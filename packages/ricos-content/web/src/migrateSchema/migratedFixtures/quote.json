@@ -2,60 +2,68 @@
   "doc": {
     "nodes": [
       {
-        "key": "7di6i",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "dsrt3",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "2tpjp",
             "ricosText": {
-              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
-              "decorations": []
+              "decorations": [],
+              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "et658"
       },
       {
-        "key": "d4hhc",
-        "type": "blockquote",
         "nodes": [
           {
-            "key": "4mv4n",
-            "type": "paragraph",
             "nodes": [
               {
-                "key": "3pg35",
-                "type": "text",
                 "nodes": [],
+                "type": "text",
+                "key": "1gtuq",
                 "ricosText": {
-                  "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-                  "decorations": []
+                  "decorations": [],
+                  "text": "Bring to the table win-win survival strategies to ensure proactive domination."
                 }
               }
-            ]
+            ],
+            "type": "paragraph",
+            "key": "d487"
           }
-        ]
+        ],
+        "type": "blockquote",
+        "key": "d4hhc"
       },
       {
-        "key": "f4o3t",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "fooki",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "2je1l",
             "ricosText": {
-              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
-              "decorations": []
+              "decorations": [],
+              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "9s149"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 78000000
+    }
   },
   "selection": {
-    "anchorNode": "7di6i"
+    "anchorNode": "et658"
   },
-  "version": "3.5.4"
+  "version": ""
 }

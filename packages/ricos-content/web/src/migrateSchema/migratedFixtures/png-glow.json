@@ -2,58 +2,51 @@
   "doc": {
     "nodes": [
       {
-        "key": "dm33b",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4p092"
       },
       {
-        "key": "6u09h",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "98e9q"
       },
       {
-        "key": "22n10",
         "nodes": [],
         "type": "ricos-image",
+        "key": "22n10",
         "ricosImage": {
-          "src": {
-            "original_file_name": "e32fd518921d4fc2a430ff518109eccd.png",
-            "file_name": "e32fd518921d4fc2a430ff518109eccd.png",
-            "width": 1272,
-            "height": 803
-          },
           "config": {
-            "size": "content",
-            "alignment": "center",
+            "size": "CONTENT",
+            "alignment": "CENTER",
             "link": {
               "url": "wix.com",
               "target": "_top"
             }
           },
+          "src": {
+            "width": 1272,
+            "height": 803
+          },
           "metadata": {
             "caption": "test"
-          },
-          "linkPanelValues": {
-            "url": "",
-            "targetBlank": false,
-            "nofollow": false
           }
         }
       },
       {
-        "key": "14tkl",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "2brmt"
       },
       {
-        "key": "467a8",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "407qd"
       },
       {
-        "key": "fioa",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "fioa",
         "ricosGallery": {
           "items": [
             {
@@ -104,24 +97,24 @@
           ],
           "styles": {
             "galleryLayout": 1,
+            "gallerySizePx": 300,
+            "oneRow": false,
+            "galleryThumbnailsAlignment": "none",
+            "numberOfImagesPerRow": 0,
+            "imageMargin": 20,
             "showArrows": false,
+            "gridStyle": 0,
             "cubeImages": false,
             "groupSize": 1,
             "groupTypes": "1",
             "fixedColumns": 0,
-            "numberOfImagesPerRow": 0,
-            "imageMargin": 20,
-            "gallerySizePx": "300",
-            "gridStyle": 0,
             "hasThumbnails": false,
-            "galleryThumbnailsAlignment": "none",
             "enableScroll": true,
             "isGrid": false,
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false,
-            "oneRow": false
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "center",
@@ -132,44 +125,50 @@
         }
       },
       {
-        "key": "10pvu",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "6ll1c"
       },
       {
-        "key": "78g83",
         "nodes": [],
         "type": "ricos-image",
+        "key": "78g83",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "size": "CONTENT",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {
             "id": "816f7f_9dfea0e10bee4e13a6f8e7037624de3e~mv2.png",
-            "original_file_name": "816f7f_9dfea0e10bee4e13a6f8e7037624de3e~mv2.png",
-            "file_name": "816f7f_9dfea0e10bee4e13a6f8e7037624de3e~mv2.png",
             "width": 600,
             "height": 315
           }
         }
       },
       {
-        "key": "1q2d8",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "bh1vd"
       },
       {
-        "key": "6envi",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1t1id"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 76000000
+    }
   },
   "selection": {
-    "anchorNode": "dm33b"
+    "anchorNode": "4p092"
   },
   "version": "6.8.2"
 }

@@ -2,19 +2,18 @@
   "doc": {
     "nodes": [
       {
-        "key": "aidcr",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "629ub"
       },
       {
-        "key": "5frbg",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "5frbg",
         "ricosGallery": {
           "items": [
             {
               "metadata": {
-                "type": "image",
                 "height": 4930,
                 "width": 3287
               },
@@ -23,7 +22,6 @@
             },
             {
               "metadata": {
-                "type": "image",
                 "height": 2124,
                 "width": 3192
               },
@@ -32,7 +30,6 @@
             },
             {
               "metadata": {
-                "type": "image",
                 "height": 3044,
                 "width": 2016
               },
@@ -44,7 +41,6 @@
             "galleryLayout": 2,
             "gallerySizeType": "px",
             "gallerySizePx": 300,
-            "galleryMargin": 0,
             "oneRow": false,
             "cubeRatio": 1,
             "galleryThumbnailsAlignment": "bottom",
@@ -54,19 +50,13 @@
             "cubeType": "fill",
             "enableInfiniteScroll": true,
             "titlePlacement": "SHOW_ON_HOVER",
-            "allowHover": false,
+            "allowHover": true,
             "itemClick": "link",
-            "fullscreen": false,
             "showArrows": false,
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false,
-            "mobileSwipeAnimation": "NO_EFFECT",
-            "thumbnailSize": 120,
-            "gotStyleParams": true,
-            "showVideoPlayButton": true,
-            "videoPlay": "onClick"
+            "allowDownload": false
           },
           "config": {
             "alignment": "center",
@@ -77,14 +67,22 @@
         }
       },
       {
-        "key": "59u7m",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "bh490"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 892000000
+    }
   },
   "selection": {
-    "anchorNode": "aidcr"
+    "anchorNode": "629ub"
   },
   "version": "7.10.5"
 }

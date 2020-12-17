@@ -1,4 +1,4 @@
-import { RicosContent, google } from './generated/ricos-content';
+import { RicosContent, google } from './generated/ricos-content.cjs';
 
 export const {
   create,
@@ -14,4 +14,4 @@ export const {
 export type Timestamp = google.protobuf.Timestamp;
 
 // eslint-disable-next-line no-duplicate-imports
-export * from './generated/ricos-content';
+export * from './generated/ricos-content.cjs';

@@ -2,40 +2,45 @@
   "doc": {
     "nodes": [
       {
-        "key": "85os9",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "9425i"
       },
       {
-        "key": "5qr5o",
         "nodes": [],
         "type": "ricos-image",
+        "key": "5qr5o",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "size": "CONTENT",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {
             "id": "17ef104520dd9a0711f1cc900d970b79",
-            "original_file_name": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
-            "file_name": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
             "width": 1920,
             "height": 1280
-          },
-          "loading": true
+          }
         }
       },
       {
-        "key": "7i0g4",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "bnc12"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 919000000
+    }
   },
   "selection": {
-    "anchorNode": "85os9"
+    "anchorNode": "9425i"
   },
   "version": "7.10.5"
 }

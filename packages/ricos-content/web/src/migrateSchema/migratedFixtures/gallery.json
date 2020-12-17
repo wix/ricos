@@ -2,14 +2,14 @@
   "doc": {
     "nodes": [
       {
-        "key": "8g0fa",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "3fq4t"
       },
       {
-        "key": "ubva",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "ubva",
         "ricosGallery": {
           "items": [
             {
@@ -33,7 +33,6 @@
             "galleryLayout": 2,
             "gallerySizeType": "px",
             "gallerySizePx": 300,
-            "galleryMargin": 0,
             "oneRow": false,
             "cubeRatio": 1,
             "galleryThumbnailsAlignment": "bottom",
@@ -44,17 +43,13 @@
             "cubeType": "fill",
             "enableInfiniteScroll": true,
             "titlePlacement": "SHOW_ON_HOVER",
-            "allowHover": false,
+            "allowHover": true,
             "itemClick": "link",
-            "fullscreen": false,
             "showArrows": false,
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false,
-            "mobileSwipeAnimation": "NO_EFFECT",
-            "thumbnailSize": 120,
-            "gotStyleParams": true
+            "allowDownload": false
           },
           "config": {
             "alignment": "center",
@@ -65,59 +60,65 @@
         }
       },
       {
-        "key": "47irr",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "5ta3t"
       },
       {
-        "key": "4b5q5",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "co2sj",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "fikc9",
             "ricosText": {
-              "text": "This is a test of the gallery plugin.",
-              "decorations": []
+              "decorations": [],
+              "text": "This is a test of the gallery plugin."
             }
           }
-        ]
-      },
-      {
-        "key": "ekab2",
+        ],
         "type": "paragraph",
-        "nodes": []
+        "key": "4aioa"
       },
       {
-        "key": "1ie98",
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cneja"
+      },
+      {
         "nodes": [],
         "type": "ricos-image",
+        "key": "1ie98",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "size": "CONTENT",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {
             "id": "d052fe7e6db2fd246708f8e56ddc3684",
-            "original_file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
-            "file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
             "width": 1621,
             "height": 1081
           }
         }
       },
       {
-        "key": "69aue",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1r278"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 897000000
+    }
   },
   "selection": {
-    "anchorNode": "8g0fa"
+    "anchorNode": "3fq4t"
   },
   "version": "5.1.1"
 }

@@ -2,51 +2,45 @@
   "doc": {
     "nodes": [
       {
-        "key": "7oa6g",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "b28e6",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "9ea2o",
             "ricosText": {
-              "text": "Here is what we saw last week (brief highlights) ",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Here is what we saw last week (brief highlights) "
             }
           },
           {
-            "key": "1tphl",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "eq0eh",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           }
-        ]
-      },
-      {
-        "key": "dcmue",
+        ],
         "type": "paragraph",
-        "nodes": []
+        "key": "dct0c"
       },
       {
-        "key": "4o4jq",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
+        "nodes": [],
+        "type": "paragraph",
+        "key": "eft3d"
+      },
+      {
         "nodes": [
           {
-            "key": "bc1e6",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "7i5sa",
             "ricosText": {
-              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): ",
               "decorations": [
                 {
                   "type": "wix-rich-content-plugin-spoiler"
@@ -60,73 +54,87 @@
                     "foreground": "#040404"
                   }
                 }
-              ]
+              ],
+              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): "
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "4o4jq",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "2hlrb",
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "5ll2v",
+            "ricosText": {
+              "decorations": [],
+              "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
+            }
+          }
+        ],
         "type": "heading",
+        "key": "2hlrb",
         "ricosHeading": {
           "level": 6
-        },
-        "nodes": [
-          {
-            "key": "3hdpg",
-            "type": "text",
-            "nodes": [],
-            "ricosText": {
-              "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field.",
-              "decorations": []
-            }
-          }
-        ]
+        }
       },
       {
-        "key": "8uvtv",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 5
-        },
         "nodes": [
           {
-            "key": "cqn20",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "c7fld",
             "ricosText": {
-              "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow ",
-              "decorations": []
+              "decorations": [],
+              "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow "
             }
           },
           {
-            "key": "tje7",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "bd2g6",
             "ricosText": {
-              "text": "Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker,",
               "decorations": [
                 {
                   "type": "wix-rich-content-plugin-spoiler"
                 }
-              ]
+              ],
+              "text": "Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker,"
             }
           },
           {
-            "key": "fdmkc",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "7npua",
             "ricosText": {
-              "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza.",
-              "decorations": []
+              "decorations": [],
+              "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza."
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "8uvtv",
+        "ricosHeading": {
+          "level": 5
+        }
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 81000000
+    }
   },
   "selection": {
-    "anchorNode": "7oa6g"
+    "anchorNode": "dct0c"
   },
   "version": "7.9.1"
 }

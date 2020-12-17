@@ -2,132 +2,125 @@
   "doc": {
     "nodes": [
       {
-        "key": "eje6e",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "erb3l",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "ksvg",
             "ricosText": {
-              "text": "#roses_are_red ",
-              "decorations": []
+              "decorations": [],
+              "text": "#roses_are_red "
             }
           },
           {
-            "key": "fdkhr",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "6pd44",
             "ricosText": {
-              "text": "Violets-are-blue.com",
               "decorations": [
                 {
-                  "type": "ricos-link",
-                  "ricosLink": {
-                    "url": "Violets-are-blue.com",
-                    "target": "_blank",
-                    "rel": "noopener"
-                  }
+                  "type": "ricos-link"
                 },
                 {
                   "type": "underline"
                 }
-              ]
+              ],
+              "text": "Violets-are-blue.com"
             }
           },
           {
-            "key": "c85gd",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "22cao",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "5ahsb"
       },
       {
-        "key": "5ee70",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "br0q4",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "8narr",
             "ricosText": {
-              "text": "#rich_content_is_awesome.com ",
-              "decorations": []
+              "decorations": [],
+              "text": "#rich_content_is_awesome.com "
             }
           },
           {
-            "key": "6p65f",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "34ft7",
             "ricosText": {
-              "text": "#and_so_are_you",
               "decorations": [
                 {
-                  "type": "ricos-link",
-                  "ricosLink": {
-                    "url": "wix.com",
-                    "target": "_blank",
-                    "rel": "noopener"
-                  }
+                  "type": "ricos-link"
                 },
                 {
                   "type": "underline"
                 }
-              ]
+              ],
+              "text": "#and_so_are_you"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "me4m"
       },
       {
-        "key": "1of9p",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "agsft",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "cv3vo",
             "ricosText": {
-              "text": "thisislink#youknow.com",
               "decorations": [
                 {
-                  "type": "ricos-link",
-                  "ricosLink": {
-                    "url": "thisislink#youknow.com",
-                    "target": "_blank",
-                    "rel": "noopener"
-                  }
+                  "type": "ricos-link"
                 },
                 {
                   "type": "underline"
                 }
-              ]
+              ],
+              "text": "thisislink#youknow.com"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "ec916"
       },
       {
-        "key": "1rf61",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "4fupc",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "4k1jg",
             "ricosText": {
-              "text": "The End",
-              "decorations": []
+              "decorations": [],
+              "text": "The End"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "9eper"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 902000000
+    }
   },
   "selection": {
-    "anchorNode": "eje6e"
+    "anchorNode": "5ahsb"
   },
   "version": "7.2.0"
 }

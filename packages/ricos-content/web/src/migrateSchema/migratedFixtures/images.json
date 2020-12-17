@@ -2,129 +2,133 @@
   "doc": {
     "nodes": [
       {
-        "key": "5ckc4",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "c8jcm",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "apvub",
             "ricosText": {
-              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
-              "decorations": []
+              "decorations": [],
+              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. "
             }
           }
-        ]
-      },
-      {
-        "key": "9redq",
+        ],
         "type": "paragraph",
-        "nodes": []
+        "key": "59lhl"
       },
       {
-        "key": "4n607",
+        "nodes": [],
+        "type": "paragraph",
+        "key": "baj3g"
+      },
+      {
         "nodes": [],
         "type": "ricos-image",
+        "key": "4n607",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "small",
+            "size": "SMALL",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {
             "id": "036c6bf6cef5e4409848eb4eb6f80de1",
-            "original_file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
-            "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
             "width": 2898,
             "height": 3354
           }
         }
       },
       {
-        "key": "1fqri",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "2quf0"
       },
       {
-        "key": "7dms2",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "98b3l",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "4p77e",
             "ricosText": {
-              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-              "decorations": []
+              "decorations": [],
+              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "55hdt"
       },
       {
-        "key": "8sen0",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "dgcqh",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "eb6uq",
             "ricosText": {
-              "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-              "decorations": []
+              "decorations": [],
+              "text": "Bring to the table win-win survival strategies to ensure proactive domination."
             }
           }
-        ]
-      },
-      {
-        "key": "5i24",
+        ],
         "type": "paragraph",
-        "nodes": []
+        "key": "8hp4v"
       },
       {
-        "key": "213ea",
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4lnpo"
+      },
+      {
         "nodes": [],
         "type": "ricos-image",
+        "key": "213ea",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "size": "CONTENT",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {
             "id": "b12907da5fbb55a31a760e49fb0bb4e6",
-            "original_file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
-            "file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
             "width": 5177,
             "height": 3526
           }
         }
       },
       {
-        "key": "o7jj",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "20c1v"
       },
       {
-        "key": "1abhg",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "a0si3",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "2cj6r",
             "ricosText": {
-              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
-              "decorations": []
+              "decorations": [],
+              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "cin7v"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 926000000
+    }
   },
   "selection": {
-    "anchorNode": "5ckc4"
+    "anchorNode": "59lhl"
   },
-  "version": "3.5.4"
+  "version": ""
 }

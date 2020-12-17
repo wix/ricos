@@ -2,105 +2,102 @@
   "doc": {
     "nodes": [
       {
-        "key": "1mvat",
+        "nodes": [
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "8a0j9",
+                    "ricosText": {
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "left"
+                          }
+                        }
+                      ],
+                      "text": "asdsad"
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "a93e4"
+              }
+            ],
+            "type": "list_item",
+            "key": "ap77n"
+          },
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "fi78h",
+                    "ricosText": {
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "left"
+                          }
+                        }
+                      ],
+                      "text": "שדגדש"
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "c7rlb"
+              }
+            ],
+            "type": "list_item",
+            "key": "dt9vd"
+          },
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "9ctis",
+                    "ricosText": {
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "left"
+                          }
+                        }
+                      ],
+                      "text": "asdsa"
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "593ks"
+              }
+            ],
+            "type": "list_item",
+            "key": "7gqdu"
+          }
+        ],
         "type": "ordered_list",
-        "nodes": [
-          {
-            "key": "ap77n",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "3mrpr",
-                "type": "paragraph",
-                "nodes": [
-                  {
-                    "key": "cjkqb",
-                    "type": "text",
-                    "nodes": [],
-                    "ricosText": {
-                      "text": "asdsad",
-                      "decorations": [
-                        {
-                          "type": "ricos-alignment",
-                          "ricosAlignment": {
-                            "direction": "left"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "key": "dt9vd",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "eb0ca",
-                "type": "paragraph",
-                "nodes": [
-                  {
-                    "key": "clhd3",
-                    "type": "text",
-                    "nodes": [],
-                    "ricosText": {
-                      "text": "שדגדש",
-                      "decorations": [
-                        {
-                          "type": "ricos-alignment",
-                          "ricosAlignment": {
-                            "direction": "left"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "key": "7gqdu",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "8rlh1",
-                "type": "paragraph",
-                "nodes": [
-                  {
-                    "key": "1prg6",
-                    "type": "text",
-                    "nodes": [],
-                    "ricosText": {
-                      "text": "asdsa",
-                      "decorations": [
-                        {
-                          "type": "ricos-alignment",
-                          "ricosAlignment": {
-                            "direction": "left"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+        "key": "fojbs"
       },
       {
-        "key": "2a0qd",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "bjq7j",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "cjn27",
             "ricosText": {
-              "text": "asdasd",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -108,21 +105,21 @@
                     "direction": "left"
                   }
                 }
-              ]
+              ],
+              "text": "asdasd"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "bek9a"
       },
       {
-        "key": "dk5f4",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "flghr",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "9g9n7",
             "ricosText": {
-              "text": "שדגשדג",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -130,21 +127,21 @@
                     "direction": "left"
                   }
                 }
-              ]
+              ],
+              "text": "שדגשדג"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "9t473"
       },
       {
-        "key": "dhudr",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "eblhl",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "cmlgg",
             "ricosText": {
-              "text": "asda",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -152,15 +149,26 @@
                     "direction": "left"
                   }
                 }
-              ]
+              ],
+              "text": "asda"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "54hua"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 927000000
+    }
   },
   "selection": {
-    "anchorNode": "1mvat"
+    "anchorNode": "fojbs"
   },
   "version": "7.10.2"
 }

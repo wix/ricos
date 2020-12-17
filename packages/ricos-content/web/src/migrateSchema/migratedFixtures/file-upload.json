@@ -2,33 +2,32 @@
   "doc": {
     "nodes": [
       {
-        "key": "4ch6u",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "c1e9e"
       },
       {
-        "key": "410nb",
         "nodes": [],
         "type": "ricos-file-upload",
-        "ricosFileUpload": {
-          "config": {
-            "alignment": "center",
-            "size": "small"
-          },
-          "name": "receipt.pdf",
-          "type": "pdf",
-          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
-        }
+        "key": "410nb"
       },
       {
-        "key": "p0q7",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "fp2g5"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 885000000
+    }
   },
   "selection": {
-    "anchorNode": "4ch6u"
+    "anchorNode": "c1e9e"
   },
   "version": "7.6.1"
 }

@@ -16,12 +16,13 @@
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
   "files": [ "dist" ],
   "main": "dist/index.js",
+  "module": "dist/index.cjs.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": ":",
     "clean": "rm -rf dist generated",
     "generate": "yarn clean && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateJSSchema.ts",
-    "build": "yarn generate && tsc"
+    "build": "yarn generate && tsc && tsc --project tsconfig.cjs.json"
   },
   "unpkg": true,
   "publishConfig": {

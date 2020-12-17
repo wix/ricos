@@ -2,54 +2,60 @@
   "doc": {
     "nodes": [
       {
-        "key": "cff0q",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "20siq"
       },
       {
-        "key": "af416",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "5n2b8",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "4ql7i",
             "ricosText": {
-              "text": "The roots of the civil war go back to the First Fitna. After the assassination of the third caliph Uthman, the Islamic community experienced its first civil war over the question of leadership, with the main contenders being Ali and Mu'awiya.",
-              "decorations": []
+              "decorations": [],
+              "text": "The roots of the civil war go back to the First Fitna. After the assassination of the third caliph Uthman, the Islamic community experienced its first civil war over the question of leadership, with the main contenders being Ali and Mu'awiya."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "7ieu0"
       },
       {
-        "key": "d6fdv",
         "nodes": [],
         "type": "ricos-image",
+        "key": "d6fdv",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "small",
+            "size": "SMALL",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {
             "id": "61d3f0c021fd47d92a4e7395ab107e48",
-            "original_file_name": "8bb438_cdbf2bdff4864d2094370a3051812409.jpg",
-            "file_name": "8bb438_cdbf2bdff4864d2094370a3051812409.jpg",
             "width": 5600,
             "height": 3727
           }
         }
       },
       {
-        "key": "8ejmq",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "2jvaq"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 871000000
+    }
   },
   "selection": {
-    "anchorNode": "cff0q"
+    "anchorNode": "20siq"
   },
   "version": "6.0.0"
 }

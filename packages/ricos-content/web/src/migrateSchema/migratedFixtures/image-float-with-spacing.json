@@ -2,352 +2,344 @@
   "doc": {
     "nodes": [
       {
-        "key": "cfnfg",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "c4llc"
       },
       {
-        "key": "4dq7o",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "2db8p"
       },
       {
-        "key": "7mv4j",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "a79de"
       },
       {
-        "key": "81k01",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "3jqqv"
       },
       {
-        "key": "dbsou",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4vk53"
       },
       {
-        "key": "abqpj",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "2k012",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "6h475",
             "ricosText": {
-              "text": "This one displays weird space issue happened w/ blog (",
-              "decorations": []
+              "decorations": [],
+              "text": "This one displays weird space issue happened w/ blog ("
             }
           },
           {
-            "key": "e7a9",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "d7c74",
             "ricosText": {
-              "text": "JIRA",
               "decorations": [
                 {
-                  "type": "ricos-link",
-                  "ricosLink": {
-                    "url": "https: //jira.wixpress.com/browse/NWB-2849",
-                    "target": "_blank",
-                    "rel": "noopener"
-                  }
+                  "type": "ricos-link"
                 },
                 {
                   "type": "underline"
                 }
-              ]
+              ],
+              "text": "JIRA"
             }
           },
           {
-            "key": "3cpvm",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "3pc1j",
             "ricosText": {
-              "text": ")",
-              "decorations": []
+              "decorations": [],
+              "text": ")"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "aq5uh"
       },
       {
-        "key": "7tsgm",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "3avlq",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "6odgd",
             "ricosText": {
-              "text": "Content state appear below, copy and paste ",
-              "decorations": []
+              "decorations": [],
+              "text": "Content state appear below, copy and paste "
             }
           },
           {
-            "key": "em1u5",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "8iuk4",
             "ricosText": {
-              "text": "here",
               "decorations": [
                 {
-                  "type": "ricos-link",
-                  "ricosLink": {
-                    "url": "https: //rich-content-6-6-8.surge.sh",
-                    "target": "_blank",
-                    "rel": "noopener"
-                  }
+                  "type": "ricos-link"
                 },
                 {
                   "type": "underline"
                 }
-              ]
+              ],
+              "text": "here"
             }
           },
           {
-            "key": "2r8fb",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "1n88f",
             "ricosText": {
-              "text": " to see the actual problem (viewer has extra space below which ",
-              "decorations": []
+              "decorations": [],
+              "text": " to see the actual problem (viewer has extra space below which "
             }
           },
           {
-            "key": "bet7o",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "1j9ff",
             "ricosText": {
-              "text": "doesn't",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "doesn't"
             }
           },
           {
-            "key": "7plev",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "25kpu",
             "ricosText": {
-              "text": " appear on editor so it can't be deleted ",
-              "decorations": []
+              "decorations": [],
+              "text": " appear on editor so it can't be deleted "
             }
           },
           {
-            "key": "go9l",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "256b0",
             "ricosText": {
-              "text": "\ud83d",
               "decorations": [
                 {
-                  "type": "ricos-emoji",
-                  "ricosEmoji": {
-                    "emojiUnicode": "😪"
-                  }
+                  "type": "ricos-emoji"
                 }
-              ]
+              ],
+              "text": "\ud83d"
             }
           },
           {
-            "key": "2uqk4",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "6unkm",
             "ricosText": {
-              "text": "\ude2a)",
-              "decorations": []
+              "decorations": [],
+              "text": "\ude2a)"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "er3cg"
       },
       {
-        "key": "bmpfl",
         "nodes": [],
         "type": "ricos-image",
+        "key": "bmpfl",
         "ricosImage": {
           "config": {
-            "alignment": "left",
-            "size": "inline",
+            "size": "INLINE",
+            "alignment": "LEFT",
             "showTitle": true,
-            "showDescription": true,
-            "width": 707
+            "showDescription": true
           },
           "src": {
             "id": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
-            "original_file_name": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
-            "file_name": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
             "width": 522,
             "height": 522
           }
         }
       },
       {
-        "key": "j1f6",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "bhah3"
       },
       {
-        "key": "apoku",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "314gp"
       },
       {
-        "key": "fua5a",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "efm44"
       },
       {
-        "key": "6eues",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "8t3no"
       },
       {
-        "key": "2brvr",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "66buq"
       },
       {
-        "key": "c80vd",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "fu9h8"
       },
       {
-        "key": "20tat",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1mskl"
       },
       {
-        "key": "fjjam",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "7gru9"
       },
       {
-        "key": "8r6tk",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "7ndsi"
       },
       {
-        "key": "as8gf",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "fatrf"
       },
       {
-        "key": "breel",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "524vt"
       },
       {
-        "key": "c9bmr",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "ckv6g"
       },
       {
-        "key": "4aruk",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "fjrak"
       },
       {
-        "key": "f672i",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "3r558"
       },
       {
-        "key": "929ka",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "8outg"
       },
       {
-        "key": "40sum",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4cf3r"
       },
       {
-        "key": "fldoa",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "nmf7"
       },
       {
-        "key": "dfqri",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "d2n6j"
       },
       {
-        "key": "7gl28",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "aou0g"
       },
       {
-        "key": "59d8t",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "3klq4"
       },
       {
-        "key": "275do",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "444qp"
       },
       {
-        "key": "78g9u",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "722jg"
       },
       {
-        "key": "atda",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "8l3r3"
       },
       {
-        "key": "4gftg",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "9ed70"
       },
       {
-        "key": "f5be9",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "72o0o"
       },
       {
-        "key": "bfhha",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "c010u"
       },
       {
-        "key": "k2o0",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "c3vgo"
       },
       {
-        "key": "t6u3",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "693ee"
       },
       {
-        "key": "apkj3",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4a00h"
       },
       {
-        "key": "cbnt6",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "9ckv7"
       },
       {
-        "key": "1vj9q",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "ahj8m"
       },
       {
-        "key": "7vci1",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "29dsi"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 915000000
+    }
   },
   "selection": {
-    "anchorNode": "cfnfg"
+    "anchorNode": "c4llc"
   },
   "version": "6.8.1"
 }

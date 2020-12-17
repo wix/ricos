@@ -2,39 +2,35 @@
   "doc": {
     "nodes": [
       {
-        "key": "5aas7",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "5s00e",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "fn8i2",
             "ricosText": {
-              "text": "wqeqweqweqw",
-              "decorations": []
+              "decorations": [],
+              "text": "wqeqweqweqw"
             }
           }
-        ]
-      },
-      {
-        "key": "f1vpt",
+        ],
         "type": "paragraph",
-        "nodes": []
+        "key": "48o21"
       },
       {
-        "key": "6acre",
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2ehtl"
+      },
+      {
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "6acre",
         "ricosGallery": {
           "items": [
             {
               "metadata": {
                 "height": 1060,
                 "width": 2560,
-                "link": {
-                  "url": "www.wix.com",
-                  "target": "_top"
-                },
                 "title": "this is title"
               },
               "itemId": "a27d24_346eb94e9ceb4512b6fe8fdd629ee442~mv2.jpg",
@@ -45,7 +41,6 @@
               "metadata": {
                 "height": 400,
                 "width": 870,
-                "link": null,
                 "title": "title it is"
               },
               "itemId": "a27d24_9fc76dfecb75438e939c43077c8ab6ba~mv2.jpg",
@@ -66,7 +61,6 @@
             "galleryLayout": 2,
             "gallerySizeType": "px",
             "gallerySizePx": 300,
-            "galleryMargin": 0,
             "oneRow": false,
             "cubeRatio": 1,
             "galleryThumbnailsAlignment": "bottom",
@@ -76,17 +70,13 @@
             "cubeType": "fill",
             "enableInfiniteScroll": true,
             "titlePlacement": "SHOW_ON_HOVER",
-            "allowHover": false,
+            "allowHover": true,
             "itemClick": "link",
-            "fullscreen": false,
             "showArrows": false,
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false,
-            "mobileSwipeAnimation": "NO_EFFECT",
-            "thumbnailSize": 120,
-            "gotStyleParams": true
+            "allowDownload": false
           },
           "config": {
             "alignment": "center",
@@ -97,14 +87,22 @@
         }
       },
       {
-        "key": "1ov0f",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "ceu0a"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 894000000
+    }
   },
   "selection": {
-    "anchorNode": "5aas7"
+    "anchorNode": "48o21"
   },
   "version": "5.9.9"
 }

@@ -2,15 +2,12 @@
   "doc": {
     "nodes": [
       {
-        "key": "1eun7",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "a8nv2",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "av2tv",
             "ricosText": {
-              "text": "LTR:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -21,39 +18,39 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "LTR:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "7tll6"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "5luk9",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "5h1dr",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "djjc2"
       },
       {
-        "key": "dk5rg",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "1apld",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "6hc1u",
             "ricosText": {
-              "text": "Expanded:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -64,478 +61,26 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Expanded:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "9qvhb"
       },
       {
-        "key": "cm8ut",
         "nodes": [],
         "type": "ricos-accordion",
-        "ricosAccordion": {
-          "config": {
-            "expandState": "expanded",
-            "direction": "ltr",
-            "expandOnlyOne": false
-          },
-          "pairs": [
-            {
-              "key": "1",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "4rvoj",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "frlqr",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "2",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "f199l",
-                    "text": "How are you?",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "1r2e9",
-                    "text": "I'm... GREAT!",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "{\"FG\":\"#1414a8\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "3",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "eatdd",
-                    "text": "Some Styling Capabilities",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "ITALIC"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "{\"FG\":\"color3\"}"
-                      },
-                      {
-                        "offset": 13,
-                        "length": 12,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "etb7h",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"BG\":\"color4\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "1flf3",
-                    "text": "Hey! I'm a nested list.",
-                    "type": "ordered-list-item",
-                    "depth": 1,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 23,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "7tvc7",
-                    "text": "Yes!!",
-                    "type": "ordered-list-item",
-                    "depth": 2,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cet9",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "e4c47",
-                    "text": "Quote?",
-                    "type": "blockquote",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 6,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 6,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "918ba",
-                    "text": "Link with text",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 14,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "style": "UNDERLINE"
-                      }
-                    ],
-                    "entityRanges": [
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "key": 0
-                      }
-                    ],
-                    "data": {}
-                  },
-                  {
-                    "key": "2boh",
-                    "text": "Code Block",
-                    "type": "code-block",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cb6ql",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {
-                  "0": {
-                    "type": "LINK",
-                    "mutability": "MUTABLE",
-                    "data": {
-                      "url": "www.wix.com",
-                      "target": "_blank",
-                      "rel": "noopener"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "key": "4",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "92ui0",
-                    "text": "Alignments",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "9vq5",
-                    "text": "LTR language:",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "de2bc",
-                    "text": "LEFT",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "left"
-                    }
-                  },
-                  {
-                    "key": "b20rh",
-                    "text": "CENTER",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "center"
-                    }
-                  },
-                  {
-                    "key": "2ve4a",
-                    "text": "RIGHT",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "right"
-                    }
-                  },
-                  {
-                    "key": "fpolu",
-                    "text": "JUSTIFY",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "justify"
-                    }
-                  },
-                  {
-                    "key": "5ttmu",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "justify"
-                    }
-                  },
-                  {
-                    "key": "eb1s2",
-                    "text": "RTL language:",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "d0lgn",
-                    "text": "שמאל",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "left"
-                    }
-                  },
-                  {
-                    "key": "88os6",
-                    "text": "אמצע",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "center"
-                    }
-                  },
-                  {
-                    "key": "8rsgf",
-                    "text": "ימין",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "right"
-                    }
-                  },
-                  {
-                    "key": "ebiet",
-                    "text": "ג׳סטיפי",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "justify"
-                    }
-                  }
-                ],
-                "entityMap": {}
-              }
-            }
-          ]
-        }
+        "key": "cm8ut"
       },
       {
-        "key": "9leb8",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "5st89",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "8vp1m",
             "ricosText": {
-              "text": "Collapsed:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -546,324 +91,44 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Collapsed:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "9a0tc"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "fva4r",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "8jn5",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "fehul"
       },
       {
-        "key": "7cvfa",
         "nodes": [],
         "type": "ricos-accordion",
-        "ricosAccordion": {
-          "config": {
-            "expandState": "collapsed",
-            "direction": "ltr",
-            "expandOnlyOne": false
-          },
-          "pairs": [
-            {
-              "key": "1",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "4rvoj",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "frlqr",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "2",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "f199l",
-                    "text": "How are you?",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "1r2e9",
-                    "text": "I'm... GREAT!",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "{\"FG\":\"#1414a8\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "3",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "eatdd",
-                    "text": "Some Styling Capabilities",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "ITALIC"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "{\"FG\":\"color3\"}"
-                      },
-                      {
-                        "offset": 13,
-                        "length": 12,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "etb7h",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"BG\":\"color4\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "1flf3",
-                    "text": "Hey! I'm a nested list.",
-                    "type": "ordered-list-item",
-                    "depth": 1,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 23,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "7tvc7",
-                    "text": "Yes!!",
-                    "type": "ordered-list-item",
-                    "depth": 2,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cet9",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "e4c47",
-                    "text": "Quote",
-                    "type": "blockquote",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "918ba",
-                    "text": "Link with text",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 14,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "key": 0
-                      }
-                    ],
-                    "data": {}
-                  },
-                  {
-                    "key": "2boh",
-                    "text": "Code Block",
-                    "type": "code-block",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cb6ql",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {
-                  "0": {
-                    "type": "LINK",
-                    "mutability": "MUTABLE",
-                    "data": {
-                      "url": "www.wix.com",
-                      "target": "_blank",
-                      "rel": "noopener"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
+        "key": "7cvfa"
       },
       {
-        "key": "c42nv",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "e9mqm",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "5rv2s",
             "ricosText": {
-              "text": "First expanded:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -874,324 +139,44 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "First expanded:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "e2cp9"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "eoikq",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "34dg8",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "8kg08"
       },
       {
-        "key": "8mcg3",
         "nodes": [],
         "type": "ricos-accordion",
-        "ricosAccordion": {
-          "config": {
-            "expandState": "first_expanded",
-            "direction": "ltr",
-            "expandOnlyOne": false
-          },
-          "pairs": [
-            {
-              "key": "1",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "4rvoj",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "frlqr",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "2",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "f199l",
-                    "text": "How are you?",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "1r2e9",
-                    "text": "I'm... GREAT!",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "{\"FG\":\"#1414a8\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "3",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "eatdd",
-                    "text": "Some Styling Capabilities",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "ITALIC"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "{\"FG\":\"color3\"}"
-                      },
-                      {
-                        "offset": 13,
-                        "length": 12,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "etb7h",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"BG\":\"color4\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "1flf3",
-                    "text": "Hey! I'm a nested list.",
-                    "type": "ordered-list-item",
-                    "depth": 1,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 23,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "7tvc7",
-                    "text": "Yes!!",
-                    "type": "ordered-list-item",
-                    "depth": 2,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cet9",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "e4c47",
-                    "text": "Quote",
-                    "type": "blockquote",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "918ba",
-                    "text": "Link with text",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 14,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "key": 0
-                      }
-                    ],
-                    "data": {}
-                  },
-                  {
-                    "key": "2boh",
-                    "text": "Code Block",
-                    "type": "code-block",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cb6ql",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {
-                  "0": {
-                    "type": "LINK",
-                    "mutability": "MUTABLE",
-                    "data": {
-                      "url": "www.wix.com",
-                      "target": "_blank",
-                      "rel": "noopener"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
+        "key": "8mcg3"
       },
       {
-        "key": "fc2pc",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "evmqm",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "c4r96",
             "ricosText": {
-              "text": "RTL:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -1202,39 +187,39 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "RTL:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "60vhn"
       },
       {
-        "key": "b26nv",
         "nodes": [],
         "type": "ricos-divider",
+        "key": "b26nv",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "29moh",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1i961"
       },
       {
-        "key": "aramk",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "f5ahc",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "88kq0",
             "ricosText": {
-              "text": "Expanded:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -1245,476 +230,26 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Expanded:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "9806u"
       },
       {
-        "key": "79q9s",
         "nodes": [],
         "type": "ricos-accordion",
-        "ricosAccordion": {
-          "config": {
-            "expandState": "expanded",
-            "direction": "rtl",
-            "expandOnlyOne": false
-          },
-          "pairs": [
-            {
-              "key": "1",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "4rvoj",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "frlqr",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "2",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "f199l",
-                    "text": "How are you?",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "1r2e9",
-                    "text": "I'm... GREAT!",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "{\"FG\":\"#1414a8\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "3",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "eatdd",
-                    "text": "Some Styling Capabilities",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "ITALIC"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "{\"FG\":\"color3\"}"
-                      },
-                      {
-                        "offset": 13,
-                        "length": 12,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "etb7h",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"BG\":\"color4\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "1flf3",
-                    "text": "Hey! I'm a nested list.",
-                    "type": "ordered-list-item",
-                    "depth": 1,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 23,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "7tvc7",
-                    "text": "Yes!!",
-                    "type": "ordered-list-item",
-                    "depth": 2,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cet9",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "e4c47",
-                    "text": "Quote?",
-                    "type": "blockquote",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 6,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 6,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "918ba",
-                    "text": "Link with text",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 14,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "style": "UNDERLINE"
-                      }
-                    ],
-                    "entityRanges": [
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "key": 0
-                      }
-                    ],
-                    "data": {}
-                  },
-                  {
-                    "key": "2boh",
-                    "text": "Code Block",
-                    "type": "code-block",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cb6ql",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {
-                  "0": {
-                    "type": "LINK",
-                    "mutability": "MUTABLE",
-                    "data": {
-                      "url": "www.wix.com",
-                      "target": "_blank",
-                      "rel": "noopener"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "key": "4",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "bs3cu",
-                    "text": "Alignments",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "5292c",
-                    "text": "LTR language:",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "34s0n",
-                    "text": "LEFT",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "left"
-                    }
-                  },
-                  {
-                    "key": "5lduc",
-                    "text": "CENTER",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "center"
-                    }
-                  },
-                  {
-                    "key": "c3ig",
-                    "text": "RIGHT",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "right"
-                    }
-                  },
-                  {
-                    "key": "fjue3",
-                    "text": "JUSTIFY",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "justify"
-                    }
-                  },
-                  {
-                    "key": "842ce",
-                    "text": "\n",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "1ppa8",
-                    "text": "RTL language:",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 13,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "24tlb",
-                    "text": "שמאל",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "left"
-                    }
-                  },
-                  {
-                    "key": "71eqe",
-                    "text": "אמצע",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "center"
-                    }
-                  },
-                  {
-                    "key": "2lc2i",
-                    "text": "ימין",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "right"
-                    }
-                  },
-                  {
-                    "key": "bbaaf",
-                    "text": "ג׳סטיפי",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {
-                      "textAlignment": "justify"
-                    }
-                  }
-                ],
-                "entityMap": {}
-              }
-            }
-          ]
-        }
+        "key": "79q9s"
       },
       {
-        "key": "78jp8",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "4adm3",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "b24d0",
             "ricosText": {
-              "text": "Collapsed:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -1725,324 +260,44 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Collapsed:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "6peei"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "2l0cs",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "ek6of",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "eelk6"
       },
       {
-        "key": "226db",
         "nodes": [],
         "type": "ricos-accordion",
-        "ricosAccordion": {
-          "config": {
-            "expandState": "collapsed",
-            "direction": "rtl",
-            "expandOnlyOne": false
-          },
-          "pairs": [
-            {
-              "key": "1",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "4rvoj",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "frlqr",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "2",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "f199l",
-                    "text": "How are you?",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "1r2e9",
-                    "text": "I'm... GREAT!",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "{\"FG\":\"#1414a8\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "3",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "eatdd",
-                    "text": "Some Styling Capabilities",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "ITALIC"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "{\"FG\":\"color3\"}"
-                      },
-                      {
-                        "offset": 13,
-                        "length": 12,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "etb7h",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"BG\":\"color4\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "1flf3",
-                    "text": "Hey! I'm a nested list.",
-                    "type": "ordered-list-item",
-                    "depth": 1,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 23,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "7tvc7",
-                    "text": "Yes!!",
-                    "type": "ordered-list-item",
-                    "depth": 2,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cet9",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "e4c47",
-                    "text": "Quote",
-                    "type": "blockquote",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "918ba",
-                    "text": "Link with text",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 14,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "key": 0
-                      }
-                    ],
-                    "data": {}
-                  },
-                  {
-                    "key": "2boh",
-                    "text": "Code Block",
-                    "type": "code-block",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cb6ql",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {
-                  "0": {
-                    "type": "LINK",
-                    "mutability": "MUTABLE",
-                    "data": {
-                      "url": "www.wix.com",
-                      "target": "_blank",
-                      "rel": "noopener"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
+        "key": "226db"
       },
       {
-        "key": "7skf5",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "7pu6l",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "63pv7",
             "ricosText": {
-              "text": "First expanded:",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -2053,323 +308,54 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "First expanded:"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "2pa3m"
       },
       {
-        "key": "a84mb",
         "nodes": [],
         "type": "ricos-divider",
+        "key": "a84mb",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "29kte",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "fk765"
       },
       {
-        "key": "24m2m",
         "nodes": [],
         "type": "ricos-accordion",
-        "ricosAccordion": {
-          "config": {
-            "expandState": "first_expanded",
-            "direction": "rtl",
-            "expandOnlyOne": false
-          },
-          "pairs": [
-            {
-              "key": "1",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "4rvoj",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "frlqr",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "2",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "f199l",
-                    "text": "How are you?",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "1r2e9",
-                    "text": "I'm... GREAT!",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "BOLD"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 7,
-                        "length": 6,
-                        "style": "{\"FG\":\"#1414a8\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              }
-            },
-            {
-              "key": "3",
-              "title": {
-                "blocks": [
-                  {
-                    "key": "eatdd",
-                    "text": "Some Styling Capabilities",
-                    "type": "unstyled",
-                    "depth": 1,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "ITALIC"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 8,
-                        "style": "{\"FG\":\"color3\"}"
-                      },
-                      {
-                        "offset": 13,
-                        "length": 12,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {}
-              },
-              "content": {
-                "blocks": [
-                  {
-                    "key": "etb7h",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"BG\":\"color4\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "1flf3",
-                    "text": "Hey! I'm a nested list.",
-                    "type": "ordered-list-item",
-                    "depth": 1,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 23,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "7tvc7",
-                    "text": "Yes!!",
-                    "type": "ordered-list-item",
-                    "depth": 2,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cet9",
-                    "text": "Hey! I'm a list.",
-                    "type": "ordered-list-item",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 16,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 5,
-                        "length": 11,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "e4c47",
-                    "text": "Quote",
-                    "type": "blockquote",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "{\"FG\":\"#212121\"}"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "UNDERLINE"
-                      },
-                      {
-                        "offset": 0,
-                        "length": 5,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "918ba",
-                    "text": "Link with text",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 14,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [
-                      {
-                        "offset": 0,
-                        "length": 4,
-                        "key": 0
-                      }
-                    ],
-                    "data": {}
-                  },
-                  {
-                    "key": "2boh",
-                    "text": "Code Block",
-                    "type": "code-block",
-                    "depth": 0,
-                    "inlineStyleRanges": [
-                      {
-                        "offset": 0,
-                        "length": 10,
-                        "style": "BOLD"
-                      }
-                    ],
-                    "entityRanges": [],
-                    "data": {}
-                  },
-                  {
-                    "key": "cb6ql",
-                    "text": "",
-                    "type": "unstyled",
-                    "depth": 0,
-                    "inlineStyleRanges": [],
-                    "entityRanges": [],
-                    "data": {}
-                  }
-                ],
-                "entityMap": {
-                  "0": {
-                    "type": "LINK",
-                    "mutability": "MUTABLE",
-                    "data": {
-                      "url": "www.wix.com",
-                      "target": "_blank",
-                      "rel": "noopener"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
+        "key": "24m2m"
       },
       {
-        "key": "1g5d8",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "2q5i9"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 30000000
+    }
   },
   "selection": {
-    "anchorNode": "1eun7"
+    "anchorNode": "7tll6"
   },
   "version": "7.21.1"
 }

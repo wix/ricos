@@ -2,31 +2,31 @@
   "doc": {
     "nodes": [
       {
-        "key": "1bkd",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "b4mmb",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "ba723",
             "ricosText": {
-              "text": "Slider",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Slider"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "1bkd",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "a711k",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "a711k",
         "ricosGallery": {
           "items": [
             {
@@ -56,25 +56,23 @@
           ],
           "styles": {
             "galleryLayout": 4,
+            "oneRow": true,
+            "cubeRatio": 1.7777777777777777,
+            "galleryThumbnailsAlignment": "none",
+            "isVertical": false,
+            "imageMargin": 20,
+            "cubeType": "fit",
             "showArrows": true,
             "cubeImages": true,
-            "smartCrop": false,
-            "isVertical": false,
-            "galleryType": "Strips",
             "groupSize": 1,
             "groupTypes": "1",
-            "oneRow": true,
             "hasThumbnails": false,
-            "galleryThumbnailsAlignment": "none",
             "enableScroll": true,
             "isGrid": false,
             "isSlider": true,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": true,
-            "imageMargin": 20,
-            "cubeType": "fit",
-            "cubeRatio": 1.7777777777777777
+            "cropOnlyFill": true
           },
           "config": {
             "alignment": "center",
@@ -85,31 +83,31 @@
         }
       },
       {
-        "key": "c4fe0",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "1frnn",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "kc3u",
             "ricosText": {
-              "text": "Thumbnails",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Thumbnails"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "c4fe0",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "csa2k",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "csa2k",
         "ricosGallery": {
           "items": [
             {
@@ -169,7 +167,6 @@
             "galleryLayout": 3,
             "gallerySizeType": "px",
             "gallerySizePx": 300,
-            "galleryMargin": 0,
             "oneRow": true,
             "cubeRatio": 1,
             "galleryThumbnailsAlignment": "bottom",
@@ -179,20 +176,14 @@
             "cubeType": "fill",
             "enableInfiniteScroll": true,
             "titlePlacement": "SHOW_ON_HOVER",
-            "allowHover": false,
+            "allowHover": true,
             "itemClick": "link",
-            "fullscreen": false,
             "showArrows": true,
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
             "allowDownload": false,
-            "mobileSwipeAnimation": "NO_EFFECT",
-            "thumbnailSize": 120,
-            "gotStyleParams": true,
             "cubeImages": true,
-            "smartCrop": false,
-            "galleryType": "Strips",
             "groupSize": 1,
             "groupTypes": "1",
             "hasThumbnails": true,
@@ -201,8 +192,7 @@
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false,
-            "floatingImages": 0
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "center",
@@ -213,31 +203,31 @@
         }
       },
       {
-        "key": "f9ikb",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "8g8ds",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "6rd67",
             "ricosText": {
-              "text": "Slideshow",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Slideshow"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "f9ikb",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "625am",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "625am",
         "ricosGallery": {
           "items": [
             {
@@ -267,27 +257,24 @@
           ],
           "styles": {
             "galleryLayout": 9,
+            "oneRow": true,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "none",
+            "isVertical": false,
+            "imageMargin": 0,
+            "cubeType": "fill",
+            "allowHover": true,
             "showArrows": true,
             "cubeImages": true,
-            "smartCrop": false,
-            "cubeType": "fill",
-            "cubeRatio": 1,
-            "isVertical": false,
-            "galleryType": "Strips",
             "groupSize": 1,
             "groupTypes": "1",
-            "oneRow": true,
             "hasThumbnails": false,
-            "galleryThumbnailsAlignment": "none",
             "enableScroll": false,
             "isGrid": false,
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false,
-            "floatingImages": 0,
-            "galleryMargin": 0,
-            "imageMargin": 0
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "center",
@@ -298,31 +285,31 @@
         }
       },
       {
-        "key": "foo",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "f4upm",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "9pbol",
             "ricosText": {
-              "text": "Grid",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Grid"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "foo",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "d61n6",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "d61n6",
         "ricosGallery": {
           "items": [
             {
@@ -381,43 +368,33 @@
             "galleryLayout": 2,
             "gallerySizeType": "px",
             "gallerySizePx": 300,
-            "galleryMargin": 0,
             "oneRow": false,
             "cubeRatio": 1,
             "galleryThumbnailsAlignment": "none",
             "isVertical": true,
+            "numberOfImagesPerRow": 3,
             "imageMargin": 20,
             "thumbnailSpacings": 0,
             "cubeType": "fill",
             "enableInfiniteScroll": true,
             "titlePlacement": "SHOW_ON_HOVER",
-            "allowHover": false,
+            "allowHover": true,
             "itemClick": "link",
-            "fullscreen": false,
             "showArrows": false,
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
             "allowDownload": false,
-            "mobileSwipeAnimation": "NO_EFFECT",
-            "thumbnailSize": 120,
-            "gotStyleParams": true,
             "cubeImages": true,
-            "smartCrop": false,
-            "imageResize": false,
-            "galleryImageRatio": 2,
-            "numberOfImagesPerRow": 3,
-            "galleryType": "Columns",
             "groupSize": 1,
             "groupTypes": "1",
             "hasThumbnails": false,
             "enableScroll": true,
-            "cropOnlyFill": false,
+            "isGrid": true,
             "isSlider": false,
             "isColumns": false,
-            "isGrid": true,
             "isSlideshow": false,
-            "minItemSize": 50
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "center",
@@ -428,31 +405,31 @@
         }
       },
       {
-        "key": "5i40q",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "ffvel",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "bapac",
             "ricosText": {
-              "text": "Masonry",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Masonry"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "5i40q",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "d0ier",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "d0ier",
         "ricosGallery": {
           "items": [
             {
@@ -485,24 +462,25 @@
           ],
           "styles": {
             "galleryLayout": 1,
+            "gallerySizePx": 300,
+            "oneRow": false,
+            "galleryThumbnailsAlignment": "none",
+            "numberOfImagesPerRow": 0,
+            "imageMargin": 20,
+            "allowHover": true,
             "showArrows": false,
+            "gridStyle": 0,
             "cubeImages": false,
             "groupSize": 1,
             "groupTypes": "1",
             "fixedColumns": 0,
-            "numberOfImagesPerRow": 0,
-            "imageMargin": 20,
-            "gallerySizePx": "300",
-            "gridStyle": 0,
             "hasThumbnails": false,
-            "galleryThumbnailsAlignment": "none",
             "enableScroll": true,
             "isGrid": false,
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false,
-            "oneRow": false
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "center",
@@ -513,31 +491,31 @@
         }
       },
       {
-        "key": "arj4t",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "51u04",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "5tcvg",
             "ricosText": {
-              "text": "Collage",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Collage"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "arj4t",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "3i8q0",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "3i8q0",
         "ricosGallery": {
           "items": [
             {
@@ -589,8 +567,7 @@
           "styles": {
             "galleryLayout": 0,
             "gallerySizeType": "px",
-            "gallerySizePx": "300",
-            "galleryMargin": 0,
+            "gallerySizePx": 300,
             "oneRow": false,
             "cubeRatio": 1,
             "galleryThumbnailsAlignment": "none",
@@ -600,17 +577,13 @@
             "cubeType": "fill",
             "enableInfiniteScroll": true,
             "titlePlacement": "SHOW_ON_HOVER",
-            "allowHover": false,
+            "allowHover": true,
             "itemClick": "link",
-            "fullscreen": false,
             "showArrows": false,
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
             "allowDownload": false,
-            "mobileSwipeAnimation": "NO_EFFECT",
-            "thumbnailSize": 120,
-            "gotStyleParams": true,
             "cubeImages": false,
             "groupSize": 3,
             "groupTypes": "1,2h,2v,3t,3b,3l,3r",
@@ -621,8 +594,7 @@
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false,
-            "galleryType": "Columns"
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "center",
@@ -633,31 +605,31 @@
         }
       },
       {
-        "key": "agvb6",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "9hgcc",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "e8aua",
             "ricosText": {
-              "text": "Panorama",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Panorama"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "agvb6",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "eck0s",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "eck0s",
         "ricosGallery": {
           "items": [
             {
@@ -681,23 +653,23 @@
           ],
           "styles": {
             "galleryLayout": 6,
+            "oneRow": false,
+            "galleryThumbnailsAlignment": "none",
+            "isVertical": true,
+            "imageMargin": 20,
+            "allowHover": true,
             "showArrows": false,
             "cubeImages": false,
-            "isVertical": true,
-            "galleryType": "Columns",
             "groupSize": 1,
             "groupTypes": "1",
-            "oneRow": false,
             "fixedColumns": 1,
             "hasThumbnails": false,
-            "galleryThumbnailsAlignment": "none",
             "enableScroll": true,
             "isGrid": false,
-            "isColumns": false,
             "isSlider": false,
+            "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false,
-            "imageMargin": 20
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "center",
@@ -708,31 +680,31 @@
         }
       },
       {
-        "key": "bpth4",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 3
-        },
         "nodes": [
           {
-            "key": "6ga4d",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "33uo1",
             "ricosText": {
-              "text": "Columns",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Columns"
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "bpth4",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "eu79d",
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "eu79d",
         "ricosGallery": {
           "items": [
             {
@@ -775,7 +747,6 @@
             "galleryLayout": 7,
             "gallerySizeType": "px",
             "gallerySizePx": 300,
-            "galleryMargin": 0,
             "oneRow": true,
             "cubeRatio": 0.35,
             "galleryThumbnailsAlignment": "none",
@@ -785,28 +756,22 @@
             "cubeType": "fill",
             "enableInfiniteScroll": true,
             "titlePlacement": "SHOW_ON_HOVER",
-            "allowHover": false,
+            "allowHover": true,
             "itemClick": "link",
-            "fullscreen": false,
             "showArrows": true,
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
             "allowDownload": false,
-            "mobileSwipeAnimation": "NO_EFFECT",
-            "thumbnailSize": 120,
-            "gotStyleParams": true,
             "cubeImages": true,
-            "smartCrop": false,
-            "galleryType": "Strips",
             "groupSize": 1,
             "groupTypes": "1",
             "fixedColumns": 0,
             "hasThumbnails": false,
             "enableScroll": true,
             "isGrid": false,
-            "isColumns": true,
             "isSlider": false,
+            "isColumns": true,
             "isSlideshow": false,
             "cropOnlyFill": false
           },
@@ -819,11 +784,19 @@
         }
       },
       {
-        "key": "58haj",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1n3ov"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 886000000
+    }
   },
   "selection": {
     "anchorNode": "1bkd"

@@ -2,44 +2,38 @@
   "doc": {
     "nodes": [
       {
-        "key": "272ie",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "31hpi"
       },
       {
-        "key": "9vpmq",
         "nodes": [],
         "type": "ricos-map",
+        "key": "9vpmq",
         "ricosMap": {
           "config": {
             "size": "content",
-            "alignment": "center",
-            "width": 400,
-            "height": 400
-          },
-          "mapSettings": {
-            "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-            "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-            "lat": 32.097235,
-            "lng": 34.77427,
-            "zoom": 18,
-            "mode": "roadmap",
-            "isMarkerShown": true,
-            "isZoomControlShown": false,
-            "isStreetViewControlShown": false,
-            "isDraggingAllowed": false
+            "alignment": "center"
           }
         }
       },
       {
-        "key": "b18dr",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1jg51"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 28000000
+    }
   },
   "selection": {
-    "anchorNode": "272ie"
+    "anchorNode": "31hpi"
   },
-  "version": "3.5.4"
+  "version": ""
 }

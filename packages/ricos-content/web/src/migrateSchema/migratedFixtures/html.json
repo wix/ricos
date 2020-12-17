@@ -2,101 +2,106 @@
   "doc": {
     "nodes": [
       {
-        "key": "979u",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "cr2lt"
       },
       {
-        "key": "ado30",
         "nodes": [],
         "type": "ricos-html",
+        "key": "ado30",
         "ricosHtml": {
-          "srcType": "html",
           "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+          "srcType": "html",
           "config": {
-            "alignment": "center",
             "width": 350,
             "height": 527
           }
         }
       },
       {
-        "key": "99sjv",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "3d7s7",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "1vh0h",
             "ricosText": {
-              "text": "Wide embed. In mobile full width. In desktop 740px ",
-              "decorations": []
+              "decorations": [],
+              "text": "Wide embed. In mobile full width. In desktop 740px "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "7pi16"
       },
       {
-        "key": "3877q",
         "nodes": [],
         "type": "ricos-html",
+        "key": "3877q",
         "ricosHtml": {
-          "srcType": "html",
           "src": "<div class=\"iframely-embed\"><div class=\"iframely-responsive\" style=\"padding-bottom: 52.356%; padding-top: 120px;\"><a href=\"https://www.worldofbuzz.com/9-yummy-snacks-from-south-korea-that-make-great-souvenirs-for-everyone/\" data-iframely-url=\"//cdn.iframe.ly/05UevKO\"></a></div></div><script async src=\"//cdn.iframe.ly/embed.js\" charset=\"utf-8\"></script>",
+          "srcType": "html",
           "config": {
-            "alignment": "center",
             "width": 740,
             "height": 339
           }
         }
       },
       {
-        "key": "ae5jo",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "cs50f"
       },
       {
-        "key": "4r3qd",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4m3gr"
       },
       {
-        "key": "vd1p",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "6b0od"
       },
       {
-        "key": "da06r",
         "nodes": [],
         "type": "ricos-html",
+        "key": "da06r",
         "ricosHtml": {
-          "srcType": "html",
           "src": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+          "srcType": "html",
           "config": {
-            "alignment": "center",
             "width": 350,
             "height": 154
           }
         }
       },
       {
-        "key": "70cia",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "2dkls"
       },
       {
-        "key": "dl2jv",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "e2ijt"
       },
       {
-        "key": "fdtai",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1au2l"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 911000000
+    }
   },
   "selection": {
-    "anchorNode": "979u"
+    "anchorNode": "cr2lt"
   },
   "version": "7.1.5"
 }

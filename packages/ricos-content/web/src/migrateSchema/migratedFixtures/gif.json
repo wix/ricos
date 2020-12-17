@@ -2,39 +2,45 @@
   "doc": {
     "nodes": [
       {
-        "key": "8h548",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "cunnq"
       },
       {
-        "key": "8e2kc",
         "nodes": [],
         "type": "ricos-image",
+        "key": "8e2kc",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "size": "CONTENT",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {
             "id": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
-            "original_file_name": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
-            "file_name": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
             "width": 700,
             "height": 394
           }
         }
       },
       {
-        "key": "56ko3",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "a4mb8"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 898000000
+    }
   },
   "selection": {
-    "anchorNode": "8h548"
+    "anchorNode": "cunnq"
   },
   "version": "6.8.2"
 }

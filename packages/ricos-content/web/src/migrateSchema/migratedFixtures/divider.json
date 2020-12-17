@@ -2,86 +2,94 @@
   "doc": {
     "nodes": [
       {
-        "key": "8gu5b",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4t2ik"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "121kb",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "sr34",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "bm61e"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "ec5dm",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "double",
+          "type": "DOUBLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "k8kb",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "82b2m"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "aerv3",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "dashed",
+          "type": "DASHED",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "ds2vp",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "7rllu"
       },
       {
+        "nodes": [],
+        "type": "ricos-divider",
         "key": "a21rv",
-        "nodes": [],
-        "type": "ricos-divider",
         "ricosDivider": {
-          "type": "dotted",
+          "type": "DOTTED",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "685gn",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "5ppad"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 869000000
+    }
   },
   "selection": {
-    "anchorNode": "8gu5b"
+    "anchorNode": "4t2ik"
   },
   "version": "5.1.1"
 }

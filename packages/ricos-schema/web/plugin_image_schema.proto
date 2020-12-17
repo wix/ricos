@@ -1,14 +1,8 @@
 syntax = "proto3";
 
-message ImageLink {
-    enum Target {
-        BLANK = 0;
-        SELF = 1;
-        TOP = 2;
-    }
-    
+message ImageLink {    
     string url = 1 [required = true];
-    Target target = 2;
+    string target = 2;
     string rel = 3;
 }
 

@@ -2,15 +2,12 @@
   "doc": {
     "nodes": [
       {
-        "key": "fiel1",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "9epva",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "5ofud",
             "ricosText": {
-              "text": "I am text without alignment",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -18,21 +15,21 @@
                     "direction": "left"
                   }
                 }
-              ]
+              ],
+              "text": "I am text without alignment"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "31rqi"
       },
       {
-        "key": "c66kb",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "3gg4a",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "b6i6u",
             "ricosText": {
-              "text": "I am text with left alignment",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -40,21 +37,21 @@
                     "direction": "left"
                   }
                 }
-              ]
+              ],
+              "text": "I am text with left alignment"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "8lgsf"
       },
       {
-        "key": "3h8gj",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "9usdt",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "2mqd",
             "ricosText": {
-              "text": "I am text with center alignment",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -62,21 +59,21 @@
                     "direction": "center"
                   }
                 }
-              ]
+              ],
+              "text": "I am text with center alignment"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "4nojs"
       },
       {
-        "key": "cq8gs",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "30q7i",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "lmkb",
             "ricosText": {
-              "text": "I am text with right alignment",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -84,21 +81,21 @@
                     "direction": "right"
                   }
                 }
-              ]
+              ],
+              "text": "I am text with right alignment"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "8al4d"
       },
       {
-        "key": "5s45r",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "49cki",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "upte",
             "ricosText": {
-              "text": "I am text with justify alignment",
               "decorations": [
                 {
                   "type": "ricos-alignment",
@@ -106,15 +103,26 @@
                     "direction": "justify"
                   }
                 }
-              ]
+              ],
+              "text": "I am text with justify alignment"
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "21moh"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 86000000
+    }
   },
   "selection": {
-    "anchorNode": "fiel1"
+    "anchorNode": "31rqi"
   },
   "version": "6.6.1"
 }

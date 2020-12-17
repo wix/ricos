@@ -2,54 +2,48 @@
   "doc": {
     "nodes": [
       {
-        "key": "4lirv",
-        "type": "heading",
-        "ricosHeading": {
-          "level": 2
-        },
         "nodes": [
           {
-            "key": "5ouhi",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "9g9tn",
             "ricosText": {
-              "text": "Here is what we saw last week (brief highlights) ",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "Here is what we saw last week (brief highlights) "
             }
           },
           {
-            "key": "5bjbo",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "9t7h",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           }
-        ]
-      },
-      {
-        "key": "d3271",
-        "type": "paragraph",
-        "nodes": []
-      },
-      {
-        "key": "4o4jq",
+        ],
         "type": "heading",
+        "key": "4lirv",
         "ricosHeading": {
-          "level": 3
-        },
+          "level": 2
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "755rf"
+      },
+      {
         "nodes": [
           {
-            "key": "7fn9r",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "4no8a",
             "ricosText": {
-              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): ",
               "decorations": [
                 {
                   "type": "bold"
@@ -60,68 +54,82 @@
                     "foreground": "#040404"
                   }
                 }
-              ]
+              ],
+              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): "
             }
           }
-        ]
+        ],
+        "type": "heading",
+        "key": "4o4jq",
+        "ricosHeading": {
+          "level": 3
+        }
       },
       {
-        "key": "2hlrb",
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "a8esj",
+            "ricosText": {
+              "decorations": [],
+              "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
+            }
+          }
+        ],
         "type": "heading",
+        "key": "2hlrb",
         "ricosHeading": {
           "level": 6
-        },
-        "nodes": [
-          {
-            "key": "3nvp",
-            "type": "text",
-            "nodes": [],
-            "ricosText": {
-              "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field.",
-              "decorations": []
-            }
-          }
-        ]
+        }
       },
       {
-        "key": "8uvtv",
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "fkato",
+            "ricosText": {
+              "decorations": [],
+              "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker, siamo riusciti tutti a  vederla accuratamente e in vicinanza."
+            }
+          }
+        ],
         "type": "heading",
+        "key": "8uvtv",
         "ricosHeading": {
           "level": 5
-        },
-        "nodes": [
-          {
-            "key": "7d4vs",
-            "type": "text",
-            "nodes": [],
-            "ricosText": {
-              "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker, siamo riusciti tutti a  vederla accuratamente e in vicinanza.",
-              "decorations": []
-            }
-          }
-        ]
+        }
       },
       {
-        "key": "bv1s9",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "7o3e6"
       },
       {
-        "key": "eauv",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "cs0cu",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "6of8e",
             "ricosText": {
-              "text": "Intorno  all `isola a sud di ow Bridge c'era inoltre una coppia di Hooded  Merganser, molte Canadian Geese, Grayleg Goose e 7-8 Shovelers. Mark ha  avvistato la Cooper`s Hawk vicino a Summer House.",
-              "decorations": []
+              "decorations": [],
+              "text": "Intorno  all `isola a sud di ow Bridge c'era inoltre una coppia di Hooded  Merganser, molte Canadian Geese, Grayleg Goose e 7-8 Shovelers. Mark ha  avvistato la Cooper`s Hawk vicino a Summer House."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "4rv89"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 904000000
+    }
   },
   "selection": {
     "anchorNode": "4lirv"

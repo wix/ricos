@@ -2,24 +2,21 @@
   "doc": {
     "nodes": [
       {
-        "key": "18h7i",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "d253",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "clblk",
             "ricosText": {
-              "text": "Leverage ",
-              "decorations": []
+              "decorations": [],
+              "text": "Leverage "
             }
           },
           {
-            "key": "14gs4",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "g6o7",
             "ricosText": {
-              "text": "agile",
               "decorations": [
                 {
                   "type": "italic"
@@ -27,68 +24,68 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "agile"
             }
           },
           {
-            "key": "49unu",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "d3a4i",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           },
           {
-            "key": "2r7hq",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "11k9b",
             "ricosText": {
-              "text": "frameworks to provide",
               "decorations": [
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "frameworks to provide"
             }
           },
           {
-            "key": "4rf9k",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "d8ld",
             "ricosText": {
-              "text": " a robust synopsis for ",
-              "decorations": []
+              "decorations": [],
+              "text": " a robust synopsis for "
             }
           },
           {
-            "key": "b1eo",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "bsnhn",
             "ricosText": {
-              "text": "high level overviews",
               "decorations": [
                 {
                   "type": "underline"
                 }
-              ]
+              ],
+              "text": "high level overviews"
             }
           },
           {
-            "key": "1ovnm",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "35d5d",
             "ricosText": {
-              "text": ". Iterative approaches to ",
-              "decorations": []
+              "decorations": [],
+              "text": ". Iterative approaches to "
             }
           },
           {
-            "key": "3d9s2",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "1bkkn",
             "ricosText": {
-              "text": "corporate",
               "decorations": [
                 {
                   "type": "underline"
@@ -96,46 +93,57 @@
                 {
                   "type": "bold"
                 }
-              ]
+              ],
+              "text": "corporate"
             }
           },
           {
-            "key": "5ipla",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "cdv3v",
             "ricosText": {
-              "text": " strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace ",
-              "decorations": []
+              "decorations": [],
+              "text": " strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace "
             }
           },
           {
-            "key": "5vtpi",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "drls6",
             "ricosText": {
-              "text": "diversity and empowerment",
               "decorations": [
                 {
                   "type": "italic"
                 }
-              ]
+              ],
+              "text": "diversity and empowerment"
             }
           },
           {
-            "key": "eer5d",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "420aa",
             "ricosText": {
-              "text": ".",
-              "decorations": []
+              "decorations": [],
+              "text": "."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "6sfq5"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 929000000
+    }
   },
   "selection": {
-    "anchorNode": "18h7i"
+    "anchorNode": "6sfq5"
   },
-  "version": "3.5.4"
+  "version": ""
 }

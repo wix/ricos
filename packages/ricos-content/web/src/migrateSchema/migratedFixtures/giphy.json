@@ -2,36 +2,44 @@
   "doc": {
     "nodes": [
       {
-        "key": "7l3rn",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "emiin"
       },
       {
-        "key": "1u5r4",
         "nodes": [],
         "type": "ricos-giphy",
+        "key": "1u5r4",
         "ricosGiphy": {
-          "config": {
-            "size": "content",
-            "alignment": "center"
-          },
           "gif": {
             "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
             "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
             "height": 400,
             "width": 480
+          },
+          "config": {
+            "size": "content",
+            "alignment": "center"
           }
         }
       },
       {
-        "key": "aciov",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "1q4b6"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 900000000
+    }
   },
   "selection": {
-    "anchorNode": "7l3rn"
+    "anchorNode": "emiin"
   },
   "version": "5.1.1"
 }

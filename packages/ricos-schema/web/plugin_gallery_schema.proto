@@ -5,7 +5,7 @@ message GalleryStyles {
   string gallery_size_type = 2;
   int32 gallery_size_px = 3;
   bool one_row = 4;
-  int32 cube_ratio = 5;
+  double cube_ratio = 5;
   string gallery_thumbnails_alignment = 6;
   bool is_vertical = 7;
   int32 number_of_images_per_row = 8;

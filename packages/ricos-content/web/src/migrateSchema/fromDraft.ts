@@ -13,13 +13,38 @@ import {
   EntityTypeDataMap,
   PluginTypeMap,
 } from './consts';
-import { RicosContent, Node, Decoration } from 'ricos-schema';
+import {
+  RicosContent,
+  Decoration,
+  Node,
+  fromObject,
+  Timestamp,
+  toObject,
+  verify,
+} from 'ricos-schema';
 import { genKey } from 'draft-js';
+import {
+  ANCHOR_TYPE,
+  VIDEO_TYPE,
+  VIDEO_TYPE_LEGACY,
+  DIVIDER_TYPE,
+  IMAGE_TYPE,
+  IMAGE_TYPE_LEGACY,
+  VERTICAL_EMBED_TYPE,
+  POLL_TYPE,
+} from '../consts';
+import toConstantCase from 'to-constant-case';
 
 type Range = RicosInlineStyleRange | RicosEntityRange;
 type RangeData = Pick<RicosInlineStyleRange, 'style'> | Pick<RicosEntityRange, 'key'>;
 
-const LAST_UNVERSIONED_CONTENT_STATE = '3.5.4';
+const createTimestamp = (): Timestamp => {
+  const timeMS = Date.now();
+  return {
+    seconds: Math.floor(timeMS / 1000),
+    nanos: (timeMS % 1000) * 1e6,
+  };
+};
 
 export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   const { blocks, entityMap, VERSION: version } = draftJSON;
@@ -174,7 +199,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       if (currentRange && posIsInRange(currentPos, currentRange)) {
         const { length, ...rangeData } = currentRange;
         if (textNode) {
-          textNode.ricosText?.decorations.push(getDecoration(rangeData));
+          textNode.ricosText?.decorations?.push(getDecoration(rangeData));
         } else {
           textNode = createTextNode({
             text: text.substr(currentPos, length),
@@ -251,9 +276,31 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       process.exit(1);
     }
 
-    // Remap anchor key for text blocks
-    if (dataFieldName === EntityTypeDataMap.ANCHOR && keyMapping[data.anchor]) {
-      data.anchor = keyMapping[data.anchor];
+    switch (type) {
+      case ANCHOR_TYPE:
+        // Remap anchor key for text blocks
+        if (keyMapping[data.anchor]) {
+          data.anchor = keyMapping[data.anchor];
+        }
+        break;
+      case VIDEO_TYPE:
+      case VIDEO_TYPE_LEGACY:
+        migrateVideoData(data);
+        break;
+      case DIVIDER_TYPE:
+        migrateDividerData(data);
+        break;
+      case IMAGE_TYPE:
+      case IMAGE_TYPE_LEGACY:
+        migrateImageData(data);
+        break;
+      case POLL_TYPE:
+        migratePollData(data);
+        break;
+      case VERTICAL_EMBED_TYPE:
+        migrateVerticalEmbedData(data);
+        break;
+      default:
     }
 
     return { type: PluginTypeMap[type], [dataFieldName]: data };
@@ -290,13 +337,59 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   parseBlocks();
 
-  return {
+  const ricosContentMessage = fromObject({
     doc: {
       nodes,
+      lastEdited: createTimestamp(),
     },
     selection: {
       anchorNode: nodes[0].key,
     },
-    version: version || LAST_UNVERSIONED_CONTENT_STATE,
-  };
+    version: version || '',
+  });
+
+  const err = verify(ricosContentMessage);
+  if (err) {
+    console.log('ERROR! Invalid content');
+    console.log(err);
+    process.exit(1);
+  }
+
+  const ricosContent = toObject(ricosContentMessage, { arrays: true, enums: String });
+
+  return ricosContent;
+};
+
+const migrateVideoData = data => {
+  // src is split into src for objects and url for strings
+  if (typeof data.src === 'string') {
+    data.url = data.src;
+    delete data.src;
+  } else {
+    data.config.size = toConstantCase(data.config.size);
+    data.config.alignment = toConstantCase(data.config.alignment);
+  }
+};
+
+const migrateDividerData = data => {
+  data.type = toConstantCase(data.type);
+  data.config.size = toConstantCase(data.config.size);
+  data.config.alignment = toConstantCase(data.config.alignment);
+};
+
+const migrateImageData = data => {
+  data.config.size = toConstantCase(data.config.size);
+  data.config.alignment = toConstantCase(data.config.alignment);
+};
+
+const migratePollData = data => {
+  data.config.size = toConstantCase(data.config.size);
+  data.config.alignment = toConstantCase(data.config.alignment);
+  data.layout.poll.type = toConstantCase(data.layout.poll.type);
+  data.layout.poll.direction = toConstantCase(data.layout.poll.direction);
+  data.design.backgroundType = toConstantCase(data.design.backgroundType);
+};
+
+const migrateVerticalEmbedData = data => {
+  data.type = toConstantCase(data.type);
 };

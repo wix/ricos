@@ -2,161 +2,169 @@
   "doc": {
     "nodes": [
       {
-        "key": "f9mp5",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "81bq6",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "4sq8l",
             "ricosText": {
-              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews.",
-              "decorations": []
+              "decorations": [],
+              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "8sp0l"
       },
       {
-        "key": "1jedg",
+        "nodes": [
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "eo3e0",
+                    "ricosText": {
+                      "decorations": [],
+                      "text": "Bring to the table win-win survival strategies to ensure proactive domination."
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "3e7qn"
+              }
+            ],
+            "type": "list_item",
+            "key": "d4hhc"
+          },
+          {
+            "nodes": [
+              {
+                "nodes": [],
+                "type": "paragraph",
+                "key": "ap2om"
+              }
+            ],
+            "type": "list_item",
+            "key": "a4ikl"
+          },
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "5t6r3",
+                    "ricosText": {
+                      "decorations": [],
+                      "text": "Check if the list above displays correctly!"
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "31apc"
+              }
+            ],
+            "type": "list_item",
+            "key": "8e46b"
+          }
+        ],
         "type": "ordered_list",
-        "nodes": [
-          {
-            "key": "d4hhc",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "2apo1",
-                "type": "paragraph",
-                "nodes": [
-                  {
-                    "key": "7tadc",
-                    "type": "text",
-                    "nodes": [],
-                    "ricosText": {
-                      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-                      "decorations": []
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "key": "a4ikl",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "kfuc",
-                "type": "paragraph",
-                "nodes": []
-              }
-            ]
-          },
-          {
-            "key": "8e46b",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "auuln",
-                "type": "paragraph",
-                "nodes": [
-                  {
-                    "key": "379p",
-                    "type": "text",
-                    "nodes": [],
-                    "ricosText": {
-                      "text": "Check if the list above displays correctly!",
-                      "decorations": []
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+        "key": "8snok"
       },
       {
-        "key": "cc670",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "5jlcl",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "2749f",
             "ricosText": {
-              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-              "decorations": []
+              "decorations": [],
+              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "9g003"
       },
       {
-        "key": "73g2p",
+        "nodes": [
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "6n606",
+                    "ricosText": {
+                      "decorations": [],
+                      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line."
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "37ttb"
+              }
+            ],
+            "type": "list_item",
+            "key": "dp96d"
+          },
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "frveg",
+                    "ricosText": {
+                      "decorations": [],
+                      "text": "Override the digital divide with additional clickthroughs from DevOps."
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "f476n"
+              }
+            ],
+            "type": "list_item",
+            "key": "7vnq7"
+          }
+        ],
         "type": "bullet_list",
-        "nodes": [
-          {
-            "key": "dp96d",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "425b2",
-                "type": "paragraph",
-                "nodes": [
-                  {
-                    "key": "cpf8b",
-                    "type": "text",
-                    "nodes": [],
-                    "ricosText": {
-                      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
-                      "decorations": []
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "key": "7vnq7",
-            "type": "list_item",
-            "nodes": [
-              {
-                "key": "3rvdf",
-                "type": "paragraph",
-                "nodes": [
-                  {
-                    "key": "e25cc",
-                    "type": "text",
-                    "nodes": [],
-                    "ricosText": {
-                      "text": "Override the digital divide with additional clickthroughs from DevOps.",
-                      "decorations": []
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+        "key": "2fdbj"
       },
       {
-        "key": "4jmjf",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "12gqn",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "cjd0f",
             "ricosText": {
-              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
-              "decorations": []
+              "decorations": [],
+              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "d3bnl"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 89000000
+    }
   },
   "selection": {
-    "anchorNode": "f9mp5"
+    "anchorNode": "8sp0l"
   },
   "version": "7.5.0"
 }

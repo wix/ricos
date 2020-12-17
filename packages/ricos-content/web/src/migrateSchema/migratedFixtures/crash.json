@@ -2,20 +2,28 @@
   "doc": {
     "nodes": [
       {
-        "key": "128er",
         "nodes": [],
         "type": "ricos-image",
+        "key": "128er",
         "ricosImage": {
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "size": "CONTENT",
+            "alignment": "CENTER",
             "showTitle": true,
             "showDescription": true
           },
           "src": {}
         }
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 868000000
+    }
   },
   "selection": {
     "anchorNode": "128er"

@@ -2,90 +2,98 @@
   "doc": {
     "nodes": [
       {
-        "key": "3qaqn",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "d58a9",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "fk84r",
             "ricosText": {
-              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
-              "decorations": []
+              "decorations": [],
+              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "50qmr"
       },
       {
-        "key": "d4hhc",
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "4jg4l",
+            "ricosText": {
+              "decorations": [],
+              "text": "Bring to the table win-win survival strategies to ensure proactive domination."
+            }
+          }
+        ],
         "type": "heading",
+        "key": "d4hhc",
         "ricosHeading": {
           "level": 2
-        },
-        "nodes": [
-          {
-            "key": "b9hro",
-            "type": "text",
-            "nodes": [],
-            "ricosText": {
-              "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-              "decorations": []
-            }
-          }
-        ]
+        }
       },
       {
-        "key": "9c04d",
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "fqln7",
+            "ricosText": {
+              "decorations": [],
+              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution."
+            }
+          }
+        ],
         "type": "paragraph",
-        "nodes": [
-          {
-            "key": "918jf",
-            "type": "text",
-            "nodes": [],
-            "ricosText": {
-              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
-              "decorations": []
-            }
-          }
-        ]
+        "key": "4kb41"
       },
       {
-        "key": "87u",
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8f0v6",
+            "ricosText": {
+              "decorations": [],
+              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
+            }
+          }
+        ],
         "type": "heading",
+        "key": "87u",
         "ricosHeading": {
           "level": 3
-        },
-        "nodes": [
-          {
-            "key": "1beek",
-            "type": "text",
-            "nodes": [],
-            "ricosText": {
-              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-              "decorations": []
-            }
-          }
-        ]
+        }
       },
       {
-        "key": "3ssef",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "5nl8q",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "1n2et",
             "ricosText": {
-              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
-              "decorations": []
+              "decorations": [],
+              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "6ge2s"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 903000000
+    }
   },
   "selection": {
-    "anchorNode": "3qaqn"
+    "anchorNode": "50qmr"
   },
-  "version": "3.5.4"
+  "version": ""
 }

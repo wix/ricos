@@ -2,129 +2,137 @@
   "doc": {
     "nodes": [
       {
-        "key": "7q4vs",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "2985g",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "c36aj",
             "ricosText": {
-              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
-              "decorations": []
+              "decorations": [],
+              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "11d7n"
       },
       {
-        "key": "6eiq8",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "7ekca",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "a4if",
             "ricosText": {
-              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-              "decorations": []
+              "decorations": [],
+              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "41ln"
       },
       {
-        "key": "faem1",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "986j0",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "5e6dt",
             "ricosText": {
-              "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-              "decorations": []
+              "decorations": [],
+              "text": "Bring to the table win-win survival strategies to ensure proactive domination."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "el0nb"
       },
       {
-        "key": "16cl8",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "39ksr",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "d6lkp",
             "ricosText": {
-              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
-              "decorations": []
+              "decorations": [],
+              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "4muot"
       },
       {
-        "key": "a8j75",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "a801u",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "fbeo0",
             "ricosText": {
-              "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
-              "decorations": []
+              "decorations": [],
+              "text": "User generated content in real-time will have multiple touchpoints for offshoring."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "4au9d"
       },
       {
-        "key": "foh69",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "f1dbr",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "bhoo2",
             "ricosText": {
-              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
-              "decorations": []
+              "decorations": [],
+              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "13qk7"
       },
       {
-        "key": "4rc6i",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "373jr",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "bqk45",
             "ricosText": {
-              "text": "Override the digital divide with additional clickthroughs from DevOps.",
-              "decorations": []
+              "decorations": [],
+              "text": "Override the digital divide with additional clickthroughs from DevOps."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "aurf0"
       },
       {
-        "key": "1coog",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "6e64u",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "7fhh8",
             "ricosText": {
-              "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
-              "decorations": []
+              "decorations": [],
+              "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line."
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "cicbr"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 54000000
+    }
   },
   "selection": {
-    "anchorNode": "7q4vs"
+    "anchorNode": "11d7n"
   },
-  "version": "3.5.4"
+  "version": ""
 }

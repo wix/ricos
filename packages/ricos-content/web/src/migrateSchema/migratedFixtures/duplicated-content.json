@@ -1,0 +1,378 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "e4kn9",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "1º Aula: Calcinatio"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "28h1n",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ],
+              "text": "\n"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "epsm3",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "\n2º Aula: Solutio"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "bh92u",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ],
+              "text": "\n"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "3ek40",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "\n3º Aula: Coagulatio"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9sr64",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ],
+              "text": "\n"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "28rnl",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "\n4º Aula: Sublimatio"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9sao6",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ],
+              "text": "\n"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9veqk",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "\n5º Aula: Mortificatio"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8pl8j",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ],
+              "text": "\n"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "1j176",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "\n6º Aula: Coletivo Alquímico - Dinheiro e Alquimia"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8nsh2",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ],
+              "text": "\n"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "akclg",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "\n7º Aula: Separatio, Coniunctio e o Andrógino"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "en7sl",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ],
+              "text": "\n"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "bv9sv",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "\n8º Aula: A Pedra Filosofal"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "fduk"
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "13h0d",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "9º Aula: A Pedra Filosofal II"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "1vtq8"
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "21guj",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "ricos-link"
+                },
+                {
+                  "type": "bold"
+                },
+                {}
+              ],
+              "text": "10º Aula: A Pedra Filosofal III"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "fbb0r"
+      }
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223652,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 873000000
+    }
+  },
+  "selection": {
+    "anchorNode": "fduk"
+  },
+  "version": "8.7.5"
+}

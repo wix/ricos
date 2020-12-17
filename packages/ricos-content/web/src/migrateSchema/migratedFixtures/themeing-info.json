@@ -2,127 +2,119 @@
   "doc": {
     "nodes": [
       {
-        "key": "dbho",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "6todc"
       },
       {
-        "key": "dq131",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "5nmv3",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "bbo9q",
             "ricosText": {
-              "text": "Theming is done by ",
-              "decorations": []
+              "decorations": [],
+              "text": "Theming is done by "
             }
           },
           {
-            "key": "feqok",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "5oge2",
             "ricosText": {
-              "text": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewe",
               "decorations": [
                 {
-                  "type": "ricos-link",
-                  "ricosLink": {
-                    "url": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewer/web",
-                    "target": "_blank",
-                    "rel": "noopener"
-                  }
+                  "type": "ricos-link"
                 }
-              ]
+              ],
+              "text": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewe"
             }
           },
           {
-            "key": "878p0",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "40mav",
             "ricosText": {
-              "text": "r/web ",
-              "decorations": []
+              "decorations": [],
+              "text": "r/web "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "ctmq6"
       },
       {
-        "key": "3biuv",
-        "type": "blockquote",
         "nodes": [
           {
-            "key": "54re0",
-            "type": "paragraph",
             "nodes": [
               {
-                "key": "alm7",
-                "type": "text",
                 "nodes": [],
+                "type": "text",
+                "key": "5av4i",
                 "ricosText": {
-                  "text": "This is a quote example - look at the color!",
-                  "decorations": []
+                  "decorations": [],
+                  "text": "This is a quote example - look at the color!"
                 }
               }
-            ]
+            ],
+            "type": "paragraph",
+            "key": "3i578"
           }
-        ]
+        ],
+        "type": "blockquote",
+        "key": "3biuv"
       },
       {
-        "key": "fgkbb",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "62ddg"
       },
       {
-        "key": "1if35",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "3dfsb",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "fbfvf",
             "ricosText": {
-              "text": "No #documentation yet though ",
-              "decorations": []
+              "decorations": [],
+              "text": "No #documentation yet though "
             }
           },
           {
-            "key": "3agp0",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "8mp2m",
             "ricosText": {
-              "text": "\ud83d",
               "decorations": [
                 {
-                  "type": "ricos-emoji",
-                  "ricosEmoji": {
-                    "emojiUnicode": "😲"
-                  }
+                  "type": "ricos-emoji"
                 }
-              ]
+              ],
+              "text": "\ud83d"
             }
           },
           {
-            "key": "1nuvo",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "4vpe6",
             "ricosText": {
-              "text": "\ude32",
-              "decorations": []
+              "decorations": [],
+              "text": "\ude32"
             }
           }
-        ]
-      },
-      {
-        "key": "61i3r",
+        ],
         "type": "paragraph",
-        "nodes": []
+        "key": "2nb9k"
       },
       {
-        "key": "fjspc",
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8s30e"
+      },
+      {
         "nodes": [],
         "type": "ricos-gallery",
+        "key": "fjspc",
         "ricosGallery": {
           "items": [
             {
@@ -152,27 +144,23 @@
           ],
           "styles": {
             "galleryLayout": 3,
+            "oneRow": true,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "bottom",
+            "isVertical": false,
+            "thumbnailSpacings": 0,
+            "cubeType": "fill",
             "showArrows": true,
             "cubeImages": true,
-            "smartCrop": false,
-            "cubeType": "fill",
-            "cubeRatio": 1,
-            "isVertical": false,
-            "galleryType": "Strips",
             "groupSize": 1,
             "groupTypes": "1",
-            "oneRow": true,
             "hasThumbnails": true,
-            "galleryThumbnailsAlignment": "bottom",
             "enableScroll": false,
             "isGrid": false,
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false,
-            "floatingImages": 0,
-            "thumbnailSpacings": 0,
-            "galleryMargin": 0
+            "cropOnlyFill": false
           },
           "config": {
             "alignment": "left",
@@ -183,230 +171,202 @@
         }
       },
       {
-        "key": "60eus",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4a2mt"
       },
       {
-        "key": "ft097",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "5fkn7"
       },
       {
-        "key": "43fuj",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "fl96p"
       },
       {
-        "key": "3uku5",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "4h6ij"
       },
       {
-        "key": "fe879",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "5el6d"
       },
       {
-        "key": "bnstu",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "faj2h"
       },
       {
-        "key": "155cs",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "8jagi"
       },
       {
-        "key": "6in75",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "7i2kk"
       },
       {
-        "key": "35pom",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "bjksu"
       },
       {
-        "key": "a5nid",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "9f7h6"
       },
       {
-        "key": "15gmi",
         "nodes": [],
         "type": "ricos-divider",
+        "key": "15gmi",
         "ricosDivider": {
-          "type": "single",
+          "type": "SINGLE",
           "config": {
-            "size": "large",
-            "alignment": "center",
+            "size": "LARGE",
+            "alignment": "CENTER",
             "textWrap": "nowrap"
           }
         }
       },
       {
-        "key": "c114e",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "1029u",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "vsnl",
             "ricosText": {
-              "text": "@Cool",
               "decorations": [
                 {
-                  "type": "ricos-mention",
-                  "ricosMention": {
-                    "mention": {
-                      "name": "Cool",
-                      "slug": "Cool"
-                    }
-                  }
+                  "type": "ricos-mention"
                 }
-              ]
+              ],
+              "text": "@Cool"
             }
           },
           {
-            "key": "79jdf",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "clbh7",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           },
           {
-            "key": "e7bgp",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "bt5tg",
             "ricosText": {
-              "text": "@Mention",
               "decorations": [
                 {
-                  "type": "ricos-mention",
-                  "ricosMention": {
-                    "mention": {
-                      "name": "Mention",
-                      "slug": "Mention"
-                    }
-                  }
+                  "type": "ricos-mention"
                 }
-              ]
+              ],
+              "text": "@Mention"
             }
           },
           {
-            "key": "c2860",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "f2hil",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           },
           {
-            "key": "32s6r",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "31p5q",
             "ricosText": {
-              "text": "@Tags",
               "decorations": [
                 {
-                  "type": "ricos-mention",
-                  "ricosMention": {
-                    "mention": {
-                      "name": "Tags",
-                      "slug": "Tags"
-                    }
-                  }
+                  "type": "ricos-mention"
                 }
-              ]
+              ],
+              "text": "@Tags"
             }
           },
           {
-            "key": "3h4ma",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "c9hei",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "4l2o8"
       },
       {
-        "key": "dg3jt",
-        "type": "paragraph",
         "nodes": [
           {
-            "key": "fp9p",
-            "type": "text",
             "nodes": [],
+            "type": "text",
+            "key": "65cte",
             "ricosText": {
-              "text": " ",
-              "decorations": []
+              "decorations": [],
+              "text": " "
             }
           }
-        ]
+        ],
+        "type": "paragraph",
+        "key": "efgho"
       },
       {
-        "key": "35km7",
         "nodes": [],
         "type": "ricos-link-preview",
+        "key": "35km7",
         "ricosLinkPreview": {
+          "title": "Free Website Builder | Create a Free Website | Wix.com",
+          "description": "Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
           "config": {
-            "size": "content",
-            "alignment": "center",
             "link": {
               "url": "wix.com"
             }
-          },
-          "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
-          "title": "Free Website Builder | Create a Free Website | Wix.com",
-          "description": "Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
-          "provider_url": "http://wix.com"
-        }
-      },
-      {
-        "key": "c3p1s",
-        "type": "paragraph",
-        "nodes": []
-      },
-      {
-        "key": "4bmiu",
-        "nodes": [],
-        "type": "ricos-map",
-        "ricosMap": {
-          "config": {
-            "size": "content",
-            "alignment": "center",
-            "width": 400,
-            "height": 400
-          },
-          "mapSettings": {
-            "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-            "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-            "lat": 32.097235,
-            "lng": 34.77427,
-            "zoom": 18,
-            "mode": "roadmap",
-            "isMarkerShown": true,
-            "isZoomControlShown": true,
-            "isStreetViewControlShown": true,
-            "isDraggingAllowed": true
           }
         }
       },
       {
-        "key": "c7tpo",
+        "nodes": [],
         "type": "paragraph",
-        "nodes": []
+        "key": "2qgv"
+      },
+      {
+        "nodes": [],
+        "type": "ricos-map",
+        "key": "4bmiu",
+        "ricosMap": {
+          "config": {
+            "size": "content",
+            "alignment": "center"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "58k24"
       }
-    ]
+    ],
+    "lastEdited": {
+      "seconds": {
+        "low": 1608223653,
+        "high": 0,
+        "unsigned": false
+      },
+      "nanos": 91000000
+    }
   },
   "selection": {
-    "anchorNode": "dbho"
+    "anchorNode": "6todc"
   },
   "version": "7.3.4"
 }

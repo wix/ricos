@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
     "allowSyntheticDefaultImports": true,
-    "module": "ESNext",
+    "module": "CommonJs",
     "moduleResolution": "node",
     "target": "ES5",
     "strictNullChecks": true,
     "esModuleInterop": true,
     "outDir": "dist"
   },
-  "include": ["index.ts"]
+  "include": ["index.cjs.ts"]
 }
