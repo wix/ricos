@@ -1,4 +1,4 @@
-import { EditorState, convertToRaw } from '@wix/draft-js';
+import { EditorState, convertToRaw, ContentState } from '@wix/draft-js';
 import { RicosContent } from 'ricos-content';
 import { isEqual } from 'lodash';
 
@@ -179,7 +179,7 @@ function shiftRedoStack(editorState: EditorState) {
   return EditorState.set(editorState, { redoStack: editorState.getRedoStack().shift() });
 }
 
-function pushToRedoStack(editorState: EditorState, contentState: RicosContent) {
+function pushToRedoStack(editorState: EditorState, contentState: ContentState) {
   return EditorState.set(editorState, { redoStack: editorState.getRedoStack().push(contentState) });
 }
 
