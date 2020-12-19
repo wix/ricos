@@ -72,10 +72,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   onChange = (childOnChange?: RichContentEditorProps['onChange']) => (
     editorState: EditorState,
-    contentTraits: {
-      isEmpty: boolean;
-      isContentChanged: boolean;
-    }
+    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
   ) => {
     this.dataInstance.refresh(editorState, contentTraits);
     childOnChange?.(editorState, contentTraits);
@@ -116,10 +113,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   onBusyChange = (
     contentState: ContentState,
-    contentTraits: {
-      isEmpty: boolean;
-      isContentChanged: boolean;
-    }
+    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
   ) => {
     const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
