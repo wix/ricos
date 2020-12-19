@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} orang memberikan suara untuk jawaban ini",
   "Spoiler_Reveal_Video_Placeholder": "Video ini berisi bocoran",
   "Preview_SeeFullPost_Label": "Lihat pos lengkap",
-  "UploadFile_Viewer_Download": "Unduh {{fileType}}"
+  "UploadFile_Viewer_Download": "Unduh {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}}min",
+  "Embed_Vertical_Units_Hour": "{{hours}}h"
 }
