@@ -1,9 +1,9 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState, ContentState, EditorProps } from 'draft-js';
+import { EditorState, ContentState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
@@ -57,7 +57,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   }
 
-  onChange = (childOnChange?: EditorProps['onChange']) => (
+  onChange = (childOnChange?: RichContentEditorProps['onChange']) => (
     editorState: EditorState,
     contentTraits: { isEmpty: boolean; isContentChanged: boolean }
   ) => {
