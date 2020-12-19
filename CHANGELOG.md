@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1875](https://github.com/wix-incubator/rich-content/pull/1875) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
 
 </details>
 <hr/>
