@@ -9,12 +9,14 @@ import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
 import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
+
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
   StaticToolbar?: ElementType;
   localeStrategy: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
+  editorState?: EditorState;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -56,10 +58,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   }
 
-  onChange = (childOnChange?: EditorProps['onChange']) => (editorState: EditorState) => {
-    this.dataInstance.refresh(editorState);
-    childOnChange?.(editorState);
-    this.onBusyChange(editorState.getCurrentContent());
+  onChange = (childOnChange?: EditorProps['onChange']) => (
+    editorState: EditorState,
+    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
+  ) => {
+    this.dataInstance.refresh(editorState, contentTraits);
+    childOnChange?.(editorState, contentTraits);
+    this.onBusyChange(editorState.getCurrentContent(), contentTraits);
   };
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
@@ -94,13 +99,16 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return res;
   };
 
-  onBusyChange = (contentState: ContentState) => {
+  onBusyChange = (
+    contentState: ContentState,
+    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
+  ) => {
     const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
       this.isBusy = isBusy;
       onBusyChange?.(isBusy);
-      onChange?.(convertToRaw(contentState));
+      onChange?.(convertToRaw(contentState), contentTraits);
     }
   };
 
@@ -110,8 +118,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   render() {
-    const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
-    const { StaticToolbar, localeStrategy, remountKey } = this.state;
+    const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
+    const { StaticToolbar, localeStrategy, remountKey, editorState } = this.state;
+
+    const contentProp = editorState
+      ? { editorState: { editorState }, content: {} }
+      : { editorState: {}, content: { content } };
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
@@ -133,6 +145,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           isViewer={false}
           key={'editor'}
           toolbarSettings={toolbarSettings}
+          {...contentProp.content}
           {...props}
         >
           {React.cloneElement(child, {
@@ -140,6 +153,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             ref: this.setEditorRef,
             editorKey: 'editor',
             setEditorToolbars: this.setStaticToolbar,
+            ...contentProp.editorState,
             ...supportedDraftEditorSettings,
             ...localeStrategy,
           })}
