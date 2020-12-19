@@ -8,12 +8,7 @@ import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
-import {
-  convertToRaw,
-  convertFromRaw,
-  createWithContent,
-} from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isEqual } from 'lodash';
+import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
 
 import { ToolbarType } from 'wix-rich-content-common';
 
@@ -61,16 +56,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
-    if (newProps.content && !isEqual(this.props.content, newProps.content)) {
-      console.debug('new content provided as editorState'); // eslint-disable-line
-      this.setState({ editorState: createWithContent(convertFromRaw(newProps.content)) });
-    }
   }
 
-  onChange = (childOnChange?: EditorProps['onChange']) => (editorState: EditorState) => {
-    this.dataInstance.refresh(editorState);
-    childOnChange?.(editorState);
-    this.onBusyChange(editorState.getCurrentContent());
+  onChange = (childOnChange?: EditorProps['onChange']) => (
+    editorState: EditorState,
+    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
+  ) => {
+    this.dataInstance.refresh(editorState, contentTraits);
+    childOnChange?.(editorState, contentTraits);
+    this.onBusyChange(editorState.getCurrentContent(), contentTraits);
   };
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
@@ -105,13 +99,16 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return res;
   };
 
-  onBusyChange = (contentState: ContentState) => {
+  onBusyChange = (
+    contentState: ContentState,
+    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
+  ) => {
     const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
       this.isBusy = isBusy;
       onBusyChange?.(isBusy);
-      onChange?.(convertToRaw(contentState));
+      onChange?.(convertToRaw(contentState), contentTraits);
     }
   };
 
