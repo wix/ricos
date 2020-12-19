@@ -22,7 +22,10 @@ export const WithEditorEventsProps = {
 
 export const withEditorEvents = WrappedComponent => props => (
   <EditorEventsContext.Consumer>
-    {contextValue => <WrappedComponent editorEvents={contextValue} {...props} />}
+    {contextValue => (
+      // eslint-disable-next-line react/prop-types
+      <WrappedComponent editorEvents={contextValue} ref={props?.forwardedRef} {...props} />
+    )}
   </EditorEventsContext.Consumer>
 );
 
