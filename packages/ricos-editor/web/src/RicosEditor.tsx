@@ -16,7 +16,6 @@ interface State {
   StaticToolbar?: ElementType;
   localeStrategy: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
-  editorState?: EditorState;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -118,12 +117,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   render() {
-    const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
-    const { StaticToolbar, localeStrategy, remountKey, editorState } = this.state;
-
-    const contentProp = editorState
-      ? { editorState: { editorState }, content: {} }
-      : { editorState: {}, content: { content } };
+    const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
+    const { StaticToolbar, localeStrategy, remountKey } = this.state;
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
@@ -145,7 +140,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           isViewer={false}
           key={'editor'}
           toolbarSettings={toolbarSettings}
-          {...contentProp.content}
           {...props}
         >
           {React.cloneElement(child, {
@@ -153,7 +147,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             ref: this.setEditorRef,
             editorKey: 'editor',
             setEditorToolbars: this.setStaticToolbar,
-            ...contentProp.editorState,
             ...supportedDraftEditorSettings,
             ...localeStrategy,
           })}
