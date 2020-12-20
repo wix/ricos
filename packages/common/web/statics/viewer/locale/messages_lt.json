@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "Už šį atsakymą balsavo {{count}}",
   "Spoiler_Reveal_Video_Placeholder": "This video contains a spoiler",
   "Preview_SeeFullPost_Label": "Rodyti visą įrašą",
-  "UploadFile_Viewer_Download": "Download {{fileType}}"
+  "UploadFile_Viewer_Download": "Download {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}}min",
+  "Embed_Vertical_Units_Hour": "{{hours}}h"
 }
