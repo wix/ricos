@@ -45,6 +45,7 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
+  injectedContent?: RicosContent;
   /* Changes to this interface should also be reflected in the API docs */
 }
 

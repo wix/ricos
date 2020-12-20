@@ -1,9 +1,9 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState, ContentState, EditorProps } from 'draft-js';
+import { EditorState, ContentState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
@@ -61,16 +61,25 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
-    if (newProps.content && !isEqual(this.props.content, newProps.content)) {
+    if (
+      newProps.injectedContent &&
+      !isEqual(this.props.injectedContent, newProps.injectedContent)
+    ) {
       console.debug('new content provided as editorState'); // eslint-disable-line
-      this.setState({ editorState: createWithContent(convertFromRaw(newProps.content)) });
+      this.setState({ editorState: createWithContent(convertFromRaw(newProps.injectedContent)) });
     }
   }
 
-  onChange = (childOnChange?: EditorProps['onChange']) => (editorState: EditorState) => {
-    this.dataInstance.refresh(editorState);
-    childOnChange?.(editorState);
-    this.onBusyChange(editorState.getCurrentContent());
+  onChange = (childOnChange?: RichContentEditorProps['onChange']) => (
+    editorState: EditorState,
+    contentTraits: {
+      isEmpty: boolean;
+      isContentChanged: boolean;
+    }
+  ) => {
+    this.dataInstance.refresh(editorState, contentTraits);
+    childOnChange?.(editorState, contentTraits);
+    this.onBusyChange(editorState.getCurrentContent(), contentTraits);
   };
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
@@ -105,13 +114,19 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return res;
   };
 
-  onBusyChange = (contentState: ContentState) => {
+  onBusyChange = (
+    contentState: ContentState,
+    contentTraits: {
+      isEmpty: boolean;
+      isContentChanged: boolean;
+    }
+  ) => {
     const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
       this.isBusy = isBusy;
       onBusyChange?.(isBusy);
-      onChange?.(convertToRaw(contentState));
+      onChange?.(convertToRaw(contentState), contentTraits);
     }
   };
 
