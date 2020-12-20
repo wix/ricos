@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "Pro tuto odpověď hlasovalo uživatelů: {{count}}",
   "Spoiler_Reveal_Video_Placeholder": "Toto video obsahuje spoiler",
   "Preview_SeeFullPost_Label": "Zobrazit celý příspěvek",
-  "UploadFile_Viewer_Download": "Stáhnout {{fileType}}"
+  "UploadFile_Viewer_Download": "Stáhnout {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}} min",
+  "Embed_Vertical_Units_Hour": "{{hours}} h"
 }
