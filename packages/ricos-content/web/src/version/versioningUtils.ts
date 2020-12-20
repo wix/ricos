@@ -1,3 +1,4 @@
+import { isNaN } from 'lodash';
 import { version as currentVersion } from '../../package.json';
 
 // "1.2.3-alpha.4" => [1, 2, 3]
