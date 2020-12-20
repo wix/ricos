@@ -21,6 +21,12 @@
 - `ricos-editor`
   - [#1875](https://github.com/wix-incubator/rich-content/pull/1875) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
 
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1878](https://github.com/wix-incubator/rich-content/pull/1878) paragraph color customization
+- `ricos-viewer`
+  - [#1878](https://github.com/wix-incubator/rich-content/pull/1878) paragraph color customization
+
 </details>
 <hr/>
 
