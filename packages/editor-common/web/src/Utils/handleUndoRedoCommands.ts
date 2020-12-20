@@ -1,6 +1,6 @@
 import { EditorState } from '@wix/draft-js';
 
-function createEditorStateWithoutComposition(editorState: EditorState) {
+function removeCompositionModeFromEditorState(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
     return EditorState.set(editorState, {
       inCompositionMode: false,
@@ -10,7 +10,7 @@ function createEditorStateWithoutComposition(editorState: EditorState) {
 }
 
 export const undo = (editorState: EditorState) =>
-  createEditorStateWithoutComposition(EditorState.undo(editorState));
+  removeCompositionModeFromEditorState(EditorState.undo(editorState));
 
 export const redo = (editorState: EditorState) =>
-  createEditorStateWithoutComposition(EditorState.redo(editorState));
+  removeCompositionModeFromEditorState(EditorState.redo(editorState));
