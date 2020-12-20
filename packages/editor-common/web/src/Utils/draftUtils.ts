@@ -266,13 +266,13 @@ export const replaceWithNewEntityData = (
   type: string
 ) => {
   if (blockKey && type) {
-    const selection = new SelectionState({
+    const targetSelection = new SelectionState({
       anchorKey: blockKey,
       anchorOffset: 0,
       focusKey: blockKey,
       focusOffset: 1,
     });
-    return addEntity(editorState, selection, {
+    return addEntity(editorState, targetSelection, {
       type,
       data,
       mutability: 'IMMUTABLE',

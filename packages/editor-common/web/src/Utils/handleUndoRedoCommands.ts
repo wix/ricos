@@ -9,14 +9,6 @@ const GALLERY_TYPE = 'wix-draft-plugin-gallery';
 const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
 const IGNORE_CHANGE_TYPE = 'ignore';
 const typesToIgnoreChanges = ['wix-rich-content-plugin-table'];
-const types = [
-  GALLERY_TYPE,
-  FILE_TYPE,
-  IMAGE_TYPE,
-  VIDEO_TYPE,
-  ACCORDION_TYPE,
-  ...typesToIgnoreChanges,
-];
 
 const getType = (type: string) => (typesToIgnoreChanges.includes(type) ? IGNORE_CHANGE_TYPE : type);
 
@@ -65,17 +57,18 @@ function didAccordionPairsChange(currentPairs, newPairs) {
   });
 }
 
-function createReplaceableEntitiesKeyMap(contentState: RicosContent) {
-  const replaceableEntitiesMap = {};
+function createBlockEntitiesDataMap(contentState: RicosContent) {
+  const blockEntitiesDataMap = {};
   const { blocks, entityMap } = contentState;
   blocks.forEach(block => {
-    const { entityRanges = [], type, key: blockKey } = block;
+    const { entityRanges = [], key: blockKey } = block;
     const entity = entityMap[entityRanges[0]?.key];
-    if (type === 'atomic' && types.includes(entity?.type)) {
-      replaceableEntitiesMap[blockKey] = entity.data;
-    }
+    blockEntitiesDataMap[blockKey] = { block, entityData: entity?.data };
+    // if (type === 'atomic' && entity) {
+    //   blockEntitiesDataMap[blockKey] = { block, entityData: entity.data };
+    // }
   });
-  return replaceableEntitiesMap;
+  return blockEntitiesDataMap;
 }
 
 function shouldReplaceVideoData(currentData, newData) {
@@ -133,46 +126,55 @@ const entityDataFixers = {
   /* eslint-enable no-unused-vars */
 };
 
-function doesEntityExistInNewBlockAndOldBlock(block, entityMap, newBlocksEntitiesData) {
+function doesBlockExistInNewContentState(block, entityMap, newBlocksEntitiesData) {
   const { entityRanges = [], key: blockKey } = block;
+  if (!(blockKey in newBlocksEntitiesData)) {
+    return false;
+  }
   const entityKey = entityRanges[0]?.key;
   const currentEntity = entityMap[entityKey];
-  return blockKey in newBlocksEntitiesData && currentEntity;
+  const { entityData: newEntity } = newBlocksEntitiesData[blockKey];
+  return (currentEntity && newEntity) || (!currentEntity && !newEntity);
 }
 
 function getEntityToReplace(newContentState: RicosContent, contentState: RicosContent) {
-  const newBlocksEntitiesData = createReplaceableEntitiesKeyMap(newContentState);
+  const newBlocksEntitiesData = createBlockEntitiesDataMap(newContentState);
   const { blocks, entityMap } = contentState;
   let entityToReplace;
-  blocks.find(block => {
-    if (doesEntityExistInNewBlockAndOldBlock(block, entityMap, newBlocksEntitiesData)) {
-      const { entityRanges = [], key: blockKey } = block;
-      const entityKey = entityRanges[0]?.key;
-      const currentEntity = entityMap[entityKey];
-      const { type, data: currentData } = currentEntity;
-      const newData = newBlocksEntitiesData[blockKey];
-
-      if (type === ACCORDION_TYPE) {
-        entityToReplace = handleAccordionEntity(currentData, newData);
-        if (entityToReplace) {
-          entityToReplace.blockKey = blockKey;
-          return true;
-        }
-      } else if (!isEqual(currentData, newData)) {
-        const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
-        if (fixedData) {
-          entityToReplace = {
-            blockKey,
-            fixedData,
-            shouldUndoAgain: true,
-          };
-        }
+  const didChange = blocks.some(block => {
+    const { entityRanges = [], key: blockKey } = block;
+    if (doesBlockExistInNewContentState(block, entityMap, newBlocksEntitiesData)) {
+      const { block: newBlock, entityData: newData } = newBlocksEntitiesData[blockKey];
+      if (!isEqual(block, newBlock)) {
         return true;
       }
+      if (newData) {
+        const entityKey = entityRanges[0]?.key;
+        const currentEntity = entityMap[entityKey];
+        const { type, data: currentData } = currentEntity;
+        if (type === ACCORDION_TYPE) {
+          entityToReplace = handleAccordionEntity(currentData, newData);
+          if (entityToReplace) {
+            entityToReplace.blockKey = blockKey;
+            return true;
+          }
+        } else if (!isEqual(currentData, newData)) {
+          const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
+          if (fixedData) {
+            entityToReplace = {
+              blockKey,
+              fixedData,
+              shouldUndoAgain: true,
+            };
+          }
+          return true;
+        }
+      }
+      return false;
     }
-    return false;
+    return true;
   });
-  return entityToReplace;
+  return entityToReplace || { shouldUndoAgain: !didChange };
 }
 
 function shiftRedoStack(editorState: EditorState) {
@@ -197,12 +199,12 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
   const contentState = convertToRaw(editorState.getCurrentContent());
 
   const entityToReplace = getEntityToReplace(newContentState, contentState);
-  if (entityToReplace) {
-    const { blockKey, fixedData, shouldUndoAgain } = entityToReplace;
+  const { blockKey, fixedData, shouldUndoAgain } = entityToReplace;
+  if (fixedData) {
     replaceComponentData(newEditorState, blockKey, fixedData);
-    if (shouldUndoAgain) {
-      return undo(newEditorState);
-    }
+  }
+  if (shouldUndoAgain) {
+    return undo(newEditorState);
   }
   return pushToRedoStack(
     removeCompositionModeFromEditorState(newEditorState),
