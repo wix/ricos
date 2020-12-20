@@ -1,14 +1,9 @@
 import { createEmpty, convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { EditorState, ContentState, EditorProps } from 'draft-js';
+import { ContentState, EditorProps } from 'draft-js';
 import { debounce, pick } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { isSSR } from 'wix-rich-content-common';
-import {
-  RicosContent,
-  EditorDataInstance,
-  OnContentChangeFunction,
-  ContentStateGetter,
-} from '../index';
+import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
 
 /* eslint-disable no-console */
@@ -21,8 +16,9 @@ const wait = ms => {
 };
 
 export function createDataConverter(onContentChange?: OnContentChangeFunction): EditorDataInstance {
-  let currContent: RicosContent = emptyState;
-  let currEditorState: EditorState = createEmpty();
+  let currContent = emptyState;
+  let currEditorState = createEmpty();
+  let currentTraits = { isEmpty: true, isContentChanged: false };
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
     waitingForUpdateResolve;
@@ -45,7 +41,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
       isUpdated = true;
     }
 
-    onContentChange?.(currContent);
+    onContentChange?.(currContent, currentTraits);
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
@@ -59,10 +55,11 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     getContentState,
     waitForUpdate,
     getContentStatePromise,
-    refresh: editorState => {
+    refresh: (editorState, contentTraits) => {
       if (!isSSR()) {
         isUpdated = false;
         currEditorState = editorState;
+        currentTraits = contentTraits;
         debounceUpdate();
       }
     },
