@@ -1,4 +1,4 @@
-import { EditorState } from 'wix-rich-content-editor-common';
+import { EditorState } from '@wix/draft-js';
 
 function createEditorStateWithoutComposition(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
