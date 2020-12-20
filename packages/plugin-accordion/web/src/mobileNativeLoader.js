@@ -1,4 +1,4 @@
-import * as accordionPlugin from './viewer';
+import { pluginAccordion } from './viewer';
 
 window.__ricosPlugins = window.__ricosPlugins || {};
-window.__ricosPlugins.accordionPlugin = accordionPlugin;
+window.__ricosPlugins[pluginAccordion.type] = pluginAccordion;
