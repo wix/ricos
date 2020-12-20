@@ -20,12 +20,12 @@
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1875](https://github.com/wix-incubator/rich-content/pull/1875) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
-- `undo-redo`
-  - [#1847](https://github.com/wix-incubator/rich-content/pull/1847) undo-redo supports plugin customisations
+- `mobileNativeLoader`
+  - [#1867](https://github.com/wix-incubator/rich-content/pull/1867) create mobile native plugin loader bundle
 
 ### :house: Internal
-- `editor`
-  - [#1847](https://github.com/wix-incubator/rich-content/pull/1847) custom `handleKeyCommand` for undo-redo operations
+- `editor-common`
+  - [#1880](https://github.com/wix-incubator/rich-content/pull/1880) moved `handleUndoRedoCommands` to editor-common
 
 </details>
 <hr/>

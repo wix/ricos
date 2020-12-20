@@ -226,6 +226,5 @@ export const redo = (editorState: EditorState) => {
     return editorState;
   }
 
-  const newEditorState = EditorState.redo(editorState);
-  return removeCompositionModeFromEditorState(newEditorState);
+  return removeCompositionModeFromEditorState(EditorState.redo(editorState));
 };
