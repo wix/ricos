@@ -8,7 +8,7 @@ import editorSourceCode from '!!raw-loader!../Components/EditorWrapper';
 import viewerSourceCode from '!!raw-loader!../Components/ViewerWrapper';
 import styles from '../Components/styles.scss';
 
-export default function ExampleApplication({ initialState, palette }) {
+export default function ExampleApplication({ initialState, theme }) {
   const [content, setContent] = useState(initialState);
 
   return (
@@ -16,12 +16,12 @@ export default function ExampleApplication({ initialState, palette }) {
       <RichContentEditorBox sourcecode={editorSourceCode}>
         <EditorWrapper
           content={content}
-          theme={{ palette, parentClass: styles['rce-wrapper'] }}
+          theme={{ ...theme, parentClass: styles['rce-wrapper'] }}
           onChange={setContent}
         />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourceCode}>
-        <ViewerWrapper content={content} theme={{ palette, parentClass: styles['rcv-wrapper'] }} />
+        <ViewerWrapper content={content} theme={{ ...theme, parentClass: styles['rcv-wrapper'] }} />
       </RichContentViewerBox>
     </Section>
   );
@@ -29,5 +29,5 @@ export default function ExampleApplication({ initialState, palette }) {
 
 ExampleApplication.propTypes = {
   initialState: PropTypes.object,
-  palette: PropTypes.arrayOf(PropTypes.object),
+  theme: PropTypes.object,
 };

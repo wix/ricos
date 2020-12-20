@@ -16,7 +16,7 @@ export default function createInlinePluginToolbar({
   isMobile,
   t,
   name,
-  getToolbarSettings = () => [],
+  getToolbarSettings,
   languageDir,
 }) {
   return class BaseToolbar extends Component {

@@ -7,14 +7,14 @@ sidebar_label: Divider Plugin
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Divider plugin allows the user to add different types of divider lines.
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add a divider line!')}
+    content={createContent('Add a divider line!')}
     placeholder={'Type here!'}
     plugins={[pluginDivider()]}
   />

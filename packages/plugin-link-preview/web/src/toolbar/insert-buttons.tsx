@@ -9,12 +9,17 @@ import {
   YoutubeIcon,
 } from '../icons';
 import EmbedURLInputModal from './embedURLInputModal';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { LinkPreviewPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
   isMobile,
+}: {
+  t: TranslationFunction;
+  settings: LinkPreviewPluginEditorConfig;
+  isMobile: boolean;
 }) => {
   const content = isMobile
     ? {

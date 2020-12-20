@@ -44,12 +44,13 @@ class FileUploadViewer extends PureComponent {
     );
   };
 
-  renderError = () => {
+  renderContainerWithoutLink = () => {
     const {
       componentData: { name, type },
     } = this.props;
-    const style = classnames(this.styles.file_upload_error_container, this.styles.file_upload_link);
-    return <div className={style}>{this.renderViewerBody({ name, type })}</div>;
+    return (
+      <div className={this.styles.file_upload_link}>{this.renderViewerBody({ name, type })}</div>
+    );
   };
 
   renderIcon = Icon => {
@@ -139,7 +140,7 @@ class FileUploadViewer extends PureComponent {
     const { downloadTarget } = this.props.settings;
 
     if (error) {
-      return this.renderError();
+      return this.renderContainerWithoutLink();
     }
 
     return (
@@ -150,19 +151,20 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderFileUrlResolver() {
-    const { componentData, settings } = this.props;
-    if (componentData.error) {
-      return this.renderError();
+    const {
+      componentData,
+      settings: { resolveFileUrl },
+    } = this.props;
+    const { name, type, error } = componentData;
+
+    if (error) {
+      return this.renderContainerWithoutLink();
     }
 
-    const resolveFileUrl = () => {
-      if (!settings.resolveFileUrl) {
-        return;
-      }
-
+    const fileUrlResolver = () => {
       this.setState({ resolvingUrl: true });
-      settings.resolveFileUrl(componentData).then(resolveFileUrl => {
-        this.setState({ resolveFileUrl, resolvingUrl: false }, this.switchReadyIcon);
+      resolveFileUrl(componentData).then(resolvedFileUrl => {
+        this.setState({ resolvedFileUrl, resolvingUrl: false }, this.switchReadyIcon);
 
         if (this.iframeRef.current) {
           this.iframeRef.current.src = resolveFileUrl;
@@ -173,19 +175,19 @@ class FileUploadViewer extends PureComponent {
     const resolveIfEnter = ev => {
       const enterEvent = 13;
       if (ev.which === enterEvent) {
-        resolveFileUrl();
+        fileUrlResolver();
       }
     };
 
     return (
       <div
-        onClick={resolveFileUrl}
+        onClick={fileUrlResolver}
         onKeyDown={resolveIfEnter}
         role="button"
         tabIndex={0}
         className={this.styles.file_upload_link}
       >
-        {this.renderViewerBody({ name: componentData.name, type: componentData.type })}
+        {this.renderViewerBody({ name, type })}
       </div>
     );
   }
@@ -203,7 +205,7 @@ class FileUploadViewer extends PureComponent {
   render() {
     const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const fileUrl = componentData.url || this.state.resolveFileUrl;
+    const fileUrl = componentData.url || this.state.resolvedFileUrl;
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
     const style = classnames(

@@ -9,7 +9,7 @@ import {
   Separator,
 } from 'wix-rich-content-editor-common';
 import { FileInput } from 'wix-rich-content-plugin-commons';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/toolbar-button.scss';
 import createTextDropdownButton from './createTextDropdownButton';

@@ -89,7 +89,7 @@ class Tooltip extends React.Component<Props> {
     };
   };
 
-  wrapperProps: any = {
+  wrapperProps = {
     ...this.wrappChildrenProp('onMouseEnter', this.showTooltip),
     ...this.wrappChildrenProp('onMouseLeave', this.hideTooltip),
     ...this.wrappChildrenProp('onClick', this.hideTooltip),

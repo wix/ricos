@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/preview.cjs.js",
+    "module": "../../dist/lib/preview.js",
+    "types": "../../dist/lib/preview.d.ts"
+}

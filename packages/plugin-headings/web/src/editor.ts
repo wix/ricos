@@ -1,10 +1,12 @@
 import { createHeadingsPlugin } from './createHeadingsPlugin';
-import { HEADINGS_DROPDOWN_TYPE } from './types';
+import { HEADINGS_DROPDOWN_TYPE, HeadingsPluginEditorConfig } from './types';
 import { ModalsMap } from './modals';
+import { EditorPluginCreator } from 'wix-rich-content-common';
+import { DEFAULTS } from './defaults';
 
-export const pluginHeadings = (config = {}) => {
+export const pluginHeadings: EditorPluginCreator<HeadingsPluginEditorConfig> = config => {
   return {
-    config,
+    config: { ...DEFAULTS.config, ...config },
     type: HEADINGS_DROPDOWN_TYPE,
     createPlugin: createHeadingsPlugin,
     ModalsMap,

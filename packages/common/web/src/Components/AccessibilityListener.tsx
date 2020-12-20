@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import noOutlineStyle from '../../statics/styles/no-outline.scss';
 
-export default class AccessibilityListener extends Component<{ isMobile: boolean }> {
+export default class AccessibilityListener extends Component<{ isMobile?: boolean }> {
   handleTabKeyUp = (e: KeyboardEvent) => {
     if (e.which === 9 && document.body.classList.contains(noOutlineStyle.noOutline)) {
       document.body.classList.remove(noOutlineStyle.noOutline);

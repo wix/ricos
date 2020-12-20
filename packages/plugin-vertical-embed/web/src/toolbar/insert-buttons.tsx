@@ -8,13 +8,19 @@ import { EventIcon, ProductIcon, BookingIcon } from '../icons';
 import VerticalEmbedInputModal from './VerticalEmbedInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { VerticalEmbedPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile' | 'locale'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
   isMobile,
   locale,
+}: {
+  t: TranslationFunction;
+  settings: VerticalEmbedPluginEditorConfig;
+  isMobile: boolean;
+  locale: string;
 }) => {
   const iconsMap = {
     product: ProductIcon,
@@ -22,7 +28,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile' | '
     booking: BookingIcon,
   };
 
-  const buttonCreator = type => {
+  const buttonCreator = (type: string) => {
     const contentType = contentTypeMap[type];
     return {
       type: BUTTON_TYPES.MODAL,
@@ -39,12 +45,13 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile' | '
         fullScreen: false,
         isMobile,
       }),
+      isVisiblePromise: getIsVisiblePromise?.(type, locale),
     };
   };
 
-  const { exposeEmbedButtons = [] } = settings;
+  const { exposeEmbedButtons = [], getIsVisiblePromise } = settings;
 
-  return exposeEmbedButtons.map(verticalType => buttonCreator(verticalType));
+  return exposeEmbedButtons.map((verticalType: string) => buttonCreator(verticalType));
 };
 
 export default createInsertButtons;

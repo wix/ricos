@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign, camelcase */
 
-import imageClientAPI from 'image-client-api';
+import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import { getWixFilename, getAbsoluteUrl, isAbsoluteUrl } from './baseUrlConverter';
 
 const getResizedImageUrl = (

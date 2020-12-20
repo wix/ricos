@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
 .emptyState {
     display: flex;
     flex-direction: column;
@@ -8,12 +10,11 @@
 
 .title,
 .description {
-    font-family: HelveticaNeue;
+    font-family: $ricos-font-family;
     font-size: 16px;
     color: #000000;
 }
 
 .description {
     padding-top: 4px;
-    opacity: 0.4;
 }

@@ -1,6 +1,6 @@
 /* eslint-disable */
 const path = require('path');
-const merge = require('webpack-merge');
+const merge = require('webpack-merge').merge;
 const { HotModuleReplacementPlugin } = require('webpack');
 
 const PATHS = {

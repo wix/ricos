@@ -7,14 +7,14 @@ sidebar_label: Map Plugin
 import { pluginMap } from 'wix-rich-content-plugin-map';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Map plugin allows you to insert googls maps component & customize it. Map plugin uses Google Maps API.
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add a Map to check it out!')}
+    content={createContent('Add a Map to check it out!')}
     placeholder={'Type here!'}
     plugins={[pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY })]}
   />

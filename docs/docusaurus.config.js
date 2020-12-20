@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Ricos',
-  tagline: 'A super charged rich content framework with an extensible plugin system',
+  tagline: 'A supercharged rich content framework with an extensible plugin system',
   url: 'https://wix-incubator.github.io/',
   baseUrl: '/rich-content/',
   favicon: 'img/favicon.ico',
@@ -14,8 +14,8 @@ module.exports = {
       title: 'Ricos',
       logo: {
         alt: 'Ricos Logo',
-        src: 'img/rce.svg',
-        srcDark: 'img/rceDark.svg',
+        src: 'img/RICOS black.png',
+        srcDark: 'img/RICOS white.png',
       },
       items: [
         {
@@ -28,12 +28,6 @@ module.exports = {
           to: 'docs/ricos/ricos-api',
           activeBasePath: 'docs',
           label: 'API',
-          position: 'left',
-        },
-        {
-          to: 'docs/plugin-development-guidelines/general',
-          activeBasePath: 'docs',
-          label: 'Developer Guidelines',
           position: 'left',
         },
         {

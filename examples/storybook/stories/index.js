@@ -5,5 +5,6 @@ require('./Plugins/');
 require('./Preview/');
 require('./Ricos/');
 require('./Toolbars/');
+require('./RicosComponents/');
 require('./TestCase/');
 require('./UploadMedia/');

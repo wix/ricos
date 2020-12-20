@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import HTMLPluginStory from './HtmlPlugin.js';
-import BlogLefties from './BlogLefties.js';
-import ImageFloatSpacing from './ImageFloatSpacing.js';
+import HTMLPluginStory from './HtmlPlugin';
+import BlogLefties from './BlogLefties';
+import ImageFloatSpacing from './ImageFloatSpacing';
 import MaxHeight from './MaxHeight';
 import OneLiner from './OneLiner';
 import VeryBigPost from './VeryBigPost';
@@ -14,6 +14,7 @@ import GroupsStory from './GroupsStory';
 import NormalizerStory from './NormalizerStory';
 import ExternalUndoStory from './ExternalUndoStory';
 import ButtonsTest from './ButtonsTest';
+import DuplicateContent from './DuplicateContent';
 
 storiesOf('Test Cases')
   .add('Groups', GroupsStory)
@@ -28,4 +29,5 @@ storiesOf('Test Cases')
   .add('Blog Lefties', BlogLefties)
   .add('HTML Instagram Height', HTMLPluginStory)
   .add('Max Height', MaxHeight)
-  .add('Buttons Test', ButtonsTest);
+  .add('Buttons Test', ButtonsTest)
+  .add('Duplicated Content', DuplicateContent);

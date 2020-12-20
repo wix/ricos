@@ -20,7 +20,7 @@ export const adsenseDefaults = () => {
   return defaults(true);
 };
 
-export const defaults = (isAdsense: boolean) => {
+export const defaults = (isAdsense?: boolean) => {
   return {
     srcType: SRC_TYPE_HTML,
     src: '',

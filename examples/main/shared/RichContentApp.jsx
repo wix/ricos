@@ -6,7 +6,7 @@ import {
   convertFromRaw,
   createEmpty,
   createWithContent,
-} from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+} from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isSSR } from 'wix-rich-content-common';
 import { getRequestedLocale, normalize } from '../src/utils';
 
@@ -44,10 +44,11 @@ class RichContentApp extends PureComponent {
     );
   };
 
-  onEditorChange = editorState => {
+  onEditorChange = (editorState, traits) => {
     this.setState({
       editorState,
     });
+    console.debug(traits);
 
     this.updateContentState(editorState);
   };

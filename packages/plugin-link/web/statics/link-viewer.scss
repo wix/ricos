@@ -1,8 +1,9 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
+@import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .link {
-  color: $action-color;
-  text-decoration: none;
+  color: $ricos-link-color;
+  @include ricosTypography('link', false);
 }
 .linkToAnchorInViewer {
   &:hover {
@@ -16,7 +17,7 @@
 }
 
 .toolbarUrl {
-  color: $action-color;
+  color: $action-color-fallback;
   max-width: 270px;
   white-space: nowrap;
   overflow: hidden;

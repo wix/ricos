@@ -1,4 +1,4 @@
-import { VERTICAL_EMBED_TYPE } from './constants';
+import { VERTICAL_EMBED_TYPE } from './types';
 import VerticalEmbedComponent from './components/vertical-embed-component';
 import { PluginTypeMapper } from 'wix-rich-content-common';
 

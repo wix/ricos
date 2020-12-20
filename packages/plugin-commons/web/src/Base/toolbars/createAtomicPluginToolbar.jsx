@@ -5,7 +5,13 @@ import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import { Separator } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
-import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from '../buttons';
+import {
+  BUTTONS,
+  BUTTONS_BY_KEY,
+  BlockLinkButton,
+  deleteButton,
+  BlockSpoilerButton,
+} from '../buttons';
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
@@ -24,7 +30,7 @@ export default function createAtomicPluginToolbar({
   t,
   name,
   uiSettings,
-  getToolbarSettings = () => [],
+  getToolbarSettings,
   getEditorBounds,
   languageDir,
   getEditorState,
@@ -198,25 +204,28 @@ export default function createAtomicPluginToolbar({
       const icons = settings?.toolbar?.icons || {};
       const buttonByKey = BUTTONS_BY_KEY[button.type];
       const Button = (buttonByKey && buttonByKey(icons[button.keyName])) || BaseToolbarButton;
+      const commonButtonProps = {
+        tabIndex,
+        theme: themedStyle,
+        key: index,
+        isMobile,
+        t,
+        pubsub,
+      };
+
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
         settings: button.settings,
-        pubsub,
+        ...commonButtonProps,
       };
       const baseLinkProps = {
-        tabIndex,
-        pubsub,
         onOverrideContent: this.onOverrideContent,
-        theme: themedStyle,
-        key: index,
         helpers,
-        isMobile,
         componentState: this.state.componentState,
         closeModal: helpers.closeModal,
         anchorTarget,
         relValue,
-        t,
         uiSettings,
         icons: icons.link,
         editorState: getEditorState(),
@@ -224,38 +233,20 @@ export default function createAtomicPluginToolbar({
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
+        ...commonButtonProps,
       };
+
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
         case BUTTONS.TEXT_ALIGN_RIGHT:
           return (
-            <Button
-              alignment={alignment}
-              setLayoutProps={this.setLayoutProps}
-              theme={themedStyle}
-              isMobile={isMobile}
-              key={index}
-              t={t}
-              tabIndex={tabIndex}
-              {...buttonProps}
-            />
+            <Button alignment={alignment} setLayoutProps={this.setLayoutProps} {...buttonProps} />
           );
         case BUTTONS.SIZE_SMALL:
         case BUTTONS.SIZE_MEDIUM:
         case BUTTONS.SIZE_LARGE:
-          return (
-            <Button
-              size={size}
-              setLayoutProps={this.setLayoutProps}
-              theme={themedStyle}
-              isMobile={isMobile}
-              key={index}
-              t={t}
-              tabIndex={tabIndex}
-              {...buttonProps}
-            />
-          );
+          return <Button size={size} setLayoutProps={this.setLayoutProps} {...buttonProps} />;
         case BUTTONS.SIZE_ORIGINAL:
         case BUTTONS.SIZE_CONTENT:
         case BUTTONS.SIZE_FULL_WIDTH:
@@ -271,10 +262,6 @@ export default function createAtomicPluginToolbar({
               size={size}
               alignment={alignment}
               setLayoutProps={this.setLayoutProps}
-              theme={themedStyle}
-              key={index}
-              t={t}
-              tabIndex={tabIndex}
               {...buttonProps}
             />
           );
@@ -284,6 +271,10 @@ export default function createAtomicPluginToolbar({
           return <Separator className={separatorClassNames} horizontal key={index} />;
         case BUTTONS.LINK:
           return <BlockLinkButton {...baseLinkProps} tooltipText={t('TextLinkButton_Tooltip')} />;
+        case BUTTONS.SPOILER:
+          return (
+            <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
+          );
         case BUTTONS.LINK_PREVIEW: {
           return (
             <BlockLinkButton
@@ -298,11 +289,7 @@ export default function createAtomicPluginToolbar({
           const DeleteButtonComponent = deleteButton(icons.delete);
           return (
             <DeleteButtonComponent
-              tabIndex={tabIndex}
               onClick={pubsub.get('deleteBlock')}
-              theme={themedStyle}
-              key={index}
-              t={t}
               icon={icons.delete}
               {...buttonProps}
             />
@@ -311,15 +298,9 @@ export default function createAtomicPluginToolbar({
         default:
           return (
             <Button
-              tabIndex={tabIndex}
-              theme={themedStyle}
               componentData={this.state.componentData}
               componentState={this.state.componentState}
-              pubsub={pubsub}
               helpers={helpers}
-              key={index}
-              t={t}
-              isMobile={isMobile}
               displayPanel={this.displayPanel}
               displayInlinePanel={this.displayInlinePanel}
               hideInlinePanel={this.hidePanels}

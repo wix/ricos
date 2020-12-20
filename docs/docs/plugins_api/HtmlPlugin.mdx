@@ -1,0 +1,142 @@
+---
+id: HtmlPlugin
+title: Html Plugin
+sidebar_label: Html Plugin
+---
+
+import { pluginHtml } from 'wix-rich-content-plugin-html';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+HTML plugin enables users to embed content in an iframe (either source code or by URL)
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add an Html')}
+    placeholder={'Type here!'}
+    plugins={[pluginHtml({})]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginHtml } from 'wix-rich-content-plugin-html';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosEditor plugins={[pluginHtml(HtmlConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosViewer plugins={[pluginHtml(HtmlConfig)]} />;
+```
+
+## Html Config API
+
+### `maxWidth`
+
+The maximum component width in pixels. note: this value is dynamicaly limited by the editor boundaries
+
+```jsx
+maxWidth?: number;
+```
+
+Default value:
+
+```jsx
+940;
+```
+
+### `minWidth`
+
+The minimum component width in pixels
+
+```jsx
+minWidth?: number;
+```
+
+Default value:
+
+```jsx
+35;
+```
+
+### `width`
+
+The initial component width in pixels
+
+```jsx
+width?: number;
+```
+
+Default value:
+
+```jsx
+740;
+```
+
+### `minHeight`
+
+The minimum component height in pixels
+
+```jsx
+minHeight?: number;
+```
+
+Default value:
+
+```jsx
+35;
+```
+
+### `maxHeight`
+
+The maximum component height in pixels
+
+```jsx
+maxHeight?: number;
+```
+
+Default value:
+
+```jsx
+1200;
+```
+
+### `siteDomain`
+
+The site domain in order for adsense to work
+
+```jsx
+siteDomain?: string;
+```
+
+Default value:
+
+```jsx
+none;
+```
+
+### `exposeButtons`
+
+Which html buttons will display - array with htmlButtonsTypes types [Instagram, Twitter, ...].
+For provide buttons type you should import htmlButtonsTypes.
+
+```jsx
+exposeButtons?: array;
+```
+
+Default value:
+
+```jsx
+['html'];
+```
+
+<br />

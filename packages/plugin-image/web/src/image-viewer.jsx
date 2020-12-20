@@ -9,13 +9,16 @@ import {
   isSSR,
   getImageSrc,
   WIX_MEDIA_DEFAULT,
+  anchorScroll,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
-import styles from '../statics/styles/image-viewer.scss';
+import styles from '../statics/styles/image-viewer.rtlignore.scss';
 import ExpandIcon from './icons/expand';
 import InPluginInput from './InPluginInput';
+
+const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -23,10 +26,15 @@ class ImageViewer extends React.Component {
     validate(props.componentData, pluginImageSchema);
     this.state = {};
     this.preloadRef = React.createRef();
+    this.imageRef = React.createRef();
   }
 
   componentDidMount() {
     this.setState({ ssrDone: true });
+    if (isSafari()) {
+      //In Safari, onload event doesn't always called when reloading the page
+      this.forceOnImageLoad();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,6 +42,19 @@ class ImageViewer extends React.Component {
       validate(nextProps.componentData, pluginImageSchema);
     }
   }
+
+  forceOnImageLoad = () => {
+    let executionTimes = 0;
+    const interval = setInterval(() => {
+      if (this.imageRef?.current?.complete) {
+        this.onImageLoad(this.imageRef.current);
+        clearInterval(interval);
+      }
+      if (++executionTimes === 10) {
+        clearInterval(interval);
+      }
+    }, 200);
+  };
 
   calculateHeight(width = 1, src) {
     return src && src.height && src.width
@@ -131,14 +152,14 @@ class ImageViewer extends React.Component {
         src={src}
         alt={alt}
         onError={this.onImageLoadError}
-        onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
-        ref={fadeIn ? undefined : this.preloadRef}
+        onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
+        ref={fadeIn ? this.imageRef : this.preloadRef}
       />
     );
   }
 
-  onImageLoad = e => {
-    e.target.style.opacity = 1;
+  onImageLoad = element => {
+    element.style.opacity = 1;
     if (this.preloadRef.current) {
       this.preloadRef.current.style.opacity = 0;
     }
@@ -221,7 +242,7 @@ class ImageViewer extends React.Component {
       },
     } = this.props;
     const element = document.getElementById(`viewer-${anchor}`);
-    element.scrollIntoView({ behavior: 'smooth' });
+    anchorScroll(element);
   };
 
   hasLink = () => this.props.componentData?.config?.link?.url;
@@ -239,6 +260,7 @@ class ImageViewer extends React.Component {
     if (this.hasLink()) {
       return null;
     } else if (this.hasAnchor()) {
+      e.preventDefault();
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);
@@ -273,7 +295,7 @@ class ImageViewer extends React.Component {
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
     });
-    const imageClassName = classNames(this.styles.image);
+    const imageClassName = this.styles.image;
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
     let imageProps = {};
     if (data.src && settings) {
@@ -315,9 +337,7 @@ class ImageViewer extends React.Component {
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   className: PropTypes.string,
-  isLoading: PropTypes.bool,
   dataUrl: PropTypes.string,
-  isFocused: PropTypes.bool,
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,

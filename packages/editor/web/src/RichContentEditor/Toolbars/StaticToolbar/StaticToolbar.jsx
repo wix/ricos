@@ -5,7 +5,7 @@ import Measure from 'react-measure';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE, TOOLBARS } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
-import MoreButton from './MoreButton.js';
+import MoreButton from './MoreButton';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},

@@ -6,8 +6,9 @@ export {
   createEmpty,
   createWithContent,
   convertToRaw,
-  __convertToRawWithoutVersion,
   convertFromRaw,
 } from '../lib/editorStateConversion';
+
+export { RichContentEditorProps } from './RichContentEditor/RichContentEditor';
 
 export { RichContentEditorModal, RichContentEditor };

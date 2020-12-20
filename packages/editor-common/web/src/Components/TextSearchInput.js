@@ -18,6 +18,11 @@ export default class TextSearchInput extends Component {
     if (e.charCode === KEYS_CHARCODE.ESCAPE) {
       this.onCloseRequested();
     }
+    if (e.charCode === KEYS_CHARCODE.ENTER) {
+      const elements = Array.from(document.querySelectorAll('button,input'));
+      const searchInputIndex = elements.indexOf(e.target);
+      elements[searchInputIndex + 1]?.click();
+    }
   };
 
   handleClearText = () => this.props.onChange('');

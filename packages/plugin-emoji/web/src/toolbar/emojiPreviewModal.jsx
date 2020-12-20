@@ -51,12 +51,24 @@ export default class EmojiPreviewModal extends Component {
     });
   };
 
-  onEmojiClicked = emoji => {
+  getBoundOnClick(emoji) {
+    return () => this.addEmoji(emoji);
+  }
+
+  getBoundKeyPress(emoji) {
+    return e => {
+      if (e.key === 'Enter') {
+        this.addEmoji(emoji);
+      }
+    };
+  }
+
+  addEmoji(emoji) {
     const { helpers, setEditorState, getEditorState } = this.props;
     const newEditorState = addEmoji(getEditorState(), emoji);
     setEditorState(newEditorState);
     helpers.closeModal();
-  };
+  }
 
   onScroll = event => {
     const { scrollTop } = event.srcElement;
@@ -72,11 +84,11 @@ export default class EmojiPreviewModal extends Component {
         <div
           role="button"
           data-hook={'emoji-' + index}
-          onKeyPress={null}
           tabIndex={0}
           className={this.styles.emojiPreviewModal_emoji}
           key={`emojis-${category}-${index}`}
-          onClick={this.onEmojiClicked.bind(this, emoji)}
+          onClick={this.getBoundOnClick(emoji)}
+          onKeyPress={this.getBoundKeyPress(emoji)}
         >
           {emoji}
         </div>

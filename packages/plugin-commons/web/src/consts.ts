@@ -35,12 +35,7 @@ export const FOOTER_BUTTON_ALIGNMENT = Object.freeze({
   END: 'end',
 });
 
-const PLUGINS_TYPE_MAP = {
-  ACCORDION: 'wix-rich-content-plugin-accordion',
-};
-
-export const pluginsWithoutBorderOnHover = [PLUGINS_TYPE_MAP.ACCORDION];
-
-export const pluginsWithoutBorderOnFocus = [PLUGINS_TYPE_MAP.ACCORDION];
-
-export const pluginsWithoutPointerEventsOnFocus = [PLUGINS_TYPE_MAP.ACCORDION];
+export const MODAL_CONTROLS_POSITION = Object.freeze({
+  TOP: 'top',
+  BOTTOM: 'bottom',
+});

@@ -1,10 +1,10 @@
 import pluginsStrategy from './pluginsStrategy';
 import getType from 'jest-get-type';
-import { PluginConfig } from './pluginTypes';
+import { BasePlugin } from './pluginTypes';
 
 describe('PluginsStrategy', () => {
   const driver = {
-    runStrategy: (isViewer: boolean, plugins: PluginConfig[] = []) =>
+    runStrategy: (isViewer: boolean, plugins: BasePlugin[] = []) =>
       pluginsStrategy(isViewer, plugins, {}, { modalTheme: { content: {} } }),
   };
 

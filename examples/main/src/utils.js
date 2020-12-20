@@ -62,10 +62,9 @@ export function disableBrowserBackButton() {
     if (typeof global === 'undefined') {
       throw new Error('window is undefined');
     }
-
     var _hash = '!';
     var noBackPlease = function() {
-      global.location.href += '#';
+      global.location.href = '#';
 
       // making sure we have the fruit available for juice (^__^)
       global.setTimeout(function() {
@@ -74,7 +73,7 @@ export function disableBrowserBackButton() {
     };
 
     global.onhashchange = function() {
-      if (global.location.hash !== _hash) {
+      if (!global.location.hash) {
         global.location.hash = _hash;
       }
     };

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ComponentType } from 'react';
 import FocusManager from '../Components/FocusManager';
 import { DECORATION_MODE } from '../consts';
-import { getLangDir } from 'wix-rich-content-common';
+import { getLangDir, ModalDecorations } from 'wix-rich-content-common';
 
 const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
   if (wrapping.length === 0) {
@@ -18,10 +18,7 @@ const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
 
 interface Props {
   modalElement?: ComponentType;
-  modalDecorations?: {
-    decorationMode: 'PREPEND' | 'WRAP' | 'APPEND';
-    decorator: ComponentType;
-  }[];
+  modalDecorations?: ModalDecorations;
   locale?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;

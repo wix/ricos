@@ -7,7 +7,7 @@ sidebar_label: File Upload Plugin
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 import { mockFileUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
 
@@ -15,7 +15,7 @@ A slick UI component for uploading, viewing and downloading files.
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add a file!')}
+    content={createContent('Add a file!')}
     placeholder={'Type here!'}
     plugins={[pluginFileUpload({ handleFileSelection: mockFileUploadFunc })]}
   />

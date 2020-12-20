@@ -3,17 +3,38 @@ import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import {
+  CreateInlineButtons,
+  TranslationFunction,
+  AnchorTarget,
+  RelValue,
+} from 'wix-rich-content-common';
+import { GalleryPluginEditorConfig } from '../types';
 
 const modalStyles = getModalStyles({});
 
-const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue' | 'settings'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   anchorTarget,
   relValue,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: GalleryPluginEditorConfig;
+  anchorTarget: AnchorTarget;
+  relValue: RelValue;
 }) => {
   const icons = settings?.toolbar?.icons || {};
+  const spoilerButton = settings.spoiler
+    ? [
+        {
+          keyName: 'spoiler',
+          type: BUTTONS.SPOILER,
+          mobile: true,
+        },
+      ]
+    : [];
+
   return [
     {
       keyName: 'add',
@@ -48,6 +69,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
+    ...spoilerButton,
     {
       keyName: 'manage_media',
       type: BUTTONS.EXTERNAL_MODAL,

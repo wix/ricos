@@ -10,6 +10,7 @@ import {
   PLUGIN_COMPONENT,
   STATIC_TOOLBAR_BUTTONS,
   SETTINGS_PANEL,
+  TOOLBARS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
@@ -127,7 +128,7 @@ Cypress.Commands.add('getTwitterButton', () => {
 
 function setSelection(start, offset, container) {
   container.then(args => {
-    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const getTextElmentAndLocalOffset = getTextElements(args[0]);
     const document = args[0].ownerDocument;
     const range = document.createRange();
     const startObj = getTextElmentAndLocalOffset(start);
@@ -165,7 +166,7 @@ Cypress.Commands.add('blurEditor', () => {
   cy.getEditor()
     .blur()
     .get('[data-hook=inlineToolbar]')
-    .should('not.visible');
+    .should('not.exist');
 });
 
 Cypress.Commands.add('getEditor', () => {
@@ -234,7 +235,7 @@ Cypress.on('window:before:load', win => {
   };
 });
 
-function getTextElments(rootElement) {
+function getTextElements(rootElement) {
   let textElement,
     offset = 0;
   const textElements = [],
@@ -361,7 +362,9 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
     .parent()
     .click();
-  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`)
+    .scrollIntoView()
+    .click({ force: true });
 });
 
 Cypress.Commands.add('shrinkPlugin', dataHook => {
@@ -630,6 +633,33 @@ Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
   cy.focusEditor()
     .get('[data-hook=addPluginFloatingToolbar]')
     .should('be.visible');
+});
+
+Cypress.Commands.add('insertPlugin', (toolbar, pluginInsertButtonName) => {
+  cy.focusEditor();
+  if (toolbar === TOOLBARS.FOOTER) {
+    cy.insertPluginFromFooterToolbar(pluginInsertButtonName);
+  }
+  if (toolbar === TOOLBARS.SIDE) {
+    cy.insertPluginFromSideToolbar(pluginInsertButtonName);
+  }
+});
+
+Cypress.Commands.add('insertPluginFromFooterToolbar', pluginInsertButtonName => {
+  cy.get(`[data-hook*=${TOOLBARS.FOOTER}] [data-hook*=${pluginInsertButtonName}]`).click({
+    force: true,
+  });
+});
+
+Cypress.Commands.add('insertPluginFromSideToolbar', pluginInsertButtonName => {
+  cy.get(`[data-hook=${TOOLBARS.SIDE}]`)
+    .click({
+      force: true, //fixes element getting detached from dom and not clicking
+    })
+    .get(`[data-hook*=addPluginMenu] [data-hook*=${pluginInsertButtonName}]`)
+    .click({
+      force: true, //fixes element getting detached from dom and not clicking
+    });
 });
 
 Cypress.Commands.add('waitForDocumentMutations', () => {

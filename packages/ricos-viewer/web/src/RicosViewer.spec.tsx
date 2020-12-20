@@ -1,7 +1,7 @@
 import React from 'react';
 import { RicosViewer, RicosViewerProps } from './index';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
+import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -64,7 +64,7 @@ describe('RicosViewer', () => {
       isMobile: true,
       _rcProps: {
         helpers: { dummyFunction: () => true },
-        config: { dummyPluginJustForThisTest: {} },
+        config: { [HASHTAG_TYPE]: {} },
       },
       plugins,
       onError: () => true,

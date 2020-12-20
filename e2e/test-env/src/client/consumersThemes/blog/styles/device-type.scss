@@ -1,0 +1,11 @@
+@mixin mobile {
+    :global(.app-mobile) & {
+      @content
+    }
+  }
+  
+  @mixin desktop {
+    :global(.app-desktop) & {
+      @content
+    }
+  }

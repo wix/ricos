@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isSSR } from '../Utils/ssrUtils';
 import styles from '../../statics/styles/placeholder.scss';
-import { RichContentTheme, Styles } from '../types';
+import { RichContentTheme } from '../types';
 
 interface Props {
   children: ReactNode;
@@ -17,7 +17,7 @@ interface Props {
 }
 
 class ViewportRenderer extends Component<Props> {
-  styles: Styles;
+  styles: Record<string, string>;
 
   static defaultProps = {
     placeholderStyle: {},

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Mention } from './createMentionsPlugin';
 
 export const DEFAULT_SETTINGS = {
   mentionPrefix: '@',
@@ -11,10 +12,10 @@ export const DEFAULT_SETTINGS = {
   visibleItemsBeforeOverflow: 5,
   popoverComponent: <div />,
   handleDropdownOpen: () => true,
-  onMentionClick: mention => mention,
+  onMentionClick: (mention: Mention) => mention,
   handleDropdownClose: () => true,
-  getMentions: searchQuery =>
-    new Promise(resolve =>
+  getMentions: (searchQuery: string) =>
+    new Promise<Mention[]>(resolve =>
       setTimeout(
         () =>
           resolve([

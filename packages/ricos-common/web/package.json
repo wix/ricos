@@ -1,6 +1,6 @@
 {
   "name": "ricos-common",
-  "version": "8.1.1",
+  "version": "8.8.2",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-common",
   "files": [
-    "dist"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/cjs/index.js",
   "types": "dist/src/index.d.ts",
@@ -34,17 +36,12 @@
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
   "dependencies": {
     "ts-is-present": "^1.1.1",
-    "wix-rich-content-common": "8.1.1",
-    "wix-rich-content-preview": "8.1.1"
+    "wix-rich-content-common": "8.8.2",
+    "wix-rich-content-editor": "8.8.2",
+    "wix-rich-content-preview": "8.8.2",
+    "wix-rich-content-viewer": "8.8.2"
   },
   "jest": {
     "globals": {

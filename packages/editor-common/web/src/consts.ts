@@ -33,18 +33,12 @@ export const CHARACTERS = Object.freeze({
   TAB: '\t',
 });
 
-export { ModifierKey as MODIFIERS, ToolbarType as TOOLBARS } from 'wix-rich-content-common';
-
-export const DISPLAY_MODE = Object.freeze({
-  NORMAL: 'NORMAL',
-  FLOATING: 'FLOATING',
-});
-
-export const DECORATION_MODE = Object.freeze({
-  PREPEND: 'PREPEND',
-  WRAP: 'WRAP',
-  APPEND: 'APPEND',
-});
+export {
+  ModifierKey as MODIFIERS,
+  ToolbarType as TOOLBARS,
+  DisplayMode as DISPLAY_MODE,
+  DecorationMode as DECORATION_MODE,
+} from 'wix-rich-content-common';
 
 export const KEYS_CHARCODE = {
   ENTER: 13,

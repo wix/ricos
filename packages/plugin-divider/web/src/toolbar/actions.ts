@@ -3,7 +3,7 @@ import { Store, ComponentData } from 'wix-rich-content-common';
 
 const COMPONENT_DATA = 'componentData';
 
-const getDividerFromStore = store => new Divider(store.get(COMPONENT_DATA));
+const getDividerFromStore = (store: Store) => new Divider(store.get(COMPONENT_DATA));
 
 const updateStoreConfig = (store: Store, config: ComponentData) => {
   store.update(COMPONENT_DATA, { config });

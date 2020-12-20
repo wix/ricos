@@ -24,34 +24,6 @@ export const DEFAULTS = Object.freeze({
   pairs: [
     {
       key: generateKey(),
-      title: {
-        blocks: [
-          {
-            key: 'e87rc',
-            text: '',
-            type: 'unstyled',
-            depth: 0,
-            inlineStyleRanges: [],
-            entityRanges: [],
-            data: {},
-          },
-        ],
-        entityMap: {},
-      },
-      content: {
-        blocks: [
-          {
-            key: 'f6etu',
-            text: '',
-            type: 'unstyled',
-            depth: 0,
-            inlineStyleRanges: [],
-            entityRanges: [],
-            data: {},
-          },
-        ],
-        entityMap: {},
-      },
     },
   ],
 });

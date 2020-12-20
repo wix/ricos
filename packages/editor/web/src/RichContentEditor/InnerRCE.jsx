@@ -5,41 +5,36 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { __convertToRawWithoutVersion } from '../../lib/editorStateConversion';
+import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 
 class InnerRCE extends Component {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editorState } = props;
-    this.config = this.removeAnchorFromLink(cloneDeep(config));
+    const { innerRCERenderedIn, config } = props;
+    this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
-    this.state = {
-      editorState,
-    };
   }
+
+  cleanConfig = config => {
+    let clearConfig = config;
+    clearConfig = this.removeAnchorFromLink(clearConfig);
+    clearConfig = this.removeLinkPreview(clearConfig);
+    return clearConfig;
+  };
+
+  removeLinkPreview = config => {
+    if (config?.[LINK_PREVIEW_TYPE]) {
+      config[LINK_PREVIEW_TYPE] = undefined;
+    }
+    return config;
+  };
 
   removeAnchorFromLink = config => {
     if (config?.LINK?.linkTypes?.anchor) {
       config.LINK.linkTypes.anchor = false;
     }
     return config;
-  };
-
-  static getDerivedStateFromProps(props, state) {
-    const propsContentState = __convertToRawWithoutVersion(props.editorState.getCurrentContent());
-    const stateContentState = __convertToRawWithoutVersion(state.editorState.getCurrentContent());
-    if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
-      return { editorState: props.editorState };
-    } else {
-      return null;
-    }
-  }
-
-  saveInnerRCE = editorState => {
-    this.setState({ editorState });
-    const newContentState = __convertToRawWithoutVersion(editorState.getCurrentContent());
-    this.props.onChange(newContentState);
   };
 
   onFocus = e => {
@@ -77,8 +72,16 @@ class InnerRCE extends Component {
   };
 
   render() {
-    const { theme, isMobile, direction, additionalProps, readOnly, ...rest } = this.props;
-    const { editorState } = this.state;
+    const {
+      theme,
+      isMobile,
+      direction,
+      additionalProps,
+      readOnly,
+      editorState,
+      onChange,
+      ...rest
+    } = this.props;
     return (
       <div
         data-id="inner-rce"
@@ -89,7 +92,7 @@ class InnerRCE extends Component {
           {...rest} // {...rest} need to be before editorState, onChange, plugins
           ref={this.setRef}
           editorState={editorState}
-          onChange={this.saveInnerRCE}
+          onChange={onChange}
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}

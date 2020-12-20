@@ -1,0 +1,39 @@
+---
+id: EmojiPlugin
+title: Emoji Plugin
+sidebar_label: Emoji Plugin
+---
+
+import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
+import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Emoji plugin is pretty self explanatory - it allows the user to add Emojis!
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add an Emoji to get the party started!')}
+    placeholder={'Type here!'}
+    plugins={[pluginEmoji()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+<RicosEditor plugins={[pluginEmoji()]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginEmoji } from 'wix-rich-content-plugin-emoji/dist/module.viewer';
+import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+<RicosViewer plugins={[pluginEmoji()]} />;
+```

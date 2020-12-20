@@ -8,6 +8,9 @@ export const kebabToCamelObjectKeys = (obj = {}) =>
 
 // eslint-disable-next-line no-unused-vars
 export const hasText = child => {
+  if (!child) {
+    return false;
+  }
   if (typeof child === 'string') {
     return child.trim().length > 0;
   }

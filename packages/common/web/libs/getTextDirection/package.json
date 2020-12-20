@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/getTextDirection.cjs.js",
+    "module": "../../dist/lib/getTextDirection.js",
+    "types": "../../dist/lib/getTextDirection.d.ts"
+}

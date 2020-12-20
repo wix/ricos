@@ -93,8 +93,9 @@ export const createKeyBindingFn = customCommands => {
 
 // merges all plugin TextButton keyBindings into an object { commands: [{ cmd1 }, ...], commandHandlers: { cmd1: handler1, ... } }
 export const initPluginKeyBindings = pluginTextButtons =>
-  pluginTextButtons.reduce(
-    (bindings, buttonData, i) => {
+  Object.keys(pluginTextButtons).reduce(
+    (bindings, pluginKey, i) => {
+      const buttonData = pluginTextButtons[pluginKey];
       if (buttonData) {
         // iterate each button
         const buttonBindings = Object.keys(buttonData).reduce(
@@ -115,7 +116,10 @@ export const initPluginKeyBindings = pluginTextButtons =>
               // merge all button commands and handlers
               return {
                 commands: [...buttonBindings.commands, ...buttonCommands],
-                commandHandlers: { ...buttonBindings.commandHandlers, ...buttonCommandHandlers },
+                commandHandlers: {
+                  ...buttonBindings.commandHandlers,
+                  ...buttonCommandHandlers,
+                },
               };
             }
             return buttonBindings;
@@ -125,7 +129,10 @@ export const initPluginKeyBindings = pluginTextButtons =>
         // merge all commands and handlers
         return {
           commands: [...bindings.commands, ...buttonBindings.commands],
-          commandHandlers: { ...bindings.commandHandlers, ...buttonBindings.commandHandlers },
+          commandHandlers: {
+            ...bindings.commandHandlers,
+            ...buttonBindings.commandHandlers,
+          },
         };
       }
       return bindings;

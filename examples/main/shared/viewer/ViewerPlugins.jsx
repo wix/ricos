@@ -9,7 +9,7 @@ import {
   LINK_PREVIEW_TYPE,
   linkPreviewTypeMapper,
 } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
 import {
   galleryTypeMapper,
   GALLERY_TYPE,
@@ -41,6 +41,7 @@ import {
 import {
   spoilerInlineStyleMapper,
   initSpoilersContentState,
+  SpoilerViewerWrapper,
   SPOILER_TYPE,
 } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 import { accordionTypeMapper } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
@@ -80,6 +81,7 @@ import { getBaseUrl } from '../../src/utils';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
+  siteUrl: 'http://localhost:3000/', //siteUrl is for anchor SEO
 };
 const mentionsPluginSettings = {
   onMentionClick: mention => console.log('mention clicked!', mention),
@@ -115,7 +117,7 @@ const config = {
     isWebView: false,
   },
   [GALLERY_TYPE]: {},
-  [SPOILER_TYPE]: { initSpoilersContentState },
+  [SPOILER_TYPE]: { initSpoilersContentState, SpoilerViewerWrapper },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },

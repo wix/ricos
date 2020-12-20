@@ -41,14 +41,16 @@ class SettingsComponent extends PureComponent {
     this.setState({ rel: event.target.checked });
   };
 
-  onBlur = event => {
-    this.setState({ target: event.target.checked });
-  };
-
   render() {
-    const { t, linkInputRef, isMobile, shouldShowLink } = this.props;
-    const { buttonText, url } = this.state;
-    const errorTooltip = !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
+    const { t, linkInputRef, isMobile, validUrl, shouldShowLink } = this.props;
+    const { buttonText, url, target, rel } = this.state;
+    const errorTooltip = !validUrl ? t('ButtonModal_Invalid_Link') : null;
+    let style;
+    if (!validUrl) {
+      style = { paddingTop: isMobile ? '21px' : '25px' };
+    } else {
+      style = { paddingTop: isMobile ? '33px' : '34px' };
+    }
     const textInputBaseProps = {
       inputRef: ref => (this.input = ref),
       type: 'text',
@@ -82,40 +84,28 @@ class SettingsComponent extends PureComponent {
             <TextInput
               {...textInputBaseProps}
               onChange={this.onLinkChanged}
-              onBlur={this.onBlur}
               value={url}
               placeholder={t('ButtonModal_Link_Input_Placeholder')}
               error={errorTooltip}
               showTooltip={false}
             />
-            {!this.props.validUrl ? (
+            {!validUrl ? (
               <div className={this.styles.button_settingsComponent_errorMessage}>
                 {t('ButtonModal_InputLink_ErrorMessage')}
               </div>
             ) : null}
-            <div
-              style={{
-                paddingTop: !this.props.validUrl
-                  ? isMobile
-                    ? '21px'
-                    : '25px'
-                  : isMobile
-                  ? '33px'
-                  : '34px',
-              }}
-              className={this.styles.button_settingsComponent_checkBoxes}
-            >
+            <div style={style} className={this.styles.button_settingsComponent_checkBoxes}>
               <Checkbox
                 label={t('LinkPanel_Target_Checkbox')}
                 theme={this.styles}
-                checked={this.state.target}
+                checked={target}
                 dataHook="linkPanelBlankCheckbox"
                 onChange={this.handleTargetChange}
               />
               <Checkbox
                 label={t('LinkPanel_Nofollow_Checkbox')}
                 theme={this.styles}
-                checked={this.state.rel}
+                checked={rel}
                 dataHook="linkPanelRelCheckbox"
                 onChange={this.handleRelChange}
                 tooltipTextKey={'LinkPanel_Nofollow_Checkbox_Tooltip'}

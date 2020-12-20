@@ -1,4 +1,4 @@
-import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from './constants';
+import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from './types';
 import { alignmentClassName, sizeClassName } from './classNameStrategies';
 import ButtonViewer from './components/button-component';
 import { PluginTypeMapper } from 'wix-rich-content-common';

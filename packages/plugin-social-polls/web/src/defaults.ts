@@ -10,11 +10,11 @@ export const LAYOUT = {
   GRID: 'grid',
 };
 
-export const BACKGROUND_TYPE = {
-  COLOR: 'color',
-  IMAGE: 'image',
-  GRADIENT: 'gradient',
-};
+export enum BACKGROUND_TYPE {
+  COLOR = 'color',
+  IMAGE = 'image',
+  GRADIENT = 'gradient',
+}
 
 /* eslint-disable max-len */
 export const BACKGROUND_PRESETS = {

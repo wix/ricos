@@ -7,7 +7,7 @@ sidebar_label: Gallery Plugin
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithHelpers } from '../../infra/editor/components/RicosEditorWithHelpers.tsx';
 import { mockImageNativeUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
 
@@ -16,8 +16,8 @@ Let's push even higher with tons of customizable layouts to explore !
 
 <div className="card">
   <RicosEditorWithHelpers
-    plugins={[pluginGallery({scrollingElement: () => document.body})]} 
-    content={content('Add a beautiful gallery!')}
+    plugins={[pluginGallery({ scrollingElement: () => document.body })]}
+    content={createContent('Add a beautiful gallery!')}
     placeholder={'Type here!'}
     handleFileUpload={mockImageNativeUploadFunc}
   />
@@ -51,10 +51,11 @@ upload functions are passed through `RichContentEditor`
 e.g.
 
 ```jsx
-<RicosEditor plugins={plugins} content={content} >
+<RicosEditor plugins={plugins} content={content}>
   <RichContentEditor helpers={{ handleFileUpload }} />
 </RicosEditor>
 ```
+
 :::
 
 ```jsx
@@ -92,7 +93,7 @@ The `scrollingElement` is required for the gallery to work properly, should retu
 If not provided it would fall back to `document.body`.
 
 ```jsx
-scrollingElement: () => JSX.Element
+scrollingElement: () => JSX.Element;
 ```
 
 ### `modify default config`
