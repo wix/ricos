@@ -64,9 +64,6 @@ function createBlockEntitiesDataMap(contentState: RicosContent) {
     const { entityRanges = [], key: blockKey } = block;
     const entity = entityMap[entityRanges[0]?.key];
     blockEntitiesDataMap[blockKey] = { block, entityData: entity?.data };
-    // if (type === 'atomic' && entity) {
-    //   blockEntitiesDataMap[blockKey] = { block, entityData: entity.data };
-    // }
   });
   return blockEntitiesDataMap;
 }
