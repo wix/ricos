@@ -277,7 +277,7 @@ describe('plugins', () => {
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
     });
-    it.skip('convert link preview to regular link', function() {
+    it('convert link preview to regular link', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
       cy.triggerLinkPreviewViewerUpdate();
