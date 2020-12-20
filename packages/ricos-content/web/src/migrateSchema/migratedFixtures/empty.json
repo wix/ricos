@@ -4,20 +4,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7jgi9"
+        "key": "28s04"
       }
     ],
     "lastEdited": {
-      "seconds": {
-        "low": 1608223652,
-        "high": 0,
-        "unsigned": false
-      },
-      "nanos": 880000000
+      "seconds": 1608477230,
+      "nanos": 884000000
     }
   },
   "selection": {
-    "anchorNode": "7jgi9"
+    "anchorNode": "28s04"
   },
   "version": ""
 }

@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ste",
+            "key": "7ioia",
             "ricosText": {
               "decorations": [],
               "text": "bla bla bla"
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "7ggpt"
+        "key": "b9m13"
       },
       {
         "nodes": [],
@@ -34,7 +34,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "biuv6",
+            "key": "ct187",
             "ricosText": {
               "decorations": [],
               "text": "Wide embed. In mobile full width. In desktop 740px "
@@ -42,7 +42,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "budfj"
+        "key": "8oioi"
       },
       {
         "nodes": [],
@@ -60,17 +60,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f3bg"
+        "key": "eh5dj"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8aq7o"
+        "key": "a2m0v"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b7pg8"
+        "key": "f52on"
       },
       {
         "nodes": [],
@@ -88,30 +88,26 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "flb25"
+        "key": "f8qaf"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fbk5s"
+        "key": "51k8u"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "63gio"
+        "key": "65r11"
       }
     ],
     "lastEdited": {
-      "seconds": {
-        "low": 1608223652,
-        "high": 0,
-        "unsigned": false
-      },
-      "nanos": 913000000
+      "seconds": 1608477230,
+      "nanos": 903000000
     }
   },
   "selection": {
-    "anchorNode": "7ggpt"
+    "anchorNode": "b9m13"
   },
   "version": "7.1.5"
 }

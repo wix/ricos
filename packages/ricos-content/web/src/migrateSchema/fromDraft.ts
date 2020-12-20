@@ -13,15 +13,7 @@ import {
   EntityTypeDataMap,
   PluginTypeMap,
 } from './consts';
-import {
-  RicosContent,
-  Decoration,
-  Node,
-  fromObject,
-  Timestamp,
-  toObject,
-  verify,
-} from 'ricos-schema';
+import { RicosContent, Decoration, Node, google } from 'ricos-schema';
 import { genKey } from 'draft-js';
 import {
   ANCHOR_TYPE,
@@ -38,7 +30,7 @@ import toConstantCase from 'to-constant-case';
 type Range = RicosInlineStyleRange | RicosEntityRange;
 type RangeData = Pick<RicosInlineStyleRange, 'style'> | Pick<RicosEntityRange, 'key'>;
 
-const createTimestamp = (): Timestamp => {
+const createTimestamp = (): google.protobuf.Timestamp => {
   const timeMS = Date.now();
   return {
     seconds: Math.floor(timeMS / 1000),
@@ -337,7 +329,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   parseBlocks();
 
-  const ricosContentMessage = fromObject({
+  const ricosContentMessage = RicosContent.fromObject({
     doc: {
       nodes,
       lastEdited: createTimestamp(),
@@ -348,14 +340,18 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     version: version || '',
   });
 
-  const err = verify(ricosContentMessage);
+  const err = RicosContent.verify(ricosContentMessage);
   if (err) {
     console.log('ERROR! Invalid content');
     console.log(err);
     process.exit(1);
   }
 
-  const ricosContent = toObject(ricosContentMessage, { arrays: true, enums: String });
+  const ricosContent = RicosContent.toObject(ricosContentMessage, {
+    arrays: true,
+    enums: String,
+    longs: Number,
+  });
 
   return ricosContent;
 };

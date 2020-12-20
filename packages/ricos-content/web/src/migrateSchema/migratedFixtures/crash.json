@@ -17,12 +17,8 @@
       }
     ],
     "lastEdited": {
-      "seconds": {
-        "low": 1608223652,
-        "high": 0,
-        "unsigned": false
-      },
-      "nanos": 868000000
+      "seconds": 1608477230,
+      "nanos": 876000000
     }
   },
   "selection": {

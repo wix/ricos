@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e4kn9",
+            "key": "6hq84",
             "ricosText": {
               "decorations": [
                 {
@@ -29,7 +29,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "28h1n",
+            "key": "64oh7",
             "ricosText": {
               "decorations": [
                 {
@@ -45,7 +45,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "epsm3",
+            "key": "4ge34",
             "ricosText": {
               "decorations": [
                 {
@@ -68,7 +68,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bh92u",
+            "key": "7brh4",
             "ricosText": {
               "decorations": [
                 {
@@ -84,7 +84,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3ek40",
+            "key": "ai7op",
             "ricosText": {
               "decorations": [
                 {
@@ -107,7 +107,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9sr64",
+            "key": "94vtk",
             "ricosText": {
               "decorations": [
                 {
@@ -123,7 +123,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "28rnl",
+            "key": "3boje",
             "ricosText": {
               "decorations": [
                 {
@@ -146,7 +146,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9sao6",
+            "key": "22d5d",
             "ricosText": {
               "decorations": [
                 {
@@ -162,7 +162,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9veqk",
+            "key": "2nbdq",
             "ricosText": {
               "decorations": [
                 {
@@ -185,7 +185,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8pl8j",
+            "key": "ats9v",
             "ricosText": {
               "decorations": [
                 {
@@ -201,7 +201,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1j176",
+            "key": "euhoi",
             "ricosText": {
               "decorations": [
                 {
@@ -224,7 +224,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8nsh2",
+            "key": "5j428",
             "ricosText": {
               "decorations": [
                 {
@@ -240,7 +240,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "akclg",
+            "key": "duelu",
             "ricosText": {
               "decorations": [
                 {
@@ -263,7 +263,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "en7sl",
+            "key": "8gufo",
             "ricosText": {
               "decorations": [
                 {
@@ -279,7 +279,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bv9sv",
+            "key": "a397j",
             "ricosText": {
               "decorations": [
                 {
@@ -301,14 +301,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "fduk"
+        "key": "ccrm0"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "13h0d",
+            "key": "d6hvh",
             "ricosText": {
               "decorations": [
                 {
@@ -330,14 +330,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "1vtq8"
+        "key": "c7uev"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "21guj",
+            "key": "bjeup",
             "ricosText": {
               "decorations": [
                 {
@@ -359,20 +359,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "fbb0r"
+        "key": "8o6e3"
       }
     ],
     "lastEdited": {
-      "seconds": {
-        "low": 1608223652,
-        "high": 0,
-        "unsigned": false
-      },
-      "nanos": 873000000
+      "seconds": 1608477230,
+      "nanos": 878000000
     }
   },
   "selection": {
-    "anchorNode": "fduk"
+    "anchorNode": "ccrm0"
   },
   "version": "8.7.5"
 }

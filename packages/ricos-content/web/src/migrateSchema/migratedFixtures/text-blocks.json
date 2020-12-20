@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4sq8l",
+            "key": "bist1",
             "ricosText": {
               "decorations": [],
               "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews."
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "8sp0l"
+        "key": "3rf41"
       },
       {
         "nodes": [
@@ -25,7 +25,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "eo3e0",
+                    "key": "9ant8",
                     "ricosText": {
                       "decorations": [],
                       "text": "Bring to the table win-win survival strategies to ensure proactive domination."
@@ -33,7 +33,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "3e7qn"
+                "key": "f0t14"
               }
             ],
             "type": "list_item",
@@ -44,7 +44,7 @@
               {
                 "nodes": [],
                 "type": "paragraph",
-                "key": "ap2om"
+                "key": "4u4ss"
               }
             ],
             "type": "list_item",
@@ -57,7 +57,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "5t6r3",
+                    "key": "dalip",
                     "ricosText": {
                       "decorations": [],
                       "text": "Check if the list above displays correctly!"
@@ -65,7 +65,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "31apc"
+                "key": "4dek7"
               }
             ],
             "type": "list_item",
@@ -73,14 +73,14 @@
           }
         ],
         "type": "ordered_list",
-        "key": "8snok"
+        "key": "7nroh"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "2749f",
+            "key": "c88f3",
             "ricosText": {
               "decorations": [],
               "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
@@ -88,7 +88,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "9g003"
+        "key": "f42gk"
       },
       {
         "nodes": [
@@ -99,7 +99,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "6n606",
+                    "key": "259ba",
                     "ricosText": {
                       "decorations": [],
                       "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line."
@@ -107,7 +107,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "37ttb"
+                "key": "5vch1"
               }
             ],
             "type": "list_item",
@@ -120,7 +120,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "frveg",
+                    "key": "9mlej",
                     "ricosText": {
                       "decorations": [],
                       "text": "Override the digital divide with additional clickthroughs from DevOps."
@@ -128,7 +128,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "f476n"
+                "key": "5i9iu"
               }
             ],
             "type": "list_item",
@@ -136,14 +136,14 @@
           }
         ],
         "type": "bullet_list",
-        "key": "2fdbj"
+        "key": "79s36"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "cjd0f",
+            "key": "4so7g",
             "ricosText": {
               "decorations": [],
               "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test."
@@ -151,20 +151,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "d3bnl"
+        "key": "cuv02"
       }
     ],
     "lastEdited": {
-      "seconds": {
-        "low": 1608223653,
-        "high": 0,
-        "unsigned": false
-      },
-      "nanos": 89000000
+      "seconds": 1608477125,
+      "nanos": 784000000
     }
   },
   "selection": {
-    "anchorNode": "8sp0l"
+    "anchorNode": "3rf41"
   },
   "version": "7.5.0"
 }

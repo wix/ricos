@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "erk5u",
+            "key": "60ubg",
             "ricosText": {
               "decorations": [],
               "text": "היי! אמור להיות בטקסט זה אינדנטציה בעומק 1."
@@ -14,20 +14,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "8aun1"
+        "key": "a5dt"
       }
     ],
     "lastEdited": {
-      "seconds": {
-        "low": 1608223652,
-        "high": 0,
-        "unsigned": false
-      },
-      "nanos": 907000000
+      "seconds": 1608477230,
+      "nanos": 900000000
     }
   },
   "selection": {
-    "anchorNode": "8aun1"
+    "anchorNode": "a5dt"
   },
   "version": "7.6.1"
 }

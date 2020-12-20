@@ -4,7 +4,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3fq4t"
+        "key": "dga6"
       },
       {
         "nodes": [],
@@ -62,14 +62,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5ta3t"
+        "key": "rtr1"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "fikc9",
+            "key": "6a4br",
             "ricosText": {
               "decorations": [],
               "text": "This is a test of the gallery plugin."
@@ -77,12 +77,12 @@
           }
         ],
         "type": "paragraph",
-        "key": "4aioa"
+        "key": "9fk8d"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cneja"
+        "key": "cg9dq"
       },
       {
         "nodes": [],
@@ -105,20 +105,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1r278"
+        "key": "3c9q7"
       }
     ],
     "lastEdited": {
-      "seconds": {
-        "low": 1608223652,
-        "high": 0,
-        "unsigned": false
-      },
-      "nanos": 897000000
+      "seconds": 1608477230,
+      "nanos": 893000000
     }
   },
   "selection": {
-    "anchorNode": "3fq4t"
+    "anchorNode": "dga6"
   },
   "version": "5.1.1"
 }
