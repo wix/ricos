@@ -82,14 +82,6 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     entries = [editorEntry, ...viewerEntry, ...libEntries];
   }
 
-  if (process.env.MODULE_ANALYZE_EDITOR) {
-    entries = [editorEntry, ...libEntries];
-  } else if (process.env.MODULE_ANALYZE_VIEWER) {
-    entries = [...viewerEntry, ...libEntries];
-  } else {
-    entries = [editorEntry, ...viewerEntry, ...libEntries];
-  }
-
   const mobileNativeLoaderPath = 'src/mobileNativeLoader.js';
   if (existsSync(`./${mobileNativeLoaderPath}`)) {
     entries.push({
