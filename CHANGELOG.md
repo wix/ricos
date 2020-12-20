@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.9.0 (Dec 20, 2020)
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1875](https://github.com/wix-incubator/rich-content/pull/1875) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
@@ -28,9 +33,6 @@
 ### :house: Internal
 - `editor-common`
   - [#1880](https://github.com/wix-incubator/rich-content/pull/1880) moved `handleUndoRedoCommands` to editor-common
-
-</details>
-<hr/>
 
 ## 8.8.2 (Dec 16, 2020)
 ### :bug: Bug Fix
