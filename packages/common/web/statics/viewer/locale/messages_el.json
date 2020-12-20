@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} άτομα ψήφισαν υπέρ αυτής της απάντησης",
   "Spoiler_Reveal_Video_Placeholder": "Αυτό το βίντεο περιέχει σπόιλερ",
   "Preview_SeeFullPost_Label": "Δείτε την πλήρη ανάρτηση",
-  "UploadFile_Viewer_Download": "Λήψη {{fileType}}"
+  "UploadFile_Viewer_Download": "Λήψη {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}}min",
+  "Embed_Vertical_Units_Hour": "{{hours}}h"
 }
