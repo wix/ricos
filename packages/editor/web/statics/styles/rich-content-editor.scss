@@ -51,7 +51,7 @@
   height: 100%;
   line-height: 1.5;
   font-size: $paragraphFontSize;
-  color: $primary-text-color;
+  color: var(--ricos-custom-p-color, $primary-text-color);
   background-color: $background-color;
 
   :global(.DraftEditor-editorContainer) {
