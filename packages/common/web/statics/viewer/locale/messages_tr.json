@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} kişi bu yanıt için oy verdi",
   "Spoiler_Reveal_Video_Placeholder": "Bu video, spoiler içerir",
   "Preview_SeeFullPost_Label": "Tamamını görüntüle",
-  "UploadFile_Viewer_Download": "{{fileType}} dosyasını indir"
+  "UploadFile_Viewer_Download": "{{fileType}} dosyasını indir",
+  "Embed_Vertical_Units_Minute": "{{minutes}}dk.",
+  "Embed_Vertical_Units_Hour": "{{hours}}s."
 }
