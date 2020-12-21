@@ -4,7 +4,7 @@ export const getMockComponentData = () => ({
   type: 'table',
   config: {
     alignment: 'center',
-    colsWidth: ['auto', 'auto'],
+    colsWidth: [10, 10],
     rowsHeight: [47, 47],
     size: 'content',
     rows: {

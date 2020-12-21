@@ -48,7 +48,7 @@ class Table extends TableDataUtil {
       Object.entries(rows).forEach(([i, row]) => {
         [...Array(colsOutOfBoundNum).fill(0)].forEach((value, i) => {
           const colIndex = i + colNum - 1 + colsOutOfBoundNum;
-          this.addNewColWidth(colIndex, this.getColWidth(i - 1));
+          this.addNewColWidth(colIndex, this.getColWidth(i === 0 ? 0 : i - 1));
           row.columns[colIndex] = createEmptyCell();
         });
       });
@@ -130,7 +130,7 @@ class Table extends TableDataUtil {
         this.addNewCellToMergeRange(i, index - 1, cellsWithNewCol[i].columns[index], true);
       }
     });
-    this.addNewColWidth(index, this.getColWidth(index - 1));
+    this.addNewColWidth(index, this.getColWidth(index === 0 ? 0 : index - 1));
     this.setNewRows(cellsWithNewCol);
   };
 
