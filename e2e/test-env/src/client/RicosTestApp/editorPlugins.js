@@ -80,6 +80,12 @@ const configs = {
   gallery: {
     scrollingElement: () => window,
   },
+  link: {
+    onLinkAdd: async saveData => {
+      const data = await Promise.resolve({ externalData: {} });
+      saveData(data);
+    },
+  },
 };
 
 const plugins = {
@@ -89,7 +95,7 @@ const plugins = {
   html: pluginHtml(),
   divider: pluginDivider(),
   codeBlock: pluginCodeBlock(),
-  link: pluginLink(),
+  link: pluginLink(configs.link),
   linkPreview: pluginLinkPreview(configs.linkPreview),
   spacing: pluginLineSpacing(),
   indent: pluginIndent(),

@@ -14,7 +14,7 @@ import {
 
 import { flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget } from 'wix-rich-content-common';
+import { RelValue, AnchorTarget, SetEditorState } from 'wix-rich-content-common';
 
 type LinkDataUrl = {
   url: string;
@@ -25,6 +25,9 @@ type LinkDataUrl = {
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ExternalLinkData = { [key: string]: any };
 
 export function createSelection({
   blockKey,
@@ -50,18 +53,38 @@ export const insertLinkInPosition = (
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
 
-  return insertLink(editorState, selection, {
-    url,
-    targetBlank,
-    nofollow,
-    anchorTarget,
-    relValue,
-  });
+  return insertLink(
+    editorState,
+    selection,
+    createLinkEntityData({
+      url,
+      targetBlank,
+      nofollow,
+      anchorTarget,
+      relValue,
+    })
+  );
+};
+
+export const insertExternalLink = (editorState: EditorState, setEditorState: SetEditorState) => (
+  externalData: ExternalLinkData
+) => {
+  const selection = getSelection(editorState);
+  const editorStateWithLink = isSelectionBelongsToExistingLink(editorState, selection)
+    ? updateLink(editorState, selection, { externalData })
+    : insertLink(editorState, selection, { externalData });
+
+  const newEditorState = EditorState.forceSelection(
+    editorStateWithLink,
+    selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
+  );
+
+  setEditorState(newEditorState);
 };
 
 export const updateLinkAtCurrentSelection = (editorState: EditorState, data): EditorState => {
   const selection = getSelection(editorState);
-  const editorStateWithLink = updateLink(selection, editorState, data);
+  const editorStateWithLink = updateLink(editorState, selection, createLinkEntityData(data));
   return EditorState.forceSelection(
     editorStateWithLink,
     selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
@@ -95,9 +118,9 @@ export const insertLinkAtCurrentSelection = (
     }) as SelectionState;
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-  const editorStateWithLink = isSelectionBelongsToExsistingLink(newEditorState, selection)
-    ? updateLink(selection, newEditorState, entityData)
-    : insertLink(newEditorState, selection, entityData);
+  const editorStateWithLink = isSelectionBelongsToExistingLink(newEditorState, selection)
+    ? updateLink(newEditorState, selection, createLinkEntityData(entityData))
+    : insertLink(newEditorState, selection, createLinkEntityData(entityData));
 
   return EditorState.forceSelection(
     editorStateWithLink,
@@ -105,7 +128,7 @@ export const insertLinkAtCurrentSelection = (
   );
 };
 
-function isSelectionBelongsToExsistingLink(editorState: EditorState, selection: SelectionState) {
+function isSelectionBelongsToExistingLink(editorState: EditorState, selection: SelectionState) {
   const startOffset = selection.getStartOffset();
   const endOffset = selection.getEndOffset();
   return getSelectedLinks(editorState).find(({ range }) => {
@@ -113,11 +136,15 @@ function isSelectionBelongsToExsistingLink(editorState: EditorState, selection: 
   });
 }
 
-function updateLink(selection: SelectionState, editorState: EditorState, linkData: LinkData) {
+function updateLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  linkData: LinkData | ExternalLinkData
+) {
   const blockKey = selection.getStartKey();
   const block = editorState.getCurrentContent().getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(selection.getStartOffset());
-  return setEntityData(editorState, entityKey, createLinkEntityData(linkData));
+  return setEntityData(editorState, entityKey, linkData);
 }
 
 function preventLinkInlineStyleForNewLine(editorState: EditorState, selection: SelectionState) {
@@ -131,11 +158,15 @@ function preventLinkInlineStyleForNewLine(editorState: EditorState, selection: S
   return Modifier.insertText(editorState.getCurrentContent(), selectionForSpace, ' ');
 }
 
-function insertLink(editorState: EditorState, selection: SelectionState, linkData: LinkData) {
+function insertLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  data: LinkData | ExternalLinkData
+) {
   const oldSelection = editorState.getSelection();
   const editorWithLink = addEntity(editorState, selection, {
     type: 'LINK',
-    data: createLinkEntityData(linkData),
+    data,
     mutability: 'MUTABLE',
   });
   const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link

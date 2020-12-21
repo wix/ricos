@@ -24,62 +24,73 @@ export default class TextLinkButton extends Component {
       t,
       uiSettings,
       insertLinkFn,
+      insertExternalLink,
       closeInlinePluginToolbar,
       config,
       innerModal,
       toolbarOffsetTop,
       toolbarOffsetLeft,
     } = this.props;
-    const linkTypes = config[LINK_TYPE]?.linkTypes;
-    const OriginalLinkPanel =
-      !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
-    const modalStyles = getModalStyles({
-      fullScreen: !OriginalLinkPanel,
-      isMobile,
-      customStyles: {
-        content: {
-          position: 'fixed',
+
+    const settings = config[LINK_TYPE];
+    const linkTypes = settings?.linkTypes;
+    const onLinkAdd = settings?.onLinkAdd;
+    const isExternalModal = settings?.isExternalModal;
+
+    if (!isExternalModal) {
+      const OriginalLinkPanel =
+        !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
+      const modalStyles = getModalStyles({
+        fullScreen: !OriginalLinkPanel,
+        isMobile,
+        customStyles: {
+          content: {
+            position: 'fixed',
+          },
         },
-      },
-    });
-    const commonPanelProps = {
-      helpers,
-      modalName: EditorModals.TEXT_LINK_MODAL,
-      anchorTarget,
-      relValue,
-      theme,
-      t,
-      uiSettings,
-      getEditorState,
-      setEditorState,
-      insertLinkFn,
-      closeInlinePluginToolbar,
-      linkTypes: config[LINK_TYPE]?.linkTypes,
-    };
-    if (isMobile || linkModal) {
-      if (helpers && helpers.openModal) {
+      });
+      const commonPanelProps = {
+        helpers,
+        modalName: EditorModals.TEXT_LINK_MODAL,
+        anchorTarget,
+        relValue,
+        theme,
+        t,
+        uiSettings,
+        getEditorState,
+        setEditorState,
+        insertLinkFn,
+        closeInlinePluginToolbar,
+        linkTypes,
+      };
+      if (isMobile || linkModal) {
+        if (helpers && helpers.openModal) {
+          const modalProps = {
+            modalStyles,
+            hidePopup: helpers.closeModal,
+            isMobile,
+            ...commonPanelProps,
+          };
+          helpers.openModal(modalProps);
+        } else {
+          //eslint-disable-next-line no-console
+          console.error(
+            'Open external helper function is not defined for toolbar button with keyName ' +
+              keyName
+          );
+        }
+      } else {
         const modalProps = {
-          modalStyles,
-          hidePopup: helpers.closeModal,
-          isMobile,
+          hidePopup: innerModal.closeInnerModal,
+          top: toolbarOffsetTop,
+          left: toolbarOffsetLeft,
+          modalStyles: OriginalLinkPanel ? null : { maxWidth: 'none', padding: '0 19px' },
           ...commonPanelProps,
         };
-        helpers.openModal(modalProps);
-      } else {
-        //eslint-disable-next-line no-console
-        console.error(
-          'Open external helper function is not defined for toolbar button with keyName ' + keyName
-        );
+        innerModal.openInnerModal(modalProps);
       }
     } else {
-      const modalProps = {
-        hidePopup: innerModal.closeInnerModal,
-        top: toolbarOffsetTop,
-        left: toolbarOffsetLeft,
-        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'none', padding: '0 19px' },
-        ...commonPanelProps,
-      };
-      innerModal.openInnerModal(modalProps);
+      onLinkAdd?.(insertExternalLink(getEditorState(), setEditorState));
     }
   };
 
@@ -132,4 +143,5 @@ TextLinkButton.propTypes = {
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
   toolbarOffsetLeft: PropTypes.string,
+  insertExternalLink: PropTypes.func,
 };

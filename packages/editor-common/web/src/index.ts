@@ -39,6 +39,7 @@ export {
   updateLinkAtCurrentSelection,
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
+  insertExternalLink,
   hasLinksInBlock,
   getLinkRangesInBlock,
   fixPastedLinks,

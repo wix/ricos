@@ -33,15 +33,20 @@ class LinkViewer extends Component {
   }
 
   handleClick = event => {
-    const { componentData, isInEditor } = this.props;
-    const { anchor } = componentData;
-    this.props?.settings?.onClick?.(event, anchor || this.getHref());
-    if (anchor && !isInEditor) {
-      event.preventDefault();
-      const anchorString = `viewer-${anchor}`;
-      history.pushState({}, null, `#${anchorString}`);
-      const element = document.getElementById(anchorString);
-      anchorScroll(element);
+    const { componentData, isInEditor, settings = {} } = this.props;
+    const { onClick, isExternalModal } = settings;
+    if (isExternalModal) {
+      onClick?.(componentData?.externalData);
+    } else {
+      const { anchor } = componentData;
+      onClick?.(event, anchor || this.getHref());
+      if (anchor && !isInEditor) {
+        event.preventDefault();
+        const anchorString = `viewer-${anchor}`;
+        history.pushState({}, null, `#${anchorString}`);
+        const element = document.getElementById(anchorString);
+        anchorScroll(element);
+      }
     }
   };
 

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
@@ -137,7 +138,9 @@ class RicosTestApp extends PureComponent {
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
-      />
+      >
+        <RichContentViewer config={{ ...testAppConfig.pluginsConfig }} />
+      </RicosViewer>
     );
   };
 
