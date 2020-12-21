@@ -5043,6 +5043,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-dom@16.8.0":
+  version "16.8.0"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.0.tgz#c565f43f9d2ec911f9e0b8f3b74e25e67879aa3f"
+  integrity sha512-Jp4ufcEEjVJEB0OHq2MCZcE1u3KYUKO6WnSuiU/tZeYeiZxUoQavfa/TZeiIT+1XoN6l0lQVNM30VINZFDeolQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-i18next@^7.0.0":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@types/react-i18next/-/react-i18next-7.8.3.tgz#ba1820c91923c7f2b2abf6755d4372e503821c4b"
@@ -5086,7 +5093,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.13.1", "@types/react@^16.9.34":
+"@types/react@*", "@types/react@16.8.2", "@types/react@^16.13.1", "@types/react@^16.9.34":
   version "16.14.2"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.2.tgz#85dcc0947d0645349923c04ccef6018a1ab7538c"
   integrity sha512-BzzcAlyDxXl2nANlabtT4thtvbbnhee8hMmH/CcJrISDBVcJS1iOsP1f0OAgSdGE0MsY9tqcrb9YoZcOFv9dbQ==
@@ -22375,9 +22382,13 @@ react-chartjs-2@^2.11.1:
     lodash "^4.17.19"
     prop-types "^15.7.2"
 
-"react-click-outside@github:tj/react-click-outside":
+react-click-outsider@1.1.1:
   version "1.1.1"
-  resolved "https://codeload.github.com/tj/react-click-outside/tar.gz/a833ddc5be47490307f9fcc6ed09d8c353108510"
+  resolved "https://registry.yarnpkg.com/react-click-outsider/-/react-click-outsider-1.1.1.tgz#1509cf0d373d946963f888bcf1b3f140337834e5"
+  integrity sha512-RtLavST63EUqcFVNusAEe7RZD/DyrUYzaT9lMmBAbZju1SzF5tlNh/UkQWlGVQwcvTd2ixle3iff/mnPGZxh5w==
+  dependencies:
+    "@types/react" "16.8.2"
+    "@types/react-dom" "16.8.0"
 
 react-clientside-effect@^1.2.2:
   version "1.2.2"

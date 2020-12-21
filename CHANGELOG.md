@@ -20,6 +20,9 @@
 ### :bug: Bug Fix
 - `link`
   - [#1884](https://github.com/wix-incubator/rich-content/pull/1884) fix opening different link modal when using keyboard shortcut & externalToolbar
+### :house: Internal
+- `editor`
+  - [#1890](https://github.com/wix-incubator/rich-content/pull/1890) switch from react-click-outside to 'react-click-outsider'
 
 </details>
 <hr/>

@@ -7,7 +7,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 
 class InnerRCE extends Component {
   constructor(props) {
