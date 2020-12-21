@@ -28,6 +28,11 @@ export const paddingDiff = col => {
   return parseInt(padLeft) + parseInt(padRight);
 };
 
+export const getRefWidthAsNumber = ref => {
+  const widthStr = ref.style.width;
+  return parseInt(widthStr.substring(0, widthStr.length - 2));
+};
+
 //SELECTION
 export const range = (start, end) => {
   const array = [];
@@ -108,6 +113,27 @@ export class TableDataUtil {
     }
     return colMinWidth;
   };
+
+  getCellWidthAsPixel = (tableWidth, i) => {
+    const colsWidthSum = this.getColsWidth().reduce((acc, val) => acc + val, 0);
+    let smallestCellIndex, smallestCellWidth, currCellWidth;
+    this.getColsWidth().forEach((width, index) => {
+      const cellWidth = tableWidth * (width / colsWidthSum);
+      if (index === i) {
+        currCellWidth = cellWidth;
+      } else if (cellWidth < 120 && (!smallestCellWidth || smallestCellWidth > cellWidth)) {
+        smallestCellWidth = cellWidth;
+        smallestCellIndex = index;
+      }
+    });
+    if (smallestCellWidth) {
+      return 120 * (this.getColWidth(i) / this.getColWidth(smallestCellIndex));
+    }
+    return Math.max(currCellWidth, 120);
+  };
+
+  getCellWidthAsRatio = (tableWidth, totalColsWidth, cellWidth) =>
+    (totalColsWidth * cellWidth) / tableWidth;
 
   //MERGE
   getCellMergeData = (i, j) => this.getCell(i, j)?.merge;

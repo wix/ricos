@@ -30,7 +30,12 @@ class TableViewer extends Component {
 
   sheetRenderer = props => {
     return (
-      <TableRenderer {...props} columns={this.props.columns} getColWidth={this.table.getColWidth} />
+      <TableRenderer
+        {...props}
+        columns={this.props.columns}
+        table={this.table}
+        tableRef={this.tableViewerRef}
+      />
     );
   };
 
@@ -39,11 +44,12 @@ class TableViewer extends Component {
       {...props}
       getRowHeight={this.table.getRowHeight}
       setRowRef={this.props.setRowRef}
-      rows={this.props.rows}
     />
   );
 
   setCellRef = ref => (this.cellRef = ref);
+
+  setTableViewerRef = ref => (this.tableViewerRef = ref);
 
   cellRenderer = props => {
     const {
@@ -84,7 +90,7 @@ class TableViewer extends Component {
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
 
     return (
-      <div className={classNames(!isEditMode && styles.tableWrapper)}>
+      <div className={classNames(!isEditMode && styles.tableWrapper)} ref={this.setTableViewerRef}>
         <DataSheet
           data={this.grid}
           valueRenderer={this.valueRenderer}
@@ -113,7 +119,6 @@ TableViewer.propTypes = {
   setEditingActive: PropTypes.func,
   updateCellContent: PropTypes.func,
   columns: PropTypes.any,
-  rows: PropTypes.any,
   selected: PropTypes.object,
   componentData: PropTypes.object,
   tableWidth: PropTypes.number,

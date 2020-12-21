@@ -4,9 +4,10 @@ import {
   createEmptyRow,
   createEmptyCell,
   TableDataUtil,
+  getRefWidthAsNumber,
 } from '../tableUtils';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
-import { ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
+import { ROW_DEFAULT_HEIGHT } from '../consts';
 import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-plugin-commons';
 
@@ -47,7 +48,7 @@ class Table extends TableDataUtil {
       Object.entries(rows).forEach(([i, row]) => {
         [...Array(colsOutOfBoundNum).fill(0)].forEach((value, i) => {
           const colIndex = i + colNum - 1 + colsOutOfBoundNum;
-          this.addNewColWidth(colIndex);
+          this.addNewColWidth(colIndex, this.getColWidth(i - 1));
           row.columns[colIndex] = createEmptyCell();
         });
       });
@@ -84,8 +85,7 @@ class Table extends TableDataUtil {
 
   addNewRowHeight = index => this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
 
-  addNewColWidth = (index, colWidth) =>
-    this.getColsWidth().splice(index, 0, colWidth || COL_DEFAULT_WIDTH);
+  addNewColWidth = (index, colWidth) => this.getColsWidth().splice(index, 0, colWidth);
 
   addRow = index => {
     const rows = this.getRows();
@@ -109,7 +109,7 @@ class Table extends TableDataUtil {
     this.setNewRows(cellsWithNewRow);
   };
 
-  addColumn = (index, colWidth) => {
+  addColumn = index => {
     const rows = this.getRows();
     const cellsWithNewCol = {};
     //eslint-disable-next-line
@@ -130,7 +130,7 @@ class Table extends TableDataUtil {
         this.addNewCellToMergeRange(i, index - 1, cellsWithNewCol[i].columns[index], true);
       }
     });
-    this.addNewColWidth(index, colWidth);
+    this.addNewColWidth(index, this.getColWidth(index - 1));
     this.setNewRows(cellsWithNewCol);
   };
 
@@ -180,6 +180,17 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
+  setColWidthAfterResize = (columnsRefs, tableWidth) => {
+    const pixelWidthArr = columnsRefs.map(col => getRefWidthAsNumber(col));
+    const totalColsWidth = pixelWidthArr.reduce((acc, val) => acc + val, 0);
+    const colsWidth = this.getColsWidth();
+    pixelWidthArr.forEach(
+      (cellWidth, index) =>
+        (colsWidth[index] = this.getCellWidthAsRatio(tableWidth, totalColsWidth, cellWidth))
+    );
+    this.saveNewDataFunc(this.componentData);
+  };
+
   setColumnWidth = (range, width) => {
     range.forEach(({ j }) => {
       const colsWidth = this.getColsWidth();
@@ -198,7 +209,8 @@ class Table extends TableDataUtil {
 
   distributeColumns = range => {
     const colsWidth = this.getColsWidth();
-    range.forEach(i => (colsWidth[i] = COL_DEFAULT_WIDTH));
+    const newWidth = range.reduce((acc, val) => acc + colsWidth[val], 0) / range.length;
+    range.forEach(i => (colsWidth[i] = newWidth));
     this.saveNewDataFunc(this.componentData);
   };
 

@@ -96,7 +96,6 @@ class TableToolbar extends Component {
         y: firstCellRef.offsetTop,
         containerWidth: tableWidth,
         extraTopOffset,
-        extraLeftOffset: 19,
       };
     }
   };

@@ -54,12 +54,14 @@
     border-radius: 2px;
 }
 
-.columns, .rows {
+.columns {
     background-color: #e5e5e5;
     padding: 0;
     border: 1px solid #e5e5e5;
+    height: 20px;
+    position: relative;
     &.selected {
-        border: 1px double $action-color;
+        border: 1px solid $action-color;
     }
     &.selectAll {
         border: none !important;
@@ -68,21 +70,11 @@
 
 .selectAll {
     width: 20px;
+    max-width: 20px;
     height: 20px;
     padding: 0;
     border: 1px solid rgba(0, 0, 0, 0.4);
     &.selected {
         border: 1px double $action-color;
     }
-}
-
-.columns {
-    height: 20px;
-    position: relative;
-
-}
-.rows {
-    width: 20px;
-    height: inherit;
-    position: relative;
 }

@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/borders.scss';
 
 const CellBorders = ({ borders }) => [
-  borders.top && <div style={{ background: borders.top }} className={styles.borderT} />,
-  borders.bottom && <div style={{ background: borders.bottom }} className={styles.borderB} />,
-  borders.right && <div style={{ background: borders.right }} className={styles.borderR} />,
-  borders.left && <div style={{ background: borders.left }} className={styles.borderL} />,
+  borders.top && <div key="top" style={{ background: borders.top }} className={styles.borderT} />,
+  borders.bottom && (
+    <div key="bottom" style={{ background: borders.bottom }} className={styles.borderB} />
+  ),
+  borders.right && (
+    <div key="right" style={{ background: borders.right }} className={styles.borderR} />
+  ),
+  borders.left && (
+    <div key="left" style={{ background: borders.left }} className={styles.borderL} />
+  ),
 ];
 
 CellBorders.propTypes = {

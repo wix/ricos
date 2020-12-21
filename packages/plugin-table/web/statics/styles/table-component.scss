@@ -4,8 +4,11 @@
 .tableEditorContainer {
     display: grid;
     grid-template-rows: auto max-content;
-    grid-template-columns:auto max-content;  
+    grid-template-columns: 20px calc(100% - 20px) max-content;  
     position: unset;
+    &.viewMode {
+        grid-template-columns: 100%;  
+    }
 
     .dragPreview {
         background-color: $action-color;
@@ -62,7 +65,7 @@
 }
 
 .addCol {
-    grid-column-start: 2;
+    grid-column-start: 3;
     width: 20px;
     height: calc(100% + 20px);
     margin-left: -1px;

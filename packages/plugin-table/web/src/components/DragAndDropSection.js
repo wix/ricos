@@ -81,7 +81,7 @@ class DragAndDropSection extends React.Component {
       this.isActive(index + 1) && (selectPreviewStyle.borderRight = 'none');
       this.isActive(index - 1) && (selectPreviewStyle.borderLeft = 'none');
     } else {
-      selectPreviewStyle.width = size - 22;
+      selectPreviewStyle.width = size;
       this.isActive(index + 1) && (selectPreviewStyle.borderBottom = 'none');
       this.isActive(index - 1) && (selectPreviewStyle.borderTop = 'none');
     }

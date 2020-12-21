@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/resizer.scss';
-import { paddingDiff } from '../tableUtils';
+import { paddingDiff, getRefWidthAsNumber } from '../tableUtils';
 import classNames from 'classnames';
 
 const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
@@ -27,13 +27,15 @@ export default class Resizer extends PureComponent {
       : (this.curTarget.style.height = size);
 
   onMouseDown = e => {
-    const { horizontal, size, onResizeStart } = this.props;
+    const { horizontal, size, onResizeStart, index, itemsRefs } = this.props;
     horizontal ? (this.ref.style.height = `${size}px`) : (this.ref.style.width = `${size}px`);
     e.stopPropagation();
-    this.curTarget = horizontal ? e.target.parentElement : e.target.parentElement.parentElement;
+    this.curTarget = itemsRefs[index];
+    this.siblingCell = horizontal && itemsRefs[index + 1];
     this.position = this.getPosition(e);
     const padding = paddingDiff(this.curTarget);
-    this.curSize = this.getSize() - padding;
+    this.curSize = horizontal ? getRefWidthAsNumber(this.curTarget) : this.getSize() - padding;
+    this.siblingSize = this.siblingCell && getRefWidthAsNumber(this.siblingCell);
     onResizeStart();
   };
 
@@ -41,17 +43,28 @@ export default class Resizer extends PureComponent {
     if (this.curTarget) {
       const diff = this.getPosition(e) - this.position;
       const newSize = this.curSize + diff;
-      const { minSize = 0 } = this.props;
-      if (newSize >= minSize) {
+      const siblingNewSize = this.siblingSize - diff;
+      const { minSize, setContainerSize } = this.props;
+      if (newSize >= minSize && (!siblingNewSize || siblingNewSize >= minSize)) {
         this.setNewSize(newSize + 'px');
+        setContainerSize && setContainerSize(newSize + 'px', this.props.index);
+        siblingNewSize && (this.siblingCell.style.width = siblingNewSize + 'px');
       }
     }
   };
 
   onMouseUp = () => {
-    this.props.horizontal ? (this.ref.style.height = '20px') : (this.ref.style.width = '20px');
+    const { horizontal, onResize, index, itemsRefs, minSize } = this.props;
+    horizontal ? (this.ref.style.height = '20px') : (this.ref.style.width = '20px');
+    if (horizontal && this.curTarget) {
+      const cellWidth = getRefWidthAsNumber(this.curTarget);
+      const siblingWidth = this.siblingCell && getRefWidthAsNumber(this.siblingCell);
+      cellWidth < minSize && (this.curTarget.style.minWidth = cellWidth);
+      siblingWidth && siblingWidth < minSize && (this.siblingCell.style.minWidth = siblingWidth);
+    }
+
     if (this.curTarget && this.position && this.curSize) {
-      this.props.onResize(this.props.index, this.getSize());
+      horizontal ? onResize(itemsRefs) : onResize(index, this.getSize());
       this.curTarget = undefined;
       this.position = undefined;
       this.curSize = undefined;
@@ -64,7 +77,7 @@ export default class Resizer extends PureComponent {
     if (highlightResizer === index) {
       horizontal
         ? (style = { height: size, borderRight: RESIZER_STYLE })
-        : (style = { width: size, borderBottom: RESIZER_STYLE });
+        : (style = { width: size, borderBottom: RESIZER_STYLE, zIndex: 3 });
     }
     return style;
   };
@@ -96,4 +109,6 @@ Resizer.propTypes = {
   horizontal: PropTypes.bool,
   minSize: PropTypes.number,
   onResizeStart: PropTypes.func,
+  itemsRefs: PropTypes.any,
+  setContainerSize: PropTypes.func,
 };

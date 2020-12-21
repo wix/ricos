@@ -9,7 +9,6 @@ import Table from './domain/table';
 import { getRange, createEmptyCellEditor } from './tableUtils';
 import { AddNewSection, TableToolbar, Columns, Rows } from './components';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
-import { CELL_AUTO_MIN_WIDTH } from './consts';
 import { isEmpty, isNumber } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
@@ -156,7 +155,7 @@ class TableComponent extends React.Component {
       const firstSelectedCell = getRange(selected)[0];
       const firstSelectedRowRef = this.rowsRefs[firstSelectedCell.i];
       Array.from(firstSelectedRowRef?.children || []).forEach((col, i) => {
-        if (i - 1 === firstSelectedCell.j) {
+        if (i === firstSelectedCell.j) {
           firstSelectedCellRef = col;
         }
       });
@@ -218,8 +217,8 @@ class TableComponent extends React.Component {
   updateComponentData1 = data =>
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
 
-  onResizeCol = (i, width) =>
-    this.table.setColumnWidth(getRange(this.table.getColsSelection({ start: i, end: i })), width);
+  onResizeCol = columnsRefs =>
+    this.table.setColWidthAfterResize(columnsRefs, this.tableRef.current.offsetWidth);
 
   onResizeRow = (i, height) =>
     this.table.setRowHeight(getRange(this.table.getRowsSelection({ start: i, end: i })), height);
@@ -280,20 +279,7 @@ class TableComponent extends React.Component {
   };
 
   addCol = i => {
-    let newColWith;
-    const fixedWidth = this.getCellsFixedWidth();
-    if (
-      (this.tableRef.current.offsetWidth - fixedWidth) / (this.table.getColNum() + 1) <
-      CELL_AUTO_MIN_WIDTH
-    ) {
-      newColWith = CELL_AUTO_MIN_WIDTH;
-      this.table
-        .getColsWidth()
-        .forEach(
-          (width, j) => !isNumber(width) && this.table.setColumnWidth([{ j }], CELL_AUTO_MIN_WIDTH)
-        );
-    }
-    this.table.addColumn(i, newColWith);
+    this.table.addColumn(i);
     this.selectCols({ start: i, end: i });
   };
 
@@ -379,22 +365,8 @@ class TableComponent extends React.Component {
 
   setEditorRef = (ref, i, j) => (this.innerEditorsRefs[`${i}-${j}`] = ref);
 
-  getRows = range => (
-    <Rows
-      rowDragProps={this.rowDragProps}
-      onResize={this.onResizeRow}
-      highlightResizer={this.state.highlightRowResizer}
-      onResizeStart={this.setSelected}
-      activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
-      selectAll={this.state.isAllCellsSelected}
-      size={this.tableRef.current?.offsetWidth}
-    />
-  );
-
   getColumns = range => (
     <Columns
-      isAllCellsSelected={this.state.isAllCellsSelected}
-      toggleAllCellsSelection={this.toggleAllCellsSelection}
       colDragProps={this.colDragProps}
       colNum={this.table.getColNum()}
       onResize={this.onResizeCol}
@@ -403,6 +375,8 @@ class TableComponent extends React.Component {
       activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
       selectAll={this.state.isAllCellsSelected}
       size={this.tableRef.current?.offsetHeight}
+      table={this.table}
+      tableWidth={this.tableRef.current?.offsetWidth}
     />
   );
 
@@ -413,17 +387,15 @@ class TableComponent extends React.Component {
     const { selected, isEditingActive, disableSelectedStyle } = this.state;
     this.table.updateComponentData(componentData);
     this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
-    this.colsWidth = Array.from(this.rowsRefs[0]?.children || [])
-      .map(ref => ref?.offsetWidth)
-      .slice(1);
+    this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const range = selected && getRange(selected);
     const isEditMode = !isMobile && isTableOnFocus;
     return (
       <div
         className={classNames(styles.tableEditorContainer, {
-          [styles.editMode]: !isMobile && isTableOnFocus,
-          [styles.viewMode]: isMobile || !isTableOnFocus,
+          [styles.editMode]: isEditMode,
+          [styles.viewMode]: !isEditMode,
           [styles.disableSelection]: !isEditingActive,
         })}
         data-hook="TableComponent"
@@ -454,6 +426,23 @@ class TableComponent extends React.Component {
             merge={this.merge}
           />
         )}
+        {!isMobile && (
+          <Rows
+            rowDragProps={this.rowDragProps}
+            activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
+            isAllCellsSelected={this.state.isAllCellsSelected}
+            size={this.tableRef.current?.offsetWidth}
+            onResize={this.onResizeRow}
+            highlightResizer={this.state.highlightRowResizer}
+            onResizeStart={this.setSelected}
+            isSelectAllActive={this.isAllCellsSelected(selected)}
+            onSelectAllClick={this.toggleAllCellsSelection}
+            rowNum={this.table.getRowNum()}
+            isEditMode={isEditMode}
+            rowsHeights={this.rowsHeights}
+            rowsRefs={this.rowsRefs}
+          />
+        )}
         <div
           ref={this.tableRef}
           className={styles.tableWrapper}
@@ -471,7 +460,6 @@ class TableComponent extends React.Component {
             setEditingActive={this.setEditingActive}
             updateCellContent={this.table.updateCellContent}
             columns={isEditMode && this.getColumns(range)}
-            rows={isEditMode && this.getRows(range)}
             selected={selected}
             tableWidth={this.tableRef.current?.offsetWidth}
             isMobile={isMobile}

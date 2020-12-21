@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getRange } from '../tableUtils';
-import { isNumber, cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 
 export default class Cell extends Component {
@@ -110,10 +110,6 @@ export default class Cell extends Component {
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
-    const width =
-      isMobile && isNumber(table.getColWidth(col))
-        ? table.getColWidth(col) * 0.8
-        : table.getColWidth(col);
     const toolbarButtons = cloneDeep(
       this.editorRef?.getToolbarProps?.(TOOLBARS.FORMATTING).buttons
     );
@@ -150,7 +146,6 @@ export default class Cell extends Component {
         style={{
           ...style,
           ...additionalStyles,
-          width,
         }}
         data-row={row}
         data-col={col}
