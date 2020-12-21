@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `link`
+  - [#1884](https://github.com/wix-incubator/rich-content/pull/1884) fix opening different link modal when using keyboard shortcut & externalToolbar
 
 </details>
 <hr/>
