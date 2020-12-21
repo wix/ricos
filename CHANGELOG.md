@@ -21,11 +21,10 @@
 </details>
 <hr/>
 
-## 8.9.0 (Dec 21, 2020)
+## 8.9.1 (Dec 21, 2020)
 ### :house: Internal
 - `native-polyfill`
   - [#1887](https://github.com/wix-incubator/rich-content/pull/1887) add native polyfills (button, accordion, link-preview & sound-cloud)
-
 
 ## 8.9.0 (Dec 20, 2020)
 ### :rocket: New Feature
