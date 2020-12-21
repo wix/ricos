@@ -240,7 +240,7 @@ const createBasePlugin = (
       noPluginBorder,
       noPointerEventsOnFocus,
       withHorizontalScroll,
-      innerRCERenderedIn,
+      innerRCERenderedIn: config.type === 'wix-draft-plugin-divider' ? false : innerRCERenderedIn,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =
