@@ -44,10 +44,10 @@
           "size": "content",
           "alignment": "center",
           "colsWidth": [
-            "auto",
-            "auto",
-            "auto",
-            "auto"
+            10,
+            10,
+            10,
+            10
           ],
           "rowsHeight": [
             "47px",
