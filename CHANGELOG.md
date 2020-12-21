@@ -1,4 +1,4 @@
-# Changelog
+****# Changelog
 
 > **Tags:**
 >
@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `native-polyfill`
+  - [#1887](https://github.com/wix-incubator/rich-content/pull/1887) add native loaders for button, accordion, link-preview & sound-cloud
 
 </details>
 <hr/>
