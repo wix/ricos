@@ -50,6 +50,7 @@ class InnerRCE extends Component {
 
   onClickOutside = e => {
     if (
+      this.state.showToolbars &&
       this.editorWrapper &&
       e.target &&
       !e.target.closest('[data-id=rich-content-editor-modal]') &&
