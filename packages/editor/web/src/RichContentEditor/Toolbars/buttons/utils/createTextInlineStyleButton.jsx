@@ -36,7 +36,6 @@ export default ({ style, Icon, tooltipTextKey }) =>
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textInlineStyleButton_${textForHooks}`;
-
       return (
         <TextButton
           icon={Icon}
