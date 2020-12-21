@@ -1319,19 +1319,19 @@
           "size": "content",
           "alignment": "center",
           "colsWidth": [
-            "auto",
-            "auto",
-            76,
-            90,
-            "auto",
-            "auto"
+            170.651376146789,
+            170.651376146789,
+            126.74108053007136,
+            135.72273190621814,
+            214.56167176350664,
+            158.67584097859327
           ],
           "rowsHeight": [
             47,
             47,
             47,
             47,
-            47,
+            48,
             47,
             47,
             47
@@ -2912,12 +2912,12 @@
           "size": "content",
           "alignment": "center",
           "colsWidth": [
-            "auto",
-            "auto",
-            "auto",
-            "auto",
-            "auto",
-            "auto"
+            119.61904761904762,
+            193.384126984127,
+            156.5015873015873,
+            156.5015873015873,
+            156.5015873015873,
+            156.5015873015873
           ],
           "rowsHeight": [
             47,
@@ -3410,11 +3410,11 @@
           "size": "content",
           "alignment": "center",
           "colsWidth": [
-            306,
-            "auto",
-            "auto",
-            118,
-            "auto"
+            380,
+            151,
+            120,
+            145,
+            149
           ],
           "rowsHeight": [
             47,
@@ -3546,7 +3546,7 @@
           "size": "content",
           "alignment": "center",
           "colsWidth": [
-            "auto"
+            10
           ],
           "rowsHeight": [
             47
@@ -4395,9 +4395,9 @@
           "size": "content",
           "alignment": "center",
           "colsWidth": [
-            "auto",
-            "auto",
-            "auto"
+            10,
+            10,
+            10
           ],
           "rowsHeight": [
             47,
@@ -4409,5 +4409,5 @@
       }
     }
   },
-  "VERSION": "8.7.6"
+  "VERSION": "8.8.2"
 }
