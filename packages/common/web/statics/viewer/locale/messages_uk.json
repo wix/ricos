@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "Людей, які проголосували за цю відповідь: {{count}}",
   "Spoiler_Reveal_Video_Placeholder": "У цьому відео є спойлер",
   "Preview_SeeFullPost_Label": "Переглянути весь пост",
-  "UploadFile_Viewer_Download": "Завантажити {{fileType}}"
+  "UploadFile_Viewer_Download": "Завантажити {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}} хв.",
+  "Embed_Vertical_Units_Hour": "{{hours}} г."
 }
