@@ -1,4 +1,4 @@
-# Changelog
+****# Changelog
 
 > **Tags:**
 >
@@ -17,12 +17,39 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `button`
-  - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
+### :house: Internal
+- `native-polyfill`
+  - [#1887](https://github.com/wix-incubator/rich-content/pull/1887) add native loaders for button, accordion, link-preview & sound-cloud
 
 </details>
 <hr/>
+
+## 8.9.0 (Dec 20, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1875](https://github.com/wix-incubator/rich-content/pull/1875) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+- `mobileNativeLoader`
+  - [#1867](https://github.com/wix-incubator/rich-content/pull/1867) create mobile native plugin loader bundle
+- `gallery`
+  - [#1881](https://github.com/wix-incubator/rich-content/pull/1881) mobile native item loader
+
+### :house: Internal
+- `editor-common`
+  - [#1880](https://github.com/wix-incubator/rich-content/pull/1880) moved `handleUndoRedoCommands` to editor-common
+
+## 8.8.2 (Dec 16, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1845](https://github.com/wix-incubator/rich-content/pull/1845) disable list item block type override when single block is pasted
+
+## 8.8.1 (Dec 14, 2020)
+### :bug: Bug Fix
+- `button`
+  - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
+- `emoji`
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix the external toolbar popup styles
+- `giphy`
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix the external toolbar popup styles
 
 ## 8.8.0 (Dec 13, 2020)
 ### :rocket: New Feature
@@ -32,13 +59,10 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
-- `general`
-  - [#1861](https://github.com/wix-incubator/rich-content/pull/1861) improve theming non-overrides to ensure non-breaking cssOverrides
+- `emoji`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 - `giphy`
-  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
-- `image`
-  - [#1851](https://github.com/wix-incubator/rich-content/pull/1851) added rtl-ignore to fix the expand icon location
-
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 ### :book: Documentation
 - [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
 

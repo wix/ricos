@@ -1,6 +1,6 @@
 {
   "wix-rich-content-plugin-accordion": 163,
-  "wix-rich-content-plugin-button": 180,
+  "wix-rich-content-plugin-button": 178,
   "wix-rich-content-plugin-code-block": 171,
   "wix-rich-content-plugin-divider": 160,
   "wix-rich-content-plugin-emoji": 155,
@@ -37,5 +37,10 @@
   "ricos-editor": 705,
   "ricos-editor-no-modal": 705,
   "ricos-editor-with-plugins": 873,
+  "rce": 679,
+  "rce-with-plugins": 849,
+  "ricos-editor": 704,
+  "ricos-editor-no-modal": 704,
+  "ricos-editor-with-plugins": 874,
   "ricos-common": 16
 }
