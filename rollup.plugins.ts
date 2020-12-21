@@ -205,6 +205,7 @@ const replace = (): Plugin => {
 const uglify = (): Plugin => {
   return terser({
     mangle: false,
+    output: { comments: false },
   });
 };
 
