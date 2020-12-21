@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} personer har röstat på det här svaret",
   "Spoiler_Reveal_Video_Placeholder": "Videon innehåller en spoiler",
   "Preview_SeeFullPost_Label": "Se hela inlägget",
-  "UploadFile_Viewer_Download": "Ladda ner {{fileType}}"
+  "UploadFile_Viewer_Download": "Ladda ner {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}} min",
+  "Embed_Vertical_Units_Hour": "{{hours}} h"
 }

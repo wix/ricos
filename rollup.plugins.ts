@@ -167,6 +167,7 @@ const json = (): Plugin => {
       'node_modules/**',
       '../../../node_modules/**',
       '../../../packages/**/package.json',
+      '../../common/web/dist/statics/schemas/*.schema.json',
     ],
   });
 };

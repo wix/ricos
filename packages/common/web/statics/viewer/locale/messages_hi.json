@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} लोगों ने इस उत्तर के लिए वोट किया",
   "Spoiler_Reveal_Video_Placeholder": "इस वीडियो में एक स्पॉइलर है",
   "Preview_SeeFullPost_Label": "पूरी पोस्ट देखें",
-  "UploadFile_Viewer_Download": "{{fileType}} डाउनलोड करें"
+  "UploadFile_Viewer_Download": "{{fileType}} डाउनलोड करें",
+  "Embed_Vertical_Units_Hour": "{{hours}} घंटे",
+  "Embed_Vertical_Units_Minute": "{{minutes}} मिनट"
 }

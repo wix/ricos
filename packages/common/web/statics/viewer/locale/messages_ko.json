@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "해당 답변에 응답한 이용자는 {{count}}명입니다.",
   "Spoiler_Reveal_Video_Placeholder": "동영상에 스포일러가 포함되어 있습니다.",
   "Preview_SeeFullPost_Label": "전체 게시물 보기",
-  "UploadFile_Viewer_Download": "{{fileType}} 다운로드"
+  "UploadFile_Viewer_Download": "{{fileType}} 다운로드",
+  "Embed_Vertical_Units_Minute": "{{minutes}}분",
+  "Embed_Vertical_Units_Hour": "{{hours}}시"
 }
