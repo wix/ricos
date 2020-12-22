@@ -35,7 +35,7 @@ import toConstantCase from 'to-constant-case';
 type Range = RicosInlineStyleRange | RicosEntityRange;
 type RangeData = Pick<RicosInlineStyleRange, 'style'> | Pick<RicosEntityRange, 'key'>;
 
-const createTimestamp = (): google.protobuf.Timestamp => {
+const createTimestamp = () => {
   const timeMS = Date.now();
   return {
     seconds: Math.floor(timeMS / 1000),
