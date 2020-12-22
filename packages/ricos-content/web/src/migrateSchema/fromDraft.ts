@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { isEmpty, inRange } from 'lodash';
 import {
@@ -14,11 +13,7 @@ import {
   EntityTypeDataMap,
   PluginTypeMap,
 } from './consts';
-import AAA from 'ricos-schema';
-console.dir(AAA);
-type RicosContent = any;
-type Decoration = any;
-type Node = any;
+import { RicosContent, Decoration, Node, google } from 'ricos-schema';
 import { genKey } from 'draft-js';
 import {
   ANCHOR_TYPE,
@@ -35,7 +30,7 @@ import toConstantCase from 'to-constant-case';
 type Range = RicosInlineStyleRange | RicosEntityRange;
 type RangeData = Pick<RicosInlineStyleRange, 'style'> | Pick<RicosEntityRange, 'key'>;
 
-const createTimestamp = () => {
+const createTimestamp = (): google.protobuf.Timestamp => {
   const timeMS = Date.now();
   return {
     seconds: Math.floor(timeMS / 1000),
@@ -334,7 +329,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   parseBlocks();
 
-  const ricosContentMessage = AAA.RicosContent.fromObject({
+  const ricosContentMessage = RicosContent.fromObject({
     doc: {
       nodes,
       lastEdited: createTimestamp(),
@@ -345,14 +340,14 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     version: version || '',
   });
 
-  const err = AAA.RicosContent.verify(ricosContentMessage);
+  const err = RicosContent.verify(ricosContentMessage);
   if (err) {
     console.log('ERROR! Invalid content');
     console.log(err);
     process.exit(1);
   }
 
-  const ricosContent = AAA.RicosContent.toObject(ricosContentMessage, {
+  const ricosContent = RicosContent.toObject(ricosContentMessage, {
     arrays: true,
     enums: String,
     longs: Number,

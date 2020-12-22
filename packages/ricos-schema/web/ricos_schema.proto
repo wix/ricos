@@ -19,6 +19,7 @@ import "plugin_poll_schema.proto";
 import "plugin_sound_cloud_schema.proto";
 import "plugin_video_schema.proto";
 import "plugin_vertical_embed_schema.proto";
+import "plugin_emoji_schema.proto";
 
 message RicosContent {
     Document doc = 1 [required = true]; /// Document root
@@ -75,6 +76,7 @@ message Decoration {
     oneof data {
         RicosColor ricos_color = 2;
         RicosAlignment ricos_alignment = 3;
+        RicosEmoji ricos_emoji = 4;
     }
 }
 
