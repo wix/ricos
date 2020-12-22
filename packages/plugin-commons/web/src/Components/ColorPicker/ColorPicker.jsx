@@ -23,6 +23,10 @@ class ColorPicker extends PureComponent {
     this.onCustomColorPicked = this.onCustomColorPicked.bind(this);
   }
 
+  componentDidMount() {
+    import('./CustomColorPicker'); //prefetch
+  }
+
   componentWillReceiveProps(props) {
     if (this.props.color !== props.color) {
       this.setState({ color: props.color });
@@ -98,7 +102,11 @@ class ColorPicker extends PureComponent {
   renderAddColorButton = () => {
     const { styles } = this;
     return (
-      <div key={`add_color_button_${this.id}`} className={styles.colorPicker_add_color_button}>
+      <div
+        key={`add_color_button_${this.id}`}
+        className={styles.colorPicker_add_color_button}
+        data-hook="addColor"
+      >
         <button
           id={`add_color_button_${this.id}`}
           className={styles.colorPicker_color_button_hidden}
@@ -128,6 +136,7 @@ class ColorPicker extends PureComponent {
         />
         <label // eslint-disable-line
           onClick={this.resetColor}
+          data-hook="resetColor"
           tabIndex={0} // eslint-disable-line
           className={styles.colorPicker_reset_color_label}
           htmlFor={`reset_color_button_${this.id}`}

@@ -6,6 +6,7 @@ import {
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
 } from 'wix-rich-content-common';
+import { isListType } from 'ricos-content';
 
 const styles = { ...editorStyles, ...alignmentStyles };
 const types = {
@@ -20,9 +21,6 @@ const types = {
   'code-block': 'codeBlock',
   'ordered-list-item': 'orderedList',
   'unordered-list-item': 'unorderedList',
-};
-const isList = type => {
-  return type === 'ordered-list-item' || type === 'unordered-list-item';
 };
 
 const listAlignmentClass = (textAlignment, textDirection) => {
@@ -53,7 +51,7 @@ export default (theme, styleToClass, defaultTextAlignment) => {
       classList.push(
         styles[textAlignment],
         theme[textAlignment],
-        isList(type)
+        isListType(type)
           ? listAlignmentClass(textAlignment, textDirection)
           : [depthClassName(depth), textBlockAlignmentClass(textAlignment, textDirection)]
       );

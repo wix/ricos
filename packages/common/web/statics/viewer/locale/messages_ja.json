@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}}人がこの回答に投票しました",
   "Spoiler_Reveal_Video_Placeholder": "この動画にはぼかしが入っています",
   "Preview_SeeFullPost_Label": "記事全文を表示",
-  "UploadFile_Viewer_Download": "ダウンロード：{{fileType}}"
+  "UploadFile_Viewer_Download": "ダウンロード：{{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}}分",
+  "Embed_Vertical_Units_Hour": "{{hours}}時間"
 }

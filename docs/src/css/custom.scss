@@ -67,7 +67,11 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 }
 
 a code {
-    color: var(--ifm-code-color);
+    color: f5f6f7;
+}
+
+.codeBlock pre {
+	background-color: #f5f6f7;
 }
 
 /* .markdown {
