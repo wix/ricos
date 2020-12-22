@@ -14,16 +14,18 @@
 
   &:hover {
     button {
-      background-color: transparent;
-    }
+      background-color: rgba($fallbackColor, 0.06);
+    } 
     // .inlineToolbarButton_icon,
     // .inlineToolbarButton_icon svg,
     // .inlineToolbarDropdownButton_icon svg {
     //   @include fillWithActionColor();
     // }
   }
+  
+
   &.inlineToolbarButton_active button {
-    background-color: rgba($action-color-fallback-tuple, 0.1);
+    background-color: rgba($action-color-fallback-tuple, 0.1) !important;
   }
 }
 
