@@ -12,11 +12,10 @@
       color: $action-color;
       fill: $action-color;
     }
-  }
-  &:hover {
     button {
       background-color: transparent !important;
-    }}
+    }
+  }
 }
 
 .mobileToolbarButton {
