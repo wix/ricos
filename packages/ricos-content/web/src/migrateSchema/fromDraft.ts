@@ -15,6 +15,7 @@ import {
   PluginTypeMap,
 } from './consts';
 import AAA from 'ricos-schema';
+console.dir(AAA);
 type RicosContent = any;
 type Decoration = any;
 type Node = any;
