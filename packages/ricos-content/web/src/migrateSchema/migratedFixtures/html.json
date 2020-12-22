@@ -4,7 +4,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4t130"
+        "key": "o1i8"
       },
       {
         "nodes": [],
@@ -24,7 +24,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "857au",
+            "key": "7foha",
             "ricosText": {
               "decorations": [],
               "text": "Wide embed. In mobile full width. In desktop 740px "
@@ -32,7 +32,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "8qfdd"
+        "key": "4htto"
       },
       {
         "nodes": [],
@@ -50,17 +50,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f672t"
+        "key": "9kokh"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7r06a"
+        "key": "72f09"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3tift"
+        "key": "csj84"
       },
       {
         "nodes": [],
@@ -78,26 +78,26 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "aihk1"
+        "key": "3f3h1"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "64deb"
+        "key": "f0kna"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ascsq"
+        "key": "3n7c1"
       }
     ],
     "lastEdited": {
-      "seconds": 1608633047,
-      "nanos": 826000000
+      "seconds": 1608637167,
+      "nanos": 755000000
     }
   },
   "selection": {
-    "anchorNode": "4t130"
+    "anchorNode": "o1i8"
   },
   "version": "7.1.5"
 }

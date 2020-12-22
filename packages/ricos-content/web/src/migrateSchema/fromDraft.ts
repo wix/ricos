@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { isEmpty, inRange } from 'lodash';
 import {
@@ -13,7 +14,10 @@ import {
   EntityTypeDataMap,
   PluginTypeMap,
 } from './consts';
-import { RicosContent, Decoration, Node, google } from 'ricos-schema';
+import AAA from 'ricos-schema';
+type RicosContent = any;
+type Decoration = any;
+type Node = any;
 import { genKey } from 'draft-js';
 import {
   ANCHOR_TYPE,
@@ -329,7 +333,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   parseBlocks();
 
-  const ricosContentMessage = RicosContent.fromObject({
+  const ricosContentMessage = AAA.RicosContent.fromObject({
     doc: {
       nodes,
       lastEdited: createTimestamp(),
@@ -340,14 +344,14 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     version: version || '',
   });
 
-  const err = RicosContent.verify(ricosContentMessage);
+  const err = AAA.RicosContent.verify(ricosContentMessage);
   if (err) {
     console.log('ERROR! Invalid content');
     console.log(err);
     process.exit(1);
   }
 
-  const ricosContent = RicosContent.toObject(ricosContentMessage, {
+  const ricosContent = AAA.RicosContent.toObject(ricosContentMessage, {
     arrays: true,
     enums: String,
     longs: Number,
