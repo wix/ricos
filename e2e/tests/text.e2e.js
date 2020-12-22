@@ -147,7 +147,7 @@ describe('text', () => {
   it('should insert external link', function() {
     const testAppConfig = {
       ...usePluginsConfig({
-        LINK: {
+        link: {
           isExternalModal: true,
         },
       }),
