@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1886](https://github.com/wix-incubator/rich-content/pull/1886) `injectedContent` prop allows injecting content to mounted editor without remount
 
 </details>
 <hr/>
