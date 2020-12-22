@@ -116,6 +116,7 @@ const plugins = {
       pluginLineSpacing().createPlugin,
       pluginLink().createPlugin,
       pluginCodeBlock().createPlugin,
+      pluginImage().createPlugin,
     ],
   }),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),

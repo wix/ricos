@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import ToolbarButton from '../ToolbarButton.jsx';
 
 class DropdownButton extends Component {

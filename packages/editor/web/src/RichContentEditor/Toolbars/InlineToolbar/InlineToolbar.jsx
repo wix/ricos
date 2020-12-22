@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE, getVisibleSelectionRect } from 'wix-rich-content-editor-common';
 import stylesRtlIgnore from '../../../../statics/styles/inline-toolbar.rtlignore.scss';

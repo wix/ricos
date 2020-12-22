@@ -1,18 +1,18 @@
-$PANEL_WIDTH: 216px;
-$PANEL_HEIGHT: 116px;
+$PANEL_WIDTH: 184px;
+$PANEL_HEIGHT: 89px;
 $PANEL_MAX_WIDTH: 360px;
 
 .textColorModal {
   display: inline-table;
   min-height: $PANEL_HEIGHT;
-  height: auto;
+  height: 89px;
   position: absolute;
   border-radius: 6px;
   border: solid 1px #ededed;
   margin: 0px;
   min-width: $PANEL_WIDTH;
   max-width: $PANEL_MAX_WIDTH;
-  width: auto;
+  width: 184px;
   background: white;
 }
 

@@ -125,6 +125,10 @@ const commonjs = (): Plugin => {
       exportList: ['List', 'OrderedSet', 'Map'],
     },
     {
+      path: 'node_modules/react-google-maps/lib/index.js',
+      exportList: ['withGoogleMap', 'GoogleMap', 'Marker', 'InfoWindow'],
+    },
+    {
       path: 'node_modules/draft-js/lib/Draft.js',
       exportList: [
         'SelectionState',
@@ -167,6 +171,7 @@ const json = (): Plugin => {
       'node_modules/**',
       '../../../node_modules/**',
       '../../../packages/**/package.json',
+      '../../common/web/dist/statics/schemas/*.schema.json',
     ],
   });
 };
