@@ -22,7 +22,7 @@
   - [#1886](https://github.com/wix-incubator/rich-content/pull/1886) `injectedContent` prop allows injecting content to mounted editor without remount
 ### :bug: Bug Fix
 - `gallery`
-  - [#1897](https://github.com/wix-incubator/rich-content/pull/1897) fix gallery styles (affects college layout)
+  - [#1897](https://github.com/wix-incubator/rich-content/pull/1897) fix gallery styles (college layout)
 
 </details>
 <hr/>
