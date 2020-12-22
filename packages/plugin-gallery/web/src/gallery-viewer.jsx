@@ -227,7 +227,11 @@ class GalleryViewer extends React.Component {
             domId={this.domId}
             allowSSR={!!seoMode}
             items={items}
-            styles={{ ...styleParams, hoveringBehaviour: 'NO_CHANGE' }}
+            styles={{
+              ...DEFAULTS.styles,
+              ...styleParams,
+              hoveringBehaviour: 'NO_CHANGE',
+            }}
             container={size}
             settings={galleySettings}
             scrollingElement={scrollingElement}
