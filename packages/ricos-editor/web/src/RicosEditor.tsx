@@ -8,7 +8,12 @@ import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
-import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
+import {
+  convertToRaw,
+  convertFromRaw,
+  createWithContent,
+} from 'wix-rich-content-editor/libs/editorStateConversion';
+import { isEqual } from 'lodash';
 
 import { ToolbarType } from 'wix-rich-content-common';
 
@@ -16,6 +21,7 @@ interface State {
   StaticToolbar?: ElementType;
   localeStrategy: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
+  editorState?: EditorState;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -54,6 +60,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   componentWillReceiveProps(newProps: RicosEditorProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
+    }
+    if (
+      newProps.injectedContent &&
+      !isEqual(this.props.injectedContent, newProps.injectedContent)
+    ) {
+      console.debug('new content provided as editorState'); // eslint-disable-line
+      this.setState({ editorState: createWithContent(convertFromRaw(newProps.injectedContent)) });
     }
   }
 
@@ -117,8 +130,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   render() {
-    const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
-    const { StaticToolbar, localeStrategy, remountKey } = this.state;
+    const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
+    const { StaticToolbar, localeStrategy, remountKey, editorState } = this.state;
+
+    const contentProp = editorState
+      ? { editorState: { editorState }, content: {} }
+      : { editorState: {}, content: { content } };
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
@@ -140,6 +157,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           isViewer={false}
           key={'editor'}
           toolbarSettings={toolbarSettings}
+          {...contentProp.content}
           {...props}
         >
           {React.cloneElement(child, {
@@ -147,6 +165,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             ref: this.setEditorRef,
             editorKey: 'editor',
             setEditorToolbars: this.setStaticToolbar,
+            ...contentProp.editorState,
             ...supportedDraftEditorSettings,
             ...localeStrategy,
           })}
