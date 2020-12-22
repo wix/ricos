@@ -64,7 +64,6 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
       input: viewerPath,
       output: cloneDeep(output).map(o => {
         if (o.file) {
-          const anchor = o.file.indexOf('.');
           o.file = addPartToFilename(o.file, 'viewer');
         }
         return o;

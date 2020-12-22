@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import TextButton from '../TextButton';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 
 export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
   class TextDropdownButton extends PureComponent {
