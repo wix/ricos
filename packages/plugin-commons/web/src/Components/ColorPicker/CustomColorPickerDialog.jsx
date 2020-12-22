@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import CustomColorPicker from './CustomColorPicker';
 import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
+
+const CustomColorPicker = lazy(() => import('./CustomColorPicker'));
 
 class CustomColorPickerDialog extends Component {
   constructor(props) {
@@ -36,13 +37,15 @@ class CustomColorPickerDialog extends Component {
     const { t, isMobile, theme } = this.props;
     return (
       <div className={styles.colorPickerDialog}>
-        <CustomColorPicker
-          color={this.state.color}
-          onChange={this.onChange}
-          t={t}
-          isMobile={isMobile}
-          theme={theme}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CustomColorPicker
+            color={this.state.color}
+            onChange={this.onChange}
+            t={t}
+            isMobile={isMobile}
+            theme={theme}
+          />
+        </Suspense>
         <hr className={styles.colorPickerDialog_separator} />
         <div className={styles.colorPickerDialog_buttons}>
           <button className={styles.colorPickerDialog_button} onClick={this.onCancel}>
@@ -53,6 +56,7 @@ class CustomColorPickerDialog extends Component {
               styles.colorPickerDialog_button,
               styles.colorPickerDialog_button_update
             )}
+            data-hook="colorPickerUpdateButton"
             onClick={this.onUpdate}
           >
             {t('ColorPickerButtonLabel_Update')}
