@@ -82,7 +82,7 @@ const configs = {
   },
   link: {
     onLinkAdd: async saveData => {
-      const data = await Promise.resolve({ externalData: {} });
+      const data = await Promise.resolve({ mockURL: 'www.sport5.co.il', mockData: {} });
       saveData(data);
     },
   },
