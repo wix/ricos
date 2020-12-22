@@ -16,6 +16,9 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+	
+### :book: Documentation
+- [#1899](https://github.com/wix-incubator/rich-content/pull/1899) algolia search integrated
 
 
 </details>
