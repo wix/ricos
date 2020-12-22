@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-commons",
-  "version": "8.9.1",
+  "version": "8.9.2",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -19,14 +19,14 @@
     "libs",
     "viewer"
   ],
-  "main": "dist/module.cjs.js",
+  "main": "dist/cjs/index.js",
   "types": "dist/src/index.d.ts",
-  "module": "dist/module.js",
+  "module": "dist/es/index.js",
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-commons -c ../../../rollup.config.js",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:plugin-commons -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
@@ -34,10 +34,10 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "react-color": "~2.17.3",
+    "react-colorful": "^4.4.3",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "8.9.1",
-    "wix-rich-content-editor-common": "8.9.1"
+    "wix-rich-content-common": "8.9.2",
+    "wix-rich-content-editor-common": "8.9.2"
   },
   "unpkg": true,
   "publishConfig": {

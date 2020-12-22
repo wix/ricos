@@ -27,7 +27,7 @@ const externals = [
 ];
 
 const excludedExternalsRegexArr = [
-  /react-click-outside/,
+  /react-click-outsider/,
   /wix-rich-content-editor-common\/.*?\.scss/,
   /wix-rich-content-common\/.*?\.scss/,
 ];

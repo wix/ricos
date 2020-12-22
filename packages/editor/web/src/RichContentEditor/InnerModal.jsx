@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RichContentEditorModal from './RichContentEditorModal';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import { getLangDir } from 'wix-rich-content-common';
 
 class InnerModal extends Component {
