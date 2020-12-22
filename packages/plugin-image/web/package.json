@@ -1,6 +1,10 @@
 {
   "name": "wix-rich-content-plugin-image",
-  "version": "8.7.1",
+<<<<<<< Updated upstream
+  "version": "8.9.2",
+=======
+  "version": "8.8.2",
+>>>>>>> Stashed changes
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -36,9 +40,15 @@
   },
   "dependencies": {
     "image-client-api": "1.2218.0",
-    "wix-rich-content-common": "8.7.1",
-    "wix-rich-content-editor-common": "8.7.1",
-    "wix-rich-content-plugin-commons": "8.7.1"
+<<<<<<< Updated upstream
+    "wix-rich-content-common": "8.9.2",
+    "wix-rich-content-editor-common": "8.9.2",
+    "wix-rich-content-plugin-commons": "8.9.2"
+=======
+    "wix-rich-content-common": "8.8.2",
+    "wix-rich-content-editor-common": "8.8.2",
+    "wix-rich-content-plugin-commons": "8.8.2"
+>>>>>>> Stashed changes
   },
   "unpkg": true,
   "publishConfig": {

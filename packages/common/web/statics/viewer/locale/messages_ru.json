@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "За этот ответ проголосовали {{count}} чел.",
   "Spoiler_Reveal_Video_Placeholder": "Видео содержит спойлер",
   "Preview_SeeFullPost_Label": "Показать весь пост",
-  "UploadFile_Viewer_Download": "Скачать {{fileType}}"
+  "UploadFile_Viewer_Download": "Скачать {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}} мин.",
+  "Embed_Vertical_Units_Hour": "{{hours}} ч."
 }

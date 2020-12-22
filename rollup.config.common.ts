@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { readdirSync, accessSync } from 'fs';
+import { readdirSync, existsSync } from 'fs';
 import { cloneDeep } from 'lodash';
 import { plugins as createPlugins, lastEntryPlugins } from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
@@ -58,21 +58,19 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
   } catch (_) {}
 
   let viewerEntry: RollupOptions[] = [];
-  try {
-    let viewerPath = 'src/viewer.ts';
-    accessSync(`./${viewerPath}`);
+  const viewerPath = 'src/viewer.ts';
+  if (existsSync(`./${viewerPath}`)) {
     viewerEntry.push({
       input: viewerPath,
       output: cloneDeep(output).map(o => {
         if (o.file) {
-          const anchor = o.file.indexOf('.');
           o.file = addPartToFilename(o.file, 'viewer');
         }
         return o;
       }),
       ...commonOptions,
     });
-  } catch (_) {}
+  }
 
   let entries;
   if (process.env.MODULE_ANALYZE_EDITOR) {
@@ -81,6 +79,24 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     entries = [...viewerEntry, ...libEntries];
   } else {
     entries = [editorEntry, ...viewerEntry, ...libEntries];
+  }
+
+  const mobileNativeLoaderPath = 'src/mobileNativeLoader.js';
+  if (existsSync(`./${mobileNativeLoaderPath}`)) {
+    entries.push({
+      input: mobileNativeLoaderPath,
+      output: {
+        file: 'dist/mobileNativeLoader.js',
+        format: 'iife',
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          lodash: '_',
+        },
+      },
+      ...commonOptions,
+      external: source => ['lodash', 'react', 'react-dom'].includes(source),
+    });
   }
   const lastEntry = entries[entries.length - 1];
   lastEntry.plugins = [...lastEntry.plugins, ...lastEntryPlugins];

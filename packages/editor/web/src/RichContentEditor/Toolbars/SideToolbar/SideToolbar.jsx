@@ -42,6 +42,8 @@ export default class SideToolbar extends PureComponent {
 
   componentDidMount() {
     this.props.pubsub.subscribe('editorState', this.onEditorStateChange);
+    const getEditorState = this.props.pubsub.get('getEditorState');
+    this.onEditorStateChange(getEditorState());
   }
 
   componentWillUnmount() {

@@ -29,6 +29,9 @@ export const BLOCK_TYPES = Object.freeze([
 export const UNSTYLED = 'unstyled';
 export const BLOCKQUOTE = 'blockquote';
 
+export const isListType = (type: string): boolean =>
+  type === 'ordered-list-item' || type === 'unordered-list-item';
+
 /* eslint-disable camelcase */
 export const LINK_BUTTON_TYPE = 'wix-draft-plugin-link-button';
 export const ACTION_BUTTON_TYPE = 'wix-draft-plugin-action-button';
@@ -64,3 +67,4 @@ export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 export const POLL_TYPE = 'wix-draft-plugin-poll';
 export const TABLE_TYPE = 'table';
 export const PREVIEW = 'PREVIEW';
+export const UNAVAILABLE_ON_ONEAPP_TYPE = 'unavailableononeapp';

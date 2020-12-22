@@ -1,6 +1,10 @@
 {
   "name": "wix-rich-content-common",
-  "version": "8.7.1",
+<<<<<<< Updated upstream
+  "version": "8.9.2",
+=======
+  "version": "8.8.2",
+>>>>>>> Stashed changes
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -42,7 +46,11 @@
     "react-i18next": "^7.0.0",
     "react-intersection-observer": "~8.24.1",
     "react-portal-tooltip": "^2.4.7",
-    "ricos-content": "8.7.1"
+<<<<<<< Updated upstream
+    "ricos-content": "8.9.2"
+=======
+    "ricos-content": "8.8.2"
+>>>>>>> Stashed changes
   },
   "unpkg": true,
   "publishConfig": {

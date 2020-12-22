@@ -57,6 +57,7 @@ const DEFAULT_SETTINGS = {
 };
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
+  supportedPluginsOnOneApp?: string[];
   settings: Record<string, any> & EditorPluginConfig;
   customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
@@ -253,6 +254,23 @@ const createBasePlugin = (
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
+        if (
+          type === 'wix-draft-plugin-action-button' ||
+          type === 'unavailableononeapp' ||
+          !config.supportedPluginsOnOneApp.includes(type)
+        ) {
+          return {
+            component: DecoratedCompWithBase,
+            editable: false,
+            props: {
+              getData: getData(contentBlock, { getEditorState }),
+              setData: setData(contentBlock, { getEditorState, setEditorState }),
+              deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
+              type: 'unavailableononeapp',
+              unsupportedType: type,
+            },
+          };
+        }
         if (config.type === type || config.legacyType === type) {
           return {
             component: DecoratedCompWithBase,

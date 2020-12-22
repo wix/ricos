@@ -1,6 +1,10 @@
 {
   "name": "ricos-driver",
-  "version": "8.7.1",
+<<<<<<< Updated upstream
+  "version": "8.9.2",
+=======
+  "version": "8.8.2",
+>>>>>>> Stashed changes
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"

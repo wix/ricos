@@ -454,7 +454,8 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('create link button & customize it', function() {
+    //TODO: fix this flaky test
+    it.skip('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click()
@@ -727,6 +728,15 @@ describe('plugins', () => {
         .focusAccordion(1)
         .type('Yes\n')
         .focusAccordion(2);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert image in accordion', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
+        .focusAccordion(2)
+        .type('Image in accordion');
+      cy.insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      cy.wait(1000);
       cy.eyesCheckWindow(this.test.title);
     });
 

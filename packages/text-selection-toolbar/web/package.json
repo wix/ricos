@@ -1,6 +1,10 @@
 {
   "name": "wix-rich-content-text-selection-toolbar",
-  "version": "8.7.1",
+<<<<<<< Updated upstream
+  "version": "8.9.2",
+=======
+  "version": "8.8.2",
+>>>>>>> Stashed changes
   "author": {
     "name": "Dana Rish",
     "email": "danari@wix.com"

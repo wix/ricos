@@ -1,6 +1,10 @@
 {
   "name": "wix-rich-content-plugin-mentions",
-  "version": "8.7.1",
+<<<<<<< Updated upstream
+  "version": "8.9.2",
+=======
+  "version": "8.8.2",
+>>>>>>> Stashed changes
   "author": {
     "name": "Vytenis Butkevicius",
     "email": "vytenisb@wix.com"
@@ -36,9 +40,15 @@
   },
   "dependencies": {
     "draft-js-mention-plugin": "~3.1.3",
-    "wix-rich-content-common": "8.7.1",
-    "wix-rich-content-editor-common": "8.7.1",
-    "wix-rich-content-plugin-commons": "8.7.1"
+<<<<<<< Updated upstream
+    "wix-rich-content-common": "8.9.2",
+    "wix-rich-content-editor-common": "8.9.2",
+    "wix-rich-content-plugin-commons": "8.9.2"
+=======
+    "wix-rich-content-common": "8.8.2",
+    "wix-rich-content-editor-common": "8.8.2",
+    "wix-rich-content-plugin-commons": "8.8.2"
+>>>>>>> Stashed changes
   },
   "unpkg": true,
   "publishConfig": {

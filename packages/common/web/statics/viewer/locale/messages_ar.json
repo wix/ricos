@@ -25,5 +25,8 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} أشخاص صوتوا لهذه الإجابة",
   "Spoiler_Reveal_Video_Placeholder": "This video contains a spoiler",
   "Preview_SeeFullPost_Label": "عرض المنشور كاملاً",
-  "UploadFile_Viewer_Download": "Download {{fileType}}"
+  "UploadFile_Viewer_Download": "Download {{fileType}}",
+  "Embed_Vertical_Units_Hour": "{{hours}}h",
+  "Embed_Vertical_Units_Minute": "{{minutes}}min"
+
 }
