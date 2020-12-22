@@ -6,6 +6,7 @@
   "Poll_Viewer_ShowAllResults_CTA": "ראה את כל התוצאות",
   "Spoiler_Reveal_Image_Placeholder": "This image contains a spoiler",
   "Poll_Viewer_Multiselect_Footer": "אתה יכול להצביע ליותר מתשובה אחת.",
+  "Embed_Vertical_Units_Minute": "{{minutes}} דקות",
   "UploadFile_Viewer_Loader": "Loading {{fileType}}",
   "Preview_ReadMore_Label": "למידע נוסף",
   "Spoiler_Insert_Tooltip": "Spoiler",
@@ -14,6 +15,7 @@
   "Poll_Viewer_ShowLess_CTA": "הצג פחות",
   "Poll_Viewer_VoteCount_Modal_Voters_Anonymous": "+{{anonNumber}} אנונימי",
   "Poll_Viewer_VoteCount_Modal_Voters_CTA_Follow": "עקוב",
+  "Embed_Vertical_Units_Hour": "{{hours}}h",
   "AccordionPlugin_ExpandButton_AriaLabel": "הפריט הזה מורחב",
   "Poll_Viewer_Toast_Error_ServerDown": "לא ניתן היה להתחבר לשרת. נסה שוב מאוחר יותר.",
   "Poll_Viewer_VoteCount_Modal_Voters_Header": "{{count}} אדם הצביע בעד תשובה זו",
@@ -25,7 +27,5 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} אנשים הצביעו בעד תשובה זו",
   "Spoiler_Reveal_Video_Placeholder": "This video contains a spoiler",
   "Preview_SeeFullPost_Label": "עבור לפוסט המלא",
-  "UploadFile_Viewer_Download": "Download {{fileType}}",
-  "Embed_Vertical_Units_Minute": "{{minutes}}min",
-  "Embed_Vertical_Units_Hour": "{{hours}}h"
+  "UploadFile_Viewer_Download": "הורידו את {{fileType}}"
 }
