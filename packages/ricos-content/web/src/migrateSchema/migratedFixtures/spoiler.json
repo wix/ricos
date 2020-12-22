@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bcuik",
+            "key": "8v8pd",
             "ricosText": {
               "decorations": [
                 {
@@ -19,7 +19,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d7heg",
+            "key": "k6pk",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -27,19 +27,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "3i264"
+        "key": "bdksd"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fka09"
+        "key": "ijvl"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "d8i57",
+            "key": "dqf3d",
             "ricosText": {
               "decorations": [
                 {
@@ -70,7 +70,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5kam8",
+            "key": "ek9im",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -88,7 +88,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5pd57",
+            "key": "4iahu",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow "
@@ -97,7 +97,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8s9o3",
+            "key": "7mum1",
             "ricosText": {
               "decorations": [
                 {
@@ -110,7 +110,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "907tq",
+            "key": "4ffs6",
             "ricosText": {
               "decorations": [],
               "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -125,12 +125,12 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1608477125,
-      "nanos": 777000000
+      "seconds": 1608633047,
+      "nanos": 917000000
     }
   },
   "selection": {
-    "anchorNode": "3i264"
+    "anchorNode": "bdksd"
   },
   "version": "7.9.1"
 }
