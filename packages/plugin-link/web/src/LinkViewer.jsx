@@ -34,8 +34,8 @@ class LinkViewer extends Component {
 
   handleClick = event => {
     const { componentData, isInEditor, settings = {} } = this.props;
-    const { onClick, isExternalModal } = settings;
-    if (isExternalModal) {
+    const { onClick } = settings;
+    if (componentData?.externalData) {
       onClick?.(componentData?.externalData);
     } else {
       const { anchor } = componentData;

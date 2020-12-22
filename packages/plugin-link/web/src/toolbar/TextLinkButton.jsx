@@ -35,9 +35,9 @@ export default class TextLinkButton extends Component {
     const settings = config[LINK_TYPE];
     const linkTypes = settings?.linkTypes;
     const onLinkAdd = settings?.onLinkAdd;
-    const isExternalModal = settings?.isExternalModal;
+    const shouldRenderModal = !onLinkAdd;
 
-    if (!isExternalModal) {
+    if (shouldRenderModal) {
       const OriginalLinkPanel =
         !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
       const modalStyles = getModalStyles({
