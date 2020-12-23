@@ -18,7 +18,7 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/wix-incubator/rich-content.git"
+		"url": "git+https://github.com/wix/ricos.git"
 	},
 	"scripts": {
 		"clean": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && rm -f yarn.lock",
