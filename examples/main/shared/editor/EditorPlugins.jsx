@@ -15,7 +15,7 @@ import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import {
-  createUnavailableOnOneAppPlugin,
+  createUnavailableOnOneappPlugin,
   UNAVAILABLE_ON_ONEAPP_TYPE,
 } from 'wix-rich-content-plugin-unavailable-on-oneapp';
 import {
@@ -127,7 +127,7 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
-  createUnavailableOnOneAppPlugin,
+  createUnavailableOnOneappPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -187,7 +187,7 @@ export const editorPluginsMap = {
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
   accordion: createAccordionPlugin,
-  unavailableOnOneApp: createUnavailableOnOneAppPlugin,
+  unavailableOnOneApp: createUnavailableOnOneappPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -469,7 +469,7 @@ const config = {
       createGiphyPlugin,
       createFileUploadPlugin,
       createEmojiPlugin,
-      createUnavailableOnOneAppPlugin,
+      createUnavailableOnOneappPlugin,
     ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {

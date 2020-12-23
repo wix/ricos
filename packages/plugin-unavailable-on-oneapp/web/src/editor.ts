@@ -3,7 +3,7 @@
   If your plugin uses a modal, then make sure to uncomment 'ModalsMap'.
 */
 
-import { createUnavailableOnOneAppPlugin } from './createUnavailableOnOneAppPlugin';
+import { createUnavailableOnOneappPlugin } from './createUnavailableOnOneappPlugin';
 import { UNAVAILABLE_ON_ONEAPP_TYPE, UnavailableOnOneAppPluginEditorConfig } from './types';
 // import { ModalsMap } from './modals'; // Optional
 // import { theme } from './defaults'; // Optional
@@ -14,7 +14,7 @@ export const pluginUnavailableOnOneApp: EditorPluginCreator<UnavailableOnOneAppP
   return {
     config: { ...DEFAULTS.config, ...config },
     type: UNAVAILABLE_ON_ONEAPP_TYPE,
-    createPlugin: createUnavailableOnOneAppPlugin,
+    createPlugin: createUnavailableOnOneappPlugin,
     // ModalsMap,
     // theme,
   };
