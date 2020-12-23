@@ -20,11 +20,13 @@ export type RicosEntity = Overwrite<RawDraftEntity, { mutability: string }>;
 
 export type RicosEntityMap = { [key: string]: RicosEntity };
 
-export type RicosContent = Overwrite<
-  RawDraftContentState,
-  {
-    blocks: RicosContentBlock[];
-    entityMap: RicosEntityMap;
-    VERSION?: string;
-  }
->;
+export interface RicosContent
+  extends Overwrite<
+    RawDraftContentState,
+    {
+      blocks: RicosContentBlock[];
+      entityMap: RicosEntityMap;
+    }
+  > {
+  VERSION?: string;
+}
