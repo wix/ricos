@@ -38,10 +38,12 @@ if (filename) {
     if (fixture.endsWith('.json')) {
       console.log('Migrating ', fixture);
       const ricosSchema = convertFile(fixture);
-      const prevMigratedFixture = require(`${MIGRATED_FIXTURES_PATH}/${fixture}`);
-      const diff = difference(ricosSchema, prevMigratedFixture);
-      if (Object.keys(diff).length > 0) {
-        hasDifferences = true;
+      if (existsSync(`${MIGRATED_FIXTURES_PATH}/${fixture}`)) {
+        const prevMigratedFixture = require(`${MIGRATED_FIXTURES_PATH}/${fixture}`);
+        const diff = difference(ricosSchema, prevMigratedFixture);
+        if (Object.keys(diff).length > 0) {
+          hasDifferences = true;
+        }
       }
 
       writeFileSync(`${MIGRATED_FIXTURES_PATH}/${fixture}`, JSON.stringify(ricosSchema, null, 2));
