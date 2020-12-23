@@ -1,12 +1,18 @@
 module.exports = {
   title: 'Ricos',
-  tagline: 'A super charged rich content framework with an extensible plugin system',
+  tagline: 'A supercharged rich content framework with an extensible plugin system',
   url: 'https://wix-incubator.github.io/',
   baseUrl: '/rich-content/',
   favicon: 'img/favicon.ico',
   organizationName: 'wix-incubator',
   projectName: 'rich-content',
   themeConfig: {
+    // https://docsearch.algolia.com/docs/faq/#can-i-share-the-apikey-in-my-repo
+    algolia: {
+      apiKey: '1c2337fcafb4c304a30def6efc0b441a',
+      indexName: 'rich-content',
+      algoliaOptions: { facetFilters: ['type:content'] },
+    },
     colorMode: {
       defaultMode: 'dark',
     },

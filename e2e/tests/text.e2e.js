@@ -30,6 +30,18 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('allow to change text color', function() {
+    cy.loadRicosEditorAndViewer('plain')
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 15])
+      .addColor();
+    cy.eyesCheckWindow(this.test.title);
+    cy.setColorByHex('d932c3');
+    cy.updateTextColor();
+    cy.eyesCheckWindow(this.test.title);
+    cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('allow to apply inline styles and links', function() {
     cy.loadRicosEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])

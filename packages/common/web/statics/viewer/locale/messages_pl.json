@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} osób głosowało na tę odpowiedź",
   "Spoiler_Reveal_Video_Placeholder": "Ten film zawiera spoiler",
   "Preview_SeeFullPost_Label": "Zobacz cały post",
-  "UploadFile_Viewer_Download": "Pobierz {{fileType}}"
+  "UploadFile_Viewer_Download": "Pobierz {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}} min",
+  "Embed_Vertical_Units_Hour": "{{hours}} godz."
 }

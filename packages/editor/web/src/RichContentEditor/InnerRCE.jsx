@@ -7,6 +7,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
+import ClickOutside from 'react-click-outsider';
 
 class InnerRCE extends Component {
   constructor(props) {
@@ -14,6 +15,9 @@ class InnerRCE extends Component {
     const { innerRCERenderedIn, config } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.state = {
+      showToolbars: false,
+    };
   }
 
   cleanConfig = config => {
@@ -41,6 +45,34 @@ class InnerRCE extends Component {
     e.stopPropagation();
     this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
+    this.setState({ showToolbars: true });
+  };
+
+  onClickOutside = e => {
+    if (
+      this.state.showToolbars &&
+      this.editorWrapper &&
+      e.target &&
+      !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !this.editorWrapper.contains(e.target)
+    ) {
+      this.setState({ showToolbars: false });
+    }
+  };
+
+  handleAtomicPluginsBorders = () => {
+    const { editing = true } = this.props;
+    const { showToolbars } = this.state;
+    const hideBorder = !showToolbars || !editing;
+    if (this.editorWrapper) {
+      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
+      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
+      atomicBlocks.forEach(block => {
+        const blockDataFocus = block.getAttribute('data-focus');
+        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
+        block.style.boxShadow = hideBorder ? 'none' : '';
+      });
+    }
   };
 
   getToolbars = () => {
@@ -51,6 +83,8 @@ class InnerRCE extends Component {
   focus = () => this.ref.focus();
 
   setRef = ref => (this.ref = ref);
+
+  setEditorWrapper = ref => (this.editorWrapper = ref);
 
   onBackspaceAtBeginningOfContent = editorState => {
     const { onBackspaceAtBeginningOfContent } = this.props;
@@ -80,31 +114,39 @@ class InnerRCE extends Component {
       readOnly,
       editorState,
       onChange,
+      toolbarsToIgnore = [],
+      editing = true,
       ...rest
     } = this.props;
+    const { showToolbars } = this.state;
+    this.handleAtomicPluginsBorders();
     return (
-      <div
-        data-id="inner-rce"
-        onFocus={this.onFocus}
-        className={classNames(styles.editor, theme.editor, 'inner-rce')}
-      >
-        <RichContentEditor
-          {...rest} // {...rest} need to be before editorState, onChange, plugins
-          ref={this.setRef}
-          editorState={editorState}
-          onChange={onChange}
-          plugins={this.plugins}
-          config={this.config}
-          isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
-          isInnerRCE
-          editorKey="inner-rce"
-          readOnly={readOnly}
-          onBackspace={this.onBackspaceAtBeginningOfContent}
-          direction={direction}
-          {...additionalProps}
-        />
-      </div>
+      <ClickOutside onClickOutside={this.onClickOutside}>
+        <div
+          data-id="inner-rce"
+          onFocus={this.onFocus}
+          className={classNames(styles.editor, theme.editor, 'inner-rce')}
+          ref={this.setEditorWrapper}
+        >
+          <RichContentEditor
+            {...rest} // {...rest} need to be before editorState, onChange, plugins
+            ref={this.setRef}
+            editorState={editorState}
+            onChange={onChange}
+            plugins={this.plugins}
+            config={this.config}
+            isMobile={isMobile}
+            toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+            showToolbars={editing && showToolbars}
+            isInnerRCE
+            editorKey="inner-rce"
+            readOnly={readOnly}
+            onBackspace={this.onBackspaceAtBeginningOfContent}
+            direction={direction}
+            {...additionalProps}
+          />
+        </div>
+      </ClickOutside>
     );
   }
 }
@@ -124,6 +166,8 @@ InnerRCE.propTypes = {
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   direction: PropTypes.string,
+  toolbarsToIgnore: PropTypes.array,
+  editing: PropTypes.bool,
 };
 
 export default InnerRCE;

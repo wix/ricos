@@ -21,4 +21,5 @@ export { default as EditIcon } from './EditIcon';
 export { default as RTLIcon } from './RTLIcon';
 export { default as LTRIcon } from './LTRIcon';
 export { default as LoaderIcon } from './LoaderIcon';
+export { default as HashtagIcon } from './HashtagIcon';
 export { default as MoreIcon } from './MoreIcon';

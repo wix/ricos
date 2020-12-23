@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton';
 
