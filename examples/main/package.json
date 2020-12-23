@@ -68,7 +68,7 @@
   "devDependencies": {
     "babel-plugin-preval": "^3.0.1",
     "dotenv-webpack": "^1.7.0",
-    "monaco-editor-webpack-plugin": "^1.7.0",
+    "monaco-editor-webpack-plugin": "^2.0.0",
     "wix-statics-parent": "*"
   },
   "eslintConfig": {
