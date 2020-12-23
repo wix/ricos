@@ -186,14 +186,37 @@ class TableToolbar extends Component {
     );
   };
 
+  renderEditingTextFormattingToolbar = () => {
+    const { isMobile, t, theme } = this.props;
+    const buttonsAsArray = Object.values(this.state.editingToolbarProps.buttons);
+    return (
+      <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
+        <div onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}>
+          <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
+        </div>
+      </ToolbarContainer>
+    );
+  };
+
+  setEditingTextFormattingToolbarProps = editingToolbarProps => {
+    this.setState({ editingToolbarProps });
+  };
+
   render() {
     const { selected, isEditingActive } = this.props;
-    const { isTextFormattingOpen, combinedToolbarProps } = this.state;
-    return !isEmpty(selected) && !isEditingActive ? (
-      <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
-        {combinedToolbarProps && isTextFormattingOpen && this.renderTextFormattingToolbar()}
-        {!isTextFormattingOpen && this.renderMainToolbar()}
-      </ToolbarContainer>
+    const { isTextFormattingOpen, combinedToolbarProps, editingToolbarProps } = this.state;
+    return !isEmpty(selected) ? (
+      <>
+        {isEditingActive ? (
+          editingToolbarProps && this.renderEditingTextFormattingToolbar()
+        ) : (
+          <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
+            {isTextFormattingOpen
+              ? combinedToolbarProps && this.renderTextFormattingToolbar()
+              : this.renderMainToolbar()}
+          </ToolbarContainer>
+        )}
+      </>
     ) : null;
   }
 }

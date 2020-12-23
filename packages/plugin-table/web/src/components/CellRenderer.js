@@ -10,7 +10,6 @@ import {
   isCursorAtFirstLine,
   isCursorAtLastLine,
 } from 'wix-rich-content-editor-common';
-import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getRange } from '../tableUtils';
 import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
@@ -31,6 +30,7 @@ export default class Cell extends Component {
       !this.isEditing(this.props.editing, this.props.selectedCells)
     ) {
       this.props.setEditingActive(false);
+      this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
     if (this.props.selected) {
       if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
@@ -109,18 +109,14 @@ export default class Cell extends Component {
       table,
       isMobile,
       disableSelectedStyle,
-      t,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
-    const toolbarButtons = cloneDeep(
-      this.editorRef?.getToolbarProps?.(TOOLBARS.FORMATTING).buttons
-    );
+    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(TOOLBARS.FORMATTING));
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
-    const buttonsAsArray = toolbarButtons && Object.values(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
     const showFormattingToolbar =
@@ -130,6 +126,11 @@ export default class Cell extends Component {
         .getCellContent(row, col)
         .getSelection()
         .isCollapsed();
+    if (showFormattingToolbar) {
+      this.props.toolbarRef?.setEditingTextFormattingToolbarProps(toolbarButtons);
+    } else if (isEditing) {
+      this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
+    }
     const editorWrapperStyle =
       !isMobile && isEditing ? { minHeight: this.tdHeight, ...additionalStyles } : {};
     return parentCellKey ? null : (
@@ -157,11 +158,6 @@ export default class Cell extends Component {
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
       >
-        {showFormattingToolbar && (
-          <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
-            <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
-          </ToolbarContainer>
-        )}
         <div
           className={classNames(!isMobile && isEditing && styles.editing)}
           style={editorWrapperStyle}
