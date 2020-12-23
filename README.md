@@ -91,8 +91,6 @@ See [rich-content-editor-example](./examples/main) to see how to consume the Com
 - [editor](./examples/main/shared/editor/Editor.jsx)
 - [viewer](./examples/main/shared/viewer/Viewer.jsx)
 
-And check [rich-content-viewer-ssr](./examples/viewer-ssr) to see how to consume the Component as a viewer within a Yoshi-based SSR Application.
-
 ### Modules
 
 - [wix-rich-content-editor](./packages/editor) is the rich content editor React Component.
