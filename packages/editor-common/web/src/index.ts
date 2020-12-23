@@ -76,6 +76,10 @@ export {
   isInSelectionRange,
   cloneDeepWithoutEditorState,
   getEntities,
+  isCursorAtStartOfContent,
+  isCursorAtEndOfContent,
+  isCursorAtFirstLine,
+  isCursorAtLastLine,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';

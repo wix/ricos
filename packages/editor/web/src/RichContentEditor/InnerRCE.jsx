@@ -7,7 +7,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
-import { EditorState } from 'wix-rich-content-editor-common';
+import { EditorState, isCursorAtStartOfContent } from 'wix-rich-content-editor-common';
 
 class InnerRCE extends PureComponent {
   constructor(props) {
@@ -84,15 +84,11 @@ class InnerRCE extends PureComponent {
 
     if (onBackspaceAtBeginningOfContent) {
       const selection = editorState.getSelection();
-      const startKey = selection.getStartKey();
       const contentState = editorState.getCurrentContent();
       const isCollapsed = selection.isCollapsed();
-      const firstBlock = contentState.getBlocksAsArray()[0];
-      const isFirstBlock = firstBlock.getKey() === startKey;
-      const isBeginingOfBlock = selection.getAnchorOffset() === 0;
-      const isUnstyledBlock = firstBlock.getType() === 'unstyled';
+      const isUnstyledBlock = contentState.getBlocksAsArray()[0].getType() === 'unstyled';
 
-      if (isCollapsed && isFirstBlock && isBeginingOfBlock && isUnstyledBlock) {
+      if (isCollapsed && isCursorAtStartOfContent(editorState) && isUnstyledBlock) {
         onBackspaceAtBeginningOfContent();
       }
     }

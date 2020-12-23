@@ -707,3 +707,40 @@ export function deleteCharacterBeforeCursor(editorState: EditorState) {
 export function isPluginFocused(block: ContentBlock, selection: SelectionState) {
   return block.getKey() === selection.getAnchorKey();
 }
+
+export function isCursorAtFirstLine(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  return (
+    editorState
+      .getCurrentContent()
+      .getBlockMap()
+      .first()
+      .getKey() === selection.getFocusKey()
+  );
+}
+
+export function isCursorAtStartOfContent(editorState: EditorState) {
+  const isStartOfLine = editorState.getSelection().getAnchorOffset() === 0;
+  return isCursorAtFirstLine(editorState) && isStartOfLine;
+}
+
+export function isCursorAtLastLine(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  return (
+    editorState
+      .getCurrentContent()
+      .getBlockMap()
+      .last()
+      .getKey() === selection.getFocusKey()
+  );
+}
+
+export function isCursorAtEndOfContent(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  const lastBlock = editorState
+    .getCurrentContent()
+    .getBlockMap()
+    .last();
+  const isEndOfLine = selection.getAnchorOffset() >= lastBlock.getText().length;
+  return isCursorAtLastLine(editorState) && isEndOfLine;
+}

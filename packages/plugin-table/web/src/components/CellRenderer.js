@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import {
+  TOOLBARS,
+  isCursorAtStartOfContent,
+  isCursorAtEndOfContent,
+  isCursorAtFirstLine,
+  isCursorAtLastLine,
+} from 'wix-rich-content-editor-common';
 import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getRange } from '../tableUtils';
 import { cloneDeep } from 'lodash';
@@ -189,11 +195,40 @@ class Editor extends Component {
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
+  handleClipboardEvent = e => {
+    if (this.props.editing) {
+      let shouldPreventDefault;
+      const editorState = this.editor.ref.getEditorState();
+      if (e.key === 'ArrowRight') {
+        isCursorAtEndOfContent(editorState) && (shouldPreventDefault = true);
+      } else if (e.key === 'ArrowLeft') {
+        isCursorAtStartOfContent(editorState) && (shouldPreventDefault = true);
+      } else if (e.key === 'ArrowUp') {
+        isCursorAtFirstLine(editorState) && (shouldPreventDefault = true);
+      } else if (e.key === 'ArrowDown') {
+        isCursorAtLastLine(editorState) && (shouldPreventDefault = true);
+      }
+      if (shouldPreventDefault) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    }
+  };
+
+  setEditorRef = ref => {
+    this.editor = ref;
+    this.props.setEditorRef(ref);
+  };
+
   render() {
-    const { children, setEditorRef, editing } = this.props;
+    const { children, editing } = this.props;
     return (
-      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
-        {React.cloneElement(children, { ref: setEditorRef, editing })}
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      <div
+        className={classNames(styles.editor, editing ? styles.edit : styles.view)}
+        onKeyDown={this.handleClipboardEvent}
+      >
+        {React.cloneElement(children, { ref: this.setEditorRef, editing })}
       </div>
     );
   }
