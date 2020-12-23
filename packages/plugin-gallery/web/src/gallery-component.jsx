@@ -5,6 +5,7 @@ import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS, imageItem } from './defaults';
 import { GALLERY_TYPE } from './types';
+import styles from '../statics/styles/gallery-component.scss';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER =
@@ -202,6 +203,13 @@ class GalleryComponent extends PureComponent {
     this.setState({ isLoading });
   };
 
+  renderMobileNativeLoader = ({ url }) =>
+    url ? null : (
+      <div className={styles.mobileNativeLoaderContainer}>
+        <Loader />
+      </div>
+    );
+
   render() {
     return (
       <>
@@ -218,6 +226,7 @@ class GalleryComponent extends PureComponent {
           anchorTarget={this.props.anchorTarget}
           relValue={this.props.relValue}
           blockKey={this.blockKey}
+          itemOverlayElement={this.renderMobileNativeLoader}
         />
         {this.state.isLoading && this.renderLoader()}
       </>

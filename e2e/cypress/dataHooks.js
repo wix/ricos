@@ -20,6 +20,13 @@ export const INLINE_TOOLBAR_BUTTONS = {
   CODE_BLOCK: 'TextCodeBlockButton',
 };
 
+export const COLOR_PICKER = {
+  ADD_COLOR: 'addColor',
+  COLOR_INPUT: 'colorInput',
+  UPDATE_BUTTON: 'colorPickerUpdateButton',
+  RESET_COLOR: 'resetColor',
+};
+
 export const STATIC_TOOLBAR_BUTTONS_BASIC = {
   DIVIDER: 'DividerPlugin_InsertButton',
   CODE_BLOCK: 'CodeblockPlugin_InsertButton',

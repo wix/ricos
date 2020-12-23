@@ -12,7 +12,7 @@
   background-color: white;
   border-radius: 30px;
   display: none;
-  .gallery_container:hover & {
+  .itemOverlay:hover & {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,7 +26,7 @@
   z-index: 11;
 }
 
-.galleryItem {
+.itemOverlay {
   width: 100%;
   height: 100%;
   top: 0;
