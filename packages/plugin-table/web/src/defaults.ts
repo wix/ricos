@@ -13,8 +13,7 @@ export const getDefaultsSettings = (rowNum = 4, colNum = 4) =>
   Object.freeze({
     type,
     config: {
-      size: 'content',
-      alignment: 'center',
+      ...DEFAULTS.config,
       colsWidth: [...Array(colNum).fill(10)],
       rowsHeight: [...Array(rowNum).fill(ROW_DEFAULT_HEIGHT)],
       rows: createEmptyRows(rowNum, colNum),
@@ -32,3 +31,10 @@ export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   WRAPPER_PALETTE.color7 = utils.toCssRgbA(actionColor, 0.06);
   WRAPPER_PALETTE.color8 = actionColor;
 };
+
+export const DEFAULTS = Object.freeze({
+  config: {
+    size: 'content',
+    alignment: 'center',
+  },
+});
