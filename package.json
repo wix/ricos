@@ -18,7 +18,7 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/wix-incubator/rich-content.git"
+		"url": "git+https://github.com/wix/ricos.git"
 	},
 	"scripts": {
 		"clean": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && rm -f yarn.lock",
@@ -57,7 +57,7 @@
 		"e2e:app": "cd e2e/test-env && npm run build && npm start",
 		"e2e:app:run": "cd e2e/test-env && npm start",
 		"e2e:app:dev": "cd e2e/test-env && npm run dev",
-		"e2e:app:wait": "wait-on http://localhost:3002/ --timeout 180000 --interval 2000",
+		"e2e:app:wait": "wait-on http://localhost:3002/ --timeout 220000 --interval 2000",
 		"test": "lerna run --parallel --stream test",
 		"lint": "lerna run --parallel --stream lint",
 		"build:test": "npm run build && npm run build --prefix e2e/test-env",
@@ -178,6 +178,7 @@
 		"ts-node": "^9.0.0",
 		"typescript": "^3.8.3",
 		"url-loader": "^4.1.0",
+		"utility-types": "^3.10.0",
 		"wait-on": "^4.0.2",
 		"webpack": "^4.38.0",
 		"webpack-bundle-analyzer": "^3.3.2",

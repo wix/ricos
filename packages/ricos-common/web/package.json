@@ -1,19 +1,19 @@
 {
   "name": "ricos-common",
-  "version": "8.10.0",
+  "version": "8.10.1",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wix-incubator/rich-content.git"
+    "url": "git+https://github.com/wix/ricos.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wix-incubator/rich-content/issues"
+    "url": "https://github.com/wix/ricos/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-common",
+  "homepage": "https://github.com/wix/ricos/tree/master/packages/ricos-common",
   "files": [
     "dist",
     "libs",
@@ -38,10 +38,10 @@
   },
   "dependencies": {
     "ts-is-present": "^1.1.1",
-    "wix-rich-content-common": "8.10.0",
-    "wix-rich-content-editor": "8.10.0",
-    "wix-rich-content-preview": "8.10.0",
-    "wix-rich-content-viewer": "8.10.0"
+    "wix-rich-content-common": "8.10.1",
+    "wix-rich-content-editor": "8.10.1",
+    "wix-rich-content-preview": "8.10.1",
+    "wix-rich-content-viewer": "8.10.1"
   },
   "jest": {
     "globals": {

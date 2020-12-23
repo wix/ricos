@@ -1,19 +1,19 @@
 {
   "name": "wix-rich-content-plugin-undo-redo",
-  "version": "8.10.0",
+  "version": "8.10.1",
   "author": {
     "name": "Bar Boaron",
     "email": "barb@wix.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wix-incubator/rich-content.git"
+    "url": "git+https://github.com/wix/ricos.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wix-incubator/rich-content/issues"
+    "url": "https://github.com/wix/ricos/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-undo-redo",
+  "homepage": "https://github.com/wix/ricos/tree/master/rich-content-plugin-undo-redo",
   "files": [
     "dist",
     "libs",
@@ -35,9 +35,9 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.10.0",
-    "wix-rich-content-editor-common": "8.10.0",
-    "wix-rich-content-plugin-commons": "8.10.0"
+    "wix-rich-content-common": "8.10.1",
+    "wix-rich-content-editor-common": "8.10.1",
+    "wix-rich-content-plugin-commons": "8.10.1"
   },
   "unpkg": true,
   "publishConfig": {
