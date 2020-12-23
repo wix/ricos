@@ -8,14 +8,23 @@ interface Props {
   componentData: ComponentData;
   settings: UnavailableOnOneAppPluginEditorConfig;
   theme: RichContentTheme;
+  blockProps: {
+    unsupportedType: string;
+  };
 }
 
 class UnavailableOnOneAppComponent extends React.Component<Props> {
   static type = { UNAVAILABLE_ON_ONEAPP_TYPE };
   render() {
-    const { componentData, settings, theme } = this.props;
+    const { componentData, settings, theme, blockProps } = this.props;
+    const { unsupportedType } = blockProps;
     return (
-      <UnavailableOnOneAppViewer componentData={componentData} settings={settings} theme={theme} />
+      <UnavailableOnOneAppViewer
+        componentData={componentData}
+        settings={settings}
+        theme={theme}
+        unsupportedType={unsupportedType}
+      />
     );
   }
 }

@@ -62,6 +62,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
+  supportedPluginsOnOneApp: string[];
   type: PluginType;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
@@ -250,9 +251,27 @@ const createBasePlugin = (
       // TODO subject to change for draft-js next release
       const contentState = getEditorState().getCurrentContent();
       const key = contentBlock.getEntityAt(0);
+
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
+        if (
+          type === 'wix-draft-plugin-action-button' ||
+          type === 'unavailableononeapp' ||
+          !config.supportedPluginsOnOneApp.includes(type)
+        ) {
+          return {
+            component: DecoratedCompWithBase,
+            editable: false,
+            props: {
+              getData: getData(contentBlock, { getEditorState }),
+              setData: setData(contentBlock, { getEditorState, setEditorState }),
+              deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
+              type: 'unavailableononeapp',
+              unsupportedType: type,
+            },
+          };
+        }
         if (config.type === type || config.legacyType === type) {
           return {
             component: DecoratedCompWithBase,

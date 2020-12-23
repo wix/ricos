@@ -8,26 +8,25 @@ interface Props {
   componentData: ComponentData;
   settings: UnavailableOnOneAppPluginViewerConfig;
   theme: RichContentTheme;
+  unsupportedType: string;
 }
-
-const AlertMessage = ({ pluginName }) => {
-  return (
-    <div className={styles.unaOnOneApp_alert}>
-      <CircleInfoIcon />
-      <p>{pluginName} can be edited only on the web</p>
-    </div>
-  );
-};
 
 class UnavailableOnOneAppViewer extends Component<Props> {
   styles: Record<string, string>;
-
+  getPluginName = fullPluginName => {
+    if (!fullPluginName.includes('-')) return fullPluginName;
+    const unSupportedNames = fullPluginName.split('-');
+    return unSupportedNames.slice(2, unSupportedNames.length).join('-');
+  };
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
+    const pluginName = this.getPluginName(this.props.unsupportedType);
     return (
       <div className={styles.unaOnOneApp_container}>
-        <AlertMessage pluginName="Image spoiler" />
-        <AlertMessage pluginName="Table" />
+        <div className={styles.unaOnOneApp_alert}>
+          <CircleInfoIcon />
+          <p>{pluginName} can be edited only on the web</p>
+        </div>
       </div>
     );
   }

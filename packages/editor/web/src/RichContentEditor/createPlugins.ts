@@ -60,6 +60,7 @@ const createPlugins = ({
     isMobile: context.isMobile,
   });
 
+  const supportedPluginsOnOneApp = Object.entries(context.config).map(([key]) => key);
   const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false, ulChars: [] });
 
   const dndPlugin = createBlockDndPlugin();
@@ -77,10 +78,15 @@ const createPlugins = ({
 
   const pluginDefaults = {};
 
-  const wixPluginConfig: CreatePluginConfig = {
+  interface WixPluginConfig extends CreatePluginConfig {
+    supportedPluginsOnOneApp: string[];
+  }
+
+  const wixPluginConfig: WixPluginConfig = {
     decorator: wixPluginsDecorators,
     commonPubsub,
     pluginDefaults,
+    supportedPluginsOnOneApp,
     ...context,
     ...context.config,
   };
