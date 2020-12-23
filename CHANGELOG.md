@@ -171,7 +171,7 @@
 
 - `ricos-common`
 
-  - [#1808](https://github.com/wix/ricos/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
+  - [#1808](https://github.com/wix/ricos/pull/1808) buttons' custom color ([customStyles API](https://wix.github.io/ricos/docs/ricos/theming#custom-styles))
 
 - `accordion`
   - [#1798](https://github.com/wix/ricos/pull/1798) accordion screen reader (accessibility)
@@ -399,7 +399,7 @@
 ### :rocket: New Feature
 
 - `ricos-common`
-  - [#1651](https://github.com/wix/ricos/pull/1651) theme API features ([Check it out](https://wix-incubator.github.io/rich-content/docs/ricos/theming))
+  - [#1651](https://github.com/wix/ricos/pull/1651) theme API features ([Check it out](https://wix.github.io/ricos/docs/ricos/theming))
     - typography API - fontFamily
     - custom fields addition
 - `editor`
@@ -603,7 +603,7 @@
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 
-[Migration guide](https://wix-incubator.github.io/rich-content/docs/ricos/migrations/v7-to-v8)
+[Migration guide](https://wix.github.io/ricos/docs/ricos/migrations/v7-to-v8)
 
 ### :rocket: New Feature
 
