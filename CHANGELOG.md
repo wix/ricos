@@ -21,6 +21,21 @@
 </details>
 <hr/>
 
+## 8.10.1 (Dec 22, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1298](https://github.com/wix-incubator/rich-content/pull/1298) fix mobile native item loader
+### :book: Documentation
+- [#1899](https://github.com/wix-incubator/rich-content/pull/1899) algolia search integrated
+
+## 8.10.0 (Dec 22, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1886](https://github.com/wix-incubator/rich-content/pull/1886) `injectedContent` prop allows injecting content to mounted editor without remount
+### :bug: Bug Fix
+- `gallery`
+  - [#1897](https://github.com/wix-incubator/rich-content/pull/1897) fix gallery styles (college layout)
+  
 ## 8.9.2 (Dec 21, 2020)
 ### :bug: Bug Fix
 - `link`
