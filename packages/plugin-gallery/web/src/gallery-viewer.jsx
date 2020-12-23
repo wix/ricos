@@ -241,6 +241,10 @@ class GalleryViewer extends React.Component {
     const items = this.getItems();
     const styleParams = this.getStyleParams();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+    const alwaysShowHover = {
+      hoveringBehaviour: 'NO_CHANGE',
+      alwaysShowHover: 'true' /*alwaysShowHover needed for mobile*/,
+    };
 
     return (
       <div
@@ -258,7 +262,7 @@ class GalleryViewer extends React.Component {
             styles={{
               ...DEFAULTS.styles,
               ...styleParams,
-              hoveringBehaviour: 'NO_CHANGE',
+              ...alwaysShowHover,
             }}
             container={size}
             settings={galleySettings}
