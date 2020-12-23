@@ -46,10 +46,8 @@ createPreview({ transformation, contentInteractionMappers, onPreviewExpand });
 
 The transformation consists of:
 
-
 - the predicate the content metadata is tested for
 - an action to perform if the predicate returns `true`
-
 
 Example:
 
@@ -65,7 +63,7 @@ Example:
 
 The example above defines the following transformation rule: "if content contains more than 4 images, the preview should display four of them as a grid gallery with image counter above the last image".
 
-- default value: [Default Transformation](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Components/default-transformation.ts)
+- default value: [Default Transformation](https://github.com/wix/rich-content/blob/master/packages/preview/web/src/Components/default-transformation.ts)
 
 ---
 
@@ -106,7 +104,7 @@ The `See Full Post` displays a text label over an overlay. Mouse click expands t
 
 The `Image Counter` displays hidden image counter. By default, the counter `+N` label is placed above the last visible image element. The image elements are selected by the `role='img'` attribute.
 
-- default value: [Default Interaction Map](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Interactions/interactionMap.tsx)
+- default value: [Default Interaction Map](https://github.com/wix/rich-content/blob/master/packages/preview/web/src/Interactions/interactionMap.tsx)
 
 ---
 
