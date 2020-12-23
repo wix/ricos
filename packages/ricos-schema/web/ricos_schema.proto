@@ -22,27 +22,27 @@ import "plugin_vertical_embed_schema.proto";
 import "plugin_emoji_schema.proto";
 
 message RicosContent {
-    Document doc = 1 [required = true]; /// Document root
-    Selection selection = 2; /// Last saved selection
+    RicosDocument doc = 1 [required = true]; /// Document root
+    RicosSelection selection = 2; /// Last saved selection
     string version = 3 [required = true]; /// Ricos version used to create this schema
 }
 
-message Document {
-    repeated Node nodes = 1 [required = true]; /// List of nodes
+message RicosDocument {
+    repeated RicosNode nodes = 1 [required = true]; /// List of nodes
     google.protobuf.Timestamp last_edited = 2 [required = true]; /// Timestamp when the document was last edited
 }
 
-message Selection {
+message RicosSelection {
     string anchor_node = 1 [required = true]; /// Selection start node key
     int32 anchor_offset = 2; /// Selection start offset (default: 0)
     string focus_node = 3; /// Selection end node key
     int32 focus_offset = 4; /// Selection end offset (default: 0)
 }
 
-message Node {
+message RicosNode {
     string type = 1 [required = true]; /// Node type
     string key = 2 [required = true]; /// Node unique indentifier
-    repeated Node nodes = 3 [required = true]; /// List of child nodes
+    repeated RicosNode nodes = 3 [required = true]; /// List of child nodes
     oneof data {
         RicosText ricos_text = 4;
         RicosImage ricos_image = 5;
@@ -67,11 +67,11 @@ message Node {
 
 message RicosText {
     string text = 1 [required = true]; /// Textual data
-    repeated Decoration decorations = 2; /// List of decorations
+    repeated RicosDecoration decorations = 2; /// List of decorations
 }
 
 /// Adds appearence changes to text
-message Decoration {
+message RicosDecoration {
     string type = 1 [required = true]; /// Decoration type
     oneof data {
         RicosColor ricos_color = 2;

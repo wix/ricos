@@ -34,6 +34,7 @@ import {
   TABLE_TYPE,
   ANCHOR_TYPE,
 } from '../consts';
+import toCamelCase from 'to-camel-case';
 
 export enum BlockTypesMap {
   Unstyled = 'unstyled',
@@ -65,47 +66,7 @@ export enum FromDraftListType {
   'ordered-list-item' = 'ordered_list',
 }
 
-export enum NodeType {}
-
-export const EntityTypeDataMap = {
-  [LINK_BUTTON_TYPE]: 'ricosLinkButton',
-  [ACTION_BUTTON_TYPE]: 'ricosActionButton',
-  [CODE_BLOCK_TYPE]: 'ricosCodeBlock',
-  [DIVIDER_TYPE]: 'ricosDivider',
-  [EMOJI_TYPE]: 'ricosEmoji',
-  EMOJI_TYPE: 'ricosEmoji',
-  [FILE_UPLOAD_TYPE]: 'ricosFileUpload',
-  [GALLERY_TYPE]: 'ricosGallery',
-  [GIPHY_TYPE]: 'ricosGiphy',
-  [HASHTAG_TYPE]: 'ricosHashtag',
-  [HEADERS_MARKDOWN_TYPE]: 'ricosHeadersMarkdown',
-  [HTML_TYPE]: 'ricosHtml',
-  [IMAGE_TYPE]: 'ricosImage',
-  [IMAGE_TYPE_LEGACY]: 'ricosImage',
-  [INDENT_TYPE]: 'ricosIndent',
-  [LINE_SPACING_TYPE]: 'ricosLineSpacing',
-  [HEADINGS_DROPDOWN_TYPE]: 'ricosHeadings',
-  [SPOILER_TYPE]: 'ricosSpoiler',
-  [ACCORDION_TYPE]: 'ricosAccordion',
-  [EXTERNAL_LINK_TYPE]: 'ricosExternalLink',
-  [LINK_TYPE]: 'ricosLink',
-  [LINK_PREVIEW_TYPE]: 'ricosLinkPreview',
-  [MAP_TYPE]: 'ricosMap',
-  [EXTERNAL_MENTIONS_TYPE]: 'ricosExternalMentions',
-  [MENTION_TYPE]: 'ricosMention',
-  [SOUND_CLOUD_TYPE]: 'ricosSoundCloud',
-  [TEXT_COLOR_TYPE]: 'ricosTextColor',
-  [TEXT_HIGHLIGHT_TYPE]: 'ricosTextHighlight',
-  [UNDO_REDO_TYPE]: 'ricosUndoRedo',
-  [VERTICAL_EMBED_TYPE]: 'ricosVerticalEmbed',
-  [VIDEO_TYPE]: 'ricosVideo',
-  [VIDEO_TYPE_LEGACY]: 'ricosVideo',
-  [POLL_TYPE]: 'ricosPoll',
-  [TABLE_TYPE]: 'ricosTable',
-  [ANCHOR_TYPE]: 'ricosAnchor',
-};
-
-export const PluginTypeMap = {
+export const TO_RICOS_PLUGIN_TYPE_MAP = {
   [LINK_BUTTON_TYPE]: 'ricos-link-button',
   [ACTION_BUTTON_TYPE]: 'ricos-action-button',
   [CODE_BLOCK_TYPE]: 'ricos-code-block',
@@ -144,3 +105,16 @@ export const PluginTypeMap = {
   [TABLE_TYPE]: 'ricos-table',
   [ANCHOR_TYPE]: 'ricos-anchor',
 };
+
+export const TO_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
+  Object.entries(TO_RICOS_PLUGIN_TYPE_MAP).map(([key, value]) => [key, toCamelCase(value)])
+);
+
+const DUPLICATE_KEYS = ['EMOJI_TYPE', IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
+
+// Reverses TO_RICOS_PLUGIN_TYPE_MAP
+export const FROM_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
+  Object.entries(TO_RICOS_PLUGIN_TYPE_MAP)
+    .filter(([key]) => !DUPLICATE_KEYS.includes(key))
+    .map(([key, value]) => [value, key])
+);

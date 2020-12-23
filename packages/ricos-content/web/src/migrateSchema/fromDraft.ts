@@ -10,10 +10,10 @@ import {
   BlockTypesMap,
   FromDraftListType,
   HeaderLevel,
-  EntityTypeDataMap,
-  PluginTypeMap,
+  TO_RICOS_ENTITY_TYPE_MAP,
+  TO_RICOS_PLUGIN_TYPE_MAP,
 } from './consts';
-import { RicosContent, Decoration, Node, google } from 'ricos-schema';
+import { RicosContent, RicosDecoration, RicosNode, google } from 'ricos-schema';
 import { genKey } from 'draft-js';
 import {
   ANCHOR_TYPE,
@@ -40,7 +40,7 @@ const createTimestamp = (): google.protobuf.Timestamp => {
 
 export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   const { blocks, entityMap, VERSION: version } = draftJSON;
-  const nodes: Node[] = [];
+  const nodes: RicosNode[] = [];
   const keyMapping = {};
 
   const parseBlocks = (index = 0) => {
@@ -52,7 +52,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
           parseBlocks(index + 1);
           break;
         case BlockTypesMap.Blockquote:
-          nodes.push(parseBlockQuoteBlock(block));
+          nodes.push(parseQuoteBlock(block));
           parseBlocks(index + 1);
           break;
         case BlockTypesMap.CodeBlock:
@@ -85,23 +85,23 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     }
   };
 
-  const parseAtomicBlock = (block: RicosContentBlock): Node => {
+  const parseAtomicBlock = (block: RicosContentBlock): RicosNode => {
     return { key: block.key, nodes: [], ...getEntity(block.entityRanges[0].key) };
   };
 
-  const parseBlockQuoteBlock = (block: RicosContentBlock): Node => ({
+  const parseQuoteBlock = (block: RicosContentBlock): RicosNode => ({
     key: block.key,
     type: 'blockquote',
     nodes: [parseTextBlock(block)],
   });
 
-  const parseCodeBlock = (block: RicosContentBlock): Node => ({
+  const parseCodeBlock = (block: RicosContentBlock): RicosNode => ({
     key: block.key,
     type: 'codeblock',
     nodes: getTextNodes(block),
   });
 
-  const parseHeaderBlock = (block: RicosContentBlock): Node => {
+  const parseHeaderBlock = (block: RicosContentBlock): RicosNode => {
     const getLevel = (blockType: string) => {
       switch (blockType) {
         case BlockTypesMap.HeaderOne:
@@ -131,8 +131,8 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     };
   };
 
-  const parseTextBlock = (block: RicosContentBlock): Node => {
-    const textWrapperNode: Node = {
+  const parseTextBlock = (block: RicosContentBlock): RicosNode => {
+    const textWrapperNode: RicosNode = {
       key: genKey(),
       type: 'paragraph',
       nodes: [],
@@ -148,7 +148,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     return textWrapperNode;
   };
 
-  const parseListBlocks = (listStartIndex: number): { node: Node; nextIndex: number } => {
+  const parseListBlocks = (listStartIndex: number): { node: RicosNode; nextIndex: number } => {
     const listType = blocks[listStartIndex].type;
     const listBlocks: RicosContentBlock[] = [];
     let searchIndex = listStartIndex;
@@ -177,14 +177,14 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     };
   };
 
-  const getTextNodes = (block: RicosContentBlock): Node[] => {
+  const getTextNodes = (block: RicosContentBlock): RicosNode[] => {
     const { text, inlineStyleRanges, entityRanges, data: blockData } = block;
     const ranges: Range[] = [...inlineStyleRanges, ...entityRanges].sort(
       (a, b) => b.offset - a.offset
     );
     const getRange = () => ranges.pop();
-    let textNode: Node | null = null;
-    const textNodes: Node[] = [];
+    let textNode: RicosNode | null = null;
+    const textNodes: RicosNode[] = [];
     let currentPos = 0;
     let currentRange: Range | undefined = getRange();
     while (currentPos < text.length) {
@@ -227,8 +227,8 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     text: string;
     blockData: RicosContentBlock['data'];
     rangeData?: RangeData;
-  }): Node => {
-    const textNode: Node = {
+  }): RicosNode => {
+    const textNode: RicosNode = {
       key: genKey(),
       type: 'text',
       nodes: [],
@@ -238,7 +238,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       },
     };
 
-    const decorations: Decoration[] = [];
+    const decorations: RicosDecoration[] = [];
     if (blockData && !isEmpty(blockData)) {
       if (blockData.textAlignment) {
         decorations.push({
@@ -262,7 +262,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   const getEntity = (key: string | number) => {
     const { type, data } = entityMap[key];
-    const dataFieldName = EntityTypeDataMap[type];
+    const dataFieldName = TO_RICOS_ENTITY_TYPE_MAP[type];
     if (!dataFieldName) {
       console.log(`ERROR! Unknown entity type "${type}"!`);
       process.exit(1);
@@ -295,16 +295,16 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       default:
     }
 
-    return { type: PluginTypeMap[type], [dataFieldName]: data };
+    return { type: TO_RICOS_PLUGIN_TYPE_MAP[type], [dataFieldName]: data };
   };
 
-  const getDecoration = (rangeData: RangeData): Decoration => {
+  const getDecoration = (rangeData: RangeData): RicosDecoration => {
     if ('key' in rangeData) {
       // rangeData is an entity range
       return getEntity(rangeData.key);
     } else if ('style' in rangeData) {
       // rangeData is an inline style range
-      let decoration: Decoration;
+      let decoration: RicosDecoration;
       try {
         const styleObj = JSON.parse(rangeData.style);
         const type = Object.keys(styleObj)[0];

@@ -15,3 +15,7 @@ declare module 'to-constant-case' {
   function toConstantCase(string: string): string;
   export default toConstantCase;
 }
+declare module 'to-camel-case' {
+  function toCamelCase(string: string): string;
+  export default toCamelCase;
+}

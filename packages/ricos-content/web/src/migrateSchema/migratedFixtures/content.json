@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d1jar",
+            "key": "43ru3",
             "ricosText": {
               "decorations": [],
               "text": "Wix unveils advanced web design platform\n"
@@ -14,14 +14,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "104tu"
+        "key": "c42ld"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "egsl6",
+            "key": "ulr8",
             "ricosText": {
               "decorations": [],
               "text": "Editor X offers advanced design and layout capabilities specifically targeted to designers and web agencies.\n\n\nIsraeli DIY website building company "
@@ -30,7 +30,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "il8r",
+            "key": "98ol7",
             "ricosText": {
               "decorations": [
                 {
@@ -43,7 +43,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "b61jq",
+            "key": "fde12",
             "ricosText": {
               "decorations": [],
               "text": " continues to expand its product line. The company has unveiled Editor X, a website creation platform offering advanced design and layout capabilities specifically targeted to designers and web agencies.\nThe wide, flexible new canvas allows the use of modern CSS technologies including Flexbox and Grid, all with precise drag and drop, so designers and web creators can control the exact position and styling of elements at every viewport.\n"
@@ -51,14 +51,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "popd"
+        "key": "35mnf"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bcikj",
+            "key": "6jlum",
             "ricosText": {
               "decorations": [],
               "text": "Wix sees the new product as an integral part of its solutions for businesses together with additional coding capabilities that can be used as required and which can create highly sophisticated, powerful and complex websites.\nWix cofounder and CEO Avishai Abrahami said, \"We understand the evolving needs of designers and their clients, and we innovate to address their sophisticated demands and diverse requirements. Wix has established itself as a leader in the DIY market, and at the same time we are enabling those who build websites for others. Editor X is the solution for these users with more complex design needs.\"\nHe added, \"This platform offers advanced design capabilities, all the while providing the most accessible gateway to CSS. It was built to empower web creators who design across all devices, leveraging the latest technologies to bring their visions to life. Wix is built to meet any client need with the combination of Editor X, the ability to code if necessary, and the existing comprehensive business solutions already available from Wix.\"\nWix's share price fell 1.87% to $145.50 on Wall Street yesterday, giving a market cap of $7.44 billion. the company will announce its fourth quarter and full 2019 results on February 20."
@@ -66,16 +66,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "90ibo"
+        "key": "e0gjd"
       }
     ],
     "lastEdited": {
-      "seconds": 1608638918,
-      "nanos": 900000000
+      "seconds": 1608654518,
+      "nanos": 394000000
     }
   },
   "selection": {
-    "anchorNode": "104tu"
+    "anchorNode": "c42ld"
   },
   "version": "7.15.3"
 }
