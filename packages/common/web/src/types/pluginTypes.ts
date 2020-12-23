@@ -58,6 +58,7 @@ import {
   POLL_TYPE,
   ACCORDION_TYPE,
   TABLE_TYPE,
+  UNAVAILABLE_ON_ONEAPP_TYPE,
 } from 'ricos-content';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
@@ -111,7 +112,8 @@ export type PluginType =
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE
   | typeof ACCORDION_TYPE
-  | typeof TABLE_TYPE;
+  | typeof TABLE_TYPE
+  | typeof UNAVAILABLE_ON_ONEAPP_TYPE;
 
 export type BlockRendererFn = (
   contentBlock: ContentBlock,

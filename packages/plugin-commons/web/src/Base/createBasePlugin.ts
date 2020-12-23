@@ -255,11 +255,7 @@ const createBasePlugin = (
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
-        if (
-          type === 'wix-draft-plugin-action-button' ||
-          type === 'unavailableononeapp' ||
-          !config.supportedPluginsOnOneApp.includes(type)
-        ) {
+        if (type === 'unavailableononeapp' || !config.supportedPluginsOnOneApp.includes(type)) {
           return {
             component: DecoratedCompWithBase,
             editable: false,

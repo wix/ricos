@@ -469,6 +469,7 @@ const config = {
       createGiphyPlugin,
       createFileUploadPlugin,
       createEmojiPlugin,
+      createUnavailableOnOneAppPlugin,
     ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
