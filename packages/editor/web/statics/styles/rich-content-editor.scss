@@ -3,6 +3,45 @@
 @import '~wix-rich-content-editor-common/dist/statics/styles/general';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
 
+:global(.editor) {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+
+  :global(.toolbar-wrapper) {
+    flex: 0;
+  }
+  > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    > div:last-child {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+  }
+
+  :global(.DraftEditor-root) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    :global(.DraftEditor-editorContainer) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      > div:first-child {
+        flex: 1;
+      }
+    }
+  }
+}
+
+
 .wrapper {
   @extend .fontElementMap;
   position: relative;
