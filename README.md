@@ -13,7 +13,7 @@
 <br />
 
 
-Try out our [demo](https://wix-rich-content.herokuapp.com/). You can see the full documentation here: [https://wix-incubator.github.io/rich-content/](https://wix-incubator.github.io/rich-content/)
+Try out our [demo](https://wix-rich-content.herokuapp.com/). You can see the full documentation here: [https://wix.github.io/rich-content/](https://wix.github.io/rich-content/)
 
 ## Quick start
 
@@ -55,7 +55,7 @@ import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 
 There you go! A rich content editor with plugins. 
 
-[See full documentation](https://wix-incubator.github.io/rich-content/)
+[See full documentation](https://wix.github.io/rich-content/)
 
 ### SSR support
 
