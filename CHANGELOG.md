@@ -17,15 +17,16 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.10.1 (Dec 22, 2020)
 ### :bug: Bug Fix
 - `gallery`
   - [#1298](https://github.com/wix-incubator/rich-content/pull/1298) fix mobile native item loader
 ### :book: Documentation
 - [#1899](https://github.com/wix-incubator/rich-content/pull/1899) algolia search integrated
-
-
-</details>
-<hr/>
 
 ## 8.10.0 (Dec 22, 2020)
 ### :rocket: New Feature
