@@ -18,9 +18,11 @@ class UnavailableOnOneAppViewer extends Component<Props> {
     const unSupportedNames = fullPluginName.split('-');
     return unSupportedNames.slice(2, unSupportedNames.length).join('-');
   };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const pluginName = this.getPluginName(this.props.unsupportedType);
+
     return (
       <div className={styles.unaOnOneApp_container}>
         <div className={styles.unaOnOneApp_alert}>
