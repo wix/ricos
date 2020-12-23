@@ -16,7 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-	
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1298](https://github.com/wix-incubator/rich-content/pull/1298) fix mobile native item loader
 ### :book: Documentation
 - [#1899](https://github.com/wix-incubator/rich-content/pull/1899) algolia search integrated
 
