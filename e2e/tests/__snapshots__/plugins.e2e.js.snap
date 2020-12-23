@@ -3257,7 +3257,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         }
       ],
       "key": 2,
-      "text": "wix.com",
+      "text": "wix.com ",
       "type": "unstyled"
     },
     {
