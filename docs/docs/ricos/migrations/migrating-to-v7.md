@@ -15,4 +15,4 @@ This is not a proper breaking change, but will cause bundle bloat on the editor 
 
 This is a preparation step. The next step is switching to the `@wix/draft-js` fork which solves many issues in the mobile web for Android and provides a more seamless experience for consumers.
 
-`rich-content-editor-common` package is [exposing](https://github.com/wix-incubator/rich-content/blob/5f81918551b09406bfc5bfbbb6a33770bc4d0156/packages/editor-common/web/src/index.ts#L107) any `draft-js` functionality needed - please let us know if you consume `draft-js` in any other way.
+`rich-content-editor-common` package is [exposing](https://github.com/wix/rich-content/blob/5f81918551b09406bfc5bfbbb6a33770bc4d0156/packages/editor-common/web/src/index.ts#L107) any `draft-js` functionality needed - please let us know if you consume `draft-js` in any other way.

@@ -1,10 +1,10 @@
 module.exports = {
   title: 'Ricos',
   tagline: 'A supercharged rich content framework with an extensible plugin system',
-  url: 'https://wix-incubator.github.io/',
+  url: 'https://wix.github.io/',
   baseUrl: '/rich-content/',
   favicon: 'img/favicon.ico',
-  organizationName: 'wix-incubator',
+  organizationName: 'wix',
   projectName: 'rich-content',
   themeConfig: {
     // https://docsearch.algolia.com/docs/faq/#can-i-share-the-apikey-in-my-repo
@@ -37,7 +37,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://github.com/wix-incubator/rich-content',
+          href: 'https://github.com/wix/rich-content',
           label: 'GitHub',
           position: 'right',
         },
@@ -78,11 +78,11 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/wix-incubator/rich-content',
+              href: 'https://github.com/wix/rich-content',
             },
             {
               label: 'Changelog',
-              href: 'https://github.com/wix-incubator/rich-content/blob/master/CHANGELOG.md',
+              href: 'https://github.com/wix/rich-content/blob/master/CHANGELOG.md',
             },
           ],
         },
