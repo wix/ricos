@@ -35,7 +35,8 @@
   },
   "dependencies": {
     "wix-rich-content-common": "8.9.2",
-    "wix-rich-content-editor-common": "8.9.2"
+    "wix-rich-content-editor-common": "8.9.2",
+    "wix-rich-content-plugin-commons": "8.9.2"
   },
   "unpkg": true,
   "publishConfig": {
