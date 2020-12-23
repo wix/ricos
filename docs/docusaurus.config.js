@@ -2,15 +2,15 @@ module.exports = {
   title: 'Ricos',
   tagline: 'A supercharged rich content framework with an extensible plugin system',
   url: 'https://wix.github.io/',
-  baseUrl: '/rich-content/',
+  baseUrl: '/ricos/',
   favicon: 'img/favicon.ico',
   organizationName: 'wix',
-  projectName: 'rich-content',
+  projectName: 'ricos',
   themeConfig: {
     // https://docsearch.algolia.com/docs/faq/#can-i-share-the-apikey-in-my-repo
     algolia: {
       apiKey: '1c2337fcafb4c304a30def6efc0b441a',
-      indexName: 'rich-content',
+      indexName: 'ricos',
       algoliaOptions: { facetFilters: ['type:content'] },
     },
     colorMode: {
@@ -37,7 +37,7 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://github.com/wix/rich-content',
+          href: 'https://github.com/wix/ricos',
           label: 'GitHub',
           position: 'right',
         },
@@ -78,11 +78,11 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/wix/rich-content',
+              href: 'https://github.com/wix/ricos',
             },
             {
               label: 'Changelog',
-              href: 'https://github.com/wix/rich-content/blob/master/CHANGELOG.md',
+              href: 'https://github.com/wix/ricos/blob/master/CHANGELOG.md',
             },
           ],
         },
