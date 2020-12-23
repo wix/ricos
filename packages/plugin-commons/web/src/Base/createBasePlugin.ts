@@ -62,7 +62,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
-  supportedPluginsOnOneApp: string[];
+  supportedPluginsOnOneApp?: string[];
   type: PluginType;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
@@ -255,7 +255,7 @@ const createBasePlugin = (
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
-        if (type === 'unavailableononeapp' || !config.supportedPluginsOnOneApp.includes(type)) {
+        if (type === 'unavailableononeapp' || !config.supportedPluginsOnOneApp?.includes(type)) {
           return {
             component: DecoratedCompWithBase,
             editable: false,
