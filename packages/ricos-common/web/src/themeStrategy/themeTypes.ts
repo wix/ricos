@@ -50,7 +50,7 @@ export interface WixTypographyDefinition {
 export interface RicosTheme {
   /** You'll have to specify a parent `className` if you plan to apply different palettes for multiple
    * Ricos instances living next to each other.
-   * {@link https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#theme Read More}.
+   * {@link https://wix.github.io/ricos/docs/ricos/ricos-api/#theme Read More}.
    *
    * Otherwise, you can ignore this field.
    * @example
