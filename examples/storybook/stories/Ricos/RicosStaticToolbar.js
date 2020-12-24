@@ -9,6 +9,8 @@ import inlineStylesState from '../../../../e2e/tests/fixtures/inline-styles.json
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 const plugins = [pluginDivider()];
 
+const logTraits = (content, traits) => console.debug(traits); // eslint-disable-line
+
 export default () => {
   const bottomToolbar = document.createElement('div');
   const isMobile = mobileDetect.mobile() !== null;
@@ -28,6 +30,7 @@ export default () => {
             toolbarSettings={{ useStaticTextToolbar: true }}
             isMobile={isMobile}
             plugins={plugins}
+            onChange={logTraits}
           />
         </RichContentEditorBox>
       </Section>

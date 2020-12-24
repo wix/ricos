@@ -25,5 +25,7 @@
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} 個人投票給這個答覆",
   "Spoiler_Reveal_Video_Placeholder": "此影片有雷",
   "Preview_SeeFullPost_Label": "查看完整文章",
-  "UploadFile_Viewer_Download": "下載 {{fileType}}"
+  "UploadFile_Viewer_Download": "下載 {{fileType}}",
+  "Embed_Vertical_Units_Minute": "{{minutes}} 分鐘",
+  "Embed_Vertical_Units_Hour": "{{hours}}小時"
 }

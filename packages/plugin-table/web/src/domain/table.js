@@ -9,7 +9,7 @@ import {
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
 import { ROW_DEFAULT_HEIGHT } from '../consts';
 import { isEmpty } from 'lodash';
-import { generateKey } from 'wix-rich-content-plugin-commons';
+import { generateKey } from 'wix-rich-content-common';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);

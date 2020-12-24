@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TABLE_TYPE } from 'wix-rich-content-plugin-table';
+import { ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
 
 const removeKeyFromBlocks = blocks => blocks.map((block, index) => ({ ...block, key: index }));
 
 const isTable = entity => entity.type === TABLE_TYPE;
+const isAccordion = entity => entity.type === ACCORDION_TYPE;
 
 const innerRceFixers = [
   {
@@ -17,6 +19,16 @@ const innerRceFixers = [
           column.merge?.key && (column.merge.key = '');
           column.merge?.parentCellKey && (column.merge.parentCellKey = '');
         });
+      });
+    },
+  },
+  {
+    predicate: isAccordion,
+    entityFixer: entity => {
+      const { pairs } = entity.data;
+      pairs.forEach(pair => {
+        pair.title.blocks = removeKeyFromBlocks(pair.title.blocks);
+        pair.content.blocks = removeKeyFromBlocks(pair.content.blocks);
       });
     },
   },

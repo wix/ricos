@@ -89,7 +89,7 @@ export default () => {
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api#theme"
+          href="https://wix.github.io/ricos/docs/ricos/ricos-api#theme"
         >
           here
         </a>

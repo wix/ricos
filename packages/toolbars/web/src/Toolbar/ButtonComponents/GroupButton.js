@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
 

@@ -1,4 +1,4 @@
-import { generateKey } from 'wix-rich-content-plugin-commons';
+import { generateKey } from 'wix-rich-content-common';
 export { ACCORDION_TYPE } from './types';
 export const COMPONENT_DATA = 'componentData';
 

@@ -82,7 +82,7 @@ relValue - as defined in [HTMLAnchorElement.rel](https://developer.mozilla.org/e
 locale?: string
 ```
 
-Any two letter string represing a [supported](https://github.com/wix-incubator/rich-content/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction.
+Any two letter string represing a [supported](https://github.com/wix/ricos/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction.
 
 ### `mediaSettings`
 
@@ -155,6 +155,14 @@ draftEditorSettings?: {
 ```
 
 draft-js props, as described in [https://draftjs.org/docs/api-reference-editor](https://draftjs.org/docs/api-reference-editor)
+
+### `injectedContent`
+
+```
+injectedContent?: RicosContent
+```
+
+Similar to [content](#content) prop; allows content to be injected to mounted RicosEditor without need for remount.
 
 ### `linkPanelSettings`
 

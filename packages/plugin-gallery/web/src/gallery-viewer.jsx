@@ -185,14 +185,15 @@ class GalleryViewer extends React.Component {
     } = this.props;
     const isExpandEnabled = !disableExpand && onExpand;
     const isClickable = isExpandEnabled || itemProps.link;
-    const itemStyles = classnames(
-      this.styles.galleryItem,
+    const itemOverlayStyles = classnames(
+      this.styles.itemOverlay,
       isClickable && this.styles.clickableItem
     );
     return (
-      <div className={itemStyles}>
+      <div className={itemOverlayStyles}>
         {isExpandEnabled && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title, 'HOVER')}
+        {this.props.itemOverlayElement?.(itemProps)}
       </div>
     );
   };
@@ -212,6 +213,10 @@ class GalleryViewer extends React.Component {
 
     const items = this.getItems();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+    const alwaysShowHover = {
+      hoveringBehaviour: 'NO_CHANGE',
+      alwaysShowHover: 'true' /*alwaysShowHover needed for mobile*/,
+    };
 
     return (
       <div
@@ -226,7 +231,11 @@ class GalleryViewer extends React.Component {
             domId={this.domId}
             allowSSR={!!seoMode}
             items={items}
-            styles={styleParams}
+            styles={{
+              ...DEFAULTS.styles,
+              ...styleParams,
+              ...alwaysShowHover,
+            }}
             container={size}
             settings={galleySettings}
             scrollingElement={scrollingElement}
@@ -255,6 +264,7 @@ GalleryViewer.propTypes = {
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
   seoMode: PropTypes.bool,
+  itemOverlayElement: PropTypes.elementType,
 };
 
 export default GalleryViewer;

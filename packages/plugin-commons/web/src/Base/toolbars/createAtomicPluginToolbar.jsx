@@ -77,6 +77,8 @@ export default function createAtomicPluginToolbar({
         key: 'componentLink',
         callback: this.onComponentLinkChange,
       });
+      const focusedBlock = pubsub.get('focusedBlock');
+      this.onVisibilityChanged(focusedBlock);
     }
 
     componentWillUnmount() {

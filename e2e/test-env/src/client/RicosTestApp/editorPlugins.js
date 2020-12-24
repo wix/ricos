@@ -117,6 +117,7 @@ const plugins = {
       pluginLineSpacing().createPlugin,
       pluginLink().createPlugin,
       pluginCodeBlock().createPlugin,
+      pluginImage().createPlugin,
     ],
   }),
   table: pluginTable({

@@ -36,6 +36,7 @@ const RichContentEditorModal: FunctionComponent<Props> = ({
     return null;
   }
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}
       data-id="rich-content-editor-modal"
