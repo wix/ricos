@@ -36,9 +36,9 @@ import {
 } from '../consts';
 import toCamelCase from 'to-camel-case';
 
-export enum BlockTypesMap {
+export enum BlockType {
   Unstyled = 'unstyled',
-  // Paragraph ='paragraph',
+  // Paragraph = 'paragraph',
   HeaderOne = 'header-one',
   HeaderTwo = 'header-two',
   HeaderThree = 'header-three',
@@ -50,6 +50,17 @@ export enum BlockTypesMap {
   Blockquote = 'blockquote',
   CodeBlock = 'code-block',
   Atomic = 'atomic',
+}
+
+export enum NodeType {
+  Paragraph = 'paragraph',
+  Heading = 'heading',
+  UnorderedList = 'bullet_list',
+  OrderedList = 'ordered_list',
+  ListItem = 'list_item',
+  Blockquote = 'blockquote',
+  CodeBlock = 'codeblock',
+  Text = 'text',
 }
 
 export enum HeaderLevel {
@@ -106,13 +117,14 @@ export const TO_RICOS_PLUGIN_TYPE_MAP = {
   [ANCHOR_TYPE]: 'ricos-anchor',
 };
 
+// [IMAGE_TYPE]: 'ricosImage'
 export const TO_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
   Object.entries(TO_RICOS_PLUGIN_TYPE_MAP).map(([key, value]) => [key, toCamelCase(value)])
 );
 
 const DUPLICATE_KEYS = ['EMOJI_TYPE', IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
 
-// Reverses TO_RICOS_PLUGIN_TYPE_MAP
+// 'ricos-image': IMAGE_TYPE
 export const FROM_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
   Object.entries(TO_RICOS_PLUGIN_TYPE_MAP)
     .filter(([key]) => !DUPLICATE_KEYS.includes(key))

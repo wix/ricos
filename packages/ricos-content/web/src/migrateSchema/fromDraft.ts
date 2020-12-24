@@ -7,11 +7,12 @@ import {
   RicosInlineStyleRange,
 } from '..';
 import {
-  BlockTypesMap,
+  BlockType,
   FromDraftListType,
   HeaderLevel,
   TO_RICOS_ENTITY_TYPE_MAP,
   TO_RICOS_PLUGIN_TYPE_MAP,
+  NodeType,
 } from './consts';
 import { RicosContent, RicosDecoration, RicosNode, google } from 'ricos-schema';
 import { genKey } from 'draft-js';
@@ -47,34 +48,34 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     const block = blocks[index];
     if (block) {
       switch (block.type) {
-        case BlockTypesMap.Atomic:
+        case BlockType.Atomic:
           nodes.push(parseAtomicBlock(block));
           parseBlocks(index + 1);
           break;
-        case BlockTypesMap.Blockquote:
+        case BlockType.Blockquote:
           nodes.push(parseQuoteBlock(block));
           parseBlocks(index + 1);
           break;
-        case BlockTypesMap.CodeBlock:
+        case BlockType.CodeBlock:
           nodes.push(parseCodeBlock(block));
           parseBlocks(index + 1);
           break;
-        case BlockTypesMap.HeaderOne:
-        case BlockTypesMap.HeaderTwo:
-        case BlockTypesMap.HeaderThree:
-        case BlockTypesMap.HeaderFour:
-        case BlockTypesMap.HeaderFive:
-        case BlockTypesMap.HeaderSix:
+        case BlockType.HeaderOne:
+        case BlockType.HeaderTwo:
+        case BlockType.HeaderThree:
+        case BlockType.HeaderFour:
+        case BlockType.HeaderFive:
+        case BlockType.HeaderSix:
           nodes.push(parseHeaderBlock(block));
           parseBlocks(index + 1);
           break;
-        case BlockTypesMap.OrderedListItem:
-        case BlockTypesMap.UnorderedListItem:
+        case BlockType.OrderedListItem:
+        case BlockType.UnorderedListItem:
           const { node, nextIndex } = parseListBlocks(index);
           nodes.push(node);
           parseBlocks(nextIndex);
           break;
-        case BlockTypesMap.Unstyled:
+        case BlockType.Unstyled:
           nodes.push(parseTextBlock(block));
           parseBlocks(index + 1);
           break;
@@ -91,31 +92,31 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   const parseQuoteBlock = (block: RicosContentBlock): RicosNode => ({
     key: block.key,
-    type: 'blockquote',
+    type: NodeType.Blockquote,
     nodes: [parseTextBlock(block)],
   });
 
   const parseCodeBlock = (block: RicosContentBlock): RicosNode => ({
     key: block.key,
-    type: 'codeblock',
+    type: NodeType.CodeBlock,
     nodes: getTextNodes(block),
   });
 
   const parseHeaderBlock = (block: RicosContentBlock): RicosNode => {
     const getLevel = (blockType: string) => {
       switch (blockType) {
-        case BlockTypesMap.HeaderOne:
-          return HeaderLevel[BlockTypesMap.HeaderOne];
-        case BlockTypesMap.HeaderTwo:
-          return HeaderLevel[BlockTypesMap.HeaderTwo];
-        case BlockTypesMap.HeaderThree:
-          return HeaderLevel[BlockTypesMap.HeaderThree];
-        case BlockTypesMap.HeaderFour:
-          return HeaderLevel[BlockTypesMap.HeaderFour];
-        case BlockTypesMap.HeaderFive:
-          return HeaderLevel[BlockTypesMap.HeaderFive];
-        case BlockTypesMap.HeaderSix:
-          return HeaderLevel[BlockTypesMap.HeaderSix];
+        case BlockType.HeaderOne:
+          return HeaderLevel[BlockType.HeaderOne];
+        case BlockType.HeaderTwo:
+          return HeaderLevel[BlockType.HeaderTwo];
+        case BlockType.HeaderThree:
+          return HeaderLevel[BlockType.HeaderThree];
+        case BlockType.HeaderFour:
+          return HeaderLevel[BlockType.HeaderFour];
+        case BlockType.HeaderFive:
+          return HeaderLevel[BlockType.HeaderFive];
+        case BlockType.HeaderSix:
+          return HeaderLevel[BlockType.HeaderSix];
         default:
           console.log(`ERROR! Unknown header level "${blockType}"!`);
           process.exit(1);
@@ -123,7 +124,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     };
     return {
       key: block.key,
-      type: 'heading',
+      type: NodeType.Heading,
       ricosHeading: {
         level: getLevel(block.type),
       },
@@ -134,7 +135,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   const parseTextBlock = (block: RicosContentBlock): RicosNode => {
     const textWrapperNode: RicosNode = {
       key: genKey(),
-      type: 'paragraph',
+      type: NodeType.Paragraph,
       nodes: [],
     };
 
@@ -169,7 +170,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
         type: FromDraftListType[listType],
         nodes: listBlocks.map(block => ({
           key: block.key,
-          type: 'list_item',
+          type: NodeType.ListItem,
           nodes: [parseTextBlock(block)],
         })),
       },
@@ -230,7 +231,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   }): RicosNode => {
     const textNode: RicosNode = {
       key: genKey(),
-      type: 'text',
+      type: NodeType.Text,
       nodes: [],
       ricosText: {
         text,

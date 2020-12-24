@@ -1,7 +1,7 @@
 import { RicosContent, RicosNode } from 'ricos-schema';
 import { RicosContent as RicosContentDraft } from 'ricos-content';
 import { EditorState, convertToRaw, createBlock } from 'wix-rich-content-editor-common';
-import { FROM_RICOS_ENTITY_TYPE_MAP } from './consts';
+import { FROM_RICOS_ENTITY_TYPE_MAP, NodeType } from './consts';
 
 export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   const {
@@ -15,45 +15,41 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
     const node = nodes[index];
     if (node) {
       switch (node.type) {
-        case BlockTypesMap.Atomic:
-          nodes.push(parseAtomicBlock(node));
+        case NodeType.Blockquote:
+          parseQuoteBlock(node);
           parseNodes(index + 1);
           break;
-        case BlockTypesMap.Blockquote:
-          nodes.push(parseQuoteBlock(node));
+        case NodeType.CodeBlock:
+          parseCodeBlock(node);
           parseNodes(index + 1);
           break;
-        case BlockTypesMap.CodeBlock:
-          nodes.push(parseCodeBlock(node));
+        case NodeType.Heading:
+          parseHeaderBlock(node);
           parseNodes(index + 1);
           break;
-        case BlockTypesMap.HeaderOne:
-        case BlockTypesMap.HeaderTwo:
-        case BlockTypesMap.HeaderThree:
-        case BlockTypesMap.HeaderFour:
-        case BlockTypesMap.HeaderFive:
-        case BlockTypesMap.HeaderSix:
-          nodes.push(parseHeaderBlock(node));
-          parseNodes(index + 1);
+        case NodeType.OrderedList:
+        case NodeType.UnorderedList:
+          // const { node, nextIndex } = parseListBlocks(index);
+          // node);
+          // parseNodes(nextIndex);
           break;
-        case BlockTypesMap.OrderedListItem:
-        case BlockTypesMap.UnorderedListItem:
-          const { node, nextIndex } = parseListBlocks(index);
-          nodes.push(node);
-          parseNodes(nextIndex);
-          break;
-        case BlockTypesMap.Unstyled:
-          nodes.push(parseTextBlock(node));
+        case NodeType.Text:
+          parseTextBlock(node);
           parseNodes(index + 1);
           break;
         default:
-          console.log(`ERROR! Unknown node type "${node.type}"!`);
-          process.exit(1);
+          if (node.type.includes('ricos')) {
+            parseAtomicNode(node);
+            parseNodes(index + 1);
+          } else {
+            console.log(`ERROR! Unknown node type "${node.type}"!`);
+            process.exit(1);
+          }
       }
     }
   };
 
-  const parseAtomicBlock = (node: RicosNode) => {
+  const parseAtomicNode = (node: RicosNode) => {
     const dataField = FROM_RICOS_ENTITY_TYPE_MAP[node.type];
     editorState = createBlock(editorState, node.type, dataField).newEditorState;
   };
@@ -73,18 +69,18 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   const parseHeaderBlock = (node: RicosNode) => {
     const getLevel = (blockType: string) => {
       switch (blockType) {
-        case BlockTypesMap.HeaderOne:
-          return HeaderLevel[BlockTypesMap.HeaderOne];
-        case BlockTypesMap.HeaderTwo:
-          return HeaderLevel[BlockTypesMap.HeaderTwo];
-        case BlockTypesMap.HeaderThree:
-          return HeaderLevel[BlockTypesMap.HeaderThree];
-        case BlockTypesMap.HeaderFour:
-          return HeaderLevel[BlockTypesMap.HeaderFour];
-        case BlockTypesMap.HeaderFive:
-          return HeaderLevel[BlockTypesMap.HeaderFive];
-        case BlockTypesMap.HeaderSix:
-          return HeaderLevel[BlockTypesMap.HeaderSix];
+        case BlockType.HeaderOne:
+          return HeaderLevel[BlockType.HeaderOne];
+        case BlockType.HeaderTwo:
+          return HeaderLevel[BlockType.HeaderTwo];
+        case BlockType.HeaderThree:
+          return HeaderLevel[BlockType.HeaderThree];
+        case BlockType.HeaderFour:
+          return HeaderLevel[BlockType.HeaderFour];
+        case BlockType.HeaderFive:
+          return HeaderLevel[BlockType.HeaderFive];
+        case BlockType.HeaderSix:
+          return HeaderLevel[BlockType.HeaderSix];
         default:
           console.log(`ERROR! Unknown header level "${blockType}"!`);
           process.exit(1);
