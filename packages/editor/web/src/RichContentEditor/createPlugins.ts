@@ -78,11 +78,7 @@ const createPlugins = ({
 
   const pluginDefaults = {};
 
-  interface WixPluginConfig extends CreatePluginConfig {
-    supportedPluginsOnOneApp: string[];
-  }
-
-  const wixPluginConfig: WixPluginConfig = {
+  const wixPluginConfig: CreatePluginConfig = {
     decorator: wixPluginsDecorators,
     commonPubsub,
     pluginDefaults,

@@ -231,6 +231,7 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
     LegacyEditorPluginConfig<PluginConfig> {
   decorator: PluginsDecorator;
   commonPubsub: Pubsub;
+  supportedPluginsOnOneApp?: string[];
   pluginDefaults: Record<string, unknown>;
   spoilerWrapper?: (component: ComponentType) => ComponentType;
 }

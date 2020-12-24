@@ -28,6 +28,7 @@ import {
   SetEditorState,
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
+import { UNAVAILABLE_ON_ONEAPP_TYPE } from 'wix-rich-content-plugin-unavailable-on-oneapp';
 import { CSSProperties, ComponentType } from 'react';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
@@ -255,7 +256,10 @@ const createBasePlugin = (
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
-        if (type === 'unavailableononeapp' || !config.supportedPluginsOnOneApp?.includes(type)) {
+        if (
+          type === UNAVAILABLE_ON_ONEAPP_TYPE ||
+          !config.supportedPluginsOnOneApp?.includes(type)
+        ) {
           return {
             component: DecoratedCompWithBase,
             editable: false,
@@ -263,7 +267,7 @@ const createBasePlugin = (
               getData: getData(contentBlock, { getEditorState }),
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              type: 'unavailableononeapp',
+              type: UNAVAILABLE_ON_ONEAPP_TYPE,
               unsupportedType: type,
             },
           };
