@@ -1,6 +1,5 @@
 import createInlineButtons from './inline-buttons';
-import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
-import { UnavailableOnOneAppPluginEditorConfig } from '../types';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = () => {
   return {
