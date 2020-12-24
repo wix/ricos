@@ -2913,7 +2913,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         }
       ],
       "key": 2,
-      "text": "wix.com ",
+      "text": "wix.com",
       "type": "unstyled"
     },
     {
