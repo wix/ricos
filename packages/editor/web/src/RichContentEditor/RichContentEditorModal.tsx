@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { FunctionComponent, ComponentType } from 'react';
 
 import { EditorModals, RichContentModal } from 'wix-rich-content-editor-common';

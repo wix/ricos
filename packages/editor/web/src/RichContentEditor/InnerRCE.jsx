@@ -136,17 +136,6 @@ class InnerRCE extends PureComponent {
     this.setState({ showToolbars: true });
   };
 
-  onBlur = e => {
-    if (
-      this.editorWrapper &&
-      e.relatedTarget &&
-      !e.relatedTarget.querySelector('[data-id=rich-content-editor-modal]') &&
-      !this.editorWrapper.contains(e.relatedTarget)
-    ) {
-      this.setState({ showToolbars: false });
-    }
-  };
-
   handleAtomicPluginsBorders = () => {
     const { editing = true } = this.props;
     const { showToolbars } = this.state;

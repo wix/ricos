@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { camelCase, upperFirst } from 'lodash';
 import { ClassNameStrategy } from '../types';
+import { TABLE_TYPE } from 'ricos-content';
 
 export const alignmentClassName: ClassNameStrategy = (componentData, theme, styles) => {
   const { alignment } = componentData.config || {};
@@ -23,7 +24,7 @@ export const sizeClassName: ClassNameStrategy = (
     return '';
   }
   const key = `size${upperFirst(camelCase(size))}`;
-  const isRenderedInTable = innerRCERenderedIn === 'table';
+  const isRenderedInTable = innerRCERenderedIn === TABLE_TYPE;
   return classNames(styles[key], theme[key], {
     [styles.renderedInTable]: isRenderedInTable,
     [theme.renderedInTable]: isRenderedInTable,
