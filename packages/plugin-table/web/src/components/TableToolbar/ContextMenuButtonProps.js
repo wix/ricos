@@ -1,5 +1,5 @@
 import { ContextMenuIcon } from '../../icons';
-import { getRange, getColsRange } from '../../tableUtils';
+import { getRange, getColsRange } from '../../domain/tableDataUtil';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;

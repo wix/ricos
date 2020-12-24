@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/table-toolbar.scss';
-import { getRange } from '../../tableUtils';
+import { getRange } from '../../domain/tableDataUtil';
 import { cloneDeep, isEmpty } from 'lodash';
 import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getCellFormattingButtonsProps } from './CellFormattingButtonProps';

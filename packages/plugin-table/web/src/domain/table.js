@@ -1,13 +1,7 @@
-import {
-  createEmptyCellEditor,
-  getRange,
-  createEmptyRow,
-  createEmptyCell,
-  TableDataUtil,
-  getRefWidthAsNumber,
-} from '../tableUtils';
+import { getRange, TableDataUtil, getRefWidthAsNumber } from './tableDataUtil';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
 import { ROW_DEFAULT_HEIGHT } from '../consts';
+import { createEmptyCellEditor, createEmptyCell, createEmptyRow } from '../tableUtil';
 import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
 

@@ -1,4 +1,4 @@
-import { getDefaultsSettings } from '../defaults';
+import { getDefaultsSettings } from '../tableUtil';
 import {
   TOOLBARS,
   BUTTON_TYPES,

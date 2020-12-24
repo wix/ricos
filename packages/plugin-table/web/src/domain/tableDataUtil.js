@@ -1,18 +1,5 @@
-import { EditorState } from 'wix-rich-content-editor';
-import { getColors } from './defaults';
-import { CELL_MANUAL_MIN_WIDTH } from './consts';
-
-//CREATE EMPTY TABLE COMPS
-export const createEmptyCellEditor = () => EditorState.createEmpty();
-
-export const createEmptyCell = () => ({ content: createEmptyCellEditor() });
-
-export const createEmptyRow = colNum => {
-  const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
-  const emptyRow = { columns: {} };
-  columnsIndexes.forEach(i => (emptyRow.columns[i] = createEmptyCell()));
-  return emptyRow;
-};
+import { getColors } from '../defaults';
+import { CELL_MANUAL_MIN_WIDTH } from '../consts';
 
 //RESIZERS
 const getStyleVal = (elm, css) => {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/table-settings-modal.scss';
 import { TableSettingsCountSection } from '../components';
-import { getDefaultsSettings } from '../defaults';
+import { getDefaultsSettings } from '../tableUtil';
 import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { CloseIcon } from '../icons';
 

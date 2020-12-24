@@ -10,7 +10,7 @@ import {
   isCursorAtFirstLine,
   isCursorAtLastLine,
 } from 'wix-rich-content-editor-common';
-import { getRange } from '../tableUtils';
+import { getRange } from '../domain/tableDataUtil';
 import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 

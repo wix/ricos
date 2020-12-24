@@ -1,4 +1,4 @@
-import { getRange } from '../../tableUtils';
+import { getRange } from '../../domain/tableDataUtil';
 import {
   VerticalAlignmentTop,
   VerticalAlignmentMiddle,

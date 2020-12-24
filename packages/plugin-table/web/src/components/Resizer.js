@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/resizer.scss';
-import { paddingDiff, getRefWidthAsNumber } from '../tableUtils';
+import { paddingDiff, getRefWidthAsNumber } from '../domain/tableDataUtil';
 import classNames from 'classnames';
 
 const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color

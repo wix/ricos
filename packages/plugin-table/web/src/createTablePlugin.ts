@@ -1,6 +1,6 @@
 import createToolbar from './toolbar/createToolbar';
 import { Component } from './table-component';
-import { getDefaultsSettings } from './defaults';
+import { getDefaultsSettings } from './tableUtil';
 import { TABLE_TYPE, TablePluginEditorConfig } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';

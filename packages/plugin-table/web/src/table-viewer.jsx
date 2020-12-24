@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
-import { TableDataUtil } from './tableUtils';
+import { TableDataUtil } from './domain/tableDataUtil';
 import classNames from 'classnames';
 
 class TableViewer extends Component {

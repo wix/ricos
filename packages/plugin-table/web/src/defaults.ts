@@ -1,24 +1,5 @@
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
-import { TABLE_TYPE as type } from './types';
-import { createEmptyRow } from './tableUtils';
-import { ROW_DEFAULT_HEIGHT, COLORS } from './consts';
-
-const createEmptyRows = (rowNum, colNum) => {
-  const rows = {};
-  [...Array(rowNum).fill(0)].map((row, i) => (rows[i] = createEmptyRow(colNum)));
-  return rows;
-};
-
-export const getDefaultsSettings = (rowNum = 4, colNum = 4) =>
-  Object.freeze({
-    type,
-    config: {
-      ...DEFAULTS.config,
-      colsWidth: [...Array(colNum).fill(10)],
-      rowsHeight: [...Array(rowNum).fill(ROW_DEFAULT_HEIGHT)],
-      rows: createEmptyRows(rowNum, colNum),
-    },
-  });
+import { COLORS } from './consts';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const WRAPPER_PALETTE: any = {};
