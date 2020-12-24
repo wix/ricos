@@ -33,7 +33,15 @@ const RichContentEditorModal: FunctionComponent<Props> = ({
       console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console
     return null;
   }
-  return <RichContentModal modalElement={element} {...modalProps} />;
+  return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div
+      onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}
+      data-id="rich-content-editor-modal"
+    >
+      <RichContentModal modalElement={element} {...modalProps} />
+    </div>
+  );
 };
 
 export default RichContentEditorModal;

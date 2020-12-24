@@ -5,7 +5,7 @@ import Styles from '../../../../statics/styles/static-toolbar-more-button.scss';
 import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
