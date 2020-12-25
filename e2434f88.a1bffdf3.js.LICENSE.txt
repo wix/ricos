@@ -1,6 +1,0 @@
-/*!
- * ends-with <https://github.com/jonschlinkert/ends-with>
- *
- * Copyright (c) 2014 Jon Schlinkert, contributors.
- * Licensed under the MIT license.
- */
