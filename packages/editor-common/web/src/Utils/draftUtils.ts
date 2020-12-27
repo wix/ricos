@@ -9,12 +9,12 @@ import {
   EntityInstance,
   RawDraftEntity,
   EditorChangeType,
-  DraftEntityMutability,
 } from '@wix/draft-js';
 
 import { flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import { RelValue, AnchorTarget } from 'wix-rich-content-common';
+import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
   url: string;
@@ -447,11 +447,7 @@ function removeLink(editorState: EditorState, blockKey: string, [start, end]: [n
 
 export function createEntity(
   editorState: EditorState,
-  {
-    type,
-    mutability = 'MUTABLE',
-    data,
-  }: Omit<RawDraftEntity, 'mutability'> & { mutability?: DraftEntityMutability }
+  { type, mutability = 'MUTABLE', data }: Optional<RawDraftEntity, 'mutability'>
 ) {
   return editorState
     .getCurrentContent()

@@ -10,7 +10,7 @@ export interface ThemeUtils {
 
 /** Colors scheme for `Ricos`.
  *
- * {@link https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#theme Read More}
+ * {@link https://wix.github.io/ricos/docs/ricos/ricos-api/#theme Read More}
  * @example
  * ```ts
  * const palette: PaletteColors = {
