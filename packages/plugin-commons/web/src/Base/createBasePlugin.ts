@@ -28,8 +28,10 @@ import {
   SetEditorState,
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
-import { UNAVAILABLE_ON_ONEAPP_TYPE } from 'wix-rich-content-plugin-unavailable-on-oneapp';
+// import { UNAVAILABLE_ON_ONEAPP_TYPE } from 'wix-rich-content-plugin-unavailable-on-oneapp';
 import { CSSProperties, ComponentType } from 'react';
+
+const UNAVAILABLE_ON_ONEAPP_TYPE = 'unavailableononeapp';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
