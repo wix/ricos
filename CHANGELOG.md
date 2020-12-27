@@ -17,12 +17,13 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.10.2 (Dec 27, 2020)
 ### :bug: Bug Fix
 - `gallery`
   - [#1908](https://github.com/wix-incubator/rich-content/pull/1908) remove option to choose videos in native selection
-
-</details>
-<hr/>
 
 ## 8.10.1 (Dec 22, 2020)
 ### :bug: Bug Fix
