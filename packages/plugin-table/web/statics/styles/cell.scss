@@ -25,7 +25,7 @@
     width: calc(100% + 36px);
     height: max-content;
     top: 0;
-    left: -18px;
+    left: -20px;
     position: relative;
     z-index: 1;
 }
@@ -35,7 +35,7 @@
     caret-color: transparent;
     &.edit {
         caret-color: unset;
-        padding-left: 27px;
+        padding-left: 29px;
         padding-top: 10px;
         padding-right: 10px;
         padding-bottom: 10px;
