@@ -1,10 +1,4 @@
-import { colorNameToHex } from './colorNameToHex';
-
 export default rgbString => {
-  if (colorNameToHex(rgbString)) {
-    return colorNameToHex(rgbString);
-  }
-
   const sep = rgbString.indexOf(',') > -1 ? ',' : ' ';
   const rgb = rgbString
     .substr(4)

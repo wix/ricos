@@ -2,6 +2,7 @@ import { OrderedSet } from 'immutable';
 import rgbToHex from './rgbToHex';
 import { Modifier, SelectionState } from 'wix-rich-content-editor-common';
 import htmlToBlock from './htmlToBlock';
+import { colorNameToHex } from './colorNameToHex';
 import { reduce } from 'lodash';
 
 const isBlack = color => color === '#000000';
@@ -16,14 +17,14 @@ const shouldIncludeColor = color => {
 const getInlineColors = style => {
   const styles = [];
   if (style.color) {
-    const FG = rgbToHex(style.color);
+    const FG = colorNameToHex(style.color) || rgbToHex(style.color);
     if (shouldIncludeColor(FG)) {
       styles.push(`{"FG":"${FG}"}`);
     }
   }
 
   if (style.backgroundColor) {
-    const BG = rgbToHex(style.backgroundColor);
+    const BG = colorNameToHex(style.backgroundColor) || rgbToHex(style.backgroundColor);
     if (shouldIncludeColor(BG)) {
       styles.push(`{"BG":"${BG}"}`);
     }
