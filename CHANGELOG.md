@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `viewer`
+  - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
+
 ### :bug: Bug Fix
 - `gallery`
   - [#1908](https://github.com/wix-incubator/rich-content/pull/1908) remove option to choose videos in native selection
