@@ -57,16 +57,6 @@ const COMMAND_BY_SHORTCUT = [
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: '9',
   },
-  {
-    command: COMMANDS.UNDO,
-    modifiers: [MODIFIERS.COMMAND],
-    key: 'z',
-  },
-  {
-    command: COMMANDS.REDO,
-    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: 'z',
-  },
 ];
 
 const {

@@ -24,6 +24,8 @@ import {
   COMMANDS,
   MODIFIERS,
   getEntities,
+  undo,
+  redo,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
@@ -145,6 +147,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleReturn?: (
     updateEditorStateCallback: (editorState: EditorState) => void
   ) => DraftEditorProps['handleReturn'];
+  handleUndoCommand?: () => EditorState;
+  handleRedoCommand?: () => EditorState;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -585,6 +589,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     event?.preventDefault();
   };
 
+  handleUndoCommand = () => {
+    this.props.handleUndoCommand?.() || this.updateEditorState(undo(this.state.editorState));
+  };
+
+  handleRedoCommand = () => {
+    this.props.handleRedoCommand?.() || this.updateEditorState(redo(this.state.editorState));
+  };
+
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
@@ -603,12 +615,24 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         modifiers: [],
         key: 'Escape',
       },
+      {
+        command: COMMANDS.UNDO,
+        modifiers: [MODIFIERS.COMMAND],
+        key: 'z',
+      },
+      {
+        command: COMMANDS.REDO,
+        modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+        key: 'z',
+      },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
       esc: this.handleEscCommand,
+      ricosUndo: this.handleUndoCommand,
+      ricosRedo: this.handleRedoCommand,
     },
   });
 
@@ -793,6 +817,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
+        handleUndoCommand={this.handleUndoCommand}
+        handleRedoCommand={this.handleRedoCommand}
       />
     );
   };
