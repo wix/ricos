@@ -1,4 +1,4 @@
-import { pluginSoundCloud } from './viewer';
+import { pluginSoundCloud, SOUND_CLOUD_TYPE } from './viewer';
 
 window.__ricosPlugins = window.__ricosPlugins || {};
-window.__ricosPlugins[pluginSoundCloud.type] = pluginSoundCloud;
+window.__ricosPlugins[SOUND_CLOUD_TYPE] = pluginSoundCloud;

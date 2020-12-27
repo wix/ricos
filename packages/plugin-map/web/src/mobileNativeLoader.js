@@ -1,4 +1,4 @@
-import { pluginMap } from './viewer';
+import { pluginMap, MAP_TYPE } from './viewer';
 
 window.__ricosPlugins = window.__ricosPlugins || {};
-window.__ricosPlugins[pluginMap.type] = pluginMap;
+window.__ricosPlugins[MAP_TYPE] = pluginMap;
