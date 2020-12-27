@@ -1,9 +1,19 @@
+import { colorNameToHex } from './colorNameToHex';
+
 export default rgbString => {
+  if (colorNameToHex(rgbString)) {
+    return colorNameToHex(rgbString);
+  }
+
   const sep = rgbString.indexOf(',') > -1 ? ',' : ' ';
   const rgb = rgbString
     .substr(4)
     .split(')')[0]
     .split(sep);
+
+  if (rgb?.length !== 3) {
+    return null;
+  }
 
   let r = Number(rgb[0]).toString(16),
     g = Number(rgb[1]).toString(16),
