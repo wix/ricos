@@ -37,6 +37,12 @@ module.exports = {
           position: 'left',
         },
         {
+          to: 'docs/dev/plugin_structure',
+          activeBasePath: 'docs',
+          label: 'For Developers',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/wix/ricos',
           label: 'GitHub',
           position: 'right',
