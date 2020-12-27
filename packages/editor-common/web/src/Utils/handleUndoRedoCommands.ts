@@ -39,22 +39,24 @@ function applyActionForGalleryItems(currentItems, newItems) {
   }
 }
 
-function didAccordionPairsChange(currentPairs, newPairs) {
-  if (newPairs.length !== currentPairs.length) {
-    return true;
-  }
-  return newPairs.some((pair, index) => {
+function getChangedPairIndex(currentPairs, newPairs) {
+  let hasOrderChanged = false;
+  let isTitle = false;
+  const changedPairIndex = newPairs.findIndex((pair, index) => {
     const { key } = pair;
     const currentPair = currentPairs[index];
     if (currentPair.key !== key) {
+      hasOrderChanged = true;
       return true;
     }
     const { title, content } = currentPair;
-    return (
-      title.getCurrentContent() !== pair.title.getCurrentContent() ||
-      content.getCurrentContent() !== pair.content.getCurrentContent()
-    );
+    if (title.getCurrentContent() !== pair.title.getCurrentContent()) {
+      isTitle = true;
+      return true;
+    }
+    return content.getCurrentContent() !== pair.content.getCurrentContent();
   });
+  return { changedPairIndex, hasOrderChanged, isTitle };
 }
 
 function createBlockEntitiesDataMap(contentState: RicosContent) {
@@ -81,16 +83,59 @@ function shouldReplaceVideoData(currentData, newData) {
 
 function handleAccordionEntity(currentData, newData) {
   const newPairs = newData.pairs.filter(pair => pair.key && pair.title && pair.content);
-  const shouldUndoAgain =
-    newPairs.length !== newData.pairs.length ||
-    didAccordionPairsChange(currentData.pairs, newPairs);
-  if (!isEqual(currentData.config, newData.config) || shouldUndoAgain) {
+  const isBrokenContent = newPairs.length !== newData.pairs.length;
+  if (!isEqual(currentData.config, newData.config) || isBrokenContent) {
     return {
-      shouldUndoAgain,
+      shouldUndoAgain: isBrokenContent,
       fixedData: {
         ...currentData,
         config: newData.config,
       },
+    };
+  }
+
+  const { pairs: currentPairs } = currentData;
+  if (newPairs.length !== currentPairs.length) {
+    return { shouldUndoAgain: false };
+  }
+
+  const { changedPairIndex, hasOrderChanged, isTitle } = getChangedPairIndex(
+    currentPairs,
+    newPairs
+  );
+  if (changedPairIndex > -1) {
+    if (hasOrderChanged) {
+      return { shouldUndoAgain: false };
+    }
+    const newInnerState = isTitle
+      ? newPairs[changedPairIndex].title
+      : newPairs[changedPairIndex].content;
+    const currentInnerState = isTitle
+      ? currentPairs[changedPairIndex].title
+      : currentPairs[changedPairIndex].content;
+    const entityToReplace = getEntityToReplace(
+      convertToRaw(newInnerState.getCurrentContent()),
+      convertToRaw(currentInnerState.getCurrentContent())
+    );
+    const { blockKey, fixedData, shouldUndoAgain } = entityToReplace;
+    if (fixedData) {
+      replaceComponentData(newInnerState, blockKey, fixedData);
+    }
+    if (isTitle) {
+      currentPairs[changedPairIndex].title = EditorState.createWithContent(
+        newInnerState.getCurrentContent()
+      );
+    } else {
+      currentPairs[changedPairIndex].content = EditorState.createWithContent(
+        newInnerState.getCurrentContent()
+      );
+    }
+    return {
+      fixedData: {
+        ...currentData,
+        pairs: currentPairs,
+      },
+      shouldUndoAgain,
     };
   }
 }
