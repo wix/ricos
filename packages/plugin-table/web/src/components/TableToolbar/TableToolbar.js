@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/table-toolbar.scss';
 import { getRange } from '../../domain/tableDataUtil';
 import { cloneDeep, isEmpty } from 'lodash';
-import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
+import { ToolbarContainer, FloatingToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getCellFormattingButtonsProps } from './CellFormattingButtonProps';
 import { getContextMenuButtonsProps } from './ContextMenuButtonProps';
 
@@ -190,11 +190,11 @@ class TableToolbar extends Component {
     const { isMobile, t, theme } = this.props;
     const buttonsAsArray = Object.values(this.state.editingToolbarProps.buttons);
     return (
-      <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
+      <FloatingToolbarContainer isMobile={isMobile}>
         <div onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}>
           <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
         </div>
-      </ToolbarContainer>
+      </FloatingToolbarContainer>
     );
   };
 
