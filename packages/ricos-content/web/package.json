@@ -35,6 +35,9 @@
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
   },
+  "dependencies": {
+    "utility-types": "^3.10.0"
+  },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
