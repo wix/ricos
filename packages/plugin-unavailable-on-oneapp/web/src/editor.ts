@@ -5,8 +5,6 @@
 
 import { createUnavailableOnOneappPlugin } from './createUnavailableOnOneappPlugin';
 import { UNAVAILABLE_ON_ONEAPP_TYPE, UnavailableOnOneAppPluginEditorConfig } from './types';
-// import { ModalsMap } from './modals'; // Optional
-// import { theme } from './defaults'; // Optional
 import { DEFAULTS } from './defaults';
 import { EditorPluginCreator } from 'wix-rich-content-common';
 
@@ -15,7 +13,5 @@ export const pluginUnavailableOnOneApp: EditorPluginCreator<UnavailableOnOneAppP
     config: { ...DEFAULTS.config, ...config },
     type: UNAVAILABLE_ON_ONEAPP_TYPE,
     createPlugin: createUnavailableOnOneappPlugin,
-    // ModalsMap,
-    // theme,
   };
 };
