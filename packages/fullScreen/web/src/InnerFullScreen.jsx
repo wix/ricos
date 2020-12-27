@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { closeIcon, expandIcon, shrinkIcon } from './icons';
+import { closeIcon, expandIcon, shrinkIcon, arrowLeft, arrowRight } from './icons';
 import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
 import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/libs/resize-media-url';
 import PropTypes from 'prop-types';
@@ -8,6 +8,11 @@ import fscreen from 'fscreen';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
 
 const { ProGallery } = require('pro-gallery');
+
+const navArrowsMap = {
+  left: arrowLeft,
+  right: arrowRight,
+};
 
 export default class InnerFullscreen extends Component {
   constructor(props) {
@@ -85,13 +90,13 @@ export default class InnerFullscreen extends Component {
   };
 
   renderCloseButton = () => {
-    const { foregroundColor } = this.props;
+    const { iconsColor, backgroundColor } = this.props;
     return (
       <div
         role="button"
         tabIndex={0}
         className={styles.close}
-        style={foregroundColor}
+        style={{ ...iconsColor, ...backgroundColor }}
         onClick={this.onClose}
         onKeyDown={this.onClose}
         aria-label={'Close'}
@@ -112,7 +117,7 @@ export default class InnerFullscreen extends Component {
 
   renderFullscreenToggleButton = () => {
     const { isInFullscreen } = this.state;
-    const { foregroundColor } = this.props;
+    const { iconsColor, backgroundColor } = this.props;
     const icon = isInFullscreen ? shrinkIcon : expandIcon;
     const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
     return (
@@ -120,7 +125,7 @@ export default class InnerFullscreen extends Component {
         role="button"
         tabIndex={0}
         className={styles.expand_button}
-        style={foregroundColor}
+        style={{ ...iconsColor, ...backgroundColor }}
         onClick={this.toggleFullscreenMode}
         onKeyDown={this.onFullscreenToggleKeyDown}
         aria-label={ariaLabel}
@@ -143,6 +148,11 @@ export default class InnerFullscreen extends Component {
         <div className={styles.title}>{itemProps.title}</div>
       </div>
     );
+  };
+
+  renderArrows = direction => {
+    const { iconsColor, backgroundColor } = this.props;
+    return <div style={{ ...iconsColor, ...backgroundColor }}> {navArrowsMap[direction]()} </div>;
   };
 
   render() {
@@ -181,6 +191,7 @@ export default class InnerFullscreen extends Component {
             slideshowInfoSize,
           }}
           customSlideshowInfoRenderer={this.infoElement}
+          customNavArrowsRenderer={this.renderArrows}
         />
       </div>
     );
@@ -193,6 +204,6 @@ InnerFullscreen.propTypes = {
   index: PropTypes.number,
   topMargin: PropTypes.object,
   backgroundColor: PropTypes.object,
-  foregroundColor: PropTypes.object,
+  iconsColor: PropTypes.object,
   onClose: PropTypes.func,
 };
