@@ -1,4 +1,4 @@
-import { EditorState, convertToRaw, ContentState } from '@wix/draft-js';
+import { EditorState, convertToRaw, convertFromRaw, ContentState } from '@wix/draft-js';
 import { RicosContent } from 'ricos-content';
 import { isEqual } from 'lodash';
 
@@ -81,6 +81,23 @@ function shouldReplaceVideoData(currentData, newData) {
   );
 }
 
+function fixBrokenInnerRicosStates(newEditorState: EditorState, editorState: EditorState) {
+  const entityToReplace = getEntityToReplace(
+    convertToRaw(newEditorState.getCurrentContent()),
+    convertToRaw(editorState.getCurrentContent())
+  );
+  const { blockKey, fixedData, shouldUndoAgain } = entityToReplace;
+  if (fixedData) {
+    replaceComponentData(newEditorState, blockKey, fixedData);
+  }
+  return {
+    newEditorState: EditorState.createWithContent(
+      convertFromRaw(convertToRaw(newEditorState.getCurrentContent()))
+    ),
+    undoAgain: shouldUndoAgain,
+  };
+}
+
 function handleAccordionEntity(currentData, newData) {
   const newPairs = newData.pairs.filter(pair => pair.key && pair.title && pair.content);
   const isBrokenContent = newPairs.length !== newData.pairs.length;
@@ -107,33 +124,26 @@ function handleAccordionEntity(currentData, newData) {
     if (hasOrderChanged) {
       return { shouldUndoAgain: false };
     }
-    const newInnerState = isTitle
-      ? newPairs[changedPairIndex].title
-      : newPairs[changedPairIndex].content;
-    const currentInnerState = isTitle
-      ? currentPairs[changedPairIndex].title
-      : currentPairs[changedPairIndex].content;
-    const entityToReplace = getEntityToReplace(
-      convertToRaw(newInnerState.getCurrentContent()),
-      convertToRaw(currentInnerState.getCurrentContent())
-    );
-    const { blockKey, fixedData, shouldUndoAgain } = entityToReplace;
-    if (fixedData) {
-      replaceComponentData(newInnerState, blockKey, fixedData);
-    }
+    let shouldUndoAgain: boolean | undefined;
     if (isTitle) {
-      currentPairs[changedPairIndex].title = EditorState.createWithContent(
-        newInnerState.getCurrentContent()
+      const { newEditorState, undoAgain } = fixBrokenInnerRicosStates(
+        newPairs[changedPairIndex].title,
+        currentPairs[changedPairIndex].title
       );
+      newPairs[changedPairIndex].title = newEditorState;
+      shouldUndoAgain = undoAgain;
     } else {
-      currentPairs[changedPairIndex].content = EditorState.createWithContent(
-        newInnerState.getCurrentContent()
+      const { newEditorState, undoAgain } = fixBrokenInnerRicosStates(
+        newPairs[changedPairIndex].content,
+        currentPairs[changedPairIndex].content
       );
+      newPairs[changedPairIndex].content = newEditorState;
+      shouldUndoAgain = undoAgain;
     }
     return {
       fixedData: {
         ...currentData,
-        pairs: currentPairs,
+        pairs: newPairs,
       },
       shouldUndoAgain,
     };
