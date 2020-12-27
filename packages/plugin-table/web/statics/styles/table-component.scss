@@ -4,7 +4,7 @@
 .tableEditorContainer {
     display: grid;
     grid-template-rows: auto max-content;
-    grid-template-columns: 20px calc(100% - 20px) max-content;  
+    grid-template-columns: 20px auto max-content;  
     position: unset;
     &.viewMode {
         grid-template-columns: 100%;  
