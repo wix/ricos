@@ -1,11 +1,21 @@
-import { UpdateEntityFunc, ImageComponentData, ComponentData, BICallbacks } from '.';
+import {
+  UpdateEntityFunc,
+  ImageComponentData,
+  VideoComponentData,
+  FileComponentData,
+  ComponentData,
+  BICallbacks,
+} from '.';
 import { CSSProperties } from 'react';
 import { EditorState } from 'draft-js';
 
 export interface Helpers extends BICallbacksForHelpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
   closeModal?: () => void;
-  handleFileUpload?: (file: File, updateEntity: UpdateEntityFunc<ImageComponentData>) => void;
+  handleFileUpload?: (
+    file: File,
+    updateEntity: UpdateEntityFunc<ImageComponentData | VideoComponentData | FileComponentData>
+  ) => void;
   handleFileSelection?: (
     index: number | undefined,
     multiple: boolean,
