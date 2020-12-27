@@ -173,9 +173,16 @@ class TableToolbar extends Component {
     return <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttons} />;
   };
 
+  cleanFirstButtonAsSeparator = buttonsAsArray => {
+    if (buttonsAsArray[0].type === 'SEPARATOR') {
+      buttonsAsArray.shift();
+    }
+  };
+
   renderTextFormattingToolbar = () => {
     const { isMobile, t, theme } = this.props;
     const buttonsAsArray = Object.values(this.state.combinedToolbarProps.buttons);
+    this.cleanFirstButtonAsSeparator(buttonsAsArray);
     return (
       <>
         <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
@@ -189,6 +196,7 @@ class TableToolbar extends Component {
   renderEditingTextFormattingToolbar = () => {
     const { isMobile, t, theme } = this.props;
     const buttonsAsArray = Object.values(this.state.editingToolbarProps.buttons);
+    this.cleanFirstButtonAsSeparator(buttonsAsArray);
     return (
       <FloatingToolbarContainer isMobile={isMobile}>
         <div onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}>
