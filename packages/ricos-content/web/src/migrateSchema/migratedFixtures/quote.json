@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d7bf1",
+            "key": "9rg5d",
             "ricosText": {
               "decorations": [],
               "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition."
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "7jrt6"
+        "key": "8igvd"
       },
       {
         "nodes": [
@@ -23,7 +23,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "514up",
+                "key": "46eem",
                 "ricosText": {
                   "decorations": [],
                   "text": "Bring to the table win-win survival strategies to ensure proactive domination."
@@ -31,7 +31,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "700mb"
+            "key": "e5aqp"
           }
         ],
         "type": "blockquote",
@@ -42,7 +42,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9h4vo",
+            "key": "eaitn",
             "ricosText": {
               "decorations": [],
               "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution."
@@ -50,16 +50,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "ah0i1"
+        "key": "ff3jo"
       }
     ],
     "lastEdited": {
-      "seconds": 1609175506,
-      "nanos": 512000000
+      "seconds": 1609176061,
+      "nanos": 372000000
     }
   },
   "selection": {
-    "anchorNode": "7jrt6"
+    "anchorNode": "8igvd"
   },
   "version": ""
 }

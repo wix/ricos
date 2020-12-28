@@ -4,14 +4,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "nfm1"
+        "key": "7tggc"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "adech",
+            "key": "blb4r",
             "ricosText": {
               "decorations": [],
               "text": "Theming is done by "
@@ -20,7 +20,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3bmg9",
+            "key": "8tkce",
             "ricosText": {
               "decorations": [],
               "text": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewe"
@@ -29,7 +29,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bbeju",
+            "key": "faar1",
             "ricosText": {
               "decorations": [],
               "text": "r/web "
@@ -37,7 +37,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "7c8s"
+        "key": "66lrq"
       },
       {
         "nodes": [
@@ -46,7 +46,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "a6pt0",
+                "key": "8iv32",
                 "ricosText": {
                   "decorations": [],
                   "text": "This is a quote example - look at the color!"
@@ -54,7 +54,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "54cut"
+            "key": "2tlp8"
           }
         ],
         "type": "blockquote",
@@ -63,14 +63,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ehb60"
+        "key": "7vh4n"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "amu5b",
+            "key": "4rco6",
             "ricosText": {
               "decorations": [],
               "text": "No #documentation yet though "
@@ -79,7 +79,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "809t",
+            "key": "cr7c7",
             "ricosText": {
               "decorations": [
                 {
@@ -91,15 +91,24 @@
               ],
               "text": "\ud83d"
             }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "firr8",
+            "ricosText": {
+              "decorations": [],
+              "text": "\ude32"
+            }
           }
         ],
         "type": "paragraph",
-        "key": "dhhdh"
+        "key": "77cc1"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "a4qse"
+        "key": "2cj1q"
       },
       {
         "nodes": [],
@@ -163,52 +172,52 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b5as0"
+        "key": "4c2if"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dg1k3"
+        "key": "3aqto"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dg1rl"
+        "key": "a9e7v"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5isne"
+        "key": "26qdd"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "52bg3"
+        "key": "6rjt"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fs2n3"
+        "key": "61ocq"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5dqe1"
+        "key": "6l326"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8func"
+        "key": "13idk"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3667l"
+        "key": "68gv4"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "92gke"
+        "key": "ekt55"
       },
       {
         "nodes": [],
@@ -228,7 +237,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6dqlv",
+            "key": "afmd3",
             "ricosText": {
               "decorations": [
                 {
@@ -241,7 +250,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "11mfo",
+            "key": "fe593",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -250,7 +259,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e83s9",
+            "key": "2mnhk",
             "ricosText": {
               "decorations": [
                 {
@@ -263,7 +272,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e0qhq",
+            "key": "avggg",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -272,7 +281,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "eh15j",
+            "key": "f286c",
             "ricosText": {
               "decorations": [
                 {
@@ -281,15 +290,34 @@
               ],
               "text": "@Tags"
             }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "e0unp",
+            "ricosText": {
+              "decorations": [],
+              "text": " "
+            }
           }
         ],
         "type": "paragraph",
-        "key": "72d57"
+        "key": "fnp3u"
       },
       {
-        "nodes": [],
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "7phbj",
+            "ricosText": {
+              "decorations": [],
+              "text": " "
+            }
+          }
+        ],
         "type": "paragraph",
-        "key": "9fag7"
+        "key": "3use2"
       },
       {
         "nodes": [],
@@ -308,7 +336,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "386em"
+        "key": "9e3eh"
       },
       {
         "nodes": [],
@@ -324,16 +352,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d15hi"
+        "key": "c77u0"
       }
     ],
     "lastEdited": {
-      "seconds": 1609175506,
-      "nanos": 520000000
+      "seconds": 1609176061,
+      "nanos": 388000000
     }
   },
   "selection": {
-    "anchorNode": "nfm1"
+    "anchorNode": "7tggc"
   },
   "version": "7.3.4"
 }
