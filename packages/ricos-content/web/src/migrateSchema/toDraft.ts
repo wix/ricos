@@ -1,3 +1,5 @@
+/* eslint-disable  */
+
 import { RicosContent, RicosNode } from 'ricos-schema';
 import { RicosContent as RicosContentDraft } from 'ricos-content';
 import { EditorState, convertToRaw, createBlock } from 'wix-rich-content-editor-common';

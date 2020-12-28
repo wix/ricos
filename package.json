@@ -18,7 +18,7 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/wix-incubator/rich-content.git"
+		"url": "git+https://github.com/wix/ricos.git"
 	},
 	"scripts": {
 		"clean": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && rm -f yarn.lock",
@@ -36,7 +36,7 @@
 		"deploy": "node scripts/deployment/deployExamples",
 		"deployPRComment": "node scripts/deployment/deployPRComment",
 		"createVersion": "node scripts/createVersion",
-		"preRelease": "node scripts/preRelease",
+		"preRelease": "node scripts/preRelease",		
 		"storybook": "npm run start --prefix examples/storybook",
 		"exampleApp": "npm run start --prefix examples/main",
 		"docs": "npm run start --prefix docs",
