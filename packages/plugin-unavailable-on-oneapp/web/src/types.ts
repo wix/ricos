@@ -1,11 +1,7 @@
-import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
+import { EditorPluginConfig } from 'wix-rich-content-common';
 
-export const UNAVAILABLE_ON_ONEAPP_TYPE = 'unavailableononeapp';
+export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
 
-export interface UnavailableOnOneAppPluginEditorConfig extends EditorPluginConfig {
-  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
-
-export interface UnavailableOnOneAppPluginViewerConfig extends ViewerPluginConfig {
+export interface UnsupportedBlocksPluginEditorConfig extends EditorPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }

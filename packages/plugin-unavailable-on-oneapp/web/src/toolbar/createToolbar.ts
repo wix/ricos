@@ -4,7 +4,7 @@ import { CreatePluginToolbar } from 'wix-rich-content-common';
 const createToolbar: CreatePluginToolbar = () => {
   return {
     InlineButtons: createInlineButtons(),
-    name: 'unavailableononeapp',
+    name: 'unsupported-blocks',
   };
 };
 

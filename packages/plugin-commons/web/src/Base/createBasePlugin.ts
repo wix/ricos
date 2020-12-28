@@ -28,10 +28,10 @@ import {
   SetEditorState,
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
-// import { UNAVAILABLE_ON_ONEAPP_TYPE } from 'wix-rich-content-plugin-unavailable-on-oneapp';
+// import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-unsupported-blocks';
 import { CSSProperties, ComponentType } from 'react';
 
-const UNAVAILABLE_ON_ONEAPP_TYPE = 'unavailableononeapp';
+const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
@@ -65,7 +65,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
-  supportedPluginsOnOneApp?: string[];
+  supportedBlocks?: string[];
   type: PluginType;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
@@ -258,10 +258,7 @@ const createBasePlugin = (
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
-        if (
-          type === UNAVAILABLE_ON_ONEAPP_TYPE ||
-          !config.supportedPluginsOnOneApp?.includes(type)
-        ) {
+        if (type === UNSUPPORTED_BLOCKS_TYPE || !config.supportedBlocks?.includes(type)) {
           return {
             component: DecoratedCompWithBase,
             editable: false,
@@ -269,7 +266,7 @@ const createBasePlugin = (
               getData: getData(contentBlock, { getEditorState }),
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              type: UNAVAILABLE_ON_ONEAPP_TYPE,
+              type: UNSUPPORTED_BLOCKS_TYPE,
               unsupportedType: type,
             },
           };

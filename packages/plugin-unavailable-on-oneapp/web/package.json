@@ -1,10 +1,10 @@
 {
-  "name": "wix-rich-content-plugin-unavailable-on-oneapp",
+  "name": "wix-rich-content-plugin-unsupported-blocks",
   "private": true,
   "version": "8.10.2",
   "author": {
-    "name": "undefined",
-    "email": "tamratb@wix.comn"
+    "name": "tamrat-bayeh",
+    "email": "tamratb@wix.com"
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-unavailable-on-oneapp",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-unsupported-blocks",
   "files": [
     "dist", "libs", "viewer"
   ],
@@ -25,7 +25,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build:rollup": "rollup --environment MODULE_NAME:plugin-unavailable-on-oneapp -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:plugin-unsupported-blocks -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",

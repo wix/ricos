@@ -1,4 +1,4 @@
-export { createUnavailableOnOneappPlugin } from './createUnavailableOnOneappPlugin';
-export { default as unavailableononeappViewer } from './unavailable-on-oneapp-viewer';
-export { UNAVAILABLE_ON_ONEAPP_TYPE } from './types';
-export { pluginUnavailableOnOneApp } from './editor';
+export { createUnsupportedBlocksPlugin } from './createUnsupportedBlocksPlugin';
+export { default as UnsupportedBlocksViewer } from './unsupported-blocks-viewer';
+export { UNSUPPORTED_BLOCKS_TYPE } from './types';
+export { pluginUnsupportedBlocks } from './editor';

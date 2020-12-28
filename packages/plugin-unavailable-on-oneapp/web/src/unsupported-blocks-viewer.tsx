@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { mergeStyles, RichContentTheme, ComponentData } from 'wix-rich-content-common';
-import styles from '../statics/styles/unavailable-on-oneapp.scss';
+import styles from '../statics/styles/unsupported-blocks.scss';
 import CircleInfoIcon from './icons/CircleInfoIcon';
-import { UnavailableOnOneAppPluginViewerConfig } from './types';
+import { UnsupportedBlocksPluginEditorConfig } from './types';
 
 interface Props {
   componentData: ComponentData;
-  settings: UnavailableOnOneAppPluginViewerConfig;
+  settings: UnsupportedBlocksPluginEditorConfig;
   theme: RichContentTheme;
   unsupportedType: string;
 }
 
-class UnavailableOnOneAppViewer extends Component<Props> {
+class UnsupportedBlocksViewer extends Component<Props> {
   styles: Record<string, string>;
   getPluginName = fullPluginName => {
     if (!fullPluginName.includes('-')) return fullPluginName;
@@ -24,8 +24,8 @@ class UnavailableOnOneAppViewer extends Component<Props> {
     const pluginName = this.getPluginName(this.props.unsupportedType);
 
     return (
-      <div className={styles.unaOnOneApp_container}>
-        <div className={styles.unaOnOneApp_alert}>
+      <div className={styles.unsupportedBlocks_container}>
+        <div className={styles.unsupportedBlocks_alert}>
           <CircleInfoIcon />
           <p>{pluginName} can be edited only on the web</p>
         </div>
@@ -34,4 +34,4 @@ class UnavailableOnOneAppViewer extends Component<Props> {
   }
 }
 
-export default UnavailableOnOneAppViewer;
+export default UnsupportedBlocksViewer;

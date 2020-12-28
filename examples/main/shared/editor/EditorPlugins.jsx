@@ -15,9 +15,9 @@ import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import {
-  createUnavailableOnOneappPlugin,
-  UNAVAILABLE_ON_ONEAPP_TYPE,
-} from 'wix-rich-content-plugin-unavailable-on-oneapp';
+  createUnsupportedBlocksPlugin,
+  UNSUPPORTED_BLOCKS_TYPE,
+} from 'wix-rich-content-plugin-unsupported-blocks';
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
@@ -84,7 +84,7 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-import 'wix-rich-content-plugin-unavailable-on-oneapp/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
@@ -127,7 +127,7 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
-  createUnavailableOnOneappPlugin,
+  createUnsupportedBlocksPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -187,7 +187,7 @@ export const editorPluginsMap = {
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
   accordion: createAccordionPlugin,
-  unavailableOnOneApp: createUnavailableOnOneappPlugin,
+  unsupportedblocks: createUnsupportedBlocksPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -469,7 +469,7 @@ const config = {
       createGiphyPlugin,
       createFileUploadPlugin,
       createEmojiPlugin,
-      createUnavailableOnOneappPlugin,
+      createUnsupportedBlocksPlugin,
     ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
@@ -518,7 +518,7 @@ const config = {
     //   },
     // },
   },
-  [UNAVAILABLE_ON_ONEAPP_TYPE]: {},
+  [UNSUPPORTED_BLOCKS_TYPE]: {},
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],

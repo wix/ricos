@@ -1,25 +1,25 @@
 import React from 'react';
-import UnavailableOnOneAppViewer from './unavailable-on-oneapp-viewer';
-import { UNAVAILABLE_ON_ONEAPP_TYPE, UnavailableOnOneAppPluginEditorConfig } from './types';
+import UnsupportedBlocksViewer from './unsupported-blocks-viewer';
+import { UNSUPPORTED_BLOCKS_TYPE, UnsupportedBlocksPluginEditorConfig } from './types';
 import { DEFAULTS } from './defaults';
 import { ComponentData, RichContentTheme } from 'wix-rich-content-common';
 
 interface Props {
   componentData: ComponentData;
-  settings: UnavailableOnOneAppPluginEditorConfig;
+  settings: UnsupportedBlocksPluginEditorConfig;
   theme: RichContentTheme;
   blockProps: {
     unsupportedType: string;
   };
 }
 
-class UnavailableOnOneAppComponent extends React.Component<Props> {
-  static type = { UNAVAILABLE_ON_ONEAPP_TYPE };
+class UnsupportedBlocksComponent extends React.Component<Props> {
+  static type = { UNSUPPORTED_BLOCKS_TYPE };
   render() {
     const { componentData, settings, theme, blockProps } = this.props;
     const { unsupportedType } = blockProps;
     return (
-      <UnavailableOnOneAppViewer
+      <UnsupportedBlocksViewer
         componentData={componentData}
         settings={settings}
         theme={theme}
@@ -29,4 +29,4 @@ class UnavailableOnOneAppComponent extends React.Component<Props> {
   }
 }
 
-export { UnavailableOnOneAppComponent as Component, DEFAULTS };
+export { UnsupportedBlocksComponent as Component, DEFAULTS };

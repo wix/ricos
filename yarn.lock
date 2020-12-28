@@ -2167,9 +2167,9 @@
   integrity sha512-V87P8fv7PI0LH7LiVi8Lkf3x+KCO7pQozXRssAHNXXL9L1K+uyu4XypLXwxqVDKgyQai6qj3/KteNlrqDx4W5A==
 
 "@hapi/hoek@^9.0.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.0.tgz#6c9eafc78c1529248f8f4d92b0799a712b6052c6"
-  integrity sha512-i9YbZPN3QgfighY/1X1Pu118VUz2Fmmhd6b2n0/O8YVgGGfw0FbUYoA97k7FkpGJ+pLCFEDLUmAPPV4D1kpeFw==
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.1.tgz#9daf5745156fd84b8e9889a2dc721f0c58e894aa"
+  integrity sha512-CAEbWH7OIur6jEOzaai83jq3FmKmv4PmX1JYfs9IrYcGEVI/lyL1EXJGCj7eFVJ0bg5QR8LMxBlEtA+xKiLpFw==
 
 "@hapi/joi@^17.1.1":
   version "17.1.1"
@@ -3664,18 +3664,18 @@
     readdirp "^2.2.1"
     upath "^1.1.1"
 
-"@nodelib/fs.scandir@2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.3.tgz#3a582bdb53804c6ba6d146579c46e52130cf4a3b"
-  integrity sha512-eGmwYQn3gxo4r7jdQnkrrN6bY478C3P+a/y72IJukF8LjB6ZHeB3c+Ehacj3sYeSmUXGlnA67/PmbM9CVwL7Dw==
+"@nodelib/fs.scandir@2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz#d4b3549a5db5de2683e0c1071ab4f140904bbf69"
+  integrity sha512-33g3pMJk3bg5nXbL/+CY6I2eJDzZAni49PfJnL5fghPTggPvBd/pFNSgJsdAgWptuFu7qq/ERvOYFlhvsLTCKA==
   dependencies:
-    "@nodelib/fs.stat" "2.0.3"
+    "@nodelib/fs.stat" "2.0.4"
     run-parallel "^1.1.9"
 
-"@nodelib/fs.stat@2.0.3", "@nodelib/fs.stat@^2.0.2":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-2.0.3.tgz#34dc5f4cabbc720f4e60f75a747e7ecd6c175bd3"
-  integrity sha512-bQBFruR2TAwoevBEd/NWMoAAtNGzTRgdrqnYCc7dhzfoNvqPzLyqlEQnzZ3kVnNrSp25iyxE00/3h2fqGAGArA==
+"@nodelib/fs.stat@2.0.4", "@nodelib/fs.stat@^2.0.2":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-2.0.4.tgz#a3f2dd61bab43b8db8fa108a121cfffe4c676655"
+  integrity sha512-IYlHJA0clt2+Vg7bccq+TzRdJvv19c2INqBSsoOLp1je7xjtr7J26+WXR72MCdvU9q1qTzIWDfhMf+DRvQJK4Q==
 
 "@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
@@ -3683,11 +3683,11 @@
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
 "@nodelib/fs.walk@^1.2.3":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@nodelib/fs.walk/-/fs.walk-1.2.4.tgz#011b9202a70a6366e436ca5c065844528ab04976"
-  integrity sha512-1V9XOY4rDW0rehzbrcqAmHnz8e7SKvX27gh8Gt2WgB0+pdzdiLV83p72kZPU+jvMbS1qU5mauP2iOvO8rhmurQ==
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@nodelib/fs.walk/-/fs.walk-1.2.6.tgz#cce9396b30aa5afe9e3756608f5831adcb53d063"
+  integrity sha512-8Broas6vTtW4GIXTAHDoE32hnN2M5ykgCpWGbuXHQ15vEMqr23pB76e/GZcYsZCHALv50ktd24qhEyKr6wBtow==
   dependencies:
-    "@nodelib/fs.scandir" "2.1.3"
+    "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
 "@npmcli/move-file@^1.0.1":
@@ -4308,7 +4308,7 @@
     postcss-selector-matches "^4.0.0"
     postcss-value-parser "^4.1.0"
 
-"@stylable/dom-test-kit@^3.11.5":
+"@stylable/dom-test-kit@^3.11.10":
   version "3.11.10"
   resolved "https://registry.yarnpkg.com/@stylable/dom-test-kit/-/dom-test-kit-3.11.10.tgz#880012095805e51f28babcd968df51aa0eca25aa"
   integrity sha512-7PCOUeBADHettYsMhh2xxum7WWTaUGzxz8jMXzvAbA+zrKycOwypGBRTwTKAx4vCV103JWd7xFpdFVOxtTu2yw==
@@ -10091,7 +10091,7 @@ d3-zoom@2:
     d3-selection "2"
     d3-transition "2"
 
-d3@^6.2.0:
+d3@^6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/d3/-/d3-6.3.1.tgz#c5fe6c7abff432826775a9e04db80b5f2e22eb1c"
   integrity sha512-rbaoA67o2N4lO1TCuvrTGQdowNb3zT0z2ygg6TLmJZAd7TRPg+lhbfDOVwQUAgdbRD+73kg2FrEQ9HLiap5H2w==
@@ -28464,21 +28464,21 @@ wix-statics-parent@*:
   integrity sha512-9q6gnuTjxhGXXrwPSgkAbf2H78QEyCsdnMQKbESt9k4wfNK04jiZ6lZETfOSYBiJiOaIIYKLYNIyFbmRgBcYlw==
 
 wix-style-react@^9.0.0:
-  version "9.57.0"
-  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.57.0.tgz#e931cae3c9870f014b2d094dca0b4d7f3f7d8dd2"
-  integrity sha512-rpTrwWHBq/SQ6LOdY8ytmUEe+r7FYG9Lpnyq/1RL4molrGCQj7ZjpKnu6khQ9nR/czlGi20UBpBB8uVZDjPpHw==
+  version "9.58.0"
+  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.58.0.tgz#bd728a31c7abfdfddc7b4882d42bb3eab855321a"
+  integrity sha512-H8jtFvczQI2RbPhwRIiNXraiLZARlB5NjFCykAFjXj/K1dnhqHOXvoE+w/8ywVq796+a2dN5xKdWQF2Y+tID6Q==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@date-fns/upgrade" "^1.0.3"
     "@loadable/component" "^5.14.1"
-    "@stylable/dom-test-kit" "^3.11.5"
+    "@stylable/dom-test-kit" "^3.11.10"
     "@types/color" "^2.0.1"
     bootstrap-sass "^3.4.1"
     chart.js "^2.9.4"
     classnames "^2.2.6"
     color "^2.0.1"
     css-element-queries "^1.2.3"
-    d3 "^6.2.0"
+    d3 "^6.3.1"
     date-fns "^2.16.1"
     difference "^1.0.2"
     dnd-core "^2.6.0"
@@ -28509,8 +28509,8 @@ wix-style-react@^9.0.0:
     wix-animations "^1.0.405"
     wix-eventually "^2.3.0"
     wix-ui-core "^3.0.165"
-    wix-ui-icons-common "^2.0.294"
-    wix-ui-test-utils "^1.0.177"
+    wix-ui-icons-common "^2.0.298"
+    wix-ui-test-utils "^1.0.178"
     yoshi-stylable-dependencies "^4.0.0"
 
 wix-tpa-style-loader@1.0.13:
@@ -28551,7 +28551,7 @@ wix-ui-core@^3.0.165:
     wix-ui-test-utils "^1.0.151"
     yoshi-stylable-dependencies "^4.49.0"
 
-wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.294:
+wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.298:
   version "2.0.298"
   resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.298.tgz#d97678d40fc5d3294a0aa87ba1ec5e0a63eae082"
   integrity sha512-5kp4QD8BVLU7ZpldZioMFbVd4AKI58SF0K6rmTUZIY0swizdeeGBNeCwhBt4U6urujNDlFS0A31N8lMKgpaPjw==
@@ -28559,7 +28559,7 @@ wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.294:
     fuse.js "^6.4.1"
     use-debounce "^4.0.0"
 
-wix-ui-test-utils@^1.0.151, wix-ui-test-utils@^1.0.177:
+wix-ui-test-utils@^1.0.151, wix-ui-test-utils@^1.0.178:
   version "1.0.178"
   resolved "https://registry.yarnpkg.com/wix-ui-test-utils/-/wix-ui-test-utils-1.0.178.tgz#8b0020c361e04ad56995e627d1a74f1fb444a052"
   integrity sha512-wHj17YfWLwVvvdXvoXIKuUixOENesYK1qfJ8ZrWOGa/nyvsF5YGvmlXrmfzDNdX3OdW5kjKfaOdLfrcWKnSwWg==
