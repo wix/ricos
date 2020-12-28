@@ -20,6 +20,7 @@
 ### :rocket: New Feature
 - `viewer`
   - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
+  - [#1921](https://github.com/wix-incubator/rich-content/pull/1921) `onViewerLoaded` callback includes `isPreview`
 
 </details>
 <hr/>
