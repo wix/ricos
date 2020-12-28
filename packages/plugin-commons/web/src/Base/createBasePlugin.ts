@@ -28,7 +28,6 @@ import {
   SetEditorState,
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
-// import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-unsupported-blocks';
 import { CSSProperties, ComponentType } from 'react';
 
 const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
