@@ -747,3 +747,19 @@ export function isCursorAtEndOfContent(editorState: EditorState) {
   const isEndOfLine = selection.getFocusOffset() >= lastBlock.getText().length;
   return isEndOfLine && isCursorAtLastLine(editorState);
 }
+
+export function selectAllContent(editorState, forceSelection) {
+  const currentContent = editorState.getCurrentContent();
+  const selection = editorState.getSelection().merge({
+    anchorKey: currentContent.getFirstBlock().getKey(),
+    anchorOffset: 0,
+
+    focusOffset: currentContent.getLastBlock().getText().length,
+    focusKey: currentContent.getLastBlock().getKey(),
+  });
+  const setSelectionFunction = forceSelection
+    ? EditorState.forceSelection
+    : EditorState.acceptSelection;
+  const newEditorState = setSelectionFunction(editorState, selection);
+  return newEditorState;
+}

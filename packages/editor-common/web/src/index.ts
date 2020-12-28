@@ -81,6 +81,7 @@ export {
   isCursorAtEndOfContent,
   isCursorAtFirstLine,
   isCursorAtLastLine,
+  selectAllContent,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
