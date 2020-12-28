@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { mergeStyles, RichContentTheme, ComponentData } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  RichContentTheme,
+  ComponentData,
+  TranslationFunction,
+} from 'wix-rich-content-common';
 import styles from '../statics/styles/unsupported-blocks.scss';
 import CircleInfoIcon from './icons/CircleInfoIcon';
 import { UnsupportedBlocksPluginEditorConfig } from './types';
@@ -9,19 +14,16 @@ interface Props {
   settings: UnsupportedBlocksPluginEditorConfig;
   theme: RichContentTheme;
   unsupportedType: string;
+  t: TranslationFunction;
 }
 
 class UnsupportedBlocksViewer extends Component<Props> {
   styles: Record<string, string>;
-  getPluginName = fullPluginName => {
-    if (!fullPluginName?.includes('-')) return fullPluginName;
-    const unSupportedNames = fullPluginName.split('-');
-    return unSupportedNames.slice(2, unSupportedNames.length).join('-');
-  };
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const pluginName = this.getPluginName(this.props.unsupportedType);
+    const { unsupportedType, t, theme } = this.props;
+    const pluginName = t(unsupportedType);
+    this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
       <div className={styles.unsupportedBlocks_alert}>
