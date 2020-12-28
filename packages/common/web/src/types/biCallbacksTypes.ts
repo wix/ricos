@@ -16,6 +16,7 @@ export interface BICallbacks {
   ): void;
   onViewerAction?(pluginId: string, actionName: string, value: string): void;
   onViewerLoaded?(isPreview: boolean, version: string): void;
+  onOpenEditorSuccess?(version: string): void;
   onPluginChange?(
     pluginId: string,
     changeObject: { from: string; to: string },

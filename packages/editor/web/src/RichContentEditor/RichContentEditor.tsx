@@ -229,6 +229,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
+    this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
   }
 
   componentDidMount() {
