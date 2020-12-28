@@ -10,7 +10,6 @@ import {
   PLUGIN_COMPONENT,
   STATIC_TOOLBAR_BUTTONS,
   SETTINGS_PANEL,
-  TABLE_PLUGIN,
   TOOLBARS,
   COLOR_PICKER,
 } from '../dataHooks';
@@ -129,7 +128,7 @@ Cypress.Commands.add('getTwitterButton', () => {
   cy.get('[data-hook="twitter-button"]');
 });
 
-function setSelection(start, offset, container) {
+export function setSelection(start, offset, container) {
   container.then(args => {
     const getTextElmentAndLocalOffset = getTextElements(args[0]);
     const document = args[0].ownerDocument;
@@ -151,10 +150,6 @@ Cypress.Commands.add('setViewerSelection', (start, offset) => {
 
 Cypress.Commands.add('setEditorSelection', (start, offset) => {
   setSelection(start, offset, cy.focusEditor());
-});
-
-Cypress.Commands.add('setTableCellEditingSelection', (start, offset, cellIndex) => {
-  setSelection(start, offset, cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`).eq(cellIndex));
 });
 
 Cypress.Commands.add('enterText', text => {
@@ -195,159 +190,6 @@ Cypress.Commands.add('toggleCollapseExpand', idx => {
   cy.get(`[data-hook=ExpandCollapseButton_${idx}]`)
     .first()
     .click();
-});
-
-Cypress.Commands.add('openTableModal', () => {
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.TABLE);
-});
-
-Cypress.Commands.add('addTableFromModal', (rowNum, colNum) => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.ROW_COUNT_INPUT}]`).type(rowNum);
-  cy.get(`[data-hook*=${TABLE_PLUGIN.COL_COUNT_INPUT}]`).type(colNum);
-  cy.get(`[data-hook*=${TABLE_PLUGIN.SUBMIT}]`).click();
-});
-
-Cypress.Commands.add('focusTable', () => {
-  cy.get(`[data-hook*=${PLUGIN_COMPONENT.TABLE}]`)
-    .first()
-    .parent()
-    .click();
-});
-
-Cypress.Commands.add('focusCell', cellIndex => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`)
-    .eq(cellIndex)
-    .trigger('mousedown')
-    .trigger('mouseup');
-});
-
-Cypress.Commands.add('editCell', cellIndex => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`)
-    .eq(cellIndex)
-    .dblclick()
-    .type('table!!');
-});
-
-Cypress.Commands.add('paintBG', () => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.BG_COLOR}]`).click();
-  cy.get(`[data-scheme-color]`)
-    .eq(2)
-    .click();
-});
-
-Cypress.Commands.add('setRowHeader', () => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.ROW_HEADER}]`).click();
-});
-
-Cypress.Commands.add('setColHeader', () => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.COL_HEADER}]`).click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenu', () => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.CONTEXT_MENU}]`).click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuClear', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.CLEAR}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuDeleteCol', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.DELETE_COLUMN}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuDeleteRow', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.DELETE_ROW}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuInsertRight', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_RIGHT}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuInsertLeft', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_LEFT}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuInsertAbove', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_ABOVE}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuInsertBelow', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_BELOW}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuMerge', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.MERGE}]`)
-    .click();
-});
-
-Cypress.Commands.add('clickOnTableToolbarContextMenuSplit', () => {
-  cy.clickOnTableToolbarContextMenu()
-    .get(`[data-hook*=${TABLE_PLUGIN.SPLIT}]`)
-    .click();
-});
-
-Cypress.Commands.add('paintBorder', (type, colorIndex) => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.BORDER_COLOR_BUTTONS}]`).click();
-  cy.get(`[data-hook*=${type}]`).click();
-  cy.get(`[data-scheme-color]`)
-    .eq(colorIndex)
-    .click();
-});
-
-Cypress.Commands.add('paintTableTextColor', () => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.TEXT_COLOR}]`).click();
-  cy.get(`[data-scheme-color=color1]`).click();
-});
-
-Cypress.Commands.add('paintTableHighlightColor', () => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.HIGHLIGHT_COLOR}]`).click();
-  cy.get(`[data-scheme-color=color4]`).click();
-});
-
-Cypress.Commands.add('goToTextStyle', () => {
-  cy.get(`[data-hook*=${TABLE_PLUGIN.TEXT_STYLE_BUTTON}]`).click();
-});
-
-Cypress.Commands.add('selectAllTableCells', () => {
-  cy.get(`[data-hook*=selectAllTableCells]`).click();
-});
-
-// Cypress.Commands.add('dragRow', index => {
-//   cy.get(`[data-hook*=rowDrag-${index}]`)
-//     .trigger('mousedown', { which: 1, pageX: 0, pageY: 0 })
-//     .trigger('mousemove', { which: 1, clientX: 0, clientY: 0 })
-//     .trigger('mouseup');
-// });
-
-Cypress.Commands.add('clickOnRowDrag', index => {
-  cy.get(`[data-hook*=rowDrag-${index}]`).click();
-});
-
-Cypress.Commands.add('clickOnColDrag', index => {
-  cy.get(`[data-hook*=colDrag-${index}]`).click();
-});
-
-Cypress.Commands.add('clickOnAddRow', () => {
-  cy.get(`[data-hook*=addRow]`).click();
-});
-
-Cypress.Commands.add('clickOnAddCol', () => {
-  cy.get(`[data-hook*=addCol]`).click();
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -445,7 +287,7 @@ Cypress.Commands.add('setColorByHex', color => {
 });
 
 Cypress.Commands.add('updateTextColor', () => {
-  cy.get(`[data-hook="${COLOR_PICKER.UPDATE_BUTTON}"]`).click();
+  cy.get(`[data-hook="${COLOR_PICKER.UPDATE_BUTTON}"]`).click({ force: true });
 });
 
 Cypress.Commands.add('resetColor', () => {

@@ -48,9 +48,6 @@ class TableComponent extends React.Component {
     }
   }
 
-  // disableKeyboardEvents = () => {
-  //   this.props.disableKeyboardEvents(false);
-  // };
   componentDidMount() {
     document.addEventListener('keydown', this.handleTableClipboardEvent);
   }
@@ -68,7 +65,7 @@ class TableComponent extends React.Component {
       renderedIn: 'table',
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
-      lightPluginMenu: true,
+      tablePluginMenu: true,
     });
   };
 
@@ -493,7 +490,6 @@ TableComponent.propTypes = {
   renderInnerRCE: PropTypes.func,
   theme: PropTypes.object,
   selection: PropTypes.object.isRequired,
-  // disableKeyboardEvents: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,

@@ -712,6 +712,7 @@ export function isPluginFocused(block: ContentBlock, selection: SelectionState) 
 export function isCursorAtFirstLine(editorState: EditorState) {
   const selection = editorState.getSelection();
   return (
+    selection.isCollapsed() &&
     editorState
       .getCurrentContent()
       .getBlockMap()
@@ -721,13 +722,14 @@ export function isCursorAtFirstLine(editorState: EditorState) {
 }
 
 export function isCursorAtStartOfContent(editorState: EditorState) {
-  const isStartOfLine = editorState.getSelection().getAnchorOffset() === 0;
-  return isCursorAtFirstLine(editorState) && isStartOfLine;
+  const isStartOfLine = editorState.getSelection().getFocusOffset() === 0;
+  return isStartOfLine && isCursorAtFirstLine(editorState);
 }
 
 export function isCursorAtLastLine(editorState: EditorState) {
   const selection = editorState.getSelection();
   return (
+    selection.isCollapsed() &&
     editorState
       .getCurrentContent()
       .getBlockMap()
@@ -742,6 +744,6 @@ export function isCursorAtEndOfContent(editorState: EditorState) {
     .getCurrentContent()
     .getBlockMap()
     .last();
-  const isEndOfLine = selection.getAnchorOffset() >= lastBlock.getText().length;
-  return isCursorAtLastLine(editorState) && isEndOfLine;
+  const isEndOfLine = selection.getFocusOffset() >= lastBlock.getText().length;
+  return isEndOfLine && isCursorAtLastLine(editorState);
 }

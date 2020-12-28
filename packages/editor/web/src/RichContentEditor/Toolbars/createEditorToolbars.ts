@@ -27,7 +27,7 @@ const createEditorToolbars = ({
   context,
   pluginButtonProps,
   isInnerRCE,
-  lightPluginMenu,
+  tablePluginMenu,
 }: {
   buttons: {
     pluginButtons: PluginButton[];
@@ -38,7 +38,7 @@ const createEditorToolbars = ({
   context: EditorContextType;
   pluginButtonProps: ToolbarButtonProps[];
   isInnerRCE?: boolean;
-  lightPluginMenu?: boolean;
+  tablePluginMenu?: boolean;
 }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
@@ -60,7 +60,7 @@ const createEditorToolbars = ({
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
-    lightPluginMenu,
+    tablePluginMenu,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
@@ -69,11 +69,11 @@ const createEditorToolbars = ({
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
-  if (lightPluginMenu) {
+  if (tablePluginMenu) {
     const pluginMenuSettings: PluginMenuSettings =
       customSettings.find(setting => setting.name === TOOLBARS.SIDE) || {};
-    if (pluginMenuSettings.addPluginMenuConfig) {
-      pluginMenuSettings.addPluginMenuConfig = { lightPluginMenu };
+    if (pluginMenuSettings) {
+      pluginMenuSettings.addPluginMenuConfig = { tablePluginMenu };
     }
   }
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });

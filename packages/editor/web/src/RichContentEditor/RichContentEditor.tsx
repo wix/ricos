@@ -146,7 +146,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleReturn?: (
     updateEditorStateCallback: (editorState: EditorState) => void
   ) => DraftEditorProps['handleReturn'];
-  lightPluginMenu?: boolean;
+  tablePluginMenu?: boolean;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -395,7 +395,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
-      // disableKeyboardEvents: this.disableKeyboardEvents,
     };
   };
 
@@ -428,7 +427,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pluginTextButtons: TextButtonMapping[],
     pluginButtonProps: ToolbarButtonProps[]
   ) {
-    const { textAlignment, isInnerRCE, lightPluginMenu } = this.props;
+    const { textAlignment, isInnerRCE, tablePluginMenu } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
@@ -438,7 +437,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       context: this.contextualData,
       pluginButtonProps,
       isInnerRCE,
-      lightPluginMenu,
+      tablePluginMenu,
     });
   }
 
@@ -651,11 +650,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.setState({ toolbarsToIgnore });
   };
 
-  // disableKeyboardEvents = shouldDisable => {
-  //   const mode = shouldDisable ? 'render' : 'edit';
-  //   this.editor.setMode(mode);
-  // };
-
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
   renderToolbars = () => {
@@ -791,7 +785,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     direction,
     additionalProps,
     toolbarsToIgnore,
-    lightPluginMenu,
+    tablePluginMenu,
   }) => {
     return (
       <InnerRCE
@@ -807,7 +801,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
-        lightPluginMenu={lightPluginMenu}
+        tablePluginMenu={tablePluginMenu}
       />
     );
   };

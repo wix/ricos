@@ -42,7 +42,6 @@ const createBaseComponent = ({
   anchorTarget,
   relValue,
   renderInnerRCE,
-  // disableKeyboardEvents,
   noPluginBorder,
   noPointerEventsOnFocus,
   withHorizontalScroll,
@@ -365,7 +364,6 @@ const createBaseComponent = ({
             getInPluginEditingMode={getInPluginEditingMode}
             setComponentUrl={this.setComponentUrl}
             renderInnerRCE={renderInnerRCE}
-            // disableKeyboardEvents={disableKeyboardEvents}
           />
           <div
             role="none"

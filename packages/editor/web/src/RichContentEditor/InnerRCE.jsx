@@ -118,12 +118,10 @@ class InnerRCE extends PureComponent {
     const { onBackspaceAtBeginningOfContent } = this.props;
 
     if (onBackspaceAtBeginningOfContent) {
-      const selection = editorState.getSelection();
       const contentState = editorState.getCurrentContent();
-      const isCollapsed = selection.isCollapsed();
       const isUnstyledBlock = contentState.getBlocksAsArray()[0].getType() === 'unstyled';
 
-      if (isCollapsed && isCursorAtStartOfContent(editorState) && isUnstyledBlock) {
+      if (isCursorAtStartOfContent(editorState) && isUnstyledBlock) {
         onBackspaceAtBeginningOfContent();
       }
     }
@@ -162,7 +160,7 @@ class InnerRCE extends PureComponent {
       editorState,
       editing = true,
       innerRCERenderedIn,
-      lightPluginMenu,
+      tablePluginMenu,
       ...rest
     } = this.props;
     const { showToolbars } = this.state;
@@ -191,7 +189,7 @@ class InnerRCE extends PureComponent {
             readOnly={readOnly}
             onBackspace={this.onBackspaceAtBeginningOfContent}
             direction={direction}
-            lightPluginMenu={lightPluginMenu}
+            tablePluginMenu={tablePluginMenu}
             {...additionalProps}
           />
         </div>
@@ -217,7 +215,7 @@ InnerRCE.propTypes = {
   direction: PropTypes.string,
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
-  lightPluginMenu: PropTypes.bool,
+  tablePluginMenu: PropTypes.bool,
 };
 
 export default InnerRCE;

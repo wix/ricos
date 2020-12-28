@@ -53,20 +53,20 @@ export type GetToolbarSettings = ({
   pluginButtonNames,
   pluginTextButtons,
   pluginButtonProps,
-  lightPluginMenu,
+  tablePluginMenu,
 }: {
   textButtons: TextButtons;
   pluginButtons: PluginButton[];
   pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
   pluginButtonProps: ToolbarButtonProps[];
-  lightPluginMenu?: boolean;
+  tablePluginMenu?: boolean;
 }) => ToolbarSettingsFunctions[];
 
 export type AddPluginMenuConfig = {
   showSearch?: boolean;
   splitToSections?: boolean;
-  lightPluginMenu?: boolean;
+  tablePluginMenu?: boolean;
 };
 
 export type PluginMenuSettings = {

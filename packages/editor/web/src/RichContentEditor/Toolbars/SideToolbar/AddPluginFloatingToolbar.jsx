@@ -170,7 +170,7 @@ export default class AddPluginFloatingToolbar extends Component {
       Styles.sideToolbar_floatingIcon,
       toolbarStyles && toolbarStyles.sideToolbar_floatingIcon
     );
-    const plusIconStyle = addPluginMenuConfig?.lightPluginMenu ? { transform: 'scale(0.7)' } : {};
+    const plusIconStyle = addPluginMenuConfig?.tablePluginMenu ? { transform: 'scale(0.7)' } : {};
 
     return (
       <FocusManager

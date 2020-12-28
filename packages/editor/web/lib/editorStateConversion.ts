@@ -101,16 +101,13 @@ const entityFixersToRaw = [
   },
 ];
 
-const convertTableConfigToRaw = (config, removeBlockKey = false) => {
-  const { rows, ...rest } = config;
+const convertTableConfigToRaw = config => {
+  const { rows, ...rest }: { rows: { string: Row } } = config;
   const newRows = {};
   Object.entries(rows).forEach(([rowIndex, row]) => {
     newRows[rowIndex] = {};
-    Object.entries((row as Row).columns).forEach(([cellIndex, cell]) => {
-      const content = toRaw((cell as Cell).content.getCurrentContent());
-      if (removeBlockKey) {
-        content.blocks.map(block => (block.key = ''));
-      }
+    Object.entries(row.columns).forEach(([cellIndex, cell]) => {
+      const content = toRaw(cell.content.getCurrentContent());
       newRows[rowIndex].columns = {
         ...newRows[rowIndex].columns,
         [cellIndex]: { ...cell, content },

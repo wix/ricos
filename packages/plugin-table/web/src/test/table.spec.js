@@ -3,6 +3,15 @@ import { getMockComponentData } from './TestData/cell-content-state';
 import { EditorState } from 'wix-rich-content-editor-common';
 import { convertTableConfigToRaw } from 'wix-rich-content-editor';
 
+const removeBlockKey = config => {
+  Object.entries(config.rows).forEach(([, row]) => {
+    Object.entries(row.columns).forEach(([, cell]) => {
+      cell.content.blocks.map(block => (block.key = ''));
+    });
+  });
+  return config;
+};
+
 describe('Test Table domain functions', () => {
   let componentData, table;
   beforeEach(() => {
@@ -10,7 +19,7 @@ describe('Test Table domain functions', () => {
     table = new Table(componentData, () => {});
   });
   afterEach(() => {
-    expect(convertTableConfigToRaw(componentData.config, true)).toMatchSnapshot();
+    expect(removeBlockKey(convertTableConfigToRaw(componentData.config))).toMatchSnapshot();
   });
   it('Test addRow function', () => {
     table.addRow(1);
@@ -85,7 +94,7 @@ describe('Test Table domain functions', () => {
   it('Test deleteColumn function', () => {
     table.toggleRowHeader();
     table.toggleColHeader();
-    expect(convertTableConfigToRaw(componentData.config, true)).toMatchSnapshot();
+    expect(removeBlockKey(convertTableConfigToRaw(componentData.config))).toMatchSnapshot();
     table.toggleRowHeader();
     table.toggleColHeader();
   });
