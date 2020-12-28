@@ -85,7 +85,7 @@ export class RicosEngine extends Component<EngineProps> {
     const { anchorTarget, relValue } = linkSettings;
 
     // any of ricos props that should be merged into child
-    const isPreview = () => previewContent && !isPreviewExpanded;
+    const isPreview = () => !!(previewContent && !isPreviewExpanded);
     const ricosPropsToMerge: RichContentProps = {
       isMobile,
       textToolbarType:
