@@ -1,4 +1,7 @@
-import { pluginLinkButton } from './viewer';
+import { pluginLinkButton, LINK_BUTTON_TYPE } from './viewer';
 
 window.__ricosPlugins = window.__ricosPlugins || {};
-window.__ricosPlugins[pluginLinkButton.type] = pluginLinkButton;
+window.__ricosPlugins[LINK_BUTTON_TYPE] = pluginLinkButton;
+if (window.__notifyRicosPluginLoaded) {
+  window.__notifyRicosPluginLoaded(LINK_BUTTON_TYPE);
+}

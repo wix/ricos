@@ -118,14 +118,14 @@ export const insertLinkAtCurrentSelection = (
     }) as SelectionState;
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-  const editorStateWithLink = isSelectionBelongsToExistingLink(newEditorState, selection)
+  const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+  const editorStateWithLink = isExistsLink
     ? updateLink(newEditorState, selection, createLinkEntityData(entityData))
     : insertLink(newEditorState, selection, createLinkEntityData(entityData));
-
-  return EditorState.forceSelection(
-    editorStateWithLink,
-    selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
-  );
+  const editorStateSelection = isExistsLink
+    ? selection.merge({ anchorOffset: selection.getFocusOffset() })
+    : editorStateWithLink.getCurrentContent().getSelectionAfter();
+  return EditorState.forceSelection(editorStateWithLink, editorStateSelection as SelectionState);
 };
 
 function isSelectionBelongsToExistingLink(editorState: EditorState, selection: SelectionState) {
@@ -169,16 +169,21 @@ function insertLink(
     data,
     mutability: 'MUTABLE',
   });
-  const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link
-  const contentState = isNewLine
+  const preventInlineStyleForFurtherText =
+    editorWithLink
+      .getCurrentContent()
+      .getBlockForKey(oldSelection.getAnchorKey())
+      .getText().length -
+      selection.getFocusOffset() ===
+      0 || selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link
+  const contentState = preventInlineStyleForFurtherText
     ? preventLinkInlineStyleForNewLine(editorWithLink, selection)
     : editorWithLink.getCurrentContent();
-
   return EditorState.push(
     editorState,
     Modifier.applyInlineStyle(contentState, selection, 'UNDERLINE').set(
       'selectionAfter',
-      oldSelection
+      contentState.getSelectionAfter()
     ) as ContentState,
     'change-inline-style'
   );

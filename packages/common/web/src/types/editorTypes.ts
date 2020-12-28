@@ -20,11 +20,11 @@ export interface Helpers extends BICallbacksForHelpers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: ((...args: any[]) => any) | undefined;
 }
-
 interface BICallbacksForHelpers extends BICallbacks {
   // makes version optional
   onPluginAdd?(pluginId: string, entryPoint: string, version?: string): void;
   onPluginAddSuccess?(pluginId: string, entryPoint: string, version?: string): void;
+  isPreview?: () => boolean;
 }
 
 export type OnErrorFunction = (error: string) => void;
