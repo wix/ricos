@@ -29,8 +29,7 @@ import {
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
-
-const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
+import { UNSUPPORTED_BLOCKS_TYPE } from '../index';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
@@ -64,7 +63,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
-  supportedBlocks?: string[];
+  supportedBlockTypes?: string[];
   type: PluginType;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
@@ -256,32 +255,27 @@ const createBasePlugin = (
 
       if (key) {
         const entity = contentState.getEntity(key);
-        const type = entity.getType();
-        if (type === UNSUPPORTED_BLOCKS_TYPE || !config.supportedBlocks?.includes(type)) {
-          return {
-            component: DecoratedCompWithBase,
-            editable: false,
-            props: {
-              getData: getData(contentBlock, { getEditorState }),
-              setData: setData(contentBlock, { getEditorState, setEditorState }),
-              deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              type: UNSUPPORTED_BLOCKS_TYPE,
-              unsupportedType: type,
-            },
-          };
+        const entityType = entity.getType();
+        let type;
+        if (config.type === entityType || config.legacyType === entityType) {
+          type = entityType;
+        } else if (!config.supportedBlockTypes?.includes(entityType)) {
+          type = UNSUPPORTED_BLOCKS_TYPE;
         }
-        if (config.type === type || config.legacyType === type) {
-          return {
-            component: DecoratedCompWithBase,
-            editable: false,
-            props: {
-              getData: getData(contentBlock, { getEditorState }),
-              setData: setData(contentBlock, { getEditorState, setEditorState }),
-              deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              type: config.type,
-            },
-          };
-        }
+        const blockRenderObject = type
+          ? {
+              component: DecoratedCompWithBase,
+              editable: false,
+              props: {
+                getData: getData(contentBlock, { getEditorState }),
+                setData: setData(contentBlock, { getEditorState, setEditorState }),
+                deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
+                type,
+                unsupportedType: type === UNSUPPORTED_BLOCKS_TYPE ? entityType : null,
+              },
+            }
+          : null;
+        return blockRenderObject;
       }
     }
     return null;

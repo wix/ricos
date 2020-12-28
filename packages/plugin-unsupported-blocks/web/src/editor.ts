@@ -1,5 +1,6 @@
 import { createUnsupportedBlocksPlugin } from './createUnsupportedBlocksPlugin';
-import { UNSUPPORTED_BLOCKS_TYPE, UnsupportedBlocksPluginEditorConfig } from './types';
+import { UnsupportedBlocksPluginEditorConfig } from './types';
+import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 import { DEFAULTS } from './defaults';
 import { EditorPluginCreator } from 'wix-rich-content-common';
 

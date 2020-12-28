@@ -9,7 +9,6 @@ import { ModalsMap as LineSpacingModalsMap } from 'wix-rich-content-plugin-line-
 import { ModalsMap as PollModalsMap } from 'wix-rich-content-plugin-social-polls';
 import { ModalsMap as VerticalEmbedModalsMap } from 'wix-rich-content-plugin-vertical-embed';
 import { ModalsMap as AccordionModalsMap } from 'wix-rich-content-plugin-accordion';
-// import { ModalsMap as UnavailableOnOneAppModalsMap } from 'wix-rich-content-plugin-unsupported-blocks';
 export default {
   ...VideoModalsMap,
   ...SoundCloudModalsMap,
@@ -22,5 +21,4 @@ export default {
   ...headingsModalsMap,
   ...VerticalEmbedModalsMap,
   ...AccordionModalsMap,
-  // ...UnavailableOnOneAppModalsMap,
 };

@@ -233,7 +233,7 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
   commonPubsub: Pubsub;
   pluginDefaults: Record<string, unknown>;
   spoilerWrapper?: (component: ComponentType) => ComponentType;
-  supportedBlocks?: string[];
+  supportedBlockTypes?: string[];
 }
 
 export interface LinkPanelSettings {

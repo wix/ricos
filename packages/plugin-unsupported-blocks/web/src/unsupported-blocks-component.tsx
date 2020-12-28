@@ -1,6 +1,7 @@
 import React from 'react';
 import UnsupportedBlocksViewer from './unsupported-blocks-viewer';
-import { UNSUPPORTED_BLOCKS_TYPE, UnsupportedBlocksPluginEditorConfig } from './types';
+import { UnsupportedBlocksPluginEditorConfig } from './types';
+import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 import { DEFAULTS } from './defaults';
 import { ComponentData, RichContentTheme } from 'wix-rich-content-common';
 

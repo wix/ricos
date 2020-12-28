@@ -14,10 +14,8 @@ import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-galle
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
-import {
-  createUnsupportedBlocksPlugin,
-  UNSUPPORTED_BLOCKS_TYPE,
-} from 'wix-rich-content-plugin-unsupported-blocks';
+import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
+// import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons'
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
@@ -518,7 +516,7 @@ const config = {
     //   },
     // },
   },
-  [UNSUPPORTED_BLOCKS_TYPE]: {},
+  // [UNSUPPORTED_BLOCKS_TYPE]: {},
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],

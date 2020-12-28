@@ -6,6 +6,7 @@ export {
   DEFAULT_HEADERS_DROPDOWN_OPTIONS,
   FOOTER_BUTTON_ALIGNMENT,
   MODAL_CONTROLS_POSITION,
+  UNSUPPORTED_BLOCKS_TYPE,
 } from './consts';
 
 export { default as UrlInputModal } from './Modals/UrlInputModal';

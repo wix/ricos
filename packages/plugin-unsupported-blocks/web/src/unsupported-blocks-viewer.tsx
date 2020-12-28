@@ -14,7 +14,7 @@ interface Props {
 class UnsupportedBlocksViewer extends Component<Props> {
   styles: Record<string, string>;
   getPluginName = fullPluginName => {
-    if (!fullPluginName.includes('-')) return fullPluginName;
+    if (!fullPluginName?.includes('-')) return fullPluginName;
     const unSupportedNames = fullPluginName.split('-');
     return unSupportedNames.slice(2, unSupportedNames.length).join('-');
   };
@@ -24,11 +24,9 @@ class UnsupportedBlocksViewer extends Component<Props> {
     const pluginName = this.getPluginName(this.props.unsupportedType);
 
     return (
-      <div className={styles.unsupportedBlocks_container}>
-        <div className={styles.unsupportedBlocks_alert}>
-          <CircleInfoIcon />
-          <p>{pluginName} can be edited only on the web</p>
-        </div>
+      <div className={styles.unsupportedBlocks_alert}>
+        <CircleInfoIcon />
+        <p>{pluginName} can be edited only on the web</p>
       </div>
     );
   }
