@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cdcsi",
+            "key": "5bnfu",
             "ricosText": {
               "decorations": [],
               "text": "link me to section"
@@ -14,19 +14,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "45l59"
+        "key": "7q7m0"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dk1gl",
+            "key": "2m6cf",
             "ricosText": {
               "decorations": [
-                {
-                  "type": "ricos-anchor"
-                },
                 {
                   "type": "underline"
                 }
@@ -36,14 +33,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "avtc4"
+        "key": "c50lj"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "em3ng",
+            "key": "6lq7s",
             "ricosText": {
               "decorations": [],
               "text": "my paragraph (regular text)"
@@ -51,14 +48,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "4q1ks"
+        "key": "112vj"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6ttu9",
+            "key": "cqn8l",
             "ricosText": {
               "decorations": [],
               "text": "my header 1"
@@ -76,7 +73,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2l8b5",
+            "key": "3nltb",
             "ricosText": {
               "decorations": [],
               "text": "my header 2"
@@ -94,7 +91,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cjc9h",
+            "key": "6klg1",
             "ricosText": {
               "decorations": [],
               "text": "my code block"
@@ -111,7 +108,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "1g89r",
+                "key": "agei6",
                 "ricosText": {
                   "decorations": [],
                   "text": "my quote"
@@ -119,7 +116,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "7v30t"
+            "key": "dc3l1"
           }
         ],
         "type": "blockquote",
@@ -128,7 +125,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e8drb"
+        "key": "j1ae"
       },
       {
         "nodes": [],
@@ -151,7 +148,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3pbtb"
+        "key": "71fmp"
       },
       {
         "nodes": [],
@@ -216,7 +213,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "gd6j"
+        "key": "3cg0k"
       },
       {
         "nodes": [],
@@ -230,7 +227,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8re2p"
+        "key": "9usa1"
       },
       {
         "nodes": [],
@@ -246,7 +243,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ffqua"
+        "key": "7kv8t"
       },
       {
         "nodes": [],
@@ -256,7 +253,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2cs0e"
+        "key": "3p7kt"
       },
       {
         "nodes": [],
@@ -266,7 +263,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5pir"
+        "key": "c87k5"
       },
       {
         "nodes": [],
@@ -288,7 +285,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "k6cc"
+        "key": "9segg"
       },
       {
         "nodes": [],
@@ -298,16 +295,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "69ba6"
+        "key": "b3gcn"
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 372000000
+      "seconds": 1609175506,
+      "nanos": 320000000
     }
   },
   "selection": {
-    "anchorNode": "45l59"
+    "anchorNode": "7q7m0"
   },
   "version": "7.16.3"
 }

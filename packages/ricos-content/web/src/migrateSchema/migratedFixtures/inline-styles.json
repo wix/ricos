@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "frgp3",
+            "key": "ctjqq",
             "ricosText": {
               "decorations": [],
               "text": "Leverage "
@@ -15,14 +15,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "654o2",
+            "key": "9f7op",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "italic"
+                  "type": "bold"
                 },
                 {
-                  "type": "bold"
+                  "type": "italic"
                 }
               ],
               "text": "agile"
@@ -31,7 +31,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "20d6f",
+            "key": "6611s",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -40,7 +40,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3ern2",
+            "key": "epp5q",
             "ricosText": {
               "decorations": [
                 {
@@ -53,7 +53,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5o2mo",
+            "key": "5lqg3",
             "ricosText": {
               "decorations": [],
               "text": " a robust synopsis for "
@@ -62,7 +62,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4e52i",
+            "key": "2akh7",
             "ricosText": {
               "decorations": [
                 {
@@ -75,7 +75,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1vvhq",
+            "key": "5njee",
             "ricosText": {
               "decorations": [],
               "text": ". Iterative approaches to "
@@ -84,14 +84,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "flqvb",
+            "key": "3dfhi",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "underline"
+                  "type": "bold"
                 },
                 {
-                  "type": "bold"
+                  "type": "underline"
                 }
               ],
               "text": "corporate"
@@ -100,7 +100,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8fmdi",
+            "key": "3alh6",
             "ricosText": {
               "decorations": [],
               "text": " strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace "
@@ -109,7 +109,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cnsh1",
+            "key": "96uff",
             "ricosText": {
               "decorations": [
                 {
@@ -118,28 +118,19 @@
               ],
               "text": "diversity and empowerment"
             }
-          },
-          {
-            "nodes": [],
-            "type": "text",
-            "key": "cthq5",
-            "ricosText": {
-              "decorations": [],
-              "text": "."
-            }
           }
         ],
         "type": "paragraph",
-        "key": "ecjrf"
+        "key": "cm79h"
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 448000000
+      "seconds": 1609175506,
+      "nanos": 402000000
     }
   },
   "selection": {
-    "anchorNode": "ecjrf"
+    "anchorNode": "cm79h"
   },
   "version": ""
 }

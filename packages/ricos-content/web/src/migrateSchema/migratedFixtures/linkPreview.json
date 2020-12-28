@@ -4,43 +4,31 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4dnag"
+        "key": "5u45p"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6uqnd",
+            "key": "2m4vt",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 }
               ],
-              "text": "Hi!  😊 here is a brief guid on how to use link preview plugin"
+              "text": "Hi!  "
             }
           },
           {
             "nodes": [],
             "type": "text",
-            "key": "ekbeu",
-            "ricosText": {
-              "decorations": [],
-              "text": "😊 here is a brief guid on how to use link preview plugin"
-            }
-          },
-          {
-            "nodes": [],
-            "type": "text",
-            "key": "b7j10",
+            "key": "5j5sh",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-emoji",
-                  "ricosEmoji": {
-                    "emojiUnicode": "😊"
-                  }
+                  "type": "bold"
                 }
               ],
               "text": "\ud83d"
@@ -49,31 +37,38 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3f7m8",
+            "key": "afub3",
             "ricosText": {
-              "decorations": [],
-              "text": "\ude0a here is a brief guid on how to use link preview plugin:"
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "\ude0a here is a brief guid on how to use link preview plugin"
             }
           }
         ],
         "type": "paragraph",
-        "key": "dkgv5"
+        "key": "8p3g1"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5eoit"
+        "key": "3ghr"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9gl8u",
+            "key": "509h7",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "bold"
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#24292e"
+                  }
                 },
                 {
                   "type": "BG",
@@ -82,18 +77,37 @@
                   }
                 },
                 {
-                  "type": "FG",
-                  "ricosColor": {
-                    "foreground": "#24292e"
-                  }
+                  "type": "bold"
                 }
               ],
               "text": "Link Prview"
             }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "vv4n",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#24292e"
+                  }
+                },
+                {
+                  "type": "BG",
+                  "ricosColor": {
+                    "background": "#ffffff"
+                  }
+                }
+              ],
+              "text": ": "
+            }
           }
         ],
         "type": "paragraph",
-        "key": "e1i67"
+        "key": "9auku"
       },
       {
         "nodes": [
@@ -104,19 +118,19 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "2bbt4",
+                    "key": "bg9rv",
                     "ricosText": {
                       "decorations": [
-                        {
-                          "type": "BG",
-                          "ricosColor": {
-                            "background": "#ffffff"
-                          }
-                        },
                         {
                           "type": "FG",
                           "ricosColor": {
                             "foreground": "#24292e"
+                          }
+                        },
+                        {
+                          "type": "BG",
+                          "ricosColor": {
+                            "background": "#ffffff"
                           }
                         }
                       ],
@@ -125,7 +139,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "4l8gd"
+                "key": "bfu1i"
               }
             ],
             "type": "list_item",
@@ -138,19 +152,19 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "2k0p4",
+                    "key": "ahsds",
                     "ricosText": {
                       "decorations": [
-                        {
-                          "type": "BG",
-                          "ricosColor": {
-                            "background": "#ffffff"
-                          }
-                        },
                         {
                           "type": "FG",
                           "ricosColor": {
                             "foreground": "#24292e"
+                          }
+                        },
+                        {
+                          "type": "BG",
+                          "ricosColor": {
+                            "background": "#ffffff"
                           }
                         }
                       ],
@@ -159,7 +173,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "4pe44"
+                "key": "7k4tq"
               }
             ],
             "type": "list_item",
@@ -167,18 +181,21 @@
           }
         ],
         "type": "ordered_list",
-        "key": "6k8hm"
+        "key": "d5u5l"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5igpk",
+            "key": "bim78",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "bold"
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#24292e"
+                  }
                 },
                 {
                   "type": "BG",
@@ -187,10 +204,7 @@
                   }
                 },
                 {
-                  "type": "FG",
-                  "ricosColor": {
-                    "foreground": "#24292e"
-                  }
+                  "type": "bold"
                 }
               ],
               "text": "Link Preview with inline-embed:"
@@ -198,7 +212,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "59tro"
+        "key": "6pcp9"
       },
       {
         "nodes": [
@@ -209,19 +223,19 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "5loj9",
+                    "key": "d7acj",
                     "ricosText": {
                       "decorations": [
-                        {
-                          "type": "BG",
-                          "ricosColor": {
-                            "background": "#ffffff"
-                          }
-                        },
                         {
                           "type": "FG",
                           "ricosColor": {
                             "foreground": "#24292e"
+                          }
+                        },
+                        {
+                          "type": "BG",
+                          "ricosColor": {
+                            "background": "#ffffff"
                           }
                         }
                       ],
@@ -230,7 +244,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "72l2n"
+                "key": "dvktl"
               }
             ],
             "type": "list_item",
@@ -243,19 +257,19 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "3c06r",
+                    "key": "263mh",
                     "ricosText": {
                       "decorations": [
-                        {
-                          "type": "BG",
-                          "ricosColor": {
-                            "background": "#ffffff"
-                          }
-                        },
                         {
                           "type": "FG",
                           "ricosColor": {
                             "foreground": "#24292e"
+                          }
+                        },
+                        {
+                          "type": "BG",
+                          "ricosColor": {
+                            "background": "#ffffff"
                           }
                         }
                       ],
@@ -264,7 +278,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "c6hot"
+                "key": "d0v4"
               }
             ],
             "type": "list_item",
@@ -272,26 +286,26 @@
           }
         ],
         "type": "ordered_list",
-        "key": "d5uv9"
+        "key": "es7ho"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8p01q"
+        "key": "am7a7"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "cv0em",
+            "key": "9tkar",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "underline"
+                  "type": "bold"
                 },
                 {
-                  "type": "bold"
+                  "type": "underline"
                 }
               ],
               "text": "NOTE"
@@ -300,7 +314,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fcqi6",
+            "key": "2i62k",
             "ricosText": {
               "decorations": [],
               "text": " - Mock only (use @wix/rich-content to consume link metadata fetcher service) "
@@ -308,12 +322,12 @@
           }
         ],
         "type": "paragraph",
-        "key": "27cld"
+        "key": "b27su"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bvsoj"
+        "key": "2043d"
       },
       {
         "nodes": [],
@@ -332,7 +346,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8jikk"
+        "key": "7b2j4"
       },
       {
         "nodes": [],
@@ -351,7 +365,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "85jj1"
+        "key": "huae"
       },
       {
         "nodes": [],
@@ -369,7 +383,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cpvn3"
+        "key": "93bdn"
       },
       {
         "nodes": [],
@@ -400,14 +414,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "vat4"
+        "key": "fbjlm"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7n7ga",
+            "key": "6k2vf",
             "ricosText": {
               "decorations": [
                 {
@@ -419,28 +433,19 @@
               ],
               "text": "wix.com"
             }
-          },
-          {
-            "nodes": [],
-            "type": "text",
-            "key": "52jh6",
-            "ricosText": {
-              "decorations": [],
-              "text": " "
-            }
           }
         ],
         "type": "paragraph",
-        "key": "6pip9"
+        "key": "itg6"
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 454000000
+      "seconds": 1609175506,
+      "nanos": 408000000
     }
   },
   "selection": {
-    "anchorNode": "4dnag"
+    "anchorNode": "5u45p"
   },
   "version": "7.1.5"
 }

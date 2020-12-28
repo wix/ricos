@@ -4,14 +4,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f0ilk"
+        "key": "armta"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6jql9",
+            "key": "d5u93",
             "ricosText": {
               "decorations": [],
               "text": "The roots of the civil war go back to the First Fitna. After the assassination of the third caliph Uthman, the Islamic community experienced its first civil war over the question of leadership, with the main contenders being Ali and Mu'awiya."
@@ -19,7 +19,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "2u2f4"
+        "key": "be4ae"
       },
       {
         "nodes": [],
@@ -42,16 +42,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1p7p8"
+        "key": "ap7qr"
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 398000000
+      "seconds": 1609175506,
+      "nanos": 358000000
     }
   },
   "selection": {
-    "anchorNode": "f0ilk"
+    "anchorNode": "armta"
   },
   "version": "6.0.0"
 }

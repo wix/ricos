@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6objn",
+            "key": "3rlb9",
             "ricosText": {
               "decorations": [],
               "text": "#roses_are_red "
@@ -15,38 +15,26 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6dldf",
+            "key": "dbmk3",
             "ricosText": {
               "decorations": [
-                {
-                  "type": "ricos-link"
-                },
                 {
                   "type": "underline"
                 }
               ],
               "text": "Violets-are-blue.com"
             }
-          },
-          {
-            "nodes": [],
-            "type": "text",
-            "key": "lavm",
-            "ricosText": {
-              "decorations": [],
-              "text": " "
-            }
           }
         ],
         "type": "paragraph",
-        "key": "edcqg"
+        "key": "d31d0"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7blh0",
+            "key": "2nvgp",
             "ricosText": {
               "decorations": [],
               "text": "#rich_content_is_awesome.com "
@@ -55,7 +43,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2v8q6",
+            "key": "5o6du",
             "ricosText": {
               "decorations": [
                 {
@@ -70,14 +58,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "3dsae"
+        "key": "7joul"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7eceu",
+            "key": "aj0pt",
             "ricosText": {
               "decorations": [
                 {
@@ -92,14 +80,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "5k3pi"
+        "key": "16csk"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "79nef",
+            "key": "bvcr5",
             "ricosText": {
               "decorations": [],
               "text": "The End"
@@ -107,16 +95,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "d5qo9"
+        "key": "dlqhm"
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 423000000
+      "seconds": 1609175506,
+      "nanos": 380000000
     }
   },
   "selection": {
-    "anchorNode": "edcqg"
+    "anchorNode": "d31d0"
   },
   "version": "7.2.0"
 }

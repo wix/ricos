@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bseo7",
+            "key": "3c2rg",
             "ricosText": {
               "decorations": [
                 {
@@ -15,39 +15,46 @@
               ],
               "text": "Here is what we saw last week (brief highlights) "
             }
-          },
-          {
-            "nodes": [],
-            "type": "text",
-            "key": "3mjsk",
-            "ricosText": {
-              "decorations": [],
-              "text": " "
-            }
           }
         ],
         "type": "paragraph",
-        "key": "d94d4"
+        "key": "2tf84"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "appka"
+        "key": "9ile1"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "foheu",
+            "key": "3epi5",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "wix-rich-content-plugin-spoiler"
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#040404"
+                  }
                 },
                 {
                   "type": "bold"
                 },
+                {
+                  "type": "wix-rich-content-plugin-spoiler"
+                }
+              ],
+              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "b6bq8",
+            "ricosText": {
+              "decorations": [
                 {
                   "type": "FG",
                   "ricosColor": {
@@ -55,7 +62,7 @@
                   }
                 }
               ],
-              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): "
+              "text": "Today's bird walk was led  by Sandra Critelli who is originally from Italy - so you folks can practice your Italian with Sandra's summary:"
             }
           }
         ],
@@ -70,7 +77,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8ivhd",
+            "key": "c3jmu",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -88,7 +95,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7gk10",
+            "key": "1l682",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow "
@@ -97,7 +104,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "29b21",
+            "key": "8i94g",
             "ricosText": {
               "decorations": [
                 {
@@ -110,7 +117,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dnrnb",
+            "key": "74lt7",
             "ricosText": {
               "decorations": [],
               "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -125,12 +132,12 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
+      "seconds": 1609175506,
       "nanos": 514000000
     }
   },
   "selection": {
-    "anchorNode": "d94d4"
+    "anchorNode": "2tf84"
   },
   "version": "7.9.1"
 }

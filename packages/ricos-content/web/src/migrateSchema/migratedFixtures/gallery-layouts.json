@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4ngjg",
+            "key": "7oaiu",
             "ricosText": {
               "decorations": [
                 {
@@ -87,7 +87,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9on6t",
+            "key": "5nvd1",
             "ricosText": {
               "decorations": [
                 {
@@ -207,7 +207,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ftfhu",
+            "key": "1dobc",
             "ricosText": {
               "decorations": [
                 {
@@ -289,7 +289,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6pdaa",
+            "key": "ck9o1",
             "ricosText": {
               "decorations": [
                 {
@@ -409,7 +409,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d2bl0",
+            "key": "dhrg6",
             "ricosText": {
               "decorations": [
                 {
@@ -495,7 +495,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5fjt",
+            "key": "40prk",
             "ricosText": {
               "decorations": [
                 {
@@ -609,7 +609,114 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6efr3",
+            "key": "7qk4h",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Collage 2"
+            }
+          }
+        ],
+        "type": "heading",
+        "key": "agvb6",
+        "ricosHeading": {
+          "level": 3
+        }
+      },
+      {
+        "nodes": [],
+        "type": "ricos-gallery",
+        "key": "967dd",
+        "ricosGallery": {
+          "items": [
+            {
+              "metadata": {
+                "height": 2240,
+                "width": 5805
+              },
+              "itemId": "11062b_5c2fbd48b5f8492ea693384a5c07a05f~mv2.jpg",
+              "url": "11062b_5c2fbd48b5f8492ea693384a5c07a05f~mv2.jpg",
+              "selected": false
+            },
+            {
+              "metadata": {
+                "height": 3840,
+                "width": 5760
+              },
+              "itemId": "dd7e03deffdd4267b75ef0a60d8510c7.jpg",
+              "url": "dd7e03deffdd4267b75ef0a60d8510c7.jpg",
+              "selected": false
+            },
+            {
+              "metadata": {
+                "height": 4201,
+                "width": 8607
+              },
+              "itemId": "11062b_bb02665196ed487e81cce0838afeded8~mv2.jpg",
+              "url": "11062b_bb02665196ed487e81cce0838afeded8~mv2.jpg",
+              "selected": false
+            },
+            {
+              "metadata": {
+                "height": 2240,
+                "width": 3360
+              },
+              "itemId": "11062b_98eb9802f3554aef955e82eecda2dac2~mv2.jpg",
+              "url": "11062b_98eb9802f3554aef955e82eecda2dac2~mv2.jpg",
+              "selected": false
+            },
+            {
+              "metadata": {
+                "height": 2978,
+                "width": 4461
+              },
+              "itemId": "11062b_4af72a9ecf7a45939c53837a5fde709e~mv2_d_4461_2978_s_4_2.jpg",
+              "url": "11062b_4af72a9ecf7a45939c53837a5fde709e~mv2_d_4461_2978_s_4_2.jpg",
+              "selected": false
+            }
+          ],
+          "styles": {
+            "galleryLayout": 0,
+            "gallerySizePx": 435,
+            "oneRow": false,
+            "galleryThumbnailsAlignment": "none",
+            "isVertical": false,
+            "imageMargin": 12,
+            "showArrows": false,
+            "cubeImages": false,
+            "groupSize": 3,
+            "groupTypes": "1,2h,2v,3t,3b,3l,3r",
+            "fixedColumns": 0,
+            "hasThumbnails": false,
+            "enableScroll": true,
+            "isGrid": false,
+            "isSlider": false,
+            "isColumns": false,
+            "isSlideshow": false,
+            "cropOnlyFill": false
+          },
+          "config": {
+            "alignment": "center",
+            "size": "fullWidth",
+            "layout": "small",
+            "spacing": 0
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7r7u6"
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9hcvh",
             "ricosText": {
               "decorations": [
                 {
@@ -621,7 +728,7 @@
           }
         ],
         "type": "heading",
-        "key": "agvb6",
+        "key": "1h00v",
         "ricosHeading": {
           "level": 3
         }
@@ -684,7 +791,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dvi1d",
+            "key": "fdu90",
             "ricosText": {
               "decorations": [
                 {
@@ -786,16 +893,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3gl"
+        "key": "kiu2"
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 410000000
+      "seconds": 1609175506,
+      "nanos": 367000000
     }
   },
   "selection": {
     "anchorNode": "1bkd"
   },
-  "version": "6.8.5"
+  "version": "8.9.2"
 }

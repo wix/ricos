@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2sem1",
+            "key": "5ehup",
             "ricosText": {
               "decorations": [
                 {
@@ -15,13 +15,10 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "1º Aula: Calcinatio"
             }
@@ -29,7 +26,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "25ut",
+            "key": "40s46",
             "ricosText": {
               "decorations": [
                 {
@@ -45,7 +42,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fk1jn",
+            "key": "7bp9g",
             "ricosText": {
               "decorations": [
                 {
@@ -54,13 +51,10 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "\n2º Aula: Solutio"
             }
@@ -68,7 +62,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "o5b9",
+            "key": "ai85h",
             "ricosText": {
               "decorations": [
                 {
@@ -84,7 +78,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "653sp",
+            "key": "1953d",
             "ricosText": {
               "decorations": [
                 {
@@ -93,13 +87,10 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "\n3º Aula: Coagulatio"
             }
@@ -107,7 +98,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2mi2i",
+            "key": "5o6od",
             "ricosText": {
               "decorations": [
                 {
@@ -123,7 +114,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "pjqu",
+            "key": "3d7f8",
             "ricosText": {
               "decorations": [
                 {
@@ -132,13 +123,10 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "\n4º Aula: Sublimatio"
             }
@@ -146,7 +134,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "65kp0",
+            "key": "4suai",
             "ricosText": {
               "decorations": [
                 {
@@ -162,7 +150,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6r3d6",
+            "key": "da3rn",
             "ricosText": {
               "decorations": [
                 {
@@ -171,13 +159,10 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "\n5º Aula: Mortificatio"
             }
@@ -185,7 +170,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "en9rb",
+            "key": "f1hqi",
             "ricosText": {
               "decorations": [
                 {
@@ -201,7 +186,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9atiu",
+            "key": "d6ug3",
             "ricosText": {
               "decorations": [
                 {
@@ -210,13 +195,10 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "\n6º Aula: Coletivo Alquímico - Dinheiro e Alquimia"
             }
@@ -224,7 +206,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "88quj",
+            "key": "6alq",
             "ricosText": {
               "decorations": [
                 {
@@ -240,7 +222,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dlmv9",
+            "key": "3unl9",
             "ricosText": {
               "decorations": [
                 {
@@ -249,13 +231,10 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "\n7º Aula: Separatio, Coniunctio e o Andrógino"
             }
@@ -263,7 +242,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1etqu",
+            "key": "4qulg",
             "ricosText": {
               "decorations": [
                 {
@@ -279,7 +258,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4o5gn",
+            "key": "44g3s",
             "ricosText": {
               "decorations": [
                 {
@@ -288,27 +267,24 @@
                     "direction": "justify"
                   }
                 },
-                {
-                  "type": "ricos-link"
-                },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "\n8º Aula: A Pedra Filosofal"
             }
           }
         ],
         "type": "paragraph",
-        "key": "absqn"
+        "key": "4dfj4"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "a397s",
+            "key": "cu3dh",
             "ricosText": {
               "decorations": [
                 {
@@ -320,24 +296,24 @@
                 {
                   "type": "ricos-link"
                 },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "9º Aula: A Pedra Filosofal II"
             }
           }
         ],
         "type": "paragraph",
-        "key": "ammlk"
+        "key": "204b6"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "ctvao",
+            "key": "55tmd",
             "ricosText": {
               "decorations": [
                 {
@@ -349,26 +325,26 @@
                 {
                   "type": "ricos-link"
                 },
+                {},
                 {
                   "type": "bold"
-                },
-                {}
+                }
               ],
               "text": "10º Aula: A Pedra Filosofal III"
             }
           }
         ],
         "type": "paragraph",
-        "key": "jqem"
+        "key": "6gif"
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 399000000
+      "seconds": 1609175506,
+      "nanos": 359000000
     }
   },
   "selection": {
-    "anchorNode": "absqn"
+    "anchorNode": "4dfj4"
   },
   "version": "8.7.5"
 }
