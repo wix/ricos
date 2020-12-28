@@ -7,7 +7,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
-import { EditorState, isCursorAtStartOfContent } from 'wix-rich-content-editor-common';
+import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
 
 class InnerRCE extends PureComponent {
@@ -93,18 +93,7 @@ class InnerRCE extends PureComponent {
 
   selectAllContent = forceSelection => {
     const { editorState } = this.props;
-    const currentContent = editorState.getCurrentContent();
-    const selection = editorState.getSelection().merge({
-      anchorKey: currentContent.getFirstBlock().getKey(),
-      anchorOffset: 0,
-
-      focusOffset: currentContent.getLastBlock().getText().length,
-      focusKey: currentContent.getLastBlock().getKey(),
-    });
-    const setSelectionFunction = forceSelection
-      ? EditorState.forceSelection
-      : EditorState.acceptSelection;
-    const newEditorState = setSelectionFunction(editorState, selection);
+    const newEditorState = selectAllContent(editorState, forceSelection);
     this.props.onChange(newEditorState);
   };
 
