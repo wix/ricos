@@ -36,7 +36,7 @@
 		"deploy": "node scripts/deployment/deployExamples",
 		"deployPRComment": "node scripts/deployment/deployPRComment",
 		"createVersion": "node scripts/createVersion",
-		"preRelease": "node scripts/preRelease",
+		"preRelease": "node scripts/preRelease",		
 		"storybook": "npm run start --prefix examples/storybook",
 		"exampleApp": "npm run start --prefix examples/main",
 		"docs": "npm run start --prefix docs",
