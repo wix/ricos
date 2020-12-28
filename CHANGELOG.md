@@ -20,6 +20,8 @@
 ### :rocket: New Feature
 - `viewer`
   - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
+- `editor`
+  - [#1917](https://github.com/wix-incubator/rich-content/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
 
 </details>
 <hr/>
