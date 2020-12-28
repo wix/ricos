@@ -1,6 +1,6 @@
 /*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
-import { PLUGIN_COMPONENT, STATIC_TOOLBAR_BUTTONS, TABLE_PLUGIN } from '../dataHooks';
+import { PLUGIN_COMPONENT, TABLE_PLUGIN } from '../dataHooks';
 import { setSelection } from './commands';
 
 Cypress.Commands.add('setTableCellEditingSelection', (start, offset, cellIndex) => {
@@ -8,7 +8,7 @@ Cypress.Commands.add('setTableCellEditingSelection', (start, offset, cellIndex) 
 });
 
 Cypress.Commands.add('openTableModal', () => {
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.TABLE);
+  cy.clickOnStaticButton(TABLE_PLUGIN.STATIC_TOOLBAR_BUTTON);
 });
 
 Cypress.Commands.add('addTableFromModal', (rowNum, colNum) => {

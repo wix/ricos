@@ -133,6 +133,7 @@ export const VIDEO_PLUGIN = {
 };
 
 export const TABLE_PLUGIN = {
+  STATIC_TOOLBAR_BUTTON: 'TablePlugin_InsertButton',
   ROW_COUNT_INPUT: 'rowCount',
   COL_COUNT_INPUT: 'columnCount',
   SUBMIT: 'createTableButton',
