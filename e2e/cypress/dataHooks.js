@@ -41,7 +41,6 @@ export const STATIC_TOOLBAR_BUTTONS_WITH_MODAL = {
   // GIPHY: 'GIFPlugin_InsertButton', //Flaky test, TODO: think of a way to get same gif
   // ADSENSE: 'AdSensePlugin_InsertButton',
   EMOJI: 'EmojiPlugin_InsertButton',
-  TABLE: 'TablePlugin_InsertButton',
 };
 
 // export const STATIC_TOOLBAR_BUTTONS_MEDIA = {
