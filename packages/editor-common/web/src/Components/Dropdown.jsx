@@ -126,7 +126,7 @@ class Dropdown extends Component {
       <button
         key={value}
         className={optionClass}
-        onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
+        // onMouseDown={this.setValue.bind(this, value, label, OptionComponent)}
         data-hook={`${label || value}_dropdown_option`}
         onClick={this.setValue.bind(this, value, label, OptionComponent)}
         role="option"
