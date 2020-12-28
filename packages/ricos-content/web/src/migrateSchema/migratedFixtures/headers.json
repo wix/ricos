@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9ttb2",
+            "key": "1bnom",
             "ricosText": {
               "decorations": [],
               "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition."
@@ -14,14 +14,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "4gso4"
+        "key": "2ifkg"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5srj",
+            "key": "4e27k",
             "ricosText": {
               "decorations": [],
               "text": "Bring to the table win-win survival strategies to ensure proactive domination."
@@ -39,7 +39,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "n9p8",
+            "key": "c43c2",
             "ricosText": {
               "decorations": [],
               "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution."
@@ -47,14 +47,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "47pe9"
+        "key": "aaj95"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7g206",
+            "key": "9kcj7",
             "ricosText": {
               "decorations": [],
               "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
@@ -72,7 +72,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "aj0q2",
+            "key": "22ck5",
             "ricosText": {
               "decorations": [],
               "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test."
@@ -80,16 +80,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "bolj9"
+        "key": "4t7lk"
       }
     ],
     "lastEdited": {
-      "seconds": 1609176061,
-      "nanos": 98000000
+      "seconds": 1609179949,
+      "nanos": 537000000
     }
   },
   "selection": {
-    "anchorNode": "4gso4"
+    "anchorNode": "2ifkg"
   },
   "version": ""
 }

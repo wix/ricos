@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "pcg9",
+            "key": "40caf",
             "ricosText": {
               "decorations": [],
               "text": "link me to section"
@@ -14,16 +14,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "a1v4f"
+        "key": "3elat"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "1nalm",
+            "key": "el3ro",
             "ricosText": {
               "decorations": [
+                {
+                  "type": "ricos-anchor"
+                },
                 {
                   "type": "underline"
                 }
@@ -33,14 +36,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "7ocgr"
+        "key": "dsqlp"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9cdi7",
+            "key": "eorl1",
             "ricosText": {
               "decorations": [],
               "text": "my paragraph (regular text)"
@@ -48,14 +51,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "7tolg"
+        "key": "e3kcp"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bgh7g",
+            "key": "e26ad",
             "ricosText": {
               "decorations": [],
               "text": "my header 1"
@@ -73,7 +76,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5s09a",
+            "key": "2hseg",
             "ricosText": {
               "decorations": [],
               "text": "my header 2"
@@ -91,7 +94,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "aab98",
+            "key": "3gush",
             "ricosText": {
               "decorations": [],
               "text": "my code block"
@@ -108,7 +111,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "kbd",
+                "key": "4v9p5",
                 "ricosText": {
                   "decorations": [],
                   "text": "my quote"
@@ -116,7 +119,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "1dah7"
+            "key": "bav4h"
           }
         ],
         "type": "blockquote",
@@ -125,7 +128,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fr6pv"
+        "key": "fm5jq"
       },
       {
         "nodes": [],
@@ -148,7 +151,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "a6t2k"
+        "key": "euub2"
       },
       {
         "nodes": [],
@@ -213,7 +216,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ffoq5"
+        "key": "1ldi4"
       },
       {
         "nodes": [],
@@ -227,7 +230,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3alic"
+        "key": "pjrn"
       },
       {
         "nodes": [],
@@ -243,7 +246,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bpvr6"
+        "key": "8p6cv"
       },
       {
         "nodes": [],
@@ -253,7 +256,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "afk0a"
+        "key": "cpjn4"
       },
       {
         "nodes": [],
@@ -263,7 +266,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "a9usd"
+        "key": "8fam1"
       },
       {
         "nodes": [],
@@ -285,7 +288,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "443av"
+        "key": "67rqq"
       },
       {
         "nodes": [],
@@ -295,16 +298,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1124p"
+        "key": "8i346"
       }
     ],
     "lastEdited": {
-      "seconds": 1609176061,
-      "nanos": 23000000
+      "seconds": 1609179949,
+      "nanos": 458000000
     }
   },
   "selection": {
-    "anchorNode": "a1v4f"
+    "anchorNode": "3elat"
   },
   "version": "7.16.3"
 }

@@ -1,16 +1,19 @@
 /* eslint-disable no-unused-vars */
+
 import { MigrateSchema } from '.';
 import { compare } from '../comparision/compare';
 
 import fixture from '../../../../../e2e/tests/fixtures/intro.json';
 import { getTextNodes } from './getTextNodes';
 const ricosFixture = require('./migratedFixtures/intro.json');
+
+const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
   it('should migrate intro fixture', () => {
     expect(compare(MigrateSchema.fromDraft(fixture), ricosFixture)).toEqual({});
   });
 
-  it('getTextNodes', () => {
+  it('should overlap styles', () => {
     const block = {
       key: 'foo',
       text: 'blah blah blah',
@@ -71,12 +74,64 @@ describe('migrate from draft', () => {
       { key: 'dkn86', nodes: [], ricosText: { decorations: [], text: 'ah' }, type: 'text' },
     ];
 
-    const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
-
     const entityMap = {};
     const keyMapping = {};
     expect(filterKeys(getTextNodes(block, entityMap, keyMapping))).toEqual(
       filterKeys(expectedResults)
     );
+  });
+
+  it('should detect mentions', () => {
+    const block = {
+      key: 'fcm70',
+      text: 'Mentions too @Test One ',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [
+        {
+          offset: 13,
+          length: 9,
+          key: 0,
+        },
+      ],
+      data: {},
+    };
+    const entityMap = {
+      '0': {
+        type: 'mention',
+        mutability: 'SEGMENTED',
+        data: {
+          mention: {
+            name: 'Test One',
+            slug: 'testone',
+          },
+        },
+      },
+    };
+
+    const expectedResult = [
+      { nodes: [], ricosText: { decorations: [], text: 'Mentions too ' }, type: 'text' },
+      {
+        nodes: [],
+        ricosText: {
+          decorations: [
+            {
+              ricosMention: {
+                mention: {
+                  name: 'Test One',
+                  slug: 'testone',
+                },
+              },
+              type: 'ricos-mention',
+            },
+          ],
+          text: '@Test One',
+        },
+        type: 'text',
+      },
+      { nodes: [], ricosText: { decorations: [], text: ' ' }, type: 'text' },
+    ];
+    expect(filterKeys(getTextNodes(block, entityMap, {}))).toEqual(expectedResult);
   });
 });

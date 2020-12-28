@@ -101,15 +101,15 @@ export const getTextNodes = (
     if (numbers[i] < text.length) {
       rangeMap[point].forEach(({ action, key, style }) => {
         if (action === 'start') {
-          if (key) {
-            keys.push(key);
-          } else if (style) {
+          if (style) {
             styles.push(style);
+          } else {
+            keys.push(key);
           }
-        } else if (key) {
-          keys = keys.filter(s => s !== key);
         } else if (style) {
           styles = styles.filter(s => s !== style);
+        } else {
+          keys = keys.filter(s => s !== key);
         }
       });
 
