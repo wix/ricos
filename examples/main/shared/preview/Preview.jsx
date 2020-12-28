@@ -63,6 +63,9 @@ export default class Preview extends PureComponent {
 
   render() {
     const { expandModeIsOpen, expandModeIndex } = this.state;
+    const helpers = {
+      onViewerLoaded: async (...args) => console.log('onViewerLoaded', ...args),
+    };
     return (
       <div id="rich-content-preview" className="viewer">
         <div className="content-preview">
@@ -74,6 +77,7 @@ export default class Preview extends PureComponent {
             config={this.config}
             initialState={this.props.initialState}
             theme={theme}
+            helpers={helpers}
             isMobile={this.props.isMobile}
             anchorTarget={anchorTarget}
             relValue={relValue}
