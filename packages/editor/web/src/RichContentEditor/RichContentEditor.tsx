@@ -238,6 +238,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
     this.reportDebuggingInfo();
+    this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
   }
 
   componentWillMount() {
