@@ -19,10 +19,10 @@
 
 </details>
 <hr/>
-## 8.11.0 (Dec 28, 2020)
 
-## 8.10.2 (Dec 27, 2020)
+## 8.11.0 (Dec 28, 2020)
 ### :rocket: New Feature
+
 - `viewer`
   - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
   - [#1921](https://github.com/wix-incubator/rich-content/pull/1921) `onViewerLoaded` callback includes `isPreview`
@@ -31,6 +31,7 @@
   - [#1917](https://github.com/wix-incubator/rich-content/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
 - `table`
   - [#1401](https://github.com/wix-incubator/rich-content/pull/1401) add new table plugin
+## 8.10.2 (Dec 27, 2020)
 ### :bug: Bug Fix
 - `gallery`
   - [#1908](https://github.com/wix-incubator/rich-content/pull/1908) remove option to choose videos in native selection
