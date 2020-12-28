@@ -5,6 +5,10 @@ export default rgbString => {
     .split(')')[0]
     .split(sep);
 
+  if (rgb?.length !== 3) {
+    return null;
+  }
+
   let r = Number(rgb[0]).toString(16),
     g = Number(rgb[1]).toString(16),
     b = Number(rgb[2]).toString(16);
