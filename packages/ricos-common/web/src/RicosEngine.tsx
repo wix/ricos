@@ -85,6 +85,7 @@ export class RicosEngine extends Component<EngineProps> {
     const { anchorTarget, relValue } = linkSettings;
 
     // any of ricos props that should be merged into child
+    const isPreview = () => previewContent && !isPreviewExpanded;
     const ricosPropsToMerge: RichContentProps = {
       isMobile,
       textToolbarType:
@@ -99,6 +100,7 @@ export class RicosEngine extends Component<EngineProps> {
       helpers: {
         openModal,
         closeModal,
+        isPreview,
       },
       disabled: pauseMedia,
       anchorTarget,
@@ -111,7 +113,7 @@ export class RicosEngine extends Component<EngineProps> {
       ...htmls,
       <RicosModal
         ariaHiddenId={ariaHiddenId}
-        isModalSuspended={previewContent && !isPreviewExpanded}
+        isModalSuspended={isPreview()}
         container={container}
         {...mergedRCProps}
         key={'ricosElement'}
