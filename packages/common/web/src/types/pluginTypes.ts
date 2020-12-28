@@ -225,15 +225,17 @@ export type LegacyViewerPluginConfig<PluginConfig = Record<string, any>> = Parti
 
 export type PluginsDecorator = (component: ComponentType) => ComponentType;
 
+export type SupportedBlocks = string[];
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Record<string, any>>
   extends EditorContextType,
     LegacyEditorPluginConfig<PluginConfig> {
   decorator: PluginsDecorator;
   commonPubsub: Pubsub;
-  supportedPluginsOnOneApp?: string[];
   pluginDefaults: Record<string, unknown>;
   spoilerWrapper?: (component: ComponentType) => ComponentType;
+  supportedPluginsOnOneApp?: SupportedBlocks;
 }
 
 export interface LinkPanelSettings {
