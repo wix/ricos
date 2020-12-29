@@ -1,6 +1,10 @@
 import React from 'react';
 import { BUTTONS, EditIcon } from 'wix-rich-content-plugin-commons';
-import { updateLinkAtCurrentSelection, insertExternalLink } from 'wix-rich-content-editor-common';
+import {
+  updateLinkAtCurrentSelection,
+  getExternalLinkData,
+  insertExternalLink,
+} from 'wix-rich-content-editor-common';
 import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
 import UrlLinkButton from './UrlLinkButton';
@@ -45,6 +49,7 @@ const createInlineButtons: CreateInlineButtons = (config: {
         <div data-hook={'EditLinkButton'} style={{ margin: '0 2px 0 -7px' }}>
           <TextLinkButton
             insertLinkFn={updateLinkAtCurrentSelection}
+            getExternalLinkData={getExternalLinkData}
             insertExternalLink={insertExternalLink}
             icon={EditIcon}
             tooltipText={config.t('LinkTo_Edit_Tooltip')}

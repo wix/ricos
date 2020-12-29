@@ -46,7 +46,7 @@ import { MockVerticalSearchModule } from '../../../../../examples/main/shared/ut
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
 
-const onLinkAdd = async saveData => {
+const onLinkAdd = async (externalLinkData, saveData) => {
   const data = await Promise.resolve({ mockURL: 'www.sport5.co.il', mockData: {} });
   saveData(data);
 };

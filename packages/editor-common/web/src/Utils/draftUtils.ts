@@ -13,7 +13,7 @@ import {
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget, SetEditorState } from 'wix-rich-content-common';
+import { RelValue, AnchorTarget } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
@@ -55,23 +55,34 @@ export const insertLinkInPosition = (
   { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
+  const linkEntityData = createLinkEntityData({
+    url,
+    targetBlank,
+    nofollow,
+    anchorTarget,
+    relValue,
+  });
 
-  return insertLink(
-    editorState,
-    selection,
-    createLinkEntityData({
-      url,
-      targetBlank,
-      nofollow,
-      anchorTarget,
-      relValue,
-    })
-  );
+  return insertLink(editorState, selection, linkEntityData);
 };
 
-export const insertExternalLink = (editorState: EditorState, setEditorState: SetEditorState) => (
-  externalData: ExternalLinkData
-) => {
+export const getExternalLinkData = (editorState: EditorState) => {
+  let externalLinkData;
+  const selection = getSelection(editorState);
+
+  if (isSelectionBelongsToExistingLink(editorState, selection)) {
+    const contentState = editorState.getCurrentContent();
+    const blockKey = selection.getStartKey();
+    const block = contentState.getBlockForKey(blockKey);
+    const entityKey = block.getEntityAt(selection.getStartOffset());
+    const entity = contentState.getEntityMap().get(entityKey);
+    externalLinkData = entity?.getData()?.externalData;
+  }
+
+  return externalLinkData || {};
+};
+
+export const insertExternalLink = (editorState: EditorState, externalData: ExternalLinkData) => {
   const selection = getSelection(editorState);
   const editorStateWithLink = isSelectionBelongsToExistingLink(editorState, selection)
     ? updateLink(editorState, selection, { externalData })
@@ -82,12 +93,13 @@ export const insertExternalLink = (editorState: EditorState, setEditorState: Set
     selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
   );
 
-  setEditorState(newEditorState);
+  return newEditorState;
 };
 
 export const updateLinkAtCurrentSelection = (editorState: EditorState, data): EditorState => {
   const selection = getSelection(editorState);
-  const editorStateWithLink = updateLink(editorState, selection, createLinkEntityData(data));
+  const linkEntityData = createLinkEntityData(data);
+  const editorStateWithLink = updateLink(editorState, selection, linkEntityData);
   return EditorState.forceSelection(
     editorStateWithLink,
     selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
@@ -122,9 +134,10 @@ export const insertLinkAtCurrentSelection = (
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
   const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+  const linkEntityData = createLinkEntityData(entityData);
   const editorStateWithLink = isExistsLink
-    ? updateLink(newEditorState, selection, createLinkEntityData(entityData))
-    : insertLink(newEditorState, selection, createLinkEntityData(entityData));
+    ? updateLink(newEditorState, selection, linkEntityData)
+    : insertLink(newEditorState, selection, linkEntityData);
   const editorStateSelection = isExistsLink
     ? selection.merge({ anchorOffset: selection.getFocusOffset() })
     : editorStateWithLink.getCurrentContent().getSelectionAfter();
