@@ -1,6 +1,7 @@
 const imageType = 'wix-draft-plugin-image';
 const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
+const tableType = 'table';
 
 function imageEntryToGallery(data, index) {
   const src = data.src;
@@ -18,13 +19,34 @@ function imageEntryToGallery(data, index) {
   };
 }
 
+function getTableImages(entry, index) {
+  let tableImages = [];
+  // eslint-disable-next-line fp/no-loops
+  for (const [, row] of Object.entries(entry.data.config.rows)) {
+    // eslint-disable-next-line fp/no-loops
+    for (const [, column] of Object.entries(row.columns)) {
+      const entity = Object.entries(column.content.entityMap);
+      const entryData = entity.length ? entity[0][1].data : null;
+      // eslint-disable-next-line no-extra-boolean-cast
+      if (!!entryData?.src) {
+        tableImages = [...tableImages, ...imageEntryToGallery(entryData, index)];
+      }
+    }
+  }
+  return tableImages;
+}
+
 function convertEntryToGalleryItems(entry, index) {
   switch (entry.type) {
     case imageType:
     case imageTypeLegacy:
       return entry.data.src ? [imageEntryToGallery(entry.data, index)] : [];
-    case galleryType:
+    case galleryType: {
       return entry.data.items;
+    }
+    case tableType: {
+      return getTableImages(entry);
+    }
     default:
       return [];
   }
