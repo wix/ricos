@@ -211,6 +211,7 @@ class RichContentViewer extends Component<
         inlineStyleMappers: this.props.inlineStyleMappers,
         decorators: this.props.decorators,
         config: this.props.config,
+        t: this.props.t,
       };
 
       const output = convertToReact(

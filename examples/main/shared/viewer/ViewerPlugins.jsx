@@ -10,6 +10,8 @@ import {
   linkPreviewTypeMapper,
 } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
+import { tableTypeMapper } from 'wix-rich-content-plugin-table/viewer';
+
 import {
   galleryTypeMapper,
   GALLERY_TYPE,
@@ -76,6 +78,7 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
 import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'wix-rich-content-plugin-table/dist/styles.min.css';
 
 import { getBaseUrl } from '../../src/utils';
 
@@ -98,6 +101,7 @@ export const typeMappers = [
   soundCloudTypeMapper,
   mentionsTypeMapper,
   imageTypeMapper,
+  tableTypeMapper,
   galleryTypeMapper,
   mapTypeMapper,
   fileUploadTypeMapper,
