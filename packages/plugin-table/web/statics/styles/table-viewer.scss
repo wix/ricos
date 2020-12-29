@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    min-width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    .cell {
+        min-width: 10px;
+    }
+}
+
+.tableWrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

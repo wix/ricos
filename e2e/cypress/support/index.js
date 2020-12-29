@@ -1,5 +1,6 @@
 require('cypress-plugin-tab');
 import './commands';
+import './tableCommands';
 import '@applitools/eyes-cypress/commands';
 import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
 

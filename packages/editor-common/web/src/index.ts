@@ -73,9 +73,16 @@ export {
   deleteCharacterBeforeCursor,
   createLinkEntityData,
   getCharacterBeforeSelection,
+  isPluginFocused,
   getSelectionRange,
   isInSelectionRange,
+  cloneDeepWithoutEditorState,
   getEntities,
+  isCursorAtStartOfContent,
+  isCursorAtEndOfContent,
+  isCursorAtFirstLine,
+  isCursorAtLastLine,
+  selectAllContent,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';

@@ -11,6 +11,7 @@ import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
 import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -106,7 +107,7 @@ const createPlugins = externalConfigs => {
     html: pluginHtml(),
     divider: pluginDivider(),
     codeBlock: pluginCodeBlock(),
-    link: pluginLink(configs.link),
+    link: pluginLink(),
     linkPreview: pluginLinkPreview(configs.linkPreview),
     spacing: pluginLineSpacing(),
     indent: pluginIndent(),
@@ -123,7 +124,7 @@ const createPlugins = externalConfigs => {
     textColor: pluginTextColor(configs.textColor),
     emoji: pluginEmoji(),
     undoRedo: pluginUndoRedo(),
-    headings: pluginHeadings(configs.headings),
+    headings: pluginHeadings(),
     spoiler: pluginSpoiler(),
     accordion: pluginAccordion({
       innerRCEPlugins: [
@@ -134,6 +135,16 @@ const createPlugins = externalConfigs => {
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
         pluginImage().createPlugin,
+      ],
+    }),
+    table: pluginTable({
+      innerRCEPlugins: [
+        pluginTextColor(configs.textColor).createPlugin,
+        pluginTextHighlight(configs.textHighlight).createPlugin,
+        pluginIndent().createPlugin,
+        pluginLineSpacing().createPlugin,
+        pluginLink().createPlugin,
+        pluginCodeBlock().createPlugin,
       ],
     }),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
