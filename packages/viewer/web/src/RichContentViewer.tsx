@@ -154,7 +154,8 @@ class RichContentViewer extends Component<
 
   componentDidMount() {
     this.reportDebuggingInfo();
-    this.props.helpers?.onViewerLoaded?.(Version.currentVersion);
+    const { onViewerLoaded, isPreview } = this.props.helpers || {};
+    onViewerLoaded?.(!!isPreview?.(), Version.currentVersion);
   }
 
   reportDebuggingInfo() {
@@ -210,6 +211,7 @@ class RichContentViewer extends Component<
         inlineStyleMappers: this.props.inlineStyleMappers,
         decorators: this.props.decorators,
         config: this.props.config,
+        t: this.props.t,
       };
 
       const output = convertToReact(

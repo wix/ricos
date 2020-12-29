@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
+import { getModalPosition } from '../ToolbarUtils';
 
 class ContextMenu extends PureComponent {
   static propTypes = {
@@ -33,7 +34,17 @@ class ContextMenu extends PureComponent {
     };
   }
 
-  toggleOptions = () => this.setState({ isOpen: !this.state.isOpen });
+  setModalRef = ref => (this.modalRef = ref);
+
+  toggleOptions = () => {
+    this.setState({ isOpen: !this.state.isOpen }, () => {
+      if (this.state.isOpen && this.modalRef) {
+        this.setState({ position: getModalPosition(this.modalRef) });
+      } else {
+        this.setState({ position: null });
+      }
+    });
+  };
 
   hideOptions = () => this.setState({ isOpen: false });
 
@@ -44,9 +55,18 @@ class ContextMenu extends PureComponent {
 
   renderOptions = () => {
     const { buttonList, theme } = this.props;
+    const { isOpen, position } = this.state;
+    const visibility = isOpen ? { visibility: 'visible' } : { visibility: 'hidden' };
 
     return (
-      <div className={Styles.modal}>
+      <div
+        className={Styles.modal}
+        ref={this.setModalRef}
+        style={{
+          ...position,
+          ...visibility,
+        }}
+      >
         {Object.values(buttonList).map((props, i) => {
           if (props) {
             if (props.type === 'divider') {
@@ -81,7 +101,6 @@ class ContextMenu extends PureComponent {
 
   render() {
     const { tooltip, dataHook, getButtonStyles, isMobile, getIcon, tabIndex, theme } = this.props;
-    const { isOpen } = this.state;
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
@@ -96,7 +115,7 @@ class ContextMenu extends PureComponent {
             theme={theme}
             tabIndex={tabIndex}
           />
-          {isOpen && this.renderOptions()}
+          {this.renderOptions()}
         </div>
       </ClickOutside>
     );

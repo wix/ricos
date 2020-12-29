@@ -1,12 +1,11 @@
-import { EditorState } from 'wix-rich-content-editor-common';
+import { EditorState, cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
 import {
   convertFromRaw as fromRaw,
   convertToRaw as toRaw,
   RawDraftEntity,
   RawDraftContentState,
 } from '@wix/draft-js';
-import { cloneDeepWith } from 'lodash';
-import { ACCORDION_TYPE } from 'ricos-content';
+import { ACCORDION_TYPE, TABLE_TYPE } from 'ricos-content';
 import { version } from '../package.json';
 
 const addVersion = (obj, version) => {
@@ -27,6 +26,7 @@ const fixBlockDataImmutableJS = contentState => {
 };
 
 const isAccordion = entity => entity.type === ACCORDION_TYPE;
+const isTable = entity => entity.type === TABLE_TYPE;
 
 type Pair = {
   key: string;
@@ -38,6 +38,12 @@ type RawPair = {
   key: string;
   title: RawDraftContentState;
   content: RawDraftContentState;
+};
+
+type Row = Record<string, Columns>;
+type Columns = Record<string, Cell>;
+type Cell = {
+  content: EditorState;
 };
 
 const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
@@ -87,7 +93,32 @@ const entityFixersToRaw = [
       });
     },
   },
+  {
+    predicate: isTable,
+    entityFixer: (entity: RawDraftEntity) => {
+      entity.data.config = convertTableConfigToRaw(entity.data.config);
+    },
+  },
 ];
+
+const convertTableConfigToRaw = config => {
+  const { rows, ...rest }: { rows: { string: Row } } = config;
+  const newRows = {};
+  Object.entries(rows).forEach(([rowIndex, row]) => {
+    newRows[rowIndex] = {};
+    Object.entries(row.columns).forEach(([cellIndex, cell]) => {
+      const content = toRaw(cell.content.getCurrentContent());
+      newRows[rowIndex].columns = {
+        ...newRows[rowIndex].columns,
+        [cellIndex]: { ...cell, content },
+      };
+    });
+  });
+  return {
+    rows: newRows,
+    ...rest,
+  };
+};
 
 const entityFixersFromRaw = [
   {
@@ -103,11 +134,18 @@ const entityFixersFromRaw = [
       });
     },
   },
+  {
+    predicate: isTable,
+    entityFixer: (entity: RawDraftEntity) => {
+      const { rows } = entity.data.config;
+      Object.entries(rows).forEach(([, row]) => {
+        Object.entries((row as Row).columns).forEach(([, column]) => {
+          column.content = EditorState.createWithContent(convertFromRaw(column.content));
+        });
+      });
+    },
+  },
 ];
-
-const isEditorState = value => value?.getCurrentContent && value;
-
-const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
 const convertToRaw = ContentState =>
   addVersion(
@@ -122,4 +160,11 @@ const createEmpty = () => addVersion(EditorState.createEmpty(), version);
 const createWithContent = contentState =>
   addVersion(EditorState.createWithContent(contentState), contentState.VERSION);
 
-export { EditorState, createEmpty, createWithContent, convertToRaw, convertFromRaw };
+export {
+  EditorState,
+  createEmpty,
+  createWithContent,
+  convertToRaw,
+  convertFromRaw,
+  convertTableConfigToRaw,
+};
