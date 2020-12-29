@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bseo7",
+            "key": "8a938",
             "ricosText": {
               "decorations": [
                 {
@@ -19,7 +19,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3mjsk",
+            "key": "9c62b",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -27,27 +27,43 @@
           }
         ],
         "type": "paragraph",
-        "key": "d94d4"
+        "key": "b84n7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "appka"
+        "key": "vohq"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "foheu",
+            "key": "f4bmk",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "wix-rich-content-plugin-spoiler"
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#040404"
+                  }
                 },
                 {
                   "type": "bold"
                 },
+                {
+                  "type": "wix-rich-content-plugin-spoiler"
+                }
+              ],
+              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "f7g9u",
+            "ricosText": {
+              "decorations": [
                 {
                   "type": "FG",
                   "ricosColor": {
@@ -55,7 +71,7 @@
                   }
                 }
               ],
-              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): "
+              "text": "Today's bird walk was led  by Sandra Critelli who is originally from Italy - so you folks can practice your Italian with Sandra's summary:"
             }
           }
         ],
@@ -70,7 +86,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8ivhd",
+            "key": "4rf0a",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -88,7 +104,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7gk10",
+            "key": "bfoue",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow "
@@ -97,7 +113,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "29b21",
+            "key": "7ig97",
             "ricosText": {
               "decorations": [
                 {
@@ -110,7 +126,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dnrnb",
+            "key": "4nh67",
             "ricosText": {
               "decorations": [],
               "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -125,12 +141,12 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1608654518,
-      "nanos": 514000000
+      "seconds": 1609179949,
+      "nanos": 748000000
     }
   },
   "selection": {
-    "anchorNode": "d94d4"
+    "anchorNode": "b84n7"
   },
   "version": "7.9.1"
 }

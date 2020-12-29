@@ -6,7 +6,7 @@ import { BlockType, FromDraftListType, HeaderLevel, NodeType } from './consts';
 import { RicosContent, RicosNode, google } from 'ricos-schema';
 import { genKey } from 'draft-js';
 
-import { getTextNodes } from './getTextNode';
+import { getTextNodes } from './getTextNodes';
 import { getEntity } from './getEntity';
 
 const createTimestamp = (): google.protobuf.Timestamp => {
