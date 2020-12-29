@@ -34,7 +34,9 @@ function areBlocksEqual(block1, block2) {
     block1.getLength() === block2.getLength() &&
     block1.getText() === block2.getText() &&
     block1.getDepth() === block2.getDepth() &&
-    isEqual(block1.getData(), block2.getData()) &&
+    (block1.getData().equals
+      ? block1.getData().equals(block2.getData())
+      : isEqual(block1.getData(), block2.getData())) &&
     block1.getCharacterList().equals(block2.getCharacterList())
   );
 }

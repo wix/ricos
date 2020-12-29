@@ -53,6 +53,7 @@ import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
+import { createTablePlugin, TABLE_TYPE } from 'wix-rich-content-plugin-table';
 import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
@@ -81,6 +82,7 @@ import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
+import 'wix-rich-content-plugin-table/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
 import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 
@@ -153,6 +155,7 @@ export const editorPlugins = [
   createActionButtonPlugin,
   createPollPlugin,
   createAccordionPlugin,
+  createTablePlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -185,7 +188,8 @@ export const editorPluginsMap = {
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
   accordion: createAccordionPlugin,
-  unsupportedblocks: createUnsupportedBlocksPlugin,
+  unsupportedBlocks: createUnsupportedBlocksPlugin,
+  table: createTablePlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -399,6 +403,29 @@ const config = {
     //   },
     // },
     // },
+    innerRCEPlugins: [
+      createTextColorPlugin,
+      createLineSpacingPlugin,
+      createDividerPlugin,
+      createEmojiPlugin,
+      createMapPlugin,
+    ],
+  },
+  [TABLE_TYPE]: {
+    innerRCEPlugins: [
+      createTextColorPlugin,
+      createTextHighlightPlugin,
+      createIndentPlugin,
+      createLineSpacingPlugin,
+      createLinkPlugin,
+      createCodeBlockPlugin,
+      createImagePlugin,
+      createVideoPlugin,
+      createDividerPlugin,
+      createGiphyPlugin,
+      createFileUploadPlugin,
+      createEmojiPlugin,
+    ],
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,

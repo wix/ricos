@@ -60,6 +60,7 @@ export const plugins = {
   giphy: 'giphy',
   emoji: 'emoji',
   accordion: 'accordion',
+  table: 'table',
 };
 
 export const pluginsType = {

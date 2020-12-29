@@ -925,11 +925,6 @@ export const headerWithAlignmentGoogleDocsExpectedRaw = {
           length: 9,
           style: '{"FG":"#040404"}',
         },
-        {
-          offset: 0,
-          length: 9,
-          style: '{"BG":"#NaNNaNNaN"}',
-        },
       ],
       entityRanges: [],
       data: {
