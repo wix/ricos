@@ -39,13 +39,6 @@
   border: solid 1px #e0e0e3;
 }
 
-.customColorPicker_input_container:hover {
-  border-bottom: 1px solid rgba($action-color-fallback-tuple, 0.2);
-}
-
-.customColorPicker_input_container:focus-within {
-  border-bottom: 1px solid $action-color-fallback;
-}
 .hexColorInput{
   max-height: 100%;
   border: 1px solid;
@@ -75,6 +68,9 @@
       border-radius: 0;
       overflow: auto;
       border: none;
+      .react-colorful__pointer{  
+        box-shadow: 0 2px 2px rgba(9, 9, 9,0.90);
+      }
     }
     .react-colorful__pointer {
       width: 16px;
@@ -91,7 +87,6 @@
         overflow-x: hidden;
       }
     }
-
     .react-colorful__pointer.react-colorful__hue-pointer {
       z-index: 3;
     }
