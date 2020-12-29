@@ -33,6 +33,38 @@ import {
   VIDEO_TYPE_LEGACY,
   TABLE_TYPE,
   ANCHOR_TYPE,
+  RICOS_LINK_BUTTON_TYPE,
+  RICOS_ACTION_BUTTON_TYPE,
+  RICOS_CODE_BLOCK_TYPE,
+  RICOS_DIVIDER_TYPE,
+  RICOS_EMOJI_TYPE,
+  RICOS_GALLERY_TYPE,
+  RICOS_GIPHY_TYPE,
+  RICOS_HASHTAG_TYPE,
+  RICOS_HEADERS_MARKDOWN_TYPE,
+  RICOS_HTML_TYPE,
+  RICOS_IMAGE_TYPE,
+  RICOS_INDENT_TYPE,
+  RICOS_LINE_SPACING_TYPE,
+  RICOS_HEADINGS_DROPDOWN_TYPE,
+  RICOS_SPOILER_TYPE,
+  RICOS_ACCORDION_TYPE,
+  RICOS_EXTERNAL_LINK_TYPE,
+  RICOS_LINK_TYPE,
+  RICOS_LINK_PREVIEW_TYPE,
+  RICOS_MAP_TYPE,
+  RICOS_MENTION_TYPE,
+  RICOS_SOUND_CLOUD_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
+  RICOS_UNDO_REDO_TYPE,
+  RICOS_VERTICAL_EMBED_TYPE,
+  RICOS_VIDEO_TYPE,
+  RICOS_POLL_TYPE,
+  RICOS_TABLE_TYPE,
+  RICOS_ANCHOR_TYPE,
+  RICOS_EXTERNAL_MENTION_TYPE,
+  RICOS_FILE_TYPE,
 } from '../consts';
 import toCamelCase from 'to-camel-case';
 
@@ -72,49 +104,49 @@ export enum HeaderLevel {
   'header-six' = 6,
 }
 
-export enum FromDraftListType {
-  'unordered-list-item' = 'bullet_list',
-  'ordered-list-item' = 'ordered_list',
-}
+export const FROM_DRAFT_LIST_TYPE = {
+  [BlockType.UnorderedListItem]: NodeType.UnorderedList,
+  [BlockType.OrderedListItem]: NodeType.OrderedList,
+};
 
 export const TO_RICOS_PLUGIN_TYPE_MAP = {
-  [LINK_BUTTON_TYPE]: 'ricos-link-button',
-  [ACTION_BUTTON_TYPE]: 'ricos-action-button',
-  [CODE_BLOCK_TYPE]: 'ricos-code-block',
-  [DIVIDER_TYPE]: 'ricos-divider',
-  [EMOJI_TYPE]: 'ricos-emoji',
-  EMOJI_TYPE: 'ricos-emoji',
-  [FILE_UPLOAD_TYPE]: 'ricos-file-upload',
-  [GALLERY_TYPE]: 'ricos-gallery',
-  [GIPHY_TYPE]: 'ricos-giphy',
-  [HASHTAG_TYPE]: 'ricos-hashtag',
-  [HEADERS_MARKDOWN_TYPE]: 'ricos-headers-markdown',
-  [HTML_TYPE]: 'ricos-html',
-  [IMAGE_TYPE]: 'ricos-image',
-  [IMAGE_TYPE_LEGACY]: 'ricos-image',
-  [INDENT_TYPE]: 'ricos-indent',
-  [LINE_SPACING_TYPE]: 'ricos-line-spacing',
-  [HEADINGS_DROPDOWN_TYPE]: 'ricos-headings',
-  [SPOILER_TYPE]: 'ricos-spoiler',
-  [ACCORDION_TYPE]: 'ricos-accordion',
+  [LINK_BUTTON_TYPE]: RICOS_LINK_BUTTON_TYPE,
+  [ACTION_BUTTON_TYPE]: RICOS_ACTION_BUTTON_TYPE,
+  [CODE_BLOCK_TYPE]: RICOS_CODE_BLOCK_TYPE,
+  [DIVIDER_TYPE]: RICOS_DIVIDER_TYPE,
+  [EMOJI_TYPE]: RICOS_EMOJI_TYPE,
+  EMOJI_TYPE: RICOS_EMOJI_TYPE,
+  [FILE_UPLOAD_TYPE]: RICOS_FILE_TYPE,
+  [GALLERY_TYPE]: RICOS_GALLERY_TYPE,
+  [GIPHY_TYPE]: RICOS_GIPHY_TYPE,
+  [HASHTAG_TYPE]: RICOS_HASHTAG_TYPE,
+  [HEADERS_MARKDOWN_TYPE]: RICOS_HEADERS_MARKDOWN_TYPE,
+  [HTML_TYPE]: RICOS_HTML_TYPE,
+  [IMAGE_TYPE]: RICOS_IMAGE_TYPE,
+  [IMAGE_TYPE_LEGACY]: RICOS_IMAGE_TYPE,
+  [INDENT_TYPE]: RICOS_INDENT_TYPE,
+  [LINE_SPACING_TYPE]: RICOS_LINE_SPACING_TYPE,
+  [HEADINGS_DROPDOWN_TYPE]: RICOS_HEADINGS_DROPDOWN_TYPE,
+  [SPOILER_TYPE]: RICOS_SPOILER_TYPE,
+  [ACCORDION_TYPE]: RICOS_ACCORDION_TYPE,
   // TODO: are both types needed?
-  [EXTERNAL_LINK_TYPE]: 'ricos-external-link',
-  [LINK_TYPE]: 'ricos-link',
-  [LINK_PREVIEW_TYPE]: 'ricos-link-preview',
-  [MAP_TYPE]: 'ricos-map',
+  [EXTERNAL_LINK_TYPE]: RICOS_EXTERNAL_LINK_TYPE,
+  [LINK_TYPE]: RICOS_LINK_TYPE,
+  [LINK_PREVIEW_TYPE]: RICOS_LINK_PREVIEW_TYPE,
+  [MAP_TYPE]: RICOS_MAP_TYPE,
   // TODO: are both types needed?
-  [EXTERNAL_MENTIONS_TYPE]: 'ricos-external-mentions',
-  [MENTION_TYPE]: 'ricos-mention',
-  [SOUND_CLOUD_TYPE]: 'ricos-sound-cloud',
-  [TEXT_COLOR_TYPE]: 'ricos-text-color',
-  [TEXT_HIGHLIGHT_TYPE]: 'ricos-text-highlight',
-  [UNDO_REDO_TYPE]: 'ricos-undo-redo',
-  [VERTICAL_EMBED_TYPE]: 'ricos-vertical-embed',
-  [VIDEO_TYPE]: 'ricos-video',
-  [VIDEO_TYPE_LEGACY]: 'ricos-video',
-  [POLL_TYPE]: 'ricos-poll',
-  [TABLE_TYPE]: 'ricos-table',
-  [ANCHOR_TYPE]: 'ricos-anchor',
+  [EXTERNAL_MENTIONS_TYPE]: RICOS_EXTERNAL_MENTION_TYPE,
+  [MENTION_TYPE]: RICOS_MENTION_TYPE,
+  [SOUND_CLOUD_TYPE]: RICOS_SOUND_CLOUD_TYPE,
+  [TEXT_COLOR_TYPE]: RICOS_TEXT_COLOR_TYPE,
+  [TEXT_HIGHLIGHT_TYPE]: RICOS_TEXT_HIGHLIGHT_TYPE,
+  [UNDO_REDO_TYPE]: RICOS_UNDO_REDO_TYPE,
+  [VERTICAL_EMBED_TYPE]: RICOS_VERTICAL_EMBED_TYPE,
+  [VIDEO_TYPE]: RICOS_VIDEO_TYPE,
+  [VIDEO_TYPE_LEGACY]: RICOS_VIDEO_TYPE,
+  [POLL_TYPE]: RICOS_POLL_TYPE,
+  [TABLE_TYPE]: RICOS_TABLE_TYPE,
+  [ANCHOR_TYPE]: RICOS_ANCHOR_TYPE,
 };
 
 // [IMAGE_TYPE]: 'ricosImage'
@@ -124,9 +156,15 @@ export const TO_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
 
 const DUPLICATE_KEYS = ['EMOJI_TYPE', IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
 
-// 'ricos-image': IMAGE_TYPE
+// 'ricos_image': IMAGE_TYPE
 export const FROM_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
   Object.entries(TO_RICOS_PLUGIN_TYPE_MAP)
     .filter(([key]) => !DUPLICATE_KEYS.includes(key))
     .map(([key, value]) => [value, key])
 );
+
+export const TO_RICOS_DECORATION_TYPE = {
+  BOLD: 'bold',
+  ITALIC: 'italic',
+  UNDERLINE: 'underline',
+};

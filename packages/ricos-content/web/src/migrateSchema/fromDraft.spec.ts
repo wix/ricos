@@ -123,7 +123,7 @@ describe('migrate from draft', () => {
                   slug: 'testone',
                 },
               },
-              type: 'ricos-mention',
+              type: 'ricos_mention',
             },
           ],
           text: '@Test One',

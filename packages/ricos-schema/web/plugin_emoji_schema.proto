@@ -1,5 +1,0 @@
-syntax = "proto3";
-
-message RicosEmoji {
-    string emojiUnicode = 1 [required = true];
-}

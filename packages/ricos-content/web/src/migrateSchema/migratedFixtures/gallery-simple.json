@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "54gmg"
+        "key": "7vnpr"
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "5frbg",
         "ricosGallery": {
           "items": [
@@ -69,16 +69,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ds5qa"
+        "key": "8peqa"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 526000000
+      "seconds": 1609230023,
+      "nanos": 213000000
     }
   },
   "selection": {
-    "anchorNode": "54gmg"
+    "anchorNode": "7vnpr"
   },
   "version": "7.10.5"
 }

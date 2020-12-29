@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "asvkl",
+            "key": "202c2",
             "ricosText": {
               "decorations": [],
               "text": "As you read this, we are in Xalapa, Mexico doing our best to get photos of warblers that have rarely xxsxsxsxasxoccurred in Central Park such as the Townsend's and Hermit - for Deborah Allen's book on the Birds of Central Park. We are home in Central Park on Sunday,1 March."
@@ -14,11 +14,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "tcr5"
+        "key": "49u46"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "17tmr",
         "ricosImage": {
           "config": {
@@ -43,11 +43,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "p4no",
+            "key": "emgb8",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -56,7 +56,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#626262"
                   }
@@ -67,23 +67,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "a5p78"
+        "key": "e7eb9"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ftqus"
+        "key": "bekmj"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "1l7bg",
+            "key": "gd9a",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -98,11 +98,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6128t",
+            "key": "7a9dt",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -114,11 +114,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8ngmb",
+            "key": "bg59b",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -133,11 +133,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2e73j",
+            "key": "872uc",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -149,11 +149,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8m4fc",
+            "key": "d8se3",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -168,11 +168,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9kcoq",
+            "key": "e7pjr",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -183,23 +183,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "c8u6m"
+        "key": "acuvp"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9ii79"
+        "key": "dgv2r"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "4kgah",
+            "key": "afqi2",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -211,11 +211,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5mo45",
+            "key": "cfiep",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -230,11 +230,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4jjdb",
+            "key": "8ltbj",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -246,11 +246,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "67q9g",
+            "key": "4m2fe",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -268,11 +268,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2i4re",
+            "key": "g5nn",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -283,29 +283,29 @@
           }
         ],
         "type": "paragraph",
-        "key": "ousi"
+        "key": "f4nnm"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ade05"
+        "key": "8qea"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "fhujt",
+            "key": "bkcut",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -317,11 +317,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3tnie",
+            "key": "bfv04",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -330,7 +330,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#626262"
                   }
@@ -341,11 +341,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "dkblq"
+        "key": "5vfhi"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "6b0e4",
         "ricosImage": {
           "config": {
@@ -374,14 +374,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "frolm",
+            "key": "aihj5",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor2"
                   }
@@ -402,7 +402,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6q8fe",
+            "key": "fr4al",
             "ricosText": {
               "decorations": [
                 {
@@ -417,23 +417,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "co84a"
+        "key": "b7kt7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2gjov"
+        "key": "310ae"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bblj1",
+            "key": "aij12",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
                   "type": "bold"
@@ -447,21 +447,21 @@
           }
         ],
         "type": "paragraph",
-        "key": "6q2mk"
+        "key": "eqlfo"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bv8t1",
+            "key": "3tbn1",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -473,14 +473,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4jtkk",
+            "key": "djlk5",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor3"
                   }
@@ -492,14 +492,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9h6as",
+            "key": "7qpdh",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -510,21 +510,21 @@
           }
         ],
         "type": "paragraph",
-        "key": "cur16"
+        "key": "7ded0"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "3q6v7",
+            "key": "9ljvo",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -536,14 +536,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bbmmj",
+            "key": "egolp",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor3"
                   }
@@ -555,14 +555,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dmv1i",
+            "key": "c22u5",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -573,21 +573,21 @@
           }
         ],
         "type": "paragraph",
-        "key": "2dbt"
+        "key": "dl3m2"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "d4nt7",
+            "key": "8suo6",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -599,14 +599,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "aq3r1",
+            "key": "dvj28",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor3"
                   }
@@ -618,14 +618,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e798p",
+            "key": "89grh",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -637,7 +637,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6f0v8",
+            "key": "f93rd",
             "ricosText": {
               "decorations": [
                 {
@@ -649,21 +649,21 @@
           }
         ],
         "type": "paragraph",
-        "key": "a329h"
+        "key": "239r2"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "f7ban",
+            "key": "5v9s3",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -675,11 +675,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cfg70",
+            "key": "1nj2m",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -691,7 +691,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3ap5q",
+            "key": "2o0t8",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -700,11 +700,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8uj50",
+            "key": "1r9a4",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -718,18 +718,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "6eg01"
+        "key": "6rl2s"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "afmge",
+            "key": "ful0n",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -738,7 +738,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -750,17 +750,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2iggv",
+            "key": "9pdbj",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
                   "type": "italic"
@@ -772,7 +772,7 @@
                   "type": "underline"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor2"
                   }
@@ -784,11 +784,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9q6ns",
+            "key": "4qu9s",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -797,7 +797,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -809,17 +809,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "27d2n",
+            "key": "f25pm",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -831,17 +831,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "66i1f",
+            "key": "7fvqf",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -856,17 +856,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "14j0k",
+            "key": "dpu3m",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -878,17 +878,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2qdrg",
+            "key": "bu4cg",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -903,17 +903,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ct2gv",
+            "key": "7plg4",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -925,17 +925,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8388e",
+            "key": "cbdn0",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -950,17 +950,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8lqr3",
+            "key": "dkp0e",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -971,23 +971,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "780kl"
+        "key": "5qmrm"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "aljc3"
+        "key": "111u6"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "a6e4c",
+            "key": "fjsup",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -996,7 +996,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#626262"
                   }
@@ -1007,11 +1007,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "3m7e2"
+        "key": "6g9bf"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "a6n1a",
         "ricosImage": {
           "config": {
@@ -1040,14 +1040,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cubtu",
+            "key": "70sbf",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor3"
                   }
@@ -1059,7 +1059,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1chpm",
+            "key": "4mf85",
             "ricosText": {
               "decorations": [
                 {
@@ -1081,14 +1081,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9p3pm",
+            "key": "5gv0f",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1100,14 +1100,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "30esg",
+            "key": "b5eju",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1122,11 +1122,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5nkb7",
+            "key": "8g04m",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1140,19 +1140,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "cidbm"
+        "key": "adfad"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "p75i"
+        "key": "68obu"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bsjh1",
+            "key": "csfbo",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -1160,19 +1160,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "7hkje"
+        "key": "e3a3s"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2thal"
+        "key": "e0gpr"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "3kt8t",
+            "key": "5mupd",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker, siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -1180,19 +1180,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "bg1da"
+        "key": "7o390"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7o9f5"
+        "key": "49h4m"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "8508q",
+            "key": "9vmqs",
             "ricosText": {
               "decorations": [],
               "text": "Intorno  all `isola a sud di ow Bridge c'era inoltre una coppia di Hooded  Merganser, molte Canadian Geese, Grayleg Goose e 7-8 Shovelers. Mark ha  avvistato la Cooper`s Hawk vicino a Summer House."
@@ -1200,19 +1200,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "as8np"
+        "key": "akcvn"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e6e8r"
+        "key": "f5625"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6vb7o",
+            "key": "cfc3p",
             "ricosText": {
               "decorations": [],
               "text": "2 volte abbiamo notato 2 Red-Tailed Hawk che volavano in circolo insieme, forse pronte per costruire il futuro nido? Abbiamo  avvistato Red-Bellied Woodpeckers( 4 ) che hanno reagito abbastanza  facilmente alla mia chiamata, una coppia di Downy, una coppia di  White  Breasted Nuthatch  a Tupolo e 1 Brown Creeper."
@@ -1220,19 +1220,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "fbch5"
+        "key": "9jrb5"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4lql5"
+        "key": "barfh"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "ashq2",
+            "key": "272bv",
             "ricosText": {
               "decorations": [],
               "text": "A  Shakespeare Garden abbiamo trovato un maschio di Eastern Towee (  trovato da Jaquie). Proseguendo per Turtle Pond, Mark ha avvistato un  giovane di Great Blue Heron"
@@ -1240,19 +1240,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "e0l6r"
+        "key": "6i58i"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9nvo3"
+        "key": "camul"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5p8um",
+            "key": "75e0a",
             "ricosText": {
               "decorations": [],
               "text": "Abbiamo  poi raggiunto il Reservoir per trovare una femmina di Red-breasted  Merganser che abbiamo osservato bene dopo che ha reagito alla mia  chiamata, almeno 12 Bufflehead ( maschi e femmine ) , 1 Pie-billed  Greebe, probabilmente 100 ( o piu`) Shovelers che si muovevano in gruppo  e a cerchio come fanno di solito per muovere le "
@@ -1261,11 +1261,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3089f",
+            "key": "7ltt5",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1276,23 +1276,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "9nvhp"
+        "key": "baih2"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "agef3"
+        "key": "egad5"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "a78ah",
+            "key": "8hjuf",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1303,23 +1303,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "2huj3"
+        "key": "9j0n6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "flq9m"
+        "key": "d6vgr"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "lr3l",
+            "key": "9mrt4",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1330,23 +1330,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "144fi"
+        "key": "6dkai"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "58f3i"
+        "key": "4klen"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "c8q89",
+            "key": "4o301",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1357,23 +1357,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "2btsi"
+        "key": "athn6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3ajvp"
+        "key": "7lpov"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "46id6",
+            "key": "cjsi4",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1384,23 +1384,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "4l8d3"
+        "key": "atsdf"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fr7r7"
+        "key": "6b4qa"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "db8k",
+            "key": "1e6gn",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1412,7 +1412,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2m8m3",
+            "key": "bb7c8",
             "ricosText": {
               "decorations": [],
               "text": "\n"
@@ -1421,14 +1421,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "18rso",
+            "key": "34b3n",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor2"
                   }
@@ -1445,28 +1445,28 @@
           }
         ],
         "type": "paragraph",
-        "key": "b7876"
+        "key": "b19no"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5m8du"
+        "key": "67qab"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "eea2n"
+        "key": "eqg1n"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "801m1",
+            "key": "1q052",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -1475,7 +1475,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#626262"
                   }
@@ -1486,11 +1486,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "88pbo"
+        "key": "e2vau"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "fpgp8",
         "ricosImage": {
           "config": {
@@ -1509,21 +1509,21 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "193sl"
+        "key": "6fhuf"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "arrrc",
+            "key": "7oi3i",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor3"
                   }
@@ -1544,14 +1544,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3ue7b",
+            "key": "fpllc",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1565,23 +1565,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "6gsnr"
+        "key": "ddbr9"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "auqkp"
+        "key": "cek1j"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dgllp",
+            "key": "5a79f",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1592,23 +1592,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "a6c6k"
+        "key": "9iuac"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9a7s9"
+        "key": "eo9vu"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "55rii",
+            "key": "6etmv",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -1617,7 +1617,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor4"
                   }
@@ -1628,11 +1628,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "dhvvh"
+        "key": "2l2uj"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "h9ui",
         "ricosImage": {
           "config": {
@@ -1651,18 +1651,18 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "65a45"
+        "key": "3rb6u"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "n7ln",
+            "key": "coc7v",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1673,7 +1673,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "fh3i5"
+        "key": "79on2"
       },
       {
         "nodes": [],
@@ -1688,11 +1688,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cntqt",
+            "key": "70phu",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1703,23 +1703,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "113j3"
+        "key": "95c1k"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "flc1e"
+        "key": "e45kc"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "95f5k",
+            "key": "c0va9",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1730,23 +1730,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "36a28"
+        "key": "eduog"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "eoa3o"
+        "key": "9n96r"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "51l96",
+            "key": "137n7",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -1755,7 +1755,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor4"
                   }
@@ -1766,11 +1766,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "ak069"
+        "key": "7iltc"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "2pumo",
         "ricosImage": {
           "config": {
@@ -1789,18 +1789,18 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "clv66"
+        "key": "fbkd1"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bjqlu",
+            "key": "2355i",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1811,18 +1811,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "6oiof"
+        "key": "ffnce"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "3am6l",
+            "key": "bt2rg",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1833,23 +1833,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "fgq1"
+        "key": "8uvdk"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4mj4s"
+        "key": "e5ib1"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "aurn2",
+            "key": "ev1jk",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1860,23 +1860,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "bo9jb"
+        "key": "5k0f8"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bi8g"
+        "key": "e7pl8"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "eauag",
+            "key": "6g4ct",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1887,23 +1887,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "9o4m8"
+        "key": "1l1c2"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8cnl3"
+        "key": "f3m4h"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "104qb",
+            "key": "abldu",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -1912,7 +1912,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor4"
                   }
@@ -1923,11 +1923,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "6fllo"
+        "key": "480kh"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "5f9jv",
         "ricosImage": {
           "config": {
@@ -1948,11 +1948,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6a08q",
+            "key": "cueeg",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1963,23 +1963,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "770ho"
+        "key": "1cagb"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "apajl"
+        "key": "b32ie"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6spfc",
+            "key": "6ndbh",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -1990,23 +1990,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "amkl0"
+        "key": "48chq"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e370f"
+        "key": "439ti"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "20g47",
+            "key": "a0tsa",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2017,23 +2017,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "6g85b"
+        "key": "dpk8f"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6crai"
+        "key": "dop8h"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7tkb1",
+            "key": "n48u",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -2042,7 +2042,7 @@
                   "type": "italic"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor4"
                   }
@@ -2053,11 +2053,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "cpaj1"
+        "key": "ech2l"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "eav85",
         "ricosImage": {
           "config": {
@@ -2078,11 +2078,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bba54",
+            "key": "ab90e",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2093,23 +2093,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "d4102"
+        "key": "abj06"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "aij89"
+        "key": "9v3gl"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "18dib",
+            "key": "ee5g6",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2120,23 +2120,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "43mli"
+        "key": "1otau"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dqbd3"
+        "key": "boeli"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "28ohi",
+            "key": "5emvo",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2147,23 +2147,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "8lqko"
+        "key": "agplb"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9q3m6"
+        "key": "8155g"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "4p6vv",
+            "key": "d292k",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2174,7 +2174,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "1q7d"
+        "key": "2a5fd"
       },
       {
         "nodes": [],
@@ -2189,11 +2189,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "behn5",
+            "key": "efmkf",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2204,29 +2204,29 @@
           }
         ],
         "type": "paragraph",
-        "key": "33ita"
+        "key": "91omk"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6gli1"
+        "key": "bjq81"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dknoi",
+            "key": "2bonr",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor4"
                   }
@@ -2240,11 +2240,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "8krtm"
+        "key": "7jlrm"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "b7vjp",
         "ricosImage": {
           "config": {
@@ -2263,18 +2263,18 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3rv8e"
+        "key": "hq32"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "cj6vb",
+            "key": "e5lu8",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2285,23 +2285,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "ov65"
+        "key": "cjfun"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "35or"
+        "key": "3o6lm"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "431s4",
+            "key": "d5mbg",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2312,23 +2312,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "g1q7"
+        "key": "fgjl6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "37m18"
+        "key": "caqqv"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "cnhgb",
+            "key": "dkai1",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -2339,16 +2339,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "1j8qi"
+        "key": "5u44c"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5p9an"
+        "key": "57qmp"
       },
       {
         "nodes": [],
-        "type": "ricos-divider",
+        "type": "ricos_divider",
         "key": "6jhli",
         "ricosDivider": {
           "type": "SINGLE",
@@ -2362,21 +2362,21 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bhib0"
+        "key": "4qeab"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6knf",
+            "key": "644h2",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor3"
                   }
@@ -2388,7 +2388,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "34a85",
+            "key": "c7ehd",
             "ricosText": {
               "decorations": [],
               "text": " and "
@@ -2397,14 +2397,14 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3drfk",
+            "key": "ekprk",
             "ricosText": {
               "decorations": [
                 {
                   "type": "bold"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#ef15cc"
                   }
@@ -2423,14 +2423,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1l120"
+        "key": "5tnvp"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "d188m",
+            "key": "433cr",
             "ricosText": {
               "decorations": [
                 {
@@ -2446,7 +2446,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "68k68",
+            "key": "5i81r",
             "ricosText": {
               "decorations": [
                 {
@@ -2459,11 +2459,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5h2sn",
+            "key": "8lqtl",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
                   "type": "bold"
@@ -2472,7 +2472,7 @@
                   "type": "underline"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "textColor3"
                   }
@@ -2484,7 +2484,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "b817r",
+            "key": "ddro8",
             "ricosText": {
               "decorations": [
                 {
@@ -2497,7 +2497,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bj1m4",
+            "key": "7de42",
             "ricosText": {
               "decorations": [],
               "text": "and/or"
@@ -2506,7 +2506,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1pi0g",
+            "key": "8oghe",
             "ricosText": {
               "decorations": [
                 {
@@ -2519,11 +2519,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "142vp",
+            "key": "6q6v5",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
                   "type": "bold"
@@ -2532,7 +2532,7 @@
                   "type": "underline"
                 },
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#ef15cc"
                   }
@@ -2543,29 +2543,29 @@
           }
         ],
         "type": "paragraph",
-        "key": "85hkv"
+        "key": "djqjk"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bjqmd"
+        "key": "7m5tn"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "51soj"
+        "key": "dcvgn"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "74nop"
+        "key": "5fd3r"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "agcs0",
+            "key": "7qgs0",
             "ricosText": {
               "decorations": [],
               "text": "#February1982BirdingCentralPark"
@@ -2573,29 +2573,29 @@
           }
         ],
         "type": "paragraph",
-        "key": "brfor"
+        "key": "6i8m1"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fi0k3"
+        "key": "c4knd"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5e0b0"
+        "key": "cfc08"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5tj3h"
+        "key": "ahg4t"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "4vhdm",
+            "key": "c69v7",
             "ricosText": {
               "decorations": [
                 {
@@ -2607,14 +2607,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "4u7ei"
+        "key": "dgbhv"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "1rfkb",
+            "key": "6sgjj",
             "ricosText": {
               "decorations": [
                 {
@@ -2626,7 +2626,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "dgkcr"
+        "key": "314f6"
       },
       {
         "nodes": [
@@ -2637,7 +2637,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "99b1k",
+                    "key": "6e3i8",
                     "ricosText": {
                       "decorations": [],
                       "text": "a?"
@@ -2645,7 +2645,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "743on"
+                "key": "fu3vi"
               }
             ],
             "type": "list_item",
@@ -2658,7 +2658,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "7k8gh",
+                    "key": "ato00",
                     "ricosText": {
                       "decorations": [],
                       "text": "א?"
@@ -2666,7 +2666,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "34f47"
+                "key": "9g5ae"
               }
             ],
             "type": "list_item",
@@ -2674,14 +2674,14 @@
           }
         ],
         "type": "ordered_list",
-        "key": "e2vv4"
+        "key": "anb4b"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "e8ovn",
+            "key": "85e3g",
             "ricosText": {
               "decorations": [],
               "text": "b?"
@@ -2689,14 +2689,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "2gtmm"
+        "key": "2smb8"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "597vr",
+            "key": "147vm",
             "ricosText": {
               "decorations": [],
               "text": "ב?"
@@ -2704,14 +2704,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "6v793"
+        "key": "baqds"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bt4ue",
+            "key": "5jg2q",
             "ricosText": {
               "decorations": [
                 {
@@ -2723,7 +2723,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "d0j5f"
+        "key": "3e9e5"
       },
       {
         "nodes": [
@@ -2734,11 +2734,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "2vu5m",
+                    "key": "326fh",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -2749,7 +2749,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "9412b"
+                "key": "4jh53"
               }
             ],
             "type": "list_item",
@@ -2762,11 +2762,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "ebkae",
+                    "key": "2pemd",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -2777,7 +2777,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "bi83e"
+                "key": "9jciv"
               }
             ],
             "type": "list_item",
@@ -2785,18 +2785,18 @@
           }
         ],
         "type": "ordered_list",
-        "key": "cfp75"
+        "key": "d7ejb"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "629ih",
+            "key": "5j383",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -2807,18 +2807,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "6qdcs"
+        "key": "bt7c6"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "1thts",
+            "key": "46gst",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -2829,18 +2829,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "p0ls"
+        "key": "etvsu"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "41enc",
+            "key": "36ub5",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -2854,7 +2854,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "4bcqu"
+        "key": "b172o"
       },
       {
         "nodes": [
@@ -2865,11 +2865,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "h4rn",
+                    "key": "45d52",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "right"
                           }
@@ -2880,7 +2880,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "d8q93"
+                "key": "46fqi"
               }
             ],
             "type": "list_item",
@@ -2893,11 +2893,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "1149b",
+                    "key": "4ne9m",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "right"
                           }
@@ -2908,7 +2908,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "dgs5u"
+                "key": "21u2m"
               }
             ],
             "type": "list_item",
@@ -2916,18 +2916,18 @@
           }
         ],
         "type": "ordered_list",
-        "key": "pecq"
+        "key": "1md8l"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "aggfd",
+            "key": "bshrp",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -2938,18 +2938,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "6v3l5"
+        "key": "jnoe"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bknh7",
+            "key": "8i1nk",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -2960,18 +2960,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "35chv"
+        "key": "958f"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "54c9k",
+            "key": "fhu6o",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -2985,18 +2985,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "fo74o"
+        "key": "6vu35"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "d0ghb",
+            "key": "2d4va",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -3007,18 +3007,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "600u1"
+        "key": "8tliu"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "e0d3o",
+            "key": "2ih7v",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -3029,7 +3029,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "37f6p"
+        "key": "7djet"
       },
       {
         "nodes": [
@@ -3040,11 +3040,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "eb8jm",
+                    "key": "dbr5a",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "center"
                           }
@@ -3055,7 +3055,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "164ic"
+                "key": "1ksld"
               }
             ],
             "type": "list_item",
@@ -3068,11 +3068,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "52p5m",
+                    "key": "6qtdh",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "center"
                           }
@@ -3083,7 +3083,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "doal2"
+                "key": "3k67p"
               }
             ],
             "type": "list_item",
@@ -3091,14 +3091,14 @@
           }
         ],
         "type": "ordered_list",
-        "key": "96rf8"
+        "key": "ad87p"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5erqj",
+            "key": "67vp9",
             "ricosText": {
               "decorations": [
                 {
@@ -3110,18 +3110,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "cj20k"
+        "key": "8lri9"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dlugr",
+            "key": "8nneb",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -3132,18 +3132,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "1mle5"
+        "key": "4vcnh"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9263l",
+            "key": "a1kcl",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -3154,7 +3154,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "8pvta"
+        "key": "b8e04"
       },
       {
         "nodes": [
@@ -3165,11 +3165,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "8ndg6",
+                    "key": "f79ig",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "justify"
                           }
@@ -3180,7 +3180,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "fekhi"
+                "key": "c3b62"
               }
             ],
             "type": "list_item",
@@ -3193,11 +3193,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "5kni4",
+                    "key": "s2gs",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "justify"
                           }
@@ -3208,7 +3208,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "c0soj"
+                "key": "e9pej"
               }
             ],
             "type": "list_item",
@@ -3216,14 +3216,14 @@
           }
         ],
         "type": "ordered_list",
-        "key": "61m8k"
+        "key": "1qaog"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "99q6v",
+            "key": "76qs2",
             "ricosText": {
               "decorations": [
                 {
@@ -3235,14 +3235,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "66rf9"
+        "key": "ndef"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6slls",
+            "key": "fd6t1",
             "ricosText": {
               "decorations": [
                 {
@@ -3254,7 +3254,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "a3nio"
+        "key": "16bdg"
       },
       {
         "nodes": [
@@ -3265,7 +3265,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "e2r95",
+                    "key": "fd056",
                     "ricosText": {
                       "decorations": [],
                       "text": "a?"
@@ -3273,7 +3273,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "4j2me"
+                "key": "2eqdg"
               }
             ],
             "type": "list_item",
@@ -3286,7 +3286,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "4ddto",
+                    "key": "2qa47",
                     "ricosText": {
                       "decorations": [],
                       "text": "א?"
@@ -3294,7 +3294,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "btkc4"
+                "key": "6hmnn"
               }
             ],
             "type": "list_item",
@@ -3302,14 +3302,14 @@
           }
         ],
         "type": "bullet_list",
-        "key": "5k0oh"
+        "key": "brrti"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "2dtmc",
+            "key": "6qgid",
             "ricosText": {
               "decorations": [],
               "text": "b?"
@@ -3317,14 +3317,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "44bhl"
+        "key": "bpflb"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "cg5ji",
+            "key": "fok3c",
             "ricosText": {
               "decorations": [],
               "text": "ב?"
@@ -3332,14 +3332,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "b7a9h"
+        "key": "f6pbc"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "ce9o",
+            "key": "dshhv",
             "ricosText": {
               "decorations": [
                 {
@@ -3351,7 +3351,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "83ldh"
+        "key": "ac473"
       },
       {
         "nodes": [
@@ -3362,11 +3362,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "e3u1i",
+                    "key": "s6n3",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -3377,7 +3377,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "3n0mj"
+                "key": "4prr0"
               }
             ],
             "type": "list_item",
@@ -3390,11 +3390,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "6hfgo",
+                    "key": "8m3um",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -3405,7 +3405,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "fhalc"
+                "key": "d2u6t"
               }
             ],
             "type": "list_item",
@@ -3413,18 +3413,18 @@
           }
         ],
         "type": "bullet_list",
-        "key": "df1oq"
+        "key": "8vk2f"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "2mc2l",
+            "key": "7ju3m",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -3435,18 +3435,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "d5kfo"
+        "key": "9t7u1"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7fokp",
+            "key": "1dl1k",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -3457,18 +3457,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "9qv50"
+        "key": "674np"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "a608j",
+            "key": "6q2n9",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -3482,7 +3482,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "1e3gv"
+        "key": "ap3qn"
       },
       {
         "nodes": [
@@ -3493,11 +3493,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "6fqla",
+                    "key": "b2fgi",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "right"
                           }
@@ -3508,7 +3508,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "a9cs1"
+                "key": "9vgkl"
               }
             ],
             "type": "list_item",
@@ -3521,11 +3521,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "8hql0",
+                    "key": "9qbh",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "right"
                           }
@@ -3536,7 +3536,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "ep4fa"
+                "key": "4515a"
               }
             ],
             "type": "list_item",
@@ -3544,18 +3544,18 @@
           }
         ],
         "type": "bullet_list",
-        "key": "e0uam"
+        "key": "2i6i5"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "65rvp",
+            "key": "anhed",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -3566,18 +3566,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "5p9fo"
+        "key": "i14s"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "8gvfp",
+            "key": "2stu3",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -3588,18 +3588,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "1vhh2"
+        "key": "vout"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "fdjr9",
+            "key": "7jb9l",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -3613,18 +3613,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "f84aq"
+        "key": "d13a9"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "fgmud",
+            "key": "1m4tq",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -3635,18 +3635,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "9bau1"
+        "key": "7lo8h"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "fbemq",
+            "key": "e97gv",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -3657,7 +3657,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "9gk8j"
+        "key": "143cg"
       },
       {
         "nodes": [
@@ -3668,11 +3668,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "7td2a",
+                    "key": "7os6u",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "center"
                           }
@@ -3683,7 +3683,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "d3hqn"
+                "key": "acbvv"
               }
             ],
             "type": "list_item",
@@ -3696,11 +3696,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "6iekk",
+                    "key": "2ka9c",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "center"
                           }
@@ -3711,7 +3711,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "41fhd"
+                "key": "2ud1n"
               }
             ],
             "type": "list_item",
@@ -3719,14 +3719,14 @@
           }
         ],
         "type": "bullet_list",
-        "key": "cfl8u"
+        "key": "aq1ou"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "eni99",
+            "key": "bllqo",
             "ricosText": {
               "decorations": [
                 {
@@ -3738,18 +3738,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "6dqiu"
+        "key": "d22ar"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bc4b7",
+            "key": "3bsjk",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -3760,18 +3760,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "c1hts"
+        "key": "8r98j"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "de5hp",
+            "key": "ij5o",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -3782,7 +3782,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "cllov"
+        "key": "4bv4f"
       },
       {
         "nodes": [
@@ -3793,11 +3793,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "1jsq",
+                    "key": "7h1uk",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "justify"
                           }
@@ -3808,7 +3808,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "eq2u1"
+                "key": "9pdmk"
               }
             ],
             "type": "list_item",
@@ -3821,11 +3821,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "dma1l",
+                    "key": "3pelo",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "justify"
                           }
@@ -3836,7 +3836,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "5t9dj"
+                "key": "f74n"
               }
             ],
             "type": "list_item",
@@ -3844,19 +3844,19 @@
           }
         ],
         "type": "ordered_list",
-        "key": "cc6ch"
+        "key": "9o6et"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8vs68"
+        "key": "df5rj"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5ihu6",
+            "key": "fv44n",
             "ricosText": {
               "decorations": [
                 {
@@ -3868,14 +3868,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "8hfn5"
+        "key": "9frda"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "2mq2n",
+            "key": "b3rqm",
             "ricosText": {
               "decorations": [],
               "text": "left:"
@@ -3883,14 +3883,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "bchsi"
+        "key": "1m380"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "e4sna",
+            "key": "3vin1",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -3898,14 +3898,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "ea6uq"
+        "key": "6k36n"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dupjm",
+            "key": "6c1um",
             "ricosText": {
               "decorations": [],
               "text": "\t"
@@ -3913,14 +3913,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "3ghjm"
+        "key": "7jjpg"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7n2en",
+            "key": "7tlg0",
             "ricosText": {
               "decorations": [],
               "text": "   \t  \t "
@@ -3928,14 +3928,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "3oa8b"
+        "key": "2r312"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "elo8h",
+            "key": "4po90",
             "ricosText": {
               "decorations": [],
               "text": "right:"
@@ -3943,18 +3943,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "10d1k"
+        "key": "1m5ju"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bgjsu",
+            "key": "5jquq",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -3965,18 +3965,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "79k69"
+        "key": "3rbk2"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "e7f87",
+            "key": "5tei4",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -3987,18 +3987,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "c8u0m"
+        "key": "7vaca"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "a47jr",
+            "key": "89inq",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -4009,18 +4009,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "8pp09"
+        "key": "dh5b7"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "2ru3s",
+            "key": "ejd27",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4031,18 +4031,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "9n4u5"
+        "key": "c6lhh"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dg99o",
+            "key": "396p1",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -4053,18 +4053,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "bjkcc"
+        "key": "4fu4c"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "8vpim",
+            "key": "7apu",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -4075,18 +4075,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "d4hgt"
+        "key": "1polm"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "b23fp",
+            "key": "5dv54",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -4097,18 +4097,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "f4ii4"
+        "key": "7hulk"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "3ntkl",
+            "key": "4o6v1",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4119,18 +4119,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "4a9uu"
+        "key": "b3b6j"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "can02",
+            "key": "451so",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -4141,18 +4141,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "bvj8h"
+        "key": "2g5lm"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5u57g",
+            "key": "5dl8i",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -4163,18 +4163,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "abpeh"
+        "key": "33tji"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dd3ql",
+            "key": "6qqi1",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -4185,19 +4185,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "jqu5"
+        "key": "ekvk7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4h7ev"
+        "key": "74fip"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "8it2k",
+            "key": "395mj",
             "ricosText": {
               "decorations": [
                 {
@@ -4209,18 +4209,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "aioeo"
+        "key": "bnftl"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "8ujr7",
+            "key": "35gep",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4235,11 +4235,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "edb7n",
+            "key": "7ht2b",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4250,18 +4250,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "cau8d"
+        "key": "epdm8"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "654ee",
+            "key": "aga89",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4272,18 +4272,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "aq0iv"
+        "key": "624c2"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dcs5l",
+            "key": "784nb",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -4294,18 +4294,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "7hpl"
+        "key": "4el0n"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "3gpmr",
+            "key": "4pujr",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -4316,18 +4316,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "50f27"
+        "key": "fhhj7"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "1rugn",
+            "key": "5nu4h",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -4342,11 +4342,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2tfcj",
+            "key": "3g37t",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -4357,18 +4357,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "b303t"
+        "key": "f4t7s"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "1e63e",
+            "key": "ddpdr",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -4379,18 +4379,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "1a8sk"
+        "key": "65m8"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5v214",
+            "key": "171bj",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -4401,18 +4401,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "5ec68"
+        "key": "3chnu"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "eue0t",
+            "key": "6uj8c",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -4423,7 +4423,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "4i6ga"
+        "key": "61li"
       },
       {
         "nodes": [
@@ -4434,11 +4434,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "4d39p",
+                    "key": "8l6g1",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -4449,7 +4449,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "dj3pu"
+                "key": "13ec8"
               }
             ],
             "type": "list_item",
@@ -4462,11 +4462,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "m0hn",
+                    "key": "ab3ar",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -4477,7 +4477,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "evsp0"
+                "key": "bka98"
               }
             ],
             "type": "list_item",
@@ -4490,11 +4490,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "3mepb",
+                    "key": "4nie0",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -4505,7 +4505,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "a7vc6"
+                "key": "c6jjl"
               }
             ],
             "type": "list_item",
@@ -4513,18 +4513,18 @@
           }
         ],
         "type": "ordered_list",
-        "key": "2u6gb"
+        "key": "4hd32"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9cfg6",
+            "key": "ai905",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4535,18 +4535,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "bhrao"
+        "key": "588ph"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "c2vq3",
+            "key": "mjqe",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4557,18 +4557,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "ap4sd"
+        "key": "81kfe"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5p4nv",
+            "key": "agtnf",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -4579,16 +4579,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "2nsqc"
+        "key": "7tk45"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 477000000
+      "seconds": 1609230023,
+      "nanos": 172000000
     }
   },
   "selection": {
-    "anchorNode": "tcr5"
+    "anchorNode": "49u46"
   },
   "version": "8.1.4"
 }

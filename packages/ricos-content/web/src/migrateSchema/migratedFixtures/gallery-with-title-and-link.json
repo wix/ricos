@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4m35m",
+            "key": "6rcau",
             "ricosText": {
               "decorations": [],
               "text": "wqeqweqweqw"
@@ -14,16 +14,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "85lro"
+        "key": "9dshe"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "42n61"
+        "key": "96b2g"
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "6acre",
         "ricosGallery": {
           "items": [
@@ -89,16 +89,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "67e1a"
+        "key": "bgjc4"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 529000000
+      "seconds": 1609230023,
+      "nanos": 214000000
     }
   },
   "selection": {
-    "anchorNode": "85lro"
+    "anchorNode": "9dshe"
   },
   "version": "5.9.9"
 }

@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8emn"
+        "key": "fsq4h"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "5qr5o",
         "ricosImage": {
           "config": {
@@ -27,16 +27,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3put3"
+        "key": "9b4rm"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 563000000
+      "seconds": 1609230023,
+      "nanos": 235000000
     }
   },
   "selection": {
-    "anchorNode": "8emn"
+    "anchorNode": "fsq4h"
   },
   "version": "7.10.5"
 }

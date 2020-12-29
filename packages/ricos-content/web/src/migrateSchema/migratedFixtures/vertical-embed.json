@@ -4,21 +4,21 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "24sn1"
+        "key": "7bobu"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bf4h4"
+        "key": "9hii7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "as9to"
+        "key": "94bj4"
       },
       {
         "nodes": [],
-        "type": "ricos-vertical-embed",
+        "type": "ricos_vertical_embed",
         "key": "cr0lc",
         "ricosVerticalEmbed": {
           "type": "PRODUCT",
@@ -34,16 +34,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9ab7l"
+        "key": "2qr0i"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 760000000
+      "seconds": 1609230023,
+      "nanos": 336000000
     }
   },
   "selection": {
-    "anchorNode": "24sn1"
+    "anchorNode": "7bobu"
   },
   "version": "8.3.0"
 }

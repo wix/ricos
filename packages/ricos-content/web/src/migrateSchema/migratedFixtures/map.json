@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7gnuf"
+        "key": "6pf1k"
       },
       {
         "nodes": [],
-        "type": "ricos-map",
+        "type": "ricos_map",
         "key": "9vpmq",
         "ricosMap": {
           "config": {
@@ -20,16 +20,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4m95f"
+        "key": "fb7n4"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 707000000
+      "seconds": 1609230023,
+      "nanos": 304000000
     }
   },
   "selection": {
-    "anchorNode": "7gnuf"
+    "anchorNode": "6pf1k"
   },
   "version": ""
 }

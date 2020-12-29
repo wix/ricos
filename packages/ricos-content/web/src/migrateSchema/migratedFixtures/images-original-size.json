@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5k75u"
+        "key": "8od4r"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "5rgdm",
         "ricosImage": {
           "config": {
@@ -27,11 +27,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6rdi"
+        "key": "72o28"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "30am2",
         "ricosImage": {
           "config": {
@@ -50,11 +50,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8uijh"
+        "key": "de61e"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "30am3",
         "ricosImage": {
           "config": {
@@ -72,7 +72,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "30am4",
         "ricosImage": {
           "config": {
@@ -91,11 +91,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3cdkj"
+        "key": "2cjbp"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "30am5",
         "ricosImage": {
           "config": {
@@ -114,16 +114,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5fnph"
+        "key": "don3i"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 564000000
+      "seconds": 1609230023,
+      "nanos": 236000000
     }
   },
   "selection": {
-    "anchorNode": "5k75u"
+    "anchorNode": "8od4r"
   },
   "version": "7.1.2"
 }

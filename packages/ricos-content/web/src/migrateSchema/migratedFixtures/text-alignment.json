@@ -6,11 +6,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5ppsq",
+            "key": "fbk5l",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -21,18 +21,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "5tsbv"
+        "key": "dgpgf"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5tj2r",
+            "key": "f9h8f",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -43,18 +43,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "c2sl3"
+        "key": "b95ub"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "avgob",
+            "key": "dml3m",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -65,18 +65,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "2nqr5"
+        "key": "4uov0"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "db8va",
+            "key": "dphk1",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "right"
                   }
@@ -87,18 +87,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "avnr8"
+        "key": "camde"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "bg6bb",
+            "key": "7a687",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "justify"
                   }
@@ -109,16 +109,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "86eec"
+        "key": "57il0"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 755000000
+      "seconds": 1609230023,
+      "nanos": 331000000
     }
   },
   "selection": {
-    "anchorNode": "5tsbv"
+    "anchorNode": "dgpgf"
   },
   "version": "6.6.1"
 }

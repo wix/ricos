@@ -4,34 +4,34 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ajda3"
+        "key": "e7hld"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7plvo"
+        "key": "eehrr"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "atplg"
+        "key": "6jgaq"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "73o8b"
+        "key": "8s2de"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "46htl"
+        "key": "7senj"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6a0nl",
+            "key": "308mj",
             "ricosText": {
               "decorations": [],
               "text": "This one displays weird space issue happened w/ blog ("
@@ -40,11 +40,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "burb0",
+            "key": "2dfkj",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
                   "type": "underline"
@@ -56,7 +56,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "a593a",
+            "key": "feqd3",
             "ricosText": {
               "decorations": [],
               "text": ")"
@@ -64,14 +64,14 @@
           }
         ],
         "type": "paragraph",
-        "key": "ccc4l"
+        "key": "eelma"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "81saj",
+            "key": "b3fv7",
             "ricosText": {
               "decorations": [],
               "text": "Content state appear below, copy and paste "
@@ -80,11 +80,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "brpmr",
+            "key": "81o5v",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
                   "type": "underline"
@@ -96,7 +96,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "83c8b",
+            "key": "5pm9g",
             "ricosText": {
               "decorations": [],
               "text": " to see the actual problem (viewer has extra space below which "
@@ -105,7 +105,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "crr1j",
+            "key": "48su3",
             "ricosText": {
               "decorations": [
                 {
@@ -118,44 +118,19 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9ojgp",
+            "key": "4cf9u",
             "ricosText": {
               "decorations": [],
-              "text": " appear on editor so it can't be deleted "
-            }
-          },
-          {
-            "nodes": [],
-            "type": "text",
-            "key": "ufom",
-            "ricosText": {
-              "decorations": [
-                {
-                  "type": "ricos-emoji",
-                  "ricosEmoji": {
-                    "emojiUnicode": "😪"
-                  }
-                }
-              ],
-              "text": "\ud83d"
-            }
-          },
-          {
-            "nodes": [],
-            "type": "text",
-            "key": "f4h2u",
-            "ricosText": {
-              "decorations": [],
-              "text": "\ude2a)"
+              "text": " appear on editor so it can't be deleted 😪)"
             }
           }
         ],
         "type": "paragraph",
-        "key": "d0o6b"
+        "key": "dj80o"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "bmpfl",
         "ricosImage": {
           "config": {
@@ -174,171 +149,171 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "963qe"
+        "key": "4pmcm"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1k4ke"
+        "key": "7br74"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "52etb"
+        "key": "5cpj8"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "eh7e5"
+        "key": "9hv93"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6gb57"
+        "key": "bkos0"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6m0of"
+        "key": "dtlnf"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4g14e"
+        "key": "3osne"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b4b3v"
+        "key": "e24e6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9ifb8"
+        "key": "arahk"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ggjm"
+        "key": "26lpi"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6s8u7"
+        "key": "4gjr1"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cse8m"
+        "key": "c6mtv"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "42o3n"
+        "key": "8s58c"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9bpmc"
+        "key": "d67cd"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1no4h"
+        "key": "4p95g"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7lrg9"
+        "key": "5ncmn"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bbd01"
+        "key": "dhr61"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2ki35"
+        "key": "fm234"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "59ib1"
+        "key": "26r1m"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dl3ql"
+        "key": "efg2a"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "657if"
+        "key": "vvar"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1j03t"
+        "key": "ekcvo"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b03m3"
+        "key": "59a15"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e5kaa"
+        "key": "80d50"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3j4hg"
+        "key": "63ovh"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "coucq"
+        "key": "a0qqq"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2mpph"
+        "key": "ekos4"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "rnun"
+        "key": "ajc25"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "15k5c"
+        "key": "eti6d"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "46cdo"
+        "key": "dj0r7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "32gai"
+        "key": "adea1"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "67fo8"
+        "key": "9c9h7"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 556000000
+      "seconds": 1609230023,
+      "nanos": 232000000
     }
   },
   "selection": {
-    "anchorNode": "ajda3"
+    "anchorNode": "e7hld"
   },
   "version": "6.8.1"
 }

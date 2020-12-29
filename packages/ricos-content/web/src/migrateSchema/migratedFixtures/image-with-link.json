@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7pv06"
+        "key": "2la0i"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "fb6g1",
         "ricosImage": {
           "config": {
@@ -32,16 +32,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "eajev"
+        "key": "5h10h"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 560000000
+      "seconds": 1609230023,
+      "nanos": 233000000
     }
   },
   "selection": {
-    "anchorNode": "7pv06"
+    "anchorNode": "2la0i"
   },
   "version": "7.10.7"
 }

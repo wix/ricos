@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7fai2",
+            "key": "cs2p",
             "ricosText": {
               "decorations": [],
               "text": "1. Image aligned to left"
@@ -14,11 +14,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "3qj9g"
+        "key": "ctena"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "av4dl",
         "ricosImage": {
           "config": {
@@ -37,69 +37,69 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6dt64"
+        "key": "3s319"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3kgha"
+        "key": "bjo4t"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3di34"
+        "key": "aefdp"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2jprm"
+        "key": "cmaq8"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8faj9"
+        "key": "fh62v"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cjvcg"
+        "key": "cfept"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8t9pp"
+        "key": "fnc59"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5g6j2"
+        "key": "2icte"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bq3ge"
+        "key": "1rtsh"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d8r0q"
+        "key": "7g4po"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e6jol"
+        "key": "6ea34"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "74a3g"
+        "key": "8l99r"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "da09u",
+            "key": "43q8p",
             "ricosText": {
               "decorations": [],
               "text": "2. Gallery aligned to left"
@@ -107,11 +107,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "96utu"
+        "key": "f7fb"
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "6o3rt",
         "ricosGallery": {
           "items": [
@@ -173,39 +173,39 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2ov2e"
+        "key": "6pvl6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dm69a"
+        "key": "if8i"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bcmdk"
+        "key": "f9kmn"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "86ck1"
+        "key": "2g9t3"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bafqf"
+        "key": "5fpop"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6te08"
+        "key": "bigdf"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "cle9c",
+            "key": "625qm",
             "ricosText": {
               "decorations": [],
               "text": "3. HTML aligned to left"
@@ -213,11 +213,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "9r4ic"
+        "key": "b5ar4"
       },
       {
         "nodes": [],
-        "type": "ricos-html",
+        "type": "ricos_html",
         "key": "8b2gn",
         "ricosHtml": {
           "src": "<blockquote class='twitter-tweet' data-lang='en'><p lang='en' dir='ltr'>There are some things that only <a href='https://twitter.com/hashtag/designers?src=hash&amp;ref_src=twsrc%5Etfw'>#designers</a> will understand 😉<a href='https://twitter.com/hashtag/WebDesign?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesign</a> <a href='https://twitter.com/hashtag/WebDesigner?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesigner</a> <a href='https://t.co/WqXbS822Sq'>pic.twitter.com/WqXbS822Sq</a></p>&mdash; Wix (@Wix) <a href='https://twitter.com/Wix/status/1109883326599446528?ref_src=twsrc%5Etfw'>March 24, 2019</a></blockquote>\n<script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>",
@@ -231,119 +231,119 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b072f"
+        "key": "ajed6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2t0li"
+        "key": "a0gui"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "22p65"
+        "key": "alokd"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d5oje"
+        "key": "8k2ib"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "35si7"
+        "key": "89gln"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7u413"
+        "key": "2uagu"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fuhft"
+        "key": "bkk46"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "v45n"
+        "key": "2n2l1"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cpf5m"
+        "key": "dtt6s"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1067b"
+        "key": "br8i6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "333i3"
+        "key": "dkplj"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bl6l5"
+        "key": "2tcm4"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "899s8"
+        "key": "7f6hf"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7rg"
+        "key": "8ga95"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "eqq9i"
+        "key": "f7ji6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "60jkj"
+        "key": "6g2kq"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bel2a"
+        "key": "brb24"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "db502"
+        "key": "d2uq8"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bkn3d"
+        "key": "3td5s"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7e5pe"
+        "key": "3asvv"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "calvc"
+        "key": "40fbs"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4m2ql"
+        "key": "82kpl"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "329h9",
+            "key": "c995a",
             "ricosText": {
               "decorations": [],
               "text": "4. Youtube video aligned to left"
@@ -351,11 +351,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "8iul4"
+        "key": "71q43"
       },
       {
         "nodes": [],
-        "type": "ricos-video",
+        "type": "ricos_video",
         "key": "99kup",
         "ricosVideo": {
           "url": "https://www.youtube.com/watch?v=7jIA3eFtSOM",
@@ -366,54 +366,54 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "76n45"
+        "key": "ocnf"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3knt4"
+        "key": "ek3sg"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "22pjk"
+        "key": "6up2n"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cv3cm"
+        "key": "3306r"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b0n4s"
+        "key": "jvhs"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "499gs"
+        "key": "csha3"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c3cvg"
+        "key": "fk07o"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "agcoq"
+        "key": "7p340"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "es1ll"
+        "key": "cnok2"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "aplkm",
+            "key": "dbhfh",
             "ricosText": {
               "decorations": [],
               "text": "5. Vimeo video aligned to left"
@@ -421,11 +421,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "3h7go"
+        "key": "961ni"
       },
       {
         "nodes": [],
-        "type": "ricos-video",
+        "type": "ricos_video",
         "key": "a3147",
         "ricosVideo": {
           "url": "https://vimeo.com/298341839",
@@ -436,54 +436,54 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4q8sj"
+        "key": "bchcp"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4ppb"
+        "key": "98vlr"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "14ic6"
+        "key": "4c5vi"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "93qi9"
+        "key": "2k4tt"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "30op1"
+        "key": "2vbau"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d6m3k"
+        "key": "7iimo"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6aqu3"
+        "key": "43rrc"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5j7ks"
+        "key": "2jngo"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7il00"
+        "key": "ecr5l"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9btmi",
+            "key": "5j1jk",
             "ricosText": {
               "decorations": [],
               "text": "6. Facebook video aligned to left"
@@ -491,11 +491,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "8hbo1"
+        "key": "2fltp"
       },
       {
         "nodes": [],
-        "type": "ricos-video",
+        "type": "ricos_video",
         "key": "5ucd2",
         "ricosVideo": {
           "url": "https://www.facebook.com/wix/videos/971691596505371/",
@@ -506,84 +506,84 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "em395"
+        "key": "8833d"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "esv17"
+        "key": "ndrt"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5h980"
+        "key": "c132c"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "118ub"
+        "key": "kbnb"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "agrit"
+        "key": "a50l8"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d3ubk"
+        "key": "eltgs"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7lcec"
+        "key": "b3nr7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fuip8"
+        "key": "a7ujl"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bd6u4"
+        "key": "8rj6f"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8pc0l"
+        "key": "700ru"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "969g7"
+        "key": "evhp"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1c5c6"
+        "key": "brav3"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f7ngk"
+        "key": "4ldsr"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4jhn7"
+        "key": "5cou9"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c2ci8"
+        "key": "61ls4"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "8dtsj",
+            "key": "1ia4g",
             "ricosText": {
               "decorations": [],
               "text": "7. Media manager video aligned to left"
@@ -591,11 +591,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "ekhrq"
+        "key": "5ti2a"
       },
       {
         "nodes": [],
-        "type": "ricos-video",
+        "type": "ricos_video",
         "key": "169ek",
         "ricosVideo": {
           "src": {
@@ -616,54 +616,54 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bgg9h"
+        "key": "4gefc"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "43i70"
+        "key": "9tb0f"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dmiv2"
+        "key": "fph7s"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8djoi"
+        "key": "21pa2"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f0bc9"
+        "key": "c755u"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3tc6g"
+        "key": "8kavo"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6f0f1"
+        "key": "5mb42"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "21vou"
+        "key": "7526f"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4juh6"
+        "key": "1amqm"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9s0qv",
+            "key": "8pq3p",
             "ricosText": {
               "decorations": [],
               "text": "8. All dividers aligned to left"
@@ -671,16 +671,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "2f0le"
+        "key": "5qvb6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1e2pu"
+        "key": "fh76s"
       },
       {
         "nodes": [],
-        "type": "ricos-divider",
+        "type": "ricos_divider",
         "key": "7pcml",
         "ricosDivider": {
           "type": "SINGLE",
@@ -694,11 +694,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ci608"
+        "key": "c2k3l"
       },
       {
         "nodes": [],
-        "type": "ricos-divider",
+        "type": "ricos_divider",
         "key": "2gsl5",
         "ricosDivider": {
           "type": "DOUBLE",
@@ -712,11 +712,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dsfje"
+        "key": "ancc1"
       },
       {
         "nodes": [],
-        "type": "ricos-divider",
+        "type": "ricos_divider",
         "key": "1irv9",
         "ricosDivider": {
           "type": "DASHED",
@@ -730,11 +730,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f50e"
+        "key": "5l6ra"
       },
       {
         "nodes": [],
-        "type": "ricos-divider",
+        "type": "ricos_divider",
         "key": "6hva1",
         "ricosDivider": {
           "type": "DOTTED",
@@ -748,16 +748,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ahpp4"
+        "key": "9f9og"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 736000000
+      "seconds": 1609230023,
+      "nanos": 318000000
     }
   },
   "selection": {
-    "anchorNode": "3qj9g"
+    "anchorNode": "ctena"
   },
   "version": "6.6.8"
 }

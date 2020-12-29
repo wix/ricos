@@ -44,6 +44,6 @@ message ImageMetadata {
 
 message RicosImage {
     ImageConfig config = 1;
-    ImageSource src = 2; // required
+    ImageSource src = 2 [required = true];
     ImageMetadata metadata = 3;
 }

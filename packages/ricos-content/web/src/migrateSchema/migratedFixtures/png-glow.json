@@ -4,16 +4,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ejpsu"
+        "key": "fdrtn"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "hk8h"
+        "key": "7gs6v"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "22n10",
         "ricosImage": {
           "config": {
@@ -36,16 +36,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "a2bpa"
+        "key": "9hns0"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "478t1"
+        "key": "2g0qp"
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "fioa",
         "ricosGallery": {
           "items": [
@@ -127,11 +127,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6ah8l"
+        "key": "2uk25"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "78g83",
         "ricosImage": {
           "config": {
@@ -150,21 +150,21 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3fnda"
+        "key": "2d4r6"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6tb0q"
+        "key": "edr0j"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 742000000
+      "seconds": 1609230023,
+      "nanos": 322000000
     }
   },
   "selection": {
-    "anchorNode": "ejpsu"
+    "anchorNode": "fdrtn"
   },
   "version": "6.8.2"
 }

@@ -10,11 +10,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "5i0ug",
+                    "key": "at4tb",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -25,7 +25,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "86rma"
+                "key": "9k62k"
               }
             ],
             "type": "list_item",
@@ -38,11 +38,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "avmf7",
+                    "key": "brul0",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -53,7 +53,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "27u86"
+                "key": "32dlc"
               }
             ],
             "type": "list_item",
@@ -66,11 +66,11 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "alco7",
+                    "key": "e3sp9",
                     "ricosText": {
                       "decorations": [
                         {
-                          "type": "ricos-alignment",
+                          "type": "ricos_alignment",
                           "ricosAlignment": {
                             "direction": "left"
                           }
@@ -81,7 +81,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "9mhak"
+                "key": "9m6du"
               }
             ],
             "type": "list_item",
@@ -89,18 +89,18 @@
           }
         ],
         "type": "ordered_list",
-        "key": "9uegs"
+        "key": "djnn9"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "3n97b",
+            "key": "7p6e7",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -111,18 +111,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "2fea6"
+        "key": "4ren4"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "akon6",
+            "key": "7amor",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -133,18 +133,18 @@
           }
         ],
         "type": "paragraph",
-        "key": "bk9sf"
+        "key": "edk8b"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "d7k51",
+            "key": "5guet",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "left"
                   }
@@ -155,16 +155,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "cad2n"
+        "key": "abr78"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 574000000
+      "seconds": 1609230023,
+      "nanos": 241000000
     }
   },
   "selection": {
-    "anchorNode": "9uegs"
+    "anchorNode": "djnn9"
   },
   "version": "7.10.2"
 }

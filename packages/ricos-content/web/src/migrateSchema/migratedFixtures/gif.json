@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fp108"
+        "key": "dia3l"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "8e2kc",
         "ricosImage": {
           "config": {
@@ -27,16 +27,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1gtpo"
+        "key": "daatc"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 532000000
+      "seconds": 1609230023,
+      "nanos": 217000000
     }
   },
   "selection": {
-    "anchorNode": "fp108"
+    "anchorNode": "dia3l"
   },
   "version": "6.8.2"
 }

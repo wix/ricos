@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "umcm"
+        "key": "4iujv"
       },
       {
         "nodes": [],
-        "type": "ricos-html",
+        "type": "ricos_html",
         "key": "5csqb",
         "ricosHtml": {
           "src": "<div style=\"border: 5px solid cyan; padding: 20px; height: 100px; background: black; color:white\" id=\"root\">\nHi! i'm a HTML Plugin, and my domain is:\n<script>\nele = document.getElementById('root')\nele.innerHTML =ele.innerHTML +'<div><b> '+document.domain+'</b></div>';\n</script>\n</div>\n\n",
@@ -22,11 +22,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "24p2s"
+        "key": "532h7"
       },
       {
         "nodes": [],
-        "type": "ricos-link-preview",
+        "type": "ricos_link_preview",
         "key": "6uav7",
         "ricosLinkPreview": {
           "html": "<div style=\"border: 5px solid purple; padding: 20px; height: 100px; background: black; color:white\" id=\"root\">\nHi! i'm a Link Preview Plugin, and my domain is:\n<script>\nele = document.getElementById('root')\nele.innerHTML =ele.innerHTML +'<div><b> '+document.domain+'</b></div>';\n</script>\n</div>\n\n",
@@ -39,12 +39,12 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 545000000
+      "seconds": 1609230023,
+      "nanos": 226000000
     }
   },
   "selection": {
-    "anchorNode": "umcm"
+    "anchorNode": "4iujv"
   },
   "version": "7.6.1"
 }

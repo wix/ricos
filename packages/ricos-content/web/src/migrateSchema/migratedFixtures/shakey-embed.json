@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3vfcf"
+        "key": "6abbt"
       },
       {
         "nodes": [],
-        "type": "ricos-html",
+        "type": "ricos_html",
         "key": "6slun",
         "ricosHtml": {
           "src": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">John Horton Conway has died.<br><br>Sigh.<br><br>One of the most unique mathematicians and human beings who ever lived.<br><br>Five years ago he was game for this April Fool&#39;s prank<a href=\"https://t.co/sykGARb0FC\">https://t.co/sykGARb0FC</a></p>&mdash; Card Colm Mulcahy (@CardColm) <a href=\"https://twitter.com/CardColm/status/1249038195880341505?ref_src=twsrc%5Etfw\">April 11, 2020</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
@@ -22,16 +22,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3n3pl"
+        "key": "2rc10"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 746000000
+      "seconds": 1609230023,
+      "nanos": 325000000
     }
   },
   "selection": {
-    "anchorNode": "3vfcf"
+    "anchorNode": "6abbt"
   },
   "version": "7.3.5"
 }

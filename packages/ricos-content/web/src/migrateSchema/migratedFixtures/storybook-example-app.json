@@ -6,11 +6,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9ov91",
+            "key": "9oik0",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-alignment",
+                  "type": "ricos_alignment",
                   "ricosAlignment": {
                     "direction": "center"
                   }
@@ -36,7 +36,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "56l6f",
         "ricosImage": {
           "config": {
@@ -57,7 +57,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e0rac",
+            "key": "4qld1",
             "ricosText": {
               "decorations": [],
               "text": "Try editing this #content and see what "
@@ -66,11 +66,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2cdjj",
+            "key": "fgunt",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-mention"
+                  "type": "ricos_mention"
                 }
               ],
               "text": "@Happens"
@@ -79,7 +79,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "91dda",
+            "key": "b63kk",
             "ricosText": {
               "decorations": [],
               "text": "!"
@@ -87,12 +87,12 @@
           }
         ],
         "type": "paragraph",
-        "key": "20q2j"
+        "key": "28ttc"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "blukc"
+        "key": "65q36"
       },
       {
         "nodes": [
@@ -101,7 +101,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "6ivk4",
+                "key": "7gepu",
                 "ricosText": {
                   "decorations": [],
                   "text": "Add some "
@@ -110,7 +110,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "c8ij0",
+                "key": "eflnr",
                 "ricosText": {
                   "decorations": [
                     {
@@ -129,7 +129,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "dv69e",
+                "key": "ddtpk",
                 "ricosText": {
                   "decorations": [],
                   "text": " see how they look in the viewer"
@@ -137,7 +137,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "c8crl"
+            "key": "3onc3"
           }
         ],
         "type": "blockquote",
@@ -146,14 +146,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b8n27"
+        "key": "9bohn"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9h7l9",
+            "key": "8evus",
             "ricosText": {
               "decorations": [],
               "text": "Here's a link to "
@@ -162,11 +162,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5d0me",
+            "key": "fcoc4",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos-link"
+                  "type": "ricos_link"
                 },
                 {
                   "type": "underline"
@@ -178,7 +178,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4191h",
+            "key": "b52h7",
             "ricosText": {
               "decorations": [],
               "text": "."
@@ -186,26 +186,26 @@
           }
         ],
         "type": "paragraph",
-        "key": "9jtsh"
+        "key": "15vpg"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dj5sp"
+        "key": "5ro36"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d0ks0"
+        "key": "29fkv"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "55ngi"
+        "key": "2k7uo"
       },
       {
         "nodes": [],
-        "type": "ricos-divider",
+        "type": "ricos_divider",
         "key": "2vkiq",
         "ricosDivider": {
           "type": "SINGLE",
@@ -218,7 +218,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "a4dnj",
         "ricosGallery": {
           "items": [
@@ -279,56 +279,65 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2t0h7"
+        "key": "c460l"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3ola6"
+        "key": "8i01g"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "76qm"
+        "key": "88sj7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bht27"
+        "key": "5jeg2"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5akkv"
+        "key": "b6r6e"
       },
       {
         "nodes": [],
-        "type": "ricos-file-upload",
-        "key": "5h99s"
-      },
-      {
-        "nodes": [],
-        "type": "paragraph",
-        "key": "lvd3"
-      },
-      {
-        "nodes": [],
-        "type": "paragraph",
-        "key": "2c128"
-      },
-      {
-        "nodes": [],
-        "type": "paragraph",
-        "key": "66qvg"
+        "type": "ricos_file",
+        "key": "5h99s",
+        "ricosFile": {
+          "name": "music.mp3",
+          "type": "mp3",
+          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
+          "config": {
+            "size": "small",
+            "alignment": "left"
+          }
+        }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "300g2"
+        "key": "cvsbq"
       },
       {
         "nodes": [],
-        "type": "ricos-link-preview",
+        "type": "paragraph",
+        "key": "dkuep"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bqd1v"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7nu9i"
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_preview",
         "key": "4286h",
         "ricosLinkPreview": {
           "title": "Free Website Builder | Create a Free Website | Wix.com",
@@ -343,21 +352,21 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cc1jt"
+        "key": "64pjt"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4l869"
+        "key": "89hah"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "eorc4"
+        "key": "fislk"
       },
       {
         "nodes": [],
-        "type": "ricos-vertical-embed",
+        "type": "ricos_vertical_embed",
         "key": "64cq5",
         "ricosVerticalEmbed": {
           "type": "PRODUCT",
@@ -373,16 +382,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9r4nc"
+        "key": "kv8c"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5rh0i"
+        "key": "2f5i9"
       },
       {
         "nodes": [],
-        "type": "ricos-vertical-embed",
+        "type": "ricos_vertical_embed",
         "key": "312il",
         "ricosVerticalEmbed": {
           "type": "EVENT",
@@ -397,11 +406,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e0t18"
+        "key": "cttvb"
       },
       {
         "nodes": [],
-        "type": "ricos-vertical-embed",
+        "type": "ricos_vertical_embed",
         "key": "8nh4m",
         "ricosVerticalEmbed": {
           "selectedProduct": {
@@ -416,12 +425,12 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "79e9b"
+        "key": "ehp90"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 751000000
+      "seconds": 1609230023,
+      "nanos": 328000000
     }
   },
   "selection": {

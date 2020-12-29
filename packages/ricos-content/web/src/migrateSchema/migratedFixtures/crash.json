@@ -3,7 +3,7 @@
     "nodes": [
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "128er",
         "ricosImage": {
           "config": {
@@ -17,8 +17,8 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 497000000
+      "seconds": 1609230023,
+      "nanos": 192000000
     }
   },
   "selection": {

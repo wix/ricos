@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8a938",
+            "key": "cqv4v",
             "ricosText": {
               "decorations": [
                 {
@@ -19,7 +19,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9c62b",
+            "key": "7dlbh",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -27,23 +27,23 @@
           }
         ],
         "type": "paragraph",
-        "key": "b84n7"
+        "key": "n8q8"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "vohq"
+        "key": "3f2h3"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "f4bmk",
+            "key": "di7ol",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -51,9 +51,7 @@
                 {
                   "type": "bold"
                 },
-                {
-                  "type": "wix-rich-content-plugin-spoiler"
-                }
+                {}
               ],
               "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): "
             }
@@ -61,11 +59,11 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "f7g9u",
+            "key": "5aa81",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "FG",
+                  "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
@@ -86,7 +84,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4rf0a",
+            "key": "6g0e7",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -104,7 +102,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bfoue",
+            "key": "61f5g",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow "
@@ -113,12 +111,10 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7ig97",
+            "key": "1qqh",
             "ricosText": {
               "decorations": [
-                {
-                  "type": "wix-rich-content-plugin-spoiler"
-                }
+                {}
               ],
               "text": "Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker,"
             }
@@ -126,7 +122,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4nh67",
+            "key": "9ojs5",
             "ricosText": {
               "decorations": [],
               "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -141,12 +137,12 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 748000000
+      "seconds": 1609230023,
+      "nanos": 326000000
     }
   },
   "selection": {
-    "anchorNode": "b84n7"
+    "anchorNode": "n8q8"
   },
   "version": "7.9.1"
 }

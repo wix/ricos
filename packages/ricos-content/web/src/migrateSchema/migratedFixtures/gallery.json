@@ -4,11 +4,11 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5d3l6"
+        "key": "bhrf9"
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "ubva",
         "ricosGallery": {
           "items": [
@@ -62,14 +62,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fc2lb"
+        "key": "70elo"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "eaouq",
+            "key": "bnujt",
             "ricosText": {
               "decorations": [],
               "text": "This is a test of the gallery plugin."
@@ -77,16 +77,16 @@
           }
         ],
         "type": "paragraph",
-        "key": "ju9d"
+        "key": "438tj"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "157vd"
+        "key": "68nel"
       },
       {
         "nodes": [],
-        "type": "ricos-image",
+        "type": "ricos_image",
         "key": "1ie98",
         "ricosImage": {
           "config": {
@@ -105,16 +105,16 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bssni"
+        "key": "3nl8d"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 531000000
+      "seconds": 1609230023,
+      "nanos": 215000000
     }
   },
   "selection": {
-    "anchorNode": "5d3l6"
+    "anchorNode": "bhrf9"
   },
   "version": "5.1.1"
 }

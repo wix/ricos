@@ -4,26 +4,35 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bgsgm"
+        "key": "87eaq"
       },
       {
         "nodes": [],
-        "type": "ricos-file-upload",
-        "key": "410nb"
+        "type": "ricos_file",
+        "key": "410nb",
+        "ricosFile": {
+          "name": "receipt.pdf",
+          "type": "pdf",
+          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
+          "config": {
+            "size": "small",
+            "alignment": "center"
+          }
+        }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9ljni"
+        "key": "7u952"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 513000000
+      "seconds": 1609230023,
+      "nanos": 205000000
     }
   },
   "selection": {
-    "anchorNode": "bgsgm"
+    "anchorNode": "87eaq"
   },
   "version": "7.6.1"
 }

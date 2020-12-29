@@ -1,7 +1,14 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
-import { RicosContentBlock, RicosEntityMap } from '..';
+import {
+  RicosContentBlock,
+  RicosEntityMap,
+  RicosEntityRange,
+  EMOJI_TYPE,
+  RICOS_ALIGNMENT_TYPE,
+  RICOS_COLOR_TYPE,
+} from '..';
 import { RicosNode, RicosDecoration } from 'ricos-schema';
-import { NodeType } from './consts';
+import { NodeType, TO_RICOS_DECORATION_TYPE } from './consts';
 
 import { isEmpty } from 'lodash';
 import { getEntity } from './getEntity';
@@ -9,6 +16,12 @@ import { genKey } from 'draft-js';
 
 type KeyType = string | number;
 type StyleType = string;
+
+const removeEmojiEntities = (
+  entityRanges: RicosEntityRange[],
+  entityMap: RicosEntityMap
+): RicosEntityRange[] =>
+  entityRanges.filter(range => !['EMOJI_TYPE', EMOJI_TYPE].includes(entityMap[range.key].type));
 
 export const getTextNodes = (
   block: RicosContentBlock,
@@ -40,7 +53,7 @@ export const getTextNodes = (
 
     if (blockData && !isEmpty(blockData) && blockData.textAlignment) {
       decorations.push({
-        type: 'ricos-alignment',
+        type: RICOS_ALIGNMENT_TYPE,
         ricosAlignment: { direction: blockData.textAlignment },
       });
     }
@@ -63,15 +76,13 @@ export const getTextNodes = (
       const type = Object.keys(styleObj)[0];
       const value = Object.values<string>(styleObj)[0];
       decoration = { type };
-      if (type === 'FG') {
-        decoration.ricosColor = { foreground: value };
-      }
-      if (type === 'BG') {
-        decoration.ricosColor = { background: value };
+      if (type === 'FG' || type === 'BG') {
+        decoration.type = RICOS_COLOR_TYPE;
+        decoration.ricosColor = { [type === 'FG' ? 'foreground' : 'background']: value };
       }
     } catch {
       decoration = {
-        type: style.toLowerCase(),
+        type: TO_RICOS_DECORATION_TYPE[style],
       };
     }
     return decoration;
@@ -82,10 +93,15 @@ export const getTextNodes = (
     return [];
   }
   const rangeMap = {};
-  [...inlineStyleRanges, ...entityRanges].forEach(({ offset, length, ...props }) => {
-    rangeMap[offset] = [...(rangeMap[offset] || []), { action: 'start', ...props }];
-    rangeMap[offset + length] = [...(rangeMap[offset + length] || []), { action: 'end', ...props }];
-  });
+  [...inlineStyleRanges, ...removeEmojiEntities(entityRanges, entityMap)].forEach(
+    ({ offset, length, ...props }) => {
+      rangeMap[offset] = [...(rangeMap[offset] || []), { action: 'start', ...props }];
+      rangeMap[offset + length] = [
+        ...(rangeMap[offset + length] || []),
+        { action: 'end', ...props },
+      ];
+    }
+  );
 
   const textNodes: RicosNode[] = [];
 

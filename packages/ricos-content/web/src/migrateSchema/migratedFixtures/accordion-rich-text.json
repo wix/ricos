@@ -3,18 +3,18 @@
     "nodes": [
       {
         "nodes": [],
-        "type": "ricos-accordion",
+        "type": "ricos_accordion",
         "key": "cm8ut"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c91n"
+        "key": "abedj"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 401000000
+      "seconds": 1609230023,
+      "nanos": 122000000
     }
   },
   "selection": {

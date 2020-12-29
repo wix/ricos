@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "454c3",
+            "key": "3rhmv",
             "ricosText": {
               "decorations": [],
               "text": "bla bla bla"
@@ -14,11 +14,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "a0vm4"
+        "key": "958rm"
       },
       {
         "nodes": [],
-        "type": "ricos-html",
+        "type": "ricos_html",
         "key": "ado30",
         "ricosHtml": {
           "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
@@ -34,7 +34,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "erbrn",
+            "key": "d1b5n",
             "ricosText": {
               "decorations": [],
               "text": "Wide embed. In mobile full width. In desktop 740px "
@@ -42,11 +42,11 @@
           }
         ],
         "type": "paragraph",
-        "key": "hggf"
+        "key": "7lqrj"
       },
       {
         "nodes": [],
-        "type": "ricos-html",
+        "type": "ricos_html",
         "key": "3877q",
         "ricosHtml": {
           "src": "<div class=\"iframely-embed\"><div class=\"iframely-responsive\" style=\"padding-bottom: 52.356%; padding-top: 120px;\"><a href=\"https://www.worldofbuzz.com/9-yummy-snacks-from-south-korea-that-make-great-souvenirs-for-everyone/\" data-iframely-url=\"//cdn.iframe.ly/05UevKO\"></a></div></div><script async src=\"//cdn.iframe.ly/embed.js\" charset=\"utf-8\"></script>",
@@ -60,21 +60,21 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "anac6"
+        "key": "f5uim"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1tk6e"
+        "key": "de1f7"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9ca9u"
+        "key": "8lnjb"
       },
       {
         "nodes": [],
-        "type": "ricos-html",
+        "type": "ricos_html",
         "key": "da06r",
         "ricosHtml": {
           "src": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
@@ -88,26 +88,26 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "brga8"
+        "key": "77lne"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "asj57"
+        "key": "fv986"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b4r59"
+        "key": "f1s98"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 554000000
+      "seconds": 1609230023,
+      "nanos": 230000000
     }
   },
   "selection": {
-    "anchorNode": "a0vm4"
+    "anchorNode": "958rm"
   },
   "version": "7.1.5"
 }

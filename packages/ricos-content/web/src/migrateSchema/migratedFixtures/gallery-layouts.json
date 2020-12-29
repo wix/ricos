@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9foop",
+            "key": "2o8hl",
             "ricosText": {
               "decorations": [
                 {
@@ -25,7 +25,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "a711k",
         "ricosGallery": {
           "items": [
@@ -87,7 +87,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "aqm7h",
+            "key": "ra1e",
             "ricosText": {
               "decorations": [
                 {
@@ -106,7 +106,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "csa2k",
         "ricosGallery": {
           "items": [
@@ -207,7 +207,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7obqc",
+            "key": "eodqr",
             "ricosText": {
               "decorations": [
                 {
@@ -226,7 +226,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "625am",
         "ricosGallery": {
           "items": [
@@ -289,7 +289,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "29ds3",
+            "key": "91dsq",
             "ricosText": {
               "decorations": [
                 {
@@ -308,7 +308,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "d61n6",
         "ricosGallery": {
           "items": [
@@ -409,7 +409,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "21llk",
+            "key": "4ng44",
             "ricosText": {
               "decorations": [
                 {
@@ -428,7 +428,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "d0ier",
         "ricosGallery": {
           "items": [
@@ -495,7 +495,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8cra",
+            "key": "9rn2e",
             "ricosText": {
               "decorations": [
                 {
@@ -514,7 +514,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "3i8q0",
         "ricosGallery": {
           "items": [
@@ -609,7 +609,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ceq69",
+            "key": "eg1cs",
             "ricosText": {
               "decorations": [
                 {
@@ -628,7 +628,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "967dd",
         "ricosGallery": {
           "items": [
@@ -709,14 +709,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "33cin"
+        "key": "5puii"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "2tgff",
+            "key": "869k8",
             "ricosText": {
               "decorations": [
                 {
@@ -735,7 +735,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "eck0s",
         "ricosGallery": {
           "items": [
@@ -791,7 +791,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "41elc",
+            "key": "e495u",
             "ricosText": {
               "decorations": [
                 {
@@ -810,7 +810,7 @@
       },
       {
         "nodes": [],
-        "type": "ricos-gallery",
+        "type": "ricos_gallery",
         "key": "eu79d",
         "ricosGallery": {
           "items": [
@@ -893,12 +893,12 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2etvo"
+        "key": "bj09d"
       }
     ],
     "lastEdited": {
-      "seconds": 1609179949,
-      "nanos": 518000000
+      "seconds": 1609230023,
+      "nanos": 206000000
     }
   },
   "selection": {

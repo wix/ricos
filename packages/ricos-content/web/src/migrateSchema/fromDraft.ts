@@ -2,7 +2,7 @@
 
 import { isEmpty } from 'lodash';
 import { RicosContent as RicosContentDraft, RicosContentBlock } from '..';
-import { BlockType, FromDraftListType, HeaderLevel, NodeType } from './consts';
+import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from './consts';
 import { RicosContent, RicosNode, google } from 'ricos-schema';
 import { genKey } from 'draft-js';
 
@@ -44,7 +44,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
         case BlockType.HeaderFour:
         case BlockType.HeaderFive:
         case BlockType.HeaderSix:
-          nodes.push(parseHeaderBlock(block));
+          nodes.push(parseHeadingBlock(block));
           parseBlocks(index + 1);
           break;
         case BlockType.OrderedListItem:
@@ -84,25 +84,13 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     nodes: getTextNodes(block, entityMap, keyMapping),
   });
 
-  const parseHeaderBlock = (block: RicosContentBlock): RicosNode => {
+  const parseHeadingBlock = (block: RicosContentBlock): RicosNode => {
     const getLevel = (blockType: string) => {
-      switch (blockType) {
-        case BlockType.HeaderOne:
-          return HeaderLevel[BlockType.HeaderOne];
-        case BlockType.HeaderTwo:
-          return HeaderLevel[BlockType.HeaderTwo];
-        case BlockType.HeaderThree:
-          return HeaderLevel[BlockType.HeaderThree];
-        case BlockType.HeaderFour:
-          return HeaderLevel[BlockType.HeaderFour];
-        case BlockType.HeaderFive:
-          return HeaderLevel[BlockType.HeaderFive];
-        case BlockType.HeaderSix:
-          return HeaderLevel[BlockType.HeaderSix];
-        default:
-          console.log(`ERROR! Unknown header level "${blockType}"!`);
-          process.exit(1);
+      if (Object.keys(HeaderLevel).includes(blockType)) {
+        return HeaderLevel[blockType];
       }
+      console.log(`ERROR! Unknown header level "${blockType}"!`);
+      process.exit(1);
     };
     return {
       key: block.key,
@@ -149,7 +137,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     return {
       node: {
         key: genKey(),
-        type: FromDraftListType[listType],
+        type: FROM_DRAFT_LIST_TYPE[listType],
         nodes: listBlocks.map(block => ({
           key: block.key,
           type: NodeType.ListItem,
