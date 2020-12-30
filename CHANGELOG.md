@@ -18,11 +18,28 @@
   </summary>
 
 ### :bug: Bug Fix
-- `gallery`
-  - [#1908](https://github.com/wix-incubator/rich-content/pull/1908) remove option to choose videos in native selection
+- `editor`
+  - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) add plugin menu - fix override plugin menu styles on mobile
 
 </details>
 <hr/>
+
+## 8.11.0 (Dec 28, 2020)
+### :rocket: New Feature
+- `viewer`
+  - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
+  - [#1921](https://github.com/wix-incubator/rich-content/pull/1921) `onViewerLoaded` callback includes `isPreview`
+- `editor`
+  - [#1922](https://github.com/wix-incubator/rich-content/pull/1922) `onOpenEditorSuccess` callback is now added to helpers
+  - [#1917](https://github.com/wix-incubator/rich-content/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
+### :house: Internal
+- `table`
+  - [#1401](https://github.com/wix-incubator/rich-content/pull/1401) **beta** add table plugin
+
+## 8.10.2 (Dec 27, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1908](https://github.com/wix-incubator/rich-content/pull/1908) remove option to choose videos in native selection
 
 ## 8.10.1 (Dec 22, 2020)
 ### :bug: Bug Fix
@@ -87,6 +104,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix/ricos/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
+- `link`
+  - [#1863](https://github.com/wix-incubator/rich-content/pull/1863) fix - after adding a link the text after is not remained underlined
 - `emoji`
 	- [#1864](https://github.com/wix/ricos/pull/1864) fix external toolbar popup styles
 - `giphy`

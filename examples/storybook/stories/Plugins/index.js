@@ -13,6 +13,7 @@ import VerticalEmbedStory from './VerticalEmbed';
 import HtmlPluginStory from './HtmlPlugin';
 import FileUploadStory from './FileUpload';
 import MapPluginStory from './Map';
+import TablePluginStory from './Table';
 
 storiesOf('Plugins')
   .add('Divider', DividerPluginStory)
@@ -28,4 +29,5 @@ storiesOf('Plugins')
   .add('Vertical Embed', VerticalEmbedStory)
   .add('HTML Plugin', HtmlPluginStory)
   .add('File Upload', FileUploadStory)
-  .add('Map', MapPluginStory);
+  .add('Map', MapPluginStory)
+  .add('Table', TablePluginStory);

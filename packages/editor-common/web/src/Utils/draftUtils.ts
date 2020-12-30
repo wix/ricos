@@ -11,7 +11,7 @@ import {
   EditorChangeType,
 } from '@wix/draft-js';
 
-import { flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import { RelValue, AnchorTarget } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
@@ -25,6 +25,9 @@ type LinkDataUrl = {
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
+
+const isEditorState = value => value?.getCurrentContent && value;
+export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
 export function createSelection({
   blockKey,
@@ -95,17 +98,17 @@ export const insertLinkAtCurrentSelection = (
     }) as SelectionState;
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-  const editorStateWithLink = isSelectionBelongsToExsistingLink(newEditorState, selection)
+  const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+  const editorStateWithLink = isExistsLink
     ? updateLink(selection, newEditorState, entityData)
     : insertLink(newEditorState, selection, entityData);
-
-  return EditorState.forceSelection(
-    editorStateWithLink,
-    selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
-  );
+  const editorStateSelection = isExistsLink
+    ? selection.merge({ anchorOffset: selection.getFocusOffset() })
+    : editorStateWithLink.getCurrentContent().getSelectionAfter();
+  return EditorState.forceSelection(editorStateWithLink, editorStateSelection as SelectionState);
 };
 
-function isSelectionBelongsToExsistingLink(editorState: EditorState, selection: SelectionState) {
+function isSelectionBelongsToExistingLink(editorState: EditorState, selection: SelectionState) {
   const startOffset = selection.getStartOffset();
   const endOffset = selection.getEndOffset();
   return getSelectedLinks(editorState).find(({ range }) => {
@@ -138,16 +141,21 @@ function insertLink(editorState: EditorState, selection: SelectionState, linkDat
     data: createLinkEntityData(linkData),
     mutability: 'MUTABLE',
   });
-  const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link
-  const contentState = isNewLine
+  const preventInlineStyleForFurtherText =
+    editorWithLink
+      .getCurrentContent()
+      .getBlockForKey(oldSelection.getAnchorKey())
+      .getText().length -
+      selection.getFocusOffset() ===
+      0 || selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link
+  const contentState = preventInlineStyleForFurtherText
     ? preventLinkInlineStyleForNewLine(editorWithLink, selection)
     : editorWithLink.getCurrentContent();
-
   return EditorState.push(
     editorState,
     Modifier.applyInlineStyle(contentState, selection, 'UNDERLINE').set(
       'selectionAfter',
-      oldSelection
+      contentState.getSelectionAfter()
     ) as ContentState,
     'change-inline-style'
   );
@@ -352,7 +360,11 @@ export const createBlockAndFocus = (editorState: EditorState, data, pluginType: 
 export const createBlock = (editorState: EditorState, data, type: string) => {
   const currentEditorState = editorState;
   const contentState = currentEditorState.getCurrentContent();
-  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', { ...data });
+  const contentStateWithEntity = contentState.createEntity(
+    type,
+    'IMMUTABLE',
+    cloneDeepWithoutEditorState(data)
+  );
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
@@ -713,4 +725,63 @@ export function deleteCharacterBeforeCursor(editorState: EditorState) {
     newState = EditorState.push(editorState, newContentState, 'delete-string' as EditorChangeType);
   }
   return newState;
+}
+
+export function isPluginFocused(block: ContentBlock, selection: SelectionState) {
+  return block.getKey() === selection.getAnchorKey();
+}
+
+export function isCursorAtFirstLine(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  return (
+    selection.isCollapsed() &&
+    editorState
+      .getCurrentContent()
+      .getBlockMap()
+      .first()
+      .getKey() === selection.getFocusKey()
+  );
+}
+
+export function isCursorAtStartOfContent(editorState: EditorState) {
+  const isStartOfLine = editorState.getSelection().getFocusOffset() === 0;
+  return isStartOfLine && isCursorAtFirstLine(editorState);
+}
+
+export function isCursorAtLastLine(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  return (
+    selection.isCollapsed() &&
+    editorState
+      .getCurrentContent()
+      .getBlockMap()
+      .last()
+      .getKey() === selection.getFocusKey()
+  );
+}
+
+export function isCursorAtEndOfContent(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  const lastBlock = editorState
+    .getCurrentContent()
+    .getBlockMap()
+    .last();
+  const isEndOfLine = selection.getFocusOffset() >= lastBlock.getText().length;
+  return isEndOfLine && isCursorAtLastLine(editorState);
+}
+
+export function selectAllContent(editorState, forceSelection) {
+  const currentContent = editorState.getCurrentContent();
+  const selection = editorState.getSelection().merge({
+    anchorKey: currentContent.getFirstBlock().getKey(),
+    anchorOffset: 0,
+
+    focusOffset: currentContent.getLastBlock().getText().length,
+    focusKey: currentContent.getLastBlock().getKey(),
+  });
+  const setSelectionFunction = forceSelection
+    ? EditorState.forceSelection
+    : EditorState.acceptSelection;
+  const newEditorState = setSelectionFunction(editorState, selection);
+  return newEditorState;
 }
