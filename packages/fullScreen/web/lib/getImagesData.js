@@ -20,19 +20,17 @@ function imageEntryToGallery(data, index) {
 }
 
 function getTableImages(entry, index) {
-  let tableImages = [];
-  // eslint-disable-next-line fp/no-loops
-  for (const [, row] of Object.entries(entry.data.config.rows)) {
-    // eslint-disable-next-line fp/no-loops
-    for (const [, column] of Object.entries(row.columns)) {
-      const entity = Object.entries(column.content.entityMap);
-      const entryData = entity.length ? entity[0][1].data : null;
-      // eslint-disable-next-line no-extra-boolean-cast
-      if (!!entryData?.src) {
-        tableImages = [...tableImages, ...imageEntryToGallery(entryData, index)];
-      }
-    }
-  }
+  const tableImages = [];
+  const { rows } = entry.data.config;
+  Object.entries(rows).forEach(([, row]) => {
+    Object.entries(row.columns).forEach(([, column]) => {
+      const entityMap = column.content.entityMap;
+      entityMap &&
+        Object.entries(entityMap).forEach(([, entityData]) => {
+          entityData.data?.src && tableImages.push(imageEntryToGallery(entityData.data, index));
+        });
+    });
+  });
   return tableImages;
 }
 
