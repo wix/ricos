@@ -269,7 +269,7 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
   }
   return pushToRedoStack(
     removeCompositionModeFromEditorState(newEditorState),
-    editorState.getCurrentContent()
+    convertFromRaw(convertToRaw(editorState.getCurrentContent()))
   );
 }
 
