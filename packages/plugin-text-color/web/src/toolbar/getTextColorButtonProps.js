@@ -97,7 +97,7 @@ export const getButtonProps = ({ config, type }) => {
             height: 'calc(88px - 2px)',
             top: bottom,
             left: left - 15,
-            borderRadius: '6px',
+            borderRadius: '2px',
             border: '1px solid #ededed',
             margin: '0',
             background: '#fff',

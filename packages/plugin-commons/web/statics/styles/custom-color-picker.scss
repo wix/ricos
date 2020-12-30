@@ -69,7 +69,7 @@
       overflow: auto;
       border: none;
       .react-colorful__pointer{  
-        box-shadow: 0 2px 2px rgba(9, 9, 9,0.90);
+        border-color: $action-color;
       }
     }
     .react-colorful__pointer {
