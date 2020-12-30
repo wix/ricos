@@ -7,10 +7,8 @@ const VIDEO_TYPE = 'wix-draft-plugin-video';
 const FILE_TYPE = 'wix-draft-plugin-file-upload';
 const GALLERY_TYPE = 'wix-draft-plugin-gallery';
 const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
-const IGNORE_CHANGE_TYPE = 'ignore';
-const typesToIgnoreChanges = ['wix-rich-content-plugin-table'];
-
-const getType = (type: string) => (typesToIgnoreChanges.includes(type) ? IGNORE_CHANGE_TYPE : type);
+const TABLE_TYPE = 'table';
+const INNER_RICOS_TYPES = [ACCORDION_TYPE, TABLE_TYPE];
 
 function removeCompositionModeFromEditorState(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
@@ -39,7 +37,7 @@ function applyActionForGalleryItems(currentItems, newItems) {
   }
 }
 
-function getChangedPairIndex(currentPairs, newPairs) {
+function getChangedAccordionPairIndex(currentPairs, newPairs) {
   let hasOrderChanged = false;
   let isTitle = false;
   const changedPairIndex = newPairs.findIndex((pair, index) => {
@@ -122,7 +120,7 @@ function handleAccordionEntity(currentData, newData) {
     return { shouldUndoAgain: false };
   }
 
-  const { changedPairIndex, hasOrderChanged, isTitle } = getChangedPairIndex(
+  const { changedPairIndex, hasOrderChanged, isTitle } = getChangedAccordionPairIndex(
     currentPairs,
     newPairs
   );
@@ -156,6 +154,79 @@ function handleAccordionEntity(currentData, newData) {
   }
 }
 
+function checkColumns(newRow, currentRow) {
+  return Object.keys(newRow).find(columnKey => {
+    const newColumn = newRow[columnKey].content;
+    const currentColumn = currentRow[columnKey].content;
+    if (newColumn.getCurrentContent() !== currentColumn.getCurrentContent()) {
+      return true;
+    }
+    return false;
+  });
+}
+
+function getChangedTableCellIndex(newRows, currentRows) {
+  let isDeletion = false;
+  let column;
+  const row = Object.keys(newRows).find(rowKey => {
+    const currentRow = currentRows[rowKey].columns;
+    const newRow = newRows[rowKey].columns;
+    const newColumnsArr = Object.keys(newRow);
+    const currentColumnsArr = Object.keys(currentRow);
+    if (!currentRow || newColumnsArr.length !== currentColumnsArr.length) {
+      isDeletion = true;
+      return true;
+    }
+    column = checkColumns(newRow, currentRow);
+    if (column) {
+      return true;
+    }
+    return false;
+  });
+  return { row, column, isDeletion };
+}
+
+function handleTableEntity(currentData, newData) {
+  const { rows: newRows, ...newConfig } = newData.config;
+  const { rows: currentRows, ...currentConfig } = currentData.config;
+
+  if (!isEqual(newConfig, currentConfig)) {
+    return {
+      fixedData: {
+        ...currentData,
+        config: {
+          rows: currentRows,
+          ...newConfig,
+        },
+      },
+    };
+  }
+
+  const { row, column, isDeletion } = getChangedTableCellIndex(newRows, currentRows);
+  if (isDeletion) {
+    return {
+      fixedData: { ...newData },
+    };
+  }
+  if (row && column) {
+    const { newEditorState, undoAgain: shouldUndoAgain } = fixBrokenInnerRicosStates(
+      newRows[row].columns[column].content,
+      currentRows[row].columns[column].content
+    );
+    newRows[row].columns[column].content = newEditorState;
+    return {
+      shouldUndoAgain,
+      fixedData: {
+        ...currentData,
+        config: {
+          rows: newRows,
+          ...currentConfig,
+        },
+      },
+    };
+  }
+}
+
 const entityDataFixers = {
   [IMAGE_TYPE]: (currentData, newData) => {
     const { src, error } = currentData;
@@ -179,12 +250,11 @@ const entityDataFixers = {
       return { ...newData, items };
     }
   },
-  /* eslint-disable no-unused-vars */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  [IGNORE_CHANGE_TYPE]: (currentData, _) => {
-    return { ...currentData };
-  },
-  /* eslint-enable no-unused-vars */
+};
+
+const innerRicosDataFixers = {
+  [ACCORDION_TYPE]: (currentData, newData) => handleAccordionEntity(currentData, newData),
+  [TABLE_TYPE]: (currentData, newData) => handleTableEntity(currentData, newData),
 };
 
 function doesBlockExistInNewContentState(block, entityMap, newBlocksEntitiesData) {
@@ -213,14 +283,14 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
         const entityKey = entityRanges[0]?.key;
         const currentEntity = entityMap[entityKey];
         const { type, data: currentData } = currentEntity;
-        if (type === ACCORDION_TYPE) {
-          entityToReplace = handleAccordionEntity(currentData, newData);
+        if (INNER_RICOS_TYPES.includes(type)) {
+          entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
           if (entityToReplace) {
             entityToReplace.blockKey = blockKey;
             return true;
           }
         } else if (!isEqual(currentData, newData)) {
-          const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
+          const fixedData = entityDataFixers[type]?.(currentData, newData);
           if (fixedData) {
             entityToReplace = {
               blockKey,
