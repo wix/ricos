@@ -139,7 +139,7 @@ export const resizeMediaUrl = (
   if (resizeMethod === 'video') {
     return getAbsoluteUrl(originalUrl, 'video');
   } else if (requiredWidth >= item.maxWidth && requiredHeight >= item.maxHeight) {
-    return getAbsoluteUrl(item.url, 'image');
+    return getAbsoluteUrl(item.dto.metaData.type === 'video' ? originalUrl : item.url, 'image');
   } else {
     return getResizedImageUrl(
       item,
