@@ -40,6 +40,7 @@ export default class StaticToolbar extends React.PureComponent {
     setEditorState: PropTypes.func,
     config: PropTypes.object,
     footerToolbarConfig: PropTypes.object,
+    forceDisabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -116,7 +117,7 @@ export default class StaticToolbar extends React.PureComponent {
   onExtendContent = extendContent => this.setState({ extendContent });
 
   renderToolbarContent(childrenProps) {
-    const { theme, isMobile, footerToolbarConfig, pubsub, t } = this.props;
+    const { theme, isMobile, footerToolbarConfig, pubsub, t, forceDisabled } = this.props;
     const { toolbarStyles } = theme || {};
     const { showLeftArrow, showRightArrow, overrideContent: OverrideContent } = this.state;
     const hasArrow = showLeftArrow || showRightArrow;
@@ -165,7 +166,7 @@ export default class StaticToolbar extends React.PureComponent {
                 <OverrideContent {...childrenProps} />
               ) : (
                 this.structure.map(({ component: Component }, index) => (
-                  <Component key={index} {...childrenProps} />
+                  <Component key={index} {...childrenProps} forceDisabled={forceDisabled} />
                 ))
               )}
             </div>
@@ -178,6 +179,7 @@ export default class StaticToolbar extends React.PureComponent {
             addPluginMenuProps={addPluginMenuProps}
             footerToolbarConfig={footerToolbarConfig}
             structure={this.pluginMenuPlugins}
+            forceDisabled={forceDisabled}
           />
         ) : (
           hasArrow && (
