@@ -675,6 +675,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
           <Toolbar
             key={`k${index}`}
             hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
+            forceDisabled={
+              plugin.name === 'FooterToolbar' && !this.props.isInnerRCE && this.inPluginEditingMode
+            }
           />
         );
       }
