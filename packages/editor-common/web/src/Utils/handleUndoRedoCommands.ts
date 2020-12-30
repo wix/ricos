@@ -59,7 +59,10 @@ function getChangedPairIndex(currentPairs, newPairs) {
   return { changedPairIndex, hasOrderChanged, isTitle };
 }
 
-function createBlockEntitiesDataMap(contentState: RicosContent) {
+function createBlockEntitiesDataMap(
+  contentState: RicosContent,
+  filter?: (type: string) => boolean
+) {
   const blockEntitiesDataMap = {};
   const { blocks, entityMap } = contentState;
   blocks.forEach(block => {
@@ -68,7 +71,9 @@ function createBlockEntitiesDataMap(contentState: RicosContent) {
     if (type === 'atomic') {
       block.text = ' ';
     }
-    blockEntitiesDataMap[blockKey] = { block, entityData: entity?.data };
+    if (!filter || filter?.(entity?.type)) {
+      blockEntitiesDataMap[blockKey] = { block, entityData: entity?.data };
+    }
   });
   return blockEntitiesDataMap;
 }
@@ -101,6 +106,7 @@ function fixBrokenInnerRicosStates(newEditorState: EditorState, editorState: Edi
 function handleAccordionEntity(currentData, newData) {
   const newPairs = newData.pairs.filter(pair => pair.key && pair.title && pair.content);
   const isBrokenContent = newPairs.length !== newData.pairs.length;
+
   if (!isEqual(currentData.config, newData.config) || isBrokenContent) {
     return {
       shouldUndoAgain: isBrokenContent,
