@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../../statics/styles/table-toolbar.scss';
-import { getRange } from '../../domain/tableDataUtil';
+import styles from '../../statics/styles/table-toolbar.scss';
+import { getRange } from '../domain/tableDataUtil';
 import { cloneDeep, isEmpty } from 'lodash';
 import { ToolbarContainer, FloatingToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getCellFormattingButtonsProps } from './CellFormattingButtonProps';
