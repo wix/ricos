@@ -1,10 +1,6 @@
 syntax = "proto3";
 
-message MentionData {
+message RicosMention {
     string name = 1 [required = true];
     string slug = 2 [required = true];
-}
-
-message RicosMention {
-    MentionData mention = 1 [required = true];
 }

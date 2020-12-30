@@ -4,7 +4,6 @@ import {
   RicosEntityMap,
   RicosEntityRange,
   EMOJI_TYPE,
-  RICOS_ALIGNMENT_TYPE,
   RICOS_COLOR_TYPE,
 } from '..';
 import { RicosNode, RicosDecoration } from 'ricos-schema';
@@ -30,12 +29,10 @@ export const getTextNodes = (
 ): RicosNode[] => {
   const createTextNode = ({
     text,
-    blockData,
     styles = [],
     keys = [],
   }: {
     text: string;
-    blockData: RicosContentBlock['data'];
     styles: StyleType[];
     keys: KeyType[];
   }): RicosNode => {
@@ -50,13 +47,6 @@ export const getTextNodes = (
     };
 
     let decorations: RicosDecoration[] = [];
-
-    if (blockData && !isEmpty(blockData) && blockData.textAlignment) {
-      decorations.push({
-        type: RICOS_ALIGNMENT_TYPE,
-        ricosAlignment: { direction: blockData.textAlignment },
-      });
-    }
 
     const keysDecorations = keys.map(key => getEntity(key, entityMap, keyMapping));
     const stylesDecorations = styles.map(style => getDecoration(style));
@@ -88,7 +78,7 @@ export const getTextNodes = (
     return decoration;
   };
 
-  const { text, inlineStyleRanges, entityRanges, data: blockData } = block;
+  const { text, inlineStyleRanges, entityRanges } = block;
   if (text.length === 0) {
     return [];
   }
@@ -132,7 +122,6 @@ export const getTextNodes = (
       textNodes.push(
         createTextNode({
           text: text.slice(numbers[i], numbers[i + 1]),
-          blockData,
           styles,
           keys,
         })

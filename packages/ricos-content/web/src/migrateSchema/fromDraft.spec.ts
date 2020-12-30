@@ -118,10 +118,8 @@ describe('migrate from draft', () => {
           decorations: [
             {
               ricosMention: {
-                mention: {
-                  name: 'Test One',
-                  slug: 'testone',
-                },
+                name: 'Test One',
+                slug: 'testone',
               },
               type: 'ricos_mention',
             },

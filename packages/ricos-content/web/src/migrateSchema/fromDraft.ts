@@ -7,7 +7,7 @@ import { RicosContent, RicosNode, google } from 'ricos-schema';
 import { genKey } from 'draft-js';
 
 import { getTextNodes } from './getTextNodes';
-import { getEntity } from './getEntity';
+import { getEntity, parseBlockData } from './getEntity';
 
 const createTimestamp = (): google.protobuf.Timestamp => {
   const timeMS = Date.now();
@@ -82,6 +82,9 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     key: block.key,
     type: NodeType.CodeBlock,
     nodes: getTextNodes(block, entityMap, keyMapping),
+    ricosCode: {
+      ...parseBlockData(block.data),
+    },
   });
 
   const parseHeadingBlock = (block: RicosContentBlock): RicosNode => {
@@ -97,6 +100,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       type: NodeType.Heading,
       ricosHeading: {
         level: getLevel(block.type),
+        ...parseBlockData(block.data),
       },
       nodes: getTextNodes(block, entityMap, keyMapping),
     };
@@ -106,6 +110,9 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     const textWrapperNode: RicosNode = {
       key: genKey(),
       type: NodeType.Paragraph,
+      ricosParagraph: {
+        ...parseBlockData(block.data),
+      },
       nodes: [],
     };
 

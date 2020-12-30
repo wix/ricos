@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+import "../common_enums.proto";
+
+message RicosParagraph {
+    Common.TextAlignment textAlignment = 1;
+}

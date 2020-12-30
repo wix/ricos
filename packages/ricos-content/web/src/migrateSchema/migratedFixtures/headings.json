@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3oms9",
+            "key": "26u47",
             "ricosText": {
               "decorations": [
                 {
@@ -19,7 +19,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9l1vu",
+            "key": "5i6f9",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -35,14 +35,15 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ek9d2"
+        "key": "c4vg",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "fv261",
+            "key": "fjfqd",
             "ricosText": {
               "decorations": [
                 {
@@ -61,7 +62,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "brj29",
+            "key": "dijp4",
             "ricosText": {
               "decorations": [
                 {
@@ -83,7 +84,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ffgdl",
+            "key": "65c30",
             "ricosText": {
               "decorations": [
                 {
@@ -111,7 +112,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8q0cj",
+            "key": "ef3oq",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -129,7 +130,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "jlgm",
+            "key": "92i5u",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker, siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -145,14 +146,15 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fquco"
+        "key": "7h24e",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "c7om7",
+            "key": "fmt1c",
             "ricosText": {
               "decorations": [],
               "text": "Intorno  all `isola a sud di ow Bridge c'era inoltre una coppia di Hooded  Merganser, molte Canadian Geese, Grayleg Goose e 7-8 Shovelers. Mark ha  avvistato la Cooper`s Hawk vicino a Summer House."
@@ -160,12 +162,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "cjlbu"
+        "key": "f211g",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 222000000
+      "seconds": 1609345637,
+      "nanos": 951000000
     }
   },
   "selection": {

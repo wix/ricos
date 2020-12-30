@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "22p38",
+            "key": "7cfap",
             "ricosText": {
               "decorations": [],
               "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition."
@@ -14,14 +14,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "3ur06"
+        "key": "emao3",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dgt05",
+            "key": "6kt49",
             "ricosText": {
               "decorations": [],
               "text": "Bring to the table win-win survival strategies to ensure proactive domination."
@@ -39,7 +40,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e2p6h",
+            "key": "fbt8r",
             "ricosText": {
               "decorations": [],
               "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution."
@@ -47,14 +48,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "868c0"
+        "key": "1nkp0",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "kjtk",
+            "key": "29ush",
             "ricosText": {
               "decorations": [],
               "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
@@ -72,7 +74,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bh3ch",
+            "key": "d7s5r",
             "ricosText": {
               "decorations": [],
               "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test."
@@ -80,16 +82,17 @@
           }
         ],
         "type": "paragraph",
-        "key": "4l746"
+        "key": "6nma3",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 221000000
+      "seconds": 1609345637,
+      "nanos": 949000000
     }
   },
   "selection": {
-    "anchorNode": "3ur06"
+    "anchorNode": "emao3"
   },
   "version": ""
 }

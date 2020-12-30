@@ -10,22 +10,18 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "at4tb",
+                    "key": "f00qk",
                     "ricosText": {
-                      "decorations": [
-                        {
-                          "type": "ricos_alignment",
-                          "ricosAlignment": {
-                            "direction": "left"
-                          }
-                        }
-                      ],
+                      "decorations": [],
                       "text": "asdsad"
                     }
                   }
                 ],
                 "type": "paragraph",
-                "key": "9k62k"
+                "key": "6hicm",
+                "ricosParagraph": {
+                  "textAlignment": "LEFT"
+                }
               }
             ],
             "type": "list_item",
@@ -38,22 +34,18 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "brul0",
+                    "key": "24u1m",
                     "ricosText": {
-                      "decorations": [
-                        {
-                          "type": "ricos_alignment",
-                          "ricosAlignment": {
-                            "direction": "left"
-                          }
-                        }
-                      ],
+                      "decorations": [],
                       "text": "שדגדש"
                     }
                   }
                 ],
                 "type": "paragraph",
-                "key": "32dlc"
+                "key": "bs58i",
+                "ricosParagraph": {
+                  "textAlignment": "LEFT"
+                }
               }
             ],
             "type": "list_item",
@@ -66,22 +58,18 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "e3sp9",
+                    "key": "16hdj",
                     "ricosText": {
-                      "decorations": [
-                        {
-                          "type": "ricos_alignment",
-                          "ricosAlignment": {
-                            "direction": "left"
-                          }
-                        }
-                      ],
+                      "decorations": [],
                       "text": "asdsa"
                     }
                   }
                 ],
                 "type": "paragraph",
-                "key": "9m6du"
+                "key": "br8pl",
+                "ricosParagraph": {
+                  "textAlignment": "LEFT"
+                }
               }
             ],
             "type": "list_item",
@@ -89,82 +77,70 @@
           }
         ],
         "type": "ordered_list",
-        "key": "djnn9"
+        "key": "cvuuv"
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7p6e7",
+            "key": "e8uda",
             "ricosText": {
-              "decorations": [
-                {
-                  "type": "ricos_alignment",
-                  "ricosAlignment": {
-                    "direction": "left"
-                  }
-                }
-              ],
+              "decorations": [],
               "text": "asdasd"
             }
           }
         ],
         "type": "paragraph",
-        "key": "4ren4"
+        "key": "fkdji",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "7amor",
+            "key": "cka8v",
             "ricosText": {
-              "decorations": [
-                {
-                  "type": "ricos_alignment",
-                  "ricosAlignment": {
-                    "direction": "left"
-                  }
-                }
-              ],
+              "decorations": [],
               "text": "שדגשדג"
             }
           }
         ],
         "type": "paragraph",
-        "key": "edk8b"
+        "key": "aqapl",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5guet",
+            "key": "39uil",
             "ricosText": {
-              "decorations": [
-                {
-                  "type": "ricos_alignment",
-                  "ricosAlignment": {
-                    "direction": "left"
-                  }
-                }
-              ],
+              "decorations": [],
               "text": "asda"
             }
           }
         ],
         "type": "paragraph",
-        "key": "abr78"
+        "key": "10rq8",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 241000000
+      "seconds": 1609345637,
+      "nanos": 966000000
     }
   },
   "selection": {
-    "anchorNode": "djnn9"
+    "anchorNode": "cvuuv"
   },
   "version": "7.10.2"
 }

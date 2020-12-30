@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3rhmv",
+            "key": "a7ugd",
             "ricosText": {
               "decorations": [],
               "text": "bla bla bla"
@@ -14,7 +14,8 @@
           }
         ],
         "type": "paragraph",
-        "key": "958rm"
+        "key": "rf75",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -34,7 +35,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d1b5n",
+            "key": "4aq81",
             "ricosText": {
               "decorations": [],
               "text": "Wide embed. In mobile full width. In desktop 740px "
@@ -42,7 +43,8 @@
           }
         ],
         "type": "paragraph",
-        "key": "7lqrj"
+        "key": "29jc1",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -60,17 +62,20 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f5uim"
+        "key": "4ehvk",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "de1f7"
+        "key": "f74vj",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8lnjb"
+        "key": "e3qku",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -88,26 +93,29 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "77lne"
+        "key": "5h270",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fv986"
+        "key": "2phgv",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f1s98"
+        "key": "aap8r",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 230000000
+      "seconds": 1609345637,
+      "nanos": 956000000
     }
   },
   "selection": {
-    "anchorNode": "958rm"
+    "anchorNode": "rf75"
   },
   "version": "7.1.5"
 }

@@ -1,24 +1,26 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "plugin_image_schema.proto";
-import "plugin_divider_schema.proto";
-import "plugin_color_schema.proto";
-import "plugin_heading_schema.proto";
-import "plugin_anchor_schema.proto";
-import "plugin_button_schema.proto";
-import "plugin_file_schema.proto";
-import "plugin_gallery_schema.proto";
-import "plugin_giphy_schema.proto";
-import "plugin_html_schema.proto";
-import "plugin_link_schema.proto";
-import "plugin_link_preview_schema.proto";
-import "plugin_map_schema.proto";
-import "plugin_mention_schema.proto";
-import "plugin_poll_schema.proto";
-import "plugin_sound_cloud_schema.proto";
-import "plugin_video_schema.proto";
-import "plugin_vertical_embed_schema.proto";
+import "decorations/plugin_anchor.proto";
+import "decorations/plugin_color.proto";
+import "decorations/plugin_link.proto";
+import "decorations/plugin_mention.proto";
+import "nodes/plugin_code.proto";
+import "nodes/plugin_heading.proto";
+import "nodes/plugin_paragraph.proto";
+import "plugins/plugin_button.proto";
+import "plugins/plugin_divider.proto";
+import "plugins/plugin_file.proto";
+import "plugins/plugin_gallery.proto";
+import "plugins/plugin_giphy.proto";
+import "plugins/plugin_html.proto";
+import "plugins/plugin_image.proto";
+import "plugins/plugin_link_preview.proto";
+import "plugins/plugin_map.proto";
+import "plugins/plugin_poll.proto";
+import "plugins/plugin_sound_cloud.proto";
+import "plugins/plugin_vertical_embed.proto";
+import "plugins/plugin_video.proto";
 
 message RicosContent {
     RicosDocument doc = 1 [required = true]; /// Document root
@@ -46,21 +48,20 @@ message RicosNode {
         RicosText ricos_text = 4;
         RicosImage ricos_image = 5;
         RicosDivider ricos_divider = 6;
-        RicosHeading ricos_heading = 7;
-        RicosAnchor ricos_anchor = 8;
+        RicosVideo ricos_video = 7;
+        RicosVerticalEmbed ricos_vertical_embed = 8;
         RicosButton ricos_button = 9;
         RicosFile ricos_file = 10;
         RicosGallery ricos_gallery = 11;
         RicosGiphy ricos_giphy = 12;
         RicosHTML ricos_html = 13;
-        RicosLink ricos_link = 14;
-        RicosLinkPreview ricos_link_preview = 15;
-        RicosMap ricos_map = 16;
-        RicosPoll ricos_poll = 17;
-        RicosSoundCloud ricos_sound_cloud = 18;
-        RicosVideo ricos_video = 19;
-        RicosVerticalEmbed ricos_vertical_embed = 20;
-        RicosMention ricos_mention = 21;
+        RicosLinkPreview ricos_link_preview = 14;
+        RicosMap ricos_map = 15;
+        RicosPoll ricos_poll = 16;
+        RicosSoundCloud ricos_sound_cloud = 17;
+        RicosParagraph ricos_paragraph = 18;
+        RicosCode ricos_code = 19;
+        RicosHeading ricos_heading = 20;
     }
 }
 
@@ -74,10 +75,8 @@ message RicosDecoration {
     string type = 1 [required = true]; /// Decoration type
     oneof data {
         RicosColor ricos_color = 2;
-        RicosAlignment ricos_alignment = 3;
+        RicosMention ricos_mention = 3;
+        RicosAnchor ricos_anchor = 4;
+        RicosLink ricos_link = 5;
     }
-}
-
-message RicosAlignment {
-    string direction = 1;
 }

@@ -4,7 +4,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4srej"
+        "key": "dn6ek",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -22,16 +23,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "evfv5"
+        "key": "999fv",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 199000000
+      "seconds": 1609345637,
+      "nanos": 930000000
     }
   },
   "selection": {
-    "anchorNode": "4srej"
+    "anchorNode": "dn6ek"
   },
   "version": "6.6.8"
 }

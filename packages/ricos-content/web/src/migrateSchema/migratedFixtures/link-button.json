@@ -4,7 +4,10 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "683fn"
+        "key": "69ac1",
+        "ricosParagraph": {
+          "textAlignment": "JUSTIFY"
+        }
       },
       {
         "nodes": [],
@@ -14,16 +17,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ctm4t"
+        "key": "ce1un",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 247000000
+      "seconds": 1609345637,
+      "nanos": 972000000
     }
   },
   "selection": {
-    "anchorNode": "683fn"
+    "anchorNode": "69ac1"
   },
   "version": "7.3.5"
 }

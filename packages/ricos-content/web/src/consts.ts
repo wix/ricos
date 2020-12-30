@@ -72,7 +72,6 @@ export const PREVIEW = 'PREVIEW';
 // ricos plugin types
 export const RICOS_ACCORDION_TYPE = 'ricos_accordion';
 export const RICOS_ACTION_BUTTON_TYPE = 'ricos_action_button';
-export const RICOS_ANCHOR_TYPE = 'ricos_anchor';
 export const RICOS_CODE_BLOCK_TYPE = 'ricos_code_block';
 export const RICOS_DIVIDER_TYPE = 'ricos_divider';
 export const RICOS_EXTERNAL_LINK_TYPE = 'ricos_external_link';
@@ -82,16 +81,15 @@ export const RICOS_GALLERY_TYPE = 'ricos_gallery';
 export const RICOS_GIPHY_TYPE = 'ricos_giphy';
 export const RICOS_HASHTAG_TYPE = 'ricos_hashtag';
 export const RICOS_HEADERS_MARKDOWN_TYPE = 'ricos_headers_markdown';
-export const RICOS_HEADINGS_DROPDOWN_TYPE = 'ricos_heading';
+export const RICOS_HEADINGS_DROPDOWN_TYPE = 'ricos_heading_dropdown';
+export const RICOS_HEADING = 'ricos_heading';
 export const RICOS_HTML_TYPE = 'ricos_html';
 export const RICOS_IMAGE_TYPE = 'ricos_image';
 export const RICOS_INDENT_TYPE = 'ricos_indent';
 export const RICOS_LINE_SPACING_TYPE = 'ricos_line_spacing';
 export const RICOS_LINK_BUTTON_TYPE = 'ricos_link_button';
 export const RICOS_LINK_PREVIEW_TYPE = 'ricos_link_preview';
-export const RICOS_LINK_TYPE = 'ricos_link';
 export const RICOS_MAP_TYPE = 'ricos_map';
-export const RICOS_MENTION_TYPE = 'ricos_mention';
 export const RICOS_POLL_TYPE = 'ricos_poll';
 export const RICOS_SOUND_CLOUD_TYPE = 'ricos_sound_cloud';
 export const RICOS_SPOILER_TYPE = 'ricos_spoiler';
@@ -103,6 +101,7 @@ export const RICOS_VERTICAL_EMBED_TYPE = 'ricos_vertical_embed';
 export const RICOS_VIDEO_TYPE = 'ricos_video';
 
 // ricos decoration types
-export const RICOS_ALIGNMENT_TYPE = 'ricos_alignment';
+export const RICOS_ANCHOR_TYPE = 'ricos_anchor';
 export const RICOS_COLOR_TYPE = 'ricos_color';
-export const RICOS_EMOJI_TYPE = 'ricos_emoji';
+export const RICOS_LINK_TYPE = 'ricos_link';
+export const RICOS_MENTION_TYPE = 'ricos_mention';

@@ -4,7 +4,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8od4r"
+        "key": "7kq92",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -27,7 +28,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "72o28"
+        "key": "fk8s9",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -50,7 +52,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "de61e"
+        "key": "fni9q",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -91,7 +94,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2cjbp"
+        "key": "53qju",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -114,16 +118,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "don3i"
+        "key": "8un4m",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 236000000
+      "seconds": 1609345637,
+      "nanos": 963000000
     }
   },
   "selection": {
-    "anchorNode": "8od4r"
+    "anchorNode": "7kq92"
   },
   "version": "7.1.2"
 }

@@ -1,4 +1,4 @@
-import { RicosEntityMap } from '..';
+import { RicosEntityMap, RicosContentBlock } from '..';
 import toConstantCase from 'to-constant-case';
 
 import {
@@ -10,6 +10,7 @@ import {
   IMAGE_TYPE_LEGACY,
   VERTICAL_EMBED_TYPE,
   POLL_TYPE,
+  MENTION_TYPE,
 } from '../consts';
 
 import { TO_RICOS_ENTITY_TYPE_MAP, TO_RICOS_PLUGIN_TYPE_MAP } from './consts';
@@ -68,6 +69,11 @@ export const getEntity = (
         data.anchor = keyMapping[data.anchor];
       }
       break;
+    case MENTION_TYPE:
+      data.name = data.mention.name;
+      data.slug = data.mention.slug;
+      delete data.mention;
+      break;
     case VIDEO_TYPE:
     case VIDEO_TYPE_LEGACY:
       migrateVideoData(data);
@@ -89,4 +95,12 @@ export const getEntity = (
   }
 
   return { type: TO_RICOS_PLUGIN_TYPE_MAP[type], [dataFieldName]: data };
+};
+
+export const parseBlockData = (blockData?: RicosContentBlock['data']) => {
+  const { textAlignment } = blockData || {};
+  return Object.assign(
+    {},
+    textAlignment ? { textAlignment: textAlignment.toUpperCase() } : undefined
+  );
 };

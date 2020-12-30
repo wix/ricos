@@ -4,7 +4,7 @@ message ButtonData {
     string url = 1 [required = true];
     bool target = 2 [required = true];
     bool rel = 3 [required = true];
-    string text_color = 4;
+    optional string text_color = 4;
     string picker_type = 5;
     int32 border_radius = 6;
     int32 border_width = 7;
@@ -13,12 +13,12 @@ message ButtonData {
     int32 button_theme = 10;
     string background_color = 11;
     string border_color = 12;
-  }
+}
   
-  message ButtonConfig {
+message ButtonConfig {
     string width = 1;
     string alignment = 2;
-  }
+}
 
 message RicosButton {
     ButtonData button = 1;

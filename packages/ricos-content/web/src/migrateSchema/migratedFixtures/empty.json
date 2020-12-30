@@ -4,16 +4,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6aaqj"
+        "key": "a4faj",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 202000000
+      "seconds": 1609345637,
+      "nanos": 932000000
     }
   },
   "selection": {
-    "anchorNode": "6aaqj"
+    "anchorNode": "a4faj"
   },
   "version": ""
 }

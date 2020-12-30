@@ -4,17 +4,20 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7bobu"
+        "key": "4nams",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9hii7"
+        "key": "9rkq4",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "94bj4"
+        "key": "cba82",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -34,16 +37,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2qr0i"
+        "key": "2gise",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 336000000
+      "seconds": 1609345638,
+      "nanos": 100000000
     }
   },
   "selection": {
-    "anchorNode": "7bobu"
+    "anchorNode": "4nams"
   },
   "version": "8.3.0"
 }

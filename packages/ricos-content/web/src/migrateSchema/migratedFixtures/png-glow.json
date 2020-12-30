@@ -4,12 +4,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fdrtn"
+        "key": "cr8rm",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7gs6v"
+        "key": "9hsoo",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -36,12 +38,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9hns0"
+        "key": "bvn47",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2g0qp"
+        "key": "4isa8",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -127,7 +131,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2uk25"
+        "key": "37cc9",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -150,21 +155,23 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2d4r6"
+        "key": "1ps9q",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "edr0j"
+        "key": "4q4i0",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 322000000
+      "seconds": 1609345638,
+      "nanos": 73000000
     }
   },
   "selection": {
-    "anchorNode": "fdrtn"
+    "anchorNode": "cr8rm"
   },
   "version": "6.8.2"
 }

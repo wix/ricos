@@ -4,12 +4,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bnp6k"
+        "key": "9tbjm",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2rpgm"
+        "key": "7pnve",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -19,16 +21,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "81rqc"
+        "key": "2sbld",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 126000000
+      "seconds": 1609345637,
+      "nanos": 859000000
     }
   },
   "selection": {
-    "anchorNode": "bnp6k"
+    "anchorNode": "9tbjm"
   },
   "version": "7.3.5"
 }

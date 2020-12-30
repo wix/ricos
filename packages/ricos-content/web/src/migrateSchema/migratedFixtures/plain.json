@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d4uhu",
+            "key": "2m4qq",
             "ricosText": {
               "decorations": [],
               "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. "
@@ -14,14 +14,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "cv7s4"
+        "key": "f599f",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6tm94",
+            "key": "1deop",
             "ricosText": {
               "decorations": [],
               "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
@@ -29,14 +30,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "9fsmj"
+        "key": "d7h52",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "c8lcs",
+            "key": "3klff",
             "ricosText": {
               "decorations": [],
               "text": "Bring to the table win-win survival strategies to ensure proactive domination."
@@ -44,14 +46,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "afb8g"
+        "key": "fgpu0",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "43p4k",
+            "key": "3k8t1",
             "ricosText": {
               "decorations": [],
               "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. "
@@ -59,14 +62,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "ds7q3"
+        "key": "e60sq",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "dh5ee",
+            "key": "cp2t5",
             "ricosText": {
               "decorations": [],
               "text": "User generated content in real-time will have multiple touchpoints for offshoring."
@@ -74,14 +78,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "8kbtq"
+        "key": "12vg9",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "702eb",
+            "key": "81g4d",
             "ricosText": {
               "decorations": [],
               "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. "
@@ -89,14 +94,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "7nuuq"
+        "key": "4ptcl",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "334lu",
+            "key": "bijlr",
             "ricosText": {
               "decorations": [],
               "text": "Override the digital divide with additional clickthroughs from DevOps."
@@ -104,14 +110,15 @@
           }
         ],
         "type": "paragraph",
-        "key": "3cqd0"
+        "key": "8hvo4",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "22oud",
+            "key": "dvq",
             "ricosText": {
               "decorations": [],
               "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line."
@@ -119,16 +126,17 @@
           }
         ],
         "type": "paragraph",
-        "key": "csoih"
+        "key": "csio5",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 316000000
+      "seconds": 1609345638,
+      "nanos": 64000000
     }
   },
   "selection": {
-    "anchorNode": "cv7s4"
+    "anchorNode": "f599f"
   },
   "version": ""
 }

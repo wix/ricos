@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message Common {
+    enum TextAlignment {
+        LEFT = 0;
+        RIGHT = 1;
+        CENTER = 2;
+        JUSTIFY = 3;
+    }
+}

@@ -4,12 +4,14 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2sm6q"
+        "key": "5n2op",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "av1j3"
+        "key": "68qrb",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -28,7 +30,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2pl1n"
+        "key": "6mvdc",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -46,7 +49,8 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1q219"
+        "key": "ajkt3",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
@@ -65,18 +69,24 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "vd8i"
+        "key": "e3ovh",
+        "ricosParagraph": {}
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "aau4u",
+            "key": "drcds",
             "ricosText": {
               "decorations": [
                 {
-                  "type": "ricos_link"
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "wix.com",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
                 },
                 {
                   "type": "underline"
@@ -88,7 +98,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1npv2",
+            "key": "fulsk",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -96,16 +106,17 @@
           }
         ],
         "type": "paragraph",
-        "key": "c1d5v"
+        "key": "6abgu",
+        "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609230023,
-      "nanos": 250000000
+      "seconds": 1609345637,
+      "nanos": 975000000
     }
   },
   "selection": {
-    "anchorNode": "2sm6q"
+    "anchorNode": "5n2op"
   },
   "version": "7.1.4"
 }
