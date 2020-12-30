@@ -22568,6 +22568,11 @@ react-custom-scrollbars@^4.2.1:
     prop-types "^15.5.10"
     raf "^3.1.0"
 
+react-datasheet@1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/react-datasheet/-/react-datasheet-1.4.7.tgz#600e2305a19dca3b84983fdc3dad72825ab5c9a9"
+  integrity sha512-dN7nTuDqgx8fWnDlPNna56tVUarDCGxZmCu4C6hV0J/SH7GHfWC1EgHyODyLfU4wGSeDhZde8jE9znkixajXQA==
+
 react-day-picker@^7.4.8:
   version "7.4.8"
   resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.4.8.tgz#675625240d3fae1b41c0a9d5177c968c8517c1d4"

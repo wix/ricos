@@ -132,6 +132,33 @@ export const VIDEO_PLUGIN = {
   CUSTOM: 'videoUploadModalCustomVideo',
 };
 
+export const TABLE_PLUGIN = {
+  STATIC_TOOLBAR_BUTTON: 'TablePlugin_InsertButton',
+  ROW_COUNT_INPUT: 'rowCount',
+  COL_COUNT_INPUT: 'columnCount',
+  SUBMIT: 'createTableButton',
+  CELL: 'table-plugin-cell',
+  TEXT_STYLE_BUTTON: 'text-style',
+  BG_COLOR: 'back-ground-color',
+  BORDER_COLOR_BUTTONS: 'border-color-buttons',
+  BORDER_COLOR_AROUND: 'border-color-around',
+  BORDER_COLOR_ALL: 'border-color-all',
+  TEXT_COLOR: 'wix-rich-content-text-color-button',
+  HIGHLIGHT_COLOR: 'wix-rich-content-text-highlight-button',
+  CONTEXT_MENU: 'context-menu',
+  CLEAR: 'clear',
+  DELETE_COLUMN: 'delete-column',
+  DELETE_ROW: 'delete-row',
+  INSERT_RIGHT: 'insert-right',
+  INSERT_LEFT: 'insert-left',
+  INSERT_ABOVE: 'insert-above',
+  INSERT_BELOW: 'insert-below',
+  MERGE: 'merge-cells',
+  SPLIT: 'split-cells',
+  ROW_HEADER: 'row-header',
+  COL_HEADER: 'col-header',
+};
+
 export const SOUND_CLOUD = {
   INPUT: 'soundCloudUploadModalInput',
   ADD: 'settingPanelFooterDone',
@@ -164,6 +191,7 @@ export const PLUGIN_COMPONENT = {
   LINK_PREVIEW: 'linkPreviewViewer',
   BUTTON: 'buttonViewer',
   VERTICAL_EMBED: 'vertical-embed',
+  TABLE: 'TableComponent',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {

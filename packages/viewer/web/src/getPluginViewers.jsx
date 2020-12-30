@@ -33,6 +33,7 @@ class PluginViewer extends PureComponent {
         [styles.anchor]: hasLink,
         [theme.anchor]: hasLink && theme.anchor,
         [styles.embed]: hasLink && html,
+        [styles.horizontalScrollbar]: pluginComponent.withHorizontalScroll,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
@@ -261,6 +262,7 @@ const getPluginViewers = (
           typeMap={typeMappers}
           innerRCEViewerProps={innerRCEViewerProps}
           SpoilerViewerWrapper={SpoilerViewerWrapper}
+          withHorizontalScroll
         >
           {isInline ? children : null}
         </PluginViewer>

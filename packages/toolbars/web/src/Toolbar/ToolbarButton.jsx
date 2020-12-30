@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import DropdownArrowIcon from '../icons/DropdownArrowIcon';
 import Styles from './ToolbarButton.scss';
 import { mergeStyles } from 'wix-rich-content-common';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 class ToolbarButton extends Component {
   constructor(props) {

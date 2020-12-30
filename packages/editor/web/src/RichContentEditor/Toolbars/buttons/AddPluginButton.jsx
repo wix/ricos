@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextButton from './TextButton';
-import { EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
+import { EditorModals, getModalStyles, TOOLBARS } from 'wix-rich-content-editor-common';
 import { PlusIcon } from '../../Icons';
+import { getPluginMenuTheme } from '../SideToolbar/utils';
 
 export default class AddPluginButton extends Component {
   handleClick = () => this.openAddPluginModal();
@@ -26,7 +27,7 @@ export default class AddPluginButton extends Component {
         name,
         section: section || 'BlockToolbar_Section_Basic',
       })),
-      theme,
+      theme: getPluginMenuTheme(theme, isMobile),
       hidePopup: this.props.closeModal,
       getEditorState,
       setEditorState,
@@ -34,6 +35,7 @@ export default class AddPluginButton extends Component {
       t,
       isMobile,
       addPluginMenuConfig,
+      toolbarName: TOOLBARS.SIDE,
     });
   };
 

@@ -17,6 +17,16 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) add plugin menu - fix override plugin menu styles on mobile
+- `inner-rce`
+  - [#1932](https://github.com/wix-incubator/rich-content/pull/1932) disable footer toolbar when inner rce is in focus
+
+</details>
+<hr/>
+
+## 8.11.0 (Dec 28, 2020)
 ### :rocket: New Feature
 - `viewer`
   - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
@@ -24,9 +34,9 @@
 - `editor`
   - [#1922](https://github.com/wix-incubator/rich-content/pull/1922) `onOpenEditorSuccess` callback is now added to helpers
   - [#1917](https://github.com/wix-incubator/rich-content/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
-
-</details>
-<hr/>
+### :house: Internal
+- `table`
+  - [#1401](https://github.com/wix-incubator/rich-content/pull/1401) **beta** add table plugin
 
 ## 8.10.2 (Dec 27, 2020)
 ### :bug: Bug Fix

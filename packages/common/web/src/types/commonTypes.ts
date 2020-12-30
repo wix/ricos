@@ -25,8 +25,9 @@ export type RichContentTheme = {
 export type ClassNameStrategy = (
   componentData: ComponentData,
   theme: RichContentTheme,
-  styles: Styles,
-  isMobile: boolean
+  styles: Record<string, string>,
+  isMobile: boolean,
+  innerRCERenderedIn: string
 ) => string;
 
 export type ContainerClassNameStrategy = (theme: RichContentTheme) => string;
@@ -92,6 +93,7 @@ export interface EditorContextType extends CommonContextType {
   innerModal: InnerModalType;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderInnerRCE: (params: any) => JSX.Element;
+  innerRCERenderedIn?: string;
 }
 
 export interface ViewerContextType extends CommonContextType {
