@@ -7,7 +7,7 @@ import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
 import { getRange } from './domain/tableDataUtil';
-import { createEmptyCellEditor } from './tableUtil';
+import { createEmptyCellEditor, handleCellClipboardEvent } from './tableUtil';
 import { AddNewSection, TableToolbar, Columns, Rows } from './components';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { isEmpty, isNumber } from 'lodash';
@@ -468,6 +468,7 @@ class TableComponent extends React.Component {
               this.table.getSelectedRows(range)
             }
             t={t}
+            handleCellClipboardEvent={handleCellClipboardEvent}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
