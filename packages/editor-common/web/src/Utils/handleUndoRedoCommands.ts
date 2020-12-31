@@ -146,7 +146,7 @@ function handleAccordionEntity(currentData, newData) {
 // check table row's columns for a changed column.
 function checkColumns(newRow, currentRow) {
   let isStyleChange = false;
-  const column = Object.keys(newRow).find(columnKey => {
+  const columnIndex = Object.keys(newRow).find(columnKey => {
     const { content: newContent, ...newStyles } = newRow[columnKey];
     const { content: currentContent, ...currentStyles } = currentRow[columnKey];
     if (newContent.getCurrentContent() !== currentContent.getCurrentContent()) {
@@ -157,7 +157,7 @@ function checkColumns(newRow, currentRow) {
     }
     return false;
   });
-  return { column, isStyleChange };
+  return { columnIndex, isStyleChange };
 }
 
 // looks for a changed cell in the new content, if there is returns it's indices.
@@ -171,8 +171,9 @@ function getChangedTableCellIndex(newRows, currentRows) {
       isChangeFine = true;
       return true;
     }
-    const { column, isStyleChange } = checkColumns(newRow, currentRow);
-    if (column) {
+    const { columnIndex, isStyleChange } = checkColumns(newRow, currentRow);
+    if (columnIndex) {
+      column = columnIndex;
       isChangeFine = isStyleChange;
       return true;
     }
