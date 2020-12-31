@@ -22,6 +22,8 @@
   - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) add plugin menu - fix override plugin menu styles on mobile
 - `inner-rce`
   - [#1932](https://github.com/wix-incubator/rich-content/pull/1932) disable footer toolbar when inner rce is in focus
+- `gallery`
+  - [#1935](https://github.com/wix-incubator/rich-content/pull/1935) disable progress in mobile native loader
 
 </details>
 <hr/>
