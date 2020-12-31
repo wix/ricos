@@ -98,7 +98,7 @@ function fixBrokenInnerRicosStates(newEditorState: EditorState, editorState: Edi
     newEditorState: EditorState.createWithContent(
       convertFromRaw(convertToRaw(newEditorState.getCurrentContent()))
     ),
-    undoAgain: shouldUndoAgain,
+    shouldUndoAgain,
   };
 }
 
@@ -126,7 +126,7 @@ function handleAccordionEntity(currentData, newData) {
   const { changedPairIndex, item } = getChangedAccordionPairIndex(currentPairs, newPairs);
   if (changedPairIndex > -1) {
     if (item) {
-      const { newEditorState, undoAgain: shouldUndoAgain } = fixBrokenInnerRicosStates(
+      const { newEditorState, shouldUndoAgain } = fixBrokenInnerRicosStates(
         newPairs[changedPairIndex][item],
         currentPairs[changedPairIndex][item]
       );
@@ -145,19 +145,24 @@ function handleAccordionEntity(currentData, newData) {
 
 // check table row's columns for a changed column.
 function checkColumns(newRow, currentRow) {
-  return Object.keys(newRow).find(columnKey => {
-    const newColumn = newRow[columnKey].content;
-    const currentColumn = currentRow[columnKey].content;
-    if (newColumn.getCurrentContent() !== currentColumn.getCurrentContent()) {
+  let isStyleChange = false;
+  const column = Object.keys(newRow).find(columnKey => {
+    const { content: newContent, ...newStyles } = newRow[columnKey];
+    const { content: currentContent, ...currentStyles } = currentRow[columnKey];
+    if (newContent.getCurrentContent() !== currentContent.getCurrentContent()) {
+      return true;
+    } else if (!isEqual(newStyles, currentStyles)) {
+      isStyleChange = true;
       return true;
     }
     return false;
   });
+  return { column, isStyleChange };
 }
 
 // looks for a changed cell in the new content, if there is returns it's indices.
 function getChangedTableCellIndex(newRows, currentRows) {
-  let isDeletion = false;
+  let shouldCheckInnerEditorState = true;
   let column;
   const row = Object.keys(newRows).find(rowKey => {
     const currentRow = currentRows[rowKey].columns;
@@ -165,16 +170,17 @@ function getChangedTableCellIndex(newRows, currentRows) {
     const newColumnsArr = Object.keys(newRow);
     const currentColumnsArr = Object.keys(currentRow);
     if (!currentRow || newColumnsArr.length !== currentColumnsArr.length) {
-      isDeletion = true;
+      shouldCheckInnerEditorState = false;
       return true;
     }
-    column = checkColumns(newRow, currentRow);
+    const { column, isStyleChange } = checkColumns(newRow, currentRow);
     if (column) {
+      shouldCheckInnerEditorState = !isStyleChange;
       return true;
     }
     return false;
   });
-  return { row, column, isDeletion };
+  return { row, column, shouldCheckInnerEditorState };
 }
 
 function handleTableEntity(currentData, newData) {
@@ -194,14 +200,16 @@ function handleTableEntity(currentData, newData) {
     };
   }
 
-  const { row, column, isDeletion } = getChangedTableCellIndex(newRows, currentRows);
-  if (isDeletion) {
+  const { row, column, shouldCheckInnerEditorState } = getChangedTableCellIndex(
+    newRows,
+    currentRows
+  );
+  if (!shouldCheckInnerEditorState) {
     return {
       fixedData: { ...newData },
     };
-  }
-  if (row && column) {
-    const { newEditorState, undoAgain: shouldUndoAgain } = fixBrokenInnerRicosStates(
+  } else if (row && column) {
+    const { newEditorState, shouldUndoAgain } = fixBrokenInnerRicosStates(
       newRows[row].columns[column].content,
       currentRows[row].columns[column].content
     );
@@ -293,6 +301,7 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
           return true;
         }
       }
+      return false;
     }
     return true;
   });
