@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#1934](https://github.com/wix/ricos/pull/1934) Mobile UI fix
 
 </details>
 <hr/>
