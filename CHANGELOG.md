@@ -17,6 +17,7 @@
     Click to see more.
   </summary>
 
+## 8.11.2 (Dec 31, 2020)
 ### :bug: Bug Fix
 - `vertical-embed`
   - [#1934](https://github.com/wix/ricos/pull/1934) Mobile UI fix
