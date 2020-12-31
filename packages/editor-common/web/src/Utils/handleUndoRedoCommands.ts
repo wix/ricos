@@ -151,7 +151,7 @@ function checkColumns(newRow, currentRow) {
     const { content: currentContent, ...currentStyles } = currentRow[columnKey];
     if (newContent.getCurrentContent() !== currentContent.getCurrentContent()) {
       return true;
-    } else if (!isEqual(newStyles, currentStyles)) {
+    } else if (JSON.stringify(newStyles) !== JSON.stringify(currentStyles)) {
       isStyleChange = true;
       return true;
     }
@@ -162,25 +162,23 @@ function checkColumns(newRow, currentRow) {
 
 // looks for a changed cell in the new content, if there is returns it's indices.
 function getChangedTableCellIndex(newRows, currentRows) {
-  let shouldCheckInnerEditorState = true;
+  let isChangeFine;
   let column;
   const row = Object.keys(newRows).find(rowKey => {
     const currentRow = currentRows[rowKey].columns;
     const newRow = newRows[rowKey].columns;
-    const newColumnsArr = Object.keys(newRow);
-    const currentColumnsArr = Object.keys(currentRow);
-    if (!currentRow || newColumnsArr.length !== currentColumnsArr.length) {
-      shouldCheckInnerEditorState = false;
+    if (!currentRow || Object.keys(newRow).length !== Object.keys(currentRow).length) {
+      isChangeFine = true;
       return true;
     }
     const { column, isStyleChange } = checkColumns(newRow, currentRow);
     if (column) {
-      shouldCheckInnerEditorState = !isStyleChange;
+      isChangeFine = isStyleChange;
       return true;
     }
     return false;
   });
-  return { row, column, shouldCheckInnerEditorState };
+  return { row, column, isChangeFine };
 }
 
 function handleTableEntity(currentData, newData) {
@@ -200,15 +198,13 @@ function handleTableEntity(currentData, newData) {
     };
   }
 
-  const { row, column, shouldCheckInnerEditorState } = getChangedTableCellIndex(
-    newRows,
-    currentRows
-  );
-  if (!shouldCheckInnerEditorState) {
+  const { row, column, isChangeFine } = getChangedTableCellIndex(newRows, currentRows);
+  if (isChangeFine) {
     return {
       fixedData: { ...newData },
     };
-  } else if (row && column) {
+  }
+  if (row && column) {
     const { newEditorState, shouldUndoAgain } = fixBrokenInnerRicosStates(
       newRows[row].columns[column].content,
       currentRows[row].columns[column].content
