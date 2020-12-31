@@ -40,19 +40,19 @@ function applyActionForGalleryItems(currentItems, newItems) {
 function getChangedAccordionPairIndex(currentPairs, newPairs) {
   let hasOrderChanged = false;
   let isTitle = false;
-  const changedPairIndex = newPairs.findIndex((pair, index) => {
-    const { key } = pair;
+  const changedPairIndex = newPairs.findIndex((newPair, index) => {
+    const { key, title: newTitle, content: newContent } = newPair;
     const currentPair = currentPairs[index];
     if (currentPair.key !== key) {
       hasOrderChanged = true;
       return true;
     }
-    const { title, content } = currentPair;
-    if (title.getCurrentContent() !== pair.title.getCurrentContent()) {
+    const { title: currentTitle, content: currentContent } = currentPair;
+    if (currentTitle.getCurrentContent() !== newTitle.getCurrentContent()) {
       isTitle = true;
       return true;
     }
-    return content.getCurrentContent() !== pair.content.getCurrentContent();
+    return currentContent.getCurrentContent() !== newContent.getCurrentContent();
   });
   return { changedPairIndex, hasOrderChanged, isTitle };
 }
