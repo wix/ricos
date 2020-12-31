@@ -214,7 +214,7 @@ class TableComponent extends React.Component {
   };
 
   updateComponentData1 = data =>
-    this.props.store.set('componentData', { ...data }, this.props.block.getKey());
+    this.props.store.update('componentData', { ...data }, this.props.block.getKey());
 
   onResizeCol = columnsRefs =>
     this.table.setColWidthAfterResize(columnsRefs, this.tableRef.current.offsetWidth);
