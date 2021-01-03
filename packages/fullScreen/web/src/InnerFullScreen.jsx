@@ -9,11 +9,6 @@ import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-it
 
 const { ProGallery } = require('pro-gallery');
 
-const navArrowsMap = {
-  left: arrowLeft,
-  right: arrowRight,
-};
-
 export default class InnerFullscreen extends Component {
   constructor(props) {
     super(props);
@@ -150,9 +145,18 @@ export default class InnerFullscreen extends Component {
     );
   };
 
-  renderArrows = direction => {
+  renderArrow = Icon => {
     const { iconsColor, backgroundColor } = this.props;
-    return <div style={{ ...iconsColor, ...backgroundColor }}> {navArrowsMap[direction]()} </div>;
+    return (
+      <div id="xxxxxxxxxxx" style={{ ...iconsColor, ...backgroundColor, backgroundColor: 'red' }}>
+        <Icon />
+      </div>
+    );
+  };
+
+  arrowRenderers = {
+    left: this.renderArrow(arrowLeft),
+    right: this.renderArrow(arrowRight),
   };
 
   render() {
@@ -191,7 +195,7 @@ export default class InnerFullscreen extends Component {
             slideshowInfoSize,
           }}
           customSlideshowInfoRenderer={this.infoElement}
-          customNavArrowsRenderer={this.renderArrows}
+          customNavArrowsRenderer={this.arrowRenderers}
         />
       </div>
     );
