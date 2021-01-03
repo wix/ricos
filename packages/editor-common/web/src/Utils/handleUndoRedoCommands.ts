@@ -182,7 +182,7 @@ function handleTableEntity(currentData, newData) {
   const { rows: newRows, ...newConfig } = newData.config;
   const { rows: currentRows, ...currentConfig } = currentData.config;
 
-  // check if the config changed of a row has been added\deleted
+  // check if the config changed or a row has been added\deleted
   if (
     !isEqual(newConfig, currentConfig) ||
     Object.keys(newRows).length !== Object.keys(currentRows).length
