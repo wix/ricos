@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8o3ll",
+            "key": "9ba4o",
             "ricosText": {
               "decorations": [],
               "text": "link me to section"
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "65aln",
+        "key": "4pl9b",
         "ricosParagraph": {}
       },
       {
@@ -22,7 +22,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "c5r16",
+            "key": "7ikd2",
             "ricosText": {
               "decorations": [
                 {
@@ -40,7 +40,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "76gid",
+        "key": "8cr62",
         "ricosParagraph": {}
       },
       {
@@ -48,7 +48,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4g6qr",
+            "key": "5c3o",
             "ricosText": {
               "decorations": [],
               "text": "my paragraph (regular text)"
@@ -56,7 +56,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "51gi7",
+        "key": "if3t",
         "ricosParagraph": {}
       },
       {
@@ -64,7 +64,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1b2hu",
+            "key": "fe4g1",
             "ricosText": {
               "decorations": [],
               "text": "my header 1"
@@ -82,7 +82,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e5q69",
+            "key": "7amv1",
             "ricosText": {
               "decorations": [],
               "text": "my header 2"
@@ -100,7 +100,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "a9is2",
+            "key": "bg1ce",
             "ricosText": {
               "decorations": [],
               "text": "my code block"
@@ -118,7 +118,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "5uojv",
+                "key": "ajld3",
                 "ricosText": {
                   "decorations": [],
                   "text": "my quote"
@@ -126,7 +126,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "17dbc",
+            "key": "fvk68",
             "ricosParagraph": {}
           }
         ],
@@ -136,7 +136,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cssll",
+        "key": "dtn4n",
         "ricosParagraph": {}
       },
       {
@@ -152,6 +152,8 @@
           },
           "src": {
             "id": "a466b258c6b5e2096fa546c86aae8fa2",
+            "originalFileName": "8bb438_eeef61d83253480ab7bbdb07692b4c90.jpg",
+            "fileName": "8bb438_eeef61d83253480ab7bbdb07692b4c90.jpg",
             "width": 5494,
             "height": 3840
           }
@@ -160,7 +162,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ar19m",
+        "key": "aam2j",
         "ricosParagraph": {}
       },
       {
@@ -172,7 +174,8 @@
             {
               "metadata": {
                 "height": 4645,
-                "width": 3484
+                "width": 3484,
+                "type": "image"
               },
               "itemId": "3337a427b2e877ab39bf116fcb3f01ea",
               "url": "8bb438_a74f09cd4425418296d417ce91f589cd.jpg"
@@ -180,7 +183,8 @@
             {
               "metadata": {
                 "height": 1280,
-                "width": 1920
+                "width": 1920,
+                "type": "image"
               },
               "itemId": "15f407e0947a3680a2261a41cb6abbb6",
               "url": "8bb438_b2d862605f684658926e6ee05e954880.jpg"
@@ -188,7 +192,8 @@
             {
               "metadata": {
                 "height": 1922,
-                "width": 1920
+                "width": 1920,
+                "type": "image"
               },
               "itemId": "a327950f89cc4994f34a0cd0d4a71473",
               "url": "8bb438_6a7159be0f944dde9098fe566bf22831.jpg"
@@ -213,11 +218,18 @@
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false
+            "allowDownload": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true,
+            "showVideoPlayButton": true,
+            "videoPlay": "onClick"
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -226,7 +238,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "csru6",
+        "key": "892vf",
         "ricosParagraph": {}
       },
       {
@@ -235,13 +247,33 @@
         "key": "2chnt",
         "ricosVideo": {
           "url": "https://www.youtube.com/watch?v=u3ltZmI5LQw",
-          "config": {}
+          "config": {
+            "size": "SMALL",
+            "alignment": "CENTER"
+          },
+          "tempData": false,
+          "metadata": {
+            "authorName": "Wix.com",
+            "width": 480,
+            "thumbnailUrl": "https://i.ytimg.com/vi/_zuIxexRrtk/hqdefault.jpg",
+            "thumbnailWidth": 480,
+            "providerUrl": "https://www.youtube.com/",
+            "type": "video",
+            "height": 270,
+            "authorUrl": "https://www.youtube.com/user/Wix",
+            "version": "1.0",
+            "providerName": "YouTube",
+            "thumbnailHeight": 360,
+            "title": "How to Build a Wix Website for Your Business | James Veitch",
+            "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/_zuIxexRrtk?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+            "videoUrl": "https://youtu.be/_zuIxexRrtk"
+          }
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2pkka",
+        "key": "e643v",
         "ricosParagraph": {}
       },
       {
@@ -258,7 +290,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "a7e7",
+        "key": "55uka",
         "ricosParagraph": {}
       },
       {
@@ -269,7 +301,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ait5t",
+        "key": "3oqk5",
         "ricosParagraph": {}
       },
       {
@@ -280,7 +312,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "20mgh",
+        "key": "fbsb7",
         "ricosParagraph": {}
       },
       {
@@ -303,7 +335,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "alp4i",
+        "key": "3kb5n",
         "ricosParagraph": {}
       },
       {
@@ -323,17 +355,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7kuip",
+        "key": "ebo2c",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 895000000
+      "seconds": 1609664139,
+      "nanos": 788000000
     }
   },
   "selection": {
-    "anchorNode": "65aln"
+    "anchorNode": "4pl9b"
   },
   "version": "7.16.3"
 }

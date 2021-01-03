@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ed2p1",
+            "key": "aqrir",
             "ricosText": {
               "decorations": [],
               "text": "I am text without alignment"
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "39ctj",
+        "key": "ac341",
         "ricosParagraph": {
           "textAlignment": "LEFT"
         }
@@ -24,7 +24,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6hb02",
+            "key": "fsac7",
             "ricosText": {
               "decorations": [],
               "text": "I am text with left alignment"
@@ -32,7 +32,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "dc98s",
+        "key": "au6gj",
         "ricosParagraph": {
           "textAlignment": "LEFT"
         }
@@ -42,7 +42,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3lknt",
+            "key": "9f6lh",
             "ricosText": {
               "decorations": [],
               "text": "I am text with center alignment"
@@ -50,7 +50,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "a8c1o",
+        "key": "corqb",
         "ricosParagraph": {
           "textAlignment": "CENTER"
         }
@@ -60,7 +60,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3861f",
+            "key": "25qas",
             "ricosText": {
               "decorations": [],
               "text": "I am text with right alignment"
@@ -68,7 +68,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "bsq34",
+        "key": "86tfp",
         "ricosParagraph": {
           "textAlignment": "RIGHT"
         }
@@ -78,7 +78,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "eh48a",
+            "key": "4l9or",
             "ricosText": {
               "decorations": [],
               "text": "I am text with justify alignment"
@@ -86,19 +86,19 @@
           }
         ],
         "type": "paragraph",
-        "key": "f0smk",
+        "key": "fojr8",
         "ricosParagraph": {
           "textAlignment": "JUSTIFY"
         }
       }
     ],
     "lastEdited": {
-      "seconds": 1609345638,
-      "nanos": 85000000
+      "seconds": 1609664139,
+      "nanos": 938000000
     }
   },
   "selection": {
-    "anchorNode": "39ctj"
+    "anchorNode": "ac341"
   },
   "version": "6.6.1"
 }

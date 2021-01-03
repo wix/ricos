@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "a7ugd",
+            "key": "6uoms",
             "ricosText": {
               "decorations": [],
               "text": "bla bla bla"
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "rf75",
+        "key": "9q63v",
         "ricosParagraph": {}
       },
       {
@@ -35,7 +35,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4aq81",
+            "key": "1e4qt",
             "ricosText": {
               "decorations": [],
               "text": "Wide embed. In mobile full width. In desktop 740px "
@@ -43,7 +43,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "29jc1",
+        "key": "fs0c4",
         "ricosParagraph": {}
       },
       {
@@ -62,19 +62,19 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4ehvk",
+        "key": "17cdj",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f74vj",
+        "key": "7ia72",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e3qku",
+        "key": "e6jlv",
         "ricosParagraph": {}
       },
       {
@@ -93,29 +93,29 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5h270",
+        "key": "flt7a",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2phgv",
+        "key": "bhuf9",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "aap8r",
+        "key": "clu3v",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 956000000
+      "seconds": 1609664139,
+      "nanos": 866000000
     }
   },
   "selection": {
-    "anchorNode": "rf75"
+    "anchorNode": "9q63v"
   },
   "version": "7.1.5"
 }

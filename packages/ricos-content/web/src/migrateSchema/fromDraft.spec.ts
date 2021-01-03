@@ -4,13 +4,22 @@ import { MigrateSchema } from '.';
 import { compare } from '../comparision/compare';
 
 import fixture from '../../../../../e2e/tests/fixtures/intro.json';
+import complexFixture from '../../../../../e2e/tests/fixtures/migration-content.json';
 import { getTextNodes } from './getTextNodes';
-const ricosFixture = require('./migratedFixtures/intro.json');
+import ricosFixture from './migratedFixtures/intro.json';
+import complexRicosFixture from './migratedFixtures/migration-content.json';
+import { RicosContent } from 'ricos-schema';
 
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
   it('should migrate intro fixture', () => {
-    expect(compare(MigrateSchema.fromDraft(fixture), ricosFixture)).toEqual({});
+    expect(compare(MigrateSchema.fromDraft(fixture), ricosFixture as RicosContent)).toEqual({});
+  });
+
+  it('should migrate complex fixture', () => {
+    expect(
+      compare(MigrateSchema.fromDraft(complexFixture), complexRicosFixture as RicosContent)
+    ).toEqual({});
   });
 
   it('should overlap styles', () => {

@@ -4,30 +4,28 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e6t2k",
-        "ricosParagraph": {
-          "textAlignment": "JUSTIFY"
-        }
+        "key": "3bm71",
+        "ricosParagraph": {}
       },
       {
         "nodes": [],
-        "type": "ricos_link_button",
-        "key": "aj91j"
+        "type": "ricos_table",
+        "key": "f5b1i"
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f2ra2",
+        "key": "72ier",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
       "seconds": 1609664139,
-      "nanos": 884000000
+      "nanos": 934000000
     }
   },
   "selection": {
-    "anchorNode": "e6t2k"
+    "anchorNode": "3bm71"
   },
-  "version": "7.3.5"
+  "version": "8.1.1"
 }

@@ -4,19 +4,19 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4nams",
+        "key": "a06bo",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9rkq4",
+        "key": "fquvj",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cba82",
+        "key": "69i8o",
         "ricosParagraph": {}
       },
       {
@@ -24,7 +24,6 @@
         "type": "ricos_vertical_embed",
         "key": "cr0lc",
         "ricosVerticalEmbed": {
-          "type": "PRODUCT",
           "selectedProduct": {
             "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",
             "name": "I'm a product",
@@ -37,17 +36,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2gise",
+        "key": "5ts5j",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345638,
-      "nanos": 100000000
+      "seconds": 1609664139,
+      "nanos": 945000000
     }
   },
   "selection": {
-    "anchorNode": "4nams"
+    "anchorNode": "a06bo"
   },
   "version": "8.3.0"
 }

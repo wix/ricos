@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "62p15",
+            "key": "2kkbu",
             "ricosText": {
               "decorations": [],
               "text": "wqeqweqweqw"
@@ -14,13 +14,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "5d34n",
+        "key": "2e00a",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c90ff",
+        "key": "ekhll",
         "ricosParagraph": {}
       },
       {
@@ -78,11 +78,16 @@
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false
+            "allowDownload": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -91,17 +96,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8gmtm",
+        "key": "6loqd",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 943000000
+      "seconds": 1609664139,
+      "nanos": 844000000
     }
   },
   "selection": {
-    "anchorNode": "5d34n"
+    "anchorNode": "2e00a"
   },
   "version": "5.9.9"
 }

@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "plugin_spoiler.proto";
+
 message ImageLink {    
     string url = 1 [required = true];
     string target = 2;
@@ -27,6 +29,8 @@ message ImageConfig {
     bool show_description = 4;
     string anchor = 5;
     ImageLink link = 6;
+    RicosSpoiler spoiler = 7;
+    bool disableExpand = 8;
 }
 
 message ImageSource {

@@ -11,11 +11,6 @@ declare module 'postcss-rtl';
 declare module 'postcss-exclude-files';
 declare module 'rollup-plugin-babel';
 declare module 'deep-freeze';
-declare module 'to-constant-case' {
-  function toConstantCase(string: string): string;
-  export default toConstantCase;
-}
-declare module 'to-camel-case' {
-  function toCamelCase(string: string): string;
-  export default toCamelCase;
+declare module 'to-*-case' {
+  export default function(string: string): string;
 }

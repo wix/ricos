@@ -12,12 +12,25 @@ import {
   Modifier,
 } from 'wix-rich-content-editor-common';
 import { FROM_RICOS_ENTITY_TYPE_MAP, NodeType, BlockType } from './consts';
-import { DraftBlockType } from 'draft-js';
+import { DraftBlockType, RawDraftContentBlock } from 'draft-js';
+import { merge } from 'lodash';
+import toSlugCase from 'to-slug-case';
 
 interface DecorationDescriptor extends RicosDecoration {
   start: number;
   end: number;
 }
+
+const splitColorDecoration = (decorations: DecorationDescriptor[]): DecorationDescriptor[] =>
+  decorations.flatMap(({ ricosColor, ...decorationProps }) => {
+    const { foreground, background } = ricosColor || {};
+    return [foreground && { FG: foreground }, background && { BG: background }]
+      .filter(x => x)
+      .map(type => ({
+        ...decorationProps,
+        type: JSON.stringify(type),
+      }));
+  });
 
 export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   const {
@@ -74,7 +87,7 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
     const paragraph: RicosNode = getParagraphNode(node);
     parseTextNodes(paragraph);
 
-    addTextBlock(editorState, { text: node.text, key: node.key, type: BlockType.Blockquote });
+    // addTextBlock(editorState, { text: node.text, key: node.key, type: BlockType.Blockquote });
   };
 
   // const parseCodeNode = (node: RicosNode) => ({
@@ -178,18 +191,15 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
       anchorOffset: decoration.start,
       focusOffset: decoration.end,
     });
-    let type = decoration.type;
-    if (decoration.ricosColor) {
-      type = JSON.stringify({
-        [type]: decoration.ricosColor[type === 'FG' ? 'foreground' : 'background'],
-      });
-    }
-    return Modifier.applyInlineStyle(contentState, selection, type);
+    return Modifier.applyInlineStyle(contentState, selection, decoration.type);
   };
 
   const parseTextNodes = (node: RicosNode, blockType: DraftBlockType) => {
     let length = 0;
-    const parsed = node.nodes.reduce<{ text: string; decorations: DecorationDescriptor[] }>(
+    const { text, decorations } = node.nodes.reduce<{
+      text: string;
+      decorations: DecorationDescriptor[];
+    }>(
       (accNode, currNode) => {
         accNode.text += currNode.ricosText?.text;
         const decorations = currNode.ricosText?.decorations?.map(decoration => ({
@@ -205,9 +215,26 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
       },
       { text: '', decorations: [] }
     );
-    editorState = addTextBlock(editorState, { key: node.key, type: blockType, text: parsed.text });
+    const { textAlignment, dynamicStyles } = node.ricosParagraph || {};
+    const data = Object.assign(
+      {},
+      textAlignment ? { textAlignment: textAlignment.toString().toLowerCase() } : undefined,
+      dynamicStyles
+        ? {
+            dynamicStyles: Object.fromEntries(
+              Object.entries(dynamicStyles).map(([key, value]) => [toSlugCase(key), value])
+            ),
+          }
+        : undefined
+    );
+    editorState = addTextBlock(editorState, {
+      key: node.key,
+      type: blockType,
+      text,
+      data,
+    });
     const contentState = editorState.getCurrentContent();
-    const newContentState = parsed.decorations.reduce(
+    const newContentState = splitColorDecoration(decorations).reduce(
       (accContentState, decoration) => applyDecoration(accContentState, node.key, decoration),
       contentState
     );
@@ -223,14 +250,18 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
 
 const addTextBlock = (
   editorState: EditorState,
-  blockProps?: { key?: string; type?: DraftBlockType; text?: string }
+  blockProps?: Partial<RawDraftContentBlock>
 ): EditorState => {
-  const newBlock = new ContentBlock({
-    key: genKey(),
-    type: BlockType.Unstyled,
-    text: '',
-    ...blockProps,
-  });
+  const newBlock = new ContentBlock(
+    merge(
+      {
+        key: genKey(),
+        type: BlockType.Unstyled,
+        text: '',
+      },
+      blockProps
+    )
+  );
 
   const contentState = editorState.getCurrentContent();
   const newBlockMap = contentState.getBlockMap().set(newBlock.getKey(), newBlock);

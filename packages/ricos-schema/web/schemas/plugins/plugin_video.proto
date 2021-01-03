@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "plugin_spoiler.proto";
+
 message VideoConfig {
   enum Size {
     CONTENT = 0;
@@ -16,6 +18,24 @@ message VideoConfig {
   Size size = 1;
   Alignment alignment = 2;
   string textWrap = 3;
+  RicosSpoiler spoiler = 4;
+}
+
+message VideoMetadata {
+  string authorName = 1;
+  int32 width = 2;
+  string thumbnailUrl = 3;
+  int32 thumbnailWidth = 4;
+  string providerUrl = 5;
+  string type = 6;
+  int32 height = 7;
+  string authorUrl = 8;
+  string version = 9;
+  string providerName = 10;
+  int32 thumbnailHeight = 11;
+  string title = 12;
+  string html = 13;
+  string videoUrl = 14;
 }
 
 message VideoSource {
@@ -36,4 +56,6 @@ message RicosVideo {
   }
   VideoConfig config = 3;
   bool is_custom_video = 4;
+  bool tempData = 5;
+  VideoMetadata metadata = 6;
 }

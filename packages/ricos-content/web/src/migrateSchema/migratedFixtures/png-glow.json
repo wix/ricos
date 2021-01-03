@@ -4,13 +4,13 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cr8rm",
+        "key": "dvjal",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9hsoo",
+        "key": "2arm7",
         "ricosParagraph": {}
       },
       {
@@ -27,6 +27,8 @@
             }
           },
           "src": {
+            "originalFileName": "e32fd518921d4fc2a430ff518109eccd.png",
+            "fileName": "e32fd518921d4fc2a430ff518109eccd.png",
             "width": 1272,
             "height": 803
           },
@@ -38,13 +40,13 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bvn47",
+        "key": "7rihh",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4isa8",
+        "key": "5na4k",
         "ricosParagraph": {}
       },
       {
@@ -121,8 +123,8 @@
             "cropOnlyFill": false
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -131,7 +133,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "37cc9",
+        "key": "dqmpv",
         "ricosParagraph": {}
       },
       {
@@ -147,6 +149,8 @@
           },
           "src": {
             "id": "816f7f_9dfea0e10bee4e13a6f8e7037624de3e~mv2.png",
+            "originalFileName": "816f7f_9dfea0e10bee4e13a6f8e7037624de3e~mv2.png",
+            "fileName": "816f7f_9dfea0e10bee4e13a6f8e7037624de3e~mv2.png",
             "width": 600,
             "height": 315
           }
@@ -155,23 +159,23 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1ps9q",
+        "key": "21hd7",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4q4i0",
+        "key": "j6ub",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345638,
-      "nanos": 73000000
+      "seconds": 1609664139,
+      "nanos": 925000000
     }
   },
   "selection": {
-    "anchorNode": "cr8rm"
+    "anchorNode": "dvjal"
   },
   "version": "6.8.2"
 }

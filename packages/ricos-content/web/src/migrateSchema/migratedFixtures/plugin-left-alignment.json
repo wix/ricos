@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "89toh",
+            "key": "f7b4n",
             "ricosText": {
               "decorations": [],
               "text": "1. Image aligned to left"
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "c05h",
+        "key": "f1p93",
         "ricosParagraph": {}
       },
       {
@@ -30,6 +30,8 @@
           },
           "src": {
             "id": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "originalFileName": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "fileName": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
             "width": 3934,
             "height": 3445
           }
@@ -38,73 +40,73 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "epha0",
+        "key": "37glq",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dre6b",
+        "key": "6i0bl",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7g4a",
+        "key": "b1019",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dbji4",
+        "key": "b37as",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8tfee",
+        "key": "40p8g",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4lmcg",
+        "key": "b1thg",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bmtbu",
+        "key": "ej096",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1ipq5",
+        "key": "2vh38",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2gf0r",
+        "key": "35ivh",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9rejv",
+        "key": "4b5g4",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2t5mj",
+        "key": "2l4fo",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6pue7",
+        "key": "ei5ph",
         "ricosParagraph": {}
       },
       {
@@ -112,7 +114,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6fq73",
+            "key": "5mrn5",
             "ricosText": {
               "decorations": [],
               "text": "2. Gallery aligned to left"
@@ -120,7 +122,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "afjdr",
+        "key": "4hoah",
         "ricosParagraph": {}
       },
       {
@@ -174,11 +176,15 @@
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false
+            "allowDownload": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "thumbnailSize": 120,
+            "gotStyleParams": true
           },
           "config": {
-            "alignment": "left",
-            "size": "small",
+            "alignment": "LEFT",
+            "size": "SMALL",
             "layout": "small",
             "spacing": 0
           }
@@ -187,37 +193,37 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f4gfm",
+        "key": "ab0g1",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "82g70",
+        "key": "6flo3",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "boc7p",
+        "key": "bfads",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e9dpp",
+        "key": "27tml",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7t9bm",
+        "key": "fke7e",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e4ani",
+        "key": "6fntt",
         "ricosParagraph": {}
       },
       {
@@ -225,7 +231,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3q58q",
+            "key": "1oqh0",
             "ricosText": {
               "decorations": [],
               "text": "3. HTML aligned to left"
@@ -233,7 +239,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "bgt4e",
+        "key": "ihmv",
         "ricosParagraph": {}
       },
       {
@@ -252,133 +258,133 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d4ovk",
+        "key": "c7r4h",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4l6dl",
+        "key": "63s5j",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5u1an",
+        "key": "hk2t",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "834bj",
+        "key": "2t0ds",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2chcn",
+        "key": "f2upj",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8uvec",
+        "key": "27ocp",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "aq70m",
+        "key": "9omsc",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8l5fr",
+        "key": "84oha",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b0f67",
+        "key": "asn9l",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ci1bh",
+        "key": "2v0mo",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3kaik",
+        "key": "7j94r",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cpt36",
+        "key": "67oj2",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c2no8",
+        "key": "40pc",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "frakf",
+        "key": "90pr3",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1pa2s",
+        "key": "927uu",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "23d63",
+        "key": "2c4ss",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cutfd",
+        "key": "9q932",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "70lp5",
+        "key": "dtl4s",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8djdm",
+        "key": "c52mo",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "50isb",
+        "key": "4mmvn",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5k81v",
+        "key": "84tuu",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bger1",
+        "key": "c0gu0",
         "ricosParagraph": {}
       },
       {
@@ -386,7 +392,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dfoju",
+            "key": "8amv4",
             "ricosText": {
               "decorations": [],
               "text": "4. Youtube video aligned to left"
@@ -394,7 +400,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "28o7d",
+        "key": "4u2vk",
         "ricosParagraph": {}
       },
       {
@@ -403,62 +409,66 @@
         "key": "99kup",
         "ricosVideo": {
           "url": "https://www.youtube.com/watch?v=7jIA3eFtSOM",
-          "config": {},
-          "isCustomVideo": false
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT"
+          },
+          "isCustomVideo": false,
+          "metadata": {}
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "chv10",
+        "key": "a2nok",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4801k",
+        "key": "27aic",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d9gsg",
+        "key": "6g79l",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1hbtd",
+        "key": "36apu",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6vs49",
+        "key": "c3q73",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "akmd5",
+        "key": "9hobq",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bgfui",
+        "key": "daqsh",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c25dl",
+        "key": "5hcka",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4kf84",
+        "key": "6mf6t",
         "ricosParagraph": {}
       },
       {
@@ -466,7 +476,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1n21u",
+            "key": "csk11",
             "ricosText": {
               "decorations": [],
               "text": "5. Vimeo video aligned to left"
@@ -474,7 +484,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "1no4h",
+        "key": "335us",
         "ricosParagraph": {}
       },
       {
@@ -483,62 +493,66 @@
         "key": "a3147",
         "ricosVideo": {
           "url": "https://vimeo.com/298341839",
-          "config": {},
-          "isCustomVideo": false
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT"
+          },
+          "isCustomVideo": false,
+          "metadata": {}
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1hq9t",
+        "key": "e4lr6",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4m1sq",
+        "key": "5jdeu",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6gduo",
+        "key": "af0bo",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ccur7",
+        "key": "ettqs",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "a2jec",
+        "key": "9ufol",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6ngl8",
+        "key": "2kmog",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d0jmm",
+        "key": "6gun1",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "74rp9",
+        "key": "5fbgi",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bspns",
+        "key": "eecm9",
         "ricosParagraph": {}
       },
       {
@@ -546,7 +560,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "b7mgn",
+            "key": "b7crh",
             "ricosText": {
               "decorations": [],
               "text": "6. Facebook video aligned to left"
@@ -554,7 +568,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "a226k",
+        "key": "8ufk6",
         "ricosParagraph": {}
       },
       {
@@ -563,98 +577,102 @@
         "key": "5ucd2",
         "ricosVideo": {
           "url": "https://www.facebook.com/wix/videos/971691596505371/",
-          "config": {},
-          "isCustomVideo": false
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT"
+          },
+          "isCustomVideo": false,
+          "metadata": {}
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "68jhe",
+        "key": "5b9h0",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e0amq",
+        "key": "1khjr",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7blv3",
+        "key": "6p7ik",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5er49",
+        "key": "f914t",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2ihge",
+        "key": "1sbtb",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8lckl",
+        "key": "73s87",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "92qug",
+        "key": "cpb73",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8ud2a",
+        "key": "3l191",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "d2tof",
+        "key": "9pj1a",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bts57",
+        "key": "6ict3",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5b7dg",
+        "key": "alka4",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6vi5j",
+        "key": "bbf8s",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c1gd5",
+        "key": "84c7b",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1i4od",
+        "key": "e3qgr",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3r62f",
+        "key": "a5o2p",
         "ricosParagraph": {}
       },
       {
@@ -662,7 +680,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fqsvg",
+            "key": "d1otn",
             "ricosText": {
               "decorations": [],
               "text": "7. Media manager video aligned to left"
@@ -670,7 +688,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "avv75",
+        "key": "d4057",
         "ricosParagraph": {}
       },
       {
@@ -690,61 +708,62 @@
             "size": "SMALL",
             "alignment": "LEFT"
           },
-          "isCustomVideo": true
+          "isCustomVideo": true,
+          "metadata": {}
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7ff08",
+        "key": "970cr",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "cfff0",
+        "key": "3t01o",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3hcgt",
+        "key": "cca4o",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "21hfh",
+        "key": "1jlm5",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "crkh7",
+        "key": "4gdn5",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "mafr",
+        "key": "cogep",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "diiqq",
+        "key": "eqqa4",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "aqm90",
+        "key": "fsr8v",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f1jmh",
+        "key": "bn59d",
         "ricosParagraph": {}
       },
       {
@@ -752,7 +771,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "71v8t",
+            "key": "e7tqf",
             "ricosText": {
               "decorations": [],
               "text": "8. All dividers aligned to left"
@@ -760,13 +779,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "3u7rs",
+        "key": "9lfin",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "33la4",
+        "key": "19de6",
         "ricosParagraph": {}
       },
       {
@@ -785,7 +804,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "37qs2",
+        "key": "7f47j",
         "ricosParagraph": {}
       },
       {
@@ -804,7 +823,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4rbcc",
+        "key": "1qk9c",
         "ricosParagraph": {}
       },
       {
@@ -823,7 +842,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7rnh2",
+        "key": "1poi0",
         "ricosParagraph": {}
       },
       {
@@ -842,17 +861,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f8io5",
+        "key": "c7pal",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345638,
-      "nanos": 65000000
+      "seconds": 1609664139,
+      "nanos": 919000000
     }
   },
   "selection": {
-    "anchorNode": "c05h"
+    "anchorNode": "f1p93"
   },
   "version": "6.6.8"
 }

@@ -7,4 +7,10 @@ message Common {
         CENTER = 2;
         JUSTIFY = 3;
     }
+
+    message DynamicStyles {
+        string lineHeight = 1;
+        string paddingTop = 2;
+        string paddingBottom = 3;
+    }
 }

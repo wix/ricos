@@ -4,7 +4,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "55iq7",
+        "key": "5t9bo",
         "ricosParagraph": {}
       },
       {
@@ -16,7 +16,8 @@
             {
               "metadata": {
                 "height": 4930,
-                "width": 3287
+                "width": 3287,
+                "type": "image"
               },
               "itemId": "4f431d8f88a3e5d3842df5a906fd536f",
               "url": "8bb438_4afd60c9c97d44c8bcd61f1b6080d7e5.jpg"
@@ -24,7 +25,8 @@
             {
               "metadata": {
                 "height": 2124,
-                "width": 3192
+                "width": 3192,
+                "type": "image"
               },
               "itemId": "a78c2fa4a7c95115ca0c6674d07ec937",
               "url": "8bb438_67a68c0652d740bab508f68662acc882.jpg"
@@ -32,7 +34,8 @@
             {
               "metadata": {
                 "height": 3044,
-                "width": 2016
+                "width": 2016,
+                "type": "image"
               },
               "itemId": "1dcb3c6098ce8c0253fe118f2b244b72",
               "url": "8bb438_2b31b324f130433685c160fdba0a66e9.jpg"
@@ -57,11 +60,18 @@
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false
+            "allowDownload": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true,
+            "showVideoPlayButton": true,
+            "videoPlay": "onClick"
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -70,17 +80,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9b74u",
+        "key": "6nbb9",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 942000000
+      "seconds": 1609664139,
+      "nanos": 843000000
     }
   },
   "selection": {
-    "anchorNode": "55iq7"
+    "anchorNode": "5t9bo"
   },
   "version": "7.10.5"
 }

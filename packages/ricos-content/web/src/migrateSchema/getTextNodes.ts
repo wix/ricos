@@ -9,7 +9,7 @@ import {
 import { RicosNode, RicosDecoration } from 'ricos-schema';
 import { NodeType, TO_RICOS_DECORATION_TYPE } from './consts';
 
-import { isEmpty } from 'lodash';
+import { isEmpty, merge } from 'lodash';
 import { getEntity } from './getEntity';
 import { genKey } from 'draft-js';
 
@@ -21,6 +21,14 @@ const removeEmojiEntities = (
   entityMap: RicosEntityMap
 ): RicosEntityRange[] =>
   entityRanges.filter(range => !['EMOJI_TYPE', EMOJI_TYPE].includes(entityMap[range.key].type));
+
+const mergeColorDecorations = (decorations: RicosDecoration[]): RicosDecoration[] => {
+  const colorDecorations = decorations.filter(decoration => decoration.type === RICOS_COLOR_TYPE);
+  const otherDecorations = decorations.filter(decoration => decoration.type !== RICOS_COLOR_TYPE);
+  return colorDecorations.length > 0
+    ? otherDecorations.concat([merge({}, ...colorDecorations)])
+    : otherDecorations;
+};
 
 export const getTextNodes = (
   block: RicosContentBlock,
@@ -49,7 +57,7 @@ export const getTextNodes = (
     let decorations: RicosDecoration[] = [];
 
     const keysDecorations = keys.map(key => getEntity(key, entityMap, keyMapping));
-    const stylesDecorations = styles.map(style => getDecoration(style));
+    const stylesDecorations = mergeColorDecorations(styles.map(style => getDecoration(style)));
     decorations = [...decorations, ...keysDecorations, ...stylesDecorations];
 
     if (!isEmpty(decorations) && textNode.ricosText) {
@@ -71,6 +79,10 @@ export const getTextNodes = (
         decoration.ricosColor = { [type === 'FG' ? 'foreground' : 'background']: value };
       }
     } catch {
+      if (!TO_RICOS_DECORATION_TYPE[style]) {
+        console.log(`ERROR! Unknown decoration type "${style}"!`);
+        process.exit(1);
+      }
       decoration = {
         type: TO_RICOS_DECORATION_TYPE[style],
       };
@@ -121,7 +133,9 @@ export const getTextNodes = (
 
       textNodes.push(
         createTextNode({
-          text: text.slice(numbers[i], numbers[i + 1]),
+          text: Array.from(text)
+            .slice(numbers[i], numbers[i + 1])
+            .join(''),
           styles,
           keys,
         })

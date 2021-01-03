@@ -4,7 +4,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "amgot",
+        "key": "bif84",
         "ricosParagraph": {}
       },
       {
@@ -50,11 +50,16 @@
             "gridStyle": 1,
             "loveButton": false,
             "allowSocial": false,
-            "allowDownload": false
+            "allowDownload": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -63,7 +68,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "bqrap",
+        "key": "78an3",
         "ricosParagraph": {}
       },
       {
@@ -71,7 +76,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "f1nrp",
+            "key": "27lr5",
             "ricosText": {
               "decorations": [],
               "text": "This is a test of the gallery plugin."
@@ -79,13 +84,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "8qimn",
+        "key": "elj68",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5t60o",
+        "key": "3ao81",
         "ricosParagraph": {}
       },
       {
@@ -101,6 +106,8 @@
           },
           "src": {
             "id": "d052fe7e6db2fd246708f8e56ddc3684",
+            "originalFileName": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
+            "fileName": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
             "width": 1621,
             "height": 1081
           }
@@ -109,17 +116,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fes1e",
+        "key": "c311j",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 945000000
+      "seconds": 1609664139,
+      "nanos": 846000000
     }
   },
   "selection": {
-    "anchorNode": "amgot"
+    "anchorNode": "bif84"
   },
   "version": "5.1.1"
 }

@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d72v4",
+            "key": "cqibk",
             "ricosText": {
               "decorations": [],
               "text": "qweqweqweqeqe"
@@ -14,13 +14,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "39aqq",
+        "key": "7n59t",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "5t0nb",
+        "key": "1hs6n",
         "ricosParagraph": {}
       },
       {
@@ -29,24 +29,28 @@
         "key": "dgvqn",
         "ricosVideo": {
           "url": "https://www.facebook.com/facebook/videos/10153231379946729/",
-          "config": {},
-          "isCustomVideo": false
+          "config": {
+            "size": "CONTENT",
+            "alignment": "CENTER"
+          },
+          "isCustomVideo": false,
+          "metadata": {}
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8kice",
+        "key": "5c67f",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 933000000
+      "seconds": 1609664139,
+      "nanos": 831000000
     }
   },
   "selection": {
-    "anchorNode": "39aqq"
+    "anchorNode": "7n59t"
   },
   "version": "6.7.0"
 }

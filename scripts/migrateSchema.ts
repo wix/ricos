@@ -6,7 +6,7 @@ import { RicosContent } from 'ricos-schema';
 import { compare } from 'ricos-content/libs/comparision';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
 const MIGRATED_FIXTURES_PATH = '../packages/ricos-content/web/src/migrateSchema/migratedFixtures';
-const FIXTURES_TO_IGNORE = ['old-image-format'];
+const FIXTURES_TO_IGNORE = ['old-image-format', 'long-post-bad-data'];
 
 const filename = process.argv[2];
 

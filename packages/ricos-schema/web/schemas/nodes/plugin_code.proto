@@ -1,7 +1,8 @@
 syntax = "proto3";
 
-import "../common_enums.proto";
+import "../common.proto";
 
 message RicosCode {
     Common.TextAlignment textAlignment = 1;
+    Common.DynamicStyles dynamicStyles = 2;
 }

@@ -4996,9 +4996,9 @@
   integrity sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
 
 "@types/node@*", "@types/node@>= 8":
-  version "14.14.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.16.tgz#3cc351f8d48101deadfed4c9e4f116048d437b4b"
-  integrity sha512-naXYePhweTi+BMv11TgioE2/FXU4fSl29HAH1ffxVciNsH3rYXjNP2yM8wqmSm7jS20gM8TIklKiTen+1iVncw==
+  version "14.14.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.17.tgz#29fab92f3986c0e379968ad3c2043683d8020dbb"
+  integrity sha512-G0lD1/7qD60TJ/mZmhog76k7NcpLWkPVGgzkRy3CTlnFu4LUQh5v2Wa661z6vnXmD8EQrnALUyf0VRtrACYztw==
 
 "@types/node@^13.7.0":
   version "13.13.38"
@@ -14866,9 +14866,9 @@ image-client-api@1.2218.0:
   integrity sha512-swegnkQGx/qaIiz7skaNXMEipLzBmDd3tuh+zhrvHpum1RK+ZCVoe74CLRWECIYV+DTQNNOluEuXJX+WRasEhQ==
 
 image-client-api@^1.3581.0:
-  version "1.4053.0"
-  resolved "https://registry.yarnpkg.com/image-client-api/-/image-client-api-1.4053.0.tgz#40c6d1552f244eaa4724dd9a3f2e0c37ffeab710"
-  integrity sha512-s/0aFa96OtTb3mbeDFp5TUNXQTc8jthkNvmvnTde521sZsIFCZh07VLAYiZdcshcN28rQ73A3jliJKk/k74ADA==
+  version "1.4054.0"
+  resolved "https://registry.yarnpkg.com/image-client-api/-/image-client-api-1.4054.0.tgz#910b566e58818bc5f29b1e54475faf1049b013dd"
+  integrity sha512-6jH6rYJKqqrchTC6l8PqckhUrdPmipi1b616rZ88xDu3Und/RmqRU3vwrzSwQuUslv7X3iC6aVmmnHbkPiGbQQ==
 
 image-size@^0.7.2:
   version "0.7.5"
@@ -26690,6 +26690,13 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
+to-slug-case@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/to-slug-case/-/to-slug-case-1.0.0.tgz#92acde53471055a33c830719e8eb78387206d813"
+  integrity sha1-kqzeU0cQVaM8gwcZ6Ot4OHIG2BM=
+  dependencies:
+    to-space-case "^1.0.0"
+
 to-snake-case@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/to-snake-case/-/to-snake-case-1.0.0.tgz#ce746913897946019a87e62edfaeaea4c608ab8c"
@@ -26905,9 +26912,9 @@ ts-loader@6.2.2:
     semver "^6.0.0"
 
 ts-loader@^8.0.4:
-  version "8.0.12"
-  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-8.0.12.tgz#1de9f1de65176318c1e6d187bfc496182f8dc2a0"
-  integrity sha512-UIivVfGVJDdwwjgSrbtcL9Nf10c1BWnL1mxAQUVcnhNIn/P9W3nP5v60Z0aBMtc7ZrE11lMmU6+5jSgAXmGaYw==
+  version "8.0.13"
+  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-8.0.13.tgz#2bebeb833570ca46bb9338322a9a29900e988535"
+  integrity sha512-1o1nO6aqouA23d2nlcMSEyPMAWRhnYUU0EQUJSc60E0TUyBNX792RHFYUN1ZM29vhMUNayrsbj2UVdZwKhXCDA==
   dependencies:
     chalk "^2.3.0"
     enhanced-resolve "^4.0.0"
@@ -28616,9 +28623,9 @@ wix-eventually@^2.2.0, wix-eventually@^2.3.0:
     trier-promise "~1.0.1"
 
 wix-redraft@^1.1.2:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/wix-redraft/-/wix-redraft-1.1.5.tgz#34de93b2b25b220bf6a0366cd0de9eb0a2bd6e21"
-  integrity sha512-ni/1BUfsTIcD8QU7bZaFuq583Azubash9P5v6humzcgZi5UOVhmDHBFPr6KLQNyiPaJgmSPAQb78w9QDf/lR8Q==
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/wix-redraft/-/wix-redraft-1.1.6.tgz#8842cdcee16c68f1a82e71d03b4bfc13fa8d2899"
+  integrity sha512-T0LhyOL+MVs0FWYxS6kza9hNnW8ZPZh0ca+Z7LV/Y/HZ7Iomed1nR58hhyKA2pmE0M30YPLc0bAuoWplj1rkyQ==
   dependencies:
     punycode "^1.4.1"
 
@@ -28628,9 +28635,9 @@ wix-statics-parent@*:
   integrity sha512-9q6gnuTjxhGXXrwPSgkAbf2H78QEyCsdnMQKbESt9k4wfNK04jiZ6lZETfOSYBiJiOaIIYKLYNIyFbmRgBcYlw==
 
 wix-style-react@^9.0.0:
-  version "9.60.0"
-  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.60.0.tgz#5d3b1f2cc8ad00d8392c1bd4aecca118e45b320e"
-  integrity sha512-cC53fzGHOLJtatgIFHFT256j7vtZghEe6ZgLoTm8/knQ0DcSmrp3cu9rUjTKHMdxhbHs57x6AZV/xQtT2qaYiw==
+  version "9.60.1"
+  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.60.1.tgz#c1cfcaa620b168c62cfd607ca926828cb7ebf7fa"
+  integrity sha512-mWOOa//MfcYDYivlkja+qfOGI22XPNTAZwDKx0cY+SVpAC7m44DvuV3z3dEu0IqRBhb3bQU69+Ojq2sBMM6YBQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@date-fns/upgrade" "^1.0.3"

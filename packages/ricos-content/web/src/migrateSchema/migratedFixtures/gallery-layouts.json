@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bgp1p",
+            "key": "2emer",
             "ricosText": {
               "decorations": [
                 {
@@ -75,8 +75,8 @@
             "cropOnlyFill": true
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -87,7 +87,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "959he",
+            "key": "aitc5",
             "ricosText": {
               "decorations": [
                 {
@@ -192,11 +192,16 @@
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false
+            "cropOnlyFill": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -207,7 +212,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4s5n5",
+            "key": "28g0b",
             "ricosText": {
               "decorations": [
                 {
@@ -274,11 +279,12 @@
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false
+            "cropOnlyFill": false,
+            "galleryMargin": 0
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -289,7 +295,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4aqkp",
+            "key": "6cu97",
             "ricosText": {
               "decorations": [
                 {
@@ -394,11 +400,16 @@
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false
+            "cropOnlyFill": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -409,7 +420,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "26uqo",
+            "key": "eg2vl",
             "ricosText": {
               "decorations": [
                 {
@@ -483,8 +494,8 @@
             "cropOnlyFill": false
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -495,7 +506,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "60t2s",
+            "key": "cnvqs",
             "ricosText": {
               "decorations": [
                 {
@@ -594,11 +605,16 @@
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false
+            "cropOnlyFill": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -609,7 +625,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bfguh",
+            "key": "ffld7",
             "ricosText": {
               "decorations": [
                 {
@@ -635,7 +651,8 @@
             {
               "metadata": {
                 "height": 2240,
-                "width": 5805
+                "width": 5805,
+                "type": "image"
               },
               "itemId": "11062b_5c2fbd48b5f8492ea693384a5c07a05f~mv2.jpg",
               "url": "11062b_5c2fbd48b5f8492ea693384a5c07a05f~mv2.jpg",
@@ -644,7 +661,8 @@
             {
               "metadata": {
                 "height": 3840,
-                "width": 5760
+                "width": 5760,
+                "type": "image"
               },
               "itemId": "dd7e03deffdd4267b75ef0a60d8510c7.jpg",
               "url": "dd7e03deffdd4267b75ef0a60d8510c7.jpg",
@@ -653,7 +671,8 @@
             {
               "metadata": {
                 "height": 4201,
-                "width": 8607
+                "width": 8607,
+                "type": "image"
               },
               "itemId": "11062b_bb02665196ed487e81cce0838afeded8~mv2.jpg",
               "url": "11062b_bb02665196ed487e81cce0838afeded8~mv2.jpg",
@@ -662,7 +681,8 @@
             {
               "metadata": {
                 "height": 2240,
-                "width": 3360
+                "width": 3360,
+                "type": "image"
               },
               "itemId": "11062b_98eb9802f3554aef955e82eecda2dac2~mv2.jpg",
               "url": "11062b_98eb9802f3554aef955e82eecda2dac2~mv2.jpg",
@@ -671,7 +691,8 @@
             {
               "metadata": {
                 "height": 2978,
-                "width": 4461
+                "width": 4461,
+                "type": "image"
               },
               "itemId": "11062b_4af72a9ecf7a45939c53837a5fde709e~mv2_d_4461_2978_s_4_2.jpg",
               "url": "11062b_4af72a9ecf7a45939c53837a5fde709e~mv2_d_4461_2978_s_4_2.jpg",
@@ -699,17 +720,18 @@
             "cropOnlyFill": false
           },
           "config": {
-            "alignment": "center",
-            "size": "fullWidth",
+            "alignment": "CENTER",
+            "size": "FULL_WIDTH",
             "layout": "small",
-            "spacing": 0
+            "spacing": 0,
+            "disableExpand": false
           }
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8gr82",
+        "key": "e44e5",
         "ricosParagraph": {}
       },
       {
@@ -717,7 +739,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6pg6k",
+            "key": "7rlus",
             "ricosText": {
               "decorations": [
                 {
@@ -780,8 +802,8 @@
             "cropOnlyFill": false
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -792,7 +814,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "42jcn",
+            "key": "4vd4t",
             "ricosText": {
               "decorations": [
                 {
@@ -881,11 +903,16 @@
             "isSlider": false,
             "isColumns": true,
             "isSlideshow": false,
-            "cropOnlyFill": false
+            "cropOnlyFill": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true
           },
           "config": {
-            "alignment": "center",
-            "size": "content",
+            "alignment": "CENTER",
+            "size": "CONTENT",
             "layout": "small",
             "spacing": 0
           }
@@ -894,13 +921,13 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3a582",
+        "key": "ctj0",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 936000000
+      "seconds": 1609664139,
+      "nanos": 836000000
     }
   },
   "selection": {

@@ -1,6 +1,6 @@
 import { RicosEntityMap, RicosContentBlock } from '..';
 import toConstantCase from 'to-constant-case';
-
+import toCamelCase from 'to-camel-case';
 import {
   ANCHOR_TYPE,
   VIDEO_TYPE,
@@ -11,42 +11,54 @@ import {
   VERTICAL_EMBED_TYPE,
   POLL_TYPE,
   MENTION_TYPE,
+  GALLERY_TYPE,
 } from '../consts';
-
 import { TO_RICOS_ENTITY_TYPE_MAP, TO_RICOS_PLUGIN_TYPE_MAP } from './consts';
+import { has } from 'lodash';
 
 const migrateVideoData = data => {
   // src is split into src for objects and url for strings
   if (typeof data.src === 'string') {
     data.url = data.src;
     delete data.src;
-  } else {
-    data.config.size = toConstantCase(data.config.size);
-    data.config.alignment = toConstantCase(data.config.alignment);
+  }
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
+  if (data.metadata) {
+    data.metadata = keysToCamelCase(data.metadata);
   }
 };
 
 const migrateDividerData = data => {
-  data.type = toConstantCase(data.type);
-  data.config.size = toConstantCase(data.config.size);
-  data.config.alignment = toConstantCase(data.config.alignment);
+  has(data, 'type') && (data.type = toConstantCase(data.type));
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };
 
 const migrateImageData = data => {
-  data.config.size = toConstantCase(data.config.size);
-  data.config.alignment = toConstantCase(data.config.alignment);
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
+  has(data, 'src.original_file_name') && (data.src.originalFileName = data.src.original_file_name);
+  has(data, 'src.file_name') && (data.src.fileName = data.src.file_name);
+};
+
+const migrateGalleryData = data => {
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };
 
 const migratePollData = data => {
-  data.config.size = toConstantCase(data.config.size);
-  data.config.alignment = toConstantCase(data.config.alignment);
-  data.layout.poll.type = toConstantCase(data.layout.poll.type);
-  data.layout.poll.direction = toConstantCase(data.layout.poll.direction);
-  data.design.backgroundType = toConstantCase(data.design.backgroundType);
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
+  has(data, 'layout.poll.type') && (data.layout.poll.type = toConstantCase(data.layout.poll.type));
+  has(data, 'layout.poll.direction') &&
+    (data.layout.poll.direction = toConstantCase(data.layout.poll.direction));
+  has(data, 'design.poll.backgroundType') &&
+    (data.design.poll.backgroundType = toConstantCase(data.design.poll.backgroundType));
 };
 
 const migrateVerticalEmbedData = data => {
-  data.type = toConstantCase(data.type);
+  has(data, 'data.type') && (data.type = toConstantCase(data.type));
 };
 
 export const getEntity = (
@@ -85,6 +97,9 @@ export const getEntity = (
     case IMAGE_TYPE_LEGACY:
       migrateImageData(data);
       break;
+    case GALLERY_TYPE:
+      migrateGalleryData(data);
+      break;
     case POLL_TYPE:
       migratePollData(data);
       break;
@@ -98,9 +113,17 @@ export const getEntity = (
 };
 
 export const parseBlockData = (blockData?: RicosContentBlock['data']) => {
-  const { textAlignment } = blockData || {};
+  const { textAlignment, dynamicStyles } = blockData || {};
   return Object.assign(
     {},
-    textAlignment ? { textAlignment: textAlignment.toUpperCase() } : undefined
+    textAlignment ? { textAlignment: textAlignment.toUpperCase() } : undefined,
+    dynamicStyles
+      ? {
+          dynamicStyles: keysToCamelCase(dynamicStyles),
+        }
+      : undefined
   );
 };
+
+const keysToCamelCase = obj =>
+  Object.fromEntries(Object.entries(obj).map(([key, value]) => [toCamelCase(key), value]));

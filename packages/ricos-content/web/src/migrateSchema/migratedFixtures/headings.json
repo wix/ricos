@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "26u47",
+            "key": "b82g5",
             "ricosText": {
               "decorations": [
                 {
@@ -19,7 +19,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5i6f9",
+            "key": "6eqnn",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -35,7 +35,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "c4vg",
+        "key": "e57am",
         "ricosParagraph": {}
       },
       {
@@ -43,17 +43,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fjfqd",
+            "key": "9eej4",
             "ricosText": {
               "decorations": [
+                {
+                  "type": "bold"
+                },
                 {
                   "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
-                },
-                {
-                  "type": "bold"
                 }
               ],
               "text": "Sunday, 23 February 2020 "
@@ -62,20 +62,20 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dijp4",
+            "key": "7oor2",
             "ricosText": {
               "decorations": [
-                {
-                  "type": "ricos_color",
-                  "ricosColor": {
-                    "foreground": "#040404"
-                  }
-                },
                 {
                   "type": "bold"
                 },
                 {
                   "type": "italic"
+                },
+                {
+                  "type": "ricos_color",
+                  "ricosColor": {
+                    "foreground": "#040404"
+                  }
                 }
               ],
               "text": "(Boathouse Restaurant at 9:30am): "
@@ -84,17 +84,17 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "65c30",
+            "key": "745ij",
             "ricosText": {
               "decorations": [
+                {
+                  "type": "italic"
+                },
                 {
                   "type": "ricos_color",
                   "ricosColor": {
                     "foreground": "#040404"
                   }
-                },
-                {
-                  "type": "italic"
                 }
               ],
               "text": "Today's bird walk was led  by Sandra Critelli who is originally from Italy - so you folks can practice your Italian with Sandra's summary:"
@@ -112,7 +112,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ef3oq",
+            "key": "db7tn",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -130,7 +130,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "92i5u",
+            "key": "52h18",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker, siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -146,7 +146,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "7h24e",
+        "key": "cl4fk",
         "ricosParagraph": {}
       },
       {
@@ -154,7 +154,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fmt1c",
+            "key": "1lhao",
             "ricosText": {
               "decorations": [],
               "text": "Intorno  all `isola a sud di ow Bridge c'era inoltre una coppia di Hooded  Merganser, molte Canadian Geese, Grayleg Goose e 7-8 Shovelers. Mark ha  avvistato la Cooper`s Hawk vicino a Summer House."
@@ -162,13 +162,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "f211g",
+        "key": "bq96o",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609345637,
-      "nanos": 951000000
+      "seconds": 1609664139,
+      "nanos": 857000000
     }
   },
   "selection": {
