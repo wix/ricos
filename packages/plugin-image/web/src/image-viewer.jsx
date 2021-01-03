@@ -262,9 +262,11 @@ class ImageViewer extends React.Component {
     } else if (this.hasAnchor()) {
       e.preventDefault();
       this.scrollToAnchor();
-    } else {
-      this.handleExpand(e);
     }
+    //!does expand mode needs to be available on on image click
+    // else {
+    //   this.handleExpand(e);
+    // }
   };
 
   handleRef = e => {
@@ -289,8 +291,9 @@ class ImageViewer extends React.Component {
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
+    const { disableExpand } = componentData.config; //! settings
 
-    const hasExpand = !settings.disableExpand && settings.onExpand;
+    const hasExpand = !disableExpand && settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,

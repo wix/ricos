@@ -8,6 +8,7 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
+  LabeledToggle,
 } from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
@@ -27,8 +28,8 @@ class ImageSettings extends Component {
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
-    this.linkRedirectTextLabel = t('ImageSettings_Link_Label');
-    this.linkRedirectText = t('ImageSettings_Link_RedirectToToolbar');
+    this.imageOpensInExpandModeLabel = t('ImageSettings_Image_OpensInExpandMode_Label');
+    this.imageCanBeDownloadedLabel = t('ImageSettings_Image_CanBeDownloaded_Label');
   }
 
   propsToState(props) {
@@ -42,6 +43,22 @@ class ImageSettings extends Component {
     };
   }
 
+  onToggleChange = () => {
+    const {
+      componentData: { config },
+      pubsub,
+    } = this.props;
+    const blockKey = this.getFocusedBlockKey();
+    const newComponentData = {
+      ...this.props.componentData,
+      config: { ...config, disableExpand: !config.disableExpand },
+    };
+    pubsub.update('componentData', newComponentData, blockKey);
+  };
+
+  getFocusedBlockKey() {
+    return this.props.pubsub.get('focusedBlock');
+  }
   componentDidMount() {
     this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
   }
@@ -88,7 +105,6 @@ class ImageSettings extends Component {
   render() {
     const { helpers, theme, t, isMobile, languageDir } = this.props;
     const { src, error, metadata = {} } = this.state;
-
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
         {isMobile ? (
@@ -173,8 +189,22 @@ class ImageSettings extends Component {
             className={this.styles.imageSettingsSection}
             ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
           >
-            <div className={this.styles.imageSettingsLabel}>{this.linkRedirectTextLabel}</div>
-            <div>{this.linkRedirectText}</div>
+            <div className={this.styles.imageSettingsLabel}>
+              <LabeledToggle
+                label={this.imageOpensInExpandModeLabel}
+                onChange={() => this.onToggleChange('isExpandable', this.state.isExpandable)}
+                checked={this.state.isExpandable}
+                theme={theme}
+              />
+            </div>
+            <div className={this.styles.imageSettingsLabel}>
+              <LabeledToggle
+                label={this.imageCanBeDownloadedLabel}
+                onChange={() => this.onToggleChange('isDownloadable', this.state.isDownloadable)}
+                checked={this.state.isDownloadable}
+                theme={theme}
+              />
+            </div>
           </SettingsSection>
         </div>
         {isMobile ? null : (
