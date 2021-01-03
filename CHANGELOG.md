@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1938](https://github.com/wix-incubator/rich-content/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
+
 ## 8.11.2 (Dec 31, 2020)
 ### :bug: Bug Fix
 - `vertical-embed`
