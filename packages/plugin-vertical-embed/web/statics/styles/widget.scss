@@ -130,9 +130,12 @@
                 flex-direction: column;
             }
 
-            .vertical-embed-imageLayout {
-                width: unset;
-                padding-bottom: 56.25%;
+            .vertical-embed-card {
+
+                .vertical-embed-imageLayout {
+                    width: unset;
+                    padding-bottom: 56.25%;
+                }
             }
 
             .vertical-embed-content {
