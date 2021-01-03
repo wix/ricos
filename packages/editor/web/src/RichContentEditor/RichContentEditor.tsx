@@ -497,7 +497,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
     // TODO: new editor state should become initialContentState?
     if (nextProps.editorState && this.props.editorState !== nextProps.editorState) {
-      this.setState({ editorState: nextProps.editorState });
+      this.updateEditorState(nextProps.editorState);
     }
     if (this.props.theme !== nextProps.theme) {
       this.setState({ theme: nextProps.theme });
