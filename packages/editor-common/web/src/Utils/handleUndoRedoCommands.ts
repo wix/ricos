@@ -1,6 +1,7 @@
 import { EditorState, convertToRaw, convertFromRaw, ContentState } from '@wix/draft-js';
 import { RicosContent } from 'ricos-content';
 import { isEqual } from 'lodash';
+import { setSelection } from './draftUtils';
 
 const IMAGE_TYPE = 'wix-draft-plugin-image';
 const VIDEO_TYPE = 'wix-draft-plugin-video';
@@ -110,10 +111,6 @@ function handleAccordionEntity(currentData, newData) {
   if (!isEqual(currentData.config, newData.config) || isBrokenContent) {
     return {
       shouldUndoAgain: isBrokenContent,
-      fixedData: {
-        ...currentData,
-        config: newData.config,
-      },
     };
   }
   // check if pairs were deleted.
@@ -162,24 +159,23 @@ function checkColumns(newRow, currentRow) {
 
 // looks for a changed cell in the new content, if there is returns it's indices.
 function getChangedTableCellIndex(newRows, currentRows) {
-  let isChangeFine;
   let column;
   const row = Object.keys(newRows).find(rowKey => {
     const currentRow = currentRows[rowKey].columns;
     const newRow = newRows[rowKey].columns;
     if (!currentRow || Object.keys(newRow).length !== Object.keys(currentRow).length) {
-      isChangeFine = true;
       return true;
     }
     const { columnIndex, isStyleChange } = checkColumns(newRow, currentRow);
-    if (columnIndex) {
+    if (isStyleChange) {
+      return true;
+    } else if (columnIndex) {
       column = columnIndex;
-      isChangeFine = isStyleChange;
       return true;
     }
     return false;
   });
-  return { row, column, isChangeFine };
+  return { row, column };
 }
 
 function handleTableEntity(currentData, newData) {
@@ -188,39 +184,29 @@ function handleTableEntity(currentData, newData) {
 
   // check if the config changed
   if (!isEqual(newConfig, currentConfig)) {
-    return {
-      fixedData: {
-        ...currentData,
-        config: {
-          rows: currentRows,
-          ...newConfig,
-        },
-      },
-    };
+    return { shouldUndoAgain: false };
   }
 
-  const { row, column, isChangeFine } = getChangedTableCellIndex(newRows, currentRows);
-  if (isChangeFine) {
-    return {
-      fixedData: { ...newData },
-    };
-  }
-  if (row && column) {
-    const { newEditorState, shouldUndoAgain } = fixBrokenInnerRicosStates(
-      newRows[row].columns[column].content,
-      currentRows[row].columns[column].content
-    );
-    newRows[row].columns[column].content = newEditorState;
-    return {
-      shouldUndoAgain,
-      fixedData: {
-        ...currentData,
-        config: {
-          rows: newRows,
-          ...currentConfig,
+  const { row, column } = getChangedTableCellIndex(newRows, currentRows);
+  if (row) {
+    if (column) {
+      const { newEditorState, shouldUndoAgain } = fixBrokenInnerRicosStates(
+        newRows[row].columns[column].content,
+        currentRows[row].columns[column].content
+      );
+      newRows[row].columns[column].content = newEditorState;
+      return {
+        shouldUndoAgain,
+        fixedData: {
+          ...currentData,
+          config: {
+            rows: newRows,
+            ...currentConfig,
+          },
         },
-      },
-    };
+      };
+    }
+    return { shouldUndoAgain: false };
   }
 }
 
@@ -284,6 +270,7 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
           entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
           if (entityToReplace) {
             entityToReplace.blockKey = blockKey;
+            entityToReplace.shouldKeepSelection = true;
             return true;
           }
         } else if (!isEqual(currentData, newData)) {
@@ -327,17 +314,20 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
   const contentState = convertToRaw(editorState.getCurrentContent());
 
   const entityToReplace = getEntityToReplace(newContentState, contentState);
-  const { blockKey, fixedData, shouldUndoAgain } = entityToReplace;
+  const { blockKey, fixedData, shouldUndoAgain, shouldKeepSelection } = entityToReplace;
   if (fixedData) {
     replaceComponentData(newEditorState, blockKey, fixedData);
   }
-  if (shouldUndoAgain) {
-    return undo(newEditorState);
-  }
-  return pushToRedoStack(
-    removeCompositionModeFromEditorState(newEditorState),
-    convertFromRaw(convertToRaw(editorState.getCurrentContent()))
-  );
+  const editedState = shouldKeepSelection
+    ? setSelection(newEditorState, editorState.getSelection())
+    : newEditorState;
+
+  return shouldUndoAgain
+    ? undo(editedState)
+    : pushToRedoStack(
+        removeCompositionModeFromEditorState(editedState),
+        convertFromRaw(convertToRaw(editorState.getCurrentContent()))
+      );
 }
 
 export const undo = (editorState: EditorState) => {
