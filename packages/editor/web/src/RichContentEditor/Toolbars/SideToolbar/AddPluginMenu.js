@@ -15,7 +15,8 @@ export default class AddPluginMenu extends Component {
     const { addPluginMenuConfig, isMobile, theme } = props;
     this.styles = mergeStyles({ styles: Styles, theme });
     this.showSearch = addPluginMenuConfig?.showSearch && !isMobile;
-    this.horizontalMenu = !addPluginMenuConfig && !isMobile;
+    this.horizontalMenu =
+      (!addPluginMenuConfig || addPluginMenuConfig?.horizontalMenuLayout) && !isMobile;
     this.wrapperClassName = classNames(this.styles.sideToolbarPanelWrapper, {
       [this.styles.horizontalMenu]: this.horizontalMenu,
     });
