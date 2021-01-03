@@ -17,14 +17,29 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `editor`
-  - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) add plugin menu - fix override plugin menu styles on mobile
-- `inner-rce`
-  - [#1932](https://github.com/wix-incubator/rich-content/pull/1932) disable footer toolbar when inner rce is in focus
-
 </details>
 <hr/>
+
+## 8.11.3 (Jan 3, 2021)
+### :rocket: New Feature
+- `editor`
+  - [#1939](https://github.com/wix-incubator/rich-content/pull/1939) allow api to disable input (`props.handleBeforeInput` can return handled)
+### :bug: Bug Fix
+- `editor`
+  - [#1938](https://github.com/wix-incubator/rich-content/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
+
+## 8.11.2 (Dec 31, 2020)
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#1934](https://github.com/wix/ricos/pull/1934) Mobile UI fix
+## 8.11.1 (Dec 31, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) addPluginMenu - fix override plugin menu styles on mobile
+- `inner-rce`
+  - [#1932](https://github.com/wix-incubator/rich-content/pull/1932) disable footer toolbar when inner rce is in focus
+- `gallery`
+  - [#1935](https://github.com/wix-incubator/rich-content/pull/1935) disable progress in mobile native loader
 
 ## 8.11.0 (Dec 28, 2020)
 ### :rocket: New Feature

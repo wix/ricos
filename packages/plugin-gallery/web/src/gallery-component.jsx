@@ -203,7 +203,7 @@ class GalleryComponent extends PureComponent {
   renderMobileNativeLoader = ({ url }) =>
     url ? null : (
       <div className={styles.mobileNativeLoaderContainer}>
-        <Loader />
+        <Loader type={'mini'} disableProgress />
       </div>
     );
 
