@@ -51,11 +51,15 @@ class MoreButton extends Component {
   };
 
   render() {
-    const { addPluginMenuProps, isActive, t, theme } = this.props;
+    const { addPluginMenuProps, isActive, t, theme, forceDisabled } = this.props;
     const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
-        className={classnames(this.styles.moreButton, isActive && this.styles.active)}
+        className={classnames(
+          this.styles.moreButton,
+          isActive && this.styles.active,
+          forceDisabled && this.styles.forceDisabled
+        )}
         key="shorcutButton"
         onClick={this.handleClick}
         ref={ref => (this.moreButton = ref)}
@@ -92,6 +96,7 @@ class MoreButton extends Component {
 
 MoreButton.propTypes = {
   addPluginMenuProps: PropTypes.object.isRequired,
+  forceDisabled: PropTypes.bool,
 };
 
 export default MoreButton;
