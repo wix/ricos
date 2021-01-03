@@ -1,4 +1,4 @@
-import { getRange } from '../../domain/tableDataUtil';
+import { getRange } from '../domain/tableDataUtil';
 import {
   VerticalAlignmentTop,
   VerticalAlignmentMiddle,
@@ -9,7 +9,7 @@ import {
   BorderOutsideIcon,
   RowHeader,
   ColumnHeader,
-} from '../../icons';
+} from '../icons';
 
 const DEFAULT_PALETTE = Object.freeze([
   'transparent',
