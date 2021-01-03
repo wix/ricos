@@ -39,13 +39,6 @@
   border: solid 1px #e0e0e3;
 }
 
-.customColorPicker_input_container:hover {
-  border-bottom: 1px solid rgba($action-color-fallback-tuple, 0.2);
-}
-
-.customColorPicker_input_container:focus-within {
-  border-bottom: 1px solid $action-color-fallback;
-}
 .hexColorInput{
   max-height: 100%;
   border: 1px solid;
@@ -64,6 +57,7 @@
 }
 
 :global {
+  @import '~react-colorful/dist/index.css';
   .react-colorful {
     width: 187px !important;
     height: 100% !important;
@@ -91,7 +85,6 @@
         overflow-x: hidden;
       }
     }
-
     .react-colorful__pointer.react-colorful__hue-pointer {
       z-index: 3;
     }
