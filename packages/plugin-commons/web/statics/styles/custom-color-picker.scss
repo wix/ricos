@@ -57,6 +57,7 @@
 }
 
 :global {
+  @import '~react-colorful/dist/index.css';
   .react-colorful {
     width: 187px !important;
     height: 100% !important;
@@ -68,9 +69,6 @@
       border-radius: 0;
       overflow: auto;
       border: none;
-      .react-colorful__pointer{  
-        border-color: $action-color;
-      }
     }
     .react-colorful__pointer {
       width: 16px;
