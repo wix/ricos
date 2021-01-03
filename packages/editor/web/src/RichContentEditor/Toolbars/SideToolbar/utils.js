@@ -10,3 +10,25 @@ export const getSortedSections = sectionsArr => {
     .map(section => (sectionsArr.includes(section) ? section : false))
     .filter(section => section);
 };
+
+export const getPluginMenuTheme = (theme = {}, isMobile) => {
+  const {
+    buttonStyles,
+    mobileAddModalToolbarButton_wrapper,
+    mobileAddModalToolbarButton,
+    mobileAddModalToolbarButton_icon,
+    mobileAddModalToolbarButton_label,
+    ...rest
+  } = theme;
+  return {
+    buttonStyles: {
+      button: isMobile ? mobileAddModalToolbarButton : buttonStyles.sideToolbarButton,
+      buttonWrapper: isMobile
+        ? mobileAddModalToolbarButton_wrapper
+        : buttonStyles.sideToolbarButton_wrapper,
+      icon: isMobile ? mobileAddModalToolbarButton_icon : buttonStyles.sideToolbarButton_icon,
+      label: isMobile ? mobileAddModalToolbarButton_label : buttonStyles.sideToolbarButton_label,
+    },
+    ...rest,
+  };
+};

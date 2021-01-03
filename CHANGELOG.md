@@ -17,20 +17,35 @@
     Click to see more.
   </summary>
 
+## 8.11.2 (Dec 31, 2020)
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#1934](https://github.com/wix/ricos/pull/1934) Mobile UI fix
+
 </details>
 <hr/>
 
+## 8.11.1 (Dec 31, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) addPluginMenu - fix override plugin menu styles on mobile
+- `inner-rce`
+  - [#1932](https://github.com/wix-incubator/rich-content/pull/1932) disable footer toolbar when inner rce is in focus
+- `gallery`
+  - [#1935](https://github.com/wix-incubator/rich-content/pull/1935) disable progress in mobile native loader
+
 ## 8.11.0 (Dec 28, 2020)
 ### :rocket: New Feature
-
 - `viewer`
   - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
   - [#1921](https://github.com/wix-incubator/rich-content/pull/1921) `onViewerLoaded` callback includes `isPreview`
 - `editor`
   - [#1922](https://github.com/wix-incubator/rich-content/pull/1922) `onOpenEditorSuccess` callback is now added to helpers
   - [#1917](https://github.com/wix-incubator/rich-content/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
+### :house: Internal
 - `table`
-  - [#1401](https://github.com/wix-incubator/rich-content/pull/1401) add new table plugin
+  - [#1401](https://github.com/wix-incubator/rich-content/pull/1401) **beta** add table plugin
+
 ## 8.10.2 (Dec 27, 2020)
 ### :bug: Bug Fix
 - `gallery`
