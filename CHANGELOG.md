@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#1939](https://github.com/wix-incubator/rich-content/pull/1939) allow api to disable input (`props.handleBeforeInput` can return handled) 
 ### :bug: Bug Fix
 - `editor`
   - [#1938](https://github.com/wix-incubator/rich-content/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
