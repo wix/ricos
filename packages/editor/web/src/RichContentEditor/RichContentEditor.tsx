@@ -151,6 +151,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleUndoCommand?: () => EditorState;
   handleRedoCommand?: () => EditorState;
   tablePluginMenu?: boolean;
+  callOnChangeOnNewEditorState?: boolean;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -501,7 +502,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
     // TODO: new editor state should become initialContentState?
     if (nextProps.editorState && this.props.editorState !== nextProps.editorState) {
-      this.setState({ editorState: nextProps.editorState });
+      if (this.props.callOnChangeOnNewEditorState) {
+        this.updateEditorState(nextProps.editorState);
+      } else {
+        this.setState({ editorState: nextProps.editorState });
+      }
     }
     if (this.props.theme !== nextProps.theme) {
       this.setState({ theme: nextProps.theme });
