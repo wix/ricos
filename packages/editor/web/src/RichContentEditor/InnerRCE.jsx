@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
+import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
@@ -154,6 +154,7 @@ class InnerRCE extends PureComponent {
     } = this.props;
     const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
+    innerRCERenderedIn === TABLE_TYPE && isMobile && toolbarsToIgnore.push('SideToolbar');
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
         <div
