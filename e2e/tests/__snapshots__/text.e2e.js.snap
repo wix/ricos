@@ -1718,28 +1718,7 @@ exports[`text > should paste html correctly #0`] =
           "offset": 7
         }
       ],
-      "inlineStyleRanges": [
-        {
-          "length": 7,
-          "offset": 0,
-          "style": "{\"FG\":\"#202122\"}"
-        },
-        {
-          "length": 2,
-          "offset": 18,
-          "style": "{\"FG\":\"#202122\"}"
-        },
-        {
-          "length": 7,
-          "offset": 0,
-          "style": "{\"BG\":\"#ffffff\"}"
-        },
-        {
-          "length": 2,
-          "offset": 18,
-          "style": "{\"BG\":\"#ffffff\"}"
-        }
-      ],
+      "inlineStyleRanges": [],
       "key": 0,
       "text": "called anchor text. ",
       "type": "unstyled"
