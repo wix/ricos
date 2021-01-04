@@ -36,4 +36,8 @@
     padding-bottom: 1px;
     display: flex;
   }
+  &.forceDisabled {
+    color: lightgray;
+    pointer-events: none;
+  }
 }

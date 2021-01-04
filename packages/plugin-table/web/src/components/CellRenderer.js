@@ -3,16 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
-import {
-  TOOLBARS,
-  isCursorAtStartOfContent,
-  isCursorAtEndOfContent,
-  isCursorAtFirstLine,
-  isCursorAtLastLine,
-} from 'wix-rich-content-editor-common';
 import { getRange } from '../domain/tableDataUtil';
 import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
+import { ToolbarType } from 'wix-rich-content-common';
 
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
@@ -109,13 +103,14 @@ export default class Cell extends Component {
       table,
       isMobile,
       disableSelectedStyle,
+      handleCellClipboardEvent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
-    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(TOOLBARS.FORMATTING));
+    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
@@ -167,6 +162,7 @@ export default class Cell extends Component {
             selected={selected}
             contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
+            handleCellClipboardEvent={handleCellClipboardEvent}
           >
             {children}
           </Editor>
@@ -193,21 +189,8 @@ class Editor extends Component {
 
   handleClipboardEvent = e => {
     if (this.props.editing) {
-      let shouldPreventDefault;
       const editorState = this.editor.ref.getEditorState();
-      if (e.key === 'ArrowRight') {
-        isCursorAtEndOfContent(editorState) && (shouldPreventDefault = true);
-      } else if (e.key === 'ArrowLeft') {
-        isCursorAtStartOfContent(editorState) && (shouldPreventDefault = true);
-      } else if (e.key === 'ArrowUp') {
-        isCursorAtFirstLine(editorState) && (shouldPreventDefault = true);
-      } else if (e.key === 'ArrowDown') {
-        isCursorAtLastLine(editorState) && (shouldPreventDefault = true);
-      }
-      if (shouldPreventDefault) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
+      this.props.handleCellClipboardEvent(e, editorState);
     }
   };
 
@@ -236,6 +219,7 @@ Editor.propTypes = {
   children: PropTypes.any,
   contentState: PropTypes.object,
   setIsHighlighted: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  handleCellClipboardEvent: PropTypes.func,
 };
 Cell.propTypes = {
   t: PropTypes.func,
@@ -260,4 +244,5 @@ Cell.propTypes = {
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  handleCellClipboardEvent: PropTypes.func,
 };
