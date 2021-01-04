@@ -90,6 +90,7 @@ export default class BaseTextColor extends Component {
             top: panelTop,
             left: panelLeft,
             marginTop: 15,
+            borderRadius: 2,
             width: 184,
           },
     };

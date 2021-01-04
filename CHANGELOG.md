@@ -24,6 +24,11 @@
 </details>
 <hr/>
 
+## 8.11.4 (Jan 3, 2021)
+### :bug: Bug Fix
+- `text-color`
+  - [#1930](https://github.com/wix-incubator/rich-content/pull/1930) fix color picker css
+
 ## 8.11.3 (Jan 3, 2021)
 ### :rocket: New Feature
 - `editor`
