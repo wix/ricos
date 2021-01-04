@@ -106,7 +106,7 @@ class RicosEditor extends Component<RicosEditorProps, State> {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
       /* eslint-disable */
-      console.warning(
+      console.warn(
         'Please use biSettings.postId and ref.publish() API for publishing. The getContent(postId, isPublishing) API is deprecated and will be removed in ricos v9.0.0'
       );
       /* eslint-enable */
@@ -115,16 +115,15 @@ class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState({ shouldRemoveErrorBlocks });
   };
 
-  waitForUploadsToComplete = () =>
-    new Promise(resolve => {
-      // eslint-disable-next-line
-      (function waitForUploads() {
-        if (!hasActiveUploads()) {
-          return resolve();
-        }
-        setTimeout(waitForUploads, 500);
-      })();
-    });
+  pollContentStateForUploads = resolve => {
+    const contentState = this.dataInstance.getEditorState().getCurrentContent();
+    if (!hasActiveUploads(contentState)) {
+      return resolve();
+    }
+    setTimeout(() => this.pollContentStateForUploads(resolve), 500);
+  };
+
+  waitForUploadsToComplete = () => new Promise(resolve => this.pollContentStateForUploads(resolve));
 
   getContentPromise = async ({
     publishId,

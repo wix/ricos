@@ -10,6 +10,7 @@ export const EditorEventsContext = React.createContext({
   subscribe() {},
   unsubscribe() {},
   dispatch() {},
+  publish() {},
 });
 
 export const WithEditorEventsProps = {
@@ -36,21 +37,19 @@ export class EditorEventsProvider extends React.Component {
     subscribe: this.subscribe.bind(this),
     unsubscribe: this.unsubscribe.bind(this),
     dispatch: this.dispatch.bind(this),
+    publish: this.publish.bind(this),
   };
 
   events = {};
 
-  dispatch(event, data) {
+  async dispatch(event, data) {
     const callbacks = this.events[event] || [];
-
-    const result = Promise.all(callbacks.map(cb => cb(data)));
-    console.debug('dispatch result', result); // eslint-disable-line
-    return result;
+    return Promise.all(callbacks.map(cb => cb(data)));
   }
 
-  publish() {
-    const publishResponse = this.dispatch(EditorEvents.PUBLISH);
-    const editorResponse = publishResponse.filter(({ type }) => type === 'EDITOR_PUBLISH');
+  async publish() {
+    const publishResponse = await this.dispatch(EditorEvents.PUBLISH);
+    const editorResponse = publishResponse.filter(({ type }) => type === 'EDITOR_PUBLISH')[0];
     return editorResponse?.data;
   }
 

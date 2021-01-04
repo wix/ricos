@@ -47,8 +47,11 @@ export interface RicosEditorProps extends RicosProps {
   onBusyChange?: OnBusyChangeFunction;
   injectedContent?: RicosContent;
   editorEvents?: {
-    subscribe: () => Record<string, unknown>;
-    unsubscribe: () => Record<string, unknown>;
+    subscribe: (event: string, callback: () => Record<string, unknown>) => Record<string, unknown>;
+    unsubscribe: (
+      event: string,
+      callback: () => Record<string, unknown>
+    ) => Record<string, unknown>;
     dispatch: (event: string) => Promise<unknown>;
   };
 
