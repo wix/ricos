@@ -521,8 +521,5 @@
 	"AccordionPlugin_ExpandButton_AriaLabel": "Item is expanded",
 	"AccordionPlugin_CollapseButton_AriaLabel": "Item is collapsed",
 	"Embed_Vertical_Units_Hour": "{{hours}}h",
-	"Embed_Vertical_Units_Minute": "{{minutes}}min",
-	"TablePlugin_InsertButton": "Table",
-	"Table_plugin_search_tags": "table",
-	"TablePlugin_InsertButton_Tooltip": "Add a table"
+	"Embed_Vertical_Units_Minute": "{{minutes}}min"
 }
