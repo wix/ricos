@@ -205,7 +205,7 @@ export const getBottomToolbarModalStyles = (
     position: 'absolute',
   };
   if (toolbarName === TOOLBARS.SIDE) {
-    contentStyles.top = isAboveButton ? top - 100 : top - 20;
+    contentStyles.top = isAboveButton ? top - 95 : top - 15;
     contentStyles.right = window.innerWidth - right - 10;
     contentStyles.left = left + 35;
   } else if (toolbarName === TOOLBARS.SHORTCUT) {
