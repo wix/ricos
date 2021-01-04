@@ -107,7 +107,7 @@ const createPlugins = externalConfigs => {
     html: pluginHtml(),
     divider: pluginDivider(),
     codeBlock: pluginCodeBlock(),
-    link: pluginLink(),
+    link: pluginLink(configs.link),
     linkPreview: pluginLinkPreview(configs.linkPreview),
     spacing: pluginLineSpacing(),
     indent: pluginIndent(),
@@ -124,7 +124,7 @@ const createPlugins = externalConfigs => {
     textColor: pluginTextColor(configs.textColor),
     emoji: pluginEmoji(),
     undoRedo: pluginUndoRedo(),
-    headings: pluginHeadings(),
+    headings: pluginHeadings(configs.headings),
     spoiler: pluginSpoiler(),
     accordion: pluginAccordion({
       innerRCEPlugins: [
