@@ -133,7 +133,9 @@ export default class AddPluginFloatingToolbar extends Component {
       toolbarStyles && toolbarStyles.sideToolbar
     );
     const { isPopupOpen } = this.state;
-    const horizontalMenuWidth = structure.length * 34;
+    const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
+    const horizontalMenuWidthOffset = smallPlusIcon ? 34 : 39;
+    const horizontalMenuWidth = structure.length * horizontalMenuWidthOffset;
     const horizontalMenu = !addPluginMenuConfig || addPluginMenuConfig?.horizontalMenuLayout;
     const style = this.getStyle(horizontalMenu ? horizontalMenuWidth : 320, top);
     return (
