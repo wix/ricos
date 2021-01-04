@@ -16,7 +16,10 @@ import styles from '../../statics/styles/image-settings.scss';
 class ImageSettings extends Component {
   constructor(props) {
     super(props);
-    this.state = this.propsToState(props);
+    this.state = {
+      ...this.propsToState(props),
+      isExpandable: !this.props.componentData.config.disableExpand,
+    };
     this.initialState = { ...this.state };
     const { t, theme } = props;
     this.styles = mergeStyles({ styles, theme });
@@ -43,7 +46,21 @@ class ImageSettings extends Component {
     };
   }
 
-  onToggleChange = () => {
+  onToggle = key => {
+    switch (key) {
+      case 'expandMode':
+        return this.setState(prevState => ({
+          ...prevState,
+          isExpandable: !this.state.isExpandable,
+        }));
+      // case 'rightClick':
+      //   return (this.rightClick = !this.rightClick);
+      default:
+        break;
+    }
+  };
+
+  handleExpandModeToggle = () => {
     const {
       componentData: { config },
       pubsub,
@@ -93,9 +110,12 @@ class ImageSettings extends Component {
   };
 
   onDoneClick = () => {
-    const { helpers } = this.props;
+    const { helpers, componentData } = this.props;
     if (this.state.metadata) {
       this.addMetadataToBlock();
+    }
+    if (this.state.isExpandable !== !componentData.config.disableExpand) {
+      this.handleExpandModeToggle();
     }
     helpers.closeModal();
   };
@@ -192,18 +212,18 @@ class ImageSettings extends Component {
             <div className={this.styles.imageSettingsLabel}>
               <LabeledToggle
                 label={this.imageOpensInExpandModeLabel}
-                onChange={() => this.onToggleChange('isExpandable', this.state.isExpandable)}
+                onChange={() => this.onToggle('expandMode')}
                 checked={this.state.isExpandable}
                 theme={theme}
               />
             </div>
             <div className={this.styles.imageSettingsLabel}>
-              <LabeledToggle
+              {/* <LabeledToggle
                 label={this.imageCanBeDownloadedLabel}
-                onChange={() => this.onToggleChange('isDownloadable', this.state.isDownloadable)}
+                onChange={() => this.onToggleChange('rightClick')}
                 checked={this.state.isDownloadable}
                 theme={theme}
-              />
+              /> */}
             </div>
           </SettingsSection>
         </div>

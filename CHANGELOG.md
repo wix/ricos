@@ -11,6 +11,12 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+- `fullScreen`
+  - [#1939](https://github.com/wix-incubator/rich-content/pull/1931) allow full screen display for table images
+### :rocket: New Feature
+- `image-plugin`
+  - [#1939](https://github.com/wix-incubator/rich-content/pull/1931) allow users to toggle the expand mode option on the image-settings
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
