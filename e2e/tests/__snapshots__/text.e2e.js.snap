@@ -2410,18 +2410,18 @@ exports[`text > should enter link and further text in next block has no inline s
         {
           "key": 0,
           "length": 7,
-          "offset": 15
+          "offset": 0
         }
       ],
       "inlineStyleRanges": [
         {
-          "length": 22,
+          "length": 7,
           "offset": 0,
           "style": "UNDERLINE"
         }
       ],
       "key": 0,
-      "text": "no inline stylewix.com ",
+      "text": "wix.com ",
       "type": "unstyled"
     },
     {
@@ -2430,7 +2430,7 @@ exports[`text > should enter link and further text in next block has no inline s
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 1,
-      "text": "",
+      "text": "no inline style",
       "type": "unstyled"
     }
   ],
