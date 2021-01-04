@@ -635,12 +635,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pubsub: this.commonPubsub,
   });
 
-  publish = async (postId: string) => {
+  publish = async () => {
     if (!this.props.helpers?.onPublish) {
       return;
     }
     const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
-    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
+    this.props.helpers.onPublish(pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
   setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));

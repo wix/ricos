@@ -14,7 +14,7 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-
+import { withEditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
@@ -24,7 +24,7 @@ interface State {
   editorState?: EditorState;
 }
 
-export class RicosEditor extends Component<RicosEditorProps, State> {
+class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
   isBusy = false;
@@ -47,6 +47,19 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
+    this.props.editorEvents?.subscribe('rce:publish', this.onPublish);
+  }
+
+  componentWillUnmount() {
+    this.props.editorEvents?.unsubscribe('rce:publish', this.onPublish);
+  }
+
+  onPublish = async () {
+    await this.editor.publish();
+    return {
+      type: 'EDITOR_PUBLISH',
+      data: this.getContent(),
+    };
   }
 
   setStaticToolbar = ref => {
@@ -174,6 +187,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     );
   }
 }
+
+export default withEditorEvents(RicosEditor);
 
 const StaticToolbarPortal: FunctionComponent<{
   StaticToolbar?: ElementType;

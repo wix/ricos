@@ -17,6 +17,7 @@ export const WithEditorEventsProps = {
     subscribe: PropTypes.func,
     unsubscribe: PropTypes.func,
     dispatch: PropTypes.func,
+    publish: PropTypes.func,
   }),
 };
 
@@ -43,6 +44,12 @@ export class EditorEventsProvider extends React.Component {
     const callbacks = this.events[event] || [];
 
     return Promise.all(callbacks.map(cb => cb(data)));
+  }
+
+  publish() {
+    const publishResponse = this.dispatch(EditorEvents.PUBLISH);
+    const editorResponse = publishResponse.filter(({ type }) => type === 'EDITOR_PUBLISH');
+    return editorResponse?.data;
   }
 
   subscribe(event, cb) {

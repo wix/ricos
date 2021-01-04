@@ -22,7 +22,7 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   blur = () => this.editor.blur();
 
-  publish = (postId: string) => this.editor.publish(postId); //async
+  publish = () => this.editor.publish(); //async
 
   render() {
     return <WrappedEditor {...this.props} ref={this.setEditorRef} />;

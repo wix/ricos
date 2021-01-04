@@ -46,6 +46,12 @@ export interface RicosEditorProps extends RicosProps {
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
   injectedContent?: RicosContent;
+  editorEvents?: {
+    subscribe: () => Record<string, unknown>;
+    unsubscribe: () => Record<string, unknown>;
+    dispatch: (event: string) => Promise<unknown>;
+  };
+
   /* Changes to this interface should also be reflected in the API docs */
 }
 
