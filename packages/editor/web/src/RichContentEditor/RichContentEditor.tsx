@@ -703,15 +703,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   handleBeforeInput: DraftEditorProps['handleBeforeInput'] = (chars, editorState, timestamp) => {
-    this.props.handleBeforeInput?.(chars, editorState, timestamp);
+    let handled = this.props.handleBeforeInput?.(chars, editorState, timestamp);
 
     const blockType = getBlockType(this.state.editorState);
     if (blockType === 'atomic') {
       // fixes space click on atomic blocks deletion bug.
       // in general, disables any input click on atomic blocks
-      return 'handled';
+      handled = 'handled';
     }
-    return 'not-handled';
+    return handled || 'not-handled';
   };
 
   renderEditor = () => {

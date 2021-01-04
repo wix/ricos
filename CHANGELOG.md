@@ -17,6 +17,18 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.11.4 (Jan 3, 2021)
+### :bug: Bug Fix
+- `text-color`
+  - [#1930](https://github.com/wix-incubator/rich-content/pull/1930) fix color picker css
+
+## 8.11.3 (Jan 3, 2021)
+### :rocket: New Feature
+- `editor`
+  - [#1939](https://github.com/wix-incubator/rich-content/pull/1939) allow api to disable input (`props.handleBeforeInput` can return handled)
 ### :bug: Bug Fix
 - `editor`
   - [#1938](https://github.com/wix-incubator/rich-content/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
@@ -25,10 +37,6 @@
 ### :bug: Bug Fix
 - `vertical-embed`
   - [#1934](https://github.com/wix/ricos/pull/1934) Mobile UI fix
-
-</details>
-<hr/>
-
 ## 8.11.1 (Dec 31, 2020)
 ### :bug: Bug Fix
 - `editor`
