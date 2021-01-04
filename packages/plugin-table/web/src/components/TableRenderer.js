@@ -19,7 +19,7 @@ export default class TableRenderer extends PureComponent {
     this.setState({ windowWidth: window.innerWidth });
     const { table, tableRef } = this.props;
     this.columns.forEach((col, i) => {
-      const width = table.getCellWidthAsPixel(tableRef?.offsetWidth, i.toString);
+      const width = table.getCellWidthAsPixel(tableRef?.offsetWidth, i);
       col.style.width = width + 'px';
     });
   };
