@@ -47,16 +47,16 @@ class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
-    this.props.editorEvents?.subscribe('rce:publish', this.onPublish);
+    this.props.editorEvents?.subscribe('rce:publish', this.publish);
   }
 
   componentWillUnmount() {
-    this.props.editorEvents?.unsubscribe('rce:publish', this.onPublish);
+    this.props.editorEvents?.unsubscribe('rce:publish', this.publish);
   }
 
-  onPublish = async () => {
+  publish = async () => {
+    await this.waitForUploadsToComplete();
     await this.editor.publish();
-    await this.isUploadComplete();
     console.debug('editor publish callback'); // eslint-disable-line
     return {
       type: 'EDITOR_PUBLISH',
@@ -105,12 +105,17 @@ class RicosEditor extends Component<RicosEditorProps, State> {
   getContent = (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
+      /* eslint-disable */
+      console.warning(
+        'Please use biSettings.postId and ref.publish() API for publishing. The getContent(postId, isPublishing) API is deprecated and will be removed in ricos v9.0.0'
+      );
+      /* eslint-enable */
       this.editor.publish(postId); //async
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
 
-  isUploadComplete = () =>
+  waitForUploadsToComplete = () =>
     new Promise(resolve => {
       // eslint-disable-next-line
       (function waitForUploads() {

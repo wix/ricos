@@ -635,12 +635,13 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pubsub: this.commonPubsub,
   });
 
-  publish = async () => {
+  // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
+  publish = async (postId?: string) => {
     if (!this.props.helpers?.onPublish) {
       return;
     }
     const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
-    this.props.helpers.onPublish(pluginsCount, pluginsDetails, Version.currentVersion);
+    this.props.helpers.onPublish(pluginsCount, pluginsDetails, Version.currentVersion, postId);
   };
 
   setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));

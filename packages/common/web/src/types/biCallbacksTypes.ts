@@ -11,7 +11,8 @@ export interface BICallbacks {
           data: any;
         }[]
       | undefined,
-    version: string
+    version: string,
+    postId: string | undefined
   ): void;
   onViewerAction?(pluginId: string, actionName: string, value: string): void;
   onViewerLoaded?(isPreview: boolean, version: string): void;
