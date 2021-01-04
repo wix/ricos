@@ -142,11 +142,17 @@ function insertLink(editorState: EditorState, selection: SelectionState, linkDat
     mutability: 'MUTABLE',
   });
   const contentWithLink = editorWithLink.getCurrentContent();
+  const isNotCollapsed =
+    editorWithLink
+      .getCurrentContent()
+      .getBlockForKey(oldSelection.getAnchorKey())
+      .getText().length -
+      selection.getFocusOffset() ===
+    0;
   const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey();
-  const isCollapsed = oldSelection.isCollapsed();
 
   const contentState =
-    !isCollapsed || isNewLine
+    isNotCollapsed || isNewLine
       ? preventLinkInlineStyleForFurtherText(editorWithLink, selection)
       : contentWithLink;
 
