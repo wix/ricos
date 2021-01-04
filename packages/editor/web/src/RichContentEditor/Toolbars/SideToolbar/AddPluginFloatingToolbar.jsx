@@ -206,7 +206,7 @@ export default class AddPluginFloatingToolbar extends Component {
         {!isSSR() && isPopupOpen && (
           <PopupOffsetnHoc
             elementHeight={this.popupRef?.offsetHeight}
-            elementMarginTop={smallPlusIcon ? -8 : addPluginMenuConfig ? -20 : -15}
+            elementMarginTop={smallPlusIcon ? -14 : addPluginMenuConfig ? -20 : -15}
             elementMarginBottom={45}
             targetElement={this.selectButton}
           >
