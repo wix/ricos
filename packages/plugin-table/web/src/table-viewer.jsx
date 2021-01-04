@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DataSheet from 'react-datasheet/lib';
+import DataSheet from 'wix-react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
 import { TableDataUtil } from './domain/tableDataUtil';
@@ -92,7 +92,10 @@ class TableViewer extends Component {
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
 
     return (
-      <div className={classNames(!isEditMode && styles.tableWrapper)} ref={this.setTableViewerRef}>
+      <div
+        className={classNames(isEditMode ? styles.editMode : styles.viewMode)}
+        ref={this.setTableViewerRef}
+      >
         <DataSheet
           data={this.grid}
           valueRenderer={this.valueRenderer}

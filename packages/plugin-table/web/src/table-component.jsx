@@ -240,7 +240,6 @@ class TableComponent extends React.Component {
     this.table.reorderColumns(dragsIndex, this.colDropIndex);
     this.setState({ highlightColResizer: false });
     this.resetDrag();
-    this.dropLeft = null;
     this.colDropIndex = null;
   };
 
@@ -298,26 +297,28 @@ class TableComponent extends React.Component {
 
   onColDrag = (e, dragsIndex) => {
     e.movementX > 0 ? (this.movementX = 'right') : e.movementX < 0 && (this.movementX = 'left');
-    const colsRefs = this.rowsRefs[0]?.children || [];
-    const colsPositions = Array.from(colsRefs).map(col =>
+    const colsRefs = Array.from(this.rowsRefs[0]?.children || []);
+    const colsPositions = colsRefs.map(col =>
       this.movementX === 'right' ? col.offsetLeft + col.offsetWidth : col.offsetLeft
     );
 
     const dragPreviewWidth = this.colsWidth
       .slice(dragsIndex.start, dragsIndex.end + 1)
       .reduce((acc, curr) => acc + curr);
-    this.dropLeft = e.pageX - dragPreviewWidth;
+    const lastCol = colsRefs[colsRefs.length - 1];
+    const maxLeft = lastCol.offsetLeft + lastCol.offsetWidth + 20 - dragPreviewWidth;
+    const dropLeft = Math.min(e.pageX - dragPreviewWidth, maxLeft);
     colsPositions.forEach((pos, index) => {
       if (
-        (this.movementX === 'right' && this.dropLeft + dragPreviewWidth > pos - 30) ||
-        (this.movementX === 'left' && this.dropLeft > pos + 30)
+        (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
+        (this.movementX === 'left' && dropLeft > pos + 15)
       ) {
         this.colDropIndex = index + 1;
       }
     });
     this.highlightResizer(this.colDropIndex - 1, true);
 
-    this.dragPreview.current.style.left = `${this.dropLeft}px`;
+    this.dragPreview.current.style.left = `${dropLeft}px`;
     this.dragPreview.current.style.top = '0';
     this.dragPreview.current.style.visibility = 'visible';
     this.dragPreview.current.style.height = `${this.tableRef.current.offsetHeight}px`;
@@ -374,7 +375,6 @@ class TableComponent extends React.Component {
       activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
       selectAll={this.state.isAllCellsSelected}
       size={this.tableRef.current?.offsetHeight}
-      table={this.table}
       tableWidth={this.tableRef.current?.offsetWidth}
     />
   );
