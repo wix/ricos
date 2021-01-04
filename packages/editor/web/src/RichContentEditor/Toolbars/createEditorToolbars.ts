@@ -73,7 +73,12 @@ const createEditorToolbars = ({
     const pluginMenuSettings: PluginMenuSettings =
       customSettings.find(setting => setting.name === TOOLBARS.SIDE) || {};
     if (pluginMenuSettings) {
-      pluginMenuSettings.addPluginMenuConfig = { tablePluginMenu };
+      const horizontalMenuLayout = true; // force old menu on table
+      // const horizontalMenuLayout = !pluginMenuSettings.addPluginMenuConfig;
+      pluginMenuSettings.addPluginMenuConfig = {
+        tablePluginMenu,
+        horizontalMenuLayout,
+      };
     }
   }
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
