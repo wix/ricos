@@ -4658,9 +4658,9 @@
     defer-to-connect "^1.0.1"
 
 "@testing-library/dom@*":
-  version "7.29.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.0.tgz#60b18065bab50a5cde21fe80275a47a43024d9cc"
-  integrity sha512-0hhuJSmw/zLc6ewR9cVm84TehuTd7tbqBX9pRNSp8znJ9gTmSgesdbiGZtt8R6dL+2rgaPFp9Yjr7IU1HWm49w==
+  version "7.29.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.1.tgz#a08ebeb26b2ea859b1621ff9642d114c1f04fe3a"
+  integrity sha512-6BU7vAjKuMspCy9QQEtbWgmkuXi/yOSZo3ANdvZmNQW8N/WQGjO9cvlcA5EFJaPtp2hL1RAaPGpCXxumijUxCg==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/runtime" "^7.12.5"
@@ -7757,7 +7757,7 @@ browserslist@4.7.0:
     electron-to-chromium "^1.3.247"
     node-releases "^1.1.29"
 
-browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.14.5, browserslist@^4.15.0, browserslist@^4.6.4:
+browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.14.5, browserslist@^4.16.0, browserslist@^4.6.4:
   version "4.16.0"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.0.tgz#410277627500be3cb28a1bfe037586fbedf9488b"
   integrity sha512-/j6k8R0p3nxOC6kx5JGAxsnhc9ixaWJfYc+TNTzxg6+ARaESAvQGV7h0uNOB4t+pLQJZWzcrMxXOxjgsCj3dqQ==
@@ -8156,9 +8156,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000929, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30000989, caniuse-lite@^1.0.30001035, caniuse-lite@^1.0.30001061, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001165:
-  version "1.0.30001171"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001171.tgz#3291e11e02699ad0a29e69b8d407666fc843eba7"
-  integrity sha512-5Alrh8TTYPG9IH4UkRqEBZoEToWRLvPbSQokvzSz0lii8/FOWKG4keO1HoYfPWs8IF/NH/dyNPg1cmJGvV3Zlg==
+  version "1.0.30001173"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001173.tgz#3c47bbe3cd6d7a9eda7f50ac016d158005569f56"
+  integrity sha512-R3aqmjrICdGCTAnSXtNyvWYMK3YtV5jwudbq0T7nN9k4kmE4CBuwPqyJ+KBzepSTh0huivV2gLbSMEzTTmfeYw==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -9162,17 +9162,17 @@ copy-webpack-plugin@^6.3.0:
     webpack-sources "^1.4.3"
 
 core-js-compat@^3.8.0:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.8.1.tgz#8d1ddd341d660ba6194cbe0ce60f4c794c87a36e"
-  integrity sha512-a16TLmy9NVD1rkjUGbwuyWkiDoN0FDpAwrfLONvHFQx0D9k7J9y0srwMT8QP/Z6HE3MIFaVynEeYwZwPX1o5RQ==
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.8.2.tgz#3717f51f6c3d2ebba8cbf27619b57160029d1d4c"
+  integrity sha512-LO8uL9lOIyRRrQmZxHZFl1RV+ZbcsAkFWTktn5SmH40WgLtSNYN4m4W2v9ONT147PxBY/XrRhrWq8TlvObyUjQ==
   dependencies:
-    browserslist "^4.15.0"
+    browserslist "^4.16.0"
     semver "7.0.0"
 
 core-js-pure@^3.0.0, core-js-pure@^3.0.1:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.8.1.tgz#23f84048f366fdfcf52d3fd1c68fec349177d119"
-  integrity sha512-Se+LaxqXlVXGvmexKGPvnUIYC1jwXu1H6Pkyb3uBM5d8/NELMYCHs/4/roD7721NxrTLyv7e5nXd5/QLBO+10g==
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.8.2.tgz#286f885c0dac1cdcd6d78397392abc25ddeca225"
+  integrity sha512-v6zfIQqL/pzTVAbZvYUozsxNfxcFb6Ks3ZfEbuneJl3FW9Jb8F6vLWB6f+qTmAu72msUdyb84V8d/yBFf7FNnw==
 
 core-js@^1.0.0:
   version "1.2.7"
@@ -9185,9 +9185,9 @@ core-js@^2.4.0, core-js@^2.4.1, core-js@^2.6.5:
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-js@^3.0.1, core-js@^3.0.4, core-js@^3.4.1, core-js@^3.6.4:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.1.tgz#f51523668ac8a294d1285c3b9db44025fda66d47"
-  integrity sha512-9Id2xHY1W7m8hCl8NkhQn5CufmF/WuR30BTRewvCXc1aZd3kMECwNZ69ndLbekKfakw9Rf2Xyc+QR6E7Gg+obg==
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.2.tgz#0a1fd6709246da9ca8eff5bb0cbd15fba9ac7044"
+  integrity sha512-FfApuSRgrR6G5s58casCBd9M2k+4ikuu4wbW6pJyYU7bd9zvFc9qf7vr5xmrZOhT9nn+8uwlH1oRR9jTnFoA3A==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -14514,16 +14514,16 @@ html-webpack-plugin@^3.1.0:
     util.promisify "1.0.0"
 
 html-webpack-plugin@^4.0.0-beta.2, html-webpack-plugin@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-4.5.0.tgz#625097650886b97ea5dae331c320e3238f6c121c"
-  integrity sha512-MouoXEYSjTzCrjIxWwg8gxL5fE2X2WZJLmBYXlaJhQUH5K/b5OrqmV7T4dB7iu0xkmJ6JlUuV6fFVtnqbPopZw==
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-4.5.1.tgz#40aaf1b5cb78f2f23a83333999625c20929cda65"
+  integrity sha512-yzK7RQZwv9xB+pcdHNTjcqbaaDZ+5L0zJHXfi89iWIZmb/FtzxhLk0635rmJihcQbs3ZUF27Xp4oWGx6EK56zg==
   dependencies:
     "@types/html-minifier-terser" "^5.0.0"
     "@types/tapable" "^1.0.5"
     "@types/webpack" "^4.41.8"
     html-minifier-terser "^5.0.1"
     loader-utils "^1.2.3"
-    lodash "^4.17.15"
+    lodash "^4.17.20"
     pretty-error "^2.1.1"
     tapable "^1.1.3"
     util.promisify "1.0.0"
@@ -26096,9 +26096,9 @@ table@^5.2.3:
     string-width "^3.0.0"
 
 table@^6.0.4:
-  version "6.0.6"
-  resolved "https://registry.yarnpkg.com/table/-/table-6.0.6.tgz#e9223f1e851213e2e43ab584b0fec33fb09a8e7a"
-  integrity sha512-OInCtPmDNieVBkVFi6C8RwU2S2H0h8mF3e3TQK4nreaUNCpooQUkI+A/KuEkm5FawfhWIfNqG+qfelVVR+V00g==
+  version "6.0.7"
+  resolved "https://registry.yarnpkg.com/table/-/table-6.0.7.tgz#e45897ffbcc1bcf9e8a87bf420f2c9e5a7a52a34"
+  integrity sha512-rxZevLGTUzWna/qBLObOe16kB2RTnnbhciwgPbMMlazz1yZGVEgnZK762xyVdVznhqxrfCeBMmMkgOOaPwjH7g==
   dependencies:
     ajv "^7.0.2"
     lodash "^4.17.20"
@@ -27000,9 +27000,9 @@ tsutils@^2.13.1, tsutils@^2.29.0:
     tslib "^1.8.1"
 
 tsutils@^3.0.0, tsutils@^3.17.1, tsutils@^3.5.0:
-  version "3.17.1"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.17.1.tgz#ed719917f11ca0dee586272b2ac49e015a2dd759"
-  integrity sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g==
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.18.0.tgz#38add50a28ec97e988cb43c5b32e55d1ff4a222a"
+  integrity sha512-D9Tu8nE3E7D1Bsf/V29oMHceMf+gnVO+pDguk/A5YRo1cLpkiQ48ZnbbS57pvvHeY+OIeNQx1vf4ASPlEtRpcA==
   dependencies:
     tslib "^1.8.1"
 
@@ -28523,9 +28523,9 @@ wix-statics-parent@*:
   integrity sha512-9q6gnuTjxhGXXrwPSgkAbf2H78QEyCsdnMQKbESt9k4wfNK04jiZ6lZETfOSYBiJiOaIIYKLYNIyFbmRgBcYlw==
 
 wix-style-react@^9.0.0:
-  version "9.60.1"
-  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.60.1.tgz#c1cfcaa620b168c62cfd607ca926828cb7ebf7fa"
-  integrity sha512-mWOOa//MfcYDYivlkja+qfOGI22XPNTAZwDKx0cY+SVpAC7m44DvuV3z3dEu0IqRBhb3bQU69+Ojq2sBMM6YBQ==
+  version "9.61.0"
+  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.61.0.tgz#0f08910a3dac8527ed27ab3995ac099dbecaf73a"
+  integrity sha512-0L84wOawhwMhinymr9zo6VExUsDQ/LaW+oozYdT0WkwT8CkLWdQRKjzIn1SHqdiGqcnM9ljWYel73JrKpgbJ2A==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@date-fns/upgrade" "^1.0.3"
@@ -28581,9 +28581,9 @@ wix-tpa-style-loader@1.0.13:
     postcss-extract-styles "^1.1.1"
 
 wix-ui-core@^3.0.166:
-  version "3.0.166"
-  resolved "https://registry.yarnpkg.com/wix-ui-core/-/wix-ui-core-3.0.166.tgz#9d08642232387cf2ed368cf2ba6471794eabc36c"
-  integrity sha512-Z3vJBCOmwiZm6CKAAbJ5nc7BN9OZM6cA/WB49T8t825I8g0OvHKWfwCfaqOdOrjkVQG2XzXthqafJnw+c1FYnQ==
+  version "3.0.167"
+  resolved "https://registry.yarnpkg.com/wix-ui-core/-/wix-ui-core-3.0.167.tgz#54087cf9a51ab75d6c04751e36b108fb1e0eb1ee"
+  integrity sha512-Y7oHnwmN/VKs0YiJe4+uFtjoCQKOHdb32teyy33PcycervgVbePPtHRa6M3zAHebgjW2VEnz5dOGY2mvQbDjsw==
   dependencies:
     "@loadable/component" "^5.14.1"
     classnames "^2.2.5"

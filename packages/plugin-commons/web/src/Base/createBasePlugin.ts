@@ -29,7 +29,7 @@ import {
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
-import { UNSUPPORTED_BLOCKS_TYPE } from '../index';
+import { UNSUPPORTED_BLOCKS_TYPE } from '../';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
