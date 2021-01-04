@@ -54,13 +54,15 @@ class RicosEditor extends Component<RicosEditorProps, State> {
     this.props.editorEvents?.unsubscribe('rce:publish', this.onPublish);
   }
 
-  onPublish = async () {
+  onPublish = async () => {
     await this.editor.publish();
+    await this.isUploadComplete();
+    console.debug('editor publish callback'); // eslint-disable-line
     return {
       type: 'EDITOR_PUBLISH',
       data: this.getContent(),
     };
-  }
+  };
 
   setStaticToolbar = ref => {
     if (ref && ref !== this.currentEditorRef) {
@@ -107,6 +109,17 @@ class RicosEditor extends Component<RicosEditorProps, State> {
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
+
+  isUploadComplete = () =>
+    new Promise(resolve => {
+      // eslint-disable-next-line
+      (function waitForUploads() {
+        if (!hasActiveUploads()) {
+          return resolve();
+        }
+        setTimeout(waitForUploads, 500);
+      })();
+    });
 
   getContentPromise = async ({
     publishId,

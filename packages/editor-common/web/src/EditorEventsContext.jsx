@@ -43,7 +43,9 @@ export class EditorEventsProvider extends React.Component {
   dispatch(event, data) {
     const callbacks = this.events[event] || [];
 
-    return Promise.all(callbacks.map(cb => cb(data)));
+    const result = Promise.all(callbacks.map(cb => cb(data)));
+    console.debug('dispatch result', result); // eslint-disable-line
+    return result;
   }
 
   publish() {
