@@ -42,6 +42,7 @@ export default class AddPluginMenu extends Component {
       toolbarName,
       searchablePlugins,
     } = this.props;
+    const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
     return (
@@ -71,6 +72,7 @@ export default class AddPluginMenu extends Component {
             hidePopup={hidePopup}
             splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
+            smallPlusIcon={smallPlusIcon}
             theme={theme}
             pluginMenuButtonRef={pluginMenuButtonRef}
             isMobile={isMobile}
