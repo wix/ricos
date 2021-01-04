@@ -102,7 +102,7 @@ class Loader extends React.Component {
             [this.styles[this.props.type]]: this.props.type,
           })}
         />
-        {this.renderProgress()}
+        {this.props.disableProgress ? null : this.renderProgress()}
       </div>
     );
   }
@@ -114,6 +114,7 @@ Loader.propTypes = {
   isFastFakeLoader: PropTypes.bool,
   isVerySlowFakeLoader: PropTypes.bool,
   percent: PropTypes.number,
+  disableProgress: PropTypes.bool,
 };
 
 Loader.defaultProps = {

@@ -1,9 +1,10 @@
-import { cloneDeep } from 'lodash';
 import { RicosEntityMap, RicosContent, RicosContentBlock } from 'wix-rich-content-common';
+import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
+
 const galleryType = 'wix-draft-plugin-gallery';
 
 const removeEntitiesWithErrors = (entityMap: RicosEntityMap): RicosEntityMap => {
-  const newEntityMap: RicosEntityMap = cloneDeep(entityMap);
+  const newEntityMap: RicosEntityMap = cloneDeepWithoutEditorState(entityMap);
   Object.keys(entityMap).forEach((key: string | number): void => {
     const { data, type: entityType } = entityMap[key] || {};
     if (entityType === galleryType) {
