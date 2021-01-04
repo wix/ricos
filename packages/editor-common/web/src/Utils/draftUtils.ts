@@ -142,19 +142,16 @@ function insertLink(editorState: EditorState, selection: SelectionState, linkDat
     mutability: 'MUTABLE',
   });
   const contentWithLink = editorWithLink.getCurrentContent();
-  const isNotCollapsed =
-    editorWithLink
-      .getCurrentContent()
-      .getBlockForKey(oldSelection.getAnchorKey())
-      .getText().length -
-      selection.getFocusOffset() ===
-    0;
+  const selectedTextLength = contentWithLink.getBlockForKey(oldSelection.getAnchorKey()).getText()
+    .length;
+  const shouldPreventInlineStyleAtCurrentBlock =
+    selectedTextLength - selection.getFocusOffset() === 0;
   const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey();
+  const preventInlineStyle = shouldPreventInlineStyleAtCurrentBlock || isNewLine;
 
-  const contentState =
-    isNotCollapsed || isNewLine
-      ? preventLinkInlineStyleForFurtherText(editorWithLink, selection)
-      : contentWithLink;
+  const contentState = preventInlineStyle
+    ? preventLinkInlineStyleForFurtherText(editorWithLink, selection)
+    : contentWithLink;
 
   const selectionAfter = isNewLine
     ? contentWithLink.getSelectionAfter()
