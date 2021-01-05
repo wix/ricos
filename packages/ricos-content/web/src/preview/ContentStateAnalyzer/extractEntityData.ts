@@ -43,13 +43,22 @@ const giphyConverter: PluginConverter = entity => [
   },
 ];
 
-const videoConverter: PluginConverter = entity => [
-  {
-    type: 'video',
-    url: entity.data.src,
-    isCustom: entity.data.isCustomVideo,
+const videoConverter: PluginConverter = ({
+  data: {
+    src,
+    isCustomVideo,
+    metadata: { thumbnail_url },
   },
-];
+}) => {
+  return [
+    {
+      type: 'video',
+      url: src,
+      isCustom: isCustomVideo,
+      thumbnail: thumbnail_url,
+    },
+  ];
+};
 
 const fileConverter: PluginConverter = entity => [
   {
