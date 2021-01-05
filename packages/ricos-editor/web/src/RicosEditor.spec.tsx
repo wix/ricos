@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RicosEditorType, RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
+import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
@@ -31,9 +31,9 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
   const toRender = !asWrapper ? (
     <RicosEditor {...(ricosEditorProps || {})} />
   ) : (
-    <RicosEditorType {...(ricosEditorProps || {})}>
+    <RicosEditor {...(ricosEditorProps || {})}>
       <RichContentEditor />
-    </RicosEditorType>
+    </RicosEditor>
   );
 
   const element = shallow(toRender)
@@ -92,13 +92,13 @@ describe('RicosEditor', () => {
   //   });
   // });
   it('should call updateLocale on componentDidMount', () => {
-    const ricosEditor = getRicosEditorInstance() as RicosEditorType;
+    const ricosEditor = getRicosEditorInstance() as RicosEditor;
     const spyUpdate = spyOn(ricosEditor, 'updateLocale');
     ricosEditor.componentDidMount();
     expect(spyUpdate.calls.count()).toEqual(1);
   });
   it('should render localeStrategy in strategies', async () => {
-    const ricosEditor = getRicosEditorInstance({ locale: 'he' }) as RicosEditorType;
+    const ricosEditor = getRicosEditorInstance({ locale: 'he' }) as RicosEditor;
     await ricosEditor.updateLocale();
     expect(ricosEditor.state.localeStrategy).toMatchObject({
       locale: 'he',
