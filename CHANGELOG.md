@@ -17,7 +17,9 @@
     Click to see more.
   </summary>
 
-
+### :rocket: New Feature
+- `editor`
+  - [#1944](https://github.com/wix-incubator/rich-content/pull/1944) improve inline color filtering from pasted text
 ### :bug: Bug Fix
 - `link`
   - [#1941](https://github.com/wix-incubator/rich-content/pull/1941) fix: selection after adding link
