@@ -919,13 +919,7 @@ export const headerWithAlignmentGoogleDocsExpectedRaw = {
       text: 'Heading 3',
       type: 'header-three',
       depth: 0,
-      inlineStyleRanges: [
-        {
-          offset: 0,
-          length: 9,
-          style: '{"FG":"#040404"}',
-        },
-      ],
+      inlineStyleRanges: [],
       entityRanges: [],
       data: {
         textAlignment: 'right',
@@ -2457,13 +2451,7 @@ export const textWithLineSpacingWordExpectedRaw = {
       text: 'Line spacing 2',
       type: 'unstyled',
       depth: 0,
-      inlineStyleRanges: [
-        {
-          offset: 0,
-          length: 14,
-          style: '{"FG":"#040404"}',
-        },
-      ],
+      inlineStyleRanges: [],
       entityRanges: [],
       data: {
         dynamicStyles: {
