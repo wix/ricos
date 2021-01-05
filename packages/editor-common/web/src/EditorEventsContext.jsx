@@ -49,7 +49,7 @@ export class EditorEventsProvider extends React.Component {
 
   async publish() {
     const publishResponse = await this.dispatch(EditorEvents.PUBLISH);
-    const editorResponse = publishResponse.filter(({ type }) => type === 'EDITOR_PUBLISH')[0];
+    const editorResponse = publishResponse.filter(({ type } = {}) => type === 'EDITOR_PUBLISH')[0];
     return editorResponse?.data;
   }
 

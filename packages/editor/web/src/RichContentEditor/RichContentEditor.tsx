@@ -641,7 +641,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       return;
     }
     const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
-    this.props.helpers.onPublish(pluginsCount, pluginsDetails, Version.currentVersion, postId);
+    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
   setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));

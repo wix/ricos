@@ -55,8 +55,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   publish = async () => {
-    await this.waitForUploadsToComplete();
-    await this.editor.publish();
+    // TODO: remove this param after getContent(postId) is deprecated
+    await this.editor.publish((undefined as unknown) as string);
     console.debug('editor publish callback'); // eslint-disable-line
     return {
       type: 'EDITOR_PUBLISH',
@@ -102,7 +102,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getToolbars = () => this.editor.getToolbars();
 
-  getContent = (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
+  getContent = async (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
       /* eslint-disable */
@@ -110,20 +110,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         'Please use biSettings.postId and ref.publish() API for publishing. The getContent(postId, isPublishing) API is deprecated and will be removed in ricos v9.0.0'
       );
       /* eslint-enable */
-      this.editor.publish(postId); //async
+      await this.editor.publish(postId); //async
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
-
-  pollContentStateForUploads = resolve => {
-    const contentState = this.dataInstance.getEditorState().getCurrentContent();
-    if (!hasActiveUploads(contentState)) {
-      return resolve();
-    }
-    setTimeout(() => this.pollContentStateForUploads(resolve), 500);
-  };
-
-  waitForUploadsToComplete = () => new Promise(resolve => this.pollContentStateForUploads(resolve));
 
   getContentPromise = async ({
     publishId,
