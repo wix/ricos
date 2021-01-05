@@ -24,7 +24,7 @@ interface State {
   editorState?: EditorState;
 }
 
-class RicosEditor extends Component<RicosEditorProps, State> {
+export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
   isBusy = false;

@@ -47,11 +47,11 @@ export interface RicosEditorProps extends RicosProps {
   onBusyChange?: OnBusyChangeFunction;
   injectedContent?: RicosContent;
   editorEvents?: {
-    subscribe: (event: string, callback: () => Record<string, unknown>) => Record<string, unknown>;
-    unsubscribe: (
+    subscribe: (
       event: string,
-      callback: () => Record<string, unknown>
-    ) => Record<string, unknown>;
+      callback: () => Promise<{ type: string; data: unknown }>
+    ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+    unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
     dispatch: (event: string) => Promise<unknown>;
   };
 
@@ -74,6 +74,7 @@ export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
+  getEditorState: () => EditorState;
   refresh: (
     editorState: EditorState,
     contentTraits: { isEmpty: boolean; isContentChanged: boolean }
