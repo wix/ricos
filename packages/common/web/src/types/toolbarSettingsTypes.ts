@@ -67,6 +67,7 @@ export type AddPluginMenuConfig = {
   showSearch?: boolean;
   splitToSections?: boolean;
   tablePluginMenu?: boolean;
+  horizontalMenuLayout?: boolean;
 };
 
 export type PluginMenuSettings = {

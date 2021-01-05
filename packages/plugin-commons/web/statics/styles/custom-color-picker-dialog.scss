@@ -3,7 +3,8 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .colorPickerDialog {
-  width: 211px;
+  width: 209px;
+  height: 250px;
   margin: 0;
   @include phone {
     margin: 27px 18px 15px;
@@ -20,10 +21,10 @@
   cursor: pointer;
   flex: none;
   height: 32px;
-  width: 87px;
+  width: 88px;
   padding: 0;
   color: $action-color-fallback;
-  margin: 0 7px;
+  margin: 0 6px;
 }
 
 .colorPickerDialog_button_update {
