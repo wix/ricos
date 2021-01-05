@@ -127,7 +127,7 @@ describe('plugins', () => {
         cy.loadRicosEditorAndViewer('gallery').waitForGalleryImagesToLoad()
       );
 
-      it.only('expand gallery image on full screen', () => {
+      it('expand gallery image on full screen', () => {
         cy.get(
           '#pro-gallery-inner-container-v-0 > .pro-gallery-parent-container > #pro-gallery-container > #pro-gallery-margin-container > a[data-id="ea8ec1609e052b7f196935318316299d"] > #pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > .gallery-item-content',
           {
