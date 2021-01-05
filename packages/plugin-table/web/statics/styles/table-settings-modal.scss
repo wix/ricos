@@ -28,7 +28,7 @@
 .submit {
     width: 100%;
     background-color: $action-color;
-    color: $background-color;
+    color: var(--ricos-background-color,#fff);
     font-size: 16px;
     height: 36px;
     align-items: center;
