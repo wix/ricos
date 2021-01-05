@@ -23,12 +23,15 @@ class UnsupportedBlocksViewer extends Component<Props> {
   render() {
     const { unsupportedType, t, theme } = this.props;
     const pluginName = t(unsupportedType);
+    const unsupportedMessage = t('unsupported_plugin_text');
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
       <div className={styles.unsupportedBlocks_alert}>
         <CircleInfoIcon />
-        <p>{pluginName} can be edited only on the web</p>
+        <p>
+          {pluginName} {unsupportedMessage}
+        </p>
       </div>
     );
   }
