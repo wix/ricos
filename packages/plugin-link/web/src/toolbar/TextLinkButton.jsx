@@ -14,7 +14,7 @@ export default class TextLinkButton extends Component {
     const {
       getEditorState,
       setEditorState,
-      getExternalLinkData,
+      getEntityData,
       insertExternalLink,
       config,
     } = this.props;
@@ -23,7 +23,7 @@ export default class TextLinkButton extends Component {
     const isExternalLinkHandling = onLinkAdd;
 
     if (isExternalLinkHandling) {
-      const externalLinkData = getExternalLinkData(getEditorState());
+      const externalLinkData = getEntityData(getEditorState())?.externalData;
       const callback = data => setEditorState(insertExternalLink(getEditorState(), data));
       onLinkAdd(externalLinkData, callback);
     } else {
@@ -155,6 +155,6 @@ TextLinkButton.propTypes = {
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
   toolbarOffsetLeft: PropTypes.string,
-  getExternalLinkData: PropTypes.func,
+  getEntityData: PropTypes.func,
   insertExternalLink: PropTypes.func,
 };

@@ -27,7 +27,7 @@ type LinkDataUrl = {
 type LinkData = LinkDataUrl & { anchor?: string };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ExternalLinkData = { [key: string]: any };
+type ExternalLinkData = any;
 
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
@@ -66,20 +66,15 @@ export const insertLinkInPosition = (
   return insertLink(editorState, selection, linkEntityData);
 };
 
-export const getExternalLinkData = (editorState: EditorState) => {
-  let externalLinkData;
+export const getEntityData = (editorState: EditorState) => {
   const selection = getSelection(editorState);
-
-  if (isSelectionBelongsToExistingLink(editorState, selection)) {
-    const contentState = editorState.getCurrentContent();
-    const blockKey = selection.getStartKey();
-    const block = contentState.getBlockForKey(blockKey);
-    const entityKey = block.getEntityAt(selection.getStartOffset());
-    const entity = contentState.getEntityMap().get(entityKey);
-    externalLinkData = entity?.getData()?.externalData;
-  }
-
-  return externalLinkData || {};
+  const contentState = editorState.getCurrentContent();
+  const blockKey = selection.getStartKey();
+  const block = contentState.getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(selection.getStartOffset());
+  const entity = contentState.getEntityMap().get(entityKey);
+  const entityData = entity?.getData();
+  return entityData;
 };
 
 export const insertExternalLink = (editorState: EditorState, externalData: ExternalLinkData) => {

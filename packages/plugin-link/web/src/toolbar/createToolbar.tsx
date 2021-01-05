@@ -6,7 +6,7 @@ import {
   EditorModals,
   getModalStyles,
   insertLinkAtCurrentSelection,
-  getExternalLinkData,
+  getEntityData,
   insertExternalLink,
   LinkIcon,
   BUTTON_TYPES,
@@ -104,7 +104,7 @@ const createToolbar: CreatePluginToolbar = (config: {
       component: props => (
         <TextLinkButton
           insertLinkFn={insertLinkAtCurrentSelection}
-          getExternalLinkData={getExternalLinkData}
+          getEntityData={getEntityData}
           insertExternalLink={insertExternalLink}
           isActive={hasLinksInSelection(config.getEditorState())}
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
