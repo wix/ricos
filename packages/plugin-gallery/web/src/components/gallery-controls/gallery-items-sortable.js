@@ -76,7 +76,7 @@ const SortableItem = sortableElement(props => {
     if (!isLocalObjectUrl(item)) {
       url = imageClientAPI.getScaleToFillImageURL(
         prefix +
-          (item.metadata.type === GALLERY_ITEMS_TYPES.IMAGE ? item.url : item.metadata.poster),
+          (item.metadata.type !== GALLERY_ITEMS_TYPES.VIDEO ? item.url : item.metadata.poster),
         item.metadata.width,
         item.metadata.height,
         imageSize,
