@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+
+### :bug: Bug Fix
+- `link`
+  - [#1941](https://github.com/wix-incubator/rich-content/pull/1941) fix: selection after adding link
+
 </details>
 <hr/>
 
