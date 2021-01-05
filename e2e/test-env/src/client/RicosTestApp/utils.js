@@ -1,5 +1,6 @@
 export const createPresets = plugins => {
   const partialPreset = [
+    plugins.unsupportedBlocks,
     plugins.image,
     plugins.gallery,
     plugins.video,

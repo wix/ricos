@@ -29,7 +29,7 @@ import {
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
-import { UNSUPPORTED_BLOCKS_TYPE } from '../';
+import { UNSUPPORTED_BLOCKS_TYPE } from '../consts';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
@@ -265,7 +265,10 @@ const createBasePlugin = (
         let type;
         if (config.type === entityType || config.legacyType === entityType) {
           type = entityType;
-        } else if (!config.supportedBlockTypes?.includes(entityType)) {
+        } else if (
+          config.type === UNSUPPORTED_BLOCKS_TYPE &&
+          !config.supportedBlockTypes?.includes(entityType)
+        ) {
           type = UNSUPPORTED_BLOCKS_TYPE;
         }
         const blockRenderObject = type

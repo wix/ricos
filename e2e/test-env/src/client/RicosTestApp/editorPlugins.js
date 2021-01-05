@@ -29,6 +29,7 @@ import {
 } from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../../../examples/main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import { pluginUnsupportedBlocks } from 'wix-rich-content-plugin-unsupported-blocks';
 
 import { createPresets } from './utils';
 import {
@@ -84,6 +85,7 @@ const configs = {
 };
 
 const plugins = {
+  unsupportedBlocks: pluginUnsupportedBlocks(),
   image: pluginImage(),
   gallery: pluginGallery(configs.gallery),
   video: pluginVideo(configs.video),
