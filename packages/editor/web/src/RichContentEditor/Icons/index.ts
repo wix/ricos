@@ -3,7 +3,7 @@ export { default as BoldIcon } from './BoldIcon';
 export { default as ItalicIcon } from './ItalicIcon';
 export { default as LinkIcon } from './LinkIcon';
 export { default as OrderedListIcon } from './OrderedListIcon';
-export { default as PlusActiveIcon } from './PlusActiveIcon';
+export { default as PlusIconSmall } from './PlusIconSmall';
 export { default as PlusIcon } from './PlusIcon';
 export { default as TitleIcon } from './TitleIcon';
 export { default as TitleOneIcon } from './TitleOneIcon';

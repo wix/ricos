@@ -201,6 +201,23 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('should enter link and further text in current block has no inline style', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs(['wix.com '])
+      .enterParagraphs(['no inline style'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter link and further text in next block has no inline style', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs(['wix.com'])
+      .type('{enter}')
+      .enterParagraphs(['no inline style'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   context('indentation', () => {
     it('allow to apply indent on a single block with inline styling', function() {
       cy.loadRicosEditorAndViewer('plain', usePlugins(plugins.textPlugins))
