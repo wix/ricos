@@ -32,14 +32,8 @@ const supportedDecorations = {
 };
 
 const supportedTypes = {
-  text: (inner, node) => {
-    const {
-      ricosText: { text, decorations },
-    } = node;
-
-    if (decorations.length > 0) {
-      console.log({ decorations });
-    }
+  text: (inner, { ricosText }) => {
+    const { text, decorations } = ricosText;
 
     let res = text;
     decorations.forEach(deco => (res = (supportedDecorations[deco.type] || (x => x))(res, deco)));
@@ -47,11 +41,22 @@ const supportedTypes = {
   },
   heading: inner => `<h1>${inner}</h1>`,
   paragraph: inner => `<p>${inner}</p>`,
-  ricos_giphy: inner => `<div><<< Missing gif plugin >>></div>`,
-  ricos_divider: inner => `<hr>`,
   blockquote: inner =>
-    `<div style="border-left: 5px solid blue; padding-left:20px;">${inner}</div>`,
+    `<div style="border-left: 5px solid blue; padding-left:20px; margin-left: 20px;">${inner}</div>`,
   codeblock: inner => `<pre style="background: black; color: white;">${escapeHtml(inner)}</pre>`,
+  ricos_divider: (inner, { ricosDivider }) => {
+    const { type } = ricosDivider;
+    const border = type === 'DASHED' ? 'dashed' : 'solid';
+    return `<hr style="border-top: ${border};">`;
+  },
+  ricos_giphy: (inner, { ricosGiphy }) => {
+    const {
+      gif: { originalUrl },
+    } = ricosGiphy;
+    return `<img role="img" aria-label="gif" src="${originalUrl}" alt="gif" />`;
+  },
+
+  ricos_gallery: inner => `<div><<< Missing no gallery plugin quite yet >>></div>`,
 };
 
 const nodeToHTML = node => {
