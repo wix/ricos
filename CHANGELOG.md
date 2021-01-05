@@ -17,15 +17,19 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.11.5 (Jan 5, 2021)
 ### :rocket: New Feature
 - `editor`
   - [#1944](https://github.com/wix-incubator/rich-content/pull/1944) improve inline color filtering from pasted text
+- `link`
+  - [#1892](https://github.com/wix-incubator/rich-content/pull/1892) external link
 ### :bug: Bug Fix
 - `link`
   - [#1941](https://github.com/wix-incubator/rich-content/pull/1941) fix: selection after adding link
 
-</details>
-<hr/>
 
 ## 8.11.4 (Jan 3, 2021)
 ### :bug: Bug Fix
