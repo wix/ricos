@@ -12,7 +12,7 @@ const parseRGB = rgbString => {
   return rgb;
 };
 
-const tooDark = luma => luma < 40;
+const tooDark = luma => luma <= 50;
 
 const tooLight = luma => luma > 220;
 
