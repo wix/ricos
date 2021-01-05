@@ -2,19 +2,14 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
-    width: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     height: 100%;
     background-color: rgba($primary-text-color-tuple, 0.4);
-    color: $background-color;
-    opacity: 0.6;
-
-    .selectAllContainer {
-        width: 100%;
-        height: 20px;
-    }
-
-    .rowContainer {
-        width: 100%;
-        position: relative;
+    &:hover {
+        color: $action-color;
+        background-color: rgba($action-color-tuple, 0.2);
     }
 }

@@ -12,7 +12,7 @@
             align-items: center;
             &.active, &.selectAll {
                 background-color: $action-color;
-                color: white;
+                color: $background-color;
             }
             &.selectAll {
                 opacity: 0.4;
@@ -33,7 +33,7 @@
     }
 
     .selectPreview {
-        background-color:rgba(33, 133, 208, 0.15);
+        background-color: rgba($action-color-tuple, 0.2);
         position: absolute;
         visibility: hidden;
         z-index: 3;

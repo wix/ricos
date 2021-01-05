@@ -474,10 +474,14 @@ class TableComponent extends React.Component {
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
         {!isMobile && (
-          <AddNewSection dataHook={'addCol'} className={styles.addCol} onClick={this.addLastCol} />
+          <div className={styles.addCol}>
+            <AddNewSection dataHook={'addCol'} onClick={this.addLastCol} />
+          </div>
         )}
         {!isMobile && (
-          <AddNewSection dataHook={'addRow'} className={styles.addRow} onClick={this.addLastRow} />
+          <div className={styles.addRow}>
+            <AddNewSection dataHook={'addRow'} onClick={this.addLastRow} />
+          </div>
         )}
       </div>
     );

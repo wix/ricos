@@ -5,7 +5,7 @@
     font-size: 16px;
     @include phone {
         font-size: 20px;
-      }
+    }
 }
 .subtitle {
     padding-top: 7px;
@@ -14,7 +14,7 @@
     @include phone {
         font-size: 14px;
         padding-top: 12px;
-      }
+    }
 }
 .tableConfig {
     padding-top: 11px;
@@ -23,12 +23,12 @@
     grid-column-gap: 11px;
     @include phone {
         padding-top: 20px;
-      }
+    }
 }
 .submit {
     width: 100%;
     background-color: $action-color;
-    color: #ffffff;
+    color: $background-color;
     font-size: 16px;
     height: 36px;
     align-items: center;

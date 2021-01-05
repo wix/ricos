@@ -201,7 +201,7 @@ export default class AddPluginFloatingToolbar extends Component {
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
         >
-          {smallPlusIcon ? <PlusIconSmall /> : <PlusIcon />}
+          {smallPlusIcon ? <PlusIconSmall className={Styles.smallPlusIcon} /> : <PlusIcon />}
         </button>
         {!isSSR() && isPopupOpen && (
           <PopupOffsetnHoc

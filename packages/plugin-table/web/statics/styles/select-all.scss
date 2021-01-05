@@ -2,7 +2,8 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .selectAll {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: $primary-text-color;
+    color: $background-color;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -11,6 +12,6 @@
     cursor: pointer;
     &.activeSelectAll {
         background-color: $action-color;
-        color: white;
+        color: $background-color;
     }
 }

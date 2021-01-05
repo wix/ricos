@@ -7,6 +7,7 @@ const AddIcon = props => (
       fillRule="evenodd"
       d="M2.5 6.6h3.6V3h.8v3.6h3.6v.8H6.9V11h-.8V7.4H2.5v-.8z"
       opacity=".4"
+      fill="currentColor"
     />
   </svg>
 );

@@ -136,7 +136,7 @@ export default class Cell extends Component {
         className={classNames(
           styles.cell,
           shouldShowSelectedStyle && styles.selected,
-          range?.length === 1 && styles.multiSelection,
+          range?.length === 1 && styles.singleSelection,
           isContainedInHeader && styles.header
         )}
         onMouseDown={onMouseDown}
