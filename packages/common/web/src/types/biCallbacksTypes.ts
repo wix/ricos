@@ -3,6 +3,7 @@ export interface BICallbacks {
   onPluginAddSuccess?(pluginId: string, entryPoint: string, version: string): void;
   onPluginDelete?(pluginId: string, version: string): void;
   onPublish?(
+    postId: string | undefined,
     pluginsCount: Record<string, number> | undefined,
     pluginsDetails:
       | {
@@ -11,8 +12,7 @@ export interface BICallbacks {
           data: any;
         }[]
       | undefined,
-    version: string,
-    postId: string | undefined
+    version: string
   ): void;
   onViewerAction?(pluginId: string, actionName: string, value: string): void;
   onViewerLoaded?(isPreview: boolean, version: string): void;
