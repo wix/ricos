@@ -20,6 +20,15 @@
   pointer-events: initial;
   fill: $primary-text-color;
 
+  &.sideToolbar_smallPlusIcon {
+    height: 18px;
+    width: 18px;
+  }
+
+  &.sideToolbar_popupOpen {
+    transform: rotate(45deg);
+  }
+
   &:hover {
     color: $action-color;
     fill: $action-color;

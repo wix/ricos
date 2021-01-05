@@ -163,14 +163,14 @@ function updateLink(
   return setEntityData(editorState, entityKey, linkData);
 }
 
-function preventLinkInlineStyleForNewLine(editorState: EditorState, selection: SelectionState) {
+function preventLinkInlineStyleForFurtherText(editorState: EditorState, selection: SelectionState) {
   const focusOffset = selection.getFocusOffset();
   const selectionForSpace: SelectionState = createSelection({
     blockKey: selection.getAnchorKey(),
     anchorOffset: focusOffset,
     focusOffset,
   });
-  //insert dummy space after link for preventing underline inline style to the new line
+  //insert dummy space after link for preventing underline inline style for further text
   return Modifier.insertText(editorState.getCurrentContent(), selectionForSpace, ' ');
 }
 
@@ -185,21 +185,27 @@ function insertLink(
     data,
     mutability: 'MUTABLE',
   });
-  const preventInlineStyleForFurtherText =
-    editorWithLink
-      .getCurrentContent()
-      .getBlockForKey(oldSelection.getAnchorKey())
-      .getText().length -
-      selection.getFocusOffset() ===
-      0 || selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link
-  const contentState = preventInlineStyleForFurtherText
-    ? preventLinkInlineStyleForNewLine(editorWithLink, selection)
-    : editorWithLink.getCurrentContent();
+  const contentWithLink = editorWithLink.getCurrentContent();
+  const selectedTextLength = contentWithLink.getBlockForKey(oldSelection.getAnchorKey()).getText()
+    .length;
+  const shouldPreventInlineStyleAtCurrentBlock =
+    selectedTextLength - selection.getFocusOffset() === 0;
+  const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey();
+  const preventInlineStyle = shouldPreventInlineStyleAtCurrentBlock || isNewLine;
+
+  const contentState = preventInlineStyle
+    ? preventLinkInlineStyleForFurtherText(editorWithLink, selection)
+    : contentWithLink;
+
+  const selectionAfter = isNewLine
+    ? contentWithLink.getSelectionAfter()
+    : contentState.getSelectionAfter();
+
   return EditorState.push(
     editorState,
     Modifier.applyInlineStyle(contentState, selection, 'UNDERLINE').set(
       'selectionAfter',
-      contentState.getSelectionAfter()
+      selectionAfter
     ) as ContentState,
     'change-inline-style'
   );
