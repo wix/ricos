@@ -2,27 +2,6 @@ import React from 'react';
 import RicosFixture from '../../../../packages/ricos-content/web/src/migrateSchema/migratedFixtures/intro.json';
 import { RichContentViewerBox, ContentState, Section, Page } from '../Components/StoryParts';
 
-/*
-[
-  {
-    "type": "ricos_link",
-    "ricosLink": {
-      "url": "https://github.com/wix-incubator/rich-content",
-      "rel": "noopener",
-      "target": "_blank"
-    }
-  },
-  {
-    "type": "bold"
-  },
-  {
-    "type": "italic"
-  },
-  {
-    "type": "underline"
-  }
-]*/
-
 function escapeHtml(unsafe) {
   return unsafe
     .replace(/&/g, '&amp;')
@@ -33,7 +12,10 @@ function escapeHtml(unsafe) {
 }
 
 const supportedDecorations = {
-  ricos_link: inner => `<a href='#'>${inner}</a>`,
+  ricos_link: (inner, { ricosLink }) => {
+    const { url, rel, target } = ricosLink;
+    return `<a href='${url}' rel='${rel}' target='${target}'>${inner}</a>`;
+  },
   bold: inner => `<strong>${inner}</strong>`,
   italic: inner => `<i>${inner}</i>`,
   underline: inner => `<u>${inner}</u>`,
