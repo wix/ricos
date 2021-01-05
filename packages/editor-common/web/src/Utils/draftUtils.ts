@@ -72,9 +72,12 @@ export const getEntityData = (editorState: EditorState) => {
   const blockKey = selection.getStartKey();
   const block = contentState.getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(selection.getStartOffset());
-  const entity = contentState.getEntityMap().get(entityKey);
-  const entityData = entity?.getData();
-  return entityData;
+  if (entityKey) {
+    const entity = contentState.getEntity(entityKey);
+    const entityData = entity?.getData();
+    return entityData;
+  }
+  return null;
 };
 
 export const insertExternalLink = (editorState: EditorState, externalData: ExternalLinkData) => {
