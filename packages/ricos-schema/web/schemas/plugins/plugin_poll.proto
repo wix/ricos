@@ -114,4 +114,5 @@ message RicosPoll {
   PollData poll = 2 [required = true];
   PollWidgetLayout layout = 3 [required = true];
   PollWidgetDesign design = 4 [required = true];
+  string site_token = 5;
 }

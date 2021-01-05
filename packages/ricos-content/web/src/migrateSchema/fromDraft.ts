@@ -108,7 +108,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   const parseTextBlock = (block: RicosContentBlock): RicosNode => {
     const textWrapperNode: RicosNode = {
-      key: genKey(),
+      key: block.type === BlockType.Unstyled ? block.key : genKey(),
       type: NodeType.Paragraph,
       ricosParagraph: {
         ...parseBlockData(block.data),
