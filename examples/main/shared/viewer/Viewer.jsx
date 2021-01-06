@@ -60,6 +60,7 @@ export default class Viewer extends PureComponent {
         // This is for debugging only
         onViewerAction: async (actionName, pluginId, value) =>
           console.log('onViewerAction', actionName, pluginId, value),
+        onViewerLoaded: async (...args) => console.log('onViewerLoaded', ...args),
       },
       localeResource,
       locale,

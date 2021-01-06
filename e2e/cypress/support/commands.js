@@ -18,6 +18,7 @@ import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
 import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
 import { merge } from 'lodash';
+
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -127,7 +128,7 @@ Cypress.Commands.add('getTwitterButton', () => {
   cy.get('[data-hook="twitter-button"]');
 });
 
-function setSelection(start, offset, container) {
+export function setSelection(start, offset, container) {
   container.then(args => {
     const getTextElmentAndLocalOffset = getTextElements(args[0]);
     const document = args[0].ownerDocument;
@@ -286,7 +287,7 @@ Cypress.Commands.add('setColorByHex', color => {
 });
 
 Cypress.Commands.add('updateTextColor', () => {
-  cy.get(`[data-hook="${COLOR_PICKER.UPDATE_BUTTON}"]`).click();
+  cy.get(`[data-hook="${COLOR_PICKER.UPDATE_BUTTON}"]`).click({ force: true });
 });
 
 Cypress.Commands.add('resetColor', () => {
