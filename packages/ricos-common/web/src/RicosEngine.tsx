@@ -6,7 +6,13 @@ import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
+import {
+  RicosEditorProps,
+  RicosViewerProps,
+  RichContentProps,
+  BasePlugin,
+  FullscreenProps,
+} from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: ReactElement;
@@ -15,6 +21,7 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   isViewer: boolean;
   isPreviewExpanded?: boolean;
   onPreviewExpand?: PreviewConfig['onPreviewExpand'];
+  fullscreenProps?: FullscreenProps;
 }
 
 export class RicosEngine extends Component<EngineProps> {

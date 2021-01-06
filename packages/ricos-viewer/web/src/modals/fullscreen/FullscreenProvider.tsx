@@ -1,7 +1,7 @@
 import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
 import { emptyState } from 'ricos-common';
 import { Helpers } from 'wix-rich-content-common';
-import { RicosContent } from '../../index';
+import { RicosContent, FullscreenProps } from '../../index';
 
 interface Props {
   children: ReactElement;
@@ -9,7 +9,7 @@ interface Props {
   initialState?: RicosContent;
   isModalSuspended: boolean;
   isMobile: boolean;
-  fullscreenProps?: { backgroundColor?: string; iconsColor?: string };
+  fullscreenProps?: FullscreenProps;
 }
 
 interface State {

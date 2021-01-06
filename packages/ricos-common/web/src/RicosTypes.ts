@@ -49,12 +49,14 @@ export interface RicosEditorProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
 }
 
+export type FullscreenProps = { backgroundColor?: string; iconsColor?: string };
+
 export interface RicosViewerProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
   plugins?: ViewerPlugin[];
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
-  fullscreenProps?: { backgroundColor?: string; iconsColor?: string };
+  fullscreenProps?: FullscreenProps;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
