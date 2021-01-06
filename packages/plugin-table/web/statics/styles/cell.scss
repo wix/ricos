@@ -55,14 +55,11 @@
 }
 
 .columns {
-    background-color: rgba($primary-text-color-tuple, 0.3);
-    color: $background-color;
-    opacity: 0.6;
     padding: 0;
     height: 20px;
     position: relative;
     &.selected {
-        border: 1px solid $action-color;
+        border-right: 1px solid $action-color;
     }
     &.selectAll {
         border: none !important;

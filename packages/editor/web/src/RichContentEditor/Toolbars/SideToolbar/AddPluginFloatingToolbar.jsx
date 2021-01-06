@@ -179,6 +179,7 @@ export default class AddPluginFloatingToolbar extends Component {
       isPopupOpen && Styles.sideToolbar_popupOpen,
       smallPlusIcon && Styles.sideToolbar_smallPlusIcon
     );
+    const Icon = smallPlusIcon ? PlusIconSmall : PlusIcon;
 
     return (
       <FocusManager
@@ -201,7 +202,7 @@ export default class AddPluginFloatingToolbar extends Component {
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
         >
-          {smallPlusIcon ? <PlusIconSmall className={Styles.smallPlusIcon} /> : <PlusIcon />}
+          <Icon className={Styles.plusIcon} />
         </button>
         {!isSSR() && isPopupOpen && (
           <PopupOffsetnHoc
