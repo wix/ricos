@@ -93,12 +93,14 @@ class RicosTestApp extends PureComponent {
           handleFileSelection: mockTestFileUpload,
         };
     const nativeFileUploadConfig = {
-      'wix-draft-plugin-file-upload': uploadHandler,
+      fileUpload: uploadHandler,
     };
+
+    const externalPluginsConfigs = { ...testAppConfig.pluginsConfig, ...nativeFileUploadConfig };
 
     return (
       <RicosEditor
-        plugins={editorPlugins(testAppConfig.plugins)}
+        plugins={editorPlugins(testAppConfig.plugins, externalPluginsConfigs)}
         placeholder={'Add some text!'}
         content={contentState}
         isMobile={isMobile}
@@ -109,7 +111,6 @@ class RicosTestApp extends PureComponent {
         onChange={onRicosEditorChange}
       >
         <RichContentEditor
-          config={{ ...testAppConfig.pluginsConfig, ...nativeFileUploadConfig }}
           helpers={{
             onVideoSelected,
             handleFileSelection: !isNativeUpload ? mockTestImageUpload : undefined,

@@ -1,5 +1,5 @@
 import { getColors } from '../defaults';
-import { CELL_MANUAL_MIN_WIDTH } from '../consts';
+import { CELL_MANUAL_MIN_WIDTH, CELL_AUTO_MIN_WIDTH } from '../consts';
 
 //RESIZERS
 const getStyleVal = (elm, css) => {
@@ -108,15 +108,18 @@ export class TableDataUtil {
       const cellWidth = tableWidth * (width / colsWidthSum);
       if (index === i) {
         currCellWidth = cellWidth;
-      } else if (cellWidth < 120 && (!smallestCellWidth || smallestCellWidth > cellWidth)) {
+      } else if (
+        cellWidth < CELL_AUTO_MIN_WIDTH &&
+        (!smallestCellWidth || smallestCellWidth > cellWidth)
+      ) {
         smallestCellWidth = cellWidth;
         smallestCellIndex = index;
       }
     });
     if (smallestCellWidth) {
-      return 120 * (this.getColWidth(i) / this.getColWidth(smallestCellIndex));
+      return CELL_AUTO_MIN_WIDTH * (this.getColWidth(i) / this.getColWidth(smallestCellIndex));
     }
-    return Math.max(currCellWidth, 120);
+    return Math.max(currCellWidth, CELL_AUTO_MIN_WIDTH);
   };
 
   getCellWidthAsRatio = (tableWidth, totalColsWidth, cellWidth) =>

@@ -1718,28 +1718,7 @@ exports[`text > should paste html correctly #0`] =
           "offset": 7
         }
       ],
-      "inlineStyleRanges": [
-        {
-          "length": 7,
-          "offset": 0,
-          "style": "{\"FG\":\"#202122\"}"
-        },
-        {
-          "length": 2,
-          "offset": 18,
-          "style": "{\"FG\":\"#202122\"}"
-        },
-        {
-          "length": 7,
-          "offset": 0,
-          "style": "{\"BG\":\"#ffffff\"}"
-        },
-        {
-          "length": 2,
-          "offset": 18,
-          "style": "{\"BG\":\"#ffffff\"}"
-        }
-      ],
+      "inlineStyleRanges": [],
       "key": 0,
       "text": "called anchor text. ",
       "type": "unstyled"
@@ -2362,4 +2341,124 @@ exports[`text > allow to reset to default text color #0`] =
     }
   ],
   "entityMap": {}
+};
+
+exports[`text > should enter link and further text in current block has no inline style #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "wix.com no inline style",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`text > should enter link and further text in next block has no inline style #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 7,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "wix.com ",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "no inline style",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "url": "wix.com"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`text > should insert external link #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 13,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 13,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "External link.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "externalData": {
+          "mockData": {},
+          "mockURL": "www.sport5.co.il"
+        }
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
 };
