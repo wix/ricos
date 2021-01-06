@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
-import { styleParams, defaultColors } from './defaults';
+import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -15,6 +15,11 @@ export default class InnerFullscreen extends Component {
     this.state = { isInFullscreen: false };
     this.getItems();
   }
+
+  static defaultProps = {
+    backgroundColor: 'white',
+    iconsColor: '#2F2E2E',
+  };
 
   componentDidMount() {
     document.addEventListener('keydown', this.onEsc);
@@ -85,8 +90,8 @@ export default class InnerFullscreen extends Component {
   };
 
   renderCloseButton = () => {
-    const backgroundColor = this.props.backgroundColor || defaultColors.backgroundColor;
-    const iconsColor = this.props.iconsColor || defaultColors.iconsColor;
+    const backgroundColor = this.props.backgroundColor;
+    const iconsColor = this.props.iconsColor;
     return (
       <div
         role="button"
@@ -112,8 +117,8 @@ export default class InnerFullscreen extends Component {
 
   renderFullscreenToggleButton = () => {
     const { isInFullscreen } = this.state;
-    const backgroundColor = this.props.backgroundColor || defaultColors.backgroundColor;
-    const iconsColor = this.props.iconsColor || defaultColors.iconsColor;
+    const backgroundColor = this.props.backgroundColor;
+    const iconsColor = this.props.iconsColor;
     const Icon = isInFullscreen ? ShrinkIcon : ExpandIcon;
     const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
     return (
@@ -146,8 +151,8 @@ export default class InnerFullscreen extends Component {
   };
 
   renderArrow = (Icon, styles) => {
-    const backgroundColor = this.props.backgroundColor || defaultColors.backgroundColor;
-    const iconsColor = this.props.iconsColor || defaultColors.iconsColor;
+    const backgroundColor = this.props.backgroundColor;
+    const iconsColor = this.props.iconsColor;
     return (
       <div className={styles}>
         <Icon backgroundColor={backgroundColor} iconsColor={iconsColor} />
@@ -168,6 +173,7 @@ export default class InnerFullscreen extends Component {
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams();
     const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
+
     return (
       <div
         style={{ background: backgroundColor, ...topMargin }}
@@ -184,7 +190,15 @@ export default class InnerFullscreen extends Component {
           resizeMediaUrl={fullscreenResizeMediaUrl}
           container={{ width, height }}
           styles={{
-            ...styleParams,
+            ...layouts[5],
+            galleryLayout: 5,
+            cubeType: 'fit',
+            scrollSnap: true,
+            videoPlay: 'auto',
+            allowSocial: false,
+            loveButton: false,
+            allowTitle: true,
+            defaultShowInfoExpand: 1,
             showArrows: !isMobile,
             arrowsPosition,
             slideshowInfoSize,

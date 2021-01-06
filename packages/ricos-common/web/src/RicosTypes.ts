@@ -46,6 +46,15 @@ export interface RicosEditorProps extends RicosProps {
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
   injectedContent?: RicosContent;
+  editorEvents?: {
+    subscribe: (
+      event: string,
+      callback: () => Promise<{ type: string; data: unknown }>
+    ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+    unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+    dispatch: (event: string) => Promise<unknown>;
+  };
+
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -65,6 +74,7 @@ export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
+  getEditorState: () => EditorState;
   refresh: (
     editorState: EditorState,
     contentTraits: { isEmpty: boolean; isContentChanged: boolean }
