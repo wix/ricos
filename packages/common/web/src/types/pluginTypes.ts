@@ -79,6 +79,7 @@ export type PluginMapping = Partial<
 export type PluginTypeMapper = (...args) => PluginMapping;
 
 export type PluginType =
+  | string
   | typeof LINK_BUTTON_TYPE
   | typeof ACTION_BUTTON_TYPE
   | typeof CODE_BLOCK_TYPE
