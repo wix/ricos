@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.12.0 (Jan 6, 2021)
 ### :rocket: New Feature
 - `editor`
   - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
@@ -31,8 +35,6 @@
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
 
-</details>
-<hr/>
 
 ## 8.11.5 (Jan 5, 2021)
 ### :rocket: New Feature
