@@ -19,10 +19,14 @@
 
 ### :rocket: New Feature
 - `editor`
-  - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste 
+  - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
+- `ricos-viewer`
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `iconsColor` via `fullscreenProps` object prop
 ### :house: Internal
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
+- `fullscreen`
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `iconsColor` props support
 
 </details>
 <hr/>
