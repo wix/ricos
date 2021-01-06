@@ -22,7 +22,13 @@ export const WithEditorEventsProps = {
   }),
 };
 
-export const withEditorEvents = WrappedComponent => {
+export const withEditorEvents = WrappedComponent => props => (
+  <EditorEventsContext.Consumer>
+    {contextValue => <WrappedComponent editorEvents={contextValue} {...props} />}
+  </EditorEventsContext.Consumer>
+);
+
+export const withEditorEventsRef = WrappedComponent => {
   class WithEditorEvents extends React.Component {
     static propTypes = {
       forwardRef: PropTypes.oneOfType([
