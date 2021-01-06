@@ -5,7 +5,6 @@ export {
   EditorEventsContext,
   EditorEventsProvider,
   withEditorEvents,
-  withEditorEventsRef,
   WithEditorEventsProps,
   EditorEvents,
 } from './EditorEventsContext';
