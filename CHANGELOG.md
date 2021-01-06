@@ -20,10 +20,13 @@
 ### :rocket: New Feature
 - `editor`
   - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
+- `ricos-editor`
+  - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
 
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1959](https://github.com/wix-incubator/rich-content/pull/1959) fix horizontal orientation image view
+
 ### :house: Internal
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
