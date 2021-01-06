@@ -17,15 +17,24 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.12.0 (Jan 6, 2021)
 ### :rocket: New Feature
 - `editor`
-  - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste 
+  - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
+- `ricos-editor`
+  - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
+
+### :bug: Bug Fix
+- `file-upload`
+  - [#1962](https://github.com/wix-incubator/rich-content/pull/1962) fix autodownload file after url resolve
+
 ### :house: Internal
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
 
-</details>
-<hr/>
 
 ## 8.11.5 (Jan 5, 2021)
 ### :rocket: New Feature

@@ -34,6 +34,8 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     });
   };
 
+  const getEditorState = () => currEditorState;
+
   const getContentState: ContentStateGetter = ({ shouldRemoveErrorBlocks = true } = {}) => {
     const currState: ContentState = currEditorState.getCurrentContent();
     if (!isUpdated) {
@@ -53,6 +55,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
   const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {
     getContentState,
+    getEditorState,
     waitForUpdate,
     getContentStatePromise,
     refresh: (editorState, contentTraits) => {
