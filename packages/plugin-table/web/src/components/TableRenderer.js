@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/table-viewer.scss';
 import { debounce } from 'lodash';
+import { CELL_AUTO_MIN_WIDTH } from '../consts';
 export default class TableRenderer extends PureComponent {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ export default class TableRenderer extends PureComponent {
   };
 
   render() {
-    const { columns, children, tableRef, table } = this.props;
+    const { columns, children, tableRef, table, isMobile } = this.props;
     return (
       <table className={styles.container}>
         <colgroup>
@@ -33,8 +34,10 @@ export default class TableRenderer extends PureComponent {
               key={i}
               ref={ref => (this.columns[i] = ref)}
               style={{
-                width: table.getCellWidthAsPixel(tableRef?.offsetWidth, i),
-                minWidth: 120,
+                width: isMobile
+                  ? CELL_AUTO_MIN_WIDTH
+                  : table.getCellWidthAsPixel(tableRef?.offsetWidth, i),
+                minWidth: CELL_AUTO_MIN_WIDTH,
               }}
             />
           ))}
@@ -51,4 +54,5 @@ TableRenderer.propTypes = {
   columns: PropTypes.any,
   table: PropTypes.any,
   tableRef: PropTypes.any,
+  isMobile: PropTypes.bool,
 };
