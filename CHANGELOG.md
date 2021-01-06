@@ -28,6 +28,8 @@
   - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
 
 ### :bug: Bug Fix
+- `fullscreen`
+  - [#1959](https://github.com/wix-incubator/rich-content/pull/1959) fix horizontal orientation image view
 - `file-upload`
   - [#1962](https://github.com/wix-incubator/rich-content/pull/1962) fix autodownload file after url resolve
 
