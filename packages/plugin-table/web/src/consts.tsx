@@ -52,5 +52,3 @@ export const COLORS = Object.freeze({
 export const CELL_MANUAL_MIN_WIDTH = 120;
 export const CELL_AUTO_MIN_WIDTH = 120;
 export const ROW_DEFAULT_HEIGHT = 47;
-
-export const getCellMinWidth = isMobile => (isMobile ? CELL_AUTO_MIN_WIDTH * 0.8 : isMobile);

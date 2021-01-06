@@ -154,7 +154,9 @@ class InnerRCE extends PureComponent {
     } = this.props;
     const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
-    innerRCERenderedIn === TABLE_TYPE && isMobile && toolbarsToIgnore.push('SideToolbar');
+    if (innerRCERenderedIn === TABLE_TYPE && isMobile) {
+      toolbarsToIgnore.push('SideToolbar');
+    }
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
         <div
