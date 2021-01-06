@@ -14,5 +14,5 @@ export const styleParams = {
 
 export const defaultColors = {
   backgroundColor: 'white',
-  iconsColor: 'black',
+  iconsColor: '#2F2E2E',
 };
