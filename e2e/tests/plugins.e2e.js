@@ -307,7 +307,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          LINK_PREVIEW: {
+          linkPreview: {
             enableEmbed: undefined,
             enableLinkPreview: undefined,
           },
@@ -333,7 +333,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          'wix-draft-plugin-link-preview': {
+          linkPreview: {
             enableEmbed: false,
             enableLinkPreview: false,
           },
@@ -521,7 +521,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
-        'wix-rich-content-plugin-headings': {
+        headings: {
           customHeadings: ['P', 'H2', 'H3'],
         },
       }),
@@ -610,7 +610,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.all),
       ...usePluginsConfig({
-        LINK: {
+        link: {
           linkTypes: { anchor: true },
         },
       }),
