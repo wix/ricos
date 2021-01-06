@@ -7,9 +7,13 @@ export const EditorEvents = {
 };
 
 export const EditorEventsContext = React.createContext({
-  subscribe() {},
+  subscribe() {
+    return () => {};
+  },
   unsubscribe() {},
-  dispatch() {},
+  dispatch() {
+    return Promise.resolve(true);
+  },
   publish() {},
 });
 
