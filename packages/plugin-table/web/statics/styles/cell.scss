@@ -35,10 +35,10 @@
     caret-color: transparent;
     &.edit {
         caret-color: unset;
-        padding-left: 29px;
-        padding-top: 10px;
-        padding-right: 10px;
-        padding-bottom: 10px;
+        padding: 10px 26px 10px 29px;
+        @media only screen and (max-width: 640px) {
+            padding: 10px 0px 10px 10px;
+        }
     }
     &.view {
         padding: 10px;
