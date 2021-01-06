@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
@@ -12,8 +12,9 @@ import { PlusIcon, PlusIconSmall } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import AddPluginMenu from './AddPluginMenu';
 import PopupOffsetnHoc from './PopupOffsetnHoc';
+import { isElementOutOfWindow } from 'wix-rich-content-toolbars';
 
-export default class AddPluginFloatingToolbar extends Component {
+export default class AddPluginFloatingToolbar extends PureComponent {
   state = {
     isPopupOpen: false,
   };
@@ -108,13 +109,22 @@ export default class AddPluginFloatingToolbar extends Component {
   getStyle(width, top) {
     const { addPluginMenuConfig } = this.props;
     const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
-    const leftRightOffset = smallPlusIcon ? 22 : 30;
-    return {
-      left: width / 2 + leftRightOffset,
-      right: width / 2 + leftRightOffset,
-      width,
-      top,
-    };
+    if (smallPlusIcon) {
+      const isToolbarOverflow = this.popupRef && isElementOutOfWindow(this.popupRef);
+      return {
+        left: isToolbarOverflow ? null : width / 2 + 22,
+        right: isToolbarOverflow ? -(width / 2) + 30 : width / 2 + 22,
+        width,
+        top,
+      };
+    } else {
+      return {
+        left: width / 2 + 30,
+        right: width / 2 + 30,
+        width,
+        top,
+      };
+    }
   }
 
   SideToolbarPanel = ({ top }) => {

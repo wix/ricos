@@ -24,15 +24,15 @@ const getWidth = element => {
   return element.clientWidth;
 };
 
-export const getModalPosition = element => {
+export const isElementOutOfWindow = element => {
   if (window && document) {
     const modalOffset = getElementCoordsInWindow(element).left;
     const modalWidth = getWidth(element);
     const windowWidth = getWindowWidth();
     if (modalWidth + modalOffset > windowWidth) {
-      return { right: 0 };
+      return true;
     } else {
-      return { left: 0 };
+      return false;
     }
   } else {
     console.error('window or document not found'); //eslint-disable-line
