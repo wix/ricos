@@ -14,6 +14,8 @@ import {
   GALLERY_TYPE,
   HTML_TYPE,
   GIPHY_TYPE,
+  LINK_PREVIEW_TYPE,
+  SOUND_CLOUD_TYPE,
 } from '../consts';
 import { TO_RICOS_ENTITY_TYPE_MAP, TO_RICOS_PLUGIN_TYPE_MAP } from './consts';
 import { has } from 'lodash';
@@ -64,7 +66,7 @@ const migrateVerticalEmbedData = data => {
 };
 
 const migrateHtmlData = data => {
-  has(data, 'alignment') && (data.alignment = toConstantCase(data.alignment));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };
 
 const migrateGiphyData = data => {
@@ -72,6 +74,17 @@ const migrateGiphyData = data => {
     (data.configViewer.sizes.desktop = toConstantCase(data.configViewer.sizes.desktop));
   has(data, 'configViewer.sizes.mobile') &&
     (data.configViewer.sizes.mobile = toConstantCase(data.configViewer.sizes.mobile));
+};
+
+const migrateLinkPreviewData = data => {
+  has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
+  has(data, 'provider_url') && (data.providerUrl = data.provider_url);
+};
+
+const migrateSoundCloudData = data => {
+  if (data.metadata) {
+    data.metadata = keysToCamelCase(data.metadata);
+  }
 };
 
 export const getEntity = (
@@ -124,6 +137,12 @@ export const getEntity = (
       break;
     case GIPHY_TYPE:
       migrateGiphyData(data);
+      break;
+    case LINK_PREVIEW_TYPE:
+      migrateLinkPreviewData(data);
+      break;
+    case SOUND_CLOUD_TYPE:
+      migrateSoundCloudData(data);
       break;
     default:
   }

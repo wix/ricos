@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "./plugin_video.proto";
+
 message SoundCloudConfig {
   string size = 1;
   string alignment = 2;
@@ -9,4 +11,5 @@ message SoundCloudConfig {
 message RicosSoundCloud {
   string src = 1 [required = true];
   SoundCloudConfig config = 2;
+  VideoMetadata metadata = 3;
 }

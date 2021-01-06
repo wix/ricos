@@ -208,30 +208,6 @@
       "data": {}
     },
     {
-      "key": "b7qh5",
-      "type": "unstyled",
-      "text": "",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "7qp04",
-      "type": "atomic",
-      "text": " ",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 9
-        }
-      ],
-      "data": {}
-    },
-    {
       "key": "89ir3",
       "type": "unstyled",
       "text": "",
@@ -250,7 +226,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 10
+          "key": 9
         }
       ],
       "data": {}
@@ -292,7 +268,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 11
+          "key": 10
         }
       ],
       "data": {}
@@ -316,7 +292,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 12
+          "key": 11
         }
       ],
       "data": {}
@@ -340,7 +316,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 13
+          "key": 12
         }
       ],
       "data": {}
@@ -364,7 +340,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 14
+          "key": 13
         }
       ],
       "data": {}
@@ -388,7 +364,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 15
+          "key": 14
         }
       ],
       "data": {}
@@ -421,7 +397,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 16
+          "key": 15
         }
       ],
       "data": {}
@@ -433,21 +409,6 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "9qfd3",
-      "type": "atomic",
-      "text": " ",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 17
-        }
-      ],
       "data": {}
     },
     {
@@ -578,88 +539,6 @@
           "padding-bottom": "0px"
         }
       }
-    },
-    {
-      "key": "55t98",
-      "type": "unstyled",
-      "text": "Praesent purus nibh, sodales non efficitur a, consequat ac ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "key": 18,
-          "offset": 164,
-          "length": 7
-        }
-      ],
-      "data": {
-        "textAlignment": "justify",
-        "dynamicStyles": {
-          "line-height": "2.5",
-          "padding-top": "0px",
-          "padding-bottom": "0px"
-        }
-      }
-    },
-    {
-      "key": "27i88",
-      "type": "unstyled",
-      "text": "",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "79dta",
-      "type": "atomic",
-      "text": " ",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 19
-        }
-      ],
-      "data": {}
-    },
-    {
-      "key": "dcre3",
-      "type": "unstyled",
-      "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש.\n",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "5rm16",
-      "type": "unstyled",
-      "text": "",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "brfl1",
-      "type": "unstyled",
-      "text": "",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "4btgr",
-      "type": "unstyled",
-      "text": "\n",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
     }
   ],
   "entityMap": {
@@ -871,10 +750,6 @@
       }
     },
     "9": {
-      "type": "wix-draft-plugin-link-button",
-      "mutability": "IMMUTABLE"
-    },
-    "10": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -886,7 +761,7 @@
         }
       }
     },
-    "11": {
+    "10": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
@@ -912,7 +787,7 @@
         }
       }
     },
-    "12": {
+    "11": {
       "type": "wix-draft-plugin-map",
       "mutability": "IMMUTABLE",
       "data": {
@@ -936,7 +811,7 @@
         }
       }
     },
-    "13": {
+    "12": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
@@ -950,7 +825,7 @@
         "size": 150000
       }
     },
-    "14": {
+    "13": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
@@ -964,7 +839,7 @@
         "config": {}
       }
     },
-    "15": {
+    "14": {
       "type": "wix-draft-plugin-sound-cloud",
       "mutability": "IMMUTABLE",
       "data": {
@@ -991,7 +866,7 @@
         }
       }
     },
-    "16": {
+    "15": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1008,139 +883,6 @@
         },
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "provider_url": "www.mockUrl.com"
-      }
-    },
-    "17": {
-      "type": "wix-draft-plugin-poll",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "alignment": "center",
-          "enableVoteRole": false
-        },
-        "poll": {
-          "options": [
-            {
-              "latestVoters": [
-                "84856a9a-f25f-4d8f-a774-56e0b8927bbe",
-                "15c6f37e-c980-46ba-b450-11415ca5b4fe",
-                "2bff5b99-e56c-421d-b5ec-cd432a5b6961",
-                "3efa7e86-fc25-4ef1-a002-19769b84202f",
-                "28ba5b75-0c82-4239-86e3-131879cb96e7"
-              ],
-              "anonymousCount": 0,
-              "count": 5,
-              "id": "067ed3b5-f19d-4886-8f23-acd84a586522",
-              "mediaId": "https://static.wixstatic.com/media/3efa7e_f12aec64c02f464c9d3f0f6d62ec7384~mv2.png",
-              "rating": 38,
-              "title": "Cafe Nordoy"
-            },
-            {
-              "latestVoters": [
-                "3efa7e86-fc25-4ef1-a002-19769b84202f",
-                "dd0d2b42-ba5f-47e9-8a53-26c61c08f9ec",
-                "3f3fa379-9a5a-4306-8a95-f79915ef479d",
-                "7b3cad1d-bce1-4529-b402-d1e1e74962f1"
-              ],
-              "anonymousCount": 0,
-              "count": 4,
-              "id": "ee32a57f-bf6c-425a-a20c-e678bcf4a73b",
-              "mediaId": "https://static.wixstatic.com/media/3efa7e_c6ebbeecf9b4494f91244656beee6e78~mv2.jpg",
-              "rating": 31,
-              "title": "קפה רוטשילד 65"
-            },
-            {
-              "latestVoters": [
-                "15c6f37e-c980-46ba-b450-11415ca5b4fe",
-                "13633644-d00c-4456-a189-1575ea044f10",
-                "7b3cad1d-bce1-4529-b402-d1e1e74962f1"
-              ],
-              "anonymousCount": 0,
-              "count": 3,
-              "id": "41679bf9-89ba-41f2-81d3-832d567531da",
-              "mediaId": "https://static.wixstatic.com/media/3efa7e_26d7f9c215944dbcb783c6b16f536c33~mv2.jpg",
-              "rating": 23,
-              "title": "האחים"
-            },
-            {
-              "latestVoters": [
-                "dd0d2b42-ba5f-47e9-8a53-26c61c08f9ec"
-              ],
-              "anonymousCount": 0,
-              "count": 1,
-              "id": "378c6042-55cc-4e4a-9f0c-77824bee4964",
-              "mediaId": "https://static.wixstatic.com/media/3efa7e_d9b16be508ce41aa8e635d0e9e97b923~mv2.jpeg",
-              "rating": 8,
-              "title": "הוטל מונטיפיורי"
-            }
-          ],
-          "ownVotes": [
-            "067ed3b5-f19d-4886-8f23-acd84a586522",
-            "ee32a57f-bf6c-425a-a20c-e678bcf4a73b"
-          ],
-          "anonymousCount": 0,
-          "count": 13,
-          "createdBy": "3efa7e86-fc25-4ef1-a002-19769b84202f",
-          "creatorFlag": true,
-          "id": "f3fa62b4-6d75-4016-a895-acb793ca6f5c",
-          "mediaId": "https://static.wixstatic.com/media/436483e6ed9e41fe91b9f286d2ea4efb.jpg",
-          "title": "Where do you want to have breakfast tomorrow to use the monthly budget?",
-          "settings": {
-            "multipleVotes": true,
-            "resultsVisibility": "VOTERS_ONLY",
-            "voteRole": "SITE_MEMBERS",
-            "votersDisplay": true,
-            "votesDisplay": true
-          }
-        },
-        "layout": {
-          "poll": {
-            "type": "grid",
-            "direction": "ltr",
-            "enableImage": false
-          },
-          "option": {
-            "enableImage": true
-          }
-        },
-        "design": {
-          "poll": {
-            "backgroundType": "image",
-            "background": "https://static.wixstatic.com/media/2dfdd3_b120b7d9cffd4645bb143beadef13c56~mv2.jpg",
-            "borderRadius": 0
-          },
-          "option": {
-            "borderRadius": 0
-          }
-        },
-        "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
-      }
-    },
-    "18": {
-      "type": "EMOJI_TYPE",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "emojiUnicode": "👨‍👩‍👦‍👦"
-      }
-    },
-    "19": {
-      "type": "wix-draft-plugin-image",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "size": "small",
-          "alignment": "right",
-          "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
-        },
-        "src": {
-          "id": "91ff5a615e0235157dc1a7e5f66607bf",
-          "width": 1920,
-          "height": 1280,
-          "original_file_name": "8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg",
-          "file_name": "8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg"
-        }
       }
     }
   },

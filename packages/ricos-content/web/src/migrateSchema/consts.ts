@@ -186,12 +186,14 @@ export const ENTITY_DECORATION_TO_MUTABILITY = {
   [ANCHOR_TYPE]: 'MUTABLE',
   [LINK_TYPE]: 'MUTABLE',
   [MENTION_TYPE]: 'SEGMENTED',
+  EMOJI_TYPE: 'IMMUTABLE',
 };
 
 export const ENTITY_DECORATION_TO_DATA_FIELD = {
   [ANCHOR_TYPE]: toCamelCase(RICOS_ANCHOR_TYPE),
   [LINK_TYPE]: toCamelCase(RICOS_LINK_TYPE),
   [MENTION_TYPE]: toCamelCase(RICOS_MENTION_TYPE),
+  EMOJI_TYPE: 'ricosEmoji',
 };
 
 // eslint-disable-next-line max-len

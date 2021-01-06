@@ -1,44 +1,55 @@
 /* eslint-disable no-console */
 import { RicosContent, RicosNode, RicosDecoration } from 'ricos-schema';
-import { RicosContent as RicosContentDraft, RicosContentBlock } from '..';
 import {
-  EditorState,
-  convertToRaw,
-  createBlock,
-  ContentBlock,
-  genKey,
-  ContentState,
-  Modifier,
-  createSelection,
-  SelectionState,
-} from 'wix-rich-content-editor-common';
+  RicosContent as RicosContentDraft,
+  RicosContentBlock,
+  RicosEntityMap,
+  RicosEntityRange,
+  RicosInlineStyleRange,
+} from '..';
+import { genKey } from 'wix-rich-content-editor-common';
 import {
   NodeType,
   BlockType,
   HeaderLevel,
   FROM_RICOS_DECORATION_TYPE,
-  ENTITY_DECORATION_TO_MUTABILITY,
+  ENTITY_DECORATION_TO_DATA_FIELD,
   emojiRegex,
 } from './consts';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
 import {
   createTextBlockData,
-  getDecorationEntityData,
-  getNodeEntityData,
+  createDecorationEntityData,
+  createAtomicEntityData,
 } from './getDraftEntityData';
 
 interface DecorationDescriptor extends RicosDecoration {
   start: number;
   end: number;
+  ricosEmoji?: { emojiUnicode: string };
 }
 
-const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
-  return fns.reduce((v, fn) => fn(v), arg);
-};
+// const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
+//   return fns.reduce((v, fn) => fn(v), arg);
+// };
 
 const convertDecorationTypes = (decorations: DecorationDescriptor[]): DecorationDescriptor[] =>
-  decorations.flatMap(decoration => pipe(decoration, splitColorDecoration, toDraftDecorationType));
+  decorations.flatMap(decoration => toDraftDecorationType(decoration));
+
+const createEmojiDecorations = (text: string) =>
+  Array.from(text.matchAll(emojiRegex)).flatMap(({ 0: emojiUnicode, index: start }) => {
+    if (start) {
+      const decoration: DecorationDescriptor = {
+        type: 'EMOJI_TYPE',
+        ricosEmoji: { emojiUnicode },
+        start,
+        end: start + Array.from(emojiUnicode).length,
+      };
+      return decoration;
+    }
+    return [];
+  });
 
 const toDraftDecorationType = (decoration: DecorationDescriptor): DecorationDescriptor => {
   if (FROM_RICOS_DECORATION_TYPE[decoration.type]) {
@@ -50,7 +61,7 @@ const toDraftDecorationType = (decoration: DecorationDescriptor): DecorationDesc
 const splitColorDecoration = ({
   ricosColor,
   ...decoration
-}: DecorationDescriptor): DecorationDescriptor | DecorationDescriptor[] => {
+}: RicosDecoration): RicosDecoration | RicosDecoration[] => {
   if (!ricosColor) {
     return decoration;
   }
@@ -65,18 +76,21 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
     doc: { nodes },
     version,
   } = ricosContent;
-  let editorState = removeFirstBlock(EditorState.createEmpty());
+  const draftContent: RicosContentDraft = {
+    blocks: [],
+    entityMap: {},
+  };
 
   const parseNodes = (index = 0) => {
     const node = nodes[index];
     if (node) {
       switch (node.type) {
         case NodeType.Blockquote:
-          parseTextNodes(getParagraphNode(node), BlockType.Blockquote);
+          parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.key });
           parseNodes(index + 1);
           break;
         case NodeType.CodeBlock:
-          parseTextNodes(node, BlockType.CodeBlock, node);
+          parseTextNodes(node, { type: BlockType.CodeBlock, key: node.key });
           parseNodes(index + 1);
           break;
         case NodeType.Heading:
@@ -84,23 +98,29 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
             console.log(`ERROR! Heading node with no data!`);
             process.exit(1);
           }
-          parseTextNodes(node, HeaderLevel[node.ricosHeading.level], node);
+          parseTextNodes(node, { type: HeaderLevel[node.ricosHeading.level], key: node.key });
           parseNodes(index + 1);
           break;
         case NodeType.OrderedList:
           node.nodes.forEach(listItem =>
-            parseTextNodes(getParagraphNode(listItem), BlockType.OrderedListItem)
+            parseTextNodes(getParagraphNode(listItem), {
+              type: BlockType.OrderedListItem,
+              key: listItem.key,
+            })
           );
           parseNodes(index + 1);
           break;
         case NodeType.UnorderedList:
           node.nodes.forEach(listItem =>
-            parseTextNodes(getParagraphNode(listItem), BlockType.UnorderedListItem)
+            parseTextNodes(getParagraphNode(listItem), {
+              type: BlockType.UnorderedListItem,
+              key: listItem.key,
+            })
           );
           parseNodes(index + 1);
           break;
         case NodeType.Paragraph:
-          parseTextNodes(node, BlockType.Unstyled);
+          parseTextNodes(node, { type: BlockType.Unstyled, key: node.key });
           parseNodes(index + 1);
           break;
         default:
@@ -116,8 +136,14 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   };
 
   const parseAtomicNode = (node: RicosNode) => {
-    const { type, data } = getNodeEntityData(node);
-    editorState = createBlock(editorState, data, type).newEditorState;
+    const { entityKey, entityMap } = createAtomicEntityData(node);
+    addBlock({
+      key: node.key,
+      type: BlockType.Atomic,
+      text: ' ',
+      entityRanges: [{ offset: 0, length: 1, key: entityKey }],
+    });
+    draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
 
   const getParagraphNode = (node: RicosNode) => {
@@ -129,188 +155,160 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
     }
   };
 
-  const parseTextNodes = (node: RicosNode, blockType: DraftBlockType, wrapperNode?: RicosNode) => {
+  const parseTextNodes = (
+    node: RicosNode,
+    { type, key }: { type: DraftBlockType; key: string }
+  ) => {
     const { text, decorations } = mergeTextNodes(node.nodes);
-    const {
-      editorState: editorStateWithEntities,
-      inlineStyleRanges,
-      entityRanges,
-    } = parseDecorations(editorState, decorations, text);
-    const data = createTextBlockData(wrapperNode || node, blockType);
-    editorState = addTextBlock(editorStateWithEntities, {
-      key: node.key,
-      type: blockType,
+    const { inlineStyleRanges, entityRanges, entityMap } = parseDecorations(decorations);
+    const data = createTextBlockData(node, type);
+    addBlock({
+      key,
+      type,
       text,
       data,
+      inlineStyleRanges,
+      entityRanges,
     });
-    const contentState = [...entityRanges, ...inlineStyleRanges].reduce((contentState, range) => {
-      const selectionState = createSelection({
-        blockKey: node.key,
-        anchorOffset: range.start,
-        focusOffset: range.end,
-      });
-      const content =
-        'style' in range
-          ? Modifier.applyInlineStyle(contentState, selectionState, range.style)
-          : Modifier.applyEntity(contentState, selectionState, range.key);
-      return content;
-    }, editorState.getCurrentContent());
-    editorState = EditorState.push(editorState, contentState, 'change-inline-style');
+    draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
 
-  parseNodes();
-
-  const rawContentState: RicosContentDraft = convertToRaw(editorState.getCurrentContent());
-  rawContentState.VERSION = version;
-  return rawContentState;
-};
-
-const addTextBlock = (
-  editorState: EditorState,
-  blockProps?: Pick<RicosContentBlock, 'key' | 'type' | 'text' | 'data'>
-): EditorState => {
-  const newBlock = new ContentBlock(
-    merge(
+  const addBlock = (blockProps?: Partial<RicosContentBlock>) => {
+    const newBlock: RicosContentBlock = merge(
       {
         key: genKey(),
         type: BlockType.Unstyled,
         text: '',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {},
       },
       blockProps
-    )
-  );
+    );
+    draftContent.blocks = [...draftContent.blocks, newBlock];
+  };
 
-  const contentState = editorState.getCurrentContent();
-  const newBlockMap = contentState.getBlockMap().set(newBlock.getKey(), newBlock);
-  const newEditorState = EditorState.push(
-    editorState,
-    ContentState.createFromBlockArray(newBlockMap.toArray())
-      .set('selectionBefore', contentState.getSelectionBefore())
-      .set('selectionAfter', contentState.getSelectionAfter()) as ContentState,
-    'insert-fragment'
-  );
-  const selectionState = SelectionState.createEmpty(
-    newEditorState
-      .getCurrentContent()
-      .getLastBlock()
-      .getKey()
-  );
+  parseNodes();
 
-  return EditorState.acceptSelection(newEditorState, selectionState);
-};
-
-const removeFirstBlock = (editorState: EditorState): EditorState => {
-  const contentState = editorState.getCurrentContent();
-  const blockMap = contentState.getBlockMap();
-  const firstBlockKey = contentState.getFirstBlock().getKey();
-  const newBlockMap = blockMap.remove(firstBlockKey);
-  const newContentState = contentState.merge({
-    blockMap: newBlockMap,
-  }) as ContentState;
-  const newEditorState = EditorState.push(editorState, newContentState, 'remove-range');
-  return newEditorState;
+  draftContent.VERSION = version;
+  return draftContent;
 };
 
 const mergeTextNodes = (
   nodes: RicosNode[]
 ): { text: string; decorations: DecorationDescriptor[] } => {
   let length = 0;
-  return nodes.reduce<{
+  const { text, decorationMap } = nodes.reduce<{
     text: string;
-    decorations: DecorationDescriptor[];
+    decorationMap: { [type: string]: DecorationDescriptor[] };
   }>(
-    (accNode, currNode) => {
+    ({ text, decorationMap }, currNode) => {
+      let accText = text;
       if (currNode.ricosText) {
-        const text = currNode.ricosText.text;
-        const textLength = Array.from(text).length; // required for properly reading emojis
-        accNode.text += text;
-        const decorations: DecorationDescriptor[] | undefined = currNode.ricosText.decorations?.map(
-          decoration => ({
-            ...decoration,
-            start: length,
-            end: length + textLength,
-          })
-        );
-        if (decorations) {
-          accNode.decorations = accNode.decorations.concat(decorations);
-        }
+        const { text: currText, decorations: currDecorations } = currNode.ricosText;
+        const textLength = Array.from(currText).length; // required for properly reading emojis
+        accText += currText;
+        currDecorations
+          ?.flatMap(decoration => splitColorDecoration(decoration))
+          .forEach(decoration => {
+            if (!decorationMap[decoration.type]) {
+              decorationMap[decoration.type] = [];
+            }
+            decorationMap[decoration.type] = [
+              ...decorationMap[decoration.type],
+              {
+                ...decoration,
+                start: length,
+                end: length + textLength,
+              },
+            ];
+          });
         length += textLength;
       }
-      return accNode;
+      return { text: accText, decorationMap };
     },
-    { text: '', decorations: [] }
+    { text: '', decorationMap: {} }
   );
+  const decorations = Object.values(decorationMap).reduce(
+    (decorations: DecorationDescriptor[], currentDecorations) => {
+      if (currentDecorations.length > 0) {
+        const firstDecoration = currentDecorations.shift() as DecorationDescriptor;
+        const mergedDecorations: DecorationDescriptor[] = [firstDecoration];
+        currentDecorations.forEach(decoration => {
+          const lastDecoration = mergedDecorations.pop() as DecorationDescriptor;
+          if (decoration.start === lastDecoration.end) {
+            mergedDecorations.push({ ...lastDecoration, end: decoration.end });
+          } else {
+            mergedDecorations.push(lastDecoration, decoration);
+          }
+        });
+        return [...decorations, ...mergedDecorations];
+      }
+      return decorations;
+    },
+    []
+  );
+  return {
+    text,
+    decorations: [...convertDecorationTypes(decorations), ...createEmojiDecorations(text)].sort(
+      sortEntityRangesByOffset
+    ),
+  };
 };
 
-interface InlineStyleRange {
-  style: string;
-  start: number;
-  end: number;
-}
-
-interface EntityRange {
-  key: string;
-  start: number;
-  end: number;
-}
-
 const parseDecorations = (
-  editorState: EditorState,
-  decorations: DecorationDescriptor[],
-  text: string
+  decorations: DecorationDescriptor[]
 ): {
-  editorState: EditorState;
-  inlineStyleRanges: InlineStyleRange[];
-  entityRanges: EntityRange[];
+  inlineStyleRanges: RicosInlineStyleRange[];
+  entityRanges: RicosEntityRange[];
+  entityMap: RicosEntityMap;
 } => {
-  const contentState = editorState.getCurrentContent();
-  const { inlineStyleRanges, entityRanges } = convertDecorationTypes(decorations).reduce<{
-    inlineStyleRanges: InlineStyleRange[];
-    entityRanges: EntityRange[];
+  const { inlineStyleRanges, entityRanges, entityMap } = decorations.reduce<{
+    inlineStyleRanges: RicosInlineStyleRange[];
+    entityRanges: RicosEntityRange[];
+    entityMap: RicosEntityMap;
   }>(
-    ({ inlineStyleRanges, entityRanges }, decoration) => {
-      if (ENTITY_DECORATION_TO_MUTABILITY[decoration.type]) {
-        const { type, data, mutability } = getDecorationEntityData(decoration);
-        const entityKey = contentState
-          .createEntity(type, mutability, data)
-          .getLastCreatedEntityKey();
+    ({ inlineStyleRanges, entityRanges, entityMap }, decoration) => {
+      if (ENTITY_DECORATION_TO_DATA_FIELD[decoration.type]) {
+        const { entityKey, entityMap: newEntityMap } = createDecorationEntityData(decoration);
         return {
           inlineStyleRanges,
           entityRanges: [
             ...entityRanges,
             {
               key: entityKey,
-              start: decoration.start,
-              end: decoration.end,
+              offset: decoration.start,
+              length: decoration.end - decoration.start,
             },
           ],
+          entityMap: { ...entityMap, ...newEntityMap },
         };
       }
       return {
         inlineStyleRanges: [
           ...inlineStyleRanges,
-          { style: decoration.type, start: decoration.start, end: decoration.end },
+          {
+            style: decoration.type,
+            offset: decoration.start,
+            length: decoration.end - decoration.start,
+          },
         ],
         entityRanges,
+        entityMap,
       };
     },
-    { inlineStyleRanges: [], entityRanges: [] }
-  );
-  const emojiEntityRanges: EntityRange[] = Array.from(text.matchAll(emojiRegex)).flatMap(
-    ({ 0: emojiUnicode, index: start }) =>
-      start
-        ? {
-            key: contentState
-              .createEntity('EMOJI_TYPE', 'IMMUTABLE', { emojiUnicode })
-              .getLastCreatedEntityKey(),
-            start,
-            end: (start || 0) + 1,
-          }
-        : []
+    { inlineStyleRanges: [], entityRanges: [], entityMap: {} }
   );
   return {
-    editorState: EditorState.push(editorState, contentState, 'apply-entity'),
     inlineStyleRanges,
-    entityRanges: [...emojiEntityRanges, ...entityRanges],
+    entityRanges,
+    entityMap,
   };
+};
+
+const sortEntityRangesByOffset = (a: DecorationDescriptor, b: DecorationDescriptor) => {
+  const aVal = ENTITY_DECORATION_TO_DATA_FIELD[a.type] ? a.start : 0;
+  const bVal = ENTITY_DECORATION_TO_DATA_FIELD[b.type] ? b.start : 0;
+  return aVal - bVal;
 };

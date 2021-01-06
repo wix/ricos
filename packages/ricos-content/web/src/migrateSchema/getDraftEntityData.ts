@@ -15,14 +15,20 @@ import {
   RICOS_GALLERY_TYPE,
   RICOS_HTML_TYPE,
   RICOS_IMAGE_TYPE,
+  RICOS_LINK_PREVIEW_TYPE,
   RICOS_POLL_TYPE,
   RICOS_VERTICAL_EMBED_TYPE,
   RICOS_VIDEO_TYPE,
   MENTION_TYPE,
   RICOS_GIPHY_TYPE,
+  RicosEntity,
+  RicosEntityMap,
+  RICOS_SOUND_CLOUD_TYPE,
 } from '..';
 import { DraftBlockType } from 'draft-js';
 import { Map as immutableMap } from 'immutable';
+
+let latestEntityKey = 0;
 
 const migrateVideoData = data => {
   if (data.url) {
@@ -75,7 +81,7 @@ const migrateVerticalEmbedData = data => {
 };
 
 const migrateHtmlData = data => {
-  has(data, 'alignment') && (data.alignment = toCamelCase(data.alignment));
+  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
 
 const migrateGiphyData = data => {
@@ -85,7 +91,24 @@ const migrateGiphyData = data => {
     (data.configViewer.sizes.mobile = toCamelCase(data.configViewer.sizes.mobile));
 };
 
-export const getNodeEntityData = (node: RicosNode) => {
+const migrateLinkPreviewData = data => {
+  if (has(data, 'thumbnailUrl')) {
+    data.thumbnail_url = data.thumbnailUrl;
+    delete data.thumbnailUrl;
+  }
+  if (has(data, 'providerUrl')) {
+    data.provider_url = data.providerUrl;
+    delete data.providerUrl;
+  }
+};
+
+const migrateSoundCloudData = data => {
+  if (data.metadata) {
+    data.metadata = keysToSnakeCase(data.metadata);
+  }
+};
+
+const getNodeEntityData = (node: RicosNode) => {
   const { type } = node;
   const draftPluginType = FROM_RICOS_ENTITY_TYPE_MAP[type];
   const dataFieldName = TO_RICOS_ENTITY_TYPE_MAP[draftPluginType];
@@ -121,13 +144,21 @@ export const getNodeEntityData = (node: RicosNode) => {
     case RICOS_GIPHY_TYPE:
       migrateGiphyData(data);
       break;
+    case RICOS_LINK_PREVIEW_TYPE:
+      migrateLinkPreviewData(data);
+      break;
+    case RICOS_SOUND_CLOUD_TYPE:
+      migrateSoundCloudData(data);
+      break;
     default:
   }
 
   return { type: draftPluginType, data };
 };
 
-export const getDecorationEntityData = (decoration: RicosDecoration) => {
+export const createDecorationEntityData = (
+  decoration: RicosDecoration
+): { entityKey: number; entityMap: RicosEntityMap } => {
   const { type } = decoration;
   const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[type];
   if (!dataFieldName) {
@@ -148,7 +179,14 @@ export const getDecorationEntityData = (decoration: RicosDecoration) => {
     default:
   }
 
-  return { type, data, mutability };
+  return createEntity({ type, mutability, data });
+};
+
+export const createAtomicEntityData = (
+  node: RicosNode
+): { entityKey: number; entityMap: RicosEntityMap } => {
+  const { type, data } = getNodeEntityData(node);
+  return createEntity({ type, mutability: 'IMMUTABLE', data });
 };
 
 export const createTextBlockData = (node: RicosNode, blockType: DraftBlockType) => {
@@ -170,3 +208,13 @@ export const createTextBlockData = (node: RicosNode, blockType: DraftBlockType) 
 
 const keysToSnakeCase = obj =>
   Object.fromEntries(Object.entries(obj).map(([key, value]) => [toSnakeCase(key), value]));
+
+const createEntity = ({
+  type,
+  mutability,
+  data,
+}: RicosEntity): { entityKey: number; entityMap: RicosEntityMap } => {
+  const entityKey = latestEntityKey;
+  latestEntityKey += 1;
+  return { entityKey, entityMap: { [entityKey.toString()]: { type, mutability, data } } };
+};
