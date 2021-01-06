@@ -14,8 +14,12 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-
+import { withEditorEventsRef } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
+
+// eslint-disable-next-line
+const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
+The getContent(postId, isPublishing) API is deprecated and will be removed in ricos v9.0.0`;
 
 interface State {
   StaticToolbar?: ElementType;
@@ -47,7 +51,27 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
+    this.props.editorEvents?.subscribe('rce:publish', this.onPublish);
   }
+
+  componentWillUnmount() {
+    this.props.editorEvents?.unsubscribe('rce:publish', this.onPublish);
+  }
+
+  onPublish = async () => {
+    // TODO: remove this param after getContent(postId) is deprecated
+    await this.editor.publish((undefined as unknown) as string);
+    console.debug('editor publish callback'); // eslint-disable-line
+    return {
+      type: 'EDITOR_PUBLISH',
+      data: await this.getContent(),
+    };
+  };
+
+  publish = async () => {
+    const publishResponse = await this.onPublish();
+    return publishResponse.data;
+  };
 
   setStaticToolbar = ref => {
     if (ref && ref !== this.currentEditorRef) {
@@ -87,10 +111,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getToolbars = () => this.editor.getToolbars();
 
-  getContent = (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
+  getContent = async (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
-      this.editor.publish(postId); //async
+      console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
+      await this.editor.publish(postId); //async
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
@@ -106,7 +131,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
     const res = await getContentStatePromise();
     if (publishId) {
-      this.editor.publish(publishId);
+      console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
+      await this.editor.publish(publishId);
     }
     return res;
   };
@@ -174,6 +200,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     );
   }
 }
+
+export default withEditorEventsRef(RicosEditor);
 
 const StaticToolbarPortal: FunctionComponent<{
   StaticToolbar?: ElementType;
