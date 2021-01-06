@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1r88a",
+            "key": "fidcp",
             "ricosText": {
               "decorations": [],
               "text": "Hi! 😃"
@@ -32,7 +32,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "f6aop",
+            "key": "f8d2k",
             "ricosText": {
               "decorations": [],
               "text": "Welcome to "
@@ -41,7 +41,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cp2rk",
+            "key": "606d0",
             "ricosText": {
               "decorations": [
                 {
@@ -68,7 +68,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d6he5",
+            "key": "89toa",
             "ricosText": {
               "decorations": [],
               "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️"
@@ -76,13 +76,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "47hm2",
+        "key": "7cqs0",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "6hmdq",
+        "key": "4ni77",
         "ricosParagraph": {}
       },
       {
@@ -91,10 +91,14 @@
         "key": "9uurj",
         "ricosGiphy": {
           "gif": {
+            "height": 220,
+            "width": 410,
             "originalUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy.gif",
             "stillUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy_s.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy_s.gif",
-            "height": 220,
-            "width": 410
+            "originalMp4": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy.mp4?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy.mp4",
+            "downsizedUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy.gif",
+            "downsizedStillUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy_s.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy_s.gif",
+            "downsizedSmallMp4": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy-downsized-small.mp4?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy-downsized-small.mp4"
           },
           "config": {
             "size": "small",
@@ -105,7 +109,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dtgeu",
+        "key": "nujv",
         "ricosParagraph": {}
       },
       {
@@ -113,7 +117,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "842om",
+            "key": "2ldmd",
             "ricosText": {
               "decorations": [],
               "text": "Checkout the "
@@ -122,7 +126,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "89glq",
+            "key": "5s22d",
             "ricosText": {
               "decorations": [
                 {
@@ -142,7 +146,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "2h01r",
+        "key": "cg20j",
         "ricosParagraph": {}
       },
       {
@@ -150,7 +154,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ebat6",
+            "key": "o4bm",
             "ricosText": {
               "decorations": [
                 {
@@ -165,7 +169,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "md6e",
+        "key": "bhslk",
         "ricosParagraph": {}
       },
       {
@@ -173,7 +177,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "53b7f",
+            "key": "26aja",
             "ricosText": {
               "decorations": [
                 {
@@ -191,7 +195,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "2n4th",
+        "key": "ckj27",
         "ricosParagraph": {}
       },
       {
@@ -210,7 +214,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2j7b0",
+        "key": "3b4ah",
         "ricosParagraph": {}
       },
       {
@@ -218,7 +222,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2fa3f",
+            "key": "908gj",
             "ricosText": {
               "decorations": [],
               "text": "A wise man once said:"
@@ -226,7 +230,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "dk911",
+        "key": "8ptbs",
         "ricosParagraph": {}
       },
       {
@@ -236,7 +240,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "35ui3",
+                "key": "519hv",
                 "ricosText": {
                   "decorations": [],
                   "text": "The Wix Rich Content Editor is the best tool in the world!"
@@ -244,7 +248,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "dskvg",
+            "key": "12tsd",
             "ricosParagraph": {}
           }
         ],
@@ -254,7 +258,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "4dt4f",
+        "key": "8hmrf",
         "ricosParagraph": {}
       },
       {
@@ -262,7 +266,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "53eb8",
+            "key": "et18v",
             "ricosText": {
               "decorations": [],
               "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components."
@@ -270,13 +274,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "57mdo",
+        "key": "c4i62",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "esoov",
+        "key": "7bn5j",
         "ricosParagraph": {}
       },
       {
@@ -284,7 +288,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "360dh",
+            "key": "762u5",
             "ricosText": {
               "decorations": [],
               "text": "Code example:"
@@ -292,7 +296,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "6153h",
+        "key": "bmqc9",
         "ricosParagraph": {}
       },
       {
@@ -300,7 +304,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "tm0u",
+            "key": "a3aes",
             "ricosText": {
               "decorations": [],
               "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />"
@@ -316,7 +320,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9a797",
+            "key": "2890v",
             "ricosText": {
               "decorations": [],
               "text": "Pro Gallery Collage:"
@@ -324,13 +328,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "63uam",
+        "key": "45pcl",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "9qt2m",
+        "key": "dl5nc",
         "ricosParagraph": {}
       },
       {
@@ -395,19 +399,19 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "b7q1n",
+        "key": "1qn5s",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "2616u",
+        "key": "5vr9d",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609664139,
-      "nanos": 882000000
+      "seconds": 1609921246,
+      "nanos": 216000000
     }
   },
   "selection": {

@@ -4,7 +4,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1le7c",
+        "key": "8s1v3",
         "ricosParagraph": {}
       },
       {
@@ -13,10 +13,10 @@
         "key": "1u5r4",
         "ricosGiphy": {
           "gif": {
-            "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
-            "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
             "height": 400,
-            "width": 480
+            "width": 480,
+            "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+            "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif"
           },
           "config": {
             "size": "content",
@@ -27,17 +27,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ble8f",
+        "key": "bsrvp",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609664139,
-      "nanos": 849000000
+      "seconds": 1609921246,
+      "nanos": 184000000
     }
   },
   "selection": {
-    "anchorNode": "1le7c"
+    "anchorNode": "8s1v3"
   },
   "version": "5.1.1"
 }

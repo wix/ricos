@@ -13,21 +13,20 @@ import {
   SelectionState,
 } from 'wix-rich-content-editor-common';
 import {
-  FROM_RICOS_ENTITY_TYPE_MAP,
   NodeType,
   BlockType,
   HeaderLevel,
-  TO_RICOS_ENTITY_TYPE_MAP,
   FROM_RICOS_DECORATION_TYPE,
-  DRAFT_BLOCK_TYPE_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_MUTABILITY,
-  ENTITY_DECORATION_TO_DATA_FIELD,
   emojiRegex,
 } from './consts';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
-import toSlugCase from 'to-slug-case';
-import { Map as immutableMap } from 'immutable';
+import {
+  createTextBlockData,
+  getDecorationEntityData,
+  getNodeEntityData,
+} from './getDraftEntityData';
 
 interface DecorationDescriptor extends RicosDecoration {
   start: number;
@@ -117,12 +116,8 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   };
 
   const parseAtomicNode = (node: RicosNode) => {
-    const draftPluginType = FROM_RICOS_ENTITY_TYPE_MAP[node.type];
-    editorState = createBlock(
-      editorState,
-      node[TO_RICOS_ENTITY_TYPE_MAP[draftPluginType]],
-      draftPluginType
-    ).newEditorState;
+    const { type, data } = getNodeEntityData(node);
+    editorState = createBlock(editorState, data, type).newEditorState;
   };
 
   const getParagraphNode = (node: RicosNode) => {
@@ -154,12 +149,10 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
         anchorOffset: range.start,
         focusOffset: range.end,
       });
-      console.log(selectionState.toJS());
       const content =
         'style' in range
           ? Modifier.applyInlineStyle(contentState, selectionState, range.style)
           : Modifier.applyEntity(contentState, selectionState, range.key);
-      console.dir(convertToRaw(content), { depth: null });
       return content;
     }, editorState.getCurrentContent());
     editorState = EditorState.push(editorState, contentState, 'change-inline-style');
@@ -249,23 +242,6 @@ const mergeTextNodes = (
   );
 };
 
-const createTextBlockData = (node: RicosNode, blockType: DraftBlockType) => {
-  const { textAlignment, dynamicStyles } = node[DRAFT_BLOCK_TYPE_TO_DATA_FIELD[blockType]] || {};
-  return immutableMap(
-    Object.assign(
-      {},
-      textAlignment ? { textAlignment: textAlignment.toString().toLowerCase() } : undefined,
-      dynamicStyles
-        ? {
-            dynamicStyles: Object.fromEntries(
-              Object.entries(dynamicStyles).map(([key, value]) => [toSlugCase(key), value])
-            ),
-          }
-        : undefined
-    )
-  );
-};
-
 interface InlineStyleRange {
   style: string;
   start: number;
@@ -294,12 +270,9 @@ const parseDecorations = (
   }>(
     ({ inlineStyleRanges, entityRanges }, decoration) => {
       if (ENTITY_DECORATION_TO_MUTABILITY[decoration.type]) {
+        const { type, data, mutability } = getDecorationEntityData(decoration);
         const entityKey = contentState
-          .createEntity(
-            decoration.type,
-            ENTITY_DECORATION_TO_MUTABILITY[decoration.type],
-            decoration[ENTITY_DECORATION_TO_DATA_FIELD[decoration.type]]
-          )
+          .createEntity(type, mutability, data)
           .getLastCreatedEntityKey();
         return {
           inlineStyleRanges,

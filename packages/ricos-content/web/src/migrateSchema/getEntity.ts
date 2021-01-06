@@ -12,6 +12,8 @@ import {
   POLL_TYPE,
   MENTION_TYPE,
   GALLERY_TYPE,
+  HTML_TYPE,
+  GIPHY_TYPE,
 } from '../consts';
 import { TO_RICOS_ENTITY_TYPE_MAP, TO_RICOS_PLUGIN_TYPE_MAP } from './consts';
 import { has } from 'lodash';
@@ -58,7 +60,18 @@ const migratePollData = data => {
 };
 
 const migrateVerticalEmbedData = data => {
-  has(data, 'data.type') && (data.type = toConstantCase(data.type));
+  has(data, 'type') && (data.type = toConstantCase(data.type));
+};
+
+const migrateHtmlData = data => {
+  has(data, 'alignment') && (data.alignment = toConstantCase(data.alignment));
+};
+
+const migrateGiphyData = data => {
+  has(data, 'configViewer.sizes.desktop') &&
+    (data.configViewer.sizes.desktop = toConstantCase(data.configViewer.sizes.desktop));
+  has(data, 'configViewer.sizes.mobile') &&
+    (data.configViewer.sizes.mobile = toConstantCase(data.configViewer.sizes.mobile));
 };
 
 export const getEntity = (
@@ -105,6 +118,12 @@ export const getEntity = (
       break;
     case VERTICAL_EMBED_TYPE:
       migrateVerticalEmbedData(data);
+      break;
+    case HTML_TYPE:
+      migrateHtmlData(data);
+      break;
+    case GIPHY_TYPE:
+      migrateGiphyData(data);
       break;
     default:
   }

@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1vgmj",
+            "key": "e6io9",
             "ricosText": {
               "decorations": [
                 {
@@ -19,7 +19,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "1baq5",
+            "key": "1ieq6",
             "ricosText": {
               "decorations": [],
               "text": " "
@@ -27,13 +27,13 @@
           }
         ],
         "type": "paragraph",
-        "key": "97s3k",
+        "key": "4lirv",
         "ricosParagraph": {}
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "esi8",
+        "key": "d40oj",
         "ricosParagraph": {}
       },
       {
@@ -41,7 +41,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "aq653",
+            "key": "6tdv5",
             "ricosText": {
               "decorations": [
                 {
@@ -63,7 +63,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d54a8",
+            "key": "7ktc",
             "ricosText": {
               "decorations": [
                 {
@@ -88,7 +88,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d04tj",
+            "key": "9gdvl",
             "ricosText": {
               "decorations": [],
               "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field."
@@ -106,7 +106,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fgklb",
+            "key": "bas80",
             "ricosText": {
               "decorations": [],
               "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow "
@@ -115,7 +115,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4kge2",
+            "key": "6eq8p",
             "ricosText": {
               "decorations": [
                 {
@@ -128,7 +128,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "728it",
+            "key": "dmaj",
             "ricosText": {
               "decorations": [],
               "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza."
@@ -143,12 +143,12 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1609664139,
-      "nanos": 929000000
+      "seconds": 1609921246,
+      "nanos": 272000000
     }
   },
   "selection": {
-    "anchorNode": "97s3k"
+    "anchorNode": "4lirv"
   },
   "version": "7.9.1"
 }

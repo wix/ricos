@@ -4,7 +4,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e6t2k",
+        "key": "50k2j",
         "ricosParagraph": {
           "textAlignment": "JUSTIFY"
         }
@@ -17,17 +17,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "f2ra2",
+        "key": "4lu58",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609664139,
-      "nanos": 884000000
+      "seconds": 1609921246,
+      "nanos": 218000000
     }
   },
   "selection": {
-    "anchorNode": "e6t2k"
+    "anchorNode": "50k2j"
   },
   "version": "7.3.5"
 }

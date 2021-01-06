@@ -4,7 +4,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "8t6l2",
+        "key": "foo",
         "ricosParagraph": {}
       },
       {
@@ -23,17 +23,17 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "1o21d",
+        "key": "s2q6",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609664139,
-      "nanos": 826000000
+      "seconds": 1609921246,
+      "nanos": 162000000
     }
   },
   "selection": {
-    "anchorNode": "8t6l2"
+    "anchorNode": "foo"
   },
   "version": "6.6.8"
 }

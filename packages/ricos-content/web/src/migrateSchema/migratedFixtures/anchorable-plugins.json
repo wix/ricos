@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9ba4o",
+            "key": "bmd3g",
             "ricosText": {
               "decorations": [],
               "text": "link me to section"
@@ -14,7 +14,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "4pl9b",
+        "key": "1jlo1",
         "ricosParagraph": {}
       },
       {
@@ -22,7 +22,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7ikd2",
+            "key": "cfti",
             "ricosText": {
               "decorations": [
                 {
@@ -40,7 +40,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "8cr62",
+        "key": "4u0nr",
         "ricosParagraph": {}
       },
       {
@@ -48,7 +48,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5c3o",
+            "key": "533a1",
             "ricosText": {
               "decorations": [],
               "text": "my paragraph (regular text)"
@@ -56,7 +56,7 @@
           }
         ],
         "type": "paragraph",
-        "key": "if3t",
+        "key": "4qcgg",
         "ricosParagraph": {}
       },
       {
@@ -64,7 +64,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fe4g1",
+            "key": "89ssf",
             "ricosText": {
               "decorations": [],
               "text": "my header 1"
@@ -82,7 +82,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7amv1",
+            "key": "6cgn7",
             "ricosText": {
               "decorations": [],
               "text": "my header 2"
@@ -100,7 +100,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bg1ce",
+            "key": "4pvvh",
             "ricosText": {
               "decorations": [],
               "text": "my code block"
@@ -118,7 +118,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "ajld3",
+                "key": "1t8fl",
                 "ricosText": {
                   "decorations": [],
                   "text": "my quote"
@@ -126,7 +126,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "fvk68",
+            "key": "c5igb",
             "ricosParagraph": {}
           }
         ],
@@ -136,7 +136,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "dtn4n",
+        "key": "26it0",
         "ricosParagraph": {}
       },
       {
@@ -162,7 +162,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "aam2j",
+        "key": "9k387",
         "ricosParagraph": {}
       },
       {
@@ -238,7 +238,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "892vf",
+        "key": "fp23l",
         "ricosParagraph": {}
       },
       {
@@ -273,7 +273,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "e643v",
+        "key": "e4v04",
         "ricosParagraph": {}
       },
       {
@@ -290,7 +290,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "55uka",
+        "key": "60e1p",
         "ricosParagraph": {}
       },
       {
@@ -301,7 +301,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3oqk5",
+        "key": "8iav5",
         "ricosParagraph": {}
       },
       {
@@ -312,7 +312,7 @@
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "fbsb7",
+        "key": "15shb",
         "ricosParagraph": {}
       },
       {
@@ -321,21 +321,31 @@
         "key": "d8ipj",
         "ricosGiphy": {
           "gif": {
+            "height": 245,
+            "width": 245,
             "originalUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy.gif",
             "stillUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy_s.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy_s.gif",
-            "height": 245,
-            "width": 245
+            "originalMp4": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy.mp4?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy.mp4",
+            "downsizedUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy.gif",
+            "downsizedStillUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy_s.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy_s.gif",
+            "downsizedSmallMp4": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy-downsized-small.mp4?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy-downsized-small.mp4"
           },
           "config": {
             "size": "small",
             "alignment": "center"
+          },
+          "configViewer": {
+            "sizes": {
+              "desktop": "ORIGINAL",
+              "mobile": "ORIGINAL"
+            }
           }
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "3kb5n",
+        "key": "eonr4",
         "ricosParagraph": {}
       },
       {
@@ -343,29 +353,29 @@
         "type": "ricos_file",
         "key": "54mm0",
         "ricosFile": {
-          "name": "image.jpg",
-          "type": "jpg",
-          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
           "config": {
             "size": "small",
             "alignment": "center"
-          }
+          },
+          "name": "image.jpg",
+          "type": "jpg",
+          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
         }
       },
       {
         "nodes": [],
         "type": "paragraph",
-        "key": "ebo2c",
+        "key": "fhsng",
         "ricosParagraph": {}
       }
     ],
     "lastEdited": {
-      "seconds": 1609664139,
-      "nanos": 788000000
+      "seconds": 1609921246,
+      "nanos": 120000000
     }
   },
   "selection": {
-    "anchorNode": "4pl9b"
+    "anchorNode": "1jlo1"
   },
   "version": "7.16.3"
 }
