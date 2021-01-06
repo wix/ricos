@@ -2,13 +2,7 @@
 import React from 'react';
 
 const ExpandIcon = props => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="60"
-    height="60"
-    viewBox="0 0 60 60"
-    // style="background:#fff"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
     <g fill="none" fillRule="evenodd">
       <path fill={props.backgroundColor} d="M0 0H60V60H0z" />
       <g fill={props.iconsColor}>
