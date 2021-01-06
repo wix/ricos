@@ -69,7 +69,7 @@ export default class InnerFullscreen extends Component {
     let arrowsPosition = 0;
     let slideshowInfoSize = 0;
     if (this.props.isMobile) {
-      slideshowInfoSize = 154;
+      slideshowInfoSize = window.innerWidth < window.screen.height ? 154 : 0;
     } else if (!isInFullscreen) {
       arrowsPosition = 1;
       slideshowInfoSize = 142;
@@ -151,12 +151,14 @@ export default class InnerFullscreen extends Component {
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams();
     const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
+    const fullscreenStyle =
+      isInFullscreen || (isMobile && window.innerWidth > window.screen.height);
     return (
       <div
         style={{ ...backgroundColor, ...topMargin }}
         dir="ltr"
         data-hook={'fullscreen-root'}
-        className={isInFullscreen ? styles.fullscreen_mode : styles.expand_mode}
+        className={fullscreenStyle ? styles.fullscreen_mode : styles.expand_mode}
       >
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
