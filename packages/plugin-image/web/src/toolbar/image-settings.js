@@ -16,9 +16,11 @@ import styles from '../../statics/styles/image-settings.scss';
 class ImageSettings extends Component {
   constructor(props) {
     super(props);
+    const { componentData } = this.props;
+
     this.state = {
       ...this.propsToState(props),
-      isExpandable: !this.props.componentData.config.disableExpand,
+      isExpandable: !componentData.config.disableExpand,
     };
     this.initialState = { ...this.state };
     const { t, theme } = props;
@@ -31,8 +33,8 @@ class ImageSettings extends Component {
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
-    this.imageOpensInExpandModeLabel = t('ImageSettings_Image_OpensInExpandMode_Label');
-    this.imageCanBeDownloadedLabel = t('ImageSettings_Image_CanBeDownloaded_Label');
+    // this.imageOpensInExpandModeLabel = t('ImageSettings_Image_OpensInExpandMode_Label');
+    // this.imageCanBeDownloadedLabel = t('ImageSettings_Image_CanBeDownloaded_Label');
   }
 
   propsToState(props) {
@@ -46,36 +48,28 @@ class ImageSettings extends Component {
     };
   }
 
-  onToggle = key => {
-    switch (key) {
-      case 'expandMode':
-        return this.setState(prevState => ({
-          ...prevState,
-          isExpandable: !this.state.isExpandable,
-        }));
-      // case 'rightClick':
-      //   return (this.rightClick = !this.rightClick);
-      default:
-        break;
-    }
+  toggleState = key => () => {
+    this.setState(prevState => ({
+      [key]: !prevState[key],
+    }));
   };
 
-  handleExpandModeToggle = () => {
-    const {
-      componentData: { config },
-      pubsub,
-    } = this.props;
-    const blockKey = this.getFocusedBlockKey();
-    const newComponentData = {
-      ...this.props.componentData,
-      config: { ...config, disableExpand: !config.disableExpand },
-    };
-    pubsub.update('componentData', newComponentData, blockKey);
-  };
+  renderToggle = ({ toggleKey, labelKey }) => (
+    <LabeledToggle
+      key={toggleKey}
+      theme={this.props.theme}
+      checked={this.state[toggleKey]}
+      label={this.props.t(labelKey)}
+      onChange={this.toggleState(toggleKey)}
+    />
+  );
+  toggleData = [
+    {
+      toggleKey: 'isExpandable',
+      labelKey: 'ImageSettings_Image_OpensInExpandMode_Label',
+    },
+  ];
 
-  getFocusedBlockKey() {
-    return this.props.pubsub.get('focusedBlock');
-  }
   componentDidMount() {
     this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
   }
@@ -110,13 +104,16 @@ class ImageSettings extends Component {
   };
 
   onDoneClick = () => {
-    const { helpers, componentData } = this.props;
+    const { helpers, componentData, pubsub } = this.props;
+    const newComponentData = {
+      ...componentData,
+      config: { ...componentData.config, disableExpand: !this.state.isExpandable },
+    };
     if (this.state.metadata) {
       this.addMetadataToBlock();
     }
-    if (this.state.isExpandable !== !componentData.config.disableExpand) {
-      this.handleExpandModeToggle();
-    }
+    pubsub.update('componentData', newComponentData);
+
     helpers.closeModal();
   };
 
@@ -210,20 +207,7 @@ class ImageSettings extends Component {
             ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
           >
             <div className={this.styles.imageSettingsLabel}>
-              <LabeledToggle
-                label={this.imageOpensInExpandModeLabel}
-                onChange={() => this.onToggle('expandMode')}
-                checked={this.state.isExpandable}
-                theme={theme}
-              />
-            </div>
-            <div className={this.styles.imageSettingsLabel}>
-              {/* <LabeledToggle
-                label={this.imageCanBeDownloadedLabel}
-                onChange={() => this.onToggleChange('rightClick')}
-                checked={this.state.isDownloadable}
-                theme={theme}
-              /> */}
+              {this.toggleData.map(toggle => this.renderToggle(toggle))}
             </div>
           </SettingsSection>
         </div>

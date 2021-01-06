@@ -98,7 +98,7 @@
 	"ImageSettings_Caption_Label": "Caption",
 	"ImageSettings_Caption_Input_Placeholder": "Write a catchy title",
 	"ImageSettings_Alt_Label": "Alt text",
-	"ImageSettings_Image_OpensInExpandMode_Label": "Image open in expand mode",
+	"ImageSettings_Image_OpensInExpandMode_Label": "Image opens in expand mode",
 	"ImageSettings_Image_CanBeDownloaded_Label": "Image can be downloaded",
 	"ImageSettings_Alt_Input_Placeholder": "Describe what's in this image",
 	"ImageSettings_Link_Label": "Link",
