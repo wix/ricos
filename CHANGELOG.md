@@ -21,6 +21,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `gallery`
+  - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
+
 </details>
 <hr/>
 
