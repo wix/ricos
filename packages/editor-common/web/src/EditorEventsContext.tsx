@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { remove } from 'lodash';
 
@@ -27,28 +27,6 @@ export const withEditorEvents = WrappedComponent => props => (
     {contextValue => <WrappedComponent editorEvents={contextValue} {...props} />}
   </EditorEventsContext.Consumer>
 );
-
-export const withEditorEventsRef = WrappedComponent => {
-  class WithEditorEvents extends React.Component {
-    static propTypes = {
-      forwardRef: PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.shape({ current: PropTypes.func }),
-      ]),
-    };
-    render() {
-      const { forwardRef, ...props } = this.props;
-      return (
-        <EditorEventsContext.Consumer>
-          {contextValue => (
-            <WrappedComponent editorEvents={contextValue} {...props} ref={forwardRef} />
-          )}
-        </EditorEventsContext.Consumer>
-      );
-    }
-  }
-  return forwardRef((props, ref) => <WithEditorEvents {...props} forwardRef={ref} />);
-};
 
 export class EditorEventsProvider extends React.Component {
   static propTypes = {
