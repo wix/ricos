@@ -635,7 +635,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pubsub: this.commonPubsub,
   });
 
-  publish = async (postId: string) => {
+  // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
+  publish = async (postId?: string) => {
     if (!this.props.helpers?.onPublish) {
       return;
     }
