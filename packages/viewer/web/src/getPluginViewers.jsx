@@ -66,7 +66,8 @@ class PluginViewer extends PureComponent {
     return newConfig;
   };
 
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  // eslint-disable-next-line react/prop-types
+  innerRCV = React.memo(({ contentState, textAlignment, direction }) => {
     const { innerRCEViewerProps } = this.props;
     const config = this.removeExpand(innerRCEViewerProps.config);
     return (
@@ -79,7 +80,7 @@ class PluginViewer extends PureComponent {
         isInnerRcv
       />
     );
-  };
+  });
 
   /* eslint-disable complexity */
   render() {

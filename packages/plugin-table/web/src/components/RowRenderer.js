@@ -5,8 +5,7 @@ class RowRenderer extends PureComponent {
   setRef = ref => this.props.setRowRef?.(ref, this.props.row);
 
   render() {
-    const { row, children, getRowHeight } = this.props;
-    const height = getRowHeight(row);
+    const { row, children, height } = this.props;
     return (
       <tr style={{ height }} ref={this.setRef}>
         {children}
@@ -18,7 +17,7 @@ class RowRenderer extends PureComponent {
 RowRenderer.propTypes = {
   row: PropTypes.number.isRequired,
   children: PropTypes.any.isRequired,
-  getRowHeight: PropTypes.func,
+  height: PropTypes.number,
   setRowRef: PropTypes.func,
 };
 

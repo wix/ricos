@@ -13,13 +13,13 @@ class DragAndDropSection extends React.Component {
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
     document.addEventListener('keydown', this.setShiftKey);
-    document.addEventListener('keyup', this.removeShiftKey);
+    // document.addEventListener('keyup', this.removeShiftKey);
   }
   componentWillUnmount() {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
     document.removeEventListener('keydown', this.setShiftKey);
-    document.removeEventListener('keyup', this.removeShiftKey);
+    // document.removeEventListener('keyup', this.removeShiftKey);
   }
 
   removeShiftKey = () => (this.shiftKey = false);

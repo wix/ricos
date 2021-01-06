@@ -9,6 +9,7 @@ import classNames from 'classnames';
 class TableViewer extends Component {
   constructor(props) {
     super(props);
+    this.grid = [];
     this.table = this.props.table || new TableDataUtil(props.componentData);
     this.state = {};
   }
@@ -17,6 +18,16 @@ class TableViewer extends Component {
     this.tableViewerRef.children[0].classList.add('has-custom-focus');
   }
 
+
+  renderCell = (i, j) => {
+    const { renderInnerRCE, innerRCV } = this.props;
+    return renderInnerRCE ? (
+      renderInnerRCE(i, j)
+    ) : (
+      <innerRCV contentState={this.table.getCellContent(i, j)} />
+    );
+  };
+
   cellCreator = (i, j) => ({
     key: `${i}-${j}`,
     component: this.renderCell(i, j),
@@ -24,15 +35,13 @@ class TableViewer extends Component {
     disableUpdatedFlag: true,
   });
 
-  renderCell = (i, j) => {
-    const { renderInnerRCE, innerRCV } = this.props;
-    return renderInnerRCE
-      ? renderInnerRCE(i, j)
-      : innerRCV({ contentState: this.table.getCellContent(i, j) });
-  };
-
   createRow = (i, columnsNumber) =>
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
+
+  getGrid = (rowNum, colNum) =>
+    this.grid.length === rowNum && this.grid[0].length === colNum
+      ? this.grid
+      : [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
 
   sheetRenderer = props => {
     return (
@@ -57,7 +66,7 @@ class TableViewer extends Component {
   rowRenderer = props => (
     <RowRenderer
       {...props}
-      getRowHeight={this.table.getRowHeight}
+      height={this.table.getRowHeight(props.row)}
       setRowRef={this.props.setRowRef}
     />
   );
@@ -105,7 +114,7 @@ class TableViewer extends Component {
     const { onSelect, selected, isEditMode, setCellContent, onClear, onPaste } = this.props;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
-    this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
+    this.grid = this.getGrid(rowNum, colNum);
 
     return (
       <div

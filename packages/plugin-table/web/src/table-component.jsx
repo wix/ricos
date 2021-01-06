@@ -405,7 +405,7 @@ class TableComponent extends React.Component {
       isAllCellsSelected,
     } = this.state;
     this.table.updateComponentData(componentData);
-    this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
+    this.rowsHeights = componentData.config.rowsHeight;
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const range = selected && getRange(selected);

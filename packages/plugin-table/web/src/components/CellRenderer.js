@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 import { getRange } from '../domain/tableDataUtil';
-import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 import { ToolbarType } from 'wix-rich-content-common';
 
@@ -145,7 +144,7 @@ export default class Cell extends Component {
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
     const cellBorders = this.getCellBorders(border, shouldShowSelectedStyle);
-    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
+    const toolbarButtons = this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING);
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
@@ -217,8 +216,7 @@ export default class Cell extends Component {
 class Editor extends Component {
   shouldComponentUpdate(nextProps) {
     const { editing, selected, contentState } = this.props;
-    const isContentStateChanged =
-      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
+    const isContentStateChanged = contentState !== nextProps.contentState;
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 

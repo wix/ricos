@@ -951,7 +951,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onError(this.state.error);
         return null;
       }
-      const { isMobile = false, t } = this.props;
+      const { isMobile = false, t, isInnerRCE } = this.props;
       const { theme } = this.contextualData;
       const themeDesktopStyle = theme.desktop
         ? { [theme.desktop]: !isMobile && theme && theme.desktop }
@@ -978,7 +978,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                   ref={this.setEditorWrapper}
                   className={classNames(styles.editor, theme.editor)}
                 >
-                  {this.renderAccessibilityListener()}
+                  {isInnerRCE ? null : this.renderAccessibilityListener()}
                   {this.renderEditor()}
                   {showToolbars && this.renderToolbars()}
                   {this.renderInlineModals()}
