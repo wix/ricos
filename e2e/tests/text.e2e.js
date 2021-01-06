@@ -159,6 +159,20 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('should enter text without linkify links (disableAutoLink set to true)', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          disableAutoLink: true,
+        },
+      }),
+    };
+    cy.loadRicosEditorAndViewer('empty', testAppConfig).enterParagraphs([
+      'www.wix.com\nwww.wix.com ',
+    ]);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('should paste plain text', function() {
     cy.loadRicosEditorAndViewer()
       .focusEditor()

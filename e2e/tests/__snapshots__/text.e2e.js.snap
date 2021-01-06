@@ -2462,3 +2462,28 @@ exports[`text > should insert custom link #0`] =
     }
   }
 };
+
+exports[`text > should enter text without linkify links (disableAutoLink set to true) #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "www.wix.com",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "www.wix.com ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
