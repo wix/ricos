@@ -14,7 +14,7 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-
+import { withEditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
@@ -47,7 +47,22 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
+    this.props.editorEvents?.subscribe('rce:publish', this.publish);
   }
+
+  componentWillUnmount() {
+    this.props.editorEvents?.unsubscribe('rce:publish', this.publish);
+  }
+
+  publish = async () => {
+    // TODO: remove this param after getContent(postId) is deprecated
+    await this.editor.publish((undefined as unknown) as string);
+    console.debug('editor publish callback'); // eslint-disable-line
+    return {
+      type: 'EDITOR_PUBLISH',
+      data: this.getContent(),
+    };
+  };
 
   setStaticToolbar = ref => {
     if (ref && ref !== this.currentEditorRef) {
@@ -87,10 +102,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getToolbars = () => this.editor.getToolbars();
 
-  getContent = (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
+  getContent = async (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
-      this.editor.publish(postId); //async
+      /* eslint-disable */
+      console.warn(
+        'Please use biSettings.postId and ref.publish() API for publishing. The getContent(postId, isPublishing) API is deprecated and will be removed in ricos v9.0.0'
+      );
+      /* eslint-enable */
+      await this.editor.publish(postId); //async
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
@@ -174,6 +194,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     );
   }
 }
+
+export default withEditorEvents(RicosEditor);
 
 const StaticToolbarPortal: FunctionComponent<{
   StaticToolbar?: ElementType;
