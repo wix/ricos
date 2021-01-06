@@ -51,3 +51,5 @@ export interface RicosCustomStyles {
   hashtag?: CustomTextualStyle;
   button?: Pick<CustomTextualStyle, 'color'>;
 }
+
+export type FullscreenProps = { backgroundColor?: string; iconsColor?: string };
