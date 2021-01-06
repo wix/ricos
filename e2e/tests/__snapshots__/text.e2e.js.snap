@@ -2423,3 +2423,42 @@ exports[`text > should enter link and further text in next block has no inline s
     }
   }
 };
+
+exports[`text > should insert external link #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 13,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 13,
+          "offset": 0,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "External link.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "externalData": {
+          "mockData": {},
+          "mockURL": "www.sport5.co.il"
+        }
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
