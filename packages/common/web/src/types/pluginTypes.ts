@@ -61,25 +61,22 @@ import {
 } from 'ricos-content';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
-export type PluginMapping = Partial<
-  {
-    [type in PluginType]: {
-      component: ComponentType;
-      classNameStrategies?: {
-        size?: ClassNameStrategy;
-        alignment?: ClassNameStrategy;
-        textWrap?: ClassNameStrategy;
-        container?: ContainerClassNameStrategy;
-      };
-      elementType?: 'inline' | 'block';
+export type PluginMapping = Partial<{
+  [type: string]: {
+    component: ComponentType;
+    classNameStrategies?: {
+      size?: ClassNameStrategy;
+      alignment?: ClassNameStrategy;
+      textWrap?: ClassNameStrategy;
+      container?: ContainerClassNameStrategy;
     };
-  }
->;
+    elementType?: 'inline' | 'block';
+  };
+}>;
 
 export type PluginTypeMapper = (...args) => PluginMapping;
 
 export type PluginType =
-  | string
   | typeof LINK_BUTTON_TYPE
   | typeof ACTION_BUTTON_TYPE
   | typeof CODE_BLOCK_TYPE
@@ -139,7 +136,7 @@ export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Recor
   Toolbar?: ComponentType;
   InsertPluginButtons: Pick<PluginButton, 'buttonSettings' | 'component'>[];
   externalizedButtonProps?: ToolbarButtonProps[];
-  blockType: PluginType;
+  blockType: string;
   InlineModals?: ComponentType[];
   TextButtonMapper?: TextButtonMapper;
   pubsub: Pubsub;
@@ -209,6 +206,8 @@ export type LegacyEditorPluginConfig<
 > & {
   uiSettings?: UISettings;
   getToolbarSettings?: GetToolbarSettings;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -220,6 +219,8 @@ export type LegacyViewerPluginConfig<PluginConfig = Record<string, any>> = Parti
   uiSettings?: UISettings;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [PREVIEW]?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 export type PluginsDecorator = (component: ComponentType) => ComponentType;
