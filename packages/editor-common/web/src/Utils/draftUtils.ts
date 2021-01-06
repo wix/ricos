@@ -26,6 +26,9 @@ type LinkDataUrl = {
 
 type LinkData = LinkDataUrl & { anchor?: string };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ExternalLinkData = any;
+
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
@@ -52,19 +55,49 @@ export const insertLinkInPosition = (
   { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
-
-  return insertLink(editorState, selection, {
+  const linkEntityData = createLinkEntityData({
     url,
     targetBlank,
     nofollow,
     anchorTarget,
     relValue,
   });
+
+  return insertLink(editorState, selection, linkEntityData);
+};
+
+export const getEntityData = (editorState: EditorState) => {
+  const selection = getSelection(editorState);
+  const contentState = editorState.getCurrentContent();
+  const blockKey = selection.getStartKey();
+  const block = contentState.getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(selection.getStartOffset());
+  if (entityKey) {
+    const entity = contentState.getEntity(entityKey);
+    const entityData = entity?.getData();
+    return entityData;
+  }
+  return null;
+};
+
+export const insertExternalLink = (editorState: EditorState, externalData: ExternalLinkData) => {
+  const selection = getSelection(editorState);
+  const editorStateWithLink = isSelectionBelongsToExistingLink(editorState, selection)
+    ? updateLink(editorState, selection, { externalData })
+    : insertLink(editorState, selection, { externalData });
+
+  const newEditorState = EditorState.forceSelection(
+    editorStateWithLink,
+    selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
+  );
+
+  return newEditorState;
 };
 
 export const updateLinkAtCurrentSelection = (editorState: EditorState, data): EditorState => {
   const selection = getSelection(editorState);
-  const editorStateWithLink = updateLink(selection, editorState, data);
+  const linkEntityData = createLinkEntityData(data);
+  const editorStateWithLink = updateLink(editorState, selection, linkEntityData);
   return EditorState.forceSelection(
     editorStateWithLink,
     selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
@@ -99,9 +132,10 @@ export const insertLinkAtCurrentSelection = (
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
   const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+  const linkEntityData = createLinkEntityData(entityData);
   const editorStateWithLink = isExistsLink
-    ? updateLink(selection, newEditorState, entityData)
-    : insertLink(newEditorState, selection, entityData);
+    ? updateLink(newEditorState, selection, linkEntityData)
+    : insertLink(newEditorState, selection, linkEntityData);
   const editorStateSelection = isExistsLink
     ? selection.merge({ anchorOffset: selection.getFocusOffset() })
     : editorStateWithLink.getCurrentContent().getSelectionAfter();
@@ -116,11 +150,15 @@ function isSelectionBelongsToExistingLink(editorState: EditorState, selection: S
   });
 }
 
-function updateLink(selection: SelectionState, editorState: EditorState, linkData: LinkData) {
+function updateLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  linkData: LinkData | ExternalLinkData
+) {
   const blockKey = selection.getStartKey();
   const block = editorState.getCurrentContent().getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(selection.getStartOffset());
-  return setEntityData(editorState, entityKey, createLinkEntityData(linkData));
+  return setEntityData(editorState, entityKey, linkData);
 }
 
 function preventLinkInlineStyleForFurtherText(editorState: EditorState, selection: SelectionState) {
@@ -134,11 +172,15 @@ function preventLinkInlineStyleForFurtherText(editorState: EditorState, selectio
   return Modifier.insertText(editorState.getCurrentContent(), selectionForSpace, ' ');
 }
 
-function insertLink(editorState: EditorState, selection: SelectionState, linkData: LinkData) {
+function insertLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  data: LinkData | ExternalLinkData
+) {
   const oldSelection = editorState.getSelection();
   const editorWithLink = addEntity(editorState, selection, {
     type: 'LINK',
-    data: createLinkEntityData(linkData),
+    data,
     mutability: 'MUTABLE',
   });
   const contentWithLink = editorWithLink.getCurrentContent();
