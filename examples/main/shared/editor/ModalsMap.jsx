@@ -10,7 +10,6 @@ import { ModalsMap as PollModalsMap } from 'wix-rich-content-plugin-social-polls
 import { ModalsMap as VerticalEmbedModalsMap } from 'wix-rich-content-plugin-vertical-embed';
 import { ModalsMap as TableModalsMap } from 'wix-rich-content-plugin-table';
 import { ModalsMap as AccordionModalsMap } from 'wix-rich-content-plugin-accordion';
-
 export default {
   ...VideoModalsMap,
   ...SoundCloudModalsMap,
