@@ -114,7 +114,7 @@ export default class Cell extends Component {
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
-    const Selection = table.getCellContent(row, col).getSelection();
+    const Selection = this.editorRef && table.getCellContent(row, col).getSelection();
     const showFormattingToolbar =
       this.editorRef && isEditing && !Selection.isCollapsed() && Selection.getHasFocus();
     if (showFormattingToolbar) {
