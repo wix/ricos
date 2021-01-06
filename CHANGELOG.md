@@ -17,8 +17,22 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `link`
+  - [#1958](https://github.com/wix-incubator/rich-content/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
+### :book: Documentation
+- `link`
+  - [#1958](https://github.com/wix/ricos/pull/1958) Update link documentation with `customLink` & `disableAutoLink` capabilities
+
 </details>
 <hr/>
+
+## 8.12.1 (Jan 6, 2021)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1959](https://github.com/wix-incubator/rich-content/pull/1959) fix horizontal orientation image view
+- `file-upload`
+  - [#1962](https://github.com/wix-incubator/rich-content/pull/1962) fix autodownload file after url resolve
 
 ## 8.12.0 (Jan 6, 2021)
 ### :rocket: New Feature
@@ -29,7 +43,6 @@
 ### :house: Internal
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
-
 
 ## 8.11.5 (Jan 5, 2021)
 ### :rocket: New Feature

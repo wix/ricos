@@ -118,7 +118,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
   const shouldLinkify = (consecutiveString: LinkifyData) =>
     consecutiveString.string.length >= settings.minLinkifyLength &&
     isValidUrl(consecutiveString.string) &&
-    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString));
+    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString)) &&
+    !settings?.disableAutoLink;
 
   const findLastStringWithNoSpaces = (editorState: EditorState): LinkifyData => {
     const selection = editorState.getSelection();
