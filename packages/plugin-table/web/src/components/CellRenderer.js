@@ -8,6 +8,7 @@ import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 import { ToolbarType } from 'wix-rich-content-common';
 
+const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
     if (
@@ -64,7 +65,7 @@ export default class Cell extends Component {
   };
 
   handleClipboardEvent = e => {
-    const { editing, row, col, updateCellContent } = this.props;
+    const { editing, row, col, updateCellContent, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -75,6 +76,10 @@ export default class Cell extends Component {
       }
       if (e.key === 'Escape') {
         updateCellContent(row, col, this.contentBeforeEdit);
+      }
+      const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
+      if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
+        onKeyDown(e);
       }
     }
   };
@@ -245,4 +250,5 @@ Cell.propTypes = {
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   handleCellClipboardEvent: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };

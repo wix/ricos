@@ -36,7 +36,7 @@
     "test": "jest --verbose"
   },
   "dependencies": {
-    "react-datasheet": "1.4.7",
+    "wix-react-datasheet": "1.4.9",
     "wix-rich-content-common": "8.11.5",
     "wix-rich-content-editor-common": "8.11.5",
     "wix-rich-content-plugin-commons": "8.11.5",
