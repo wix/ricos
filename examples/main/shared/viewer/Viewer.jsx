@@ -90,8 +90,6 @@ export default class Viewer extends PureComponent {
               isOpen={expandModeIsOpen}
               index={expandModeIndex}
               isMobile={isMobile}
-              backgroundColor={{ background: 'black' }}
-              iconsColor={{ color: 'white' }}
             />
           )}
           {!isMobile ? (

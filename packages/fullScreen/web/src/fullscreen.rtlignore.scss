@@ -34,6 +34,16 @@
   }
 }
 
+.nav_arrow_left {
+  right: 22px;
+  position: absolute;
+}
+
+.nav_arrow_right {
+  left: 22px;
+  position: absolute;
+}
+
 .close {
   box-sizing: content-box;
   z-index: 1001;

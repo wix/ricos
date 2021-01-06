@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { closeIcon, expandIcon, shrinkIcon, arrowLeft, arrowRight } from './icons';
-import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
+import { CloseIcon, ExpandIcon, ShrinkIcon, ArrowLeft, ArrowRight } from './icons';
 import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/libs/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
+import { styleParams, defaultColors } from './defaults';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -85,19 +85,19 @@ export default class InnerFullscreen extends Component {
   };
 
   renderCloseButton = () => {
-    const { iconsColor, backgroundColor } = this.props;
+    const backgroundColor = this.props.backgroundColor || defaultColors.backgroundColor;
+    const iconsColor = this.props.iconsColor || defaultColors.iconsColor;
     return (
       <div
         role="button"
         tabIndex={0}
         className={styles.close}
-        style={{ ...iconsColor, ...backgroundColor }}
         onClick={this.onClose}
         onKeyDown={this.onClose}
         aria-label={'Close'}
         data-hook={'fullscreen-close-button'}
       >
-        {closeIcon()}
+        <CloseIcon backgroundColor={backgroundColor} iconsColor={iconsColor} />
       </div>
     );
   };
@@ -112,21 +112,21 @@ export default class InnerFullscreen extends Component {
 
   renderFullscreenToggleButton = () => {
     const { isInFullscreen } = this.state;
-    const { iconsColor, backgroundColor } = this.props;
-    const icon = isInFullscreen ? shrinkIcon : expandIcon;
+    const backgroundColor = this.props.backgroundColor || defaultColors.backgroundColor;
+    const iconsColor = this.props.iconsColor || defaultColors.iconsColor;
+    const Icon = isInFullscreen ? ShrinkIcon : ExpandIcon;
     const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
     return (
       <div
         role="button"
         tabIndex={0}
         className={styles.expand_button}
-        style={{ ...iconsColor, ...backgroundColor }}
         onClick={this.toggleFullscreenMode}
         onKeyDown={this.onFullscreenToggleKeyDown}
         aria-label={ariaLabel}
         data-hook={'fullscreen-toggle-button'}
       >
-        {icon()}
+        <Icon backgroundColor={backgroundColor} iconsColor={iconsColor} />
       </div>
     );
   };
@@ -145,19 +145,22 @@ export default class InnerFullscreen extends Component {
     );
   };
 
-  renderArrow = Icon => {
-    const { iconsColor, backgroundColor } = this.props;
+  renderArrow = (Icon, styles) => {
+    const backgroundColor = this.props.backgroundColor || defaultColors.backgroundColor;
+    const iconsColor = this.props.iconsColor || defaultColors.iconsColor;
     return (
-      <div style={{ ...iconsColor, ...backgroundColor }}>
-        <Icon />
+      <div className={styles}>
+        <Icon backgroundColor={backgroundColor} iconsColor={iconsColor} />
       </div>
     );
   };
 
   arrowRenderers = {
-    left: this.renderArrow(arrowLeft),
-    right: this.renderArrow(arrowRight),
+    left: this.renderArrow(ArrowLeft, styles.nav_arrow_left),
+    right: this.renderArrow(ArrowRight, styles.nav_arrow_right),
   };
+
+  customArrowRenderer = direction => this.arrowRenderers[direction];
 
   render() {
     const { backgroundColor, topMargin, isMobile, index } = this.props;
@@ -167,7 +170,7 @@ export default class InnerFullscreen extends Component {
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
     return (
       <div
-        style={{ ...backgroundColor, ...topMargin }}
+        style={{ background: backgroundColor, ...topMargin }}
         dir="ltr"
         data-hook={'fullscreen-root'}
         className={isInFullscreen ? styles.fullscreen_mode : styles.expand_mode}
@@ -181,21 +184,13 @@ export default class InnerFullscreen extends Component {
           resizeMediaUrl={fullscreenResizeMediaUrl}
           container={{ width, height }}
           styles={{
-            ...layouts[5],
-            galleryLayout: 5,
-            cubeType: 'fit',
-            scrollSnap: true,
-            videoPlay: 'auto',
-            allowSocial: false,
-            loveButton: false,
-            allowTitle: true,
-            defaultShowInfoExpand: 1,
+            ...styleParams,
             showArrows: !isMobile,
             arrowsPosition,
             slideshowInfoSize,
           }}
           customSlideshowInfoRenderer={this.infoElement}
-          customNavArrowsRenderer={this.arrowRenderers}
+          customNavArrowsRenderer={this.customArrowRenderer}
         />
       </div>
     );
@@ -207,7 +202,7 @@ InnerFullscreen.propTypes = {
   isMobile: PropTypes.bool,
   index: PropTypes.number,
   topMargin: PropTypes.object,
-  backgroundColor: PropTypes.object,
-  iconsColor: PropTypes.object,
+  backgroundColor: PropTypes.string,
+  iconsColor: PropTypes.string,
   onClose: PropTypes.func,
 };
