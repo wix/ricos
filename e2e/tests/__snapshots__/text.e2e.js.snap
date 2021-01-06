@@ -2458,7 +2458,7 @@ exports[`text > should insert custom link #0`] =
         }
       },
       "mutability": "MUTABLE",
-      "type": "LINK"
+      "type": "wix-rich-content-plugin-custom-link"
     }
   }
 };

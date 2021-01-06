@@ -13,7 +13,7 @@ import {
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget, LINK_TYPE } from 'wix-rich-content-common';
+import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
@@ -178,7 +178,7 @@ function insertLink(
   data: LinkData | CustomLinkData
 ) {
   const oldSelection = editorState.getSelection();
-  const type = LINK_TYPE;
+  const type = data?.customData ? CUSTOM_LINK_TYPE : LINK_TYPE;
   const editorWithLink = addEntity(editorState, selection, {
     type,
     data,

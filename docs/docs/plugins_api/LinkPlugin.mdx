@@ -113,16 +113,13 @@ https://wix.github.io/ricos/docs/plugins_api/LinkPlugin#top-section
 ### `onClick`
 
 ```jsx
-onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
+onClick?: (event: React.MouseEvent<HTMLElement>, data: string | CustomLinkData) => void;
 ```
 
-or if you wish to use Custom Link then,
+`data` can be resulted of two types:
 
-```jsx
-onClick?: (CustomLinkData: any) => void
-```
-
-`onClick` is a function provided to fire `onClick` event on your custom link data.
+1. `string` - the url for the following link.
+2. `CustomLinkData: any` - custom link data, can be any data you wish to save.
 
 Default value:
 
