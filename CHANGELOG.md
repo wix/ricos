@@ -28,6 +28,11 @@
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `iconsColor` via `fullscreenProps` object in `mediaSettings`
 - `ricos-editor`
   - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
+
+### :bug: Bug Fix
+- `file-upload`
+  - [#1962](https://github.com/wix-incubator/rich-content/pull/1962) fix autodownload file after url resolve
+
 ### :house: Internal
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
