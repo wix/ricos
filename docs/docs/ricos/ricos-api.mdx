@@ -397,3 +397,17 @@ An object allows extended configuration.
 
 className - Content blocked by a payall will be marked up using this string (This class will be used by Googlebot to discern between paid and free content on a page level)
 index - number of free content blocks
+
+### `Fullscreen`
+
+We provide an option to change fullscreen's background and icon colors, if you choose to customize them make sure to pick colors that aren't too similar. <br />
+default colors are: <br />
+backgroundColor: 'white';
+iconsColor: 'black'; <br />
+
+```jsx
+fullscreenProps?: {
+  backgroundColor?: string;
+  iconsColor?: string;
+}
+```

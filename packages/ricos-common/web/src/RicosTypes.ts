@@ -54,6 +54,7 @@ export interface RicosViewerProps extends RicosProps {
   plugins?: ViewerPlugin[];
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
+  fullscreenProps?: { backgroundColor?: string; iconsColor?: string };
   /* Changes to this interface should also be reflected in the API docs */
 }
 

@@ -9,6 +9,7 @@ interface Props {
   initialState?: RicosContent;
   isModalSuspended: boolean;
   isMobile: boolean;
+  fullscreenProps?: { backgroundColor?: string; iconsColor?: string };
 }
 
 interface State {
@@ -77,7 +78,7 @@ export default class FullscreenProvider extends Component<Props, State> {
 
   render() {
     const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
-    const { children, initialState, isModalSuspended, isMobile } = this.props;
+    const { children, initialState, isModalSuspended, isMobile, fullscreenProps } = this.props;
     const config = this.addExpand(children.props.config);
 
     return (
@@ -94,6 +95,7 @@ export default class FullscreenProvider extends Component<Props, State> {
               index={index}
               isMobile={isMobile}
               setExpandModeData={this.setExpandModeData}
+              {...fullscreenProps}
             />
           </Suspense>
         )}
