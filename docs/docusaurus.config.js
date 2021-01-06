@@ -10,7 +10,7 @@ module.exports = {
     // https://docsearch.algolia.com/docs/faq/#can-i-share-the-apikey-in-my-repo
     algolia: {
       apiKey: '1c2337fcafb4c304a30def6efc0b441a',
-      indexName: 'ricos',
+      indexName: 'rich-content',
       algoliaOptions: { facetFilters: ['type:content'] },
     },
     colorMode: {

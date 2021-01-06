@@ -35,6 +35,7 @@ class TableViewer extends Component {
         columns={this.props.columns}
         table={this.table}
         tableRef={this.tableViewerRef}
+        isMobile={this.props.isMobile}
       />
     );
   };
