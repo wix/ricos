@@ -36,8 +36,8 @@ class LinkViewer extends Component {
     const { componentData, isInEditor, settings = {} } = this.props;
     const { onClick } = settings;
     event.preventDefault();
-    if (componentData?.externalData) {
-      onClick?.(componentData?.externalData);
+    if (componentData?.customData) {
+      onClick?.(componentData?.customData);
     } else {
       const { anchor } = componentData;
       onClick?.(event, anchor || this.getHref());

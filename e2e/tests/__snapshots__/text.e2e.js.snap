@@ -2424,7 +2424,7 @@ exports[`text > should enter link and further text in next block has no inline s
   }
 };
 
-exports[`text > should insert external link #0`] =
+exports[`text > should insert custom link #0`] =
 {
   "blocks": [
     {
@@ -2433,26 +2433,26 @@ exports[`text > should insert external link #0`] =
       "entityRanges": [
         {
           "key": 0,
-          "length": 13,
+          "length": 11,
           "offset": 0
         }
       ],
       "inlineStyleRanges": [
         {
-          "length": 13,
+          "length": 11,
           "offset": 0,
           "style": "UNDERLINE"
         }
       ],
       "key": 0,
-      "text": "External link.",
+      "text": "Custom link.",
       "type": "unstyled"
     }
   ],
   "entityMap": {
     "0": {
       "data": {
-        "externalData": {
+        "customData": {
           "mockData": {},
           "mockURL": "www.sport5.co.il"
         }

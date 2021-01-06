@@ -43,18 +43,6 @@ import 'wix-rich-content-plugin-link/dist/styles.min.css';
 
 ## Link Config API
 
-### `onClick`
-
-```jsx
-onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
-```
-
-Default value:
-
-```jsx
-none;
-```
-
 ### `Link Preview`
 
 The Link Preview Plugin is implemented within the Link Plugin,
@@ -92,6 +80,21 @@ Default value:
 }
 ```
 
+### Custom Link
+
+Allows users to render custom link panel, save their data, and get it by the `onClick` event.
+
+### `onLinkAdd`
+
+```jsx
+onLinkAdd?: (CustomLinkData: any, saveData: (CustomLinkData: any) => void ) => void
+```
+
+`onLinkAdd` is a function provided to give you the option to customize our default link behaviour,
+you can render your own link panel, and call `saveData` function to save your changes. <br />
+
+### Viewer Config
+
 ### `Site URL (Anchor SEO)`
 
 ```jsx
@@ -104,5 +107,25 @@ On client adds that correct url in the addressbar.
 Copy the link below to your addressbar to go the top section.
 
 ```jsx
-https://wix.github.io/rich-content/docs/plugins_api/LinkPlugin#top-section
+https://wix.github.io/ricos/docs/plugins_api/LinkPlugin#top-section
+```
+
+### `onClick`
+
+```jsx
+onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
+```
+
+or if you wish to use Custom Link then,
+
+```jsx
+onClick?: (CustomLinkData: any) => void
+```
+
+`onClick` is a function provided to fire `onClick` event on your custom link data.
+
+Default value:
+
+```jsx
+none;
 ```

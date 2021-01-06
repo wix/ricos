@@ -7,7 +7,7 @@ import {
   getModalStyles,
   insertLinkAtCurrentSelection,
   getEntityData,
-  insertExternalLink,
+  insertCustomLink,
   LinkIcon,
   BUTTON_TYPES,
   FORMATTING_BUTTONS,
@@ -105,7 +105,7 @@ const createToolbar: CreatePluginToolbar = (config: {
         <TextLinkButton
           insertLinkFn={insertLinkAtCurrentSelection}
           getEntityData={getEntityData}
-          insertExternalLink={insertExternalLink}
+          insertCustomLink={insertCustomLink}
           isActive={hasLinksInSelection(config.getEditorState())}
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}
