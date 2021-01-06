@@ -577,7 +577,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
-      return this.props.handlePastedText(text, html, editorState);
+      const handled = this.props.handlePastedText(text, html, editorState);
+      if (handled !== 'not-handled') {
+        return handled;
+      }
     }
 
     const { config, isInnerRCE } = this.props;
