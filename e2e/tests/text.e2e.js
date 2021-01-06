@@ -2,7 +2,7 @@
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, usePluginsConfig, plugins } from '../cypress/testAppConfig';
 
 describe('text', () => {
   before(function() {
@@ -142,6 +142,35 @@ describe('text', () => {
     // remove link
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
     cy.blurEditor();
+  });
+
+  it('should insert custom link', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          isCustomModal: true,
+        },
+      }),
+    };
+    const selection = [0, 11];
+    cy.loadRicosEditorAndViewer('empty', testAppConfig)
+      .enterParagraphs(['Custom link.'])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter text without linkify links (disableAutoLink set to true)', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          disableAutoLink: true,
+        },
+      }),
+    };
+    cy.loadRicosEditorAndViewer('empty', testAppConfig).enterParagraphs([
+      'www.wix.com\nwww.wix.com ',
+    ]);
+    cy.eyesCheckWindow(this.test.title);
   });
 
   it('should paste plain text', function() {

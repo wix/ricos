@@ -6,7 +6,6 @@ import {
 } from 'wix-rich-content-editor-common';
 import {
   GALLERY_TYPE,
-  PluginType,
   Helpers,
   ToolbarType,
   TranslationFunction,
@@ -36,7 +35,7 @@ export function generateInsertPluginButtonProps({
   pluginMenuButtonRef,
   closePluginMenu,
 }: {
-  blockType: PluginType;
+  blockType: string;
   button: InsertButton;
   helpers: Helpers;
   pubsub: Pubsub;
@@ -75,7 +74,7 @@ export function generateInsertPluginButtonProps({
   function createBlocksFromFiles(
     files: File[] | File[][],
     data,
-    type: PluginType,
+    type: string,
     updateEntity: (blockKey: string, file: File | File[]) => void
   ) {
     let editorState = getEditorState();

@@ -11,6 +11,21 @@ import { isEmpty } from 'lodash';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
+    const { getEditorState, setEditorState, getEntityData, insertCustomLink, config } = this.props;
+    const settings = config[LINK_TYPE];
+    const onLinkAdd = settings?.onLinkAdd;
+    const isCustomLinkHandling = onLinkAdd;
+
+    if (isCustomLinkHandling) {
+      const customLinkData = getEntityData(getEditorState())?.customData;
+      const callback = data => setEditorState(insertCustomLink(getEditorState(), data));
+      onLinkAdd(customLinkData, callback);
+    } else {
+      this.openLinkPanel();
+    }
+  };
+
+  openLinkPanel = () => {
     const {
       getEditorState,
       setEditorState,
@@ -30,7 +45,9 @@ export default class TextLinkButton extends Component {
       toolbarOffsetTop,
       toolbarOffsetLeft,
     } = this.props;
-    const linkTypes = config[LINK_TYPE]?.linkTypes;
+    const settings = config[LINK_TYPE];
+    const linkTypes = settings?.linkTypes;
+
     const OriginalLinkPanel =
       !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
     const modalStyles = getModalStyles({
@@ -54,7 +71,7 @@ export default class TextLinkButton extends Component {
       setEditorState,
       insertLinkFn,
       closeInlinePluginToolbar,
-      linkTypes: config[LINK_TYPE]?.linkTypes,
+      linkTypes,
     };
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {
@@ -132,4 +149,6 @@ TextLinkButton.propTypes = {
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
   toolbarOffsetLeft: PropTypes.string,
+  getEntityData: PropTypes.func,
+  insertCustomLink: PropTypes.func,
 };

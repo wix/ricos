@@ -62,6 +62,7 @@ const configs = {
     },
   },
   headersMarkdown: { hideMarkdown: true },
+  link: { onClick: (event, data) => console.log(data) },
 };
 
 const plugins = {
@@ -71,7 +72,7 @@ const plugins = {
   html: pluginHtml(),
   divider: pluginDivider(),
   spacing: pluginLineSpacing(),
-  link: pluginLink(),
+  link: pluginLink(configs.link),
   linkPreview: pluginLinkPreview(configs.linkPreview),
   indent: pluginIndent(),
   hashtag: pluginHashtag(),

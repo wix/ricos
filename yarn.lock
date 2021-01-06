@@ -21950,28 +21950,28 @@ private@^0.1.6, private@~0.1.5:
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
   integrity sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==
 
-pro-gallery-lib@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-2.3.0.tgz#ee7024fc977ce2313ecc8218180ca2398cce2ab5"
-  integrity sha512-5cpavfFJEDrEv8wIc5bEJESzzlB6KM1NDfXeSNVJBiEPAQle9jb8veVta0hZgKiRRIARzdf2I+0FFK2ZL7eWfA==
+pro-gallery-lib@2.4.7:
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-2.4.7.tgz#6ac31278f2571c50f734cc73417f61ec73c8d22d"
+  integrity sha512-rzDB+zs2Gnv230eFMsgZJppUcuYtag2NBPU+FmQVpgmJRSg9BgQgWW+PZYg9HanPOX8N6183/Fs9HNcf24A02Q==
   dependencies:
-    pro-layouts "2.3.0"
+    pro-layouts "2.3.11"
 
-pro-gallery@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-2.3.0.tgz#5ebb1564583bbc2760261511c4ea7468fb9bea68"
-  integrity sha512-SgOZj/oK6g2c4oMXmJ+ZuciD47ExKTczgqPkEqqetAfRzYoWufxGhG9ngyNorj7vVOe0GT22g/6dKAH48Wis2w==
+pro-gallery@2.4.7:
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-2.4.7.tgz#075c9c45675369e3937ccdb3ae1862a3f526ad61"
+  integrity sha512-RxrvnwJIk9GkRFhAPIwDaYo6OebfTpdqht1RdtF9Hp/8tFx2qZNm0Sm9GPWSsSoG7IZ4Mby36yXPnpsoniWdlg==
   dependencies:
     "@vimeo/player" "2.8.2"
     hls.js "^0.14.12"
-    pro-gallery-lib "2.3.0"
-    pro-layouts "2.3.0"
+    pro-gallery-lib "2.4.7"
+    pro-layouts "2.3.11"
     react-player "^2.6.2"
 
-pro-layouts@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-2.3.0.tgz#a488b10340d018c857c3c93d1e10ecccc3fa2e4e"
-  integrity sha512-px2+wAYQViQiJUVe9r8pDx+fUFqSOtsXvZHtvTRKGxqEgcTwBBBNZ7eJQZA3xoJv3WJjvOk65rvCZA2H0YUnjg==
+pro-layouts@2.3.11:
+  version "2.3.11"
+  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-2.3.11.tgz#35ca39ce41d03624592e64706bc63921595b0057"
+  integrity sha512-r2EJbKWtNs3YcZtA0j2B6SYqPPyD1gQzkZfme1QS1tLniQy5b3TlY0JPMSUbjq635rJXwSv0I4YMm//uLPZxKg==
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
