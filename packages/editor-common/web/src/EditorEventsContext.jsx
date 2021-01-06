@@ -64,15 +64,18 @@ export class EditorEventsProvider extends React.Component {
 
   events = {};
 
-  async dispatch(event, data) {
+  dispatch(event, data) {
     const callbacks = this.events[event] || [];
     return Promise.all(callbacks.map(cb => cb(data)));
   }
 
-  async publish() {
-    const publishResponse = await this.dispatch(EditorEvents.PUBLISH);
-    const editorResponse = publishResponse.filter(({ type } = {}) => type === 'EDITOR_PUBLISH')[0];
-    return editorResponse?.data;
+  publish() {
+    return this.dispatch(EditorEvents.PUBLISH).then(publishResponse => {
+      const editorResponse = publishResponse.filter(
+        ({ type } = {}) => type === 'EDITOR_PUBLISH'
+      )[0];
+      return editorResponse?.data;
+    });
   }
 
   subscribe(event, cb) {
