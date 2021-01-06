@@ -5,6 +5,7 @@ import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
 import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import styles from '../../statics/styles/preview.scss';
+import { merge } from 'lodash';
 
 interface Props extends RichContentViewerProps {
   transformation: ContentStateTransformation;
@@ -45,9 +46,18 @@ class RichContentPreview extends Component<Props, State> {
         onPreviewExpand: this.onPreviewExpand,
       },
     };
+    const isPreviewAddition = {
+      helpers: {
+        isPreview: () => !this.state.isPreviewExpanded,
+      },
+    };
     return (
       <div className={styles.preview_container}>
-        <RichContentViewer initialState={previewState} config={previewConfig} {...rest} />
+        <RichContentViewer
+          initialState={previewState}
+          config={previewConfig}
+          {...merge(rest, isPreviewAddition)}
+        />
       </div>
     );
   }

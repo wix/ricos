@@ -16,6 +16,7 @@ import {
   ToolbarButtonProps,
   TextButtons,
   simplePubsub,
+  PluginMenuSettings,
 } from 'wix-rich-content-common';
 import { EditorProps } from 'draft-js';
 
@@ -26,6 +27,7 @@ const createEditorToolbars = ({
   context,
   pluginButtonProps,
   isInnerRCE,
+  tablePluginMenu,
 }: {
   buttons: {
     pluginButtons: PluginButton[];
@@ -36,6 +38,7 @@ const createEditorToolbars = ({
   context: EditorContextType;
   pluginButtonProps: ToolbarButtonProps[];
   isInnerRCE?: boolean;
+  tablePluginMenu?: boolean;
 }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
@@ -57,6 +60,7 @@ const createEditorToolbars = ({
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
+    tablePluginMenu,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
@@ -65,6 +69,18 @@ const createEditorToolbars = ({
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
+  if (tablePluginMenu) {
+    const pluginMenuSettings: PluginMenuSettings =
+      customSettings.find(setting => setting.name === TOOLBARS.SIDE) || {};
+    if (pluginMenuSettings) {
+      const horizontalMenuLayout = true; // force old menu on table
+      // const horizontalMenuLayout = !pluginMenuSettings.addPluginMenuConfig;
+      pluginMenuSettings.addPluginMenuConfig = {
+        tablePluginMenu,
+        horizontalMenuLayout,
+      };
+    }
+  }
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toolbars: any = {};

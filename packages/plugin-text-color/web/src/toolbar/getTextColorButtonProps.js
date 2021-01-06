@@ -6,7 +6,7 @@ import {
   isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
-import TextColorPanel from './TextColorPanel';
+import TextColorPanel, { getInlineColorState } from './TextColorPanel';
 import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
 import {
   styleMapper,
@@ -89,15 +89,15 @@ export const getButtonProps = ({ config, type }) => {
           content: {
             display: 'inline-table',
             transform: 'translateY(0)',
-            minHeight: '89px',
-            height: 'auto',
+            minHeight: '88px',
             position: 'absolute',
             minWidth: '89px',
             maxWidth: '184',
-            width: 'auto',
+            width: '182px',
+            height: '86px',
             top: bottom,
             left: left - 15,
-            borderRadius: '6px',
+            borderRadius: '2px',
             border: '1px solid #ededed',
             margin: '0',
             background: '#fff',
@@ -108,13 +108,30 @@ export const getButtonProps = ({ config, type }) => {
         };
   };
 
-  const TextColorModal = () => {
+  const onSelect = color => {
+    const editorState = getEditorState();
+    const selection = editorState.getSelection();
+    const coloredEditorState = getInlineColorState(
+      color,
+      getEditorState(),
+      settings,
+      styleMap,
+      pluginSettings.predicate
+    );
+    setEditorState(EditorState.forceSelection(coloredEditorState || editorState, selection));
+  };
+
+  // eslint-disable-next-line react/prop-types
+  const TextColorModal = ({ closeCustomModal, onSelect }) => {
     return (
       <TextColorPanel
         t={t}
         isMobile={isMobile}
         theme={theme}
-        closeModal={closePanel}
+        closeModal={args => {
+          closePanel(args);
+          closeCustomModal && closeCustomModal();
+        }}
         editorState={getEditorState()}
         setEditorState={setEditorState}
         settings={settings}
@@ -123,6 +140,7 @@ export const getButtonProps = ({ config, type }) => {
         predicate={pluginSettings.predicate}
         defaultColor={pluginSettings.defaultColor}
         setKeepToolbarOpen={noop}
+        onSelect={onSelect}
       />
     );
   };
@@ -167,6 +185,8 @@ export const getButtonProps = ({ config, type }) => {
     tooltip: config.t(pluginSettings.tooltipKey),
     getLabel: () => '',
     type: BUTTON_TYPES.DROPDOWN,
-    dataHook: '', // TODO: set datahook
+    dataHook: `${type.replace(/\s+/g, '-').toLowerCase()}-button`,
+    modal: TextColorModal,
+    onSelect,
   };
 };

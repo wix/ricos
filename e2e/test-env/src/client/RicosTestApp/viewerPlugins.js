@@ -28,6 +28,7 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
 import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+import { pluginTable } from 'wix-rich-content-plugin-table/viewer';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const configs = {
@@ -61,6 +62,7 @@ const configs = {
     },
   },
   headersMarkdown: { hideMarkdown: true },
+  link: { onClick: data => console.log(data) },
 };
 
 const plugins = {
@@ -70,7 +72,7 @@ const plugins = {
   html: pluginHtml(),
   divider: pluginDivider(),
   spacing: pluginLineSpacing(),
-  link: pluginLink(),
+  link: pluginLink(configs.link),
   linkPreview: pluginLinkPreview(configs.linkPreview),
   indent: pluginIndent(),
   hashtag: pluginHashtag(),
@@ -87,6 +89,7 @@ const plugins = {
   textColor: pluginTextColor(configs.textColor),
   spoiler: pluginSpoiler(),
   accordion: pluginAccordion(),
+  table: pluginTable(),
   emoji: pluginEmoji(),
   verticalEmbed: pluginVerticalEmbed(),
 };

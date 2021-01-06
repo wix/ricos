@@ -13,7 +13,7 @@
 <br />
 
 
-Try out our [demo](https://wix-rich-content.herokuapp.com/). You can see the full documentation here: [https://wix.github.io/rich-content/](https://wix.github.io/rich-content/)
+Try out our [demo](https://wix-rich-content.herokuapp.com/). You can see the full documentation here: [https://wix.github.io/ricos/](https://wix.github.io/ricos/)
 
 ## Quick start
 
@@ -55,7 +55,7 @@ import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 
 There you go! A rich content editor with plugins. 
 
-[See full documentation](https://wix.github.io/rich-content/)
+[See full documentation](https://wix.github.io/ricos/)
 
 ### SSR support
 
@@ -77,7 +77,7 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 
 ### Run Locally
 
-1. `cd rich-content`
+1. `cd ricos`
 1. `yarn` - installs all dependencies and links any cross-dependencies.
 1. Build the modules by running one of the following:
    1. `npm run build` - build once and bundle
@@ -90,8 +90,6 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 See [rich-content-editor-example](./examples/main) to see how to consume the Component as:
 - [editor](./examples/main/shared/editor/Editor.jsx)
 - [viewer](./examples/main/shared/viewer/Viewer.jsx)
-
-And check [rich-content-viewer-ssr](./examples/viewer-ssr) to see how to consume the Component as a viewer within a Yoshi-based SSR Application.
 
 ### Modules
 

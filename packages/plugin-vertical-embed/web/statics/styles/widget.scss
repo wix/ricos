@@ -63,7 +63,7 @@
 
             .vertical-embed-subtitle {
                 font-family: var(--ricos-custom-p-font-family, Avenir);
-                padding-top: 12px;                
+                padding-top: 16px;
                 font-size: 14px;
                 line-height: 1.43;                
                 padding-right: 40px;
@@ -130,9 +130,12 @@
                 flex-direction: column;
             }
 
-            .vertical-embed-imageLayout {
-                width: unset;
-                padding-bottom: 56.25%;
+            .vertical-embed-card {
+
+                .vertical-embed-imageLayout {
+                    width: unset;
+                    padding-bottom: 56.25%;
+                }
             }
 
             .vertical-embed-content {

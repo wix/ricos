@@ -40,6 +40,10 @@
 .sizeFullWidth,
 .textWrapNowrap {
   width: 100%;
+  &.renderedInTable {
+    margin: 0 -8px;
+    width: auto;
+  }
 }
 
 .sizeContent {
@@ -53,6 +57,9 @@
 .sizeSmall {
   &:not(.textWrapNowrap) {
     width: 350px;
+    &.renderedInTable {
+      width: 150px;
+    }
   }
 }
 
@@ -61,6 +68,9 @@
     width: 350px;
     margin-left: auto;
     margin-right: auto;
+    &.renderedInTable {
+      width: 150px;
+    }
   }
 }
 

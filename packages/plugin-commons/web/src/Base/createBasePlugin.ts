@@ -14,7 +14,6 @@ import { ContentBlock, EditorProps } from 'draft-js';
 import {
   CreatePluginConfig,
   EditorPluginConfig,
-  PluginType,
   UISettings,
   Pubsub,
   CreatePluginToolbar,
@@ -62,7 +61,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
-  type: PluginType;
+  type: string;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
   toolbar?: ReturnType<CreatePluginToolbar>;
@@ -84,9 +83,11 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
     onPropsChange: (props: any) => void
   ) => void;
   inlineModals?: ComponentType[];
-  legacyType?: PluginType;
+  legacyType?: string;
   noPluginBorder?: boolean;
   noPointerEventsOnFocus?: boolean;
+  withHorizontalScroll?: boolean;
+  innerRCERenderedIn?: string;
 }
 
 const createBasePlugin = (
@@ -121,6 +122,8 @@ const createBasePlugin = (
     decoratorTrigger,
     noPluginBorder,
     noPointerEventsOnFocus,
+    withHorizontalScroll,
+    innerRCERenderedIn,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -233,6 +236,8 @@ const createBasePlugin = (
       renderInnerRCE,
       noPluginBorder,
       noPointerEventsOnFocus,
+      withHorizontalScroll,
+      innerRCERenderedIn: config.type === 'wix-draft-plugin-divider' ? false : innerRCERenderedIn,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =

@@ -8,7 +8,7 @@ import {
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
 import { isSSR } from 'wix-rich-content-common';
-import { PlusIcon, PlusActiveIcon } from '../../Icons';
+import { PlusIcon, PlusIconSmall } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import AddPluginMenu from './AddPluginMenu';
 import PopupOffsetnHoc from './PopupOffsetnHoc';
@@ -106,9 +106,12 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   getStyle(width, top) {
+    const { addPluginMenuConfig } = this.props;
+    const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
+    const leftRightOffset = smallPlusIcon ? 22 : 30;
     return {
-      left: width / 2 + 30,
-      right: width / 2 + 30,
+      left: width / 2 + leftRightOffset,
+      right: width / 2 + leftRightOffset,
       width,
       top,
     };
@@ -130,8 +133,11 @@ export default class AddPluginFloatingToolbar extends Component {
       toolbarStyles && toolbarStyles.sideToolbar
     );
     const { isPopupOpen } = this.state;
-    const horizontalMenuWidth = structure.length * 39;
-    const style = this.getStyle(addPluginMenuConfig ? 320 : horizontalMenuWidth, top);
+    const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
+    const horizontalMenuWidthOffset = smallPlusIcon ? 34 : 39;
+    const horizontalMenuWidth = structure.length * horizontalMenuWidthOffset;
+    const horizontalMenu = !addPluginMenuConfig || addPluginMenuConfig?.horizontalMenuLayout;
+    const style = this.getStyle(horizontalMenu ? horizontalMenuWidth : 320, top);
     return (
       <div
         className={popoupClassNames}
@@ -166,9 +172,12 @@ export default class AddPluginFloatingToolbar extends Component {
       Styles.sideToolbar_floatingContainer,
       toolbarStyles && toolbarStyles.sideToolbar_floatingContainer
     );
+    const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
     const floatingIconClassNames = classNames(
       Styles.sideToolbar_floatingIcon,
-      toolbarStyles && toolbarStyles.sideToolbar_floatingIcon
+      toolbarStyles && toolbarStyles.sideToolbar_floatingIcon,
+      isPopupOpen && Styles.sideToolbar_popupOpen,
+      smallPlusIcon && Styles.sideToolbar_smallPlusIcon
     );
 
     return (
@@ -192,12 +201,12 @@ export default class AddPluginFloatingToolbar extends Component {
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
         >
-          {!isPopupOpen ? <PlusIcon /> : <PlusActiveIcon />}
+          {smallPlusIcon ? <PlusIconSmall /> : <PlusIcon />}
         </button>
         {!isSSR() && isPopupOpen && (
           <PopupOffsetnHoc
             elementHeight={this.popupRef?.offsetHeight}
-            elementMarginTop={addPluginMenuConfig ? -20 : -15}
+            elementMarginTop={smallPlusIcon ? -14 : addPluginMenuConfig ? -20 : -15}
             elementMarginBottom={45}
             targetElement={this.selectButton}
           >
