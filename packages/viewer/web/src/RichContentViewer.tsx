@@ -24,7 +24,6 @@ import {
   TextDirection,
   ViewerContextType,
   InlineStyleMapperFunction,
-  FullscreenProps,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -59,7 +58,6 @@ export interface RichContentViewerProps {
   onError: OnErrorFunction;
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
-  fullscreenProps?: FullscreenProps;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 

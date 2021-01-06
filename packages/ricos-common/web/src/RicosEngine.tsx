@@ -73,7 +73,6 @@ export class RicosEngine extends Component<EngineProps> {
       mediaSettings = {},
       linkSettings = {},
       linkPanelSettings = {},
-      fullscreenProps,
     } = this.props;
 
     const { strategyProps, previewContent, htmls } = this.runStrategies();
@@ -82,7 +81,7 @@ export class RicosEngine extends Component<EngineProps> {
       toolbarSettings || {};
 
     const { openModal, closeModal, ariaHiddenId, container } = modalSettings;
-    const { pauseMedia, disableRightClick } = mediaSettings;
+    const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
 
     // any of ricos props that should be merged into child
@@ -106,7 +105,6 @@ export class RicosEngine extends Component<EngineProps> {
       disabled: pauseMedia,
       anchorTarget,
       relValue,
-      fullscreenProps,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
@@ -117,6 +115,7 @@ export class RicosEngine extends Component<EngineProps> {
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={isPreview()}
         container={container}
+        fullscreenProps={fullscreenProps}
         {...mergedRCProps}
         key={'ricosElement'}
       >

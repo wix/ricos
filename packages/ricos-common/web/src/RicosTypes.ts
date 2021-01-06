@@ -9,7 +9,6 @@ import {
   RelValue,
   EditorPlugin,
   ViewerPlugin,
-  FullscreenProps,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -55,7 +54,6 @@ export interface RicosViewerProps extends RicosProps {
   plugins?: ViewerPlugin[];
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
-  fullscreenProps?: FullscreenProps;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -98,9 +96,12 @@ export interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
+export type FullscreenProps = { backgroundColor?: string; iconsColor?: string };
+
 export interface MediaSettings {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  fullscreenProps?: FullscreenProps;
 }
 
 export interface LinkSettings {

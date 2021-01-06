@@ -84,7 +84,7 @@ const ViewerWrapper = ({
       content={content}
       isMobile={isMobile}
       preview={preview}
-      fullscreenProps={{ backgroundColor: 'black', iconsColor: 'white' }}
+      mediaSettings={{ fullscreenProps: { backgroundColor: 'black', iconsColor: 'white' } }}
     >
       <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
     </RicosViewer>
