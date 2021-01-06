@@ -187,7 +187,7 @@
     "@applitools/snippets" "2.1.0"
     "@applitools/utils" "1.0.0"
 
-"@applitools/eyes-cypress@^3.13.4":
+"@applitools/eyes-cypress@^3.18.2":
   version "3.18.2"
   resolved "https://registry.yarnpkg.com/@applitools/eyes-cypress/-/eyes-cypress-3.18.2.tgz#a8644a620f5f274df0c2883a42de85f8909d608a"
   integrity sha512-rglaCpFSpLG0Gi4L5vN3XROTH97ljd8g2icqQ0NJ8xkOS+nYLR604iTmYf8hFrYBYiPa2dJJrUdQt9GBkge6XQ==
