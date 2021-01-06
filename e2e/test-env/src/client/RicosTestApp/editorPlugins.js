@@ -90,56 +90,6 @@ const defaultConfigs = {
   },
 };
 
-const plugins = {
-  unsupportedBlocks: pluginUnsupportedBlocks(),
-  image: pluginImage(),
-  gallery: pluginGallery(configs.gallery),
-  video: pluginVideo(configs.video),
-  html: pluginHtml(),
-  divider: pluginDivider(),
-  codeBlock: pluginCodeBlock(),
-  link: pluginLink(),
-  linkPreview: pluginLinkPreview(configs.linkPreview),
-  spacing: pluginLineSpacing(),
-  indent: pluginIndent(),
-  hashtag: pluginHashtag(),
-  mentions: pluginMentions(),
-  soundCloud: pluginSoundCloud(),
-  giphy: pluginGiphy(configs.giphy),
-  headers: pluginHeadersMarkdown(),
-  map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
-  fileUpload: pluginFileUpload(configs.fileUpload),
-  linkButton: pluginLinkButton(),
-  actionButton: pluginActionButton(),
-  highlight: pluginTextHighlight(configs.textHighlight),
-  textColor: pluginTextColor(configs.textColor),
-  emoji: pluginEmoji(),
-  undoRedo: pluginUndoRedo(),
-  headings: pluginHeadings(),
-  spoiler: pluginSpoiler(),
-  accordion: pluginAccordion({
-    innerRCEPlugins: [
-      pluginTextColor(configs.textColor).createPlugin,
-      pluginTextHighlight(configs.textHighlight).createPlugin,
-      pluginIndent().createPlugin,
-      pluginLineSpacing().createPlugin,
-      pluginLink().createPlugin,
-      pluginCodeBlock().createPlugin,
-      pluginImage().createPlugin,
-    ],
-  }),
-  table: pluginTable({
-    innerRCEPlugins: [
-      pluginTextColor(configs.textColor).createPlugin,
-      pluginTextHighlight(configs.textHighlight).createPlugin,
-      pluginIndent().createPlugin,
-      pluginLineSpacing().createPlugin,
-      pluginLink().createPlugin,
-      pluginCodeBlock().createPlugin,
-    ],
-  }),
-  verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
-};
 const normalizeConfigs = configs => {
   if (configs.link?.isExternalModal) {
     configs.link.onLinkAdd = onLinkAdd;
@@ -152,6 +102,7 @@ const createPlugins = externalConfigs => {
   const configs = normalizeConfigs(merge(defaultConfigs, externalConfigs));
 
   return {
+    unsupportedBlocks: pluginUnsupportedBlocks(),
     image: pluginImage(),
     gallery: pluginGallery(configs.gallery),
     video: pluginVideo(configs.video),
