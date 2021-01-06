@@ -17,6 +17,13 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `link`
+  - [#1958](https://github.com/wix-incubator/rich-content/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
+### :book: Documentation
+- `link`
+  - [#1958](https://github.com/wix/ricos/pull/1958) Update link documentation with `customLink` & `disableAutoLink` capabilities
+
 </details>
 <hr/>
 
@@ -33,15 +40,9 @@
   - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
 - `ricos-editor`
   - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
-- `link`
-  - [#1958](https://github.com/wix-incubator/rich-content/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
 ### :house: Internal
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
-### :book: Documentation
-- `link`
-  - [#1958](https://github.com/wix/ricos/pull/1958) Update link documentation with `customLink` & `disableAutoLink` capabilities
-
 
 ## 8.11.5 (Jan 5, 2021)
 ### :rocket: New Feature
