@@ -1,2 +1,2 @@
 export * from 'ricos-common';
-export { RicosEditor } from './RicosEditor';
+export { default as RicosEditor, RicosEditor as RicosEditorType } from './RicosEditor';
