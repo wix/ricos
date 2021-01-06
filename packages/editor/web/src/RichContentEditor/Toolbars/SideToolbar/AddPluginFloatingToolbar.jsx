@@ -109,11 +109,12 @@ export default class AddPluginFloatingToolbar extends PureComponent {
   getStyle(width, top) {
     const { addPluginMenuConfig } = this.props;
     const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
-    if (smallPlusIcon) {
-      const isToolbarOverflow = this.popupRef && isElementOutOfWindow(this.popupRef);
+    if (smallPlusIcon && this.popupRef) {
+      const isToolbarOverflow = isElementOutOfWindow(this.popupRef);
+      const editorWidth = this.popupRef.closest('[data-id=rce]').getBoundingClientRect().width;
       return {
-        left: isToolbarOverflow ? null : width / 2 + 22,
-        right: isToolbarOverflow ? -(width / 2) + 30 : width / 2 + 22,
+        left: isToolbarOverflow ? editorWidth - width / 2 + 25 : width / 2 + 22,
+        right: isToolbarOverflow ? -(width / 2) + 15 : width / 2 + 22,
         width,
         top,
       };
