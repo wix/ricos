@@ -24,8 +24,6 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     ...rest
   } = config;
 
-  const a = config.sdgfjh;
-
   return createBasePlugin({
     component: Component,
     type: IMAGE_TYPE,
