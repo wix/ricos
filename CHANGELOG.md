@@ -20,6 +20,10 @@
 </details>
 <hr/>
 
+## 8.13.1 (Jan 7, 2021)
+- `link`
+  - [#c3b615bc](https://github.com/wix/ricos/commit/c3b615bc) link not working in viewer
+
 ## 8.13.0 (Jan 6, 2021)
 ### :rocket: New Feature
 - `link`
