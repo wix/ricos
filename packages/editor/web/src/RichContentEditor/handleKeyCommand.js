@@ -18,7 +18,7 @@ export default (updateEditorState, customHandlers, blockType, onBackspace) => (
     if (isTab(command)) {
       newState = handleTabCommand(editorState, blockType, customHandlers, command);
     } else if (isUndoRedo(command)) {
-      customHandlers[command]();
+      customHandlers[command](editorState);
       return 'handled';
     } else {
       newState = customHandlers[command](editorState, event);

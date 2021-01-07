@@ -148,8 +148,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleReturn?: (
     updateEditorStateCallback: (editorState: EditorState) => void
   ) => DraftEditorProps['handleReturn'];
-  handleUndoCommand?: () => EditorState;
-  handleRedoCommand?: () => EditorState;
+  handleUndoCommand?: (editorState?: EditorState) => EditorState;
+  handleRedoCommand?: (editorState?: EditorState) => EditorState;
   tablePluginMenu?: boolean;
   callOnChangeOnNewEditorState?: boolean;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
@@ -605,12 +605,20 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     event?.preventDefault();
   };
 
-  handleUndoCommand = () => {
-    this.props.handleUndoCommand?.() || this.updateEditorState(undo(this.state.editorState));
+  handleUndoCommand = (editorState: EditorState) => {
+    if (this.props.isInnerRCE) {
+      this.props.handleUndoCommand?.();
+    } else {
+      this.updateEditorState(undo(editorState || this.state.editorState));
+    }
   };
 
-  handleRedoCommand = () => {
-    this.props.handleRedoCommand?.() || this.updateEditorState(redo(this.state.editorState));
+  handleRedoCommand = (editorState: EditorState) => {
+    if (this.props.isInnerRCE) {
+      this.props.handleRedoCommand?.();
+    } else {
+      this.updateEditorState(redo(editorState || this.state.editorState));
+    }
   };
 
   getCustomCommandHandlers = () => ({
