@@ -167,7 +167,7 @@ class FileUploadViewer extends PureComponent {
         this.setState({ resolvedFileUrl, resolvingUrl: false }, this.switchReadyIcon);
 
         if (this.iframeRef.current) {
-          this.iframeRef.current.src = resolveFileUrl;
+          this.iframeRef.current.src = resolvedFileUrl;
         }
       });
     };

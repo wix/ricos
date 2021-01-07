@@ -3,7 +3,7 @@ import { BUTTONS, EditIcon } from 'wix-rich-content-plugin-commons';
 import {
   updateLinkAtCurrentSelection,
   getEntityData,
-  insertExternalLink,
+  insertCustomLink,
 } from 'wix-rich-content-editor-common';
 import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
@@ -50,7 +50,7 @@ const createInlineButtons: CreateInlineButtons = (config: {
           <TextLinkButton
             insertLinkFn={updateLinkAtCurrentSelection}
             getEntityData={getEntityData}
-            insertExternalLink={insertExternalLink}
+            insertCustomLink={insertCustomLink}
             icon={EditIcon}
             tooltipText={config.t('LinkTo_Edit_Tooltip')}
             {...config}
