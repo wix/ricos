@@ -110,6 +110,7 @@ export class PollContextProvider extends PureComponent {
     }
 
     this.props.setPoll(dto);
+    console.debug('polls publish callback'); // eslint-disable-line
   };
 
   updatePoll(poll) {

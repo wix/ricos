@@ -40,7 +40,7 @@ export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   getEntityData,
-  insertExternalLink,
+  insertCustomLink,
   hasLinksInBlock,
   getLinkRangesInBlock,
   fixPastedLinks,

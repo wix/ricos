@@ -144,18 +144,32 @@ describe('text', () => {
     cy.blurEditor();
   });
 
-  it('should insert external link', function() {
+  it('should insert custom link', function() {
     const testAppConfig = {
       ...usePluginsConfig({
         link: {
-          isExternalModal: true,
+          isCustomModal: true,
         },
       }),
     };
-    const selection = [0, 13];
+    const selection = [0, 11];
     cy.loadRicosEditorAndViewer('empty', testAppConfig)
-      .enterParagraphs(['External link.'])
+      .enterParagraphs(['Custom link.'])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter text without linkify links (disableAutoLink set to true)', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          disableAutoLink: true,
+        },
+      }),
+    };
+    cy.loadRicosEditorAndViewer('empty', testAppConfig).enterParagraphs([
+      'www.wix.com\nwww.wix.com ',
+    ]);
     cy.eyesCheckWindow(this.test.title);
   });
 

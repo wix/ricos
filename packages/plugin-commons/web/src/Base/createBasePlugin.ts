@@ -14,7 +14,6 @@ import { ContentBlock, EditorProps } from 'draft-js';
 import {
   CreatePluginConfig,
   EditorPluginConfig,
-  PluginType,
   UISettings,
   Pubsub,
   CreatePluginToolbar,
@@ -62,7 +61,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
-  type: PluginType;
+  type: string;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
   toolbar?: ReturnType<CreatePluginToolbar>;
@@ -84,7 +83,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
     onPropsChange: (props: any) => void
   ) => void;
   inlineModals?: ComponentType[];
-  legacyType?: PluginType;
+  legacyType?: string;
   noPluginBorder?: boolean;
   noPointerEventsOnFocus?: boolean;
   withHorizontalScroll?: boolean;
