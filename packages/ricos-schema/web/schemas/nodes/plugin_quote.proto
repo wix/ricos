@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+message RicosQuote {
+    int32 depth = 1;
+}

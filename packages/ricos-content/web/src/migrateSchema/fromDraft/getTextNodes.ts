@@ -5,9 +5,9 @@ import {
   RicosEntityRange,
   EMOJI_TYPE,
   RICOS_COLOR_TYPE,
-} from '..';
+} from '../..';
 import { RicosNode, RicosDecoration } from 'ricos-schema';
-import { NodeType, TO_RICOS_DECORATION_TYPE } from './consts';
+import { NodeType, TO_RICOS_DECORATION_TYPE } from '../consts';
 
 import { isEmpty, merge } from 'lodash';
 import { getEntity } from './getEntity';

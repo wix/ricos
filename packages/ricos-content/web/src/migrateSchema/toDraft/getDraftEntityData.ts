@@ -5,7 +5,7 @@ import {
   ENTITY_DECORATION_TO_MUTABILITY,
   FROM_RICOS_ENTITY_TYPE_MAP,
   TO_RICOS_ENTITY_TYPE_MAP,
-} from './consts';
+} from '../consts';
 import toCamelCase from 'to-camel-case';
 import toSlugCase from 'to-slug-case';
 import toSnakeCase from 'to-snake-case';
@@ -24,9 +24,8 @@ import {
   RicosEntity,
   RicosEntityMap,
   RICOS_SOUND_CLOUD_TYPE,
-} from '..';
+} from '../..';
 import { DraftBlockType } from 'draft-js';
-import { Map as immutableMap } from 'immutable';
 
 let latestEntityKey = 0;
 
@@ -190,19 +189,19 @@ export const createAtomicEntityData = (
 };
 
 export const createTextBlockData = (node: RicosNode, blockType: DraftBlockType) => {
-  const { textAlignment, dynamicStyles } = node[DRAFT_BLOCK_TYPE_TO_DATA_FIELD[blockType]] || {};
-  return immutableMap(
-    Object.assign(
-      {},
-      textAlignment ? { textAlignment: textAlignment.toString().toLowerCase() } : undefined,
-      dynamicStyles
-        ? {
-            dynamicStyles: Object.fromEntries(
-              Object.entries(dynamicStyles).map(([key, value]) => [toSlugCase(key), value])
-            ),
-          }
-        : undefined
-    )
+  const { textAlignment, dynamicStyles, depth } =
+    node[DRAFT_BLOCK_TYPE_TO_DATA_FIELD[blockType]] || {};
+  return Object.assign(
+    {},
+    textAlignment ? { textAlignment: textAlignment.toString().toLowerCase() } : undefined,
+    dynamicStyles
+      ? {
+          dynamicStyles: Object.fromEntries(
+            Object.entries(dynamicStyles).map(([key, value]) => [toSlugCase(key), value])
+          ),
+        }
+      : undefined,
+    depth ? { depth } : undefined
   );
 };
 

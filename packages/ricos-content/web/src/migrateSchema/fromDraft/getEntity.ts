@@ -1,4 +1,4 @@
-import { RicosEntityMap, RicosContentBlock } from '..';
+import { RicosEntityMap, RicosContentBlock } from '../..';
 import toConstantCase from 'to-constant-case';
 import toCamelCase from 'to-camel-case';
 import {
@@ -16,8 +16,8 @@ import {
   GIPHY_TYPE,
   LINK_PREVIEW_TYPE,
   SOUND_CLOUD_TYPE,
-} from '../consts';
-import { TO_RICOS_ENTITY_TYPE_MAP, TO_RICOS_PLUGIN_TYPE_MAP } from './consts';
+} from '../../consts';
+import { TO_RICOS_ENTITY_TYPE_MAP, TO_RICOS_PLUGIN_TYPE_MAP } from '../consts';
 import { has } from 'lodash';
 
 const migrateVideoData = data => {

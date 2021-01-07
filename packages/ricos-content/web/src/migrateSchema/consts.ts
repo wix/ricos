@@ -180,6 +180,7 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.HeaderFive]: 'ricosHeading',
   [BlockType.HeaderSix]: 'ricosHeading',
   [BlockType.CodeBlock]: 'ricosCode',
+  [BlockType.Blockquote]: 'ricosQuote',
 };
 
 export const ENTITY_DECORATION_TO_MUTABILITY = {

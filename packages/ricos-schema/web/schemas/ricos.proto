@@ -8,6 +8,7 @@ import "decorations/plugin_mention.proto";
 import "nodes/plugin_code.proto";
 import "nodes/plugin_heading.proto";
 import "nodes/plugin_paragraph.proto";
+import "nodes/plugin_quote.proto";
 import "plugins/plugin_button.proto";
 import "plugins/plugin_divider.proto";
 import "plugins/plugin_file.proto";
@@ -62,6 +63,7 @@ message RicosNode {
         RicosParagraph ricos_paragraph = 18;
         RicosCode ricos_code = 19;
         RicosHeading ricos_heading = 20;
+        RicosQuote ricos_quote = 21;
     }
 }
 

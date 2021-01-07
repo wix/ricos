@@ -6,9 +6,10 @@ import { RicosContent } from 'ricos-schema';
 import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 import { compare } from 'ricos-content/libs/comparision';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
-const MIGRATED_FIXTURES_PATH = '../packages/ricos-content/web/src/migrateSchema/migratedFixtures';
+const MIGRATED_FIXTURES_PATH =
+  '../packages/ricos-content/web/src/migrateSchema/fromDraft/migratedFixtures';
 const REVERSE_MIGRATED_FIXTURES_PATH =
-  '../packages/ricos-content/web/src/migrateSchema/reverseMigratedFixtures';
+  '../packages/ricos-content/web/src/migrateSchema/toDraft/reverseMigratedFixtures';
 const FIXTURES_TO_IGNORE = ['old-image-format', 'long-post-bad-data'];
 
 const filename = process.argv[2];

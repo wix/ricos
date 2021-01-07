@@ -6,8 +6,8 @@ import {
   RicosEntityMap,
   RicosEntityRange,
   RicosInlineStyleRange,
-} from '..';
-import { genKey } from './generateRandomKey';
+} from '../..';
+import { genKey } from '../generateRandomKey';
 import {
   NodeType,
   BlockType,
@@ -15,7 +15,7 @@ import {
   FROM_RICOS_DECORATION_TYPE,
   ENTITY_DECORATION_TO_DATA_FIELD,
   emojiRegex,
-} from './consts';
+} from '../consts';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
 import {
@@ -23,6 +23,7 @@ import {
   createDecorationEntityData,
   createAtomicEntityData,
 } from './getDraftEntityData';
+import { Map as immutableMap } from 'immutable';
 
 interface DecorationDescriptor extends RicosDecoration {
   start: number;
@@ -161,14 +162,15 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   ) => {
     const { text, decorations } = mergeTextNodes(node.nodes);
     const { inlineStyleRanges, entityRanges, entityMap } = parseDecorations(decorations);
-    const data = createTextBlockData(node, type);
+    const { depth, ...data } = createTextBlockData(node, type);
     addBlock({
       key,
       type,
       text,
-      data,
+      depth,
       inlineStyleRanges,
       entityRanges,
+      data: immutableMap(data),
     });
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };

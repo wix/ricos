@@ -1,10 +1,10 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 
 import { isEmpty } from 'lodash';
-import { RicosContent as RicosContentDraft, RicosContentBlock } from '..';
-import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from './consts';
+import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
+import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from '../consts';
 import { RicosContent, RicosNode, google } from 'ricos-schema';
-import { genKey } from './generateRandomKey';
+import { genKey } from '../generateRandomKey';
 
 import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getEntity';
@@ -76,6 +76,9 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     key: block.key,
     type: NodeType.Blockquote,
     nodes: [parseTextBlock(block)],
+    ricosQuote: {
+      depth: block.depth || undefined,
+    },
   });
 
   const parseCodeBlock = (block: RicosContentBlock): RicosNode => ({
@@ -100,6 +103,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       type: NodeType.Heading,
       ricosHeading: {
         level: getLevel(block.type),
+        depth: block.depth || undefined,
         ...parseBlockData(block.data),
       },
       nodes: getTextNodes(block, entityMap, keyMapping),
@@ -108,13 +112,20 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
 
   const parseTextBlock = (block: RicosContentBlock): RicosNode => {
     const textWrapperNode: RicosNode = {
-      key: block.type === BlockType.Unstyled ? block.key : genKey(),
+      key: genKey(),
       type: NodeType.Paragraph,
       ricosParagraph: {
         ...parseBlockData(block.data),
       },
       nodes: [],
     };
+    if (block.type === BlockType.Unstyled) {
+      textWrapperNode.key = block.key;
+      textWrapperNode.ricosParagraph = {
+        ...textWrapperNode.ricosParagraph,
+        depth: block.depth || undefined,
+      };
+    }
 
     keyMapping[block.key] = textWrapperNode.key;
     const nodes = getTextNodes(block, entityMap, keyMapping);

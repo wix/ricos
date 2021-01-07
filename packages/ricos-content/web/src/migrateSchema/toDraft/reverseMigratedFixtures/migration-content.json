@@ -208,30 +208,6 @@
       "data": {}
     },
     {
-      "key": "b7qh5",
-      "type": "unstyled",
-      "text": "",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "7qp04",
-      "type": "atomic",
-      "text": " ",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 9
-        }
-      ],
-      "data": {}
-    },
-    {
       "key": "89ir3",
       "type": "unstyled",
       "text": "",
@@ -250,7 +226,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 10
+          "key": 9
         }
       ],
       "data": {}
@@ -292,7 +268,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 11
+          "key": 10
         }
       ],
       "data": {}
@@ -316,7 +292,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 12
+          "key": 11
         }
       ],
       "data": {}
@@ -340,7 +316,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 13
+          "key": 12
         }
       ],
       "data": {}
@@ -364,7 +340,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 14
+          "key": 13
         }
       ],
       "data": {}
@@ -388,7 +364,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 15
+          "key": 14
         }
       ],
       "data": {}
@@ -421,7 +397,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 16
+          "key": 15
         }
       ],
       "data": {}
@@ -445,7 +421,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 17
+          "key": 16
         }
       ],
       "data": {}
@@ -583,11 +559,11 @@
       "key": "55t98",
       "type": "unstyled",
       "text": "Praesent purus nibh, sodales non efficitur a, consequat ac ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.",
-      "depth": 0,
+      "depth": 2,
       "inlineStyleRanges": [],
       "entityRanges": [
         {
-          "key": 18,
+          "key": 17,
           "offset": 164,
           "length": 7
         }
@@ -605,7 +581,7 @@
       "key": "27i88",
       "type": "unstyled",
       "text": "",
-      "depth": 0,
+      "depth": 1,
       "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {}
@@ -620,7 +596,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 19
+          "key": 18
         }
       ],
       "data": {}
@@ -871,10 +847,6 @@
       }
     },
     "9": {
-      "type": "wix-draft-plugin-link-button",
-      "mutability": "IMMUTABLE"
-    },
-    "10": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -886,7 +858,7 @@
         }
       }
     },
-    "11": {
+    "10": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
@@ -912,7 +884,7 @@
         }
       }
     },
-    "12": {
+    "11": {
       "type": "wix-draft-plugin-map",
       "mutability": "IMMUTABLE",
       "data": {
@@ -936,7 +908,7 @@
         }
       }
     },
-    "13": {
+    "12": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
@@ -950,7 +922,7 @@
         "size": 150000
       }
     },
-    "14": {
+    "13": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
@@ -964,7 +936,7 @@
         "config": {}
       }
     },
-    "15": {
+    "14": {
       "type": "wix-draft-plugin-sound-cloud",
       "mutability": "IMMUTABLE",
       "data": {
@@ -991,7 +963,7 @@
         }
       }
     },
-    "16": {
+    "15": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1010,7 +982,7 @@
         "provider_url": "www.mockUrl.com"
       }
     },
-    "17": {
+    "16": {
       "type": "wix-draft-plugin-poll",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1116,14 +1088,14 @@
         "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
       }
     },
-    "18": {
+    "17": {
       "type": "EMOJI_TYPE",
       "mutability": "IMMUTABLE",
       "data": {
         "emojiUnicode": "👨‍👩‍👦‍👦"
       }
     },
-    "19": {
+    "18": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
