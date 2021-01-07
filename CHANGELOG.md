@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+- `editor-common`
+  - [#1965](https://github.com/wix/ricos/pull/1965) Editor context lib
+
 </details>
 <hr/>
 
