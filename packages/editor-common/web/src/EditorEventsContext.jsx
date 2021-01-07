@@ -79,3 +79,15 @@ export class EditorEventsProvider extends React.Component {
     );
   }
 }
+
+export const withEditorContext = WrappedComponent => {
+  const WrappedComponentWithEvents = withEditorEvents(WrappedComponent);
+  const withEditorProivder = props => {
+    return (
+      <EditorEventsProvider>
+        <WrappedComponentWithEvents {...props} />
+      </EditorEventsProvider>
+    );
+  };
+  return withEditorProivder;
+};
