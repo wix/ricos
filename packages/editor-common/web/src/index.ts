@@ -7,6 +7,7 @@ export {
   withEditorEvents,
   WithEditorEventsProps,
   EditorEvents,
+  withEditorContext,
 } from './EditorEventsContext';
 
 // Components

@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+## 8.13.3 (Jan 7, 2021)
+- `editor-common`
+  - [#1966](https://github.com/wix/ricos/pull/1966) export withEditorContext
+
 
 </details>
 <hr/>
