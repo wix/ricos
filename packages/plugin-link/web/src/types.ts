@@ -2,6 +2,7 @@ import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common'
 
 export const EXTERNAL_LINK_TYPE = 'wix-draft-plugin-external-link';
 export const LINK_TYPE = 'LINK';
+export const CUSTOM_LINK_TYPE = 'ricos-plugin-custom-link';
 
 export interface LinkPluginEditorConfig extends EditorPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
