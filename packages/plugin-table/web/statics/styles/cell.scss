@@ -5,7 +5,7 @@
     background-color: transparent;
     vertical-align: initial;
     text-align: right;
-    border: 1px solid rgba($primary-text-color-tuple, 0.1);;
+    border: 1px solid rgba($primary-text-color-tuple, 0.2);
     padding: 0;
     &.selected {
         z-index: 1;
@@ -14,7 +14,7 @@
         background-color: rgba($action-color-tuple, 0.2);
     }
     &.header {
-        background-color: rgba(0, 0, 0, 0.02) !important;
+        background-color: rgba(primary-text-color-tuple, 0.04) !important;
     }
 }
 
