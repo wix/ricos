@@ -17,8 +17,13 @@
     Click to see more.
   </summary>
 
+
 </details>
 <hr/>
+
+## 8.13.2 (Jan 7, 2021)
+- `editor-common`
+  - [#1965](https://github.com/wix/ricos/pull/1965) Editor context lib
 
 ## 8.13.1 (Jan 7, 2021)
 ### :bug: Bug Fix
