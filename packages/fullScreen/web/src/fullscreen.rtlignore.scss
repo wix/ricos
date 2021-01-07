@@ -37,11 +37,17 @@
 .nav_arrow_left {
   right: 22px;
   position: absolute;
+  > svg {
+    filter: drop-shadow(0px 0px 0px black) !important;
+  }
 }
 
 .nav_arrow_right {
   left: 22px;
   position: absolute;
+  > svg {
+    filter: drop-shadow(0px 0px 0px black) !important;
+  }
 }
 
 .close {
