@@ -19,6 +19,8 @@ import {
   VERTICAL_EMBED_TYPE,
   verticalEmbedProviders,
 } from 'wix-rich-content-plugin-vertical-embed';
+import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
+import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 import {
   createExternalMentionsPlugin,
   EXTERNAL_MENTIONS_TYPE,
@@ -82,6 +84,7 @@ import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
@@ -124,6 +127,7 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
+  createUnsupportedBlocksPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -185,6 +189,7 @@ export const editorPluginsMap = {
   polls: createPollPlugin,
   accordion: createAccordionPlugin,
   table: createTablePlugin,
+  unsupportedBlocks: createUnsupportedBlocksPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -404,6 +409,7 @@ const config = {
       createDividerPlugin,
       createEmojiPlugin,
       createMapPlugin,
+      createUnsupportedBlocksPlugin,
     ],
   },
   [TABLE_TYPE]: {
@@ -420,6 +426,7 @@ const config = {
       createFileUploadPlugin,
       createDividerPlugin,
       createCodeBlockPlugin,
+      createUnsupportedBlocksPlugin,
     ],
   },
   [HASHTAG_TYPE]: {
@@ -489,6 +496,7 @@ const config = {
       createGiphyPlugin,
       createFileUploadPlugin,
       createEmojiPlugin,
+      createUnsupportedBlocksPlugin,
     ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
@@ -537,6 +545,7 @@ const config = {
     //   },
     // },
   },
+  [UNSUPPORTED_BLOCKS_TYPE]: {},
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],

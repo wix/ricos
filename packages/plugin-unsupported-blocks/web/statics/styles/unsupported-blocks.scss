@@ -1,0 +1,24 @@
+.unsupportedBlocks_alert{
+    margin: 0 auto;
+    max-width: 375px;
+    margin: 0 auto;
+    background-color: rgb(240 ,244 ,247);
+    color: rgb(51, 51, 51);
+    height: 52px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 12px auto;
+    border-radius: 10px;
+      svg{
+        margin: 0 8px;
+      }
+      p{
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        font-family: Helvetica, sans-serif;
+        width: 282px;
+        }
+  }
