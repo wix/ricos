@@ -7,7 +7,7 @@ import {
   RicosEntityRange,
   RicosInlineStyleRange,
 } from '..';
-import { genKey } from 'wix-rich-content-editor-common';
+import { genKey } from './generateRandomKey';
 import {
   NodeType,
   BlockType,
