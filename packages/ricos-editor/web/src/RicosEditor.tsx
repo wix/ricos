@@ -1,4 +1,4 @@
-import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
+import React, { Component, Fragment, ElementType, FunctionComponent, forwardRef } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
@@ -14,7 +14,7 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-import { withEditorEventsRef } from 'wix-rich-content-editor-common';
+import { EditorEventsContext } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
 
 // eslint-disable-next-line
@@ -201,7 +201,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 }
 
-export default withEditorEventsRef(RicosEditor);
+export default forwardRef<RicosEditor, RicosEditorProps>((props, ref) => (
+  <EditorEventsContext.Consumer>
+    {contextValue => <RicosEditor editorEvents={contextValue} {...props} ref={ref} />}
+  </EditorEventsContext.Consumer>
+));
 
 const StaticToolbarPortal: FunctionComponent<{
   StaticToolbar?: ElementType;

@@ -5,7 +5,6 @@ export {
   EditorEventsContext,
   EditorEventsProvider,
   withEditorEvents,
-  withEditorEventsRef,
   WithEditorEventsProps,
   EditorEvents,
 } from './EditorEventsContext';
@@ -41,7 +40,7 @@ export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   getEntityData,
-  insertExternalLink,
+  insertCustomLink,
   hasLinksInBlock,
   getLinkRangesInBlock,
   fixPastedLinks,
