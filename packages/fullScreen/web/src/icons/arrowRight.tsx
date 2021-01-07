@@ -6,7 +6,7 @@ const ArrowRight = props => (
     <g fill="none" fillRule="evenodd">
       <path fill={props.backgroundColor} transform="translate(0 .5)" />
       <path
-        stroke={props.iconsColor}
+        stroke={props.foregroundColor}
         strokeWidth="1.5"
         d="M17 21L35 21 35 39"
         transform="translate(0 .5) rotate(45 26 30)"

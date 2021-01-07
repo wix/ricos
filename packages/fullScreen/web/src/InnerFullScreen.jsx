@@ -18,7 +18,7 @@ export default class InnerFullscreen extends Component {
 
   static defaultProps = {
     backgroundColor: 'white',
-    iconsColor: '#2F2E2E',
+    foregroundColor: '#2F2E2E',
   };
 
   componentDidMount() {
@@ -90,7 +90,7 @@ export default class InnerFullscreen extends Component {
   };
 
   renderCloseButton = () => {
-    const { backgroundColor, iconsColor } = this.props;
+    const { backgroundColor, foregroundColor } = this.props;
     return (
       <div
         role="button"
@@ -101,7 +101,7 @@ export default class InnerFullscreen extends Component {
         aria-label={'Close'}
         data-hook={'fullscreen-close-button'}
       >
-        <CloseIcon backgroundColor={backgroundColor} iconsColor={iconsColor} />
+        <CloseIcon backgroundColor={backgroundColor} foregroundColor={foregroundColor} />
       </div>
     );
   };
@@ -116,7 +116,7 @@ export default class InnerFullscreen extends Component {
 
   renderFullscreenToggleButton = () => {
     const { isInFullscreen } = this.state;
-    const { backgroundColor, iconsColor } = this.props;
+    const { backgroundColor, foregroundColor } = this.props;
     const Icon = isInFullscreen ? ShrinkIcon : ExpandIcon;
     const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
     return (
@@ -129,7 +129,7 @@ export default class InnerFullscreen extends Component {
         aria-label={ariaLabel}
         data-hook={'fullscreen-toggle-button'}
       >
-        <Icon backgroundColor={backgroundColor} iconsColor={iconsColor} />
+        <Icon backgroundColor={backgroundColor} foregroundColor={foregroundColor} />
       </div>
     );
   };
@@ -143,16 +143,18 @@ export default class InnerFullscreen extends Component {
   infoElement = itemProps => {
     return (
       <div className={styles.info_container}>
-        <div className={styles.title}>{itemProps.title}</div>
+        <div style={{ color: this.props.foregroundColor }} className={styles.title}>
+          {itemProps.title}
+        </div>
       </div>
     );
   };
 
   renderArrow = (Icon, styles) => {
-    const { backgroundColor, iconsColor } = this.props;
+    const { backgroundColor, foregroundColor } = this.props;
     return (
       <div className={styles}>
-        <Icon backgroundColor={backgroundColor} iconsColor={iconsColor} />
+        <Icon backgroundColor={backgroundColor} foregroundColor={foregroundColor} />
       </div>
     );
   };
@@ -217,6 +219,6 @@ InnerFullscreen.propTypes = {
   index: PropTypes.number,
   topMargin: PropTypes.object,
   backgroundColor: PropTypes.string,
-  iconsColor: PropTypes.string,
+  foregroundColor: PropTypes.string,
   onClose: PropTypes.func,
 };

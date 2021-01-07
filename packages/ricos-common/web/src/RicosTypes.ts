@@ -106,7 +106,7 @@ export interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
-export type FullscreenProps = { backgroundColor?: string; iconsColor?: string };
+export type FullscreenProps = { backgroundColor?: string; foregroundColor?: string };
 
 export interface MediaSettings {
   pauseMedia?: boolean;

@@ -14,7 +14,7 @@ interface Props {
   dataHook: string;
   isMobile: boolean;
   backgroundColor: string;
-  iconsColor: string;
+  foregroundColor: string;
 }
 
 export default class ViewerModal extends Component<Props> {
@@ -34,7 +34,15 @@ export default class ViewerModal extends Component<Props> {
   }
 
   render() {
-    const { index, isOpen, images, onClose, isMobile, backgroundColor, iconsColor } = this.props;
+    const {
+      index,
+      isOpen,
+      images,
+      onClose,
+      isMobile,
+      backgroundColor,
+      foregroundColor,
+    } = this.props;
     return (
       <Fullscreen
         isOpen={isOpen}
@@ -43,7 +51,7 @@ export default class ViewerModal extends Component<Props> {
         isMobile={isMobile}
         index={index}
         backgroundColor={backgroundColor}
-        iconsColor={iconsColor}
+        foregroundColor={foregroundColor}
       />
     );
   }

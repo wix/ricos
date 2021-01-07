@@ -5,7 +5,7 @@ const ExpandIcon = props => (
   <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
     <g fill="none" fillRule="evenodd">
       <path fill={props.backgroundColor} d="M0 0H60V60H0z" />
-      <g fill={props.iconsColor}>
+      <g fill={props.foregroundColor}>
         <path
           d="M4.333 15.167H5.413V27.084H4.333z"
           transform="translate(17 17) rotate(45 4.873 21.125)"

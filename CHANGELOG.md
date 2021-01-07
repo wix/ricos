@@ -19,9 +19,9 @@
 
 ### :rocket: New Feature
 - `ricos-viewer`
-  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `iconsColor` via `fullscreenProps` object in `mediaSettings`
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
 - `fullscreen`
-  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `iconsColor` props support, icon design improvement
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
 
 </details>
 <hr/>

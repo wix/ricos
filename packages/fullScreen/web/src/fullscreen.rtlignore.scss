@@ -34,7 +34,7 @@
   }
 }
 
-.nav_arrow_left {
+.nav_arrow_left, .nav_arrow_right {
   right: 22px;
   position: absolute;
   > svg {
@@ -44,10 +44,6 @@
 
 .nav_arrow_right {
   left: 22px;
-  position: absolute;
-  > svg {
-    filter: drop-shadow(0px 0px 0px black) !important;
-  }
 }
 
 .close {
@@ -99,7 +95,6 @@
 }
 
 .title {
-  color: black;
   font-size: 14px;
   line-height: 20px;
   white-space: nowrap;

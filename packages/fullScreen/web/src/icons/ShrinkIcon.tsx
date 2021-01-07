@@ -5,7 +5,7 @@ const ShrinkIcon = props => (
   <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
     <g fill="none" fillRule="evenodd">
       <path fill={props.backgroundColor} d="M0 0H60V60H0z" />
-      <g fill={props.iconsColor}>
+      <g fill={props.foregroundColor}>
         <path
           d="M4.055 16.447H5.135V28.363999999999997H4.055z"
           transform="translate(17 16) rotate(-135 4.595 22.405)"

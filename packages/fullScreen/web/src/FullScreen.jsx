@@ -21,7 +21,7 @@ Fullscreen.propTypes = {
   index: PropTypes.number,
   topMargin: PropTypes.object,
   backgroundColor: PropTypes.string,
-  iconsColor: PropTypes.string,
+  foregroundColor: PropTypes.string,
   onClose: PropTypes.func,
   target: PropTypes.elementType,
 };
