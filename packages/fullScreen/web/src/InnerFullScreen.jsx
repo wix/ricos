@@ -90,8 +90,7 @@ export default class InnerFullscreen extends Component {
   };
 
   renderCloseButton = () => {
-    const backgroundColor = this.props.backgroundColor;
-    const iconsColor = this.props.iconsColor;
+    const { backgroundColor, iconsColor } = this.props;
     return (
       <div
         role="button"
@@ -117,8 +116,7 @@ export default class InnerFullscreen extends Component {
 
   renderFullscreenToggleButton = () => {
     const { isInFullscreen } = this.state;
-    const backgroundColor = this.props.backgroundColor;
-    const iconsColor = this.props.iconsColor;
+    const { backgroundColor, iconsColor } = this.props;
     const Icon = isInFullscreen ? ShrinkIcon : ExpandIcon;
     const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
     return (
@@ -151,8 +149,7 @@ export default class InnerFullscreen extends Component {
   };
 
   renderArrow = (Icon, styles) => {
-    const backgroundColor = this.props.backgroundColor;
-    const iconsColor = this.props.iconsColor;
+    const { backgroundColor, iconsColor } = this.props;
     return (
       <div className={styles}>
         <Icon backgroundColor={backgroundColor} iconsColor={iconsColor} />
