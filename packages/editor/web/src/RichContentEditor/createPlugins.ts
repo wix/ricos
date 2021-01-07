@@ -61,7 +61,7 @@ const createPlugins = ({
   });
 
   const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false, ulChars: [] });
-  const supportedBlockTypes = Object.entries(context.config).map(([key]) => key);
+  // const supportedBlockTypes = Object.entries(context.config).map(([key]) => key);
 
   const dndPlugin = createBlockDndPlugin();
   const handleDrop = dndPlugin.handleDrop;
@@ -82,7 +82,7 @@ const createPlugins = ({
     decorator: wixPluginsDecorators,
     commonPubsub,
     pluginDefaults,
-    supportedBlockTypes,
+    // supportedBlockTypes,
     ...context,
     ...context.config,
   };

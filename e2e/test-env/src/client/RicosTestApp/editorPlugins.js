@@ -136,6 +136,7 @@ const createPlugins = externalConfigs => {
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
         pluginImage().createPlugin,
+        pluginUnsupportedBlocks(),
       ],
     }),
     table: pluginTable({
@@ -146,6 +147,7 @@ const createPlugins = externalConfigs => {
         pluginLineSpacing().createPlugin,
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
+        pluginUnsupportedBlocks(),
       ],
     }),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
