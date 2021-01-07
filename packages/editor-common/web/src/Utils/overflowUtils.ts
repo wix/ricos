@@ -1,4 +1,9 @@
-const getElementCoordsInWindow = elem => {
+type ElementCoords = {
+  top: number;
+  left: number;
+};
+
+const getElementCoordsInWindow = (elem: HTMLElement): ElementCoords => {
   const box = elem.getBoundingClientRect();
 
   const body = document.body;
@@ -16,15 +21,15 @@ const getElementCoordsInWindow = elem => {
   return { top: Math.round(top), left: Math.round(left) };
 };
 
-const getWindowWidth = () => {
+const getWindowWidth = (): number => {
   return window.innerWidth;
 };
 
-const getWidth = element => {
+const getWidth = (element: HTMLElement): number => {
   return element.clientWidth;
 };
 
-export const isElementOutOfWindow = element => {
+export const isElementOutOfWindow = (element: HTMLElement): boolean | undefined => {
   if (window && document) {
     const modalOffset = getElementCoordsInWindow(element).left;
     const modalWidth = getWidth(element);

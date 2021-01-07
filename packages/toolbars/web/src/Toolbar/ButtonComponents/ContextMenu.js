@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
-import { isElementOutOfWindow } from '../ToolbarUtils';
+import { isElementOutOfWindow } from 'wix-rich-content-editor-common';
 
 class ContextMenu extends PureComponent {
   static propTypes = {

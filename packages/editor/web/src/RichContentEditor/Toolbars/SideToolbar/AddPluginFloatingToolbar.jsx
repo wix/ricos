@@ -6,13 +6,13 @@ import {
   EditorModals,
   getModalStyles,
   TOOLBARS,
+  isElementOutOfWindow,
 } from 'wix-rich-content-editor-common';
 import { isSSR } from 'wix-rich-content-common';
 import { PlusIcon, PlusIconSmall } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import AddPluginMenu from './AddPluginMenu';
 import PopupOffsetnHoc from './PopupOffsetnHoc';
-import { isElementOutOfWindow } from 'wix-rich-content-toolbars';
 
 export default class AddPluginFloatingToolbar extends PureComponent {
   state = {
