@@ -16,23 +16,21 @@ export function compare(object, base) {
       ) {
         const areObjects = isObject(value) && isObject(baseValue);
         const currentValue = areObjects ? changes(value, baseValue) : value;
-        if (!(isObject(currentValue) && Object.keys(currentValue).length === 0)) {
-          result[key] = currentValue;
-          if (!areObjects) {
-            // eslint-disable-next-line no-console
-            console.dir(
-              {
-                [key]: {
-                  from: baseValue,
-                  to: currentValue,
-                },
+        result[key] = currentValue;
+        if (!isObject(currentValue) || Object.keys(currentValue).length === 0) {
+          console.dir(
+            {
+              [key]: {
+                from: baseValue,
+                to: currentValue,
               },
-              { depth: null }
-            );
-          }
+            },
+            { depth: null }
+          );
         }
       }
     });
   }
+
   return changes(object, base);
 }

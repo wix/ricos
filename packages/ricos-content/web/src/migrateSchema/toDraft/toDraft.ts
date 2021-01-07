@@ -23,7 +23,6 @@ import {
   createDecorationEntityData,
   createAtomicEntityData,
 } from './getDraftEntityData';
-import { Map as immutableMap } from 'immutable';
 
 interface DecorationDescriptor extends RicosDecoration {
   start: number;
@@ -170,7 +169,7 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
       depth,
       inlineStyleRanges,
       entityRanges,
-      data: immutableMap(data),
+      data,
     });
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
