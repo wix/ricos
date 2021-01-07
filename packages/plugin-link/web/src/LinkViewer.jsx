@@ -37,9 +37,9 @@ class LinkViewer extends Component {
     const settings = config[LINK_TYPE];
     const { onClick } = settings;
     const { anchor, url } = componentData;
-    event.preventDefault();
     onClick?.(event, componentData?.customData || this.getHref(url, anchor));
     if (anchor && !isInEditor) {
+      event.preventDefault();
       const anchorString = `viewer-${anchor}`;
       history.pushState({}, null, `#${anchorString}`);
       const element = document.getElementById(anchorString);
