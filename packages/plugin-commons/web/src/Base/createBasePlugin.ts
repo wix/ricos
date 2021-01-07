@@ -258,7 +258,8 @@ const createBasePlugin = (
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
-        if (config.type === type || config.legacyType === type) {
+        const currentType = config.type;
+        if (currentType === type || config.legacyType === type) {
           return {
             component: DecoratedCompWithBase,
             editable: false,
