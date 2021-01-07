@@ -21,6 +21,7 @@
 <hr/>
 
 ## 8.13.1 (Jan 7, 2021)
+### :bug: Bug Fix
 - `link`
   - [#c3b615bc](https://github.com/wix/ricos/commit/c3b615bc) link not working in viewer
 
