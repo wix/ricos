@@ -39,5 +39,3 @@ export const MODAL_CONTROLS_POSITION = Object.freeze({
   TOP: 'top',
   BOTTOM: 'bottom',
 });
-
-export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';

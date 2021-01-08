@@ -29,7 +29,6 @@ import {
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
-// import { UNSUPPORTED_BLOCKS_TYPE } from '../consts';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
@@ -261,7 +260,8 @@ const createBasePlugin = (
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
-        if (config.type === type || config.legacyType === type) {
+        const currentType = config.type;
+        if (currentType === type || config.legacyType === type) {
           return {
             component: DecoratedCompWithBase,
             editable: false,

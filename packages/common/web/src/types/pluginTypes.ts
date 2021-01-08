@@ -58,7 +58,6 @@ import {
   POLL_TYPE,
   ACCORDION_TYPE,
   TABLE_TYPE,
-  // UNSUPPORTED_BLOCKS_TYPE,
 } from 'ricos-content';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
@@ -111,7 +110,6 @@ export type PluginType =
   | typeof POLL_TYPE
   | typeof ACCORDION_TYPE
   | typeof TABLE_TYPE;
-// | typeof UNSUPPORTED_BLOCKS_TYPE;
 
 export type BlockRendererFn = (
   contentBlock: ContentBlock,
@@ -235,7 +233,6 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
   commonPubsub: Pubsub;
   pluginDefaults: Record<string, unknown>;
   spoilerWrapper?: (component: ComponentType) => ComponentType;
-  // supportedBlockTypes?: string[];
 }
 
 export interface LinkPanelSettings {
