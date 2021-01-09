@@ -102,7 +102,6 @@ const createPlugins = externalConfigs => {
   const configs = normalizeConfigs(merge(defaultConfigs, externalConfigs));
 
   return {
-    unsupportedBlocks: pluginUnsupportedBlocks(),
     image: pluginImage(),
     gallery: pluginGallery(configs.gallery),
     video: pluginVideo(configs.video),
@@ -137,6 +136,7 @@ const createPlugins = externalConfigs => {
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
         pluginImage().createPlugin,
+        pluginUnsupportedBlocks().createPlugin,
       ],
     }),
     table: pluginTable({
@@ -147,9 +147,11 @@ const createPlugins = externalConfigs => {
         pluginLineSpacing().createPlugin,
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
+        pluginUnsupportedBlocks().createPlugin,
       ],
     }),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
+    unsupportedBlocks: pluginUnsupportedBlocks(),
   };
 };
 
