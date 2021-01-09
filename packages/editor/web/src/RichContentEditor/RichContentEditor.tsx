@@ -577,7 +577,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
-      return this.props.handlePastedText(text, html, editorState);
+      const handled = this.props.handlePastedText(text, html, editorState);
+      if (handled !== 'not-handled') {
+        return handled;
+      }
     }
 
     const { config, isInnerRCE } = this.props;
@@ -635,7 +638,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pubsub: this.commonPubsub,
   });
 
-  publish = async (postId: string) => {
+  // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
+  publish = async (postId?: string) => {
     if (!this.props.helpers?.onPublish) {
       return;
     }

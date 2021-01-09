@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
+import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
@@ -35,6 +35,7 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
       <RichContentEditor />
     </RicosEditor>
   );
+
   const element = shallow(toRender)
     .children()
     .last()

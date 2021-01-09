@@ -7,6 +7,7 @@ export {
   withEditorEvents,
   WithEditorEventsProps,
   EditorEvents,
+  withEditorContext,
 } from './EditorEventsContext';
 
 // Components
@@ -40,7 +41,7 @@ export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   getEntityData,
-  insertExternalLink,
+  insertCustomLink,
   hasLinksInBlock,
   getLinkRangesInBlock,
   fixPastedLinks,
