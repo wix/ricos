@@ -4,7 +4,7 @@ export interface ThemeUtils {
   fallbackColor: string;
   fallbackColorBright: string;
   isBright: (hexColor: string) => boolean;
-  adaptForeground: (actionColor: string) => string;
+  adaptForeground: (actionColor: string, fallbackColor?: string) => string;
   toCssRgbA: (hexColor: string, opacity: number) => string;
 }
 
@@ -24,6 +24,12 @@ export interface PaletteColors {
   actionColor: string;
   bgColor: string;
   textColor: string;
+  textColorLow?: string;
+  disabledColor?: string;
+  /** Default is black.
+   * When `ActionColor` is too bright, it is replaced with `FallbackColor` when used on bright backgrounds (e.g modals, toolbars).
+   * Therefore this color should remain relatively dark. */
+  fallbackColor?: string;
 }
 export interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils, customStyles?: RicosCustomStyles): void;

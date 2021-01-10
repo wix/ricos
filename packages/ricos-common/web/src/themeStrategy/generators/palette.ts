@@ -4,16 +4,18 @@ import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from
 import { RicosTheme, CssVarsObject } from '../themeTypes';
 
 const createCssVars = (colors: PaletteColors): CssVarsObject => {
-  const { textColor, bgColor: backgroundColor, actionColor } = colors;
+  const { textColor, bgColor: backgroundColor, actionColor, fallbackColor } = colors;
   return {
     textColor,
     textColorTuple: toRgbTuple(textColor),
     actionColor,
     actionColorTuple: toRgbTuple(actionColor),
-    actionColorFallback: adaptForeground(actionColor),
-    actionColorFallbackTuple: toRgbTuple(adaptForeground(actionColor)),
+    actionColorFallback: adaptForeground(actionColor, fallbackColor),
+    actionColorFallbackTuple: toRgbTuple(adaptForeground(actionColor, fallbackColor)),
     backgroundColor,
     backgroundColorTuple: toRgbTuple(backgroundColor),
+    fallbackColor,
+    fallbackColorTuple: fallbackColor ? toRgbTuple(fallbackColor) : undefined,
   };
 };
 
