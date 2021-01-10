@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/RicosViewer.cjs.js",
+    "module": "../../dist/lib/RicosViewer.js",
+    "types": "../../dist/lib/RicosViewer.d.ts"
+}
