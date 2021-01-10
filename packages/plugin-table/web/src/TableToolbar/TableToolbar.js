@@ -135,7 +135,8 @@ class TableToolbar extends Component {
       isAllCellsSelected,
       deleteBlock,
       selectedRows,
-      selectedCols
+      selectedCols,
+      t
     );
     const contextMenuButtonsProps = getContextMenuButtonsProps(
       isAllCellsSelected,
@@ -152,13 +153,14 @@ class TableToolbar extends Component {
       selectRows,
       selectCols,
       deleteBlock,
-      merge
+      merge,
+      t
     );
     const buttons = [
       {
         onClick: this.toggleIsTextFormattingOpen,
         dataHook: 'text-style',
-        text: 'Text Style',
+        text: t('TablePlugin_Toolbar_TextStyle_Button'),
         type: 'text',
       },
       {
@@ -186,7 +188,7 @@ class TableToolbar extends Component {
     return (
       <>
         <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
-          Go back
+          {t('TablePlugin_Toolbar_GoBack_Button')}
         </div>
         <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
       </>

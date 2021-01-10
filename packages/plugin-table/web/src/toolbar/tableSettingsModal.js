@@ -55,7 +55,7 @@ export default class tableSettingsModal extends Component {
   render() {
     const { styles } = this;
     const { colCount, rowCount, submittedInvalidCol, submittedInvalidRow } = this.state || {};
-    const { isMobile, helpers } = this.props;
+    const { isMobile, helpers, t } = this.props;
     return (
       <div>
         {isMobile && (
@@ -64,24 +64,24 @@ export default class tableSettingsModal extends Component {
             <CloseIcon />
           </div>
         )}
-        <div className={styles.title}>Table Configuration</div>
-        <div className={styles.subtitle}>You can customize the number of rows & columns</div>
+        <div className={styles.title}>{t('TablePlugin_SettingsModal_Title')}</div>
+        <div className={styles.subtitle}>{t('TablePlugin_SettingsModal_SubTitle')}</div>
         <div className={styles.tableConfig}>
           <TableSettingsCountSection
-            title={'Column Count'}
+            title={t('TablePlugin_SettingsModal_ColCount')}
             theme={this.props.theme}
             input={colCount}
             onCountChange={this.onColCountChange}
-            errorMessage={'count should be a number greater then 0'}
+            errorMessage={t('TablePlugin_SettingsModal_ErrorMessage')}
             submittedInvalidInput={submittedInvalidCol}
             dataHook={'columnCount'}
           />
           <TableSettingsCountSection
-            title={'Row Count'}
+            title={t('TablePlugin_SettingsModal_RowCount')}
             theme={this.props.theme}
             input={rowCount}
             onCountChange={this.onRowCountChange}
-            errorMessage={'count should be a number greater then 0'}
+            errorMessage={t('TablePlugin_SettingsModal_ErrorMessage')}
             submittedInvalidInput={submittedInvalidRow}
             dataHook={'rowCount'}
           />
@@ -94,7 +94,7 @@ export default class tableSettingsModal extends Component {
           onKeyUp={this.onKeyUp}
           data-hook={'createTableButton'}
         >
-          Create Table
+          {t('TablePlugin_SettingsModal_CreateTable_Button')}
         </div>
         {/*eslint-disable-next-line*/}
         <div tabIndex="0" />
