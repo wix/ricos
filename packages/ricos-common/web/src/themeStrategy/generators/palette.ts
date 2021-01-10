@@ -8,7 +8,7 @@ const createCssVars = (colors: PaletteColors): CssVarsObject => {
     textColor,
     bgColor: backgroundColor,
     actionColor,
-    fallbackColor,
+    fallbackColor = '#000000',
     disabledColor,
     textColorLow,
   } = colors;
@@ -22,7 +22,7 @@ const createCssVars = (colors: PaletteColors): CssVarsObject => {
     backgroundColor,
     backgroundColorTuple: toRgbTuple(backgroundColor),
     fallbackColor,
-    fallbackColorTuple: fallbackColor ? toRgbTuple(fallbackColor) : undefined,
+    fallbackColorTuple: toRgbTuple(fallbackColor),
     disabledColor,
     disabledColorTuple: disabledColor ? toRgbTuple(disabledColor) : undefined,
     textColorLow,
