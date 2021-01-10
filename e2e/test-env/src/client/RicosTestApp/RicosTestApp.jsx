@@ -67,11 +67,12 @@ class RicosTestApp extends PureComponent {
   renderEditor = () => {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType, useCustomStyles } = testAppConfig.theme || {};
+    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
+      testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType);
+    const palette = { ...determinePalette(paletteType), fallbackColor };
     const isNativeUpload = testAppConfig?.isNativeUpload;
 
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
@@ -123,11 +124,12 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, paletteType, useCustomStyles } = testAppConfig.theme || {};
+    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
+      testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType);
+    const palette = { ...determinePalette(paletteType), fallbackColor };
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}
