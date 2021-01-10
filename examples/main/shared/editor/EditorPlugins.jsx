@@ -53,10 +53,7 @@ import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
 import { createTablePlugin, TABLE_TYPE } from 'wix-rich-content-plugin-table';
 import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
-import {
-  createUnsupportedBlocksPlugin,
-  // UNSUPPORTED_BLOCKS_TYPE,
-} from 'wix-rich-content-plugin-unsupported-blocks';
+import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
 import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
