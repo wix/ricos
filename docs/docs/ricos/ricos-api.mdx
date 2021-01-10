@@ -86,10 +86,20 @@ Any two letter string represing a [supported](https://github.com/wix/ricos/tree/
 
 ### `mediaSettings`
 
+When changing fullscreen's background and foreground colors, make sure to choose colors that aren't too similar. <br />
+default colors are: <br />
+backgroundColor: 'white';
+foregroundColor: 'black'; <br />
+The string values should be css color strings (e.g `'black'`, `'#2F2E2E'`, etc) <br />
+
 ```jsx
 mediaSettings?: {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  fullscreenProps?: {
+  backgroundColor?: string;
+  foregroundColor?: string;
+}
 }
 ```
 
