@@ -140,3 +140,5 @@ export {
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
+
+export { isElementOutOfWindow } from './Utils/overflowUtils';
