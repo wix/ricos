@@ -22,6 +22,13 @@
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
 - `fullscreen`
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
+### :bug: Bug Fix
+- `image`
+  - [#1968](https://github.com/wix/ricos/commit/1968) local uploaded image is displayed when remote upload fails
+
+### :house: Internal
+- `editor`
+  - [#1968](https://github.com/wix/ricos/commit/1968) error toast custom messages don't go through translation (i18next console warnings fix)
 
 </details>
 <hr/>
