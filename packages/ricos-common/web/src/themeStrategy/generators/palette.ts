@@ -62,7 +62,9 @@ export default function createPalette(palette?: RicosTheme['palette']): PaletteS
     return { paletteVarsObject: {} };
   }
   const colors = extractColors(palette);
-  Object.entries(colors).forEach(([colorName, value]) => (colors[colorName] = toHexFormat(value)));
+  Object.entries(colors).forEach(
+    ([colorName, value]) => (colors[colorName] = value && toHexFormat(value))
+  );
   const paletteVarsObject = createCssVars(colors);
 
   return { paletteVarsObject, colors };
