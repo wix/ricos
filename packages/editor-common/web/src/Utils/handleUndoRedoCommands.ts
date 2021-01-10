@@ -9,7 +9,6 @@ import {
   TABLE_TYPE,
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
-import { setSelection } from './draftUtils';
 
 const INNER_RICOS_TYPES = [ACCORDION_TYPE, TABLE_TYPE];
 
@@ -200,7 +199,7 @@ function handleTableEntity(currentData, newData) {
         newRows[row].columns[column].content,
         currentRows[row].columns[column].content
       );
-      newRows[row].columns[column].content = setSelection(
+      newRows[row].columns[column].content = EditorState.acceptSelection(
         fixedEditorState,
         fixedEditorState.getSelection().merge({ hasFocus: false })
       );

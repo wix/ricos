@@ -608,10 +608,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   handleUndoCommand = (editorState: EditorState) => {
     if (this.props.isInnerRCE) {
       this.props.handleUndoCommand?.();
-      return editorState;
     } else {
-      return undo(editorState || this.state.editorState);
+      this.updateEditorState(undo(editorState || this.state.editorState));
     }
+    return 'handled';
   };
 
   handleRedoCommand = (editorState: EditorState) => {
@@ -620,44 +620,50 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     } else {
       this.updateEditorState(redo(editorState || this.state.editorState));
     }
+    return 'handled';
+  };
+
+  customCommands = [
+    {
+      command: COMMANDS.TAB,
+      modifiers: [],
+      key: 'Tab',
+    },
+    {
+      command: COMMANDS.SHIFT_TAB,
+      modifiers: [MODIFIERS.SHIFT],
+      key: 'Tab',
+    },
+    {
+      command: COMMANDS.ESC,
+      modifiers: [],
+      key: 'Escape',
+    },
+    {
+      command: COMMANDS.UNDO,
+      modifiers: [MODIFIERS.COMMAND],
+      key: 'z',
+    },
+    {
+      command: COMMANDS.REDO,
+      modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+      key: 'z',
+    },
+  ];
+
+  customCommandHandlers = {
+    tab: this.handleTabCommand,
+    shiftTab: this.handleTabCommand,
+    esc: this.handleEscCommand,
+    ricosUndo: this.handleUndoCommand,
+    ricosRedo: this.handleRedoCommand,
   };
 
   getCustomCommandHandlers = () => ({
-    commands: [
-      ...this.pluginKeyBindings.commands,
-      {
-        command: COMMANDS.TAB,
-        modifiers: [],
-        key: 'Tab',
-      },
-      {
-        command: COMMANDS.SHIFT_TAB,
-        modifiers: [MODIFIERS.SHIFT],
-        key: 'Tab',
-      },
-      {
-        command: COMMANDS.ESC,
-        modifiers: [],
-        key: 'Escape',
-      },
-      {
-        command: COMMANDS.UNDO,
-        modifiers: [MODIFIERS.COMMAND],
-        key: 'z',
-      },
-      {
-        command: COMMANDS.REDO,
-        modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-        key: 'z',
-      },
-    ],
-    commandHanders: {
+    commands: [...this.pluginKeyBindings.commands, ...this.customCommands],
+    commandHandlers: {
       ...this.pluginKeyBindings.commandHandlers,
-      tab: this.handleTabCommand,
-      shiftTab: this.handleTabCommand,
-      esc: this.handleEscCommand,
-      ricosUndo: this.handleUndoCommand,
-      ricosRedo: this.handleRedoCommand,
+      ...this.customCommandHandlers,
     },
   });
 
@@ -793,7 +799,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
-          this.getCustomCommandHandlers().commandHanders,
+          this.getCustomCommandHandlers().commandHandlers,
           getBlockType(editorState),
           this.props.onBackspace
         )}
