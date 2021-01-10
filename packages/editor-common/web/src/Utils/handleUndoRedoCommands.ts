@@ -1,4 +1,4 @@
-import { EditorState, convertToRaw, convertFromRaw, ContentState } from '@wix/draft-js';
+import { EditorState, convertToRaw, ContentState } from '@wix/draft-js';
 import { RicosContent } from 'ricos-content';
 import { isEqual } from 'lodash';
 import { setSelection } from './draftUtils';
@@ -86,7 +86,7 @@ function shouldReplaceVideoData(currentData, newData) {
 }
 
 // fixes entities in inner EditorStates
-function fixBrokenInnerRicosStates(newEditorState: EditorState, editorState: EditorState) {
+function fixBrokenRicosStates(newEditorState: EditorState, editorState: EditorState) {
   const entityToReplace = getEntityToReplace(
     convertToRaw(newEditorState.getCurrentContent()),
     convertToRaw(editorState.getCurrentContent())
@@ -95,13 +95,9 @@ function fixBrokenInnerRicosStates(newEditorState: EditorState, editorState: Edi
   if (fixedData) {
     replaceComponentData(newEditorState, blockKey, fixedData);
   }
+
   return {
-    newEditorState: EditorState.forceSelection(
-      EditorState.createWithContent(
-        convertFromRaw(convertToRaw(newEditorState.getCurrentContent()))
-      ),
-      newEditorState.getSelection()
-    ),
+    fixedEditorState: newEditorState,
     shouldUndoAgain,
   };
 }
@@ -126,11 +122,13 @@ function handleAccordionEntity(currentData, newData) {
   const { changedPairIndex, item } = getChangedAccordionPairIndex(currentPairs, newPairs);
   if (changedPairIndex > -1) {
     if (item) {
-      const { newEditorState, shouldUndoAgain } = fixBrokenInnerRicosStates(
+      const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
         newPairs[changedPairIndex][item],
         currentPairs[changedPairIndex][item]
       );
-      newPairs[changedPairIndex][item] = newEditorState;
+      newPairs[changedPairIndex][item] = EditorState.createWithContent(
+        fixedEditorState.getCurrentContent()
+      );
       return {
         fixedData: {
           ...currentData,
@@ -196,11 +194,14 @@ function handleTableEntity(currentData, newData) {
   const { row, column } = getChangedTableCellIndex(newRows, currentRows);
   if (row) {
     if (column) {
-      const { newEditorState, shouldUndoAgain } = fixBrokenInnerRicosStates(
+      const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
         newRows[row].columns[column].content,
         currentRows[row].columns[column].content
       );
-      newRows[row].columns[column].content = newEditorState;
+      newRows[row].columns[column].content = setSelection(
+        fixedEditorState,
+        fixedEditorState.getSelection().merge({ hasFocus: false })
+      );
       return {
         shouldUndoAgain,
         fixedData: {
@@ -276,7 +277,6 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
           entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
           if (entityToReplace) {
             entityToReplace.blockKey = blockKey;
-            entityToReplace.shouldKeepSelection = true;
             return true;
           }
         } else if (!isEqual(currentData, newData)) {
@@ -316,22 +316,12 @@ function replaceComponentData(editorState: EditorState, blockKey: string, compon
 }
 
 function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState) {
-  const newContentState = convertToRaw(newEditorState.getCurrentContent());
-  const contentState = convertToRaw(editorState.getCurrentContent());
-
-  const entityToReplace = getEntityToReplace(newContentState, contentState);
-  const { blockKey, fixedData, shouldUndoAgain, shouldKeepSelection } = entityToReplace;
-  if (fixedData) {
-    replaceComponentData(newEditorState, blockKey, fixedData);
-  }
-  const editedState = shouldKeepSelection
-    ? setSelection(newEditorState, editorState.getSelection().merge({ hasFocus: false }))
-    : newEditorState;
+  const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(newEditorState, editorState);
 
   return shouldUndoAgain
-    ? undo(editedState)
+    ? undo(fixedEditorState)
     : pushToRedoStack(
-        removeCompositionModeFromEditorState(editedState),
+        removeCompositionModeFromEditorState(fixedEditorState),
         editorState.getCurrentContent()
       );
 }
