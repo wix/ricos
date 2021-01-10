@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.14.0 (Jan 10, 2021)
 ### :rocket: New Feature
 - `ricos-viewer`
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
@@ -26,14 +31,10 @@
   - [#1970](https://github.com/wix-incubator/rich-content/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
 ### :bug: Bug Fix
 - `image`
-  - [#1968](https://github.com/wix/ricos/commit/1968) local uploaded image is displayed when remote upload fails
-
+  - [#1968](https://github.com/wix/ricos/commit/1968) image preview isn't displayed with error
 ### :house: Internal
 - `editor`
   - [#1968](https://github.com/wix/ricos/commit/1968) error toast custom messages don't go through translation (i18next console warnings fix)
-
-</details>
-<hr/>
 
 ## 8.13.3 (Jan 7, 2021)
 - `editor-common`
