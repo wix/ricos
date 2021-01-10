@@ -43,6 +43,8 @@ const extractColors = (palette: RicosTheme['palette']): PaletteColors => {
       actionColor: getColorValue(palette, COLORS.ACTION_COLOR),
       bgColor: getColorValue(palette, COLORS.BG_COLOR),
       textColor: getColorValue(palette, COLORS.TEXT_COLOR),
+      disabledColor: getColorValue(palette, COLORS.DISABLED_COLOR),
+      textColorLow: getColorValue(palette, COLORS.TEXT_COLOR_LOW),
     };
   } else if (palette && isRicosPalette(palette)) {
     return palette;
