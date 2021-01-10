@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-
 import { toDraft, fromDraft } from '..';
 import { compare } from '../../comparision/compare';
-
 import fixture from '../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../e2e/tests/fixtures/migration-content.json';
 import ricosFixture from './reverseMigratedFixtures/intro.json';

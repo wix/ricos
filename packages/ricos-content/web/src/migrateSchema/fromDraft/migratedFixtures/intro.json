@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fdc53",
+            "key": "bbehs",
             "ricosText": {
               "decorations": [],
               "text": "Hi! 😃"
@@ -32,7 +32,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "b0mip",
+            "key": "c82q9",
             "ricosText": {
               "decorations": [],
               "text": "Welcome to "
@@ -41,7 +41,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ahve9",
+            "key": "7knhs",
             "ricosText": {
               "decorations": [
                 {
@@ -68,7 +68,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "eengt",
+            "key": "505pv",
             "ricosText": {
               "decorations": [],
               "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️"
@@ -117,7 +117,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3frk8",
+            "key": "26qpo",
             "ricosText": {
               "decorations": [],
               "text": "Checkout the "
@@ -126,7 +126,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3dtql",
+            "key": "2jhv6",
             "ricosText": {
               "decorations": [
                 {
@@ -154,7 +154,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8sh9a",
+            "key": "7palb",
             "ricosText": {
               "decorations": [
                 {
@@ -177,7 +177,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "drtai",
+            "key": "drs38",
             "ricosText": {
               "decorations": [
                 {
@@ -222,7 +222,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "fgpqk",
+            "key": "d64tb",
             "ricosText": {
               "decorations": [],
               "text": "A wise man once said:"
@@ -240,7 +240,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "c4mig",
+                "key": "fpcei",
                 "ricosText": {
                   "decorations": [],
                   "text": "The Wix Rich Content Editor is the best tool in the world!"
@@ -248,7 +248,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "7kef7",
+            "key": "1otfj",
             "ricosParagraph": {}
           }
         ],
@@ -267,7 +267,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bu6qg",
+            "key": "2731i",
             "ricosText": {
               "decorations": [],
               "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components."
@@ -289,7 +289,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "b3cnp",
+            "key": "29rmc",
             "ricosText": {
               "decorations": [],
               "text": "Code example:"
@@ -305,7 +305,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ehkpf",
+            "key": "787c3",
             "ricosText": {
               "decorations": [],
               "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />"
@@ -321,7 +321,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2n9re",
+            "key": "vm36",
             "ricosText": {
               "decorations": [],
               "text": "Pro Gallery Collage:"
@@ -387,7 +387,8 @@
             "isSlider": false,
             "isColumns": false,
             "isSlideshow": false,
-            "cropOnlyFill": false
+            "cropOnlyFill": false,
+            "galleryType": "Columns"
           },
           "config": {
             "alignment": "CENTER",
@@ -411,12 +412,12 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1610042952,
-      "nanos": 688000000
+      "seconds": 1610288980,
+      "nanos": 147000000
     }
   },
   "selection": {
     "anchorNode": "foo"
   },
-  "version": "7.1.2"
+  "version": "8.11.4"
 }

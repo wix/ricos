@@ -41,6 +41,7 @@ message GalleryStyles {
   bool got_style_params = 36;
   bool show_video_play_button = 37;
   string video_play = 38;
+  string gallery_type = 39;
 }
 
 message GalleryConfig {

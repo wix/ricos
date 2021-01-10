@@ -401,7 +401,8 @@
           "isSlider": false,
           "isColumns": false,
           "isSlideshow": false,
-          "cropOnlyFill": false
+          "cropOnlyFill": false,
+          "galleryType": "Columns"
         },
         "config": {
           "alignment": "center",
@@ -412,5 +413,5 @@
       }
     }
   },
-  "VERSION": "7.1.2"
+  "VERSION": "8.11.4"
 }

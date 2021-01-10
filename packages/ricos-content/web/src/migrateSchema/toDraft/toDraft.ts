@@ -14,8 +14,8 @@ import {
   HeaderLevel,
   FROM_RICOS_DECORATION_TYPE,
   ENTITY_DECORATION_TO_DATA_FIELD,
-  emojiRegex,
 } from '../consts';
+import { emojiRegex } from '../emojiRegex';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
 import {
@@ -30,12 +30,12 @@ interface DecorationDescriptor extends RicosDecoration {
   ricosEmoji?: { emojiUnicode: string };
 }
 
-// const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
-//   return fns.reduce((v, fn) => fn(v), arg);
-// };
+const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
+  return fns.reduce((v, fn) => fn(v), arg);
+};
 
-const convertDecorationTypes = (decorations: DecorationDescriptor[]): DecorationDescriptor[] =>
-  decorations.flatMap(decoration => toDraftDecorationType(decoration));
+const convertDecorationTypes = (decorations: RicosDecoration[]): RicosDecoration[] =>
+  decorations.flatMap(decoration => pipe(decoration, toDraftDecorationType, splitColorDecoration));
 
 const createEmojiDecorations = (text: string) =>
   Array.from(text.matchAll(emojiRegex)).flatMap(({ 0: emojiUnicode, index: start }) => {
@@ -51,7 +51,7 @@ const createEmojiDecorations = (text: string) =>
     return [];
   });
 
-const toDraftDecorationType = (decoration: DecorationDescriptor): DecorationDescriptor => {
+const toDraftDecorationType = (decoration: RicosDecoration): RicosDecoration => {
   if (FROM_RICOS_DECORATION_TYPE[decoration.type]) {
     decoration.type = FROM_RICOS_DECORATION_TYPE[decoration.type];
   }
@@ -210,9 +210,8 @@ const mergeTextNodes = (
         const { text: currText, decorations: currDecorations } = currNode.ricosText;
         const textLength = Array.from(currText).length; // required for properly reading emojis
         accText += currText;
-        currDecorations
-          ?.flatMap(decoration => splitColorDecoration(decoration))
-          .forEach(decoration => {
+        if (currDecorations) {
+          convertDecorationTypes(currDecorations).forEach(decoration => {
             if (!decorationMap[decoration.type]) {
               decorationMap[decoration.type] = [];
             }
@@ -225,14 +224,16 @@ const mergeTextNodes = (
               },
             ];
           });
+        }
         length += textLength;
       }
       return { text: accText, decorationMap };
     },
     { text: '', decorationMap: {} }
   );
-  const decorations = Object.values(decorationMap).reduce(
-    (decorations: DecorationDescriptor[], currentDecorations) => {
+  const decorations = Object.values(decorationMap)
+    .sort((a, b) => a[0].start - b[0].start)
+    .reduce((decorations: DecorationDescriptor[], currentDecorations) => {
       if (currentDecorations.length > 0) {
         const firstDecoration = currentDecorations.shift() as DecorationDescriptor;
         const mergedDecorations: DecorationDescriptor[] = [firstDecoration];
@@ -244,17 +245,21 @@ const mergeTextNodes = (
             mergedDecorations.push(lastDecoration, decoration);
           }
         });
-        return [...decorations, ...mergedDecorations];
+        return [...decorations, ...mergedDecorations.sort((a, b) => a.start - b.start)];
       }
       return decorations;
-    },
-    []
+    }, []);
+  const allDecorations = [...decorations, ...createEmojiDecorations(text)];
+  const entityRanges = allDecorations
+    .filter(({ type }) => ENTITY_DECORATION_TO_DATA_FIELD[type])
+    .sort((a, b) => a.start - b.start);
+  const inlineStyleRanges = allDecorations.filter(
+    ({ type }) => !ENTITY_DECORATION_TO_DATA_FIELD[type]
   );
+
   return {
     text,
-    decorations: [...convertDecorationTypes(decorations), ...createEmojiDecorations(text)].sort(
-      sortEntityRangesByOffset
-    ),
+    decorations: [...entityRanges, ...inlineStyleRanges],
   };
 };
 
@@ -308,8 +313,19 @@ const parseDecorations = (
   };
 };
 
-const sortEntityRangesByOffset = (a: DecorationDescriptor, b: DecorationDescriptor) => {
-  const aVal = ENTITY_DECORATION_TO_DATA_FIELD[a.type] ? a.start : 0;
-  const bVal = ENTITY_DECORATION_TO_DATA_FIELD[b.type] ? b.start : 0;
-  return aVal - bVal;
-};
+// const sortEntityRangesByOffset = (a: DecorationDescriptor, b: DecorationDescriptor) => {
+//   // const aVal = ENTITY_DECORATION_TO_DATA_FIELD[a.type] ? a.start : 0;
+//   // const bVal = ENTITY_DECORATION_TO_DATA_FIELD[b.type] ? b.start : 0;
+//   return a.start - b.start;
+// };
+
+// const sortInlineStyleRangesByType = (a: DecorationDescriptor[], b: DecorationDescriptor[]) => {
+//   if (a[0].type < b[0].type) {
+//     return -1;
+//   }
+//   if (a[0].type > b[0].type) {
+//     return 1;
+//   }
+//   return 0;
+//   // return a.start - b.start;
+// };

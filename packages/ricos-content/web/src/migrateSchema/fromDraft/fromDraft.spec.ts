@@ -2,7 +2,6 @@
 
 import { fromDraft } from './fromDraft';
 import { compare } from '../../comparision/compare';
-
 import fixture from '../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../e2e/tests/fixtures/migration-content.json';
 import { getTextNodes } from './getTextNodes';
