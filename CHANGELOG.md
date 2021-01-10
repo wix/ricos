@@ -17,6 +17,14 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `image`
+  - [#1968](https://github.com/wix/ricos/commit/1968) local uploaded image is displayed when remote upload fails
+
+### :house: Internal
+- `editor`
+  - [#1968](https://github.com/wix/ricos/commit/1968) error toast custom messages don't go through translation (i18next console warnings fix)
+
 </details>
 <hr/>
 
