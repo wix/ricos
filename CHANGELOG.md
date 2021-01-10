@@ -20,6 +20,14 @@
 </details>
 <hr/>
 
+## 8.13.3 (Jan 7, 2021)
+- `editor-common`
+  - [#1966](https://github.com/wix/ricos/pull/1966) export withEditorContext
+
+## 8.13.2 (Jan 7, 2021)
+- `editor-common`
+  - [#1965](https://github.com/wix/ricos/pull/1965) Editor context lib
+
 ## 8.13.1 (Jan 7, 2021)
 ### :bug: Bug Fix
 - `link`
