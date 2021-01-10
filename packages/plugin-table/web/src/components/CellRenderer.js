@@ -64,7 +64,7 @@ export default class Cell extends Component {
   };
 
   handleClipboardEvent = e => {
-    const { editing, row, col, updateCellContent } = this.props;
+    const { editing, row, col, table } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -74,7 +74,7 @@ export default class Cell extends Component {
         this.editorRef.selectAllContent(true);
       }
       if (e.key === 'Escape') {
-        updateCellContent(row, col, this.contentBeforeEdit);
+        table.updateCellContent(row, col, this.contentBeforeEdit);
       }
     }
   };
@@ -240,7 +240,6 @@ Cell.propTypes = {
   toolbarRef: PropTypes.any,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
-  updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),

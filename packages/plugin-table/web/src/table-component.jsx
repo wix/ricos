@@ -8,7 +8,7 @@ import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
 import { getRange } from './domain/tableDataUtil';
 import { createEmptyCellEditor, handleCellClipboardEvent } from './tableUtil';
-import { AddNewSection, Columns, Rows } from './components';
+import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { isEmpty, isNumber } from 'lodash';
@@ -364,26 +364,17 @@ class TableComponent extends React.Component {
 
   setEditorRef = (ref, i, j) => (this.innerEditorsRefs[`${i}-${j}`] = ref);
 
-  getColumns = range => (
-    <Columns
-      colDragProps={this.colDragProps}
-      colNum={this.table.getColNum()}
-      onResize={this.onResizeCol}
-      onResizeStart={this.setSelected}
-      highlightResizer={this.state.highlightColResizer}
-      activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
-      selectAll={this.state.isAllCellsSelected}
-      size={this.tableRef.current?.offsetHeight}
-      table={this.table}
-      tableWidth={this.tableRef.current?.offsetWidth}
-    />
-  );
-
   onFocus = e => e.stopPropagation();
 
   render() {
     const { componentData, theme, t, isMobile, settings, blockProps } = this.props;
-    const { selected, isEditingActive, disableSelectedStyle } = this.state;
+    const {
+      selected,
+      isEditingActive,
+      disableSelectedStyle,
+      highlightColResizer,
+      isAllCellsSelected,
+    } = this.state;
     this.table.updateComponentData(componentData);
     this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
@@ -429,7 +420,7 @@ class TableComponent extends React.Component {
           <Rows
             rowDragProps={this.rowDragProps}
             activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
-            isAllCellsSelected={this.state.isAllCellsSelected}
+            isAllCellsSelected={isAllCellsSelected}
             size={this.tableRef.current?.offsetWidth}
             onResize={this.onResizeRow}
             highlightResizer={this.state.highlightRowResizer}
@@ -457,8 +448,6 @@ class TableComponent extends React.Component {
             setEditorRef={this.setEditorRef}
             toolbarRef={this.toolbarRef}
             setEditingActive={this.setEditingActive}
-            updateCellContent={this.table.updateCellContent}
-            columns={isEditMode && this.getColumns(range)}
             selected={selected}
             tableWidth={this.tableRef.current?.offsetWidth}
             isMobile={isMobile}
@@ -470,6 +459,12 @@ class TableComponent extends React.Component {
             }
             t={t}
             handleCellClipboardEvent={handleCellClipboardEvent}
+            colDragProps={this.colDragProps}
+            onResize={this.onResizeCol}
+            onResizeStart={this.setSelected}
+            highlightResizer={highlightColResizer}
+            selectAll={isAllCellsSelected}
+            tableHeight={this.tableRef.current?.offsetHeight}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
