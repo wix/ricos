@@ -229,7 +229,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     // eslint-disable-next-line mocha/no-skipped-tests
-    it('drag and drop plugins', function() {
+    it.skip('drag and drop plugins', function() {
       cy.focusEditor();
       const src = `[data-hook=${PLUGIN_COMPONENT.IMAGE}] + [data-hook=componentOverlay]`;
       const dest = `span[data-offset-key="fjkhf-0-0"]`;
@@ -456,7 +456,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
-    it('create link button & customize it', function() {
+    it.skip('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click()
