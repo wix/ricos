@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
-import { mergeStyles, RichContentTheme, ComponentData } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  RichContentTheme,
+  ComponentData,
+  TranslationFunction,
+} from 'wix-rich-content-common';
 import styles from '../statics/styles/unsupported-blocks.scss';
-import { UnsupportedBlocksPluginViewerConfig } from './types';
+import { UnsupportedBlocksPluginEditorConfig } from './types';
+import CircleInfoIcon from './icons/CircleInfoIcon';
 
 interface Props {
   componentData: ComponentData;
-  settings: UnsupportedBlocksPluginViewerConfig;
+  settings: UnsupportedBlocksPluginEditorConfig;
   theme: RichContentTheme;
+  unsupportedType: string;
+  t: TranslationFunction;
 }
 
 class UnsupportedBlocksViewer extends Component<Props> {
   styles: Record<string, string>;
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    return <div>This is my new unsupported-blocks plugin!</div>;
+    const { unsupportedType, t, theme } = this.props;
+    const pluginName = t(unsupportedType);
+    const unsupportedMessage = t('unsupported_plugin_message');
+    this.styles = this.styles || mergeStyles({ styles, theme });
+
+    return (
+      <div className={styles.unsupportedBlocks_alert}>
+        <CircleInfoIcon />
+        <p>
+          {pluginName} {unsupportedMessage}
+        </p>
+      </div>
+    );
   }
 }
 

@@ -61,6 +61,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
+  unsupportedBlocks?: string[];
   type: string;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
@@ -254,22 +255,34 @@ const createBasePlugin = (
     if (contentBlock.getType() === 'atomic') {
       // TODO subject to change for draft-js next release
       const contentState = getEditorState().getCurrentContent();
+      const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
       const key = contentBlock.getEntityAt(0);
       if (key) {
         const entity = contentState.getEntity(key);
-        const type = entity.getType();
-        if (config.type === type || config.legacyType === type) {
-          return {
-            component: DecoratedCompWithBase,
-            editable: false,
-            props: {
-              getData: getData(contentBlock, { getEditorState }),
-              setData: setData(contentBlock, { getEditorState, setEditorState }),
-              deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              type: config.type,
-            },
-          };
+        const entityType = entity.getType();
+        let type;
+        if (config.type === entityType || config.legacyType === entityType) {
+          type = entityType;
+        } else if (
+          config.type === UNSUPPORTED_BLOCKS_TYPE &&
+          !config.supportedBlockTypes?.includes(entityType)
+        ) {
+          type = UNSUPPORTED_BLOCKS_TYPE;
         }
+        const blockRenderObject = type
+          ? {
+              component: DecoratedCompWithBase,
+              editable: false,
+              props: {
+                getData: getData(contentBlock, { getEditorState }),
+                setData: setData(contentBlock, { getEditorState, setEditorState }),
+                deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
+                type,
+                unsupportedType: type === UNSUPPORTED_BLOCKS_TYPE ? entityType : null,
+              },
+            }
+          : null;
+        return blockRenderObject;
       }
     }
     return null;

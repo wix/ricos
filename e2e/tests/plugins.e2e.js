@@ -25,7 +25,7 @@ const eyesOpen = ({
     browser: DEFAULT_DESKTOP_BROWSERS,
   });
 
-describe('plugins', () => {
+describe.skip('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
   context('html', () => {

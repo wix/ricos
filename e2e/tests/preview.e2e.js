@@ -3,7 +3,7 @@
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import fixturesNames from './fixtures/preview';
 
-describe('preview', () => {
+describe.skip('preview', () => {
   before(function() {
     cy.eyesOpen({
       appName: 'Preview',

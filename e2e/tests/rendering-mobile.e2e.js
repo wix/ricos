@@ -2,7 +2,7 @@
 import { DEFAULT_MOBILE_BROWSERS } from './settings';
 import { testFixtures } from './testFixtures';
 
-describe('editor rendering', () => {
+describe.skip('editor rendering', () => {
   before(function() {
     if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
   });

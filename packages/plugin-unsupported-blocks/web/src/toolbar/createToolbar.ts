@@ -1,20 +1,7 @@
-import createInlineButtons from './inline-buttons';
-import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
-import { UnsupportedBlocksPluginEditorConfig } from '../types';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
-const createToolbar: CreatePluginToolbar = ({
-  t,
-  settings,
-  isMobile,
-}: {
-  t: TranslationFunction;
-  settings: UnsupportedBlocksPluginEditorConfig;
-  isMobile: boolean;
-}) => {
+const createToolbar: CreatePluginToolbar = () => {
   return {
-    InlineButtons: createInlineButtons(),
-    InsertButtons: createInsertButtons({ t, settings, isMobile }),
     name: 'unsupported-blocks',
   };
 };
