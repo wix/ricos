@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .toolbar, .moreToolbar, .moreMenu, .goBack {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
     border: solid 1px rgba(51, 51, 51, 0.1);
@@ -12,6 +14,16 @@
 .goBack {
     position: absolute;
     top: -22px;
+    display: flex;
+    height: 20px;
+    padding: 6px;
+    background-color: $action-color;
+    color: var(--ricos-background-color,#fff);
+
+    .goBackLabel {
+        font-size: 11px;
+        margin-left: 5px;
+    }
 }
 .toolbar, .moreToolbar {
     display: flex;

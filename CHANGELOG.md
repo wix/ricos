@@ -21,6 +21,23 @@
 </details>
 <hr/>
 
+## 8.14.0 (Jan 10, 2021)
+### :rocket: New Feature
+- `ricos-viewer`
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
+- `fullscreen`
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
+### :bug: Bug Fix
+- `image`
+  - [#1968](https://github.com/wix/ricos/commit/1968) image preview isn't displayed with error
+### :house: Internal
+- `editor`
+  - [#1968](https://github.com/wix/ricos/commit/1968) error toast custom messages don't go through translation (i18next console warnings fix)
+
+## 8.13.3 (Jan 7, 2021)
+- `editor-common`
+  - [#1966](https://github.com/wix/ricos/pull/1966) export withEditorContext
+
 ## 8.13.2 (Jan 7, 2021)
 - `editor-common`
   - [#1965](https://github.com/wix/ricos/pull/1965) Editor context lib
