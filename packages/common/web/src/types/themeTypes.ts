@@ -1,8 +1,6 @@
 import { CSSProperties } from 'react';
 
 export interface ThemeUtils {
-  fallbackColor: string;
-  fallbackColorBright: string;
   isBright: (hexColor: string) => boolean;
   adaptForeground: (actionColor: string, fallbackColor?: string) => string;
   toCssRgbA: (hexColor: string, opacity: number) => string;
