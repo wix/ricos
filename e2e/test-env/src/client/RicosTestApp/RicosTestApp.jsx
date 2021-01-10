@@ -72,7 +72,7 @@ class RicosTestApp extends PureComponent {
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = { ...determinePalette(paletteType), fallbackColor };
+    const palette = !!paletteType && { ...determinePalette(paletteType), fallbackColor };
     const isNativeUpload = testAppConfig?.isNativeUpload;
 
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
@@ -129,7 +129,7 @@ class RicosTestApp extends PureComponent {
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = { ...determinePalette(paletteType), fallbackColor };
+    const palette = !!paletteType && { ...determinePalette(paletteType), fallbackColor };
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}
