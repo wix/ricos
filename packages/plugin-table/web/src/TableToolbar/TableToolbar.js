@@ -8,6 +8,7 @@ import { cloneDeep, isEmpty } from 'lodash';
 import { ToolbarContainer, FloatingToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getCellFormattingButtonsProps } from './CellFormattingButtonProps';
 import { getContextMenuButtonsProps } from './ContextMenuButtonProps';
+import { GoBackIcon } from '../icons';
 
 class TableToolbar extends Component {
   constructor(props) {
@@ -188,7 +189,8 @@ class TableToolbar extends Component {
     return (
       <>
         <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
-          {t('TablePlugin_Toolbar_GoBack_Button')}
+          <GoBackIcon />
+          <div className={styles.goBackLabel}>{t('TablePlugin_Toolbar_GoBack_Button')}</div>
         </div>
         <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
       </>
