@@ -53,7 +53,7 @@ export default class ErrorToast extends Component {
       errorCount > 1 ? 'UploadFile_Error_Generic_Toast_Multiple' : errorMap[error.key];
     const upgradeUrl = error.args?.upgradeUrl;
     const maxLimit = error.args?.maxLimit;
-    const errorMsg = (
+    const errorMsg = translationKey ? (
       <Trans i18nKey={translationKey} values={{ maxLimit, errors: errorCount }}>
         {error.msg}
         {upgradeUrl && (
@@ -62,6 +62,8 @@ export default class ErrorToast extends Component {
           </a>
         )}
       </Trans>
+    ) : (
+      error.msg
     );
     return errorMsg;
   };

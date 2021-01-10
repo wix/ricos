@@ -1,4 +1,9 @@
-const getElementCoordsInWindow = elem => {
+type ElementCoords = {
+  top: number;
+  left: number;
+};
+
+const getElementCoordsInWindow = (elem: HTMLElement): ElementCoords => {
   const box = elem.getBoundingClientRect();
 
   const body = document.body;
@@ -16,23 +21,23 @@ const getElementCoordsInWindow = elem => {
   return { top: Math.round(top), left: Math.round(left) };
 };
 
-const getWindowWidth = () => {
+const getWindowWidth = (): number => {
   return window.innerWidth;
 };
 
-const getWidth = element => {
+const getWidth = (element: HTMLElement): number => {
   return element.clientWidth;
 };
 
-export const getModalPosition = element => {
+export const isElementOutOfWindow = (element: HTMLElement): boolean | undefined => {
   if (window && document) {
     const modalOffset = getElementCoordsInWindow(element).left;
     const modalWidth = getWidth(element);
     const windowWidth = getWindowWidth();
     if (modalWidth + modalOffset > windowWidth) {
-      return { right: 0 };
+      return true;
     } else {
-      return { left: 0 };
+      return false;
     }
   } else {
     console.error('window or document not found'); //eslint-disable-line
