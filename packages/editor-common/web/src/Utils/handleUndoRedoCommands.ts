@@ -1,14 +1,16 @@
 import { EditorState, convertToRaw, ContentState } from '@wix/draft-js';
-import { RicosContent } from 'ricos-content';
+import {
+  RicosContent,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  FILE_UPLOAD_TYPE,
+  GALLERY_TYPE,
+  ACCORDION_TYPE,
+  TABLE_TYPE,
+} from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { setSelection } from './draftUtils';
 
-const IMAGE_TYPE = 'wix-draft-plugin-image';
-const VIDEO_TYPE = 'wix-draft-plugin-video';
-const FILE_TYPE = 'wix-draft-plugin-file-upload';
-const GALLERY_TYPE = 'wix-draft-plugin-gallery';
-const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
-const TABLE_TYPE = 'table';
 const INNER_RICOS_TYPES = [ACCORDION_TYPE, TABLE_TYPE];
 
 // removing composition mode fixes mobile issues
@@ -230,7 +232,7 @@ const entityDataFixers = {
       return { ...currentData, config };
     }
   },
-  [FILE_TYPE]: (currentData, newData) => {
+  [FILE_UPLOAD_TYPE]: (currentData, newData) => {
     const { config } = newData;
     return { ...currentData, config };
   },
