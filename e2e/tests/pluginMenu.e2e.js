@@ -17,7 +17,7 @@ const footerPluginMenuRenderer = (title, config) => {
   cy.eyesCheckWindow(title);
 };
 
-describe.skip('plugin menu test', () => {
+describe('plugin menu test', () => {
   context('plugin menu', () => {
     before(function() {
       cy.eyesOpen({

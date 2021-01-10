@@ -1,7 +1,10 @@
 import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './unsupported-blocks-component';
-import { UNSUPPORTED_BLOCKS_TYPE, UnsupportedBlocksPluginEditorConfig } from './types';
-import { createBasePlugin } from 'wix-rich-content-plugin-commons';
+import {
+  // UNSUPPORTED_BLOCKS_TYPE,
+  UnsupportedBlocksPluginEditorConfig,
+} from './types';
+import { createBasePlugin, UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
 const createUnsupportedBlocksPlugin: CreatePluginFunction<UnsupportedBlocksPluginEditorConfig> = config => {

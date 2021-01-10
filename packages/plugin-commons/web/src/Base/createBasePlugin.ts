@@ -28,6 +28,7 @@ import {
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
+import { UNSUPPORTED_BLOCKS_TYPE } from '../consts';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
@@ -255,7 +256,6 @@ const createBasePlugin = (
     if (contentBlock.getType() === 'atomic') {
       // TODO subject to change for draft-js next release
       const contentState = getEditorState().getCurrentContent();
-      const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
       const key = contentBlock.getEntityAt(0);
       if (key) {
         const entity = contentState.getEntity(key);
