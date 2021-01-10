@@ -96,8 +96,11 @@ function fixBrokenInnerRicosStates(newEditorState: EditorState, editorState: Edi
     replaceComponentData(newEditorState, blockKey, fixedData);
   }
   return {
-    newEditorState: EditorState.createWithContent(
-      convertFromRaw(convertToRaw(newEditorState.getCurrentContent()))
+    newEditorState: EditorState.forceSelection(
+      EditorState.createWithContent(
+        convertFromRaw(convertToRaw(newEditorState.getCurrentContent()))
+      ),
+      newEditorState.getSelection()
     ),
     shouldUndoAgain,
   };
@@ -322,7 +325,7 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
     replaceComponentData(newEditorState, blockKey, fixedData);
   }
   const editedState = shouldKeepSelection
-    ? setSelection(newEditorState, editorState.getSelection())
+    ? setSelection(newEditorState, editorState.getSelection().merge({ hasFocus: false }))
     : newEditorState;
 
   return shouldUndoAgain
