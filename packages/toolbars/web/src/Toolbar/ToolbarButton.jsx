@@ -113,7 +113,7 @@ class ToolbarButton extends Component {
 
     const isMenu = !!showArrowIcon;
     return (
-      <Tooltip key={tooltipText} content={tooltipText} tooltipOffset={{ y: -20 }}>
+      <Tooltip key={tooltipText} content={tooltipText} tooltipOffset={{ y: -8 }}>
         <div className={wrapperClassNames}>
           <button
             disabled={disabled}

@@ -7,6 +7,7 @@ export {
   withEditorEvents,
   WithEditorEventsProps,
   EditorEvents,
+  withEditorContext,
 } from './EditorEventsContext';
 
 // Components
@@ -138,3 +139,5 @@ export {
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
+
+export { isElementOutOfWindow } from './Utils/overflowUtils';

@@ -62,8 +62,10 @@ class FloatingToolbarContainer extends PureComponent {
     const { top, left } = this.getRelativePosition();
     const { toolbarPosition } = this.state;
     const reactModalElement = document.querySelector('[data-id="rich-content-editor-modal"]');
+    const pluginMenuElement = document.querySelector('[data-hook="addPluginMenu"]');
     if (
       !reactModalElement &&
+      !pluginMenuElement &&
       (`${top}px` !== toolbarPosition.top || `${left}px` !== toolbarPosition.left)
     ) {
       // eslint-disable-next-line react/no-did-update-set-state
