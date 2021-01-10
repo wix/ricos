@@ -7,10 +7,16 @@ import {
   GALLERY_TYPE,
   ACCORDION_TYPE,
   TABLE_TYPE,
+  SOUND_CLOUD_TYPE,
+  POLL_TYPE,
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 
+const IGNORE_TYPE = 'ignore';
 const INNER_RICOS_TYPES = [ACCORDION_TYPE, TABLE_TYPE];
+
+// new plugins should be added while they are not supported
+const PLUGINS_TO_IGNORE: string[] = [POLL_TYPE];
 
 // removing composition mode fixes mobile issues
 function removeCompositionModeFromEditorState(editorState: EditorState) {
@@ -20,6 +26,15 @@ function removeCompositionModeFromEditorState(editorState: EditorState) {
     });
   }
   return editorState;
+}
+
+function getType(type: string) {
+  if (type === SOUND_CLOUD_TYPE) {
+    return VIDEO_TYPE;
+  } else if (PLUGINS_TO_IGNORE.includes(type)) {
+    return IGNORE_TYPE;
+  }
+  return type;
 }
 
 // applies undo action on gallery items by fixing the changed item if it's source was broken
@@ -241,6 +256,9 @@ const entityDataFixers = {
       return { ...newData, items };
     }
   },
+  [IGNORE_TYPE]: currentData => {
+    return { ...currentData };
+  },
 };
 
 const innerRicosDataFixers = {
@@ -281,7 +299,7 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
             return true;
           }
         } else if (!isEqual(currentData, newData)) {
-          const fixedData = entityDataFixers[type]?.(currentData, newData);
+          const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
           if (fixedData) {
             entityToReplace = {
               blockKey,
