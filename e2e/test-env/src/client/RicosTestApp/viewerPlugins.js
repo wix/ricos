@@ -62,7 +62,7 @@ const configs = {
     },
   },
   headersMarkdown: { hideMarkdown: true },
-  link: { onClick: data => console.log(data) },
+  link: { onClick: (event, data) => console.log(data) },
 };
 
 const plugins = {

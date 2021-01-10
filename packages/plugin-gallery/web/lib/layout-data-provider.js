@@ -137,7 +137,7 @@ const layouts = [
     floatingImages: 0,
     galleryMargin: 0,
     imageMargin: 0,
-    slideShowInfoSize: 0,
+    slideshowInfoSize: 0,
     allowHover: true,
   }, // Slideshow
   {

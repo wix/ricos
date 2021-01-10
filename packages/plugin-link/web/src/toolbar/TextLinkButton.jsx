@@ -11,21 +11,15 @@ import { isEmpty } from 'lodash';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
-    const {
-      getEditorState,
-      setEditorState,
-      getEntityData,
-      insertExternalLink,
-      config,
-    } = this.props;
+    const { getEditorState, setEditorState, getEntityData, insertCustomLink, config } = this.props;
     const settings = config[LINK_TYPE];
     const onLinkAdd = settings?.onLinkAdd;
-    const isExternalLinkHandling = onLinkAdd;
+    const isCustomLinkHandling = onLinkAdd;
 
-    if (isExternalLinkHandling) {
-      const externalLinkData = getEntityData(getEditorState())?.externalData;
-      const callback = data => setEditorState(insertExternalLink(getEditorState(), data));
-      onLinkAdd(externalLinkData, callback);
+    if (isCustomLinkHandling) {
+      const customLinkData = getEntityData(getEditorState())?.customData;
+      const callback = data => setEditorState(insertCustomLink(getEditorState(), data));
+      onLinkAdd(customLinkData, callback);
     } else {
       this.openLinkPanel();
     }
@@ -156,5 +150,5 @@ TextLinkButton.propTypes = {
   toolbarOffsetTop: PropTypes.string,
   toolbarOffsetLeft: PropTypes.string,
   getEntityData: PropTypes.func,
-  insertExternalLink: PropTypes.func,
+  insertCustomLink: PropTypes.func,
 };

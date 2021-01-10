@@ -5,9 +5,9 @@ export {
   EditorEventsContext,
   EditorEventsProvider,
   withEditorEvents,
-  withEditorEventsRef,
   WithEditorEventsProps,
   EditorEvents,
+  withEditorContext,
 } from './EditorEventsContext';
 
 // Components
@@ -41,7 +41,7 @@ export {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
   getEntityData,
-  insertExternalLink,
+  insertCustomLink,
   hasLinksInBlock,
   getLinkRangesInBlock,
   fixPastedLinks,
@@ -139,3 +139,5 @@ export {
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
+
+export { isElementOutOfWindow } from './Utils/overflowUtils';
