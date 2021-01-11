@@ -54,18 +54,6 @@
     border-radius: 2px;
 }
 
-.columns {
-    padding: 0;
-    height: 20px;
-    position: relative;
-    &.selected {
-        border-right: 1px solid $action-color;
-    }
-    &.selectAll {
-        border: none !important;
-    }
-}
-
 .selectAll {
     width: 20px;
     max-width: 20px;
