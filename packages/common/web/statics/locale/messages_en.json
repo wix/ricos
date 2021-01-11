@@ -525,6 +525,7 @@
 	"AccordionPlugin_CollapseButton_AriaLabel": "Item is collapsed",
 	"Embed_Vertical_Units_Hour": "{{hours}}h",
 	"Embed_Vertical_Units_Minute": "{{minutes}}min",
+	"UnsupportedPlugin_message": "can be edited only on the web",
 	"UnsupportedPlugin_wix-draft-plugin-poll": "Poll",
 	"UnsupportedPlugin_wix-draft-plugin-link-preview": "Link Preview",
 	"UnsupportedPlugin_wix-draft-plugin-emoji": "Emoji" ,

@@ -22,15 +22,14 @@ class UnsupportedBlocksViewer extends Component<Props> {
   render() {
     const { unsupportedType, t, theme } = this.props;
     const pluginName = t(`UnsupportedPlugin_${unsupportedType}`);
-    const unsupportedMessage = t('Unsupported_plugin_message');
+    const unsupportedMessage = t('UnsupportedPlugin_message');
+    const alertMessage = <p>{`${pluginName} ${unsupportedMessage}`}</p>;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
       <div className={styles.unsupportedBlocks_alert}>
         <CircleInfoIcon />
-        <p>
-          {pluginName} {unsupportedMessage}
-        </p>
+        {alertMessage}
       </div>
     );
   }
