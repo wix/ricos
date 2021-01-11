@@ -80,10 +80,7 @@ describe('migrate from draft', () => {
     ];
 
     const entityMap = {};
-    const keyMapping = {};
-    expect(filterKeys(getTextNodes(block, entityMap, keyMapping))).toEqual(
-      filterKeys(expectedResults)
-    );
+    expect(filterKeys(getTextNodes(block, entityMap))).toEqual(filterKeys(expectedResults));
   });
 
   it('should detect mentions', () => {
@@ -135,6 +132,6 @@ describe('migrate from draft', () => {
       },
       { nodes: [], ricosText: { decorations: [], text: ' ' }, type: 'text' },
     ];
-    expect(filterKeys(getTextNodes(block, entityMap, {}))).toEqual(expectedResult);
+    expect(filterKeys(getTextNodes(block, entityMap))).toEqual(expectedResult);
   });
 });
