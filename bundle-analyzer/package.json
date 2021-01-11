@@ -57,6 +57,7 @@
     "wix-rich-content-plugin-undo-redo": "8.14.1",
     "wix-rich-content-plugin-vertical-embed": "8.14.1",
     "wix-rich-content-plugin-video": "8.14.1",
+    "wix-rich-content-plugin-unsupported-blocks": "8.14.1",
     "wix-rich-content-viewer": "8.14.1"
   }
 }
