@@ -524,5 +524,32 @@
 	"AccordionPlugin_ExpandButton_AriaLabel": "Item is expanded",
 	"AccordionPlugin_CollapseButton_AriaLabel": "Item is collapsed",
 	"Embed_Vertical_Units_Hour": "{{hours}}h",
-	"Embed_Vertical_Units_Minute": "{{minutes}}min"
+	"Embed_Vertical_Units_Minute": "{{minutes}}min",
+	"UnsupportedPlugin_wix-draft-plugin-poll": "Poll",
+	"UnsupportedPlugin_wix-draft-plugin-link-preview": "Link Preview",
+	"UnsupportedPlugin_wix-draft-plugin-emoji": "Emoji" ,
+	"UnsupportedPlugin_wix-draft-plugin-gallery": "Gallery",
+	"UnsupportedPlugin_wix-draft-plugin-image": "Image",
+	"UnsupportedPlugin_table": "Table",
+	"UnsupportedPlugin_wix-draft-plugin-hashtag": "Hashtag",
+	"UnsupportedPlugin_wix-draft-plugin-html": "HTML",
+	"UnsupportedPlugin_wix-draft-plugin-external-mentions": "External mentions",
+	"UnsupportedPlugin_wix-rich-content-plugin-accordion": "Accordion",
+	"UnsupportedPlugin_wix-rich-content-plugin-headings": "Headings",
+	"UnsupportedPlugin_line-spacing": "Line spacing",
+	"UnsupportedPlugin_LINK": "Link",
+	"UnsupportedPlugin_wix-draft-plugin-sound-cloud": "Sound Cloud",
+	"UnsupportedPlugin_code-block": "Code Block",
+	"UnsupportedPlugin_wix-draft-plugin-divider": "Divider",
+	"UnsupportedPlugin_wix-draft-plugin-vertical-embed": "Vertical embed",
+	"UnsupportedPlugin_wix-draft-plugin-video": "Video",
+	"UnsupportedPlugin_wix-draft-plugin-giphy": "GIF",
+	"UnsupportedPlugin_wix-draft-plugin-map": "Map",
+	"UnsupportedPlugin_wix-draft-plugin-file-upload": "File upload",
+	"UnsupportedPlugin_wix-draft-plugin-link-button": "Link button",
+	"UnsupportedPlugin_wix-draft-plugin-action-button": "Action button",
+	"UnsupportedPlugin_wix-rich-content-text-highlight": "Text highlight",
+	"UnsupportedPlugin_wix-rich-content-text-color": "Text color"
+	
+	
 }

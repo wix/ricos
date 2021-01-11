@@ -17,6 +17,7 @@ interface Props {
 
 class UnsupportedBlocksComponent extends React.Component<Props> {
   static type = { UNSUPPORTED_BLOCKS_TYPE };
+
   render() {
     const { componentData, settings, theme, blockProps, t } = this.props;
     const { unsupportedType } = blockProps;

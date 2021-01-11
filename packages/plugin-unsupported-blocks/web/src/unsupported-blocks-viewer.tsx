@@ -16,14 +16,13 @@ interface Props {
   unsupportedType: string;
   t: TranslationFunction;
 }
-
 class UnsupportedBlocksViewer extends Component<Props> {
   styles: Record<string, string>;
 
   render() {
     const { unsupportedType, t, theme } = this.props;
-    const pluginName = t(unsupportedType);
-    const unsupportedMessage = t('unsupported_plugin_message');
+    const pluginName = t(`UnsupportedPlugin_${unsupportedType}`);
+    const unsupportedMessage = t('Unsupported_plugin_message');
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
