@@ -14,7 +14,7 @@
             align-items: center;
             &.active, &.selectAll {
                 background-color: $action-color;
-                color: $background-color;
+                color: var(--ricos-background-color,#fff);
                 border: 1px solid $action-color;
             }
             &.selectAll {
