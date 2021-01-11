@@ -85,10 +85,12 @@ const entityFixersToRaw = [
     entityFixer: (entity: RawDraftEntity) => {
       const { pairs } = entity.data;
       entity.data.pairs = pairs.map((pair: Pair) => {
+        const title = pair.title?.getCurrentContent() || createEmptyContent();
+        const content = pair.content?.getCurrentContent() || createEmptyContent();
         return {
           key: pair.key,
-          title: toRaw(pair.title.getCurrentContent()),
-          content: toRaw(pair.content.getCurrentContent()),
+          title: toRaw(title),
+          content: toRaw(content),
         };
       });
     },
@@ -107,7 +109,8 @@ const convertTableConfigToRaw = config => {
   Object.entries(rows).forEach(([rowIndex, row]) => {
     newRows[rowIndex] = {};
     Object.entries(row.columns).forEach(([cellIndex, cell]) => {
-      const content = toRaw(cell.content.getCurrentContent());
+      const contentState = cell.content?.getCurrentContent() || createEmptyContent();
+      const content = toRaw(contentState);
       newRows[rowIndex].columns = {
         ...newRows[rowIndex].columns,
         [cellIndex]: { ...cell, content },
@@ -157,6 +160,7 @@ const convertFromRaw = rawState =>
   addVersion(fromRaw(entityMapDataFixer(rawState, entityFixersFromRaw)), rawState.VERSION);
 
 const createEmpty = () => addVersion(EditorState.createEmpty(), version);
+const createEmptyContent = () => createEmpty().getCurrentContent();
 const createWithContent = contentState =>
   addVersion(EditorState.createWithContent(contentState), contentState.VERSION);
 

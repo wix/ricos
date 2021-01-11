@@ -350,6 +350,8 @@ class TableComponent extends React.Component {
         (this.movementY === 'up' && this.dropTop > pos + 20)
       ) {
         this.rowDropIndex = index + 1;
+      } else if (this.dropTop <= 15) {
+        this.rowDropIndex = 0;
       }
     });
     this.highlightResizer(this.rowDropIndex - 1);
@@ -372,7 +374,9 @@ class TableComponent extends React.Component {
       onResize={this.onResizeCol}
       onResizeStart={this.setSelected}
       highlightResizer={this.state.highlightColResizer}
-      activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
+      activeDrag={
+        this.state.isEditingActive ? [] : this.table.getSelectedCols(range)?.map(i => parseInt(i))
+      }
       selectAll={this.state.isAllCellsSelected}
       size={this.tableRef.current?.offsetHeight}
       tableWidth={this.tableRef.current?.offsetWidth}
@@ -428,7 +432,11 @@ class TableComponent extends React.Component {
         {!isMobile && (
           <Rows
             rowDragProps={this.rowDragProps}
-            activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
+            activeDrag={
+              this.state.isEditingActive
+                ? []
+                : this.table.getSelectedRows(range)?.map(i => parseInt(i))
+            }
             isAllCellsSelected={this.state.isAllCellsSelected}
             size={this.tableRef.current?.offsetWidth}
             onResize={this.onResizeRow}
