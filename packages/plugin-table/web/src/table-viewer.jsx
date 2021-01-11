@@ -43,6 +43,7 @@ class TableViewer extends Component {
         tableHeight={this.props.tableHeight}
         selected={this.props.selected}
         isEditMode={this.props.isEditMode}
+        isEditingActive={this.props.isEditingActive}
       />
     );
   };
@@ -143,6 +144,7 @@ TableViewer.propTypes = {
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   selectAll: PropTypes.bool,
   tableHeight: PropTypes.number,
+  isEditingActive: PropTypes.bool,
 };
 
 export default TableViewer;

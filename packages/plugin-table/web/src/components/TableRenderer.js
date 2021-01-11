@@ -40,6 +40,7 @@ export default class TableRenderer extends PureComponent {
       selectAll,
       tableHeight,
       isEditMode,
+      isEditingActive,
     } = this.props;
     const range = selected && getRange(selected);
     const colsMinWidth = table.getColsMinWidth();
@@ -67,7 +68,9 @@ export default class TableRenderer extends PureComponent {
               onResize={onResize}
               onResizeStart={onResizeStart}
               highlightResizer={highlightResizer}
-              activeDrag={table.getSelectedCols(range)?.map(i => parseInt(i))}
+              activeDrag={
+                isEditingActive ? [] : table.getSelectedCols(range)?.map(i => parseInt(i))
+              }
               selectAll={selectAll}
               size={tableHeight}
               tableWidth={tableRef?.offsetWidth}
@@ -95,4 +98,5 @@ TableRenderer.propTypes = {
   tableHeight: PropTypes.number,
   isEditMode: PropTypes.bool,
   selected: PropTypes.object,
+  isEditingActive: PropTypes.bool,
 };
