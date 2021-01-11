@@ -349,6 +349,8 @@ class TableComponent extends React.Component {
         (this.movementY === 'up' && this.dropTop > pos + 20)
       ) {
         this.rowDropIndex = index + 1;
+      } else if (this.dropTop <= 15) {
+        this.rowDropIndex = 0;
       }
     });
     this.highlightResizer(this.rowDropIndex - 1);
