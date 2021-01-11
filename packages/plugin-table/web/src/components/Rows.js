@@ -32,7 +32,7 @@ export default class Rows extends PureComponent {
       <div style={{ display: isEditMode ? 'flex' : 'none' }} className={styles.container}>
         <div className={styles.selectAllContainer}>
           <SelectTable isActive={isSelectAllActive} onClick={onSelectAllClick} />
-          <Resizer index={-1} highlightResizer={highlightResizer} size={size + 20} />
+          <Resizer index={-1} highlightResizer={highlightResizer} size={size + 20} highlightOnly />
         </div>
         <div className={styles.rows}>
           {[...Array(rowNum).fill(0)].map((row, index) => (
