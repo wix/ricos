@@ -5,7 +5,6 @@ import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from '../consts';
 import { RicosContent, RicosNode, google } from 'ricos-schema';
 import { genKey } from '../generateRandomKey';
-
 import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getEntity';
 

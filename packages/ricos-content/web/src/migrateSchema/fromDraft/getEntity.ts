@@ -1,3 +1,4 @@
+/* eslint-disable fp/no-delete */
 import { RicosEntityMap, RicosContentBlock } from '../..';
 import toConstantCase from 'to-constant-case';
 import toCamelCase from 'to-camel-case';

@@ -1,3 +1,4 @@
+/* eslint-disable fp/no-delete */
 import { RicosDecoration, RicosNode } from 'ricos-schema';
 import {
   DRAFT_BLOCK_TYPE_TO_DATA_FIELD,

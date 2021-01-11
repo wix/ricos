@@ -46,11 +46,7 @@ const comparator = (left, right, key) => {
   if (IGNORED_KEYS.includes(key)) {
     return true;
   }
-  if (left.enableVoteRole || right.enableVoteRole) {
-    console.log(left);
-    console.log(omit(left, IGNORED_POLL_CONFIG_KEYS));
-    console.log(right);
-    console.log(omit(right, IGNORED_POLL_CONFIG_KEYS));
+  if (left?.enableVoteRole !== undefined || right?.enableVoteRole !== undefined) {
     return isEqual(omit(left, IGNORED_POLL_CONFIG_KEYS), omit(right, IGNORED_POLL_CONFIG_KEYS));
   }
   return undefined;

@@ -49,7 +49,7 @@ message GalleryConfig {
   enum GallerySize {
     CONTENT = 0;
     SMALL = 1;
-    FULL_WIDTH = 3;
+    FULL_WIDTH = 2;
   }
   enum GalleryAlignment {
     LEFT = 0;
