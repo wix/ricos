@@ -1,38 +1,18 @@
 /* eslint-disable no-console */
-import { RicosContent, RicosNode, RicosDecoration } from 'ricos-schema';
-import {
-  RicosContent as RicosContentDraft,
-  RicosContentBlock,
-  RicosEntityMap,
-  RicosEntityRange,
-  RicosInlineStyleRange,
-} from '../..';
+import { RicosContent, RicosNode } from 'ricos-schema';
+import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
 import { genKey } from '../generateRandomKey';
-import {
-  NodeType,
-  BlockType,
-  HeaderLevel,
-  FROM_RICOS_DECORATION_TYPE,
-  ENTITY_DECORATION_TO_DATA_FIELD,
-} from '../consts';
-import { emojiRegex } from '../emojiRegex';
+import { NodeType, BlockType, HeaderLevel } from '../consts';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
+import { createTextBlockData, createAtomicEntityData } from './getDraftEntityData';
 import {
-  createTextBlockData,
-  createDecorationEntityData,
-  createAtomicEntityData,
-} from './getDraftEntityData';
-
-interface RangedDecoration extends RicosDecoration {
-  start: number;
-  end: number;
-  ricosEmoji?: { emojiUnicode: string };
-}
-
-interface RangedDecorationMap {
-  [type: string]: RangedDecoration[];
-}
+  getParagraphNode,
+  mergeTextNodes,
+  parseDecorations,
+  parseInlineStyleDecorations,
+  parseEntityDecorations,
+} from './decorationParsers';
 
 export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   const {
@@ -157,180 +137,3 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   draftContent.VERSION = version;
   return draftContent;
 };
-
-const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
-  return fns.reduce((v, fn) => fn(v), arg);
-};
-
-const getParagraphNode = (node: RicosNode) => {
-  if (node.nodes[0].type === 'paragraph') {
-    return node.nodes[0];
-  } else {
-    console.log(`ERROR! Expected a paragraph node but found ${node.nodes[0].type}`);
-    process.exit(1);
-  }
-};
-
-const convertDecorationTypes = (decorations: RicosDecoration[]): RicosDecoration[] =>
-  decorations.flatMap(decoration => pipe(decoration, toDraftDecorationType, splitColorDecoration));
-
-const createEmojiDecorations = (text: string) =>
-  Array.from(text.matchAll(emojiRegex)).flatMap(({ 0: emojiUnicode, index: start }) => {
-    if (start) {
-      const decoration: RangedDecoration = {
-        type: 'EMOJI_TYPE',
-        ricosEmoji: { emojiUnicode },
-        start,
-        end: start + Array.from(emojiUnicode).length,
-      };
-      return decoration;
-    }
-    return [];
-  });
-
-const toDraftDecorationType = (decoration: RicosDecoration): RicosDecoration => {
-  if (FROM_RICOS_DECORATION_TYPE[decoration.type]) {
-    decoration.type = FROM_RICOS_DECORATION_TYPE[decoration.type];
-  }
-  return decoration;
-};
-
-const splitColorDecoration = ({
-  ricosColor,
-  ...decoration
-}: RicosDecoration): RicosDecoration | RicosDecoration[] => {
-  if (!ricosColor) {
-    return decoration;
-  }
-  const { foreground, background } = ricosColor;
-  return [foreground && { FG: foreground }, background && { BG: background }]
-    .filter(x => x)
-    .map(type => ({ ...decoration, type: JSON.stringify(type) }));
-};
-
-const mergeTextNodes = (
-  nodes: RicosNode[]
-): { text: string; decorationMap: RangedDecorationMap } => {
-  let length = 0;
-  return nodes.reduce<{
-    text: string;
-    decorationMap: RangedDecorationMap;
-  }>(
-    ({ text, decorationMap }, currNode) => {
-      let accText = text;
-      if (currNode.ricosText) {
-        const { text: currText, decorations: currDecorations } = currNode.ricosText;
-        const textLength = Array.from(currText).length; // required for properly reading emojis
-        accText += currText;
-        if (currDecorations) {
-          convertDecorationTypes(currDecorations).forEach(decoration => {
-            if (!decorationMap[decoration.type]) {
-              decorationMap[decoration.type] = [];
-            }
-            decorationMap[decoration.type] = [
-              ...decorationMap[decoration.type],
-              {
-                ...decoration,
-                start: length,
-                end: length + textLength,
-              },
-            ];
-          });
-        }
-        length += textLength;
-      }
-      return { text: accText, decorationMap };
-    },
-    { text: '', decorationMap: {} }
-  );
-};
-
-const parseDecorations = (
-  decorationMap: RangedDecorationMap,
-  text: string
-): { inlineStyleDecorations: RangedDecoration[]; entityDecorations: RangedDecoration[] } => {
-  const decorations = Object.values(decorationMap)
-    .sort(decorationComparator)
-    .reduce((decorations: RangedDecoration[], currentDecorations) => {
-      if (currentDecorations.length > 0) {
-        const firstDecoration = currentDecorations.shift() as RangedDecoration;
-        const mergedDecorations: RangedDecoration[] = [firstDecoration];
-        currentDecorations.forEach(decoration => {
-          const lastDecoration = mergedDecorations.pop() as RangedDecoration;
-          if (decoration.start === lastDecoration.end) {
-            mergedDecorations.push({ ...lastDecoration, end: decoration.end });
-          } else {
-            mergedDecorations.push(lastDecoration, decoration);
-          }
-        });
-        return [...decorations, ...mergedDecorations.sort(decorationComparator)];
-      }
-      return decorations;
-    }, []);
-  const allDecorations = [...decorations, ...createEmojiDecorations(text)];
-  const entityDecorations = allDecorations
-    .filter(({ type }) => ENTITY_DECORATION_TO_DATA_FIELD[type])
-    .sort(decorationComparator);
-  const inlineStyleDecorations = allDecorations.filter(
-    ({ type }) => !ENTITY_DECORATION_TO_DATA_FIELD[type]
-  );
-  return { inlineStyleDecorations, entityDecorations };
-};
-
-const parseInlineStyleDecorations = (decorations: RangedDecoration[]): RicosInlineStyleRange[] => {
-  const inlineStyleRanges = decorations.reduce<RicosInlineStyleRange[]>(
-    (inlineStyleRanges, decoration) => [
-      ...inlineStyleRanges,
-      {
-        style: decoration.type,
-        offset: decoration.start,
-        length: decoration.end - decoration.start,
-      },
-    ],
-    []
-  );
-  return inlineStyleRanges;
-};
-
-const parseEntityDecorations = (
-  decorations: RangedDecoration[],
-  latestEntityKey: number
-): {
-  entityRanges: RicosEntityRange[];
-  entityMap: RicosEntityMap;
-  latestEntityKey: number;
-} => {
-  const { entityRanges, entityMap, latestEntityKey: newLatestEntityKey } = decorations.reduce<{
-    entityRanges: RicosEntityRange[];
-    entityMap: RicosEntityMap;
-    latestEntityKey: number;
-  }>(
-    ({ entityRanges, entityMap, latestEntityKey }, decoration) => {
-      const newEntityKey = latestEntityKey + 1;
-      const newEntityMap = createDecorationEntityData(decoration, newEntityKey);
-      return {
-        entityRanges: [
-          ...entityRanges,
-          {
-            key: newEntityKey,
-            offset: decoration.start,
-            length: decoration.end - decoration.start,
-          },
-        ],
-        entityMap: { ...entityMap, ...newEntityMap },
-        latestEntityKey: newEntityKey,
-      };
-    },
-    { entityRanges: [], entityMap: {}, latestEntityKey }
-  );
-  return {
-    entityRanges,
-    entityMap,
-    latestEntityKey: newLatestEntityKey,
-  };
-};
-
-const decorationComparator = (
-  a: RangedDecoration | RangedDecoration[],
-  b: RangedDecoration | RangedDecoration[]
-) => ('start' in a && 'start' in b ? a.start - b.start : a[0].start - b[0].start);

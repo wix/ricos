@@ -6,7 +6,7 @@ import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from '../const
 import { RicosContent, RicosNode, google } from 'ricos-schema';
 import { genKey } from '../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
-import { getEntity, parseBlockData } from './getEntity';
+import { getEntity, parseBlockData } from './getRicosEntityData';
 
 const createTimestamp = (): google.protobuf.Timestamp => {
   const timeMS = Date.now();

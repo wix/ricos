@@ -10,7 +10,7 @@ import { RicosNode, RicosDecoration } from 'ricos-schema';
 import { NodeType, TO_RICOS_DECORATION_TYPE } from '../consts';
 
 import { isEmpty, merge } from 'lodash';
-import { getEntity } from './getEntity';
+import { getEntity } from './getRicosEntityData';
 import { genKey } from 'draft-js';
 
 type KeyType = string | number;
