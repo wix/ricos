@@ -1,4 +1,5 @@
 import React from 'react';
+import { RicosViewerProps } from 'ricos-common';
 import { RicosContent, RicosNode } from 'ricos-schema';
 
 function escapeHtml(unsafe: string) {
@@ -79,6 +80,6 @@ const toHTML = (content: RicosContent) => {
   return nodes.map(nodeToHTML).join('');
 };
 
-export default (props: { content: RicosContent }) => (
+export default (props: RicosViewerProps) => (
   <div dangerouslySetInnerHTML={{ __html: toHTML(props.content) }} />
 );
