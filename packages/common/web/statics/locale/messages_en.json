@@ -497,7 +497,7 @@
 	"TablePlugin_InsertButton": "Table",
 	"Table_plugin_search_tags": "table grid row column data",
 	"TablePlugin_InsertButton_Tooltip": "Add a table",
-	"TablePlugin_Toolbar_TextStyle_Button": "Text Style",
+	"TablePlugin_Toolbar_TextStyle_Button": "Text style",
 	"TablePlugin_Toolbar_GoBack_Button": "Go back",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
 	"TablePlugin_Toolbar_Header_Tooltip": "Set as header",
