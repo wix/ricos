@@ -10,24 +10,19 @@ interface Props {
   settings: UnsupportedBlocksPluginEditorConfig;
   theme: RichContentTheme;
   t: TranslationFunction;
-  blockProps: {
-    unsupportedType: string;
-  };
 }
 
 class UnsupportedBlocksComponent extends React.Component<Props> {
   static type = { UNSUPPORTED_BLOCKS_TYPE };
 
   render() {
-    const { componentData, settings, theme, blockProps, t } = this.props;
-    const { unsupportedType } = blockProps;
+    const { componentData, settings, theme, t } = this.props;
     return (
       <UnsupportedBlocksViewer
         componentData={componentData}
         settings={settings}
         theme={theme}
         t={t}
-        unsupportedType={unsupportedType}
       />
     );
   }

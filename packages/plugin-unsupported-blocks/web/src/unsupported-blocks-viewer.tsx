@@ -13,15 +13,14 @@ interface Props {
   componentData: ComponentData;
   settings: UnsupportedBlocksPluginEditorConfig;
   theme: RichContentTheme;
-  unsupportedType: string;
   t: TranslationFunction;
 }
 class UnsupportedBlocksViewer extends Component<Props> {
   styles: Record<string, string>;
 
   render() {
-    const { unsupportedType, t, theme } = this.props;
-    const pluginName = t(`UnsupportedPlugin_${unsupportedType}`);
+    const { t, theme } = this.props;
+    const pluginName = t('UnsupportedPlugin_default_name');
     const unsupportedMessage = t('UnsupportedPlugin_message');
     const alertMessage = <p>{`${pluginName} ${unsupportedMessage}`}</p>;
     this.styles = this.styles || mergeStyles({ styles, theme });
