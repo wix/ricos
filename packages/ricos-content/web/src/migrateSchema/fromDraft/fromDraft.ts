@@ -19,7 +19,6 @@ const createTimestamp = (): google.protobuf.Timestamp => {
 export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   const { blocks, entityMap, VERSION: version } = draftJSON;
   const nodes: RicosNode[] = [];
-  const keyMapping = {};
 
   const parseBlocks = (index = 0) => {
     const block = blocks[index];
@@ -67,7 +66,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     return {
       key: block.key,
       nodes: [],
-      ...getEntity(block.entityRanges[0].key, entityMap, keyMapping),
+      ...getEntity(block.entityRanges[0].key, entityMap),
     };
   };
 
@@ -83,7 +82,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   const parseCodeBlock = (block: RicosContentBlock): RicosNode => ({
     key: block.key,
     type: NodeType.CodeBlock,
-    nodes: getTextNodes(block, entityMap, keyMapping),
+    nodes: getTextNodes(block, entityMap),
     ricosCode: {
       ...parseBlockData(block.data),
     },
@@ -105,7 +104,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
         depth: block.depth || undefined,
         ...parseBlockData(block.data),
       },
-      nodes: getTextNodes(block, entityMap, keyMapping),
+      nodes: getTextNodes(block, entityMap),
     };
   };
 
@@ -126,8 +125,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       };
     }
 
-    keyMapping[block.key] = textWrapperNode.key;
-    const nodes = getTextNodes(block, entityMap, keyMapping);
+    const nodes = getTextNodes(block, entityMap);
 
     if (!isEmpty(nodes)) {
       textWrapperNode.nodes = nodes;

@@ -30,11 +30,7 @@ const mergeColorDecorations = (decorations: RicosDecoration[]): RicosDecoration[
     : otherDecorations;
 };
 
-export const getTextNodes = (
-  block: RicosContentBlock,
-  entityMap: RicosEntityMap,
-  keyMapping: Record<string, string>
-): RicosNode[] => {
+export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap): RicosNode[] => {
   const createTextNode = ({
     text,
     styles = [],
@@ -56,7 +52,7 @@ export const getTextNodes = (
 
     let decorations: RicosDecoration[] = [];
 
-    const keysDecorations = keys.map(key => getEntity(key, entityMap, keyMapping));
+    const keysDecorations = keys.map(key => getEntity(key, entityMap));
     const stylesDecorations = mergeColorDecorations(styles.map(style => getDecoration(style)));
     decorations = [...decorations, ...keysDecorations, ...stylesDecorations];
 

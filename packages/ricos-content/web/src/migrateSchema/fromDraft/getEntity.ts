@@ -3,7 +3,6 @@ import { RicosEntityMap, RicosContentBlock } from '../..';
 import toConstantCase from 'to-constant-case';
 import toCamelCase from 'to-camel-case';
 import {
-  ANCHOR_TYPE,
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
   DIVIDER_TYPE,
@@ -88,11 +87,7 @@ const migrateSoundCloudData = data => {
   }
 };
 
-export const getEntity = (
-  key: string | number,
-  entityMap: RicosEntityMap,
-  keyMapping: Record<string, string>
-) => {
+export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   const { type, data } = entityMap[key];
   const dataFieldName = TO_RICOS_ENTITY_TYPE_MAP[type];
   if (!dataFieldName) {
@@ -102,12 +97,6 @@ export const getEntity = (
   }
 
   switch (type) {
-    case ANCHOR_TYPE:
-      // Remap anchor key for text blocks
-      if (keyMapping[data.anchor]) {
-        data.anchor = keyMapping[data.anchor];
-      }
-      break;
     case MENTION_TYPE:
       data.name = data.mention.name;
       data.slug = data.mention.slug;
