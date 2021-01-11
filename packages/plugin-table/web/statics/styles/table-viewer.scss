@@ -1,8 +1,5 @@
 .viewMode, .editMode, .container {
-    &:focus {
-        outline: none;
-    }
-    > span:focus {
+    &:focus, > span:focus {
         outline: none;
     }
 }

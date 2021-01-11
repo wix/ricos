@@ -64,7 +64,7 @@ export default class Cell extends Component {
     }
   };
 
-  handleClipboardEvent = e => {
+  onKeydown = e => {
     const { editing, row, col, updateCellContent, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
@@ -152,7 +152,7 @@ export default class Cell extends Component {
         }}
         data-row={row}
         data-col={col}
-        onKeyDown={this.handleClipboardEvent}
+        onKeyDown={this.onKeydown}
       >
         <div
           className={classNames(!isMobile && isEditing && styles.editing)}
@@ -188,7 +188,7 @@ class Editor extends Component {
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
-  handleClipboardEvent = e => {
+  onKeydown = e => {
     if (this.props.editing) {
       const editorState = this.editor.ref.getEditorState();
       this.props.handleCellClipboardEvent(e, editorState);
@@ -206,7 +206,7 @@ class Editor extends Component {
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         className={classNames(styles.editor, editing ? styles.edit : styles.view)}
-        onKeyDown={this.handleClipboardEvent}
+        onKeyDown={this.onKeydown}
       >
         {React.cloneElement(children, { ref: this.setEditorRef, editing })}
       </div>
