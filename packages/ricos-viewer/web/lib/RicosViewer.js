@@ -1,8 +1,6 @@
 import React from 'react';
-import { RicosViewerProps } from 'ricos-common';
-import { RicosContent, RicosNode } from 'ricos-schema';
 
-function escapeHtml(unsafe: string) {
+function escapeHtml(unsafe) {
   return unsafe
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -11,10 +9,7 @@ function escapeHtml(unsafe: string) {
     .replace(/'/g, '&#039;');
 }
 
-const supportedDecorations: Record<
-  RicosNode['type'],
-  (inner: string, node?: RicosNode) => string
-> = {
+const supportedDecorations = {
   ricos_link: (inner, { ricosLink }) => {
     const { url, rel, target } = ricosLink;
     return `<a href='${url}' rel='${rel}' target='${target}'>${inner}</a>`;
@@ -34,7 +29,7 @@ const supportedDecorations: Record<
   },
 };
 
-const supportedTypes: Record<RicosNode['type'], (inner: string, node?: RicosNode) => string> = {
+const supportedTypes = {
   text: (inner, { ricosText }) => {
     const { text, decorations } = ricosText;
 
@@ -62,7 +57,7 @@ const supportedTypes: Record<RicosNode['type'], (inner: string, node?: RicosNode
   ricos_gallery: inner => `<div><<< Missing no gallery plugin quite yet >>></div>`,
 };
 
-const nodeToHTML = (node: RicosNode) => {
+const nodeToHTML = node => {
   let res = '';
   if (node.nodes.length > 0) {
     res += node.nodes.map(nodeToHTML).join('');
@@ -75,11 +70,9 @@ const nodeToHTML = (node: RicosNode) => {
   }
 };
 
-const toHTML = (content: RicosContent) => {
+const toHTML = content => {
   const { nodes } = content.doc;
   return nodes.map(nodeToHTML).join('');
 };
 
-export default (props: RicosViewerProps) => (
-  <div dangerouslySetInnerHTML={{ __html: toHTML(props.content) }} />
-);
+export default props => <div dangerouslySetInnerHTML={{ __html: toHTML(props.content) }} />;
