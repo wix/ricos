@@ -17,12 +17,13 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.14.1 (Jan 11, 2021)
 ### :bug: Bug Fix
 - `editor`
   - [#1973](https://github.com/wix/ricos/commit/1973) fix `convertToRaw` when inner-rce is undefined (only for Rce-on-Rce plugins)
-
-</details>
-<hr/>
 
 ## 8.14.0 (Jan 10, 2021)
 ### :rocket: New Feature
