@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "63hua",
+            "key": "9rkfm",
             "ricosText": {
               "decorations": [
                 {
@@ -19,7 +19,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "36ul6",
+            "key": "c20sn",
             "ricosText": {
               "decorations": [],
               "text": " 😎, "
@@ -28,7 +28,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2r3j6",
+            "key": "838et",
             "ricosText": {
               "decorations": [
                 {
@@ -41,7 +41,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9k8v5",
+            "key": "65u14",
             "ricosText": {
               "decorations": [],
               "text": " elit. Quisque quis ex "
@@ -50,7 +50,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bp8pc",
+            "key": "83o82",
             "ricosText": {
               "decorations": [
                 {
@@ -63,7 +63,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8a45t",
+            "key": "8cijo",
             "ricosText": {
               "decorations": [],
               "text": ", facilisis lectus id, sodales ipsum. In "
@@ -72,7 +72,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9rlh3",
+            "key": "brb7d",
             "ricosText": {
               "decorations": [
                 {
@@ -85,7 +85,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9g5qd",
+            "key": "3i2fm",
             "ricosText": {
               "decorations": [
                 {
@@ -101,7 +101,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bpm0n",
+            "key": "a3ls6",
             "ricosText": {
               "decorations": [
                 {
@@ -114,7 +114,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7bib0",
+            "key": "743ff",
             "ricosText": {
               "decorations": [],
               "text": " ac elementum. Ut ut iaculis ex. "
@@ -123,7 +123,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6m2tt",
+            "key": "9pn5a",
             "ricosText": {
               "decorations": [
                 {
@@ -136,7 +136,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7kom4",
+            "key": "56dav",
             "ricosText": {
               "decorations": [],
               "text": " dolor sit "
@@ -145,7 +145,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "sr6o",
+            "key": "4a3lv",
             "ricosText": {
               "decorations": [
                 {
@@ -162,7 +162,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "51bru",
+            "key": "3fjb4",
             "ricosText": {
               "decorations": [],
               "text": ", consectetur adipiscing elit. In hac "
@@ -171,7 +171,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bsf4n",
+            "key": "7ep52",
             "ricosText": {
               "decorations": [
                 {
@@ -187,7 +187,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d1bh",
+            "key": "djtht",
             "ricosText": {
               "decorations": [
                 {
@@ -204,7 +204,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ehmrm",
+            "key": "5sm5",
             "ricosText": {
               "decorations": [
                 {
@@ -220,7 +220,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e6af4",
+            "key": "7qvh1",
             "ricosText": {
               "decorations": [],
               "text": ". Aenean placerat, quam eget vestibulum "
@@ -229,7 +229,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "cmlld",
+            "key": "f02cl",
             "ricosText": {
               "decorations": [
                 {
@@ -250,7 +250,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "a4to3",
+            "key": "q8mf",
             "ricosText": {
               "decorations": [],
               "text": ", nisl ligula vulputate "
@@ -259,7 +259,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "d7s4l",
+            "key": "eb3pc",
             "ricosText": {
               "decorations": [
                 {
@@ -278,7 +278,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "576s8",
+            "key": "fn4sg",
             "ricosText": {
               "decorations": [],
               "text": ", id lacinia odio magna eu arcu."
@@ -534,7 +534,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "6jro8",
+            "key": "3o9jc",
             "ricosText": {
               "decorations": [],
               "text": "process.exit(1);"
@@ -729,8 +729,10 @@
         "key": "9qfd3",
         "ricosPoll": {
           "config": {
+            "size": "LARGE",
             "alignment": "CENTER",
-            "enableVoteRole": false
+            "enableVoteRole": false,
+            "width": "full-width"
           },
           "poll": {
             "options": [
@@ -837,7 +839,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "572rn",
+                "key": "cs5m8",
                 "ricosText": {
                   "decorations": [],
                   "text": "Nunc eros ante , porttitor "
@@ -846,7 +848,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "frcku",
+                "key": "4orh6",
                 "ricosText": {
                   "decorations": [
                     {
@@ -859,7 +861,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "a1l9m",
+                "key": "5cn3r",
                 "ricosText": {
                   "decorations": [],
                   "text": " tempor nec, sagittis non mi. Nulla non "
@@ -868,7 +870,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "f9mg9",
+                "key": "2kinc",
                 "ricosText": {
                   "decorations": [
                     {
@@ -881,7 +883,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "144se",
+                "key": "6k4pe",
                 "ricosText": {
                   "decorations": [],
                   "text": " "
@@ -890,7 +892,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "ee9lu",
+                "key": "704r2",
                 "ricosText": {
                   "decorations": [
                     {
@@ -906,7 +908,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "30j67",
+                "key": "7pb3u",
                 "ricosText": {
                   "decorations": [],
                   "text": ", semper convallis sapien."
@@ -914,7 +916,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "ej80n",
+            "key": "apv06",
             "ricosParagraph": {}
           }
         ],
@@ -931,7 +933,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "21tul",
+                    "key": "45e1q",
                     "ricosText": {
                       "decorations": [],
                       "text": "In imperdiet eros elementum nulla fringilla sollicitudin. Proin dictum aliquam sapien at pretium."
@@ -939,7 +941,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "d0spf",
+                "key": "ep3ng",
                 "ricosParagraph": {}
               }
             ],
@@ -953,7 +955,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "9ekjo",
+                    "key": "f3utl",
                     "ricosText": {
                       "decorations": [],
                       "text": "Quisque pulvinar ac erat vitae imperdiet. Phasellus ultricies urna ut ultrices imperdiet. Nulla non varius ipsum, sit amet consectetur quam. Nunc scelerisque fringilla aliquet."
@@ -961,7 +963,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "ec8u0",
+                "key": "7pukb",
                 "ricosParagraph": {}
               }
             ],
@@ -970,7 +972,7 @@
           }
         ],
         "type": "ordered_list",
-        "key": "3opo1"
+        "key": "fggch"
       },
       {
         "nodes": [],
@@ -987,7 +989,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "2sfaj",
+                    "key": "a2hpc",
                     "ricosText": {
                       "decorations": [],
                       "text": "Aenean sed posuere odio."
@@ -995,7 +997,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "e8a4m",
+                "key": "6i340",
                 "ricosParagraph": {}
               }
             ],
@@ -1009,7 +1011,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "1kk1o",
+                    "key": "4pd3e",
                     "ricosText": {
                       "decorations": [],
                       "text": "Pellentesque imperdiet maximus turpis nec faucibus. Nulla at tempus lectus, non tempor tortor."
@@ -1017,7 +1019,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "6933r",
+                "key": "9vpk4",
                 "ricosParagraph": {}
               }
             ],
@@ -1031,7 +1033,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "2pose",
+                    "key": "48rqs",
                     "ricosText": {
                       "decorations": [],
                       "text": "Vivamus mauris diam, auctor in sollicitudin eget, suscipit sed nulla."
@@ -1039,7 +1041,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "g3bg",
+                "key": "6l5n7",
                 "ricosParagraph": {
                   "textAlignment": "RIGHT"
                 }
@@ -1055,7 +1057,7 @@
                   {
                     "nodes": [],
                     "type": "text",
-                    "key": "9skvu",
+                    "key": "de30i",
                     "ricosText": {
                       "decorations": [],
                       "text": "Aenean sapien lectus, interdum ultrices enim a, sodales ultrices mi. Quisque ut mi metus."
@@ -1063,7 +1065,7 @@
                   }
                 ],
                 "type": "paragraph",
-                "key": "9as15",
+                "key": "bi8gj",
                 "ricosParagraph": {}
               }
             ],
@@ -1072,7 +1074,7 @@
           }
         ],
         "type": "bullet_list",
-        "key": "30ddk"
+        "key": "ca2ef"
       },
       {
         "nodes": [],
@@ -1085,7 +1087,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "72nop",
+            "key": "dhpui",
             "ricosText": {
               "decorations": [],
               "text": "Donec sit amet sapien quis velit ultrices sollicitudin id facilisis ligula."
@@ -1120,7 +1122,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "akbh1",
+            "key": "b7olu",
             "ricosText": {
               "decorations": [],
               "text": "Praesent purus nibh, sodales non efficitur a, consequat ac ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum."
@@ -1173,7 +1175,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9kg99",
+            "key": "1j0kb",
             "ricosText": {
               "decorations": [],
               "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש.\n"
@@ -1201,7 +1203,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bb9ch",
+            "key": "4v9an",
             "ricosText": {
               "decorations": [],
               "text": "\n"
@@ -1214,8 +1216,8 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1610281456,
-      "nanos": 269000000
+      "seconds": 1610352749,
+      "nanos": 582000000
     }
   },
   "selection": {

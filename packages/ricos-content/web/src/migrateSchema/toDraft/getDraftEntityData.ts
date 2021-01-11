@@ -27,8 +27,6 @@ import {
 } from '../..';
 import { DraftBlockType } from 'draft-js';
 
-let latestEntityKey = 0;
-
 const migrateVideoData = data => {
   if (data.url) {
     data.src = data.url;
@@ -156,8 +154,9 @@ const getNodeEntityData = (node: RicosNode) => {
 };
 
 export const createDecorationEntityData = (
-  decoration: RicosDecoration
-): { entityKey: number; entityMap: RicosEntityMap } => {
+  decoration: RicosDecoration,
+  entityKey: number
+): RicosEntityMap => {
   const { type } = decoration;
   const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[type];
   if (!dataFieldName) {
@@ -178,14 +177,12 @@ export const createDecorationEntityData = (
     default:
   }
 
-  return createEntity({ type, mutability, data });
+  return createEntity(entityKey, { type, mutability, data });
 };
 
-export const createAtomicEntityData = (
-  node: RicosNode
-): { entityKey: number; entityMap: RicosEntityMap } => {
+export const createAtomicEntityData = (node: RicosNode, entityKey: number): RicosEntityMap => {
   const { type, data } = getNodeEntityData(node);
-  return createEntity({ type, mutability: 'IMMUTABLE', data });
+  return createEntity(entityKey, { type, mutability: 'IMMUTABLE', data });
 };
 
 export const createTextBlockData = (node: RicosNode, blockType: DraftBlockType) => {
@@ -208,12 +205,6 @@ export const createTextBlockData = (node: RicosNode, blockType: DraftBlockType) 
 const keysToSnakeCase = obj =>
   Object.fromEntries(Object.entries(obj).map(([key, value]) => [toSnakeCase(key), value]));
 
-const createEntity = ({
-  type,
-  mutability,
-  data,
-}: RicosEntity): { entityKey: number; entityMap: RicosEntityMap } => {
-  const entityKey = latestEntityKey;
-  latestEntityKey += 1;
-  return { entityKey, entityMap: { [entityKey.toString()]: { type, mutability, data } } };
+const createEntity = (key: number, { type, mutability, data }: RicosEntity): RicosEntityMap => {
+  return { [key.toString()]: { type, mutability, data } };
 };

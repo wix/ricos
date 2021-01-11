@@ -24,52 +24,15 @@ import {
   createAtomicEntityData,
 } from './getDraftEntityData';
 
-interface DecorationDescriptor extends RicosDecoration {
+interface RangedDecoration extends RicosDecoration {
   start: number;
   end: number;
   ricosEmoji?: { emojiUnicode: string };
 }
 
-const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
-  return fns.reduce((v, fn) => fn(v), arg);
-};
-
-const convertDecorationTypes = (decorations: RicosDecoration[]): RicosDecoration[] =>
-  decorations.flatMap(decoration => pipe(decoration, toDraftDecorationType, splitColorDecoration));
-
-const createEmojiDecorations = (text: string) =>
-  Array.from(text.matchAll(emojiRegex)).flatMap(({ 0: emojiUnicode, index: start }) => {
-    if (start) {
-      const decoration: DecorationDescriptor = {
-        type: 'EMOJI_TYPE',
-        ricosEmoji: { emojiUnicode },
-        start,
-        end: start + Array.from(emojiUnicode).length,
-      };
-      return decoration;
-    }
-    return [];
-  });
-
-const toDraftDecorationType = (decoration: RicosDecoration): RicosDecoration => {
-  if (FROM_RICOS_DECORATION_TYPE[decoration.type]) {
-    decoration.type = FROM_RICOS_DECORATION_TYPE[decoration.type];
-  }
-  return decoration;
-};
-
-const splitColorDecoration = ({
-  ricosColor,
-  ...decoration
-}: RicosDecoration): RicosDecoration | RicosDecoration[] => {
-  if (!ricosColor) {
-    return decoration;
-  }
-  const { foreground, background } = ricosColor;
-  return [foreground && { FG: foreground }, background && { BG: background }]
-    .filter(x => x)
-    .map(type => ({ ...decoration, type: JSON.stringify(type) }));
-};
+interface RangedDecorationMap {
+  [type: string]: RangedDecoration[];
+}
 
 export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   const {
@@ -80,6 +43,7 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
     blocks: [],
     entityMap: {},
   };
+  let latestEntityKey = -1;
 
   const parseNodes = (index = 0) => {
     const node = nodes[index];
@@ -136,31 +100,29 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   };
 
   const parseAtomicNode = (node: RicosNode) => {
-    const { entityKey, entityMap } = createAtomicEntityData(node);
+    latestEntityKey += 1;
+    const entityMap = createAtomicEntityData(node, latestEntityKey);
     addBlock({
       key: node.key,
       type: BlockType.Atomic,
       text: ' ',
-      entityRanges: [{ offset: 0, length: 1, key: entityKey }],
+      entityRanges: [{ offset: 0, length: 1, key: latestEntityKey }],
     });
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
-  };
-
-  const getParagraphNode = (node: RicosNode) => {
-    if (node.nodes[0].type === 'paragraph') {
-      return node.nodes[0];
-    } else {
-      console.log(`ERROR! Expected a paragraph node but found ${node.nodes[0].type}`);
-      process.exit(1);
-    }
   };
 
   const parseTextNodes = (
     node: RicosNode,
     { type, key }: { type: DraftBlockType; key: string }
   ) => {
-    const { text, decorations } = mergeTextNodes(node.nodes);
-    const { inlineStyleRanges, entityRanges, entityMap } = parseDecorations(decorations);
+    const { text, decorationMap } = mergeTextNodes(node.nodes);
+    const { inlineStyleDecorations, entityDecorations } = parseDecorations(decorationMap, text);
+    const inlineStyleRanges = parseInlineStyleDecorations(inlineStyleDecorations);
+    const { entityRanges, entityMap, latestEntityKey: newLatestEntityKey } = parseEntityDecorations(
+      entityDecorations,
+      latestEntityKey
+    );
+    latestEntityKey = newLatestEntityKey;
     const { depth, ...data } = createTextBlockData(node, type);
     addBlock({
       key,
@@ -196,13 +158,63 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   return draftContent;
 };
 
+const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
+  return fns.reduce((v, fn) => fn(v), arg);
+};
+
+const getParagraphNode = (node: RicosNode) => {
+  if (node.nodes[0].type === 'paragraph') {
+    return node.nodes[0];
+  } else {
+    console.log(`ERROR! Expected a paragraph node but found ${node.nodes[0].type}`);
+    process.exit(1);
+  }
+};
+
+const convertDecorationTypes = (decorations: RicosDecoration[]): RicosDecoration[] =>
+  decorations.flatMap(decoration => pipe(decoration, toDraftDecorationType, splitColorDecoration));
+
+const createEmojiDecorations = (text: string) =>
+  Array.from(text.matchAll(emojiRegex)).flatMap(({ 0: emojiUnicode, index: start }) => {
+    if (start) {
+      const decoration: RangedDecoration = {
+        type: 'EMOJI_TYPE',
+        ricosEmoji: { emojiUnicode },
+        start,
+        end: start + Array.from(emojiUnicode).length,
+      };
+      return decoration;
+    }
+    return [];
+  });
+
+const toDraftDecorationType = (decoration: RicosDecoration): RicosDecoration => {
+  if (FROM_RICOS_DECORATION_TYPE[decoration.type]) {
+    decoration.type = FROM_RICOS_DECORATION_TYPE[decoration.type];
+  }
+  return decoration;
+};
+
+const splitColorDecoration = ({
+  ricosColor,
+  ...decoration
+}: RicosDecoration): RicosDecoration | RicosDecoration[] => {
+  if (!ricosColor) {
+    return decoration;
+  }
+  const { foreground, background } = ricosColor;
+  return [foreground && { FG: foreground }, background && { BG: background }]
+    .filter(x => x)
+    .map(type => ({ ...decoration, type: JSON.stringify(type) }));
+};
+
 const mergeTextNodes = (
   nodes: RicosNode[]
-): { text: string; decorations: DecorationDescriptor[] } => {
+): { text: string; decorationMap: RangedDecorationMap } => {
   let length = 0;
-  const { text, decorationMap } = nodes.reduce<{
+  return nodes.reduce<{
     text: string;
-    decorationMap: { [type: string]: DecorationDescriptor[] };
+    decorationMap: RangedDecorationMap;
   }>(
     ({ text, decorationMap }, currNode) => {
       let accText = text;
@@ -231,101 +243,94 @@ const mergeTextNodes = (
     },
     { text: '', decorationMap: {} }
   );
+};
+
+const parseDecorations = (
+  decorationMap: RangedDecorationMap,
+  text: string
+): { inlineStyleDecorations: RangedDecoration[]; entityDecorations: RangedDecoration[] } => {
   const decorations = Object.values(decorationMap)
-    .sort((a, b) => a[0].start - b[0].start)
-    .reduce((decorations: DecorationDescriptor[], currentDecorations) => {
+    .sort(decorationComparator)
+    .reduce((decorations: RangedDecoration[], currentDecorations) => {
       if (currentDecorations.length > 0) {
-        const firstDecoration = currentDecorations.shift() as DecorationDescriptor;
-        const mergedDecorations: DecorationDescriptor[] = [firstDecoration];
+        const firstDecoration = currentDecorations.shift() as RangedDecoration;
+        const mergedDecorations: RangedDecoration[] = [firstDecoration];
         currentDecorations.forEach(decoration => {
-          const lastDecoration = mergedDecorations.pop() as DecorationDescriptor;
+          const lastDecoration = mergedDecorations.pop() as RangedDecoration;
           if (decoration.start === lastDecoration.end) {
             mergedDecorations.push({ ...lastDecoration, end: decoration.end });
           } else {
             mergedDecorations.push(lastDecoration, decoration);
           }
         });
-        return [...decorations, ...mergedDecorations.sort((a, b) => a.start - b.start)];
+        return [...decorations, ...mergedDecorations.sort(decorationComparator)];
       }
       return decorations;
     }, []);
   const allDecorations = [...decorations, ...createEmojiDecorations(text)];
-  const entityRanges = allDecorations
+  const entityDecorations = allDecorations
     .filter(({ type }) => ENTITY_DECORATION_TO_DATA_FIELD[type])
-    .sort((a, b) => a.start - b.start);
-  const inlineStyleRanges = allDecorations.filter(
+    .sort(decorationComparator);
+  const inlineStyleDecorations = allDecorations.filter(
     ({ type }) => !ENTITY_DECORATION_TO_DATA_FIELD[type]
   );
-
-  return {
-    text,
-    decorations: [...entityRanges, ...inlineStyleRanges],
-  };
+  return { inlineStyleDecorations, entityDecorations };
 };
 
-const parseDecorations = (
-  decorations: DecorationDescriptor[]
+const parseInlineStyleDecorations = (decorations: RangedDecoration[]): RicosInlineStyleRange[] => {
+  const inlineStyleRanges = decorations.reduce<RicosInlineStyleRange[]>(
+    (inlineStyleRanges, decoration) => [
+      ...inlineStyleRanges,
+      {
+        style: decoration.type,
+        offset: decoration.start,
+        length: decoration.end - decoration.start,
+      },
+    ],
+    []
+  );
+  return inlineStyleRanges;
+};
+
+const parseEntityDecorations = (
+  decorations: RangedDecoration[],
+  latestEntityKey: number
 ): {
-  inlineStyleRanges: RicosInlineStyleRange[];
   entityRanges: RicosEntityRange[];
   entityMap: RicosEntityMap;
+  latestEntityKey: number;
 } => {
-  const { inlineStyleRanges, entityRanges, entityMap } = decorations.reduce<{
-    inlineStyleRanges: RicosInlineStyleRange[];
+  const { entityRanges, entityMap, latestEntityKey: newLatestEntityKey } = decorations.reduce<{
     entityRanges: RicosEntityRange[];
     entityMap: RicosEntityMap;
+    latestEntityKey: number;
   }>(
-    ({ inlineStyleRanges, entityRanges, entityMap }, decoration) => {
-      if (ENTITY_DECORATION_TO_DATA_FIELD[decoration.type]) {
-        const { entityKey, entityMap: newEntityMap } = createDecorationEntityData(decoration);
-        return {
-          inlineStyleRanges,
-          entityRanges: [
-            ...entityRanges,
-            {
-              key: entityKey,
-              offset: decoration.start,
-              length: decoration.end - decoration.start,
-            },
-          ],
-          entityMap: { ...entityMap, ...newEntityMap },
-        };
-      }
+    ({ entityRanges, entityMap, latestEntityKey }, decoration) => {
+      const newEntityKey = latestEntityKey + 1;
+      const newEntityMap = createDecorationEntityData(decoration, newEntityKey);
       return {
-        inlineStyleRanges: [
-          ...inlineStyleRanges,
+        entityRanges: [
+          ...entityRanges,
           {
-            style: decoration.type,
+            key: newEntityKey,
             offset: decoration.start,
             length: decoration.end - decoration.start,
           },
         ],
-        entityRanges,
-        entityMap,
+        entityMap: { ...entityMap, ...newEntityMap },
+        latestEntityKey: newEntityKey,
       };
     },
-    { inlineStyleRanges: [], entityRanges: [], entityMap: {} }
+    { entityRanges: [], entityMap: {}, latestEntityKey }
   );
   return {
-    inlineStyleRanges,
     entityRanges,
     entityMap,
+    latestEntityKey: newLatestEntityKey,
   };
 };
 
-// const sortEntityRangesByOffset = (a: DecorationDescriptor, b: DecorationDescriptor) => {
-//   // const aVal = ENTITY_DECORATION_TO_DATA_FIELD[a.type] ? a.start : 0;
-//   // const bVal = ENTITY_DECORATION_TO_DATA_FIELD[b.type] ? b.start : 0;
-//   return a.start - b.start;
-// };
-
-// const sortInlineStyleRangesByType = (a: DecorationDescriptor[], b: DecorationDescriptor[]) => {
-//   if (a[0].type < b[0].type) {
-//     return -1;
-//   }
-//   if (a[0].type > b[0].type) {
-//     return 1;
-//   }
-//   return 0;
-//   // return a.start - b.start;
-// };
+const decorationComparator = (
+  a: RangedDecoration | RangedDecoration[],
+  b: RangedDecoration | RangedDecoration[]
+) => ('start' in a && 'start' in b ? a.start - b.start : a[0].start - b[0].start);

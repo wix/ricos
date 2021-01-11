@@ -1,28 +1,29 @@
 /** Based on https://gist.github.com/Yimiprod/7ee176597fef230d1451 */
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any */
 
-import { transform, isEqual, isObject, get } from 'lodash';
+import { transform, isEqualWith, isObject } from 'lodash';
+
+const IGNORED_KEYS = ['lastEdited', 'key'];
+
 /**
  * Deep diff between two object, using lodash
  * @param  {RicosContent} object Object compared
  * @param  {RicosContent} base   Object to compare with
  * @return {RicosContent}        Return a new object who represent the diff
  */
-export function compare(object, base) {
-  const { entityMap } = object;
+export function compare(object, base, options: { verbose?: boolean } = {}) {
+  const { verbose } = options;
+  object.blocks && removeEmoji(object);
+  base.blocks && removeEmoji(base);
 
   function changes(object, base) {
     return transform<any, any>(object, (result, value, key) => {
       const baseValue = base[key];
-      if (
-        !['anchorNode', 'lastEdited', 'key'].includes(key as string) &&
-        !isEqual(value, baseValue) &&
-        get(entityMap, `${baseValue.key}.type`) === 'EMOJI_TYPE' // ignore changes in emoji plugin
-      ) {
+      if (!isEqualWith(value, baseValue, comparator)) {
         const areObjects = isObject(value) && isObject(baseValue);
         const currentValue = areObjects ? changes(value, baseValue) : value;
         result[key] = currentValue;
-        if (!isObject(currentValue) || Object.keys(currentValue).length === 0) {
+        if (verbose && (!isObject(currentValue) || Object.keys(currentValue).length === 0)) {
           console.dir(
             {
               [key]: {
@@ -39,3 +40,24 @@ export function compare(object, base) {
 
   return changes(object, base);
 }
+
+const comparator = (left, right, key) => {
+  if (IGNORED_KEYS.includes(key)) {
+    return true;
+  }
+  return undefined;
+};
+
+const removeEmoji = object => {
+  const emojiEntityKeys: number[] = [];
+  Object.entries<any>(object.entityMap).forEach(
+    ([key, value]) => value.type === 'EMOJI_TYPE' && emojiEntityKeys.push(parseInt(key, 10))
+  );
+  object.entityMap = Object.entries<any>(object.entityMap).filter(
+    ([, value]) => value.type !== 'EMOJI_TYPE'
+  );
+  object.blocks = object.blocks.map(block => ({
+    ...block,
+    entityRanges: block.entityRanges.filter(range => !emojiEntityKeys.includes(range.key)),
+  }));
+};

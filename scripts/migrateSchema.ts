@@ -55,7 +55,7 @@ if (filename) {
     `${REVERSE_MIGRATED_FIXTURES_PATH}/${filename}.json`,
     JSON.stringify(draftData, null, 2)
   );
-  const diff = compare(draftData, originalFixture);
+  const diff = compare(draftData, originalFixture, { verbose: true });
   if (Object.keys(diff).length > 0) {
     console.log('\n*** Reverse migration found differences! ***');
   }

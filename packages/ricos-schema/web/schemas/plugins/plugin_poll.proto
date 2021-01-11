@@ -15,9 +15,11 @@ message PollConfig {
       CENTER = 2;
     }
 
-    Size size = 1;
+    // Size size = 1; TODO: check with groups how size & width should work
+    string size = 1;
     Alignment alignment = 2;
     bool enable_vote_role = 3;
+    string width = 4;
   }
 
   message PollOption {
