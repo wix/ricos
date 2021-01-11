@@ -1,9 +1,10 @@
 /** Based on https://gist.github.com/Yimiprod/7ee176597fef230d1451 */
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any */
 
-import { transform, isEqualWith, isObject } from 'lodash';
+import { transform, isEqualWith, isEqual, isObject, omit } from 'lodash';
 
 const IGNORED_KEYS = ['lastEdited', 'key'];
+const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
 
 /**
  * Deep diff between two object, using lodash
@@ -44,6 +45,13 @@ export function compare(object, base, options: { verbose?: boolean } = {}) {
 const comparator = (left, right, key) => {
   if (IGNORED_KEYS.includes(key)) {
     return true;
+  }
+  if (left.enableVoteRole || right.enableVoteRole) {
+    console.log(left);
+    console.log(omit(left, IGNORED_POLL_CONFIG_KEYS));
+    console.log(right);
+    console.log(omit(right, IGNORED_POLL_CONFIG_KEYS));
+    return isEqual(omit(left, IGNORED_POLL_CONFIG_KEYS), omit(right, IGNORED_POLL_CONFIG_KEYS));
   }
   return undefined;
 };

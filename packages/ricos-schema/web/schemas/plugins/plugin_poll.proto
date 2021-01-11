@@ -1,25 +1,11 @@
 syntax = "proto3";
 
+import "../common.proto";
+
+import "../common.proto";
+
 message PollConfig {
-    enum Size {
-      CONTENT = 0;
-      SMALL = 1;
-      ORIGINAL = 2;
-      FULL_WIDTH = 3;
-      INLINE = 4;
-    }
-
-    enum Alignment {
-      LEFT = 0;
-      RIGHT = 1;
-      CENTER = 2;
-    }
-
-    // Size size = 1; TODO: check with groups how size & width should work
-    string size = 1;
-    Alignment alignment = 2;
-    bool enable_vote_role = 3;
-    string width = 4;
+    bool enable_vote_role = 1;
   }
 
   message PollOption {

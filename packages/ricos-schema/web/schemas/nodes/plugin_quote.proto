@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "../common.proto";
+
 message RicosQuote {
     int32 depth = 1;
 }

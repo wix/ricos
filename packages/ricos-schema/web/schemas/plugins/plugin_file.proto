@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "../common.proto";
+
 message FileConfig {
     string size = 1;
     string alignment = 2;

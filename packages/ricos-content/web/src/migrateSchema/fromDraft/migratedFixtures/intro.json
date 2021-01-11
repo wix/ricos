@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9esvo",
+            "key": "8kc9b",
             "ricosText": {
               "decorations": [],
               "text": "Hi! 😃"
@@ -32,7 +32,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "c0u2s",
+            "key": "4632c",
             "ricosText": {
               "decorations": [],
               "text": "Welcome to "
@@ -41,7 +41,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "ftlo4",
+            "key": "bqa3a",
             "ricosText": {
               "decorations": [
                 {
@@ -68,7 +68,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dgt4l",
+            "key": "3aut5",
             "ricosText": {
               "decorations": [],
               "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️"
@@ -117,7 +117,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "u0ab",
+            "key": "876b8",
             "ricosText": {
               "decorations": [],
               "text": "Checkout the "
@@ -126,7 +126,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3n1bu",
+            "key": "8bpm0",
             "ricosText": {
               "decorations": [
                 {
@@ -154,7 +154,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "9d55n",
+            "key": "5hil4",
             "ricosText": {
               "decorations": [
                 {
@@ -177,7 +177,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e1eqs",
+            "key": "9nikd",
             "ricosText": {
               "decorations": [
                 {
@@ -222,7 +222,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3j9fd",
+            "key": "clstp",
             "ricosText": {
               "decorations": [],
               "text": "A wise man once said:"
@@ -240,7 +240,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "23udf",
+                "key": "csdua",
                 "ricosText": {
                   "decorations": [],
                   "text": "The Wix Rich Content Editor is the best tool in the world!"
@@ -248,7 +248,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "akhte",
+            "key": "4tchl",
             "ricosParagraph": {}
           }
         ],
@@ -267,7 +267,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7gut2",
+            "key": "13u55",
             "ricosText": {
               "decorations": [],
               "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components."
@@ -289,7 +289,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "2tff7",
+            "key": "6verv",
             "ricosText": {
               "decorations": [],
               "text": "Code example:"
@@ -305,7 +305,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "5l1ud",
+            "key": "6vbt5",
             "ricosText": {
               "decorations": [],
               "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />"
@@ -321,7 +321,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "e7ajn",
+            "key": "36tk6",
             "ricosText": {
               "decorations": [],
               "text": "Pro Gallery Collage:"
@@ -412,8 +412,8 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1610356086,
-      "nanos": 338000000
+      "seconds": 1610367712,
+      "nanos": 425000000
     }
   },
   "selection": {

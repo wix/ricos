@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "../common.proto";
 import "plugin_spoiler.proto";
 
 message GalleryStyles {

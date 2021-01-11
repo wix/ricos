@@ -987,10 +987,7 @@
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
-          "size": "large",
-          "alignment": "center",
-          "enableVoteRole": false,
-          "width": "full-width"
+          "enableVoteRole": false
         },
         "poll": {
           "options": [

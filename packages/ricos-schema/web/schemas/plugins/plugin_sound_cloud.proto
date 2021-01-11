@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "../common.proto";
+
 import "./plugin_video.proto";
 
 message SoundCloudConfig {

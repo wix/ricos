@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "../common.proto";
+
 message RicosColor {
     string background = 1;
     string foreground = 2;
