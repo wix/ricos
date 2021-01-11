@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1973](https://github.com/wix/ricos/commit/1973) fix `convertToRaw` when inner-rce is undefined (only for Rce-on-Rce plugins)
 
 </details>
 <hr/>
