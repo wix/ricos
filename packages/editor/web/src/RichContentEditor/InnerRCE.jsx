@@ -60,6 +60,7 @@ class InnerRCE extends PureComponent {
       this.editorWrapper &&
       e.target &&
       !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !e.target.closest('[class=ReactModalPortal]') &&
       !this.editorWrapper.contains(e.target)
     ) {
       this.setState({ showToolbars: false });
