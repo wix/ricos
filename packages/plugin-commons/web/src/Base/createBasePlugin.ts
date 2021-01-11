@@ -62,7 +62,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
-  unsupportedBlocks?: string[];
+  supportedBlockTypes: string[];
   type: string;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
