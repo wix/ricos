@@ -97,6 +97,7 @@ export default class Resizer extends PureComponent {
       <div
         className={classNames(
           styles.resizer,
+          this.props.highlightOnly && styles.highlightOnly,
           this.props.horizontal ? styles.horizonResizer : styles.verticalResizer
         )}
         style={resizerStyle}
@@ -117,4 +118,5 @@ Resizer.propTypes = {
   onResizeStart: PropTypes.func,
   itemsRefs: PropTypes.any,
   setContainerSize: PropTypes.func,
+  highlightOnly: PropTypes.bool,
 };
