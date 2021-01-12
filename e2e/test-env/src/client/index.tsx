@@ -7,6 +7,7 @@ import RicosTestApp from './RicosTestApp';
 import PreviewTestApp from './PreviewTestApp';
 
 import './app.css';
+import { TestAppConfig } from '../../../../examples/main/src/types';
 
 const compMap = {
   rce: TestApp,
@@ -26,3 +27,12 @@ hydrate(
   <RichContentApp app={compMap[window.compId]} mode={'test'} {...props} />,
   document.getElementById('root')
 );
+
+declare global {
+  interface Window {
+    isMobile: boolean;
+    locale: string;
+    testAppConfig: TestAppConfig;
+    compId: string;
+  }
+}

@@ -17,7 +17,7 @@ const mockFetchVerticalEmbed = (vertical: string) => {
 export class MockVerticalSearchModule {
   items;
 
-  constructor(verticalType: string, instance) {
+  constructor(verticalType: string) {
     this.items = mockFetchVerticalEmbed(verticalType);
   }
   search(searchInput: string) {

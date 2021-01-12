@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { RichContentPreview } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
-import { isSSR, RicosContent } from 'wix-rich-content-common';
+import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import theme from '../theme/theme'; // must import after custom styles
 import 'wix-rich-content-preview/dist/styles.min.css';
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -15,20 +15,22 @@ import 'wix-rich-content-fullscreen/dist/styles.min.css';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
-export default class Preview extends PureComponent<
-  {
-    initialState?: RicosContent;
-    isMobile?: boolean;
-    locale?: string;
-    localeResource?: Record<string, string>;
-  },
-  {
-    expandModeIsOpen?: boolean;
-    expandModeIndex?: number;
-    disabled: boolean;
-    showModal?: boolean;
-  }
-> {
+interface Props {
+  initialState?: RicosContent;
+  isMobile?: boolean;
+  locale?: string;
+  localeResource?: Record<string, string>;
+  seoMode?: SEOSettings;
+}
+
+interface State {
+  expandModeIsOpen?: boolean;
+  expandModeIndex?: number;
+  disabled: boolean;
+  showModal?: boolean;
+}
+
+export default class Preview extends PureComponent<Props, State> {
   expandModeData: { images: any; imageMap: {} };
   config;
   shouldRenderFullscreen: boolean;
@@ -99,6 +101,7 @@ export default class Preview extends PureComponent<
             anchorTarget={anchorTarget}
             relValue={relValue}
             disabled={this.state.disabled}
+            seoMode={this.props.seoMode}
           />
           {this.shouldRenderFullscreen && (
             <Fullscreen

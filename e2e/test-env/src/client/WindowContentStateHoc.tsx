@@ -1,18 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ElementType } from 'react';
 import { TABLE_TYPE } from 'wix-rich-content-plugin-table';
 import { ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
+import { RicosContent, RicosEntity, RicosEntityMap } from 'wix-rich-content-common';
+
+type Predicate = (entity: RicosEntity) => boolean;
+
+interface InnerRceFixer {
+  predicate: Predicate;
+  entityFixer: (entity: RicosEntity) => void;
+}
 
 const removeKeyFromBlocks = blocks => blocks.map((block, index) => ({ ...block, key: index }));
 
-const isTable = entity => entity.type === TABLE_TYPE;
-const isAccordion = entity => entity.type === ACCORDION_TYPE;
+const isTable: Predicate = entity => entity.type === TABLE_TYPE;
+const isAccordion: Predicate = entity => entity.type === ACCORDION_TYPE;
 
-const innerRceFixers = [
+type Row = Record<string, Columns>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Columns = Record<string, any>;
+
+const innerRceFixers: InnerRceFixer[] = [
   {
     predicate: isTable,
     entityFixer: entity => {
-      const { rows } = entity.data.config;
+      const { rows }: { rows: Row[] } = entity.data.config;
       Object.entries(rows).forEach(([, row]) => {
         Object.entries(row.columns).forEach(([, column]) => {
           column.content.blocks = removeKeyFromBlocks(column.content.blocks);
@@ -34,8 +45,8 @@ const innerRceFixers = [
   },
 ];
 
-const entityMapInnerRceFixer = entityMap => {
-  Object.values(entityMap).forEach(entity => {
+const entityMapInnerRceFixer = (entityMap: RicosEntityMap) => {
+  Object.values(entityMap).forEach((entity: RicosEntity) => {
     innerRceFixers.forEach(({ predicate, entityFixer }) => {
       if (predicate(entity)) {
         entityFixer(entity);
@@ -58,8 +69,8 @@ const putContentStateStateOnWindowForTests = contentState => {
     delete window.__CONTENT_SNAPSHOT__.VERSION;
   }
 };
-export default WrappedComponent => {
-  class WindowContentStateHoc extends React.Component {
+export default (WrappedComponent: ElementType) => {
+  class WindowContentStateHoc extends React.Component<{ contentState?: RicosContent }> {
     componentDidUpdate(prevProps) {
       const { contentState } = this.props;
       if (prevProps.contentState !== contentState) {
@@ -72,9 +83,12 @@ export default WrappedComponent => {
     }
   }
 
-  WindowContentStateHoc.propTypes = {
-    contentState: PropTypes.object,
-  };
-
   return WindowContentStateHoc;
 };
+
+declare global {
+  interface Window {
+    __CONTENT_STATE__: RicosContent;
+    __CONTENT_SNAPSHOT__: RicosContent;
+  }
+}

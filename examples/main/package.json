@@ -21,9 +21,8 @@
     "react-reflex": "^3.0.13",
     "react-tiny-fab": "^2.0.0",
     "whatwg-fetch": "3.4.1",
-    "wix-rich-content-common": "8.14.1",
-    "wix-rich-content-editor": "8.14.1",
-    "wix-rich-content-editor-common": "8.14.1",
+    "ricos-editor": "8.14.1",
+    "ricos-viewer": "8.14.1",
     "wix-rich-content-fullscreen": "8.14.1",
     "wix-rich-content-plugin-accordion": "8.14.1",
     "wix-rich-content-plugin-button": "8.14.1",
@@ -54,8 +53,7 @@
     "wix-rich-content-plugin-vertical-embed": "8.14.1",
     "wix-rich-content-plugin-video": "8.14.1",
     "wix-rich-content-preview": "8.14.1",
-    "wix-rich-content-text-selection-toolbar": "8.14.1",
-    "wix-rich-content-viewer": "8.14.1"
+    "wix-rich-content-text-selection-toolbar": "8.14.1"
   },
   "scripts": {
     "clean": "rm -rf dist/",

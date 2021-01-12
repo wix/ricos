@@ -9,6 +9,7 @@ import {
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import { getRequestedLocale, normalize } from '../src/utils';
+import { TestAppConfig } from '../src/types';
 
 type Mode = 'demo' | 'test';
 
@@ -21,7 +22,7 @@ interface Props {
   seoMode?: SEOSettings;
   isMobile?: boolean;
   app?: ElementType;
-  testAppConfig?: any;
+  testAppConfig?: TestAppConfig;
 }
 
 interface State {

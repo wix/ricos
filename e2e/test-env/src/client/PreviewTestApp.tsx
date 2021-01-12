@@ -1,8 +1,22 @@
+import { EditorState } from 'draft-js';
 import React, { PureComponent } from 'react';
+import { RicosContent } from 'ricos-editor';
+import { SEOSettings } from 'wix-rich-content-common';
+import { RichContentEditorProps } from 'wix-rich-content-editor';
 import Preview from '../../../../examples/main/shared/preview/Preview';
-import PropTypes from 'prop-types';
 import windowContentStateHoc from './WindowContentStateHoc';
-class PreviewTestApp extends PureComponent {
+
+interface Props {
+  isMobile: boolean;
+  locale?: string;
+  contentState?: RicosContent;
+  editorState?: EditorState;
+  localeResource?: Record<string, string>;
+  onEditorChange?: RichContentEditorProps['onChange'];
+  seoMode?: SEOSettings;
+}
+
+class PreviewTestApp extends PureComponent<Props> {
   renderPreview = () => {
     const { isMobile, contentState, locale, seoMode } = this.props;
     return (
@@ -22,15 +36,5 @@ class PreviewTestApp extends PureComponent {
     );
   }
 }
-
-PreviewTestApp.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  locale: PropTypes.string,
-  contentState: PropTypes.object,
-  editorState: PropTypes.object,
-  localeResource: PropTypes.object,
-  onEditorChange: PropTypes.func,
-  seoMode: PropTypes.bool,
-};
 
 export default windowContentStateHoc(PreviewTestApp);

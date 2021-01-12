@@ -1,9 +1,25 @@
 import React, { PureComponent } from 'react';
 import Editor from '../../../../examples/main/shared/editor/Editor';
 import Viewer from '../../../../examples/main/shared/viewer/Viewer';
-import PropTypes from 'prop-types';
 import windowContentStateHoc from './WindowContentStateHoc';
-class TestApp extends PureComponent {
+import { EditorState } from 'draft-js';
+import { RicosContent } from 'ricos-editor';
+import { SEOSettings } from 'wix-rich-content-common';
+import { RichContentEditorProps } from 'wix-rich-content-editor';
+import { TestAppConfig } from '../../../../examples/main/src/types';
+
+interface Props {
+  isMobile: boolean;
+  locale?: string;
+  contentState?: RicosContent;
+  editorState?: EditorState;
+  localeResource?: Record<string, string>;
+  onEditorChange?: RichContentEditorProps['onChange'];
+  seoMode?: SEOSettings;
+  testAppConfig?: TestAppConfig;
+}
+
+class TestApp extends PureComponent<Props> {
   renderEditor = () => {
     const {
       editorState,
@@ -50,16 +66,5 @@ class TestApp extends PureComponent {
     );
   }
 }
-
-TestApp.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  locale: PropTypes.string,
-  contentState: PropTypes.object,
-  editorState: PropTypes.object,
-  localeResource: PropTypes.object,
-  onEditorChange: PropTypes.func,
-  seoMode: PropTypes.bool,
-  testAppConfig: PropTypes.object,
-};
 
 export default windowContentStateHoc(TestApp);

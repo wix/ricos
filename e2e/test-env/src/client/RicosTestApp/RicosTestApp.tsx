@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RicosEditor } from 'ricos-editor';
+import { RicosEditor, RicosEditorProps } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
@@ -10,6 +9,7 @@ import './styles.global.scss';
 import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
+import { TestAppConfig } from '../../../../../examples/main/src/types';
 import {
   mockTestImageUpload,
   mockTestImageNativeUpload,
@@ -21,14 +21,17 @@ import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selec
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 import { themes } from '../consumersThemes/themes';
+import { PaletteColors, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { EditorState } from '@wix/draft-js';
 
-const onVideoSelected = (url, updateEntity) => {
+const onVideoSelected = (url: string, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
-const determinePalette = paletteType =>
+const determinePalette = (paletteType: 'light' | 'dark'): PaletteColors =>
   paletteType ? (paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9]) : undefined;
-const setBackground = palette => (palette ? { backgroundColor: palette.bgColor } : {});
-const setForeground = palette => (palette ? { color: palette.textColor } : {});
+const setBackground = (palette: PaletteColors) =>
+  palette ? { backgroundColor: palette.bgColor } : {};
+const setForeground = (palette: PaletteColors) => (palette ? { color: palette.textColor } : {});
 const customStyles = [
   'h1',
   'h2',
@@ -58,7 +61,22 @@ const customStyles = [
   }),
   {}
 );
-class RicosTestApp extends PureComponent {
+
+interface RicosTestAppProps {
+  isMobile: boolean;
+  locale?: string;
+  contentState?: RicosContent;
+  editorState?: EditorState;
+  localeResource?: Record<string, string>;
+  onRicosEditorChange?: RicosEditorProps['onChange'];
+  seoMode?: SEOSettings;
+  testAppConfig?: TestAppConfig;
+}
+
+class RicosTestApp extends PureComponent<RicosTestAppProps> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  viewerRef: React.RefObject<any>;
+
   constructor(props) {
     super(props);
     this.viewerRef = React.createRef();
@@ -178,16 +196,5 @@ class RicosTestApp extends PureComponent {
     );
   }
 }
-
-RicosTestApp.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  locale: PropTypes.string,
-  contentState: PropTypes.object,
-  editorState: PropTypes.object,
-  localeResource: PropTypes.object,
-  onRicosEditorChange: PropTypes.func,
-  seoMode: PropTypes.bool,
-  testAppConfig: PropTypes.object,
-};
 
 export default windowContentStateHoc(RicosTestApp);

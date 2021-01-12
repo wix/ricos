@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { hasLinksInBlock, RichContentTheme } from 'wix-rich-content-common';
 import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 import { CompositeDecorator } from '@wix/draft-js';
-import { List as immutableList } from 'immutable';
+import type { List } from 'immutable'; // eslint-disable-line prettier/prettier
 
 const DEFAULT_SYNTAX = 'javascript';
 const CODE_TOKEN_CLASS_NAMES = highlightingTheme;
@@ -28,7 +28,7 @@ export default class PrismDecorator implements CompositeDecorator {
   getDecorations(block, contentState) {
     const blockKey = block.getKey();
     const blockText = block.getText();
-    const decorations = immutableList(Array(blockText.length).fill(null));
+    const decorations = Array(blockText.length).fill(null) as unknown as List<string>;
 
     this.highlighted[blockKey] = {};
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { renderToString } from 'react-dom/server';
 import RichContentApp from '../../../../examples/main/shared/RichContentApp';
 import serialize from 'serialize-javascript';
@@ -24,9 +24,14 @@ export default function renderer() {
 
     const isMobile = req.query.mobile === '';
     const locale = req.query.hebrew === '' ? 'he' : 'en';
-    const seoMode = req.query.seoMode === '';
+    const seoMode = req.query.seoMode === '' ? req.query.seoMode : {};
     const testAppConfig = JSON.parse(req.query.testAppConfig || '{}');
-    const props = { isMobile, locale, seoMode, testAppConfig };
+    const props: ComponentProps<typeof RichContentApp> = {
+      isMobile,
+      locale,
+      seoMode,
+      testAppConfig,
+    };
 
     try {
       props.initialState = require(`../../../tests/fixtures/${fixtureName}.json`);

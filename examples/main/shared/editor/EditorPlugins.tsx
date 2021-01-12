@@ -102,10 +102,10 @@ import {
   mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
-import { UISettings } from 'wix-rich-content-common';
+import { CreatePluginFunction, UISettings } from 'wix-rich-content-common';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
 
-export const editorPluginsPartialPreset = [
+export const editorPluginsPartialPreset: CreatePluginFunction[] = [
   createImagePlugin,
   createGalleryPlugin,
   createVideoPlugin,
@@ -128,15 +128,18 @@ export const editorPluginsPartialPreset = [
   createUndoRedoPlugin,
 ];
 
-export const editorPluginsEmbedsPreset = [
+export const editorPluginsEmbedsPreset: CreatePluginFunction[] = [
   createLinkPlugin,
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
 ];
 
-export const editorPluginsSpoilerPreset = [createLinkPlugin, createSpoilerPlugin];
+export const editorPluginsSpoilerPreset: CreatePluginFunction[] = [
+  createLinkPlugin,
+  createSpoilerPlugin,
+];
 
-export const textPlugins = [
+export const textPlugins: CreatePluginFunction[] = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
   createIndentPlugin,
@@ -144,7 +147,7 @@ export const textPlugins = [
   ...editorPluginsPartialPreset,
 ];
 
-export const editorPlugins = [
+export const editorPlugins: CreatePluginFunction[] = [
   createLinkPreviewPlugin,
   createSpoilerPlugin,
   createVerticalEmbedPlugin,
@@ -157,7 +160,7 @@ export const editorPlugins = [
   ...editorPluginsPartialPreset,
 ];
 
-export const editorPluginsMap = {
+export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePluginFunction[]> = {
   image: createImagePlugin,
   gallery: createGalleryPlugin,
   video: createVideoPlugin,

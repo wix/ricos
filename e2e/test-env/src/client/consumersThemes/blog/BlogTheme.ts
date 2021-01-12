@@ -1,11 +1,20 @@
 import classNames from 'classnames';
 import { mapKeys, upperFirst } from 'lodash';
+import { RichContentTheme } from 'wix-rich-content-common';
 import stylesOOI from './styles/theme-ooi.scss';
 
-const createToolbarTheme = (toolbarName, theme) =>
+const createToolbarTheme = (toolbarName: string, theme: RichContentTheme) =>
   mapKeys(theme, (value, key) => `${toolbarName}${upperFirst(key)}`);
 
-export default function BlogTheme({ isViewer, isSeo, isMobile }) {
+export default function BlogTheme({
+  isViewer,
+  isSeo,
+  isMobile,
+}: {
+  isViewer?: boolean;
+  isSeo?: boolean;
+  isMobile?: boolean;
+}) {
   let advancedPostOpts;
   let useDescriptionFontInEditor;
   let readOnly;
@@ -31,7 +40,7 @@ export default function BlogTheme({ isViewer, isSeo, isMobile }) {
     },
   };
 
-  const defaultToolbarTheme = {
+  const defaultToolbarTheme: RichContentTheme = {
     toolbar: classNames(
       styles.opaqueBackgroundColor,
       styles.dividerBorderColor,

@@ -4,6 +4,7 @@ import {
   RichContentEditorModal,
   RichContentEditorProps,
 } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
@@ -13,6 +14,7 @@ import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
+import { TestAppConfig } from '../../src/types';
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -39,7 +41,7 @@ interface ExampleEditprProps {
   externalToolbar?: ElementType;
   shouldNativeUpload?: boolean;
   scrollingElementFn?: any;
-  testAppConfig?: any;
+  testAppConfig?: TestAppConfig;
   mockImageIndex?: number;
   shouldMultiSelectImages?: boolean;
   shouldMockUpload?: boolean;
@@ -255,18 +257,20 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               <TopToolbar />
             </div>
           )}
-          <RichContentEditor
-            placeholder={'Add some text!'}
-            ref={this.setEditorRef}
-            onChange={onChange}
-            helpers={this.helpers}
-            plugins={this.plugins}
-            // config={Plugins.getConfig(additionalConfig)}
-            config={this.config}
-            editorKey="random-editorKey-ssr"
-            setEditorToolbars={this.setEditorToolbars}
-            {...editorProps}
-          />
+          <RicosEditor>
+            <RichContentEditor
+              placeholder={'Add some text!'}
+              ref={this.setEditorRef}
+              onChange={onChange}
+              helpers={this.helpers}
+              plugins={this.plugins}
+              // config={Plugins.getConfig(additionalConfig)}
+              config={this.config}
+              editorKey="random-editorKey-ssr"
+              setEditorToolbars={this.setEditorToolbars}
+              {...editorProps}
+            />
+          </RicosEditor>
           <ReactModal
             isOpen={this.state.showModal}
             contentLabel="External Modal Example"
