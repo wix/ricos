@@ -1,10 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactElement } from 'react';
 import { Fab as FabButton, Action } from 'react-tiny-fab';
 import { MdAdd, MdEdit, MdRemoveRedEye, MdCode } from 'react-icons/md';
 import 'react-tiny-fab/dist/styles.min.css';
+import { OnVisibilityChanged } from '../types';
 
-const Fab = React.memo(
+const Fab = React.memo<{
+  isMobile: boolean;
+  isEditorShown: boolean;
+  isPreviewShown: boolean;
+  isViewerShown: boolean;
+  isContentStateShown: boolean;
+  toggleSectionVisibility: OnVisibilityChanged;
+}>(
   ({
     isMobile,
     isEditorShown,
@@ -23,7 +30,7 @@ const Fab = React.memo(
       return null;
     }
 
-    const FabActions = [];
+    const FabActions: ReactElement[] = [];
     if (!isEditorShown) {
       FabActions.push(
         <Action
@@ -76,14 +83,5 @@ const Fab = React.memo(
     );
   }
 );
-
-Fab.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  isEditorShown: PropTypes.bool.isRequired,
-  isViewerShown: PropTypes.bool.isRequired,
-  isPreviewShown: PropTypes.bool.isRequired,
-  isContentStateShown: PropTypes.bool.isRequired,
-  toggleSectionVisibility: PropTypes.func.isRequired,
-};
 
 export default Fab;

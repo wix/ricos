@@ -1,6 +1,6 @@
 export const mockFetchUrlPreviewData = () => {
   let index = 0;
-  return async url => {
+  return async (url: string) => {
     const supportEmbed = embedTypes.filter(type => url.includes(type))[0];
     let res;
     if (url.includes('mockUrl')) {

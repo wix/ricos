@@ -1,14 +1,13 @@
 import { debounce, pick } from 'lodash';
-import local from 'local-storage';
+import { set, get } from 'local-storage';
 import MobileDetect from 'mobile-detect';
-import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { normalizeInitialState, isSSR } from 'wix-rich-content-common';
+import { normalizeInitialState, isSSR, RicosContent } from 'wix-rich-content-common';
 import * as CONSTS from './consts';
 
 const mobileDetect = !isSSR() ? new MobileDetect(window.navigator.userAgent) : null;
 export const isMobile = () => mobileDetect && mobileDetect.mobile() !== null;
 
-export const generateKey = prefix => `${prefix}-${new Date().getTime()}`;
+export const generateKey = (prefix: string) => `${prefix}-${new Date().getTime()}`;
 
 const getStateKeysToStore = () => {
   const { STATE_KEYS_TO_STORE } = CONSTS;
@@ -20,14 +19,14 @@ const getStateKeysToStore = () => {
 export const getStorageKey = () =>
   !isMobile() ? CONSTS.LOCAL_STORAGE_KEY : CONSTS.LOCAL_STORAGE_MOBILE_KEY;
 
-export const loadStateFromStorage = () => local.get(getStorageKey());
+export const loadStateFromStorage = () => get<Record<string, any>>(getStorageKey());
 
 export const saveStateToStorage = debounce(state => {
   const stateToStore = pick(state, getStateKeysToStore());
-  local.set(getStorageKey(), stateToStore);
+  set(getStorageKey(), stateToStore);
 }, 1000);
 
-export const normalize = json => {
+export const normalize = (json: RicosContent) => {
   const { anchorTarget, relValue } = CONSTS;
   return normalizeInitialState(json, {
     anchorTarget,

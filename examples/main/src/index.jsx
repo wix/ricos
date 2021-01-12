@@ -4,8 +4,8 @@ import registerServiceWorker from './registerServiceWorker';
 import RichContentApp from '../shared/RichContentApp';
 import 'react-reflex/styles.css';
 import './styles.global.scss';
-import ExampleApp from './ExampleApp.jsx';
-import { isMobile } from '../src/utils';
+import ExampleApp from './ExampleApp';
+import { isMobile } from './utils';
 
 const allLocales = preval`module.exports = require('./getAllLocales')`;
 

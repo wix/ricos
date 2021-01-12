@@ -1,3 +1,4 @@
+import { Helpers } from 'wix-rich-content-common';
 import { testImages, testWixVideos } from './mock';
 
 export const mockImageNativeUploadFunc = (files, updateEntity) => {
@@ -16,7 +17,13 @@ export const mockImageNativeUploadFunc = (files, updateEntity) => {
   }, 2000);
 };
 
-export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
+export const mockImageUploadFunc: Helpers['handleFileSelection'] = (
+  index,
+  multiple,
+  updateEntity,
+  removeEntity,
+  componentData
+) => {
   const shouldMultiSelectImages = false;
   const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
   const data = [];
@@ -96,7 +103,7 @@ export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   }, 5000);
 };
 
-export const getVideoToUpload = (url, thumbnailUrl) => {
+export const getVideoToUpload = (url: string, thumbnailUrl: string) => {
   const videoWithAbsoluteUrl = {
     url:
       'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
@@ -137,7 +144,13 @@ export const mockTestImageNativeUpload = (files, updateEntity) => {
   }, 200);
 };
 
-export const mockTestImageUpload = (index, multiple, updateEntity, removeEntity, componentData) => {
+export const mockTestImageUpload: Helpers['handleFileSelection'] = (
+  index,
+  multiple,
+  updateEntity,
+  removeEntity,
+  componentData
+) => {
   const shouldMultiSelectImages = false;
   const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
   const data = [];

@@ -1,3 +1,4 @@
+import { EditorProps } from 'draft-js';
 import { isHexColor } from 'wix-rich-content-common';
 
 export const colorScheme = {
@@ -27,7 +28,7 @@ export const colorScheme = {
   },
 };
 
-export const viewerCustomForegroundStyleFn = style => {
+export const viewerCustomForegroundStyleFn = (style: string) => {
   let colorRule = {};
   if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
     colorRule = { color: colorScheme[style].color };
@@ -37,7 +38,7 @@ export const viewerCustomForegroundStyleFn = style => {
   return colorRule;
 };
 
-export const customForegroundStyleFn = styles =>
+export const customForegroundStyleFn: EditorProps['customStyleFn'] = styles =>
   styles.toArray().reduce((cssStyle, style) => {
     return {
       ...cssStyle,
@@ -45,7 +46,7 @@ export const customForegroundStyleFn = styles =>
     };
   }, {});
 
-export const viewerCustomBackgroundStyleFn = style => {
+export const viewerCustomBackgroundStyleFn = (style: string) => {
   let colorRule = {};
   if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
     colorRule = { backgroundColor: colorScheme[style].color };
@@ -55,7 +56,7 @@ export const viewerCustomBackgroundStyleFn = style => {
   return colorRule;
 };
 
-export const customBackgroundStyleFn = styles =>
+export const customBackgroundStyleFn: EditorProps['customStyleFn'] = styles =>
   styles.toArray().reduce((cssStyle, style) => {
     return {
       ...cssStyle,
@@ -63,6 +64,6 @@ export const customBackgroundStyleFn = styles =>
     };
   }, {});
 
-export const styleSelectionPredicate = style => {
+export const styleSelectionPredicate = (style: string) => {
   return (colorScheme[style] && isHexColor(colorScheme[style].color)) || isHexColor(style);
 };

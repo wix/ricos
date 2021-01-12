@@ -1,8 +1,16 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { MdClose, MdSettings } from 'react-icons/md';
+import { SectionSettings, OnVisibilityChanged } from '../types';
 
-export default class SectionHeader extends PureComponent {
+export default class SectionHeader extends PureComponent<{
+  title?: string;
+  settings: SectionSettings[];
+  onHide: OnVisibilityChanged;
+}> {
+  static defaultProps = {
+    settings: [],
+  };
+
   onHideClick = () => {
     this.props.onHide(this.props.title.replace(' ', ''), false);
   };
@@ -52,13 +60,3 @@ export default class SectionHeader extends PureComponent {
     );
   }
 }
-
-SectionHeader.propTypes = {
-  title: PropTypes.string,
-  settings: PropTypes.array,
-  onHide: PropTypes.func,
-};
-
-SectionHeader.defaultProps = {
-  settings: [],
-};

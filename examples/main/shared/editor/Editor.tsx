@@ -1,6 +1,9 @@
-import React, { PureComponent } from 'react';
-import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import * as PropTypes from 'prop-types';
+import React, { ElementType, PureComponent } from 'react';
+import {
+  RichContentEditor,
+  RichContentEditorModal,
+  RichContentEditorProps,
+} from 'wix-rich-content-editor';
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
@@ -9,8 +12,9 @@ import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
 
-const modalStyleDefaults = {
+const modalStyleDefaults: ModalStyles = {
   content: {
     top: '50%',
     left: '50%',
@@ -24,9 +28,39 @@ const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
 
-export default class Editor extends PureComponent {
-  state = {};
-  constructor(props) {
+interface ExampleEditprProps {
+  onChange?: RichContentEditorProps['onChange'];
+  editorState?: RichContentEditorProps['editorState'];
+  theme?: RichContentEditorProps['theme'];
+  isMobile?: boolean;
+  staticToolbar?: boolean;
+  locale?: string;
+  localeResource?: Record<string, string>;
+  externalToolbar?: ElementType;
+  shouldNativeUpload?: boolean;
+  scrollingElementFn?: any;
+  testAppConfig?: any;
+  mockImageIndex?: number;
+  shouldMultiSelectImages?: boolean;
+  shouldMockUpload?: boolean;
+  initialState?: RicosContent;
+}
+
+interface ExampleEditprState {
+  showModal?: boolean;
+  modalProps?: any;
+  modalStyles?: ModalStyles;
+  MobileToolbar?: ElementType;
+  TextToolbar?: ElementType;
+}
+export default class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
+  state: ExampleEditprState = {};
+  plugins: RichContentEditorProps['plugins'];
+  config: RichContentEditorProps['config'];
+  helpers: RichContentEditorProps['helpers'];
+  editor: RichContentEditor;
+
+  constructor(props: ExampleEditprProps) {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
@@ -70,7 +104,7 @@ export default class Editor extends PureComponent {
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       onOpenEditorSuccess: async version => console.log('onOpenEditorSuccess', version),
       //
-      // onFilesChange: mockImageNativeUploadFunc,
+      // handleFileUpload: mockImageNativeUploadFunc,
       handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
@@ -107,7 +141,6 @@ export default class Editor extends PureComponent {
           showModal: false,
           modalProps: null,
           modalStyles: null,
-          modalContent: null,
         });
       },
     };
@@ -138,11 +171,11 @@ export default class Editor extends PureComponent {
   setImageUploadHelper = () => {
     const { shouldNativeUpload } = this.props;
     if (shouldNativeUpload) {
-      this.helpers.onFilesChange = mockImageNativeUploadFunc;
+      this.helpers.handleFileUpload = mockImageNativeUploadFunc;
       delete this.helpers.handleFileSelection;
     } else {
       this.helpers.handleFileSelection = mockImageUploadFunc;
-      delete this.helpers.onFilesChange;
+      delete this.helpers.handleFileUpload;
     }
   };
 
@@ -198,7 +231,7 @@ export default class Editor extends PureComponent {
       onChange,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
-    const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
+    const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
 
     const editorProps = {
@@ -252,15 +285,3 @@ export default class Editor extends PureComponent {
     );
   }
 }
-
-Editor.propTypes = {
-  onChange: PropTypes.func,
-  editorState: PropTypes.object,
-  theme: PropTypes.object,
-  isMobile: PropTypes.bool,
-  staticToolbar: PropTypes.bool,
-  locale: PropTypes.string,
-  localeResource: PropTypes.object,
-  externalToolbar: PropTypes.node,
-  shouldNativeUpload: PropTypes.bool,
-};

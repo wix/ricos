@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { getVisibleSelectionRect } from 'wix-rich-content-editor-common';
-
 import styles from './InlineToolbarDecoration.scss';
 
-class InlineToolbarDecoration extends Component {
+class InlineToolbarDecoration extends Component<{
+  style?: any;
+  className?: string;
+  refCallback?: (node) => void;
+}> {
+  static displayName = 'InlineToolbarDecoration';
+  element: Element;
+
   handleRef = el => {
     this.element = el;
     return this.props.refCallback(el);
@@ -18,7 +23,7 @@ class InlineToolbarDecoration extends Component {
     }
 
     const selectionRect = getVisibleSelectionRect(window);
-    const toolbarRect = this.element ? this.element.getBoundingClientRect() : {};
+    const toolbarRect: Partial<DOMRect> = this.element ? this.element.getBoundingClientRect() : {};
     console.log('TCL: InlineToolbarDecoration -> render -> toolbarRect', toolbarRect);
     const relLeft = selectionRect ? selectionRect.left + selectionRect.width / 2 : 0;
     const toolbarLeft = toolbarRect.left || 0;
@@ -36,14 +41,5 @@ class InlineToolbarDecoration extends Component {
     );
   }
 }
-
-InlineToolbarDecoration.propTypes = {
-  children: PropTypes.node,
-  style: PropTypes.object,
-  className: PropTypes.string,
-  refCallback: PropTypes.func,
-};
-
-InlineToolbarDecoration.displayName = 'InlineToolbarDecoration';
 
 export default InlineToolbarDecoration;

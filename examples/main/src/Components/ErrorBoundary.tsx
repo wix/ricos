@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ErrorInfo } from 'react';
 
-export default class ErrorBoundary extends PureComponent {
+export default class ErrorBoundary extends PureComponent<{}, { error?: Error; info?: ErrorInfo }> {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: Error, info: ErrorInfo) {
     this.setState({ error, info });
   }
 

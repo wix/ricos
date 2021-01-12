@@ -1,17 +1,44 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { ElementType, PureComponent } from 'react';
 import { debounce } from 'lodash';
 import {
   convertToRaw,
   convertFromRaw,
   createEmpty,
   createWithContent,
+  EditorState,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import { getRequestedLocale, normalize } from '../src/utils';
 
-class RichContentApp extends PureComponent {
-  constructor(props) {
+type Mode = 'demo' | 'test';
+
+interface Props {
+  mode?: Mode;
+  allLocales?: string[];
+  debounce?: number;
+  initialState?: RicosContent;
+  locale?: string;
+  seoMode?: SEOSettings;
+  isMobile?: boolean;
+  app?: ElementType;
+  testAppConfig?: any;
+}
+
+interface State {
+  editorState?: EditorState;
+  contentState?: RicosContent;
+  localeResource?: Record<string, string>;
+  locale?: string;
+  remountKey?: boolean;
+}
+
+class RichContentApp extends PureComponent<Props, State> {
+  static defaultProps: Props = {
+    mode: 'demo',
+    allLocales: ['en'],
+  };
+
+  constructor(props: Props) {
     super(props);
     this.state = this.getInitialState(props);
     if (props.debounce) {
@@ -20,7 +47,15 @@ class RichContentApp extends PureComponent {
     }
   }
 
-  getInitialState = ({ initialState, locale = getRequestedLocale(), mode }) => {
+  getInitialState = ({
+    initialState,
+    locale = getRequestedLocale(),
+    mode,
+  }: {
+    initialState?: RicosContent;
+    locale?: string;
+    mode?: Mode;
+  }) => {
     if (!isSSR() && mode === 'demo' && locale !== 'en') {
       this.setLocaleResource(locale);
     }
@@ -34,7 +69,7 @@ class RichContentApp extends PureComponent {
     };
   };
 
-  setLocaleResource = locale => {
+  setLocaleResource = (locale: string) => {
     import(`wix-rich-content-common/statics/locale/messages_${locale}.json`).then(localeResource =>
       this.setState({
         locale,
@@ -44,16 +79,16 @@ class RichContentApp extends PureComponent {
     );
   };
 
-  onEditorChange = (editorState, traits) => {
+  onEditorChange = (editorState: EditorState, traits) => {
     this.setState({
       editorState,
     });
     this.updateContentState(editorState);
   };
 
-  onRicosEditorChange = contentState => this.setState({ contentState });
+  onRicosEditorChange = (contentState: RicosContent) => this.setState({ contentState });
 
-  onContentStateChange = contentState => {
+  onContentStateChange = (contentState: RicosContent) => {
     this.setState({
       contentState,
     });
@@ -61,11 +96,11 @@ class RichContentApp extends PureComponent {
     this.updateEditorState(contentState);
   };
 
-  updateContentState = editorState => {
+  updateContentState = (editorState: EditorState) => {
     this.setState({ contentState: convertToRaw(editorState.getCurrentContent()) });
   };
 
-  updateEditorState = contentState => {
+  updateEditorState = (contentState: RicosContent) => {
     this.setState({ editorState: createWithContent(convertFromRaw(normalize(contentState))) });
   };
 
@@ -91,15 +126,5 @@ class RichContentApp extends PureComponent {
     );
   }
 }
-
-RichContentApp.propTypes = {
-  mode: PropTypes.oneOf(['demo', 'test']),
-  allLocales: PropTypes.arrayOf(PropTypes.string),
-};
-
-RichContentApp.defaultProps = {
-  mode: 'demo',
-  allLocales: ['en'],
-};
 
 export default RichContentApp;

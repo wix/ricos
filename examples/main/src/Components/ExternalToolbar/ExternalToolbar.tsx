@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, RefObject } from 'react';
 import { FileInput } from 'wix-rich-content-plugin-commons';
 import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import FormattingGroupButton from 'wix-rich-content-editor-common/libs/FormattingGroupButton';
 import FormattingDropdownButton from 'wix-rich-content-editor-common/libs/FormattingDropdownButton';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import styles from './ExternalToolbar.scss';
+import { RichContentTheme } from 'wix-rich-content-common';
 
-class ExternalToolbar extends Component {
-  static propTypes = {
-    buttons: PropTypes.object.isRequired,
-    theme: PropTypes.object,
-  };
+class ExternalToolbar extends Component<{
+  buttons;
+  theme?: RichContentTheme;
+  isMobile?: boolean;
+  tabIndex?: number;
+}> {
+  theme: RichContentTheme;
+  buttonRef: RefObject<any>;
 
   constructor(props) {
     super(props);
@@ -33,7 +36,7 @@ class ExternalToolbar extends Component {
     const Icon = getIcon();
     const style = isActive() ? { background: 'lightslategray' } : {};
     return (
-      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
+      <Tooltip content={tooltip} place="bottom">
         <button
           disabled={isDisabled()}
           data-hook={dataHook}
@@ -67,7 +70,7 @@ class ExternalToolbar extends Component {
         multiple={multiple}
         key={name}
       >
-        <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
+        <Tooltip content={tooltip} place="bottom">
           <Icon />
         </Tooltip>
       </FileInput>
@@ -116,7 +119,7 @@ class ExternalToolbar extends Component {
     const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
-        {Object.values(buttons).map((buttonProps, i) => {
+        {Object.values(buttons).map((buttonProps: any, i) => {
           const Button = this.buttonMap[buttonProps.type];
           return <Button {...buttonProps} key={i} />;
         })}

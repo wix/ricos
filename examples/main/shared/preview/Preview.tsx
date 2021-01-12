@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { RichContentPreview } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, RicosContent } from 'wix-rich-content-common';
 import theme from '../theme/theme'; // must import after custom styles
 import 'wix-rich-content-preview/dist/styles.min.css';
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/viewer';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
@@ -15,7 +15,24 @@ import 'wix-rich-content-fullscreen/dist/styles.min.css';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
-export default class Preview extends PureComponent {
+export default class Preview extends PureComponent<
+  {
+    initialState?: RicosContent;
+    isMobile?: boolean;
+    locale?: string;
+    localeResource?: Record<string, string>;
+  },
+  {
+    expandModeIsOpen?: boolean;
+    expandModeIndex?: number;
+    disabled: boolean;
+    showModal?: boolean;
+  }
+> {
+  expandModeData: { images: any; imageMap: {} };
+  config;
+  shouldRenderFullscreen: boolean;
+
   constructor(props) {
     super(props);
     if (!isSSR()) {
@@ -40,7 +57,6 @@ export default class Preview extends PureComponent {
   closeModal = () => {
     this.setState({
       showModal: false,
-      modalContent: null,
     });
   };
 
@@ -72,6 +88,7 @@ export default class Preview extends PureComponent {
           <RichContentPreview
             locale={this.props.locale}
             typeMappers={Plugins.typeMappers}
+            // @ts-ignore
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
             decorators={Plugins.decorators}
             config={this.config}
@@ -96,8 +113,3 @@ export default class Preview extends PureComponent {
     );
   }
 }
-
-Preview.propTypes = {
-  initialState: PropTypes.any,
-  isMobile: PropTypes.bool,
-};

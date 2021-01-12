@@ -4,6 +4,8 @@ import Prism from 'prismjs';
 import classNames from 'classnames';
 import { hasLinksInBlock, RichContentTheme } from 'wix-rich-content-common';
 import highlightingTheme from '../statics/styles/highlighting-theme.scss';
+import { CompositeDecorator } from '@wix/draft-js';
+import { List as immutableList } from 'immutable';
 
 const DEFAULT_SYNTAX = 'javascript';
 const CODE_TOKEN_CLASS_NAMES = highlightingTheme;
@@ -15,7 +17,7 @@ const PrismToken: FunctionComponent<{
   <span key={`codeBlock_${offsetKey}`} children={children} className={className} />
 );
 
-export default class PrismDecorator {
+export default class PrismDecorator implements CompositeDecorator {
   highlighted = {};
   theme: RichContentTheme;
 
@@ -26,7 +28,7 @@ export default class PrismDecorator {
   getDecorations(block, contentState) {
     const blockKey = block.getKey();
     const blockText = block.getText();
-    const decorations = Array(blockText.length).fill(null);
+    const decorations = immutableList(Array(blockText.length).fill(null));
 
     this.highlighted[blockKey] = {};
 

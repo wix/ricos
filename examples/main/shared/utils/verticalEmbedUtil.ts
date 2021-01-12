@@ -10,22 +10,24 @@ const mockDataMap = {
   [product]: mockProductsData,
 };
 
-const mockFetchVerticalEmbed = vertical => {
+const mockFetchVerticalEmbed = (vertical: string) => {
   return Promise.resolve(mockDataMap[vertical]);
 };
 
 export class MockVerticalSearchModule {
-  constructor(verticalType, instance) {
+  items;
+
+  constructor(verticalType: string, instance) {
     this.items = mockFetchVerticalEmbed(verticalType);
   }
-  search(searchInput) {
+  search(searchInput: string) {
     return this.items.then(res =>
       res.filter(item => item.name.toLowerCase().includes(searchInput.toLowerCase()))
     );
   }
 }
 
-export const MockGetIsVisiblePromise = (type, _locale) => {
+export const MockGetIsVisiblePromise = (type: string, _locale: string) => {
   if (type === product) {
     return Promise.resolve(true);
   }

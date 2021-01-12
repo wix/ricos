@@ -102,6 +102,8 @@ import {
   mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
+import { UISettings } from 'wix-rich-content-common';
+import { RichContentEditorProps } from 'wix-rich-content-editor';
 
 export const editorPluginsPartialPreset = [
   createImagePlugin,
@@ -210,6 +212,7 @@ const getLinkPanelDropDownConfig = () => {
     const items = [];
     const amount = 1000;
     for (let i = 0; i < amount; ++i) {
+      // @ts-ignore
       items.push(casual.item);
     }
     return items;
@@ -257,7 +260,7 @@ const getLinkPanelDropDownConfig = () => {
 
 let userColors = [];
 
-export const uiSettings = {
+export const uiSettings: UISettings = {
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
@@ -320,7 +323,7 @@ const buttonConfig = {
 };
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { html, adsense } = htmlButtonsTypes;
-const config = {
+const config: RichContentEditorProps['config'] = {
   [SPOILER_TYPE]: {
     SpoilerEditorWrapper,
     // supportedPlugins: [GALLERY_TYPE, IMAGE_TYPE, VIDEO_TYPE],
@@ -540,7 +543,7 @@ const config = {
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],
-    getIsVisiblePromise: (type, locale) => new MockGetIsVisiblePromise(type, locale),
+    getIsVisiblePromise: (type, locale) => MockGetIsVisiblePromise(type, locale),
     // slimLayout: true,
   },
   // [EXTERNAL_EMOJI_TYPE]: {},
@@ -721,7 +724,10 @@ export const getConfig = (additionalConfig = {}, shouldNativeUpload = false) => 
   return toggleNativeUploadConfig(_config, shouldNativeUpload);
 };
 
-export const toggleNativeUploadConfig = (currentConfig, shouldNativeUpload) => {
+export const toggleNativeUploadConfig = (
+  currentConfig: RichContentEditorProps['config'],
+  shouldNativeUpload: boolean
+) => {
   const _config = { ...currentConfig };
   if (shouldNativeUpload) {
     // native upload

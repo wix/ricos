@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
-import { getContentStateSchema, isSSR } from 'wix-rich-content-common';
+import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -34,15 +34,17 @@ import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-bu
 import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
-import MonacoEditor from 'react-monaco-editor';
+import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
-class ContentStateEditor extends PureComponent {
+class ContentStateEditor extends PureComponent<{
+  contentState: RicosContent;
+  onChange: (contentState: RicosContent) => void;
+}> {
   state = {
     value: stringifyJSON(this.props.contentState),
   };
-
   editorOptions = {
     codeLens: false,
     formatOnType: true,
@@ -52,6 +54,7 @@ class ContentStateEditor extends PureComponent {
       enabled: false,
     },
   };
+  monaco: MonacoEditor;
 
   componentWillReceiveProps(nextProps) {
     if (!this.monaco?.editor.hasTextFocus()) {
@@ -59,7 +62,7 @@ class ContentStateEditor extends PureComponent {
     }
   }
 
-  editorWillMount = monaco => {
+  editorWillMount: EditorWillMount = monaco => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
       validate: true,
       schemas: [
@@ -89,7 +92,7 @@ class ContentStateEditor extends PureComponent {
     });
   };
 
-  onChange = value => {
+  onChange: ChangeHandler = value => {
     this.setState({ value });
     this.updateContentState(value);
   };
@@ -121,10 +124,5 @@ class ContentStateEditor extends PureComponent {
     );
   };
 }
-
-ContentStateEditor.propTypes = {
-  contentState: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
 
 export default ContentStateEditor;

@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap, debounce } from 'lodash';
-import local from 'local-storage';
+import { set, get } from 'local-storage';
 import { ErrorBoundary, Fab, SectionHeader, SectionContent, ExternalToolbar } from './Components';
 import {
   generateKey,
@@ -11,12 +11,49 @@ import {
   saveStateToStorage,
   disableBrowserBackButton,
 } from './utils';
+import { SectionSettings, OnVisibilityChanged } from './types';
+import { RicosContent } from 'wix-rich-content-common';
+import type ContentStateEditorType from './Components/ContentStateEditor';
+import { EditorState } from 'draft-js';
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
 const Preview = React.lazy(() => import('../shared/preview/Preview'));
 
-class ExampleApp extends PureComponent {
+interface ExampleAppProps {
+  isMobile?: boolean;
+  onContentStateChange?: (contentState: RicosContent) => void;
+  contentState?: RicosContent;
+  setLocale?: (locale: string) => void;
+  locale?: string;
+  allLocales?: string[];
+  editorState?: EditorState;
+  onEditorChange?: (editorState: EditorState, traits)=> void;
+  localeResource?: Record<string, string>;
+}
+
+interface ExampleAppState {
+  containerKey?: string;
+  isEditorShown?: boolean;
+  isViewerShown?: boolean;
+  isPreviewShown?: boolean;
+  isContentStateShown?: boolean;
+  viewerResetKey?: number;
+  previewResetKey?: number;
+  editorResetKey?: number;
+  shouldMockUpload?: boolean;
+  shouldMultiSelectImages?: boolean;
+  shouldNativeUpload?: boolean;
+  [key: string]: any;
+}
+
+class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
+  editorSettings: SectionSettings[];
+  viewerSettings: SectionSettings[];
+  editorScrollingElementFn: () => Element;
+  viewerScrollingElementFn: () => Element;
+  contentStateEditor: ContentStateEditorType;
+
   constructor(props) {
     super(props);
     this.state = this.getInitialState();
@@ -64,19 +101,16 @@ class ExampleApp extends PureComponent {
     this.saveContentStateToLocalStorage(this.props.contentState);
   }
 
-  saveContentStateToLocalStorage = debounce(
-    contentState => local.set('contentState', contentState),
-    500
-  );
+  saveContentStateToLocalStorage = debounce(contentState => set('contentState', contentState), 500);
 
-  loadContentStateFromLocalStorage = () => local.get('contentState');
+  loadContentStateFromLocalStorage = (): RicosContent => get('contentState');
 
-  setContentStateEditor = ref => (this.contentStateEditor = ref);
+  setContentStateEditor = (ref: ContentStateEditorType) => (this.contentStateEditor = ref);
 
   onContentStateEditorResize = () =>
     this.contentStateEditor && this.contentStateEditor.refreshLayout();
 
-  onSectionVisibilityChange = (sectionName, isVisible) => {
+  onSectionVisibilityChange: OnVisibilityChanged = (sectionName, isVisible) => {
     this.setState(
       { [`is${sectionName}Shown`]: isVisible, containerKey: generateKey('prefix') },
       () => {
@@ -85,7 +119,8 @@ class ExampleApp extends PureComponent {
     );
     this.onContentStateEditorResize();
   };
-  onSetLocale = locale => {
+
+  onSetLocale = (locale: string) => {
     this.props.setLocale && this.props.setLocale(locale);
   };
 
@@ -302,7 +337,7 @@ class ExampleApp extends PureComponent {
     );
   };
 
-  setSectionVisibility = (sectionName, isVisible) =>
+  setSectionVisibility: OnVisibilityChanged = (sectionName, isVisible) =>
     this.setState({ [`show${sectionName}`]: isVisible });
 
   renderSections = () => {

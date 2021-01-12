@@ -1,7 +1,6 @@
-import React, { PureComponent } from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
-import { isSSR } from 'wix-rich-content-common';
-import * as PropTypes from 'prop-types';
+import React, { PureComponent, RefObject } from 'react';
+import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
+import { isSSR, SEOSettings } from 'wix-rich-content-common';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -13,8 +12,28 @@ import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
-export default class Viewer extends PureComponent {
-  constructor(props) {
+interface ExampleViewerProps {
+  initialState?: RichContentViewerProps['initialState'];
+  isMobile?: boolean;
+  locale: string;
+  scrollingElementFn?: any;
+  seoMode?: SEOSettings;
+  localeResource?: Record<string, string>;
+}
+
+interface ExampleViewerState {
+  expandModeIsOpen?: boolean;
+  expandModeIndex?: number;
+  disabled: boolean;
+}
+
+export default class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
+  expandModeData;
+  viewerRef: RefObject<any>;
+  pluginsConfig: RichContentViewerProps['config'];
+  shouldRenderFullscreen: boolean;
+
+  constructor(props: ExampleViewerProps) {
     super(props);
     if (!isSSR()) {
       this.expandModeData = getImagesData(this.props.initialState);
@@ -78,6 +97,7 @@ export default class Viewer extends PureComponent {
         <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
           <RichContentViewer
             typeMappers={Plugins.typeMappers}
+            // @ts-ignore
             inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
             decorators={Plugins.decorators}
             config={this.pluginsConfig}
@@ -102,9 +122,3 @@ export default class Viewer extends PureComponent {
     );
   }
 }
-
-Viewer.propTypes = {
-  initialState: PropTypes.any,
-  isMobile: PropTypes.bool,
-  locale: PropTypes.string.isRequired,
-};
