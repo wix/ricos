@@ -1,9 +1,10 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .unsupportedBlocks_alert{
     max-width: 375px;
     margin: 0 auto;
-    background-color:#F0F4F7;
-    // background-color:var(--ricos-background-color,#F0F4F7);
-    color: rgb(51, 51, 51);
+    background-color: $background-color;
+    color: $primary-text-color;
     height: 52px;
     padding: 0 8px;
     display: flex;
