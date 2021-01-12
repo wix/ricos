@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "../common.proto";
+
+message RicosLink {
+  string url = 1 [required = true];
+  string rel = 2;
+  string target = 3;
+  string href = 4;
+}
