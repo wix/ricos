@@ -20,6 +20,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `e2e`
+  - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
+
 </details>
 <hr/>
 
