@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import {
-  mergeStyles,
-  RichContentTheme,
-  ComponentData,
-  TranslationFunction,
-} from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme, TranslationFunction } from 'wix-rich-content-common';
 import styles from '../statics/styles/unsupported-blocks.scss';
-import { UnsupportedBlocksPluginEditorConfig } from './types';
 import CircleInfoIcon from './icons/CircleInfoIcon';
 
 interface Props {
-  componentData: ComponentData;
-  settings: UnsupportedBlocksPluginEditorConfig;
   theme: RichContentTheme;
   t: TranslationFunction;
 }

@@ -1,4 +1,3 @@
-import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './unsupported-blocks-component';
 import { UnsupportedBlocksPluginEditorConfig } from './types';
 import { createBasePlugin, UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
@@ -10,11 +9,6 @@ const createUnsupportedBlocksPlugin: CreatePluginFunction<UnsupportedBlocksPlugi
   return createBasePlugin({
     component: Component,
     type: UNSUPPORTED_BLOCKS_TYPE,
-    toolbar: createToolbar({
-      t,
-      settings,
-      isMobile,
-    }),
     helpers,
     settings,
     t,
