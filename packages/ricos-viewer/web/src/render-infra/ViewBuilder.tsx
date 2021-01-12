@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 export class ViewBuilder {
   view: { content: string | ReactElement; type: 'html' | 'element' }[];
@@ -18,7 +18,7 @@ export class ViewBuilder {
 
   appendHtml(html: string) {
     const lastItem = this.view[this.view.length - 1];
-    if (lastItem.type === 'html') {
+    if (lastItem?.type === 'html') {
       lastItem.content = `${lastItem.content}${html}`;
     } else {
       this.addHtmlNode(html);
@@ -27,6 +27,11 @@ export class ViewBuilder {
   }
 
   getView() {
-    return this.view;
+    return this.view.map(({ type, content }, index) => {
+      if (type === 'html') {
+        // eslint-disable-next-line react/no-danger
+        return <div dangerouslySetInnerHTML={{ __html: content as string }} key={index} />;
+      } else return React.cloneElement(content as ReactElement, { key: index });
+    });
   }
 }

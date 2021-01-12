@@ -1,6 +1,6 @@
 import { RicosNode, RicosContent } from 'ricos-schema';
 import { RenderVisitor } from './RenderVisitor';
-
+import { getTextRenderMap } from './element-mappers';
 type RenderTypeMap = Record<RicosNode['type'], (node: RicosNode) => void>;
 
 export class ContentRenderer {
@@ -16,10 +16,15 @@ export class ContentRenderer {
       map[type] = renderer(this.visitor);
       return map;
     }, {});
+    this.renderTypeMap = { ...this.renderTypeMap, ...getTextRenderMap(this.visitor) };
   }
 
-  renderContent(content: RicosContent) {
-    content.doc.nodes.forEach((node: RicosNode) => this.renderTypeMap[node.type](node));
+  render(content: RicosContent) {
+    content.doc.nodes.forEach((node: RicosNode) => {
+      // eslint-disable-next-line no-console
+      console.assert(this.renderTypeMap[node.type], `unsupported node ${JSON.stringify(node)}`);
+      this.renderTypeMap[node.type]?.(node);
+    });
     return this.visitor.getView();
   }
 }

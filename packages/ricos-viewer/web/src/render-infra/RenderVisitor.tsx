@@ -20,7 +20,10 @@ export class RenderVisitor {
   }
 
   renderHtml() {
-    return (node: RicosNode) => nodeToHTML(elementMappers[node.type], node);
+    return (node: RicosNode) => {
+      const html = nodeToHTML(elementMappers[node.type], node);
+      this.builder.appendHtml(html);
+    };
   }
 
   renderStaticComponent(type: string, Component: React.Component) {
