@@ -59,12 +59,26 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
 
   let viewerEntry: RollupOptions[] = [];
   const viewerPath = 'src/viewer.ts';
+  const viewerRicosPath = 'src/viewer.ricos.ts';
   if (existsSync(`./${viewerPath}`)) {
     viewerEntry.push({
       input: viewerPath,
       output: cloneDeep(output).map(o => {
         if (o.file) {
           o.file = addPartToFilename(o.file, 'viewer');
+        }
+        return o;
+      }),
+      ...commonOptions,
+    });
+  }
+
+  if (existsSync(`./${viewerRicosPath}`)) {
+    viewerEntry.push({
+      input: viewerRicosPath,
+      output: cloneDeep(output).map(o => {
+        if (o.file) {
+          o.file = addPartToFilename(o.file, 'viewer.ricos');
         }
         return o;
       }),
