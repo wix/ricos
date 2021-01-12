@@ -8,6 +8,7 @@ import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 import { ToolbarType } from 'wix-rich-content-common';
 
+const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
     if (
@@ -63,8 +64,8 @@ export default class Cell extends Component {
     }
   };
 
-  handleClipboardEvent = e => {
-    const { editing, row, col, updateCellContent } = this.props;
+  onKeydown = e => {
+    const { editing, row, col, updateCellContent, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -75,6 +76,10 @@ export default class Cell extends Component {
       }
       if (e.key === 'Escape') {
         updateCellContent(row, col, this.contentBeforeEdit);
+      }
+      const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
+      if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
+        onKeyDown(e);
       }
     }
   };
@@ -151,7 +156,7 @@ export default class Cell extends Component {
         }}
         data-row={row}
         data-col={col}
-        onKeyDown={this.handleClipboardEvent}
+        onKeyDown={this.onKeydown}
       >
         <div
           className={classNames(!isMobile && isEditing && styles.editing)}
@@ -187,7 +192,7 @@ class Editor extends Component {
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
-  handleClipboardEvent = e => {
+  onKeydown = e => {
     if (this.props.editing) {
       const editorState = this.editor.ref.getEditorState();
       this.props.handleCellClipboardEvent(e, editorState);
@@ -205,7 +210,7 @@ class Editor extends Component {
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         className={classNames(styles.editor, editing ? styles.edit : styles.view)}
-        onKeyDown={this.handleClipboardEvent}
+        onKeyDown={this.onKeydown}
       >
         {React.cloneElement(children, { ref: this.setEditorRef, editing })}
       </div>
@@ -245,4 +250,5 @@ Cell.propTypes = {
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   handleCellClipboardEvent: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
