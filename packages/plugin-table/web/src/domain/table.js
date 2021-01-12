@@ -8,6 +8,13 @@ import { generateKey } from 'wix-rich-content-common';
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
+const reorderArray = (arr, from, to) => {
+  const numOfItemsToReorder = from.end - from.start + 1;
+  const source = arr.splice(from.start, numOfItemsToReorder);
+  const indexToInsert = to < from.start ? to : to - numOfItemsToReorder;
+  arr.splice(indexToInsert, 0, ...source);
+};
+
 class Table extends TableDataUtil {
   constructor(componentData = {}, saveNewDataFunc) {
     super(componentData);
@@ -380,6 +387,8 @@ class Table extends TableDataUtil {
     return isAllMergeRangeSelected;
   };
 
+  reorderColsWidth = (from, to) => reorderArray(this.getColsWidth(), from, to);
+
   reorderColumns = (from, to) => {
     const rows = this.getRows();
     const isAddedToLaterCol = from.start < to;
@@ -399,8 +408,11 @@ class Table extends TableDataUtil {
         }
       });
     });
+    this.reorderColsWidth(from, to);
     this.setNewRows(cellsWithReorder);
   };
+
+  reorderRowsHeight = (from, to) => reorderArray(this.getRowsHeight(), from, to);
 
   reorderRows = (from, to) => {
     const rows = this.getRows();
@@ -419,6 +431,7 @@ class Table extends TableDataUtil {
         cellsWithReorder[dropIndex + parseInt(i) - from.start] = rowToSet;
       }
     });
+    this.reorderRowsHeight(from, to);
     this.setNewRows(cellsWithReorder);
   };
 
