@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DataSheet from 'react-datasheet/lib';
+import DataSheet from 'wix-react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
 import { TableDataUtil } from './domain/tableDataUtil';
@@ -32,10 +32,18 @@ class TableViewer extends Component {
     return (
       <TableRenderer
         {...props}
-        columns={this.props.columns}
         table={this.table}
         tableRef={this.tableViewerRef}
         isMobile={this.props.isMobile}
+        colDragProps={this.props.colDragProps}
+        onResize={this.props.onResize}
+        onResizeStart={this.props.onResizeStart}
+        highlightResizer={this.props.highlightResizer}
+        selectAll={this.props.selectAll}
+        tableHeight={this.props.tableHeight}
+        selected={this.props.selected}
+        isEditMode={this.props.isEditMode}
+        isEditingActive={this.props.isEditingActive}
       />
     );
   };
@@ -50,14 +58,15 @@ class TableViewer extends Component {
 
   setCellRef = ref => (this.cellRef = ref);
 
-  setTableViewerRef = ref => (this.tableViewerRef = ref);
+  setTableViewerRef = ref => {
+    this.tableViewerRef = ref;
+  };
 
   cellRenderer = props => {
     const {
       setEditorRef,
       toolbarRef,
       setEditingActive,
-      updateCellContent,
       tableWidth,
       isMobile,
       selected = {},
@@ -74,7 +83,6 @@ class TableViewer extends Component {
         toolbarRef={toolbarRef}
         selectedCells={selected}
         setEditingActive={setEditingActive}
-        updateCellContent={updateCellContent}
         tableWidth={tableWidth}
         isMobile={isMobile}
         disableSelectedStyle={disableSelectedStyle}
@@ -93,7 +101,10 @@ class TableViewer extends Component {
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
 
     return (
-      <div className={classNames(!isEditMode && styles.tableWrapper)} ref={this.setTableViewerRef}>
+      <div
+        className={classNames(isEditMode ? styles.editMode : styles.viewMode)}
+        ref={this.setTableViewerRef}
+      >
         <DataSheet
           data={this.grid}
           valueRenderer={this.valueRenderer}
@@ -130,6 +141,13 @@ TableViewer.propTypes = {
   t: PropTypes.func,
   disableSelectedStyle: PropTypes.bool,
   handleCellClipboardEvent: PropTypes.func,
+  colDragProps: PropTypes.object,
+  onResize: PropTypes.func,
+  onResizeStart: PropTypes.func,
+  highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  selectAll: PropTypes.bool,
+  tableHeight: PropTypes.number,
+  isEditingActive: PropTypes.bool,
 };
 
 export default TableViewer;
