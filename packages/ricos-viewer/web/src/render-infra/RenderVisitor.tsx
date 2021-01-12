@@ -1,5 +1,4 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
 import { RicosNode } from 'ricos-schema';
 import { ViewBuilder } from './ViewBuilder';
 import { elementMappers, ElementMapper } from './element-mappers';
@@ -26,16 +25,9 @@ export class RenderVisitor {
     };
   }
 
-  renderStaticComponent(type: string, Component: React.Component) {
+  renderReactComponent(Component: React.Component) {
     return (node: RicosNode) => {
-      const html = renderToString(<Component {...node[type]} />);
-      this.builder.appendHtml(html);
-    };
-  }
-
-  renderReactComponent(type: string, Component: React.Component) {
-    return (node: RicosNode) => {
-      this.builder.addReactNode(<Component {...node[type]} />);
+      this.builder.addReactNode(<Component node={node} />);
     };
   }
 

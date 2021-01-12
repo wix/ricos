@@ -59,7 +59,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
 
   let viewerEntry: RollupOptions[] = [];
   const viewerPath = 'src/viewer.ts';
-  const viewerRicosPath = 'src/viewer.ricos.ts';
+  const viewerRicosPath = 'src/viewer.ricos.tsx';
   if (existsSync(`./${viewerPath}`)) {
     viewerEntry.push({
       input: viewerPath,

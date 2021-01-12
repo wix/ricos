@@ -11,7 +11,6 @@ export default () => {
           <RicosViewer content={RicosFixture} plugins={[dividerRenderer]} />
         </RichContentViewerBox>
       </Section>
-      <ReactAndStaticHtmlPOC />
 
       <Section title="Content State">
         <ContentState json={RicosFixture} />
