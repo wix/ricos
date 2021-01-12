@@ -26,6 +26,77 @@
 </details>
 <hr/>
 
+## 8.14.1 (Jan 11, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#1973](https://github.com/wix/ricos/commit/1973) fix `convertToRaw` when inner-rce is undefined (only for Rce-on-Rce plugins)
+
+## 8.14.0 (Jan 10, 2021)
+### :rocket: New Feature
+- `ricos-viewer`
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
+- `fullscreen`
+  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
+### :bug: Bug Fix
+- `image`
+  - [#1968](https://github.com/wix/ricos/commit/1968) image preview isn't displayed with error
+### :house: Internal
+- `editor`
+  - [#1968](https://github.com/wix/ricos/commit/1968) error toast custom messages don't go through translation (i18next console warnings fix)
+
+## 8.13.3 (Jan 7, 2021)
+- `editor-common`
+  - [#1966](https://github.com/wix/ricos/pull/1966) export withEditorContext
+
+## 8.13.2 (Jan 7, 2021)
+- `editor-common`
+  - [#1965](https://github.com/wix/ricos/pull/1965) Editor context lib
+
+## 8.13.1 (Jan 7, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#c3b615bc](https://github.com/wix/ricos/commit/c3b615bc) link not working in viewer
+
+## 8.13.0 (Jan 6, 2021)
+### :rocket: New Feature
+- `link`
+  - [#1958](https://github.com/wix-incubator/rich-content/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
+### :book: Documentation
+- `link`
+  - [#1958](https://github.com/wix/ricos/pull/1958) Update link documentation with `customLink` & `disableAutoLink` capabilities
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1963](https://github.com/wix-incubator/rich-content/pull/1963) wrapped with EditorEventsContext using typed forwardRef
+
+
+## 8.12.1 (Jan 6, 2021)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1959](https://github.com/wix-incubator/rich-content/pull/1959) fix horizontal orientation image view
+- `file-upload`
+  - [#1962](https://github.com/wix-incubator/rich-content/pull/1962) fix autodownload file after url resolve
+
+## 8.12.0 (Jan 6, 2021)
+### :rocket: New Feature
+- `editor`
+  - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
+- `ricos-editor`
+  - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
+### :house: Internal
+- `gallery`
+  - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
+
+## 8.11.5 (Jan 5, 2021)
+### :rocket: New Feature
+- `editor`
+  - [#1944](https://github.com/wix-incubator/rich-content/pull/1944) improve inline color filtering from pasted text
+- `link`
+  - [#1892](https://github.com/wix-incubator/rich-content/pull/1892) external link
+### :bug: Bug Fix
+- `link`
+  - [#1941](https://github.com/wix-incubator/rich-content/pull/1941) fix: selection after adding link
+
+
 ## 8.11.4 (Jan 3, 2021)
 ### :bug: Bug Fix
 - `text-color`

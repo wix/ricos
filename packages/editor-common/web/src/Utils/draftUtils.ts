@@ -13,7 +13,7 @@ import {
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget } from 'wix-rich-content-common';
+import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
@@ -25,6 +25,9 @@ type LinkDataUrl = {
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type CustomLinkData = any;
 
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
@@ -52,19 +55,49 @@ export const insertLinkInPosition = (
   { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
-
-  return insertLink(editorState, selection, {
+  const linkEntityData = createLinkEntityData({
     url,
     targetBlank,
     nofollow,
     anchorTarget,
     relValue,
   });
+
+  return insertLink(editorState, selection, linkEntityData);
+};
+
+export const getEntityData = (editorState: EditorState) => {
+  const selection = getSelection(editorState);
+  const contentState = editorState.getCurrentContent();
+  const blockKey = selection.getStartKey();
+  const block = contentState.getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(selection.getStartOffset());
+  if (entityKey) {
+    const entity = contentState.getEntity(entityKey);
+    const entityData = entity?.getData();
+    return entityData;
+  }
+  return null;
+};
+
+export const insertCustomLink = (editorState: EditorState, customData: CustomLinkData) => {
+  const selection = getSelection(editorState);
+  const editorStateWithLink = isSelectionBelongsToExistingLink(editorState, selection)
+    ? updateLink(editorState, selection, { customData })
+    : insertLink(editorState, selection, { customData });
+
+  const newEditorState = EditorState.forceSelection(
+    editorStateWithLink,
+    selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
+  );
+
+  return newEditorState;
 };
 
 export const updateLinkAtCurrentSelection = (editorState: EditorState, data): EditorState => {
   const selection = getSelection(editorState);
-  const editorStateWithLink = updateLink(selection, editorState, data);
+  const linkEntityData = createLinkEntityData(data);
+  const editorStateWithLink = updateLink(editorState, selection, linkEntityData);
   return EditorState.forceSelection(
     editorStateWithLink,
     selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
@@ -99,9 +132,10 @@ export const insertLinkAtCurrentSelection = (
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
   const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+  const linkEntityData = createLinkEntityData(entityData);
   const editorStateWithLink = isExistsLink
-    ? updateLink(selection, newEditorState, entityData)
-    : insertLink(newEditorState, selection, entityData);
+    ? updateLink(newEditorState, selection, linkEntityData)
+    : insertLink(newEditorState, selection, linkEntityData);
   const editorStateSelection = isExistsLink
     ? selection.merge({ anchorOffset: selection.getFocusOffset() })
     : editorStateWithLink.getCurrentContent().getSelectionAfter();
@@ -116,46 +150,61 @@ function isSelectionBelongsToExistingLink(editorState: EditorState, selection: S
   });
 }
 
-function updateLink(selection: SelectionState, editorState: EditorState, linkData: LinkData) {
+function updateLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  linkData: LinkData | CustomLinkData
+) {
   const blockKey = selection.getStartKey();
   const block = editorState.getCurrentContent().getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(selection.getStartOffset());
-  return setEntityData(editorState, entityKey, createLinkEntityData(linkData));
+  return setEntityData(editorState, entityKey, linkData);
 }
 
-function preventLinkInlineStyleForNewLine(editorState: EditorState, selection: SelectionState) {
+function preventLinkInlineStyleForFurtherText(editorState: EditorState, selection: SelectionState) {
   const focusOffset = selection.getFocusOffset();
   const selectionForSpace: SelectionState = createSelection({
     blockKey: selection.getAnchorKey(),
     anchorOffset: focusOffset,
     focusOffset,
   });
-  //insert dummy space after link for preventing underline inline style to the new line
+  //insert dummy space after link for preventing underline inline style for further text
   return Modifier.insertText(editorState.getCurrentContent(), selectionForSpace, ' ');
 }
 
-function insertLink(editorState: EditorState, selection: SelectionState, linkData: LinkData) {
+function insertLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  data: LinkData | CustomLinkData
+) {
   const oldSelection = editorState.getSelection();
+  const type = data?.customData ? CUSTOM_LINK_TYPE : LINK_TYPE;
   const editorWithLink = addEntity(editorState, selection, {
-    type: 'LINK',
-    data: createLinkEntityData(linkData),
+    type,
+    data,
     mutability: 'MUTABLE',
   });
-  const preventInlineStyleForFurtherText =
-    editorWithLink
-      .getCurrentContent()
-      .getBlockForKey(oldSelection.getAnchorKey())
-      .getText().length -
-      selection.getFocusOffset() ===
-      0 || selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link
-  const contentState = preventInlineStyleForFurtherText
-    ? preventLinkInlineStyleForNewLine(editorWithLink, selection)
-    : editorWithLink.getCurrentContent();
+  const contentWithLink = editorWithLink.getCurrentContent();
+  const selectedTextLength = contentWithLink.getBlockForKey(oldSelection.getAnchorKey()).getText()
+    .length;
+  const shouldPreventInlineStyleAtCurrentBlock =
+    selectedTextLength - selection.getFocusOffset() === 0;
+  const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey();
+  const preventInlineStyle = shouldPreventInlineStyleAtCurrentBlock || isNewLine;
+
+  const contentState = preventInlineStyle
+    ? preventLinkInlineStyleForFurtherText(editorWithLink, selection)
+    : contentWithLink;
+
+  const selectionAfter = isNewLine
+    ? contentWithLink.getSelectionAfter()
+    : contentState.getSelectionAfter();
+
   return EditorState.push(
     editorState,
     Modifier.applyInlineStyle(contentState, selection, 'UNDERLINE').set(
       'selectionAfter',
-      contentState.getSelectionAfter()
+      selectionAfter
     ) as ContentState,
     'change-inline-style'
   );

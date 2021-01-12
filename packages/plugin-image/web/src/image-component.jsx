@@ -53,10 +53,13 @@ class ImageComponent extends React.Component {
   };
 
   resetLoadingState = error => {
+    let { dataUrl } = this.state;
     if (error) {
       this.props.commonPubsub.set('onMediaUploadError', error);
+    } else {
+      dataUrl = null;
     }
-    this.setState({ isLoading: false, dataUrl: null, error });
+    this.setState({ isLoading: false, dataUrl, error });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 

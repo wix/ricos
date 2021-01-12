@@ -196,7 +196,10 @@ export const getBottomToolbarModalStyles = (
     isMobile,
   });
   const height = parseInt(customStyles.content?.height?.toString().slice(0, 3) || '0', 10);
+  const modalWidth = parseInt(customStyles.content?.width?.toString().slice(0, 3) || '0', 10);
+  const windowWidth = window && window.innerWidth;
   const { top, left, right, width } = buttonRef.getBoundingClientRect();
+  const modalOverflowFromRight = left + modalWidth > windowWidth;
   const isAboveButton = top - height - 11 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
   const contentStyles: ModalStyles['content'] = {
@@ -205,9 +208,9 @@ export const getBottomToolbarModalStyles = (
     position: 'absolute',
   };
   if (toolbarName === TOOLBARS.SIDE) {
-    contentStyles.top = isAboveButton ? top - 100 : top - 20;
-    contentStyles.right = window.innerWidth - right - 10;
-    contentStyles.left = left + 30;
+    contentStyles.top = isAboveButton ? top - 95 : top - 15;
+    contentStyles.right = modalOverflowFromRight ? 15 : window.innerWidth - right - 10;
+    contentStyles.left = modalOverflowFromRight ? window.innerWidth - modalWidth - 15 : left + 35;
   } else if (toolbarName === TOOLBARS.SHORTCUT) {
     contentStyles.top = top - height + 9;
     contentStyles.left = left - 114;

@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { merge } from 'lodash';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -45,7 +46,12 @@ import { MockVerticalSearchModule } from '../../../../../examples/main/shared/ut
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
 
-const configs = {
+const onLinkAdd = async (customLinkData, saveData) => {
+  const data = await Promise.resolve({ mockURL: 'www.sport5.co.il', mockData: {} });
+  saveData(data);
+};
+
+const defaultConfigs = {
   fileUpload: {
     accept: '*',
   },
@@ -83,62 +89,75 @@ const configs = {
   },
 };
 
-const plugins = {
-  image: pluginImage(),
-  gallery: pluginGallery(configs.gallery),
-  video: pluginVideo(configs.video),
-  html: pluginHtml(),
-  divider: pluginDivider(),
-  codeBlock: pluginCodeBlock(),
-  link: pluginLink(),
-  linkPreview: pluginLinkPreview(configs.linkPreview),
-  spacing: pluginLineSpacing(),
-  indent: pluginIndent(),
-  hashtag: pluginHashtag(),
-  mentions: pluginMentions(),
-  soundCloud: pluginSoundCloud(),
-  giphy: pluginGiphy(configs.giphy),
-  headers: pluginHeadersMarkdown(),
-  map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
-  fileUpload: pluginFileUpload(configs.fileUpload),
-  linkButton: pluginLinkButton(),
-  actionButton: pluginActionButton(),
-  highlight: pluginTextHighlight(configs.textHighlight),
-  textColor: pluginTextColor(configs.textColor),
-  emoji: pluginEmoji(),
-  undoRedo: pluginUndoRedo(),
-  headings: pluginHeadings(),
-  spoiler: pluginSpoiler(),
-  accordion: pluginAccordion({
-    innerRCEPlugins: [
-      pluginTextColor(configs.textColor).createPlugin,
-      pluginTextHighlight(configs.textHighlight).createPlugin,
-      pluginIndent().createPlugin,
-      pluginLineSpacing().createPlugin,
-      pluginLink().createPlugin,
-      pluginCodeBlock().createPlugin,
-      pluginImage().createPlugin,
-    ],
-  }),
-  table: pluginTable({
-    innerRCEPlugins: [
-      pluginTextColor(configs.textColor).createPlugin,
-      pluginTextHighlight(configs.textHighlight).createPlugin,
-      pluginIndent().createPlugin,
-      pluginLineSpacing().createPlugin,
-      pluginLink().createPlugin,
-      pluginCodeBlock().createPlugin,
-    ],
-  }),
-  verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
+const normalizeConfigs = configs => {
+  if (configs.link?.isCustomModal) {
+    configs.link.onLinkAdd = onLinkAdd;
+  }
+
+  return configs;
 };
 
-const presets = createPresets(plugins);
+const createPlugins = externalConfigs => {
+  const configs = normalizeConfigs(merge(defaultConfigs, externalConfigs));
 
-export default pluginsPreset =>
-  pluginsPreset
+  return {
+    image: pluginImage(),
+    gallery: pluginGallery(configs.gallery),
+    video: pluginVideo(configs.video),
+    html: pluginHtml(),
+    divider: pluginDivider(),
+    codeBlock: pluginCodeBlock(),
+    link: pluginLink(configs.link),
+    linkPreview: pluginLinkPreview(configs.linkPreview),
+    spacing: pluginLineSpacing(),
+    indent: pluginIndent(),
+    hashtag: pluginHashtag(),
+    mentions: pluginMentions(),
+    soundCloud: pluginSoundCloud(),
+    giphy: pluginGiphy(configs.giphy),
+    headers: pluginHeadersMarkdown(),
+    map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
+    fileUpload: pluginFileUpload(configs.fileUpload),
+    linkButton: pluginLinkButton(),
+    actionButton: pluginActionButton(),
+    highlight: pluginTextHighlight(configs.textHighlight),
+    textColor: pluginTextColor(configs.textColor),
+    emoji: pluginEmoji(),
+    undoRedo: pluginUndoRedo(),
+    headings: pluginHeadings(configs.headings),
+    spoiler: pluginSpoiler(),
+    accordion: pluginAccordion({
+      innerRCEPlugins: [
+        pluginTextColor(configs.textColor).createPlugin,
+        pluginTextHighlight(configs.textHighlight).createPlugin,
+        pluginIndent().createPlugin,
+        pluginLineSpacing().createPlugin,
+        pluginLink().createPlugin,
+        pluginCodeBlock().createPlugin,
+        pluginImage().createPlugin,
+      ],
+    }),
+    table: pluginTable({
+      innerRCEPlugins: [
+        pluginTextColor(configs.textColor).createPlugin,
+        pluginTextHighlight(configs.textHighlight).createPlugin,
+        pluginIndent().createPlugin,
+        pluginLineSpacing().createPlugin,
+        pluginLink().createPlugin,
+        pluginCodeBlock().createPlugin,
+      ],
+    }),
+    verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
+  };
+};
+
+export default (pluginsPreset, externalPluginsConfigs = {}) => {
+  const presets = createPresets(createPlugins(externalPluginsConfigs));
+
+  return pluginsPreset
     ? pluginsPreset
         .map(plugin => presets[plugin])
         .flat()
         .filter(val => !!val)
     : presets.all;
+};
