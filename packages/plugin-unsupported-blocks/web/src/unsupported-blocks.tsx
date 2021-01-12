@@ -7,7 +7,7 @@ interface Props {
   theme: RichContentTheme;
   t: TranslationFunction;
 }
-class UnsupportedBlocksViewer extends Component<Props> {
+class UnsupportedBlocks extends Component<Props> {
   styles: Record<string, string>;
 
   render() {
@@ -26,4 +26,4 @@ class UnsupportedBlocksViewer extends Component<Props> {
   }
 }
 
-export default UnsupportedBlocksViewer;
+export default UnsupportedBlocks;
