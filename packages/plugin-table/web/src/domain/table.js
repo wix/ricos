@@ -1,6 +1,11 @@
-import { getRange, TableDataUtil, getRefWidthAsNumber } from './tableDataUtil';
+import {
+  getRange,
+  TableDataUtil,
+  getRefWidthAsNumber,
+  getSizeStringAsNumber,
+} from './tableDataUtil';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
-import { ROW_DEFAULT_HEIGHT } from '../consts';
+import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH } from '../consts';
 import { createEmptyCellEditor, createEmptyCell, createEmptyRow } from '../tableUtil';
 import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
@@ -88,6 +93,8 @@ class Table extends TableDataUtil {
 
   addNewColWidth = (index, colWidth) => this.getColsWidth().splice(index, 0, colWidth);
 
+  addNewColMinWidth = index => this.getColsMinWidth().splice(index, 0, CELL_AUTO_MIN_WIDTH);
+
   addRow = index => {
     const rows = this.getRows();
     const cellsWithNewRow = { [index]: createEmptyRow(this.getColNum()) };
@@ -132,6 +139,7 @@ class Table extends TableDataUtil {
       }
     });
     this.addNewColWidth(index, this.getColWidth(index === 0 ? 0 : index - 1));
+    this.addNewColMinWidth(index);
     this.setNewRows(cellsWithNewCol);
   };
 
@@ -188,6 +196,9 @@ class Table extends TableDataUtil {
     pixelWidthArr.forEach(
       (cellWidth, index) =>
         (colsWidth[index] = this.getCellWidthAsRatio(tableWidth, totalColsWidth, cellWidth))
+    );
+    this.componentData.config.colsMinWidth = this.getColsMinWidth().map((width, index) =>
+      getSizeStringAsNumber(columnsRefs[index].style.minWidth)
     );
     this.saveNewDataFunc(this.componentData);
   };
@@ -311,6 +322,7 @@ class Table extends TableDataUtil {
       });
     });
     this.getColsWidth().splice(deleteIndexes, deleteIndexes.length);
+    this.getColsMinWidth().splice(deleteIndexes, deleteIndexes.length);
     this.setNewRows(cellsWithoutCol);
   };
 

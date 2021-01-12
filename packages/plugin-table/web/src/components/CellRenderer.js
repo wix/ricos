@@ -65,7 +65,7 @@ export default class Cell extends Component {
   };
 
   onKeydown = e => {
-    const { editing, row, col, updateCellContent, onKeyDown } = this.props;
+    const { editing, row, col, table, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -75,7 +75,7 @@ export default class Cell extends Component {
         this.editorRef.selectAllContent(true);
       }
       if (e.key === 'Escape') {
-        updateCellContent(row, col, this.contentBeforeEdit);
+        table.updateCellContent(row, col, this.contentBeforeEdit);
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
@@ -259,7 +259,6 @@ Cell.propTypes = {
   toolbarRef: PropTypes.any,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
-  updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
