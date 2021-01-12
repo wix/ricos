@@ -49,3 +49,10 @@
   pointer-events: auto;
   overflow: hidden;
 }
+
+.plusIcon {
+  color: $action-color;
+  &:hover {
+    opacity: 0.7;
+  }
+}

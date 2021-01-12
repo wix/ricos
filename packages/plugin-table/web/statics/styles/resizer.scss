@@ -19,6 +19,9 @@
     &.verticalResizer {
         bottom: 0;
         left: 0;
+    }
+
+    &.verticalResizer:not(.highlightOnly) {
         height: 5px;
         width: 20px;
         cursor: row-resize;

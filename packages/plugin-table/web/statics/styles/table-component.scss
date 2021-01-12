@@ -1,6 +1,12 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
+.tableEditorContainer, .tableWrapper {
+    &:focus {
+        outline: none;
+    }
+}
+
 .tableEditorContainer {
     display: grid;
     grid-template-rows: auto max-content;
@@ -33,24 +39,6 @@
 }
 
 .addRow, .addCol {
-    z-index: 1;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    &:hover {
-        color: $action-color;
-    }
-    >div {
-        background-color: rgba(0,0,0,.04);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        &:hover {
-            background-color: $action-color;
-            opacity: 0.1;
-        }
-    }
     display: none;
     .editMode & {
         display: flex;
@@ -68,7 +56,6 @@
     grid-column-start: 3;
     width: 20px;
     height: calc(100% + 20px);
-    margin-left: -1px;
     margin-right: -20px;
 }
 
