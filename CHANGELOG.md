@@ -10,10 +10,6 @@
 > - :nail_care: Polish
 
 ## [Unreleased]
-
-### :rocket: New Feature
-- `unsupportedBlocksPlugin`
-  - [#1939](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when some plugins aren't supported
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
@@ -22,6 +18,11 @@
 
 </details>
 <hr/>
+
+## 8.15.0 (Jan 12, 2021)
+### :rocket: New Feature
+- `unsupportedBlocks`
+  - [#1969](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when plugin isn't supported
 
 ## 8.14.2 (Jan 12, 2021)
 ### :bug: Bug Fix
