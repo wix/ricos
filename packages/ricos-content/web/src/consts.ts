@@ -69,6 +69,7 @@ export const POLL_TYPE = 'wix-draft-plugin-poll';
 export const TABLE_TYPE = 'table';
 export const ANCHOR_TYPE = 'ANCHOR';
 export const PREVIEW = 'PREVIEW';
+export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
 
 // ricos plugin types
 export const RICOS_ACCORDION_TYPE = 'ricos_accordion';
