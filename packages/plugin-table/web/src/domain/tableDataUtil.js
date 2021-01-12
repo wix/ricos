@@ -291,16 +291,16 @@ export class TableDataUtil {
     const style = {};
     const range = getRange(selection);
     if (!range.find(({ i, j }) => i === row && j === col - 1)) {
-      style.borderLeft = this.getCellStyle(row, col)?.borderLeft;
+      style.borderLeft = this.getCell(row, col)?.border?.left;
     }
     if (!range.find(({ i, j }) => i === row && j === col + 1)) {
-      style.borderRight = this.getCellStyle(row, col)?.borderRight;
+      style.borderRight = this.getCell(row, col)?.border?.right;
     }
     if (!range.find(({ i, j }) => i === row - 1 && j === col)) {
-      style.borderTop = this.getCellStyle(row, col)?.borderTop;
+      style.borderTop = this.getCell(row, col)?.border?.top;
     }
     if (!range.find(({ i, j }) => i === row + 1 && j === col)) {
-      style.borderBottom = this.getCellStyle(row, col)?.borderBottom;
+      style.borderBottom = this.getCell(row, col)?.border?.bottom;
     }
     const borderStyles = Object.values(style);
     const isBorderConsistent = borderStyles.every(borderStyle => borderStyle === borderStyles[0]);

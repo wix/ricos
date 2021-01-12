@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import DragAndDropSection from './DragAndDropSection';
 import Resizer from './Resizer';
-import styles from '../../statics/styles/cell.scss';
+import styles from '../../statics/styles/columns.scss';
 import { CELL_MANUAL_MIN_WIDTH } from '../consts';
 import classNames from 'classnames';
 export default class Columns extends PureComponent {
@@ -24,7 +24,7 @@ export default class Columns extends PureComponent {
           <td
             key={`column${i}`}
             className={classNames(
-              styles.columns,
+              styles.container,
               selectAll && styles.selectAll,
               activeDrag?.includes(i) && styles.selected
             )}

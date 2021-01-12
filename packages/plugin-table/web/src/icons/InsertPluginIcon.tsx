@@ -10,7 +10,7 @@ const InsertPluginIcon = props => (
           <g
             id="table_icon_plugin"
             transform="translate(3.000000, 3.000000)"
-            fill="#000000"
+            fill="currentColor"
             fillRule="nonzero"
           >
             <g id="Group-7">
