@@ -740,6 +740,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       textAlignment,
       handleReturn,
       readOnly,
+      onBackspace,
+      innerRCERenderedIn,
     } = this.props;
     const { editorState } = this.state;
     const { theme } = this.contextualData;
@@ -762,7 +764,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders,
           getBlockType(editorState),
-          this.props.onBackspace
+          onBackspace,
+          innerRCERenderedIn
         )}
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}

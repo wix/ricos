@@ -49,6 +49,6 @@ export const COLORS = Object.freeze({
   color10: '#012055',
 });
 
-export const CELL_MANUAL_MIN_WIDTH = 120;
+export const CELL_MANUAL_MIN_WIDTH = 65;
 export const CELL_AUTO_MIN_WIDTH = 120;
 export const ROW_DEFAULT_HEIGHT = 47;

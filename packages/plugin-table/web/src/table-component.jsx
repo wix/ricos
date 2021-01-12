@@ -8,7 +8,7 @@ import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
 import { getRange } from './domain/tableDataUtil';
 import { createEmptyCellEditor, handleCellClipboardEvent } from './tableUtil';
-import { AddNewSection, Columns, Rows } from './components';
+import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { isEmpty, isNumber } from 'lodash';
@@ -240,7 +240,6 @@ class TableComponent extends React.Component {
     this.table.reorderColumns(dragsIndex, this.colDropIndex);
     this.setState({ highlightColResizer: false });
     this.resetDrag();
-    this.dropLeft = null;
     this.colDropIndex = null;
   };
 
@@ -298,26 +297,28 @@ class TableComponent extends React.Component {
 
   onColDrag = (e, dragsIndex) => {
     e.movementX > 0 ? (this.movementX = 'right') : e.movementX < 0 && (this.movementX = 'left');
-    const colsRefs = this.rowsRefs[0]?.children || [];
-    const colsPositions = Array.from(colsRefs).map(col =>
+    const colsRefs = Array.from(this.rowsRefs[0]?.children || []);
+    const colsPositions = colsRefs.map(col =>
       this.movementX === 'right' ? col.offsetLeft + col.offsetWidth : col.offsetLeft
     );
 
     const dragPreviewWidth = this.colsWidth
       .slice(dragsIndex.start, dragsIndex.end + 1)
       .reduce((acc, curr) => acc + curr);
-    this.dropLeft = e.pageX - dragPreviewWidth;
+    const lastCol = colsRefs[colsRefs.length - 1];
+    const maxLeft = lastCol.offsetLeft + lastCol.offsetWidth + 20 - dragPreviewWidth;
+    const dropLeft = Math.min(e.pageX - dragPreviewWidth, maxLeft);
     colsPositions.forEach((pos, index) => {
       if (
-        (this.movementX === 'right' && this.dropLeft + dragPreviewWidth > pos - 30) ||
-        (this.movementX === 'left' && this.dropLeft > pos + 30)
+        (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
+        (this.movementX === 'left' && this.dropLeft > pos + 15)
       ) {
         this.colDropIndex = index + 1;
       }
     });
     this.highlightResizer(this.colDropIndex - 1, true);
 
-    this.dragPreview.current.style.left = `${this.dropLeft}px`;
+    this.dragPreview.current.style.left = `${dropLeft}px`;
     this.dragPreview.current.style.top = '0';
     this.dragPreview.current.style.visibility = 'visible';
     this.dragPreview.current.style.height = `${this.tableRef.current.offsetHeight}px`;
@@ -366,28 +367,17 @@ class TableComponent extends React.Component {
 
   setEditorRef = (ref, i, j) => (this.innerEditorsRefs[`${i}-${j}`] = ref);
 
-  getColumns = range => (
-    <Columns
-      colDragProps={this.colDragProps}
-      colNum={this.table.getColNum()}
-      onResize={this.onResizeCol}
-      onResizeStart={this.setSelected}
-      highlightResizer={this.state.highlightColResizer}
-      activeDrag={
-        this.state.isEditingActive ? [] : this.table.getSelectedCols(range)?.map(i => parseInt(i))
-      }
-      selectAll={this.state.isAllCellsSelected}
-      size={this.tableRef.current?.offsetHeight}
-      table={this.table}
-      tableWidth={this.tableRef.current?.offsetWidth}
-    />
-  );
-
   onFocus = e => e.stopPropagation();
 
   render() {
     const { componentData, theme, t, isMobile, settings, blockProps } = this.props;
-    const { selected, isEditingActive, disableSelectedStyle } = this.state;
+    const {
+      selected,
+      isEditingActive,
+      disableSelectedStyle,
+      highlightColResizer,
+      isAllCellsSelected,
+    } = this.state;
     this.table.updateComponentData(componentData);
     this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
@@ -437,7 +427,7 @@ class TableComponent extends React.Component {
                 ? []
                 : this.table.getSelectedRows(range)?.map(i => parseInt(i))
             }
-            isAllCellsSelected={this.state.isAllCellsSelected}
+            isAllCellsSelected={isAllCellsSelected}
             size={this.tableRef.current?.offsetWidth}
             onResize={this.onResizeRow}
             highlightResizer={this.state.highlightRowResizer}
@@ -465,8 +455,6 @@ class TableComponent extends React.Component {
             setEditorRef={this.setEditorRef}
             toolbarRef={this.toolbarRef}
             setEditingActive={this.setEditingActive}
-            updateCellContent={this.table.updateCellContent}
-            columns={isEditMode && this.getColumns(range)}
             selected={selected}
             tableWidth={this.tableRef.current?.offsetWidth}
             isMobile={isMobile}
@@ -478,14 +466,25 @@ class TableComponent extends React.Component {
             }
             t={t}
             handleCellClipboardEvent={handleCellClipboardEvent}
+            colDragProps={this.colDragProps}
+            onResize={this.onResizeCol}
+            onResizeStart={this.setSelected}
+            highlightResizer={highlightColResizer}
+            selectAll={isAllCellsSelected}
+            tableHeight={this.tableRef.current?.offsetHeight}
+            isEditingActive={this.state.isEditingActive}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
         {!isMobile && (
-          <AddNewSection dataHook={'addCol'} className={styles.addCol} onClick={this.addLastCol} />
+          <div className={styles.addCol}>
+            <AddNewSection dataHook={'addCol'} onClick={this.addLastCol} />
+          </div>
         )}
         {!isMobile && (
-          <AddNewSection dataHook={'addRow'} className={styles.addRow} onClick={this.addLastRow} />
+          <div className={styles.addRow}>
+            <AddNewSection dataHook={'addRow'} onClick={this.addLastRow} />
+          </div>
         )}
       </div>
     );

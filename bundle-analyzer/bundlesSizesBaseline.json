@@ -1,6 +1,6 @@
 {
   "wix-rich-content-plugin-accordion": 164,
-  "wix-rich-content-plugin-button": 179,
+  "wix-rich-content-plugin-button": 182,
   "wix-rich-content-plugin-code-block": 172,
   "wix-rich-content-plugin-divider": 161,
   "wix-rich-content-plugin-emoji": 155,
@@ -21,7 +21,7 @@
   "wix-rich-content-plugin-social-polls": 313,
   "wix-rich-content-plugin-sound-cloud": 244,
   "wix-rich-content-plugin-spoiler": 182,
-  "wix-rich-content-plugin-table": 210,
+  "wix-rich-content-plugin-table": 220,
   "wix-rich-content-plugin-text-color": 159,
   "wix-rich-content-plugin-undo-redo": 154,
   "wix-rich-content-plugin-vertical-embed": 157,
@@ -32,10 +32,10 @@
   "ricos-viewer": 168,
   "ricos-viewer-no-modal": 168,
   "ricos-viewer-with-plugins": 197,
-  "rce": 687,
-  "rce-with-plugins": 856,
-  "ricos-editor": 713,
-  "ricos-editor-no-modal": 713,
-  "ricos-editor-with-plugins": 882,
+  "rce": 689,
+  "rce-with-plugins": 859,
+  "ricos-editor": 717,
+  "ricos-editor-no-modal": 717,
+  "ricos-editor-with-plugins": 887,
   "ricos-common": 16
 }
