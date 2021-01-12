@@ -92,6 +92,21 @@ export default class Cell extends Component {
     });
   };
 
+  getEditorWrapperStyle = (additionalStyles, isEditing) => {
+    const shouldSetEditStyle = !this.props.isMobile && isEditing;
+    const style = shouldSetEditStyle ? { minHeight: this.tdHeight, ...additionalStyles } : {};
+    const { verticalAlign } = additionalStyles;
+    if (shouldSetEditStyle && verticalAlign) {
+      style.display = 'flex';
+      if (verticalAlign === 'middle') {
+        style.alignItems = 'center';
+      } else if (verticalAlign === 'bottom') {
+        style.alignItems = 'flex-end';
+      }
+    }
+    return style;
+  };
+
   render() {
     const {
       row,
@@ -131,8 +146,7 @@ export default class Cell extends Component {
     } else if (isEditing) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
-    const editorWrapperStyle =
-      !isMobile && isEditing ? { minHeight: this.tdHeight, ...additionalStyles } : {};
+    const editorWrapperStyle = this.getEditorWrapperStyle(additionalStyles, isEditing);
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
