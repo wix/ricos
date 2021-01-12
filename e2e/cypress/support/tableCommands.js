@@ -78,25 +78,25 @@ Cypress.Commands.add('clickOnTableToolbarContextMenuDeleteRow', () => {
 Cypress.Commands.add('clickOnTableToolbarContextMenuInsertRight', () => {
   cy.clickOnTableToolbarContextMenu()
     .get(`[data-hook*=${TABLE_PLUGIN.INSERT_RIGHT}]`)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('clickOnTableToolbarContextMenuInsertLeft', () => {
   cy.clickOnTableToolbarContextMenu()
     .get(`[data-hook*=${TABLE_PLUGIN.INSERT_LEFT}]`)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('clickOnTableToolbarContextMenuInsertAbove', () => {
   cy.clickOnTableToolbarContextMenu()
     .get(`[data-hook*=${TABLE_PLUGIN.INSERT_ABOVE}]`)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('clickOnTableToolbarContextMenuInsertBelow', () => {
   cy.clickOnTableToolbarContextMenu()
     .get(`[data-hook*=${TABLE_PLUGIN.INSERT_BELOW}]`)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('clickOnTableToolbarContextMenuMerge', () => {
@@ -142,7 +142,7 @@ Cypress.Commands.add('clickOnRowDrag', index => {
 });
 
 Cypress.Commands.add('clickOnColDrag', index => {
-  cy.get(`[data-hook*=colDrag-${index}]`).click();
+  cy.get(`[data-hook*=colDrag-${index}]`).click({ force: true });
 });
 
 Cypress.Commands.add('clickOnAddRow', () => {
@@ -150,5 +150,5 @@ Cypress.Commands.add('clickOnAddRow', () => {
 });
 
 Cypress.Commands.add('clickOnAddCol', () => {
-  cy.get(`[data-hook*=addCol]`).click();
+  cy.get(`[data-hook*=addCol]`).click({ force: true });
 });

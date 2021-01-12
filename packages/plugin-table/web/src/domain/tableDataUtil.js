@@ -102,7 +102,7 @@ export class TableDataUtil {
     return colMinWidth;
   };
 
-  getCellWidthAsPixel = (tableWidth, i, colsMinWidth) => {
+  getCellWidthAsPixel = (tableWidth, i, colsMinWidth = []) => {
     const colsWidthSum = this.getColsWidth().reduce((acc, val) => acc + val, 0);
     let smallestCellIndex, smallestCellWidth, currCellWidth;
     this.getColsWidth().forEach((width, index) => {

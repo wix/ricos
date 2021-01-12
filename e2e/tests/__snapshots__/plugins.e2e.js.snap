@@ -7326,6 +7326,10 @@ exports[`plugins > table > should open table modal and create table by the setti
       "data": {
         "config": {
           "alignment": "center",
+          "colsMinWidth": [
+            120,
+            120
+          ],
           "colsWidth": [
             10,
             10
@@ -7802,7 +7806,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
             10,
             10,
             10,
-            10,
             10
           ],
           "rows": {
@@ -7871,22 +7874,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
                     ],
                     "entityMap": {}
                   }
-                },
-                "4": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
                 }
               }
             },
@@ -7941,22 +7928,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
                   }
                 },
                 "3": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "4": {
                   "content": {
                     "blocks": [
                       {
@@ -8039,22 +8010,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
                     ],
                     "entityMap": {}
                   }
-                },
-                "4": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
                 }
               }
             },
@@ -8123,22 +8078,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
                     ],
                     "entityMap": {}
                   }
-                },
-                "4": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
                 }
               }
             },
@@ -8193,22 +8132,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
                   }
                 },
                 "3": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "4": {
                   "content": {
                     "blocks": [
                       {

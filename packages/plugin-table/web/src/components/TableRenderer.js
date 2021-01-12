@@ -55,7 +55,7 @@ export default class TableRenderer extends PureComponent {
                 width: isMobile
                   ? CELL_AUTO_MIN_WIDTH
                   : table.getCellWidthAsPixel(tableRef?.offsetWidth, i, colsMinWidth),
-                minWidth: colsMinWidth[i] || CELL_AUTO_MIN_WIDTH,
+                minWidth: colsMinWidth?.[i] || CELL_AUTO_MIN_WIDTH,
               }}
             />
           ))}
