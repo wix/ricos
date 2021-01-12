@@ -33,8 +33,6 @@ class ImageSettings extends Component {
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
-    // this.imageOpensInExpandModeLabel = t('ImageSettings_Image_OpensInExpandMode_Label');
-    // this.imageCanBeDownloadedLabel = t('ImageSettings_Image_CanBeDownloaded_Label');
   }
 
   propsToState(props) {
