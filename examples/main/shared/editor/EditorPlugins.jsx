@@ -53,6 +53,8 @@ import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
 import { createTablePlugin, TABLE_TYPE } from 'wix-rich-content-plugin-table';
 import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
+import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
+import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-plugin-commons/dist/styles.min.css';
@@ -82,6 +84,7 @@ import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
@@ -124,6 +127,7 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
+  createUnsupportedBlocksPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -190,6 +194,7 @@ export const editorPluginsMap = {
   spoilerPreset: editorPluginsSpoilerPreset,
   textPlugins: textPlugins,
   all: editorPlugins,
+  unsupportedBlocks: createUnsupportedBlocksPlugin,
 };
 
 const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
@@ -404,6 +409,7 @@ const config = {
       createDividerPlugin,
       createEmojiPlugin,
       createMapPlugin,
+      createUnsupportedBlocksPlugin,
     ],
   },
   [TABLE_TYPE]: {
@@ -420,6 +426,7 @@ const config = {
       createFileUploadPlugin,
       createDividerPlugin,
       createCodeBlockPlugin,
+      createUnsupportedBlocksPlugin,
     ],
   },
   [HASHTAG_TYPE]: {
@@ -489,6 +496,7 @@ const config = {
       createGiphyPlugin,
       createFileUploadPlugin,
       createEmojiPlugin,
+      createUnsupportedBlocksPlugin,
     ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
@@ -537,6 +545,7 @@ const config = {
     //   },
     // },
   },
+  [UNSUPPORTED_BLOCKS_TYPE]: {},
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],

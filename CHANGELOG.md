@@ -11,6 +11,9 @@
 
 ## [Unreleased]
 
+### :rocket: New Feature
+- `unsupportedBlocksPlugin`
+  - [#1939](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when some plugins aren't supported
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
