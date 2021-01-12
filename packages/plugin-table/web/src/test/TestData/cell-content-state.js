@@ -5,6 +5,7 @@ export const getMockComponentData = () => ({
   config: {
     alignment: 'center',
     colsWidth: [10, 10],
+    colsMinWidth: [120, 120],
     rowsHeight: [47, 47],
     size: 'content',
     rows: {

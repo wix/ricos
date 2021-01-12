@@ -23,6 +23,21 @@
 </details>
 <hr/>
 
+## 8.14.2 (Jan 12, 2021)
+### :bug: Bug Fix
+- `table`
+  - [#1972](https://github.com/wix/ricos/commit/1972) fix table responsive and table resize
+- `table`
+  - [#1980](https://github.com/wix/ricos/commit/1980) fix table cell content align on edit
+- `table`
+  - [#1949](https://github.com/wix/ricos/commit/1949) fix table theme wiring
+- `table`
+  - [#1957](https://github.com/wix/ricos/commit/1957) fix table keyboard behavior, ui fixes, disable drag preview scroll
+- `table`
+  - [#1975](https://github.com/wix/ricos/commit/1975) add the option to reorder row to first place
+- `table`
+  - [#1974](https://github.com/wix/ricos/commit/1974) fix rows and columns selection on edit cell
+
 ## 8.14.1 (Jan 11, 2021)
 ### :bug: Bug Fix
 - `editor`

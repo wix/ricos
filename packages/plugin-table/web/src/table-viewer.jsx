@@ -32,10 +32,18 @@ class TableViewer extends Component {
     return (
       <TableRenderer
         {...props}
-        columns={this.props.columns}
         table={this.table}
         tableRef={this.tableViewerRef}
         isMobile={this.props.isMobile}
+        colDragProps={this.props.colDragProps}
+        onResize={this.props.onResize}
+        onResizeStart={this.props.onResizeStart}
+        highlightResizer={this.props.highlightResizer}
+        selectAll={this.props.selectAll}
+        tableHeight={this.props.tableHeight}
+        selected={this.props.selected}
+        isEditMode={this.props.isEditMode}
+        isEditingActive={this.props.isEditingActive}
       />
     );
   };
@@ -50,14 +58,15 @@ class TableViewer extends Component {
 
   setCellRef = ref => (this.cellRef = ref);
 
-  setTableViewerRef = ref => (this.tableViewerRef = ref);
+  setTableViewerRef = ref => {
+    this.tableViewerRef = ref;
+  };
 
   cellRenderer = props => {
     const {
       setEditorRef,
       toolbarRef,
       setEditingActive,
-      updateCellContent,
       tableWidth,
       isMobile,
       selected = {},
@@ -74,7 +83,6 @@ class TableViewer extends Component {
         toolbarRef={toolbarRef}
         selectedCells={selected}
         setEditingActive={setEditingActive}
-        updateCellContent={updateCellContent}
         tableWidth={tableWidth}
         isMobile={isMobile}
         disableSelectedStyle={disableSelectedStyle}
@@ -133,6 +141,13 @@ TableViewer.propTypes = {
   t: PropTypes.func,
   disableSelectedStyle: PropTypes.bool,
   handleCellClipboardEvent: PropTypes.func,
+  colDragProps: PropTypes.object,
+  onResize: PropTypes.func,
+  onResizeStart: PropTypes.func,
+  highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  selectAll: PropTypes.bool,
+  tableHeight: PropTypes.number,
+  isEditingActive: PropTypes.bool,
 };
 
 export default TableViewer;
