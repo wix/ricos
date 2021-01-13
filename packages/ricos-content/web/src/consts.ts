@@ -10,7 +10,7 @@ export const HEADER_BLOCK = Object.freeze({
 export const DEFAULT_TITLE_HEADINGS = ['h2', 'h3'];
 
 export const EditorEvents = {
-  PUBLISH: 'rce:publish',
+  PUBLISH: 'plugin:publish',
   RICOS_PUBLISH: 'ricos:publish',
 };
 
