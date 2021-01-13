@@ -10,6 +10,10 @@
 > - :nail_care: Polish
 
 ## [Unreleased]
+### :book: Documentation
+- `unsupportedBlocks`
+  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
+  
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
