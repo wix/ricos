@@ -15,10 +15,9 @@ export const paddingDiff = col => {
   return parseInt(padLeft) + parseInt(padRight);
 };
 
-export const getRefWidthAsNumber = ref => {
-  const widthStr = ref.style.width;
-  return parseInt(widthStr.substring(0, widthStr.length - 2));
-};
+export const getRefWidthAsNumber = ref => getSizeStringAsNumber(ref.style.width);
+
+export const getSizeStringAsNumber = str => parseInt(str.substring(0, str.length - 2));
 
 //SELECTION
 export const range = (start, end) => {
@@ -78,6 +77,8 @@ export class TableDataUtil {
 
   getRowHeight = i => this.getRowsHeight()[i];
 
+  getColsMinWidth = () => this.componentData.config.colsMinWidth;
+
   // get min width of column (in case we want min width for column with specific atomic plugins)
   getColMinWidth = j => {
     let colMinWidth = CELL_MANUAL_MIN_WIDTH;
@@ -101,7 +102,7 @@ export class TableDataUtil {
     return colMinWidth;
   };
 
-  getCellWidthAsPixel = (tableWidth, i) => {
+  getCellWidthAsPixel = (tableWidth, i, colsMinWidth = []) => {
     const colsWidthSum = this.getColsWidth().reduce((acc, val) => acc + val, 0);
     let smallestCellIndex, smallestCellWidth, currCellWidth;
     this.getColsWidth().forEach((width, index) => {
@@ -112,14 +113,17 @@ export class TableDataUtil {
         cellWidth < CELL_AUTO_MIN_WIDTH &&
         (!smallestCellWidth || smallestCellWidth > cellWidth)
       ) {
-        smallestCellWidth = cellWidth;
+        smallestCellWidth = Math.max(colsMinWidth[index], cellWidth);
         smallestCellIndex = index;
       }
     });
     if (smallestCellWidth) {
-      return CELL_AUTO_MIN_WIDTH * (this.getColWidth(i) / this.getColWidth(smallestCellIndex));
+      return (
+        Math.min(CELL_AUTO_MIN_WIDTH, smallestCellWidth) *
+        (this.getColWidth(i) / this.getColWidth(smallestCellIndex))
+      );
     }
-    return Math.max(currCellWidth, CELL_AUTO_MIN_WIDTH);
+    return Math.max(currCellWidth, colsMinWidth[i]);
   };
 
   getCellWidthAsRatio = (tableWidth, totalColsWidth, cellWidth) =>

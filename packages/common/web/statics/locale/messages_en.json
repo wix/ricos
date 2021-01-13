@@ -555,5 +555,7 @@
 	"AccordionPlugin_ExpandButton_AriaLabel": "Item is expanded",
 	"AccordionPlugin_CollapseButton_AriaLabel": "Item is collapsed",
 	"Embed_Vertical_Units_Hour": "{{hours}}h",
-	"Embed_Vertical_Units_Minute": "{{minutes}}min"
+	"Embed_Vertical_Units_Minute": "{{minutes}}min",
+	"UnsupportedPlugin_default_name": "This plugin",
+	"UnsupportedPlugin_message": "can be edited only on the web"
 }
