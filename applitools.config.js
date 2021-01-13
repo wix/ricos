@@ -18,4 +18,5 @@ module.exports = {
   batchName: `${process.env.APPLITOOLS_BATCH_ID ? '' : 'LOCAL - '}${getBranchName()}`,
   parentBranchName: 'wix/ricos/master',
   branchName: `wix/ricos/${getBranchName()}`,
+  showLogs: true,
 };
