@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "lib": ["dom", "ESNext"],
-    "rootDirs": [".", "../../e2e/**/*.json"]
+    "rootDirs": [".", "../../e2e/**/*.json", "../main"]
   },
   "files": ["../../external-types.d.ts"],
   "include": ["src", "stories"]
