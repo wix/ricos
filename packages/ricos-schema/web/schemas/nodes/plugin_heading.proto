@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "../common.proto";
+
+message RicosHeading {
+    int32 level = 1 [required = true];
+    Common.TextAlignment textAlignment = 2;
+    Common.DynamicStyles dynamicStyles = 3;
+    int32 depth = 4;
+}
