@@ -10,6 +10,10 @@
 > - :nail_care: Polish
 
 ## [Unreleased]
+### :house: Internal
+- `unsupported-blocks`
+  - [#1987](https://github.com/wix/ricos/pull/1987) unsupported-blocks test
+
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
