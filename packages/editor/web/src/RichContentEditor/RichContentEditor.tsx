@@ -6,6 +6,8 @@ import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
+import createEditorCommands from './EditorCommands';
+import createEditorState from './EditorState';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -180,6 +182,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   customStyleFn: DraftEditorProps['customStyleFn'];
   toolbars;
   innerRCECustomStyleFn;
+  EditorCommands: ReturnType<typeof createEditorCommands>;
+  EditorState: ReturnType<typeof createEditorState>;
 
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
@@ -229,6 +233,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.initEditorCommands();
+    this.initEditorState();
+    // (window as any).editor = this;
   }
 
   componentDidUpdate() {
@@ -423,6 +430,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
     this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
+
+  initEditorCommands = () => {
+    this.EditorCommands = createEditorCommands(this.getEditorState, this.updateEditorState);
+  };
+
+  initEditorState = () => {
+    this.EditorState = createEditorState(this.getEditorState);
+  };
 
   initEditorToolbars(
     pluginButtons: PluginButton[],

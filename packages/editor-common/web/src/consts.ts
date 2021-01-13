@@ -1,4 +1,13 @@
 export const COMMANDS = Object.freeze({
+  BOLD: 'BOLD',
+  UNDERLINE: 'UNDERLINE',
+  ITALIC: 'ITALIC',
+  HEADER_ONE: 'header-one',
+  HEADER_TWO: 'header-two',
+  HEADER_THREE: 'header-three',
+  HEADER_FOUR: 'header-four',
+  HEADER_FIVE: 'header-five',
+  HEADER_SIX: 'header-six',
   TITLE: 'header-two',
   SUBTITLE: 'header-three',
   ALIGN_LEFT: 'left',
