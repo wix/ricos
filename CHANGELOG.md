@@ -10,9 +10,9 @@
 > - :nail_care: Polish
 
 ## [Unreleased]
-
+### :book: Documentation
 - `unsupportedBlocks`
-  - [#1958](https://github.com/wix/ricos/pull/1985) unsupported-blocks-plugin documentation
+  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
   
 <details>
   <summary>
