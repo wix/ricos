@@ -191,6 +191,7 @@ export interface EditorPluginConfig {
     };
   };
   getIsVisiblePromise?: (...args) => Promise<boolean>;
+  innerRCEPlugins?: CreatePluginFunction[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
