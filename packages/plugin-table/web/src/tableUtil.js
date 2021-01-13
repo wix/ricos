@@ -1,6 +1,6 @@
 import { EditorState } from 'wix-rich-content-editor';
 import { TABLE_TYPE as type } from './types';
-import { ROW_DEFAULT_HEIGHT } from './consts';
+import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH } from './consts';
 import { DEFAULTS } from './defaults';
 import {
   isCursorAtStartOfContent,
@@ -31,6 +31,7 @@ export const getDefaultsSettings = (rowNum = 4, colNum = 4) =>
       ...DEFAULTS.config,
       colsWidth: [...Array(colNum).fill(10)],
       rowsHeight: [...Array(rowNum).fill(ROW_DEFAULT_HEIGHT)],
+      colsMinWidth: [...Array(colNum).fill(CELL_AUTO_MIN_WIDTH)],
       rows: createEmptyRows(rowNum, colNum),
     },
   });

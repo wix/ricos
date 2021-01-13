@@ -8,7 +8,7 @@ const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_
 
 const isUndoRedo = command => command === COMMANDS.UNDO || command === COMMANDS.REDO;
 
-export default (updateEditorState, customHandlers, blockType, onBackspace) => (
+export default (updateEditorState, customHandlers, blockType, onBackspace, innerRCERenderedIn) => (
   command,
   editorState
 ) => {
@@ -16,7 +16,13 @@ export default (updateEditorState, customHandlers, blockType, onBackspace) => (
 
   if (customHandlers[command]) {
     if (isTab(command)) {
-      newState = handleTabCommand(editorState, blockType, customHandlers, command);
+      newState = handleTabCommand(
+        editorState,
+        blockType,
+        customHandlers,
+        command,
+        innerRCERenderedIn
+      );
     } else if (isUndoRedo(command)) {
       return customHandlers[command](editorState);
     } else {

@@ -30,6 +30,7 @@ import {
 } from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../../../examples/main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import { pluginUnsupportedBlocks } from 'wix-rich-content-plugin-unsupported-blocks';
 
 import { createPresets } from './utils';
 import {
@@ -135,6 +136,7 @@ const createPlugins = externalConfigs => {
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
         pluginImage().createPlugin,
+        pluginUnsupportedBlocks().createPlugin,
       ],
     }),
     table: pluginTable({
@@ -145,9 +147,11 @@ const createPlugins = externalConfigs => {
         pluginLineSpacing().createPlugin,
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
+        pluginUnsupportedBlocks().createPlugin,
       ],
     }),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
+    unsupportedBlocks: pluginUnsupportedBlocks(),
   };
 };
 

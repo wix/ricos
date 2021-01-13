@@ -8,6 +8,7 @@ import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 import { ToolbarType } from 'wix-rich-content-common';
 
+const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
     if (
@@ -63,8 +64,8 @@ export default class Cell extends Component {
     }
   };
 
-  handleClipboardEvent = e => {
-    const { editing, row, col, updateCellContent } = this.props;
+  onKeydown = e => {
+    const { editing, row, col, table, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -74,7 +75,11 @@ export default class Cell extends Component {
         this.editorRef.selectAllContent(true);
       }
       if (e.key === 'Escape') {
-        updateCellContent(row, col, this.contentBeforeEdit);
+        table.updateCellContent(row, col, this.contentBeforeEdit);
+      }
+      const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
+      if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
+        onKeyDown(e);
       }
     }
   };
@@ -85,6 +90,21 @@ export default class Cell extends Component {
         buttonsProps.type = 'modal';
       }
     });
+  };
+
+  getEditorWrapperStyle = (additionalStyles, isEditing) => {
+    const shouldSetEditStyle = !this.props.isMobile && isEditing;
+    const style = shouldSetEditStyle ? { minHeight: this.tdHeight, ...additionalStyles } : {};
+    const { verticalAlign } = additionalStyles;
+    if (shouldSetEditStyle && verticalAlign) {
+      style.display = 'flex';
+      if (verticalAlign === 'middle') {
+        style.alignItems = 'center';
+      } else if (verticalAlign === 'bottom') {
+        style.alignItems = 'flex-end';
+      }
+    }
+    return style;
   };
 
   render() {
@@ -106,6 +126,10 @@ export default class Cell extends Component {
       handleCellClipboardEvent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
+    if (additionalStyles.backgroundColor === 'transparent') {
+      // eslint-disable-next-line fp/no-delete
+      delete additionalStyles.backgroundColor;
+    }
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
@@ -122,8 +146,7 @@ export default class Cell extends Component {
     } else if (isEditing) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
-    const editorWrapperStyle =
-      !isMobile && isEditing ? { minHeight: this.tdHeight, ...additionalStyles } : {};
+    const editorWrapperStyle = this.getEditorWrapperStyle(additionalStyles, isEditing);
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -132,7 +155,7 @@ export default class Cell extends Component {
         className={classNames(
           styles.cell,
           shouldShowSelectedStyle && styles.selected,
-          range?.length === 1 && styles.multiSelection,
+          range?.length === 1 && styles.singleSelection,
           isContainedInHeader && styles.header
         )}
         onMouseDown={onMouseDown}
@@ -147,7 +170,7 @@ export default class Cell extends Component {
         }}
         data-row={row}
         data-col={col}
-        onKeyDown={this.handleClipboardEvent}
+        onKeyDown={this.onKeydown}
       >
         <div
           className={classNames(!isMobile && isEditing && styles.editing)}
@@ -183,7 +206,7 @@ class Editor extends Component {
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
-  handleClipboardEvent = e => {
+  onKeydown = e => {
     if (this.props.editing) {
       const editorState = this.editor.ref.getEditorState();
       this.props.handleCellClipboardEvent(e, editorState);
@@ -201,7 +224,7 @@ class Editor extends Component {
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         className={classNames(styles.editor, editing ? styles.edit : styles.view)}
-        onKeyDown={this.handleClipboardEvent}
+        onKeyDown={this.onKeydown}
       >
         {React.cloneElement(children, { ref: this.setEditorRef, editing })}
       </div>
@@ -236,9 +259,9 @@ Cell.propTypes = {
   toolbarRef: PropTypes.any,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
-  updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   handleCellClipboardEvent: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
