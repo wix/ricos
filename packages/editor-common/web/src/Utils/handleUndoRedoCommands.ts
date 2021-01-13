@@ -59,6 +59,7 @@ function applyActionForGalleryItems(currentItems, newItems) {
 // checks if an accordion pair changed and if so returns the changed pair index and an indictor (title or content)
 function getChangedAccordionPairIndex(currentPairs, newPairs) {
   let item;
+  let didChange = false;
   const changedPairIndex = newPairs.findIndex((newPair, index) => {
     const { key: newKey, title: newTitle, content: newContent } = newPair;
     const currentPair = currentPairs[index];
@@ -75,7 +76,10 @@ function getChangedAccordionPairIndex(currentPairs, newPairs) {
     }
     return false;
   });
-  return { changedPairIndex, item };
+  if (changedPairIndex > -1) {
+    didChange = true;
+  }
+  return { didChange, changedPairIndex, item };
 }
 
 // creates a map of blockKey to the block's data and entityData for easier access
@@ -135,8 +139,11 @@ function handleAccordionEntity(currentData, newData) {
   }
 
   // check if a pair changed and fix if necessary.
-  const { changedPairIndex, item } = getChangedAccordionPairIndex(currentPairs, newPairs);
-  if (changedPairIndex > -1) {
+  const { didChange, changedPairIndex, item } = getChangedAccordionPairIndex(
+    currentPairs,
+    newPairs
+  );
+  if (didChange) {
     if (item) {
       const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
         newPairs[changedPairIndex][item],
@@ -160,6 +167,7 @@ function handleAccordionEntity(currentData, newData) {
 // check table row's columns for a changed column.
 function checkColumns(newRow, currentRow) {
   let isStyleChange = false;
+  let didColumnChange = false;
   const columnIndex = Object.keys(newRow).find(columnKey => {
     const { content: newContent, ...newStyles } = newRow[columnKey];
     const { content: currentContent, ...currentStyles } = currentRow[columnKey];
@@ -171,28 +179,36 @@ function checkColumns(newRow, currentRow) {
     }
     return false;
   });
-  return { columnIndex, isStyleChange };
+  if (columnIndex || isStyleChange) {
+    didColumnChange = true;
+  }
+  return { didColumnChange, columnIndex, isStyleChange };
 }
 
 // looks for a changed cell in the new content, if there is returns it's indices.
 function getChangedTableCellIndex(newRows, currentRows) {
-  let column;
+  const changedCell = { didCellChange: false, isStyleChange: false, row: '', column: '' };
   const row = Object.keys(newRows).find(rowKey => {
     const currentRow = currentRows[rowKey].columns;
     const newRow = newRows[rowKey].columns;
     if (!currentRow || Object.keys(newRow).length !== Object.keys(currentRow).length) {
       return true;
     }
-    const { columnIndex, isStyleChange } = checkColumns(newRow, currentRow);
-    if (isStyleChange) {
-      return true;
-    } else if (columnIndex) {
-      column = columnIndex;
+    const { didColumnChange, columnIndex, isStyleChange } = checkColumns(newRow, currentRow);
+    if (didColumnChange) {
+      if (columnIndex) {
+        changedCell.column = columnIndex;
+      }
+      changedCell.isStyleChange = isStyleChange;
+      changedCell.didCellChange = true;
       return true;
     }
     return false;
   });
-  return { row, column };
+  if (row) {
+    changedCell.row = row;
+  }
+  return changedCell;
 }
 
 function handleTableEntity(currentData, newData) {
@@ -207,9 +223,12 @@ function handleTableEntity(currentData, newData) {
     return { shouldUndoAgain: false };
   }
 
-  const { row, column } = getChangedTableCellIndex(newRows, currentRows);
-  if (row) {
-    if (column) {
+  const { isStyleChange, didCellChange, row, column } = getChangedTableCellIndex(
+    newRows,
+    currentRows
+  );
+  if (didCellChange) {
+    if (!isStyleChange) {
       const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
         newRows[row].columns[column].content,
         currentRows[row].columns[column].content
