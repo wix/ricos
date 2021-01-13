@@ -259,7 +259,7 @@ class TableComponent extends React.Component {
 
   addRow = i => {
     this.table.addRow(i);
-    this.selectRows({ start: i, end: i });
+    setTimeout(() => this.selectRows({ start: i, end: i }), 0);
   };
 
   merge = () => {
@@ -278,7 +278,7 @@ class TableComponent extends React.Component {
 
   addCol = i => {
     this.table.addColumn(i);
-    this.selectCols({ start: i, end: i });
+    setTimeout(() => this.selectCols({ start: i, end: i }), 0);
   };
 
   deleteRow = deleteIndexes => {
