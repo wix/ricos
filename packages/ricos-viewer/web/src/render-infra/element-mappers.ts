@@ -1,13 +1,7 @@
 import { RicosNode, IRicosDecoration } from 'ricos-schema';
 import { RenderVisitor } from './RenderVisitor';
 
-export type ElementMapper = ({
-  innerHtml,
-  node,
-}: {
-  innerHtml?: string;
-  node?: RicosNode;
-}) => string;
+export type ElementMapper = ({ innerHtml, node }: { innerHtml: string; node: RicosNode }) => string;
 type DecorationMapper = ({
   innerHtml,
   decoration,
@@ -40,7 +34,8 @@ export const elementMappers: Record<RicosNode['type'], ElementMapper> = {
     );
     return innerHtml || '';
   },
-  heading: ({ innerHtml }) => `<h1>${innerHtml}</h1>`,
+  heading: ({ innerHtml, node: { ricosHeading } }) =>
+    `<h${ricosHeading?.level || '2'}>${innerHtml}</h${ricosHeading?.level || '2'}>`,
   paragraph: ({ innerHtml }) => `<p>${innerHtml}</p>`,
   blockquote: ({ innerHtml }) =>
     `<div style="border-left: 5px solid blue; padding-left:20px; margin-left: 20px;">${innerHtml}</div>`,
