@@ -10,6 +10,10 @@
 > - :nail_care: Polish
 
 ## [Unreleased]
+
+- `unsupportedBlocks`
+  - [#1958](https://github.com/wix/ricos/pull/1985) unsupported-blocks-plugin documentation
+  
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
