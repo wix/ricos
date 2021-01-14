@@ -21,6 +21,7 @@ class ImageSettings extends Component {
     this.state = {
       ...this.propsToState(props),
       isExpandable: !componentData.config.disableExpand,
+      isRightClickAllowed: !componentData.config.disableRightClick,
     };
     this.initialState = { ...this.state };
     const { t, theme } = props;
@@ -66,6 +67,10 @@ class ImageSettings extends Component {
       toggleKey: 'isExpandable',
       labelKey: 'ImageSettings_Image_OpensInExpandMode_Label',
     },
+    {
+      toggleKey: 'isRightClickAllowed',
+      labelKey: 'ImageSettings_Image_CanBeDownloaded_Label',
+    },
   ];
 
   componentDidMount() {
@@ -105,7 +110,11 @@ class ImageSettings extends Component {
     const { helpers, componentData, pubsub } = this.props;
     const newComponentData = {
       ...componentData,
-      config: { ...componentData.config, disableExpand: !this.state.isExpandable },
+      config: {
+        ...componentData.config,
+        disableExpand: !this.state.isExpandable,
+        disableRightClick: !this.state.isRightClickAllowed,
+      },
     };
     if (this.state.metadata) {
       this.addMetadataToBlock();

@@ -5,6 +5,7 @@ export const DEFAULTS = Object.freeze({
     showTitle: true,
     showDescription: true,
     disableExpand: false,
+    disableRightClick: true,
   },
 });
 

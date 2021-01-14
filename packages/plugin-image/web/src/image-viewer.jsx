@@ -274,7 +274,7 @@ class ImageViewer extends React.Component {
     }
   };
 
-  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.componentData.config.disableRightClick && e.preventDefault();
 
   renderExpandIcon = () => {
     return (
@@ -289,10 +289,9 @@ class ImageViewer extends React.Component {
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
-    const { metadata = {} } = componentData;
-    const { disableExpand } = componentData.config; //! settings.config was undefined
+    const { config, metadata = {} } = componentData;
 
-    const hasExpand = !disableExpand && settings.onExpand;
+    const hasExpand = !config.disableExpand && settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
