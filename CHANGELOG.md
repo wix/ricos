@@ -15,6 +15,11 @@
   - [#1987](https://github.com/wix/ricos/pull/1987) unsupported-blocks test
 
 ## [Unreleased]  
+
+### :bug: Bug Fix
+- `unsupportedBlocks`
+  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
+
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
