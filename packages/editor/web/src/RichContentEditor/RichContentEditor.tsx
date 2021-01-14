@@ -744,6 +744,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       innerRCERenderedIn,
     } = this.props;
     const { editorState } = this.state;
+
     const { theme } = this.contextualData;
 
     return (
