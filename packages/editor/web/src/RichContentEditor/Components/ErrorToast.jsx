@@ -44,7 +44,7 @@ const errorMap = {
   [MediaUploadErrorKey.AUDIO_CODEC]: 'UploadAudio_Error_Unsupported_Audio_Codec',
   [MediaUploadErrorKey.EMPTY_FILE]: 'UploadFile_Error_Empty_File',
   [MediaUploadErrorKey.MP4_UNSUPPORTED_FORMAT]: 'UploadAudio_Error_MP4_Unsupported_Format',
-  [MediaUploadErrorKey.MP4_SAMPLE_RATE]: 'UploadAudio_Error_Unsupported_Sample_Rate',
+  [MediaUploadErrorKey.MP4_SAMPLE_RATE]: 'UploadVideo_Error_Unsupported_Sample_Rate',
   [MediaUploadErrorKey.VIDEO_BITRATE]: 'UploadVideo_Error_Unsupported_Bit_Rate',
   [MediaUploadErrorKey.VIDEO_DURATION_MISMATCH]: 'UploadVideo_Error_Video_Audio_Duration_Mismatch',
   [MediaUploadErrorKey.VIDEO_CODEC]: 'UploadVideo_Error_Unsupported_Video_Codec',
