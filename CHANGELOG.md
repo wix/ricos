@@ -23,6 +23,11 @@
 </details>
 <hr/>
 
+## 8.15.2 (Jan 14, 2021)
+### :house: Internal
+- `common`
+  - [#1994](https://github.com/wix/ricos/commit/1994) added new media upload error keys
+
 ## 8.15.1 (Jan 13, 2021)
 ### :book: Documentation
 - `unsupportedBlocks`
