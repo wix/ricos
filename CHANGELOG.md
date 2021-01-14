@@ -14,6 +14,7 @@
 - `unsupported-blocks`
   - [#1987](https://github.com/wix/ricos/pull/1987) unsupported-blocks test
 
+## [Unreleased]  
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
@@ -22,6 +23,11 @@
 
 </details>
 <hr/>
+
+## 8.15.1 (Jan 13, 2021)
+### :book: Documentation
+- `unsupportedBlocks`
+  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
 
 ## 8.15.0 (Jan 12, 2021)
 ### :rocket: New Feature

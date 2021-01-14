@@ -30,6 +30,7 @@ module.exports = {
           'plugins_api/TextColorAndHighlightPlugins',
           'plugins_api/HtmlPlugin',
           'plugins_api/LinkPreviewPlugin',
+          'plugins_api/UnsupportedBlocksPlugin',
         ],
       },
       {
