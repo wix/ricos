@@ -4,7 +4,6 @@ import {
   RichContentEditorModal,
   RichContentEditorProps,
 } from 'wix-rich-content-editor';
-import { RicosEditor } from 'ricos-editor';
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
@@ -257,20 +256,18 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               <TopToolbar />
             </div>
           )}
-          <RicosEditor>
-            <RichContentEditor
-              placeholder={'Add some text!'}
-              ref={this.setEditorRef}
-              onChange={onChange}
-              helpers={this.helpers}
-              plugins={this.plugins}
-              // config={Plugins.getConfig(additionalConfig)}
-              config={this.config}
-              editorKey="random-editorKey-ssr"
-              setEditorToolbars={this.setEditorToolbars}
-              {...editorProps}
-            />
-          </RicosEditor>
+          <RichContentEditor
+            placeholder={'Add some text!'}
+            ref={this.setEditorRef}
+            onChange={onChange}
+            helpers={this.helpers}
+            plugins={this.plugins}
+            // config={Plugins.getConfig(additionalConfig)}
+            config={this.config}
+            editorKey="random-editorKey-ssr"
+            setEditorToolbars={this.setEditorToolbars}
+            {...editorProps}
+          />
           <ReactModal
             isOpen={this.state.showModal}
             contentLabel="External Modal Example"
