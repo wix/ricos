@@ -1,5 +1,2 @@
-import { fromDraft } from './fromDraft';
-
-export const MigrateSchema = {
-  fromDraft,
-};
+export { fromDraft } from './fromDraft/fromDraft';
+export { toDraft } from './toDraft/toDraft';

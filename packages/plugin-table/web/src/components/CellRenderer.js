@@ -65,7 +65,7 @@ export default class Cell extends Component {
   };
 
   onKeydown = e => {
-    const { editing, row, col, updateCellContent, onKeyDown } = this.props;
+    const { editing, row, col, table, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -75,7 +75,7 @@ export default class Cell extends Component {
         this.editorRef.selectAllContent(true);
       }
       if (e.key === 'Escape') {
-        updateCellContent(row, col, this.contentBeforeEdit);
+        table.updateCellContent(row, col, this.contentBeforeEdit);
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
@@ -107,6 +107,20 @@ export default class Cell extends Component {
     return style;
   };
 
+  getCellBorders = (cellBorders, shouldShowSelectedStyle) => {
+    const { table, selectedCells, row, col, disableSelectedStyle, isMobile, selected } = this.props;
+    const cellSelectionBorders = table.getCellBorders(selectedCells, row, col);
+    let borders = {};
+    if (disableSelectedStyle && selected) {
+      Object.entries(cellBorders).forEach(([key, val]) => {
+        !cellSelectionBorders[key] && (borders[key] = val);
+      });
+    } else {
+      borders = cellBorders;
+    }
+    return !isMobile && shouldShowSelectedStyle ? { ...borders, ...cellSelectionBorders } : borders;
+  };
+
   render() {
     const {
       row,
@@ -134,6 +148,7 @@ export default class Cell extends Component {
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
+    const cellBorders = this.getCellBorders(border, shouldShowSelectedStyle);
     const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
@@ -186,13 +201,7 @@ export default class Cell extends Component {
             {children}
           </Editor>
         </div>
-        <CellBorders
-          borders={
-            !isMobile && shouldShowSelectedStyle
-              ? table.getCellBorders(selectedCells, row, col)
-              : border
-          }
-        />
+        <CellBorders borders={cellBorders} />
       </Tag>
     );
   }
@@ -259,7 +268,6 @@ Cell.propTypes = {
   toolbarRef: PropTypes.any,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
-  updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),

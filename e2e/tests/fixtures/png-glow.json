@@ -11,8 +11,8 @@
       },
       {
         "key": "3nhna",
-        "text": " ",
-        "type": "atomic",
+        "text": "",
+        "type": "unstyled",
         "depth": 0,
         "inlineStyleRanges": [],
         "entityRanges": [],

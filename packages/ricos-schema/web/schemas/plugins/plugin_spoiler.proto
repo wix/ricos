@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "../common.proto";
+
+message RicosSpoiler {
+    bool enabled = 1;
+    string description = 2;
+    string button_content = 3;
+}
