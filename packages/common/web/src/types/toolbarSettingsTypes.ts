@@ -62,14 +62,3 @@ export type GetToolbarSettings = ({
   pluginButtonProps: ToolbarButtonProps[];
   tablePluginMenu?: boolean;
 }) => ToolbarSettingsFunctions[];
-
-export type AddPluginMenuConfig = {
-  showSearch?: boolean;
-  splitToSections?: boolean;
-  tablePluginMenu?: boolean;
-  horizontalMenuLayout?: boolean;
-};
-
-export type PluginMenuSettings = {
-  addPluginMenuConfig?: AddPluginMenuConfig;
-};

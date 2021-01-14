@@ -16,7 +16,6 @@ import {
   ToolbarButtonProps,
   TextButtons,
   simplePubsub,
-  PluginMenuSettings,
 } from 'wix-rich-content-common';
 import { EditorProps } from 'draft-js';
 
@@ -70,16 +69,11 @@ const createEditorToolbars = ({
     pluginButtonProps,
   });
   if (tablePluginMenu) {
-    const pluginMenuSettings: PluginMenuSettings =
-      customSettings.find(setting => setting.name === TOOLBARS.SIDE) || {};
-    if (pluginMenuSettings) {
-      const horizontalMenuLayout = true; // force old menu on table
-      // const horizontalMenuLayout = !pluginMenuSettings.addPluginMenuConfig;
-      pluginMenuSettings.addPluginMenuConfig = {
-        tablePluginMenu,
-        horizontalMenuLayout,
-      };
-    }
+    const sideToolbarSettings = customSettings.find(setting => setting.name === TOOLBARS.SIDE);
+    const pluginMenuSettings = { tablePluginMenu, horizontalMenuLayout: true };
+    !sideToolbarSettings
+      ? customSettings.push({ name: TOOLBARS.SIDE, addPluginMenuConfig: pluginMenuSettings })
+      : (sideToolbarSettings.addPluginMenuConfig = pluginMenuSettings);
   }
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
