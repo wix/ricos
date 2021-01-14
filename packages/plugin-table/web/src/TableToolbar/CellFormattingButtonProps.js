@@ -231,7 +231,7 @@ export const getCellFormattingButtonsProps = (
       type: 'SEPARATOR',
     },
     ...getBorderColorButtons(selected, settings, table, multipleCellsSelected),
-    ...getHeaderButtons(selectedRows, selectedCols, table),
-    ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock),
+    ...getHeaderButtons(selectedRows, selectedCols, table, t),
+    ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock, t),
   ];
 };
