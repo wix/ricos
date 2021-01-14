@@ -7,9 +7,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "lib": ["dom", "ESNext"],
-    "rootDirs": [".", "../../e2e/**/*.json", "../main"]
+    "lib": ["dom", "ESNext"]
   },
   "files": ["../../external-types.d.ts"],
-  "include": ["src", "stories"]
+  "include": ["src", "stories", "../../e2e/**/*.json", "../main"]
 }
