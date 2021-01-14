@@ -9,7 +9,7 @@
 > - :house: Internal
 > - :nail_care: Polish
 
-## [Unreleased]
+## [Unreleased]  
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
@@ -18,6 +18,16 @@
 
 </details>
 <hr/>
+
+## 8.15.2 (Jan 14, 2021)
+### :house: Internal
+- `common`
+  - [#1994](https://github.com/wix/ricos/commit/1994) added new media upload error keys
+
+## 8.15.1 (Jan 13, 2021)
+### :book: Documentation
+- `unsupportedBlocks`
+  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
 
 ## 8.15.0 (Jan 12, 2021)
 ### :rocket: New Feature
