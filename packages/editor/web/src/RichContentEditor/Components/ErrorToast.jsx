@@ -5,7 +5,7 @@ import { Trans } from 'react-i18next';
 
 const Toast = React.lazy(() => import('./Toast'));
 
-const createErrorMap = () => {
+function createErrorMap() {
   return {
     [MediaUploadErrorKey.GENERIC]: 'UploadFile_Error_Generic_Toast',
     [MediaUploadErrorKey.QUOTA_STORAGE_VISITOR]: 'UploadFile_Error_StorageExceeded_Visitor',
@@ -51,7 +51,7 @@ const createErrorMap = () => {
       'UploadVideo_Error_Video_Audio_Duration_Mismatch',
     [MediaUploadErrorKey.VIDEO_CODEC]: 'UploadVideo_Error_Unsupported_Video_Codec',
   };
-};
+}
 
 export default class ErrorToast extends Component {
   constructor(props) {
