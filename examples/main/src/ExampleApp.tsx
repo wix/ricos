@@ -15,6 +15,7 @@ import { SectionSettings, OnVisibilityChanged } from './types';
 import { RicosContent } from 'wix-rich-content-common';
 import type ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
+import { OnContentChangeFunction, RicosEditorProps } from 'ricos-editor';
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
@@ -28,7 +29,7 @@ interface ExampleAppProps {
   locale?: string;
   allLocales?: string[];
   editorState?: EditorState;
-  onEditorChange?: (editorState: EditorState, traits)=> void;
+  onRicosEditorChange?: RicosEditorProps['onChange'];
   localeResource?: Record<string, string>;
 }
 
@@ -194,20 +195,16 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
 
   renderEditor = () => {
     const {
-      allLocales,
-      editorState,
-      onEditorChange,
+      contentState,
+      onRicosEditorChange,
       locale,
-      localeResource,
       isMobile,
     } = this.props;
     const {
       isEditorShown,
       staticToolbar,
-      shouldMockUpload,
       shouldMultiSelectImages,
       editorIsMobile,
-      isToolbarShown,
       shouldNativeUpload,
     } = this.state;
 
@@ -225,17 +222,16 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ErrorBoundary>
               <Editor
-                onChange={onEditorChange}
-                editorState={editorState}
+                onRicosContentChange={onRicosEditorChange}
+                initialState={contentState}
                 isMobile={editorIsMobile || isMobile}
-                shouldMockUpload={shouldMockUpload}
                 shouldMultiSelectImages={shouldMultiSelectImages}
                 shouldNativeUpload={shouldNativeUpload}
                 staticToolbar={staticToolbar}
                 locale={locale}
-                localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}
                 externalToolbar={ExternalToolbar}
+                shouldUseRicos
               />
             </ErrorBoundary>
           </SectionContent>
@@ -306,6 +302,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.viewerScrollingElementFn}
+                shouldUseRicos
               />
             </ErrorBoundary>
           </SectionContent>

@@ -1,6 +1,7 @@
 import React, { PureComponent, RefObject } from 'react';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
-import { isSSR, SEOSettings } from 'wix-rich-content-common';
+import { RicosViewer } from 'ricos-viewer';
+import { Decorator, isSSR, SEOSettings } from 'wix-rich-content-common';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -19,6 +20,7 @@ interface ExampleViewerProps {
   scrollingElementFn?: any;
   seoMode?: SEOSettings;
   localeResource?: Record<string, string>;
+  shouldUseRicos?: boolean;
 }
 
 interface ExampleViewerState {
@@ -72,7 +74,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
+    const { isMobile, initialState, locale, seoMode, localeResource, shouldUseRicos } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
       helpers: {
@@ -95,14 +97,29 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
     return (
       <>
         <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
-          <RichContentViewer
-            typeMappers={Plugins.typeMappers}
-            // @ts-ignore
-            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-            decorators={Plugins.decorators}
-            config={this.pluginsConfig}
-            {...viewerProps}
-          />
+          {shouldUseRicos ? (
+            <RicosViewer
+              locale={locale}
+              linkSettings={{ anchorTarget, relValue }}
+              isMobile={isMobile}
+              cssOverride={theme}
+              content={initialState}
+              mediaSettings={{ pauseMedia: disabled }}
+              seoSettings={seoMode}
+              plugins={Plugins.viewerPlugins}
+            >
+              <RichContentViewer helpers={viewerProps.helpers} />
+            </RicosViewer>
+          ) : (
+            <RichContentViewer
+              typeMappers={Plugins.typeMappers}
+              // @ts-ignore
+              inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+              decorators={Plugins.decorators}
+              config={this.pluginsConfig}
+              {...viewerProps}
+            />
+          )}
           {this.shouldRenderFullscreen && (
             <Fullscreen
               images={this.expandModeData.images}
