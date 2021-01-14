@@ -100,7 +100,6 @@ export {
   INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
   KEYS_CHARCODE,
-  ERROR_MAP,
 } from './consts';
 
 import './draftTypes';
