@@ -14,6 +14,8 @@ import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-galle
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
+import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
+import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
@@ -70,6 +72,7 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
@@ -107,6 +110,7 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
+  createUnsupportedBlocksPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -119,6 +123,7 @@ export const editorPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
   createActionButtonPlugin,
+  createUnsupportedBlocksPlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -149,6 +154,7 @@ export const editorPluginsMap = {
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   all: editorPlugins,
+  unsupportedBlocks: createUnsupportedBlocksPlugin,
 };
 
 const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
@@ -470,6 +476,7 @@ const config = {
     //   },
     // },
   },
+  [UNSUPPORTED_BLOCKS_TYPE]: {},
   [VERTICAL_EMBED_TYPE]: {
     fetchFunctions: {
       [product]: mockFetchVerticalEmbedFunc(product),

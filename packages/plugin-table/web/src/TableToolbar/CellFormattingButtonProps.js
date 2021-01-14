@@ -38,14 +38,14 @@ const setVerticalAlign = (value, table, selected) => {
   table.setCellsStyle({ verticalAlign: value }, getRange(selected));
 };
 
-const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
+const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock, t) => {
   return isAllCellsSelected
     ? [
         {
           type: 'SEPARATOR',
         },
         {
-          tooltip: 'Delete table',
+          tooltip: t('TablePlugin_Toolbar_DeleteTable_Tooltip'),
           onClick: deleteBlock,
           dataHook: 'delete-table',
           getIcon: () => TrashIcon,
@@ -58,7 +58,7 @@ const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
     : [];
 };
 
-const getHeaderButtons = (selectedRows, selectedCols, table) => {
+const getHeaderButtons = (selectedRows, selectedCols, table, t) => {
   const isRowHeader = isHeaderSelected(selectedRows);
   const isColHeader = isHeaderSelected(selectedCols);
   if (isRowHeader || isColHeader) {
@@ -67,7 +67,7 @@ const getHeaderButtons = (selectedRows, selectedCols, table) => {
         type: 'SEPARATOR',
       },
       {
-        tooltip: 'Set as Header',
+        tooltip: t('TablePlugin_Toolbar_Header_Tooltip'),
         onClick: isRowHeader ? table.toggleRowHeader : table.toggleColHeader,
         dataHook: isRowHeader ? 'row-header' : 'col-header',
         getIcon: () => (isRowHeader ? RowHeader : ColumnHeader),
@@ -160,7 +160,8 @@ export const getCellFormattingButtonsProps = (
   deleteBlock,
   selectedRows,
   selectedCols,
-  multipleCellsSelected
+  multipleCellsSelected,
+  t
 ) => {
   return [
     {
@@ -173,7 +174,7 @@ export const getCellFormattingButtonsProps = (
           isDisabled: () => {},
           name: 'AlignTop',
           onClick: () => setVerticalAlign('top', table, selected),
-          tooltip: 'Align top',
+          tooltip: t('TablePlugin_Toolbar_VerticalAlignment_AlignTop_Tooltip'),
           type: 'button',
         },
         {
@@ -185,7 +186,7 @@ export const getCellFormattingButtonsProps = (
           isDisabled: () => {},
           name: 'AlignMiddle',
           onClick: () => setVerticalAlign('middle', table, selected),
-          tooltip: 'Align middle',
+          tooltip: t('TablePlugin_Toolbar_VerticalAlignment_AlignMiddle_Tooltip'),
           type: 'button',
         },
         {
@@ -197,20 +198,20 @@ export const getCellFormattingButtonsProps = (
           isDisabled: () => {},
           name: 'AlignBottom',
           onClick: () => setVerticalAlign('bottom', table, selected),
-          tooltip: 'Align bottom',
+          tooltip: t('TablePlugin_Toolbar_VerticalAlignment_AlignBottom_Tooltip'),
           type: 'button',
         },
       ],
       dataHook: 'VerticalAlignment',
       name: 'VerticalAlignment',
-      tooltip: 'Vertical alignment',
+      tooltip: t('TablePlugin_Toolbar_VerticalAlignment_Tooltip'),
       type: 'GROUP',
     },
     {
       type: 'SEPARATOR',
     },
     {
-      tooltip: 'Back ground color',
+      tooltip: t('TablePlugin_Toolbar_BGColor_Tooltip'),
       dataHook: 'back-ground-color',
       getCurrentColor: () => getColorsFromComponentData(selected, table).bgCurrentColor,
       onColorAdded: color => settings?.onBgColorAdded?.(color),
