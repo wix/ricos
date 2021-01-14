@@ -9,11 +9,6 @@ export const HEADER_BLOCK = Object.freeze({
 
 export const DEFAULT_TITLE_HEADINGS = ['h2', 'h3'];
 
-export const EditorEvents = {
-  PUBLISH: 'plugin:publish',
-  RICOS_PUBLISH: 'ricos:publish',
-};
-
 export const DEFAULT_HEADINGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
 
 export const BLOCK_TYPES = Object.freeze([

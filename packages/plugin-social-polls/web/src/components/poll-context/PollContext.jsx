@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
-import { EditorEvents } from 'wix-rich-content-common';
 
 import { SocialPollsService } from '../../api';
 
@@ -70,11 +69,11 @@ export class PollContextProvider extends PureComponent {
   componentDidMount() {
     const { editorEvents } = this.props;
 
-    editorEvents?.subscribe(EditorEvents.PUBLISH, this.syncPoll);
+    editorEvents?.subscribe('plugin:publish', this.syncPoll);
   }
 
   componentWillUnmount() {
-    this.props.editorEvents?.unsubscribe(EditorEvents.PUBLISH, this.syncPoll);
+    this.props.editorEvents?.unsubscribe('plugin:publish', this.syncPoll);
   }
 
   async fetchPoll() {

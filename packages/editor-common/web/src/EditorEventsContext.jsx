@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { remove } from 'lodash';
-import { EditorEvents } from 'wix-rich-content-common';
 
-//TODO: update groups to import this from common
-export { EditorEvents };
+//TODO: move to a lib
+export const EditorEvents = { PUBLISH: 'plugin:publish', RICOS_PUBLISH: 'ricos:publish' };
 
 export const EditorEventsContext = React.createContext({
   subscribe() {

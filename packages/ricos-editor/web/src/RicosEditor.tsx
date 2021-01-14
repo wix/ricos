@@ -14,8 +14,8 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-import { EditorEventsContext } from 'wix-rich-content-editor-common';
-import { ToolbarType, EditorEvents } from 'wix-rich-content-common';
+import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
+import { ToolbarType } from 'wix-rich-content-common';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
