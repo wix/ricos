@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `common`
+  - [#1994](https://github.com/wix/ricos/commit/1994) added new media upload error keys
+
 </details>
 <hr/>
 
