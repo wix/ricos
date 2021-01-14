@@ -10,5 +10,5 @@
     "lib": ["dom", "ESNext"]
   },
   "files": ["../../external-types.d.ts"],
-  "include": ["src", "shared"]
+  "include": ["main", "storybook"]
 }
