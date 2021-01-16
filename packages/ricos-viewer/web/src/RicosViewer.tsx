@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RicosEngine, localeStrategy } from 'ricos-common';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
+import IoC from './render-infra/ioc-container';
+import { ViewerTransitionManager } from './render-infra/types';
 
 interface State {
   isPreviewExpanded: boolean;
@@ -12,8 +13,11 @@ interface State {
 }
 
 export class RicosViewer extends Component<RicosViewerProps, State> {
+  transitionManager: ViewerTransitionManager;
   constructor(props: RicosViewerProps) {
     super(props);
+    this.transitionManager = IoC.getViewerTransitionManager();
+    this.transitionManager.initialize(this.props.children);
     this.state = {
       isPreviewExpanded: false,
       localeStrategy: { locale: props.locale },
@@ -43,16 +47,12 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
 
   render() {
-    const { children, seoSettings, ...props } = this.props;
+    const { seoSettings, ...props } = this.props;
     const { isPreviewExpanded, remountKey, localeStrategy } = this.state;
-    const child =
-      children && shouldRenderChild('RichContentViewer', children) ? (
-        children
-      ) : (
-        <RichContentViewer />
-      );
+    const child = this.transitionManager.getViewerChild();
     return (
       <RicosEngine
+        strategies={this.transitionManager.getViewerStrategies()}
         RicosModal={RicosModal}
         isPreviewExpanded={isPreviewExpanded}
         onPreviewExpand={this.onPreviewExpand}

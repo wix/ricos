@@ -59,7 +59,6 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
 
   let viewerEntry: RollupOptions[] = [];
   const viewerPath = 'src/viewer.ts';
-  const viewerRicosPath = 'src/viewer.ricos.tsx';
   if (existsSync(`./${viewerPath}`)) {
     viewerEntry.push({
       input: viewerPath,
@@ -72,20 +71,6 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
       ...commonOptions,
     });
   }
-
-  if (existsSync(`./${viewerRicosPath}`)) {
-    viewerEntry.push({
-      input: viewerRicosPath,
-      output: cloneDeep(output).map(o => {
-        if (o.file) {
-          o.file = addPartToFilename(o.file, 'viewer.ricos');
-        }
-        return o;
-      }),
-      ...commonOptions,
-    });
-  }
-
   let entries;
   if (process.env.MODULE_ANALYZE_EDITOR) {
     entries = [editorEntry, ...libEntries];

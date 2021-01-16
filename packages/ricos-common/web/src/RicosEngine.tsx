@@ -1,11 +1,11 @@
 import React, { Component, Children, FunctionComponent, ReactElement } from 'react';
+import { merge } from 'lodash';
+import { PreviewConfig } from 'wix-rich-content-preview';
 
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import themeStrategy from './themeStrategy/themeStrategy';
-import { merge } from 'lodash';
-
 import previewStrategy from './previewStrategy/previewStrategy';
-import { PreviewConfig } from 'wix-rich-content-preview';
+
 import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {

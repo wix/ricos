@@ -52,14 +52,12 @@ function viewerStrategy(
   const finalConfig = { ...prev.config, [type]: config };
   return {
     config: finalConfig,
-    typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
-    decorators:
-      (decorator && prev.decorators.concat([decorator(cssOverride, config)])) || prev.decorators,
-    inlineStyleMappers:
-      (inlineStyleMapper &&
-        content &&
-        prev.inlineStyleMappers.concat([inlineStyleMapper?.(finalConfig, content)])) ||
-      prev.inlineStyleMappers,
+    typeMappers: [...prev.typeMappers, ...(typeMapper ? [typeMapper] : [])],
+    decorators: [...prev.decorators, ...(decorator ? [decorator(cssOverride, config)] : [])],
+    inlineStyleMappers: [
+      ...prev.inlineStyleMappers,
+      ...(inlineStyleMapper && content ? [inlineStyleMapper(finalConfig, content)] : []),
+    ],
   };
 }
 

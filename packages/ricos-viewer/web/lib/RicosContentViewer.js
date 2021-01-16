@@ -17,6 +17,7 @@ import viewerAlignmentStyles from '../statics/styles/viewer-alignment.ricos.rtli
 import rtlStyle from '../statics/styles/viewer-rtl.ricos.rtlignore.scss';
 
 export default class RicosContentViewer extends Component {
+  static displayName = 'RicosContentViewer';
   static propTypes = {
     plugins: PropTypes.arrayOf(
       PropTypes.shape({ renderer: PropTypes.func.isRequired, type: PropTypes.string.isRequired })
