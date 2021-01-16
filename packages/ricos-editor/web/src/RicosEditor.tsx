@@ -1,5 +1,12 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
-import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
+import {
+  RicosEngine,
+  shouldRenderChild,
+  localeStrategy,
+  pluginsStrategy,
+  themeStrategy,
+  previewStrategy,
+} from 'ricos-common';
 import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
@@ -153,6 +160,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           textToolbarContainer={toolbarSettings?.textToolbarContainer}
         />
         <RicosEngine
+          strategies={{ theme: themeStrategy, preview: previewStrategy, plugins: pluginsStrategy }}
           RicosModal={RicosModal}
           isViewer={false}
           key={'editor'}

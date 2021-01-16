@@ -1,7 +1,12 @@
 import React, { ReactElement } from 'react';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { themeStrategy, pluginsStrategy, localeStrategy, previewStrategy } from 'ricos-common';
-import { shouldRenderChild } from './utils';
+import {
+  shouldRenderChild,
+  themeStrategy,
+  pluginsStrategy,
+  localeStrategy,
+  previewStrategy,
+} from 'ricos-common';
 import { ricosViewerPluginStrategy } from './ricosViewerPluginStrategy';
 import { ViewerTransitionManager } from './types';
 

@@ -46,6 +46,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
 
     readdirSync(`./${libEntriesPath}`).forEach(file => {
       const fileName = file.split('.')[0];
+      console.log({ fileName });
       libEntries.push({
         input: libEntriesPath + file,
         output: output.map(({ format }) => ({

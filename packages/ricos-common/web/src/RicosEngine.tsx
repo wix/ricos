@@ -2,10 +2,6 @@ import React, { Component, Children, FunctionComponent, ReactElement } from 'rea
 import { merge } from 'lodash';
 import { PreviewConfig } from 'wix-rich-content-preview';
 
-import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
-import themeStrategy from './themeStrategy/themeStrategy';
-import previewStrategy from './previewStrategy/previewStrategy';
-
 import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
@@ -15,6 +11,7 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   isViewer: boolean;
   isPreviewExpanded?: boolean;
   onPreviewExpand?: PreviewConfig['onPreviewExpand'];
+  strategies: Record<string, any>; // eslint-disable-line
 }
 
 export class RicosEngine extends Component<EngineProps> {
@@ -31,7 +28,12 @@ export class RicosEngine extends Component<EngineProps> {
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
+      strategies,
     } = this.props;
+
+    const themeStrategy = strategies.theme;
+    const pluginsStrategy = strategies.plugins;
+    const previewStrategy = strategies.preview;
 
     const { theme, html } = themeStrategy({ plugins, cssOverride, ricosTheme });
     const htmls: ReactElement[] = [];
@@ -41,7 +43,7 @@ export class RicosEngine extends Component<EngineProps> {
 
     const strategiesProps = merge(
       { theme },
-      pluginsStrategy(isViewer, plugins, children.props, theme, content)
+      pluginsStrategy(isViewer, plugins, children.props, content)
     );
 
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(

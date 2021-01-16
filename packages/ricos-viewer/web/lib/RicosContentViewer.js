@@ -22,7 +22,7 @@ export default class RicosContentViewer extends Component {
     plugins: PropTypes.arrayOf(
       PropTypes.shape({ renderer: PropTypes.func.isRequired, type: PropTypes.string.isRequired })
     ),
-    content: PropTypes.object.isRequired,
+    initialState: PropTypes.object.isRequired,
     t: PropTypes.func.isRequired,
     isMobile: PropTypes.bool.isRequired,
     anchorTarget: PropTypes.string,
@@ -74,20 +74,18 @@ export default class RicosContentViewer extends Component {
     if (typeof window === 'undefined') {
       return;
     }
-    if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
-      import(
-        /* webpackChunkName: debugging-info */
-        'wix-rich-content-common/libs/debugging-info'
-      ).then(({ reportDebuggingInfo }) => {
-        reportDebuggingInfo({
-          version: Version.currentVersion,
-          reporter: 'Ricos Viewer',
-          plugins: this.props.plugins.map(p => p.type),
-          getContent: () => this.props.content,
-          getConfig: () => ({}),
-        });
+    import(
+      /* webpackChunkName: debugging-info */
+      'wix-rich-content-common/libs/debugging-info'
+    ).then(({ reportDebuggingInfo }) => {
+      reportDebuggingInfo({
+        version: Version.currentVersion,
+        reporter: 'Ricos Content Viewer',
+        plugins: this.props.plugins.map(p => p.type),
+        getContent: () => this.props.initialState,
+        getConfig: () => ({}),
       });
-    }
+    });
   }
 
   render() {
@@ -109,7 +107,9 @@ export default class RicosContentViewer extends Component {
       return (
         <GlobalContext.Provider value={this.props}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
-            <div className={editorClassName}>{this.contentRenderer.render(this.props.content)}</div>
+            <div className={editorClassName}>
+              {this.contentRenderer.render(this.props.initialState)}
+            </div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>
         </GlobalContext.Provider>
