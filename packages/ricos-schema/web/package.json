@@ -1,6 +1,6 @@
 {
   "name": "ricos-schema",
-  "version": "8.8.2",
+  "version": "8.15.3",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -14,7 +14,9 @@
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
-  "files": [ "dist" ],
+  "files": [
+    "dist"
+  ],
   "main": "dist/ricos-content.js",
   "types": "dist/ricos-content.d.ts",
   "scripts": {

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
+import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
@@ -19,6 +19,12 @@ class InnerRCE extends PureComponent {
     this.state = {
       showToolbars: false,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.editing === false && prevProps.editing !== this.props.editing) {
+      this.handleAtomicPluginsBorders(true);
+    }
   }
 
   cleanConfig = config => {
@@ -60,24 +66,10 @@ class InnerRCE extends PureComponent {
       this.editorWrapper &&
       e.target &&
       !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !e.target.closest('[class=ReactModalPortal]') &&
       !this.editorWrapper.contains(e.target)
     ) {
       this.setState({ showToolbars: false });
-    }
-  };
-
-  handleAtomicPluginsBorders = () => {
-    const { editing = true } = this.props;
-    const { showToolbars } = this.state;
-    const hideBorder = !showToolbars || !editing;
-    if (this.editorWrapper) {
-      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
-      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
-      atomicBlocks.forEach(block => {
-        const blockDataFocus = block.getAttribute('data-focus');
-        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
-        block.style.boxShadow = hideBorder ? 'none' : '';
-      });
     }
   };
 
@@ -123,7 +115,7 @@ class InnerRCE extends PureComponent {
     this.setState({ showToolbars: true });
   };
 
-  handleAtomicPluginsBorders = () => {
+  handleAtomicPluginsBorders = enterEditing => {
     const { editing = true } = this.props;
     const { showToolbars } = this.state;
     const hideBorder = !showToolbars || !editing;
@@ -131,7 +123,7 @@ class InnerRCE extends PureComponent {
       const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
       const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
       atomicBlocks.forEach(block => {
-        const blockDataFocus = block.getAttribute('data-focus');
+        const blockDataFocus = enterEditing ? 'true' : block.getAttribute('data-focus');
         block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
         block.style.boxShadow = hideBorder ? 'none' : '';
       });
@@ -154,6 +146,9 @@ class InnerRCE extends PureComponent {
     } = this.props;
     const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
+    if (innerRCERenderedIn === TABLE_TYPE && isMobile) {
+      toolbarsToIgnore.push('SideToolbar');
+    }
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
         <div

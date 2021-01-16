@@ -1,13 +1,12 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 
 import { isEmpty } from 'lodash';
-import { RicosContent as RicosContentDraft, RicosContentBlock } from '..';
-import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from './consts';
+import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
+import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from '../consts';
 import { RicosContent, RicosNode, google } from 'ricos-schema';
-import { genKey } from 'draft-js';
-
+import { genKey } from '../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
-import { getEntity, parseBlockData } from './getEntity';
+import { getEntity, parseBlockData } from './getRicosEntityData';
 
 const createTimestamp = (): google.protobuf.Timestamp => {
   const timeMS = Date.now();
@@ -20,7 +19,6 @@ const createTimestamp = (): google.protobuf.Timestamp => {
 export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   const { blocks, entityMap, VERSION: version } = draftJSON;
   const nodes: RicosNode[] = [];
-  const keyMapping = {};
 
   const parseBlocks = (index = 0) => {
     const block = blocks[index];
@@ -68,7 +66,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     return {
       key: block.key,
       nodes: [],
-      ...getEntity(block.entityRanges[0].key, entityMap, keyMapping),
+      ...getEntity(block.entityRanges[0].key, entityMap),
     };
   };
 
@@ -76,12 +74,15 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     key: block.key,
     type: NodeType.Blockquote,
     nodes: [parseTextBlock(block)],
+    ricosQuote: {
+      depth: block.depth || undefined,
+    },
   });
 
   const parseCodeBlock = (block: RicosContentBlock): RicosNode => ({
     key: block.key,
     type: NodeType.CodeBlock,
-    nodes: getTextNodes(block, entityMap, keyMapping),
+    nodes: getTextNodes(block, entityMap),
     ricosCode: {
       ...parseBlockData(block.data),
     },
@@ -100,9 +101,10 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       type: NodeType.Heading,
       ricosHeading: {
         level: getLevel(block.type),
+        depth: block.depth || undefined,
         ...parseBlockData(block.data),
       },
-      nodes: getTextNodes(block, entityMap, keyMapping),
+      nodes: getTextNodes(block, entityMap),
     };
   };
 
@@ -115,9 +117,15 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       },
       nodes: [],
     };
+    if (block.type === BlockType.Unstyled) {
+      textWrapperNode.key = block.key;
+      textWrapperNode.ricosParagraph = {
+        ...textWrapperNode.ricosParagraph,
+        depth: block.depth || undefined,
+      };
+    }
 
-    keyMapping[block.key] = textWrapperNode.key;
-    const nodes = getTextNodes(block, entityMap, keyMapping);
+    const nodes = getTextNodes(block, entityMap);
 
     if (!isEmpty(nodes)) {
       textWrapperNode.nodes = nodes;

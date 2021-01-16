@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
-import { getModalPosition } from '../ToolbarUtils';
+import { isElementOutOfWindow } from 'wix-rich-content-editor-common';
 
 class ContextMenu extends PureComponent {
   static propTypes = {
@@ -39,7 +39,8 @@ class ContextMenu extends PureComponent {
   toggleOptions = () => {
     this.setState({ isOpen: !this.state.isOpen }, () => {
       if (this.state.isOpen && this.modalRef) {
-        this.setState({ position: getModalPosition(this.modalRef) });
+        const isModalOverflow = isElementOutOfWindow(this.modalRef);
+        this.setState({ position: isModalOverflow ? { right: 0 } : { left: 0 } });
       } else {
         this.setState({ position: null });
       }

@@ -66,7 +66,6 @@ import toCamelCase from 'to-camel-case';
 
 export enum BlockType {
   Unstyled = 'unstyled',
-  // Paragraph = 'paragraph',
   HeaderOne = 'header-one',
   HeaderTwo = 'header-two',
   HeaderThree = 'header-three',
@@ -160,4 +159,40 @@ export const TO_RICOS_DECORATION_TYPE = {
   ITALIC: 'italic',
   UNDERLINE: 'underline',
   [SPOILER_TYPE]: RICOS_SPOILER_TYPE,
+  [ANCHOR_TYPE]: RICOS_ANCHOR_TYPE,
+  [MENTION_TYPE]: RICOS_MENTION_TYPE,
+  [LINK_TYPE]: RICOS_LINK_TYPE,
+};
+
+// bold: BOLD
+export const FROM_RICOS_DECORATION_TYPE = Object.fromEntries(
+  Object.entries(TO_RICOS_DECORATION_TYPE).map(([key, value]) => [value, key])
+);
+
+export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
+  [BlockType.Unstyled]: 'ricosParagraph',
+  [BlockType.UnorderedListItem]: 'ricosParagraph',
+  [BlockType.OrderedListItem]: 'ricosParagraph',
+  [BlockType.HeaderOne]: 'ricosHeading',
+  [BlockType.HeaderTwo]: 'ricosHeading',
+  [BlockType.HeaderThree]: 'ricosHeading',
+  [BlockType.HeaderFour]: 'ricosHeading',
+  [BlockType.HeaderFive]: 'ricosHeading',
+  [BlockType.HeaderSix]: 'ricosHeading',
+  [BlockType.CodeBlock]: 'ricosCode',
+  [BlockType.Blockquote]: 'ricosQuote',
+};
+
+export const ENTITY_DECORATION_TO_MUTABILITY = {
+  [ANCHOR_TYPE]: 'MUTABLE',
+  [LINK_TYPE]: 'MUTABLE',
+  [MENTION_TYPE]: 'SEGMENTED',
+  EMOJI_TYPE: 'IMMUTABLE',
+};
+
+export const ENTITY_DECORATION_TO_DATA_FIELD = {
+  [ANCHOR_TYPE]: toCamelCase(RICOS_ANCHOR_TYPE),
+  [LINK_TYPE]: toCamelCase(RICOS_LINK_TYPE),
+  [MENTION_TYPE]: toCamelCase(RICOS_MENTION_TYPE),
+  EMOJI_TYPE: 'ricosEmoji',
 };

@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "../common.proto";
 import "plugin_spoiler.proto";
 
 message GalleryStyles {
@@ -41,13 +42,14 @@ message GalleryStyles {
   bool got_style_params = 36;
   bool show_video_play_button = 37;
   string video_play = 38;
+  string gallery_type = 39;
 }
 
 message GalleryConfig {
   enum GallerySize {
     CONTENT = 0;
     SMALL = 1;
-    FULL_WIDTH = 3;
+    FULL_WIDTH = 2;
   }
   enum GalleryAlignment {
     LEFT = 0;

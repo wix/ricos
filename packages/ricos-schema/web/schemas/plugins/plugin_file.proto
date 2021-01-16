@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "../common.proto";
+
 message FileConfig {
     string size = 1;
     string alignment = 2;
@@ -7,9 +9,10 @@ message FileConfig {
   }
 
 message RicosFile {
-    string name = 1;
-    string type = 2;
-    string url = 3;
-    string id = 4;
-    FileConfig config = 5;
+  FileConfig config = 1;
+  string name = 2;
+  string type = 3;
+  string url = 4;
+  string id = 5;
+  int32 size = 6;  
 }

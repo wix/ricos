@@ -53,6 +53,7 @@ export const SPOILER_TYPE = 'wix-rich-content-plugin-spoiler';
 export const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
 export const EXTERNAL_LINK_TYPE = 'wix-draft-plugin-external-link';
 export const LINK_TYPE = 'LINK';
+export const CUSTOM_LINK_TYPE = 'ricos-plugin-custom-link';
 export const LINK_PREVIEW_TYPE = 'wix-draft-plugin-link-preview';
 export const MAP_TYPE = 'wix-draft-plugin-map';
 export const EXTERNAL_MENTIONS_TYPE = 'wix-draft-plugin-external-mentions';
@@ -68,6 +69,7 @@ export const POLL_TYPE = 'wix-draft-plugin-poll';
 export const TABLE_TYPE = 'table';
 export const ANCHOR_TYPE = 'ANCHOR';
 export const PREVIEW = 'PREVIEW';
+export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
 
 // ricos plugin types
 export const RICOS_ACCORDION_TYPE = 'ricos_accordion';

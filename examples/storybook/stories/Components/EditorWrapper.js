@@ -13,6 +13,7 @@ import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
 import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -95,6 +96,21 @@ const plugins = [
       pluginCodeBlock().createPlugin,
     ],
   }),
+  pluginTable({
+    innerRCEPlugins: [
+      pluginTextColor().createPlugin,
+      pluginTextHighlight().createPlugin,
+      pluginIndent().createPlugin,
+      pluginLineSpacing().createPlugin,
+      pluginLink().createPlugin,
+      pluginImage().createPlugin,
+      pluginVideo().createPlugin,
+      pluginGiphy().createPlugin,
+      pluginEmoji().createPlugin,
+      pluginFileUpload().createPlugin,
+      pluginCodeBlock().createPlugin,
+    ],
+  }),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
@@ -143,6 +159,7 @@ const pluginsMap = {
   textColor: pluginTextColor(),
   spoiler: pluginSpoiler(),
   accordion: pluginAccordion(),
+  table: pluginTable(),
   highlight: pluginTextHighlight(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };

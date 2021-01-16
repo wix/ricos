@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { remove } from 'lodash';
 
-export const EditorEvents = {
-  PUBLISH: 'rce:publish',
-};
+//TODO: move to a lib
+export const EditorEvents = { PUBLISH: 'plugin:publish', RICOS_PUBLISH: 'ricos:publish' };
 
 export const EditorEventsContext = React.createContext({
-  subscribe() {},
+  subscribe() {
+    return () => {};
+  },
   unsubscribe() {},
-  dispatch() {},
+  dispatch() {
+    return Promise.resolve(true);
+  },
+  publish() {},
 });
 
 export const WithEditorEventsProps = {
@@ -17,6 +21,7 @@ export const WithEditorEventsProps = {
     subscribe: PropTypes.func,
     unsubscribe: PropTypes.func,
     dispatch: PropTypes.func,
+    publish: PropTypes.func,
   }),
 };
 
@@ -35,14 +40,25 @@ export class EditorEventsProvider extends React.Component {
     subscribe: this.subscribe.bind(this),
     unsubscribe: this.unsubscribe.bind(this),
     dispatch: this.dispatch.bind(this),
+    publish: this.publish.bind(this),
   };
 
   events = {};
 
   dispatch(event, data) {
     const callbacks = this.events[event] || [];
-
     return Promise.all(callbacks.map(cb => cb(data)));
+  }
+
+  publish() {
+    return this.dispatch(EditorEvents.PUBLISH).then(() => {
+      return this.dispatch(EditorEvents.RICOS_PUBLISH).then(publishResponse => {
+        const editorResponse = publishResponse.filter(
+          ({ type } = {}) => type === 'EDITOR_PUBLISH'
+        )[0];
+        return editorResponse?.data;
+      });
+    });
   }
 
   subscribe(event, cb) {
@@ -64,3 +80,15 @@ export class EditorEventsProvider extends React.Component {
     );
   }
 }
+
+export const withEditorContext = WrappedComponent => {
+  const WrappedComponentWithEvents = withEditorEvents(WrappedComponent);
+  const withEditorProivder = props => {
+    return (
+      <EditorEventsProvider>
+        <WrappedComponentWithEvents {...props} />
+      </EditorEventsProvider>
+    );
+  };
+  return withEditorProivder;
+};

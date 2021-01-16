@@ -19,146 +19,146 @@ const distributeColumns = (table, selected) => table.distributeColumns(getColsRa
 const addLastRow = (addRow, table) => addRow(table.getRowNum());
 const addLastCol = (addCol, table) => addCol(table.getColNum());
 
-const splitButton = (table, selected) => {
+const splitButton = (table, selected, t) => {
   return {
     onClick: () => split(table, selected),
     dataHook: 'split-cells',
-    text: 'Split cells',
+    text: t('TablePlugin_Toolbar_ContextMenu_SplitCells_Button'),
     type: 'text',
   };
 };
 
-const selectRowButton = (selected, selectRows) => {
+const selectRowButton = (selected, selectRows, t) => {
   return {
     onClick: () => selectRow(selected, selectRows),
     dataHook: 'select-row',
-    text: 'Select row',
+    text: t('TablePlugin_Toolbar_ContextMenu_SelectRow_Button'),
     type: 'text',
   };
 };
 
-const selectColButton = (selected, selectCols) => {
+const selectColButton = (selected, selectCols, t) => {
   return {
     onClick: () => selectCol(selected, selectCols),
     dataHook: 'select-column',
-    text: 'Select column',
+    text: t('TablePlugin_Toolbar_ContextMenu_SelectCol_Button'),
     type: 'text',
   };
 };
 
-const deleteRowButton = (deleteRow, selectedRows) => {
+const deleteRowButton = (deleteRow, selectedRows, t) => {
   return {
     onClick: () => deleteRow(selectedRows),
     dataHook: 'delete-row',
-    text: 'Delete row',
+    text: t('TablePlugin_Toolbar_ContextMenu_DeleteRow_Button'),
     type: 'text',
   };
 };
 
-const addLastRowButton = (addRow, table) => {
+const addLastRowButton = (addRow, table, t) => {
   return {
     onClick: () => addLastRow(addRow, table),
     dataHook: 'insert-last-row',
-    text: 'Insert row',
+    text: t('TablePlugin_Toolbar_ContextMenu_InsertRow_Button'),
     type: 'text',
   };
 };
 
-const addLastColButton = (addCol, table) => {
+const addLastColButton = (addCol, table, t) => {
   return {
     onClick: () => addLastCol(addCol, table),
     dataHook: 'insert-last-col',
-    text: 'Insert column',
+    text: t('TablePlugin_Toolbar_ContextMenu_InsertCol_Button'),
     type: 'text',
   };
 };
 
-const addRowAboveButton = (addRow, range) => {
+const addRowAboveButton = (addRow, range, t) => {
   return {
     onClick: () => addRow(getRowIndex(range)),
     dataHook: 'insert-above',
-    text: 'Insert 1 above',
+    text: t('TablePlugin_Toolbar_ContextMenu_InsertAbove_Button'),
     type: 'text',
   };
 };
 
-const addRowBelowButton = (addRow, range) => {
+const addRowBelowButton = (addRow, range, t) => {
   return {
     onClick: () => addRow(getRowIndex(range) + 1),
     dataHook: 'insert-below',
-    text: 'Insert 1 below',
+    text: t('TablePlugin_Toolbar_ContextMenu_InsertBelow_Button'),
     type: 'text',
   };
 };
 
-const deleteColButton = (deleteColumn, selectedCols) => {
+const deleteColButton = (deleteColumn, selectedCols, t) => {
   return {
     onClick: () => deleteColumn(selectedCols),
     dataHook: 'delete-column',
-    text: 'Delete column',
+    text: t('TablePlugin_Toolbar_ContextMenu_DeleteCol_Button'),
     type: 'text',
   };
 };
 
-const addColRightButton = (addCol, range) => {
+const addColRightButton = (addCol, range, t) => {
   return {
     onClick: () => addCol(getColIndex(range) + 1),
     dataHook: 'insert-right',
-    text: 'Insert 1 right',
+    text: t('TablePlugin_Toolbar_ContextMenu_InsertRight_Button'),
     type: 'text',
   };
 };
 
-const addColLeftButton = (addCol, range) => {
+const addColLeftButton = (addCol, range, t) => {
   return {
     onClick: () => addCol(getColIndex(range)),
     dataHook: 'insert-left',
-    text: 'Insert 1 left',
+    text: t('TablePlugin_Toolbar_ContextMenu_InsertLeft_Button'),
     type: 'text',
   };
 };
 
-const distributeRowsButton = (table, innerEditorsRefs, selected) => {
+const distributeRowsButton = (table, innerEditorsRefs, selected, t) => {
   return {
     onClick: () => distributeRows(table, innerEditorsRefs, selected),
     dataHook: 'distribute-rows',
-    text: 'Distribute rows',
+    text: t('TablePlugin_Toolbar_ContextMenu_DistributeRows_Button'),
     type: 'text',
   };
 };
 
-const distributeColumnsButton = (table, selected) => {
+const distributeColumnsButton = (table, selected, t) => {
   return {
     onClick: () => distributeColumns(table, selected),
     dataHook: 'distribute-columns',
-    text: 'Distribute columns',
+    text: t('TablePlugin_Toolbar_ContextMenu_DistributeCols_Button'),
     type: 'text',
   };
 };
 
-const mergeButton = merge => {
+const mergeButton = (merge, t) => {
   return {
     onClick: () => merge(),
     dataHook: 'merge-cells',
-    text: 'Merge cells',
+    text: t('TablePlugin_Toolbar_ContextMenu_MergeCells_Button'),
     type: 'text',
   };
 };
 
-const clearButton = (table, selected) => {
+const clearButton = (table, selected, t) => {
   return {
     onClick: () => clear(table, selected),
     dataHook: 'clear',
-    text: 'Clear',
+    text: t('TablePlugin_Toolbar_ContextMenu_Clear_Button'),
     type: 'text',
   };
 };
 
-const deleteTableButton = deleteBlock => {
+const deleteTableButton = (deleteBlock, t) => {
   return {
     onClick: deleteBlock,
     dataHook: 'delete-table',
-    text: 'Delete table',
+    text: t('TablePlugin_Toolbar_ContextMenu_DeleteTable_Button'),
     type: 'text',
   };
 };
@@ -184,7 +184,8 @@ export const getContextMenuButtonsProps = (
   selectRows,
   selectCols,
   deleteBlock,
-  merge
+  merge,
+  t
 ) => {
   const range = selected && getRange(selected);
   const shouldShowMerge =
@@ -195,62 +196,62 @@ export const getContextMenuButtonsProps = (
   let buttons;
   if (isAllCellsSelected) {
     buttons = [
-      clearButton(table, selected),
-      deleteTableButton(deleteBlock),
+      clearButton(table, selected, t),
+      deleteTableButton(deleteBlock, t),
       divider(),
-      addLastRowButton(addRow, table),
-      addLastColButton(addCol, table),
+      addLastRowButton(addRow, table, t),
+      addLastColButton(addCol, table, t),
       divider(),
-      shouldShowMerge && mergeButton(merge),
-      shouldShowSplit && splitButton(table, selected),
+      shouldShowMerge && mergeButton(merge, t),
+      shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(table, innerEditorsRefs, selected),
-      distributeColumnsButton(table, selected),
+      distributeRowsButton(table, innerEditorsRefs, selected, t),
+      distributeColumnsButton(table, selected, t),
     ];
   } else if (selectedRows) {
     buttons = [
-      clearButton(table, selected),
-      deleteRowButton(deleteRow, selectedRows),
+      clearButton(table, selected, t),
+      deleteRowButton(deleteRow, selectedRows, t),
       divider(),
-      addRowAboveButton(addRow, range),
-      addRowBelowButton(addRow, range),
+      addRowAboveButton(addRow, range, t),
+      addRowBelowButton(addRow, range, t),
       divider(),
-      shouldShowMerge && mergeButton(merge),
-      shouldShowSplit && splitButton(table, selected),
+      shouldShowMerge && mergeButton(merge, t),
+      shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(table, innerEditorsRefs, selected),
+      distributeRowsButton(table, innerEditorsRefs, selected, t),
     ];
   } else if (selectedCols) {
     buttons = [
-      clearButton(table, selected),
-      deleteColButton(deleteColumn, selectedCols),
+      clearButton(table, selected, t),
+      deleteColButton(deleteColumn, selectedCols, t),
       divider(),
-      addColRightButton(addCol, range),
-      addColLeftButton(addCol, range),
+      addColRightButton(addCol, range, t),
+      addColLeftButton(addCol, range, t),
       divider(),
-      shouldShowMerge && mergeButton(merge),
-      shouldShowSplit && splitButton(table, selected),
+      shouldShowMerge && mergeButton(merge, t),
+      shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeColumnsButton(table, selected),
+      distributeColumnsButton(table, selected, t),
     ];
   } else if (multipleCellsSelected) {
     buttons = [
-      clearButton(table, selected),
+      clearButton(table, selected, t),
       divider(),
-      shouldShowMerge && mergeButton(merge),
-      shouldShowSplit && splitButton(table, selected),
+      shouldShowMerge && mergeButton(merge, t),
+      shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(table, innerEditorsRefs, selected),
-      distributeColumnsButton(table, selected),
+      distributeRowsButton(table, innerEditorsRefs, selected, t),
+      distributeColumnsButton(table, selected, t),
     ];
   } else {
     buttons = [
-      clearButton(table, selected),
+      clearButton(table, selected, t),
       divider(),
-      shouldShowSplit && splitButton(table, selected),
+      shouldShowSplit && splitButton(table, selected, t),
       shouldShowSplit && divider(),
-      selectRowButton(selected, selectRows),
-      selectColButton(selected, selectCols),
+      selectRowButton(selected, selectRows, t),
+      selectColButton(selected, selectCols, t),
     ];
   }
   return [

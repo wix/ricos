@@ -1,5 +1,5 @@
 import { getColors } from '../defaults';
-import { CELL_MANUAL_MIN_WIDTH } from '../consts';
+import { CELL_MANUAL_MIN_WIDTH, CELL_AUTO_MIN_WIDTH } from '../consts';
 
 //RESIZERS
 const getStyleVal = (elm, css) => {
@@ -15,10 +15,9 @@ export const paddingDiff = col => {
   return parseInt(padLeft) + parseInt(padRight);
 };
 
-export const getRefWidthAsNumber = ref => {
-  const widthStr = ref.style.width;
-  return parseInt(widthStr.substring(0, widthStr.length - 2));
-};
+export const getRefWidthAsNumber = ref => getSizeStringAsNumber(ref.style.width);
+
+export const getSizeStringAsNumber = str => parseInt(str.substring(0, str.length - 2));
 
 //SELECTION
 export const range = (start, end) => {
@@ -78,6 +77,8 @@ export class TableDataUtil {
 
   getRowHeight = i => this.getRowsHeight()[i];
 
+  getColsMinWidth = () => this.componentData.config.colsMinWidth;
+
   // get min width of column (in case we want min width for column with specific atomic plugins)
   getColMinWidth = j => {
     let colMinWidth = CELL_MANUAL_MIN_WIDTH;
@@ -101,22 +102,28 @@ export class TableDataUtil {
     return colMinWidth;
   };
 
-  getCellWidthAsPixel = (tableWidth, i) => {
+  getCellWidthAsPixel = (tableWidth, i, colsMinWidth = []) => {
     const colsWidthSum = this.getColsWidth().reduce((acc, val) => acc + val, 0);
     let smallestCellIndex, smallestCellWidth, currCellWidth;
     this.getColsWidth().forEach((width, index) => {
       const cellWidth = tableWidth * (width / colsWidthSum);
       if (index === i) {
         currCellWidth = cellWidth;
-      } else if (cellWidth < 120 && (!smallestCellWidth || smallestCellWidth > cellWidth)) {
-        smallestCellWidth = cellWidth;
+      } else if (
+        cellWidth < CELL_AUTO_MIN_WIDTH &&
+        (!smallestCellWidth || smallestCellWidth > cellWidth)
+      ) {
+        smallestCellWidth = Math.max(colsMinWidth[index], cellWidth);
         smallestCellIndex = index;
       }
     });
     if (smallestCellWidth) {
-      return 120 * (this.getColWidth(i) / this.getColWidth(smallestCellIndex));
+      return (
+        Math.min(CELL_AUTO_MIN_WIDTH, smallestCellWidth) *
+        (this.getColWidth(i) / this.getColWidth(smallestCellIndex))
+      );
     }
-    return Math.max(currCellWidth, 120);
+    return Math.max(currCellWidth, colsMinWidth[i]);
   };
 
   getCellWidthAsRatio = (tableWidth, totalColsWidth, cellWidth) =>
@@ -284,16 +291,16 @@ export class TableDataUtil {
     const style = {};
     const range = getRange(selection);
     if (!range.find(({ i, j }) => i === row && j === col - 1)) {
-      style.borderLeft = this.getCellStyle(row, col)?.borderLeft;
+      style.borderLeft = this.getCell(row, col)?.border?.left;
     }
     if (!range.find(({ i, j }) => i === row && j === col + 1)) {
-      style.borderRight = this.getCellStyle(row, col)?.borderRight;
+      style.borderRight = this.getCell(row, col)?.border?.right;
     }
     if (!range.find(({ i, j }) => i === row - 1 && j === col)) {
-      style.borderTop = this.getCellStyle(row, col)?.borderTop;
+      style.borderTop = this.getCell(row, col)?.border?.top;
     }
     if (!range.find(({ i, j }) => i === row + 1 && j === col)) {
-      style.borderBottom = this.getCellStyle(row, col)?.borderBottom;
+      style.borderBottom = this.getCell(row, col)?.border?.bottom;
     }
     const borderStyles = Object.values(style);
     const isBorderConsistent = borderStyles.every(borderStyle => borderStyle === borderStyles[0]);

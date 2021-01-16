@@ -1,6 +1,11 @@
+/* eslint-disable fp/no-delete */
 import { cloneDeepWith } from 'lodash';
 import { RicosContent } from 'ricos-schema';
 import { EditorState } from 'prosemirror-state';
+
+/**
+  This is still WIP
+ */
 
 export const convertToProse = (content: RicosContent): EditorState => {
   content.doc.type = 'doc';

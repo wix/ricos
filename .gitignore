@@ -39,3 +39,9 @@ applitools.config.js
 # docs
 **/.docusaurus
 **/docs/build/
+
+# ricos content migration
+**/migratedFixtures
+!intro.json
+!migration-content.json
+**/reverseMigratedFixtures

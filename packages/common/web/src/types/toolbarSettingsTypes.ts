@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditorState } from 'draft-js';
 import { ComponentType } from 'react';
-import { ToolbarType, InsertButton, ToolbarButtonProps, PluginType } from '.';
+import { ToolbarType, InsertButton, ToolbarButtonProps } from '.';
 
 interface PlatformSettings<T> {
   desktop: T;
@@ -30,7 +30,7 @@ export interface ToolbarSettingsFunctions {
       splitToSections: boolean;
       showSearch: boolean;
     };
-    pluginsToDisplayInToolbar?: PluginType[];
+    pluginsToDisplayInToolbar?: string[];
   };
 }
 
@@ -67,6 +67,7 @@ export type AddPluginMenuConfig = {
   showSearch?: boolean;
   splitToSections?: boolean;
   tablePluginMenu?: boolean;
+  horizontalMenuLayout?: boolean;
 };
 
 export type PluginMenuSettings = {

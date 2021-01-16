@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/resizer.scss';
 import { paddingDiff, getRefWidthAsNumber } from '../domain/tableDataUtil';
 import classNames from 'classnames';
+import { CELL_AUTO_MIN_WIDTH } from '../consts';
 
 const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 
@@ -21,10 +22,10 @@ export default class Resizer extends PureComponent {
   getSize = () =>
     this.props.horizontal ? this.curTarget.offsetWidth : this.curTarget.offsetHeight;
 
-  setNewSize = size =>
-    this.props.horizontal
-      ? (this.curTarget.style.width = size)
-      : (this.curTarget.style.height = size);
+  setNewSize = (ref, size) =>
+    this.props.horizontal ? (ref.style.width = size) : (ref.style.height = size);
+
+  setMinSize = (ref, size) => (ref.style.minWidth = size);
 
   onMouseDown = e => {
     const { horizontal, size, onResizeStart, index, itemsRefs } = this.props;
@@ -44,11 +45,16 @@ export default class Resizer extends PureComponent {
       const diff = this.getPosition(e) - this.position;
       const newSize = this.curSize + diff;
       const siblingNewSize = this.siblingSize - diff;
-      const { minSize, setContainerSize } = this.props;
-      if (newSize >= minSize && (!siblingNewSize || siblingNewSize >= minSize)) {
-        this.setNewSize(newSize + 'px');
+      const { minSize, setContainerSize, horizontal } = this.props;
+      if (newSize >= minSize) {
+        horizontal &&
+          newSize < CELL_AUTO_MIN_WIDTH &&
+          this.setMinSize(this.curTarget, newSize + 'px');
+        this.setNewSize(this.curTarget, newSize + 'px');
         setContainerSize && setContainerSize(newSize + 'px', this.props.index);
-        siblingNewSize && (this.siblingCell.style.width = siblingNewSize + 'px');
+        siblingNewSize &&
+          siblingNewSize >= CELL_AUTO_MIN_WIDTH &&
+          this.setNewSize(this.siblingCell, siblingNewSize + 'px');
       }
     }
   };
@@ -91,6 +97,7 @@ export default class Resizer extends PureComponent {
       <div
         className={classNames(
           styles.resizer,
+          this.props.highlightOnly && styles.highlightOnly,
           this.props.horizontal ? styles.horizonResizer : styles.verticalResizer
         )}
         style={resizerStyle}
@@ -111,4 +118,5 @@ Resizer.propTypes = {
   onResizeStart: PropTypes.func,
   itemsRefs: PropTypes.any,
   setContainerSize: PropTypes.func,
+  highlightOnly: PropTypes.bool,
 };
