@@ -26,9 +26,19 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add support for new error codes, split `ErrorToast` component for scalability
+- `editor-common`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add new media upload error transtion keys
+
 </details>
 <hr/>
 
+## 8.15.3 (Jan 14, 2021)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
 ## 8.15.2 (Jan 14, 2021)
 ### :house: Internal
 - `common`
