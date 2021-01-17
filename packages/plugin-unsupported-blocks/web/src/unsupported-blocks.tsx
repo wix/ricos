@@ -12,9 +12,7 @@ class UnsupportedBlocks extends Component<Props> {
 
   render() {
     const { t, theme } = this.props;
-    const pluginName = t('UnsupportedPlugin_default_name');
-    const unsupportedMessage = t('UnsupportedPlugin_message');
-    const alertMessage = <p>{`${pluginName} ${unsupportedMessage}`}</p>;
+    const alertMessage = <p>{t('UnsupportedPlugin_message')}</p>;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
