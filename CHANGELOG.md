@@ -9,11 +9,12 @@
 > - :house: Internal
 > - :nail_care: Polish
 
-## [Unreleased]
+## [Unreleased]  
 
-### :rocket: New Feature
-- `unsupportedBlocksPlugin`
-  - [#1939](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when some plugins aren't supported
+### :bug: Bug Fix
+- `unsupportedBlocks`
+  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
+
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
@@ -23,9 +24,32 @@
 ### :house: Internal
 - `e2e`
   - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
+- `editor`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add support for new error codes, split `ErrorToast` component for scalability
+- `editor-common`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add new media upload error transtion keys
 
 </details>
 <hr/>
+
+## 8.15.3 (Jan 14, 2021)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
+## 8.15.2 (Jan 14, 2021)
+### :house: Internal
+- `common`
+  - [#1994](https://github.com/wix/ricos/commit/1994) added new media upload error keys
+
+## 8.15.1 (Jan 13, 2021)
+### :book: Documentation
+- `unsupportedBlocks`
+  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
+
+## 8.15.0 (Jan 12, 2021)
+### :rocket: New Feature
+- `unsupportedBlocks`
+  - [#1969](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when plugin isn't supported
 
 ## 8.14.2 (Jan 12, 2021)
 ### :bug: Bug Fix
