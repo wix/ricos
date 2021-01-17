@@ -49,7 +49,7 @@ const errorMap = {
   [MediaUploadErrorKey.VIDEO_CODEC]: 'UploadVideo_Error_Unsupported_Video_Codec',
 };
 
-export default function ErrorMessageProvider(props) {
+export default function ErrorMessage(props) {
   const { error, errorCount, ...rest } = props;
   const translationKey =
     errorCount > 1 ? 'UploadFile_Error_Generic_Toast_Multiple' : errorMap[error.key];
@@ -70,7 +70,7 @@ export default function ErrorMessageProvider(props) {
   return <Toast message={errorMsg} isError {...rest} />;
 }
 
-ErrorMessageProvider.propTypes = {
+ErrorMessage.propTypes = {
   error: PropTypes.object,
   errorCount: PropTypes.number,
 };

@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { GlobalContext } from 'wix-rich-content-common';
 
-const ErrorMessageProvider = React.lazy(() => import('./ErrorMessageProvider'));
+const ErrorMessage = React.lazy(() => import('./ErrorMessage'));
 
 export default class ErrorToast extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class ErrorToast extends Component {
 
     return (
       <Suspense fallback={<div />}>
-        <ErrorMessageProvider
+        <ErrorMessage
           error={error}
           errorCount={errorCount}
           onClose={this.close}
