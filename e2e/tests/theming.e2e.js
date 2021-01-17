@@ -85,16 +85,16 @@ function tests({ isDesktop }) {
     testFlow(isDesktop, this.test.title);
   });
 
-  // it('dark palette, no cssOverride, fallbackColor=red', function() {
-  //   cy.loadRicosEditorAndViewer(
-  //     'storybook-example-app',
-  //     usePlugins(plugins.all),
-  //     useTheming({ paletteType: 'dark', skipCssOverride: true, fallback: '#FF0000' })
-  //   ).focusEditor();
-  //   cy.wait(2000);
-  //   cy.eyesCheckWindow(this.test.title);
-  //   testFlow(isDesktop, this.test.title);
-  // });
+  it('dark palette, no cssOverride, fallbackColor=red', function() {
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      usePlugins(plugins.all),
+      useTheming({ paletteType: 'dark', skipCssOverride: true, fallback: '#FF0000' })
+    ).focusEditor();
+    cy.wait(2000);
+    cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
+  });
 
   it('customStyles', function() {
     cy.loadRicosEditorAndViewer(
