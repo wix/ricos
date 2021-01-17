@@ -137,6 +137,7 @@ class TableToolbar extends Component {
       deleteBlock,
       selectedRows,
       selectedCols,
+      multipleCellsSelected,
       t
     );
     const contextMenuButtonsProps = getContextMenuButtonsProps(
@@ -165,7 +166,7 @@ class TableToolbar extends Component {
         type: 'text',
       },
       {
-        type: 'gap',
+        type: 'SEPARATOR',
       },
       ...cellFormattingButtonsProps,
       {
