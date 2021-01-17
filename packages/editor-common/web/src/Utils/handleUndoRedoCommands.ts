@@ -25,6 +25,8 @@ type EntityToReplace = {
   blockKey?: string;
 };
 
+/* Utilities */
+
 // removing composition mode fixes mobile issues
 function removeCompositionModeFromEditorState(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
@@ -33,6 +35,13 @@ function removeCompositionModeFromEditorState(editorState: EditorState) {
     });
   }
   return editorState;
+}
+
+function removeFocus(editorState: EditorState) {
+  return EditorState.acceptSelection(
+    editorState,
+    editorState.getSelection().merge({ hasFocus: false })
+  );
 }
 
 function getType(type: string) {
@@ -44,49 +53,34 @@ function getType(type: string) {
   return type;
 }
 
-// applies undo action on gallery items by fixing the changed item if it's source was broken
-function applyActionForGalleryItems(currentItems, newItems) {
-  const brokenItemIndex = newItems.findIndex((item, index) => {
-    const currentItem = currentItems[index];
-    return currentItem && !currentItem.tempData && item.tempData;
-  });
-  if (brokenItemIndex !== -1) {
-    const newItem = newItems[brokenItemIndex];
-    const {
-      itemId,
-      url,
-      metadata: { type, height, width },
-    } = currentItems[brokenItemIndex];
-    const metadata = { ...newItem.metadata, type, height, width };
-    newItems[brokenItemIndex] = { ...newItem, itemId, url, metadata, tempData: undefined };
-    return newItems;
-  }
+function extractEntities(block, newBlocksEntitiesData, entityMap) {
+  const { entityRanges = [], key: blockKey } = block;
+  const entityKey = entityRanges[0]?.key;
+  const currentEntity = entityMap[entityKey];
+  const { entityData: newEntityData } = newBlocksEntitiesData[blockKey];
+  return { currentEntity, newEntityData };
 }
 
-// checks if an accordion pair changed and if so returns the changed pair index and an indictor (title or content)
-function getChangedAccordionPairIndex(currentPairs, newPairs) {
-  let item;
-  let didChange = false;
-  const changedPairIndex = newPairs.findIndex((newPair, index) => {
-    const { key: newKey, title: newTitle, content: newContent } = newPair;
-    const currentPair = currentPairs[index];
-    const { key: currentKey, title: currentTitle, content: currentContent } = currentPair;
-    if (currentKey !== newKey) {
-      return true;
-    }
-    if (currentTitle.getCurrentContent() !== newTitle.getCurrentContent()) {
-      item = 'title';
-      return true;
-    } else if (currentContent.getCurrentContent() !== newContent.getCurrentContent()) {
-      item = 'content';
-      return true;
-    }
-    return false;
-  });
-  if (changedPairIndex > -1) {
-    didChange = true;
-  }
-  return { didChange, changedPairIndex, item };
+function hasEntity(block, newBlocksEntitiesData, entityMap) {
+  const { currentEntity, newEntityData } = extractEntities(block, newBlocksEntitiesData, entityMap);
+  return currentEntity && newEntityData;
+}
+
+function shiftRedoStack(editorState: EditorState) {
+  return EditorState.set(editorState, { redoStack: editorState.getRedoStack().shift() });
+}
+
+function pushToRedoStack(editorState: EditorState, contentState: ContentState) {
+  return EditorState.set(editorState, { redoStack: editorState.getRedoStack().push(contentState) });
+}
+
+function replaceComponentData(editorState: EditorState, blockKey: string, componentData) {
+  const currentContent = editorState.getCurrentContent();
+  const entityKey = currentContent
+    .getBlockMap()
+    .get(blockKey)
+    .getEntityAt(0);
+  currentContent.replaceEntityData(entityKey, componentData);
 }
 
 // creates a map of blockKey to the block's data and entityData for easier access
@@ -104,12 +98,28 @@ function createBlockEntitiesDataMap(contentState: RicosContent) {
   return blockEntitiesDataMap;
 }
 
-function shouldReplaceVideoData(currentData, newData) {
-  return (
-    (!currentData.tempData && newData.tempData) ||
-    (currentData.metadata && !newData.metadata) ||
-    (currentData.src && !newData.src)
-  );
+/* Compare EditorStates and fix (if needed) */
+
+function checkEntities(currentBlock, newBlocksEntitiesData, entityMap) {
+  const {
+    currentEntity: { type, data: currentData },
+    newEntityData: newData,
+  } = extractEntities(currentBlock, newBlocksEntitiesData, entityMap);
+  let entityToReplace: EntityToReplace = { didChange: false };
+  if (INNER_RICOS_TYPES.includes(type)) {
+    entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
+  } else if (!isEqual(currentData, newData)) {
+    entityToReplace.didChange = true;
+    const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
+    if (fixedData) {
+      entityToReplace = {
+        ...entityToReplace,
+        fixedData,
+        shouldUndoAgain: true,
+      };
+    }
+  }
+  return entityToReplace;
 }
 
 function getEntityToReplace(blocks, entityMap, newBlocksEntitiesData): EntityToReplace {
@@ -140,7 +150,18 @@ function getEntityToReplace(blocks, entityMap, newBlocksEntitiesData): EntityToR
   return entityToReplace;
 }
 
-// fixes entities in inner EditorStates
+function didBlocksChange(blocks, newBlocksEntitiesData) {
+  if (blocks.length !== Object.keys(newBlocksEntitiesData).length) {
+    return true;
+  }
+  return blocks.some(block => {
+    const { key: blockKey } = block;
+    const { block: newBlock } = newBlocksEntitiesData[blockKey];
+    return !newBlock || !isEqual(block, newBlock);
+  });
+}
+
+// fixes entities in EditorStates
 function fixBrokenRicosStates(newEditorState: EditorState, editorState: EditorState) {
   const newContentState = convertToRaw(newEditorState.getCurrentContent());
   const contentState = convertToRaw(editorState.getCurrentContent());
@@ -167,48 +188,86 @@ function fixBrokenRicosStates(newEditorState: EditorState, editorState: EditorSt
   };
 }
 
-function handleAccordionEntity(currentData, newData) {
-  const newPairs = newData.pairs.filter(pair => pair.key && pair.title && pair.content);
-  // a pair with no key, title or content is broken
-  const isBrokenContent = newPairs.length !== newData.pairs.length;
-  // check if the config changed.
-  if (!isEqual(currentData.config, newData.config) || isBrokenContent) {
-    return {
-      didChange: !isBrokenContent,
-    };
-  }
-  // check if pairs were deleted.
-  const { pairs: currentPairs } = currentData;
-  if (newPairs.length !== currentPairs.length) {
-    return { didChange: true };
-  }
+/* Accordion Entity Handling */
 
-  // check if a pair changed and fix if necessary.
-  const { didChange, changedPairIndex, item } = getChangedAccordionPairIndex(
+function didAccordionConfigChange(currentData, newData) {
+  const { pairs: currentPairs } = currentData;
+  const { pairs: newPairs } = newData;
+  return !isEqual(currentData.config, newData.config) || newPairs.length !== currentPairs.length;
+}
+
+function checkAccordionPair(currentPair, newPair) {
+  const { key: newKey, title: newTitle, content: newContent } = newPair;
+  const { key: currentKey, title: currentTitle, content: currentContent } = currentPair;
+
+  return (
+    (currentKey !== newKey && 'key') ||
+    (currentTitle.getCurrentContent() !== newTitle.getCurrentContent() && 'title') ||
+    (currentContent.getCurrentContent() !== newContent.getCurrentContent() && 'content')
+  );
+}
+
+// checks if an accordion pair changed and if so returns the changed pair index and an indictor (title or content)
+function getChangedAccordionPairIndex(currentPairs, newPairs) {
+  let item;
+  let didPairChange = false;
+  const changedPairIndex = newPairs.findIndex((newPair, index) => {
+    const currentPair = currentPairs[index];
+    item = checkAccordionPair(currentPair, newPair);
+    return !!item;
+  });
+  if (changedPairIndex > -1) {
+    didPairChange = true;
+  }
+  return { didPairChange, changedPairIndex, item };
+}
+
+function getFixedAccordionData(currentData, newData) {
+  let entityToReplace: EntityToReplace = { didChange: false };
+  const { pairs: currentPairs } = currentData;
+  const { pairs: newPairs } = newData;
+
+  const { didPairChange, changedPairIndex, item } = getChangedAccordionPairIndex(
     currentPairs,
     newPairs
   );
-  if (didChange) {
-    if (item) {
-      const { fixedEditorState, didChange } = fixBrokenRicosStates(
+
+  if (didPairChange) {
+    entityToReplace.didChange = true;
+    if (item !== 'key') {
+      const { fixedEditorState, didChange: didInnerStateChange } = fixBrokenRicosStates(
         newPairs[changedPairIndex][item],
         currentPairs[changedPairIndex][item]
       );
       newPairs[changedPairIndex][item] = EditorState.createWithContent(
-        fixedEditorState.getCurrentContent()
+        removeFocus(fixedEditorState).getCurrentContent()
       );
-      return {
+      entityToReplace = {
+        ...entityToReplace,
         fixedData: {
           ...currentData,
           pairs: newPairs,
         },
-        shouldUndoAgain: !didChange,
-        didChange,
+        shouldUndoAgain: !didInnerStateChange,
       };
     }
   }
-  return { didChange };
+  return entityToReplace;
 }
+
+function handleAccordionEntity(currentData, newData) {
+  // a pair with no key, title or content is broken
+  const isBrokenContent = newData.pairs.some(pair => !(pair.key && pair.title && pair.content));
+
+  const entityToReplace: EntityToReplace = {
+    didChange: isBrokenContent || didAccordionConfigChange(currentData, newData),
+    shouldUndoAgain: isBrokenContent,
+  };
+
+  return entityToReplace.didChange ? entityToReplace : getFixedAccordionData(currentData, newData);
+}
+
+/* Table Entity Handling */
 
 // check table row's columns for a changed column.
 function checkColumns(newRow, currentRow) {
@@ -279,10 +338,7 @@ function handleTableEntity(currentData, newData) {
         newRows[row].columns[column].content,
         currentRows[row].columns[column].content
       );
-      newRows[row].columns[column].content = EditorState.acceptSelection(
-        fixedEditorState,
-        fixedEditorState.getSelection().merge({ hasFocus: false })
-      );
+      newRows[row].columns[column].content = removeFocus(fixedEditorState);
       return {
         didChange,
         shouldUndoAgain: !didChange,
@@ -297,6 +353,35 @@ function handleTableEntity(currentData, newData) {
     }
   }
   return { didChange: didCellChange };
+}
+
+/* Data Fixers for breakable plugins */
+
+// applies undo action on gallery items by fixing the changed item if it's source was broken
+function applyActionForGalleryItems(currentItems, newItems) {
+  const brokenItemIndex = newItems.findIndex((item, index) => {
+    const currentItem = currentItems[index];
+    return currentItem && !currentItem.tempData && item.tempData;
+  });
+  if (brokenItemIndex !== -1) {
+    const newItem = newItems[brokenItemIndex];
+    const {
+      itemId,
+      url,
+      metadata: { type, height, width },
+    } = currentItems[brokenItemIndex];
+    const metadata = { ...newItem.metadata, type, height, width };
+    newItems[brokenItemIndex] = { ...newItem, itemId, url, metadata, tempData: undefined };
+    return newItems;
+  }
+}
+
+function shouldReplaceVideoData(currentData, newData) {
+  return (
+    (!currentData.tempData && newData.tempData) ||
+    (currentData.metadata && !newData.metadata) ||
+    (currentData.src && !newData.src)
+  );
 }
 
 const entityDataFixers = {
@@ -332,68 +417,7 @@ const innerRicosDataFixers = {
   [TABLE_TYPE]: (currentData, newData) => handleTableEntity(currentData, newData),
 };
 
-function checkEntities(currentBlock, newBlocksEntitiesData, entityMap) {
-  const {
-    currentEntity: { type, data: currentData },
-    newEntityData: newData,
-  } = extractEntities(currentBlock, newBlocksEntitiesData, entityMap);
-  let entityToReplace: EntityToReplace = { didChange: false };
-  if (INNER_RICOS_TYPES.includes(type)) {
-    entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
-  } else if (!isEqual(currentData, newData)) {
-    entityToReplace.didChange = true;
-    const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
-    if (fixedData) {
-      entityToReplace = {
-        ...entityToReplace,
-        fixedData,
-        shouldUndoAgain: true,
-      };
-    }
-  }
-  return entityToReplace;
-}
-
-function extractEntities(block, newBlocksEntitiesData, entityMap) {
-  const { entityRanges = [], key: blockKey } = block;
-  const entityKey = entityRanges[0]?.key;
-  const currentEntity = entityMap[entityKey];
-  const { entityData: newEntityData } = newBlocksEntitiesData[blockKey];
-  return { currentEntity, newEntityData };
-}
-
-function hasEntity(block, newBlocksEntitiesData, entityMap) {
-  const { currentEntity, newEntityData } = extractEntities(block, newBlocksEntitiesData, entityMap);
-  return currentEntity && newEntityData;
-}
-
-function didBlocksChange(blocks, newBlocksEntitiesData) {
-  if (blocks.length !== Object.keys(newBlocksEntitiesData).length) {
-    return true;
-  }
-  return blocks.some(block => {
-    const { key: blockKey } = block;
-    const { block: newBlock } = newBlocksEntitiesData[blockKey];
-    return !newBlock || !isEqual(block, newBlock);
-  });
-}
-
-function shiftRedoStack(editorState: EditorState) {
-  return EditorState.set(editorState, { redoStack: editorState.getRedoStack().shift() });
-}
-
-function pushToRedoStack(editorState: EditorState, contentState: ContentState) {
-  return EditorState.set(editorState, { redoStack: editorState.getRedoStack().push(contentState) });
-}
-
-function replaceComponentData(editorState: EditorState, blockKey: string, componentData) {
-  const currentContent = editorState.getCurrentContent();
-  const entityKey = currentContent
-    .getBlockMap()
-    .get(blockKey)
-    .getEntityAt(0);
-  currentContent.replaceEntityData(entityKey, componentData);
-}
+/* Handle undo-redo calls */
 
 function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState) {
   const { fixedEditorState, didChange } = fixBrokenRicosStates(newEditorState, editorState);
