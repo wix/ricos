@@ -67,7 +67,7 @@ export default function ErrorMessageProvider(props) {
   ) : (
     error.msg
   );
-  return <Toast message={errorMsg} {...rest} />;
+  return <Toast message={errorMsg} isError {...rest} />;
 }
 
 ErrorMessageProvider.propTypes = {

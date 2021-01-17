@@ -52,7 +52,6 @@ export default class ErrorToast extends Component {
           errorCount={errorCount}
           onClose={this.close}
           isMobile={isMobile}
-          isError
         />
       </Suspense>
     );
