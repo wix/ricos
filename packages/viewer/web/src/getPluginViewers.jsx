@@ -68,14 +68,14 @@ class PluginViewer extends PureComponent {
 
   innerRCV = ({ contentState, textAlignment, direction }) => {
     const { innerRCEViewerProps } = this.props;
-    // const config = this.removeExpand(innerRCEViewerProps.config); //todo => check if needed
+    const config = this.removeExpand(innerRCEViewerProps.config);
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
         direction={direction}
         {...innerRCEViewerProps}
-        // config={config}
+        config={config}
       />
     );
   };
@@ -93,7 +93,6 @@ class PluginViewer extends PureComponent {
       context,
       blockIndex,
       SpoilerViewerWrapper,
-      blockKey,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -106,7 +105,6 @@ class PluginViewer extends PureComponent {
       settings,
       children,
       entityIndex,
-      blockKey,
       ...context,
       innerRCV: this.innerRCV,
     };
@@ -229,7 +227,6 @@ PluginViewer.propTypes = {
   }).isRequired,
   innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
-  blockKey: PropTypes.string,
 };
 
 PluginViewer.defaultProps = {
@@ -266,7 +263,6 @@ const getPluginViewers = (
           innerRCEViewerProps={innerRCEViewerProps}
           SpoilerViewerWrapper={SpoilerViewerWrapper}
           withHorizontalScroll
-          blockKey={block.key}
         >
           {isInline ? children : null}
         </PluginViewer>

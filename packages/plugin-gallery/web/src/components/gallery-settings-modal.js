@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { FocusManager } from 'wix-rich-content-editor-common';
-import { SettingsPanelFooter, SettingsSection, Tabs, Tab } from 'wix-rich-content-plugin-commons';
+import {
+  SettingsPanelFooter,
+  SettingsSection,
+  LabeledToggle,
+  Tabs,
+  Tab,
+} from 'wix-rich-content-plugin-commons';
 
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
@@ -10,7 +16,7 @@ import LayoutControlsSection from './layout-controls-section';
 import { SortableComponent } from './gallery-controls/gallery-items-sortable';
 import layoutData from '../../lib/layout-data-provider';
 import GallerySettingsMobileHeader from './gallery-controls/gallery-settings-mobile-header';
-
+import NotificationIcon from '../icons/NotificationIcon';
 class ManageMediaSection extends Component {
   applyItems = items => {
     const { data, store } = this.props;
@@ -146,12 +152,14 @@ AdvancedSettingsSection.propTypes = {
   t: PropTypes.func,
   languageDir: PropTypes.string,
 };
-
 export class GallerySettingsModal extends Component {
   constructor(props) {
     super(props);
+    const { componentData } = this.props;
     this.state = {
       activeTab: this.props.activeTab,
+      isExpandEnabled: !componentData.config.disableExpand,
+      isRightClickEnabled: !componentData.config.disableRightClick,
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.switchTab = this.switchTab.bind(this);
@@ -180,7 +188,21 @@ export class GallerySettingsModal extends Component {
   };
 
   otherTab() {
-    return this.state.activeTab === 'manage_media' ? 'advanced_settings' : 'manage_media';
+    const { activeTab } = this.state;
+    switch (activeTab) {
+      case 'manage_media': {
+        return 'manage_media';
+      }
+      case 'advanced_settings': {
+        return 'advanced_settings';
+      }
+      case 'settings': {
+        return 'settings';
+      }
+      default: {
+        return 'manage_media';
+      }
+    }
   }
 
   switchTab() {
@@ -195,8 +217,67 @@ export class GallerySettingsModal extends Component {
     return {
       manage_media: t('GallerySettings_Tab_ManageMedia'),
       advanced_settings: t('GallerySettings_Tab_AdvancedSettings'),
+      settings: t('GallerySettings_Tab_Settings'),
     }[tab];
   }
+  onDoneClick = () => {
+    const { helpers, componentData, pubsub } = this.props;
+    const newComponentData = {
+      ...componentData,
+      config: {
+        ...componentData.config,
+        disableExpand: !this.state.isExpandEnabled,
+        disableRightClick: !this.state.isRightClickEnabled,
+      },
+    };
+    if (this.state.metadata) {
+      this.addMetadataToBlock();
+    }
+    pubsub.update('componentData', newComponentData);
+
+    helpers.closeModal();
+  };
+
+  toggleState = key => () => {
+    this.setState(prevState => ({
+      [key]: !prevState[key],
+    }));
+  };
+
+  renderToggle = ({ toggleKey, labelKey }) => {
+    if (toggleKey === 'isRightClickEnabled') {
+      return (
+        <div key={toggleKey} className={styles.galleryImageSettings_toggleContainer}>
+          <LabeledToggle
+            theme={this.props.theme}
+            checked={this.state[toggleKey]}
+            label={this.props.t(labelKey)}
+            onChange={this.toggleState(toggleKey)}
+          />
+          <NotificationIcon />
+        </div>
+      );
+    }
+    return (
+      <LabeledToggle
+        key={toggleKey}
+        theme={this.props.theme}
+        checked={this.state[toggleKey]}
+        label={this.props.t(labelKey)}
+        onChange={this.toggleState(toggleKey)}
+      />
+    );
+  };
+  toggleData = [
+    {
+      toggleKey: 'isExpandEnabled',
+      labelKey: 'GalleryImageSettings_Images_OpenInExpandMode_Label',
+    },
+    {
+      toggleKey: 'isRightClickEnabled',
+      labelKey: 'GalleryImageSettings_Images_CanBeDownloaded_Label',
+    },
+  ];
 
   render() {
     const styles = this.styles;
@@ -252,6 +333,9 @@ export class GallerySettingsModal extends Component {
               isMobile
             />
           ) : null}
+          {activeTab === 'settings' ? (
+            <div> {this.toggleData.map(toggle => this.renderToggle(toggle))}</div>
+          ) : null}
         </div>
       );
     } else {
@@ -295,12 +379,15 @@ export class GallerySettingsModal extends Component {
                   t={t}
                 />
               </Tab>
+              <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
+                <div> {this.toggleData.map(toggle => this.renderToggle(toggle))}</div>
+              </Tab>
             </Tabs>
           </div>
           <SettingsPanelFooter
             fixed
             cancel={() => this.revertComponentData()}
-            save={() => helpers.closeModal()}
+            save={this.onDoneClick}
             theme={this.props.theme}
             t={t}
           />

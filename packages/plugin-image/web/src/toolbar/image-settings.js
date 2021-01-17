@@ -12,6 +12,7 @@ import {
 } from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
+import NotificationIcon from '../icons/NotificationIcon';
 
 class ImageSettings extends Component {
   constructor(props) {
@@ -20,8 +21,8 @@ class ImageSettings extends Component {
 
     this.state = {
       ...this.propsToState(props),
-      isExpandable: !componentData.config.disableExpand,
-      isRightClickAllowed: !componentData.config.disableRightClick,
+      isExpandEnabled: !componentData.config.disableExpand,
+      isRightClickEnabled: !componentData.config.disableRightClick,
     };
     this.initialState = { ...this.state };
     const { t, theme } = props;
@@ -53,22 +54,38 @@ class ImageSettings extends Component {
     }));
   };
 
-  renderToggle = ({ toggleKey, labelKey }) => (
-    <LabeledToggle
-      key={toggleKey}
-      theme={this.props.theme}
-      checked={this.state[toggleKey]}
-      label={this.props.t(labelKey)}
-      onChange={this.toggleState(toggleKey)}
-    />
-  );
+  renderToggle = ({ toggleKey, labelKey }) => {
+    if (toggleKey === 'isRightClickEnabled') {
+      return (
+        <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
+          <LabeledToggle
+            theme={this.props.theme}
+            checked={this.state[toggleKey]}
+            label={this.props.t(labelKey)}
+            onChange={this.toggleState(toggleKey)}
+          />
+          <NotificationIcon />
+        </div>
+      );
+    }
+    return (
+      <LabeledToggle
+        key={toggleKey}
+        theme={this.props.theme}
+        checked={this.state[toggleKey]}
+        label={this.props.t(labelKey)}
+        onChange={this.toggleState(toggleKey)}
+      />
+    );
+  };
+
   toggleData = [
     {
-      toggleKey: 'isExpandable',
+      toggleKey: 'isExpandEnabled',
       labelKey: 'ImageSettings_Image_OpensInExpandMode_Label',
     },
     {
-      toggleKey: 'isRightClickAllowed',
+      toggleKey: 'isRightClickEnabled',
       labelKey: 'ImageSettings_Image_CanBeDownloaded_Label',
     },
   ];
@@ -112,8 +129,8 @@ class ImageSettings extends Component {
       ...componentData,
       config: {
         ...componentData.config,
-        disableExpand: !this.state.isExpandable,
-        disableRightClick: !this.state.isRightClickAllowed,
+        disableExpand: !this.state.isExpandEnabled,
+        disableRightClick: !this.state.isRightClickEnabled,
       },
     };
     if (this.state.metadata) {

@@ -44,3 +44,11 @@ $FOOTER_HEIGHT: 100px;
   overflow-y: auto;
   overflow-x: hidden;
 }
+.galleryImageSettings_toggleContainer{
+  position: relative;
+  svg{
+    position: absolute;
+    top: 30px;
+    left: 170px;
+  }
+}

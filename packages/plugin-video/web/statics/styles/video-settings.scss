@@ -1,7 +1,7 @@
 $TITLE_HEIGHT: 100px;
 $FOOTER_HEIGHT: 100px;
 $MOBILE_HEADER_HEIGHT: 50px;
-.imageSettings {
+.videoSettings {
   position: absolute;
   left: 0;
   right: 0;
@@ -11,35 +11,33 @@ $MOBILE_HEADER_HEIGHT: 50px;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  hr{
+    width: 100%;
+    position: absolute;
+    top: 70px;
+  }
 }
 
-.imageSettingsTitle {
+.videoSettingsTitle {
   position: absolute;
   margin: 46px 0 27px 30px;
   font-size: 18px;
 }
 
-.imageSettingsImage {
-  position: relative;
-  width: 100%;
-  height: 240px;
-  background-color: rgba(51, 51, 51, 0.1);
-}
-
-.imageSettingsSection {
+.videoSettingsSection {
   padding: 20px 30px 0 30px;
   font-size: 14px;
 }
 
-.imageSettingsLabel {
+.videoSettingsLabel {
   margin-bottom: 5px;
 }
 
-.imageSettings_scrollContainer {
+.videoSettings_scrollContainer {
   margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
   width: 100%;
 }
-.imageSettings_toggleContainer{
+.videoSettings_toggleContainer{
   position: relative;
   svg{
     position: absolute;
@@ -48,14 +46,14 @@ $MOBILE_HEADER_HEIGHT: 50px;
   }
 }
 
-.imageSettings_mobile {
+.videoSettings_mobile {
   margin: 0 auto;
 }
 
-.imageSettings_footer {
+.videoSettings_footer {
   z-index: 6;
 }
 
-.imageSettings_hidden {
+.videoSettings_hidden {
   visibility: hidden;
 }

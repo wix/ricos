@@ -8,13 +8,14 @@ import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
+import { DEFAULTS } from './defaults';
 
-const DEFAULTS = Object.freeze({
-  config: {
-    size: 'content',
-    alignment: 'center',
-  },
-});
+// const DEFAULTS = Object.freeze({
+//   config: {
+//     size: 'content',
+//     alignment: 'center',
+//   },
+// });
 
 class VideoComponent extends React.Component {
   static type = { VIDEO_TYPE_LEGACY, VIDEO_TYPE };
