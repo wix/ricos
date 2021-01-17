@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "../common.proto";
+
+message RicosParagraph {
+    Common.TextAlignment textAlignment = 1;
+    Common.DynamicStyles dynamicStyles = 2;
+    int32 depth = 3;
+}

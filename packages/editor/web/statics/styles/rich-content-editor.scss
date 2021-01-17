@@ -52,7 +52,6 @@
   line-height: 1.5;
   font-size: $paragraphFontSize;
   color: $primary-text-color;
-  background-color: $background-color;
 
   :global(.DraftEditor-editorContainer) {
     @include ricosTypography('p', false);

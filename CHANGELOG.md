@@ -9,7 +9,11 @@
 > - :house: Internal
 > - :nail_care: Polish
 
-## [Unreleased]
+## [Unreleased]  
+
+### :bug: Bug Fix
+- `unsupportedBlocks`
+  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
 
 ### :rocket: New Feature
 - `fullScreen`
@@ -25,6 +29,40 @@
 
 </details>
 <hr/>
+
+## 8.15.3 (Jan 14, 2021)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
+## 8.15.2 (Jan 14, 2021)
+### :house: Internal
+- `common`
+  - [#1994](https://github.com/wix/ricos/commit/1994) added new media upload error keys
+
+## 8.15.1 (Jan 13, 2021)
+### :book: Documentation
+- `unsupportedBlocks`
+  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
+
+## 8.15.0 (Jan 12, 2021)
+### :rocket: New Feature
+- `unsupportedBlocks`
+  - [#1969](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when plugin isn't supported
+
+## 8.14.2 (Jan 12, 2021)
+### :bug: Bug Fix
+- `table`
+  - [#1972](https://github.com/wix/ricos/commit/1972) fix table responsive and table resize
+- `table`
+  - [#1980](https://github.com/wix/ricos/commit/1980) fix table cell content align on edit
+- `table`
+  - [#1949](https://github.com/wix/ricos/commit/1949) fix table theme wiring
+- `table`
+  - [#1957](https://github.com/wix/ricos/commit/1957) fix table keyboard behavior, ui fixes, disable drag preview scroll
+- `table`
+  - [#1975](https://github.com/wix/ricos/commit/1975) add the option to reorder row to first place
+- `table`
+  - [#1974](https://github.com/wix/ricos/commit/1974) fix rows and columns selection on edit cell
 
 ## 8.14.1 (Jan 11, 2021)
 ### :bug: Bug Fix

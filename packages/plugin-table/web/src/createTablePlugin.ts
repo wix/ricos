@@ -32,26 +32,11 @@ const createTablePlugin: CreatePluginFunction<TablePluginEditorConfig> = config 
       ...rest,
     },
     {
-      // keyBindingFn: (event, { getEditorState }) => {
-      //   const editorState = getEditorState();
-      //   const currentBlock = getBlockAtStartOfSelection(editorState);
-      //   const entityKey = currentBlock.getEntityAt(0);
-      //   const entityType = entityKey && editorState.getCurrentContent().getEntity(entityKey).type;
-      //   if (entityType === TABLE_TYPE) {
-      //     if (event.key === 'Backspace') {
-      //       return 'CLEAR_TABLE_CELL';
-      //     }
-      //   }
-      // },
       handleKeyCommand: (command, editorState, timestamp, { setEditorState }) => {
         if (CodeUtils.hasSelectionInBlock(editorState)) {
           let newState;
-          // if (command === 'CLEAR_TABLE_CELL') {
-          //   return 'handled';
-          // }
           if (command === COMMANDS.TAB) {
-            const mockEvent = { preventDefault: () => {} };
-            newState = CodeUtils.onTab(mockEvent, editorState);
+            return 'handled';
           }
           if (newState) {
             setEditorState(newState);

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+    // is message value required
+    optional bool required = 50367;
+}
+
+message Common {
+    enum TextAlignment {
+        LEFT = 0;
+        RIGHT = 1;
+        CENTER = 2;
+        JUSTIFY = 3;
+    }
+
+    message DynamicStyles {
+        string lineHeight = 1;
+        string paddingTop = 2;
+        string paddingBottom = 3;
+    }
+}

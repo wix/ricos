@@ -1,1 +1,1 @@
-export { MigrateSchema } from '../src/migrateSchema';
+export { fromDraft, toDraft } from '../src/migrateSchema';
