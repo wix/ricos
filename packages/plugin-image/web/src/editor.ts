@@ -10,5 +10,6 @@ export const pluginImage: EditorPluginCreator<ImagePluginEditorConfig> = config 
     type: IMAGE_TYPE,
     createPlugin: createImagePlugin,
     ModalsMap,
+    componentData: DEFAULTS,
   };
 };

@@ -9,5 +9,6 @@ export const pluginLink: EditorPluginCreator<LinkPluginEditorConfig> = config =>
     type: LINK_TYPE,
     createPlugin: createLinkPlugin,
     ModalsMap: {},
+    componentData: DEFAULTS,
   };
 };

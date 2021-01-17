@@ -10,5 +10,6 @@ export const pluginVideo: EditorPluginCreator<VideoPluginEditorConfig> = config 
     type: VIDEO_TYPE,
     createPlugin: createVideoPlugin,
     ModalsMap,
+    componentData: DEFAULTS,
   };
 };

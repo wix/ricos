@@ -9,5 +9,6 @@ export const pluginLinkPreview: EditorPluginCreator<LinkPreviewPluginEditorConfi
     type: LINK_PREVIEW_TYPE,
     createPlugin: createLinkPreviewPlugin,
     ModalsMap: {},
+    componentData: DEFAULTS,
   };
 };

@@ -11,5 +11,6 @@ export const pluginTable: EditorPluginCreator<TablePluginEditorConfig> = config 
     createPlugin: createTablePlugin,
     ModalsMap,
     theme,
+    componentData: DEFAULTS,
   };
 };

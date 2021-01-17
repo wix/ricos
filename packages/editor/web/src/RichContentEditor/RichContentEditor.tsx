@@ -119,6 +119,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  pluginsData: any; //TODO: createType
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -235,7 +237,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.initPlugins();
     this.initEditorCommands();
     this.initEditorState();
-    // (window as any).editor = this;
+    this.initEditorCommands();
+    this.initEditorState();
+    if (typeof window !== 'undefined') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).editor = this;
+    }
   }
 
   componentDidUpdate() {
@@ -432,7 +439,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 
   initEditorCommands = () => {
-    this.EditorCommands = createEditorCommands(this.getEditorState, this.updateEditorState);
+    const { pluginsData = {} } = this.props;
+    this.EditorCommands = createEditorCommands(
+      pluginsData,
+      this.getEditorState,
+      this.updateEditorState
+    );
   };
 
   initEditorState = () => {

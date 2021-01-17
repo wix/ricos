@@ -10,5 +10,6 @@ export const pluginAccordion: EditorPluginCreator<AccordionPluginEditorConfig> =
     type: ACCORDION_TYPE,
     createPlugin: createAccordionPlugin,
     ModalsMap,
+    componentData: DEFAULTS,
   };
 };

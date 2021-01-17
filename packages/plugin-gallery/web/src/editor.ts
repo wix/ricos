@@ -10,5 +10,6 @@ export const pluginGallery: EditorPluginCreator<GalleryPluginEditorConfig> = con
     type: GALLERY_TYPE,
     createPlugin: createGalleryPlugin,
     ModalsMap,
+    componentData: DEFAULTS,
   };
 };

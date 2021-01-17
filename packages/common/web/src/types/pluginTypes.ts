@@ -59,6 +59,7 @@ import {
   ACCORDION_TYPE,
   TABLE_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
+  ComponentData,
 } from 'ricos-content';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
@@ -167,6 +168,8 @@ export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<s
   config: PluginConfig;
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  componentData?: ComponentData; //TODO: createType
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

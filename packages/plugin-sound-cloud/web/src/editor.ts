@@ -10,5 +10,6 @@ export const pluginSoundCloud: EditorPluginCreator<SoundCloudPluginEditorConfig>
     type: SOUND_CLOUD_TYPE,
     createPlugin: createSoundCloudPlugin,
     ModalsMap,
+    componentData: DEFAULTS,
   };
 };

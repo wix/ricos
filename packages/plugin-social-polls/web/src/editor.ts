@@ -11,5 +11,6 @@ export const pluginPoll: EditorPluginCreator<PollPluginEditorConfig> = config =>
     createPlugin: createPollPlugin,
     ModalsMap,
     theme,
+    componentData: DEFAULT_COMPONENT_DATA,
   };
 };

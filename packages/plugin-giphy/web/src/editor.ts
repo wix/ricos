@@ -10,5 +10,6 @@ export const pluginGiphy: EditorPluginCreator<GiphyPluginEditorConfig> = config 
     type: GIPHY_TYPE,
     createPlugin: createGiphyPlugin,
     ModalsMap,
+    componentData: DEFAULTS,
   };
 };

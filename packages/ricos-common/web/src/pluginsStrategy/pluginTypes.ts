@@ -14,6 +14,8 @@ export interface EditorPluginsStrategy {
   config: Record<string, any>;
   plugins: CreatePluginFunction[];
   ModalsMap: ModalsMap;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  pluginsData: any; //TODO: create type;
 }
 
 export interface ViewerPluginsStrategy {

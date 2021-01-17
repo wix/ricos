@@ -9,5 +9,6 @@ export const pluginDivider: EditorPluginCreator<DividerPluginEditorConfig> = con
     type: DIVIDER_TYPE,
     createPlugin: createDividerPlugin,
     ModalsMap: {},
+    componentData: DEFAULTS,
   };
 };

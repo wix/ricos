@@ -9,5 +9,6 @@ export const pluginFileUpload: EditorPluginCreator<FilePluginEditorConfig> = con
     type: FILE_UPLOAD_TYPE,
     createPlugin: createFileUploadPlugin,
     ModalsMap: {},
+    componentData: DEFAULTS,
   };
 };
