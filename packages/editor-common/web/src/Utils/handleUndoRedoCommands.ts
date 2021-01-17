@@ -124,30 +124,18 @@ function checkEntities(currentBlock, newBlocksEntitiesData, entityMap) {
 
 function getEntityToReplace(blocks, entityMap, newBlocksEntitiesData): EntityToReplace {
   let entityToReplace: EntityToReplace = {};
-  const didChange = blocks
+  const didEntityChange = blocks
     .filter(block => hasEntity(block, newBlocksEntitiesData, entityMap))
     .some(currentBlock => {
       const { key: blockKey } = currentBlock;
-      const { didChange: didEntityChange, fixedData, shouldUndoAgain } = checkEntities(
-        currentBlock,
-        newBlocksEntitiesData,
-        entityMap
-      );
-      if (didEntityChange) {
-        entityToReplace = {
-          blockKey,
-          fixedData,
-          didChange: !shouldUndoAgain,
-        };
-        return true;
-      }
-      return false;
+      const { didChange, ...rest } = checkEntities(currentBlock, newBlocksEntitiesData, entityMap);
+      entityToReplace = {
+        blockKey,
+        ...rest,
+      };
+      return didChange;
     });
-
-  if (!Object.keys(entityToReplace).length) {
-    entityToReplace = { didChange };
-  }
-  return entityToReplace;
+  return didEntityChange ? entityToReplace : { shouldUndoAgain: true };
 }
 
 function didBlocksChange(blocks, newBlocksEntitiesData) {
@@ -167,11 +155,9 @@ function fixBrokenRicosStates(newEditorState: EditorState, editorState: EditorSt
   const contentState = convertToRaw(editorState.getCurrentContent());
   const newBlocksEntitiesData = createBlockEntitiesDataMap(newContentState);
   const { blocks, entityMap } = contentState;
-  let didChange = false;
-  if (didBlocksChange(blocks, newBlocksEntitiesData)) {
-    didChange = true;
-  } else {
-    const { blockKey, fixedData, didChange: didEntityChange } = getEntityToReplace(
+  let shouldUndo = false;
+  if (!didBlocksChange(blocks, newBlocksEntitiesData)) {
+    const { blockKey, fixedData, shouldUndoAgain } = getEntityToReplace(
       blocks,
       entityMap,
       newBlocksEntitiesData
@@ -179,12 +165,11 @@ function fixBrokenRicosStates(newEditorState: EditorState, editorState: EditorSt
     if (fixedData && blockKey) {
       replaceComponentData(newEditorState, blockKey, fixedData);
     }
-    didChange = !!didEntityChange;
+    shouldUndo = !!shouldUndoAgain;
   }
-
   return {
     fixedEditorState: newEditorState,
-    didChange,
+    shouldUndoAgain: shouldUndo,
   };
 }
 
@@ -199,7 +184,6 @@ function didAccordionConfigChange(currentData, newData) {
 function checkAccordionPair(currentPair, newPair) {
   const { key: newKey, title: newTitle, content: newContent } = newPair;
   const { key: currentKey, title: currentTitle, content: currentContent } = currentPair;
-
   return (
     (currentKey !== newKey && 'key') ||
     (currentTitle.getCurrentContent() !== newTitle.getCurrentContent() && 'title') ||
@@ -226,31 +210,27 @@ function getFixedAccordionData(currentData, newData) {
   let entityToReplace: EntityToReplace = { didChange: false };
   const { pairs: currentPairs } = currentData;
   const { pairs: newPairs } = newData;
-
   const { didPairChange, changedPairIndex, item } = getChangedAccordionPairIndex(
     currentPairs,
     newPairs
   );
-
-  if (didPairChange) {
-    entityToReplace.didChange = true;
-    if (item !== 'key') {
-      const { fixedEditorState, didChange: didInnerStateChange } = fixBrokenRicosStates(
-        newPairs[changedPairIndex][item],
-        currentPairs[changedPairIndex][item]
-      );
-      newPairs[changedPairIndex][item] = EditorState.createWithContent(
-        removeFocus(fixedEditorState).getCurrentContent()
-      );
-      entityToReplace = {
-        ...entityToReplace,
-        fixedData: {
-          ...currentData,
-          pairs: newPairs,
-        },
-        shouldUndoAgain: !didInnerStateChange,
-      };
-    }
+  entityToReplace.didChange = didPairChange;
+  if (item && item !== 'key') {
+    const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
+      newPairs[changedPairIndex][item],
+      currentPairs[changedPairIndex][item]
+    );
+    newPairs[changedPairIndex][item] = EditorState.createWithContent(
+      removeFocus(fixedEditorState).getCurrentContent()
+    );
+    entityToReplace = {
+      ...entityToReplace,
+      fixedData: {
+        ...currentData,
+        pairs: newPairs,
+      },
+      shouldUndoAgain,
+    };
   }
   return entityToReplace;
 }
@@ -258,12 +238,10 @@ function getFixedAccordionData(currentData, newData) {
 function handleAccordionEntity(currentData, newData) {
   // a pair with no key, title or content is broken
   const isBrokenContent = newData.pairs.some(pair => !(pair.key && pair.title && pair.content));
-
   const entityToReplace: EntityToReplace = {
     didChange: isBrokenContent || didAccordionConfigChange(currentData, newData),
     shouldUndoAgain: isBrokenContent,
   };
-
   return entityToReplace.didChange ? entityToReplace : getFixedAccordionData(currentData, newData);
 }
 
@@ -334,14 +312,14 @@ function handleTableEntity(currentData, newData) {
   );
   if (didCellChange) {
     if (!isStyleChange) {
-      const { fixedEditorState, didChange } = fixBrokenRicosStates(
+      const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
         newRows[row].columns[column].content,
         currentRows[row].columns[column].content
       );
       newRows[row].columns[column].content = removeFocus(fixedEditorState);
       return {
-        didChange,
-        shouldUndoAgain: !didChange,
+        didChange: true,
+        shouldUndoAgain,
         fixedData: {
           ...currentData,
           config: {
@@ -420,21 +398,20 @@ const innerRicosDataFixers = {
 /* Handle undo-redo calls */
 
 function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState) {
-  const { fixedEditorState, didChange } = fixBrokenRicosStates(newEditorState, editorState);
+  const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(newEditorState, editorState);
 
-  return didChange
-    ? pushToRedoStack(
+  return shouldUndoAgain
+    ? undo(fixedEditorState)
+    : pushToRedoStack(
         removeCompositionModeFromEditorState(fixedEditorState),
         editorState.getCurrentContent()
-      )
-    : undo(fixedEditorState);
+      );
 }
 
 export const undo = (editorState: EditorState) => {
   if (editorState.getUndoStack().isEmpty()) {
     return editorState;
   }
-
   const newEditorState = shiftRedoStack(EditorState.undo(editorState));
   return updateUndoEditorState(editorState, newEditorState);
 };
@@ -443,6 +420,5 @@ export const redo = (editorState: EditorState) => {
   if (editorState.getRedoStack().isEmpty()) {
     return editorState;
   }
-
   return removeCompositionModeFromEditorState(EditorState.redo(editorState));
 };
