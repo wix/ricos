@@ -89,7 +89,7 @@ function tests({ isDesktop }) {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
       usePlugins(plugins.all),
-      useTheming({ paletteType: 'dark', skipCssOverride: true, fallback: '#FF0000' })
+      useTheming({ paletteType: 'dark', skipCssOverride: true, fallbackColor: '%23FF0000' })
     ).focusEditor();
     cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
