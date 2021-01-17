@@ -11,6 +11,11 @@ class TableViewer extends Component {
     super(props);
     this.table = this.props.table || new TableDataUtil(props.componentData);
   }
+
+  componentDidMount() {
+    this.tableViewerRef.children[0].classList.add('has-custom-focus');
+  }
+
   cellCreator = (i, j) => ({
     key: `${i}-${j}`,
     component: this.renderCell(i, j),
