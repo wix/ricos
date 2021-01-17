@@ -21,6 +21,12 @@ class InnerRCE extends PureComponent {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.editing === false && prevProps.editing !== this.props.editing) {
+      this.handleAtomicPluginsBorders(true);
+    }
+  }
+
   cleanConfig = config => {
     let clearConfig = config;
     clearConfig = this.removeAnchorFromLink(clearConfig);
@@ -67,21 +73,6 @@ class InnerRCE extends PureComponent {
     }
   };
 
-  handleAtomicPluginsBorders = () => {
-    const { editing = true } = this.props;
-    const { showToolbars } = this.state;
-    const hideBorder = !showToolbars || !editing;
-    if (this.editorWrapper) {
-      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
-      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
-      atomicBlocks.forEach(block => {
-        const blockDataFocus = block.getAttribute('data-focus');
-        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
-        block.style.boxShadow = hideBorder ? 'none' : '';
-      });
-    }
-  };
-
   getToolbars = () => {
     const { MobileToolbar, TextToolbar } = this.ref.getToolbars();
     return { MobileToolbar, TextToolbar };
@@ -124,7 +115,7 @@ class InnerRCE extends PureComponent {
     this.setState({ showToolbars: true });
   };
 
-  handleAtomicPluginsBorders = () => {
+  handleAtomicPluginsBorders = enterEditing => {
     const { editing = true } = this.props;
     const { showToolbars } = this.state;
     const hideBorder = !showToolbars || !editing;
@@ -132,7 +123,7 @@ class InnerRCE extends PureComponent {
       const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
       const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
       atomicBlocks.forEach(block => {
-        const blockDataFocus = block.getAttribute('data-focus');
+        const blockDataFocus = enterEditing ? 'true' : block.getAttribute('data-focus');
         block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
         block.style.boxShadow = hideBorder ? 'none' : '';
       });

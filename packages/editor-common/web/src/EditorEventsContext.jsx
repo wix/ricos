@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { remove } from 'lodash';
 
-export const EditorEvents = {
-  PUBLISH: 'rce:publish',
-};
+//TODO: move to a lib
+export const EditorEvents = { PUBLISH: 'plugin:publish', RICOS_PUBLISH: 'ricos:publish' };
 
 export const EditorEventsContext = React.createContext({
   subscribe() {
@@ -52,11 +51,13 @@ export class EditorEventsProvider extends React.Component {
   }
 
   publish() {
-    return this.dispatch(EditorEvents.PUBLISH).then(publishResponse => {
-      const editorResponse = publishResponse.filter(
-        ({ type } = {}) => type === 'EDITOR_PUBLISH'
-      )[0];
-      return editorResponse?.data;
+    return this.dispatch(EditorEvents.PUBLISH).then(() => {
+      return this.dispatch(EditorEvents.RICOS_PUBLISH).then(publishResponse => {
+        const editorResponse = publishResponse.filter(
+          ({ type } = {}) => type === 'EDITOR_PUBLISH'
+        )[0];
+        return editorResponse?.data;
+      });
     });
   }
 
