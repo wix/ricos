@@ -22,8 +22,10 @@ export interface ToolbarSettingsFunctions {
   getDisplayOptions?: () => PlatformSettings<any>;
   getToolbarDecorationFn?: () => PlatformSettings<any>;
   addPluginMenuConfig?: {
-    showSearch: boolean;
-    splitToSections: boolean;
+    showSearch?: boolean;
+    splitToSections?: boolean;
+    tablePluginMenu?: boolean;
+    horizontalMenuLayout?: boolean;
   };
   footerToolbarConfig?: {
     morePluginsMenu?: {
