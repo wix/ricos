@@ -25,6 +25,8 @@
 - `common`
   - [#1970](https://github.com/wix-incubator/rich-content/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
 ### :house: Internal
+- `e2e`
+  - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
 - `editor`
   - [#1996](https://github.com/wix/ricos/commit/1996) add support for new error codes, split `ErrorToast` component for scalability
 - `editor-common`
