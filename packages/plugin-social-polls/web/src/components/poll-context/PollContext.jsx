@@ -69,11 +69,11 @@ export class PollContextProvider extends PureComponent {
   componentDidMount() {
     const { editorEvents } = this.props;
 
-    editorEvents?.subscribe('rce:publish', this.syncPoll);
+    editorEvents?.subscribe('plugin:publish', this.syncPoll);
   }
 
   componentWillUnmount() {
-    this.props.editorEvents?.unsubscribe('rce:publish', this.syncPoll);
+    this.props.editorEvents?.unsubscribe('plugin:publish', this.syncPoll);
   }
 
   async fetchPoll() {
