@@ -21,6 +21,12 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add support for new error codes, split `ErrorToast` component for scalability
+- `editor-common`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add new media upload error transtion keys
+
 </details>
 <hr/>
 
