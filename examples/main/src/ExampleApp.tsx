@@ -12,10 +12,11 @@ import {
   disableBrowserBackButton,
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
-import { RicosContent } from 'wix-rich-content-common';
+import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 import type ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
-import { OnContentChangeFunction, RicosEditorProps } from 'ricos-editor';
+import { RicosContent } from 'ricos-schema';
+import { convertToDraft } from '../shared/utils/contentConversion';
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
@@ -23,13 +24,12 @@ const Preview = React.lazy(() => import('../shared/preview/Preview'));
 
 interface ExampleAppProps {
   isMobile?: boolean;
-  onContentStateChange?: (contentState: RicosContent) => void;
-  contentState?: RicosContent;
+  onRicosChange?: (content: RicosContent | RicosDraftContent) => void;
+  content?: RicosContent | RicosDraftContent;
   setLocale?: (locale: string) => void;
   locale?: string;
   allLocales?: string[];
   editorState?: EditorState;
-  onRicosEditorChange?: RicosEditorProps['onChange'];
   localeResource?: Record<string, string>;
 }
 
@@ -45,6 +45,7 @@ interface ExampleAppState {
   shouldMockUpload?: boolean;
   shouldMultiSelectImages?: boolean;
   shouldNativeUpload?: boolean;
+  shouldUseRicosContent?: boolean;
   [key: string]: any;
 }
 
@@ -53,7 +54,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   viewerSettings: SectionSettings[];
   editorScrollingElementFn: () => Element;
   viewerScrollingElementFn: () => Element;
-  contentStateEditor: ContentStateEditorType;
+  contentEditor: ContentStateEditorType;
 
   constructor(props) {
     super(props);
@@ -78,6 +79,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMockUpload: true,
       shouldMultiSelectImages: false,
       shouldNativeUpload: false,
+      shouldUseRicosContent: false,
       ...localState,
     };
   }
@@ -88,9 +90,9 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     this.viewerScrollingElementFn = () =>
       typeof window !== 'undefined' && document.getElementsByClassName('viewer-example')[0];
     window && window.addEventListener('resize', this.onContentStateEditorResize);
-    const contentState = this.loadContentStateFromLocalStorage();
-    if (contentState) {
-      this.props.onContentStateChange(contentState);
+    const content = this.loadContentStateFromLocalStorage();
+    if (content) {
+        this.props.onRicosChange(content);
     }
   }
 
@@ -99,17 +101,17 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   }
 
   componentDidUpdate(prevProps) {
-    this.saveContentStateToLocalStorage(this.props.contentState);
+    this.saveContentStateToLocalStorage(this.props.content);
   }
 
-  saveContentStateToLocalStorage = debounce(contentState => set('contentState', contentState), 500);
+  saveContentStateToLocalStorage = debounce(content => set('contentState', content), 500);
 
-  loadContentStateFromLocalStorage = (): RicosContent => get('contentState');
+  loadContentStateFromLocalStorage = (): RicosContent | RicosDraftContent => get('contentState');
 
-  setContentStateEditor = (ref: ContentStateEditorType) => (this.contentStateEditor = ref);
+  setContentStateEditor = (ref: ContentStateEditorType) => (this.contentEditor = ref);
 
   onContentStateEditorResize = () =>
-    this.contentStateEditor && this.contentStateEditor.refreshLayout();
+    this.contentEditor && this.contentEditor.refreshLayout();
 
   onSectionVisibilityChange: OnVisibilityChanged = (sectionName, isVisible) => {
     this.setState(
@@ -132,6 +134,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMultiSelectImages,
       staticToolbar,
       shouldNativeUpload,
+      shouldUseRicosContent
     } = this.state;
     this.editorSettings = [
       {
@@ -157,6 +160,15 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
         action: () =>
           this.setState(state => ({
             shouldNativeUpload: !state.shouldNativeUpload,
+            editorResetKey: state.editorResetKey + 1,
+          })),
+      },
+      {
+        name: 'Use Ricos Content',
+        active: shouldUseRicosContent,
+        action: () =>
+          this.setState(state => ({
+            shouldUseRicosContent: !state.shouldUseRicosContent,
             editorResetKey: state.editorResetKey + 1,
           })),
       },
@@ -195,8 +207,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
 
   renderEditor = () => {
     const {
-      contentState,
-      onRicosEditorChange,
+      content,
+      onRicosChange,
       locale,
       isMobile,
     } = this.props;
@@ -206,6 +218,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMultiSelectImages,
       editorIsMobile,
       shouldNativeUpload,
+      shouldUseRicosContent
     } = this.state;
 
     return (
@@ -222,11 +235,12 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ErrorBoundary>
               <Editor
-                onRicosContentChange={onRicosEditorChange}
-                initialState={contentState}
+                onRicosChange={onRicosChange}
+                content={content}
                 isMobile={editorIsMobile || isMobile}
                 shouldMultiSelectImages={shouldMultiSelectImages}
                 shouldNativeUpload={shouldNativeUpload}
+                shouldUseRicosContent={shouldUseRicosContent}
                 staticToolbar={staticToolbar}
                 locale={locale}
                 scrollingElementFn={this.editorScrollingElementFn}
@@ -241,7 +255,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderPreview = () => {
-    const { contentState, isMobile, locale, localeResource } = this.props;
+    const { content, isMobile, locale, localeResource } = this.props;
     const { isPreviewShown } = this.state;
     const settings = [
       {
@@ -267,7 +281,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ErrorBoundary>
               <Preview
-                initialState={contentState}
+                content={convertToDraft(content)}
                 isMobile={this.state.previewIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
@@ -280,7 +294,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderViewer = () => {
-    const { contentState, isMobile, locale, localeResource } = this.props;
+    const { content, isMobile, locale, localeResource } = this.props;
     const { isViewerShown } = this.state;
 
     return (
@@ -297,7 +311,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ErrorBoundary>
               <Viewer
-                initialState={contentState}
+                content={content}
                 isMobile={this.state.viewerIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
@@ -312,8 +326,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderContentState = () => {
-    const { contentState, onContentStateChange } = this.props;
-    const { isContentStateShown } = this.state;
+    const { content, onRicosChange } = this.props;
+    const { isContentStateShown, shouldUseRicosContent } = this.state;
     return (
       isContentStateShown && (
         <ReflexElement
@@ -325,8 +339,9 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ContentStateEditor
               ref={this.setContentStateEditor}
-              onChange={onContentStateChange}
-              contentState={contentState}
+              onChange={onRicosChange}
+              shouldUseRicosContent={shouldUseRicosContent}
+              content={content}
             />
           </SectionContent>
         </ReflexElement>

@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
-import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
+import {
+  getContentStateSchema,
+  isSSR,
+  RicosContent as RicosDraftContent,
+} from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -35,15 +39,17 @@ import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
+import { RicosContent } from 'ricos-schema';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
 class ContentStateEditor extends PureComponent<{
-  contentState: RicosContent;
-  onChange: (contentState: RicosContent) => void;
+  content: RicosDraftContent | RicosContent;
+  onChange: (content: RicosDraftContent) => void;
+  shouldUseRicosContent?: boolean;
 }> {
   state = {
-    value: stringifyJSON(this.props.contentState),
+    value: stringifyJSON(this.props.content),
   };
   editorOptions = {
     codeLens: false,
@@ -58,13 +64,13 @@ class ContentStateEditor extends PureComponent<{
 
   componentWillReceiveProps(nextProps) {
     if (!this.monaco?.editor.hasTextFocus()) {
-      this.setState({ value: stringifyJSON(nextProps.contentState) });
+      this.setState({ value: stringifyJSON(nextProps.content) });
     }
   }
 
   editorWillMount: EditorWillMount = monaco => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-      validate: true,
+      validate: !this.props.shouldUseRicosContent,
       schemas: [
         {
           uri: 'https://wix-rich-content/content-state-schema.json', // scema id

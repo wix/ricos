@@ -1,6 +1,6 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
-  RicosContent,
+  RicosContent as RicosDraftContent,
   OnErrorFunction,
   SEOSettings,
   LinkPanelSettings,
@@ -17,6 +17,7 @@ import { RicosCssOverride } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
 import { RichContentViewerProps } from 'wix-rich-content-viewer';
+import { RicosContent } from 'ricos-schema';
 
 export type RichContentProps = Partial<RichContentEditorProps | RichContentViewerProps>;
 
@@ -24,7 +25,7 @@ export interface RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: ReactElement;
-  content?: RicosContent;
+  content?: RicosDraftContent | RicosContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
   linkSettings?: LinkSettings;
@@ -42,10 +43,11 @@ export interface RicosEditorProps extends RicosProps {
   linkPanelSettings?: LinkPanelSettings;
   modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
+  onRicosContentChange?: OnRicosContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
-  injectedContent?: RicosContent;
+  injectedContent?: RicosDraftContent | RicosContent;
   editorEvents?: {
     subscribe: (
       event: string,
@@ -54,7 +56,6 @@ export interface RicosEditorProps extends RicosProps {
     unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
     dispatch: (event: string) => Promise<unknown>;
   };
-
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -70,7 +71,7 @@ export interface ContentStateGetterArgs {
   shouldRemoveErrorBlocks?: boolean;
 }
 
-export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosDraftContent;
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
@@ -80,10 +81,15 @@ export interface EditorDataInstance {
     contentTraits: { isEmpty: boolean; isContentChanged: boolean }
   ) => void;
   waitForUpdate: () => void;
-  getContentStatePromise: () => Promise<RicosContent>;
+  getContentStatePromise: () => Promise<RicosDraftContent>;
 }
 
 export type OnContentChangeFunction = (
+  content: RicosDraftContent,
+  contentTraits: { isEmpty: boolean; isContentChanged: boolean }
+) => void;
+
+export type OnRicosContentChangeFunction = (
   content: RicosContent,
   contentTraits: { isEmpty: boolean; isContentChanged: boolean }
 ) => void;

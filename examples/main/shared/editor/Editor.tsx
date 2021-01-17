@@ -4,7 +4,7 @@ import {
   RichContentEditorModal,
   RichContentEditorProps,
 } from 'wix-rich-content-editor';
-import { RicosEditor, RicosEditorProps, RicosEditorType } from 'ricos-editor';
+import { RicosEditor, RicosEditorType } from 'ricos-editor';
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
@@ -13,9 +13,14 @@ import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
+import {
+  ModalStyles,
+  RicosContent as RicosDraftContent,
+  TextToolbarType,
+} from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
-import initialState from '../../src/testData/initialState';
+import { RicosContent } from 'ricos-schema';
+import { convertFromDraft, convertToDraft } from '../utils/contentConversion';
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -33,7 +38,7 @@ let shouldMultiSelectImages = false;
 
 interface ExampleEditorProps {
   onChange?: RichContentEditorProps['onChange'];
-  onRicosContentChange?: RicosEditorProps['onChange'];
+  onRicosChange?: (content: RicosDraftContent | RicosContent) => void;
   editorState?: RichContentEditorProps['editorState'];
   theme?: RichContentEditorProps['theme'];
   isMobile?: boolean;
@@ -47,8 +52,9 @@ interface ExampleEditorProps {
   mockImageIndex?: number;
   shouldMultiSelectImages?: boolean;
   shouldMockUpload?: boolean;
-  initialState?: RicosContent;
+  content?: RicosContent | RicosDraftContent;
   shouldUseRicos?: boolean;
+  shouldUseRicosContent?: boolean;
 }
 
 interface ExampleEditorState {
@@ -166,6 +172,13 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
     if (prevProps.shouldNativeUpload !== this.props.shouldNativeUpload) {
       this.toggleFileUploadMechanism();
     }
+    if (prevProps.shouldUseRicosContent !== this.props.shouldUseRicosContent) {
+      if (this.props.shouldUseRicosContent) {
+        this.props.onRicosChange(convertFromDraft(this.props.content));
+      } else {
+        this.props.onRicosChange(convertToDraft(this.props.content));
+      }
+    }
   }
 
   toggleFileUploadMechanism = () => {
@@ -230,11 +243,11 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
       staticToolbar,
       isMobile,
       editorState,
-      initialState,
+      content,
       locale,
       localeResource,
       onChange,
-      onRicosContentChange,
+      onRicosChange,
       shouldUseRicos,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
@@ -249,7 +262,7 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
       theme,
       textToolbarType,
       isMobile,
-      initialState,
+      initialState: convertToDraft(content),
       editorState,
     };
     const TopToolbar = MobileToolbar || TextToolbar;
@@ -259,8 +272,9 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
         {shouldUseRicos ? (
           <div className="editor">
             <RicosEditor
-              onChange={onRicosContentChange}
-              content={initialState}
+              onRicosContentChange={onRicosChange}
+              content={content}
+              injectedContent={content}
               linkSettings={{ anchorTarget, relValue }}
               locale={locale}
               cssOverride={theme}

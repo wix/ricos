@@ -15,7 +15,9 @@ import {
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
 import { EditorEventsContext } from 'wix-rich-content-editor-common';
-import { ToolbarType } from 'wix-rich-content-common';
+import { ToolbarType, RicosContent as RicosDraftContent } from 'wix-rich-content-common';
+import { toDraft } from 'ricos-content/libs/migrateSchema';
+import { RicosContent } from 'ricos-schema';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -36,7 +38,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange);
+    this.dataInstance = createDataConverter(props.onChange, props.onRicosContentChange);
     this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
   }
 
@@ -90,7 +92,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       !isEqual(this.props.injectedContent, newProps.injectedContent)
     ) {
       console.debug('new content provided as editorState'); // eslint-disable-line
-      this.setState({ editorState: createWithContent(convertFromRaw(newProps.injectedContent)) });
+      this.setState({
+        editorState: createWithContent(
+          convertFromRaw(convertContentToDraft(newProps.injectedContent))
+        ),
+      });
     }
   }
 
@@ -201,9 +207,18 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 }
 
+const convertContentToDraft = (content: RicosContent | RicosDraftContent): RicosDraftContent =>
+  'doc' in content ? toDraft(content) : content;
+
 export default forwardRef<RicosEditor, RicosEditorProps>((props, ref) => (
   <EditorEventsContext.Consumer>
-    {contextValue => <RicosEditor editorEvents={contextValue} {...props} ref={ref} />}
+    {contextValue => (
+      <RicosEditor
+        editorEvents={contextValue}
+        {...{ ...props, content: props.content && convertContentToDraft(props.content) }}
+        ref={ref}
+      />
+    )}
   </EditorEventsContext.Consumer>
 ));
 

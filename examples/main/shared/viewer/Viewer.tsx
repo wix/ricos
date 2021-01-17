@@ -1,7 +1,7 @@
 import React, { PureComponent, RefObject } from 'react';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
 import { RicosViewer } from 'ricos-viewer';
-import { Decorator, isSSR, SEOSettings } from 'wix-rich-content-common';
+import { isSSR, RicosContent as RicosDraftContent, SEOSettings } from 'wix-rich-content-common';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -10,11 +10,13 @@ import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { RicosContent } from 'ricos-schema';
+import { convertToDraft } from '../utils/contentConversion';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
 interface ExampleViewerProps {
-  initialState?: RichContentViewerProps['initialState'];
+  content?: RicosContent | RicosDraftContent;
   isMobile?: boolean;
   locale: string;
   scrollingElementFn?: any;
@@ -38,7 +40,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   constructor(props: ExampleViewerProps) {
     super(props);
     if (!isSSR()) {
-      this.expandModeData = getImagesData(this.props.initialState);
+      this.expandModeData = getImagesData(convertToDraft(this.props.content));
     }
     this.state = {
       disabled: false,
@@ -52,8 +54,8 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.initialState !== this.props.initialState) {
-      this.expandModeData = getImagesData(this.props.initialState);
+    if (prevProps.content !== this.props.content) {
+      this.expandModeData = getImagesData(convertToDraft(this.props.content));
     }
   }
 
@@ -74,7 +76,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode, localeResource, shouldUseRicos } = this.props;
+    const { isMobile, content, locale, seoMode, localeResource, shouldUseRicos } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
       helpers: {
@@ -89,7 +91,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
       anchorTarget,
       isMobile,
       theme,
-      initialState,
+      initialState: content,
       disabled,
       seoMode,
     };
@@ -103,7 +105,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
               linkSettings={{ anchorTarget, relValue }}
               isMobile={isMobile}
               cssOverride={theme}
-              content={initialState}
+              content={content}
               mediaSettings={{ pauseMedia: disabled }}
               seoSettings={seoMode}
               plugins={Plugins.viewerPlugins}

@@ -13,6 +13,7 @@ export const linkify: NormalizationProcessor<RicosContent> = (
   contentState,
   { anchorTarget, relValue }
 ) => {
+  debugger;
   let lastKey =
     Object.keys(contentState.entityMap).length > 0
       ? Math.max(...Object.keys(contentState.entityMap).map(key => parseInt(key, 10))) + 1

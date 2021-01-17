@@ -16,7 +16,7 @@ const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
 interface Props {
-  initialState?: RicosContent;
+  content?: RicosContent;
   isMobile?: boolean;
   locale?: string;
   localeResource?: Record<string, string>;
@@ -38,7 +38,7 @@ export default class Preview extends PureComponent<Props, State> {
   constructor(props) {
     super(props);
     if (!isSSR()) {
-      this.expandModeData = getImagesData(this.props.initialState);
+      this.expandModeData = getImagesData(this.props.content);
     }
     this.state = {
       disabled: false,
@@ -47,8 +47,8 @@ export default class Preview extends PureComponent<Props, State> {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.initialState !== this.props.initialState) {
-      this.expandModeData = getImagesData(this.props.initialState);
+    if (prevProps.content !== this.props.content) {
+      this.expandModeData = getImagesData(this.props.content);
     }
   }
 
@@ -91,10 +91,10 @@ export default class Preview extends PureComponent<Props, State> {
             locale={this.props.locale}
             typeMappers={Plugins.typeMappers}
             // @ts-ignore
-            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.content)}
             decorators={Plugins.decorators}
             config={this.config}
-            initialState={this.props.initialState}
+            initialState={this.props.content}
             theme={theme}
             helpers={helpers}
             isMobile={this.props.isMobile}
