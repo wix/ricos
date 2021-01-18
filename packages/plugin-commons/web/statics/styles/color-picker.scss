@@ -90,15 +90,7 @@
 }
 
 .colorPicker_add_color_button {
-  @extend %button;
-  display: inline-block;
-  vertical-align: top;
-  left: 65%;
-  top: -2px;
-  margin-top: 5px;
-  @include phone {
-    left: 75%;
-  }
+  margin-top: -2px;
 }
 
 .colorPicker_add_color_label {
@@ -132,10 +124,7 @@
 }
 
 .colorPicker_reset_color_button {
-  @extend %button;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 5px;
+  line-height: initial;
 }
 
 .colorPicker_reset_color_label {
@@ -147,5 +136,10 @@
   letter-spacing: normal;
   color: $action-color-fallback;
   cursor: pointer;
-  position: fixed;
+}
+
+.colorPicker_bottom_container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 10px 0px 10px;
 }
