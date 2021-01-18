@@ -128,6 +128,7 @@
 	"VideoUploadModal_Input_InvalidUrl": "Check the URL and try again",
 	"VideoComponent_Overlay": "To play this video, view this post from your live site.",
 	"VideoSettings_Header":"Video",
+	"VideoSettings_Video_CanBeDownloaded_Label":"Video can be downloaded",
 	"SoundCloudPlugin_InsertButton_Tooltip": "Add a SoundCloud track",
 	"SoundCloudUploadModal_Header": "Add a SoundCloud track",
 	"SoundCloudUploadModal_Header_Mobile": "Add a track from SoundCloud",
