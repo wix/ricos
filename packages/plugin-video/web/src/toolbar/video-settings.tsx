@@ -5,34 +5,28 @@ import {
   LabeledToggle,
   SettingsPanelFooter,
 } from 'wix-rich-content-plugin-commons';
-import {
-  ComponentData,
-  Helpers,
-  Pubsub,
-  TranslationFunction,
-  RichContentTheme,
-} from 'wix-rich-content-common';
+import { VideoSettingsProps } from '../types';
+import NotificationIcon from '../icons/NotificationIcon';
 
-export interface VideoSettingsProps {
-  componentData: ComponentData;
-  helpers: Helpers;
-  pubsub: Pubsub;
-  theme: RichContentTheme;
-  t: TranslationFunction;
-  mobile: boolean;
-}
 const VideoSettings: React.FC<VideoSettingsProps> = ({
-  // componentData,
-  // helpers,
-  // pubsub,
+  componentData,
+  helpers,
+  pubsub,
   theme,
   t,
-  // mobile,
+  isMobile,
 }) => {
-  const [isDownloadEnabled, setIsDownloadEnabled] = useState(true);
+  const { configViewer } = componentData;
+  const [isDownloadEnabled, setIsDownloadEnabled] = useState(configViewer.isDownloadEnabled);
   const headerText = t('VideoSettings_Header');
+  const canBeDownloadedLabel = t('VideoSettings_Video_CanBeDownloaded_Label');
 
   // console.log('componentData', componentData);
+  const onDoneClick = () => {
+    const newComponentData = { ...componentData, configViewer: { isDownloadEnabled } };
+    pubsub.update('componentData', newComponentData);
+    helpers.closeModal();
+  };
 
   return (
     <div className={styles.videoSettings}>
@@ -44,23 +38,26 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
           className={styles.videoSettingsSection}
           ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
         >
-          <div className={styles.videoSettingsLabel}>
+          <div className={styles.videoSettings_toggleContainer}>
             <LabeledToggle
-              key={'Video can be downloaded'}
+              className={styles.videoSettingsLabel}
               theme={theme}
               checked={isDownloadEnabled}
-              label={'label'}
+              label={canBeDownloadedLabel}
               onChange={() => setIsDownloadEnabled(!isDownloadEnabled)}
             />
+            <NotificationIcon />
           </div>
         </SettingsSection>
-        <SettingsPanelFooter
-          fixed
-          theme={theme}
-          // cancel={revertComponentData}
-          // save={onDoneClick}
-          t={t}
-        />
+        {isMobile ? null : (
+          <SettingsPanelFooter
+            fixed
+            theme={theme}
+            // cancel={revertComponentData}
+            save={onDoneClick}
+            t={t}
+          />
+        )}
       </div>
     </div>
   );

@@ -83,7 +83,9 @@ class VideoViewer extends Component {
       height,
       disabled,
       setComponentUrl,
-      settings: { disableDownload = false },
+      componentData: {
+        configViewer: { isDownloadEnabled },
+      },
     } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
@@ -96,7 +98,7 @@ class VideoViewer extends Component {
       width,
       height,
       key,
-      ...(disableDownload && {
+      ...(isDownloadEnabled && {
         config: {
           file: {
             attributes: {

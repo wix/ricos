@@ -5,7 +5,6 @@ export const DEFAULTS = Object.freeze({
     },
     size: 'content',
     alignment: 'center',
-    isDownloadEnabled: true,
   },
   configViewer: {
     isDownloadEnabled: true,

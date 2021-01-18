@@ -59,6 +59,7 @@ class ImageSettings extends Component {
       return (
         <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
           <LabeledToggle
+            className={this.styles.imageSettingsToggle}
             theme={this.props.theme}
             checked={this.state[toggleKey]}
             label={this.props.t(labelKey)}
@@ -227,7 +228,7 @@ class ImageSettings extends Component {
           </SettingsSection>
           <SettingsSection
             theme={theme}
-            className={this.styles.imageSettingsSection}
+            className={this.styles.imageSettings_togglesContainer}
             ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
           >
             <div className={this.styles.imageSettingsLabel}>

@@ -1,5 +1,6 @@
 import createToolbar from './toolbar/createToolbar';
-import { Component, DEFAULTS } from './video-component';
+import { Component } from './video-component';
+import { DEFAULTS } from './defaults';
 import { VIDEO_TYPE, VIDEO_TYPE_LEGACY, VideoPluginEditorConfig } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
