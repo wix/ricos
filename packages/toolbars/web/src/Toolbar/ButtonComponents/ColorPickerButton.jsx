@@ -69,7 +69,10 @@ class ColorPickerButton extends Component {
           theme={theme}
         />
         {isModalOpen && (
-          <div className={classNames(styles.modal, styles.withoutTop)}>
+          <div
+            className={classNames(styles.modal, styles.withoutTop)}
+            data-id={'color-picker-modal'}
+          >
             <ColorPicker
               color={currentColor}
               palette={palette.slice(0, 6)}

@@ -9,35 +9,33 @@
 > - :house: Internal
 > - :nail_care: Polish
 
-## [Unreleased]
-### :house: Internal
-- `unsupported-blocks`
-  - [#1987](https://github.com/wix/ricos/pull/1987) unsupported-blocks test
-- `color-picker`
-  - [#2000](https://github.com/wix/ricos/pull/2000) remove position fixed from reset button
-
 ## [Unreleased]  
-
-### :bug: Bug Fix
-- `unsupportedBlocks`
-  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
-
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+
+## 8.15.4 (Jan 18, 2021)
+### :bug: Bug Fix
+- `unsupportedBlocks`
+  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
 ### :house: Internal
 - `e2e`
   - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
 - `editor`
   - [#1996](https://github.com/wix/ricos/commit/1996) add support for new error codes, split `ErrorToast` component for scalability
 - `editor-common`
-  - [#1996](https://github.com/wix/ricos/commit/1996) add new media upload error transtion keys
-
-</details>
-<hr/>
+  - [#1996](https://github.com/wix/ricos/commit/1996) add new media upload error translation keys
+- `unsupported-blocks`
+  - [#1987](https://github.com/wix/ricos/pull/1987) unsupported-blocks test
+- `color-picker`
+  - [#2000](https://github.com/wix/ricos/pull/2000) remove position fixed from reset button
 
 ## 8.15.3 (Jan 14, 2021)
 ### :rocket: New Feature
