@@ -197,6 +197,16 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
+  removeCellBackgroundColor = range => {
+    range.forEach(({ i, j }) => {
+      const cell = this.getCell(i, j);
+      // eslint-disable-next-line no-unused-vars
+      const { backgroundColor, ...rest } = cell.style || {};
+      cell.style = { ...rest };
+    });
+    this.setNewRows(this.componentData.config.rows);
+  };
+
   setColWidthAfterResize = (columnsRefs, tableWidth) => {
     const pixelWidthArr = columnsRefs.map(col => getRefWidthAsNumber(col));
     const totalColsWidth = pixelWidthArr.reduce((acc, val) => acc + val, 0);

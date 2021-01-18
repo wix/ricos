@@ -228,6 +228,7 @@ export const getCellFormattingButtonsProps = (
       getLabel: () => {},
       isActive: () =>
         getColorsFromComponentData(selected, table).bgCurrentColor !== DEFAULT_BG_COLOR,
+      onResetColor: () => table.removeCellBackgroundColor(getRange(selected)),
       type: 'color-picker',
     },
     {
