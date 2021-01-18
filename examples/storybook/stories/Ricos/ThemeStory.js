@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Palette } from 'wix-style-react';
+import { Layout, Palette, ToggleSwitch } from 'wix-style-react';
 import { Page, Section, ContentState } from '../Components/StoryParts';
 import exapmleState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
 import { wixPalettes, ricosPalettes } from '../../../../e2e/tests/resources/palettesExample';
@@ -18,6 +18,8 @@ const FONTS = [
 const ThemeSelector = () => {
   const [palettePage, setPalettePage] = useState(0);
   const [fontPage, setFontPage] = useState(0);
+  const [isFallback, setFallback] = useState(false);
+  const fallbackColor = isFallback ? '#FF0000' : undefined
 
   useEffect(() => {
     document.onkeyup = event => {
@@ -64,11 +66,16 @@ const ThemeSelector = () => {
           </div>
         </SelectorCell>
       </Layout>
+
+      <div>
+        <ToggleSwitch checked={isFallback} onChange={({ target }) => setFallback(target.checked)} />
+        <span>Use RED fallback color</span>
+      </div>
       <div style={{ backgroundColor: palette.bgColor, padding: 4 }}>
         <ExampleApplication
           key={palettePage}
           initialState={exapmleState}
-          theme={{ palette, customStyles: FONTS[fontPage] }}
+          theme={{ palette: { ...palette, fallbackColor }, customStyles: FONTS[fontPage] }}
         />
       </div>
     </>

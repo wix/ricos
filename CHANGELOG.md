@@ -16,10 +16,12 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `common`
+  - [#1970](https://github.com/wix-incubator/rich-content/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
 
 </details>
 <hr/>
-
 
 ## 8.16.0 (Jan 18, 2021)
 ### :rocket: New Feature
@@ -30,6 +32,7 @@
 ### :bug: Bug Fix
 - `unsupportedBlocks`
   - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
+
 ### :house: Internal
 - `e2e`
   - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
@@ -46,6 +49,7 @@
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
+
 ## 8.15.2 (Jan 14, 2021)
 ### :house: Internal
 - `common`
@@ -87,6 +91,7 @@
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
 - `fullscreen`
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
+
 ### :bug: Bug Fix
 - `image`
   - [#1968](https://github.com/wix/ricos/commit/1968) image preview isn't displayed with error
