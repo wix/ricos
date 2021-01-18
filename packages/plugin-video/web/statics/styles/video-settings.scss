@@ -1,4 +1,4 @@
-$TITLE_HEIGHT: 100px;
+$TITLE_HEIGHT: 70px;
 $FOOTER_HEIGHT: 100px;
 $MOBILE_HEADER_HEIGHT: 50px;
 .videoSettings {
@@ -11,24 +11,32 @@ $MOBILE_HEADER_HEIGHT: 50px;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  box-sizing: border-box;
   hr{
-    width: 100%;
     position: absolute;
-    top: 70px;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    margin: 0;
   }
 }
 
 .videoSettingsTitle {
   position: absolute;
-  margin: 46px 0 27px 30px;
-  font-size: 18px;
+  margin: 24px 0 24px 24px;
+  font-size: 20px;
 }
 
 .videoSettingsSection {
-  padding: 20px 30px 0 30px;
+  padding: 0;
   font-size: 14px;
+  label{
+    line-height: 20px;
+  }
 }
-
+// .videoSettings_toggle {
+//   padding-top: 24px;
+// }
 .videoSettingsLabel {
   margin-bottom: 5px;
 }
@@ -36,13 +44,15 @@ $MOBILE_HEADER_HEIGHT: 50px;
 .videoSettings_scrollContainer {
   margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
   width: 100%;
+  box-sizing:inherit;
+  padding: 0 24px;
 }
 .videoSettings_toggleContainer{
   position: relative;
   svg{
     position: absolute;
-    top: 30px;
-    left: 170px;
+    top: 24px;
+    left: 163px;
   }
 }
 

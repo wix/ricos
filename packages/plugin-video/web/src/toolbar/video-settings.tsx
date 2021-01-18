@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styles from '../../statics/styles/video-settings.scss';
+import { VideoSettingsProps } from '../types';
+import NotificationIcon from '../icons/NotificationIcon';
 import {
   SettingsSection,
   LabeledToggle,
   SettingsPanelFooter,
 } from 'wix-rich-content-plugin-commons';
-import { VideoSettingsProps } from '../types';
-import NotificationIcon from '../icons/NotificationIcon';
 
 const VideoSettings: React.FC<VideoSettingsProps> = ({
   componentData,
@@ -21,11 +21,18 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   const headerText = t('VideoSettings_Header');
   const canBeDownloadedLabel = t('VideoSettings_Video_CanBeDownloaded_Label');
 
-  // console.log('componentData', componentData);
   const onDoneClick = () => {
     const newComponentData = { ...componentData, configViewer: { isDownloadEnabled } };
     pubsub.update('componentData', newComponentData);
-    helpers.closeModal();
+    if (helpers.closeModal) {
+      helpers.closeModal();
+    }
+  };
+
+  const onCancelClick = () => {
+    if (helpers.closeModal) {
+      helpers.closeModal();
+    }
   };
 
   return (
@@ -40,7 +47,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
         >
           <div className={styles.videoSettings_toggleContainer}>
             <LabeledToggle
-              className={styles.videoSettingsLabel}
+              className={styles.videoSettings_toggle}
               theme={theme}
               checked={isDownloadEnabled}
               label={canBeDownloadedLabel}
@@ -53,7 +60,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
           <SettingsPanelFooter
             fixed
             theme={theme}
-            // cancel={revertComponentData}
+            cancel={onCancelClick}
             save={onDoneClick}
             t={t}
           />
