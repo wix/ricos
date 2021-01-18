@@ -58,7 +58,7 @@ const getImageFormat = (fileName: string) => {
 
 const getImageSrc = (
   src: ComponentData['src'],
-  helpers: Helpers,
+  helpers?: Helpers,
   options: {
     requiredWidth?: number;
     requiredHeight?: number;
