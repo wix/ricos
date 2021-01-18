@@ -39,9 +39,6 @@
 - `color-picker`
   - [#2000](https://github.com/wix/ricos/pull/2000) remove position fixed from reset button
 
-</details>
-<hr/>
-
 ## 8.15.3 (Jan 14, 2021)
 ### :rocket: New Feature
 - `ricos-editor`
