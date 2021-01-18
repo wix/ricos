@@ -9,7 +9,7 @@ import {
   undo,
   redo,
 } from 'wix-rich-content-editor-common';
-import { CreatePluginsDataMap, GetEditorState, SetEditorState } from 'wix-rich-content-common';
+import { PluginsDataMap, GetEditorState, SetEditorState } from 'wix-rich-content-common';
 
 type Left = 'left';
 type Center = 'center';
@@ -43,7 +43,7 @@ type BlockType =
 type InlineStyle = 'BOLD' | 'UNDERLINE' | 'ITALIC';
 
 const createEditorCommands = (
-  createPluginsDataMap: CreatePluginsDataMap,
+  createPluginsDataMap,
   getEditorState: GetEditorState,
   setEditorState: SetEditorState
 ) => {
@@ -71,15 +71,14 @@ const createEditorCommands = (
   };
 
   const pluginsCommands = {
-    insertBlock: <K extends keyof CreatePluginsDataMap>(
-      type: K,
-      config?: Parameters<CreatePluginsDataMap[K] & []>[0]
-    ) => {
+    insertBlock: <K extends keyof PluginsDataMap>(type: K, config?: PluginsDataMap[K]) => {
       const { [type]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config);
-        const { newSelection, newEditorState } = createBlock(getEditorState(), data, type);
-        setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+        if (data) {
+          const { newSelection, newEditorState } = createBlock(getEditorState(), data, type);
+          setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+        }
       }
     },
     updateBlock: (blockKey: string, data) =>

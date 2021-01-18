@@ -60,7 +60,16 @@ import {
   TABLE_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
 } from 'ricos-content';
-import { RicosDivider } from 'ricos-schema';
+import {
+  RicosDivider,
+  RicosFile,
+  RicosGallery,
+  RicosGiphy,
+  RicosHTML,
+  RicosImage,
+  RicosPoll,
+  RicosVideo,
+} from 'ricos-schema';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
 export type PluginMapping = Partial<{
@@ -152,11 +161,30 @@ export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Recor
   };
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type CreatePluginData<PluginData> = (pluginData?: PluginData) => Record<string, any>;
+export type CreatePluginData<PluginData> = (
+  pluginData?: PluginData
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+Record<string, any> | undefined;
 
 export interface CreatePluginsDataMap {
   [DIVIDER_TYPE]?: CreatePluginData<RicosDivider>;
+  [FILE_UPLOAD_TYPE]?: CreatePluginData<RicosFile>;
+  [GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
+  [GIPHY_TYPE]?: CreatePluginData<RicosGiphy>;
+  [HTML_TYPE]?: CreatePluginData<RicosHTML>;
+  [IMAGE_TYPE]?: CreatePluginData<RicosImage>;
+  [POLL_TYPE]?: CreatePluginData<RicosPoll>;
+  [VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
+}
+
+export interface PluginsDataMap {
+  [DIVIDER_TYPE]?: RicosDivider;
+  [FILE_UPLOAD_TYPE]?: RicosFile;
+  [GALLERY_TYPE]?: RicosGallery;
+  [GIPHY_TYPE]?: RicosGiphy;
+  [IMAGE_TYPE]?: RicosImage;
+  [POLL_TYPE]?: RicosPoll;
+  [VIDEO_TYPE]?: RicosVideo;
 }
 
 export type ModalsMap = Record<string, ComponentType>;

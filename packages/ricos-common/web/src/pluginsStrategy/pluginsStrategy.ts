@@ -14,6 +14,7 @@ const getPluginProps = (
     config = {},
     plugins = [],
     ModalsMap = {},
+    createPluginsDataMap = {},
     typeMappers = [],
     decorators = [],
     inlineStyleMappers = [],
@@ -31,7 +32,7 @@ const getPluginProps = (
           ? inlineStyleMappers.map(mapper => mapper(config, content))
           : [],
       }
-    : { config, plugins, ModalsMap };
+    : { config, plugins, ModalsMap, createPluginsDataMap };
 
 function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPlugin) {
   const { type, config, createPlugin, ModalsMap, createPluginData } = curr;

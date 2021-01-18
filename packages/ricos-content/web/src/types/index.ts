@@ -12,14 +12,6 @@ export interface ComponentData {
     url?: string;
     textWrap?: string;
     width?: number | string;
-    //For Accordion, might changed
-    expandState?: string;
-    direction?: string;
-    expandOnlyOne?: boolean;
-    //For Link, might changed
-    linkTypes?: { anchor: boolean };
-    //For Video, might changed
-    toolbar?: { hidden: never[] };
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   src?: any;

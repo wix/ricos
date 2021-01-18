@@ -6,24 +6,18 @@ import {
   LinkButtonPluginEditorConfig,
   ActionButtonPluginEditorConfig,
 } from './types';
-import { theme, getDefaultComponentData } from './defaults';
+import { theme } from './defaults';
 
 import { ModalsMap } from './modals';
 import { EditorPluginCreator } from 'wix-rich-content-common';
 
 const pluginButton = (createPlugin, type, config) => {
-  const pluginConfig = { ...DEFAULT_CONFIG, ...config };
-  const { relValue, anchorTarget } = pluginConfig;
-  const rel = relValue === '_nofollow';
-  const target = anchorTarget ? anchorTarget === '_blank' : true;
-
   return {
-    config: pluginConfig,
+    config: { ...DEFAULT_CONFIG, ...config },
     type,
     createPlugin,
     ModalsMap,
     theme,
-    componentData: getDefaultComponentData(rel, target),
   };
 };
 
