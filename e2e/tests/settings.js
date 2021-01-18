@@ -18,6 +18,7 @@ export const fixtures = [
     fixture: 'facebook-video',
     additionalCommands: cy => {
       cy.waitForVideoToLoad();
+      cy.wait(200);
     },
   },
   'gif',
