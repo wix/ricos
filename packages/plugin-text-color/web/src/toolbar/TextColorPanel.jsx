@@ -106,7 +106,7 @@ export default class TextColorPanel extends Component {
               {renderUserColors()}
             </div>
             <hr className={mergedStyles.colorPicker_separator} />
-            <div className={mergedStyles.colorPicker_buttons_container}>
+            <div className={mergedStyles.colorPicker_bottom_container}>
               {renderResetColorButton()}
               {renderAddColorButton()}
             </div>
