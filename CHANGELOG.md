@@ -27,6 +27,7 @@
 ### :bug: Bug Fix
 - `unsupportedBlocks`
   - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
+
 ### :house: Internal
 - `e2e`
   - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
@@ -43,6 +44,7 @@
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
+
 ## 8.15.2 (Jan 14, 2021)
 ### :house: Internal
 - `common`
