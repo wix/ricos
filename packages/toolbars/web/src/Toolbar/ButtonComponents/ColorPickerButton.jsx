@@ -41,6 +41,16 @@ class ColorPickerButton extends Component {
     this.closeModal();
   };
 
+  onResetColor = () => {
+    const { getDefaultColors, onResetColor } = this.props;
+    if (onResetColor) {
+      onResetColor();
+    } else {
+      const defaultColors = getDefaultColors?.();
+      this.onChange(defaultColors);
+    }
+  };
+
   extractPalette = colorScheme => {
     if (!colorScheme) {
       return this.props.defaultPalette;
@@ -51,7 +61,7 @@ class ColorPickerButton extends Component {
   };
 
   render() {
-    const { settings, t, isMobile, dropDownProps, theme, onResetColor } = this.props;
+    const { settings, t, isMobile, dropDownProps, theme } = this.props;
     const { isActive, getIcon, tooltip } = dropDownProps;
     const { currentColor, userColors } = this.state;
     const { isModalOpen } = this.state;
@@ -82,7 +92,7 @@ class ColorPickerButton extends Component {
               isMobile={isMobile}
               onChange={this.onChange}
               t={t}
-              onResetColor={onResetColor}
+              onResetColor={this.onResetColor}
             >
               {({
                 renderPalette,
