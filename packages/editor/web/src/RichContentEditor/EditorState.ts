@@ -11,7 +11,9 @@ type InlineStyle = 'BOLD' | 'UNDERLINE' | 'ITALIC';
 
 const createEditorState = (getEditorState: GetEditorState) => {
   const editorState = {
-    getSelection: () => getEditorState().getSelection(),
+    //TODO: fix it
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getSelection: (): any => getEditorState().getSelection(),
     getTextAlignment: () => getTextAlignment(getEditorState()),
     hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
     isBlockTypeSelected: (type: string) => getBlockType(getEditorState()) === type,

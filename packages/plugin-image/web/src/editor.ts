@@ -1,8 +1,8 @@
+import { createImagePlugin } from './createImagePlugin';
 import { IMAGE_TYPE, ImagePluginEditorConfig } from './types';
 import { ModalsMap } from './modals';
 import { DEFAULTS } from './consts';
 import { EditorPluginCreator } from 'wix-rich-content-common';
-import { createImagePlugin } from './createImagePlugin';
 // import { createImageData } from './createImageData';
 
 export const pluginImage: EditorPluginCreator<ImagePluginEditorConfig> = config => {
