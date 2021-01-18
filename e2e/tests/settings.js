@@ -14,13 +14,13 @@ export const fixtures = [
   },
   'indent_blocks_lists_with_alignment',
   'quote',
-  {
-    fixture: 'facebook-video',
-    additionalCommands: cy => {
-      cy.waitForVideoToLoad();
-      cy.wait(200);
-    },
-  },
+  // {
+  //   fixture: 'facebook-video',
+  //   additionalCommands: cy => {
+  //     cy.waitForVideoToLoad();
+  //     cy.wait(200);
+  //   },
+  // },
   'gif',
   'giphy',
   // {
