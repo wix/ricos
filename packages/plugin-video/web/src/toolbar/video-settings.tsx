@@ -47,7 +47,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
         >
           <div className={styles.videoSettings_toggleContainer}>
             <LabeledToggle
-              className={styles.videoSettings_toggle}
+              style={{ paddingTop: 24 }}
               theme={theme}
               checked={isDownloadEnabled}
               label={canBeDownloadedLabel}
