@@ -31,15 +31,15 @@ const getPluginProps = (
           ? inlineStyleMappers.map(mapper => mapper(config, content))
           : [],
       }
-    : { config, plugins, ModalsMap, pluginsData: {} };
+    : { config, plugins, ModalsMap };
 
 function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPlugin) {
-  const { type, config, createPlugin, ModalsMap, componentData } = curr;
+  const { type, config, createPlugin, ModalsMap, createPluginData } = curr;
   return {
     config: { ...prev.config, [type]: config },
     plugins: createPlugin ? prev.plugins.concat(createPlugin) : prev.plugins,
     ModalsMap: { ...prev.ModalsMap, ...ModalsMap },
-    pluginsData: { ...prev.pluginsData, [type]: componentData },
+    createPluginsDataMap: { ...prev.createPluginsDataMap, [type]: createPluginData },
   };
 }
 
@@ -89,7 +89,7 @@ export default function pluginsStrategy(
       config: {},
       plugins: [],
       ModalsMap: {},
-      pluginsData: {},
+      createPluginsDataMap: {},
     };
     strategy = plugins.reduce((prev, curr) => editorStrategy(prev, curr), emptyStrategy);
   }

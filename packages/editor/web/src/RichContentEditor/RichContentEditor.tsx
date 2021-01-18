@@ -62,6 +62,7 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  CreatePluginsDataMap,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -120,7 +121,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pluginsData: any; //TODO: createType
+  createPluginsDataMap: CreatePluginsDataMap;
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -439,9 +440,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 
   initEditorCommands = () => {
-    const { pluginsData = {} } = this.props;
+    const { createPluginsDataMap = {} } = this.props;
     this.EditorCommands = createEditorCommands(
-      pluginsData,
+      createPluginsDataMap,
       this.getEditorState,
       this.updateEditorState
     );

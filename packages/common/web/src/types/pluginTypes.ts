@@ -59,8 +59,8 @@ import {
   ACCORDION_TYPE,
   TABLE_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
-  ComponentData,
 } from 'ricos-content';
+import { RicosDivider } from 'ricos-schema';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
 export type PluginMapping = Partial<{
@@ -152,6 +152,13 @@ export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Recor
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CreatePluginData<PluginData> = (pluginData?: PluginData) => Record<string, any>;
+
+export interface CreatePluginsDataMap {
+  [DIVIDER_TYPE]?: CreatePluginData<RicosDivider>;
+}
+
 export type ModalsMap = Record<string, ComponentType>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -169,7 +176,7 @@ export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<s
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  componentData?: ComponentData; //TODO: createType
+  createPluginData?: CreatePluginData<PluginConfig>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

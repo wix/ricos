@@ -6,10 +6,17 @@ import {
   createBlock,
   updateEntityData,
   deleteBlock,
+  undo,
+  redo,
 } from 'wix-rich-content-editor-common';
-import { GetEditorState, SetEditorState } from 'wix-rich-content-common';
+import { CreatePluginsDataMap, GetEditorState, SetEditorState } from 'wix-rich-content-common';
 
-type TextAlignment = 'left' | 'center' | 'right' | 'justify';
+type Left = 'left';
+type Center = 'center';
+type Right = 'right';
+type Justify = 'justify';
+
+type TextAlignment = Left | Center | Right | Justify;
 
 type Selection = {
   anchorKey?: string;
@@ -36,7 +43,7 @@ type BlockType =
 type InlineStyle = 'BOLD' | 'UNDERLINE' | 'ITALIC';
 
 const createEditorCommands = (
-  pluginsData,
+  createPluginsDataMap: CreatePluginsDataMap,
   getEditorState: GetEditorState,
   setEditorState: SetEditorState
 ) => {
@@ -53,8 +60,8 @@ const createEditorCommands = (
     );
 
   const textFormattingCommands = {
-    undo: (): void => setEditorState(EditorState.undo(getEditorState())),
-    redo: (): void => setEditorState(EditorState.redo(getEditorState())),
+    undo: (): void => setEditorState(undo(getEditorState())),
+    redo: (): void => setEditorState(redo(getEditorState())),
     toggleInlineStyle: (style: InlineStyle): void =>
       setEditorState(RichUtils.toggleInlineStyle(getEditorState(), style)),
     setBlockType: (type: BlockType) => setBlockType(type),
@@ -64,11 +71,16 @@ const createEditorCommands = (
   };
 
   const pluginsCommands = {
-    insertBlock: (type: string, config = {}) => {
-      const { [type]: pluginData } = pluginsData;
-      const data = { ...pluginData, ...config };
-      const { newSelection, newEditorState } = createBlock(getEditorState(), data, type);
-      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+    insertBlock: <K extends keyof CreatePluginsDataMap>(
+      type: K,
+      config?: Parameters<CreatePluginsDataMap[K] & []>[0]
+    ) => {
+      const { [type]: createPluginData } = createPluginsDataMap;
+      if (createPluginData) {
+        const data = createPluginData(config);
+        const { newSelection, newEditorState } = createBlock(getEditorState(), data, type);
+        setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      }
     },
     updateBlock: (blockKey: string, data) =>
       setEditorState(updateEntityData(getEditorState(), blockKey, data)),

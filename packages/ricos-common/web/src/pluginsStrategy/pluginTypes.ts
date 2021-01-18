@@ -5,6 +5,7 @@ import {
   ViewerPlugin,
   EditorPlugin,
   InlineStyleMapper,
+  CreatePluginsDataMap,
 } from 'wix-rich-content-common';
 
 export type BasePlugin = EditorPlugin & ViewerPlugin;
@@ -15,7 +16,7 @@ export interface EditorPluginsStrategy {
   plugins: CreatePluginFunction[];
   ModalsMap: ModalsMap;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pluginsData: any; //TODO: create type;
+  createPluginsDataMap?: CreatePluginsDataMap;
 }
 
 export interface ViewerPluginsStrategy {
