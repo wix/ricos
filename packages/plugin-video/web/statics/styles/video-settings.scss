@@ -25,6 +25,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
   position: absolute;
   margin: 24px 0 24px 24px;
   font-size: 20px;
+  line-height: 28px;
 }
 
 .videoSettingsSection {
@@ -49,7 +50,10 @@ $MOBILE_HEADER_HEIGHT: 50px;
   svg{
     position: absolute;
     top: 24px;
-    left: 163px;
+    left: 190px;
+  }
+  p{
+    font-size: 16px;
   }
 }
 
@@ -59,6 +63,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
 
 .videoSettings_footer {
   z-index: 6;
+  bottom: 85px;
 }
 
 .videoSettings_hidden {

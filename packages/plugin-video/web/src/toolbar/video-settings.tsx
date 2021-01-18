@@ -56,16 +56,17 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
             <NotificationIcon />
           </div>
         </SettingsSection>
-        {isMobile ? null : (
-          <SettingsPanelFooter
-            fixed
-            theme={theme}
-            cancel={onCancelClick}
-            save={onDoneClick}
-            t={t}
-          />
-        )}
       </div>
+      {isMobile ? null : (
+        <SettingsPanelFooter
+          className={styles.videoSettings_footer}
+          fixed
+          theme={theme}
+          cancel={onCancelClick}
+          save={onDoneClick}
+          t={t}
+        />
+      )}
     </div>
   );
 };

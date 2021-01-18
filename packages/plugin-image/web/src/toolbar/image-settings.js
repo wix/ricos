@@ -12,7 +12,7 @@ import {
 } from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
-import NotificationIcon from '../icons/NotificationIcon';
+import { NotificationIcon } from 'wix-rich-content-editor-common';
 
 class ImageSettings extends Component {
   constructor(props) {
@@ -59,13 +59,13 @@ class ImageSettings extends Component {
       return (
         <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
           <LabeledToggle
-            className={this.styles.imageSettingsToggle}
+            style={{ paddingTop: 24 }}
             theme={this.props.theme}
             checked={this.state[toggleKey]}
             label={this.props.t(labelKey)}
             onChange={this.toggleState(toggleKey)}
           />
-          <NotificationIcon />
+          <NotificationIcon iconStyles={'test'} tooltipText="test" />
         </div>
       );
     }
@@ -218,7 +218,7 @@ class ImageSettings extends Component {
               id="imageSettingsAltInput"
               label={this.altLabel}
               placeholder={this.altInputPlaceholder}
-              tooltipTextKey={this.altTooltip}
+              // tooltipTextKey={this.altTooltip}
               t={t}
               value={metadata.alt || ''}
               onChange={alt => this.metadataUpdated(metadata, { alt })}
