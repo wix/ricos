@@ -169,7 +169,8 @@ class TableComponent extends React.Component {
         e.stopPropagation();
         e.preventDefault();
       };
-      if (e.key === 'Backspace' && !isAllCellsSelected) {
+      const isColorPickerModalOpen = e.target.closest('[data-id=color-picker-modal]');
+      if (e.key === 'Backspace' && !isAllCellsSelected && !isColorPickerModalOpen) {
         preventEvent();
         this.table.clearRange(getRange(selected));
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
