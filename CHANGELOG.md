@@ -23,6 +23,11 @@
 </details>
 <hr/>
 
+## 8.16.0 (Jan 18, 2021)
+### :rocket: New Feature
+- `unsupportedBlocks`
+  - [#2005](https://github.com/wix-incubator/rich-content/pull/2005) new plugin for informing oneApp users when plugin isn't supported
+
 ## 8.15.4 (Jan 18, 2021)
 ### :bug: Bug Fix
 - `unsupportedBlocks`
