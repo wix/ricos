@@ -29,6 +29,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
 }
 
 .imageSettingsSection {
+  position: relative;
   padding: 20px 0px 0 0px;
   font-size: 14px;
   label{
@@ -40,6 +41,12 @@ $MOBILE_HEADER_HEIGHT: 50px;
   }
   input {
     height: 40px;
+  }
+  svg{
+    position: absolute;
+    left: 48px;
+    top:16px;
+    height: 24px;
   }
 }
 
@@ -56,8 +63,9 @@ $MOBILE_HEADER_HEIGHT: 50px;
   position: relative;
   svg{
     position: absolute;
-    top: 30px;
+    top: 22px;
     left: 170px;
+    height: 24px;
   }
 }
 .imageSettings_togglesContainer{

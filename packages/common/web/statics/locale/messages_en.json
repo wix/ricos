@@ -103,6 +103,7 @@
 	"ImageSettings_Alt_Input_Placeholder": "Describe what's in this image",
 	"ImageSettings_Link_Label": "Link",
 	"ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open link settings.",
+	"ImageSettings_Image_CanBeDownloaded_Label_Tooltip": "Your readers will be able to download your image.",
 	"ImageEditorButton_Tooltip": "Edit image",
 	"EmbedURL_Common_CTA_Primary": "Add",
 	"EmbedURL_Common_CTA_Secondary": "Cancel",

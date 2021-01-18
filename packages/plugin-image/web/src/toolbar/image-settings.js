@@ -34,6 +34,7 @@ class ImageSettings extends Component {
     this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
+    this.imgCanBeDownloadedTooltip = 'ImageSettings_Image_CanBeDownloaded_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
   }
 
@@ -65,7 +66,7 @@ class ImageSettings extends Component {
             label={this.props.t(labelKey)}
             onChange={this.toggleState(toggleKey)}
           />
-          <NotificationIcon iconStyles={'test'} tooltipText="test" />
+          <NotificationIcon theme={this.props.theme} tooltipText={this.imgCanBeDownloadedTooltip} />
         </div>
       );
     }
@@ -225,6 +226,7 @@ class ImageSettings extends Component {
               dataHook="imageSettingsAltInput"
               isMobile={isMobile}
             />
+            <NotificationIcon theme={this.props.theme} tooltipText={this.altTooltip} />
           </SettingsSection>
           <SettingsSection
             theme={theme}
