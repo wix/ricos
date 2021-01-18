@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - 'release*'
+    tags:
+      - v8.*
 jobs:
   publishPackages:
     runs-on: ubuntu-18.04
