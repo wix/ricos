@@ -39,25 +39,13 @@ export default class TextColorPanel extends Component {
   }
 
   setColor(colorName) {
-    let {
-      editorState,
-      settings,
-      defaultColor,
-      onSelect,
-      styleMapper,
-      predicate,
-      onResetColor,
-    } = this.props;
-    if (onResetColor) {
-      onResetColor();
-    } else {
-      const newColorHex = colorName && extractColor(settings.colorScheme, colorName);
-      editorState = getInlineColorState(colorName, editorState, settings, styleMapper, predicate);
-      this.setState({
-        currentColor: newColorHex || defaultColor,
-        currentSchemeColor: colorName || (this.currentColors[0] && getColor(this.currentColors[0])),
-      });
-    }
+    let { editorState, settings, defaultColor, onSelect, styleMapper, predicate } = this.props;
+    const newColorHex = colorName && extractColor(settings.colorScheme, colorName);
+    editorState = getInlineColorState(colorName, editorState, settings, styleMapper, predicate);
+    this.setState({
+      currentColor: newColorHex || defaultColor,
+      currentSchemeColor: colorName || (this.currentColors[0] && getColor(this.currentColors[0])),
+    });
     this.props.closeModal(editorState);
     onSelect && onSelect(colorName);
   }
@@ -138,7 +126,6 @@ TextColorPanel.propTypes = {
   predicate: PropTypes.func,
   defaultColor: PropTypes.string.isRequired,
   onSelect: PropTypes.func,
-  onResetColor: PropTypes.func,
 };
 
 export const getInlineColorState = (color, editorState, settings, styleMapper, predicate) => {
