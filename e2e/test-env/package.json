@@ -6,9 +6,9 @@
     "email": "jonathanb@wix.com"
   },
   "scripts": {
-    "dev": "node ./dev",
+    "dev": "node --max-http-header-size=1000000 ./dev",
     "build": "webpack",
-    "start": "node ./src/server"
+    "start": "node --max-http-header-size=1000000 ./src/server"
   },
   "dependencies": {
     "casual-browserify": "1.5.19-2",

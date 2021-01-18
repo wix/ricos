@@ -1,0 +1,29 @@
+{
+  "blocks": [
+    {
+      "key": "1qaje",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "an-unsupported-block",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {}
+      }
+    }
+  },
+  "VERSION": "8.15.0"
+}
