@@ -13,6 +13,8 @@
 ### :house: Internal
 - `unsupported-blocks`
   - [#1987](https://github.com/wix/ricos/pull/1987) unsupported-blocks test
+- `color-picker`
+  - [#2000](https://github.com/wix/ricos/pull/2000) remove position fixed from reset button
 
 ## [Unreleased]  
 
