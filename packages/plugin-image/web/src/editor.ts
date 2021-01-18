@@ -3,6 +3,7 @@ import { ModalsMap } from './modals';
 import { DEFAULTS } from './consts';
 import { EditorPluginCreator } from 'wix-rich-content-common';
 import { createImagePlugin } from './createImagePlugin';
+// import { createImageData } from './createImageData';
 
 export const pluginImage: EditorPluginCreator<ImagePluginEditorConfig> = config => {
   return {
@@ -10,6 +11,6 @@ export const pluginImage: EditorPluginCreator<ImagePluginEditorConfig> = config 
     type: IMAGE_TYPE,
     createPlugin: createImagePlugin,
     ModalsMap,
-    componentData: DEFAULTS,
+    // createPluginData: createImageData,
   };
 };

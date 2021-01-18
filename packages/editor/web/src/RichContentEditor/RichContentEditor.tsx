@@ -120,7 +120,6 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createPluginsDataMap: CreatePluginsDataMap;
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;

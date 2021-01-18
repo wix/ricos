@@ -10,6 +10,5 @@ export const pluginHeadings: EditorPluginCreator<HeadingsPluginEditorConfig> = c
     type: HEADINGS_DROPDOWN_TYPE,
     createPlugin: createHeadingsPlugin,
     ModalsMap,
-    componentData: DEFAULTS,
   };
 };

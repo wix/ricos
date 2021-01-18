@@ -10,6 +10,5 @@ export const pluginVerticalEmbed: EditorPluginCreator<VerticalEmbedPluginEditorC
     type: VERTICAL_EMBED_TYPE,
     createPlugin: createVerticalEmbedPlugin,
     ModalsMap,
-    componentData: DEFAULTS,
   };
 };

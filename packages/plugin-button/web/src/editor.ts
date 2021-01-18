@@ -7,7 +7,6 @@ import {
   ActionButtonPluginEditorConfig,
 } from './types';
 import { theme } from './defaults';
-
 import { ModalsMap } from './modals';
 import { EditorPluginCreator } from 'wix-rich-content-common';
 

@@ -9,6 +9,5 @@ export const pluginMap: EditorPluginCreator<MapPluginEditorConfig> = config => {
     type: MAP_TYPE,
     createPlugin: createMapPlugin,
     ModalsMap: {},
-    componentData: DEFAULTS,
   };
 };
