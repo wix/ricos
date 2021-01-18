@@ -106,6 +106,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             isActive: () =>
               getColorsFromComponentData(selected, table).borderCurrentColor !==
               DEFAULT_BORDER_COLOR,
+            onResetColor: () => table.removeCellBorders(getRange(selected)),
             type: 'color-picker',
           },
           {
@@ -123,6 +124,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             isActive: () =>
               getColorsFromComponentData(selected, table).borderCurrentColor !==
               DEFAULT_BORDER_COLOR,
+            onResetColor: () => table.removeCellBorders(getRange(selected)),
             type: 'color-picker',
           },
         ],
@@ -144,6 +146,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
         getLabel: () => {},
         isActive: () =>
           getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
+        onResetColor: () => table.removeCellBorders(getRange(selected)),
         type: 'color-picker',
       },
     ];
