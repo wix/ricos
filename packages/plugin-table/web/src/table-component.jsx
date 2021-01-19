@@ -387,7 +387,7 @@ class TableComponent extends React.Component {
     const isEditMode = !isMobile && isTableOnFocus;
     return (
       <div
-        className={classNames(styles.tableEditorContainer, {
+        className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
           [styles.editMode]: isEditMode,
           [styles.viewMode]: !isEditMode,
           [styles.disableSelection]: !isEditingActive,
