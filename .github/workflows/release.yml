@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - 'release*'
+    tags:
+      - v9.*
+      - v8.*
+      - v7.*
 jobs:
   publishPackages:
     runs-on: ubuntu-18.04

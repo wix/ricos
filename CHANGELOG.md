@@ -10,30 +10,46 @@
 > - :nail_care: Polish
 
 ## [Unreleased]  
-
-### :bug: Bug Fix
-- `unsupportedBlocks`
-  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
-
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
 
-### :house: Internal
-- `editor`
-  - [#1996](https://github.com/wix/ricos/commit/1996) add support for new error codes, split `ErrorToast` component for scalability
-- `editor-common`
-  - [#1996](https://github.com/wix/ricos/commit/1996) add new media upload error transtion keys
+### :rocket: New Feature
+- `common`
+  - [#1970](https://github.com/wix-incubator/rich-content/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
 
 </details>
 <hr/>
+
+## 8.16.0 (Jan 18, 2021)
+### :rocket: New Feature
+- `unsupportedBlocks`
+  - [#2005](https://github.com/wix-incubator/rich-content/pull/2005) new plugin for informing oneApp users when plugin isn't supported
+
+## 8.15.4 (Jan 18, 2021)
+### :bug: Bug Fix
+- `unsupportedBlocks`
+  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
+
+### :house: Internal
+- `e2e`
+  - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
+- `editor`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add support for new error codes, split `ErrorToast` component for scalability
+- `editor-common`
+  - [#1996](https://github.com/wix/ricos/commit/1996) add new media upload error translation keys
+- `unsupported-blocks`
+  - [#1987](https://github.com/wix/ricos/pull/1987) unsupported-blocks test
+- `color-picker`
+  - [#2000](https://github.com/wix/ricos/pull/2000) remove position fixed from reset button
 
 ## 8.15.3 (Jan 14, 2021)
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
+
 ## 8.15.2 (Jan 14, 2021)
 ### :house: Internal
 - `common`
@@ -75,6 +91,7 @@
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
 - `fullscreen`
   - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
+
 ### :bug: Bug Fix
 - `image`
   - [#1968](https://github.com/wix/ricos/commit/1968) image preview isn't displayed with error
