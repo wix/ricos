@@ -28,6 +28,7 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
 import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+import { pluginPoll } from 'wix-rich-content-plugin-social-polls/dist/module.viewer';
 import { pluginTable } from 'wix-rich-content-plugin-table/viewer';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
@@ -89,6 +90,7 @@ const plugins = {
   textColor: pluginTextColor(configs.textColor),
   spoiler: pluginSpoiler(),
   accordion: pluginAccordion(),
+  poll: pluginPoll(),
   table: pluginTable(),
   emoji: pluginEmoji(),
   verticalEmbed: pluginVerticalEmbed(),

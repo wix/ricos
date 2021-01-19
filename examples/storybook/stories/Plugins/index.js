@@ -14,6 +14,7 @@ import HtmlPluginStory from './HtmlPlugin';
 import FileUploadStory from './FileUpload';
 import MapPluginStory from './Map';
 import TablePluginStory from './Table';
+import PollPluginStory from './Poll';
 
 storiesOf('Plugins')
   .add('Divider', DividerPluginStory)
@@ -30,4 +31,5 @@ storiesOf('Plugins')
   .add('HTML Plugin', HtmlPluginStory)
   .add('File Upload', FileUploadStory)
   .add('Map', MapPluginStory)
-  .add('Table', TablePluginStory);
+  .add('Table', TablePluginStory)
+  .add('Poll', PollPluginStory);
