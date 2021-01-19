@@ -19,8 +19,8 @@ const VideoSettingsMobileHeader = ({
     switchTab,
     otherTab,
     dataHookPrefix: 'VideoSettingsMobileHeader',
-    cancelLabel: cancelName || t('VideoSettings_MobileHeader_Cancel'),
-    saveLabel: saveName || t('VideoSettings_MobileHeader_Save'),
+    cancelLabel: cancelName || t('SettingsPanelFooter_Cancel'),
+    saveLabel: saveName || t('SettingsPanelFooter_Save'),
   };
 
   return <MediaSettingsMobileHeader {...props} />;
