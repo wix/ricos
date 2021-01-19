@@ -103,6 +103,7 @@
   "SettingsButton_Tooltip": "Nustatymai",
   "LinkPreview_Settings_Tooltip": "Nuorodos nustatymai",
   "Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Norite parduoti paslaugas ir dalytis jomis savo įraše? Eikite svetainėje į „App Market“ ir įdiekite „Wix Bookings“.",
+  "UnsupportedPlugin_message": "This content can be edited only on the web",
   "TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
   "Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Apklausa (px)",
   "TextCodeBlock_InsertButton_Tooltip": "Pridėkite kodo fragmentą",
