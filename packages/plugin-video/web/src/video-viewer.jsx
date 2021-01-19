@@ -77,17 +77,10 @@ class VideoViewer extends Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const {
-      theme,
-      width,
-      height,
-      disabled,
-      setComponentUrl,
-      settings: { disableDownload = false },
-    } = this.props;
+    const { theme, width, height, disabled, setComponentUrl, settings, componentData } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
-
+    const disableDownload = settings.disableDownload || componentData.config.disableDownload;
     setComponentUrl?.(url);
     const props = {
       url,

@@ -12,6 +12,7 @@ export {
 
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';
+export { default as NotificationIcon } from './Components/NotificationIcon';
 export { default as Checkbox } from './Components/Checkbox';
 
 export { default as Dropdown } from './Components/Dropdown';
