@@ -40,9 +40,15 @@ class ColorPickerButton extends Component {
     this.setState({ currentColor: color });
     this.closeModal();
   };
+
   onResetColor = () => {
-    const defaultColors = this.props.getDefaultColors?.();
-    this.onChange(defaultColors);
+    const { getDefaultColors, onResetColor } = this.props;
+    if (onResetColor) {
+      onResetColor();
+    } else {
+      const defaultColors = getDefaultColors?.();
+      this.onChange(defaultColors);
+    }
   };
 
   extractPalette = colorScheme => {
@@ -127,6 +133,7 @@ ColorPickerButton.propTypes = {
   getDefaultColors: PropTypes.func,
   dropDownProps: PropTypes.Object,
   theme: PropTypes.object,
+  onResetColor: PropTypes.func,
 };
 
 export default ColorPickerButton;

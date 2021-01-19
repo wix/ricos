@@ -141,10 +141,6 @@ export default class Cell extends Component {
       handleCellClipboardEvent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
-    if (additionalStyles.backgroundColor === 'transparent') {
-      // eslint-disable-next-line fp/no-delete
-      delete additionalStyles.backgroundColor;
-    }
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
