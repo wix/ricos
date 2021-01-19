@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :house: Internal
+- `common`
+  - [#2012](https://github.com/wix/ricos/commit/2012) merge translations
+
 </details>
 <hr/>
 
