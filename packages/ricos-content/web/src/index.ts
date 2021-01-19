@@ -11,6 +11,7 @@ export {
 export * from './consts';
 export * from './types';
 export * from './version';
+export { migrateDividerData } from './migrateSchema/toDraft/getDraftEntityData';
 
 export { isContentStateEmpty } from './contentStateUtils/contentStateUtils';
 

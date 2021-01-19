@@ -28,7 +28,7 @@ import {
 } from '../..';
 import { DraftBlockType } from 'draft-js';
 
-const migrateVideoData = data => {
+export const migrateVideoData = data => {
   if (data.url) {
     data.src = data.url;
     delete data.url;
@@ -40,13 +40,13 @@ const migrateVideoData = data => {
   }
 };
 
-const migrateDividerData = data => {
+export const migrateDividerData = data => {
   has(data, 'type') && (data.type = toCamelCase(data.type));
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
 
-const migrateImageData = data => {
+export const migrateImageData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
   if (has(data, 'src.originalFileName')) {
@@ -59,12 +59,12 @@ const migrateImageData = data => {
   }
 };
 
-const migrateGalleryData = data => {
+export const migrateGalleryData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
 
-const migratePollData = data => {
+export const migratePollData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
   has(data, 'layout.poll.type') && (data.layout.poll.type = toCamelCase(data.layout.poll.type));
@@ -74,22 +74,22 @@ const migratePollData = data => {
     (data.design.poll.backgroundType = toCamelCase(data.design.poll.backgroundType));
 };
 
-const migrateVerticalEmbedData = data => {
+export const migrateVerticalEmbedData = data => {
   has(data, 'type') && (data.type = toCamelCase(data.type));
 };
 
-const migrateHtmlData = data => {
+export const migrateHtmlData = data => {
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
 
-const migrateGiphyData = data => {
+export const migrateGiphyData = data => {
   has(data, 'configViewer.sizes.desktop') &&
     (data.configViewer.sizes.desktop = toCamelCase(data.configViewer.sizes.desktop));
   has(data, 'configViewer.sizes.mobile') &&
     (data.configViewer.sizes.mobile = toCamelCase(data.configViewer.sizes.mobile));
 };
 
-const migrateLinkPreviewData = data => {
+export const migrateLinkPreviewData = data => {
   if (has(data, 'thumbnailUrl')) {
     data.thumbnail_url = data.thumbnailUrl;
     delete data.thumbnailUrl;
@@ -100,7 +100,7 @@ const migrateLinkPreviewData = data => {
   }
 };
 
-const migrateSoundCloudData = data => {
+export const migrateSoundCloudData = data => {
   if (data.metadata) {
     data.metadata = keysToSnakeCase(data.metadata);
   }
