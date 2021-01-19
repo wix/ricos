@@ -14,7 +14,8 @@
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
-
+    
+### :rocket: New Feature
 - `video-plugin`
   - [#2009](https://github.com/wix-incubator/rich-content/pull/2009) optional video download via settings-modal
   </summary>
