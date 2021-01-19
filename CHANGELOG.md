@@ -18,6 +18,8 @@
 </details>
 <hr/>
 
+## 8.17.1 (Jan 19, 2021)
+
 ## 8.17.0 (Jan 19, 2021)
 ### :rocket: New Feature
 - `common`
