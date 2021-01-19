@@ -20,12 +20,12 @@ const DEFAULT_PALETTE_BG = Object.freeze([
   '#dddddd',
 ]);
 const DEFAULT_PALETTE_BORDERS = Object.freeze([
+  '#ff0000',
   '#ffffff',
   '#303030',
   '#3a54b4',
   '#bfad80',
   '#dddddd',
-  '#ff0000',
 ]);
 const DEFAULT_BG_COLOR = 'transparent';
 const DEFAULT_BORDER_COLOR = 'unset';
