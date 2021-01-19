@@ -42,7 +42,7 @@
     "to-constant-case": "1.0.0",
     "to-slug-case": "1.0.0",
     "to-snake-case": "1.0.0",
-    "utility-types": "^3.10.0",
+    "utility-types": "^3.10.0"
   },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
