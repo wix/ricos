@@ -17,8 +17,11 @@ export interface VideoPluginEditorConfig extends EditorPluginConfig {
 export interface VideoPluginViewerConfig extends ViewerPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
+export type VideoData = ComponentData & {
+  config: { disableDownload?: boolean };
+};
 export interface VideoSettingsProps {
-  componentData: ComponentData;
+  componentData: VideoData;
   helpers: Helpers;
   pubsub: Pubsub;
   theme: RichContentTheme;
