@@ -1,5 +1,5 @@
 import { RicosNode, VideoSource } from 'ricos-schema';
-import { getImageSrc } from 'wix-rich-content-common/libs/getImageSrc';
+import { getImageSrc } from '../imageUtils';
 import { LINK_TYPE } from '../consts';
 import { NodeType } from '../migrateSchema/consts';
 import {

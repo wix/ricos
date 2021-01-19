@@ -1,5 +1,0 @@
-{
-    "main": "../../dist/lib/getImageSrc.cjs.js",
-    "module": "../../dist/lib/getImageSrc.js",
-    "types": "../../dist/lib/getImageSrc.d.ts"
-}

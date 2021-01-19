@@ -1,5 +1,5 @@
 import imageClientAPI from 'image-client-api/dist/imageClientSDK';
-import { ComponentData, Helpers } from '../types';
+import { ComponentData, Helpers } from 'wix-rich-content-common/src/types';
 
 const WIX_STATIC_URL = 'https://static.wixstatic.com';
 const DEFAULT = {
