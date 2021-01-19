@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const mergedTranslations = {};
-const getPath = package => `../packages/${package}/web/statics`;
-const editorTranslationsPath = `${getPath('editor-common')}/locale/`;
-const viewerTranslationsPath = `${getPath('common')}/viewer/locale/`;
-const allTranslationsPath = `${getPath('common')}/locale/`;
+const getPath = package => `../packages/${package}/web`;
+const editorTranslationsPath = `${getPath('editor-common')}/statics/locale/`;
+const viewerTranslationsPath = `${getPath('common')}/statics/viewer/locale/`;
+const allTranslationsPath = `${getPath('common')}/dist/statics/locale/`;
 
 [editorTranslationsPath, viewerTranslationsPath].forEach(transPath => {
   fs.readdirSync(path.join(__dirname, transPath), `utf8`).forEach(file => {
@@ -15,9 +15,7 @@ const allTranslationsPath = `${getPath('common')}/locale/`;
 });
 
 Object.keys(mergedTranslations).forEach(file => {
-  fs.writeFileSync(
-    path.join(__dirname, allTranslationsPath + file),
-    JSON.stringify(mergedTranslations[file], null, '\t'),
-    `utf8`
-  );
+  const filePath = path.join(__dirname, allTranslationsPath);
+  fs.mkdirSync(filePath, { recursive: true });
+  fs.writeFileSync(filePath + file, JSON.stringify(mergedTranslations[file], null, '\t'), `utf8`);
 });
