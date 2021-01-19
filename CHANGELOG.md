@@ -15,8 +15,15 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :house: Internal
+- `common`
+  - [#2012](https://github.com/wix/ricos/commit/2012) merge translations
+
 </details>
 <hr/>
+
+## 8.17.1 (Jan 19, 2021)
 
 ## 8.17.0 (Jan 19, 2021)
 ### :rocket: New Feature
