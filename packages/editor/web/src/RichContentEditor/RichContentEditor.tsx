@@ -172,6 +172,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
   contextualData: EditorContextType;
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
+  editorWrapper: Element;
   copySource: { unregister(): void };
   updateBounds: (editorBounds?: BoundingRect) => void;
   plugins;
@@ -237,7 +238,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
-    preventWixFocusRingAccessibility();
+    preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
   }
@@ -897,6 +898,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  setEditorWrapper = ref => ref && (this.editorWrapper = ref);
+
   render() {
     const { onError, locale, direction, showToolbars = true } = this.props;
     const { innerModal } = this.state;
@@ -928,7 +931,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 data-id={'rce'}
               >
                 {this.renderStyleTag()}
-                <div className={classNames(styles.editor, theme.editor)}>
+                <div
+                  ref={this.setEditorWrapper}
+                  className={classNames(styles.editor, theme.editor)}
+                >
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}
                   {showToolbars && this.renderToolbars()}
