@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "ricos-schema": "8.17.0",
-    "wix-rich-content-common": "8.17.0",
     "to-camel-case": "1.0.0",
     "to-constant-case": "1.0.0",
     "to-slug-case": "1.0.0",
