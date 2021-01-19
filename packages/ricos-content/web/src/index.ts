@@ -11,7 +11,17 @@ export {
 export * from './consts';
 export * from './types';
 export * from './version';
-export { migrateDividerData } from './migrateSchema/toDraft/getDraftEntityData';
+export {
+  migrateDividerData,
+  migrateImageData,
+  migrateGalleryData,
+  migratePollData,
+  migrateVerticalEmbedData,
+  migrateHtmlData,
+  migrateGiphyData,
+  migrateLinkPreviewData,
+  migrateSoundCloudData,
+} from './migrateSchema/toDraft/getDraftEntityData';
 
 export { isContentStateEmpty } from './contentStateUtils/contentStateUtils';
 

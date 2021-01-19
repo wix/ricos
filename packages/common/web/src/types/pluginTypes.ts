@@ -168,22 +168,23 @@ Record<string, any> | undefined;
 
 export interface CreatePluginsDataMap {
   [DIVIDER_TYPE]?: CreatePluginData<RicosDivider>;
-  [FILE_UPLOAD_TYPE]?: CreatePluginData<RicosFile>;
-  [GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
   [GIPHY_TYPE]?: CreatePluginData<RicosGiphy>;
   [HTML_TYPE]?: CreatePluginData<RicosHTML>;
-  [IMAGE_TYPE]?: CreatePluginData<RicosImage>;
+  [GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
   [POLL_TYPE]?: CreatePluginData<RicosPoll>;
+  [FILE_UPLOAD_TYPE]?: CreatePluginData<RicosFile>;
+  [IMAGE_TYPE]?: CreatePluginData<RicosImage>;
   [VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
 }
 
 export interface PluginsDataMap {
   [DIVIDER_TYPE]?: RicosDivider;
-  [FILE_UPLOAD_TYPE]?: RicosFile;
-  [GALLERY_TYPE]?: RicosGallery;
   [GIPHY_TYPE]?: RicosGiphy;
-  [IMAGE_TYPE]?: RicosImage;
+  [HTML_TYPE]?: RicosHTML;
+  [GALLERY_TYPE]?: RicosGallery;
   [POLL_TYPE]?: RicosPoll;
+  [FILE_UPLOAD_TYPE]?: RicosFile;
+  [IMAGE_TYPE]?: RicosImage;
   [VIDEO_TYPE]?: RicosVideo;
 }
 
