@@ -552,5 +552,6 @@
   "TablePlugin_SettingsModal_ColCount": "How many columns?",
   "TablePlugin_SettingsModal_ErrorMessage": "Enter a number greater than 0",
   "TablePlugin_SettingsModal_RowCount": "How many rows?",
-  "TablePlugin_SettingsModal_CreateTable_Button": "Create Table"
+  "TablePlugin_SettingsModal_CreateTable_Button": "Create Table",
+  "UnsupportedPlugin_message": "This content can be edited only on the web"
 }
