@@ -83,6 +83,7 @@ class Toolbar extends Component {
       defaultPalette,
       getUserColors,
       getDefaultColors,
+      onResetColor,
       ...rest
     } = buttonProps;
     return (
@@ -98,6 +99,7 @@ class Toolbar extends Component {
         getDefaultColors={getDefaultColors}
         dropDownProps={rest}
         theme={this.theme}
+        onResetColor={onResetColor}
       />
     );
   };
