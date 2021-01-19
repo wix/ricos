@@ -37,11 +37,12 @@
   },
   "dependencies": {
     "ricos-schema": "8.16.0",
+    "wix-rich-content-common": "8.16.0",
     "to-camel-case": "1.0.0",
     "to-constant-case": "1.0.0",
     "to-slug-case": "1.0.0",
     "to-snake-case": "1.0.0",
-    "utility-types": "^3.10.0"
+    "utility-types": "^3.10.0",
   },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
