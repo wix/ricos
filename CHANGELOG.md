@@ -15,13 +15,18 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.17.0 (Jan 19, 2021)
 ### :rocket: New Feature
 - `common`
   - [#1970](https://github.com/wix-incubator/rich-content/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
-
-</details>
-<hr/>
+### :bug: Bug Fix
+- `table`
+  - [#2002](https://github.com/wix-incubator/rich-content/pull/2002) fix reset to default colors for table
+- `table`
+  - [#1999](https://github.com/wix-incubator/rich-content/pull/1999) prevent wix focus accessibility
 
 ## 8.16.0 (Jan 18, 2021)
 ### :rocket: New Feature
