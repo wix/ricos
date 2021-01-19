@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SettingsMobileHeader } from 'wix-rich-content-plugin-commons';
+import { MediaSettingsMobileHeader } from 'wix-rich-content-plugin-commons';
 
 const VideoSettingsMobileHeader = ({
   theme,
@@ -23,7 +23,7 @@ const VideoSettingsMobileHeader = ({
     saveLabel: saveName || t('VideoSettings_MobileHeader_Save'),
   };
 
-  return <SettingsMobileHeader {...props} />;
+  return <MediaSettingsMobileHeader {...props} />;
 };
 
 VideoSettingsMobileHeader.propTypes = {

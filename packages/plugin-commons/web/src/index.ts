@@ -11,6 +11,7 @@ export {
 
 export { default as UrlInputModal } from './Modals/UrlInputModal';
 export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
+export { default as MediaSettingsMobileHeader } from './Modals/MediaSettingsMobileHeader';
 
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';

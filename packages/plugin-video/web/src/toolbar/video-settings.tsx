@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import styles from '../../statics/styles/video-settings.scss';
 import { VideoSettingsProps } from '../types';
 import { NotificationIcon } from 'wix-rich-content-editor-common';
 import VideoSettingsMobileHeader from './video-settings-mobile-header';
+import classNames from 'classnames';
+import { mergeStyles } from 'wix-rich-content-common';
+import Styles from '../../statics/styles/video-settings.scss';
 import {
   SettingsSection,
   LabeledToggle,
@@ -23,6 +25,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   const headerText = t('VideoSettings_Header');
   const videoCanBeDownloadedLabel = t('VideoSettings_Video_CanBeDownloaded_Label');
   const videoCanBeDownloadedTooltipText = t('VideoSettings_Video_CanBeDownloaded_Tooltip');
+  const styles = mergeStyles({ styles: Styles, theme });
 
   const onDoneClick = () => {
     const newComponentData = { ...componentData, config: { disableDownload: !isDownloadEnabled } };
@@ -41,18 +44,18 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   return (
     <div className={styles.videoSettings}>
       {isMobile ? (
-        <VideoSettingsMobileHeader
-          t={t}
-          theme={theme}
-          cancel={onCancelClick}
-          save={onDoneClick}
-          // saveName={this.updateLabel}
-        />
+        <VideoSettingsMobileHeader t={t} theme={theme} cancel={onCancelClick} save={onDoneClick} />
       ) : (
-        <h3 className={styles.videoSettingsTitle}>{headerText}</h3>
+        <>
+          <h3 className={styles.videoSettingsTitle}>{headerText}</h3>
+          <hr />
+        </>
       )}
-      <div className={styles.videoSettings_scrollContainer}>
-        <hr />
+      <div
+        className={classNames(styles.videoSettings_scrollContainer, {
+          [styles.videoSettings_mobile]: isMobile,
+        })}
+      >
         <SettingsSection
           theme={theme}
           className={styles.videoSettingsSection}

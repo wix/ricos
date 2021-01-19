@@ -60,7 +60,13 @@ $MOBILE_HEADER_HEIGHT: 50px;
 }
 
 .videoSettings_mobile {
-  margin: 0 auto;
+  margin: 48px auto;
+  p{
+    font-size: 14px;
+  }
+  svg{
+    left: 167px;
+  }
 }
 
 .videoSettings_footer {
