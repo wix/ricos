@@ -1,8 +1,10 @@
 name: update
 on:
   push:
-    tags-ignore:
-      - '**'
+    tags:
+      - v9.*
+      - v8.*
+      - v7.*
     branches:
       - '**'
 jobs:
