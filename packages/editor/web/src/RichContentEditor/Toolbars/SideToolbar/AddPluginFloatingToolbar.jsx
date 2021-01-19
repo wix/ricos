@@ -208,7 +208,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
           aria-label={'Plugin Toolbar'}
           aria-pressed={isPopupOpen}
           tabIndex="0"
-          className={floatingIconClassNames}
+          className={classNames(floatingIconClassNames, 'has-custom-focus')}
           data-hook={'addPluginFloatingToolbar'}
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
