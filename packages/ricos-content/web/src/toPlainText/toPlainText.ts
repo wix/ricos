@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 import { RicosContent, VideoSource } from 'ricos-schema';
+import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 import {
   RICOS_IMAGE_TYPE,
   RICOS_VIDEO_TYPE,
@@ -22,6 +22,7 @@ import {
   parseVideo,
 } from './convertNodes';
 import { NodeType } from '../migrateSchema/consts';
+import { fromDraft } from '../migrateSchema';
 
 interface PlainTextOptions {
   urlShortener?: (url: string) => Promise<string>;
@@ -29,9 +30,13 @@ interface PlainTextOptions {
 }
 
 export const toPlainText = async (
-  ricosContent: RicosContent,
+  content: RicosContent | RicosDraftContent,
   options?: PlainTextOptions
 ): Promise<string> => {
+  let ricosContent = content;
+  if ('blocks' in ricosContent) {
+    ricosContent = fromDraft(ricosContent);
+  }
   const {
     doc: { nodes },
   } = ricosContent;
