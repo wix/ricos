@@ -19,6 +19,7 @@ export {
   migrateVerticalEmbedData,
   migrateHtmlData,
   migrateGiphyData,
+  migrateVideoData,
   migrateLinkPreviewData,
   migrateSoundCloudData,
 } from './migrateSchema/toDraft/getDraftEntityData';

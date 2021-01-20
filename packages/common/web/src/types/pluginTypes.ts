@@ -172,9 +172,9 @@ export interface CreatePluginsDataMap {
   [HTML_TYPE]?: CreatePluginData<RicosHTML>;
   [GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
   [POLL_TYPE]?: CreatePluginData<RicosPoll>;
+  [VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
   [FILE_UPLOAD_TYPE]?: CreatePluginData<RicosFile>;
   [IMAGE_TYPE]?: CreatePluginData<RicosImage>;
-  [VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
 }
 
 export interface PluginsDataMap {
@@ -183,9 +183,9 @@ export interface PluginsDataMap {
   [HTML_TYPE]?: RicosHTML;
   [GALLERY_TYPE]?: RicosGallery;
   [POLL_TYPE]?: RicosPoll;
+  [VIDEO_TYPE]?: RicosVideo;
   [FILE_UPLOAD_TYPE]?: RicosFile;
   [IMAGE_TYPE]?: RicosImage;
-  [VIDEO_TYPE]?: RicosVideo;
 }
 
 export type ModalsMap = Record<string, ComponentType>;
