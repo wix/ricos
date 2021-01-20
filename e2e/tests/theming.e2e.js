@@ -23,14 +23,14 @@ function tests({ isDesktop }) {
       usePlugins(plugins.all),
       getPluginMenuConfig()
     ).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
 
   it('no palette, cssOverride', function() {
     cy.loadRicosEditorAndViewer('storybook-example-app', usePlugins(plugins.all)).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -44,7 +44,7 @@ function tests({ isDesktop }) {
         paletteType: 'light',
       })
     ).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -55,7 +55,7 @@ function tests({ isDesktop }) {
       usePlugins(plugins.all),
       useTheming({ paletteType: 'light' })
     ).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -69,7 +69,7 @@ function tests({ isDesktop }) {
         paletteType: 'dark',
       })
     ).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -80,7 +80,7 @@ function tests({ isDesktop }) {
       usePlugins(plugins.all),
       useTheming({ paletteType: 'dark' })
     ).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -91,7 +91,7 @@ function tests({ isDesktop }) {
       usePlugins(plugins.all),
       useTheming({ paletteType: 'dark', skipCssOverride: true, fallbackColor: '%23FF0000' })
     ).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -102,7 +102,7 @@ function tests({ isDesktop }) {
       usePlugins(plugins.all),
       useTheming({ useCustomStyles: true, skipCssOverride: true })
     ).focusEditor();
-    cy.wait(2000);
+    cy.waitForDocumentMutations();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
