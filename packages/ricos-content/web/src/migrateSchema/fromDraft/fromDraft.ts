@@ -74,9 +74,6 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     key: block.key,
     type: NodeType.Blockquote,
     nodes: [parseTextBlock(block)],
-    ricosQuote: {
-      depth: block.depth || undefined,
-    },
   });
 
   const parseCodeBlock = (block: RicosContentBlock): RicosNode => ({
@@ -117,12 +114,20 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       },
       nodes: [],
     };
-    if (block.type === BlockType.Unstyled) {
-      textWrapperNode.key = block.key;
-      textWrapperNode.ricosParagraph = {
-        ...textWrapperNode.ricosParagraph,
-        depth: block.depth || undefined,
-      };
+
+    switch (block.type) {
+      case BlockType.Unstyled:
+        textWrapperNode.key = block.key;
+      // falls through
+      case BlockType.Blockquote:
+      case BlockType.OrderedListItem:
+      case BlockType.UnorderedListItem:
+        textWrapperNode.ricosParagraph = {
+          ...textWrapperNode.ricosParagraph,
+          depth: block.depth,
+        };
+        break;
+      default:
     }
 
     const nodes = getTextNodes(block, entityMap);
@@ -134,32 +139,39 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     return textWrapperNode;
   };
 
-  const parseListBlocks = (listStartIndex: number): { node: RicosNode; nextIndex: number } => {
-    const listType = blocks[listStartIndex].type;
-    const listBlocks: RicosContentBlock[] = [];
-    let searchIndex = listStartIndex;
+  const createListItem = (block: RicosContentBlock): RicosNode => ({
+    key: block.key,
+    type: NodeType.ListItem,
+    nodes: [parseTextBlock(block)],
+  });
 
-    while (searchIndex >= 0) {
-      const nextBlock = blocks[searchIndex];
-      if (nextBlock.type === listType) {
-        listBlocks.push(nextBlock);
-        searchIndex++;
+  const isListBlock = (block: RicosContentBlock): boolean => !!FROM_DRAFT_LIST_TYPE[block.type];
+
+  const parseListBlocks = (listStartIndex: number): { node: RicosNode; nextIndex: number } => {
+    const { type: listType, depth } = blocks[listStartIndex];
+    const listNodes: RicosNode[] = [];
+    let searchIndex = listStartIndex;
+    let nextBlock = blocks[searchIndex];
+
+    while (isListBlock(nextBlock) && nextBlock.depth >= depth) {
+      if (nextBlock.depth > depth || nextBlock.type !== listType) {
+        const { node, nextIndex } = parseListBlocks(searchIndex);
+        listNodes[listNodes.length - 1].nodes.push(node);
+        searchIndex = nextIndex;
       } else {
-        searchIndex = -1;
+        listNodes.push(createListItem(nextBlock));
+        searchIndex++;
       }
+      nextBlock = blocks[searchIndex];
     }
 
     return {
       node: {
         key: genKey(),
         type: FROM_DRAFT_LIST_TYPE[listType],
-        nodes: listBlocks.map(block => ({
-          key: block.key,
-          type: NodeType.ListItem,
-          nodes: [parseTextBlock(block)],
-        })),
+        nodes: listNodes,
       },
-      nextIndex: listStartIndex + listBlocks.length,
+      nextIndex: searchIndex,
     };
   };
 

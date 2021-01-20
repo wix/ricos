@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8kc9b",
+            "key": "1rjt4",
             "ricosText": {
               "decorations": [],
               "text": "Hi! 😃"
@@ -32,7 +32,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4632c",
+            "key": "bdi4q",
             "ricosText": {
               "decorations": [],
               "text": "Welcome to "
@@ -41,7 +41,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bqa3a",
+            "key": "8uplp",
             "ricosText": {
               "decorations": [
                 {
@@ -68,7 +68,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3aut5",
+            "key": "i6ck",
             "ricosText": {
               "decorations": [],
               "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️"
@@ -77,13 +77,17 @@
         ],
         "type": "paragraph",
         "key": "7cqs0",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [],
         "type": "paragraph",
         "key": "4ni77",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [],
@@ -110,14 +114,16 @@
         "nodes": [],
         "type": "paragraph",
         "key": "nujv",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "876b8",
+            "key": "cqa3b",
             "ricosText": {
               "decorations": [],
               "text": "Checkout the "
@@ -126,7 +132,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "8bpm0",
+            "key": "b3cm0",
             "ricosText": {
               "decorations": [
                 {
@@ -147,14 +153,16 @@
         ],
         "type": "paragraph",
         "key": "cg20j",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "5hil4",
+            "key": "7dj1n",
             "ricosText": {
               "decorations": [
                 {
@@ -170,14 +178,16 @@
         ],
         "type": "paragraph",
         "key": "bhslk",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "9nikd",
+            "key": "f8a7c",
             "ricosText": {
               "decorations": [
                 {
@@ -196,7 +206,9 @@
         ],
         "type": "paragraph",
         "key": "ckj27",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [],
@@ -215,14 +227,16 @@
         "nodes": [],
         "type": "paragraph",
         "key": "3b4ah",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "clstp",
+            "key": "70otq",
             "ricosText": {
               "decorations": [],
               "text": "A wise man once said:"
@@ -231,7 +245,9 @@
         ],
         "type": "paragraph",
         "key": "8ptbs",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
@@ -240,7 +256,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "csdua",
+                "key": "6osjn",
                 "ricosText": {
                   "decorations": [],
                   "text": "The Wix Rich Content Editor is the best tool in the world!"
@@ -248,26 +264,29 @@
               }
             ],
             "type": "paragraph",
-            "key": "4tchl",
-            "ricosParagraph": {}
+            "key": "cjo9t",
+            "ricosParagraph": {
+              "depth": 0
+            }
           }
         ],
         "type": "blockquote",
-        "key": "bu4jj",
-        "ricosQuote": {}
+        "key": "bu4jj"
       },
       {
         "nodes": [],
         "type": "paragraph",
         "key": "8hmrf",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "13u55",
+            "key": "alce7",
             "ricosText": {
               "decorations": [],
               "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components."
@@ -276,20 +295,24 @@
         ],
         "type": "paragraph",
         "key": "c4i62",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [],
         "type": "paragraph",
         "key": "7bn5j",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6verv",
+            "key": "23jti",
             "ricosText": {
               "decorations": [],
               "text": "Code example:"
@@ -298,14 +321,16 @@
         ],
         "type": "paragraph",
         "key": "bmqc9",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [
           {
             "nodes": [],
             "type": "text",
-            "key": "6vbt5",
+            "key": "4vj4",
             "ricosText": {
               "decorations": [],
               "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />"
@@ -321,7 +346,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "36tk6",
+            "key": "bipsb",
             "ricosText": {
               "decorations": [],
               "text": "Pro Gallery Collage:"
@@ -330,13 +355,17 @@
         ],
         "type": "paragraph",
         "key": "45pcl",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [],
         "type": "paragraph",
         "key": "dl5nc",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [],
@@ -402,18 +431,22 @@
         "nodes": [],
         "type": "paragraph",
         "key": "1qn5s",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       },
       {
         "nodes": [],
         "type": "paragraph",
         "key": "5vr9d",
-        "ricosParagraph": {}
+        "ricosParagraph": {
+          "depth": 0
+        }
       }
     ],
     "lastEdited": {
-      "seconds": 1610367712,
-      "nanos": 425000000
+      "seconds": 1611134447,
+      "nanos": 582000000
     }
   },
   "selection": {
