@@ -3,17 +3,18 @@
 
 import { transform, isEqualWith, isEqual, isObject, omit } from 'lodash';
 
-const IGNORED_KEYS = ['lastEdited', 'key'];
+const IGNORED_KEYS = ['lastEdited'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
 
 /**
  * Deep diff between two object, using lodash
- * @param  {RicosContent} object Object compared
- * @param  {RicosContent} base   Object to compare with
- * @return {RicosContent}        Return a new object who represent the diff
+ * @param object Object compared
+ * @param base   Object to compare with
+ * @return       Return a new object who represent the diff
  */
-export function compare(object, base, options: { verbose?: boolean } = {}) {
-  const { verbose } = options;
+export function compare(object, base, options: { verbose?: boolean; ignoredKeys?: string[] } = {}) {
+  const { verbose, ignoredKeys } = options;
+  const comparator = getComparator([...IGNORED_KEYS, ...(ignoredKeys || [])]);
   object.blocks && removeEmoji(object);
   base.blocks && removeEmoji(base);
 
@@ -42,8 +43,8 @@ export function compare(object, base, options: { verbose?: boolean } = {}) {
   return changes(object, base);
 }
 
-const comparator = (left, right, key) => {
-  if (IGNORED_KEYS.includes(key)) {
+const getComparator = (ignoredKeys: string[]) => (left, right, key) => {
+  if (ignoredKeys.includes(key)) {
     return true;
   }
   if (left?.enableVoteRole !== undefined || right?.enableVoteRole !== undefined) {

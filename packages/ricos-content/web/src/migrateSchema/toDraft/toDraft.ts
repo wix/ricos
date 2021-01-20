@@ -2,7 +2,7 @@
 import { RicosContent, RicosNode } from 'ricos-schema';
 import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
 import { genKey } from '../generateRandomKey';
-import { NodeType, BlockType, HeaderLevel } from '../consts';
+import { NodeType, BlockType, HeaderLevel, TO_DRAFT_LIST_TYPE } from '../consts';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
 import { createTextBlockData, createAtomicEntityData } from './getDraftEntityData';
@@ -46,21 +46,8 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
           parseNodes(index + 1);
           break;
         case NodeType.OrderedList:
-          node.nodes.forEach(listItem =>
-            parseTextNodes(getParagraphNode(listItem), {
-              type: BlockType.OrderedListItem,
-              key: listItem.key,
-            })
-          );
-          parseNodes(index + 1);
-          break;
         case NodeType.UnorderedList:
-          node.nodes.forEach(listItem =>
-            parseTextNodes(getParagraphNode(listItem), {
-              type: BlockType.UnorderedListItem,
-              key: listItem.key,
-            })
-          );
+          parseListNode(node);
           parseNodes(index + 1);
           break;
         case NodeType.Paragraph:
@@ -90,6 +77,25 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
     });
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
+
+  const parseListNode = (node: RicosNode) => {
+    node.nodes.forEach(listItem => {
+      const [paragraph, childNode] = listItem.nodes;
+      parseTextNodes(paragraph, {
+        type: TO_DRAFT_LIST_TYPE[node.type],
+        key: listItem.key,
+      });
+      if (childNode) {
+        parseListNode(childNode);
+      }
+    });
+  };
+
+  // const parseListItemNode = (node: RicosNode, listType: string) =>
+  //   parseTextNodes(getParagraphNode(node), {
+  //     type: TO_DRAFT_LIST_TYPE[listType],
+  //     key: node.key,
+  //   });
 
   const parseTextNodes = (
     node: RicosNode,
