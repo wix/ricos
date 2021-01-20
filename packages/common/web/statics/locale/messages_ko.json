@@ -103,7 +103,6 @@
 	"SettingsButton_Tooltip": "설정",
 	"LinkPreview_Settings_Tooltip": "링크 설정",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "온라인으로 유료 서비스를 제공하고 게시물을 공유하려면 Wix Bookings를 추가하세요.",
-	"UnsupportedPlugin_message": "This content can be edited only on the web",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "설문 결과 (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "코드 스니펫 추가",
