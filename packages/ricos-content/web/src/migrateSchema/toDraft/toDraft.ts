@@ -2,7 +2,7 @@
 import { RicosContent, RicosNode } from 'ricos-schema';
 import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
 import { genKey } from '../generateRandomKey';
-import { NodeType, BlockType, HeaderLevel } from '../consts';
+import { NodeType, BlockType, HeaderLevel, TO_DRAFT_LIST_TYPE } from '../consts';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
 import { createTextBlockData, createAtomicEntityData } from './getDraftEntityData';
@@ -31,11 +31,9 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
       switch (node.type) {
         case NodeType.Blockquote:
           parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.key });
-          parseNodes(index + 1);
           break;
         case NodeType.CodeBlock:
           parseTextNodes(node, { type: BlockType.CodeBlock, key: node.key });
-          parseNodes(index + 1);
           break;
         case NodeType.Heading:
           if (!node.ricosHeading) {
@@ -43,39 +41,23 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
             process.exit(1);
           }
           parseTextNodes(node, { type: HeaderLevel[node.ricosHeading.level], key: node.key });
-          parseNodes(index + 1);
           break;
         case NodeType.OrderedList:
-          node.nodes.forEach(listItem =>
-            parseTextNodes(getParagraphNode(listItem), {
-              type: BlockType.OrderedListItem,
-              key: listItem.key,
-            })
-          );
-          parseNodes(index + 1);
-          break;
         case NodeType.UnorderedList:
-          node.nodes.forEach(listItem =>
-            parseTextNodes(getParagraphNode(listItem), {
-              type: BlockType.UnorderedListItem,
-              key: listItem.key,
-            })
-          );
-          parseNodes(index + 1);
+          parseListNode(node);
           break;
         case NodeType.Paragraph:
           parseTextNodes(node, { type: BlockType.Unstyled, key: node.key });
-          parseNodes(index + 1);
           break;
         default:
           if (node.type.includes('ricos')) {
             parseAtomicNode(node);
-            parseNodes(index + 1);
           } else {
             console.log(`ERROR! Unknown node type "${node.type}"!`);
             process.exit(1);
           }
       }
+      parseNodes(index + 1);
     }
   };
 
@@ -89,6 +71,19 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
       entityRanges: [{ offset: 0, length: 1, key: latestEntityKey }],
     });
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
+  };
+
+  const parseListNode = (node: RicosNode) => {
+    node.nodes.forEach(listItem => {
+      const [paragraph, childNode] = listItem.nodes;
+      parseTextNodes(paragraph, {
+        type: TO_DRAFT_LIST_TYPE[node.type],
+        key: listItem.key,
+      });
+      if (childNode) {
+        parseListNode(childNode);
+      }
+    });
   };
 
   const parseTextNodes = (
