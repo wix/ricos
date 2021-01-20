@@ -11,7 +11,7 @@ import {
   ColumnHeader,
 } from '../icons';
 
-const DEFAULT_PALETTE = Object.freeze([
+const DEFAULT_PALETTE_BG = Object.freeze([
   'transparent',
   '#ffffff',
   '#303030',
@@ -19,8 +19,16 @@ const DEFAULT_PALETTE = Object.freeze([
   '#bfad80',
   '#dddddd',
 ]);
+const DEFAULT_PALETTE_BORDERS = Object.freeze([
+  '#ff0000',
+  '#ffffff',
+  '#303030',
+  '#3a54b4',
+  '#bfad80',
+  '#dddddd',
+]);
 const DEFAULT_BG_COLOR = 'transparent';
-const DEFAULT_BORDER_COLOR = '#dddddd';
+const DEFAULT_BORDER_COLOR = 'unset';
 
 const getColorsFromComponentData = (selected, table) => {
   const selectionStyle = table.getSelectionStyle(selected, DEFAULT_BG_COLOR, DEFAULT_BORDER_COLOR);
@@ -97,7 +105,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             onColorAdded: color => settings?.onBorderColorAdded?.(color),
             onChange: color => table.setCellsSelectionBorderStyle(color, selected),
             settings,
-            defaultPalette: DEFAULT_PALETTE,
+            defaultPalette: DEFAULT_PALETTE_BORDERS,
             getUserColors: () => settings?.getBorderUserColors?.(),
             getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
             getIcon: () => BorderOutsideIcon,
@@ -106,6 +114,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             isActive: () =>
               getColorsFromComponentData(selected, table).borderCurrentColor !==
               DEFAULT_BORDER_COLOR,
+            onResetColor: () => table.removeCellBorders(getRange(selected)),
             type: 'color-picker',
           },
           {
@@ -114,7 +123,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             onColorAdded: color => settings?.onBorderColorAdded?.(color),
             onChange: color => table.setCellsSelectionBorderStyle(color, selected, true),
             settings,
-            defaultPalette: DEFAULT_PALETTE,
+            defaultPalette: DEFAULT_PALETTE_BORDERS,
             getUserColors: () => settings?.getBorderUserColors?.(),
             getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
             getIcon: () => BorderIcon,
@@ -123,6 +132,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             isActive: () =>
               getColorsFromComponentData(selected, table).borderCurrentColor !==
               DEFAULT_BORDER_COLOR,
+            onResetColor: () => table.removeCellBorders(getRange(selected)),
             type: 'color-picker',
           },
         ],
@@ -136,7 +146,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
         onColorAdded: color => settings?.onBorderColorAdded?.(color),
         onChange: color => table.setCellsSelectionBorderStyle(color, selected),
         settings,
-        defaultPalette: DEFAULT_PALETTE,
+        defaultPalette: DEFAULT_PALETTE_BORDERS,
         getUserColors: () => settings?.getBorderUserColors?.(),
         getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
         getIcon: () => BorderIcon,
@@ -144,6 +154,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
         getLabel: () => {},
         isActive: () =>
           getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
+        onResetColor: () => table.removeCellBorders(getRange(selected)),
         type: 'color-picker',
       },
     ];
@@ -217,7 +228,7 @@ export const getCellFormattingButtonsProps = (
       onColorAdded: color => settings?.onBgColorAdded?.(color),
       onChange: color => table.setCellsStyle({ backgroundColor: color }, getRange(selected)),
       settings,
-      defaultPalette: DEFAULT_PALETTE,
+      defaultPalette: DEFAULT_PALETTE_BG,
       getUserColors: () => settings?.getBgUserColors?.(),
       getDefaultColors: () => settings?.getBgDefaultColors?.() || DEFAULT_BG_COLOR,
       getIcon: () => BGColorIcon,
@@ -225,6 +236,7 @@ export const getCellFormattingButtonsProps = (
       getLabel: () => {},
       isActive: () =>
         getColorsFromComponentData(selected, table).bgCurrentColor !== DEFAULT_BG_COLOR,
+      onResetColor: () => table.removeCellBackgroundColor(getRange(selected)),
       type: 'color-picker',
     },
     {
