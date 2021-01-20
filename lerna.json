@@ -2,10 +2,6 @@
   "lerna": "3.16.4",
   "command": {
     "version": {
-      "allowBranch": [
-        "master",
-        "release*"
-      ],
       "message": "[*] chore(release): %s"
     }
   },
@@ -14,5 +10,5 @@
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "8.17.4"
+  "version": "8.17.5-alpha.0"
 }
