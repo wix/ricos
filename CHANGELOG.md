@@ -19,6 +19,17 @@
 </details>
 <hr/>
 
+## 8.17.5 (Jan 20, 2021)
+### :house: Internal
+- `gallery`
+  - [#2023](https://github.com/wix/ricos/pull/2023) bump pro-gallery to 2.4.13
+
+## 8.17.4 (Jan 20, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#2021](https://github.com/wix/ricos/pull/2021) fix anchors click deletes url params
+  - [#2022](https://github.com/wix/ricos/pull/2021) fix link panel in Safari
+
 ## 8.17.3 (Jan 19, 2021)
 ### :bug: Bug Fix
 - `editor`
