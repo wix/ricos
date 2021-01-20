@@ -22,7 +22,7 @@ import {
   parseVideo,
 } from './convertNodes';
 import { NodeType } from '../migrateSchema/consts';
-import { fromDraft } from '../migrateSchema';
+import { ensureRicosContent } from '../migrateSchema';
 
 interface PlainTextOptions {
   urlShortener?: (url: string) => Promise<string>;
@@ -33,10 +33,7 @@ export const toPlainText = async (
   content: RicosContent | RicosDraftContent,
   options?: PlainTextOptions
 ): Promise<string> => {
-  let ricosContent = content;
-  if ('blocks' in ricosContent) {
-    ricosContent = fromDraft(ricosContent);
-  }
+  const ricosContent = ensureRicosContent(content);
   const {
     doc: { nodes },
   } = ricosContent;

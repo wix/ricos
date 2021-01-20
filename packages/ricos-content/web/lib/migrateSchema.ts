@@ -1,1 +1,1 @@
-export { fromDraft, toDraft } from '../src/migrateSchema';
+export { fromDraft, toDraft, ensureDraftContent, ensureRicosContent } from '../src/migrateSchema';
