@@ -16,14 +16,23 @@
     Click to see more.
   </summary>
 
-### :house: Internal
-- `common`
-  - [#2012](https://github.com/wix/ricos/commit/2012) merge translations
-
 </details>
 <hr/>
 
-## 8.17.1 (Jan 19, 2021)
+## 8.17.4 (Jan 20, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#2021](https://github.com/wix/ricos/pull/2021) fix anchors click deletes url params
+  - [#2022](https://github.com/wix/ricos/pull/2021) fix link panel in Safari
+
+## 8.17.3 (Jan 19, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#2019](https://github.com/wix/ricos/pull/2019) fix inline toolbar ui bug
+## 8.17.2 (Jan 19, 2021)
+### :house: Internal
+- `common`
+  - [#2012](https://github.com/wix/ricos/pull/2012) merge translations
 
 ## 8.17.0 (Jan 19, 2021)
 ### :rocket: New Feature

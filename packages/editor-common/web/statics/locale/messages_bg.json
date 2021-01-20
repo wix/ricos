@@ -103,6 +103,7 @@
   "SettingsButton_Tooltip": "Настройки",
   "LinkPreview_Settings_Tooltip": "Настройки за връзка",
   "Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "За да продавате услуги и да ги споделяте в публикацията си, отидете на пазара на приложения на вашия сайт и инсталирайте Wix Bookings.",
+  "UnsupportedPlugin_message": "This content can be edited only on the web",
   "TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
   "Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Анкета (px)",
   "TextCodeBlock_InsertButton_Tooltip": "Добавете фрагмент на код",
