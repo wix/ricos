@@ -44,6 +44,7 @@ export default class TableRenderer extends PureComponent {
     } = this.props;
     const range = selected && getRange(selected);
     const colsMinWidth = table.getColsMinWidth();
+    this.columns = this.columns.filter(elem => elem.parentElement);
     return (
       <table className={styles.container}>
         <colgroup>

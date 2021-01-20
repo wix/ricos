@@ -103,6 +103,7 @@
   "SettingsButton_Tooltip": "Asetukset",
   "LinkPreview_Settings_Tooltip": "Linkin asetukset",
   "Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Jos haluat myydä palveluja verkossa ja jakaa tietoa niistä päivityksissäsi, mene sivustosi sovelluskauppaan ja asenna Wix-varaukset.",
+  "UnsupportedPlugin_message": "This content can be edited only on the web",
   "TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
   "Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Äänestys (px)",
   "TextCodeBlock_InsertButton_Tooltip": "Lisää koodinpätkä",
