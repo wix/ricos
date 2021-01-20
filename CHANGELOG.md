@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `link`
+  - [#2021](https://github.com/wix/ricos/pull/2021) fix anchors click deletes url params
 </details>
 <hr/>
 
