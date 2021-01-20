@@ -124,7 +124,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       case BlockType.UnorderedListItem:
         textWrapperNode.ricosParagraph = {
           ...textWrapperNode.ricosParagraph,
-          depth: block.depth || undefined,
+          depth: block.depth,
         };
         break;
       default:
