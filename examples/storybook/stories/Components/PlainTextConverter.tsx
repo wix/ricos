@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RichContentEditorBox, Section } from './StoryParts';
-import PropTypes from 'prop-types';
 import EditorWrapper from './EditorWrapper';
 import styles from '../Components/styles.scss';
+import sourceCode from '!!raw-loader!./PlainTextConverter';
 import { toPlainText } from 'ricos-content/libs/toPlainText';
+import { RichContentTheme, RicosContent } from 'wix-rich-content-common';
 
-export default function PlainTextConverter({ content, theme }) {
+const PlainTextConverter: FunctionComponent<{
+  content: RicosContent;
+  theme?: RichContentTheme;
+}> = ({ content, theme }) => {
   const [newContent, setContent] = useState(content);
   const [plainText, setText] = useState('');
 
@@ -15,7 +19,7 @@ export default function PlainTextConverter({ content, theme }) {
 
   return (
     <Section type={Section.Types.COMPARISON}>
-      <RichContentEditorBox>
+      <RichContentEditorBox title={undefined} content={undefined} sourcecode={sourceCode}>
         <EditorWrapper
           content={newContent}
           theme={{ ...theme, parentClass: styles['rce-wrapper'] }}
@@ -25,9 +29,6 @@ export default function PlainTextConverter({ content, theme }) {
       <div style={{ whiteSpace: 'pre-wrap' }}>{plainText}</div>
     </Section>
   );
-}
-
-PlainTextConverter.propTypes = {
-  content: PropTypes.object,
-  theme: PropTypes.object,
 };
+
+export default PlainTextConverter;
