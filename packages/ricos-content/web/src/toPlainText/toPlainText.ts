@@ -1,5 +1,5 @@
 import { RicosContent, VideoSource } from 'ricos-schema';
-import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
+import { RicosContent as RicosContentDraft } from '../..';
 import {
   RICOS_IMAGE_TYPE,
   RICOS_VIDEO_TYPE,
@@ -30,7 +30,7 @@ interface PlainTextOptions {
 }
 
 export const toPlainText = async (
-  content: RicosContent | RicosDraftContent,
+  content: RicosContent | RicosContentDraft,
   options?: PlainTextOptions
 ): Promise<string> => {
   const ricosContent = ensureRicosContent(content);

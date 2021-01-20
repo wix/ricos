@@ -7,7 +7,6 @@ import { RicosContent, RicosNode, google } from 'ricos-schema';
 import { genKey } from '../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getRicosEntityData';
-import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 
 const createTimestamp = (): google.protobuf.Timestamp => {
   const timeMS = Date.now();
@@ -17,7 +16,7 @@ const createTimestamp = (): google.protobuf.Timestamp => {
   };
 };
 
-export const ensureRicosContent = (content: RicosContent | RicosDraftContent) =>
+export const ensureRicosContent = (content: RicosContent | RicosContentDraft) =>
   'blocks' in content ? fromDraft(content) : content;
 
 export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {

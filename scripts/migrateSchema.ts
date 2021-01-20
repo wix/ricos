@@ -3,7 +3,7 @@ import { writeFileSync, existsSync } from 'fs';
 import path from 'path';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { RicosContent } from 'ricos-schema';
-import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
+import { RicosContent as RicosContentDraft } from 'ricos-content';
 import { compare } from 'ricos-content/libs/comparision';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
 const MIGRATED_FIXTURES_PATH =
@@ -28,7 +28,7 @@ const convertDraftFile = (filename: string): RicosContent => {
   return ricosSchema;
 };
 
-const convertRicosFile = (filename: string): RicosDraftContent => {
+const convertRicosFile = (filename: string): RicosContentDraft => {
   const filepath = path.resolve(
     __dirname,
     `${MIGRATED_FIXTURES_PATH}/${filename.replace('.json', '')}.json`

@@ -13,9 +13,8 @@ import {
   parseInlineStyleDecorations,
   parseEntityDecorations,
 } from './decorationParsers';
-import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 
-export const ensureDraftContent = (content: RicosContent | RicosDraftContent) =>
+export const ensureDraftContent = (content: RicosContent | RicosContentDraft) =>
   'doc' in content ? toDraft(content) : content;
 
 export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
