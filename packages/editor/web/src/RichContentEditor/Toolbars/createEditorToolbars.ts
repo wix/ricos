@@ -18,7 +18,6 @@ import {
   simplePubsub,
 } from 'wix-rich-content-common';
 import { EditorProps } from 'draft-js';
-import { defaultFormattingToolbarConfig } from 'wix-rich-content-toolbars';
 
 const createEditorToolbars = ({
   buttons,
@@ -69,10 +68,6 @@ const createEditorToolbars = ({
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
-  const renderDefaultFormattingToolbar = !customSettings.find(a => a.name === 'FORMATTING');
-  if (renderDefaultFormattingToolbar && defaultFormattingToolbarConfig) {
-    customSettings.push(defaultFormattingToolbarConfig);
-  }
   if (tablePluginMenu) {
     const sideToolbarSettings = customSettings.find(setting => setting.name === TOOLBARS.SIDE);
     const pluginMenuSettings = { tablePluginMenu, horizontalMenuLayout: true };
