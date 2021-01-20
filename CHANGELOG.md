@@ -16,9 +16,16 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `link`
+  - [#2021](https://github.com/wix/ricos/pull/2021) fix anchors click deletes url params
 </details>
 <hr/>
 
+## 8.17.3 (Jan 19, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#2019](https://github.com/wix/ricos/pull/2019) fix inline toolbar ui bug
 ## 8.17.2 (Jan 19, 2021)
 ### :house: Internal
 - `common`
