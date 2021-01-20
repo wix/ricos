@@ -304,6 +304,22 @@ export default function createAtomicPluginToolbar({
             />
           );
         }
+        // case BUTTONS.VIDEO_SETTINGS: {
+        //   //Todo => Render video settings only for custom videos
+        //   return this.state.componentData.isCustomVideo ? (
+        //     <Button
+        //       componentData={this.state.componentData}
+        //       componentState={this.state.componentState}
+        //       helpers={helpers}
+        //       displayPanel={this.displayPanel}
+        //       displayInlinePanel={this.displayInlinePanel}
+        //       hideInlinePanel={this.hidePanels}
+        //       uiSettings={uiSettings}
+        //       getEditorBounds={getEditorBounds}
+        //       {...buttonProps}
+        //     />
+        //   ) : null;
+        // }
         default:
           return (
             <Button

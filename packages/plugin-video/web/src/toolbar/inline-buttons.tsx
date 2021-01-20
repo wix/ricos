@@ -8,29 +8,17 @@ import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
-import {
-  CreateInlineButtons,
-  TranslationFunction,
-  AnchorTarget,
-  RelValue,
-  UISettings,
-} from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
 import { VideoPluginEditorConfig } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
-  anchorTarget,
-  relValue,
-  uiSettings,
 }: {
   t: TranslationFunction;
   settings: VideoPluginEditorConfig;
   isMobile: boolean;
-  anchorTarget: AnchorTarget;
-  relValue: RelValue;
-  uiSettings: UISettings;
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
@@ -40,7 +28,6 @@ const createInlineButtons: CreateInlineButtons = ({
     (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
-
   const spoilerButton = settings.spoiler
     ? [
         {
@@ -57,7 +44,7 @@ const createInlineButtons: CreateInlineButtons = ({
     { keyName: 'sizeFullWidth', type: BUTTONS.SIZE_FULL_WIDTH, mobile: false },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
+    { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     ...spoilerButton,
     {
@@ -84,13 +71,10 @@ const createInlineButtons: CreateInlineButtons = ({
       modalStyles: getModalStyles({
         isMobile,
       }),
-      anchorTarget,
-      relValue,
       t,
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       settings,
-      uiSettings,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

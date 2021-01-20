@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VideoSettingsProps } from '../types';
-import { NotificationIcon } from 'wix-rich-content-editor-common';
-import VideoSettingsMobileHeader from './video-settings-mobile-header';
+import { InfoIcon } from 'wix-rich-content-editor-common';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import Styles from '../../statics/styles/video-settings.scss';
@@ -9,6 +8,7 @@ import {
   SettingsSection,
   LabeledToggle,
   SettingsPanelFooter,
+  SettingsMobileHeader,
 } from 'wix-rich-content-plugin-commons';
 
 const VideoSettings: React.FC<VideoSettingsProps> = ({
@@ -22,58 +22,53 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
 }) => {
   const disableDownload = settings.disableDownload || componentData?.config?.disableDownload;
   const [isDownloadEnabled, setIsDownloadEnabled] = useState(!disableDownload);
-  const headerText = t('VideoSettings_Header');
-  const videoCanBeDownloadedLabel = t('VideoSettings_Video_CanBeDownloaded_Label');
-  const videoCanBeDownloadedTooltipText = t('VideoSettings_Video_CanBeDownloaded_Tooltip');
+  const mobileSettingsProps = {
+    t,
+    theme,
+    dataHookPrefix: 'VideoSettingsMobileHeader',
+    cancelLabel: t('SettingsPanelFooter_Cancel'),
+    saveLabel: t('SettingsPanelFooter_Save'),
+    isSettingsModal: true,
+  };
   const styles = mergeStyles({ styles: Styles, theme });
 
   const onDoneClick = () => {
     const newComponentData = { ...componentData, config: { disableDownload: !isDownloadEnabled } };
     pubsub.update('componentData', newComponentData);
-    if (helpers.closeModal) {
-      helpers.closeModal();
-    }
+    helpers.closeModal?.();
   };
 
-  const onCancelClick = () => {
-    if (helpers.closeModal) {
-      helpers.closeModal();
-    }
-  };
+  const onCancelClick = () => helpers.closeModal?.();
+  const onToggle = () => setIsDownloadEnabled(!isDownloadEnabled);
 
   return (
-    <div className={styles.videoSettings}>
+    <div
+      className={classNames(styles.videoSettings, {
+        [styles.videoSettings_mobile]: isMobile,
+      })}
+    >
       {isMobile ? (
-        <VideoSettingsMobileHeader t={t} theme={theme} cancel={onCancelClick} save={onDoneClick} />
+        <SettingsMobileHeader {...mobileSettingsProps} cancel={onCancelClick} save={onDoneClick} />
       ) : (
-        <>
-          <h3 className={styles.videoSettingsTitle}>{headerText}</h3>
-          <hr />
-        </>
+        <React.Fragment>
+          <div className={styles.videoSettingsTitle}>{t('VideoSettings_Header')}</div>
+          <div className={styles.separator} />
+        </React.Fragment>
       )}
-      <div
-        className={classNames(styles.videoSettings_scrollContainer, {
-          [styles.videoSettings_mobile]: isMobile,
-        })}
-      >
-        <SettingsSection
+      <SettingsSection theme={theme} className={classNames(styles.videoSettings_toggleContainer)}>
+        <LabeledToggle
           theme={theme}
-          className={styles.videoSettingsSection}
-          ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
-        >
-          <div className={styles.videoSettings_toggleContainer}>
-            <LabeledToggle
-              style={{ paddingTop: 24 }}
-              theme={theme}
-              checked={isDownloadEnabled}
-              label={videoCanBeDownloadedLabel}
-              onChange={() => setIsDownloadEnabled(!isDownloadEnabled)}
-            />
-            <NotificationIcon theme={theme} tooltipText={videoCanBeDownloadedTooltipText} />
-          </div>
-        </SettingsSection>
-      </div>
-      {isMobile ? null : (
+          checked={isDownloadEnabled}
+          label={t('VideoSettings_Video_CanBeDownloaded_Label')}
+          onChange={onToggle}
+        />
+        <InfoIcon
+          theme={theme}
+          isNotification
+          tooltipText={t('VideoSettings_Video_CanBeDownloaded_Tooltip')}
+        />
+      </SettingsSection>
+      {!isMobile && (
         <SettingsPanelFooter
           className={styles.videoSettings_footer}
           fixed
