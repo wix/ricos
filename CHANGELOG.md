@@ -15,12 +15,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-### :house: Internal
-- `gallery`
-  - [#2023](https://github.com/wix/ricos/pull/2023) bump pro-gallery to 2.4.13
 
 </details>
 <hr/>
+
+## 8.17.5 (Jan 20, 2021)
+### :house: Internal
+- `gallery`
+  - [#2023](https://github.com/wix/ricos/pull/2023) bump pro-gallery to 2.4.13
 
 ## 8.17.4 (Jan 20, 2021)
 ### :bug: Bug Fix
