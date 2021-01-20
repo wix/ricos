@@ -14,7 +14,7 @@ import {
   parseGiphy,
   parseImage,
   parseLinkPreview,
-  parseListNodes,
+  parseListNode,
   parseMap,
   parseSoundCloud,
   parseTextNodes,
@@ -54,7 +54,7 @@ export const toPlainText = async (
           break;
         case NodeType.OrderedList:
         case NodeType.UnorderedList:
-          plainText += parseListNodes(node);
+          plainText += parseListNode(node);
           break;
         case RICOS_IMAGE_TYPE:
           plainText += await parseImage(node, options?.urlShortener);

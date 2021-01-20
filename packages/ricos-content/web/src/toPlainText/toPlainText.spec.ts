@@ -44,17 +44,28 @@ www.wix.com
 
 
 Nunc eros ante , porttitor sed tempor nec, sagittis non mi. Nulla non vulputate magna, semper convallis sapien.
-1. In imperdiet eros elementum nulla fringilla sollicitudin. Proin dictum aliquam sapien at pretium.
-2. Quisque pulvinar ac erat vitae imperdiet. Phasellus ultricies urna ut ultrices imperdiet. Nulla non varius ipsum, sit amet consectetur quam. Nunc scelerisque fringilla aliquet.
+1. In imperdiet eros elementum nulla fringilla sollicitudin.
+2. Proin dictum aliquam sapien at pretium.
+3. Quisque pulvinar ac erat vitae imperdiet.
+4. Phasellus ultricies urna ut ultrices imperdiet.
+5. Nulla non varius ipsum, sit amet consectetur quam.
+6. Nunc scelerisque fringilla aliquet.
+7. Praesent purus nibh, sodales
+• non efficitur a
+9. consequat ac ante.
 
 • Aenean sed posuere odio.
-• Pellentesque imperdiet maximus turpis nec faucibus. Nulla at tempus lectus, non tempor tortor.
-• Vivamus mauris diam, auctor in sollicitudin eget, suscipit sed nulla.
+• Pellentesque imperdiet maximus turpis nec faucibus.
+• Nulla at tempus lectus,
+• non tempor tortor.
+• Vivamus mauris
+• diam
+• Auctor in sollicitudin eget, suscipit sed nulla.
 • Aenean sapien lectus, interdum ultrices enim a, sodales ultrices mi. Quisque ut mi metus.
 
 Donec sit amet sapien quis velit ultrices sollicitudin id facilisis ligula.
 
-Praesent purus nibh, sodales non efficitur a, consequat ac ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.
+Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.
 
 https://static.wixstatic.com/media/8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg/v1/fill/w_1920,h_1280,al_c,q_90/8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg
 לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק.

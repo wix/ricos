@@ -2,11 +2,7 @@ import { RicosNode, VideoSource } from 'ricos-schema';
 import { getImageSrc } from '../imageUtils';
 import { LINK_TYPE } from '../consts';
 import { NodeType } from '../migrateSchema/consts';
-import {
-  getParagraphNode,
-  mergeTextNodes,
-  RangedDecoration,
-} from '../migrateSchema/toDraft/decorationParsers';
+import { mergeTextNodes, RangedDecoration } from '../migrateSchema/toDraft/decorationParsers';
 
 export const parseTextNodes = (node: RicosNode) => {
   const {
@@ -17,14 +13,23 @@ export const parseTextNodes = (node: RicosNode) => {
   return removeTrailingNewLine(textWithLinks);
 };
 
-export const parseListNodes = (node: RicosNode) => {
-  const getListSymbol = (index: number) =>
-    node.type === NodeType.OrderedList ? index + 1 + '. ' : '• ';
+const getListSymbol = (index: number, type: string) =>
+  type === NodeType.OrderedList ? index + 1 + '. ' : '• ';
 
-  return node.nodes
-    .map((listItem, index) => getListSymbol(index) + parseTextNodes(getParagraphNode(listItem)))
+const parseList = (listNode: RicosNode): { type: string; item: string }[] =>
+  listNode.nodes
+    .map(({ nodes: [paragraph, childNode] }) => {
+      return [
+        { type: listNode.type, item: parseTextNodes(paragraph) },
+        childNode ? parseList(childNode) : [],
+      ];
+    })
+    .flat(2);
+
+export const parseListNode = (node: RicosNode) =>
+  parseList(node)
+    .map(({ type, item }, index) => getListSymbol(index, type) + item)
     .join('\n');
-};
 
 export const addLinksToText = (text: string, linkDecorations: RangedDecoration[] = []) =>
   linkDecorations
