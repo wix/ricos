@@ -105,7 +105,7 @@
       }
 
       &:hover {
-        background-color: rgba($fallbackColor, 0.06);
+        background-color: rgba($fallbackColorTuple, 0.06);
 
         // button:not([disabled]) span,
         // button:not([disabled]) svg,
