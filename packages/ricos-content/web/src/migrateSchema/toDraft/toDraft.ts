@@ -4,7 +4,7 @@ import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
 import { genKey } from '../generateRandomKey';
 import { NodeType, BlockType, HeaderLevel, TO_DRAFT_LIST_TYPE } from '../consts';
 import { DraftBlockType } from 'draft-js';
-import { merge } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 import { createTextBlockData, createAtomicEntityData } from './getDraftEntityData';
 import {
   getParagraphNode,
@@ -18,7 +18,7 @@ export const toDraft = (ricosContent: RicosContent): RicosContentDraft => {
   const {
     doc: { nodes },
     version,
-  } = ricosContent;
+  } = cloneDeep(ricosContent);
   const draftContent: RicosContentDraft = {
     blocks: [],
     entityMap: {},

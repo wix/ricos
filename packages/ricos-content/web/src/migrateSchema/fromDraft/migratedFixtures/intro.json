@@ -6,7 +6,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "3s4f9",
+            "key": "dkncv",
             "ricosText": {
               "decorations": [],
               "text": "Hi! 😃"
@@ -32,7 +32,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "a3gp2",
+            "key": "709a1",
             "ricosText": {
               "decorations": [],
               "text": "Welcome to "
@@ -41,7 +41,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "as8nh",
+            "key": "8foth",
             "ricosText": {
               "decorations": [
                 {
@@ -68,7 +68,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "adgp3",
+            "key": "fjoso",
             "ricosText": {
               "decorations": [],
               "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️"
@@ -123,7 +123,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "bn5nv",
+            "key": "3pq7u",
             "ricosText": {
               "decorations": [],
               "text": "Checkout the "
@@ -132,7 +132,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "88sgj",
+            "key": "74f5g",
             "ricosText": {
               "decorations": [
                 {
@@ -162,7 +162,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "dau2s",
+            "key": "e2vke",
             "ricosText": {
               "decorations": [
                 {
@@ -187,7 +187,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "72nsa",
+            "key": "3imqm",
             "ricosText": {
               "decorations": [
                 {
@@ -236,7 +236,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "21lre",
+            "key": "9vbl8",
             "ricosText": {
               "decorations": [],
               "text": "A wise man once said:"
@@ -256,7 +256,7 @@
               {
                 "nodes": [],
                 "type": "text",
-                "key": "6hkq9",
+                "key": "1m0jg",
                 "ricosText": {
                   "decorations": [],
                   "text": "The Wix Rich Content Editor is the best tool in the world!"
@@ -264,7 +264,7 @@
               }
             ],
             "type": "paragraph",
-            "key": "dl6u8",
+            "key": "b2466",
             "ricosParagraph": {
               "depth": 0
             }
@@ -286,7 +286,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "4bvhi",
+            "key": "697r7",
             "ricosText": {
               "decorations": [],
               "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components."
@@ -312,7 +312,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "btomd",
+            "key": "7peee",
             "ricosText": {
               "decorations": [],
               "text": "Code example:"
@@ -330,7 +330,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "58h5r",
+            "key": "2h7ga",
             "ricosText": {
               "decorations": [],
               "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />"
@@ -346,7 +346,7 @@
           {
             "nodes": [],
             "type": "text",
-            "key": "7o366",
+            "key": "eoi6g",
             "ricosText": {
               "decorations": [],
               "text": "Pro Gallery Collage:"
@@ -445,8 +445,8 @@
       }
     ],
     "lastEdited": {
-      "seconds": 1611143451,
-      "nanos": 219000000
+      "seconds": 1611166896,
+      "nanos": 587000000
     }
   },
   "selection": {
