@@ -1,5 +1,5 @@
 import { RicosContent, VideoSource } from 'ricos-schema';
-import { RicosContent as RicosContentDraft } from '../..';
+import { RicosContent as RicosContentDraft } from '..';
 import {
   RICOS_IMAGE_TYPE,
   RICOS_VIDEO_TYPE,
