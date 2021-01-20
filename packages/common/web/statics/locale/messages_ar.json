@@ -103,7 +103,6 @@
 	"SettingsButton_Tooltip": "الإعدادات",
 	"LinkPreview_Settings_Tooltip": "إعدادات الرابط",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "لبيع الخدمات ومشاركتها في منشورك، انتقل إلى سوق التطبيقات على موقعك وقم بتثبيت حجوزات Wix.",
-	"UnsupportedPlugin_message": "This content can be edited only on the web",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "استقصاء (بكسل)",
 	"TextCodeBlock_InsertButton_Tooltip": "إضافة قصاصة برمجية",
