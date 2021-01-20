@@ -19,6 +19,10 @@
 ### :bug: Bug Fix
 - `link`
   - [#2021](https://github.com/wix/ricos/pull/2021) fix anchors click deletes url params
+
+### :house: Internal
+- `gallery`
+  - [#2023](https://github.com/wix/ricos/pull/2023) bump pro-gallery to 2.4.13
 </details>
 <hr/>
 
