@@ -25,6 +25,11 @@ type EntityToReplace = {
   blockKey?: string;
 };
 
+type UndoOperationResult = {
+  fixedEditorState: EditorState;
+  shouldUndoAgain?: boolean;
+};
+
 /* Utilities */
 
 // removing composition mode fixes mobile issues
@@ -109,15 +114,10 @@ function checkEntities(currentBlock, newBlocksEntitiesData, entityMap) {
   if (INNER_RICOS_TYPES.includes(type)) {
     entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
   } else if (!isEqual(currentData, newData)) {
-    entityToReplace.didChange = true;
     const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
-    if (fixedData) {
-      entityToReplace = {
-        ...entityToReplace,
-        fixedData,
-        shouldUndoAgain: true,
-      };
-    }
+    entityToReplace.didChange = true;
+    entityToReplace.fixedData = fixedData;
+    entityToReplace.shouldUndoAgain = !!fixedData;
   }
   return entityToReplace;
 }
@@ -150,12 +150,15 @@ function didBlocksChange(blocks, newBlocksEntitiesData) {
 }
 
 // fixes entities in EditorStates
-function fixBrokenRicosStates(newEditorState: EditorState, editorState: EditorState) {
+function fixBrokenRicosStates(
+  newEditorState: EditorState,
+  editorState: EditorState
+): UndoOperationResult {
   const newContentState = convertToRaw(newEditorState.getCurrentContent());
   const contentState = convertToRaw(editorState.getCurrentContent());
   const newBlocksEntitiesData = createBlockEntitiesDataMap(newContentState);
   const { blocks, entityMap } = contentState;
-  let shouldUndo = false;
+  const result: UndoOperationResult = { fixedEditorState: newEditorState, shouldUndoAgain: false };
   if (!didBlocksChange(blocks, newBlocksEntitiesData)) {
     const { blockKey, fixedData, shouldUndoAgain } = getEntityToReplace(
       blocks,
@@ -163,25 +166,22 @@ function fixBrokenRicosStates(newEditorState: EditorState, editorState: EditorSt
       newBlocksEntitiesData
     );
     if (fixedData && blockKey) {
-      replaceComponentData(newEditorState, blockKey, fixedData);
+      replaceComponentData(result.fixedEditorState, blockKey, fixedData);
     }
-    shouldUndo = !!shouldUndoAgain;
+    result.shouldUndoAgain = shouldUndoAgain;
   }
-  return {
-    fixedEditorState: newEditorState,
-    shouldUndoAgain: shouldUndo,
-  };
+  return result;
 }
 
 /* Accordion Entity Handling */
 
-function didAccordionConfigChange(currentData, newData) {
+function didAccordionConfigChange(currentData, newData): boolean {
   const { pairs: currentPairs } = currentData;
   const { pairs: newPairs } = newData;
   return !isEqual(currentData.config, newData.config) || newPairs.length !== currentPairs.length;
 }
 
-function checkAccordionPair(currentPair, newPair) {
+function checkAccordionPair(currentPair, newPair): string | boolean {
   const { key: newKey, title: newTitle, content: newContent } = newPair;
   const { key: currentKey, title: currentTitle, content: currentContent } = currentPair;
   return (
@@ -206,8 +206,8 @@ function getChangedAccordionPairIndex(currentPairs, newPairs) {
   return { didPairChange, changedPairIndex, item };
 }
 
-function getFixedAccordionData(currentData, newData) {
-  let entityToReplace: EntityToReplace = { didChange: false };
+function getFixedAccordionData(currentData, newData): EntityToReplace {
+  const entityToReplace: EntityToReplace = { didChange: false };
   const { pairs: currentPairs } = currentData;
   const { pairs: newPairs } = newData;
   const { didPairChange, changedPairIndex, item } = getChangedAccordionPairIndex(
@@ -223,19 +223,16 @@ function getFixedAccordionData(currentData, newData) {
     newPairs[changedPairIndex][item] = EditorState.createWithContent(
       removeFocus(fixedEditorState).getCurrentContent()
     );
-    entityToReplace = {
-      ...entityToReplace,
-      fixedData: {
-        ...currentData,
-        pairs: newPairs,
-      },
-      shouldUndoAgain,
+    entityToReplace.fixedData = {
+      ...currentData,
+      pairs: newPairs,
     };
+    entityToReplace.shouldUndoAgain = shouldUndoAgain;
   }
   return entityToReplace;
 }
 
-function handleAccordionEntity(currentData, newData) {
+function handleAccordionEntity(currentData, newData): EntityToReplace {
   // a pair with no key, title or content is broken
   const isBrokenContent = newData.pairs.some(pair => !(pair.key && pair.title && pair.content));
   const entityToReplace: EntityToReplace = {
@@ -249,112 +246,115 @@ function handleAccordionEntity(currentData, newData) {
 
 // check table row's columns for a changed column.
 function checkColumns(newRow, currentRow) {
-  let isStyleChange = false;
-  let didColumnChange = false;
-  const columnIndex = Object.keys(newRow).find(columnKey => {
-    const { content: newContent, ...newStyles } = newRow[columnKey];
-    const { content: currentContent, ...currentStyles } = currentRow[columnKey];
-    if (newContent.getCurrentContent() !== currentContent.getCurrentContent()) {
-      return true;
-    } else if (JSON.stringify(newStyles) !== JSON.stringify(currentStyles)) {
-      isStyleChange = true;
-      return true;
-    }
-    return false;
+  return Object.keys(newRow).find(columnKey => {
+    const { content: newContent } = newRow[columnKey];
+    const { content: currentContent } = currentRow[columnKey];
+    return newContent.getCurrentContent() !== currentContent.getCurrentContent();
   });
-  if (columnIndex || isStyleChange) {
-    didColumnChange = true;
-  }
-  return { didColumnChange, columnIndex, isStyleChange };
 }
 
 // looks for a changed cell in the new content, if there is returns it's indices.
 function getChangedTableCellIndex(newRows, currentRows) {
-  const changedCell = { didCellChange: false, isStyleChange: false, row: '', column: '' };
-  const row = Object.keys(newRows).find(rowKey => {
+  const changedCell: { row?: string; column?: string } = {};
+  changedCell.row = Object.keys(newRows).find(rowKey => {
     const currentRow = currentRows[rowKey].columns;
     const newRow = newRows[rowKey].columns;
-    if (!currentRow || Object.keys(newRow).length !== Object.keys(currentRow).length) {
-      return true;
-    }
-    const { didColumnChange, columnIndex, isStyleChange } = checkColumns(newRow, currentRow);
-    if (didColumnChange) {
-      if (columnIndex) {
-        changedCell.column = columnIndex;
-      }
-      changedCell.isStyleChange = isStyleChange;
-      changedCell.didCellChange = true;
-      return true;
-    }
-    return false;
+    changedCell.column = checkColumns(newRow, currentRow);
+    return !!changedCell.column;
   });
-  if (row) {
-    changedCell.row = row;
-  }
   return changedCell;
 }
 
-function handleTableEntity(currentData, newData) {
+function getFixedTableData(currentData, newData): EntityToReplace {
+  const entityToReplace: EntityToReplace = { didChange: false };
+  const { rows: newRows } = newData.config;
+  const { rows: currentRows, ...currentConfig } = currentData.config;
+  const { row, column } = getChangedTableCellIndex(newRows, currentRows);
+  entityToReplace.didChange = !!(row && column);
+  if (row && column) {
+    const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
+      newRows[row].columns[column].content,
+      currentRows[row].columns[column].content
+    );
+    newRows[row].columns[column].content = removeFocus(fixedEditorState);
+    entityToReplace.shouldUndoAgain = shouldUndoAgain;
+    entityToReplace.fixedData = {
+      ...currentData,
+      config: {
+        rows: newRows,
+        ...currentConfig,
+      },
+    };
+  }
+  return entityToReplace;
+}
+
+function didTableConfigChange(currentData, newData) {
   const { rows: newRows, ...newConfig } = newData.config;
   const { rows: currentRows, ...currentConfig } = currentData.config;
-
-  // check if the config changed or a row has been added\deleted
-  if (
+  return (
     !isEqual(newConfig, currentConfig) ||
     Object.keys(newRows).length !== Object.keys(currentRows).length
-  ) {
-    return { didChange: true };
-  }
-
-  const { isStyleChange, didCellChange, row, column } = getChangedTableCellIndex(
-    newRows,
-    currentRows
   );
-  if (didCellChange) {
-    if (!isStyleChange) {
-      const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
-        newRows[row].columns[column].content,
-        currentRows[row].columns[column].content
-      );
-      newRows[row].columns[column].content = removeFocus(fixedEditorState);
-      return {
-        didChange: true,
-        shouldUndoAgain,
-        fixedData: {
-          ...currentData,
-          config: {
-            rows: newRows,
-            ...currentConfig,
-          },
-        },
-      };
-    }
-  }
-  return { didChange: didCellChange };
+}
+
+function didCellStyleChange(newRow, currentRow) {
+  return Object.keys(newRow).some(columnKey => {
+    /* eslint-disable no-unused-vars */
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const { content: newContent, ...newStyles } = newRow[columnKey];
+    const { content: currentContent, ...currentStyles } = currentRow[columnKey];
+    /* eslint-enable no-unused-vars */
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    return JSON.stringify(newStyles) !== JSON.stringify(currentStyles);
+  });
+}
+
+function didTableRowStyleChange(currentData, newData) {
+  const { rows: newRows } = newData.config;
+  const { rows: currentRows } = currentData.config;
+  return Object.keys(newRows).some(rowKey => {
+    const currentRow = currentRows[rowKey].columns;
+    const newRow = newRows[rowKey].columns;
+    return (
+      !currentRow ||
+      Object.keys(newRow).length !== Object.keys(currentRow).length ||
+      didCellStyleChange(newRow, currentRow)
+    );
+  });
+}
+
+function handleTableEntity(currentData, newData): EntityToReplace {
+  const entityToReplace: EntityToReplace = {
+    didChange:
+      didTableConfigChange(currentData, newData) || didTableRowStyleChange(currentData, newData),
+  };
+  return entityToReplace.didChange ? entityToReplace : getFixedTableData(currentData, newData);
 }
 
 /* Data Fixers for breakable plugins */
 
 // applies undo action on gallery items by fixing the changed item if it's source was broken
 function applyActionForGalleryItems(currentItems, newItems) {
-  const brokenItemIndex = newItems.findIndex((item, index) => {
+  let didChange = false;
+  const fixedItems = newItems.map((newItem, index) => {
     const currentItem = currentItems[index];
-    return currentItem && !currentItem.tempData && item.tempData;
+    if (currentItem && !currentItem.tempData && newItem.tempData) {
+      didChange = true;
+      const {
+        itemId,
+        url,
+        metadata: { type, height, width },
+      } = currentItem;
+      const metadata = { ...newItem.metadata, type, height, width };
+      return { ...newItem, itemId, url, metadata, tempData: undefined };
+    }
+    return newItem;
   });
-  if (brokenItemIndex !== -1) {
-    const newItem = newItems[brokenItemIndex];
-    const {
-      itemId,
-      url,
-      metadata: { type, height, width },
-    } = currentItems[brokenItemIndex];
-    const metadata = { ...newItem.metadata, type, height, width };
-    newItems[brokenItemIndex] = { ...newItem, itemId, url, metadata, tempData: undefined };
-    return newItems;
-  }
+  return { fixedItems, didChange };
 }
 
-function shouldReplaceVideoData(currentData, newData) {
+function shouldReplaceVideoData(currentData, newData): boolean {
   return (
     (!currentData.tempData && newData.tempData) ||
     (currentData.metadata && !newData.metadata) ||
@@ -380,9 +380,9 @@ const entityDataFixers = {
     return { ...currentData, config };
   },
   [GALLERY_TYPE]: (currentData, newData) => {
-    const items = applyActionForGalleryItems(currentData.items, newData.items);
-    if (items) {
-      return { ...newData, items };
+    const { fixedItems, didChange } = applyActionForGalleryItems(currentData.items, newData.items);
+    if (didChange) {
+      return { ...newData, items: fixedItems };
     }
   },
   [IGNORE_TYPE]: currentData => {
@@ -397,9 +397,8 @@ const innerRicosDataFixers = {
 
 /* Handle undo-redo calls */
 
-function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState) {
+function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState): EditorState {
   const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(newEditorState, editorState);
-
   return shouldUndoAgain
     ? undo(fixedEditorState)
     : pushToRedoStack(
@@ -408,7 +407,7 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
       );
 }
 
-export const undo = (editorState: EditorState) => {
+export const undo = (editorState: EditorState): EditorState => {
   if (editorState.getUndoStack().isEmpty()) {
     return editorState;
   }
@@ -416,7 +415,7 @@ export const undo = (editorState: EditorState) => {
   return updateUndoEditorState(editorState, newEditorState);
 };
 
-export const redo = (editorState: EditorState) => {
+export const redo = (editorState: EditorState): EditorState => {
   if (editorState.getRedoStack().isEmpty()) {
     return editorState;
   }
