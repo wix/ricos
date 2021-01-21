@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import {
-  RicosEngine,
-  shouldRenderChild,
-  localeStrategy,
-  RicosContent as RicosDraftContent,
-} from 'ricos-common';
+import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
-import { toDraft } from 'ricos-content/dist/lib/migrateSchema.cjs';
-import { RicosContent } from 'ricos-schema';
+import { ensureDraftContent } from 'ricos-content/dist/lib/migrateSchema.cjs';
 
 interface State {
   isPreviewExpanded: boolean;
@@ -65,7 +59,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         onPreviewExpand={this.onPreviewExpand}
         isViewer
         key={`viewer-${remountKey}`}
-        content={content && convertContentToDraft(content)}
+        content={content && ensureDraftContent(content)}
         {...props}
       >
         {React.cloneElement(child, {
@@ -76,6 +70,3 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     );
   }
 }
-
-const convertContentToDraft = (content: RicosContent | RicosDraftContent): RicosDraftContent =>
-  'doc' in content ? toDraft(content) : content;

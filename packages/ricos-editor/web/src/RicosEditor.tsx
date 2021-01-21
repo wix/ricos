@@ -15,9 +15,8 @@ import {
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
 import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
-import { ToolbarType, RicosContent as RicosDraftContent } from 'wix-rich-content-common';
-import { toDraft } from 'ricos-content/libs/migrateSchema';
-import { RicosContent } from 'ricos-schema';
+import { ToolbarType } from 'wix-rich-content-common';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -94,7 +93,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       console.debug('new content provided as editorState'); // eslint-disable-line
       this.setState({
         editorState: createWithContent(
-          convertFromRaw(convertContentToDraft(newProps.injectedContent))
+          convertFromRaw(ensureDraftContent(newProps.injectedContent))
         ),
       });
     }
@@ -167,7 +166,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     const contentProp = editorState
       ? { editorState: { editorState }, content: {} }
-      : { editorState: {}, content: { content } };
+      : {
+          editorState: {},
+          content: { content: content && ensureDraftContent(content) },
+        };
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
@@ -207,18 +209,9 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 }
 
-const convertContentToDraft = (content: RicosContent | RicosDraftContent): RicosDraftContent =>
-  'doc' in content ? toDraft(content) : content;
-
 export default forwardRef<RicosEditor, RicosEditorProps>((props, ref) => (
   <EditorEventsContext.Consumer>
-    {contextValue => (
-      <RicosEditor
-        editorEvents={contextValue}
-        {...{ ...props, content: props.content && convertContentToDraft(props.content) }}
-        ref={ref}
-      />
-    )}
+    {contextValue => <RicosEditor editorEvents={contextValue} {...props} ref={ref} />}
   </EditorEventsContext.Consumer>
 ));
 
