@@ -169,7 +169,8 @@ class TableComponent extends React.Component {
         e.stopPropagation();
         e.preventDefault();
       };
-      if (e.key === 'Backspace' && !isAllCellsSelected) {
+      const isColorPickerModalOpen = e.target.closest('[data-id=color-picker-modal]');
+      if (e.key === 'Backspace' && !isAllCellsSelected && !isColorPickerModalOpen) {
         preventEvent();
         this.table.clearRange(getRange(selected));
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
@@ -386,7 +387,7 @@ class TableComponent extends React.Component {
     const isEditMode = !isMobile && isTableOnFocus;
     return (
       <div
-        className={classNames(styles.tableEditorContainer, {
+        className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
           [styles.editMode]: isEditMode,
           [styles.viewMode]: !isEditMode,
           [styles.disableSelection]: !isEditingActive,

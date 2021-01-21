@@ -11,7 +11,7 @@
   }
 
   &:hover .pluginToolbarButton:not(.pluginToolbarButton_disabled):not(.pluginToolbarButton_active) {
-    background-color: rgba($fallbackColor, 0.06);
+    background-color: rgba($fallbackColorTuple, 0.06);
   }
 
   .pluginToolbarButton_active {

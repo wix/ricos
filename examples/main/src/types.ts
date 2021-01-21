@@ -35,6 +35,7 @@ export interface TestAppConfig {
     paletteType?: 'light' | 'dark';
     skipCssOverride?: boolean;
     useCustomStyles?: boolean;
+    fallbackColor?: string;
   };
   showDefaultPreview?: boolean;
   isNativeUpload?: boolean;
