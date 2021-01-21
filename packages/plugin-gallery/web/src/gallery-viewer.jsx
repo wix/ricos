@@ -128,11 +128,11 @@ class GalleryViewer extends React.Component {
 
   handleGalleryEvents = (name, data) => {
     const {
-      componentData: {
-        styles: styleParams,
-        config: { disableExpand },
-      },
+      settings,
+      componentData: { styles: styleParams, config },
     } = this.props;
+    const disableExpand = settings.disableExpand || config.disableExpand;
+
     switch (name) {
       case GALLERY_EVENTS.GALLERY_CHANGE:
         if (this.containerRef.current) {
@@ -184,12 +184,11 @@ class GalleryViewer extends React.Component {
 
   hoverElement = itemProps => {
     const {
-      settings: { onExpand },
-      componentData: {
-        config: { disableExpand },
-      },
+      settings,
+      componentData: { config },
     } = this.props;
-    const isExpandEnabled = !disableExpand && onExpand;
+    const disableExpand = settings.disableExpand || config.disableExpand;
+    const isExpandEnabled = !disableExpand && settings.onExpand;
     const isClickable = isExpandEnabled || itemProps.link;
     const itemOverlayStyles = classnames(
       this.styles.itemOverlay,

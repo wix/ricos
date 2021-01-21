@@ -1,36 +1,22 @@
-import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
-import { Modals } from '../modals';
-
 import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
-import {
-  CreateInlineButtons,
-  TranslationFunction,
-  AnchorTarget,
-  RelValue,
-  UISettings,
-} from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
 import { VideoPluginEditorConfig } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
-  anchorTarget,
-  relValue,
-  uiSettings,
 }: {
   t: TranslationFunction;
   settings: VideoPluginEditorConfig;
   isMobile: boolean;
-  anchorTarget: AnchorTarget;
-  relValue: RelValue;
-  uiSettings: UISettings;
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
@@ -75,21 +61,6 @@ const createInlineButtons: CreateInlineButtons = ({
       mobile: true,
       tooltipTextKey: 'ReplaceVideoButton_Tooltip',
       t,
-    },
-    {
-      keyName: 'settings',
-      type: BUTTONS.EXTERNAL_MODAL,
-      icon: PluginSettingsIcon,
-      modalName: Modals.VIDEO_SETTINGS,
-      modalStyles: getModalStyles({
-        isMobile,
-      }),
-      anchorTarget,
-      relValue,
-      t,
-      mobile: true,
-      tooltipTextKey: 'SettingsButton_Tooltip',
-      uiSettings,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
