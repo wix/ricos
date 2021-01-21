@@ -1,0 +1,1 @@
+export { toPlainText } from './toPlainText';

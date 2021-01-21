@@ -14,7 +14,7 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-import { EditorEventsContext } from 'wix-rich-content-editor-common';
+import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType, RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 import { toDraft } from 'ricos-content/libs/migrateSchema';
 import { RicosContent } from 'ricos-schema';
@@ -53,11 +53,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
-    this.props.editorEvents?.subscribe('rce:publish', this.onPublish);
+    this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
   componentWillUnmount() {
-    this.props.editorEvents?.unsubscribe('rce:publish', this.onPublish);
+    this.props.editorEvents?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
   onPublish = async () => {

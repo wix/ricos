@@ -2,10 +2,12 @@ import { difference } from 'lodash';
 import { RicosTheme, WixColor, WixPalette } from '../themeTypes';
 
 const BG_COLOR = 11;
+const DISABLED_COLOR = 13;
+const TEXT_COLOR_LOW = 14;
 const TEXT_COLOR = 15;
 const ACTION_COLOR = 18;
 
-export const COLORS = { BG_COLOR, TEXT_COLOR, ACTION_COLOR };
+export const COLORS = { BG_COLOR, DISABLED_COLOR, TEXT_COLOR_LOW, TEXT_COLOR, ACTION_COLOR };
 export const assertWixPalette = (palette: WixPalette) => {
   if (palette.length === 0) {
     throw Error('Received empty palette colors array');

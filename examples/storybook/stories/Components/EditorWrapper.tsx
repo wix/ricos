@@ -131,7 +131,7 @@ const plugins = [
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
-  pluginVideo(),
+  pluginVideo({ getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}` }),
   pluginLinkPreview(configs.linkPreview),
   pluginPoll(),
   pluginUndoRedo(),

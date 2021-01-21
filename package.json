@@ -29,7 +29,7 @@
 		"build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' --ignore 'ricos-@(docs)' build:dev",
 		"build:core": "npm run build:dev -- --scope 'ricos-content' && npm run build:dev -- --scope 'wix-rich-content-@(common|editor|viewer)'",
 		"prewatch": "lerna run build --scope wix-rich-content-*common* && lerna run build --scope wix-rich-content-editor && lerna run build --scope ricos-common",
-		"postbuild": "node scripts/mergeTranslations",
+		"prebuild": "node scripts/mergeTranslations",
 		"watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-'wix-rich-content-@(test-env|example|storybook)'}  --ignore 'ricos-@(docs)' watch",
 		"watch:core": "LERNA_IGNORE='wix-rich-content-@(plugin-*|fullscreen)' npm run watch",
 		"release": "node scripts/publishPackages",
@@ -63,6 +63,7 @@
 		"build:test": "npm run build && npm run build --prefix e2e/test-env",
 		"generatePlugin": "node scripts/generatePlugin",
 		"migrateFixtures": "cd scripts && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} migrateSchema",
+		"toPlainText": "cd scripts && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} toPlainText",
 		"link": "lerna link"
 	},
 	"husky": {
@@ -181,7 +182,7 @@
 		"start-server-and-test": "^1.7.11",
 		"style-loader": "^1.1.3",
 		"terser-webpack-plugin": "^4.1.0",
-		"ts-jest": "^25.5.1",
+		"ts-jest": "^26.4.4",
 		"ts-node": "^9.0.0",
 		"typescript": "^3.8.3",
 		"url-loader": "^4.1.0",

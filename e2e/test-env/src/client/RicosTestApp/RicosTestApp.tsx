@@ -23,12 +23,15 @@ import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 import { themes } from '../consumersThemes/themes';
 import { PaletteColors, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import { EditorState } from '@wix/draft-js';
+import { merge } from 'lodash';
 
 const onVideoSelected = (url: string, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
-const determinePalette = (paletteType: 'light' | 'dark'): PaletteColors =>
-  paletteType ? (paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9]) : undefined;
+const determinePalette = (paletteType: 'light' | 'dark', fallbackColor?: string): PaletteColors =>
+  paletteType
+    ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], { fallbackColor })
+    : undefined;
 const setBackground = (palette: PaletteColors) =>
   palette ? { backgroundColor: palette.bgColor } : {};
 const setForeground = (palette: PaletteColors) => (palette ? { color: palette.textColor } : {});
@@ -85,11 +88,12 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
   renderEditor = () => {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType, useCustomStyles } = testAppConfig.theme || {};
+    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
+      testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType);
+    const palette = determinePalette(paletteType, fallbackColor);
     const isNativeUpload = testAppConfig?.isNativeUpload;
 
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
@@ -141,11 +145,12 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, paletteType, useCustomStyles } = testAppConfig.theme || {};
+    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
+      testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType);
+    const palette = determinePalette(paletteType, fallbackColor);
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}

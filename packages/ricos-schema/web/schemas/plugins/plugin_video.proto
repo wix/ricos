@@ -46,7 +46,7 @@ message VideoSource {
     int32 width = 3;
   }
 
-  string pathname = 1;
+  string pathname = 1 [required = true];
   Thumbnail thumbnail = 2;
 }
 

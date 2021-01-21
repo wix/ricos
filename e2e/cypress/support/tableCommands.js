@@ -116,7 +116,7 @@ Cypress.Commands.add('paintBorder', (type, colorIndex) => {
   cy.get(`[data-hook*=${type}]`).click();
   cy.get(`[data-scheme-color]`)
     .eq(colorIndex)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('paintTableTextColor', () => {

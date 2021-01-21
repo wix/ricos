@@ -41,7 +41,9 @@ class LinkViewer extends Component {
     if (anchor && !isInEditor) {
       event.preventDefault();
       const anchorString = `viewer-${anchor}`;
-      history.pushState({}, null, `#${anchorString}`);
+      const url = new URL(window.location);
+      url.hash = anchorString;
+      history.pushState({}, null, url);
       const element = document.getElementById(anchorString);
       anchorScroll(element);
     }

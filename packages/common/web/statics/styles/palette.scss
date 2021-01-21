@@ -5,6 +5,11 @@ $primary-text-color-tuple: var(--ricos-text-color-tuple, (33,33,33));
 $primary-text-color-light: #e6e6e6;
 $secondary-text-color: #757575;
 
+$ricos-text-color-low: var(--ricos-text-color-low, unset);
+$ricos-text-color-low-tuple: var(--ricos-text-color-low-tuple, unset);
+$ricos-disabled-color: var(--ricos-disabled-color, unset);
+$ricos-disabled-color-tuple: var(--ricos-disabled-color-tuple, unset);
+
 $action-color: var(--ricos-action-color, #0261ff);
 $action-color-tuple: var(--ricos-action-color-tuple, (2,97,255));
 $action-color-fallback: var(--ricos-action-color-fallback, #0261ff);
@@ -23,5 +28,6 @@ $ricos-hashtag-color: var(--ricos-custom-hashtag-color, $action-color);
 $modal-input-color: #333333;
 $toolbar-font-color: #333333;
 $toolbar-border-color: #ededed;
-$fallbackColor: #000000;
+$fallbackColor: var(--ricos-fallback-color ,#000000);
+$fallbackColorTuple: var(--ricos-fallback-color-tuple ,(0,0,0));
 $fallbackColorBright: #ffffff;

@@ -104,6 +104,10 @@ export const FROM_DRAFT_LIST_TYPE = {
   [BlockType.OrderedListItem]: NodeType.OrderedList,
 };
 
+export const TO_DRAFT_LIST_TYPE = Object.fromEntries(
+  Object.entries(FROM_DRAFT_LIST_TYPE).map(([key, value]) => [value, key])
+);
+
 export const TO_RICOS_PLUGIN_TYPE_MAP = {
   [LINK_BUTTON_TYPE]: RICOS_LINK_BUTTON_TYPE,
   [ACTION_BUTTON_TYPE]: RICOS_ACTION_BUTTON_TYPE,
