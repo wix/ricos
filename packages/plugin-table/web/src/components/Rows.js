@@ -27,6 +27,7 @@ export default class Rows extends PureComponent {
       rowsHeights,
       isAllCellsSelected,
       rowsRefs,
+      rowsMaxContentHeight,
     } = this.props;
     return (
       <div style={{ display: isEditMode ? 'flex' : 'none' }} className={styles.container}>
@@ -58,7 +59,7 @@ export default class Rows extends PureComponent {
                 onResizeStart={onResizeStart}
                 itemsRefs={rowsRefs}
                 setContainerSize={this.setContainerSize}
-                minSize={ROW_DEFAULT_HEIGHT}
+                minSize={Math.max(ROW_DEFAULT_HEIGHT, rowsMaxContentHeight?.[index])}
               />
             </div>
           ))}
@@ -83,4 +84,5 @@ Rows.propTypes = {
   rowsHeights: PropTypes.array,
   isAllCellsSelected: PropTypes.bool,
   rowsRefs: PropTypes.array,
+  rowsMaxContentHeight: PropTypes.array,
 };
