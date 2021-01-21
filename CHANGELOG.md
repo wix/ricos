@@ -23,6 +23,10 @@
   - [#1939](https://github.com/wix-incubator/rich-content/pull/1931) allow users to toggle the expand mode option on the image-settings
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+
 </details>
 <hr/>
 
