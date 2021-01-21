@@ -16,7 +16,8 @@ import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 import type ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
 import { RicosContent } from 'ricos-schema';
-import { convertToDraft } from '../shared/utils/contentConversion';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
+
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
@@ -281,7 +282,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ErrorBoundary>
               <Preview
-                content={convertToDraft(content)}
+                content={ensureDraftContent(content)}
                 isMobile={this.state.previewIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}

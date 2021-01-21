@@ -11,7 +11,8 @@ import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { RicosContent } from 'ricos-schema';
-import { convertToDraft } from '../utils/contentConversion';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
+
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -40,7 +41,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   constructor(props: ExampleViewerProps) {
     super(props);
     if (!isSSR()) {
-      this.expandModeData = getImagesData(convertToDraft(this.props.content));
+      this.expandModeData = getImagesData(ensureDraftContent(this.props.content));
     }
     this.state = {
       disabled: false,
@@ -55,7 +56,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
 
   componentDidUpdate(prevProps) {
     if (prevProps.content !== this.props.content) {
-      this.expandModeData = getImagesData(convertToDraft(this.props.content));
+      this.expandModeData = getImagesData(ensureDraftContent(this.props.content));
     }
   }
 

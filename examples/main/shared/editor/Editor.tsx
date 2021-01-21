@@ -20,7 +20,7 @@ import {
 } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosContent } from 'ricos-schema';
-import { convertFromDraft, convertToDraft } from '../utils/contentConversion';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -174,9 +174,9 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
     }
     if (prevProps.shouldUseRicosContent !== this.props.shouldUseRicosContent) {
       if (this.props.shouldUseRicosContent) {
-        this.props.onRicosChange(convertFromDraft(this.props.content));
+        this.props.onRicosChange(ensureRicosContent(this.props.content));
       } else {
-        this.props.onRicosChange(convertToDraft(this.props.content));
+        this.props.onRicosChange(ensureDraftContent(this.props.content));
       }
     }
   }
@@ -262,7 +262,7 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
       theme,
       textToolbarType,
       isMobile,
-      initialState: convertToDraft(content),
+      initialState: ensureDraftContent(content),
       editorState,
     };
     const TopToolbar = MobileToolbar || TextToolbar;
