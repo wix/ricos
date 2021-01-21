@@ -29,6 +29,7 @@ export enum ButtonType {
   SPOILER = 'spoiler',
   DELETE = 'delete',
   LINK_PREVIEW = 'link-preview',
+  // VIDEO_SETTINGS = 'video-settings', //Todo => Render video settings only for custom videos
 }
 
 export enum ModifierKey {
