@@ -43,9 +43,16 @@ function removeCompositionModeFromEditorState(editorState: EditorState) {
 }
 
 function removeFocus(editorState: EditorState) {
-  return EditorState.acceptSelection(
+  return EditorState.forceSelection(
     editorState,
     editorState.getSelection().merge({ hasFocus: false })
+  );
+}
+
+function preserveSelection(editorState: EditorState, newEditorState: EditorState) {
+  return EditorState.forceSelection(
+    newEditorState,
+    editorState.getCurrentContent().getSelectionBefore()
   );
 }
 
@@ -158,7 +165,10 @@ function fixBrokenRicosStates(
   const contentState = convertToRaw(editorState.getCurrentContent());
   const newBlocksEntitiesData = createBlockEntitiesDataMap(newContentState);
   const { blocks, entityMap } = contentState;
-  const result: UndoOperationResult = { fixedEditorState: newEditorState, shouldUndoAgain: false };
+  const result: UndoOperationResult = {
+    fixedEditorState: preserveSelection(editorState, newEditorState),
+    shouldUndoAgain: false,
+  };
   if (!didBlocksChange(blocks, newBlocksEntitiesData)) {
     const { blockKey, fixedData, shouldUndoAgain } = getEntityToReplace(
       blocks,
@@ -194,16 +204,12 @@ function checkAccordionPair(currentPair, newPair): string | boolean {
 // checks if an accordion pair changed and if so returns the changed pair index and an indictor (title or content)
 function getChangedAccordionPairIndex(currentPairs, newPairs) {
   let item;
-  let didPairChange = false;
   const changedPairIndex = newPairs.findIndex((newPair, index) => {
     const currentPair = currentPairs[index];
     item = checkAccordionPair(currentPair, newPair);
     return !!item;
   });
-  if (changedPairIndex > -1) {
-    didPairChange = true;
-  }
-  return { didPairChange, changedPairIndex, item };
+  return { didPairChange: changedPairIndex > -1, changedPairIndex, item };
 }
 
 function getFixedAccordionData(currentData, newData): EntityToReplace {
@@ -245,7 +251,7 @@ function handleAccordionEntity(currentData, newData): EntityToReplace {
 /* Table Entity Handling */
 
 // check table row's columns for a changed column.
-function checkColumns(newRow, currentRow) {
+function checkColumnEditorStates(newRow, currentRow) {
   return Object.keys(newRow).find(columnKey => {
     const { content: newContent } = newRow[columnKey];
     const { content: currentContent } = currentRow[columnKey];
@@ -259,7 +265,7 @@ function getChangedTableCellIndex(newRows, currentRows) {
   changedCell.row = Object.keys(newRows).find(rowKey => {
     const currentRow = currentRows[rowKey].columns;
     const newRow = newRows[rowKey].columns;
-    changedCell.column = checkColumns(newRow, currentRow);
+    changedCell.column = checkColumnEditorStates(newRow, currentRow);
     return !!changedCell.column;
   });
   return changedCell;
