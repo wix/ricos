@@ -1,0 +1,20 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "d4l8d",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 829000000
+    }
+  },
+  "selection": {
+    "anchorNode": "d4l8d"
+  },
+  "version": ""
+}

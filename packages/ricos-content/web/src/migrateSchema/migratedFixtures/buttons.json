@@ -1,0 +1,48 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bv1d",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_action_button",
+        "key": "fltie"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "89ptt",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6632t",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_button",
+        "key": "864qn"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "38oqr",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 815000000
+    }
+  },
+  "selection": {
+    "anchorNode": "bv1d"
+  },
+  "version": "7.4.5"
+}

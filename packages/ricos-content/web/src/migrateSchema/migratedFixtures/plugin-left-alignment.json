@@ -1,0 +1,877 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "f7b4n",
+            "ricosText": {
+              "decorations": [],
+              "text": "1. Image aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "f1p93",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "av4dl",
+        "ricosImage": {
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "originalFileName": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "fileName": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "width": 3934,
+            "height": 3445
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "37glq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6i0bl",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "b1019",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "b37as",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "40p8g",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "b1thg",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ej096",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2vh38",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "35ivh",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4b5g4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2l4fo",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ei5ph",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "5mrn5",
+            "ricosText": {
+              "decorations": [],
+              "text": "2. Gallery aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "4hoah",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_gallery",
+        "key": "6o3rt",
+        "ricosGallery": {
+          "items": [
+            {
+              "metadata": {
+                "height": 2366,
+                "width": 3534
+              },
+              "itemId": "11062b_f1e7cb1c362d4517a0acb8b2910c2773~mv2_d_3534_2366_s_2.jpg",
+              "url": "11062b_f1e7cb1c362d4517a0acb8b2910c2773~mv2_d_3534_2366_s_2.jpg"
+            },
+            {
+              "metadata": {
+                "height": 2848,
+                "width": 4288
+              },
+              "itemId": "11062b_04ac9d5b7c2e46b39645da4bd9d2c80b~mv2_d_4288_2848_s_4_2.jpg",
+              "url": "11062b_04ac9d5b7c2e46b39645da4bd9d2c80b~mv2_d_4288_2848_s_4_2.jpg"
+            },
+            {
+              "metadata": {
+                "height": 3044,
+                "width": 4448
+              },
+              "itemId": "9b5eedf020b34ca09167ef932163e6ed.jpg",
+              "url": "9b5eedf020b34ca09167ef932163e6ed.jpg"
+            }
+          ],
+          "styles": {
+            "galleryLayout": 2,
+            "gallerySizeType": "px",
+            "gallerySizePx": 300,
+            "oneRow": false,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "bottom",
+            "isVertical": false,
+            "numberOfImagesPerRow": 3,
+            "imageMargin": 20,
+            "thumbnailSpacings": 0,
+            "cubeType": "fill",
+            "enableInfiniteScroll": true,
+            "titlePlacement": "SHOW_ON_HOVER",
+            "allowHover": true,
+            "itemClick": "link",
+            "showArrows": false,
+            "gridStyle": 1,
+            "loveButton": false,
+            "allowSocial": false,
+            "allowDownload": false,
+            "galleryMargin": 0,
+            "fullscreen": false,
+            "thumbnailSize": 120,
+            "gotStyleParams": true
+          },
+          "config": {
+            "alignment": "LEFT",
+            "size": "SMALL",
+            "layout": "small",
+            "spacing": 0
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ab0g1",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6flo3",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bfads",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "27tml",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "fke7e",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6fntt",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "1oqh0",
+            "ricosText": {
+              "decorations": [],
+              "text": "3. HTML aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "ihmv",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_html",
+        "key": "8b2gn",
+        "ricosHtml": {
+          "src": "<blockquote class='twitter-tweet' data-lang='en'><p lang='en' dir='ltr'>There are some things that only <a href='https://twitter.com/hashtag/designers?src=hash&amp;ref_src=twsrc%5Etfw'>#designers</a> will understand 😉<a href='https://twitter.com/hashtag/WebDesign?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesign</a> <a href='https://twitter.com/hashtag/WebDesigner?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesigner</a> <a href='https://t.co/WqXbS822Sq'>pic.twitter.com/WqXbS822Sq</a></p>&mdash; Wix (@Wix) <a href='https://twitter.com/Wix/status/1109883326599446528?ref_src=twsrc%5Etfw'>March 24, 2019</a></blockquote>\n<script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>",
+          "srcType": "html",
+          "config": {
+            "width": 364,
+            "height": 743
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c7r4h",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "63s5j",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "hk2t",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2t0ds",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "f2upj",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "27ocp",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9omsc",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "84oha",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "asn9l",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2v0mo",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7j94r",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "67oj2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "40pc",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "90pr3",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "927uu",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2c4ss",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9q932",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "dtl4s",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c52mo",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4mmvn",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "84tuu",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c0gu0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8amv4",
+            "ricosText": {
+              "decorations": [],
+              "text": "4. Youtube video aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "4u2vk",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_video",
+        "key": "99kup",
+        "ricosVideo": {
+          "url": "https://www.youtube.com/watch?v=7jIA3eFtSOM",
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT"
+          },
+          "isCustomVideo": false,
+          "metadata": {}
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a2nok",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "27aic",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6g79l",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "36apu",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c3q73",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9hobq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "daqsh",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5hcka",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6mf6t",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "csk11",
+            "ricosText": {
+              "decorations": [],
+              "text": "5. Vimeo video aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "335us",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_video",
+        "key": "a3147",
+        "ricosVideo": {
+          "url": "https://vimeo.com/298341839",
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT"
+          },
+          "isCustomVideo": false,
+          "metadata": {}
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "e4lr6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5jdeu",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "af0bo",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ettqs",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9ufol",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2kmog",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6gun1",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5fbgi",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "eecm9",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "b7crh",
+            "ricosText": {
+              "decorations": [],
+              "text": "6. Facebook video aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "8ufk6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_video",
+        "key": "5ucd2",
+        "ricosVideo": {
+          "url": "https://www.facebook.com/wix/videos/971691596505371/",
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT"
+          },
+          "isCustomVideo": false,
+          "metadata": {}
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5b9h0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1khjr",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6p7ik",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "f914t",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1sbtb",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "73s87",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cpb73",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3l191",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9pj1a",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6ict3",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "alka4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bbf8s",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "84c7b",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "e3qgr",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a5o2p",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "d1otn",
+            "ricosText": {
+              "decorations": [],
+              "text": "7. Media manager video aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "d4057",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_video",
+        "key": "169ek",
+        "ricosVideo": {
+          "src": {
+            "pathname": "video/11062b_7124ff06fc56498d96722413f5f4846f/1080p/mp4/file.mp4",
+            "thumbnail": {
+              "pathname": "media/11062b_7124ff06fc56498d96722413f5f4846ff000.jpg",
+              "height": 1080,
+              "width": 1920
+            }
+          },
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT"
+          },
+          "isCustomVideo": true,
+          "metadata": {}
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "970cr",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3t01o",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cca4o",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1jlm5",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4gdn5",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cogep",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "eqqa4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "fsr8v",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bn59d",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "e7tqf",
+            "ricosText": {
+              "decorations": [],
+              "text": "8. All dividers aligned to left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "9lfin",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "19de6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "7pcml",
+        "ricosDivider": {
+          "type": "SINGLE",
+          "config": {
+            "size": "MEDIUM",
+            "alignment": "LEFT",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7f47j",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "2gsl5",
+        "ricosDivider": {
+          "type": "DOUBLE",
+          "config": {
+            "size": "MEDIUM",
+            "alignment": "LEFT",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1qk9c",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "1irv9",
+        "ricosDivider": {
+          "type": "DASHED",
+          "config": {
+            "size": "MEDIUM",
+            "alignment": "LEFT",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1poi0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "6hva1",
+        "ricosDivider": {
+          "type": "DOTTED",
+          "config": {
+            "size": "MEDIUM",
+            "alignment": "LEFT",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c7pal",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 919000000
+    }
+  },
+  "selection": {
+    "anchorNode": "f1p93"
+  },
+  "version": "6.6.8"
+}

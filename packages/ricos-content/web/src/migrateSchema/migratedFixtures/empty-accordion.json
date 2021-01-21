@@ -1,0 +1,31 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "83mh0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_accordion",
+        "key": "ame0m"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "969ma",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 828000000
+    }
+  },
+  "selection": {
+    "anchorNode": "83mh0"
+  },
+  "version": "7.20.4"
+}

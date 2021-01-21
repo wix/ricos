@@ -1,0 +1,406 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ffbil",
+        "ricosParagraph": {
+          "dynamicStyles": {
+            "lineHeight": "3",
+            "paddingTop": "2px",
+            "paddingBottom": "3px"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4m33q",
+        "ricosParagraph": {
+          "dynamicStyles": {
+            "lineHeight": "3",
+            "paddingTop": "2px",
+            "paddingBottom": "3px"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2ssg0",
+        "ricosParagraph": {
+          "dynamicStyles": {
+            "lineHeight": "3",
+            "paddingTop": "2px",
+            "paddingBottom": "3px"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4b4su",
+        "ricosParagraph": {
+          "dynamicStyles": {
+            "lineHeight": "3",
+            "paddingTop": "2px",
+            "paddingBottom": "3px"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ejivh",
+        "ricosParagraph": {
+          "dynamicStyles": {
+            "lineHeight": "3",
+            "paddingTop": "2px",
+            "paddingBottom": "3px"
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "c1knj",
+            "ricosText": {
+              "decorations": [],
+              "text": "This one displays weird space issue happened w/ blog ("
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "1sc88",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "https: //jira.wixpress.com/browse/NWB-2849",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "JIRA"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8njtu",
+            "ricosText": {
+              "decorations": [],
+              "text": ")"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "bdha6",
+        "ricosParagraph": {
+          "dynamicStyles": {
+            "lineHeight": "3",
+            "paddingTop": "2px",
+            "paddingBottom": "3px"
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "5kfb2",
+            "ricosText": {
+              "decorations": [],
+              "text": "Content state appear below, copy and paste "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8ff7k",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "https: //rich-content-6-6-8.surge.sh",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "here"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8rj5q",
+            "ricosText": {
+              "decorations": [],
+              "text": " to see the actual problem (viewer has extra space below which "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8hn9b",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "doesn't"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cr5on",
+            "ricosText": {
+              "decorations": [],
+              "text": " appear on editor so it can't be deleted 😪)"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "bdo0e",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "bmpfl",
+        "ricosImage": {
+          "config": {
+            "size": "INLINE",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
+            "originalFileName": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
+            "fileName": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
+            "width": 522,
+            "height": 522
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3lko",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c9d7m",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6cbad",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "qd2t",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bef1t",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "eeun6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1ng1a",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "dmn38",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cvrk4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7ucu4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9oama",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7jhmv",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2sepf",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "elhc3",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bi024",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a5jl7",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "da9a2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "39b8e",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "as80o",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "74c7p",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "f3no0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5mpn5",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "chtim",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8nb18",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "78h5g",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "29hu0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5t048",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "r6tc",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cle5v",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "73eij",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cq8uq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2jakr",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 868000000
+    }
+  },
+  "selection": {
+    "anchorNode": "ffbil"
+  },
+  "version": "6.8.1"
+}

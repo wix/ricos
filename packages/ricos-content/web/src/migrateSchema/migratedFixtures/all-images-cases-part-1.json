@@ -1,0 +1,1940 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "bahq7",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "ocpa",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(50px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "1nmk7",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "1gop6",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Center"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "dudf0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "85pue",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 50,
+            "height": 50
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "dhov9",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "c06h",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(50px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "2bg49",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "581l8",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "32g0i",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "1m95g",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 50,
+            "height": 50
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3l048",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c76br",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "7o8nd",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "32ajs",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(50px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "f1ntr",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "35ocv",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Right"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "6qno1",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "embcj",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "RIGHT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 50,
+            "height": 50
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c9dmb",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "92rgo",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "5fka9",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "at2jf",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(170px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "7pr3t",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "3s8f3",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Center"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "bkm8",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "5pcjg",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 170,
+            "height": 170
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "d3j77",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8ip8q",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(170px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "27mlq",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "f2isa",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "tqsi",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "fpfib",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 170,
+            "height": 170
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7ecfh",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "93nn6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "74v67",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4o2bg",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "d08i5",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3431j",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "bre6q",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cp6q9",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(170px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "136h8",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "54fvf",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Right"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "9uiu2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "9jc4i",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "RIGHT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 170,
+            "height": 170
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1otdu",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8nk6p",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2955h",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8592a",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "faps8",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8m6cl",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "69vuc",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "avssg",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "2edlk",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(350px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cqfog",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "7jkk7",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Center"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "bnnes",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "5j7a6",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 350,
+            "height": 350
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "b5lv4",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "4o0sd",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(350px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "d7mg9",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "bksiu",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "f764a",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "gigj",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 350,
+            "height": 350
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "55do",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "eq71o",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "quc9",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2fs2r",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a1ct9",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "anc9k",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5fjhc",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9u6h0",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a0qci",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6itq2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7r0jj",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "781db",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "92ss2",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(350px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "2gpif",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "b5aau",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Right"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "bsftl",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "drjmh",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "RIGHT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 350,
+            "height": 350
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "61skt",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "fv3a2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8qaaq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "dv6jb",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "df00h",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6cbia",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "dh0rj",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9nf5s",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2m0s",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "723p9",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "78bdb",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "3mk7p",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(450px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8dghh",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9rlc2",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Center"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "alag7",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "1k74s",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 450,
+            "height": 450
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "3sog",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "671h1",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(450px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "5kj4u",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "dhtmf",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "cgq41",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "9bcnu",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 450,
+            "height": 450
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6gpgd",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "72cpr",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "b312p",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9oe32",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6p9n6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8eneg",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8pu1i",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3il28",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1m1jb",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3otmu",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ee1nf",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2kinb",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9fsji",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "42m25",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "96d58",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "ejgp3",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original(450px)"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "e4tkp",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "6vauc",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Right"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "a6ui4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "5r0n",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "RIGHT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 450,
+            "height": 450
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "gdfl",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3m3h2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6lhqc",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6m61o",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "f4ie3",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5cfc7",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9t0vk",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6gv6v",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6iopl",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9m1gr",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7kkc7",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1flep",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "431o",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7f75u",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "bjdqa",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "12gg",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8u6h",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cf9k9",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Center"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "ca2st",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "8klt3",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 4500,
+            "height": 3228
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "fnkpg",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "334cv",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "5sno1",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "7sdhu",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "2m1ft",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "4rgrv",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 4500,
+            "height": 3228
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "3s2ca",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "73b26",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Original"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8rtof",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "auhao",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Right"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "20gps",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "m00r",
+        "ricosImage": {
+          "config": {
+            "size": "ORIGINAL",
+            "alignment": "RIGHT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 4500,
+            "height": 3228
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5tlti",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "c8onc",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bg7rq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ej6ij",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9ioh5",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "dgltd",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9dd01",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "fte7b",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "eujrn",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6kc2o",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "f5umk",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2h5vv",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5kp6j",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7m4f6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3oaai",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bdfkn",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "agat1",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "17p6",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Small"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "d8l64",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "apn70",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Center"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "bkb2a",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "4p3im",
+        "ricosImage": {
+          "config": {
+            "size": "SMALL",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 4500,
+            "height": 3228
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "aeuka",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "6ak35",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Small"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "38lj5",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "6n6p8",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Left"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "4ffp2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "5bfp1",
+        "ricosImage": {
+          "config": {
+            "size": "SMALL",
+            "alignment": "LEFT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 4500,
+            "height": 3228
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "eun3l",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "71i2l",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5jn9f",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "9v17v",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3f027",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7gh91",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "esrnj",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1k0ib",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1gd7h",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "f8h5j",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "21u4l",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "91gfh",
+            "ricosText": {
+              "decorations": [],
+              "text": "Size: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9a46s",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Small"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "2tpqc",
+            "ricosText": {
+              "decorations": [],
+              "text": " Alignment: "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "a2q5m",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Right"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "2rutv",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "4b5o2",
+        "ricosImage": {
+          "config": {
+            "size": "SMALL",
+            "alignment": "RIGHT",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "1ea8c429c3fbbc7b507b45b756c8499f",
+            "originalFileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "fileName": "8bb438_1ab1a6e5d0bf4edeb847d15d821a76d8.jpg",
+            "width": 4500,
+            "height": 3228
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ajtsg",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8fdm1",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "lme4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "fke32",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1scmb",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "e0jfq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "65afh",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a03hs",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "k2v3",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a8jvq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3pf7f",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "88cu6",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 767000000
+    }
+  },
+  "selection": {
+    "anchorNode": "dudf0"
+  },
+  "version": "8.6.3"
+}

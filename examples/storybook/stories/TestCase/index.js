@@ -15,8 +15,10 @@ import NormalizerStory from './NormalizerStory';
 import ExternalUndoStory from './ExternalUndoStory';
 import ButtonsTest from './ButtonsTest';
 import DuplicateContent from './DuplicateContent';
+import NewViewer from './NewViewer';
 
 storiesOf('Test Cases')
+  .add('New Viewer', NewViewer)
   .add('Groups', GroupsStory)
   .add('External Undo', ExternalUndoStory)
   .add('Normalizer', NormalizerStory)

@@ -1,0 +1,33 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "e6t2k",
+        "ricosParagraph": {
+          "textAlignment": "JUSTIFY"
+        }
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_button",
+        "key": "aj91j"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "f2ra2",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 884000000
+    }
+  },
+  "selection": {
+    "anchorNode": "e6t2k"
+  },
+  "version": "7.3.5"
+}

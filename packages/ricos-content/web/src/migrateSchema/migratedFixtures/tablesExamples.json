@@ -1,0 +1,92 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ftoie",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "kqul",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_table",
+        "key": "1439l"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ec60s",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_table",
+        "key": "4f5q9"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2ebed",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_table",
+        "key": "d7h7o"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3kaef",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_table",
+        "key": "2no4a"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "246a2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_table",
+        "key": "7kkvi"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cirdv",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_table",
+        "key": "apl8v"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "fpgiq",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 937000000
+    }
+  },
+  "selection": {
+    "anchorNode": "ftoie"
+  },
+  "version": "8.8.2"
+}

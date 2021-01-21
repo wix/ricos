@@ -1,0 +1,102 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "e14s7",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "aacet",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_preview",
+        "key": "1osk2",
+        "ricosLinkPreview": {
+          "title": "Free Website Builder | Create a Free Website | Wix.com",
+          "description": "\tCreate a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
+          "config": {
+            "link": {
+              "url": "wix.com"
+            }
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "lc8m",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_preview",
+        "key": "8k2tv",
+        "ricosLinkPreview": {
+          "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019",
+          "config": {
+            "link": {
+              "url": "wix.com"
+            }
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1c30d",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cf721",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "wix.com",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "wix.com"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "e93cm",
+            "ricosText": {
+              "decorations": [],
+              "text": " "
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "7vdoq",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 886000000
+    }
+  },
+  "selection": {
+    "anchorNode": "e14s7"
+  },
+  "version": "7.11.0"
+}

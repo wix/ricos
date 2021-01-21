@@ -1,0 +1,31 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "3bm71",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_table",
+        "key": "f5b1i"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "72ier",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 934000000
+    }
+  },
+  "selection": {
+    "anchorNode": "3bm71"
+  },
+  "version": "8.1.1"
+}

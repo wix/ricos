@@ -1,0 +1,121 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "6uoms",
+            "ricosText": {
+              "decorations": [],
+              "text": "bla bla bla"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "9q63v",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_html",
+        "key": "ado30",
+        "ricosHtml": {
+          "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+          "srcType": "html",
+          "config": {
+            "width": 350,
+            "height": 527
+          }
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "1e4qt",
+            "ricosText": {
+              "decorations": [],
+              "text": "Wide embed. In mobile full width. In desktop 740px "
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "fs0c4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_html",
+        "key": "3877q",
+        "ricosHtml": {
+          "src": "<div class=\"iframely-embed\"><div class=\"iframely-responsive\" style=\"padding-bottom: 52.356%; padding-top: 120px;\"><a href=\"https://www.worldofbuzz.com/9-yummy-snacks-from-south-korea-that-make-great-souvenirs-for-everyone/\" data-iframely-url=\"//cdn.iframe.ly/05UevKO\"></a></div></div><script async src=\"//cdn.iframe.ly/embed.js\" charset=\"utf-8\"></script>",
+          "srcType": "html",
+          "config": {
+            "width": 740,
+            "height": 339
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "17cdj",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7ia72",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "e6jlv",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_html",
+        "key": "da06r",
+        "ricosHtml": {
+          "src": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+          "srcType": "html",
+          "config": {
+            "width": 350,
+            "height": 154
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "flt7a",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bhuf9",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "clu3v",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 866000000
+    }
+  },
+  "selection": {
+    "anchorNode": "9q63v"
+  },
+  "version": "7.1.5"
+}

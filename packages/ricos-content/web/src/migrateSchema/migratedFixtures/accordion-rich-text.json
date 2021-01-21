@@ -1,0 +1,25 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "ricos_accordion",
+        "key": "cm8ut"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1a7aq",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 748000000
+    }
+  },
+  "selection": {
+    "anchorNode": "cm8ut"
+  },
+  "version": "7.21.2"
+}

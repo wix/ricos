@@ -46,6 +46,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
 
     readdirSync(`./${libEntriesPath}`).forEach(file => {
       const fileName = file.split('.')[0];
+      console.log({ fileName });
       libEntries.push({
         input: libEntriesPath + file,
         output: output.map(({ format }) => ({
@@ -71,7 +72,6 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
       ...commonOptions,
     });
   }
-
   let entries;
   if (process.env.MODULE_ANALYZE_EDITOR) {
     entries = [editorEntry, ...libEntries];

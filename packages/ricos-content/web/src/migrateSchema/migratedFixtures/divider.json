@@ -1,0 +1,96 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4i1k6",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "121kb",
+        "ricosDivider": {
+          "type": "SINGLE",
+          "config": {
+            "size": "LARGE",
+            "alignment": "CENTER",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "bqt7d",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "ec5dm",
+        "ricosDivider": {
+          "type": "DOUBLE",
+          "config": {
+            "size": "LARGE",
+            "alignment": "CENTER",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1pjqn",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "aerv3",
+        "ricosDivider": {
+          "type": "DASHED",
+          "config": {
+            "size": "LARGE",
+            "alignment": "CENTER",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "apqic",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_divider",
+        "key": "a21rv",
+        "ricosDivider": {
+          "type": "DOTTED",
+          "config": {
+            "size": "LARGE",
+            "alignment": "CENTER",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a2jam",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 819000000
+    }
+  },
+  "selection": {
+    "anchorNode": "4i1k6"
+  },
+  "version": "5.1.1"
+}

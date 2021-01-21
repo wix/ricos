@@ -1,0 +1,37 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "50bhp",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_map",
+        "key": "9vpmq",
+        "ricosMap": {
+          "config": {
+            "size": "content",
+            "alignment": "center"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "ea02q",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 896000000
+    }
+  },
+  "selection": {
+    "anchorNode": "50bhp"
+  },
+  "version": ""
+}

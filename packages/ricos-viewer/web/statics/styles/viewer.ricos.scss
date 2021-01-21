@@ -1,0 +1,244 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
+.pluginContainerMobile {
+  max-width: 100%;
+}
+
+.wrapper {
+  box-sizing: border-box;
+
+  @extend .fontElementMap;
+  position: relative;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  &.desktop {
+    .editor {
+      :global(.DraftEditor-root) {
+        &::after {
+          content: '';
+          display: table;
+          clear: both;
+          line-height: 0;
+        }
+      }
+
+      :global(.public-DraftEditorPlaceholder-root) {
+        margin: 0;
+      }
+    }
+  }
+
+  .editor {
+    box-sizing: border-box;
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    input {
+      box-sizing: border-box;
+    }
+  }
+
+  &.android {
+    padding-top: 50px;
+  }
+}
+
+.editor {
+  width: 100%;
+  height: 100%;
+  line-height: 1.5;
+  font-size: $paragraphFontSize;
+  color: $primary-text-color;
+  background-color: $background-color;
+  white-space: pre-wrap !important;
+  overflow-wrap: break-word;
+  @include ricosTypography('p', true);
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+    line-height: 0;
+  }
+}
+
+.atomic {
+  margin: 2px 0;
+}
+
+.toolbar {
+  margin-top: 20px;
+}
+
+.underline {
+  text-decoration: underline;
+
+  & * {
+    text-decoration: underline;
+  }
+}
+
+.block {
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.elementSpacing {
+  margin: 0;
+
+  @include phone {
+    margin: 0;
+    clear: both;
+  }
+}
+
+.blockStyleSpacing {
+  margin: 15px 18px;
+
+  @include phone {
+    margin: 15px calc((18px + (100% - #{$textMobileWidth}) / 2));
+  }
+}
+
+.text {
+  composes: elementSpacing;
+  color: $ricos-p-color;
+
+  &:empty {
+    height: 24px;
+  }
+}
+
+.child {
+  display: block;
+}
+
+.unorderedList.center{
+  list-style-position: inside;
+}
+
+.contentCenterAlignment{
+  display: inline;
+}
+
+.justify {
+  white-space: pre-wrap !important;
+  text-align: justify !important;
+}
+
+@mixin justifySafariOrFirefox {
+  white-space: pre-line !important;
+}
+
+// Css hack for Safari only. 
+// was taken from: https://stackoverflow.com/questions/16348489/is-there-a-css-hack-for-safari-only-not-chrome
+
+@media not all and (min-resolution:.001dpcm){ 
+  @supports (-webkit-appearance:none) {
+    .hasJustifyText {
+      @include justifySafariOrFirefox;
+    }
+  }
+}
+// Css hack for Firefox only. 
+// was taken from: https://css-tricks.com/snippets/css/css-hacks-targeting-firefox/
+
+@-moz-document url-prefix()  {
+  .hasJustifyText {
+    @include justifySafariOrFirefox;
+  }
+}
+
+.quote {
+  composes: blockStyleSpacing;
+  border-inline-start-width: 3px;
+  border-inline-start-style: solid;
+  font-size: $quoteFontSize;
+  line-height: $quoteLineHeight;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-start: 18px;
+  font-style: normal;
+  border-left-color: $ricos-quote-border-color;
+  border-right-color: $ricos-quote-border-color;
+  color: $ricos-quote-color;
+  @include ricosTypography('quote', false);
+}
+
+.headerOne,
+.headerTwo,
+.headerThree,
+.headerFour,
+.headerFive,
+.headerSix {
+  composes: elementSpacing;
+  font: inherit;
+}
+
+@each $headerName in $headerNames {
+  $i: index($headerNames, $headerName);
+  .header#{$headerName} {
+    @include ricosTypography('h#{$i}', true);
+    color: var(--ricos-custom-h#{$i}-color, $primary-text-color);
+  }
+}
+
+.code,
+.codeBlock {
+  composes: blockStyleSpacing;
+  background-color: rgba($fallbackColor, 0.06);
+  font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
+  font-size: 16px;
+  line-height: 26px;
+  padding: 2px 25px;
+  white-space: pre-wrap;
+}
+
+.normalText {
+  line-height: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  display: contents;
+}
+
+.anchor {
+  text-decoration: none;
+}
+
+.embed {
+  width: max-content;
+  border: none;
+}
+
+.horizontalScrollbar {
+  overflow-x: auto;
+}
+
+.horizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.horizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.horizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
+}

@@ -1,0 +1,122 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "dv26p",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2eqjq",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_preview",
+        "key": "1osk2",
+        "ricosLinkPreview": {
+          "title": "Free Website Builder | Create a Free Website | Wix.com",
+          "description": "\tCreate a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
+          "config": {
+            "link": {
+              "url": "wix.com"
+            }
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "lus9",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_preview",
+        "key": "8k2tv",
+        "ricosLinkPreview": {
+          "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019",
+          "config": {
+            "link": {
+              "url": "wix.com"
+            }
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "a9k7f",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_link_preview",
+        "key": "6mhje",
+        "ricosLinkPreview": {
+          "title": "I am a mock html",
+          "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+          "config": {
+            "link": {
+              "url": "mockUrl.com"
+            }
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "883ps",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8jn8h",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "wix.com",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "wix.com"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9dtk1",
+            "ricosText": {
+              "decorations": [],
+              "text": " "
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "ch8qg",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 888000000
+    }
+  },
+  "selection": {
+    "anchorNode": "dv26p"
+  },
+  "version": "7.1.4"
+}

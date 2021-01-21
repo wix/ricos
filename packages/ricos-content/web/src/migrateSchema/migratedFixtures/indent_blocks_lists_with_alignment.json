@@ -1,0 +1,146 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "9hcdc",
+                    "ricosText": {
+                      "decorations": [],
+                      "text": "asdsad"
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "85a92",
+                "ricosParagraph": {
+                  "textAlignment": "LEFT"
+                }
+              }
+            ],
+            "type": "list_item",
+            "key": "ap77n"
+          },
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "d59do",
+                    "ricosText": {
+                      "decorations": [],
+                      "text": "שדגדש"
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "1oloc",
+                "ricosParagraph": {
+                  "textAlignment": "LEFT"
+                }
+              }
+            ],
+            "type": "list_item",
+            "key": "dt9vd"
+          },
+          {
+            "nodes": [
+              {
+                "nodes": [
+                  {
+                    "nodes": [],
+                    "type": "text",
+                    "key": "eqn9c",
+                    "ricosText": {
+                      "decorations": [],
+                      "text": "asdsa"
+                    }
+                  }
+                ],
+                "type": "paragraph",
+                "key": "btkea",
+                "ricosParagraph": {
+                  "textAlignment": "LEFT"
+                }
+              }
+            ],
+            "type": "list_item",
+            "key": "7gqdu"
+          }
+        ],
+        "type": "ordered_list",
+        "key": "67bd8"
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8lrj5",
+            "ricosText": {
+              "decorations": [],
+              "text": "asdasd"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "cjl7u",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "350lk",
+            "ricosText": {
+              "decorations": [],
+              "text": "שדגשדג"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "di63j",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cc8hb",
+            "ricosText": {
+              "decorations": [],
+              "text": "asda"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "4mmhb",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 879000000
+    }
+  },
+  "selection": {
+    "anchorNode": "67bd8"
+  },
+  "version": "7.10.2"
+}

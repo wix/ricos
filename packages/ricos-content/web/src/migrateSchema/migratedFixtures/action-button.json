@@ -1,0 +1,37 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4cf5t",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1slj4",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_action_button",
+        "key": "36k46"
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "fij1r",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 752000000
+    }
+  },
+  "selection": {
+    "anchorNode": "4cf5t"
+  },
+  "version": "7.3.5"
+}

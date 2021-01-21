@@ -1,0 +1,51 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7aup5",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "fb6g1",
+        "ricosImage": {
+          "config": {
+            "size": "CONTENT",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true,
+            "link": {
+              "url": "www.wix.com",
+              "target": "_blank",
+              "rel": "noopener"
+            }
+          },
+          "src": {
+            "id": "d432d617a9f508cf404d64d8c489e1f1",
+            "originalFileName": "8bb438_ea26cc9ae0ce440bbc4cfaaa8864c5e6.jpg",
+            "fileName": "8bb438_ea26cc9ae0ce440bbc4cfaaa8864c5e6.jpg",
+            "width": 4400,
+            "height": 2966
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "8rblh",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 870000000
+    }
+  },
+  "selection": {
+    "anchorNode": "7aup5"
+  },
+  "version": "7.10.7"
+}

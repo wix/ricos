@@ -1,0 +1,146 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "77a5g",
+            "ricosText": {
+              "decorations": [],
+              "text": "Leverage "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "528tf",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                },
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": "agile"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "57t1q",
+            "ricosText": {
+              "decorations": [],
+              "text": " "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "enj69",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "frameworks to provide"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8lf6q",
+            "ricosText": {
+              "decorations": [],
+              "text": " a robust synopsis for "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "fvier",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "high level overviews"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "3msvq",
+            "ricosText": {
+              "decorations": [],
+              "text": ". Iterative approaches to "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "6p85p",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "bold"
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "corporate"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "fhn8b",
+            "ricosText": {
+              "decorations": [],
+              "text": " strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "1n963",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": "diversity and empowerment"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "69l67",
+            "ricosText": {
+              "decorations": [],
+              "text": "."
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "a5sfu",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 880000000
+    }
+  },
+  "selection": {
+    "anchorNode": "a5sfu"
+  },
+  "version": ""
+}

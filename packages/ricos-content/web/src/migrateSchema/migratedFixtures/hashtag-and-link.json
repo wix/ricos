@@ -1,0 +1,141 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "5fej9",
+            "ricosText": {
+              "decorations": [],
+              "text": "#roses_are_red "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "ecf75",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "Violets-are-blue.com",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "Violets-are-blue.com"
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "813g4",
+            "ricosText": {
+              "decorations": [],
+              "text": " "
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "2qu4p",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "ekgkk",
+            "ricosText": {
+              "decorations": [],
+              "text": "#rich_content_is_awesome.com "
+            }
+          },
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9thqu",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "wix.com",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "#and_so_are_you"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "1sqp2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "d9la4",
+            "ricosText": {
+              "decorations": [
+                {
+                  "type": "ricos_link",
+                  "ricosLink": {
+                    "url": "thisislink#youknow.com",
+                    "rel": "noopener",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ],
+              "text": "thisislink#youknow.com"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "7g6p2",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "8fr3d",
+            "ricosText": {
+              "decorations": [],
+              "text": "The End"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "d2iia",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 853000000
+    }
+  },
+  "selection": {
+    "anchorNode": "2qu4p"
+  },
+  "version": "7.2.0"
+}

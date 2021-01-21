@@ -1,0 +1,46 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "5fukv",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "8e2kc",
+        "ricosImage": {
+          "config": {
+            "size": "CONTENT",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
+            "originalFileName": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
+            "fileName": "7a41ac_2129d1406ef54c92a9219a7c0609ce7a~mv2.gif",
+            "width": 700,
+            "height": 394
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "4rhsf",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 847000000
+    }
+  },
+  "selection": {
+    "anchorNode": "5fukv"
+  },
+  "version": "6.8.2"
+}

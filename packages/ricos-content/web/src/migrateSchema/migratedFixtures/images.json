@@ -1,0 +1,142 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cglk9",
+            "ricosText": {
+              "decorations": [],
+              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. "
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "575ls",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "2ldjh",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "4n607",
+        "ricosImage": {
+          "config": {
+            "size": "SMALL",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "036c6bf6cef5e4409848eb4eb6f80de1",
+            "originalFileName": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
+            "fileName": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
+            "width": 2898,
+            "height": 3354
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "1j08d",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "co5n",
+            "ricosText": {
+              "decorations": [],
+              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment."
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "efosb",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "2psll",
+            "ricosText": {
+              "decorations": [],
+              "text": "Bring to the table win-win survival strategies to ensure proactive domination."
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "e7scs",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "li73",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "213ea",
+        "ricosImage": {
+          "config": {
+            "size": "CONTENT",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "b12907da5fbb55a31a760e49fb0bb4e6",
+            "originalFileName": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
+            "fileName": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
+            "width": 5177,
+            "height": 3526
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "cai2p",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "auokh",
+            "ricosText": {
+              "decorations": [],
+              "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution."
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "avea8",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 877000000
+    }
+  },
+  "selection": {
+    "anchorNode": "575ls"
+  },
+  "version": ""
+}

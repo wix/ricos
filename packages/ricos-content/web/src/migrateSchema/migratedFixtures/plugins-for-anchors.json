@@ -1,0 +1,116 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "cbspe",
+            "ricosText": {
+              "decorations": [],
+              "text": "anchor"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "2qhl",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "39ikf",
+            "ricosText": {
+              "decorations": [],
+              "text": "title1"
+            }
+          }
+        ],
+        "type": "heading",
+        "key": "test-blockKey",
+        "ricosHeading": {
+          "level": 2
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "28dt4",
+            "ricosText": {
+              "decorations": [],
+              "text": "super ultra mega long long long long long line"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "65nte",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_image",
+        "key": "9j0kf",
+        "ricosImage": {
+          "config": {
+            "size": "CONTENT",
+            "alignment": "CENTER",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "711b734cd45cfb65becf32d557b6f980",
+            "originalFileName": "8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg",
+            "fileName": "8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg",
+            "width": 1920,
+            "height": 1280
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "7sp5a",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_video",
+        "key": "43v36",
+        "ricosVideo": {
+          "src": {
+            "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
+            "thumbnail": {
+              "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
+              "height": 1080,
+              "width": 1920
+            }
+          },
+          "config": {
+            "size": "CONTENT",
+            "alignment": "CENTER"
+          },
+          "isCustomVideo": true
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "6nmo6",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 924000000
+    }
+  },
+  "selection": {
+    "anchorNode": "2qhl"
+  },
+  "version": "7.1.2"
+}

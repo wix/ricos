@@ -1,0 +1,104 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "aqrir",
+            "ricosText": {
+              "decorations": [],
+              "text": "I am text without alignment"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "ac341",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "fsac7",
+            "ricosText": {
+              "decorations": [],
+              "text": "I am text with left alignment"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "au6gj",
+        "ricosParagraph": {
+          "textAlignment": "LEFT"
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "9f6lh",
+            "ricosText": {
+              "decorations": [],
+              "text": "I am text with center alignment"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "corqb",
+        "ricosParagraph": {
+          "textAlignment": "CENTER"
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "25qas",
+            "ricosText": {
+              "decorations": [],
+              "text": "I am text with right alignment"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "86tfp",
+        "ricosParagraph": {
+          "textAlignment": "RIGHT"
+        }
+      },
+      {
+        "nodes": [
+          {
+            "nodes": [],
+            "type": "text",
+            "key": "4l9or",
+            "ricosText": {
+              "decorations": [],
+              "text": "I am text with justify alignment"
+            }
+          }
+        ],
+        "type": "paragraph",
+        "key": "fojr8",
+        "ricosParagraph": {
+          "textAlignment": "JUSTIFY"
+        }
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 938000000
+    }
+  },
+  "selection": {
+    "anchorNode": "ac341"
+  },
+  "version": "6.6.1"
+}

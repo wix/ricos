@@ -1,0 +1,40 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "erpbf",
+        "ricosParagraph": {}
+      },
+      {
+        "nodes": [],
+        "type": "ricos_file",
+        "key": "410nb",
+        "ricosFile": {
+          "name": "receipt.pdf",
+          "type": "pdf",
+          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
+          "config": {
+            "size": "small",
+            "alignment": "center"
+          }
+        }
+      },
+      {
+        "nodes": [],
+        "type": "paragraph",
+        "key": "juo7",
+        "ricosParagraph": {}
+      }
+    ],
+    "lastEdited": {
+      "seconds": 1609664139,
+      "nanos": 833000000
+    }
+  },
+  "selection": {
+    "anchorNode": "erpbf"
+  },
+  "version": "7.6.1"
+}
