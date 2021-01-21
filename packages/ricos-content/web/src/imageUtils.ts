@@ -1,5 +1,5 @@
 import imageClientAPI from 'image-client-api/dist/imageClientSDK';
-import { ComponentData, Helpers } from 'wix-rich-content-common/src/types';
+import { ComponentData } from './types';
 
 const WIX_STATIC_URL = 'https://static.wixstatic.com';
 const DEFAULT = {
@@ -58,7 +58,7 @@ const getImageFormat = (fileName: string) => {
 
 const getImageSrc = (
   src: ComponentData['src'],
-  helpers?: Helpers,
+  helpers?: { getImageUrl: ({ file_name }: { file_name: string }) => string },
   options: {
     requiredWidth?: number;
     requiredHeight?: number;
