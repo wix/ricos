@@ -3,7 +3,6 @@ import { compare } from '../../comparision/compare';
 import fixture from '../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../e2e/tests/fixtures/migration-content.json';
 import anchorBlocksFixture from '../../../../../../e2e/tests/fixtures/all-blocks-with-anchors.json';
-import { cloneDeep } from 'lodash';
 import { ANCHOR_TYPE } from '../..';
 
 const fixtures = { intro: fixture, complex: complexFixture };
@@ -26,5 +25,5 @@ describe('migrate to draft', () => {
   });
 });
 
-const convert = content => toDraft(fromDraft(cloneDeep(content)));
+const convert = content => toDraft(fromDraft(content));
 const compareWithConverted = content => compare(convert(content), content);
