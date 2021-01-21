@@ -189,7 +189,7 @@ class BaseToolbarButton extends React.Component {
   renderVideoSettingsFlag = () => {
     if ('isCustomVideo' in this.props.componentData) {
       return (
-        (this.props.type === 'external-modal' && this.props.componentData.isCustomVideo) ||
+        (this.props.type === BUTTONS.EXTERNAL_MODAL && this.props.componentData.isCustomVideo) ||
         this.props.keyName !== 'settings'
       );
     }
