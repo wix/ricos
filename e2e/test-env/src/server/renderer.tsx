@@ -24,7 +24,7 @@ export default function renderer() {
 
     const isMobile = req.query.mobile === '';
     const locale = req.query.hebrew === '' ? 'he' : 'en';
-    const seoMode = req.query.seoMode === '' ? req.query.seoMode : {};
+    const seoMode = req.query.seoMode === '' ? {} : undefined;
     const testAppConfig = JSON.parse(req.query.testAppConfig || '{}');
     const props: ComponentProps<typeof RichContentApp> = {
       isMobile,
