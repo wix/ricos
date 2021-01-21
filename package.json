@@ -63,6 +63,7 @@
 		"build:test": "npm run build && npm run build --prefix e2e/test-env",
 		"generatePlugin": "node scripts/generatePlugin",
 		"migrateFixtures": "cd scripts && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} migrateSchema",
+		"toPlainText": "cd scripts && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} toPlainText",
 		"link": "lerna link"
 	},
 	"husky": {

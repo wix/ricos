@@ -1,6 +1,6 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 
-import { isEmpty } from 'lodash';
+import { cloneDeep, isEmpty } from 'lodash';
 import { RicosContent as RicosContentDraft, RicosContentBlock } from '../..';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel, NodeType } from '../consts';
 import { RicosContent, RicosNode, google } from 'ricos-schema';
@@ -16,8 +16,11 @@ const createTimestamp = (): google.protobuf.Timestamp => {
   };
 };
 
+export const ensureRicosContent = (content: RicosContent | RicosContentDraft) =>
+  'blocks' in content ? fromDraft(content) : content;
+
 export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
-  const { blocks, entityMap, VERSION: version } = draftJSON;
+  const { blocks, entityMap, VERSION: version } = cloneDeep(draftJSON);
   const nodes: RicosNode[] = [];
 
   const parseBlocks = (index = 0) => {
