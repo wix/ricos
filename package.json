@@ -98,7 +98,7 @@
 		"@types/enzyme": "^3.10.5",
 		"@types/enzyme-adapter-react-16": "^1.0.6",
 		"@types/happypack": "^5.0.0",
-		"@types/i18next": "11.9.0",
+		"@types/i18next": "13.0.0",
 		"@types/jest": "^25.2.1",
 		"@types/lodash": "^4.14.149",
 		"@types/postcss-url": "^8.0.1",
