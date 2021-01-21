@@ -244,15 +244,28 @@ class Table extends TableDataUtil {
     this.saveNewDataFunc(this.componentData);
   };
 
-  distributeRows = (innerEditorsRefs, range) => {
+  getRowMaxContentHeight = (innerEditorsRefs, range) => {
     let maxContentHeight = 0;
     range.forEach(({ i, j }) => {
-      const height = innerEditorsRefs[`${i}-${j}`].editorHeight + 20;
+      const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
       if (height > maxContentHeight) {
         maxContentHeight = height;
       }
     });
-    this.setRowHeight(range, maxContentHeight);
+    return maxContentHeight;
+  };
+
+  distributeRows = (innerEditorsRefs, range) =>
+    this.setRowHeight(range, this.getRowMaxContentHeight(innerEditorsRefs, range));
+
+  getRowsMaxContentHeight = innerEditorsRefs => {
+    const rowsMaxContentHeight = [];
+    const colNum = this.getColNum();
+    [...Array(this.getRowNum()).fill(0)].forEach((val, i) => {
+      const range = getRange({ start: { i, j: 0 }, end: { i, j: colNum } });
+      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, range));
+    });
+    return rowsMaxContentHeight;
   };
 
   isRowInsideMergeRange = (i, j) =>

@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/toPlainText.cjs.js",
+    "module": "../../dist/lib/toPlainText.js",
+    "types": "../../dist/lib/toPlainText.d.ts"
+}

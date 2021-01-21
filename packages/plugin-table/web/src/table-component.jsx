@@ -439,6 +439,9 @@ class TableComponent extends React.Component {
             isEditMode={isEditMode}
             rowsHeights={this.rowsHeights}
             rowsRefs={this.rowsRefs}
+            rowsMaxContentHeight={
+              this.innerEditorsRefs && this.table.getRowsMaxContentHeight(this.innerEditorsRefs)
+            }
           />
         )}
         <div

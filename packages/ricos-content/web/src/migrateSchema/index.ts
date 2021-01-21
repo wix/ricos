@@ -1,2 +1,2 @@
-export { fromDraft } from './fromDraft/fromDraft';
-export { toDraft } from './toDraft/toDraft';
+export { fromDraft, ensureRicosContent } from './fromDraft/fromDraft';
+export { toDraft, ensureDraftContent } from './toDraft/toDraft';

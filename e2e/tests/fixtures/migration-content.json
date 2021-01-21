@@ -27,6 +27,11 @@
           "style": "UNDERLINE"
         },
         {
+          "offset": 161,
+          "length": 2,
+          "style": "UNDERLINE"
+        },
+        {
           "offset": 306,
           "length": 6,
           "style": "UNDERLINE"
@@ -64,19 +69,24 @@
           "key": 0
         },
         {
+          "offset": 161,
+          "length": 2,
+          "key": 1
+        },
+        {
           "offset": 198,
           "length": 5,
-          "key": 1
+          "key": 2
         },
         {
           "offset": 306,
           "length": 6,
-          "key": 2
+          "key": 3
         },
         {
           "offset": 336,
           "length": 6,
-          "key": 3
+          "key": 4
         }
       ],
       "data": {
@@ -106,7 +116,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 4
+          "key": 5
         }
       ],
       "data": {}
@@ -130,7 +140,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 5
+          "key": 6
         }
       ],
       "data": {}
@@ -154,7 +164,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 6
+          "key": 7
         }
       ],
       "data": {}
@@ -178,7 +188,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 7
+          "key": 8
         }
       ],
       "data": {}
@@ -202,13 +212,37 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 8
+          "key": 9
         }
       ],
       "data": {}
     },
     {
       "key": "89ir3",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fg6am",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 10
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "atona",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -226,7 +260,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 9
+          "key": 11
         }
       ],
       "data": {}
@@ -242,7 +276,7 @@
     },
     {
       "key": "6mjbs",
-      "text": "process.exit(1);",
+      "text": "songs = pd.read_csv(SONGS_FILE)",
       "type": "code-block",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -268,7 +302,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 10
+          "key": 12
         }
       ],
       "data": {}
@@ -292,7 +326,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 11
+          "key": 13
         }
       ],
       "data": {}
@@ -316,7 +350,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 12
+          "key": 14
         }
       ],
       "data": {}
@@ -340,7 +374,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 13
+          "key": 15
         }
       ],
       "data": {}
@@ -364,22 +398,13 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 14
+          "key": 16
         }
       ],
       "data": {}
     },
     {
       "key": "akn59",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "5ldtm",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -397,7 +422,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 15
+          "key": 17
         }
       ],
       "data": {}
@@ -421,7 +446,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 16
+          "key": 18
         }
       ],
       "data": {}
@@ -453,7 +478,7 @@
     },
     {
       "key": "ev9r2",
-      "text": "In imperdiet eros elementum nulla fringilla sollicitudin. Proin dictum aliquam sapien at pretium.",
+      "text": "In imperdiet eros elementum nulla fringilla sollicitudin.",
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -461,8 +486,71 @@
       "data": {}
     },
     {
+      "key": "aha4n",
+      "text": "Proin dictum aliquam sapien at pretium.",
+      "type": "ordered-list-item",
+      "depth": 1,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ft9ku",
+      "text": "Quisque pulvinar ac erat vitae imperdiet.",
+      "type": "ordered-list-item",
+      "depth": 2,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
       "key": "4brg",
-      "text": "Quisque pulvinar ac erat vitae imperdiet. Phasellus ultricies urna ut ultrices imperdiet. Nulla non varius ipsum, sit amet consectetur quam. Nunc scelerisque fringilla aliquet.",
+      "text": "Phasellus ultricies urna ut ultrices imperdiet.",
+      "type": "ordered-list-item",
+      "depth": 3,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ctmpp",
+      "text": "Nulla non varius ipsum, sit amet consectetur quam.",
+      "type": "ordered-list-item",
+      "depth": 4,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ba8lb",
+      "text": "Nunc scelerisque fringilla aliquet.",
+      "type": "ordered-list-item",
+      "depth": 4,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "9ofc",
+      "text": "Praesent purus nibh, sodales",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5h4cb",
+      "text": "non efficitur a",
+      "type": "unordered-list-item",
+      "depth": 1,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a47kn",
+      "text": "consequat ac ante.",
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -489,16 +577,56 @@
     },
     {
       "key": "10oj0",
-      "text": "Pellentesque imperdiet maximus turpis nec faucibus. Nulla at tempus lectus, non tempor tortor.",
+      "text": "Pellentesque imperdiet maximus turpis nec faucibus.",
       "type": "unordered-list-item",
-      "depth": 0,
+      "depth": 1,
       "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {}
     },
     {
+      "key": "1qucc",
+      "text": "Nulla at tempus lectus,",
+      "type": "unordered-list-item",
+      "depth": 2,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "3dppt",
+      "text": "non tempor tortor.",
+      "type": "unordered-list-item",
+      "depth": 3,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "3l0io",
+      "text": "Vivamus mauris",
+      "type": "unordered-list-item",
+      "depth": 4,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "55he5",
+      "text": "diam",
+      "type": "unordered-list-item",
+      "depth": 4,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
       "key": "7vpfq",
-      "text": "Vivamus mauris diam, auctor in sollicitudin eget, suscipit sed nulla.",
+      "text": "Auctor in sollicitudin eget, suscipit sed nulla.",
       "type": "unordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -514,7 +642,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "34c4j",
@@ -523,7 +653,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "5qcnb",
@@ -557,15 +689,15 @@
     },
     {
       "key": "55t98",
-      "text": "Praesent purus nibh, sodales non efficitur a, consequat ac ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.",
+      "text": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.",
       "type": "unstyled",
       "depth": 2,
       "inlineStyleRanges": [],
       "entityRanges": [
         {
-          "offset": 164,
+          "offset": 99,
           "length": 7,
-          "key": 17
+          "key": 19
         }
       ],
       "data": {
@@ -596,14 +728,23 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 18
+          "key": 20
         }
       ],
       "data": {}
     },
     {
       "key": "dcre3",
-      "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק. בראיט ולחת צורק מונחף, בגורמי מגמש.\n",
+      "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "eb7g5",
+      "text": "בראיט ולחת צורק מונחף, בגורמי מגמש.\n",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -613,24 +754,6 @@
     {
       "key": "5rm16",
       "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "brfl1",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "4btgr",
-      "text": "\n",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -647,6 +770,15 @@
       }
     },
     "1": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "www.google.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "2": {
       "type": "mention",
       "mutability": "SEGMENTED",
       "data": {
@@ -656,7 +788,7 @@
         }
       }
     },
-    "2": {
+    "3": {
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
@@ -665,14 +797,14 @@
         "rel": "noopener"
       }
     },
-    "3": {
+    "4": {
       "type": "ANCHOR",
       "mutability": "MUTABLE",
       "data": {
         "anchor": "98ccj"
       }
     },
-    "4": {
+    "5": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
@@ -705,7 +837,7 @@
         }
       }
     },
-    "5": {
+    "6": {
       "type": "wix-draft-plugin-video",
       "mutability": "IMMUTABLE",
       "data": {
@@ -736,7 +868,7 @@
         }
       }
     },
-    "6": {
+    "7": {
       "type": "wix-draft-plugin-video",
       "mutability": "IMMUTABLE",
       "data": {
@@ -756,7 +888,7 @@
         "tempData": false
       }
     },
-    "7": {
+    "8": {
       "type": "wix-draft-plugin-gallery",
       "mutability": "IMMUTABLE",
       "data": {
@@ -833,20 +965,38 @@
         }
       }
     },
-    "8": {
+    "9": {
       "type": "wix-draft-plugin-html",
       "mutability": "IMMUTABLE",
       "data": {
         "srcType": "html",
-        "src": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">We now have far more votes than needed to flip Georgia in the Presidential race. Massive VOTER FRAUD took place. Thank you to the Georgia Legislature for today’s revealing meeting!</p>&mdash; Donald J. Trump (@realDonaldTrump) <a href=\"https://twitter.com/realDonaldTrump/status/1344400646066331648?ref_src=twsrc%5Etfw\">December 30, 2020</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+        "src": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">How we cut cost on 55% of our storage without deleting a single file? We understood that NOT all files should be treated equally. <br><br>Here’s the full story:<a href=\"https://t.co/zC3d0uBkEA\">https://t.co/zC3d0uBkEA</a> <a href=\"https://t.co/j8ND7GfOEg\">pic.twitter.com/j8ND7GfOEg</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1348206215336259584?ref_src=twsrc%5Etfw\">January 10, 2021</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
         "config": {
           "alignment": "center",
           "width": 350,
-          "height": 260
+          "height": 490
         }
       }
     },
-    "9": {
+    "10": {
+      "type": "wix-draft-plugin-link-preview",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "link": {
+            "url": "https://twitter.com/CNN/status/1244886173409034240",
+            "target": "_blank",
+            "rel": "noopener"
+          },
+          "width": 350
+        },
+        "socialType": "Twitter",
+        "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">Eleven veterans who live at the Soldiers&#39; Home in Holyoke, Massachusetts, have died and five of them tested positive for coronavirus.<br><br>Tests are still pending for five other veterans who passed away, and the status of the last one is unknown, officials say <a href=\"https://t.co/rTVjn9FiBC\">https://t.co/rTVjn9FiBC</a></p>&mdash; CNN (@CNN) <a href=\"https://twitter.com/CNN/status/1244886173409034240?ref_src=twsrc%5Etfw\">March 31, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n"
+      }
+    },
+    "11": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -858,7 +1008,7 @@
         }
       }
     },
-    "10": {
+    "12": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
@@ -884,7 +1034,7 @@
         }
       }
     },
-    "11": {
+    "13": {
       "type": "wix-draft-plugin-map",
       "mutability": "IMMUTABLE",
       "data": {
@@ -908,7 +1058,7 @@
         }
       }
     },
-    "12": {
+    "14": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
@@ -922,7 +1072,7 @@
         "size": 150000
       }
     },
-    "13": {
+    "15": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
@@ -936,7 +1086,7 @@
         }
       }
     },
-    "14": {
+    "16": {
       "type": "wix-draft-plugin-sound-cloud",
       "mutability": "IMMUTABLE",
       "data": {
@@ -963,7 +1113,7 @@
         }
       }
     },
-    "15": {
+    "17": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -982,7 +1132,7 @@
         "provider_url": "www.mockUrl.com"
       }
     },
-    "16": {
+    "18": {
       "type": "wix-draft-plugin-poll",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1090,14 +1240,14 @@
         "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
       }
     },
-    "17": {
+    "19": {
       "type": "EMOJI_TYPE",
       "mutability": "IMMUTABLE",
       "data": {
         "emojiUnicode": "👨‍👩‍👦‍👦"
       }
     },
-    "18": {
+    "20": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {

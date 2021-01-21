@@ -7,6 +7,7 @@ import RicosModalSettings from './RicosModalSettings';
 import RicosMediaStory from './RicosMediaStory';
 import RicosContent from './RicosContentStory';
 import MountedRicosContent from './MountedRicosContent';
+import PlainTextStory from './PlainTextStory';
 
 storiesOf('Ricos', module)
   .add('Basic Usage', BasicUsageStory)
@@ -16,4 +17,5 @@ storiesOf('Ricos', module)
   .add('Modal API', RicosModalSettings)
   .add('Ricos Media', RicosMediaStory)
   .add('Ricos Content', RicosContent)
-  .add('Mounted Ricos Content Change', MountedRicosContent);
+  .add('Mounted Ricos Content Change', MountedRicosContent)
+  .add('Plain Text Converter', PlainTextStory);

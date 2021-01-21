@@ -16,8 +16,17 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+
 </details>
 <hr/>
+
+## 8.17.5 (Jan 20, 2021)
+### :house: Internal
+- `gallery`
+  - [#2023](https://github.com/wix/ricos/pull/2023) bump pro-gallery to 2.4.13
 
 ## 8.17.4 (Jan 20, 2021)
 ### :bug: Bug Fix
