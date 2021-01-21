@@ -35,6 +35,7 @@
     "ricos-editor": "8.17.5",
     "ricos-viewer": "8.17.5",
     "thread-loader": "^3.0.0",
+    "ts-loader": "^8.0.4",
     "wix-rich-content-common": "8.17.5",
     "wix-rich-content-editor": "8.17.5",
     "wix-rich-content-editor-common": "8.17.5",

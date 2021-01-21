@@ -58,6 +58,7 @@ export interface RichContentViewerProps {
   onError: OnErrorFunction;
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
+  localeResource?: Record<string, string>;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 

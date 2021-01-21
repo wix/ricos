@@ -19,6 +19,13 @@
 ### :rocket: New Feature
 - `ricos-content`
   - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+### :house: Internal
+- `example`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
+- `storybook`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
+- `e2e`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert test-env to TypeScript
 
 </details>
 <hr/>
