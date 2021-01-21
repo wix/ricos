@@ -91,11 +91,15 @@ class TableToolbar extends Component {
     if (firstCellRef && tableWidth) {
       const extraTopOffset = firstCellRef.offsetTop === 20 ? 60 : 41;
       const cellOffsetLeft = firstCellRef.offsetLeft;
+      const horizontalScrollbarElement = firstCellRef.closest(
+        '[data-id=horizontal-scrollbar-element]'
+      );
+      const xPosition = cellOffsetLeft - horizontalScrollbarElement.scrollLeft;
       return {
-        x: cellOffsetLeft,
-        offsetLeftInsideContainer: cellOffsetLeft,
+        x: xPosition < 0 ? 0 : xPosition,
+        offsetLeftInsideContainer: xPosition,
         y: firstCellRef.offsetTop,
-        containerWidth: tableWidth,
+        containerWidth: tableWidth - 40,
         extraTopOffset,
       };
     }
