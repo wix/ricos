@@ -68,7 +68,7 @@
     "babel-plugin-preval": "^3.0.1",
     "dotenv-webpack": "^1.7.0",
     "happypack": "^5.0.1",
-    "monaco-editor-webpack-plugin": "^1.7.0",
+    "monaco-editor-webpack-plugin": "^2.1.0",
     "ts-loader": "^8.0.4",
     "wix-statics-parent": "*"
   },
