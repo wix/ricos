@@ -13,6 +13,7 @@ export * from './types';
 export * from './version';
 export {
   migrateDividerData,
+  migrateFileData,
   migrateImageData,
   migrateGalleryData,
   migratePollData,

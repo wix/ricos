@@ -3,16 +3,26 @@ syntax = "proto3";
 import "../common.proto";
 
 message FileConfig {
-    string size = 1;
-    string alignment = 2;
-    string width = 3;
-  }
+    enum FileSize {
+      SMALL = 0;
+      CONTENT = 1;
+    }
+
+    enum FileAlignment {
+        LEFT = 0;
+        RIGHT = 1;
+        CENTER = 2;
+    }
+
+    FileSize size = 1;
+    FileAlignment alignment = 2;
+}
 
 message RicosFile {
-  FileConfig config = 1;
-  string name = 2;
-  string type = 3;
-  string url = 4;
-  string id = 5;
-  int32 size = 6;  
+    FileConfig config = 1;
+    string name = 2;
+    string type = 3;
+    string url = 4 [required = true];
+    string id = 5;
+    int32 size = 6;  
 }

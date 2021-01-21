@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
 import { FILE_UPLOAD_TYPE } from './types';
 import { mapExtensionToType } from './mapExtensionToType';
-
-const DEFAULTS = Object.freeze({
-  config: {
-    alignment: 'center',
-    size: 'content',
-  },
-});
+import { DEFAULTS } from './defaults';
 
 class FileUploadComponent extends PureComponent {
   constructor(props) {
