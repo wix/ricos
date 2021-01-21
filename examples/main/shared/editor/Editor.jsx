@@ -115,6 +115,7 @@ export default class Editor extends PureComponent {
   }
 
   componentDidMount() {
+    setTimeout(this.editor.focus, 50);
     ReactModal.setAppElement('body');
   }
 
