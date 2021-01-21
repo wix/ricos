@@ -20,7 +20,7 @@ const PlainTextConverter: FunctionComponent<{
 
   return (
     <Section type={Section.Types.COMPARISON}>
-      <RichContentEditorBox title={undefined} content={undefined} sourcecode={sourceCode}>
+      <RichContentEditorBox sourcecode={sourceCode}>
         <EditorWrapper
           content={newContent}
           theme={{ ...theme, parentClass: styles['rce-wrapper'] }}
