@@ -186,14 +186,19 @@ class BaseToolbarButton extends React.Component {
 
   getDataHook = () => `baseToolbarButton_${this.props.keyName}`;
 
-  renderVideoSettingsFlag = () =>
-    (this.props.type === BUTTONS.EXTERNAL_MODAL && this.props.componentData.isCustomVideo) ||
-    this.props.keyName !== 'settings';
+  renderVideoSettingsFlag = () => {
+    if ('isCustomVideo' in this.props.componentData) {
+      return (
+        (this.props.type === BUTTONS.EXTERNAL_MODAL && this.props.componentData.isCustomVideo) ||
+        this.props.keyName !== 'settings'
+      );
+    }
+    return false;
+  };
 
   renderToggleButton = (buttonWrapperClassNames, buttonClassNames) => {
     const { theme, t, tooltipTextKey, tabIndex } = this.props;
     const tooltipText = t(tooltipTextKey);
-    const isTypeVideo = 'isCustomVideo' in this.props.componentData;
     const toggleButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
       <div className={buttonWrapperClassNames}>
@@ -210,7 +215,7 @@ class BaseToolbarButton extends React.Component {
       </div>
       /* eslint-enable jsx-a11y/no-static-element-interactions */
     );
-    if (isTypeVideo && !this.renderVideoSettingsFlag()) return null;
+    if (!this.renderVideoSettingsFlag()) return null;
     return <ToolbarButton theme={theme} tooltipText={tooltipText} button={toggleButton} />;
   };
 
