@@ -24,6 +24,7 @@ import {
   COMMANDS,
   MODIFIERS,
   getEntities,
+  getSelectedText,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
@@ -149,6 +150,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   tablePluginMenu?: boolean;
   callOnChangeOnNewEditorState?: boolean;
   localeResource?: Record<string, string>;
+  maxTextLength?: number;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -717,6 +719,17 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       // in general, disables any input click on atomic blocks
       handled = 'handled';
     }
+
+    // input is ignored if length > maxTextLength (if maxTextLength is set)
+    if (this.props.maxTextLength && this.props.maxTextLength > 0) {
+      const contentLength = this.state.editorState.getCurrentContent().getPlainText('').length;
+      const selectedTextLength = getSelectedText(this.state.editorState).length;
+      if (contentLength - selectedTextLength > this.props.maxTextLength - 1) {
+        console.debug('maxContentLength = ', this.props.maxTextLength); // eslint-disable-line no-console
+        handled = 'handled';
+      }
+    }
+
     return handled || 'not-handled';
   };
 

@@ -77,6 +77,7 @@ export {
   getCharacterBeforeSelection,
   isPluginFocused,
   getSelectionRange,
+  getSelectedText,
   isInSelectionRange,
   cloneDeepWithoutEditorState,
   getEntities,
