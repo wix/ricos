@@ -103,6 +103,7 @@
 	"SettingsButton_Tooltip": "ตั้งค่า",
 	"LinkPreview_Settings_Tooltip": "ตั้งค่าลิงก์",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "เพื่อเปิดจำหน่ายบริการและแชร์ลงในโพสต์ของคุณ กรุณาไปที่ App Market ในเว็บไซต์แล้วติดตั้ง Wix Bookings",
+	"UnsupportedPlugin_message": "This content can be edited only on the web",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "แบบสำรวจ (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "เพิ่มโค้ด Snippet",

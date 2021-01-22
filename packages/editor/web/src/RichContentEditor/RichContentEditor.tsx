@@ -587,14 +587,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       }
     }
 
-    const { config, isInnerRCE } = this.props;
-    const resultEditorState = handlePastedText(
+    const { config, isInnerRCE, maxTextLength } = this.props;
+    const resultEditorState = handlePastedText({
       text,
       html,
       editorState,
-      isInnerRCE,
-      this.getHeadings(config)
-    );
+      pasteWithoutAtomic: isInnerRCE,
+      customHeadings: this.getHeadings(config),
+      maxTextLength,
+    });
     this.updateEditorState(resultEditorState);
 
     return 'handled';
@@ -725,7 +726,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       const contentLength = this.state.editorState.getCurrentContent().getPlainText('').length;
       const selectedTextLength = getSelectedText(this.state.editorState).length;
       if (contentLength - selectedTextLength > this.props.maxTextLength - 1) {
-        console.debug('maxContentLength = ', this.props.maxTextLength); // eslint-disable-line no-console
+        // eslint-disable-next-line no-console
+        console.debug(
+          `text editing prevented due to maxTextLength limitation (${this.props.maxTextLength})`
+        );
         handled = 'handled';
       }
     }
