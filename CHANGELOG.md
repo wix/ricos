@@ -26,7 +26,9 @@
   - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
 - `e2e`
   - [#2026](https://github.com/wix/ricos/pull/2026) convert test-env to TypeScript
-
+### :rocket: New Feature
+- `plugin-video`
+  - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) settings-modal enable download toggle
 </details>
 <hr/>
 
