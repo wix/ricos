@@ -1,7 +1,9 @@
-import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
+import { Modals } from '../modals';
+
 import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
@@ -26,7 +28,6 @@ const createInlineButtons: CreateInlineButtons = ({
     (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
-
   const spoilerButton = settings.spoiler
     ? [
         {
@@ -43,7 +44,7 @@ const createInlineButtons: CreateInlineButtons = ({
     { keyName: 'sizeFullWidth', type: BUTTONS.SIZE_FULL_WIDTH, mobile: false },
     { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
+    { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     ...spoilerButton,
     {
@@ -61,6 +62,19 @@ const createInlineButtons: CreateInlineButtons = ({
       mobile: true,
       tooltipTextKey: 'ReplaceVideoButton_Tooltip',
       t,
+    },
+    {
+      keyName: 'settings',
+      type: BUTTONS.EXTERNAL_MODAL,
+      icon: PluginSettingsIcon,
+      modalName: Modals.VIDEO_SETTINGS,
+      modalStyles: getModalStyles({
+        isMobile,
+      }),
+      t,
+      mobile: true,
+      tooltipTextKey: 'SettingsButton_Tooltip',
+      settings,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

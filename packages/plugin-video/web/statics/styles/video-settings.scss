@@ -1,0 +1,58 @@
+.videoSettings {
+    background: #fff;
+    z-index: 5;
+    box-sizing: border-box;
+    .separator {
+      display: flex;
+      margin-top: 16px;
+      width: 100%;
+      height: 1px;
+      background-color: black;
+    }
+  }
+  
+  .videoSettingsTitle {
+    font-size: 20px;
+    height: 100%;
+    padding: 24px 0 0 24px;
+  }
+  
+  .videoSettings_toggleContainer{
+    position: relative;
+    box-sizing:inherit;
+    padding: 0 24px;
+    font-size: 14px;
+    svg{
+      position: absolute;
+      top: 22px;
+      left: 210px;
+      height: 24px;
+      cursor: pointer;
+    }
+    p{
+      font-size: 16px;
+    }
+    >div {
+      padding-top: 24px; 
+    }
+  }
+  
+  .videoSettings_mobile {
+    p{
+      font-size: 14px;
+    }
+    svg{
+      top: 12px;
+      left: 191px;
+    }
+    .videoSettings_toggleContainer{
+      >div {
+      padding-top: 15px; 
+    }}
+  
+  }
+  
+  .videoSettings_footer {
+    z-index: 6;
+    bottom: 85px;
+  }
