@@ -84,4 +84,21 @@ describe('Paste text tests', () => {
   it('should convert raw content of accordion (from EditorState JSON object to rawData) correctly', () => {
     expect(convertParsedEditorStateObjectToRawData(rawContent)).toEqual(expectedRawContent);
   });
+
+  it('should cancel paste if the pasted text exceeds the maxTextLength', () => {
+    const editorState = EditorState.createWithContent(convertFromRaw(emptyRaw));
+    const blockKey = '4lirv';
+    const selection = SelectionState.createEmpty(blockKey);
+    const editorStateWithSelection = EditorState.forceSelection(editorState, selection);
+    const pastedEditorState = handlePastedText({
+      text: '123456',
+      html: headerWithAlignmentWordHTML,
+      editorState: editorStateWithSelection,
+      customHeadings: allHeaders,
+      maxTextLength: 5,
+      getSelectedText: () => '',
+    });
+    const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
+    expect(pastedRaw).toEqual(convertToRaw(editorState.getCurrentContent()));
+  });
 });

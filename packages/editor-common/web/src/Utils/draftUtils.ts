@@ -11,8 +11,6 @@ import {
   EditorChangeType,
 } from '@wix/draft-js';
 
-import getFragmentFromSelection from '@wix/draft-js/lib/getFragmentFromSelection';
-
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
@@ -472,12 +470,6 @@ function getSelectedLinks(editorState: EditorState) {
     getSelectedLinksInBlock(block, editorState)
   );
 }
-
-// TODO: use getFragmentFromSelection for selection-related utils
-export const getSelectedText = (editorState: EditorState) => {
-  const selectedFragment = getFragmentFromSelection(editorState) || [];
-  return selectedFragment.map((block: ContentBlock) => block.getText()).join('\n');
-};
 
 function getSelectedLinksInBlock(block: ContentBlock, editorState: EditorState) {
   const selectionRange = getSelectionRange(editorState, block);

@@ -4,7 +4,6 @@ import {
   SelectionState,
   ContentState,
   createEntity,
-  getSelectedText,
 } from 'wix-rich-content-editor-common';
 import draftConvertFromHtml from './utils/draftConvertFromHtml';
 import {
@@ -74,20 +73,23 @@ const applyPasteOnContentState = (editorState, contentToPaste) => {
   return contentWithPaste;
 };
 
-// checks if text to paste exceeds maxTextLength
-const exceedsMaxTextLimit = ({ contentFragment, editorState, maxTextLength }) => {
+// checks if text to paste exceeds maxTextLength (if any)
+const exceedsMaxTextLimit = ({ contentFragment, editorState, maxTextLength, getSelectedText }) => {
+  if (!maxTextLength) {
+    return false;
+  }
   const fragmentTextLength = contentFragment.getPlainText('').length;
   const contentLength = editorState.getCurrentContent().getPlainText('').length;
   const selectedTextLength = getSelectedText(editorState).length;
   return contentLength - selectedTextLength + fragmentTextLength > maxTextLength;
 };
 
-const handlePastedTextFromEditor = (html, editorState, maxTextLength) => {
+const handlePastedTextFromEditor = (html, editorState, maxTextLength, getSelectedText) => {
   const rawContent = getContent(html);
   const contentFragment = convertFromRaw(rawContent);
-  if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength })) {
+  if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength, getSelectedText })) {
     // eslint-disable-next-line no-console
-    console.debug(`paste cancelled due to maxTextLength exceeded (${maxTextLength})`);
+    console.debug(`paste canceled due to maxTextLength exceeded (${maxTextLength})`);
     return editorState;
   }
   const fragment = contentFragment.getBlockMap();
@@ -110,14 +112,15 @@ const handlePastedTextFromOutsideEditor = ({
   editorState,
   customHeadings,
   maxTextLength,
+  getSelectedText,
 }) => {
   const contentFragment = html
     ? draftConvertFromHtml(pastedContentConfig(customHeadings))(html)
     : ContentState.createFromText(text);
 
-  if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength })) {
+  if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength, getSelectedText })) {
     // eslint-disable-next-line no-console
-    console.debug(`paste cancelled due to maxTextLength exceeded (${maxTextLength})`);
+    console.debug(`paste canceled due to maxTextLength exceeded (${maxTextLength})`);
     return editorState;
   }
   const contentWithPaste = applyPasteOnContentState(editorState, contentFragment);
@@ -172,14 +175,23 @@ export const convertParsedEditorStateObjectToRawData = rawContent => {
 
 const isCopyFromEditor = html => !!getContent(html);
 
-export default ({ text, html, editorState, pasteWithoutAtomic, customHeadings, maxTextLength }) => {
+export default ({
+  text,
+  html,
+  editorState,
+  pasteWithoutAtomic,
+  customHeadings,
+  maxTextLength,
+  getSelectedText,
+}) => {
   return isCopyFromEditor(html) && !pasteWithoutAtomic
-    ? handlePastedTextFromEditor(html, editorState, maxTextLength)
+    ? handlePastedTextFromEditor(html, editorState, maxTextLength, getSelectedText)
     : handlePastedTextFromOutsideEditor({
         text,
         html: normalizeHTML(html),
         editorState,
         customHeadings,
         maxTextLength,
+        getSelectedText,
       });
 };

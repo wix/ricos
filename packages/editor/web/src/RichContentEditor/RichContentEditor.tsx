@@ -24,7 +24,6 @@ import {
   COMMANDS,
   MODIFIERS,
   getEntities,
-  getSelectedText,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
@@ -184,7 +183,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   customStyleFn: DraftEditorProps['customStyleFn'];
   toolbars;
   innerRCECustomStyleFn;
-
+  getSelectedText: (editorState: EditorState) => string;
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
     spellCheck: true,
@@ -243,6 +242,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
+    this.preloadLibs();
     this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
   }
 
@@ -256,6 +256,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.updateBounds = () => '';
     if (this.copySource) {
       this.copySource.unregister();
+    }
+  }
+
+  // imports dynamic chunks conditionally
+  preloadLibs() {
+    if (this.props.maxTextLength && this.props.maxTextLength > 0) {
+      import(
+        /* webpackChunkName: getSelectedText */ 'wix-rich-content-editor-common/libs/getSelectedText'
+      ).then(({ getSelectedText }) => (this.getSelectedText = getSelectedText));
     }
   }
 
@@ -595,6 +604,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       pasteWithoutAtomic: isInnerRCE,
       customHeadings: this.getHeadings(config),
       maxTextLength,
+      getSelectedText: this.getSelectedText,
     });
     this.updateEditorState(resultEditorState);
 
@@ -724,7 +734,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     // input is ignored if length > maxTextLength (if maxTextLength is set)
     if (this.props.maxTextLength && this.props.maxTextLength > 0) {
       const contentLength = this.state.editorState.getCurrentContent().getPlainText('').length;
-      const selectedTextLength = getSelectedText(this.state.editorState).length;
+      const selectedTextLength = this.getSelectedText(this.state.editorState).length;
       if (contentLength - selectedTextLength > this.props.maxTextLength - 1) {
         // eslint-disable-next-line no-console
         console.debug(
