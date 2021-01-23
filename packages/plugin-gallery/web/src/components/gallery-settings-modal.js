@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FocusManager } from 'wix-rich-content-editor-common';
-import { SettingsPanelFooter, SettingsSection, Tabs, Tab } from 'wix-rich-content-plugin-commons';
-
+import { FocusManager, InfoIcon } from 'wix-rich-content-editor-common';
+import {
+  SettingsPanelFooter,
+  SettingsSection,
+  LabeledToggle,
+  Tabs,
+  Tab,
+} from 'wix-rich-content-plugin-commons';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import LayoutControlsSection from './layout-controls-section';
@@ -146,12 +151,14 @@ AdvancedSettingsSection.propTypes = {
   t: PropTypes.func,
   languageDir: PropTypes.string,
 };
-
 export class GallerySettingsModal extends Component {
   constructor(props) {
     super(props);
+    const { componentData } = this.props;
     this.state = {
       activeTab: this.props.activeTab,
+      isExpandEnabled: !componentData.config.disableExpand,
+      isRightClickEnabled: !componentData.config.disableRightClick,
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.switchTab = this.switchTab.bind(this);
@@ -180,7 +187,21 @@ export class GallerySettingsModal extends Component {
   };
 
   otherTab() {
-    return this.state.activeTab === 'manage_media' ? 'advanced_settings' : 'manage_media';
+    const { activeTab } = this.state;
+    switch (activeTab) {
+      case 'manage_media': {
+        return 'manage_media';
+      }
+      case 'advanced_settings': {
+        return 'advanced_settings';
+      }
+      case 'settings': {
+        return 'settings';
+      }
+      default: {
+        return 'manage_media';
+      }
+    }
   }
 
   switchTab() {
@@ -195,8 +216,71 @@ export class GallerySettingsModal extends Component {
     return {
       manage_media: t('GallerySettings_Tab_ManageMedia'),
       advanced_settings: t('GallerySettings_Tab_AdvancedSettings'),
+      settings: t('GallerySettings_Tab_Settings'),
     }[tab];
   }
+  onDoneClick = () => {
+    const { helpers, componentData, pubsub } = this.props;
+    const newComponentData = {
+      ...componentData,
+      config: {
+        ...componentData.config,
+        disableExpand: !this.state.isExpandEnabled,
+        disableRightClick: !this.state.isRightClickEnabled,
+      },
+    };
+    if (this.state.metadata) {
+      this.addMetadataToBlock();
+    }
+    pubsub.update('componentData', newComponentData);
+
+    helpers.closeModal();
+  };
+
+  toggleState = key => () => {
+    this.setState(prevState => ({
+      [key]: !prevState[key],
+    }));
+  };
+
+  renderToggle = ({ toggleKey, labelKey }) => {
+    if (toggleKey === 'isRightClickEnabled') {
+      return (
+        <React.Fragment>
+          <LabeledToggle
+            theme={this.props.theme}
+            checked={this.state[toggleKey]}
+            label={this.props.t(labelKey)}
+            onChange={this.toggleState(toggleKey)}
+          />
+          <InfoIcon
+            theme={this.props.theme}
+            isNotification
+            tooltipText={this.props.t('GallerySettings_Images_CanBeDownloaded_Tooltip')}
+          />
+        </React.Fragment>
+      );
+    }
+    return (
+      <LabeledToggle
+        key={toggleKey}
+        theme={this.props.theme}
+        checked={this.state[toggleKey]}
+        label={this.props.t(labelKey)}
+        onChange={this.toggleState(toggleKey)}
+      />
+    );
+  };
+  toggleData = [
+    {
+      toggleKey: 'isExpandEnabled',
+      labelKey: 'GallerySettings_Images_OpenInExpandMode_Label',
+    },
+    {
+      toggleKey: 'isRightClickEnabled',
+      labelKey: 'GallerySettings_Images_CanBeDownloaded_Label',
+    },
+  ];
 
   render() {
     const styles = this.styles;
@@ -213,13 +297,10 @@ export class GallerySettingsModal extends Component {
     } = this.props;
     const { activeTab } = this.state;
     const componentData = pubsub.get('componentData');
-    // console.log('MODAL_RENDER: ', componentData);
 
-    if (isMobile) {
-      // console.log('Rendering mobile settings');
-      /* eslint-disable max-len */
-      return (
-        <div dir={languageDir}>
+    return (
+      <div dir={languageDir}>
+        {isMobile && (
           <GallerySettingsMobileHeader
             theme={this.props.theme}
             cancel={() => this.revertComponentData()}
@@ -228,42 +309,14 @@ export class GallerySettingsModal extends Component {
             otherTab={this.tabName(this.otherTab(), t)}
             t={t}
           />
-          {activeTab === 'manage_media' ? (
-            <ManageMediaSection
-              data={componentData}
-              store={pubsub.store}
-              theme={this.props.theme}
-              helpers={helpers}
-              t={t}
-              isMobile
-              anchorTarget={anchorTarget}
-              relValue={relValue}
-              uiSettings={uiSettings}
-              accept={accept}
-            />
-          ) : null}
-          {activeTab === 'advanced_settings' ? (
-            <AdvancedSettingsSection
-              theme={this.props.theme}
-              data={componentData}
-              store={pubsub.store}
-              helpers={helpers}
-              t={t}
-              isMobile
-            />
-          ) : null}
-        </div>
-      );
-    } else {
-      const headerText = t('GallerySettings_Header');
-      return (
+        )}
         <FocusManager
           focusTrapOptions={{ initialFocus: `#${activeTab}_header` }}
           className={styles.gallerySettings}
           dir={languageDir}
         >
-          <h3 className={styles.gallerySettings_title}>{headerText}</h3>
-          <div>
+          <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab
                 label={this.tabName('manage_media', t)}
@@ -295,23 +348,30 @@ export class GallerySettingsModal extends Component {
                   t={t}
                 />
               </Tab>
+              <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
+                {this.toggleData.map(toggle => (
+                  <div key={toggle.toggleKey} className={styles.galleryImageSettings_toggleWrapper}>
+                    {this.renderToggle(toggle)}
+                  </div>
+                ))}
+              </Tab>
             </Tabs>
           </div>
           <SettingsPanelFooter
             fixed
             cancel={() => this.revertComponentData()}
-            save={() => helpers.closeModal()}
+            save={this.onDoneClick}
             theme={this.props.theme}
             t={t}
           />
         </FocusManager>
-      );
-    }
+      </div>
+    );
   }
 }
 
 GallerySettingsModal.propTypes = {
-  activeTab: PropTypes.oneOf(['manage_media', 'advanced_settings']),
+  activeTab: PropTypes.oneOf(['manage_media', 'advanced_settings', 'settings']),
   componentData: PropTypes.object.isRequired,
   helpers: PropTypes.object.isRequired,
   pubsub: PropTypes.any.isRequired,

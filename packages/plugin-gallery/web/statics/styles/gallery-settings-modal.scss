@@ -14,13 +14,17 @@ $FOOTER_HEIGHT: 100px;
   width: 100%;
   color: #333333;
   line-height: 30px;
-  padding: 24px 24px 20px;
+  padding: 24px 0 0 24px;
   margin: 0;
-  border-bottom: 1px solid #ededed;
   position: relative;
   top: 0;
   background-color: #fff;
   z-index: 5;
+  box-sizing: border-box;
+}
+
+.gallerySettings_tabsContainer{
+  margin-top: 24px;
 }
 
 .gallerySettings_divider {
@@ -43,4 +47,19 @@ $FOOTER_HEIGHT: 100px;
   margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.galleryImageSettings_toggleWrapper{
+  position: relative;
+  svg{
+    position: absolute;
+    top: 10px;
+    left: 201px;
+  }
+  p{
+    font-size: 16px;
+  }
+  >div{
+    padding-bottom: 14px;
+    padding-top: 10px;
+  }
 }

@@ -93,7 +93,7 @@ const createInlineButtons: CreateInlineButtons = ({
       modalStyles,
       switchLayout,
       t,
-      mobile: false,
+      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,
