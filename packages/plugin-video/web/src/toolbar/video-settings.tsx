@@ -22,6 +22,16 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
 }) => {
   const disableDownload = settings.disableDownload || componentData?.config?.disableDownload;
   const [isDownloadEnabled, setIsDownloadEnabled] = useState(!disableDownload);
+  const styles = mergeStyles({ styles: Styles, theme });
+
+  const onToggle = () => setIsDownloadEnabled(!isDownloadEnabled);
+  const onCancelClick = () => helpers.closeModal?.();
+  const onDoneClick = () => {
+    const newComponentData = { ...componentData, config: { disableDownload: !isDownloadEnabled } };
+    pubsub.update('componentData', newComponentData);
+    helpers.closeModal?.();
+  };
+
   const mobileSettingsProps = {
     t,
     theme,
@@ -29,17 +39,9 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
     cancelLabel: t('SettingsPanelFooter_Cancel'),
     saveLabel: t('SettingsPanelFooter_Save'),
     isSettingsModal: true,
+    cancel: onCancelClick,
+    save: onDoneClick,
   };
-  const styles = mergeStyles({ styles: Styles, theme });
-
-  const onDoneClick = () => {
-    const newComponentData = { ...componentData, config: { disableDownload: !isDownloadEnabled } };
-    pubsub.update('componentData', newComponentData);
-    helpers.closeModal?.();
-  };
-
-  const onCancelClick = () => helpers.closeModal?.();
-  const onToggle = () => setIsDownloadEnabled(!isDownloadEnabled);
 
   return (
     <div
@@ -48,7 +50,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
       })}
     >
       {isMobile ? (
-        <SettingsMobileHeader {...mobileSettingsProps} cancel={onCancelClick} save={onDoneClick} />
+        <SettingsMobileHeader {...mobileSettingsProps} />
       ) : (
         <React.Fragment>
           <div className={styles.videoSettingsTitle}>{t('VideoSettings_Header')}</div>
