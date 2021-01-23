@@ -200,6 +200,10 @@ By default, its predicate is `relValue !== 'nofollow'`
 Determines the placeholder to use for the link panel.
 By default, its value is `"Enter a URL here"` translated by localization
 
+### `maxTextLength`
+
+Limits the editor text length to a given value. When the max text length is reached, further text input is ignored. Also, text paste action is canceled if the resulting text would exceed the max length.
+
 ### `modalSettings`
 
 Customise the `ReactModal` of `RicosEditor`, or alternatively provide callbacks to create your own Modal.
