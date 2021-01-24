@@ -233,7 +233,7 @@ class ImageViewer extends React.Component {
     onExpand?.(this.props.entityIndex);
   };
 
-  scrollToAnchor = () => {
+  scrollToAnchor = e => {
     const {
       componentData: {
         config: {
@@ -242,7 +242,7 @@ class ImageViewer extends React.Component {
       },
     } = this.props;
     const element = document.getElementById(`viewer-${anchor}`);
-    anchorScroll(element);
+    anchorScroll(e, element);
   };
 
   hasLink = () => this.props.componentData?.config?.link?.url;
@@ -260,8 +260,7 @@ class ImageViewer extends React.Component {
     if (this.hasLink()) {
       return null;
     } else if (this.hasAnchor()) {
-      e.preventDefault();
-      this.scrollToAnchor();
+      this.scrollToAnchor(e);
     } else {
       this.handleExpand(e);
     }

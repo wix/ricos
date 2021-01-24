@@ -105,7 +105,6 @@ class PluginViewer extends PureComponent {
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme, isMobile } = context;
     const settings = config?.[type] || {};
-    const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
       type,
       componentData,
@@ -133,13 +132,7 @@ class PluginViewer extends PureComponent {
         }
         if (hasAnchor) {
           const { anchor } = config.link;
-          const anchorString = `viewer-${anchor}`;
-          let href;
-          if (siteUrl) {
-            href = `${siteUrl}#${anchorString}`;
-          } else if (!isSSR) {
-            href = this.getUrlWithAnchorTag(anchorString);
-          }
+          const href = `#viewer-${anchor}`;
           containerProps = {
             href,
             target: '_self',
