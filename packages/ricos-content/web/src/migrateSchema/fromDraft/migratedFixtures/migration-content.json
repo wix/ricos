@@ -699,8 +699,8 @@
         "key": "ept6s",
         "ricosFile": {
           "config": {
-            "size": "content",
-            "alignment": "center"
+            "size": "CONTENT",
+            "alignment": "CENTER"
           },
           "name": "image.jpg",
           "type": "jpg",
