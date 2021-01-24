@@ -407,7 +407,7 @@ class TableComponent extends React.Component {
             deleteColumn={this.deleteColumn}
             deleteRow={this.deleteRow}
             isEditingActive={isEditingActive}
-            tableWidth={this.tableRef.current?.offsetWidth}
+            tableWidth={this.tableRef.current?.parentElement?.offsetWidth}
             getFirstCellRef={this.getFirstCellRef}
             t={t}
             theme={theme}
@@ -439,6 +439,9 @@ class TableComponent extends React.Component {
             isEditMode={isEditMode}
             rowsHeights={this.rowsHeights}
             rowsRefs={this.rowsRefs}
+            rowsMaxContentHeight={
+              this.innerEditorsRefs && this.table.getRowsMaxContentHeight(this.innerEditorsRefs)
+            }
           />
         )}
         <div

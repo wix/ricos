@@ -5,7 +5,7 @@ import { FROM_RICOS_DECORATION_TYPE, ENTITY_DECORATION_TO_DATA_FIELD } from '../
 import { emojiRegex } from '../emojiRegex';
 import { createDecorationEntityData } from './getDraftEntityData';
 
-interface RangedDecoration extends RicosDecoration {
+export interface RangedDecoration extends RicosDecoration {
   start: number;
   end: number;
   ricosEmoji?: { emojiUnicode: string };

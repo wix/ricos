@@ -47,16 +47,27 @@ export const KEYS_CHARCODE = {
   ESCAPE: 27,
 };
 
+const ALIGN_LEFT = 'AlignLeft';
+const ALIGN_RIGHT = 'AlignRight';
+const ALIGN_CENTER = 'AlignCenter';
+const ALIGN_JUSTIFY = 'Justify';
+
 export const FORMATTING_BUTTONS = Object.freeze({
   BOLD: 'Bold',
   ITALIC: 'Italic',
   UNDERLINE: 'Underline',
   TITLE: 'Title',
   BLOCKQUOTE: 'Blockquote',
-  ALIGN_LEFT: 'AlignLeft',
-  ALIGN_RIGHT: 'AlignRight',
-  ALIGN_CENTER: 'AlignCenter',
-  ALIGN_JUSTIFY: 'Justify',
+  ALIGN_LEFT,
+  ALIGN_RIGHT,
+  ALIGN_CENTER,
+  ALIGN_JUSTIFY,
+  ALIGN_GROUP: {
+    tooltipKey: 'AlignTextDropdownButton_Tooltip',
+    name: 'Alignment',
+    dataHook: 'Alignment',
+    buttons: [ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT, ALIGN_JUSTIFY],
+  },
   ORDERED_LIST: 'OrderedList',
   UNORDERED_LIST: 'UnorderedList',
   // plugins

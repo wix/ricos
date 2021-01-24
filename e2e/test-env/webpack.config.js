@@ -1,5 +1,6 @@
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HappyPack = require('happypack');
 const path = require('path');
 
 const output = {
@@ -16,7 +17,7 @@ const common = {
     hints: false,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   optimization: {
     splitChunks: {
@@ -62,6 +63,22 @@ const urlRule = {
   use: ['url-loader'],
 };
 
+const typescriptRule = {
+  test: /\.tsx?$/,
+  exclude: /node_modules/,
+  loader: 'happypack/loader?id=ts',
+};
+
+const happyPackPlugin = new HappyPack({
+  id: 'ts',
+  loaders: [
+    {
+      path: 'ts-loader',
+      query: { happyPackMode: true },
+    },
+  ],
+});
+
 const config = [
   {
     ...common,
@@ -70,6 +87,7 @@ const config = [
       index: './src/client/index',
     },
     output,
+    plugins: [happyPackPlugin],
     module: {
       rules: [
         babelRule,
@@ -81,6 +99,7 @@ const config = [
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
         },
+        typescriptRule,
       ],
     },
   },
@@ -102,6 +121,7 @@ const config = [
         filename: '[name].css',
         chunkFilename: '[id].css',
       }),
+      happyPackPlugin,
     ],
     module: {
       rules: [
@@ -112,6 +132,7 @@ const config = [
           test: /\.css$/,
           use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
+        typescriptRule,
       ],
     },
   },

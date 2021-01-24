@@ -193,6 +193,7 @@ export interface EditorPluginConfig {
     };
   };
   getIsVisiblePromise?: (...args) => Promise<boolean>;
+  innerRCEPlugins?: CreatePluginFunction[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -242,6 +243,8 @@ export interface LinkPanelSettings {
   blankTargetToggleVisibilityFn?: (anchorTarget?: AnchorTarget) => boolean;
   nofollowRelToggleVisibilityFn?: (relValue?: RelValue) => boolean;
   placeholder?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dropDown?: any;
 }
 
 export type UISettings = {

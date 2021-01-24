@@ -189,10 +189,25 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
-  removeCellBorders = range => {
+  removeAllBorders = range => {
     range.forEach(({ i, j }) => {
       const cell = this.getCell(i, j);
       cell.border = {};
+    });
+    this.setNewRows(this.componentData.config.rows);
+  };
+
+  removeBorderAround = selection => {
+    const range = getRange(selection);
+    range.forEach(({ i, j }) => {
+      const cell = this.getCell(i, j);
+      const cellAroundBorders = this.getCellBorders(selection, i, j, '');
+      const bordersWithoutAroundBorder = {};
+      const innerBorders = ['top', 'bottom', 'right', 'left'].filter(
+        border => !cellAroundBorders[border]
+      );
+      innerBorders.forEach(border => (bordersWithoutAroundBorder[border] = cell.border[border]));
+      cell.border = bordersWithoutAroundBorder;
     });
     this.setNewRows(this.componentData.config.rows);
   };
@@ -244,15 +259,28 @@ class Table extends TableDataUtil {
     this.saveNewDataFunc(this.componentData);
   };
 
-  distributeRows = (innerEditorsRefs, range) => {
+  getRowMaxContentHeight = (innerEditorsRefs, range) => {
     let maxContentHeight = 0;
     range.forEach(({ i, j }) => {
-      const height = innerEditorsRefs[`${i}-${j}`].editorHeight + 20;
+      const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
       if (height > maxContentHeight) {
         maxContentHeight = height;
       }
     });
-    this.setRowHeight(range, maxContentHeight);
+    return maxContentHeight;
+  };
+
+  distributeRows = (innerEditorsRefs, range) =>
+    this.setRowHeight(range, this.getRowMaxContentHeight(innerEditorsRefs, range));
+
+  getRowsMaxContentHeight = innerEditorsRefs => {
+    const rowsMaxContentHeight = [];
+    const colNum = this.getColNum();
+    [...Array(this.getRowNum()).fill(0)].forEach((val, i) => {
+      const range = getRange({ start: { i, j: 0 }, end: { i, j: colNum } });
+      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, range));
+    });
+    return rowsMaxContentHeight;
   };
 
   isRowInsideMergeRange = (i, j) =>
