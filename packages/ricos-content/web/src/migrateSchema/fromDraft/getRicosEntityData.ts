@@ -39,10 +39,10 @@ const migrateDividerData = data => {
   has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };
 
-const migrateFileData = data => {
-  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
-};
+// const migrateFileData = data => {
+//   has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+//   has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
+// };
 
 const migrateImageData = data => {
   has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
