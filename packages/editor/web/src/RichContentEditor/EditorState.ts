@@ -4,7 +4,6 @@ import {
   getBlockType,
   hasLinksInSelection,
   getLinkDataInSelection,
-  SelectionState,
 } from 'wix-rich-content-editor-common';
 import {
   GetEditorState,
@@ -54,7 +53,11 @@ type PluginType =
 
 const createEditorState = (getEditorState: GetEditorState) => {
   const editorState = {
-    getSelection: (): SelectionState => getEditorState().getSelection(),
+    //TODO: fix this type error
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getSelection: (): any => {
+      return getEditorState().getSelection();
+    },
     getTextAlignment: () => getTextAlignment(getEditorState()),
     hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style.toUpperCase(), getEditorState()),
     isBlockTypeSelected: (type: PluginType) => getBlockType(getEditorState()) === type,
