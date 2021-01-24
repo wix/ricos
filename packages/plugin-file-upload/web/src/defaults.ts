@@ -3,4 +3,7 @@ export const DEFAULTS = {
     alignment: 'center',
     size: 'content',
   },
+  configViewer: {
+    downloadTarget: '_blank',
+  },
 };
