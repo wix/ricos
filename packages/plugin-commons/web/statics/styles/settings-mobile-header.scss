@@ -44,15 +44,16 @@
       font-size: 16px;
       line-height: 24px;
       padding: 0;
-      &.done {
-        padding: 10px 13px 14px 0;
-        color: $action-color;
-      }
-      &.cancel {
-        padding: 12px 0 14px 19px;
-        color: inherit;
-      }
     }
+  }
+
+  .media .done {
+    padding: 10px 13px 14px 0;
+    color: $action-color;
+  }
+  .media .cancel {
+    padding: 12px 0 14px 19px;
+    color: inherit;
   }
 
   .menuIcon {
