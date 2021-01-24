@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/getSelectedText.cjs.js",
+    "module": "../../dist/lib/getSelectedText.js",
+    "types": "../../dist/lib/getSelectedText.d.ts"
+}

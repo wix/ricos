@@ -62,11 +62,7 @@ const replaceWithFragment = (contentState, selection, fragment) => {
   return contentWithFragment;
 };
 
-const applyPasteOnContentState = (editorState, html, text, customHeadings) => {
-  const contentToPaste = html
-    ? draftConvertFromHtml(pastedContentConfig(customHeadings))(html)
-    : ContentState.createFromText(text);
-
+const applyPasteOnContentState = (editorState, contentToPaste) => {
   const contentState = clearAtomicBlockEntities(editorState);
   const contentWithPaste = replaceWithFragment(
     contentState,
@@ -77,9 +73,26 @@ const applyPasteOnContentState = (editorState, html, text, customHeadings) => {
   return contentWithPaste;
 };
 
-const handlePastedTextFromEditor = (html, editorState) => {
+// checks if text to paste exceeds maxTextLength (if any)
+const exceedsMaxTextLimit = ({ contentFragment, editorState, maxTextLength, getSelectedText }) => {
+  if (!maxTextLength) {
+    return false;
+  }
+  const fragmentTextLength = contentFragment.getPlainText('').length;
+  const contentLength = editorState.getCurrentContent().getPlainText('').length;
+  const selectedTextLength = getSelectedText(editorState).length;
+  return contentLength - selectedTextLength + fragmentTextLength > maxTextLength;
+};
+
+const handlePastedTextFromEditor = (html, editorState, maxTextLength, getSelectedText) => {
   const rawContent = getContent(html);
-  const fragment = convertFromRaw(rawContent).getBlockMap();
+  const contentFragment = convertFromRaw(rawContent);
+  if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength, getSelectedText })) {
+    // eslint-disable-next-line no-console
+    console.debug(`paste canceled due to maxTextLength exceeded (${maxTextLength})`);
+    return editorState;
+  }
+  const fragment = contentFragment.getBlockMap();
   const selection = editorState.getSelection();
   let currentContentState = editorState.getCurrentContent();
   Object.entries(rawContent.entityMap).forEach(([, value]) => {
@@ -93,8 +106,24 @@ const handlePastedTextFromEditor = (html, editorState) => {
   return EditorState.push(editorState, content, 'insert-fragment');
 };
 
-const handlePastedTextFromOutsideEditor = (text, html, editorState, customHeadings) => {
-  const contentWithPaste = applyPasteOnContentState(editorState, html, text, customHeadings);
+const handlePastedTextFromOutsideEditor = ({
+  text,
+  html,
+  editorState,
+  customHeadings,
+  maxTextLength,
+  getSelectedText,
+}) => {
+  const contentFragment = html
+    ? draftConvertFromHtml(pastedContentConfig(customHeadings))(html)
+    : ContentState.createFromText(text);
+
+  if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength, getSelectedText })) {
+    // eslint-disable-next-line no-console
+    console.debug(`paste canceled due to maxTextLength exceeded (${maxTextLength})`);
+    return editorState;
+  }
+  const contentWithPaste = applyPasteOnContentState(editorState, contentFragment);
   const newContentState = clearUnnecessaryInlineStyles(contentWithPaste);
 
   return EditorState.forceSelection(
@@ -146,8 +175,23 @@ export const convertParsedEditorStateObjectToRawData = rawContent => {
 
 const isCopyFromEditor = html => !!getContent(html);
 
-export default (text, html, editorState, pasteWithoutAtomic, customHeadings) => {
+export default ({
+  text,
+  html,
+  editorState,
+  pasteWithoutAtomic,
+  customHeadings,
+  maxTextLength,
+  getSelectedText,
+}) => {
   return isCopyFromEditor(html) && !pasteWithoutAtomic
-    ? handlePastedTextFromEditor(html, editorState)
-    : handlePastedTextFromOutsideEditor(text, normalizeHTML(html), editorState, customHeadings);
+    ? handlePastedTextFromEditor(html, editorState, maxTextLength, getSelectedText)
+    : handlePastedTextFromOutsideEditor({
+        text,
+        html: normalizeHTML(html),
+        editorState,
+        customHeadings,
+        maxTextLength,
+        getSelectedText,
+      });
 };
