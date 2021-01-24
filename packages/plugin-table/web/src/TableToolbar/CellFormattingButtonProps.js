@@ -32,8 +32,8 @@ const DEFAULT_BORDER_COLOR = 'unset';
 
 const getColorsFromComponentData = (selected, table) => {
   const selectionStyle = table.getSelectionStyle(selected, DEFAULT_BG_COLOR, DEFAULT_BORDER_COLOR);
-  const bgColor = selectionStyle.selectionBGColor;
-  const borderColor = selectionStyle.selectionBorderColor;
+  const bgColor = selectionStyle.selectionBGColor || 'unset';
+  const borderColor = selectionStyle.selectionBorderColor || 'unset';
   const verticalAlignment = selectionStyle.selectionVerticalAlign;
   return {
     bgCurrentColor: bgColor,
