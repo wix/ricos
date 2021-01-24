@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "react-player": "~1.14.0",
+    "ricos-schema": "8.17.6",
     "wix-rich-content-common": "8.17.6",
     "wix-rich-content-editor-common": "8.17.6",
     "wix-rich-content-plugin-commons": "8.17.6"
