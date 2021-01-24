@@ -13,7 +13,6 @@ import toSnakeCase from 'to-snake-case';
 import { has } from 'lodash';
 import {
   RICOS_DIVIDER_TYPE,
-  RICOS_FILE_TYPE,
   RICOS_GALLERY_TYPE,
   RICOS_HTML_TYPE,
   RICOS_IMAGE_TYPE,
@@ -129,9 +128,6 @@ const getNodeEntityData = (node: RicosNode) => {
       break;
     case RICOS_DIVIDER_TYPE:
       migrateDividerData(data);
-      break;
-    case RICOS_FILE_TYPE:
-      migrateFileData(data);
       break;
     case RICOS_IMAGE_TYPE:
       migrateImageData(data);

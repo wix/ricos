@@ -6,7 +6,6 @@ import {
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
   DIVIDER_TYPE,
-  FILE_UPLOAD_TYPE,
   IMAGE_TYPE,
   IMAGE_TYPE_LEGACY,
   VERTICAL_EMBED_TYPE,
@@ -114,9 +113,6 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
       break;
     case DIVIDER_TYPE:
       migrateDividerData(data);
-      break;
-    case FILE_UPLOAD_TYPE:
-      migrateFileData(data);
       break;
     case IMAGE_TYPE:
     case IMAGE_TYPE_LEGACY:
