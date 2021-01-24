@@ -164,7 +164,12 @@ export default class Cell extends Component {
       <Tag
         data-hook={'table-plugin-cell'}
         ref={this.setTdRef}
-        className={classNames(styles.cell, isContainedInHeader && styles.header)}
+        className={classNames(
+          styles.cell,
+          isContainedInHeader && styles.header,
+          shouldShowSelectedStyle && styles.selected,
+          range?.length === 1 && styles.singleSelection
+        )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
@@ -180,12 +185,7 @@ export default class Cell extends Component {
         onKeyDown={this.onKeydown}
       >
         <div
-          className={classNames(
-            styles.editorWrapper,
-            !isMobile && isEditing && styles.editing,
-            shouldShowSelectedStyle && styles.selected,
-            range?.length === 1 && styles.singleSelection
-          )}
+          className={classNames(!isMobile && isEditing && styles.editing)}
           style={editorWrapperStyle}
         >
           <Editor
