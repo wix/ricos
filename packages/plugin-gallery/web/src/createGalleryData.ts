@@ -1,9 +1,8 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './defaults';
 import { GALLERY_TYPE } from './types';
-import { CreatePluginsDataMap } from 'wix-rich-content-common';
+import { CreatePluginsDataMap, migrateGalleryData } from 'wix-rich-content-common';
 import { RicosGallery } from 'ricos-schema';
-import { migrateGalleryData } from 'ricos-content';
 
 export const createGalleryData: CreatePluginsDataMap[typeof GALLERY_TYPE] = pluginData => {
   if (!pluginData) {
