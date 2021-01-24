@@ -12,13 +12,15 @@ message LinkPreviewConfig {
   Link link = 1 [required = true];
   string alignment = 2;
   string size = 3;
+  int32 width = 4;
 }
 
 message RicosLinkPreview {
-  string title = 1 [required = true];
-  string description = 2;
+  LinkPreviewConfig config = 1 [required = true];
+  string title = 2 [required = true];
   string thumbnail_url = 3 [required = true];
-  string provider_url = 4;
-  string html = 5;
-  LinkPreviewConfig config = 6 [required = true];
+  string description = 4;
+  string provider_url = 5;
+  string html = 6;
+  string socialType = 7;
 }

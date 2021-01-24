@@ -15,9 +15,22 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
 </details>
 <hr/>
+
+## 8.17.6 (Jan 22, 2021)
+### :rocket: New Feature
+- `ricos-content`
+  - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+### :house: Internal
+- `example`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
+- `storybook`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
+- `e2e`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert test-env to TypeScript
+
+
 
 ## 8.17.5 (Jan 20, 2021)
 ### :house: Internal
