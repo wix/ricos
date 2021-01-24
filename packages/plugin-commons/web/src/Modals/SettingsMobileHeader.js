@@ -22,7 +22,7 @@ const SettingsMobileHeader = ({
 
   return (
     <div role="menu" className={classNames(_styles.root)}>
-      {!isSettingsModal && <div className={_styles.headerPlaceholder} />}
+      <div className={_styles.headerPlaceholder} />
       <div
         className={classNames(_styles.header, {
           [styles.media]: isSettingsModal,
