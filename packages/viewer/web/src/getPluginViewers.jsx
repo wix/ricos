@@ -10,6 +10,7 @@ import {
   normalizeUrl,
   IMAGE_TYPE,
   GALLERY_TYPE,
+  isSSR,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -136,7 +137,7 @@ class PluginViewer extends PureComponent {
           let href;
           if (siteUrl) {
             href = `${siteUrl}#${anchorString}`;
-          } else {
+          } else if (!isSSR) {
             href = this.getUrlWithAnchorTag(anchorString);
           }
           containerProps = {
