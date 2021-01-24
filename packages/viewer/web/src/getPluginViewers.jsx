@@ -80,6 +80,12 @@ class PluginViewer extends PureComponent {
     );
   };
 
+  getUrlWithAnchorTag = anchorString => {
+    const url = new URL(window.location);
+    url.hash = anchorString;
+    return url;
+  };
+
   /* eslint-disable complexity */
   render() {
     const {
@@ -124,10 +130,17 @@ class PluginViewer extends PureComponent {
             rel: rel || relValue || 'noopener noreferrer',
           };
         }
-        if (hasAnchor && siteUrl) {
+        if (hasAnchor) {
           const { anchor } = config.link;
+          const anchorString = `viewer-${anchor}`;
+          let href;
+          if (siteUrl) {
+            href = `${siteUrl}#${anchorString}`;
+          } else {
+            href = this.getUrlWithAnchorTag(anchorString);
+          }
           containerProps = {
-            href: `${siteUrl}#viewer-${anchor}`,
+            href,
             target: '_self',
           };
         }

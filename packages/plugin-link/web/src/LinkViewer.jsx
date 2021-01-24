@@ -32,20 +32,28 @@ class LinkViewer extends Component {
     }
   }
 
+  getUrlWithAnchorTag = anchorString => {
+    const url = new URL(window.location);
+    url.hash = anchorString;
+    return url;
+  };
+
   handleClick = event => {
     const { componentData, isInEditor, config } = this.props;
-    const settings = config[LINK_TYPE];
-    const { onClick } = settings;
-    const { anchor, url } = componentData;
-    onClick?.(event, componentData?.customData || this.getHref(url, anchor));
-    if (anchor && !isInEditor) {
-      event.preventDefault();
-      const anchorString = `viewer-${anchor}`;
-      const url = new URL(window.location);
-      url.hash = anchorString;
-      history.pushState({}, null, url);
-      const element = document.getElementById(anchorString);
-      anchorScroll(element);
+    const settings = config?.[LINK_TYPE];
+    if (settings) {
+      const { onClick } = settings;
+      const { anchor, url } = componentData;
+      onClick?.(event, componentData?.customData || this.getHref(url, anchor));
+      if (anchor && !isInEditor) {
+        event.preventDefault();
+        const anchorString = `viewer-${anchor}`;
+        const url = this.getUrlWithAnchorTag(anchorString);
+        url.hash = anchorString;
+        history.pushState({}, null, url);
+        const element = document.getElementById(anchorString);
+        anchorScroll(element);
+      }
     }
   };
 
@@ -53,10 +61,17 @@ class LinkViewer extends Component {
     const siteUrl = this.props.config?.[LINK_TYPE]?.siteUrl;
     if (url) {
       return normalizeUrl(url);
-    } else if (siteUrl) {
-      return `${siteUrl}#viewer-${anchor}`;
+    }
+    if (anchor) {
+      const anchorString = `viewer-${anchor}`;
+      if (siteUrl) {
+        return `${siteUrl}#${anchorString}`;
+      } else {
+        return this.getUrlWithAnchorTag(anchorString);
+      }
     }
   }
+
   getTarget(anchor, target, anchorTarget) {
     if (anchor) {
       return '_self';
