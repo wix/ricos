@@ -80,12 +80,6 @@ class PluginViewer extends PureComponent {
     );
   };
 
-  getUrlWithAnchorTag = anchorString => {
-    const url = new URL(window.location);
-    url.hash = anchorString;
-    return url;
-  };
-
   /* eslint-disable complexity */
   render() {
     const {

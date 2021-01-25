@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { normalizeUrl, mergeStyles, validate, anchorScroll } from 'wix-rich-content-common';
+import {
+  normalizeUrl,
+  mergeStyles,
+  validate,
+  anchorScroll,
+  addAnchorTagToUrl,
+} from 'wix-rich-content-common';
 import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
 import { isEqual } from 'lodash';
 import styles from '../statics/link-viewer.scss';
@@ -40,8 +46,11 @@ class LinkViewer extends Component {
       const { anchor, url } = componentData;
       onClick?.(event, componentData?.customData || this.getHref(url, anchor));
       if (anchor && !isInEditor) {
-        const element = document.getElementById(`viewer-${anchor}`);
-        anchorScroll(event, element);
+        event.preventDefault();
+        const anchorString = `viewer-${anchor}`;
+        const element = document.getElementById(anchorString);
+        addAnchorTagToUrl(anchorString);
+        anchorScroll(element);
       }
     }
   };

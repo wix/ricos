@@ -1,9 +1,4 @@
-export const anchorScroll = (e, element) => {
-  e.preventDefault();
-  const url = getUrlWithAnchorTag(element.id);
-  if (url) {
-    history.pushState({}, '', url);
-  }
+export const anchorScroll = element => {
   const stickyHeaderHeight = document.querySelector('[id="SITE_HEADER"]')?.clientHeight || 0;
   const stickyAdd = document.querySelector('[id="WIX_ADS"]')?.clientHeight || 0;
   element.style.marginTop = `-${stickyHeaderHeight + stickyAdd}px`;
@@ -13,8 +8,8 @@ export const anchorScroll = (e, element) => {
   element.style.paddingTop = null;
 };
 
-const getUrlWithAnchorTag = anchorString => {
+export const addAnchorTagToUrl = anchorString => {
   const url = new URL(window.location.href);
   url.hash = anchorString;
-  return url.href;
+  history.pushState({}, '', url.href);
 };
