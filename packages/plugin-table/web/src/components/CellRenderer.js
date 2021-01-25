@@ -164,12 +164,7 @@ export default class Cell extends Component {
       <Tag
         data-hook={'table-plugin-cell'}
         ref={this.setTdRef}
-        className={classNames(
-          styles.cell,
-          isContainedInHeader && styles.header,
-          shouldShowSelectedStyle && styles.selected,
-          range?.length === 1 && styles.singleSelection
-        )}
+        className={classNames(styles.cell, isContainedInHeader && styles.header)}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
@@ -199,6 +194,15 @@ export default class Cell extends Component {
           </Editor>
         </div>
         <CellBorders borders={cellBorders} />
+        <div
+          style={{
+            height: shouldShowSelectedStyle ? this.tdRef?.offsetHeight : 0,
+          }}
+          className={classNames(
+            shouldShowSelectedStyle && styles.selected,
+            range?.length === 1 && styles.singleSelection
+          )}
+        />
       </Tag>
     );
   }

@@ -18,6 +18,11 @@
 </details>
 <hr/>
 
+## 8.17.8 (Jan 25, 2021)
+### :bug: Bug Fix
+- `table`
+  - [#2046](https://github.com/wix/ricos/pull/2046) cell selection background color style
+
 ## 8.17.7 (Jan 25, 2021)
 ### :bug: Bug Fix
 - `ricos-common`
