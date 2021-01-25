@@ -22,6 +22,9 @@
 ### :rocket: New Feature
 - `ricos-content`
   - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2041](https://github.com/wix/ricos/pull/2041) remove draft dependency in migration tool
 ### :house: Internal
 - `example`
   - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
