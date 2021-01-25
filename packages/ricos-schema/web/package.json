@@ -22,7 +22,7 @@
   "scripts": {
     "lint": ":",
     "clean": "rm -rf dist",
-    "build": "yarn clean && tsc && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateJSSchema.ts"
+    "build": "yarn clean && tsc && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateSchema.ts"
   },
   "unpkg": true,
   "publishConfig": {
