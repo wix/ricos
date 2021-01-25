@@ -32,6 +32,9 @@ type CustomLinkData = any;
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
+export const hasInlineStyle = (inlineStyle: string, editorState: EditorState) =>
+  editorState.getCurrentInlineStyle().has(inlineStyle);
+
 export function createSelection({
   blockKey,
   anchorOffset,
@@ -278,7 +281,7 @@ export const removeLinksInSelection = (editorState: EditorState) => {
   );
 };
 
-export const getTextAlignment = (editorState: EditorState, defaultAlignment = 'left') => {
+export const getTextAlignment = (editorState: EditorState, defaultAlignment = 'left'): string => {
   const selection = getSelection(editorState);
   const currentContent = editorState.getCurrentContent();
   const contentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -306,6 +309,12 @@ export const getAnchorBlockData = (editorState: EditorState) => {
   const anchorKey = editorState.getSelection().getAnchorKey();
   const block = editorState.getCurrentContent().getBlockForKey(anchorKey);
   return block.get('data').toJS();
+};
+
+export const updateEntityData = (editorState: EditorState, blockKey: string, data) => {
+  const block = editorState.getCurrentContent().getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(0);
+  return setEntityData(editorState, entityKey, data);
 };
 
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {

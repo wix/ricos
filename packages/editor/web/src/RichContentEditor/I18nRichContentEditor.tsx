@@ -22,6 +22,10 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   blur = () => this.editor.blur();
 
+  getEditorCommands = () => this.editor.EditorCommands;
+
+  getEditorState = () => this.editor.EditorState;
+
   // TODO: remove postId param once the getContent(postId) API is completely deprecated
   publish = (postId?: string) => this.editor.publish(postId); //async
 

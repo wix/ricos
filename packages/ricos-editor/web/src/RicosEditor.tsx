@@ -155,6 +155,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.setStaticToolbar(ref);
   };
 
+  getEditorCommands = () => this.editor.getEditorCommands();
+
+  getEditorState = () => this.editor.getEditorState();
+
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
     const { StaticToolbar, localeStrategy, remountKey, editorState } = this.state;

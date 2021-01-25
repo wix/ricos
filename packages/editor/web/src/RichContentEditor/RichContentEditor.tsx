@@ -6,6 +6,8 @@ import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
+import { createEditorCommands } from './EditorCommands';
+import { createEditorState } from './EditorState';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -60,6 +62,7 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  CreatePluginsDataMap,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -117,6 +120,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
+  createPluginsDataMap: CreatePluginsDataMap;
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -183,6 +187,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   customStyleFn: DraftEditorProps['customStyleFn'];
   toolbars;
   innerRCECustomStyleFn;
+  EditorCommands: ReturnType<typeof createEditorCommands>;
+  EditorState: ReturnType<typeof createEditorState>;
   getSelectedText: (editorState: EditorState) => string;
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
@@ -232,6 +238,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.initEditorCommands();
+    this.initEditorState();
   }
 
   componentDidUpdate() {
@@ -436,6 +444,19 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
     this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
+
+  initEditorCommands = () => {
+    const { createPluginsDataMap = {} } = this.props;
+    this.EditorCommands = createEditorCommands(
+      createPluginsDataMap,
+      this.getEditorState,
+      this.updateEditorState
+    );
+  };
+
+  initEditorState = () => {
+    this.EditorState = createEditorState(this.getEditorState);
+  };
 
   initEditorToolbars(
     pluginButtons: PluginButton[],
