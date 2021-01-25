@@ -80,10 +80,9 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 1. `cd ricos`
 1. `yarn` - installs all dependencies and links any cross-dependencies.
 1. Build the modules by running one of the following:
-   1. `npm run build` - build once and bundle
-   1. `npm run watch` - rebuild on changes
-1. Choose an [example](./examples/) and run:
-   1. `npm start`
+   1. `yarn build` - build once and bundle
+   1. `yarn watch` - rebuild on changes
+1. Run `yarn exampleApp` or `yarn storybook` to start the magic
 
 #### Examples
 
