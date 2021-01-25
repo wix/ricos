@@ -1,9 +1,8 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './consts';
-import { IMAGE_TYPE } from './types';
-import { CreatePluginsDataMap, migrateImageData } from 'wix-rich-content-common';
+import { CreatePluginsDataMap, RICOS_IMAGE_TYPE, migrateImageData } from 'wix-rich-content-common';
 //TODO: implement method
-export const createImageData: CreatePluginsDataMap[typeof IMAGE_TYPE] = pluginData => {
+export const createImageData: CreatePluginsDataMap[typeof RICOS_IMAGE_TYPE] = pluginData => {
   migrateImageData(pluginData);
   merge(DEFAULTS, pluginData);
   return undefined;

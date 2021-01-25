@@ -28,14 +28,20 @@ import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
   CODE_BLOCK_TYPE,
+  RICOS_DIVIDER_TYPE,
   DIVIDER_TYPE,
   EMOJI_TYPE,
+  RICOS_FILE_TYPE,
   FILE_UPLOAD_TYPE,
+  RICOS_GALLERY_TYPE,
   GALLERY_TYPE,
+  RICOS_GIPHY_TYPE,
   GIPHY_TYPE,
   HASHTAG_TYPE,
   HEADERS_MARKDOWN_TYPE,
+  RICOS_HTML_TYPE,
   HTML_TYPE,
+  RICOS_IMAGE_TYPE,
   IMAGE_TYPE,
   IMAGE_TYPE_LEGACY,
   INDENT_TYPE,
@@ -53,8 +59,10 @@ import {
   TEXT_HIGHLIGHT_TYPE,
   UNDO_REDO_TYPE,
   VERTICAL_EMBED_TYPE,
+  RICOS_VIDEO_TYPE,
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
+  RICOS_POLL_TYPE,
   POLL_TYPE,
   ACCORDION_TYPE,
   TABLE_TYPE,
@@ -166,26 +174,35 @@ export type CreatePluginData<PluginData> = (
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Record<string, any> | undefined;
 
+// TODO: remove legacy types after moving to prose
 export interface CreatePluginsDataMap {
+  [RICOS_DIVIDER_TYPE]?: CreatePluginData<RicosDivider>;
   [DIVIDER_TYPE]?: CreatePluginData<RicosDivider>;
+  [RICOS_GIPHY_TYPE]?: CreatePluginData<RicosGiphy>;
   [GIPHY_TYPE]?: CreatePluginData<RicosGiphy>;
+  [RICOS_HTML_TYPE]?: CreatePluginData<RicosHTML>;
   [HTML_TYPE]?: CreatePluginData<RicosHTML>;
+  [RICOS_GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
   [GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
+  [RICOS_POLL_TYPE]?: CreatePluginData<RicosPoll>;
   [POLL_TYPE]?: CreatePluginData<RicosPoll>;
+  [RICOS_VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
   [VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
+  [RICOS_FILE_TYPE]?: CreatePluginData<RicosFile>;
   [FILE_UPLOAD_TYPE]?: CreatePluginData<RicosFile>;
+  [RICOS_IMAGE_TYPE]?: CreatePluginData<RicosImage>;
   [IMAGE_TYPE]?: CreatePluginData<RicosImage>;
 }
 
 export interface PluginsDataMap {
-  [DIVIDER_TYPE]?: RicosDivider;
-  [GIPHY_TYPE]?: RicosGiphy;
-  [HTML_TYPE]?: RicosHTML;
-  [GALLERY_TYPE]?: RicosGallery;
-  [POLL_TYPE]?: RicosPoll;
-  [VIDEO_TYPE]?: RicosVideo;
-  [FILE_UPLOAD_TYPE]?: RicosFile;
-  [IMAGE_TYPE]?: RicosImage;
+  [RICOS_DIVIDER_TYPE]?: RicosDivider;
+  [RICOS_GIPHY_TYPE]?: RicosGiphy;
+  [RICOS_HTML_TYPE]?: RicosHTML;
+  [RICOS_GALLERY_TYPE]?: RicosGallery;
+  [RICOS_POLL_TYPE]?: RicosPoll;
+  [RICOS_VIDEO_TYPE]?: RicosVideo;
+  [RICOS_FILE_TYPE]?: RicosFile;
+  [RICOS_IMAGE_TYPE]?: RicosImage;
 }
 
 export type ModalsMap = Record<string, ComponentType>;

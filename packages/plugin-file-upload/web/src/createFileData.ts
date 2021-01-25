@@ -1,10 +1,9 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './defaults';
-import { FILE_UPLOAD_TYPE } from './types';
-import { CreatePluginsDataMap, migrateFileData } from 'wix-rich-content-common';
+import { CreatePluginsDataMap, RICOS_FILE_TYPE, migrateFileData } from 'wix-rich-content-common';
 import { RicosFile } from 'ricos-schema';
 
-export const createFileData: CreatePluginsDataMap[typeof FILE_UPLOAD_TYPE] = pluginData => {
+export const createFileData: CreatePluginsDataMap[typeof RICOS_FILE_TYPE] = pluginData => {
   if (!pluginData) {
     return undefined;
   }

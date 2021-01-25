@@ -1,10 +1,9 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './defaults';
-import { VIDEO_TYPE } from './types';
-import { CreatePluginsDataMap, migrateVideoData } from 'wix-rich-content-common';
+import { CreatePluginsDataMap, RICOS_VIDEO_TYPE, migrateVideoData } from 'wix-rich-content-common';
 import { RicosVideo } from 'ricos-schema';
 
-export const createVideoData: CreatePluginsDataMap[typeof VIDEO_TYPE] = pluginData => {
+export const createVideoData: CreatePluginsDataMap[typeof RICOS_VIDEO_TYPE] = pluginData => {
   if (!pluginData) {
     return undefined;
   }

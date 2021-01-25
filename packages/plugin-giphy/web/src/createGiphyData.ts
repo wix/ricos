@@ -1,10 +1,9 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './constants';
-import { GIPHY_TYPE } from './types';
-import { CreatePluginsDataMap, migrateGiphyData } from 'wix-rich-content-common';
+import { CreatePluginsDataMap, RICOS_GIPHY_TYPE, migrateGiphyData } from 'wix-rich-content-common';
 import { RicosGiphy } from 'ricos-schema';
 
-export const createGiphyData: CreatePluginsDataMap[typeof GIPHY_TYPE] = pluginData => {
+export const createGiphyData: CreatePluginsDataMap[typeof RICOS_GIPHY_TYPE] = pluginData => {
   if (!pluginData) {
     return undefined;
   }
