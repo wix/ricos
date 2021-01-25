@@ -10,7 +10,9 @@
     &.header {
         background-color: rgba($primary-text-color-tuple, 0.04);
     }
-
+    &.selected {
+        z-index: 2;
+    }
     .editing {
         box-shadow: 0 0 7px 0 rgba($primary-text-color-tuple, 0.1);
         border: solid 1px #DDD;
