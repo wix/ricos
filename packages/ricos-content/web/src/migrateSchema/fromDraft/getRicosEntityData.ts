@@ -17,7 +17,7 @@ import {
   LINK_PREVIEW_TYPE,
   SOUND_CLOUD_TYPE,
 } from '../../consts';
-import { TO_RICOS_ENTITY_TYPE_MAP, TO_RICOS_PLUGIN_TYPE_MAP } from '../consts';
+import { TO_RICOS_ENTITY_TYPE, TO_RICOS_PLUGIN_TYPE_MAP } from '../consts';
 import { has } from 'lodash';
 
 const migrateVideoData = data => {
@@ -89,7 +89,7 @@ const migrateSoundCloudData = data => {
 
 export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   const { type, data } = entityMap[key];
-  const dataFieldName = TO_RICOS_ENTITY_TYPE_MAP[type];
+  const dataFieldName = TO_RICOS_ENTITY_TYPE[type];
   if (!dataFieldName) {
     // eslint-disable-next-line no-console
     console.error(`ERROR! Unknown entity type "${type}"!`);

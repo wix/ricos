@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "ES5",
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "outDir": "dist"
+  },
+  "files": ["index.ts"]
+}

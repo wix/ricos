@@ -1,8 +1,10 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
 
-message RicosHeading {
+message HeadingData {
     int32 level = 1 [required = true];
     Common.TextAlignment textAlignment = 2;
     Common.DynamicStyles dynamicStyles = 3;

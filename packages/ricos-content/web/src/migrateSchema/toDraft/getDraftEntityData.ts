@@ -1,32 +1,19 @@
 /* eslint-disable fp/no-delete */
-import { RicosDecoration, RicosNode } from 'ricos-schema';
+import { Node } from 'ricos-schema';
 import {
   DRAFT_BLOCK_TYPE_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_MUTABILITY,
   FROM_RICOS_ENTITY_TYPE_MAP,
-  TO_RICOS_ENTITY_TYPE_MAP,
+  TO_RICOS_ENTITY_TYPE,
 } from '../consts';
 import toCamelCase from 'to-camel-case';
 import toSlugCase from 'to-slug-case';
 import toSnakeCase from 'to-snake-case';
 import { has } from 'lodash';
-import {
-  RICOS_DIVIDER_TYPE,
-  RICOS_GALLERY_TYPE,
-  RICOS_HTML_TYPE,
-  RICOS_IMAGE_TYPE,
-  RICOS_LINK_PREVIEW_TYPE,
-  RICOS_POLL_TYPE,
-  RICOS_VERTICAL_EMBED_TYPE,
-  RICOS_VIDEO_TYPE,
-  MENTION_TYPE,
-  RICOS_GIPHY_TYPE,
-  RicosEntity,
-  RicosEntityMap,
-  RICOS_SOUND_CLOUD_TYPE,
-} from '../..';
+import { MENTION_TYPE, RicosEntity, RicosEntityMap } from '../..';
 import { DraftBlockType } from 'draft-js';
+import { DraftTypedDecoration } from './decorationParsers';
 
 const migrateVideoData = data => {
   if (data.url) {
@@ -106,10 +93,10 @@ const migrateSoundCloudData = data => {
   }
 };
 
-const getNodeEntityData = (node: RicosNode) => {
+const getNodeEntityData = (node: Node) => {
   const { type } = node;
   const draftPluginType = FROM_RICOS_ENTITY_TYPE_MAP[type];
-  const dataFieldName = TO_RICOS_ENTITY_TYPE_MAP[draftPluginType];
+  const dataFieldName = TO_RICOS_ENTITY_TYPE[draftPluginType];
   if (!dataFieldName) {
     // eslint-disable-next-line no-console
     console.error(`ERROR! Unknown entity type "${type}"!`);
@@ -118,34 +105,34 @@ const getNodeEntityData = (node: RicosNode) => {
   const data = node[dataFieldName];
 
   switch (type) {
-    case RICOS_VIDEO_TYPE:
+    case Node.Type.VIDEO:
       migrateVideoData(data);
       break;
-    case RICOS_DIVIDER_TYPE:
+    case Node.Type.DIVIDER:
       migrateDividerData(data);
       break;
-    case RICOS_IMAGE_TYPE:
+    case Node.Type.IMAGE:
       migrateImageData(data);
       break;
-    case RICOS_GALLERY_TYPE:
+    case Node.Type.GALLERY:
       migrateGalleryData(data);
       break;
-    case RICOS_POLL_TYPE:
+    case Node.Type.POLL:
       migratePollData(data);
       break;
-    case RICOS_VERTICAL_EMBED_TYPE:
+    case Node.Type.VERTICAL_EMBED:
       migrateVerticalEmbedData(data);
       break;
-    case RICOS_HTML_TYPE:
+    case Node.Type.HTML:
       migrateHtmlData(data);
       break;
-    case RICOS_GIPHY_TYPE:
+    case Node.Type.GIPHY:
       migrateGiphyData(data);
       break;
-    case RICOS_LINK_PREVIEW_TYPE:
+    case Node.Type.LINK_PREVIEW:
       migrateLinkPreviewData(data);
       break;
-    case RICOS_SOUND_CLOUD_TYPE:
+    case Node.Type.SOUND_CLOUD:
       migrateSoundCloudData(data);
       break;
     default:
@@ -155,7 +142,7 @@ const getNodeEntityData = (node: RicosNode) => {
 };
 
 export const createDecorationEntityData = (
-  decoration: RicosDecoration,
+  decoration: DraftTypedDecoration,
   entityKey: number
 ): RicosEntityMap => {
   const { type } = decoration;
@@ -181,12 +168,12 @@ export const createDecorationEntityData = (
   return createEntity(entityKey, { type, mutability, data });
 };
 
-export const createAtomicEntityData = (node: RicosNode, entityKey: number): RicosEntityMap => {
+export const createAtomicEntityData = (node: Node, entityKey: number): RicosEntityMap => {
   const { type, data } = getNodeEntityData(node);
   return createEntity(entityKey, { type, mutability: 'IMMUTABLE', data });
 };
 
-export const createTextBlockData = (node: RicosNode, blockType: DraftBlockType) => {
+export const createTextBlockData = (node: Node, blockType: DraftBlockType) => {
   const { textAlignment, dynamicStyles, depth } =
     node[DRAFT_BLOCK_TYPE_TO_DATA_FIELD[blockType]] || {};
   return Object.assign(

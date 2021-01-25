@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package rich_content;
+
+import "google/protobuf/timestamp.proto";
+import "common.proto";
+import "selection.proto";
+import "decorations/anchor.proto";
+import "decorations/color.proto";
+import "decorations/link.proto";
+import "decorations/mention.proto";
+import "nodes/code.proto";
+import "nodes/heading.proto";
+import "nodes/paragraph.proto";
+import "plugins/button.proto";
+import "plugins/divider.proto";
+import "plugins/file.proto";
+import "plugins/gallery.proto";
+import "plugins/giphy.proto";
+import "plugins/html.proto";
+import "plugins/image.proto";
+import "plugins/link_preview.proto";
+import "plugins/map.proto";
+import "plugins/poll.proto";
+import "plugins/sound_cloud.proto";
+import "plugins/vertical_embed.proto";
+import "plugins/video.proto";
+
+message RichContent {
+    repeated Node nodes = 1 [required = true]; /// List of nodes
+    google.protobuf.Timestamp last_edited = 2 [required = true]; /// Time of latest edit
+    string created_version = 3 [required = true]; /// Rich Content version used to create this schema
+    string updated_version = 4 [required = true]; /// Rich Content version last used to update this schema
+}
+
+message Node {
+    enum Type {
+        PARAGRAPH = 0;
+        TEXT = 1;
+        HEADING = 2;
+        BULLET_LIST = 3;
+        ORDERED_LIST = 4;
+        LIST_ITEM = 5;
+        BLOCKQUOTE = 6;
+        CODEBLOCK = 7;
+        VIDEO = 8;
+        DIVIDER = 9;
+        FILE = 10;
+        GALLERY = 11;
+        GIPHY = 12;
+        HTML = 13;
+        IMAGE = 14;
+        LINK_PREVIEW = 15;
+        MAP = 16;
+        POLL = 17;
+        SOUND_CLOUD = 18;
+        VERTICAL_EMBED = 19;
+        ACTION_BUTTON = 20;
+        LINK_BUTTON = 21;
+        ACCORDION = 22;
+        TABLE = 23;
+    }
+
+    Type type = 1 [required = true]; /// Node type
+    string key = 2 [required = true]; /// Node unique indentifier
+    repeated Node nodes = 3 [required = true]; /// List of child nodes
+    oneof data {
+        ButtonData button_data = 4;
+        CodeData code_data = 5;
+        DividerData divider_data = 6;
+        FileData file_data = 7;
+        GalleryData gallery_data = 8;
+        GiphyData giphy_data = 9;
+        HeadingData heading_data = 10;
+        HTMLData html_data = 11;
+        ImageData image_data = 12;
+        LinkPreviewData link_preview_data = 13;
+        MapData map_data = 14;
+        ParagraphData paragraph_data = 15;
+        PollData poll_data = 16;
+        SoundCloudData sound_cloud_data = 17;
+        TextData text_data = 18;
+        VerticalEmbedData vertical_embed_data = 19;
+        VideoData video_data = 20;
+    }
+}
+
+message TextData {
+    string text = 1 [required = true]; /// Textual data
+    repeated Decoration decorations = 2; /// List of decorations
+}
+
+/// Adds appearence changes to text
+message Decoration {
+    enum Type {
+        BOLD = 0;
+        ITALIC = 1;
+        UNDERLINE = 2;
+        SPOILER = 3;
+        ANCHOR = 4;
+        MENTION = 5;
+        LINK = 6;
+        COLOR = 7;
+    }
+
+    Type type = 1 [required = true]; /// Decoration type
+    oneof data {
+        AnchorData anchor_data = 2;
+        ColorData color_data = 3;
+        LinkData link_data = 4;
+        MentionData mention_data = 5;
+    }
+}

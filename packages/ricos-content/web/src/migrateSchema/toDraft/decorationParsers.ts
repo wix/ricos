@@ -1,14 +1,18 @@
 /* eslint-disable no-console */
-import { RicosDecoration, RicosNode } from 'ricos-schema';
+import { Decoration, Node } from 'ricos-schema';
 import { RicosInlineStyleRange, RicosEntityRange, RicosEntityMap } from '../..';
 import { FROM_RICOS_DECORATION_TYPE, ENTITY_DECORATION_TO_DATA_FIELD } from '../consts';
 import { emojiRegex } from '../emojiRegex';
 import { createDecorationEntityData } from './getDraftEntityData';
 
-export interface RangedDecoration extends RicosDecoration {
+export interface DraftTypedDecoration extends Omit<Decoration, 'type'> {
+  type: string;
+}
+
+export interface RangedDecoration extends DraftTypedDecoration {
   start: number;
   end: number;
-  ricosEmoji?: { emojiUnicode: string };
+  emojiData?: { emojiUnicode: string };
 }
 
 interface RangedDecorationMap {
@@ -20,7 +24,7 @@ const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
 };
 
 export const mergeTextNodes = (
-  nodes: RicosNode[]
+  nodes: Node[]
 ): { text: string; decorationMap: RangedDecorationMap } => {
   let length = 0;
   return nodes.reduce<{
@@ -29,8 +33,8 @@ export const mergeTextNodes = (
   }>(
     ({ text, decorationMap }, currNode) => {
       let accText = text;
-      if (currNode.ricosText) {
-        const { text: currText, decorations: currDecorations } = currNode.ricosText;
+      if (currNode.textData) {
+        const { text: currText, decorations: currDecorations } = currNode.textData;
         const textLength = Array.from(currText).length; // required for properly reading emojis
         accText += currText;
         if (currDecorations) {
@@ -143,8 +147,8 @@ export const parseEntityDecorations = (
   };
 };
 
-export const getParagraphNode = (node: RicosNode) => {
-  if (node.nodes[0].type === 'paragraph') {
+export const getParagraphNode = (node: Node) => {
+  if (node.nodes[0].type === Node.Type.PARAGRAPH) {
     return node.nodes[0];
   } else {
     console.log(`ERROR! Expected a paragraph node but found ${node.nodes[0].type}`);
@@ -152,7 +156,7 @@ export const getParagraphNode = (node: RicosNode) => {
   }
 };
 
-const convertDecorationTypes = (decorations: RicosDecoration[]): RicosDecoration[] =>
+const convertDecorationTypes = (decorations: Decoration[]): DraftTypedDecoration[] =>
   decorations.flatMap(decoration => pipe(decoration, toDraftDecorationType, splitColorDecoration));
 
 const createEmojiDecorations = (text: string) =>
@@ -160,7 +164,7 @@ const createEmojiDecorations = (text: string) =>
     if (start) {
       const decoration: RangedDecoration = {
         type: 'EMOJI_TYPE',
-        ricosEmoji: { emojiUnicode },
+        emojiData: { emojiUnicode },
         start,
         end: start + Array.from(emojiUnicode).length,
       };
@@ -169,21 +173,19 @@ const createEmojiDecorations = (text: string) =>
     return [];
   });
 
-const toDraftDecorationType = (decoration: RicosDecoration): RicosDecoration => {
-  if (FROM_RICOS_DECORATION_TYPE[decoration.type]) {
-    decoration.type = FROM_RICOS_DECORATION_TYPE[decoration.type];
-  }
-  return decoration;
-};
+const toDraftDecorationType = (decoration: Decoration): DraftTypedDecoration => ({
+  ...decoration,
+  type: FROM_RICOS_DECORATION_TYPE[decoration.type],
+});
 
 const splitColorDecoration = ({
-  ricosColor,
+  colorData,
   ...decoration
-}: RicosDecoration): RicosDecoration | RicosDecoration[] => {
-  if (!ricosColor) {
+}: DraftTypedDecoration): DraftTypedDecoration | DraftTypedDecoration[] => {
+  if (!colorData) {
     return decoration;
   }
-  const { foreground, background } = ricosColor;
+  const { foreground, background } = colorData;
   return [foreground && { FG: foreground }, background && { BG: background }]
     .filter(x => x)
     .map(type => ({ ...decoration, type: JSON.stringify(type) }));

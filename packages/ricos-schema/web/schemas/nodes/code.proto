@@ -1,9 +1,10 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
 
-message RicosParagraph {
+message CodeData {
     Common.TextAlignment textAlignment = 1;
     Common.DynamicStyles dynamicStyles = 2;
-    int32 depth = 3;
 }

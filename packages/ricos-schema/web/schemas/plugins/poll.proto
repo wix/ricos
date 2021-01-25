@@ -1,8 +1,16 @@
 syntax = "proto3";
 
-import "../common.proto";
+package rich_content;
 
 import "../common.proto";
+
+message PollData {
+  PollConfig config = 1 [required = true];
+  Poll poll = 2 [required = true];
+  PollWidgetLayout layout = 3 [required = true];
+  PollWidgetDesign design = 4 [required = true];
+  string site_token = 5;
+}
 
 message PollConfig {
     bool enable_vote_role = 1;
@@ -62,7 +70,7 @@ message PollConfig {
     PollOptionLayout option = 2;
   }
 
-  message PollData {    
+  message Poll {    
     int32 anonymous_count = 1;
     int32 count = 2;
     string created_by = 3;
@@ -95,12 +103,4 @@ message PollConfig {
     
     PollDesign poll = 1;
     PollOptionDesign option = 2;
-}
-
-message RicosPoll {
-  PollConfig config = 1 [required = true];
-  PollData poll = 2 [required = true];
-  PollWidgetLayout layout = 3 [required = true];
-  PollWidgetDesign design = 4 [required = true];
-  string site_token = 5;
 }

@@ -7,6 +7,7 @@ import complexFixture from '../../../../../../e2e/tests/fixtures/migration-conte
 import { getTextNodes } from './getTextNodes';
 import ricosFixture from './migratedFixtures/intro.json';
 import complexRicosFixture from './migratedFixtures/migration-content.json';
+import { Decoration } from 'ricos-schema';
 
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
@@ -47,38 +48,38 @@ describe('migrate from draft', () => {
     };
 
     const expectedResults = [
-      { key: '2k4v1', nodes: [], ricosText: { decorations: [], text: 'bla' }, type: 'text' },
+      { key: '2k4v1', nodes: [], textData: { decorations: [], text: 'bla' }, type: 'text' },
       {
         key: '1ba7b',
         nodes: [],
-        ricosText: { decorations: [{ type: 'italic' }], text: 'h ' },
+        textData: { decorations: [{ type: 'italic' }], text: 'h ' },
         type: 'text',
       },
       {
         key: '59lhm',
         nodes: [],
-        ricosText: { decorations: [{ type: 'italic' }, { type: 'underline' }], text: 'b' },
+        textData: { decorations: [{ type: 'italic' }, { type: 'underline' }], text: 'b' },
         type: 'text',
       },
       {
         key: '1agl0',
         nodes: [],
-        ricosText: { decorations: [{ type: 'underline' }], text: 'la' },
+        textData: { decorations: [{ type: 'underline' }], text: 'la' },
         type: 'text',
       },
       {
         key: '1m39g',
         nodes: [],
-        ricosText: { decorations: [{ type: 'underline' }, { type: 'bold' }], text: 'h ' },
+        textData: { decorations: [{ type: 'underline' }, { type: 'bold' }], text: 'h ' },
         type: 'text',
       },
       {
         key: '8cr95',
         nodes: [],
-        ricosText: { decorations: [{ type: 'bold' }], text: 'bl' },
+        textData: { decorations: [{ type: 'bold' }], text: 'bl' },
         type: 'text',
       },
-      { key: 'dkn86', nodes: [], ricosText: { decorations: [], text: 'ah' }, type: 'text' },
+      { key: 'dkn86', nodes: [], textData: { decorations: [], text: 'ah' }, type: 'text' },
     ];
 
     const entityMap = {};
@@ -115,24 +116,24 @@ describe('migrate from draft', () => {
     };
 
     const expectedResult = [
-      { nodes: [], ricosText: { decorations: [], text: 'Mentions too ' }, type: 'text' },
+      { nodes: [], textData: { decorations: [], text: 'Mentions too ' }, type: 'text' },
       {
         nodes: [],
-        ricosText: {
+        textData: {
           decorations: [
             {
-              ricosMention: {
+              mentionData: {
                 name: 'Test One',
                 slug: 'testone',
               },
-              type: 'ricos_mention',
+              type: Decoration.Type.MENTION,
             },
           ],
           text: '@Test One',
         },
         type: 'text',
       },
-      { nodes: [], ricosText: { decorations: [], text: ' ' }, type: 'text' },
+      { nodes: [], textData: { decorations: [], text: ' ' }, type: 'text' },
     ];
     expect(filterKeys(getTextNodes(block, entityMap))).toEqual(expectedResult);
   });

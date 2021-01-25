@@ -1,14 +1,5 @@
-import { RicosContent, VideoSource } from 'ricos-schema';
-import { RicosContent as RicosContentDraft } from '..';
-import {
-  RICOS_IMAGE_TYPE,
-  RICOS_VIDEO_TYPE,
-  RICOS_GIPHY_TYPE,
-  RICOS_MAP_TYPE,
-  RICOS_VERTICAL_EMBED_TYPE,
-  RICOS_LINK_PREVIEW_TYPE,
-  RICOS_SOUND_CLOUD_TYPE,
-} from '../consts';
+import { RichContent, VideoSource, Node } from 'ricos-schema';
+import { RicosContent } from '..';
 import { getParagraphNode } from '../migrateSchema/toDraft/decorationParsers';
 import {
   parseGiphy,
@@ -21,7 +12,6 @@ import {
   parseVerticalEmbed,
   parseVideo,
 } from './convertNodes';
-import { NodeType } from '../migrateSchema/consts';
 import { ensureRicosContent } from '../migrateSchema';
 
 interface PlainTextOptions {
@@ -30,13 +20,11 @@ interface PlainTextOptions {
 }
 
 export const toPlainText = async (
-  content: RicosContent | RicosContentDraft,
+  content: RichContent | RicosContent,
   options?: PlainTextOptions
 ): Promise<string> => {
   const ricosContent = ensureRicosContent(content);
-  const {
-    doc: { nodes },
-  } = ricosContent;
+  const { nodes } = ricosContent;
   let plainText = '';
 
   const parseNodes = async (index = 0) => {
@@ -46,37 +34,37 @@ export const toPlainText = async (
         plainText += '\n';
       }
       switch (node.type) {
-        case NodeType.CodeBlock:
-        case NodeType.Paragraph:
-        case NodeType.Heading:
+        case Node.Type.CODEBLOCK:
+        case Node.Type.PARAGRAPH:
+        case Node.Type.HEADING:
           plainText += parseTextNodes(node);
           break;
-        case NodeType.Blockquote:
+        case Node.Type.BLOCKQUOTE:
           plainText += parseTextNodes(getParagraphNode(node));
           break;
-        case NodeType.OrderedList:
-        case NodeType.UnorderedList:
+        case Node.Type.ORDERED_LIST:
+        case Node.Type.BULLET_LIST:
           plainText += parseListNode(node);
           break;
-        case RICOS_IMAGE_TYPE:
+        case Node.Type.IMAGE:
           plainText += await parseImage(node, options?.urlShortener);
           break;
-        case RICOS_VIDEO_TYPE:
+        case Node.Type.VIDEO:
           plainText += await parseVideo(node, options?.getVideoUrl);
           break;
-        case RICOS_SOUND_CLOUD_TYPE:
+        case Node.Type.SOUND_CLOUD:
           plainText += parseSoundCloud(node);
           break;
-        case RICOS_GIPHY_TYPE:
+        case Node.Type.GIPHY:
           plainText += parseGiphy(node);
           break;
-        case RICOS_MAP_TYPE:
+        case Node.Type.MAP:
           plainText += parseMap(node);
           break;
-        case RICOS_VERTICAL_EMBED_TYPE:
+        case Node.Type.VERTICAL_EMBED:
           plainText += parseVerticalEmbed(node);
           break;
-        case RICOS_LINK_PREVIEW_TYPE:
+        case Node.Type.LINK_PREVIEW:
           plainText += parseLinkPreview(node);
           break;
         default:
