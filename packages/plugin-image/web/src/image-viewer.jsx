@@ -230,7 +230,7 @@ class ImageViewer extends React.Component {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.('expand_image', IMAGE_TYPE);
-    onExpand?.(this.props.entityIndex);
+    onExpand?.(this.props.blockKey);
   };
 
   scrollToAnchor = () => {
@@ -352,6 +352,7 @@ ImageViewer.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
   seoMode: PropTypes.bool,
+  blockKey: PropTypes.string,
 };
 
 export default ImageViewer;
