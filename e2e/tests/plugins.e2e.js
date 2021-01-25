@@ -899,5 +899,24 @@ describe('plugins', () => {
       cy.clickOnTableToolbarContextMenuDeleteRow();
       cy.eyesCheckWindow(this.test.title);
     });
+
+    it('should use cell alignment', function() {
+      cy.loadRicosEditorAndViewer('table-alignment', usePlugins(plugins.all));
+      cy.focusTable();
+      cy.focusCell(0);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_BOTTOM);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_TOP);
+      cy.focusCell(1);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_MIDDLE);
+      cy.focusCell(2);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_BOTTOM);
+      cy.eyesCheckWindow(this.test.title);
+      cy.editCell(0);
+      cy.eyesCheckWindow(this.test.title);
+      cy.editCell(1);
+      cy.eyesCheckWindow(this.test.title);
+      cy.editCell(2);
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 });
