@@ -10,12 +10,6 @@
     &.header {
         background-color: rgba($primary-text-color-tuple, 0.04);
     }
-}
-
-.editorWrapper {
-    height: 100%;
-    width: 100%;
-    position: absolute;
     &.selected {
         z-index: 1;
     }
@@ -42,6 +36,7 @@
     &.edit {
         caret-color: unset;
         padding: 10px 26px 10px 29px;
+        width: 100%;
         @media only screen and (max-width: 640px) {
             padding: 10px 0px 10px 10px;
         }
