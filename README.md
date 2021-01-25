@@ -77,7 +77,6 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 
 ### Run Locally
 
-1. `cd ricos`
 1. `yarn` - installs all dependencies and links any cross-dependencies.
 1. Build the modules by running one of the following:
    1. `yarn build` - build once and bundle
