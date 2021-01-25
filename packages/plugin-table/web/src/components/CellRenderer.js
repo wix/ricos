@@ -166,9 +166,9 @@ export default class Cell extends Component {
         ref={this.setTdRef}
         className={classNames(
           styles.cell,
+          isContainedInHeader && styles.header,
           shouldShowSelectedStyle && styles.selected,
-          range?.length === 1 && styles.singleSelection,
-          isContainedInHeader && styles.header
+          range?.length === 1 && styles.singleSelection
         )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}

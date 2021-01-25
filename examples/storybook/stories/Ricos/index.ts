@@ -8,6 +8,7 @@ import RicosMediaStory from './RicosMediaStory';
 import RicosContent from './RicosContentStory';
 import MountedRicosContent from './MountedRicosContent';
 import PlainTextStory from './PlainTextStory';
+import MaxTextLengthStory from './MaxTextLengthStory';
 
 storiesOf('Ricos', module)
   .add('Basic Usage', BasicUsageStory)
@@ -18,4 +19,5 @@ storiesOf('Ricos', module)
   .add('Ricos Media', RicosMediaStory)
   .add('Ricos Content', RicosContent)
   .add('Mounted Ricos Content Change', MountedRicosContent)
+  .add('maxTextLength Demo', MaxTextLengthStory)
   .add('Plain Text Converter', PlainTextStory);

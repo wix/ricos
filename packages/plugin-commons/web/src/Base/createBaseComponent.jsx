@@ -377,7 +377,12 @@ const createBaseComponent = ({
 
       return withHorizontalScroll ? (
         <div className={styles.horizontalScrollbarWrapper}>
-          <div className={styles.pluginWithHorizontalScrollbar}>{component}</div>
+          <div
+            data-id={'horizontal-scrollbar-element'}
+            className={styles.pluginWithHorizontalScrollbar}
+          >
+            {component}
+          </div>
         </div>
       ) : (
         component

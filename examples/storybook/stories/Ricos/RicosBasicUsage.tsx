@@ -5,8 +5,14 @@ import { pluginDivider } from 'wix-rich-content-plugin-divider';
 const DividerEditor: FunctionComponent<{
   content?: RicosContent;
   injectedContent?: RicosContent;
-}> = ({ content, injectedContent }) => (
-  <RicosEditor plugins={[pluginDivider()]} content={content} injectedContent={injectedContent} />
+  maxTextLength?: number;
+}> = ({ content, injectedContent, maxTextLength }) => (
+  <RicosEditor
+    plugins={[pluginDivider()]}
+    content={content}
+    injectedContent={injectedContent}
+    maxTextLength={maxTextLength}
+  />
 );
 
 export default DividerEditor;

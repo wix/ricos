@@ -29,7 +29,10 @@ describe('Paste text tests', () => {
     const blockKey = '6hc2b';
     const selection = SelectionState.createEmpty(blockKey);
     const editorStateWithSelection = EditorState.forceSelection(editorState, selection);
-    const pastedEditorState = handlePastedText('3000', undefined, editorStateWithSelection);
+    const pastedEditorState = handlePastedText({
+      text: '3000',
+      editorState: editorStateWithSelection,
+    });
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(expectedRaw);
   });
@@ -39,13 +42,12 @@ describe('Paste text tests', () => {
     const blockKey = '4lirv';
     const selection = SelectionState.createEmpty(blockKey);
     const editorStateWithSelection = EditorState.forceSelection(editorState, selection);
-    const pastedEditorState = handlePastedText(
-      '',
-      headerWithAlignmentGoogleDocsHTML,
-      editorStateWithSelection,
-      undefined,
-      allHeaders
-    );
+    const pastedEditorState = handlePastedText({
+      text: '',
+      html: headerWithAlignmentGoogleDocsHTML,
+      editorState: editorStateWithSelection,
+      customHeadings: allHeaders,
+    });
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(headerWithAlignmentGoogleDocsExpectedRaw);
   });
@@ -55,13 +57,12 @@ describe('Paste text tests', () => {
     const blockKey = '4lirv';
     const selection = SelectionState.createEmpty(blockKey);
     const editorStateWithSelection = EditorState.forceSelection(editorState, selection);
-    const pastedEditorState = handlePastedText(
-      '',
-      headerWithAlignmentWordHTML,
-      editorStateWithSelection,
-      undefined,
-      allHeaders
-    );
+    const pastedEditorState = handlePastedText({
+      text: '',
+      html: headerWithAlignmentWordHTML,
+      editorState: editorStateWithSelection,
+      customHeadings: allHeaders,
+    });
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(headerWithAlignmentWordExpectedRaw);
   });
@@ -71,16 +72,33 @@ describe('Paste text tests', () => {
     const blockKey = '4lirv';
     const selection = SelectionState.createEmpty(blockKey);
     const editorStateWithSelection = EditorState.forceSelection(editorState, selection);
-    const pastedEditorState = handlePastedText(
-      '',
-      textWithLineSpacingWordHTML,
-      editorStateWithSelection
-    );
+    const pastedEditorState = handlePastedText({
+      text: '',
+      html: textWithLineSpacingWordHTML,
+      editorState: editorStateWithSelection,
+    });
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(textWithLineSpacingWordExpectedRaw);
   });
 
   it('should convert raw content of accordion (from EditorState JSON object to rawData) correctly', () => {
     expect(convertParsedEditorStateObjectToRawData(rawContent)).toEqual(expectedRawContent);
+  });
+
+  it('should cancel paste if the pasted text exceeds the maxTextLength', () => {
+    const editorState = EditorState.createWithContent(convertFromRaw(emptyRaw));
+    const blockKey = '4lirv';
+    const selection = SelectionState.createEmpty(blockKey);
+    const editorStateWithSelection = EditorState.forceSelection(editorState, selection);
+    const pastedEditorState = handlePastedText({
+      text: '123456',
+      html: headerWithAlignmentWordHTML,
+      editorState: editorStateWithSelection,
+      customHeadings: allHeaders,
+      maxTextLength: 5,
+      getSelectedText: () => '',
+    });
+    const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
+    expect(pastedRaw).toEqual(convertToRaw(editorState.getCurrentContent()));
   });
 });

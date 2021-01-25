@@ -18,6 +18,11 @@
 </details>
 <hr/>
 
+## 8.17.7 (Jan 25, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2041](https://github.com/wix/ricos/pull/2041) remove draft dependency in migration tool
+
 ## 8.17.6 (Jan 22, 2021)
 ### :rocket: New Feature
 - `ricos-content`
@@ -29,8 +34,6 @@
   - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
 - `e2e`
   - [#2026](https://github.com/wix/ricos/pull/2026) convert test-env to TypeScript
-
-
 
 ## 8.17.5 (Jan 20, 2021)
 ### :house: Internal
