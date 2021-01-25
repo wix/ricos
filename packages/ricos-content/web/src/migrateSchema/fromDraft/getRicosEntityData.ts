@@ -6,6 +6,7 @@ import {
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
   DIVIDER_TYPE,
+  FILE_UPLOAD_TYPE,
   IMAGE_TYPE,
   IMAGE_TYPE_LEGACY,
   VERTICAL_EMBED_TYPE,
@@ -35,6 +36,11 @@ const migrateVideoData = data => {
 
 const migrateDividerData = data => {
   has(data, 'type') && (data.type = toConstantCase(data.type));
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
+};
+
+const migrateFileData = data => {
   has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };
@@ -108,6 +114,9 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
       break;
     case DIVIDER_TYPE:
       migrateDividerData(data);
+      break;
+    case FILE_UPLOAD_TYPE:
+      migrateFileData(data);
       break;
     case IMAGE_TYPE:
     case IMAGE_TYPE_LEGACY:

@@ -13,6 +13,7 @@ import toSnakeCase from 'to-snake-case';
 import { has } from 'lodash';
 import {
   RICOS_DIVIDER_TYPE,
+  RICOS_FILE_TYPE,
   RICOS_GALLERY_TYPE,
   RICOS_HTML_TYPE,
   RICOS_IMAGE_TYPE,
@@ -28,7 +29,7 @@ import {
 } from '../..';
 import { DraftBlockType } from 'draft-js';
 
-const migrateVideoData = data => {
+export const migrateVideoData = data => {
   if (data.url) {
     data.src = data.url;
     delete data.url;
@@ -40,13 +41,18 @@ const migrateVideoData = data => {
   }
 };
 
-const migrateDividerData = data => {
+export const migrateDividerData = data => {
   has(data, 'type') && (data.type = toCamelCase(data.type));
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
 
-const migrateImageData = data => {
+export const migrateFileData = data => {
+  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+};
+
+export const migrateImageData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
   if (has(data, 'src.originalFileName')) {
@@ -59,12 +65,12 @@ const migrateImageData = data => {
   }
 };
 
-const migrateGalleryData = data => {
+export const migrateGalleryData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
 
-const migratePollData = data => {
+export const migratePollData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
   has(data, 'layout.poll.type') && (data.layout.poll.type = toCamelCase(data.layout.poll.type));
@@ -78,11 +84,11 @@ const migrateVerticalEmbedData = data => {
   has(data, 'type') && (data.type = toCamelCase(data.type));
 };
 
-const migrateHtmlData = data => {
+export const migrateHtmlData = data => {
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
 
-const migrateGiphyData = data => {
+export const migrateGiphyData = data => {
   has(data, 'configViewer.sizes.desktop') &&
     (data.configViewer.sizes.desktop = toCamelCase(data.configViewer.sizes.desktop));
   has(data, 'configViewer.sizes.mobile') &&
@@ -123,6 +129,9 @@ const getNodeEntityData = (node: RicosNode) => {
       break;
     case RICOS_DIVIDER_TYPE:
       migrateDividerData(data);
+      break;
+    case RICOS_FILE_TYPE:
+      migrateFileData(data);
       break;
     case RICOS_IMAGE_TYPE:
       migrateImageData(data);
