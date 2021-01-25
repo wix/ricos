@@ -55,14 +55,7 @@ class LinkViewer extends Component {
     }
   };
 
-  getHref(url, anchor) {
-    if (url) {
-      return normalizeUrl(url);
-    }
-    if (anchor) {
-      return `#viewer-${anchor}`;
-    }
-  }
+  getHref = (url, anchor) => (url ? normalizeUrl(url) : `#viewer-${anchor}`);
 
   getTarget(anchor, target, anchorTarget) {
     if (anchor) {
