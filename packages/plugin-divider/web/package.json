@@ -37,7 +37,9 @@
   "dependencies": {
     "wix-rich-content-common": "8.17.7",
     "wix-rich-content-editor-common": "8.17.7",
-    "wix-rich-content-plugin-commons": "8.17.7"
+    "wix-rich-content-plugin-commons": "8.17.7",
+    "ricos-content": "8.17.7",
+    "ricos-schema": "8.17.7"
   },
   "unpkg": true,
   "publishConfig": {
