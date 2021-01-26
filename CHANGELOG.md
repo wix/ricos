@@ -23,6 +23,9 @@
 <hr/>
 
 ## 8.17.8 (Jan 25, 2021)
+### :rocket: New Feature
+- `editor`
+  - [#2034](https://github.com/wix-incubator/rich-content/pull/2034) maxTextLength prop added
 ### :bug: Bug Fix
 - `table`
   - [#2046](https://github.com/wix/ricos/pull/2046) cell selection background color style
