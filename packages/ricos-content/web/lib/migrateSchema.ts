@@ -1,1 +1,9 @@
-export { fromDraft, toDraft, ensureDraftContent, ensureRicosContent } from '../src/migrateSchema';
+export {
+  fromDraft,
+  toDraft,
+  ensureDraftContent,
+  ensureRicosContent,
+  convertBlockDataToDraft,
+  convertNodeDataToDraft,
+  convertDecorationDataToDraft,
+} from '../src/migrateSchema';

@@ -2,7 +2,12 @@
 import { rich_content } from 'ricos-schema';
 import { RicosContent, RicosContentBlock } from '../..';
 import { genKey } from '../generateRandomKey';
-import { BlockType, HeaderLevel, RICOS_TYPE_TO_DATA_FIELD, TO_DRAFT_LIST_TYPE } from '../consts';
+import {
+  BlockType,
+  HeaderLevel,
+  RICOS_NODE_TYPE_TO_DATA_FIELD,
+  TO_DRAFT_LIST_TYPE,
+} from '../consts';
 import { DraftBlockType } from 'draft-js';
 import { merge } from 'lodash';
 import { createTextBlockData, createAtomicEntityData } from './getDraftEntityData';
@@ -55,7 +60,7 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
           parseTextNodes(node, { type: BlockType.Unstyled, key: node.key });
           break;
         default:
-          if (RICOS_TYPE_TO_DATA_FIELD[node.type]) {
+          if (RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]) {
             parseAtomicNode(node);
           } else {
             console.log(`ERROR! Unknown node type "${node.type}"!`);

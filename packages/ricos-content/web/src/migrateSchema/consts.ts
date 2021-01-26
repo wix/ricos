@@ -114,14 +114,7 @@ export const ENTITY_DECORATION_TO_MUTABILITY = {
   EMOJI_TYPE: 'IMMUTABLE',
 };
 
-export const ENTITY_DECORATION_TO_DATA_FIELD = {
-  [ANCHOR_TYPE]: 'anchorData',
-  [LINK_TYPE]: 'linkData',
-  [MENTION_TYPE]: 'mentionData',
-  EMOJI_TYPE: 'emojiData',
-};
-
-export const RICOS_TYPE_TO_DATA_FIELD = {
+export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
   [rich_content.Node.Type.LINK_BUTTON]: 'linkButtonData',
   [rich_content.Node.Type.ACTION_BUTTON]: 'actionButtonData',
   [rich_content.Node.Type.DIVIDER]: 'dividerData',
@@ -130,22 +123,15 @@ export const RICOS_TYPE_TO_DATA_FIELD = {
   [rich_content.Node.Type.GIPHY]: 'giphyData',
   [rich_content.Node.Type.HTML]: 'htmlData',
   [rich_content.Node.Type.IMAGE]: 'imageData',
-  [rich_content.Node.Type.IMAGE]: 'imageData',
   [rich_content.Node.Type.ACCORDION]: 'accordionData',
   [rich_content.Node.Type.LINK_PREVIEW]: 'linkPreviewData',
   [rich_content.Node.Type.MAP]: 'mapData',
   [rich_content.Node.Type.SOUND_CLOUD]: 'soundCloudData',
   [rich_content.Node.Type.VERTICAL_EMBED]: 'verticalEmbedData',
   [rich_content.Node.Type.VIDEO]: 'videoData',
-  [rich_content.Node.Type.VIDEO]: 'videoData',
   [rich_content.Node.Type.POLL]: 'pollData',
   [rich_content.Node.Type.TABLE]: 'tableData',
-};
-
-// rich_content.Node.Type.IMAGE: imageData
-const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = Object.fromEntries(
-  Object.entries(TO_RICOS_NODE_TYPE).map(([key, value]) => [key, RICOS_TYPE_TO_DATA_FIELD[value]])
-);
+} as const;
 
 export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.Unstyled]: 'paragraphData',
@@ -159,6 +145,21 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.HeaderSix]: 'headingData',
   [BlockType.CodeBlock]: 'codeData',
   [BlockType.Blockquote]: 'quoteData',
+};
+
+// rich_content.Node.Type.IMAGE: imageData
+const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = Object.fromEntries(
+  Object.entries(TO_RICOS_NODE_TYPE).map(([key, value]) => [
+    key,
+    RICOS_NODE_TYPE_TO_DATA_FIELD[value],
+  ])
+);
+
+export const ENTITY_DECORATION_TO_DATA_FIELD = {
+  [ANCHOR_TYPE]: 'anchorData',
+  [LINK_TYPE]: 'linkData',
+  [MENTION_TYPE]: 'mentionData',
+  EMOJI_TYPE: 'emojiData',
 };
 
 export const TO_RICOS_DATA_FIELD = {
