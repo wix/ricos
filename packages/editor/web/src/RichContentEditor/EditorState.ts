@@ -1,70 +1,83 @@
 import {
+  TextAlignment,
   getTextAlignment,
+  InlineStyle,
   hasInlineStyle,
   getBlockType,
   hasLinksInSelection,
   getLinkDataInSelection,
+  getEntityData,
 } from 'wix-rich-content-editor-common';
 import {
   GetEditorState,
-  ACTION_BUTTON_TYPE,
-  CODE_BLOCK_TYPE,
+  IMAGE_TYPE,
   DIVIDER_TYPE,
   FILE_UPLOAD_TYPE,
   GALLERY_TYPE,
   GIPHY_TYPE,
   HTML_TYPE,
-  IMAGE_TYPE,
-  IMAGE_TYPE_LEGACY,
-  LINK_PREVIEW_TYPE,
-  MAP_TYPE,
-  SOUND_CLOUD_TYPE,
-  VERTICAL_EMBED_TYPE,
-  VIDEO_TYPE,
-  VIDEO_TYPE_LEGACY,
   POLL_TYPE,
-  ACCORDION_TYPE,
-  TABLE_TYPE,
-  UNSUPPORTED_BLOCKS_TYPE,
+  VIDEO_TYPE,
+  RICOS_DIVIDER_TYPE,
+  RICOS_GALLERY_TYPE,
+  RICOS_GIPHY_TYPE,
+  RICOS_HTML_TYPE,
+  RICOS_IMAGE_TYPE,
+  RICOS_VIDEO_TYPE,
+  RICOS_POLL_TYPE,
+  RICOS_FILE_TYPE,
 } from 'wix-rich-content-common';
 
-type InlineStyle = 'bold' | 'underline' | 'italic';
+export type BlockType =
+  | 'unstyled'
+  | 'ordered-list-item'
+  | 'unordered-list-item'
+  | 'code-block'
+  | 'blockquote'
+  | 'header-one'
+  | 'header-two'
+  | 'header-three'
+  | 'header-four'
+  | 'header-five'
+  | 'header-six';
 
-type PluginType =
-  | typeof ACTION_BUTTON_TYPE
-  | typeof CODE_BLOCK_TYPE
-  | typeof DIVIDER_TYPE
-  | typeof FILE_UPLOAD_TYPE
-  | typeof GALLERY_TYPE
-  | typeof GIPHY_TYPE
-  | typeof HTML_TYPE
-  | typeof IMAGE_TYPE
-  | typeof IMAGE_TYPE_LEGACY
-  | typeof LINK_PREVIEW_TYPE
-  | typeof MAP_TYPE
-  | typeof SOUND_CLOUD_TYPE
-  | typeof VERTICAL_EMBED_TYPE
-  | typeof VIDEO_TYPE
-  | typeof VIDEO_TYPE_LEGACY
-  | typeof POLL_TYPE
-  | typeof ACCORDION_TYPE
-  | typeof TABLE_TYPE
-  | typeof UNSUPPORTED_BLOCKS_TYPE;
+export type Selection = {
+  anchorKey?: string;
+  anchorOffset?: number;
+  focusKey?: string;
+  focusOffset?: number;
+  isBackward?: boolean;
+  hasFocus?: boolean;
+};
+
+export const FROM_RICOS_PLUGIN_TYPE_MAP = {
+  [RICOS_DIVIDER_TYPE]: DIVIDER_TYPE,
+  [RICOS_FILE_TYPE]: FILE_UPLOAD_TYPE,
+  [RICOS_GALLERY_TYPE]: GALLERY_TYPE,
+  [RICOS_GIPHY_TYPE]: GIPHY_TYPE,
+  [RICOS_HTML_TYPE]: HTML_TYPE,
+  [RICOS_IMAGE_TYPE]: IMAGE_TYPE,
+  [RICOS_VIDEO_TYPE]: VIDEO_TYPE,
+  [RICOS_POLL_TYPE]: POLL_TYPE,
+};
 
 export const createEditorState = (getEditorState: GetEditorState) => {
   const editorState = {
     //TODO: fix this type error
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getSelection: (): any => {
-      return getEditorState().getSelection();
-    },
-    getTextAlignment: () => getTextAlignment(getEditorState()),
-    hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style.toUpperCase(), getEditorState()),
-    isBlockTypeSelected: (type: PluginType) => getBlockType(getEditorState()) === type,
+    getSelection: (): any => getEditorState().getSelection(),
+    getSelectedBlockKey: () =>
+      getEditorState()
+        .getSelection()
+        .getAnchorKey(),
+    getTextAlignment: (): TextAlignment => getTextAlignment(getEditorState()),
+    hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
+    isBlockTypeSelected: (type: BlockType | 'atomic') => getBlockType(getEditorState()) === type,
     isUndoStackEmpty: () => getEditorState().getUndoStack().size === 0,
     isRedoStackEmpty: () => getEditorState().getRedoStack().size === 0,
     hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
     getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
+    getSelectedBlockData: () => getEntityData(getEditorState()) || {},
   };
 
   return editorState;

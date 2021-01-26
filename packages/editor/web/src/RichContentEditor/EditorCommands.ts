@@ -8,65 +8,11 @@ import {
   deleteBlock,
   undo,
   redo,
+  InlineStyle,
+  TextAlignment,
 } from 'wix-rich-content-editor-common';
-import {
-  PluginsDataMap,
-  GetEditorState,
-  SetEditorState,
-  IMAGE_TYPE,
-  DIVIDER_TYPE,
-  FILE_UPLOAD_TYPE,
-  GALLERY_TYPE,
-  GIPHY_TYPE,
-  HTML_TYPE,
-  POLL_TYPE,
-  VIDEO_TYPE,
-  RICOS_DIVIDER_TYPE,
-  RICOS_GALLERY_TYPE,
-  RICOS_GIPHY_TYPE,
-  RICOS_HTML_TYPE,
-  RICOS_IMAGE_TYPE,
-  RICOS_VIDEO_TYPE,
-  RICOS_POLL_TYPE,
-  RICOS_FILE_TYPE,
-} from 'wix-rich-content-common';
-
-const FROM_RICOS_PLUGIN_TYPE_MAP = {
-  [RICOS_DIVIDER_TYPE]: DIVIDER_TYPE,
-  [RICOS_FILE_TYPE]: FILE_UPLOAD_TYPE,
-  [RICOS_GALLERY_TYPE]: GALLERY_TYPE,
-  [RICOS_GIPHY_TYPE]: GIPHY_TYPE,
-  [RICOS_HTML_TYPE]: HTML_TYPE,
-  [RICOS_IMAGE_TYPE]: IMAGE_TYPE,
-  [RICOS_VIDEO_TYPE]: VIDEO_TYPE,
-  [RICOS_POLL_TYPE]: POLL_TYPE,
-};
-
-type TextAlignment = 'left' | 'center' | 'right' | 'justify';
-
-type Selection = {
-  anchorKey?: string;
-  anchorOffset?: number;
-  focusKey?: string;
-  focusOffset?: number;
-  isBackward?: boolean;
-  hasFocus?: boolean;
-};
-
-type BlockType =
-  | 'unstyled'
-  | 'ordered-list-item'
-  | 'unordered-list-item'
-  | 'code-block'
-  | 'blockquote'
-  | 'header-one'
-  | 'header-two'
-  | 'header-three'
-  | 'header-four'
-  | 'header-five'
-  | 'header-six';
-
-type InlineStyle = 'bold' | 'underline' | 'italic';
+import { PluginsDataMap, GetEditorState, SetEditorState } from 'wix-rich-content-common';
+import { BlockType, Selection, FROM_RICOS_PLUGIN_TYPE_MAP } from './EditorState';
 
 export const createEditorCommands = (
   createPluginsDataMap,
@@ -97,23 +43,14 @@ export const createEditorCommands = (
   };
 
   const pluginsCommands = {
-    insertBlock: <K extends keyof PluginsDataMap>(
-      type: K,
-      config?: PluginsDataMap[K],
-      shouldForceFocus = true
-    ) => {
-      const oldType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
-      const { [oldType]: createPluginData } = createPluginsDataMap;
+    insertBlock: <K extends keyof PluginsDataMap>(type: K, config?: PluginsDataMap[K]) => {
+      const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config);
         if (data) {
-          const { newSelection, newEditorState } = createBlock(getEditorState(), data, oldType);
-          setEditorState(
-            shouldForceFocus
-              ? EditorState.forceSelection(newEditorState, newSelection)
-              : EditorState.acceptSelection(newEditorState, newSelection)
-          );
-          return { blockKey: newSelection.getAnchorKey(), data };
+          const { newSelection, newEditorState } = createBlock(getEditorState(), data, draftType);
+          setEditorState(EditorState.forceSelection(newEditorState, newSelection));
         }
       }
     },
@@ -122,13 +59,13 @@ export const createEditorCommands = (
       type: K,
       config?: PluginsDataMap[K]
     ) => {
-      const oldType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
-      const { [oldType]: createPluginData } = createPluginsDataMap;
+      const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config);
         if (data) {
-          setEditorState(updateEntityData(getEditorState(), blockKey, data));
-          return { blockKey, data };
+          const newEditorState = updateEntityData(getEditorState(), blockKey, data);
+          setEditorState(EditorState.forceSelection(newEditorState, newEditorState.getSelection()));
         }
       }
     },

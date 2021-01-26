@@ -26,14 +26,18 @@ type LinkDataUrl = {
 
 type LinkData = LinkDataUrl & { anchor?: string };
 
+export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
+
+export type InlineStyle = 'bold' | 'underline' | 'italic';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomLinkData = any;
 
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
-export const hasInlineStyle = (inlineStyle: string, editorState: EditorState) =>
-  editorState.getCurrentInlineStyle().has(inlineStyle);
+export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) =>
+  editorState.getCurrentInlineStyle().has(inlineStyle.toUpperCase());
 
 export function createSelection({
   blockKey,
@@ -281,7 +285,10 @@ export const removeLinksInSelection = (editorState: EditorState) => {
   );
 };
 
-export const getTextAlignment = (editorState: EditorState, defaultAlignment = 'left'): string => {
+export const getTextAlignment = (
+  editorState: EditorState,
+  defaultAlignment = 'left'
+): TextAlignment => {
   const selection = getSelection(editorState);
   const currentContent = editorState.getCurrentContent();
   const contentBlock = currentContent.getBlockForKey(selection.getStartKey());
