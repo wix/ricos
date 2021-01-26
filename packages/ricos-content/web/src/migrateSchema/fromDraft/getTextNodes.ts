@@ -11,7 +11,7 @@ import { NodeType, TO_RICOS_DECORATION_TYPE } from '../consts';
 
 import { isEmpty, merge } from 'lodash';
 import { getEntity } from './getRicosEntityData';
-import { genKey } from 'draft-js';
+import { genKey } from '../generateRandomKey';
 
 type KeyType = string | number;
 type StyleType = string;
