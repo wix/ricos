@@ -184,7 +184,10 @@ export default class Cell extends Component {
         onKeyDown={this.onKeydown}
       >
         <div
-          className={classNames(!isMobile && isEditing && styles.editing)}
+          className={classNames(
+            !isMobile && isEditing && styles.editing,
+            !isEditing && styles.disableSelection
+          )}
           style={editorWrapperStyle}
         >
           <Editor
