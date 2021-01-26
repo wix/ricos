@@ -263,8 +263,7 @@ class ImageViewer extends React.Component {
       e.preventDefault();
       this.scrollToAnchor();
     } else {
-      //!does expand mode needs to be available on on image click
-      !this.props.componentData.config.disableExpand && this.handleExpand(e);
+      this.handleExpand(e);
     }
   };
 

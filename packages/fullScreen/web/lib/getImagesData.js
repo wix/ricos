@@ -72,6 +72,7 @@ function convertEntryToGalleryItems(entry, index) {
       return [];
   }
 }
+
 const getAtomicBlocksKeysMapper = blocks => {
   const keysMapper = {};
   blocks.forEach(block => {
@@ -99,10 +100,6 @@ const getBlocksByType = (type, entityMap) =>
 
 const getBlocksIndexes = (blocks, entityMap) =>
   blocks.map(block => Object.values(entityMap).indexOf(block));
-
-const addInnerRceKeysToKeysMap = (keys, keysMap, imageIndex) => {
-  keys.forEach(key => key && (keysMap[key] = imageIndex));
-};
 
 export default function getImagesData(data) {
   const blockKeys = data.blocks.filter(block => block.type === atomicType);
@@ -145,9 +142,9 @@ export default function getImagesData(data) {
 
       if (entryUrls.length > 0) {
         if (isAccordionIndex) {
-          addInnerRceKeysToKeysMap(accordionImagesKeys[i], imageMap, sum++);
+          accordionImagesKeys[i].forEach(key => key && (imageMap[key] = sum++));
         } else if (isTableIndex) {
-          addInnerRceKeysToKeysMap(tableImagesKeys[i], imageMap, sum++);
+          tableImagesKeys[i].forEach(key => key && (imageMap[key] = sum++));
         } else {
           const blockKey = blockKeys[i].key;
           imageMap[blockKey] = sum;
