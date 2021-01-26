@@ -16,11 +16,13 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.17.9 (Jan 26, 2021)
 ### :bug: Bug Fix
 - `link`
   - [#2038](https://github.com/wix/ricos/pull/2038) fix anchor's tag overriding url,add `href` value & remove `siteUrl` prop
-</details>
-<hr/>
 
 ## 8.17.8 (Jan 25, 2021)
 ### :rocket: New Feature
