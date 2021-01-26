@@ -3,9 +3,9 @@ const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
 const accordionType = 'wix-rich-content-plugin-accordion';
 const tableType = 'table';
+const atomicType = 'atomic';
 
 function imageEntryToGallery(data, index) {
-  if (data.config.disableExpand) return;
   const src = data.src;
   const url = src.file_name;
   const metadata = data.metadata;
@@ -29,24 +29,23 @@ function getTableImages(entry, index) {
       const entityMap = column.content.entityMap;
       entityMap &&
         Object.entries(entityMap).forEach(([, entityData]) => {
-          entityData.data?.src && tableImages.push(imageEntryToGallery(entityData.data, index));
+          entityData.data?.src &&
+            !entityData.data?.config.disableExpand &&
+            tableImages.push(imageEntryToGallery(entityData.data, index));
         });
     });
   });
   return tableImages;
 }
+
 function getAccordionImages(entry, index) {
   const accordionImages = [];
-  // const entityMaps = Object.entries(entry.data.pairs[0].content.entityMap);
-  // entityMaps.forEach(([, block]) => {
-  //   if (block.type === imageType) {
-  //     accordionImages.push(imageEntryToGallery(block.data, index));
-  //   }
-  // });
   entry.data.pairs.forEach(pair => {
     Object.entries(pair.content.entityMap).forEach(([, block]) => {
       if (block.type === imageType) {
-        accordionImages.push(imageEntryToGallery(block.data, index));
+        block.data?.src &&
+          !block.data?.config.disableExpand &&
+          accordionImages.push(imageEntryToGallery(block.data, index));
       }
     });
   });
@@ -55,102 +54,107 @@ function getAccordionImages(entry, index) {
 }
 
 function convertEntryToGalleryItems(entry, index) {
+  const { disableExpand } = entry?.data.config;
   switch (entry.type) {
     case imageType:
     case imageTypeLegacy:
-      return entry.data.src ? [imageEntryToGallery(entry.data, index)] : [];
+      return entry.data.src && !disableExpand ? [imageEntryToGallery(entry.data, index)] : [];
     case galleryType: {
-      // console.log('gallery',entry.data.items);
-      return entry.data.items;
+      return !disableExpand && entry.data.items;
     }
     case tableType: {
-      return getTableImages(entry);
+      return getTableImages(entry, index);
     }
     case accordionType: {
-      return getAccordionImages(entry);
+      return getAccordionImages(entry, index);
     }
     default:
       return [];
   }
 }
+const getAtomicBlocksKeysMapper = blocks => {
+  const keysMapper = {};
+  blocks.forEach(block => {
+    if (block.type === atomicType) {
+      const entityIndex = block.entityRanges[0].key;
+      keysMapper[entityIndex] = block.key;
+    }
+  });
+  return keysMapper;
+};
+
+const getImagesKeys = (entityMap, innerRceIndexes, keysMapper, currentInnerRceIndex) => {
+  const imagesKeys = {};
+  Object.entries(entityMap).forEach(([, block], j) => {
+    if (block.type === imageType && !block.data.config.disableExpand) {
+      const imageKey = innerRceIndexes[currentInnerRceIndex];
+      imagesKeys[imageKey] = [...imagesKeys[imageKey], ...keysMapper[j]];
+    }
+  });
+  return imagesKeys;
+};
+
+const getBlocksByType = (type, entityMap) =>
+  Object.values(entityMap).filter(block => block.type === type);
+
+const getBlocksIndexes = (blocks, entityMap) =>
+  blocks.map(block => Object.values(entityMap).indexOf(block));
+
+const addInnerRceKeysToKeysMap = (keys, keysMap, imageIndex) => {
+  keys.forEach(key => key && (keysMap[key] = imageIndex));
+};
 
 export default function getImagesData(data) {
-  console.log('data', data);
-  const blockKeys = data.blocks.filter(block => block.type === 'atomic');
+  const blockKeys = data.blocks.filter(block => block.type === atomicType);
 
-  const accordionData = Object.values(data.entityMap).filter(block => block.type === accordionType);
-  const accordionIndexes = accordionData.map(d => Object.values(data.entityMap).indexOf(d));
-  const accordionkeys = [];
+  const accordionBlocks = getBlocksByType(accordionType, data.entityMap);
+  const accordionIndexes = getBlocksIndexes(accordionBlocks, data.entityMap);
+  let accordionImagesKeys = {};
+  accordionBlocks.forEach((block, i) => {
+    block.data?.pairs.forEach(pair => {
+      const keysMapper = getAtomicBlocksKeysMapper(pair.content.blocks);
+      accordionImagesKeys = {
+        ...accordionImagesKeys,
+        ...getImagesKeys(pair.content.entityMap, accordionIndexes, keysMapper, i),
+      };
+    });
+  });
 
-  accordionData.forEach(a => {
-    a.data?.pairs.forEach(pair => {
-      const entityKeyRange = {};
-      pair.content.blocks.forEach(block => {
-        if (block.type === 'atomic') {
-          entityKeyRange[block.entityRanges[0].key] = block.key;
-        }
-      });
-      // console.log('entityKeyRange', entityKeyRange);
-      // console.log('pair.content.entityMap', Object.entries(pair.content.entityMap));
-      Object.entries(pair.content.entityMap).forEach(([, block], i) => {
-        if (block.type === imageType) {
-          accordionkeys.push(entityKeyRange[i]);
-        }
+  const tableBlocks = getBlocksByType(tableType, data.entityMap);
+  const tableIndexes = getBlocksIndexes(tableBlocks, data.entityMap);
+  let tableImagesKeys = {};
+  tableBlocks.forEach((block, i) => {
+    Object.entries(block.data?.config.rows).forEach(([, row]) => {
+      Object.entries(row.columns).forEach(([, column]) => {
+        const keysMapper = getAtomicBlocksKeysMapper(column.content.blocks);
+        tableImagesKeys = {
+          ...tableImagesKeys,
+          ...getImagesKeys(column.content.entityMap, tableIndexes, keysMapper, i),
+        };
       });
     });
-    // Object.entries(a.data?.pairs[0].content.blocks).forEach(([, b]) => {
-    //   // console.log('block', b);
-    //   // const entityKey = b.entityRanges[0]?.key;
-    //   // console.log('a.data?.pairs', a.data?.pairs);
-    //   // const entityType = a.data?.pairs[0].content.entityMap[entityKey]?.type;
-    //   // if (b.type === 'atomic' && entityType === imageType) {
-    //   //   return accordionkeys.push(b.key);
-    //   // }
-    // });
   });
-  console.log('accordionkeys', accordionkeys);
-  // console.log('accordionkeys', accordionkeys);
-  //TODO => Handle images in table
-  // const tableData = Object.values(data.entityMap).filter(block => block.type === tableType);
-  // const tableIndexes = tableData.map(d => Object.values(data.entityMap).indexOf(d));
-  // console.log('tableData', tableData, 'tableIndexes', tableIndexes);
-  // const tableKeys = [];
-  // tableData.forEach(t => {
-  //   Object.entries(t.data?.config.rows).forEach(([, row]) => {
-  //     Object.entries(row.columns).forEach(([, column]) => {
-  //       const blocks = column.content.blocks;
-  //       const atomicKey = blocks.filter(block => block.type === 'atomic')[0];
-  //       console.log('table atomicKeys', atomicKey?.entityRanges[0]?.key);
-  //       // const entityType = t.data?.pairs[0].content.entityMap[entityKey]?.type;
-  //       // if (row.type === 'atomic' && entityType === imageType) {
-  //       //   // return accordionkeys.push(row.key);
-  //       // }
-  //     });
-  //   });
-  // });
 
   let sum = 0;
   const imageMap = {};
   const images = Object.values(data.entityMap)
     .map(convertEntryToGalleryItems)
     .reduce((urls, entryUrls, i) => {
+      const isAccordionIndex = accordionIndexes.length && accordionIndexes.indexOf(i) !== -1;
+      const isTableIndex = tableIndexes.length && tableIndexes.indexOf(i) !== -1;
+
       if (entryUrls.length > 0) {
-        // console.log('accordionkeys', i in accordionIndexes, i);
-        if (!(i in accordionIndexes) && urls.concat(entryUrls).length >= sum) {
-          // console.log('sum', sum);
-          accordionkeys.forEach(key => (imageMap[key] = sum++));
-          // console.log('imageMap accordionType', imageMap);
+        if (isAccordionIndex) {
+          addInnerRceKeysToKeysMap(accordionImagesKeys[i], imageMap, sum++);
+        } else if (isTableIndex) {
+          addInnerRceKeysToKeysMap(tableImagesKeys[i], imageMap, sum++);
         } else {
           const blockKey = blockKeys[i].key;
           imageMap[blockKey] = sum;
+          sum += entryUrls.length;
         }
       }
-      sum += entryUrls.length;
       return urls.concat(entryUrls);
-    }, [])
-    .filter(expandableImage => expandableImage);
-
-  console.log('imageMap', imageMap);
-  console.log('images', images);
+    }, []);
   return { images, imageMap };
 }
