@@ -4,6 +4,10 @@ import {
   RichContentEditorModal,
   RichContentEditorProps,
 } from 'wix-rich-content-editor';
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
+import { RicosEditor, RicosEditorType } from 'ricos-editor';
+=======
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
@@ -12,8 +16,19 @@ import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
+import {
+  ModalStyles,
+  RicosContent as RicosDraftContent,
+  TextToolbarType,
+} from 'wix-rich-content-common';
+import { TestAppConfig } from '../../src/types';
+import { RicosContent } from 'ricos-schema';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
+=======
 import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -29,8 +44,14 @@ const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
 
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
+interface ExampleEditorProps {
+  onChange?: RichContentEditorProps['onChange'];
+  onRicosChange?: (content: RicosDraftContent | RicosContent) => void;
+=======
 interface ExampleEditprProps {
   onChange?: RichContentEditorProps['onChange'];
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
   editorState?: RichContentEditorProps['editorState'];
   theme?: RichContentEditorProps['theme'];
   isMobile?: boolean;
@@ -44,16 +65,35 @@ interface ExampleEditprProps {
   mockImageIndex?: number;
   shouldMultiSelectImages?: boolean;
   shouldMockUpload?: boolean;
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
+  content?: RicosContent | RicosDraftContent;
+  shouldUseRicos?: boolean;
+  shouldUseRicosContent?: boolean;
+}
+
+interface ExampleEditorState {
+=======
   initialState?: RicosContent;
 }
 
 interface ExampleEditprState {
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
   showModal?: boolean;
   modalProps?: any;
   modalStyles?: ModalStyles;
   MobileToolbar?: ElementType;
   TextToolbar?: ElementType;
 }
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
+export default class Editor extends PureComponent<ExampleEditorProps, ExampleEditorState> {
+  state: ExampleEditorState = {};
+  plugins: RichContentEditorProps['plugins'];
+  config: RichContentEditorProps['config'];
+  helpers: RichContentEditorProps['helpers'];
+  editor: RichContentEditor | RicosEditorType;
+
+  constructor(props: ExampleEditorProps) {
+=======
 export default class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
   state: ExampleEditprState = {};
   plugins: RichContentEditorProps['plugins'];
@@ -62,6 +102,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
   editor: RichContentEditor;
 
   constructor(props: ExampleEditprProps) {
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
@@ -162,6 +203,13 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
     if (prevProps.shouldNativeUpload !== this.props.shouldNativeUpload) {
       this.toggleFileUploadMechanism();
     }
+    if (prevProps.shouldUseRicosContent !== this.props.shouldUseRicosContent) {
+      if (this.props.shouldUseRicosContent) {
+        this.props.onRicosChange(ensureRicosContent(this.props.content));
+      } else {
+        this.props.onRicosChange(ensureDraftContent(this.props.content));
+      }
+    }
   }
 
   toggleFileUploadMechanism = () => {
@@ -226,10 +274,12 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
       staticToolbar,
       isMobile,
       editorState,
-      initialState,
+      content,
       locale,
       localeResource,
       onChange,
+      onRicosChange,
+      shouldUseRicos,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
@@ -243,45 +293,67 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
       theme,
       textToolbarType,
       isMobile,
-      initialState,
+      initialState: ensureDraftContent(content),
       editorState,
     };
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
       <div style={{ height: '100%' }}>
         {this.renderExternalToolbar()}
-        <div className="editor">
-          {TopToolbar && (
-            <div className="toolbar-wrapper">
-              <TopToolbar />
-            </div>
-          )}
-          <RichContentEditor
-            placeholder={'Add some text!'}
-            ref={this.setEditorRef}
-            onChange={onChange}
-            helpers={this.helpers}
-            plugins={this.plugins}
-            // config={Plugins.getConfig(additionalConfig)}
-            config={this.config}
-            editorKey="random-editorKey-ssr"
-            setEditorToolbars={this.setEditorToolbars}
-            {...editorProps}
-          />
-          <ReactModal
-            isOpen={this.state.showModal}
-            contentLabel="External Modal Example"
-            style={modalStyles}
-            role="dialog"
-            onRequestClose={onRequestClose || this.helpers.closeModal}
-          >
-            <RichContentEditorModal
-              modalsMap={ModalsMap}
-              locale={this.props.locale}
-              {...this.state.modalProps}
+        {shouldUseRicos ? (
+          <div className="editor">
+            <RicosEditor
+              onRicosContentChange={onRicosChange}
+              content={content}
+              injectedContent={content}
+              linkSettings={{ anchorTarget, relValue }}
+              locale={locale}
+              cssOverride={theme}
+              toolbarSettings={{ useStaticTextToolbar: textToolbarType === 'static' }}
+              isMobile={isMobile}
+              placeholder={'Add some text!'}
+              ref={ref => (this.editor = ref)}
+            >
+              <RichContentEditor
+                helpers={this.helpers}
+                plugins={this.plugins}
+                config={this.config}
+              />
+            </RicosEditor>
+          </div>
+        ) : (
+          <div className="editor">
+            {TopToolbar && (
+              <div className="toolbar-wrapper">
+                <TopToolbar />
+              </div>
+            )}
+            <RichContentEditor
+              placeholder={'Add some text!'}
+              ref={this.setEditorRef}
+              onChange={onChange}
+              helpers={this.helpers}
+              plugins={this.plugins}
+              config={this.config}
+              editorKey="random-editorKey-ssr"
+              setEditorToolbars={this.setEditorToolbars}
+              {...editorProps}
             />
-          </ReactModal>
-        </div>
+            <ReactModal
+              isOpen={this.state.showModal}
+              contentLabel="External Modal Example"
+              style={modalStyles}
+              role="dialog"
+              onRequestClose={onRequestClose || this.helpers.closeModal}
+            >
+              <RichContentEditorModal
+                modalsMap={ModalsMap}
+                locale={this.props.locale}
+                {...this.state.modalProps}
+              />
+            </ReactModal>
+          </div>
+        )}
       </div>
     );
   }

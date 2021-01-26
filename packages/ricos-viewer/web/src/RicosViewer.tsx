@@ -4,6 +4,7 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
+import { ensureDraftContent } from 'ricos-content/dist/lib/migrateSchema.cjs';
 
 interface State {
   isPreviewExpanded: boolean;
@@ -43,7 +44,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
 
   render() {
-    const { children, seoSettings, ...props } = this.props;
+    const { children, seoSettings, content, ...props } = this.props;
     const { isPreviewExpanded, remountKey, localeStrategy } = this.state;
     const child =
       children && shouldRenderChild('RichContentViewer', children) ? (
@@ -58,6 +59,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         onPreviewExpand={this.onPreviewExpand}
         isViewer
         key={`viewer-${remountKey}`}
+        content={content && ensureDraftContent(content)}
         {...props}
       >
         {React.cloneElement(child, {

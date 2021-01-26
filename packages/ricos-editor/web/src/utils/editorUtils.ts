@@ -2,9 +2,15 @@ import { createEmpty, convertToRaw } from 'wix-rich-content-editor/libs/editorSt
 import { ContentState, EditorProps } from 'draft-js';
 import { debounce, pick } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
-import { isSSR } from 'wix-rich-content-common';
-import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
+import { isSSR, RicosContent } from 'wix-rich-content-common';
+import {
+  EditorDataInstance,
+  OnContentChangeFunction,
+  ContentStateGetter,
+  OnRicosContentChangeFunction,
+} from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
+import { fromDraft } from 'ricos-content/libs/migrateSchema';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
@@ -15,8 +21,11 @@ const wait = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-export function createDataConverter(onContentChange?: OnContentChangeFunction): EditorDataInstance {
-  let currContent = emptyState;
+export function createDataConverter(
+  onContentChange?: OnContentChangeFunction,
+  onRicosContentChange?: OnRicosContentChangeFunction
+): EditorDataInstance {
+  let currContent: RicosContent = emptyState;
   let currEditorState = createEmpty();
   let currentTraits = { isEmpty: true, isContentChanged: false };
   let isUpdated = false;
@@ -43,7 +52,11 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
       isUpdated = true;
     }
 
-    onContentChange?.(currContent, currentTraits);
+    if (onRicosContentChange && 'blocks' in currContent) {
+      onRicosContentChange?.(fromDraft(currContent), currentTraits);
+    } else {
+      onContentChange?.(currContent, currentTraits);
+    }
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();

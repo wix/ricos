@@ -1,6 +1,11 @@
 import React, { PureComponent, RefObject } from 'react';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
+import { RicosViewer } from 'ricos-viewer';
+import { isSSR, RicosContent as RicosDraftContent, SEOSettings } from 'wix-rich-content-common';
+=======
 import { isSSR, SEOSettings } from 'wix-rich-content-common';
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -9,16 +14,27 @@ import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { RicosContent } from 'ricos-schema';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
+
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
 interface ExampleViewerProps {
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
+  content?: RicosContent | RicosDraftContent;
+=======
   initialState?: RichContentViewerProps['initialState'];
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
   isMobile?: boolean;
   locale: string;
   scrollingElementFn?: any;
   seoMode?: SEOSettings;
   localeResource?: Record<string, string>;
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
+  shouldUseRicos?: boolean;
+=======
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
 }
 
 interface ExampleViewerState {
@@ -36,7 +52,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   constructor(props: ExampleViewerProps) {
     super(props);
     if (!isSSR()) {
-      this.expandModeData = getImagesData(this.props.initialState);
+      this.expandModeData = getImagesData(ensureDraftContent(this.props.content));
     }
     this.state = {
       disabled: false,
@@ -50,8 +66,8 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.initialState !== this.props.initialState) {
-      this.expandModeData = getImagesData(this.props.initialState);
+    if (prevProps.content !== this.props.content) {
+      this.expandModeData = getImagesData(ensureDraftContent(this.props.content));
     }
   }
 
@@ -72,7 +88,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
+    const { isMobile, content, locale, seoMode, localeResource, shouldUseRicos } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
       helpers: {
@@ -87,7 +103,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
       anchorTarget,
       isMobile,
       theme,
-      initialState,
+      initialState: content,
       disabled,
       seoMode,
     };
@@ -95,6 +111,31 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
     return (
       <>
         <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
+          {shouldUseRicos ? (
+            <RicosViewer
+              locale={locale}
+              linkSettings={{ anchorTarget, relValue }}
+              isMobile={isMobile}
+              cssOverride={theme}
+              content={content}
+              mediaSettings={{ pauseMedia: disabled }}
+              seoSettings={seoMode}
+              plugins={Plugins.viewerPlugins}
+            >
+              <RichContentViewer helpers={viewerProps.helpers} />
+            </RicosViewer>
+          ) : (
+            <RichContentViewer
+              typeMappers={Plugins.typeMappers}
+              // @ts-ignore
+              inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+              decorators={Plugins.decorators}
+              config={this.pluginsConfig}
+              {...viewerProps}
+            />
+          )}
+=======
           <RichContentViewer
             typeMappers={Plugins.typeMappers}
             // @ts-ignore
@@ -103,6 +144,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
             config={this.pluginsConfig}
             {...viewerProps}
           />
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
           {this.shouldRenderFullscreen && (
             <Fullscreen
               images={this.expandModeData.images}

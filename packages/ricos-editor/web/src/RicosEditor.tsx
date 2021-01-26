@@ -16,6 +16,7 @@ import {
 import { isEqual } from 'lodash';
 import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -36,7 +37,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange);
+    this.dataInstance = createDataConverter(props.onChange, props.onRicosContentChange);
     this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
   }
 
@@ -90,7 +91,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       !isEqual(this.props.injectedContent, newProps.injectedContent)
     ) {
       console.debug('new content provided as editorState'); // eslint-disable-line
-      this.setState({ editorState: createWithContent(convertFromRaw(newProps.injectedContent)) });
+      this.setState({
+        editorState: createWithContent(
+          convertFromRaw(ensureDraftContent(newProps.injectedContent))
+        ),
+      });
     }
   }
 
@@ -161,7 +166,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     const contentProp = editorState
       ? { editorState: { editorState }, content: {} }
-      : { editorState: {}, content: { content } };
+      : {
+          editorState: {},
+          content: { content: content && ensureDraftContent(content) },
+        };
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
