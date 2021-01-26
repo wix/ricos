@@ -6,7 +6,7 @@ import "../common.proto";
 
 message HeadingData {
     int32 level = 1 [required = true];
-    Common.TextAlignment textAlignment = 2;
-    Common.DynamicStyles dynamicStyles = 3;
+    Common.TextAlignment text_alignment = 2;
+    Common.DynamicStyles dynamic_styles = 3;
     int32 depth = 4;
 }

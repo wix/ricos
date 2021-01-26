@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-import { Decoration, Node } from 'ricos-schema';
+import { rich_content } from 'ricos-schema';
 import { RicosInlineStyleRange, RicosEntityRange, RicosEntityMap } from '../..';
 import { FROM_RICOS_DECORATION_TYPE, ENTITY_DECORATION_TO_DATA_FIELD } from '../consts';
 import { emojiRegex } from '../emojiRegex';
 import { createDecorationEntityData } from './getDraftEntityData';
 
-export interface DraftTypedDecoration extends Omit<Decoration, 'type'> {
+export interface DraftTypedDecoration extends Omit<rich_content.Decoration, 'type'> {
   type: string;
 }
 
@@ -19,12 +19,15 @@ interface RangedDecorationMap {
   [type: string]: RangedDecoration[];
 }
 
+const isInlineStyleDecoration = (decorationType: string) =>
+  ENTITY_DECORATION_TO_DATA_FIELD[decorationType] === undefined;
+
 const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
   return fns.reduce((v, fn) => fn(v), arg);
 };
 
 export const mergeTextNodes = (
-  nodes: Node[]
+  nodes: rich_content.Node[]
 ): { text: string; decorationMap: RangedDecorationMap } => {
   let length = 0;
   return nodes.reduce<{
@@ -84,11 +87,9 @@ export const parseDecorations = (
     }, []);
   const allDecorations = [...decorations, ...createEmojiDecorations(text)];
   const entityDecorations = allDecorations
-    .filter(({ type }) => ENTITY_DECORATION_TO_DATA_FIELD[type])
+    .filter(({ type }) => !isInlineStyleDecoration(type))
     .sort(decorationComparator);
-  const inlineStyleDecorations = allDecorations.filter(
-    ({ type }) => !ENTITY_DECORATION_TO_DATA_FIELD[type]
-  );
+  const inlineStyleDecorations = allDecorations.filter(({ type }) => isInlineStyleDecoration(type));
   return { inlineStyleDecorations, entityDecorations };
 };
 
@@ -147,8 +148,8 @@ export const parseEntityDecorations = (
   };
 };
 
-export const getParagraphNode = (node: Node) => {
-  if (node.nodes[0].type === Node.Type.PARAGRAPH) {
+export const getParagraphNode = (node: rich_content.Node) => {
+  if (node.nodes[0].type === rich_content.Node.Type.PARAGRAPH) {
     return node.nodes[0];
   } else {
     console.log(`ERROR! Expected a paragraph node but found ${node.nodes[0].type}`);
@@ -156,7 +157,7 @@ export const getParagraphNode = (node: Node) => {
   }
 };
 
-const convertDecorationTypes = (decorations: Decoration[]): DraftTypedDecoration[] =>
+const convertDecorationTypes = (decorations: rich_content.Decoration[]): DraftTypedDecoration[] =>
   decorations.flatMap(decoration => pipe(decoration, toDraftDecorationType, splitColorDecoration));
 
 const createEmojiDecorations = (text: string) =>
@@ -173,7 +174,7 @@ const createEmojiDecorations = (text: string) =>
     return [];
   });
 
-const toDraftDecorationType = (decoration: Decoration): DraftTypedDecoration => ({
+const toDraftDecorationType = (decoration: rich_content.Decoration): DraftTypedDecoration => ({
   ...decoration,
   type: FROM_RICOS_DECORATION_TYPE[decoration.type],
 });

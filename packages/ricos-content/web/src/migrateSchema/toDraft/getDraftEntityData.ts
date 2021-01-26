@@ -1,11 +1,11 @@
 /* eslint-disable fp/no-delete */
-import { Node } from 'ricos-schema';
+import { rich_content } from 'ricos-schema';
 import {
   DRAFT_BLOCK_TYPE_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_MUTABILITY,
-  FROM_RICOS_ENTITY_TYPE_MAP,
-  TO_RICOS_ENTITY_TYPE,
+  FROM_RICOS_ENTITY_TYPE,
+  TO_RICOS_DATA_FIELD,
 } from '../consts';
 import toCamelCase from 'to-camel-case';
 import toSlugCase from 'to-slug-case';
@@ -20,22 +20,34 @@ const migrateVideoData = data => {
     data.src = data.url;
     delete data.url;
   }
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+  has(data, 'config.size') &&
+    (data.config.size = toCamelCase(rich_content.VideoConfig.Size[data.config.size]));
+  has(data, 'config.alignment') &&
+    (data.config.alignment = toCamelCase(
+      rich_content.VideoConfig.Alignment[data.config.alignment]
+    ));
   if (data.metadata) {
     data.metadata = keysToSnakeCase(data.metadata);
   }
 };
 
 const migrateDividerData = data => {
-  has(data, 'type') && (data.type = toCamelCase(data.type));
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+  has(data, 'type') && (data.type = toCamelCase(rich_content.DividerData.DividerType[data.type]));
+  has(data, 'config.size') &&
+    (data.config.size = toCamelCase(rich_content.DividerConfig.DividerSize[data.config.size]));
+  has(data, 'config.alignment') &&
+    (data.config.alignment = toCamelCase(
+      rich_content.DividerConfig.DividerAlignment[data.config.alignment]
+    ));
 };
 
 const migrateImageData = data => {
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+  has(data, 'config.size') &&
+    (data.config.size = toCamelCase(rich_content.ImageConfig.ImageSize[data.config.size]));
+  has(data, 'config.alignment') &&
+    (data.config.alignment = toCamelCase(
+      rich_content.ImageConfig.ImageAlignment[data.config.alignment]
+    ));
   if (has(data, 'src.originalFileName')) {
     data.src.original_file_name = data.src.originalFileName;
     delete data.src.originalFileName;
@@ -47,33 +59,55 @@ const migrateImageData = data => {
 };
 
 const migrateGalleryData = data => {
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+  has(data, 'config.size') &&
+    (data.config.size = toCamelCase(rich_content.GalleryConfig.GallerySize[data.config.size]));
+  has(data, 'config.alignment') &&
+    (data.config.alignment = toCamelCase(
+      rich_content.GalleryConfig.GalleryAlignment[data.config.alignment]
+    ));
 };
 
 const migratePollData = data => {
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
-  has(data, 'layout.poll.type') && (data.layout.poll.type = toCamelCase(data.layout.poll.type));
+  has(data, 'layout.poll.type') &&
+    (data.layout.poll.type = toCamelCase(
+      rich_content.PollWidgetLayout.PollLayout.LayoutType[data.layout.poll.type]
+    ));
   has(data, 'layout.poll.direction') &&
-    (data.layout.poll.direction = toCamelCase(data.layout.poll.direction));
+    (data.layout.poll.direction = toCamelCase(
+      rich_content.PollWidgetLayout.PollLayout.Direction[data.layout.poll.direction]
+    ));
   has(data, 'design.poll.backgroundType') &&
-    (data.design.poll.backgroundType = toCamelCase(data.design.poll.backgroundType));
+    (data.design.poll.backgroundType = toCamelCase(
+      rich_content.PollWidgetDesign.PollDesign.BackgroundType[data.design.poll.backgroundType]
+    ));
+  has(data, 'poll.settings.resultsVisibility') &&
+    (data.poll.settings.resultsVisibility =
+      rich_content.PollSettings.ResultsVisibility[data.poll.settings.resultsVisibility]);
+  has(data, 'poll.settings.voteRole') &&
+    (data.poll.settings.voteRole = rich_content.PollSettings.VoteRole[data.poll.settings.voteRole]);
 };
 
 const migrateVerticalEmbedData = data => {
-  has(data, 'type') && (data.type = toCamelCase(data.type));
+  has(data, 'type') &&
+    (data.type = toCamelCase(rich_content.VerticalEmbedData.VerticalType[data.type]));
 };
 
 const migrateHtmlData = data => {
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+  has(data, 'config.alignment') &&
+    (data.config.alignment = toCamelCase(
+      rich_content.HTMLConfig.HTMLAlignment[data.config.alignment]
+    ));
 };
 
 const migrateGiphyData = data => {
   has(data, 'configViewer.sizes.desktop') &&
-    (data.configViewer.sizes.desktop = toCamelCase(data.configViewer.sizes.desktop));
+    (data.configViewer.sizes.desktop = toCamelCase(
+      rich_content.GIphyConfigViewer.GiphyViewerSize[data.configViewer.sizes.desktop]
+    ));
   has(data, 'configViewer.sizes.mobile') &&
-    (data.configViewer.sizes.mobile = toCamelCase(data.configViewer.sizes.mobile));
+    (data.configViewer.sizes.mobile = toCamelCase(
+      rich_content.GIphyConfigViewer.GiphyViewerSize[data.configViewer.sizes.mobile]
+    ));
 };
 
 const migrateLinkPreviewData = data => {
@@ -93,10 +127,10 @@ const migrateSoundCloudData = data => {
   }
 };
 
-const getNodeEntityData = (node: Node) => {
+const getNodeEntityData = (node: rich_content.Node) => {
   const { type } = node;
-  const draftPluginType = FROM_RICOS_ENTITY_TYPE_MAP[type];
-  const dataFieldName = TO_RICOS_ENTITY_TYPE[draftPluginType];
+  const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
+  const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
   if (!dataFieldName) {
     // eslint-disable-next-line no-console
     console.error(`ERROR! Unknown entity type "${type}"!`);
@@ -105,34 +139,34 @@ const getNodeEntityData = (node: Node) => {
   const data = node[dataFieldName];
 
   switch (type) {
-    case Node.Type.VIDEO:
+    case rich_content.Node.Type.VIDEO:
       migrateVideoData(data);
       break;
-    case Node.Type.DIVIDER:
+    case rich_content.Node.Type.DIVIDER:
       migrateDividerData(data);
       break;
-    case Node.Type.IMAGE:
+    case rich_content.Node.Type.IMAGE:
       migrateImageData(data);
       break;
-    case Node.Type.GALLERY:
+    case rich_content.Node.Type.GALLERY:
       migrateGalleryData(data);
       break;
-    case Node.Type.POLL:
+    case rich_content.Node.Type.POLL:
       migratePollData(data);
       break;
-    case Node.Type.VERTICAL_EMBED:
+    case rich_content.Node.Type.VERTICAL_EMBED:
       migrateVerticalEmbedData(data);
       break;
-    case Node.Type.HTML:
+    case rich_content.Node.Type.HTML:
       migrateHtmlData(data);
       break;
-    case Node.Type.GIPHY:
+    case rich_content.Node.Type.GIPHY:
       migrateGiphyData(data);
       break;
-    case Node.Type.LINK_PREVIEW:
+    case rich_content.Node.Type.LINK_PREVIEW:
       migrateLinkPreviewData(data);
       break;
-    case Node.Type.SOUND_CLOUD:
+    case rich_content.Node.Type.SOUND_CLOUD:
       migrateSoundCloudData(data);
       break;
     default:
@@ -168,18 +202,23 @@ export const createDecorationEntityData = (
   return createEntity(entityKey, { type, mutability, data });
 };
 
-export const createAtomicEntityData = (node: Node, entityKey: number): RicosEntityMap => {
+export const createAtomicEntityData = (
+  node: rich_content.Node,
+  entityKey: number
+): RicosEntityMap => {
   const { type, data } = getNodeEntityData(node);
   return createEntity(entityKey, { type, mutability: 'IMMUTABLE', data });
 };
 
-export const createTextBlockData = (node: Node, blockType: DraftBlockType) => {
+export const createTextBlockData = (node: rich_content.Node, blockType: DraftBlockType) => {
   const { textAlignment, dynamicStyles, depth } =
     node[DRAFT_BLOCK_TYPE_TO_DATA_FIELD[blockType]] || {};
   return Object.assign(
     {},
-    textAlignment ? { textAlignment: textAlignment.toString().toLowerCase() } : undefined,
-    dynamicStyles
+    textAlignment !== undefined
+      ? { textAlignment: rich_content.Common.TextAlignment[textAlignment].toLowerCase() }
+      : undefined,
+    dynamicStyles !== undefined
       ? {
           dynamicStyles: Object.fromEntries(
             Object.entries(dynamicStyles).map(([key, value]) => [toSlugCase(key), value])

@@ -1,6 +1,6 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { RicosContentBlock, RicosEntityMap, RicosEntityRange, EMOJI_TYPE } from '../..';
-import { Node, Decoration } from 'ricos-schema';
+import { rich_content } from 'ricos-schema';
 import { TO_RICOS_DECORATION_TYPE } from '../consts';
 
 import { isEmpty, merge } from 'lodash';
@@ -16,19 +16,27 @@ const removeEmojiEntities = (
 ): RicosEntityRange[] =>
   entityRanges.filter(range => !['EMOJI_TYPE', EMOJI_TYPE].includes(entityMap[range.key].type));
 
-const mergeColorDecorations = (decorations: Decoration[]): Decoration[] => {
+const mergeColorDecorations = (
+  decorations: rich_content.Decoration[]
+): rich_content.Decoration[] => {
   const colorDecorations = decorations.filter(
-    decoration => decoration.type === Decoration.Type.COLOR
+    decoration => decoration.type === rich_content.Decoration.Type.COLOR
   );
   const otherDecorations = decorations.filter(
-    decoration => decoration.type !== Decoration.Type.COLOR
+    decoration => decoration.type !== rich_content.Decoration.Type.COLOR
   );
   return colorDecorations.length > 0
     ? otherDecorations.concat([merge({}, ...colorDecorations)])
     : otherDecorations;
 };
 
-export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap): Node[] => {
+const isDecorationType = (decorationType: string) =>
+  TO_RICOS_DECORATION_TYPE[decorationType] !== undefined;
+
+export const getTextNodes = (
+  block: RicosContentBlock,
+  entityMap: RicosEntityMap
+): rich_content.Node[] => {
   const createTextNode = ({
     text,
     styles = [],
@@ -37,10 +45,10 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
     text: string;
     styles: StyleType[];
     keys: KeyType[];
-  }): Node => {
-    const textNode: Node = {
+  }): rich_content.Node => {
+    const textNode: rich_content.Node = {
       key: genKey(),
-      type: Node.Type.TEXT,
+      type: rich_content.Node.Type.TEXT,
       nodes: [],
       textData: {
         text,
@@ -48,7 +56,7 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
       },
     };
 
-    let decorations: Decoration[] = [];
+    let decorations: rich_content.Decoration[] = [];
 
     const keysDecorations = keys.map(key => getEntity(key, entityMap));
     const stylesDecorations = mergeColorDecorations(styles.map(style => getDecoration(style)));
@@ -61,8 +69,8 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
     return textNode;
   };
 
-  const getDecoration = (style: StyleType): Decoration => {
-    let decoration: Decoration;
+  const getDecoration = (style: StyleType): rich_content.Decoration => {
+    let decoration: rich_content.Decoration;
     try {
       const styleObj = JSON.parse(style);
       const type = Object.keys(styleObj)[0];
@@ -72,11 +80,11 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
         process.exit(1);
       }
       decoration = {
-        type: Decoration.Type.COLOR,
+        type: rich_content.Decoration.Type.COLOR,
         colorData: { [type === 'FG' ? 'foreground' : 'background']: value },
       };
     } catch {
-      if (!TO_RICOS_DECORATION_TYPE[style]) {
+      if (!isDecorationType(style)) {
         console.log(`ERROR! Unknown decoration type "${style}"!`);
         process.exit(1);
       }
@@ -102,7 +110,7 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
     }
   );
 
-  const textNodes: Node[] = [];
+  const textNodes: rich_content.Node[] = [];
 
   let styles: StyleType[] = [];
   let keys: KeyType[] = [];

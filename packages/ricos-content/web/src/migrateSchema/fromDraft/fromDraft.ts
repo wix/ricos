@@ -3,12 +3,12 @@
 import { cloneDeep, isEmpty } from 'lodash';
 import { RicosContent, RicosContentBlock } from '../..';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
-import { RichContent, Node } from 'ricos-schema';
+import { rich_content } from 'ricos-schema';
 import { genKey } from '../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getRicosEntityData';
 
-const createTimestamp = (): RichContent['lastEdited'] => {
+const createTimestamp = (): rich_content.RichContent['lastEdited'] => {
   const timeMS = Date.now();
   return {
     seconds: Math.floor(timeMS / 1000),
@@ -16,12 +16,12 @@ const createTimestamp = (): RichContent['lastEdited'] => {
   };
 };
 
-export const ensureRicosContent = (content: RichContent | RicosContent) =>
+export const ensureRicosContent = (content: rich_content.RichContent | RicosContent) =>
   'blocks' in content ? fromDraft(content) : content;
 
-export const fromDraft = (draftJSON: RicosContent): RichContent => {
+export const fromDraft = (draftJSON: RicosContent): rich_content.RichContent => {
   const { blocks, entityMap, VERSION: version } = cloneDeep(draftJSON);
-  const nodes: Node[] = [];
+  const nodes: rich_content.Node[] = [];
 
   const parseBlocks = (index = 0) => {
     const block = blocks[index];
@@ -65,7 +65,7 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     }
   };
 
-  const parseAtomicBlock = (block: RicosContentBlock): Node => {
+  const parseAtomicBlock = (block: RicosContentBlock): rich_content.Node => {
     return {
       key: block.key,
       nodes: [],
@@ -73,22 +73,22 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     };
   };
 
-  const parseQuoteBlock = (block: RicosContentBlock): Node => ({
+  const parseQuoteBlock = (block: RicosContentBlock): rich_content.Node => ({
     key: block.key,
-    type: Node.Type.BLOCKQUOTE,
+    type: rich_content.Node.Type.BLOCKQUOTE,
     nodes: [parseTextBlock(block)],
   });
 
-  const parseCodeBlock = (block: RicosContentBlock): Node => ({
+  const parseCodeBlock = (block: RicosContentBlock): rich_content.Node => ({
     key: block.key,
-    type: Node.Type.CODEBLOCK,
+    type: rich_content.Node.Type.CODEBLOCK,
     nodes: getTextNodes(block, entityMap),
     codeData: {
       ...parseBlockData(block.data),
     },
   });
 
-  const parseHeadingBlock = (block: RicosContentBlock): Node => {
+  const parseHeadingBlock = (block: RicosContentBlock): rich_content.Node => {
     const getLevel = (blockType: string) => {
       if (Object.keys(HeaderLevel).includes(blockType)) {
         return HeaderLevel[blockType];
@@ -98,7 +98,7 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     };
     return {
       key: block.key,
-      type: Node.Type.HEADING,
+      type: rich_content.Node.Type.HEADING,
       headingData: {
         level: getLevel(block.type),
         depth: block.depth || undefined,
@@ -108,10 +108,10 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     };
   };
 
-  const parseTextBlock = (block: RicosContentBlock): Node => {
-    const textWrapperNode: Node = {
+  const parseTextBlock = (block: RicosContentBlock): rich_content.Node => {
+    const textWrapperNode: rich_content.Node = {
       key: genKey(),
-      type: Node.Type.PARAGRAPH,
+      type: rich_content.Node.Type.PARAGRAPH,
       paragraphData: {
         ...parseBlockData(block.data),
       },
@@ -142,17 +142,20 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     return textWrapperNode;
   };
 
-  const createListItem = (block: RicosContentBlock): Node => ({
+  const createListItem = (block: RicosContentBlock): rich_content.Node => ({
     key: block.key,
-    type: Node.Type.LIST_ITEM,
+    type: rich_content.Node.Type.LIST_ITEM,
     nodes: [parseTextBlock(block)],
   });
 
-  const isListBlock = (block: RicosContentBlock): boolean => !!FROM_DRAFT_LIST_TYPE[block.type];
+  const isListBlock = (block: RicosContentBlock): boolean =>
+    FROM_DRAFT_LIST_TYPE[block.type] !== undefined;
 
-  const parseListBlocks = (listStartIndex: number): { node: Node; nextIndex: number } => {
+  const parseListBlocks = (
+    listStartIndex: number
+  ): { node: rich_content.Node; nextIndex: number } => {
     const { type: listType, depth } = blocks[listStartIndex];
-    const listNodes: Node[] = [];
+    const listNodes: rich_content.Node[] = [];
     let searchIndex = listStartIndex;
     let nextBlock = blocks[searchIndex];
 
@@ -180,25 +183,21 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
 
   parseBlocks();
 
-  const ricosContentMessage = RichContent.fromObject({
-    doc: {
-      nodes,
-      lastEdited: createTimestamp(),
-    },
-    selection: {
-      anchorNode: nodes[0].key,
-    },
-    version: version || '',
+  const ricosContentMessage = rich_content.RichContent.fromObject({
+    nodes,
+    lastEdited: createTimestamp(),
+    updatedVersion: version || '',
+    createdVersion: version || '',
   });
 
-  const err = RichContent.verify(ricosContentMessage);
+  const err = rich_content.RichContent.verify(ricosContentMessage);
   if (err) {
     console.log('ERROR! Invalid content');
     console.log(err);
     process.exit(1);
   }
 
-  const ricosContent = RichContent.toObject(ricosContentMessage, {
+  const ricosContent = rich_content.RichContent.toObject(ricosContentMessage, {
     arrays: true,
     enums: String,
     longs: Number,

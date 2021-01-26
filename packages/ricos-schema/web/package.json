@@ -17,8 +17,8 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/rich-content.js",
+  "types": "dist/rich-content.d.ts",
   "scripts": {
     "lint": ":",
     "clean": "rm -rf dist",

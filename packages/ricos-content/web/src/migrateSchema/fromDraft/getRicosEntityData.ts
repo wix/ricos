@@ -17,7 +17,7 @@ import {
   LINK_PREVIEW_TYPE,
   SOUND_CLOUD_TYPE,
 } from '../../consts';
-import { TO_RICOS_ENTITY_TYPE, TO_RICOS_PLUGIN_TYPE_MAP } from '../consts';
+import { TO_RICOS_DATA_FIELD, TO_RICOS_PLUGIN_TYPE } from '../consts';
 import { has } from 'lodash';
 
 const migrateVideoData = data => {
@@ -89,8 +89,8 @@ const migrateSoundCloudData = data => {
 
 export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   const { type, data } = entityMap[key];
-  const dataFieldName = TO_RICOS_ENTITY_TYPE[type];
-  if (!dataFieldName) {
+  const dataFieldName = TO_RICOS_DATA_FIELD[type];
+  if (dataFieldName === undefined) {
     // eslint-disable-next-line no-console
     console.error(`ERROR! Unknown entity type "${type}"!`);
     process.exit(1);
@@ -137,15 +137,15 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
     default:
   }
 
-  return { type: TO_RICOS_PLUGIN_TYPE_MAP[type], [dataFieldName]: data };
+  return { type: TO_RICOS_PLUGIN_TYPE[type], [dataFieldName]: data };
 };
 
 export const parseBlockData = (blockData?: RicosContentBlock['data']) => {
   const { textAlignment, dynamicStyles } = blockData || {};
   return Object.assign(
     {},
-    textAlignment ? { textAlignment: textAlignment.toUpperCase() } : undefined,
-    dynamicStyles
+    textAlignment !== undefined ? { textAlignment: textAlignment.toUpperCase() } : undefined,
+    dynamicStyles !== undefined
       ? {
           dynamicStyles: keysToCamelCase(dynamicStyles),
         }
