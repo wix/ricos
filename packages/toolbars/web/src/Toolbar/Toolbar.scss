@@ -59,5 +59,9 @@
             height: 1px;
             background-color: #e0e0e3;
         }
+        &.groupButtonModal {
+            width: 100%;
+            min-width: unset;
+        }
     }
 }

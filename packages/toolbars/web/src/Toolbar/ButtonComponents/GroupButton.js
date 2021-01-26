@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
@@ -63,7 +64,7 @@ class GroupButton extends PureComponent {
     const { buttons, theme } = this.props;
 
     return (
-      <div className={Styles.modal}>
+      <div className={classNames(Styles.modal, Styles.groupButtonModal)}>
         {buttons.map((props, i) => {
           const buttonProps = {
             ...this.props,
@@ -109,7 +110,7 @@ class GroupButton extends PureComponent {
           <ToolbarButton
             isActive={isActive()}
             onClick={this.toggleOptions}
-            showArrowIcon
+            // showArrowIcon
             getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}
