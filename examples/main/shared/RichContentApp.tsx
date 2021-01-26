@@ -11,6 +11,7 @@ import { isSSR, RicosContent as RicosDraftContent, SEOSettings } from 'wix-rich-
 import { getRequestedLocale, normalize } from '../src/utils';
 import { TestAppConfig } from '../src/types';
 import { RicosContent } from 'ricos-schema';
+import { compare } from 'ricos-content/libs/comparision';
 
 type Mode = 'demo' | 'test';
 
@@ -88,7 +89,12 @@ class RichContentApp extends PureComponent<Props, State> {
     this.updateContentState(editorState);
   };
 
-  onRicosChange = (content: RicosDraftContent | RicosContent) => this.setState({ content });
+  onRicosChange = debounce((content: RicosDraftContent | RicosContent) => {
+    const diff = compare(content, this.state.content, { ignoredKeys: ['key'] });
+    if (Object.keys(diff).length > 0) {
+      this.setState({ content });
+    }
+  }, 600);
 
   onContentStateChange = (content: RicosDraftContent) => {
     this.setState({
