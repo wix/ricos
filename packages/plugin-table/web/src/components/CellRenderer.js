@@ -167,8 +167,7 @@ export default class Cell extends Component {
         className={classNames(
           styles.cell,
           isContainedInHeader && styles.header,
-          shouldShowSelectedStyle && styles.selected,
-          range?.length === 1 && styles.singleSelection
+          shouldShowSelectedStyle && !isEditing && styles.selected
         )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
@@ -199,6 +198,15 @@ export default class Cell extends Component {
           </Editor>
         </div>
         <CellBorders borders={cellBorders} />
+        <div
+          style={{
+            height: shouldShowSelectedStyle ? this.tdRef?.offsetHeight : 0,
+          }}
+          className={classNames(
+            shouldShowSelectedStyle && styles.selected,
+            range?.length === 1 && styles.singleSelection
+          )}
+        />
       </Tag>
     );
   }
