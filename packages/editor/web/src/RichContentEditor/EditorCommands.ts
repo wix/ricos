@@ -9,7 +9,38 @@ import {
   undo,
   redo,
 } from 'wix-rich-content-editor-common';
-import { PluginsDataMap, GetEditorState, SetEditorState } from 'wix-rich-content-common';
+import {
+  PluginsDataMap,
+  GetEditorState,
+  SetEditorState,
+  IMAGE_TYPE,
+  DIVIDER_TYPE,
+  FILE_UPLOAD_TYPE,
+  GALLERY_TYPE,
+  GIPHY_TYPE,
+  HTML_TYPE,
+  POLL_TYPE,
+  VIDEO_TYPE,
+  RICOS_DIVIDER_TYPE,
+  RICOS_GALLERY_TYPE,
+  RICOS_GIPHY_TYPE,
+  RICOS_HTML_TYPE,
+  RICOS_IMAGE_TYPE,
+  RICOS_VIDEO_TYPE,
+  RICOS_POLL_TYPE,
+  RICOS_FILE_TYPE,
+} from 'wix-rich-content-common';
+
+const FROM_RICOS_PLUGIN_TYPE_MAP = {
+  [RICOS_DIVIDER_TYPE]: DIVIDER_TYPE,
+  [RICOS_FILE_TYPE]: FILE_UPLOAD_TYPE,
+  [RICOS_GALLERY_TYPE]: GALLERY_TYPE,
+  [RICOS_GIPHY_TYPE]: GIPHY_TYPE,
+  [RICOS_HTML_TYPE]: HTML_TYPE,
+  [RICOS_IMAGE_TYPE]: IMAGE_TYPE,
+  [RICOS_VIDEO_TYPE]: VIDEO_TYPE,
+  [RICOS_POLL_TYPE]: POLL_TYPE,
+};
 
 type TextAlignment = 'left' | 'center' | 'right' | 'justify';
 
@@ -71,11 +102,12 @@ export const createEditorCommands = (
       config?: PluginsDataMap[K],
       shouldForceFocus = true
     ) => {
-      const { [type]: createPluginData } = createPluginsDataMap;
+      const oldType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const { [oldType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config);
         if (data) {
-          const { newSelection, newEditorState } = createBlock(getEditorState(), data, type);
+          const { newSelection, newEditorState } = createBlock(getEditorState(), data, oldType);
           setEditorState(
             shouldForceFocus
               ? EditorState.forceSelection(newEditorState, newSelection)
@@ -90,7 +122,8 @@ export const createEditorCommands = (
       type: K,
       config?: PluginsDataMap[K]
     ) => {
-      const { [type]: createPluginData } = createPluginsDataMap;
+      const oldType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const { [oldType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config);
         if (data) {
