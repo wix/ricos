@@ -1,7 +1,11 @@
 import React, { PureComponent, RefObject } from 'react';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
 import { RicosViewer } from 'ricos-viewer';
 import { isSSR, RicosContent as RicosDraftContent, SEOSettings } from 'wix-rich-content-common';
+=======
+import { isSSR, SEOSettings } from 'wix-rich-content-common';
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -17,13 +21,20 @@ const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
 interface ExampleViewerProps {
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
   content?: RicosContent | RicosDraftContent;
+=======
+  initialState?: RichContentViewerProps['initialState'];
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
   isMobile?: boolean;
   locale: string;
   scrollingElementFn?: any;
   seoMode?: SEOSettings;
   localeResource?: Record<string, string>;
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
   shouldUseRicos?: boolean;
+=======
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
 }
 
 interface ExampleViewerState {
@@ -100,6 +111,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
     return (
       <>
         <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
+<<<<<<< HEAD:examples/main/shared/viewer/Viewer.tsx
           {shouldUseRicos ? (
             <RicosViewer
               locale={locale}
@@ -123,6 +135,16 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
               {...viewerProps}
             />
           )}
+=======
+          <RichContentViewer
+            typeMappers={Plugins.typeMappers}
+            // @ts-ignore
+            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+            decorators={Plugins.decorators}
+            config={this.pluginsConfig}
+            {...viewerProps}
+          />
+>>>>>>> master:examples/main/shared/viewer/Viewer.jsx
           {this.shouldRenderFullscreen && (
             <Fullscreen
               images={this.expandModeData.images}

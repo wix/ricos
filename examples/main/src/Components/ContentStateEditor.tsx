@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
+<<<<<<< HEAD:examples/main/src/Components/ContentStateEditor.tsx
 import {
   getContentStateSchema,
   isSSR,
   RicosContent as RicosDraftContent,
 } from 'wix-rich-content-common';
+=======
+import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
+>>>>>>> master:examples/main/src/Components/ContentStateEditor.jsx
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -39,14 +43,22 @@ import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
+<<<<<<< HEAD:examples/main/src/Components/ContentStateEditor.tsx
 import { RicosContent } from 'ricos-schema';
+=======
+>>>>>>> master:examples/main/src/Components/ContentStateEditor.jsx
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
 class ContentStateEditor extends PureComponent<{
+<<<<<<< HEAD:examples/main/src/Components/ContentStateEditor.tsx
   content: RicosDraftContent | RicosContent;
   onChange: (content: RicosDraftContent) => void;
   shouldUseRicosContent?: boolean;
+=======
+  contentState: RicosContent;
+  onChange: (contentState: RicosContent) => void;
+>>>>>>> master:examples/main/src/Components/ContentStateEditor.jsx
 }> {
   state = {
     value: stringifyJSON(this.props.content),

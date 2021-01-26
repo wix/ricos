@@ -16,7 +16,11 @@ const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
 interface Props {
+<<<<<<< HEAD:examples/main/shared/preview/Preview.tsx
   content?: RicosContent;
+=======
+  initialState?: RicosContent;
+>>>>>>> master:examples/main/shared/preview/Preview.jsx
   isMobile?: boolean;
   locale?: string;
   localeResource?: Record<string, string>;
@@ -91,7 +95,11 @@ export default class Preview extends PureComponent<Props, State> {
             locale={this.props.locale}
             typeMappers={Plugins.typeMappers}
             // @ts-ignore
+<<<<<<< HEAD:examples/main/shared/preview/Preview.tsx
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.content)}
+=======
+            inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
+>>>>>>> master:examples/main/shared/preview/Preview.jsx
             decorators={Plugins.decorators}
             config={this.config}
             initialState={this.props.content}

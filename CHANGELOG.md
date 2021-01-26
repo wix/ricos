@@ -15,7 +15,23 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.17.8 (Jan 25, 2021)
+### :rocket: New Feature
+- `editor`
+  - [#2034](https://github.com/wix-incubator/rich-content/pull/2034) maxTextLength prop added
+### :bug: Bug Fix
+- `table`
+  - [#2046](https://github.com/wix/ricos/pull/2046) cell selection background color style
+
+## 8.17.7 (Jan 25, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2041](https://github.com/wix/ricos/pull/2041) remove draft dependency in migration tool
+
+## 8.17.6 (Jan 22, 2021)
 ### :rocket: New Feature
 - `ricos-content`
   - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
@@ -26,9 +42,6 @@
   - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
 - `e2e`
   - [#2026](https://github.com/wix/ricos/pull/2026) convert test-env to TypeScript
-
-</details>
-<hr/>
 
 ## 8.17.5 (Jan 20, 2021)
 ### :house: Internal

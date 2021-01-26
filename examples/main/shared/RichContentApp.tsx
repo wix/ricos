@@ -7,11 +7,9 @@ import {
   createWithContent,
   EditorState,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isSSR, RicosContent as RicosDraftContent, SEOSettings } from 'wix-rich-content-common';
+import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import { getRequestedLocale, normalize } from '../src/utils';
 import { TestAppConfig } from '../src/types';
-import { RicosContent } from 'ricos-schema';
-import { compare } from 'ricos-content/libs/comparision';
 
 type Mode = 'demo' | 'test';
 
@@ -19,7 +17,7 @@ interface Props {
   mode?: Mode;
   allLocales?: string[];
   debounce?: number;
-  initialState?: RicosDraftContent;
+  initialState?: RicosContent;
   locale?: string;
   seoMode?: SEOSettings;
   isMobile?: boolean;
@@ -29,7 +27,7 @@ interface Props {
 
 interface State {
   editorState?: EditorState;
-  content?: RicosDraftContent | RicosContent;
+  contentState?: RicosContent;
   localeResource?: Record<string, string>;
   locale?: string;
   remountKey?: boolean;
@@ -55,7 +53,7 @@ class RichContentApp extends PureComponent<Props, State> {
     locale = getRequestedLocale(),
     mode,
   }: {
-    initialState?: RicosDraftContent;
+    initialState?: RicosContent;
     locale?: string;
     mode?: Mode;
   }) => {
@@ -67,7 +65,7 @@ class RichContentApp extends PureComponent<Props, State> {
       : createEmpty();
     return {
       editorState,
-      content: initialState || convertToRaw(editorState.getCurrentContent()),
+      contentState: initialState || convertToRaw(editorState.getCurrentContent()),
       locale,
     };
   };
@@ -89,43 +87,38 @@ class RichContentApp extends PureComponent<Props, State> {
     this.updateContentState(editorState);
   };
 
-  onRicosChange = debounce((content: RicosDraftContent | RicosContent) => {
-    const diff = compare(content, this.state.content, { ignoredKeys: ['key'] });
-    if (Object.keys(diff).length > 0) {
-      this.setState({ content });
-    }
-  }, 600);
+  onRicosEditorChange = (contentState: RicosContent) => this.setState({ contentState });
 
-  onContentStateChange = (content: RicosDraftContent) => {
+  onContentStateChange = (contentState: RicosContent) => {
     this.setState({
-      content,
+      contentState,
     });
 
-    this.updateEditorState(content);
+    this.updateEditorState(contentState);
   };
 
   updateContentState = (editorState: EditorState) => {
-    this.setState({ content: convertToRaw(editorState.getCurrentContent()) });
+    this.setState({ contentState: convertToRaw(editorState.getCurrentContent()) });
   };
 
-  updateEditorState = (content: RicosDraftContent) => {
-    this.setState({ editorState: createWithContent(convertFromRaw(normalize(content))) });
+  updateEditorState = (contentState: RicosContent) => {
+    this.setState({ editorState: createWithContent(convertFromRaw(normalize(contentState))) });
   };
 
   render() {
-    const { editorState, content, localeResource, locale, remountKey } = this.state;
+    const { editorState, contentState, localeResource, locale, remountKey } = this.state;
     const { allLocales, seoMode, isMobile, app: App, testAppConfig } = this.props;
     return (
       <App
         key={remountKey}
         allLocales={allLocales}
         editorState={editorState}
-        content={content}
+        contentState={contentState}
         locale={locale}
         isMobile={isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
-        onRicosChange={this.onRicosChange}
+        onRicosEditorChange={this.onRicosEditorChange}
         onContentStateChange={this.onContentStateChange}
         setLocale={this.setLocaleResource}
         seoMode={seoMode}

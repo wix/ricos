@@ -668,17 +668,7 @@ const config: RichContentEditorProps['config'] = {
           FORMATTING_BUTTONS.TITLE,
           FORMATTING_BUTTONS.BLOCKQUOTE,
           '|',
-          {
-            tooltipKey: 'AlignTextDropdownButton_Tooltip',
-            name: 'Alignment',
-            dataHook: 'Alignment',
-            buttons: [
-              FORMATTING_BUTTONS.ALIGN_LEFT,
-              FORMATTING_BUTTONS.ALIGN_CENTER,
-              FORMATTING_BUTTONS.ALIGN_RIGHT,
-              FORMATTING_BUTTONS.ALIGN_JUSTIFY,
-            ],
-          },
+          FORMATTING_BUTTONS.ALIGN_GROUP,
           FORMATTING_BUTTONS.ORDERED_LIST,
           FORMATTING_BUTTONS.UNORDERED_LIST,
           FORMATTING_BUTTONS.DECREASE_INDENT,

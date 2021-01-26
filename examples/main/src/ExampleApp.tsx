@@ -12,12 +12,18 @@ import {
   disableBrowserBackButton,
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
+<<<<<<< HEAD:examples/main/src/ExampleApp.tsx
 import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
 import type ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
 import { RicosContent } from 'ricos-schema';
 import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
 
+=======
+import { RicosContent } from 'wix-rich-content-common';
+import type ContentStateEditorType from './Components/ContentStateEditor';
+import { EditorState } from 'draft-js';
+>>>>>>> master:examples/main/src/ExampleApp.jsx
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
@@ -25,12 +31,21 @@ const Preview = React.lazy(() => import('../shared/preview/Preview'));
 
 interface ExampleAppProps {
   isMobile?: boolean;
+<<<<<<< HEAD:examples/main/src/ExampleApp.tsx
   onRicosChange?: (content: RicosContent | RicosDraftContent) => void;
   content?: RicosContent | RicosDraftContent;
+=======
+  onContentStateChange?: (contentState: RicosContent) => void;
+  contentState?: RicosContent;
+>>>>>>> master:examples/main/src/ExampleApp.jsx
   setLocale?: (locale: string) => void;
   locale?: string;
   allLocales?: string[];
   editorState?: EditorState;
+<<<<<<< HEAD:examples/main/src/ExampleApp.tsx
+=======
+  onEditorChange?: (editorState: EditorState, traits)=> void;
+>>>>>>> master:examples/main/src/ExampleApp.jsx
   localeResource?: Record<string, string>;
 }
 
@@ -46,7 +61,10 @@ interface ExampleAppState {
   shouldMockUpload?: boolean;
   shouldMultiSelectImages?: boolean;
   shouldNativeUpload?: boolean;
+<<<<<<< HEAD:examples/main/src/ExampleApp.tsx
   shouldUseRicosContent?: boolean;
+=======
+>>>>>>> master:examples/main/src/ExampleApp.jsx
   [key: string]: any;
 }
 
@@ -55,7 +73,11 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   viewerSettings: SectionSettings[];
   editorScrollingElementFn: () => Element;
   viewerScrollingElementFn: () => Element;
+<<<<<<< HEAD:examples/main/src/ExampleApp.tsx
   contentEditor: ContentStateEditorType;
+=======
+  contentStateEditor: ContentStateEditorType;
+>>>>>>> master:examples/main/src/ExampleApp.jsx
 
   constructor(props) {
     super(props);
@@ -105,11 +127,19 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     this.saveContentStateToLocalStorage(this.props.content);
   }
 
+<<<<<<< HEAD:examples/main/src/ExampleApp.tsx
   saveContentStateToLocalStorage = debounce(content => set('contentState', content), 500);
 
   loadContentStateFromLocalStorage = (): RicosContent | RicosDraftContent => get('contentState');
 
   setContentStateEditor = (ref: ContentStateEditorType) => (this.contentEditor = ref);
+=======
+  saveContentStateToLocalStorage = debounce(contentState => set('contentState', contentState), 500);
+
+  loadContentStateFromLocalStorage = (): RicosContent => get('contentState');
+
+  setContentStateEditor = (ref: ContentStateEditorType) => (this.contentStateEditor = ref);
+>>>>>>> master:examples/main/src/ExampleApp.jsx
 
   onContentStateEditorResize = () =>
     this.contentEditor && this.contentEditor.refreshLayout();

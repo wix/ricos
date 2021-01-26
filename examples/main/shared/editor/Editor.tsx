@@ -4,7 +4,10 @@ import {
   RichContentEditorModal,
   RichContentEditorProps,
 } from 'wix-rich-content-editor';
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
 import { RicosEditor, RicosEditorType } from 'ricos-editor';
+=======
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
@@ -13,6 +16,7 @@ import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
 import {
   ModalStyles,
   RicosContent as RicosDraftContent,
@@ -21,6 +25,10 @@ import {
 import { TestAppConfig } from '../../src/types';
 import { RicosContent } from 'ricos-schema';
 import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
+=======
+import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
+import { TestAppConfig } from '../../src/types';
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -36,9 +44,14 @@ const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
 
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
 interface ExampleEditorProps {
   onChange?: RichContentEditorProps['onChange'];
   onRicosChange?: (content: RicosDraftContent | RicosContent) => void;
+=======
+interface ExampleEditprProps {
+  onChange?: RichContentEditorProps['onChange'];
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
   editorState?: RichContentEditorProps['editorState'];
   theme?: RichContentEditorProps['theme'];
   isMobile?: boolean;
@@ -52,18 +65,26 @@ interface ExampleEditorProps {
   mockImageIndex?: number;
   shouldMultiSelectImages?: boolean;
   shouldMockUpload?: boolean;
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
   content?: RicosContent | RicosDraftContent;
   shouldUseRicos?: boolean;
   shouldUseRicosContent?: boolean;
 }
 
 interface ExampleEditorState {
+=======
+  initialState?: RicosContent;
+}
+
+interface ExampleEditprState {
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
   showModal?: boolean;
   modalProps?: any;
   modalStyles?: ModalStyles;
   MobileToolbar?: ElementType;
   TextToolbar?: ElementType;
 }
+<<<<<<< HEAD:examples/main/shared/editor/Editor.tsx
 export default class Editor extends PureComponent<ExampleEditorProps, ExampleEditorState> {
   state: ExampleEditorState = {};
   plugins: RichContentEditorProps['plugins'];
@@ -72,6 +93,16 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
   editor: RichContentEditor | RicosEditorType;
 
   constructor(props: ExampleEditorProps) {
+=======
+export default class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
+  state: ExampleEditprState = {};
+  plugins: RichContentEditorProps['plugins'];
+  config: RichContentEditorProps['config'];
+  helpers: RichContentEditorProps['helpers'];
+  editor: RichContentEditor;
+
+  constructor(props: ExampleEditprProps) {
+>>>>>>> master:examples/main/shared/editor/Editor.jsx
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
