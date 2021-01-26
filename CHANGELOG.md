@@ -15,6 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+
+### :bug: Bug Fix
+- `table`
+  - [#2049](https://github.com/wix/ricos/pull/2049) fix url data changing rel/target when only one of them is present
+
+
 </details>
 <hr/>
 
