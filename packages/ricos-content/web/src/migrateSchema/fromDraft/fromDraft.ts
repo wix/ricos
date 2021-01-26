@@ -8,7 +8,7 @@ import { genKey } from '../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getRicosEntityData';
 
-const createTimestamp = (): rich_content.RichContent['lastEdited'] => {
+const createTimestamp = (): rich_content.Metadata['lastEdited'] => {
   const timeMS = Date.now();
   return {
     seconds: Math.floor(timeMS / 1000),
@@ -185,9 +185,11 @@ export const fromDraft = (draftJSON: RicosContent): rich_content.RichContent => 
 
   const ricosContentMessage = rich_content.RichContent.fromObject({
     nodes,
-    lastEdited: createTimestamp(),
-    updatedVersion: version || '',
-    createdVersion: version || '',
+    metadata: {
+      lastEdited: createTimestamp(),
+      updatedVersion: version || '',
+      createdVersion: version || '',
+    },
   });
 
   const err = rich_content.RichContent.verify(ricosContentMessage);

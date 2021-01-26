@@ -19,6 +19,7 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
   object.blocks && removeEmoji(object);
   base.blocks && removeEmoji(base);
 
+  // Ignore ignoredKeys in object top level
   const objectWithoutIgnored = omit(object, allIgnoredKeys);
   const basetWithoutIgnored = omit(base, allIgnoredKeys);
 

@@ -28,9 +28,7 @@ import "plugins/video.proto";
 
 message RichContent {
     repeated Node nodes = 1 [required = true]; /// List of nodes
-    google.protobuf.Timestamp last_edited = 2 [required = true]; /// Time of latest edit
-    string created_version = 3 [required = true]; /// Rich Content version used to create this schema
-    string updated_version = 4 [required = true]; /// Rich Content version last used to update this schema
+    Metadata metadata = 2 [required = true];
 }
 
 message Node {
@@ -110,4 +108,10 @@ message Decoration {
         LinkData link_data = 4;
         MentionData mention_data = 5;
     }
+}
+
+message Metadata {
+    google.protobuf.Timestamp last_edited = 1 [required = true]; /// Time of latest edit
+    string created_version = 2 [required = true]; /// Rich Content version used to create this schema
+    string updated_version = 3 [required = true]; /// Rich Content version last used to update this schema
 }

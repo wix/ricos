@@ -18,12 +18,12 @@ export const ensureDraftContent = (content: rich_content.RichContent | RicosCont
   'nodes' in content ? toDraft(content) : content;
 
 export const toDraft = (ricosContent: rich_content.RichContent): RicosContent => {
-  const { nodes, updatedVersion } = rich_content.RichContent.toObject(
-    rich_content.RichContent.fromObject(ricosContent),
-    {
-      arrays: true,
-    }
-  );
+  const {
+    nodes,
+    metadata: { updatedVersion },
+  } = rich_content.RichContent.toObject(rich_content.RichContent.fromObject(ricosContent), {
+    arrays: true,
+  });
   const draftContent: RicosContent = {
     blocks: [],
     entityMap: {},
