@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction, cloneDeep } from 'lodash';
+import { isFunction, cloneDeep, isNumber } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
@@ -148,6 +148,13 @@ class PluginViewer extends PureComponent {
             customStyles = { width: src.width, maxWidth: '100%' };
           }
         }
+
+        if (type === 'wix-draft-plugin-action-button') {
+          if (isNumber(config.width)) {
+            componentProps.style = { ...componentProps.style, width: config.width };
+          }
+        }
+
         if (customStyles) {
           containerProps.style = customStyles;
         }
