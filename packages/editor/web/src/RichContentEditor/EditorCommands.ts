@@ -39,7 +39,7 @@ import {
   RICOS_FILE_TYPE,
 } from 'wix-rich-content-common';
 
-type BlockType =
+type TextBlockType =
   | 'unstyled'
   | 'ordered-list-item'
   | 'unordered-list-item'
@@ -77,7 +77,7 @@ export const createEditorCommands = (
   getEditorState: GetEditorState,
   setEditorState: SetEditorState
 ) => {
-  const setBlockType = (type: BlockType) => {
+  const setBlockType = (type: TextBlockType) => {
     setEditorState(RichUtils.toggleBlockType(getEditorState(), type));
   };
 
@@ -88,6 +88,24 @@ export const createEditorCommands = (
         SelectionState.createEmpty(blockKey).merge(selection)
       )
     );
+
+  const editorState = {
+    //TODO: fix this type error
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getSelection: (): any => getEditorState().getSelection(),
+    getSelectedBlockKey: () =>
+      getEditorState()
+        .getSelection()
+        .getAnchorKey(),
+    getTextAlignment: (): TextAlignment => getTextAlignment(getEditorState()),
+    hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
+    isBlockTypeSelected: (type: TextBlockType) => getBlockType(getEditorState()) === type,
+    isUndoStackEmpty: () => getEditorState().getUndoStack().size === 0,
+    isRedoStackEmpty: () => getEditorState().getRedoStack().size === 0,
+    hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
+    getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
+    getSelectedBlockData: () => getEntityData(getEditorState()) || {},
+  };
 
   const textFormattingCommands = {
     undo: (): void => setEditorState(undo(getEditorState())),
@@ -120,7 +138,7 @@ export const createEditorCommands = (
       const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(config);
+        const data = createPluginData(config, editorState.getSelectedBlockData());
         if (data) {
           const newEditorState = updateEntityData(getEditorState(), blockKey, data);
           setEditorState(EditorState.forceSelection(newEditorState, newEditorState.getSelection()));
@@ -128,24 +146,6 @@ export const createEditorCommands = (
       }
     },
     deleteBlock: (blockKey: string) => setEditorState(deleteBlock(getEditorState(), blockKey)),
-  };
-
-  const editorState = {
-    //TODO: fix this type error
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getSelection: (): any => getEditorState().getSelection(),
-    getSelectedBlockKey: () =>
-      getEditorState()
-        .getSelection()
-        .getAnchorKey(),
-    getTextAlignment: (): TextAlignment => getTextAlignment(getEditorState()),
-    hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
-    isBlockTypeSelected: (type: BlockType | 'atomic') => getBlockType(getEditorState()) === type,
-    isUndoStackEmpty: () => getEditorState().getUndoStack().size === 0,
-    isRedoStackEmpty: () => getEditorState().getRedoStack().size === 0,
-    hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
-    getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
-    getSelectedBlockData: () => getEntityData(getEditorState()) || {},
   };
 
   const editorCommands = { ...textFormattingCommands, ...pluginsCommands, ...editorState };

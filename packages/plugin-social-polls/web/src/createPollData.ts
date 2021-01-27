@@ -4,7 +4,10 @@ import { CreatePluginsDataMap, RICOS_POLL_TYPE } from 'wix-rich-content-common';
 import { RicosPoll } from 'ricos-schema';
 import { migratePollData } from 'ricos-content/libs/migrateSchema';
 
-export const createPollData: CreatePluginsDataMap[typeof RICOS_POLL_TYPE] = pluginData => {
+export const createPollData: CreatePluginsDataMap[typeof RICOS_POLL_TYPE] = (
+  pluginData,
+  currentData
+) => {
   if (!pluginData) {
     return DEFAULT_COMPONENT_DATA;
   }
@@ -12,5 +15,5 @@ export const createPollData: CreatePluginsDataMap[typeof RICOS_POLL_TYPE] = plug
     enums: String,
   });
   migratePollData(pollData);
-  return merge({}, DEFAULT_COMPONENT_DATA, pollData);
+  return merge({}, currentData || DEFAULT_COMPONENT_DATA, pollData);
 };

@@ -4,7 +4,10 @@ import { CreatePluginsDataMap, RICOS_GALLERY_TYPE } from 'wix-rich-content-commo
 import { RicosGallery } from 'ricos-schema';
 import { migrateGalleryData } from 'ricos-content/libs/migrateSchema';
 
-export const createGalleryData: CreatePluginsDataMap[typeof RICOS_GALLERY_TYPE] = pluginData => {
+export const createGalleryData: CreatePluginsDataMap[typeof RICOS_GALLERY_TYPE] = (
+  pluginData,
+  currentData
+) => {
   if (!pluginData) {
     return undefined;
   }
@@ -12,5 +15,5 @@ export const createGalleryData: CreatePluginsDataMap[typeof RICOS_GALLERY_TYPE] 
     enums: String,
   });
   migrateGalleryData(galleryData);
-  return merge({}, DEFAULTS, galleryData);
+  return merge({}, currentData || DEFAULTS, galleryData);
 };

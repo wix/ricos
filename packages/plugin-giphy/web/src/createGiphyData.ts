@@ -4,7 +4,10 @@ import { CreatePluginsDataMap, RICOS_GIPHY_TYPE } from 'wix-rich-content-common'
 import { RicosGiphy } from 'ricos-schema';
 import { migrateGiphyData } from 'ricos-content/libs/migrateSchema';
 
-export const createGiphyData: CreatePluginsDataMap[typeof RICOS_GIPHY_TYPE] = pluginData => {
+export const createGiphyData: CreatePluginsDataMap[typeof RICOS_GIPHY_TYPE] = (
+  pluginData,
+  currentData
+) => {
   if (!pluginData) {
     return undefined;
   }
@@ -12,5 +15,5 @@ export const createGiphyData: CreatePluginsDataMap[typeof RICOS_GIPHY_TYPE] = pl
     enums: String,
   });
   migrateGiphyData(giphyData);
-  return merge({}, DEFAULTS, giphyData);
+  return merge({}, currentData || DEFAULTS, giphyData);
 };

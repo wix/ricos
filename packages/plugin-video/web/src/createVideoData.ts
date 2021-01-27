@@ -4,7 +4,10 @@ import { CreatePluginsDataMap, RICOS_VIDEO_TYPE } from 'wix-rich-content-common'
 import { RicosVideo } from 'ricos-schema';
 import { migrateVideoData } from 'ricos-content/libs/migrateSchema';
 
-export const createVideoData: CreatePluginsDataMap[typeof RICOS_VIDEO_TYPE] = pluginData => {
+export const createVideoData: CreatePluginsDataMap[typeof RICOS_VIDEO_TYPE] = (
+  pluginData,
+  currentData
+) => {
   if (!pluginData) {
     return undefined;
   }
@@ -12,5 +15,5 @@ export const createVideoData: CreatePluginsDataMap[typeof RICOS_VIDEO_TYPE] = pl
     enums: String,
   });
   migrateVideoData(videoData);
-  return merge({}, DEFAULTS, videoData);
+  return merge({}, currentData || DEFAULTS, videoData);
 };

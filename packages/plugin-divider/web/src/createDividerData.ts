@@ -4,7 +4,10 @@ import { CreatePluginsDataMap, RICOS_DIVIDER_TYPE } from 'wix-rich-content-commo
 import { RicosDivider } from 'ricos-schema';
 import { migrateDividerData } from 'ricos-content/libs/migrateSchema';
 
-export const createDividerData: CreatePluginsDataMap[typeof RICOS_DIVIDER_TYPE] = pluginData => {
+export const createDividerData: CreatePluginsDataMap[typeof RICOS_DIVIDER_TYPE] = (
+  pluginData,
+  currentData
+) => {
   if (!pluginData) {
     return DEFAULTS;
   }
@@ -12,5 +15,5 @@ export const createDividerData: CreatePluginsDataMap[typeof RICOS_DIVIDER_TYPE] 
     enums: String,
   });
   migrateDividerData(dividerData);
-  return merge({}, DEFAULTS, dividerData);
+  return merge({}, currentData || DEFAULTS, dividerData);
 };
