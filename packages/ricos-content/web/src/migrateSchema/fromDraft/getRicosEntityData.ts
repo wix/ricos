@@ -1,7 +1,7 @@
 /* eslint-disable fp/no-delete */
 import { RicosEntityMap, RicosContentBlock } from '../..';
 import { TO_RICOS_DATA_FIELD, TO_RICOS_PLUGIN_TYPE } from '../consts';
-import { convertBlockDataToDraft, keysToCamelCase } from './convertRicosPluginData';
+import { convertBlockDataToRicos, keysToCamelCase } from './convertRicosPluginData';
 
 export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   const { type, data } = entityMap[key];
@@ -12,7 +12,7 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
     process.exit(1);
   }
 
-  return { type: TO_RICOS_PLUGIN_TYPE[type], [dataFieldName]: convertBlockDataToDraft(type, data) };
+  return { type: TO_RICOS_PLUGIN_TYPE[type], [dataFieldName]: convertBlockDataToRicos(type, data) };
 };
 
 export const parseBlockData = (blockData?: RicosContentBlock['data']) => {

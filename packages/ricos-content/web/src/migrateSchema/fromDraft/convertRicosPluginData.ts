@@ -16,7 +16,7 @@ import {
   VIDEO_TYPE,
 } from '../../consts';
 
-export const convertBlockDataToDraft = (blockType: string, data) => {
+export const convertBlockDataToRicos = (blockType: string, data) => {
   const newData = cloneDeep(data);
   const conversionFunctions = {
     [VIDEO_TYPE]: convertVideoData,
@@ -59,8 +59,14 @@ const convertDividerData = data => {
 const convertImageData = data => {
   has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
-  has(data, 'src.original_file_name') && (data.src.originalFileName = data.src.original_file_name);
-  has(data, 'src.file_name') && (data.src.fileName = data.src.file_name);
+  if (has(data, 'src.original_file_name')) {
+    data.src.originalFileName = data.src.original_file_name;
+    delete data.src.original_file_name;
+  }
+  if (has(data, 'src.file_name')) {
+    data.src.fileName = data.src.file_name;
+    delete data.src.file_name;
+  }
 };
 
 const convertGalleryData = data => {

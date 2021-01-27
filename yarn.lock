@@ -22133,7 +22133,7 @@ proto-list@~1.2.1:
 
 protobufjs@mharsat/protobuf.js:
   version "6.10.2"
-  resolved "https://codeload.github.com/mharsat/protobuf.js/tar.gz/ee4e3341ebf9920b3faa5fe387396e3bba604e1c"
+  resolved "https://codeload.github.com/mharsat/protobuf.js/tar.gz/8c523ea69447d0e0fde43d8b70ef0e4858f9f5d6"
   dependencies:
     "@protobufjs/aspromise" "^1.1.2"
     "@protobufjs/base64" "^1.1.2"

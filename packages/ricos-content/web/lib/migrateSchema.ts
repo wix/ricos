@@ -3,7 +3,7 @@ export {
   toDraft,
   ensureDraftContent,
   ensureRicosContent,
-  convertBlockDataToDraft,
+  convertBlockDataToRicos,
   convertNodeDataToDraft,
   convertDecorationDataToDraft,
 } from '../src/migrateSchema';

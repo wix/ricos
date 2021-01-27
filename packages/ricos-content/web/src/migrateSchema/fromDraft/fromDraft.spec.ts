@@ -8,6 +8,8 @@ import { getTextNodes } from './getTextNodes';
 import ricosFixture from './migratedFixtures/intro.json';
 import complexRicosFixture from './migratedFixtures/migration-content.json';
 import { rich_content } from 'ricos-schema';
+import { convertBlockDataToRicos } from './convertRicosPluginData';
+import { IMAGE_TYPE } from '../../consts';
 
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
@@ -162,5 +164,53 @@ describe('migrate from draft', () => {
       { nodes: [], textData: { decorations: [], text: ' ' }, type: rich_content.Node.Type.TEXT },
     ];
     expect(filterKeys(getTextNodes(block, entityMap))).toEqual(expectedResult);
+  });
+
+  it('should convert block data', () => {
+    const blockData = {
+      config: {
+        alignment: 'center',
+        size: 'content',
+        showTitle: true,
+        showDescription: true,
+        disableExpand: false,
+      },
+      src: {
+        id: '036c6bf6cef5e4409848eb4eb6f80de1',
+        original_file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        width: 2898,
+        height: 3354,
+      },
+      metadata: {
+        caption: 'The caption!',
+        alt: 'feet',
+      },
+    };
+
+    const expectedNodeData = {
+      config: {
+        size: 'CONTENT',
+        alignment: 'CENTER',
+        showTitle: true,
+        showDescription: true,
+        disableExpand: false,
+      },
+      src: {
+        id: '036c6bf6cef5e4409848eb4eb6f80de1',
+        originalFileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        fileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        width: 2898,
+        height: 3354,
+      },
+      metadata: {
+        alt: 'feet',
+        caption: 'The caption!',
+      },
+    };
+
+    const nodeData = convertBlockDataToRicos(IMAGE_TYPE, blockData);
+
+    expect(nodeData).toEqual(expectedNodeData);
   });
 });

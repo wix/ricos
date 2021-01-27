@@ -7,12 +7,12 @@ import { createDecorationEntityData } from './getDraftEntityData';
 
 export interface DraftTypedDecoration extends Omit<rich_content.Decoration, 'type'> {
   type: string;
+  emojiData?: { emojiUnicode: string };
 }
 
 export interface RangedDecoration extends DraftTypedDecoration {
   start: number;
   end: number;
-  emojiData?: { emojiUnicode: string };
 }
 
 interface RangedDecorationMap {
