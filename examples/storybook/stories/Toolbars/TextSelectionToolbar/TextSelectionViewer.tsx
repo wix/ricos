@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RicosContent, RicosViewer } from 'ricos-viewer';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { TextSelectionToolbar, TwitterButton, HighlightButton, UnhighlightButton } from 'wix-rich-content-text-selection-toolbar';
 
 class TextSelectionViewer extends Component<
   { content?: RicosContent },
@@ -14,7 +14,13 @@ class TextSelectionViewer extends Component<
       <div data-hook="viewer" style={{ position: 'relative', paddingTop: '8px' }} ref={this.setRef}>
         <RicosViewer content={content} />
         <TextSelectionToolbar container={this.state.containerRef}>
-          {selectedText => <TwitterButton selectedText={selectedText} />}
+          {selectedText => (
+            <>
+              <TwitterButton selectedText={selectedText} />
+              <HighlightButton />
+              <UnhighlightButton />
+            </>
+          )}
         </TextSelectionToolbar>
       </div>
     );
