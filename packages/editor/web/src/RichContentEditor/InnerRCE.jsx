@@ -48,8 +48,11 @@ class InnerRCE extends PureComponent {
     return config;
   };
 
+  shouldTriggerOnChange = editorState =>
+    !['undo', 'redo'].includes(editorState.getLastChangeType());
+
   onChange = editorState => {
-    this.props.onChange(editorState);
+    this.shouldTriggerOnChange(editorState) && this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
