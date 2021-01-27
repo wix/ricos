@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { normalizeUrl, mergeStyles, validate, anchorScroll } from 'wix-rich-content-common';
+import {
+  normalizeUrl,
+  mergeStyles,
+  validate,
+  anchorScroll,
+  addAnchorTagToUrl,
+} from 'wix-rich-content-common';
 import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
 import { isEqual } from 'lodash';
 import styles from '../statics/link-viewer.scss';
@@ -34,29 +40,23 @@ class LinkViewer extends Component {
 
   handleClick = event => {
     const { componentData, isInEditor, config } = this.props;
-    const settings = config[LINK_TYPE];
-    const { onClick } = settings;
-    const { anchor, url } = componentData;
-    onClick?.(event, componentData?.customData || this.getHref(url, anchor));
-    if (anchor && !isInEditor) {
-      event.preventDefault();
-      const anchorString = `viewer-${anchor}`;
-      const url = new URL(window.location);
-      url.hash = anchorString;
-      history.pushState({}, null, url);
-      const element = document.getElementById(anchorString);
-      anchorScroll(element);
+    const settings = config?.[LINK_TYPE];
+    if (settings) {
+      const { onClick } = settings;
+      const { anchor, url } = componentData;
+      onClick?.(event, componentData?.customData || this.getHref(url, anchor));
+      if (anchor && !isInEditor) {
+        event.preventDefault();
+        const anchorString = `viewer-${anchor}`;
+        const element = document.getElementById(anchorString);
+        addAnchorTagToUrl(anchorString);
+        anchorScroll(element);
+      }
     }
   };
 
-  getHref(url, anchor) {
-    const siteUrl = this.props.config?.[LINK_TYPE]?.siteUrl;
-    if (url) {
-      return normalizeUrl(url);
-    } else if (siteUrl) {
-      return `${siteUrl}#viewer-${anchor}`;
-    }
-  }
+  getHref = (url, anchor) => (url ? normalizeUrl(url) : `#viewer-${anchor}`);
+
   getTarget(anchor, target, anchorTarget) {
     if (anchor) {
       return '_self';

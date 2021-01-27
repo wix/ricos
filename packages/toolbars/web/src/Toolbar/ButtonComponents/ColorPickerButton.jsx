@@ -39,6 +39,7 @@ class ColorPickerButton extends Component {
     this.props.onChange(color);
     this.setState({ currentColor: color });
     this.closeModal();
+    this.props.afterClick && this.props.afterClick();
   };
 
   onResetColor = () => {
@@ -49,6 +50,8 @@ class ColorPickerButton extends Component {
       const defaultColors = getDefaultColors?.();
       this.onChange(defaultColors);
     }
+    this.closeModal();
+    this.props.afterClick && this.props.afterClick();
   };
 
   extractPalette = colorScheme => {
@@ -61,7 +64,7 @@ class ColorPickerButton extends Component {
   };
 
   render() {
-    const { settings, t, isMobile, dropDownProps, theme } = this.props;
+    const { settings, t, isMobile, dropDownProps, theme, nestedMenu } = this.props;
     const { isActive, getIcon, tooltip } = dropDownProps;
     const { currentColor, userColors } = this.state;
     const { isModalOpen } = this.state;
@@ -80,7 +83,7 @@ class ColorPickerButton extends Component {
         />
         {isModalOpen && (
           <div
-            className={classNames(styles.modal, styles.withoutTop)}
+            className={classNames(styles.modal, nestedMenu && styles.withoutTop)}
             data-id={'color-picker-modal'}
           >
             <ColorPicker
@@ -134,6 +137,8 @@ ColorPickerButton.propTypes = {
   dropDownProps: PropTypes.Object,
   theme: PropTypes.object,
   onResetColor: PropTypes.func,
+  nestedMenu: PropTypes.bool,
+  afterClick: PropTypes.func,
 };
 
 export default ColorPickerButton;
