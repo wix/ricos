@@ -27,7 +27,7 @@ Same as normal version, except changes should not be merged to `master` but to a
 ## Hotfix version:
 1. After updating master w/ changelog (including hotfix changelog in the right version), checkout `version-7`
 2. `git cherry-pick {md5-of-hotfix-from-master}`
-3. update the changelog with the new version, commit and push `git push --force origin master:version-7`
+3. update the changelog with the new version and commit
 4. `npm run createVersion` and follow script instruction (this should push to github)
 5. The release will start automatically. Go to [Github actions](https://github.com/wix/ricos/actions?query=workflow%3Arelease) to see that it passed without errors.
 6. `git checkout master`
