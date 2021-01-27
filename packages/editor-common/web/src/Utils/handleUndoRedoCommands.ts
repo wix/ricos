@@ -240,10 +240,10 @@ function getFixedAccordionData(currentData, newData): EntityToReplace {
 }
 
 function setChangeTypeForNewAccordionPair(currentPairs, newPairs, lastChangeType) {
-  if (newPairs.length > currentPairs.length) {
-    const idx = newPairs.findIndex(
-      newPair => !currentPairs.some(currentPair => currentPair.key === newPair.key)
-    );
+  const idx = newPairs.findIndex(
+    newPair => !currentPairs.some(currentPair => currentPair.key === newPair.key)
+  );
+  if (idx) {
     newPairs[idx].title = setLastChangeType(removeFocus(newPairs[idx].title), lastChangeType);
     newPairs[idx].content = setLastChangeType(removeFocus(newPairs[idx].content), lastChangeType);
   }
@@ -270,12 +270,11 @@ function setCellChangeType(rows, rowKey, columnKey, lastChangeType) {
 }
 
 function setChangeTypeForNewTableCells(currentRows, newRows, lastChangeType) {
-  if (Object.keys(newRows).length > Object.keys(currentRows).length) {
-    const rowKey = Object.keys(newRows).find(newRowKey => !currentRows[newRowKey]);
-    rowKey &&
-      Object.keys(newRows[rowKey].columns).forEach(columnKey => {
-        setCellChangeType(newRows, rowKey, columnKey, lastChangeType);
-      });
+  const rowKey = Object.keys(newRows).find(newRowKey => !currentRows[newRowKey]);
+  if (rowKey) {
+    Object.keys(newRows[rowKey].columns).forEach(columnKey => {
+      setCellChangeType(newRows, rowKey, columnKey, lastChangeType);
+    });
   } else {
     Object.keys(newRows).forEach(rowKey => {
       const columnKey = Object.keys(newRows[rowKey].columns).find(
