@@ -40,7 +40,15 @@ class NestedMenu extends Component {
         />
         {isModalOpen && (
           <div className={styles.modal}>
-            <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonList} vertical />
+            <Toolbar
+              theme={theme}
+              isMobile={isMobile}
+              t={t}
+              buttons={buttonList}
+              nestedMenu
+              vertical
+              afterClick={this.toggleModal}
+            />
           </div>
         )}
       </ClickOutside>
