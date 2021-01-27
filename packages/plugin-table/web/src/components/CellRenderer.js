@@ -164,7 +164,11 @@ export default class Cell extends Component {
       <Tag
         data-hook={'table-plugin-cell'}
         ref={this.setTdRef}
-        className={classNames(styles.cell, isContainedInHeader && styles.header)}
+        className={classNames(
+          styles.cell,
+          isContainedInHeader && styles.header,
+          shouldShowSelectedStyle && !isEditing && styles.selected
+        )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}

@@ -15,7 +15,7 @@ export {
 } from './Utils/classNameStrategies';
 export { mergeStyles } from './Utils/mergeStyles';
 
-export { anchorScroll } from './Utils/anchorScroll';
+export { anchorScroll, addAnchorTagToUrl } from './Utils/anchor';
 
 export * from 'ricos-content';
 
