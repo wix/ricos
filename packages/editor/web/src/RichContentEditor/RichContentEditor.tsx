@@ -7,7 +7,6 @@ import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
 import { createEditorCommands } from './EditorCommands';
-import { createEditorState } from './EditorState';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -188,7 +187,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   toolbars;
   innerRCECustomStyleFn;
   EditorCommands: ReturnType<typeof createEditorCommands>;
-  EditorState: ReturnType<typeof createEditorState>;
   getSelectedText: (editorState: EditorState) => string;
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
@@ -239,7 +237,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.initContext();
     this.initPlugins();
     this.initEditorCommands();
-    this.initEditorState();
     if (typeof window !== 'undefined') {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).editor = this;
@@ -456,10 +453,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       this.getEditorState,
       this.updateEditorState
     );
-  };
-
-  initEditorState = () => {
-    this.EditorState = createEditorState(this.getEditorState);
   };
 
   initEditorToolbars(
