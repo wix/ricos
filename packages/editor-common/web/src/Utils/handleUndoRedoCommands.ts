@@ -12,6 +12,8 @@ import {
 } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 
+/* Type declarations */
+
 const IGNORE_TYPE = 'ignore';
 const INNER_RICOS_TYPES = [ACCORDION_TYPE, TABLE_TYPE];
 
@@ -441,7 +443,7 @@ const innerRicosChangeTypeSetters = {
   [ACCORDION_TYPE]: (currentData, prevData) => {
     return {
       ...prevData,
-      pairs: setChangeTypeForNewAccordionPair(currentData.pairs, prevData.pairs, 'undo'),
+      pairs: setChangeTypeForNewAccordionPair(currentData.pairs, prevData.pairs, 'redo'),
     };
   },
   [TABLE_TYPE]: (currentData, prevData) => {
@@ -449,7 +451,7 @@ const innerRicosChangeTypeSetters = {
       ...prevData,
       config: {
         ...prevData.config,
-        rows: setChangeTypeForNewTableCells(currentData.config.rows, prevData.config.rows, 'undo'),
+        rows: setChangeTypeForNewTableCells(currentData.config.rows, prevData.config.rows, 'redo'),
       },
     };
   },
@@ -457,7 +459,7 @@ const innerRicosChangeTypeSetters = {
 
 /* Handle undo-redo calls */
 
-function fixInnerRicosRedoStates(editorState: EditorState, prevEditorState: EditorState) {
+function getContentStateForRedoStack(editorState: EditorState, prevEditorState: EditorState) {
   const { blocks, entityMap } = convertToRaw(editorState.getCurrentContent());
   const prevContentState = convertToRaw(prevEditorState.getCurrentContent());
   const prevBlocksEntitiesData = createBlockEntitiesDataMap(prevContentState);
@@ -480,7 +482,7 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
     ? undo(fixedEditorState)
     : pushToRedoStack(
         removeCompositionModeFromEditorState(fixedEditorState),
-        fixInnerRicosRedoStates(fixedEditorState, editorState)
+        getContentStateForRedoStack(fixedEditorState, editorState)
       );
 }
 
