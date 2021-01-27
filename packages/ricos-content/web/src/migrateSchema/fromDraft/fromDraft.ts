@@ -205,5 +205,6 @@ export const fromDraft = (draftJSON: RicosContent): rich_content.RichContent => 
     longs: Number,
   });
 
-  return ricosContent;
+  // Should consider creating a new type for RichContent with string enums
+  return ricosContent as rich_content.RichContent;
 };
