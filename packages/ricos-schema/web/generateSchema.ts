@@ -1,7 +1,10 @@
+import { mkdirSync } from 'fs';
 import { execSync } from 'child_process';
 
 const DIST_DIR = 'dist';
 const OUT_FILE = `${DIST_DIR}/rich-content`;
+
+mkdirSync(DIST_DIR);
 
 // Generate schema
 execSync(
