@@ -12,6 +12,7 @@ import {
 } from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
+import { InfoIcon } from 'wix-rich-content-editor-common';
 
 class ImageSettings extends Component {
   constructor(props) {
@@ -20,8 +21,8 @@ class ImageSettings extends Component {
 
     this.state = {
       ...this.propsToState(props),
-      isExpandable: !componentData.config.disableExpand,
-      isRightClickAllowed: !componentData.config.disableRightClick,
+      isExpandEnabled: !componentData.config.disableExpand,
+      isRightClickEnabled: !componentData.config.disableRightClick,
     };
     this.initialState = { ...this.state };
     const { t, theme } = props;
@@ -33,6 +34,7 @@ class ImageSettings extends Component {
     this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
+    this.imgCanBeDownloadedTooltip = 'ImageSettings_Image_CanBeDownloaded_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
   }
 
@@ -53,22 +55,43 @@ class ImageSettings extends Component {
     }));
   };
 
-  renderToggle = ({ toggleKey, labelKey }) => (
-    <LabeledToggle
-      key={toggleKey}
-      theme={this.props.theme}
-      checked={this.state[toggleKey]}
-      label={this.props.t(labelKey)}
-      onChange={this.toggleState(toggleKey)}
-    />
-  );
+  renderToggle = ({ toggleKey, labelKey }) => {
+    if (toggleKey === 'isRightClickEnabled') {
+      return (
+        <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
+          <LabeledToggle
+            style={{ paddingTop: 24 }}
+            theme={this.props.theme}
+            checked={this.state[toggleKey]}
+            label={this.props.t(labelKey)}
+            onChange={this.toggleState(toggleKey)}
+          />
+          <InfoIcon
+            isNotification
+            theme={this.props.theme}
+            tooltipText={this.imgCanBeDownloadedTooltip}
+          />
+        </div>
+      );
+    }
+    return (
+      <LabeledToggle
+        key={toggleKey}
+        theme={this.props.theme}
+        checked={this.state[toggleKey]}
+        label={this.props.t(labelKey)}
+        onChange={this.toggleState(toggleKey)}
+      />
+    );
+  };
+
   toggleData = [
     {
-      toggleKey: 'isExpandable',
+      toggleKey: 'isExpandEnabled',
       labelKey: 'ImageSettings_Image_OpensInExpandMode_Label',
     },
     {
-      toggleKey: 'isRightClickAllowed',
+      toggleKey: 'isRightClickEnabled',
       labelKey: 'ImageSettings_Image_CanBeDownloaded_Label',
     },
   ];
@@ -112,8 +135,8 @@ class ImageSettings extends Component {
       ...componentData,
       config: {
         ...componentData.config,
-        disableExpand: !this.state.isExpandable,
-        disableRightClick: !this.state.isRightClickAllowed,
+        disableExpand: !this.state.isExpandEnabled,
+        disableRightClick: !this.state.isRightClickEnabled,
       },
     };
     if (this.state.metadata) {
@@ -200,17 +223,18 @@ class ImageSettings extends Component {
               id="imageSettingsAltInput"
               label={this.altLabel}
               placeholder={this.altInputPlaceholder}
-              tooltipTextKey={this.altTooltip}
+              // tooltipTextKey={this.altTooltip}
               t={t}
               value={metadata.alt || ''}
               onChange={alt => this.metadataUpdated(metadata, { alt })}
               dataHook="imageSettingsAltInput"
               isMobile={isMobile}
             />
+            <InfoIcon isNotification theme={this.props.theme} tooltipText={this.altTooltip} />
           </SettingsSection>
           <SettingsSection
             theme={theme}
-            className={this.styles.imageSettingsSection}
+            className={this.styles.imageSettings_togglesContainer}
             ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
           >
             <div className={this.styles.imageSettingsLabel}>

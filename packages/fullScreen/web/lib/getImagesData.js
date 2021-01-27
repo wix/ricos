@@ -21,6 +21,54 @@ function imageEntryToGallery(data, index) {
   };
 }
 
+const blockToImagesKeys = {
+  [imageType]: (entity, blockKey) => {
+    if (!entity.data.config.disableExpand) return { [blockKey]: 1 };
+  },
+  [tableType]: entity => {
+    const tableKeys = {};
+    Object.entries(entity.data?.config.rows).forEach(([, row]) => {
+      Object.entries(row.columns).forEach(([, column]) => {
+        const keysMapper = getAtomicBlocksKeysMapper(column.content.blocks);
+        Object.entries(column.content.entityMap).forEach(([, block], j) => {
+          if (block.type === imageType && !block.data.config.disableExpand) {
+            tableKeys[keysMapper[j]] = 1;
+          }
+        });
+      });
+    });
+    return tableKeys;
+  },
+  [accordionType]: entity => {
+    const accordionKeys = {};
+    entity.data?.pairs.forEach(pair => {
+      const keysMapper = getAtomicBlocksKeysMapper(pair.content.blocks);
+      Object.entries(pair.content.entityMap).forEach(([, block], j) => {
+        if (block.type === imageType && !block.data.config.disableExpand) {
+          accordionKeys[keysMapper[j]] = 1;
+        }
+      });
+    });
+    return accordionKeys;
+  },
+  [galleryType]: (entity, blockKey) => {
+    if (!entity.data.config.disableExpand) return { [blockKey]: entity.data.items.length };
+  },
+};
+
+function contentTraverser(content) {
+  return content.blocks.map(block => {
+    const entityKey = block.entityRanges[0]?.key;
+    const blockKey = block.key;
+    const entity = content.entityMap[entityKey];
+    const entityType = entity?.type;
+    if (blockToImagesKeys[entityType]) {
+      return blockToImagesKeys[entityType](entity, blockKey);
+    }
+    return null;
+  });
+}
+
 function getTableImages(entry, index) {
   const tableImages = [];
   const { rows } = entry.data.config;
@@ -28,10 +76,12 @@ function getTableImages(entry, index) {
     Object.entries(row.columns).forEach(([, column]) => {
       const entityMap = column.content.entityMap;
       entityMap &&
-        Object.entries(entityMap).forEach(([, entityData]) => {
-          entityData.data?.src &&
-            !entityData.data?.config.disableExpand &&
-            tableImages.push(imageEntryToGallery(entityData.data, index));
+        Object.entries(entityMap).forEach(([, block]) => {
+          if (block.type === imageType || block.type === imageTypeLegacy) {
+            block.data?.src &&
+              !block.data?.config.disableExpand &&
+              tableImages.push(imageEntryToGallery(block.data, index));
+          }
         });
     });
   });
@@ -42,14 +92,13 @@ function getAccordionImages(entry, index) {
   const accordionImages = [];
   entry.data.pairs.forEach(pair => {
     Object.entries(pair.content.entityMap).forEach(([, block]) => {
-      if (block.type === imageType) {
+      if (block.type === imageType || block.type === imageTypeLegacy) {
         block.data?.src &&
           !block.data?.config.disableExpand &&
           accordionImages.push(imageEntryToGallery(block.data, index));
       }
     });
   });
-
   return accordionImages;
 }
 
@@ -60,7 +109,7 @@ function convertEntryToGalleryItems(entry, index) {
     case imageTypeLegacy:
       return entry.data.src && !disableExpand ? [imageEntryToGallery(entry.data, index)] : [];
     case galleryType: {
-      return !disableExpand && entry.data.items;
+      return !disableExpand ? entry.data.items : [];
     }
     case tableType: {
       return getTableImages(entry, index);
@@ -84,74 +133,21 @@ const getAtomicBlocksKeysMapper = blocks => {
   return keysMapper;
 };
 
-const getImagesKeys = (entityMap, innerRceIndexes, keysMapper, currentInnerRceIndex) => {
-  const imagesKeys = {};
-  Object.entries(entityMap).forEach(([, block], j) => {
-    if (block.type === imageType && !block.data.config.disableExpand) {
-      const imageKey = innerRceIndexes[currentInnerRceIndex];
-      imagesKeys[imageKey] = [...imagesKeys[imageKey], ...keysMapper[j]];
-    }
-  });
-  return imagesKeys;
-};
-
-const getBlocksByType = (type, entityMap) =>
-  Object.values(entityMap).filter(block => block.type === type);
-
-const getBlocksIndexes = (blocks, entityMap) =>
-  blocks.map(block => Object.values(entityMap).indexOf(block));
-
-export default function getImagesData(data) {
-  const blockKeys = data.blocks.filter(block => block.type === atomicType);
-
-  const accordionBlocks = getBlocksByType(accordionType, data.entityMap);
-  const accordionIndexes = getBlocksIndexes(accordionBlocks, data.entityMap);
-  let accordionImagesKeys = {};
-  accordionBlocks.forEach((block, i) => {
-    block.data?.pairs.forEach(pair => {
-      const keysMapper = getAtomicBlocksKeysMapper(pair.content.blocks);
-      accordionImagesKeys = {
-        ...accordionImagesKeys,
-        ...getImagesKeys(pair.content.entityMap, accordionIndexes, keysMapper, i),
-      };
-    });
-  });
-
-  const tableBlocks = getBlocksByType(tableType, data.entityMap);
-  const tableIndexes = getBlocksIndexes(tableBlocks, data.entityMap);
-  let tableImagesKeys = {};
-  tableBlocks.forEach((block, i) => {
-    Object.entries(block.data?.config.rows).forEach(([, row]) => {
-      Object.entries(row.columns).forEach(([, column]) => {
-        const keysMapper = getAtomicBlocksKeysMapper(column.content.blocks);
-        tableImagesKeys = {
-          ...tableImagesKeys,
-          ...getImagesKeys(column.content.entityMap, tableIndexes, keysMapper, i),
-        };
-      });
-    });
-  });
-
+export default function getImagesData(content) {
+  const blockKeys = contentTraverser(content).filter(keys => keys);
   let sum = 0;
   const imageMap = {};
-  const images = Object.values(data.entityMap)
+  const images = Object.values(content.entityMap)
     .map(convertEntryToGalleryItems)
     .reduce((urls, entryUrls, i) => {
-      const isAccordionIndex = accordionIndexes.length && accordionIndexes.indexOf(i) !== -1;
-      const isTableIndex = tableIndexes.length && tableIndexes.indexOf(i) !== -1;
-
-      if (entryUrls.length > 0) {
-        if (isAccordionIndex) {
-          accordionImagesKeys[i].forEach(key => key && (imageMap[key] = sum++));
-        } else if (isTableIndex) {
-          tableImagesKeys[i].forEach(key => key && (imageMap[key] = sum++));
-        } else {
-          const blockKey = blockKeys[i].key;
-          imageMap[blockKey] = sum;
-          sum += entryUrls.length;
-        }
+      if (blockKeys[i]) {
+        Object.entries(blockKeys[i]).forEach(([key, size]) => {
+          imageMap[key] = sum;
+          sum += size;
+        });
       }
       return urls.concat(entryUrls);
     }, []);
+
   return { images, imageMap };
 }

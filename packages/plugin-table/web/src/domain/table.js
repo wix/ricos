@@ -189,6 +189,24 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
+  removeCellBorders = range => {
+    range.forEach(({ i, j }) => {
+      const cell = this.getCell(i, j);
+      cell.border = {};
+    });
+    this.setNewRows(this.componentData.config.rows);
+  };
+
+  removeCellBackgroundColor = range => {
+    range.forEach(({ i, j }) => {
+      const cell = this.getCell(i, j);
+      // eslint-disable-next-line no-unused-vars
+      const { backgroundColor, ...rest } = cell.style || {};
+      cell.style = { ...rest };
+    });
+    this.setNewRows(this.componentData.config.rows);
+  };
+
   setColWidthAfterResize = (columnsRefs, tableWidth) => {
     const pixelWidthArr = columnsRefs.map(col => getRefWidthAsNumber(col));
     const totalColsWidth = pixelWidthArr.reduce((acc, val) => acc + val, 0);
@@ -226,15 +244,28 @@ class Table extends TableDataUtil {
     this.saveNewDataFunc(this.componentData);
   };
 
-  distributeRows = (innerEditorsRefs, range) => {
+  getRowMaxContentHeight = (innerEditorsRefs, range) => {
     let maxContentHeight = 0;
     range.forEach(({ i, j }) => {
-      const height = innerEditorsRefs[`${i}-${j}`].editorHeight + 20;
+      const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
       if (height > maxContentHeight) {
         maxContentHeight = height;
       }
     });
-    this.setRowHeight(range, maxContentHeight);
+    return maxContentHeight;
+  };
+
+  distributeRows = (innerEditorsRefs, range) =>
+    this.setRowHeight(range, this.getRowMaxContentHeight(innerEditorsRefs, range));
+
+  getRowsMaxContentHeight = innerEditorsRefs => {
+    const rowsMaxContentHeight = [];
+    const colNum = this.getColNum();
+    [...Array(this.getRowNum()).fill(0)].forEach((val, i) => {
+      const range = getRange({ start: { i, j: 0 }, end: { i, j: colNum } });
+      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, range));
+    });
+    return rowsMaxContentHeight;
   };
 
   isRowInsideMergeRange = (i, j) =>
