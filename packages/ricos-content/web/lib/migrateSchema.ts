@@ -5,5 +5,7 @@ export {
   ensureRicosContent,
   convertBlockDataToRicos,
   convertNodeDataToDraft,
+  convertNodeToDraftData,
+  convertDecorationToDraftData,
   convertDecorationDataToDraft,
 } from '../src/migrateSchema';
