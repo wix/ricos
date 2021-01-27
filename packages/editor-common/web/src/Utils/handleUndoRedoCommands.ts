@@ -458,21 +458,21 @@ const innerRicosChangeTypeSetters = {
 
 /* Handle undo-redo calls */
 
-function fixInnerRicosRedoStates(editorState: EditorState, newEditorState: EditorState) {
+function fixInnerRicosRedoStates(editorState: EditorState, prevEditorState: EditorState) {
   const { blocks, entityMap } = convertToRaw(editorState.getCurrentContent());
-  const newContentState = convertToRaw(newEditorState.getCurrentContent());
-  const newBlocksEntitiesData = createBlockEntitiesDataMap(newContentState);
+  const prevContentState = convertToRaw(prevEditorState.getCurrentContent());
+  const prevBlocksEntitiesData = createBlockEntitiesDataMap(prevContentState);
   blocks
-    .filter(block => hasEntity(block, newBlocksEntitiesData, entityMap))
+    .filter(block => hasEntity(block, prevBlocksEntitiesData, entityMap))
     .forEach(block => {
       const {
         currentEntity: { type, data: currentData },
-        newEntityData: newData,
-      } = extractEntities(block, newBlocksEntitiesData, entityMap);
-      const fixedData = innerRicosChangeTypeSetters[type]?.(currentData, newData);
-      fixedData && replaceComponentData(newEditorState, block.key, fixedData);
+        newEntityData: prevData,
+      } = extractEntities(block, prevBlocksEntitiesData, entityMap);
+      const fixedData = innerRicosChangeTypeSetters[type]?.(currentData, prevData);
+      fixedData && replaceComponentData(prevEditorState, block.key, fixedData);
     });
-  return newEditorState.getCurrentContent();
+  return prevEditorState.getCurrentContent();
 }
 
 function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState): EditorState {
