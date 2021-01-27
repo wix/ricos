@@ -31,7 +31,6 @@ export default class TableRenderer extends PureComponent {
       children,
       tableRef,
       table,
-      isMobile,
       colDragProps,
       onResize,
       onResizeStart,
@@ -53,9 +52,7 @@ export default class TableRenderer extends PureComponent {
               key={i}
               ref={ref => ref && (this.columns[i] = ref)}
               style={{
-                width: isMobile
-                  ? CELL_AUTO_MIN_WIDTH
-                  : table.getCellWidthAsPixel(tableRef?.offsetWidth, i, colsMinWidth),
+                width: table.getCellWidthAsPixel(tableRef?.offsetWidth, i, colsMinWidth),
                 minWidth: colsMinWidth?.[i] || CELL_AUTO_MIN_WIDTH,
               }}
             />
@@ -90,7 +87,6 @@ TableRenderer.propTypes = {
   columns: PropTypes.any,
   table: PropTypes.any,
   tableRef: PropTypes.any,
-  isMobile: PropTypes.bool,
   colDragProps: PropTypes.object,
   onResize: PropTypes.func,
   onResizeStart: PropTypes.func,
