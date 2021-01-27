@@ -231,7 +231,7 @@ function getFixedAccordionData(currentData, newData): EntityToReplace {
     );
     newPairs[changedPairIndex][item] = setLastChangeType(removeFocus(fixedEditorState), 'undo');
     entityToReplace.fixedData = {
-      ...currentData,
+      ...newData,
       pairs: newPairs,
     };
     entityToReplace.shouldUndoAgain = shouldUndoAgain;
@@ -243,7 +243,7 @@ function setChangeTypeForNewAccordionPair(currentPairs, newPairs, lastChangeType
   const idx = newPairs.findIndex(
     newPair => !currentPairs.some(currentPair => currentPair.key === newPair.key)
   );
-  if (idx) {
+  if (idx > -1) {
     newPairs[idx].title = setLastChangeType(removeFocus(newPairs[idx].title), lastChangeType);
     newPairs[idx].content = setLastChangeType(removeFocus(newPairs[idx].content), lastChangeType);
   }
@@ -309,8 +309,8 @@ function getChangedTableCellIndex(newRows, currentRows) {
 
 function getFixedTableData(currentData, newData): EntityToReplace {
   const entityToReplace: EntityToReplace = { didChange: false };
-  const { rows: newRows } = newData.config;
-  const { rows: currentRows, ...currentConfig } = currentData.config;
+  const { rows: newRows, ...newConfig } = newData.config;
+  const { rows: currentRows } = currentData.config;
   const { row, column } = getChangedTableCellIndex(newRows, currentRows);
   entityToReplace.didChange = !!(row && column);
   if (row && column) {
@@ -321,10 +321,10 @@ function getFixedTableData(currentData, newData): EntityToReplace {
     newRows[row].columns[column].content = setLastChangeType(removeFocus(fixedEditorState), 'undo');
     entityToReplace.shouldUndoAgain = shouldUndoAgain;
     entityToReplace.fixedData = {
-      ...currentData,
+      ...newData,
       config: {
         rows: newRows,
-        ...currentConfig,
+        ...newConfig,
       },
     };
   }
@@ -438,18 +438,18 @@ const innerRicosDataFixers = {
 };
 
 const innerRicosChangeTypeSetters = {
-  [ACCORDION_TYPE]: (currentData, newData) => {
+  [ACCORDION_TYPE]: (currentData, prevData) => {
     return {
-      ...newData,
-      pairs: setChangeTypeForNewAccordionPair(currentData.pairs, newData.pairs, 'undo'),
+      ...prevData,
+      pairs: setChangeTypeForNewAccordionPair(currentData.pairs, prevData.pairs, 'undo'),
     };
   },
-  [TABLE_TYPE]: (currentData, newData) => {
+  [TABLE_TYPE]: (currentData, prevData) => {
     return {
-      ...newData,
+      ...prevData,
       config: {
-        ...newData.config,
-        rows: setChangeTypeForNewTableCells(currentData.config.rows, newData.config.rows, 'undo'),
+        ...prevData.config,
+        rows: setChangeTypeForNewTableCells(currentData.config.rows, prevData.config.rows, 'undo'),
       },
     };
   },
