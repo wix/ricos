@@ -60,7 +60,12 @@ export const getRelativePositionStyle = ({
   const tmpLeft =
     boundingRect.left + boundingRect.width / 2 - offsetParentLeft - toolbarWidth / 2 + x;
   const maxLeft = offsetParentRect.right - toolbarWidth - TOOLBAR_OFFSETS.left;
-  const left = calculateLeftOffset(tmpLeft, maxLeft, languageDir, isMobile);
+  let left = calculateLeftOffset(tmpLeft, maxLeft, languageDir, isMobile);
+  if (left + offsetParentLeft + toolbarWidth > window.innerWidth) {
+    // atomic plugins inside table
+    const maxLeftByWindowWidth = window.innerWidth - toolbarWidth - TOOLBAR_OFFSETS.left * 2;
+    left = -1 * offsetParentLeft + maxLeftByWindowWidth;
+  }
   return {
     position: {
       '--offset-top': `${top}px`,
