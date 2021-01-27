@@ -330,7 +330,7 @@
   "UploadFile_Error_Size_Toast": "ファイルの最大サイズは {{maxLimit}}MB です。もう少し容量の小さいファイルを試してください。",
   "Poll_PollSettings_Tab_Settings_Section_Results_Permission_Owner_Tooltip": "すべての回答の投票数を見ることができます。誰もがどの回答に投票したか見ることができます。",
   "GallerySettings_Radios_Horizontal": "横",
-  "QuoteButton_Tooltip": "格言",
+  "QuoteButton_Tooltip": "引用",
   "HtmlEditPanel_HtmlInput_Placeholder": "コードを貼り付け（HTTPSのみ）",
   "Embed_Vertical_Bookings_EmptyState_NoItems_Description": "現在提供しているサービスはありません。",
   "Accordion_AccordionSettings_Tab_Settings_TabName": "設定",
