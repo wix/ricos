@@ -10,6 +10,7 @@ import {
   getImageSrc,
   WIX_MEDIA_DEFAULT,
   anchorScroll,
+  addAnchorTagToUrl,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -241,7 +242,9 @@ class ImageViewer extends React.Component {
         },
       },
     } = this.props;
-    const element = document.getElementById(`viewer-${anchor}`);
+    const anchorString = `viewer-${anchor}`;
+    const element = document.getElementById(anchorString);
+    addAnchorTagToUrl(anchorString);
     anchorScroll(element);
   };
 

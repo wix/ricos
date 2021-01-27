@@ -236,28 +236,42 @@ export class TableDataUtil {
   getSelectionStyle = (selection, defaultBG, defaultBorder) => {
     const range = getRange(selection);
     let selectionBGColor = this.getCellStyle(range[0].i, range[0].j)?.backgroundColor || defaultBG;
-    let selectionBorderColor = this.getCellBorderColor(
+    let selectionBorderColor = this.getConsistentCellBorderColor(
       selection,
       range[0].i,
       range[0].j,
       defaultBorder
     );
     let selectionVerticalAlign = this.getCellStyle(range[0].i, range[0].j)?.verticalAlign || 'top';
+    let selectionBorderIsActive = false;
     range.forEach(({ i, j }) => {
       const currentCellBGColor = this.getCellStyle(i, j)?.backgroundColor || defaultBG;
       if (selectionBGColor !== currentCellBGColor) {
         selectionBGColor = false;
       }
-      const currentCellBorderColor = this.getCellBorderColor(selection, i, j, defaultBorder);
+      const currentCellBorderColor = this.getConsistentCellBorderColor(
+        selection,
+        i,
+        j,
+        selectionBorderColor
+      );
       if (selectionBorderColor !== currentCellBorderColor) {
         selectionBorderColor = false;
+      }
+      if (this.isCellBorderActive(selection, i, j)) {
+        selectionBorderIsActive = true;
       }
       const currentVerticalAlign = this.getCellStyle(i, j)?.verticalAlign || 'top';
       if (selectionVerticalAlign !== currentVerticalAlign) {
         selectionVerticalAlign = false;
       }
     });
-    return { selectionBGColor, selectionBorderColor, selectionVerticalAlign };
+    return {
+      selectionBGColor,
+      selectionBorderColor,
+      selectionVerticalAlign,
+      selectionBorderIsActive,
+    };
   };
 
   getSelectedRows = (range = []) => {
@@ -287,7 +301,7 @@ export class TableDataUtil {
     return selected[0] && selected;
   };
 
-  getCellBorderColor = (selection, row, col, defaultBorder) => {
+  getCellBorderColor = (selection, row, col) => {
     const style = {};
     const range = getRange(selection);
     if (!range.find(({ i, j }) => i === row && j === col - 1)) {
@@ -302,7 +316,11 @@ export class TableDataUtil {
     if (!range.find(({ i, j }) => i === row + 1 && j === col)) {
       style.borderBottom = this.getCell(row, col)?.border?.bottom;
     }
-    const borderStyles = Object.values(style);
+    return Object.values(style);
+  };
+
+  getConsistentCellBorderColor = (selection, row, col, defaultBorder) => {
+    const borderStyles = this.getCellBorderColor(selection, row, col);
     const isBorderConsistent = borderStyles.every(borderStyle => borderStyle === borderStyles[0]);
     if (isBorderConsistent) {
       const borderColor = borderStyles[0]
@@ -312,6 +330,11 @@ export class TableDataUtil {
     } else {
       return false;
     }
+  };
+
+  isCellBorderActive = (selection, row, col) => {
+    const borderStyles = this.getCellBorderColor(selection, row, col);
+    return borderStyles.some(borderStyle => borderStyle !== undefined);
   };
 
   getColorFromBorderStyle = borderStyle => {
