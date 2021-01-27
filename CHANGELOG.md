@@ -16,8 +16,15 @@
     Click to see more.
   </summary>
 
+
+
 </details>
 <hr/>
+
+## 8.17.10 (Jan 27, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#2049](https://github.com/wix/ricos/pull/2049) fix url data changing rel/target when only one of them is present
 
 ## 8.17.9 (Jan 26, 2021)
 ### :bug: Bug Fix
