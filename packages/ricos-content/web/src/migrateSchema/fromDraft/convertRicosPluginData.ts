@@ -4,6 +4,7 @@ import toCamelCase from 'to-camel-case';
 import { has, cloneDeep } from 'lodash';
 import {
   DIVIDER_TYPE,
+  FILE_UPLOAD_TYPE,
   GALLERY_TYPE,
   GIPHY_TYPE,
   HTML_TYPE,
@@ -21,6 +22,7 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
   const conversionFunctions = {
     [VIDEO_TYPE]: convertVideoData,
     [DIVIDER_TYPE]: convertDividerData,
+    [FILE_UPLOAD_TYPE]: convertFileData,
     [IMAGE_TYPE]: convertImageData,
     [GALLERY_TYPE]: convertGalleryData,
     [POLL_TYPE]: convertPollData,
@@ -52,6 +54,11 @@ const convertVideoData = data => {
 
 const convertDividerData = data => {
   has(data, 'type') && (data.type = toConstantCase(data.type));
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
+};
+
+const convertFileData = data => {
   has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };

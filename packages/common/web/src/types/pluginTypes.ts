@@ -68,16 +68,7 @@ import {
   TABLE_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
 } from 'ricos-content';
-import {
-  RicosDivider,
-  RicosFile,
-  RicosGallery,
-  RicosGiphy,
-  RicosHTML,
-  RicosImage,
-  RicosPoll,
-  RicosVideo,
-} from 'ricos-schema';
+import { rich_content } from 'ricos-schema';
 
 export type CreatePluginData<PluginData> = (
   pluginData?: PluginData,
@@ -87,33 +78,33 @@ Record<string, any> | undefined;
 
 // TODO: remove legacy types after moving to prose
 export interface CreatePluginsDataMap {
-  [RICOS_DIVIDER_TYPE]?: CreatePluginData<RicosDivider>;
-  [DIVIDER_TYPE]?: CreatePluginData<RicosDivider>;
-  [RICOS_GIPHY_TYPE]?: CreatePluginData<RicosGiphy>;
-  [GIPHY_TYPE]?: CreatePluginData<RicosGiphy>;
-  [RICOS_HTML_TYPE]?: CreatePluginData<RicosHTML>;
-  [HTML_TYPE]?: CreatePluginData<RicosHTML>;
-  [RICOS_GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
-  [GALLERY_TYPE]?: CreatePluginData<RicosGallery>;
-  [RICOS_POLL_TYPE]?: CreatePluginData<RicosPoll>;
-  [POLL_TYPE]?: CreatePluginData<RicosPoll>;
-  [RICOS_VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
-  [VIDEO_TYPE]?: CreatePluginData<RicosVideo>;
-  [RICOS_FILE_TYPE]?: CreatePluginData<RicosFile>;
-  [FILE_UPLOAD_TYPE]?: CreatePluginData<RicosFile>;
-  [RICOS_IMAGE_TYPE]?: CreatePluginData<RicosImage>;
-  [IMAGE_TYPE]?: CreatePluginData<RicosImage>;
+  [RICOS_DIVIDER_TYPE]?: CreatePluginData<rich_content.DividerData>;
+  [DIVIDER_TYPE]?: CreatePluginData<rich_content.DividerData>;
+  [RICOS_GIPHY_TYPE]?: CreatePluginData<rich_content.GiphyData>;
+  [GIPHY_TYPE]?: CreatePluginData<rich_content.GiphyData>;
+  [RICOS_HTML_TYPE]?: CreatePluginData<rich_content.HTMLData>;
+  [HTML_TYPE]?: CreatePluginData<rich_content.HTMLData>;
+  [RICOS_GALLERY_TYPE]?: CreatePluginData<rich_content.GalleryData>;
+  [GALLERY_TYPE]?: CreatePluginData<rich_content.GalleryData>;
+  [RICOS_POLL_TYPE]?: CreatePluginData<rich_content.PollData>;
+  [POLL_TYPE]?: CreatePluginData<rich_content.PollData>;
+  [RICOS_VIDEO_TYPE]?: CreatePluginData<rich_content.VideoData>;
+  [VIDEO_TYPE]?: CreatePluginData<rich_content.VideoData>;
+  [RICOS_FILE_TYPE]?: CreatePluginData<rich_content.FileData>;
+  [FILE_UPLOAD_TYPE]?: CreatePluginData<rich_content.FileData>;
+  [RICOS_IMAGE_TYPE]?: CreatePluginData<rich_content.ImageData>;
+  [IMAGE_TYPE]?: CreatePluginData<rich_content.ImageData>;
 }
 
 export interface PluginsDataMap {
-  [RICOS_DIVIDER_TYPE]?: RicosDivider;
-  [RICOS_GIPHY_TYPE]?: RicosGiphy;
-  [RICOS_HTML_TYPE]?: RicosHTML;
-  [RICOS_GALLERY_TYPE]?: RicosGallery;
-  [RICOS_POLL_TYPE]?: RicosPoll;
-  [RICOS_VIDEO_TYPE]?: RicosVideo;
-  [RICOS_FILE_TYPE]?: RicosFile;
-  [RICOS_IMAGE_TYPE]?: RicosImage;
+  [RICOS_DIVIDER_TYPE]?: rich_content.DividerData;
+  [RICOS_GIPHY_TYPE]?: rich_content.GiphyData;
+  [RICOS_HTML_TYPE]?: rich_content.HTMLData;
+  [RICOS_GALLERY_TYPE]?: rich_content.GalleryData;
+  [RICOS_POLL_TYPE]?: rich_content.GalleryData;
+  [RICOS_VIDEO_TYPE]?: rich_content.VideoData;
+  [RICOS_FILE_TYPE]?: rich_content.FileData;
+  [RICOS_IMAGE_TYPE]?: rich_content.ImageData;
 }
 
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
