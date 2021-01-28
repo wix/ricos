@@ -687,7 +687,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setInPluginEditingMode = (shouldEnable: boolean) => {
     // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
     const mode = shouldEnable ? 'render' : 'edit';
-    this.editor.setMode(mode);
+    this.editor?.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
     const toolbarsToIgnore: ToolbarsToIgnore = shouldEnable ? ['SideToolbar'] : [];
     this.setState({ toolbarsToIgnore });
