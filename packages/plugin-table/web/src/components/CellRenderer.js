@@ -219,7 +219,8 @@ class Editor extends Component {
   shouldComponentUpdate(nextProps) {
     const { editing, selected, contentState } = this.props;
     const isContentStateChanged =
-      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
+      JSON.stringify(contentState.getCurrentContent() || {}) !==
+      JSON.stringify(nextProps.contentState.getCurrentContent() || {});
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
