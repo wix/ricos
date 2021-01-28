@@ -1,5 +1,5 @@
 import React from 'react';
-import { RicosViewer, RicosViewerProps } from './index';
+import { RicosViewerType as RicosViewer, RicosViewerProps } from './index';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
 import introState from '../../../../e2e/tests/fixtures/intro.json';

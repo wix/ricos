@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
+import { Version } from 'wix-rich-content-common';
 
 interface State {
   isPreviewExpanded: boolean;
@@ -68,3 +69,18 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     );
   }
 }
+
+const withFullscreenStyles = Component => props => {
+  const getFullscreenCssUrl = () => {
+    const version = Version.currentVersion;
+    return `https://static.parastorage.com/unpkg/wix-rich-content-fullscreen@${version}/dist/styles.min.css`;
+  };
+  return (
+    <>
+      <link href={getFullscreenCssUrl()} rel="stylesheet" />
+      <Component {...props} />
+    </>
+  );
+};
+
+export default withFullscreenStyles(RicosViewer);
