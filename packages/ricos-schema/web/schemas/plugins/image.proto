@@ -1,7 +1,14 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
-import "plugin_spoiler.proto";
+
+message ImageData {
+    ImageConfig config = 1;
+    ImageSource src = 2 [required = true];
+    ImageMetadata metadata = 3;
+}
 
 message ImageLink {    
     string url = 1 [required = true];
@@ -30,7 +37,7 @@ message ImageConfig {
     bool show_description = 4;
     string anchor = 5;
     ImageLink link = 6;
-    RicosSpoiler spoiler = 7;
+    Spoiler spoiler = 7;
     bool disableExpand = 8;
 }
 
@@ -45,10 +52,4 @@ message ImageSource {
 message ImageMetadata {
     string alt = 1;
     string caption = 2;
-}
-
-message RicosImage {
-    ImageConfig config = 1;
-    ImageSource src = 2 [required = true];
-    ImageMetadata metadata = 3;
 }

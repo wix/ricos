@@ -1,10 +1,10 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
 
-message VerticalEmbedConfig {}
-
-message RicosVerticalEmbed {
+message VerticalEmbedData {
     message SelectedProduct {
         string id = 1;
         string name = 2;
@@ -22,3 +22,5 @@ message RicosVerticalEmbed {
     SelectedProduct selectedProduct = 2 [required = true];
     VerticalEmbedConfig config = 3;
 }
+
+message VerticalEmbedConfig {}

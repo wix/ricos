@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package rich_content;
+
+import "../common.proto";
+
+message PollData {
+  PollConfig config = 1 [required = true];
+  Poll poll = 2 [required = true];
+  PollWidgetLayout layout = 3 [required = true];
+  PollWidgetDesign design = 4 [required = true];
+  string site_token = 5;
+}
+
+message PollConfig {
+  bool enable_vote_role = 1;
+}
+
+message PollOption {
+  int32 anonymous_count = 1;
+  int32 count = 2;
+  string id = 3;
+  repeated string latest_voters = 4;
+  string media_id = 5;
+  int32 rating = 6;
+  string title = 7;
+}
+
+message PollSettings {
+  enum ResultsVisibility {
+    ALWAYS = 0;
+    VOTERS_ONLY = 1;
+    ONLY_ME = 2;
+  }
+
+  enum VoteRole {
+    ALL = 0;
+    SITE_MEMBERS = 1;
+  }
+
+  bool multiple_votes = 1;
+  ResultsVisibility results_visibility = 2;
+  VoteRole vote_role = 3;
+  bool voters_display = 4;
+  bool votes_display = 5;
+}
+
+message PollWidgetLayout {
+  message PollLayout {
+    enum LayoutType {
+      LIST = 0;
+      GRID = 1;
+    }
+
+    enum Direction {
+      LTR = 0;
+      RTL = 1;
+    }
+
+    LayoutType type = 1;
+    Direction direction = 2;
+    bool enable_image = 3;
+  }
+  
+  message PollOptionLayout {
+    bool enable_image = 1;
+  }
+  
+  PollLayout poll = 1;
+  PollOptionLayout option = 2;
+}
+
+message Poll {    
+  int32 anonymous_count = 1;
+  int32 count = 2;
+  string created_by = 3;
+  bool creator_flag = 4;
+  string id = 5;
+  string media_id = 6;
+  repeated PollOption options = 7;
+  repeated string own_votes = 8; // poll_option_id
+  string title = 9;
+  PollSettings settings = 10;
+}
+
+
+message PollWidgetDesign {
+  message PollDesign {
+    enum BackgroundType {
+      COLOR = 0;
+      IMAGE = 1;
+      GRADIENT = 2;
+    }
+
+    BackgroundType background_type = 1;
+    string background = 2;
+    int32 border_radius = 3;
+  }
+  
+  message PollOptionDesign {
+    int32 border_radius = 1;
+  }
+  
+  PollDesign poll = 1;
+  PollOptionDesign option = 2;
+}
