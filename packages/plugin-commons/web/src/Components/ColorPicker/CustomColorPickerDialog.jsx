@@ -12,7 +12,7 @@ class CustomColorPickerDialog extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.initialColor = props.color;
     this.state = {
-      color: props.color,
+      color: props.color[0] === '#' ? props.color : '#ffffff',
     };
     this.onCancel = this.onCancel.bind(this);
     this.onUpdate = this.onUpdate.bind(this);

@@ -175,6 +175,7 @@ const createBasePlugin = (
       languageDir,
       getEditorState,
       linkTypes: config.LINK?.linkTypes,
+      innerRCERenderedIn,
     });
 
   const externalizedButtonProps:
