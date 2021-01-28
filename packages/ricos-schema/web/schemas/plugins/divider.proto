@@ -1,6 +1,20 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
+
+message DividerData {
+    enum DividerType {
+        DOUBLE = 0;
+        SINGLE = 1;
+        DASHED = 2;
+        DOTTED = 3;
+    }
+
+    DividerType type = 1 [required = true];
+    DividerConfig config = 2;
+}
 
 message DividerConfig {
     enum DividerSize {
@@ -18,16 +32,4 @@ message DividerConfig {
     DividerSize size = 1;
     DividerAlignment alignment = 2;
     string text_wrap = 3;
-}
-
-message RicosDivider {
-    enum DividerType {
-        DOUBLE = 0;
-        SINGLE = 1;
-        DASHED = 2;
-        DOTTED = 3;
-    }
-
-    DividerType type = 1 [required = true];
-    DividerConfig config = 2;
 }

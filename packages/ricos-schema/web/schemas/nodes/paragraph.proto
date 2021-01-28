@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package rich_content;
+
+import "../common.proto";
+
+message ParagraphData {
+    Common.TextAlignment text_alignment = 1;
+    Common.DynamicStyles dynamic_styles = 2;
+    int32 depth = 3;
+}

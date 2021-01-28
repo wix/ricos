@@ -50,7 +50,7 @@
         //     left: 0;
         // }
         &.withoutTop {
-            top: unset;
+            top: 0;
         }
         &.withoutPadding {
             padding: unset;
@@ -58,6 +58,10 @@
         .contextMenuDivider {
             height: 1px;
             background-color: #e0e0e3;
+        }
+        &.groupButtonModal {
+            width: 100%;
+            min-width: unset;
         }
     }
 }
