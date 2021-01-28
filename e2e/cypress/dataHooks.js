@@ -157,6 +157,10 @@ export const TABLE_PLUGIN = {
   SPLIT: 'split-cells',
   ROW_HEADER: 'row-header',
   COL_HEADER: 'col-header',
+  ALIGNMENT: 'VerticalAlignment',
+  ALIGN_TOP: 'vertical-alignment-align-top',
+  ALIGN_MIDDLE: 'vertical-alignment-align-middle',
+  ALIGN_BOTTOM: 'vertical-alignment-align-bottom',
 };
 
 export const SOUND_CLOUD = {
