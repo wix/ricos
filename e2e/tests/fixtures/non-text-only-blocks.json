@@ -1,122 +1,122 @@
 {
-    "blocks": [
-      {
-        "key": "50k2j",
-        "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "di4v2",
-        "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-        "type": "ordered-list-item",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "7oken",
-        "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.\n",
-        "type": "ordered-list-item",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "f0nm7",
-        "text": " ",
-        "type": "atomic",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [
-          {
-            "offset": 0,
-            "length": 1,
-            "key": 0
-          }
-        ],
-        "data": {}
-      },
-      {
-        "key": "3rtkv",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "ed7gi",
-        "text": "",
-        "type": "ordered-list-item",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "56q1i",
-        "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "eh57o",
-        "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
-        "type": "unordered-list-item",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "ad0na",
-        "text": "Override the digital divide with additional clickthroughs from DevOps.",
-        "type": "unordered-list-item",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "a2d7v",
-        "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      }
-    ],
-    "entityMap": {
-      "0": {
-        "type": "wix-draft-plugin-image",
-        "mutability": "IMMUTABLE",
-        "data": {
-          "config": {
-            "alignment": "center",
-            "size": "content",
-            "showTitle": true,
-            "showDescription": true
-          },
-          "src": {
-            "id": "2f64886b1998251a4a5e47d25fff5ffa",
-            "original_file_name": "8bb438_92b217c36c98400a82e5c59bf131d957.jpg",
-            "file_name": "8bb438_92b217c36c98400a82e5c59bf131d957.jpg",
-            "width": 1600,
-            "height": 1068
-          }
+  "blocks": [
+    {
+      "key": "50k2j",
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "di4v2",
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7oken",
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.\n",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "f0nm7",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "3rtkv",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ed7gi",
+      "text": "",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "56q1i",
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "eh57o",
+      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "type": "unordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ad0na",
+      "text": "Override the digital divide with additional clickthroughs from DevOps.",
+      "type": "unordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a2d7v",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "2f64886b1998251a4a5e47d25fff5ffa",
+          "original_file_name": "8bb438_92b217c36c98400a82e5c59bf131d957.jpg",
+          "file_name": "8bb438_92b217c36c98400a82e5c59bf131d957.jpg",
+          "width": 1600,
+          "height": 1068
         }
       }
-    },
-    "VERSION": "7.5.0"
-  }
+    }
+  },
+  "VERSION": "8.17.10"
+}

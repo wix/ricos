@@ -20,10 +20,15 @@ export default class TableRenderer extends PureComponent {
   onResizeWindow = () => {
     this.setState({ windowWidth: window.innerWidth });
     const { table, tableRef } = this.props;
-    this.columns.forEach((col, i) => {
-      const width = table.getCellWidthAsPixel(tableRef?.offsetWidth, i, table.getColsMinWidth());
-      col && (col.style.width = width + 'px');
-    });
+    tableRef.offsetWidth &&
+      this.columns.forEach((col, i) => {
+        const width = table.getCellWidthAsPixel(
+          tableRef.offsetWidth - 1,
+          i,
+          table.getColsMinWidth()
+        );
+        col && (col.style.width = width + 'px');
+      });
   };
 
   render() {
@@ -31,7 +36,6 @@ export default class TableRenderer extends PureComponent {
       children,
       tableRef,
       table,
-      isMobile,
       colDragProps,
       onResize,
       onResizeStart,
@@ -48,18 +52,17 @@ export default class TableRenderer extends PureComponent {
     return (
       <table className={styles.container}>
         <colgroup>
-          {table.getColsWidth().map((cellWidth, i) => (
-            <col
-              key={i}
-              ref={ref => ref && (this.columns[i] = ref)}
-              style={{
-                width: isMobile
-                  ? CELL_AUTO_MIN_WIDTH
-                  : table.getCellWidthAsPixel(tableRef?.offsetWidth, i, colsMinWidth),
-                minWidth: colsMinWidth?.[i] || CELL_AUTO_MIN_WIDTH,
-              }}
-            />
-          ))}
+          {tableRef?.offsetWidth &&
+            table.getColsWidth().map((cellWidth, i) => (
+              <col
+                key={i}
+                ref={ref => ref && (this.columns[i] = ref)}
+                style={{
+                  width: table.getCellWidthAsPixel(tableRef.offsetWidth - 1, i, colsMinWidth),
+                  minWidth: colsMinWidth?.[i] || CELL_AUTO_MIN_WIDTH,
+                }}
+              />
+            ))}
         </colgroup>
         <thead>
           {isEditMode && (
@@ -90,7 +93,6 @@ TableRenderer.propTypes = {
   columns: PropTypes.any,
   table: PropTypes.any,
   tableRef: PropTypes.any,
-  isMobile: PropTypes.bool,
   colDragProps: PropTypes.object,
   onResize: PropTypes.func,
   onResizeStart: PropTypes.func,
