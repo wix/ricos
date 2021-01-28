@@ -25,6 +25,9 @@ const blockToImagesKeys = {
   [imageType]: (entity, blockKey) => {
     if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
   },
+  [imageTypeLegacy]: (entity, blockKey) => {
+    if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
+  },
   [tableType]: entity => {
     let tableImagesKeys = {};
     Object.entries(entity.data?.config.rows).forEach(([, row]) => {
@@ -68,14 +71,17 @@ function contentTraverser(content) {
 }
 
 function calcNumberOfImages(entity) {
-  if (entity.type === imageType) return 1;
+  if (entity.type === imageType || entity.type === imageTypeLegacy) return 1;
   if (entity.type === galleryType) return entity.data.items.length;
 }
 
 function imagesKeysMapper(entityMap, atomicKeysMap) {
   const imagesKeys = {};
   Object.entries(entityMap).forEach(([, block], j) => {
-    if (block.type === imageType && !block.data.config.disableExpand) {
+    if (
+      (block.type === imageType || block.type === imageTypeLegacy) &&
+      !block.data.config.disableExpand
+    ) {
       imagesKeys[atomicKeysMap[j]] = calcNumberOfImages(block);
     }
   });
