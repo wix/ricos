@@ -39,7 +39,6 @@ class TableViewer extends Component {
         {...props}
         table={this.table}
         tableRef={this.tableViewerRef}
-        isMobile={this.props.isMobile}
         colDragProps={this.props.colDragProps}
         onResize={this.props.onResize}
         onResizeStart={this.props.onResizeStart}

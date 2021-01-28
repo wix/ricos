@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package rich_content;
+
+import "../common.proto";
+
+message LinkPreviewData {
+  LinkPreviewConfig config = 1 [required = true];
+  string title = 2 [required = true];
+  string thumbnail_url = 3 [required = true];
+  string description = 4;
+  string provider_url = 5;
+  string html = 6;
+  string socialType = 7;
+}
+
+message LinkPreviewConfig {
+  message Link {
+    string url = 1 [required = true];
+    string rel = 2;
+    string target = 3;
+  }
+
+  Link link = 1 [required = true];
+  string alignment = 2;
+  string size = 3;
+  int32 width = 4;
+}

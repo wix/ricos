@@ -15,8 +15,23 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [#2058](https://github.com/wix/ricos/pull/2058) bg color update
 </details>
 <hr/>
+
+## 8.17.10 (Jan 27, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#2049](https://github.com/wix/ricos/pull/2049) fix url data changing rel/target when only one of them is present
+
+## 8.17.9 (Jan 26, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#2038](https://github.com/wix/ricos/pull/2038) fix anchor's tag overriding url,add `href` value & remove `siteUrl` prop
 
 ## 8.17.8 (Jan 25, 2021)
 ### :rocket: New Feature
