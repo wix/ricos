@@ -15,13 +15,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
-
+## 8.17.11 (Jan 27, 2021)
 ### :bug: Bug Fix
 - `unsupported-blocks`
   - [#2058](https://github.com/wix/ricos/pull/2058) bg color update
-</details>
-<hr/>
+
 
 ## 8.17.10 (Jan 27, 2021)
 ### :bug: Bug Fix
