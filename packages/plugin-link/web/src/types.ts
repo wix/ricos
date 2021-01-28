@@ -6,6 +6,10 @@ export const CUSTOM_LINK_TYPE = 'ricos-plugin-custom-link';
 
 export interface LinkPluginEditorConfig extends EditorPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  url: string; // TODO: check if this is correct
+  rel: string;
+  target: string;
+  href: string;
 }
 export interface LinkPluginViewerConfig extends ViewerPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any

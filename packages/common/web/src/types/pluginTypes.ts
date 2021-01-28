@@ -67,6 +67,8 @@ import {
   ACCORDION_TYPE,
   TABLE_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
+  RICOS_LINK_TYPE,
+  RICOS_MENTION_TYPE,
 } from 'ricos-content';
 import { rich_content } from 'ricos-schema';
 
@@ -94,6 +96,10 @@ export interface CreatePluginsDataMap {
   [FILE_UPLOAD_TYPE]?: CreatePluginData<rich_content.FileData>;
   [RICOS_IMAGE_TYPE]?: CreatePluginData<rich_content.ImageData>;
   [IMAGE_TYPE]?: CreatePluginData<rich_content.ImageData>;
+  [RICOS_LINK_TYPE]?: CreatePluginData<rich_content.LinkData>;
+  [LINK_TYPE]?: CreatePluginData<rich_content.LinkData>;
+  [RICOS_MENTION_TYPE]?: CreatePluginData<rich_content.MentionData>;
+  [MENTION_TYPE]?: CreatePluginData<rich_content.MentionData>;
 }
 
 export interface PluginsDataMap {
@@ -105,6 +111,11 @@ export interface PluginsDataMap {
   [RICOS_VIDEO_TYPE]?: rich_content.VideoData;
   [RICOS_FILE_TYPE]?: rich_content.FileData;
   [RICOS_IMAGE_TYPE]?: rich_content.ImageData;
+}
+
+export interface DecorationsDataMap {
+  [RICOS_LINK_TYPE]?: rich_content.LinkData;
+  [RICOS_MENTION_TYPE]?: rich_content.MentionData;
 }
 
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';

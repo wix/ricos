@@ -16,9 +16,12 @@ import {
   hasLinksInSelection,
   getLinkDataInSelection,
   getEntityData,
+  insertLinkAtCurrentSelection,
+  removeLinksInSelection,
 } from 'wix-rich-content-editor-common';
 import {
   PluginsDataMap,
+  DecorationsDataMap,
   GetEditorState,
   SetEditorState,
   IMAGE_TYPE,
@@ -37,6 +40,10 @@ import {
   RICOS_VIDEO_TYPE,
   RICOS_POLL_TYPE,
   RICOS_FILE_TYPE,
+  RICOS_LINK_TYPE,
+  LINK_TYPE,
+  RICOS_MENTION_TYPE,
+  MENTION_TYPE,
 } from 'wix-rich-content-common';
 
 type TextBlockType =
@@ -70,6 +77,18 @@ const FROM_RICOS_PLUGIN_TYPE_MAP = {
   [RICOS_IMAGE_TYPE]: IMAGE_TYPE,
   [RICOS_VIDEO_TYPE]: VIDEO_TYPE,
   [RICOS_POLL_TYPE]: POLL_TYPE,
+  [RICOS_LINK_TYPE]: LINK_TYPE,
+  [RICOS_MENTION_TYPE]: MENTION_TYPE,
+};
+
+const insertDecorationsMapFuncs = {
+  [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
+  [RICOS_MENTION_TYPE]: () => {}, //WIP
+};
+
+const removeDecorationsMapFuncs = {
+  [RICOS_LINK_TYPE]: removeLinksInSelection,
+  [RICOS_MENTION_TYPE]: () => {}, //WIP
 };
 
 export const createEditorCommands = (
@@ -148,6 +167,36 @@ export const createEditorCommands = (
     deleteBlock: (blockKey: string) => setEditorState(deleteBlock(getEditorState(), blockKey)),
   };
 
-  const editorCommands = { ...textFormattingCommands, ...pluginsCommands, ...editorState };
+  const decorationsCommands = {
+    insertDecoration: <K extends keyof DecorationsDataMap>(
+      type: K,
+      config?: DecorationsDataMap[K]
+    ) => {
+      const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const { [draftType]: createPluginData } = createPluginsDataMap;
+      if (createPluginData) {
+        const data = createPluginData(config);
+        if (data) {
+          const newEditorState = insertDecorationsMapFuncs[type]?.(getEditorState(), data);
+          if (newEditorState) {
+            setEditorState(newEditorState);
+          }
+        }
+      }
+    },
+    removeDecoration: <K extends keyof DecorationsDataMap>(type: K) => {
+      const newEditorState = removeDecorationsMapFuncs[type]?.(getEditorState());
+      if (newEditorState) {
+        setEditorState(newEditorState);
+      }
+    },
+  };
+
+  const editorCommands = {
+    ...textFormattingCommands,
+    ...pluginsCommands,
+    ...decorationsCommands,
+    ...editorState,
+  };
   return editorCommands;
 };
