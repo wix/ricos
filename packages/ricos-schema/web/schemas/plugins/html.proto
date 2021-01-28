@@ -1,6 +1,14 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
+
+message HTMLData {
+  string src = 1 [required = true];
+  string src_type = 2;
+  HTMLConfig config = 3;
+}
 
 message HTMLConfig {
   enum HTMLAlignment {
@@ -13,10 +21,4 @@ message HTMLConfig {
   int32 height = 2;
   HTMLAlignment alignment = 3;
   bool safe = 4;
-}
-
-message RicosHTML {
-  string src = 1 [required = true];
-  string src_type = 2;
-  HTMLConfig config = 3;
 }

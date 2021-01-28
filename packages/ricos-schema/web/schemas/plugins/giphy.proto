@@ -1,6 +1,14 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
+
+message GiphyData {
+    GIFSource gif = 1 [required = true];
+    GiphyConfig config = 2;
+    GIphyConfigViewer configViewer = 3;
+}
 
 message GIFSource {
     int32 height = 1 [required = true];
@@ -30,10 +38,4 @@ message GIphyConfigViewer {
     }
 
     GiphyViewerSizes sizes = 1;
-}
-
-message RicosGiphy {
-    GIFSource gif = 1 [required = true];
-    GiphyConfig config = 2;
-    GIphyConfigViewer configViewer = 3;
 }
