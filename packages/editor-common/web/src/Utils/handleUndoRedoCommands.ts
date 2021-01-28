@@ -241,23 +241,46 @@ function getFixedAccordionData(currentData, newData): EntityToReplace {
   return entityToReplace;
 }
 
-function setChangeTypeForNewAccordionPair(currentPairs, newPairs, lastChangeType) {
-  const idx = newPairs.findIndex(
-    newPair => !currentPairs.some(currentPair => currentPair.key === newPair.key)
+function setPairItemChangeType(editorState, lastChangeType) {
+  return setLastChangeType(
+    EditorState.createWithContent(editorState.getCurrentContent()),
+    lastChangeType
   );
-  if (idx > -1) {
-    newPairs[idx].title = setLastChangeType(removeFocus(newPairs[idx].title), lastChangeType);
-    newPairs[idx].content = setLastChangeType(removeFocus(newPairs[idx].content), lastChangeType);
+}
+
+function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
+  return newPairs.map(pair => {
+    return {
+      key: pair.key,
+      title: setPairItemChangeType(pair.title, lastChangeType),
+      content: setPairItemChangeType(pair.content, lastChangeType),
+    };
+  });
+}
+
+function fixBrokenPair(newPairs, currentPairs, brokenPairIndex) {
+  if (brokenPairIndex > -1) {
+    ['title', 'content'].forEach(item => {
+      newPairs[brokenPairIndex][item] = setLastChangeType(
+        removeFocus(currentPairs[brokenPairIndex][item]),
+        'undo'
+      );
+    });
   }
   return newPairs;
 }
 
 function handleAccordionEntity(currentData, newData): EntityToReplace {
-  // a pair with no key, title or content is broken
-  const isBrokenContent = newData.pairs.some(pair => !(pair.key && pair.title && pair.content));
+  const brokenPairIndex = newData.pairs.findIndex(
+    pair => !(pair.key && pair.title && pair.content)
+  );
   const entityToReplace: EntityToReplace = {
-    didChange: isBrokenContent || didAccordionConfigChange(currentData, newData),
-    shouldUndoAgain: isBrokenContent,
+    didChange: brokenPairIndex > -1 || didAccordionConfigChange(currentData, newData),
+    fixedData: {
+      ...newData,
+      pairs: fixBrokenPair(newData.pairs, currentData.pairs, brokenPairIndex),
+    },
+    shouldUndoAgain: brokenPairIndex > -1,
   };
   return entityToReplace.didChange ? entityToReplace : getFixedAccordionData(currentData, newData);
 }
@@ -440,13 +463,13 @@ const innerRicosDataFixers = {
 };
 
 const innerRicosChangeTypeSetters = {
-  [ACCORDION_TYPE]: (currentData, prevData) => {
+  [ACCORDION_TYPE]: prevData => {
     return {
       ...prevData,
-      pairs: setChangeTypeForNewAccordionPair(currentData.pairs, prevData.pairs, 'redo'),
+      pairs: setChangeTypeForAccordionPairs(prevData.pairs, 'redo'),
     };
   },
-  [TABLE_TYPE]: (currentData, prevData) => {
+  [TABLE_TYPE]: (prevData, currentData) => {
     return {
       ...prevData,
       config: {
@@ -470,7 +493,7 @@ function getContentStateForRedoStack(editorState: EditorState, prevEditorState: 
         currentEntity: { type, data: currentData },
         newEntityData: prevData,
       } = extractEntities(block, prevBlocksEntitiesData, entityMap);
-      const fixedData = innerRicosChangeTypeSetters[type]?.(currentData, prevData);
+      const fixedData = innerRicosChangeTypeSetters[type]?.(prevData, currentData);
       fixedData && replaceComponentData(prevEditorState, block.key, fixedData);
     });
   return prevEditorState.getCurrentContent();
