@@ -1,8 +1,10 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
 
-message RicosMention {
+message MentionData {
     string name = 1 [required = true];
     string slug = 2 [required = true];
 }

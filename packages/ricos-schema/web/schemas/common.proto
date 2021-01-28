@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.FieldOptions {
@@ -20,4 +22,10 @@ message Common {
         string paddingTop = 2;
         string paddingBottom = 3;
     }
+}
+
+message Spoiler {
+    bool enabled = 1;
+    string description = 2;
+    string button_content = 3;
 }

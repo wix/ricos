@@ -1,12 +1,10 @@
 export { fromDraft, ensureRicosContent } from './fromDraft/fromDraft';
+export { convertBlockDataToRicos } from './fromDraft/convertRicosPluginData';
+
 export { toDraft, ensureDraftContent } from './toDraft/toDraft';
 export {
-  migrateDividerData,
-  migrateFileData,
-  migrateImageData,
-  migrateGalleryData,
-  migratePollData,
-  migrateHtmlData,
-  migrateGiphyData,
-  migrateVideoData,
-} from './toDraft/getDraftEntityData';
+  convertNodeDataToDraft,
+  convertNodeToDraftData,
+  convertDecorationDataToDraft,
+  convertDecorationToDraftData,
+} from './toDraft/convertDraftPluginData';

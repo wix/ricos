@@ -1,6 +1,17 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
+
+message FileData {
+  FileConfig config = 1;
+  string name = 2;
+  string type = 3;
+  string url = 4 [required = true];
+  string id = 5;
+  int32 size = 6;  
+}
 
 message FileConfig {
   enum FileSize {
@@ -17,12 +28,3 @@ message FileConfig {
   FileSize size = 1;
   FileAlignment alignment = 2;
 }
-
-message RicosFile {
-  FileConfig config = 1;
-  string name = 2;
-  string type = 3;
-  string url = 4 [required = true];
-  string id = 5;
-  int32 size = 6;  
-} 
