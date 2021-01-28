@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package rich_content;
+
+import "../common.proto";
+
+message ColorData {
+    string background = 1;
+    string foreground = 2;
+}

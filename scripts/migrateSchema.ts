@@ -2,8 +2,8 @@
 import { writeFileSync, existsSync } from 'fs';
 import path from 'path';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
-import { RicosContent } from 'ricos-schema';
-import { RicosContent as RicosContentDraft } from 'ricos-content';
+import { rich_content } from 'ricos-schema';
+import { RicosContent } from 'ricos-content';
 import { compare } from 'ricos-content/libs/comparision';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
 const MIGRATED_FIXTURES_PATH =
@@ -13,7 +13,7 @@ const REVERSE_MIGRATED_FIXTURES_PATH =
 
 const filename = process.argv[2];
 
-const convertDraftFile = (filename: string): RicosContent => {
+const convertDraftFile = (filename: string): rich_content.RichContent => {
   const filepath = path.resolve(
     __dirname,
     `${FIXTURES_PATH}/${filename.replace('.json', '')}.json`
@@ -28,7 +28,7 @@ const convertDraftFile = (filename: string): RicosContent => {
   return ricosSchema;
 };
 
-const convertRicosFile = (filename: string): RicosContentDraft => {
+const convertRicosFile = (filename: string): RicosContent => {
   const filepath = path.resolve(
     __dirname,
     `${MIGRATED_FIXTURES_PATH}/${filename.replace('.json', '')}.json`

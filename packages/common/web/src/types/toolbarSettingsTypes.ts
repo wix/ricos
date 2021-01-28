@@ -4,10 +4,10 @@ import { ComponentType } from 'react';
 import { ToolbarType, InsertButton, ToolbarButtonProps } from '.';
 
 interface PlatformSettings<T> {
-  desktop: T;
-  mobile: {
-    ios: T;
-    android: T;
+  desktop?: T;
+  mobile?: {
+    ios?: T;
+    android?: T;
   };
 }
 

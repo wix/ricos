@@ -189,10 +189,25 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
-  removeCellBorders = range => {
+  removeAllBorders = range => {
     range.forEach(({ i, j }) => {
       const cell = this.getCell(i, j);
       cell.border = {};
+    });
+    this.setNewRows(this.componentData.config.rows);
+  };
+
+  removeBorderAround = selection => {
+    const range = getRange(selection);
+    range.forEach(({ i, j }) => {
+      const cell = this.getCell(i, j);
+      const cellAroundBorders = this.getCellBorders(selection, i, j, '');
+      const bordersWithoutAroundBorder = {};
+      const innerBorders = ['top', 'bottom', 'right', 'left'].filter(
+        border => !cellAroundBorders[border]
+      );
+      innerBorders.forEach(border => (bordersWithoutAroundBorder[border] = cell.border[border]));
+      cell.border = bordersWithoutAroundBorder;
     });
     this.setNewRows(this.componentData.config.rows);
   };

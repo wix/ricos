@@ -32,13 +32,15 @@ const DEFAULT_BORDER_COLOR = 'unset';
 
 const getColorsFromComponentData = (selected, table) => {
   const selectionStyle = table.getSelectionStyle(selected, DEFAULT_BG_COLOR, DEFAULT_BORDER_COLOR);
-  const bgColor = selectionStyle.selectionBGColor;
-  const borderColor = selectionStyle.selectionBorderColor;
+  const bgColor = selectionStyle.selectionBGColor || 'unset';
+  const borderColor = selectionStyle.selectionBorderColor || 'unset';
   const verticalAlignment = selectionStyle.selectionVerticalAlign;
+  const cellBorderIsActive = selectionStyle.selectionBorderIsActive;
   return {
     bgCurrentColor: bgColor,
     borderCurrentColor: borderColor,
     verticalAlignment,
+    cellBorderIsActive,
   };
 };
 
@@ -96,8 +98,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
         type: 'nested-menu',
         dataHook: 'border-color-buttons',
         getIcon: () => BorderIcon,
-        isActive: () =>
-          getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
+        isActive: () => getColorsFromComponentData(selected, table).cellBorderIsActive,
         buttonList: [
           {
             dataHook: 'border-color-around',
@@ -111,10 +112,8 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             getIcon: () => BorderOutsideIcon,
             isDisabled: () => {},
             getLabel: () => {},
-            isActive: () =>
-              getColorsFromComponentData(selected, table).borderCurrentColor !==
-              DEFAULT_BORDER_COLOR,
-            onResetColor: () => table.removeCellBorders(getRange(selected)),
+            isActive: () => false,
+            onResetColor: () => table.removeBorderAround(selected),
             type: 'color-picker',
           },
           {
@@ -129,10 +128,8 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             getIcon: () => BorderIcon,
             isDisabled: () => {},
             getLabel: () => {},
-            isActive: () =>
-              getColorsFromComponentData(selected, table).borderCurrentColor !==
-              DEFAULT_BORDER_COLOR,
-            onResetColor: () => table.removeCellBorders(getRange(selected)),
+            isActive: () => false,
+            onResetColor: () => table.removeAllBorders(getRange(selected)),
             type: 'color-picker',
           },
         ],
@@ -152,9 +149,8 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
         getIcon: () => BorderIcon,
         isDisabled: () => {},
         getLabel: () => {},
-        isActive: () =>
-          getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
-        onResetColor: () => table.removeCellBorders(getRange(selected)),
+        isActive: () => getColorsFromComponentData(selected, table).cellBorderIsActive,
+        onResetColor: () => table.removeAllBorders(getRange(selected)),
         type: 'color-picker',
       },
     ];

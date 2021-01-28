@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-import "../common.proto";
-
-message RicosMention {
-    string name = 1 [required = true];
-    string slug = 2 [required = true];
-}
