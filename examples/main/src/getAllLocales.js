@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const localeDir = path.resolve(__dirname, '../../../packages/common/web/statics/locale');
+const localeDir = path.resolve(__dirname, '../../../packages/common/web/dist/statics/locale');
 const locales = [];
 const files = fs.readdirSync(localeDir);
 
