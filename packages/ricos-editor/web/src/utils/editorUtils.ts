@@ -18,7 +18,6 @@ const wait = ms => {
 export function createDataConverter(onContentChange?: OnContentChangeFunction): EditorDataInstance {
   let currContent = emptyState;
   let currEditorState = createEmpty();
-  let currentTraits = { isEmpty: true, isContentChanged: false };
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
     waitingForUpdateResolve;
@@ -43,7 +42,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
       isUpdated = true;
     }
 
-    onContentChange?.(currContent, currentTraits);
+    onContentChange?.(currContent);
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
@@ -58,11 +57,10 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     getEditorState,
     waitForUpdate,
     getContentStatePromise,
-    refresh: (editorState, contentTraits) => {
+    refresh: editorState => {
       if (!isSSR()) {
         isUpdated = false;
         currEditorState = editorState;
-        currentTraits = contentTraits;
         debounceUpdate();
       }
     },

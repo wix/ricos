@@ -76,18 +76,12 @@ export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
   getEditorState: () => EditorState;
-  refresh: (
-    editorState: EditorState,
-    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-  ) => void;
+  refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
   getContentStatePromise: () => Promise<RicosContent>;
 }
 
-export type OnContentChangeFunction = (
-  content: RicosContent,
-  contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-) => void;
+export type OnContentChangeFunction = (content: RicosContent) => void;
 
 export type OnBusyChangeFunction = (isBusy: boolean) => void;
 

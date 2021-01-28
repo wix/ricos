@@ -94,13 +94,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   }
 
-  onChange = (childOnChange?: RichContentEditorProps['onChange']) => (
-    editorState: EditorState,
-    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-  ) => {
-    this.dataInstance.refresh(editorState, contentTraits);
-    childOnChange?.(editorState, contentTraits);
-    this.onBusyChange(editorState.getCurrentContent(), contentTraits);
+  onChange = (childOnChange?: RichContentEditorProps['onChange']) => (editorState: EditorState) => {
+    this.dataInstance.refresh(editorState);
+    childOnChange?.(editorState);
+    this.onBusyChange(editorState.getCurrentContent());
   };
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
@@ -137,16 +134,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return res;
   };
 
-  onBusyChange = (
-    contentState: ContentState,
-    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-  ) => {
+  onBusyChange = (contentState: ContentState) => {
     const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
       this.isBusy = isBusy;
       onBusyChange?.(isBusy);
-      onChange?.(convertToRaw(contentState), contentTraits);
+      onChange?.(convertToRaw(contentState));
     }
   };
 
