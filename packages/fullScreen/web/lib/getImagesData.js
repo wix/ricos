@@ -23,7 +23,7 @@ function imageEntryToGallery(data, index) {
 
 const blockToImagesKeys = {
   [imageType]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: 1 };
+    if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
   },
   [tableType]: entity => {
     const tableKeys = {};
@@ -32,7 +32,7 @@ const blockToImagesKeys = {
         const keysMapper = getAtomicBlocksKeysMapper(column.content.blocks);
         Object.entries(column.content.entityMap).forEach(([, block], j) => {
           if (block.type === imageType && !block.data.config.disableExpand) {
-            tableKeys[keysMapper[j]] = 1;
+            tableKeys[keysMapper[j]] = calcNumberOfImages(block);
           }
         });
       });
@@ -45,14 +45,14 @@ const blockToImagesKeys = {
       const keysMapper = getAtomicBlocksKeysMapper(pair.content.blocks);
       Object.entries(pair.content.entityMap).forEach(([, block], j) => {
         if (block.type === imageType && !block.data.config.disableExpand) {
-          accordionKeys[keysMapper[j]] = 1;
+          accordionKeys[keysMapper[j]] = calcNumberOfImages(block);
         }
       });
     });
     return accordionKeys;
   },
   [galleryType]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: entity.data.items.length };
+    if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
   },
 };
 
@@ -69,6 +69,10 @@ function contentTraverser(content) {
   });
 }
 
+function calcNumberOfImages(entity) {
+  if (entity.type === imageType) return 1;
+  if (entity.type === galleryType) return entity.data.items.length;
+}
 function getTableImages(entry, index) {
   const tableImages = [];
   const { rows } = entry.data.config;
@@ -122,7 +126,7 @@ function convertEntryToGalleryItems(entry, index) {
   }
 }
 
-const getAtomicBlocksKeysMapper = blocks => {
+function getAtomicBlocksKeysMapper(blocks) {
   const keysMapper = {};
   blocks.forEach(block => {
     if (block.type === atomicType) {
@@ -131,19 +135,19 @@ const getAtomicBlocksKeysMapper = blocks => {
     }
   });
   return keysMapper;
-};
+}
 
 export default function getImagesData(content) {
   const blockKeys = contentTraverser(content).filter(keys => keys);
-  let sum = 0;
+  let imageIndex = 0;
   const imageMap = {};
   const images = Object.values(content.entityMap)
     .map(convertEntryToGalleryItems)
     .reduce((urls, entryUrls, i) => {
       if (blockKeys[i]) {
         Object.entries(blockKeys[i]).forEach(([key, size]) => {
-          imageMap[key] = sum;
-          sum += size;
+          imageMap[key] = imageIndex;
+          imageIndex += size;
         });
       }
       return urls.concat(entryUrls);
