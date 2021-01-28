@@ -1,6 +1,14 @@
 syntax = "proto3";
 
+package rich_content;
+
 import "../common.proto";
+
+message MapData {
+  int32 zoom = 1;
+  MapConfig config = 2;
+  MapSettings mapSettings = 3;
+}
 
 message MapConfig {
   string size = 1;
@@ -20,10 +28,4 @@ message MapSettings {
   string locationDisplayName = 8;
   string mode = 9;
   int32 zoom = 10;
-}
-
-message RicosMap {
-  int32 zoom = 1;
-  MapConfig config = 2;
-  MapSettings mapSettings = 3;
 }
