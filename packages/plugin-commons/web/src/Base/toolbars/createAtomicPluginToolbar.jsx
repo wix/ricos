@@ -36,6 +36,7 @@ export default function createAtomicPluginToolbar({
   getEditorState,
   linkTypes,
   innerModal,
+  innerRCERenderedIn,
 }) {
   return class BaseToolbar extends Component {
     static propTypes = {
@@ -421,10 +422,12 @@ export default function createAtomicPluginToolbar({
       const { toolbarStyles: toolbarTheme } = theme || {};
 
       if (this.visibilityFn() && isVisible) {
+        const renderedInTable = innerRCERenderedIn === 'table';
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
             toolbarStyles.pluginToolbar,
+            renderedInTable && toolbarStyles.overflowToolbar,
             toolbarTheme && toolbarTheme.pluginToolbar
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
