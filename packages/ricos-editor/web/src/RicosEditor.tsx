@@ -36,7 +36,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange);
+    this.dataInstance = createDataConverter(props.onChange, props.content);
     this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
   }
 
@@ -107,6 +107,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   blur = () => this.editor.blur();
 
   getToolbars = () => this.editor.getToolbars();
+
+  getContentTraits = () => this.dataInstance.getContentTraits();
 
   getContent = async (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
