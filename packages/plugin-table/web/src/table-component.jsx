@@ -25,7 +25,7 @@ class TableComponent extends React.Component {
     };
     this.innerRceAdditionalProps = { placeholder: '' };
     this.innerEditorsRefs = {};
-    this.table = new Table(props.componentData, this.updateComponentData1);
+    this.table = new Table(props.componentData, this.updateComponentData);
     this.tableRef = createRef();
     this.dragPreview = createRef();
     this.rowDragProps = {
@@ -214,7 +214,7 @@ class TableComponent extends React.Component {
     !this.isAllCellsSelected(this.state.selected) && this.setState({ isAllCellsSelected: false });
   };
 
-  updateComponentData1 = data =>
+  updateComponentData = data =>
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
 
   onResizeCol = columnsRefs =>
