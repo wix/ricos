@@ -24,6 +24,7 @@
 }
 
 .toolbarButton {
+  display: flex;
   background: transparent;
   color: $toolbar-font-color;
   padding: 4px;

@@ -1,10 +1,9 @@
-import { RicosNode, VideoSource } from 'ricos-schema';
+import { rich_content } from 'ricos-schema';
 import { getImageSrc } from '../imageUtils';
 import { LINK_TYPE } from '../consts';
-import { NodeType } from '../migrateSchema/consts';
 import { mergeTextNodes, RangedDecoration } from '../migrateSchema/toDraft/decorationParsers';
 
-export const parseTextNodes = (node: RicosNode) => {
+export const parseTextNodes = (node: rich_content.Node) => {
   const {
     text,
     decorationMap: { [LINK_TYPE]: linkDecorations },
@@ -13,10 +12,10 @@ export const parseTextNodes = (node: RicosNode) => {
   return removeTrailingNewLine(textWithLinks);
 };
 
-const getListSymbol = (index: number, type: string) =>
-  type === NodeType.OrderedList ? index + 1 + '. ' : '• ';
+const getListSymbol = (index: number, type: rich_content.Node.Type) =>
+  type === rich_content.Node.Type.ORDERED_LIST ? index + 1 + '. ' : '• ';
 
-const parseList = (listNode: RicosNode): { type: string; item: string }[] =>
+const parseList = (listNode: rich_content.Node): { type: rich_content.Node.Type; item: string }[] =>
   listNode.nodes
     .map(({ nodes: [paragraph, childNode] }) => {
       return [
@@ -26,7 +25,7 @@ const parseList = (listNode: RicosNode): { type: string; item: string }[] =>
     })
     .flat(2);
 
-export const parseListNode = (node: RicosNode) =>
+export const parseListNode = (node: rich_content.Node) =>
   parseList(node)
     .map(({ type, item }, index) => getListSymbol(index, type) + item)
     .join('\n');
@@ -39,7 +38,7 @@ export const addLinksToText = (text: string, linkDecorations: RangedDecoration[]
         insertInText(
           newText,
           link.end + newText.length - text.length + 1,
-          `(${link.ricosLink?.url})`
+          `(${link.linkData?.url})`
         ),
       text
     );
@@ -51,11 +50,11 @@ const removeTrailingNewLine = (text: string) =>
   text.endsWith('\n') ? text.substring(0, text.length - 1) : text;
 
 export const parseImage = async (
-  { ricosImage }: RicosNode,
+  { imageData }: rich_content.Node,
   urlShortener?: (url: string) => Promise<string>
 ): Promise<string> => {
-  const { caption } = ricosImage?.metadata || {};
-  const { fileName, width, height } = ricosImage?.src || {};
+  const { caption } = imageData?.metadata || {};
+  const { fileName, width, height } = imageData?.src || {};
   const imageUrlOptions = Object.assign(
     {
       imageType: 'highRes',
@@ -71,35 +70,35 @@ export const parseImage = async (
   return [caption, url].filter(Boolean).join('\n');
 };
 
-const getDefaultVideoUrl = async (src: VideoSource) =>
+const getDefaultVideoUrl = async (src: rich_content.VideoSource) =>
   `https://video.wixstatic.com/${src.pathname}`;
 
 export const parseVideo = async (
-  { ricosVideo }: RicosNode,
-  getVideoUrl: (src: VideoSource) => Promise<string> = getDefaultVideoUrl
+  { videoData }: rich_content.Node,
+  getVideoUrl: (src: rich_content.VideoSource) => Promise<string> = getDefaultVideoUrl
 ): Promise<string> => {
-  const { src, url } = ricosVideo || {};
+  const { src, url } = videoData || {};
   const text = src ? getVideoUrl(src) : url;
   return text || '';
 };
 
-export const parseSoundCloud = ({ ricosSoundCloud }: RicosNode): string => {
-  const { src } = ricosSoundCloud || {};
+export const parseSoundCloud = ({ soundCloudData }: rich_content.Node): string => {
+  const { src } = soundCloudData || {};
   return src || '';
 };
 
-export const parseGiphy = ({ ricosGiphy }: RicosNode): string => {
-  const { originalUrl } = ricosGiphy?.gif || {};
+export const parseGiphy = ({ giphyData }: rich_content.Node): string => {
+  const { originalUrl } = giphyData?.gif || {};
   return originalUrl || '';
 };
 
-export const parseMap = ({ ricosMap }: RicosNode): string => {
-  const { address } = ricosMap?.mapSettings || {};
+export const parseMap = ({ mapData }: rich_content.Node): string => {
+  const { address } = mapData?.mapSettings || {};
   return address || '';
 };
 
-export const parseVerticalEmbed = ({ ricosVerticalEmbed }: RicosNode): string => {
-  const { html, name } = ricosVerticalEmbed?.selectedProduct || {};
+export const parseVerticalEmbed = ({ verticalEmbedData }: rich_content.Node): string => {
+  const { html, name } = verticalEmbedData?.selectedProduct || {};
   const href = html
     ?.replace(/.*href="/g, '')
     .replace(/.*=http/g, 'http')
@@ -107,7 +106,7 @@ export const parseVerticalEmbed = ({ ricosVerticalEmbed }: RicosNode): string =>
   return [name, href].filter(Boolean).join('\n');
 };
 
-export const parseLinkPreview = ({ ricosLinkPreview }: RicosNode): string => {
-  const { url } = ricosLinkPreview?.config.link || {};
+export const parseLinkPreview = ({ linkPreviewData }: rich_content.Node): string => {
+  const { url } = linkPreviewData?.config.link || {};
   return url || '';
 };
