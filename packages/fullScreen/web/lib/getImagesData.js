@@ -26,30 +26,28 @@ const blockToImagesKeys = {
     if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
   },
   [tableType]: entity => {
-    const tableKeys = {};
+    let tableImagesKeys = {};
     Object.entries(entity.data?.config.rows).forEach(([, row]) => {
       Object.entries(row.columns).forEach(([, column]) => {
-        const keysMapper = getAtomicBlocksKeysMapper(column.content.blocks);
-        Object.entries(column.content.entityMap).forEach(([, block], j) => {
-          if (block.type === imageType && !block.data.config.disableExpand) {
-            tableKeys[keysMapper[j]] = calcNumberOfImages(block);
-          }
-        });
+        const atomicKeysMap = atomicBlocksKeysMapper(column.content.blocks);
+        tableImagesKeys = {
+          ...tableImagesKeys,
+          ...imagesKeysMapper(column.content.entityMap, atomicKeysMap),
+        };
       });
     });
-    return tableKeys;
+    return tableImagesKeys;
   },
   [accordionType]: entity => {
-    const accordionKeys = {};
+    let accordionImagesKeys = {};
     entity.data?.pairs.forEach(pair => {
-      const keysMapper = getAtomicBlocksKeysMapper(pair.content.blocks);
-      Object.entries(pair.content.entityMap).forEach(([, block], j) => {
-        if (block.type === imageType && !block.data.config.disableExpand) {
-          accordionKeys[keysMapper[j]] = calcNumberOfImages(block);
-        }
-      });
+      const atomicKeysMap = atomicBlocksKeysMapper(pair.content.blocks);
+      accordionImagesKeys = {
+        ...accordionImagesKeys,
+        ...imagesKeysMapper(pair.content.entityMap, atomicKeysMap),
+      };
     });
-    return accordionKeys;
+    return accordionImagesKeys;
   },
   [galleryType]: (entity, blockKey) => {
     if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
@@ -73,35 +71,55 @@ function calcNumberOfImages(entity) {
   if (entity.type === imageType) return 1;
   if (entity.type === galleryType) return entity.data.items.length;
 }
+
+function imagesKeysMapper(entityMap, atomicKeysMap) {
+  const imagesKeys = {};
+  Object.entries(entityMap).forEach(([, block], j) => {
+    if (block.type === imageType && !block.data.config.disableExpand) {
+      imagesKeys[atomicKeysMap[j]] = calcNumberOfImages(block);
+    }
+  });
+  return imagesKeys;
+}
+
+function atomicBlocksKeysMapper(blocks) {
+  const atomicKeysMap = {};
+  blocks.forEach(block => {
+    if (block.type === atomicType) {
+      const entityIndex = block.entityRanges[0].key;
+      atomicKeysMap[entityIndex] = block.key;
+    }
+  });
+  return atomicKeysMap;
+}
+
+function innerRceImagesMapper(entityMap, index) {
+  const images = [];
+  Object.entries(entityMap).forEach(([, block]) => {
+    if (block.type === imageType || block.type === imageTypeLegacy) {
+      block.data?.src &&
+        !block.data?.config.disableExpand &&
+        images.push(imageEntryToGallery(block.data, index));
+    }
+  });
+  return images;
+}
+
 function getTableImages(entry, index) {
-  const tableImages = [];
+  let tableImages = [];
   const { rows } = entry.data.config;
   Object.entries(rows).forEach(([, row]) => {
     Object.entries(row.columns).forEach(([, column]) => {
-      const entityMap = column.content.entityMap;
-      entityMap &&
-        Object.entries(entityMap).forEach(([, block]) => {
-          if (block.type === imageType || block.type === imageTypeLegacy) {
-            block.data?.src &&
-              !block.data?.config.disableExpand &&
-              tableImages.push(imageEntryToGallery(block.data, index));
-          }
-        });
+      tableImages = [...tableImages, ...innerRceImagesMapper(column.content.entityMap, index)];
     });
   });
   return tableImages;
 }
 
 function getAccordionImages(entry, index) {
-  const accordionImages = [];
+  let accordionImages = [];
   entry.data.pairs.forEach(pair => {
-    Object.entries(pair.content.entityMap).forEach(([, block]) => {
-      if (block.type === imageType || block.type === imageTypeLegacy) {
-        block.data?.src &&
-          !block.data?.config.disableExpand &&
-          accordionImages.push(imageEntryToGallery(block.data, index));
-      }
-    });
+    accordionImages = [...accordionImages, ...innerRceImagesMapper(pair.content.entityMap, index)];
   });
   return accordionImages;
 }
@@ -124,17 +142,6 @@ function convertEntryToGalleryItems(entry, index) {
     default:
       return [];
   }
-}
-
-function getAtomicBlocksKeysMapper(blocks) {
-  const keysMapper = {};
-  blocks.forEach(block => {
-    if (block.type === atomicType) {
-      const entityIndex = block.entityRanges[0].key;
-      keysMapper[entityIndex] = block.key;
-    }
-  });
-  return keysMapper;
 }
 
 export default function getImagesData(content) {
