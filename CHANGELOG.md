@@ -17,7 +17,9 @@
   </summary>
 
 
-
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [#2058](https://github.com/wix/ricos/pull/2058) bg color update
 </details>
 <hr/>
 
