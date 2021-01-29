@@ -75,6 +75,13 @@ export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
+  getContentTraits: () => {
+    isEmpty: boolean;
+    contentChanges: {
+      blockChanges: Record<string, unknown>;
+      entityChanges: Record<string, unknown>;
+    };
+  };
   getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;

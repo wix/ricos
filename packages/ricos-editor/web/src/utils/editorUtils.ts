@@ -4,7 +4,7 @@ import {
   convertToRaw,
   convertFromRaw,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { ContentState, EditorProps } from 'draft-js';
+import { EditorProps } from 'draft-js';
 import { debounce, pick } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { compare, isContentStateEmpty } from 'ricos-content';
@@ -29,7 +29,10 @@ export function createDataConverter(
   let currEditorState = initialContent
     ? createWithContent(convertFromRaw(currContent))
     : createEmpty();
-  let currTraits = { isEmpty: isContentStateEmpty(currContent), isContentChanged: false };
+  let currTraits = {
+    isEmpty: isContentStateEmpty(currContent),
+    contentChanges: { blockChanges: {}, entityChanges: {} },
+  };
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
     waitingForUpdateResolve;
@@ -48,12 +51,18 @@ export function createDataConverter(
   const getEditorState = () => currEditorState;
 
   const getContentTraits = () => {
+    if (!initialContent) {
+      return currTraits;
+    }
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
       currContent = convertToRaw(currState);
-      const changes = compare(initialContent, currContent);
-      console.debug({ changes }); //eslint-disable-line no-console
-      currTraits = { isEmpty: isContentStateEmpty(currContent), isContentChanged: !!changes };
+      const blockChanges = compare(currContent.blocks, initialContent.blocks);
+      const entityChanges = compare(currContent.entityMap, initialContent.entityMap);
+      currTraits = {
+        isEmpty: isContentStateEmpty(currContent),
+        contentChanges: { blockChanges, entityChanges },
+      };
       isUpdated = true;
     }
     return currTraits;
@@ -63,9 +72,14 @@ export function createDataConverter(
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
       currContent = convertToRaw(currState);
-      const changes = compare(initialContent, currContent);
-      console.debug({ changes }); //eslint-disable-line no-console
-      currTraits = { isEmpty: isContentStateEmpty(currContent), isContentChanged: !!changes };
+      if (initialContent) {
+        const blockChanges = compare(currContent.blocks, initialContent.blocks);
+        const entityChanges = compare(currContent.entityMap, initialContent.entityMap);
+        currTraits = {
+          isEmpty: isContentStateEmpty(currContent),
+          contentChanges: { blockChanges, entityChanges },
+        };
+      }
       isUpdated = true;
     }
 
