@@ -90,7 +90,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       !isEqual(this.props.injectedContent, newProps.injectedContent)
     ) {
       console.debug('new content provided as editorState'); // eslint-disable-line
-      this.setState({ editorState: createWithContent(convertFromRaw(newProps.injectedContent)) });
+      const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
+      this.setState({ editorState }, () => {
+        this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
+        this.dataInstance.refresh(editorState);
+      });
     }
   }
 

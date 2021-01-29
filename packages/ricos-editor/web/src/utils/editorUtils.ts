@@ -27,10 +27,10 @@ export function createDataConverter(
 ): EditorDataInstance {
   let currContent = initialContent || emptyState;
   let currEditorState = initialContent
-    ? createWithContent(convertFromRaw(currContent))
+    ? createWithContent(convertFromRaw(initialContent))
     : createEmpty();
   let currTraits = {
-    isEmpty: isContentStateEmpty(currContent),
+    isEmpty: initialContent ? isContentStateEmpty(initialContent) : true,
     contentChanges: { blockChanges: {}, entityChanges: {} },
   };
   let isUpdated = false;
