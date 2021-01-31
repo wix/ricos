@@ -4,6 +4,13 @@ import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings }
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
+import { pluginDivider } from '../../../plugin-divider/web/src';
+import { pluginFileUpload } from '../../../plugin-file-upload/web/src';
+import { pluginVideo } from '../../../plugin-video/web/src';
+import { pluginPoll } from '../../../plugin-social-polls/web/src';
+import { pluginGiphy } from '../../../plugin-giphy/web/src';
+import { pluginHtml } from '../../../plugin-html/web/src';
+import { content, pluginsTestConfig } from './utils/EditorCommands';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
@@ -11,7 +18,15 @@ import { default as hebResource } from 'wix-rich-content-common/dist/statics/loc
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
 
-const plugins = [pluginHashtag()];
+const plugins = [
+  pluginHashtag(),
+  pluginDivider(),
+  pluginFileUpload(),
+  pluginVideo(),
+  pluginPoll(),
+  pluginGiphy(),
+  pluginHtml(),
+];
 
 const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
   mount(<RicosEditor {...(ricosEditorProps || {})} />);
@@ -44,6 +59,31 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
 
   return element.at(element.length - 1); // due to add html by strategies
 };
+
+const insertPluginTest = ([pluginName, { type, data, expectedData }]) =>
+  it(`should insert ${pluginName}`, () => {
+    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+    ricosEditor.getEditorCommands().insertBlock(type, data);
+    expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedData);
+  });
+
+const updatePluginTest = ([pluginName, { type, data, updatedData, expectedUpdatedData }]) =>
+  it(`should update ${pluginName}`, () => {
+    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+    ricosEditor.getEditorCommands().insertBlock(type, data);
+    const blockKey = ricosEditor.getEditorCommands().getSelectedBlockKey();
+    ricosEditor.getEditorCommands().updateBlock(blockKey, type, updatedData);
+    expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
+  });
+
+const removePluginTest = ([pluginName, { type, data }]) =>
+  it(`should remove ${pluginName}`, () => {
+    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+    ricosEditor.getEditorCommands().insertBlock(type, data);
+    const blockKey = ricosEditor.getEditorCommands().getSelectedBlockKey();
+    ricosEditor.getEditorCommands().deleteBlock(blockKey);
+    expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual({});
+  });
 
 describe('RicosEditor', () => {
   it('should render editor', () => {
@@ -161,6 +201,144 @@ describe('RicosEditor', () => {
       expect(rceProps).toHaveProperty('helpers');
       const { openModal, closeModal } = rceProps.helpers;
       expect({ openModal, closeModal }).toStrictEqual(modalSettings);
+    });
+  });
+  describe('Editor Commands API', () => {
+    describe('Editor text formatting API', () => {
+      it('should have left text alignment', () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {});
+        const textAlignment = ricosEditor.getEditorCommands().getTextAlignment();
+        expect(textAlignment).toEqual('left');
+      });
+      it('should have right text alignment', () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        const alignment = 'right';
+        ricosEditor.getEditorCommands().setTextAlignment(alignment);
+        const textAlignment = ricosEditor.getEditorCommands().getTextAlignment();
+        expect(textAlignment).toEqual(alignment);
+      });
+      it('should have bold inline style', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('bold');
+        expect(ricosEditor.getEditorCommands().hasInlineStyle('bold')).toBeTruthy();
+      });
+      it('should not have bold inline style', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('bold');
+        ricosEditor.getEditorCommands().toggleInlineStyle('bold');
+        expect(ricosEditor.getEditorCommands().hasInlineStyle('bold')).toBeFalsy();
+      });
+      it('should have italic inline style', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('italic');
+        expect(ricosEditor.getEditorCommands().hasInlineStyle('italic')).toBeTruthy();
+      });
+      it('should not have italic inline style', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('italic');
+        ricosEditor.getEditorCommands().toggleInlineStyle('italic');
+        expect(ricosEditor.getEditorCommands().hasInlineStyle('italic')).toBeFalsy();
+      });
+      it('should have underline inline style', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('underline');
+        expect(ricosEditor.getEditorCommands().hasInlineStyle('underline')).toBeTruthy();
+      });
+      it('should not have underline inline style', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('underline');
+        ricosEditor.getEditorCommands().toggleInlineStyle('underline');
+        expect(ricosEditor.getEditorCommands().hasInlineStyle('underline')).toBeFalsy();
+      });
+      it('should undo stack be empty', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        expect(ricosEditor.getEditorCommands().isUndoStackEmpty()).toBeTruthy();
+      });
+      it('should redo stack be empty', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        expect(ricosEditor.getEditorCommands().isRedoStackEmpty()).toBeTruthy();
+      });
+      it('should undo stack be not empty', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('bold');
+        expect(ricosEditor.getEditorCommands().isUndoStackEmpty()).toBeFalsy();
+      });
+      it('should redo stack be not empty', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().toggleInlineStyle('bold');
+        ricosEditor.getEditorCommands().undo();
+        expect(ricosEditor.getEditorCommands().isRedoStackEmpty()).toBeFalsy();
+      });
+      it('should change block to numbered list', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        ricosEditor.getEditorCommands().setSelection('o12', {
+          anchorKey: 'o12',
+          focusKey: 'o12',
+          anchorOffset: 0,
+          focusOffset: 8,
+        });
+        ricosEditor.getEditorCommands().setBlockType('ordered-list-item');
+        expect(
+          ricosEditor.getEditorCommands().isBlockTypeSelected('ordered-list-item')
+        ).toBeTruthy();
+      });
+    });
+    describe('Editor Decorations API', () => {
+      it('TBA', () => {});
+    });
+    describe('Editor Plugins API', () => {
+      Object.entries(pluginsTestConfig).forEach(insertPluginTest);
+      Object.entries(pluginsTestConfig).forEach(updatePluginTest);
+      Object.entries(pluginsTestConfig).forEach(removePluginTest);
     });
   });
 });
