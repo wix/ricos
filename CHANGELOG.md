@@ -18,7 +18,7 @@
   
 ### :rocket: New Feature
 - `fullScreen`
-  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full screen display for inner-rce images
+  - [#2072](https://github.com/wix-incubator/rich-content/pull/2072) allow full screen display for inner-rce images
 
 </details>
 <hr/>

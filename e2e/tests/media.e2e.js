@@ -129,25 +129,24 @@ describe('plugins', () => {
 
       it('expand gallery image on full screen', () => {
         cy.get(
-          '#pro-gallery-inner-container-v-0 > .pro-gallery-parent-container > #pro-gallery-container > #pro-gallery-margin-container > a[data-id="ea8ec1609e052b7f196935318316299d"] > #pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > .gallery-item-content',
+          `#item-wrapper-65a6266ba23a8a55da3f469157f15237 > div.gallery-item-hover.fullscreen-disabled.default.force-hover > div > div > div`,
           {
             timeout: 10000,
           }
-        ).click({ force: true });
-        cy.get(
-          '#pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
-          {
-            timeout: 10000,
-          }
-        ).should('be.visible');
+        )
+          .eq(1)
+          .click({ force: true });
+        cy.get('#item-wrapper-65a6266ba23a8a55da3f469157f15237 > div > a > div > img', {
+          timeout: 10000,
+        }).should('be.visible');
         // cy.eyesCheckWindow({
         //   tag: 'gallery fullscreen open on second image',
         //   target: 'window',
         //   fully: false,
         // });
-        cy.get(`[data-hook=${'nav-arrow-back'}]`).click({ force: true });
+        cy.get(`#pro-gallery-container > button > div`).click({ force: true });
         cy.get(
-          '#pgi65a6266ba23a8a55da3f469157f15237_0 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
+          '#item-wrapper-65a6266ba23a8a55da3f469157f15237 > div.gallery-item-hover.fullscreen-disabled.default.force-hover > div > div > div',
           {
             timeout: 10000,
           }
