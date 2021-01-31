@@ -81,7 +81,7 @@ const FROM_RICOS_PLUGIN_TYPE_MAP = {
   [RICOS_MENTION_TYPE]: MENTION_TYPE,
 };
 
-const insertDecorationsMapFuncs = {
+const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
   [RICOS_MENTION_TYPE]: () => {}, //WIP
 };
@@ -177,7 +177,7 @@ export const createEditorCommands = (
       if (createPluginData) {
         const data = createPluginData(config);
         if (data) {
-          const newEditorState = insertDecorationsMapFuncs[type]?.(getEditorState(), data);
+          const newEditorState = insertDecorationsMap[type]?.(getEditorState(), data);
           if (newEditorState) {
             setEditorState(newEditorState);
           }
