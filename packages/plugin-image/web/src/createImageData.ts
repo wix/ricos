@@ -14,5 +14,3 @@ export const createImageData: CreatePluginsDataMap[typeof RICOS_IMAGE_TYPE] = (
   const imageData = convertNodeDataToDraft(rich_content.Node.Type.IMAGE, pluginData);
   return merge({}, currentData || DEFAULTS, imageData);
 };
-
-// TODO: Fix bundleSize problem

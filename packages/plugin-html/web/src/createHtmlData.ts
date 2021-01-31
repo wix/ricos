@@ -14,5 +14,3 @@ export const createHtmlData: CreatePluginsDataMap[typeof RICOS_HTML_TYPE] = (
   const htmlData = convertNodeDataToDraft(rich_content.Node.Type.HTML, pluginData);
   return merge({}, currentData || defaults(), htmlData);
 };
-
-// TODO: Fix bundleSize problem
