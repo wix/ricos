@@ -1,2 +1,2 @@
 export * from 'ricos-common';
-export { RicosViewer } from './RicosViewer';
+export { default as RicosViewer, RicosViewer as RicosViewerType } from './RicosViewer';

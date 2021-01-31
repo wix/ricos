@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment, useEffect, useState } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
+import { Version } from 'wix-rich-content-common';
 
 interface State {
   isPreviewExpanded: boolean;
@@ -68,3 +69,26 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     );
   }
 }
+
+const withFullscreenStyles = Component => props => {
+  const [isLocal, setLocal] = useState(false);
+  // onDidMount: if local env, renders fullscreen inline style, and prevents link render
+  useEffect(() => {
+    if (window.location.href.includes('localhost')) {
+      console.debug('local env detected -- renders fullscreen style tag'); // eslint-disable-line no-console
+      import('./fullscreen-styles.css').then(() => setLocal(true));
+    }
+  }, []);
+  const getFullscreenCssUrl = () => {
+    const version = Version.currentVersion;
+    return `https://static.parastorage.com/unpkg/wix-rich-content-fullscreen@${version}/dist/styles.min.css`;
+  };
+  return (
+    <>
+      {!isLocal && <link href={getFullscreenCssUrl()} rel="stylesheet" />}
+      <Component {...props} />
+    </>
+  );
+};
+
+export default withFullscreenStyles(RicosViewer);
