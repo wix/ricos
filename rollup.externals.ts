@@ -11,7 +11,6 @@ const externals = [
   'wix-rich-content-editor-common',
   'wix-rich-content-common',
   'wix-rich-content-plugin-commons',
-  'ricos-schema',
   'react-i18next',
   'react-flip-move',
   'image-client-api/dist/imageClientSDK',
@@ -24,6 +23,7 @@ const externals = [
   /^wix-rich-content-editor$/,
   /^wix-rich-content-viewer$/,
   /^ricos-content$/,
+  /^ricos-schema$/,
   /^react-player$/,
 ];
 

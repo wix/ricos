@@ -73,9 +73,6 @@ const file = {
     configViewer: {
       downloadTarget: '_blank',
     },
-    id: '',
-    size: 0,
-    type: '',
   },
   expectedUpdatedData: {
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
@@ -87,9 +84,6 @@ const file = {
     configViewer: {
       downloadTarget: '_blank',
     },
-    id: '',
-    size: 0,
-    type: '',
   },
 };
 
@@ -217,7 +211,7 @@ const html = {
       width: 0,
     },
     src: 'www.sport5.co.il',
-    srcType: '',
+    srcType: 'url',
   },
 };
 
