@@ -65,6 +65,7 @@ class ImageSettings extends Component {
             checked={this.state[toggleKey]}
             label={this.props.t(labelKey)}
             onChange={this.toggleState(toggleKey)}
+            dataHook="imageRightClickToggle"
           />
           <InfoIcon
             isNotification
@@ -81,6 +82,7 @@ class ImageSettings extends Component {
         checked={this.state[toggleKey]}
         label={this.props.t(labelKey)}
         onChange={this.toggleState(toggleKey)}
+        dataHook="imageExpandToggle"
       />
     );
   };

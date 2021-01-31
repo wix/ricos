@@ -7,6 +7,7 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
   GIPHY_PLUGIN,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
@@ -99,6 +100,36 @@ describe('plugins', () => {
     it('render image with loader - loading in component data', () => {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.get(`[data-hook=loader]`).should('to.be.visible');
+    });
+
+    it('should disable image expand', () => {
+      cy.loadRicosEditorAndViewer('image');
+      cy.openImageSettings();
+      cy.get(`[data-hook=${IMAGE_SETTINGS.IMAGE_EXPAND_TOGGLE}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+
+      cy.wait(200);
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+        .parent()
+        .click();
+      cy.eyesCheckWindow();
+    });
+
+    it.only('should disable image right click', () => {
+      cy.loadRicosEditorAndViewer('image');
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+        .parent()
+        .rightclick();
+      cy.eyesCheckWindow();
+      cy.openImageSettings();
+      cy.get(`[data-hook=${IMAGE_SETTINGS.IMAGE_RIGHT_CLICK_TOGGLE}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+
+      cy.wait(500);
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+        .parent()
+        .rightclick();
+      cy.eyesCheckWindow();
     });
   });
 

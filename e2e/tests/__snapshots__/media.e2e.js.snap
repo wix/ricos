@@ -2288,3 +2288,65 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
   ],
   "entityMap": {}
 };
+
+exports[`plugins > image > should disable image right click #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "disableRightClick": true,
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_e1c242b87eb74abab740e5af5104a520.jpg",
+          "height": 3648,
+          "id": "2103f7d2c4be85e4467d2f9cba4aeded",
+          "original_file_name": "8bb438_e1c242b87eb74abab740e5af5104a520.jpg",
+          "width": 5472
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};

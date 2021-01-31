@@ -103,6 +103,8 @@ export const IMAGE_SETTINGS = {
   CAPTION: 'imageSettingsCaptionInput',
   LINK: 'linkPanelInput',
   PREVIEW: 'imagePreview',
+  IMAGE_EXPAND_TOGGLE: 'imageExpandToggle',
+  IMAGE_RIGHT_CLICK_TOGGLE: 'imageRightClickToggle',
 };
 
 export const GALLERY_SETTINGS = {

@@ -3,7 +3,6 @@ const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
 const accordionType = 'wix-rich-content-plugin-accordion';
 const tableType = 'table';
-const atomicType = 'atomic';
 
 function imageEntryToGallery(data, index) {
   const src = data.src;
@@ -23,19 +22,20 @@ function imageEntryToGallery(data, index) {
 
 const blockToImagesKeys = {
   [imageType]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
+    if (!entity.data.config.disableExpand) return { [blockKey]: 1 };
   },
   [imageTypeLegacy]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
+    if (!entity.data.config.disableExpand) return { [blockKey]: 1 };
   },
   [tableType]: entity => {
     let tableImagesKeys = {};
     Object.entries(entity.data?.config.rows).forEach(([, row]) => {
       Object.entries(row.columns).forEach(([, column]) => {
-        const atomicKeysMap = atomicBlocksKeysMapper(column.content.blocks);
+        const blockKeys = contentTraverser(column.content).filter(key => key);
+        const imageKeys = blockKeys.length ? Object.assign(...blockKeys) : {};
         tableImagesKeys = {
           ...tableImagesKeys,
-          ...imagesKeysMapper(column.content.entityMap, atomicKeysMap),
+          ...imageKeys,
         };
       });
     });
@@ -44,16 +44,17 @@ const blockToImagesKeys = {
   [accordionType]: entity => {
     let accordionImagesKeys = {};
     entity.data?.pairs.forEach(pair => {
-      const atomicKeysMap = atomicBlocksKeysMapper(pair.content.blocks);
+      const blockKeys = contentTraverser(pair.content).filter(key => key);
+      const imageKeys = blockKeys.length ? Object.assign(...blockKeys) : {};
       accordionImagesKeys = {
-        ...accordionImagesKeys,
-        ...imagesKeysMapper(pair.content.entityMap, atomicKeysMap),
+        ...imageKeys,
+        ...imageKeys,
       };
     });
     return accordionImagesKeys;
   },
   [galleryType]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: calcNumberOfImages(entity) };
+    if (!entity.data.config.disableExpand) return { [blockKey]: entity.data.items.length };
   },
 };
 
@@ -68,35 +69,6 @@ function contentTraverser(content) {
     }
     return null;
   });
-}
-
-function calcNumberOfImages(entity) {
-  if (entity.type === imageType || entity.type === imageTypeLegacy) return 1;
-  if (entity.type === galleryType) return entity.data.items.length;
-}
-
-function imagesKeysMapper(entityMap, atomicKeysMap) {
-  const imagesKeys = {};
-  Object.entries(entityMap).forEach(([, block], j) => {
-    if (
-      (block.type === imageType || block.type === imageTypeLegacy) &&
-      !block.data.config.disableExpand
-    ) {
-      imagesKeys[atomicKeysMap[j]] = calcNumberOfImages(block);
-    }
-  });
-  return imagesKeys;
-}
-
-function atomicBlocksKeysMapper(blocks) {
-  const atomicKeysMap = {};
-  blocks.forEach(block => {
-    if (block.type === atomicType) {
-      const entityIndex = block.entityRanges[0].key;
-      atomicKeysMap[entityIndex] = block.key;
-    }
-  });
-  return atomicKeysMap;
 }
 
 function innerRceImagesMapper(entityMap, index) {
