@@ -17,7 +17,7 @@
   </summary>
 
 - `fullScreen`
-  - [#1939](https://github.com/wix-incubator/rich-content/pull/1931) allow full screen display for inner-rce images
+  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full screen display for inner-rce images
 </details>
 <hr/>
 
