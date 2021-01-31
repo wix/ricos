@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :rocket: New Feature
+- `fullScreen`
+  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full screen display for inner-rce images
 
 </details>
 <hr/>
