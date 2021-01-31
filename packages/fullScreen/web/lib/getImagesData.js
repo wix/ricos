@@ -47,7 +47,7 @@ const blockToImagesKeys = {
       const blockKeys = contentTraverser(pair.content).filter(key => key);
       const imageKeys = blockKeys.length ? Object.assign(...blockKeys) : {};
       accordionImagesKeys = {
-        ...imageKeys,
+        ...accordionImagesKeys,
         ...imageKeys,
       };
     });
