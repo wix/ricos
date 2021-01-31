@@ -103,6 +103,7 @@
 	"SettingsButton_Tooltip": "Pengaturan",
 	"LinkPreview_Settings_Tooltip": "Setelan penaut",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Untuk menjual jasa dan mengumumkannya lewat pos Anda, buka pasar apli di situs Anda dan instal Wix Bookings.",
+	"UnsupportedPlugin_message": "This content can be edited only on the web",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Jajak Suara (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "Tambah cuplikan kode",

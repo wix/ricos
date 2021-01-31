@@ -524,7 +524,7 @@
 	"Embed_Vertical_Events_Search_Placeholder": "Search for an event",
 	"Embed_Vertical_Events_Placeholder": "Select an event from the list",
 	"TablePlugin_InsertButton": "Table",
-	"Table_plugin_search_tags": "table",
+	"Table_plugin_search_tags": "table grid row column data",
 	"TablePlugin_InsertButton_Tooltip": "Add a table",
 	"TablePlugin_Toolbar_TextStyle_Button": "Text style",
 	"TablePlugin_Toolbar_GoBack_Button": "Go back",
