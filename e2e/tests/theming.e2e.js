@@ -15,6 +15,7 @@ function testFlow(isDesktop, title) {
   }
 }
 
+
 function tests({ isDesktop }) {
   it('no palette, no cssOverride', function() {
     cy.loadRicosEditorAndViewer(
