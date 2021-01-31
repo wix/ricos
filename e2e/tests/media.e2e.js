@@ -318,7 +318,6 @@ describe('plugins', () => {
       cy.get(`[data-hook=${VIDEO_SETTINGS.DOWNLOAD_TOGGLE}]`).click();
       cy.eyesCheckWindow();
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
-      cy.wait(200);
     });
   });
 
