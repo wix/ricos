@@ -74,6 +74,7 @@ export class RicosEngine extends Component<EngineProps> {
       linkSettings = {},
       linkPanelSettings = {},
       maxTextLength,
+      textAlignment,
     } = this.props;
 
     const { strategyProps, previewContent, htmls } = this.runStrategies();
@@ -107,6 +108,7 @@ export class RicosEngine extends Component<EngineProps> {
       disabled: pauseMedia,
       anchorTarget,
       relValue,
+      textAlignment,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);

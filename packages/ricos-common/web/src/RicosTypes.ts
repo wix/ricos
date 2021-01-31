@@ -32,6 +32,7 @@ export interface RicosProps {
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
+  textAlignment?: TextAlignment;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -120,3 +121,5 @@ export interface LinkSettings {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
 }
+
+export type TextAlignment = 'left' | 'right';

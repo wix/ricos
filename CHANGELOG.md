@@ -15,11 +15,18 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :rocket: New Feature
 - `fullScreen`
   - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full screen display for inner-rce images
+
 </details>
 <hr/>
+
+## 8.18.0 (Jan 31, 2021)
+### :rocket: New Feature
+- `ricos-common`
+  - [#2065](https://github.com/wix-incubator/rich-content/pull/2065) add textAlignment prop
 
 ## 8.17.11 (Jan 27, 2021)
 ### :bug: Bug Fix
