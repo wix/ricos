@@ -103,6 +103,7 @@
 	"SettingsButton_Tooltip": "Mga Setting",
 	"LinkPreview_Settings_Tooltip": "Mga setting ng link",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Para magbenta ng mga serbisyo online at ibahagi ang mga ito sa iyong post, pumunta sa app market sa iyong site at i-install ang Wix Bookings.",
+	"UnsupportedPlugin_message": "This content can be edited only on the web",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Poll (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "Magdagdag ng snippet ng code",

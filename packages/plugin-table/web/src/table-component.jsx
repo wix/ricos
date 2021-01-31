@@ -25,7 +25,7 @@ class TableComponent extends React.Component {
     };
     this.innerRceAdditionalProps = { placeholder: '' };
     this.innerEditorsRefs = {};
-    this.table = new Table(props.componentData, this.updateComponentData1);
+    this.table = new Table(props.componentData, this.updateComponentData);
     this.tableRef = createRef();
     this.dragPreview = createRef();
     this.rowDragProps = {
@@ -164,13 +164,18 @@ class TableComponent extends React.Component {
 
   handleTableClipboardEvent = e => {
     const { selected, isEditingActive, copiedCellsRange, isAllCellsSelected } = this.state;
-    if (isPluginFocused(this.props.block, this.props.selection) && selected && !isEditingActive) {
+    const isColorPickerModalOpen = e.target.closest('[data-id=color-picker-modal]');
+    if (
+      isPluginFocused(this.props.block, this.props.selection) &&
+      selected &&
+      !isEditingActive &&
+      !isColorPickerModalOpen
+    ) {
       const preventEvent = () => {
         e.stopPropagation();
         e.preventDefault();
       };
-      const isColorPickerModalOpen = e.target.closest('[data-id=color-picker-modal]');
-      if (e.key === 'Backspace' && !isAllCellsSelected && !isColorPickerModalOpen) {
+      if (e.key === 'Backspace' && !isAllCellsSelected) {
         preventEvent();
         this.table.clearRange(getRange(selected));
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
@@ -214,7 +219,7 @@ class TableComponent extends React.Component {
     !this.isAllCellsSelected(this.state.selected) && this.setState({ isAllCellsSelected: false });
   };
 
-  updateComponentData1 = data =>
+  updateComponentData = data =>
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
 
   onResizeCol = columnsRefs =>
@@ -390,7 +395,6 @@ class TableComponent extends React.Component {
         className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
           [styles.editMode]: isEditMode,
           [styles.viewMode]: !isEditMode,
-          [styles.disableSelection]: !isEditingActive,
         })}
         data-hook="TableComponent"
         onFocus={this.onFocus}

@@ -10,6 +10,7 @@ class TableViewer extends Component {
   constructor(props) {
     super(props);
     this.table = this.props.table || new TableDataUtil(props.componentData);
+    this.state = {};
   }
 
   componentDidMount() {
@@ -39,7 +40,6 @@ class TableViewer extends Component {
         {...props}
         table={this.table}
         tableRef={this.tableViewerRef}
-        isMobile={this.props.isMobile}
         colDragProps={this.props.colDragProps}
         onResize={this.props.onResize}
         onResizeStart={this.props.onResizeStart}
@@ -65,6 +65,9 @@ class TableViewer extends Component {
 
   setTableViewerRef = ref => {
     this.tableViewerRef = ref;
+    if (!this.state.isTableRefSet) {
+      this.setState({ isTableRefSet: true });
+    }
   };
 
   cellRenderer = props => {
