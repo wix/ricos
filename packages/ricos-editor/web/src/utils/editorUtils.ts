@@ -1,14 +1,8 @@
-import {
-  createWithContent,
-  createEmpty,
-  convertToRaw,
-  convertFromRaw,
-} from 'wix-rich-content-editor/libs/editorStateConversion';
-import { EditorProps } from 'draft-js';
+import { createEmpty, convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
+import { ContentState, EditorProps } from 'draft-js';
 import { debounce, pick } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
-import { compare, isContentStateEmpty } from 'ricos-content';
-import { RicosContent, isSSR } from 'wix-rich-content-common';
+import { isSSR } from 'wix-rich-content-common';
 import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
 
@@ -21,18 +15,10 @@ const wait = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-export function createDataConverter(
-  onContentChange?: OnContentChangeFunction,
-  initialContent?: RicosContent
-): EditorDataInstance {
-  let currContent = initialContent || emptyState;
-  let currEditorState = initialContent
-    ? createWithContent(convertFromRaw(initialContent))
-    : createEmpty();
-  let currTraits = {
-    isEmpty: initialContent ? isContentStateEmpty(initialContent) : true,
-    contentChanges: { blockChanges: {}, entityChanges: {} },
-  };
+export function createDataConverter(onContentChange?: OnContentChangeFunction): EditorDataInstance {
+  let currContent = emptyState;
+  let currEditorState = createEmpty();
+  let currentTraits = { isEmpty: true, isContentChanged: false };
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
     waitingForUpdateResolve;
@@ -50,40 +36,14 @@ export function createDataConverter(
 
   const getEditorState = () => currEditorState;
 
-  const getContentTraits = () => {
-    if (!initialContent) {
-      return currTraits;
-    }
-    if (!isUpdated) {
-      const currState = currEditorState.getCurrentContent();
-      currContent = convertToRaw(currState);
-      const blockChanges = compare(currContent.blocks, initialContent.blocks);
-      const entityChanges = compare(currContent.entityMap, initialContent.entityMap);
-      currTraits = {
-        isEmpty: isContentStateEmpty(currContent),
-        contentChanges: { blockChanges, entityChanges },
-      };
-      isUpdated = true;
-    }
-    return currTraits;
-  };
-
   const getContentState: ContentStateGetter = ({ shouldRemoveErrorBlocks = true } = {}) => {
+    const currState: ContentState = currEditorState.getCurrentContent();
     if (!isUpdated) {
-      const currState = currEditorState.getCurrentContent();
       currContent = convertToRaw(currState);
-      if (initialContent) {
-        const blockChanges = compare(currContent.blocks, initialContent.blocks);
-        const entityChanges = compare(currContent.entityMap, initialContent.entityMap);
-        currTraits = {
-          isEmpty: isContentStateEmpty(currContent),
-          contentChanges: { blockChanges, entityChanges },
-        };
-      }
       isUpdated = true;
     }
 
-    onContentChange?.(currContent);
+    onContentChange?.(currContent, currentTraits);
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
@@ -95,14 +55,14 @@ export function createDataConverter(
   const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {
     getContentState,
-    getContentTraits,
     getEditorState,
     waitForUpdate,
     getContentStatePromise,
-    refresh: editorState => {
+    refresh: (editorState, contentTraits) => {
       if (!isSSR()) {
         isUpdated = false;
         currEditorState = editorState;
+        currentTraits = contentTraits;
         debounceUpdate();
       }
     },
