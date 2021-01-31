@@ -5,7 +5,7 @@ import {
   convertFromRaw,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { EditorProps } from 'draft-js';
-import { debounce, pick } from 'lodash';
+import { debounce, pick, sortBy, isEqual, isEmpty } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { compare, isContentStateEmpty } from 'ricos-content';
 import { RicosContent, isSSR } from 'wix-rich-content-common';
@@ -21,6 +21,45 @@ const wait = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
+// compares ranges regardless style order, e.g. ['BOLD', 'ITALIC'] equals ['ITALIC', 'BOLD']
+function areRangesEqual(blockRanges1, blockRanges2, sortKey) {
+  return (
+    blockRanges1.length === blockRanges2.length &&
+    isEqual(
+      sortBy(blockRanges1, r => r[sortKey]),
+      sortBy(blockRanges2, r => r[sortKey])
+    )
+  );
+}
+
+function isTextAlignmentEqual(block1, block2) {
+  const isBlock1AlignedLeft = !block1.data.textAlignment || block1.data.textAlignment === 'left';
+  const isBlock2AlignedLeft = !block2.data.textAlignment || block2.data.textAlignment === 'left';
+  return (
+    isBlock1AlignedLeft === isBlock2AlignedLeft ||
+    block1.data.textAlignment === block2.data.textAlignment
+  );
+}
+
+function areBlockFieldsEqual(block1, block2) {
+  return (
+    block1.text === block2.text &&
+    block1.depth === block2.depth &&
+    block1.type === block2.type &&
+    areRangesEqual(block1.inlineStyleRanges, block2.inlineStyleRanges, 'style') &&
+    areRangesEqual(block1.entityRanges, block2.entityRanges, 'key') &&
+    isTextAlignmentEqual(block1, block2) &&
+    isEmpty(compare(block1.data, block2.data, { verbose: true, ignoredKeys: ['textAlignment'] }))
+  );
+}
+
+function areBlocksEqual(currentStateBlocks, initialStateBlocks) {
+  return (
+    currentStateBlocks.length === initialStateBlocks.length &&
+    currentStateBlocks.every((block, i) => areBlockFieldsEqual(block, initialStateBlocks[i]))
+  );
+}
+
 export function createDataConverter(
   onContentChange?: OnContentChangeFunction,
   initialContent?: RicosContent
@@ -31,7 +70,7 @@ export function createDataConverter(
     : createEmpty();
   let currTraits = {
     isEmpty: initialContent ? isContentStateEmpty(initialContent) : true,
-    contentChanges: { blockChanges: {}, entityChanges: {} },
+    isContentChanged: false,
   };
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
@@ -57,11 +96,13 @@ export function createDataConverter(
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
       currContent = convertToRaw(currState);
-      const blockChanges = compare(currContent.blocks, initialContent.blocks);
-      const entityChanges = compare(currContent.entityMap, initialContent.entityMap);
+      const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
+      const entitiesEqual = isEmpty(
+        compare(currContent.entityMap, initialContent.entityMap, { verbose: true })
+      );
       currTraits = {
         isEmpty: isContentStateEmpty(currContent),
-        contentChanges: { blockChanges, entityChanges },
+        isContentChanged: blocksEqual && entitiesEqual,
       };
       isUpdated = true;
     }
@@ -73,11 +114,13 @@ export function createDataConverter(
       const currState = currEditorState.getCurrentContent();
       currContent = convertToRaw(currState);
       if (initialContent) {
-        const blockChanges = compare(currContent.blocks, initialContent.blocks);
-        const entityChanges = compare(currContent.entityMap, initialContent.entityMap);
+        const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
+        const entitiesEqual = isEmpty(
+          compare(currContent.entityMap, initialContent.entityMap, { verbose: true })
+        );
         currTraits = {
           isEmpty: isContentStateEmpty(currContent),
-          contentChanges: { blockChanges, entityChanges },
+          isContentChanged: !(blocksEqual && entitiesEqual),
         };
       }
       isUpdated = true;
