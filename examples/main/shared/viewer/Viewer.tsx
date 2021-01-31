@@ -57,11 +57,11 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
 
   getConfig = () => {
     const { scrollingElementFn } = this.props;
-    const onExpand = (entityIndex, innerIndex = 0) => {
+    const onExpand = (blockKey, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
         expandModeIsOpen: true,
-        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+        expandModeIndex: this.expandModeData.imageMap[blockKey] + innerIndex,
       });
     };
     const additionalConfig = {

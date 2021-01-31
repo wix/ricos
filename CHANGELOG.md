@@ -15,6 +15,9 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+- `fullScreen`
+  - [#1939](https://github.com/wix-incubator/rich-content/pull/1931) allow full screen display for inner-rce images
 </details>
 <hr/>
 
