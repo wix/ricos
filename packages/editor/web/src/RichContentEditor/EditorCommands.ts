@@ -100,11 +100,11 @@ export const createEditorCommands = (
     setEditorState(RichUtils.toggleBlockType(getEditorState(), type));
   };
 
-  const setSelection = (blockKey: string, selection: Selection): void =>
+  const setSelection = (blockKey: string, selection?: Selection): void =>
     setEditorState(
       EditorState.forceSelection(
         getEditorState(),
-        SelectionState.createEmpty(blockKey).merge(selection)
+        SelectionState.createEmpty(blockKey).merge(selection || {})
       )
     );
 
