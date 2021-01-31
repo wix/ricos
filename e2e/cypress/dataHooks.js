@@ -104,6 +104,9 @@ export const IMAGE_SETTINGS = {
   LINK: 'linkPanelInput',
   PREVIEW: 'imagePreview',
 };
+export const VIDEO_SETTINGS = {
+  DOWNLOAD_TOGGLE: 'videoDownloadToggle',
+};
 
 export const GALLERY_SETTINGS = {
   IMAGE: 'galleryItemPreview',

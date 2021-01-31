@@ -45,6 +45,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
 
   return (
     <div
+      data-hook="videoSettings"
       className={classNames(styles.videoSettings, {
         [styles.videoSettings_mobile]: isMobile,
       })}
@@ -63,6 +64,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
           checked={isDownloadEnabled}
           label={t('VideoSettings_Video_CanBeDownloaded_Label')}
           onChange={onToggle}
+          dataHook="videoDownloadToggle"
         />
         <InfoIcon
           theme={theme}

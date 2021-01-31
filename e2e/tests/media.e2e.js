@@ -7,6 +7,8 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
   GIPHY_PLUGIN,
+  VIDEO_SETTINGS,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 
@@ -307,6 +309,16 @@ describe('plugins', () => {
         .type('Will this fix the flakiness?');
       cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should toggle download option', () => {
+      cy.loadRicosEditorAndViewer('video');
+      cy.openVideoSettings();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${VIDEO_SETTINGS.DOWNLOAD_TOGGLE}]`).click();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.wait(200);
     });
   });
 

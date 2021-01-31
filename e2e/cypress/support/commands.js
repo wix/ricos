@@ -370,6 +370,12 @@ Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
   cy.get('[data-hook="imageSettings"]');
 });
 
+Cypress.Commands.add('openVideoSettings', (shouldOpenToolbar = true) => {
+  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO);
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+  cy.get('[data-hook="videoSettings"]');
+});
+
 Cypress.Commands.add('openMapSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.MAP}]:first`)
     .parent()

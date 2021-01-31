@@ -1738,7 +1738,7 @@ exports[`plugins > video > add a video from URL #0`] =
           "alignment": "center",
           "size": "small"
         },
-         "isCustomVideo": false,
+        "isCustomVideo": false,
         "metadata": {
           "author_name": "Wix.com",
           "author_url": "https://www.youtube.com/user/Wix",
@@ -2288,4 +2288,65 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
     }
   ],
   "entityMap": {}
+};
+
+exports[`plugins > video > should toggle download option #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableDownload": true,
+          "size": "content"
+        },
+        "isCustomVideo": true,
+        "src": {
+          "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
+          "thumbnail": {
+            "height": 1080,
+            "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
+            "width": 1920
+          }
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
 };
