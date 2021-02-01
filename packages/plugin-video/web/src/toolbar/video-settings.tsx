@@ -54,7 +54,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
         <SettingsMobileHeader {...mobileSettingsProps} />
       ) : (
         <React.Fragment>
-          <div className={styles.videoSettingsTitle}>{t('VideoSettings_Header')}</div>
+          <div className={styles.videoSettingsTitle}>{t('VideoPlugin_Settings_Header')}</div>
           <div className={styles.separator} />
         </React.Fragment>
       )}
@@ -62,14 +62,14 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
         <LabeledToggle
           theme={theme}
           checked={isDownloadEnabled}
-          label={t('VideoSettings_Video_CanBeDownloaded_Label')}
+          label={t('VideoPlugin_Settings_VideoCanBeDownloaded_Label')}
           onChange={onToggle}
           dataHook="videoDownloadToggle"
         />
         <InfoIcon
           theme={theme}
           isNotification
-          tooltipText={t('VideoSettings_Video_CanBeDownloaded_Tooltip')}
+          tooltipText={t('VideoPlugin_Settings_VideoCanBeDownloaded_Tooltip')}
         />
       </SettingsSection>
       {!isMobile && (

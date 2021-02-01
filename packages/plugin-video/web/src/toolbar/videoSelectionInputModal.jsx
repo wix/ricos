@@ -35,11 +35,7 @@ export default class VideoSelectionInputModal extends Component {
   onUrlChange = url => this.setState({ url, showError: false });
 
   onUrlVideoSelection = () => {
-    const {
-      // eslint-disable-next-line no-unused-vars
-      componentData,
-      helpers,
-    } = this.props;
+    const { componentData, helpers } = this.props;
     const { url = '' } = this.state;
 
     const src = url.trim();
