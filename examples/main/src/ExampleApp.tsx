@@ -28,7 +28,7 @@ interface ExampleAppProps {
   locale?: string;
   allLocales?: string[];
   editorState?: EditorState;
-  onEditorChange?: (editorState: EditorState, traits)=> void;
+  onEditorChange?: (editorState: EditorState)=> void;
   localeResource?: Record<string, string>;
 }
 
