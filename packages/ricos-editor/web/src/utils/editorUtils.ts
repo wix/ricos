@@ -49,7 +49,7 @@ function areBlockFieldsEqual(block1, block2) {
     areRangesEqual(block1.inlineStyleRanges, block2.inlineStyleRanges, 'style') &&
     areRangesEqual(block1.entityRanges, block2.entityRanges, 'key') &&
     isTextAlignmentEqual(block1, block2) &&
-    isEmpty(compare(block1.data, block2.data, { verbose: true, ignoredKeys: ['textAlignment'] }))
+    isEmpty(compare(block1.data, block2.data, { verbose: false, ignoredKeys: ['textAlignment'] }))
   );
 }
 
@@ -98,7 +98,7 @@ export function createDataConverter(
       currContent = convertToRaw(currState);
       const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
       const entitiesEqual = isEmpty(
-        compare(currContent.entityMap, initialContent.entityMap, { verbose: true })
+        compare(currContent.entityMap, initialContent.entityMap, { verbose: false })
       );
       currTraits = {
         isEmpty: isContentStateEmpty(currContent),
@@ -116,7 +116,7 @@ export function createDataConverter(
       if (initialContent) {
         const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
         const entitiesEqual = isEmpty(
-          compare(currContent.entityMap, initialContent.entityMap, { verbose: true })
+          compare(currContent.entityMap, initialContent.entityMap, { verbose: false })
         );
         currTraits = {
           isEmpty: isContentStateEmpty(currContent),
