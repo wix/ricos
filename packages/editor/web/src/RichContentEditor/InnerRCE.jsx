@@ -52,20 +52,6 @@ class InnerRCE extends PureComponent {
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
-  onBlur = e => {
-    if (
-      this.state.showToolbars &&
-      this.editorWrapper &&
-      e.target &&
-      !e.target.closest('[data-id=rich-content-editor-modal]') &&
-      !e.target.closest('[class=ReactModalPortal]') &&
-      !this.editorWrapper.contains(e.target) &&
-      !e.target.closest('[data-hook=table-plugin-cell]')
-    ) {
-      this.setState({ showToolbars: false });
-    }
-  };
-
   getToolbars = () => {
     const { MobileToolbar, TextToolbar } = this.ref.getToolbars();
     return { MobileToolbar, TextToolbar };
@@ -108,6 +94,22 @@ class InnerRCE extends PureComponent {
     if (!this.state.showToolbars) {
       this.setState({ showToolbars: true });
     }
+  };
+
+  onBlur = () => {
+    setTimeout(() => {
+      const target = document.activeElement;
+      if (
+        this.state.showToolbars &&
+        this.editorWrapper &&
+        target &&
+        !target.closest('[data-id=rich-content-editor-modal]') &&
+        !target.closest('[class=ReactModalPortal]') &&
+        !this.editorWrapper.contains(target)
+      ) {
+        this.setState({ showToolbars: false });
+      }
+    }, 50);
   };
 
   handleAtomicPluginsBorders = enterEditing => {
