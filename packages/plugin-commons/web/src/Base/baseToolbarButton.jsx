@@ -100,14 +100,13 @@ class BaseToolbarButton extends React.Component {
     }
 
     const activeButton = componentState.activeButton || { keyName, isActive: false };
-    const isToggleButton = !(
-      this.props.type === BUTTONS.EXTERNAL_MODAL || this.props.type === BUTTONS.FILES
-    );
+    const isExternalButtonModal = this.props.type === BUTTONS.EXTERNAL_MODAL;
+    const isToggleButton = !(isExternalButtonModal || this.props.type === BUTTONS.FILES);
+    const isCurrentKey = activeButton.keyName === keyName;
     const isActive =
-      this.props.type === BUTTONS.EXTERNAL_MODAL ||
-      (!isToggleButton
-        ? activeButton.keyName === keyName
-        : !(activeButton.keyName === keyName && activeButton.isActive));
+      isExternalButtonModal ||
+      (!isToggleButton ? isCurrentKey : !(isCurrentKey && activeButton.isActive));
+
     componentState.activeButton = {
       ...activeButton,
       keyName,
@@ -187,6 +186,7 @@ class BaseToolbarButton extends React.Component {
   getDataHook = () => `baseToolbarButton_${this.props.keyName}`;
 
   renderVideoSettingsFlag = () =>
+    //this function checks if video settings should be rendered
     (this.props.type === BUTTONS.EXTERNAL_MODAL && this.props.componentData.isCustomVideo) ||
     this.props.keyName !== 'settings';
 
