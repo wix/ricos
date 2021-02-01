@@ -86,7 +86,7 @@ const insertDecorationsMap = {
   [RICOS_MENTION_TYPE]: () => {}, //WIP
 };
 
-const removeDecorationsMapFuncs = {
+const deleteDecorationsMapFuncs = {
   [RICOS_LINK_TYPE]: removeLinksInSelection,
   [RICOS_MENTION_TYPE]: () => {}, //WIP
 };
@@ -184,8 +184,8 @@ export const createEditorCommands = (
         }
       }
     },
-    removeDecoration: <K extends keyof DecorationsDataMap>(type: K) => {
-      const newEditorState = removeDecorationsMapFuncs[type]?.(getEditorState());
+    deleteDecoration: <K extends keyof DecorationsDataMap>(type: K) => {
+      const newEditorState = deleteDecorationsMapFuncs[type]?.(getEditorState());
       if (newEditorState) {
         setEditorState(newEditorState);
       }

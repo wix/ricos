@@ -74,7 +74,8 @@ import { rich_content } from 'ricos-schema';
 
 export type CreatePluginData<PluginData> = (
   pluginData?: PluginData,
-  currentData?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  currentData?: any
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Record<string, any> | undefined;
 

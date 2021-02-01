@@ -11,6 +11,10 @@ export const createGalleryData: CreatePluginsDataMap[typeof RICOS_GALLERY_TYPE] 
   if (!pluginData) {
     return undefined;
   }
+  if (currentData) {
+    // eslint-disable-next-line fp/no-delete
+    delete currentData.items;
+  }
   const galleryData = convertNodeDataToDraft(rich_content.Node.Type.GALLERY, pluginData);
   return merge({}, currentData || DEFAULTS, galleryData);
 };
