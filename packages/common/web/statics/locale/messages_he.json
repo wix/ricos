@@ -103,6 +103,7 @@
 	"SettingsButton_Tooltip": "הגדרות",
 	"LinkPreview_Settings_Tooltip": "הגדרות הקישור",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "כדי למכור שירותים ולשתף אותם בפוסטים שלכם, עברו לחנות האפליקציות באתר שלכם והתקינו את ההזמנות של Wix.",
+	"UnsupportedPlugin_message": "This content can be edited only on the web",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "סקר (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "הוסף פיסת קוד",
