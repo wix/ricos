@@ -15,17 +15,17 @@ const SettingsMobileHeader = ({
   switchTab,
   otherTab,
   dataHookPrefix,
-  isSettingsModal = false,
+  isMediaSettingsModal = false,
 }) => {
   const [menuVisible, toggleMenu] = useState(false);
   const _styles = mergeStyles({ styles, theme });
 
   return (
     <div role="menu" className={classNames(_styles.root)}>
-      {!isSettingsModal && <div className={_styles.headerPlaceholder} />}
+      {!isMediaSettingsModal && <div className={_styles.headerPlaceholder} />}
       <div
         className={classNames(_styles.header, {
-          [styles.media]: isSettingsModal,
+          [styles.media]: isMediaSettingsModal,
         })}
       >
         <button
@@ -84,7 +84,7 @@ SettingsMobileHeader.propTypes = {
   saveLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   dataHookPrefix: PropTypes.string,
-  isSettingsModal: PropTypes.bool,
+  isMediaSettingsModal: PropTypes.bool,
 };
 
 export default SettingsMobileHeader;

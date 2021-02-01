@@ -1,3 +1,4 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
   .separator {
     display: block;
     margin-top: 16px;
@@ -20,6 +21,7 @@
       left: 210px;
       height: 24px;
       cursor: pointer;
+      fill: $primary-text-color;
     }
     p{
       font-size: 16px;
@@ -36,7 +38,7 @@
     svg{
       top: 14px;
       left: 191px;
-    }
+        }
     .videoSettings_toggleContainer{
       >div {
       padding-top: 15px; 

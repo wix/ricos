@@ -38,7 +38,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
     dataHookPrefix: 'VideoSettingsMobileHeader',
     cancelLabel: t('SettingsPanelFooter_Cancel'),
     saveLabel: t('SettingsPanelFooter_Save'),
-    isSettingsModal: true,
+    isMediaSettingsModal: true,
     cancel: onCancelClick,
     save: onDoneClick,
   };
