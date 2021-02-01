@@ -70,6 +70,7 @@ export interface RicosTheme {
 }
 
 export interface ThemeStrategyArgs {
+  experiments?: Record<string, string>;
   plugins?: BasePlugin[];
   cssOverride?: RicosCssOverride;
   ricosTheme?: RicosTheme;

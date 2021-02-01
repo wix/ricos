@@ -59,6 +59,7 @@ export interface RichContentViewerProps {
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
   localeResource?: Record<string, string>;
+  experiments?: Record<string, string>;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
@@ -196,6 +197,7 @@ class RichContentViewer extends Component<
         addAnchors,
         isMobile = false,
         t,
+        experiments,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -229,7 +231,7 @@ class RichContentViewer extends Component<
       );
 
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />

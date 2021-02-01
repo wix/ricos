@@ -63,13 +63,22 @@ function viewerStrategy(
   };
 }
 
-export default function pluginsStrategy(
-  isViewer: boolean,
-  plugins: BasePlugin[] = [],
-  childProps: RichContentProps,
-  cssOverride: RicosCssOverride,
-  content?: RicosContent
-): PluginsStrategy {
+export default function pluginsStrategy({
+  isViewer,
+  plugins = [],
+  childProps,
+  cssOverride,
+  content,
+  experiments,
+}: {
+  isViewer: boolean;
+  plugins: BasePlugin[];
+  childProps: RichContentProps;
+  cssOverride: RicosCssOverride;
+  content?: RicosContent;
+  experiments?: Record<string, string>;
+}): PluginsStrategy {
+  console.debug(experiments); // eslint-disable-line no-console
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isViewer) {

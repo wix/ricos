@@ -145,6 +145,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   callOnChangeOnNewEditorState?: boolean;
   localeResource?: Record<string, string>;
   maxTextLength?: number;
+  experiments?: Record<string, string>;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -913,7 +914,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { onError, locale, direction, showToolbars = true } = this.props;
+    const { onError, locale, direction, experiments, showToolbars = true } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -930,7 +931,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
