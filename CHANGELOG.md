@@ -9,7 +9,7 @@
 > - :house: Internal
 > - :nail_care: Polish
 
-## [Unreleased]  
+## [Unreleased]
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
@@ -19,6 +19,11 @@
 ### :rocket: New Feature
 - `plugin-video`
   - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) add settings-modal enable download toggle
+
+  ### :bug: Bug Fix
+  - `ricos-editor`
+    - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
+
 </details>
 <hr/>
 
@@ -284,7 +289,7 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#1897](https://github.com/wix/ricos/pull/1897) fix gallery styles (college layout)
-  
+
 ## 8.9.2 (Dec 21, 2020)
 ### :bug: Bug Fix
 - `link`
@@ -356,7 +361,7 @@
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1850](https://github.com/wix/ricos/pull/1850) settings modal overlay appears above wix ad
-  
+
 ### :house: Internal
 - `test-env`
   - [#1848](https://github.com/wix/ricos/pull/1848) theme `customStyles` coverage

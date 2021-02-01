@@ -8,16 +8,15 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
-import ClickOutside from 'react-click-outsider';
 
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config } = props;
+    const { innerRCERenderedIn, config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
-      showToolbars: false,
+      showToolbars: editing || false,
     };
   }
 
@@ -51,26 +50,6 @@ class InnerRCE extends PureComponent {
   onChange = editorState => {
     this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
-  };
-
-  onFocus = e => {
-    e.stopPropagation();
-    this.ref && this.props.setEditorToolbars(this.ref);
-    this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
-  };
-
-  onClickOutside = e => {
-    if (
-      this.state.showToolbars &&
-      this.editorWrapper &&
-      e.target &&
-      !e.target.closest('[data-id=rich-content-editor-modal]') &&
-      !e.target.closest('[class=ReactModalPortal]') &&
-      !this.editorWrapper.contains(e.target)
-    ) {
-      this.setState({ showToolbars: false });
-    }
   };
 
   getToolbars = () => {
@@ -112,7 +91,25 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
+    if (!this.state.showToolbars) {
+      this.setState({ showToolbars: true });
+    }
+  };
+
+  onBlur = () => {
+    setTimeout(() => {
+      const target = document.activeElement;
+      if (
+        this.state.showToolbars &&
+        this.editorWrapper &&
+        target &&
+        !target.closest('[data-id=rich-content-editor-modal]') &&
+        !target.closest('[class=ReactModalPortal]') &&
+        !this.editorWrapper.contains(target)
+      ) {
+        this.setState({ showToolbars: false });
+      }
+    }, 50);
   };
 
   handleAtomicPluginsBorders = enterEditing => {
@@ -150,34 +147,33 @@ class InnerRCE extends PureComponent {
       toolbarsToIgnore.push('SideToolbar');
     }
     return (
-      <ClickOutside onClickOutside={this.onClickOutside}>
-        <div
-          data-id="inner-rce"
-          onFocus={this.onFocus}
-          className={classNames(styles.editor, theme.editor, 'inner-rce')}
-          ref={this.setEditorWrapper}
-        >
-          <RichContentEditor
-            {...rest} // {...rest} need to be before editorState, onChange, plugins
-            ref={this.setRef}
-            editorState={editorState}
-            onChange={this.onChange}
-            plugins={this.plugins}
-            config={this.config}
-            isMobile={isMobile}
-            toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
-            showToolbars={editing && showToolbars}
-            isInnerRCE
-            innerRCERenderedIn={innerRCERenderedIn}
-            editorKey="inner-rce"
-            readOnly={readOnly}
-            onBackspace={this.onBackspaceAtBeginningOfContent}
-            direction={direction}
-            tablePluginMenu={tablePluginMenu}
-            {...additionalProps}
-          />
-        </div>
-      </ClickOutside>
+      <div
+        data-id="inner-rce"
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        className={classNames(styles.editor, theme.editor, 'inner-rce')}
+        ref={this.setEditorWrapper}
+      >
+        <RichContentEditor
+          {...rest} // {...rest} need to be before editorState, onChange, plugins
+          ref={this.setRef}
+          editorState={editorState}
+          onChange={this.onChange}
+          plugins={this.plugins}
+          config={this.config}
+          isMobile={isMobile}
+          toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+          showToolbars={editing && showToolbars}
+          isInnerRCE
+          innerRCERenderedIn={innerRCERenderedIn}
+          editorKey="inner-rce"
+          readOnly={readOnly}
+          onBackspace={this.onBackspaceAtBeginningOfContent}
+          direction={direction}
+          tablePluginMenu={tablePluginMenu}
+          {...additionalProps}
+        />
+      </div>
     );
   }
 }
