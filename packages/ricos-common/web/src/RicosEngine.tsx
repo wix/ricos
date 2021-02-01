@@ -46,7 +46,7 @@ export class RicosEngine extends Component<EngineProps> {
         isViewer,
         plugins,
         childProps: children.props,
-        theme,
+        cssOverride: theme,
         content,
         experiments,
       })
@@ -56,7 +56,7 @@ export class RicosEngine extends Component<EngineProps> {
       isViewer,
       isPreviewExpanded,
       onPreviewExpand,
-      preview,
+      previewConfig: preview,
       content,
       experiments,
     });
