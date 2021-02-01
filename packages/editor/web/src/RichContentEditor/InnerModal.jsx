@@ -8,8 +8,8 @@ class InnerModal extends Component {
   setInnerModalRef = ref => (this.innerModalRef = ref);
 
   getVerticalPosition = top => {
-    const editor = document && document.querySelector('[data-id=rce]');
-    const editorRect = editor.getBoundingClientRect();
+    const { editorWrapper } = this.props;
+    const editorRect = editorWrapper.getBoundingClientRect();
     const modalHeight = this.innerModalRef.clientHeight;
     const editorHeight = editorRect.height;
     const topAsNumber = parseInt(top, 10);
@@ -71,6 +71,7 @@ InnerModal.propTypes = {
   locale: PropTypes.string.isRequired,
   innerModal: PropTypes.object,
   closeInnerModal: PropTypes.func,
+  editorWrapper: PropTypes.any,
 };
 
 export default InnerModal;
