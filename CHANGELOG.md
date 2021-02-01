@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [##2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue 
+
   ### :bug: Bug Fix
   - `ricos-editor`
     - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
