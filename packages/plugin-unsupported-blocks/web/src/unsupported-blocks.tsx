@@ -8,7 +8,23 @@ interface Props {
   t: TranslationFunction;
 }
 class UnsupportedBlocks extends Component<Props> {
+  unsupportedBlocksRef: React.RefObject<HTMLInputElement>;
+  constructor(props) {
+    super(props);
+    this.unsupportedBlocksRef = React.createRef();
+  }
   styles: Record<string, string>;
+
+  fixContainerHeight = () => {
+    const container = this.unsupportedBlocksRef.current?.parentElement;
+    if (container?.style.height) {
+      container.style.height = '100%';
+    }
+  };
+
+  componentDidMount() {
+    this.fixContainerHeight();
+  }
 
   render() {
     const { t, theme } = this.props;
@@ -16,7 +32,7 @@ class UnsupportedBlocks extends Component<Props> {
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
-      <div className={styles.unsupportedBlocks_alert}>
+      <div className={styles.unsupportedBlocks_alert} ref={this.unsupportedBlocksRef}>
         <CircleInfoIcon />
         {alertMessage}
       </div>
