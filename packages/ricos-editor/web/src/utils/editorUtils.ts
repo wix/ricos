@@ -102,7 +102,7 @@ export function createDataConverter(
       );
       currTraits = {
         isEmpty: isContentStateEmpty(currContent),
-        isContentChanged: blocksEqual && entitiesEqual,
+        isContentChanged: !(blocksEqual && entitiesEqual),
       };
       isUpdated = true;
     }
