@@ -5,16 +5,33 @@ import ClickOutside from 'react-click-outsider';
 import { getLangDir } from 'wix-rich-content-common';
 
 class InnerModal extends Component {
+  setInnerModalRef = ref => (this.innerModalRef = ref);
+
+  getVerticalPosition = top => {
+    const editor = document && document.querySelector('[data-id=rce]');
+    const editorRect = editor.getBoundingClientRect();
+    const modalHeight = this.innerModalRef.clientHeight;
+    const editorHeight = editorRect.height;
+    const topAsNumber = parseInt(top, 10);
+    if (topAsNumber + modalHeight > editorHeight) {
+      return { top: 'auto', bottom: '0' };
+    } else {
+      return { top, bottom: 'auto' };
+    }
+  };
+
   render() {
     const { theme, locale, innerModal, closeInnerModal } = this.props;
     const { top, left } = innerModal?.modalProps || {};
+    const { top: topAfterOverflowCheck, bottom: bottomAfterOverflowCheck } =
+      (this.innerModalRef && this.getVerticalPosition(top)) || {};
     const dir = getLangDir(locale);
     const modalStyleDefaults = {
       position: 'absolute',
-      top,
+      top: topAfterOverflowCheck || top,
       left: dir === 'ltr' ? left : 'auto',
       right: dir === 'rtl' ? left : 'auto',
-      bottom: 'auto',
+      bottom: bottomAfterOverflowCheck || 'auto',
       border: 'solid 1px #ededed',
       background: 'rgb(255, 255, 255)',
       borderRadius: '6px',
@@ -32,6 +49,7 @@ class InnerModal extends Component {
     return innerModal ? (
       <ClickOutside onClickOutside={closeInnerModal}>
         <div
+          ref={this.setInnerModalRef}
           style={{
             ...innerModalStyles,
           }}
