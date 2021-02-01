@@ -8,8 +8,25 @@ import {
   isCursorAtFirstLine,
   isCursorAtLastLine,
 } from 'wix-rich-content-editor-common';
+import { generateKey } from 'wix-rich-content-common';
+import { convertFromRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
 
-export const createEmptyCellEditor = () => EditorState.createEmpty();
+export const createEmptyCellEditor = () => {
+  const emptyContentStateWithZeroWidthCharacter = convertFromRaw({
+    entityMap: {},
+    blocks: [
+      {
+        text: '​', //zero-width space
+        key: generateKey(),
+        type: 'unstyled',
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+      },
+    ],
+  });
+  return EditorState.createWithContent(emptyContentStateWithZeroWidthCharacter);
+};
 export const createEmptyCell = () => ({ content: createEmptyCellEditor() });
 export const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
