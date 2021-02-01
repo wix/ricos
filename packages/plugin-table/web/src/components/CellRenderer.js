@@ -216,8 +216,10 @@ export default class Cell extends Component {
 
 class Editor extends Component {
   shouldComponentUpdate(nextProps) {
-    const { editing, selected } = this.props;
-    return editing || nextProps.editing || selected || nextProps.selected;
+    const { editing, selected, contentState } = this.props;
+    const isContentStateChanged =
+      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
+    return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
   onKeydown = e => {
