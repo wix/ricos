@@ -8,7 +8,6 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
-import ClickOutside from 'react-click-outsider';
 
 class InnerRCE extends PureComponent {
   constructor(props) {
@@ -53,7 +52,7 @@ class InnerRCE extends PureComponent {
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
-  onClickOutside = e => {
+  onBlur = e => {
     if (
       this.state.showToolbars &&
       this.editorWrapper &&
@@ -146,34 +145,33 @@ class InnerRCE extends PureComponent {
       toolbarsToIgnore.push('SideToolbar');
     }
     return (
-      <ClickOutside onClickOutside={this.onClickOutside}>
-        <div
-          data-id="inner-rce"
-          onFocus={this.onFocus}
-          className={classNames(styles.editor, theme.editor, 'inner-rce')}
-          ref={this.setEditorWrapper}
-        >
-          <RichContentEditor
-            {...rest} // {...rest} need to be before editorState, onChange, plugins
-            ref={this.setRef}
-            editorState={editorState}
-            onChange={this.onChange}
-            plugins={this.plugins}
-            config={this.config}
-            isMobile={isMobile}
-            toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
-            showToolbars={editing && showToolbars}
-            isInnerRCE
-            innerRCERenderedIn={innerRCERenderedIn}
-            editorKey="inner-rce"
-            readOnly={readOnly}
-            onBackspace={this.onBackspaceAtBeginningOfContent}
-            direction={direction}
-            tablePluginMenu={tablePluginMenu}
-            {...additionalProps}
-          />
-        </div>
-      </ClickOutside>
+      <div
+        data-id="inner-rce"
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        className={classNames(styles.editor, theme.editor, 'inner-rce')}
+        ref={this.setEditorWrapper}
+      >
+        <RichContentEditor
+          {...rest} // {...rest} need to be before editorState, onChange, plugins
+          ref={this.setRef}
+          editorState={editorState}
+          onChange={this.onChange}
+          plugins={this.plugins}
+          config={this.config}
+          isMobile={isMobile}
+          toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+          showToolbars={editing && showToolbars}
+          isInnerRCE
+          innerRCERenderedIn={innerRCERenderedIn}
+          editorKey="inner-rce"
+          readOnly={readOnly}
+          onBackspace={this.onBackspaceAtBeginningOfContent}
+          direction={direction}
+          tablePluginMenu={tablePluginMenu}
+          {...additionalProps}
+        />
+      </div>
     );
   }
 }
