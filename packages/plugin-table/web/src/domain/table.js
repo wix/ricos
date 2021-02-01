@@ -11,7 +11,6 @@ import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
-const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
 const reorderArray = (arr, from, to) => {
   const numOfItemsToReorder = from.end - from.start + 1;
@@ -51,15 +50,20 @@ class Table extends TableDataUtil {
     }
     if (colsOutOfBoundNum > 0) {
       //eslint-disable-next-line
-      Object.entries(rows).forEach(([i, row]) => {
+      Object.entries(rows).forEach(([rowIndex, row]) => {
         [...Array(colsOutOfBoundNum).fill(0)].forEach((value, i) => {
-          const colIndex = i + colNum - 1 + colsOutOfBoundNum;
-          this.addNewColWidth(colIndex, this.getColWidth(i === 0 ? 0 : i - 1));
+          const colIndex = i + colNum;
           row.columns[colIndex] = createEmptyCell();
+          if (rowIndex === '0') {
+            this.addNewColWidth(colIndex, this.getColWidth(i === 0 ? 0 : i - 1));
+            this.addNewColMinWidth(colIndex);
+          }
         });
       });
     }
   };
+
+  setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
   pasteCells = (copiedCellsRange, targetRow, targetCol) => {
     const rows = this.getRows();
@@ -68,14 +72,14 @@ class Table extends TableDataUtil {
     const colDiff = targetCol - copiedCellsRange[0].j;
     const cellsWithPaste = cloneDeepWithoutEditorState(rows);
     copiedCellsRange.forEach(({ i, j }) => {
-      setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowDiff, j + colDiff);
+      this.setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowDiff, j + colDiff);
     });
     this.setNewRows(cellsWithPaste);
   };
 
   clearRange = range => {
     const rows = this.getRows();
-    range.forEach(({ i, j }) => setCellContent(rows, createEmptyCellEditor(), i, j));
+    range.forEach(({ i, j }) => this.setCellContent(rows, createEmptyCellEditor(), i, j));
     this.setNewRows(rows);
   };
 

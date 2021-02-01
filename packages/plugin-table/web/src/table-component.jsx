@@ -162,8 +162,14 @@ class TableComponent extends React.Component {
     return firstSelectedCellRef;
   };
 
+  setCellContent = (content, row, col) => {
+    const rows = this.table.getRows();
+    this.table.setCellContent(rows, content, row, col);
+    this.table.setNewRows(rows);
+  };
+
   handleTableClipboardEvent = e => {
-    const { selected, isEditingActive, copiedCellsRange, isAllCellsSelected } = this.state;
+    const { selected, isEditingActive } = this.state;
     const isColorPickerModalOpen = e.target.closest('[data-id=color-picker-modal]');
     if (
       isPluginFocused(this.props.block, this.props.selection) &&
@@ -175,24 +181,23 @@ class TableComponent extends React.Component {
         e.stopPropagation();
         e.preventDefault();
       };
-      if (e.key === 'Backspace' && !isAllCellsSelected) {
-        preventEvent();
-        this.table.clearRange(getRange(selected));
-      } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+      if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         preventEvent();
         this.setAllCellsSelected();
-      } else if (copiedCellsRange && e.key === 'v' && (e.ctrlKey || e.metaKey)) {
-        preventEvent();
-        this.table.pasteCells(copiedCellsRange, selected.start.i, selected.start.j);
-        this.setSelectionOnPastedCells();
       }
     }
   };
 
-  setSelectionOnPastedCells = () => {
-    const { selected, copiedCellsRange } = this.state;
-    const { i: startI, j: startJ } = copiedCellsRange[0];
-    const { i: endI, j: endJ } = copiedCellsRange[copiedCellsRange.length - 1];
+  onPaste = (copiedCells, start) => {
+    const copiedCellRange = getRange(copiedCells);
+    this.table.pasteCells(copiedCellRange, start.i, start.j);
+    this.setSelectionOnPastedCells(copiedCellRange);
+  };
+
+  setSelectionOnPastedCells = copiedCells => {
+    const { selected } = this.state;
+    const { i: startI, j: startJ } = copiedCells[0];
+    const { i: endI, j: endJ } = copiedCells[copiedCells.length - 1];
     const copiedRowsNum = endI - startI + 1;
     const copiedColsNum = endJ - startJ + 1;
     this.setSelected({
@@ -229,8 +234,6 @@ class TableComponent extends React.Component {
     this.table.setRowHeight(getRange(this.table.getRowsSelection({ start: i, end: i })), height);
 
   setToolbarRef = ref => (this.toolbarRef = ref);
-
-  handleCopy = ({ end, start }) => this.setState({ copiedCellsRange: getRange({ start, end }) });
 
   highlightResizer = (i, isCol) => {
     if (isCol && this.state.highlightColResizer !== i) {
@@ -458,7 +461,6 @@ class TableComponent extends React.Component {
             renderInnerRCE={this.renderInnerRCE}
             onSelect={this.onSelect}
             theme={theme}
-            handleCopy={this.handleCopy}
             setRowRef={this.setRowRef}
             setEditorRef={this.setEditorRef}
             toolbarRef={this.toolbarRef}
@@ -481,6 +483,9 @@ class TableComponent extends React.Component {
             selectAll={isAllCellsSelected}
             tableHeight={this.tableRef.current?.offsetHeight}
             isEditingActive={this.state.isEditingActive}
+            onClear={this.table.clearRange}
+            setCellContent={this.setCellContent}
+            onPaste={this.onPaste}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>

@@ -17,7 +17,6 @@ export default class Cell extends Component {
     ) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      this.contentBeforeEdit = prevProps.table.getCellContent(prevProps.row, prevProps.col);
       this.tdHeight = this.tdRef?.offsetHeight - 1;
       this.editorRef?.selectAllContent(true);
     }
@@ -66,7 +65,7 @@ export default class Cell extends Component {
   };
 
   onKeydown = e => {
-    const { editing, row, col, table, onKeyDown } = this.props;
+    const { editing, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -74,9 +73,10 @@ export default class Cell extends Component {
         e.stopPropagation();
         e.preventDefault();
         this.editorRef.selectAllContent(true);
-      }
-      if (e.key === 'Escape') {
-        table.updateCellContent(row, col, this.contentBeforeEdit);
+      } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+        e.preventDefault();
+      } else if (e.key === 'v' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+        e.preventDefault();
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
@@ -193,7 +193,6 @@ export default class Cell extends Component {
           <Editor
             editing={isMobile ? selected : isEditing}
             selected={selected}
-            contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
             handleCellClipboardEvent={handleCellClipboardEvent}
           >
@@ -217,10 +216,8 @@ export default class Cell extends Component {
 
 class Editor extends Component {
   shouldComponentUpdate(nextProps) {
-    const { editing, selected, contentState } = this.props;
-    const isContentStateChanged =
-      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
-    return editing || nextProps.editing || selected || isContentStateChanged;
+    const { editing, selected } = this.props;
+    return editing || nextProps.editing || selected || nextProps.selected;
   }
 
   onKeydown = e => {
