@@ -17,7 +17,7 @@ export default function previewStrategy({
   content?: RicosContent;
   experiments?: Record<string, string>;
 }) {
-  console.debug(experiments); // eslint-disable-line no-console
+  console.debug('previewStrategy experiments', experiments); // eslint-disable-line no-console
   if (!isViewer || !previewConfig || !content) {
     return {};
   }

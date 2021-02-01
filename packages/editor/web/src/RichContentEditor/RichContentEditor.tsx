@@ -159,6 +159,15 @@ interface State {
   error?: string;
 }
 
+// experiment example code
+function makeBarrelRoll() {
+  document.querySelector('.DraftEditor-root')?.classList.toggle('barrelRoll');
+  setTimeout(
+    () => document.querySelector('.DraftEditor-root')?.classList.toggle('barrelRoll'),
+    1000
+  );
+}
+
 class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialEditorState: {
@@ -235,6 +244,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.reportDebuggingInfo();
     this.preloadLibs();
     this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
+    console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {
@@ -619,12 +629,22 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         modifiers: [],
         key: 'Escape',
       },
+      this.props.experiments?.barrelRoll === 'True' && typeof window !== 'undefined'
+        ? {
+            command: 'cmdShift7',
+            modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+            key: '7',
+          }
+        : {},
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
       esc: this.handleEscCommand,
+      ...(this.props.experiments?.barrelRoll === 'True' && typeof window !== 'undefined'
+        ? { cmdShift7: makeBarrelRoll }
+        : {}),
     },
   });
 

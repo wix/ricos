@@ -78,7 +78,7 @@ export default function pluginsStrategy({
   content?: RicosContent;
   experiments?: Record<string, string>;
 }): PluginsStrategy {
-  console.debug(experiments); // eslint-disable-line no-console
+  console.debug('PluginsStrategy experiments', experiments); // eslint-disable-line no-console
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isViewer) {
