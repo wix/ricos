@@ -189,9 +189,8 @@ class TableComponent extends React.Component {
   };
 
   onPaste = (copiedCells, start) => {
-    const copiedCellRange = getRange(copiedCells);
-    this.table.pasteCells(copiedCellRange, start.i, start.j);
-    this.setSelectionOnPastedCells(copiedCellRange);
+    this.table.pasteCells(copiedCells, start.i, start.j);
+    this.setSelectionOnPastedCells(copiedCells);
   };
 
   setSelectionOnPastedCells = copiedCells => {

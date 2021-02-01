@@ -28596,10 +28596,10 @@ wix-eventually@^2.2.0, wix-eventually@^2.3.0:
   dependencies:
     trier-promise "~1.0.1"
 
-wix-react-datasheet@1.5.5:
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/wix-react-datasheet/-/wix-react-datasheet-1.5.5.tgz#bd443bde9989bda57c7f82abadd8019db6343b80"
-  integrity sha512-vNQGHhHuozrrOB7sFx25IC7DMf1bWo/n6i05VH7p8/Ng+cG3CPCrmZht9ocgZquVqaHNbEbfmDuanttgvyw1kg==
+wix-react-datasheet@1.5.6:
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/wix-react-datasheet/-/wix-react-datasheet-1.5.6.tgz#d15e11d9ce91129077a03b21a5eb118069f16d61"
+  integrity sha512-klzDVBuS7UZL2glKBiXk+y5ClCrTyFZ1utefseSbILxdD+xLU3nrnf/b6y6EvDKuBA/pSV11N0w9NJxAvJkPgQ==
 
 wix-redraft@^1.1.2:
   version "1.1.6"

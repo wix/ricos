@@ -31,12 +31,10 @@ class Table extends TableDataUtil {
     this.saveNewDataFunc(this.componentData);
   };
 
-  handlePasteCellsOutOfBound = (copiedCellsRange, targetRow, targetCol) => {
+  handlePasteCellsOutOfBound = (copiedCells, targetRow, targetCol) => {
     const rows = this.getRows();
-    const copiedRowsNum =
-      copiedCellsRange[copiedCellsRange.length - 1].i - copiedCellsRange[0].i + 1;
-    const copiedColsNum =
-      copiedCellsRange[copiedCellsRange.length - 1].j - copiedCellsRange[0].j + 1;
+    const copiedRowsNum = copiedCells[copiedCells.length - 1].i - copiedCells[0].i + 1;
+    const copiedColsNum = copiedCells[copiedCells.length - 1].j - copiedCells[0].j + 1;
     const rowNum = this.getRowNum();
     const colNum = this.getColNum();
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
@@ -65,14 +63,14 @@ class Table extends TableDataUtil {
 
   setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
-  pasteCells = (copiedCellsRange, targetRow, targetCol) => {
+  pasteCells = (copiedCells, targetRow, targetCol) => {
     const rows = this.getRows();
-    this.handlePasteCellsOutOfBound(copiedCellsRange, targetRow, targetCol);
-    const rowDiff = targetRow - copiedCellsRange[0].i;
-    const colDiff = targetCol - copiedCellsRange[0].j;
+    this.handlePasteCellsOutOfBound(copiedCells, targetRow, targetCol);
+    const rowDiff = targetRow - copiedCells[0].i;
+    const colDiff = targetCol - copiedCells[0].j;
     const cellsWithPaste = cloneDeepWithoutEditorState(rows);
-    copiedCellsRange.forEach(({ i, j }) => {
-      this.setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowDiff, j + colDiff);
+    copiedCells.forEach(({ i, j, content }) => {
+      this.setCellContent(cellsWithPaste, content, i + rowDiff, j + colDiff);
     });
     this.setNewRows(cellsWithPaste);
   };
