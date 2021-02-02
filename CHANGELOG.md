@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [##2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue 
+
 </details>
 <hr/>
 
