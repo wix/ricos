@@ -492,7 +492,7 @@ Object {
 }
 `;
 
-exports[`Test Table domain functions Test clearRange function 1`] = `
+exports[`Test Table domain functions Test clearCells function 1`] = `
 Object {
   "alignment": "center",
   "colsMinWidth": Array [

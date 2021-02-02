@@ -1,9 +1,9 @@
 import { ContextMenuIcon } from '../icons';
-import { getRange, getColsRange } from '../domain/tableDataUtil';
+import { getRange, getColsRange, getRowsRange } from '../domain/tableDataUtil';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
-const clear = (table, selected) => table.clearRange(getRange(selected));
+const clear = (table, selected) => table.clearCells(getRange(selected));
 const split = (table, selected) => table.splitCell(getRange(selected));
 const selectRow = (selected, selectRows) => {
   const selectedRow = selected.start.i;
@@ -14,7 +14,7 @@ const selectCol = (selected, selectCols) => {
   selectCols({ start: selectedCol, end: selectedCol });
 };
 const distributeRows = (table, innerEditorsRefs, selected) =>
-  table.distributeRows(innerEditorsRefs, getRange(selected));
+  table.distributeRows(innerEditorsRefs, getRowsRange(selected));
 const distributeColumns = (table, selected) => table.distributeColumns(getColsRange(selected));
 const addLastRow = (addRow, table) => addRow(table.getRowNum());
 const addLastCol = (addCol, table) => addCol(table.getColNum());
