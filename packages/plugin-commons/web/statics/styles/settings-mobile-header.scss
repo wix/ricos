@@ -14,12 +14,23 @@
       padding: 0 9px;
       background: $action-color-fallback;
     }
-    &.media {
-      border-bottom: 1px solid #ededed;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 5px;
-      background: $background-color;
+  }
+  
+  .media {
+    border-bottom: 1px solid #ededed;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    background: $background-color;
+    &.button{
+      padding: 14px 12px 15px 18px;
+    }
+    font-size: 16px;
+    &.done {
+      color: $action-color;
+    }
+    &.cancel {
+      color: inherit;
     }
   }
 
@@ -36,26 +47,11 @@
     background-color: transparent;
     color: #fff;
     &:not(.media) {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 40px;
       padding: 0 9px;
     }
-    &.media {
-      font-size: 16px;
-      line-height: 24px;
-      padding: 0;
-    }
   }
-
-  .media .done {
-    padding: 10px 13px 14px 0;
-    color: $action-color;
-  }
-  .media .cancel {
-    padding: 12px 0 14px 19px;
-    color: inherit;
-  }
-
   .menuIcon {
     float: right;
 
@@ -102,7 +98,6 @@
     .header {
       position: absolute;
       width: 100%;
-
     }
     
     .headerPlaceholder {
@@ -111,8 +106,7 @@
 
     .menu {
       position: absolute;
-
     }
-    
+
   }
 }

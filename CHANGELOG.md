@@ -16,9 +16,9 @@
     Click to see more.
   </summary>
   
-### :rocket: New Feature
-- `plugin-video`
-  - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) add settings-modal enable download toggle
+  ### :rocket: New Feature
+  - `plugin-video`
+    - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) add settings-modal enable download toggle
 
   ### :bug: Bug Fix
   - `ricos-editor`

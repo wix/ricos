@@ -33,7 +33,9 @@ const SettingsMobileHeader = ({
           role="menuitem"
           aria-label={cancelLabel}
           onClick={() => cancel()}
-          className={classNames(_styles.button, _styles.cancel)}
+          className={classNames(_styles.button, _styles.cancel, {
+            [styles.media]: isMediaSettingsModal,
+          })}
         >
           {cancelLabel}
         </button>
@@ -53,7 +55,9 @@ const SettingsMobileHeader = ({
           onClick={() => save()}
           role="menuitem"
           aria-label={saveLabel}
-          className={classNames(_styles.button, _styles.done)}
+          className={classNames(_styles.button, _styles.done, {
+            [styles.media]: isMediaSettingsModal,
+          })}
         >
           {saveLabel}
         </button>

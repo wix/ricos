@@ -4,7 +4,7 @@
     margin-top: 16px;
     width: 100%;
     height: 1px;
-    background-color: black;
+    background-color: #efeff4;
   }
   
   .videoSettingsTitle {
@@ -18,7 +18,7 @@
     svg{
       position: absolute;
       top: 23px;
-      left: 210px;
+      left: 215px;
       height: 24px;
       cursor: pointer;
       fill: $primary-text-color;
@@ -34,18 +34,16 @@
   .videoSettings_mobile {
     p{
       font-size: 14px;
-    }
+    }    
     svg{
-      top: 14px;
+      top: 19px;
       left: 191px;
         }
     .videoSettings_toggleContainer{
+      padding-right: 18px;
       >div {
-      padding-top: 15px; 
+      padding-top: 23px; 
     }}
   
   }
   
-  .videoSettings_footer {
-    bottom: 85px;
-  }
