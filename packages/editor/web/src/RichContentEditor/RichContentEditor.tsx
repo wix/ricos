@@ -24,13 +24,11 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
-  getEntities,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
-import { isContentChanged } from '../is-content-changed';
 import {
   AccessibilityListener,
   normalizeInitialState,
@@ -126,10 +124,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   style?: CSSProperties;
   locale: string;
   shouldRenderOptimizedImages?: boolean;
-  onChange?(
-    editorState: EditorState,
-    contentTraits?: { isEmpty: boolean; isContentChanged: boolean }
-  ): void;
+  onChange?(editorState: EditorState): void;
   onAtomicBlockFocus?(params: {
     blockKey?: string;
     type?: string;
@@ -216,11 +211,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   constructor(props: RichContentEditorProps) {
     super(props);
     const initialEditorState = this.getInitialEditorState();
-    const initialContentState = initialEditorState.getCurrentContent();
-    this.initialEditorState = {
-      entities: getEntities(initialEditorState),
-      blocks: initialContentState.getBlocksAsArray(),
-    };
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
@@ -575,13 +565,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   updateEditorState = (editorState: EditorState) => {
     this.setState({ editorState }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
-      // console.time('traits');
-      const contentTraits = {
-        isEmpty: !editorState.getCurrentContent().hasText(),
-        isContentChanged: isContentChanged(editorState, this.initialEditorState),
-      };
-      // console.timeEnd('traits');
-      this.props.onChange?.(this.state.editorState, contentTraits);
+      this.props.onChange?.(this.state.editorState);
     });
   };
 
