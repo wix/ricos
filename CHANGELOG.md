@@ -9,14 +9,37 @@
 > - :house: Internal
 > - :nail_care: Polish
 
-## [Unreleased]  
+## [Unreleased]
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `common`
+  - [#2081](https://github.com/wix-incubator/rich-content/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
+
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [##2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue 
+
 </details>
 <hr/>
+
+## 8.18.3 (Feb 2, 2021)
+### :bug: Bug Fix
+- `inner-modal`
+  - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
+## 8.18.1 (Feb 2, 2021)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
+
+## 8.18.0 (Jan 31, 2021)
+### :rocket: New Feature
+- `ricos-common`
+  - [#2065](https://github.com/wix-incubator/rich-content/pull/2065) add textAlignment prop
 
 ## 8.17.11 (Jan 27, 2021)
 ### :bug: Bug Fix
@@ -275,7 +298,7 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#1897](https://github.com/wix/ricos/pull/1897) fix gallery styles (college layout)
-  
+
 ## 8.9.2 (Dec 21, 2020)
 ### :bug: Bug Fix
 - `link`
@@ -347,7 +370,7 @@
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1850](https://github.com/wix/ricos/pull/1850) settings modal overlay appears above wix ad
-  
+
 ### :house: Internal
 - `test-env`
   - [#1848](https://github.com/wix/ricos/pull/1848) theme `customStyles` coverage
