@@ -15,15 +15,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-  ### :bug: Bug Fix
-- `inner-modal`
-  - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
-
 </details>
 <hr/>
 
-## 8.18.1 (Jan 31, 2021)
+## 8.18.2 (Feb 2, 2021)
+### :bug: Bug Fix
+- `inner-modal`
+  - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
+## 8.18.1 (Feb 2, 2021)
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
