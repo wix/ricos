@@ -15,13 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-  ### :bug: Bug Fix
-  - `ricos-editor`
-    - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
-
 </details>
 <hr/>
+
+## 8.18.1 (Jan 31, 2021)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
 
 ## 8.18.0 (Jan 31, 2021)
 ### :rocket: New Feature
