@@ -27,6 +27,15 @@
 </details>
 <hr/>
 
+## 8.18.3 (Feb 2, 2021)
+### :bug: Bug Fix
+- `inner-modal`
+  - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
+## 8.18.1 (Feb 2, 2021)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
+
 ## 8.18.0 (Jan 31, 2021)
 ### :rocket: New Feature
 - `ricos-common`

@@ -125,17 +125,18 @@ export default ({
       dataHook,
       isDisabled,
     }) => {
-      const { showName, tabIndex } = this.props;
+      const { showName, tabIndex, forceDisabled } = this.props;
       const { styles } = this;
       const Icon = getIcon();
       const label = getLabel();
       return (
         <FileInput
-          disabled={isDisabled()}
+          disabled={isDisabled() || forceDisabled}
           dataHook={`${dataHook}_file_input`}
           className={classNames(
             styles.button,
-            showName ? styles.sideToolbarButton : styles.footerToolbarButton
+            showName ? styles.sideToolbarButton : styles.footerToolbarButton,
+            { [styles.forceDisabled]: forceDisabled }
           )}
           onChange={onChange}
           accept={accept}
