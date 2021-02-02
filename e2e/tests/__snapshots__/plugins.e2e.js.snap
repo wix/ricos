@@ -4338,10 +4338,7 @@ exports[`plugins > action button > create action button & customize it #0`] =
             "padding": 12
           },
           "settings": {
-            "buttonText": "Click Me",
-            "rel": false,
-            "target": true,
-            "url": ""
+            "buttonText": "Click Me"
           }
         },
         "config": {
@@ -4416,10 +4413,7 @@ exports[`plugins > action button > create action button & click it #0`] =
             "padding": 12
           },
           "settings": {
-            "buttonText": "Click Me",
-            "rel": false,
-            "target": true,
-            "url": ""
+            "buttonText": "Click Me"
           }
         },
         "config": {
