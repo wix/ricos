@@ -74,7 +74,7 @@ describe('migrate to draft', () => {
   };
 
   it('should convert node data', () => {
-    const blockData = convertNodeDataToDraft(rich_content.Node.Type.IMAGE, imageNodeData.imageData);
+    const blockData = convertNodeDataToDraft(Node_Type.IMAGE, imageNodeData.imageData);
 
     expect(blockData).toEqual(expectedImageBlockData);
   });
@@ -102,7 +102,7 @@ describe('migrate to draft', () => {
 
   it('should convert decoration data', () => {
     const blockData = convertDecorationDataToDraft(
-      rich_content.Decoration.Type.MENTION,
+      Decoration_Type.MENTION,
       mentionDecoration.mentionData
     );
 

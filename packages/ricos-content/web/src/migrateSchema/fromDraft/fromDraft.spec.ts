@@ -7,7 +7,7 @@ import complexFixture from '../../../../../../e2e/tests/fixtures/migration-conte
 import { getTextNodes } from './getTextNodes';
 import ricosFixture from './migratedFixtures/intro.json';
 import complexRicosFixture from './migratedFixtures/migration-content.json';
-import { rich_content } from 'ricos-schema';
+import { Node_Type, Decoration_Type } from 'ricos-schema';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
 import { IMAGE_TYPE } from '../../consts';
 
@@ -54,55 +54,49 @@ describe('migrate from draft', () => {
         key: '2k4v1',
         nodes: [],
         textData: { decorations: [], text: 'bla' },
-        type: rich_content.Node.Type.TEXT,
+        type: Node_Type.TEXT,
       },
       {
         key: '1ba7b',
         nodes: [],
-        textData: { decorations: [{ type: rich_content.Decoration.Type.ITALIC }], text: 'h ' },
-        type: rich_content.Node.Type.TEXT,
+        textData: { decorations: [{ type: Decoration_Type.ITALIC }], text: 'h ' },
+        type: Node_Type.TEXT,
       },
       {
         key: '59lhm',
         nodes: [],
         textData: {
-          decorations: [
-            { type: rich_content.Decoration.Type.ITALIC },
-            { type: rich_content.Decoration.Type.UNDERLINE },
-          ],
+          decorations: [{ type: Decoration_Type.ITALIC }, { type: Decoration_Type.UNDERLINE }],
           text: 'b',
         },
-        type: rich_content.Node.Type.TEXT,
+        type: Node_Type.TEXT,
       },
       {
         key: '1agl0',
         nodes: [],
-        textData: { decorations: [{ type: rich_content.Decoration.Type.UNDERLINE }], text: 'la' },
-        type: rich_content.Node.Type.TEXT,
+        textData: { decorations: [{ type: Decoration_Type.UNDERLINE }], text: 'la' },
+        type: Node_Type.TEXT,
       },
       {
         key: '1m39g',
         nodes: [],
         textData: {
-          decorations: [
-            { type: rich_content.Decoration.Type.UNDERLINE },
-            { type: rich_content.Decoration.Type.BOLD },
-          ],
+          decorations: [{ type: Decoration_Type.UNDERLINE }, { type: Decoration_Type.BOLD }],
           text: 'h ',
         },
-        type: rich_content.Node.Type.TEXT,
+        type: Node_Type.TEXT,
       },
       {
         key: '8cr95',
         nodes: [],
-        textData: { decorations: [{ type: rich_content.Decoration.Type.BOLD }], text: 'bl' },
-        type: rich_content.Node.Type.TEXT,
+        textData: { decorations: [{ type: Decoration_Type.BOLD }], text: 'bl' },
+        type: Node_Type.TEXT,
       },
       {
         key: 'dkn86',
         nodes: [],
         textData: { decorations: [], text: 'ah' },
-        type: rich_content.Node.Type.TEXT,
+        type: Node_Type.TEXT,
       },
     ];
 
@@ -143,7 +137,7 @@ describe('migrate from draft', () => {
       {
         nodes: [],
         textData: { decorations: [], text: 'Mentions too ' },
-        type: rich_content.Node.Type.TEXT,
+        type: Node_Type.TEXT,
       },
       {
         nodes: [],
@@ -154,14 +148,14 @@ describe('migrate from draft', () => {
                 name: 'Test One',
                 slug: 'testone',
               },
-              type: rich_content.Decoration.Type.MENTION,
+              type: Decoration_Type.MENTION,
             },
           ],
           text: '@Test One',
         },
-        type: rich_content.Node.Type.TEXT,
+        type: Node_Type.TEXT,
       },
-      { nodes: [], textData: { decorations: [], text: ' ' }, type: rich_content.Node.Type.TEXT },
+      { nodes: [], textData: { decorations: [], text: ' ' }, type: Node_Type.TEXT },
     ];
     expect(filterKeys(getTextNodes(block, entityMap))).toEqual(expectedResult);
   });

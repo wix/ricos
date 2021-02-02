@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package rich_content;
 
-import "common.proto";
+import "google/protobuf/wrappers.proto";
 
 message Selection {
-    string anchor_node = 1 [required = true]; /// Selection start node key
-    int32 anchor_offset = 2; /// Selection start offset (default: 0)
-    string focus_node = 3; /// Selection end node key
-    int32 focus_offset = 4; /// Selection end offset (default: 0)
+    string anchor_node = 1; // Selection start node key
+    google.protobuf.Int32Value anchor_offset = 2; // Selection start offset (default: 0)
+    google.protobuf.StringValue focus_node = 3; // Selection end node key
+    google.protobuf.Int32Value focus_offset = 4; // Selection end offset (default: 0)
 }

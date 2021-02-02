@@ -1,6 +1,6 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { RicosContentBlock, RicosEntityMap, RicosEntityRange, EMOJI_TYPE } from '../..';
-import { rich_content } from 'ricos-schema';
+import { Decoration, Decoration_Type } from 'ricos-schema';
 import { TO_RICOS_DECORATION_TYPE } from '../consts';
 
 import { isEmpty, merge } from 'lodash';
@@ -16,14 +16,12 @@ const removeEmojiEntities = (
 ): RicosEntityRange[] =>
   entityRanges.filter(range => !['EMOJI_TYPE', EMOJI_TYPE].includes(entityMap[range.key].type));
 
-const mergeColorDecorations = (
-  decorations: rich_content.Decoration[]
-): rich_content.Decoration[] => {
+const mergeColorDecorations = (decorations: Decoration[]): Decoration[] => {
   const colorDecorations = decorations.filter(
-    decoration => decoration.type === rich_content.Decoration.Type.COLOR
+    decoration => decoration.type === Decoration_Type.COLOR
   );
   const otherDecorations = decorations.filter(
-    decoration => decoration.type !== rich_content.Decoration.Type.COLOR
+    decoration => decoration.type !== Decoration_Type.COLOR
   );
   return colorDecorations.length > 0
     ? otherDecorations.concat([merge({}, ...colorDecorations)])
@@ -33,10 +31,7 @@ const mergeColorDecorations = (
 const isDecorationType = (decorationType: string) =>
   TO_RICOS_DECORATION_TYPE[decorationType] !== undefined;
 
-export const getTextNodes = (
-  block: RicosContentBlock,
-  entityMap: RicosEntityMap
-): rich_content.Node[] => {
+export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap): Node[] => {
   const createTextNode = ({
     text,
     styles = [],
@@ -45,10 +40,10 @@ export const getTextNodes = (
     text: string;
     styles: StyleType[];
     keys: KeyType[];
-  }): rich_content.Node => {
-    const textNode: rich_content.Node = {
+  }): Node => {
+    const textNode: Node = {
       key: genKey(),
-      type: rich_content.Node.Type.TEXT,
+      type: Node_Type.TEXT,
       nodes: [],
       textData: {
         text,
@@ -56,7 +51,7 @@ export const getTextNodes = (
       },
     };
 
-    let decorations: rich_content.Decoration[] = [];
+    let decorations: Decoration[] = [];
 
     const keysDecorations = keys.map(key => getEntity(key, entityMap));
     const stylesDecorations = mergeColorDecorations(styles.map(style => getDecoration(style)));
@@ -69,8 +64,8 @@ export const getTextNodes = (
     return textNode;
   };
 
-  const getDecoration = (style: StyleType): rich_content.Decoration => {
-    let decoration: rich_content.Decoration;
+  const getDecoration = (style: StyleType): Decoration => {
+    let decoration: Decoration;
     try {
       const styleObj = JSON.parse(style);
       const type = Object.keys(styleObj)[0];
@@ -80,7 +75,7 @@ export const getTextNodes = (
         process.exit(1);
       }
       decoration = {
-        type: rich_content.Decoration.Type.COLOR,
+        type: Decoration_Type.COLOR,
         colorData: { [type === 'FG' ? 'foreground' : 'background']: value },
       };
     } catch {
@@ -110,7 +105,7 @@ export const getTextNodes = (
     }
   );
 
-  const textNodes: rich_content.Node[] = [];
+  const textNodes: Node[] = [];
 
   let styles: StyleType[] = [];
   let keys: KeyType[] = [];

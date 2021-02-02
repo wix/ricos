@@ -12,7 +12,7 @@ import { DraftBlockType } from 'draft-js';
 import { DraftTypedDecoration } from './decorationParsers';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
-const getNodeEntityData = (node: rich_content.Node) => {
+const getNodeEntityData = (node: Node) => {
   const { type } = node;
   const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
   const data = convertNodeToDraftData(node);
@@ -47,21 +47,18 @@ export const createDecorationEntityData = (
   return createEntity(entityKey, { type, mutability, data });
 };
 
-export const createAtomicEntityData = (
-  node: rich_content.Node,
-  entityKey: number
-): RicosEntityMap => {
+export const createAtomicEntityData = (node: Node, entityKey: number): RicosEntityMap => {
   const { type, data } = getNodeEntityData(node);
   return createEntity(entityKey, { type, mutability: 'IMMUTABLE', data });
 };
 
-export const createTextBlockData = (node: rich_content.Node, blockType: DraftBlockType) => {
+export const createTextBlockData = (node: Node, blockType: DraftBlockType) => {
   const { textAlignment, dynamicStyles, depth } =
     node[DRAFT_BLOCK_TYPE_TO_DATA_FIELD[blockType]] || {};
   return Object.assign(
     {},
     textAlignment !== undefined
-      ? { textAlignment: rich_content.Common.TextAlignment[textAlignment].toLowerCase() }
+      ? { textAlignment: Common.TextAlignment[textAlignment].toLowerCase() }
       : undefined,
     dynamicStyles !== undefined
       ? {

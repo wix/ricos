@@ -13,7 +13,7 @@ const REVERSE_MIGRATED_FIXTURES_PATH =
 
 const filename = process.argv[2];
 
-const convertDraftFile = (filename: string): rich_content.RichContent => {
+const convertDraftFile = (filename: string): RichContent => {
   const filepath = path.resolve(
     __dirname,
     `${FIXTURES_PATH}/${filename.replace('.json', '')}.json`

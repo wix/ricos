@@ -19,14 +19,14 @@ import {
   parseEntityDecorations,
 } from './decorationParsers';
 
-export const ensureDraftContent = (content: rich_content.RichContent | RicosContent) =>
+export const ensureDraftContent = (content: RichContent | RicosContent) =>
   'nodes' in content ? toDraft(content) : content;
 
-export const toDraft = (ricosContent: rich_content.RichContent): RicosContent => {
+export const toDraft = (ricosContent: RichContent): RicosContent => {
   const {
     nodes,
     metadata: { updatedVersion },
-  } = rich_content.RichContent.toObject(rich_content.RichContent.fromObject(ricosContent), {
+  } = RichContent.toObject(RichContent.fromObject(ricosContent), {
     arrays: true,
   });
   const draftContent: RicosContent = {
@@ -38,32 +38,32 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
   const parseNodes = (index = 0) => {
     const node = nodes[index];
     if (node) {
-      switch (node.type) {
-        case rich_content.Node.Type.BLOCKQUOTE:
+      switch (Node_Type) {
+        case Node_Type.BLOCKQUOTE:
           parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.key });
           break;
-        case rich_content.Node.Type.CODEBLOCK:
+        case Node_Type.CODEBLOCK:
           parseTextNodes(node, { type: BlockType.CodeBlock, key: node.key });
           break;
-        case rich_content.Node.Type.HEADING:
+        case Node_Type.HEADING:
           if (!node.headingData) {
             console.log(`ERROR! Heading node with no data!`);
             process.exit(1);
           }
           parseTextNodes(node, { type: HeaderLevel[node.headingData.level], key: node.key });
           break;
-        case rich_content.Node.Type.ORDERED_LIST:
-        case rich_content.Node.Type.BULLET_LIST:
+        case Node_Type.ORDERED_LIST:
+        case Node_Type.BULLET_LIST:
           parseListNode(node);
           break;
-        case rich_content.Node.Type.PARAGRAPH:
+        case Node_Type.PARAGRAPH:
           parseTextNodes(node, { type: BlockType.Unstyled, key: node.key });
           break;
         default:
-          if (RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]) {
+          if (RICOS_NODE_TYPE_TO_DATA_FIELD[Node_Type]) {
             parseAtomicNode(node);
           } else {
-            console.log(`ERROR! Unknown node type "${node.type}"!`);
+            console.log(`ERROR! Unknown node type "${Node_Type}"!`);
             process.exit(1);
           }
       }
@@ -71,7 +71,7 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
     }
   };
 
-  const parseAtomicNode = (node: rich_content.Node) => {
+  const parseAtomicNode = (node: Node) => {
     latestEntityKey += 1;
     const entityMap = createAtomicEntityData(node, latestEntityKey);
     addBlock({
@@ -83,11 +83,11 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
 
-  const parseListNode = (node: rich_content.Node) => {
+  const parseListNode = (node: Node) => {
     node.nodes.forEach(listItem => {
       const [paragraph, childNode] = listItem.nodes;
       parseTextNodes(paragraph, {
-        type: TO_DRAFT_LIST_TYPE[node.type],
+        type: TO_DRAFT_LIST_TYPE[Node_Type],
         key: listItem.key,
       });
       if (childNode) {
@@ -96,10 +96,7 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
     });
   };
 
-  const parseTextNodes = (
-    node: rich_content.Node,
-    { type, key }: { type: DraftBlockType; key: string }
-  ) => {
+  const parseTextNodes = (node: Node, { type, key }: { type: DraftBlockType; key: string }) => {
     const { text, decorationMap } = mergeTextNodes(node.nodes);
     const { inlineStyleDecorations, entityDecorations } = parseDecorations(decorationMap, text);
     const inlineStyleRanges = parseInlineStyleDecorations(inlineStyleDecorations);

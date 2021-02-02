@@ -12,9 +12,7 @@ import {
 
 export const convertNodeToDraftData = node => {
   const { type } = node;
-  const validType: rich_content.Node.Type = Number.isInteger(type)
-    ? type
-    : rich_content.Node.Type[type];
+  const validType: Node_Type = Number.isInteger(type) ? type : Node_Type[type];
   const draftPluginType = FROM_RICOS_ENTITY_TYPE[validType];
   const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
   return convertNodeDataToDraft(validType, node[dataFieldName]);
@@ -22,28 +20,23 @@ export const convertNodeToDraftData = node => {
 
 export const convertDecorationToDraftData = decoration => {
   const { type } = decoration;
-  const validType: rich_content.Decoration.Type = Number.isInteger(type)
-    ? type
-    : rich_content.Decoration.Type[type];
+  const validType: Decoration_Type = Number.isInteger(type) ? type : Decoration_Type[type];
   const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[FROM_RICOS_DECORATION_TYPE[validType]];
   return convertDecorationDataToDraft(validType, decoration[dataFieldName]);
 };
 
-export const convertNodeDataToDraft = (nodeType: rich_content.Node.Type, data) => {
+export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
   const converters = {
-    [rich_content.Node.Type.VIDEO]: [convertVideoData, rich_content.VideoData],
-    [rich_content.Node.Type.DIVIDER]: [convertDividerData, rich_content.DividerData],
-    [rich_content.Node.Type.IMAGE]: [convertImageData, rich_content.ImageData],
-    [rich_content.Node.Type.GALLERY]: [convertGalleryData, rich_content.GalleryData],
-    [rich_content.Node.Type.POLL]: [convertPollData, rich_content.PollData],
-    [rich_content.Node.Type.VERTICAL_EMBED]: [
-      convertVerticalEmbedData,
-      rich_content.VerticalEmbedData,
-    ],
-    [rich_content.Node.Type.HTML]: [convertHtmlData, rich_content.HTMLData],
-    [rich_content.Node.Type.GIPHY]: [convertGiphyData, rich_content.GiphyData],
-    [rich_content.Node.Type.LINK_PREVIEW]: [convertLinkPreviewData, rich_content.LinkPreviewData],
-    [rich_content.Node.Type.SOUND_CLOUD]: [convertSoundCloudData, rich_content.SoundCloudData],
+    [Node_Type.VIDEO]: [convertVideoData, VideoData],
+    [Node_Type.DIVIDER]: [convertDividerData, DividerData],
+    [Node_Type.IMAGE]: [convertImageData, ImageData],
+    [Node_Type.GALLERY]: [convertGalleryData, GalleryData],
+    [Node_Type.POLL]: [convertPollData, PollData],
+    [Node_Type.VERTICAL_EMBED]: [convertVerticalEmbedData, VerticalEmbedData],
+    [Node_Type.HTML]: [convertHtmlData, HTMLData],
+    [Node_Type.GIPHY]: [convertGiphyData, GiphyData],
+    [Node_Type.LINK_PREVIEW]: [convertLinkPreviewData, LinkPreviewData],
+    [Node_Type.SOUND_CLOUD]: [convertSoundCloudData, SoundCloudData],
   };
   if (nodeType in converters) {
     const [convert, Type] = converters[nodeType];
@@ -54,12 +47,9 @@ export const convertNodeDataToDraft = (nodeType: rich_content.Node.Type, data) =
   return data;
 };
 
-export const convertDecorationDataToDraft = (
-  decorationType: rich_content.Decoration.Type,
-  data
-) => {
+export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
   const converters = {
-    [rich_content.Decoration.Type.MENTION]: [convertMention, rich_content.MentionData],
+    [Decoration_Type.MENTION]: [convertMention, MentionData],
   };
   if (decorationType in converters) {
     const [convert, Type] = converters[decorationType];

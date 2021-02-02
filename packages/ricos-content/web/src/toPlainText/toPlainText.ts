@@ -16,14 +16,14 @@ import { ensureRicosContent } from '../migrateSchema';
 
 interface PlainTextOptions {
   urlShortener?: (url: string) => Promise<string>;
-  getVideoUrl?: (src: rich_content.VideoSource) => Promise<string>;
+  getVideoUrl?: (src: VideoSource) => Promise<string>;
 }
 
 export const toPlainText = async (
-  content: rich_content.RichContent | RicosContent,
+  content: RichContent | RicosContent,
   options?: PlainTextOptions
 ): Promise<string> => {
-  const ricosContent = rich_content.RichContent.fromObject(ensureRicosContent(content));
+  const ricosContent = RichContent.fromObject(ensureRicosContent(content));
   const { nodes } = ricosContent;
   let plainText = '';
 
@@ -33,38 +33,38 @@ export const toPlainText = async (
       if (index > 0) {
         plainText += '\n';
       }
-      switch (node.type) {
-        case rich_content.Node.Type.CODEBLOCK:
-        case rich_content.Node.Type.PARAGRAPH:
-        case rich_content.Node.Type.HEADING:
+      switch (Node_Type) {
+        case Node_Type.CODEBLOCK:
+        case Node_Type.PARAGRAPH:
+        case Node_Type.HEADING:
           plainText += parseTextNodes(node);
           break;
-        case rich_content.Node.Type.BLOCKQUOTE:
+        case Node_Type.BLOCKQUOTE:
           plainText += parseTextNodes(getParagraphNode(node));
           break;
-        case rich_content.Node.Type.ORDERED_LIST:
-        case rich_content.Node.Type.BULLET_LIST:
+        case Node_Type.ORDERED_LIST:
+        case Node_Type.BULLET_LIST:
           plainText += parseListNode(node);
           break;
-        case rich_content.Node.Type.IMAGE:
+        case Node_Type.IMAGE:
           plainText += await parseImage(node, options?.urlShortener);
           break;
-        case rich_content.Node.Type.VIDEO:
+        case Node_Type.VIDEO:
           plainText += await parseVideo(node, options?.getVideoUrl);
           break;
-        case rich_content.Node.Type.SOUND_CLOUD:
+        case Node_Type.SOUND_CLOUD:
           plainText += parseSoundCloud(node);
           break;
-        case rich_content.Node.Type.GIPHY:
+        case Node_Type.GIPHY:
           plainText += parseGiphy(node);
           break;
-        case rich_content.Node.Type.MAP:
+        case Node_Type.MAP:
           plainText += parseMap(node);
           break;
-        case rich_content.Node.Type.VERTICAL_EMBED:
+        case Node_Type.VERTICAL_EMBED:
           plainText += parseVerticalEmbed(node);
           break;
-        case rich_content.Node.Type.LINK_PREVIEW:
+        case Node_Type.LINK_PREVIEW:
           plainText += parseLinkPreview(node);
           break;
         default:

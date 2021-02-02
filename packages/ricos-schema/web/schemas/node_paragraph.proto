@@ -2,9 +2,11 @@ syntax = "proto3";
 
 package rich_content;
 
-import "../common.proto";
+import "common.proto";
+import "google/protobuf/wrappers.proto";
 
-message CodeData {
+message ParagraphData {
     Common.TextAlignment text_alignment = 1;
     Common.DynamicStyles dynamic_styles = 2;
+    google.protobuf.Int32Value depth = 3;
 }
