@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
-import { getRange } from './domain/tableDataUtil';
+import { getRange, getRowsRange, getColsRange } from './domain/tableDataUtil';
 import { createEmptyCellEditor, handleCellClipboardEvent } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
@@ -85,6 +85,16 @@ class TableComponent extends React.Component {
   getCellEditorRef = (i, j) => this.innerEditorsRefs[`${i}-${j}`];
 
   getCellToolbarProps = (i, j) => this.getCellEditorRef(i, j)?.getToolbarProps(TOOLBARS.FORMATTING);
+
+  distributeRows = selected => {
+    this.table.distributeRows(this.innerEditorsRefs, getRowsRange(selected));
+    this.setSelected();
+  };
+
+  distributeColumns = selected => {
+    this.table.distributeColumns(getColsRange(selected));
+    this.setSelected();
+  };
 
   isCellEmpty = (i, j) =>
     this.table
@@ -230,7 +240,10 @@ class TableComponent extends React.Component {
     this.table.setColWidthAfterResize(columnsRefs, this.tableRef.current.offsetWidth);
 
   onResizeRow = (i, height) =>
-    this.table.setRowHeight(getRange(this.table.getRowsSelection({ start: i, end: i })), height);
+    this.table.setRowHeight(
+      getRowsRange(this.table.getRowsSelection({ start: i, end: i })),
+      height
+    );
 
   setToolbarRef = ref => (this.toolbarRef = ref);
 
@@ -424,6 +437,8 @@ class TableComponent extends React.Component {
             deleteBlock={blockProps.deleteBlock}
             isAllCellsSelected={this.isAllCellsSelected(selected)}
             merge={this.merge}
+            distributeRows={this.distributeRows}
+            distributeColumns={this.distributeColumns}
           />
         )}
         {!isMobile && (
@@ -482,7 +497,7 @@ class TableComponent extends React.Component {
             selectAll={isAllCellsSelected}
             tableHeight={this.tableRef.current?.offsetHeight}
             isEditingActive={this.state.isEditingActive}
-            onClear={this.table.clearRange}
+            onClear={this.table.clearCells}
             setCellContent={this.setCellContent}
             onPaste={this.onPaste}
           />
