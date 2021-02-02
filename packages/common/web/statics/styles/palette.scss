@@ -6,9 +6,9 @@ $primary-text-color: var(--ricos-text-color, #212121);                  // color
 $primary-text-color-tuple: var(--ricos-text-color-tuple, (33,33,33));
 
 $ricos-text-color-low: var(--ricos-text-color-low, #969696);            // color 4
-$ricos-text-color-low-tuple: var(--ricos-text-color-low-tuple, unset);
+$ricos-text-color-low-tuple: var(--ricos-text-color-low-tuple, (150, 150, 150));
 $ricos-disabled-color: var(--ricos-disabled-color, #747474);            // color 3
-$ricos-disabled-color-tuple: var(--ricos-disabled-color-tuple, unset);
+$ricos-disabled-color-tuple: var(--ricos-disabled-color-tuple, (116,116,116));
 
 $action-color: var(--ricos-action-color, #0261ff);                      // color 8
 $action-color-tuple: var(--ricos-action-color-tuple, (2,97,255));
