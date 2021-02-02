@@ -95,7 +95,7 @@ export default class Cell extends Component {
   getEditorWrapperStyle = (additionalStyles, isEditing) => {
     const shouldSetEditStyle = !this.props.isMobile && isEditing;
     const style = shouldSetEditStyle
-      ? { minHeight: this.tdRef?.offsetHeight, ...additionalStyles }
+      ? { minHeight: this.tdRef?.offsetHeight - 1, ...additionalStyles }
       : {};
     const { verticalAlign } = additionalStyles;
     if (shouldSetEditStyle && verticalAlign) {
