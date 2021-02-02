@@ -18,7 +18,7 @@
 </details>
 <hr/>
 
-## 8.18.2 (Feb 2, 2021)
+## 8.18.3 (Feb 2, 2021)
 ### :bug: Bug Fix
 - `inner-modal`
   - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
