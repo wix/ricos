@@ -482,7 +482,7 @@ class TableComponent extends React.Component {
             selectAll={isAllCellsSelected}
             tableHeight={this.tableRef.current?.offsetHeight}
             isEditingActive={this.state.isEditingActive}
-            onClear={this.table.clearRange}
+            onClear={this.table.clearCells}
             setCellContent={this.setCellContent}
             onPaste={this.onPaste}
           />
