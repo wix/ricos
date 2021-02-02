@@ -58,7 +58,7 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
           if (RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]) {
             parseAtomicNode(node);
           } else {
-            console.log(`ERROR! Unknown node type "${Node_Type}"!`);
+            console.log(`ERROR! Unknown node type "${node.type}"!`);
             process.exit(1);
           }
       }
