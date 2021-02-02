@@ -34,12 +34,15 @@ type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEdi
 
 const getData = (
   contentBlock: ContentBlock,
-  { getEditorState }: Pick<EditorStateFuncs, 'getEditorState'>
-) => () =>
-  getEditorState?.()
+  { getEditorState }: Pick<EditorStateFuncs, 'getEditorState'>,
+  removeConfigFromData: boolean
+) => () => {
+  const { config, ...rest } = getEditorState?.()
     .getCurrentContent()
     .getEntity(contentBlock.getEntityAt(0))
     .getData();
+  return removeConfigFromData ? { ...rest } : { config, ...rest };
+};
 
 const setData = (
   contentBlock: ContentBlock,
@@ -270,16 +273,20 @@ const createBasePlugin = (
         ) {
           type = UNSUPPORTED_BLOCKS_TYPE;
         }
+
         const blockRenderObject = type
           ? {
               component: DecoratedCompWithBase,
               editable: false,
               props: {
-                getData: getData(contentBlock, { getEditorState }),
+                getData: getData(
+                  contentBlock,
+                  { getEditorState },
+                  type === UNSUPPORTED_BLOCKS_TYPE
+                ),
                 setData: setData(contentBlock, { getEditorState, setEditorState }),
                 deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
                 type,
-                unsupportedType: type === UNSUPPORTED_BLOCKS_TYPE ? entityType : null,
               },
             }
           : null;

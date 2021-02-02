@@ -17,9 +17,8 @@ export default class Cell extends Component {
     ) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      this.contentBeforeEdit = prevProps.table.getCellContent(prevProps.row, prevProps.col);
-      this.tdHeight = this.tdRef?.offsetHeight - 1;
       this.editorRef?.selectAllContent(true);
+      this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
     if (
       this.isEditing(prevProps.editing, prevProps.selectedCells) &&
@@ -66,7 +65,7 @@ export default class Cell extends Component {
   };
 
   onKeydown = e => {
-    const { editing, row, col, table, onKeyDown } = this.props;
+    const { editing, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -74,9 +73,10 @@ export default class Cell extends Component {
         e.stopPropagation();
         e.preventDefault();
         this.editorRef.selectAllContent(true);
-      }
-      if (e.key === 'Escape') {
-        table.updateCellContent(row, col, this.contentBeforeEdit);
+      } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+        e.preventDefault();
+      } else if (e.key === 'v' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+        e.preventDefault();
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
