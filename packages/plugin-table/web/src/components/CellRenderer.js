@@ -193,6 +193,7 @@ export default class Cell extends Component {
           <Editor
             editing={isMobile ? selected : isEditing}
             selected={selected}
+            contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
             handleCellClipboardEvent={handleCellClipboardEvent}
           >
