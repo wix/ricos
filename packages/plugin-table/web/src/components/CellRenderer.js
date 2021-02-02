@@ -18,6 +18,7 @@ export default class Cell extends Component {
       this.editorRef.focus();
       this.props.setEditingActive(true);
       this.editorRef?.selectAllContent(true);
+      this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
     if (
       this.isEditing(prevProps.editing, prevProps.selectedCells) &&
@@ -94,9 +95,7 @@ export default class Cell extends Component {
 
   getEditorWrapperStyle = (additionalStyles, isEditing) => {
     const shouldSetEditStyle = !this.props.isMobile && isEditing;
-    const style = shouldSetEditStyle
-      ? { minHeight: this.tdRef?.offsetHeight - 1, ...additionalStyles }
-      : {};
+    const style = shouldSetEditStyle ? { minHeight: this.tdHeight, ...additionalStyles } : {};
     const { verticalAlign } = additionalStyles;
     if (shouldSetEditStyle && verticalAlign) {
       style.display = 'flex';
