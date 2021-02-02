@@ -20,6 +20,10 @@
 - `common`
   - [#2081](https://github.com/wix-incubator/rich-content/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
 
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [##2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue 
+
 </details>
 <hr/>
 
