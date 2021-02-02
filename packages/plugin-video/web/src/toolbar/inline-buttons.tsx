@@ -65,7 +65,7 @@ const createInlineButtons: CreateInlineButtons = ({
     },
     {
       keyName: 'settings',
-      type: BUTTONS.EXTERNAL_MODAL,
+      type: BUTTONS.VIDEO_SETTINGS,
       icon: PluginSettingsIcon,
       modalName: Modals.VIDEO_SETTINGS,
       modalStyles: getModalStyles({

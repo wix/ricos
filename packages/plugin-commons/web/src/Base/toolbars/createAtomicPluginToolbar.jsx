@@ -286,6 +286,27 @@ export default function createAtomicPluginToolbar({
           return (
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
+        case BUTTONS.VIDEO_SETTINGS:
+          //eslint-disable-next-line no-case-declarations
+          const isCustomVideo = this.state?.componentData?.isCustomVideo;
+          // eslint-disable-next-line no-case-declarations
+          const videoSettingsProps = { ...buttonProps, type: BUTTONS.EXTERNAL_MODAL };
+          if (isCustomVideo) {
+            return (
+              <BaseToolbarButton
+                componentData={this.state.componentData}
+                componentState={this.state.componentState}
+                helpers={helpers}
+                displayPanel={this.displayPanel}
+                displayInlinePanel={this.displayInlinePanel}
+                hideInlinePanel={this.hidePanels}
+                uiSettings={uiSettings}
+                getEditorBounds={getEditorBounds}
+                {...videoSettingsProps}
+              />
+            );
+          }
+          return null;
         case BUTTONS.LINK_PREVIEW: {
           return (
             <BlockLinkButton
