@@ -452,16 +452,16 @@ const image = {
 const link = {
   type: RICOS_LINK_TYPE,
   data: rich_content.LinkData.create({ url: 'www.wix.com' }),
-  updatedData: rich_content.LinkData.create({ url: 'www.sport5.co.il' }),
+  updatedData: rich_content.LinkData.create({ url: 'www.sport5.co.il', rel: 'nofollow' }),
   expectedData: {
     url: 'www.wix.com',
-    rel: undefined, // TODO: fix this data
-    target: undefined, // TODO: fix this data
+    rel: 'noopener',
+    target: '_self',
   },
   expectedUpdatedData: {
     url: 'www.sport5.co.il',
-    rel: undefined, // TODO: fix this data
-    target: undefined, // TODO: fix this data
+    rel: 'nofollow',
+    target: '_self',
   },
 };
 
