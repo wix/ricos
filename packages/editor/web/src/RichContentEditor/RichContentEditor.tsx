@@ -957,6 +957,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                     locale={locale}
                     innerModal={innerModal}
                     closeInnerModal={this.closeInnerModal}
+                    editorWrapper={this.editorWrapper}
                   />
                 </div>
               </div>

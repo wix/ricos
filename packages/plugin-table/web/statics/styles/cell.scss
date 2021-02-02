@@ -9,6 +9,7 @@
     padding: 0;
     &.header {
         background-color: rgba($primary-text-color-tuple, 0.04);
+        font-weight: unset;
     }
     &.selected {
         z-index: 2;
