@@ -75,7 +75,7 @@ class Table extends TableDataUtil {
     this.setNewRows(cellsWithPaste);
   };
 
-  clearRange = range => {
+  clearCells = range => {
     const rows = this.getRows();
     range.forEach(({ i, j }) => this.setCellContent(rows, createEmptyCellEditor(), i, j));
     this.setNewRows(rows);
@@ -247,7 +247,7 @@ class Table extends TableDataUtil {
   };
 
   setRowHeight = (range, height) => {
-    range.forEach(({ i }) => {
+    range.forEach(i => {
       const rowsHeight = this.getRowsHeight();
       rowsHeight[i] = height;
     });
@@ -263,11 +263,13 @@ class Table extends TableDataUtil {
 
   getRowMaxContentHeight = (innerEditorsRefs, range) => {
     let maxContentHeight = 0;
-    range.forEach(({ i, j }) => {
-      const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
-      if (height > maxContentHeight) {
-        maxContentHeight = height;
-      }
+    range.forEach(i => {
+      [...Array(this.getColNum()).fill(0)].forEach((val, j) => {
+        const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
+        if (height > maxContentHeight) {
+          maxContentHeight = height;
+        }
+      });
     });
     return maxContentHeight;
   };
@@ -277,10 +279,8 @@ class Table extends TableDataUtil {
 
   getRowsMaxContentHeight = innerEditorsRefs => {
     const rowsMaxContentHeight = [];
-    const colNum = this.getColNum();
     [...Array(this.getRowNum()).fill(0)].forEach((val, i) => {
-      const range = getRange({ start: { i, j: 0 }, end: { i, j: colNum } });
-      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, range));
+      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, [i]));
     });
     return rowsMaxContentHeight;
   };
