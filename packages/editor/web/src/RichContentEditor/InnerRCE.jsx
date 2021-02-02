@@ -109,7 +109,7 @@ class InnerRCE extends PureComponent {
       ) {
         this.setState({ showToolbars: false });
       }
-    }, 50);
+    }, 100);
   };
 
   handleAtomicPluginsBorders = enterEditing => {
