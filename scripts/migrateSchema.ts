@@ -2,7 +2,7 @@
 import { writeFileSync, existsSync } from 'fs';
 import path from 'path';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
-import { rich_content } from 'ricos-schema';
+import { RichContent } from 'ricos-schema';
 import { RicosContent } from 'ricos-content';
 import { compare } from 'ricos-content/libs/comparision';
 const FIXTURES_PATH = '../e2e/tests/fixtures';

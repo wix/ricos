@@ -1,4 +1,4 @@
-import { rich_content } from 'ricos-schema';
+import { Node, Node_Type, VideoSource } from 'ricos-schema';
 import { getImageSrc } from '../imageUtils';
 import { LINK_TYPE } from '../consts';
 import { mergeTextNodes, RangedDecoration } from '../migrateSchema/toDraft/decorationParsers';
@@ -19,7 +19,7 @@ const parseList = (listNode: Node): { type: Node_Type; item: string }[] =>
   listNode.nodes
     .map(({ nodes: [paragraph, childNode] }) => {
       return [
-        { type: listNode_Type, item: parseTextNodes(paragraph) },
+        { type: listNode.type, item: parseTextNodes(paragraph) },
         childNode ? parseList(childNode) : [],
       ];
     })
@@ -107,6 +107,6 @@ export const parseVerticalEmbed = ({ verticalEmbedData }: Node): string => {
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {
-  const { url } = linkPreviewData?.config.link || {};
+  const { url } = linkPreviewData?.config?.link || {};
   return url || '';
 };

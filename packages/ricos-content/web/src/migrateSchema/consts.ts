@@ -22,7 +22,7 @@ import {
   TABLE_TYPE,
   ANCHOR_TYPE,
 } from '../consts';
-import { rich_content } from 'ricos-schema';
+import { Decoration_Type, Node_Type } from 'ricos-schema';
 
 export enum BlockType {
   Unstyled = 'unstyled',
@@ -131,6 +131,11 @@ export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
   [Node_Type.VIDEO]: 'videoData',
   [Node_Type.POLL]: 'pollData',
   [Node_Type.TABLE]: 'tableData',
+  [Node_Type.PARAGRAPH]: 'paragraphData',
+  [Node_Type.LIST_ITEM]: 'paragraphData',
+  [Node_Type.HEADING]: 'headingData',
+  [Node_Type.CODEBLOCK]: 'codeData',
+  [Node_Type.BLOCKQUOTE]: 'paragraphData',
 } as const;
 
 export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
@@ -144,7 +149,7 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.HeaderFive]: 'headingData',
   [BlockType.HeaderSix]: 'headingData',
   [BlockType.CodeBlock]: 'codeData',
-  [BlockType.Blockquote]: 'quoteData',
+  [BlockType.Blockquote]: 'paragraphData',
 };
 
 // Node_Type.IMAGE: imageData

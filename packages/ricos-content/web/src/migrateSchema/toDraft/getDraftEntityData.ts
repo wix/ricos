@@ -1,14 +1,13 @@
 /* eslint-disable fp/no-delete */
-import { rich_content } from 'ricos-schema';
+import { Node } from 'ricos-schema';
 import {
-  DRAFT_BLOCK_TYPE_TO_DATA_FIELD,
+  RICOS_NODE_TYPE_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_MUTABILITY,
   FROM_RICOS_ENTITY_TYPE,
   TO_RICOS_DECORATION_TYPE,
 } from '../consts';
 import toSlugCase from 'to-slug-case';
 import { RicosEntity, RicosEntityMap } from '../..';
-import { DraftBlockType } from 'draft-js';
 import { DraftTypedDecoration } from './decorationParsers';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
@@ -52,14 +51,12 @@ export const createAtomicEntityData = (node: Node, entityKey: number): RicosEnti
   return createEntity(entityKey, { type, mutability: 'IMMUTABLE', data });
 };
 
-export const createTextBlockData = (node: Node, blockType: DraftBlockType) => {
+export const createTextBlockData = (node: Node) => {
   const { textAlignment, dynamicStyles, depth } =
-    node[DRAFT_BLOCK_TYPE_TO_DATA_FIELD[blockType]] || {};
+    node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
   return Object.assign(
     {},
-    textAlignment !== undefined
-      ? { textAlignment: Common.TextAlignment[textAlignment].toLowerCase() }
-      : undefined,
+    textAlignment !== undefined ? { textAlignment: textAlignment.toLowerCase() } : undefined,
     dynamicStyles !== undefined
       ? {
           dynamicStyles: Object.fromEntries(

@@ -124,10 +124,9 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
       case BlockType.Blockquote:
       case BlockType.OrderedListItem:
       case BlockType.UnorderedListItem:
-        textWrapperNode.paragraphData = {
-          ...textWrapperNode.paragraphData,
-          depth: block.depth,
-        };
+        if (textWrapperNode.paragraphData) {
+          textWrapperNode.paragraphData.depth = block.depth;
+        }
         break;
       default:
     }
@@ -180,17 +179,14 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
 
   parseBlocks();
 
-  const ricosContent = RichContent.toJSON(
-    RichContent.fromJSON({
-      nodes,
-      metadata: {
-        lastEdited: createTimestamp(),
-        updatedVersion: version,
-        createdVersion: version,
-      },
-    })
-  );
+  const content: RichContent = {
+    nodes,
+    metadata: {
+      updatedDate: createTimestamp(),
+      updatedVersion: version || '',
+      createdVersion: version || '',
+    },
+  };
 
-  // Should consider creating a new type for RichContent with string enums
-  return ricosContent as RichContent;
+  return RichContent.fromJSON(content);
 };

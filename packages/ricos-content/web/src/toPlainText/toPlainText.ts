@@ -1,4 +1,4 @@
-import { rich_content } from 'ricos-schema';
+import { Node_Type, RichContent, VideoSource } from 'ricos-schema';
 import { RicosContent } from '..';
 import { getParagraphNode } from '../migrateSchema/toDraft/decorationParsers';
 import {
@@ -23,7 +23,7 @@ export const toPlainText = async (
   content: RichContent | RicosContent,
   options?: PlainTextOptions
 ): Promise<string> => {
-  const ricosContent = RichContent.fromObject(ensureRicosContent(content));
+  const ricosContent = RichContent.fromJSON(ensureRicosContent(content));
   const { nodes } = ricosContent;
   let plainText = '';
 
@@ -33,7 +33,7 @@ export const toPlainText = async (
       if (index > 0) {
         plainText += '\n';
       }
-      switch (Node_Type) {
+      switch (node.type) {
         case Node_Type.CODEBLOCK:
         case Node_Type.PARAGRAPH:
         case Node_Type.HEADING:

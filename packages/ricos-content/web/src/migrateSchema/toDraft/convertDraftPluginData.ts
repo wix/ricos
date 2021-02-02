@@ -1,8 +1,8 @@
 /* eslint-disable fp/no-delete */
-import { rich_content } from 'ricos-schema';
+import { Node_Type, Decoration_Type } from 'ricos-schema';
 import toCamelCase from 'to-camel-case';
 import toSnakeCase from 'to-snake-case';
-import { has } from 'lodash';
+import { cloneDeep, has } from 'lodash';
 import {
   ENTITY_DECORATION_TO_DATA_FIELD,
   FROM_RICOS_DECORATION_TYPE,
@@ -12,35 +12,33 @@ import {
 
 export const convertNodeToDraftData = node => {
   const { type } = node;
-  const validType: Node_Type = Number.isInteger(type) ? type : Node_Type[type];
-  const draftPluginType = FROM_RICOS_ENTITY_TYPE[validType];
+  const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
   const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
-  return convertNodeDataToDraft(validType, node[dataFieldName]);
+  return convertNodeDataToDraft(type, node[dataFieldName]);
 };
 
 export const convertDecorationToDraftData = decoration => {
   const { type } = decoration;
-  const validType: Decoration_Type = Number.isInteger(type) ? type : Decoration_Type[type];
-  const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[FROM_RICOS_DECORATION_TYPE[validType]];
-  return convertDecorationDataToDraft(validType, decoration[dataFieldName]);
+  const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[FROM_RICOS_DECORATION_TYPE[type]];
+  return convertDecorationDataToDraft(type, decoration[dataFieldName]);
 };
 
 export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
   const converters = {
-    [Node_Type.VIDEO]: [convertVideoData, VideoData],
-    [Node_Type.DIVIDER]: [convertDividerData, DividerData],
-    [Node_Type.IMAGE]: [convertImageData, ImageData],
-    [Node_Type.GALLERY]: [convertGalleryData, GalleryData],
-    [Node_Type.POLL]: [convertPollData, PollData],
-    [Node_Type.VERTICAL_EMBED]: [convertVerticalEmbedData, VerticalEmbedData],
-    [Node_Type.HTML]: [convertHtmlData, HTMLData],
-    [Node_Type.GIPHY]: [convertGiphyData, GiphyData],
-    [Node_Type.LINK_PREVIEW]: [convertLinkPreviewData, LinkPreviewData],
-    [Node_Type.SOUND_CLOUD]: [convertSoundCloudData, SoundCloudData],
+    [Node_Type.VIDEO]: convertVideoData,
+    [Node_Type.DIVIDER]: convertDividerData,
+    [Node_Type.IMAGE]: convertImageData,
+    [Node_Type.GALLERY]: convertGalleryData,
+    [Node_Type.POLL]: convertPollData,
+    [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
+    [Node_Type.HTML]: convertHtmlData,
+    [Node_Type.GIPHY]: convertGiphyData,
+    [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
+    [Node_Type.SOUND_CLOUD]: convertSoundCloudData,
   };
   if (nodeType in converters) {
-    const [convert, Type] = converters[nodeType];
-    const newData = getNewObjectWithStringEnums(data, Type);
+    const convert = converters[nodeType];
+    const newData = cloneDeep(data);
     convert(newData);
     return newData;
   }
@@ -49,19 +47,16 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
 
 export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
   const converters = {
-    [Decoration_Type.MENTION]: [convertMention, MentionData],
+    [Decoration_Type.MENTION]: convertMention,
   };
   if (decorationType in converters) {
-    const [convert, Type] = converters[decorationType];
-    const newData = getNewObjectWithStringEnums(data, Type);
+    const convert = converters[decorationType];
+    const newData = cloneDeep(data);
     convert(newData);
     return newData;
   }
   return data;
 };
-
-const getNewObjectWithStringEnums = (object, Type) =>
-  Type.toObject(Type.fromObject(object), { enums: String });
 
 const convertVideoData = data => {
   if (data.url) {

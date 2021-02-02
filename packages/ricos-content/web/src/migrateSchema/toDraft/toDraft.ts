@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { rich_content } from 'ricos-schema';
+import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { RicosContent, RicosContentBlock } from '../..';
 import { genKey } from '../generateRandomKey';
 import {
@@ -23,12 +23,7 @@ export const ensureDraftContent = (content: RichContent | RicosContent) =>
   'nodes' in content ? toDraft(content) : content;
 
 export const toDraft = (ricosContent: RichContent): RicosContent => {
-  const {
-    nodes,
-    metadata: { updatedVersion },
-  } = RichContent.toObject(RichContent.fromObject(ricosContent), {
-    arrays: true,
-  });
+  const { nodes, metadata } = RichContent.toJSON(RichContent.fromJSON(ricosContent)) as RichContent; // using toJSON to remove undefined fields
   const draftContent: RicosContent = {
     blocks: [],
     entityMap: {},
@@ -38,7 +33,7 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
   const parseNodes = (index = 0) => {
     const node = nodes[index];
     if (node) {
-      switch (Node_Type) {
+      switch (node.type) {
         case Node_Type.BLOCKQUOTE:
           parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.key });
           break;
@@ -60,7 +55,7 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
           parseTextNodes(node, { type: BlockType.Unstyled, key: node.key });
           break;
         default:
-          if (RICOS_NODE_TYPE_TO_DATA_FIELD[Node_Type]) {
+          if (RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]) {
             parseAtomicNode(node);
           } else {
             console.log(`ERROR! Unknown node type "${Node_Type}"!`);
@@ -87,7 +82,7 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
     node.nodes.forEach(listItem => {
       const [paragraph, childNode] = listItem.nodes;
       parseTextNodes(paragraph, {
-        type: TO_DRAFT_LIST_TYPE[Node_Type],
+        type: TO_DRAFT_LIST_TYPE[node.type],
         key: listItem.key,
       });
       if (childNode) {
@@ -105,7 +100,7 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
       latestEntityKey
     );
     latestEntityKey = newLatestEntityKey;
-    const { depth, ...data } = createTextBlockData(node, type);
+    const { depth, ...data } = createTextBlockData(node);
     addBlock({
       key,
       type,
@@ -136,6 +131,6 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
 
   parseNodes();
 
-  draftContent.VERSION = updatedVersion;
+  draftContent.VERSION = metadata?.updatedVersion;
   return draftContent;
 };

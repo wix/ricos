@@ -1,6 +1,6 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { RicosContentBlock, RicosEntityMap, RicosEntityRange, EMOJI_TYPE } from '../..';
-import { Decoration, Decoration_Type } from 'ricos-schema';
+import { Decoration, Decoration_Type, Node_Type, Node } from 'ricos-schema';
 import { TO_RICOS_DECORATION_TYPE } from '../consts';
 
 import { isEmpty, merge } from 'lodash';

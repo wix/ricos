@@ -6,8 +6,8 @@ import "google/protobuf/wrappers.proto";
 
 message LinkPreviewData {
   LinkPreviewConfig config = 1;
-  string title = 2;
-  string thumbnail_url = 3;
+  google.protobuf.StringValue title = 2;
+  google.protobuf.StringValue thumbnail_url = 3;
   google.protobuf.StringValue description = 4;
   google.protobuf.StringValue provider_url = 5;
   google.protobuf.StringValue html = 6;
