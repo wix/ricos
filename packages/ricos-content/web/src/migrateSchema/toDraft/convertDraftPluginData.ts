@@ -1,8 +1,8 @@
 /* eslint-disable fp/no-delete */
-import { rich_content } from 'ricos-schema';
+import { Node_Type, Decoration_Type } from 'ricos-schema';
 import toCamelCase from 'to-camel-case';
 import toSnakeCase from 'to-snake-case';
-import { has } from 'lodash';
+import { cloneDeep, has } from 'lodash';
 import {
   ENTITY_DECORATION_TO_DATA_FIELD,
   FROM_RICOS_DECORATION_TYPE,
@@ -12,66 +12,51 @@ import {
 
 export const convertNodeToDraftData = node => {
   const { type } = node;
-  const validType: rich_content.Node.Type = Number.isInteger(type)
-    ? type
-    : rich_content.Node.Type[type];
-  const draftPluginType = FROM_RICOS_ENTITY_TYPE[validType];
+  const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
   const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
-  return convertNodeDataToDraft(validType, node[dataFieldName]);
+  return convertNodeDataToDraft(type, node[dataFieldName]);
 };
 
 export const convertDecorationToDraftData = decoration => {
   const { type } = decoration;
-  const validType: rich_content.Decoration.Type = Number.isInteger(type)
-    ? type
-    : rich_content.Decoration.Type[type];
-  const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[FROM_RICOS_DECORATION_TYPE[validType]];
-  return convertDecorationDataToDraft(validType, decoration[dataFieldName]);
+  const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[FROM_RICOS_DECORATION_TYPE[type]];
+  return convertDecorationDataToDraft(type, decoration[dataFieldName]);
 };
 
-export const convertNodeDataToDraft = (nodeType: rich_content.Node.Type, data) => {
+export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
   const converters = {
-    [rich_content.Node.Type.VIDEO]: [convertVideoData, rich_content.VideoData],
-    [rich_content.Node.Type.DIVIDER]: [convertDividerData, rich_content.DividerData],
-    [rich_content.Node.Type.IMAGE]: [convertImageData, rich_content.ImageData],
-    [rich_content.Node.Type.GALLERY]: [convertGalleryData, rich_content.GalleryData],
-    [rich_content.Node.Type.POLL]: [convertPollData, rich_content.PollData],
-    [rich_content.Node.Type.VERTICAL_EMBED]: [
-      convertVerticalEmbedData,
-      rich_content.VerticalEmbedData,
-    ],
-    [rich_content.Node.Type.HTML]: [convertHtmlData, rich_content.HTMLData],
-    [rich_content.Node.Type.GIPHY]: [convertGiphyData, rich_content.GiphyData],
-    [rich_content.Node.Type.LINK_PREVIEW]: [convertLinkPreviewData, rich_content.LinkPreviewData],
-    [rich_content.Node.Type.SOUND_CLOUD]: [convertSoundCloudData, rich_content.SoundCloudData],
+    [Node_Type.VIDEO]: convertVideoData,
+    [Node_Type.DIVIDER]: convertDividerData,
+    [Node_Type.IMAGE]: convertImageData,
+    [Node_Type.GALLERY]: convertGalleryData,
+    [Node_Type.POLL]: convertPollData,
+    [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
+    [Node_Type.HTML]: convertHtmlData,
+    [Node_Type.GIPHY]: convertGiphyData,
+    [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
+    [Node_Type.SOUND_CLOUD]: convertSoundCloudData,
   };
   if (nodeType in converters) {
-    const [convert, Type] = converters[nodeType];
-    const newData = getNewObjectWithStringEnums(data, Type);
+    const convert = converters[nodeType];
+    const newData = cloneDeep(data);
     convert(newData);
     return newData;
   }
   return data;
 };
 
-export const convertDecorationDataToDraft = (
-  decorationType: rich_content.Decoration.Type,
-  data
-) => {
+export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
   const converters = {
-    [rich_content.Decoration.Type.MENTION]: [convertMention, rich_content.MentionData],
+    [Decoration_Type.MENTION]: convertMention,
   };
   if (decorationType in converters) {
-    const [convert, Type] = converters[decorationType];
-    const newData = getNewObjectWithStringEnums(data, Type);
+    const convert = converters[decorationType];
+    const newData = cloneDeep(data);
     convert(newData);
     return newData;
   }
   return data;
 };
-
-const getNewObjectWithStringEnums = (object, Type) =>
-  Type.toObject(Type.fromObject(object), { enums: String });
 
 const convertVideoData = data => {
   if (data.url) {
