@@ -98,7 +98,7 @@ export default ({
             className,
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton,
-            { [styles.forceDisabled]: forceDisabled }
+            { [styles.forceDisabled]: isDisabled() || forceDisabled }
           )}
           data-hook={dataHook}
           onClick={onClick}
@@ -136,7 +136,7 @@ export default ({
           className={classNames(
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton,
-            { [styles.forceDisabled]: forceDisabled }
+            { [styles.forceDisabled]: isDisabled() || forceDisabled }
           )}
           onChange={onChange}
           accept={accept}
