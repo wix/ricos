@@ -128,18 +128,14 @@ describe('plugins', () => {
       );
 
       it('expand gallery image on full screen', () => {
-        cy.get(
-          '#pro-gallery-inner-container-v-0 > .pro-gallery-parent-container > #pro-gallery-container > #pro-gallery-margin-container > a[data-id="ea8ec1609e052b7f196935318316299d"] > #pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > .gallery-item-content',
-          {
-            timeout: 10000,
-          }
-        ).click({ force: true });
-        cy.get(
-          '#pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
-          {
-            timeout: 10000,
-          }
-        ).should('be.visible');
+        cy.get('[data-hook=ricos-viewer] [data-hook=item-wrapper]', {
+          timeout: 10000,
+        })
+          .eq(1)
+          .click({ force: true });
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
         // cy.eyesCheckWindow({
         //   tag: 'gallery fullscreen open on second image',
         //   target: 'window',
