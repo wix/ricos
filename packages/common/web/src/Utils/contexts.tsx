@@ -1,8 +1,8 @@
 import React from 'react';
-import { TranslationFunction } from '../types';
+import { TranslationFunction, AvailableExperiments } from '../types';
 
 export const GlobalContext = React.createContext<{
-  experiments?: Record<string, string>;
+  experiments?: AvailableExperiments;
   isMobile: boolean;
   t?: TranslationFunction;
 }>({

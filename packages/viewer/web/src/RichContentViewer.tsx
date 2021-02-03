@@ -24,6 +24,7 @@ import {
   TextDirection,
   ViewerContextType,
   InlineStyleMapperFunction,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -59,7 +60,7 @@ export interface RichContentViewerProps {
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
   localeResource?: Record<string, string>;
-  experiments?: Record<string, string>;
+  experiments?: AvailableExperiments;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 

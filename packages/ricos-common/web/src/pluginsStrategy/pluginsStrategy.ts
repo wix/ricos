@@ -6,7 +6,12 @@ import {
   PluginsStrategy,
 } from './pluginTypes';
 import { RicosCssOverride, RichContentProps } from '../types';
-import { RicosContent, EditorPlugin, ViewerPlugin } from 'wix-rich-content-common';
+import {
+  AvailableExperiments,
+  RicosContent,
+  EditorPlugin,
+  ViewerPlugin,
+} from 'wix-rich-content-common';
 
 const getPluginProps = (
   isViewer: boolean,
@@ -76,7 +81,7 @@ export default function pluginsStrategy({
   childProps: RichContentProps;
   cssOverride: RicosCssOverride;
   content?: RicosContent;
-  experiments?: Record<string, string>;
+  experiments?: AvailableExperiments;
 }): PluginsStrategy {
   console.debug('PluginsStrategy experiments', experiments); // eslint-disable-line no-console
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;

@@ -29,6 +29,7 @@ import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'd
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
+  AvailableExperiments,
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
@@ -145,7 +146,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   callOnChangeOnNewEditorState?: boolean;
   localeResource?: Record<string, string>;
   maxTextLength?: number;
-  experiments?: Record<string, string>;
+  experiments?: AvailableExperiments;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -629,7 +630,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         modifiers: [],
         key: 'Escape',
       },
-      this.props.experiments?.barrelRoll === 'True' && typeof window !== 'undefined'
+      this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
         ? {
             command: 'cmdShift7',
             modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
@@ -642,7 +643,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
       esc: this.handleEscCommand,
-      ...(this.props.experiments?.barrelRoll === 'True' && typeof window !== 'undefined'
+      ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
         ? { cmdShift7: makeBarrelRoll }
         : {}),
     },
