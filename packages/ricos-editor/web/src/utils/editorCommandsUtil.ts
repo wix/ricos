@@ -10,7 +10,19 @@ import {
   RICOS_IMAGE_TYPE,
   RICOS_LINK_TYPE,
 } from 'ricos-content';
-import { rich_content } from 'ricos-schema';
+import {
+  DividerData,
+  DividerData_DividerType,
+  GiphyData,
+  HTMLData,
+  GalleryData,
+  PollData,
+  VideoData,
+  FileData,
+  ImageData,
+  ImageConfig_ImageAlignment,
+  LinkData,
+} from 'ricos-schema';
 
 export const content = {
   blocks: [
@@ -46,11 +58,11 @@ export const selectionState2 = {
 
 const divider = {
   type: RICOS_DIVIDER_TYPE,
-  data: rich_content.DividerData.create({
-    type: rich_content.DividerData.DividerType.DOUBLE,
+  data: DividerData.fromJSON({
+    type: DividerData_DividerType.DOUBLE,
   }),
-  updatedData: rich_content.DividerData.create({
-    type: rich_content.DividerData.DividerType.DASHED,
+  updatedData: DividerData.fromJSON({
+    type: DividerData_DividerType.DASHED,
   }),
   expectedData: {
     type: 'double',
@@ -64,7 +76,7 @@ const divider = {
 
 const giphy = {
   type: RICOS_GIPHY_TYPE,
-  data: rich_content.GiphyData.create({
+  data: GiphyData.fromJSON({
     gif: {
       originalUrl: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.gif',
       originalMp4: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.mp4',
@@ -76,7 +88,7 @@ const giphy = {
       width: 500,
     },
   }),
-  updatedData: rich_content.GiphyData.create({
+  updatedData: GiphyData.fromJSON({
     gif: {
       originalUrl: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.gif',
       originalMp4: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.mp4',
@@ -136,8 +148,8 @@ const giphy = {
 
 const html = {
   type: RICOS_HTML_TYPE,
-  data: rich_content.HTMLData.create({ src: 'www.wix.com', srcType: 'url' }),
-  updatedData: rich_content.HTMLData.create({ src: 'www.sport5.co.il' }),
+  data: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
+  updatedData: HTMLData.fromJSON({ src: 'www.sport5.co.il' }),
   expectedData: {
     config: {
       alignment: 'center',
@@ -160,7 +172,7 @@ const html = {
 
 const gallery = {
   type: RICOS_GALLERY_TYPE,
-  data: rich_content.GalleryData.create({
+  data: GalleryData.fromJSON({
     items: [
       {
         metadata: {
@@ -191,7 +203,7 @@ const gallery = {
       },
     ],
   }),
-  updatedData: rich_content.GalleryData.create({
+  updatedData: GalleryData.fromJSON({
     items: [
       {
         metadata: {
@@ -323,13 +335,13 @@ const gallery = {
 // TODO: check about expected data
 const poll = {
   type: RICOS_POLL_TYPE,
-  data: rich_content.PollData.create({
+  data: PollData.fromJSON({
     config: { enableVoteRole: true },
     poll: {},
     design: {},
     layout: {},
   }),
-  updatedData: rich_content.PollData.create({
+  updatedData: PollData.fromJSON({
     config: { enableVoteRole: false },
     poll: {},
     design: {},
@@ -342,10 +354,10 @@ const poll = {
 // TODO: check about expected data
 const video = {
   type: RICOS_VIDEO_TYPE,
-  data: rich_content.VideoData.create({
+  data: VideoData.fromJSON({
     url: 'https://www.youtube.com/watch?v=2iDTAGKkixE&ab_channel=QueenClub',
   }),
-  updatedData: rich_content.VideoData.create({
+  updatedData: VideoData.fromJSON({
     url: 'https://www.youtube.com/watch?v=tIA_vrBDC1g&ab_channel=BoyceAvenue',
   }),
   expectedData: {},
@@ -354,20 +366,20 @@ const video = {
 
 const file = {
   type: RICOS_FILE_TYPE,
-  data: rich_content.FileData.create({
+  data: FileData.fromJSON({
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'File sample',
     config: {
-      size: rich_content.FileConfig.FileSize.SMALL,
-      alignment: rich_content.FileConfig.FileAlignment.LEFT,
+      size: 'small',
+      alignment: 'left',
     },
   }),
-  updatedData: rich_content.FileData.create({
+  updatedData: FileData.fromJSON({
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'Updated file sample',
     config: {
-      size: rich_content.FileConfig.FileSize.CONTENT,
-      alignment: rich_content.FileConfig.FileAlignment.RIGHT,
+      size: 'content',
+      alignment: 'right',
     },
   }),
   expectedData: {
@@ -396,7 +408,7 @@ const file = {
 
 const image = {
   type: RICOS_IMAGE_TYPE,
-  data: rich_content.ImageData.create({
+  data: ImageData.fromJSON({
     src: {
       id: '8b72558253b2502b401bb46e5599f22a',
       originalFileName: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg',
@@ -405,8 +417,8 @@ const image = {
       height: 1000,
     },
   }),
-  updatedData: rich_content.ImageData.create({
-    config: { alignment: rich_content.ImageConfig.ImageAlignment.LEFT },
+  updatedData: ImageData.fromJSON({
+    config: { alignment: ImageConfig_ImageAlignment.LEFT },
     src: {
       id: '2f64886b1998251a4a5e47d25fff5ffa',
       originalFileName: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg',
@@ -451,8 +463,8 @@ const image = {
 
 const link = {
   type: RICOS_LINK_TYPE,
-  data: rich_content.LinkData.create({ url: 'www.wix.com' }),
-  updatedData: rich_content.LinkData.create({ url: 'www.sport5.co.il', rel: 'nofollow' }),
+  data: LinkData.fromJSON({ url: 'www.wix.com' }),
+  updatedData: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
   expectedData: {
     url: 'www.wix.com',
     rel: 'noopener',

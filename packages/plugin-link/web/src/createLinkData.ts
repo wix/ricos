@@ -1,9 +1,9 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './defaults';
 import { CreatePluginsDataMap, RICOS_LINK_TYPE } from 'wix-rich-content-common';
-import { rich_content } from 'ricos-schema';
+import { LinkData } from 'ricos-schema';
 
-const convertLinkData = (data: rich_content.LinkData) => {
+const convertLinkData = (data: LinkData) => {
   let linkData = {};
   if (data.target === '_blank') {
     linkData = { ...linkData, targetBlank: true };

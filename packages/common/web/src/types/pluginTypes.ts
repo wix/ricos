@@ -70,7 +70,17 @@ import {
   RICOS_LINK_TYPE,
   RICOS_MENTION_TYPE,
 } from 'ricos-content';
-import { rich_content } from 'ricos-schema';
+import {
+  DividerData,
+  GiphyData,
+  HTMLData,
+  GalleryData,
+  PollData,
+  VideoData,
+  FileData,
+  LinkData,
+  MentionData,
+} from 'ricos-schema';
 
 export type CreatePluginData<PluginData> = (
   pluginData?: PluginData,
@@ -81,42 +91,42 @@ Record<string, any> | undefined;
 
 // TODO: remove legacy types after moving to prose
 export interface CreatePluginsDataMap {
-  [RICOS_DIVIDER_TYPE]?: CreatePluginData<rich_content.DividerData>;
-  [DIVIDER_TYPE]?: CreatePluginData<rich_content.DividerData>;
-  [RICOS_GIPHY_TYPE]?: CreatePluginData<rich_content.GiphyData>;
-  [GIPHY_TYPE]?: CreatePluginData<rich_content.GiphyData>;
-  [RICOS_HTML_TYPE]?: CreatePluginData<rich_content.HTMLData>;
-  [HTML_TYPE]?: CreatePluginData<rich_content.HTMLData>;
-  [RICOS_GALLERY_TYPE]?: CreatePluginData<rich_content.GalleryData>;
-  [GALLERY_TYPE]?: CreatePluginData<rich_content.GalleryData>;
-  [RICOS_POLL_TYPE]?: CreatePluginData<rich_content.PollData>;
-  [POLL_TYPE]?: CreatePluginData<rich_content.PollData>;
-  [RICOS_VIDEO_TYPE]?: CreatePluginData<rich_content.VideoData>;
-  [VIDEO_TYPE]?: CreatePluginData<rich_content.VideoData>;
-  [RICOS_FILE_TYPE]?: CreatePluginData<rich_content.FileData>;
-  [FILE_UPLOAD_TYPE]?: CreatePluginData<rich_content.FileData>;
-  [RICOS_IMAGE_TYPE]?: CreatePluginData<rich_content.ImageData>;
-  [IMAGE_TYPE]?: CreatePluginData<rich_content.ImageData>;
-  [RICOS_LINK_TYPE]?: CreatePluginData<rich_content.LinkData>;
-  [LINK_TYPE]?: CreatePluginData<rich_content.LinkData>;
-  [RICOS_MENTION_TYPE]?: CreatePluginData<rich_content.MentionData>;
-  [MENTION_TYPE]?: CreatePluginData<rich_content.MentionData>;
+  [RICOS_DIVIDER_TYPE]?: CreatePluginData<DividerData>;
+  [DIVIDER_TYPE]?: CreatePluginData<DividerData>;
+  [RICOS_GIPHY_TYPE]?: CreatePluginData<GiphyData>;
+  [GIPHY_TYPE]?: CreatePluginData<GiphyData>;
+  [RICOS_HTML_TYPE]?: CreatePluginData<HTMLData>;
+  [HTML_TYPE]?: CreatePluginData<HTMLData>;
+  [RICOS_GALLERY_TYPE]?: CreatePluginData<GalleryData>;
+  [GALLERY_TYPE]?: CreatePluginData<GalleryData>;
+  [RICOS_POLL_TYPE]?: CreatePluginData<PollData>;
+  [POLL_TYPE]?: CreatePluginData<PollData>;
+  [RICOS_VIDEO_TYPE]?: CreatePluginData<VideoData>;
+  [VIDEO_TYPE]?: CreatePluginData<VideoData>;
+  [RICOS_FILE_TYPE]?: CreatePluginData<FileData>;
+  [FILE_UPLOAD_TYPE]?: CreatePluginData<FileData>;
+  [RICOS_IMAGE_TYPE]?: CreatePluginData<ImageData>;
+  [IMAGE_TYPE]?: CreatePluginData<ImageData>;
+  [RICOS_LINK_TYPE]?: CreatePluginData<LinkData>;
+  [LINK_TYPE]?: CreatePluginData<LinkData>;
+  [RICOS_MENTION_TYPE]?: CreatePluginData<MentionData>;
+  [MENTION_TYPE]?: CreatePluginData<MentionData>;
 }
 
 export interface PluginsDataMap {
-  [RICOS_DIVIDER_TYPE]?: rich_content.DividerData;
-  [RICOS_GIPHY_TYPE]?: rich_content.GiphyData;
-  [RICOS_HTML_TYPE]?: rich_content.HTMLData;
-  [RICOS_GALLERY_TYPE]?: rich_content.GalleryData;
-  [RICOS_POLL_TYPE]?: rich_content.GalleryData;
-  [RICOS_VIDEO_TYPE]?: rich_content.VideoData;
-  [RICOS_FILE_TYPE]?: rich_content.FileData;
-  [RICOS_IMAGE_TYPE]?: rich_content.ImageData;
+  [RICOS_DIVIDER_TYPE]?: DividerData;
+  [RICOS_GIPHY_TYPE]?: GiphyData;
+  [RICOS_HTML_TYPE]?: HTMLData;
+  [RICOS_GALLERY_TYPE]?: GalleryData;
+  [RICOS_POLL_TYPE]?: GalleryData;
+  [RICOS_VIDEO_TYPE]?: VideoData;
+  [RICOS_FILE_TYPE]?: FileData;
+  [RICOS_IMAGE_TYPE]?: ImageData;
 }
 
 export interface DecorationsDataMap {
-  [RICOS_LINK_TYPE]?: rich_content.LinkData;
-  [RICOS_MENTION_TYPE]?: rich_content.MentionData;
+  [RICOS_LINK_TYPE]?: LinkData;
+  [RICOS_MENTION_TYPE]?: MentionData;
 }
 
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
