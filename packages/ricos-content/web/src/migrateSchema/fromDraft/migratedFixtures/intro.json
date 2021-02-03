@@ -1,47 +1,52 @@
 {
   "nodes": [
     {
+      "type": "HEADING",
+      "key": "foo",
       "nodes": [
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "6gpe1",
+          "key": "ee1ov",
+          "nodes": [],
           "textData": {
-            "decorations": [],
-            "text": "Hi! 😃"
+            "text": "Hi! 😃",
+            "decorations": []
           }
         }
       ],
-      "type": "HEADING",
-      "key": "foo",
       "headingData": {
-        "level": 3
+        "level": 3,
+        "textAlignment": "LEFT"
       }
     },
     {
-      "nodes": [],
       "type": "HEADING",
       "key": "8207r",
+      "nodes": [],
       "headingData": {
-        "level": 3
+        "level": 3,
+        "textAlignment": "LEFT"
       }
     },
     {
+      "type": "PARAGRAPH",
+      "key": "7cqs0",
       "nodes": [
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "d15uq",
+          "key": "f1775",
+          "nodes": [],
           "textData": {
-            "decorations": [],
-            "text": "Welcome to "
+            "text": "Welcome to ",
+            "decorations": []
           }
         },
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "5686k",
+          "key": "5g2r2",
+          "nodes": [],
           "textData": {
+            "text": "Wix Rich Content",
             "decorations": [
               {
                 "type": "LINK",
@@ -60,38 +65,37 @@
               {
                 "type": "UNDERLINE"
               }
-            ],
-            "text": "Wix Rich Content"
+            ]
           }
         },
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "avvni",
+          "key": "1sa01",
+          "nodes": [],
           "textData": {
-            "decorations": [],
-            "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️"
+            "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️",
+            "decorations": []
           }
         }
       ],
-      "type": "PARAGRAPH",
-      "key": "7cqs0",
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "4ni77",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [],
       "type": "GIPHY",
       "key": "9uurj",
+      "nodes": [],
       "giphyData": {
         "gif": {
           "height": 220,
@@ -110,29 +114,33 @@
       }
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "nujv",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
+      "type": "PARAGRAPH",
+      "key": "cg20j",
       "nodes": [
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "2df2c",
+          "key": "5mu41",
+          "nodes": [],
           "textData": {
-            "decorations": [],
-            "text": "Checkout the "
+            "text": "Checkout the ",
+            "decorations": []
           }
         },
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "8gi9g",
+          "key": "f7f4f",
+          "nodes": [],
           "textData": {
+            "text": "Example App",
             "decorations": [
               {
                 "type": "LINK",
@@ -145,24 +153,25 @@
               {
                 "type": "UNDERLINE"
               }
-            ],
-            "text": "Example App"
+            ]
           }
         }
       ],
-      "type": "PARAGRAPH",
-      "key": "cg20j",
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
+      "type": "PARAGRAPH",
+      "key": "bhslk",
       "nodes": [
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "25ij0",
+          "key": "3ajk4",
+          "nodes": [],
           "textData": {
+            "text": "Here's a text with a background",
             "decorations": [
               {
                 "type": "COLOR",
@@ -170,24 +179,25 @@
                   "background": "#DDDDDD"
                 }
               }
-            ],
-            "text": "Here's a text with a background"
+            ]
           }
         }
       ],
-      "type": "PARAGRAPH",
-      "key": "bhslk",
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
+      "type": "PARAGRAPH",
+      "key": "ckj27",
       "nodes": [
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "9l7dg",
+          "key": "dhh9b",
+          "nodes": [],
           "textData": {
+            "text": "Heres a text with color",
             "decorations": [
               {
                 "type": "BOLD"
@@ -198,21 +208,19 @@
                   "foreground": "#830063"
                 }
               }
-            ],
-            "text": "Heres a text with color"
+            ]
           }
         }
       ],
-      "type": "PARAGRAPH",
-      "key": "ckj27",
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [],
       "type": "DIVIDER",
       "key": "6na39",
+      "nodes": [],
       "dividerData": {
         "type": "DASHED",
         "config": {
@@ -223,153 +231,164 @@
       }
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "3b4ah",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
+      "type": "PARAGRAPH",
+      "key": "8ptbs",
       "nodes": [
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "1bsa1",
+          "key": "ecu7h",
+          "nodes": [],
           "textData": {
-            "decorations": [],
-            "text": "A wise man once said:"
+            "text": "A wise man once said:",
+            "decorations": []
           }
         }
       ],
-      "type": "PARAGRAPH",
-      "key": "8ptbs",
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
+      "type": "BLOCKQUOTE",
+      "key": "bu4jj",
       "nodes": [
         {
+          "type": "PARAGRAPH",
+          "key": "9e1hd",
           "nodes": [
             {
-              "nodes": [],
               "type": "TEXT",
-              "key": "2kvir",
+              "key": "35tf2",
+              "nodes": [],
               "textData": {
-                "decorations": [],
-                "text": "The Wix Rich Content Editor is the best tool in the world!"
+                "text": "The Wix Rich Content Editor is the best tool in the world!",
+                "decorations": []
               }
             }
           ],
-          "type": "PARAGRAPH",
-          "key": "8c4ir",
           "paragraphData": {
+            "textAlignment": "LEFT",
             "depth": 0
           }
         }
-      ],
-      "type": "BLOCKQUOTE",
-      "key": "bu4jj"
+      ]
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "8hmrf",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [
-        {
-          "nodes": [],
-          "type": "TEXT",
-          "key": "6bua5",
-          "textData": {
-            "decorations": [],
-            "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components."
-          }
-        }
-      ],
       "type": "PARAGRAPH",
       "key": "c4i62",
+      "nodes": [
+        {
+          "type": "TEXT",
+          "key": "dqh7t",
+          "nodes": [],
+          "textData": {
+            "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components.",
+            "decorations": []
+          }
+        }
+      ],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "7bn5j",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [
-        {
-          "nodes": [],
-          "type": "TEXT",
-          "key": "9fl17",
-          "textData": {
-            "decorations": [],
-            "text": "Code example:"
-          }
-        }
-      ],
       "type": "PARAGRAPH",
       "key": "bmqc9",
+      "nodes": [
+        {
+          "type": "TEXT",
+          "key": "b8toa",
+          "nodes": [],
+          "textData": {
+            "text": "Code example:",
+            "decorations": []
+          }
+        }
+      ],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [
-        {
-          "nodes": [],
-          "type": "TEXT",
-          "key": "2vidm",
-          "textData": {
-            "decorations": [],
-            "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />"
-          }
-        }
-      ],
       "type": "CODEBLOCK",
       "key": "ejfuu",
-      "codeData": {}
-    },
-    {
       "nodes": [
         {
-          "nodes": [],
           "type": "TEXT",
-          "key": "a04qc",
+          "key": "3fr87",
+          "nodes": [],
           "textData": {
-            "decorations": [],
-            "text": "Pro Gallery Collage:"
+            "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />",
+            "decorations": []
           }
         }
       ],
+      "codeData": {
+        "textAlignment": "LEFT"
+      }
+    },
+    {
       "type": "PARAGRAPH",
       "key": "45pcl",
+      "nodes": [
+        {
+          "type": "TEXT",
+          "key": "d1ap",
+          "nodes": [],
+          "textData": {
+            "text": "Pro Gallery Collage:",
+            "decorations": []
+          }
+        }
+      ],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "dl5nc",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [],
       "type": "GALLERY",
       "key": "46hkp",
+      "nodes": [],
       "galleryData": {
         "items": [
           {
@@ -427,28 +446,30 @@
       }
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "1qn5s",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     },
     {
-      "nodes": [],
       "type": "PARAGRAPH",
       "key": "5vr9d",
+      "nodes": [],
       "paragraphData": {
+        "textAlignment": "LEFT",
         "depth": 0
       }
     }
   ],
   "metadata": {
-    "lastEdited": {
-      "seconds": 1611674724,
-      "nanos": 564000000
-    },
     "createdVersion": "8.11.4",
-    "updatedVersion": "8.11.4"
+    "updatedVersion": "8.11.4",
+    "updatedDate": {
+      "seconds": 1612274564,
+      "nanos": 546000000
+    }
   }
 }

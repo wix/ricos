@@ -11,7 +11,6 @@ import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
-const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
 const reorderArray = (arr, from, to) => {
   const numOfItemsToReorder = from.end - from.start + 1;
@@ -32,12 +31,10 @@ class Table extends TableDataUtil {
     this.saveNewDataFunc(this.componentData);
   };
 
-  handlePasteCellsOutOfBound = (copiedCellsRange, targetRow, targetCol) => {
+  handlePasteCellsOutOfBound = (copiedCells, targetRow, targetCol) => {
     const rows = this.getRows();
-    const copiedRowsNum =
-      copiedCellsRange[copiedCellsRange.length - 1].i - copiedCellsRange[0].i + 1;
-    const copiedColsNum =
-      copiedCellsRange[copiedCellsRange.length - 1].j - copiedCellsRange[0].j + 1;
+    const copiedRowsNum = copiedCells[copiedCells.length - 1].i - copiedCells[0].i + 1;
+    const copiedColsNum = copiedCells[copiedCells.length - 1].j - copiedCells[0].j + 1;
     const rowNum = this.getRowNum();
     const colNum = this.getColNum();
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
@@ -51,31 +48,36 @@ class Table extends TableDataUtil {
     }
     if (colsOutOfBoundNum > 0) {
       //eslint-disable-next-line
-      Object.entries(rows).forEach(([i, row]) => {
+      Object.entries(rows).forEach(([rowIndex, row]) => {
         [...Array(colsOutOfBoundNum).fill(0)].forEach((value, i) => {
-          const colIndex = i + colNum - 1 + colsOutOfBoundNum;
-          this.addNewColWidth(colIndex, this.getColWidth(i === 0 ? 0 : i - 1));
+          const colIndex = i + colNum;
           row.columns[colIndex] = createEmptyCell();
+          if (rowIndex === '0') {
+            this.addNewColWidth(colIndex, this.getColWidth(i === 0 ? 0 : i - 1));
+            this.addNewColMinWidth(colIndex);
+          }
         });
       });
     }
   };
 
-  pasteCells = (copiedCellsRange, targetRow, targetCol) => {
+  setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
+
+  pasteCells = (copiedCells, targetRow, targetCol) => {
     const rows = this.getRows();
-    this.handlePasteCellsOutOfBound(copiedCellsRange, targetRow, targetCol);
-    const rowDiff = targetRow - copiedCellsRange[0].i;
-    const colDiff = targetCol - copiedCellsRange[0].j;
+    this.handlePasteCellsOutOfBound(copiedCells, targetRow, targetCol);
+    const rowDiff = targetRow - copiedCells[0].i;
+    const colDiff = targetCol - copiedCells[0].j;
     const cellsWithPaste = cloneDeepWithoutEditorState(rows);
-    copiedCellsRange.forEach(({ i, j }) => {
-      setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowDiff, j + colDiff);
+    copiedCells.forEach(({ i, j, content }) => {
+      this.setCellContent(cellsWithPaste, content, i + rowDiff, j + colDiff);
     });
     this.setNewRows(cellsWithPaste);
   };
 
-  clearRange = range => {
+  clearCells = range => {
     const rows = this.getRows();
-    range.forEach(({ i, j }) => setCellContent(rows, createEmptyCellEditor(), i, j));
+    range.forEach(({ i, j }) => this.setCellContent(rows, createEmptyCellEditor(), i, j));
     this.setNewRows(rows);
   };
 
@@ -245,7 +247,7 @@ class Table extends TableDataUtil {
   };
 
   setRowHeight = (range, height) => {
-    range.forEach(({ i }) => {
+    range.forEach(i => {
       const rowsHeight = this.getRowsHeight();
       rowsHeight[i] = height;
     });
@@ -261,11 +263,13 @@ class Table extends TableDataUtil {
 
   getRowMaxContentHeight = (innerEditorsRefs, range) => {
     let maxContentHeight = 0;
-    range.forEach(({ i, j }) => {
-      const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
-      if (height > maxContentHeight) {
-        maxContentHeight = height;
-      }
+    range.forEach(i => {
+      [...Array(this.getColNum()).fill(0)].forEach((val, j) => {
+        const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
+        if (height > maxContentHeight) {
+          maxContentHeight = height;
+        }
+      });
     });
     return maxContentHeight;
   };
@@ -275,10 +279,8 @@ class Table extends TableDataUtil {
 
   getRowsMaxContentHeight = innerEditorsRefs => {
     const rowsMaxContentHeight = [];
-    const colNum = this.getColNum();
     [...Array(this.getRowNum()).fill(0)].forEach((val, i) => {
-      const range = getRange({ start: { i, j: 0 }, end: { i, j: colNum } });
-      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, range));
+      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, [i]));
     });
     return rowsMaxContentHeight;
   };

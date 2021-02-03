@@ -128,6 +128,8 @@ class TableToolbar extends Component {
       deleteBlock,
       isAllCellsSelected,
       merge,
+      distributeRows,
+      distributeColumns,
     } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
@@ -160,7 +162,9 @@ class TableToolbar extends Component {
       selectCols,
       deleteBlock,
       merge,
-      t
+      t,
+      distributeRows,
+      distributeColumns
     );
     const buttons = [
       {
@@ -258,6 +262,8 @@ TableToolbar.propTypes = {
   deleteBlock: PropTypes.func,
   isAllCellsSelected: PropTypes.bool,
   merge: PropTypes.func,
+  distributeRows: PropTypes.func,
+  distributeColumns: PropTypes.func,
 };
 
 export default TableToolbar;
