@@ -22,7 +22,7 @@ function imageEntryToGallery(data, index) {
 
 const blockToImagesKeys = {
   [imageType]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: 1 };
+    if (!entity.data.config?.disableExpand) return { [blockKey]: 1 };
   },
   [imageTypeLegacy]: (entity, blockKey) => {
     if (!entity.data?.config?.disableExpand) return { [blockKey]: 1 };
@@ -76,7 +76,7 @@ function innerRceImagesMapper(entityMap, index) {
   Object.entries(entityMap).forEach(([, block]) => {
     if (block.type === imageType || block.type === imageTypeLegacy) {
       block.data?.src &&
-        !block.data?.config.disableExpand &&
+        !block.data?.config?.disableExpand &&
         images.push(imageEntryToGallery(block.data, index));
     }
   });
