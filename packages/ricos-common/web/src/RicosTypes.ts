@@ -78,10 +78,7 @@ export interface EditorDataInstance {
   getContentState: ContentStateGetter;
   getContentTraits: () => {
     isEmpty: boolean;
-    contentChanges: {
-      blockChanges: Record<string, unknown>;
-      entityChanges: Record<string, unknown>;
-    };
+    isContentChanged: boolean;
   };
   getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;
