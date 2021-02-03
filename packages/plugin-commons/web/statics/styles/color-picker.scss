@@ -42,6 +42,9 @@
     &:nth-child(6n + 1) {
       margin-left: 0;
     }
+    width: 34px;
+    height: 34px;
+    margin-left: 24px !important;
   }
 }
 
@@ -85,7 +88,10 @@
 .colorPicker_palette {
   width: auto;
   @include phone {
-    margin: 0 18px 24px;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    height: 125px;
+    width: 352px;
   }
 }
 
@@ -111,6 +117,7 @@
   width: 180px;
   @include phone {
     width: 100%;
+    justify-content: center;
   }
 }
 

@@ -74,7 +74,10 @@ class ColorPicker extends PureComponent {
 
   renderColorButtons(colors, attributes) {
     const { styles } = this;
-    const { schemeColor } = this.props;
+    const { schemeColor, isMobile } = this.props;
+    if (isMobile) {
+      colors.pop();
+    }
     return colors.map((color, index) => (
       <button
         data-scheme-color={attributes ? attributes[index] : ''}
