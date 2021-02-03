@@ -122,7 +122,7 @@ describe('plugins', () => {
       });
     });
 
-    context.only('gallery full screen', () => {
+    context('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('gallery').waitForGalleryImagesToLoad()
       );
