@@ -40,7 +40,6 @@
     "react-infinite-scroller": "^1.2.4",
     "react-md-spinner": "~1.0.0",
     "ricos-content": "8.18.3",
-    "ricos-schema": "8.18.3",
     "wix-rich-content-common": "8.18.3",
     "wix-rich-content-editor-common": "8.18.3",
     "wix-rich-content-plugin-commons": "8.18.3"

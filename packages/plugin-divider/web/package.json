@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "ricos-content": "8.18.3",
-    "ricos-schema": "8.18.3",
     "wix-rich-content-common": "8.18.3",
     "wix-rich-content-editor-common": "8.18.3",
     "wix-rich-content-plugin-commons": "8.18.3"

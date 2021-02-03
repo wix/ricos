@@ -1,7 +1,6 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './defaults';
-import { CreatePluginsDataMap, RICOS_LINK_TYPE } from 'wix-rich-content-common';
-import { LinkData } from 'ricos-schema';
+import { CreatePluginsDataMap, RICOS_LINK_TYPE, LinkData } from 'wix-rich-content-common';
 
 const convertLinkData = (data: LinkData) => {
   let linkData = {};

@@ -1,7 +1,6 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './defaults';
-import { CreatePluginsDataMap, RICOS_FILE_TYPE } from 'wix-rich-content-common';
-import { Node_Type } from 'ricos-schema';
+import { CreatePluginsDataMap, RICOS_FILE_TYPE, Node_Type } from 'wix-rich-content-common';
 import { convertNodeDataToDraft } from 'ricos-content/libs/migrateSchema';
 
 export const createFileData: CreatePluginsDataMap[typeof RICOS_FILE_TYPE] = (

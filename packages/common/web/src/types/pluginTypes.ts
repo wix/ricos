@@ -80,7 +80,10 @@ import {
   FileData,
   LinkData,
   MentionData,
+  Node_Type,
+  Decoration_Type,
 } from 'ricos-schema';
+export { Node_Type, Decoration_Type, LinkData };
 
 export type CreatePluginData<PluginData> = (
   pluginData?: PluginData,
