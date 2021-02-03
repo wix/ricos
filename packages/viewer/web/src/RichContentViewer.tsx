@@ -24,6 +24,7 @@ import {
   TextDirection,
   ViewerContextType,
   InlineStyleMapperFunction,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -59,6 +60,7 @@ export interface RichContentViewerProps {
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
   localeResource?: Record<string, string>;
+  experiments?: AvailableExperiments;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
@@ -196,6 +198,7 @@ class RichContentViewer extends Component<
         addAnchors,
         isMobile = false,
         t,
+        experiments,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -229,7 +232,7 @@ class RichContentViewer extends Component<
       );
 
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
