@@ -21,6 +21,9 @@ class AccordionPair extends Component {
 
   setTitleRef = ref => (this.titleRef = ref);
   setContentRef = ref => (this.contentRef = ref);
+  addTitleEditing = () => this.setState({ titleEditing: true });
+  addContentEditing = () => this.setState({ contentEditing: true });
+  removeContentEditing = () => this.setState({ contentEditing: false });
 
   componentDidMount() {
     document.addEventListener('mousedown', this.pageClick);
@@ -31,10 +34,10 @@ class AccordionPair extends Component {
   pageClick = e => {
     const titleElement = this.titleRef;
     const contentElement = this.contentRef;
-    if (!titleElement.contains(e.target)) {
+    if (this.state.titleEditing && !titleElement.contains(e.target)) {
       this.setState({ titleEditing: false });
     }
-    if (this.props.isExpanded && !contentElement.contains(e.target)) {
+    if (this.props.isExpanded && this.state.contentEditing && !contentElement.contains(e.target)) {
       this.setState({ contentEditing: false });
     }
   };
@@ -47,9 +50,7 @@ class AccordionPair extends Component {
 
     return (
       <div ref={this.setTitleRef} className={this.styles.title}>
-        {renderTitle(idx, this.titleEditorRef, titleEditing, () =>
-          this.setState({ titleEditing: true })
-        )}
+        {renderTitle(idx, this.titleEditorRef, titleEditing, this.addTitleEditing)}
       </div>
     );
   };
@@ -67,8 +68,8 @@ class AccordionPair extends Component {
             idx,
             this.contentEditorRef,
             contentEditing,
-            () => this.setState({ contentEditing: true }),
-            () => this.setState({ contentEditing: false })
+            this.addContentEditing,
+            this.removeContentEditing
           )}
         </div>
       )

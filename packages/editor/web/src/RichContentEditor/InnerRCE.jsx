@@ -17,14 +17,9 @@ class InnerRCE extends PureComponent {
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
   }
 
-  selectAllContentWhenEnteringEditing = () => {
-    const { innerRCERenderedIn } = this.props;
-    return innerRCERenderedIn === 'table';
-  };
-
   componentDidUpdate(prevProps) {
     if (
-      this.selectAllContentWhenEnteringEditing() &&
+      this.props.innerRCERenderedIn === 'table' &&
       prevProps.editing === false &&
       prevProps.editing !== this.props.editing
     ) {
@@ -97,7 +92,7 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
-    this.props.onFocusCallback && this.props.onFocusCallback();
+    this.props.onFocus && this.props.onFocus();
   };
 
   handleAtomicPluginsBorders = enterEditing => {
@@ -181,7 +176,7 @@ InnerRCE.propTypes = {
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
   tablePluginMenu: PropTypes.bool,
-  onFocusCallback: PropTypes.func,
+  onFocus: PropTypes.func,
 };
 
 export default InnerRCE;

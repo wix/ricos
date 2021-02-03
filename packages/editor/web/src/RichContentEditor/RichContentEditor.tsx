@@ -816,7 +816,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     toolbarsToIgnore,
     tablePluginMenu,
     editing,
-    onFocusCallback,
+    onFocus,
   }) => {
     return (
       <InnerRCE
@@ -834,7 +834,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         toolbarsToIgnore={toolbarsToIgnore}
         tablePluginMenu={tablePluginMenu}
         editing={editing}
-        onFocusCallback={onFocusCallback}
+        onFocus={onFocus}
       />
     );
   };
