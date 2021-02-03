@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -246,6 +247,17 @@ export default function createAtomicPluginToolbar({
         innerModal,
         ...commonButtonProps,
       };
+      const defaultButtonProps = {
+        componentData: this.state.componentData,
+        componentState: this.state.componentState,
+        helpers,
+        displayPanel: this.displayPanel,
+        displayInlinePanel: this.displayInlinePanel,
+        hideInlinePanel: this.hidePanels,
+        uiSettings,
+        getEditorBounds,
+        ...buttonProps,
+      };
 
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
@@ -287,24 +299,13 @@ export default function createAtomicPluginToolbar({
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
         case BUTTONS.VIDEO_SETTINGS:
-          //eslint-disable-next-line no-case-declarations
           const isCustomVideo = this.state?.componentData?.isCustomVideo;
-          // eslint-disable-next-line no-case-declarations
-          const videoSettingsProps = { ...buttonProps, type: BUTTONS.EXTERNAL_MODAL };
+          const videoSettingsProps = {
+            ...defaultButtonProps,
+            type: BUTTONS.EXTERNAL_MODAL,
+          };
           if (isCustomVideo) {
-            return (
-              <BaseToolbarButton
-                componentData={this.state.componentData}
-                componentState={this.state.componentState}
-                helpers={helpers}
-                displayPanel={this.displayPanel}
-                displayInlinePanel={this.displayInlinePanel}
-                hideInlinePanel={this.hidePanels}
-                uiSettings={uiSettings}
-                getEditorBounds={getEditorBounds}
-                {...videoSettingsProps}
-              />
-            );
+            return <Button {...videoSettingsProps} />;
           }
           return null;
         case BUTTONS.LINK_PREVIEW: {
@@ -328,19 +329,7 @@ export default function createAtomicPluginToolbar({
           );
         }
         default:
-          return (
-            <Button
-              componentData={this.state.componentData}
-              componentState={this.state.componentState}
-              helpers={helpers}
-              displayPanel={this.displayPanel}
-              displayInlinePanel={this.displayInlinePanel}
-              hideInlinePanel={this.hidePanels}
-              uiSettings={uiSettings}
-              getEditorBounds={getEditorBounds}
-              {...buttonProps}
-            />
-          );
+          return <Button {...defaultButtonProps} />;
       }
     };
     /*eslint-enable complexity*/
