@@ -93,6 +93,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   noPointerEventsOnFocus?: boolean;
   withHorizontalScroll?: boolean;
   innerRCERenderedIn?: string;
+  disableKeyboardEvents?: (boolean) => void;
 }
 
 const createBasePlugin = (
@@ -129,6 +130,7 @@ const createBasePlugin = (
     noPointerEventsOnFocus,
     withHorizontalScroll,
     innerRCERenderedIn,
+    disableKeyboardEvents,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -244,6 +246,7 @@ const createBasePlugin = (
       noPointerEventsOnFocus,
       withHorizontalScroll,
       innerRCERenderedIn: config.type === 'wix-draft-plugin-divider' ? false : innerRCERenderedIn,
+      disableKeyboardEvents,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =
