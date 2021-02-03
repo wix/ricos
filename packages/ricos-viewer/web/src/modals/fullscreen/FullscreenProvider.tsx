@@ -57,12 +57,12 @@ export default class FullscreenProvider extends Component<Props, State> {
     if (isModalSuspended) {
       return config;
     }
-    const onExpand = (entityIndex: number, innerIndex = 0) => {
+    const onExpand = (blockKey: string, innerIndex = 0) => {
       const { expandModeData } = this.state;
       this.setState({
         isExpanded: true,
         // if expandModeData is not defined - expand the first image
-        index: expandModeData ? expandModeData.imageMap[entityIndex] + innerIndex : 0,
+        index: expandModeData ? expandModeData.imageMap[blockKey] + innerIndex : 0,
       });
     };
     const imageConfig = config['wix-draft-plugin-image'];
