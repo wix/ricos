@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -11,24 +13,65 @@ class AccordionPair extends Component {
     this.styles = mergeStyles({ styles, theme });
     this.titleEditorRef = React.createRef();
     this.contentEditorRef = React.createRef();
+    this.state = {
+      titleEditing: false,
+      contentEditing: false,
+    };
   }
+
+  setTitleRef = ref => (this.titleRef = ref);
+  setContentRef = ref => (this.contentRef = ref);
+  addTitleEditing = () => this.setState({ titleEditing: true });
+  addContentEditing = () => this.setState({ contentEditing: true });
+  removeContentEditing = () => this.setState({ contentEditing: false });
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.pageClick);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.pageClick);
+  }
+  pageClick = e => {
+    const titleElement = this.titleRef;
+    const contentElement = this.contentRef;
+    if (this.state.titleEditing && !titleElement.contains(e.target)) {
+      this.setState({ titleEditing: false });
+    }
+    if (this.props.isExpanded && this.state.contentEditing && !contentElement.contains(e.target)) {
+      this.setState({ contentEditing: false });
+    }
+  };
 
   focusTitle = () => this.titleEditorRef.current?.focus();
 
   renderTitle = () => {
     const { idx, renderTitle } = this.props;
+    const { titleEditing } = this.state;
 
-    return <div className={this.styles.title}>{renderTitle(idx, this.titleEditorRef)}</div>;
+    return (
+      <div ref={this.setTitleRef} className={this.styles.title}>
+        {renderTitle(idx, this.titleEditorRef, titleEditing, this.addTitleEditing)}
+      </div>
+    );
   };
 
   focusContent = () => this.contentEditorRef.current?.focus();
 
   renderContent = () => {
     const { idx, renderContent, isExpanded } = this.props;
+    const { contentEditing } = this.state;
 
     return (
       isExpanded && (
-        <div className={this.styles.content}>{renderContent(idx, this.contentEditorRef)}</div>
+        <div ref={this.setContentRef} className={this.styles.content}>
+          {renderContent(
+            idx,
+            this.contentEditorRef,
+            contentEditing,
+            this.addContentEditing,
+            this.removeContentEditing
+          )}
+        </div>
       )
     );
   };
