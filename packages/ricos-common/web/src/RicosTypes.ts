@@ -1,5 +1,6 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
+  AvailableExperiments,
   RicosContent,
   OnErrorFunction,
   SEOSettings,
@@ -33,6 +34,7 @@ export interface RicosProps {
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
+  experiments?: AvailableExperiments; // internal use only
   /* Changes to this interface should also be reflected in the API docs */
 }
 

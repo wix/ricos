@@ -29,6 +29,7 @@ import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'd
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
+  AvailableExperiments,
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
@@ -145,6 +146,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   callOnChangeOnNewEditorState?: boolean;
   localeResource?: Record<string, string>;
   maxTextLength?: number;
+  experiments?: AvailableExperiments;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -156,6 +158,15 @@ interface State {
   theme?: RichContentTheme;
   textToolbarType?: TextToolbarType;
   error?: string;
+}
+
+// experiment example code
+function makeBarrelRoll() {
+  document.querySelector('.DraftEditor-root')?.classList.toggle('barrelRoll');
+  setTimeout(
+    () => document.querySelector('.DraftEditor-root')?.classList.toggle('barrelRoll'),
+    1000
+  );
 }
 
 class RichContentEditor extends Component<RichContentEditorProps, State> {
@@ -234,6 +245,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.reportDebuggingInfo();
     this.preloadLibs();
     this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
+    console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {
@@ -618,12 +630,22 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         modifiers: [],
         key: 'Escape',
       },
+      this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+        ? {
+            command: 'cmdShift7',
+            modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+            key: '7',
+          }
+        : {},
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
       esc: this.handleEscCommand,
+      ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+        ? { cmdShift7: makeBarrelRoll }
+        : {}),
     },
   });
 
@@ -917,7 +939,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { onError, locale, direction, showToolbars = true } = this.props;
+    const { onError, locale, direction, experiments, showToolbars = true } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -934,7 +956,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div

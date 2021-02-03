@@ -5,7 +5,12 @@ import { BasePlugin } from './pluginTypes';
 describe('PluginsStrategy', () => {
   const driver = {
     runStrategy: (isViewer: boolean, plugins: BasePlugin[] = []) =>
-      pluginsStrategy(isViewer, plugins, {}, { modalTheme: { content: {} } }),
+      pluginsStrategy({
+        isViewer,
+        plugins,
+        childProps: {},
+        cssOverride: { modalTheme: { content: {} } },
+      }),
   };
 
   it('should create an object', () => {
