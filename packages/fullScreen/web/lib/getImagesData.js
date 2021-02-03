@@ -103,13 +103,14 @@ function getAccordionImages(entry, index) {
 }
 
 function convertEntryToGalleryItems(entry, index) {
-  const { disableExpand } = entry?.data.config;
   switch (entry.type) {
     case imageType:
     case imageTypeLegacy:
-      return entry.data.src && !disableExpand ? [imageEntryToGallery(entry.data, index)] : [];
+      return entry.data.src && !entry?.data?.config.disableExpand
+        ? [imageEntryToGallery(entry.data, index)]
+        : [];
     case galleryType: {
-      return !disableExpand ? entry.data.items : [];
+      return !entry?.data?.config.disableExpand ? entry.data.items : [];
     }
     case tableType: {
       return getTableImages(entry, index);
