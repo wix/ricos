@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-import { rich_content } from 'ricos-schema';
+import { Decoration, Node, Node_Type } from 'ricos-schema';
 import { RicosInlineStyleRange, RicosEntityRange, RicosEntityMap } from '../..';
 import { FROM_RICOS_DECORATION_TYPE, ENTITY_DECORATION_TO_DATA_FIELD } from '../consts';
 import { emojiRegex } from '../emojiRegex';
 import { createDecorationEntityData } from './getDraftEntityData';
 
-export interface DraftTypedDecoration extends Omit<rich_content.Decoration, 'type'> {
+export interface DraftTypedDecoration extends Omit<Decoration, 'type'> {
   type: string;
   emojiData?: { emojiUnicode: string };
 }
@@ -27,7 +27,7 @@ const pipe = (arg, ...fns: ((arg) => unknown)[]) => {
 };
 
 export const mergeTextNodes = (
-  nodes: rich_content.Node[]
+  nodes: Node[]
 ): { text: string; decorationMap: RangedDecorationMap } => {
   let length = 0;
   return nodes.reduce<{
@@ -148,8 +148,8 @@ export const parseEntityDecorations = (
   };
 };
 
-export const getParagraphNode = (node: rich_content.Node) => {
-  if (node.nodes[0].type === rich_content.Node.Type.PARAGRAPH) {
+export const getParagraphNode = (node: Node) => {
+  if (node.nodes[0].type === Node_Type.PARAGRAPH) {
     return node.nodes[0];
   } else {
     console.log(`ERROR! Expected a paragraph node but found ${node.nodes[0].type}`);
@@ -157,7 +157,7 @@ export const getParagraphNode = (node: rich_content.Node) => {
   }
 };
 
-const convertDecorationTypes = (decorations: rich_content.Decoration[]): DraftTypedDecoration[] =>
+const convertDecorationTypes = (decorations: Decoration[]): DraftTypedDecoration[] =>
   decorations.flatMap(decoration => pipe(decoration, toDraftDecorationType, splitColorDecoration));
 
 const createEmojiDecorations = (text: string) =>
@@ -174,7 +174,7 @@ const createEmojiDecorations = (text: string) =>
     return [];
   });
 
-const toDraftDecorationType = (decoration: rich_content.Decoration): DraftTypedDecoration => ({
+const toDraftDecorationType = (decoration: Decoration): DraftTypedDecoration => ({
   ...decoration,
   type: FROM_RICOS_DECORATION_TYPE[decoration.type],
 });

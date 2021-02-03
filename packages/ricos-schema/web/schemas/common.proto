@@ -2,12 +2,7 @@ syntax = "proto3";
 
 package rich_content;
 
-import "google/protobuf/descriptor.proto";
-
-extend google.protobuf.FieldOptions {
-    // is message value required
-    optional bool required = 50367;
-}
+import "google/protobuf/wrappers.proto";
 
 message Common {
     enum TextAlignment {
@@ -18,14 +13,14 @@ message Common {
     }
 
     message DynamicStyles {
-        string lineHeight = 1;
-        string paddingTop = 2;
-        string paddingBottom = 3;
+        google.protobuf.StringValue lineHeight = 1;
+        google.protobuf.StringValue paddingTop = 2;
+        google.protobuf.StringValue paddingBottom = 3;
     }
 }
 
 message Spoiler {
-    bool enabled = 1;
-    string description = 2;
-    string button_content = 3;
+    google.protobuf.BoolValue enabled = 1;
+    google.protobuf.StringValue description = 2;
+    google.protobuf.StringValue button_content = 3;
 }

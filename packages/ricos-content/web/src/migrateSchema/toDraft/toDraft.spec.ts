@@ -4,7 +4,7 @@ import fixture from '../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../e2e/tests/fixtures/migration-content.json';
 import anchorBlocksFixture from '../../../../../../e2e/tests/fixtures/all-blocks-with-anchors.json';
 import { ANCHOR_TYPE } from '../..';
-import { rich_content } from 'ricos-schema';
+import { Decoration_Type, Node_Type } from 'ricos-schema';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
 const fixtures = { intro: fixture, complex: complexFixture };
@@ -74,7 +74,7 @@ describe('migrate to draft', () => {
   };
 
   it('should convert node data', () => {
-    const blockData = convertNodeDataToDraft(rich_content.Node.Type.IMAGE, imageNodeData.imageData);
+    const blockData = convertNodeDataToDraft(Node_Type.IMAGE, imageNodeData.imageData);
 
     expect(blockData).toEqual(expectedImageBlockData);
   });
@@ -102,7 +102,7 @@ describe('migrate to draft', () => {
 
   it('should convert decoration data', () => {
     const blockData = convertDecorationDataToDraft(
-      rich_content.Decoration.Type.MENTION,
+      Decoration_Type.MENTION,
       mentionDecoration.mentionData
     );
 

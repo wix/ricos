@@ -1,14 +1,26 @@
-import { mkdirSync } from 'fs';
+import { mkdirSync, readdirSync, writeFileSync } from 'fs';
 import { execSync } from 'child_process';
 
-const DIST_DIR = 'dist';
-const OUT_FILE = `${DIST_DIR}/rich-content`;
+const GEN_DIR = 'generated';
+const TS_PROTO_DIR = '../../../node_modules/.bin/protoc-gen-ts_proto';
 
-mkdirSync(DIST_DIR);
+execSync(`rm -rf ${GEN_DIR}`);
+mkdirSync(GEN_DIR);
 
-// Generate schema
-execSync(
-  // eslint-disable-next-line max-len
-  `pbjs -t static-module -o ${OUT_FILE}.js --force-number --no-instance schemas/rich-content.proto &&
-   pbts -o ${OUT_FILE}.d.ts ${OUT_FILE}.js`
+const schemas = readdirSync('./schemas');
+
+schemas.forEach(schema => {
+  if (schema.endsWith('.proto')) {
+    execSync(
+      // eslint-disable-next-line max-len
+      `protoc --plugin=${TS_PROTO_DIR} --proto_path schemas --ts_proto_opt=useOptionals=true,outputEncodeMethods=false,stringEnums=true,useDate=false,exportCommonSymbols=false --ts_proto_out=${GEN_DIR} schemas/${schema}`
+    );
+  }
+});
+
+const indexFile = schemas.reduce(
+  (fileString, schema) => fileString + `export * from './${schema.replace('.proto', '')}';\n`,
+  ''
 );
+
+writeFileSync(`${GEN_DIR}/index.ts`, indexFile);
