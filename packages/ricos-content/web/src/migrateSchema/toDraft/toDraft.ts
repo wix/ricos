@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { rich_content } from 'ricos-schema';
+import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { RicosContent, RicosContentBlock } from '../..';
 import { genKey } from '../generateRandomKey';
 import {
@@ -19,16 +19,11 @@ import {
   parseEntityDecorations,
 } from './decorationParsers';
 
-export const ensureDraftContent = (content: rich_content.RichContent | RicosContent) =>
+export const ensureDraftContent = (content: RichContent | RicosContent) =>
   'nodes' in content ? toDraft(content) : content;
 
-export const toDraft = (ricosContent: rich_content.RichContent): RicosContent => {
-  const {
-    nodes,
-    metadata: { updatedVersion },
-  } = rich_content.RichContent.toObject(rich_content.RichContent.fromObject(ricosContent), {
-    arrays: true,
-  });
+export const toDraft = (ricosContent: RichContent): RicosContent => {
+  const { nodes, metadata } = RichContent.toJSON(RichContent.fromJSON(ricosContent)) as RichContent; // using toJSON to remove undefined fields
   const draftContent: RicosContent = {
     blocks: [],
     entityMap: {},
@@ -39,24 +34,24 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
     const node = nodes[index];
     if (node) {
       switch (node.type) {
-        case rich_content.Node.Type.BLOCKQUOTE:
+        case Node_Type.BLOCKQUOTE:
           parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.key });
           break;
-        case rich_content.Node.Type.CODEBLOCK:
+        case Node_Type.CODEBLOCK:
           parseTextNodes(node, { type: BlockType.CodeBlock, key: node.key });
           break;
-        case rich_content.Node.Type.HEADING:
+        case Node_Type.HEADING:
           if (!node.headingData) {
             console.log(`ERROR! Heading node with no data!`);
             process.exit(1);
           }
           parseTextNodes(node, { type: HeaderLevel[node.headingData.level], key: node.key });
           break;
-        case rich_content.Node.Type.ORDERED_LIST:
-        case rich_content.Node.Type.BULLET_LIST:
+        case Node_Type.ORDERED_LIST:
+        case Node_Type.BULLET_LIST:
           parseListNode(node);
           break;
-        case rich_content.Node.Type.PARAGRAPH:
+        case Node_Type.PARAGRAPH:
           parseTextNodes(node, { type: BlockType.Unstyled, key: node.key });
           break;
         default:
@@ -71,7 +66,7 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
     }
   };
 
-  const parseAtomicNode = (node: rich_content.Node) => {
+  const parseAtomicNode = (node: Node) => {
     latestEntityKey += 1;
     const entityMap = createAtomicEntityData(node, latestEntityKey);
     addBlock({
@@ -83,7 +78,7 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
 
-  const parseListNode = (node: rich_content.Node) => {
+  const parseListNode = (node: Node) => {
     node.nodes.forEach(listItem => {
       const [paragraph, childNode] = listItem.nodes;
       parseTextNodes(paragraph, {
@@ -96,10 +91,7 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
     });
   };
 
-  const parseTextNodes = (
-    node: rich_content.Node,
-    { type, key }: { type: DraftBlockType; key: string }
-  ) => {
+  const parseTextNodes = (node: Node, { type, key }: { type: DraftBlockType; key: string }) => {
     const { text, decorationMap } = mergeTextNodes(node.nodes);
     const { inlineStyleDecorations, entityDecorations } = parseDecorations(decorationMap, text);
     const inlineStyleRanges = parseInlineStyleDecorations(inlineStyleDecorations);
@@ -108,7 +100,7 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
       latestEntityKey
     );
     latestEntityKey = newLatestEntityKey;
-    const { depth, ...data } = createTextBlockData(node, type);
+    const { depth, ...data } = createTextBlockData(node);
     addBlock({
       key,
       type,
@@ -139,6 +131,6 @@ export const toDraft = (ricosContent: rich_content.RichContent): RicosContent =>
 
   parseNodes();
 
-  draftContent.VERSION = updatedVersion;
+  draftContent.VERSION = metadata?.updatedVersion;
   return draftContent;
 };
