@@ -22,7 +22,7 @@ import {
   TABLE_TYPE,
   ANCHOR_TYPE,
 } from '../consts';
-import { rich_content } from 'ricos-schema';
+import { Decoration_Type, Node_Type } from 'ricos-schema';
 
 export enum BlockType {
   Unstyled = 'unstyled',
@@ -49,8 +49,8 @@ export enum HeaderLevel {
 }
 
 export const FROM_DRAFT_LIST_TYPE = {
-  [BlockType.UnorderedListItem]: rich_content.Node.Type.BULLET_LIST,
-  [BlockType.OrderedListItem]: rich_content.Node.Type.ORDERED_LIST,
+  [BlockType.UnorderedListItem]: Node_Type.BULLET_LIST,
+  [BlockType.OrderedListItem]: Node_Type.ORDERED_LIST,
 };
 
 export const TO_DRAFT_LIST_TYPE = Object.fromEntries(
@@ -58,29 +58,29 @@ export const TO_DRAFT_LIST_TYPE = Object.fromEntries(
 );
 
 export const TO_RICOS_NODE_TYPE = {
-  [LINK_BUTTON_TYPE]: rich_content.Node.Type.LINK_BUTTON,
-  [ACTION_BUTTON_TYPE]: rich_content.Node.Type.ACTION_BUTTON,
-  [DIVIDER_TYPE]: rich_content.Node.Type.DIVIDER,
-  [FILE_UPLOAD_TYPE]: rich_content.Node.Type.FILE,
-  [GALLERY_TYPE]: rich_content.Node.Type.GALLERY,
-  [GIPHY_TYPE]: rich_content.Node.Type.GIPHY,
-  [HTML_TYPE]: rich_content.Node.Type.HTML,
-  [IMAGE_TYPE]: rich_content.Node.Type.IMAGE,
-  [IMAGE_TYPE_LEGACY]: rich_content.Node.Type.IMAGE,
-  [ACCORDION_TYPE]: rich_content.Node.Type.ACCORDION,
-  [LINK_PREVIEW_TYPE]: rich_content.Node.Type.LINK_PREVIEW,
-  [MAP_TYPE]: rich_content.Node.Type.MAP,
-  [SOUND_CLOUD_TYPE]: rich_content.Node.Type.SOUND_CLOUD,
-  [VERTICAL_EMBED_TYPE]: rich_content.Node.Type.VERTICAL_EMBED,
-  [VIDEO_TYPE]: rich_content.Node.Type.VIDEO,
-  [VIDEO_TYPE_LEGACY]: rich_content.Node.Type.VIDEO,
-  [POLL_TYPE]: rich_content.Node.Type.POLL,
-  [TABLE_TYPE]: rich_content.Node.Type.TABLE,
+  [LINK_BUTTON_TYPE]: Node_Type.LINK_BUTTON,
+  [ACTION_BUTTON_TYPE]: Node_Type.ACTION_BUTTON,
+  [DIVIDER_TYPE]: Node_Type.DIVIDER,
+  [FILE_UPLOAD_TYPE]: Node_Type.FILE,
+  [GALLERY_TYPE]: Node_Type.GALLERY,
+  [GIPHY_TYPE]: Node_Type.GIPHY,
+  [HTML_TYPE]: Node_Type.HTML,
+  [IMAGE_TYPE]: Node_Type.IMAGE,
+  [IMAGE_TYPE_LEGACY]: Node_Type.IMAGE,
+  [ACCORDION_TYPE]: Node_Type.ACCORDION,
+  [LINK_PREVIEW_TYPE]: Node_Type.LINK_PREVIEW,
+  [MAP_TYPE]: Node_Type.MAP,
+  [SOUND_CLOUD_TYPE]: Node_Type.SOUND_CLOUD,
+  [VERTICAL_EMBED_TYPE]: Node_Type.VERTICAL_EMBED,
+  [VIDEO_TYPE]: Node_Type.VIDEO,
+  [VIDEO_TYPE_LEGACY]: Node_Type.VIDEO,
+  [POLL_TYPE]: Node_Type.POLL,
+  [TABLE_TYPE]: Node_Type.TABLE,
 };
 
 const DUPLICATE_KEYS = [IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
 
-// rich_content.Node.Type.IMAGE: IMAGE_TYPE
+// Node_Type.IMAGE: IMAGE_TYPE
 export const FROM_RICOS_ENTITY_TYPE = Object.fromEntries(
   Object.entries(TO_RICOS_NODE_TYPE)
     .filter(([key]) => !DUPLICATE_KEYS.includes(key))
@@ -88,13 +88,13 @@ export const FROM_RICOS_ENTITY_TYPE = Object.fromEntries(
 );
 
 export const TO_RICOS_DECORATION_TYPE = {
-  BOLD: rich_content.Decoration.Type.BOLD,
-  ITALIC: rich_content.Decoration.Type.ITALIC,
-  UNDERLINE: rich_content.Decoration.Type.UNDERLINE,
-  [SPOILER_TYPE]: rich_content.Decoration.Type.SPOILER,
-  [ANCHOR_TYPE]: rich_content.Decoration.Type.ANCHOR,
-  [MENTION_TYPE]: rich_content.Decoration.Type.MENTION,
-  [LINK_TYPE]: rich_content.Decoration.Type.LINK,
+  BOLD: Decoration_Type.BOLD,
+  ITALIC: Decoration_Type.ITALIC,
+  UNDERLINE: Decoration_Type.UNDERLINE,
+  [SPOILER_TYPE]: Decoration_Type.SPOILER,
+  [ANCHOR_TYPE]: Decoration_Type.ANCHOR,
+  [MENTION_TYPE]: Decoration_Type.MENTION,
+  [LINK_TYPE]: Decoration_Type.LINK,
 };
 
 export const TO_RICOS_PLUGIN_TYPE = {
@@ -102,7 +102,7 @@ export const TO_RICOS_PLUGIN_TYPE = {
   ...TO_RICOS_DECORATION_TYPE,
 };
 
-// Decoration.Type.BOLD: BOLD
+// Decoration_Type.BOLD: BOLD
 export const FROM_RICOS_DECORATION_TYPE = Object.fromEntries(
   Object.entries(TO_RICOS_DECORATION_TYPE).map(([key, value]) => [value, key])
 );
@@ -115,22 +115,27 @@ export const ENTITY_DECORATION_TO_MUTABILITY = {
 };
 
 export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
-  [rich_content.Node.Type.LINK_BUTTON]: 'linkButtonData',
-  [rich_content.Node.Type.ACTION_BUTTON]: 'actionButtonData',
-  [rich_content.Node.Type.DIVIDER]: 'dividerData',
-  [rich_content.Node.Type.FILE]: 'fileData',
-  [rich_content.Node.Type.GALLERY]: 'galleryData',
-  [rich_content.Node.Type.GIPHY]: 'giphyData',
-  [rich_content.Node.Type.HTML]: 'htmlData',
-  [rich_content.Node.Type.IMAGE]: 'imageData',
-  [rich_content.Node.Type.ACCORDION]: 'accordionData',
-  [rich_content.Node.Type.LINK_PREVIEW]: 'linkPreviewData',
-  [rich_content.Node.Type.MAP]: 'mapData',
-  [rich_content.Node.Type.SOUND_CLOUD]: 'soundCloudData',
-  [rich_content.Node.Type.VERTICAL_EMBED]: 'verticalEmbedData',
-  [rich_content.Node.Type.VIDEO]: 'videoData',
-  [rich_content.Node.Type.POLL]: 'pollData',
-  [rich_content.Node.Type.TABLE]: 'tableData',
+  [Node_Type.LINK_BUTTON]: 'linkButtonData',
+  [Node_Type.ACTION_BUTTON]: 'actionButtonData',
+  [Node_Type.DIVIDER]: 'dividerData',
+  [Node_Type.FILE]: 'fileData',
+  [Node_Type.GALLERY]: 'galleryData',
+  [Node_Type.GIPHY]: 'giphyData',
+  [Node_Type.HTML]: 'htmlData',
+  [Node_Type.IMAGE]: 'imageData',
+  [Node_Type.ACCORDION]: 'accordionData',
+  [Node_Type.LINK_PREVIEW]: 'linkPreviewData',
+  [Node_Type.MAP]: 'mapData',
+  [Node_Type.SOUND_CLOUD]: 'soundCloudData',
+  [Node_Type.VERTICAL_EMBED]: 'verticalEmbedData',
+  [Node_Type.VIDEO]: 'videoData',
+  [Node_Type.POLL]: 'pollData',
+  [Node_Type.TABLE]: 'tableData',
+  [Node_Type.PARAGRAPH]: 'paragraphData',
+  [Node_Type.LIST_ITEM]: 'paragraphData',
+  [Node_Type.HEADING]: 'headingData',
+  [Node_Type.CODEBLOCK]: 'codeData',
+  [Node_Type.BLOCKQUOTE]: 'paragraphData',
 } as const;
 
 export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
@@ -144,10 +149,10 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.HeaderFive]: 'headingData',
   [BlockType.HeaderSix]: 'headingData',
   [BlockType.CodeBlock]: 'codeData',
-  [BlockType.Blockquote]: 'quoteData',
+  [BlockType.Blockquote]: 'paragraphData',
 };
 
-// rich_content.Node.Type.IMAGE: imageData
+// Node_Type.IMAGE: imageData
 const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = Object.fromEntries(
   Object.entries(TO_RICOS_NODE_TYPE).map(([key, value]) => [
     key,

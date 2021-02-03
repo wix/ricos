@@ -3,7 +3,7 @@
 
 import { transform, isEqualWith, isEqual, isObject, omit } from 'lodash';
 
-const IGNORED_KEYS = ['lastEdited'];
+const IGNORED_KEYS = ['updatedDate'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
 
 /**
@@ -35,7 +35,7 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
             {
               [key]: {
                 from: baseValue,
-                to: currentValue,
+                to: value,
               },
             },
             { depth: null }
