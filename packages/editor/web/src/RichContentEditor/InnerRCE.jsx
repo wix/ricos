@@ -12,16 +12,22 @@ import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-edi
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editing } = props;
+    const { innerRCERenderedIn, config } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
-    this.state = {
-      showToolbars: editing || false,
-    };
   }
 
+  selectAllContentWhenEnteringEditing = () => {
+    const { innerRCERenderedIn } = this.props;
+    return innerRCERenderedIn === 'table';
+  };
+
   componentDidUpdate(prevProps) {
-    if (prevProps.editing === false && prevProps.editing !== this.props.editing) {
+    if (
+      this.selectAllContentWhenEnteringEditing() &&
+      prevProps.editing === false &&
+      prevProps.editing !== this.props.editing
+    ) {
       this.handleAtomicPluginsBorders(true);
     }
   }
@@ -91,31 +97,11 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
-    if (!this.state.showToolbars) {
-      this.setState({ showToolbars: true });
-    }
-  };
-
-  onBlur = () => {
-    setTimeout(() => {
-      const target = document.activeElement;
-      if (
-        this.state.showToolbars &&
-        this.editorWrapper &&
-        target &&
-        !target.closest('[data-id=rich-content-editor-modal]') &&
-        !target.closest('[class=ReactModalPortal]') &&
-        !this.editorWrapper.contains(target)
-      ) {
-        this.setState({ showToolbars: false });
-      }
-    }, 100);
   };
 
   handleAtomicPluginsBorders = enterEditing => {
     const { editing = true } = this.props;
-    const { showToolbars } = this.state;
-    const hideBorder = !showToolbars || !editing;
+    const hideBorder = !editing;
     if (this.editorWrapper) {
       const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
       const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
@@ -141,7 +127,6 @@ class InnerRCE extends PureComponent {
       tablePluginMenu,
       ...rest
     } = this.props;
-    const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
     if (innerRCERenderedIn === TABLE_TYPE && isMobile) {
       toolbarsToIgnore.push('SideToolbar');
@@ -150,7 +135,6 @@ class InnerRCE extends PureComponent {
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
-        onBlur={this.onBlur}
         className={classNames(styles.editor, theme.editor, 'inner-rce')}
         ref={this.setEditorWrapper}
       >
@@ -163,7 +147,7 @@ class InnerRCE extends PureComponent {
           config={this.config}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
-          showToolbars={editing && showToolbars}
+          showToolbars={editing}
           isInnerRCE
           innerRCERenderedIn={innerRCERenderedIn}
           editorKey="inner-rce"
