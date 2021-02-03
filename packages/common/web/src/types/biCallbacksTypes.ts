@@ -1,6 +1,25 @@
+import { ToolbarType } from './toolbarEnums';
+interface biCallbackParams {
+  version?: string;
+}
+
+export enum EntryType {
+  PLUS = 'plusButton',
+  MORE = 'moreButton',
+  FOOTER = 'footerButton',
+  OTHER = '',
+}
+interface onPluginAddStepArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
+  entryPoint: ToolbarType;
+  entryType: EntryType;
+  step: string;
+}
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
   onPluginAddSuccess?(pluginId: string, entryPoint: string, version: string): void;
+  onPluginAddStep?(params: onPluginAddStepArgs): void;
   onPluginDelete?(pluginId: string, version: string): void;
   onPublish?(
     postId: string | undefined,

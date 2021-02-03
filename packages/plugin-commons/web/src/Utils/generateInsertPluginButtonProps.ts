@@ -16,7 +16,7 @@ import {
   Pubsub,
   EditorPluginConfig,
 } from 'wix-rich-content-common';
-import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
+import { EntryType, GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -53,6 +53,15 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
+  const onPluginAddStep = (pluginDetails: string) =>
+    helpers?.onPluginAddStep?.({
+      //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
+      entryType: toolbarName,
+      entryPoint: toolbarName,
+      pluginId: blockType,
+      pluginDetails,
+      step: '',
+    });
   const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
 
   function addBlock(data) {
@@ -99,6 +108,7 @@ export function generateInsertPluginButtonProps({
         break;
       case 'modal':
         toggleButtonModal(event);
+        onPluginAddStep('');
         break;
       case 'custom-block':
         addCustomBlock(button);
