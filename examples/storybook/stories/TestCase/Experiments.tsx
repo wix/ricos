@@ -9,7 +9,9 @@ export default () => {
     <Page title="Experiments API">
       <p>{'Type some text in the editor. Then press Cmd+Shift+7'}</p>
       <RichContentEditorBox preset="blog-preset">
-        <RicosEditor experiments={{ barrelRoll: 'True' }} />
+        <RicosEditor
+          experiments={{ barrelRoll: { value: 'True', enabled: true, namespace: 'ricos' } }}
+        />
       </RichContentEditorBox>
     </Page>
   );
