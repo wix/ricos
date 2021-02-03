@@ -25,7 +25,7 @@ const blockToImagesKeys = {
     if (!entity.data.config.disableExpand) return { [blockKey]: 1 };
   },
   [imageTypeLegacy]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: 1 };
+    if (!entity.data?.config?.disableExpand) return { [blockKey]: 1 };
   },
   [tableType]: entity => {
     let tableImagesKeys = {};
@@ -106,7 +106,7 @@ function convertEntryToGalleryItems(entry, index) {
   switch (entry.type) {
     case imageType:
     case imageTypeLegacy:
-      return entry.data.src && !entry?.data?.config.disableExpand
+      return entry.data.src && !entry?.data?.config?.disableExpand
         ? [imageEntryToGallery(entry.data, index)]
         : [];
     case galleryType: {
