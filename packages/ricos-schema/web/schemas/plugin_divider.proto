@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package rich_content;
 
-import "../common.proto";
+import "google/protobuf/wrappers.proto";
 
 message DividerData {
     enum DividerType {
@@ -12,7 +12,7 @@ message DividerData {
         DOTTED = 3;
     }
 
-    DividerType type = 1 [required = true];
+    DividerType type = 1;
     DividerConfig config = 2;
 }
 
@@ -31,5 +31,5 @@ message DividerConfig {
     
     DividerSize size = 1;
     DividerAlignment alignment = 2;
-    string text_wrap = 3;
+    google.protobuf.StringValue text_wrap = 3;
 }

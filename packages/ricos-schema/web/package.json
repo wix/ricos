@@ -17,12 +17,17 @@
   "files": [
     "dist"
   ],
-  "main": "dist/rich-content.js",
-  "types": "dist/rich-content.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "lint": ":",
     "clean": "rm -rf dist",
-    "build": "yarn clean && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateSchema.ts"
+    "prebuild": "yarn clean",
+    "generate": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateSchema.ts",
+    "buildESM": "tsc",
+    "buildCJS": "tsc --module commonjs --outDir dist/cjs",
+    "build": "yarn generate && yarn buildESM && yarn buildCJS"
   },
   "unpkg": true,
   "publishConfig": {
