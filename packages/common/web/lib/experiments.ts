@@ -1,4 +1,4 @@
-import { AvailableExperiments } from '../../src/types/commonTypes';
+import { AvailableExperiments } from '../src/types';
 
 export function parseExperiments(petriExperiments: Record<string, string>): AvailableExperiments {
   return Object.entries(petriExperiments).reduce((parsed, [key, value]) => {
