@@ -97,6 +97,7 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
+    this.props.onFocusCallback && this.props.onFocusCallback();
   };
 
   handleAtomicPluginsBorders = enterEditing => {
@@ -180,6 +181,7 @@ InnerRCE.propTypes = {
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
   tablePluginMenu: PropTypes.bool,
+  onFocusCallback: PropTypes.func,
 };
 
 export default InnerRCE;

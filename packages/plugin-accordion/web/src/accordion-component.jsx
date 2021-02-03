@@ -51,7 +51,7 @@ class AccordionComponent extends React.Component {
     }
   };
 
-  renderTitle = (idx, setRef, titleEditing) => {
+  renderTitle = (idx, setRef, titleEditing, onFocusCallback) => {
     return (
       <this.renderInput
         value={this.getDataManager().getTitle(idx)}
@@ -62,19 +62,24 @@ class AccordionComponent extends React.Component {
         handleReturn={this.handleTitleReturn(idx)}
         toolbarsToIgnore={['SideToolbar']}
         editing={titleEditing}
+        onFocusCallback={onFocusCallback}
       />
     );
   };
 
-  renderContent = (idx, setRef, contentEditing) => {
+  renderContent = (idx, setRef, contentEditing, onFocusCallback, removeContentEditing) => {
     return (
       <this.renderInput
         value={this.getDataManager().getContent(idx)}
         setRef={setRef}
         onChange={val => this.getDataManager().setContent(idx, val)}
         placeholder={this.contentPlaceholder}
-        onBackspaceAtBeginningOfContent={() => this.focusTitle(idx)}
+        onBackspaceAtBeginningOfContent={() => {
+          this.focusTitle(idx);
+          removeContentEditing();
+        }}
         editing={contentEditing}
+        onFocusCallback={onFocusCallback}
       />
     );
   };
@@ -88,6 +93,7 @@ class AccordionComponent extends React.Component {
     handleReturn,
     toolbarsToIgnore,
     editing,
+    onFocusCallback,
   }) => {
     const { renderInnerRCE } = this.props;
     const direction = this.getDataManager().getDirection();
@@ -108,6 +114,7 @@ class AccordionComponent extends React.Component {
       additionalProps,
       toolbarsToIgnore,
       editing,
+      onFocusCallback,
     });
   };
 

@@ -34,7 +34,7 @@ class AccordionPair extends Component {
     if (!titleElement.contains(e.target)) {
       this.setState({ titleEditing: false });
     }
-    if (!contentElement.contains(e.target)) {
+    if (this.props.isExpanded && !contentElement.contains(e.target)) {
       this.setState({ contentEditing: false });
     }
   };
@@ -46,12 +46,10 @@ class AccordionPair extends Component {
     const { titleEditing } = this.state;
 
     return (
-      <div
-        ref={this.setTitleRef}
-        onClick={() => this.setState({ titleEditing: true })}
-        className={this.styles.title}
-      >
-        {renderTitle(idx, this.titleEditorRef, titleEditing)}
+      <div ref={this.setTitleRef} className={this.styles.title}>
+        {renderTitle(idx, this.titleEditorRef, titleEditing, () =>
+          this.setState({ titleEditing: true })
+        )}
       </div>
     );
   };
@@ -64,12 +62,14 @@ class AccordionPair extends Component {
 
     return (
       isExpanded && (
-        <div
-          ref={this.setContentRef}
-          onClick={() => this.setState({ contentEditing: true })}
-          className={this.styles.content}
-        >
-          {renderContent(idx, this.contentEditorRef, contentEditing)}
+        <div ref={this.setContentRef} className={this.styles.content}>
+          {renderContent(
+            idx,
+            this.contentEditorRef,
+            contentEditing,
+            () => this.setState({ contentEditing: true }),
+            () => this.setState({ contentEditing: false })
+          )}
         </div>
       )
     );
