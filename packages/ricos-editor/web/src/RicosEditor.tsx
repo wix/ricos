@@ -23,7 +23,7 @@ The getContent(postId, isPublishing) API is deprecated and will be removed in ri
 
 interface State {
   StaticToolbar?: ElementType;
-  localeStrategy: { locale?: string; localeResource?: Record<string, string> };
+  localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
   editorState?: EditorState;
 }
@@ -37,22 +37,24 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange, props.content);
-    this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
+    this.state = { localeData: { locale: props.locale }, remountKey: false };
   }
 
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { locale, children, _rcProps } = this.props;
-    await localeStrategy(children?.props.locale || locale, _rcProps?.experiments).then(
-      localeData => {
-        this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
-      }
+    const { children, _rcProps } = this.props;
+    const { locale } = children?.props || this.props;
+    await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
+      this.setState({ localeData, remountKey: !this.state.remountKey })
     );
   };
 
   componentDidMount() {
-    this.updateLocale();
+    const { children } = this.props;
+    if ((children?.props.locale || this.props.locale) !== 'en') {
+      this.updateLocale();
+    }
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
@@ -159,7 +161,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
-    const { StaticToolbar, localeStrategy, remountKey, editorState } = this.state;
+    const { StaticToolbar, localeData, remountKey, editorState } = this.state;
 
     const contentProp = editorState
       ? { editorState: { editorState }, content: {} }
@@ -195,7 +197,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             setEditorToolbars: this.setStaticToolbar,
             ...contentProp.editorState,
             ...supportedDraftEditorSettings,
-            ...localeStrategy,
+            ...localeData,
           })}
         </RicosEngine>
       </Fragment>

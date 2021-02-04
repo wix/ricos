@@ -92,15 +92,21 @@ describe('RicosEditor', () => {
   //   });
   // });
   it('should call updateLocale on componentDidMount', () => {
-    const ricosEditor = getRicosEditorInstance() as RicosEditor;
+    const ricosEditor = getRicosEditorInstance({ locale: 'he' }) as RicosEditor;
     const spyUpdate = spyOn(ricosEditor, 'updateLocale');
     ricosEditor.componentDidMount();
     expect(spyUpdate.calls.count()).toEqual(1);
   });
+  it(`shouldn't call updateLocale on componentDidMount for locale = 'en'`, () => {
+    const ricosEditor = getRicosEditorInstance() as RicosEditor;
+    const spyUpdate = spyOn(ricosEditor, 'updateLocale');
+    ricosEditor.componentDidMount();
+    expect(spyUpdate.calls.count()).toEqual(0);
+  });
   it('should render localeStrategy in strategies', async () => {
     const ricosEditor = getRicosEditorInstance({ locale: 'he' }) as RicosEditor;
     await ricosEditor.updateLocale();
-    expect(ricosEditor.state.localeStrategy).toMatchObject({
+    expect(ricosEditor.state.localeData).toMatchObject({
       locale: 'he',
       localeResource: hebResource,
     });
