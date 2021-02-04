@@ -12,7 +12,7 @@ import {
 } from '../icons';
 
 const DEFAULT_PALETTE_BG = Object.freeze([
-  'transparent',
+  '#ff0000',
   '#ffffff',
   '#303030',
   '#3a54b4',
@@ -27,7 +27,7 @@ const DEFAULT_PALETTE_BORDERS = Object.freeze([
   '#bfad80',
   '#dddddd',
 ]);
-const DEFAULT_BG_COLOR = 'transparent';
+const DEFAULT_BG_COLOR = 'unset';
 const DEFAULT_BORDER_COLOR = 'unset';
 
 const getColorsFromComponentData = (selected, table) => {
