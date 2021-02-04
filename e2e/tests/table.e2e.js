@@ -11,7 +11,7 @@ describe('plugins', () => {
     beforeEach('load editor', () => {
       cy.eyesOpen({
         appName: 'Plugins',
-        testName: this.test.title,
+        testName: 'table',
         browser: DEFAULT_DESKTOP_BROWSERS,
       });
       cy.switchToDesktop();
