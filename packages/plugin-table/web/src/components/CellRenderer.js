@@ -138,7 +138,6 @@ export default class Cell extends Component {
       table,
       isMobile,
       disableSelectedStyle,
-      handleCellClipboardEvent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
@@ -179,8 +178,6 @@ export default class Cell extends Component {
           ...style,
           ...additionalStyles,
         }}
-        data-row={row}
-        data-col={col}
         onKeyDown={this.onKeydown}
       >
         <div
@@ -195,7 +192,6 @@ export default class Cell extends Component {
             selected={selected}
             contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
-            handleCellClipboardEvent={handleCellClipboardEvent}
           >
             {children}
           </Editor>
@@ -223,27 +219,21 @@ class Editor extends Component {
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
-  onKeydown = e => {
-    if (this.props.editing) {
-      const editorState = this.editor.ref.getEditorState();
-      this.props.handleCellClipboardEvent(e, editorState);
-    }
-  };
-
   setEditorRef = ref => {
     this.editor = ref;
     this.props.setEditorRef(ref);
   };
 
   render() {
-    const { children, editing } = this.props;
+    const { children, editing, selected } = this.props;
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div
-        className={classNames(styles.editor, editing ? styles.edit : styles.view)}
-        onKeyDown={this.onKeydown}
-      >
-        {React.cloneElement(children, { ref: this.setEditorRef, editing })}
+      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
+        {React.cloneElement(children, {
+          ref: this.setEditorRef,
+          editing,
+          readOnly: !editing && !selected,
+        })}
       </div>
     );
   }
@@ -255,7 +245,6 @@ Editor.propTypes = {
   children: PropTypes.any,
   contentState: PropTypes.object,
   setIsHighlighted: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  handleCellClipboardEvent: PropTypes.func,
 };
 Cell.propTypes = {
   t: PropTypes.func,
@@ -279,6 +268,5 @@ Cell.propTypes = {
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  handleCellClipboardEvent: PropTypes.func,
   onKeyDown: PropTypes.func,
 };
