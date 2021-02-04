@@ -138,21 +138,30 @@ export const createEditorCommands = (
   };
 
   const pluginsCommands = {
-    insertBlock: <K extends keyof PluginsDataMap>(type: K, config?: PluginsDataMap[K]) => {
+    insertBlock: <K extends keyof PluginsDataMap>(
+      type: K,
+      config?: PluginsDataMap[K],
+      forceSelection = true
+    ) => {
       const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config);
         if (data) {
           const { newSelection, newEditorState } = createBlock(getEditorState(), data, draftType);
-          setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+          setEditorState(
+            forceSelection
+              ? EditorState.forceSelection(newEditorState, newSelection)
+              : EditorState.acceptSelection(newEditorState, newSelection)
+          );
         }
       }
     },
     updateBlock: <K extends keyof PluginsDataMap>(
       blockKey: string,
       type: K,
-      config?: PluginsDataMap[K]
+      config?: PluginsDataMap[K],
+      forceSelection = true
     ) => {
       const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
@@ -160,7 +169,12 @@ export const createEditorCommands = (
         const data = createPluginData(config, editorState.getSelectedBlockData());
         if (data) {
           const newEditorState = updateEntityData(getEditorState(), blockKey, data);
-          setEditorState(EditorState.forceSelection(newEditorState, newEditorState.getSelection()));
+          const newSelection = newEditorState.getSelection();
+          setEditorState(
+            forceSelection
+              ? EditorState.forceSelection(newEditorState, newSelection)
+              : EditorState.acceptSelection(newEditorState, newSelection)
+          );
         }
       }
     },

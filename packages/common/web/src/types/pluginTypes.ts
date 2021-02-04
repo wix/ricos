@@ -92,7 +92,6 @@ export type CreatePluginData<PluginData> = (
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Record<string, any> | undefined;
 
-// TODO: remove legacy types after moving to prose
 export interface CreatePluginsDataMap {
   [RICOS_DIVIDER_TYPE]?: CreatePluginData<DividerData>;
   [DIVIDER_TYPE]?: CreatePluginData<DividerData>;

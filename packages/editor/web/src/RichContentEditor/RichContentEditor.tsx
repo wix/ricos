@@ -241,10 +241,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.initContext();
     this.initPlugins();
     this.initEditorCommands();
-    if (typeof window !== 'undefined') {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (window as any).editor = this;
-    }
   }
 
   componentDidUpdate() {
