@@ -147,6 +147,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   localeResource?: Record<string, string>;
   maxTextLength?: number;
   experiments?: AvailableExperiments;
+  disableKeyboardEvents?: (shouldEnable: boolean) => void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
