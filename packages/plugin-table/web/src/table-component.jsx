@@ -27,6 +27,7 @@ class TableComponent extends React.Component {
     this.innerEditorsRefs = {};
     this.table = new Table(props.componentData, this.updateComponentData);
     this.tableRef = createRef();
+    this.tableContainer = createRef();
     this.dragPreview = createRef();
     this.rowDragProps = {
       onDragClick: selected => this.selectRows(selected, true),
@@ -414,6 +415,7 @@ class TableComponent extends React.Component {
         data-hook="TableComponent"
         onFocus={this.onFocus}
         tabIndex="0"
+        ref={this.tableContainer}
       >
         {!isMobile && (
           <TableToolbar
@@ -500,6 +502,9 @@ class TableComponent extends React.Component {
             onClear={this.table.clearCells}
             setCellContent={this.setCellContent}
             onPaste={this.onPaste}
+            tableOverflowWidth={
+              this.tableRef.current?.offsetWidth - this.tableContainer.current?.offsetWidth
+            }
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>

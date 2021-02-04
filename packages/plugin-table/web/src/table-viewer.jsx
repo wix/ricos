@@ -49,6 +49,7 @@ class TableViewer extends Component {
         selected={this.props.selected}
         isEditMode={this.props.isEditMode}
         isEditingActive={this.props.isEditingActive}
+        tableOverflowWidth={this.props.tableOverflowWidth}
       />
     );
   };
@@ -161,6 +162,7 @@ TableViewer.propTypes = {
   setCellContent: PropTypes.func,
   onClear: PropTypes.func,
   onPaste: PropTypes.func,
+  tableOverflowWidth: PropTypes.number,
 };
 
 export default TableViewer;
