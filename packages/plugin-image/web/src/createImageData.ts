@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './consts';
 import { CreatePluginsDataMap, RICOS_IMAGE_TYPE, Node_Type } from 'wix-rich-content-common';
-import { convertNodeDataToDraft } from 'ricos-content/libs/migrateSchema';
+import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createImageData: CreatePluginsDataMap[typeof RICOS_IMAGE_TYPE] = (
   pluginData,

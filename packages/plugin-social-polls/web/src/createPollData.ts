@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { DEFAULT_COMPONENT_DATA } from './defaults';
 import { CreatePluginsDataMap, RICOS_POLL_TYPE, Node_Type } from 'wix-rich-content-common';
-import { convertNodeDataToDraft } from 'ricos-content/libs/migrateSchema';
+import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createPollData: CreatePluginsDataMap[typeof RICOS_POLL_TYPE] = (
   pluginData,

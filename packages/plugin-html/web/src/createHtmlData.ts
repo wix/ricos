@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { defaults } from './defaults';
 import { CreatePluginsDataMap, RICOS_HTML_TYPE, Node_Type } from 'wix-rich-content-common';
-import { convertNodeDataToDraft } from 'ricos-content/libs/migrateSchema';
+import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createHtmlData: CreatePluginsDataMap[typeof RICOS_HTML_TYPE] = (
   pluginData,

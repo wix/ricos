@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { DEFAULTS } from './defaultSettings';
 import { CreatePluginsDataMap, RICOS_MENTION_TYPE, Decoration_Type } from 'wix-rich-content-common';
-import { convertDecorationDataToDraft } from 'ricos-content/libs/migrateSchema';
+import { convertDecorationDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createMentionData: CreatePluginsDataMap[typeof RICOS_MENTION_TYPE] = (
   pluginData,
