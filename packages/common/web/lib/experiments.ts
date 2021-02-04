@@ -1,11 +1,13 @@
 import { AvailableExperiments } from '../src/types';
 
-export function parseExperiments(petriExperiments: Record<string, string>): AvailableExperiments {
-  return Object.entries(petriExperiments).reduce((parsed, [key, value]) => {
+export function parseExperiments(
+  wixExperiments: Record<string, string | boolean>
+): AvailableExperiments {
+  return Object.entries(wixExperiments).reduce((parsed, [key, value]) => {
     // splits specs.namespace.name to elements
     const [, namespace, name] = key.split('.');
     parsed[name] = {
-      enabled: value === 'True',
+      enabled: value.toString().toLowerCase() === 'true',
       value,
       namespace,
     };
