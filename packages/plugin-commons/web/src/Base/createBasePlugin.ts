@@ -93,7 +93,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   noPointerEventsOnFocus?: boolean;
   withHorizontalScroll?: boolean;
   innerRCERenderedIn?: string;
-  disableKeyboardEvents?: (boolean) => void;
+  disableKeyboardEvents?: (shouldEnable: boolean) => void;
 }
 
 const createBasePlugin = (
