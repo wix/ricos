@@ -12,7 +12,7 @@ import {
 } from '../icons';
 
 const DEFAULT_PALETTE_BG = Object.freeze([
-  'transparent',
+  '#ff0000',
   '#ffffff',
   '#303030',
   '#3a54b4',
