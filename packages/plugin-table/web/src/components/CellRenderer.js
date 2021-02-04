@@ -151,7 +151,10 @@ export default class Cell extends Component {
     const Tag = isContainedInHeader ? 'th' : 'td';
     const Selection = this.editorRef && isEditing && table.getCellContent(row, col).getSelection();
     const showFormattingToolbar =
-      this.editorRef && isEditing && !Selection.isCollapsed() && Selection.getHasFocus();
+      this.editorRef &&
+      isEditing &&
+      ((!Selection.isCollapsed() && Selection.getHasFocus()) ||
+        (document && document.querySelector('[data-id="rich-content-editor-modal"]')));
     if (showFormattingToolbar) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(toolbarButtons);
     } else if (isEditing) {
