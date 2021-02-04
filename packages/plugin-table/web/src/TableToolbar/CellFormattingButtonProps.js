@@ -27,7 +27,7 @@ const DEFAULT_PALETTE_BORDERS = Object.freeze([
   '#bfad80',
   '#dddddd',
 ]);
-const DEFAULT_BG_COLOR = 'unset';
+const DEFAULT_BG_COLOR = 'transparent';
 const DEFAULT_BORDER_COLOR = 'unset';
 
 const getColorsFromComponentData = (selected, table) => {
