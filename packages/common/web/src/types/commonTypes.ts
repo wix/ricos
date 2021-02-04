@@ -94,6 +94,7 @@ export interface EditorContextType extends CommonContextType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderInnerRCE: (params: any) => JSX.Element;
   innerRCERenderedIn?: string;
+  disableKeyboardEvents?: (shouldEnable: boolean) => void;
 }
 
 export interface ViewerContextType extends CommonContextType {

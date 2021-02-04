@@ -150,6 +150,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   localeResource?: Record<string, string>;
   maxTextLength?: number;
   experiments?: AvailableExperiments;
+  disableKeyboardEvents?: (shouldEnable: boolean) => void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -161,6 +162,7 @@ interface State {
   theme?: RichContentTheme;
   textToolbarType?: TextToolbarType;
   error?: string;
+  readOnly: boolean;
 }
 
 // experiment example code
@@ -226,6 +228,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
+      readOnly: false,
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -421,7 +424,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
+      disableKeyboardEvents: this.disableKeyboardEvents,
     };
+  };
+
+  disableKeyboardEvents = shouldDisable => {
+    if (!this.props.isInnerRCE && shouldDisable !== this.state.readOnly) {
+      this.setState({ readOnly: shouldDisable });
+    }
   };
 
   getEditorBounds = () => this.state.editorBounds;
@@ -840,7 +850,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={readOnly}
+        readOnly={readOnly || this.state.readOnly}
       />
     );
   };

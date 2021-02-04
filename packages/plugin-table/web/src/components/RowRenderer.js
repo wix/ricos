@@ -8,7 +8,7 @@ class RowRenderer extends PureComponent {
     const { row, children, getRowHeight } = this.props;
     const height = getRowHeight(row);
     return (
-      <tr data-row={row} style={{ height }} ref={this.setRef}>
+      <tr style={{ height }} ref={this.setRef}>
         {children}
       </tr>
     );
