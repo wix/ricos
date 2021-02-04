@@ -14,7 +14,7 @@ interface onPluginAddStepArgs extends biCallbackParams {
   pluginDetails: unknown;
   entryPoint: ToolbarType;
   entryType: EntryType;
-  step: string;
+  step: 'FileUploadDialog' | 'PluginModal';
 }
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;

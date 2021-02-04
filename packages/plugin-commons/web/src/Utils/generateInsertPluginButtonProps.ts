@@ -16,7 +16,7 @@ import {
   Pubsub,
   EditorPluginConfig,
 } from 'wix-rich-content-common';
-import { EntryType, GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
+import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -53,14 +53,14 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
-  const onPluginAddStep = (pluginDetails: string) =>
+  const onPluginAddStep = (step: string) =>
     helpers?.onPluginAddStep?.({
       //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryType: toolbarName,
       entryPoint: toolbarName,
       pluginId: blockType,
-      pluginDetails,
-      step: '',
+      pluginDetails: '',
+      step,
     });
   const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
 
@@ -105,10 +105,11 @@ export function generateInsertPluginButtonProps({
     switch (button.type) {
       case 'file':
         toggleFileSelection();
+        onPluginAddStep('FileUpload');
         break;
       case 'modal':
         toggleButtonModal(event);
-        onPluginAddStep('');
+        onPluginAddStep('PluginModal');
         break;
       case 'custom-block':
         addCustomBlock(button);
