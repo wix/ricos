@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package rich_content;
-
-import "../common.proto";
-
-message AnchorData {
-    string anchor = 1 [required = true];
-}

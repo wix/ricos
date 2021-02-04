@@ -24,8 +24,8 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
+    const { locale, children, experiments } = this.props;
+    await localeStrategy(children?.props.locale || locale, experiments).then(localeData => {
       this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
     });
   };
