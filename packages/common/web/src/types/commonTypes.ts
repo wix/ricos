@@ -105,3 +105,11 @@ export interface ViewerContextType extends CommonContextType {
   contentState?: RicosContent;
   textAlignment?: 'left' | 'right';
 }
+
+export type Experiment = {
+  value: string;
+  enabled: boolean;
+  namespace: string;
+};
+
+export type AvailableExperiments = Record<string, Experiment>;
