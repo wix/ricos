@@ -19,15 +19,11 @@ describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
   context('table', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
     beforeEach('load editor', () => {
+      eyesOpen(this);
       cy.switchToDesktop();
     });
-
-    after(() => cy.eyesClose());
+    afterEach(() => cy.eyesClose());
 
     it('should open table modal and create table by the settings', function() {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.table));
