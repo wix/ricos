@@ -4,23 +4,16 @@ import { TABLE_PLUGIN } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
 
-const eyesOpen = ({
-  test: {
-    parent: { title },
-  },
-}) =>
-  cy.eyesOpen({
-    appName: 'Plugins',
-    testName: title,
-    browser: DEFAULT_DESKTOP_BROWSERS,
-  });
-
 describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
   context('table', () => {
     beforeEach('load editor', () => {
-      eyesOpen(this);
+      cy.eyesOpen({
+        appName: 'Plugins',
+        testName: this.test.title,
+        browser: DEFAULT_DESKTOP_BROWSERS,
+      });
       cy.switchToDesktop();
     });
     afterEach(() => cy.eyesClose());
