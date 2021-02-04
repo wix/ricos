@@ -214,7 +214,7 @@ export class GallerySettingsModal extends Component {
   tabName(tab, t) {
     /* eslint-disable camelcase */
     return {
-      manage_media: t('GallerySettings_Tab_ManageMedia'),
+      manage_media: t('GalleryPlugin_Settings_Tab_ManageMedia'),
       advanced_settings: t('GallerySettings_Tab_AdvancedSettings'),
       settings: t('GallerySettings_Tab_Settings'),
     }[tab];
@@ -246,7 +246,7 @@ export class GallerySettingsModal extends Component {
   renderToggle = ({ toggleKey, labelKey }) => {
     if (toggleKey === 'isRightClickEnabled') {
       return (
-        <React.Fragment>
+        <>
           <LabeledToggle
             theme={this.props.theme}
             checked={this.state[toggleKey]}
@@ -256,9 +256,9 @@ export class GallerySettingsModal extends Component {
           <InfoIcon
             theme={this.props.theme}
             isNotification
-            tooltipText={this.props.t('GallerySettings_Images_CanBeDownloaded_Tooltip')}
+            tooltipText={this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip')}
           />
-        </React.Fragment>
+        </>
       );
     }
     return (
@@ -274,11 +274,11 @@ export class GallerySettingsModal extends Component {
   toggleData = [
     {
       toggleKey: 'isExpandEnabled',
-      labelKey: 'GallerySettings_Images_OpenInExpandMode_Label',
+      labelKey: 'GalleryPlugin_Settings_ImagesOpenInExpandMode_Label',
     },
     {
       toggleKey: 'isRightClickEnabled',
-      labelKey: 'GallerySettings_Images_CanBeDownloaded_Label',
+      labelKey: 'GalleryPlugin_Settings_ImagesCanBeDownloaded_Label',
     },
   ];
 
@@ -315,7 +315,7 @@ export class GallerySettingsModal extends Component {
           className={styles.gallerySettings}
           dir={languageDir}
         >
-          <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          <div className={styles.gallerySettings_title}>{t('GalleryPlugin_Settings_Header')}</div>
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab
@@ -348,13 +348,22 @@ export class GallerySettingsModal extends Component {
                   t={t}
                 />
               </Tab>
-              <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
-                {this.toggleData.map(toggle => (
-                  <div key={toggle.toggleKey} className={styles.galleryImageSettings_toggleWrapper}>
-                    {this.renderToggle(toggle)}
-                  </div>
-                ))}
-              </Tab>
+              <div>
+                <Tab
+                  label={this.tabName('settings', t)}
+                  value={'settings'}
+                  theme={this.props.theme}
+                >
+                  {this.toggleData.map(toggle => (
+                    <div
+                      key={toggle.toggleKey}
+                      className={styles.galleryImageSettings_toggleWrapper}
+                    >
+                      {this.renderToggle(toggle)}
+                    </div>
+                  ))}
+                </Tab>
+              </div>
             </Tabs>
           </div>
           <SettingsPanelFooter
