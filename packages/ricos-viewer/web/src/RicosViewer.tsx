@@ -7,7 +7,7 @@ import { RicosViewerProps } from './index';
 
 interface State {
   isPreviewExpanded: boolean;
-  localeStrategy: { locale?: string; localeResource?: Record<string, string> };
+  localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
 }
 
@@ -16,7 +16,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     super(props);
     this.state = {
       isPreviewExpanded: false,
-      localeStrategy: { locale: props.locale },
+      localeData: { locale: props.locale },
       remountKey: false,
     };
   }
@@ -24,16 +24,17 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { locale, children, _rcProps } = this.props;
-    await localeStrategy(children?.props.locale || locale, _rcProps?.experiments).then(
-      localeData => {
-        this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
-      }
+    const { children, _rcProps } = this.props;
+    const { locale } = children?.props || this.props;
+    await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
+      this.setState({ localeData, remountKey: !this.state.remountKey })
     );
   };
 
   componentDidMount() {
+    // if (this.props.locale !== this.state.localeData.locale) {
     this.updateLocale();
+    // }
   }
 
   componentWillReceiveProps(newProps: RicosViewerProps) {
@@ -46,7 +47,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
 
   render() {
     const { children, seoSettings, ...props } = this.props;
-    const { isPreviewExpanded, remountKey, localeStrategy } = this.state;
+    const { isPreviewExpanded, remountKey, localeData } = this.state;
     const child =
       children && shouldRenderChild('RichContentViewer', children) ? (
         children
@@ -64,7 +65,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
       >
         {React.cloneElement(child, {
           seoMode: seoSettings,
-          ...localeStrategy,
+          ...localeData,
         })}
       </RicosEngine>
     );
