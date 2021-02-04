@@ -228,10 +228,7 @@ class Editor extends Component {
     const { children, editing, selected } = this.props;
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div
-        className={classNames(styles.editor, editing ? styles.edit : styles.view)}
-        data-id={'cell-editor'}
-      >
+      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
         {React.cloneElement(children, {
           ref: this.setEditorRef,
           editing,

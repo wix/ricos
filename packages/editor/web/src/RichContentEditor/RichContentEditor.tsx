@@ -158,6 +158,7 @@ interface State {
   theme?: RichContentTheme;
   textToolbarType?: TextToolbarType;
   error?: string;
+  readOnly: boolean;
 }
 
 // experiment example code
@@ -189,7 +190,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   customStyleFn: DraftEditorProps['customStyleFn'];
   toolbars;
   innerRCECustomStyleFn;
-  readOnly: boolean;
   getSelectedText: (editorState: EditorState) => string;
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
@@ -223,6 +223,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
+      readOnly: false,
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -418,8 +419,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   disableKeyboardEvents = shouldDisable => {
-    if (!this.props.isInnerRCE) {
-      this.readOnly = shouldDisable;
+    if (!this.props.isInnerRCE && shouldDisable !== this.state.readOnly) {
+      this.setState({ readOnly: shouldDisable });
     }
   };
 
@@ -830,7 +831,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={readOnly || this.readOnly}
+        readOnly={readOnly || this.state.readOnly}
       />
     );
   };
