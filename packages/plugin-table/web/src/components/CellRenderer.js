@@ -149,11 +149,12 @@ export default class Cell extends Component {
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
-    const reactModalElement = document.querySelector('[data-id="rich-content-editor-modal"]');
     const Selection = this.editorRef && isEditing && table.getCellContent(row, col).getSelection();
     const showFormattingToolbar =
-      (this.editorRef && isEditing && !Selection.isCollapsed() && Selection.getHasFocus()) ||
-      (this.editorRef && isEditing && reactModalElement);
+      this.editorRef &&
+      isEditing &&
+      ((!Selection.isCollapsed() && Selection.getHasFocus()) ||
+        (document && document.querySelector('[data-id="rich-content-editor-modal"]')));
     if (showFormattingToolbar) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(toolbarButtons);
     } else if (isEditing) {
