@@ -81,7 +81,6 @@ class TableViewer extends Component {
       selected = {},
       disableSelectedStyle,
       t,
-      handleCellClipboardEvent,
     } = this.props;
     return (
       <CellRenderer
@@ -96,7 +95,6 @@ class TableViewer extends Component {
         isMobile={isMobile}
         disableSelectedStyle={disableSelectedStyle}
         t={t}
-        handleCellClipboardEvent={handleCellClipboardEvent}
       />
     );
   };
@@ -151,7 +149,6 @@ TableViewer.propTypes = {
   isEditMode: PropTypes.bool,
   t: PropTypes.func,
   disableSelectedStyle: PropTypes.bool,
-  handleCellClipboardEvent: PropTypes.func,
   colDragProps: PropTypes.object,
   onResize: PropTypes.func,
   onResizeStart: PropTypes.func,

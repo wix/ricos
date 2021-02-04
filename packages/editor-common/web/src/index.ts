@@ -81,9 +81,7 @@ export {
   cloneDeepWithoutEditorState,
   getEntities,
   isCursorAtStartOfContent,
-  isCursorAtEndOfContent,
   isCursorAtFirstLine,
-  isCursorAtLastLine,
   selectAllContent,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';

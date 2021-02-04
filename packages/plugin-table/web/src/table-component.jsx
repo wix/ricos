@@ -7,13 +7,14 @@ import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
 import { getRange, getRowsRange, getColsRange } from './domain/tableDataUtil';
-import { createEmptyCellEditor, handleCellClipboardEvent } from './tableUtil';
+import { createEmptyCellEditor } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { isEmpty, isNumber } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
+
 class TableComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -81,7 +82,10 @@ class TableComponent extends React.Component {
     this.setSelected(selected, disableSelectedStyle);
   };
 
-  setEditingActive = isEditingActive => this.setState({ isEditingActive });
+  setEditingActive = isEditingActive => {
+    this.props.disableKeyboardEvents(isEditingActive);
+    this.setState({ isEditingActive });
+  };
 
   getCellEditorRef = (i, j) => this.innerEditorsRefs[`${i}-${j}`];
 
@@ -491,7 +495,6 @@ class TableComponent extends React.Component {
               this.table.getSelectedRows(range)
             }
             t={t}
-            handleCellClipboardEvent={handleCellClipboardEvent}
             colDragProps={this.colDragProps}
             onResize={this.onResizeCol}
             onResizeStart={this.setSelected}
@@ -534,6 +537,7 @@ TableComponent.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
+  disableKeyboardEvents: PropTypes.func,
 };
 
 export { TableComponent as Component };
