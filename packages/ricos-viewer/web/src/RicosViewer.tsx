@@ -33,10 +33,8 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   };
 
   componentDidMount() {
+    this.updateLocale();
     const { children } = this.props;
-    if ((children?.props.locale || this.props.locale) !== 'en') {
-      this.updateLocale();
-    }
     const onViewerLoaded =
       children?.props.helpers?.onViewerLoaded || this.props._rcProps?.helpers?.onViewerLoaded;
     const isPreview = children?.props.helpers?.isPreview || this.props._rcProps?.helpers?.isPreview;

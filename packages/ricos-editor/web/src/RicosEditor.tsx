@@ -51,10 +51,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   componentDidMount() {
+    this.updateLocale();
     const { children } = this.props;
-    if ((children?.props.locale || this.props.locale) !== 'en') {
-      this.updateLocale();
-    }
     const onOpenEditorSuccess =
       children?.props.helpers?.onOpenEditorSuccess ||
       this.props._rcProps?.helpers?.onOpenEditorSuccess;
