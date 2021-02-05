@@ -1,4 +1,4 @@
-$TITLE_HEIGHT: 100px;
+$TITLE_HEIGHT: 70px;
 $FOOTER_HEIGHT: 100px;
 $MOBILE_HEADER_HEIGHT: 50px;
 .imageSettings {
@@ -11,12 +11,14 @@ $MOBILE_HEADER_HEIGHT: 50px;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  box-sizing: border-box;
+
 }
 
 .imageSettingsTitle {
   position: absolute;
-  margin: 46px 0 27px 30px;
-  font-size: 18px;
+  margin: 24px 0 24px 24px;
+  font-size: 20px;
 }
 
 .imageSettingsImage {
@@ -27,17 +29,47 @@ $MOBILE_HEADER_HEIGHT: 50px;
 }
 
 .imageSettingsSection {
-  padding: 20px 30px 0 30px;
+  position: relative;
+  padding: 20px 0px 0 0px;
   font-size: 14px;
+  label{
+    line-height: 20px;
+  }
+  label div span {
+    margin-bottom: 8px;
+    margin-right: 4px;
+  }
+  input {
+    height: 40px;
+  }
+  svg{
+    position: absolute;
+    left: 48px;
+    top:16px;
+    height: 24px;
+  }
 }
 
 .imageSettingsLabel {
   margin-bottom: 5px;
 }
-
 .imageSettings_scrollContainer {
   margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
   width: 100%;
+  box-sizing:inherit;
+  padding: 0 24px;
+}
+.imageSettings_toggleContainer{
+  position: relative;
+  svg{
+    position: absolute;
+    top: 22px;
+    left: 170px;
+    height: 24px;
+  }
+}
+.imageSettings_togglesContainer{
+  margin-bottom: 4px;
 }
 
 .imageSettings_mobile {

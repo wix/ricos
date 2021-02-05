@@ -231,7 +231,7 @@ class ImageViewer extends React.Component {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.('expand_image', IMAGE_TYPE);
-    onExpand?.(this.props.entityIndex);
+    onExpand?.(this.props.blockKey);
   };
 
   scrollToAnchor = () => {
@@ -266,7 +266,7 @@ class ImageViewer extends React.Component {
       e.preventDefault();
       this.scrollToAnchor();
     } else {
-      this.handleExpand(e);
+      !this.props.componentData.config.disableExpand && this.handleExpand(e);
     }
   };
 
@@ -276,7 +276,7 @@ class ImageViewer extends React.Component {
     }
   };
 
-  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.componentData.config.disableRightClick && e.preventDefault();
 
   renderExpandIcon = () => {
     return (
@@ -291,9 +291,10 @@ class ImageViewer extends React.Component {
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
-    const { metadata = {} } = componentData;
+    const { metadata = {}, config } = componentData;
+    const disableExpand = settings.disableExpand || config.disableExpand;
 
-    const hasExpand = !settings.disableExpand && settings.onExpand;
+    const hasExpand = !disableExpand && settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -310,7 +311,7 @@ class ImageViewer extends React.Component {
     setComponentUrl?.(imageSrc?.highres);
     const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
-    const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
+    const accessibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
@@ -320,7 +321,7 @@ class ImageViewer extends React.Component {
         onKeyDown={this.onKeyDown}
         ref={this.handleRef}
         onContextMenu={this.handleContextMenu}
-        {...accesibilityProps}
+        {...accessibilityProps}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {shouldRenderPreloadImage &&
@@ -354,6 +355,7 @@ ImageViewer.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
   seoMode: PropTypes.bool,
+  blockKey: PropTypes.string,
 };
 
 export default ImageViewer;

@@ -8,14 +8,22 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
+  LabeledToggle,
 } from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
+import { InfoIcon } from 'wix-rich-content-editor-common';
 
 class ImageSettings extends Component {
   constructor(props) {
     super(props);
-    this.state = this.propsToState(props);
+    const { componentData } = this.props;
+
+    this.state = {
+      ...this.propsToState(props),
+      isExpandEnabled: !componentData.config.disableExpand,
+      isRightClickEnabled: !componentData.config.disableRightClick,
+    };
     this.initialState = { ...this.state };
     const { t, theme } = props;
     this.styles = mergeStyles({ styles, theme });
@@ -26,9 +34,8 @@ class ImageSettings extends Component {
     this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
+    this.imgCanBeDownloadedTooltip = 'ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
-    this.linkRedirectTextLabel = t('ImageSettings_Link_Label');
-    this.linkRedirectText = t('ImageSettings_Link_RedirectToToolbar');
   }
 
   propsToState(props) {
@@ -41,6 +48,55 @@ class ImageSettings extends Component {
       error,
     };
   }
+
+  toggleState = key => () => {
+    this.setState(prevState => ({
+      [key]: !prevState[key],
+    }));
+  };
+
+  renderToggle = ({ toggleKey, labelKey }) => {
+    if (toggleKey === 'isRightClickEnabled') {
+      return (
+        <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
+          <LabeledToggle
+            style={{ paddingTop: 24 }}
+            theme={this.props.theme}
+            checked={this.state[toggleKey]}
+            label={this.props.t(labelKey)}
+            onChange={this.toggleState(toggleKey)}
+            dataHook="imageRightClickToggle"
+          />
+          <InfoIcon
+            isNotification
+            theme={this.props.theme}
+            tooltipText={this.imgCanBeDownloadedTooltip}
+          />
+        </div>
+      );
+    }
+    return (
+      <LabeledToggle
+        key={toggleKey}
+        theme={this.props.theme}
+        checked={this.state[toggleKey]}
+        label={this.props.t(labelKey)}
+        onChange={this.toggleState(toggleKey)}
+        dataHook="imageExpandToggle"
+      />
+    );
+  };
+
+  toggleData = [
+    {
+      toggleKey: 'isExpandEnabled',
+      labelKey: 'ImagePlugin_Settings_ImageOpensInExpandMode_Label',
+    },
+    {
+      toggleKey: 'isRightClickEnabled',
+      labelKey: 'ImagePlugin_Settings_ImageCanBeDownloaded_Label',
+    },
+  ];
 
   componentDidMount() {
     this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
@@ -76,10 +132,20 @@ class ImageSettings extends Component {
   };
 
   onDoneClick = () => {
-    const { helpers } = this.props;
+    const { helpers, componentData, pubsub } = this.props;
+    const newComponentData = {
+      ...componentData,
+      config: {
+        ...componentData.config,
+        disableExpand: !this.state.isExpandEnabled,
+        disableRightClick: !this.state.isRightClickEnabled,
+      },
+    };
     if (this.state.metadata) {
       this.addMetadataToBlock();
     }
+    pubsub.update('componentData', newComponentData);
+
     helpers.closeModal();
   };
 
@@ -88,7 +154,6 @@ class ImageSettings extends Component {
   render() {
     const { helpers, theme, t, isMobile, languageDir } = this.props;
     const { src, error, metadata = {} } = this.state;
-
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
         {isMobile ? (
@@ -160,21 +225,22 @@ class ImageSettings extends Component {
               id="imageSettingsAltInput"
               label={this.altLabel}
               placeholder={this.altInputPlaceholder}
-              tooltipTextKey={this.altTooltip}
               t={t}
               value={metadata.alt || ''}
               onChange={alt => this.metadataUpdated(metadata, { alt })}
               dataHook="imageSettingsAltInput"
               isMobile={isMobile}
             />
+            <InfoIcon isNotification theme={this.props.theme} tooltipText={this.altTooltip} />
           </SettingsSection>
           <SettingsSection
             theme={theme}
-            className={this.styles.imageSettingsSection}
+            className={this.styles.imageSettings_togglesContainer}
             ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
           >
-            <div className={this.styles.imageSettingsLabel}>{this.linkRedirectTextLabel}</div>
-            <div>{this.linkRedirectText}</div>
+            <div className={this.styles.imageSettingsLabel}>
+              {this.toggleData.map(toggle => this.renderToggle(toggle))}
+            </div>
           </SettingsSection>
         </div>
         {isMobile ? null : (
