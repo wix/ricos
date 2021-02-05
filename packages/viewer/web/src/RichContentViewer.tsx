@@ -157,8 +157,6 @@ class RichContentViewer extends Component<
 
   componentDidMount() {
     this.reportDebuggingInfo();
-    const { onViewerLoaded, isPreview } = this.props.helpers || {};
-    onViewerLoaded?.(!!isPreview?.(), Version.currentVersion);
   }
 
   reportDebuggingInfo() {

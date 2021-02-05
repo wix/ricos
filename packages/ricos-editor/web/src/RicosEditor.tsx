@@ -15,7 +15,7 @@ import {
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
 import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
-import { ToolbarType } from 'wix-rich-content-common';
+import { ToolbarType, Version } from 'wix-rich-content-common';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -55,6 +55,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if ((children?.props.locale || this.props.locale) !== 'en') {
       this.updateLocale();
     }
+    const onOpenEditorSuccess =
+      children?.props.helpers?.onOpenEditorSuccess ||
+      this.props._rcProps?.helpers?.onOpenEditorSuccess;
+    onOpenEditorSuccess?.(Version.currentVersion);
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 

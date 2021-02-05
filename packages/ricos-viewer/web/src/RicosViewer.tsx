@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
+import { Version } from 'wix-rich-content-common';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
@@ -36,6 +37,10 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     if ((children?.props.locale || this.props.locale) !== 'en') {
       this.updateLocale();
     }
+    const onViewerLoaded =
+      children?.props.helpers?.onViewerLoaded || this.props._rcProps?.helpers?.onViewerLoaded;
+    const isPreview = children?.props.helpers?.isPreview || this.props._rcProps?.helpers?.isPreview;
+    onViewerLoaded?.(!!isPreview?.(), Version.currentVersion);
   }
 
   componentWillReceiveProps(newProps: RicosViewerProps) {
