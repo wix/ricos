@@ -26,7 +26,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
 
   updateLocale = async () => {
     const { children, _rcProps } = this.props;
-    const { locale } = children?.props || this.props;
+    const locale = children?.props.locale || this.props.locale;
     await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
       this.setState({ localeData, remountKey: !this.state.remountKey })
     );
