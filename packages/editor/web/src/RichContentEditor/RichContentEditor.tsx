@@ -184,7 +184,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
   editorWrapper: Element;
   copySource: { unregister(): void };
-  updateBounds: (editorBounds?: BoundingRect) => void;
   plugins;
   focusedBlockKey: string;
   pluginKeyBindings;
@@ -251,17 +250,13 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
-  componentWillMount() {
-    this.updateBounds = (editorBounds?: BoundingRect) => {
-      this.setState({ editorBounds });
-    };
+  componentWillUnmount() {
+    this.onResize.cancel();
+    this.copySource?.unregister();
   }
 
-  componentWillUnmount() {
-    this.updateBounds = () => '';
-    if (this.copySource) {
-      this.copySource.unregister();
-    }
+  updateBounds(editorBounds?: BoundingRect) {
+    this.setState({ editorBounds });
   }
 
   // imports dynamic chunks conditionally
