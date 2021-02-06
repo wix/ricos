@@ -23,14 +23,13 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
-  getEntities,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
-import { isContentChanged } from '../is-content-changed';
 import {
+  AvailableExperiments,
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
@@ -123,10 +122,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   style?: CSSProperties;
   locale: string;
   shouldRenderOptimizedImages?: boolean;
-  onChange?(
-    editorState: EditorState,
-    contentTraits?: { isEmpty: boolean; isContentChanged: boolean }
-  ): void;
+  onChange?(editorState: EditorState): void;
   onAtomicBlockFocus?(params: {
     blockKey?: string;
     type?: string;
@@ -150,6 +146,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   callOnChangeOnNewEditorState?: boolean;
   localeResource?: Record<string, string>;
   maxTextLength?: number;
+  experiments?: AvailableExperiments;
+  disableKeyboardEvents?: (shouldEnable: boolean) => void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -161,6 +159,16 @@ interface State {
   theme?: RichContentTheme;
   textToolbarType?: TextToolbarType;
   error?: string;
+  readOnly: boolean;
+}
+
+// experiment example code
+function makeBarrelRoll() {
+  document.querySelector('.DraftEditor-root')?.classList.toggle('barrelRoll');
+  setTimeout(
+    () => document.querySelector('.DraftEditor-root')?.classList.toggle('barrelRoll'),
+    1000
+  );
 }
 
 class RichContentEditor extends Component<RichContentEditorProps, State> {
@@ -212,15 +220,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   constructor(props: RichContentEditorProps) {
     super(props);
     const initialEditorState = this.getInitialEditorState();
-    const initialContentState = initialEditorState.getCurrentContent();
-    this.initialEditorState = {
-      entities: getEntities(initialEditorState),
-      blocks: initialContentState.getBlocksAsArray(),
-    };
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
+      readOnly: false,
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -244,6 +248,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.reportDebuggingInfo();
     this.preloadLibs();
     this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
+    console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {
@@ -410,7 +415,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
+      disableKeyboardEvents: this.disableKeyboardEvents,
     };
+  };
+
+  disableKeyboardEvents = shouldDisable => {
+    if (!this.props.isInnerRCE && shouldDisable !== this.state.readOnly) {
+      this.setState({ readOnly: shouldDisable });
+    }
   };
 
   getEditorBounds = () => this.state.editorBounds;
@@ -557,13 +569,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   updateEditorState = (editorState: EditorState) => {
     this.setState({ editorState }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
-      // console.time('traits');
-      const contentTraits = {
-        isEmpty: !editorState.getCurrentContent().hasText(),
-        isContentChanged: isContentChanged(editorState, this.initialEditorState),
-      };
-      // console.timeEnd('traits');
-      this.props.onChange?.(this.state.editorState, contentTraits);
+      this.props.onChange?.(this.state.editorState);
     });
   };
 
@@ -634,12 +640,22 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         modifiers: [],
         key: 'Escape',
       },
+      this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+        ? {
+            command: 'cmdShift7',
+            modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+            key: '7',
+          }
+        : {},
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
       esc: this.handleEscCommand,
+      ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+        ? { cmdShift7: makeBarrelRoll }
+        : {}),
     },
   });
 
@@ -816,7 +832,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={readOnly}
+        readOnly={readOnly || this.state.readOnly}
       />
     );
   };
@@ -929,7 +945,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { onError, locale, direction, showToolbars = true } = this.props;
+    const { onError, locale, direction, experiments, showToolbars = true } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -946,7 +962,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
@@ -973,6 +989,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                     locale={locale}
                     innerModal={innerModal}
                     closeInnerModal={this.closeInnerModal}
+                    editorWrapper={this.editorWrapper}
                   />
                 </div>
               </div>

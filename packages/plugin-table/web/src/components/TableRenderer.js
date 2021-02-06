@@ -45,6 +45,7 @@ export default class TableRenderer extends PureComponent {
       tableHeight,
       isEditMode,
       isEditingActive,
+      tableOverflowWidth,
     } = this.props;
     const range = selected && getRange(selected);
     const colsMinWidth = table.getColsMinWidth();
@@ -79,6 +80,7 @@ export default class TableRenderer extends PureComponent {
               size={tableHeight}
               tableWidth={tableRef?.offsetWidth}
               columnsRefs={this.columns}
+              tableOverflowWidth={tableOverflowWidth}
             />
           )}
         </thead>
@@ -102,4 +104,5 @@ TableRenderer.propTypes = {
   isEditMode: PropTypes.bool,
   selected: PropTypes.object,
   isEditingActive: PropTypes.bool,
+  tableOverflowWidth: PropTypes.number,
 };

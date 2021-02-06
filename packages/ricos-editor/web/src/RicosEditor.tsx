@@ -36,17 +36,19 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange);
+    this.dataInstance = createDataConverter(props.onChange, props.content);
     this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
   }
 
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
-    });
+    const { locale, children, _rcProps } = this.props;
+    await localeStrategy(children?.props.locale || locale, _rcProps?.experiments).then(
+      localeData => {
+        this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
+      }
+    );
   };
 
   componentDidMount() {
@@ -90,17 +92,18 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       !isEqual(this.props.injectedContent, newProps.injectedContent)
     ) {
       console.debug('new content provided as editorState'); // eslint-disable-line
-      this.setState({ editorState: createWithContent(convertFromRaw(newProps.injectedContent)) });
+      const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
+      this.setState({ editorState }, () => {
+        this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
+        this.dataInstance.refresh(editorState);
+      });
     }
   }
 
-  onChange = (childOnChange?: RichContentEditorProps['onChange']) => (
-    editorState: EditorState,
-    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-  ) => {
-    this.dataInstance.refresh(editorState, contentTraits);
-    childOnChange?.(editorState, contentTraits);
-    this.onBusyChange(editorState.getCurrentContent(), contentTraits);
+  onChange = (childOnChange?: RichContentEditorProps['onChange']) => (editorState: EditorState) => {
+    this.dataInstance.refresh(editorState);
+    childOnChange?.(editorState);
+    this.onBusyChange(editorState.getCurrentContent());
   };
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
@@ -110,6 +113,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   blur = () => this.editor.blur();
 
   getToolbars = () => this.editor.getToolbars();
+
+  getContentTraits = () => this.dataInstance.getContentTraits();
 
   getContent = async (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
@@ -137,16 +142,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return res;
   };
 
-  onBusyChange = (
-    contentState: ContentState,
-    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-  ) => {
+  onBusyChange = (contentState: ContentState) => {
     const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
       this.isBusy = isBusy;
       onBusyChange?.(isBusy);
-      onChange?.(convertToRaw(contentState), contentTraits);
+      onChange?.(convertToRaw(contentState));
     }
   };
 
