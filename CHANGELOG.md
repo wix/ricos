@@ -20,7 +20,7 @@
 - `image`
   - [#2101](https://github.com/wix/ricos/pull/#2101) remove duplication of images in browsers reader mode
 - `ricos-common`
-  - [#2102)](https://github.com/wix-incubator/rich-content/pull/2102) experiments API: wix-experiments compatibility
+  - [#2102](https://github.com/wix-incubator/rich-content/pull/2102) experiments API: wix-experiments compatibility
 </details>
 <hr/>
 
