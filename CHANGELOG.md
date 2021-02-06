@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `image`
+  - [#2101](https://github.com/wix/ricos/pull/#2101) remove duplication of images in browsers reader mode 
 
 </details>
 <hr/>
@@ -27,7 +30,7 @@
   - [#2079](https://github.com/wix-incubator/rich-content/pull/2079) experiments infra
 ### :bug: Bug Fix
 - `unsupported-blocks`
-  - [##2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue
+  - [#2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue
 
 ## 8.18.3 (Feb 2, 2021)
 ### :bug: Bug Fix
