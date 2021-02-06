@@ -31,10 +31,15 @@ export class RicosEngine extends Component<EngineProps> {
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
-      experiments,
+      _rcProps,
     } = this.props;
 
-    const { theme, html } = themeStrategy({ plugins, cssOverride, ricosTheme, experiments });
+    const { theme, html } = themeStrategy({
+      plugins,
+      cssOverride,
+      ricosTheme,
+      experiments: _rcProps?.experiments,
+    });
     const htmls: ReactElement[] = [];
     if (html) {
       htmls.push(html);
@@ -48,7 +53,7 @@ export class RicosEngine extends Component<EngineProps> {
         childProps: children.props,
         cssOverride: theme,
         content,
-        experiments,
+        experiments: _rcProps?.experiments,
       })
     );
 
@@ -58,7 +63,7 @@ export class RicosEngine extends Component<EngineProps> {
       onPreviewExpand,
       previewConfig: preview,
       content,
-      experiments,
+      experiments: _rcProps?.experiments,
     });
 
     return {
@@ -67,6 +72,7 @@ export class RicosEngine extends Component<EngineProps> {
       htmls,
     };
   }
+
   render() {
     const {
       _rcProps,
@@ -84,7 +90,6 @@ export class RicosEngine extends Component<EngineProps> {
       linkPanelSettings = {},
       maxTextLength,
       textAlignment,
-      experiments,
     } = this.props;
 
     const { strategyProps, previewContent, htmls } = this.runStrategies();
@@ -119,7 +124,6 @@ export class RicosEngine extends Component<EngineProps> {
       anchorTarget,
       relValue,
       textAlignment,
-      experiments,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
