@@ -8,13 +8,17 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
+import ClickOutside from 'react-click-outsider';
 
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config } = props;
+    const { innerRCERenderedIn, config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.state = {
+      showToolbars: editing || false,
+    };
   }
 
   componentDidUpdate(prevProps) {
@@ -92,12 +96,29 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
-    this.props.onFocus && this.props.onFocus();
+    if (!this.state.showToolbars) {
+      this.setState({ showToolbars: true });
+    }
+  };
+
+  onClickOutside = e => {
+    if (
+      this.state.showToolbars &&
+      this.editorWrapper &&
+      e.target &&
+      !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !e.target.closest('[class=ReactModalPortal]') &&
+      !this.editorWrapper.contains(e.target) &&
+      !e.target.closest('[data-hook=table-plugin-cell]')
+    ) {
+      this.setState({ showToolbars: false });
+    }
   };
 
   handleAtomicPluginsBorders = enterEditing => {
     const { editing = true } = this.props;
-    const hideBorder = !editing;
+    const { showToolbars } = this.state;
+    const hideBorder = !showToolbars || !editing;
     if (this.editorWrapper) {
       const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
       const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
@@ -123,37 +144,40 @@ class InnerRCE extends PureComponent {
       tablePluginMenu,
       ...rest
     } = this.props;
+    const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
     if (innerRCERenderedIn === TABLE_TYPE && isMobile) {
       toolbarsToIgnore.push('SideToolbar');
     }
     return (
-      <div
-        data-id="inner-rce"
-        onFocus={this.onFocus}
-        className={classNames(styles.editor, theme.editor, 'inner-rce')}
-        ref={this.setEditorWrapper}
-      >
-        <RichContentEditor
-          {...rest} // {...rest} need to be before editorState, onChange, plugins
-          ref={this.setRef}
-          editorState={editorState}
-          onChange={this.onChange}
-          plugins={this.plugins}
-          config={this.config}
-          isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
-          showToolbars={editing}
-          isInnerRCE
-          innerRCERenderedIn={innerRCERenderedIn}
-          editorKey="inner-rce"
-          readOnly={readOnly}
-          onBackspace={this.onBackspaceAtBeginningOfContent}
-          direction={direction}
-          tablePluginMenu={tablePluginMenu}
-          {...additionalProps}
-        />
-      </div>
+      <ClickOutside onClickOutside={this.onClickOutside}>
+        <div
+          data-id="inner-rce"
+          onFocus={this.onFocus}
+          className={classNames(styles.editor, theme.editor, 'inner-rce')}
+          ref={this.setEditorWrapper}
+        >
+          <RichContentEditor
+            {...rest} // {...rest} need to be before editorState, onChange, plugins
+            ref={this.setRef}
+            editorState={editorState}
+            onChange={this.onChange}
+            plugins={this.plugins}
+            config={this.config}
+            isMobile={isMobile}
+            toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+            showToolbars={editing && showToolbars}
+            isInnerRCE
+            innerRCERenderedIn={innerRCERenderedIn}
+            editorKey="inner-rce"
+            readOnly={readOnly}
+            onBackspace={this.onBackspaceAtBeginningOfContent}
+            direction={direction}
+            tablePluginMenu={tablePluginMenu}
+            {...additionalProps}
+          />
+        </div>
+      </ClickOutside>
     );
   }
 }
@@ -176,7 +200,6 @@ InnerRCE.propTypes = {
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
   tablePluginMenu: PropTypes.bool,
-  onFocus: PropTypes.func,
 };
 
 export default InnerRCE;

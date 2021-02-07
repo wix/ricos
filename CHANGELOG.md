@@ -16,17 +16,24 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.19.1 (Feb 6, 2021)
+### :bug: Bug Fix
+- `image`
+  - [#2101](https://github.com/wix/ricos/pull/#2101) remove duplication of images in browsers reader mode
+- `ricos-common`
+  - [#2102](https://github.com/wix-incubator/rich-content/pull/2102) experiments API: wix-experiments compatibility
+
+## 8.19.0 (Feb 4, 2021)
 ### :rocket: New Feature
 - `common`
   - [#2081](https://github.com/wix-incubator/rich-content/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
   - [#2079](https://github.com/wix-incubator/rich-content/pull/2079) experiments infra
-
 ### :bug: Bug Fix
 - `unsupported-blocks`
-  - [##2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue 
-
-</details>
-<hr/>
+  - [#2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue
 
 ## 8.18.3 (Feb 2, 2021)
 ### :bug: Bug Fix
