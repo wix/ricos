@@ -16,6 +16,12 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onOpenEditorSuccess` unwanted triggers
+- `viewer`
+  - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onViewerLoaded` unwanted triggers
+
 </details>
 <hr/>
 
