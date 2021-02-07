@@ -61,6 +61,7 @@ export interface RichContentViewerProps {
   normalize: NormalizeConfig;
   localeResource?: Record<string, string>;
   experiments?: AvailableExperiments;
+  isInnerRcv?: boolean;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
