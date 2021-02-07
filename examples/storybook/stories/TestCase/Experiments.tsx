@@ -5,13 +5,14 @@ import { RicosEditor } from 'ricos-editor';
 import './Experiments.global.css';
 
 export default () => {
+  const _rcProps = {
+    experiments: { barrelRoll: { value: 'true', enabled: true, namespace: 'ricos' } },
+  };
   return (
     <Page title="Experiments API">
       <p>{'Type some text in the editor. Then press Cmd+Shift+7'}</p>
       <RichContentEditorBox preset="blog-preset">
-        <RicosEditor
-          experiments={{ barrelRoll: { value: 'True', enabled: true, namespace: 'ricos' } }}
-        />
+        <RicosEditor _rcProps={_rcProps} />
       </RichContentEditorBox>
     </Page>
   );
