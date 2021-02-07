@@ -110,12 +110,13 @@ export default function createAtomicPluginToolbar({
         this.updateLinkData(null);
         return;
       }
-      const { url, anchor, target, rel } = linkData;
+      const { url, anchor, target, rel, sponsored } = linkData;
       const link = url
         ? {
             url,
             target,
             rel,
+            sponsored,
           }
         : { anchor };
       this.updateLinkData(link);

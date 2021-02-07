@@ -14,6 +14,7 @@ class LinkPanel extends Component {
     targetBlank: true,
     showTargetBlankCheckbox: true,
     showRelValueCheckbox: true,
+    showSponsoredRelValueCheckbox: true,
     isMobile: false,
   };
   styles = mergeStyles({ styles, theme: this.props.theme });
@@ -39,6 +40,10 @@ class LinkPanel extends Component {
 
   handleNofollowChange = event => {
     this.onChange({ nofollow: event.target.checked });
+  };
+
+  handleSponsoredChange = event => {
+    this.onChange({ sponsored: event.target.checked });
   };
 
   onChange = changes => {
@@ -111,13 +116,14 @@ class LinkPanel extends Component {
       ariaProps,
       showTargetBlankCheckbox,
       showRelValueCheckbox,
+      showSponsoredRelValueCheckbox,
       t,
       linkValues,
       unchangedUrl,
       isMobile,
     } = this.props;
 
-    const { targetBlank, nofollow } = linkValues;
+    const { targetBlank, nofollow, sponsored } = linkValues;
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
@@ -154,6 +160,17 @@ class LinkPanel extends Component {
               isMobile={isMobile}
             />
           )}
+          {showSponsoredRelValueCheckbox && (
+            <Checkbox
+              label={'Mark as a sponsored link'}
+              theme={theme}
+              checked={sponsored}
+              dataHook="linkPanelSponsoredCheckbox"
+              onChange={this.handleSponsoredChange}
+              t={t}
+              isMobile={isMobile}
+            />
+          )}
         </div>
       </div>
     );
@@ -169,10 +186,12 @@ LinkPanel.propTypes = {
     isValid: PropTypes.bool,
     targetBlank: PropTypes.bool,
     nofollow: PropTypes.bool,
+    sponsored: PropTypes.bool,
   }).isRequired,
   ariaProps: PropTypes.object,
   showTargetBlankCheckbox: PropTypes.bool,
   showRelValueCheckbox: PropTypes.bool,
+  showSponsoredRelValueCheckbox: PropTypes.bool,
   dropDown: PropTypes.object,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,

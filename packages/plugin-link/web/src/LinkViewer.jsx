@@ -67,11 +67,14 @@ class LinkViewer extends Component {
 
   render() {
     const { componentData, anchorTarget, relValue, children, isInEditor } = this.props;
-    const { url, anchor, target, rel } = componentData;
+    const { url, anchor, target, rel, sponsored } = componentData;
+    const relString = `${rel ? rel : relValue || 'noopener noreferrer'}${
+      sponsored ? ' sponsored' : ''
+    }`;
     const anchorProps = {
       href: this.getHref(url, anchor),
       target: this.getTarget(anchor, target, anchorTarget),
-      rel: rel ? rel : relValue || 'noopener',
+      rel: relString,
       className: classNames(this.styles.link, {
         [this.styles.linkToAnchorInViewer]: anchor && !isInEditor,
       }),

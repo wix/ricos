@@ -23,6 +23,7 @@ class MultiSelectLinkPanelMobile extends PureComponent {
       ariaProps,
       showTargetBlankCheckbox,
       showRelValueCheckbox,
+      showSponsoredRelValueCheckbox,
       sharedPanelsProps,
       buttonsProps,
       radioGroupValue,
@@ -63,6 +64,7 @@ class MultiSelectLinkPanelMobile extends PureComponent {
                 onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
                 showTargetBlankCheckbox={showTargetBlankCheckbox}
                 showRelValueCheckbox={showRelValueCheckbox}
+                showSponsoredRelValueCheckbox={showSponsoredRelValueCheckbox}
                 {...sharedPanelsProps}
               />
             </div>
@@ -87,6 +89,7 @@ MultiSelectLinkPanelMobile.propTypes = {
   ariaProps: PropTypes.object,
   showTargetBlankCheckbox: PropTypes.bool,
   showRelValueCheckbox: PropTypes.bool,
+  showSponsoredRelValueCheckbox: PropTypes.bool,
   sharedPanelsProps: PropTypes.object,
   buttonsProps: PropTypes.object,
   radioGroupValue: PropTypes.string,

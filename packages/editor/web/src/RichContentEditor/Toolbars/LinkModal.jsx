@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LinkPanelContainer } from 'wix-rich-content-editor-common';
 
-export default class MobileLinkModal extends Component {
+export default class LinkModal extends Component {
   render() {
     const {
       url,
@@ -11,6 +11,7 @@ export default class MobileLinkModal extends Component {
       anchorTarget,
       relValue,
       nofollow,
+      sponsored,
       theme,
       isMobile,
       isActive,
@@ -31,6 +32,7 @@ export default class MobileLinkModal extends Component {
       anchorTarget,
       relValue,
       nofollow,
+      sponsored,
       theme,
       isActive,
       isMobile,
@@ -52,7 +54,7 @@ export default class MobileLinkModal extends Component {
   }
 }
 
-MobileLinkModal.propTypes = {
+LinkModal.propTypes = {
   editorState: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   onDone: PropTypes.func.isRequired,
@@ -66,6 +68,7 @@ MobileLinkModal.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   nofollow: PropTypes.bool,
+  sponsored: PropTypes.bool,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,

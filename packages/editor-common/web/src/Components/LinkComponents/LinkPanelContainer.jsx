@@ -14,6 +14,7 @@ class LinkPanelContainer extends PureComponent {
       anchor,
       targetBlank,
       nofollow,
+      sponsored,
       editorState,
       linkTypes,
       unchangedUrl,
@@ -29,7 +30,7 @@ class LinkPanelContainer extends PureComponent {
       ? getAnchorableBlocks(editorState)
       : undefined;
     this.state = {
-      linkPanelValues: { url, targetBlank, nofollow },
+      linkPanelValues: { url, targetBlank, nofollow, sponsored },
       anchorPanelValues: this.renderBasicLinkPanel
         ? undefined
         : {
@@ -145,11 +146,17 @@ class LinkPanelContainer extends PureComponent {
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn } = linkPanel || {};
+    const {
+      blankTargetToggleVisibilityFn,
+      nofollowRelToggleVisibilityFn,
+      sponsoredRelToggleVisibilityFn,
+    } = linkPanel || {};
     const showTargetBlankCheckbox =
       blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
+    const showSponsoredRelValueCheckbox =
+      sponsoredRelToggleVisibilityFn && sponsoredRelToggleVisibilityFn(relValue);
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
     const sharedPanelsProps = {
       theme,
@@ -178,6 +185,7 @@ class LinkPanelContainer extends PureComponent {
       ariaProps,
       showTargetBlankCheckbox,
       showRelValueCheckbox,
+      showSponsoredRelValueCheckbox,
       sharedPanelsProps,
       buttonsProps,
       radioGroupValue,
@@ -210,6 +218,7 @@ LinkPanelContainer.propTypes = {
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   nofollow: PropTypes.bool,
+  sponsored: PropTypes.bool,
   isActive: PropTypes.bool,
   isMobile: PropTypes.bool,
   onOverrideContent: PropTypes.func,

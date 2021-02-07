@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import MobileLinkModal from './MobileLinkModal';
+import LinkModal from './LinkModal';
 
 export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
-  setLinkInBlockData = ({ url, anchor, targetBlank, nofollow }) => {
+  setLinkInBlockData = ({ url, anchor, targetBlank, nofollow, sponsored }) => {
     const { pubsub, anchorTarget, relValue, unchangedUrl } = this.props;
     let target = '_blank',
       rel = 'nofollow';
@@ -23,6 +23,7 @@ export default class BlockLinkModal extends Component {
             url: url || pubsub.get('componentData')?.config?.link?.url,
             target,
             rel,
+            sponsored,
           };
       pubsub.setBlockData({
         key: 'componentLink',
@@ -53,15 +54,16 @@ export default class BlockLinkModal extends Component {
       editorState,
     } = this.props;
     const componentLink = pubsub.get('componentData')?.config?.link;
-    const { url, anchor, target, rel } = componentLink || {};
+    const { url, anchor, target, rel, sponsored } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
-      <MobileLinkModal
+      <LinkModal
         url={url}
         anchor={anchor}
         targetBlank={targetBlank}
         nofollow={nofollow}
+        sponsored={sponsored}
         theme={theme}
         isActive={!!componentLink}
         isMobile={isMobile}
@@ -88,6 +90,7 @@ BlockLinkModal.propTypes = {
   isMobile: PropTypes.bool,
   targetBlank: PropTypes.bool,
   nofollow: PropTypes.bool,
+  sponsored: PropTypes.bool,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   t: PropTypes.func,

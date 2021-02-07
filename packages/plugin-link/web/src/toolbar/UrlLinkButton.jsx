@@ -28,12 +28,13 @@ export default class UrlLinkButton extends Component {
     const { styles } = this;
     const { getEditorState, t } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url = '', anchor, target, rel } = linkData || {};
+    const { url = '', anchor, target, rel, sponsored } = linkData || {};
     const href = url ? normalizeUrl(url) : undefined;
+    const relString = `${rel || 'noopener noreferrer'}${sponsored ? ' sponsored' : ''}`;
     const anchorProps = {
       href,
       target: target || '_self',
-      rel: rel || 'noopener',
+      rel: relString,
       className: classNames(styles.toolbarUrl, { [styles.toolbarUrlAnchor]: anchor }),
       onMouseDown: this.preventDefault,
       onClick: anchor && this.handleClick,

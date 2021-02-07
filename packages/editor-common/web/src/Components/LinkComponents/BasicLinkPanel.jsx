@@ -22,6 +22,7 @@ class BasicLinkPanel extends PureComponent {
           <LinkIcon />
         </div>
         <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>
+          {/*TODO: should be deleted?*/}
           {t('MobileLinkModal_Title')}
         </h3>
       </div>
@@ -34,6 +35,7 @@ class BasicLinkPanel extends PureComponent {
       ariaProps,
       showTargetBlankCheckbox,
       showRelValueCheckbox,
+      showSponsoredRelValueCheckbox,
       sharedPanelsProps,
       buttonsProps,
       linkPanelValues,
@@ -58,6 +60,7 @@ class BasicLinkPanel extends PureComponent {
             onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
             showTargetBlankCheckbox={showTargetBlankCheckbox}
             showRelValueCheckbox={showRelValueCheckbox}
+            showSponsoredRelValueCheckbox={showSponsoredRelValueCheckbox}
             {...sharedPanelsProps}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator" />
@@ -74,6 +77,7 @@ BasicLinkPanel.propTypes = {
   ariaProps: PropTypes.object,
   showTargetBlankCheckbox: PropTypes.bool,
   showRelValueCheckbox: PropTypes.bool,
+  showSponsoredRelValueCheckbox: PropTypes.bool,
   sharedPanelsProps: PropTypes.object,
   buttonsProps: PropTypes.object,
   changeRadioGroup: PropTypes.func,

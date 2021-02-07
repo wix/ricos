@@ -6,7 +6,7 @@ import {
   removeLinksInSelection,
   setForceSelection,
 } from 'wix-rich-content-editor-common';
-import MobileLinkModal from './MobileLinkModal';
+import LinkModal from './LinkModal';
 
 export default class TextLinkModal extends Component {
   hidePopup = () => {
@@ -21,7 +21,7 @@ export default class TextLinkModal extends Component {
     this.hidePopup();
   };
 
-  createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName }) => {
+  createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName, sponsored }) => {
     if (!isEmpty(url) || !isEmpty(anchor)) {
       const { getEditorState, setEditorState, anchorTarget, relValue, insertLinkFn } = this.props;
       const newEditorState = insertLinkFn(getEditorState(), {
@@ -31,6 +31,7 @@ export default class TextLinkModal extends Component {
         nofollow,
         anchorTarget,
         relValue,
+        sponsored,
         text: defaultName,
       });
       setEditorState(newEditorState);
@@ -59,16 +60,17 @@ export default class TextLinkModal extends Component {
       linkTypes,
     } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url, anchor, target, rel } = linkData || {};
+    const { url, anchor, target, rel, sponsored } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
-      <MobileLinkModal
+      <LinkModal
         editorState={getEditorState()}
         url={url}
         anchor={anchor}
         targetBlank={targetBlank}
         nofollow={nofollow}
+        sponsored={sponsored}
         theme={theme}
         isActive={!isEmpty(linkData)}
         isMobile={isMobile}
@@ -94,6 +96,7 @@ TextLinkModal.propTypes = {
   isMobile: PropTypes.bool,
   targetBlank: PropTypes.bool,
   nofollow: PropTypes.bool,
+  sponsored: PropTypes.bool,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   t: PropTypes.func,

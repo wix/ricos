@@ -22,6 +22,7 @@ type LinkDataUrl = {
   nofollow?: boolean;
   anchorTarget?: string;
   relValue?: string;
+  sponsored?: boolean;
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
@@ -52,7 +53,7 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
+  { url, targetBlank, nofollow, anchorTarget, relValue, sponsored }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   const linkEntityData = createLinkEntityData({
@@ -61,6 +62,7 @@ export const insertLinkInPosition = (
     nofollow,
     anchorTarget,
     relValue,
+    sponsored,
   });
 
   return insertLink(editorState, selection, linkEntityData);
@@ -217,6 +219,7 @@ export function createLinkEntityData({
   nofollow,
   anchorTarget,
   relValue,
+  sponsored,
 }: LinkData) {
   if (url) {
     const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
@@ -225,6 +228,7 @@ export function createLinkEntityData({
       url,
       target,
       rel,
+      sponsored,
     };
   } else {
     return { anchor };
