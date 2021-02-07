@@ -247,7 +247,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
-    !this.props.isInnerRCE && this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
     console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
