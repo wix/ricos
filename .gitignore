@@ -37,7 +37,7 @@ applitools.config.js
 
 # docs
 **/.docusaurus
-**/docs/build/
+**/website/build/
 
 # ricos content migration
 **/migratedFixtures

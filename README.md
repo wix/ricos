@@ -75,6 +75,8 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 
 ## Development
 
+### Prerequisites
+- `protoc` - install [protoc](http://google.github.io/proto-lens/installing-protoc.html) on your local machine
 ### Run Locally
 
 1. `yarn` - installs all dependencies and links any cross-dependencies.
