@@ -17,7 +17,7 @@ export default class Cell extends Component {
     ) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      this.editorRef?.selectAllContent(true);
+      !this.props.isMobile && this.editorRef?.selectAllContent(true);
       this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
     if (
@@ -29,7 +29,7 @@ export default class Cell extends Component {
     }
     if (this.props.selected) {
       if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
-        this.editorRef?.selectAllContent();
+        !this.props.isMobile && this.editorRef?.selectAllContent();
       }
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
