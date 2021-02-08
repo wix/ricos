@@ -21,6 +21,7 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-column-gap: 11px;
+    grid-row-gap: 12px;
     @include phone {
         padding-top: 20px;
     }
@@ -32,10 +33,10 @@
     font-size: 16px;
     height: 36px;
     align-items: center;
-    margin-top: 12px;
     display: flex;
     justify-content: center;
     cursor: pointer;
+    grid-column: 1/-1;
 }
 
 .closeButton {
