@@ -55,7 +55,7 @@ class ImageSettings extends Component {
     this.props.onUpdateItem({ link: this.linkPanelToLink(linkPanelValues) });
   };
 
-  linkPanelToLink = ({ url, targetBlank, nofollow, isValid }) => ({
+  linkPanelToLink = ({ url, targetBlank, nofollow, isValid, sponsored }) => ({
     url,
     target: targetBlank
       ? '_blank'
@@ -68,13 +68,15 @@ class ImageSettings extends Component {
       ? this.props.relValue
       : 'noopener',
     isValid,
+    sponsored,
   });
 
-  linkToLinkPanel = ({ url = '', target, rel, isValid }) => ({
+  linkToLinkPanel = ({ url = '', target, rel, isValid, sponsored }) => ({
     url,
     targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
     nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
     isValid,
+    sponsored,
   });
   render() {
     const styles = this.styles;
@@ -98,13 +100,18 @@ class ImageSettings extends Component {
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn, placeholder } =
-      linkPanel || {};
+    const {
+      blankTargetToggleVisibilityFn,
+      nofollowRelToggleVisibilityFn,
+      sponsoredRelToggleVisibilityFn,
+      placeholder,
+    } = linkPanel || {};
     const showTargetBlankCheckbox =
       blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
     const showRelValueCheckbox =
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
-
+    const showSponsoredRelValueCheckbox =
+      sponsoredRelToggleVisibilityFn && sponsoredRelToggleVisibilityFn(relValue);
     const { metadata = {} } = image || {};
 
     const altText = typeof metadata.altText === 'string' ? metadata.altText : metadata.title;
@@ -249,6 +256,7 @@ class ImageSettings extends Component {
                       onChange={this.onLinkPanelChange}
                       showTargetBlankCheckbox={showTargetBlankCheckbox}
                       showRelValueCheckbox={showRelValueCheckbox}
+                      showSponsoredRelValueCheckbox={showSponsoredRelValueCheckbox}
                       theme={theme}
                       t={t}
                       ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
