@@ -85,19 +85,17 @@ export default class tableSettingsModal extends Component {
             submittedInvalidInput={submittedInvalidRow}
             dataHook={'rowCount'}
           />
+          {/*eslint-disable-next-line*/}
+          <div
+            tabIndex="0" //eslint-disable-line
+            className={styles.submit}
+            onClick={this.onCreateTableClicked}
+            onKeyUp={this.onKeyUp}
+            data-hook={'createTableButton'}
+          >
+            {t('TablePlugin_SettingsModal_CreateTable_Button')}
+          </div>
         </div>
-        {/*eslint-disable-next-line*/}
-        <div
-          tabIndex="0" //eslint-disable-line
-          className={styles.submit}
-          onClick={this.onCreateTableClicked}
-          onKeyUp={this.onKeyUp}
-          data-hook={'createTableButton'}
-        >
-          {t('TablePlugin_SettingsModal_CreateTable_Button')}
-        </div>
-        {/*eslint-disable-next-line*/}
-        <div tabIndex="0" />
       </div>
     );
   }

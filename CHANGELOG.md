@@ -23,6 +23,8 @@
   - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onViewerLoaded` unwanted triggers
 - `link`
   - [##2108](https://github.com/wix/ricos/pull/#2108) fix anchor not scrolling in wix site
+- `editor`
+  - [##2111](https://github.com/wix/ricos/pull/#2111) fix horizontal side toolbar theme
 ### :house: Internal
 - `button`
   - [#2082](https://github.com/wix/ricos/pull/2082) remove link data from action-button
