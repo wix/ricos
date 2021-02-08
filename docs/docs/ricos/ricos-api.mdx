@@ -180,7 +180,6 @@ Similar to [content](#content) prop; allows content to be injected to mounted Ri
 linkPanelSettings?: {
   blankTargetToggleVisibilityFn?: (anchorTarget: string) => boolean;
   nofollowRelToggleVisibilityFn?: (relValue: string) => boolean;
-  sponsoredRelToggleVisibilityFn?: (relValue: string) => boolean;
   placeholder?: string;}
 ```
 
@@ -195,11 +194,6 @@ By default, its predicate is `anchorTarget !== '_blank'`
 
 Determines the 'Add a nofollow tag' link panel checkbox visiblity.
 By default, its predicate is `relValue !== 'nofollow'`
-
-#### `sponsoredRelToggleVisibilityFn`
-
-Determines the 'Mark as a sponsored link' link panel checkbox visiblity.
-By default, its predicate is ?????
 
 #### `placeholder`
 
