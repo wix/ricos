@@ -65,8 +65,8 @@ export default class Cell extends Component {
   };
 
   onKeydown = e => {
-    const { editing, onKeyDown } = this.props;
-    if (editing) {
+    const { editing, onKeyDown, isMobile } = this.props;
+    if (editing && !isMobile) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
@@ -74,6 +74,8 @@ export default class Cell extends Component {
         e.preventDefault();
         this.editorRef.selectAllContent(true);
       } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+        e.preventDefault();
+      } else if (e.key === 'v' && (e.ctrlKey || e.metaKey || e.shiftKey)) {
         e.preventDefault();
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
@@ -137,7 +139,8 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
     } = this.props;
-    const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
+    // console.log(row, col, table.componentData, table.getCell(row, col));
+    const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
