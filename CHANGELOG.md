@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.19.2 (Feb 8, 2021)
 ### :bug: Bug Fix
 - `editor`
   - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onOpenEditorSuccess` unwanted triggers
@@ -25,9 +28,9 @@
   - [##2108](https://github.com/wix/ricos/pull/#2108) fix anchor not scrolling in wix site
 - `editor`
   - [##2111](https://github.com/wix/ricos/pull/#2111) fix horizontal side toolbar theme
-
-</details>
-<hr/>
+### :house: Internal
+- `button`
+  - [#2082](https://github.com/wix/ricos/pull/2082) remove link data from action-button
 
 ## 8.19.1 (Feb 6, 2021)
 ### :bug: Bug Fix
