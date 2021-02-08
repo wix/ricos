@@ -10,6 +10,7 @@ import {
   normalizeUrl,
   IMAGE_TYPE,
   GALLERY_TYPE,
+  getRelValue,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -117,11 +118,11 @@ class PluginViewer extends PureComponent {
         const ContainerElement = hasLink || hasAnchor ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
-          const { url, target, rel } = config.link;
+          const { url, target, rel, sponsored } = config.link;
           containerProps = {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
-            rel: rel || relValue || 'noopener noreferrer',
+            rel: getRelValue({ relValue, rel, sponsored }),
           };
         }
         if (hasAnchor) {
