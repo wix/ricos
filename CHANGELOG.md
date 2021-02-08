@@ -21,6 +21,8 @@
   - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onOpenEditorSuccess` unwanted triggers
 - `viewer`
   - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onViewerLoaded` unwanted triggers
+- `link`
+  - [##2108](https://github.com/wix/ricos/pull/#2108) fix anchor not scrolling in wix site
 
 </details>
 <hr/>
