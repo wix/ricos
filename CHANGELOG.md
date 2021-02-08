@@ -16,14 +16,15 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.19.3 (Feb 8, 2021)
 ### :bug: Bug Fix
 - `headings`
   - [#2116](https://github.com/wix-incubator/rich-content/pull/2116) headings toolbar in external modal
 - `link-preview`
   - [#2112](https://github.com/wix/ricos/pull/2112) fix link-preview link data (rel & target)
-
-</details>
-<hr/>
 
 ## 8.19.2 (Feb 8, 2021)
 ### :bug: Bug Fix
