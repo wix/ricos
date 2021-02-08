@@ -1,59 +1,107 @@
 import React from 'react';
-import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { createLinkPlugin, LINK_TYPE, pluginLink } from 'wix-rich-content-plugin-link';
 import {
   createLinkPreviewPlugin,
   LINK_PREVIEW_TYPE,
   LinkPreviewProviders,
+  pluginLinkPreview,
 } from 'wix-rich-content-plugin-link-preview';
-import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
-import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
-import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
-import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
-import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
-import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
+import {
+  createLineSpacingPlugin,
+  LINE_SPACING_TYPE,
+  pluginLineSpacing,
+} from 'wix-rich-content-plugin-line-spacing';
+import { createHashtagPlugin, HASHTAG_TYPE, pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { createEmojiPlugin, EMOJI_TYPE, pluginEmoji } from 'wix-rich-content-plugin-emoji';
+import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'wix-rich-content-plugin-image';
+import {
+  createUndoRedoPlugin,
+  pluginUndoRedo,
+  UNDO_REDO_TYPE,
+} from 'wix-rich-content-plugin-undo-redo';
+import { createGalleryPlugin, GALLERY_TYPE, pluginGallery } from 'wix-rich-content-plugin-gallery';
+import { createVideoPlugin, pluginVideo, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
+import {
+  createHtmlPlugin,
+  HTML_TYPE,
+  htmlButtonsTypes,
+  pluginHtml,
+} from 'wix-rich-content-plugin-html';
+import { createDividerPlugin, DIVIDER_TYPE, pluginDivider } from 'wix-rich-content-plugin-divider';
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
   verticalEmbedProviders,
+  pluginVerticalEmbed,
 } from 'wix-rich-content-plugin-vertical-embed';
 import {
   createExternalMentionsPlugin,
   EXTERNAL_MENTIONS_TYPE,
+  pluginMentions,
 } from 'wix-rich-content-plugin-mentions';
-import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
-import { createHeadingsPlugin, HEADINGS_DROPDOWN_TYPE } from 'wix-rich-content-plugin-headings';
-import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
-import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
+import {
+  createCodeBlockPlugin,
+  CODE_BLOCK_TYPE,
+  pluginCodeBlock,
+} from 'wix-rich-content-plugin-code-block';
+import {
+  createHeadingsPlugin,
+  HEADINGS_DROPDOWN_TYPE,
+  pluginHeadings,
+} from 'wix-rich-content-plugin-headings';
+import {
+  createSoundCloudPlugin,
+  pluginSoundCloud,
+  SOUND_CLOUD_TYPE,
+} from 'wix-rich-content-plugin-sound-cloud';
+import { createGiphyPlugin, GIPHY_TYPE, pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
   HEADERS_MARKDOWN_TYPE,
+  pluginHeadersMarkdown,
 } from 'wix-rich-content-plugin-headers-markdown';
-import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
-import { createPollPlugin, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
-import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
-import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createMapPlugin, MAP_TYPE, pluginMap } from 'wix-rich-content-plugin-map';
+import { createPollPlugin, pluginPoll, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
+import {
+  createFileUploadPlugin,
+  FILE_UPLOAD_TYPE,
+  pluginFileUpload,
+} from 'wix-rich-content-plugin-file-upload';
+import {
+  createTextColorPlugin,
+  pluginTextColor,
+  pluginTextHighlight,
+  TEXT_COLOR_TYPE,
+} from 'wix-rich-content-plugin-text-color';
 import {
   createSpoilerPlugin,
   SPOILER_TYPE,
   SpoilerEditorWrapper,
+  pluginSpoiler,
 } from 'wix-rich-content-plugin-spoiler';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
   createActionButtonPlugin,
   ACTION_BUTTON_TYPE,
+  pluginActionButton,
+  pluginLinkButton,
 } from 'wix-rich-content-plugin-button';
 import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
-import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
-import { createTablePlugin, TABLE_TYPE } from 'wix-rich-content-plugin-table';
-import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
-import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
+import { createIndentPlugin, pluginIndent, INDENT_TYPE } from 'wix-rich-content-plugin-indent';
+import { createTablePlugin, pluginTable, TABLE_TYPE } from 'wix-rich-content-plugin-table';
+import {
+  createAccordionPlugin,
+  ACCORDION_TYPE,
+  pluginAccordion,
+} from 'wix-rich-content-plugin-accordion';
+import {
+  createUnsupportedBlocksPlugin,
+  pluginUnsupportedBlocks,
+} from 'wix-rich-content-plugin-unsupported-blocks';
 import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
@@ -105,8 +153,46 @@ import {
   mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
-import { CreatePluginFunction, UISettings } from 'wix-rich-content-common';
+import {
+  CreatePluginFunction,
+  EditorPluginCreator,
+  PluginType,
+  UISettings,
+} from 'wix-rich-content-common';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
+
+export const ricosEditorPlugins: Record<string, EditorPluginCreator<unknown>> = {
+  [IMAGE_TYPE]: pluginImage,
+  [GALLERY_TYPE]: pluginGallery,
+  [VIDEO_TYPE]: pluginVideo,
+  [HTML_TYPE]: pluginHtml,
+  [DIVIDER_TYPE]: pluginDivider,
+  [LINE_SPACING_TYPE]: pluginLineSpacing,
+  [LINK_TYPE]: pluginLink,
+  [HASHTAG_TYPE]: pluginHashtag,
+  [EXTERNAL_MENTIONS_TYPE]: pluginMentions,
+  [CODE_BLOCK_TYPE]: pluginCodeBlock,
+  [SOUND_CLOUD_TYPE]: pluginSoundCloud,
+  [GIPHY_TYPE]: pluginGiphy,
+  [HEADERS_MARKDOWN_TYPE]: pluginHeadersMarkdown,
+  [MAP_TYPE]: pluginMap,
+  [FILE_UPLOAD_TYPE]: pluginFileUpload,
+  [LINK_BUTTON_TYPE]: pluginLinkButton,
+  [TEXT_COLOR_TYPE]: pluginTextColor,
+  [EMOJI_TYPE]: pluginEmoji,
+  [TEXT_HIGHLIGHT_TYPE]: pluginTextHighlight,
+  [UNDO_REDO_TYPE]: pluginUndoRedo,
+  [UNSUPPORTED_BLOCKS_TYPE]: pluginUnsupportedBlocks,
+  [LINK_PREVIEW_TYPE]: pluginLinkPreview,
+  [SPOILER_TYPE]: pluginSpoiler,
+  [VERTICAL_EMBED_TYPE]: pluginVerticalEmbed,
+  [HEADINGS_DROPDOWN_TYPE]: pluginHeadings,
+  [INDENT_TYPE]: pluginIndent,
+  [ACTION_BUTTON_TYPE]: pluginActionButton,
+  [POLL_TYPE]: pluginPoll,
+  [ACCORDION_TYPE]: pluginAccordion,
+  [TABLE_TYPE]: pluginTable,
+};
 
 export const editorPluginsPartialPreset: CreatePluginFunction[] = [
   createImagePlugin,

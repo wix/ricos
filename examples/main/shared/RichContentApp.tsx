@@ -7,9 +7,11 @@ import {
   createWithContent,
   EditorState,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { compare, isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import { getRequestedLocale, normalize } from '../src/utils';
 import { TestAppConfig } from '../src/types';
+import { RichContent } from 'ricos-schema';
+import { fromDraft } from 'ricos-content/libs/migrateSchema';
 
 type Mode = 'demo' | 'test';
 
@@ -28,6 +30,7 @@ interface Props {
 interface State {
   editorState?: EditorState;
   contentState?: RicosContent;
+  content?: RichContent;
   localeResource?: Record<string, string>;
   locale?: string;
   remountKey?: boolean;
@@ -63,9 +66,11 @@ class RichContentApp extends PureComponent<Props, State> {
     const editorState = initialState
       ? createWithContent(convertFromRaw(initialState))
       : createEmpty();
+    const contentState = initialState || convertToRaw(editorState.getCurrentContent());
     return {
       editorState,
-      contentState: initialState || convertToRaw(editorState.getCurrentContent()),
+      contentState,
+      content: fromDraft(contentState),
       locale,
     };
   };
@@ -87,7 +92,14 @@ class RichContentApp extends PureComponent<Props, State> {
     this.updateContentState(editorState);
   };
 
-  onRicosEditorChange = (contentState: RicosContent) => this.setState({ contentState });
+  onNewContentChange = (content: RichContent) => {
+    if (this.state.content) {
+      const diff = compare(content, this.state.content, { ignoredKeys: ['key'] });
+      if (Object.keys(diff).length > 0) {
+        this.setState({ content });
+      }
+    }
+  };
 
   onContentStateChange = (contentState: RicosContent) => {
     this.setState({
@@ -106,7 +118,7 @@ class RichContentApp extends PureComponent<Props, State> {
   };
 
   render() {
-    const { editorState, contentState, localeResource, locale, remountKey } = this.state;
+    const { editorState, contentState, localeResource, locale, remountKey, content } = this.state;
     const { allLocales, seoMode, isMobile, app: App, testAppConfig } = this.props;
     return (
       <App
@@ -118,7 +130,8 @@ class RichContentApp extends PureComponent<Props, State> {
         isMobile={isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
-        onRicosEditorChange={this.onRicosEditorChange}
+        onNewContentChange={this.onNewContentChange}
+        content={content}
         onContentStateChange={this.onContentStateChange}
         setLocale={this.setLocaleResource}
         seoMode={seoMode}

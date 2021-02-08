@@ -188,5 +188,5 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     },
   };
 
-  return RichContent.fromJSON(content);
+  return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent;
 };

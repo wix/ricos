@@ -35,15 +35,21 @@ import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
+import { RichContent } from 'ricos-schema';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
 class ContentStateEditor extends PureComponent<{
-  contentState: RicosContent;
+  contentState?: RicosContent;
   onChange: (contentState: RicosContent) => void;
+  onNewContentChange: (conten: RichContent) => void;
+  content?: RichContent;
+  shouldUseNewContent?: boolean;
 }> {
   state = {
-    value: stringifyJSON(this.props.contentState),
+    value: stringifyJSON(
+      this.props.shouldUseNewContent ? this.props.content : this.props.contentState
+    ),
   };
   editorOptions = {
     codeLens: false,
@@ -57,14 +63,15 @@ class ContentStateEditor extends PureComponent<{
   monaco: MonacoEditor;
 
   componentWillReceiveProps(nextProps) {
+    const { contentState, content, shouldUseNewContent } = nextProps;
     if (!this.monaco?.editor.hasTextFocus()) {
-      this.setState({ value: stringifyJSON(nextProps.contentState) });
+      this.setState({ value: stringifyJSON(shouldUseNewContent ? content : contentState) });
     }
   }
 
   editorWillMount: EditorWillMount = monaco => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-      validate: true,
+      validate: !this.props.shouldUseNewContent,
       schemas: [
         {
           uri: 'https://wix-rich-content/content-state-schema.json', // scema id
@@ -100,7 +107,11 @@ class ContentStateEditor extends PureComponent<{
   updateContentState = debounce(value => {
     if (value !== '') {
       try {
-        this.props.onChange(JSON.parse(value));
+        if (this.props.shouldUseNewContent) {
+          this.props.onNewContentChange(JSON.parse(value));
+        } else {
+          this.props.onChange(JSON.parse(value));
+        }
       } catch (e) {
         console.error(`Error parsing JSON: ${e.message}`);
       }

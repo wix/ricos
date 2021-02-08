@@ -23,7 +23,7 @@ export const toPlainText = async (
   content: RichContent | RicosContent,
   options?: PlainTextOptions
 ): Promise<string> => {
-  const ricosContent = RichContent.fromJSON(ensureRicosContent(content));
+  const ricosContent = ensureRicosContent(content);
   const { nodes } = ricosContent;
   let plainText = '';
 
