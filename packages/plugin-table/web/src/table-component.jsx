@@ -263,14 +263,14 @@ class TableComponent extends React.Component {
   isPositionInBoundaries = (boundary, pos) => boundary - 10 < pos && pos < boundary + 10;
 
   onColDragEnd = (e, dragsIndex) => {
-    this.table.reorderColumns(dragsIndex, this.colDropIndex);
+    dragsIndex && this.colDropIndex && this.table.reorderColumns(dragsIndex, this.colDropIndex);
     this.setState({ highlightColResizer: false });
     this.resetDrag();
     this.colDropIndex = null;
   };
 
   onRowDragEnd = (e, dragsIndex) => {
-    this.table.reorderRows(dragsIndex, this.rowDropIndex);
+    dragsIndex && this.rowDropIndex && this.table.reorderRows(dragsIndex, this.rowDropIndex);
     this.setState({ highlightRowResizer: false });
     this.resetDrag();
     this.dropTop = null;
@@ -337,7 +337,7 @@ class TableComponent extends React.Component {
     colsPositions.forEach((pos, index) => {
       if (
         (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
-        (this.movementX === 'left' && this.dropLeft > pos + 15)
+        (this.movementX === 'left' && dropLeft > pos + 15)
       ) {
         this.colDropIndex = index + 1;
       }
