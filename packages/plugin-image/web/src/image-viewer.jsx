@@ -10,6 +10,7 @@ import {
   getImageSrc,
   WIX_MEDIA_DEFAULT,
   anchorScroll,
+  addAnchorTagToUrl,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -140,7 +141,7 @@ class ImageViewer extends React.Component {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      props
+      { ariaHidden: 'true', ...props }
     );
   };
 
@@ -241,7 +242,9 @@ class ImageViewer extends React.Component {
         },
       },
     } = this.props;
-    const element = document.getElementById(`viewer-${anchor}`);
+    const anchorString = `viewer-${anchor}`;
+    const element = document.getElementById(anchorString);
+    addAnchorTagToUrl(anchorString);
     anchorScroll(element);
   };
 
@@ -261,6 +264,7 @@ class ImageViewer extends React.Component {
       return null;
     } else if (this.hasAnchor()) {
       e.preventDefault();
+      e.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);

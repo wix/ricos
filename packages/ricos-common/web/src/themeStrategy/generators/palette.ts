@@ -4,16 +4,29 @@ import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from
 import { RicosTheme, CssVarsObject } from '../themeTypes';
 
 const createCssVars = (colors: PaletteColors): CssVarsObject => {
-  const { textColor, bgColor: backgroundColor, actionColor } = colors;
+  const {
+    textColor,
+    bgColor: backgroundColor,
+    actionColor,
+    fallbackColor = '#000000',
+    disabledColor,
+    textColorLow,
+  } = colors;
   return {
     textColor,
     textColorTuple: toRgbTuple(textColor),
     actionColor,
     actionColorTuple: toRgbTuple(actionColor),
-    actionColorFallback: adaptForeground(actionColor),
-    actionColorFallbackTuple: toRgbTuple(adaptForeground(actionColor)),
+    actionColorFallback: adaptForeground(actionColor, fallbackColor),
+    actionColorFallbackTuple: toRgbTuple(adaptForeground(actionColor, fallbackColor)),
     backgroundColor,
     backgroundColorTuple: toRgbTuple(backgroundColor),
+    fallbackColor,
+    fallbackColorTuple: toRgbTuple(fallbackColor),
+    disabledColor,
+    disabledColorTuple: disabledColor ? toRgbTuple(disabledColor) : undefined,
+    textColorLow,
+    textColorLowTuple: textColorLow ? toRgbTuple(textColorLow) : undefined,
   };
 };
 
@@ -30,6 +43,8 @@ const extractColors = (palette: RicosTheme['palette']): PaletteColors => {
       actionColor: getColorValue(palette, COLORS.ACTION_COLOR),
       bgColor: getColorValue(palette, COLORS.BG_COLOR),
       textColor: getColorValue(palette, COLORS.TEXT_COLOR),
+      disabledColor: getColorValue(palette, COLORS.DISABLED_COLOR),
+      textColorLow: getColorValue(palette, COLORS.TEXT_COLOR_LOW),
     };
   } else if (palette && isRicosPalette(palette)) {
     return palette;
@@ -47,7 +62,9 @@ export default function createPalette(palette?: RicosTheme['palette']): PaletteS
     return { paletteVarsObject: {} };
   }
   const colors = extractColors(palette);
-  Object.entries(colors).forEach(([colorName, value]) => (colors[colorName] = toHexFormat(value)));
+  Object.entries(colors).forEach(
+    ([colorName, value]) => (colors[colorName] = value && toHexFormat(value))
+  );
   const paletteVarsObject = createCssVars(colors);
 
   return { paletteVarsObject, colors };

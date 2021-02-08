@@ -45,6 +45,11 @@ Cypress.Commands.add('paintBG', () => {
     .click();
 });
 
+Cypress.Commands.add('alignCell', alignTo => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.ALIGNMENT}]`).click({ force: true });
+  cy.get(`[data-hook*=${alignTo}]`).click({ force: true });
+});
+
 Cypress.Commands.add('setRowHeader', () => {
   cy.get(`[data-hook*=${TABLE_PLUGIN.ROW_HEADER}]`).click({ force: true });
 });
@@ -116,7 +121,7 @@ Cypress.Commands.add('paintBorder', (type, colorIndex) => {
   cy.get(`[data-hook*=${type}]`).click();
   cy.get(`[data-scheme-color]`)
     .eq(colorIndex)
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('paintTableTextColor', () => {

@@ -10,7 +10,7 @@
 
   &:hover {
     button {
-      background-color: rgba($fallbackColor, 0.06);
+      background-color: rgba($fallbackColorTuple, 0.06);
     }
     // .inlineToolbarButton_icon,
     // .inlineToolbarButton_icon svg,
@@ -24,6 +24,7 @@
 }
 
 .toolbarButton {
+  display: flex;
   background: transparent;
   color: $toolbar-font-color;
   padding: 4px;
@@ -31,6 +32,7 @@
   line-height: normal;
   width: 100%;
   text-align: left;
+  line-height: 1.5;
   cursor: pointer;
   &:hover,
   &:focus {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DataSheet from 'react-datasheet/lib';
+import DataSheet from 'wix-react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
 import { TableDataUtil } from './domain/tableDataUtil';
@@ -10,7 +10,13 @@ class TableViewer extends Component {
   constructor(props) {
     super(props);
     this.table = this.props.table || new TableDataUtil(props.componentData);
+    this.state = {};
   }
+
+  componentDidMount() {
+    this.tableViewerRef.children[0].classList.add('has-custom-focus');
+  }
+
   cellCreator = (i, j) => ({
     key: `${i}-${j}`,
     component: this.renderCell(i, j),
@@ -32,10 +38,18 @@ class TableViewer extends Component {
     return (
       <TableRenderer
         {...props}
-        columns={this.props.columns}
         table={this.table}
         tableRef={this.tableViewerRef}
-        isMobile={this.props.isMobile}
+        colDragProps={this.props.colDragProps}
+        onResize={this.props.onResize}
+        onResizeStart={this.props.onResizeStart}
+        highlightResizer={this.props.highlightResizer}
+        selectAll={this.props.selectAll}
+        tableHeight={this.props.tableHeight}
+        selected={this.props.selected}
+        isEditMode={this.props.isEditMode}
+        isEditingActive={this.props.isEditingActive}
+        tableOverflowWidth={this.props.tableOverflowWidth}
       />
     );
   };
@@ -50,20 +64,23 @@ class TableViewer extends Component {
 
   setCellRef = ref => (this.cellRef = ref);
 
-  setTableViewerRef = ref => (this.tableViewerRef = ref);
+  setTableViewerRef = ref => {
+    this.tableViewerRef = ref;
+    if (!this.state.isTableRefSet) {
+      this.setState({ isTableRefSet: true });
+    }
+  };
 
   cellRenderer = props => {
     const {
       setEditorRef,
       toolbarRef,
       setEditingActive,
-      updateCellContent,
       tableWidth,
       isMobile,
       selected = {},
       disableSelectedStyle,
       t,
-      handleCellClipboardEvent,
     } = this.props;
     return (
       <CellRenderer
@@ -74,12 +91,10 @@ class TableViewer extends Component {
         toolbarRef={toolbarRef}
         selectedCells={selected}
         setEditingActive={setEditingActive}
-        updateCellContent={updateCellContent}
         tableWidth={tableWidth}
         isMobile={isMobile}
         disableSelectedStyle={disableSelectedStyle}
         t={t}
-        handleCellClipboardEvent={handleCellClipboardEvent}
       />
     );
   };
@@ -87,13 +102,16 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   render() {
-    const { onSelect, selected, handleCopy, isEditMode } = this.props;
+    const { onSelect, selected, isEditMode, setCellContent, onClear, onPaste } = this.props;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
 
     return (
-      <div className={classNames(!isEditMode && styles.tableWrapper)} ref={this.setTableViewerRef}>
+      <div
+        className={classNames(isEditMode ? styles.editMode : styles.viewMode)}
+        ref={this.setTableViewerRef}
+      >
         <DataSheet
           data={this.grid}
           valueRenderer={this.valueRenderer}
@@ -102,7 +120,10 @@ class TableViewer extends Component {
           cellRenderer={this.cellRenderer}
           rowRenderer={this.rowRenderer}
           sheetRenderer={this.sheetRenderer}
-          handleCopy={handleCopy}
+          onClear={onClear}
+          getCellContent={this.table.getCellContent}
+          setCellContent={setCellContent}
+          onPaste={onPaste}
         />
       </div>
     );
@@ -115,7 +136,6 @@ TableViewer.propTypes = {
   innerRCV: PropTypes.func,
   table: PropTypes.object,
   onSelect: PropTypes.func,
-  handleCopy: PropTypes.func,
   setRowRef: PropTypes.func,
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.any,
@@ -129,7 +149,17 @@ TableViewer.propTypes = {
   isEditMode: PropTypes.bool,
   t: PropTypes.func,
   disableSelectedStyle: PropTypes.bool,
-  handleCellClipboardEvent: PropTypes.func,
+  colDragProps: PropTypes.object,
+  onResize: PropTypes.func,
+  onResizeStart: PropTypes.func,
+  highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  selectAll: PropTypes.bool,
+  tableHeight: PropTypes.number,
+  isEditingActive: PropTypes.bool,
+  setCellContent: PropTypes.func,
+  onClear: PropTypes.func,
+  onPaste: PropTypes.func,
+  tableOverflowWidth: PropTypes.number,
 };
 
 export default TableViewer;

@@ -8,6 +8,7 @@ import { cloneDeep, isEmpty } from 'lodash';
 import { ToolbarContainer, FloatingToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getCellFormattingButtonsProps } from './CellFormattingButtonProps';
 import { getContextMenuButtonsProps } from './ContextMenuButtonProps';
+import { GoBackIcon } from '../icons';
 
 class TableToolbar extends Component {
   constructor(props) {
@@ -90,11 +91,15 @@ class TableToolbar extends Component {
     if (firstCellRef && tableWidth) {
       const extraTopOffset = firstCellRef.offsetTop === 20 ? 60 : 41;
       const cellOffsetLeft = firstCellRef.offsetLeft;
+      const horizontalScrollbarElement = firstCellRef.closest(
+        '[data-id=horizontal-scrollbar-element]'
+      );
+      const xPosition = cellOffsetLeft - horizontalScrollbarElement.scrollLeft;
       return {
-        x: cellOffsetLeft,
-        offsetLeftInsideContainer: cellOffsetLeft,
+        x: xPosition < 0 ? 0 : xPosition,
+        offsetLeftInsideContainer: xPosition,
         y: firstCellRef.offsetTop,
-        containerWidth: tableWidth,
+        containerWidth: tableWidth - 40,
         extraTopOffset,
       };
     }
@@ -123,6 +128,8 @@ class TableToolbar extends Component {
       deleteBlock,
       isAllCellsSelected,
       merge,
+      distributeRows,
+      distributeColumns,
     } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
@@ -135,7 +142,9 @@ class TableToolbar extends Component {
       isAllCellsSelected,
       deleteBlock,
       selectedRows,
-      selectedCols
+      selectedCols,
+      multipleCellsSelected,
+      t
     );
     const contextMenuButtonsProps = getContextMenuButtonsProps(
       isAllCellsSelected,
@@ -152,17 +161,20 @@ class TableToolbar extends Component {
       selectRows,
       selectCols,
       deleteBlock,
-      merge
+      merge,
+      t,
+      distributeRows,
+      distributeColumns
     );
     const buttons = [
       {
         onClick: this.toggleIsTextFormattingOpen,
         dataHook: 'text-style',
-        text: 'Text Style',
+        text: t('TablePlugin_Toolbar_TextStyle_Button'),
         type: 'text',
       },
       {
-        type: 'gap',
+        type: 'SEPARATOR',
       },
       ...cellFormattingButtonsProps,
       {
@@ -186,7 +198,8 @@ class TableToolbar extends Component {
     return (
       <>
         <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
-          Go back
+          <GoBackIcon />
+          <div className={styles.goBackLabel}>{t('TablePlugin_Toolbar_GoBack_Button')}</div>
         </div>
         <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
       </>
@@ -249,6 +262,8 @@ TableToolbar.propTypes = {
   deleteBlock: PropTypes.func,
   isAllCellsSelected: PropTypes.bool,
   merge: PropTypes.func,
+  distributeRows: PropTypes.func,
+  distributeColumns: PropTypes.func,
 };
 
 export default TableToolbar;

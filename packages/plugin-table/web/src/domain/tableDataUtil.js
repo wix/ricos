@@ -15,10 +15,9 @@ export const paddingDiff = col => {
   return parseInt(padLeft) + parseInt(padRight);
 };
 
-export const getRefWidthAsNumber = ref => {
-  const widthStr = ref.style.width;
-  return parseInt(widthStr.substring(0, widthStr.length - 2));
-};
+export const getRefWidthAsNumber = ref => getSizeStringAsNumber(ref.style.width);
+
+export const getSizeStringAsNumber = str => parseInt(str.substring(0, str.length - 2));
 
 //SELECTION
 export const range = (start, end) => {
@@ -38,9 +37,13 @@ export const getRange = ({ start, end }) => {
   return ranges;
 };
 
-export const getColsRange = ({ start, end }) => {
+export const getColsRange = ({ start, end }) => getSectionRange(start, end, 'j');
+
+export const getRowsRange = ({ start, end }) => getSectionRange(start, end, 'i');
+
+const getSectionRange = (start, end, key) => {
   const ranges = [];
-  range(start.j, end.j).map(j => ranges.push(j));
+  range(start[key], end[key]).map(index => ranges.push(index));
   return ranges;
 };
 
@@ -78,6 +81,8 @@ export class TableDataUtil {
 
   getRowHeight = i => this.getRowsHeight()[i];
 
+  getColsMinWidth = () => this.componentData.config.colsMinWidth;
+
   // get min width of column (in case we want min width for column with specific atomic plugins)
   getColMinWidth = j => {
     let colMinWidth = CELL_MANUAL_MIN_WIDTH;
@@ -101,7 +106,7 @@ export class TableDataUtil {
     return colMinWidth;
   };
 
-  getCellWidthAsPixel = (tableWidth, i) => {
+  getCellWidthAsPixel = (tableWidth, i, colsMinWidth = []) => {
     const colsWidthSum = this.getColsWidth().reduce((acc, val) => acc + val, 0);
     let smallestCellIndex, smallestCellWidth, currCellWidth;
     this.getColsWidth().forEach((width, index) => {
@@ -112,14 +117,17 @@ export class TableDataUtil {
         cellWidth < CELL_AUTO_MIN_WIDTH &&
         (!smallestCellWidth || smallestCellWidth > cellWidth)
       ) {
-        smallestCellWidth = cellWidth;
+        smallestCellWidth = Math.max(colsMinWidth[index], cellWidth);
         smallestCellIndex = index;
       }
     });
     if (smallestCellWidth) {
-      return CELL_AUTO_MIN_WIDTH * (this.getColWidth(i) / this.getColWidth(smallestCellIndex));
+      return (
+        Math.min(CELL_AUTO_MIN_WIDTH, smallestCellWidth) *
+        (this.getColWidth(i) / this.getColWidth(smallestCellIndex))
+      );
     }
-    return Math.max(currCellWidth, CELL_AUTO_MIN_WIDTH);
+    return Math.max(currCellWidth, colsMinWidth[i]);
   };
 
   getCellWidthAsRatio = (tableWidth, totalColsWidth, cellWidth) =>
@@ -232,28 +240,42 @@ export class TableDataUtil {
   getSelectionStyle = (selection, defaultBG, defaultBorder) => {
     const range = getRange(selection);
     let selectionBGColor = this.getCellStyle(range[0].i, range[0].j)?.backgroundColor || defaultBG;
-    let selectionBorderColor = this.getCellBorderColor(
+    let selectionBorderColor = this.getConsistentCellBorderColor(
       selection,
       range[0].i,
       range[0].j,
       defaultBorder
     );
     let selectionVerticalAlign = this.getCellStyle(range[0].i, range[0].j)?.verticalAlign || 'top';
+    let selectionBorderIsActive = false;
     range.forEach(({ i, j }) => {
       const currentCellBGColor = this.getCellStyle(i, j)?.backgroundColor || defaultBG;
       if (selectionBGColor !== currentCellBGColor) {
         selectionBGColor = false;
       }
-      const currentCellBorderColor = this.getCellBorderColor(selection, i, j, defaultBorder);
+      const currentCellBorderColor = this.getConsistentCellBorderColor(
+        selection,
+        i,
+        j,
+        selectionBorderColor
+      );
       if (selectionBorderColor !== currentCellBorderColor) {
         selectionBorderColor = false;
+      }
+      if (this.isCellBorderActive(selection, i, j)) {
+        selectionBorderIsActive = true;
       }
       const currentVerticalAlign = this.getCellStyle(i, j)?.verticalAlign || 'top';
       if (selectionVerticalAlign !== currentVerticalAlign) {
         selectionVerticalAlign = false;
       }
     });
-    return { selectionBGColor, selectionBorderColor, selectionVerticalAlign };
+    return {
+      selectionBGColor,
+      selectionBorderColor,
+      selectionVerticalAlign,
+      selectionBorderIsActive,
+    };
   };
 
   getSelectedRows = (range = []) => {
@@ -283,22 +305,26 @@ export class TableDataUtil {
     return selected[0] && selected;
   };
 
-  getCellBorderColor = (selection, row, col, defaultBorder) => {
+  getCellBorderColor = (selection, row, col) => {
     const style = {};
     const range = getRange(selection);
     if (!range.find(({ i, j }) => i === row && j === col - 1)) {
-      style.borderLeft = this.getCellStyle(row, col)?.borderLeft;
+      style.borderLeft = this.getCell(row, col)?.border?.left;
     }
     if (!range.find(({ i, j }) => i === row && j === col + 1)) {
-      style.borderRight = this.getCellStyle(row, col)?.borderRight;
+      style.borderRight = this.getCell(row, col)?.border?.right;
     }
     if (!range.find(({ i, j }) => i === row - 1 && j === col)) {
-      style.borderTop = this.getCellStyle(row, col)?.borderTop;
+      style.borderTop = this.getCell(row, col)?.border?.top;
     }
     if (!range.find(({ i, j }) => i === row + 1 && j === col)) {
-      style.borderBottom = this.getCellStyle(row, col)?.borderBottom;
+      style.borderBottom = this.getCell(row, col)?.border?.bottom;
     }
-    const borderStyles = Object.values(style);
+    return Object.values(style);
+  };
+
+  getConsistentCellBorderColor = (selection, row, col, defaultBorder) => {
+    const borderStyles = this.getCellBorderColor(selection, row, col);
     const isBorderConsistent = borderStyles.every(borderStyle => borderStyle === borderStyles[0]);
     if (isBorderConsistent) {
       const borderColor = borderStyles[0]
@@ -308,6 +334,11 @@ export class TableDataUtil {
     } else {
       return false;
     }
+  };
+
+  isCellBorderActive = (selection, row, col) => {
+    const borderStyles = this.getCellBorderColor(selection, row, col);
+    return borderStyles.some(borderStyle => borderStyle !== undefined);
   };
 
   getColorFromBorderStyle = borderStyle => {

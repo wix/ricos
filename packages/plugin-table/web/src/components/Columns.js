@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import DragAndDropSection from './DragAndDropSection';
 import Resizer from './Resizer';
-import styles from '../../statics/styles/cell.scss';
+import styles from '../../statics/styles/columns.scss';
 import { CELL_MANUAL_MIN_WIDTH } from '../consts';
 import classNames from 'classnames';
 export default class Columns extends PureComponent {
@@ -17,6 +17,7 @@ export default class Columns extends PureComponent {
       highlightResizer,
       onResizeStart,
       columnsRefs,
+      tableOverflowWidth,
     } = this.props;
     return (
       <tr>
@@ -24,7 +25,7 @@ export default class Columns extends PureComponent {
           <td
             key={`column${i}`}
             className={classNames(
-              styles.columns,
+              styles.container,
               selectAll && styles.selectAll,
               activeDrag?.includes(i) && styles.selected
             )}
@@ -47,6 +48,7 @@ export default class Columns extends PureComponent {
                 size={size}
                 onResizeStart={onResizeStart}
                 itemsRefs={columnsRefs}
+                overflowWidth={tableOverflowWidth}
               />
             )}
           </td>
@@ -66,4 +68,5 @@ Columns.propTypes = {
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   onResizeStart: PropTypes.func,
   columnsRefs: PropTypes.array,
+  tableOverflowWidth: PropTypes.number,
 };

@@ -8,6 +8,7 @@ import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 import { ToolbarType } from 'wix-rich-content-common';
 
+const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
     if (
@@ -16,7 +17,7 @@ export default class Cell extends Component {
     ) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      this.contentBeforeEdit = prevProps.table.getCellContent(prevProps.row, prevProps.col);
+      !this.props.isMobile && this.editorRef?.selectAllContent(true);
       this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
     if (
@@ -28,7 +29,7 @@ export default class Cell extends Component {
     }
     if (this.props.selected) {
       if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
-        this.editorRef?.selectAllContent();
+        !this.props.isMobile && this.editorRef?.selectAllContent();
       }
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
@@ -63,8 +64,8 @@ export default class Cell extends Component {
     }
   };
 
-  handleClipboardEvent = e => {
-    const { editing, row, col, updateCellContent } = this.props;
+  onKeydown = e => {
+    const { editing, onKeyDown } = this.props;
     if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
@@ -72,9 +73,14 @@ export default class Cell extends Component {
         e.stopPropagation();
         e.preventDefault();
         this.editorRef.selectAllContent(true);
+      } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+        e.preventDefault();
+      } else if (e.key === 'v' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+        e.preventDefault();
       }
-      if (e.key === 'Escape') {
-        updateCellContent(row, col, this.contentBeforeEdit);
+      const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
+      if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
+        onKeyDown(e);
       }
     }
   };
@@ -85,6 +91,35 @@ export default class Cell extends Component {
         buttonsProps.type = 'modal';
       }
     });
+  };
+
+  getEditorWrapperStyle = (additionalStyles, isEditing) => {
+    const shouldSetEditStyle = !this.props.isMobile && isEditing;
+    const style = shouldSetEditStyle ? { minHeight: this.tdHeight, ...additionalStyles } : {};
+    const { verticalAlign } = additionalStyles;
+    if (shouldSetEditStyle && verticalAlign) {
+      style.display = 'flex';
+      if (verticalAlign === 'middle') {
+        style.alignItems = 'center';
+      } else if (verticalAlign === 'bottom') {
+        style.alignItems = 'flex-end';
+      }
+    }
+    return style;
+  };
+
+  getCellBorders = (cellBorders, shouldShowSelectedStyle) => {
+    const { table, selectedCells, row, col, disableSelectedStyle, isMobile, selected } = this.props;
+    const cellSelectionBorders = table.getCellBorders(selectedCells, row, col);
+    let borders = {};
+    if (disableSelectedStyle && selected) {
+      Object.entries(cellBorders).forEach(([key, val]) => {
+        !cellSelectionBorders[key] && (borders[key] = val);
+      });
+    } else {
+      borders = cellBorders;
+    }
+    return !isMobile && shouldShowSelectedStyle ? { ...borders, ...cellSelectionBorders } : borders;
   };
 
   render() {
@@ -103,31 +138,29 @@ export default class Cell extends Component {
       table,
       isMobile,
       disableSelectedStyle,
-      handleCellClipboardEvent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
+    const cellBorders = this.getCellBorders(border, shouldShowSelectedStyle);
     const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
+    const Selection = this.editorRef && isEditing && table.getCellContent(row, col).getSelection();
     const showFormattingToolbar =
       this.editorRef &&
       isEditing &&
-      !table
-        .getCellContent(row, col)
-        .getSelection()
-        .isCollapsed();
+      ((!Selection.isCollapsed() && Selection.getHasFocus()) ||
+        (document && document.querySelector('[data-id="rich-content-editor-modal"]')));
     if (showFormattingToolbar) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(toolbarButtons);
     } else if (isEditing) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
-    const editorWrapperStyle =
-      !isMobile && isEditing ? { minHeight: this.tdHeight, ...additionalStyles } : {};
+    const editorWrapperStyle = this.getEditorWrapperStyle(additionalStyles, isEditing);
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -135,9 +168,8 @@ export default class Cell extends Component {
         ref={this.setTdRef}
         className={classNames(
           styles.cell,
-          shouldShowSelectedStyle && styles.selected,
-          range?.length === 1 && styles.multiSelection,
-          isContainedInHeader && styles.header
+          isContainedInHeader && styles.header,
+          shouldShowSelectedStyle && !isEditing && styles.selected
         )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
@@ -149,12 +181,13 @@ export default class Cell extends Component {
           ...style,
           ...additionalStyles,
         }}
-        data-row={row}
-        data-col={col}
-        onKeyDown={this.handleClipboardEvent}
+        onKeyDown={this.onKeydown}
       >
         <div
-          className={classNames(!isMobile && isEditing && styles.editing)}
+          className={classNames(
+            !isMobile && isEditing && styles.editing,
+            !isEditing && styles.disableSelection
+          )}
           style={editorWrapperStyle}
         >
           <Editor
@@ -162,17 +195,19 @@ export default class Cell extends Component {
             selected={selected}
             contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
-            handleCellClipboardEvent={handleCellClipboardEvent}
           >
             {children}
           </Editor>
         </div>
-        <CellBorders
-          borders={
-            !isMobile && shouldShowSelectedStyle
-              ? table.getCellBorders(selectedCells, row, col)
-              : border
-          }
+        <CellBorders borders={cellBorders} />
+        <div
+          style={{
+            height: shouldShowSelectedStyle ? this.tdRef?.offsetHeight : 0,
+          }}
+          className={classNames(
+            shouldShowSelectedStyle && styles.selected,
+            range?.length === 1 && styles.singleSelection
+          )}
         />
       </Tag>
     );
@@ -187,27 +222,21 @@ class Editor extends Component {
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
-  handleClipboardEvent = e => {
-    if (this.props.editing) {
-      const editorState = this.editor.ref.getEditorState();
-      this.props.handleCellClipboardEvent(e, editorState);
-    }
-  };
-
   setEditorRef = ref => {
     this.editor = ref;
     this.props.setEditorRef(ref);
   };
 
   render() {
-    const { children, editing } = this.props;
+    const { children, editing, selected } = this.props;
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div
-        className={classNames(styles.editor, editing ? styles.edit : styles.view)}
-        onKeyDown={this.handleClipboardEvent}
-      >
-        {React.cloneElement(children, { ref: this.setEditorRef, editing })}
+      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
+        {React.cloneElement(children, {
+          ref: this.setEditorRef,
+          editing,
+          readOnly: !editing && !selected,
+        })}
       </div>
     );
   }
@@ -219,7 +248,6 @@ Editor.propTypes = {
   children: PropTypes.any,
   contentState: PropTypes.object,
   setIsHighlighted: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  handleCellClipboardEvent: PropTypes.func,
 };
 Cell.propTypes = {
   t: PropTypes.func,
@@ -240,9 +268,8 @@ Cell.propTypes = {
   toolbarRef: PropTypes.any,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
-  updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  handleCellClipboardEvent: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };

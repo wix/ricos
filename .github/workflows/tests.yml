@@ -37,6 +37,7 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - uses: arduino/setup-protoc@v1
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: npx midgard-yarn install --frozen-lockfile
@@ -63,7 +64,7 @@ jobs:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
           APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
         run: |
-          # fix video recording error
+          # fix video recording bug
           echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
           $(npm bin)/knapsack-pro-cypress
       - uses: actions/upload-artifact@v2
@@ -104,6 +105,7 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - uses: arduino/setup-protoc@v1
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: npx midgard-yarn install --frozen-lockfile
@@ -125,7 +127,7 @@ jobs:
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
           APPLITOOLS_IS_DISABLED: true
         run: |
-          # fix video recording error
+          # fix video recording bug
           echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
           $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true
       - uses: actions/upload-artifact@v2
@@ -150,6 +152,7 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - uses: arduino/setup-protoc@v1
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: npx midgard-yarn install --frozen-lockfile

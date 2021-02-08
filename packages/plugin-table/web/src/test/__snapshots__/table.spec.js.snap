@@ -3,6 +3,11 @@
 exports[`Test Table domain functions Test addColumn function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -20,7 +25,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -90,7 +95,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -161,6 +166,11 @@ Object {
 exports[`Test Table domain functions Test addColumn function 2`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -178,7 +188,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -248,7 +258,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -319,6 +329,10 @@ Object {
 exports[`Test Table domain functions Test addRow function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -389,7 +403,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -405,7 +419,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -478,9 +492,13 @@ Object {
 }
 `;
 
-exports[`Test Table domain functions Test clearRange function 1`] = `
+exports[`Test Table domain functions Test clearCells function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -497,7 +515,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -597,6 +615,9 @@ Object {
 exports[`Test Table domain functions Test deleteColumn function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+  ],
   "colsWidth": Array [
     10,
   ],
@@ -672,6 +693,10 @@ exports[`Test Table domain functions Test deleteColumn function 2`] = `
 Object {
   "alignment": "center",
   "colHeader": true,
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -799,6 +824,10 @@ exports[`Test Table domain functions Test deleteColumn function 3`] = `
 Object {
   "alignment": "center",
   "colHeader": false,
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -925,6 +954,10 @@ Object {
 exports[`Test Table domain functions Test deleteRow function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -995,6 +1028,10 @@ Object {
 exports[`Test Table domain functions Test distributeColumns function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -1158,6 +1195,9 @@ Object {
 exports[`Test Table domain functions Test mergeCells function 6`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+  ],
   "colsWidth": Array [
     10,
   ],
@@ -1207,7 +1247,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -1228,8 +1268,12 @@ Object {
 exports[`Test Table domain functions Test pasteCells function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+    120,
+  ],
   "colsWidth": Array [
-    10,
     10,
     10,
     10,
@@ -1271,16 +1315,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "cell 0,0",
-                "type": "unstyled",
-              },
-              Object {
-                "data": Object {},
-                "depth": 0,
-                "entityRanges": Array [],
-                "inlineStyleRanges": Array [],
-                "key": "",
-                "text": "test2",
+                "text": "",
                 "type": "unstyled",
               },
             ],
@@ -1296,16 +1331,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "cell 0,1",
-                "type": "unstyled",
-              },
-              Object {
-                "data": Object {},
-                "depth": 0,
-                "entityRanges": Array [],
-                "inlineStyleRanges": Array [],
-                "key": "",
-                "text": "test2",
+                "text": "",
                 "type": "unstyled",
               },
             ],
@@ -1375,7 +1401,7 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "",
+                "text": "​",
                 "type": "unstyled",
               },
             ],
@@ -1396,6 +1422,10 @@ Object {
 exports[`Test Table domain functions Test setCellsStyle function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -1524,6 +1554,10 @@ Object {
 exports[`Test Table domain functions Test setColumnWidth function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     96,
     10,
@@ -1649,6 +1683,10 @@ Object {
 exports[`Test Table domain functions Test setRowHeight function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,
@@ -1774,6 +1812,10 @@ Object {
 exports[`Test Table domain functions Test updateCellContent function 1`] = `
 Object {
   "alignment": "center",
+  "colsMinWidth": Array [
+    120,
+    120,
+  ],
   "colsWidth": Array [
     10,
     10,

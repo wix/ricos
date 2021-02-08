@@ -1,3 +1,4 @@
+import { Helpers } from 'wix-rich-content-common';
 import { testImages, testWixVideos } from './mock';
 
 export const mockImageNativeUploadFunc = (files, updateEntity) => {

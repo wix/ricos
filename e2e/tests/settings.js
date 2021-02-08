@@ -14,12 +14,13 @@ export const fixtures = [
   },
   'indent_blocks_lists_with_alignment',
   'quote',
-  {
-    fixture: 'facebook-video',
-    additionalCommands: cy => {
-      cy.waitForVideoToLoad();
-    },
-  },
+  // {
+  //   fixture: 'facebook-video',
+  //   additionalCommands: cy => {
+  //     cy.waitForVideoToLoad();
+  //     cy.wait(200);
+  //   },
+  // },
   'gif',
   'giphy',
   // {
@@ -45,6 +46,7 @@ export const fixtures = [
   'all-images-cases-part-1',
   'all-images-cases-part-2',
   'all-images-cases-part-3',
+  'unsupported-blocks',
   {
     fixture: 'link-preview-render',
     config: usePlugins(plugins.all),

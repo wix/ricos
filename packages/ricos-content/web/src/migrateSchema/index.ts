@@ -1,5 +1,10 @@
-import { fromDraft } from './fromDraft';
+export { fromDraft, ensureRicosContent } from './fromDraft/fromDraft';
+export { convertBlockDataToRicos } from './fromDraft/convertRicosPluginData';
 
-export const MigrateSchema = {
-  fromDraft,
-};
+export { toDraft, ensureDraftContent } from './toDraft/toDraft';
+export {
+  convertNodeDataToDraft,
+  convertNodeToDraftData,
+  convertDecorationDataToDraft,
+  convertDecorationToDraftData,
+} from './toDraft/convertDraftPluginData';

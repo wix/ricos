@@ -12,6 +12,29 @@ describe('Palette', () => {
     actionColorFallbackTuple: '0, 0, 0',
     backgroundColor: '#0E092B',
     backgroundColorTuple: '14, 9, 43',
+    disabledColor: undefined,
+    disabledColorTuple: undefined,
+    fallbackColor: '#000000',
+    fallbackColorTuple: '0, 0, 0',
+    textColorLow: undefined,
+    textColorLowTuple: undefined,
+  };
+
+  const wixExpected = {
+    ...expected,
+    disabledColor: '#FFFFFF',
+    disabledColorTuple: '255, 255, 255',
+    textColorLow: '#FFFFFF',
+    textColorLowTuple: '255, 255, 255',
+  };
+
+  const transparentExpected = {
+    ...expected,
+    textColor: '#FFFFFF00',
+    actionColor: '#FFFFFF00',
+    actionColorTuple: '255, 255, 255',
+    backgroundColor: '#FFFFFF00',
+    backgroundColorTuple: '255, 255, 255',
   };
 
   it('should return empty colors object', () => {
@@ -26,7 +49,7 @@ describe('Palette', () => {
 
   it('should apply wix palette', () => {
     const { paletteVarsObject: cssVars } = createPalette(wixPalettes[9]);
-    expect(cssVars).toStrictEqual(expected);
+    expect(cssVars).toStrictEqual(wixExpected);
   });
 
   it('should apply ricos palette', () => {
@@ -40,15 +63,6 @@ describe('Palette', () => {
       bgColor: 'transparent',
       textColor: 'transparent',
     });
-    expect(cssVars).toStrictEqual({
-      textColor: '#FFFFFF00',
-      textColorTuple: '255, 255, 255',
-      actionColor: '#FFFFFF00',
-      actionColorTuple: '255, 255, 255',
-      actionColorFallback: '#000000',
-      actionColorFallbackTuple: '0, 0, 0',
-      backgroundColor: '#FFFFFF00',
-      backgroundColorTuple: '255, 255, 255',
-    });
+    expect(cssVars).toStrictEqual(transparentExpected);
   });
 });

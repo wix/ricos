@@ -13,12 +13,22 @@ import ClickOutside from 'react-click-outsider';
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config } = props;
+    const { innerRCERenderedIn, config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
-      showToolbars: false,
+      showToolbars: editing || false,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.innerRCERenderedIn === 'table' &&
+      prevProps.editing === false &&
+      prevProps.editing !== this.props.editing
+    ) {
+      this.handleAtomicPluginsBorders(true);
+    }
   }
 
   cleanConfig = config => {
@@ -45,40 +55,6 @@ class InnerRCE extends PureComponent {
   onChange = editorState => {
     this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
-  };
-
-  onFocus = e => {
-    e.stopPropagation();
-    this.props.setEditorToolbars(this.ref);
-    this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
-  };
-
-  onClickOutside = e => {
-    if (
-      this.state.showToolbars &&
-      this.editorWrapper &&
-      e.target &&
-      !e.target.closest('[data-id=rich-content-editor-modal]') &&
-      !this.editorWrapper.contains(e.target)
-    ) {
-      this.setState({ showToolbars: false });
-    }
-  };
-
-  handleAtomicPluginsBorders = () => {
-    const { editing = true } = this.props;
-    const { showToolbars } = this.state;
-    const hideBorder = !showToolbars || !editing;
-    if (this.editorWrapper) {
-      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
-      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
-      atomicBlocks.forEach(block => {
-        const blockDataFocus = block.getAttribute('data-focus');
-        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
-        block.style.boxShadow = hideBorder ? 'none' : '';
-      });
-    }
   };
 
   getToolbars = () => {
@@ -120,10 +96,26 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
+    if (!this.state.showToolbars) {
+      this.setState({ showToolbars: true });
+    }
   };
 
-  handleAtomicPluginsBorders = () => {
+  onClickOutside = e => {
+    if (
+      this.state.showToolbars &&
+      this.editorWrapper &&
+      e.target &&
+      !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !e.target.closest('[class=ReactModalPortal]') &&
+      !this.editorWrapper.contains(e.target) &&
+      !e.target.closest('[data-hook=table-plugin-cell]')
+    ) {
+      this.setState({ showToolbars: false });
+    }
+  };
+
+  handleAtomicPluginsBorders = enterEditing => {
     const { editing = true } = this.props;
     const { showToolbars } = this.state;
     const hideBorder = !showToolbars || !editing;
@@ -131,7 +123,7 @@ class InnerRCE extends PureComponent {
       const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
       const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
       atomicBlocks.forEach(block => {
-        const blockDataFocus = block.getAttribute('data-focus');
+        const blockDataFocus = enterEditing ? 'true' : block.getAttribute('data-focus');
         block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
         block.style.boxShadow = hideBorder ? 'none' : '';
       });

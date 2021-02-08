@@ -1,15 +1,18 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { remove } from 'lodash';
 
-export const EditorEvents = {
-  PUBLISH: 'rce:publish',
-};
+//TODO: move to a lib
+export const EditorEvents = { PUBLISH: 'plugin:publish', RICOS_PUBLISH: 'ricos:publish' };
 
 export const EditorEventsContext = React.createContext({
-  subscribe() {},
+  subscribe() {
+    return () => {};
+  },
   unsubscribe() {},
-  dispatch() {},
+  dispatch() {
+    return Promise.resolve(true);
+  },
   publish() {},
 });
 
@@ -27,28 +30,6 @@ export const withEditorEvents = WrappedComponent => props => (
     {contextValue => <WrappedComponent editorEvents={contextValue} {...props} />}
   </EditorEventsContext.Consumer>
 );
-
-export const withEditorEventsRef = WrappedComponent => {
-  class WithEditorEvents extends React.Component {
-    static propTypes = {
-      forwardRef: PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.shape({ current: PropTypes.func }),
-      ]),
-    };
-    render() {
-      const { forwardRef, ...props } = this.props;
-      return (
-        <EditorEventsContext.Consumer>
-          {contextValue => (
-            <WrappedComponent editorEvents={contextValue} {...props} ref={forwardRef} />
-          )}
-        </EditorEventsContext.Consumer>
-      );
-    }
-  }
-  return forwardRef((props, ref) => <WithEditorEvents {...props} forwardRef={ref} />);
-};
 
 export class EditorEventsProvider extends React.Component {
   static propTypes = {
@@ -70,11 +51,13 @@ export class EditorEventsProvider extends React.Component {
   }
 
   publish() {
-    return this.dispatch(EditorEvents.PUBLISH).then(publishResponse => {
-      const editorResponse = publishResponse.filter(
-        ({ type } = {}) => type === 'EDITOR_PUBLISH'
-      )[0];
-      return editorResponse?.data;
+    return this.dispatch(EditorEvents.PUBLISH).then(() => {
+      return this.dispatch(EditorEvents.RICOS_PUBLISH).then(publishResponse => {
+        const editorResponse = publishResponse.filter(
+          ({ type } = {}) => type === 'EDITOR_PUBLISH'
+        )[0];
+        return editorResponse?.data;
+      });
     });
   }
 
@@ -97,3 +80,15 @@ export class EditorEventsProvider extends React.Component {
     );
   }
 }
+
+export const withEditorContext = WrappedComponent => {
+  const WrappedComponentWithEvents = withEditorEvents(WrappedComponent);
+  const withEditorProivder = props => {
+    return (
+      <EditorEventsProvider>
+        <WrappedComponentWithEvents {...props} />
+      </EditorEventsProvider>
+    );
+  };
+  return withEditorProivder;
+};

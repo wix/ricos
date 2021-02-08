@@ -58,6 +58,7 @@ import {
   POLL_TYPE,
   ACCORDION_TYPE,
   TABLE_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
 } from 'ricos-content';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
@@ -109,7 +110,8 @@ export type PluginType =
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE
   | typeof ACCORDION_TYPE
-  | typeof TABLE_TYPE;
+  | typeof TABLE_TYPE
+  | typeof UNSUPPORTED_BLOCKS_TYPE;
 
 export type BlockRendererFn = (
   contentBlock: ContentBlock,
@@ -191,6 +193,7 @@ export interface EditorPluginConfig {
     };
   };
   getIsVisiblePromise?: (...args) => Promise<boolean>;
+  innerRCEPlugins?: CreatePluginFunction[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -233,12 +236,15 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
   commonPubsub: Pubsub;
   pluginDefaults: Record<string, unknown>;
   spoilerWrapper?: (component: ComponentType) => ComponentType;
+  supportedBlockTypes: string[];
 }
 
 export interface LinkPanelSettings {
   blankTargetToggleVisibilityFn?: (anchorTarget?: AnchorTarget) => boolean;
   nofollowRelToggleVisibilityFn?: (relValue?: RelValue) => boolean;
   placeholder?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dropDown?: any;
 }
 
 export type UISettings = {

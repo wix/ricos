@@ -60,7 +60,6 @@
   line-height: 1.5;
   font-size: $paragraphFontSize;
   color: $primary-text-color;
-  background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
   @include ricosTypography('p', true);
@@ -198,7 +197,7 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba($fallbackColor, 0.06);
+  background-color: rgba($fallbackColorTuple, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;

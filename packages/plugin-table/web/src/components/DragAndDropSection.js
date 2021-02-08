@@ -32,16 +32,15 @@ class DragAndDropSection extends React.Component {
     if (this.isActive(i)) {
       this.clickedOnActiveDrag = true;
     } else {
-      const activeDrag = {};
+      this.drags = {};
       if (this.shiftKey && this.props.activeDrag) {
-        activeDrag.start = Math.min(i, this.props.activeDrag[0]);
-        activeDrag.end = Math.max(i, this.props.activeDrag[this.props.activeDrag.length - 1]);
+        this.drags.start = Math.min(i, this.props.activeDrag[0]);
+        this.drags.end = Math.max(i, this.props.activeDrag[this.props.activeDrag.length - 1]);
       } else {
-        activeDrag.start = i;
-        activeDrag.end = i;
+        this.drags.start = i;
+        this.drags.end = i;
       }
-      this.props.onDragClick(activeDrag);
-      this.drags = activeDrag;
+      this.props.onDragClick(this.drags);
     }
   };
 
@@ -51,7 +50,9 @@ class DragAndDropSection extends React.Component {
     const isDragging =
       this.curDrag && (this.isDragging || Math.abs(this.startPoint - this.getEventDiff(e)) > 25);
     if (isDragging) {
+      const { activeDrag } = this.props;
       this.isDragging = true;
+      this.drags = { start: Math.min(...activeDrag), end: Math.max(...activeDrag) };
       this.props.onDrag(e, this.drags);
     }
   };
@@ -74,8 +75,10 @@ class DragAndDropSection extends React.Component {
   isActive = i => this.props.activeDrag?.includes(i);
 
   getSelectedPreviewStyle = () => {
-    const { size, horizontal, index } = this.props;
-    const selectPreviewStyle = { visibility: this.isActive(index) && 'visible' };
+    const { size, horizontal, index, selectAll } = this.props;
+    const selectPreviewStyle = {
+      visibility: this.isActive(index) && (selectAll ? horizontal : !selectAll) && 'visible',
+    };
     if (horizontal) {
       selectPreviewStyle.height = size - 20;
       this.isActive(index + 1) && (selectPreviewStyle.borderRight = 'none');

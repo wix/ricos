@@ -13,7 +13,7 @@ import {
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget } from 'wix-rich-content-common';
+import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
@@ -27,7 +27,7 @@ type LinkDataUrl = {
 type LinkData = LinkDataUrl & { anchor?: string };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ExternalLinkData = any;
+type CustomLinkData = any;
 
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
@@ -80,11 +80,11 @@ export const getEntityData = (editorState: EditorState) => {
   return null;
 };
 
-export const insertExternalLink = (editorState: EditorState, externalData: ExternalLinkData) => {
+export const insertCustomLink = (editorState: EditorState, customData: CustomLinkData) => {
   const selection = getSelection(editorState);
   const editorStateWithLink = isSelectionBelongsToExistingLink(editorState, selection)
-    ? updateLink(editorState, selection, { externalData })
-    : insertLink(editorState, selection, { externalData });
+    ? updateLink(editorState, selection, { customData })
+    : insertLink(editorState, selection, { customData });
 
   const newEditorState = EditorState.forceSelection(
     editorStateWithLink,
@@ -153,7 +153,7 @@ function isSelectionBelongsToExistingLink(editorState: EditorState, selection: S
 function updateLink(
   editorState: EditorState,
   selection: SelectionState,
-  linkData: LinkData | ExternalLinkData
+  linkData: LinkData | CustomLinkData
 ) {
   const blockKey = selection.getStartKey();
   const block = editorState.getCurrentContent().getBlockForKey(blockKey);
@@ -175,11 +175,12 @@ function preventLinkInlineStyleForFurtherText(editorState: EditorState, selectio
 function insertLink(
   editorState: EditorState,
   selection: SelectionState,
-  data: LinkData | ExternalLinkData
+  data: LinkData | CustomLinkData
 ) {
   const oldSelection = editorState.getSelection();
+  const type = data?.customData ? CUSTOM_LINK_TYPE : LINK_TYPE;
   const editorWithLink = addEntity(editorState, selection, {
-    type: 'LINK',
+    type,
     data,
     mutability: 'MUTABLE',
   });
@@ -772,28 +773,6 @@ export function isCursorAtFirstLine(editorState: EditorState) {
 export function isCursorAtStartOfContent(editorState: EditorState) {
   const isStartOfLine = editorState.getSelection().getFocusOffset() === 0;
   return isStartOfLine && isCursorAtFirstLine(editorState);
-}
-
-export function isCursorAtLastLine(editorState: EditorState) {
-  const selection = editorState.getSelection();
-  return (
-    selection.isCollapsed() &&
-    editorState
-      .getCurrentContent()
-      .getBlockMap()
-      .last()
-      .getKey() === selection.getFocusKey()
-  );
-}
-
-export function isCursorAtEndOfContent(editorState: EditorState) {
-  const selection = editorState.getSelection();
-  const lastBlock = editorState
-    .getCurrentContent()
-    .getBlockMap()
-    .last();
-  const isEndOfLine = selection.getFocusOffset() >= lastBlock.getText().length;
-  return isEndOfLine && isCursorAtLastLine(editorState);
 }
 
 export function selectAllContent(editorState, forceSelection) {

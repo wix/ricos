@@ -11,26 +11,36 @@ import {
   ColumnHeader,
 } from '../icons';
 
-const DEFAULT_PALETTE = Object.freeze([
-  'transparent',
+const DEFAULT_PALETTE_BG = Object.freeze([
+  '#ff0000',
   '#ffffff',
   '#303030',
   '#3a54b4',
   '#bfad80',
   '#dddddd',
 ]);
-const DEFAULT_BG_COLOR = '#ffffff';
-const DEFAULT_BORDER_COLOR = '#dddddd';
+const DEFAULT_PALETTE_BORDERS = Object.freeze([
+  '#ff0000',
+  '#ffffff',
+  '#303030',
+  '#3a54b4',
+  '#bfad80',
+  '#dddddd',
+]);
+const DEFAULT_BG_COLOR = 'transparent';
+const DEFAULT_BORDER_COLOR = 'unset';
 
 const getColorsFromComponentData = (selected, table) => {
   const selectionStyle = table.getSelectionStyle(selected, DEFAULT_BG_COLOR, DEFAULT_BORDER_COLOR);
-  const bgColor = selectionStyle.selectionBGColor;
-  const borderColor = selectionStyle.selectionBorderColor;
+  const bgColor = selectionStyle.selectionBGColor || 'unset';
+  const borderColor = selectionStyle.selectionBorderColor || 'unset';
   const verticalAlignment = selectionStyle.selectionVerticalAlign;
+  const cellBorderIsActive = selectionStyle.selectionBorderIsActive;
   return {
     bgCurrentColor: bgColor,
     borderCurrentColor: borderColor,
     verticalAlignment,
+    cellBorderIsActive,
   };
 };
 
@@ -38,14 +48,14 @@ const setVerticalAlign = (value, table, selected) => {
   table.setCellsStyle({ verticalAlign: value }, getRange(selected));
 };
 
-const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
+const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock, t) => {
   return isAllCellsSelected
     ? [
         {
           type: 'SEPARATOR',
         },
         {
-          tooltip: 'Delete table',
+          tooltip: t('TablePlugin_Toolbar_DeleteTable_Tooltip'),
           onClick: deleteBlock,
           dataHook: 'delete-table',
           getIcon: () => TrashIcon,
@@ -58,7 +68,7 @@ const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
     : [];
 };
 
-const getHeaderButtons = (selectedRows, selectedCols, table) => {
+const getHeaderButtons = (selectedRows, selectedCols, table, t) => {
   const isRowHeader = isHeaderSelected(selectedRows);
   const isColHeader = isHeaderSelected(selectedCols);
   if (isRowHeader || isColHeader) {
@@ -67,7 +77,7 @@ const getHeaderButtons = (selectedRows, selectedCols, table) => {
         type: 'SEPARATOR',
       },
       {
-        tooltip: 'Set as Header',
+        tooltip: t('TablePlugin_Toolbar_Header_Tooltip'),
         onClick: isRowHeader ? table.toggleRowHeader : table.toggleColHeader,
         dataHook: isRowHeader ? 'row-header' : 'col-header',
         getIcon: () => (isRowHeader ? RowHeader : ColumnHeader),
@@ -81,6 +91,72 @@ const getHeaderButtons = (selectedRows, selectedCols, table) => {
   return [];
 };
 
+const getBorderColorButtons = (selected, settings, table, multipleCellsSelected) => {
+  if (multipleCellsSelected) {
+    return [
+      {
+        type: 'nested-menu',
+        dataHook: 'border-color-buttons',
+        getIcon: () => BorderIcon,
+        isActive: () => getColorsFromComponentData(selected, table).cellBorderIsActive,
+        buttonList: [
+          {
+            dataHook: 'border-color-around',
+            getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
+            onColorAdded: color => settings?.onBorderColorAdded?.(color),
+            onChange: color => table.setCellsSelectionBorderStyle(color, selected),
+            settings,
+            defaultPalette: DEFAULT_PALETTE_BORDERS,
+            getUserColors: () => settings?.getBorderUserColors?.(),
+            getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
+            getIcon: () => BorderOutsideIcon,
+            isDisabled: () => {},
+            getLabel: () => {},
+            isActive: () => false,
+            onResetColor: () => table.removeBorderAround(selected),
+            type: 'color-picker',
+          },
+          {
+            dataHook: 'border-color-all',
+            getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
+            onColorAdded: color => settings?.onBorderColorAdded?.(color),
+            onChange: color => table.setCellsSelectionBorderStyle(color, selected, true),
+            settings,
+            defaultPalette: DEFAULT_PALETTE_BORDERS,
+            getUserColors: () => settings?.getBorderUserColors?.(),
+            getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
+            getIcon: () => BorderIcon,
+            isDisabled: () => {},
+            getLabel: () => {},
+            isActive: () => false,
+            onResetColor: () => table.removeAllBorders(getRange(selected)),
+            type: 'color-picker',
+          },
+        ],
+      },
+    ];
+  } else {
+    return [
+      {
+        dataHook: 'border-color-around',
+        getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
+        onColorAdded: color => settings?.onBorderColorAdded?.(color),
+        onChange: color => table.setCellsSelectionBorderStyle(color, selected),
+        settings,
+        defaultPalette: DEFAULT_PALETTE_BORDERS,
+        getUserColors: () => settings?.getBorderUserColors?.(),
+        getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
+        getIcon: () => BorderIcon,
+        isDisabled: () => {},
+        getLabel: () => {},
+        isActive: () => getColorsFromComponentData(selected, table).cellBorderIsActive,
+        onResetColor: () => table.removeAllBorders(getRange(selected)),
+        type: 'color-picker',
+      },
+    ];
+  }
+};
+
 const isHeaderSelected = (selection = []) => selection.length === 1 && selection.includes('0');
 
 export const getCellFormattingButtonsProps = (
@@ -90,73 +166,11 @@ export const getCellFormattingButtonsProps = (
   isAllCellsSelected,
   deleteBlock,
   selectedRows,
-  selectedCols
+  selectedCols,
+  multipleCellsSelected,
+  t
 ) => {
   return [
-    {
-      tooltip: 'Back ground color',
-      dataHook: 'back-ground-color',
-      getCurrentColor: () => getColorsFromComponentData(selected, table).bgCurrentColor,
-      onColorAdded: color => settings?.onBgColorAdded?.(color),
-      onChange: color => table.setCellsStyle({ backgroundColor: color }, getRange(selected)),
-      settings,
-      defaultPalette: DEFAULT_PALETTE,
-      getUserColors: () => settings?.getBgUserColors?.(),
-      getDefaultColors: () => settings?.getBgDefaultColors?.() || DEFAULT_BG_COLOR,
-      getIcon: () => BGColorIcon,
-      isDisabled: () => {},
-      getLabel: () => {},
-      isActive: () =>
-        getColorsFromComponentData(selected, table).bgCurrentColor !== DEFAULT_BG_COLOR,
-      type: 'color-picker',
-    },
-    {
-      type: 'SEPARATOR',
-    },
-    {
-      type: 'nested-menu',
-      dataHook: 'border-color-buttons',
-      getIcon: () => BorderIcon,
-      isActive: () =>
-        getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
-      buttonList: [
-        {
-          dataHook: 'border-color-around',
-          getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
-          onColorAdded: color => settings?.onBorderColorAdded?.(color),
-          onChange: color => table.setCellsSelectionBorderStyle(color, selected),
-          settings,
-          defaultPalette: DEFAULT_PALETTE,
-          getUserColors: () => settings?.getBorderUserColors?.(),
-          getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
-          getIcon: () => BorderOutsideIcon,
-          isDisabled: () => {},
-          getLabel: () => {},
-          isActive: () =>
-            getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
-          type: 'color-picker',
-        },
-        {
-          dataHook: 'border-color-all',
-          getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
-          onColorAdded: color => settings?.onBorderColorAdded?.(color),
-          onChange: color => table.setCellsSelectionBorderStyle(color, selected, true),
-          settings,
-          defaultPalette: DEFAULT_PALETTE,
-          getUserColors: () => settings?.getBorderUserColors?.(),
-          getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
-          getIcon: () => BorderIcon,
-          isDisabled: () => {},
-          getLabel: () => {},
-          isActive: () =>
-            getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
-          type: 'color-picker',
-        },
-      ],
-    },
-    {
-      type: 'SEPARATOR',
-    },
     {
       buttonList: [
         {
@@ -167,7 +181,7 @@ export const getCellFormattingButtonsProps = (
           isDisabled: () => {},
           name: 'AlignTop',
           onClick: () => setVerticalAlign('top', table, selected),
-          tooltip: 'Align top',
+          tooltip: t('TablePlugin_Toolbar_VerticalAlignment_AlignTop_Tooltip'),
           type: 'button',
         },
         {
@@ -179,7 +193,7 @@ export const getCellFormattingButtonsProps = (
           isDisabled: () => {},
           name: 'AlignMiddle',
           onClick: () => setVerticalAlign('middle', table, selected),
-          tooltip: 'Align middle',
+          tooltip: t('TablePlugin_Toolbar_VerticalAlignment_AlignMiddle_Tooltip'),
           type: 'button',
         },
         {
@@ -191,16 +205,41 @@ export const getCellFormattingButtonsProps = (
           isDisabled: () => {},
           name: 'AlignBottom',
           onClick: () => setVerticalAlign('bottom', table, selected),
-          tooltip: 'Align bottom',
+          tooltip: t('TablePlugin_Toolbar_VerticalAlignment_AlignBottom_Tooltip'),
           type: 'button',
         },
       ],
       dataHook: 'VerticalAlignment',
       name: 'VerticalAlignment',
-      tooltip: 'Vertical alignment',
+      tooltip: t('TablePlugin_Toolbar_VerticalAlignment_Tooltip'),
       type: 'GROUP',
     },
-    ...getHeaderButtons(selectedRows, selectedCols, table),
-    ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock),
+    {
+      type: 'SEPARATOR',
+    },
+    {
+      tooltip: t('TablePlugin_Toolbar_BGColor_Tooltip'),
+      dataHook: 'back-ground-color',
+      getCurrentColor: () => getColorsFromComponentData(selected, table).bgCurrentColor,
+      onColorAdded: color => settings?.onBgColorAdded?.(color),
+      onChange: color => table.setCellsStyle({ backgroundColor: color }, getRange(selected)),
+      settings,
+      defaultPalette: DEFAULT_PALETTE_BG,
+      getUserColors: () => settings?.getBgUserColors?.(),
+      getDefaultColors: () => settings?.getBgDefaultColors?.() || DEFAULT_BG_COLOR,
+      getIcon: () => BGColorIcon,
+      isDisabled: () => {},
+      getLabel: () => {},
+      isActive: () =>
+        getColorsFromComponentData(selected, table).bgCurrentColor !== DEFAULT_BG_COLOR,
+      onResetColor: () => table.removeCellBackgroundColor(getRange(selected)),
+      type: 'color-picker',
+    },
+    {
+      type: 'SEPARATOR',
+    },
+    ...getBorderColorButtons(selected, settings, table, multipleCellsSelected),
+    ...getHeaderButtons(selectedRows, selectedCols, table, t),
+    ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock, t),
   ];
 };

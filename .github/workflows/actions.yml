@@ -1,8 +1,10 @@
 name: update
 on:
   push:
-    tags-ignore:
-      - '**'
+    tags:
+      - v9.*
+      - v8.*
+      - v7.*
     branches:
       - '**'
 jobs:
@@ -19,6 +21,7 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - uses: arduino/setup-protoc@v1
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: npx midgard-yarn install --frozen-lockfile
