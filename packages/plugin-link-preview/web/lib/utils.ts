@@ -1,3 +1,4 @@
+import { pickBy } from 'lodash';
 import { DEFAULTS } from '../src/defaults';
 import { LINK_PREVIEW_TYPE } from '../src/types';
 import {
@@ -38,7 +39,7 @@ const addLinkPreview = async (
     const data = {
       config: {
         ...currentConfig,
-        link: { ...currentConfig.link, ...linkData, url: fixedUrl },
+        link: { ...currentConfig.link, ...pickBy(linkData), url: fixedUrl },
         width: html && 350,
       },
       thumbnail_url,
