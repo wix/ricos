@@ -15,7 +15,7 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RichContent } from 'ricos-schema';
-import { RicosEditorNewContent, RicosEditorNewContentProps } from 'ricos-editor';
+import { RicosEditor, RicosEditorProps } from 'ricos-editor';
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -49,7 +49,9 @@ interface ExampleEditprProps {
   shouldUseNewContent?: boolean;
   initialState?: RicosContent;
   content?: RichContent;
+  injectedContent?: RichContent;
   onNewContentChange?: (content: RichContent) => void;
+  onNewInjectedContentChange?: (content: RichContent) => void;
 }
 
 interface ExampleEditprState {
@@ -65,7 +67,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
   config: RichContentEditorProps['config'];
   helpers: RichContentEditorProps['helpers'];
   editor: RichContentEditor;
-  ricosPlugins: RicosEditorNewContentProps['plugins'];
+  ricosPlugins: RicosEditorProps['plugins'];
 
   constructor(props: ExampleEditprProps) {
     super(props);
@@ -244,6 +246,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
       onNewContentChange,
       shouldUseNewContent,
       content,
+      injectedContent,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
@@ -267,10 +270,10 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
         {this.renderExternalToolbar()}
         {shouldUseNewContent ? (
           <div className="editor">
-            <RicosEditorNewContent
+            <RicosEditor
               onChange={onNewContentChange}
               content={content}
-              // injectedContent={content}
+              injectedContent={injectedContent}
               linkSettings={{ anchorTarget, relValue }}
               locale={locale}
               cssOverride={theme}
@@ -284,7 +287,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               linkPanelSettings={this.config.uiSettings.linkPanel}
             >
               <RichContentEditor helpers={helpersWithoutModal} />
-            </RicosEditorNewContent>
+            </RicosEditor>
           </div>
         ) : (
           <div className="editor">

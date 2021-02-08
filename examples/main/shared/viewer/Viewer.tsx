@@ -9,7 +9,7 @@ import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { RicosViewerNewContent, RicosViewerNewContentProps } from 'ricos-viewer';
+import { RicosViewer } from 'ricos-viewer';
 import { RichContent } from 'ricos-schema';
 
 const anchorTarget = '_top';
@@ -109,7 +109,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
       <>
         {shouldUseNewContent ? (
           <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
-            <RicosViewerNewContent
+            <RicosViewer
               content={content}
               plugins={Plugins.viewerPlugins}
               locale={locale}
@@ -120,7 +120,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
               seoSettings={seoMode}
             >
               <RichContentViewer helpers={viewerProps.helpers} />
-            </RicosViewerNewContent>
+            </RicosViewer>
           </div>
         ) : (
           <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">

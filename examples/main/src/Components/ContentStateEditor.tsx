@@ -42,7 +42,7 @@ const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 class ContentStateEditor extends PureComponent<{
   contentState?: RicosContent;
   onChange: (contentState: RicosContent) => void;
-  onNewContentChange: (conten: RichContent) => void;
+  onNewInjectedContentChange: (conten: RichContent) => void;
   content?: RichContent;
   shouldUseNewContent?: boolean;
 }> {
@@ -108,7 +108,7 @@ class ContentStateEditor extends PureComponent<{
     if (value !== '') {
       try {
         if (this.props.shouldUseNewContent) {
-          this.props.onNewContentChange(JSON.parse(value));
+          this.props.onNewInjectedContentChange(JSON.parse(value));
         } else {
           this.props.onChange(JSON.parse(value));
         }

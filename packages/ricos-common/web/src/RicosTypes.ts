@@ -17,6 +17,7 @@ import { RicosCssOverride } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
 import { RichContentViewerProps } from 'wix-rich-content-viewer';
+import { RichContent } from 'ricos-schema';
 
 export type RichContentProps = Partial<RichContentEditorProps | RichContentViewerProps>;
 
@@ -24,7 +25,7 @@ export interface RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: ReactElement;
-  content?: RicosContent;
+  content?: RicosContent | RichContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
   linkSettings?: LinkSettings;
@@ -46,7 +47,7 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
-  injectedContent?: RicosContent;
+  injectedContent?: RicosContent | RichContent;
   maxTextLength?: number;
   editorEvents?: {
     subscribe: (
@@ -56,7 +57,7 @@ export interface RicosEditorProps extends RicosProps {
     unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
     dispatch: (event: string) => Promise<unknown>;
   };
-
+  useNewContent?: boolean;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -72,7 +73,7 @@ export interface ContentStateGetterArgs {
   shouldRemoveErrorBlocks?: boolean;
 }
 
-export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent | RichContent;
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
@@ -83,10 +84,10 @@ export interface EditorDataInstance {
   getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
-  getContentStatePromise: () => Promise<RicosContent>;
+  getContentStatePromise: () => Promise<RicosContent | RichContent>;
 }
 
-export type OnContentChangeFunction = (content: RicosContent) => void;
+export type OnContentChangeFunction = (content: RicosContent | RichContent) => void;
 
 export type OnBusyChangeFunction = (isBusy: boolean) => void;
 

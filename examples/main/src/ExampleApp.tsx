@@ -27,7 +27,9 @@ interface ExampleAppProps {
   onContentStateChange?: (contentState: RicosContent) => void;
   contentState?: RicosContent;
   onNewContentChange?: (content: RichContent) => void;
+  onNewInjectedContentChange?: (content: RichContent) => void;
   content?: RichContent;
+  injectedContent?: RichContent;
   setLocale?: (locale: string) => void;
   locale?: string;
   allLocales?: string[];
@@ -225,6 +227,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       isMobile,
       onNewContentChange,
       content,
+      onNewInjectedContentChange,
+      injectedContent,
     } = this.props;
     const {
       isEditorShown,
@@ -253,6 +257,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
               <Editor
                 onChange={onEditorChange}
                 onNewContentChange={onNewContentChange}
+                onNewInjectedContentChange={onNewInjectedContentChange}
                 editorState={editorState}
                 isMobile={editorIsMobile || isMobile}
                 shouldMockUpload={shouldMockUpload}
@@ -265,6 +270,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 scrollingElementFn={this.editorScrollingElementFn}
                 externalToolbar={ExternalToolbar}
                 content={content}
+                injectedContent={injectedContent}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -346,7 +352,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderContentState = () => {
-    const { contentState, onContentStateChange, content, onNewContentChange } = this.props;
+    const { contentState, onContentStateChange, content, onNewInjectedContentChange } = this.props;
     const { isContentStateShown, shouldUseNewContent } = this.state;
     return (
       isContentStateShown && (
@@ -363,7 +369,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
               contentState={contentState}
               content={content}
               shouldUseNewContent={shouldUseNewContent}
-              onNewContentChange={onNewContentChange}
+              onNewInjectedContentChange={onNewInjectedContentChange}
             />
           </SectionContent>
         </ReflexElement>
