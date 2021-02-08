@@ -92,13 +92,10 @@ class RichContentApp extends PureComponent<Props, State> {
     this.updateContentState(editorState);
   };
 
+  onRicosEditorChange = (contentState: RicosContent) => this.setState({ contentState });
+
   onNewContentChange = (content: RichContent) => {
-    if (this.state.content) {
-      const diff = compare(content, this.state.content, { ignoredKeys: ['key'] });
-      if (Object.keys(diff).length > 0) {
-        this.setState({ content });
-      }
-    }
+    this.setState({ content });
   };
 
   onContentStateChange = (contentState: RicosContent) => {
@@ -130,6 +127,7 @@ class RichContentApp extends PureComponent<Props, State> {
         isMobile={isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
+        onRicosEditorChange={this.onRicosEditorChange}
         onNewContentChange={this.onNewContentChange}
         content={content}
         onContentStateChange={this.onContentStateChange}
