@@ -106,6 +106,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/wix/ricos/edit/master/website',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),

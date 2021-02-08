@@ -38,6 +38,7 @@ export default ({
       closePluginMenu: PropTypes.func,
       pluginMenuButtonRef: PropTypes.any,
       forceDisabled: PropTypes.bool,
+      sideToolbar: PropTypes.bool,
     };
 
     constructor(props) {
@@ -86,7 +87,7 @@ export default ({
 
     renderButton = ({ getIcon, getLabel, onClick, dataHook, isDisabled, tooltip }) => {
       const { styles } = this;
-      const { className, showName, tabIndex, forceDisabled } = this.props;
+      const { className, showName, tabIndex, forceDisabled, sideToolbar } = this.props;
       const Icon = getIcon();
       const label = getLabel();
       return (
@@ -97,7 +98,7 @@ export default ({
           className={classNames(
             className,
             styles.button,
-            showName ? styles.sideToolbarButton : styles.footerToolbarButton,
+            sideToolbar ? styles.sideToolbarButton : styles.footerToolbarButton,
             { [styles.forceDisabled]: isDisabled() || forceDisabled }
           )}
           data-hook={dataHook}
@@ -125,7 +126,7 @@ export default ({
       dataHook,
       isDisabled,
     }) => {
-      const { showName, tabIndex, forceDisabled } = this.props;
+      const { showName, tabIndex, forceDisabled, sideToolbar } = this.props;
       const { styles } = this;
       const Icon = getIcon();
       const label = getLabel();
@@ -135,7 +136,7 @@ export default ({
           dataHook={`${dataHook}_file_input`}
           className={classNames(
             styles.button,
-            showName ? styles.sideToolbarButton : styles.footerToolbarButton,
+            sideToolbar ? styles.sideToolbarButton : styles.footerToolbarButton,
             { [styles.forceDisabled]: isDisabled() || forceDisabled }
           )}
           onChange={onChange}
