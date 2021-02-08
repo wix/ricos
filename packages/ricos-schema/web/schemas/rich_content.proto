@@ -1,34 +1,40 @@
+/**
+* This schema defines a rich content object as used in the Ricos project https://github.com/wix/ricos
+* The content is defined in the RichContent message.
+* The content's structure is fundamentally a tree of nodes that represent rich text and content blocks.
+* Some nodes are basic rich text nodes (like paragraph, heading and list), other more complex nodes are
+* ricos plugins that allow creating rich content blocks (like image, giphy and poll).
+*/
+
 syntax = "proto3";
 
 package rich_content;
 
-import "google/protobuf/timestamp.proto";
-import "common.proto";
-import "selection.proto";
-import "decorations/anchor.proto";
-import "decorations/color.proto";
-import "decorations/link.proto";
-import "decorations/mention.proto";
-import "nodes/code.proto";
-import "nodes/heading.proto";
-import "nodes/paragraph.proto";
-import "plugins/button.proto";
-import "plugins/divider.proto";
-import "plugins/file.proto";
-import "plugins/gallery.proto";
-import "plugins/giphy.proto";
-import "plugins/html.proto";
-import "plugins/image.proto";
-import "plugins/link_preview.proto";
-import "plugins/map.proto";
-import "plugins/poll.proto";
-import "plugins/sound_cloud.proto";
-import "plugins/vertical_embed.proto";
-import "plugins/video.proto";
+import "timestamp.proto";
+import "decoration_anchor.proto";
+import "decoration_color.proto";
+import "decoration_link.proto";
+import "decoration_mention.proto";
+import "node_code.proto";
+import "node_heading.proto";
+import "node_paragraph.proto";
+import "plugin_button.proto";
+import "plugin_divider.proto";
+import "plugin_file.proto";
+import "plugin_gallery.proto";
+import "plugin_giphy.proto";
+import "plugin_html.proto";
+import "plugin_image.proto";
+import "plugin_link_preview.proto";
+import "plugin_map.proto";
+import "plugin_poll.proto";
+import "plugin_sound_cloud.proto";
+import "plugin_vertical_embed.proto";
+import "plugin_video.proto";
 
 message RichContent {
-    repeated Node nodes = 1 [required = true]; /// List of nodes
-    Metadata metadata = 2 [required = true];
+    repeated Node nodes = 1; // List of nodes
+    Metadata metadata = 2;
 }
 
 message Node {
@@ -59,9 +65,9 @@ message Node {
         TABLE = 23;
     }
 
-    Type type = 1 [required = true]; /// Node type
-    string key = 2 [required = true]; /// Node unique indentifier
-    repeated Node nodes = 3 [required = true]; /// List of child nodes
+    Type type = 1; // Node type
+    string key = 2; // Node unique indentifier
+    repeated Node nodes = 3; // List of child nodes
     oneof data {
         ButtonData button_data = 4;
         CodeData code_data = 5;
@@ -84,11 +90,11 @@ message Node {
 }
 
 message TextData {
-    string text = 1 [required = true]; /// Textual data
-    repeated Decoration decorations = 2; /// List of decorations
+    string text = 1; // Textual data
+    repeated Decoration decorations = 2; // List of decorations
 }
 
-/// Adds appearence changes to text
+// Adds appearence changes to text
 message Decoration {
     enum Type {
         BOLD = 0;
@@ -101,7 +107,7 @@ message Decoration {
         COLOR = 7;
     }
 
-    Type type = 1 [required = true]; /// Decoration type
+    Type type = 1; // Decoration type
     oneof data {
         AnchorData anchor_data = 2;
         ColorData color_data = 3;
@@ -111,7 +117,7 @@ message Decoration {
 }
 
 message Metadata {
-    google.protobuf.Timestamp last_edited = 1 [required = true]; /// Time of latest edit
-    string created_version = 2 [required = true]; /// Rich Content version used to create this schema
-    string updated_version = 3 [required = true]; /// Rich Content version last used to update this schema
+    string created_version = 1; // Rich Content version used to create this schema
+    string updated_version = 2; // Rich Content version last used to update this schema
+    Timestamp updated_date = 3; // Time of latest edit
 }
