@@ -17,9 +17,13 @@ const addLinkPreview = async (
   editorState: EditorState,
   config: CreatePluginConfig,
   blockKey: string,
-  url: string
+  linkData: {
+    url: string;
+    target?: string;
+    rel?: string;
+  }
 ) => {
-  const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
+  const fixedUrl = linkData.url.split('\u21b5').join(''); //remove {enter} char
   const settings = config[LINK_PREVIEW_TYPE] || {};
   const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
   const { setEditorState } = config;
@@ -34,7 +38,7 @@ const addLinkPreview = async (
     const data = {
       config: {
         ...currentConfig,
-        link: { url: fixedUrl, ...currentConfig.link },
+        link: { ...currentConfig.link, ...linkData, url: fixedUrl },
         width: html && 350,
       },
       thumbnail_url,
