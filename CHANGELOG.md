@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `headings`
+  - [#2116](https://github.com/wix-incubator/rich-content/pull/2116) headings toolbar in external modal
+
 </details>
 <hr/>
 
