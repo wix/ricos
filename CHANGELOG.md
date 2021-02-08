@@ -16,13 +16,15 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `vertical-embed`
-  - [#2118](https://github.com/wix-incubator/rich-content/pull/2118) fix css
   
 
 </details>
 <hr/>
+
+## 8.19.4 (Feb 8, 2021)
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#2118](https://github.com/wix-incubator/rich-content/pull/2118) fix css
 
 ## 8.19.3 (Feb 8, 2021)
 ### :bug: Bug Fix
