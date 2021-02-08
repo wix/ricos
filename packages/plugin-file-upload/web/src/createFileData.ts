@@ -5,11 +5,12 @@ import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createFileData: CreatePluginsDataMap[typeof RICOS_FILE_TYPE] = (
   pluginData,
-  currentData
+  currentData,
+  isRicosSchema = false
 ) => {
   if (!pluginData) {
     return undefined;
   }
-  const fileData = convertNodeDataToDraft(Node_Type.FILE, pluginData);
+  const fileData = isRicosSchema ? convertNodeDataToDraft(Node_Type.FILE, pluginData) : pluginData;
   return merge({}, currentData || DEFAULTS, fileData);
 };

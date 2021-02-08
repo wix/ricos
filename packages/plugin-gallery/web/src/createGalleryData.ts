@@ -5,7 +5,8 @@ import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createGalleryData: CreatePluginsDataMap[typeof RICOS_GALLERY_TYPE] = (
   pluginData,
-  currentData
+  currentData,
+  isRicosSchema = false
 ) => {
   if (!pluginData) {
     return undefined;
@@ -14,6 +15,8 @@ export const createGalleryData: CreatePluginsDataMap[typeof RICOS_GALLERY_TYPE] 
     // eslint-disable-next-line fp/no-delete
     delete currentData.items;
   }
-  const galleryData = convertNodeDataToDraft(Node_Type.GALLERY, pluginData);
+  const galleryData = isRicosSchema
+    ? convertNodeDataToDraft(Node_Type.GALLERY, pluginData)
+    : pluginData;
   return merge({}, currentData || DEFAULTS, galleryData);
 };

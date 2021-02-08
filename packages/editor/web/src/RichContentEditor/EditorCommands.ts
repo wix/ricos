@@ -141,12 +141,13 @@ export const createEditorCommands = (
     insertBlock: <K extends keyof PluginsDataMap>(
       type: K,
       config?: PluginsDataMap[K],
-      forceSelection = true
+      forceSelection = true,
+      isRicosSchema?: boolean
     ) => {
       const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(config);
+        const data = createPluginData(config, undefined, isRicosSchema);
         if (data) {
           const { newSelection, newEditorState } = createBlock(getEditorState(), data, draftType);
           setEditorState(
@@ -161,12 +162,13 @@ export const createEditorCommands = (
       blockKey: string,
       type: K,
       config?: PluginsDataMap[K],
-      forceSelection = true
+      forceSelection = true,
+      isRicosSchema?: boolean
     ) => {
       const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(config, editorState.getSelectedBlockData());
+        const data = createPluginData(config, editorState.getSelectedBlockData(), isRicosSchema);
         if (data) {
           const newEditorState = updateEntityData(getEditorState(), blockKey, data);
           const newSelection = newEditorState.getSelection();
@@ -184,12 +186,13 @@ export const createEditorCommands = (
   const decorationsCommands = {
     insertDecoration: <K extends keyof DecorationsDataMap>(
       type: K,
-      config?: DecorationsDataMap[K]
+      config?: DecorationsDataMap[K],
+      isRicosSchema?: boolean
     ) => {
       const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(config);
+        const data = createPluginData(config, undefined, isRicosSchema);
         if (data) {
           const newEditorState = insertDecorationsMap[type]?.(getEditorState(), data);
           if (newEditorState) {

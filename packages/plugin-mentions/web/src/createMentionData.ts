@@ -5,11 +5,14 @@ import { convertDecorationDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createMentionData: CreatePluginsDataMap[typeof RICOS_MENTION_TYPE] = (
   pluginData,
-  currentData
+  currentData,
+  isRicosSchema = false
 ) => {
   if (!pluginData) {
     return undefined;
   }
-  const mentionData = convertDecorationDataToDraft(Decoration_Type.MENTION, pluginData);
+  const mentionData = isRicosSchema
+    ? convertDecorationDataToDraft(Decoration_Type.MENTION, pluginData)
+    : pluginData;
   return merge({}, currentData || DEFAULTS, mentionData);
 };

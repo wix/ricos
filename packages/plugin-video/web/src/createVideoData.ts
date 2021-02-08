@@ -5,11 +5,14 @@ import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 
 export const createVideoData: CreatePluginsDataMap[typeof RICOS_VIDEO_TYPE] = (
   pluginData,
-  currentData
+  currentData,
+  isRicosSchema = false
 ) => {
   if (!pluginData) {
     return undefined;
   }
-  const videoData = convertNodeDataToDraft(Node_Type.VIDEO, pluginData);
+  const videoData = isRicosSchema
+    ? convertNodeDataToDraft(Node_Type.VIDEO, pluginData)
+    : pluginData;
   return merge({}, currentData || DEFAULTS, videoData);
 };
