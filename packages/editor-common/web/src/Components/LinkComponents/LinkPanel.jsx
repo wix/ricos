@@ -162,7 +162,7 @@ class LinkPanel extends Component {
           )}
           {showSponsoredRelValueCheckbox && (
             <Checkbox
-              label={'Mark as a sponsored link'}
+              label={t('LinkPanel_Sponsored_Checkbox')}
               theme={theme}
               checked={sponsored}
               dataHook="linkPanelSponsoredCheckbox"
