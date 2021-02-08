@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `headings`
   - [#2116](https://github.com/wix-incubator/rich-content/pull/2116) headings toolbar in external modal
+- `link-preview`
+  - [#2112](https://github.com/wix/ricos/pull/2112) fix link-preview link data (rel & target)
 
 </details>
 <hr/>
@@ -31,8 +33,6 @@
   - [#2099](https://github.com/wix/ricos/pull/2099) fix `onViewerLoaded` unwanted triggers
 - `link`
   - [#2108](https://github.com/wix/ricos/pull/2108) fix anchor not scrolling in wix site
-- `link-preview`
-  - [#2112](https://github.com/wix/ricos/pull/2112) fix link-preview link data (rel & target)
 - `editor`
   - [#2111](https://github.com/wix/ricos/pull/2111) fix horizontal side toolbar theme
 ### :house: Internal
