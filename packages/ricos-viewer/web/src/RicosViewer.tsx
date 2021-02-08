@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { RicosContent, Version } from 'wix-rich-content-common';
+import { RicosContent, Version, compare } from 'wix-rich-content-common';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
 import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
-import { compare } from 'ricos-content';
 
 interface State {
   isPreviewExpanded: boolean;

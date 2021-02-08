@@ -7,8 +7,8 @@ import {
 import { EditorProps } from 'draft-js';
 import { debounce, pick, sortBy, isEqual, isEmpty } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
-import { isContentStateEmpty } from 'ricos-content';
-import { RicosContent, isSSR, compare } from 'wix-rich-content-common';
+import { compare, isContentStateEmpty } from 'ricos-content';
+import { RicosContent, isSSR } from 'wix-rich-content-common';
 import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
 import { RichContent } from 'ricos-schema';
