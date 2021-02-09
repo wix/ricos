@@ -99,7 +99,14 @@ export class RicosEngine extends Component<EngineProps> {
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
 
-    const { openModal, closeModal, ariaHiddenId, container } = modalSettings;
+    const {
+      openModal,
+      closeModal,
+      ariaHiddenId,
+      container,
+      onModalOpen,
+      onModalClose,
+    } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
 
@@ -139,6 +146,8 @@ export class RicosEngine extends Component<EngineProps> {
         fullscreenProps={fullscreenProps}
         {...mergedRCProps}
         key={'ricosElement'}
+        onModalOpen={onModalOpen}
+        onModalClose={onModalClose}
       >
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </RicosModal>,

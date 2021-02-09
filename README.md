@@ -80,9 +80,7 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 ### Run Locally
 
 1. `yarn` - installs all dependencies and links any cross-dependencies.
-1. Build the modules by running one of the following:
-   1. `yarn build` - build once and bundle
-   1. `yarn watch` - rebuild on changes
+1. `yarn build` - Build the modules
 1. Run `yarn exampleApp` or `yarn storybook` to start the magic
 
 #### Examples

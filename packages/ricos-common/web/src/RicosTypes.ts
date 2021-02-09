@@ -99,6 +99,8 @@ export interface ModalSettings {
   closeModal?: () => void;
   ariaHiddenId?: string;
   container?: HTMLElement;
+  onModalOpen?: (data: Record<string, unknown>) => void;
+  onModalClose?: () => void;
 }
 
 export interface ToolbarSettings {
