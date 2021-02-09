@@ -1,7 +1,7 @@
 /** Based on https://gist.github.com/Yimiprod/7ee176597fef230d1451 */
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any */
 
-import { transform, isEqualWith, isEqual, isObject, omit } from 'lodash';
+import { transform, isEqualWith, isEqual, isObject, omit, cloneDeep } from 'lodash';
 
 const IGNORED_KEYS = ['updatedDate'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
@@ -16,12 +16,13 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
   const { verbose, ignoredKeys } = options;
   const allIgnoredKeys = [...IGNORED_KEYS, ...(ignoredKeys || [])];
   const comparator = getComparator(allIgnoredKeys);
-  object.blocks && removeEmoji(object);
-  base.blocks && removeEmoji(base);
+
+  const objectWithoutEmoji = object.blocks ? removeEmoji(object) : object;
+  const basetWithoutEmoji = base.blocks ? removeEmoji(base) : object;
 
   // Ignore ignoredKeys in object top level
-  const objectWithoutIgnored = omit(object, allIgnoredKeys);
-  const basetWithoutIgnored = omit(base, allIgnoredKeys);
+  const objectWithoutIgnored = omit(objectWithoutEmoji, allIgnoredKeys);
+  const basetWithoutIgnored = omit(basetWithoutEmoji, allIgnoredKeys);
 
   function changes(object, base) {
     return transform<any, any>(object, (result, value, key) => {
@@ -59,15 +60,17 @@ const getComparator = (ignoredKeys: string[]) => (left, right, key) => {
 };
 
 const removeEmoji = object => {
+  const newObject = cloneDeep(object);
   const emojiEntityKeys: number[] = [];
-  Object.entries<any>(object.entityMap).forEach(
+  Object.entries<any>(newObject.entityMap).forEach(
     ([key, value]) => value.type === 'EMOJI_TYPE' && emojiEntityKeys.push(parseInt(key, 10))
   );
-  object.entityMap = Object.entries<any>(object.entityMap).filter(
-    ([, value]) => value.type !== 'EMOJI_TYPE'
+  newObject.entityMap = Object.fromEntries(
+    Object.entries<any>(newObject.entityMap).filter(([, value]) => value.type !== 'EMOJI_TYPE')
   );
-  object.blocks = object.blocks.map(block => ({
+  newObject.blocks = newObject.blocks.map(block => ({
     ...block,
     entityRanges: block.entityRanges.filter(range => !emojiEntityKeys.includes(range.key)),
   }));
+  return newObject;
 };
