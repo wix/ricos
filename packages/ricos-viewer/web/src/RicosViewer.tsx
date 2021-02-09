@@ -5,7 +5,7 @@ import { RicosContent, Version, compare } from 'wix-rich-content-common';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
-import { ensureDraftContent } from 'ricos-content/libs/toDraft';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
 
 interface State {
   isPreviewExpanded: boolean;
