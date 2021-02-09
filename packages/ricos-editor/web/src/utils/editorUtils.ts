@@ -132,7 +132,7 @@ export function createDataConverter(
       isUpdated = true;
     }
 
-    onContentChange?.(useNewContent ? currContent : ensureRicosContent(currContent));
+    onContentChange?.(useNewContent ? ensureRicosContent(currContent) : currContent);
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
@@ -141,7 +141,7 @@ export function createDataConverter(
     }
 
     const returnedContent = shouldRemoveErrorBlocks ? errorBlocksRemover(currContent) : currContent;
-    return useNewContent ? returnedContent : ensureRicosContent(returnedContent);
+    return useNewContent ? ensureRicosContent(returnedContent) : returnedContent;
   };
   const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {
