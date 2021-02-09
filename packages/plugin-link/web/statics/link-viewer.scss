@@ -5,7 +5,12 @@
   color: $ricos-link-color;
   @include ricosTypography('link', false);
 }
-.linkToAnchorInViewer {
+.linkInEditor{
+  &:hover {
+    cursor: text;
+  }
+}
+.linkInViewer {
   &:hover {
     cursor: pointer;
   }

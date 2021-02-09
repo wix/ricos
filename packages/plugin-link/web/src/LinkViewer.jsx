@@ -47,12 +47,12 @@ class LinkViewer extends Component {
       onClick?.(event, componentData?.customData || this.getHref(url, anchor));
       if (anchor && !isInEditor) {
         event.preventDefault();
-        event.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
         const anchorString = `viewer-${anchor}`;
         const element = document.getElementById(anchorString);
         addAnchorTagToUrl(anchorString);
         anchorScroll(element);
       }
+      event.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
     }
   };
 
@@ -74,7 +74,8 @@ class LinkViewer extends Component {
       target: this.getTarget(anchor, target, anchorTarget),
       rel: rel ? rel : relValue || 'noopener',
       className: classNames(this.styles.link, {
-        [this.styles.linkToAnchorInViewer]: anchor && !isInEditor,
+        [this.styles.linkInEditor]: isInEditor,
+        [this.styles.linkInViewer]: !isInEditor,
       }),
       onClick: this.handleClick,
     };
