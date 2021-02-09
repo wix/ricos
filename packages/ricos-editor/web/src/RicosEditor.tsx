@@ -15,7 +15,7 @@ import {
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType, Version, compare, RicosContent } from 'wix-rich-content-common';
-import { ensureDraftContent } from 'ricos-content/libs/toDraft';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
