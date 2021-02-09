@@ -78,6 +78,8 @@ const forceSelection = true;
 
 const isRicosSchema = true;
 
+const useCurrentData = true;
+
 const insertPluginTest = ([pluginName, { type, data, expectedData }]) =>
   it(`should insert ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
@@ -92,7 +94,7 @@ const updatePluginTest = ([pluginName, { type, data, updatedData, expectedUpdate
     const blockKey = ricosEditor.getEditorCommands().getSelectedBlockKey();
     ricosEditor
       .getEditorCommands()
-      .updateBlock(blockKey, type, updatedData, forceSelection, isRicosSchema);
+      .updateBlock(blockKey, type, updatedData, forceSelection, isRicosSchema, useCurrentData);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
   });
 

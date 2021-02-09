@@ -163,12 +163,17 @@ export const createEditorCommands = (
       type: K,
       config?: PluginsDataMap[K],
       forceSelection = true,
-      isRicosSchema?: boolean
+      isRicosSchema?: boolean,
+      useCurrentData = false
     ) => {
       const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(config, editorState.getSelectedBlockData(), isRicosSchema);
+        const data = createPluginData(
+          config,
+          useCurrentData ? editorState.getSelectedBlockData() : undefined,
+          isRicosSchema
+        );
         if (data) {
           const newEditorState = updateEntityData(getEditorState(), blockKey, data);
           const newSelection = newEditorState.getSelection();
