@@ -76,7 +76,7 @@ const createToolbar: CreatePluginToolbar = config => {
     );
   };
 
-  const modalStylesFn = ({ ref }) => {
+  const modalStylesFn = ref => {
     const { bottom, left } = ref.getBoundingClientRect();
     return {
       content: {

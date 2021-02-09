@@ -10,11 +10,16 @@ class SettingsComponent extends PureComponent {
     super(props);
     const { settingsObj } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
+    const linkButtonSettings = settingsObj.url
+      ? {
+          url: settingsObj.url,
+          target: settingsObj.target || false,
+          rel: settingsObj.rel || false,
+        }
+      : {};
     this.state = {
-      url: settingsObj.url || '',
       buttonText: settingsObj.buttonText,
-      target: settingsObj.target || false,
-      rel: settingsObj.rel || false,
+      ...linkButtonSettings,
     };
   }
 
