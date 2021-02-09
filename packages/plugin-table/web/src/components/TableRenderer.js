@@ -11,10 +11,10 @@ export default class TableRenderer extends PureComponent {
     this.columns = [props.table.getColNum()];
   }
   componentDidMount() {
-    window.addEventListener('resize', this.onResizeWindow, 60);
+    window.addEventListener('resize', this.onResizeWindow);
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResizeWindow, 60);
+    window.removeEventListener('resize', this.onResizeWindow);
   }
 
   onResizeWindow = debounce(() => {
