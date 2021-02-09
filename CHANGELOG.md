@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling 
 ### :bug: Bug Fix
 - `link`
   - [#2119](https://github.com/wix-incubator/rich-content/pull/2119) anchors issues in editor
