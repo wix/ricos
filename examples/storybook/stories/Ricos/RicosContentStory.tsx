@@ -11,7 +11,10 @@ const plugins = [pluginImage(), pluginGallery()];
 
 export default () => {
   const editorEl = useRef(null);
-
+  const modalSettings = {
+    onModalOpen: () => console.log('modal opened'),
+    onModalClose: () => console.log('modal closed'),
+  };
   const isMobile = mobileDetect.mobile() !== null;
   const [content, setContent] = useState('');
 
@@ -29,7 +32,12 @@ export default () => {
       </h4>
       <Section>
         <RichContentEditorBox>
-          <RicosEditor ref={editorEl} isMobile={isMobile} plugins={plugins} />
+          <RicosEditor
+            ref={editorEl}
+            isMobile={isMobile}
+            plugins={plugins}
+            modalSettings={modalSettings}
+          />
           <ActionButton
             text={'getContentPromise()'}
             onClick={async () => {
