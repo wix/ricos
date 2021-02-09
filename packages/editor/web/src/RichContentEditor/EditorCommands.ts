@@ -68,7 +68,7 @@ type Selection = {
   hasFocus?: boolean;
 };
 
-const FROM_RICOS_PLUGIN_TYPE_MAP = {
+const PLUGIN_TYPE_MAP = {
   [RICOS_DIVIDER_TYPE]: DIVIDER_TYPE,
   [RICOS_FILE_TYPE]: FILE_UPLOAD_TYPE,
   [RICOS_GALLERY_TYPE]: GALLERY_TYPE,
@@ -79,6 +79,14 @@ const FROM_RICOS_PLUGIN_TYPE_MAP = {
   [RICOS_POLL_TYPE]: POLL_TYPE,
   [RICOS_LINK_TYPE]: LINK_TYPE,
   [RICOS_MENTION_TYPE]: MENTION_TYPE,
+  [DIVIDER_TYPE]: DIVIDER_TYPE,
+  [FILE_UPLOAD_TYPE]: FILE_UPLOAD_TYPE,
+  [GALLERY_TYPE]: GALLERY_TYPE,
+  [GIPHY_TYPE]: GIPHY_TYPE,
+  [HTML_TYPE]: HTML_TYPE,
+  [IMAGE_TYPE]: IMAGE_TYPE,
+  [VIDEO_TYPE]: VIDEO_TYPE,
+  [POLL_TYPE]: POLL_TYPE,
 };
 
 const insertDecorationsMap = {
@@ -144,7 +152,7 @@ export const createEditorCommands = (
       forceSelection = true,
       isRicosSchema?: boolean
     ) => {
-      const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config, undefined, isRicosSchema);
@@ -166,7 +174,7 @@ export const createEditorCommands = (
       isRicosSchema?: boolean,
       useCurrentData = false
     ) => {
-      const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(
@@ -194,7 +202,7 @@ export const createEditorCommands = (
       config?: DecorationsDataMap[K],
       isRicosSchema?: boolean
     ) => {
-      const draftType = FROM_RICOS_PLUGIN_TYPE_MAP[type];
+      const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
         const data = createPluginData(config, undefined, isRicosSchema);

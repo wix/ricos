@@ -118,13 +118,21 @@ export interface CreatePluginsDataMap {
 
 export interface PluginsDataMap {
   [RICOS_DIVIDER_TYPE]?: DividerData;
+  [DIVIDER_TYPE]?: DividerData;
   [RICOS_GIPHY_TYPE]?: GiphyData;
+  [GIPHY_TYPE]?: GiphyData;
   [RICOS_HTML_TYPE]?: HTMLData;
+  [HTML_TYPE]?: HTMLData;
   [RICOS_GALLERY_TYPE]?: GalleryData;
-  [RICOS_POLL_TYPE]?: GalleryData;
+  [GALLERY_TYPE]?: GalleryData;
+  [RICOS_POLL_TYPE]?: PollData;
+  [POLL_TYPE]?: PollData;
   [RICOS_VIDEO_TYPE]?: VideoData;
+  [VIDEO_TYPE]?: VideoData;
   [RICOS_FILE_TYPE]?: FileData;
+  [FILE_UPLOAD_TYPE]?: FileData;
   [RICOS_IMAGE_TYPE]?: ImageData;
+  [IMAGE_TYPE]?: ImageData;
 }
 
 export interface DecorationsDataMap {
