@@ -343,15 +343,18 @@ describe('RicosEditor', () => {
         ).toBeTruthy();
       });
     });
-    describe('Editor Decorations API', () => {
+    describe('Editor Decorations API (Ricos Schema)', () => {
       Object.entries(decorationsTestConfig).forEach(insertDecorationTest);
       Object.entries(decorationsTestConfig).forEach(updateDecorationTest);
       Object.entries(decorationsTestConfig).forEach(deleteDecorationTest);
     });
-    describe('Editor Plugins API', () => {
+    describe('Editor Plugins API (Ricos Schema)', () => {
       Object.entries(pluginsTestConfig).forEach(insertPluginTest);
       Object.entries(pluginsTestConfig).forEach(updatePluginTest);
       Object.entries(pluginsTestConfig).forEach(deletePluginTest);
     });
+    // TBA - Old Schema tests
+    // describe('Editor Decorations API (Old Schema)', () => {});
+    // describe('Editor Plugins API (Old Schema)', () => {});
   });
 });
