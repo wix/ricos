@@ -12,7 +12,7 @@ import {
   parseVerticalEmbed,
   parseVideo,
 } from './convertNodes';
-import { ensureRicosContent } from '../migrateSchema';
+import { ensureRicosContent } from '../migrateSchema/fromDraft';
 
 interface PlainTextOptions {
   urlShortener?: (url: string) => Promise<string>;
