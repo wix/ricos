@@ -325,6 +325,7 @@
   "VideoUploadModal_CustomVideoClickText": "Nahrát video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Přidat obrázek ke každé odpovědi",
   "LinkTo_Modal_Section_Item_Video": "Video",
+  "TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
   "ImageSettings_Header": "Nastavení obrázku",
   "LinkTo_Toolbar_GoTo": "Odkaz",
   "UploadFile_Error_Size_Toast": "Max. velikost souboru je {{maxLimit}} MB. Zkuste menší soubor.",

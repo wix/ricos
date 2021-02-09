@@ -325,6 +325,7 @@
   "VideoUploadModal_CustomVideoClickText": "Įkelti vaizdo įrašą",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Prie kiekvieno atsakymo pridėti vaizdą",
   "LinkTo_Modal_Section_Item_Video": "Vaizdo įrašas",
+  "TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
   "ImageSettings_Header": "Vaizdo nustatymai",
   "LinkTo_Toolbar_GoTo": "Eiti į nuorodą",
   "UploadFile_Error_Size_Toast": "Maks. failo dydis yra {{maxLimit}}  MB. Pabandykite mažesnį failą.",
