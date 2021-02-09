@@ -46,3 +46,5 @@ export const getDefaultsSettings = (rowNum = 4, colNum = 4) =>
       rows: createEmptyRows(rowNum, colNum),
     },
   });
+
+export const isCellsNumberInvalid = (rowNum, colNum) => rowNum * colNum > 100;

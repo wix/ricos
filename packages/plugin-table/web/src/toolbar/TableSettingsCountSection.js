@@ -13,7 +13,7 @@ export default class TableSettingsCountSection extends Component {
   }
 
   render() {
-    const { title, theme, input = '', submittedInvalidInput, errorMessage, dataHook } = this.props;
+    const { title, theme, input = '', error, dataHook, showErrorIcon } = this.props;
     return (
       <div className={styles.container}>
         {title}
@@ -21,10 +21,11 @@ export default class TableSettingsCountSection extends Component {
           inputRef={this.setInputRef}
           onChange={this.onChange}
           value={input}
-          error={submittedInvalidInput && errorMessage}
+          error={error}
           theme={theme}
           autoComplete="off"
           dataHook={dataHook}
+          showErrorIcon={showErrorIcon}
         />
       </div>
     );
@@ -36,7 +37,7 @@ TableSettingsCountSection.propTypes = {
   theme: PropTypes.any.isRequired,
   onCountChange: PropTypes.func.isRequired,
   input: PropTypes.string,
-  submittedInvalidInput: PropTypes.bool,
-  errorMessage: PropTypes.string,
+  error: PropTypes.string,
   dataHook: PropTypes.string,
+  showErrorIcon: PropTypes.bool,
 };
