@@ -17,7 +17,7 @@ export default class Cell extends Component {
     ) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      this.editorRef?.selectAllContent(true);
+      !this.props.isMobile && this.editorRef?.selectAllContent(true);
       this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
     if (
@@ -29,7 +29,7 @@ export default class Cell extends Component {
     }
     if (this.props.selected) {
       if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
-        this.editorRef?.selectAllContent();
+        !this.props.isMobile && this.editorRef?.selectAllContent();
       }
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
@@ -65,8 +65,8 @@ export default class Cell extends Component {
   };
 
   onKeydown = e => {
-    const { editing, onKeyDown } = this.props;
-    if (editing) {
+    const { editing, onKeyDown, isMobile } = this.props;
+    if (editing && !isMobile) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
@@ -75,7 +75,7 @@ export default class Cell extends Component {
         this.editorRef.selectAllContent(true);
       } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
         e.preventDefault();
-      } else if (e.key === 'v' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+      } else if (e.key === 'v' && (e.ctrlKey || e.metaKey || e.shiftKey)) {
         e.preventDefault();
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
@@ -139,7 +139,7 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
     } = this.props;
-    const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
+    const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
@@ -151,7 +151,10 @@ export default class Cell extends Component {
     const Tag = isContainedInHeader ? 'th' : 'td';
     const Selection = this.editorRef && isEditing && table.getCellContent(row, col).getSelection();
     const showFormattingToolbar =
-      this.editorRef && isEditing && !Selection.isCollapsed() && Selection.getHasFocus();
+      this.editorRef &&
+      isEditing &&
+      ((!Selection.isCollapsed() && Selection.getHasFocus()) ||
+        (document && document.querySelector('[data-id="rich-content-editor-modal"]')));
     if (showFormattingToolbar) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(toolbarButtons);
     } else if (isEditing) {

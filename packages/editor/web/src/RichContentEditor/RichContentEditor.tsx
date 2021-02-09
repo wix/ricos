@@ -252,7 +252,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
-    this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
     console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
@@ -861,8 +860,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     additionalProps,
     toolbarsToIgnore,
     tablePluginMenu,
-    editing,
-    onFocus,
   }) => {
     return (
       <InnerRCE
@@ -879,8 +876,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
         tablePluginMenu={tablePluginMenu}
-        editing={editing}
-        onFocus={onFocus}
       />
     );
   };

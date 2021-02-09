@@ -1,7 +1,9 @@
 import { AvailableExperiments } from 'wix-rich-content-common';
 
 export default async function localeStrategy(locale = 'en', experiments?: AvailableExperiments) {
-  console.debug('localeStrategy experiments', experiments); // eslint-disable-line no-console
+  if (experiments) {
+    console.debug('localeStrategy experiments', experiments); // eslint-disable-line no-console
+  }
   if (locale === 'en') {
     return { locale };
   }

@@ -76,6 +76,7 @@ class PluginViewer extends PureComponent {
         direction={direction}
         {...innerRCEViewerProps}
         config={config}
+        isInnerRcv
       />
     );
   };
