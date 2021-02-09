@@ -139,7 +139,6 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
     } = this.props;
-    // console.log(row, col, table.componentData, table.getCell(row, col));
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
