@@ -15,19 +15,34 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+  
+
 </details>
 <hr/>
+
+## 8.19.4 (Feb 8, 2021)
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#2118](https://github.com/wix-incubator/rich-content/pull/2118) fix css
+
+## 8.19.3 (Feb 8, 2021)
+### :bug: Bug Fix
+- `headings`
+  - [#2116](https://github.com/wix-incubator/rich-content/pull/2116) headings toolbar in external modal
+- `link-preview`
+  - [#2112](https://github.com/wix/ricos/pull/2112) fix link-preview link data (rel & target)
 
 ## 8.19.2 (Feb 8, 2021)
 ### :bug: Bug Fix
 - `editor`
-  - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onOpenEditorSuccess` unwanted triggers
+  - [#2099](https://github.com/wix/ricos/pull/2099) fix `onOpenEditorSuccess` unwanted triggers
 - `viewer`
-  - [##2099](https://github.com/wix/ricos/pull/#2099) fix `onViewerLoaded` unwanted triggers
+  - [#2099](https://github.com/wix/ricos/pull/2099) fix `onViewerLoaded` unwanted triggers
 - `link`
-  - [##2108](https://github.com/wix/ricos/pull/#2108) fix anchor not scrolling in wix site
+  - [#2108](https://github.com/wix/ricos/pull/2108) fix anchor not scrolling in wix site
 - `editor`
-  - [##2111](https://github.com/wix/ricos/pull/#2111) fix horizontal side toolbar theme
+  - [#2111](https://github.com/wix/ricos/pull/2111) fix horizontal side toolbar theme
 ### :house: Internal
 - `button`
   - [#2082](https://github.com/wix/ricos/pull/2082) remove link data from action-button
@@ -35,7 +50,7 @@
 ## 8.19.1 (Feb 6, 2021)
 ### :bug: Bug Fix
 - `image`
-  - [#2101](https://github.com/wix/ricos/pull/#2101) remove duplication of images in browsers reader mode
+  - [#2101](https://github.com/wix/ricos/pull/2101) remove duplication of images in browsers reader mode
 - `ricos-common`
   - [#2102](https://github.com/wix-incubator/rich-content/pull/2102) experiments API: wix-experiments compatibility
 
@@ -46,7 +61,7 @@
   - [#2079](https://github.com/wix-incubator/rich-content/pull/2079) experiments infra
 ### :bug: Bug Fix
 - `unsupported-blocks`
-  - [#2078](https://github.com/wix/ricos/pull/#2078) fix unsupported-blocks container height issue
+  - [#2078](https://github.com/wix/ricos/pull/2078) fix unsupported-blocks container height issue
 
 ## 8.18.3 (Feb 2, 2021)
 ### :bug: Bug Fix
@@ -527,7 +542,7 @@
 
 ### :book: Documentation
 
-- [##1782](https://github.com/wix/ricos/pull/#1782) legacy docs cleanu
+- [#1782](https://github.com/wix/ricos/pull/1782) legacy docs cleanu
 
 ### :house: Internal
 
@@ -1284,8 +1299,8 @@
 - `image`
   - [#1467](https://github.com/wix/ricos/pull/1467) image caption aligned correctly in rtl
 - `fullscreen`
-  - [##1468](https://github.com/wix/ricos/pull/#1468) add pro gallery css to fullscreen css
-  - [##1432](https://github.com/wix/ricos/pull/#1468) fix resolution on mobile
+  - [#1468](https://github.com/wix/ricos/pull/1468) add pro gallery css to fullscreen css
+  - [#1432](https://github.com/wix/ricos/pull/1468) fix resolution on mobile
 
 ## 7.16.10 (Aug 19, 2020)
 
@@ -2182,7 +2197,7 @@ fix bad release in 7.10.1
 - `wrapper`
   - [#852](https://github.com/wix/ricos/pull/852) strategies create configs & not functions
 - `viewer`
-  - [#861](https://github.com/wix/ricos/pull/#861) text direction util improved; tests added
+  - [#861](https://github.com/wix/ricos/pull/861) text direction util improved; tests added
   - [#846](https://github.com/wix/ricos/pull/846) switch to forked redraft (`wix-redraft`)
 - `e2e`
   - [#860](https://github.com/wix/ricos/pull/860) Images original size test
