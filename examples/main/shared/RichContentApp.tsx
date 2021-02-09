@@ -67,11 +67,9 @@ class RichContentApp extends PureComponent<Props, State> {
     const editorState = initialState
       ? createWithContent(convertFromRaw(initialState))
       : createEmpty();
-    const contentState = initialState || convertToRaw(editorState.getCurrentContent());
     return {
       editorState,
-      contentState,
-      content: fromDraft(contentState),
+      contentState: initialState || convertToRaw(editorState.getCurrentContent()),
       locale,
     };
   };
