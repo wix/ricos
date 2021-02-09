@@ -325,6 +325,7 @@
   "VideoUploadModal_CustomVideoClickText": "Videó feltöltése",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Kép hozzáadása minden válaszhoz",
   "LinkTo_Modal_Section_Item_Video": "Videó",
+  "TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
   "ImageSettings_Header": "Képbeállítások",
   "LinkTo_Toolbar_GoTo": "Ugrás a linkre",
   "UploadFile_Error_Size_Toast": "A fájl maximális mérete {{maxLimit}} MB. Próbálkozz egy kisebb fájllal!",
