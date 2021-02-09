@@ -1,5 +1,0 @@
-{
-    "main": "../../dist/lib/migrateSchema.cjs.js",
-    "module": "../../dist/lib/migrateSchema.js",
-    "types": "../../dist/lib/migrateSchema.d.ts"
-}
