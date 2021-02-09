@@ -126,7 +126,7 @@ export default ({
       dataHook,
       isDisabled,
     }) => {
-      const { showName, tabIndex, forceDisabled, sideToolbar } = this.props;
+      const { showName, tabIndex, forceDisabled, sideToolbar, className } = this.props;
       const { styles } = this;
       const Icon = getIcon();
       const label = getLabel();
@@ -135,6 +135,7 @@ export default ({
           disabled={isDisabled() || forceDisabled}
           dataHook={`${dataHook}_file_input`}
           className={classNames(
+            className,
             styles.button,
             sideToolbar ? styles.sideToolbarButton : styles.footerToolbarButton,
             { [styles.forceDisabled]: isDisabled() || forceDisabled }
