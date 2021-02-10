@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#2127](https://github.com/wix-incubator/rich-content/pull/2127) fix css issues
+
 </details>
 <hr/>
 
