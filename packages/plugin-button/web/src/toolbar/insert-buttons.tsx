@@ -16,6 +16,7 @@ const createInsertButtons: CreateInsertButtons = ({
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const rel = settings?.relValue === '_nofollow';
   const target = settings?.anchorTarget ? settings?.anchorTarget === '_blank' : true;
+  const isLinkButton = !settings.isActionButton;
   return [
     {
       type: BUTTON_TYPES.BUTTON,
@@ -23,7 +24,7 @@ const createInsertButtons: CreateInsertButtons = ({
       tooltip: customTooltip || t('ButtonPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      componentData: getDefaultComponentData(rel, target),
+      componentData: getDefaultComponentData(isLinkButton, rel, target),
     },
   ];
 };

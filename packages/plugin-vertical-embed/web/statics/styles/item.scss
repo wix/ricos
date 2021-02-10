@@ -3,7 +3,6 @@
 .container {
   width: calc(100% - 24px);
   cursor: pointer;
-  height: 48px;
   display: grid;
   grid-template-areas:
     'img title'

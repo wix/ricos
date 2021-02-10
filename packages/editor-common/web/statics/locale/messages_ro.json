@@ -325,6 +325,7 @@
   "VideoUploadModal_CustomVideoClickText": "Încarcă videoclip",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Adaugă o imagine la fiecare răspuns",
   "LinkTo_Modal_Section_Item_Video": "Video",
+  "TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
   "ImageSettings_Header": "Setări pentru imagini",
   "LinkTo_Toolbar_GoTo": "Accesează linkul",
   "UploadFile_Error_Size_Toast": "Dimensiunea maximă a fișierului este de {{maxLimit}} MB. Încearcă un fișier mai mic.",
