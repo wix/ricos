@@ -24,7 +24,6 @@ const externals = [
   /^wix-rich-content-viewer$/,
   /^ricos-content$/,
   /^ricos-content\/libs\/toDraftData$/,
-  /^ricos-schema$/,
   /^react-player$/,
 ];
 
