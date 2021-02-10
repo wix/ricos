@@ -76,7 +76,7 @@ export default class Cell extends Component {
       } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
         e.preventDefault();
       }
-      const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
+      const shouldCreateNewLine = e.key === 'Enter' && (e.altKey || e.shiftKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
         onKeyDown(e);
       }
