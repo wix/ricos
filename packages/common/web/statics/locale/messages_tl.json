@@ -325,6 +325,7 @@
 	"VideoUploadModal_CustomVideoClickText": "Mag-upload ng Video",
 	"Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Magdagdag ng larawan sa bawat sagot",
 	"LinkTo_Modal_Section_Item_Video": "VIDEO",
+	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
 	"ImageSettings_Header": "Mga Setting ng Larawan",
 	"LinkTo_Toolbar_GoTo": "Pumunta sa link",
 	"UploadFile_Error_Size_Toast": "ang max na laki ng file ay {{maxLimit}}MB. Sumubok ng mas maliit na file.",
