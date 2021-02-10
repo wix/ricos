@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Loader } from 'wix-rich-content-plugin-commons';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
-import { DEFAULTS, GALLERY_ITEMS_TYPES, imageItem, videoItem } from './defaults';
+import { DEFAULTS, GALLERY_ITEMS_TYPES, createImageItem, createVideoItem } from './defaults';
 import { GALLERY_TYPE } from './types';
 import styles from '../statics/styles/gallery-component.scss';
 
@@ -128,7 +128,8 @@ class GalleryComponent extends PureComponent {
     const handleFileUpload = helpers?.handleFileUpload;
 
     if (handleFileUpload) {
-      const createGalleryItem = type === GALLERY_ITEMS_TYPES.IMAGE ? imageItem : videoItem;
+      const createGalleryItem =
+        type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;
       const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, type);
       handleFileUpload(file, ({ data, error }) => {
         const item = createGalleryItem(data, Date.now().toString());
@@ -142,7 +143,7 @@ class GalleryComponent extends PureComponent {
 
   imageLoaded = (event, file, itemPos) => {
     const img = event.target;
-    const item = imageItem(img, Date.now().toString(), true);
+    const item = createImageItem(img, Date.now().toString(), true);
     const itemIdx = this.setItemInGallery(item, itemPos);
     this.handleFileUpload(file, GALLERY_ITEMS_TYPES.IMAGE, itemIdx);
   };

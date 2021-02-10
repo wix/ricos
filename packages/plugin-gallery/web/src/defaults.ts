@@ -83,7 +83,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const imageItem = (
+export const createImageItem = (
   img: ImageComponentData & HTMLImageElement,
   itemId: string,
   preloadImage: boolean | undefined
@@ -99,7 +99,7 @@ export const imageItem = (
   };
 };
 
-export const videoItem = (video: VideoComponentData, itemId: string) => {
+export const createVideoItem = (video: VideoComponentData, itemId: string) => {
   return {
     metadata: {
       type: 'video',
