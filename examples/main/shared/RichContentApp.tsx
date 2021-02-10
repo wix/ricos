@@ -11,7 +11,7 @@ import { compare, isSSR, RicosContent, SEOSettings } from 'wix-rich-content-comm
 import { getRequestedLocale, normalize } from '../src/utils';
 import { TestAppConfig } from '../src/types';
 import { RichContent } from 'ricos-schema';
-import { fromDraft } from 'ricos-content/libs/migrateSchema';
+import { fromDraft } from 'ricos-content/libs/fromDraft';
 
 type Mode = 'demo' | 'test';
 

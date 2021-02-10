@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/fromDraft.cjs.js",
+    "module": "../../dist/lib/fromDraft.js",
+    "types": "../../dist/lib/fromDraft.d.ts"
+}

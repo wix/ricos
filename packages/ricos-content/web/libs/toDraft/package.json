@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/toDraft.cjs.js",
+    "module": "../../dist/lib/toDraft.js",
+    "types": "../../dist/lib/toDraft.d.ts"
+}

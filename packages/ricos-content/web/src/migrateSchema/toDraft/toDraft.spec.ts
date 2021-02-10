@@ -1,4 +1,5 @@
-import { toDraft, fromDraft, convertNodeDataToDraft, convertDecorationDataToDraft } from '..';
+import { toDraft, convertNodeDataToDraft, convertDecorationDataToDraft } from '.';
+import { fromDraft } from '../fromDraft';
 import { compare } from '../../comparision/compare';
 import fixture from '../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../e2e/tests/fixtures/migration-content.json';

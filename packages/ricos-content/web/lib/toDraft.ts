@@ -1,11 +1,8 @@
 export {
-  fromDraft,
   toDraft,
   ensureDraftContent,
-  ensureRicosContent,
-  convertBlockDataToRicos,
   convertNodeDataToDraft,
   convertNodeToDraftData,
   convertDecorationToDraftData,
   convertDecorationDataToDraft,
-} from '../src/migrateSchema';
+} from '../src/migrateSchema/toDraft';

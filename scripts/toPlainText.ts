@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import path from 'path';
-import { fromDraft } from 'ricos-content/libs/migrateSchema';
+import { fromDraft } from 'ricos-content/libs/from-draft';
 import { toPlainText } from 'ricos-content/libs/toPlainText';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
 

@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import { writeFileSync, existsSync } from 'fs';
 import path from 'path';
-import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
+import { fromDraft } from 'ricos-content/libs/fromDraft';
+import { toDraft } from 'ricos-content/libs/toDraft';
 import { RichContent } from 'ricos-schema';
 import { RicosContent } from 'ricos-content';
 import { compare } from 'ricos-content/libs/comparision';
