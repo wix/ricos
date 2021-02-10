@@ -20,7 +20,7 @@
 </details>
 <hr/>
 
-## 8.20.1 (Feb 10, 2021)
+## 8.21.0 (Feb 10, 2021)
 ### :rocket: New Feature
 - `gallery`
   - [#1926](https://github.com/wix-incubator/rich-content/pull/1926) upload video items in gallery (will be available through wix-ricos soon)
