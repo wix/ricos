@@ -166,6 +166,7 @@ export default function createAtomicPluginToolbar({
         toolbarNode: findDOMNode(this),
         languageDir,
         isMobile,
+        renderedInTable: innerRCERenderedIn === 'table',
       });
       this.offsetHeight = updatedOffsetHeight;
       return position;

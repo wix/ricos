@@ -13,7 +13,9 @@
           "key": 0
         }
       ],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "8207r",
@@ -22,7 +24,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "7cqs0",
@@ -58,7 +62,9 @@
           "key": 2
         }
       ],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "4ni77",
@@ -67,7 +73,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "9uurj",
@@ -91,7 +99,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "cg20j",
@@ -112,7 +122,9 @@
           "key": 4
         }
       ],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "bhslk",
@@ -127,7 +139,9 @@
         }
       ],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "ckj27",
@@ -147,7 +161,9 @@
         }
       ],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "6na39",
@@ -171,7 +187,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "8ptbs",
@@ -180,7 +198,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "bu4jj",
@@ -189,7 +209,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "8hmrf",
@@ -198,7 +220,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "c4i62",
@@ -207,7 +231,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "7bn5j",
@@ -216,7 +242,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "bmqc9",
@@ -225,7 +253,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "ejfuu",
@@ -234,7 +264,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "45pcl",
@@ -243,7 +275,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "dl5nc",
@@ -252,7 +286,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "46hkp",
@@ -276,7 +312,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "5vr9d",
@@ -285,7 +323,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     }
   ],
   "entityMap": {

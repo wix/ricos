@@ -1,9 +1,9 @@
 import { ContextMenuIcon } from '../icons';
-import { getRange, getColsRange } from '../domain/tableDataUtil';
+import { getRange } from '../domain/tableDataUtil';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
-const clear = (table, selected) => table.clearRange(getRange(selected));
+const clear = (table, selected) => table.clearCells(getRange(selected));
 const split = (table, selected) => table.splitCell(getRange(selected));
 const selectRow = (selected, selectRows) => {
   const selectedRow = selected.start.i;
@@ -13,9 +13,6 @@ const selectCol = (selected, selectCols) => {
   const selectedCol = selected.start.j;
   selectCols({ start: selectedCol, end: selectedCol });
 };
-const distributeRows = (table, innerEditorsRefs, selected) =>
-  table.distributeRows(innerEditorsRefs, getRange(selected));
-const distributeColumns = (table, selected) => table.distributeColumns(getColsRange(selected));
 const addLastRow = (addRow, table) => addRow(table.getRowNum());
 const addLastCol = (addCol, table) => addCol(table.getColNum());
 
@@ -118,18 +115,18 @@ const addColLeftButton = (addCol, range, t) => {
   };
 };
 
-const distributeRowsButton = (table, innerEditorsRefs, selected, t) => {
+const distributeRowsButton = (distributeRows, selected, t) => {
   return {
-    onClick: () => distributeRows(table, innerEditorsRefs, selected),
+    onClick: () => distributeRows(selected),
     dataHook: 'distribute-rows',
     text: t('TablePlugin_Toolbar_ContextMenu_DistributeRows_Button'),
     type: 'text',
   };
 };
 
-const distributeColumnsButton = (table, selected, t) => {
+const distributeColumnsButton = (distributeColumns, selected, t) => {
   return {
-    onClick: () => distributeColumns(table, selected),
+    onClick: () => distributeColumns(selected),
     dataHook: 'distribute-columns',
     text: t('TablePlugin_Toolbar_ContextMenu_DistributeCols_Button'),
     type: 'text',
@@ -185,13 +182,16 @@ export const getContextMenuButtonsProps = (
   selectCols,
   deleteBlock,
   merge,
-  t
+  t,
+  distributeRows,
+  distributeColumns
 ) => {
   const range = selected && getRange(selected);
-  const shouldShowMerge =
-    range &&
-    table.isAllMergeRangeSelected(range) &&
-    !table.isBothHeaderCellsAndRegularCellsSelected(range);
+  const shouldShowMerge = false;
+  // const shouldShowMerge =
+  //   range &&
+  //   table.isAllMergeRangeSelected(range) &&
+  //   !table.isBothHeaderCellsAndRegularCellsSelected(range);
   const shouldShowSplit = table.getSelectedParentCells(range).length > 0;
   let buttons;
   if (isAllCellsSelected) {
@@ -205,8 +205,8 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(table, innerEditorsRefs, selected, t),
-      distributeColumnsButton(table, selected, t),
+      distributeRowsButton(distributeRows, selected, t),
+      distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else if (selectedRows) {
     buttons = [
@@ -219,7 +219,7 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(table, innerEditorsRefs, selected, t),
+      distributeRowsButton(distributeRows, selected, t),
     ];
   } else if (selectedCols) {
     buttons = [
@@ -232,7 +232,7 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeColumnsButton(table, selected, t),
+      distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else if (multipleCellsSelected) {
     buttons = [
@@ -241,8 +241,8 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(table, innerEditorsRefs, selected, t),
-      distributeColumnsButton(table, selected, t),
+      distributeRowsButton(distributeRows, selected, t),
+      distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else {
     buttons = [

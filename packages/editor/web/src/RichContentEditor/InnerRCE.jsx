@@ -13,16 +13,20 @@ import ClickOutside from 'react-click-outsider';
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config } = props;
+    const { innerRCERenderedIn, config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
-      showToolbars: false,
+      showToolbars: editing || false,
     };
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.editing === false && prevProps.editing !== this.props.editing) {
+    if (
+      this.props.innerRCERenderedIn === 'table' &&
+      prevProps.editing === false &&
+      prevProps.editing !== this.props.editing
+    ) {
       this.handleAtomicPluginsBorders(true);
     }
   }
@@ -54,26 +58,6 @@ class InnerRCE extends PureComponent {
   onChange = editorState => {
     this.shouldTriggerOnChange(editorState) && this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
-  };
-
-  onFocus = e => {
-    e.stopPropagation();
-    this.ref && this.props.setEditorToolbars(this.ref);
-    this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
-  };
-
-  onClickOutside = e => {
-    if (
-      this.state.showToolbars &&
-      this.editorWrapper &&
-      e.target &&
-      !e.target.closest('[data-id=rich-content-editor-modal]') &&
-      !e.target.closest('[class=ReactModalPortal]') &&
-      !this.editorWrapper.contains(e.target)
-    ) {
-      this.setState({ showToolbars: false });
-    }
   };
 
   getToolbars = () => {
@@ -115,7 +99,23 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
+    if (!this.state.showToolbars) {
+      this.setState({ showToolbars: true });
+    }
+  };
+
+  onClickOutside = e => {
+    if (
+      this.state.showToolbars &&
+      this.editorWrapper &&
+      e.target &&
+      !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !e.target.closest('[class=ReactModalPortal]') &&
+      !this.editorWrapper.contains(e.target) &&
+      !e.target.closest('[data-hook=table-plugin-cell]')
+    ) {
+      this.setState({ showToolbars: false });
+    }
   };
 
   handleAtomicPluginsBorders = enterEditing => {
