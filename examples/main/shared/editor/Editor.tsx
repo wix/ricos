@@ -272,6 +272,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
           <div className="editor">
             <RicosEditor
               onChange={onNewContentChange}
+              useNewContent={shouldUseNewContent}
               content={content}
               injectedContent={injectedContent}
               linkSettings={{ anchorTarget, relValue }}

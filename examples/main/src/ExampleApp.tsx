@@ -84,7 +84,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMockUpload: true,
       shouldMultiSelectImages: false,
       shouldNativeUpload: false,
-      shouldUseNewContent: true,
+      shouldUseNewContent: false,
       ...localState,
     };
   }
@@ -174,14 +174,16 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
         active: shouldUseNewContent,
         action: () => {
           const { onNewContentChange, onContentStateChange, contentState, content } = this.props;
-          if (!this.state.shouldUseNewContent) {
-            onNewContentChange(ensureRicosContent(contentState));
-          } else {
-            onContentStateChange(ensureDraftContent(content));
-          }
-          this.setState(state => ({
-            shouldUseNewContent: !state.shouldUseNewContent,
-          }));
+          this.setState(state => {
+            if (!state.shouldUseNewContent) {
+              onNewContentChange(ensureRicosContent(contentState));
+            } else {
+              onContentStateChange(ensureDraftContent(content));
+            }
+            return {
+              shouldUseNewContent: !state.shouldUseNewContent,
+            };
+          });
         },
       },
       {
@@ -400,6 +402,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     const { isEditorShown, isViewerShown, isContentStateShown, isPreviewShown } = this.state;
     const showEmptyState =
       !isEditorShown && !isViewerShown && !isContentStateShown && !isPreviewShown;
+    this.initSectionsSettings();
 
     return (
       <div className="wrapper">
