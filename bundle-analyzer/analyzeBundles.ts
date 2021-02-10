@@ -31,7 +31,7 @@ const getAllPluginsNames = ({
     'ricos-editor-with-plugins',
     'ricos-common',
     'rich-content-schema',
-    'from-draft-converter',
+    'to-from-draft-converters',
     'to-draft-converter',
   ];
 

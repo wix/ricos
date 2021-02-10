@@ -1,3 +1,3 @@
-import { fromDraft } from 'ricos-content/libs/fromDraft';
+import { toDraft } from 'ricos-content/libs/toDraft';
 
-export default () => fromDraft({ blocks: [], entityMap: {} });
+export default () => toDraft({ nodes: [] });

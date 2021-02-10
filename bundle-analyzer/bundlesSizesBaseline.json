@@ -39,5 +39,6 @@
   "ricos-editor-with-plugins": 899,
   "ricos-common": 16,
   "rich-content-schema": 103,
-  "draft-ricos-converter": 64
+  "to-from-draft-converters": 66,
+  "to-draft-converter": 29
 }
