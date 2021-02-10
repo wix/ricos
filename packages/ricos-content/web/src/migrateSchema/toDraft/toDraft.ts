@@ -23,7 +23,7 @@ export const ensureDraftContent = (content: RichContent | RicosContent) =>
   'nodes' in content ? toDraft(content) : content;
 
 export const toDraft = (ricosContent: RichContent): RicosContent => {
-  const { nodes, metadata } = RichContent.toJSON(RichContent.fromJSON(ricosContent)) as RichContent; // using toJSON to remove undefined fields
+  const { nodes, metadata } = ricosContent; // using toJSON to remove undefined fields
   const draftContent: RicosContent = {
     blocks: [],
     entityMap: {},
