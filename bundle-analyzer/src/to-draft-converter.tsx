@@ -1,3 +1,3 @@
-import { fromDraft } from 'ricos-content/libs/migrateSchema';
+import { fromDraft } from 'ricos-content/libs/fromDraft';
 
 export default () => fromDraft({ blocks: [], entityMap: {} });
