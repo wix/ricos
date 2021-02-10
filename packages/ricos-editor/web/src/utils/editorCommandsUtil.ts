@@ -22,6 +22,8 @@ import {
   ImageData,
   ImageConfig_ImageAlignment,
   LinkData,
+  Node_Type,
+  Decoration_Type,
 } from 'ricos-schema';
 
 export const content = {
@@ -58,6 +60,7 @@ export const selectionState2 = {
 
 const divider = {
   type: RICOS_DIVIDER_TYPE,
+  nodeType: Node_Type.DIVIDER,
   data: DividerData.fromJSON({
     type: DividerData_DividerType.DOUBLE,
   }),
@@ -76,6 +79,7 @@ const divider = {
 
 const giphy = {
   type: RICOS_GIPHY_TYPE,
+  nodeType: Node_Type.GIPHY,
   data: GiphyData.fromJSON({
     gif: {
       originalUrl: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.gif',
@@ -148,6 +152,7 @@ const giphy = {
 
 const html = {
   type: RICOS_HTML_TYPE,
+  nodeType: Node_Type.HTML,
   data: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
   updatedData: HTMLData.fromJSON({ src: 'www.sport5.co.il' }),
   expectedData: {
@@ -172,6 +177,7 @@ const html = {
 
 const gallery = {
   type: RICOS_GALLERY_TYPE,
+  nodeType: Node_Type.HTML,
   data: GalleryData.fromJSON({
     items: [
       {
@@ -335,6 +341,7 @@ const gallery = {
 // TODO: check about expected data
 const poll = {
   type: RICOS_POLL_TYPE,
+  nodeType: Node_Type.POLL,
   data: PollData.fromJSON({
     config: { enableVoteRole: true },
     poll: {},
@@ -354,6 +361,7 @@ const poll = {
 // TODO: check about expected data
 const video = {
   type: RICOS_VIDEO_TYPE,
+  nodeType: Node_Type.VIDEO,
   data: VideoData.fromJSON({
     url: 'https://www.youtube.com/watch?v=2iDTAGKkixE&ab_channel=QueenClub',
   }),
@@ -366,6 +374,7 @@ const video = {
 
 const file = {
   type: RICOS_FILE_TYPE,
+  nodeType: Node_Type.FILE,
   data: FileData.fromJSON({
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'File sample',
@@ -408,6 +417,7 @@ const file = {
 
 const image = {
   type: RICOS_IMAGE_TYPE,
+  nodeType: Node_Type.IMAGE,
   data: ImageData.fromJSON({
     src: {
       id: '8b72558253b2502b401bb46e5599f22a',
@@ -463,6 +473,7 @@ const image = {
 
 const link = {
   type: RICOS_LINK_TYPE,
+  decorationType: Decoration_Type.LINK,
   data: LinkData.fromJSON({ url: 'www.wix.com' }),
   updatedData: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
   expectedData: {

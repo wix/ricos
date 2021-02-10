@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 import React from 'react';
 import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
@@ -13,6 +14,7 @@ import { pluginVideo } from '../../../plugin-video/web/src';
 import { pluginFileUpload } from '../../../plugin-file-upload/web/src';
 import { pluginImage } from '../../../plugin-image/web/src';
 import { pluginLink } from '../../../plugin-link/web/src';
+import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 import {
   content,
   blockKey,
@@ -78,63 +80,78 @@ const forceSelection = true;
 
 const isRicosSchema = true;
 
-const useCurrentData = true;
+type Settings = { isRicosSchema?: boolean; forceSelection?: boolean };
 
-const insertPluginTest = ([pluginName, { type, data, expectedData }]) =>
+const insertPluginTest = (settings: Settings) => ([
+  pluginName,
+  { type, nodeType, data, expectedData },
+]) =>
   it(`should insert ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().insertBlock(type, data, { forceSelection, isRicosSchema });
+    data = settings?.isRicosSchema ? data : convertNodeDataToDraft(nodeType, data);
+    ricosEditor.getEditorCommands().insertBlock(type, data, settings);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedData);
   });
 
-const updatePluginTest = ([pluginName, { type, data, updatedData, expectedUpdatedData }]) =>
+const updatePluginTest = (settings: Settings) => ([
+  pluginName,
+  { type, nodeType, data, updatedData, expectedUpdatedData },
+]) =>
   it(`should update ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().insertBlock(type, data, { forceSelection, isRicosSchema });
+    data = settings?.isRicosSchema ? data : convertNodeDataToDraft(nodeType, data);
+    updatedData = settings?.isRicosSchema
+      ? updatedData
+      : convertNodeDataToDraft(nodeType, updatedData);
+    ricosEditor.getEditorCommands().insertBlock(type, data, settings);
     const blockKey = ricosEditor.getEditorCommands().getSelectedBlockKey();
     ricosEditor
       .getEditorCommands()
-      .updateBlock(blockKey, type, updatedData, { forceSelection, isRicosSchema, useCurrentData });
+      .updateBlock(blockKey, type, updatedData, { ...settings, useCurrentData: true });
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
   });
 
-const deletePluginTest = ([pluginName, { type, data }]) =>
+const deletePluginTest = (settings: Settings) => ([pluginName, { type, nodeType, data }]) =>
   it(`should remove ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().insertBlock(type, data, { forceSelection, isRicosSchema });
+    data = settings?.isRicosSchema ? data : convertNodeDataToDraft(nodeType, data);
+    ricosEditor.getEditorCommands().insertBlock(type, data, settings);
     const blockKey = ricosEditor.getEditorCommands().getSelectedBlockKey();
     ricosEditor.getEditorCommands().deleteBlock(blockKey);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual({});
   });
 
-const insertDecorationTest = ([pluginName, { type, data, expectedData }]) =>
+const insertDecorationTest = (settings: Settings) => ([pluginName, { type, data, expectedData }]) =>
   it(`should insert ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, { isRicosSchema });
+    ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedData);
   });
 
-const updateDecorationTest = ([pluginName, { type, data, updatedData, expectedUpdatedData }]) =>
+const updateDecorationTest = (settings: Settings) => ([
+  pluginName,
+  { type, data, updatedData, expectedUpdatedData },
+]) =>
   it(`should update ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, { isRicosSchema });
+    ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, updatedData, { isRicosSchema });
+    ricosEditor.getEditorCommands().insertDecoration(type, updatedData, settings);
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
   });
 
-const deleteDecorationTest = ([pluginName, { type, data }]) =>
+const deleteDecorationTest = (settings: Settings) => ([pluginName, { type, data }]) =>
   it(`should remove ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, { isRicosSchema });
+    ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
     ricosEditor.getEditorCommands().deleteDecoration(type);
@@ -344,17 +361,22 @@ describe('RicosEditor', () => {
       });
     });
     describe('Editor Decorations API (Ricos Schema)', () => {
-      Object.entries(decorationsTestConfig).forEach(insertDecorationTest);
-      Object.entries(decorationsTestConfig).forEach(updateDecorationTest);
-      Object.entries(decorationsTestConfig).forEach(deleteDecorationTest);
+      const settings = { isRicosSchema };
+      Object.entries(decorationsTestConfig).forEach(insertDecorationTest(settings));
+      Object.entries(decorationsTestConfig).forEach(updateDecorationTest(settings));
+      Object.entries(decorationsTestConfig).forEach(deleteDecorationTest(settings));
     });
     describe('Editor Plugins API (Ricos Schema)', () => {
-      Object.entries(pluginsTestConfig).forEach(insertPluginTest);
-      Object.entries(pluginsTestConfig).forEach(updatePluginTest);
-      Object.entries(pluginsTestConfig).forEach(deletePluginTest);
+      const settings = { forceSelection, isRicosSchema };
+      Object.entries(pluginsTestConfig).forEach(insertPluginTest(settings));
+      Object.entries(pluginsTestConfig).forEach(updatePluginTest(settings));
+      Object.entries(pluginsTestConfig).forEach(deletePluginTest(settings));
     });
-    // TBA - Old Schema tests
-    // describe('Editor Decorations API (Old Schema)', () => {});
-    // describe('Editor Plugins API (Old Schema)', () => {});
+    describe('Editor Plugins API (Old Schema)', () => {
+      const settings = { forceSelection };
+      Object.entries(pluginsTestConfig).forEach(insertPluginTest(settings));
+      Object.entries(pluginsTestConfig).forEach(updatePluginTest(settings));
+      Object.entries(pluginsTestConfig).forEach(deletePluginTest(settings));
+    });
   });
 });
