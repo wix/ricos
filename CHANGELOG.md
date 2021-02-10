@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+
+### :rocket: New Feature
+- `gallery`
+  - [#1926](https://github.com/wix-incubator/rich-content/pull/1926) upload video items in gallery (will be available through wix-ricos soon)
+
 ### :bug: Bug Fix
 - `vertical-embed`
   - [#2127](https://github.com/wix-incubator/rich-content/pull/2127) fix css issues

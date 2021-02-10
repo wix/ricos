@@ -43,6 +43,7 @@ export {
 export const KEYS_CHARCODE = {
   ENTER: 13,
   ESCAPE: 27,
+  SPACE: 32,
 };
 
 const ALIGN_LEFT = 'AlignLeft';
