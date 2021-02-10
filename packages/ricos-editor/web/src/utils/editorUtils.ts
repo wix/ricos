@@ -12,8 +12,7 @@ import { RicosContent, isSSR } from 'wix-rich-content-common';
 import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
 import { RichContent } from 'ricos-schema';
-import { ensureDraftContent } from 'ricos-content/libs/toDraft';
-import { ensureRicosContent } from 'ricos-content/libs/fromDraft';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
