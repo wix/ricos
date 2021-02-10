@@ -75,8 +75,6 @@ export default class Cell extends Component {
         this.editorRef.selectAllContent(true);
       } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
         e.preventDefault();
-      } else if (e.key === 'v' && (e.ctrlKey || e.metaKey || e.shiftKey)) {
-        e.preventDefault();
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
@@ -139,7 +137,6 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
     } = this.props;
-    // console.log(row, col, table.componentData, table.getCell(row, col));
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);

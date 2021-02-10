@@ -19,6 +19,8 @@ interface Props {
   locale: string;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
   container?: HTMLElement;
+  onModalOpen: (modalProps: Record<string, unknown>) => void;
+  onModalClose: () => void;
 }
 
 type ModalProps = {
@@ -70,7 +72,7 @@ export default class EditorModalProvider extends Component<Props, State> {
 
   openModal = (data: ModalProps) => {
     const { modalStyles, ...modalProps } = data;
-
+    this.props.onModalOpen?.(modalProps);
     this.setState({
       showModal: true,
       modalProps,
@@ -79,6 +81,7 @@ export default class EditorModalProvider extends Component<Props, State> {
   };
 
   closeModal = () => {
+    this.props.onModalClose?.();
     this.setState({
       showModal: false,
       modalProps: undefined,

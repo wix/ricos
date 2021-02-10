@@ -325,6 +325,7 @@
   "VideoUploadModal_CustomVideoClickText": "Last opp video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Legg til et bilde til hvert svar",
   "LinkTo_Modal_Section_Item_Video": "Video",
+  "TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
   "ImageSettings_Header": "Bildeinnstillinger",
   "LinkTo_Toolbar_GoTo": "Gå til lenke",
   "UploadFile_Error_Size_Toast": "Maks. filstørrelse er {{maxLimit}} MB. Prøv en mindre fil.",

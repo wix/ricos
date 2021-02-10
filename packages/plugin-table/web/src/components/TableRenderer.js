@@ -11,13 +11,13 @@ export default class TableRenderer extends PureComponent {
     this.columns = [props.table.getColNum()];
   }
   componentDidMount() {
-    window.addEventListener('resize', debounce(this.onResizeWindow, 60));
+    window.addEventListener('resize', this.onResizeWindow);
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', debounce(this.onResizeWindow, 60));
+    window.removeEventListener('resize', this.onResizeWindow);
   }
 
-  onResizeWindow = () => {
+  onResizeWindow = debounce(() => {
     this.setState({ windowWidth: window.innerWidth });
     const { table, tableRef } = this.props;
     tableRef.offsetWidth &&
@@ -29,7 +29,7 @@ export default class TableRenderer extends PureComponent {
         );
         col && (col.style.width = width + 'px');
       });
-  };
+  }, 60);
 
   render() {
     const {
