@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
 import {
   getAnchorBlockData,
   InlineToolbarButton,
@@ -20,6 +20,8 @@ const spaceBefore = 'padding-top';
 const spaceAfter = 'padding-bottom';
 
 export default class LineSpacingButton extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.state = { showPanel: false };
@@ -76,9 +78,7 @@ export default class LineSpacingButton extends Component {
 
   fixSelection = EditorState.forceSelection;
 
-  static getModalParent() {
-    return document.querySelector('.DraftEditor-root').parentNode;
-  }
+  getModalParent = () => this.context.editorWrapper;
 
   render() {
     const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar } = this.props;
@@ -104,32 +104,34 @@ export default class LineSpacingButton extends Component {
         icon={icon}
         ref={ref => (this.buttonRef = ref)}
       >
-        <Modal
-          isOpen={isPanelOpen}
-          onRequestClose={() => this.save()}
-          className={classNames(styles.lineSpacingModal, {
-            [styles.lineSpacingModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames(styles.lineSpacingModalOverlay, {
-            [styles.lineSpacingModalOverlay_mobile]: isMobile,
-          })}
-          parentSelector={LineSpacingButton.getModalParent}
-          style={{
-            content: modalStyle,
-          }}
-          ariaHideApp={false}
-        >
-          <Panel
-            spacing={{ ...defaultSpacing, ...spacing }}
-            onChange={this.updateSpacing}
-            onSave={this.save}
-            onCancel={this.cancel}
-            styles={this.styles}
-            t={t}
-            isMobile={isMobile}
-            theme={theme}
-          />
-        </Modal>
+        {isPanelOpen ? (
+          <Modal
+            isOpen={isPanelOpen}
+            onRequestClose={() => this.save()}
+            className={classNames(styles.lineSpacingModal, {
+              [styles.lineSpacingModal_mobile]: isMobile,
+            })}
+            overlayClassName={classNames(styles.lineSpacingModalOverlay, {
+              [styles.lineSpacingModalOverlay_mobile]: isMobile,
+            })}
+            parentSelector={this.getModalParent}
+            style={{
+              content: modalStyle,
+            }}
+            ariaHideApp={false}
+          >
+            <Panel
+              spacing={{ ...defaultSpacing, ...spacing }}
+              onChange={this.updateSpacing}
+              onSave={this.save}
+              onCancel={this.cancel}
+              styles={this.styles}
+              t={t}
+              isMobile={isMobile}
+              theme={theme}
+            />
+          </Modal>
+        ) : null}
       </InlineToolbarButton>
     );
   }

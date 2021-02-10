@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
 import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
 import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
 import TextColorPanel from './TextColorPanel';
@@ -12,6 +12,8 @@ import styles from '../../statics/styles/text-color-modal.scss';
 import { styleMapper } from '../text-decorations-utils';
 
 export default class BaseTextColor extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.state = { showPanel: false };
@@ -20,9 +22,7 @@ export default class BaseTextColor extends Component {
     this.styleMapper = styleMapper(props.pluginParams.type);
   }
 
-  static getModalParent() {
-    return document.querySelector('.DraftEditor-root').parentNode;
-  }
+  getModalParent = () => this.context.editorWrapper;
 
   openPanel = () => {
     const { isMobile, setKeepOpen } = this.props;
@@ -107,36 +107,38 @@ export default class BaseTextColor extends Component {
         icon={pluginParams.icon}
         forwardRef={this.buttonRef}
       >
-        <Modal
-          onRequestClose={() => this.closePanel()}
-          isOpen={isPanelOpen}
-          parentSelector={BaseTextColor.getModalParent}
-          className={classNames({
-            [this.styles.textColorModal]: !isMobile,
-            [this.styles.textColorModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames({
-            [this.styles.textColorModalOverlay]: !isMobile,
-            [this.styles.textColorModalOverlay_mobile]: isMobile,
-          })}
-          style={modalStyle}
-          ariaHideApp={false}
-        >
-          <TextColorPanel
-            t={t}
-            isMobile={isMobile}
-            theme={theme}
-            closeModal={this.closePanel}
-            editorState={getEditorState()}
-            setEditorState={setEditorState}
-            settings={settings}
-            uiSettings={uiSettings}
-            setKeepToolbarOpen={setKeepOpen}
-            styleMapper={this.styleMapper}
-            predicate={pluginParams.predicate}
-            defaultColor={pluginParams.defaultColor}
-          />
-        </Modal>
+        {isPanelOpen ? (
+          <Modal
+            onRequestClose={() => this.closePanel()}
+            isOpen={isPanelOpen}
+            parentSelector={this.getModalParent}
+            className={classNames({
+              [this.styles.textColorModal]: !isMobile,
+              [this.styles.textColorModal_mobile]: isMobile,
+            })}
+            overlayClassName={classNames({
+              [this.styles.textColorModalOverlay]: !isMobile,
+              [this.styles.textColorModalOverlay_mobile]: isMobile,
+            })}
+            style={modalStyle}
+            ariaHideApp={false}
+          >
+            <TextColorPanel
+              t={t}
+              isMobile={isMobile}
+              theme={theme}
+              closeModal={this.closePanel}
+              editorState={getEditorState()}
+              setEditorState={setEditorState}
+              settings={settings}
+              uiSettings={uiSettings}
+              setKeepToolbarOpen={setKeepOpen}
+              styleMapper={this.styleMapper}
+              predicate={pluginParams.predicate}
+              defaultColor={pluginParams.defaultColor}
+            />
+          </Modal>
+        ) : null}
       </InlineToolbarButton>
     );
   }

@@ -2,7 +2,7 @@
 import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, cloneDeep, isEmpty } from 'lodash';
+import { includes, debounce, cloneDeep, isEmpty } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -677,7 +677,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
-  setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
+  setEditor = ref => {
+    this.editor = ref?.getEditorRef();
+  };
 
   inPluginEditingMode = false;
 
@@ -941,7 +943,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
-  setEditorWrapper = ref => ref && (this.editorWrapper = ref);
+  setEditorWrapper = ref => {
+    this.editorWrapper = ref;
+  };
 
   render() {
     const { onError, locale, direction, experiments, showToolbars = true } = this.props;
@@ -961,7 +965,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
+        <GlobalContext.Provider
+          value={{ experiments, isMobile, t, editorWrapper: this.editorWrapper }}
+        >
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
