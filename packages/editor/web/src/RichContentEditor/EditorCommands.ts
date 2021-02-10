@@ -148,18 +148,21 @@ export const createEditorCommands = (
   const pluginsCommands = {
     insertBlock: <K extends keyof PluginsDataMap>(
       type: K,
-      config?: PluginsDataMap[K],
-      forceSelection = true,
-      isRicosSchema?: boolean
+      data?: PluginsDataMap[K],
+      settings?: { forceSelection?: boolean; isRicosSchema?: boolean }
     ) => {
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(config, undefined, isRicosSchema);
-        if (data) {
-          const { newSelection, newEditorState } = createBlock(getEditorState(), data, draftType);
+        const pluginData = createPluginData(data, undefined, settings?.isRicosSchema);
+        if (pluginData) {
+          const { newSelection, newEditorState } = createBlock(
+            getEditorState(),
+            pluginData,
+            draftType
+          );
           setEditorState(
-            forceSelection
+            settings?.forceSelection
               ? EditorState.forceSelection(newEditorState, newSelection)
               : EditorState.acceptSelection(newEditorState, newSelection)
           );
@@ -169,24 +172,22 @@ export const createEditorCommands = (
     updateBlock: <K extends keyof PluginsDataMap>(
       blockKey: string,
       type: K,
-      config?: PluginsDataMap[K],
-      forceSelection = true,
-      isRicosSchema?: boolean,
-      useCurrentData = false
+      data?: PluginsDataMap[K],
+      settings?: { forceSelection?: boolean; isRicosSchema?: boolean; useCurrentData?: boolean }
     ) => {
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(
-          config,
-          useCurrentData ? editorState.getSelectedBlockData() : undefined,
-          isRicosSchema
+        const pluginData = createPluginData(
+          data,
+          settings?.useCurrentData ? editorState.getSelectedBlockData() : undefined,
+          settings?.isRicosSchema
         );
-        if (data) {
-          const newEditorState = updateEntityData(getEditorState(), blockKey, data);
+        if (pluginData) {
+          const newEditorState = updateEntityData(getEditorState(), blockKey, pluginData);
           const newSelection = newEditorState.getSelection();
           setEditorState(
-            forceSelection
+            settings?.forceSelection
               ? EditorState.forceSelection(newEditorState, newSelection)
               : EditorState.acceptSelection(newEditorState, newSelection)
           );
@@ -199,15 +200,15 @@ export const createEditorCommands = (
   const decorationsCommands = {
     insertDecoration: <K extends keyof DecorationsDataMap>(
       type: K,
-      config?: DecorationsDataMap[K],
-      isRicosSchema?: boolean
+      data?: DecorationsDataMap[K],
+      settings?: { isRicosSchema?: boolean }
     ) => {
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
-        const data = createPluginData(config, undefined, isRicosSchema);
-        if (data) {
-          const newEditorState = insertDecorationsMap[type]?.(getEditorState(), data);
+        const pluginData = createPluginData(data, undefined, settings?.isRicosSchema);
+        if (pluginData) {
+          const newEditorState = insertDecorationsMap[type]?.(getEditorState(), pluginData);
           if (newEditorState) {
             setEditorState(newEditorState);
           }

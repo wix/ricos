@@ -83,25 +83,25 @@ const useCurrentData = true;
 const insertPluginTest = ([pluginName, { type, data, expectedData }]) =>
   it(`should insert ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().insertBlock(type, data, forceSelection, isRicosSchema);
+    ricosEditor.getEditorCommands().insertBlock(type, data, { forceSelection, isRicosSchema });
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedData);
   });
 
 const updatePluginTest = ([pluginName, { type, data, updatedData, expectedUpdatedData }]) =>
   it(`should update ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().insertBlock(type, data, forceSelection, isRicosSchema);
+    ricosEditor.getEditorCommands().insertBlock(type, data, { forceSelection, isRicosSchema });
     const blockKey = ricosEditor.getEditorCommands().getSelectedBlockKey();
     ricosEditor
       .getEditorCommands()
-      .updateBlock(blockKey, type, updatedData, forceSelection, isRicosSchema, useCurrentData);
+      .updateBlock(blockKey, type, updatedData, { forceSelection, isRicosSchema, useCurrentData });
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
   });
 
 const deletePluginTest = ([pluginName, { type, data }]) =>
   it(`should remove ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().insertBlock(type, data, forceSelection, isRicosSchema);
+    ricosEditor.getEditorCommands().insertBlock(type, data, { forceSelection, isRicosSchema });
     const blockKey = ricosEditor.getEditorCommands().getSelectedBlockKey();
     ricosEditor.getEditorCommands().deleteBlock(blockKey);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual({});
@@ -111,7 +111,7 @@ const insertDecorationTest = ([pluginName, { type, data, expectedData }]) =>
   it(`should insert ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, isRicosSchema);
+    ricosEditor.getEditorCommands().insertDecoration(type, data, { isRicosSchema });
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedData);
@@ -121,10 +121,10 @@ const updateDecorationTest = ([pluginName, { type, data, updatedData, expectedUp
   it(`should update ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, isRicosSchema);
+    ricosEditor.getEditorCommands().insertDecoration(type, data, { isRicosSchema });
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, updatedData, isRicosSchema);
+    ricosEditor.getEditorCommands().insertDecoration(type, updatedData, { isRicosSchema });
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
@@ -134,7 +134,7 @@ const deleteDecorationTest = ([pluginName, { type, data }]) =>
   it(`should remove ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, isRicosSchema);
+    ricosEditor.getEditorCommands().insertDecoration(type, data, { isRicosSchema });
     // TODO: check this behaviour
     ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
     ricosEditor.getEditorCommands().deleteDecoration(type);
