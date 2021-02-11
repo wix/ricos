@@ -212,13 +212,13 @@ const normalizeContentState = (contentState: RicosContent): RicosContent => ({
       return block;
     }
 
-    const data = { ...block.data };
-    data.depth = block.depth;
-    data.index = index;
-    const direction = getTextDirection(block.text);
-    if (direction === 'rtl') {
-      data.textDirection = direction;
-    }
+    const textDirection = getTextDirection(block.text);
+    const data = {
+      ...block.data,
+      depth: block.depth,
+      index,
+      textDirection: textDirection === 'rtl' ? textDirection : undefined,
+    };
 
     let text = block.text;
     if (endsWith(text, '\n')) {
