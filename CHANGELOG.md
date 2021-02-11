@@ -21,6 +21,8 @@
   - [#2137](https://github.com/wix-incubator/rich-content/pull/2137) fix image replace for native uploads
 - `gallery`
   - [#2137](https://github.com/wix-incubator/rich-content/pull/2137) fix image replace for native uploads in gallery image settings
+- `*`
+  - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
 
 </details>
 <hr/>
