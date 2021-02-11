@@ -27,7 +27,7 @@ Read more about backward compatibility in [Migrating from rich-content](./migrat
 ### `content`
 
 ```jsx
-content?: RicosContent
+content?: RicosContent | RichContent
 ```
 
 A `RicosContent` is an immutable object that saves the entire content created by a `RicosEditor`. For `RicosViewer` this is a requirement, it will set the content to display. For the `RicosEditor` this will set its initial state.
@@ -168,8 +168,8 @@ draft-js props, as described in [https://draftjs.org/docs/api-reference-editor](
 
 ### `injectedContent`
 
-```
-injectedContent?: RicosContent
+```jsx
+injectedContent?: RicosContent | RichContent
 ```
 
 Similar to [content](#content) prop; allows content to be injected to mounted RicosEditor without need for remount.
@@ -252,7 +252,7 @@ A function that will be called with `true` when the editor is busy, e.g. when a 
 ### `onChange`
 
 ```jsx
-onChange?: (content: RicosContent) => void
+onChange?: (content: RicosContent | RichContent) => void
 ```
 
 A callback that runs whenever the editor's content is edited.
@@ -377,6 +377,15 @@ import content from '../../infra/editor/content/intro.json';
 <div className="card">
   <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} content={content} />
 </div>
+
+### `useNewContent`
+
+```jsx
+useNewContent?: boolean;
+```
+
+Determines whether the editor should supply content in the old `draft-js` schema or the new `RichContent` schema.
+Affects the return value of the differnet output methods (`onChange`, `getContent`, `getContentPromise`).
 
 ## Ricos Viewer API
 

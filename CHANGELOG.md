@@ -16,7 +16,14 @@
     Click to see more.
   </summary>
 
-
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2109](https://github.com/wix-incubator/rich-content/pull/2109) suppport content in new ricos schema
+- `ricos-viewer`
+  - [#2109](https://github.com/wix-incubator/rich-content/pull/2109) suppport content in new ricos schema
+### :house: Internal
+- `example`
+  - [#2109](https://github.com/wix-incubator/rich-content/pull/2109) allow editing content in new `RichContent` schema via "Use New Content" setting
 </details>
 <hr/>
 
