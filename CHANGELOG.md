@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `image`
+  - [#2137](https://github.com/wix-incubator/rich-content/pull/2137) fix image replace for native uploads
+- `gallery`
+  - [#2137](https://github.com/wix-incubator/rich-content/pull/2137) fix image replace for native uploads in gallery image settings
 
 </details>
 <hr/>
