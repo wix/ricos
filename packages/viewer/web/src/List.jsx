@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { getBlockIndex } from './utils/draftUtils';
 import { hasText } from './utils/textUtils';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
@@ -86,7 +85,7 @@ const List = ({
         );
         const className = getBlockClassName(isNewList, listItemDirection, listType, depth);
         prevDepth = depth;
-        const blockIndex = getBlockIndex(context.contentState, blockProps.keys[childIndex]);
+        const blockIndex = dataEntry.index;
         const wrappedBlock = withInteraction(
           result.length === 0 ? ' ' : result,
           interactions,
