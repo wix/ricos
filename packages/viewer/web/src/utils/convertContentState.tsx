@@ -35,9 +35,6 @@ const isEmptyContentState = (raw?: RicosContent) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const isEmptyBlock = ([_, data]) => data && data.length === 0;
 
-const getBlockDepth = (contentState, key) =>
-  contentState.blocks.find(block => block.key === key).depth || 0;
-
 const getBlockStyleClasses = (
   mergedStyles: Record<string, string>,
   textDirection: TextDirection,
@@ -75,7 +72,6 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
       blockProps,
       getBlockStyleClasses,
       blockDataToStyle,
-      getBlockDepth,
       context,
     };
     return <List {...props} />;
@@ -85,7 +81,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const alignment = blockProps.data[i]?.textAlignment || context.textAlignment;
-        const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
+        const depth = blockProps.data[i].depth;
         const blockDirection = getDirectionFromAlignmentAndTextDirection(
           alignment,
           textDirection || blockProps.data[i]?.textDirection
@@ -218,6 +214,7 @@ const normalizeContentState = (contentState: RicosContent): RicosContent => ({
     }
 
     const data = { ...block.data };
+    data.depth = block.depth;
     const direction = getTextDirection(block.text);
     if (direction === 'rtl') {
       data.textDirection = direction;

@@ -30,7 +30,6 @@ const List = ({
   blockProps,
   getBlockStyleClasses,
   blockDataToStyle,
-  getBlockDepth,
   context,
 }) => {
   const Component = ordered ? 'ol' : 'ul';
@@ -79,7 +78,7 @@ const List = ({
           result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
         }
 
-        const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
+        const depth = dataEntry.depth;
         const isNewList = childIndex === 0 || depth > prevDepth;
         const listItemDirection = getDirectionFromAlignmentAndTextDirection(
           alignment,
@@ -123,7 +122,6 @@ List.propTypes = {
   mergedStyles: PropTypes.object,
   ordered: PropTypes.bool,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
-  getBlockDepth: PropTypes.func,
   context: PropTypes.shape({
     theme: PropTypes.object.isRequired,
     anchorTarget: PropTypes.string.isRequired,
