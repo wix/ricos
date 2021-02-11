@@ -273,6 +273,8 @@ const convertToReact = (
     config: LegacyViewerPluginConfig;
   }
 ) => {
+  // eslint-disable-next-line no-console
+  console.log('yaron123456');
   if (isEmptyContentState(context.contentState)) {
     return null;
   }
