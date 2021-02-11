@@ -228,6 +228,7 @@ class BaseToolbarButton extends React.Component {
           onChange={this.handleFileChange}
           accept={accept}
           multiple={this.props.multiple}
+          title={tooltipText}
         >
           {this.getIcon()}
         </FileInput>

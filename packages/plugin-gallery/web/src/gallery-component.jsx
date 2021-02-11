@@ -144,7 +144,7 @@ class GalleryComponent extends PureComponent {
   imageLoaded = (event, file, itemPos) => {
     const img = event.target;
     const item = createImageItem(img, Date.now().toString(), true);
-    const itemIdx = this.setItemInGallery(item, itemPos);
+    const itemIdx = this.setItemInGallery(item, undefined, itemPos);
     this.handleFileUpload(file, GALLERY_ITEMS_TYPES.IMAGE, itemIdx);
   };
 
