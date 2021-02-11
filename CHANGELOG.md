@@ -24,6 +24,10 @@
 ### :house: Internal
 - `example`
   - [#2109](https://github.com/wix-incubator/rich-content/pull/2109) allow editing content in new `RichContent` schema via "Use New Content" setting
+### :bug: Bug Fix
+- `*`
+  - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+
 </details>
 <hr/>
 
