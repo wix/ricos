@@ -79,7 +79,7 @@ const List = ({
           result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
         }
 
-        const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
+        const depth = getBlockDepth(blockProps.keys[childIndex]);
         const isNewList = childIndex === 0 || depth > prevDepth;
         const listItemDirection = getDirectionFromAlignmentAndTextDirection(
           alignment,
