@@ -158,7 +158,7 @@ class GalleryViewer extends React.Component {
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.type !== 'video' ? (
+    return (
       <div className={this.styles.expandContainer}>
         <ExpandIcon
           className={this.styles.expandIcon}
@@ -168,7 +168,7 @@ class GalleryViewer extends React.Component {
           }}
         />
       </div>
-    ) : null;
+    );
   };
 
   renderTitle = title => {
