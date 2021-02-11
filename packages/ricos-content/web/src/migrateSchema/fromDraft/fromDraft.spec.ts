@@ -14,13 +14,16 @@ import { IMAGE_TYPE } from '../../consts';
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
   it('should migrate intro fixture', () => {
-    expect(compare(fromDraft(fixture), ricosFixture, { ignoredKeys: ['key'] })).toEqual({});
+    expect(
+      compare(fromDraft(fixture), ricosFixture, { ignoredKeys: ['key'], verbose: true })
+    ).toEqual({});
   });
 
   it('should migrate complex fixture', () => {
     expect(
       compare(fromDraft(complexFixture), complexRicosFixture, {
         ignoredKeys: ['key'],
+        verbose: true,
       })
     ).toEqual({});
   });

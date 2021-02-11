@@ -98,11 +98,13 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     return {
       key: block.key,
       type: Node_Type.HEADING,
-      headingData: {
-        level: getLevel(block.type),
-        depth: block.depth || undefined,
-        ...parseBlockData(block.data),
-      },
+      headingData: Object.assign(
+        {
+          level: getLevel(block.type),
+          ...parseBlockData(block.data),
+        },
+        block.depth !== undefined ? { depth: block.depth } : undefined
+      ),
       nodes: getTextNodes(block, entityMap),
     };
   };
