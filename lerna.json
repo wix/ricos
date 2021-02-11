@@ -4,7 +4,8 @@
     "version": {
       "allowBranch": [
         "master",
-        "release*"
+        "release*",
+        "rich-content-viewer-performance"
       ],
       "message": "[*] chore(release): %s"
     }
@@ -14,5 +15,5 @@
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "8.21.0"
+  "version": "8.21.1-alpha.0"
 }
