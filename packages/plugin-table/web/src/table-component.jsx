@@ -10,7 +10,7 @@ import { getRange, getRowsRange, getColsRange } from './domain/tableDataUtil';
 import { createEmptyCellEditor } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
-import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
+import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { isEmpty, isNumber } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
@@ -49,13 +49,6 @@ class TableComponent extends React.Component {
     ) {
       this.setSelected();
     }
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleTableClipboardEvent);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleTableClipboardEvent);
   }
 
   getCellState = (i, j) => this.table.getCellContent(i, j) || createEmptyCellEditor();
@@ -183,24 +176,44 @@ class TableComponent extends React.Component {
     this.table.setNewRows(rows);
   };
 
-  handleTableClipboardEvent = e => {
+  onKeyDown = e => {
+    const { selected } = this.state;
+    if (this.shouldHandleKeyDown(e)) {
+      if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        this.setAllCellsSelected();
+      } else if (e.keyCode === KEYS_CHARCODE.SPACE) {
+        let indexes, selectFunc;
+        if (e.ctrlKey) {
+          indexes = getColsRange(selected);
+          selectFunc = this.selectCols;
+        } else if (e.shiftKey) {
+          indexes = getRowsRange(selected);
+          selectFunc = this.selectRows;
+        }
+        indexes && selectFunc({ start: Math.min(...indexes), end: Math.max(...indexes) });
+      } else if (e.key === '+' && e.altKey && e.ctrlKey) {
+        const selectedCols = this.table.getSelectedCols(getRange(selected));
+        selectedCols ? this.addCol(Math.max(...selectedCols) + 1) : this.addLastCol();
+      } else if (e.key === '-' && e.altKey && e.ctrlKey) {
+        const selectedCols = this.table.getSelectedCols(getRange(selected));
+        const colNum = this.table.getColNum();
+        selectedCols
+          ? this.deleteColumn([Math.min(Math.max(...selectedCols) + 1, colNum - 1)])
+          : this.deleteColumn([colNum - 1]);
+      }
+    }
+  };
+
+  shouldHandleKeyDown = e => {
     const { selected, isEditingActive } = this.state;
     const isColorPickerModalOpen = e.target.closest('[data-id=color-picker-modal]');
-    if (
+    return (
       isPluginFocused(this.props.block, this.props.selection) &&
       selected &&
       !isEditingActive &&
       !isColorPickerModalOpen
-    ) {
-      const preventEvent = () => {
-        e.stopPropagation();
-        e.preventDefault();
-      };
-      if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
-        preventEvent();
-        this.setAllCellsSelected();
-      }
-    }
+    );
   };
 
   onPaste = (copiedCells, start) => {
@@ -420,6 +433,7 @@ class TableComponent extends React.Component {
         onFocus={this.onFocus}
         tabIndex="0"
         ref={this.tableContainer}
+        onKeyDown={this.onKeyDown}
       >
         {!isMobile && (
           <TableToolbar
