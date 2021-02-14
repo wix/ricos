@@ -15,8 +15,21 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `*`
+  - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+
 </details>
 <hr/>
+
+## 8.21.0 (Feb 10, 2021)
+### :rocket: New Feature
+- `gallery`
+  - [#1926](https://github.com/wix-incubator/rich-content/pull/1926) upload video items in gallery (will be available through wix-ricos soon)
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#2127](https://github.com/wix-incubator/rich-content/pull/2127) fix css issues
 
 ## 8.20.0 (Feb 9, 2021)
 ### :rocket: New Feature

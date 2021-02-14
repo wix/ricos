@@ -325,6 +325,7 @@
 	"VideoUploadModal_CustomVideoClickText": "העלאת סרטון",
 	"Poll_PollSettings_Tab_Layout_Section_Answers_Image": "הוסף תמונה לכל תשובה",
 	"LinkTo_Modal_Section_Item_Video": "סרטון",
+	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
 	"ImageSettings_Header": "הגדרות תמונה",
 	"LinkTo_Toolbar_GoTo": "עברו לקישור",
 	"UploadFile_Error_Size_Toast": "גודל הקובץ המרבי הוא MB{{maxLimit}}. נסה קובץ קטן יותר.",
