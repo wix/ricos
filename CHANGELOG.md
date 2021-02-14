@@ -19,6 +19,9 @@
 ### :bug: Bug Fix
 - `*`
   - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+### :house: Internal
+- `viewer`
+  - [#2138](https://github.com/wix/ricos/pull/2138) viewer performance
 
 </details>
 <hr/>
