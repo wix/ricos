@@ -16,12 +16,16 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix
 - `*`
   - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
-
-</details>
-<hr/>
+### :house: Internal
+- `viewer`
+  - [#2138](https://github.com/wix/ricos/pull/2138) viewer performance
 
 ## 8.21.0 (Feb 10, 2021)
 ### :rocket: New Feature
