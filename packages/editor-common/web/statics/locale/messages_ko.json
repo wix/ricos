@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "아이템 제목을 입력하세요.",
   "Video_plugin_search_tags": "비디오 동영상 오디오 엠티비 유튜브 카메라 음악 시각적 디지털 필름 업로드 애니메이션 테이프",
   "ReplaceGiphyButton_Tooltip": "GIF 변경",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "열",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "해당 오디오 파일이 AAC 형식을 지원하지 않아 업로드할 수 없습니다. 다른 파일을 사용해보세요.",
