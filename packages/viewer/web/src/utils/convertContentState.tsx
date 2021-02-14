@@ -217,7 +217,7 @@ const normalizeContentState = (contentState: RicosContent): RicosContent => ({
       ...block.data,
       depth: block.depth,
       index,
-      textDirection: textDirection === 'rtl' ? textDirection : undefined,
+      ...(textDirection === 'rtl' && { textDirection }),
     };
 
     let text = block.text;
