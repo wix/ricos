@@ -5,30 +5,24 @@ import styles from '../../statics/styles/add-new-section.scss';
 import classNames from 'classnames';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
-const AddNewSection = ({ onClick, dataHook, disabled, t }) => {
-  const Add = () => (
-    //eslint-disable-next-line
-    <div
-      data-hook={dataHook}
-      onClick={!disabled && onClick}
-      className={classNames(styles.container, disabled && styles.disabled)}
-    >
-      <AddIcon />
-    </div>
-  );
-  return disabled ? (
-    <Tooltip content={t('TablePlugin_SettingsModal_limitError')}>
-      <Add />
+const AddNewSection = ({ onClick, dataHook, shouldDisable, t }) => {
+  return (
+    <Tooltip content={shouldDisable && t('TablePlugin_SettingsModal_limitError')}>
+      <div // eslint-disable-line
+        data-hook={dataHook}
+        onClick={onClick}
+        className={classNames(styles.container, shouldDisable && styles.disabled)}
+      >
+        <AddIcon />
+      </div>
     </Tooltip>
-  ) : (
-    <Add />
   );
 };
 
 AddNewSection.propTypes = {
   onClick: PropTypes.func.isRequired,
   dataHook: PropTypes.string,
-  disabled: PropTypes.bool,
+  shouldDisable: PropTypes.bool,
   t: PropTypes.func,
 };
 

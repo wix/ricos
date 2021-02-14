@@ -300,8 +300,10 @@ class TableComponent extends React.Component {
   };
 
   addRow = i => {
-    this.table.addRow(i);
-    this.selectRows({ start: i, end: i });
+    if (!isCellsNumberInvalid(this.table.getRowNum() + 1, this.table.getColNum())) {
+      this.table.addRow(i);
+      this.selectRows({ start: i, end: i });
+    }
   };
 
   merge = () => {
@@ -319,8 +321,10 @@ class TableComponent extends React.Component {
   };
 
   addCol = i => {
-    this.table.addColumn(i);
-    this.selectCols({ start: i, end: i });
+    if (!isCellsNumberInvalid(this.table.getRowNum(), this.table.getColNum() + 1)) {
+      this.table.addColumn(i);
+      this.selectCols({ start: i, end: i });
+    }
   };
 
   deleteRow = deleteIndexes => {
@@ -537,7 +541,7 @@ class TableComponent extends React.Component {
             <AddNewSection
               dataHook={'addCol'}
               onClick={this.addLastCol}
-              disabled={disableNewCol}
+              shouldDisable={disableNewCol}
               t={t}
             />
           </div>
@@ -547,7 +551,7 @@ class TableComponent extends React.Component {
             <AddNewSection
               dataHook={'addRow'}
               onClick={this.addLastRow}
-              disabled={disableNewRow}
+              shouldDisable={disableNewRow}
               t={t}
             />
           </div>
