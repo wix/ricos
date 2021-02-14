@@ -548,7 +548,7 @@
 	"TablePlugin_Toolbar_ContextMenu_Clear_Button": "Clear",
 	"TablePlugin_Toolbar_ContextMenu_DeleteTable_Button": "Delete table",
 	"TablePlugin_SettingsModal_Title": "Table configuration",
-	"TablePlugin_SettingsModal_SubTitle": "Set the number of rows & columns",
+	"TablePlugin_SettingsModal_SubTitle": "Set the number of columns & rows",
 	"TablePlugin_SettingsModal_ColCount": "How many columns?",
 	"TablePlugin_SettingsModal_ErrorMessage": "Enter a number greater than 0",
 	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
