@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "Escribe un título para este elemento",
   "Video_plugin_search_tags": "video clip película música audio mtv cámara youtube canción visual película digital cargar cinta animada grabación viral",
   "ReplaceGiphyButton_Tooltip": "Reemplazar Gif",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "Columnas",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "Este archivo de audio no está en un formato ACC compatible y no se puede subir. Intenta con un archivo diferente.",
