@@ -5,6 +5,7 @@ import {
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
   RicosContent,
+  RicosContentBlock,
   TextDirection,
   PluginMapping,
   ViewerContextType,
@@ -13,7 +14,6 @@ import {
   LegacyViewerPluginConfig,
   InlineStyleMapperFunction,
 } from 'wix-rich-content-common';
-import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -34,9 +34,6 @@ const isEmptyContentState = (raw?: RicosContent) =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const isEmptyBlock = ([_, data]) => data && data.length === 0;
-
-const getBlockDepth = (contentState, key) =>
-  contentState.blocks.find(block => block.key === key).depth || 0;
 
 const getBlockStyleClasses = (
   mergedStyles: Record<string, string>,
@@ -63,6 +60,13 @@ const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
 const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
+  const blockMap: Record<string, { block: RicosContentBlock; index: number }> = {};
+  context.contentState.blocks.forEach((block, index) => {
+    blockMap[block.key] = { block, index };
+  });
+
+  const getBlockDepth = key => blockMap[key].block.depth || 0;
+
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -85,7 +89,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const alignment = blockProps.data[i]?.textAlignment || context.textAlignment;
-        const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
+        const depth = getBlockDepth(blockProps.keys[i]);
         const blockDirection = getDirectionFromAlignmentAndTextDirection(
           alignment,
           textDirection || blockProps.data[i]?.textDirection
@@ -98,7 +102,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           'ltr'}`;
 
         const ChildTag = typeof type === 'string' ? type : type(child);
-        const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
+        const blockIndex = blockMap[blockProps.keys[i]].index;
         const { interactions } = blockProps.data[i];
 
         const _child = isEmptyBlock(child) ? <br /> : child;
