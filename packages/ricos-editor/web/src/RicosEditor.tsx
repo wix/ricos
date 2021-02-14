@@ -13,9 +13,9 @@ import {
   convertFromRaw,
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isEqual } from 'lodash';
 import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
-import { ToolbarType, Version } from 'wix-rich-content-common';
+import { ToolbarType, Version, compare, RicosContent } from 'wix-rich-content-common';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -26,6 +26,7 @@ interface State {
   localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
   editorState?: EditorState;
+  draftContent?: RicosContent;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -36,8 +37,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange, props.content);
-    this.state = { localeData: { locale: props.locale }, remountKey: false };
+    this.dataInstance = createDataConverter(props.onChange, props.content, props.useNewContent);
+    this.state = {
+      localeData: { locale: props.locale },
+      remountKey: false,
+      draftContent: props.content && ensureDraftContent(props.content),
+    };
   }
 
   static defaultProps = { locale: 'en' };
@@ -91,16 +96,30 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
-    if (
-      newProps.injectedContent &&
-      !isEqual(this.props.injectedContent, newProps.injectedContent)
-    ) {
-      console.debug('new content provided as editorState'); // eslint-disable-line
-      const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
-      this.setState({ editorState }, () => {
-        this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
-        this.dataInstance.refresh(editorState);
+    if (newProps.injectedContent) {
+      const diff = compare(this.props.injectedContent || {}, newProps.injectedContent, {
+        ignoredKeys: ['key'],
       });
+      if (Object.keys(diff).length > 0) {
+        console.debug('new content provided as editorState'); // eslint-disable-line
+        const editorState = createWithContent(
+          convertFromRaw(ensureDraftContent(newProps.injectedContent))
+        );
+        this.setState({ editorState }, () => {
+          this.dataInstance = createDataConverter(
+            this.props.onChange,
+            this.props.injectedContent,
+            this.props.useNewContent
+          );
+          this.dataInstance.refresh(editorState);
+        });
+      }
+    }
+    if (newProps.content) {
+      const diff = compare(this.props.content, newProps.content, { ignoredKeys: ['key'] });
+      if (Object.keys(diff).length > 0) {
+        this.setState({ draftContent: ensureDraftContent(newProps.content) });
+      }
     }
   }
 
@@ -162,12 +181,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   render() {
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
-    const { StaticToolbar, localeData, remountKey, editorState } = this.state;
+    const { StaticToolbar, localeData, remountKey, editorState, draftContent } = this.state;
 
     const contentProp = editorState
       ? { editorState: { editorState }, content: {} }
-      : { editorState: {}, content: { content } };
+      : { editorState: {}, content: { content: draftContent } };
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 

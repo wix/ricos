@@ -117,4 +117,4 @@ describe('migrate to draft', () => {
 });
 
 const convert = content => toDraft(fromDraft(content));
-const compareWithConverted = content => compare(convert(content), content);
+const compareWithConverted = content => compare(convert(content), content, { verbose: true });

@@ -30,6 +30,9 @@ const getAllPluginsNames = ({
     'ricos-editor-no-modal',
     'ricos-editor-with-plugins',
     'ricos-common',
+    'rich-content-schema',
+    'to-from-draft-converters',
+    'to-draft-converter',
   ];
 
   if (skipPlugins) {

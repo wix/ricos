@@ -100,8 +100,14 @@ const convertGiphyData = data => {
 };
 
 const convertLinkPreviewData = data => {
-  has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
-  has(data, 'provider_url') && (data.providerUrl = data.provider_url);
+  if (has(data, 'thumbnail_url')) {
+    data.thumbnailUrl = data.thumbnail_url;
+    delete data.thumbnail_url;
+  }
+  if (has(data, 'provider_url')) {
+    data.providerUrl = data.provider_url;
+    delete data.provider_url;
+  }
 };
 
 const convertSoundCloudData = data => {

@@ -2,7 +2,7 @@
 import { Decoration, Node, Node_Type } from 'ricos-schema';
 import { RicosInlineStyleRange, RicosEntityRange, RicosEntityMap } from '../..';
 import { FROM_RICOS_DECORATION_TYPE, ENTITY_DECORATION_TO_DATA_FIELD } from '../consts';
-import { emojiRegex } from '../emojiRegex';
+import { emojiRegex } from './emojiRegex';
 import { createDecorationEntityData } from './getDraftEntityData';
 
 export interface DraftTypedDecoration extends Omit<Decoration, 'type'> {

@@ -7,7 +7,7 @@ import complexFixture from '../../../../../../e2e/tests/fixtures/migration-conte
 import { getTextNodes } from './getTextNodes';
 import ricosFixture from './migratedFixtures/intro.json';
 import complexRicosFixture from './migratedFixtures/migration-content.json';
-import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
+import { Node_Type, Decoration_Type } from 'ricos-schema';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
 import { IMAGE_TYPE } from '../../consts';
 
@@ -15,14 +15,15 @@ const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
   it('should migrate intro fixture', () => {
     expect(
-      compare(RichContent.toJSON(fromDraft(fixture)), ricosFixture, { ignoredKeys: ['key'] })
+      compare(fromDraft(fixture), ricosFixture, { ignoredKeys: ['key'], verbose: true })
     ).toEqual({});
   });
 
   it('should migrate complex fixture', () => {
     expect(
-      compare(RichContent.toJSON(fromDraft(complexFixture)), complexRicosFixture, {
+      compare(fromDraft(complexFixture), complexRicosFixture, {
         ignoredKeys: ['key'],
+        verbose: true,
       })
     ).toEqual({});
   });

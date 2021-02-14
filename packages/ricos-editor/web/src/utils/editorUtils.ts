@@ -11,6 +11,8 @@ import { compare, isContentStateEmpty } from 'ricos-content';
 import { RicosContent, isSSR } from 'wix-rich-content-common';
 import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
+import { RichContent } from 'ricos-schema';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
@@ -62,14 +64,17 @@ function areBlocksEqual(currentStateBlocks, initialStateBlocks) {
 
 export function createDataConverter(
   onContentChange?: OnContentChangeFunction,
-  initialContent?: RicosContent
+  initialContent?: RicosContent | RichContent,
+  useNewContent?: boolean
 ): EditorDataInstance {
-  let currContent = initialContent || emptyState;
-  let currEditorState = initialContent
-    ? createWithContent(convertFromRaw(initialContent))
+  const initialDraftContent: RicosContent | undefined =
+    initialContent && ensureDraftContent(initialContent);
+  let currContent = initialDraftContent || emptyState;
+  let currEditorState = initialDraftContent
+    ? createWithContent(convertFromRaw(initialDraftContent))
     : createEmpty();
   let currTraits = {
-    isEmpty: initialContent ? isContentStateEmpty(initialContent) : true,
+    isEmpty: initialDraftContent ? isContentStateEmpty(initialDraftContent) : true,
     isContentChanged: false,
   };
   let isUpdated = false;
@@ -90,15 +95,15 @@ export function createDataConverter(
   const getEditorState = () => currEditorState;
 
   const getContentTraits = () => {
-    if (!initialContent) {
+    if (!initialDraftContent) {
       return currTraits;
     }
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
       currContent = convertToRaw(currState);
-      const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
+      const blocksEqual = areBlocksEqual(currContent.blocks, initialDraftContent.blocks);
       const entitiesEqual = isEmpty(
-        compare(currContent.entityMap, initialContent.entityMap, { verbose: false })
+        compare(currContent.entityMap, initialDraftContent.entityMap, { verbose: false })
       );
       currTraits = {
         isEmpty: isContentStateEmpty(currContent),
@@ -113,10 +118,10 @@ export function createDataConverter(
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
       currContent = convertToRaw(currState);
-      if (initialContent) {
-        const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
+      if (initialDraftContent) {
+        const blocksEqual = areBlocksEqual(currContent.blocks, initialDraftContent.blocks);
         const entitiesEqual = isEmpty(
-          compare(currContent.entityMap, initialContent.entityMap, { verbose: false })
+          compare(currContent.entityMap, initialDraftContent.entityMap, { verbose: false })
         );
         currTraits = {
           isEmpty: isContentStateEmpty(currContent),
@@ -126,14 +131,16 @@ export function createDataConverter(
       isUpdated = true;
     }
 
-    onContentChange?.(currContent);
+    onContentChange?.(useNewContent ? ensureRicosContent(currContent) : currContent);
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
       waitingForUpdateResolve = false;
       waitingForUpdatePromise = Promise.resolve();
     }
-    return shouldRemoveErrorBlocks ? errorBlocksRemover(currContent) : currContent;
+
+    const returnedContent = shouldRemoveErrorBlocks ? errorBlocksRemover(currContent) : currContent;
+    return useNewContent ? ensureRicosContent(returnedContent) : returnedContent;
   };
   const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {

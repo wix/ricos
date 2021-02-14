@@ -9,6 +9,9 @@ import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { RicosViewer } from 'ricos-viewer';
+import { RichContent } from 'ricos-schema';
+
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
@@ -19,6 +22,8 @@ interface ExampleViewerProps {
   scrollingElementFn?: any;
   seoMode?: SEOSettings;
   localeResource?: Record<string, string>;
+  shouldUseNewContent?: boolean;
+  content?: RichContent;
 }
 
 interface ExampleViewerState {
@@ -72,7 +77,15 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
+    const {
+      isMobile,
+      initialState,
+      locale,
+      seoMode,
+      localeResource,
+      shouldUseNewContent,
+      content,
+    } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
       helpers: {
@@ -94,30 +107,47 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
 
     return (
       <>
-        <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
-          <RichContentViewer
-            typeMappers={Plugins.typeMappers}
-            // @ts-ignore
-            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-            decorators={Plugins.decorators}
-            config={this.pluginsConfig}
-            {...viewerProps}
-          />
-          {this.shouldRenderFullscreen && (
-            <Fullscreen
-              images={this.expandModeData.images}
-              onClose={() => this.setState({ expandModeIsOpen: false })}
-              isOpen={expandModeIsOpen}
-              index={expandModeIndex}
+        {shouldUseNewContent ? (
+          <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
+            <RicosViewer
+              content={content}
+              plugins={Plugins.viewerPlugins}
+              locale={locale}
+              linkSettings={{ relValue, anchorTarget }}
               isMobile={isMobile}
+              cssOverride={theme}
+              mediaSettings={{ pauseMedia: disabled }}
+              seoSettings={seoMode}
+            >
+              <RichContentViewer helpers={viewerProps.helpers} />
+            </RicosViewer>
+          </div>
+        ) : (
+          <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
+            <RichContentViewer
+              typeMappers={Plugins.typeMappers}
+              // @ts-ignore
+              inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+              decorators={Plugins.decorators}
+              config={this.pluginsConfig}
+              {...viewerProps}
             />
-          )}
-          {!isMobile ? (
-            <TextSelectionToolbar container={this.viewerRef.current}>
-              {selectedText => <TwitterButton selectedText={selectedText} />}
-            </TextSelectionToolbar>
-          ) : null}
-        </div>
+            {this.shouldRenderFullscreen && (
+              <Fullscreen
+                images={this.expandModeData.images}
+                onClose={() => this.setState({ expandModeIsOpen: false })}
+                isOpen={expandModeIsOpen}
+                index={expandModeIndex}
+                isMobile={isMobile}
+              />
+            )}
+          </div>
+        )}
+        {!isMobile ? (
+          <TextSelectionToolbar container={this.viewerRef.current}>
+            {selectedText => <TwitterButton selectedText={selectedText} />}
+          </TextSelectionToolbar>
+        ) : null}
       </>
     );
   }

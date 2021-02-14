@@ -13,8 +13,10 @@ import {
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
 import { RicosContent } from 'wix-rich-content-common';
-import type ContentStateEditorType from './Components/ContentStateEditor';
+import ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
+import { RichContent } from 'ricos-schema';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
@@ -24,11 +26,15 @@ interface ExampleAppProps {
   isMobile?: boolean;
   onContentStateChange?: (contentState: RicosContent) => void;
   contentState?: RicosContent;
+  onNewContentChange?: (content: RichContent) => void;
+  onNewInjectedContentChange?: (content: RichContent) => void;
+  content?: RichContent;
+  injectedContent?: RichContent;
   setLocale?: (locale: string) => void;
   locale?: string;
   allLocales?: string[];
   editorState?: EditorState;
-  onEditorChange?: (editorState: EditorState)=> void;
+  onEditorChange?: (editorState: EditorState) => void;
   localeResource?: Record<string, string>;
 }
 
@@ -44,6 +50,7 @@ interface ExampleAppState {
   shouldMockUpload?: boolean;
   shouldMultiSelectImages?: boolean;
   shouldNativeUpload?: boolean;
+  shouldUseNewContent?: boolean;
   [key: string]: any;
 }
 
@@ -77,6 +84,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMockUpload: true,
       shouldMultiSelectImages: false,
       shouldNativeUpload: false,
+      shouldUseNewContent: false,
       ...localState,
     };
   }
@@ -90,6 +98,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     const contentState = this.loadContentStateFromLocalStorage();
     if (contentState) {
       this.props.onContentStateChange(contentState);
+      this.props.onNewContentChange(ensureRicosContent(contentState));
     }
   }
 
@@ -131,6 +140,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMultiSelectImages,
       staticToolbar,
       shouldNativeUpload,
+      shouldUseNewContent,
     } = this.state;
     this.editorSettings = [
       {
@@ -158,6 +168,23 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
             shouldNativeUpload: !state.shouldNativeUpload,
             editorResetKey: state.editorResetKey + 1,
           })),
+      },
+      {
+        name: 'Use New Content',
+        active: shouldUseNewContent,
+        action: () => {
+          const { onNewContentChange, onContentStateChange, contentState, content } = this.props;
+          this.setState(state => {
+            if (!state.shouldUseNewContent) {
+              onNewContentChange(ensureRicosContent(contentState));
+            } else {
+              onContentStateChange(ensureDraftContent(content));
+            }
+            return {
+              shouldUseNewContent: !state.shouldUseNewContent,
+            };
+          });
+        },
       },
       {
         name: 'Multi-Select Images',
@@ -200,6 +227,10 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       locale,
       localeResource,
       isMobile,
+      onNewContentChange,
+      content,
+      onNewInjectedContentChange,
+      injectedContent,
     } = this.props;
     const {
       isEditorShown,
@@ -209,6 +240,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       editorIsMobile,
       isToolbarShown,
       shouldNativeUpload,
+      shouldUseNewContent,
     } = this.state;
 
     return (
@@ -226,16 +258,21 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
             <ErrorBoundary>
               <Editor
                 onChange={onEditorChange}
+                onNewContentChange={onNewContentChange}
+                onNewInjectedContentChange={onNewInjectedContentChange}
                 editorState={editorState}
                 isMobile={editorIsMobile || isMobile}
                 shouldMockUpload={shouldMockUpload}
                 shouldMultiSelectImages={shouldMultiSelectImages}
                 shouldNativeUpload={shouldNativeUpload}
+                shouldUseNewContent={shouldUseNewContent}
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}
                 externalToolbar={ExternalToolbar}
+                content={content}
+                injectedContent={injectedContent}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -271,7 +308,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ErrorBoundary>
               <Preview
-                initialState={contentState}
+                initialState={ensureDraftContent(contentState)}
                 isMobile={this.state.previewIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
@@ -284,8 +321,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderViewer = () => {
-    const { contentState, isMobile, locale, localeResource } = this.props;
-    const { isViewerShown } = this.state;
+    const { contentState, isMobile, locale, localeResource, content } = this.props;
+    const { isViewerShown, shouldUseNewContent } = this.state;
 
     return (
       isViewerShown && (
@@ -306,6 +343,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.viewerScrollingElementFn}
+                content={content}
+                shouldUseNewContent={shouldUseNewContent}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -315,8 +354,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderContentState = () => {
-    const { contentState, onContentStateChange } = this.props;
-    const { isContentStateShown } = this.state;
+    const { contentState, onContentStateChange, content, onNewInjectedContentChange } = this.props;
+    const { isContentStateShown, shouldUseNewContent } = this.state;
     return (
       isContentStateShown && (
         <ReflexElement
@@ -330,6 +369,9 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
               ref={this.setContentStateEditor}
               onChange={onContentStateChange}
               contentState={contentState}
+              content={content}
+              shouldUseNewContent={shouldUseNewContent}
+              onNewInjectedContentChange={onNewInjectedContentChange}
             />
           </SectionContent>
         </ReflexElement>
@@ -360,6 +402,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     const { isEditorShown, isViewerShown, isContentStateShown, isPreviewShown } = this.state;
     const showEmptyState =
       !isEditorShown && !isViewerShown && !isContentStateShown && !isPreviewShown;
+    this.initSectionsSettings();
 
     return (
       <div className="wrapper">
