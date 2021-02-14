@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
-import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
@@ -149,7 +149,8 @@ class InnerRCE extends PureComponent {
     } = this.props;
     const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
-    if (innerRCERenderedIn === TABLE_TYPE && isMobile) {
+    const renderedInTable = innerRCERenderedIn === TABLE_TYPE;
+    if (renderedInTable && isMobile) {
       toolbarsToIgnore.push('SideToolbar');
     }
     return (
@@ -157,7 +158,13 @@ class InnerRCE extends PureComponent {
         <div
           data-id="inner-rce"
           onFocus={this.onFocus}
-          className={classNames(styles.editor, theme.editor, 'inner-rce')}
+          className={classNames(
+            styles.editor,
+            theme.editor,
+            renderedInTable && styles.renderedInTable,
+            renderedInTable && draftDefaultStyles.renderedInTable,
+            'inner-rce'
+          )}
           ref={this.setEditorWrapper}
         >
           <RichContentEditor
