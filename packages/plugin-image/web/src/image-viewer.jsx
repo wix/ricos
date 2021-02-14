@@ -230,7 +230,7 @@ class ImageViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.('expand_image', IMAGE_TYPE);
+    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
     onExpand?.(this.props.entityIndex);
   };
 
