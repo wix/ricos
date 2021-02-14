@@ -338,7 +338,6 @@ const createBaseComponent = ({
 
       const component = (
         <div
-          data-hook="blabla"
           ref={this.containerRef}
           role="none"
           style={sizeStyles}
@@ -348,8 +347,6 @@ const createBaseComponent = ({
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
-          <div className={this.styles.addNewLineAbove} onClick={addNewLineAbove} />
-          <div className={this.styles.addNewLineBelow} onClick={addNewLineBelow} />
           <PluginComponent
             {...this.props}
             isMobile={isMobile}
@@ -384,17 +381,25 @@ const createBaseComponent = ({
         </div>
       );
 
+      const componentWithEmptyBlocksButtons = (
+        <>
+          <div className={this.styles.addNewLine} onClick={addNewLineAbove} />
+          {component}
+          <div className={this.styles.addNewLine} onClick={addNewLineBelow} />
+        </>
+      );
+
       return withHorizontalScroll ? (
         <div className={styles.horizontalScrollbarWrapper}>
           <div
             data-id={'horizontal-scrollbar-element'}
             className={styles.pluginWithHorizontalScrollbar}
           >
-            {component}
+            {componentWithEmptyBlocksButtons}
           </div>
         </div>
       ) : (
-        component
+        componentWithEmptyBlocksButtons
       );
     };
   };
