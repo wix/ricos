@@ -68,14 +68,15 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
       cy.focusCell(4);
       cy.eyesCheckWindow(this.test.title);
-      cy.focusCell(7);
-      cy.eyesCheckWindow(this.test.title);
       cy.clickOnColDrag(1);
       cy.eyesCheckWindow(this.test.title);
       cy.clickOnRowDrag(2);
       cy.eyesCheckWindow(this.test.title);
-      cy.selectAllTableCells();
-      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should edit cell', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
+      cy.focusTable();
       cy.editCell(0);
       cy.eyesCheckWindow(this.test.title);
       cy.setTableCellEditingSelection(1, 2, 0);
@@ -87,27 +88,61 @@ describe('plugins', () => {
       cy.focusTable();
       cy.clickOnRowDrag(0);
       cy.paintBG();
-      cy.eyesCheckWindow(this.test.title);
       cy.goToTextStyle();
       cy.paintTableTextColor();
-      cy.eyesCheckWindow(this.test.title);
       cy.paintTableHighlightColor();
-      cy.eyesCheckWindow(this.test.title);
       cy.clickOnRowDrag(2);
       cy.goToTextStyle();
       cy.get(`[data-hook*=textInlineStyleButton_BOLD]`).click();
-      cy.eyesCheckWindow(this.test.title);
       cy.clickOnColDrag(2);
       cy.paintBorder(TABLE_PLUGIN.BORDER_COLOR_AROUND, 3);
-      cy.eyesCheckWindow(this.test.title);
       cy.clickOnColDrag(3);
       cy.paintBorder(TABLE_PLUGIN.BORDER_COLOR_ALL, 4);
       cy.eyesCheckWindow(this.test.title);
       cy.clickOnColDrag(0);
       cy.setColHeader();
-      cy.eyesCheckWindow(this.test.title);
       cy.clickOnRowDrag(0);
       cy.setRowHeader();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should use cell alignment', function() {
+      cy.loadRicosEditorAndViewer('table-alignment', usePlugins(plugins.all));
+      cy.focusTable();
+      cy.focusCell(0);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_BOTTOM);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_TOP);
+      cy.focusCell(1);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_MIDDLE);
+      cy.focusCell(2);
+      cy.alignCell(TABLE_PLUGIN.ALIGN_BOTTOM);
+      cy.eyesCheckWindow(this.test.title);
+      cy.editCell(0);
+      cy.eyesCheckWindow(this.test.title);
+      cy.editCell(1);
+      cy.eyesCheckWindow(this.test.title);
+      cy.editCell(2);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should use table toolbar context menu', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
+      cy.focusTable();
+      cy.clickOnRowDrag(1);
+      cy.clickOnTableToolbarContextMenuInsertAbove();
+      cy.clickOnRowDrag(2);
+      cy.clickOnTableToolbarContextMenuDeleteRow();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnRowDrag(0);
+      cy.clickOnTableToolbarContextMenuInsertBelow();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnRowDrag(0);
+      cy.clickOnTableToolbarContextMenuClear();
+      cy.clickOnColDrag(0);
+      cy.clickOnTableToolbarContextMenuInsertRight();
+      cy.clickOnColDrag(0);
+      cy.clickOnTableToolbarContextMenuInsertLeft();
+      cy.clickOnTableToolbarContextMenuDeleteCol();
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -155,49 +190,5 @@ describe('plugins', () => {
     //   cy.clickOnTableToolbarContextMenuDeleteRow();
     //   cy.eyesCheckWindow(this.test.title);
     // });
-
-    it('should use table toolbar context menu', function() {
-      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
-      cy.focusTable();
-      cy.clickOnRowDrag(1);
-      cy.clickOnTableToolbarContextMenuInsertAbove();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnRowDrag(2);
-      cy.clickOnTableToolbarContextMenuDeleteRow();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnRowDrag(0);
-      cy.clickOnTableToolbarContextMenuInsertBelow();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnRowDrag(0);
-      cy.clickOnTableToolbarContextMenuClear();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnColDrag(0);
-      cy.clickOnTableToolbarContextMenuInsertRight();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnColDrag(0);
-      cy.clickOnTableToolbarContextMenuInsertLeft();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnTableToolbarContextMenuDeleteCol();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('should use cell alignment', function() {
-      cy.loadRicosEditorAndViewer('table-alignment', usePlugins(plugins.all));
-      cy.focusTable();
-      cy.focusCell(0);
-      cy.alignCell(TABLE_PLUGIN.ALIGN_BOTTOM);
-      cy.alignCell(TABLE_PLUGIN.ALIGN_TOP);
-      cy.focusCell(1);
-      cy.alignCell(TABLE_PLUGIN.ALIGN_MIDDLE);
-      cy.focusCell(2);
-      cy.alignCell(TABLE_PLUGIN.ALIGN_BOTTOM);
-      cy.eyesCheckWindow(this.test.title);
-      cy.editCell(0);
-      cy.eyesCheckWindow(this.test.title);
-      cy.editCell(1);
-      cy.eyesCheckWindow(this.test.title);
-      cy.editCell(2);
-      cy.eyesCheckWindow(this.test.title);
-    });
   });
 });
