@@ -9,9 +9,9 @@ import {
   EntityInstance,
   RawDraftEntity,
   EditorChangeType,
+  genKey,
 } from '@wix/draft-js';
 
-import { genKey } from '../index';
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
