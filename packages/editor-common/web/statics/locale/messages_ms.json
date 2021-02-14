@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "Tulis tajuk untuk item ini",
   "Video_plugin_search_tags": "video klip filem muzik audio mtv youtube kamera lagu visual filem digital memuat naik rakaman pita animasi tular",
   "ReplaceGiphyButton_Tooltip": "Gantikan GIF",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "Ruangan",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "This audio file is not in a supported AAC format and can’t be uploaded. Try a different file,.",
