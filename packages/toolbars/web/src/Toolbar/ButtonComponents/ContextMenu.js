@@ -89,6 +89,7 @@ class ContextMenu extends PureComponent {
                 isMobile={this.props.isMobile}
                 buttonContent={buttonProps.text}
                 disabled={buttonProps.isDisabled()}
+                tooltipText={buttonProps.tooltip}
                 asContextButton
               />
             );
