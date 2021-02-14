@@ -52,6 +52,29 @@
 .pluginContainer,
 .pluginContainerReadOnly {
   position: relative;
+
+  .addNewLineAbove {
+    height: 10px;
+    width: 100%;
+    position: absolute;
+    top: -10px;
+    z-index: 1;
+    &:hover {
+      background-color: lightblue;
+      cursor: pointer;
+    }
+  }
+  .addNewLineBelow {
+    height: 10px;
+    width: 100%;
+    position: absolute;
+    bottom: -10px;
+    z-index: 1;
+    &:hover {
+      background-color: lightblue;
+      cursor: pointer;
+    }
+  }
 }
 
 .pluginContainerReadOnly {

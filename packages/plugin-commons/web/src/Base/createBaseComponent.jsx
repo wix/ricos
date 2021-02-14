@@ -47,6 +47,8 @@ const createBaseComponent = ({
   withHorizontalScroll,
   innerRCERenderedIn,
   disableKeyboardEvents,
+  addNewLineBelow,
+  addNewLineAbove,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -334,6 +336,7 @@ const createBaseComponent = ({
 
       const component = (
         <div
+          data-hook="blabla"
           ref={this.containerRef}
           role="none"
           style={sizeStyles}
@@ -343,6 +346,8 @@ const createBaseComponent = ({
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
+          <div className={this.styles.addNewLineAbove} onClick={addNewLineAbove} />
+          <div className={this.styles.addNewLineBelow} onClick={addNewLineBelow} />
           <PluginComponent
             {...this.props}
             isMobile={isMobile}

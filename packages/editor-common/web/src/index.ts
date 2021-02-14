@@ -83,6 +83,8 @@ export {
   isCursorAtStartOfContent,
   isCursorAtFirstLine,
   selectAllContent,
+  createNewLineBelow,
+  createNewLineAbove,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';

@@ -11,6 +11,7 @@ import {
   EditorChangeType,
 } from '@wix/draft-js';
 
+import { genKey } from '../index';
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
@@ -398,24 +399,45 @@ export const createBlock = (editorState: EditorState, data, type: string) => {
   // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
   // so get the block before the space
   const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+  const newBlockKey = newBlock.getKey();
   const newSelection = SelectionState.createEmpty(newBlock.getKey());
-  return { newBlock, newSelection, newEditorState };
+
+  const blockBefore = newEditorState.getCurrentContent().getBlockBefore(newBlockKey);
+  const blockAfter = newEditorState.getCurrentContent().getBlockAfter(newBlockKey);
+
+  const editorStateWithoutEmptyBlockAfter = deleteBlock(newEditorState, blockAfter.getKey());
+  const editorStateWithoutEmptyBlocks =
+    blockBefore.getText() === ''
+      ? deleteBlock(editorStateWithoutEmptyBlockAfter, blockBefore.getKey())
+      : editorStateWithoutEmptyBlockAfter;
+
+  return { newBlock, newSelection, newEditorState: editorStateWithoutEmptyBlocks };
 };
 
 export const deleteBlock = (editorState: EditorState, blockKey: string) => {
   const contentState = editorState.getCurrentContent();
-  const block = contentState.getBlockForKey(blockKey);
-  const previousBlock = contentState.getBlockBefore(blockKey) || block;
-  const anchorOffset = previousBlock.getKey() === blockKey ? 0 : previousBlock.getText().length;
-  const selectionRange = new SelectionState({
-    anchorKey: previousBlock.getKey(),
-    anchorOffset,
-    focusKey: blockKey,
-    focusOffset: block.getText().length,
-    hasFocus: true,
-  });
-  const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
-  return EditorState.push(editorState, newContentState, 'remove-range');
+  if (contentState.getBlockBefore(blockKey)) {
+    const block = contentState.getBlockForKey(blockKey);
+    const previousBlock = contentState.getBlockBefore(blockKey) || block;
+    const anchorOffset = previousBlock.getKey() === blockKey ? 0 : previousBlock.getText().length;
+    const selectionRange = new SelectionState({
+      anchorKey: previousBlock.getKey(),
+      anchorOffset,
+      focusKey: blockKey,
+      focusOffset: block.getText().length,
+      hasFocus: true,
+    });
+    const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
+    return EditorState.push(editorState, newContentState, 'remove-range');
+  } else {
+    // deleting the first line
+    const blockMap = contentState.getBlockMap();
+    const newBlockMap = blockMap.remove(blockKey);
+    const newContentState = contentState.merge({
+      blockMap: newBlockMap,
+    }) as ContentState;
+    return EditorState.push(editorState, newContentState, 'remove-range');
+  }
 };
 
 export const deleteBlockText = (editorState: EditorState, blockKey: string) => {
@@ -789,4 +811,41 @@ export function selectAllContent(editorState, forceSelection) {
     : EditorState.acceptSelection;
   const newEditorState = setSelectionFunction(editorState, selection);
   return newEditorState;
+}
+
+export function createNewLineBelow(editorState) {
+  const { contentState, selection } = insertNewBlock(editorState, false);
+  const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
+  return EditorState.forceSelection(newEditorState, selection);
+}
+
+export function createNewLineAbove(editorState) {
+  const { contentState, selection } = insertNewBlock(editorState, true);
+  const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
+  return EditorState.forceSelection(newEditorState, selection);
+}
+
+function insertNewBlock(editorState, insertAbove) {
+  const contentState = editorState.getCurrentContent();
+  const selectedBlockKey = editorState.getSelection().getFocusKey();
+  const blockKey = insertAbove
+    ? selectedBlockKey
+    : editorState.getCurrentContent().getKeyAfter(selectedBlockKey);
+  const blockMap = contentState.getBlockMap();
+  const newBlockKey = genKey();
+  const newBlock = new ContentBlock({
+    key: newBlockKey,
+    text: '',
+    type: 'unstyled',
+  });
+  const restOfBlockMap = blockMap.skipUntil((_, k) => k === blockKey);
+  const newBlockMap = blockMap
+    .takeUntil((_, k) => k === blockKey)
+    .concat([[newBlock.getKey(), newBlock]])
+    .merge(restOfBlockMap);
+  const newSelection = createSelection({ blockKey: newBlockKey, anchorOffset: 0, focusOffset: 0 });
+  const newContentState = contentState.merge({
+    blockMap: newBlockMap,
+  });
+  return { contentState: newContentState, selection: newSelection };
 }
