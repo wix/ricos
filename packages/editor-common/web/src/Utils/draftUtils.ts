@@ -432,11 +432,15 @@ export const deleteBlock = (editorState: EditorState, blockKey: string) => {
   } else {
     // deleting the first line
     const blockMap = contentState.getBlockMap();
-    const newBlockMap = blockMap.remove(blockKey);
-    const newContentState = contentState.merge({
-      blockMap: newBlockMap,
-    }) as ContentState;
-    return EditorState.push(editorState, newContentState, 'remove-range');
+    if (blockMap.size === 1) {
+      return replaceWithEmptyBlock(editorState, blockKey);
+    } else {
+      const newBlockMap = blockMap.remove(blockKey);
+      const newContentState = contentState.merge({
+        blockMap: newBlockMap,
+      }) as ContentState;
+      return EditorState.push(editorState, newContentState, 'remove-range');
+    }
   }
 };
 
