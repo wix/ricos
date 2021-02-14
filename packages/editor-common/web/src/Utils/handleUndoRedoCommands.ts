@@ -259,28 +259,26 @@ function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
 }
 
 function fixBrokenPair(newPairs, currentPairs, brokenPairIndex) {
-  if (brokenPairIndex > -1) {
-    ['title', 'content'].forEach(item => {
-      newPairs[brokenPairIndex][item] = setLastChangeType(
-        removeFocus(currentPairs[brokenPairIndex][item]),
-        'undo'
-      );
-    });
-  }
+  ['title', 'content'].forEach(item => {
+    newPairs[brokenPairIndex][item] = setLastChangeType(
+      removeFocus(currentPairs[brokenPairIndex][item]),
+      'undo'
+    );
+  });
   return newPairs;
 }
 
 function handleAccordionEntity(currentData, newData): EntityToReplace {
-  const brokenPairIndex = newData.pairs.findIndex(
-    pair => !(pair.key && pair.title && pair.content)
-  );
+  const { pairs: newPairs } = newData;
+  const brokenPairIndex = newPairs.findIndex(pair => !(pair.key && pair.title && pair.content));
+  const didPairBreak = brokenPairIndex > -1;
   const entityToReplace: EntityToReplace = {
-    didChange: brokenPairIndex > -1 || didAccordionConfigChange(currentData, newData),
+    didChange: didPairBreak || didAccordionConfigChange(currentData, newData),
     fixedData: {
       ...newData,
-      pairs: fixBrokenPair(newData.pairs, currentData.pairs, brokenPairIndex),
+      pairs: didPairBreak ? fixBrokenPair(newPairs, currentData.pairs, brokenPairIndex) : newPairs,
     },
-    shouldUndoAgain: brokenPairIndex > -1,
+    shouldUndoAgain: didPairBreak,
   };
   return entityToReplace.didChange ? entityToReplace : getFixedAccordionData(currentData, newData);
 }
