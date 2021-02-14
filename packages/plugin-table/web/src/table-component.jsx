@@ -432,8 +432,6 @@ class TableComponent extends React.Component {
     const isEditMode = !isMobile && isTableOnFocus;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
-    const disableNewCol = isCellsNumberInvalid(rowNum, colNum + 1);
-    const disableNewRow = isCellsNumberInvalid(rowNum + 1, colNum);
     return (
       <div
         className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
@@ -452,8 +450,8 @@ class TableComponent extends React.Component {
             selected={selected}
             table={this.table}
             innerEditorsRefs={this.innerEditorsRefs}
-            addCol={!disableNewCol && this.addCol}
-            addRow={!disableNewRow && this.addRow}
+            addCol={this.addCol}
+            addRow={this.addRow}
             deleteColumn={this.deleteColumn}
             deleteRow={this.deleteRow}
             isEditingActive={isEditingActive}
@@ -541,7 +539,7 @@ class TableComponent extends React.Component {
             <AddNewSection
               dataHook={'addCol'}
               onClick={this.addLastCol}
-              shouldDisable={disableNewCol}
+              shouldDisable={isCellsNumberInvalid(rowNum, colNum + 1)}
               t={t}
             />
           </div>
@@ -551,7 +549,7 @@ class TableComponent extends React.Component {
             <AddNewSection
               dataHook={'addRow'}
               onClick={this.addLastRow}
-              shouldDisable={disableNewRow}
+              shouldDisable={isCellsNumberInvalid(rowNum + 1, colNum)}
               t={t}
             />
           </div>

@@ -88,7 +88,7 @@ class ContextMenu extends PureComponent {
                 dataHook={buttonProps.dataHook}
                 isMobile={this.props.isMobile}
                 buttonContent={buttonProps.text}
-                disabled={buttonProps.isDisabled()}
+                disabledStyle={buttonProps.isDisabled()}
                 tooltipText={buttonProps.tooltip}
                 asContextButton
               />
