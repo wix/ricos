@@ -8,7 +8,7 @@ export const DesktopFlyOutModalStyles: ModalStyles = Object.freeze({
   content: {
     width: '362px',
     boxSizing: 'border-box',
-    height: 'max-content',
+    height: '212px',
     overflow: 'visible',
     border: 'solid 1px rgba(51, 51, 51, 0.1)',
     display: 'block',

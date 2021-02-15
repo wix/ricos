@@ -1,11 +1,7 @@
 import React from 'react';
 import SpoilerViewer from './spoiler-viewer';
 import { SPOILER_TYPE, SpoilerPluginViewerConfig } from './types';
-import {
-  InlineStyleMapperFunction,
-  InlineStyleMapper,
-  getBlocksFromContentState,
-} from 'wix-rich-content-common';
+import { InlineStyleMapperFunction, InlineStyleMapper } from 'wix-rich-content-common';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type StateChangeCallback = (state: Record<string, any>) => void;
@@ -15,8 +11,7 @@ export const spoilerInlineStyleMapper: InlineStyleMapperFunction<SpoilerPluginVi
   raw = { blocks: [], entityMap: {} }
 ) => {
   const settings = config[SPOILER_TYPE] || {};
-  const rawBlocks = getBlocksFromContentState(raw);
-  const mapper = rawBlocks.reduce<InlineStyleMapper>((map, block) => {
+  const mapper = raw.blocks.reduce<InlineStyleMapper>((map, block) => {
     block?.inlineStyleRanges?.forEach((range, idx) => {
       if (range.style === SPOILER_TYPE) {
         const stateChangeCallBacks: StateChangeCallback[] = [];

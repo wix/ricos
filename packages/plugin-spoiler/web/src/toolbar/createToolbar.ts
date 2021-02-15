@@ -1,7 +1,7 @@
 import { RichUtils, BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 import TextSpoilerButton from './TextSpoilerButton';
 import { SPOILER_TYPE } from '../types';
-import { SpoilerButtonIcon } from 'wix-rich-content-plugin-commons';
+import SpoilerIcon from '../icons/SpoilerContainerIcon';
 import {
   CreatePluginToolbar,
   TranslationFunction,
@@ -28,7 +28,7 @@ const createToolbar: CreatePluginToolbar = ({
           type: BUTTON_TYPES.BUTTON,
           tooltip: t('Spoiler_Insert_Tooltip'),
           getLabel: () => t('Spoiler_Insert_Tooltip'), // TODO: need another key?
-          getIcon: () => SpoilerButtonIcon,
+          getIcon: () => SpoilerIcon,
           onClick: () =>
             setEditorState(RichUtils.toggleInlineStyle(getEditorState(), SPOILER_TYPE)),
           isActive: () =>

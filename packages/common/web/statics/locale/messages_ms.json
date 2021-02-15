@@ -325,7 +325,6 @@
 	"VideoUploadModal_CustomVideoClickText": "Muat Naik Video",
 	"Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Tambah gambar pada setiap jawapan",
 	"LinkTo_Modal_Section_Item_Video": "VIDEO",
-	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
 	"ImageSettings_Header": "Tetapan Gambar",
 	"LinkTo_Toolbar_GoTo": "Pergi ke pautan",
 	"UploadFile_Error_Size_Toast": "Saiz maksimum fail ialah {{maxLimit}}MB. Cuba fail yang bersaiz lebih kecil.",

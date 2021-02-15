@@ -13,6 +13,7 @@ import {
   LegacyViewerPluginConfig,
   InlineStyleMapperFunction,
 } from 'wix-rich-content-common';
+import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -33,6 +34,9 @@ const isEmptyContentState = (raw?: RicosContent) =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const isEmptyBlock = ([_, data]) => data && data.length === 0;
+
+const getBlockDepth = (contentState, key) =>
+  contentState.blocks.find(block => block.key === key).depth || 0;
 
 const getBlockStyleClasses = (
   mergedStyles: Record<string, string>,
@@ -71,6 +75,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
       blockProps,
       getBlockStyleClasses,
       blockDataToStyle,
+      getBlockDepth,
       context,
     };
     return <List {...props} />;
@@ -80,7 +85,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const alignment = blockProps.data[i]?.textAlignment || context.textAlignment;
-        const depth = blockProps.data[i].depth;
+        const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
         const blockDirection = getDirectionFromAlignmentAndTextDirection(
           alignment,
           textDirection || blockProps.data[i]?.textDirection
@@ -93,7 +98,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           'ltr'}`;
 
         const ChildTag = typeof type === 'string' ? type : type(child);
-        const blockIndex = blockProps.data[i].index;
+        const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
 
         const _child = isEmptyBlock(child) ? <br /> : child;
@@ -207,18 +212,16 @@ const getEntities = (
 
 const normalizeContentState = (contentState: RicosContent): RicosContent => ({
   ...contentState,
-  blocks: contentState.blocks.map((block, index) => {
+  blocks: contentState.blocks.map(block => {
     if (block.type === 'atomic') {
       return block;
     }
 
-    const textDirection = getTextDirection(block.text);
-    const data = {
-      ...block.data,
-      depth: block.depth,
-      index,
-      ...(textDirection === 'rtl' && { textDirection }),
-    };
+    const data = { ...block.data };
+    const direction = getTextDirection(block.text);
+    if (direction === 'rtl') {
+      data.textDirection = direction;
+    }
 
     let text = block.text;
     if (endsWith(text, '\n')) {

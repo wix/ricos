@@ -24,9 +24,8 @@ import {
   TextDirection,
   ViewerContextType,
   InlineStyleMapperFunction,
-  AvailableExperiments,
 } from 'wix-rich-content-common';
-import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
@@ -60,9 +59,6 @@ export interface RichContentViewerProps {
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
   localeResource?: Record<string, string>;
-  experiments?: AvailableExperiments;
-  isInnerRcv?: boolean;
-  renderedInTable?: boolean;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
@@ -159,6 +155,8 @@ class RichContentViewer extends Component<
 
   componentDidMount() {
     this.reportDebuggingInfo();
+    const { onViewerLoaded, isPreview } = this.props.helpers || {};
+    onViewerLoaded?.(!!isPreview?.(), Version.currentVersion);
   }
 
   reportDebuggingInfo() {
@@ -198,20 +196,13 @@ class RichContentViewer extends Component<
         addAnchors,
         isMobile = false,
         t,
-        experiments,
-        renderedInTable,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
       });
-      const editorClassName = classNames(
-        styles.editor,
-        renderedInTable && styles.renderedInTable,
-        renderedInTable && draftDefaultStyles.renderedInTable,
-        {
-          [styles.rtl]: textDirection === 'rtl',
-        }
-      );
+      const editorClassName = classNames(styles.editor, {
+        [styles.rtl]: textDirection === 'rtl',
+      });
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
@@ -238,7 +229,7 @@ class RichContentViewer extends Component<
       );
 
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
+        <GlobalContext.Provider value={{ isMobile, t }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />

@@ -55,7 +55,10 @@
         },
         "button": {
           "settings": {
-            "buttonText": "Click Me"
+            "buttonText": "Click Me",
+            "url": "",
+            "rel": false,
+            "target": true
           },
           "design": {
             "activeButton": 0,

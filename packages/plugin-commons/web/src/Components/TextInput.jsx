@@ -14,7 +14,6 @@ export default class TextInput extends React.Component {
     theme: PropTypes.object.isRequired,
     error: PropTypes.string,
     showTooltip: PropTypes.bool,
-    showErrorIcon: PropTypes.bool,
     onChange: PropTypes.func,
     getTarget: PropTypes.bool,
     searchIcon: PropTypes.bool,
@@ -23,7 +22,6 @@ export default class TextInput extends React.Component {
 
   static defaultProps = {
     showTooltip: true,
-    showErrorIcon: true,
   };
 
   constructor(props) {
@@ -54,7 +52,6 @@ export default class TextInput extends React.Component {
       showTooltip,
       searchIcon = false,
       dataHook,
-      showErrorIcon,
       ...otherProps
     } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
@@ -82,7 +79,6 @@ export default class TextInput extends React.Component {
           {...inputProps}
         />
         {error &&
-          showErrorIcon &&
           (showTooltip ? (
             <Tooltip isError content={error}>
               <ErrorIcon className={styles.textInput_errorIcon} />

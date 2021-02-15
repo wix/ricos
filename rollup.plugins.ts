@@ -88,7 +88,7 @@ const typescript = (): Plugin => {
   const absPath = (dir: string) => `${process.cwd()}/${dir}`;
   return typescriptPlugin({
     useTsconfigDeclarationDir: true,
-    check: true,
+    check: !!process.env.GITHUB_ACTIONS,
     tsconfig: `${__dirname}/tsconfig.json`,
     tsconfigOverride: {
       compilerOptions: {

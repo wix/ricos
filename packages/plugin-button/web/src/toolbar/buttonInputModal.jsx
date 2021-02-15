@@ -20,7 +20,7 @@ export default class ButtonInputModal extends Component {
     } = this.props;
 
     this.state = {
-      validUrl: button.settings?.url && isValidUrl(button.settings.url),
+      validUrl: isValidUrl(button.settings.url),
       settings: { ...button.settings },
       design: { ...button.design },
       initialComponentData: { ...button },

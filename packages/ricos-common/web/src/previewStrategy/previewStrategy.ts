@@ -1,24 +1,14 @@
 import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import { RicosContent, AvailableExperiments } from 'wix-rich-content-common';
-import { isEmpty } from 'lodash';
+import { RicosContent } from 'wix-rich-content-common';
 
-export default function previewStrategy({
-  isViewer,
-  isPreviewExpanded,
-  onPreviewExpand,
-  previewConfig,
-  content,
-  experiments,
-}: {
-  isViewer: boolean;
-  isPreviewExpanded: boolean;
-  onPreviewExpand: PreviewConfig['onPreviewExpand'];
-  previewConfig?: PreviewConfig;
-  content?: RicosContent;
-  experiments?: AvailableExperiments;
-}) {
-  !isEmpty(experiments) && console.debug('previewStrategy experiments', experiments); // eslint-disable-line no-console
+export default function previewStrategy(
+  isViewer: boolean,
+  isPreviewExpanded: boolean,
+  onPreviewExpand: PreviewConfig['onPreviewExpand'],
+  previewConfig?: PreviewConfig,
+  content?: RicosContent
+) {
   if (!isViewer || !previewConfig || !content) {
     return {};
   }

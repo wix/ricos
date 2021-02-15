@@ -94,7 +94,6 @@ export interface EditorContextType extends CommonContextType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderInnerRCE: (params: any) => JSX.Element;
   innerRCERenderedIn?: string;
-  disableKeyboardEvents?: (shouldEnable: boolean) => void;
 }
 
 export interface ViewerContextType extends CommonContextType {
@@ -105,11 +104,3 @@ export interface ViewerContextType extends CommonContextType {
   contentState?: RicosContent;
   textAlignment?: 'left' | 'right';
 }
-
-export type Experiment = {
-  value: string;
-  enabled: boolean;
-  namespace: string;
-};
-
-export type AvailableExperiments = Record<string, Experiment>;

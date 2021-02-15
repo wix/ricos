@@ -34,8 +34,13 @@
     }
   }
 
+  &:disabled {
+    & > * {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
   &.forceDisabled {
-    opacity: 0.4;
     cursor: default;
   }
 }

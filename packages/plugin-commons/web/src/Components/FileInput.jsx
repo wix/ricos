@@ -51,7 +51,6 @@ class FileInput extends Component {
 
     return (
       <label
-        disabled={disabled}
         htmlFor={this.id}
         className={classnames({ [className]: true, [styles.focused]: this.state.focused })}
         style={this.props.style}
@@ -59,7 +58,6 @@ class FileInput extends Component {
       >
         {handleFileSelection ? (
           <button
-            disabled={disabled}
             className={styles.visuallyHidden}
             {...a11yProps}
             id={this.id}

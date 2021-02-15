@@ -141,7 +141,7 @@ class ImageViewer extends React.Component {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      { ariaHidden: 'true', ...props }
+      props
     );
   };
 
@@ -230,7 +230,7 @@ class ImageViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
+    helpers.onViewerAction?.('expand_image', IMAGE_TYPE);
     onExpand?.(this.props.blockKey);
   };
 
@@ -264,7 +264,6 @@ class ImageViewer extends React.Component {
       return null;
     } else if (this.hasAnchor()) {
       e.preventDefault();
-      e.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);

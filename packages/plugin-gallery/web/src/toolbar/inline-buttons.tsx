@@ -97,7 +97,6 @@ const createInlineButtons: CreateInlineButtons = ({
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,
-      accept: settings.accept,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

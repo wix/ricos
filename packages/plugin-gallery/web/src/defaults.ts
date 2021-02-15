@@ -1,5 +1,3 @@
-import { ImageComponentData, VideoComponentData } from 'wix-rich-content-common';
-
 /* eslint-disable camelcase */
 const GALLERY_LAYOUTS = Object.freeze({
   EMPTY: -1,
@@ -16,11 +14,6 @@ const GALLERY_LAYOUTS = Object.freeze({
   BRICKS: 10,
   MIX: 11,
   ALTERNATE: 12,
-});
-
-export const GALLERY_ITEMS_TYPES = Object.freeze({
-  IMAGE: 'image',
-  VIDEO: 'video',
 });
 
 const HORIZONTAL_LAYOUTS = Object.freeze([
@@ -83,11 +76,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const createImageItem = (
-  img: ImageComponentData & HTMLImageElement,
-  itemId: string,
-  preloadImage: boolean | undefined
-) => {
+export const imageItem = (img, itemId) => {
   return {
     metadata: {
       type: 'image',
@@ -95,20 +84,7 @@ export const createImageItem = (
       width: img.width,
     },
     itemId,
-    url: preloadImage ? img.src : img.file_name,
-  };
-};
-
-export const createVideoItem = (video: VideoComponentData, itemId: string) => {
-  return {
-    metadata: {
-      type: 'video',
-      height: video.thumbnail.height,
-      width: video.thumbnail.width,
-      poster: video.thumbnail.pathname,
-    },
-    itemId,
-    url: video.pathname,
+    url: img.src,
   };
 };
 

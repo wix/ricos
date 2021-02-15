@@ -5,14 +5,15 @@ import { DEFAULT_CONFIG, COLORS } from './constants';
 const WRAPPER_PALETTE: any = {};
 export const DEFAULT_PALETTE = ['#FFFFFF', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
 export const getColors = () => ({ ...COLORS, ...WRAPPER_PALETTE });
-export const getDefaultComponentData = (isLinkButton, rel, target) => {
-  const linkButtonSettings = isLinkButton ? { url: '', rel, target } : {};
+export const getDefaultComponentData = (rel, target) => {
   return {
     config: DEFAULT_CONFIG,
     button: {
       settings: {
         buttonText: 'Click Me',
-        ...linkButtonSettings,
+        url: '',
+        rel,
+        target,
       },
       design: {
         activeButton: 0,

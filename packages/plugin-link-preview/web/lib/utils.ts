@@ -1,4 +1,3 @@
-import { pickBy } from 'lodash';
 import { DEFAULTS } from '../src/defaults';
 import { LINK_PREVIEW_TYPE } from '../src/types';
 import {
@@ -18,13 +17,9 @@ const addLinkPreview = async (
   editorState: EditorState,
   config: CreatePluginConfig,
   blockKey: string,
-  linkData: {
-    url: string;
-    target?: string;
-    rel?: string;
-  }
+  url: string
 ) => {
-  const fixedUrl = linkData.url.split('\u21b5').join(''); //remove {enter} char
+  const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
   const settings = config[LINK_PREVIEW_TYPE] || {};
   const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
   const { setEditorState } = config;
@@ -39,7 +34,7 @@ const addLinkPreview = async (
     const data = {
       config: {
         ...currentConfig,
-        link: { ...currentConfig.link, ...pickBy(linkData), url: fixedUrl },
+        link: { url: fixedUrl, ...currentConfig.link },
         width: html && 350,
       },
       thumbnail_url,

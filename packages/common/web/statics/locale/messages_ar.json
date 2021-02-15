@@ -325,7 +325,6 @@
 	"VideoUploadModal_CustomVideoClickText": "تحميل فيديو",
 	"Poll_PollSettings_Tab_Layout_Section_Answers_Image": "أضِف صورة إلى كل إجابة",
 	"LinkTo_Modal_Section_Item_Video": "فيديو",
-	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
 	"ImageSettings_Header": "إعدادات الصورة",
 	"LinkTo_Toolbar_GoTo": "انتقال إلى الرابط",
 	"UploadFile_Error_Size_Toast": "الحد الأقصى لحجم الملف {{maxLimit}}ميغابايت. جرب ملفًا أصغر حجمًا.",

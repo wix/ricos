@@ -22,7 +22,7 @@ const lintModified = () => {
         !s.startsWith(' ') &&
         !s.startsWith('?') &&
         s.indexOf(baseDir) !== -1 &&
-        s.indexOf('website') === -1 &&
+        s.indexOf('docs') === -1 &&
         s.indexOf('wrapper') === -1
     )
     .map(status => {

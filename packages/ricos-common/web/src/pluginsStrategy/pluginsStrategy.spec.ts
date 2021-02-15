@@ -5,12 +5,7 @@ import { BasePlugin } from './pluginTypes';
 describe('PluginsStrategy', () => {
   const driver = {
     runStrategy: (isViewer: boolean, plugins: BasePlugin[] = []) =>
-      pluginsStrategy({
-        isViewer,
-        plugins,
-        childProps: {},
-        cssOverride: { modalTheme: { content: {} } },
-      }),
+      pluginsStrategy(isViewer, plugins, {}, { modalTheme: { content: {} } }),
   };
 
   it('should create an object', () => {

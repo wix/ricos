@@ -187,11 +187,10 @@ export const getContextMenuButtonsProps = (
   distributeColumns
 ) => {
   const range = selected && getRange(selected);
-  const shouldShowMerge = false;
-  // const shouldShowMerge =
-  //   range &&
-  //   table.isAllMergeRangeSelected(range) &&
-  //   !table.isBothHeaderCellsAndRegularCellsSelected(range);
+  const shouldShowMerge =
+    range &&
+    table.isAllMergeRangeSelected(range) &&
+    !table.isBothHeaderCellsAndRegularCellsSelected(range);
   const shouldShowSplit = table.getSelectedParentCells(range).length > 0;
   let buttons;
   if (isAllCellsSelected) {

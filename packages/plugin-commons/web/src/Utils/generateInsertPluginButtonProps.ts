@@ -153,6 +153,9 @@ export function generateInsertPluginButtonProps({
   }
 
   function toggleButtonModal(event) {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur(); // fixes focus/selction after giphy is inserted
+    }
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {

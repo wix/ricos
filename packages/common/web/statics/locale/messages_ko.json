@@ -325,7 +325,6 @@
 	"VideoUploadModal_CustomVideoClickText": "동영상 업로드",
 	"Poll_PollSettings_Tab_Layout_Section_Answers_Image": "각 답변별 이미지 추가하기",
 	"LinkTo_Modal_Section_Item_Video": "동영상",
-	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
 	"ImageSettings_Header": "이미지 설정",
 	"LinkTo_Toolbar_GoTo": "링크로 이동",
 	"UploadFile_Error_Size_Toast": "최대 업로드 용량은 {{maxLimit}}MB입니다. 더 작은 크기의 파일로 다시 시도해보세요.",

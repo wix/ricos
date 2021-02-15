@@ -11,13 +11,13 @@ export default class TableRenderer extends PureComponent {
     this.columns = [props.table.getColNum()];
   }
   componentDidMount() {
-    window.addEventListener('resize', this.onResizeWindow);
+    window.addEventListener('resize', debounce(this.onResizeWindow, 60));
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResizeWindow);
+    window.removeEventListener('resize', debounce(this.onResizeWindow, 60));
   }
 
-  onResizeWindow = debounce(() => {
+  onResizeWindow = () => {
     this.setState({ windowWidth: window.innerWidth });
     const { table, tableRef } = this.props;
     tableRef.offsetWidth &&
@@ -29,7 +29,7 @@ export default class TableRenderer extends PureComponent {
         );
         col && (col.style.width = width + 'px');
       });
-  }, 60);
+  };
 
   render() {
     const {
@@ -45,7 +45,6 @@ export default class TableRenderer extends PureComponent {
       tableHeight,
       isEditMode,
       isEditingActive,
-      tableOverflowWidth,
     } = this.props;
     const range = selected && getRange(selected);
     const colsMinWidth = table.getColsMinWidth();
@@ -80,7 +79,6 @@ export default class TableRenderer extends PureComponent {
               size={tableHeight}
               tableWidth={tableRef?.offsetWidth}
               columnsRefs={this.columns}
-              tableOverflowWidth={tableOverflowWidth}
             />
           )}
         </thead>
@@ -104,5 +102,4 @@ TableRenderer.propTypes = {
   isEditMode: PropTypes.bool,
   selected: PropTypes.object,
   isEditingActive: PropTypes.bool,
-  tableOverflowWidth: PropTypes.number,
 };

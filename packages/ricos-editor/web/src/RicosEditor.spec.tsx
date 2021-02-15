@@ -100,7 +100,7 @@ describe('RicosEditor', () => {
   it('should render localeStrategy in strategies', async () => {
     const ricosEditor = getRicosEditorInstance({ locale: 'he' }) as RicosEditor;
     await ricosEditor.updateLocale();
-    expect(ricosEditor.state.localeData).toMatchObject({
+    expect(ricosEditor.state.localeStrategy).toMatchObject({
       locale: 'he',
       localeResource: hebResource,
     });

@@ -6,11 +6,8 @@ import {
   viewerStyleFnFilter,
   isTextColor,
 } from './text-decorations-utils';
-import {
-  InlineStyleMapperFunction,
-  InlineStyleMapper,
-  getBlocksFromContentState,
-} from 'wix-rich-content-common';
+import { getBlocksFromContentState } from './innerRCEBlocksUtils';
+import { InlineStyleMapperFunction, InlineStyleMapper } from 'wix-rich-content-common';
 
 /**
  * textColorInlineStyleMapper

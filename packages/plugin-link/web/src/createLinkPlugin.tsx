@@ -5,7 +5,6 @@ import {
   hasLinksInSelection,
   getVisibleSelectionRect,
   EditorState,
-  createLinkEntityData,
 } from 'wix-rich-content-editor-common';
 import { addLinkPreview, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview/libs/utils';
 import { isValidUrl, CreatePluginFunction } from 'wix-rich-content-common';
@@ -48,14 +47,7 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
       const url = getBlockLinkUrl(linkifyData);
       const blockKey = linkifyData?.block.getKey();
       if (url && blockKey) {
-        const linkData = createLinkEntityData({
-          url,
-          targetBlank,
-          nofollow,
-          anchorTarget,
-          relValue,
-        }) as { url: string; target?: string; rel?: string };
-        addLinkPreview(editorState, config, blockKey, linkData);
+        addLinkPreview(editorState, config, blockKey, url);
       }
     }
     return 'not-handled';

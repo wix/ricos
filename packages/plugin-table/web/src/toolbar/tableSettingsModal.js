@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/table-settings-modal.scss';
 import TableSettingsCountSection from './TableSettingsCountSection';
-import { getDefaultsSettings, isCellsNumberInvalid } from '../tableUtil';
+import { getDefaultsSettings } from '../tableUtil';
 import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { CloseIcon } from '../icons';
 
@@ -36,21 +36,16 @@ export default class tableSettingsModal extends Component {
 
   isNumber = n => /^[1-9][0-9]*$/.test(n);
 
-  isCellsNumberInvalid = (rows, cols) =>
-    this.isNumber(rows) && this.isNumber(cols) && isCellsNumberInvalid(cols, rows);
-
   onColCountChange = colCount =>
     this.setState({
       colCount,
       submittedInvalidCol: colCount.length > 0 && !this.isNumber(colCount),
-      invalidCellNum: this.isCellsNumberInvalid(this.state.rowCount, colCount),
     });
 
   onRowCountChange = rowCount =>
     this.setState({
       rowCount,
       submittedInvalidRow: rowCount.length > 0 && !this.isNumber(rowCount),
-      invalidCellNum: this.isCellsNumberInvalid(rowCount, this.state.colCount),
     });
 
   setCreateTableButtonRef = ref => (this.createTableButton = ref);
@@ -59,13 +54,7 @@ export default class tableSettingsModal extends Component {
 
   render() {
     const { styles } = this;
-    const {
-      colCount,
-      rowCount,
-      submittedInvalidCol,
-      submittedInvalidRow,
-      invalidCellNum,
-    } = this.state;
+    const { colCount, rowCount, submittedInvalidCol, submittedInvalidRow } = this.state || {};
     const { isMobile, helpers, t } = this.props;
     return (
       <div>
@@ -83,37 +72,32 @@ export default class tableSettingsModal extends Component {
             theme={this.props.theme}
             input={colCount}
             onCountChange={this.onColCountChange}
-            error={
-              (submittedInvalidCol || invalidCellNum) && t('TablePlugin_SettingsModal_ErrorMessage')
-            }
+            errorMessage={t('TablePlugin_SettingsModal_ErrorMessage')}
+            submittedInvalidInput={submittedInvalidCol}
             dataHook={'columnCount'}
-            showErrorIcon={!invalidCellNum}
           />
           <TableSettingsCountSection
             title={t('TablePlugin_SettingsModal_RowCount')}
             theme={this.props.theme}
             input={rowCount}
             onCountChange={this.onRowCountChange}
-            error={
-              (submittedInvalidRow || invalidCellNum) && t('TablePlugin_SettingsModal_ErrorMessage')
-            }
+            errorMessage={t('TablePlugin_SettingsModal_ErrorMessage')}
+            submittedInvalidInput={submittedInvalidRow}
             dataHook={'rowCount'}
-            showErrorIcon={!invalidCellNum}
           />
-          {invalidCellNum && (
-            <div className={styles.errorMsg}>{t('TablePlugin_SettingsModal_limitError')}</div>
-          )}
-          {/*eslint-disable-next-line*/}
-          <div
-            tabIndex="0" //eslint-disable-line
-            className={styles.submit}
-            onClick={this.onCreateTableClicked}
-            onKeyUp={this.onKeyUp}
-            data-hook={'createTableButton'}
-          >
-            {t('TablePlugin_SettingsModal_CreateTable_Button')}
-          </div>
         </div>
+        {/*eslint-disable-next-line*/}
+        <div
+          tabIndex="0" //eslint-disable-line
+          className={styles.submit}
+          onClick={this.onCreateTableClicked}
+          onKeyUp={this.onKeyUp}
+          data-hook={'createTableButton'}
+        >
+          {t('TablePlugin_SettingsModal_CreateTable_Button')}
+        </div>
+        {/*eslint-disable-next-line*/}
+        <div tabIndex="0" />
       </div>
     );
   }

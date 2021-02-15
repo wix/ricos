@@ -17,7 +17,6 @@ export default class Columns extends PureComponent {
       highlightResizer,
       onResizeStart,
       columnsRefs,
-      tableOverflowWidth,
     } = this.props;
     return (
       <tr>
@@ -48,7 +47,6 @@ export default class Columns extends PureComponent {
                 size={size}
                 onResizeStart={onResizeStart}
                 itemsRefs={columnsRefs}
-                overflowWidth={tableOverflowWidth}
               />
             )}
           </td>
@@ -68,5 +66,4 @@ Columns.propTypes = {
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   onResizeStart: PropTypes.func,
   columnsRefs: PropTypes.array,
-  tableOverflowWidth: PropTypes.number,
 };

@@ -1,4 +1,4 @@
-import { merge, isEmpty } from 'lodash';
+import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
   ViewerPluginsStrategy,
@@ -6,12 +6,7 @@ import {
   PluginsStrategy,
 } from './pluginTypes';
 import { RicosCssOverride, RichContentProps } from '../types';
-import {
-  AvailableExperiments,
-  RicosContent,
-  EditorPlugin,
-  ViewerPlugin,
-} from 'wix-rich-content-common';
+import { RicosContent, EditorPlugin, ViewerPlugin } from 'wix-rich-content-common';
 
 const getPluginProps = (
   isViewer: boolean,
@@ -68,24 +63,13 @@ function viewerStrategy(
   };
 }
 
-export default function pluginsStrategy({
-  isViewer,
-  plugins = [],
-  childProps,
-  cssOverride,
-  content,
-  experiments,
-}: {
-  isViewer: boolean;
-  plugins: BasePlugin[];
-  childProps: RichContentProps;
-  cssOverride: RicosCssOverride;
-  content?: RicosContent;
-  experiments?: AvailableExperiments;
-}): PluginsStrategy {
-  if (!isEmpty(experiments)) {
-    console.debug('PluginsStrategy experiments', experiments); // eslint-disable-line no-console
-  }
+export default function pluginsStrategy(
+  isViewer: boolean,
+  plugins: BasePlugin[] = [],
+  childProps: RichContentProps,
+  cssOverride: RicosCssOverride,
+  content?: RicosContent
+): PluginsStrategy {
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isViewer) {

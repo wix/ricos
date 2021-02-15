@@ -37,7 +37,7 @@
     display: flex;
   }
   &.forceDisabled {
-    opacity: 0.4;
+    color: lightgray;
     pointer-events: none;
   }
 }

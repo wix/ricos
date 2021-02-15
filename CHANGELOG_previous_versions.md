@@ -1991,7 +1991,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 ### :rocket: New Feature
 
 - `general`
-  - [#149](https://github.com/wix/ricos/pull/149) RCE `config.getToolbarSettings` API now allows to provide decoration component for toolbar containers. Check [documentation](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) for more details
+  - [#149](https://github.com/wix/ricos/pull/149) RCE `config.getToolbarSettings` API now allows to provide decoration component for toolbar containers. Check [documentation](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) for more details
 - `editor`
   - [#151](https://github.com/wix/ricos/pull/151) RCE `handleReturn` prop exposed. Check [documentation](./docs/RichContentEditorApi.md) for more details
 
@@ -2033,13 +2033,13 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 ### :rocket: New Feature
 
 - `general`
-  - [#142](https://github.com/wix/ricos/pull/142) RCE `config.getToolbarSettings` API now allows to customize the plugin functionality toolbars. Check [documentation](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) for more details
-  - [#143](https://github.com/wix/ricos/pull/143) RCE `config.getToolbarSettings` API now allows to customize the toolbar display mode. Check [documentation](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) for more details
+  - [#142](https://github.com/wix/ricos/pull/142) RCE `config.getToolbarSettings` API now allows to customize the plugin functionality toolbars. Check [documentation](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) for more details
+  - [#143](https://github.com/wix/ricos/pull/143) RCE `config.getToolbarSettings` API now allows to customize the toolbar display mode. Check [documentation](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) for more details
 
 ### :book: Documentation
 
-- [#143](https://github.com/wix/ricos/pull/143) [Toolbar Customization](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) updated
-- [Theming Guidelines](https://github.com/wix/ricos/blob/master/website/docs/plugin-development-guidelines/Theming.md) added
+- [#143](https://github.com/wix/ricos/pull/143) [Toolbar Customization](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) updated
+- [Theming Guidelines](https://github.com/wix/ricos/blob/master/docs/plugin-development-guidelines/Theming.md) added
   <hr/>
 
 ## 1.6.1 (Sep 13, 2018)
@@ -2138,7 +2138,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 
 ### :book: Documentation
 
-- [UI Settings](https://github.com/wix/ricos/blob/master/website/docs/rce_api/UiSettings.mdx) added
+- [UI Settings](https://github.com/wix/ricos/blob/master/docs/UiSettings.md) added
 
 ### :house: Internal
 
@@ -2156,7 +2156,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 ### :rocket: New Feature
 
 - `editor`
-  - RCE `config.getToolbarSettings` API now allows to customize the plugin text buttons. Check [documentation](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) for more details
+  - RCE `config.getToolbarSettings` API now allows to customize the plugin text buttons. Check [documentation](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) for more details
 
 ### :bug: Bug Fix
 
@@ -2165,7 +2165,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 
 ### :book: Documentation
 
-- [Toolbar Customization](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) updated
+- [Toolbar Customization](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) updated
   <hr/>
 
 ## 1.3.5 (Aug 22, 2018)
@@ -2245,7 +2245,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 ### :rocket: New Feature
 
 - `editor`
-  - RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) for more details
+  - RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) for more details
 
 ### :bug: Bug Fix
 
@@ -2260,7 +2260,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 
 ### :book: Documentation
 
-- [Toolbar Customization](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) added
+- [Toolbar Customization](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) added
   <hr/>
 
 ## 1.2.14 (Aug 8, 2018)
@@ -2457,7 +2457,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 ### :rocket: New Feature
 
 - `editor`
-  - RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) for more details
+  - RCE `config.getToolbarSettings` API allows to customize toolbar instantiation, visibility, offset point, and buttons. Check [documentation](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) for more details
 
 ### :bug: Bug Fix
 
@@ -2472,7 +2472,7 @@ _NOTE:_ From this version onwards all modules will have the same version number,
 
 ### :book: Documentation
 
-- [Toolbar Customization](https://github.com/wix/ricos/blob/master/website/docs/rce_api/ToolbarCustomization.mdx) added
+- [Toolbar Customization](https://github.com/wix/ricos/blob/master/docs/ToolbarCustomization.md) added
 
 <hr/>
 

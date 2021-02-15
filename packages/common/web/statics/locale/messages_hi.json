@@ -325,7 +325,6 @@
 	"VideoUploadModal_CustomVideoClickText": "वीडियो अपलोड करें",
 	"Poll_PollSettings_Tab_Layout_Section_Answers_Image": "प्रत्येक उत्तर के लिए एक छवि जोड़ें",
 	"LinkTo_Modal_Section_Item_Video": "वीडियो",
-	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
 	"ImageSettings_Header": "छवि सेटिंग",
 	"LinkTo_Toolbar_GoTo": "लींक पर जाएं",
 	"UploadFile_Error_Size_Toast": "फ़ाइल का अधिकतम आकार {{maxLimit}}MB है। एक छोटी फ़ाइल का प्रयास करें।",

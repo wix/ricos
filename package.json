@@ -6,7 +6,7 @@
 		"examples/storybook",
 		"packages/!(template-*)/web",
 		"bundle-analyzer",
-		"website"
+		"docs"
 	],
 	"resolutions": {
 		"rollup": "1.31.1",
@@ -39,8 +39,8 @@
 		"preRelease": "node scripts/preRelease",
 		"storybook": "npm run start --prefix examples/storybook",
 		"exampleApp": "npm run start --prefix examples/main",
-		"docs": "npm run start --prefix website",
-		"docs:deploy": "npm run deploy --prefix website",
+		"docs": "npm run start --prefix docs",
+		"docs:deploy": "npm run deploy --prefix docs",
 		"saveBundlesSizesBaseline": "npm run build && npm run save --prefix bundle-analyzer",
 		"analyzeBundles": "npm run build && npm run analyzeBundles:nobuild --silent",
 		"analyzeBundles:nobuild": "npm run analyzeAndCompare --prefix bundle-analyzer --silent",

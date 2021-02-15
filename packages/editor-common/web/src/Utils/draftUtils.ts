@@ -775,6 +775,28 @@ export function isCursorAtStartOfContent(editorState: EditorState) {
   return isStartOfLine && isCursorAtFirstLine(editorState);
 }
 
+export function isCursorAtLastLine(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  return (
+    selection.isCollapsed() &&
+    editorState
+      .getCurrentContent()
+      .getBlockMap()
+      .last()
+      .getKey() === selection.getFocusKey()
+  );
+}
+
+export function isCursorAtEndOfContent(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  const lastBlock = editorState
+    .getCurrentContent()
+    .getBlockMap()
+    .last();
+  const isEndOfLine = selection.getFocusOffset() >= lastBlock.getText().length;
+  return isEndOfLine && isCursorAtLastLine(editorState);
+}
+
 export function selectAllContent(editorState, forceSelection) {
   const currentContent = editorState.getCurrentContent();
   const selection = editorState.getSelection().merge({
