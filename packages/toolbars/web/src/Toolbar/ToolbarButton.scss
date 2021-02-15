@@ -38,7 +38,7 @@
   &:focus {
     outline: 0;
   }
-  &:disabled {
+  &:disabled, &.disabled {
     cursor: default;
     opacity: 0.4;
   }

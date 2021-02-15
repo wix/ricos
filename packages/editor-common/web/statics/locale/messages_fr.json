@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "Rédigez un titre pour cet article",
   "Video_plugin_search_tags": "vidéo film clip musique audio mtv youtube appareil photo caméra chanson visuel film numérique téléchargement bande animé enregistrement viral",
   "ReplaceGiphyButton_Tooltip": "Remplacer le Gif",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "Colonnes",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "Ce fichier audio n'est pas dans un format AAC pris en charge et n'a pas pu être importé. Veuillez essayer un autre fichier.",

@@ -37,6 +37,13 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
+    it('should limit cells number', function() {
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.table));
+      cy.openTableModal();
+      cy.setTableRowNumAndColNum(100, 100);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     it('should select/unSelect all cells', function() {
       cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
       cy.focusTable();

@@ -527,6 +527,7 @@
   "TablePlugin_Toolbar_DeleteTable_Tooltip": "Delete table",
   "TablePlugin_Toolbar_Header_Tooltip": "Set as header",
   "TablePlugin_Toolbar_BGColor_Tooltip": "Background color",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "TablePlugin_Toolbar_VerticalAlignment_AlignTop_Tooltip": "Align top",
   "TablePlugin_Toolbar_VerticalAlignment_AlignMiddle_Tooltip": "Align middle",
   "TablePlugin_Toolbar_VerticalAlignment_AlignBottom_Tooltip": "Align bottom",

@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "Pojmenujte tuto položku",
   "Video_plugin_search_tags": "video film klip hudba audio mtv youtube fotoaparát foťák písnička skladba vizuál digitální film nahrát animované animace páska nahrávání virální",
   "ReplaceGiphyButton_Tooltip": "Nahradit Gif",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "Sloupce",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "Tento audio soubor není v podporovaném AAC formátu a nelze jej nahrát. Zkuste jiný soubor.",
