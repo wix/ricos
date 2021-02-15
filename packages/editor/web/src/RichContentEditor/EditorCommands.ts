@@ -102,7 +102,6 @@ const insertDecorationsMap = {
 
 const deleteDecorationsMapFuncs = {
   [RICOS_LINK_TYPE]: removeLinksInSelection,
-  [RICOS_MENTION_TYPE]: () => {}, // No sure if needed
 };
 
 export const createEditorCommands = (
