@@ -407,7 +407,7 @@ export const createBlock = (editorState: EditorState, data, type: string) => {
 
   const editorStateWithoutEmptyBlockAfter = deleteBlock(newEditorState, blockAfter.getKey());
   const editorStateWithoutEmptyBlocks =
-    blockBefore.getText() === ''
+    blockBefore.getText() === '' || blockBefore.getText() === '​' //zero-width space (empty table cell)
       ? deleteBlock(editorStateWithoutEmptyBlockAfter, blockBefore.getKey())
       : editorStateWithoutEmptyBlockAfter;
 
@@ -439,7 +439,15 @@ export const deleteBlock = (editorState: EditorState, blockKey: string) => {
       const newContentState = contentState.merge({
         blockMap: newBlockMap,
       }) as ContentState;
-      return EditorState.push(editorState, newContentState, 'remove-range');
+
+      const blockAfter = contentState.getBlockAfter(blockKey);
+      const newSelection = createSelection({
+        blockKey: blockAfter.getKey(),
+        anchorOffset: 0,
+        focusOffset: 0,
+      });
+      const newEditorState = EditorState.push(editorState, newContentState, 'remove-range');
+      return EditorState.forceSelection(newEditorState, newSelection);
     }
   }
 };

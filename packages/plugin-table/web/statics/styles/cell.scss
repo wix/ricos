@@ -50,6 +50,7 @@
         }
     }
     &.view {
+        pointer-events: none;
         padding: 10px;
     }
 }
