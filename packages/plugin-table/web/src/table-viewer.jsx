@@ -28,7 +28,7 @@ class TableViewer extends Component {
     const { renderInnerRCE, innerRCV } = this.props;
     return renderInnerRCE
       ? renderInnerRCE(i, j)
-      : innerRCV({ contentState: this.table.getCellContent(i, j) });
+      : innerRCV({ contentState: this.table.getCellContent(i, j), renderedIn: 'table' });
   };
 
   createRow = (i, columnsNumber) =>
@@ -49,6 +49,7 @@ class TableViewer extends Component {
         selected={this.props.selected}
         isEditMode={this.props.isEditMode}
         isEditingActive={this.props.isEditingActive}
+        tableOverflowWidth={this.props.tableOverflowWidth}
       />
     );
   };
@@ -80,7 +81,6 @@ class TableViewer extends Component {
       selected = {},
       disableSelectedStyle,
       t,
-      handleCellClipboardEvent,
     } = this.props;
     return (
       <CellRenderer
@@ -95,7 +95,6 @@ class TableViewer extends Component {
         isMobile={isMobile}
         disableSelectedStyle={disableSelectedStyle}
         t={t}
-        handleCellClipboardEvent={handleCellClipboardEvent}
       />
     );
   };
@@ -150,7 +149,6 @@ TableViewer.propTypes = {
   isEditMode: PropTypes.bool,
   t: PropTypes.func,
   disableSelectedStyle: PropTypes.bool,
-  handleCellClipboardEvent: PropTypes.func,
   colDragProps: PropTypes.object,
   onResize: PropTypes.func,
   onResizeStart: PropTypes.func,
@@ -161,6 +159,7 @@ TableViewer.propTypes = {
   setCellContent: PropTypes.func,
   onClear: PropTypes.func,
   onPaste: PropTypes.func,
+  tableOverflowWidth: PropTypes.number,
 };
 
 export default TableViewer;

@@ -1,4 +1,10 @@
-export default async function localeStrategy(locale = 'en') {
+import { AvailableExperiments } from 'wix-rich-content-common';
+import { isEmpty } from 'lodash';
+
+export default async function localeStrategy(locale = 'en', experiments?: AvailableExperiments) {
+  if (!isEmpty(experiments)) {
+    console.debug('localeStrategy experiments', experiments); // eslint-disable-line no-console
+  }
   if (locale === 'en') {
     return { locale };
   }

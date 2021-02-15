@@ -8,6 +8,7 @@ import {
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
+  TABLE_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -53,14 +54,17 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  innerRCV = ({ contentState, textAlignment, direction, renderedIn }) => {
     const { innerRCEViewerProps } = this.props;
+    const renderedInTable = renderedIn === TABLE_TYPE;
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
         direction={direction}
         {...innerRCEViewerProps}
+        isInnerRcv
+        renderedInTable={renderedInTable}
       />
     );
   };
