@@ -6,6 +6,7 @@ import BlogLefties from './BlogLefties';
 import ImageFloatSpacing from './ImageFloatSpacing';
 import MaxHeight from './MaxHeight';
 import OneLiner from './OneLiner';
+import Experiments from './Experiments';
 import VeryBigPost from './VeryBigPost';
 import ViewerAnchors from './ViewerAnchors';
 import MobileView from './MobileViewStory';
@@ -25,6 +26,7 @@ storiesOf('Test Cases', module)
   .add('Shakey Twitter', ShakeyTwitter)
   .add('Very Big Post', VeryBigPost)
   .add('One-Liner', OneLiner)
+  .add('Experiments', Experiments)
   .add('Image Float Spacing', ImageFloatSpacing)
   .add('Blog Lefties', BlogLefties)
   .add('HTML Instagram Height', HTMLPluginStory)

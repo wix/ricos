@@ -122,10 +122,9 @@ export class TableDataUtil {
       }
     });
     if (smallestCellWidth) {
-      return (
+      currCellWidth =
         Math.min(CELL_AUTO_MIN_WIDTH, smallestCellWidth) *
-        (this.getColWidth(i) / this.getColWidth(smallestCellIndex))
-      );
+        (this.getColWidth(i) / this.getColWidth(smallestCellIndex));
     }
     return Math.max(currCellWidth, colsMinWidth[i]);
   };
