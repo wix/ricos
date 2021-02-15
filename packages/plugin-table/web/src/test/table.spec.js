@@ -40,8 +40,8 @@ describe('Test Table domain functions', () => {
       1
     );
   });
-  it('Test clearRange function', () => {
-    table.clearRange([{ i: 0, j: 0 }]);
+  it('Test clearCells function', () => {
+    table.clearCells([{ i: 0, j: 0 }]);
   });
   it('Test updateCellContent function', () => {
     table.updateCellContent(0, 0, EditorState.createEmpty());
@@ -53,7 +53,7 @@ describe('Test Table domain functions', () => {
     table.setColumnWidth([{ i: 0, j: 0 }], 96);
   });
   it('Test setRowHeight function', () => {
-    table.setRowHeight([{ i: 0, j: 0 }], 122);
+    table.setRowHeight([0], 122);
   });
   it('Test distributeColumns function', () => {
     table.distributeColumns([0, 1], 122);

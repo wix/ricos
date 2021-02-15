@@ -15,7 +15,7 @@ export {
 } from './Utils/classNameStrategies';
 export { mergeStyles } from './Utils/mergeStyles';
 
-export { anchorScroll } from './Utils/anchorScroll';
+export { anchorScroll, addAnchorTagToUrl } from './Utils/anchor';
 
 export * from 'ricos-content';
 
@@ -32,3 +32,5 @@ export { isRtl, getLangDir } from './Utils/rtlUtils';
 
 export { simplePubsub, Pubsub, Store } from './Utils/simplePubsub';
 export { generateKey } from './Utils/generateKey';
+
+export { getBlocksFromContentState } from './Utils/innerRCEBlocksUtils';

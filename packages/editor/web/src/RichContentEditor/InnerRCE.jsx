@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
-import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
@@ -13,16 +13,20 @@ import ClickOutside from 'react-click-outsider';
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config } = props;
+    const { innerRCERenderedIn, config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
-      showToolbars: false,
+      showToolbars: editing || false,
     };
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.editing === false && prevProps.editing !== this.props.editing) {
+    if (
+      this.props.innerRCERenderedIn === 'table' &&
+      prevProps.editing === false &&
+      prevProps.editing !== this.props.editing
+    ) {
       this.handleAtomicPluginsBorders(true);
     }
   }
@@ -51,26 +55,6 @@ class InnerRCE extends PureComponent {
   onChange = editorState => {
     this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
-  };
-
-  onFocus = e => {
-    e.stopPropagation();
-    this.props.setEditorToolbars(this.ref);
-    this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
-  };
-
-  onClickOutside = e => {
-    if (
-      this.state.showToolbars &&
-      this.editorWrapper &&
-      e.target &&
-      !e.target.closest('[data-id=rich-content-editor-modal]') &&
-      !e.target.closest('[class=ReactModalPortal]') &&
-      !this.editorWrapper.contains(e.target)
-    ) {
-      this.setState({ showToolbars: false });
-    }
   };
 
   getToolbars = () => {
@@ -112,7 +96,23 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
+    if (!this.state.showToolbars) {
+      this.setState({ showToolbars: true });
+    }
+  };
+
+  onClickOutside = e => {
+    if (
+      this.state.showToolbars &&
+      this.editorWrapper &&
+      e.target &&
+      !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !e.target.closest('[class=ReactModalPortal]') &&
+      !this.editorWrapper.contains(e.target) &&
+      !e.target.closest('[data-hook=table-plugin-cell]')
+    ) {
+      this.setState({ showToolbars: false });
+    }
   };
 
   handleAtomicPluginsBorders = enterEditing => {
@@ -146,7 +146,8 @@ class InnerRCE extends PureComponent {
     } = this.props;
     const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
-    if (innerRCERenderedIn === TABLE_TYPE && isMobile) {
+    const renderedInTable = innerRCERenderedIn === TABLE_TYPE;
+    if (renderedInTable && isMobile) {
       toolbarsToIgnore.push('SideToolbar');
     }
     return (
@@ -154,7 +155,13 @@ class InnerRCE extends PureComponent {
         <div
           data-id="inner-rce"
           onFocus={this.onFocus}
-          className={classNames(styles.editor, theme.editor, 'inner-rce')}
+          className={classNames(
+            styles.editor,
+            theme.editor,
+            renderedInTable && styles.renderedInTable,
+            renderedInTable && draftDefaultStyles.renderedInTable,
+            'inner-rce'
+          )}
           ref={this.setEditorWrapper}
         >
           <RichContentEditor

@@ -11,27 +11,31 @@ export default class TableRenderer extends PureComponent {
     this.columns = [props.table.getColNum()];
   }
   componentDidMount() {
-    window.addEventListener('resize', debounce(this.onResizeWindow, 60));
+    window.addEventListener('resize', this.onResizeWindow);
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', debounce(this.onResizeWindow, 60));
+    window.removeEventListener('resize', this.onResizeWindow);
   }
 
-  onResizeWindow = () => {
+  onResizeWindow = debounce(() => {
     this.setState({ windowWidth: window.innerWidth });
     const { table, tableRef } = this.props;
-    this.columns.forEach((col, i) => {
-      const width = table.getCellWidthAsPixel(tableRef?.offsetWidth, i, table.getColsMinWidth());
-      col && (col.style.width = width + 'px');
-    });
-  };
+    tableRef.offsetWidth &&
+      this.columns.forEach((col, i) => {
+        const width = table.getCellWidthAsPixel(
+          tableRef.offsetWidth - 1,
+          i,
+          table.getColsMinWidth()
+        );
+        col && (col.style.width = width + 'px');
+      });
+  }, 60);
 
   render() {
     const {
       children,
       tableRef,
       table,
-      isMobile,
       colDragProps,
       onResize,
       onResizeStart,
@@ -41,6 +45,7 @@ export default class TableRenderer extends PureComponent {
       tableHeight,
       isEditMode,
       isEditingActive,
+      tableOverflowWidth,
     } = this.props;
     const range = selected && getRange(selected);
     const colsMinWidth = table.getColsMinWidth();
@@ -48,18 +53,17 @@ export default class TableRenderer extends PureComponent {
     return (
       <table className={styles.container}>
         <colgroup>
-          {table.getColsWidth().map((cellWidth, i) => (
-            <col
-              key={i}
-              ref={ref => ref && (this.columns[i] = ref)}
-              style={{
-                width: isMobile
-                  ? CELL_AUTO_MIN_WIDTH
-                  : table.getCellWidthAsPixel(tableRef?.offsetWidth, i, colsMinWidth),
-                minWidth: colsMinWidth?.[i] || CELL_AUTO_MIN_WIDTH,
-              }}
-            />
-          ))}
+          {tableRef?.offsetWidth &&
+            table.getColsWidth().map((cellWidth, i) => (
+              <col
+                key={i}
+                ref={ref => ref && (this.columns[i] = ref)}
+                style={{
+                  width: table.getCellWidthAsPixel(tableRef.offsetWidth - 1, i, colsMinWidth),
+                  minWidth: colsMinWidth?.[i] || CELL_AUTO_MIN_WIDTH,
+                }}
+              />
+            ))}
         </colgroup>
         <thead>
           {isEditMode && (
@@ -76,6 +80,7 @@ export default class TableRenderer extends PureComponent {
               size={tableHeight}
               tableWidth={tableRef?.offsetWidth}
               columnsRefs={this.columns}
+              tableOverflowWidth={tableOverflowWidth}
             />
           )}
         </thead>
@@ -90,7 +95,6 @@ TableRenderer.propTypes = {
   columns: PropTypes.any,
   table: PropTypes.any,
   tableRef: PropTypes.any,
-  isMobile: PropTypes.bool,
   colDragProps: PropTypes.object,
   onResize: PropTypes.func,
   onResizeStart: PropTypes.func,
@@ -100,4 +104,5 @@ TableRenderer.propTypes = {
   isEditMode: PropTypes.bool,
   selected: PropTypes.object,
   isEditingActive: PropTypes.bool,
+  tableOverflowWidth: PropTypes.number,
 };

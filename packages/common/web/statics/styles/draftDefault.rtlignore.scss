@@ -64,6 +64,9 @@
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
       /*!rtl:begin:ignore*/
       margin-left: #{$indent+3}em;
+      .renderedInTable & {
+        margin-left: #{$indent+1.5}em;
+      }
       /*!rtl:end:ignore*/
       -noop:1;
     }
@@ -71,6 +74,9 @@
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
       /*!rtl:begin:ignore*/
       margin-right: #{$indent+3}em;
+      .renderedInTable & {
+        margin-right: #{$indent+1.5}em;
+      }
       /*!rtl:end:ignore*/
       -noop:1;
     }

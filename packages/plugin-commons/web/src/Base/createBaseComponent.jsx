@@ -46,6 +46,7 @@ const createBaseComponent = ({
   noPointerEventsOnFocus,
   withHorizontalScroll,
   innerRCERenderedIn,
+  disableKeyboardEvents,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -364,6 +365,7 @@ const createBaseComponent = ({
             getInPluginEditingMode={getInPluginEditingMode}
             setComponentUrl={this.setComponentUrl}
             renderInnerRCE={renderInnerRCE}
+            disableKeyboardEvents={disableKeyboardEvents}
           />
           <div
             role="none"
@@ -377,7 +379,12 @@ const createBaseComponent = ({
 
       return withHorizontalScroll ? (
         <div className={styles.horizontalScrollbarWrapper}>
-          <div className={styles.pluginWithHorizontalScrollbar}>{component}</div>
+          <div
+            data-id={'horizontal-scrollbar-element'}
+            className={styles.pluginWithHorizontalScrollbar}
+          >
+            {component}
+          </div>
         </div>
       ) : (
         component

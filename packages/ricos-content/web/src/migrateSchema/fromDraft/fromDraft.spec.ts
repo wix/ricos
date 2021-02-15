@@ -7,16 +7,23 @@ import complexFixture from '../../../../../../e2e/tests/fixtures/migration-conte
 import { getTextNodes } from './getTextNodes';
 import ricosFixture from './migratedFixtures/intro.json';
 import complexRicosFixture from './migratedFixtures/migration-content.json';
+import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
+import { convertBlockDataToRicos } from './convertRicosPluginData';
+import { IMAGE_TYPE } from '../../consts';
 
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
   it('should migrate intro fixture', () => {
-    expect(compare(fromDraft(fixture), ricosFixture, { ignoredKeys: ['key'] })).toEqual({});
+    expect(
+      compare(RichContent.toJSON(fromDraft(fixture)), ricosFixture, { ignoredKeys: ['key'] })
+    ).toEqual({});
   });
 
   it('should migrate complex fixture', () => {
     expect(
-      compare(fromDraft(complexFixture), complexRicosFixture, { ignoredKeys: ['key'] })
+      compare(RichContent.toJSON(fromDraft(complexFixture)), complexRicosFixture, {
+        ignoredKeys: ['key'],
+      })
     ).toEqual({});
   });
 
@@ -47,38 +54,54 @@ describe('migrate from draft', () => {
     };
 
     const expectedResults = [
-      { key: '2k4v1', nodes: [], ricosText: { decorations: [], text: 'bla' }, type: 'text' },
+      {
+        key: '2k4v1',
+        nodes: [],
+        textData: { decorations: [], text: 'bla' },
+        type: Node_Type.TEXT,
+      },
       {
         key: '1ba7b',
         nodes: [],
-        ricosText: { decorations: [{ type: 'italic' }], text: 'h ' },
-        type: 'text',
+        textData: { decorations: [{ type: Decoration_Type.ITALIC }], text: 'h ' },
+        type: Node_Type.TEXT,
       },
       {
         key: '59lhm',
         nodes: [],
-        ricosText: { decorations: [{ type: 'italic' }, { type: 'underline' }], text: 'b' },
-        type: 'text',
+        textData: {
+          decorations: [{ type: Decoration_Type.ITALIC }, { type: Decoration_Type.UNDERLINE }],
+          text: 'b',
+        },
+        type: Node_Type.TEXT,
       },
       {
         key: '1agl0',
         nodes: [],
-        ricosText: { decorations: [{ type: 'underline' }], text: 'la' },
-        type: 'text',
+        textData: { decorations: [{ type: Decoration_Type.UNDERLINE }], text: 'la' },
+        type: Node_Type.TEXT,
       },
       {
         key: '1m39g',
         nodes: [],
-        ricosText: { decorations: [{ type: 'underline' }, { type: 'bold' }], text: 'h ' },
-        type: 'text',
+        textData: {
+          decorations: [{ type: Decoration_Type.UNDERLINE }, { type: Decoration_Type.BOLD }],
+          text: 'h ',
+        },
+        type: Node_Type.TEXT,
       },
       {
         key: '8cr95',
         nodes: [],
-        ricosText: { decorations: [{ type: 'bold' }], text: 'bl' },
-        type: 'text',
+        textData: { decorations: [{ type: Decoration_Type.BOLD }], text: 'bl' },
+        type: Node_Type.TEXT,
       },
-      { key: 'dkn86', nodes: [], ricosText: { decorations: [], text: 'ah' }, type: 'text' },
+      {
+        key: 'dkn86',
+        nodes: [],
+        textData: { decorations: [], text: 'ah' },
+        type: Node_Type.TEXT,
+      },
     ];
 
     const entityMap = {};
@@ -115,25 +138,77 @@ describe('migrate from draft', () => {
     };
 
     const expectedResult = [
-      { nodes: [], ricosText: { decorations: [], text: 'Mentions too ' }, type: 'text' },
       {
         nodes: [],
-        ricosText: {
+        textData: { decorations: [], text: 'Mentions too ' },
+        type: Node_Type.TEXT,
+      },
+      {
+        nodes: [],
+        textData: {
           decorations: [
             {
-              ricosMention: {
+              mentionData: {
                 name: 'Test One',
                 slug: 'testone',
               },
-              type: 'ricos_mention',
+              type: Decoration_Type.MENTION,
             },
           ],
           text: '@Test One',
         },
-        type: 'text',
+        type: Node_Type.TEXT,
       },
-      { nodes: [], ricosText: { decorations: [], text: ' ' }, type: 'text' },
+      { nodes: [], textData: { decorations: [], text: ' ' }, type: Node_Type.TEXT },
     ];
     expect(filterKeys(getTextNodes(block, entityMap))).toEqual(expectedResult);
+  });
+
+  it('should convert block data', () => {
+    const blockData = {
+      config: {
+        alignment: 'center',
+        size: 'content',
+        showTitle: true,
+        showDescription: true,
+        disableExpand: false,
+      },
+      src: {
+        id: '036c6bf6cef5e4409848eb4eb6f80de1',
+        original_file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        width: 2898,
+        height: 3354,
+      },
+      metadata: {
+        caption: 'The caption!',
+        alt: 'feet',
+      },
+    };
+
+    const expectedNodeData = {
+      config: {
+        size: 'CONTENT',
+        alignment: 'CENTER',
+        showTitle: true,
+        showDescription: true,
+        disableExpand: false,
+      },
+      src: {
+        id: '036c6bf6cef5e4409848eb4eb6f80de1',
+        originalFileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        fileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+        width: 2898,
+        height: 3354,
+      },
+      metadata: {
+        alt: 'feet',
+        caption: 'The caption!',
+      },
+    };
+
+    const nodeData = convertBlockDataToRicos(IMAGE_TYPE, blockData);
+
+    expect(nodeData).toEqual(expectedNodeData);
   });
 });

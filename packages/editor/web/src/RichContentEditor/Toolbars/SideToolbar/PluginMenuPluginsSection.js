@@ -60,6 +60,7 @@ const PluginMenuPluginsSection = ({
               getEditorState={getEditorState}
               setEditorState={setEditorState}
               showName={!horizontalMenu}
+              sideToolbar
               toolbarName={toolbarName}
               hidePopup={hidePopup}
               theme={theme}

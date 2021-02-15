@@ -13,56 +13,16 @@ import {
   SOUND_CLOUD_TYPE,
   VIDEO_TYPE,
   VERTICAL_EMBED_TYPE,
-  HEADINGS_DROPDOWN_TYPE,
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
-  CODE_BLOCK_TYPE,
-  HASHTAG_TYPE,
   IMAGE_TYPE_LEGACY,
-  INDENT_TYPE,
-  LINE_SPACING_TYPE,
   SPOILER_TYPE,
   ACCORDION_TYPE,
-  EXTERNAL_LINK_TYPE,
-  EXTERNAL_MENTIONS_TYPE,
-  TEXT_COLOR_TYPE,
-  TEXT_HIGHLIGHT_TYPE,
-  UNDO_REDO_TYPE,
   VIDEO_TYPE_LEGACY,
   TABLE_TYPE,
   ANCHOR_TYPE,
-  RICOS_LINK_BUTTON_TYPE,
-  RICOS_ACTION_BUTTON_TYPE,
-  RICOS_CODE_BLOCK_TYPE,
-  RICOS_DIVIDER_TYPE,
-  RICOS_GALLERY_TYPE,
-  RICOS_GIPHY_TYPE,
-  RICOS_HASHTAG_TYPE,
-  RICOS_HTML_TYPE,
-  RICOS_IMAGE_TYPE,
-  RICOS_INDENT_TYPE,
-  RICOS_LINE_SPACING_TYPE,
-  RICOS_HEADINGS_DROPDOWN_TYPE,
-  RICOS_SPOILER_TYPE,
-  RICOS_ACCORDION_TYPE,
-  RICOS_EXTERNAL_LINK_TYPE,
-  RICOS_LINK_TYPE,
-  RICOS_LINK_PREVIEW_TYPE,
-  RICOS_MAP_TYPE,
-  RICOS_MENTION_TYPE,
-  RICOS_SOUND_CLOUD_TYPE,
-  RICOS_TEXT_COLOR_TYPE,
-  RICOS_TEXT_HIGHLIGHT_TYPE,
-  RICOS_UNDO_REDO_TYPE,
-  RICOS_VERTICAL_EMBED_TYPE,
-  RICOS_VIDEO_TYPE,
-  RICOS_POLL_TYPE,
-  RICOS_TABLE_TYPE,
-  RICOS_ANCHOR_TYPE,
-  RICOS_EXTERNAL_MENTION_TYPE,
-  RICOS_FILE_TYPE,
 } from '../consts';
-import toCamelCase from 'to-camel-case';
+import { Decoration_Type, Node_Type } from 'ricos-schema';
 
 export enum BlockType {
   Unstyled = 'unstyled',
@@ -79,17 +39,6 @@ export enum BlockType {
   Atomic = 'atomic',
 }
 
-export enum NodeType {
-  Paragraph = 'paragraph',
-  Heading = 'heading',
-  UnorderedList = 'bullet_list',
-  OrderedList = 'ordered_list',
-  ListItem = 'list_item',
-  Blockquote = 'blockquote',
-  CodeBlock = 'codeblock',
-  Text = 'text',
-}
-
 export enum HeaderLevel {
   'header-one' = 1,
   'header-two' = 2,
@@ -100,92 +49,63 @@ export enum HeaderLevel {
 }
 
 export const FROM_DRAFT_LIST_TYPE = {
-  [BlockType.UnorderedListItem]: NodeType.UnorderedList,
-  [BlockType.OrderedListItem]: NodeType.OrderedList,
+  [BlockType.UnorderedListItem]: Node_Type.BULLET_LIST,
+  [BlockType.OrderedListItem]: Node_Type.ORDERED_LIST,
 };
 
 export const TO_DRAFT_LIST_TYPE = Object.fromEntries(
   Object.entries(FROM_DRAFT_LIST_TYPE).map(([key, value]) => [value, key])
 );
 
-export const TO_RICOS_PLUGIN_TYPE_MAP = {
-  [LINK_BUTTON_TYPE]: RICOS_LINK_BUTTON_TYPE,
-  [ACTION_BUTTON_TYPE]: RICOS_ACTION_BUTTON_TYPE,
-  [CODE_BLOCK_TYPE]: RICOS_CODE_BLOCK_TYPE,
-  [DIVIDER_TYPE]: RICOS_DIVIDER_TYPE,
-  [FILE_UPLOAD_TYPE]: RICOS_FILE_TYPE,
-  [GALLERY_TYPE]: RICOS_GALLERY_TYPE,
-  [GIPHY_TYPE]: RICOS_GIPHY_TYPE,
-  [HASHTAG_TYPE]: RICOS_HASHTAG_TYPE,
-  [HTML_TYPE]: RICOS_HTML_TYPE,
-  [IMAGE_TYPE]: RICOS_IMAGE_TYPE,
-  [IMAGE_TYPE_LEGACY]: RICOS_IMAGE_TYPE,
-  [INDENT_TYPE]: RICOS_INDENT_TYPE,
-  [LINE_SPACING_TYPE]: RICOS_LINE_SPACING_TYPE,
-  [HEADINGS_DROPDOWN_TYPE]: RICOS_HEADINGS_DROPDOWN_TYPE,
-  [ACCORDION_TYPE]: RICOS_ACCORDION_TYPE,
-  // TODO: are both types needed?
-  [EXTERNAL_LINK_TYPE]: RICOS_EXTERNAL_LINK_TYPE,
-  [LINK_TYPE]: RICOS_LINK_TYPE,
-  [LINK_PREVIEW_TYPE]: RICOS_LINK_PREVIEW_TYPE,
-  [MAP_TYPE]: RICOS_MAP_TYPE,
-  // TODO: are both types needed?
-  [EXTERNAL_MENTIONS_TYPE]: RICOS_EXTERNAL_MENTION_TYPE,
-  [MENTION_TYPE]: RICOS_MENTION_TYPE,
-  [SOUND_CLOUD_TYPE]: RICOS_SOUND_CLOUD_TYPE,
-  [TEXT_COLOR_TYPE]: RICOS_TEXT_COLOR_TYPE,
-  [TEXT_HIGHLIGHT_TYPE]: RICOS_TEXT_HIGHLIGHT_TYPE,
-  [UNDO_REDO_TYPE]: RICOS_UNDO_REDO_TYPE,
-  [VERTICAL_EMBED_TYPE]: RICOS_VERTICAL_EMBED_TYPE,
-  [VIDEO_TYPE]: RICOS_VIDEO_TYPE,
-  [VIDEO_TYPE_LEGACY]: RICOS_VIDEO_TYPE,
-  [POLL_TYPE]: RICOS_POLL_TYPE,
-  [TABLE_TYPE]: RICOS_TABLE_TYPE,
-  [ANCHOR_TYPE]: RICOS_ANCHOR_TYPE,
+export const TO_RICOS_NODE_TYPE = {
+  [LINK_BUTTON_TYPE]: Node_Type.LINK_BUTTON,
+  [ACTION_BUTTON_TYPE]: Node_Type.ACTION_BUTTON,
+  [DIVIDER_TYPE]: Node_Type.DIVIDER,
+  [FILE_UPLOAD_TYPE]: Node_Type.FILE,
+  [GALLERY_TYPE]: Node_Type.GALLERY,
+  [GIPHY_TYPE]: Node_Type.GIPHY,
+  [HTML_TYPE]: Node_Type.HTML,
+  [IMAGE_TYPE]: Node_Type.IMAGE,
+  [IMAGE_TYPE_LEGACY]: Node_Type.IMAGE,
+  [ACCORDION_TYPE]: Node_Type.ACCORDION,
+  [LINK_PREVIEW_TYPE]: Node_Type.LINK_PREVIEW,
+  [MAP_TYPE]: Node_Type.MAP,
+  [SOUND_CLOUD_TYPE]: Node_Type.SOUND_CLOUD,
+  [VERTICAL_EMBED_TYPE]: Node_Type.VERTICAL_EMBED,
+  [VIDEO_TYPE]: Node_Type.VIDEO,
+  [VIDEO_TYPE_LEGACY]: Node_Type.VIDEO,
+  [POLL_TYPE]: Node_Type.POLL,
+  [TABLE_TYPE]: Node_Type.TABLE,
 };
 
-// [IMAGE_TYPE]: 'ricosImage'
-export const TO_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
-  Object.entries(TO_RICOS_PLUGIN_TYPE_MAP).map(([key, value]) => [key, toCamelCase(value)])
-);
+const DUPLICATE_KEYS = [IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
 
-const DUPLICATE_KEYS = ['EMOJI_TYPE', IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
-
-// 'ricos_image': IMAGE_TYPE
-export const FROM_RICOS_ENTITY_TYPE_MAP = Object.fromEntries(
-  Object.entries(TO_RICOS_PLUGIN_TYPE_MAP)
+// Node_Type.IMAGE: IMAGE_TYPE
+export const FROM_RICOS_ENTITY_TYPE = Object.fromEntries(
+  Object.entries(TO_RICOS_NODE_TYPE)
     .filter(([key]) => !DUPLICATE_KEYS.includes(key))
     .map(([key, value]) => [value, key])
 );
 
 export const TO_RICOS_DECORATION_TYPE = {
-  BOLD: 'bold',
-  ITALIC: 'italic',
-  UNDERLINE: 'underline',
-  [SPOILER_TYPE]: RICOS_SPOILER_TYPE,
-  [ANCHOR_TYPE]: RICOS_ANCHOR_TYPE,
-  [MENTION_TYPE]: RICOS_MENTION_TYPE,
-  [LINK_TYPE]: RICOS_LINK_TYPE,
+  BOLD: Decoration_Type.BOLD,
+  ITALIC: Decoration_Type.ITALIC,
+  UNDERLINE: Decoration_Type.UNDERLINE,
+  [SPOILER_TYPE]: Decoration_Type.SPOILER,
+  [ANCHOR_TYPE]: Decoration_Type.ANCHOR,
+  [MENTION_TYPE]: Decoration_Type.MENTION,
+  [LINK_TYPE]: Decoration_Type.LINK,
 };
 
-// bold: BOLD
+export const TO_RICOS_PLUGIN_TYPE = {
+  ...TO_RICOS_NODE_TYPE,
+  ...TO_RICOS_DECORATION_TYPE,
+};
+
+// Decoration_Type.BOLD: BOLD
 export const FROM_RICOS_DECORATION_TYPE = Object.fromEntries(
   Object.entries(TO_RICOS_DECORATION_TYPE).map(([key, value]) => [value, key])
 );
-
-export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
-  [BlockType.Unstyled]: 'ricosParagraph',
-  [BlockType.UnorderedListItem]: 'ricosParagraph',
-  [BlockType.OrderedListItem]: 'ricosParagraph',
-  [BlockType.HeaderOne]: 'ricosHeading',
-  [BlockType.HeaderTwo]: 'ricosHeading',
-  [BlockType.HeaderThree]: 'ricosHeading',
-  [BlockType.HeaderFour]: 'ricosHeading',
-  [BlockType.HeaderFive]: 'ricosHeading',
-  [BlockType.HeaderSix]: 'ricosHeading',
-  [BlockType.CodeBlock]: 'ricosCode',
-  [BlockType.Blockquote]: 'ricosQuote',
-};
 
 export const ENTITY_DECORATION_TO_MUTABILITY = {
   [ANCHOR_TYPE]: 'MUTABLE',
@@ -194,9 +114,61 @@ export const ENTITY_DECORATION_TO_MUTABILITY = {
   EMOJI_TYPE: 'IMMUTABLE',
 };
 
+export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
+  [Node_Type.LINK_BUTTON]: 'linkButtonData',
+  [Node_Type.ACTION_BUTTON]: 'actionButtonData',
+  [Node_Type.DIVIDER]: 'dividerData',
+  [Node_Type.FILE]: 'fileData',
+  [Node_Type.GALLERY]: 'galleryData',
+  [Node_Type.GIPHY]: 'giphyData',
+  [Node_Type.HTML]: 'htmlData',
+  [Node_Type.IMAGE]: 'imageData',
+  [Node_Type.ACCORDION]: 'accordionData',
+  [Node_Type.LINK_PREVIEW]: 'linkPreviewData',
+  [Node_Type.MAP]: 'mapData',
+  [Node_Type.SOUND_CLOUD]: 'soundCloudData',
+  [Node_Type.VERTICAL_EMBED]: 'verticalEmbedData',
+  [Node_Type.VIDEO]: 'videoData',
+  [Node_Type.POLL]: 'pollData',
+  [Node_Type.TABLE]: 'tableData',
+  [Node_Type.PARAGRAPH]: 'paragraphData',
+  [Node_Type.LIST_ITEM]: 'paragraphData',
+  [Node_Type.HEADING]: 'headingData',
+  [Node_Type.CODEBLOCK]: 'codeData',
+  [Node_Type.BLOCKQUOTE]: 'paragraphData',
+} as const;
+
+export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
+  [BlockType.Unstyled]: 'paragraphData',
+  [BlockType.UnorderedListItem]: 'paragraphData',
+  [BlockType.OrderedListItem]: 'paragraphData',
+  [BlockType.HeaderOne]: 'headingData',
+  [BlockType.HeaderTwo]: 'headingData',
+  [BlockType.HeaderThree]: 'headingData',
+  [BlockType.HeaderFour]: 'headingData',
+  [BlockType.HeaderFive]: 'headingData',
+  [BlockType.HeaderSix]: 'headingData',
+  [BlockType.CodeBlock]: 'codeData',
+  [BlockType.Blockquote]: 'paragraphData',
+};
+
+// Node_Type.IMAGE: imageData
+const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = Object.fromEntries(
+  Object.entries(TO_RICOS_NODE_TYPE).map(([key, value]) => [
+    key,
+    RICOS_NODE_TYPE_TO_DATA_FIELD[value],
+  ])
+);
+
 export const ENTITY_DECORATION_TO_DATA_FIELD = {
-  [ANCHOR_TYPE]: toCamelCase(RICOS_ANCHOR_TYPE),
-  [LINK_TYPE]: toCamelCase(RICOS_LINK_TYPE),
-  [MENTION_TYPE]: toCamelCase(RICOS_MENTION_TYPE),
-  EMOJI_TYPE: 'ricosEmoji',
+  [ANCHOR_TYPE]: 'anchorData',
+  [LINK_TYPE]: 'linkData',
+  [MENTION_TYPE]: 'mentionData',
+  EMOJI_TYPE: 'emojiData',
+};
+
+export const TO_RICOS_DATA_FIELD = {
+  ...ENTITY_DECORATION_TO_DATA_FIELD,
+  ...DRAFT_PLUGIN_TYPE_TO_DATA_FIELD,
+  ...DRAFT_BLOCK_TYPE_TO_DATA_FIELD,
 };

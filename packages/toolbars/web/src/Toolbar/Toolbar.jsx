@@ -74,7 +74,7 @@ class Toolbar extends Component {
   };
 
   renderColorPicker = buttonProps => {
-    const { t, isMobile } = this.props;
+    const { t, isMobile, afterClick, nestedMenu } = this.props;
     const {
       getCurrentColor,
       onColorAdded,
@@ -94,6 +94,8 @@ class Toolbar extends Component {
         settings={settings}
         t={t}
         isMobile={isMobile}
+        nestedMenu={nestedMenu}
+        afterClick={afterClick}
         defaultPalette={defaultPalette}
         getUserColors={getUserColors}
         getDefaultColors={getDefaultColors}
@@ -105,7 +107,7 @@ class Toolbar extends Component {
   };
 
   renderTextButton = buttonProps => {
-    const { onClick, dataHook, text } = buttonProps;
+    const { onClick, dataHook, text, tooltip, isDisabled } = buttonProps;
     return (
       <ToolbarButton
         onClick={onClick}
@@ -113,6 +115,8 @@ class Toolbar extends Component {
         dataHook={dataHook}
         isMobile={this.props.isMobile}
         buttonContent={text}
+        tooltipText={tooltip}
+        disabled={isDisabled?.()}
       />
     );
   };
@@ -211,7 +215,9 @@ Toolbar.propTypes = {
   t: PropTypes.func,
   tabIndex: PropTypes.number,
   buttons: PropTypes.array,
+  nestedMenu: PropTypes.bool,
   vertical: PropTypes.bool,
+  afterClick: PropTypes.func,
 };
 
 export default Toolbar;

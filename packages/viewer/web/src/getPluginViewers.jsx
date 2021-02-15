@@ -10,6 +10,7 @@ import {
   normalizeUrl,
   IMAGE_TYPE,
   GALLERY_TYPE,
+  TABLE_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -66,9 +67,10 @@ class PluginViewer extends PureComponent {
     return newConfig;
   };
 
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  innerRCV = ({ contentState, textAlignment, direction, renderedIn }) => {
     const { innerRCEViewerProps } = this.props;
     const config = this.removeExpand(innerRCEViewerProps.config);
+    const renderedInTable = renderedIn === TABLE_TYPE;
     return (
       <RichContentViewer
         initialState={contentState}
@@ -76,6 +78,8 @@ class PluginViewer extends PureComponent {
         direction={direction}
         {...innerRCEViewerProps}
         config={config}
+        isInnerRcv
+        renderedInTable={renderedInTable}
       />
     );
   };
@@ -98,7 +102,6 @@ class PluginViewer extends PureComponent {
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme, isMobile } = context;
     const settings = config?.[type] || {};
-    const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
       type,
       componentData,
@@ -124,10 +127,11 @@ class PluginViewer extends PureComponent {
             rel: rel || relValue || 'noopener noreferrer',
           };
         }
-        if (hasAnchor && siteUrl) {
+        if (hasAnchor) {
           const { anchor } = config.link;
+          const href = `#viewer-${anchor}`;
           containerProps = {
-            href: `${siteUrl}#viewer-${anchor}`,
+            href,
             target: '_self',
           };
         }

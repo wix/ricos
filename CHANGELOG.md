@@ -9,7 +9,7 @@
 > - :house: Internal
 > - :nail_care: Polish
 
-## [Unreleased]  
+## [Unreleased]
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
@@ -22,13 +22,133 @@
 - `image/gallery-plugin`
   - [#1939](https://github.com/wix-incubator/rich-content/pull/1931) allow users to toggle the expand mode option on the image-settings
   </summary>
-
-### :rocket: New Feature
-- `ricos-content`
-  - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+	
+  ### :bug: Bug Fix
+  - `link`
+    - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
 
 </details>
 <hr/>
+
+## 8.21.1 (Feb 14, 2021)
+### :bug: Bug Fix
+- `*`
+  - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+### :house: Internal
+- `viewer`
+  - [#2138](https://github.com/wix/ricos/pull/2138) viewer performance
+
+## 8.21.0 (Feb 10, 2021)
+### :rocket: New Feature
+- `gallery`
+  - [#1926](https://github.com/wix-incubator/rich-content/pull/1926) upload video items in gallery (will be available through wix-ricos soon)
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#2127](https://github.com/wix-incubator/rich-content/pull/2127) fix css issues
+
+## 8.20.0 (Feb 9, 2021)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling 
+### :bug: Bug Fix
+- `link`
+  - [#2119](https://github.com/wix-incubator/rich-content/pull/2119) anchors issues in editor
+## 8.19.4 (Feb 8, 2021)
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#2118](https://github.com/wix-incubator/rich-content/pull/2118) fix css
+
+## 8.19.3 (Feb 8, 2021)
+### :bug: Bug Fix
+- `headings`
+  - [#2116](https://github.com/wix-incubator/rich-content/pull/2116) headings toolbar in external modal
+- `link-preview`
+  - [#2112](https://github.com/wix/ricos/pull/2112) fix link-preview link data (rel & target)
+
+## 8.19.2 (Feb 8, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#2099](https://github.com/wix/ricos/pull/2099) fix `onOpenEditorSuccess` unwanted triggers
+- `viewer`
+  - [#2099](https://github.com/wix/ricos/pull/2099) fix `onViewerLoaded` unwanted triggers
+- `link`
+  - [#2108](https://github.com/wix/ricos/pull/2108) fix anchor not scrolling in wix site
+- `editor`
+  - [#2111](https://github.com/wix/ricos/pull/2111) fix horizontal side toolbar theme
+### :house: Internal
+- `button`
+  - [#2082](https://github.com/wix/ricos/pull/2082) remove link data from action-button
+
+## 8.19.1 (Feb 6, 2021)
+### :bug: Bug Fix
+- `image`
+  - [#2101](https://github.com/wix/ricos/pull/2101) remove duplication of images in browsers reader mode
+- `ricos-common`
+  - [#2102](https://github.com/wix-incubator/rich-content/pull/2102) experiments API: wix-experiments compatibility
+
+## 8.19.0 (Feb 4, 2021)
+### :rocket: New Feature
+- `common`
+  - [#2081](https://github.com/wix-incubator/rich-content/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
+  - [#2079](https://github.com/wix-incubator/rich-content/pull/2079) experiments infra
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [#2078](https://github.com/wix/ricos/pull/2078) fix unsupported-blocks container height issue
+
+## 8.18.3 (Feb 2, 2021)
+### :bug: Bug Fix
+- `inner-modal`
+  - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
+## 8.18.1 (Feb 2, 2021)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
+
+## 8.18.0 (Jan 31, 2021)
+### :rocket: New Feature
+- `ricos-common`
+  - [#2065](https://github.com/wix-incubator/rich-content/pull/2065) add textAlignment prop
+
+## 8.17.11 (Jan 27, 2021)
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [#2058](https://github.com/wix/ricos/pull/2058) bg color update
+
+
+## 8.17.10 (Jan 27, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#2049](https://github.com/wix/ricos/pull/2049) fix url data changing rel/target when only one of them is present
+
+## 8.17.9 (Jan 26, 2021)
+### :bug: Bug Fix
+- `link`
+  - [#2038](https://github.com/wix/ricos/pull/2038) fix anchor's tag overriding url,add `href` value & remove `siteUrl` prop
+
+## 8.17.8 (Jan 25, 2021)
+### :rocket: New Feature
+- `editor`
+  - [#2034](https://github.com/wix-incubator/rich-content/pull/2034) maxTextLength prop added
+### :bug: Bug Fix
+- `table`
+  - [#2046](https://github.com/wix/ricos/pull/2046) cell selection background color style
+
+## 8.17.7 (Jan 25, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2041](https://github.com/wix/ricos/pull/2041) remove draft dependency in migration tool
+
+## 8.17.6 (Jan 22, 2021)
+### :rocket: New Feature
+- `ricos-content`
+  - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+### :house: Internal
+- `example`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
+- `storybook`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
+- `e2e`
+  - [#2026](https://github.com/wix/ricos/pull/2026) convert test-env to TypeScript
 
 ## 8.17.5 (Jan 20, 2021)
 ### :house: Internal
@@ -246,7 +366,7 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#1897](https://github.com/wix/ricos/pull/1897) fix gallery styles (college layout)
-  
+
 ## 8.9.2 (Dec 21, 2020)
 ### :bug: Bug Fix
 - `link`
@@ -318,7 +438,7 @@
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1850](https://github.com/wix/ricos/pull/1850) settings modal overlay appears above wix ad
-  
+
 ### :house: Internal
 - `test-env`
   - [#1848](https://github.com/wix/ricos/pull/1848) theme `customStyles` coverage
@@ -454,7 +574,7 @@
 
 ### :book: Documentation
 
-- [##1782](https://github.com/wix/ricos/pull/#1782) legacy docs cleanu
+- [#1782](https://github.com/wix/ricos/pull/1782) legacy docs cleanu
 
 ### :house: Internal
 
@@ -1211,8 +1331,8 @@
 - `image`
   - [#1467](https://github.com/wix/ricos/pull/1467) image caption aligned correctly in rtl
 - `fullscreen`
-  - [##1468](https://github.com/wix/ricos/pull/#1468) add pro gallery css to fullscreen css
-  - [##1432](https://github.com/wix/ricos/pull/#1468) fix resolution on mobile
+  - [#1468](https://github.com/wix/ricos/pull/1468) add pro gallery css to fullscreen css
+  - [#1432](https://github.com/wix/ricos/pull/1468) fix resolution on mobile
 
 ## 7.16.10 (Aug 19, 2020)
 
@@ -2109,7 +2229,7 @@ fix bad release in 7.10.1
 - `wrapper`
   - [#852](https://github.com/wix/ricos/pull/852) strategies create configs & not functions
 - `viewer`
-  - [#861](https://github.com/wix/ricos/pull/#861) text direction util improved; tests added
+  - [#861](https://github.com/wix/ricos/pull/861) text direction util improved; tests added
   - [#846](https://github.com/wix/ricos/pull/846) switch to forked redraft (`wix-redraft`)
 - `e2e`
   - [#860](https://github.com/wix/ricos/pull/860) Images original size test

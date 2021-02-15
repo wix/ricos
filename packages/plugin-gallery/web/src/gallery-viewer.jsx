@@ -156,12 +156,12 @@ class GalleryViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.('expand_gallery', GALLERY_TYPE);
-    onExpand?.(this.props.entityIndex, data.idx); //todo=> change to- onExpand?.(this.props.entityIndex, data.idx);
+    helpers.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
+    onExpand?.(this.props.entityIndex, data.idx);
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.type !== 'video' ? (
+    return (
       <div className={this.styles.expandContainer}>
         <ExpandIcon
           className={this.styles.expandIcon}
@@ -171,7 +171,7 @@ class GalleryViewer extends React.Component {
           }}
         />
       </div>
-    ) : null;
+    );
   };
 
   renderTitle = title => {

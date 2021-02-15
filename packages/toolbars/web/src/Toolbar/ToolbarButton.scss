@@ -24,6 +24,7 @@
 }
 
 .toolbarButton {
+  display: flex;
   background: transparent;
   color: $toolbar-font-color;
   padding: 4px;
@@ -37,7 +38,7 @@
   &:focus {
     outline: 0;
   }
-  &:disabled {
+  &:disabled, &.disabled {
     cursor: default;
     opacity: 0.4;
   }
