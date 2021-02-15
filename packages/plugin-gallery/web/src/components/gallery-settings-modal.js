@@ -348,22 +348,13 @@ export class GallerySettingsModal extends Component {
                   t={t}
                 />
               </Tab>
-              <div>
-                <Tab
-                  label={this.tabName('settings', t)}
-                  value={'settings'}
-                  theme={this.props.theme}
-                >
-                  {this.toggleData.map(toggle => (
-                    <div
-                      key={toggle.toggleKey}
-                      className={styles.galleryImageSettings_toggleWrapper}
-                    >
-                      {this.renderToggle(toggle)}
-                    </div>
-                  ))}
-                </Tab>
-              </div>
+              <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
+                {this.toggleData.map(toggle => (
+                  <div key={toggle.toggleKey} className={styles.galleryImageSettings_toggleWrapper}>
+                    {this.renderToggle(toggle)}
+                  </div>
+                ))}
+              </Tab>
             </Tabs>
           </div>
           <SettingsPanelFooter
