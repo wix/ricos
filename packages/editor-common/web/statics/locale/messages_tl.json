@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "Sumulat ng pamagat para sa item na ito",
   "Video_plugin_search_tags": "video movie clip music audio mtv youtube camera song visual digital film upload animated tape recording viral",
   "ReplaceGiphyButton_Tooltip": "Magpalit ng GIF",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "Mga Column",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "This audio file is not in a supported AAC format and can’t be uploaded. Try a different file,.",

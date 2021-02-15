@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "Kirjoita otsikko tälle kohteelle",
   "Video_plugin_search_tags": "video elokuva klippi audio mtv youtube kamera laulu visuaalinen digitaalinen elokuva lataa animoitu nauha nauhoitus viraali",
   "ReplaceGiphyButton_Tooltip": "Korvaa GIF",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "Sarakkeet",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "This audio file is not in a supported AAC format and can’t be uploaded. Try a different file,.",

@@ -15,13 +15,21 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-### :bug: Bug Fix
-- `*`
-  - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+	
+  ### :bug: Bug Fix
+  - `link`
+    - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
 
 </details>
 <hr/>
+
+## 8.21.1 (Feb 14, 2021)
+### :bug: Bug Fix
+- `*`
+  - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+### :house: Internal
+- `viewer`
+  - [#2138](https://github.com/wix/ricos/pull/2138) viewer performance
 
 ## 8.21.0 (Feb 10, 2021)
 ### :rocket: New Feature
