@@ -134,9 +134,7 @@ const insertDecorationTest = (settings: Settings) => ([pluginName, { type, data,
     ricosEditor
       .getEditorCommands()
       .setSelection(blockKey, isMention(type) ? endOfSelection : selection);
-    if (type === RICOS_MENTION_TYPE) {
-      ricosEditor.getEditorCommands().triggerDecoration(type);
-    }
+    isMention(type) && ricosEditor.getEditorCommands().triggerDecoration(type);
     ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
     ricosEditor
       .getEditorCommands()
