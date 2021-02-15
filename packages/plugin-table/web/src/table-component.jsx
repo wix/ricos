@@ -7,7 +7,7 @@ import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
 import { getRange, getRowsRange, getColsRange } from './domain/tableDataUtil';
-import { createEmptyCellEditor } from './tableUtil';
+import { createEmptyCellEditor, isCellsNumberInvalid } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
 import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
@@ -191,7 +191,10 @@ class TableComponent extends React.Component {
           indexes = getRowsRange(selected);
           selectFunc = this.selectRows;
         }
-        indexes && selectFunc({ start: Math.min(...indexes), end: Math.max(...indexes) });
+        if (indexes) {
+          selectFunc({ start: Math.min(...indexes), end: Math.max(...indexes) });
+          e.stopPropagation();
+        }
       } else if (e.key === '+' && e.altKey && e.ctrlKey) {
         const selectedCols = this.table.getSelectedCols(getRange(selected));
         selectedCols ? this.addCol(Math.max(...selectedCols) + 1) : this.addLastCol();
@@ -297,8 +300,10 @@ class TableComponent extends React.Component {
   };
 
   addRow = i => {
-    this.table.addRow(i);
-    this.selectRows({ start: i, end: i });
+    if (!isCellsNumberInvalid(this.table.getRowNum() + 1, this.table.getColNum())) {
+      this.table.addRow(i);
+      this.selectRows({ start: i, end: i });
+    }
   };
 
   merge = () => {
@@ -316,8 +321,10 @@ class TableComponent extends React.Component {
   };
 
   addCol = i => {
-    this.table.addColumn(i);
-    this.selectCols({ start: i, end: i });
+    if (!isCellsNumberInvalid(this.table.getRowNum(), this.table.getColNum() + 1)) {
+      this.table.addColumn(i);
+      this.selectCols({ start: i, end: i });
+    }
   };
 
   deleteRow = deleteIndexes => {
@@ -423,6 +430,8 @@ class TableComponent extends React.Component {
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const range = selected && getRange(selected);
     const isEditMode = !isMobile && isTableOnFocus;
+    const rowNum = this.table.getRowNum();
+    const colNum = this.table.getColNum();
     return (
       <div
         className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
@@ -476,7 +485,7 @@ class TableComponent extends React.Component {
             onResizeStart={this.setSelected}
             isSelectAllActive={this.isAllCellsSelected(selected)}
             onSelectAllClick={this.toggleAllCellsSelection}
-            rowNum={this.table.getRowNum()}
+            rowNum={rowNum}
             isEditMode={isEditMode}
             rowsHeights={this.rowsHeights}
             rowsRefs={this.rowsRefs}
@@ -527,12 +536,22 @@ class TableComponent extends React.Component {
         </div>
         {!isMobile && (
           <div className={styles.addCol}>
-            <AddNewSection dataHook={'addCol'} onClick={this.addLastCol} />
+            <AddNewSection
+              dataHook={'addCol'}
+              onClick={this.addLastCol}
+              shouldDisable={isCellsNumberInvalid(rowNum, colNum + 1)}
+              t={t}
+            />
           </div>
         )}
         {!isMobile && (
           <div className={styles.addRow}>
-            <AddNewSection dataHook={'addRow'} onClick={this.addLastRow} />
+            <AddNewSection
+              dataHook={'addRow'}
+              onClick={this.addLastRow}
+              shouldDisable={isCellsNumberInvalid(rowNum + 1, colNum)}
+              t={t}
+            />
           </div>
         )}
       </div>
