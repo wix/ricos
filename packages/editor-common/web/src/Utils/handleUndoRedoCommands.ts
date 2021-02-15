@@ -1,4 +1,4 @@
-import { EditorState, convertToRaw, ContentState } from '@wix/draft-js';
+import { EditorState, convertToRaw, ContentState } from '../index';
 import {
   RicosContent,
   IMAGE_TYPE,
