@@ -81,10 +81,6 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
   return element.at(element.length - 1); // due to add html by strategies
 };
 
-const forceSelection = true;
-
-const isRicosSchema = true;
-
 type Settings = { isRicosSchema?: boolean; forceSelection?: boolean };
 
 const isMention = type => type === RICOS_MENTION_TYPE;
@@ -371,19 +367,19 @@ describe('RicosEditor', () => {
       });
     });
     describe('Editor Decorations API (Ricos Schema)', () => {
-      const settings = { isRicosSchema };
+      const settings = { isRicosSchema: true };
       Object.entries(decorationsTestConfig).forEach(insertDecorationTest(settings));
       Object.entries(decorationsTestConfig).forEach(updateDecorationTest(settings));
       Object.entries(decorationsTestConfig).forEach(deleteDecorationTest(settings));
     });
     describe('Editor Plugins API (Ricos Schema)', () => {
-      const settings = { forceSelection, isRicosSchema };
+      const settings = { isRicosSchema: true };
       Object.entries(pluginsTestConfig).forEach(insertPluginTest(settings));
       Object.entries(pluginsTestConfig).forEach(updatePluginTest(settings));
       Object.entries(pluginsTestConfig).forEach(deletePluginTest(settings));
     });
     describe('Editor Plugins API (Old Schema)', () => {
-      const settings = { forceSelection };
+      const settings = {};
       Object.entries(pluginsTestConfig).forEach(insertPluginTest(settings));
       Object.entries(pluginsTestConfig).forEach(updatePluginTest(settings));
       Object.entries(pluginsTestConfig).forEach(deletePluginTest(settings));

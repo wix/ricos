@@ -156,6 +156,7 @@ export const createEditorCommands = (
       data?: PluginsDataMap[K],
       settings?: { forceSelection?: boolean; isRicosSchema?: boolean }
     ) => {
+      const { forceSelection = true } = settings || {};
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
@@ -167,7 +168,7 @@ export const createEditorCommands = (
             draftType
           );
           setEditorState(
-            settings?.forceSelection
+            forceSelection
               ? EditorState.forceSelection(newEditorState, newSelection)
               : EditorState.acceptSelection(newEditorState, newSelection)
           );
@@ -180,6 +181,7 @@ export const createEditorCommands = (
       data?: PluginsDataMap[K],
       settings?: { forceSelection?: boolean; isRicosSchema?: boolean; useCurrentData?: boolean }
     ) => {
+      const { forceSelection = true } = settings || {};
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       if (createPluginData) {
@@ -192,7 +194,7 @@ export const createEditorCommands = (
           const newEditorState = updateEntityData(getEditorState(), blockKey, pluginData);
           const newSelection = newEditorState.getSelection();
           setEditorState(
-            settings?.forceSelection
+            forceSelection
               ? EditorState.forceSelection(newEditorState, newSelection)
               : EditorState.acceptSelection(newEditorState, newSelection)
           );
