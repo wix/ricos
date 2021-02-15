@@ -18,6 +18,8 @@ import {
   getEntityData,
   insertLinkAtCurrentSelection,
   removeLinksInSelection,
+  triggerMention,
+  insertMention,
 } from 'wix-rich-content-editor-common';
 import {
   PluginsDataMap,
@@ -89,14 +91,18 @@ const PLUGIN_TYPE_MAP = {
   [POLL_TYPE]: POLL_TYPE,
 };
 
+const triggerDecorationsMap = {
+  [RICOS_MENTION_TYPE]: triggerMention,
+};
+
 const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
-  [RICOS_MENTION_TYPE]: () => {}, //WIP
+  [RICOS_MENTION_TYPE]: insertMention,
 };
 
 const deleteDecorationsMapFuncs = {
   [RICOS_LINK_TYPE]: removeLinksInSelection,
-  [RICOS_MENTION_TYPE]: () => {}, //WIP
+  [RICOS_MENTION_TYPE]: () => {}, // No sure if needed
 };
 
 export const createEditorCommands = (
@@ -215,7 +221,17 @@ export const createEditorCommands = (
         }
       }
     },
-    deleteDecoration: <K extends keyof DecorationsDataMap>(type: K) => {
+    triggerDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_LINK_TYPE>>(
+      type: K
+    ) => {
+      const newEditorState = triggerDecorationsMap[type]?.(getEditorState());
+      if (newEditorState) {
+        setEditorState(newEditorState);
+      }
+    },
+    deleteDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
+      type: K
+    ) => {
       const newEditorState = deleteDecorationsMapFuncs[type]?.(getEditorState());
       if (newEditorState) {
         setEditorState(newEditorState);

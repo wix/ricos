@@ -79,7 +79,7 @@ import {
   VideoData,
   FileData,
   LinkData,
-  MentionData,
+  MentionData as MentionPluginData,
   Node_Type,
   Decoration_Type,
 } from 'ricos-schema';
@@ -92,6 +92,8 @@ export type CreatePluginData<PluginData> = (
   isRicosSchema?: boolean
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Record<string, any> | undefined;
+
+export type MentionData = { mention: MentionPluginData; triggerMention: string };
 
 export interface CreatePluginsDataMap {
   [RICOS_DIVIDER_TYPE]?: CreatePluginData<DividerData>;

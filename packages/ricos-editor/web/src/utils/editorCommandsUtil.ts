@@ -9,6 +9,7 @@ import {
   RICOS_FILE_TYPE,
   RICOS_IMAGE_TYPE,
   RICOS_LINK_TYPE,
+  RICOS_MENTION_TYPE,
 } from 'ricos-content';
 import {
   DividerData,
@@ -24,6 +25,7 @@ import {
   LinkData,
   Node_Type,
   Decoration_Type,
+  MentionData,
 } from 'ricos-schema';
 
 export const content = {
@@ -44,18 +46,32 @@ export const content = {
 
 export const blockKey = 'o12';
 
-export const selectionState1 = {
+export const selection = {
   anchorKey: blockKey,
   focusKey: blockKey,
   anchorOffset: 0,
   focusOffset: 8,
 };
 
-export const selectionState2 = {
+export const selectionCollapsed = {
   anchorKey: blockKey,
   focusKey: blockKey,
   anchorOffset: 3,
   focusOffset: 3,
+};
+
+export const endOfSelection = {
+  anchorKey: blockKey,
+  focusKey: blockKey,
+  anchorOffset: 8,
+  focusOffset: 8,
+};
+
+export const mentionSelection = {
+  anchorKey: blockKey,
+  focusKey: blockKey,
+  anchorOffset: 10,
+  focusOffset: 10,
 };
 
 const divider = {
@@ -488,6 +504,28 @@ const link = {
   },
 };
 
+const mention = {
+  type: RICOS_MENTION_TYPE,
+  decorationType: Decoration_Type.MENTION,
+  data: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), triggerMention: '@' },
+  updatedData: {
+    mention: MentionData.fromJSON({ name: 'chen', slug: 'blibla' }),
+    triggerMention: '@',
+  },
+  expectedData: {
+    mention: {
+      name: 'aviv',
+      slug: 'blabla',
+    },
+  },
+  expectedUpdatedData: {
+    mention: {
+      name: 'chen',
+      slug: 'blibla',
+    },
+  },
+};
+
 export const pluginsTestConfig = {
   divider,
   giphy,
@@ -499,4 +537,4 @@ export const pluginsTestConfig = {
   image,
 };
 
-export const decorationsTestConfig = { link };
+export const decorationsTestConfig = { link, mention };

@@ -3,6 +3,7 @@
 import React from 'react';
 import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
+import { RICOS_MENTION_TYPE } from 'wix-rich-content-common';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
 import { pluginDivider } from '../../../plugin-divider/web/src';
@@ -14,12 +15,15 @@ import { pluginVideo } from '../../../plugin-video/web/src';
 import { pluginFileUpload } from '../../../plugin-file-upload/web/src';
 import { pluginImage } from '../../../plugin-image/web/src';
 import { pluginLink } from '../../../plugin-link/web/src';
+import { pluginMentions } from '../../../plugin-mentions/web/src';
 import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 import {
   content,
   blockKey,
-  selectionState1,
-  selectionState2,
+  selection,
+  selectionCollapsed,
+  endOfSelection,
+  mentionSelection,
   pluginsTestConfig,
   decorationsTestConfig,
 } from './utils/editorCommandsUtil';
@@ -42,6 +46,7 @@ const plugins = [
   pluginImage(),
   pluginLink(),
   pluginHashtag(),
+  pluginMentions(),
 ];
 
 const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
@@ -124,10 +129,16 @@ const deletePluginTest = (settings: Settings) => ([pluginName, { type, nodeType,
 const insertDecorationTest = (settings: Settings) => ([pluginName, { type, data, expectedData }]) =>
   it(`should insert ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+    ricosEditor
+      .getEditorCommands()
+      .setSelection(blockKey, type === RICOS_MENTION_TYPE ? endOfSelection : selection);
+    if (type === RICOS_MENTION_TYPE) {
+      ricosEditor.getEditorCommands().triggerDecoration(type);
+    }
     ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
-    // TODO: check this behaviour
-    ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
+    ricosEditor
+      .getEditorCommands()
+      .setSelection(blockKey, type === RICOS_MENTION_TYPE ? mentionSelection : selectionCollapsed);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedData);
   });
 
@@ -136,26 +147,30 @@ const updateDecorationTest = (settings: Settings) => ([
   { type, data, updatedData, expectedUpdatedData },
 ]) =>
   it(`should update ${pluginName}`, () => {
-    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
-    // TODO: check this behaviour
-    ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, updatedData, settings);
-    // TODO: check this behaviour
-    ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
-    expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
+    if (type !== RICOS_MENTION_TYPE) {
+      const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+      ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+      ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
+      // TODO: check this behaviour
+      ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+      ricosEditor.getEditorCommands().insertDecoration(type, updatedData, settings);
+      // TODO: check this behaviour
+      ricosEditor.getEditorCommands().setSelection(blockKey, selectionCollapsed);
+      expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
+    }
   });
 
 const deleteDecorationTest = (settings: Settings) => ([pluginName, { type, data }]) =>
   it(`should remove ${pluginName}`, () => {
-    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
-    ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
-    // TODO: check this behaviour
-    ricosEditor.getEditorCommands().setSelection(blockKey, selectionState2);
-    ricosEditor.getEditorCommands().deleteDecoration(type);
-    expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual({});
+    if (type !== RICOS_MENTION_TYPE) {
+      const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+      ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+      ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
+      // TODO: check this behaviour
+      ricosEditor.getEditorCommands().setSelection(blockKey, selectionCollapsed);
+      ricosEditor.getEditorCommands().deleteDecoration(type);
+      expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual({});
+    }
   });
 
 describe('RicosEditor', () => {
@@ -293,39 +308,39 @@ describe('RicosEditor', () => {
       });
       it('should have bold inline style', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('bold');
         expect(ricosEditor.getEditorCommands().hasInlineStyle('bold')).toBeTruthy();
       });
       it('should not have bold inline style', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('bold');
         ricosEditor.getEditorCommands().toggleInlineStyle('bold');
         expect(ricosEditor.getEditorCommands().hasInlineStyle('bold')).toBeFalsy();
       });
       it('should have italic inline style', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('italic');
         expect(ricosEditor.getEditorCommands().hasInlineStyle('italic')).toBeTruthy();
       });
       it('should not have italic inline style', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('italic');
         ricosEditor.getEditorCommands().toggleInlineStyle('italic');
         expect(ricosEditor.getEditorCommands().hasInlineStyle('italic')).toBeFalsy();
       });
       it('should have underline inline style', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('underline');
         expect(ricosEditor.getEditorCommands().hasInlineStyle('underline')).toBeTruthy();
       });
       it('should not have underline inline style', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('underline');
         ricosEditor.getEditorCommands().toggleInlineStyle('underline');
         expect(ricosEditor.getEditorCommands().hasInlineStyle('underline')).toBeFalsy();
@@ -340,20 +355,20 @@ describe('RicosEditor', () => {
       });
       it('should undo stack be not empty', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('bold');
         expect(ricosEditor.getEditorCommands().isUndoStackEmpty()).toBeFalsy();
       });
       it('should redo stack be not empty', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('bold');
         ricosEditor.getEditorCommands().undo();
         expect(ricosEditor.getEditorCommands().isRedoStackEmpty()).toBeFalsy();
       });
       it('should change block to numbered list', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selectionState1);
+        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
         ricosEditor.getEditorCommands().setBlockType('ordered-list-item');
         expect(
           ricosEditor.getEditorCommands().isBlockTypeSelected('ordered-list-item')

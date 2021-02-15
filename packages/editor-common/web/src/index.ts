@@ -88,6 +88,7 @@ export {
   isCursorAtFirstLine,
   selectAllContent,
 } from './Utils/draftUtils';
+export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {
