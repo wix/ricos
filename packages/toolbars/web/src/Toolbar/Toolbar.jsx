@@ -107,7 +107,7 @@ class Toolbar extends Component {
   };
 
   renderTextButton = buttonProps => {
-    const { onClick, dataHook, text } = buttonProps;
+    const { onClick, dataHook, text, tooltip, isDisabled } = buttonProps;
     return (
       <ToolbarButton
         onClick={onClick}
@@ -115,6 +115,8 @@ class Toolbar extends Component {
         dataHook={dataHook}
         isMobile={this.props.isMobile}
         buttonContent={text}
+        tooltipText={tooltip}
+        disabled={isDisabled?.()}
       />
     );
   };

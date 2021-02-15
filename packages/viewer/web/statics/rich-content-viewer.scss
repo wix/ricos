@@ -203,6 +203,10 @@
   line-height: 26px;
   padding: 2px 25px;
   white-space: pre-wrap;
+
+  .renderedInTable & {
+    margin: 1em 0;
+  }
 }
 
 .normalText {

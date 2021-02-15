@@ -2,7 +2,7 @@
 import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, cloneDeep } from 'lodash';
+import { get, includes, debounce, cloneDeep, isEmpty } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -247,8 +247,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
-    this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
-    console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
+    !isEmpty(this.props.experiments) && console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {
@@ -847,8 +846,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     additionalProps,
     toolbarsToIgnore,
     tablePluginMenu,
-    editing,
-    onFocus,
   }) => {
     return (
       <InnerRCE
@@ -865,8 +862,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
         tablePluginMenu={tablePluginMenu}
-        editing={editing}
-        onFocus={onFocus}
       />
     );
   };

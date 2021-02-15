@@ -1041,7 +1041,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "entityRanges": [],
                         "inlineStyleRanges": [],
                         "key": 0,
-                        "text": "table!!",
+                        "text": "This",
                         "type": "unstyled"
                       }
                     ],
@@ -1787,353 +1787,6 @@ exports[`plugins > table > should use table toolbars #0`] =
   }
 };
 
-exports[`plugins > table > should use table toolbar context menu #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "colsMinWidth": [
-            120,
-            120,
-            120,
-            120
-          ],
-          "colsWidth": [
-            10,
-            10,
-            10,
-            10
-          ],
-          "rows": {
-            "0": {
-              "columns": {
-                "0": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "1": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  },
-                  "merge": {}
-                },
-                "2": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  },
-                  "merge": {}
-                },
-                "3": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  },
-                  "merge": {}
-                }
-              }
-            },
-            "1": {
-              "columns": {
-                "0": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "1": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "2": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "3": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                }
-              }
-            },
-            "2": {
-              "columns": {
-                "0": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "1": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "2": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "3": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                }
-              }
-            },
-            "3": {
-              "columns": {
-                "0": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "1": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "!!!!!!",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "2": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": ":)",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "3": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                }
-              }
-            }
-          },
-          "rowsHeight": [
-            47,
-            47,
-            47,
-            47
-          ],
-          "size": "content"
-        },
-        "type": "table"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "table"
-    }
-  }
-};
-
 exports[`plugins > table > should use cell alignment #0`] =
 {
   "blocks": [
@@ -2485,4 +2138,859 @@ exports[`plugins > table > should use cell alignment #0`] =
       "type": "table"
     }
   }
+};
+
+exports[`plugins > table > should use table toolbar context menu #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsMinWidth": [
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "colsWidth": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "4": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            47,
+            47,
+            47,
+            47,
+            47
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > table > should edit cell #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsMinWidth": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "colsWidth": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "table!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "is",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "table",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "test",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            47,
+            47,
+            47,
+            47
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > table > should limit cells number #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
 };

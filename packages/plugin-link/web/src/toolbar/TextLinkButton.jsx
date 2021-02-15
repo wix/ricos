@@ -50,14 +50,25 @@ export default class TextLinkButton extends Component {
 
     const OriginalLinkPanel =
       !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
+    const customStyles =
+      !isMobile && !OriginalLinkPanel
+        ? {
+            content: {
+              width: 512,
+              maxWidth: 512,
+              height: 380,
+              padding: 10,
+            },
+          }
+        : {
+            content: {
+              position: 'fixed',
+            },
+          };
     const modalStyles = getModalStyles({
-      fullScreen: !OriginalLinkPanel,
+      fullScreen: isMobile,
       isMobile,
-      customStyles: {
-        content: {
-          position: 'fixed',
-        },
-      },
+      customStyles,
     });
     const commonPanelProps = {
       helpers,
