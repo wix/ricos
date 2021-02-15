@@ -87,6 +87,8 @@ const isRicosSchema = true;
 
 type Settings = { isRicosSchema?: boolean; forceSelection?: boolean };
 
+const isMention = type => type === RICOS_MENTION_TYPE;
+
 const insertPluginTest = (settings: Settings) => ([
   pluginName,
   { type, nodeType, data, expectedData },
@@ -131,14 +133,14 @@ const insertDecorationTest = (settings: Settings) => ([pluginName, { type, data,
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor
       .getEditorCommands()
-      .setSelection(blockKey, type === RICOS_MENTION_TYPE ? endOfSelection : selection);
+      .setSelection(blockKey, isMention(type) ? endOfSelection : selection);
     if (type === RICOS_MENTION_TYPE) {
       ricosEditor.getEditorCommands().triggerDecoration(type);
     }
     ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
     ricosEditor
       .getEditorCommands()
-      .setSelection(blockKey, type === RICOS_MENTION_TYPE ? mentionSelection : selectionCollapsed);
+      .setSelection(blockKey, isMention(type) ? mentionSelection : selectionCollapsed);
     expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedData);
   });
 
@@ -146,31 +148,26 @@ const updateDecorationTest = (settings: Settings) => ([
   pluginName,
   { type, data, updatedData, expectedUpdatedData },
 ]) =>
+  !isMention(type) &&
   it(`should update ${pluginName}`, () => {
-    if (type !== RICOS_MENTION_TYPE) {
-      const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-      ricosEditor.getEditorCommands().setSelection(blockKey, selection);
-      ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
-      // TODO: check this behaviour
-      ricosEditor.getEditorCommands().setSelection(blockKey, selection);
-      ricosEditor.getEditorCommands().insertDecoration(type, updatedData, settings);
-      // TODO: check this behaviour
-      ricosEditor.getEditorCommands().setSelection(blockKey, selectionCollapsed);
-      expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
-    }
+    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+    ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+    ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
+    ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+    ricosEditor.getEditorCommands().insertDecoration(type, updatedData, settings);
+    ricosEditor.getEditorCommands().setSelection(blockKey, selectionCollapsed);
+    expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual(expectedUpdatedData);
   });
 
 const deleteDecorationTest = (settings: Settings) => ([pluginName, { type, data }]) =>
+  !isMention(type) &&
   it(`should remove ${pluginName}`, () => {
-    if (type !== RICOS_MENTION_TYPE) {
-      const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-      ricosEditor.getEditorCommands().setSelection(blockKey, selection);
-      ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
-      // TODO: check this behaviour
-      ricosEditor.getEditorCommands().setSelection(blockKey, selectionCollapsed);
-      ricosEditor.getEditorCommands().deleteDecoration(type);
-      expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual({});
-    }
+    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+    ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+    ricosEditor.getEditorCommands().insertDecoration(type, data, settings);
+    ricosEditor.getEditorCommands().setSelection(blockKey, selectionCollapsed);
+    ricosEditor.getEditorCommands().deleteDecoration(type);
+    expect(ricosEditor.getEditorCommands().getSelectedBlockData()).toEqual({});
   });
 
 describe('RicosEditor', () => {
