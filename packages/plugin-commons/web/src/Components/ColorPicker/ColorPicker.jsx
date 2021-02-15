@@ -121,7 +121,7 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_add_color_label}
           htmlFor={`add_color_button_${this.id}`}
         >
-          <AddColorIcon style={{ transform: 'scale(0.72)' }} />
+          <AddColorIcon />
         </label>
       </div>
     );
@@ -163,7 +163,12 @@ class ColorPicker extends PureComponent {
     } = this;
     const { t, isMobile, theme, children } = this.props;
     return (
-      <div className={styles.colorPicker} tabIndex={0}>
+      <div
+        className={classNames(styles.colorPicker, {
+          [styles.colorPicker_mobile]: this.props.isMobile,
+        })}
+        tabIndex={0}
+      >
         {this.state.isCustomColorPickerOpened
           ? this.props.onCustomPickerToggle({
               color: this.state.color,
@@ -175,9 +180,9 @@ class ColorPicker extends PureComponent {
               theme,
             })
           : children({
+              renderAddColorButton,
               renderPalette,
               renderUserColors,
-              renderAddColorButton,
               renderResetColorButton,
               mergedStyles: styles,
             })}

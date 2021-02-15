@@ -90,13 +90,14 @@ export default class TextColorPanel extends Component {
         }) => (
           <div className={mergedStyles.colorPicker_palette}>
             <div className={mergedStyles.colorPicker_buttons_container}>
+              {this.props.isMobile && renderAddColorButton()}
               {renderPalette()}
               {renderUserColors()}
             </div>
             <hr className={mergedStyles.colorPicker_separator} />
             <div className={mergedStyles.colorPicker_bottom_container}>
               {renderResetColorButton()}
-              {renderAddColorButton()}
+              {!this.props.isMobile && renderAddColorButton()}
             </div>
           </div>
         )}

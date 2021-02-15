@@ -40,11 +40,11 @@
     margin-top: 22px;
     margin-left: calc((100% - 6 * 18px) / 5);
     &:nth-child(6n + 1) {
-      margin-left: 0;
+      margin-left: 13px;
     }
     width: 34px;
     height: 34px;
-    margin-left: 24px !important;
+    margin-left: 24px;
   }
 }
 
@@ -97,6 +97,9 @@
 
 .colorPicker_add_color_button {
   margin-top: -2px;
+  svg{
+    transform: scale(0.72)
+  }
 }
 
 .colorPicker_add_color_label {
@@ -117,7 +120,7 @@
   width: 180px;
   @include phone {
     width: 100%;
-    justify-content: center;
+    justify-content: unset;
   }
 }
 
@@ -147,6 +150,26 @@
 
 .colorPicker_bottom_container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 10px 10px 0px 10px;
+}
+
+.colorPicker_mobile{
+  .colorPicker_add_color_button {
+    align-self: flex-end;
+    margin-left: 13px;
+    svg{
+      height: 34px;
+      width: 34px;
+      transform: none;
+      vertical-align: bottom;
+    }
+  }
+  .colorPicker_palette{
+    position: relative;
+    box-shadow: 0px 0px 3px black;
+  }
+  .colorPicker_reset_color_label {
+    font-size: 16px;
+  }
 }
