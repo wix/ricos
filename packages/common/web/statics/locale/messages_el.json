@@ -325,6 +325,7 @@
 	"VideoUploadModal_CustomVideoClickText": "Μεταφόρτωση βίντεο",
 	"Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Προσθέστε μια εικόνα σε κάθε απάντηση",
 	"LinkTo_Modal_Section_Item_Video": "Βίντεο",
+	"TablePlugin_SettingsModal_limitError": "You can't add more than 100 cells",
 	"ImageSettings_Header": "Ρυθμίσεις εικόνας",
 	"LinkTo_Toolbar_GoTo": "Μετάβαση στο σύνδεσμο",
 	"UploadFile_Error_Size_Toast": "Το μέγιστο μέγεθος αρχείου είναι {{maxLimit}}MB. Δοκιμάστε ένα μικρότερο αρχείο.",

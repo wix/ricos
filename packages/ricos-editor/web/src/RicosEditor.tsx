@@ -15,7 +15,7 @@ import {
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
 import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
-import { ToolbarType } from 'wix-rich-content-common';
+import { ToolbarType, Version } from 'wix-rich-content-common';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -23,7 +23,7 @@ The getContent(postId, isPublishing) API is deprecated and will be removed in ri
 
 interface State {
   StaticToolbar?: ElementType;
-  localeStrategy: { locale?: string; localeResource?: Record<string, string> };
+  localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
   editorState?: EditorState;
 }
@@ -37,20 +37,26 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange, props.content);
-    this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
+    this.state = { localeData: { locale: props.locale }, remountKey: false };
   }
 
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
-    });
+    const { children, _rcProps } = this.props;
+    const locale = children?.props.locale || this.props.locale;
+    await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
+      this.setState({ localeData, remountKey: !this.state.remountKey })
+    );
   };
 
   componentDidMount() {
     this.updateLocale();
+    const { children } = this.props;
+    const onOpenEditorSuccess =
+      children?.props.helpers?.onOpenEditorSuccess ||
+      this.props._rcProps?.helpers?.onOpenEditorSuccess;
+    onOpenEditorSuccess?.(Version.currentVersion);
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
@@ -157,7 +163,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
-    const { StaticToolbar, localeStrategy, remountKey, editorState } = this.state;
+    const { StaticToolbar, localeData, remountKey, editorState } = this.state;
 
     const contentProp = editorState
       ? { editorState: { editorState }, content: {} }
@@ -193,7 +199,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             setEditorToolbars: this.setStaticToolbar,
             ...contentProp.editorState,
             ...supportedDraftEditorSettings,
-            ...localeStrategy,
+            ...localeData,
           })}
         </RicosEngine>
       </Fragment>

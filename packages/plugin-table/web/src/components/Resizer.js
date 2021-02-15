@@ -44,17 +44,19 @@ export default class Resizer extends PureComponent {
     if (this.curTarget) {
       const diff = this.getPosition(e) - this.position;
       const newSize = this.curSize + diff;
-      const siblingNewSize = this.siblingSize - diff;
-      const { minSize, setContainerSize, horizontal } = this.props;
+      const { minSize, setContainerSize, horizontal, overflowWidth } = this.props;
       if (newSize >= minSize) {
         horizontal &&
           newSize < CELL_AUTO_MIN_WIDTH &&
           this.setMinSize(this.curTarget, newSize + 'px');
         this.setNewSize(this.curTarget, newSize + 'px');
         setContainerSize && setContainerSize(newSize + 'px', this.props.index);
-        siblingNewSize &&
-          siblingNewSize >= CELL_AUTO_MIN_WIDTH &&
-          this.setNewSize(this.siblingCell, siblingNewSize + 'px');
+        if (diff > 0 || (diff <= 0 && overflowWidth <= 0)) {
+          const siblingNewSize = this.siblingSize - diff;
+          siblingNewSize &&
+            siblingNewSize >= CELL_AUTO_MIN_WIDTH &&
+            this.setNewSize(this.siblingCell, siblingNewSize + 'px');
+        }
       }
     }
   };
@@ -119,4 +121,5 @@ Resizer.propTypes = {
   itemsRefs: PropTypes.any,
   setContainerSize: PropTypes.func,
   highlightOnly: PropTypes.bool,
+  overflowWidth: PropTypes.number,
 };
