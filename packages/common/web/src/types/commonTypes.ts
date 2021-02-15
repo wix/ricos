@@ -1,6 +1,6 @@
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
-import { ComponentData, RicosContent } from 'ricos-content';
+import { ComponentData, RicosContent, RicosEntity } from 'ricos-content';
 import {
   DecorationMode,
   TranslationFunction,
@@ -61,6 +61,12 @@ export type OnConfirmFunction = (
 };
 
 export type TextDirection = 'rtl' | 'ltr';
+
+export type onAtomicBlockFocus = (params: {
+  blockKey?: string;
+  type?: string;
+  data?: RicosEntity['data'];
+}) => void;
 
 export interface SEOSettings {
   paywall?: {
