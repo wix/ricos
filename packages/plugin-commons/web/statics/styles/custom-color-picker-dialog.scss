@@ -7,7 +7,8 @@
   height: 250px;
   margin: 0;
   @include phone {
-    margin: 27px 18px 15px;
+    width: 352px;
+    margin: 0 auto;
   }
 }
 

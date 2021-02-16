@@ -58,17 +58,32 @@
 
 :global {
   @import '~react-colorful/dist/index.css';
+  
+  @media only screen and (min-width: 640px) {
+    .react-colorful {
+     width: 187px !important;
+     margin: 12px auto;
+     .react-colorful__saturation {
+      height: 126px;
+    }
+  }}
+
   .react-colorful {
-    width: 187px !important;
     height: 100% !important;
-    margin: 12px auto;
+    @include phone {
+      margin: 0 auto;
+      width: 100% !important;
+    }
 
     .react-colorful__saturation {
       flex-grow: 0 ;
-      height: 126px;
+      // height: 126px;
       border-radius: 0;
       overflow: auto;
       border: none;
+      @include phone {
+        height: 200px !important;
+      }
     }
     .react-colorful__pointer {
       width: 16px;
