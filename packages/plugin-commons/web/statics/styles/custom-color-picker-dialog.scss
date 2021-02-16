@@ -46,3 +46,22 @@
   width: inherit;
   margin: 12px 0;
 }
+
+.colorPickerDialog_buttons_mobile {
+  display: flex;
+  justify-content:space-between;
+  margin: 12px 5px 12px 8px;
+}
+
+.colorPickerDialog_button_mobile{
+  line-height: 1.5;
+  font-size: 16px;
+  color: $primary-text-color;
+  background: transparent;
+  border:none;
+}
+
+.colorPickerDialog_button_update_mobile {
+  color: $action-color-fallback;
+}
+

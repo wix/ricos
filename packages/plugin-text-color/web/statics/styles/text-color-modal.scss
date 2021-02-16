@@ -20,13 +20,13 @@ $PANEL_MAX_WIDTH: 360px;
   display: inline-table;
   position: fixed;
   box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);
-  margin: 0px;
-  bottom: 0px;
+  margin: 0 auto;
+  bottom: 25''px;
   left: 0px;
   right: 0px;
   top: unset;
   transform: unset;
-  width: 100%;
+  width: 352px;
   z-index: 8;
   &:focus {
     box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);

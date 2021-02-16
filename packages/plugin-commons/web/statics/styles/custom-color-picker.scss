@@ -9,8 +9,9 @@
   height: 32px;
   position: relative;
   @include phone {
-    padding-top: 9px;
-    padding-bottom: 17px;
+    height: 40px;
+    padding: 0px;
+    margin: 20px 0;
   }
 }
 
@@ -29,6 +30,11 @@
   margin: 0 8px;
   display: inline-block;
   height: inherit;
+  position: relative;
+  @include phone {
+    width:233px !important;
+    font-size: 16px;
+  }
 }  
 
 .customColorPicker_currentColor {
@@ -42,18 +48,24 @@
 .hexColorInput{
   max-height: 100%;
   border: 1px solid;
-  padding: 0 0 0 20px;
+  padding-left: 20px;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: inherit;
   font-family: inherit;
+  @include phone{
+    padding-left: 32px;
+  }
 }
 .hashtagIcon {
   position: absolute;
   top: 50%;
   z-index: 1;
   transform: translate(0, -50%);
+  @include phone{
+    height: 14px;
+  }
 }
 
 :global {
@@ -74,10 +86,8 @@
       margin: 0 auto;
       width: 100% !important;
     }
-
     .react-colorful__saturation {
       flex-grow: 0 ;
-      // height: 126px;
       border-radius: 0;
       overflow: auto;
       border: none;
@@ -103,7 +113,6 @@
     .react-colorful__pointer.react-colorful__hue-pointer {
       z-index: 3;
     }
-
     .react-colorful__pointer.react-colorful__hue-pointer .react-colorful__pointer-fill{
       box-shadow: 0 1px 1px rgba(9, 9, 9, 0.1);
       background-color: #ffffff !important;

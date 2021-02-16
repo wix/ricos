@@ -6,6 +6,36 @@ import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
 
 const CustomColorPicker = lazy(() => import('./CustomColorPicker'));
 
+const ActionButtons = ({ isMobile, t }) => {
+  <div
+    className={
+      isMobile ? styles.colorPickerDialog_buttons_mobile : styles.colorPickerDialog_buttons
+    }
+  >
+    <button
+      className={
+        isMobile ? styles.colorPickerDialog_button_mobile : styles.colorPickerDialog_button
+      }
+      onClick={this.onCancel}
+    >
+      {t('ColorPickerButtonLabel_Cancel')}
+    </button>
+    <button
+      className={
+        isMobile
+          ? classNames(
+              styles.colorPickerDialog_button_mobile,
+              styles.colorPickerDialog_button_update_mobile
+            )
+          : classNames(styles.colorPickerDialog_button, styles.colorPickerDialog_button_update)
+      }
+      data-hook="colorPickerUpdateButton"
+      onClick={this.onUpdate}
+    >
+      {t('ColorPickerButtonLabel_Update')}
+    </button>
+  </div>;
+};
 class CustomColorPickerDialog extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +67,7 @@ class CustomColorPickerDialog extends Component {
     const { t, isMobile, theme } = this.props;
     return (
       <div className={styles.colorPickerDialog}>
+        {isMobile && <ActionButtons t={t} isMobile={isMobile} />}
         <Suspense fallback={<div>Loading...</div>}>
           <CustomColorPicker
             color={this.state.color}
@@ -47,21 +78,7 @@ class CustomColorPickerDialog extends Component {
           />
         </Suspense>
         <hr className={styles.colorPickerDialog_separator} />
-        <div className={styles.colorPickerDialog_buttons}>
-          <button className={styles.colorPickerDialog_button} onClick={this.onCancel}>
-            {t('ColorPickerButtonLabel_Cancel')}
-          </button>
-          <button
-            className={classNames(
-              styles.colorPickerDialog_button,
-              styles.colorPickerDialog_button_update
-            )}
-            data-hook="colorPickerUpdateButton"
-            onClick={this.onUpdate}
-          >
-            {t('ColorPickerButtonLabel_Update')}
-          </button>
-        </div>
+        {!isMobile && <ActionButtons t={t} isMobile={isMobile} />}
       </div>
     );
   }
