@@ -433,6 +433,7 @@ const config: RichContentEditorProps['config'] = {
       createDividerPlugin,
       createCodeBlockPlugin,
       createUnsupportedBlocksPlugin,
+      createSpoilerPlugin,
     ],
   },
   [HASHTAG_TYPE]: {
@@ -674,6 +675,7 @@ const config: RichContentEditorProps['config'] = {
           FORMATTING_BUTTONS.DECREASE_INDENT,
           FORMATTING_BUTTONS.INCREASE_INDENT,
           '|',
+          FORMATTING_BUTTONS.SPOILER,
           FORMATTING_BUTTONS.LINE_SPACING,
           FORMATTING_BUTTONS.LINK,
           FORMATTING_BUTTONS.CODE_BLOCK,
