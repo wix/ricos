@@ -196,52 +196,6 @@ body {
             height: calc(100% - #{$headerHeight});
             padding-bottom: 10px;
 
-            .editor {
-              min-height: 100%;
-              display: flex;
-              flex-direction: column;
-
-              .toolbar-wrapper {
-                flex: 0;
-              }
-              > div {
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-
-                > div:last-child {
-                  display: flex;
-                  flex-direction: column;
-                  flex: 1;
-                }
-
-                @include mobile {
-                  display: block;
-                  flex: 0;
-                }
-              }
-
-              .DraftEditor-root {
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-
-                .DraftEditor-editorContainer {
-                  flex: 1;
-                  display: flex;
-                  flex-direction: column;
-
-                  > div:first-child {
-                    flex: 1;
-                  }
-
-                  @include mobile {
-                    padding: 0;
-                  }
-                }
-              }
-            }
-
             .react-monaco-editor-container {
               padding: 10px 0;
             }
