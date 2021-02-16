@@ -7,7 +7,7 @@ import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { TextSelectionToolbar, TwitterButton, HighlightButton, UnhighlightButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -114,7 +114,11 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
           )}
           {!isMobile ? (
             <TextSelectionToolbar container={this.viewerRef.current}>
-              {selectedText => <TwitterButton selectedText={selectedText} />}
+              {selectedText => <>
+                <TwitterButton selectedText={selectedText} />
+                <HighlightButton />
+                <UnhighlightButton />
+              </>}
             </TextSelectionToolbar>
           ) : null}
         </div>
