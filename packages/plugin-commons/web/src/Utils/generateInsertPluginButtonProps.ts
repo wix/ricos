@@ -15,6 +15,7 @@ import {
   ToolbarButtonProps,
   Pubsub,
   EditorPluginConfig,
+  Version,
 } from 'wix-rich-content-common';
 import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
 
@@ -55,6 +56,7 @@ export function generateInsertPluginButtonProps({
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
   const onPluginAddStep = (step: onPluginAddStepArgs['step']) => {
     helpers?.onPluginAddStep?.({
+      version: Version.currentVersion,
       entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
       pluginId: blockType,
