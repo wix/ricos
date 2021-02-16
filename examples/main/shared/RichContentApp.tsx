@@ -7,10 +7,9 @@ import {
   createWithContent,
   EditorState,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { compare, isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import { getRequestedLocale, normalize } from '../src/utils';
 import { TestAppConfig } from '../src/types';
-import { fromDraft } from 'ricos-content/libs/migrateSchema';
 
 type Mode = 'demo' | 'test';
 
