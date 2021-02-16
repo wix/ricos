@@ -23,6 +23,9 @@
 - `link`
   - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
 ### :house: Internal
+- `ricos-editor`
+  - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
+  - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
 - `example`
   - [#2151](https://github.com/wix-incubator/rich-content/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
 
