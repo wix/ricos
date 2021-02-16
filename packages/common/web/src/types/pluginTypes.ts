@@ -93,7 +93,7 @@ export type CreatePluginData<PluginData> = (
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Record<string, any> | undefined;
 
-export type MentionData = { mention: MentionPluginData; triggerMention: string };
+export type MentionData = { mention: MentionPluginData; trigger: string };
 
 export interface CreatePluginsDataMap {
   [RICOS_DIVIDER_TYPE]?: CreatePluginData<DividerData>;

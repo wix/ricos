@@ -1,7 +1,7 @@
 import { MentionData } from 'wix-rich-content-common';
-import { EditorState, Modifier } from '@wix/draft-js';
+import { EditorState, Modifier, SelectionState } from '@wix/draft-js';
 
-export const triggerMention = editorState => {
+export const triggerMention = (editorState: EditorState) => {
   // If the mention is being inserted after a character, a space is appended right after for
   // a smooth writing experience.
   const currentSelectionState = editorState.getSelection();
@@ -20,7 +20,7 @@ export const triggerMention = editorState => {
 };
 
 export const insertMention = (editorState: EditorState, mentionData: MentionData) => {
-  const { mention, triggerMention } = mentionData;
+  const { mention, trigger } = mentionData;
   const contentStateWithEntity = editorState
     .getCurrentContent()
     .createEntity('mention', 'IMMUTABLE', {
@@ -29,7 +29,7 @@ export const insertMention = (editorState: EditorState, mentionData: MentionData
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 
   const currentSelectionState = editorState.getSelection();
-  const { begin, end } = getSearchText(editorState, currentSelectionState, triggerMention);
+  const { begin, end } = getSearchText(editorState, currentSelectionState, trigger);
 
   // get selection of the @mention search text
   const mentionTextSelection = currentSelectionState.merge({
@@ -59,13 +59,11 @@ export const insertMention = (editorState: EditorState, mentionData: MentionData
       ' '
     );
   }
-
   const newEditorState = EditorState.push(editorState, mentionReplacedContent, 'change-block-data');
-
   return EditorState.forceSelection(newEditorState, mentionReplacedContent.getSelectionAfter());
 };
 
-const getSearchText = (editorState, selection, trigger) => {
+const getSearchText = (editorState: EditorState, selection: SelectionState, trigger: string) => {
   const anchorKey = selection.getAnchorKey();
   const anchorOffset = selection.getAnchorOffset();
   const currentContent = editorState.getCurrentContent();
@@ -74,7 +72,7 @@ const getSearchText = (editorState, selection, trigger) => {
   return getSearchTextAt(blockText, anchorOffset, trigger);
 };
 
-const getSearchTextAt = (blockText, position, trigger) => {
+const getSearchTextAt = (blockText: string, position: number, trigger: string) => {
   const str = blockText.substr(0, position);
   const begin = trigger.length === 0 ? 0 : str.lastIndexOf(trigger);
   const matchingString = trigger.length === 0 ? str : str.slice(begin + trigger.length);

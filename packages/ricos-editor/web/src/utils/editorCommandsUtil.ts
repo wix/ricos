@@ -507,10 +507,10 @@ const link = {
 const mention = {
   type: RICOS_MENTION_TYPE,
   decorationType: Decoration_Type.MENTION,
-  data: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), triggerMention: '@' },
+  data: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), trigger: '@' },
   updatedData: {
     mention: MentionData.fromJSON({ name: 'chen', slug: 'blibla' }),
-    triggerMention: '@',
+    trigger: '@',
   },
   expectedData: {
     mention: {
