@@ -13,7 +13,14 @@ import {
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
+import {
+  RelValue,
+  AnchorTarget,
+  LINK_TYPE,
+  CUSTOM_LINK_TYPE,
+  TextAlignment,
+  InlineStyle,
+} from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
@@ -25,10 +32,6 @@ type LinkDataUrl = {
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
-
-export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
-
-export type InlineStyle = 'bold' | 'underline' | 'italic';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomLinkData = any;

@@ -8,8 +8,6 @@ import {
   deleteBlock,
   undo,
   redo,
-  InlineStyle,
-  TextAlignment,
   getTextAlignment,
   hasInlineStyle,
   getBlockType,
@@ -26,6 +24,8 @@ import {
   DecorationsDataMap,
   GetEditorState,
   SetEditorState,
+  TextAlignment,
+  InlineStyle,
   IMAGE_TYPE,
   DIVIDER_TYPE,
   FILE_UPLOAD_TYPE,
@@ -122,14 +122,12 @@ export const createEditorCommands = (
     );
 
   const editorState = {
-    //TODO: fix this type error
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getSelection: (): any => getEditorState().getSelection(),
+    getSelection: getEditorState().getSelection,
     getSelectedBlockKey: () =>
       getEditorState()
         .getSelection()
         .getAnchorKey(),
-    getTextAlignment: (): TextAlignment => getTextAlignment(getEditorState()),
+    getTextAlignment: () => getTextAlignment(getEditorState()),
     hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
     isBlockTypeSelected: (type: TextBlockType) => getBlockType(getEditorState()) === type,
     isUndoStackEmpty: () => getEditorState().getUndoStack().size === 0,

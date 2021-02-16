@@ -62,6 +62,10 @@ export type OnConfirmFunction = (
 
 export type TextDirection = 'rtl' | 'ltr';
 
+export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
+
+export type InlineStyle = 'bold' | 'underline' | 'italic';
+
 export type onAtomicBlockFocus = (params: {
   blockKey?: string;
   type?: string;
