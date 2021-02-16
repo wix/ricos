@@ -826,25 +826,33 @@ export function selectAllContent(editorState, forceSelection) {
 }
 
 export function createNewLineBelow(editorState) {
-  const { contentState, selection } = insertNewBlock(editorState, false);
+  const { contentState, selection } = insertNewBlock(editorState, { below: true }, null);
   const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   return EditorState.forceSelection(newEditorState, selection);
 }
 
 export function createNewLineAbove(editorState) {
-  const { contentState, selection } = insertNewBlock(editorState, true);
+  const { contentState, selection } = insertNewBlock(editorState, { above: true }, null);
   const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   return EditorState.forceSelection(newEditorState, selection);
 }
 
-function insertNewBlock(editorState, insertAbove) {
+function insertNewBlock(editorState, position, keyForNewBlock) {
   const contentState = editorState.getCurrentContent();
   const selectedBlockKey = editorState.getSelection().getFocusKey();
-  const blockKey = insertAbove
-    ? selectedBlockKey
-    : editorState.getCurrentContent().getKeyAfter(selectedBlockKey);
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  let blockKey;
+  if (position.above) {
+    blockKey = selectedBlockKey;
+  } else if (position.below) {
+    blockKey = editorState.getCurrentContent().getKeyAfter(selectedBlockKey);
+  } else if (position.top) {
+    blockKey = blocks[0].getKey();
+  } else if (position.bottom) {
+    blockKey = blocks[blocks.length - 1].getKey();
+  }
   const blockMap = contentState.getBlockMap();
-  const newBlockKey = genKey();
+  const newBlockKey = keyForNewBlock || genKey();
   const newBlock = new ContentBlock({
     key: newBlockKey,
     text: '',
@@ -860,4 +868,71 @@ function insertNewBlock(editorState, insertAbove) {
     blockMap: newBlockMap,
   });
   return { contentState: newContentState, selection: newSelection };
+}
+
+function lastBlockIsAtomic(editorState: EditorState) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const lastBlock = blocks[blocks.length - 1].getType();
+  return lastBlock === 'atomic';
+}
+
+function firstBlockIsAtomic(editorState: EditorState) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const firstBlock = blocks[0].getType();
+  return firstBlock === 'atomic';
+}
+
+function lastBlockIsDummy(editorState: EditorState) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const lastBlock = blocks[blocks.length - 1].getKey();
+  return lastBlock === 'bottom-dummy';
+}
+
+function firstBlockIsDummy(editorState: EditorState) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const firstBlock = blocks[0].getKey();
+  return firstBlock === 'top-dummy';
+}
+
+function removeDummyBlocks(editorState: EditorState) {
+  const contentState = editorState.getCurrentContent();
+  const blocks = contentState.getBlocksAsArray();
+  const blockMap = contentState.getBlockMap();
+  let newBlockMap = blockMap;
+  if (blocks[0].getKey() === 'top-dummy') {
+    newBlockMap = newBlockMap.remove('top-dummy');
+  }
+  if (blocks[blocks.length - 1].getKey() === 'bottom-dummy') {
+    newBlockMap = newBlockMap.remove('bottom-dummy');
+  }
+  const newContentState = contentState.merge({
+    blockMap: newBlockMap,
+  }) as ContentState;
+  return EditorState.push(editorState, newContentState, 'remove-range');
+}
+
+export function handleFirstAndLastBlocks(editorState: EditorState) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  if (blocks.length === 1) {
+    return null;
+  }
+  const editorStateWithoutDummies = removeDummyBlocks(editorState);
+  let newEditorState = editorStateWithoutDummies;
+  if (lastBlockIsAtomic(editorState)) {
+    const newContentState = insertNewBlock(newEditorState, { bottom: true }, 'bottom-dummy')
+      .contentState;
+    newEditorState = EditorState.push(editorState, newContentState, 'insert-characters');
+  }
+  if (firstBlockIsAtomic(editorState)) {
+    const newContentState = insertNewBlock(newEditorState, { top: true }, 'top-dummy').contentState;
+    newEditorState = EditorState.push(editorState, newContentState, 'insert-characters');
+  }
+  if (
+    firstBlockIsDummy(editorState) === firstBlockIsDummy(newEditorState) &&
+    lastBlockIsDummy(editorState) === lastBlockIsDummy(newEditorState)
+  ) {
+    return null;
+  } else {
+    return newEditorState;
+  }
 }
