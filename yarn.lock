@@ -24260,6 +24260,57 @@ rgba-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
+ricos-common@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/ricos-common/-/ricos-common-8.21.0.tgz#360a755b7aa8dd38421c9b7b9bd683f7590a1e53"
+  integrity sha512-1yenoAgO7DgIxoGpewJpwT4mBCKxFsPz0v19oLFSKcSfV1NCYFBPhY+jHzR1HSBRj81Z+XG/8ONqsCtpY04y9Q==
+  dependencies:
+    ts-is-present "^1.1.1"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor "8.21.0"
+    wix-rich-content-preview "8.21.0"
+    wix-rich-content-viewer "8.21.0"
+
+ricos-content@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/ricos-content/-/ricos-content-8.21.0.tgz#9a35f696ba95625e1479554d287fbad7586e42b2"
+  integrity sha512-gx5lhJs2wG0G25o95IP+3FejVkd0UIcybncFrBgf1j7iP7ZarqO9c1EK28QfuO5UeDv5dhTTTQa2O/ES21BIbA==
+  dependencies:
+    ricos-schema "8.21.0"
+    to-camel-case "1.0.0"
+    to-constant-case "1.0.0"
+    to-slug-case "1.0.0"
+    to-snake-case "1.0.0"
+    utility-types "^3.10.0"
+
+ricos-editor@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/ricos-editor/-/ricos-editor-8.21.0.tgz#490e84a72f726f42fc3e1e07cbdb47580452e7b5"
+  integrity sha512-xbx8cSpb5hDItwCgq35ryrGWnc3y+UYwYPESex8uN+pNzn6Z0FLzZ70MMCzh6A4lx6278QAAxlPCckgnM9VXIg==
+  dependencies:
+    react-modal "~3.4.1"
+    ricos-common "8.21.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+
+ricos-schema@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/ricos-schema/-/ricos-schema-8.21.0.tgz#84e4f296142e23d2e3e27521d3da043127c441bd"
+  integrity sha512-gfbSAUvHt/tFnLnysp3+2acC7URKeebdnxROH95Y/A6X4Mylvuh0Ugrr13e1AhBbPnfHkZIzIEyxMmXpSGRoYA==
+
+ricos-viewer@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/ricos-viewer/-/ricos-viewer-8.21.0.tgz#3d75de963504a9e323b7d8d1bcdc8b0393d6117d"
+  integrity sha512-hx/HQ1bt3+yJT5dXrVtbkVnyxP6DpzibZ9MVO3adaO80hPQIuGDm4rxSMYLqityic6tdBtfGgB62HijRNClQGg==
+  dependencies:
+    react-modal "~3.4.1"
+    ricos-common "8.21.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-fullscreen "8.21.0"
+    wix-rich-content-text-selection-toolbar "8.21.0"
+    wix-rich-content-viewer "8.21.0"
+
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
@@ -28653,6 +28704,379 @@ wix-redraft@^1.1.2:
   integrity sha512-T0LhyOL+MVs0FWYxS6kza9hNnW8ZPZh0ca+Z7LV/Y/HZ7Iomed1nR58hhyKA2pmE0M30YPLc0bAuoWplj1rkyQ==
   dependencies:
     punycode "^1.4.1"
+
+wix-rich-content-common@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-common/-/wix-rich-content-common-8.21.0.tgz#4371e627d1a7d865eff85efcbc6e5b7ec553f4e7"
+  integrity sha512-5lgqzaDbsYmHenJPUO805i09Pn04uf8wtkJySFrrHYG1ezffu7cZOOhFDemxG7c3tOXSMs2m+K4EPn5NDwwFCQ==
+  dependencies:
+    i18next "~10.6.0"
+    jsonschema "~1.2.4"
+    linkify-it "^2.1.0"
+    react-i18next "^7.0.0"
+    react-intersection-observer "~8.24.1"
+    react-portal-tooltip "^2.4.7"
+    ricos-content "8.21.0"
+
+wix-rich-content-editor-common@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-editor-common/-/wix-rich-content-editor-common-8.21.0.tgz#1e70d9cd1627bfd42670e3076f8ffef0d12050bb"
+  integrity sha512-dsG4NldCCxSrRsrpUPZE7aP5JsNv6lNXb/rkat5xyLX4vWarERrTwZ6HNwKW1SRcKD3gW7MZHXXxbG3Xi2t9Iw==
+  dependencies:
+    "@wix/draft-js" "0.0.10"
+    downshift "3.2.12"
+    focus-trap "~2.4.6"
+    react-window "~1.5.0"
+    wix-rich-content-common "8.21.0"
+
+wix-rich-content-editor@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-editor/-/wix-rich-content-editor-8.21.0.tgz#e34815e94790dcceb12d746d548e87b149f55a4c"
+  integrity sha512-/TyHDB9lCyqp9w5BaBPygMJbiMAgU4QqWzTBdY14Bqi/r1dprjjRvH2w6I/a5F+UgnN97+g48O6kfsDuMNYDLg==
+  dependencies:
+    draft-js-drag-n-drop-plugin "~2.0.4"
+    draft-js-list-plugin "^1.0.2"
+    draft-js-plugins-editor "~3.0.0"
+    draftjs-conductor "1.0.1"
+    forked-draft-js-focus-plugin "^3.0.1"
+    react-click-outsider "1.1.1"
+    react-measure "~2.3.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-fullscreen@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-fullscreen/-/wix-rich-content-fullscreen-8.21.0.tgz#73873e67803d29405caebe8b943056ea2448f3d5"
+  integrity sha512-dmcivwSI06bIGiNwreEtniM1SWpo00GEiuGMf+qdQ7r89aSxchbo06xAVg6dUcDzXyk31yCwYfGaFYzEVPQRZw==
+  dependencies:
+    fscreen "1.0.2"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-plugin-gallery "8.21.0"
+
+wix-rich-content-plugin-accordion@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-accordion/-/wix-rich-content-plugin-accordion-8.21.0.tgz#3b75fb50e2af66cb8f013d7d81f16d8b16139d07"
+  integrity sha512-clmIQvKiOwqmL99b+5QlXzua7aZBZrYoMdhHtbsJicqsFjRGZIudPygZ++bNBY4ZD+K905GuNaEpNviNLtzufA==
+  dependencies:
+    react-beautiful-dnd "13.0.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-button@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-button/-/wix-rich-content-plugin-button-8.21.0.tgz#2ab56b79490cd72d2d3d1e200f6ec153e127b4d6"
+  integrity sha512-4pEOG6E9Fv7/MjY2CJ2RV5cAHh3fvaYQrhDDZoT++nir/7AsIPntH8+RekCGrJj9fB0ho1jCXiYoQlBvdXvx6Q==
+  dependencies:
+    react-custom-scrollbars "^4.2.1"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-code-block@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-code-block/-/wix-rich-content-plugin-code-block-8.21.0.tgz#ca39bc7511c9ce11f7168b1bff220bae272380bd"
+  integrity sha512-WteuRnaSp6NrvIOBAdyvPjXKPxBe6w+McPolWKrD4e9KudfzQoasSQjZfzrAxG6G5dXd+4j0ehqeNSWDj1ff8g==
+  dependencies:
+    draft-js-code "~0.3.0"
+    prismjs "~1.16.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-commons@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-commons/-/wix-rich-content-plugin-commons-8.21.0.tgz#b31dc894e095108adcec93ee14708ba559f5318b"
+  integrity sha512-1aSjjUf0mq7uACVtdzRbIMpsMzM7k6nr22IZNyGQoAUR5U6DYfSg3sPYsOOGQ4M+An5NgItdMxumh5Aix3knfQ==
+  dependencies:
+    react-colorful "^4.4.3"
+    react-measure "~2.3.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+
+wix-rich-content-plugin-divider@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-divider/-/wix-rich-content-plugin-divider-8.21.0.tgz#58a5cbbaa90e10683fec29d0b6d16c5ca237bbe6"
+  integrity sha512-CEXl7WABHG9wU26YDy4r8jGsObYtyDJjYHz8yCLNZIvKbcd4SEF4czPfUum5V7TUE2CI9IUeZytKMrXfUp/fLA==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-emoji@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-emoji/-/wix-rich-content-plugin-emoji-8.21.0.tgz#12a50065a0334da65237f6a93cabd6e711ced529"
+  integrity sha512-bE+gGKYM3zi+ITUBK0ytJTcLFepkA2IiQmUd0HmuRvT/PCkEwOyYtg21VJ8deC2c/4gInx1EUQQ9fPtu8oPx1A==
+  dependencies:
+    react-custom-scrollbars "^4.2.1"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-file-upload@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-file-upload/-/wix-rich-content-plugin-file-upload-8.21.0.tgz#cb2af37f457eba3529cbaab2eeda70bcd14305bf"
+  integrity sha512-bj1eTbtGYekua6RUWaeDDoQFwicsZVA72ucGu0MV8SQush5MymbQGyfqhj1/U/3dsp1gf+0nJqPMFi77OJQT8g==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-gallery@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-gallery/-/wix-rich-content-plugin-gallery-8.21.0.tgz#f5effb1b2bf818079dfe1ce1fc9deea386976372"
+  integrity sha512-SvkrL7ct9iCU9JfXC98/5uIkLokf5oPm7JVy0fQtPMqtzYH/8KGk/ZCTwl3NDRAmHvysa5ASAW31QL7RYBLlVg==
+  dependencies:
+    image-client-api "1.2218.0"
+    pro-gallery "2.4.13"
+    react-sortable-hoc "^0.6.8"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-giphy@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-giphy/-/wix-rich-content-plugin-giphy-8.21.0.tgz#abe34863c350f2a9b9908b975d0a1a7d87ace51f"
+  integrity sha512-QKozTvUeOhrd7t9T+3CHazJbsiMUyxq7FrUa2VpYRtB4cE2Ua8jnKAj0+eCuH78tBLeEZnT5KvCroXftm1wffw==
+  dependencies:
+    giphy-js-sdk-core "~1.0.6"
+    react-custom-scrollbars "^4.2.1"
+    react-infinite-scroller "^1.2.4"
+    react-md-spinner "~1.0.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-hashtag@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-hashtag/-/wix-rich-content-plugin-hashtag-8.21.0.tgz#061192079d95575a55467976a478213743640f5a"
+  integrity sha512-/RzBEi6wNCs4oywsp/N+dNrMl4yygLsImkKJJ/WXNL2ajesN+qnf0YDGr31nNKuvpEMf8isT5beAMqTgH3Katg==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-headers-markdown@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-headers-markdown/-/wix-rich-content-plugin-headers-markdown-8.21.0.tgz#c1c4d83a2097814e2152103b1386ab02448ef4b7"
+  integrity sha512-OUpREXeCR569rNfwN/Q0PCPRYkuDXG8/hel80mtg8+qC3bCOvW4Ri/lvmqxfpJwZswfGFAOwrtfnaEgusBo1kA==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-headings@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-headings/-/wix-rich-content-plugin-headings-8.21.0.tgz#43a0312362f894e8a20bc4d7b8c7beba4fd20074"
+  integrity sha512-jO1KdCBPguZZDp/roVFPZXz2MGEnFwqzh+KQsDxduiLl+mfpndVVHfrinFhkTyCNzKqRVkTIfHwE9ViVCn/z7A==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-html@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-html/-/wix-rich-content-plugin-html-8.21.0.tgz#381b126810d659a969a9c906d2a62bd391c2fb31"
+  integrity sha512-LyZNdektpEZ1DfGg1td/aU7uA8setcDv2FA2floFfsuT+nvcTIPcEU4ZH4W2liWdRZIWV/oznnfxYgxDp87fzA==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-image@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-image/-/wix-rich-content-plugin-image-8.21.0.tgz#303986649f15c05c11a7060c8eb95caa32445445"
+  integrity sha512-x43HmaoxSCN9oywazXI9eY7fto1ZFrRhr6Pbz4aaQxgEyt7DSOuosZ/cwWja1Rc5b1Hbd73YQoXsKnv5h81IaA==
+  dependencies:
+    image-client-api "1.2218.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-indent@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-indent/-/wix-rich-content-plugin-indent-8.21.0.tgz#5705d781ce4319281f642a6322ee84ea014ec87f"
+  integrity sha512-XRj39aCwD4LyJtlkTjzSWIecDHJ+L/MrCTDn8/hqOnborks2/FBTQIvnkMx2UzRgxh7jWsuwtRDhG7KLaDYTsw==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-line-spacing@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-line-spacing/-/wix-rich-content-plugin-line-spacing-8.21.0.tgz#1c546c37ae9720902f2d2e217dc4c5589011179a"
+  integrity sha512-txNY+lxx4BMRe+aZLUZSWG1JRJm5QBu5J06WYEcGomZfXy9gS4o4foOme1VdWoho9CjrYDyMwIER1gXA3sNY2A==
+  dependencies:
+    react-modal "~3.4.1"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-link-preview@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-link-preview/-/wix-rich-content-plugin-link-preview-8.21.0.tgz#7c25c33c2c10a5d71e2d45e467a6e90b0981e11b"
+  integrity sha512-24mnyY/ilshnCZf1PIHeKrh+lES/P+jEb7mNuik04xPo0bH3jtZckY1tCnLVqwMmZfXCAX7eFe9374RUaikdUg==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+    wix-rich-content-plugin-html "8.21.0"
+
+wix-rich-content-plugin-link@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-link/-/wix-rich-content-plugin-link-8.21.0.tgz#4fb712dfcefa18c6b53703d3886f329337d7115d"
+  integrity sha512-TgsRAYuhdq5kTzUiqZ8IY3FBgpX5gOcOWK46eCGvXJq1Bvr2L6jUQnUQxfLR4g4zLIQoZl8aYIi79t+8POJ5Yg==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+    wix-rich-content-plugin-link-preview "8.21.0"
+
+wix-rich-content-plugin-map@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-map/-/wix-rich-content-plugin-map-8.21.0.tgz#45c3e2f02452def9cdd8bdfccf53eb443459a20f"
+  integrity sha512-JFMwZ1PRC9UgmC89hpxFRJT/ZMl2nj7bn6tIW1/REuCAFe5t1XVqJ/7ceHHH4nKsTKGjVLDtNqEEuYuLVdSS0Q==
+  dependencies:
+    react-custom-scrollbars "^4.2.1"
+    react-google-maps "~9.4.5"
+    react-google-maps-loader "~4.2.5"
+    react-google-places-suggest "~3.8.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-mentions@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-mentions/-/wix-rich-content-plugin-mentions-8.21.0.tgz#dc47ab6cce56eda6119f4840e2f906dce3a77560"
+  integrity sha512-jYBQ2GsjbFYzHndhHCYqe5ULUIq4AVguSM1AAoH+juKDR3gxXlGTQ5X3BMAQZevsvvner1sM0+CtU3ZPmx4psw==
+  dependencies:
+    draft-js-mention-plugin "~3.1.3"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-social-polls@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-social-polls/-/wix-rich-content-plugin-social-polls-8.21.0.tgz#e964aee64f5390439650dd81992ef672f957b5dd"
+  integrity sha512-5sfjQ4Nao/wH5YWtM8nxMyXWXNwgnQrS5wp7T1UcgXKe1CSJrjp4JQ5jZSoQjJAhz3qQ9zxPewz2ghmp1KY59A==
+  dependencies:
+    axios "^0.19.2"
+    react-flip-move "^3.0.4"
+    react-infinite-scroller "^1.2.4"
+    react-modal "~3.4.1"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-sound-cloud@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-sound-cloud/-/wix-rich-content-plugin-sound-cloud-8.21.0.tgz#d816c1f56cf9f9aa159995753c12487681cd40bd"
+  integrity sha512-opA0IQQHoNXD0Pn75uX2Ss3Wp+2rDJEXDmgROd0sw26QvIR3EfHQJA0zwmAeDTPGyWtykI0K+8qshOJihyfrdw==
+  dependencies:
+    react-player "~1.14.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-spoiler@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-spoiler/-/wix-rich-content-plugin-spoiler-8.21.0.tgz#a250ebdf9fe0dab8f6073d2597fb1b0ef749467c"
+  integrity sha512-jK9MCzoOwyAAjYa747z1naGxC51mOr0hJWV8cZjjVXWpm2IwNqlhhSPlTn7JIJ93TCOl1wpgAvgvwi35YGVikw==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-table@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-table/-/wix-rich-content-plugin-table-8.21.0.tgz#ea72a5515d2a3ef79c1071a4e3eb55470e8360bf"
+  integrity sha512-HfIQwcO4FW/SEOL6ET1sHo0WnZyPxIGdez3gB12pkZIzHVrKT916ChW/bAsaLR2qsxVPe7oCNOqmWCQ1l+VwxA==
+  dependencies:
+    wix-react-datasheet "1.5.6"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+    wix-rich-content-toolbars "8.21.0"
+
+wix-rich-content-plugin-text-color@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-text-color/-/wix-rich-content-plugin-text-color-8.21.0.tgz#f4cd7cff8272a204b161454e2f82c130b150c734"
+  integrity sha512-wA7rnB8HvZ71pHLmsr/GWFfJr1HWaa+D8BZVbMvkPTgrSkuIQmaXM7HeJyv3ubpta18IPPsr9VS4uI5p398UFw==
+  dependencies:
+    react-modal "~3.4.1"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-undo-redo@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-undo-redo/-/wix-rich-content-plugin-undo-redo-8.21.0.tgz#75bd16e035b1961cac54ad67ddb7f4d401ec7f27"
+  integrity sha512-TeT1g7SzKXLgcgc8NO/+W42rNNg8UOTfAeGPajTHtb0+PGadc8Q1AKa6vzSa8PdvmTMEsRqZee0tsPedicom7A==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-unsupported-blocks@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-unsupported-blocks/-/wix-rich-content-plugin-unsupported-blocks-8.21.0.tgz#e5b55c6f8bca8db5dc488720b5d886a174b78109"
+  integrity sha512-iRCyBEccpnnhG2Kkr26z/pVAga0wn+NguxAqgSKFNG3pCFdf1l4b/AlMpEPYqCll927lWAO5Ado5alTYxr1ifQ==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-vertical-embed@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-vertical-embed/-/wix-rich-content-plugin-vertical-embed-8.21.0.tgz#00600b39007d22d98cec82f82ff4826a5b6fe2aa"
+  integrity sha512-M6Tw4GdmM5h3RxtoITaM3Axylgu91DGEtltx93Yy+u9FFfKm0ZBDYjHY0Q2jJstjAF2eOZnfSLBLPjfdVovC4g==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-plugin-video@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-video/-/wix-rich-content-plugin-video-8.21.0.tgz#23b45fd203a430b1d6377024ea713f5cf48ab959"
+  integrity sha512-vsvOW/1wQZs2Off8ZeNYC8H+GM5f+d94kX8SKz6FuHozCsqaV3B/R1bNfmWvxa7RRAn7XkvL5X01uMLyupK4rQ==
+  dependencies:
+    react-player "~1.14.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-preview@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-preview/-/wix-rich-content-preview-8.21.0.tgz#42f463d0d6e79c00517897d44d501ce391a7bd03"
+  integrity sha512-n3gxepwHF1X9O8/bF2Lwn2pe9c+8vx7+EwmUVDYXSU66eqm5/RwSwrojN8lGDcMXB53eIBqy9dMZA0rPLbT6Ig==
+  dependencies:
+    react-measure "~2.3.0"
+    ricos-content "8.21.0"
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-viewer "8.21.0"
+
+wix-rich-content-text-selection-toolbar@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-text-selection-toolbar/-/wix-rich-content-text-selection-toolbar-8.21.0.tgz#8fca90d5adf6ec876161b544b33f6daf76535afc"
+  integrity sha512-IPdDLQUqHNQgZHBMUl3JfqCvdrUM2HZU5svcK7ryQBL5WNvfDy5FHxdme3By5gbbdRY88JuXqMDBxeQH1+dL0A==
+
+wix-rich-content-toolbars@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-toolbars/-/wix-rich-content-toolbars-8.21.0.tgz#97069fa5e5864897230bf887fa72c75a9b0ff5b5"
+  integrity sha512-NAxjiwwIXzdJsq9ebOxnLfiL2dX0LYqt4o+X2GOB+kGmWERO3hpTOoDcFkO6jZ7P/LAUtXgLmdcrsx4S6FQGaA==
+  dependencies:
+    wix-rich-content-common "8.21.0"
+    wix-rich-content-editor-common "8.21.0"
+    wix-rich-content-plugin-commons "8.21.0"
+
+wix-rich-content-viewer@8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-viewer/-/wix-rich-content-viewer-8.21.0.tgz#48306acf46f22e39b3ca43571c18b4dae18e2150"
+  integrity sha512-seZ6Ai7MLxKESyhUtWVhGGKwgZCtOLyOK+Y5inpGJxdaWO3BYHQuHqbheHIp3fBLvRYGo7vmK0j0C8T2qxpU8Q==
+  dependencies:
+    wix-redraft "^1.1.2"
+    wix-rich-content-common "8.21.0"
 
 wix-statics-parent@*:
   version "1.0.1133"
