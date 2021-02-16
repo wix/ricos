@@ -122,7 +122,9 @@ export const createEditorCommands = (
     );
 
   const editorState = {
-    getSelection: (): SelectionState => getEditorState().getSelection(),
+    // TODO: check if needed, plus type error using SelectionState, not sure why
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getSelection: (): any => getEditorState().getSelection(),
     getSelectedBlockKey: () =>
       getEditorState()
         .getSelection()
