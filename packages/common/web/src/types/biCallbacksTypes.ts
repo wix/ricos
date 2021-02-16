@@ -3,13 +3,8 @@ interface biCallbackParams {
   version?: string;
 }
 
-export enum EntryType {
-  PLUS = 'plusButton',
-  MORE = 'moreButton',
-  FOOTER = 'footerButton',
-  OTHER = '',
-}
-interface onPluginAddStepArgs extends biCallbackParams {
+type EntryType = ToolbarType;
+export interface onPluginAddStepArgs extends biCallbackParams {
   pluginId: string;
   pluginDetails: unknown;
   entryPoint: ToolbarType;
