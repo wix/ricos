@@ -55,8 +55,7 @@ export function generateInsertPluginButtonProps({
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
   const onPluginAddStep = (step: onPluginAddStepArgs['step']) => {
     helpers?.onPluginAddStep?.({
-      //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
-      entryType: toolbarName,
+      entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
       pluginId: blockType,
       pluginDetails: '',

@@ -16,12 +16,16 @@
     Click to see more.
   </summary>
   
-  ### :rocket: New Feature
-  - `ricos-editor`
-    - [#2153](https://github.com/wix-incubator/rich-content/pull/2153) getContentTraits expose isLastChangeEdit
-  ### :bug: Bug Fix
-  - `link`
-    - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2153](https://github.com/wix-incubator/rich-content/pull/2153) getContentTraits expose isLastChangeEdit
+### :bug: Bug Fix
+- `link`
+  - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
+
+### :house: Internal
+- `ricos-editor`
+  - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
 
 </details>
 <hr/>
