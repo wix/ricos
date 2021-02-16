@@ -74,7 +74,7 @@ function extractEntities(block, newBlocksEntitiesData, entityMap) {
   const { entityRanges = [], key: blockKey } = block;
   const entityKey = entityRanges[0]?.key;
   const currentEntity = entityMap[entityKey];
-  const { entityData: newEntityData } = newBlocksEntitiesData[blockKey];
+  const newEntityData = newBlocksEntitiesData[blockKey]?.entityData;
   return { currentEntity, newEntityData };
 }
 

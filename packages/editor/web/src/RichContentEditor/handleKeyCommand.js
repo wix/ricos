@@ -24,7 +24,7 @@ export default (updateEditorState, customHandlers, blockType, onBackspace, inner
         innerRCERenderedIn
       );
     } else if (isUndoRedo(command)) {
-      return customHandlers[command](editorState);
+      return customHandlers[command](editorState, event);
     } else {
       newState = customHandlers[command](editorState, event);
     }

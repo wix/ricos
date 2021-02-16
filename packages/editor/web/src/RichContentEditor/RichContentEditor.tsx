@@ -252,6 +252,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.reportDebuggingInfo();
     this.preloadLibs();
     !isEmpty(this.props.experiments) && console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
+    document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
   }
 
   componentWillMount() {
@@ -265,7 +266,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.copySource) {
       this.copySource.unregister();
     }
+    document?.removeEventListener('beforeinput', this.preventDefaultKeyCommands);
   }
+
+  preventDefaultKeyCommands = event => {
+    if (['historyUndo', 'historyRedo'].includes(event.inputType)) {
+      event.preventDefault();
+    }
+  };
 
   // imports dynamic chunks conditionally
   preloadLibs() {
@@ -625,7 +633,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     event?.preventDefault();
   };
 
-  handleUndoCommand = (editorState: EditorState) => {
+  handleUndoCommand = (editorState: EditorState, event) => {
+    event?.preventDefault();
     if (this.props.isInnerRCE) {
       this.props.handleUndoCommand?.();
     } else {
@@ -634,7 +643,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return 'handled';
   };
 
-  handleRedoCommand = (editorState: EditorState) => {
+  handleRedoCommand = (editorState: EditorState, event) => {
+    event?.preventDefault();
     if (this.props.isInnerRCE) {
       this.props.handleRedoCommand?.();
     } else {
