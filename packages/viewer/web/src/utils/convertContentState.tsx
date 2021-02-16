@@ -155,7 +155,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         return (
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore-line
-          <LazyHydrate isBrowser={isBrowser} key={wrapperKey || '1'}>
+          <LazyHydrate whenVisible isBrowser={isBrowser} key={wrapperKey || '1'}>
             {resultBlock}
           </LazyHydrate>
         );
