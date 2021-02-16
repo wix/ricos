@@ -639,6 +639,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       this.props.handleUndoCommand?.();
     } else {
       this.updateEditorState(undo(editorState || this.state.editorState));
+      this.setState({ readOnly: false });
     }
     return 'handled';
   };
@@ -649,6 +650,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       this.props.handleRedoCommand?.();
     } else {
       this.updateEditorState(redo(editorState || this.state.editorState));
+      this.setState({ readOnly: false });
     }
     return 'handled';
   };
