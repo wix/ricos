@@ -26,6 +26,7 @@ const createMobileToolbar = ({
   config,
   locale,
   addPluginMenuConfig,
+  globalContext,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
@@ -56,6 +57,7 @@ const createMobileToolbar = ({
     displayOptions,
     toolbarDecorationFn,
     locale,
+    globalContext,
   });
 };
 

@@ -84,7 +84,7 @@ export default class HeadingButton extends Component {
         );
   };
 
-  getModalParent = () => this.context.editorWrapper;
+  getModalParent = () => this.context.editorWrapper.current;
 
   render() {
     const { theme, isMobile, t, tabIndex, customHeadings } = this.props;

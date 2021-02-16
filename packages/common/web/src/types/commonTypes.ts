@@ -12,6 +12,7 @@ import { BoundingRect } from 'react-measure';
 import { ContentBlock, SelectionState, EditorState } from 'draft-js';
 
 export { Pubsub, Store } from '../Utils/simplePubsub';
+import { GlobalContextInterface } from '../Utils/contexts';
 
 export type ModalStyles = ReactModalStyles;
 export type Styles = Record<string, CSSProperties>;
@@ -78,6 +79,7 @@ interface CommonContextType {
   helpers: Helpers;
   isMobile: boolean;
   iframeSandboxDomain?: string;
+  globalContext?: GlobalContextInterface;
 }
 
 export interface EditorContextType extends CommonContextType {

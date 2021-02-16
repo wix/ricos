@@ -1,7 +1,7 @@
 import React from 'react';
 import { camelCase } from 'lodash';
 import StaticToolbar from './StaticToolbar';
-import { simplePubsub, getLangDir } from 'wix-rich-content-common';
+import { simplePubsub, getLangDir, GlobalContext } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import classNames from 'classnames';
 
@@ -28,6 +28,7 @@ export default (data = {}) => {
     setEditorState,
     config,
     footerToolbarConfig,
+    globalContext,
   } = data;
 
   const toolbarProps = {
@@ -57,6 +58,9 @@ export default (data = {}) => {
     [Styles.staticToolbarWrapper]: toolbarProps.isMobile,
   });
 
+  const Wrapper = globalContext ? GlobalContext.Provider : React.Fragment;
+  const wrapperProps = globalContext ? { value: globalContext } : {};
+
   return {
     name,
     initialize: ({ getEditorState, setEditorState }) => {
@@ -69,9 +73,11 @@ export default (data = {}) => {
       return editorState;
     },
     Toolbar: props => (
-      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
-        <StaticToolbar {...toolbarProps} {...props} />
-      </div>
+      <Wrapper {...wrapperProps}>
+        <div className={staticToolbarClassName} dir={getLangDir(locale)}>
+          <StaticToolbar {...toolbarProps} {...props} />
+        </div>
+      </Wrapper>
     ),
   };
 };

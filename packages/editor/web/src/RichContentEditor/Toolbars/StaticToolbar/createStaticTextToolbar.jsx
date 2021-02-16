@@ -86,6 +86,7 @@ export default ({
   config,
   locale,
   setEditorState,
+  experiments,
 }) => {
   const staticTextTheme = getStaticTextTheme(theme);
   const structure = getTextButtonsFromList({
@@ -121,5 +122,6 @@ export default ({
     locale,
     setEditorState,
     config,
+    experiments,
   });
 };

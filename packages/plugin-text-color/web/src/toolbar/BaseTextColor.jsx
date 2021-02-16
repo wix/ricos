@@ -22,7 +22,9 @@ export default class BaseTextColor extends Component {
     this.styleMapper = styleMapper(props.pluginParams.type);
   }
 
-  getModalParent = () => this.context.editorWrapper;
+  getModalParent = () => {
+    return this.context.editorWrapper.current;
+  };
 
   openPanel = () => {
     const { isMobile, setKeepOpen } = this.props;

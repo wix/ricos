@@ -78,7 +78,7 @@ export default class LineSpacingButton extends Component {
 
   fixSelection = EditorState.forceSelection;
 
-  getModalParent = () => this.context.editorWrapper;
+  getModalParent = () => this.context.editorWrapper.current;
 
   render() {
     const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar } = this.props;
