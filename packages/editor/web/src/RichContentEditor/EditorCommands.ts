@@ -122,7 +122,7 @@ export const createEditorCommands = (
     );
 
   const editorState = {
-    getSelection: getEditorState().getSelection,
+    getSelection: (): SelectionState => getEditorState().getSelection(),
     getSelectedBlockKey: () =>
       getEditorState()
         .getSelection()
