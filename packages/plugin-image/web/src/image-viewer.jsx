@@ -11,6 +11,7 @@ import {
   WIX_MEDIA_DEFAULT,
   anchorScroll,
   addAnchorTagToUrl,
+  GlobalContext,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -29,6 +30,8 @@ class ImageViewer extends React.Component {
     this.preloadRef = React.createRef();
     this.imageRef = React.createRef();
   }
+
+  static contextType = GlobalContext;
 
   componentDidMount() {
     this.setState({ ssrDone: true });
@@ -82,8 +85,8 @@ class ImageViewer extends React.Component {
       if (seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
-      } else if (this.state.container) {
-        const { width } = this.state.container.getBoundingClientRect();
+      } else if (this.state.container || containerWidth) {
+        const width = containerWidth || this.state.container.getBoundingClientRect().width;
         requiredWidth = width || src?.width || 1;
         if (this.props.isMobile) {
           //adjust the image width to viewport scaling and device pixel ratio
@@ -309,8 +312,11 @@ class ImageViewer extends React.Component {
     }
     const isGif = imageSrc?.highres?.endsWith?.('.gif');
     setComponentUrl?.(imageSrc?.highres);
-    const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
-    const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
+
+    const { containerWidth } = this.context;
+
+    const shouldRenderPreloadImage = !seoMode && !containerWidth && imageSrc && !isGif;
+    const shouldRenderImage = (imageSrc && (containerWidth || seoMode || ssrDone)) || isGif;
     const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
