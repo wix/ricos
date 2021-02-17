@@ -327,7 +327,7 @@ describe('text color mobile', () => {
     });
   });
   it('allow to change text color on mobile', function() {
-    // cy.switchToMobile();
+    cy.switchToMobile();
     changeTextColor(this.test.title);
   });
 });
