@@ -102,7 +102,7 @@
 .colorPicker_add_color_button {
   margin-top: -2px;
   svg{
-    transform: scale(0.72)
+    width: 18px;
   }
   @include phone {
     align-self: flex-end;
@@ -134,7 +134,6 @@
   width: 180px;
   @include phone {
     width: 100%;
-    justify-content: unset;
   }
 }
 

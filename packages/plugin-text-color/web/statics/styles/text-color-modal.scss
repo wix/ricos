@@ -26,7 +26,8 @@ $PANEL_MAX_WIDTH: 360px;
   right: 0px;
   top: unset;
   transform: unset;
-  width: 352px;
+  width: 100%;
+  max-width: 352px;
   z-index: 8;
   &:focus {
     box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);

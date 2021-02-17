@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `color-picker`
+  - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update style for mobile devices
 
 </details>
 <hr/>

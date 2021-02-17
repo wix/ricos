@@ -70,8 +70,12 @@ class CustomColorPickerDialog extends Component {
             theme={theme}
           />
         </Suspense>
-        <hr className={styles.colorPickerDialog_separator} />
-        {!isMobile && <ActionButtons onCancel={this.onCancel} onUpdate={this.onUpdate} t={t} />}
+        {!isMobile && (
+          <>
+            <hr className={styles.colorPickerDialog_separator} />
+            <ActionButtons onCancel={this.onCancel} onUpdate={this.onUpdate} t={t} />{' '}
+          </>
+        )}
       </div>
     );
   }
