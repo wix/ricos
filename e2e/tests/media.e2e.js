@@ -124,7 +124,7 @@ describe('plugins', () => {
       });
     });
 
-    context.only('innerRCE images full screen', () => {
+    context('innerRCE images full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('inner-rce-images', usePlugins(plugins.all))
       );
