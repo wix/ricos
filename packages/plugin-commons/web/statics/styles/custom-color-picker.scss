@@ -21,6 +21,9 @@
   width: auto;
   line-height: 20px;
   display: inline-block;
+  @include phone {
+    font-size: 16px;
+  }
 }
 
 .customColorPicker_input_container {
@@ -32,7 +35,8 @@
   height: inherit;
   position: relative;
   @include phone {
-    width:233px !important;
+    margin: 0 20px;
+    width:233px;
     font-size: 16px;
   }
 }  
@@ -43,6 +47,10 @@
   height: 20px;
   border-radius: 15px;
   border: solid 1px #e0e0e3;
+  @include phone {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .hexColorInput{
@@ -65,22 +73,21 @@
   transform: translate(0, -50%);
   @include phone{
     height: 14px;
+    left: 10px;
   }
 }
 
 :global {
   @import '~react-colorful/dist/index.css';
   
-  @media only screen and (min-width: 640px) {
-    .react-colorful {
-     width: 187px !important;
-     margin: 12px auto;
-     .react-colorful__saturation {
-      height: 126px;
-    }
-  }}
-
   .react-colorful {
+    @include Desktop {
+      width: 187px !important;
+      margin: 12px auto;
+      .react-colorful__saturation {
+       height: 126px;
+     }
+    }
     height: 100% !important;
     @include phone {
       margin: 0 auto;

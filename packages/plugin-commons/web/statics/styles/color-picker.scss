@@ -66,6 +66,12 @@
     top: -5px;
     left: -5px;
     outline: 0;
+    @include phone {
+      top: -8px;
+      left: -8px;
+      width: 48px;
+      height: 48px;
+    }
   }
   &.colorPicker_button_transparent {
     background: linear-gradient(
@@ -89,9 +95,7 @@
   width: auto;
   @include phone {
     margin: 0 auto;
-    margin-bottom: 24px;
-    height: 125px;
-    width: 352px;
+    height: 100%;
   }
 }
 
@@ -99,6 +103,16 @@
   margin-top: -2px;
   svg{
     transform: scale(0.72)
+  }
+  @include phone {
+    align-self: flex-end;
+    margin-left: 13px;
+    svg{
+      height: 34px;
+      width: 34px;
+      transform: none;
+      vertical-align: bottom;
+    }
   }
 }
 
@@ -146,34 +160,17 @@
   letter-spacing: normal;
   color: $action-color-fallback;
   cursor: pointer;
+  @include phone {
+    font-size: 16px;
+  }
 }
 
 .colorPicker_bottom_container {
   display: flex;
   justify-content: space-between;
   margin: 10px 10px 0px 10px;
-}
-
-.colorPicker_mobile{
-  .colorPicker_bottom_container {
-    justify-content: center;
-    padding: 7px 0;
-    margin: 0 0 25px 0;
-  }
-  .colorPicker_add_color_button {
-    align-self: flex-end;
-    margin-left: 13px;
-    svg{
-      height: 34px;
-      width: 34px;
-      transform: none;
-      vertical-align: bottom;
-    }
-  }
-  .colorPicker_palette{
-    height: 100%;
-  }
-  .colorPicker_reset_color_label {
-    font-size: 16px;
+  @include phone{
+      justify-content: center;
+      margin: 8px 0;
   }
 }

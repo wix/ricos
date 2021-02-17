@@ -8,6 +8,7 @@
   margin: 0;
   @include phone {
     width: 352px;
+    height: 330px;
     margin: 0 auto;
   }
 }
@@ -26,17 +27,34 @@
   padding: 0;
   color: $action-color-fallback;
   margin: 0 6px;
+  @include phone {
+    line-height: 1.5;
+    font-size: 16px;
+    width: 50px;
+    color: $primary-text-color;
+    background: transparent;
+    border:none;
+  }
 }
 
 .colorPickerDialog_button_update {
   background-color: $action-color-fallback;
   color: white;
+  @include phone {   
+    background-color:transparent;
+    color: $action-color-fallback;
+  }
 }
 
 .colorPickerDialog_buttons {
   display: flex;
   justify-content:center;
   margin: 12px;
+  @include phone {
+    display: flex;
+    justify-content:space-between;
+    margin: 5px 0px 5px 6px;
+  }
 }
 
 .colorPickerDialog_separator { 
@@ -46,22 +64,3 @@
   width: inherit;
   margin: 12px 0;
 }
-
-.colorPickerDialog_buttons_mobile {
-  display: flex;
-  justify-content:space-between;
-  margin: 12px 5px 12px 8px;
-}
-
-.colorPickerDialog_button_mobile{
-  line-height: 1.5;
-  font-size: 16px;
-  color: $primary-text-color;
-  background: transparent;
-  border:none;
-}
-
-.colorPickerDialog_button_update_mobile {
-  color: $action-color-fallback;
-}
-

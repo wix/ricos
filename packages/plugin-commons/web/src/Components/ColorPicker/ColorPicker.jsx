@@ -76,7 +76,7 @@ class ColorPicker extends PureComponent {
   renderColorButtons(colors, attributes) {
     const { styles } = this;
     const { schemeColor, isMobile } = this.props;
-    if (isMobile) {
+    if (isMobile && colors.length === 6) {
       colors.pop();
     }
     return colors.map((color, index) => (
@@ -163,12 +163,7 @@ class ColorPicker extends PureComponent {
     } = this;
     const { t, isMobile, theme, children } = this.props;
     return (
-      <div
-        className={classNames(styles.colorPicker, {
-          [styles.colorPicker_mobile]: this.props.isMobile,
-        })}
-        tabIndex={0}
-      >
+      <div className={classNames(styles.colorPicker)} tabIndex={0}>
         {this.state.isCustomColorPickerOpened
           ? this.props.onCustomPickerToggle({
               color: this.state.color,

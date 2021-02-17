@@ -6,35 +6,28 @@ import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
 
 const CustomColorPicker = lazy(() => import('./CustomColorPicker'));
 
-const ActionButtons = ({ isMobile, t }) => {
-  <div
-    className={
-      isMobile ? styles.colorPickerDialog_buttons_mobile : styles.colorPickerDialog_buttons
-    }
-  >
-    <button
-      className={
-        isMobile ? styles.colorPickerDialog_button_mobile : styles.colorPickerDialog_button
-      }
-      onClick={this.onCancel}
-    >
+const ActionButtons = ({ t, onCancel, onUpdate }) => (
+  <div className={styles.colorPickerDialog_buttons}>
+    <button className={styles.colorPickerDialog_button} onClick={onCancel}>
       {t('ColorPickerButtonLabel_Cancel')}
     </button>
     <button
-      className={
-        isMobile
-          ? classNames(
-              styles.colorPickerDialog_button_mobile,
-              styles.colorPickerDialog_button_update_mobile
-            )
-          : classNames(styles.colorPickerDialog_button, styles.colorPickerDialog_button_update)
-      }
+      className={classNames(
+        styles.colorPickerDialog_button,
+        styles.colorPickerDialog_button_update
+      )}
       data-hook="colorPickerUpdateButton"
-      onClick={this.onUpdate}
+      onClick={onUpdate}
     >
       {t('ColorPickerButtonLabel_Update')}
     </button>
-  </div>;
+  </div>
+);
+
+ActionButtons.propTypes = {
+  t: PropTypes.func,
+  onCancel: PropTypes.func,
+  onUpdate: PropTypes.func,
 };
 class CustomColorPickerDialog extends Component {
   constructor(props) {
@@ -67,7 +60,7 @@ class CustomColorPickerDialog extends Component {
     const { t, isMobile, theme } = this.props;
     return (
       <div className={styles.colorPickerDialog}>
-        {isMobile && <ActionButtons t={t} isMobile={isMobile} />}
+        {isMobile && <ActionButtons onCancel={this.onCancel} onUpdate={this.onUpdate} t={t} />}
         <Suspense fallback={<div>Loading...</div>}>
           <CustomColorPicker
             color={this.state.color}
@@ -78,7 +71,7 @@ class CustomColorPickerDialog extends Component {
           />
         </Suspense>
         <hr className={styles.colorPickerDialog_separator} />
-        {!isMobile && <ActionButtons t={t} isMobile={isMobile} />}
+        {!isMobile && <ActionButtons onCancel={this.onCancel} onUpdate={this.onUpdate} t={t} />}
       </div>
     );
   }
