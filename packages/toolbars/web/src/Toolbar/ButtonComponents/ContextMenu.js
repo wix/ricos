@@ -57,7 +57,7 @@ class ContextMenu extends PureComponent {
   renderOptions = () => {
     const { buttonList, theme } = this.props;
     const { isOpen, position } = this.state;
-    const visibility = isOpen ? { visibility: 'visible' } : { visibility: 'hidden' };
+    const display = isOpen ? { display: 'block' } : { display: 'none' };
 
     return (
       <div
@@ -65,7 +65,7 @@ class ContextMenu extends PureComponent {
         ref={this.setModalRef}
         style={{
           ...position,
-          ...visibility,
+          ...display,
         }}
       >
         {Object.values(buttonList).map((props, i) => {
