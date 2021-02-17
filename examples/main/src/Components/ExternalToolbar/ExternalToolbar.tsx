@@ -1,8 +1,8 @@
 import React, { Component, RefObject } from 'react';
 import { FileInput } from 'wix-rich-content-plugin-commons';
 import { BUTTON_TYPES } from 'ricos/editor-common';
-import FormattingGroupButton from 'ricos/editor-common/libs/FormattingGroupButton';
-import FormattingDropdownButton from 'ricos/editor-common/libs/FormattingDropdownButton';
+import FormattingGroupButton from 'wix-rich-content-editor-common/libs/FormattingGroupButton';
+import FormattingDropdownButton from 'wix-rich-content-editor-common/libs/FormattingDropdownButton';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import styles from './ExternalToolbar.scss';
 import { RichContentTheme } from 'ricos/common';

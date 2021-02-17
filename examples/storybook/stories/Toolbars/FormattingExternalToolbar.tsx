@@ -3,8 +3,8 @@ import React, { FunctionComponent, MouseEventHandler, ReactElement, useState } f
 import { Page, RichContentEditorBox } from '../Components/StoryParts';
 import { TOOLBARS, BUTTON_TYPES } from 'ricos/editor-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
-import FormattingGroupButton from 'ricos/editor-common/libs/FormattingGroupButton';
-import FormattingDropdownButton from 'ricos/editor-common/libs/FormattingDropdownButton';
+import FormattingGroupButton from 'wix-rich-content-editor-common/libs/FormattingGroupButton';
+import FormattingDropdownButton from 'wix-rich-content-editor-common/libs/FormattingDropdownButton';
 import EditorWrapper from '../Components/EditorWrapper';
 import s from './FormattingExternalToolbar.scss';
 

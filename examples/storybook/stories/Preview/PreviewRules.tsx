@@ -9,7 +9,7 @@ import {
 } from '../Components/StoryParts';
 
 import { createPreview } from 'ricos/preview';
-import { ContentStateTransformation } from 'ricos/content/libs/preview';
+import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import introState from '../../../../e2e/tests/fixtures/very-big-post.json';
