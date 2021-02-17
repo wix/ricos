@@ -37,7 +37,7 @@ export default function createLibsPackageJsons() {
         });
       }
       if (fs.existsSync('src/viewer.ts')) {
-        writePackageJson('viewer', '../viewer');
+        writePackageJson('viewer', '../dist/module.viewer');
       }
     },
   };
