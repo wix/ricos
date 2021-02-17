@@ -1,10 +1,6 @@
 {
   "name": "ricos-content",
-<<<<<<< HEAD
-  "version": "8.21.5-alpha.0",
-=======
   "version": "8.22.0",
->>>>>>> master
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -40,11 +36,7 @@
     "test:watchAll": "jest --verbose --watchAll"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "ricos-schema": "8.21.5-alpha.0",
-=======
     "ricos-schema": "8.22.0",
->>>>>>> master
     "to-camel-case": "1.0.0",
     "to-constant-case": "1.0.0",
     "to-slug-case": "1.0.0",

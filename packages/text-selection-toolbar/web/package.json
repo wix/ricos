@@ -1,10 +1,6 @@
 {
   "name": "wix-rich-content-text-selection-toolbar",
-<<<<<<< HEAD
-  "version": "8.21.5-alpha.0",
-=======
   "version": "8.22.0",
->>>>>>> master
   "author": {
     "name": "Dana Rish",
     "email": "danari@wix.com"

@@ -1,10 +1,6 @@
 {
   "name": "ricos-editor",
-<<<<<<< HEAD
-  "version": "8.21.5-alpha.0",
-=======
   "version": "8.22.0",
->>>>>>> master
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -49,17 +45,10 @@
   },
   "dependencies": {
     "react-modal": "~3.4.1",
-<<<<<<< HEAD
-    "ricos-common": "8.21.5-alpha.0",
-    "wix-rich-content-common": "8.21.5-alpha.0",
-    "wix-rich-content-editor": "8.21.5-alpha.0",
-    "wix-rich-content-editor-common": "8.21.5-alpha.0"
-=======
     "ricos-common": "8.22.0",
     "wix-rich-content-common": "8.22.0",
     "wix-rich-content-editor": "8.22.0",
     "wix-rich-content-editor-common": "8.22.0"
->>>>>>> master
   },
   "jest": {
     "globals": {
