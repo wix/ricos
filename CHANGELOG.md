@@ -20,11 +20,6 @@
 - `fullScreen`
   - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
 	
-  ### :bug: Bug Fix
-  - `link`
-    - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
-
-
 </details>
 <hr/>
 
