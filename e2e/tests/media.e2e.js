@@ -9,6 +9,7 @@ import {
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -119,6 +120,28 @@ describe('plugins', () => {
         cy.loadOutOfViewImagesInGallery();
         cy.waitForGalleryImagesToLoad();
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+      });
+    });
+
+    context('innerRCE images full screen', () => {
+      beforeEach('load editor', () =>
+        cy.loadRicosEditorAndViewer('innerrce-images', usePlugins(plugins.all))
+      );
+
+      it('expand image on full screen', function() {
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+          .parent()
+          .click();
+        cy.loadOutOfViewImagesInGallery();
+        cy.waitForGalleryImagesToLoad();
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
+        cy.get(`[data-hook=${'nav-arrow-back'}]`)
+          .click({ force: true })
+          .wait(200)
+          .click();
       });
     });
 
