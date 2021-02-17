@@ -1,50 +1,50 @@
 import React from 'react';
-import { createLinkPlugin, LINK_TYPE } from 'ricos/link';
+import { createLinkPlugin, LINK_TYPE } from 'ricos/link/editor';
 import {
   createLinkPreviewPlugin,
   LINK_PREVIEW_TYPE,
   LinkPreviewProviders,
-} from 'ricos/link-preview';
-import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'ricos/line-spacing';
-import { createHashtagPlugin, HASHTAG_TYPE } from 'ricos/hashtag';
-import { createEmojiPlugin, EMOJI_TYPE } from 'ricos/emoji';
-import { createImagePlugin, IMAGE_TYPE } from 'ricos/image';
-import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'ricos/undo-redo';
-import { createGalleryPlugin, GALLERY_TYPE } from 'ricos/gallery';
-import { createVideoPlugin, VIDEO_TYPE } from 'ricos/video';
-import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'ricos/html';
-import { createDividerPlugin, DIVIDER_TYPE } from 'ricos/divider';
+} from 'ricos/link-preview/editor';
+import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'ricos/line-spacing/editor';
+import { createHashtagPlugin, HASHTAG_TYPE } from 'ricos/hashtag/editor';
+import { createEmojiPlugin, EMOJI_TYPE } from 'ricos/emoji/editor';
+import { createImagePlugin, IMAGE_TYPE } from 'ricos/image/editor';
+import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'ricos/undo-redo/editor';
+import { createGalleryPlugin, GALLERY_TYPE } from 'ricos/gallery/editor';
+import { createVideoPlugin, VIDEO_TYPE } from 'ricos/video/editor';
+import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'ricos/html/editor';
+import { createDividerPlugin, DIVIDER_TYPE } from 'ricos/divider/editor';
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
   verticalEmbedProviders,
-} from 'ricos/vertical-embed';
-import { createExternalMentionsPlugin, EXTERNAL_MENTIONS_TYPE } from 'ricos/mentions';
-import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'ricos/code-block';
-import { createHeadingsPlugin, HEADINGS_DROPDOWN_TYPE } from 'ricos/headings';
-import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'ricos/sound-cloud';
-import { createGiphyPlugin, GIPHY_TYPE } from 'ricos/giphy';
-import { createHeadersMarkdownPlugin, HEADERS_MARKDOWN_TYPE } from 'ricos/headers-markdown';
-import { createMapPlugin, MAP_TYPE } from 'ricos/map';
-import { createPollPlugin, POLL_TYPE } from 'ricos/social-polls';
-import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'ricos/file-upload';
-import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'ricos/text-color';
-import { createSpoilerPlugin, SPOILER_TYPE, SpoilerEditorWrapper } from 'ricos/spoiler';
+} from 'ricos/vertical-embed/editor';
+import { createExternalMentionsPlugin, EXTERNAL_MENTIONS_TYPE } from 'ricos/mention/editor';
+import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'ricos/code-block/editor';
+import { createHeadingsPlugin, HEADINGS_DROPDOWN_TYPE } from 'ricos/heading';
+import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'ricos/sound-cloud/editor';
+import { createGiphyPlugin, GIPHY_TYPE } from 'ricos/giphy/editor';
+import { createHeadersMarkdownPlugin, HEADERS_MARKDOWN_TYPE } from 'ricos/headers-markdown/editor';
+import { createMapPlugin, MAP_TYPE } from 'ricos/map/editor';
+import { createPollPlugin, POLL_TYPE } from 'ricos/poll/editor';
+import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'ricos/file/editor';
+import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'ricos/text-color/editor';
+import { createSpoilerPlugin, SPOILER_TYPE, SpoilerEditorWrapper } from 'ricos/spoiler/editor';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
   createActionButtonPlugin,
   ACTION_BUTTON_TYPE,
-} from 'ricos/button';
-import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'ricos/text-color';
+} from 'ricos/button/editor';
+import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'ricos/text-color/editor';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
-import { createIndentPlugin } from 'ricos/indent';
-import { createTablePlugin, TABLE_TYPE } from 'ricos/table';
-import { createAccordionPlugin, ACCORDION_TYPE } from 'ricos/accordion';
+import { createIndentPlugin } from 'ricos/indent/editor';
+import { createTablePlugin, TABLE_TYPE } from 'ricos/table/editor';
+import { createAccordionPlugin, ACCORDION_TYPE } from 'ricos/accordion/editor';
 import { createUnsupportedBlocksPlugin } from 'ricos/unsupported-blocks';
-import { UNSUPPORTED_BLOCKS_TYPE } from 'ricos/commons';
+import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-plugin-commons/dist/styles.min.css';

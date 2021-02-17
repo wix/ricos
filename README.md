@@ -26,7 +26,7 @@ npm i ricos-editor
 Then add a basic rich text editor to your app. You can now test typing and adding formatting to your text:
 
 ```jsx
-import { RicosEditor } from 'ricos-editor';
+import { RicosEditor } from 'ricos/editor';
 import 'ricos-editor/dist/styles.min.css';
 
 <RicosEditor placeholder={'Type here!'} />;
@@ -41,13 +41,13 @@ npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
 Adding videos and dividers:
 
 ```jsx
-import { RicosEditor } from 'ricos-editor';
+import { RicosEditor } from 'ricos/editor';
 import 'ricos-editor/dist/styles.min.css';
 
-import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginVideo } from 'ricos/video/editor';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 
-import { pluginDivider } from 'wix-rich-content-plugin-divider';
+import { pluginDivider } from 'ricos/divider/editor';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 
 <RicosEditor placeholder={'Type here!'} plugins={[pluginDivider(), pluginVideo()]} />;

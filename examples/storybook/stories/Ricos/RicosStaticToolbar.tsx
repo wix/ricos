@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RicosEditor } from 'ricos/editor';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
-import { pluginDivider } from 'ricos/divider';
+import { pluginDivider } from 'ricos/divider/editor';
 import MobileDetect from 'mobile-detect';
 
 import inlineStylesState from '../../../../e2e/tests/fixtures/inline-styles.json';

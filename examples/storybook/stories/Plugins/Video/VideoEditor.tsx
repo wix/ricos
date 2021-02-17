@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RicosContent, RicosEditor } from 'ricos/editor';
-import { pluginVideo } from 'ricos/video';
+import { pluginVideo } from 'ricos/video/editor';
 
 const Editor: FunctionComponent<{
   content?: RicosContent;

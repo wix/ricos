@@ -1,5 +1,5 @@
 import React, { Component, RefObject } from 'react';
-import { FileInput } from 'ricos/commons';
+import { FileInput } from 'wix-rich-content-plugin-commons';
 import { BUTTON_TYPES } from 'ricos/editor-common';
 import FormattingGroupButton from 'ricos/editor-common/libs/FormattingGroupButton';
 import FormattingDropdownButton from 'ricos/editor-common/libs/FormattingDropdownButton';

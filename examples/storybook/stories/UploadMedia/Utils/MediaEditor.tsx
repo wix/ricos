@@ -1,9 +1,9 @@
 import React from 'react';
 import { RicosContent, RicosEditor, RicosEditorType } from 'ricos/editor';
-import { pluginVideo } from 'ricos/video';
-import { pluginImage } from 'ricos/image';
-import { pluginGallery } from 'ricos/gallery';
-import { pluginFileUpload } from 'ricos/file-upload';
+import { pluginVideo } from 'ricos/video/editor';
+import { pluginImage } from 'ricos/image/editor';
+import { pluginGallery } from 'ricos/gallery/editor';
+import { pluginFileUpload } from 'ricos/file/editor';
 import { RichContentEditor } from 'ricos/editor';
 import { Helpers } from 'ricos/common';
 

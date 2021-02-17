@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { RicosContent, RicosEditor } from 'ricos/editor';
 import { RichContentEditor } from 'ricos/editor';
-import { pluginHtml, htmlButtonsTypes } from 'ricos/html';
-import { pluginLinkPreview } from 'ricos/link-preview';
+import { pluginHtml, htmlButtonsTypes } from 'ricos/html/editor';
+import { pluginLinkPreview } from 'ricos/link-preview/editor';
 
 const HtmlWithDomainStory: FunctionComponent<{ content?: RicosContent }> = ({ content }) => {
   const { html, adsense } = htmlButtonsTypes;

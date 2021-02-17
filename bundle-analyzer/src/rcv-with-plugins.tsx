@@ -1,8 +1,8 @@
 import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
-import { linkTypeMapper } from 'wix-rich-content-plugin-link/viewer';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html/viewer';
+import { RichContentViewer } from 'ricos/viewer';
+import { imageTypeMapper } from 'ricos/image/viewer';
+import { linkTypeMapper } from 'ricos/link/viewer';
+import { htmlTypeMapper } from 'ricos/html/viewer';
 
 const typeMappers = [imageTypeMapper, linkTypeMapper, htmlTypeMapper];
 

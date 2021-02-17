@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { RicosEditor } from 'ricos/editor';
 import { RichContentEditor } from 'ricos/editor';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
-import { pluginImage } from 'ricos/image';
-import { pluginGallery } from 'ricos/gallery';
-import { pluginVideo } from 'ricos/video';
-import { pluginFileUpload } from 'ricos/file-upload';
+import { pluginImage } from 'ricos/image/editor';
+import { pluginGallery } from 'ricos/gallery/editor';
+import { pluginVideo } from 'ricos/video/editor';
+import { pluginFileUpload } from 'ricos/file/editor';
 import MobileDetect from 'mobile-detect';
 import {
   mockFileNativeUploadFunc,

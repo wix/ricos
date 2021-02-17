@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RicosContent, RicosViewer } from 'ricos/viewer';
-import { pluginGallery } from 'ricos/gallery/dist/module.viewer';
+import { pluginGallery } from 'ricos/gallery/viewer';
 import PropTypes from 'prop-types';
 
 const GalleryViewer: FunctionComponent<{

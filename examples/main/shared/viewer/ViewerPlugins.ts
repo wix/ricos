@@ -15,10 +15,13 @@ import { giphyTypeMapper, GIPHY_TYPE } from 'ricos/giphy/viewer';
 import { buttonTypeMapper } from 'ricos/button/viewer';
 import { HashtagDecorator } from 'ricos/hashtag/viewer';
 import { verticalEmbedTypeMapper } from 'ricos/vertical-embed/viewer';
-import { createHeadersMarkdownDecorator, HEADERS_MARKDOWN_TYPE } from 'ricos/headers-markdown';
+import {
+  createHeadersMarkdownDecorator,
+  HEADERS_MARKDOWN_TYPE,
+} from 'ricos/headers-markdown/editor';
 import { CodeBlockDecorator } from 'ricos/code-block/viewer';
-import { MENTION_TYPE, mentionsTypeMapper } from 'ricos/mentions/viewer';
-import { fileUploadTypeMapper, FILE_UPLOAD_TYPE } from 'ricos/file-upload/viewer';
+import { MENTION_TYPE, mentionsTypeMapper } from 'ricos/mention/viewer';
+import { fileUploadTypeMapper, FILE_UPLOAD_TYPE } from 'ricos/file/viewer';
 import {
   textColorInlineStyleMapper,
   TEXT_COLOR_TYPE,
@@ -39,7 +42,7 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 
-import { pollTypeMapper, POLL_TYPE } from 'ricos/social-polls/viewer';
+import { pollTypeMapper, POLL_TYPE } from 'ricos/poll/viewer';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';

@@ -19,21 +19,21 @@ import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/ve
 import linkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 import pollsSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-polls.schema.json';
 
-import { DIVIDER_TYPE } from 'ricos/divider';
-import { VIDEO_TYPE } from 'ricos/video';
-import { IMAGE_TYPE } from 'ricos/image';
-import { GIPHY_TYPE } from 'ricos/giphy';
-import { FILE_UPLOAD_TYPE } from 'ricos/file-upload';
-import { SOUND_CLOUD_TYPE } from 'ricos/sound-cloud';
-import { MAP_TYPE } from 'ricos/map';
-import { HTML_TYPE } from 'ricos/html';
-import { LINK_TYPE } from 'ricos/link';
-import { MENTION_TYPE } from 'ricos/mentions';
-import { GALLERY_TYPE } from 'ricos/gallery';
-import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'ricos/button';
-import { VERTICAL_EMBED_TYPE } from 'ricos/vertical-embed';
-import { LINK_PREVIEW_TYPE } from 'ricos/link-preview';
-import { POLL_TYPE } from 'ricos/social-polls';
+import { DIVIDER_TYPE } from 'ricos/divider/editor';
+import { VIDEO_TYPE } from 'ricos/video/editor';
+import { IMAGE_TYPE } from 'ricos/image/editor';
+import { GIPHY_TYPE } from 'ricos/giphy/editor';
+import { FILE_UPLOAD_TYPE } from 'ricos/file/editor';
+import { SOUND_CLOUD_TYPE } from 'ricos/sound-cloud/editor';
+import { MAP_TYPE } from 'ricos/map/editor';
+import { HTML_TYPE } from 'ricos/html/editor';
+import { LINK_TYPE } from 'ricos/link/editor';
+import { MENTION_TYPE } from 'ricos/mention/editor';
+import { GALLERY_TYPE } from 'ricos/gallery/editor';
+import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'ricos/button/editor';
+import { VERTICAL_EMBED_TYPE } from 'ricos/vertical-embed/editor';
+import { LINK_PREVIEW_TYPE } from 'ricos/link-preview/editor';
+import { POLL_TYPE } from 'ricos/poll/editor';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);

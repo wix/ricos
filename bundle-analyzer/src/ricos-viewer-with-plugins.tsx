@@ -1,8 +1,8 @@
 import React from 'react';
-import { RicosViewer } from 'ricos-viewer';
-import { pluginHtml } from 'wix-rich-content-plugin-html/viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { pluginLink } from 'wix-rich-content-plugin-link/viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginHtml } from 'ricos/html/viewer';
+import { pluginImage } from 'ricos/image/viewer';
+import { pluginLink } from 'ricos/link/viewer';
 
 const plugins = [pluginImage(), pluginLink(), pluginHtml()];
 

@@ -5,7 +5,7 @@ import styles from '../Components/styles.scss';
 import sourceCode from '!!raw-loader!./PlainTextConverter';
 import { toPlainText } from 'ricos/content/libs/toPlainText';
 import { RichContentTheme } from 'ricos/common';
-import { RicosContent } from 'ricos/content';
+import { RicosContent } from 'ricos/content/editor';
 
 const PlainTextConverter: FunctionComponent<{
   content: RicosContent;

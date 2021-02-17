@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useRef } from 'react';
 import { RicosContent, RicosEditor } from 'ricos/editor';
-import { pluginDivider } from 'ricos/divider';
+import { pluginDivider } from 'ricos/divider/editor';
 
 const DividerEditor: FunctionComponent<{
   content?: RicosContent;

@@ -5,7 +5,7 @@ import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-import { GALLERY_TYPE } from 'ricos/gallery';
+import { GALLERY_TYPE } from 'ricos/gallery/editor';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'ricos/editor-common';
 import { ModalStyles, RicosContent, TextToolbarType } from 'ricos/common';

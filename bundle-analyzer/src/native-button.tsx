@@ -1,4 +1,4 @@
-import { pluginLinkButton } from 'wix-rich-content-plugin-button/viewer';
+import { pluginLinkButton } from 'ricos/button/viewer';
 
 declare global {
   interface Window {

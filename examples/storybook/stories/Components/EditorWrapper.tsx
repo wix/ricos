@@ -8,34 +8,38 @@ import {
   RicosTheme,
   ToolbarSettings,
 } from 'ricos/editor';
-import { pluginLinkButton, pluginActionButton } from 'ricos/button';
-import { pluginCodeBlock } from 'ricos/code-block';
-import { pluginDivider, createDividerPlugin } from 'ricos/divider';
-import { pluginEmoji } from 'ricos/emoji';
-import { pluginFileUpload } from 'ricos/file-upload';
-import { pluginGallery } from 'ricos/gallery';
-import { pluginGiphy } from 'ricos/giphy';
-import { pluginHashtag } from 'ricos/hashtag';
-import { pluginHeadings } from 'ricos/headings';
-import { pluginSpoiler } from 'ricos/spoiler';
-import { pluginAccordion } from 'ricos/accordion';
-import { pluginTable } from 'ricos/table';
-import { pluginHeadersMarkdown } from 'ricos/headers-markdown';
-import { pluginHtml } from 'ricos/html';
-import { pluginImage } from 'ricos/image';
-import { pluginIndent } from 'ricos/indent';
-import { pluginLineSpacing, createLineSpacingPlugin } from 'ricos/line-spacing';
-import { pluginLink } from 'ricos/link';
-import { pluginMap, createMapPlugin } from 'ricos/map';
-import { pluginMentions } from 'ricos/mentions';
-import { pluginSoundCloud } from 'ricos/sound-cloud';
-import { pluginUndoRedo } from 'ricos/undo-redo';
-import { pluginVideo } from 'ricos/video';
-import { pluginPoll } from 'ricos/social-polls';
-import { pluginLinkPreview, LinkPreviewProviders } from 'ricos/link-preview';
-import { pluginVerticalEmbed, verticalEmbedProviders } from 'ricos/vertical-embed';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button/editor';
+import { pluginCodeBlock } from 'ricos/code-block/editor';
+import { pluginDivider, createDividerPlugin } from 'ricos/divider/editor';
+import { pluginEmoji } from 'ricos/emoji/editor';
+import { pluginFileUpload } from 'ricos/file/editor';
+import { pluginGallery } from 'ricos/gallery/editor';
+import { pluginGiphy } from 'ricos/giphy/editor';
+import { pluginHashtag } from 'ricos/hashtag/editor';
+import { pluginHeadings } from 'ricos/heading';
+import { pluginSpoiler } from 'ricos/spoiler/editor';
+import { pluginAccordion } from 'ricos/accordion/editor';
+import { pluginTable } from 'ricos/table/editor';
+import { pluginHeadersMarkdown } from 'ricos/headers-markdown/editor';
+import { pluginHtml } from 'ricos/html/editor';
+import { pluginImage } from 'ricos/image/editor';
+import { pluginIndent } from 'ricos/indent/editor';
+import { pluginLineSpacing, createLineSpacingPlugin } from 'ricos/line-spacing/editor';
+import { pluginLink } from 'ricos/link/editor';
+import { pluginMap, createMapPlugin } from 'ricos/map/editor';
+import { pluginMentions } from 'ricos/mention/editor';
+import { pluginSoundCloud } from 'ricos/sound-cloud/editor';
+import { pluginUndoRedo } from 'ricos/undo-redo/editor';
+import { pluginVideo } from 'ricos/video/editor';
+import { pluginPoll } from 'ricos/poll/editor';
+import { pluginLinkPreview, LinkPreviewProviders } from 'ricos/link-preview/editor';
+import { pluginVerticalEmbed, verticalEmbedProviders } from 'ricos/vertical-embed/editor';
 import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewUtil';
-import { pluginTextColor, pluginTextHighlight, createTextColorPlugin } from 'ricos/text-color';
+import {
+  pluginTextColor,
+  pluginTextHighlight,
+  createTextColorPlugin,
+} from 'ricos/text-color/editor';
 import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
 import {

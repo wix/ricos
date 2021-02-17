@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import { writeFileSync, existsSync } from 'fs';
 import path from 'path';
-import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
-import { RichContent } from 'ricos-schema';
-import { RicosContent } from 'ricos-content';
-import { compare } from 'ricos-content/libs/comparision';
+import { fromDraft, toDraft } from 'ricos/content/libs/migrateSchema';
+import { RichContent } from 'ricos/schema';
+import { RicosContent } from 'ricos/content';
+import { compare } from 'ricos/content/libs/comparision';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
 const MIGRATED_FIXTURES_PATH =
   '../packages/ricos-content/web/src/migrateSchema/fromDraft/migratedFixtures';

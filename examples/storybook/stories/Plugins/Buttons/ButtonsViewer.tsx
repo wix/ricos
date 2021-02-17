@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RicosContent, RicosViewer } from 'ricos/viewer';
-import { pluginActionButton } from 'ricos/button/dist/module.viewer';
+import { pluginActionButton } from 'ricos/button/viewer';
 
 const buttonConfig = {
   onClick: () => {

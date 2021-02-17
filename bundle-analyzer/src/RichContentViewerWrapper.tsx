@@ -1,10 +1,10 @@
 import React from 'react';
 import 'wix-rich-content-common/dist/styles.min.css';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RichContentViewer } from 'ricos/viewer';
 import contentState from './contentState';
 import * as PropTypes from 'prop-types';
-import { RicosContent } from 'ricos-common';
-import { PluginTypeMapper } from 'wix-rich-content-common';
+import { RicosContent } from 'ricos/common';
+import { PluginTypeMapper } from 'ricos/common';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function RichContentViewerWrapper(pluginTypeMapper?: any) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Section, Page, ContentState, RichContentViewerBox } from '../../Components/StoryParts';
 import { RicosViewer } from 'ricos/viewer';
-import { pluginHtml } from 'ricos/html/dist/module.viewer';
-import { pluginLinkPreview } from 'ricos/link-preview/dist/module.viewer';
+import { pluginHtml } from 'ricos/html/viewer';
+import { pluginLinkPreview } from 'ricos/link-preview/viewer';
 import content from '../../../../../e2e/tests/fixtures/html-domain-example.json';
 import HtmlWithDomainStory from './HtmlWithDomainStory';
 import HtmlWithDomainSourceCode from '!!raw-loader!./HtmlWithDomainStory.tsx';

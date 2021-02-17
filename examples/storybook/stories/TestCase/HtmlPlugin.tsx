@@ -1,6 +1,6 @@
 import React from 'react';
 import InstagramEmbedState from '../../../../e2e/tests/fixtures/embed-plugin.json';
-import { pluginHtml } from 'ricos/html/dist/module.viewer';
+import { pluginHtml } from 'ricos/html/viewer';
 import { RicosViewer } from 'ricos/viewer';
 
 import { RichContentViewerBox, ContentState, Section, Page } from '../Components/StoryParts';

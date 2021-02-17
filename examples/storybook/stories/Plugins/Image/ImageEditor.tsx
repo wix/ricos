@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RicosContent, RicosEditor } from 'ricos/editor';
 import { Helpers } from 'ricos/common';
 import { RichContentEditor } from 'ricos/editor';
-import { pluginImage } from 'ricos/image';
+import { pluginImage } from 'ricos/image/editor';
 
 const ImageEditor: FunctionComponent<{
   content?: RicosContent;

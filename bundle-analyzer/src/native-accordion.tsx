@@ -1,4 +1,4 @@
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+import { pluginAccordion } from 'ricos/accordion/viewer';
 
 declare global {
   interface Window {

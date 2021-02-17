@@ -1,6 +1,6 @@
 import React from 'react';
-import { RicosEditor } from 'ricos-editor';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos/editor';
+import { RichContentEditor } from 'ricos/editor';
 import isMobile from '../../mobileDetection';
 
 export const RicosEditorWithHelpers = ({ plugins, content, handleFileUpload, placeholder }) => (

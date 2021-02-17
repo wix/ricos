@@ -25,7 +25,7 @@ npm install --save wix-rich-content-viewer
 To get started with the editor, create a simple `React.Component`, and import the editor component:
 
 ```jsx
-import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
+import { EditorState, RichContentEditor } from 'ricos/editor';
 ```
 
 Then, create an empty `editorState` in your state:
@@ -42,7 +42,7 @@ Use the `RichContentEditor` component in your `render` function, and implement `
 
 ```jsx
 import React from 'react';
-import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
+import { EditorState, RichContentEditor } from 'ricos/editor';
 
 export class MyApp extends React.Component {
   constructor(props) {
@@ -99,8 +99,8 @@ Then, add `plugins` prop with the plugin's creation method:
 
 ```jsx
 import React from 'react';
-import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
-import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
+import { EditorState, RichContentEditor } from 'ricos/editor';
+import { createDividerPlugin } from 'ricos/divider/editor';
 
 const PLUGINS = [createDividerPlugin];
 

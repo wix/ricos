@@ -4,10 +4,10 @@ title: Html Plugin
 sidebar_label: Html Plugin
 ---
 
-import { pluginHtml } from 'wix-rich-content-plugin-html';
+import { pluginHtml } from 'ricos/html/editor';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 HTML plugin enables users to embed content in an iframe (either source code or by URL)
@@ -25,15 +25,15 @@ HTML plugin enables users to embed content in an iframe (either source code or b
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginHtml } from 'wix-rich-content-plugin-html';
+import { RicosEditor } from 'ricos/editor';
+import { pluginHtml } from 'ricos/html/editor';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 <RicosEditor plugins={[pluginHtml(HtmlConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginHtml } from 'wix-rich-content-plugin-html/viewer';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 <RicosViewer plugins={[pluginHtml(HtmlConfig)]} />;
 ```

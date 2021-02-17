@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RicosContent, RicosEditor } from 'ricos/editor';
 import { RichContentEditor } from 'ricos/editor';
-import { pluginGallery } from 'ricos/gallery';
+import { pluginGallery } from 'ricos/gallery/editor';
 import { Helpers } from 'ricos/common';
 
 const GalleryEditor: FunctionComponent<{

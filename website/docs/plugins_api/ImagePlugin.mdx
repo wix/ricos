@@ -4,10 +4,10 @@ title: Image Plugin
 sidebar_label: Image Plugin
 ---
 
-import { pluginImage } from 'wix-rich-content-plugin-image';
+import { pluginImage } from 'ricos/image/editor';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithHelpers } from '../../infra/editor/components/RicosEditorWithHelpers.tsx';
 import { mockImageNativeUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
 
@@ -27,15 +27,15 @@ Picture is Worth a Thousand Words!
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginImage } from 'wix-rich-content-plugin-image';
+import { RicosEditor } from 'ricos/editor';
+import { pluginImage } from 'ricos/image/editor';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 <RicosEditor plugins={[pluginImage(ImageConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginImage } from 'ricos/image/viewer';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 <RicosViewer plugins={[pluginImage(ImageConfig)]} />;
 ```

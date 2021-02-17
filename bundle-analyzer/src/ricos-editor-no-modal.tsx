@@ -1,5 +1,5 @@
 import React from 'react';
-import { RicosEditorType } from 'ricos-editor';
+import { RicosEditorType } from 'ricos/editor';
 
 const modalSettings = {
   openModal: () => {},

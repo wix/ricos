@@ -1,6 +1,6 @@
 import React, { ElementType } from 'react';
-import { TABLE_TYPE } from 'ricos/table';
-import { ACCORDION_TYPE } from 'ricos/accordion';
+import { TABLE_TYPE } from 'ricos/table/editor';
+import { ACCORDION_TYPE } from 'ricos/accordion/editor';
 import { RicosContent, RicosEntity, RicosEntityMap } from 'ricos/common';
 
 type Predicate = (entity: RicosEntity) => boolean;

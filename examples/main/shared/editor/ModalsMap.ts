@@ -1,15 +1,15 @@
-import { ModalsMap as VideoModalsMap } from 'ricos/video';
-import { ModalsMap as SoundCloudModalsMap } from 'ricos/sound-cloud';
-import { ModalsMap as GiphyModalsMap } from 'ricos/giphy';
-import { ModalsMap as headingsModalsMap } from 'ricos/headings';
-import { ModalsMap as ImageModalsMap } from 'ricos/image';
-import { ModalsMap as GalleryModalsMap } from 'ricos/gallery';
-import { ModalsMap as TextColorModalsMap } from 'ricos/text-color';
-import { ModalsMap as LineSpacingModalsMap } from 'ricos/line-spacing';
-import { ModalsMap as PollModalsMap } from 'ricos/social-polls';
-import { ModalsMap as VerticalEmbedModalsMap } from 'ricos/vertical-embed';
-import { ModalsMap as TableModalsMap } from 'ricos/table';
-import { ModalsMap as AccordionModalsMap } from 'ricos/accordion';
+import { ModalsMap as VideoModalsMap } from 'ricos/video/editor';
+import { ModalsMap as SoundCloudModalsMap } from 'ricos/sound-cloud/editor';
+import { ModalsMap as GiphyModalsMap } from 'ricos/giphy/editor';
+import { ModalsMap as headingsModalsMap } from 'ricos/heading';
+import { ModalsMap as ImageModalsMap } from 'ricos/image/editor';
+import { ModalsMap as GalleryModalsMap } from 'ricos/gallery/editor';
+import { ModalsMap as TextColorModalsMap } from 'ricos/text-color/editor';
+import { ModalsMap as LineSpacingModalsMap } from 'ricos/line-spacing/editor';
+import { ModalsMap as PollModalsMap } from 'ricos/poll/editor';
+import { ModalsMap as VerticalEmbedModalsMap } from 'ricos/vertical-embed/editor';
+import { ModalsMap as TableModalsMap } from 'ricos/table/editor';
+import { ModalsMap as AccordionModalsMap } from 'ricos/accordion/editor';
 
 export default {
   ...VideoModalsMap,

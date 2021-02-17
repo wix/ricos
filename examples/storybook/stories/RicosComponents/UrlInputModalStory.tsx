@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UrlInputModal, MODAL_CONTROLS_POSITION } from 'ricos/commons';
+import { UrlInputModal, MODAL_CONTROLS_POSITION } from 'wix-rich-content-plugin-commons';
 import { Section, Page } from '../Components/StoryParts';
 import styles from './TextInputStory.scss';
 import { Dropdown } from 'wix-style-react';
@@ -32,7 +32,7 @@ const UrlInputModalDesktop = () => {
     <Page title="URL Input Modal">
       <Section>
         <div className={styles.container} dir="ltr">
-          <div>import {'{ UrlInputModal }'} from 'ricos/commons';</div>
+          <div>import {'{ UrlInputModal }'} from 'wix-rich-content-plugin-commons';</div>
           <div className={styles.section}>
             <div style={{ border: '1px dashed pink', position: 'relative' }}>
               <UrlInputModalWrapper title={'Default URL input modal'}>

@@ -1,23 +1,23 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { RicosEditor } from 'ricos/editor';
-import { pluginDivider } from 'ricos/divider';
-import { pluginLinkButton, pluginActionButton } from 'ricos/button';
-import { pluginCodeBlock } from 'ricos/code-block';
-import { pluginEmoji } from 'ricos/emoji';
-import { pluginGallery } from 'ricos/gallery';
-import { pluginHashtag } from 'ricos/hashtag';
-import { pluginHeadersMarkdown } from 'ricos/headers-markdown';
-// import { pluginHtml } from 'ricos/html';
-import { pluginImage } from 'ricos/image';
-import { pluginLineSpacing } from 'ricos/line-spacing';
-import { pluginLink } from 'ricos/link';
-import { pluginLinkPreview, LinkPreviewProviders } from 'ricos/link-preview';
-import { pluginMentions } from 'ricos/mentions';
-import { pluginSoundCloud } from 'ricos/sound-cloud';
-import { pluginUndoRedo } from 'ricos/undo-redo';
-import { pluginVideo } from 'ricos/video';
-import { pluginGiphy } from 'ricos/giphy';
+import { pluginDivider } from 'ricos/divider/editor';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button/editor';
+import { pluginCodeBlock } from 'ricos/code-block/editor';
+import { pluginEmoji } from 'ricos/emoji/editor';
+import { pluginGallery } from 'ricos/gallery/editor';
+import { pluginHashtag } from 'ricos/hashtag/editor';
+import { pluginHeadersMarkdown } from 'ricos/headers-markdown/editor';
+// import { pluginHtml } from 'ricos/html/editor';
+import { pluginImage } from 'ricos/image/editor';
+import { pluginLineSpacing } from 'ricos/line-spacing/editor';
+import { pluginLink } from 'ricos/link/editor';
+import { pluginLinkPreview, LinkPreviewProviders } from 'ricos/link-preview/editor';
+import { pluginMentions } from 'ricos/mention/editor';
+import { pluginSoundCloud } from 'ricos/sound-cloud/editor';
+import { pluginUndoRedo } from 'ricos/undo-redo/editor';
+import { pluginVideo } from 'ricos/video/editor';
+import { pluginGiphy } from 'ricos/giphy/editor';
 import { TOOLBARS, DISPLAY_MODE } from 'ricos/editor-common';
 
 const configs = {

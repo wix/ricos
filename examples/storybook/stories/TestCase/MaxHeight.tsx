@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page } from '../Components/StoryParts';
 import { RicosEditor } from 'ricos/editor';
-import { pluginDivider } from 'ricos/divider';
+import { pluginDivider } from 'ricos/divider/editor';
 
 import styles from './MaxHeight.scss';
 

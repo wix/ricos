@@ -8,7 +8,7 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import { pluginDivider } from 'ricos/divider/dist/module.viewer';
+import { pluginDivider } from 'ricos/divider/viewer';
 
 import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
 import DividerEditor from './RicosBasicUsage';

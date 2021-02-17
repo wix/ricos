@@ -1,8 +1,8 @@
 import React from 'react';
-import { RicosEditorType } from 'ricos-editor';
-import { pluginHtml } from 'wix-rich-content-plugin-html';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginLink } from 'wix-rich-content-plugin-link';
+import { RicosEditorType } from 'ricos/editor';
+import { pluginHtml } from 'ricos/html/editor';
+import { pluginImage } from 'ricos/image/editor';
+import { pluginLink } from 'ricos/link/editor';
 
 const plugins = [pluginImage(), pluginLink(), pluginHtml()];
 

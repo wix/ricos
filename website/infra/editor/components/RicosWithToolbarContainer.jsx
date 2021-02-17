@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { RicosEditor } from 'ricos-editor';
+import { RicosEditor } from 'ricos/editor';
 import 'ricos-editor/dist/styles.min.css';
 import content from '../content/intro.json';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RichContentViewer } from 'ricos/viewer';
 
 export default () => {
   return <RichContentViewer />;

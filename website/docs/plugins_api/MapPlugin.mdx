@@ -4,10 +4,10 @@ title: Map Plugin
 sidebar_label: Map Plugin
 ---
 
-import { pluginMap } from 'wix-rich-content-plugin-map';
+import { pluginMap } from 'ricos/map/editor';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Map plugin allows you to insert googls maps component & customize it. Map plugin uses Google Maps API.
@@ -25,15 +25,15 @@ Map plugin allows you to insert googls maps component & customize it. Map plugin
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginMap } from 'wix-rich-content-plugin-map';
+import { RicosEditor } from 'ricos/editor';
+import { pluginMap } from 'ricos/map/editor';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 <RicosEditor plugins={[pluginMap(MapConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginMap } from 'wix-rich-content-plugin-map/viewer';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 <RicosViewer plugins={[pluginMap(MapConfig)]} />;
 ```

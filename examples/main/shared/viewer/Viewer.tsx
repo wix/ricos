@@ -8,7 +8,7 @@ import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'ricos/image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'ricos/text-selection-toolbar';
-import { GALLERY_TYPE } from 'ricos/gallery';
+import { GALLERY_TYPE } from 'ricos/gallery/editor';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 

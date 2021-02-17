@@ -4,12 +4,12 @@ title: Video Plugin
 sidebar_label: Video Plugin
 ---
 
-import { RicosViewer } from 'ricos-viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginVideo as pluginVideoViewer } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginVideo } from 'ricos/video/editor';
+import { pluginVideo as pluginVideoViewer } from 'wix-rich-content-plugin-video/viewer';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { createContent } from 'ricos/content';
 import videoContent from '../../infra/editor/content/video-content.json';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 import {
@@ -32,15 +32,15 @@ If a Picture is Worth a Thousand Words, Then Is a Video Worth a Million?
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
+import { RicosEditor } from 'ricos/editor';
 import 'ricos-editor/dist/styles.min.css';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginVideo } from 'ricos/video/editor';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 <RicosEditor plugins={[pluginVideo(VideoConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 <RicosViewer plugins={[pluginVideo(VideoConfig)]} />;
 ```
