@@ -35,7 +35,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   };
 
   componentDidMount() {
-    this.updateLocale();
+    // this.updateLocale();
     const { children } = this.props;
     const onViewerLoaded =
       children?.props.helpers?.onViewerLoaded || this.props._rcProps?.helpers?.onViewerLoaded;
@@ -45,7 +45,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
 
   componentWillReceiveProps(newProps: RicosViewerProps) {
     if (newProps.locale !== this.props.locale) {
-      this.updateLocale();
+      // this.updateLocale();
     }
   }
 
