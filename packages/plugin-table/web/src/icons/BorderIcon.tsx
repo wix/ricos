@@ -11,7 +11,6 @@ const BorderIcon = props => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <title>Icons / Formatting / border color</title>
     <g
       id="Icons-/-Formatting-/-border-color"
       stroke="none"
