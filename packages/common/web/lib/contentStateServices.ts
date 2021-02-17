@@ -27,9 +27,7 @@ export const truncateContentState = (
         pluginsCount++;
       }
 
-      console.log({ pluginsCount, maxPlugins });
       if (pluginsCount > maxPlugins) {
-        console.log('breaking!', newBlocks);
         throw BreakException;
       }
       if (cWordCount + blockWords.length > wordsCount) {
