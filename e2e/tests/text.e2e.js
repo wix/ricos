@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, DEFAULT_DESKTOP_MOBILE } from './settings';
 import { usePlugins, usePluginsConfig, plugins } from '../cypress/testAppConfig';
 
 const changeTextColor = title => {
@@ -44,11 +44,6 @@ describe('text', () => {
   });
 
   it('allow to change text color', function() {
-    changeTextColor(this.test.title);
-  });
-
-  it('allow to change text color on mobile', function() {
-    cy.switchToMobile();
     changeTextColor(this.test.title);
   });
 
@@ -320,6 +315,20 @@ describe('text', () => {
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+});
+
+describe.only('text color mobile', () => {
+  before(function() {
+    cy.eyesOpen({
+      appName: 'Text',
+      testName: this.test.parent.title,
+      browser: DEFAULT_DESKTOP_MOBILE,
+    });
+  });
+  it('allow to change text color on mobile', function() {
+    cy.switchToMobile();
+    changeTextColor(this.test.title);
   });
 });
 
