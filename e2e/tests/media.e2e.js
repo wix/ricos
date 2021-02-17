@@ -123,7 +123,7 @@ describe('plugins', () => {
       });
     });
 
-    context('innerRCE images full screen', () => {
+    context.only('innerRCE images full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('inner-rce-images', usePlugins(plugins.all))
       );
@@ -138,14 +138,15 @@ describe('plugins', () => {
         cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
           timeout: 10000,
         }).should('be.visible');
-        cy.get(`[data-hook=${'nav-arrow-back'}]`)
-          .click({ force: true })
-          .wait(200)
-          .click();
+        cy.get(`[data-hook=${'nav-arrow-back'}]`).click({ force: true });
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
+        cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
       });
     });
 
-    context('gallery full screen', () => {
+    context.only('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('gallery').waitForGalleryImagesToLoad()
       );
@@ -165,12 +166,9 @@ describe('plugins', () => {
         //   fully: false,
         // });
         cy.get(`[data-hook=${'nav-arrow-back'}]`).click({ force: true });
-        cy.get(
-          '#pgi65a6266ba23a8a55da3f469157f15237_0 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
-          {
-            timeout: 10000,
-          }
-        ).should('be.visible');
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
         // cy.eyesCheckWindow({
         //   tag: 'gallery fullscreen previous image',
         //   target: 'window',
