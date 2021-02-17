@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
+import { RicosContent, RicosViewer } from 'ricos/viewer';
+import { pluginImage } from 'ricos/image/viewer';
 
 const ImageViewer: FunctionComponent<{
   content?: RicosContent;

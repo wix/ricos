@@ -1,11 +1,11 @@
 import React from 'react';
-import { pluginHtml } from 'wix-rich-content-plugin-html/viewer';
+import { pluginHtml } from 'ricos/html/viewer';
 import { RichContentViewerBox, ContentState, Section, Page } from '../Components/StoryParts';
-import { RicosViewer } from 'ricos-viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
-import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginImage } from 'ricos/image/viewer';
+import { pluginGallery } from 'ricos/gallery/viewer';
+import { pluginVideo } from 'ricos/video/viewer';
+import { pluginDivider } from 'ricos/divider/viewer';
 import fixture from '../../../../e2e/tests/fixtures/plugin-left-alignment.json';
 
 import viewerTheme from './viewer.scss';

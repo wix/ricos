@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useRef } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import { pluginDivider } from 'wix-rich-content-plugin-divider';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { pluginDivider } from 'ricos/divider';
 
 const DividerEditor: FunctionComponent<{
   content?: RicosContent;

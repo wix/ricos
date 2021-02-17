@@ -1,7 +1,7 @@
 import mockProductsData from './mockProductsData';
 import mockEventsData from './mockEventsData';
 import mockBookingsData from './mockBookingsData';
-import { verticalEmbedProviders } from 'wix-rich-content-plugin-vertical-embed';
+import { verticalEmbedProviders } from 'ricos/vertical-embed';
 
 const { event, booking, product } = verticalEmbedProviders;
 const mockDataMap = {

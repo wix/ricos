@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
+import { RicosContent, RicosViewer } from 'ricos/viewer';
 
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
-import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { pluginLinkPreview } from 'ricos/link-preview/dist/module.viewer';
+import { pluginLink } from 'ricos/link/dist/module.viewer';
 
 const plugins = [pluginLinkPreview({ enableEmbed: true }), pluginLink()];
 

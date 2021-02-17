@@ -1,11 +1,11 @@
 import React from 'react';
-import { RicosContent, RicosEditor, RicosEditorType } from 'ricos-editor';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { Helpers } from 'wix-rich-content-common';
+import { RicosContent, RicosEditor, RicosEditorType } from 'ricos/editor';
+import { pluginVideo } from 'ricos/video';
+import { pluginImage } from 'ricos/image';
+import { pluginGallery } from 'ricos/gallery';
+import { pluginFileUpload } from 'ricos/file-upload';
+import { RichContentEditor } from 'ricos/editor';
+import { Helpers } from 'ricos/common';
 
 function getPlugins(handleVideoUpload, handleFileUpload) {
   return [

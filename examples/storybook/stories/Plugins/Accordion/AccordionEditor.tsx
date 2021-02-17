@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import { pluginIndent } from 'wix-rich-content-plugin-indent';
-import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
-import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
-import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { pluginAccordion } from 'ricos/accordion';
+import { pluginLink } from 'ricos/link';
+import { pluginIndent } from 'ricos/indent';
+import { pluginLineSpacing } from 'ricos/line-spacing';
+import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color';
+import { pluginCodeBlock } from 'ricos/code-block';
 
 const AccordionEditor: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
   <RicosEditor

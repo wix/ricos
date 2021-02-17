@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import windowContentStateHoc from '../WindowContentStateHoc';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { RicosEditor, RicosEditorProps } from 'ricos-editor';
-import { RicosViewer } from 'ricos-viewer';
+import { RichContentEditor } from 'ricos/editor';
+import { RicosEditor, RicosEditorProps } from 'ricos/editor';
+import { RicosViewer } from 'ricos/viewer';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
@@ -16,12 +16,12 @@ import {
   mockTestFileUpload,
   mockTestFileNativeUpload,
 } from '../../../../../examples/main/shared/utils/fileUploadUtil';
-import { createPreview } from 'wix-rich-content-preview';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { createPreview } from 'ricos/preview';
+import { TextSelectionToolbar, TwitterButton } from 'ricos/text-selection-toolbar';
+import { TOOLBARS } from 'ricos/editor-common';
 import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 import { themes } from '../consumersThemes/themes';
-import { PaletteColors, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { PaletteColors, RicosContent, SEOSettings } from 'ricos/common';
 import { EditorState } from '@wix/draft-js';
 import { merge } from 'lodash';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import fixture from '../../../../e2e/tests/fixtures/shakey-embed.json';
-import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
-import { RicosViewer } from 'ricos-viewer';
+import { pluginHtml } from 'ricos/html/dist/module.viewer';
+import { RicosViewer } from 'ricos/viewer';
 
 import { RichContentViewerBox, ContentState, Section, Page } from '../Components/StoryParts';
 

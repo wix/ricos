@@ -1,43 +1,37 @@
 import theme from '../theme/theme';
-import { ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button/viewer';
-import { VIDEO_TYPE, videoTypeMapper } from 'wix-rich-content-plugin-video/viewer';
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/viewer';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html/viewer';
-import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/viewer';
-import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/viewer';
-import {
-  LINK_PREVIEW_TYPE,
-  linkPreviewTypeMapper,
-} from 'wix-rich-content-plugin-link-preview/viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
-import { tableTypeMapper } from 'wix-rich-content-plugin-table/viewer';
+import { ACTION_BUTTON_TYPE } from 'ricos/button/viewer';
+import { VIDEO_TYPE, videoTypeMapper } from 'ricos/video/viewer';
+import { dividerTypeMapper } from 'ricos/divider/viewer';
+import { htmlTypeMapper } from 'ricos/html/viewer';
+import { soundCloudTypeMapper } from 'ricos/sound-cloud/viewer';
+import { LINK_TYPE, linkTypeMapper } from 'ricos/link/viewer';
+import { LINK_PREVIEW_TYPE, linkPreviewTypeMapper } from 'ricos/link-preview/viewer';
+import { imageTypeMapper } from 'ricos/image/viewer';
+import { tableTypeMapper } from 'ricos/table/viewer';
 
-import { galleryTypeMapper, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/viewer';
-import { mapTypeMapper } from 'wix-rich-content-plugin-map/viewer';
-import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
-import { buttonTypeMapper } from 'wix-rich-content-plugin-button/viewer';
-import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/viewer';
-import { verticalEmbedTypeMapper } from 'wix-rich-content-plugin-vertical-embed/viewer';
-import {
-  createHeadersMarkdownDecorator,
-  HEADERS_MARKDOWN_TYPE,
-} from 'wix-rich-content-plugin-headers-markdown';
-import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/viewer';
-import { MENTION_TYPE, mentionsTypeMapper } from 'wix-rich-content-plugin-mentions/viewer';
-import { fileUploadTypeMapper, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload/viewer';
+import { galleryTypeMapper, GALLERY_TYPE } from 'ricos/gallery/viewer';
+import { mapTypeMapper } from 'ricos/map/viewer';
+import { giphyTypeMapper, GIPHY_TYPE } from 'ricos/giphy/viewer';
+import { buttonTypeMapper } from 'ricos/button/viewer';
+import { HashtagDecorator } from 'ricos/hashtag/viewer';
+import { verticalEmbedTypeMapper } from 'ricos/vertical-embed/viewer';
+import { createHeadersMarkdownDecorator, HEADERS_MARKDOWN_TYPE } from 'ricos/headers-markdown';
+import { CodeBlockDecorator } from 'ricos/code-block/viewer';
+import { MENTION_TYPE, mentionsTypeMapper } from 'ricos/mentions/viewer';
+import { fileUploadTypeMapper, FILE_UPLOAD_TYPE } from 'ricos/file-upload/viewer';
 import {
   textColorInlineStyleMapper,
   TEXT_COLOR_TYPE,
   TEXT_HIGHLIGHT_TYPE,
   textHighlightInlineStyleMapper,
-} from 'wix-rich-content-plugin-text-color/viewer';
+} from 'ricos/text-color/viewer';
 import {
   spoilerInlineStyleMapper,
   initSpoilersContentState,
   SpoilerViewerWrapper,
   SPOILER_TYPE,
-} from 'wix-rich-content-plugin-spoiler/viewer';
-import { accordionTypeMapper } from 'wix-rich-content-plugin-accordion/viewer';
+} from 'ricos/spoiler/viewer';
+import { accordionTypeMapper } from 'ricos/accordion/viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -45,7 +39,7 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 
-import { pollTypeMapper, POLL_TYPE } from 'wix-rich-content-plugin-social-polls/viewer';
+import { pollTypeMapper, POLL_TYPE } from 'ricos/social-polls/viewer';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -72,8 +66,8 @@ import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 
 import { getBaseUrl } from '../../src/utils';
-import { RichContentViewerProps } from 'wix-rich-content-viewer';
-import { Decorator, PluginTypeMapper, RicosContent, UISettings } from 'wix-rich-content-common';
+import { RichContentViewerProps } from 'ricos/viewer';
+import { Decorator, PluginTypeMapper, RicosContent, UISettings } from 'ricos/common';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),

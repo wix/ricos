@@ -1,24 +1,24 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
-import { RicosEditor } from 'ricos-editor';
-import { pluginDivider } from 'wix-rich-content-plugin-divider';
-import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
-import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
-import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
-import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
-// import { pluginHtml } from 'wix-rich-content-plugin-html';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
-import { pluginMentions } from 'wix-rich-content-plugin-mentions';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
-import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
-import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+import { RicosEditor } from 'ricos/editor';
+import { pluginDivider } from 'ricos/divider';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button';
+import { pluginCodeBlock } from 'ricos/code-block';
+import { pluginEmoji } from 'ricos/emoji';
+import { pluginGallery } from 'ricos/gallery';
+import { pluginHashtag } from 'ricos/hashtag';
+import { pluginHeadersMarkdown } from 'ricos/headers-markdown';
+// import { pluginHtml } from 'ricos/html';
+import { pluginImage } from 'ricos/image';
+import { pluginLineSpacing } from 'ricos/line-spacing';
+import { pluginLink } from 'ricos/link';
+import { pluginLinkPreview, LinkPreviewProviders } from 'ricos/link-preview';
+import { pluginMentions } from 'ricos/mentions';
+import { pluginSoundCloud } from 'ricos/sound-cloud';
+import { pluginUndoRedo } from 'ricos/undo-redo';
+import { pluginVideo } from 'ricos/video';
+import { pluginGiphy } from 'ricos/giphy';
+import { TOOLBARS, DISPLAY_MODE } from 'ricos/editor-common';
 
 const configs = {
   giphy: {

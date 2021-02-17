@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { RichContentEditor } from 'ricos/editor';
+import { pluginFileUpload } from 'ricos/file-upload';
 
 const FileUploadEditor: FunctionComponent<{
   content?: RicosContent;

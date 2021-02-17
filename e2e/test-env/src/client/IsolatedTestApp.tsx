@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import { EditorState, RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import { EditorState, RichContentEditor, RichContentEditorProps } from 'ricos/editor';
+import { RichContentViewer } from 'ricos/viewer';
 import windowContentStateHoc from './WindowContentStateHoc';
-import { RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { RicosContent, SEOSettings } from 'ricos/common';
 
 interface Props {
   isMobile: boolean;

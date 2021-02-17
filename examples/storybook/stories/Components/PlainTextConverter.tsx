@@ -3,9 +3,9 @@ import { RichContentEditorBox, Section } from './StoryParts';
 import EditorWrapper from './EditorWrapper';
 import styles from '../Components/styles.scss';
 import sourceCode from '!!raw-loader!./PlainTextConverter';
-import { toPlainText } from 'ricos-content/libs/toPlainText';
-import { RichContentTheme } from 'wix-rich-content-common';
-import { RicosContent } from 'ricos-content';
+import { toPlainText } from 'ricos/content/libs/toPlainText';
+import { RichContentTheme } from 'ricos/common';
+import { RicosContent } from 'ricos/content';
 
 const PlainTextConverter: FunctionComponent<{
   content: RicosContent;

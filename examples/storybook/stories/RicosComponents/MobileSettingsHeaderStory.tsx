@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SettingsMobileHeader } from 'wix-rich-content-plugin-commons';
+import { SettingsMobileHeader } from 'ricos/commons';
 import { Button } from 'wix-style-react';
 
 import { Section, Page } from '../Components/StoryParts';
@@ -11,7 +11,7 @@ export default () => {
     <Page title="Mobile Setting Header">
       <Section>
         <div className={styles.container} dir="ltr">
-          <div>import {'{ SettingsMobileHeader }'} from 'wix-rich-content-plugin-commons';</div>
+          <div>import {'{ SettingsMobileHeader }'} from 'ricos/commons';</div>
           <Button onClick={() => setMoreTab(!withMoreTab)}>
             {withMoreTab ? 'Without' : 'With'} More Tab
           </Button>

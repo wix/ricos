@@ -1,15 +1,15 @@
-import { ModalsMap as VideoModalsMap } from 'wix-rich-content-plugin-video';
-import { ModalsMap as SoundCloudModalsMap } from 'wix-rich-content-plugin-sound-cloud';
-import { ModalsMap as GiphyModalsMap } from 'wix-rich-content-plugin-giphy';
-import { ModalsMap as headingsModalsMap } from 'wix-rich-content-plugin-headings';
-import { ModalsMap as ImageModalsMap } from 'wix-rich-content-plugin-image';
-import { ModalsMap as GalleryModalsMap } from 'wix-rich-content-plugin-gallery';
-import { ModalsMap as TextColorModalsMap } from 'wix-rich-content-plugin-text-color';
-import { ModalsMap as LineSpacingModalsMap } from 'wix-rich-content-plugin-line-spacing';
-import { ModalsMap as PollModalsMap } from 'wix-rich-content-plugin-social-polls';
-import { ModalsMap as VerticalEmbedModalsMap } from 'wix-rich-content-plugin-vertical-embed';
-import { ModalsMap as TableModalsMap } from 'wix-rich-content-plugin-table';
-import { ModalsMap as AccordionModalsMap } from 'wix-rich-content-plugin-accordion';
+import { ModalsMap as VideoModalsMap } from 'ricos/video';
+import { ModalsMap as SoundCloudModalsMap } from 'ricos/sound-cloud';
+import { ModalsMap as GiphyModalsMap } from 'ricos/giphy';
+import { ModalsMap as headingsModalsMap } from 'ricos/headings';
+import { ModalsMap as ImageModalsMap } from 'ricos/image';
+import { ModalsMap as GalleryModalsMap } from 'ricos/gallery';
+import { ModalsMap as TextColorModalsMap } from 'ricos/text-color';
+import { ModalsMap as LineSpacingModalsMap } from 'ricos/line-spacing';
+import { ModalsMap as PollModalsMap } from 'ricos/social-polls';
+import { ModalsMap as VerticalEmbedModalsMap } from 'ricos/vertical-embed';
+import { ModalsMap as TableModalsMap } from 'ricos/table';
+import { ModalsMap as AccordionModalsMap } from 'ricos/accordion';
 
 export default {
   ...VideoModalsMap,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page } from '../Components/StoryParts';
-import { RicosEditor } from 'ricos-editor';
-import { pluginDivider } from 'wix-rich-content-plugin-divider';
+import { RicosEditor } from 'ricos/editor';
+import { pluginDivider } from 'ricos/divider';
 
 import styles from './MaxHeight.scss';
 

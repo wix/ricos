@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { RichContentViewerBox, ContentState, Section, Page } from '../Components/StoryParts';
-import { pluginLink } from 'wix-rich-content-plugin-link/viewer';
-import { RicosViewer } from 'ricos-viewer';
+import { pluginLink } from 'ricos/link/viewer';
+import { RicosViewer } from 'ricos/viewer';
 
 import { Button } from 'wix-style-react';
 import fixture from '../../../../e2e/tests/fixtures/duplicated-content.json';

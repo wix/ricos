@@ -1,36 +1,33 @@
 /* eslint-disable no-console */
 import { merge } from 'lodash';
-import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
-import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
-import { pluginDivider } from 'wix-rich-content-plugin-divider';
-import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
-import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
-import { pluginHeadings } from 'wix-rich-content-plugin-headings';
-import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
-import { pluginTable } from 'wix-rich-content-plugin-table';
-import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
-import { pluginHtml } from 'wix-rich-content-plugin-html';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
-import { pluginIndent } from 'wix-rich-content-plugin-indent';
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import { pluginMap } from 'wix-rich-content-plugin-map';
-import { pluginMentions } from 'wix-rich-content-plugin-mentions';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
-import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
-import {
-  pluginVerticalEmbed,
-  verticalEmbedProviders,
-} from 'wix-rich-content-plugin-vertical-embed';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button';
+import { pluginCodeBlock } from 'ricos/code-block';
+import { pluginDivider } from 'ricos/divider';
+import { pluginEmoji } from 'ricos/emoji';
+import { pluginFileUpload } from 'ricos/file-upload';
+import { pluginGallery } from 'ricos/gallery';
+import { pluginGiphy } from 'ricos/giphy';
+import { pluginHashtag } from 'ricos/hashtag';
+import { pluginHeadings } from 'ricos/headings';
+import { pluginSpoiler } from 'ricos/spoiler';
+import { pluginAccordion } from 'ricos/accordion';
+import { pluginTable } from 'ricos/table';
+import { pluginHeadersMarkdown } from 'ricos/headers-markdown';
+import { pluginHtml } from 'ricos/html';
+import { pluginImage } from 'ricos/image';
+import { pluginLineSpacing } from 'ricos/line-spacing';
+import { pluginIndent } from 'ricos/indent';
+import { pluginLink } from 'ricos/link';
+import { pluginMap } from 'ricos/map';
+import { pluginMentions } from 'ricos/mentions';
+import { pluginSoundCloud } from 'ricos/sound-cloud';
+import { pluginUndoRedo } from 'ricos/undo-redo';
+import { pluginVideo } from 'ricos/video';
+import { pluginLinkPreview, LinkPreviewProviders } from 'ricos/link-preview';
+import { pluginVerticalEmbed, verticalEmbedProviders } from 'ricos/vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../../../examples/main/shared/utils/linkPreviewUtil';
-import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
-import { pluginUnsupportedBlocks } from 'wix-rich-content-plugin-unsupported-blocks';
+import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color';
+import { pluginUnsupportedBlocks } from 'ricos/unsupported-blocks';
 
 import { createPresets } from './utils';
 import {

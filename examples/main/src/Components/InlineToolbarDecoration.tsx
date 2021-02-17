@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getVisibleSelectionRect } from 'wix-rich-content-editor-common';
+import { getVisibleSelectionRect } from 'ricos/editor-common';
 import styles from './InlineToolbarDecoration.scss';
 
 class InlineToolbarDecoration extends Component<{

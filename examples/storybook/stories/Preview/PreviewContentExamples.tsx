@@ -3,7 +3,7 @@ import { Dropdown } from 'wix-style-react';
 
 import { RichContentViewerBox, Section, Page } from '../Components/StoryParts';
 
-import { createPreview } from 'wix-rich-content-preview';
+import { createPreview } from 'ricos/preview';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import fixturesNames, { fixtures } from '../../../../e2e/tests/fixtures/preview';
 

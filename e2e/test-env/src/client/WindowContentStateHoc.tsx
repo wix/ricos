@@ -1,7 +1,7 @@
 import React, { ElementType } from 'react';
-import { TABLE_TYPE } from 'wix-rich-content-plugin-table';
-import { ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
-import { RicosContent, RicosEntity, RicosEntityMap } from 'wix-rich-content-common';
+import { TABLE_TYPE } from 'ricos/table';
+import { ACCORDION_TYPE } from 'ricos/accordion';
+import { RicosContent, RicosEntity, RicosEntityMap } from 'ricos/common';
 
 type Predicate = (entity: RicosEntity) => boolean;
 

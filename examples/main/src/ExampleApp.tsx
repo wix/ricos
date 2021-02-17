@@ -12,7 +12,7 @@ import {
   disableBrowserBackButton,
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
-import { RicosContent } from 'wix-rich-content-common';
+import { RicosContent } from 'ricos/common';
 import type ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));

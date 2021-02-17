@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RicosViewer } from 'ricos-viewer';
+import { RicosViewer } from 'ricos/viewer';
 import {
   RichContentEditorBox,
   RichContentViewerBox,
@@ -8,7 +8,7 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
+import { pluginDivider } from 'ricos/divider/dist/module.viewer';
 
 import dividerContentState from '../../../../e2e/tests/fixtures/divider.json';
 import DividerEditor from './RicosBasicUsage';

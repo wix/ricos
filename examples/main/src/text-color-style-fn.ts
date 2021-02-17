@@ -1,5 +1,5 @@
 import { EditorProps } from 'draft-js';
-import { isHexColor } from 'wix-rich-content-common';
+import { isHexColor } from 'ricos/common';
 
 export const colorScheme = {
   color1: {

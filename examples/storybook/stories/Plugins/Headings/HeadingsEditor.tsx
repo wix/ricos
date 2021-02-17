@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import { pluginHeadings } from 'wix-rich-content-plugin-headings';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { pluginHeadings } from 'ricos/headings';
 
 const HeadingsEditor: FunctionComponent<{
   content?: RicosContent;

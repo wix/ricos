@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { RicosEditor } from 'ricos-editor';
+import { RicosEditor } from 'ricos/editor';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
+import { pluginImage } from 'ricos/image';
+import { pluginGallery } from 'ricos/gallery';
 import MobileDetect from 'mobile-detect';
 import ActionButton from '../Components/ActionButton';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
+import { RichContentEditor, RichContentEditorProps } from 'ricos/editor';
 import {
   RicosContent,
   RicosEditor,
@@ -7,42 +7,35 @@ import {
   RicosEditorType,
   RicosTheme,
   ToolbarSettings,
-} from 'ricos-editor';
-import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
-import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
-import { pluginDivider, createDividerPlugin } from 'wix-rich-content-plugin-divider';
-import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
-import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
-import { pluginHeadings } from 'wix-rich-content-plugin-headings';
-import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
-import { pluginTable } from 'wix-rich-content-plugin-table';
-import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
-import { pluginHtml } from 'wix-rich-content-plugin-html';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginIndent } from 'wix-rich-content-plugin-indent';
-import { pluginLineSpacing, createLineSpacingPlugin } from 'wix-rich-content-plugin-line-spacing';
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import { pluginMap, createMapPlugin } from 'wix-rich-content-plugin-map';
-import { pluginMentions } from 'wix-rich-content-plugin-mentions';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
-import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginPoll } from 'wix-rich-content-plugin-social-polls';
-import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
-import {
-  pluginVerticalEmbed,
-  verticalEmbedProviders,
-} from 'wix-rich-content-plugin-vertical-embed';
+} from 'ricos/editor';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button';
+import { pluginCodeBlock } from 'ricos/code-block';
+import { pluginDivider, createDividerPlugin } from 'ricos/divider';
+import { pluginEmoji } from 'ricos/emoji';
+import { pluginFileUpload } from 'ricos/file-upload';
+import { pluginGallery } from 'ricos/gallery';
+import { pluginGiphy } from 'ricos/giphy';
+import { pluginHashtag } from 'ricos/hashtag';
+import { pluginHeadings } from 'ricos/headings';
+import { pluginSpoiler } from 'ricos/spoiler';
+import { pluginAccordion } from 'ricos/accordion';
+import { pluginTable } from 'ricos/table';
+import { pluginHeadersMarkdown } from 'ricos/headers-markdown';
+import { pluginHtml } from 'ricos/html';
+import { pluginImage } from 'ricos/image';
+import { pluginIndent } from 'ricos/indent';
+import { pluginLineSpacing, createLineSpacingPlugin } from 'ricos/line-spacing';
+import { pluginLink } from 'ricos/link';
+import { pluginMap, createMapPlugin } from 'ricos/map';
+import { pluginMentions } from 'ricos/mentions';
+import { pluginSoundCloud } from 'ricos/sound-cloud';
+import { pluginUndoRedo } from 'ricos/undo-redo';
+import { pluginVideo } from 'ricos/video';
+import { pluginPoll } from 'ricos/social-polls';
+import { pluginLinkPreview, LinkPreviewProviders } from 'ricos/link-preview';
+import { pluginVerticalEmbed, verticalEmbedProviders } from 'ricos/vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewUtil';
-import {
-  pluginTextColor,
-  pluginTextHighlight,
-  createTextColorPlugin,
-} from 'wix-rich-content-plugin-text-color';
+import { pluginTextColor, pluginTextHighlight, createTextColorPlugin } from 'ricos/text-color';
 import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
 import {

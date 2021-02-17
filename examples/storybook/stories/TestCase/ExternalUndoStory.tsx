@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page } from '../Components/StoryParts';
-import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'ricos/editor-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import EditorWrapper from '../Components/EditorWrapper';
 

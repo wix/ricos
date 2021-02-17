@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { RicosEditor } from 'ricos-editor';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos/editor';
+import { RichContentEditor } from 'ricos/editor';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
+import { pluginImage } from 'ricos/image';
+import { pluginGallery } from 'ricos/gallery';
+import { pluginVideo } from 'ricos/video';
+import { pluginFileUpload } from 'ricos/file-upload';
 import MobileDetect from 'mobile-detect';
 import {
   mockFileNativeUploadFunc,
