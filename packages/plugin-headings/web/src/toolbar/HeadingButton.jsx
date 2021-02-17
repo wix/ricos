@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
 import { HEADING_TYPE_TO_ELEMENT, DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
 import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-editor-common';
 import Modal from 'react-modal';
@@ -9,6 +9,8 @@ import classNames from 'classnames';
 import styles from '../../statics/styles/headingButtonStyles.scss';
 
 export default class HeadingButton extends Component {
+  static contextType = GlobalContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -82,9 +84,7 @@ export default class HeadingButton extends Component {
         );
   };
 
-  static getModalParent() {
-    return document.querySelector('.DraftEditor-root').parentNode;
-  }
+  getModalParent = () => this.context.editorWrapper.current;
 
   render() {
     const { theme, isMobile, t, tabIndex, customHeadings } = this.props;
@@ -113,31 +113,33 @@ export default class HeadingButton extends Component {
         showArrowIcon
         ref={ref => (this.buttonRef = ref)}
       >
-        <Modal
-          isOpen={isPanelOpen}
-          onRequestClose={() => this.save()}
-          className={classNames(styles.headingsModal, {
-            [styles.headingsModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames(styles.headingsModalOverlay, {
-            [styles.headingsModalOverlay_mobile]: isMobile,
-          })}
-          parentSelector={HeadingButton.getModalParent}
-          style={{
-            content: modalStyle,
-          }}
-          ariaHideApp={false}
-        >
-          <HeadingsDropDownPanel
-            customHeadingsOptions={customHeadingsOptions}
-            heading={currentHeading}
-            onSave={this.save}
-            isMobile={isMobile}
-            theme={theme}
-            translateHeading={this.translateHeading}
-            {...this.props}
-          />
-        </Modal>
+        {isPanelOpen ? (
+          <Modal
+            isOpen={isPanelOpen}
+            onRequestClose={() => this.save()}
+            className={classNames(styles.headingsModal, {
+              [styles.headingsModal_mobile]: isMobile,
+            })}
+            overlayClassName={classNames(styles.headingsModalOverlay, {
+              [styles.headingsModalOverlay_mobile]: isMobile,
+            })}
+            parentSelector={this.getModalParent}
+            style={{
+              content: modalStyle,
+            }}
+            ariaHideApp={false}
+          >
+            <HeadingsDropDownPanel
+              customHeadingsOptions={customHeadingsOptions}
+              heading={currentHeading}
+              onSave={this.save}
+              isMobile={isMobile}
+              theme={theme}
+              translateHeading={this.translateHeading}
+              {...this.props}
+            />
+          </Modal>
+        ) : null}
       </InlineToolbarButton>
     );
   }

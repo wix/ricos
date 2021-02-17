@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component, CSSProperties, FocusEvent } from 'react';
+import React, { Component, CSSProperties, FocusEvent, RefObject } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, cloneDeep, isEmpty } from 'lodash';
+import { includes, debounce, cloneDeep, isEmpty } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -36,6 +36,7 @@ import {
   Version,
   HTML_TYPE,
   GlobalContext,
+  GlobalContextInterface,
   RicosContent,
   RichContentTheme,
   Helpers,
@@ -182,7 +183,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
   contextualData: EditorContextType;
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
-  editorWrapper: Element;
+  editorWrapper: RefObject<HTMLDivElement> = React.createRef();
   copySource: { unregister(): void };
   updateBounds: (editorBounds?: BoundingRect) => void;
   plugins;
@@ -192,6 +193,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   toolbars;
   innerRCECustomStyleFn;
   getSelectedText: (editorState: EditorState) => string;
+  globalContext: GlobalContextInterface;
+
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
     spellCheck: true,
@@ -244,7 +247,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
-    preventWixFocusRingAccessibility(this.editorWrapper);
+    preventWixFocusRingAccessibility(this.editorWrapper.current);
     this.reportDebuggingInfo();
     this.preloadLibs();
     !isEmpty(this.props.experiments) && console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
@@ -339,7 +342,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       siteDomain,
       iframeSandboxDomain,
       innerRCERenderedIn,
+      experiments,
     } = this.props;
+
+    this.globalContext = { experiments, isMobile, t, editorWrapper: this.editorWrapper };
 
     this.fixHelpers(helpers);
 
@@ -415,6 +421,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
       disableKeyboardEvents: this.disableKeyboardEvents,
+      globalContext: this.globalContext,
     };
   };
 
@@ -677,7 +684,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
-  setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
+  setEditor = ref => {
+    this.editor = ref?.getEditorRef();
+  };
 
   inPluginEditingMode = false;
 
@@ -941,8 +950,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
-  setEditorWrapper = ref => ref && (this.editorWrapper = ref);
-
   render() {
     const { onError, locale, direction, experiments, showToolbars = true } = this.props;
     const { innerModal } = this.state;
@@ -961,7 +968,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
+        <GlobalContext.Provider
+          value={{ experiments, isMobile, t, editorWrapper: this.editorWrapper }}
+        >
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
@@ -974,10 +983,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 data-id={'rce'}
               >
                 {this.renderStyleTag()}
-                <div
-                  ref={this.setEditorWrapper}
-                  className={classNames(styles.editor, theme.editor)}
-                >
+                <div ref={this.editorWrapper} className={classNames(styles.editor, theme.editor)}>
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}
                   {showToolbars && this.renderToolbars()}
@@ -988,7 +994,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                     locale={locale}
                     innerModal={innerModal}
                     closeInnerModal={this.closeInnerModal}
-                    editorWrapper={this.editorWrapper}
+                    editorWrapper={this.editorWrapper.current}
                   />
                 </div>
               </div>

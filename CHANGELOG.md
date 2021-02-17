@@ -36,6 +36,8 @@
 ### :bug: Bug Fix
 - `*`
   - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+- `color/link/heading`
+  - [#2132](https://github.com/wix-incubator/rich-content/pull/2132) fix modal's parentSelector when multiple editors on same page
 ### :house: Internal
 - `viewer`
   - [#2138](https://github.com/wix/ricos/pull/2138) viewer performance
