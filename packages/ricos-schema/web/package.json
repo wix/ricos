@@ -1,6 +1,10 @@
 {
   "name": "ricos-schema",
+<<<<<<< HEAD
   "version": "8.21.5-alpha.0",
+=======
+  "version": "8.22.0",
+>>>>>>> master
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"

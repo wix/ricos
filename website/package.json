@@ -1,6 +1,10 @@
 {
   "name": "ricos-docs",
+<<<<<<< HEAD
   "version": "8.21.5-alpha.0",
+=======
+  "version": "8.22.0",
+>>>>>>> master
   "private": true,
   "scripts": {
     "start": "docusaurus start",
@@ -15,6 +19,7 @@
     "docusaurus-plugin-sass": "^0.1.8",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+<<<<<<< HEAD
     "ricos-content": "8.21.5-alpha.0",
     "ricos-editor": "8.21.5-alpha.0",
     "ricos-viewer": "8.21.5-alpha.0",
@@ -47,6 +52,40 @@
     "wix-rich-content-plugin-video": "8.21.5-alpha.0",
     "wix-rich-content-preview": "8.21.5-alpha.0",
     "wix-rich-content-viewer": "8.21.5-alpha.0"
+=======
+    "ricos-content": "8.22.0",
+    "ricos-editor": "8.22.0",
+    "ricos-viewer": "8.22.0",
+    "wix-rich-content-common": "8.22.0",
+    "wix-rich-content-editor": "8.22.0",
+    "wix-rich-content-editor-common": "8.22.0",
+    "wix-rich-content-fullscreen": "8.22.0",
+    "wix-rich-content-plugin-button": "8.22.0",
+    "wix-rich-content-plugin-code-block": "8.22.0",
+    "wix-rich-content-plugin-commons": "8.22.0",
+    "wix-rich-content-plugin-divider": "8.22.0",
+    "wix-rich-content-plugin-emoji": "8.22.0",
+    "wix-rich-content-plugin-file-upload": "8.22.0",
+    "wix-rich-content-plugin-gallery": "8.22.0",
+    "wix-rich-content-plugin-giphy": "8.22.0",
+    "wix-rich-content-plugin-hashtag": "8.22.0",
+    "wix-rich-content-plugin-headers-markdown": "8.22.0",
+    "wix-rich-content-plugin-html": "8.22.0",
+    "wix-rich-content-plugin-image": "8.22.0",
+    "wix-rich-content-plugin-line-spacing": "8.22.0",
+    "wix-rich-content-plugin-link": "8.22.0",
+    "wix-rich-content-plugin-link-preview": "8.22.0",
+    "wix-rich-content-plugin-map": "8.22.0",
+    "wix-rich-content-plugin-mentions": "8.22.0",
+    "wix-rich-content-plugin-sound-cloud": "8.22.0",
+    "wix-rich-content-plugin-text-color": "8.22.0",
+    "wix-rich-content-plugin-undo-redo": "8.22.0",
+    "wix-rich-content-plugin-unsupported-blocks": "8.22.0",
+    "wix-rich-content-plugin-vertical-embed": "8.22.0",
+    "wix-rich-content-plugin-video": "8.22.0",
+    "wix-rich-content-preview": "8.22.0",
+    "wix-rich-content-viewer": "8.22.0"
+>>>>>>> master
   },
   "browserslist": {
     "production": [

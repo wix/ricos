@@ -1,6 +1,10 @@
 {
   "name": "ricos-driver",
+<<<<<<< HEAD
   "version": "8.21.5-alpha.0",
+=======
+  "version": "8.22.0",
+>>>>>>> master
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
