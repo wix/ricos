@@ -318,7 +318,7 @@ describe('text', () => {
   });
 });
 
-describe.only('text color mobile', () => {
+describe('text color mobile', () => {
   before(function() {
     cy.eyesOpen({
       appName: 'Text',
@@ -327,7 +327,7 @@ describe.only('text color mobile', () => {
     });
   });
   it('allow to change text color on mobile', function() {
-    cy.switchToMobile();
+    // cy.switchToMobile();
     changeTextColor(this.test.title);
   });
 });
