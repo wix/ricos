@@ -2703,55 +2703,9 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
                         "key": 0,
                         "text": "",
                         "type": "unstyled"
-                      },
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [
-                          {
-                            "key": 0,
-                            "length": 1,
-                            "offset": 0
-                          }
-                        ],
-                        "inlineStyleRanges": [],
-                        "key": 1,
-                        "text": " ",
-                        "type": "atomic"
-                      },
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 2,
-                        "text": "",
-                        "type": "unstyled"
                       }
                     ],
-                    "entityMap": {
-                      "0": {
-                        "data": {
-                          "config": {
-                            "alignment": "center",
-                            "disableExpand": false,
-                            "showDescription": true,
-                            "showTitle": true,
-                            "size": "inline",
-                            "width": 143
-                          },
-                          "src": {
-                            "file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
-                            "height": 5600,
-                            "id": "2d3b675ea857dc41158bad3b28300824",
-                            "original_file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
-                            "width": 3737
-                          }
-                        },
-                        "mutability": "IMMUTABLE",
-                        "type": "wix-draft-plugin-image"
-                      }
-                    }
+                    "entityMap": {}
                   }
                 },
                 "1": {

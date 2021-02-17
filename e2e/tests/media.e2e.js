@@ -10,6 +10,7 @@ import {
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { eq } from 'lodash';
 
 const eyesOpen = ({
   test: {
@@ -129,7 +130,8 @@ describe('plugins', () => {
       );
 
       it('expand inner-rce images on full screen', function() {
-        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
+          .eq(1)
           .parent()
           .click();
         cy.loadOutOfViewImagesInGallery();
@@ -137,16 +139,21 @@ describe('plugins', () => {
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
         cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
           timeout: 10000,
-        }).should('be.visible');
-        cy.get(`[data-hook=${'nav-arrow-back'}]`).click({ force: true });
+        })
+          .should('be.visible')
+          .wait(300);
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
         cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
           timeout: 10000,
-        }).should('be.visible');
+        })
+          .eq(1)
+          .should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
       });
     });
 
-    context.only('gallery full screen', () => {
+    context('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('gallery').waitForGalleryImagesToLoad()
       );

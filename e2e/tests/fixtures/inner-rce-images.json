@@ -69,55 +69,9 @@
                         "inlineStyleRanges": [],
                         "entityRanges": [],
                         "data": {}
-                      },
-                      {
-                        "key": "1u5gf",
-                        "text": " ",
-                        "type": "atomic",
-                        "depth": 0,
-                        "inlineStyleRanges": [],
-                        "entityRanges": [
-                          {
-                            "offset": 0,
-                            "length": 1,
-                            "key": 0
-                          }
-                        ],
-                        "data": {}
-                      },
-                      {
-                        "key": "2sikd",
-                        "text": "",
-                        "type": "unstyled",
-                        "depth": 0,
-                        "inlineStyleRanges": [],
-                        "entityRanges": [],
-                        "data": {}
                       }
                     ],
-                    "entityMap": {
-                      "0": {
-                        "type": "wix-draft-plugin-image",
-                        "mutability": "IMMUTABLE",
-                        "data": {
-                          "config": {
-                            "alignment": "center",
-                            "size": "inline",
-                            "showTitle": true,
-                            "showDescription": true,
-                            "disableExpand": false,
-                            "width": 143
-                          },
-                          "src": {
-                            "id": "2d3b675ea857dc41158bad3b28300824",
-                            "original_file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
-                            "file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
-                            "width": 3737,
-                            "height": 5600
-                          }
-                        }
-                      }
-                    }
+                    "entityMap": {}
                   }
                 },
                 "1": {
@@ -330,5 +284,5 @@
       }
     }
   },
-  "VERSION": "8.21.1"
+  "VERSION": "8.22.0"
 }
