@@ -77,6 +77,8 @@ class ImageViewer extends React.Component {
       highres: '',
     };
 
+    const { containerWidth } = this.context;
+
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
