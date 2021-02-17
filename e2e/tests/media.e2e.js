@@ -125,10 +125,10 @@ describe('plugins', () => {
 
     context('innerRCE images full screen', () => {
       beforeEach('load editor', () =>
-        cy.loadRicosEditorAndViewer('innerrce-images', usePlugins(plugins.all))
+        cy.loadRicosEditorAndViewer('inner-rce-images', usePlugins(plugins.all))
       );
 
-      it('expand image on full screen', function() {
+      it('expand inner-rce images on full screen', function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
