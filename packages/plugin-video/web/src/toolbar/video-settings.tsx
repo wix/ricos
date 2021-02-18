@@ -44,7 +44,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   };
   return (
     <div
-      data-hook="videoSettings"
+      data-hook="settings"
       className={classNames(styles.videoSettings, {
         [styles.videoSettings_mobile]: isMobile,
       })}

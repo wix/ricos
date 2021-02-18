@@ -16,13 +16,14 @@
     Click to see more.
   </summary>
   
-### :rocket: New Feature
-- `plugin-video`
-  - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
+  ### :rocket: New Feature
+  - `plugin-video`
+    - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 	
 ### :bug: Bug Fix
 - `link`
   - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
+
 
 
 </details>

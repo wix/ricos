@@ -364,16 +364,9 @@ Cypress.Commands.add('openFooterPluginMenu', () => {
   cy.get('[data-hook="addPluginMenu"]');
 });
 
-Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
-  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+Cypress.Commands.add('openSettings', () => {
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-  cy.get('[data-hook="imageSettings"]');
-});
-
-Cypress.Commands.add('openVideoSettings', (shouldOpenToolbar = true) => {
-  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO);
-  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-  cy.get('[data-hook="videoSettings"]');
+  cy.get('[data-hook="settings"]');
 });
 
 Cypress.Commands.add('openMapSettings', () => {
