@@ -454,19 +454,26 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    //TODO: fix this flaky test
-    it.skip('create link button & customize it', function() {
+    it('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .wait(100)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click()
-        .get(`[data-hook*=ButtonInputModal][placeholder="Enter a URL"]`)
-        .type('www.wix.com')
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
         .click()
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
         .click()
+        .wait(100)
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.SETTINGS_TAB}]`)
+        .click()
+        .wait(100)
+        .get(`[data-hook*=ButtonInputModal][placeholder="Enter a URL"]`)
+        .type('www.wix.com')
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click();
+        .click()
+        .wait(100);
       cy.eyesCheckWindow(this.test.title);
     });
   });

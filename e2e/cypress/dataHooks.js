@@ -207,6 +207,7 @@ export const DIVIDER_DROPDOWN_OPTIONS = {
 
 export const BUTTON_PLUGIN_MODAL = {
   DESIGN_TAB: 'design_Tab',
+  SETTINGS_TAB: 'settings_Tab',
   BUTTON_SAMPLE: 'buttonSample_3',
   DONE: SETTINGS_PANEL.DONE,
 };
