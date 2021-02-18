@@ -88,11 +88,15 @@ function tests({ isDesktop }) {
     testFlow(isDesktop, this.test.title);
   });
 
-  it('dark palette, cssOverride, no container', function() {
+  it('dark palette, no cssOverride, bgColor only (no container)', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
       usePlugins(plugins.all),
-      useTheming({ paletteType: 'dark', disableContainer: true })
+      useTheming({
+        skipCssOverride: true,
+        paletteType: 'dark',
+        disableContainer: true,
+      })
     ).focusEditor();
     cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
