@@ -74,21 +74,7 @@ function tests({ isDesktop }) {
     testFlow(isDesktop, this.test.title);
   });
 
-  it('dark palette, no cssOverride', function() {
-    cy.loadRicosEditorAndViewer(
-      'storybook-example-app',
-      usePlugins(plugins.all),
-      useTheming({
-        skipCssOverride: true,
-        paletteType: 'dark',
-      })
-    ).focusEditor();
-    cy.wait(2000);
-    cy.eyesCheckWindow(this.test.title);
-    testFlow(isDesktop, this.test.title);
-  });
-
-  it('dark palette, no cssOverride, bgColor only (no container)', function() {
+  it('dark palette, no cssOverride, backgroundColor (no container)', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
       usePlugins(plugins.all),
@@ -97,6 +83,17 @@ function tests({ isDesktop }) {
         paletteType: 'dark',
         disableContainer: true,
       })
+    ).focusEditor();
+    cy.wait(2000);
+    cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
+  });
+
+  it('dark palette, cssOverride', function() {
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      usePlugins(plugins.all),
+      useTheming({ paletteType: 'dark' })
     ).focusEditor();
     cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
