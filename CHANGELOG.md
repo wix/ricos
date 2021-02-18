@@ -20,12 +20,25 @@
 - `plugin-video`
   - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 	
-  ### :bug: Bug Fix
-  - `link`
-    - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
+### :bug: Bug Fix
+- `link`
+  - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
+
 
 </details>
 <hr/>
+
+## 8.22.0 (Feb 16, 2021)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2153](https://github.com/wix-incubator/rich-content/pull/2153) getContentTraits expose isLastChangeEdit
+### :bug: Bug Fix
+- `link`
+  - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
+### :house: Internal
+- `ricos-editor`
+  - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
+  - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
 
 ## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix
@@ -46,7 +59,7 @@
 ## 8.20.0 (Feb 9, 2021)
 ### :rocket: New Feature
 - `ricos-editor`
-  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling 
+  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling
 ### :bug: Bug Fix
 - `link`
   - [#2119](https://github.com/wix-incubator/rich-content/pull/2119) anchors issues in editor

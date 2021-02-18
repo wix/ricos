@@ -65,12 +65,14 @@ export function createDataConverter(
   initialContent?: RicosContent
 ): EditorDataInstance {
   let currContent = initialContent || emptyState;
+  let lastContent = currContent;
   let currEditorState = initialContent
     ? createWithContent(convertFromRaw(initialContent))
     : createEmpty();
   let currTraits = {
     isEmpty: initialContent ? isContentStateEmpty(initialContent) : true,
     isContentChanged: false,
+    isLastChangeEdit: false,
   };
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
@@ -89,21 +91,34 @@ export function createDataConverter(
 
   const getEditorState = () => currEditorState;
 
+  const updateTraits = (
+    currContent: RicosContent,
+    lastContent: RicosContent,
+    initialContent: RicosContent
+  ) => {
+    const initialBlocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
+    const initialEntitiesEqual = isEmpty(
+      compare(currContent.entityMap, initialContent.entityMap, { verbose: false })
+    );
+    const lastBlocksEqual = areBlocksEqual(currContent.blocks, lastContent.blocks);
+    const lastEntitiesEqual = isEmpty(compare(currContent.entityMap, lastContent.entityMap));
+    currTraits = {
+      isEmpty: isContentStateEmpty(currContent),
+      isContentChanged: !(initialBlocksEqual && initialEntitiesEqual),
+      isLastChangeEdit: !(lastBlocksEqual && lastEntitiesEqual),
+    };
+  };
+
   const getContentTraits = () => {
     if (!initialContent) {
       return currTraits;
     }
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
+      lastContent = currContent;
       currContent = convertToRaw(currState);
-      const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
-      const entitiesEqual = isEmpty(
-        compare(currContent.entityMap, initialContent.entityMap, { verbose: false })
-      );
-      currTraits = {
-        isEmpty: isContentStateEmpty(currContent),
-        isContentChanged: !(blocksEqual && entitiesEqual),
-      };
+      console.assert(lastContent !== currContent, 'equal by ref!');
+      updateTraits(currContent, lastContent, initialContent);
       isUpdated = true;
     }
     return currTraits;
@@ -112,16 +127,11 @@ export function createDataConverter(
   const getContentState: ContentStateGetter = ({ shouldRemoveErrorBlocks = true } = {}) => {
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
+      lastContent = currContent;
       currContent = convertToRaw(currState);
+      console.assert(lastContent !== currContent, 'equal by ref!');
       if (initialContent) {
-        const blocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
-        const entitiesEqual = isEmpty(
-          compare(currContent.entityMap, initialContent.entityMap, { verbose: false })
-        );
-        currTraits = {
-          isEmpty: isContentStateEmpty(currContent),
-          isContentChanged: !(blocksEqual && entitiesEqual),
-        };
+        updateTraits(currContent, lastContent, initialContent);
       }
       isUpdated = true;
     }
