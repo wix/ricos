@@ -16,12 +16,13 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.22.2 (Feb 18, 2021)
 ### :house: Internal
 - `image`
   - [#2167](https://github.com/wix/ricos/pull/2167) image config type contains optional `consumer` field for Photo Studio's internal BI
-
-</details>
-<hr/>
   
 ## 8.22.1 (Feb 18, 2021)
 ### :house: Internal
