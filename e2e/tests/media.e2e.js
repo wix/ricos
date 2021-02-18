@@ -10,7 +10,6 @@ import {
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
-import { eq } from 'lodash';
 
 const eyesOpen = ({
   test: {
