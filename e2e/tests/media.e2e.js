@@ -136,7 +136,6 @@ describe('plugins', () => {
           .click();
         cy.loadOutOfViewImagesInGallery();
         cy.waitForGalleryImagesToLoad();
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
         cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
           timeout: 10000,
         }).should('be.visible');
