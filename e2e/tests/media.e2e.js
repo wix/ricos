@@ -146,7 +146,6 @@ describe('plugins', () => {
           .eq(1)
           .should('be.visible');
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-        cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
       });
     });
 
