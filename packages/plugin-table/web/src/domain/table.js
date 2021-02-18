@@ -81,16 +81,6 @@ class Table extends TableDataUtil {
     this.setNewRows(rows);
   };
 
-  isObjectsEqual = (o1, o2) => JSON.stringify(o1) === JSON.stringify(o2);
-
-  updateCellContent = (i, j, content) => {
-    const oldContent = this.getCell(i, j).content;
-    if (!this.isObjectsEqual(oldContent, content)) {
-      this.getCell(i, j).content = content;
-      this.saveNewDataFunc(this.componentData);
-    }
-  };
-
   addNewRowHeight = index => this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
 
   addNewColWidth = (index, colWidth) => this.getColsWidth().splice(index, 0, colWidth);

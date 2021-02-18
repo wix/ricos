@@ -11,30 +11,20 @@ import { ToolbarType } from 'wix-rich-content-common';
 const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
-    if (
-      !this.isEditing(prevProps.editing, prevProps.selectedCells) &&
-      this.isEditing(this.props.editing, this.props.selectedCells)
-    ) {
+    const isCellWasEditing = this.isEditing(prevProps.editing, prevProps.selectedCells);
+    const isCellEditing = this.isEditing(this.props.editing, this.props.selectedCells);
+    const isGoIntoEdit = !isCellWasEditing && isCellEditing;
+    const isGoOutFromEdit = isCellWasEditing && !isCellEditing;
+    if (isGoIntoEdit) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      !this.props.isMobile && this.editorRef?.selectAllContent(true);
       this.tdHeight = this.tdRef?.offsetHeight - 1;
-    }
-    if (
-      this.isEditing(prevProps.editing, prevProps.selectedCells) &&
-      !this.isEditing(this.props.editing, this.props.selectedCells)
-    ) {
+    } else if (isGoOutFromEdit) {
       this.props.setEditingActive(false);
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
-    if (this.props.selected) {
-      if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
-        !this.props.isMobile && this.editorRef?.selectAllContent();
-      }
-      if (!prevProps.selected) {
-        const { selectedCells } = this.props;
-        selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
-      }
+    if (this.props.selected && !prevProps.selected && !isCellEditing && !this.props.isMobile) {
+      this.editorRef?.selectAllContent(true);
     }
   }
 
@@ -228,8 +218,7 @@ export default class Cell extends Component {
 class Editor extends Component {
   shouldComponentUpdate(nextProps) {
     const { editing, selected, contentState } = this.props;
-    const isContentStateChanged =
-      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
+    const isContentStateChanged = contentState !== nextProps.contentState;
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 

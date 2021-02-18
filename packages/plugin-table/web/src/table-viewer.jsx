@@ -59,6 +59,7 @@ class TableViewer extends Component {
       {...props}
       getRowHeight={this.table.getRowHeight}
       setRowRef={this.props.setRowRef}
+      rowsToUpdate={this.props.rowsToUpdate}
     />
   );
 
@@ -105,15 +106,14 @@ class TableViewer extends Component {
     const { onSelect, selected, isEditMode, setCellContent, onClear, onPaste } = this.props;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
-    this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
-
+    const grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
     return (
       <div
         className={classNames(isEditMode ? styles.editMode : styles.viewMode)}
         ref={this.setTableViewerRef}
       >
         <DataSheet
-          data={this.grid}
+          data={grid}
           valueRenderer={this.valueRenderer}
           onSelect={onSelect}
           selected={selected || {}}
@@ -140,7 +140,6 @@ TableViewer.propTypes = {
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.any,
   setEditingActive: PropTypes.func,
-  updateCellContent: PropTypes.func,
   columns: PropTypes.any,
   selected: PropTypes.object,
   componentData: PropTypes.object,
@@ -160,6 +159,7 @@ TableViewer.propTypes = {
   onClear: PropTypes.func,
   onPaste: PropTypes.func,
   tableOverflowWidth: PropTypes.number,
+  rowsToUpdate: PropTypes.array,
 };
 
 export default TableViewer;

@@ -11,7 +11,7 @@ import { createEmptyCellEditor, isCellsNumberInvalid } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
 import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
-import { isEmpty, isNumber, cloneDeep } from 'lodash';
+import { isEmpty, isNumber, cloneDeep, isEqual } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
 
@@ -23,10 +23,11 @@ class TableComponent extends React.Component {
       isEditingActive: false,
       isAllCellsSelected: false,
       selected: {},
+      prevSelection: {},
     };
     this.innerRceAdditionalProps = { placeholder: '' };
     this.innerEditorsRefs = {};
-    this.table = new Table(props.componentData, this.updateComponentData);
+    this.table = new Table(props.componentData, this.updateTable);
     this.tableRef = createRef();
     this.tableContainer = createRef();
     this.dragPreview = createRef();
@@ -53,11 +54,25 @@ class TableComponent extends React.Component {
 
   getCellState = (i, j) => this.table.getCellContent(i, j) || createEmptyCellEditor();
 
+  updateTable = data => {
+    this.updateComponentData(data);
+    this.setState({ updateAllRows: true });
+  };
+
+  updateComponentData = data => {
+    this.props.store.set('componentData', { ...data }, this.props.block.getKey());
+  };
+
+  onEditorChange = (i, j, content) => {
+    this.table.getCell(i, j).content = content;
+    this.updateComponentData(this.table.componentData);
+  };
+
   renderInnerRCE = (i, j) => {
     const editorState = this.getCellState(i, j);
     return this.props.renderInnerRCE({
       editorState,
-      onChange: editorState => this.table.updateCellContent(i, j, editorState),
+      onChange: editorState => this.onEditorChange(i, j, editorState),
       renderedIn: 'table',
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
@@ -138,6 +153,8 @@ class TableComponent extends React.Component {
     const isAllCellsSelected = this.isAllCellsSelected(selected);
     this.setState(
       {
+        updateAllRows: !selected,
+        prevSelection: this.state.selected,
         selected,
         isAllCellsSelected,
         highlightColResizer: false,
@@ -152,7 +169,8 @@ class TableComponent extends React.Component {
     selected && this.table.isAllCellsSelected(selected.start, selected.end);
 
   onSelect = selected => {
-    this.setSelected(this.table.fixSelectedWithMergeCells(selected));
+    !isEqual(selected, this.state.selected) &&
+      this.setSelected(this.table.fixSelectedWithMergeCells(selected));
   };
 
   getFirstCellRef = () => {
@@ -261,9 +279,6 @@ class TableComponent extends React.Component {
   handleClickOutsideSelectAll = () => {
     !this.isAllCellsSelected(this.state.selected) && this.setState({ isAllCellsSelected: false });
   };
-
-  updateComponentData = data =>
-    this.props.store.set('componentData', { ...data }, this.props.block.getKey());
 
   onResizeCol = columnsRefs =>
     this.table.setColWidthAfterResize(columnsRefs, this.tableRef.current.offsetWidth);
@@ -423,8 +438,15 @@ class TableComponent extends React.Component {
 
   onFocus = e => e.stopPropagation();
 
+  getRowsToUpdate = () => {
+    const { selected = {}, prevSelection = {}, updateAllRows } = this.state;
+    return updateAllRows
+      ? [...Array(this.table.getRowNum()).fill(0)].map((row, i) => i)
+      : [...getRowsRange(selected), ...getRowsRange(prevSelection)];
+  };
+
   render() {
-    const { componentData, theme, t, isMobile, settings, blockProps } = this.props;
+    const { theme, t, isMobile, settings, blockProps } = this.props;
     const {
       selected,
       isEditingActive,
@@ -432,7 +454,6 @@ class TableComponent extends React.Component {
       highlightColResizer,
       isAllCellsSelected,
     } = this.state;
-    this.table.updateComponentData(componentData);
     this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
@@ -539,6 +560,7 @@ class TableComponent extends React.Component {
             tableOverflowWidth={
               this.tableRef.current?.offsetWidth - this.tableContainer.current?.offsetWidth
             }
+            rowsToUpdate={this.getRowsToUpdate()}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
