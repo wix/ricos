@@ -63,6 +63,7 @@ export interface RichContentViewerProps {
   experiments?: AvailableExperiments;
   isInnerRcv?: boolean;
   renderedInTable?: boolean;
+  width?: number;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
@@ -200,6 +201,7 @@ class RichContentViewer extends Component<
         t,
         experiments,
         renderedInTable,
+        width,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -238,7 +240,7 @@ class RichContentViewer extends Component<
       );
 
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t, containerWidth: width }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
