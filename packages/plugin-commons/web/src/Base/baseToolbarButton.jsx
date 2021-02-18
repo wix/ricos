@@ -100,13 +100,12 @@ class BaseToolbarButton extends React.Component {
     }
 
     const activeButton = componentState.activeButton || { keyName, isActive: false };
-    const isExternalButtonModal = this.props.type === BUTTONS.EXTERNAL_MODAL;
-    const isToggleButton = !(isExternalButtonModal || this.props.type === BUTTONS.FILES);
-    const isCurrentKey = activeButton.keyName === keyName;
-    const isActive =
-      isExternalButtonModal ||
-      (!isToggleButton ? isCurrentKey : !(isCurrentKey && activeButton.isActive));
-
+    const isToggleButton = !(
+      this.props.type === BUTTONS.EXTERNAL_MODAL || this.props.type === BUTTONS.FILES
+    );
+    const isActive = !isToggleButton
+      ? activeButton.keyName === keyName
+      : !(activeButton.keyName === keyName && activeButton.isActive);
     componentState.activeButton = {
       ...activeButton,
       keyName,
@@ -188,7 +187,9 @@ class BaseToolbarButton extends React.Component {
   renderToggleButton = (buttonWrapperClassNames, buttonClassNames) => {
     const { theme, t, tooltipTextKey, tabIndex } = this.props;
     const tooltipText = t(tooltipTextKey);
+
     const toggleButton = (
+      /* eslint-disable jsx-a11y/no-static-element-interactions */
       <div className={buttonWrapperClassNames}>
         <button
           className={buttonClassNames}
@@ -201,7 +202,9 @@ class BaseToolbarButton extends React.Component {
           {this.props.children || this.getIcon()}
         </button>
       </div>
+      /* eslint-enable jsx-a11y/no-static-element-interactions */
     );
+
     return <ToolbarButton theme={theme} tooltipText={tooltipText} button={toggleButton} />;
   };
 
