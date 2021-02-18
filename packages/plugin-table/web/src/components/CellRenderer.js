@@ -80,6 +80,10 @@ export default class Cell extends Component {
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
         onKeyDown(e);
       }
+    } else if (!editing && tableKeysToIgnoreOnEdit.includes(e.key)) {
+      onKeyDown(e);
+      e.stopPropagation();
+      e.preventDefault();
     }
   };
 
