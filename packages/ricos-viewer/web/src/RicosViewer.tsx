@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Component } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
@@ -27,13 +28,14 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   updateLocale = async () => {
     const { children, _rcProps } = this.props;
     const locale = children?.props.locale || this.props.locale;
+    //@ts-ignore
     await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
       this.setState({ localeData, remountKey: !this.state.remountKey })
     );
   };
 
   componentDidMount() {
-    this.updateLocale();
+    // this.updateLocale();
     const { children } = this.props;
     const onViewerLoaded =
       children?.props.helpers?.onViewerLoaded || this.props._rcProps?.helpers?.onViewerLoaded;
@@ -43,7 +45,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
 
   componentWillReceiveProps(newProps: RicosViewerProps) {
     if (newProps.locale !== this.props.locale) {
-      this.updateLocale();
+      // this.updateLocale();
     }
   }
 
@@ -59,6 +61,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         <RichContentViewer />
       );
     return (
+      //@ts-ignore
       <RicosEngine
         RicosModal={RicosModal}
         isPreviewExpanded={isPreviewExpanded}

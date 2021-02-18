@@ -25,6 +25,7 @@ import { combineMappers } from './combineMappers';
 import Anchor from '../components/Anchor';
 import styles from '../../statics/rich-content-viewer.scss';
 import { withInteraction } from '../withInteraction';
+import LazyHydrate from './ReactLazyHydrate';
 
 const isEmptyContentState = (raw?: RicosContent) =>
   !raw ||
@@ -148,11 +149,19 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             </React.Fragment>
           );
         }
+        const isBrowser = typeof window === 'object';
+        // console.log('yaron1234567');
 
-        return resultBlock;
+        return (
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore-line
+          <LazyHydrate ssrOnly isBrowser={isBrowser} key={wrapperKey || '1'}>
+            {resultBlock}
+          </LazyHydrate>
+        );
       });
   };
-
+  // eslint-disable-next-line no-console
   return {
     unstyled: blockFactory(child => (isEmptyBlock(child) ? 'div' : 'p'), 'text'),
     blockquote: blockFactory('blockquote', 'quote'),
