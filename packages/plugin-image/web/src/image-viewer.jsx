@@ -33,7 +33,7 @@ class ImageViewer extends React.Component {
 
   static contextType = GlobalContext;
 
-  skipImageThumbnail = () => {
+  shouldSkipImageThumbnail = () => {
     const { containerWidth, experiments } = this.context;
 
     if (containerWidth && experiments?.skipImageThumbnail?.enabled) {
@@ -44,14 +44,12 @@ class ImageViewer extends React.Component {
   };
 
   componentDidMount() {
-    if (this.skipImageThumbnail()) {
-      return;
-    }
-
-    this.setState({ ssrDone: true });
-    if (isSafari()) {
-      //In Safari, onload event doesn't always called when reloading the page
-      this.forceOnImageLoad();
+    if (!this.shouldSkipImageThumbnail()) {
+      this.setState({ ssrDone: true });
+      if (isSafari()) {
+        //In Safari, onload event doesn't always called when reloading the page
+        this.forceOnImageLoad();
+      }
     }
   }
 
@@ -94,10 +92,10 @@ class ImageViewer extends React.Component {
     const getImageDimensions = (width, isMobile) => {
       let requiredHeight;
       let requiredWidth = width || 1;
-      if (isMobile) {
+      if (isMobile && !isSSR()) {
         //adjust the image width to viewport scaling and device pixel ratio
-        requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
-        requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
+        requiredWidth *= window.devicePixelRatio;
+        requiredWidth *= window.screen.width / document.body.clientWidth;
       }
       //keep the image's original ratio
       requiredHeight = this.calculateHeight(requiredWidth, src);
@@ -106,7 +104,7 @@ class ImageViewer extends React.Component {
       return [requiredWidth, requiredHeight];
     };
 
-    const skipImageThumbnail = this.skipImageThumbnail();
+    const skipImageThumbnail = this.shouldSkipImageThumbnail();
 
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
@@ -126,17 +124,14 @@ class ImageViewer extends React.Component {
         let effectiveWidth = this.context.containerWidth;
 
         if (size === 'small') {
-          //350px
+          //small size is 350px in css, might be overrided in consumers cssOverride
+
           effectiveWidth = Math.min(effectiveWidth, 350);
         }
-        const [w, h] = getImageDimensions(effectiveWidth, this.props.isMobile);
-        requiredWidth = w;
-        requiredHeight = h;
+        [requiredWidth, requiredHeight] = getImageDimensions(effectiveWidth, this.props.isMobile);
       } else if (this.state.container) {
         const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
-        const [w, h] = getImageDimensions(desiredWidth, this.props.isMobile);
-        requiredWidth = w;
-        requiredHeight = h;
+        [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
       }
       imageUrl.highres = getImageSrc(src, helpers, {
         requiredWidth,
@@ -156,7 +151,20 @@ class ImageViewer extends React.Component {
     return imageUrl;
   }
 
-  onImageLoadError = () => {};
+  onImageLoadError = () => {
+    const {
+      componentData: { src },
+    } = this.props;
+
+    if (src && src.fallback) {
+      this.setState({
+        fallbackImageSrc: {
+          preload: src.fallback,
+          highres: src.fallback,
+        },
+      });
+    }
+  };
 
   renderImage = (imageClassName, imageSrc, alt, props, isGif, onlyHighRes) => {
     return this.getImage(
@@ -348,7 +356,7 @@ class ImageViewer extends React.Component {
     const isGif = imageSrc?.highres?.endsWith?.('.gif');
     setComponentUrl?.(imageSrc?.highres);
 
-    const skipImageThumbnail = this.skipImageThumbnail();
+    const skipImageThumbnail = this.shouldSkipImageThumbnail();
 
     const shouldRenderPreloadImage = !seoMode && !skipImageThumbnail && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (skipImageThumbnail || seoMode || ssrDone)) || isGif;
