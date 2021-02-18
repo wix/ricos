@@ -52,7 +52,7 @@ export default class FullscreenProvider extends Component<Props, State> {
   componentWillReceiveProps(nextProps) {
     const { FullscreenModal } = this.state;
     if (nextProps.initialState !== this.props.initialState) {
-      if (!FullscreenModal && this.getImagesCount()) {
+      if (!FullscreenModal && this.getImagesCount() > 0) {
         this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
       }
     }
