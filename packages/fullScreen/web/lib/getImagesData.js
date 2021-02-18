@@ -4,7 +4,7 @@ const galleryType = 'wix-draft-plugin-gallery';
 const accordionType = 'wix-rich-content-plugin-accordion';
 const tableType = 'table';
 
-function imageEntryToGallery(data, index) {
+function imageEntityToGallery(data, index) {
   const src = data.src;
   const url = src.file_name;
   const metadata = data.metadata;
@@ -29,22 +29,20 @@ const blockToImagesKeys = {
   },
   [tableType]: entity => {
     let tableImagesKeys = {};
-    Object.entries(entity.data?.config.rows).forEach(([, row]) => {
-      Object.entries(row.columns).forEach(([, column]) => {
-        const blockKeys = contentTraverser(column.content).filter(key => key);
-        const imageKeys = blockKeys.length ? Object.assign(...blockKeys) : {};
-        tableImagesKeys = {
-          ...tableImagesKeys,
-          ...imageKeys,
-        };
-      });
+    getTableCellContents(entity).forEach(content => {
+      const blockKeys = contentTraverser(content);
+      const imageKeys = blockKeys.length ? Object.assign(...blockKeys) : {};
+      tableImagesKeys = {
+        ...tableImagesKeys,
+        ...imageKeys,
+      };
     });
     return tableImagesKeys;
   },
   [accordionType]: entity => {
     let accordionImagesKeys = {};
     entity.data?.pairs.forEach(pair => {
-      const blockKeys = contentTraverser(pair.content).filter(key => key);
+      const blockKeys = contentTraverser(pair.content);
       const imageKeys = blockKeys.length ? Object.assign(...blockKeys) : {};
       accordionImagesKeys = {
         ...accordionImagesKeys,
@@ -58,17 +56,16 @@ const blockToImagesKeys = {
   },
 };
 
-function contentTraverser(content) {
-  return content.blocks.map(block => {
-    const entityKey = block.entityRanges[0]?.key;
-    const blockKey = block.key;
-    const entity = content.entityMap[entityKey];
-    const entityType = entity?.type;
-    if (blockToImagesKeys[entityType]) {
-      return blockToImagesKeys[entityType](entity, blockKey);
-    }
-    return null;
-  });
+function contentTraverser({ blocks, entityMap }) {
+  return blocks
+    .map(block => {
+      const entityKey = block.entityRanges[0]?.key;
+      const blockKey = block.key;
+      const entity = entityMap[entityKey];
+      const entityType = entity?.type;
+      return blockToImagesKeys[entityType]?.(entity, blockKey);
+    })
+    .filter(x => x);
 }
 
 function innerRceImagesMapper(entityMap, index) {
@@ -77,67 +74,78 @@ function innerRceImagesMapper(entityMap, index) {
     if (block.type === imageType || block.type === imageTypeLegacy) {
       block.data?.src &&
         !block.data?.config?.disableExpand &&
-        images.push(imageEntryToGallery(block.data, index));
+        images.push(imageEntityToGallery(block.data, index));
     }
   });
   return images;
 }
 
-function getTableImages(entry, index) {
-  let tableImages = [];
-  const { rows } = entry.data.config;
+function getTableCellContents(tableEntity) {
+  const contents = [];
+  const { rows } = tableEntity.data.config;
   Object.entries(rows).forEach(([, row]) => {
-    Object.entries(row.columns).forEach(([, column]) => {
-      tableImages = [...tableImages, ...innerRceImagesMapper(column.content.entityMap, index)];
+    Object.entries(row.columns).forEach(([, cell]) => {
+      contents.push(cell.content);
     });
   });
-  return tableImages;
+  return contents;
 }
 
-function getAccordionImages(entry, index) {
+function getTableImages(entity, index) {
+  return getTableCellContents(entity)
+    .map(content => innerRceImagesMapper(content.entityMap, index))
+    .flat();
+}
+
+function getAccordionImages(entity, index) {
   let accordionImages = [];
-  entry.data.pairs.forEach(pair => {
+  entity.data.pairs.forEach(pair => {
     accordionImages = [...accordionImages, ...innerRceImagesMapper(pair.content.entityMap, index)];
   });
   return accordionImages;
 }
 
-function convertEntryToGalleryItems(entry, index) {
-  switch (entry.type) {
+function convertEntityToGalleryItems(entity, index) {
+  switch (entity.type) {
     case imageType:
     case imageTypeLegacy:
-      return entry.data.src && !entry?.data?.config?.disableExpand
-        ? [imageEntryToGallery(entry.data, index)]
+      return entity.data.src && !entity.data.config?.disableExpand
+        ? [imageEntityToGallery(entity.data, index)]
         : [];
     case galleryType: {
-      return !entry?.data?.config.disableExpand ? entry.data.items : [];
+      return entity.data.config.disableExpand ? [] : entity.data.items;
     }
     case tableType: {
-      return getTableImages(entry, index);
+      return getTableImages(entity, index);
     }
     case accordionType: {
-      return getAccordionImages(entry, index);
+      return getAccordionImages(entity, index);
     }
     default:
       return [];
   }
 }
+function createImageMap(content) {
+  const blockKeys = contentTraverser(content); // [{ key1: 1, key2: 1 }, { key3: 5 }];
+  let imageIndex = 0;
+  return blockKeys.reduce((imageMap, blockKeyAndImagesCountObjects) => {
+    Object.entries(blockKeyAndImagesCountObjects).forEach(([key, size]) => {
+      imageMap[key] = imageIndex;
+      imageIndex += size;
+    });
+    return imageMap;
+  }, {});
+}
+
+function getImages(entityMap) {
+  return Object.values(entityMap)
+    .map(convertEntityToGalleryItems) // [[imageData1, imageData2, imageData3], [imageData4, imageData5]]
+    .reduce((imagesData, imageData) => {
+      return imagesData.concat(imageData);
+    }, []);
+}
 
 export default function getImagesData(content) {
-  const blockKeys = contentTraverser(content).filter(keys => keys);
-  let imageIndex = 0;
-  const imageMap = {};
-  const images = Object.values(content.entityMap)
-    .map(convertEntryToGalleryItems)
-    .reduce((urls, entryUrls, i) => {
-      if (blockKeys[i]) {
-        Object.entries(blockKeys[i]).forEach(([key, size]) => {
-          imageMap[key] = imageIndex;
-          imageIndex += size;
-        });
-      }
-      return urls.concat(entryUrls);
-    }, []);
-
-  return { images, imageMap };
+  const images = getImages(content.entityMap);
+  return { images, imageMap: createImageMap(content) };
 }
