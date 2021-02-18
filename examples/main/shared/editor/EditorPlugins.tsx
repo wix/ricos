@@ -647,6 +647,11 @@ const config: RichContentEditorProps['config'] = {
     customStyleFn: customForegroundStyleFn,
     onColorAdded: color => (userColors = [...userColors, color]),
     getUserColors: () => userColors,
+    positionPicker: (buttonRef, panelWidth) => {
+      const { bottom, left } = buttonRef.current.getBoundingClientRect();
+      const panelLeft = left - panelWidth / 2;
+      return { left: panelLeft, top: bottom };
+    },
   },
   uiSettings,
   getToolbarSettings: ({ textButtons }) => [

@@ -25,10 +25,18 @@ export default class BaseTextColor extends Component {
   }
 
   openPanel = () => {
-    const { isMobile, setKeepOpen } = this.props;
+    const { isMobile, setKeepOpen, config, pluginParams } = this.props;
     if (!isMobile) {
       setKeepOpen && setKeepOpen(true);
     }
+
+    const settings = config[pluginParams.type];
+    if (settings.positionPicker) {
+      const position = settings.positionPicker(this.buttonRef, PANEL_WIDTH);
+      this.setState({ isPanelOpen: true, panelLeft: position.left, panelTop: position.top });
+      return;
+    }
+
     const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
     const panelLeft = left - PANEL_WIDTH / 2;
     this.setState({ isPanelOpen: true, panelLeft, panelTop: bottom });
