@@ -15,7 +15,22 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+
+</details>
+<hr/>
   
+## 8.22.1 (Feb 18, 2021)
+### :house: Internal
+- `common`
+  - [#2161](https://github.com/wix/ricos/pull/2161) add container width optional prop
+### :bug: Bug Fix
+- `editor`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+- `viewer`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+
+## 8.22.0 (Feb 16, 2021)
 ### :rocket: New Feature
 - `ricos-editor`
   - [#2153](https://github.com/wix-incubator/rich-content/pull/2153) getContentTraits expose isLastChangeEdit
@@ -28,9 +43,6 @@
   - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
 - `example`
   - [#2151](https://github.com/wix-incubator/rich-content/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
-
-</details>
-<hr/>
 
 ## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix
@@ -51,7 +63,7 @@
 ## 8.20.0 (Feb 9, 2021)
 ### :rocket: New Feature
 - `ricos-editor`
-  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling 
+  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling
 ### :bug: Bug Fix
 - `link`
   - [#2119](https://github.com/wix-incubator/rich-content/pull/2119) anchors issues in editor
