@@ -9,6 +9,7 @@ import {
   GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -122,36 +123,55 @@ describe('plugins', () => {
       });
     });
 
+    context('innerRCE images full screen', () => {
+      beforeEach('load editor', () =>
+        cy.loadRicosEditorAndViewer('inner-rce-images', usePlugins(plugins.all))
+      );
+
+      it('expand inner-rce images on full screen', function() {
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
+          .eq(1)
+          .parent()
+          .click();
+        cy.loadOutOfViewImagesInGallery();
+        cy.waitForGalleryImagesToLoad();
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        })
+          .eq(1)
+          .should('be.visible');
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+      });
+    });
+
     context('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('gallery').waitForGalleryImagesToLoad()
       );
 
       it('expand gallery image on full screen', () => {
-        cy.get(
-          '#pro-gallery-inner-container-v-0 > .pro-gallery-parent-container > #pro-gallery-container > #pro-gallery-margin-container > a[data-id="ea8ec1609e052b7f196935318316299d"] > #pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > .gallery-item-content',
-          {
-            timeout: 10000,
-          }
-        ).click({ force: true });
-        cy.get(
-          '#pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
-          {
-            timeout: 10000,
-          }
-        ).should('be.visible');
+        cy.get('[data-hook=ricos-viewer] [data-hook=item-wrapper]', {
+          timeout: 10000,
+        })
+          .eq(1)
+          .click({ force: true });
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
         // cy.eyesCheckWindow({
         //   tag: 'gallery fullscreen open on second image',
         //   target: 'window',
         //   fully: false,
         // });
         cy.get(`[data-hook=${'nav-arrow-back'}]`).click({ force: true });
-        cy.get(
-          '#pgi65a6266ba23a8a55da3f469157f15237_0 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
-          {
-            timeout: 10000,
-          }
-        ).should('be.visible');
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
         // cy.eyesCheckWindow({
         //   tag: 'gallery fullscreen previous image',
         //   target: 'window',
