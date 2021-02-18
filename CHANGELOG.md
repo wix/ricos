@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `common`
+  - [#2161](https://github.com/wix/ricos/pull/2161) add container width optional prop
 
 </details>
 <hr/>
