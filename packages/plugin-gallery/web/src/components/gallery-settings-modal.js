@@ -215,9 +215,7 @@ export class GallerySettingsModal extends Component {
         disableRightClick: !this.state.isRightClickEnabled,
       },
     };
-    if (this.state.metadata) {
-      this.addMetadataToBlock();
-    }
+
     pubsub.update('componentData', newComponentData);
 
     helpers.closeModal();
