@@ -333,13 +333,15 @@ export class GallerySettingsModal extends Component {
               </Tab>
             </Tabs>
           </div>
-          <SettingsPanelFooter
-            fixed
-            cancel={() => this.revertComponentData()}
-            save={this.onDoneClick}
-            theme={this.props.theme}
-            t={t}
-          />
+          {!isMobile && (
+            <SettingsPanelFooter
+              fixed
+              cancel={() => this.revertComponentData()}
+              save={this.onDoneClick}
+              theme={this.props.theme}
+              t={t}
+            />
+          )}
         </FocusManager>
       </div>
     );
