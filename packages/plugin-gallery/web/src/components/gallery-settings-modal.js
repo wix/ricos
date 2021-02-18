@@ -187,21 +187,7 @@ export class GallerySettingsModal extends Component {
   };
 
   otherTab() {
-    const { activeTab } = this.state;
-    switch (activeTab) {
-      case 'manage_media': {
-        return 'manage_media';
-      }
-      case 'advanced_settings': {
-        return 'advanced_settings';
-      }
-      case 'settings': {
-        return 'settings';
-      }
-      default: {
-        return 'manage_media';
-      }
-    }
+    return this.state.activeTab || 'manage_media';
   }
 
   switchTab() {
@@ -243,34 +229,24 @@ export class GallerySettingsModal extends Component {
     }));
   };
 
-  renderToggle = ({ toggleKey, labelKey }) => {
-    if (toggleKey === 'isRightClickEnabled') {
-      return (
-        <>
-          <LabeledToggle
-            theme={this.props.theme}
-            checked={this.state[toggleKey]}
-            label={this.props.t(labelKey)}
-            onChange={this.toggleState(toggleKey)}
-          />
-          <InfoIcon
-            theme={this.props.theme}
-            isNotification
-            tooltipText={this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip')}
-          />
-        </>
-      );
-    }
-    return (
+  renderToggle = ({ toggleKey, labelKey }) => (
+    <React.Fragment key={toggleKey}>
       <LabeledToggle
-        key={toggleKey}
         theme={this.props.theme}
         checked={this.state[toggleKey]}
         label={this.props.t(labelKey)}
         onChange={this.toggleState(toggleKey)}
       />
-    );
-  };
+      {toggleKey === 'isRightClickEnabled' ? (
+        <InfoIcon
+          theme={this.props.theme}
+          isNotification
+          tooltipText={this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip')}
+        />
+      ) : null}
+    </React.Fragment>
+  );
+
   toggleData = [
     {
       toggleKey: 'isExpandEnabled',

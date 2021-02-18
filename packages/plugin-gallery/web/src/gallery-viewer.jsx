@@ -187,8 +187,7 @@ class GalleryViewer extends React.Component {
       settings,
       componentData: { config },
     } = this.props;
-    const disableExpand = settings.disableExpand || config.disableExpand;
-    const isExpandEnabled = !disableExpand && settings.onExpand;
+    const isExpandEnabled = !(settings.disableExpand || config.disableExpand) && settings.onExpand;
     const isClickable = isExpandEnabled || itemProps.link;
     const itemOverlayStyles = classnames(
       this.styles.itemOverlay,
