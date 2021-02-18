@@ -19,6 +19,16 @@
 
 </details>
 <hr/>
+  
+## 8.22.1 (Feb 18, 2021)
+### :house: Internal
+- `common`
+  - [#2161](https://github.com/wix/ricos/pull/2161) add container width optional prop
+### :bug: Bug Fix
+- `editor`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+- `viewer`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
 
 ## 8.22.0 (Feb 16, 2021)
 ### :rocket: New Feature
