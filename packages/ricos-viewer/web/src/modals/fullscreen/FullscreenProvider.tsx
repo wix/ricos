@@ -44,7 +44,7 @@ export default class FullscreenProvider extends Component<Props, State> {
   }
 
   componentDidMount() {
-    if (this.props.initialState && this.getImagesCount() > 0) {
+    if (this.getImagesCount() > 0) {
       this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
     }
   }
