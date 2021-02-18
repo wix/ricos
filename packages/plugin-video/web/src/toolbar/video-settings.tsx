@@ -25,11 +25,11 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   const styles = mergeStyles({ styles: Styles, theme });
 
   const onToggle = () => setIsDownloadEnabled(!isDownloadEnabled);
-  const onCancelClick = () => helpers.closeModal?.();
+  const closeModal = () => helpers.closeModal?.();
   const onDoneClick = () => {
     const newComponentData = { ...componentData, config: { disableDownload: !isDownloadEnabled } };
     pubsub.update('componentData', newComponentData);
-    helpers.closeModal?.();
+    closeModal();
   };
 
   const mobileSettingsProps = {
@@ -39,10 +39,9 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
     cancelLabel: t('SettingsPanelFooter_Cancel'),
     saveLabel: t('SettingsPanelFooter_Save'),
     isMediaSettingsModal: true,
-    cancel: onCancelClick,
+    cancel: closeModal,
     save: onDoneClick,
   };
-
   return (
     <div
       data-hook="videoSettings"
@@ -53,10 +52,10 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
       {isMobile ? (
         <SettingsMobileHeader {...mobileSettingsProps} />
       ) : (
-        <React.Fragment>
+        <>
           <div className={styles.videoSettingsTitle}>{t('VideoPlugin_Settings_Header')}</div>
           <div className={styles.separator} />
-        </React.Fragment>
+        </>
       )}
       <SettingsSection theme={theme} className={classNames(styles.videoSettings_toggleContainer)}>
         <LabeledToggle
@@ -68,7 +67,6 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
         />
         <InfoIcon
           theme={theme}
-          isNotification
           tooltipText={t('VideoPlugin_Settings_VideoCanBeDownloaded_Tooltip')}
         />
       </SettingsSection>
@@ -77,7 +75,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
           className={styles.videoSettings_footer}
           fixed
           theme={theme}
-          cancel={onCancelClick}
+          cancel={closeModal}
           save={onDoneClick}
           t={t}
         />

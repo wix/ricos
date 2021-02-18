@@ -304,10 +304,7 @@ export default function createAtomicPluginToolbar({
             ...defaultButtonProps,
             type: BUTTONS.EXTERNAL_MODAL,
           };
-          if (isCustomVideo) {
-            return <Button {...videoSettingsProps} />;
-          }
-          return null;
+          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
         case BUTTONS.LINK_PREVIEW: {
           return (
             <BlockLinkButton
