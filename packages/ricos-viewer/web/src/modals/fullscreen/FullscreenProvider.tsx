@@ -1,6 +1,7 @@
 import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
 import { emptyState } from 'ricos-common';
 import { Helpers } from 'wix-rich-content-common';
+import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import { RicosContent, FullscreenProps } from '../../index';
 
 interface Props {
@@ -34,8 +35,27 @@ export default class FullscreenProvider extends Component<Props, State> {
     };
   }
 
+  getImagesCount(): number {
+    if (this.props.initialState) {
+      return getImagesData(this.props.initialState).images.length;
+    } else {
+      return 0;
+    }
+  }
+
   componentDidMount() {
-    this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+    if (this.props.initialState && this.getImagesCount() > 0) {
+      this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { FullscreenModal } = this.state;
+    if (nextProps.initialState !== this.props.initialState) {
+      if (!FullscreenModal && this.getImagesCount()) {
+        this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+      }
+    }
   }
 
   loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
