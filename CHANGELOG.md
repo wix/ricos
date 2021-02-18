@@ -20,8 +20,23 @@
 - `fullScreen`
   - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
 	
+
+### :house: Internal
+- `image`
+  - [#2167](https://github.com/wix/ricos/pull/2167) image config type contains optional `consumer` field for Photo Studio's internal BI
+
 </details>
 <hr/>
+  
+## 8.22.1 (Feb 18, 2021)
+### :house: Internal
+- `common`
+  - [#2161](https://github.com/wix/ricos/pull/2161) add container width optional prop
+### :bug: Bug Fix
+- `editor`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+- `viewer`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
 
 ## 8.22.0 (Feb 16, 2021)
 ### :rocket: New Feature
@@ -34,6 +49,8 @@
 - `ricos-editor`
   - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
   - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
+- `example`
+  - [#2151](https://github.com/wix-incubator/rich-content/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
 
 ## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix
