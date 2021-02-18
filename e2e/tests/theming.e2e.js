@@ -74,11 +74,25 @@ function tests({ isDesktop }) {
     testFlow(isDesktop, this.test.title);
   });
 
-  it('dark palette, cssOverride', function() {
+  it('dark palette, no cssOverride', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
       usePlugins(plugins.all),
-      useTheming({ paletteType: 'dark' })
+      useTheming({
+        skipCssOverride: true,
+        paletteType: 'dark',
+      })
+    ).focusEditor();
+    cy.wait(2000);
+    cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
+  });
+
+  it('dark palette, cssOverride, no container', function() {
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      usePlugins(plugins.all),
+      useTheming({ paletteType: 'dark', disableContainer: true })
     ).focusEditor();
     cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
