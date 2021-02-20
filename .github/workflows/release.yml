@@ -16,14 +16,17 @@ jobs:
         uses: arduino/setup-protoc@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: npx midgard-yarn install --frozen-lockfile
-      - run: npm run build
-      - run: npm run release
-      - run: curl -X POST https://api.github.com/repos/wix-private/wix-ricos/dispatches \
-              -H 'Accept: application/vnd.github.everest-preview+json' \
-              -u ${{ secrets.ACCESS_TOKEN }} \
-              --data '{"event_type": "update-ricos", "client_payload": { "repository": "ricos" }}'
-
+      - name: Retrieve version
+        run: |
+          echo ::set-env name=TAG_NAME::$(echo `git tag --points-at HEAD`)
+      - run: |
+          npx midgard-yarn install --frozen-lockfile
+          npm run build
+          npm run release
+          curl -X POST https://api.github.com/repos/wix-private/wix-ricos/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACCESS_TOKEN }} \
+          --data '{"event_type": "update-ricos", "client_payload": { "repository": "ricos", "version": "${{ env.TAG_NAME }}" }}'
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       NPM_EMAIL: ${{ secrets.NPM_EMAIL}}
