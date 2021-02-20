@@ -43,7 +43,7 @@
     }
   },
   "dependencies": {
-    "react-measure": "~2.3.0",
+    "react-measure": "~2.5.2",
     "ricos-content": "8.22.2",
     "wix-rich-content-common": "8.22.2",
     "wix-rich-content-viewer": "8.22.2"

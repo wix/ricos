@@ -36,10 +36,10 @@
     "test": "jest --verbose"
   },
   "dependencies": {
-    "@wix/draft-js": "0.0.10",
-    "downshift": "3.2.12",
+    "@wix/draft-js": "0.11.3",
+    "downshift": "3.4.8",
     "focus-trap": "~2.4.6",
-    "react-window": "~1.5.0",
+    "react-window": "~1.8.6",
     "wix-rich-content-common": "8.22.2"
   },
   "unpkg": true,

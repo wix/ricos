@@ -35,10 +35,10 @@
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "react-flip-move": "^3.0.4",
     "react-infinite-scroller": "^1.2.4",
-    "react-modal": "~3.4.1",
+    "react-modal": "~3.12.1",
     "wix-rich-content-common": "8.22.2",
     "wix-rich-content-editor-common": "8.22.2",
     "wix-rich-content-plugin-commons": "8.22.2"
