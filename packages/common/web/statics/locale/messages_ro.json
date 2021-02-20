@@ -485,6 +485,7 @@
 	"Accordion_ShownText_Placeholder": "Scrie un titlu pentru acest articol",
 	"Video_plugin_search_tags": "videoclip film clip muzică audio mtv youtube cameră melodie film digital vizual încărcare video animat înregistrare viral",
 	"ReplaceGiphyButton_Tooltip": "Înlocuiește GIF",
+	"TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
 	"GalleryPlugin_Layout_Columns": "Coloane",
 	"Common_Units_PX": "px",
 	"UploadAudio_Error_aac_Unsupported_Format": "This audio file is not in a supported AAC format and can’t be uploaded. Try a different file,.",

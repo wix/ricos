@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "react-colorful": "^4.4.3",
-    "react-measure": "~2.3.0",
+    "react-measure": "~2.5.2",
     "wix-rich-content-common": "8.22.2",
     "wix-rich-content-editor-common": "8.22.2"
   },

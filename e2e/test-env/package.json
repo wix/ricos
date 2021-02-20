@@ -11,13 +11,13 @@
     "start": "node --max-http-header-size=1000000 ./src/server"
   },
   "dependencies": {
-    "casual-browserify": "1.5.19-2",
+    "casual-browserify": "1.5.19",
     "deep-freeze": "0.0.1",
     "express": "^4.17.1",
     "happypack": "^5.0.1",
     "ignore-styles": "^5.0.1",
     "qs": "^6.6.0",
-    "react-highlight-words": "0.16.0",
+    "react-highlight-words": "0.17.0",
     "ricos-editor": "8.22.2",
     "ricos-viewer": "8.22.2",
     "serialize-javascript": "^5.0.0",
