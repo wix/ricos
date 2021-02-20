@@ -277,7 +277,9 @@ describe('plugins', () => {
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
     });
-    it('convert link preview to regular link', function() {
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('convert link preview to regular link', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
       cy.triggerLinkPreviewViewerUpdate();
@@ -455,6 +457,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
