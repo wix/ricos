@@ -4991,15 +4991,15 @@
   dependencies:
     "@types/node" "*"
 
-"@types/i18next@*", "@types/i18next@11.9.3":
-  version "11.9.3"
-  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-11.9.3.tgz#04d84c6539908ad69665d26d8967f942d1638550"
-  integrity sha512-snM7bMKy6gt7UYdpjsxycqSCAy0fr2JVPY0B8tJ2vp9bN58cE7C880k20PWFM4KXxQ3KsstKM8DLCawGCIH0tg==
-
-"@types/i18next@11.9.0":
+"@types/i18next@*", "@types/i18next@11.9.0":
   version "11.9.0"
   resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-11.9.0.tgz#e3781b5b6a923902c63e61d09b98881999a4eb88"
   integrity sha512-9ah3/OkCuZRH8QJPOfnTh5Q6JvohJivWGjmK5IgsvKEXCLpVbIPB/RXOM22Ms3xFT2Mbvt7d/mh4U7GIxEuN6A==
+
+"@types/i18next@11.9.3":
+  version "11.9.3"
+  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-11.9.3.tgz#04d84c6539908ad69665d26d8967f942d1638550"
+  integrity sha512-snM7bMKy6gt7UYdpjsxycqSCAy0fr2JVPY0B8tJ2vp9bN58cE7C880k20PWFM4KXxQ3KsstKM8DLCawGCIH0tg==
 
 "@types/is-function@^1.0.0":
   version "1.0.0"
