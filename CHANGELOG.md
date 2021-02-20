@@ -19,7 +19,10 @@
 ### :rocket: New Feature
 - `fullScreen`
   - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
-	
+### :house: Internal
+- `ricos-viewer`
+  - [#2168](https://github.com/wix-incubator/rich-content/pull/2168) load fullscreen modal if content includes images
+
 
 </details>
 <hr/>
