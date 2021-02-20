@@ -1,18 +1,17 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import './read-more.scss';
 .seeFullPost_container {
   position: relative;
 }
 
 .seeFullPost_overlay {
-  position: absolute;
+  position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  top: 0;
   width: 100%;
-  height: 100%;
   cursor: pointer;
 }
 
 .seeFullPost_label {
-  font-weight: bold;
+  @extend .readMore_label;
+  margin-top: 3px;
 }

@@ -4,11 +4,8 @@ import classNames from 'classnames';
 import Modal from 'react-modal';
 
 import { mergeStyles } from 'wix-rich-content-common';
-import {
-  InlineToolbarButton,
-  getSelectionStyles,
-  EditorState,
-} from 'wix-rich-content-editor-common';
+import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
+import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
 import TextColorPanel from './TextColorPanel';
 import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';
@@ -38,8 +35,9 @@ export default class BaseTextColor extends Component {
   };
 
   closePanel = editorState => {
-    this.setState({ isPanelOpen: false }, () => this.preserveSelectionState(editorState));
+    this.setState({ isPanelOpen: false });
     this.props.setKeepOpen(false);
+    this.preserveSelectionState(editorState);
   };
 
   preserveSelectionState(newEditorState) {
@@ -82,7 +80,19 @@ export default class BaseTextColor extends Component {
     };
 
     const modalStyle = {
-      content: isMobile ? { top: 'unset', left: 0 } : { top: panelTop, left: panelLeft },
+      content: isMobile
+        ? {
+            top: 'unset',
+            left: 0,
+            backgroundColor: 'white',
+          }
+        : {
+            top: panelTop,
+            left: panelLeft,
+            marginTop: 15,
+            borderRadius: 2,
+            width: 184,
+          },
     };
 
     return (

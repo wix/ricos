@@ -1089,7 +1089,7 @@
           "cubeType": "fill",
           "enableInfiniteScroll": 1,
           "titlePlacement": "SHOW_ON_HOVER",
-          "allowHover": false,
+          "allowHover": true,
           "itemClick": "link",
           "fullscreen": false,
           "showArrows": false,

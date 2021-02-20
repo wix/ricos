@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Loader } from 'wix-rich-content-editor-common';
+import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
@@ -40,19 +40,6 @@ class VideoComponent extends React.Component {
     this.handlePlayerFocus();
   }
 
-  static getDerivedStateFromProps(props) {
-    const {
-      componentState: { error },
-    } = props;
-    if (error) {
-      const errorMsg = error?.msg;
-      return { errorMsg };
-    } else if (error === false) {
-      return { errorMsg: undefined };
-    }
-    return {};
-  }
-
   handlePlayerFocus() {
     // eslint-disable-next-line react/no-find-dom-node
     const element = findDOMNode(this).querySelector('iframe, video');
@@ -67,14 +54,8 @@ class VideoComponent extends React.Component {
     }
   };
 
-  renderOverlay = (styles, t) => {
-    const { isLoaded } = this.state;
-    const overlayText = t('VideoComponent_Overlay');
-    return (
-      <div className={classNames(styles.video_overlay)}>
-        {isLoaded && <span className={styles.video_overlay_message}>{overlayText}</span>}
-      </div>
-    );
+  renderOverlay = styles => {
+    return <div className={classNames(styles.video_overlay)} />;
   };
 
   renderLoader = () => {
@@ -123,8 +104,13 @@ class VideoComponent extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { className, onClick } = this.props;
-    const { isPlayable, isLoaded, errorMsg } = this.state;
+    const {
+      className,
+      onClick,
+      t,
+      componentData: { error },
+    } = this.props;
+    const { isPlayable, isLoaded } = this.state;
     const containerClassNames = classNames(this.styles.video_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
@@ -137,8 +123,8 @@ class VideoComponent extends React.Component {
       >
         {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
         {this.renderPlayer()}
-        {!isLoaded && !errorMsg && this.renderLoader()}
-        {errorMsg && <div className={styles.error}>{errorMsg}</div>}
+        {!isLoaded && !error && this.renderLoader()}
+        {error && <MediaItemErrorMsg error={error} t={t} />}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */

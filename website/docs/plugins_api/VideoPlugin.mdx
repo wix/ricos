@@ -1,0 +1,136 @@
+---
+id: VideoPlugin
+title: Video Plugin
+sidebar_label: Video Plugin
+---
+
+import { RicosViewer } from 'ricos-viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginVideo as pluginVideoViewer } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import videoContent from '../../infra/editor/content/video-content.json';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+import {
+  mockVideoNativeUploadFunc,
+  getVideoUrl,
+} from '../../infra/editor/config/fileUploadUtil.js';
+
+If a Picture is Worth a Thousand Words, Then Is a Video Worth a Million?
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add A Video!')}
+    placeholder={'Type here!'}
+    plugins={[pluginVideo({ handleFileUpload: mockVideoNativeUploadFunc, getVideoUrl })]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
+import { pluginVideo } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosEditor plugins={[pluginVideo(VideoConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosViewer plugins={[pluginVideo(VideoConfig)]} />;
+```
+
+## Video Config API
+
+### `disableDownload`
+
+```jsx
+disableDownload?: boolean;
+```
+
+Disable donwload option for videos (viewer relevant only)
+
+<div className="card">
+  <RicosViewer
+    content={videoContent}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginVideoViewer({
+        disableDownload: true,
+        getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+      }),
+    ]}
+  />
+</div>
+
+### `getVideoUrl`
+
+This function take the pathname and form a full URL (invoked when rendering video which has relative URL).
+
+```jsx
+getVideoUrl?: (src: { pathname: string }) => string;
+```
+
+### `toolbar`
+
+The toolbar setting refers to the plugin functionality toolbar, it is an object which may consist of the following keys:
+
+```jsx
+toolbar?: {
+  hidden?: [keynames: string];
+  icons?: { keynames: string };
+}
+```
+
+`hidden` - An array of toolbar button keynames to be removed from toolbar
+
+`icons` - An object of toolbar button keynames to custom icons map (e.g { replace: MyCustomReplaceIcon }, { InsertPluginButtonIcon: MyCustomInsertIcon } etc...)
+
+### `enableCustomUploadOnMobile`
+
+Apply the extended input modal styles in mobile (if `handleFileSelection` is available)
+
+```jsx
+enableCustomUploadOnMobile?: boolean;
+```
+
+### `handleFileSelection`
+
+Here you can call your custom video upload functionality
+
+```jsx
+handleFileSelection?: (updateEntity: ({ data: dataType }) => void) => void;
+
+dataType =
+  {
+    pathname: string,
+    thumbnail: {
+      pathname: string,
+      height: number,
+      width: number,
+    },
+  };
+```
+
+### `handleFileUpload`
+
+Use for native file upload
+
+```jsx
+handleFileUpload?: (file: File, updateEntity: ({ data: dataType }) => void) => void;
+
+dataType =
+  {
+    pathname: string,
+    thumbnail: {
+      pathname: string,
+      height: number,
+      width: number,
+    },
+  };
+```

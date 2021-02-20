@@ -1,7 +1,8 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .container {
-  width: 100%;
+  width: calc(100% - 24px);
   cursor: pointer;
-  height: 48px;
   display: grid;
   grid-template-areas:
     'img title'
@@ -10,13 +11,14 @@
   grid-column-gap: 20px;
   padding: 17px 0;
   &.selected {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba($fallbackColorTuple, 0.1);
   }
   &:hover:not(.selected) {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba($fallbackColorTuple, 0.06);
   }
 
   .image {
+    background-color: #cccccc;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -30,7 +32,9 @@
   .description {
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
     color: black;
+    padding-right: 36px;
   }
   .title {
     grid-area: title;
@@ -41,6 +45,7 @@
     grid-area: description;
     font-size: 14px;
     line-height: 1.43;
+    opacity: 0.6;
   }
 }
 

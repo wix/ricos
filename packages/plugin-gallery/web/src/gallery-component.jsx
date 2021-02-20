@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Loader } from 'wix-rich-content-editor-common';
+import { Loader } from 'wix-rich-content-plugin-commons';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
-import { DEFAULTS, imageItem } from './constants';
+import { DEFAULTS, GALLERY_ITEMS_TYPES, createImageItem, createVideoItem } from './defaults';
+import { GALLERY_TYPE } from './types';
+import styles from '../statics/styles/gallery-component.scss';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER =
@@ -77,17 +79,17 @@ class GalleryComponent extends PureComponent {
     return state;
   };
 
-  setItemInGallery = (item, itemPos) => {
+  setItemInGallery = (item, error, itemPos) => {
     const shouldAdd = typeof itemPos === 'undefined';
     let { items, styles, key } = this.state;
     let itemIdx;
     if (shouldAdd) {
       itemIdx = items.length;
-      items = [...items, item];
+      items = [...items, { ...item, error }];
     } else {
       itemIdx = itemPos;
       items = [...items];
-      items[itemPos] = item;
+      items[itemPos] = { ...item, error };
     }
 
     //when updating componentData on an async method like this one,
@@ -100,9 +102,15 @@ class GalleryComponent extends PureComponent {
 
     this.setState({ items, key: !key });
     if (this.props.store) {
-      this.props.store.update('componentData', { items, styles, config: {} });
+      this.props.store.update('componentData', {
+        items,
+        styles,
+        config: {},
+      });
     }
-
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
     return itemIdx;
   };
 
@@ -115,58 +123,54 @@ class GalleryComponent extends PureComponent {
     this.state && this.onLoad(true);
   };
 
-  imageLoaded = (event, file, itemPos) => {
-    const img = event.target;
-    const item = imageItem(img, Date.now().toString());
-    const itemIdx = this.setItemInGallery(item, itemPos);
+  handleFileUpload = (file, type, itemIdx) => {
     const { helpers } = this.props;
     const handleFileUpload = helpers?.handleFileUpload;
 
     if (handleFileUpload) {
-      handleFileUpload(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
+      const createGalleryItem =
+        type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, type);
+      handleFileUpload(file, ({ data, error }) => {
+        const item = createGalleryItem(data, Date.now().toString());
+        uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
+        this.setItemInGallery(item, error, itemIdx);
+      });
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
     }
   };
 
-  handleFilesAdded = ({ data, itemIdx }) => {
-    const handleFileAdded = (item, idx) => {
+  imageLoaded = (event, file, itemPos) => {
+    const img = event.target;
+    const item = createImageItem(img, Date.now().toString(), true);
+    const itemIdx = this.setItemInGallery(item, itemPos);
+    this.handleFileUpload(file, GALLERY_ITEMS_TYPES.IMAGE, itemIdx);
+  };
+
+  handleFilesAdded = ({ data, error, itemIdx }, uploadBIData) => {
+    const handleFileAdded = (item, error, idx) => {
       const galleryItem = {
         metadata: {
-          type: item.type || 'image',
+          type: item.type || GALLERY_ITEMS_TYPES.IMAGE,
           height: item.height,
           width: item.width,
         },
         itemId: String(item.id),
         url: item.file_name,
       };
-      if (item.type === 'video') {
+      if (item.type === GALLERY_ITEMS_TYPES.VIDEO) {
         galleryItem.metadata.poster = item.poster || item.thumbnail_url;
       }
-      this.setItemInGallery(galleryItem, idx);
+      uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
+      this.setItemInGallery(galleryItem, error, idx);
     };
-
     if (data instanceof Array) {
       data.forEach(item => {
-        handleFileAdded(item);
+        handleFileAdded(item, error);
       });
     } else {
-      handleFileAdded(data, itemIdx);
-    }
-  };
-
-  videoLoaded = (event, file, itemPos) => {
-    const { helpers } = this.props;
-    const hasFileChangeHelper = helpers && helpers.onVideoSelected;
-
-    if (hasFileChangeHelper) {
-      helpers.onVideoSelected(file, video => {
-        // eslint-disable-next-line camelcase
-        const data = { ...video, id: Date.now().toString(), file_name: video.video_url };
-        this.handleFilesAdded({ data, itemPos });
-      });
-    } else {
-      console.warn('Missing upload function'); //eslint-disable-line no-console
+      handleFileAdded(data, error, itemIdx);
     }
   };
 
@@ -176,7 +180,7 @@ class GalleryComponent extends PureComponent {
       img.onload = e => this.imageLoaded(e, file, itemPos);
       img.src = event.target.result;
     } else if (file.type.match('video/*')) {
-      this.videoLoaded(event, file, itemPos);
+      this.handleFileUpload(file, GALLERY_ITEMS_TYPES.VIDEO, itemPos);
     }
   };
 
@@ -187,6 +191,13 @@ class GalleryComponent extends PureComponent {
   onLoad = isLoading => {
     this.setState({ isLoading });
   };
+
+  renderMobileNativeLoader = ({ url }) =>
+    url ? null : (
+      <div className={styles.mobileNativeLoaderContainer}>
+        <Loader type={'mini'} disableProgress />
+      </div>
+    );
 
   render() {
     return (
@@ -204,6 +215,7 @@ class GalleryComponent extends PureComponent {
           anchorTarget={this.props.anchorTarget}
           relValue={this.props.relValue}
           blockKey={this.blockKey}
+          itemOverlayElement={this.renderMobileNativeLoader}
         />
         {this.state.isLoading && this.renderLoader()}
       </>

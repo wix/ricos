@@ -1,0 +1,207 @@
+---
+id: TextColorAndHighlightPlugins
+title: Text Color and Highlight Plugins
+sidebar_label: Text Color and Highlight Plugins
+---
+
+import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { isHexColor } from 'wix-rich-content-common';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+One (or actually Two) of the most basic features in text editing ! <br />
+Modify text color or highlight the important stuff.
+
+<div className="card">
+  <RicosEditorWithMobile
+    plugins={[pluginTextColor(), pluginTextHighlight()]}
+    content={createContent('Color & Highlight text as you please !')}
+    placeholder={'Type here!'}
+  />
+</div>
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+
+<RicosEditor
+  plugins={[pluginTextColor(textColorConfig), pluginTextHighlight(textHighlightConfig)]}
+/>;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import {
+  pluginTextColor,
+  pluginTextHighlight,
+} from 'wix-rich-content-plugin-text-color/dist/module.viewer';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+<RicosViewer
+  plugins={[pluginTextColor(textColorConfig), pluginTextHighlight(textHighlightConfig)]}
+/>;
+```
+
+## Config
+
+:::note
+Text Color and Text Highlight have exactly the same config but both require it to be passed to them seperatly for flexability.
+:::
+
+| setting key               | description                                                                            | default value                             | is required? | editor/viewer config |
+| ------------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------- | ------------ | -------------------- |
+| `colorScheme`             | custom-style to hex-color map: `{ color1: { color: '#fff', index: 0 }, ... }`          | none (DEFAULT_PALETTE is used by default) | No           | editor               |
+| `styleSelectionPredicate` | a function that tells the plugin which inline styles are relevant: `string => boolean` | `style => isHexColor(style)`              | No           | both                 |
+| `customStyleFn` (1)       | a function that converts an inline-style to CSS style: `DraftInlineStyle => object`    | DEFAULT_STYLE_FN_DRAFT                    | No           | editor               |
+| `customStyleFn` (2)       | a function that converts an inline-style to CSS style: `string => object`              | DEFAULT_STYLE_FN                          | No           | viewer               |
+| `onColorAdded`            | a handler called when a custom color is added                                          | none                                      | No           | editor               |
+| `getUserColors`           | a function that returns user-defined custom colors                                     | none                                      | No           | editor               |
+
+### Usage exmaple with custom colors
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import { isHexColor } from 'wix-rich-content-common';
+
+const colorScheme = {
+  color1: {
+    color: '#fff',
+    index: 0,
+  },
+  color2: {
+    color: '#303030',
+    index: 1,
+  },
+  color3: {
+    color: '#bfad80',
+    index: 2,
+  },
+  color4: {
+    color: '#bf695c',
+    index: 3,
+  },
+  color5: {
+    color: '#f7f7f7',
+    index: 4,
+  },
+  color6: {
+    color: '#f7f7f7',
+    index: 5,
+  },
+};
+
+const viewerCustomForegroundStyleFn = style => {
+  let colorRule = {};
+  if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
+    colorRule = { color: colorScheme[style].color };
+  } else if (isHexColor(style)) {
+    colorRule = { color: style };
+  }
+  return colorRule;
+};
+
+const customForegroundStyleFn = styles =>
+  styles.toArray().reduce((cssStyle, style) => {
+    return {
+      ...cssStyle,
+      ...viewerCustomForegroundStyleFn(style),
+    };
+  }, {});
+
+const viewerCustomBackgroundStyleFn = style => {
+  let colorRule = {};
+  if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
+    colorRule = { backgroundColor: colorScheme[style].color };
+  } else if (isHexColor(style)) {
+    colorRule = { backgroundColor: style };
+  }
+  return colorRule;
+};
+
+const customBackgroundStyleFn = styles =>
+  styles.toArray().reduce((cssStyle, style) => {
+    return {
+      ...cssStyle,
+      ...viewerCustomBackgroundStyleFn(style),
+    };
+  }, {});
+
+const styleSelectionPredicate = style => {
+  return (colorScheme[style] && isHexColor(colorScheme[style].color)) || isHexColor(style);
+};
+
+let userForegroundColors = [];
+
+const textColorConfig = {
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customForegroundStyleFn,
+    onColorAdded: color => (userForegroundColors = [...userForegroundColors, color]),
+    getUserColors: () => userForegroundColors,
+}
+
+let userBackgroundColors = [];
+
+const textHighlightConfig = {
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customBackgroundStyleFn,
+    onColorAdded: color => (userBackgroundColors = [...userBackgroundColors, color]),
+    getUserColors: () => userBackgroundColors,
+}
+
+<RicosEditor plugins={[pluginTextColor(textColorConfig), pluginTextHighlight(textHighlightConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
+import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import { isHexColor } from 'wix-rich-content-common';
+
+const styleSelectionPredicate = style => {
+  return (colorScheme[style] && isHexColor(colorScheme[style].color)) || isHexColor(style);
+};
+
+const viewerCustomForegroundStyleFn = style => {
+  let colorRule = {};
+  if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
+    colorRule = { color: colorScheme[style].color };
+  } else if (isHexColor(style)) {
+    colorRule = { color: style };
+  }
+  return colorRule;
+};
+
+const viewerCustomBackgroundStyleFn = style => {
+  let colorRule = {};
+  if (colorScheme[style] && isHexColor(colorScheme[style].color)) {
+    colorRule = { backgroundColor: colorScheme[style].color };
+  } else if (isHexColor(style)) {
+    colorRule = { backgroundColor: style };
+  }
+  return colorRule;
+};
+
+const textColorConfig = {
+    styleSelectionPredicate,
+    customStyleFn: customForegroundStyleFn,
+}
+
+const textHighlightConfig = {
+    styleSelectionPredicate,
+    customStyleFn: customBackgroundStyleFn,
+}
+
+<RicosViewer plugins={[pluginTextColor(textColorConfig), pluginTextHighlight(textHighlightConfig)]} />;
+```
+
+<br />

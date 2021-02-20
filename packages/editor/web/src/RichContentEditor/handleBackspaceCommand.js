@@ -39,8 +39,9 @@ export default editorState => {
     return EditorState.push(editorState, withoutBlockStyle, 'change-block-type');
   }
 
-  // Last, try to decrease indentation
+  // cases where cursor is at start of block
   if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
+    // try to decrease indentation
     const depth = getSelectedBlocks(editorState)[0].getDepth();
     if (depth > 0) {
       return indentSelectedBlocks(editorState, -1);

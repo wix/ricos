@@ -1,256 +1,106 @@
-# Wix Rich Content
+<div align="center">
+  <img width=100 src="logo.png"/>
+</div>
+<h2>A React-based, supercharged rich content editor with an extensible plugin system</h2>
 
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) [![Build Status](https://travis-ci.org/wix-incubator/rich-content.svg?branch=master)](https://travis-ci.org/wix-incubator/rich-content)
 
-## A React based, super charged rich content editor with an extensible plugin system
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) 
 
-![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
+<div align="center">
+  <img src="ricos.gif"/>
+</div>
 
-You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-content.herokuapp.com/)
+<br />
 
-## Installation
 
-To install this package as editor, use the following command
+Try out our [demo](https://wix-rich-content.herokuapp.com/). You can see the full documentation here: [https://wix.github.io/ricos/](https://wix.github.io/ricos/)
 
-```bash
-npm install --save wix-rich-content-editor 
-```
+## Quick start
 
-To install this package as viewer, use the following command:
-
-```bash
-npm install --save wix-rich-content-viewer
-```
-
-## Getting Started
-
-### 1. Basic Editor
-
-To get started with the editor, create a simple `React.Component`, and import the editor component:
-
-```jsx
-import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
-```
-
-Then, create an empty `editorState` in your state:
-
-```jsx
-export class MyApp extends React.Component {
-  state = {
-    editorState: EditorState.createEmpty(),
-  };
-}
-```
-
-Use the `RichContentEditor` component in your `render` function, and implement `onChange` function:
-
-```jsx
-import React from 'react';
-import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
-
-export class MyApp extends React.Component {
-  state = {
-    editorState: EditorState.createEmpty(),
-  };
-
-  onChange = editorState => {
-    this.setState({
-      editorState,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <RichContentEditor onChange={this.onChange} editorState={this.state.editorState} />
-      </div>
-    );
-  }
-}
-```
-
-Now, to make sure you are getting the most of the rich-content editor, include the compiled CSS files in your app's main file:
-
-`app.js`
-
-```jsx
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-import 'wix-rich-content-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-...'/dist/styles.min.css';
-```
-
-> You can also import the CSS files using `@import '~...`;` from a SCSS file.
-
-### 2. Add Plugins
-
-To add plugins to your editor, choose one of the implemented plugins from [the list of available plugins](https://github.com/wix-incubator/rich-content/tree/master/packages).
-
-Install the plugin you wish use from NPM:
+Start with installing the package:
 
 ```bash
-npm install wix-rich-content-plugin-divider
+npm i ricos-editor
 ```
 
-Import the plugin's stylesheet file in your main app's file:
+Then add a basic rich text editor to your app. You can now test typing and adding formatting to your text:
 
 ```jsx
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
+
+<RicosEditor placeholder={'Type here!'} />;
+```
+
+Let's add some plugins:
+
+```bash
+npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
+```
+
+Adding videos and dividers:
+
+```jsx
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
+
+import { pluginVideo } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+
+import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+
+<RicosEditor placeholder={'Type here!'} plugins={[pluginDivider(), pluginVideo()]} />;
 ```
 
-Then, add `plugins` prop with the plugin's creation method:
+There you go! A rich content editor with plugins. 
 
-```jsx
-import React from 'react';
-import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
-import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
+[See full documentation](https://wix.github.io/ricos/)
 
-const PLUGINS = [createDividerPlugin];
+### SSR support
 
-export class MyApp extends React.Component {
-  state = {
-    editorState: EditorState.createEmpty(),
-  };
+Compiled package also contains a CommonJS bundle, which you can consume if you are using SSR.
 
-  onChange = editorState => {
-    this.setState({
-      editorState,
-    });
-  };
+## Using with [Yoshi](https://github.com/wix/yoshi)
 
-  render() {
-    return (
-      <div>
-        <RichContentEditor
-          plugins={PLUGINS}
-          onChange={this.onChange}
-          editorState={this.state.editorState}
-        />
-      </div>
-    );
-  }
-}
-```
-
-### 3. Theme and Custom Styling
-
-To customize the look and feel of the editor, you can use `theme` prop, and override the styles as you wish.
-
-Use the style's `className` to override. It also support css-modules imports.
-
-`my-style.css`
-
-```css
-.divider {
-  backgorund-color: red;
-}
-
-.divider-container {
-  border: 1px blue solid;
-}
-```
-
-```jsx
-import React from 'react';
-import { EditorState, RichContentEditor } from 'wix-rich-content-editor';
-import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
-import dividerTheme from './my-style.css';
-
-const PLUGINS = [createDividerPlugin];
-
-const THEME = {
-  ...dividerTheme,
-};
-
-export class MyApp extends React.Component {
-  state = {
-    editorState: EditorState.createEmpty(),
-  };
-
-  onChange = editorState => {
-    this.setState({
-      editorState,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <RichContentEditor
-          theme={THEME}
-          plugins={PLUGINS}
-          onChange={this.onChange}
-          editorState={this.state.editorState}
-        />
-      </div>
-    );
-  }
-}
-```
-
-You can find a full list of classes you can override in [here](./examples/main/src/theme).
-
-#### Plugins
-
-[wix-rich-content-plugin-divider](./packages/plugin-divider) add dividers to your content
-
-[wix-rich-content-plugin-emoji](./packages/plugin-emoji) add emojis to your content
-
-[wix-rich-content-plugin-hashtag](./packages/plugin-hashtag) convert plain text #hastags into dynamic elements
-
-[wix-rich-content-plugin-html](./packages/plugin-html) embed html code or sites in your content
-
-[wix-rich-content-plugin-link](./packages/plugin-link) convert plain text URLs into `<a>` tags
-
-[wix-rich-content-plugin-video](./packages/plugin-video) add videos to your content
-
-[wix-rich-content-plugin-mentions](./packages/plugin-mentions) mention users in your content
-
-[wix-rich-content-plugin-code-block](./packages/plugin-code-block) displays code block
-
-[wix-rich-content-plugin-image](./packages/plugin-image) embed images in your content
-
-[wix-rich-content-plugin-gallery](./packages/plugin-gallery) embed Wix `pro-gallery` component in your content
-
-### Usage with [Yoshi](https://github.com/wix/yoshi)
-
-To use the editor with Yoshi, you should do the same bootstrapping process, but make sure to include the package's `.css` files from a `.global.scss` file.  For example, create a file named `rich-content.global.scss` with the following content (make sure to import styles from any plugins you are using as well):
+To use editor with Yoshi, follow the same bootstrapping process, but make sure to include the package `.css` files from the `.global.scss` file.  For example, create a file named `rich-content.global.scss` with the following content (make sure to import styles from any plugins you are using as well):
 
 ```scss
 @import '~wix-rich-content-editor-common/dist/styles.min.css';
 @import '~wix-rich-content-editor/dist/styles.min.css';
 ```
 
-> This workaround is required because Yoshi re-compiles CSS files, and applies css-modules again.
+> This workaround is required because Yoshi re-compiles CSS files and applies css-modules again.
 
-### SSR support
-
-The compiled package also contains a CommonJS bundle, which you can consume if you are using SSR.
 
 ## Development
 
+### Prerequisites
+- `protoc` - install [protoc](http://google.github.io/proto-lens/installing-protoc.html) on your local machine
 ### Run Locally
 
-1. `cd rich-content`
-2. `npm i` - installs all dependencies and links any cross-dependencies.
-3. Build the modules by running one of the following:
-   1. `npm run build` - build once and bundles
-   2. `npm run watch` - rebuild on changes
-4. Choose an [example](./examples/) and run:
-   1. `npm start`
+1. `yarn` - installs all dependencies and links any cross-dependencies.
+1. `yarn build` - Build the modules
+1. Run `yarn exampleApp` or `yarn storybook` to start the magic
 
 #### Examples
 
-[rich-content-editor-example](./examples/main) to see how to consume the Component as:
+See [rich-content-editor-example](./examples/main) to see how to consume the Component as:
 - [editor](./examples/main/shared/editor/Editor.jsx)
 - [viewer](./examples/main/shared/viewer/Viewer.jsx)
 
-
-[rich-content-viewer-ssr](./examples/viewer-ssr) to see how to consume the Component as a viewer within a Yoshi-based SSR Application.
-
 ### Modules
 
-[wix-rich-content-editor](./packages/editor) is the rich content editor React Component.
+- [wix-rich-content-editor](./packages/editor) is the rich content editor React Component.
 
-[wix-rich-content-viewer](./packages/viewer) is the rich content viewer React Component.
+- [wix-rich-content-viewer](./packages/viewer) is the rich content viewer React Component.
 
-[wix-rich-content-editor-common](./packages/editor-common) is a shared library utilized by the rest of the modules.
+- [wix-rich-content-editor-common](./packages/editor-common) is a shared library utilized by the rest of the modules.
+
+### Contributing
+
+Want to help or just have ideas on how to improve Ricos? Open an issue or suggest a pull request.
+
+### License
+
+[MIT License](./LICENSE)

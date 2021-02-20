@@ -1,1 +1,0 @@
-export const LINK_PREVIEW_TYPE = 'LINK_PREVIEW';

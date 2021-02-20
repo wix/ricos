@@ -16,4 +16,3 @@ maven
 *.code-workspace
 **/.vscode/**
 .history/**
-flow-typed

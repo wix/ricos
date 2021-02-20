@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
+import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import { ExpandModeData } from './FullscreenProvider';
+import { RicosContent } from '../../index';
 
 interface Props {
   initialState: RicosContent;
-  setExpandModeData: (data: any) => any;
+  setExpandModeData: (data: ExpandModeData) => void;
   isOpen: boolean;
   index: number;
-  images: object[];
+  images: Record<string, unknown>[];
   onClose: () => void;
   dataHook: string;
+  isMobile: boolean;
+  backgroundColor: string;
+  foregroundColor: string;
 }
 
 export default class ViewerModal extends Component<Props> {
@@ -29,7 +34,25 @@ export default class ViewerModal extends Component<Props> {
   }
 
   render() {
-    const { index, isOpen, images, onClose } = this.props;
-    return <Fullscreen isOpen={isOpen} images={images} onClose={onClose} index={index} />;
+    const {
+      index,
+      isOpen,
+      images,
+      onClose,
+      isMobile,
+      backgroundColor,
+      foregroundColor,
+    } = this.props;
+    return (
+      <Fullscreen
+        isOpen={isOpen}
+        images={images}
+        onClose={onClose}
+        isMobile={isMobile}
+        index={index}
+        backgroundColor={backgroundColor}
+        foregroundColor={foregroundColor}
+      />
+    );
   }
 }

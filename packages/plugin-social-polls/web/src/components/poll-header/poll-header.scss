@@ -1,0 +1,26 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.header {}
+
+.title {
+  text-align: center;
+
+  @include phone {
+    font-weight: bold;
+  }
+}
+
+.image {
+  margin-top: 35px;
+  height: 0;
+  padding-top: 9 / 16 * 100%;
+
+  @include phone {
+    margin-top: 15px;
+  }
+}
+
+.webview .image {
+  border-radius: 2px;
+  height: 150px;
+}

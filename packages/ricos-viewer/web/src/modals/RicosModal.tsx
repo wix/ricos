@@ -1,24 +1,28 @@
-/* eslint-disable react/prop-types */
-import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
-import { EngineProps } from '../RicosEngine';
-import EditorModalProvider from './editorModal/EditorModalProvider';
+import React, { Fragment, ComponentType, Children, FunctionComponent, ReactElement } from 'react';
 import FullscreenProvider from './fullscreen/FullscreenProvider';
+import { RicosViewerProps } from 'ricos-common';
+import { IMAGE_TYPE, GALLERY_TYPE } from 'wix-rich-content-common';
 
-const RicosModal: FunctionComponent<EngineProps> = props => {
+const RicosModal: FunctionComponent<RicosViewerProps & { children: ReactElement }> = props => {
   let ModalProvider: ComponentType = Fragment;
-  const { isViewer, children } = props;
-  const { openModal, closeModal, onExpand } = children.props.helpers || {};
-  const addFullscreenModal = !onExpand;
-  const addEditorModal = !openModal && !closeModal;
+  let modalProps = {};
+  const {
+    children: {
+      props: { config },
+    },
+  } = props;
+  const { [IMAGE_TYPE]: imageConfig, [GALLERY_TYPE]: galleryConfig } = config || {};
+  const needsFullscreenProvider = !imageConfig?.onExpand || !galleryConfig?.onExpand;
+  const isExpandDisabled =
+    (!imageConfig || imageConfig.disableExpand) && (!galleryConfig || galleryConfig?.disableExpand);
 
-  if (isViewer && addFullscreenModal) {
+  if (!isExpandDisabled && needsFullscreenProvider) {
     ModalProvider = FullscreenProvider;
-  } else if (!isViewer && addEditorModal) {
-    ModalProvider = EditorModalProvider;
+    modalProps = props;
   }
 
   const child = Children.only(React.cloneElement(props.children, { ...props }));
-  return <ModalProvider {...props}>{child}</ModalProvider>;
+  return <ModalProvider {...modalProps}>{child}</ModalProvider>;
 };
 
 export default RicosModal;

@@ -1,6 +1,6 @@
 /* eslint-disable */
 const path = require('path');
-const merge = require('webpack-merge');
+const merge = require('webpack-merge').merge;
 const { HotModuleReplacementPlugin } = require('webpack');
 
 const PATHS = {
@@ -43,6 +43,11 @@ const devConfig = {
     stats: 'errors-only',
     disableHostCheck: true,
     proxy: {
+      '/_serverless/*': {
+        target: 'https://www.wix.com/',
+        secure: false,
+        changeOrigin: true,
+      },
       '/rich-content/oembed': 'http://stehauho.wixsite.com/',
     },
   },

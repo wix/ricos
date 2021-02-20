@@ -1,0 +1,64 @@
+{
+  "blocks": [
+    {
+      "key": "cg0g4",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fb6g1",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "bjqtq",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true,
+          "link": {
+            "url": "www.wix.com",
+            "target": "_blank",
+            "rel": "noopener"
+          }
+        },
+        "src": {
+          "id": "d432d617a9f508cf404d64d8c489e1f1",
+          "original_file_name": "8bb438_ea26cc9ae0ce440bbc4cfaaa8864c5e6.jpg",
+          "file_name": "8bb438_ea26cc9ae0ce440bbc4cfaaa8864c5e6.jpg",
+          "width": 4400,
+          "height": 2966
+        }
+      }
+    }
+  },
+  "VERSION": "7.10.7"
+}

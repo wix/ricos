@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { isValidUrl } from 'wix-rich-content-common';
-import { UrlInputModal } from 'wix-rich-content-editor-common';
+import { UrlInputModal } from 'wix-rich-content-plugin-commons';
 import { DEFAULTS } from '../defaults';
 
 export default class EmbedURLInputModal extends Component {
@@ -20,7 +19,7 @@ export default class EmbedURLInputModal extends Component {
       const { componentData, pubsub, onConfirm, helpers } = this.props;
       const { fetchData } = componentData;
       fetchData(url).then(({ html }) => {
-        if (!isValidUrl(url)) {
+        if (!html) {
           this.setState({ submittedInvalidUrl: true });
         } else {
           if (onConfirm) {
@@ -62,8 +61,6 @@ export default class EmbedURLInputModal extends Component {
         title={t(`EmbedURL_Social_${socialType}_Title`)}
         submittedInvalidUrl={submittedInvalidUrl}
         dataHook={'socialEmbedUploadModal'}
-        saveLabel={t('EmbedURL_Common_CTA_Primary')}
-        cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
         onInputChange={url => this.setState({ url })}
         errorMessage={t('SoundCloudUploadModal_Input_InvalidUrl')}
         placeholder={t(`EmbedURL_Social_${socialType}_Placeholder`)}

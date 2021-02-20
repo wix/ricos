@@ -11,13 +11,14 @@
   margin-left: auto;
   direction: ltr;
   position: relative;
+  background-color: $background-color;
 }
 
 .staticToolbar_scrollableContainer {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 90px 9px;
+  padding: 16px 9px;
   overflow: hidden;
   scroll-behavior: smooth;
   &.mobile {
@@ -75,5 +76,5 @@
 .staticToolbarWrapper {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 5;
 }

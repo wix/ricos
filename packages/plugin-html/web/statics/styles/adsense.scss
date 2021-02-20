@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: auto max-content;
+
+    .tooltip {
+        display: flex;
+    }
+}

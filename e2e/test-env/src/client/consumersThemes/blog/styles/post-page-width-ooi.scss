@@ -1,0 +1,42 @@
+@import 'device-type';
+@import './variables';
+@import 'responsive';
+
+@mixin postPageWidth() {
+  @include desktop {
+    width: $post-content-area-max-width;
+
+    @include lte-post_content_area_small {
+      width: calc(var(--root-width) - #{$post-page-container-padding * 2 + $post-page-padding * 2});
+    }
+
+    @include lte-post_content_area_min {
+      width: 100%;
+    }
+  }
+}
+
+@mixin fitToFullWidth() {
+  max-width: $post-page-max-width;
+  margin-left: ($post-page-max-width - $post-content-area-max-width) / -2;
+  width: calc(var(--root-width) - #{$post-page-padding * 2});
+  @include lte-w980 {
+    margin-left: calc((var(--root-width) - #{$post-content-area-max-width + $post-page-padding * 2}) / -2);
+  }
+  @include lte-post_content_area_small {
+    margin-left: -$post-page-container-padding;
+  }
+  @include lte-post_content_area_min {
+    margin-left: calc((var(--root-width) - #{$post-content-area-min-width + $post-page-padding * 2}) / -2);
+  }
+}
+
+@mixin fitToContent() {
+  margin-right: calc((100% - #{$post-content-area-max-width}) / 2 + #{$post-page-container-padding});
+  margin-left: calc((100% - #{$post-content-area-max-width}) / 2);
+
+  @include lte-post_content_area_small {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

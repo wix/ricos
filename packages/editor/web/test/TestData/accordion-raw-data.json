@@ -1,0 +1,2512 @@
+{
+  "blocks": [
+    {
+      "key": "akdqf",
+      "text": "LTR:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 4,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "5luk9",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6di0n",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "8eo54",
+      "text": "Expanded:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 9,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "cm8ut",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "1ct3b",
+      "text": "Collapsed:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 10,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "fva4r",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "buqg0",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7cvfa",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "fehmr",
+      "text": "First expanded:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 15,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "eoikq",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 4
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "9kp0u",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "8mcg3",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 5
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "79cd3",
+      "text": "RTL:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 4,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "b26nv",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 6
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "2fequ",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2q7h",
+      "text": "Expanded:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 9,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "79q9s",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 7
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "7eara",
+      "text": "Collapsed:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 10,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "2l0cs",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 8
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "ck94v",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "226db",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 9
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "5mh5",
+      "text": "First expanded:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 15,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "a84mb",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 10
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "d7uhg",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "24m2m",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 11
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "3sgn9",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "1": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "expanded",
+          "direction": "ltr",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": "1",
+            "title": {
+              "blocks": [
+                {
+                  "key": "4rvoj",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "frlqr",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "2",
+            "title": {
+              "blocks": [
+                {
+                  "key": "f199l",
+                  "text": "How are you?",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "1r2e9",
+                  "text": "I'm... GREAT!",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "{\"FG\":\"#1414a8\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "3",
+            "title": {
+              "blocks": [
+                {
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "{\"FG\":\"color3\"}"
+                    },
+                    {
+                      "offset": 13,
+                      "length": 12,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "etb7h",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"BG\":\"color4\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "1flf3",
+                  "text": "Hey! I'm a nested list.",
+                  "type": "ordered-list-item",
+                  "depth": 1,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 23,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "7tvc7",
+                  "text": "Yes!!",
+                  "type": "ordered-list-item",
+                  "depth": 2,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cet9",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "e4c47",
+                  "text": "Quote?",
+                  "type": "blockquote",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 6,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 6,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "918ba",
+                  "text": "Link with text",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 14,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "style": "UNDERLINE"
+                    }
+                  ],
+                  "entityRanges": [
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "key": 0
+                    }
+                  ],
+                  "data": {}
+                },
+                {
+                  "key": "2boh",
+                  "text": "Code Block",
+                  "type": "code-block",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cb6ql",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "type": "LINK",
+                  "mutability": "MUTABLE",
+                  "data": {
+                    "url": "www.wix.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "key": "4",
+            "title": {
+              "blocks": [
+                {
+                  "key": "92ui0",
+                  "text": "Alignments",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "9vq5",
+                  "text": "LTR language:",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "de2bc",
+                  "text": "LEFT",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "left"
+                  }
+                },
+                {
+                  "key": "b20rh",
+                  "text": "CENTER",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "center"
+                  }
+                },
+                {
+                  "key": "2ve4a",
+                  "text": "RIGHT",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "right"
+                  }
+                },
+                {
+                  "key": "fpolu",
+                  "text": "JUSTIFY",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "justify"
+                  }
+                },
+                {
+                  "key": "5ttmu",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "justify"
+                  }
+                },
+                {
+                  "key": "eb1s2",
+                  "text": "RTL language:",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "d0lgn",
+                  "text": "שמאל",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "left"
+                  }
+                },
+                {
+                  "key": "88os6",
+                  "text": "אמצע",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "center"
+                  }
+                },
+                {
+                  "key": "8rsgf",
+                  "text": "ימין",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "right"
+                  }
+                },
+                {
+                  "key": "ebiet",
+                  "text": "ג׳סטיפי",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "justify"
+                  }
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "3": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "collapsed",
+          "direction": "ltr",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": "1",
+            "title": {
+              "blocks": [
+                {
+                  "key": "4rvoj",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "frlqr",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "2",
+            "title": {
+              "blocks": [
+                {
+                  "key": "f199l",
+                  "text": "How are you?",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "1r2e9",
+                  "text": "I'm... GREAT!",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "{\"FG\":\"#1414a8\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "3",
+            "title": {
+              "blocks": [
+                {
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "{\"FG\":\"color3\"}"
+                    },
+                    {
+                      "offset": 13,
+                      "length": 12,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "etb7h",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"BG\":\"color4\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "1flf3",
+                  "text": "Hey! I'm a nested list.",
+                  "type": "ordered-list-item",
+                  "depth": 1,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 23,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "7tvc7",
+                  "text": "Yes!!",
+                  "type": "ordered-list-item",
+                  "depth": 2,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cet9",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "e4c47",
+                  "text": "Quote",
+                  "type": "blockquote",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "918ba",
+                  "text": "Link with text",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 14,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "key": 0
+                    }
+                  ],
+                  "data": {}
+                },
+                {
+                  "key": "2boh",
+                  "text": "Code Block",
+                  "type": "code-block",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cb6ql",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "type": "LINK",
+                  "mutability": "MUTABLE",
+                  "data": {
+                    "url": "www.wix.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "4": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "5": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "first_expanded",
+          "direction": "ltr",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": "1",
+            "title": {
+              "blocks": [
+                {
+                  "key": "4rvoj",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "frlqr",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "2",
+            "title": {
+              "blocks": [
+                {
+                  "key": "f199l",
+                  "text": "How are you?",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "1r2e9",
+                  "text": "I'm... GREAT!",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "{\"FG\":\"#1414a8\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "3",
+            "title": {
+              "blocks": [
+                {
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "{\"FG\":\"color3\"}"
+                    },
+                    {
+                      "offset": 13,
+                      "length": 12,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "etb7h",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"BG\":\"color4\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "1flf3",
+                  "text": "Hey! I'm a nested list.",
+                  "type": "ordered-list-item",
+                  "depth": 1,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 23,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "7tvc7",
+                  "text": "Yes!!",
+                  "type": "ordered-list-item",
+                  "depth": 2,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cet9",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "e4c47",
+                  "text": "Quote",
+                  "type": "blockquote",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "918ba",
+                  "text": "Link with text",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 14,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "key": 0
+                    }
+                  ],
+                  "data": {}
+                },
+                {
+                  "key": "2boh",
+                  "text": "Code Block",
+                  "type": "code-block",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cb6ql",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "type": "LINK",
+                  "mutability": "MUTABLE",
+                  "data": {
+                    "url": "www.wix.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "6": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "7": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "expanded",
+          "direction": "rtl",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": "1",
+            "title": {
+              "blocks": [
+                {
+                  "key": "4rvoj",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "frlqr",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "2",
+            "title": {
+              "blocks": [
+                {
+                  "key": "f199l",
+                  "text": "How are you?",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "1r2e9",
+                  "text": "I'm... GREAT!",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "{\"FG\":\"#1414a8\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "3",
+            "title": {
+              "blocks": [
+                {
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "{\"FG\":\"color3\"}"
+                    },
+                    {
+                      "offset": 13,
+                      "length": 12,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "etb7h",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"BG\":\"color4\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "1flf3",
+                  "text": "Hey! I'm a nested list.",
+                  "type": "ordered-list-item",
+                  "depth": 1,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 23,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "7tvc7",
+                  "text": "Yes!!",
+                  "type": "ordered-list-item",
+                  "depth": 2,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cet9",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "e4c47",
+                  "text": "Quote?",
+                  "type": "blockquote",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 6,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 6,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "918ba",
+                  "text": "Link with text",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 14,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "style": "UNDERLINE"
+                    }
+                  ],
+                  "entityRanges": [
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "key": 0
+                    }
+                  ],
+                  "data": {}
+                },
+                {
+                  "key": "2boh",
+                  "text": "Code Block",
+                  "type": "code-block",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cb6ql",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "type": "LINK",
+                  "mutability": "MUTABLE",
+                  "data": {
+                    "url": "www.wix.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "key": "4",
+            "title": {
+              "blocks": [
+                {
+                  "key": "bs3cu",
+                  "text": "Alignments",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "5292c",
+                  "text": "LTR language:",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "34s0n",
+                  "text": "LEFT",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "left"
+                  }
+                },
+                {
+                  "key": "5lduc",
+                  "text": "CENTER",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "center"
+                  }
+                },
+                {
+                  "key": "c3ig",
+                  "text": "RIGHT",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "right"
+                  }
+                },
+                {
+                  "key": "fjue3",
+                  "text": "JUSTIFY",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "justify"
+                  }
+                },
+                {
+                  "key": "842ce",
+                  "text": "\n",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "1ppa8",
+                  "text": "RTL language:",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 13,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "24tlb",
+                  "text": "שמאל",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "left"
+                  }
+                },
+                {
+                  "key": "71eqe",
+                  "text": "אמצע",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "center"
+                  }
+                },
+                {
+                  "key": "2lc2i",
+                  "text": "ימין",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "right"
+                  }
+                },
+                {
+                  "key": "bbaaf",
+                  "text": "ג׳סטיפי",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {
+                    "textAlignment": "justify"
+                  }
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      }
+    },
+    "8": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "9": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "collapsed",
+          "direction": "rtl",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": "1",
+            "title": {
+              "blocks": [
+                {
+                  "key": "4rvoj",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "frlqr",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "2",
+            "title": {
+              "blocks": [
+                {
+                  "key": "f199l",
+                  "text": "How are you?",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "1r2e9",
+                  "text": "I'm... GREAT!",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "{\"FG\":\"#1414a8\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "3",
+            "title": {
+              "blocks": [
+                {
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "{\"FG\":\"color3\"}"
+                    },
+                    {
+                      "offset": 13,
+                      "length": 12,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "etb7h",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"BG\":\"color4\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "1flf3",
+                  "text": "Hey! I'm a nested list.",
+                  "type": "ordered-list-item",
+                  "depth": 1,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 23,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "7tvc7",
+                  "text": "Yes!!",
+                  "type": "ordered-list-item",
+                  "depth": 2,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cet9",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "e4c47",
+                  "text": "Quote",
+                  "type": "blockquote",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "918ba",
+                  "text": "Link with text",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 14,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "key": 0
+                    }
+                  ],
+                  "data": {}
+                },
+                {
+                  "key": "2boh",
+                  "text": "Code Block",
+                  "type": "code-block",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cb6ql",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "type": "LINK",
+                  "mutability": "MUTABLE",
+                  "data": {
+                    "url": "www.wix.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "10": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "11": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "first_expanded",
+          "direction": "rtl",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": "1",
+            "title": {
+              "blocks": [
+                {
+                  "key": "4rvoj",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "frlqr",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "2",
+            "title": {
+              "blocks": [
+                {
+                  "key": "f199l",
+                  "text": "How are you?",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "1r2e9",
+                  "text": "I'm... GREAT!",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "BOLD"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 7,
+                      "length": 6,
+                      "style": "{\"FG\":\"#1414a8\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "key": "3",
+            "title": {
+              "blocks": [
+                {
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
+                  "type": "unstyled",
+                  "depth": 1,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
+                      "style": "{\"FG\":\"color3\"}"
+                    },
+                    {
+                      "offset": 13,
+                      "length": 12,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "etb7h",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"BG\":\"color4\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "1flf3",
+                  "text": "Hey! I'm a nested list.",
+                  "type": "ordered-list-item",
+                  "depth": 1,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 23,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "7tvc7",
+                  "text": "Yes!!",
+                  "type": "ordered-list-item",
+                  "depth": 2,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cet9",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 16,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 11,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "e4c47",
+                  "text": "Quote",
+                  "type": "blockquote",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "offset": 0,
+                      "length": 5,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "918ba",
+                  "text": "Link with text",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 14,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [
+                    {
+                      "offset": 0,
+                      "length": 4,
+                      "key": 0
+                    }
+                  ],
+                  "data": {}
+                },
+                {
+                  "key": "2boh",
+                  "text": "Code Block",
+                  "type": "code-block",
+                  "depth": 0,
+                  "inlineStyleRanges": [
+                    {
+                      "offset": 0,
+                      "length": 10,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cb6ql",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "type": "LINK",
+                  "mutability": "MUTABLE",
+                  "data": {
+                    "url": "www.wix.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "VERSION": "7.21.1"
+}

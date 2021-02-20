@@ -1,0 +1,163 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "bla bla bla",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ado30",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "xxx",
+      "text": "Wide embed. In mobile full width. In desktop 740px ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "3877q",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "brcve",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fhfpf",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "es99d",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "da06r",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6ldkl",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "103hn",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ct0p1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-html",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "srcType": "html",
+        "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
+        "config": {
+          "alignment": "center",
+          "width": 350,
+          "height": 527
+        }
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-html",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "srcType": "html",
+        "src": "<div class=\"iframely-embed\"><div class=\"iframely-responsive\" style=\"padding-bottom: 52.356%; padding-top: 120px;\"><a href=\"https://www.worldofbuzz.com/9-yummy-snacks-from-south-korea-that-make-great-souvenirs-for-everyone/\" data-iframely-url=\"//cdn.iframe.ly/05UevKO\"></a></div></div><script async src=\"//cdn.iframe.ly/embed.js\" charset=\"utf-8\"></script>",
+        "config": {
+          "alignment": "center",
+          "width": 740,
+          "height": 339
+        }
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-html",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "srcType": "html",
+        "src": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "config": {
+          "alignment": "center",
+          "width": 350,
+          "height": 154
+        }
+      }
+    }
+  },
+  "VERSION": "7.1.5"
+}

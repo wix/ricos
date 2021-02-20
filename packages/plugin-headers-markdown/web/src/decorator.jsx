@@ -33,7 +33,7 @@ const Headers = ({ children, hideMarkdown, decoratedText }) => {
   if (hideMarkdown) {
     const lastIndex = children.length - 1;
     children[0] = sliceElementText(children[0], 5);
-    children[lastIndex] = sliceElementText(children[lastIndex], 0, -5);
+    children[lastIndex] = sliceElementText(children[lastIndex], 0, -4);
   }
   return <Type>{children}</Type>;
 };

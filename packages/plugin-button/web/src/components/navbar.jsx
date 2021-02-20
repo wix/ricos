@@ -10,7 +10,7 @@ class Navbar extends PureComponent {
   }
   render() {
     return (
-      <div className={this.styles.button_navbar_constainer}>
+      <div className={this.styles.button_navbar_container}>
         <div className={this.styles.button_navbar_settingOptions}>
           <button
             className={this.styles.button_navbar_button}

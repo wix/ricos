@@ -5,11 +5,10 @@ import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
 import {
   Image,
   InputWithLabel,
-  LinkPanel,
   SettingsPanelFooter,
   SettingsSection,
   Loader,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 
@@ -28,22 +27,18 @@ class ImageSettings extends Component {
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
-    this.linkLabel = t('ImageSettings_Link_Label');
+    this.linkRedirectTextLabel = t('ImageSettings_Link_Label');
+    this.linkRedirectText = t('ImageSettings_Link_RedirectToToolbar');
   }
 
   propsToState(props) {
     const {
-      componentData: { src, metadata, config = {} },
+      componentData: { src, metadata, error },
     } = props;
-    const { url = '', target, rel } = config.link || {};
     return {
       src,
       metadata,
-      linkPanelValues: {
-        url,
-        targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
-        nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
-      },
+      error,
     };
   }
 
@@ -56,7 +51,8 @@ class ImageSettings extends Component {
   }
 
   onComponentUpdate = () => {
-    this.setState({ src: this.props.pubsub.get('componentData').src });
+    const componentData = this.props.pubsub.get('componentData');
+    this.setState({ src: componentData.src, error: componentData?.error });
   };
 
   revertComponentData() {
@@ -81,58 +77,17 @@ class ImageSettings extends Component {
 
   onDoneClick = () => {
     const { helpers } = this.props;
-    this.saveLink();
     if (this.state.metadata) {
       this.addMetadataToBlock();
     }
     helpers.closeModal();
   };
 
-  saveLink = () => {
-    const { linkPanelValues } = this.state;
-    const { anchorTarget, relValue } = this.props;
-    const { url, targetBlank, nofollow, isValid } = linkPanelValues;
-    let target = '_blank',
-      rel = 'nofollow';
-    if (!targetBlank) {
-      target = anchorTarget !== '_blank' ? anchorTarget : '_self';
-    }
-    if (!nofollow) {
-      rel = relValue !== 'nofollow' ? relValue : 'noopener';
-    }
-    if (url === '') {
-      this.setBlockLink(null);
-    } else if (isValid) {
-      this.setBlockLink({ url, target, rel });
-    }
-  };
-
   setBlockLink = item => this.props.pubsub.setBlockData({ key: 'componentLink', item });
 
-  onLinkPanelChange = linkPanelValues => {
-    this.setState({ linkPanelValues });
-  };
-
   render() {
-    const {
-      helpers,
-      theme,
-      t,
-      anchorTarget,
-      relValue,
-      isMobile,
-      uiSettings,
-      languageDir,
-    } = this.props;
-    const { src, metadata = {} } = this.state;
-
-    const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn, placeholder } =
-      linkPanel || {};
-    const showTargetBlankCheckbox =
-      blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
-    const showRelValueCheckbox =
-      nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
+    const { helpers, theme, t, isMobile, languageDir } = this.props;
+    const { src, error, metadata = {} } = this.state;
 
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
@@ -171,6 +126,8 @@ class ImageSettings extends Component {
                   requiredQuality: 80,
                 })}
                 theme={theme}
+                error={error}
+                t={t}
               />
             ) : (
               <div className={this.styles.imageSettingsImage}>
@@ -214,23 +171,10 @@ class ImageSettings extends Component {
           <SettingsSection
             theme={theme}
             className={this.styles.imageSettingsSection}
-            ariaProps={{ 'aria-label': 'image link', role: 'region' }}
+            ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
           >
-            <span id="image_settings_link_lbl" className={this.styles.inputWithLabel_label}>
-              {this.linkLabel}
-            </span>
-            <LinkPanel
-              linkValues={this.state.linkPanelValues}
-              onChange={this.onLinkPanelChange}
-              showTargetBlankCheckbox={showTargetBlankCheckbox}
-              showRelValueCheckbox={showRelValueCheckbox}
-              theme={theme}
-              t={t}
-              ariaProps={{ 'aria-labelledby': 'image_settings_link_lbl' }}
-              languageDir={languageDir}
-              placeholder={placeholder}
-              isMobile={isMobile}
-            />
+            <div className={this.styles.imageSettingsLabel}>{this.linkRedirectTextLabel}</div>
+            <div>{this.linkRedirectText}</div>
           </SettingsSection>
         </div>
         {isMobile ? null : (
@@ -252,10 +196,7 @@ ImageSettings.propTypes = {
   theme: PropTypes.object.isRequired,
   pubsub: PropTypes.any,
   t: PropTypes.func,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
   isMobile: PropTypes.bool,
-  uiSettings: PropTypes.object,
   languageDir: PropTypes.string,
 };
 

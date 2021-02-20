@@ -1,58 +1,31 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { TWITTER } from './toolbarOptions';
+const getSelectedText = selection => selection.toString().replace(/(\r\n|\r|\n){2,}/g, ' ');
 
-export default class TextSelectionListener extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { selectedText: '' };
-  }
-  componentDidMount() {
-    const { targetId } = this.props;
-    const specifiedElement = document.getElementById(targetId);
-    specifiedElement.addEventListener('mouseup', () => {
-      this.getSelectionText();
-    });
-    document.addEventListener('click', e => {
-      if (!specifiedElement.contains(e.target)) {
-        this.setState({ selectedText: '' });
-      }
-    });
-  }
-
-  getSelectionText = () => {
-    let text = '';
-    const { selectedText } = this.state;
-    let selection;
-    if (window.getSelection) {
-      selection = window.getSelection();
-      text = selection.toString();
-    }
-    if (selectedText !== text) {
-      const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
-      this.setState({ selectedText: text, selectionRect });
-    } else {
-      this.setState({ selectedText: '' });
-    }
-  };
-
-  render() {
-    const { ToolBar, targetId } = this.props;
-    const { selectedText, selectionRect } = this.state;
-    return selectedText !== '' ? (
-      <ToolBar
-        selectedText={selectedText}
-        options={[TWITTER]}
-        selectionRect={selectionRect}
-        targetId={targetId}
-      />
-    ) : (
-      <div />
-    );
-  }
-}
-
-TextSelectionListener.propTypes = {
-  targetId: PropTypes.string.isRequired,
-  ToolBar: PropTypes.any.isRequired,
+const getSelectionPosition = selection => {
+  const parent = selection.anchorNode.parentNode;
+  const parentRect = parent.getBoundingClientRect();
+  const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
+  const parentTop = parent.offsetTop;
+  const selectionOffesetFromParent = selectionRect.top - parentRect.top;
+  const y = parentTop + selectionOffesetFromParent;
+  const { x, width } = selectionRect;
+  return { x: x + width / 2, y };
 };
+
+export default function addTextSelectionListener(container, callback) {
+  const handleSelection = () => {
+    const selection = document.getSelection();
+    const selectionElement = selection.anchorNode?.parentElement;
+    let selectedText = null;
+    let position = {};
+    if (
+      selection.rangeCount > 0 &&
+      (container.contains(selectionElement) || selectionElement === container)
+    ) {
+      selectedText = getSelectedText(selection);
+      position = getSelectionPosition(selection);
+    }
+    callback(selectedText, position);
+  };
+  document.addEventListener('selectionchange', handleSelection);
+  return () => document.removeEventListener('selectionchange', handleSelection);
+}

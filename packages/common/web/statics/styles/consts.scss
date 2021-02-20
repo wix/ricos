@@ -4,6 +4,17 @@ $textMobileWidth: 90%;
 $icon-width: 20px;
 $footer-toolbar-height: 52px;
 $toolbarBorderRadius: 6px;
+
 $headerOneHeight: 42px;
 $headerTwoHeight: 36px;
 $headerThreeHeight: 30px;
+
+$headerOneSize: 32px;
+$headerTwoSize: 28px;
+$headerThreeSize: 22px;
+$headerFourSize: 1em;
+$headerFiveSize: 0.83em;
+$headerSixSize: 0.67em;
+
+$headersSizes: $headerOneSize, $headerTwoSize, $headerThreeSize, $headerFourSize, $headerFiveSize, $headerSixSize;
+$headerNames: 'One', 'Two', 'Three', 'Four', 'Five', 'Six';

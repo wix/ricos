@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { RadioGroupHorizontal, TextInput, InputWithLabel } from 'wix-rich-content-editor-common';
+import { RadioGroupHorizontal, TextInput, InputWithLabel } from 'wix-rich-content-plugin-commons';
 import { mergeStyles, isValidUrl, startsWithHttps, hasProtocol } from 'wix-rich-content-common';
 import { identity, trimStart } from 'lodash';
-import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../defaults';
+import AdsenseTitle from '../AdsenseTitle';
 import styles from '../../statics/styles/HtmlEditPanel.scss';
 
 const VALIDATORS = {
@@ -44,8 +45,7 @@ class HtmlEditPanel extends Component {
 
   handleSrcChange = target => {
     const { name, value } = target;
-    this.setState({ [name]: value });
-    this.updateComponentData(name, value);
+    this.setState({ [name]: value }, () => this.updateComponentData());
   };
 
   handleCancelClick = () => {
@@ -53,12 +53,12 @@ class HtmlEditPanel extends Component {
     this.props.close();
   };
 
-  updateComponentData = (name, value) => {
-    const srcType = name;
+  updateComponentData = () => {
+    const { srcType } = this.state;
     if (this.isValid()) {
       this.props.store.update('componentData', {
         srcType,
-        src: NORMALIZERS[srcType](value) || '',
+        src: NORMALIZERS[srcType](this.state[srcType]) || '',
       });
     }
 
@@ -75,7 +75,12 @@ class HtmlEditPanel extends Component {
   render = () => {
     const { styles } = this;
     const { srcType, submitted } = this.state;
-    const { t, tabIndex, theme } = this.props;
+    const {
+      t,
+      tabIndex,
+      theme,
+      componentData: { config },
+    } = this.props;
     const inputBaseProps = {
       onChange: this.handleSrcChange,
       getTarget: true,
@@ -85,25 +90,29 @@ class HtmlEditPanel extends Component {
 
     return (
       <div className={styles.htmlEditPanel}>
-        <RadioGroupHorizontal
-          theme={theme}
-          name="srcType"
-          value={this.state.srcType}
-          onChange={this.handleSrcTypeChange}
-          dataSource={[
-            {
-              value: SRC_TYPE_HTML,
-              labelText: t('HtmlEditPanel_Code'),
-              dataHook: 'htmlEditPanel_radioHtml',
-            },
-            {
-              value: SRC_TYPE_URL,
-              labelText: t('HtmlEditPanel_Source'),
-              dataHook: 'htmlEditPanel_radioUrl',
-            },
-          ]}
-          inline
-        />
+        {config?.isAdsense ? (
+          <AdsenseTitle t={t} />
+        ) : (
+          <RadioGroupHorizontal
+            theme={theme}
+            name="srcType"
+            value={this.state.srcType}
+            onChange={this.handleSrcTypeChange}
+            dataSource={[
+              {
+                value: SRC_TYPE_HTML,
+                labelText: t('HtmlEditPanel_Code'),
+                dataHook: 'htmlEditPanel_radioHtml',
+              },
+              {
+                value: SRC_TYPE_URL,
+                labelText: t('HtmlEditPanel_Source'),
+                dataHook: 'htmlEditPanel_radioUrl',
+              },
+            ]}
+            inline
+          />
+        )}
 
         <div className={styles.htmlEditPanel_input}>
           {srcType === SRC_TYPE_HTML && (
@@ -111,7 +120,11 @@ class HtmlEditPanel extends Component {
               <InputWithLabel
                 name={SRC_TYPE_HTML}
                 value={this.state[SRC_TYPE_HTML]}
-                placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
+                placeholder={
+                  config?.isAdsense
+                    ? t('HtmlEditPanel_HtmlInput_AdSense_Placeholder')
+                    : t('HtmlEditPanel_HtmlInput_Placeholder')
+                }
                 isTextArea
                 isFullHeight
                 dataHook="htmlEditPanel_htmlInput"
@@ -124,6 +137,7 @@ class HtmlEditPanel extends Component {
             <TextInput
               name={SRC_TYPE_URL}
               value={this.state[SRC_TYPE_URL]}
+              data-hook="htmlEditPanel_htmlInput"
               error={submitted ? t(this.getError()) : null}
               placeholder={t('HtmlEditPanel_UrlInput_Placeholder')}
               {...inputBaseProps}
@@ -159,6 +173,7 @@ HtmlEditPanel.propTypes = {
   componentData: PropTypes.shape({
     srcType: PropTypes.string.isRequired,
     src: PropTypes.any,
+    config: PropTypes.object,
   }).isRequired,
   store: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,

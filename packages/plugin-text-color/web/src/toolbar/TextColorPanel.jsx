@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ColorPicker,
-  getSelectionStyles,
-  Modifier,
-  EditorState,
-} from 'wix-rich-content-editor-common';
+import { ColorPicker, getSelectionStyles } from 'wix-rich-content-plugin-commons';
+import { Modifier, EditorState } from 'wix-rich-content-editor-common';
 import { DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import { getColor } from '../text-decorations-utils';
 
@@ -43,35 +39,15 @@ export default class TextColorPanel extends Component {
   }
 
   setColor(colorName) {
-    let { editorState, settings, defaultColor } = this.props;
-    const { currentColor } = this.state;
+    let { editorState, settings, defaultColor, onSelect, styleMapper, predicate } = this.props;
     const newColorHex = colorName && extractColor(settings.colorScheme, colorName);
-    if (!newColorHex || newColorHex !== currentColor)
-      editorState = this.getInlineColorState(colorName);
+    editorState = getInlineColorState(colorName, editorState, settings, styleMapper, predicate);
     this.setState({
       currentColor: newColorHex || defaultColor,
       currentSchemeColor: colorName || (this.currentColors[0] && getColor(this.currentColors[0])),
     });
     this.props.closeModal(editorState);
-  }
-
-  getInlineColorState(color) {
-    const { editorState, settings, styleMapper, predicate } = this.props;
-    const styleSelectionPredicate = predicate(
-      (settings && settings.styleSelectionPredicate) || DEFAULT_STYLE_SELECTION_PREDICATE
-    );
-    const selection = editorState.getSelection();
-    const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
-    const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
-      const contentState = nextEditorState.getCurrentContent();
-      const nextContentState = Modifier.removeInlineStyle(contentState, selection, prevColor);
-      return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
-    }, editorState);
-    let contentState = newEditorState.getCurrentContent();
-    if (color) {
-      contentState = Modifier.applyInlineStyle(contentState, selection, styleMapper(color));
-    }
-    return EditorState.push(newEditorState, contentState, 'change-inline-style');
+    onSelect && onSelect(colorName);
   }
 
   onColorAdded(color) {
@@ -118,7 +94,7 @@ export default class TextColorPanel extends Component {
               {renderUserColors()}
             </div>
             <hr className={mergedStyles.colorPicker_separator} />
-            <div className={mergedStyles.colorPicker_buttons_container}>
+            <div className={mergedStyles.colorPicker_bottom_container}>
               {renderResetColorButton()}
               {renderAddColorButton()}
             </div>
@@ -149,4 +125,23 @@ TextColorPanel.propTypes = {
   styleMapper: PropTypes.func.isRequired,
   predicate: PropTypes.func,
   defaultColor: PropTypes.string.isRequired,
+  onSelect: PropTypes.func,
+};
+
+export const getInlineColorState = (color, editorState, settings, styleMapper, predicate) => {
+  const styleSelectionPredicate = predicate(
+    (settings && settings.styleSelectionPredicate) || DEFAULT_STYLE_SELECTION_PREDICATE
+  );
+  const selection = editorState.getSelection();
+  const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
+  const newEditorState = currentColors.reduce((nextEditorState, prevColor) => {
+    const contentState = nextEditorState.getCurrentContent();
+    const nextContentState = Modifier.removeInlineStyle(contentState, selection, prevColor);
+    return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
+  }, editorState);
+  let contentState = newEditorState.getCurrentContent();
+  if (color) {
+    contentState = Modifier.applyInlineStyle(contentState, selection, styleMapper(color));
+  }
+  return EditorState.push(newEditorState, contentState, 'change-inline-style');
 };

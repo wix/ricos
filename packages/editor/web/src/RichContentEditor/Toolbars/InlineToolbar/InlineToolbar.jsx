@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE, getVisibleSelectionRect } from 'wix-rich-content-editor-common';
 import stylesRtlIgnore from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
@@ -162,8 +162,7 @@ export default class InlineToolbar extends Component {
       isVisible = visibilityFn(editorState);
     }
 
-    // TODO: Test readonly mode and possibly set isVisible to false if the editor is readonly
-    return isVisible || overrideContent || extendContent || keepOpen;
+    return isVisible || overrideContent || extendContent || keepOpen || false;
   };
 
   isVisible = () => this.state.isVisible;
@@ -283,6 +282,7 @@ export default class InlineToolbar extends Component {
       relValue,
       t,
       tabIndex,
+      toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
     };
 
     return (
@@ -326,6 +326,8 @@ export default class InlineToolbar extends Component {
     );
   }
 
+  onClick = e => e.preventDefault();
+
   render() {
     //checking false since undefined is not good
     if (this.isVisible() === false) {
@@ -335,6 +337,7 @@ export default class InlineToolbar extends Component {
     const { toolbarStyles } = theme || {};
 
     const props = {
+      onClick: this.onClick,
       className: classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar),
       style: this.getStyle(),
       tabIndex: this.isVisible() ? 0 : -1,

@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/convert-item-data.cjs.js",
+    "module": "../../dist/lib/convert-item-data.js",
+    "types": "../../dist/lib/convert-item-data.d.ts"
+}

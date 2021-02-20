@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/panelStyles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
-import { HEADER_TYPE_MAP } from 'wix-rich-content-editor-common';
+import { HEADER_TYPE_MAP } from 'wix-rich-content-plugin-commons';
 
 const headingElement = (heading, isSelected, onClick, translateHeading) => {
   const content = translateHeading(heading);

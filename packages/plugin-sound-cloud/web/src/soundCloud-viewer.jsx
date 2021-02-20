@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, pluginSoundCloudSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginSoundCloudSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-sound-cloud.schema.json';
 import { isEqual } from 'lodash';
 import styles from '../statics/styles/sound-cloud-viewer.scss';
 

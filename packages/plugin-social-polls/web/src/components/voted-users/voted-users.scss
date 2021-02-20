@@ -1,0 +1,148 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.container {
+  margin: 10px 0 0;
+  font-size: 14px;
+  display: flex;
+}
+
+.container.webview {
+  display: none;
+}
+
+.avatar_list {
+  list-style: none;
+  padding: 0;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-size: contain;
+  display: inline-block;
+
+  &:not(:first-child) {
+    margin-left: -5px;
+  }
+}
+
+.modal {
+  width: 450px;
+  height: 420px;
+  background: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+
+  @include phone {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.voted_users_modal {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: auto;
+}
+
+.user_card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.user_avatar {
+  @extend .avatar;
+  width: 36px;
+  height: 36px;
+}
+
+.user_name {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.voted_users_modal_header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cta {
+  cursor: pointer;
+}
+
+.close_icon {
+  @extend .cta;
+  margin-right: -5px;
+}
+
+.voted_users_modal_header .title {
+  font-weight: 900;
+  font-size: 16px;
+  margin: 0;
+}
+
+.member_list_container {
+  flex: 1;
+  padding: 0 20px;
+  overflow: auto;
+}
+
+.member_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.loader {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.anonymous_counter {
+  padding: 20px;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* rtl:ignore */
+.spinner {
+  animation-name: spin;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* rtl:ignore */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

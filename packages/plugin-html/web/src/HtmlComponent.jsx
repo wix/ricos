@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  mergeStyles,
-  normalizeUrl,
-  isValidUrl,
-  validate,
-  pluginHtmlSchema,
-} from 'wix-rich-content-common';
+import { mergeStyles, normalizeUrl, isValidUrl, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginHtmlSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-html.schema.json';
 
-import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './defaults';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
@@ -34,22 +30,21 @@ class HtmlComponent extends Component {
   componentDidMount() {
     const {
       componentData: { config },
-      settings,
-      siteDomain,
+      settings = {},
     } = this.props;
+    const { width, height, siteDomain } = settings;
     if (!config.width) {
-      if (settings && settings.width) {
-        config.width = settings.width;
-      } else if (this.element) {
-        const { width } = this.element.getBoundingClientRect();
+      if (width) {
         config.width = width;
+      } else if (this.element) {
+        config.width = this.element.getBoundingClientRect().width;
       } else {
         config.width = INIT_WIDTH;
       }
     }
 
     if (!config.height) {
-      config.height = (settings && settings.height) || INIT_HEIGHT;
+      config.height = height || INIT_HEIGHT;
     }
     this.setState({ siteDomain });
   }

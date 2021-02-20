@@ -1,5 +1,6 @@
 /*global cy*/
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
+import { getFooterToolbarConfig } from '../cypress/testAppConfig';
 
 describe('rtl', () => {
   beforeEach(() => cy.switchToHebrew());
@@ -19,16 +20,26 @@ describe('rtl', () => {
 
     after(() => cy.eyesClose());
 
+    it('render plugin shortcut with search in rtl', function() {
+      cy.loadRicosEditorAndViewer(
+        'newLines',
+        getFooterToolbarConfig({ morePluginsMenu: { showSearch: true } })
+      )
+        .focusEditor()
+        .openFooterPluginMenu();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     it('render plugin toolbar in rtl', function() {
-      cy.loadWrapperEditorAndViewer()
+      cy.loadRicosEditorAndViewer()
         .focusEditor()
         .openSideToolbar();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('render text toolbar in rtl', function() {
-      cy.loadWrapperEditorAndViewer('plain')
-        .setSelection(0, 8)
+      cy.loadRicosEditorAndViewer('plain')
+        .setEditorSelection(0, 8)
         .get('[data-hook=inlineToolbar]')
         .should('be.visible')
         .get('[data-hook=addPluginFloatingToolbar]')
@@ -37,20 +48,20 @@ describe('rtl', () => {
     });
 
     it('render rtl and ltr text correctly', function() {
-      cy.loadWrapperEditorAndViewer('hebrew');
+      cy.loadRicosEditorAndViewer('hebrew');
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('render external modal in rtl', function() {
-      cy.loadEditorAndViewer('images')
+      cy.loadRicosEditorAndViewer('images')
         .openImageSettings()
         .get('[data-hook="imageSettingsCaptionInput"]')
         .blur();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
 
     it('render text with indentation in rtl', function() {
-      cy.loadEditorAndViewer('hebrew_with_indentation');
+      cy.loadRicosEditorAndViewer('hebrew_with_indentation');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -69,27 +80,28 @@ describe('rtl', () => {
     after(() => cy.eyesClose());
 
     it('render add plugin modal in rtl', function() {
-      cy.loadEditorAndViewer()
+      cy.loadRicosEditorAndViewer()
         .focusEditor()
         .openAddPluginModal();
-      cy.eyesCheckWindow(this.test.title);
+      cy.wait(200);
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
 
     it('render rtl and ltr text correctly', function() {
-      cy.loadEditorAndViewer('hebrew');
+      cy.loadRicosEditorAndViewer('hebrew');
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('render external modal in rtl', function() {
-      cy.loadEditorAndViewer('images')
+      cy.loadRicosEditorAndViewer('images')
         .openImageSettings()
-        .get('[aria-label="Cancel"]')
+        .get('[data-hook="ImageSettingsMobileHeaderCancel"]')
         .blur();
       cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
 
     it('render text with indentation in rtl', function() {
-      cy.loadEditorAndViewer('hebrew_with_indentation');
+      cy.loadRicosEditorAndViewer('hebrew_with_indentation');
       cy.eyesCheckWindow(this.test.title);
     });
   });

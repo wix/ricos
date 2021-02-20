@@ -1,0 +1,80 @@
+---
+id: FileUploadPlugin
+title: File Upload Plugin
+sidebar_label: File Upload Plugin
+---
+
+import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
+import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+import { mockFileUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
+
+A slick UI component for uploading, viewing and downloading files.
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add a file!')}
+    placeholder={'Type here!'}
+    plugins={[pluginFileUpload({ handleFileSelection: mockFileUploadFunc })]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+<RicosEditor plugins={[pluginFileUpload(FileUploadConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
+import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+<RicosViewer plugins={[pluginFileUpload(FileUploadConfig)]} />;
+```
+
+## Config
+
+### `upload functions`
+
+```jsx
+handleFileUpload: (files: File[], updateEntity: UpdateEntityFunction) => void
+handleFileSelection: (updateEntity: UpdateEntityFunction) => void
+```
+
+`handleFileUpload` is a function provided to handle media uploads from the native file input. <br />
+`handleFileSelection` is a function provided to handle media uploads from a custom file input.
+
+In both functions when the upload phase is done the `updateEntity` callback should be called with an object containing the data, error (upon faliure) and index (for multiple file uploads).
+
+```jsx
+
+UpdateEntityFunction<T>: (data: T, error: MediaUploadError, index: number) => void
+
+data?: {
+  name: string;
+  type: string;
+  url?: string;
+  id?: string;
+}
+
+MediaUploadError?: {
+  msg?: string | JSX.Element;
+  key?: MediaUploadErrorKey;
+  args?: Record<string, string | number>;
+}
+```
+
+### `modify accepted file types`
+
+```jsx
+     accept: '*',
+```
+
+<br />

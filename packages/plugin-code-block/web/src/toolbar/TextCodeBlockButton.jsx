@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { InlineToolbarButton } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from '../types';
 import { hasBlockType, toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
-import { CodeBlockIcon } from '../icons';
+import CodeBlockIcon from '../icons/CodeBlockIcon';
 
 export default class TextCodeBlockButton extends Component {
   get isActive() {

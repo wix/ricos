@@ -1,0 +1,43 @@
+.buttonWrapper {
+  text-align: center;
+}
+
+.publishButton {
+  -webkit-highlight: none;
+  pointer-events: auto;
+  -webkit-font-smoothing: antialiased;
+  border: 0;
+  outline: 0;
+  background: 0 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-sizing: inherit;
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  margin: 0;
+  padding: 0 24px;
+  border-radius: 0;
+  border-style: none;
+  cursor: pointer;
+  vertical-align: middle;
+  white-space: nowrap;
+  font: normal normal normal 18px/1.75em brandon-grot-w01-light, sans-serif;
+  line-height: normal;
+  font-style: inherit;
+  font-weight: inherit;
+  text-decoration: inherit;
+  color: #ffffff;
+  background-color: #7a8699;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.publishButton:active {
+  background-color: #69707a;
+}
+
+.publishButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  background-color: #5f6062;
+}

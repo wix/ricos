@@ -1,5 +1,5 @@
 /* eslint-disable */
-const merge = require('webpack-merge');
+const merge = require('webpack-merge').merge;
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -28,9 +28,10 @@ const prodConfig = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
               importLoaders: 1,
-              localIdentName: '[hash:base64:5]',
+              modules: {
+                localIdentName: '[hash:base64:5]',
+              },
             },
           },
           'sass-loader',
@@ -45,10 +46,7 @@ const prodConfig = {
     }),
   ],
   optimization: {
-    minimizer: [
-      new TerserPlugin(),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
   },
 };
 

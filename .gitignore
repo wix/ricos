@@ -1,10 +1,10 @@
 .DS_Store
 dist
+generated
 node_modules
 *npm-debug.log
 lerna-debug.log
 yarn-error.log
-yarn.lock
 */**/package-lock.json
 target
 maven
@@ -35,7 +35,12 @@ e2e/test-env/report.*.json
 tags
 applitools.config.js
 
-#Flow types for CSS
-**/statics/styles/*.flow
+# docs
 **/.docusaurus
-**/docs/build/
+**/website/build/
+
+# ricos content migration
+**/migratedFixtures
+!intro.json
+!migration-content.json
+**/reverseMigratedFixtures
