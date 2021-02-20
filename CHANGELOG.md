@@ -16,16 +16,18 @@
     Click to see more.
   </summary>
   
+
+
+</details>
+<hr/>
+
+## 8.22.3 (Feb 20, 2021)
 ### :rocket: New Feature
 - `fullScreen`
   - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
 ### :house: Internal
 - `ricos-viewer`
   - [#2168](https://github.com/wix-incubator/rich-content/pull/2168) load fullscreen modal if content includes images
-
-
-</details>
-<hr/>
 
 ## 8.22.2 (Feb 18, 2021)
 ### :house: Internal
