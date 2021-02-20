@@ -271,32 +271,30 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
-    it('change link preview settings', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
-      cy.setLinkSettings();
+    afterEach('take snapshot', function() {
+      cy.waitForHtmlToLoad();
       cy.triggerLinkPreviewViewerUpdate();
       cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('change link preview settings', () => {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
+      cy.setLinkSettings();
     });
     //TODO: fix this flaky test
     // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('convert link preview to regular link', function() {
+    it('convert link preview to regular link', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('backspace key should convert link preview to regular link', function() {
+    it('backspace key should convert link preview to regular link', () => {
       cy.focusEditor()
         .type('{downarrow}{downarrow}')
         .type('{backspace}');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('delete link preview', function() {
+    it('delete link preview', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
   });
 
