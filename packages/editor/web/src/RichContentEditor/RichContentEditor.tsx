@@ -693,7 +693,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
-  isExternalModalOpen = () => !!document.querySelector('[data-id=rich-content-editor-modal]');
+  isExternalModalOpen = () => !!document?.querySelector('[data-id=rich-content-editor-modal]');
 
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
