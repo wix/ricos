@@ -136,8 +136,8 @@ class ImageViewer extends React.Component {
       imageUrl.highres = getImageSrc(src, helpers, {
         requiredWidth,
         requiredHeight,
-        requiredQuality: 90,
-        imageType: 'highRes',
+        requiredQuality: skipImageThumbnail && isSSR() ? 20 : 90,
+        imageType: skipImageThumbnail && isSSR() ? 'preload' : 'highRes',
       });
       if (skipImageThumbnail) {
         imageUrl.highresWidth = requiredWidth;
@@ -276,7 +276,7 @@ class ImageViewer extends React.Component {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
-    onExpand?.(this.props.entityIndex);
+    onExpand?.(this.props.blockKey);
   };
 
   scrollToAnchor = () => {
@@ -405,6 +405,7 @@ ImageViewer.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
   seoMode: PropTypes.bool,
+  blockKey: PropTypes.string,
 };
 
 export default ImageViewer;
