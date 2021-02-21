@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown, Input } from 'wix-style-react';
-import { truncateContentState } from 'wix-rich-content-common/libs/contentStateServices';
+import { truncateContent } from 'wix-rich-content-common/libs/contentStateServices';
 import { RichContentViewerBox, Section, Page } from '../Components/StoryParts';
 
 import ViewerWrapper from '../Components/ViewerWrapper';
@@ -22,6 +22,10 @@ export default () => {
     setContent(fixtures['example' + id]);
   };
 
+  const { content: truncatedConted, isTruncated } = truncateContent(content, blocksCount, {
+    wordsCount,
+    maxPlugins,
+  });
   return (
     <Page title="Preview Examples">
       <label>Content Type</label>
@@ -61,16 +65,11 @@ export default () => {
 
         <Section title="Preview">
           <RichContentViewerBox>
-            <ViewerWrapper
-              key={ruleIdx + 1}
-              content={
-                collapsed
-                  ? truncateContentState(content, blocksCount, { wordsCount, maxPlugins })
-                  : content
-              }
-            />
+            <ViewerWrapper key={ruleIdx + 1} content={collapsed ? truncatedConted : content} />
           </RichContentViewerBox>
-          <div onClick={() => setCollapse(!collapsed)}>View {collapsed ? 'More' : 'Less'} </div>
+          {isTruncated && (
+            <div onClick={() => setCollapse(!collapsed)}>See {collapsed ? 'More' : 'Less'} </div>
+          )}
         </Section>
       </Section>
     </Page>

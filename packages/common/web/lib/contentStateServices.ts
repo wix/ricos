@@ -1,6 +1,6 @@
 import { RicosContent, RicosContentBlock } from '../src';
 
-export const truncateContentState = (
+export const truncateContent = (
   contentState: RicosContent,
   index: number,
   opts: { wordsCount?: number; maxPlugins?: number } = {}
@@ -8,7 +8,7 @@ export const truncateContentState = (
   const { blocks, entityMap } = contentState;
   const { wordsCount = Infinity, maxPlugins = Infinity } = opts;
   if (index < 0 || (index > blocks.length && wordsCount === Infinity && maxPlugins === Infinity)) {
-    return contentState;
+    return { content: contentState, isTruncated: false };
   }
 
   const newEntityMap = {};
@@ -18,6 +18,7 @@ export const truncateContentState = (
   const newBlocks: RicosContentBlock[] = [];
   let cWordCount = 0;
   let pluginsCount = 0;
+  let isTruncated = false;
   try {
     blocks.forEach((block, i) => {
       if (i === index) throw BreakException;
@@ -48,7 +49,18 @@ export const truncateContentState = (
     });
   } catch (e) {
     if (e !== BreakException) throw e;
+    isTruncated = true;
   }
 
-  return { ...contentState, blocks: newBlocks, entityMap: newEntityMap };
+  const content = { ...contentState, blocks: newBlocks, entityMap: newEntityMap };
+  return { content, isTruncated };
+};
+
+export const truncateContentState = (
+  contentState: RicosContent,
+  index: number,
+  opts: { wordsCount?: number; maxPlugins?: number } = {}
+) => {
+  const { content } = truncateContent(contentState, index, opts);
+  return content;
 };
