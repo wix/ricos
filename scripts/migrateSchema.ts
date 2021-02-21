@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { writeFileSync, existsSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from 'path';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { RichContent } from 'ricos-schema';
@@ -51,6 +51,9 @@ if (filename) {
   const ricosSchema = convertDraftFile(filename);
   writeFileSync(`${MIGRATED_FIXTURES_PATH}/${filename}.json`, JSON.stringify(ricosSchema, null, 2));
   const draftData = convertRicosFile(filename);
+  if (!existsSync(REVERSE_MIGRATED_FIXTURES_PATH)) {
+    mkdirSync(REVERSE_MIGRATED_FIXTURES_PATH);
+  }
   writeFileSync(
     `${REVERSE_MIGRATED_FIXTURES_PATH}/${filename}.json`,
     JSON.stringify(draftData, null, 2)

@@ -19,19 +19,17 @@
   ### :rocket: New Feature
   - `plugin-video`
     - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
-	
-### :bug: Bug Fix
-- `link`
-  - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
-
-
-### :rocket: New Feature
-- `fullScreen`
-  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
-	
 
 </details>
 <hr/>
+
+## 8.22.3 (Feb 20, 2021)
+### :rocket: New Feature
+- `fullScreen`
+  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
+### :house: Internal
+- `ricos-viewer`
+  - [#2168](https://github.com/wix-incubator/rich-content/pull/2168) load fullscreen modal if content includes images
 
 ## 8.22.2 (Feb 18, 2021)
 ### :house: Internal

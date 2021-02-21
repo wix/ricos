@@ -485,6 +485,7 @@
 	"Accordion_ShownText_Placeholder": "Напишіть заголовок для цього елемента",
 	"Video_plugin_search_tags": "відео фільм кіно кліп музика аудіо mtv youtube камера пісня цифровий фільм завантажити анімація запис вірусне",
 	"ReplaceGiphyButton_Tooltip": "Замінити Gif",
+	"TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
 	"GalleryPlugin_Layout_Columns": "Стовпчики",
 	"Common_Units_PX": "пікс.",
 	"UploadAudio_Error_aac_Unsupported_Format": "Цей аудіофайл збережено не в підтримуваному форматі AAC, тому його не вдалося завантажити. Спробуйте інший файл.",
