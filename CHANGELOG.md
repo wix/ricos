@@ -15,12 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-- `common`
-  - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
 
 </details>
 <hr/>
+
+## 8.22.4 (Feb 21, 2021)  
+- `common`
+  - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
 
 ## 8.22.3 (Feb 20, 2021)
 ### :rocket: New Feature
