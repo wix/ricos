@@ -16,7 +16,8 @@
     Click to see more.
   </summary>
   
-
+- `common`
+  - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
 
 </details>
 <hr/>
