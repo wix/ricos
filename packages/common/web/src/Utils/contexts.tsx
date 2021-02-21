@@ -5,6 +5,7 @@ export const GlobalContext = React.createContext<{
   experiments?: AvailableExperiments;
   isMobile: boolean;
   t?: TranslationFunction;
+  containerWidth?: number;
 }>({
   isMobile: false,
 });

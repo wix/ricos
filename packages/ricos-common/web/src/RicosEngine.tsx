@@ -31,10 +31,15 @@ export class RicosEngine extends Component<EngineProps> {
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
-      experiments,
+      _rcProps,
     } = this.props;
 
-    const { theme, html } = themeStrategy({ plugins, cssOverride, ricosTheme, experiments });
+    const { theme, html } = themeStrategy({
+      plugins,
+      cssOverride,
+      ricosTheme,
+      experiments: _rcProps?.experiments,
+    });
     const htmls: ReactElement[] = [];
     if (html) {
       htmls.push(html);
@@ -48,7 +53,7 @@ export class RicosEngine extends Component<EngineProps> {
         childProps: children.props,
         cssOverride: theme,
         content,
-        experiments,
+        experiments: _rcProps?.experiments,
       })
     );
 
@@ -58,7 +63,7 @@ export class RicosEngine extends Component<EngineProps> {
       onPreviewExpand,
       previewConfig: preview,
       content,
-      experiments,
+      experiments: _rcProps?.experiments,
     });
 
     return {
@@ -67,6 +72,7 @@ export class RicosEngine extends Component<EngineProps> {
       htmls,
     };
   }
+
   render() {
     const {
       _rcProps,
@@ -84,7 +90,7 @@ export class RicosEngine extends Component<EngineProps> {
       linkPanelSettings = {},
       maxTextLength,
       textAlignment,
-      experiments,
+      width,
     } = this.props;
 
     const { strategyProps, previewContent, htmls } = this.runStrategies();
@@ -92,7 +98,14 @@ export class RicosEngine extends Component<EngineProps> {
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
 
-    const { openModal, closeModal, ariaHiddenId, container } = modalSettings;
+    const {
+      openModal,
+      closeModal,
+      ariaHiddenId,
+      container,
+      onModalOpen,
+      onModalClose,
+    } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
 
@@ -119,7 +132,7 @@ export class RicosEngine extends Component<EngineProps> {
       anchorTarget,
       relValue,
       textAlignment,
-      experiments,
+      width,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
@@ -133,6 +146,8 @@ export class RicosEngine extends Component<EngineProps> {
         fullscreenProps={fullscreenProps}
         {...mergedRCProps}
         key={'ricosElement'}
+        onModalOpen={onModalOpen}
+        onModalClose={onModalClose}
       >
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </RicosModal>,

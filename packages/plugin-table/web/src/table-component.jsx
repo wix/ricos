@@ -7,13 +7,14 @@ import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
 import { getRange, getRowsRange, getColsRange } from './domain/tableDataUtil';
-import { createEmptyCellEditor, handleCellClipboardEvent } from './tableUtil';
+import { createEmptyCellEditor, isCellsNumberInvalid } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
-import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
-import { isEmpty, isNumber } from 'lodash';
+import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { isEmpty, isNumber, cloneDeep } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
+
 class TableComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -27,6 +28,7 @@ class TableComponent extends React.Component {
     this.innerEditorsRefs = {};
     this.table = new Table(props.componentData, this.updateComponentData);
     this.tableRef = createRef();
+    this.tableContainer = createRef();
     this.dragPreview = createRef();
     this.rowDragProps = {
       onDragClick: selected => this.selectRows(selected, true),
@@ -47,13 +49,6 @@ class TableComponent extends React.Component {
     ) {
       this.setSelected();
     }
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleTableClipboardEvent);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleTableClipboardEvent);
   }
 
   getCellState = (i, j) => this.table.getCellContent(i, j) || createEmptyCellEditor();
@@ -80,7 +75,10 @@ class TableComponent extends React.Component {
     this.setSelected(selected, disableSelectedStyle);
   };
 
-  setEditingActive = isEditingActive => this.setState({ isEditingActive });
+  setEditingActive = isEditingActive => {
+    this.props.disableKeyboardEvents(isEditingActive);
+    this.setState({ isEditingActive });
+  };
 
   getCellEditorRef = (i, j) => this.innerEditorsRefs[`${i}-${j}`];
 
@@ -178,24 +176,55 @@ class TableComponent extends React.Component {
     this.table.setNewRows(rows);
   };
 
-  handleTableClipboardEvent = e => {
+  onKeyDown = e => {
+    const { selected } = this.state;
+    if (this.shouldHandleKeyDown(e)) {
+      if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        this.setAllCellsSelected();
+      } else if (e.keyCode === KEYS_CHARCODE.SPACE) {
+        e.ctrlKey && this.handleShortcutSelection(e, getColsRange(selected), this.selectCols);
+        e.shiftKey && this.handleShortcutSelection(e, getRowsRange(selected), this.selectRows);
+      } else if (e.altKey && e.ctrlKey) {
+        if (e.key === '+' || e.key === '=') {
+          const selectedCols = this.table.getSelectedCols(getRange(selected));
+          selectedCols ? this.addCol(Math.max(...selectedCols) + 1) : this.addLastCol();
+        } else if (e.key === '-') {
+          const selectedCols = this.table.getSelectedCols(getRange(selected));
+          this.isAllCellsSelected(selected)
+            ? this.props.blockProps.deleteBlock()
+            : selectedCols && this.deleteColumn(selectedCols);
+        } else if (e.key === '*') {
+          this.lastFocused = document.activeElement;
+          this.toolbarRef.focus();
+        }
+      } else if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+        this.lastFocused && this.lastFocused.focus();
+        this.lastFocused = undefined;
+      }
+    }
+  };
+
+  handleShortcutSelection = (e, indexes, selectFunc) => {
+    if (!this.prevSelection) {
+      this.prevSelection = cloneDeep(this.state.selected);
+      selectFunc({ start: Math.min(...indexes), end: Math.max(...indexes) });
+    } else {
+      this.setSelected(this.prevSelection);
+      this.prevSelection = null;
+    }
+    e.stopPropagation();
+  };
+
+  shouldHandleKeyDown = e => {
     const { selected, isEditingActive } = this.state;
     const isColorPickerModalOpen = e.target.closest('[data-id=color-picker-modal]');
-    if (
+    return (
       isPluginFocused(this.props.block, this.props.selection) &&
       selected &&
       !isEditingActive &&
       !isColorPickerModalOpen
-    ) {
-      const preventEvent = () => {
-        e.stopPropagation();
-        e.preventDefault();
-      };
-      if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
-        preventEvent();
-        this.setAllCellsSelected();
-      }
-    }
+    );
   };
 
   onPaste = (copiedCells, start) => {
@@ -258,14 +287,14 @@ class TableComponent extends React.Component {
   isPositionInBoundaries = (boundary, pos) => boundary - 10 < pos && pos < boundary + 10;
 
   onColDragEnd = (e, dragsIndex) => {
-    this.table.reorderColumns(dragsIndex, this.colDropIndex);
+    dragsIndex && this.colDropIndex && this.table.reorderColumns(dragsIndex, this.colDropIndex);
     this.setState({ highlightColResizer: false });
     this.resetDrag();
     this.colDropIndex = null;
   };
 
   onRowDragEnd = (e, dragsIndex) => {
-    this.table.reorderRows(dragsIndex, this.rowDropIndex);
+    dragsIndex && this.rowDropIndex && this.table.reorderRows(dragsIndex, this.rowDropIndex);
     this.setState({ highlightRowResizer: false });
     this.resetDrag();
     this.dropTop = null;
@@ -279,8 +308,10 @@ class TableComponent extends React.Component {
   };
 
   addRow = i => {
-    this.table.addRow(i);
-    this.selectRows({ start: i, end: i });
+    if (!isCellsNumberInvalid(this.table.getRowNum() + 1, this.table.getColNum())) {
+      this.table.addRow(i);
+      this.selectRows({ start: i, end: i });
+    }
   };
 
   merge = () => {
@@ -298,8 +329,10 @@ class TableComponent extends React.Component {
   };
 
   addCol = i => {
-    this.table.addColumn(i);
-    this.selectCols({ start: i, end: i });
+    if (!isCellsNumberInvalid(this.table.getRowNum(), this.table.getColNum() + 1)) {
+      this.table.addColumn(i);
+      this.selectCols({ start: i, end: i });
+    }
   };
 
   deleteRow = deleteIndexes => {
@@ -332,7 +365,7 @@ class TableComponent extends React.Component {
     colsPositions.forEach((pos, index) => {
       if (
         (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
-        (this.movementX === 'left' && this.dropLeft > pos + 15)
+        (this.movementX === 'left' && dropLeft > pos + 15)
       ) {
         this.colDropIndex = index + 1;
       }
@@ -405,6 +438,8 @@ class TableComponent extends React.Component {
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const range = selected && getRange(selected);
     const isEditMode = !isMobile && isTableOnFocus;
+    const rowNum = this.table.getRowNum();
+    const colNum = this.table.getColNum();
     return (
       <div
         className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
@@ -414,6 +449,8 @@ class TableComponent extends React.Component {
         data-hook="TableComponent"
         onFocus={this.onFocus}
         tabIndex="0"
+        ref={this.tableContainer}
+        onKeyDown={this.onKeyDown}
       >
         {!isMobile && (
           <TableToolbar
@@ -456,7 +493,7 @@ class TableComponent extends React.Component {
             onResizeStart={this.setSelected}
             isSelectAllActive={this.isAllCellsSelected(selected)}
             onSelectAllClick={this.toggleAllCellsSelection}
-            rowNum={this.table.getRowNum()}
+            rowNum={rowNum}
             isEditMode={isEditMode}
             rowsHeights={this.rowsHeights}
             rowsRefs={this.rowsRefs}
@@ -489,7 +526,6 @@ class TableComponent extends React.Component {
               this.table.getSelectedRows(range)
             }
             t={t}
-            handleCellClipboardEvent={handleCellClipboardEvent}
             colDragProps={this.colDragProps}
             onResize={this.onResizeCol}
             onResizeStart={this.setSelected}
@@ -500,17 +536,30 @@ class TableComponent extends React.Component {
             onClear={this.table.clearCells}
             setCellContent={this.setCellContent}
             onPaste={this.onPaste}
+            tableOverflowWidth={
+              this.tableRef.current?.offsetWidth - this.tableContainer.current?.offsetWidth
+            }
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
         {!isMobile && (
           <div className={styles.addCol}>
-            <AddNewSection dataHook={'addCol'} onClick={this.addLastCol} />
+            <AddNewSection
+              dataHook={'addCol'}
+              onClick={this.addLastCol}
+              shouldDisable={isCellsNumberInvalid(rowNum, colNum + 1)}
+              t={t}
+            />
           </div>
         )}
         {!isMobile && (
           <div className={styles.addRow}>
-            <AddNewSection dataHook={'addRow'} onClick={this.addLastRow} />
+            <AddNewSection
+              dataHook={'addRow'}
+              onClick={this.addLastRow}
+              shouldDisable={isCellsNumberInvalid(rowNum + 1, colNum)}
+              t={t}
+            />
           </div>
         )}
       </div>
@@ -529,6 +578,7 @@ TableComponent.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
+  disableKeyboardEvents: PropTypes.func,
 };
 
 export { TableComponent as Component };

@@ -62,6 +62,7 @@
   color: $primary-text-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
+  background-color: $background-color;
   @include ricosTypography('p', true);
 
   &::after {
@@ -203,6 +204,10 @@
   line-height: 26px;
   padding: 2px 25px;
   white-space: pre-wrap;
+
+  .renderedInTable & {
+    margin: 1em 0;
+  }
 }
 
 .normalText {

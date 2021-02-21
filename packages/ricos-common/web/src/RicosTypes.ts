@@ -1,6 +1,5 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
-  AvailableExperiments,
   RicosContent,
   OnErrorFunction,
   SEOSettings,
@@ -34,7 +33,7 @@ export interface RicosProps {
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
-  experiments?: AvailableExperiments; // internal use only
+  width?: number;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -100,6 +99,8 @@ export interface ModalSettings {
   closeModal?: () => void;
   ariaHiddenId?: string;
   container?: HTMLElement;
+  onModalOpen?: (data: Record<string, unknown>) => void;
+  onModalClose?: () => void;
 }
 
 export interface ToolbarSettings {

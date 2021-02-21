@@ -2,7 +2,7 @@
 import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, cloneDeep } from 'lodash';
+import { get, includes, debounce, cloneDeep, isEmpty } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -147,6 +147,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   localeResource?: Record<string, string>;
   maxTextLength?: number;
   experiments?: AvailableExperiments;
+  disableKeyboardEvents?: (shouldEnable: boolean) => void;
+  width?: number;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -158,6 +160,7 @@ interface State {
   theme?: RichContentTheme;
   textToolbarType?: TextToolbarType;
   error?: string;
+  readOnly: boolean;
 }
 
 // experiment example code
@@ -222,6 +225,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
+      readOnly: false,
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -244,8 +248,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
-    this.props.helpers?.onOpenEditorSuccess?.(Version.currentVersion);
-    console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
+    !isEmpty(this.props.experiments) && console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {
@@ -412,7 +415,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
+      disableKeyboardEvents: this.disableKeyboardEvents,
     };
+  };
+
+  disableKeyboardEvents = shouldDisable => {
+    if (!this.props.isInnerRCE && shouldDisable !== this.state.readOnly) {
+      this.setState({ readOnly: shouldDisable });
+    }
   };
 
   getEditorBounds = () => this.state.editorBounds;
@@ -822,7 +832,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={readOnly}
+        readOnly={readOnly || this.state.readOnly}
       />
     );
   };
@@ -837,8 +847,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     additionalProps,
     toolbarsToIgnore,
     tablePluginMenu,
-    editing,
-    onFocus,
   }) => {
     return (
       <InnerRCE
@@ -855,8 +863,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
         tablePluginMenu={tablePluginMenu}
-        editing={editing}
-        onFocus={onFocus}
       />
     );
   };
@@ -939,7 +945,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { onError, locale, direction, experiments, showToolbars = true } = this.props;
+    const { onError, locale, direction, experiments, showToolbars = true, width } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -956,7 +962,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t, containerWidth: width }}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div

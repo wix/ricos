@@ -11,6 +11,7 @@ import {
   WIX_MEDIA_DEFAULT,
   anchorScroll,
   addAnchorTagToUrl,
+  GlobalContext,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -30,11 +31,25 @@ class ImageViewer extends React.Component {
     this.imageRef = React.createRef();
   }
 
+  static contextType = GlobalContext;
+
+  shouldSkipImageThumbnail = () => {
+    const { containerWidth, experiments } = this.context;
+
+    if (containerWidth && experiments?.skipImageThumbnail?.enabled) {
+      return containerWidth;
+    } else {
+      return false;
+    }
+  };
+
   componentDidMount() {
-    this.setState({ ssrDone: true });
-    if (isSafari()) {
-      //In Safari, onload event doesn't always called when reloading the page
-      this.forceOnImageLoad();
+    if (!this.shouldSkipImageThumbnail()) {
+      this.setState({ ssrDone: true });
+      if (isSafari()) {
+        //In Safari, onload event doesn't always called when reloading the page
+        this.forceOnImageLoad();
+      }
     }
   }
 
@@ -74,6 +89,23 @@ class ImageViewer extends React.Component {
       highres: '',
     };
 
+    const getImageDimensions = (width, isMobile) => {
+      let requiredHeight;
+      let requiredWidth = width || 1;
+      if (isMobile && !isSSR()) {
+        //adjust the image width to viewport scaling and device pixel ratio
+        requiredWidth *= window.devicePixelRatio;
+        requiredWidth *= window.screen.width / document.body.clientWidth;
+      }
+      //keep the image's original ratio
+      requiredHeight = this.calculateHeight(requiredWidth, src);
+      requiredWidth = Math.ceil(requiredWidth);
+      requiredHeight = Math.ceil(requiredHeight);
+      return [requiredWidth, requiredHeight];
+    };
+
+    const skipImageThumbnail = this.shouldSkipImageThumbnail();
+
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
@@ -82,18 +114,24 @@ class ImageViewer extends React.Component {
       if (seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
-      } else if (this.state.container) {
-        const { width } = this.state.container.getBoundingClientRect();
-        requiredWidth = width || src?.width || 1;
-        if (this.props.isMobile) {
-          //adjust the image width to viewport scaling and device pixel ratio
-          requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
-          requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
+      } else if (skipImageThumbnail) {
+        const {
+          componentData: {
+            config: { size },
+          },
+        } = this.props;
+
+        let effectiveWidth = this.context.containerWidth;
+
+        if (size === 'small') {
+          //small size is 350px in css, might be overrided in consumers cssOverride
+
+          effectiveWidth = Math.min(effectiveWidth, 350);
         }
-        //keep the image's original ratio
-        requiredHeight = this.calculateHeight(requiredWidth, src);
-        requiredWidth = Math.ceil(requiredWidth);
-        requiredHeight = Math.ceil(requiredHeight);
+        [requiredWidth, requiredHeight] = getImageDimensions(effectiveWidth, this.props.isMobile);
+      } else if (this.state.container) {
+        const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
+        [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
       }
       imageUrl.highres = getImageSrc(src, helpers, {
         requiredWidth,
@@ -101,6 +139,10 @@ class ImageViewer extends React.Component {
         requiredQuality: 90,
         imageType: 'highRes',
       });
+      if (skipImageThumbnail) {
+        imageUrl.highresWidth = requiredWidth;
+        imageUrl.highresHeight = requiredHeight;
+      }
     }
     if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
@@ -124,15 +166,15 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage = (imageClassName, imageSrc, alt, props, isGif, seoMode) => {
+  renderImage = (imageClassName, imageSrc, alt, props, isGif, onlyHighRes) => {
     return this.getImage(
       classNames(imageClassName, this.styles.imageHighres, {
-        [this.styles.onlyHighRes]: isGif || seoMode,
+        [this.styles.onlyHighRes]: onlyHighRes,
       }),
       imageSrc.highres,
       alt,
       props,
-      !isGif
+      { fadeIn: !isGif, width: imageSrc.highresWidth, height: imageSrc.highresHeight }
     );
   };
 
@@ -141,11 +183,12 @@ class ImageViewer extends React.Component {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      props
+      { ariaHidden: 'true', ...props }
     );
   };
 
-  getImage(imageClassNames, src, alt, props, fadeIn = false) {
+  getImage(imageClassNames, src, alt, props, opts = {}) {
+    const { fadeIn = false, width, height } = opts;
     return (
       <img
         {...props}
@@ -155,6 +198,8 @@ class ImageViewer extends React.Component {
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
         ref={fadeIn ? this.imageRef : this.preloadRef}
+        width={width}
+        height={height}
       />
     );
   }
@@ -230,7 +275,7 @@ class ImageViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.('expand_image', IMAGE_TYPE);
+    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
     onExpand?.(this.props.blockKey);
   };
 
@@ -264,6 +309,7 @@ class ImageViewer extends React.Component {
       return null;
     } else if (this.hasAnchor()) {
       e.preventDefault();
+      e.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
       this.scrollToAnchor();
     } else {
       !this.props.componentData.config.disableExpand && this.handleExpand(e);
@@ -286,6 +332,7 @@ class ImageViewer extends React.Component {
     );
   };
 
+  // eslint-disable-next-line complexity
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
@@ -309,9 +356,13 @@ class ImageViewer extends React.Component {
     }
     const isGif = imageSrc?.highres?.endsWith?.('.gif');
     setComponentUrl?.(imageSrc?.highres);
-    const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
-    const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
-    const accessibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
+
+    const skipImageThumbnail = this.shouldSkipImageThumbnail();
+
+    const shouldRenderPreloadImage = !seoMode && !skipImageThumbnail && imageSrc && !isGif;
+    const shouldRenderImage = (imageSrc && (skipImageThumbnail || seoMode || ssrDone)) || isGif;
+    const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
+    const onlyHiRes = seoMode || isGif || skipImageThumbnail;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
@@ -321,13 +372,13 @@ class ImageViewer extends React.Component {
         onKeyDown={this.onKeyDown}
         ref={this.handleRef}
         onContextMenu={this.handleContextMenu}
-        {...accessibilityProps}
+        {...accesibilityProps}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
-            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, onlyHiRes)}
           {hasExpand && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
