@@ -23,6 +23,15 @@
 </details>
 <hr/>
 
+## 8.22.5 (Feb 21, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2183](https://github.com/wix/ricos/pull/2183) `customStyles` fix css-injection with `;` char
+
+## 8.22.4 (Feb 21, 2021)  
+- `common`
+  - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
+
 ## 8.22.3 (Feb 20, 2021)
 ### :rocket: New Feature
 - `fullScreen`
