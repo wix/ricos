@@ -16,7 +16,8 @@
     Click to see more.
   </summary>
   
-
+- `image-plugin`
+  - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons 
 
 </details>
 <hr/>
