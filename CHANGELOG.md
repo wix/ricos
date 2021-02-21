@@ -15,13 +15,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-### :bug: Bug Fix
-- `ricos-common`
-  - [#2183](https://github.com/wix/ricos/pull/2183) `customStyles` fix css-injection with `;` char
 
 </details>
 <hr/>
+
+## 8.22.5 (Feb 21, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2183](https://github.com/wix/ricos/pull/2183) `customStyles` fix css-injection with `;` char
 
 ## 8.22.4 (Feb 21, 2021)  
 - `common`
