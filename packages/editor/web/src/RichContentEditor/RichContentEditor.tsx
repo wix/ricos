@@ -693,7 +693,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
-  isExternalModalOpen = () => !!document?.querySelector('[data-id=rich-content-editor-modal]');
+  isLinkModalOpen = () => !!document?.querySelector('[data-hook=linkPanelContainer]');
 
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
@@ -720,7 +720,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             forceDisabled={
               plugin.name === 'FooterToolbar' && !this.props.isInnerRCE && this.inPluginEditingMode
             }
-            isModalOpen={this.isExternalModalOpen}
+            isModalOpen={this.isLinkModalOpen()}
           />
         );
       }
