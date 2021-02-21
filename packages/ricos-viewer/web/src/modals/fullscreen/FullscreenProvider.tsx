@@ -1,6 +1,7 @@
 import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
 import { emptyState } from 'ricos-common';
 import { Helpers } from 'wix-rich-content-common';
+import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import { RicosContent, FullscreenProps } from '../../index';
 
 interface Props {
@@ -34,8 +35,27 @@ export default class FullscreenProvider extends Component<Props, State> {
     };
   }
 
+  getImagesCount(): number {
+    if (this.props.initialState) {
+      return getImagesData(this.props.initialState).images.length;
+    } else {
+      return 0;
+    }
+  }
+
   componentDidMount() {
-    this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+    if (this.getImagesCount() > 0) {
+      this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { FullscreenModal } = this.state;
+    if (nextProps.initialState !== this.props.initialState) {
+      if (!FullscreenModal && this.getImagesCount() > 0) {
+        this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+      }
+    }
   }
 
   loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
@@ -57,12 +77,12 @@ export default class FullscreenProvider extends Component<Props, State> {
     if (isModalSuspended) {
       return config;
     }
-    const onExpand = (entityIndex: number, innerIndex = 0) => {
+    const onExpand = (blockKey: string, innerIndex = 0) => {
       const { expandModeData } = this.state;
       this.setState({
         isExpanded: true,
         // if expandModeData is not defined - expand the first image
-        index: expandModeData ? expandModeData.imageMap[entityIndex] + innerIndex : 0,
+        index: expandModeData ? expandModeData.imageMap[blockKey] + innerIndex : 0,
       });
     };
     const imageConfig = config['wix-draft-plugin-image'];

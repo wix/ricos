@@ -485,6 +485,7 @@
 	"Accordion_ShownText_Placeholder": "Напишете заглавие за този елемент",
 	"Video_plugin_search_tags": "видеоклип филм клип музика аудио mtv youtube камера песен визуален дигитален филм качване анимация запис на лента вирусен",
 	"ReplaceGiphyButton_Tooltip": "Замяна на GIF",
+	"TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
 	"GalleryPlugin_Layout_Columns": "Колони",
 	"Common_Units_PX": "px",
 	"UploadAudio_Error_aac_Unsupported_Format": "This audio file is not in a supported AAC format and can’t be uploaded. Try a different file,.",

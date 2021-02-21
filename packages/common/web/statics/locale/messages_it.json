@@ -485,6 +485,7 @@
 	"Accordion_ShownText_Placeholder": "Scrivi un titolo per questo oggetto",
 	"Video_plugin_search_tags": "video film clip musica audio mtv youtube fotocamera canzone digitale filmato caricamento animato registrazione nastro virale",
 	"ReplaceGiphyButton_Tooltip": "Sostituisci Gif",
+	"TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
 	"GalleryPlugin_Layout_Columns": "Colonne",
 	"Common_Units_PX": "px",
 	"UploadAudio_Error_aac_Unsupported_Format": "Questo file audio non è in un formato AAC supportato e non è possibile caricarlo. Prova con un altro file.",
