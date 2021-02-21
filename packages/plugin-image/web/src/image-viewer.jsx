@@ -34,13 +34,14 @@ class ImageViewer extends React.Component {
   static contextType = GlobalContext;
 
   shouldSkipImageThumbnail = () => {
-    const { containerWidth, experiments } = this.context;
+    return true;
+    // const { containerWidth, experiments } = this.context;
 
-    if (containerWidth && experiments?.skipImageThumbnail?.enabled) {
-      return containerWidth;
-    } else {
-      return false;
-    }
+    // if (containerWidth && experiments?.skipImageThumbnail?.enabled) {
+    //   return containerWidth;
+    // } else {
+    //   return false;
+    // }
   };
 
   componentDidMount() {
@@ -121,7 +122,7 @@ class ImageViewer extends React.Component {
           },
         } = this.props;
 
-        let effectiveWidth = this.context.containerWidth;
+        let effectiveWidth = 700; //this.context.containerWidth;
 
         if (size === 'small') {
           //small size is 350px in css, might be overrided in consumers cssOverride
