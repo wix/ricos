@@ -50,6 +50,7 @@ export default class InlineToolbar extends Component {
     }),
     toolbarDecorationFn: PropTypes.func,
     locale: PropTypes.string.isRequired,
+    isModalOpen: PropTypes.func,
   };
 
   static defaultProps = {
@@ -153,7 +154,7 @@ export default class InlineToolbar extends Component {
   getTabIndexByVisibility = () => (this.isVisible() ? 0 : -1);
 
   shouldBeVisible = () => {
-    const { pubsub, visibilityFn } = this.props;
+    const { pubsub, visibilityFn, isModalOpen } = this.props;
     const { overrideContent, extendContent, keepOpen } = this.state;
 
     let isVisible = false;
@@ -162,7 +163,7 @@ export default class InlineToolbar extends Component {
       isVisible = visibilityFn(editorState);
     }
 
-    return isVisible || overrideContent || extendContent || keepOpen || false;
+    return isVisible || overrideContent || extendContent || keepOpen || isModalOpen() || false;
   };
 
   isVisible = () => this.state.isVisible;
