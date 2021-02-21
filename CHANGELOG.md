@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
   
-
+### :bug: Bug Fix
+- `link`
+  - [#2179](https://github.com/wix/ricos/pull/2179) fix editor scrolling to the top when link modal opens from keyboard shortcuts
 
 </details>
 <hr/>
