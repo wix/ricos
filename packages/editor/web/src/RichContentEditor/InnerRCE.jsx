@@ -7,7 +7,11 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
-import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
+import {
+  isCursorAtStartOfContent,
+  selectAllContent,
+  isAllContentSelected,
+} from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
 
 class InnerRCE extends PureComponent {
@@ -69,8 +73,10 @@ class InnerRCE extends PureComponent {
 
   selectAllContent = forceSelection => {
     const { editorState } = this.props;
-    const newEditorState = selectAllContent(editorState, forceSelection);
-    this.props.onChange(newEditorState);
+    if (!isAllContentSelected(editorState)) {
+      const newEditorState = selectAllContent(editorState, forceSelection);
+      this.props.onChange(newEditorState);
+    }
   };
 
   focus = () => this.ref.focus();

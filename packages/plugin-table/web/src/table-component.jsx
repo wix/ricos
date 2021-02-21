@@ -64,8 +64,11 @@ class TableComponent extends React.Component {
   };
 
   onEditorChange = (i, j, content) => {
-    this.table.getCell(i, j).content = content;
-    this.updateComponentData(this.table.componentData);
+    const oldContent = this.table.getCell(i, j).content;
+    if (oldContent !== content) {
+      this.table.getCell(i, j).content = content;
+      this.updateComponentData(this.table.componentData);
+    }
   };
 
   renderInnerRCE = (i, j) => {

@@ -790,3 +790,15 @@ export function selectAllContent(editorState, forceSelection) {
   const newEditorState = setSelectionFunction(editorState, selection);
   return newEditorState;
 }
+
+export function isAllContentSelected(editorState) {
+  const currentContent = editorState.getCurrentContent();
+  const selection = editorState.getSelection();
+  const lastBlock = currentContent.getLastBlock();
+  return (
+    selection.anchorKey === currentContent.getFirstBlock().getKey() &&
+    selection.anchorOffset === 0 &&
+    selection.focusOffset === lastBlock.getText().length &&
+    selection.focusKey === lastBlock.getKey()
+  );
+}

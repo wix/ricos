@@ -23,8 +23,9 @@ export default class Cell extends Component {
       this.props.setEditingActive(false);
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
-    if (this.props.selected && !prevProps.selected && !isCellEditing && !this.props.isMobile) {
+    if (this.props.selected && !isCellEditing && !this.props.isMobile) {
       this.editorRef?.selectAllContent(true);
+      this.editorRef.focus();
     }
   }
 
