@@ -99,7 +99,8 @@ class BaseToolbarButton extends React.Component {
       return;
     }
 
-    const activeButton = componentState.activeButton || { keyName, isActive: false };
+    const activeButton = (componentState.activeButton &&
+      componentState.activeButton.keyName === keyName) || { keyName, isActive: false };
     const isToggleButton = !(
       this.props.type === BUTTONS.EXTERNAL_MODAL || this.props.type === BUTTONS.FILES
     );
