@@ -218,7 +218,7 @@ class ImageSettings extends Component {
               dataHook="imageSettingsAltInput"
               isMobile={isMobile}
             />
-            <InfoIcon isNotification theme={this.props.theme} tooltipText={this.altTooltip} />
+            <InfoIcon theme={this.props.theme} tooltipText={this.altTooltip} />
           </SettingsSection>
           <SettingsSection
             theme={theme}
@@ -230,7 +230,7 @@ class ImageSettings extends Component {
             </div>
           </SettingsSection>
         </div>
-        {isMobile ? null : (
+        {!isMobile && (
           <SettingsPanelFooter
             fixed
             theme={theme}
