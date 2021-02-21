@@ -28,7 +28,7 @@ schemas.forEach(schema =>
 
 const indexFile = schemas.reduce(
   (fileString, schema) => fileString + `export * from './${schema.replace('.proto', '')}';\n`,
-  `export * from './google/protobuf/timestamp';\n`
+  ''
 );
 
 writeFileSync(`${GEN_DIR}/index.ts`, indexFile);
