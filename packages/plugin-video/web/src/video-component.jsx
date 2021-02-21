@@ -38,6 +38,7 @@ class VideoComponent extends React.Component {
 
   componentDidUpdate() {
     this.handlePlayerFocus();
+    console.log("VIDEO STATE: ", JSON.stringify(this.state));
   }
 
   handlePlayerFocus() {
