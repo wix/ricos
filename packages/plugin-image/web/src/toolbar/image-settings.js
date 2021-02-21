@@ -33,8 +33,8 @@ class ImageSettings extends Component {
     this.captionLabel = t('ImageSettings_Caption_Label');
     this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
     this.altLabel = t('ImageSettings_Alt_Label');
-    this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
-    this.imgCanBeDownloadedTooltip = 'ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip';
+    this.altTooltip = t('ImageSettings_Alt_Label_Tooltip');
+    this.imgCanBeDownloadedTooltip = t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip');
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
   }
 
