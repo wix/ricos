@@ -197,10 +197,10 @@ class TableToolbar extends Component {
     this.cleanFirstButtonAsSeparator(buttonsAsArray);
     return (
       <>
-        <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
+        <button className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
           <GoBackIcon />
           <div className={styles.goBackLabel}>{t('TablePlugin_Toolbar_GoBack_Button')}</div>
-        </div>
+        </button>
         <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
       </>
     );
@@ -223,6 +223,9 @@ class TableToolbar extends Component {
     this.setState({ editingToolbarProps });
   };
 
+  focus = () => this.ref.focus();
+  setRef = ref => (this.ref = ref);
+
   render() {
     const { selected, isEditingActive } = this.props;
     const { isTextFormattingOpen, combinedToolbarProps, editingToolbarProps } = this.state;
@@ -231,7 +234,7 @@ class TableToolbar extends Component {
         {isEditingActive ? (
           editingToolbarProps && this.renderEditingTextFormattingToolbar()
         ) : (
-          <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
+          <ToolbarContainer ref={this.setRef} toolbarPosition={this.getToolbarPosition()}>
             {isTextFormattingOpen
               ? combinedToolbarProps && this.renderTextFormattingToolbar()
               : this.renderMainToolbar()}
