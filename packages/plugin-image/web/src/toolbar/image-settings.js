@@ -55,35 +55,20 @@ class ImageSettings extends Component {
     }));
   };
 
-  renderToggle = ({ toggleKey, labelKey }) => {
-    if (toggleKey === 'isRightClickEnabled') {
-      return (
-        <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
-          <LabeledToggle
-            style={{ paddingTop: 24 }}
-            theme={this.props.theme}
-            checked={this.state[toggleKey]}
-            label={this.props.t(labelKey)}
-            onChange={this.toggleState(toggleKey)}
-            dataHook="imageRightClickToggle"
-          />
-          <InfoIcon
-            isNotification
-            theme={this.props.theme}
-            tooltipText={this.imgCanBeDownloadedTooltip}
-          />
-        </div>
-      );
-    }
+  renderToggle = ({ toggleKey, labelKey, dataHook }) => {
+    const tooltipText = toggleKey === 'isRightClickEnabled' ? this.imgCanBeDownloadedTooltip : null;
     return (
-      <LabeledToggle
-        key={toggleKey}
-        theme={this.props.theme}
-        checked={this.state[toggleKey]}
-        label={this.props.t(labelKey)}
-        onChange={this.toggleState(toggleKey)}
-        dataHook="imageExpandToggle"
-      />
+      <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
+        <LabeledToggle
+          style={{ paddingTop: 24 }}
+          theme={this.props.theme}
+          checked={this.state[toggleKey]}
+          label={this.props.t(labelKey)}
+          onChange={this.toggleState(toggleKey)}
+          dataHook={dataHook}
+          tooltipText={tooltipText}
+        />
+      </div>
     );
   };
 
@@ -91,10 +76,12 @@ class ImageSettings extends Component {
     {
       toggleKey: 'isExpandEnabled',
       labelKey: 'ImagePlugin_Settings_ImageOpensInExpandMode_Label',
+      dataHook: 'imageExpandToggle',
     },
     {
       toggleKey: 'isRightClickEnabled',
       labelKey: 'ImagePlugin_Settings_ImageCanBeDownloaded_Label',
+      dataHook: 'imageRightClickToggle',
     },
   ];
 
