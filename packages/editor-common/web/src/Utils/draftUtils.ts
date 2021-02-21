@@ -405,9 +405,12 @@ export const createBlock = (editorState: EditorState, data, type: string) => {
   const blockBefore = newEditorState.getCurrentContent().getBlockBefore(newBlockKey);
   const blockAfter = newEditorState.getCurrentContent().getBlockAfter(newBlockKey);
 
-  const editorStateWithoutEmptyBlockAfter = deleteBlock(newEditorState, blockAfter.getKey());
+  const editorStateWithoutEmptyBlockAfter = !isLastBlock(newEditorState, blockAfter.getKey())
+    ? deleteBlock(newEditorState, blockAfter.getKey())
+    : newEditorState;
   const editorStateWithoutEmptyBlocks =
-    blockBefore.getText() === '' || blockBefore.getText() === '​' //zero-width space (empty table cell)
+    !isFirstBlock(editorStateWithoutEmptyBlockAfter, blockBefore.getKey()) &&
+    (blockBefore.getText() === '' || blockBefore.getText() === '​') //zero-width space (empty table cell)
       ? deleteBlock(editorStateWithoutEmptyBlockAfter, blockBefore.getKey())
       : editorStateWithoutEmptyBlockAfter;
 
@@ -849,7 +852,7 @@ function insertNewBlock(editorState, position, keyForNewBlock) {
   } else if (position.top) {
     blockKey = blocks[0].getKey();
   } else if (position.bottom) {
-    blockKey = blocks[blocks.length - 1].getKey();
+    blockKey = undefined;
   }
   const blockMap = contentState.getBlockMap();
   const newBlockKey = keyForNewBlock || genKey();
@@ -868,6 +871,18 @@ function insertNewBlock(editorState, position, keyForNewBlock) {
     blockMap: newBlockMap,
   });
   return { contentState: newContentState, selection: newSelection };
+}
+
+function isFirstBlock(editorState: EditorState, blockKey: string) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const firstBlock = blocks[0].getKey();
+  return firstBlock === blockKey;
+}
+
+function isLastBlock(editorState: EditorState, blockKey: string) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const lastBlock = blocks[blocks.length - 1].getKey();
+  return lastBlock === blockKey;
 }
 
 function lastBlockIsAtomic(editorState: EditorState) {
@@ -911,21 +926,18 @@ function removeDummyBlocks(editorState: EditorState) {
   return EditorState.push(editorState, newContentState, 'remove-range');
 }
 
-export function handleFirstAndLastBlocks(editorState: EditorState) {
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  if (blocks.length === 1) {
-    return null;
-  }
+export function handleFirstAndLastBlocksWIP(editorState: EditorState) {
+  // check if key is top / bottom with text => create new key
   const editorStateWithoutDummies = removeDummyBlocks(editorState);
   let newEditorState = editorStateWithoutDummies;
-  if (lastBlockIsAtomic(editorState)) {
+  if (lastBlockIsAtomic(newEditorState)) {
     const newContentState = insertNewBlock(newEditorState, { bottom: true }, 'bottom-dummy')
       .contentState;
-    newEditorState = EditorState.push(editorState, newContentState, 'insert-characters');
+    newEditorState = EditorState.push(newEditorState, newContentState, 'insert-characters');
   }
-  if (firstBlockIsAtomic(editorState)) {
+  if (firstBlockIsAtomic(newEditorState)) {
     const newContentState = insertNewBlock(newEditorState, { top: true }, 'top-dummy').contentState;
-    newEditorState = EditorState.push(editorState, newContentState, 'insert-characters');
+    newEditorState = EditorState.push(newEditorState, newContentState, 'insert-characters');
   }
   if (
     firstBlockIsDummy(editorState) === firstBlockIsDummy(newEditorState) &&
@@ -934,5 +946,77 @@ export function handleFirstAndLastBlocks(editorState: EditorState) {
     return null;
   } else {
     return newEditorState;
+  }
+}
+
+export function handleFirstAndLastBlocksWIP2(editorState: EditorState) {
+  const nodeListOfAllBlocks = document.querySelectorAll<HTMLElement>(`[data-editor]`);
+  nodeListOfAllBlocks.forEach(node => (node.style.height = 'unset'));
+  // nodeListOfAllBlocks.forEach(node => (node.style.backgroundColor = 'transparent'));
+  if (nodeListOfAllBlocks.length < 3) {
+    return;
+  } else {
+    const firstBlockNode = nodeListOfAllBlocks[0];
+    const lastBlockNode = nodeListOfAllBlocks[nodeListOfAllBlocks.length - 1];
+    const firstBlockKey = firstBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
+    const lastBlockKey = lastBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
+    const contentState = editorState.getCurrentContent();
+    const firstBlockText = contentState.getBlockForKey(firstBlockKey).getText();
+    const lastBlockText = contentState.getBlockForKey(lastBlockKey).getText();
+    // const blockAfterTheFirst = contentState.getBlockAfter(firstBlockKey);
+    // const blockBeforeTheLast = contentState.getBlockBefore(lastBlockKey);
+    if (firstBlockText === '') {
+      // firstBlockNode.style.backgroundColor = 'red';
+      firstBlockNode.style.height = '5px';
+    }
+    if (lastBlockText === '') {
+      // lastBlockNode.style.backgroundColor = 'red';
+      lastBlockNode.style.height = '5px';
+    }
+  }
+}
+
+export function handleFirstAndLastBlocks(editorState: EditorState) {
+  const contentState = editorState.getCurrentContent();
+  const blocks = contentState.getBlocksAsArray();
+  const blocksKeys = blocks.map(block => block.getKey());
+  const nodeListOfAllBlocks = document.querySelectorAll<HTMLElement>(`[data-editor]`);
+  // eslint-disable-next-line prefer-spread
+  const arrayOfAllBlocks = Array.apply(null, nodeListOfAllBlocks);
+  const relevantBlocks = arrayOfAllBlocks.filter(x =>
+    blocksKeys.includes(x.getAttribute('data-offset-key')?.split('-')[0])
+  );
+  // relevantBlocks.forEach(node => (node.style.display = 'block'));
+  relevantBlocks.forEach(node => {
+    if (node.getAttribute('data-id') === 'top-bottom-block') {
+      node.children[0].style.height = 'unset';
+      node.removeAttribute('data-id');
+    }
+  });
+  // relevantBlocks.forEach(node => (node.style.backgroundColor = 'transparent'));
+  if (relevantBlocks.length < 3) {
+    return;
+  } else {
+    const firstBlockNode = relevantBlocks[0];
+    const lastBlockNode = relevantBlocks[relevantBlocks.length - 1];
+    const firstBlockKey = firstBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
+    const lastBlockKey = lastBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
+    const firstBlockText = contentState.getBlockForKey(firstBlockKey).getText();
+    const lastBlockText = contentState.getBlockForKey(lastBlockKey).getText();
+    // const blockAfterTheFirst = contentState.getBlockAfter(firstBlockKey); //in case we want to detect only the spaces before / after atomic
+    // const blockBeforeTheLast = contentState.getBlockBefore(lastBlockKey); //in case we want to detect only the spaces before / after atomic
+    if (firstBlockText === '' || firstBlockText === '​') {
+      //zero-width space (empty table cell)
+      // firstBlockNode.style.backgroundColor = 'red';
+      firstBlockNode.setAttribute('data-id', 'top-bottom-block');
+      firstBlockNode.children[0].style.height = '1px';
+      // firstBlockNode.style.display = 'none';
+    }
+    if (lastBlockText === '') {
+      // lastBlockNode.style.backgroundColor = 'red';
+      lastBlockNode.setAttribute('data-id', 'top-bottom-block');
+      lastBlockNode.children[0].style.height = '1px';
+      // lastBlockNode.style.display = 'none';
+    }
   }
 }
