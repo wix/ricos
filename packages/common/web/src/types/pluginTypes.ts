@@ -177,11 +177,13 @@ export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasePl
   decorator?: RicosDecorator;
 }
 
-export type EditorPluginCreator<PluginConfig> = (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type EditorPluginCreator<PluginConfig = Record<string, any>> = (
   config?: PluginConfig
 ) => EditorPlugin<PluginConfig>;
 
-export type ViewerPluginCreator<PluginConfig> = (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ViewerPluginCreator<PluginConfig = Record<string, any>> = (
   config?: PluginConfig
 ) => ViewerPlugin<PluginConfig>;
 

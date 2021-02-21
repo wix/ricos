@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { RichContentPreview } from 'wix-rich-content-preview';
-import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import theme from '../theme/theme'; // must import after custom styles
