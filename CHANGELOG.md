@@ -15,10 +15,24 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
 
 
 </details>
 <hr/>
+
+## 8.22.3 (Feb 20, 2021)
+### :rocket: New Feature
+- `fullScreen`
+  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
+### :house: Internal
+- `ricos-viewer`
+  - [#2168](https://github.com/wix-incubator/rich-content/pull/2168) load fullscreen modal if content includes images
+
+## 8.22.2 (Feb 18, 2021)
+### :house: Internal
+- `image`
+  - [#2167](https://github.com/wix/ricos/pull/2167) image config type contains optional `consumer` field for Photo Studio's internal BI
   
 ## 8.22.1 (Feb 18, 2021)
 ### :house: Internal
@@ -41,6 +55,8 @@
 - `ricos-editor`
   - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
   - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
+- `example`
+  - [#2151](https://github.com/wix-incubator/rich-content/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
 
 ## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix

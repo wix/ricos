@@ -63,11 +63,11 @@ export default class Preview extends PureComponent<Props, State> {
   };
 
   getConfig = () => {
-    const onExpand = (entityIndex, innerIndex = 0) => {
+    const onExpand = (blockKey, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
         expandModeIsOpen: true,
-        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+        expandModeIndex: this.expandModeData.imageMap[blockKey] + innerIndex,
       });
     };
     const onPreviewExpand = () => console.log('preview expanded');
