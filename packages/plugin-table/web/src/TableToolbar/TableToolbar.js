@@ -86,15 +86,12 @@ class TableToolbar extends Component {
   };
 
   getToolbarPosition = () => {
-    const { getFirstCellRef, tableWidth } = this.props;
+    const { getFirstCellRef, tableWidth, getTableScrollLeft } = this.props;
     const firstCellRef = getFirstCellRef();
     if (firstCellRef && tableWidth) {
       const extraTopOffset = firstCellRef.offsetTop === 20 ? 60 : 41;
       const cellOffsetLeft = firstCellRef.offsetLeft;
-      const horizontalScrollbarElement = firstCellRef.closest(
-        '[data-id=horizontal-scrollbar-element]'
-      );
-      const xPosition = cellOffsetLeft - horizontalScrollbarElement.scrollLeft;
+      const xPosition = cellOffsetLeft - getTableScrollLeft();
       return {
         x: xPosition < 0 ? 0 : xPosition,
         offsetLeftInsideContainer: xPosition,
@@ -267,6 +264,7 @@ TableToolbar.propTypes = {
   merge: PropTypes.func,
   distributeRows: PropTypes.func,
   distributeColumns: PropTypes.func,
+  getTableScrollLeft: PropTypes.func,
 };
 
 export default TableToolbar;

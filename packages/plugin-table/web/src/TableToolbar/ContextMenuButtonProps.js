@@ -1,5 +1,5 @@
 import { ContextMenuIcon } from '../icons';
-import { getRange } from '../domain/tableDataUtil';
+import { getRange, getColsRange, getRowsRange } from '../domain/tableDataUtil';
 import { isCellsNumberInvalid } from '../tableUtil';
 
 const getRowIndex = range => range[0].i;
@@ -200,6 +200,8 @@ export const getContextMenuButtonsProps = (
   distributeColumns
 ) => {
   const range = selected && getRange(selected);
+  const colsRange = selected && getColsRange(selected);
+  const rowsRange = selected && getRowsRange(selected);
   const shouldShowMerge = false;
   const rowNum = table.getRowNum();
   const colNum = table.getColNum();
@@ -236,7 +238,7 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(distributeRows, selected, t),
+      distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else if (selectedCols) {
     buttons = [
@@ -249,7 +251,7 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeColumnsButton(distributeColumns, selected, t),
+      distributeRowsButton(distributeRows, selected, t),
     ];
   } else if (multipleCellsSelected) {
     buttons = [
@@ -258,8 +260,8 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(distributeRows, selected, t),
-      distributeColumnsButton(distributeColumns, selected, t),
+      rowsRange?.length > 1 && distributeRowsButton(distributeRows, selected, t),
+      colsRange?.length > 1 && distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else {
     buttons = [

@@ -13,8 +13,10 @@ import {
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
 import { RicosContent } from 'wix-rich-content-common';
-import type ContentStateEditorType from './Components/ContentStateEditor';
+import ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
+import { RichContent } from 'ricos-schema';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
@@ -24,11 +26,13 @@ interface ExampleAppProps {
   isMobile?: boolean;
   onContentStateChange?: (contentState: RicosContent) => void;
   contentState?: RicosContent;
+  injectedContent?: RicosContent;
   setLocale?: (locale: string) => void;
   locale?: string;
   allLocales?: string[];
   editorState?: EditorState;
-  onEditorChange?: (editorState: EditorState)=> void;
+  onEditorChange?: (editorState: EditorState) => void;
+  onRicosEditorChange?: (contentState: RicosContent) => void;
   localeResource?: Record<string, string>;
 }
 
@@ -44,6 +48,7 @@ interface ExampleAppState {
   shouldMockUpload?: boolean;
   shouldMultiSelectImages?: boolean;
   shouldNativeUpload?: boolean;
+  shouldUseNewContent?: boolean;
   [key: string]: any;
 }
 
@@ -77,6 +82,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMockUpload: true,
       shouldMultiSelectImages: false,
       shouldNativeUpload: false,
+      shouldUseNewContent: false,
       ...localState,
     };
   }
@@ -131,6 +137,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMultiSelectImages,
       staticToolbar,
       shouldNativeUpload,
+      shouldUseNewContent,
     } = this.state;
     this.editorSettings = [
       {
@@ -158,6 +165,15 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
             shouldNativeUpload: !state.shouldNativeUpload,
             editorResetKey: state.editorResetKey + 1,
           })),
+      },
+      {
+        name: 'Use New Content',
+        active: shouldUseNewContent,
+        action: () => {
+          this.setState(state => ({
+            shouldUseNewContent: !state.shouldUseNewContent,
+          }));
+        },
       },
       {
         name: 'Multi-Select Images',
@@ -200,6 +216,9 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       locale,
       localeResource,
       isMobile,
+      contentState,
+      injectedContent,
+      onRicosEditorChange,
     } = this.props;
     const {
       isEditorShown,
@@ -209,6 +228,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       editorIsMobile,
       isToolbarShown,
       shouldNativeUpload,
+      shouldUseNewContent,
     } = this.state;
 
     return (
@@ -231,11 +251,15 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 shouldMockUpload={shouldMockUpload}
                 shouldMultiSelectImages={shouldMultiSelectImages}
                 shouldNativeUpload={shouldNativeUpload}
+                shouldUseNewContent={shouldUseNewContent}
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}
                 externalToolbar={ExternalToolbar}
+                contentState={contentState}
+                injectedContent={injectedContent}
+                onRicosEditorChange={onRicosEditorChange}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -271,7 +295,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           <SectionContent>
             <ErrorBoundary>
               <Preview
-                initialState={contentState}
+                initialState={ensureDraftContent(contentState)}
                 isMobile={this.state.previewIsMobile || isMobile}
                 locale={locale}
                 localeResource={localeResource}
@@ -285,7 +309,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
 
   renderViewer = () => {
     const { contentState, isMobile, locale, localeResource } = this.props;
-    const { isViewerShown } = this.state;
+    const { isViewerShown, shouldUseNewContent } = this.state;
 
     return (
       isViewerShown && (
@@ -306,6 +330,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.viewerScrollingElementFn}
+                shouldUseNewContent={shouldUseNewContent}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -316,7 +341,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
 
   renderContentState = () => {
     const { contentState, onContentStateChange } = this.props;
-    const { isContentStateShown } = this.state;
+    const { isContentStateShown, shouldUseNewContent } = this.state;
     return (
       isContentStateShown && (
         <ReflexElement
@@ -330,6 +355,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
               ref={this.setContentStateEditor}
               onChange={onContentStateChange}
               contentState={contentState}
+              shouldUseNewContent={shouldUseNewContent}
             />
           </SectionContent>
         </ReflexElement>
@@ -360,6 +386,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     const { isEditorShown, isViewerShown, isContentStateShown, isPreviewShown } = this.state;
     const showEmptyState =
       !isEditorShown && !isViewerShown && !isContentStateShown && !isPreviewShown;
+    this.initSectionsSettings();
 
     return (
       <div className="wrapper">

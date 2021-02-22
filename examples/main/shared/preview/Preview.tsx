@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { RichContentPreview } from 'wix-rich-content-preview';
-import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import theme from '../theme/theme'; // must import after custom styles
@@ -63,11 +62,11 @@ export default class Preview extends PureComponent<Props, State> {
   };
 
   getConfig = () => {
-    const onExpand = (entityIndex, innerIndex = 0) => {
+    const onExpand = (blockKey, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
         expandModeIsOpen: true,
-        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+        expandModeIndex: this.expandModeData.imageMap[blockKey] + innerIndex,
       });
     };
     const onPreviewExpand = () => console.log('preview expanded');

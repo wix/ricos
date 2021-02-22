@@ -133,11 +133,21 @@ class ImageViewer extends React.Component {
         const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
         [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
       }
+
+      const { experiments } = this.context;
+
+      const requiredQuality =
+        skipImageThumbnail && isSSR()
+          ? experiments?.imageThumbnailQuality?.enabled
+            ? Number(experiments.imageThumbnailQuality.value)
+            : 20
+          : 90;
+
       imageUrl.highres = getImageSrc(src, helpers, {
         requiredWidth,
         requiredHeight,
-        requiredQuality: 90,
-        imageType: 'highRes',
+        requiredQuality,
+        imageType: skipImageThumbnail && isSSR() ? 'preload' : 'highRes',
       });
       if (skipImageThumbnail) {
         imageUrl.highresWidth = requiredWidth;
@@ -276,7 +286,7 @@ class ImageViewer extends React.Component {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
-    onExpand?.(this.props.entityIndex);
+    onExpand?.(this.props.blockKey);
   };
 
   scrollToAnchor = () => {
@@ -405,6 +415,7 @@ ImageViewer.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
   seoMode: PropTypes.bool,
+  blockKey: PropTypes.string,
 };
 
 export default ImageViewer;
