@@ -885,97 +885,6 @@ function isLastBlock(editorState: EditorState, blockKey: string) {
   return lastBlock === blockKey;
 }
 
-function lastBlockIsAtomic(editorState: EditorState) {
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const lastBlock = blocks[blocks.length - 1].getType();
-  return lastBlock === 'atomic';
-}
-
-function firstBlockIsAtomic(editorState: EditorState) {
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const firstBlock = blocks[0].getType();
-  return firstBlock === 'atomic';
-}
-
-function lastBlockIsDummy(editorState: EditorState) {
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const lastBlock = blocks[blocks.length - 1].getKey();
-  return lastBlock === 'bottom-dummy';
-}
-
-function firstBlockIsDummy(editorState: EditorState) {
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const firstBlock = blocks[0].getKey();
-  return firstBlock === 'top-dummy';
-}
-
-function removeDummyBlocks(editorState: EditorState) {
-  const contentState = editorState.getCurrentContent();
-  const blocks = contentState.getBlocksAsArray();
-  const blockMap = contentState.getBlockMap();
-  let newBlockMap = blockMap;
-  if (blocks[0].getKey() === 'top-dummy') {
-    newBlockMap = newBlockMap.remove('top-dummy');
-  }
-  if (blocks[blocks.length - 1].getKey() === 'bottom-dummy') {
-    newBlockMap = newBlockMap.remove('bottom-dummy');
-  }
-  const newContentState = contentState.merge({
-    blockMap: newBlockMap,
-  }) as ContentState;
-  return EditorState.push(editorState, newContentState, 'remove-range');
-}
-
-export function handleFirstAndLastBlocksWIP(editorState: EditorState) {
-  // check if key is top / bottom with text => create new key
-  const editorStateWithoutDummies = removeDummyBlocks(editorState);
-  let newEditorState = editorStateWithoutDummies;
-  if (lastBlockIsAtomic(newEditorState)) {
-    const newContentState = insertNewBlock(newEditorState, { bottom: true }, 'bottom-dummy')
-      .contentState;
-    newEditorState = EditorState.push(newEditorState, newContentState, 'insert-characters');
-  }
-  if (firstBlockIsAtomic(newEditorState)) {
-    const newContentState = insertNewBlock(newEditorState, { top: true }, 'top-dummy').contentState;
-    newEditorState = EditorState.push(newEditorState, newContentState, 'insert-characters');
-  }
-  if (
-    firstBlockIsDummy(editorState) === firstBlockIsDummy(newEditorState) &&
-    lastBlockIsDummy(editorState) === lastBlockIsDummy(newEditorState)
-  ) {
-    return null;
-  } else {
-    return newEditorState;
-  }
-}
-
-export function handleFirstAndLastBlocksWIP2(editorState: EditorState) {
-  const nodeListOfAllBlocks = document.querySelectorAll<HTMLElement>(`[data-editor]`);
-  nodeListOfAllBlocks.forEach(node => (node.style.height = 'unset'));
-  // nodeListOfAllBlocks.forEach(node => (node.style.backgroundColor = 'transparent'));
-  if (nodeListOfAllBlocks.length < 3) {
-    return;
-  } else {
-    const firstBlockNode = nodeListOfAllBlocks[0];
-    const lastBlockNode = nodeListOfAllBlocks[nodeListOfAllBlocks.length - 1];
-    const firstBlockKey = firstBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
-    const lastBlockKey = lastBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
-    const contentState = editorState.getCurrentContent();
-    const firstBlockText = contentState.getBlockForKey(firstBlockKey).getText();
-    const lastBlockText = contentState.getBlockForKey(lastBlockKey).getText();
-    // const blockAfterTheFirst = contentState.getBlockAfter(firstBlockKey);
-    // const blockBeforeTheLast = contentState.getBlockBefore(lastBlockKey);
-    if (firstBlockText === '') {
-      // firstBlockNode.style.backgroundColor = 'red';
-      firstBlockNode.style.height = '5px';
-    }
-    if (lastBlockText === '') {
-      // lastBlockNode.style.backgroundColor = 'red';
-      lastBlockNode.style.height = '5px';
-    }
-  }
-}
-
 export function handleFirstAndLastBlocks(editorState: EditorState) {
   const contentState = editorState.getCurrentContent();
   const blocks = contentState.getBlocksAsArray();
@@ -986,14 +895,13 @@ export function handleFirstAndLastBlocks(editorState: EditorState) {
   const relevantBlocks = arrayOfAllBlocks.filter(x =>
     blocksKeys.includes(x.getAttribute('data-offset-key')?.split('-')[0])
   );
-  // relevantBlocks.forEach(node => (node.style.display = 'block'));
   relevantBlocks.forEach(node => {
     if (node.getAttribute('data-id') === 'top-bottom-block') {
+      node.style.caretColor = 'unset';
       node.children[0].style.height = 'unset';
       node.removeAttribute('data-id');
     }
   });
-  // relevantBlocks.forEach(node => (node.style.backgroundColor = 'transparent'));
   if (relevantBlocks.length < 3) {
     return;
   } else {
@@ -1003,20 +911,17 @@ export function handleFirstAndLastBlocks(editorState: EditorState) {
     const lastBlockKey = lastBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
     const firstBlockText = contentState.getBlockForKey(firstBlockKey).getText();
     const lastBlockText = contentState.getBlockForKey(lastBlockKey).getText();
-    // const blockAfterTheFirst = contentState.getBlockAfter(firstBlockKey); //in case we want to detect only the spaces before / after atomic
-    // const blockBeforeTheLast = contentState.getBlockBefore(lastBlockKey); //in case we want to detect only the spaces before / after atomic
+    // eslint-disable-next-line prettier/prettier
     if (firstBlockText === '' || firstBlockText === '​') {
       //zero-width space (empty table cell)
-      // firstBlockNode.style.backgroundColor = 'red';
       firstBlockNode.setAttribute('data-id', 'top-bottom-block');
+      firstBlockNode.style.caretColor = 'transparent';
       firstBlockNode.children[0].style.height = '1px';
-      // firstBlockNode.style.display = 'none';
     }
     if (lastBlockText === '') {
-      // lastBlockNode.style.backgroundColor = 'red';
       lastBlockNode.setAttribute('data-id', 'top-bottom-block');
+      lastBlockNode.style.caretColor = 'transparent';
       lastBlockNode.children[0].style.height = '1px';
-      // lastBlockNode.style.display = 'none';
     }
   }
 }
