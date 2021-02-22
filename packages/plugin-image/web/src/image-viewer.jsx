@@ -286,7 +286,7 @@ class ImageViewer extends React.Component {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
-    onExpand?.(this.props.blockKey);
+    this.hasExpand() && onExpand?.(this.props.blockKey);
   };
 
   scrollToAnchor = () => {
@@ -322,7 +322,7 @@ class ImageViewer extends React.Component {
       e.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
       this.scrollToAnchor();
     } else {
-      !this.props.componentData.config?.disableExpand && this.handleExpand(e);
+      this.handleExpand(e);
     }
   };
 
@@ -333,12 +333,15 @@ class ImageViewer extends React.Component {
   };
 
   handleContextMenu = e => this.props.componentData.config.disableRightClick && e.preventDefault();
-
+  hasExpand = () =>
+    !this.props.componentData?.config?.disableExpand && this.props.settings.onExpand;
   renderExpandIcon = () => {
     return (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-      </div>
+      this.hasExpand() && (
+        <div className={this.styles.expandContainer}>
+          <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+        </div>
+      )
     );
   };
 
@@ -348,11 +351,10 @@ class ImageViewer extends React.Component {
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
-    const { metadata = {}, config } = componentData;
-    const hasExpand = !config?.disableExpand && settings.onExpand;
+    const { metadata = {} } = componentData;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
-      [this.styles.pointer]: hasExpand,
+      [this.styles.pointer]: this.hasExpand(),
     });
     const imageClassName = this.styles.image;
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
@@ -387,7 +389,7 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, onlyHiRes)}
-          {hasExpand && this.renderExpandIcon()}
+          {this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}

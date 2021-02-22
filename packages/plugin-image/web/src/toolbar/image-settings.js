@@ -16,17 +16,10 @@ import styles from '../../statics/styles/image-settings.scss';
 class ImageSettings extends Component {
   constructor(props) {
     super(props);
-    const { componentData } = this.props;
-
-    this.state = {
-      ...this.propsToState(props),
-      isExpandEnabled: !componentData?.config?.disableExpand,
-      isRightClickEnabled: !componentData?.config?.disableRightClick,
-    };
+    this.state = this.propsToState(props);
     this.initialState = { ...this.state };
     const { t, theme } = props;
     this.styles = mergeStyles({ styles, theme });
-
     this.updateLabel = t('ImageSettings_Update');
     this.headerText = t('ImageSettings_Header');
     this.captionLabel = t('ImageSettings_Caption_Label');
@@ -38,13 +31,17 @@ class ImageSettings extends Component {
   }
 
   propsToState(props) {
-    const {
-      componentData: { src, metadata, error },
-    } = props;
+    const { componentData } = props;
+    const { src, metadata, error, config } = componentData;
+    const isExpandEnabled = !config?.disableExpand;
+    const isRightClickEnabled = !config?.disableRightClick;
+
     return {
       src,
       metadata,
       error,
+      isExpandEnabled,
+      isRightClickEnabled,
     };
   }
 
@@ -54,8 +51,7 @@ class ImageSettings extends Component {
     }));
   };
 
-  renderToggle = ({ toggleKey, labelKey, dataHook }) => {
-    const tooltipText = toggleKey === 'isRightClickEnabled' ? this.imgCanBeDownloadedTooltip : null;
+  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText }) => {
     return (
       <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
         <LabeledToggle
@@ -65,7 +61,7 @@ class ImageSettings extends Component {
           label={this.props.t(labelKey)}
           onChange={this.toggleState(toggleKey)}
           dataHook={dataHook}
-          tooltipText={tooltipText}
+          tooltipText={tooltipText ? tooltipText : null}
         />
       </div>
     );
@@ -81,6 +77,7 @@ class ImageSettings extends Component {
       toggleKey: 'isRightClickEnabled',
       labelKey: 'ImagePlugin_Settings_ImageCanBeDownloaded_Label',
       dataHook: 'imageRightClickToggle',
+      tooltipText: this.imgCanBeDownloadedTooltip,
     },
   ];
 
