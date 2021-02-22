@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
 $TITLE_HEIGHT: 70px;
 $FOOTER_HEIGHT: 100px;
 $MOBILE_HEADER_HEIGHT: 50px;
@@ -11,14 +13,19 @@ $MOBILE_HEADER_HEIGHT: 50px;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  box-sizing: border-box;
-
 }
 
 .imageSettingsTitle {
   position: absolute;
   margin: 24px 0 24px 24px;
   font-size: 20px;
+}
+
+.imageSettingsImageSection{
+  padding: 0 24px;
+  @include phone {
+    padding: 0;
+  }
 }
 
 .imageSettingsImage {
@@ -42,12 +49,6 @@ $MOBILE_HEADER_HEIGHT: 50px;
   input {
     height: 40px;
   }
-  svg{
-    position: absolute;
-    left: 48px;
-    top:16px;
-    height: 24px;
-  }
 }
 
 .imageSettingsLabel {
@@ -56,18 +57,27 @@ $MOBILE_HEADER_HEIGHT: 50px;
 .imageSettings_scrollContainer {
   margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
   width: 100%;
-  box-sizing:inherit;
-  padding: 0 24px;
 }
-.imageSettings_toggleContainer{
-  position: relative;
-  svg{
-    position: absolute;
-    top: 22px;
-    left: 170px;
-    height: 24px;
+
+.imageSettings_inputsWrapper{
+  padding: 0 24px;
+  @include phone {
+    padding: 0 20px;
   }
 }
+
+.imageSettings_toggleContainer{
+  position: relative;
+  p{
+    font-size:16px;
+  }
+  @include phone {
+    p{
+      font-size:14px;
+    }
+  }
+}
+
 .imageSettings_togglesContainer{
   margin-bottom: 4px;
 }

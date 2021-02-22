@@ -25,6 +25,13 @@ export default class LabeledToggle extends Component {
         >
           <p className={this.styles.labeled_toggle_label}>{label}</p>
         </div>
+        {tooltipText && (
+          <InfoIcon
+            theme={this.props.theme}
+            iconStyles={styles.infoIcon}
+            tooltipText={tooltipText}
+          />
+        )}
         <div
           className={this.styles.labeled_toggle_input_root}
           onClick={onChange}
@@ -55,7 +62,6 @@ export default class LabeledToggle extends Component {
             </div>
           </div>
         </div>
-        {tooltipText && <InfoIcon theme={this.props.theme} tooltipText={tooltipText} />}
       </div>
     );
   }

@@ -339,7 +339,7 @@ class ImageViewer extends React.Component {
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {}, config } = componentData;
-    const disableExpand = settings?.onExpand ? false : config.disableExpand;
+    const disableExpand = settings?.onExpand ? false : config?.disableExpand;
     const hasExpand = !disableExpand && settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {

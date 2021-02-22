@@ -12,7 +12,6 @@ import {
 } from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
-import { InfoIcon } from 'wix-rich-content-editor-common';
 
 class ImageSettings extends Component {
   constructor(props) {
@@ -21,8 +20,8 @@ class ImageSettings extends Component {
 
     this.state = {
       ...this.propsToState(props),
-      isExpandEnabled: !componentData.config.disableExpand,
-      isRightClickEnabled: !componentData.config.disableRightClick,
+      isExpandEnabled: !componentData?.config?.disableExpand,
+      isRightClickEnabled: !componentData?.config?.disableRightClick,
     };
     this.initialState = { ...this.state };
     const { t, theme } = props;
@@ -33,7 +32,7 @@ class ImageSettings extends Component {
     this.captionLabel = t('ImageSettings_Caption_Label');
     this.captionInputPlaceholder = t('ImageSettings_Caption_Input_Placeholder');
     this.altLabel = t('ImageSettings_Alt_Label');
-    this.altTooltip = t('ImageSettings_Alt_Label_Tooltip');
+    this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.imgCanBeDownloadedTooltip = t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip');
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
   }
@@ -161,6 +160,7 @@ class ImageSettings extends Component {
         >
           <SettingsSection
             theme={theme}
+            className={this.styles.imageSettingsImageSection}
             ariaProps={{
               'aria-label': 'image preview',
               role: 'region',
@@ -187,48 +187,50 @@ class ImageSettings extends Component {
               </div>
             )}
           </SettingsSection>
-          <SettingsSection
-            theme={theme}
-            className={this.styles.imageSettingsSection}
-            ariaProps={{ 'aria-label': 'image caption', role: 'region' }}
-          >
-            <InputWithLabel
+          <div className={this.styles.imageSettings_inputsWrapper}>
+            <SettingsSection
               theme={theme}
-              id="imageSettingsCaptionInput"
-              label={this.captionLabel}
-              placeholder={this.captionInputPlaceholder}
-              value={metadata.caption || ''}
-              onChange={caption => this.metadataUpdated(metadata, { caption })}
-              dataHook="imageSettingsCaptionInput"
-            />
-          </SettingsSection>
-          <SettingsSection
-            theme={theme}
-            className={this.styles.imageSettingsSection}
-            ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}
-          >
-            <InputWithLabel
+              className={this.styles.imageSettingsSection}
+              ariaProps={{ 'aria-label': 'image caption', role: 'region' }}
+            >
+              <InputWithLabel
+                theme={theme}
+                id="imageSettingsCaptionInput"
+                label={this.captionLabel}
+                placeholder={this.captionInputPlaceholder}
+                value={metadata.caption || ''}
+                onChange={caption => this.metadataUpdated(metadata, { caption })}
+                dataHook="imageSettingsCaptionInput"
+              />
+            </SettingsSection>
+            <SettingsSection
               theme={theme}
-              id="imageSettingsAltInput"
-              label={this.altLabel}
-              placeholder={this.altInputPlaceholder}
-              t={t}
-              value={metadata.alt || ''}
-              onChange={alt => this.metadataUpdated(metadata, { alt })}
-              dataHook="imageSettingsAltInput"
-              isMobile={isMobile}
-            />
-            <InfoIcon theme={this.props.theme} tooltipText={this.altTooltip} />
-          </SettingsSection>
-          <SettingsSection
-            theme={theme}
-            className={this.styles.imageSettings_togglesContainer}
-            ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
-          >
-            <div className={this.styles.imageSettingsLabel}>
-              {this.toggleData.map(toggle => this.renderToggle(toggle))}
-            </div>
-          </SettingsSection>
+              className={this.styles.imageSettingsSection}
+              ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}
+            >
+              <InputWithLabel
+                theme={theme}
+                id="imageSettingsAltInput"
+                label={this.altLabel}
+                placeholder={this.altInputPlaceholder}
+                t={t}
+                value={metadata.alt || ''}
+                onChange={alt => this.metadataUpdated(metadata, { alt })}
+                dataHook="imageSettingsAltInput"
+                tooltipTextKey={this.altTooltip}
+                isMobile={isMobile}
+              />
+            </SettingsSection>
+            <SettingsSection
+              theme={theme}
+              className={this.styles.imageSettings_togglesContainer}
+              ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
+            >
+              <div className={this.styles.imageSettingsLabel}>
+                {this.toggleData.map(toggle => this.renderToggle(toggle))}
+              </div>
+            </SettingsSection>
+          </div>
         </div>
         {!isMobile && (
           <SettingsPanelFooter
