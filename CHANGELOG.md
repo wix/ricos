@@ -16,8 +16,17 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-link`
+  - [#2182](https://github.com/wix/ricos/pull/2182) open link panel from external toolbar in mobile
+
 </details>
 <hr/>
+
+## 8.22.6 (Feb 22, 2021)
+### :nail_care: Polish
+- `image`
+  - [#2184](https://github.com/wix/ricos/pull/2184) thumbnail quality by `imageThumbnailQuality` experiment
 
 ## 8.22.5 (Feb 21, 2021)
 ### :bug: Bug Fix

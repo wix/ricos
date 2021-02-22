@@ -176,12 +176,18 @@ class TableComponent extends React.Component {
     this.table.setNewRows(rows);
   };
 
+  // eslint-disable-next-line complexity
   onKeyDown = e => {
     const { selected } = this.state;
     if (this.shouldHandleKeyDown(e)) {
       if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         this.setAllCellsSelected();
+      } else if (
+        this.isAllCellsSelected(selected) &&
+        (e.key === 'Backspace' || e.key === 'Delete')
+      ) {
+        this.props.blockProps.deleteBlock();
       } else if (e.keyCode === KEYS_CHARCODE.SPACE) {
         e.ctrlKey && this.handleShortcutSelection(e, getColsRange(selected), this.selectCols);
         e.shiftKey && this.handleShortcutSelection(e, getRowsRange(selected), this.selectRows);
@@ -361,7 +367,7 @@ class TableComponent extends React.Component {
       .reduce((acc, curr) => acc + curr);
     const lastCol = colsRefs[colsRefs.length - 1];
     const maxLeft = lastCol.offsetLeft + lastCol.offsetWidth + 20 - dragPreviewWidth;
-    const dropLeft = Math.min(e.pageX - dragPreviewWidth, maxLeft);
+    const dropLeft = Math.min(e.pageX - dragPreviewWidth + this.getTableScrollLeft(), maxLeft);
     colsPositions.forEach((pos, index) => {
       if (
         (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
@@ -423,6 +429,13 @@ class TableComponent extends React.Component {
 
   onFocus = e => e.stopPropagation();
 
+  getTableScrollLeft = () => {
+    const horizontalScrollbarElement = this.tableContainer?.current?.closest(
+      '[data-id=horizontal-scrollbar-element]'
+    );
+    return horizontalScrollbarElement.scrollLeft;
+  };
+
   render() {
     const { componentData, theme, t, isMobile, settings, blockProps } = this.props;
     const {
@@ -476,6 +489,7 @@ class TableComponent extends React.Component {
             merge={this.merge}
             distributeRows={this.distributeRows}
             distributeColumns={this.distributeColumns}
+            getTableScrollLeft={this.getTableScrollLeft}
           />
         )}
         {!isMobile && (
