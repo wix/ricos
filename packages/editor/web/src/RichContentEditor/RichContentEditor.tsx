@@ -167,7 +167,7 @@ interface State {
     isMobile: boolean;
     t?: TranslationFunction;
     containerWidth?: number;
-  };;
+  };
 }
 
 // experiment example code
