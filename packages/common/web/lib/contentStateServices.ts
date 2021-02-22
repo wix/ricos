@@ -4,7 +4,7 @@ export const truncateContent = (
   contentState: RicosContent,
   index: number,
   opts: { wordsCount?: number; maxPlugins?: number } = {}
-) => {
+): { content: RicosContent; isTruncated: string } => {
   const { blocks, entityMap } = contentState;
   const { wordsCount = Infinity, maxPlugins = Infinity } = opts;
   if (index < 0 || (index > blocks.length && wordsCount === Infinity && maxPlugins === Infinity)) {

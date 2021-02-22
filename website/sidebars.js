@@ -35,6 +35,11 @@ module.exports = {
       },
       {
         type: 'category',
+        label: 'Content',
+        items: ['content_api/TruncateContent'],
+      },
+      {
+        type: 'category',
         label: 'Rich Content Preview [legacy]',
         items: ['rcp_api/RichContentPreviewAPI'],
       },
