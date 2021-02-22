@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { CloseButton, Dropdown, Input } from 'wix-style-react';
 import { StyleAttr } from './types';
+import styles from './StylesPanel.scss';
 
 interface Props {
   item: StyleAttr;
@@ -26,14 +27,8 @@ const propertyList = (element: string) =>
 const ListItem: FunctionComponent<Props> = ({ item, updateStyle, close }) => {
   const [element, property, value] = item;
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        margin: '6px 0px 6px 0px',
-      }}
-    >
+    <div className={styles.container}>
+      <CloseButton skin="standardFilled" size="medium" onClick={close} className={styles.close} />
       <Dropdown
         placeholder="Element"
         selectedId={element}
@@ -62,7 +57,6 @@ const ListItem: FunctionComponent<Props> = ({ item, updateStyle, close }) => {
         value={value}
         onChange={e => updateStyle([element, property, e.currentTarget.value])}
       />
-      <CloseButton skin="standardFilled" size="medium" onClick={close} />
     </div>
   );
 };

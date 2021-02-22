@@ -3,6 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { AddItem } from 'wix-style-react';
 import ListItem from './ListItem';
 import { StyleAttr } from './types';
+import styles from './StylesPanel.scss';
 
 const replace = (array: StyleAttr[], existingItem: StyleAttr, newItem: StyleAttr) => {
   const index = findIndex(array, item => isEqual(item, existingItem));
@@ -16,7 +17,7 @@ interface Props {
 
 const CustomStylesCreator: FunctionComponent<Props> = ({ stylesArray, setStyles }) => {
   return (
-    <div style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto' }}>
+    <div className={styles.panel}>
       {stylesArray.map((item, idx) => (
         <ListItem
           item={item}
@@ -24,7 +25,9 @@ const CustomStylesCreator: FunctionComponent<Props> = ({ stylesArray, setStyles 
           close={() => setStyles(stylesArray.filter((_, index) => index !== idx))}
         />
       ))}
-      <AddItem onClick={() => setStyles([...stylesArray, ['', '', '']])}>Add Style</AddItem>
+      <AddItem className={styles.addItem} onClick={() => setStyles([...stylesArray, ['', '', '']])}>
+        Add Style
+      </AddItem>
     </div>
   );
 };

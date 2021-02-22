@@ -13,7 +13,7 @@ const createStyle = ([element, property, value]: StyleAttr) => ({
 export default () => {
   const [stylesArray, setStyles] = useState([
     ['h3', 'color', 'red'],
-    ['hashtag', 'color', 'orange'],
+    ['', '', ''],
   ] as StyleAttr[]);
   const customStyles = stylesArray.reduce(
     (prev, style) => merge({ ...prev }, createStyle(style)),
