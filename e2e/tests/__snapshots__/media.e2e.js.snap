@@ -119,7 +119,7 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           "size": "fullWidth"
         },
         "metadata": {
-          "caption": "Title - In Plugin Editing"
+          "caption": ""
         },
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
