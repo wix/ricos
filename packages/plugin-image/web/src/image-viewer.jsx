@@ -43,7 +43,6 @@ class ImageViewer extends React.Component {
     //   return false;
     // }
   };
-
   componentDidMount() {
     if (!this.shouldSkipImageThumbnail()) {
       this.setState({ ssrDone: true });
@@ -112,7 +111,7 @@ class ImageViewer extends React.Component {
     } else {
       let requiredWidth, requiredHeight;
       imageUrl.preload = getImageSrc(src, helpers);
-      if (seoMode) {
+      if (!skipImageThumbnail && seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
       } else if (skipImageThumbnail) {
@@ -122,7 +121,7 @@ class ImageViewer extends React.Component {
           },
         } = this.props;
 
-        let effectiveWidth = 700; //this.context.containerWidth;
+        let effectiveWidth = 648; //this.context.containerWidth;
 
         if (size === 'small') {
           //small size is 350px in css, might be overrided in consumers cssOverride
@@ -358,7 +357,6 @@ class ImageViewer extends React.Component {
     setComponentUrl?.(imageSrc?.highres);
 
     const skipImageThumbnail = this.shouldSkipImageThumbnail();
-
     const shouldRenderPreloadImage = !seoMode && !skipImageThumbnail && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (skipImageThumbnail || seoMode || ssrDone)) || isGif;
     const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
@@ -409,4 +407,10 @@ ImageViewer.propTypes = {
   blockKey: PropTypes.string,
 };
 
-export default ImageViewer;
+const WrapperImage = props => {
+  const newProps = {
+    ...props,
+  };
+  return <ImageViewer {...newProps} />;
+};
+export default WrapperImage;
