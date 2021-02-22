@@ -312,7 +312,7 @@ class ImageViewer extends React.Component {
       e.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
       this.scrollToAnchor();
     } else {
-      !this.props.componentData.config.disableExpand && this.handleExpand(e);
+      !this.props.componentData.config?.disableExpand && this.handleExpand(e);
     }
   };
 
@@ -339,8 +339,7 @@ class ImageViewer extends React.Component {
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
     const { metadata = {}, config } = componentData;
-    const disableExpand = settings?.onExpand ? false : config?.disableExpand;
-    const hasExpand = !disableExpand && settings.onExpand;
+    const hasExpand = !config?.disableExpand && settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
