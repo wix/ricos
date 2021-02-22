@@ -200,10 +200,10 @@ class TableComponent extends React.Component {
           this.isAllCellsSelected(selected)
             ? this.props.blockProps.deleteBlock()
             : selectedCols && this.deleteColumn(selectedCols);
-        } else if (e.key === '*') {
-          this.lastFocused = document.activeElement;
-          this.toolbarRef.focus();
         }
+      } else if (e.key === 't' && e.ctrlKey) {
+        this.lastFocused = document.activeElement;
+        this.toolbarRef.focus();
       } else if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
         this.lastFocused && this.lastFocused.focus();
         this.lastFocused = undefined;

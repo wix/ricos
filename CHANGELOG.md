@@ -17,14 +17,20 @@
   </summary>
 
 ### :rocket: New Feature
-- `image-plugin`
+- `plugin-image`
   - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons 
+
+</details>
+
+<hr/>
+
+## 8.22.7 (Feb 22, 2021)
 ### :bug: Bug Fix
 - `plugin-link`
   - [#2182](https://github.com/wix/ricos/pull/2182) open link panel from external toolbar in mobile
-
-</details>
-<hr/>
+### :house: Internal
+- `common`
+  - [#2189](https://github.com/wix/ricos/pull/2189) experiments: support non-boolean values
 
 ## 8.22.6 (Feb 22, 2021)
 ### :nail_care: Polish

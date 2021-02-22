@@ -6,8 +6,9 @@ export function parseExperiments(
   return Object.entries(wixExperiments).reduce((parsed, [key, value]) => {
     // splits specs.namespace.name to elements
     const [, namespace, name] = key.split('.');
+    const _value = value.toString().toLowerCase();
     parsed[name] = {
-      enabled: value.toString().toLowerCase() === 'true',
+      enabled: _value !== '' && _value !== 'false',
       value,
       namespace,
     };
