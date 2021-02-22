@@ -54,9 +54,11 @@ const openLinkModal = ({
   t: TranslationFunction;
 }) => {
   const modalStyles = getModalStyles({
-    fullScreen: false,
+    fullScreen: isMobile,
     isMobile,
-    customStyles: { content: { maxWidth: 'max-content', padding: '1px 20px' } },
+    customStyles: isMobile
+      ? { content: { position: 'fixed' } }
+      : { content: { maxWidth: 'max-content', padding: '1px 20px' } },
   });
   if (helpers && helpers.openModal) {
     const modalProps = {

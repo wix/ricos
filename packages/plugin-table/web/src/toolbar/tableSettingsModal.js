@@ -18,8 +18,14 @@ export default class tableSettingsModal extends Component {
   }
 
   onCreateTableClicked = () => {
-    const { colCount, rowCount, submittedInvalidCol, submittedInvalidRow } = this.state;
-    if (colCount && rowCount && !submittedInvalidCol && !submittedInvalidRow) {
+    const {
+      colCount,
+      rowCount,
+      submittedInvalidCol,
+      submittedInvalidRow,
+      invalidCellNum,
+    } = this.state;
+    if (!invalidCellNum && colCount && rowCount && !submittedInvalidCol && !submittedInvalidRow) {
       const { componentData, pubsub, onConfirm, helpers } = this.props;
       const { config } = getDefaultsSettings(parseInt(rowCount), parseInt(colCount));
       if (onConfirm) {
