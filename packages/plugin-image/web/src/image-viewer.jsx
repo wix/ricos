@@ -133,10 +133,20 @@ class ImageViewer extends React.Component {
         const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
         [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
       }
+
+      const { experiments } = this.context;
+
+      const requiredQuality =
+        skipImageThumbnail && isSSR()
+          ? experiments?.imageThumbnailQuality?.enabled
+            ? Number(experiments.imageThumbnailQuality.value)
+            : 20
+          : 90;
+
       imageUrl.highres = getImageSrc(src, helpers, {
         requiredWidth,
         requiredHeight,
-        requiredQuality: skipImageThumbnail && isSSR() ? 20 : 90,
+        requiredQuality,
         imageType: skipImageThumbnail && isSSR() ? 'preload' : 'highRes',
       });
       if (skipImageThumbnail) {
