@@ -1,16 +1,22 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Page } from '../Components/StoryParts';
 import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import EditorWrapper from '../Components/EditorWrapper';
+import { ToolbarButtonProps } from 'wix-rich-content-common';
 
 const plugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 let editorRef;
 
-const ExternalPluginButon = ({ name, getIcon, tooltip, onClick, isDisabled = () => false }) => {
+const ExternalPluginButon = ({
+  name,
+  getIcon,
+  tooltip,
+  onClick,
+  isDisabled = () => false,
+}: ToolbarButtonProps) => {
   const Icon = getIcon();
   return (
     <Tooltip content={tooltip} key={name}>
@@ -19,14 +25,6 @@ const ExternalPluginButon = ({ name, getIcon, tooltip, onClick, isDisabled = () 
       </button>
     </Tooltip>
   );
-};
-
-ExternalPluginButon.propTypes = {
-  name: PropTypes.string,
-  tooltip: PropTypes.string,
-  getIcon: PropTypes.func,
-  onClick: PropTypes.func,
-  isDisabled: PropTypes.func,
 };
 
 const InitialIntentToolbar = ({ buttons }) => {
@@ -46,10 +44,6 @@ const InitialIntentToolbar = ({ buttons }) => {
       <ExternalPluginButon {...redoButtonProps} />
     </div>
   );
-};
-
-InitialIntentToolbar.propTypes = {
-  buttons: PropTypes.object,
 };
 
 export default () => {

@@ -155,7 +155,7 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     let searchIndex = listStartIndex;
     let nextBlock = blocks[searchIndex];
 
-    while (isListBlock(nextBlock) && nextBlock.depth >= depth) {
+    while (nextBlock && isListBlock(nextBlock) && nextBlock.depth >= depth) {
       if (nextBlock.depth > depth || nextBlock.type !== listType) {
         const { node, nextIndex } = parseListBlocks(searchIndex);
         listNodes[listNodes.length - 1].nodes.push(node);
