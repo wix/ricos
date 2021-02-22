@@ -114,6 +114,7 @@ export default class HeadingButton extends Component {
         ref={ref => (this.buttonRef = ref)}
       >
         <Modal
+          shouldReturnFocusAfterClose={false}
           isOpen={isPanelOpen}
           onRequestClose={() => this.save()}
           className={classNames(styles.headingsModal, {
