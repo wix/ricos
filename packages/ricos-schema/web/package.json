@@ -22,7 +22,7 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "lint": ":",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist generated",
     "prebuild": "yarn clean",
     "generate": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateSchema.ts",
     "buildESM": "tsc",
