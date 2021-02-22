@@ -109,6 +109,8 @@ exports[`plugins > image > render image toolbar and settings #0`] =
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
+          "disableRightClick": false,
           "link": {
             "url": "www.wix.com"
           },
@@ -117,7 +119,7 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           "size": "fullWidth"
         },
         "metadata": {
-          "caption": ""
+          "caption": "Title - In Plugin Editing"
         },
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
