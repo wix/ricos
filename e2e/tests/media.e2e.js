@@ -7,6 +7,7 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
   GIPHY_PLUGIN,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
@@ -71,14 +72,15 @@ describe('plugins', () => {
 
     it('render image toolbar and settings', function() {
       cy.loadRicosEditorAndViewer('images');
-      cy.openImageSettings();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+      cy.openSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow({ tag: this.test.title + ' - settings', target: 'window', fully: false });
       cy.addImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - add image title');
       cy.editImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
-      cy.openImageSettings(false).deleteImageTitle();
+      cy.openSettings().deleteImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
@@ -92,9 +94,19 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('render image with link', () => {
-      cy.loadRicosEditorAndViewer('image-with-link');
-      cy.getImageLink();
+    it.only('should disable image expand', () => {
+      cy.loadRicosEditorAndViewer('images');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+      cy.openSettings();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${IMAGE_SETTINGS.IMAGE_EXPAND_TOGGLE}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.wait(200);
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
+        .eq(2)
+        .parent()
+        .click();
+      cy.eyesCheckWindow();
     });
 
     it('render image with loader - loading in component data', () => {

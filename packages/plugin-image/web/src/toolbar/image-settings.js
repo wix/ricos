@@ -141,7 +141,7 @@ class ImageSettings extends Component {
     const { helpers, theme, t, isMobile, languageDir } = this.props;
     const { src, error, metadata = {} } = this.state;
     return (
-      <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
+      <div className={this.styles.imageSettings} data-hook="settings" dir={languageDir}>
         {isMobile ? (
           <ImageSettingsMobileHeader
             t={t}
