@@ -203,9 +203,9 @@ export class GallerySettingsModal extends Component {
   tabName(tab, t) {
     /* eslint-disable camelcase */
     return {
-      manage_media: t('GalleryPlugin_Settings_Tab_ManageMedia'),
+      manage_media: t('GallerySettings_Tab_ManageMedia'),
       advanced_settings: t('GallerySettings_Tab_AdvancedSettings'),
-      settings: t('GalleryPlugin_Settings_Settings'),
+      settings: t('GallerySettings_Tab_Settings'),
     }[tab];
   }
   onDoneClick = () => {
