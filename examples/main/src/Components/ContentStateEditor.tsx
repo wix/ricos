@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
 
@@ -35,15 +34,22 @@ import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
 
-class ContentStateEditor extends PureComponent<{
-  contentState: RicosContent;
+interface Props {
+  contentState?: RicosContent;
   onChange: (contentState: RicosContent) => void;
-}> {
+  shouldUseNewContent?: boolean;
+}
+class ContentStateEditor extends PureComponent<Props> {
   state = {
-    value: stringifyJSON(this.props.contentState),
+    value: stringifyJSON(
+      this.props.shouldUseNewContent
+        ? ensureRicosContent(this.props.contentState)
+        : this.props.contentState
+    ),
   };
   editorOptions = {
     codeLens: false,
@@ -56,15 +62,18 @@ class ContentStateEditor extends PureComponent<{
   };
   monaco: MonacoEditor;
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
+    const { contentState, shouldUseNewContent } = nextProps;
     if (!this.monaco?.editor.hasTextFocus()) {
-      this.setState({ value: stringifyJSON(nextProps.contentState) });
+      this.setState({
+        value: stringifyJSON(shouldUseNewContent ? ensureRicosContent(contentState) : contentState),
+      });
     }
   }
 
   editorWillMount: EditorWillMount = monaco => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-      validate: true,
+      validate: !this.props.shouldUseNewContent,
       schemas: [
         {
           uri: 'https://wix-rich-content/content-state-schema.json', // scema id
@@ -100,7 +109,7 @@ class ContentStateEditor extends PureComponent<{
   updateContentState = debounce(value => {
     if (value !== '') {
       try {
-        this.props.onChange(JSON.parse(value));
+        this.props.onChange(ensureDraftContent(JSON.parse(value)));
       } catch (e) {
         console.error(`Error parsing JSON: ${e.message}`);
       }

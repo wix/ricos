@@ -147,6 +147,12 @@ button {
   overflow-y: hidden;
   margin-left: -20px;
   margin-right: -20px;
+  &.show::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+  }
+  &.hide::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
 }
 
 .horizontalScrollbar {
@@ -161,7 +167,6 @@ button {
 .pluginWithHorizontalScrollbar::-webkit-scrollbar-thumb {
   border-radius: 8px;
   border: 2px solid white;
-  background-color: rgba(0, 0, 0, .5);
 }
 
 .pluginWithHorizontalScrollbar::-webkit-scrollbar:horizontal {
