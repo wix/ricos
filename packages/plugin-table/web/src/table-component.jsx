@@ -176,12 +176,18 @@ class TableComponent extends React.Component {
     this.table.setNewRows(rows);
   };
 
+  // eslint-disable-next-line complexity
   onKeyDown = e => {
     const { selected } = this.state;
     if (this.shouldHandleKeyDown(e)) {
       if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         this.setAllCellsSelected();
+      } else if (
+        this.isAllCellsSelected(selected) &&
+        (e.key === 'Backspace' || e.key === 'Delete')
+      ) {
+        this.props.blockProps.deleteBlock();
       } else if (e.keyCode === KEYS_CHARCODE.SPACE) {
         e.ctrlKey && this.handleShortcutSelection(e, getColsRange(selected), this.selectCols);
         e.shiftKey && this.handleShortcutSelection(e, getRowsRange(selected), this.selectRows);
