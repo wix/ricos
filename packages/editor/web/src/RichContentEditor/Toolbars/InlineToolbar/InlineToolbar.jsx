@@ -50,7 +50,6 @@ export default class InlineToolbar extends Component {
     }),
     toolbarDecorationFn: PropTypes.func,
     locale: PropTypes.string.isRequired,
-    isModalOpen: PropTypes.bool,
   };
 
   static defaultProps = {
