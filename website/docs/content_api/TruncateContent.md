@@ -4,19 +4,18 @@ title: Truncate Content
 sidebar_label: Truncate Content
 ---
 
-## Truncate Content
-
-### Signature
-
 ```js
 truncateContent = (
   contentState: RicosContent,
-  index: number,
-  opts: { wordsCount?: number; maxPlugins?: number } = {}
+  blocksCount: number,
+  opts?: { wordsCount?: number; maxPlugins?: number }
 ): { content: RicosContent; isTruncated: boolean }  
 ```
 
-### Usage
+Truncate existing content according to number of blocks, and optional words count and/or plugin count.
+(The first limit is reached will end the content, for example for blocksCount=5, wordsCount=100, maxPlugins=3, will yield a content that is not more than 5 blocks, shorter than 100 words and 3 plugins max)
+
+#### Example Usage
 
 ```js
 import { truncateContent } from 'wix-rich-content-common/libs/contentStateServices';
