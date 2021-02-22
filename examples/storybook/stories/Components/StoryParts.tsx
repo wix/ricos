@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { FunctionComponent, ReactNode } from 'react';
 import ReactJson from 'react-json-view';
 import SourceCode from './SourceCode';

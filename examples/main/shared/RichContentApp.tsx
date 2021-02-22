@@ -28,6 +28,7 @@ interface Props {
 interface State {
   editorState?: EditorState;
   contentState?: RicosContent;
+  injectedContent?: RicosContent;
   localeResource?: Record<string, string>;
   locale?: string;
   remountKey?: boolean;
@@ -102,11 +103,21 @@ class RichContentApp extends PureComponent<Props, State> {
   };
 
   updateEditorState = (contentState: RicosContent) => {
-    this.setState({ editorState: createWithContent(convertFromRaw(normalize(contentState))) });
+    this.setState({
+      editorState: createWithContent(convertFromRaw(normalize(contentState))),
+      injectedContent: contentState,
+    });
   };
 
   render() {
-    const { editorState, contentState, localeResource, locale, remountKey } = this.state;
+    const {
+      editorState,
+      contentState,
+      localeResource,
+      locale,
+      remountKey,
+      injectedContent,
+    } = this.state;
     const { allLocales, seoMode, isMobile, app: App, testAppConfig } = this.props;
     return (
       <App
@@ -119,6 +130,7 @@ class RichContentApp extends PureComponent<Props, State> {
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
         onRicosEditorChange={this.onRicosEditorChange}
+        injectedContent={injectedContent}
         onContentStateChange={this.onContentStateChange}
         setLocale={this.setLocaleResource}
         seoMode={seoMode}

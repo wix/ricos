@@ -1,3 +1,4 @@
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginIndent } from 'ricos/indent/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle();
+export default () => createViewerBundle(pluginIndent());

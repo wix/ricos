@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
-import { imageTypeMapper } from 'ricos/image/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginImage } from 'ricos/image/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(imageTypeMapper);
+export default () => createViewerBundle(pluginImage());

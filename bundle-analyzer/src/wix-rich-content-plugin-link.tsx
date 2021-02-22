@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
-import { linkTypeMapper } from 'ricos/link/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginLink } from 'ricos/link/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(linkTypeMapper);
+export default () => createViewerBundle(pluginLink());

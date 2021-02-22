@@ -16,9 +16,49 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-link`
+  - [#2182](https://github.com/wix/ricos/pull/2182) open link panel from external toolbar in mobile
 
 </details>
 <hr/>
+
+## 8.22.6 (Feb 22, 2021)
+### :nail_care: Polish
+- `image`
+  - [#2184](https://github.com/wix/ricos/pull/2184) thumbnail quality by `imageThumbnailQuality` experiment
+
+## 8.22.5 (Feb 21, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2183](https://github.com/wix/ricos/pull/2183) `customStyles` fix css-injection with `;` char
+
+## 8.22.4 (Feb 21, 2021)  
+- `common`
+  - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
+
+## 8.22.3 (Feb 20, 2021)
+### :rocket: New Feature
+- `fullScreen`
+  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
+### :house: Internal
+- `ricos-viewer`
+  - [#2168](https://github.com/wix-incubator/rich-content/pull/2168) load fullscreen modal if content includes images
+
+## 8.22.2 (Feb 18, 2021)
+### :house: Internal
+- `image`
+  - [#2167](https://github.com/wix/ricos/pull/2167) image config type contains optional `consumer` field for Photo Studio's internal BI
+  
+## 8.22.1 (Feb 18, 2021)
+### :house: Internal
+- `common`
+  - [#2161](https://github.com/wix/ricos/pull/2161) add container width optional prop
+### :bug: Bug Fix
+- `editor`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+- `viewer`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
 
 ## 8.22.0 (Feb 16, 2021)
 ### :rocket: New Feature
@@ -31,6 +71,8 @@
 - `ricos-editor`
   - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
   - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
+- `example`
+  - [#2151](https://github.com/wix-incubator/rich-content/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
 
 ## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix

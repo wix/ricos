@@ -1,40 +1,47 @@
 import theme from '../theme/theme';
-import { ACTION_BUTTON_TYPE } from 'ricos/button/viewer';
-import { VIDEO_TYPE, videoTypeMapper } from 'ricos/video/viewer';
-import { dividerTypeMapper } from 'ricos/divider/viewer';
-import { htmlTypeMapper } from 'ricos/html/viewer';
-import { soundCloudTypeMapper } from 'ricos/sound-cloud/viewer';
-import { LINK_TYPE, linkTypeMapper } from 'ricos/link/viewer';
-import { LINK_PREVIEW_TYPE, linkPreviewTypeMapper } from 'ricos/link-preview/viewer';
-import { imageTypeMapper } from 'ricos/image/viewer';
-import { tableTypeMapper } from 'ricos/table/viewer';
+import { videoTypeMapper, VIDEO_TYPE, pluginVideo } from 'ricos/video/viewer';
+import { dividerTypeMapper, pluginDivider } from 'ricos/divider/viewer';
+import { htmlTypeMapper, pluginHtml } from 'ricos/html/viewer';
+import { soundCloudTypeMapper, pluginSoundCloud } from 'ricos/sound-cloud/viewer';
+import { linkTypeMapper, LINK_TYPE, pluginLink } from 'ricos/link/viewer';
+import {
+  linkPreviewTypeMapper,
+  LINK_PREVIEW_TYPE,
+  pluginLinkPreview,
+} from 'ricos/link-preview/viewer';
+import { imageTypeMapper, pluginImage } from 'ricos/image/viewer';
+import { tableTypeMapper, pluginTable } from 'ricos/table/viewer';
 
-import { galleryTypeMapper, GALLERY_TYPE } from 'ricos/gallery/viewer';
-import { mapTypeMapper } from 'ricos/map/viewer';
-import { giphyTypeMapper, GIPHY_TYPE } from 'ricos/giphy/viewer';
-import { buttonTypeMapper } from 'ricos/button/viewer';
-import { HashtagDecorator } from 'ricos/hashtag/viewer';
-import { verticalEmbedTypeMapper } from 'ricos/vertical-embed/viewer';
+import { galleryTypeMapper, pluginGallery, GALLERY_TYPE } from 'ricos/gallery/viewer';
+import { mapTypeMapper, pluginMap } from 'ricos/map/viewer';
+import { giphyTypeMapper, pluginGiphy, GIPHY_TYPE } from 'ricos/giphy/viewer';
+import { buttonTypeMapper, pluginActionButton, ACTION_BUTTON_TYPE } from 'ricos/button/viewer';
+import { HashtagDecorator, pluginHashtag } from 'ricos/hashtag/viewer';
+import { verticalEmbedTypeMapper, pluginVerticalEmbed } from 'ricos/vertical-embed/viewer';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
+  pluginHeadersMarkdown,
 } from 'ricos/headers-markdown/editor';
-import { CodeBlockDecorator } from 'ricos/code-block/viewer';
-import { MENTION_TYPE, mentionsTypeMapper } from 'ricos/mention/viewer';
-import { fileUploadTypeMapper, FILE_UPLOAD_TYPE } from 'ricos/file/viewer';
+import { CodeBlockDecorator, pluginCodeBlock } from 'ricos/code-block/viewer';
+import { mentionsTypeMapper, MENTION_TYPE, pluginMentions } from 'ricos/mention/viewer';
+import { fileUploadTypeMapper, pluginFileUpload, FILE_UPLOAD_TYPE } from 'ricos/file/viewer';
 import {
   textColorInlineStyleMapper,
   TEXT_COLOR_TYPE,
   TEXT_HIGHLIGHT_TYPE,
   textHighlightInlineStyleMapper,
+  pluginTextColor,
+  pluginTextHighlight,
 } from 'ricos/text-color/viewer';
 import {
   spoilerInlineStyleMapper,
   initSpoilersContentState,
   SpoilerViewerWrapper,
   SPOILER_TYPE,
+  pluginSpoiler,
 } from 'ricos/spoiler/viewer';
-import { accordionTypeMapper } from 'ricos/accordion/viewer';
+import { accordionTypeMapper, pluginAccordion } from 'ricos/accordion/viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -42,7 +49,7 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 
-import { pollTypeMapper, POLL_TYPE } from 'ricos/poll/viewer';
+import { pollTypeMapper, pluginPoll, POLL_TYPE } from 'ricos/poll/viewer';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -68,12 +75,19 @@ import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 
-import { getBaseUrl } from '../../src/utils';
-import { RichContentViewerProps } from 'ricos/viewer';
-import { Decorator, PluginTypeMapper, RicosContent, UISettings } from 'ricos/common';
+import { RichContentViewerProps } from 'wix-rich-content-viewer';
+import {
+  Decorator,
+  HASHTAG_TYPE,
+  PluginTypeMapper,
+  RicosContent,
+  UISettings,
+  ViewerPlugin,
+} from 'wix-rich-content-common';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
+  siteUrl: 'http://localhost:3000/', //siteUrl is for anchor SEO
 };
 const mentionsPluginSettings = {
   onMentionClick: mention => console.log('mention clicked!', mention),
@@ -154,7 +168,40 @@ const config: RichContentViewerProps['config'] = {
       window.alert('onClick event..');
     },
   },
+  [HASHTAG_TYPE]: {
+    onClick: (event, text) => {
+      event.preventDefault();
+      console.log(`'${text}' hashtag clicked!`);
+    },
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+  },
 };
+
+export const viewerPlugins: ViewerPlugin[] = [
+  pluginVideo(config[VIDEO_TYPE]),
+  pluginActionButton(config[ACTION_BUTTON_TYPE]),
+  pluginDivider(),
+  pluginHtml(),
+  pluginLink(config[LINK_TYPE]),
+  pluginLinkPreview(config[LINK_PREVIEW_TYPE]),
+  pluginSoundCloud(),
+  pluginMentions(),
+  pluginImage(),
+  pluginTable(),
+  pluginGallery(config[GALLERY_TYPE]),
+  pluginMap(),
+  pluginFileUpload(config[FILE_UPLOAD_TYPE]),
+  pluginGiphy(config[GIPHY_TYPE]),
+  pluginPoll(config[POLL_TYPE]),
+  pluginVerticalEmbed(),
+  pluginAccordion(),
+  pluginHashtag(config[HASHTAG_TYPE]),
+  pluginHeadersMarkdown(),
+  pluginCodeBlock(),
+  pluginTextColor(config[TEXT_COLOR_TYPE]),
+  pluginTextHighlight(config[TEXT_HIGHLIGHT_TYPE]),
+  pluginSpoiler(),
+];
 
 export const getConfig = (additionalConfig = {}): RichContentViewerProps['config'] => {
   let _config = { ...config };
@@ -177,11 +224,7 @@ export const getInlineStyleMappers = (raw: RicosContent) => [
 export const decorators: Decorator[] = [
   new HashtagDecorator({
     theme,
-    onClick: (event, text) => {
-      event.preventDefault();
-      console.log(`'${text}' hashtag clicked!`);
-    },
-    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    ...config[HASHTAG_TYPE],
   }),
   new CodeBlockDecorator({ theme }),
   createHeadersMarkdownDecorator(config),

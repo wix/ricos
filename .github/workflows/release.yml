@@ -12,10 +12,22 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: arduino/setup-protoc@v1
-      - run: npx midgard-yarn install --frozen-lockfile
-      - run: npm run build
-      - run: npm run release
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Retrieve version
+        run: |
+          echo "::set-output name=TAG_NAME::$(git tag --points-at HEAD)"
+        id: version
+      - run: |
+          npx midgard-yarn install --frozen-lockfile
+          npm run build
+          npm run release
+          curl -X POST https://api.github.com/repos/wix-private/wix-ricos/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACCESS_TOKEN }} \
+          --data '{"event_type": "update-ricos", "client_payload": { "repository": "ricos", "version": "${{ steps.version.outputs.TAG_NAME }}" }}'
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       NPM_EMAIL: ${{ secrets.NPM_EMAIL}}

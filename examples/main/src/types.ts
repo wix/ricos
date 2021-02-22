@@ -1,4 +1,4 @@
-import { PluginType, RichContentTheme } from 'ricos/common';
+import { PluginType } from 'ricos/common';
 
 export type OnVisibilityChanged = (sectionName: string, isVisible: boolean) => void;
 
@@ -36,6 +36,7 @@ export interface TestAppConfig {
     skipCssOverride?: boolean;
     useCustomStyles?: boolean;
     fallbackColor?: string;
+    disableContainer?: boolean;
   };
   showDefaultPreview?: boolean;
   isNativeUpload?: boolean;

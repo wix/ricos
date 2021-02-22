@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-button/dist/styles.min.css';
-import { buttonTypeMapper } from 'ricos/button/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginLinkButton } from 'ricos/button/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(buttonTypeMapper);
+export default () => createViewerBundle(pluginLinkButton());

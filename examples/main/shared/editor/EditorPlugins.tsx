@@ -1,49 +1,79 @@
 import React from 'react';
-import { createLinkPlugin, LINK_TYPE } from 'ricos/link/editor';
+import { createLinkPlugin, LINK_TYPE, pluginLink } from 'ricos/link';
 import {
   createLinkPreviewPlugin,
   LINK_PREVIEW_TYPE,
   LinkPreviewProviders,
+  pluginLinkPreview,
 } from 'ricos/link-preview/editor';
-import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'ricos/line-spacing/editor';
-import { createHashtagPlugin, HASHTAG_TYPE } from 'ricos/hashtag/editor';
-import { createEmojiPlugin, EMOJI_TYPE } from 'ricos/emoji/editor';
-import { createImagePlugin, IMAGE_TYPE } from 'ricos/image/editor';
-import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'ricos/undo-redo/editor';
-import { createGalleryPlugin, GALLERY_TYPE } from 'ricos/gallery/editor';
-import { createVideoPlugin, VIDEO_TYPE } from 'ricos/video/editor';
-import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'ricos/html/editor';
-import { createDividerPlugin, DIVIDER_TYPE } from 'ricos/divider/editor';
+import {
+  createLineSpacingPlugin,
+  LINE_SPACING_TYPE,
+  pluginLineSpacing,
+} from 'ricos/line-spacing/editor';
+import { createHashtagPlugin, HASHTAG_TYPE, pluginHashtag } from 'ricos/hashtag/editor';
+import { createEmojiPlugin, EMOJI_TYPE, pluginEmoji } from 'ricos/emoji/editor';
+import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'ricos/image/editor';
+import { createUndoRedoPlugin, pluginUndoRedo, UNDO_REDO_TYPE } from 'ricos/undo-redo/editor';
+import { createGalleryPlugin, GALLERY_TYPE, pluginGallery } from 'ricos/gallery/editor';
+import { createVideoPlugin, pluginVideo, VIDEO_TYPE } from 'ricos/video/editor';
+import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes, pluginHtml } from 'ricos/html/editor';
+import { createDividerPlugin, DIVIDER_TYPE, pluginDivider } from 'ricos/divider/editor';
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
   verticalEmbedProviders,
+  pluginVerticalEmbed,
 } from 'ricos/vertical-embed/editor';
-import { createExternalMentionsPlugin, EXTERNAL_MENTIONS_TYPE } from 'ricos/mention/editor';
-import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'ricos/code-block/editor';
-import { createHeadingsPlugin, HEADINGS_DROPDOWN_TYPE } from 'ricos/heading';
-import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'ricos/sound-cloud/editor';
-import { createGiphyPlugin, GIPHY_TYPE } from 'ricos/giphy/editor';
-import { createHeadersMarkdownPlugin, HEADERS_MARKDOWN_TYPE } from 'ricos/headers-markdown/editor';
-import { createMapPlugin, MAP_TYPE } from 'ricos/map/editor';
-import { createPollPlugin, POLL_TYPE } from 'ricos/poll/editor';
-import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'ricos/file/editor';
-import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'ricos/text-color/editor';
-import { createSpoilerPlugin, SPOILER_TYPE, SpoilerEditorWrapper } from 'ricos/spoiler/editor';
+import {
+  createExternalMentionsPlugin,
+  EXTERNAL_MENTIONS_TYPE,
+  pluginMentions,
+} from 'ricos/mention/editor';
+import { createCodeBlockPlugin, CODE_BLOCK_TYPE, pluginCodeBlock } from 'ricos/code-block/editor';
+import { createHeadingsPlugin, HEADINGS_DROPDOWN_TYPE, pluginHeadings } from 'ricos/heading';
+import {
+  createSoundCloudPlugin,
+  pluginSoundCloud,
+  SOUND_CLOUD_TYPE,
+} from 'ricos/sound-cloud/editor';
+import { createGiphyPlugin, GIPHY_TYPE, pluginGiphy } from 'ricos/giphy/editor';
+import {
+  createHeadersMarkdownPlugin,
+  HEADERS_MARKDOWN_TYPE,
+  pluginHeadersMarkdown,
+} from 'ricos/headers-markdown/editor';
+import { createMapPlugin, MAP_TYPE, pluginMap } from 'ricos/map/editor';
+import { createPollPlugin, pluginPoll, POLL_TYPE } from 'ricos/poll/editor';
+import { createFileUploadPlugin, FILE_UPLOAD_TYPE, pluginFileUpload } from 'ricos/file/editor';
+import {
+  createTextColorPlugin,
+  pluginTextColor,
+  pluginTextHighlight,
+  TEXT_COLOR_TYPE,
+} from 'ricos/text-color/editor';
+import {
+  createSpoilerPlugin,
+  SPOILER_TYPE,
+  SpoilerEditorWrapper,
+  pluginSpoiler,
+} from 'ricos/spoiler/editor';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
   createActionButtonPlugin,
   ACTION_BUTTON_TYPE,
+  pluginActionButton,
+  pluginLinkButton,
 } from 'ricos/button/editor';
 import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'ricos/text-color/editor';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
-import { createIndentPlugin } from 'ricos/indent/editor';
-import { createTablePlugin, TABLE_TYPE } from 'ricos/table/editor';
-import { createAccordionPlugin, ACCORDION_TYPE } from 'ricos/accordion/editor';
-import { createUnsupportedBlocksPlugin } from 'ricos/unsupported-blocks';
+import { createIndentPlugin, pluginIndent, INDENT_TYPE } from 'ricos/indent/editor';
+import { createTablePlugin, pluginTable, TABLE_TYPE } from 'ricos/table/editor';
+import { createAccordionPlugin, ACCORDION_TYPE, pluginAccordion } from 'ricos/accordion/editor';
+import { createUnsupportedBlocksPlugin, pluginUnsupportedBlocks } from 'ricos/unsupported-blocks';
 import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
@@ -95,8 +125,46 @@ import {
   mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
-import { CreatePluginFunction, UISettings } from 'ricos/common';
-import { RichContentEditorProps } from 'ricos/editor';
+import {
+  CreatePluginFunction,
+  EditorPluginCreator,
+  PluginType,
+  UISettings,
+} from 'wix-rich-content-common';
+import { RichContentEditorProps } from 'wix-rich-content-editor';
+
+export const ricosEditorPlugins: Record<string, EditorPluginCreator<unknown>> = {
+  [IMAGE_TYPE]: pluginImage,
+  [GALLERY_TYPE]: pluginGallery,
+  [VIDEO_TYPE]: pluginVideo,
+  [HTML_TYPE]: pluginHtml,
+  [DIVIDER_TYPE]: pluginDivider,
+  [LINE_SPACING_TYPE]: pluginLineSpacing,
+  [LINK_TYPE]: pluginLink,
+  [HASHTAG_TYPE]: pluginHashtag,
+  [EXTERNAL_MENTIONS_TYPE]: pluginMentions,
+  [CODE_BLOCK_TYPE]: pluginCodeBlock,
+  [SOUND_CLOUD_TYPE]: pluginSoundCloud,
+  [GIPHY_TYPE]: pluginGiphy,
+  [HEADERS_MARKDOWN_TYPE]: pluginHeadersMarkdown,
+  [MAP_TYPE]: pluginMap,
+  [FILE_UPLOAD_TYPE]: pluginFileUpload,
+  [LINK_BUTTON_TYPE]: pluginLinkButton,
+  [TEXT_COLOR_TYPE]: pluginTextColor,
+  [EMOJI_TYPE]: pluginEmoji,
+  [TEXT_HIGHLIGHT_TYPE]: pluginTextHighlight,
+  [UNDO_REDO_TYPE]: pluginUndoRedo,
+  [UNSUPPORTED_BLOCKS_TYPE]: pluginUnsupportedBlocks,
+  [LINK_PREVIEW_TYPE]: pluginLinkPreview,
+  [SPOILER_TYPE]: pluginSpoiler,
+  [VERTICAL_EMBED_TYPE]: pluginVerticalEmbed,
+  [HEADINGS_DROPDOWN_TYPE]: pluginHeadings,
+  [INDENT_TYPE]: pluginIndent,
+  [ACTION_BUTTON_TYPE]: pluginActionButton,
+  [POLL_TYPE]: pluginPoll,
+  [ACCORDION_TYPE]: pluginAccordion,
+  [TABLE_TYPE]: pluginTable,
+};
 
 export const editorPluginsPartialPreset: CreatePluginFunction[] = [
   createImagePlugin,

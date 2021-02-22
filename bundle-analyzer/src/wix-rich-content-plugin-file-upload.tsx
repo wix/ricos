@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
-import { fileUploadTypeMapper } from 'ricos/file/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginFileUpload } from 'ricos/file/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(fileUploadTypeMapper);
+export default () => createViewerBundle(pluginFileUpload());

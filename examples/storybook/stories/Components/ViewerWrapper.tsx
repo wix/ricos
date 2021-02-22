@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import { RicosContent, RicosTheme, RicosViewer, RicosViewerProps } from 'ricos/viewer';
 import { RichContentViewer, RichContentViewerProps } from 'ricos/viewer';
 import { pluginLinkButton, pluginActionButton } from 'ricos/button/viewer';

@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-import { accordionTypeMapper } from 'ricos/accordion/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginAccordion } from 'ricos/accordion/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(accordionTypeMapper);
+export default () => createViewerBundle(pluginAccordion());

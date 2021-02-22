@@ -1,4 +1,4 @@
-import createViewerBundle from './RichContentViewerWrapper';
-import { createHeadersMarkdownDecorator } from 'ricos/headers-markdown/viewer';
+import { pluginHeadersMarkdown } from 'ricos/headers-markdown/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(createHeadersMarkdownDecorator);
+export default () => createViewerBundle(pluginHeadersMarkdown());

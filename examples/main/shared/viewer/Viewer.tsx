@@ -1,24 +1,27 @@
 import React, { PureComponent, RefObject } from 'react';
-import { RichContentViewer, RichContentViewerProps } from 'ricos/viewer';
-import { isSSR, SEOSettings } from 'ricos/common';
+import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
+import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'ricos/image/viewer';
-import { TextSelectionToolbar, TwitterButton } from 'ricos/text-selection-toolbar';
-import { GALLERY_TYPE } from 'ricos/gallery/editor';
+import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { GALLERY_TYPE } from 'ricos/gallery/viewer';
+import { RicosViewer } from 'ricos-viewer';
+
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
 interface ExampleViewerProps {
-  initialState?: RichContentViewerProps['initialState'];
+  initialState?: RicosContent;
   isMobile?: boolean;
   locale: string;
   scrollingElementFn?: any;
   seoMode?: SEOSettings;
   localeResource?: Record<string, string>;
+  shouldUseNewContent?: boolean;
 }
 
 interface ExampleViewerState {
@@ -57,11 +60,11 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
 
   getConfig = () => {
     const { scrollingElementFn } = this.props;
-    const onExpand = (entityIndex, innerIndex = 0) => {
+    const onExpand = (blockKey, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
         expandModeIsOpen: true,
-        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+        expandModeIndex: this.expandModeData.imageMap[blockKey] + innerIndex,
       });
     };
     const additionalConfig = {
@@ -72,7 +75,14 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
+    const {
+      isMobile,
+      initialState,
+      locale,
+      seoMode,
+      localeResource,
+      shouldUseNewContent,
+    } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
       helpers: {
@@ -94,30 +104,47 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
 
     return (
       <>
-        <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
-          <RichContentViewer
-            typeMappers={Plugins.typeMappers}
-            // @ts-ignore
-            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
-            decorators={Plugins.decorators}
-            config={this.pluginsConfig}
-            {...viewerProps}
-          />
-          {this.shouldRenderFullscreen && (
-            <Fullscreen
-              images={this.expandModeData.images}
-              onClose={() => this.setState({ expandModeIsOpen: false })}
-              isOpen={expandModeIsOpen}
-              index={expandModeIndex}
+        {shouldUseNewContent ? (
+          <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
+            <RicosViewer
+              content={initialState}
+              plugins={Plugins.viewerPlugins}
+              locale={locale}
+              linkSettings={{ relValue, anchorTarget }}
               isMobile={isMobile}
+              cssOverride={theme}
+              mediaSettings={{ pauseMedia: disabled }}
+              seoSettings={seoMode}
+            >
+              <RichContentViewer helpers={viewerProps.helpers} />
+            </RicosViewer>
+          </div>
+        ) : (
+          <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
+            <RichContentViewer
+              typeMappers={Plugins.typeMappers}
+              // @ts-ignore
+              inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+              decorators={Plugins.decorators}
+              config={this.pluginsConfig}
+              {...viewerProps}
             />
-          )}
-          {!isMobile ? (
-            <TextSelectionToolbar container={this.viewerRef.current}>
-              {selectedText => <TwitterButton selectedText={selectedText} />}
-            </TextSelectionToolbar>
-          ) : null}
-        </div>
+            {this.shouldRenderFullscreen && (
+              <Fullscreen
+                images={this.expandModeData.images}
+                onClose={() => this.setState({ expandModeIsOpen: false })}
+                isOpen={expandModeIsOpen}
+                index={expandModeIndex}
+                isMobile={isMobile}
+              />
+            )}
+          </div>
+        )}
+        {!isMobile ? (
+          <TextSelectionToolbar container={this.viewerRef.current}>
+            {selectedText => <TwitterButton selectedText={selectedText} />}
+          </TextSelectionToolbar>
+        ) : null}
       </>
     );
   }
