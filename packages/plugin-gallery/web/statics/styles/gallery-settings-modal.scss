@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
 $TITLE_HEIGHT: 0px;
 $FOOTER_HEIGHT: 100px;
 
@@ -20,7 +22,6 @@ $FOOTER_HEIGHT: 100px;
   top: 0;
   background-color: #fff;
   z-index: 5;
-  box-sizing: border-box;
 }
 
 .gallerySettings_tabsContainer{
@@ -49,18 +50,17 @@ $FOOTER_HEIGHT: 100px;
   overflow-x: hidden;
 }
 .galleryImageSettings_toggleWrapper{
-  position: relative;
-  svg{
-    position: absolute;
-    top: 9px;
-    height: 24px;
-    left: 201px;
-  }
   p{
     font-size: 16px;
   }
   >div{
     padding-bottom: 14px;
     padding-top: 10px;
+  }
+
+  @include phone {
+    p{
+      font-size:14px;
+    }
   }
 }

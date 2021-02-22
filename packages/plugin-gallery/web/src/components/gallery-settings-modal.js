@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FocusManager, InfoIcon } from 'wix-rich-content-editor-common';
+import { FocusManager } from 'wix-rich-content-editor-common';
 import {
   SettingsPanelFooter,
   SettingsSection,
@@ -187,7 +187,10 @@ export class GallerySettingsModal extends Component {
   };
 
   otherTab() {
-    return this.state.activeTab || 'manage_media';
+    if (this.state.activeTab === 'manage_media') return 'advanced_settings';
+    if (this.state.activeTab === 'advanced_settings') return 'advanced_settings';
+    if (this.state.activeTab === 'manage_media') return 'settings';
+    return 'manage_media';
   }
 
   switchTab() {
@@ -202,7 +205,7 @@ export class GallerySettingsModal extends Component {
     return {
       manage_media: t('GalleryPlugin_Settings_Tab_ManageMedia'),
       advanced_settings: t('GallerySettings_Tab_AdvancedSettings'),
-      settings: t('GallerySettings_Tab_Settings'),
+      settings: t('GalleryPlugin_Settings_Settings'),
     }[tab];
   }
   onDoneClick = () => {
@@ -227,22 +230,15 @@ export class GallerySettingsModal extends Component {
     }));
   };
 
-  renderToggle = ({ toggleKey, labelKey }) => (
-    <React.Fragment key={toggleKey}>
-      <LabeledToggle
-        theme={this.props.theme}
-        checked={this.state[toggleKey]}
-        label={this.props.t(labelKey)}
-        onChange={this.toggleState(toggleKey)}
-      />
-      {toggleKey === 'isRightClickEnabled' ? (
-        <InfoIcon
-          theme={this.props.theme}
-          isNotification
-          tooltipText={this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip')}
-        />
-      ) : null}
-    </React.Fragment>
+  renderToggle = ({ toggleKey, labelKey, tooltipText }) => (
+    <LabeledToggle
+      key={toggleKey}
+      theme={this.props.theme}
+      checked={this.state[toggleKey]}
+      label={this.props.t(labelKey)}
+      onChange={this.toggleState(toggleKey)}
+      tooltipText={tooltipText ? tooltipText : null}
+    />
   );
 
   toggleData = [
@@ -253,6 +249,7 @@ export class GallerySettingsModal extends Component {
     {
       toggleKey: 'isRightClickEnabled',
       labelKey: 'GalleryPlugin_Settings_ImagesCanBeDownloaded_Label',
+      tooltipText: this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip'),
     },
   ];
 
@@ -289,7 +286,7 @@ export class GallerySettingsModal extends Component {
           className={styles.gallerySettings}
           dir={languageDir}
         >
-          <div className={styles.gallerySettings_title}>{t('GalleryPlugin_Settings_Header')}</div>
+          <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab

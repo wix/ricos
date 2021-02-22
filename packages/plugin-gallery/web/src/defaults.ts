@@ -80,7 +80,6 @@ export const DEFAULTS = Object.freeze({
     layout: 'small',
     spacing: 0,
     disableExpand: false,
-    disableRightClick: false,
   },
 });
 

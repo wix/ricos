@@ -157,22 +157,28 @@ class GalleryViewer extends React.Component {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
-    onExpand?.(this.props.blockKey, data.idx);
+    this.hasExpand() && onExpand?.(this.props.blockKey, data.idx);
   };
 
   renderExpandIcon = itemProps => {
     return (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon
-          className={this.styles.expandIcon}
-          onClick={e => {
-            e.preventDefault();
-            this.handleExpand(itemProps);
-          }}
-        />
-      </div>
+      this.hasExpand() && (
+        <div className={this.styles.expandContainer}>
+          <ExpandIcon
+            className={this.styles.expandIcon}
+            onClick={e => {
+              e.preventDefault();
+              this.handleExpand(itemProps);
+            }}
+          />
+        </div>
+      )
     );
   };
+
+  hasExpand = () =>
+    !(this.props.settings.disableExpand || this.props.componentData.config.disableExpand) &&
+    this.props.settings.onExpand;
 
   renderTitle = title => {
     return title ? (
@@ -183,19 +189,14 @@ class GalleryViewer extends React.Component {
   };
 
   hoverElement = itemProps => {
-    const {
-      settings,
-      componentData: { config },
-    } = this.props;
-    const isExpandEnabled = !(settings.disableExpand || config.disableExpand) && settings.onExpand;
-    const isClickable = isExpandEnabled || itemProps.link;
+    const isClickable = this.hasExpand() || itemProps.link;
     const itemOverlayStyles = classnames(
       this.styles.itemOverlay,
       isClickable && this.styles.clickableItem
     );
     return (
       <div className={itemOverlayStyles}>
-        {isExpandEnabled && this.renderExpandIcon(itemProps)}
+        {this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title, 'HOVER')}
         {this.props.itemOverlayElement?.(itemProps)}
       </div>
