@@ -14,7 +14,7 @@ const ImagePluginStory = () => {
     ['specs.ricos.skipImageThumbnail']: 'true',
     ['specs.ricos.imageThumbnailQuality']: '20',
   });
-  console.log({ experiments });
+
   const _rcProps = {
     experiments,
   };
