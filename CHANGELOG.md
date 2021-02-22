@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `image`
+  - [#2184](https://github.com/wix/ricos/pull/2184) thumbnail quality by `imageThumbnailQuality` experiment
+
 </details>
 <hr/>
 
