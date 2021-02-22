@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown, Input } from 'wix-style-react';
-import { truncateContent } from 'wix-rich-content-common/libs/contentStateServices';
+import { truncateContent } from 'ricos-content/libs/truncateContent';
 import { RichContentViewerBox, Section, Page } from '../Components/StoryParts';
 
 import ViewerWrapper from '../Components/ViewerWrapper';

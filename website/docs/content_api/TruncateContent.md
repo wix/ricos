@@ -18,7 +18,7 @@ Truncate existing content according to number of blocks, and optional words coun
 #### Example Usage
 
 ```js
-import { truncateContent } from 'wix-rich-content-common/libs/contentStateServices';
+import { truncateContent } from 'ricos-content/libs/truncateContent';
 const {content} = truncateContent(fullContent, 4)
 <RicosViewer content={content} ... />
 ```
