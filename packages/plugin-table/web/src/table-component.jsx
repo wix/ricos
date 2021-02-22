@@ -379,7 +379,7 @@ class TableComponent extends React.Component {
       .reduce((acc, curr) => acc + curr);
     const lastCol = colsRefs[colsRefs.length - 1];
     const maxLeft = lastCol.offsetLeft + lastCol.offsetWidth + 20 - dragPreviewWidth;
-    const dropLeft = Math.min(e.pageX - dragPreviewWidth, maxLeft);
+    const dropLeft = Math.min(e.pageX - dragPreviewWidth + this.getTableScrollLeft(), maxLeft);
     colsPositions.forEach((pos, index) => {
       if (
         (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
@@ -448,6 +448,13 @@ class TableComponent extends React.Component {
       : [...getRowsRange(selected), ...getRowsRange(prevSelection)];
   };
 
+  getTableScrollLeft = () => {
+    const horizontalScrollbarElement = this.tableContainer?.current?.closest(
+      '[data-id=horizontal-scrollbar-element]'
+    );
+    return horizontalScrollbarElement.scrollLeft;
+  };
+
   render() {
     const { theme, t, isMobile, settings, blockProps } = this.props;
     const {
@@ -500,6 +507,7 @@ class TableComponent extends React.Component {
             merge={this.merge}
             distributeRows={this.distributeRows}
             distributeColumns={this.distributeColumns}
+            getTableScrollLeft={this.getTableScrollLeft}
           />
         )}
         {!isMobile && (
