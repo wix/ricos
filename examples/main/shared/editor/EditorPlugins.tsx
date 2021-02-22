@@ -1,5 +1,5 @@
 import React from 'react';
-import { createLinkPlugin, LINK_TYPE, pluginLink } from 'ricos/link';
+import { createLinkPlugin, LINK_TYPE, pluginLink } from 'ricos/link/editor';
 import {
   createLinkPreviewPlugin,
   LINK_PREVIEW_TYPE,

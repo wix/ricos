@@ -53,7 +53,7 @@
     "viewer"
   ],
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "find . -maxdepth 1 -type d -regex \"\\./.*\" -not -path \"./src*\" -not -path \"./node_modules*\"  -exec rm -rf {} \\;",
     "prebuild": "yarn run clean",
     "buildESM": "tsc",
     "buildCJS": "tsc --module commonjs --outDir dist",
