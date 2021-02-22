@@ -4,13 +4,19 @@ import { Page } from '../Components/StoryParts';
 import ActionButton from '../Components/ActionButton';
 import imageContentState from '../../../../e2e/tests/fixtures/images.json';
 import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
+import { parseExperiments } from 'wix-rich-content-common/libs/experiments';
 
 const ImagePluginStory = () => {
   const [experimntEnabled, setExperimentEnabled] = useState(false);
   const [viewerKey, setViewerKey] = useState(1);
 
+  const experiments = parseExperiments({
+    ['specs.ricos.skipImageThumbnail']: 'true',
+    ['specs.ricos.imageThumbnailQuality']: '20',
+  });
+  console.log({ experiments });
   const _rcProps = {
-    experiments: { skipImageThumbnail: { value: 'true', enabled: true, namespace: 'ricos' } },
+    experiments,
   };
 
   return (
