@@ -108,12 +108,6 @@ class ImageSettings extends Component {
     this.setState({ metadata: { ...metadata, ...value } });
   };
 
-  addMetadataToBlock = () => {
-    const { pubsub } = this.props;
-    const metadata = this.state.metadata || {};
-    pubsub.update('componentData', { metadata });
-  };
-
   onDoneClick = () => {
     const { helpers, componentData, pubsub } = this.props;
     const newComponentData = {
@@ -125,7 +119,7 @@ class ImageSettings extends Component {
       },
     };
     if (this.state.metadata) {
-      this.addMetadataToBlock();
+      newComponentData.metadata = this.state.metadata;
     }
     pubsub.update('componentData', newComponentData);
 
