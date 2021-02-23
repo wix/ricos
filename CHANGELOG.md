@@ -16,9 +16,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `storybook`
+  - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
 
 </details>
-
 <hr/>
 
 ## 8.22.8 (Feb 23, 2021)
