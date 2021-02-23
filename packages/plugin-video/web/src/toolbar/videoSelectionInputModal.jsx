@@ -43,8 +43,9 @@ export default class VideoSelectionInputModal extends Component {
       this.setState({ showError: true });
       return;
     }
-
-    const data = { ...componentData, isCustomVideo: false, tempData: false, src };
+    // eslint-disable-next-line fp/no-delete
+    delete componentData.isCustomVideo;
+    const data = { ...componentData, tempData: false, src };
     this.onConfirm(data);
 
     helpers?.onVideoSelected?.(
