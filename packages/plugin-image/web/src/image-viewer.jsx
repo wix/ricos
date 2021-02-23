@@ -147,7 +147,7 @@ class ImageViewer extends React.Component {
         requiredWidth,
         requiredHeight,
         requiredQuality,
-        imageType: skipImageThumbnail && isSSR() ? 'preload' : 'highRes',
+        imageType: 'highRes',
       });
       if (skipImageThumbnail) {
         imageUrl.highresWidth = requiredWidth;
