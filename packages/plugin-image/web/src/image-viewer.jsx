@@ -447,10 +447,4 @@ ImageViewer.propTypes = {
   blockKey: PropTypes.string,
 };
 
-const WrapperImage = props => {
-  const newProps = {
-    ...props,
-  };
-  return <ImageViewer {...newProps} />;
-};
-export default WrapperImage;
+export default ImageViewer;
