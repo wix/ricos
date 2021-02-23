@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import BasicUsageStory from './RicosBasicUsageStory';
 import ExampleApp from './ExampleAppStory';
-import ThemesStory from './ThemeStory';
 import RicosStaticToolbar from './RicosStaticToolbar';
 import RicosModalSettings from './RicosModalSettings';
 import RicosMediaStory from './RicosMediaStory';
@@ -13,7 +12,6 @@ import MaxTextLengthStory from './MaxTextLengthStory';
 storiesOf('Ricos', module)
   .add('Basic Usage', BasicUsageStory)
   .add('Example App', ExampleApp)
-  .add('Ricos Theme', ThemesStory)
   .add('Static Toolbar', RicosStaticToolbar)
   .add('Modal API', RicosModalSettings)
   .add('Ricos Media', RicosMediaStory)

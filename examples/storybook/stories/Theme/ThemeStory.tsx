@@ -19,7 +19,7 @@ const ThemeSelector = () => {
   const [palettePage, setPalettePage] = useState(0);
   const [fontPage, setFontPage] = useState(0);
   const [isFallback, setFallback] = useState(false);
-  const fallbackColor = isFallback ? '#FF0000' : undefined
+  const fallbackColor = isFallback ? '#FF0000' : undefined;
 
   useEffect(() => {
     document.onkeyup = event => {
@@ -96,11 +96,7 @@ export default () => {
 
       <Page title="Ricos Theme">
         See Usage{' '}
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://wix.github.io/ricos/docs/ricos/ricos-api#theme"
-        >
+        <a target="_blank" rel="noreferrer" href="https://wix.github.io/ricos/docs/ricos/theming">
           here
         </a>
         <ThemeSelector />
