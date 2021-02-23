@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(dividerTypeMapper);
+export default () => createViewerBundle(pluginDivider());

@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(HashtagDecorator);
+export default () => createViewerBundle(pluginHashtag());

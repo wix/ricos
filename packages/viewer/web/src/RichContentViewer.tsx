@@ -69,7 +69,16 @@ export interface RichContentViewerProps {
 
 class RichContentViewer extends Component<
   RichContentViewerProps,
-  { raw?: RicosContent; error?: string }
+  {
+    raw?: RicosContent;
+    error?: string;
+    context: {
+      experiments?: AvailableExperiments;
+      isMobile: boolean;
+      t?: TranslationFunction;
+      containerWidth?: number;
+    };
+  }
 > {
   styles: Record<string, string>;
   typeMappers: PluginMapping;
@@ -92,7 +101,10 @@ class RichContentViewer extends Component<
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.typeMappers = combineMappers(props.typeMappers);
-    this.state = {};
+    const { experiments, isMobile = false, t, width } = props;
+    this.state = {
+      context: { experiments, isMobile, t, containerWidth: width },
+    };
   }
 
   static getInitialState = (props: RichContentViewerProps) => {
@@ -182,16 +194,16 @@ class RichContentViewer extends Component<
     }
   }
 
-  hasAlignment(){
-    const {initialState} = this.props;
-    if(initialState){
+  hasAlignment() {
+    const { initialState } = this.props;
+    if (initialState) {
       const foundAlignment = Object.keys(initialState.entityMap).find(entityMapKey => {
         const entity = initialState.entityMap[entityMapKey];
-        return entity?.data?.config?.alignment !== 'center'
-      })
-      return !!foundAlignment ;
-    }else {
-      return false
+        return entity?.data?.config?.alignment !== 'center';
+      });
+      return !!foundAlignment;
+    } else {
+      return false;
     }
   }
 
@@ -210,11 +222,7 @@ class RichContentViewer extends Component<
         inlineStyleMappers,
         locale,
         addAnchors,
-        isMobile = false,
-        t,
-        experiments,
         renderedInTable,
-        width,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -251,10 +259,12 @@ class RichContentViewer extends Component<
         { addAnchors },
         innerRCEViewerProps
       );
-      const hasAlignment = this.hasAlignment()
+      const hasAlignment = this.hasAlignment();
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t, containerWidth: width, hasAlignment }}>
-          <div className={wrapperClassName} dir={direction || getLangDir(locale)} style={{width:}}>
+        <GlobalContext.Provider
+          value={{ experiments, isMobile, t, containerWidth: width, hasAlignment }}
+        >
+          <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>

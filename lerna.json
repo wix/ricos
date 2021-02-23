@@ -14,5 +14,5 @@
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "8.22.3"
+  "version": "8.22.8"
 }
