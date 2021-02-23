@@ -13,16 +13,7 @@
   }
   
   .videoSettings_toggleContainer{
-    position: relative;
     padding: 0 24px;
-    svg{
-      position: absolute;
-      top: 23px;
-      left: 215px;
-      height: 24px;
-      cursor: pointer;
-      fill: $primary-text-color;
-    }
     p{
       font-size: 16px;
     }

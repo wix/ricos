@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { VideoSettingsProps } from '../types';
-import { InfoIcon } from 'wix-rich-content-editor-common';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import Styles from '../../statics/styles/video-settings.scss';
@@ -63,11 +62,8 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
           checked={isDownloadEnabled}
           label={t('VideoPlugin_Settings_VideoCanBeDownloaded_Label')}
           onChange={onToggle}
-          dataHook="videoDownloadToggle"
-        />
-        <InfoIcon
-          theme={theme}
           tooltipText={t('VideoPlugin_Settings_VideoCanBeDownloaded_Tooltip')}
+          dataHook="videoDownloadToggle"
         />
       </SettingsSection>
       {!isMobile && (
