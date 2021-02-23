@@ -419,40 +419,18 @@ export const createBlock = (editorState: EditorState, data, type: string) => {
 
 export const deleteBlock = (editorState: EditorState, blockKey: string) => {
   const contentState = editorState.getCurrentContent();
-  if (contentState.getBlockBefore(blockKey)) {
-    const block = contentState.getBlockForKey(blockKey);
-    const previousBlock = contentState.getBlockBefore(blockKey) || block;
-    const anchorOffset = previousBlock.getKey() === blockKey ? 0 : previousBlock.getText().length;
-    const selectionRange = new SelectionState({
-      anchorKey: previousBlock.getKey(),
-      anchorOffset,
-      focusKey: blockKey,
-      focusOffset: block.getText().length,
-      hasFocus: true,
-    });
-    const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
-    return EditorState.push(editorState, newContentState, 'remove-range');
-  } else {
-    // deleting the first line
-    const blockMap = contentState.getBlockMap();
-    if (blockMap.size === 1) {
-      return replaceWithEmptyBlock(editorState, blockKey);
-    } else {
-      const newBlockMap = blockMap.remove(blockKey);
-      const newContentState = contentState.merge({
-        blockMap: newBlockMap,
-      }) as ContentState;
-
-      const blockAfter = contentState.getBlockAfter(blockKey);
-      const newSelection = createSelection({
-        blockKey: blockAfter.getKey(),
-        anchorOffset: 0,
-        focusOffset: 0,
-      });
-      const newEditorState = EditorState.push(editorState, newContentState, 'remove-range');
-      return EditorState.forceSelection(newEditorState, newSelection);
-    }
-  }
+  const block = contentState.getBlockForKey(blockKey);
+  const previousBlock = contentState.getBlockBefore(blockKey) || block;
+  const anchorOffset = previousBlock.getKey() === blockKey ? 0 : previousBlock.getText().length;
+  const selectionRange = new SelectionState({
+    anchorKey: previousBlock.getKey(),
+    anchorOffset,
+    focusKey: blockKey,
+    focusOffset: block.getText().length,
+    hasFocus: true,
+  });
+  const newContentState = Modifier.removeRange(contentState, selectionRange, 'forward');
+  return EditorState.push(editorState, newContentState, 'remove-range');
 };
 
 export const deleteBlockText = (editorState: EditorState, blockKey: string) => {
@@ -829,33 +807,25 @@ export function selectAllContent(editorState, forceSelection) {
 }
 
 export function createNewLineBelow(editorState) {
-  const { contentState, selection } = insertNewBlock(editorState, { below: true }, null);
+  const { contentState, selection } = insertNewBlock(editorState, false);
   const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   return EditorState.forceSelection(newEditorState, selection);
 }
 
 export function createNewLineAbove(editorState) {
-  const { contentState, selection } = insertNewBlock(editorState, { above: true }, null);
+  const { contentState, selection } = insertNewBlock(editorState, true);
   const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   return EditorState.forceSelection(newEditorState, selection);
 }
 
-function insertNewBlock(editorState, position, keyForNewBlock) {
+function insertNewBlock(editorState, insertAbove) {
   const contentState = editorState.getCurrentContent();
   const selectedBlockKey = editorState.getSelection().getFocusKey();
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  let blockKey;
-  if (position.above) {
-    blockKey = selectedBlockKey;
-  } else if (position.below) {
-    blockKey = editorState.getCurrentContent().getKeyAfter(selectedBlockKey);
-  } else if (position.top) {
-    blockKey = blocks[0].getKey();
-  } else if (position.bottom) {
-    blockKey = undefined;
-  }
+  const blockKey = insertAbove
+    ? selectedBlockKey
+    : editorState.getCurrentContent().getKeyAfter(selectedBlockKey);
   const blockMap = contentState.getBlockMap();
-  const newBlockKey = keyForNewBlock || genKey();
+  const newBlockKey = genKey();
   const newBlock = new ContentBlock({
     key: newBlockKey,
     text: '',
