@@ -16,7 +16,7 @@ HTML plugin enables users to embed content in an iframe (either source code or b
   <RicosEditorWithMobile
     content={createContent('Add an Html')}
     placeholder={'Type here!'}
-    plugins={[pluginHtml({})]}
+    plugins={[pluginHtml()]}
   />
 </div>
 <br />
@@ -126,7 +126,7 @@ none;
 
 ### `exposeButtons`
 
-Which html buttons will display - array with htmlButtonsTypes types [Instagram, Twitter, ...].
+Which html buttons will display - array with htmlButtonsTypes types [html, adsense] (you can supply both).
 For provide buttons type you should import htmlButtonsTypes.
 
 ```jsx
@@ -137,6 +137,38 @@ Default value:
 
 ```jsx
 ['html'];
+```
+
+## Adsense Plugin
+
+For consume Adsense plugin you should consume HTML plugin and pass to plugin config:
+
+1. exposeButtons: [htmlButtonsTypes.adsense] or [htmlButtonsTypes.html, htmlButtonsTypes.adsense]
+2. siteDomain
+
+see documentation above.
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add adsense')}
+    placeholder={'Type here!'}
+    plugins={[pluginHtml({ exposeButtons: ['adsense'], siteDomain: 'https://www.wix.com' })]}
+  />
+</div>
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginHtml, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosEditor plugins={[pluginHtml({ exposeButtons: [htmlButtonsTypes.adsense], , siteDomain: 'https://www.wix.com' })]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosViewer plugins={[pluginHtml()]} />;
 ```
 
 <br />
