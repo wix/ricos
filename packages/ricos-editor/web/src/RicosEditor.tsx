@@ -14,7 +14,10 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
+import {
+  EditorEventsContext,
+  EditorEvents,
+} from 'wix-rich-content-editor-common/dist/lib/EditorEventsContext';
 import { ToolbarType, Version } from 'wix-rich-content-common';
 
 // eslint-disable-next-line
