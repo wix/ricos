@@ -10,7 +10,12 @@ import { getRange, getRowsRange, getColsRange } from './domain/tableDataUtil';
 import { createEmptyCellEditor, isCellsNumberInvalid } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
-import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import {
+  isPluginFocused,
+  TOOLBARS,
+  KEYS_CHARCODE,
+  handleFirstAndLastBlocks,
+} from 'wix-rich-content-editor-common';
 import { isEmpty, isNumber, cloneDeep } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
@@ -75,9 +80,14 @@ class TableComponent extends React.Component {
     this.setSelected(selected, disableSelectedStyle);
   };
 
-  setEditingActive = isEditingActive => {
+  setEditingActive = (isEditingActive, ref) => {
     this.props.disableKeyboardEvents(isEditingActive);
     this.setState({ isEditingActive });
+    if (isEditingActive) {
+      handleFirstAndLastBlocks(ref, 'expose');
+    } else {
+      handleFirstAndLastBlocks(ref, 'hide');
+    }
   };
 
   getCellEditorRef = (i, j) => this.innerEditorsRefs[`${i}-${j}`];

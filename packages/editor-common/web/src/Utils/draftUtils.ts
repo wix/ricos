@@ -790,3 +790,22 @@ export function selectAllContent(editorState, forceSelection) {
   const newEditorState = setSelectionFunction(editorState, selection);
   return newEditorState;
 }
+
+export function handleFirstAndLastBlocks(editorWrapper: HTMLElement, action: string) {
+  const nodeListOfAllBlocks = editorWrapper.querySelectorAll<HTMLElement>(`[data-editor]`);
+  if (nodeListOfAllBlocks.length < 3) {
+    return;
+  } else {
+    const firstBlockNode = nodeListOfAllBlocks[0];
+    const lastBlockNode = nodeListOfAllBlocks[nodeListOfAllBlocks.length - 1];
+    if (firstBlockNode.textContent === '' || firstBlockNode.textContent === '​') {
+      //zero-width space (empty table cell)
+      const typeScriptIsShit = firstBlockNode.children[0] as HTMLElement;
+      typeScriptIsShit.style.height = action === 'hide' ? '1px' : 'unset';
+    }
+    if (lastBlockNode.textContent === '') {
+      const typeScriptIsShit = lastBlockNode.children[0] as HTMLElement;
+      typeScriptIsShit.style.height = action === 'hide' ? '1px' : 'unset';
+    }
+  }
+}

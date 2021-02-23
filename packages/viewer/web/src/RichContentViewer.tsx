@@ -82,6 +82,7 @@ class RichContentViewer extends Component<
 > {
   styles: Record<string, string>;
   typeMappers: PluginMapping;
+  viewerWrapper: HTMLDivElement;
 
   static defaultProps: Partial<RichContentViewerProps> = {
     theme: {},
@@ -194,6 +195,8 @@ class RichContentViewer extends Component<
     }
   }
 
+  setViewerWrapper = ref => (this.viewerWrapper = ref);
+
   render() {
     const { onError, config = {} } = this.props;
     try {
@@ -249,7 +252,11 @@ class RichContentViewer extends Component<
 
       return (
         <GlobalContext.Provider value={this.state.context}>
-          <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
+          <div
+            className={wrapperClassName}
+            dir={direction || getLangDir(locale)}
+            ref={this.setViewerWrapper}
+          >
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>

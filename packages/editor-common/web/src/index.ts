@@ -83,6 +83,7 @@ export {
   isCursorAtStartOfContent,
   isCursorAtFirstLine,
   selectAllContent,
+  handleFirstAndLastBlocks,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';

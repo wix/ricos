@@ -21,7 +21,11 @@ export * from 'ricos-content';
 
 export { default as getDisplayName } from './Utils/getDisplayName';
 
-export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
+export {
+  hasLinksInBlock,
+  getLinkRangesInBlock,
+  removeFirstAndLastBlocks,
+} from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
 export { getTextDirection, getDirectionFromAlignmentAndTextDirection } from './Utils/textDirection';

@@ -6,17 +6,24 @@ import classNames from 'classnames';
 import { getRange } from '../domain/tableDataUtil';
 import { cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
-import { ToolbarType } from 'wix-rich-content-common';
+import { ToolbarType, removeFirstAndLastBlocks } from 'wix-rich-content-common';
 
 const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
+  componentDidMount() {
+    if (this.editorRef.editorWrapper) {
+      this.props.setEditingActive(false, this.editorRef.editorWrapper);
+    } else if (this.editorRef.viewerWrapper) {
+      removeFirstAndLastBlocks(this.editorRef.viewerWrapper);
+    }
+  }
   componentDidUpdate(prevProps) {
     if (
       !this.isEditing(prevProps.editing, prevProps.selectedCells) &&
       this.isEditing(this.props.editing, this.props.selectedCells)
     ) {
       this.editorRef.focus();
-      this.props.setEditingActive(true);
+      this.props.setEditingActive(true, this.editorRef.editorWrapper);
       !this.props.isMobile && this.editorRef?.selectAllContent(true);
       this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
@@ -24,7 +31,7 @@ export default class Cell extends Component {
       this.isEditing(prevProps.editing, prevProps.selectedCells) &&
       !this.isEditing(this.props.editing, this.props.selectedCells)
     ) {
-      this.props.setEditingActive(false);
+      this.props.setEditingActive(false, this.editorRef.editorWrapper);
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
     if (this.props.selected) {
