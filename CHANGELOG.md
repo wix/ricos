@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `common`
+  - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
 ### :house: Internal
 - `storybook`
   - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
