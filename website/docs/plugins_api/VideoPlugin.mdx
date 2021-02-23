@@ -134,3 +134,56 @@ dataType =
     },
   };
 ```
+
+### `exposeButtons`
+
+Which video buttons will display - array with videoButtonsTypes types [video, soundCloud].
+For provide buttons type you should import videoButtonsTypes.
+
+```jsx
+exposeButtons?: array;
+```
+
+Default value:
+
+```jsx
+['video'];
+```
+
+## Sound Cloud Plugin
+
+For consume soundCloud plugin you should consume Video plugin and pass to plugin config:
+
+1. exposeButtons: [videoButtonsTypes.soundCloud] or [videoButtonsTypes.video, videoButtonsTypes.soundCloud]
+
+see documentation above.
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add A Video!')}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginVideo({
+        handleFileUpload: mockVideoNativeUploadFunc,
+        getVideoUrl,
+        exposeButtons: ['soundCloud'],
+      }),
+    ]}
+  />
+</div>
+<br />
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
+import { pluginVideo, videoButtonsTypes } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosEditor plugins={[pluginVideo({ exposeButtons: [videoButtonsTypes.soundCloud] })]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosViewer plugins={[pluginVideo(VideoConfig)]} />;
+```

@@ -7,13 +7,14 @@ import {
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
 import VideoSelectionInputModal from './videoSelectionInputModal';
-import { InsertPluginIcon } from '../icons';
+import SoundCloudURLInputModal from './soundCloudURLInputModal';
+import { VideoInsertPluginIcon, SoundCloudInsertPluginIcon } from '../icons';
 import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
 import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
-import { VideoPluginEditorConfig } from '../types';
+import { VideoPluginEditorConfig, videoButtonsTypes } from '../types';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
@@ -26,14 +27,21 @@ const createInsertButtons: CreateInsertButtons = ({
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
-  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
+  const {
+    exposeButtons = [videoButtonsTypes.video],
+    toolbar,
+    enableCustomUploadOnMobile,
+    handleFileSelection,
+    handleFileUpload,
+  } = settings || {};
+  const icon = toolbar?.icons?.InsertPluginButtonIcon || VideoInsertPluginIcon;
   const customStyles =
-    (!isMobile || settings.enableCustomUploadOnMobile) &&
-    (settings.handleFileSelection || settings.handleFileUpload)
+    (!isMobile || enableCustomUploadOnMobile) && (handleFileSelection || handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
-  return [
-    {
+
+  const buttonsMap = {
+    [videoButtonsTypes.video]: {
       type: BUTTON_TYPES.MODAL,
       name: INSERT_PLUGIN_BUTTONS.VIDEO,
       tooltip: t('VideoPlugin_InsertButton_Tooltip'),
@@ -47,7 +55,22 @@ const createInsertButtons: CreateInsertButtons = ({
         isMobile,
       }),
     },
-  ];
+    [videoButtonsTypes.soundCloud]: {
+      type: BUTTON_TYPES.MODAL,
+      name: INSERT_PLUGIN_BUTTONS.SOUND_CLOUD,
+      tooltip: t('SoundCloudPlugin_InsertButton_Tooltip'),
+      getIcon: () => SoundCloudInsertPluginIcon,
+      componentData: DEFAULTS,
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      modalElement: SoundCloudURLInputModal,
+      modalStyles: getModalStyles({
+        customStyles,
+        fullScreen: false,
+        isMobile,
+      }),
+    },
+  };
+  return exposeButtons.map(buttonType => buttonsMap[buttonType]);
 };
 
 export default createInsertButtons;
