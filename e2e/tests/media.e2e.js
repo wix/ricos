@@ -80,7 +80,6 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - add image title');
       cy.editImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
       cy.openSettings().deleteImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.addImageLink();
