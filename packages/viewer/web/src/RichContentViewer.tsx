@@ -182,6 +182,19 @@ class RichContentViewer extends Component<
     }
   }
 
+  hasAlignment(){
+    const {initialState} = this.props;
+    if(initialState){
+      const foundAlignment = Object.keys(initialState.entityMap).find(entityMapKey => {
+        const entity = initialState.entityMap[entityMapKey];
+        return entity?.data?.config?.alignment !== 'center'
+      })
+      return !!foundAlignment ;
+    }else {
+      return false
+    }
+  }
+
   render() {
     const { onError, config = {} } = this.props;
     try {
@@ -238,10 +251,10 @@ class RichContentViewer extends Component<
         { addAnchors },
         innerRCEViewerProps
       );
-
+      const hasAlignment = this.hasAlignment()
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t, containerWidth: width }}>
-          <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
+        <GlobalContext.Provider value={{ experiments, isMobile, t, containerWidth: width, hasAlignment }}>
+          <div className={wrapperClassName} dir={direction || getLangDir(locale)} style={{width:}}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>

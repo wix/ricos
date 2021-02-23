@@ -33,6 +33,45 @@ class ImageViewer extends React.Component {
 
   static contextType = GlobalContext;
 
+  getEffectiveWidth = () => {
+    let effectiveWidth = 0;
+
+    const {
+      componentData,
+      componentData: {
+        config: { size },
+      },
+      isMobile,
+    } = this.props;
+
+    const containerWidth = 700 || this.context.containerWidth;
+
+    // CONTENT = 0;
+    // SMALL = 1;
+    // ORIGINAL = 2;
+    // FULL_WIDTH = 3;
+    // INLINE = 4;
+
+    if (!isMobile) {
+      if (size === 'small') {
+        effectiveWidth = Math.min(effectiveWidth, 350);
+      } else if (size === 'content') {
+        if (!this.context.hasAlignment) {
+          effectiveWidth = Math.min(containerWidth, componentData?.src?.width || Infinity);
+        }
+      } else if (size === 'original') {
+        effectiveWidth = Math.min(containerWidth, componentData?.src?.width || Infinity);
+      } else if (size === 'fullWidth') {
+        // TODO: handle css overrides (blog)
+        effectiveWidth = Math.min(containerWidth, componentData?.src?.width || Infinity);
+      } else if (size === 'inline') {
+        effectiveWidth = componentData?.config?.width;
+      }
+    }
+
+    return effectiveWidth;
+  };
+
   shouldSkipImageThumbnail = () => {
     return true;
     // const { containerWidth, experiments } = this.context;
@@ -105,7 +144,11 @@ class ImageViewer extends React.Component {
     };
 
     const skipImageThumbnail = this.shouldSkipImageThumbnail();
-
+    let effectiveWidth;
+    if (skipImageThumbnail) {
+      effectiveWidth = this.getEffectiveWidth();
+    }
+    console.log({ props: this.props, context: this.context });
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
@@ -114,20 +157,7 @@ class ImageViewer extends React.Component {
       if (!skipImageThumbnail && seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
-      } else if (skipImageThumbnail) {
-        const {
-          componentData: {
-            config: { size },
-          },
-        } = this.props;
-
-        let effectiveWidth = 648; //this.context.containerWidth;
-
-        if (size === 'small') {
-          //small size is 350px in css, might be overrided in consumers cssOverride
-
-          effectiveWidth = Math.min(effectiveWidth, 350);
-        }
+      } else if (skipImageThumbnail && effectiveWidth) {
         [requiredWidth, requiredHeight] = getImageDimensions(effectiveWidth, this.props.isMobile);
       } else if (this.state.container) {
         const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
