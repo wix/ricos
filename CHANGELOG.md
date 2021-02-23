@@ -16,12 +16,26 @@
     Click to see more.
   </summary>
 
+
+</details>
+
+<hr/>
+
+## 8.22.8 (Feb 23, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+- `viewer`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+
+
+## 8.22.7 (Feb 22, 2021)
 ### :bug: Bug Fix
 - `plugin-link`
   - [#2182](https://github.com/wix/ricos/pull/2182) open link panel from external toolbar in mobile
-
-</details>
-<hr/>
+### :house: Internal
+- `common`
+  - [#2189](https://github.com/wix/ricos/pull/2189) experiments: support non-boolean values
 
 ## 8.22.6 (Feb 22, 2021)
 ### :nail_care: Polish
