@@ -16,15 +16,18 @@
     Click to see more.
   </summary>
 
+
+</details>
+
+<hr/>
+
+## 8.22.8 (Feb 23, 2021)
 ### :bug: Bug Fix
 - `editor`
   - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
 - `viewer`
   - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
 
-</details>
-
-<hr/>
 
 ## 8.22.7 (Feb 22, 2021)
 ### :bug: Bug Fix
