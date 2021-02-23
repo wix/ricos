@@ -91,7 +91,6 @@ export const RICOS_LINK_BUTTON_TYPE = 'ricos-link-button';
 export const RICOS_LINK_PREVIEW_TYPE = 'ricos-link-preview';
 export const RICOS_MAP_TYPE = 'ricos-map';
 export const RICOS_POLL_TYPE = 'ricos-poll';
-export const RICOS_SOUND_CLOUD_TYPE = 'ricos-sound-cloud';
 export const RICOS_SPOILER_TYPE = 'ricos-spoiler';
 export const RICOS_TABLE_TYPE = 'ricos-table';
 export const RICOS_TEXT_COLOR_TYPE = 'ricos-text-color';

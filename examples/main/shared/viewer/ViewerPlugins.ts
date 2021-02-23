@@ -2,7 +2,6 @@ import theme from '../theme/theme';
 import { videoTypeMapper, VIDEO_TYPE, pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 import { dividerTypeMapper, pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
 import { htmlTypeMapper, pluginHtml } from 'wix-rich-content-plugin-html/viewer';
-import { soundCloudTypeMapper, pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/viewer';
 import { linkTypeMapper, LINK_TYPE, pluginLink } from 'wix-rich-content-plugin-link/viewer';
 import {
   linkPreviewTypeMapper,
@@ -85,7 +84,6 @@ import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
 import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
@@ -120,7 +118,6 @@ export const typeMappers: PluginTypeMapper[] = [
   htmlTypeMapper,
   linkTypeMapper,
   linkPreviewTypeMapper,
-  soundCloudTypeMapper,
   mentionsTypeMapper,
   imageTypeMapper,
   tableTypeMapper,
@@ -203,7 +200,6 @@ export const viewerPlugins: ViewerPlugin[] = [
   pluginHtml(),
   pluginLink(config[LINK_TYPE]),
   pluginLinkPreview(config[LINK_PREVIEW_TYPE]),
-  pluginSoundCloud(),
   pluginMentions(),
   pluginImage(),
   pluginTable(),
