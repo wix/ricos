@@ -20,8 +20,11 @@
   - `plugin-video`
     - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
-</details>
+### :house: Internal
+- `storybook`
+  - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
 
+</details>
 <hr/>
 
 ## 8.22.8 (Feb 23, 2021)
