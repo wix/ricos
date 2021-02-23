@@ -19,9 +19,11 @@
 ### :rocket: New Feature
 - `plugin-image`
   - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons 
+### :house: Internal
+- `storybook`
+  - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
 
 </details>
-
 <hr/>
 
 ## 8.22.8 (Feb 23, 2021)
