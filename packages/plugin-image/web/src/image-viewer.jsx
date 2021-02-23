@@ -199,11 +199,21 @@ class ImageViewer extends React.Component {
 
   getImage(imageClassNames, src, alt, props, opts = {}) {
     const { fadeIn = false, width, height } = opts;
+    const skipImageThumbnail = this.shouldSkipImageThumbnail();
+    let imageSrc = src;
+    if (skipImageThumbnail) {
+      const extensionIndex = src.lastIndexOf('.jpg');
+      if (extensionIndex > -1) {
+        imageSrc = src.substring(0, extensionIndex) + '.webp';
+      }
+    }
+
     return (
       <img
         {...props}
         className={imageClassNames}
         src={src}
+        srcSet={imageSrc}
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
