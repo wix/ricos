@@ -6,8 +6,7 @@ import {
   BUTTON_TYPES,
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
-import VideoSelectionInputModal from './videoSelectionInputModal';
-import SoundCloudURLInputModal from './soundCloudURLInputModal';
+import VideoModal from './videoModal';
 import { VideoInsertPluginIcon, SoundCloudInsertPluginIcon } from '../icons';
 import {
   SelectionModalCustomStyle,
@@ -48,7 +47,7 @@ const createInsertButtons: CreateInsertButtons = ({
       getIcon: () => icon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
+      modalElement: decorateComponentWithProps(VideoModal, settings),
       modalStyles: getModalStyles({
         customStyles,
         fullScreen: false,
@@ -60,9 +59,9 @@ const createInsertButtons: CreateInsertButtons = ({
       name: INSERT_PLUGIN_BUTTONS.SOUND_CLOUD,
       tooltip: t('SoundCloudPlugin_InsertButton_Tooltip'),
       getIcon: () => SoundCloudInsertPluginIcon,
-      componentData: DEFAULTS,
+      componentData: { ...DEFAULTS, type: videoButtonsTypes.soundCloud },
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: SoundCloudURLInputModal,
+      modalElement: decorateComponentWithProps(VideoModal, settings),
       modalStyles: getModalStyles({
         customStyles,
         fullScreen: false,

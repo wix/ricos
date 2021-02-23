@@ -153,6 +153,7 @@ const entityFixersFromRaw = [
     predicate: isOldSoundCloud,
     entityFixer: (entity: RawDraftEntity) => {
       entity.type = VIDEO_TYPE;
+      entity.data.type = 'soundCloud';
     },
   },
 ];
