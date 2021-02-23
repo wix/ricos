@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+- `viewer`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
 
 </details>
 
