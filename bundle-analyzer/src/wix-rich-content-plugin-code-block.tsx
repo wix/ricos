@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
-import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(CodeBlockDecorator);
+export default () => createViewerBundle(pluginCodeBlock());
