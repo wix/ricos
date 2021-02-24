@@ -314,6 +314,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               role="dialog"
               onRequestClose={onRequestClose || this.helpers.closeModal}
               shouldFocusAfterRender={false}
+              shouldReturnFocusAfterClose={false}
             >
               <RichContentEditorModal
                 modalsMap={ModalsMap}

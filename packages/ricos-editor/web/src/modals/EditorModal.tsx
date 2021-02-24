@@ -61,6 +61,7 @@ export default class EditorModal extends Component<Props> {
         parentSelector={this.parentSelector}
         onRequestClose={onRequestClose}
         shouldFocusAfterRender={false}
+        shouldReturnFocusAfterClose={false}
       >
         <RichContentEditorModal modalsMap={ModalsMap} locale={locale} {...modalProps} />
       </ReactModal>
