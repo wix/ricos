@@ -289,14 +289,12 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                                                        | Description                         |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------- |
-| `focus(): void`                                                                                 | Focuses the editor                  |
-| `blur(): void`                                                                                  | Blurs the editor                    |
-| `getContent(): RicosContent`                                                                    | Retrieves current content           |
-| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>`     | Retrieves current content promise  |
-| `getContentTraits(): { isEmpty: boolean; isContentChanged: boolean; isLastChangeEdit: boolean}` | Retrieves current content traits   |
-| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`            | button props for external toolbar   |
+| Function                                                                                    | Description                       |
+| ------------------------------------------------------------------------------------------- | --------------------------------- |
+| `focus(): void`                                                                             | Focuses the editor                |
+| `blur(): void`                                                                              | Blurs the editor                  |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise    |
+| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`        | button props for external toolbar |
 
 #### Usage example:
 
