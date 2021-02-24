@@ -60,7 +60,7 @@ const addLastRowButton = (addRow, table, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRow_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
+    tooltip: t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -71,7 +71,7 @@ const addLastColButton = (addCol, table, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertCol_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
+    tooltip: t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -82,7 +82,7 @@ const addRowAboveButton = (addRow, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertAbove_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
+    tooltip: t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -93,7 +93,7 @@ const addRowBelowButton = (addRow, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertBelow_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
+    tooltip: t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -113,7 +113,7 @@ const addColRightButton = (addCol, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRight_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
+    tooltip: t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -124,7 +124,7 @@ const addColLeftButton = (addCol, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertLeft_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
+    tooltip: t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
