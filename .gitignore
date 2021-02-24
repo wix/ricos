@@ -1,6 +1,7 @@
 .DS_Store
 dist
-generated
+**/generated/**/*.ts
+!generated/proto/*
 node_modules
 *npm-debug.log
 lerna-debug.log
