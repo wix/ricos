@@ -20,15 +20,20 @@
 - `fullScreen`
   - [#2206](https://github.com/wix-incubator/rich-content/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
 
+</details>
+<hr/>
+
+## 8.22.9 (Feb 24, 2021)
 ### :bug: Bug Fix
 - `common`
   - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
 ### :house: Internal
 - `storybook`
   - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
+### :nail_care: Polish
+- `image`
+  - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
 
-</details>
-<hr/>
 
 ## 8.22.8 (Feb 23, 2021)
 ### :bug: Bug Fix
