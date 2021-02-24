@@ -58,7 +58,6 @@ export class EditorEventsProvider extends React.Component {
   publish() {
     return this.dispatch(EditorEvents.PUBLISH, undefined).then(() => {
       return this.dispatch(EditorEvents.RICOS_PUBLISH, undefined).then(async publishResponse => {
-        debugger;
         const editorResponse = publishResponse.filter(
           ({ type } = {}) => type === 'EDITOR_PUBLISH'
         )[0];
