@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { debounce } from 'lodash';
+import { debounce, isEqual } from 'lodash';
 import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
@@ -65,9 +65,12 @@ class ContentStateEditor extends PureComponent<Props> {
   componentWillReceiveProps(nextProps: Props) {
     const { contentState, shouldUseNewContent } = nextProps;
     if (!this.monaco?.editor.hasTextFocus()) {
-      this.setState({
-        value: stringifyJSON(shouldUseNewContent ? ensureRicosContent(contentState) : contentState),
-      });
+      const content = shouldUseNewContent ? ensureRicosContent(contentState) : contentState;
+      const value = stringifyJSON(content);
+      if (!isEqual(JSON.parse(value), content)) {
+        throw Error('content is not serializable');
+      }
+      this.setState({ value });
     }
   }
 
