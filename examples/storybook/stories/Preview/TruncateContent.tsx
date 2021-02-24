@@ -22,9 +22,10 @@ export default () => {
     setContent(fixtures['example' + id]);
   };
 
-  const { content: truncatedConted, isTruncated } = truncateContent(content, blocksCount, {
+  const { content: truncatedConted, isTruncated } = truncateContent(content, {
     wordsCount,
     maxPlugins,
+    blocksCount,
   });
   return (
     <Page title="Preview Examples">
