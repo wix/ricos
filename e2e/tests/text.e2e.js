@@ -247,6 +247,16 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it.only('should not allow applying link to atomic blocks in selection', function() {
+    cy.loadRicosEditorAndViewer('content-with-video').setEditorSelection(0, 5);
+    cy.getInlineButton(INLINE_TOOLBAR_BUTTONS.LINK).should('not.be.disabled');
+    cy.eyesCheckWindow(this.test.title);
+    cy.setEditorSelection(0, 40)
+      .getInlineButton(INLINE_TOOLBAR_BUTTONS.LINK)
+      .should('be.disabled');
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   context('indentation', () => {
     it('allow to apply indent on a single block with inline styling', function() {
       cy.loadRicosEditorAndViewer('plain', usePlugins(plugins.textPlugins))

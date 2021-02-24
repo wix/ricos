@@ -11,7 +11,6 @@ import {
   LinkIcon,
   BUTTON_TYPES,
   FORMATTING_BUTTONS,
-  // isAtomicBlockFocused,
   isAtomicBlockInSelection,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
