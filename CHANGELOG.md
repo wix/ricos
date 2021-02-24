@@ -20,7 +20,6 @@
   - `plugin-video`
     - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
-
 </details>
 <hr/>
 
@@ -301,7 +300,7 @@
   - [#1972](https://github.com/wix/ricos/commit/1972) fix table responsive and table resize
 - `table`
   - [#1980](https://github.com/wix/ricos/commit/1980) fix table cell content align on edit
-- `table`
+- `table`a
   - [#1949](https://github.com/wix/ricos/commit/1949) fix table theme wiring
 - `table`
   - [#1957](https://github.com/wix/ricos/commit/1957) fix table keyboard behavior, ui fixes, disable drag preview scroll
