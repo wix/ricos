@@ -17,8 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
-- `plugin-image`
-  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update image settings modal to have download and expand options using toggle buttons 
+- `plugin-gallery`
+  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons 
 
 ### :bug: Bug Fix
 - `common`
@@ -26,6 +26,10 @@
 ### :house: Internal
 - `storybook`
   - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
+### :nail_care: Polish
+- `image`
+  - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
+
 
 </details>
 <hr/>
