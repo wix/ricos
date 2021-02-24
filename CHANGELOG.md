@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `video`
+  - [#2212](https://github.com/wix/ricos/pull/2212) fix crash when data is not provided upon upload error
 
 </details>
 <hr/>
