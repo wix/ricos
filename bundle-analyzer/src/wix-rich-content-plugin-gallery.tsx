@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(galleryTypeMapper);
+export default () => createViewerBundle(pluginGallery());

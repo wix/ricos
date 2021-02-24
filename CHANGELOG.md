@@ -20,8 +20,42 @@
 - `link`
   - [#2179](https://github.com/wix/ricos/pull/2179) fix editor scrolling to the top when link modal opens from keyboard shortcuts
 
+
 </details>
 <hr/>
+
+## 8.22.9 (Feb 24, 2021)
+### :bug: Bug Fix
+- `common`
+  - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
+### :house: Internal
+- `storybook`
+  - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
+### :nail_care: Polish
+- `image`
+  - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
+
+
+## 8.22.8 (Feb 23, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+- `viewer`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+
+
+## 8.22.7 (Feb 22, 2021)
+### :bug: Bug Fix
+- `plugin-link`
+  - [#2182](https://github.com/wix/ricos/pull/2182) open link panel from external toolbar in mobile
+### :house: Internal
+- `common`
+  - [#2189](https://github.com/wix/ricos/pull/2189) experiments: support non-boolean values
+
+## 8.22.6 (Feb 22, 2021)
+### :nail_care: Polish
+- `image`
+  - [#2184](https://github.com/wix/ricos/pull/2184) thumbnail quality by `imageThumbnailQuality` experiment
 
 ## 8.22.5 (Feb 21, 2021)
 ### :bug: Bug Fix

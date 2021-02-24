@@ -1,6 +1,6 @@
 {
   "name": "ricos-schema",
-  "version": "8.22.5",
+  "version": "8.22.9",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -22,7 +22,7 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "lint": ":",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist generated",
     "prebuild": "yarn clean",
     "generate": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateSchema.ts",
     "buildESM": "tsc",

@@ -110,7 +110,11 @@ class ImageViewer extends React.Component {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
       let requiredWidth, requiredHeight;
-      imageUrl.preload = getImageSrc(src, helpers);
+
+      const useQualityPreoad = this.context.experiments?.useQualityPreoad?.enabled;
+      imageUrl.preload = getImageSrc(src, helpers, {
+        ...(useQualityPreoad && { imageType: 'quailtyPreload' }),
+      });
       if (seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
@@ -133,11 +137,21 @@ class ImageViewer extends React.Component {
         const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
         [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
       }
+
+      const { experiments } = this.context;
+
+      const requiredQuality =
+        skipImageThumbnail && isSSR()
+          ? experiments?.imageThumbnailQuality?.enabled
+            ? Number(experiments.imageThumbnailQuality.value)
+            : 20
+          : 90;
+
       imageUrl.highres = getImageSrc(src, helpers, {
         requiredWidth,
         requiredHeight,
-        requiredQuality: skipImageThumbnail && isSSR() ? 20 : 90,
-        imageType: skipImageThumbnail && isSSR() ? 'preload' : 'highRes',
+        requiredQuality,
+        imageType: 'highRes',
       });
       if (skipImageThumbnail) {
         imageUrl.highresWidth = requiredWidth;
