@@ -140,7 +140,6 @@ TableViewer.propTypes = {
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.any,
   setEditingActive: PropTypes.func,
-  updateCellContent: PropTypes.func,
   columns: PropTypes.any,
   selected: PropTypes.object,
   componentData: PropTypes.object,
