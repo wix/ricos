@@ -22,6 +22,20 @@ import InPluginInput from './InPluginInput';
 
 const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
+const replaceUrlFileExtenstion = (url, extensionTarget) => {
+  const originalExtensionFound = url.lastIndexOf(extensionTarget) > -1;
+  const extensionFound = ['.png', '.jpg'].find(ext => {
+    return url.lastIndexOf(ext) > -1;
+  });
+  if (!originalExtensionFound && extensionFound) {
+    const index = url.lastIndexOf(extensionFound);
+
+    return url.substring(0, index) + extensionTarget;
+  } else {
+    return url;
+  }
+};
+
 class ImageViewer extends React.Component {
   constructor(props) {
     super(props);
@@ -42,6 +56,11 @@ class ImageViewer extends React.Component {
       return false;
     }
   };
+
+  shouldUseSrcSet() {
+    const { experiments } = this.context;
+    return experiments?.useSrcSet?.enabled;
+  }
 
   componentDidMount() {
     if (!this.shouldSkipImageThumbnail()) {
@@ -203,11 +222,16 @@ class ImageViewer extends React.Component {
 
   getImage(imageClassNames, src, alt, props, opts = {}) {
     const { fadeIn = false, width, height } = opts;
+    let srcSet;
+    if (this.shouldUseSrcSet()) {
+      srcSet = replaceUrlFileExtenstion(src, '.webp');
+    }
     return (
       <img
         {...props}
         className={imageClassNames}
         src={src}
+        srcSet={srcSet}
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
