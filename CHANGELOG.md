@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `image`
+  - [#2207](https://github.com/wix/ricos/pull/2207) fix content re-render issue
 
 </details>
 
