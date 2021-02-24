@@ -11,9 +11,8 @@ const ImagePluginStory = () => {
   const [viewerKey, setViewerKey] = useState(1);
 
   const experiments = parseExperiments({
-    // ['specs.ricos.skipImageThumbnail']: 'true',
-    // ['specs.ricos.imageThumbnailQuality']: '20',
-    ['specs.ricos.useQualityPreoad']: 'true',
+    ['specs.ricos.skipImageThumbnail']: 'true',
+    ['specs.ricos.imageThumbnailQuality']: '20',
   });
   console.log({ experiments });
   const _rcProps = {
@@ -21,9 +20,9 @@ const ImagePluginStory = () => {
   };
 
   return (
-    <Page title="Image Plugin With Thumbnail experiment">
+    <Page title="Image Plugin With Skip Thumbnail experiment">
       <ActionButton
-        text={`${experimntEnabled ? 'Disable' : 'Enable'} "Quality Thumbnail" Experiment`}
+        text={`${experimntEnabled ? 'Disable' : 'Enable'} "Skip Thumbnail" Experiment`}
         onClick={() => {
           setExperimentEnabled(!experimntEnabled);
           setViewerKey(viewerKey + 1);
@@ -33,7 +32,7 @@ const ImagePluginStory = () => {
       <div style={{ width: 700 }}>
         <RicosViewer
           key={viewerKey}
-          // width={700}
+          width={700}
           content={imageContentState}
           plugins={[pluginImage()]}
           {...(experimntEnabled && { _rcProps })}

@@ -34,4 +34,4 @@ storiesOf('Test Cases', module)
   .add('Max Height', MaxHeight)
   .add('Buttons Test', ButtonsTest)
   .add('Duplicated Content', DuplicateContent)
-  .add('Image Plugin Preload Experiment', ImagePluginWithWidth);
+  .add('Image Plugin With Width', ImagePluginWithWidth);
