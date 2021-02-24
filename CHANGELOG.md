@@ -23,6 +23,11 @@
 </details>
 <hr/>
 
+## 8.23.0 (Feb 24, 2021)
+### :rocket: New Feature
+- `fullScreen`
+  - [#2206](https://github.com/wix-incubator/rich-content/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
+
 ## 8.22.9 (Feb 24, 2021)
 ### :bug: Bug Fix
 - `common`
