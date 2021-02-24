@@ -1,6 +1,6 @@
-.testApp:not(.mobile) > div {
+/* .testApp:not(.mobile) > div {
   width: 50%;
-}
+} */
 
 .testApp {
   display: flex;

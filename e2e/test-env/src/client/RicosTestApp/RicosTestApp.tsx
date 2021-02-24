@@ -177,12 +177,12 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         className={`testApp ${isMobile ? 'mobile' : ''}`}
         style={{ ...setBackground(palette, disableContainer), ...addStyle }}
       >
-        <div>
+        {/* <div>
           <h3 style={setForeground(palette)}>Editor</h3>
           <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
             {this.renderEditor()}
           </div>
-        </div>
+        </div> */}
         <div>
           <h3 style={setForeground(palette)}>Viewer</h3>
           <div
