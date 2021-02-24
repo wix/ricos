@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `link`
+  - [#2214](https://github.com/wix/ricos/pull/2214) link button is disabled when there is an atomic block in the selection
+
 </details>
 <hr/>
 
