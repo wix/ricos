@@ -34,6 +34,7 @@ export default class FullscreenProvider extends Component<Props, State> {
       index: 0,
     };
   }
+  _FullscreenModal;
 
   getImagesCount(): number {
     if (this.props.initialState) {
@@ -50,9 +51,8 @@ export default class FullscreenProvider extends Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { FullscreenModal } = this.state;
     if (nextProps.initialState !== this.props.initialState) {
-      if (!FullscreenModal && this.getImagesCount() > 0) {
+      if (!this._FullscreenModal && this.getImagesCount() > 0) {
         this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
       }
     }
@@ -64,7 +64,7 @@ export default class FullscreenProvider extends Component<Props, State> {
       const FullscreenModal = React.lazy(() =>
         import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
       );
-      this.setState({ FullscreenModal });
+      this._FullscreenModal = FullscreenModal;
     }
   }
 
@@ -96,14 +96,22 @@ export default class FullscreenProvider extends Component<Props, State> {
     return config;
   };
 
+  onChildHover = () => {
+    const { FullscreenModal } = this.state;
+    if (!FullscreenModal && this._FullscreenModal) {
+      this.setState({
+        FullscreenModal: this._FullscreenModal,
+      });
+    }
+  };
+
   render() {
-    const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
+    const { isExpanded, index, expandModeData, FullscreenModal } = this.state;
     const { children, initialState, isModalSuspended, isMobile, fullscreenProps } = this.props;
     const config = this.addExpand(children.props.config);
-
     return (
       <Fragment>
-        {Children.only(React.cloneElement(children, { config }))}
+        {Children.only(React.cloneElement(children, { config, onHover: this.onChildHover }))}
         {FullscreenModal && (
           <Suspense fallback={<div />}>
             <FullscreenModal
