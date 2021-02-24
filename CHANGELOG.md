@@ -20,6 +20,12 @@
 - `plugin-commons`
   - [#2216](https://github.com/wix/ricos/pull/2216) display error on block when unsupported error key is given when file upload fails
 
+### :nail_care: Polish
+- `image`
+  - [#2213](https://github.com/wix/ricos/pull/2213) increase preload quality
+- `ricos-viewer`
+  - [#2213](https://github.com/wix/ricos/pull/2213) fix accesive remount on english translatioins
+
 </details>
 <hr/>
 
