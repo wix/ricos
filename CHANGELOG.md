@@ -19,7 +19,8 @@
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#2216](https://github.com/wix/ricos/pull/2216) display error on block when unsupported error key is given when file upload fails
-
+- `ricos-content`
+  -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
 </details>
 <hr/>
 
