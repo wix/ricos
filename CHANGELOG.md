@@ -16,12 +16,19 @@
     Click to see more.
   </summary>
 
+
+### :bug: Bug Fix
+- `common`
+  - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
+### :house: Internal
+- `storybook`
+  - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
 ### :nail_care: Polish
 - `image`
-  - [#2207](https://github.com/wix/ricos/pull/2207) fix content re-render issue
+  - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
+
 
 </details>
-
 <hr/>
 
 ## 8.22.8 (Feb 23, 2021)
