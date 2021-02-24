@@ -15,6 +15,12 @@ export const EditorEventsContext = React.createContext({
   publish() {},
 });
 
+export interface EditorEventsProps {
+  editorEvents: EditorContextProps;
+}
+
+type EditorContextProps = Omit<EditorEventsProvider, keyof React.Component>;
+
 export const WithEditorEventsProps = {
   editorEvents: PropTypes.shape({
     subscribe: PropTypes.func,
@@ -50,12 +56,13 @@ export class EditorEventsProvider extends React.Component {
   }
 
   publish() {
-    return this.dispatch(EditorEvents.PUBLISH).then(() => {
-      return this.dispatch(EditorEvents.RICOS_PUBLISH).then(publishResponse => {
+    return this.dispatch(EditorEvents.PUBLISH, undefined).then(() => {
+      return this.dispatch(EditorEvents.RICOS_PUBLISH, undefined).then(async publishResponse => {
+        debugger;
         const editorResponse = publishResponse.filter(
           ({ type } = {}) => type === 'EDITOR_PUBLISH'
         )[0];
-        return editorResponse?.data;
+        return (editorResponse as Record<string, unknown>)?.data;
       });
     });
   }

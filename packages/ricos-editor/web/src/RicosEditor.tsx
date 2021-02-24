@@ -71,6 +71,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     // TODO: remove this param after getContent(postId) is deprecated
     await this.editor.publish((undefined as unknown) as string);
     console.debug('editor publish callback'); // eslint-disable-line
+    debugger;
     return {
       type: 'EDITOR_PUBLISH',
       data: await this.getContent(),

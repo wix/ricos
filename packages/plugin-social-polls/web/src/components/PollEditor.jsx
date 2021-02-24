@@ -4,7 +4,7 @@ import {
   WithEditorEventsProps,
   withEditorEvents,
   isPluginFocused,
-} from 'wix-rich-content-editor-common/libs/EditorEventsContext';
+} from 'wix-rich-content-editor-common/dist/lib/EditorEventsContext';
 
 import { Poll } from './Poll';
 import { PollContextProvider } from './poll-context';
