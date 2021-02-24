@@ -1,17 +1,23 @@
-import { RicosContent, RicosContentBlock } from '..';
+import { RicosContent, RicosContentBlock, RicosEntityMap } from '..';
 
 export const truncateContent = (
-  contentState: RicosContent,
-  index: number,
-  opts: { wordsCount?: number; maxPlugins?: number } = {}
+  content: RicosContent, // The content to truncate
+  limits: {
+    blocksCount?: number; // Limit on number of blocks
+    wordsCount?: number; // Limit on number of words
+    maxPlugins?: number; // Limit on number of plugin blocks
+  } = {}
 ): { content: RicosContent; isTruncated: boolean } => {
-  const { blocks, entityMap } = contentState;
-  const { wordsCount = Infinity, maxPlugins = Infinity } = opts;
-  if (index < 0 || (index > blocks.length && wordsCount === Infinity && maxPlugins === Infinity)) {
-    return { content: contentState, isTruncated: false };
+  const { blocks, entityMap } = content;
+  const { wordsCount = Infinity, maxPlugins = Infinity, blocksCount = Infinity } = limits;
+  if (
+    blocksCount < 0 ||
+    (blocksCount > blocks.length && wordsCount === Infinity && maxPlugins === Infinity)
+  ) {
+    return { content, isTruncated: false };
   }
 
-  const newEntityMap = {};
+  const newEntityMap: RicosEntityMap = {};
 
   const BreakException = {};
 
@@ -21,8 +27,8 @@ export const truncateContent = (
   let isTruncated = false;
   try {
     blocks.forEach((block, i) => {
-      if (i === index) throw BreakException;
-      const blockWords = block.text.split(' ').filter(x => x !== ' ');
+      if (i === blocksCount) throw BreakException;
+      const blockWords = block.text.split(' ').filter(x => x !== '');
 
       if (block.type === 'atomic') {
         pluginsCount++;
@@ -52,15 +58,6 @@ export const truncateContent = (
     isTruncated = true;
   }
 
-  const content = { ...contentState, blocks: newBlocks, entityMap: newEntityMap };
-  return { content, isTruncated };
-};
-
-export const truncateContentState = (
-  contentState: RicosContent,
-  index: number,
-  opts: { wordsCount?: number; maxPlugins?: number } = {}
-) => {
-  const { content } = truncateContent(contentState, index, opts);
-  return content;
+  const truncatedContent = { ...content, blocks: newBlocks, entityMap: newEntityMap };
+  return { content: truncatedContent, isTruncated };
 };

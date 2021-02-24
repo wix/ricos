@@ -6,6 +6,6 @@ export const truncateContentState = (
   index: number,
   opts: { wordsCount?: number; maxPlugins?: number } = {}
 ) => {
-  const { content } = truncateContent(contentState, index, opts);
+  const { content } = truncateContent(contentState, { ...opts, blocksCount: index });
   return content;
 };
