@@ -21,6 +21,10 @@
     - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
 
+</details>
+<hr/>
+
+## 8.22.9 (Feb 24, 2021)
 ### :bug: Bug Fix
 - `common`
   - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
@@ -31,9 +35,6 @@
 - `image`
   - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
 
-
-</details>
-<hr/>
 
 ## 8.22.8 (Feb 23, 2021)
 ### :bug: Bug Fix
