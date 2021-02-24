@@ -20,6 +20,10 @@
   - `plugin-video`
     - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
+### :rocket: New Feature
+- `fullScreen`
+  - [#2206](https://github.com/wix-incubator/rich-content/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
+
 </details>
 <hr/>
 
