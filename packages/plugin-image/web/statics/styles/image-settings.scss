@@ -39,16 +39,6 @@ $MOBILE_HEADER_HEIGHT: 50px;
   position: relative;
   padding: 20px 0px 0 0px;
   font-size: 14px;
-  label{
-    line-height: 20px;
-  }
-  label div span {
-    margin-bottom: 8px;
-    margin-right: 4px;
-  }
-  input {
-    height: 40px;
-  }
 }
 
 .imageSettingsLabel {
@@ -64,22 +54,6 @@ $MOBILE_HEADER_HEIGHT: 50px;
   @include phone {
     padding: 0 20px;
   }
-}
-
-.imageSettings_toggleContainer{
-  position: relative;
-  p{
-    font-size:16px;
-  }
-  @include phone {
-    p{
-      font-size:14px;
-    }
-  }
-}
-
-.imageSettings_togglesContainer{
-  margin-bottom: 4px;
 }
 
 .imageSettings_mobile {
