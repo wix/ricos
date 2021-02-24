@@ -4041,6 +4041,7 @@ exports[`plugins > social embed > render upload modals #0`] =
           "width": 350
         },
         "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "YouTube"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -4901,6 +4902,7 @@ exports[`plugins > social embed > render twitter upload modals #0`] =
           "width": 350
         },
         "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "Twitter"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -4959,6 +4961,7 @@ exports[`plugins > social embed > render instagram upload modals #0`] =
           "width": 350
         },
         "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "Instagram"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -5017,6 +5020,7 @@ exports[`plugins > social embed > render youtube upload modals #0`] =
           "width": 350
         },
         "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "YouTube"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
