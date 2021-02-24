@@ -20,6 +20,10 @@
 - `plugin-image`
   - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons 
 
+</details>
+<hr/>
+
+## 8.22.9 (Feb 24, 2021)
 ### :bug: Bug Fix
 - `common`
   - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
@@ -30,9 +34,6 @@
 - `image`
   - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
 
-
-</details>
-<hr/>
 
 ## 8.22.8 (Feb 23, 2021)
 ### :bug: Bug Fix
