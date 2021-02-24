@@ -11,7 +11,8 @@ import {
   LinkIcon,
   BUTTON_TYPES,
   FORMATTING_BUTTONS,
-  isAtomicBlockFocused,
+  // isAtomicBlockFocused,
+  isAtomicBlockInSelection,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
@@ -112,6 +113,7 @@ const createToolbar: CreatePluginToolbar = (config: {
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}
           innerModal={config.innerModal}
+          disabled={isAtomicBlockInSelection(config.getEditorState())}
           {...props}
         />
       ),
@@ -126,7 +128,7 @@ const createToolbar: CreatePluginToolbar = (config: {
             if (hasLinksInSelection(editorState)) {
               config.closeInlinePluginToolbar();
               return removeLinksInSelection(editorState);
-            } else {
+            } else if (!isAtomicBlockInSelection(config.getEditorState())) {
               openLinkModal(config);
             }
           },
@@ -138,7 +140,7 @@ const createToolbar: CreatePluginToolbar = (config: {
           openLinkModal(config);
         },
         isActive: () => hasLinksInSelection(config.getEditorState()),
-        isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
+        isDisabled: () => isAtomicBlockInSelection(config.getEditorState()),
         getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
         tooltip: config.t('TextLinkButton_Tooltip'),
         getLabel: () => '', // new key needed?
