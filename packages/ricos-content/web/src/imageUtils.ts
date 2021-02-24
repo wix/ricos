@@ -9,7 +9,7 @@ const DEFAULT = {
 };
 
 const PRELOAD = {
-  SIZE: 700,
+  WIDTH: 700,
   QUALITY: 10,
 };
 const resize = (w: number, h: number, rw: number, rh: number) => {
@@ -20,6 +20,7 @@ const resize = (w: number, h: number, rw: number, rh: number) => {
 };
 
 type Dimension = { w: number; h: number };
+const ceilDimension = (dim: Dimension) => ({ w: Math.ceil(dim.w), h: Math.ceil(dim.h) });
 
 const createUrl = (
   src: ComponentData['src'],
@@ -54,25 +55,16 @@ const createPreloadUrl = (
 
 const createQuailtyPreloadUrl = (
   { file_name: fileName, width: w, height: h }: ComponentData['src'] = {},
-  rw = PRELOAD.SIZE,
+  rw = PRELOAD.WIDTH,
   rq = PRELOAD.QUALITY
 ) => {
   if (fileName) {
-    const ceilDim = (dim: Dimension) => ({ w: Math.ceil(dim.w), h: Math.ceil(dim.h) });
+    const minW = Math.min(rw, w);
     const ratio = h / w;
-    const tDim: Dimension = ceilDim({ w: rw, h: rw * ratio });
+    const tDim: Dimension = ceilDimension({ w: minW, h: minW * ratio });
     return `${WIX_STATIC_URL}/media/${fileName}/v1/fit/w_${tDim.w},h_${
       tDim.h
     },al_c,q_${rq}/file${getImageFormat(fileName)}`;
-
-    // let src = imageClientAPI.getScaleToFitImageURL(fileName, w, h, W, H, { quality: rq });
-
-    // const extensionIndex = src.lastIndexOf('.webp');
-    // if (extensionIndex > -1) {
-    //   src = src.substring(0, extensionIndex) + format;
-    // }
-
-    // return src;
   }
   return '';
 };
