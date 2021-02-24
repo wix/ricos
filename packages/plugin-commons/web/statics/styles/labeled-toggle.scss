@@ -81,7 +81,7 @@
 }
 
 .labeled_toggle_label {
-  font-size: 16px;
+  font-size: 16px !important;
   @include phone{
     font-size: 14px;
   }
