@@ -34,11 +34,11 @@
   text-align: left;
   line-height: 1.5;
   cursor: pointer;
-  &:hover,
-  &:focus {
-    outline: 0;
-  }
-  &:disabled {
+  // &:hover,
+  // &:focus {
+  //   outline: 0;
+  // }
+  &:disabled, &.disabled {
     cursor: default;
     opacity: 0.4;
   }

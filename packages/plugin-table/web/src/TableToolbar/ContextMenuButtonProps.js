@@ -1,5 +1,6 @@
 import { ContextMenuIcon } from '../icons';
-import { getRange } from '../domain/tableDataUtil';
+import { getRange, getColsRange, getRowsRange } from '../domain/tableDataUtil';
+import { isCellsNumberInvalid } from '../tableUtil';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
@@ -52,39 +53,47 @@ const deleteRowButton = (deleteRow, selectedRows, t) => {
   };
 };
 
-const addLastRowButton = (addRow, table, t) => {
+const addLastRowButton = (addRow, table, t, disable) => {
   return {
     onClick: () => addLastRow(addRow, table),
     dataHook: 'insert-last-row',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRow_Button'),
     type: 'text',
+    isDisabled: () => disable,
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
-const addLastColButton = (addCol, table, t) => {
+const addLastColButton = (addCol, table, t, disable) => {
   return {
     onClick: () => addLastCol(addCol, table),
     dataHook: 'insert-last-col',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertCol_Button'),
     type: 'text',
+    isDisabled: () => disable,
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
-const addRowAboveButton = (addRow, range, t) => {
+const addRowAboveButton = (addRow, range, t, disable) => {
   return {
     onClick: () => addRow(getRowIndex(range)),
     dataHook: 'insert-above',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertAbove_Button'),
     type: 'text',
+    isDisabled: () => disable,
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
-const addRowBelowButton = (addRow, range, t) => {
+const addRowBelowButton = (addRow, range, t, disable) => {
   return {
     onClick: () => addRow(getRowIndex(range) + 1),
     dataHook: 'insert-below',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertBelow_Button'),
     type: 'text',
+    isDisabled: () => disable,
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -97,21 +106,25 @@ const deleteColButton = (deleteColumn, selectedCols, t) => {
   };
 };
 
-const addColRightButton = (addCol, range, t) => {
+const addColRightButton = (addCol, range, t, disable) => {
   return {
     onClick: () => addCol(getColIndex(range) + 1),
     dataHook: 'insert-right',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRight_Button'),
     type: 'text',
+    isDisabled: () => disable,
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
-const addColLeftButton = (addCol, range, t) => {
+const addColLeftButton = (addCol, range, t, disable) => {
   return {
     onClick: () => addCol(getColIndex(range)),
     dataHook: 'insert-left',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertLeft_Button'),
     type: 'text',
+    isDisabled: () => disable,
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -187,7 +200,13 @@ export const getContextMenuButtonsProps = (
   distributeColumns
 ) => {
   const range = selected && getRange(selected);
+  const colsRange = selected && getColsRange(selected);
+  const rowsRange = selected && getRowsRange(selected);
   const shouldShowMerge = false;
+  const rowNum = table.getRowNum();
+  const colNum = table.getColNum();
+  const disableNewCol = isCellsNumberInvalid(rowNum, colNum + 1);
+  const disableNewRow = isCellsNumberInvalid(rowNum + 1, colNum);
   // const shouldShowMerge =
   //   range &&
   //   table.isAllMergeRangeSelected(range) &&
@@ -199,8 +218,8 @@ export const getContextMenuButtonsProps = (
       clearButton(table, selected, t),
       deleteTableButton(deleteBlock, t),
       divider(),
-      addLastRowButton(addRow, table, t),
-      addLastColButton(addCol, table, t),
+      addLastRowButton(addRow, table, t, disableNewRow),
+      addLastColButton(addCol, table, t, disableNewCol),
       divider(),
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
@@ -213,26 +232,26 @@ export const getContextMenuButtonsProps = (
       clearButton(table, selected, t),
       deleteRowButton(deleteRow, selectedRows, t),
       divider(),
-      addRowAboveButton(addRow, range, t),
-      addRowBelowButton(addRow, range, t),
+      addRowAboveButton(addRow, range, t, disableNewRow),
+      addRowBelowButton(addRow, range, t, disableNewRow),
       divider(),
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(distributeRows, selected, t),
+      distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else if (selectedCols) {
     buttons = [
       clearButton(table, selected, t),
       deleteColButton(deleteColumn, selectedCols, t),
       divider(),
-      addColRightButton(addCol, range, t),
-      addColLeftButton(addCol, range, t),
+      addColRightButton(addCol, range, t, disableNewCol),
+      addColLeftButton(addCol, range, t, disableNewCol),
       divider(),
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeColumnsButton(distributeColumns, selected, t),
+      distributeRowsButton(distributeRows, selected, t),
     ];
   } else if (multipleCellsSelected) {
     buttons = [
@@ -241,8 +260,8 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(distributeRows, selected, t),
-      distributeColumnsButton(distributeColumns, selected, t),
+      rowsRange?.length > 1 && distributeRowsButton(distributeRows, selected, t),
+      colsRange?.length > 1 && distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else {
     buttons = [

@@ -28,11 +28,10 @@ export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = Object.freeze({
     top: 0,
     left: 0,
     overflow: 'hidden',
-    paddingRight: '20px',
-    paddingLeft: '20px',
     alignItems: 'center',
     display: 'flex',
-    width: 'auto',
+    width: '100vw',
+    justifyContent: 'center',
   },
 });
 

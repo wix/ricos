@@ -485,6 +485,7 @@
   "Accordion_ShownText_Placeholder": "Adj címet ennek az elemnek!",
   "Video_plugin_search_tags": "videó film klip zene audio mtv youtube kamera dal vizuális digitális film feltölt animált kazettás felvétel virális",
   "ReplaceGiphyButton_Tooltip": "GIF cseréje",
+  "TablePlugin_Toolbar_BorderColor_Tooltip": "Border color",
   "GalleryPlugin_Layout_Columns": "Oszlopok",
   "Common_Units_PX": "px",
   "UploadAudio_Error_aac_Unsupported_Format": "This audio file is not in a supported AAC format and can’t be uploaded. Try a different file,.",

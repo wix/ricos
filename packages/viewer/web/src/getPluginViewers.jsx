@@ -1,15 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction, cloneDeep } from 'lodash';
+import { isFunction } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
-  IMAGE_TYPE,
-  GALLERY_TYPE,
+  TABLE_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -55,28 +54,17 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
-  removeExpand = config => {
-    const newConfig = cloneDeep(config);
-    if (newConfig?.[IMAGE_TYPE]?.onExpand) {
-      newConfig[IMAGE_TYPE].onExpand = undefined;
-    }
-    if (newConfig?.[GALLERY_TYPE]?.onExpand) {
-      newConfig[GALLERY_TYPE].onExpand = undefined;
-    }
-    return newConfig;
-  };
-
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  innerRCV = ({ contentState, textAlignment, direction, renderedIn }) => {
     const { innerRCEViewerProps } = this.props;
-    const config = this.removeExpand(innerRCEViewerProps.config);
+    const renderedInTable = renderedIn === TABLE_TYPE;
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
         direction={direction}
         {...innerRCEViewerProps}
-        config={config}
         isInnerRcv
+        renderedInTable={renderedInTable}
       />
     );
   };
@@ -94,6 +82,7 @@ class PluginViewer extends PureComponent {
       context,
       blockIndex,
       SpoilerViewerWrapper,
+      blockKey,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -107,6 +96,7 @@ class PluginViewer extends PureComponent {
       entityIndex,
       ...context,
       innerRCV: this.innerRCV,
+      blockKey,
     };
 
     if (Component) {
@@ -228,6 +218,7 @@ PluginViewer.propTypes = {
   }).isRequired,
   innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
+  blockKey: PropTypes.string,
 };
 
 PluginViewer.defaultProps = {
@@ -264,6 +255,7 @@ const getPluginViewers = (
           innerRCEViewerProps={innerRCEViewerProps}
           SpoilerViewerWrapper={SpoilerViewerWrapper}
           withHorizontalScroll
+          blockKey={block.key}
         >
           {isInline ? children : null}
         </PluginViewer>

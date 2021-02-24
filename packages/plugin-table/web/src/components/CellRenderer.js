@@ -73,13 +73,17 @@ export default class Cell extends Component {
         e.stopPropagation();
         e.preventDefault();
         this.editorRef.selectAllContent(true);
-      } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+      } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey)) {
         e.preventDefault();
       }
-      const shouldCreateNewLine = e.key === 'Enter' && (e.altKey || e.shiftKey);
+      const shouldCreateNewLine = e.key === 'Enter' && (e.altKey || e.shiftKey || e.metaKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
         onKeyDown(e);
       }
+    } else if (!editing && tableKeysToIgnoreOnEdit.includes(e.key)) {
+      onKeyDown(e);
+      e.stopPropagation();
+      e.preventDefault();
     }
   };
 
@@ -143,17 +147,26 @@ export default class Cell extends Component {
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
     const cellBorders = this.getCellBorders(border, shouldShowSelectedStyle);
-    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
-    toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
-    const Selection = this.editorRef && isEditing && table.getCellContent(row, col).getSelection();
+    const editorState = this.editorRef && isEditing && table.getCellContent(row, col);
+    const Selection = editorState && editorState.getSelection();
+    const cellContentContainText = editorState
+      ? editorState
+          .getCurrentContent()
+          .getBlockMap()
+          .filter(x => x.getType() === 'unstyled')
+          .some(x => x.getText() !== '' && x.getText() !== '​') //zero-width space
+      : false;
     const showFormattingToolbar =
       this.editorRef &&
       isEditing &&
       ((!Selection.isCollapsed() && Selection.getHasFocus()) ||
-        (document && document.querySelector('[data-id="rich-content-editor-modal"]')));
+        (document && document.querySelector('[data-id="rich-content-editor-modal"]'))) &&
+      cellContentContainText;
     if (showFormattingToolbar) {
+      const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
+      toolbarButtons && this.fixReactModalButtons(toolbarButtons);
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(toolbarButtons);
     } else if (isEditing) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
