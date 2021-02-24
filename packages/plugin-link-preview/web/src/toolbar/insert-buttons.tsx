@@ -1,5 +1,10 @@
 import { DEFAULTS } from '../defaults';
-import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import {
+  getModalStyles,
+  TOOLBARS,
+  BUTTON_TYPES,
+  decorateComponentWithProps,
+} from 'wix-rich-content-editor-common';
 import {
   TwitterIcon,
   InstagramIcon,
@@ -48,9 +53,12 @@ const createInsertButtons: CreateInsertButtons = ({
       name: `${socialType}_InsertButton`,
       tooltip: t(`EmbedURL_Social_${socialType}_Title`),
       getIcon: () => socialIconsMap[socialType],
-      componentData: { ...DEFAULTS, socialType, fetchData: settings.fetchData },
+      componentData: DEFAULTS,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: EmbedURLInputModal,
+      modalElement: decorateComponentWithProps(EmbedURLInputModal, {
+        fetchData: settings.fetchData,
+        socialType,
+      }),
       modalStyles: getModalStyles({ customStyles: { content }, fullScreen: false, isMobile }),
       section: 'BlockToolbar_Section_Embed_Anywhere',
     };
