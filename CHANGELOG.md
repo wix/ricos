@@ -30,6 +30,10 @@
 ### :house: Internal
 - `storybook`
   - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
+### :nail_care: Polish
+- `image`
+  - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
+
 
 ## 8.22.8 (Feb 23, 2021)
 ### :bug: Bug Fix
