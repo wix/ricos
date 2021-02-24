@@ -9,8 +9,6 @@ import Fullscreen from 'wix-rich-content-fullscreen';
 import { GALLERY_TYPE } from 'ricos/gallery/viewer';
 import { IMAGE_TYPE } from 'ricos/image/viewer';
 
-import 'wix-rich-content-fullscreen/dist/styles.min.css';
-
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 

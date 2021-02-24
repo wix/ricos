@@ -5,7 +5,6 @@ import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'ricos/image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'ricos/gallery/viewer';
