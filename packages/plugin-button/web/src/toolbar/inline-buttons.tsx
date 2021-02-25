@@ -25,7 +25,7 @@ const createInlineButtons: CreateInlineButtons = ({
   isMobile: boolean;
 }) => {
   const customStyles = isMobile ? MobileFullScreenCustomStyle : DesktopCustomModalStyles;
-  const icon = settings?.toolbar?.icons?.['advanced_settings'] || PluginSettingsIcon;
+  const icon = settings?.toolbar?.icons?.advanced_settings || PluginSettingsIcon;
   return [
     { keyName: 'alignLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },

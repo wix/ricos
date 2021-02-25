@@ -16,12 +16,7 @@ export const getButtonProps = ({ icon, getEditorState, setEditorState, t }) => (
   isActive: () => {
     const editorState = getEditorState();
     const key = editorState.getSelection().getStartKey();
-    return (
-      editorState
-        .getCurrentContent()
-        .getBlockForKey(key)
-        .getType() === CODE_BLOCK_TYPE
-    );
+    return editorState.getCurrentContent().getBlockForKey(key).getType() === CODE_BLOCK_TYPE;
   },
   type: BUTTON_TYPES.BUTTON,
 });

@@ -40,10 +40,7 @@ const createInsertButtons: CreateInsertButtons = ({
         e.preventDefault();
         setEditorState(undo(getEditorState()));
       },
-      isDisabled: () =>
-        getEditorState()
-          .getUndoStack()
-          .isEmpty(),
+      isDisabled: () => getEditorState().getUndoStack().isEmpty(),
     },
     {
       type: BUTTON_TYPES.BUTTON,
@@ -56,10 +53,7 @@ const createInsertButtons: CreateInsertButtons = ({
         e.preventDefault();
         setEditorState(redo(getEditorState()));
       },
-      isDisabled: () =>
-        getEditorState()
-          .getRedoStack()
-          .isEmpty(),
+      isDisabled: () => getEditorState().getRedoStack().isEmpty(),
     },
   ];
 };

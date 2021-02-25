@@ -40,12 +40,7 @@ const createLinkPreviewPlugin: CreatePluginFunction<LinkPreviewPluginEditorConfi
     const editorState = getEditorState();
     const currentBlock = getBlockAtStartOfSelection(editorState);
     const entityKey = currentBlock.getEntityAt(0);
-    const entityType =
-      entityKey &&
-      editorState
-        .getCurrentContent()
-        .getEntity(entityKey)
-        .getType();
+    const entityType = entityKey && editorState.getCurrentContent().getEntity(entityKey).getType();
     if (entityType === LINK_PREVIEW_TYPE) {
       if (event.key === 'Backspace') {
         return REMOVE_LINK_PREVIEW;

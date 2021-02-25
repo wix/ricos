@@ -32,10 +32,7 @@ const createToolbar: CreatePluginToolbar = ({
           type: BUTTON_TYPES.BUTTON,
           getLabel: () => '',
           isActive: () => false,
-          isDisabled: () =>
-            getEditorState()
-              .getUndoStack()
-              .isEmpty(),
+          isDisabled: () => getEditorState().getUndoStack().isEmpty(),
           tooltip: t('UndoButton_Tooltip'),
           getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
           onClick: e => {
@@ -50,10 +47,7 @@ const createToolbar: CreatePluginToolbar = ({
           getLabel: () => '',
           type: BUTTON_TYPES.BUTTON,
           isActive: () => false,
-          isDisabled: () =>
-            getEditorState()
-              .getRedoStack()
-              .isEmpty(),
+          isDisabled: () => getEditorState().getRedoStack().isEmpty(),
           tooltip: t('RedoButton_Tooltip'),
           getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
           onClick: e => {

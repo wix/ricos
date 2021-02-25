@@ -533,10 +533,7 @@ function getChunkForHTML(
   options,
   DOMBuilder
 ) {
-  html = html
-    .trim()
-    .replace(REGEX_CR, '')
-    .replace(REGEX_NBSP, SPACE);
+  html = html.trim().replace(REGEX_CR, '').replace(REGEX_NBSP, SPACE);
 
   const safeBody = DOMBuilder(html);
   if (!safeBody) {

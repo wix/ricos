@@ -26,10 +26,7 @@ const DEFAULT_BLOCK_CONFIG = {
   depth: 0,
 };
 
-const createBlockKey = () =>
-  Math.random()
-    .toString(36)
-    .substr(2, 5);
+const createBlockKey = () => Math.random().toString(36).substr(2, 5);
 
 const createBlock = (
   type: string,

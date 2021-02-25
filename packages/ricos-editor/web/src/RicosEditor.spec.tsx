@@ -36,11 +36,7 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
     </RicosEditor>
   );
 
-  const element = shallow(toRender)
-    .children()
-    .last()
-    .dive()
-    .children();
+  const element = shallow(toRender).children().last().dive().children();
 
   return element.at(element.length - 1); // due to add html by strategies
 };

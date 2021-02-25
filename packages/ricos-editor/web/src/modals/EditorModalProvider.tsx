@@ -63,8 +63,8 @@ export default class EditorModalProvider extends Component<Props, State> {
   loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
     const { locale, localeResource } = this.props.children.props;
     if (locale === 'en' || localeResource) {
-      const EditorModal = React.lazy(() =>
-        import(/* webpackChunkName: "RicosEditorModal"  */ './EditorModal')
+      const EditorModal = React.lazy(
+        () => import(/* webpackChunkName: "RicosEditorModal"  */ './EditorModal')
       );
       this.setState({ EditorModal });
     }

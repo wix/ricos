@@ -61,8 +61,8 @@ export default class FullscreenProvider extends Component<Props, State> {
   loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
     const { locale, localeResource } = this.props.children.props;
     if (locale === 'en' || localeResource) {
-      const FullscreenModal = React.lazy(() =>
-        import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
+      const FullscreenModal = React.lazy(
+        () => import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
       );
       this.setState({ FullscreenModal });
     }

@@ -88,9 +88,9 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
 
         const hasJustifyText = alignment === 'justify' && hasText(child);
         const directionBlockClassName = `public-DraftStyleDefault-text-${blockDirection}`;
-        const directionTextClassName = `public-DraftStyleDefault-${textDirection ||
-          blockProps.data[i]?.textDirection ||
-          'ltr'}`;
+        const directionTextClassName = `public-DraftStyleDefault-${
+          textDirection || blockProps.data[i]?.textDirection || 'ltr'
+        }`;
 
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = blockProps.data[i].index;

@@ -171,9 +171,7 @@ export const getButtonProps = ({ config, type }) => {
     onClose: () => {},
     onClick: ({ ref, render }) => openTextColorModal({ ref, render }),
     isDisabled: () =>
-      getEditorState()
-        .getSelection()
-        .isCollapsed() || isAtomicBlockFocused(getEditorState()),
+      getEditorState().getSelection().isCollapsed() || isAtomicBlockFocused(getEditorState()),
     arrow: false,
     isActive: () => {
       const predicate = pluginSettings.predicate(

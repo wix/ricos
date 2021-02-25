@@ -23,9 +23,7 @@ export default ({ style, Icon, tooltipTextKey }) =>
     isActive = () => {
       const { getEditorState } = this.props;
       if (getEditorState) {
-        return getEditorState()
-          .getCurrentInlineStyle()
-          .has(style);
+        return getEditorState().getCurrentInlineStyle().has(style);
       } else {
         return false;
       }

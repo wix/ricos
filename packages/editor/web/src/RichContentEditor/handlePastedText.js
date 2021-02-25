@@ -35,23 +35,13 @@ const replaceWithFragment = (contentState, selection, fragment) => {
   let contentWithFragment = Modifier.replaceWithFragment(contentState, selection, fragment);
 
   const startBlockKey = selection.getStartKey();
-  const isEmptyBlock =
-    contentState
-      .getBlockMap()
-      .get(startBlockKey)
-      .getText() === '';
+  const isEmptyBlock = contentState.getBlockMap().get(startBlockKey).getText() === '';
 
-  const startBlockType = contentState
-    .getBlockMap()
-    .get(startBlockKey)
-    .getType();
+  const startBlockType = contentState.getBlockMap().get(startBlockKey).getType();
 
   const fragmentSize = fragment.size;
   if (fragmentSize === 1 && isEmptyBlock && !isListType(startBlockType)) {
-    const pastedBlockType = fragment
-      .values()
-      .next()
-      .value.getType();
+    const pastedBlockType = fragment.values().next().value.getType();
 
     contentWithFragment = Modifier.setBlockType(
       contentWithFragment,

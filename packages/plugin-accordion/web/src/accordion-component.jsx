@@ -52,8 +52,9 @@ class AccordionComponent extends React.Component {
   };
 
   renderTitle = (idx, setRef) => {
+    const Input = this.renderInput;
     return (
-      <this.renderInput
+      <Input
         value={this.getDataManager().getTitle(idx)}
         setRef={setRef}
         onChange={val => this.getDataManager().setTitle(idx, val)}
@@ -66,8 +67,9 @@ class AccordionComponent extends React.Component {
   };
 
   renderContent = (idx, setRef) => {
+    const Input = this.renderInput;
     return (
-      <this.renderInput
+      <Input
         value={this.getDataManager().getContent(idx)}
         setRef={setRef}
         onChange={val => this.getDataManager().setContent(idx, val)}
