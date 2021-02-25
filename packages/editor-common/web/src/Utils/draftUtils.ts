@@ -319,10 +319,7 @@ export const setEntityData = (editorState: EditorState, entityKey: string, data)
 export const isAtomicBlockFocused = (editorState: EditorState) => {
   const selection = editorState.getSelection();
   const [anchorKey, focusKey] = [selection.getAnchorKey(), selection.getFocusKey()];
-  const block = editorState
-    .getCurrentContent()
-    .getBlockForKey(anchorKey)
-    .getType();
+  const block = editorState.getCurrentContent().getBlockForKey(anchorKey).getType();
   return anchorKey === focusKey && block === 'atomic';
 };
 
@@ -762,11 +759,7 @@ export function isCursorAtFirstLine(editorState: EditorState) {
   const selection = editorState.getSelection();
   return (
     selection.isCollapsed() &&
-    editorState
-      .getCurrentContent()
-      .getBlockMap()
-      .first()
-      .getKey() === selection.getFocusKey()
+    editorState.getCurrentContent().getBlockMap().first().getKey() === selection.getFocusKey()
   );
 }
 

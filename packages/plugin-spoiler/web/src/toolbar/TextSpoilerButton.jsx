@@ -25,9 +25,7 @@ export default class TextSpoilerButton extends PureComponent {
   isActive = () => {
     const { getEditorState } = this.props;
     if (getEditorState) {
-      return getEditorState()
-        .getCurrentInlineStyle()
-        .has(SPOILER_TYPE);
+      return getEditorState().getCurrentInlineStyle().has(SPOILER_TYPE);
     } else {
       return false;
     }

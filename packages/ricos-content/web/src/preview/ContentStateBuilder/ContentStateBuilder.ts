@@ -59,7 +59,7 @@ Object.keys({
   ...METHOD_BLOCK_MAP,
   ...METHOD_GROUPED_BLOCK_MAP,
 }).forEach(method => {
-  ContentStateBuilder.prototype[method] = function(
+  ContentStateBuilder.prototype[method] = function (
     textBlocksWithEntities: TextBlockWithEntities | TextBlockWithEntities[]
   ) {
     const textContentArray = toArray(textBlocksWithEntities) as TextBlockWithEntities[];
@@ -76,7 +76,7 @@ Object.keys({
 });
 
 Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => {
-  ContentStateBuilder.prototype[method] = function({ mediaInfo, config = {}, overrides = {} }) {
+  ContentStateBuilder.prototype[method] = function ({ mediaInfo, config = {}, overrides = {} }) {
     this.contentState = addPlugin({
       contentState: this.contentState,
       data: mediaInfo,
@@ -94,7 +94,7 @@ Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => 
 });
 
 Object.entries({ readMore, seeFullPost, imageCounter }).forEach(([key, method]) => {
-  ContentStateBuilder.prototype[key] = function(settings: Record<string, unknown> | undefined) {
+  ContentStateBuilder.prototype[key] = function (settings: Record<string, unknown> | undefined) {
     return method(this, settings);
   };
 });

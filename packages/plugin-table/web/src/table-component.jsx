@@ -95,11 +95,7 @@ class TableComponent extends React.Component {
   };
 
   isCellEmpty = (i, j) =>
-    this.table
-      .getCellContent(i, j)
-      .getCurrentContent()
-      .getBlocksAsArray()[0]
-      .getText() === '';
+    this.table.getCellContent(i, j).getCurrentContent().getBlocksAsArray()[0].getText() === '';
 
   handleFirstCellEmpty = toolbarPropsBeforeOrganize => {
     toolbarPropsBeforeOrganize.forEach((element, index) => {

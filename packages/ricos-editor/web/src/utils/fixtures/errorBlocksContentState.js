@@ -214,7 +214,7 @@ export default {
     },
   ],
   entityMap: {
-    '0': {
+    0: {
       type: 'wix-draft-plugin-image',
       mutability: 'IMMUTABLE',
       data: {
@@ -234,7 +234,7 @@ export default {
         },
       },
     },
-    '1': {
+    1: {
       type: 'wix-draft-plugin-image',
       mutability: 'IMMUTABLE',
       data: {
@@ -260,7 +260,7 @@ export default {
         },
       },
     },
-    '2': {
+    2: {
       type: 'wix-draft-plugin-gallery',
       mutability: 'IMMUTABLE',
       data: {
@@ -348,7 +348,7 @@ export default {
         },
       },
     },
-    '3': {
+    3: {
       type: 'wix-draft-plugin-video',
       mutability: 'IMMUTABLE',
       data: {
@@ -373,7 +373,7 @@ export default {
         isCustomVideo: true,
       },
     },
-    '4': {
+    4: {
       type: 'wix-draft-plugin-file-upload',
       mutability: 'IMMUTABLE',
       data: {
@@ -390,7 +390,7 @@ export default {
         },
       },
     },
-    '5': {
+    5: {
       type: 'wix-draft-plugin-video',
       mutability: 'IMMUTABLE',
       data: {
@@ -409,7 +409,7 @@ export default {
         isCustomVideo: true,
       },
     },
-    '6': {
+    6: {
       type: 'wix-draft-plugin-gallery',
       mutability: 'IMMUTABLE',
       data: {

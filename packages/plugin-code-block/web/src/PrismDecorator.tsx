@@ -28,7 +28,7 @@ export default class PrismDecorator implements CompositeDecorator {
   getDecorations(block, contentState) {
     const blockKey = block.getKey();
     const blockText = block.getText();
-    const decorations = Array(blockText.length).fill(null) as unknown as List<string>;
+    const decorations = (Array(blockText.length).fill(null) as unknown) as List<string>;
 
     this.highlighted[blockKey] = {};
 
