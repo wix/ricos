@@ -2,19 +2,11 @@
 import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
 import { testSeoFixtures, testFixtures } from './testFixtures';
 
-const eyesOpener = testName => {
+const eyesOpener = (testName, browser = DEFAULT_DESKTOP_BROWSERS) => {
   cy.eyesOpen({
     appName: 'Rendering',
     testName,
-    browser: DEFAULT_DESKTOP_BROWSERS,
-  });
-};
-
-const eyesOpenerFirefox = testName => {
-  cy.eyesOpen({
-    appName: 'Rendering',
-    testName,
-    browser: FIREFOX_BROWSER,
+    browser,
   });
 };
 
@@ -30,11 +22,15 @@ describe('editor rendering', () => {
 
     beforeEach(() => {
       cy.switchToDesktop();
-      cy.switchToSeoMode();
+      cy.switchOnSeoMode();
     });
 
     after(() => {
       cy.eyesClose();
+    });
+
+    afterEach(() => {
+      cy.switchOffSeoMode();
     });
 
     testSeoFixtures();
@@ -58,7 +54,7 @@ describe('editor rendering', () => {
 
   context('firefoxDesktop', () => {
     before(function() {
-      eyesOpenerFirefox(this.test.parent.title);
+      eyesOpener(this.test.parent.title, FIREFOX_BROWSER);
     });
 
     beforeEach(() => {
