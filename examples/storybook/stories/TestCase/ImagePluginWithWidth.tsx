@@ -11,8 +11,6 @@ const ImagePluginStory = () => {
   const [viewerKey, setViewerKey] = useState(1);
 
   const experiments = parseExperiments({
-    // ['specs.ricos.skipImageThumbnail']: 'true',
-    // ['specs.ricos.imageThumbnailQuality']: '20',
     ['specs.ricos.useQualityPreoad']: 'true',
   });
   console.log({ experiments });
