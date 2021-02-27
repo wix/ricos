@@ -25,7 +25,7 @@
 - `e2e`
   - [#2220](https://github.com/wix/ricos/pull/2220) tests fix - load theme on SSR, and remove seoMode for non-seo tests
 - `ricos-viewer`
-  - [#2220](https://github.com/wix/ricos/pull/2220) optimization(translations): skip redundant remount
+  - [#2222](https://github.com/wix/ricos/pull/2222) optimization(translations): skip redundant remount
 - `image`
   - [#2213](https://github.com/wix/ricos/pull/2213) increase preload quality
 
