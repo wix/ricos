@@ -64,7 +64,8 @@ class PollEditorComponent extends PureComponent {
       t,
       theme,
       isMobile,
-      editorEvents,
+      editorEvents1,
+      editorEvents2,
     } = this.props;
 
     return (
@@ -85,7 +86,16 @@ class PollEditorComponent extends PureComponent {
         }}
       >
         <PollContextProvider
-          editorEvents={editorEvents}
+          editorEvents={{
+            subscribe: (event, cb) => {
+              editorEvents1?.subscribe(event, cb);
+              editorEvents2?.subscribe(event, cb);
+            },
+            unsubscribe: (event, cb) => {
+              editorEvents1?.unsubscribe(event, cb);
+              editorEvents2?.unsubscribe(event, cb);
+            },
+          }}
           settings={settings}
           poll={componentData.poll}
           setPoll={this.setPoll}
