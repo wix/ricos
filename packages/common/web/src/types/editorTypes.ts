@@ -27,6 +27,7 @@ export interface Helpers extends BICallbacksForHelpers {
     url: string,
     updateEntity: (metadata: Record<string, unknown>) => void
   ) => void;
+  getImageUrl?: ({ file_name }: { file_name: string }) => string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: ((...args: any[]) => any) | undefined;
 }

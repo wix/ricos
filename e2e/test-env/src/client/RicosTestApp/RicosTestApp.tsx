@@ -25,6 +25,7 @@ import { PaletteColors, RicosContent, SEOSettings } from 'wix-rich-content-commo
 import { EditorState } from '@wix/draft-js';
 import { merge } from 'lodash';
 
+const VIEWER_ONLY = false;
 const onVideoSelected = (url: string, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
@@ -177,13 +178,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         className={`testApp ${isMobile ? 'mobile' : ''}`}
         style={{ ...setBackground(palette, disableContainer), ...addStyle }}
       >
-        <div>
-          <h3 style={setForeground(palette)}>Editor</h3>
-          <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
-            {this.renderEditor()}
+        {!VIEWER_ONLY && (
+          <div>
+            <h3 style={setForeground(palette)}>Editor</h3>
+            <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
+              {this.renderEditor()}
+            </div>
           </div>
-        </div>
-        <div>
+        )}
+        <div className={`${VIEWER_ONLY ? 'full-width' : ''}`}>
           <h3 style={setForeground(palette)}>Viewer</h3>
           <div
             className="rcWrapper rcv"

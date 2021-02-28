@@ -15,14 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+<<<<<<< HEAD
   
   ### :rocket: New Feature
   - `plugin-video`
-    - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
-  ### :bug: Bug Fix
-  - `plugin-video`
-    - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) code refactor and fixed failing tests
-
+    - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) added new settings panel for custom videos with download toggle
 
 </details>
 <hr/>

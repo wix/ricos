@@ -146,14 +146,6 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 Adding theme to Ricos is possible with providing a `RicosTheme` object.
 Further read in [Theming](./Theming) page.
 
-### `width`
-
-```jsx
-width?: number
-```
-
-Container width, when applicapble, will be used to improve performance (prevent client side measurments)
-
 ## Ricos Editor API
 
 ### `draftEditorSettings`
@@ -289,14 +281,14 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                                                        | Description                         |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------- |
-| `focus(): void`                                                                                 | Focuses the editor                  |
-| `blur(): void`                                                                                  | Blurs the editor                    |
-| `getContent(): RicosContent`                                                                    | Retrieves current content           |
-| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>`     | Retrieves current content promise  |
-| `getContentTraits(): { isEmpty: boolean; isContentChanged: boolean; isLastChangeEdit: boolean}` | Retrieves current content traits   |
-| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`            | button props for external toolbar   |
+| Function                                                                                        | Description                       |
+| ----------------------------------------------------------------------------------------------- | --------------------------------- |
+| `focus(): void`                                                                                 | Focuses the editor                |
+| `blur(): void`                                                                                  | Blurs the editor                  |
+| `getContent(): RicosContent`                                                                    | Retrieves current content         |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>`     | Retrieves current content promise |
+| `getContentTraits(): { isEmpty: boolean; isContentChanged: boolean; isLastChangeEdit: boolean}` | Retrieves current content traits  |
+| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`            | button props for external toolbar |
 
 #### Usage example:
 
