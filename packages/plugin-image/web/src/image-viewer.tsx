@@ -140,9 +140,24 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       let requiredWidth, requiredHeight;
 
       const useQualityPreoad = this.context.experiments?.useQualityPreoad?.enabled;
-      imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, {
-        ...(useQualityPreoad && { imageType: 'quailtyPreload' }),
-      });
+      const {
+        componentData: {
+          config: { alignment, width },
+        },
+      } = this.props;
+      if (useQualityPreoad) {
+        let requiredWidth;
+        if ((alignment === 'left' || alignment === 'right') && !width) {
+          requiredWidth = 300;
+        }
+
+        imageUrl.preload = getImageSrc(src, helpers, {
+          requiredWidth,
+          imageType: 'quailtyPreload',
+        });
+      } else {
+        imageUrl.preload = getImageSrc(src, helpers);
+      }
       if (seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);

@@ -20,6 +20,7 @@ export interface ImageConfig {
     anchor: unknown;
     url: string;
   };
+  width?: number;
 }
 
 export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig {
