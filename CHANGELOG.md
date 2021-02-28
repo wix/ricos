@@ -24,7 +24,6 @@
 - `plugin-video`
   - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
-
 </details>
 <hr/>
 
