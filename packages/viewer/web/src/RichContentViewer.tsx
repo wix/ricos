@@ -66,7 +66,6 @@ export interface RichContentViewerProps {
   experiments?: AvailableExperiments;
   isInnerRcv?: boolean;
   renderedInTable?: boolean;
-  width?: number;
   onHover?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
