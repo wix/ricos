@@ -33,7 +33,6 @@ export interface RicosProps {
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
-  width?: number;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
