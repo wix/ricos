@@ -7,6 +7,8 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
   GIPHY_PLUGIN,
+  VIDEO_SETTINGS,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
@@ -71,14 +73,14 @@ describe('plugins', () => {
 
     it('render image toolbar and settings', function() {
       cy.loadRicosEditorAndViewer('images');
-      cy.openImageSettings();
-      cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+      cy.openSettings();
       cy.eyesCheckWindow({ tag: this.test.title + ' - settings', target: 'window', fully: false });
       cy.addImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - add image title');
       cy.editImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
-      cy.openImageSettings(false).deleteImageTitle();
+      cy.openImageSettings().deleteImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
@@ -328,6 +330,17 @@ describe('plugins', () => {
       cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
+    
+    it('should toggle download option', () => {
+      cy.loadRicosEditorAndViewer('video');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO);
+      cy.openSettings();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${VIDEO_SETTINGS.DOWNLOAD_TOGGLE}]`).click();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+    });
+  });
   });
 
   context('soundcloud', () => {
