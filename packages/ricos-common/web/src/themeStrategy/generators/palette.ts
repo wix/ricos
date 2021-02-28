@@ -7,6 +7,7 @@ const createCssVars = (colors: PaletteColors): CssVarsObject => {
   const {
     textColor,
     bgColor: backgroundColor,
+    shouldColorContainer = false,
     actionColor,
     fallbackColor = '#000000',
     disabledColor,
@@ -27,6 +28,7 @@ const createCssVars = (colors: PaletteColors): CssVarsObject => {
     disabledColorTuple: disabledColor ? toRgbTuple(disabledColor) : undefined,
     textColorLow,
     textColorLowTuple: textColorLow ? toRgbTuple(textColorLow) : undefined,
+    bgColorContainer: shouldColorContainer ? backgroundColor : undefined,
   };
 };
 
@@ -61,9 +63,11 @@ export default function createPalette(palette?: RicosTheme['palette']): PaletteS
   if (!palette) {
     return { paletteVarsObject: {} };
   }
+
   const colors = extractColors(palette);
   Object.entries(colors).forEach(
-    ([colorName, value]) => (colors[colorName] = value && toHexFormat(value))
+    ([colorName, value]) =>
+      (colors[colorName] = value && typeof value === 'string' ? toHexFormat(value) : value)
   );
   const paletteVarsObject = createCssVars(colors);
 
