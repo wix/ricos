@@ -16,7 +16,7 @@ export interface ImageConfig {
   disableExpand?: boolean;
   showTitle?: boolean;
   showDescription?: boolean;
-  link: {
+  link?: {
     anchor: unknown;
     url: string;
   };

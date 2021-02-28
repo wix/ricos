@@ -138,26 +138,20 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
       let requiredWidth, requiredHeight;
-
-      const useQualityPreoad = this.context.experiments?.useQualityPreoad?.enabled;
-      const {
-        componentData: {
-          config: { alignment, width },
-        },
-      } = this.props;
-      if (useQualityPreoad) {
-        let requiredWidth;
-        if ((alignment === 'left' || alignment === 'right') && !width) {
-          requiredWidth = 300;
-        }
-
-        imageUrl.preload = getImageSrc(src, helpers, {
-          requiredWidth,
+      let imageSrcOpts = {};
+      if (this.context.experiments?.useQualityPreoad?.enabled) {
+        const {
+          componentData: {
+            config: { alignment, width },
+          },
+        } = this.props;
+        const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
+        imageSrcOpts = {
           imageType: 'quailtyPreload',
-        });
-      } else {
-        imageUrl.preload = getImageSrc(src, helpers);
+          ...(usePredefinedWidth && { requiredWidth: 300 }),
+        };
       }
+      imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, imageSrcOpts);
       if (seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
@@ -317,9 +311,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   scrollToAnchor = () => {
     const {
       componentData: {
-        config: {
-          link: { anchor },
-        },
+        config: { link: { anchor } = {} },
       },
     } = this.props;
     const anchorString = `viewer-${anchor}`;
