@@ -142,10 +142,10 @@ export default class Cell extends Component {
         firstBlockText = blocks[0].text;
       }
       const hideFirstBlock = firstBlockText === '' || firstBlockText === '​'; //zero-width space
-      const hideLastBlock = lastBlockText === '';
+      const hideLastBlock = lastBlockText === '' || lastBlockText === '​'; //zero-width space
       return { hideFirstBlock, hideLastBlock };
     } else {
-      return false;
+      return {};
     }
   };
 
@@ -198,6 +198,7 @@ export default class Cell extends Component {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
     const editorWrapperStyle = this.getEditorWrapperStyle(additionalStyles, isEditing);
+    const { hideFirstBlock, hideLastBlock } = this.hideBlocks();
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -223,8 +224,8 @@ export default class Cell extends Component {
         <div
           className={classNames(
             setEditorRef ? styles.editorWrapper : styles.viewerWrapper,
-            !isEditing && this.hideBlocks().hideFirstBlock && styles.hideFirstBlock,
-            !isEditing && this.hideBlocks().hideLastBlock && styles.hideLastBlock,
+            !isEditing && hideFirstBlock && styles.hideFirstBlock,
+            !isEditing && hideLastBlock && styles.hideLastBlock,
             !isMobile && isEditing && styles.editing,
             !isEditing && styles.disableSelection
           )}

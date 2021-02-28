@@ -39,34 +39,26 @@
 
 .hideLastBlock {
     &.editorWrapper {
-        :global(.public-DraftEditor-content) > div > * {
-            &:last-child {
-                height: 1px;
-            }
+        :global(.public-DraftEditor-content) > div > :last-child {
+            display: none;
         }
     }
     &.viewerWrapper {
-        & > div > div > div > * {
-            &:last-child {
-                height: 1px;
-            }
+        & > div > div > div > :last-child {
+            display: none;
         }
     }
 }
 
 .hideFirstBlock {
     &.editorWrapper {
-        :global(.public-DraftEditor-content) > div > * {
-            &:first-child {
-                height: 1px;
-            }
+        :global(.public-DraftEditor-content) > div > :first-child {
+            display: none;
         }
     }
     &.viewerWrapper {
-        & > div > div > div > * {
-            &:first-child {
-                height: 1px;
-            }
+        & > div > div > div > :first-child {
+            display: none;
         }
     }
 }
