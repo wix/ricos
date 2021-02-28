@@ -58,8 +58,9 @@
   height: 8px;
   width: 100%;
   z-index: 1;
+  // transition: height 1s;
   &:hover {
-    background-color: rgba($action-color-fallback-tuple, 0.2);
+    height: 28px;
     cursor: pointer;
   }
 }
