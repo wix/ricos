@@ -78,7 +78,11 @@ export default class FullscreenProvider extends Component<Props, State> {
       return config;
     }
     const onExpand = (blockKey: string, innerIndex = 0) => {
-      const { expandModeData } = this.state;
+      const { expandModeData, FullscreenModal } = this.state;
+      // protective code in case that image was clicked before fullscreen is set
+      if (!FullscreenModal) {
+        return false;
+      }
       this.setState({
         isExpanded: true,
         // if expandModeData is not defined - expand the first image
