@@ -11,6 +11,7 @@ import {
   anchorScroll,
   addAnchorTagToUrl,
   GlobalContext,
+  Helpers,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -46,10 +47,7 @@ interface ImageViewerProps {
   onCaptionChange: () => unknown;
   setFocusToBlock: () => unknown;
   theme: Record<string, unknown>;
-  helpers: {
-    onViewerAction?: (type: string, action: string) => void;
-    [key: string]: unknown;
-  };
+  helpers: Helpers;
   disableRightClick: boolean;
   getInPluginEditingMode: () => unknown;
   setInPluginEditingMode: () => unknown;
@@ -150,7 +148,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       let requiredWidth, requiredHeight;
 
       const useQualityPreoad = this.context.experiments?.useQualityPreoad?.enabled;
-      imageUrl.preload = getImageSrc(src, helpers, {
+      imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, {
         ...(useQualityPreoad && { imageType: 'quailtyPreload' }),
       });
       if (seoMode) {
@@ -161,7 +159,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
         [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
       }
 
-      imageUrl.highres = getImageSrc(src, helpers, {
+      imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
         requiredWidth,
         requiredHeight,
         requiredQuality: 90,
@@ -305,7 +303,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
+    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
     onExpand?.(this.props.blockKey);
   };
 
