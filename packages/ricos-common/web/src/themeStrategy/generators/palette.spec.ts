@@ -73,7 +73,7 @@ describe('Palette', () => {
       bgColor: '#000000',
       textColor: '#000000',
     });
-    expect(Object.keys(cssVars)).not.toContain('shouldColorContainer');
+    expect(Object.keys(cssVars)).not.toContain('contentBgColor');
   });
 
   it('should color container if told to', () => {
@@ -81,7 +81,7 @@ describe('Palette', () => {
       actionColor: '#000000',
       bgColor: '#111111',
       textColor: '#000000',
-      shouldColorContainer: true,
+      contentBgColor: true,
     });
     expect(Object.keys(cssVars)).toContain('bgColorContainer');
     expect(cssVars.bgColorContainer).toEqual('#111111');

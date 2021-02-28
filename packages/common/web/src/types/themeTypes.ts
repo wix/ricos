@@ -33,7 +33,7 @@ export interface PaletteColors {
    *
    * Default: `false`
    */
-  shouldColorContainer?: boolean;
+  contentBgColor?: boolean;
 }
 export interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils, customStyles?: RicosCustomStyles): void;

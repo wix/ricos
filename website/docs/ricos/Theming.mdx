@@ -43,7 +43,7 @@ You can also modify colors of specific elements (like text headers / links). See
 
 ```jsx
 const palette = {
-  bgColor: '#0E092B',
+  bgColor: '#0E092B', // Please read note down below
   textColor: '#FFFFFF',
   actionColor: '#D6FF00',
 };
@@ -63,7 +63,12 @@ const palette = {
   />
 </div>
 
-Palette can receive 3 more optional fields:
+:::note
+`bgColor` will not set a `background-color` for Ricos' content by default.
+Please read the `contentBgColor` section below.
+:::
+
+Palette can receive few more optional fields:
 
 ##### `fallbackColor`
 When `ActionColor` is too bright, it is replaced with `FallbackColor` when used on bright backgrounds (e.g modals, toolbars).
@@ -75,6 +80,17 @@ Work in progress
 
 ##### `disabledColor`
 Work in progress
+
+##### `contentBgColor`
+If set to true, Ricos' internal content container would be colored with `bgColor`.
+
+Ricos' background color is transparent by default.
+
+The recommended practice of changing the background is to wrap Ricos with your own container, set with your own background.
+
+However, in case you want to change the content background, you should pass `contentBgColor: true`
+
+Default value: `false`.
 
 #### Palette Presets
 
