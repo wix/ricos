@@ -139,7 +139,10 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     } else {
       let requiredWidth, requiredHeight;
       let imageSrcOpts = {};
-      if (this.context.experiments?.useQualityPreoad?.enabled) {
+      if (
+        this.context.experiments?.useQualityPreoad?.enabled ||
+        this.context.experiments?.useQualityPreload?.enabled
+      ) {
         const {
           componentData: {
             config: { alignment, width },
