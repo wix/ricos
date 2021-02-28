@@ -70,8 +70,12 @@ Cypress.Commands.add('switchToDesktop', () => {
   resizeForDesktop();
 });
 
-Cypress.Commands.add('switchToSeoMode', () => {
+Cypress.Commands.add('switchOnSeoMode', () => {
   isSeoMode = true;
+});
+
+Cypress.Commands.add('switchOffSeoMode', () => {
+  isSeoMode = false;
 });
 
 Cypress.Commands.add('switchToHebrew', () => {
