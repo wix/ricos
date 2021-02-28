@@ -80,16 +80,6 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
 
   static contextType = GlobalContext;
 
-  shouldSkipImageThumbnail = () => {
-    const { containerWidth, experiments } = this.context;
-
-    if (containerWidth && experiments?.skipImageThumbnail?.enabled) {
-      return containerWidth;
-    } else {
-      return false;
-    }
-  };
-
   shouldUseSrcSet() {
     const { experiments } = this.context;
     return experiments?.useSrcSet?.enabled;
