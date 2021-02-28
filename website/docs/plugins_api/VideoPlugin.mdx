@@ -135,26 +135,9 @@ dataType =
   };
 ```
 
-### `exposeButtons`
-
-Which video buttons will display - array with videoButtonsTypes types [video, soundCloud].
-For provide buttons type you should import videoButtonsTypes.
-
-```jsx
-exposeButtons?: array;
-```
-
-Default value:
-
-```jsx
-['video'];
-```
-
 ## Sound Cloud Plugin
 
-For consume soundCloud plugin you should consume Video plugin and pass to plugin config:
-
-1. exposeButtons: [videoButtonsTypes.soundCloud] or [videoButtonsTypes.video, videoButtonsTypes.soundCloud]
+SoundCloud toolbar button is part of the Video plugin. To use it we need to expose a button with `exposeButtons`:
 
 see documentation above.
 
@@ -166,7 +149,7 @@ see documentation above.
       pluginVideo({
         handleFileUpload: mockVideoNativeUploadFunc,
         getVideoUrl,
-        exposeButtons: ['soundCloud'],
+        exposeButtons: ['soundCloud', 'video'],
       }),
     ]}
   />
@@ -186,4 +169,18 @@ import { RicosViewer } from 'ricos-viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 <RicosViewer plugins={[pluginVideo(VideoConfig)]} />;
+```
+
+### `exposeButtons`
+
+The buttons exposed by the plugin
+
+```jsx
+exposeButtons?: array;
+```
+
+Example value:
+
+```jsx
+[videoButtonsTypes.video, videoButtonsTypes.soundCloud];
 ```
