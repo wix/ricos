@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import windowContentStateHoc from '../WindowContentStateHoc';
-import { RichContentEditor } from 'ricos/editor';
-import { RicosEditor, RicosEditorProps } from 'ricos/editor';
+import { RichContentEditor, RicosEditor, RicosEditorProps } from 'ricos/editor';
 import { RicosViewer } from 'ricos/viewer';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';

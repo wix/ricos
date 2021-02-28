@@ -3,9 +3,8 @@ import Editor from '../../../../examples/main/shared/editor/Editor';
 import Viewer from '../../../../examples/main/shared/viewer/Viewer';
 import windowContentStateHoc from './WindowContentStateHoc';
 import { EditorState } from 'draft-js';
-import { RicosContent } from 'ricos/editor';
+import { RicosContent, RichContentEditorProps } from 'ricos/editor';
 import { SEOSettings } from 'ricos/common';
-import { RichContentEditorProps } from 'ricos/editor';
 import { TestAppConfig } from '../../../../examples/main/src/types';
 
 interface Props {

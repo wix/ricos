@@ -1,8 +1,7 @@
 import { EditorState } from 'draft-js';
 import React, { PureComponent } from 'react';
-import { RicosContent } from 'ricos/editor';
+import { RicosContent, RichContentEditorProps } from 'ricos/editor';
 import { SEOSettings } from 'ricos/common';
-import { RichContentEditorProps } from 'ricos/editor';
 import Preview from '../../../../examples/main/shared/preview/Preview';
 import windowContentStateHoc from './WindowContentStateHoc';
 
