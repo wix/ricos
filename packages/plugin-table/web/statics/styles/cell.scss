@@ -40,12 +40,12 @@
 .hideLastBlock {
     &.editorWrapper {
         :global(.public-DraftEditor-content) > div > :last-child {
-            display: none;
+            height: 1px;
         }
     }
     &.viewerWrapper {
         & > div > div > div > :last-child {
-            display: none;
+            height: 1px;
         }
     }
 }
@@ -53,12 +53,12 @@
 .hideFirstBlock {
     &.editorWrapper {
         :global(.public-DraftEditor-content) > div > :first-child {
-            display: none;
+            height: 1px;
         }
     }
     &.viewerWrapper {
         & > div > div > div > :first-child {
-            display: none;
+            height: 1px;
         }
     }
 }
