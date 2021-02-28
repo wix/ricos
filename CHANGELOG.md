@@ -16,13 +16,27 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `ricos-content`
+  -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
+
+</details>
+<hr/>
+
+
+## 8.23.1 (Feb 27, 2021)
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#2216](https://github.com/wix/ricos/pull/2216) display error on block when unsupported error key is given when file upload fails
-- `ricos-content`
-  -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
-</details>
-<hr/>
+
+### :house: Internal
+- `e2e`
+  - [#2220](https://github.com/wix/ricos/pull/2220) tests env fix - load theme on SSR, and remove seoMode for non-seo tests
+### :nail_care: Polish
+- `ricos-viewer`
+  - [#2222](https://github.com/wix/ricos/pull/2222) optimization(translations): skip redundant remount
+- `image`
+  - [#2213](https://github.com/wix/ricos/pull/2213) increase preload quality
 
 ## 8.23.0 (Feb 24, 2021)
 ### :rocket: New Feature
