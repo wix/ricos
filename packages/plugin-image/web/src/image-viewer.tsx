@@ -238,7 +238,12 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     src,
     alt,
     props,
-    opts: { fadeIn?: boolean; width?: number | string; height?: number | string } = {}
+    opts: {
+      fadeIn?: boolean;
+      width?: number | string;
+      height?: number | string;
+      useSrcSet?: boolean;
+    } = {}
   ) {
     const { fadeIn = false, width, height, useSrcSet } = opts;
     let srcSet;
