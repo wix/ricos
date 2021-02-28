@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -111,10 +112,27 @@ class ImageViewer extends React.Component {
     } else {
       let requiredWidth, requiredHeight;
 
+      const {
+        componentData: {
+          config: { alignment, width },
+        },
+      } = this.props;
+
       const useQualityPreoad = true; //this.context.experiments?.useQualityPreoad?.enabled;
-      imageUrl.preload = getImageSrc(src, helpers, {
-        ...(useQualityPreoad && { imageType: 'quailtyPreload' }),
-      });
+      if (useQualityPreoad) {
+        let requiredWidth;
+        if ((alignment === 'left' || alignment === 'right') && !width) {
+          requiredWidth = 300;
+        }
+
+        imageUrl.preload = getImageSrc(src, helpers, {
+          requiredWidth,
+          imageType: 'quailtyPreload',
+        });
+      } else {
+        imageUrl.preload = getImageSrc(src, helpers);
+      }
+
       if (seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);

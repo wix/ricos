@@ -33,7 +33,7 @@ const createUrl = (
     return createPreloadUrl(src, rw, rh, rq);
   }
   if (type === 'quailtyPreload') {
-    return createQuailtyPreloadUrl(src);
+    return createQuailtyPreloadUrl(src, rw);
   }
   return createHiResUrl(src, rw, rh, rq);
 };
