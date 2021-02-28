@@ -29,7 +29,47 @@ const replaceUrlFileExtenstion = (url, extensionTarget) => {
   return url.replace(/(.*)\.(jp(e)?g|png)$/, `$1.${extensionTarget}`);
 };
 
-class ImageViewer extends React.Component {
+interface ImageViewerProps {
+  componentData: {
+    config: ImageConfig;
+    src: { fallback: string; width: number };
+    metadata?: { caption?: unknown; alt?: string | undefined };
+    [key: string]: unknown;
+  };
+  className: string;
+  dataUrl: string;
+  settings: ImagePluginViewerConfig;
+  defaultCaption: string;
+  entityIndex: number;
+  onCaptionChange: () => void;
+  setFocusToBlock: () => void;
+  theme: RichContentTheme;
+  helpers: Helpers;
+  disableRightClick: boolean;
+  getInPluginEditingMode: () => unknown;
+  setInPluginEditingMode: () => unknown;
+  isMobile: boolean;
+  setComponentUrl: (highres?: string) => unknown;
+  seoMode: SEOSettings;
+  blockKey: string;
+}
+
+interface ImageSrc {
+  preload: string;
+  highres: string;
+}
+
+interface ImageViewerState {
+  container?: HTMLDivElement;
+  ssrDone?: boolean;
+  fallbackImageSrc?: ImageSrc;
+}
+
+class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
+  preloadRef: RefObject<HTMLImageElement>;
+  imageRef: RefObject<HTMLImageElement>;
+  styles: Record<string, string>;
+
   constructor(props) {
     super(props);
     validate(props.componentData, pluginImageSchema);
