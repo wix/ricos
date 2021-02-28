@@ -15,7 +15,6 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-<<<<<<< HEAD
   
   ### :rocket: New Feature
   - `plugin-video`
