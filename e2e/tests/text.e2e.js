@@ -248,7 +248,9 @@ describe('text', () => {
   });
 
   it('should not allow applying link to atomic blocks in selection', function() {
-    cy.loadRicosEditorAndViewer('content-with-video').setEditorSelection(0, 5);
+    cy.loadRicosEditorAndViewer('content-with-video');
+    cy.waitForVideoToLoad();
+    cy.setEditorSelection(0, 5);
     cy.getInlineButton(INLINE_TOOLBAR_BUTTONS.LINK).should('not.be.disabled');
     cy.eyesCheckWindow(this.test.title);
     cy.setEditorSelection(0, 40)
