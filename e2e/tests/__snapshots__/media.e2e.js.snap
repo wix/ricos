@@ -1738,7 +1738,6 @@ exports[`plugins > video > add a video from URL #0`] =
           "alignment": "center",
           "size": "small"
         },
-        "isCustomVideo": false,
         "metadata": {
           "author_name": "Wix.com",
           "author_url": "https://www.youtube.com/user/Wix",
@@ -2023,68 +2022,6 @@ exports[`plugins > emoji > render some emojies #0`] =
     }
   }
 };
-
-exports[`plugins > image > render image with loader #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "showDescription": true,
-          "showTitle": true,
-          "size": "content"
-        },
-        "loading": true,
-        "src": {
-          "file_name": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
-          "height": 1280,
-          "id": "17ef104520dd9a0711f1cc900d970b79",
-          "original_file_name": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
-          "width": 1920
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-image"
-    }
-  }
-};
-
 exports[`plugins > image > render image with link #0`] =
 {
   "blocks": [
@@ -2290,348 +2227,19 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > video > should toggle download option #0`] =
-exports[`plugins > full screen > innerRCE images full screen > expand image on full screen #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "alignment": "center",
-          "colsMinWidth": [
-            120,
-            120
-          ],
-          "colsWidth": [
-            10,
-            10
-          ],
-          "rows": {
-            "0": {
-              "columns": {
-                "0": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "",
-                        "type": "unstyled"
-                      },
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [
-                          {
-                            "key": 0,
-                            "length": 1,
-                            "offset": 0
-                          }
-                        ],
-                        "inlineStyleRanges": [],
-                        "key": 1,
-                        "text": " ",
-                        "type": "atomic"
-                      },
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 2,
-                        "text": "",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {
-                      "0": {
-                        "data": {
-                          "config": {
-                            "alignment": "center",
-                            "disableExpand": false,
-                            "showDescription": true,
-                            "showTitle": true,
-                            "size": "inline",
-                            "width": 143
-                          },
-                          "src": {
-                            "file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
-                            "height": 5600,
-                            "id": "2d3b675ea857dc41158bad3b28300824",
-                            "original_file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
-                            "width": 3737
-                          }
-                        },
-                        "mutability": "IMMUTABLE",
-                        "type": "wix-draft-plugin-image"
-                      }
-                    }
-                  }
-                },
-                "1": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                }
-              }
-            },
-            "1": {
-              "columns": {
-                "0": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "​",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {}
-                  }
-                },
-                "1": {
-                  "content": {
-                    "blocks": [
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 0,
-                        "text": "",
-                        "type": "unstyled"
-                      },
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [
-                          {
-                            "key": 0,
-                            "length": 1,
-                            "offset": 0
-                          }
-                        ],
-                        "inlineStyleRanges": [],
-                        "key": 1,
-                        "text": " ",
-                        "type": "atomic"
-                      },
-                      {
-                        "data": {},
-                        "depth": 0,
-                        "entityRanges": [],
-                        "inlineStyleRanges": [],
-                        "key": 2,
-                        "text": "",
-                        "type": "unstyled"
-                      }
-                    ],
-                    "entityMap": {
-                      "0": {
-                        "data": {
-                          "config": {
-                            "alignment": "center",
-                            "disableExpand": false,
-                            "showDescription": true,
-                            "showTitle": true,
-                            "size": "inline",
-                            "width": 156
-                          },
-                          "src": {
-                            "file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
-                            "height": 1280,
-                            "id": "bdf64d603f3a5a822d8197f97e4a1dd0",
-                            "original_file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
-                            "width": 1920
-                          }
-                        },
-                        "mutability": "IMMUTABLE",
-                        "type": "wix-draft-plugin-image"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "rowsHeight": [
-            47,
-            47
-          ],
-          "size": "content"
-        },
-        "type": "table"
-      },
-      "mutability": "IMMUTABLE",
-      "type": "table"
-    },
-    "1": {
-      "data": {
-        "config": {
-          "direction": "ltr",
-          "expandOnlyOne": false,
-          "expandState": "first_expanded"
-        },
-        "pairs": [
-          {
-            "content": {
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": 0,
-                  "text": "",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [
-                    {
-                      "key": 0,
-                      "length": 1,
-                      "offset": 0
-                    }
-                  ],
-                  "inlineStyleRanges": [],
-                  "key": 1,
-                  "text": " ",
-                  "type": "atomic"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": 2,
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {
-                "0": {
-                  "data": {
-                    "config": {
-                      "alignment": "center",
-                      "disableExpand": false,
-                      "showDescription": true,
-                      "showTitle": true,
-                      "size": "inline",
-                      "width": 301
-                    },
-                    "src": {
-                      "file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
-                      "height": 5260,
-                      "id": "2d6bee6fe2a726f213599508722bcb27",
-                      "original_file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
-                      "width": 3945
-                    }
-                  },
-                  "mutability": "IMMUTABLE",
-                  "type": "wix-draft-plugin-image"
-                }
-              }
-            },
-            "key": "fswiqtrr4",
-            "title": {
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": 0,
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          }
-        ]
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
-    }
-  }
-};
 
-exports[`plugins > full screen > innerRCE images full screen > expand inner-rce images on full screen #0`] =
+exports[`plugins > video > should toggle download option #0`] =
 {
   "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
     {
       "data": {},
       "depth": 0,
@@ -2644,7 +2252,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
       ],
       "inlineStyleRanges": [],
       "key": 1,
-      "key": 0,
       "text": " ",
       "type": "atomic"
     },
@@ -2654,31 +2261,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "key": 1,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 1,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 2,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
       "text": "",
       "type": "unstyled"
     }
@@ -2703,6 +2285,67 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > full screen > innerRCE images full screen > expand inner-rce images on full screen #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
           "colsMinWidth": [
             120,
             120
