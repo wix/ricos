@@ -15,8 +15,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :nail_care: Polish
+- `ricos-content`
+  -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
+
 </details>
 <hr/>
+
 
 ## 8.23.1 (Feb 27, 2021)
 ### :bug: Bug Fix
