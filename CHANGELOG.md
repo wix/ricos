@@ -20,14 +20,16 @@
 - `ricos-content`
   -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
 
+### :bug: Bug Fix
+- `link`
+  - [#2214](https://github.com/wix/ricos/pull/2214) link button is disabled when there is an atomic block in the selection
+
 </details>
 <hr/>
 
 
 ## 8.23.1 (Feb 27, 2021)
 ### :bug: Bug Fix
-- `link`
-  - [#2214](https://github.com/wix/ricos/pull/2214) link button is disabled when there is an atomic block in the selection
 - `plugin-commons`
   - [#2216](https://github.com/wix/ricos/pull/2216) display error on block when unsupported error key is given when file upload fails
 
