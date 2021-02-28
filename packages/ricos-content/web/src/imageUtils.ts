@@ -9,8 +9,8 @@ const DEFAULT = {
 };
 
 const PRELOAD = {
-  WIDTH: 700,
-  QUALITY: 10,
+  WIDTH: 750,
+  QUALITY: 20,
 };
 const resize = (w: number, h: number, rw: number, rh: number) => {
   if (rw > w && rh > h) {
