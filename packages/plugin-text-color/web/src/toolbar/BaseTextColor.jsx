@@ -31,15 +31,14 @@ export default class BaseTextColor extends Component {
     }
 
     const settings = config[pluginParams.type];
+    let position = {};
     if (settings.positionPicker) {
-      const position = settings.positionPicker(this.buttonRef, PANEL_WIDTH);
-      this.setState({ isPanelOpen: true, panelLeft: position.left, panelTop: position.top });
-      return;
+      position = settings.positionPicker(this.buttonRef, PANEL_WIDTH);
+    } else {
+      const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
+      position = { left: left - PANEL_WIDTH / 2, top: bottom };
     }
-
-    const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
-    const panelLeft = left - PANEL_WIDTH / 2;
-    this.setState({ isPanelOpen: true, panelLeft, panelTop: bottom });
+    this.setState({ isPanelOpen: true, panelLeft: position.left, panelTop: position.top });
   };
 
   closePanel = editorState => {

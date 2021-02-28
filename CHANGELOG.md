@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `color`
+  - [#2225](https://github.com/wix-incubator/rich-content/pull/2225) Override panel position
 ### :bug: Bug Fix
 - `video`
   - [#2212](https://github.com/wix/ricos/pull/2212) fix crash when data is not provided upon upload error
@@ -31,7 +34,6 @@
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#2216](https://github.com/wix/ricos/pull/2216) display error on block when unsupported error key is given when file upload fails
-
 ### :house: Internal
 - `e2e`
   - [#2220](https://github.com/wix/ricos/pull/2220) tests env fix - load theme on SSR, and remove seoMode for non-seo tests
@@ -45,7 +47,6 @@
 ### :rocket: New Feature
 - `fullScreen`
   - [#2206](https://github.com/wix-incubator/rich-content/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
-
 ## 8.22.9 (Feb 24, 2021)
 ### :bug: Bug Fix
 - `common`
