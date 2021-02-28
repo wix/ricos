@@ -23,17 +23,8 @@ import InPluginInput from './InPluginInput';
 const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 const replaceUrlFileExtenstion = (url, extensionTarget) => {
-  const originalExtensionFound = url.lastIndexOf(extensionTarget) > -1;
-  const extensionFound = ['.png', '.jpg'].find(ext => {
-    return url.lastIndexOf(ext) > -1;
-  });
-  if (!originalExtensionFound && extensionFound) {
-    const index = url.lastIndexOf(extensionFound);
-
-    return url.substring(0, index) + extensionTarget;
-  } else {
-    return url;
-  }
+  // replace png or jpg file to extensionTarget
+  return url.replace(/(.*)\.(jp(e)?g|png)$/, `$1.${extensionTarget}`);
 };
 
 class ImageViewer extends React.Component {
@@ -216,15 +207,15 @@ class ImageViewer extends React.Component {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      { ariaHidden: 'true', ...props }
+      { ariaHidden: 'true', ...props, useSrcSet: true }
     );
   };
 
   getImage(imageClassNames, src, alt, props, opts = {}) {
-    const { fadeIn = false, width, height } = opts;
+    const { fadeIn = false, width, height, useSrcSet } = opts;
     let srcSet;
-    if (this.shouldUseSrcSet()) {
-      srcSet = replaceUrlFileExtenstion(src, '.webp');
+    if (this.shouldUseSrcSet() && useSrcSet) {
+      srcSet = replaceUrlFileExtenstion(src, 'webp');
     }
     return (
       <img
