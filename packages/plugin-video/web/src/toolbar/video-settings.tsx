@@ -19,14 +19,14 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   isMobile,
   settings,
 }) => {
-  const disableDownload = settings.disableDownload || componentData?.config?.disableDownload;
+  const disableDownload = settings.disableDownload || componentData.disableDownload;
   const [isDownloadEnabled, setIsDownloadEnabled] = useState(!disableDownload);
   const styles = mergeStyles({ styles: Styles, theme });
 
   const onToggle = () => setIsDownloadEnabled(!isDownloadEnabled);
   const closeModal = () => helpers.closeModal?.();
   const onDoneClick = () => {
-    const newComponentData = { ...componentData, config: { disableDownload: !isDownloadEnabled } };
+    const newComponentData = { ...componentData, disableDownload: !isDownloadEnabled };
     pubsub.update('componentData', newComponentData);
     closeModal();
   };
