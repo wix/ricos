@@ -77,12 +77,16 @@ describe('Palette', () => {
   });
 
   it('should color container if told to', () => {
-    const { paletteVarsObject: cssVars } = createPalette({
-      actionColor: '#000000',
-      bgColor: '#111111',
-      textColor: '#000000',
-      contentBgColor: true,
-    });
+    const { paletteVarsObject: cssVars } = createPalette(
+      {
+        actionColor: '#000000',
+        bgColor: '#111111',
+        textColor: '#000000',
+      },
+      {
+        contentBgColor: true,
+      }
+    );
     expect(Object.keys(cssVars)).toContain('bgColorContainer');
     expect(cssVars.bgColorContainer).toEqual('#111111');
   });

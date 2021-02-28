@@ -1,13 +1,13 @@
 import { PaletteColors } from 'wix-rich-content-common';
 import { adaptForeground, toRgbTuple, toHexFormat } from '../themeUtils';
 import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from '../palettes';
-import { RicosTheme, CssVarsObject } from '../themeTypes';
+import { RicosTheme, CssVarsObject, PaletteConfig } from '../themeTypes';
 
-const createCssVars = (colors: PaletteColors): CssVarsObject => {
+const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsObject => {
+  const { contentBgColor = false } = config || {};
   const {
     textColor,
     bgColor: backgroundColor,
-    contentBgColor = false,
     actionColor,
     fallbackColor = '#000000',
     disabledColor,
@@ -59,7 +59,10 @@ interface PaletteStrategyResult {
   colors?: PaletteColors;
 }
 
-export default function createPalette(palette?: RicosTheme['palette']): PaletteStrategyResult {
+export default function createPalette(
+  palette?: RicosTheme['palette'],
+  config?: RicosTheme['paletteConfig']
+): PaletteStrategyResult {
   if (!palette) {
     return { paletteVarsObject: {} };
   }
@@ -69,7 +72,7 @@ export default function createPalette(palette?: RicosTheme['palette']): PaletteS
     ([colorName, value]) =>
       (colors[colorName] = value && typeof value === 'string' ? toHexFormat(value) : value)
   );
-  const paletteVarsObject = createCssVars(colors);
+  const paletteVarsObject = createCssVars(colors, config);
 
   return { paletteVarsObject, colors };
 }

@@ -20,6 +20,7 @@ The theming API provides an ability to customize the style of your plugins, tool
 ```tsx
 theme?: {
   palette?: PaletteColors | PalettePreset;
+  paletteConfig?: PaletteConfig;
   customStyles?: RicosCustomStyles;
   parentClass?: string;
 }
@@ -65,7 +66,7 @@ const palette = {
 
 :::note
 `bgColor` will not set a `background-color` for Ricos' content by default.
-Please read the `contentBgColor` section below.
+Please read the `contentBgColor` under PaletteConfig section below.
 :::
 
 Palette can receive few more optional fields:
@@ -81,6 +82,16 @@ Work in progress
 ##### `disabledColor`
 Work in progress
 
+#### Palette Presets
+
+Pick a palette preset by name. Currently supports 'darkTheme' only.
+
+```jsx
+<RicosEditor theme={{ palette: 'darkTheme' }} />
+```
+
+## PaletteConfig
+
 ##### `contentBgColor`
 If set to true, Ricos' internal content container would be colored with `bgColor`.
 
@@ -91,14 +102,6 @@ The recommended practice of changing the background is to wrap Ricos with your o
 However, in case you want to change the content background, you should pass `contentBgColor: true`
 
 Default value: `false`.
-
-#### Palette Presets
-
-Pick a palette preset by name. Currently supports 'darkTheme' only.
-
-```jsx
-<RicosEditor theme={{ palette: 'darkTheme' }} />
-```
 
 ## Custom Styles
 
