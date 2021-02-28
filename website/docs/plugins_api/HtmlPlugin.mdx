@@ -5,8 +5,6 @@ sidebar_label: Html Plugin
 ---
 
 import { pluginHtml } from 'ricos/html/editor';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
 import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
@@ -27,14 +25,13 @@ HTML plugin enables users to embed content in an iframe (either source code or b
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginHtml } from 'ricos/html/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
+
 <RicosEditor plugins={[pluginHtml(HtmlConfig)]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginHtml } from 'wix-rich-content-plugin-html/viewer';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import { pluginHtml } from 'ricos/html/viewer';
+
 <RicosViewer plugins={[pluginHtml(HtmlConfig)]} />;
 ```
 
@@ -124,16 +121,15 @@ Adsense plugin is part of the html plugin. To use it we need to expose a button 
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginHtml, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginHtml, htmlButtonsTypes } from 'ricos/html/editor';
+
 <RicosEditor plugins={[pluginHtml({ exposeButtons: [htmlButtonsTypes.adsense], , siteDomain: 'https://dana.wixsite.com/mysite' })]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginHtml } from 'ricos/html/viewer';
+
 <RicosViewer plugins={[pluginHtml()]} />;
 ```
 
@@ -158,4 +154,5 @@ Example value:
 ```jsx
 [htmlButtonsTypes.html, htmlButtonsTypes.adsense];
 ```
+
 <br />

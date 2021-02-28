@@ -1,3 +1,3 @@
-import { RichContent } from 'ricos-schema';
+import { RichContent } from 'ricos/schema';
 
 export default () => RichContent.fromJSON({});

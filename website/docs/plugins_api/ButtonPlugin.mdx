@@ -5,8 +5,6 @@ sidebar_label: Button Plugin
 ---
 
 import { pluginLinkButton, pluginActionButton } from 'ricos/button/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
 import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
@@ -39,14 +37,13 @@ import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditor
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginLinkButton } from 'ricos/button/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+
 <RicosEditor plugins={[pluginLinkButton(LinkButtonConfig)]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginLinkButton } from 'wix-rich-content-plugin-button/viewer';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+import { pluginLinkButton } from 'ricos/button/viewer';
+
 <RicosViewer plugins={[pluginLinkButton(LinkButtonConfig)]} />;
 ```
 
@@ -56,14 +53,13 @@ import 'wix-rich-content-plugin-button/dist/styles.min.css';
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginActionButton } from 'ricos/button/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+
 <RicosEditor plugins={[pluginActionButton(ActionButtonConfig)]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginActionButton } from 'wix-rich-content-plugin-button/viewer';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+import { pluginActionButton } from 'ricos/button/viewer';
+
 <RicosViewer plugins={[pluginActionButton(ActionButtonConfig)]} />;
 ```
 

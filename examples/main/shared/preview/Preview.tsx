@@ -3,7 +3,6 @@ import { RichContentPreview } from 'ricos/preview';
 import * as Plugins from './PreviewPlugins';
 import { isSSR, RicosContent, SEOSettings } from 'ricos/common';
 import theme from '../theme/theme'; // must import after custom styles
-import 'wix-rich-content-preview/dist/styles.min.css';
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import { GALLERY_TYPE } from 'ricos/gallery/viewer';

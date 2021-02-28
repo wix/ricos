@@ -51,31 +51,7 @@ import {
 
 import { pollTypeMapper, pluginPoll, POLL_TYPE } from 'ricos/poll/viewer';
 
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-viewer/dist/styles.min.css';
-// import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
-import 'wix-rich-content-plugin-image/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
-import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
-import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
-import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
-import 'wix-rich-content-plugin-map/dist/styles.min.css';
-import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
-import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
-import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-import 'wix-rich-content-plugin-table/dist/styles.min.css';
-
-import { RichContentViewerProps } from 'wix-rich-content-viewer';
+import { RichContentViewerProps } from 'ricos/viewer';
 import {
   Decorator,
   HASHTAG_TYPE,
@@ -83,7 +59,7 @@ import {
   RicosContent,
   UISettings,
   ViewerPlugin,
-} from 'wix-rich-content-common';
+} from 'ricos/common';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
@@ -204,7 +180,7 @@ export const viewerPlugins: ViewerPlugin[] = [
 ];
 
 export const getConfig = (additionalConfig = {}): RichContentViewerProps['config'] => {
-  let _config = { ...config };
+  const _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     if (additionalConfig[key]) {
       const orgConfig = config[key] || {};

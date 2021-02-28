@@ -5,8 +5,6 @@ sidebar_label: Divider Plugin
 ---
 
 import { pluginDivider } from 'ricos/divider/editor';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
 import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
@@ -27,14 +25,13 @@ Divider plugin allows the user to add different types of divider lines.
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginDivider } from 'ricos/divider/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+
 <RicosEditor plugins={[pluginDivider()]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+import { pluginDivider } from 'ricos/divider/viewer';
+
 <RicosViewer plugins={[pluginDivider()]} />;
 ```
 

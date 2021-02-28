@@ -5,8 +5,6 @@ sidebar_label: Emoji Plugin
 ---
 
 import { pluginEmoji } from 'ricos/emoji/editor';
-import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
 import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
@@ -27,13 +25,12 @@ Emoji plugin is pretty self explanatory - it allows the user to add Emojis!
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginEmoji } from 'ricos/emoji/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+
 <RicosEditor plugins={[pluginEmoji()]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginEmoji } from 'wix-rich-content-plugin-emoji/viewer';
-import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+import { pluginEmoji } from 'ricos/emoji/viewer';
+
 <RicosViewer plugins={[pluginEmoji()]} />;
 ```

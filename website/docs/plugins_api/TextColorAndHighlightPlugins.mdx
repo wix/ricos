@@ -5,8 +5,6 @@ sidebar_label: Text Color and Highlight Plugins
 ---
 
 import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color/editor';
-import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
 import { createContent } from 'ricos/content';
 import { isHexColor } from 'ricos/common';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
@@ -28,8 +26,6 @@ Modify text color or highlight the important stuff.
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 <RicosEditor
   plugins={[pluginTextColor(textColorConfig), pluginTextHighlight(textHighlightConfig)]}
@@ -37,8 +33,8 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color/viewer';
-import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color/viewer';
+
 <RicosViewer
   plugins={[pluginTextColor(textColorConfig), pluginTextHighlight(textHighlightConfig)]}
 />;
@@ -66,8 +62,6 @@ Text Color and Text Highlight have exactly the same config but both require it t
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import { isHexColor } from 'ricos/common';
 
 const colorScheme = {
@@ -161,8 +155,7 @@ const textHighlightConfig = {
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color/viewer';
-import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color/viewer';
 import { isHexColor } from 'ricos/common';
 
 const styleSelectionPredicate = style => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RicosViewer } from 'ricos-viewer';
+import { RicosViewer } from 'ricos/viewer';
 import { Page } from '../Components/StoryParts';
 import ActionButton from '../Components/ActionButton';
 import imageContentState from '../../../../e2e/tests/fixtures/images.json';

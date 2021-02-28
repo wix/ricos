@@ -1,5 +1,11 @@
 import React, { ElementType, PureComponent } from 'react';
-import { RichContentEditor, RichContentEditorModal, RichContentEditorProps } from 'ricos/editor';
+import {
+  RichContentEditor,
+  RichContentEditorModal,
+  RichContentEditorProps,
+  RicosEditor,
+  RicosEditorProps,
+} from 'ricos/editor';
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
@@ -10,7 +16,6 @@ import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUpl
 import { TOOLBARS } from 'ricos/editor-common';
 import { ModalStyles, RicosContent, TextToolbarType } from 'ricos/common';
 import { TestAppConfig } from '../../src/types';
-import { RicosEditor, RicosEditorProps } from 'ricos-editor';
 
 const modalStyleDefaults: ModalStyles = {
   content: {

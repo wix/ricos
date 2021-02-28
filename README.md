@@ -27,7 +27,6 @@ Then add a basic rich text editor to your app. You can now test typing and addin
 
 ```jsx
 import { RicosEditor } from 'ricos/editor';
-import 'ricos-editor/dist/styles.min.css';
 
 <RicosEditor placeholder={'Type here!'} />;
 ```
@@ -42,13 +41,10 @@ Adding videos and dividers:
 
 ```jsx
 import { RicosEditor } from 'ricos/editor';
-import 'ricos-editor/dist/styles.min.css';
 
 import { pluginVideo } from 'ricos/video/editor';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
 
 import { pluginDivider } from 'ricos/divider/editor';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 
 <RicosEditor placeholder={'Type here!'} plugins={[pluginDivider(), pluginVideo()]} />;
 ```

@@ -41,7 +41,7 @@ import {
   createTextColorPlugin,
 } from 'ricos/text-color/editor';
 import MobileDetect from 'mobile-detect';
-import '../styles.global.scss';
+
 import {
   mockFileUploadFunc,
   mockImageNativeUploadFunc,

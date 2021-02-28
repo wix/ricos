@@ -5,8 +5,6 @@ sidebar_label: Hashtag Plugin
 ---
 
 import { pluginHashtag } from 'ricos/hashtag/editor';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
 import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
@@ -33,14 +31,13 @@ Hashtag plugin allow the user to add Hashtags
 /* Editor */
 import { RicosEditor } from 'ricos/editor';
 import { pluginHashtag } from 'ricos/hashtag/editor';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+
 <RicosEditor plugins={[pluginHashtag(HashtagConfig)]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos/viewer';
-import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/viewer';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import { pluginHashtag } from 'ricos/hashtag/viewer';
+
 <RicosViewer plugins={[pluginHashtag(HashtagConfig)]} />;
 ```
 
