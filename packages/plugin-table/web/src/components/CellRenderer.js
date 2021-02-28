@@ -25,7 +25,10 @@ export default class Cell extends Component {
     }
     if (this.props.selected && !isCellEditing && !this.props.isMobile) {
       this.editorRef?.selectAllContent(true);
-      this.editorRef.focus();
+      if (!prevProps.selected) {
+        const { selectedCells } = this.props;
+        selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
+      }
     }
   }
 
