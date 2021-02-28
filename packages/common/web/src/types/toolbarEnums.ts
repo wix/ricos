@@ -29,7 +29,6 @@ export enum ButtonType {
   SPOILER = 'spoiler',
   DELETE = 'delete',
   LINK_PREVIEW = 'link-preview',
-  VIDEO_SETTINGS = 'video-settings',
 }
 
 export enum ModifierKey {
