@@ -6,9 +6,9 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import MobileDetect from 'mobile-detect';
 import ActionButton from '../Components/ActionButton';
 import {
-  withEditorEvents,
+  withEditorContext,
   EditorEventsProps,
-} from 'wix-rich-content-editor-common/dist/lib/EditorEventsContext';
+} from 'wix-rich-content-editor-common/libs/EditorEventsContext';
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 const plugins = [pluginImage(), pluginGallery()];
@@ -54,4 +54,4 @@ const RicosPublishStory: FunctionComponent<EditorEventsProps> = ({ editorEvents 
   );
 };
 
-export default withEditorEvents(RicosPublishStory);
+export default withEditorContext(RicosPublishStory);

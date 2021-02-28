@@ -1,14 +1,14 @@
 /* eslint-disable no-duplicate-imports */
 export * from './Icons';
 
-// export {
-//   EditorEventsContext,
-//   EditorEventsProvider,
-//   withEditorEvents,
-//   WithEditorEventsProps,
-//   EditorEvents,
-//   withEditorContext,
-// } from '../lib/EditorEventsContext'; //TODO: remove in v9 - lib entry
+export {
+  EditorEventsContext,
+  EditorEventsProvider,
+  withEditorEvents,
+  WithEditorEventsProps,
+  EditorEvents,
+  withEditorContext,
+} from '../lib/EditorEventsContext'; //TODO: remove in v9 - lib entry
 
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';
