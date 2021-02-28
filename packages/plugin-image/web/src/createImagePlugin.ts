@@ -16,7 +16,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     t,
     anchorTarget,
     relValue,
-    [type]: settings = {},
+    [type]: settings,
     uiSettings,
     isMobile,
     innerModal,
@@ -86,7 +86,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
-    spoilerWrapper: settings.spoiler && spoilerWrapper,
+    spoilerWrapper: settings?.spoiler && spoilerWrapper,
     ...rest,
   });
 };
