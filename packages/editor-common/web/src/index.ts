@@ -8,7 +8,7 @@ export {
   WithEditorEventsProps,
   EditorEvents,
   withEditorContext,
-} from '../lib/EditorEventsContext'; //TODO: remove in v9 - lib entry
+} from './EditorEventsContext';
 
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';

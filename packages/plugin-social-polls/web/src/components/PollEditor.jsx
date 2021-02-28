@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
   WithEditorEventsProps,
-  withEditorEvents,
+  EditorEventsContext as EditorEventsContext1,
   isPluginFocused,
-} from 'wix-rich-content-editor-common/libs/EditorEventsContext';
+} from 'wix-rich-content-editor-common';
+import { EditorEventsContext as EditorEventsContext2 } from 'wix-rich-content-editor/libs/EditorEventsContext';
 
 import { Poll } from './Poll';
 import { PollContextProvider } from './poll-context';
@@ -97,4 +98,18 @@ class PollEditorComponent extends PureComponent {
   }
 }
 
-export const PollEditor = withEditorEvents(PollEditorComponent);
+export const PollEditor = props => (
+  <EditorEventsContext1.Consumer>
+    {contextValue1 => (
+      <EditorEventsContext2.Consumer>
+        {contextValue2 => (
+          <PollEditorComponent
+            editorEvents1={contextValue1}
+            editorEvents2={contextValue2}
+            {...props}
+          />
+        )}
+      </EditorEventsContext2.Consumer>
+    )}
+  </EditorEventsContext1.Consumer>
+);
