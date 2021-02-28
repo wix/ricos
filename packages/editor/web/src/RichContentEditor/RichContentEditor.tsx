@@ -954,8 +954,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { onError, locale, direction, showToolbars = true } = this.props;
+    const { onError, locale, direction, showToolbars = true, isInnerRCE } = this.props;
     const { innerModal } = this.state;
+    const editorStyle = isInnerRCE ? { backgroundColor: 'transparent' } : {};
+
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -987,6 +989,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 <div
                   ref={this.setEditorWrapper}
                   className={classNames(styles.editor, theme.editor)}
+                  style={editorStyle}
                 >
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}
