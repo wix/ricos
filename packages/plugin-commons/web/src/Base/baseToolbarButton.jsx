@@ -99,12 +99,13 @@ class BaseToolbarButton extends React.Component {
       return;
     }
 
-    const activeButton = componentState.activeButton || { keyName, isActive: false };
-    const isToggleButton = !(
-      this.props.type === BUTTONS.EXTERNAL_MODAL || this.props.type === BUTTONS.FILES
-    );
+    const activeButton = (componentState.activeButton?.keyName === keyName &&
+      componentState.activeButton) || { keyName, isActive: false };
+    const isExternalModalButton = this.props.type === BUTTONS.EXTERNAL_MODAL;
+    const isToggleButton = !(isExternalModalButton || this.props.type === BUTTONS.FILES);
+
     const isActive = !isToggleButton
-      ? activeButton.keyName === keyName
+      ? activeButton.isActive
       : !(activeButton.keyName === keyName && activeButton.isActive);
     componentState.activeButton = {
       ...activeButton,
@@ -123,7 +124,7 @@ class BaseToolbarButton extends React.Component {
         : this.props.displayInlinePanel({ PanelContent: this.props.panelContent, keyName });
     }
 
-    if (this.props.type === BUTTONS.EXTERNAL_MODAL && isActive) {
+    if (isExternalModalButton) {
       if (helpers && helpers.openModal) {
         let appliedModalStyles = {};
         if (modalStyles) {

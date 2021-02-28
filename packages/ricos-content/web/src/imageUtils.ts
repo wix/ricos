@@ -8,12 +8,20 @@ const DEFAULT = {
   TYPE: 'preload',
 };
 
+const PRELOAD = {
+  WIDTH: 750,
+  QUALITY: 20,
+};
 const resize = (w: number, h: number, rw: number, rh: number) => {
   if (rw > w && rh > h) {
     return { width: w, height: h };
   }
   return { width: rw, height: rh };
 };
+
+type Dimension = { w: number; h: number };
+const ceilDimension = (dim: Dimension) => ({ w: Math.ceil(dim.w), h: Math.ceil(dim.h) });
+
 const createUrl = (
   src: ComponentData['src'],
   rw?: number,
@@ -23,6 +31,9 @@ const createUrl = (
 ) => {
   if (type === 'preload') {
     return createPreloadUrl(src, rw, rh, rq);
+  }
+  if (type === 'quailtyPreload') {
+    return createQuailtyPreloadUrl(src);
   }
   return createHiResUrl(src, rw, rh, rq);
 };
@@ -39,6 +50,21 @@ const createPreloadUrl = (
     const W = Math.ceil(width);
     const format = getImageFormat(fileName);
     return `${WIX_STATIC_URL}/media/${fileName}/v1/fit/w_${W},h_${H},al_c,q_${rq}/file${format}`;
+  }
+};
+
+const createQuailtyPreloadUrl = (
+  { file_name: fileName, width: w, height: h }: ComponentData['src'] = {},
+  rw = PRELOAD.WIDTH,
+  rq = PRELOAD.QUALITY
+) => {
+  if (fileName) {
+    const minW = Math.min(rw, w);
+    const ratio = h / w;
+    const tDim: Dimension = ceilDimension({ w: minW, h: minW * ratio });
+    return `${WIX_STATIC_URL}/media/${fileName}/v1/fit/w_${tDim.w},h_${
+      tDim.h
+    },al_c,q_${rq}/file${getImageFormat(fileName)}`;
   }
   return '';
 };
