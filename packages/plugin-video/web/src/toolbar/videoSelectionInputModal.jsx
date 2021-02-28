@@ -90,10 +90,13 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   updateVideoComponent = ({ data, error }, uploadBIData, componentData, isCustomVideo = false) => {
-    const { pathname, thumbnail, url } = data;
-    const src = pathname ? { pathname, thumbnail } : url;
+    let { src } = componentData;
+    if (data) {
+      const { pathname, thumbnail, url } = data;
+      src = pathname ? { pathname, thumbnail } : url;
+    }
     uploadBIData && this.props.helpers.onMediaUploadEnd(uploadBIData, error);
-    this.setComponentData({ ...componentData, src, error, isCustomVideo, tempData: false });
+    this.setComponentData({ ...componentData, src, error, isCustomVideo, tempData: !!error });
     this.handleError(error);
   };
 
