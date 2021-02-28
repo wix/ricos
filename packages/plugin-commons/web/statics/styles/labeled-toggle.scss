@@ -42,7 +42,10 @@
 }
 
 .labeled_toggle_root {
-  padding-top: 24px;
+  padding-top: 30px;
+  @include phone {
+    padding-top: 0px;
+  }
 }
 
 .labeled_toggle_root + .labeled_toggle_root {
@@ -55,12 +58,6 @@
   width: 100%;
   height: 100%;
   margin: 0;
-}
-
-.infoIcon{
-  margin-left: 4px;
-  cursor: pointer;
-  fill: $primary-text-color;
 }
 
 .labeled_toggle_switch {
@@ -81,10 +78,7 @@
 }
 
 .labeled_toggle_label {
-  font-size: 16px;
-  @include phone{
-    font-size: 14px;
-  }
+  font-size: 14px;
 }
 
 .labeled_toggle_track {
