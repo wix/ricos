@@ -90,7 +90,7 @@ class ImageSettings extends Component {
     const { src, error, metadata = {} } = this.state;
 
     return (
-      <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
+      <div className={this.styles.imageSettings} data-hook="settings" dir={languageDir}>
         {isMobile ? (
           <ImageSettingsMobileHeader
             t={t}
@@ -120,7 +120,7 @@ class ImageSettings extends Component {
                 alt={metadata.alt || 'image preview'}
                 resizeMode={'contain'}
                 className={this.styles.imageSettingsImage}
-                src={getImageSrc(src, helpers, {
+                src={getImageSrc(src, helpers?.getImageUrl, {
                   requiredWidth: 1000,
                   requiredHeight: 250,
                   requiredQuality: 80,
