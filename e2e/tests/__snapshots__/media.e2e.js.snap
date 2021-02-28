@@ -2022,6 +2022,7 @@ exports[`plugins > emoji > render some emojies #0`] =
     }
   }
 };
+
 exports[`plugins > image > render image with link #0`] =
 {
   "blocks": [
@@ -2227,7 +2228,6 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
   "entityMap": {}
 };
 
-
 exports[`plugins > video > should toggle download option #0`] =
 {
   "blocks": [
@@ -2303,7 +2303,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
         }
       ],
       "inlineStyleRanges": [],
-      "key": 1,
       "key": 0,
       "text": " ",
       "type": "atomic"
@@ -2313,7 +2312,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 2,
       "key": 1,
       "text": "",
       "type": "unstyled"
@@ -2348,21 +2346,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
       "data": {
         "config": {
           "alignment": "center",
-          "disableDownload": true,
-          "size": "content"
-        },
-        "isCustomVideo": true,
-        "src": {
-          "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
-          "thumbnail": {
-            "height": 1080,
-            "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
-            "width": 1920
-          }
-        }
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-draft-plugin-video"
           "colsMinWidth": [
             120,
             120
