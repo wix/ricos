@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 import classNames from 'classnames';
-import { IMAGE_TYPE } from './types';
+import { IMAGE_TYPE, ImagePluginViewerConfig, ImageConfig } from './types';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
   mergeStyles,
@@ -12,6 +12,8 @@ import {
   addAnchorTagToUrl,
   GlobalContext,
   Helpers,
+  RichContentTheme,
+  SEOSettings,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -24,36 +26,26 @@ const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent
 
 interface ImageViewerProps {
   componentData: {
-    config: {
-      size: string;
-      link: {
-        anchor: unknown;
-        url: string;
-      };
-    };
+    config: ImageConfig;
     src: { fallback: string; width: number };
     metadata?: { caption?: unknown; alt?: string | undefined };
     [key: string]: unknown;
   };
   className: string;
   dataUrl: string;
-  settings: {
-    onExpand: (blockkey: string) => unknown;
-    disableExpand: boolean;
-    imageProps: () => unknown | Record<string, unknown>;
-  };
+  settings: ImagePluginViewerConfig;
   defaultCaption: string;
   entityIndex: number;
-  onCaptionChange: () => unknown;
-  setFocusToBlock: () => unknown;
-  theme: Record<string, unknown>;
+  onCaptionChange: () => void;
+  setFocusToBlock: () => void;
+  theme: RichContentTheme;
   helpers: Helpers;
   disableRightClick: boolean;
   getInPluginEditingMode: () => unknown;
   setInPluginEditingMode: () => unknown;
   isMobile: boolean;
   setComponentUrl: (highres?: string) => unknown;
-  seoMode: boolean;
+  seoMode: SEOSettings;
   blockKey: string;
 }
 
@@ -214,7 +206,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     src,
     alt,
     props,
-    opts: { fadeIn?: boolean; width?: unknown; height?: unknown } = {}
+    opts: { fadeIn?: boolean; width?: number | string; height?: number | string } = {}
   ) {
     const { fadeIn = false, width, height } = opts;
     return (
@@ -376,7 +368,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const imageClassName = this.styles.image;
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
     let imageProps = {};
-    if (data.src && settings) {
+    if (data.src && settings && settings.imageProps) {
       imageProps = isFunction(settings.imageProps)
         ? settings.imageProps(data.src)
         : settings.imageProps;
