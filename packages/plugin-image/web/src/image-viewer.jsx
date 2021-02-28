@@ -111,7 +111,7 @@ class ImageViewer extends React.Component {
     } else {
       let requiredWidth, requiredHeight;
 
-      const useQualityPreoad = this.context.experiments?.useQualityPreoad?.enabled;
+      const useQualityPreoad = true; //this.context.experiments?.useQualityPreoad?.enabled;
       imageUrl.preload = getImageSrc(src, helpers, {
         ...(useQualityPreoad && { imageType: 'quailtyPreload' }),
       });
