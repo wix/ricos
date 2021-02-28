@@ -73,12 +73,6 @@
     "ts-loader": "^8.0.4",
     "wix-statics-parent": "*"
   },
-  "eslintConfig": {
-    "extends": "react-app",
-    "rules": {
-      "jsx-a11y/href-no-hash": "off"
-    }
-  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"

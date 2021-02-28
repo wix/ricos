@@ -51,6 +51,8 @@ import {
   pluginTextColor,
   pluginTextHighlight,
   TEXT_COLOR_TYPE,
+  createTextHighlightPlugin,
+  TEXT_HIGHLIGHT_TYPE,
 } from 'ricos/text-color/editor';
 import {
   createSpoilerPlugin,
@@ -66,7 +68,6 @@ import {
   pluginActionButton,
   pluginLinkButton,
 } from 'ricos/button/editor';
-import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'ricos/text-color/editor';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
@@ -255,7 +256,7 @@ export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePlugi
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
-  textPlugins: textPlugins,
+  textPlugins,
   all: editorPlugins,
   unsupportedBlocks: createUnsupportedBlocksPlugin,
 };
@@ -267,7 +268,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function() {
+    casual.define('item', () => {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -825,7 +826,7 @@ const config: RichContentEditorProps['config'] = {
 };
 
 export const getConfig = (additionalConfig = {}, shouldNativeUpload = false) => {
-  let _config = { ...config };
+  const _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
   });
