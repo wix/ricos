@@ -189,7 +189,7 @@
 		"wait-on": "^4.0.2",
 		"webpack": "^4.38.0",
 		"webpack-bundle-analyzer": "^3.3.2",
-		"webpack-cli": "^3.3.10",
+		"webpack-cli": "^4.5.0",
 		"webpack-dev-server": "^3.7.2",
 		"webpack-merge": "^5.2.0",
 		"yarn-deduplicate": "^3.0.0"
