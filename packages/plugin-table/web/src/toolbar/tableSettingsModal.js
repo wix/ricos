@@ -74,7 +74,8 @@ export default class tableSettingsModal extends Component {
     } = this.state;
     const { isMobile, helpers, t } = this.props;
     return (
-      <div>
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      <div onKeyUp={this.onKeyUp}>
         {isMobile && (
           // eslint-disable-next-line
           <div onClick={helpers.closeModal} className={styles.closeButton}>
@@ -109,15 +110,13 @@ export default class tableSettingsModal extends Component {
           {invalidCellNum && (
             <div className={styles.errorMsg}>{t('TablePlugin_SettingsModal_limitError')}</div>
           )}
-          {/*eslint-disable-next-line*/}
           <div
             tabIndex="0" //eslint-disable-line
             className={styles.submit}
-            onClick={this.onCreateTableClicked}
-            onKeyUp={this.onKeyUp}
-            data-hook={'createTableButton'}
           >
-            {t('TablePlugin_SettingsModal_CreateTable_Button')}
+            <button onClick={this.onCreateTableClicked} data-hook={'createTableButton'}>
+              {t('TablePlugin_SettingsModal_CreateTable_Button')}
+            </button>
           </div>
         </div>
       </div>
