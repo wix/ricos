@@ -15,7 +15,16 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+  ### :rocket: New Feature
+  - `plugin-video`
+    - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
+
+</details>
+<hr/>
+
+## 8.24.0 (Feb 28, 2021)
 ### :rocket: New Feature
 - `color`
   - [#2225](https://github.com/wix-incubator/rich-content/pull/2225) Override panel position
@@ -25,10 +34,6 @@
 ### :nail_care: Polish
 - `ricos-content`
   -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
-
-</details>
-<hr/>
-
 
 ## 8.23.1 (Feb 27, 2021)
 ### :bug: Bug Fix
@@ -58,14 +63,12 @@
 - `image`
   - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
 
-
 ## 8.22.8 (Feb 23, 2021)
 ### :bug: Bug Fix
 - `editor`
   - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
 - `viewer`
   - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
-
 
 ## 8.22.7 (Feb 22, 2021)
 ### :bug: Bug Fix

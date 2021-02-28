@@ -77,7 +77,10 @@
 }
 
 .labeled_toggle_label {
-  font-size: 14px;
+  font-size: 16px ;
+  @include phone{
+    font-size: 14px;
+  }
 }
 
 .labeled_toggle_track {
