@@ -71,7 +71,7 @@ class ContextMenu extends PureComponent {
         {Object.values(buttonList).map((props, i) => {
           if (props) {
             if (props.type === 'divider') {
-              return <div className={Styles.contextMenuDivider} />;
+              return <div key={i} className={Styles.contextMenuDivider} />;
             }
             const buttonProps = {
               ...this.props,
