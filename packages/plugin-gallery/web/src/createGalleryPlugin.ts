@@ -21,10 +21,10 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
   settings.accept = settings.accept || fileInputAccept;
   const defaultPluginData = {
     ...DEFAULTS,
+    disableRightClick: !!config?.uiSettings?.disableRightClick,
     config: {
       ...DEFAULTS.config,
       ...settings?.defaultData?.config,
-      disableRightClick: !!config?.uiSettings?.disableRightClick,
     },
   };
   return createBasePlugin({

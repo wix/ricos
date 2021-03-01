@@ -158,7 +158,7 @@ export class GallerySettingsModal extends Component {
     this.state = {
       activeTab: this.props.activeTab,
       isExpandEnabled: !componentData.config.disableExpand,
-      isRightClickEnabled: !componentData.config.disableRightClick,
+      isRightClickEnabled: !componentData.disableRightClick,
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.switchTab = this.switchTab.bind(this);
@@ -212,10 +212,10 @@ export class GallerySettingsModal extends Component {
     const { helpers, componentData, pubsub } = this.props;
     const newComponentData = {
       ...componentData,
+      disableRightClick: !this.state.isRightClickEnabled,
       config: {
         ...componentData.config,
         disableExpand: !this.state.isExpandEnabled,
-        disableRightClick: !this.state.isRightClickEnabled,
       },
     };
 
