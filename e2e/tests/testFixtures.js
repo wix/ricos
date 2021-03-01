@@ -1,5 +1,5 @@
 /*global cy*/
-import { fixturesToTestOnSeo, fixtures } from './settings';
+import { fixturesToTestOnSeo, fixtures1, fixtures2 } from './settings';
 
 const testFixture = fixtureObj => {
   const { fixture, config, additionalCommands } =
@@ -13,5 +13,6 @@ const testFixture = fixtureObj => {
   });
 };
 
-export const testFixtures = () => fixtures.forEach(testFixture);
+export const testFixtures1 = () => fixtures1.forEach(testFixture);
+export const testFixtures2 = () => fixtures2.forEach(testFixture);
 export const testSeoFixtures = () => fixturesToTestOnSeo.forEach(testFixture);

@@ -1,7 +1,7 @@
 import { usePlugins, plugins, useConsumerTheming } from '../cypress/testAppConfig';
 
 // eslint-disable-next-line prettier/prettier
-export const fixtures = [
+export const fixtures1 = [
   'headers',
   'images',
   'inline-styles',
@@ -39,6 +39,9 @@ export const fixtures = [
       cy.waitForGalleryImagesToLoad();
     },
   },
+];
+
+export const fixtures2 = [
   'old-image-format',
   'hashtag-and-link',
   'images-sizes',
