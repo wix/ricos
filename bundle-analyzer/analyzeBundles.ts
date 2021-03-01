@@ -31,6 +31,8 @@ const getAllPluginsNames = ({
     'ricos-editor-with-plugins',
     'ricos-common',
     'rich-content-schema',
+    'ricos-editor-context-events-from-common',
+    'ricos-editor-context-events-from-libs',
   ];
 
   if (skipPlugins) {

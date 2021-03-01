@@ -26,16 +26,18 @@
   "wix-rich-content-plugin-vertical-embed": 233,
   "wix-rich-content-plugin-video": 320,
   "rcv": 169,
-  "rcv-with-plugins": 233,
+  "rcv-with-plugins": 234,
   "rcv-with-media-plugins": 594,
   "ricos-viewer": 194,
   "ricos-viewer-no-modal": 194,
   "ricos-viewer-with-plugins": 258,
   "rce": 730,
   "rce-with-plugins": 937,
-  "ricos-editor": 781,
+  "ricos-editor": 782,
   "ricos-editor-no-modal": 782,
   "ricos-editor-with-plugins": 988,
   "ricos-common": 17,
-  "rich-content-schema": 75
+  "rich-content-schema": 75,
+  "ricos-editor-context-events-from-common": 796,
+  "ricos-editor-context-events-from-libs": 783
 }
