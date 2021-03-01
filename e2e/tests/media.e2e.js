@@ -302,7 +302,8 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render upload modal', function() {
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('render upload modal', function() {
       cy.openVideoUploadModal();
       cy.eyesCheckWindow(this.test.title);
     });
@@ -349,6 +350,7 @@ describe('plugins', () => {
     });
 
     //TODO: fix this flaky tests
+    // eslint-disable-next-line mocha/no-skipped-tests
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal();
       cy.addSoundCloud().wait(500);
