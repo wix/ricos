@@ -302,8 +302,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('render upload modal', function() {
+    it('render upload modal', function() {
       cy.openVideoUploadModal();
       cy.eyesCheckWindow(this.test.title);
     });
@@ -344,7 +343,8 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
-    it('render upload modal', function() {
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('render upload modal', function() {
       cy.openSoundCloudModal();
       cy.eyesCheckWindow(this.test.title);
     });
