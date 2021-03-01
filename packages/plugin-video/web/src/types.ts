@@ -3,6 +3,7 @@ import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common'
 export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 
+export const videoButtonsTypes = { video: 'video', soundCloud: 'soundCloud' };
 export interface VideoPluginEditorConfig extends EditorPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
