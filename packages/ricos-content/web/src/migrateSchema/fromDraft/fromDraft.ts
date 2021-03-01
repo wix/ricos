@@ -2,18 +2,11 @@
 import { cloneDeep, isEmpty } from 'lodash';
 import { RicosContent, RicosContentBlock } from '../..';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
-import { RichContent, Node, Node_Type, Timestamp } from 'ricos-schema';
+import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { genKey } from '../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getRicosEntityData';
-
-const createTimestamp = (): Timestamp => {
-  const timeMS = Date.now();
-  return {
-    seconds: Math.floor(timeMS / 1000),
-    nanos: (timeMS % 1000) * 1e6,
-  };
-};
+import { createTimestamp } from '../createTimestamp';
 
 export const ensureRicosContent = (content: RichContent | RicosContent) =>
   'blocks' in content ? fromDraft(content) : content;
