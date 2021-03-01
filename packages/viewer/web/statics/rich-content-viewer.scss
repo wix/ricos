@@ -113,7 +113,6 @@
 
 .text {
   composes: elementSpacing;
-  color: $ricos-p-color;
   @include ricosTypography('p', true);
 
   &:empty {
