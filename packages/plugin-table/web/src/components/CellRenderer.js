@@ -18,7 +18,6 @@ export default class Cell extends Component {
     if (isGoIntoEdit) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      this.tdHeight = this.tdRef?.offsetHeight - 1;
     } else if (isGoOutFromEdit) {
       this.props.setEditingActive(false);
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
@@ -28,6 +27,7 @@ export default class Cell extends Component {
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
         selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
+        this.tdHeight = this.tdRef?.offsetHeight - 1;
       }
     }
   }
