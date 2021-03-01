@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `workflows`
+  - [#2235](https://github.com/wix-incubator/rich-content/pull/2235) docs - auto deploy on release
 
 </details>
 <hr/>
@@ -29,7 +32,7 @@
   - [#2212](https://github.com/wix/ricos/pull/2212) fix crash when data is not provided upon upload error
 ### :nail_care: Polish
 - `ricos-content`
-  -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
+  - [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
 
 ## 8.23.1 (Feb 27, 2021)
 ### :bug: Bug Fix
