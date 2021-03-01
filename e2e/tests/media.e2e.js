@@ -114,7 +114,6 @@ describe('plugins', () => {
       beforeEach('load editor', () => cy.loadRicosEditorAndViewer('images'));
 
       it('expand image on full screen', function() {
-        cy.hoverOnViewer();
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();

@@ -6,7 +6,6 @@ const RicosDriver = {
   },
 
   viewer: {
-    root: '#RicosViewerContainer > div',
     image: {
       root: getDataHookSelector('imageViewer'),
     },

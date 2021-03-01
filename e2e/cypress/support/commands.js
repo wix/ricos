@@ -747,7 +747,3 @@ Cypress.Commands.add('loadOutOfViewImagesInGallery', () => {
       .should('have.attr', 'loading', 'eager')
   );
 });
-
-Cypress.Commands.add('hoverOnViewer', () => {
-  cy.get(RicosDriver.viewer.root).trigger('mouseover');
-});

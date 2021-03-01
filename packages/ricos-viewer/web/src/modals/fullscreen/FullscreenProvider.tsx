@@ -32,6 +32,7 @@ export default class FullscreenProvider extends Component<Props, State> {
     this.state = {
       isExpanded: false,
       index: 0,
+      expandModeData: getImagesData(props.initialState || emptyState),
     };
   }
   _FullscreenModal;
@@ -55,6 +56,8 @@ export default class FullscreenProvider extends Component<Props, State> {
       if (!this._FullscreenModal && this.getImagesCount() > 0) {
         this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
       }
+
+      this.setState({ expandModeData: getImagesData(nextProps.initialState || emptyState) });
     }
   }
 
@@ -69,8 +72,6 @@ export default class FullscreenProvider extends Component<Props, State> {
   }
 
   onClose = () => this.setState({ isExpanded: false });
-
-  setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = config => {
     const { isModalSuspended } = this.props;
@@ -126,7 +127,6 @@ export default class FullscreenProvider extends Component<Props, State> {
               onClose={this.onClose}
               index={index}
               isMobile={isMobile}
-              setExpandModeData={this.setExpandModeData}
               {...fullscreenProps}
             />
           </Suspense>
