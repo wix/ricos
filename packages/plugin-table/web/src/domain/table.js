@@ -31,6 +31,14 @@ class Table extends TableDataUtil {
     this.saveNewDataFunc(this.componentData);
   };
 
+  updateCellContent = (i, j, content) => {
+    const oldContent = this.getCell(i, j).content;
+    if (oldContent !== content) {
+      this.getCell(i, j).content = content;
+      this.saveNewDataFunc(this.componentData);
+    }
+  };
+
   handlePasteCellsOutOfBound = (copiedCells, targetRow, targetCol) => {
     const rows = this.getRows();
     const copiedRowsNum = copiedCells[copiedCells.length - 1].i - copiedCells[0].i + 1;

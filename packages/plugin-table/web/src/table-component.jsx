@@ -63,19 +63,11 @@ class TableComponent extends React.Component {
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
   };
 
-  onEditorChange = (i, j, content) => {
-    const oldContent = this.table.getCell(i, j).content;
-    if (oldContent !== content) {
-      this.table.getCell(i, j).content = content;
-      this.updateComponentData(this.table.componentData);
-    }
-  };
-
   renderInnerRCE = (i, j) => {
     const editorState = this.getCellState(i, j);
     return this.props.renderInnerRCE({
       editorState,
-      onChange: editorState => this.onEditorChange(i, j, editorState),
+      onChange: editorState => this.table.updateCellContent(i, j, editorState),
       renderedIn: 'table',
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
