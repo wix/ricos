@@ -1,8 +1,8 @@
 import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
-import VideoSelectionInputModal from './videoSelectionInputModal';
 import { Modals } from '../modals';
+import VideoModal from './videoModal';
 
 import {
   SelectionModalCustomStyle,
@@ -51,7 +51,7 @@ const createInlineButtons: CreateInlineButtons = ({
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon,
-      modalElement: decorateComponentWithProps(VideoSelectionInputModal, {
+      modalElement: decorateComponentWithProps(VideoModal, {
         ...settings,
       }),
       modalStyles: getModalStyles({

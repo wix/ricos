@@ -133,7 +133,7 @@ describe('plugins', () => {
 
       it('expand inner-rce images on full screen', function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
-          .eq(1)
+          .eq(2)
           .parent()
           .click();
         cy.loadOutOfViewImagesInGallery();
