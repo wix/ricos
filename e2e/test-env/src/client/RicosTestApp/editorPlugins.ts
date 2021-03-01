@@ -144,6 +144,7 @@ const createPlugins = externalConfigs => {
         pluginLineSpacing().createPlugin,
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
+        pluginImage().createPlugin,
         pluginUnsupportedBlocks().createPlugin,
       ],
     }),

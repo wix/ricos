@@ -42,6 +42,12 @@ Cypress.Commands.add('editCell', cellIndex => {
     .type('table!!');
 });
 
+Cypress.Commands.add('enterEditingCell', cellIndex => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`)
+    .eq(cellIndex)
+    .dblclick();
+});
+
 Cypress.Commands.add('paintBG', () => {
   cy.get(`[data-hook*=${TABLE_PLUGIN.BG_COLOR}]`).click({ force: true });
   cy.get(`[data-scheme-color]`)
