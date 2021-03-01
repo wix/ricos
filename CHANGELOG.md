@@ -26,6 +26,12 @@
 - `bundle-analyzer`
   - [#2238](https://github.com/wix/ricos/pull/2238) editor-common bundle size fixture
 
+### :rocket: New Feature
+- `plugin-video`
+  - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
+- `ricos-theme`
+  - [#2230](https://github.com/wix-incubator/rich-content/pull/2230) `paletteConfig` - configurations for theme. `shouldColorContainer` boolean field
+
 </details>
 <hr/>
 
