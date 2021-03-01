@@ -28,7 +28,6 @@
 - `ricos-theme`
   - [#2230](https://github.com/wix-incubator/rich-content/pull/2230) `paletteConfig` - configurations for theme. `shouldColorContainer` boolean field
 
-
 </details>
 <hr/>
 
