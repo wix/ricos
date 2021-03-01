@@ -1,16 +1,16 @@
 import { mkdirSync, readdirSync, writeFileSync, readFileSync } from 'fs';
 import { execSync } from 'child_process';
 
-const GEN_DIR = 'generated';
+const GEN_DIR = 'src/generated';
 const TS_PROTO_DIR = '../../../node_modules/.bin/protoc-gen-ts_proto';
 
 mkdirSync(GEN_DIR);
 mkdirSync(`${GEN_DIR}/proto`);
 
-const schemas = readdirSync('./wix-proto');
+const schemas = readdirSync('./src/main/proto');
 
 schemas.forEach(schema => {
-  const schemaFile = readFileSync(`wix-proto/${schema}`, 'utf8');
+  const schemaFile = readFileSync(`src/main/proto/${schema}`, 'utf8');
   writeFileSync(`${GEN_DIR}/proto/${schema}`, schemaFile.replace(/ \[.*\];/g, ';'));
 });
 
