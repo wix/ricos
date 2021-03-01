@@ -1,11 +1,11 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { RicosContentBlock, RicosEntityMap, RicosEntityRange, EMOJI_TYPE } from '../../..';
-import { Decoration, Decoration_Type, Node_Type, Node } from 'ricos-schema';
+import { Decoration, Decoration_Type, Node } from 'ricos-schema';
 import { TO_RICOS_DECORATION_TYPE } from '../consts';
 
 import { isEmpty, merge } from 'lodash';
 import { getEntity } from './getRicosEntityData';
-import { genKey } from '../generateRandomKey';
+import { createTextNode } from '../../nodeUtils';
 
 type KeyType = string | number;
 type StyleType = string;
@@ -32,7 +32,7 @@ const isDecorationType = (decorationType: string) =>
   TO_RICOS_DECORATION_TYPE[decorationType] !== undefined;
 
 export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap): Node[] => {
-  const createTextNode = ({
+  const createTextNodeWithDecorations = ({
     text,
     styles = [],
     keys = [],
@@ -41,15 +41,7 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
     styles: StyleType[];
     keys: KeyType[];
   }): Node => {
-    const textNode: Node = {
-      key: genKey(),
-      type: Node_Type.TEXT,
-      nodes: [],
-      textData: {
-        text,
-        decorations: [],
-      },
-    };
+    const textNode: Node = createTextNode(text);
 
     let decorations: Decoration[] = [];
 
@@ -132,7 +124,7 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
       });
 
       textNodes.push(
-        createTextNode({
+        createTextNodeWithDecorations({
           text: Array.from(text)
             .slice(numbers[i], numbers[i + 1])
             .join(''),

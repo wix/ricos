@@ -1,4 +1,4 @@
-import complexContent from '../../../../../e2e/tests/fixtures/migration-content.json';
+import complexContent from '../../../../../../../e2e/tests/fixtures/migration-content.json';
 import { PLAIN_TEXT } from './complexPlainText';
 import { toPlainText } from './toPlainText';
 
