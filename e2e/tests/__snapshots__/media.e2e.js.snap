@@ -110,7 +110,6 @@ exports[`plugins > image > render image toolbar and settings #0`] =
         "config": {
           "alignment": "center",
           "disableExpand": false,
-          "disableRightClick": false,
           "link": {
             "url": "www.wix.com"
           },
@@ -118,6 +117,7 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           "showTitle": true,
           "size": "fullWidth"
         },
+        "disableRightClick": false,
         "metadata": {
           "caption": ""
         },
@@ -3027,11 +3027,11 @@ exports[`plugins > image > should disable image expand #0`] =
         "config": {
           "alignment": "center",
           "disableExpand": true,
-          "disableRightClick": false,
           "showDescription": true,
           "showTitle": true,
           "size": "small"
         },
+        "disableRightClick": false,
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
           "height": 3354,

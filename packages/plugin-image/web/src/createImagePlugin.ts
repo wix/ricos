@@ -11,13 +11,16 @@ import { isNumber } from 'lodash';
 
 const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config => {
   const type = IMAGE_TYPE;
-  Object.assign(DEFAULTS.config, { disableRightClick: !!config?.uiSettings?.disableRightClick });
+  const defaultPluginData = {
+    ...DEFAULTS,
+    disableRightClick: !!config?.uiSettings?.disableRightClick,
+  };
   const {
     helpers,
     t,
     anchorTarget,
     relValue,
-    [type]: settings = {},
+    [type]: settings,
     uiSettings,
     isMobile,
     innerModal,
@@ -81,13 +84,13 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     innerModal,
     anchorTarget,
     relValue,
-    settings,
+    settings: settings || {},
     uiSettings,
     t,
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    defaultPluginData: DEFAULTS,
-    spoilerWrapper: settings.spoiler && spoilerWrapper,
+    defaultPluginData,
+    spoilerWrapper: settings?.spoiler && spoilerWrapper,
     ...rest,
   });
 };

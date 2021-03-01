@@ -7202,7 +7202,6 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                     "config": {
                       "alignment": "center",
                       "disableExpand": false,
-                      "disableRightClick": false,
                       "showDescription": true,
                       "showTitle": true,
                       "size": "content"

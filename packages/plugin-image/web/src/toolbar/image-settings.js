@@ -33,7 +33,7 @@ class ImageSettings extends Component {
     const { componentData } = props;
     const { src, metadata, error, config } = componentData;
     const isExpandEnabled = !config?.disableExpand;
-    const isRightClickEnabled = !config?.disableRightClick;
+    const isRightClickEnabled = !componentData?.disableRightClick;
 
     return {
       src,
@@ -111,10 +111,10 @@ class ImageSettings extends Component {
     const { helpers, componentData, pubsub } = this.props;
     const newComponentData = {
       ...componentData,
+      disableRightClick: !this.state.isRightClickEnabled,
       config: {
         ...componentData.config,
         disableExpand: !this.state.isExpandEnabled,
-        disableRightClick: !this.state.isRightClickEnabled,
       },
     };
     if (this.state.metadata) {
@@ -162,7 +162,7 @@ class ImageSettings extends Component {
                 alt={metadata.alt || 'image preview'}
                 resizeMode={'contain'}
                 className={this.styles.imageSettingsImage}
-                src={getImageSrc(src, helpers, {
+                src={getImageSrc(src, helpers?.getImageUrl, {
                   requiredWidth: 1000,
                   requiredHeight: 250,
                   requiredQuality: 80,
