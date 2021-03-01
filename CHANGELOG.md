@@ -16,6 +16,13 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `editor-common`
+  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
+
+### :rocket: New Feature
+- `plugin-video`
+  - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
 </details>
 <hr/>
