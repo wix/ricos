@@ -22,6 +22,10 @@
 - `ricos-viewer`
   - [#2217](https://github.com/wix-incubator/rich-content/pull/2217) render full-screen on hover
 
+### :house: Internal
+- `bundle-analyzer`
+  - [#2238](https://github.com/wix/ricos/pull/2238) editor-common bundle size fixture
+
 </details>
 <hr/>
 
