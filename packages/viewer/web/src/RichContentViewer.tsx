@@ -68,7 +68,15 @@ export interface RichContentViewerProps {
 
 class RichContentViewer extends Component<
   RichContentViewerProps,
-  { raw?: RicosContent; error?: string }
+  {
+    raw?: RicosContent;
+    error?: string;
+    context: {
+      experiments?: AvailableExperiments;
+      isMobile: boolean;
+      t?: TranslationFunction;
+    };
+  }
 > {
   styles: Record<string, string>;
   typeMappers: PluginMapping;
@@ -91,7 +99,10 @@ class RichContentViewer extends Component<
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.typeMappers = combineMappers(props.typeMappers);
-    this.state = {};
+    const { experiments, isMobile = false, t } = props;
+    this.state = {
+      context: { experiments, isMobile, t },
+    };
   }
 
   static getInitialState = (props: RichContentViewerProps) => {
@@ -196,9 +207,6 @@ class RichContentViewer extends Component<
         inlineStyleMappers,
         locale,
         addAnchors,
-        isMobile = false,
-        t,
-        experiments,
         renderedInTable,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
@@ -238,7 +246,7 @@ class RichContentViewer extends Component<
       );
 
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
+        <GlobalContext.Provider value={this.state.context}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />

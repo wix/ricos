@@ -23,6 +23,97 @@
 </details>
 <hr/>
 
+## 8.24.0 (Feb 28, 2021)
+### :rocket: New Feature
+- `color`
+  - [#2225](https://github.com/wix-incubator/rich-content/pull/2225) Override panel position
+### :bug: Bug Fix
+- `video`
+  - [#2212](https://github.com/wix/ricos/pull/2212) fix crash when data is not provided upon upload error
+### :nail_care: Polish
+- `ricos-content`
+  -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
+
+## 8.23.1 (Feb 27, 2021)
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2216](https://github.com/wix/ricos/pull/2216) display error on block when unsupported error key is given when file upload fails
+### :house: Internal
+- `e2e`
+  - [#2220](https://github.com/wix/ricos/pull/2220) tests env fix - load theme on SSR, and remove seoMode for non-seo tests
+### :nail_care: Polish
+- `ricos-viewer`
+  - [#2222](https://github.com/wix/ricos/pull/2222) optimization(translations): skip redundant remount
+- `image`
+  - [#2213](https://github.com/wix/ricos/pull/2213) increase preload quality
+
+## 8.23.0 (Feb 24, 2021)
+### :rocket: New Feature
+- `fullScreen`
+  - [#2206](https://github.com/wix-incubator/rich-content/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
+## 8.22.9 (Feb 24, 2021)
+### :bug: Bug Fix
+- `common`
+  - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
+### :house: Internal
+- `storybook`
+  - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
+### :nail_care: Polish
+- `image`
+  - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
+
+## 8.22.8 (Feb 23, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+- `viewer`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+
+## 8.22.7 (Feb 22, 2021)
+### :bug: Bug Fix
+- `plugin-link`
+  - [#2182](https://github.com/wix/ricos/pull/2182) open link panel from external toolbar in mobile
+### :house: Internal
+- `common`
+  - [#2189](https://github.com/wix/ricos/pull/2189) experiments: support non-boolean values
+
+## 8.22.6 (Feb 22, 2021)
+### :nail_care: Polish
+- `image`
+  - [#2184](https://github.com/wix/ricos/pull/2184) thumbnail quality by `imageThumbnailQuality` experiment
+
+## 8.22.5 (Feb 21, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2183](https://github.com/wix/ricos/pull/2183) `customStyles` fix css-injection with `;` char
+
+## 8.22.4 (Feb 21, 2021)  
+- `common`
+  - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
+
+## 8.22.3 (Feb 20, 2021)
+### :rocket: New Feature
+- `fullScreen`
+  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
+### :house: Internal
+- `ricos-viewer`
+  - [#2168](https://github.com/wix-incubator/rich-content/pull/2168) load fullscreen modal if content includes images
+
+## 8.22.2 (Feb 18, 2021)
+### :house: Internal
+- `image`
+  - [#2167](https://github.com/wix/ricos/pull/2167) image config type contains optional `consumer` field for Photo Studio's internal BI
+  
+## 8.22.1 (Feb 18, 2021)
+### :house: Internal
+- `common`
+  - [#2161](https://github.com/wix/ricos/pull/2161) add container width optional prop
+### :bug: Bug Fix
+- `editor`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+- `viewer`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+
 ## 8.22.0 (Feb 16, 2021)
 ### :rocket: New Feature
 - `ricos-editor`
@@ -34,6 +125,8 @@
 - `ricos-editor`
   - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
   - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
+- `example`
+  - [#2151](https://github.com/wix-incubator/rich-content/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
 
 ## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix

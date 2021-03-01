@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { RefObject } from 'react';
 import classNames from 'classnames';
-import { IMAGE_TYPE } from './types';
+import { IMAGE_TYPE, ImagePluginViewerConfig, ImageConfig } from './types';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
   mergeStyles,
@@ -11,6 +10,10 @@ import {
   WIX_MEDIA_DEFAULT,
   anchorScroll,
   addAnchorTagToUrl,
+  GlobalContext,
+  Helpers,
+  RichContentTheme,
+  SEOSettings,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -21,13 +24,65 @@ import InPluginInput from './InPluginInput';
 
 const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-class ImageViewer extends React.Component {
+const replaceUrlFileExtenstion = (url, extensionTarget) => {
+  // replace png or jpg file to extensionTarget
+  return url.replace(/(.*)\.(jp(e)?g|png)$/, `$1.${extensionTarget}`);
+};
+
+interface ImageViewerProps {
+  componentData: {
+    config: ImageConfig;
+    src: { fallback: string; width: number };
+    metadata?: { caption?: unknown; alt?: string | undefined };
+    [key: string]: unknown;
+  };
+  className: string;
+  dataUrl: string;
+  settings: ImagePluginViewerConfig;
+  defaultCaption: string;
+  entityIndex: number;
+  onCaptionChange: () => void;
+  setFocusToBlock: () => void;
+  theme: RichContentTheme;
+  helpers: Helpers;
+  disableRightClick: boolean;
+  getInPluginEditingMode: () => unknown;
+  setInPluginEditingMode: () => unknown;
+  isMobile: boolean;
+  setComponentUrl: (highres?: string) => unknown;
+  seoMode: SEOSettings;
+  blockKey: string;
+}
+
+interface ImageSrc {
+  preload: string;
+  highres: string;
+}
+
+interface ImageViewerState {
+  container?: HTMLDivElement;
+  ssrDone?: boolean;
+  fallbackImageSrc?: ImageSrc;
+}
+
+class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
+  preloadRef: RefObject<HTMLImageElement>;
+  imageRef: RefObject<HTMLImageElement>;
+  styles: Record<string, string>;
+
   constructor(props) {
     super(props);
     validate(props.componentData, pluginImageSchema);
     this.state = {};
     this.preloadRef = React.createRef();
     this.imageRef = React.createRef();
+  }
+
+  static contextType = GlobalContext;
+
+  shouldUseSrcSet() {
+    const { experiments } = this.context;
+    return experiments?.useSrcSet?.enabled;
   }
 
   componentDidMount() {
@@ -63,39 +118,62 @@ class ImageViewer extends React.Component {
       : WIX_MEDIA_DEFAULT.SIZE;
   }
 
-  getImageUrl(src) {
+  getImageUrl(src): ImageSrc | null {
     const { helpers, seoMode } = this.props || {};
     if (!src && helpers?.handleFileSelection) {
       return null;
     }
 
-    const imageUrl = {
+    const imageUrl: ImageSrc = {
       preload: '',
       highres: '',
+    };
+
+    const getImageDimensions = (width, isMobile) => {
+      let requiredHeight;
+      let requiredWidth = width || 1;
+      if (isMobile && !isSSR()) {
+        //adjust the image width to viewport scaling and device pixel ratio
+        requiredWidth *= window.devicePixelRatio;
+        requiredWidth *= window.screen.width / document.body.clientWidth;
+      }
+      //keep the image's original ratio
+      requiredHeight = this.calculateHeight(requiredWidth, src);
+      requiredWidth = Math.ceil(requiredWidth);
+      requiredHeight = Math.ceil(requiredHeight);
+      return [requiredWidth, requiredHeight];
     };
 
     if (this.props.dataUrl) {
       imageUrl.preload = imageUrl.highres = this.props.dataUrl;
     } else {
       let requiredWidth, requiredHeight;
-      imageUrl.preload = getImageSrc(src, helpers);
+      let imageSrcOpts = {};
+      if (
+        this.context.experiments?.useQualityPreoad?.enabled ||
+        this.context.experiments?.useQualityPreload?.enabled
+      ) {
+        const {
+          componentData: {
+            config: { alignment, width },
+          },
+        } = this.props;
+        const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
+        imageSrcOpts = {
+          imageType: 'quailtyPreload',
+          ...(usePredefinedWidth && { requiredWidth: 300 }),
+        };
+      }
+      imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, imageSrcOpts);
       if (seoMode) {
         requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
         requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
       } else if (this.state.container) {
-        const { width } = this.state.container.getBoundingClientRect();
-        requiredWidth = width || src?.width || 1;
-        if (this.props.isMobile) {
-          //adjust the image width to viewport scaling and device pixel ratio
-          requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
-          requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
-        }
-        //keep the image's original ratio
-        requiredHeight = this.calculateHeight(requiredWidth, src);
-        requiredWidth = Math.ceil(requiredWidth);
-        requiredHeight = Math.ceil(requiredHeight);
+        const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
+        [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
       }
-      imageUrl.highres = getImageSrc(src, helpers, {
+
+      imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
         requiredWidth,
         requiredHeight,
         requiredQuality: 90,
@@ -124,15 +202,15 @@ class ImageViewer extends React.Component {
     }
   };
 
-  renderImage = (imageClassName, imageSrc, alt, props, isGif, seoMode) => {
+  renderImage = (imageClassName, imageSrc, alt, props, isGif, onlyHighRes) => {
     return this.getImage(
       classNames(imageClassName, this.styles.imageHighres, {
-        [this.styles.onlyHighRes]: isGif || seoMode,
+        [this.styles.onlyHighRes]: onlyHighRes,
       }),
       imageSrc.highres,
       alt,
       props,
-      !isGif
+      { fadeIn: !isGif, width: imageSrc.highresWidth, height: imageSrc.highresHeight }
     );
   };
 
@@ -141,20 +219,39 @@ class ImageViewer extends React.Component {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      { ariaHidden: 'true', ...props }
+      { ariaHidden: 'true', ...props, useSrcSet: true }
     );
   };
 
-  getImage(imageClassNames, src, alt, props, fadeIn = false) {
+  getImage(
+    imageClassNames,
+    src,
+    alt,
+    props,
+    opts: {
+      fadeIn?: boolean;
+      width?: number | string;
+      height?: number | string;
+      useSrcSet?: boolean;
+    } = {}
+  ) {
+    const { fadeIn = false, width, height, useSrcSet } = opts;
+    let srcSet;
+    if (this.shouldUseSrcSet() && useSrcSet) {
+      srcSet = replaceUrlFileExtenstion(src, 'webp');
+    }
     return (
       <img
         {...props}
         className={imageClassNames}
         src={src}
+        srcSet={srcSet}
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
         ref={fadeIn ? this.imageRef : this.preloadRef}
+        width={width}
+        height={height}
       />
     );
   }
@@ -162,7 +259,7 @@ class ImageViewer extends React.Component {
   onImageLoad = element => {
     element.style.opacity = 1;
     if (this.preloadRef.current) {
-      this.preloadRef.current.style.opacity = 0;
+      this.preloadRef.current.style.opacity = '0';
     }
   };
 
@@ -230,16 +327,14 @@ class ImageViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image');
-    onExpand?.(this.props.entityIndex);
+    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
+    onExpand?.(this.props.blockKey);
   };
 
   scrollToAnchor = () => {
     const {
       componentData: {
-        config: {
-          link: { anchor },
-        },
+        config: { link: { anchor } = {} },
       },
     } = this.props;
     const anchorString = `viewer-${anchor}`;
@@ -287,6 +382,7 @@ class ImageViewer extends React.Component {
     );
   };
 
+  // eslint-disable-next-line complexity
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
@@ -302,16 +398,18 @@ class ImageViewer extends React.Component {
     const imageClassName = this.styles.image;
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
     let imageProps = {};
-    if (data.src && settings) {
+    if (data.src && settings && settings.imageProps) {
       imageProps = isFunction(settings.imageProps)
         ? settings.imageProps(data.src)
         : settings.imageProps;
     }
     const isGif = imageSrc?.highres?.endsWith?.('.gif');
     setComponentUrl?.(imageSrc?.highres);
+
     const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
     const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
+    const onlyHiRes = seoMode || isGif;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
@@ -327,7 +425,7 @@ class ImageViewer extends React.Component {
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
-            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, onlyHiRes)}
           {hasExpand && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
@@ -337,24 +435,5 @@ class ImageViewer extends React.Component {
     );
   }
 }
-
-ImageViewer.propTypes = {
-  componentData: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  dataUrl: PropTypes.string,
-  settings: PropTypes.object,
-  defaultCaption: PropTypes.string,
-  entityIndex: PropTypes.number,
-  onCaptionChange: PropTypes.func,
-  setFocusToBlock: PropTypes.func,
-  theme: PropTypes.object.isRequired,
-  helpers: PropTypes.object.isRequired,
-  disableRightClick: PropTypes.bool,
-  getInPluginEditingMode: PropTypes.func,
-  setInPluginEditingMode: PropTypes.func,
-  isMobile: PropTypes.bool.isRequired,
-  setComponentUrl: PropTypes.func,
-  seoMode: PropTypes.bool,
-};
 
 export default ImageViewer;

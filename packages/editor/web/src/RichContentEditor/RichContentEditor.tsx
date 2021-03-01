@@ -160,6 +160,12 @@ interface State {
   textToolbarType?: TextToolbarType;
   error?: string;
   readOnly: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  context: {
+    experiments?: AvailableExperiments;
+    isMobile: boolean;
+    t?: TranslationFunction;
+  };
 }
 
 // experiment example code
@@ -220,11 +226,13 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   constructor(props: RichContentEditorProps) {
     super(props);
     const initialEditorState = this.getInitialEditorState();
+    const { experiments, isMobile = false, t } = props;
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
       readOnly: false,
+      context: { experiments, isMobile, t },
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -944,14 +952,16 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { onError, locale, direction, experiments, showToolbars = true } = this.props;
+    const { onError, locale, direction, showToolbars = true, isInnerRCE } = this.props;
     const { innerModal } = this.state;
+    const editorStyle = isInnerRCE ? { backgroundColor: 'transparent' } : {};
+
     try {
       if (this.state.error) {
         onError(this.state.error);
         return null;
       }
-      const { isMobile = false, t } = this.props;
+      const { isMobile = false } = this.props;
       const { theme } = this.contextualData;
       const themeDesktopStyle = theme.desktop
         ? { [theme.desktop]: !isMobile && theme && theme.desktop }
@@ -961,7 +971,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={{ experiments, isMobile, t }}>
+        <GlobalContext.Provider value={this.state.context}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
@@ -977,6 +987,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 <div
                   ref={this.setEditorWrapper}
                   className={classNames(styles.editor, theme.editor)}
+                  style={editorStyle}
                 >
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}

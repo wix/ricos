@@ -1,5 +1,5 @@
 import { ContextMenuIcon } from '../icons';
-import { getRange } from '../domain/tableDataUtil';
+import { getRange, getColsRange, getRowsRange } from '../domain/tableDataUtil';
 import { isCellsNumberInvalid } from '../tableUtil';
 
 const getRowIndex = range => range[0].i;
@@ -60,7 +60,7 @@ const addLastRowButton = (addRow, table, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRow_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: t('TablePlugin_SettingsModal_limitError'),
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -71,7 +71,7 @@ const addLastColButton = (addCol, table, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertCol_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: t('TablePlugin_SettingsModal_limitError'),
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -82,7 +82,7 @@ const addRowAboveButton = (addRow, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertAbove_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: t('TablePlugin_SettingsModal_limitError'),
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -93,7 +93,7 @@ const addRowBelowButton = (addRow, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertBelow_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: t('TablePlugin_SettingsModal_limitError'),
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -113,7 +113,7 @@ const addColRightButton = (addCol, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRight_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: t('TablePlugin_SettingsModal_limitError'),
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -124,7 +124,7 @@ const addColLeftButton = (addCol, range, t, disable) => {
     text: t('TablePlugin_Toolbar_ContextMenu_InsertLeft_Button'),
     type: 'text',
     isDisabled: () => disable,
-    tooltip: t('TablePlugin_SettingsModal_limitError'),
+    tooltip: disable && t('TablePlugin_SettingsModal_limitError'),
   };
 };
 
@@ -200,6 +200,8 @@ export const getContextMenuButtonsProps = (
   distributeColumns
 ) => {
   const range = selected && getRange(selected);
+  const colsRange = selected && getColsRange(selected);
+  const rowsRange = selected && getRowsRange(selected);
   const shouldShowMerge = false;
   const rowNum = table.getRowNum();
   const colNum = table.getColNum();
@@ -236,7 +238,7 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(distributeRows, selected, t),
+      distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else if (selectedCols) {
     buttons = [
@@ -249,7 +251,7 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeColumnsButton(distributeColumns, selected, t),
+      distributeRowsButton(distributeRows, selected, t),
     ];
   } else if (multipleCellsSelected) {
     buttons = [
@@ -258,8 +260,8 @@ export const getContextMenuButtonsProps = (
       shouldShowMerge && mergeButton(merge, t),
       shouldShowSplit && splitButton(table, selected, t),
       divider(),
-      distributeRowsButton(distributeRows, selected, t),
-      distributeColumnsButton(distributeColumns, selected, t),
+      rowsRange?.length > 1 && distributeRowsButton(distributeRows, selected, t),
+      colsRange?.length > 1 && distributeColumnsButton(distributeColumns, selected, t),
     ];
   } else {
     buttons = [

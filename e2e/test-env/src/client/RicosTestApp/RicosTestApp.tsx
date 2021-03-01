@@ -25,6 +25,7 @@ import { PaletteColors, RicosContent, SEOSettings } from 'wix-rich-content-commo
 import { EditorState } from '@wix/draft-js';
 import { merge } from 'lodash';
 
+const VIEWER_ONLY = false;
 const onVideoSelected = (url: string, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
@@ -32,8 +33,8 @@ const determinePalette = (paletteType: 'light' | 'dark', fallbackColor?: string)
   paletteType
     ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], { fallbackColor })
     : undefined;
-const setBackground = (palette: PaletteColors) =>
-  palette ? { backgroundColor: palette.bgColor } : {};
+const setBackground = (palette: PaletteColors, disableContainer: boolean) =>
+  !disableContainer && palette ? { backgroundColor: palette.bgColor } : {};
 const setForeground = (palette: PaletteColors) => (palette ? { color: palette.textColor } : {});
 const customStyles = [
   'h1',
@@ -167,7 +168,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
 
   render() {
     const { isMobile, testAppConfig = {} } = this.props;
-    const { theme: { paletteType } = {}, applyOuterStyle } = testAppConfig;
+    const { theme: { paletteType, disableContainer } = {}, applyOuterStyle } = testAppConfig;
     const palette = determinePalette(paletteType);
     const addStyle = applyOuterStyle
       ? { color: 'white', fontFamily: 'Times', backgroundColor: 'black' }
@@ -175,15 +176,17 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
     return (
       <div
         className={`testApp ${isMobile ? 'mobile' : ''}`}
-        style={{ ...setBackground(palette), ...addStyle }}
+        style={{ ...setBackground(palette, disableContainer), ...addStyle }}
       >
-        <div>
-          <h3 style={setForeground(palette)}>Editor</h3>
-          <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
-            {this.renderEditor()}
+        {!VIEWER_ONLY && (
+          <div>
+            <h3 style={setForeground(palette)}>Editor</h3>
+            <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
+              {this.renderEditor()}
+            </div>
           </div>
-        </div>
-        <div>
+        )}
+        <div className={`${VIEWER_ONLY ? 'full-width' : ''}`}>
           <h3 style={setForeground(palette)}>Viewer</h3>
           <div
             className="rcWrapper rcv"

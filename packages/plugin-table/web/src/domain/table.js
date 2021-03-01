@@ -358,19 +358,21 @@ class Table extends TableDataUtil {
     const rows = this.getRows();
     const cellsWithoutCol = {};
     const colNum = this.getColNum();
-    this.fixDeletedMergedCellsData(deleteIndexes, true);
+    const deleteIndexesAsNumbers = deleteIndexes.map(i => parseInt(i));
+    this.fixDeletedMergedCellsData(deleteIndexesAsNumbers, true);
     Object.entries(rows).forEach(([i, row]) => {
-      cellsWithoutCol[i] = createEmptyRow(colNum - deleteIndexes.length);
+      cellsWithoutCol[i] = createEmptyRow(colNum - deleteIndexesAsNumbers.length);
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (j < deleteIndexes[0]) {
+        const currColIndex = parseInt(j);
+        if (currColIndex < deleteIndexesAsNumbers[0]) {
           setRowsCell(cellsWithoutCol, column, i, j);
-        } else if (j > deleteIndexes[deleteIndexes.length - 1]) {
-          setRowsCell(cellsWithoutCol, column, i, parseInt(j) - deleteIndexes.length);
+        } else if (currColIndex > deleteIndexesAsNumbers[deleteIndexesAsNumbers.length - 1]) {
+          setRowsCell(cellsWithoutCol, column, i, currColIndex - deleteIndexesAsNumbers.length);
         }
       });
     });
-    this.getColsWidth().splice(deleteIndexes, deleteIndexes.length);
-    this.getColsMinWidth().splice(deleteIndexes, deleteIndexes.length);
+    this.getColsWidth().splice(deleteIndexesAsNumbers, deleteIndexesAsNumbers.length);
+    this.getColsMinWidth().splice(deleteIndexesAsNumbers, deleteIndexesAsNumbers.length);
     this.setNewRows(cellsWithoutCol);
   };
 

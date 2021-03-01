@@ -155,7 +155,7 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     let searchIndex = listStartIndex;
     let nextBlock = blocks[searchIndex];
 
-    while (isListBlock(nextBlock) && nextBlock.depth >= depth) {
+    while (nextBlock && isListBlock(nextBlock) && nextBlock.depth >= depth) {
       if (nextBlock.depth > depth || nextBlock.type !== listType) {
         const { node, nextIndex } = parseListBlocks(searchIndex);
         listNodes[listNodes.length - 1].nodes.push(node);
@@ -188,5 +188,5 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     },
   };
 
-  return RichContent.fromJSON(content);
+  return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent; // using toJSON to remove undefined fields
 };

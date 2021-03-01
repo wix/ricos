@@ -153,6 +153,14 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
+    it('should test the first and last block logic', function() {
+      cy.loadRicosEditorAndViewer('table-with-images', usePlugins(plugins.all));
+      cy.focusTable();
+      cy.eyesCheckWindow(this.test.title);
+      cy.enterEditingCell(0);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     // it('should use table toolbar context menu', function() {
     //   cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
     //   cy.focusTable();

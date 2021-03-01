@@ -17,9 +17,19 @@ export default class tableSettingsModal extends Component {
     };
   }
 
+  componentDidMount() {
+    this.colsInput?.focus();
+  }
+
   onCreateTableClicked = () => {
-    const { colCount, rowCount, submittedInvalidCol, submittedInvalidRow } = this.state;
-    if (colCount && rowCount && !submittedInvalidCol && !submittedInvalidRow) {
+    const {
+      colCount,
+      rowCount,
+      submittedInvalidCol,
+      submittedInvalidRow,
+      invalidCellNum,
+    } = this.state;
+    if (!invalidCellNum && colCount && rowCount && !submittedInvalidCol && !submittedInvalidRow) {
       const { componentData, pubsub, onConfirm, helpers } = this.props;
       const { config } = getDefaultsSettings(parseInt(rowCount), parseInt(colCount));
       if (onConfirm) {
@@ -57,6 +67,8 @@ export default class tableSettingsModal extends Component {
 
   onKeyUp = e => e.keyCode === KEYS_CHARCODE.ENTER && this.onCreateTableClicked();
 
+  setInputRef = ref => (this.colsInput = ref);
+
   render() {
     const { styles } = this;
     const {
@@ -68,7 +80,8 @@ export default class tableSettingsModal extends Component {
     } = this.state;
     const { isMobile, helpers, t } = this.props;
     return (
-      <div>
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      <div onKeyUp={this.onKeyUp}>
         {isMobile && (
           // eslint-disable-next-line
           <div onClick={helpers.closeModal} className={styles.closeButton}>
@@ -88,6 +101,7 @@ export default class tableSettingsModal extends Component {
             }
             dataHook={'columnCount'}
             showErrorIcon={!invalidCellNum}
+            setInputRef={this.setInputRef}
           />
           <TableSettingsCountSection
             title={t('TablePlugin_SettingsModal_RowCount')}
@@ -103,15 +117,13 @@ export default class tableSettingsModal extends Component {
           {invalidCellNum && (
             <div className={styles.errorMsg}>{t('TablePlugin_SettingsModal_limitError')}</div>
           )}
-          {/*eslint-disable-next-line*/}
           <div
             tabIndex="0" //eslint-disable-line
             className={styles.submit}
-            onClick={this.onCreateTableClicked}
-            onKeyUp={this.onKeyUp}
-            data-hook={'createTableButton'}
           >
-            {t('TablePlugin_SettingsModal_CreateTable_Button')}
+            <button onClick={this.onCreateTableClicked} data-hook={'createTableButton'}>
+              {t('TablePlugin_SettingsModal_CreateTable_Button')}
+            </button>
           </div>
         </div>
       </div>
