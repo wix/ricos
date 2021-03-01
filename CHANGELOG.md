@@ -20,6 +20,10 @@
 - `plugin-gallery`
   - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons 
 
+### :rocket: New Feature
+- `fullScreen`
+  - [#2206](https://github.com/wix-incubator/rich-content/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
+
 </details>
 <hr/>
 
