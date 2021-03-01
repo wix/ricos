@@ -5,7 +5,7 @@ import {
   RawDraftEntity,
   RawDraftContentState,
 } from '@wix/draft-js';
-import { ACCORDION_TYPE, TABLE_TYPE } from 'ricos-content';
+import { ACCORDION_TYPE, TABLE_TYPE, SOUND_CLOUD_TYPE, VIDEO_TYPE } from 'ricos-content';
 import { version } from '../package.json';
 
 const addVersion = (obj, version) => {
@@ -27,6 +27,7 @@ const fixBlockDataImmutableJS = contentState => {
 
 const isAccordion = entity => entity.type === ACCORDION_TYPE;
 const isTable = entity => entity.type === TABLE_TYPE;
+const isOldSoundCloud = entity => entity.type === SOUND_CLOUD_TYPE;
 
 type Pair = {
   key: string;
@@ -146,6 +147,13 @@ const entityFixersFromRaw = [
           column.content = EditorState.createWithContent(convertFromRaw(column.content));
         });
       });
+    },
+  },
+  {
+    predicate: isOldSoundCloud,
+    entityFixer: (entity: RawDraftEntity) => {
+      entity.type = VIDEO_TYPE;
+      entity.data.type = 'soundCloud';
     },
   },
 ];

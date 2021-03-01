@@ -17,6 +17,10 @@ export default class tableSettingsModal extends Component {
     };
   }
 
+  componentDidMount() {
+    this.colsInput?.focus();
+  }
+
   onCreateTableClicked = () => {
     const {
       colCount,
@@ -63,6 +67,8 @@ export default class tableSettingsModal extends Component {
 
   onKeyUp = e => e.keyCode === KEYS_CHARCODE.ENTER && this.onCreateTableClicked();
 
+  setInputRef = ref => (this.colsInput = ref);
+
   render() {
     const { styles } = this;
     const {
@@ -95,6 +101,7 @@ export default class tableSettingsModal extends Component {
             }
             dataHook={'columnCount'}
             showErrorIcon={!invalidCellNum}
+            setInputRef={this.setInputRef}
           />
           <TableSettingsCountSection
             title={t('TablePlugin_SettingsModal_RowCount')}
