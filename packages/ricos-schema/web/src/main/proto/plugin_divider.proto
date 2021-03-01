@@ -2,34 +2,16 @@ syntax = "proto3";
 
 package rich_content;
 
-import "google/protobuf/wrappers.proto";
+import "common.proto";
 
 message DividerData {
     enum DividerType {
-        DOUBLE = 0;
-        SINGLE = 1;
+        SINGLE = 0;
+        DOUBLE = 1;
         DASHED = 2;
         DOTTED = 3;
     }
 
-    DividerType type = 1;
-    DividerConfig config = 2;
-}
-
-message DividerConfig {
-    enum DividerSize {
-        SMALL = 0;
-        MEDIUM = 1;
-        LARGE = 2;
-    }
-    
-    enum DividerAlignment {
-        LEFT = 0;
-        RIGHT = 1;
-        CENTER = 2;
-    }
-    
-    DividerSize size = 1;
-    DividerAlignment alignment = 2;
-    google.protobuf.StringValue text_wrap = 3;
+    PluginContainerData container_data = 1;
+    DividerType type = 2;
 }

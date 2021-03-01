@@ -6,8 +6,7 @@ import "common.proto";
 import "google/protobuf/wrappers.proto";
 
 message HeadingData {
-    int32 level = 1;
-    Common.TextAlignment text_alignment = 2;
-    Common.DynamicStyles dynamic_styles = 3;
-    google.protobuf.Int32Value depth = 4;
+    int32 level = 1; //todo should heading and paragraph be the same message with enum Type (p, h1, h2...)
+    Common.TextStyle text_style = 2;
+    google.protobuf.Int32Value depth = 3;
 }
