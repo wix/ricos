@@ -114,6 +114,7 @@ describe('plugins', () => {
       beforeEach('load editor', () => cy.loadRicosEditorAndViewer('images'));
 
       it('expand image on full screen', function() {
+        cy.hoverOnViewer();
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
@@ -343,13 +344,13 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
-    it.skip('render upload modal', function() {
+    it('render upload modal', function() {
       cy.openSoundCloudModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
     //TODO: fix this flaky tests
-    it.skip('add a soundcloud URL', function() {
+    it('add a soundcloud URL', function() {
       cy.openSoundCloudModal();
       cy.addSoundCloud().wait(500);
       cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
