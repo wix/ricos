@@ -1,6 +1,6 @@
 import { Node_Type, RichContent, VideoSource } from 'ricos-schema';
-import { RicosContent } from '..';
-import { getParagraphNode } from '../migrateSchema/toDraft/decorationParsers';
+import { RicosContent } from '../../..';
+import { getParagraphNode } from '../../draft/toDraft/decorationParsers';
 import {
   parseGiphy,
   parseImage,
@@ -12,7 +12,7 @@ import {
   parseVerticalEmbed,
   parseVideo,
 } from './convertNodes';
-import { ensureRicosContent } from '../migrateSchema';
+import { ensureRicosContent } from '../../draft/fromDraft/fromDraft';
 
 interface PlainTextOptions {
   urlShortener?: (url: string) => Promise<string>;

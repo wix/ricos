@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 
 import { fromDraft } from './fromDraft';
-import { compare } from '../../comparision/compare';
-import fixture from '../../../../../../e2e/tests/fixtures/intro.json';
-import complexFixture from '../../../../../../e2e/tests/fixtures/migration-content.json';
+import { compare } from '../../../comparision/compare';
+import fixture from '../../../../../../../e2e/tests/fixtures/intro.json';
+import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
 import { getTextNodes } from './getTextNodes';
 import ricosFixture from './migratedFixtures/intro.json';
 import complexRicosFixture from './migratedFixtures/migration-content.json';
-import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
+import { Node_Type, Decoration_Type } from 'ricos-schema';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
-import { IMAGE_TYPE } from '../../consts';
+import { IMAGE_TYPE } from '../../../consts';
 
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
