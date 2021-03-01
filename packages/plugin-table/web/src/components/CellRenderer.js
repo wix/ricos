@@ -18,7 +18,6 @@ export default class Cell extends Component {
       this.editorRef.focus();
       this.props.setEditingActive(true);
       !this.props.isMobile && this.editorRef?.selectAllContent(true);
-      this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
     if (
       this.isEditing(prevProps.editing, prevProps.selectedCells) &&
@@ -34,6 +33,7 @@ export default class Cell extends Component {
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
         selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
+        this.tdHeight = this.tdRef?.offsetHeight - 1;
       }
     }
   }
@@ -124,6 +124,31 @@ export default class Cell extends Component {
     return !isMobile && shouldShowSelectedStyle ? { ...borders, ...cellSelectionBorders } : borders;
   };
 
+  hideBlocks = () => {
+    const { row, col, table, setEditorRef } = this.props;
+    const editorState = table.getCellContent(row, col);
+    const blocks = setEditorRef
+      ? editorState.getCurrentContent().getBlocksAsArray()
+      : editorState.blocks;
+    if (blocks.length >= 3) {
+      let lastBlockText;
+      let firstBlockText;
+      if (setEditorRef) {
+        const currentContent = editorState.getCurrentContent();
+        lastBlockText = currentContent.getLastBlock().getText();
+        firstBlockText = currentContent.getFirstBlock().getText();
+      } else {
+        lastBlockText = blocks[blocks.length - 1].text;
+        firstBlockText = blocks[0].text;
+      }
+      const hideFirstBlock = firstBlockText === '' || firstBlockText === '​'; //zero-width space
+      const hideLastBlock = lastBlockText === '' || lastBlockText === '​'; //zero-width space
+      return { hideFirstBlock, hideLastBlock };
+    } else {
+      return {};
+    }
+  };
+
   render() {
     const {
       row,
@@ -140,6 +165,7 @@ export default class Cell extends Component {
       table,
       isMobile,
       disableSelectedStyle,
+      setEditorRef,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
@@ -172,6 +198,7 @@ export default class Cell extends Component {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
     const editorWrapperStyle = this.getEditorWrapperStyle(additionalStyles, isEditing);
+    const { hideFirstBlock, hideLastBlock } = this.hideBlocks();
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -196,6 +223,9 @@ export default class Cell extends Component {
       >
         <div
           className={classNames(
+            setEditorRef ? styles.editorWrapper : styles.viewerWrapper,
+            !isEditing && hideFirstBlock && styles.hideFirstBlock,
+            !isEditing && hideLastBlock && styles.hideLastBlock,
             !isMobile && isEditing && styles.editing,
             !isEditing && styles.disableSelection
           )}
