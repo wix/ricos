@@ -4040,7 +4040,7 @@ exports[`plugins > social embed > render upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -4900,7 +4900,7 @@ exports[`plugins > social embed > render twitter upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -4958,7 +4958,7 @@ exports[`plugins > social embed > render instagram upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -5016,7 +5016,7 @@ exports[`plugins > social embed > render youtube upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -7202,6 +7202,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                     "config": {
                       "alignment": "center",
                       "disableExpand": false,
+                      "disableRightClick": false,
                       "showDescription": true,
                       "showTitle": true,
                       "size": "content"
