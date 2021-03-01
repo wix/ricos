@@ -1,10 +1,7 @@
 import React from 'react';
-import { RicosViewer } from 'ricos-viewer';
+import { RicosViewer } from 'ricos/viewer';
 import contentState from './contentState';
-import { RicosContent } from 'ricos-common';
-import { ViewerPlugin } from 'wix-rich-content-common';
-import 'ricos-viewer/dist/styles.min.css';
-import 'wix-rich-content-plugin-commons/dist/styles.min.css';
+import { RicosContent, ViewerPlugin } from 'ricos/common';
 
 export function createViewerBundle(plugin?: ViewerPlugin | ViewerPlugin[]) {
   const content: RicosContent = contentState;

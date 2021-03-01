@@ -348,7 +348,7 @@
           "key": "3fr87",
           "nodes": [],
           "textData": {
-            "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />",
+            "text": "import { RichContentEditor } from 'ricos/editor';\n\nconst myApp = () => <RichContentEditor />",
             "decorations": []
           }
         }

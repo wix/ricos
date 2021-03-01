@@ -4,10 +4,8 @@ title: Button Plugin
 sidebar_label: Button Plugin
 ---
 
-import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button/editor';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 <h3>There are two types of buttons:</h3>
@@ -37,16 +35,15 @@ import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditor
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginLinkButton } from 'wix-rich-content-plugin-button';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginLinkButton } from 'ricos/button/editor';
+
 <RicosEditor plugins={[pluginLinkButton(LinkButtonConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginLinkButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginLinkButton } from 'ricos/button/viewer';
+
 <RicosViewer plugins={[pluginLinkButton(LinkButtonConfig)]} />;
 ```
 
@@ -54,16 +51,15 @@ import 'wix-rich-content-plugin-button/dist/styles.min.css';
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginActionButton } from 'wix-rich-content-plugin-button';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginActionButton } from 'ricos/button/editor';
+
 <RicosEditor plugins={[pluginActionButton(ActionButtonConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginActionButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginActionButton } from 'ricos/button/viewer';
+
 <RicosViewer plugins={[pluginActionButton(ActionButtonConfig)]} />;
 ```
 

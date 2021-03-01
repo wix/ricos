@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import { pluginTable } from 'wix-rich-content-plugin-table';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
-import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { pluginTable } from 'ricos/table/editor';
+import { pluginImage } from 'ricos/image/editor';
+import { pluginLineSpacing } from 'ricos/line-spacing/editor';
+import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color/editor';
 
 const plugins = [
   pluginTable({

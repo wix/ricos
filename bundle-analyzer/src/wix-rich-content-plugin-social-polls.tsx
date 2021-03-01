@@ -1,5 +1,4 @@
-import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
-import { pluginPoll } from 'wix-rich-content-plugin-social-polls/viewer';
+import { pluginPoll } from 'ricos/poll/viewer';
 import { createViewerBundle } from './createViewerBundle';
 
 export default () => createViewerBundle(pluginPoll());

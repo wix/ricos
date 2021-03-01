@@ -4,12 +4,9 @@ title: Introducing the rich content viewer
 sidebar_label: Add a viewer
 ---
 
-import { RicosViewer } from 'ricos-viewer';
-import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'ricos-viewer/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginDivider } from 'ricos/divider/viewer';
+import { pluginVideo } from 'ricos/video/viewer';
 import content from '../../infra/editor/content/intro.json';
 import contentWithPlugins from '../../infra/editor/content/viewer-with-plugins.json';
 
@@ -20,8 +17,7 @@ npm i ricos-viewer
 ```
 
 ```jsx
-import { RicosViewer } from 'ricos-viewer';
-import 'ricos-viewer/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
 
 const content = {
   blocks: [
@@ -47,19 +43,15 @@ const content = {
 </div>
 
 Now let's add some plugins to Ricos and display the new content:
+
 ```bash
 npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
 ```
 
 ```jsx
-import { RicosViewer } from 'ricos-viewer';
-import 'ricos-viewer/dist/styles.min.css';
-
-import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
-
-import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginVideo } from 'ricos/video/viewer';
+import { pluginDivider } from 'ricos/divider/viewer';
 
 <RicosViewer content={contentWithPlugins} plugins={[pluginDivider(), pluginVideo()]} />;
 ```

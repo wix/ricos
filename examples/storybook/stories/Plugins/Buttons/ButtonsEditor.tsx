@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button/editor';
 
 const config = {
   insertButtonTooltip: 'Custom action tooltip',

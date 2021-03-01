@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { debounce, isEqual } from 'lodash';
-import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
+import { debounce } from 'lodash';
+import { getContentStateSchema, RicosContent } from 'ricos/common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -18,21 +18,21 @@ import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/ve
 import linkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 import pollsSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-polls.schema.json';
 
-import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
-import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import { IMAGE_TYPE } from 'wix-rich-content-plugin-image';
-import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
-import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
-import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
-import { MAP_TYPE } from 'wix-rich-content-plugin-map';
-import { HTML_TYPE } from 'wix-rich-content-plugin-html';
-import { LINK_TYPE } from 'wix-rich-content-plugin-link';
-import { MENTION_TYPE } from 'wix-rich-content-plugin-mentions';
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button';
-import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
-import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
-import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
+import { DIVIDER_TYPE } from 'ricos/divider/editor';
+import { VIDEO_TYPE } from 'ricos/video/editor';
+import { IMAGE_TYPE } from 'ricos/image/editor';
+import { GIPHY_TYPE } from 'ricos/giphy/editor';
+import { FILE_UPLOAD_TYPE } from 'ricos/file/editor';
+import { SOUND_CLOUD_TYPE } from 'ricos/sound-cloud/editor';
+import { MAP_TYPE } from 'ricos/map/editor';
+import { HTML_TYPE } from 'ricos/html/editor';
+import { LINK_TYPE } from 'ricos/link/editor';
+import { MENTION_TYPE } from 'ricos/mention/editor';
+import { GALLERY_TYPE } from 'ricos/gallery/editor';
+import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'ricos/button/editor';
+import { VERTICAL_EMBED_TYPE } from 'ricos/vertical-embed/editor';
+import { LINK_PREVIEW_TYPE } from 'ricos/link-preview/editor';
+import { POLL_TYPE } from 'ricos/poll/editor';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
 import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { RicosContent, RicosViewer } from 'ricos/viewer';
+import { TextSelectionToolbar, TwitterButton } from 'ricos/text-selection-toolbar';
 
 class TextSelectionViewer extends Component<
   { content?: RicosContent },

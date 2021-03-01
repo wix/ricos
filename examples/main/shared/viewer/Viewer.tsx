@@ -1,14 +1,13 @@
 import React, { PureComponent, RefObject } from 'react';
-import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
-import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { RichContentViewer, RichContentViewerProps, RicosViewer } from 'ricos/viewer';
+import { isSSR, RicosContent, SEOSettings } from 'ricos/common';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { RicosViewer } from 'ricos-viewer';
+import { IMAGE_TYPE } from 'ricos/image/viewer';
+import { TextSelectionToolbar, TwitterButton } from 'ricos/text-selection-toolbar';
+import { GALLERY_TYPE } from 'ricos/gallery/viewer';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';

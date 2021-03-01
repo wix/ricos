@@ -4,11 +4,9 @@ title: LinkPreview Plugin
 sidebar_label: LinkPreview Plugin
 ---
 
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { pluginLinkPreview } from 'ricos/link-preview/editor';
+import { pluginLink } from 'ricos/link/editor';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Link Preview plugin allow the user to add a link preview.
@@ -39,17 +37,16 @@ Link Preview with inline-embed: for this Usage, html plugin should also be insta
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginLinkPreview } from 'ricos/link-preview/editor';
+import { pluginLink } from 'ricos/link/editor';
+
 <RicosEditor plugins={[pluginLinkPreview(LinkPreviewConfig), pluginLink({})]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
-import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginLinkPreview } from 'ricos/link-preview/viewer';
+
 <RicosViewer plugins={[pluginLinkPreview(LinkPreviewConfig)]} />;
 ```
 

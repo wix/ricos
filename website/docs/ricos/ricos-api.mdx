@@ -4,8 +4,7 @@ title: Ricos API
 sidebar_label: Ricos API
 ---
 
-import { RicosEditor } from 'ricos-editor';
-import 'ricos-editor/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
 
 ## Ricos Common API
 
@@ -129,16 +128,14 @@ plugins?: PluginConfig[]
 For every plugin you install, import it and add it to the plugins array.
 
 ```jsx
-import { RicosEditor } from 'ricos-editor';
-
-import { pluginVideo } from 'wix-rich-content-plugin-video';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginVideo } from 'ricos/video/editor';
 
 <RicosEditor plugins={[pluginVideo()]} />;
 ```
 
 :::note
-For rendering a viewer, import the plugin from the viewer entry point <br/> `wix-rich-content-plugin-video/dist/module.viewer`
+For rendering a viewer, import the plugin from the viewer entry point <br/> `ricos/video/viewer`
 :::
 
 ### `theme`

@@ -7,7 +7,7 @@ import {
   createWithContent,
   EditorState,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { isSSR, RicosContent, SEOSettings } from 'ricos/common';
 import { getRequestedLocale, normalize } from '../src/utils';
 import { TestAppConfig } from '../src/types';
 

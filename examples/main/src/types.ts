@@ -1,4 +1,4 @@
-import { PluginType, RichContentTheme } from 'wix-rich-content-common';
+import { PluginType } from 'ricos/common';
 
 export type OnVisibilityChanged = (sectionName: string, isVisible: boolean) => void;
 

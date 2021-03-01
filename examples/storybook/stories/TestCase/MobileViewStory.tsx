@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { convertToRaw } from 'wix-rich-content-editor-common';
+import { convertToRaw } from 'ricos/editor-common';
 
 import ViewerWrapper from '../Components/ViewerWrapper';
 import EditorWrapper from '../Components/EditorWrapper';

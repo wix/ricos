@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { mapKeys, upperFirst } from 'lodash';
-import { RichContentTheme } from 'wix-rich-content-common';
+import { RichContentTheme } from 'ricos/common';
 import stylesOOI from './styles/theme-ooi.scss';
 
 const createToolbarTheme = (toolbarName: string, theme: RichContentTheme) =>

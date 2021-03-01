@@ -7,7 +7,7 @@ import complexFixture from '../../../../../../e2e/tests/fixtures/migration-conte
 import { getTextNodes } from './getTextNodes';
 import ricosFixture from './migratedFixtures/intro.json';
 import complexRicosFixture from './migratedFixtures/migration-content.json';
-import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
+import { Node_Type, Decoration_Type } from 'ricos-schema';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
 import { IMAGE_TYPE } from '../../consts';
 

@@ -4,10 +4,8 @@ title: Gallery Plugin
 sidebar_label: Gallery Plugin
 ---
 
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { pluginGallery } from 'ricos/gallery/editor';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithHelpers } from '../../infra/editor/components/RicosEditorWithHelpers.tsx';
 import { mockImageNativeUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
 
@@ -28,16 +26,15 @@ Let's push even higher with tons of customizable layouts to explore !
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginGallery } from 'ricos/gallery/editor';
+
 <RicosEditor plugins={[pluginGallery(GalleryConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginGallery } from 'ricos/gallery/viewer';
+
 <RicosViewer plugins={[pluginGallery(GalleryConfig)]} />;
 ```
 

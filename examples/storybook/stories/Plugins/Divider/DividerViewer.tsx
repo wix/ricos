@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
-import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
+import { RicosContent, RicosViewer } from 'ricos/viewer';
+import { pluginDivider } from 'ricos/divider/viewer';
 
 const DividerViewer: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
   <RicosViewer content={content} plugins={[pluginDivider()]} />

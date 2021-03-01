@@ -1,50 +1,31 @@
 import theme from '../theme/theme';
-import { videoTypeMapper, VIDEO_TYPE, pluginVideo } from 'wix-rich-content-plugin-video/viewer';
-import { dividerTypeMapper, pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
-import { htmlTypeMapper, pluginHtml } from 'wix-rich-content-plugin-html/viewer';
-import { soundCloudTypeMapper, pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/viewer';
-import { linkTypeMapper, LINK_TYPE, pluginLink } from 'wix-rich-content-plugin-link/viewer';
+import { videoTypeMapper, VIDEO_TYPE, pluginVideo } from 'ricos/video/viewer';
+import { dividerTypeMapper, pluginDivider } from 'ricos/divider/viewer';
+import { htmlTypeMapper, pluginHtml } from 'ricos/html/viewer';
+import { soundCloudTypeMapper, pluginSoundCloud } from 'ricos/sound-cloud/viewer';
+import { linkTypeMapper, LINK_TYPE, pluginLink } from 'ricos/link/viewer';
 import {
   linkPreviewTypeMapper,
   LINK_PREVIEW_TYPE,
   pluginLinkPreview,
-} from 'wix-rich-content-plugin-link-preview/viewer';
-import { imageTypeMapper, pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { tableTypeMapper, pluginTable } from 'wix-rich-content-plugin-table/viewer';
+} from 'ricos/link-preview/viewer';
+import { imageTypeMapper, pluginImage } from 'ricos/image/viewer';
+import { tableTypeMapper, pluginTable } from 'ricos/table/viewer';
 
-import {
-  galleryTypeMapper,
-  pluginGallery,
-  GALLERY_TYPE,
-} from 'wix-rich-content-plugin-gallery/viewer';
-import { mapTypeMapper, pluginMap } from 'wix-rich-content-plugin-map/viewer';
-import { giphyTypeMapper, pluginGiphy, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
-import {
-  buttonTypeMapper,
-  pluginActionButton,
-  ACTION_BUTTON_TYPE,
-} from 'wix-rich-content-plugin-button/viewer';
-import { HashtagDecorator, pluginHashtag } from 'wix-rich-content-plugin-hashtag/viewer';
-import {
-  verticalEmbedTypeMapper,
-  pluginVerticalEmbed,
-} from 'wix-rich-content-plugin-vertical-embed/viewer';
+import { galleryTypeMapper, pluginGallery, GALLERY_TYPE } from 'ricos/gallery/viewer';
+import { mapTypeMapper, pluginMap } from 'ricos/map/viewer';
+import { giphyTypeMapper, pluginGiphy, GIPHY_TYPE } from 'ricos/giphy/viewer';
+import { buttonTypeMapper, pluginActionButton, ACTION_BUTTON_TYPE } from 'ricos/button/viewer';
+import { HashtagDecorator, pluginHashtag } from 'ricos/hashtag/viewer';
+import { verticalEmbedTypeMapper, pluginVerticalEmbed } from 'ricos/vertical-embed/viewer';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
   pluginHeadersMarkdown,
-} from 'wix-rich-content-plugin-headers-markdown';
-import { CodeBlockDecorator, pluginCodeBlock } from 'wix-rich-content-plugin-code-block/viewer';
-import {
-  mentionsTypeMapper,
-  MENTION_TYPE,
-  pluginMentions,
-} from 'wix-rich-content-plugin-mentions/viewer';
-import {
-  fileUploadTypeMapper,
-  pluginFileUpload,
-  FILE_UPLOAD_TYPE,
-} from 'wix-rich-content-plugin-file-upload/viewer';
+} from 'ricos/headers-markdown/editor';
+import { CodeBlockDecorator, pluginCodeBlock } from 'ricos/code-block/viewer';
+import { mentionsTypeMapper, MENTION_TYPE, pluginMentions } from 'ricos/mention/viewer';
+import { fileUploadTypeMapper, pluginFileUpload, FILE_UPLOAD_TYPE } from 'ricos/file/viewer';
 import {
   textColorInlineStyleMapper,
   TEXT_COLOR_TYPE,
@@ -52,15 +33,15 @@ import {
   textHighlightInlineStyleMapper,
   pluginTextColor,
   pluginTextHighlight,
-} from 'wix-rich-content-plugin-text-color/viewer';
+} from 'ricos/text-color/viewer';
 import {
   spoilerInlineStyleMapper,
   initSpoilersContentState,
   SpoilerViewerWrapper,
   SPOILER_TYPE,
   pluginSpoiler,
-} from 'wix-rich-content-plugin-spoiler/viewer';
-import { accordionTypeMapper, pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+} from 'ricos/spoiler/viewer';
+import { accordionTypeMapper, pluginAccordion } from 'ricos/accordion/viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -68,33 +49,9 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 
-import { pollTypeMapper, pluginPoll, POLL_TYPE } from 'wix-rich-content-plugin-social-polls/viewer';
+import { pollTypeMapper, pluginPoll, POLL_TYPE } from 'ricos/poll/viewer';
 
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-viewer/dist/styles.min.css';
-// import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
-import 'wix-rich-content-plugin-image/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
-import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
-import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
-import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
-import 'wix-rich-content-plugin-map/dist/styles.min.css';
-import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
-import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
-import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-import 'wix-rich-content-plugin-table/dist/styles.min.css';
-
-import { RichContentViewerProps } from 'wix-rich-content-viewer';
+import { RichContentViewerProps } from 'ricos/viewer';
 import {
   Decorator,
   HASHTAG_TYPE,
@@ -102,7 +59,7 @@ import {
   RicosContent,
   UISettings,
   ViewerPlugin,
-} from 'wix-rich-content-common';
+} from 'ricos/common';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
@@ -223,7 +180,7 @@ export const viewerPlugins: ViewerPlugin[] = [
 ];
 
 export const getConfig = (additionalConfig = {}): RichContentViewerProps['config'] => {
-  let _config = { ...config };
+  const _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     if (additionalConfig[key]) {
       const orgConfig = config[key] || {};

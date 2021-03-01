@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import ReactJson from 'react-json-view';
 import SourceCode from './SourceCode';
 import styles from './styles.scss';
-import { RicosContent } from 'ricos-editor';
+import { RicosContent } from 'ricos/editor';
 
 export const Page: FunctionComponent<{ title?: string }> = ({ title, children }) => (
   <div className={styles.page}>

@@ -4,10 +4,8 @@ title: Link Plugin
 sidebar_label: Link Plugin
 ---
 
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { pluginLink } from 'ricos/link/editor';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Link plugin allow the user to add links
@@ -28,16 +26,15 @@ Link plugin allow the user to add links
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginLink } from 'wix-rich-content-plugin-link';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginLink } from 'ricos/link/editor';
+
 <RicosEditor plugins={[pluginLink(LinkConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginLink } from 'ricos/link/viewer';
+
 <RicosViewer plugins={[pluginLink(LinkConfig)]} />;
 ```
 

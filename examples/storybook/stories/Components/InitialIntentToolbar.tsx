@@ -1,6 +1,6 @@
 import React, { Component, MouseEventHandler } from 'react';
 import { FileInput } from 'wix-rich-content-plugin-commons';
-import { BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'ricos/editor-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
 import VideoCamera from 'wix-ui-icons-common/VideoCamera';

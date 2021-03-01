@@ -8,7 +8,7 @@ import firstContent from '../../../../e2e/tests/fixtures/plain.json';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
-import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'ricos/editor-common';
 
 const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 

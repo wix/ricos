@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { Page } from '../Components/StoryParts';
-import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'ricos/editor-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import EditorWrapper from '../Components/EditorWrapper';
-import { ToolbarButtonProps } from 'wix-rich-content-common';
+import { ToolbarButtonProps } from 'ricos/common';
 
 const plugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 let editorRef;

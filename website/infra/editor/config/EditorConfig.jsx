@@ -1,78 +1,49 @@
 import React from 'react';
-import { createLinkPlugin, LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { createLinkPlugin, LINK_TYPE } from 'ricos/link/editor';
 import {
   createLinkPreviewPlugin,
   LINK_PREVIEW_TYPE,
   LinkPreviewProviders,
-} from 'wix-rich-content-plugin-link-preview';
-import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'wix-rich-content-plugin-line-spacing';
-import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hashtag';
-import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
-import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
-import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
-import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
-import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
-import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
+} from 'ricos/link-preview/editor';
+import { createLineSpacingPlugin, LINE_SPACING_TYPE } from 'ricos/line-spacing/editor';
+import { createHashtagPlugin, HASHTAG_TYPE } from 'ricos/hashtag/editor';
+import { createEmojiPlugin, EMOJI_TYPE } from 'ricos/emoji/editor';
+import { createImagePlugin, IMAGE_TYPE } from 'ricos/image/editor';
+import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'ricos/undo-redo/editor';
+import { createGalleryPlugin, GALLERY_TYPE } from 'ricos/gallery/editor';
+import { createVideoPlugin, VIDEO_TYPE } from 'ricos/video/editor';
+import { createHtmlPlugin, HTML_TYPE } from 'ricos/html/editor';
+import { createDividerPlugin, DIVIDER_TYPE } from 'ricos/divider/editor';
+import { createUnsupportedBlocksPlugin } from 'ricos/unsupported-blocks';
 import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
   verticalEmbedProviders,
-} from 'wix-rich-content-plugin-vertical-embed';
-import {
-  createExternalMentionsPlugin,
-  EXTERNAL_MENTIONS_TYPE,
-} from 'wix-rich-content-plugin-mentions';
-import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
-import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
-import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
-import {
-  createHeadersMarkdownPlugin,
-  HEADERS_MARKDOWN_TYPE,
-} from 'wix-rich-content-plugin-headers-markdown';
-import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
-import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
+} from 'ricos/vertical-embed/editor';
+import { createExternalMentionsPlugin, EXTERNAL_MENTIONS_TYPE } from 'ricos/mention/editor';
+import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'ricos/code-block/editor';
+import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'ricos/sound-cloud/editor';
+import { createGiphyPlugin, GIPHY_TYPE } from 'ricos/giphy/editor';
+import { createHeadersMarkdownPlugin, HEADERS_MARKDOWN_TYPE } from 'ricos/headers-markdown/editor';
+import { createMapPlugin, MAP_TYPE } from 'ricos/map/editor';
+import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'ricos/file/editor';
 import {
   createTextHighlightPlugin,
   TEXT_HIGHLIGHT_TYPE,
   createTextColorPlugin,
   TEXT_COLOR_TYPE,
-} from 'wix-rich-content-plugin-text-color';
+} from 'ricos/text-color/editor';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
   createActionButtonPlugin,
   ACTION_BUTTON_TYPE,
-} from 'wix-rich-content-plugin-button';
+} from 'ricos/button/editor';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from './linkPreviewUtil';
 
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-import 'wix-rich-content-plugin-commons/dist/styles.min.css';
-import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
-// import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
-import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
-import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
-import 'wix-rich-content-plugin-image/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
-import 'wix-rich-content-plugin-map/dist/styles.min.css';
-import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
-import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
@@ -81,8 +52,8 @@ import {
 } from './text-color-style-fn';
 
 import { testWixVideos } from './mock';
-// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'ricos/editor-common';
+import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'ricos/editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';

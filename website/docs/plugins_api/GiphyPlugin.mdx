@@ -4,10 +4,8 @@ title: Giphy Plugin
 sidebar_label: Giphy Plugin
 ---
 
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { pluginGiphy } from 'ricos/giphy/editor';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Giphy plugin is pretty self explantory - it allow the user to add GIFs!
@@ -25,16 +23,15 @@ Giphy plugin is pretty self explantory - it allow the user to add GIFs!
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginGiphy } from 'ricos/giphy/editor';
+
 <RicosEditor plugins={[pluginGiphy(GiphyConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginGiphy } from 'ricos/giphy/viewer';
+
 <RicosViewer plugins={[pluginGiphy(GiphyConfig)]} />;
 ```
 

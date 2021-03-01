@@ -1,9 +1,9 @@
 import React from 'react';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { RicosEditor } from 'ricos-editor';
-import { RicosViewer } from 'ricos-viewer';
-import { pluginImage as pluginImageEditor } from 'wix-rich-content-plugin-image';
-import { pluginImage as pluginImageViewer } from 'wix-rich-content-plugin-image/viewer';
+import { RichContentEditor } from 'ricos/editor';
+import { RicosEditor } from 'ricos/editor';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginImage as pluginImageEditor } from 'ricos/image/editor';
+import { pluginImage as pluginImageViewer } from 'ricos/image/viewer';
 import imageFloatWithSpace from '../../../../e2e/tests/fixtures/image-float-with-spacing.json';
 import {
   RichContentEditorBox,

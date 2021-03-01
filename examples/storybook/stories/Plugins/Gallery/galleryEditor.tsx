@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { Helpers } from 'wix-rich-content-common';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { RichContentEditor } from 'ricos/editor';
+import { pluginGallery } from 'ricos/gallery/editor';
+import { Helpers } from 'ricos/common';
 
 const GalleryEditor: FunctionComponent<{
   content?: RicosContent;

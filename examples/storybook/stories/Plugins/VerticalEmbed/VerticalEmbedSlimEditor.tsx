@@ -1,9 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
-import {
-  pluginVerticalEmbed,
-  verticalEmbedProviders,
-} from 'wix-rich-content-plugin-vertical-embed';
+import { RicosContent, RicosEditor } from 'ricos/editor';
+import { pluginVerticalEmbed, verticalEmbedProviders } from 'ricos/vertical-embed/editor';
 import { MockVerticalSearchModule } from '../../../../main/shared/utils/verticalEmbedUtil';
 
 const { event, booking, product } = verticalEmbedProviders;

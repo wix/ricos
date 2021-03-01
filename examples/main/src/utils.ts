@@ -1,7 +1,7 @@
 import { debounce, pick } from 'lodash';
 import { set, get } from 'local-storage';
 import MobileDetect from 'mobile-detect';
-import { normalizeInitialState, isSSR, RicosContent } from 'wix-rich-content-common';
+import { normalizeInitialState, isSSR, RicosContent } from 'ricos/common';
 import * as CONSTS from './consts';
 
 const mobileDetect = !isSSR() ? new MobileDetect(window.navigator.userAgent) : null;

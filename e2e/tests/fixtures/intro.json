@@ -259,7 +259,7 @@
     },
     {
       "key": "ejfuu",
-      "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />",
+      "text": "import { RichContentEditor } from 'ricos/editor';\n\nconst myApp = () => <RichContentEditor />",
       "type": "code-block",
       "depth": 0,
       "inlineStyleRanges": [],

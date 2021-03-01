@@ -27,12 +27,12 @@ Existing consumers can gradually integrate Ricos into their code. The Ricos wrap
 #### Wrapping the RCE with Ricos
 
 ```jsx
-import { RicosEditor } from 'ricos-editor';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos/editor';
+import { RichContentEditor } from 'ricos/editor';
 
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
-import { pluginImage } from 'wix-rich-content-plugin-image';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginGiphy } from 'ricos/giphy/editor';
+import { pluginImage } from 'ricos/image/editor';
+import { pluginVideo } from 'ricos/video/editor';
 
 ...
 
@@ -58,12 +58,12 @@ class App extends Component {
 ### Wrapping the RCV
 
 ```jsx
-import { RicosViewer } from 'ricos-viewer';
-import { RichContentViewer} from 'wix-rich-content-viewer';
+import { RicosViewer } from 'ricos/viewer';
+import { RichContentViewer} from 'ricos/viewer';
 
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy/viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
+import { pluginGiphy } from 'ricos/giphy/viewer';
+import { pluginImage } from 'ricos/image/viewer';
+import { pluginVideo } from 'ricos/video/viewer';
 
 ...
 

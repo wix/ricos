@@ -1,84 +1,65 @@
 import React from 'react';
-import { createLinkPlugin, LINK_TYPE, pluginLink } from 'wix-rich-content-plugin-link';
+import { createLinkPlugin, LINK_TYPE, pluginLink } from 'ricos/link/editor';
 import {
   createLinkPreviewPlugin,
   LINK_PREVIEW_TYPE,
   LinkPreviewProviders,
   pluginLinkPreview,
-} from 'wix-rich-content-plugin-link-preview';
+} from 'ricos/link-preview/editor';
 import {
   createLineSpacingPlugin,
   LINE_SPACING_TYPE,
   pluginLineSpacing,
-} from 'wix-rich-content-plugin-line-spacing';
-import { createHashtagPlugin, HASHTAG_TYPE, pluginHashtag } from 'wix-rich-content-plugin-hashtag';
-import { createEmojiPlugin, EMOJI_TYPE, pluginEmoji } from 'wix-rich-content-plugin-emoji';
-import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'wix-rich-content-plugin-image';
-import {
-  createUndoRedoPlugin,
-  pluginUndoRedo,
-  UNDO_REDO_TYPE,
-} from 'wix-rich-content-plugin-undo-redo';
-import { createGalleryPlugin, GALLERY_TYPE, pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { createVideoPlugin, pluginVideo, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import {
-  createHtmlPlugin,
-  HTML_TYPE,
-  htmlButtonsTypes,
-  pluginHtml,
-} from 'wix-rich-content-plugin-html';
-import { createDividerPlugin, DIVIDER_TYPE, pluginDivider } from 'wix-rich-content-plugin-divider';
+} from 'ricos/line-spacing/editor';
+import { createHashtagPlugin, HASHTAG_TYPE, pluginHashtag } from 'ricos/hashtag/editor';
+import { createEmojiPlugin, EMOJI_TYPE, pluginEmoji } from 'ricos/emoji/editor';
+import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'ricos/image/editor';
+import { createUndoRedoPlugin, pluginUndoRedo, UNDO_REDO_TYPE } from 'ricos/undo-redo/editor';
+import { createGalleryPlugin, GALLERY_TYPE, pluginGallery } from 'ricos/gallery/editor';
+import { createVideoPlugin, pluginVideo, VIDEO_TYPE } from 'ricos/video/editor';
+import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes, pluginHtml } from 'ricos/html/editor';
+import { createDividerPlugin, DIVIDER_TYPE, pluginDivider } from 'ricos/divider/editor';
 import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
   verticalEmbedProviders,
   pluginVerticalEmbed,
-} from 'wix-rich-content-plugin-vertical-embed';
+} from 'ricos/vertical-embed/editor';
 import {
   createExternalMentionsPlugin,
   EXTERNAL_MENTIONS_TYPE,
   pluginMentions,
-} from 'wix-rich-content-plugin-mentions';
-import {
-  createCodeBlockPlugin,
-  CODE_BLOCK_TYPE,
-  pluginCodeBlock,
-} from 'wix-rich-content-plugin-code-block';
-import {
-  createHeadingsPlugin,
-  HEADINGS_DROPDOWN_TYPE,
-  pluginHeadings,
-} from 'wix-rich-content-plugin-headings';
+} from 'ricos/mention/editor';
+import { createCodeBlockPlugin, CODE_BLOCK_TYPE, pluginCodeBlock } from 'ricos/code-block/editor';
+import { createHeadingsPlugin, HEADINGS_DROPDOWN_TYPE, pluginHeadings } from 'ricos/heading';
 import {
   createSoundCloudPlugin,
   pluginSoundCloud,
   SOUND_CLOUD_TYPE,
-} from 'wix-rich-content-plugin-sound-cloud';
-import { createGiphyPlugin, GIPHY_TYPE, pluginGiphy } from 'wix-rich-content-plugin-giphy';
+} from 'ricos/sound-cloud/editor';
+import { createGiphyPlugin, GIPHY_TYPE, pluginGiphy } from 'ricos/giphy/editor';
 import {
   createHeadersMarkdownPlugin,
   HEADERS_MARKDOWN_TYPE,
   pluginHeadersMarkdown,
-} from 'wix-rich-content-plugin-headers-markdown';
-import { createMapPlugin, MAP_TYPE, pluginMap } from 'wix-rich-content-plugin-map';
-import { createPollPlugin, pluginPoll, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
-import {
-  createFileUploadPlugin,
-  FILE_UPLOAD_TYPE,
-  pluginFileUpload,
-} from 'wix-rich-content-plugin-file-upload';
+} from 'ricos/headers-markdown/editor';
+import { createMapPlugin, MAP_TYPE, pluginMap } from 'ricos/map/editor';
+import { createPollPlugin, pluginPoll, POLL_TYPE } from 'ricos/poll/editor';
+import { createFileUploadPlugin, FILE_UPLOAD_TYPE, pluginFileUpload } from 'ricos/file/editor';
 import {
   createTextColorPlugin,
   pluginTextColor,
   pluginTextHighlight,
   TEXT_COLOR_TYPE,
-} from 'wix-rich-content-plugin-text-color';
+  createTextHighlightPlugin,
+  TEXT_HIGHLIGHT_TYPE,
+} from 'ricos/text-color/editor';
 import {
   createSpoilerPlugin,
   SPOILER_TYPE,
   SpoilerEditorWrapper,
   pluginSpoiler,
-} from 'wix-rich-content-plugin-spoiler';
+} from 'ricos/spoiler/editor';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
@@ -86,53 +67,15 @@ import {
   ACTION_BUTTON_TYPE,
   pluginActionButton,
   pluginLinkButton,
-} from 'wix-rich-content-plugin-button';
-import { createTextHighlightPlugin, TEXT_HIGHLIGHT_TYPE } from 'wix-rich-content-plugin-text-color';
+} from 'ricos/button/editor';
 import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
-import { createIndentPlugin, pluginIndent, INDENT_TYPE } from 'wix-rich-content-plugin-indent';
-import { createTablePlugin, pluginTable, TABLE_TYPE } from 'wix-rich-content-plugin-table';
-import {
-  createAccordionPlugin,
-  ACCORDION_TYPE,
-  pluginAccordion,
-} from 'wix-rich-content-plugin-accordion';
-import {
-  createUnsupportedBlocksPlugin,
-  pluginUnsupportedBlocks,
-} from 'wix-rich-content-plugin-unsupported-blocks';
+import { createIndentPlugin, pluginIndent, INDENT_TYPE } from 'ricos/indent/editor';
+import { createTablePlugin, pluginTable, TABLE_TYPE } from 'ricos/table/editor';
+import { createAccordionPlugin, ACCORDION_TYPE, pluginAccordion } from 'ricos/accordion/editor';
+import { createUnsupportedBlocksPlugin, pluginUnsupportedBlocks } from 'ricos/unsupported-blocks';
 import { UNSUPPORTED_BLOCKS_TYPE } from 'wix-rich-content-plugin-commons';
-
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-import 'wix-rich-content-plugin-commons/dist/styles.min.css';
-import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-button/dist/styles.min.css';
-// import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
-import 'wix-rich-content-plugin-divider/dist/styles.min.css';
-import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
-import 'wix-rich-content-plugin-html/dist/styles.min.css';
-import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
-import 'wix-rich-content-plugin-line-spacing/dist/styles.min.css';
-import 'wix-rich-content-plugin-link/dist/styles.min.css';
-import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
-import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
-import 'wix-rich-content-plugin-image/dist/styles.min.css';
-import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
-import 'wix-rich-content-plugin-map/dist/styles.min.css';
-import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
-import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
-import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
-import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
-import 'wix-rich-content-plugin-headings/dist/styles.min.css';
-import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
-import 'wix-rich-content-plugin-table/dist/styles.min.css';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
@@ -140,8 +83,8 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
-// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
+// import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'ricos/editor-common';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'ricos/editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -159,7 +102,7 @@ import {
   PluginType,
   UISettings,
 } from 'wix-rich-content-common';
-import { RichContentEditorProps } from 'wix-rich-content-editor';
+import { RichContentEditorProps } from 'ricos/editor';
 
 export const ricosEditorPlugins: Record<string, EditorPluginCreator<unknown>> = {
   [IMAGE_TYPE]: pluginImage,
@@ -283,7 +226,7 @@ export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePlugi
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
-  textPlugins: textPlugins,
+  textPlugins,
   all: editorPlugins,
   unsupportedBlocks: createUnsupportedBlocksPlugin,
 };
@@ -295,7 +238,7 @@ let userButtonBorderColors = [...buttonDefaultPalette];
 
 const getLinkPanelDropDownConfig = () => {
   const getItems = () => {
-    casual.define('item', function() {
+    casual.define('item', () => {
       return {
         value: casual.url,
         label: casual.catch_phrase,
@@ -858,7 +801,7 @@ const config: RichContentEditorProps['config'] = {
 };
 
 export const getConfig = (additionalConfig = {}, shouldNativeUpload = false) => {
-  let _config = { ...config };
+  const _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
   });

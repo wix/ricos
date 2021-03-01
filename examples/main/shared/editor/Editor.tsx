@@ -3,18 +3,19 @@ import {
   RichContentEditor,
   RichContentEditorModal,
   RichContentEditorProps,
-} from 'wix-rich-content-editor';
+  RicosEditor,
+  RicosEditorProps,
+} from 'ricos/editor';
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { GALLERY_TYPE } from 'ricos/gallery/editor';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
+import { TOOLBARS } from 'ricos/editor-common';
+import { ModalStyles, RicosContent, TextToolbarType } from 'ricos/common';
 import { TestAppConfig } from '../../src/types';
-import { RicosEditor, RicosEditorProps } from 'ricos-editor';
 
 const modalStyleDefaults: ModalStyles = {
   content: {

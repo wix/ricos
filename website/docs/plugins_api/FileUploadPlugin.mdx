@@ -4,10 +4,8 @@ title: File Upload Plugin
 sidebar_label: File Upload Plugin
 ---
 
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
-import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
-import 'ricos-editor/dist/styles.min.css';
-import { createContent } from 'ricos-content';
+import { pluginFileUpload } from 'ricos/file/editor';
+import { createContent } from 'ricos/content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 import { mockFileUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
 
@@ -26,16 +24,15 @@ A slick UI component for uploading, viewing and downloading files.
 
 ```jsx
 /* Editor */
-import { RicosEditor } from 'ricos-editor';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
-import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
+import { pluginFileUpload } from 'ricos/file/editor';
+
 <RicosEditor plugins={[pluginFileUpload(FileUploadConfig)]} />;
 
 /* Viewer */
-import { RicosViewer } from 'ricos-viewer';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
-import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import { RicosViewer } from 'ricos/viewer';
+import { pluginFileUpload } from 'ricos/file/viewer';
+
 <RicosViewer plugins={[pluginFileUpload(FileUploadConfig)]} />;
 ```
 

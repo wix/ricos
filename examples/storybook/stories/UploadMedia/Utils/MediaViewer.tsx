@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/viewer';
+import { RicosContent, RicosViewer } from 'ricos/viewer';
+import { pluginVideo } from 'ricos/video/viewer';
+import { pluginImage } from 'ricos/image/viewer';
+import { pluginGallery } from 'ricos/gallery/viewer';
+import { pluginFileUpload } from 'ricos/file/viewer';
 
 function getPlugins() {
   return [pluginImage(), pluginVideo(), pluginGallery(), pluginFileUpload()];

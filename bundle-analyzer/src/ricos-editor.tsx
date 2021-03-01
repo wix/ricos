@@ -1,6 +1,5 @@
 import React from 'react';
-import { RicosEditor } from 'ricos-editor';
-import 'ricos-editor/dist/styles.min.css';
+import { RicosEditor } from 'ricos/editor';
 
 export default () => {
   return <RicosEditor />;

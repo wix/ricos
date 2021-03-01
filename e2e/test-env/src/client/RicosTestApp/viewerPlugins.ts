@@ -1,34 +1,34 @@
 /* eslint-disable no-console */
-import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button/viewer';
-import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/viewer';
-import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
-import { pluginEmoji } from 'wix-rich-content-plugin-emoji/viewer';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/viewer';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy/viewer';
-import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/viewer';
-import { pluginIndent } from 'wix-rich-content-plugin-indent';
-import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/viewer';
-import { pluginHtml } from 'wix-rich-content-plugin-html/viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler/viewer';
-import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing/viewer';
-import { pluginLink } from 'wix-rich-content-plugin-link/viewer';
-import { pluginMap } from 'wix-rich-content-plugin-map/viewer';
-import { pluginMentions } from 'wix-rich-content-plugin-mentions/viewer';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/viewer';
-import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed/viewer';
-import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color/viewer';
+import { pluginLinkButton, pluginActionButton } from 'ricos/button/viewer';
+import { pluginCodeBlock } from 'ricos/code-block/viewer';
+import { pluginDivider } from 'ricos/divider/viewer';
+import { pluginEmoji } from 'ricos/emoji/viewer';
+import { pluginFileUpload } from 'ricos/file/viewer';
+import { pluginGallery } from 'ricos/gallery/viewer';
+import { pluginGiphy } from 'ricos/giphy/viewer';
+import { pluginHashtag } from 'ricos/hashtag/viewer';
+import { pluginIndent } from 'ricos/indent/editor';
+import { pluginHeadersMarkdown } from 'ricos/headers-markdown/viewer';
+import { pluginHtml } from 'ricos/html/viewer';
+import { pluginImage } from 'ricos/image/viewer';
+import { pluginSpoiler } from 'ricos/spoiler/viewer';
+import { pluginLineSpacing } from 'ricos/line-spacing/viewer';
+import { pluginLink } from 'ricos/link/viewer';
+import { pluginMap } from 'ricos/map/viewer';
+import { pluginMentions } from 'ricos/mention/viewer';
+import { pluginSoundCloud } from 'ricos/sound-cloud/viewer';
+import { pluginVideo } from 'ricos/video/viewer';
+import { pluginLinkPreview } from 'ricos/link-preview/viewer';
+import { pluginVerticalEmbed } from 'ricos/vertical-embed/viewer';
+import { pluginTextColor, pluginTextHighlight } from 'ricos/text-color/viewer';
 import { createPresets } from './utils';
 import {
   viewerCustomForegroundStyleFn,
   styleSelectionPredicate,
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
-import { pluginTable } from 'wix-rich-content-plugin-table/viewer';
+import { pluginAccordion } from 'ricos/accordion/viewer';
+import { pluginTable } from 'ricos/table/viewer';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const configs = {

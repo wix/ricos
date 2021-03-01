@@ -54,7 +54,8 @@
     "wix-rich-content-plugin-vertical-embed": "8.24.0",
     "wix-rich-content-plugin-video": "8.24.0",
     "wix-rich-content-preview": "8.24.0",
-    "wix-rich-content-text-selection-toolbar": "8.24.0"
+    "wix-rich-content-text-selection-toolbar": "8.24.0",
+    "ricos": "8.24.0"
   },
   "scripts": {
     "clean": "rm -rf dist/",
@@ -71,12 +72,6 @@
     "monaco-editor-webpack-plugin": "^1.7.0",
     "ts-loader": "^8.0.4",
     "wix-statics-parent": "*"
-  },
-  "eslintConfig": {
-    "extends": "react-app",
-    "rules": {
-      "jsx-a11y/href-no-hash": "off"
-    }
   },
   "jest": {
     "collectCoverageFrom": [
