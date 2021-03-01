@@ -16,13 +16,17 @@
     Click to see more.
   </summary>
 
-### :nail_care: Polish
-- `editor-common`
-  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
-
 ### :rocket: New Feature
 - `plugin-video`
   - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
+
+### :house: Internal
+- `workflows`
+  - [#2235](https://github.com/wix-incubator/rich-content/pull/2235) docs - auto deploy on release
+
+### :nail_care: Polish
+- `editor-common`
+  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
 
 </details>
 <hr/>
@@ -36,7 +40,7 @@
   - [#2212](https://github.com/wix/ricos/pull/2212) fix crash when data is not provided upon upload error
 ### :nail_care: Polish
 - `ricos-content`
-  -  [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
+  - [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
 
 ## 8.23.1 (Feb 27, 2021)
 ### :bug: Bug Fix
