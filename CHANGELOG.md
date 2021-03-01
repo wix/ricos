@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `editor-common`
+  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
+- `ricos-viewer`
+  - [#2217](https://github.com/wix-incubator/rich-content/pull/2217) render full-screen on hover
 
 </details>
 <hr/>

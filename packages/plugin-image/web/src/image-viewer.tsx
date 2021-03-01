@@ -24,6 +24,11 @@ import InPluginInput from './InPluginInput';
 
 const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
+const replaceUrlFileExtenstion = (url, extensionTarget) => {
+  // replace png or jpg file to extensionTarget
+  return url.replace(/(.*)\.(jp(e)?g|png)$/, `$1.${extensionTarget}`);
+};
+
 interface ImageViewerProps {
   componentData: {
     config: ImageConfig;
@@ -74,6 +79,11 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   }
 
   static contextType = GlobalContext;
+
+  shouldUseSrcSet() {
+    const { experiments } = this.context;
+    return experiments?.useSrcSet?.enabled;
+  }
 
   componentDidMount() {
     this.setState({ ssrDone: true });
@@ -209,7 +219,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      { ariaHidden: 'true', ...props }
+      { ariaHidden: 'true', ...props, useSrcSet: true }
     );
   };
 
@@ -218,14 +228,24 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     src,
     alt,
     props,
-    opts: { fadeIn?: boolean; width?: number | string; height?: number | string } = {}
+    opts: {
+      fadeIn?: boolean;
+      width?: number | string;
+      height?: number | string;
+      useSrcSet?: boolean;
+    } = {}
   ) {
-    const { fadeIn = false, width, height } = opts;
+    const { fadeIn = false, width, height, useSrcSet } = opts;
+    let srcSet;
+    if (this.shouldUseSrcSet() && useSrcSet) {
+      srcSet = replaceUrlFileExtenstion(src, 'webp');
+    }
     return (
       <img
         {...props}
         className={imageClassNames}
         src={src}
+        srcSet={srcSet}
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
