@@ -323,7 +323,7 @@ describe('text color mobile', () => {
     cy.eyesOpen({
       appName: 'Text',
       testName: this.test.parent.title,
-      browser: DEFAULT_DESKTOP_MOBILE,
+      browser: DEFAULT_MOBILE_BROWSERS,
     });
   });
   it('allow to change text color on mobile', function() {
