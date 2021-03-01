@@ -76,7 +76,7 @@ class ColorPicker extends PureComponent {
   renderColorButtons(colors, attributes) {
     const { styles } = this;
     const { schemeColor, isMobile } = this.props;
-    if (isMobile && colors.length === 6) {
+    if (isMobile && colors.length === 6 && attributes) {
       colors.pop();
     }
     return colors.map((color, index) => (

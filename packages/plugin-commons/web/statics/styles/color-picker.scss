@@ -12,6 +12,13 @@
   border-color: #000;
 }
 
+.colorPicker_headline {
+  @include phone {
+    font-size: 16px;
+    padding: 10px 0px 7px 20px;
+  }
+}
+
 .colorPicker_separator {
   border: none;
   height: 1px;
@@ -20,13 +27,15 @@
   margin: 11px 0 8px 0;
   @include phone {
     margin: 0;
-    margin-top: 22px;
   }
 }
 
 %button {
+  @include Desktop {
+    margin-top: 12px;
+    margin-left: 8px;
+  }
   position: relative;
-  margin-top: 12px;
   -webkit-flex: none;
   flex: none;
   width: 20px;
@@ -34,17 +43,12 @@
   cursor: pointer;
   outline: 0;
   padding: 0;
-  margin-left: 8px;
 
   @include phone {
-    margin-top: 22px;
-    margin-left: calc((100% - 6 * 18px) / 5);
-    &:nth-child(6n + 1) {
-      margin-left: 13px;
-    }
     width: 34px;
     height: 34px;
-    margin-left: 24px;
+    justify-self: center;
+    align-self: center;
   }
 }
 
@@ -105,8 +109,8 @@
     width: 18px;
   }
   @include phone {
-    align-self: flex-end;
-    margin-left: 13px;
+    justify-self: center;
+    align-self: center;
     svg{
       height: 34px;
       width: 34px;
@@ -133,6 +137,13 @@
   flex-wrap: wrap;
   width: 180px;
   @include phone {
+    margin-bottom: 22px;
+    padding-left: 20px;
+    padding-top: 24px;
+    padding-right: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-row-gap: 24px;
     width: 100%;
   }
 }

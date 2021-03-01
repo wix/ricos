@@ -106,9 +106,9 @@ class ColorPickerButton extends Component {
               }) => (
                 <div className={mergedStyles.colorPicker_palette}>
                   <div className={mergedStyles.colorPicker_buttons_container}>
-                    {this.props.isMobile && renderAddColorButton()}
                     {renderPalette()}
                     {renderUserColors()}
+                    {this.props.isMobile && renderAddColorButton()}
                   </div>
                   <hr className={mergedStyles.colorPicker_separator} />
                   <div className={mergedStyles.colorPicker_bottom_container}>
