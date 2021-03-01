@@ -1,7 +1,7 @@
 import { Node_Type, RichContent, Node, Common_TextAlignment } from 'ricos-schema';
-import { genKey } from '../migrateSchema/generateRandomKey';
-import { Version } from '../version';
-import { createTimestamp } from '../migrateSchema/createTimestamp';
+import { genKey } from '../../draft/generateRandomKey';
+import { Version } from '../../../version';
+import { createTimestamp } from '../../draft/createTimestamp';
 
 export const fromPlainText = (text: string): RichContent => {
   const paragraphs = text.split('\n').map(

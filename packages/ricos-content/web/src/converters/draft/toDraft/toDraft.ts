@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { RichContent, Node, Node_Type } from 'ricos-schema';
-import { RicosContent, RicosContentBlock } from '../..';
+import { RicosContent, RicosContentBlock } from '../../..';
 import { genKey } from '../generateRandomKey';
 import {
   BlockType,

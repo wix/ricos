@@ -1,5 +1,5 @@
 /* eslint-disable fp/no-delete */
-import { RicosEntityMap, RicosContentBlock } from '../..';
+import { RicosEntityMap, RicosContentBlock } from '../../..';
 import { TO_RICOS_DATA_FIELD, TO_RICOS_PLUGIN_TYPE } from '../consts';
 import { convertBlockDataToRicos, keysToCamelCase } from './convertRicosPluginData';
 

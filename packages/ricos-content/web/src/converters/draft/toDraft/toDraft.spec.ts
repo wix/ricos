@@ -1,9 +1,9 @@
 import { toDraft, fromDraft, convertNodeDataToDraft, convertDecorationDataToDraft } from '..';
-import { compare } from '../../comparision/compare';
-import fixture from '../../../../../../e2e/tests/fixtures/intro.json';
-import complexFixture from '../../../../../../e2e/tests/fixtures/migration-content.json';
-import anchorBlocksFixture from '../../../../../../e2e/tests/fixtures/all-blocks-with-anchors.json';
-import { ANCHOR_TYPE } from '../..';
+import { compare } from '../../../comparision/compare';
+import fixture from '../../../../../../../e2e/tests/fixtures/intro.json';
+import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
+import anchorBlocksFixture from '../../../../../../../e2e/tests/fixtures/all-blocks-with-anchors.json';
+import { ANCHOR_TYPE } from '../../..';
 import { Decoration_Type, Node_Type } from 'ricos-schema';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
