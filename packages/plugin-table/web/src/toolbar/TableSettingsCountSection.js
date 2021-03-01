@@ -6,7 +6,10 @@ import { TextInput } from 'wix-rich-content-plugin-commons';
 export default class TableSettingsCountSection extends Component {
   onChange = count => this.props.onCountChange(count);
 
-  setInputRef = ref => (this.input = ref);
+  setInputRef = ref => {
+    this.input = ref;
+    this.props.setInputRef?.(ref);
+  };
 
   componentDidMount() {
     this.input.setSelectionRange(0, this.input.value.length);
@@ -40,4 +43,5 @@ TableSettingsCountSection.propTypes = {
   error: PropTypes.string,
   dataHook: PropTypes.string,
   showErrorIcon: PropTypes.bool,
+  setInputRef: PropTypes.func,
 };
