@@ -16,9 +16,23 @@
     Click to see more.
   </summary>
 
-
 </details>
 <hr/>
+
+## 8.24.1 (March 1, 2021)
+### :nail_care: Polish
+- `editor-common`
+  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
+- `ricos-viewer`
+  - [#2217](https://github.com/wix-incubator/rich-content/pull/2217) render full-screen on hover
+
+### :house: Internal
+- `bundle-analyzer`
+  - [#2238](https://github.com/wix/ricos/pull/2238) editor-common bundle size fixture
+
+### :rocket: New Feature
+- `ricos-theme`
+  - [#2230](https://github.com/wix-incubator/rich-content/pull/2230) `paletteConfig` - configurations for theme. `shouldColorContainer` boolean field
 
 ## 8.24.0 (Feb 28, 2021)
 ### :rocket: New Feature
