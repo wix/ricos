@@ -1,1 +1,1 @@
-export { toPlainText } from '../src/toPlainText';
+export { toPlainText } from '../src/converters/plainText/toPlainText';

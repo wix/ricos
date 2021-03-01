@@ -1,19 +1,12 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { cloneDeep, isEmpty } from 'lodash';
-import { RicosContent, RicosContentBlock } from '../..';
+import { RicosContent, RicosContentBlock } from '../../..';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
-import { RichContent, Node, Node_Type, Timestamp } from 'ricos-schema';
-import { genKey } from '../generateRandomKey';
+import { RichContent, Node, Node_Type } from 'ricos-schema';
+import { genKey } from '../../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getRicosEntityData';
-
-const createTimestamp = (): Timestamp => {
-  const timeMS = Date.now();
-  return {
-    seconds: Math.floor(timeMS / 1000),
-    nanos: (timeMS % 1000) * 1e6,
-  };
-};
+import { createParagraphNode, initializeMetadata } from '../../nodeUtils';
 
 export const ensureRicosContent = (content: RichContent | RicosContent) =>
   'blocks' in content ? fromDraft(content) : content;
@@ -108,24 +101,17 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
   };
 
   const parseTextBlock = (block: RicosContentBlock): Node => {
-    const textWrapperNode: Node = {
-      key: genKey(),
-      type: Node_Type.PARAGRAPH,
-      paragraphData: {
-        ...parseBlockData(block.data),
-      },
-      nodes: [],
-    };
+    const paragraphNode: Node = createParagraphNode([], parseBlockData(block.data));
 
     switch (block.type) {
       case BlockType.Unstyled:
-        textWrapperNode.key = block.key;
+        paragraphNode.key = block.key;
       // falls through
       case BlockType.Blockquote:
       case BlockType.OrderedListItem:
       case BlockType.UnorderedListItem:
-        if (textWrapperNode.paragraphData) {
-          textWrapperNode.paragraphData.depth = block.depth;
+        if (paragraphNode.paragraphData) {
+          paragraphNode.paragraphData.depth = block.depth;
         }
         break;
       default:
@@ -134,10 +120,10 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     const nodes = getTextNodes(block, entityMap);
 
     if (!isEmpty(nodes)) {
-      textWrapperNode.nodes = nodes;
+      paragraphNode.nodes = nodes;
     }
 
-    return textWrapperNode;
+    return paragraphNode;
   };
 
   const createListItem = (block: RicosContentBlock): Node => ({
@@ -181,11 +167,7 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
 
   const content: RichContent = {
     nodes,
-    metadata: {
-      updatedDate: createTimestamp(),
-      updatedVersion: version || '',
-      createdVersion: version || '',
-    },
+    metadata: initializeMetadata(version),
   };
 
   return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent; // using toJSON to remove undefined fields
