@@ -9,6 +9,7 @@ interface Constructor extends PreviewRule {
 }
 class ContentStateTransformation {
   rules: PreviewRule[];
+
   previewState?: RicosContent;
 
   constructor({ _if, _then, initialPreviewState }: Constructor) {

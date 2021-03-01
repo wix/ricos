@@ -12,8 +12,11 @@ type ContentAPIDeps = {
 
 export class ContentAPI implements ContentBuilder, ContentExtractor {
   builder: ContentBuilder;
+
   extractor: ContentExtractor;
+
   convertors: DraftContentConvertor & RicosContentContvertor & PlainTextConvertor;
+
   constructor(deps: ContentAPIDeps) {
     this.builder = deps.builder;
     this.extractor = deps.extractor;

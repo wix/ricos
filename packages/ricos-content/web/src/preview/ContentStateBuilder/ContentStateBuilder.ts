@@ -18,32 +18,53 @@ class ContentStateBuilder {
 
   // Content
   h1: ContentBuildMethod;
+
   h2: ContentBuildMethod;
+
   h3: ContentBuildMethod;
+
   h4: ContentBuildMethod;
+
   h5: ContentBuildMethod;
+
   h6: ContentBuildMethod;
+
   quote: ContentBuildMethod;
+
   plain: ContentBuildMethod;
+
   code: ContentBuildMethod;
+
   ol: ContentBuildMethod;
+
   ul: ContentBuildMethod;
 
   // Plugins
   image: PluginBuildMethod;
+
   video: PluginBuildMethod;
+
   gallery: PluginBuildMethod;
+
   soundCloud: PluginBuildMethod;
+
   giphy: PluginBuildMethod;
+
   map: PluginBuildMethod;
+
   file: PluginBuildMethod;
+
   divider: PluginBuildMethod;
+
   link: PluginBuildMethod;
+
   linkPreview: PluginBuildMethod;
 
   // Interactions
   readMore: InteractionBuildMethod;
+
   seeFullPost: InteractionBuildMethod;
+
   imageCounter: InteractionBuildMethod;
 
   constructor(initialState?: RicosContent) {

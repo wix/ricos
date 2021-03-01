@@ -13,6 +13,7 @@ export declare class ProxyConvertor {
 
 export class ProxyRicosConvertor implements ProxyConvertor, RicosContentConvertor {
   endpoint: string;
+
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
@@ -22,6 +23,7 @@ export class ProxyRicosConvertor implements ProxyConvertor, RicosContentConverto
 
 export class ProxyDraftConvertor implements ProxyConvertor, DraftContentConvertor {
   endpoint: string;
+
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
@@ -31,6 +33,7 @@ export class ProxyDraftConvertor implements ProxyConvertor, DraftContentConverto
 
 export class ProxyPlainTextConvertor implements ProxyConvertor, PlainTextConvertor {
   endpoint: string;
+
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
