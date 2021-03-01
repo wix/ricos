@@ -32,32 +32,25 @@ export default class FullscreenProvider extends Component<Props, State> {
     this.state = {
       isExpanded: false,
       index: 0,
-      expandModeData: getImagesData(props.initialState || emptyState),
     };
   }
   _FullscreenModal;
 
-  getImagesCount(): number {
-    if (this.props.initialState) {
-      return getImagesData(this.props.initialState).images.length;
-    } else {
-      return 0;
-    }
-  }
-
   componentDidMount() {
-    if (this.getImagesCount() > 0) {
+    const imagesData = getImagesData(this.props.initialState || emptyState);
+    if (imagesData.images.length > 0) {
+      this.setState({ expandModeData: imagesData });
       this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.initialState !== this.props.initialState) {
-      if (!this._FullscreenModal && this.getImagesCount() > 0) {
+      const imagesData = getImagesData(nextProps.initialState || emptyState);
+      if (!this._FullscreenModal && imagesData.images.length > 0) {
         this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
       }
-
-      this.setState({ expandModeData: getImagesData(nextProps.initialState || emptyState) });
+      this.setState({ expandModeData: imagesData });
     }
   }
 
