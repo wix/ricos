@@ -54,10 +54,6 @@
   color: $primary-text-color;
   background-color: $background-color-container;
 
-  :global(.DraftEditor-editorContainer) {
-    @include ricosTypography('p', false);
-  }
-
   &::after {
     content: '';
     display: table;
@@ -99,6 +95,7 @@
 .text {
   composes: elementSpacing;
   color: $ricos-p-color;
+  @include ricosTypography('p', false);
 
   &:empty {
     height: 24px;

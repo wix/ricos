@@ -63,7 +63,6 @@
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
   background-color: $background-color-container;
-  @include ricosTypography('p', true);
 
   &::after {
     content: '';
@@ -115,6 +114,7 @@
 .text {
   composes: elementSpacing;
   color: $ricos-p-color;
+  @include ricosTypography('p', true);
 
   &:empty {
     height: 24px;
