@@ -1,0 +1,26 @@
+name: docs
+on:
+  push:
+    tags-ignore:
+      - v9.*-
+      - v8.*-
+      - v7.*-
+    tags:
+      - v9.*
+      - v8.*
+      - v7.*
+jobs:
+  DocsDeploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install
+      - run: npx midgard-yarn install --frozen-lockfile
+      - name: Build
+      - run: npx midgard-yarn build
+      - name: Deploy
+      - run: npx midgard-yarn docs:deploy
