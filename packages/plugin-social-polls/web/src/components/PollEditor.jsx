@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
   WithEditorEventsProps,
-  withEditorEvents,
+  EditorEventsContext as EditorEventsContext1,
   isPluginFocused,
 } from 'wix-rich-content-editor-common';
+import { EditorEventsContext as EditorEventsContext2 } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
 
 import { Poll } from './Poll';
 import { PollContextProvider } from './poll-context';
@@ -63,7 +64,8 @@ class PollEditorComponent extends PureComponent {
       t,
       theme,
       isMobile,
-      editorEvents,
+      editorEvents1,
+      editorEvents2,
     } = this.props;
 
     return (
@@ -84,7 +86,16 @@ class PollEditorComponent extends PureComponent {
         }}
       >
         <PollContextProvider
-          editorEvents={editorEvents}
+          editorEvents={{
+            subscribe: (event, cb) => {
+              editorEvents1?.subscribe(event, cb);
+              editorEvents2?.subscribe(event, cb);
+            },
+            unsubscribe: (event, cb) => {
+              editorEvents1?.unsubscribe(event, cb);
+              editorEvents2?.unsubscribe(event, cb);
+            },
+          }}
           settings={settings}
           poll={componentData.poll}
           setPoll={this.setPoll}
@@ -97,4 +108,18 @@ class PollEditorComponent extends PureComponent {
   }
 }
 
-export const PollEditor = withEditorEvents(PollEditorComponent);
+export const PollEditor = props => (
+  <EditorEventsContext1.Consumer>
+    {contextValue1 => (
+      <EditorEventsContext2.Consumer>
+        {contextValue2 => (
+          <PollEditorComponent
+            editorEvents1={contextValue1}
+            editorEvents2={contextValue2}
+            {...props}
+          />
+        )}
+      </EditorEventsContext2.Consumer>
+    )}
+  </EditorEventsContext1.Consumer>
+);

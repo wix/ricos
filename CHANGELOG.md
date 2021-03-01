@@ -16,9 +16,17 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `plugin-video`
+  - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
+
 ### :house: Internal
 - `workflows`
   - [#2235](https://github.com/wix-incubator/rich-content/pull/2235) docs - auto deploy on release
+
+### :nail_care: Polish
+- `editor-common`
+  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
 
 </details>
 <hr/>
