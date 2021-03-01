@@ -7,7 +7,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Ricos',
-        items: ['ricos/ricos-api'],
+        items: ['ricos/ricos-api', 'ricos/editor-events-context'],
       },
       {
         type: 'category',

@@ -89,7 +89,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
   renderEditor = () => {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
+    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor, contentBgColor } =
       testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
@@ -128,7 +128,11 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
+        theme={{
+          palette,
+          paletteConfig: { contentBgColor },
+          customStyles: useCustomStyles ? customStyles : {},
+        }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
@@ -146,7 +150,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
+    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor, contentBgColor } =
       testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
@@ -158,7 +162,11 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
+        theme={{
+          palette,
+          paletteConfig: { contentBgColor },
+          customStyles: useCustomStyles ? customStyles : {},
+        }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}

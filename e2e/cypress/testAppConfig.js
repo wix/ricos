@@ -26,9 +26,17 @@ export const useTheming = ({
   useCustomStyles,
   fallbackColor,
   disableContainer,
+  contentBgColor,
 }) => {
   return {
-    theme: { paletteType, skipCssOverride, useCustomStyles, fallbackColor, disableContainer },
+    theme: {
+      paletteType,
+      skipCssOverride,
+      useCustomStyles,
+      fallbackColor,
+      disableContainer,
+      contentBgColor,
+    },
   };
 };
 
