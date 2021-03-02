@@ -33,13 +33,7 @@
   /*!rtl:end:ignore*/
 }
 
-.orderedList {
-  /*!rtl:begin:ignore*/
-  @include ricosTypography('p', false);
-  /*!rtl:end:ignore*/
-}
-
-.unorderedList {
+.orderedList, .unorderedList {
   /*!rtl:begin:ignore*/
   @include ricosTypography('p', false);
   /*!rtl:end:ignore*/

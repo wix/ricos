@@ -124,16 +124,20 @@
   display: block;
 }
 
+/*! rtl:ignore */
+.orderedList {
+  /*! rtl:ignore */
+  @include ricosTypography('p', true);
+}
+
+/*! rtl:ignore */
+.unorderedList {
+  /*! rtl:ignore */
+  @include ricosTypography('p', true);
+}
+
 .unorderedList.center{
   list-style-position: inside;
-}
-
-.orderedList {
-  @include ricosTypography('p', true);
-}
-
-.unorderedList {
-  @include ricosTypography('p', true);
 }
 
 .contentCenterAlignment{
