@@ -219,7 +219,8 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      { ariaHidden: 'true', ...props, useSrcSet: true }
+      { ariaHidden: 'true', ...props },
+      { useSrcSet: true }
     );
   };
 
