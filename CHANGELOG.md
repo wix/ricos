@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.25.0 (March 2, 2021)
 ### :rocket: New Feature
 - `ricos-content`
   - [#2234](https://github.com/wix-incubator/rich-content/pull/2234) `fromPlainText` utility converts plain text to rich content
@@ -23,10 +26,9 @@
 ### :nail_care: Polish
 - `docs`
   - [#2241](https://github.com/wix-incubator/rich-content/pull/2241) `EditorEventsContext` - doc page improved
-
-</details>
-<hr/>
-
+### :bug: Bug Fix
+- `image-viewer`
+  - [#2251](https://github.com/wix/ricos/pull/2251) fix useSrcSet use
 ## 8.24.1 (March 1, 2021)
 ### :nail_care: Polish
 - `editor-common`
