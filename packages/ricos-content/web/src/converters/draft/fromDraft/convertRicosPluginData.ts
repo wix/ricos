@@ -14,7 +14,7 @@ import {
   SOUND_CLOUD_TYPE,
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
-} from '../../consts';
+} from '../../../consts';
 
 export const convertBlockDataToRicos = (blockType: string, data) => {
   const newData = cloneDeep(data);

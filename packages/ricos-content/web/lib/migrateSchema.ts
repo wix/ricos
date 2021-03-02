@@ -8,4 +8,4 @@ export {
   convertNodeToDraftData,
   convertDecorationToDraftData,
   convertDecorationDataToDraft,
-} from '../src/migrateSchema';
+} from '../src/converters/draft';
