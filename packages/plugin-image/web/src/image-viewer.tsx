@@ -219,7 +219,8 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       classNames(imageClassName, this.styles.imagePreload),
       imageSrc.preload,
       alt,
-      { ariaHidden: 'true', ...props, useSrcSet: true }
+      { ariaHidden: 'true', ...props },
+      { useSrcSet: true }
     );
   };
 
@@ -410,6 +411,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
     const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     const onlyHiRes = seoMode || isGif;
+    console.log({ shouldRenderPreloadImage });
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
