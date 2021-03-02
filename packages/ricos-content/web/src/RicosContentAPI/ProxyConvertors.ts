@@ -3,40 +3,64 @@ import {
   RicosContentConvertor,
   DraftContentConvertor,
   PlainTextConvertor,
-} from '../../types';
+  ConversionService,
+} from '../types';
 
 import { RichContent } from 'ricos-schema';
 
-export declare class ProxyConvertor {
-  constructor(endpoint: string);
+export declare class ProxyConvertor<S, T> {
+  constructor(conversionService: ConversionService<S, T>);
+
+  configureService(endpoint: string): void;
 }
 
-export class ProxyRicosConvertor implements ProxyConvertor, RicosContentConvertor {
-  endpoint: string;
+export class ProxyRicosConvertor
+  implements ProxyConvertor<DraftContent, RichContent>, RicosContentConvertor {
+  conversionService: ConversionService<DraftContent, RichContent>;
 
-  constructor(endpoint: string) {
-    this.endpoint = endpoint;
+  constructor(conversionService: ConversionService<DraftContent, RichContent>) {
+    this.conversionService = conversionService;
   }
 
-  toRicos(content: DraftContent) {}
+  configureService(endpoint: string) {
+    this.conversionService.configure(endpoint);
+  }
+
+  toRicos(content: DraftContent) {
+    return this.conversionService.convert(content);
+  }
 }
 
-export class ProxyDraftConvertor implements ProxyConvertor, DraftContentConvertor {
-  endpoint: string;
+export class ProxyDraftConvertor
+  implements ProxyConvertor<RichContent, DraftContent>, DraftContentConvertor {
+  conversionService: ConversionService<RichContent, DraftContent>;
 
-  constructor(endpoint: string) {
-    this.endpoint = endpoint;
+  constructor(conversionService: ConversionService<RichContent, DraftContent>) {
+    this.conversionService = conversionService;
   }
 
-  toDraft(content: RichContent) {}
+  configureService(endpoint: string) {
+    this.conversionService.configure(endpoint);
+  }
+
+  toDraft(content: RichContent) {
+    return this.conversionService.convert(content);
+  }
 }
 
-export class ProxyPlainTextConvertor implements ProxyConvertor, PlainTextConvertor {
-  endpoint: string;
+export class ProxyPlainTextConvertor
+  implements ProxyConvertor<RichContent, string>, PlainTextConvertor {
+  conversionService: ConversionService<RichContent, string>;
 
-  constructor(endpoint: string) {
-    this.endpoint = endpoint;
+  constructor(conversionService: ConversionService<RichContent, string>) {
+    this.conversionService = conversionService;
   }
 
-  toPlainText(content: RichContent) {}
+  configureService(endpoint: string) {
+    this.conversionService.configure(endpoint);
+  }
+
+  async toPlainText(content: RichContent) {
+    return this.conversionService.convert(content);
+  }
 }

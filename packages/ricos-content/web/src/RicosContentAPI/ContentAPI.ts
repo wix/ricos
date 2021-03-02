@@ -1,21 +1,21 @@
 import { ContentBuilder, ContentExtractor } from '../types/content-api';
-import {
-  DraftContentConvertor,
-  RicosContentContvertor,
-  PlainTextConvertor,
-} from '../types/contentTypes';
+import { Convertors } from '../types';
+import { RichContent, ImageData, DividerData } from 'ricos-schema';
+
 type ContentAPIDeps = {
   builder: ContentBuilder;
   extractor: ContentExtractor;
-  convertors: DraftContentConvertor & RicosContentContvertor & PlainTextConvertor;
+  convertors: Convertors;
 };
 
-export class ContentAPI implements ContentBuilder, ContentExtractor {
+export class ContentAPI implements ContentBuilder, ContentExtractor, Convertors {
   builder: ContentBuilder;
 
   extractor: ContentExtractor;
 
-  convertors: DraftContentConvertor & RicosContentContvertor & PlainTextConvertor;
+  convertors: Convertors;
+
+  content: RichContent;
 
   constructor(deps: ContentAPIDeps) {
     this.builder = deps.builder;
@@ -23,31 +23,33 @@ export class ContentAPI implements ContentBuilder, ContentExtractor {
     this.convertors = deps.convertors;
   }
 
-  addImage(data) {
-    this.builder.addImage(data);
+  addImage(data: ImageData) {
+    this.content = this.builder.addImage(data, this.content);
+    return this.content;
   }
 
-  addDivider(data) {
-    this.builder.addDivider(data);
+  addDivider(data: DividerData) {
+    this.content = this.builder.addDivider(data, this.content);
+    return this.content;
   }
 
   getImages() {
-    return this.extractor.getImages();
+    return this.extractor.getImages(this.content);
   }
 
   getDividers() {
-    return this.extractor.getDividers();
+    return this.extractor.getDividers(this.content);
   }
 
   toDraft() {
-    return this.convertors.toDraft();
+    return this.convertors.toDraft(this.content);
   }
 
   toRicos() {
-    return this.convertors.toRicos();
+    return Promise.resolve(this.content);
   }
 
   toPlainText() {
-    return this.convertors.toPlainText();
+    return this.convertors.toPlainText(this.content);
   }
 }

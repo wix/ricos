@@ -2,35 +2,28 @@ import { RichContent, ImageData, DividerData, Node_Type, Node } from 'ricos-sche
 import { ContentBuilder, dataByNodeType } from '../types';
 
 export class RicosContentBuilder implements ContentBuilder {
-  content: RichContent;
-
   generateKey: () => string;
 
-  constructor(generateKey) {
-    this.content = { nodes: [] };
+  constructor(generateKey: () => string) {
     this.generateKey = generateKey;
   }
 
-  setContent(content: RichContent) {
-    this.content = content;
-  }
-
-  addNode(type: Node_Type, data: unknown) {
+  addNode(type: Node_Type, data: unknown, content: RichContent) {
     const node: Node = {
       type,
       ...dataByNodeType(type, data),
       nodes: [],
       key: this.generateKey(),
     };
-    this.content.nodes.push(node);
-    return this.content;
+    content.nodes.push(node);
+    return content;
   }
 
-  addImage(data: ImageData) {
-    return this.addNode(Node_Type.IMAGE, data);
+  addImage(data: ImageData, content: RichContent) {
+    return this.addNode(Node_Type.IMAGE, data, content);
   }
 
-  addDivider(data: DividerData) {
-    return this.addNode(Node_Type.DIVIDER, data);
+  addDivider(data: DividerData, content: RichContent) {
+    return this.addNode(Node_Type.DIVIDER, data, content);
   }
 }

@@ -35,13 +35,20 @@ export interface RicosContent
 export type DraftContent = RicosContent;
 
 export interface PlainTextConvertor {
-  toPlainText(content?: RichContent): string;
+  toPlainText(content?: RichContent): Promise<string>;
 }
 
-export interface RicosContentContvertor {
-  toRicos(content?: DraftContent): RichContent;
+export interface RicosContentConvertor {
+  toRicos(content?: DraftContent): Promise<RichContent>;
 }
 
 export interface DraftContentConvertor {
-  toDraft(content?: RichContent): DraftContent;
+  toDraft(content?: RichContent): Promise<DraftContent>;
 }
+
+export type Convertors = PlainTextConvertor & RicosContentConvertor & DraftContentConvertor;
+
+export type ConversionService<Source, Target> = {
+  convert: (content: Source) => Promise<Target>;
+  configure: (endpoint: string) => void;
+};

@@ -1,43 +1,52 @@
 import { isString } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
+import { RichContent } from 'ricos-schema';
 import { ContentAPI } from './ContentAPI';
-import { ContentBuilder } from './ContentBuilder';
-import { ContentExtractor } from './ContentExtractor';
+import { RicosContentBuilder } from './ContentBuilder';
+import { RicosContentExtractor } from './ContentExtractor';
 import {
   ProxyPlainTextConvertor,
   ProxyDraftConvertor,
   ProxyRicosConvertor,
 } from './ProxyConvertors';
-import { PlainTextConvertor, RicosContentContvertor, DraftContentConvertor } from '../types';
+import { ConversionServiceClient } from './ConversionService';
+import {
+  PlainTextConvertor,
+  RicosContentConvertor,
+  DraftContentConvertor,
+  DraftContent,
+  Convertors,
+} from '../types';
 
 export type ContentAPIConfig = {
   convertors: {
-    // TODO: use URL instead of string?
     toPlainText: PlainTextConvertor | string;
     toDraft: DraftContentConvertor | string;
-    toRicos: RicosContentContvertor | string;
+    toRicos: RicosContentConvertor | string;
   };
 };
 
 const ProxyConvertors = {
-  toPlainText: ProxyPlainTextConvertor,
-  toDraft: ProxyDraftConvertor,
-  toRicos: ProxyRicosConvertor,
+  toPlainText: new ProxyPlainTextConvertor(new ConversionServiceClient<RichContent, string>()),
+  toDraft: new ProxyDraftConvertor(new ConversionServiceClient<RichContent, DraftContent>()),
+  toRicos: new ProxyRicosConvertor(new ConversionServiceClient<DraftContent, RichContent>()),
 };
 
 // content API IoC container
 // initializes ContentAPI with dependencies: builder, extractor, convertors
 export function setupContentAPI(config: ContentAPIConfig) {
-  const builder = new ContentBuilder(generateKey);
-  const extractor = new ContentExtractor();
+  const builder = new RicosContentBuilder(generateKey);
+  const extractor = new RicosContentExtractor();
   const convertors = Object.entries(config.convertors).reduce((convertorList, [key, value]) => {
     if (isString(value)) {
-      convertorList[key] = new ProxyConvertors[key](value);
+      const convertor = ProxyConvertors[key];
+      convertor.configure(value);
+      convertorList[key] = convertor;
     } else {
       convertorList[key] = value;
     }
     return convertorList;
-  }, {});
+  }, {}) as Convertors;
 
   const api = new ContentAPI({ builder, extractor, convertors });
   return api;
