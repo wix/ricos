@@ -15,6 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
+    - `p` will no longer override elements of all textual entities
+    - `lineHeight` of an element is now automatically set to 1.5 to keep ratio of growing text (unless provided).
+
 </details>
 <hr/>
 
