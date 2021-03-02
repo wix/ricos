@@ -110,11 +110,15 @@ class ColorPickerButton extends Component {
                     {renderUserColors()}
                     {this.props.isMobile && renderAddColorButton()}
                   </div>
-                  <hr className={mergedStyles.colorPicker_separator} />
-                  <div className={mergedStyles.colorPicker_bottom_container}>
-                    {renderResetColorButton()}
-                    {!this.props.isMobile && renderAddColorButton()}
-                  </div>
+                  {!this.props.isMobile && (
+                    <>
+                      <hr className={mergedStyles.colorPicker_separator} />
+                      <div className={mergedStyles.colorPicker_bottom_container}>
+                        {renderResetColorButton()}
+                        {renderAddColorButton()}
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </ColorPicker>

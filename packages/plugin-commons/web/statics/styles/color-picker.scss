@@ -129,20 +129,22 @@
 }
 
 .colorPicker_buttons_container {
-  margin-bottom: 9px;
+  @include Desktop {
+    margin-bottom: 9px;
+    width: 180px;
+  }
   flex-direction: row;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  width: 180px;
   @include phone {
-    margin-bottom: 22px;
+    padding-bottom: 22px;
     padding-left: 20px;
     padding-top: 24px;
     padding-right: 20px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: repeat(6, auto);
     grid-row-gap: 24px;
     width: 100%;
   }
