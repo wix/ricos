@@ -2,16 +2,19 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins.scss';
 
 .customColorPicker_editable_input_container {
-  margin: 12px auto;
+  @include Desktop{
+    margin: 12px auto;
+    justify-content: center; 
+  }
   display: flex; 
-  justify-content: center; 
   align-items: center;
   height: 32px;
   position: relative;
   @include phone {
+    justify-content:space-between;
     height: 40px;
     padding: 0px;
-    margin: 20px 0;
+    margin: 20px;
   }
 }
 
@@ -27,16 +30,18 @@
 }
 
 .customColorPicker_input_container {
-  font-size: 14px;
+  @include Desktop{
+    width: 126px;
+    font-size: 14px;
+    margin: 0 8px;
+  }
   color: #333333;
-  width: 126px;
-  margin: 0 8px;
   display: inline-block;
   height: inherit;
   position: relative;
   @include phone {
     margin: 0 20px;
-    width:233px;
+    max-width:233px;
     font-size: 16px;
   }
 }  
