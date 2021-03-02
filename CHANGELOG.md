@@ -20,6 +20,10 @@
   - `plugin-video`
     - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) added new settings panel for custom videos with download toggle
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2234](https://github.com/wix-incubator/rich-content/pull/2234) `fromPlainText` utility converts plain text to rich content
+
 </details>
 <hr/>
 

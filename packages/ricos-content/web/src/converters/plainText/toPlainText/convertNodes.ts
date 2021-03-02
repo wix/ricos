@@ -1,7 +1,7 @@
 import { Node, Node_Type, VideoSource } from 'ricos-schema';
-import { getImageSrc } from '../imageUtils';
-import { LINK_TYPE } from '../consts';
-import { mergeTextNodes, RangedDecoration } from '../migrateSchema/toDraft/decorationParsers';
+import { getImageSrc } from '../../../imageUtils';
+import { LINK_TYPE } from '../../../consts';
+import { mergeTextNodes, RangedDecoration } from '../../draft/toDraft/decorationParsers';
 
 export const parseTextNodes = (node: Node) => {
   const {
