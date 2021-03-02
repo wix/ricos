@@ -18,6 +18,11 @@
 </details>
 <hr/>
 
+## 8.25.1 (March 2, 2021)
+### :bug: Bug Fix
+- `table`
+  - [#2252](https://github.com/wix-incubator/rich-content/pull/2252) drag and drop preview position
+  
 ## 8.25.0 (March 2, 2021)
 ### :rocket: New Feature
 - `ricos-content`
