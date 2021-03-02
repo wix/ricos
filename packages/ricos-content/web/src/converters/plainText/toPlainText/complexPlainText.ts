@@ -1,14 +1,4 @@
 /* eslint-disable max-len */
-import complexContent from '../../../../../e2e/tests/fixtures/migration-content.json';
-import { toPlainText } from './toPlainText';
-
-describe('convert to plain text', () => {
-  it('should convert complex content', async () => {
-    const plainText = await toPlainText(complexContent);
-    expect(plainText).toEqual(PLAIN_TEXT);
-  });
-});
-
 export const PLAIN_TEXT = `Lorem ipsum dolor sit amet 😎, consectetur adipiscing elit. Quisque quis ex auctor, facilisis lectus id, sodales ipsum. In sagittis ultrices sem ac elementum. Ut ut(www.google.com) iaculis ex. Lorem ipsum dolor sit @amet, consectetur adipiscing elit. In hac habitasse platea dictumst. Aenean placerat, quam eget vestibulum varius(www.link.com), nisl ligula vulputate tortor, id lacinia odio magna eu arcu.
 
 Dad holding his baby

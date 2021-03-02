@@ -11,9 +11,17 @@ import 'ricos-editor/dist/styles.min.css';
 
 ## `withEditorContext`
 
-High-order component providing an `editorEvents` prop for you to use.
+`withEditorContext` is a High-Order component, allowing to trigger `publish` event when content editing is done.
 
-### Example
+Return value is a promise with finalized content.
+
+```ts
+editorEvents: {
+  publish: () => Promise<RicosContent>
+}
+```
+
+### Usage Example
 
 ```jsx {5}
 import { withEditorContext } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
