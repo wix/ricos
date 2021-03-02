@@ -6,7 +6,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "ee1ov",
+          "key": "95apa",
           "nodes": [],
           "textData": {
             "text": "Hi! 😃",
@@ -34,7 +34,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "f1775",
+          "key": "7icsa",
           "nodes": [],
           "textData": {
             "text": "Welcome to ",
@@ -43,7 +43,7 @@
         },
         {
           "type": "TEXT",
-          "key": "5g2r2",
+          "key": "3q3ll",
           "nodes": [],
           "textData": {
             "text": "Wix Rich Content",
@@ -70,7 +70,7 @@
         },
         {
           "type": "TEXT",
-          "key": "1sa01",
+          "key": "1gspi",
           "nodes": [],
           "textData": {
             "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️",
@@ -128,7 +128,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "5mu41",
+          "key": "4jggc",
           "nodes": [],
           "textData": {
             "text": "Checkout the ",
@@ -137,7 +137,7 @@
         },
         {
           "type": "TEXT",
-          "key": "f7f4f",
+          "key": "dgc6d",
           "nodes": [],
           "textData": {
             "text": "Example App",
@@ -168,7 +168,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "3ajk4",
+          "key": "6mmv5",
           "nodes": [],
           "textData": {
             "text": "Here's a text with a background",
@@ -194,7 +194,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "dhh9b",
+          "key": "6220e",
           "nodes": [],
           "textData": {
             "text": "Heres a text with color",
@@ -245,7 +245,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "ecu7h",
+          "key": "8jafb",
           "nodes": [],
           "textData": {
             "text": "A wise man once said:",
@@ -264,11 +264,11 @@
       "nodes": [
         {
           "type": "PARAGRAPH",
-          "key": "9e1hd",
+          "key": "ti2g",
           "nodes": [
             {
               "type": "TEXT",
-              "key": "35tf2",
+              "key": "drbck",
               "nodes": [],
               "textData": {
                 "text": "The Wix Rich Content Editor is the best tool in the world!",
@@ -298,7 +298,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "dqh7t",
+          "key": "9fh9d",
           "nodes": [],
           "textData": {
             "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components.",
@@ -326,7 +326,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "b8toa",
+          "key": "6serb",
           "nodes": [],
           "textData": {
             "text": "Code example:",
@@ -345,7 +345,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "3fr87",
+          "key": "d4ghv",
           "nodes": [],
           "textData": {
             "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />",
@@ -363,7 +363,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "d1ap",
+          "key": "fhgh1",
           "nodes": [],
           "textData": {
             "text": "Pro Gallery Collage:",
@@ -468,8 +468,8 @@
     "createdVersion": "8.11.4",
     "updatedVersion": "8.11.4",
     "updatedDate": {
-      "seconds": 1612274564,
-      "nanos": 546000000
+      "seconds": 1614621177,
+      "nanos": 536000000
     }
   }
 }

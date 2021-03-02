@@ -62,7 +62,7 @@
   color: $primary-text-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
-  background-color: $background-color;
+  background-color: $background-color-container;
   @include ricosTypography('p', true);
 
   &::after {

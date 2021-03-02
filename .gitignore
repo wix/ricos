@@ -41,7 +41,7 @@ applitools.config.js
 **/website/build/
 
 # ricos content migration
-**/migratedFixtures
+**/migratedFixtures/**
 !intro.json
 !migration-content.json
 **/reverseMigratedFixtures

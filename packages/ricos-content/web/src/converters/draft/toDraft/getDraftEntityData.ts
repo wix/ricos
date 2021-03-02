@@ -7,7 +7,7 @@ import {
   TO_RICOS_DECORATION_TYPE,
 } from '../consts';
 import toSlugCase from 'to-slug-case';
-import { RicosEntity, RicosEntityMap } from '../..';
+import { RicosEntity, RicosEntityMap } from '../../..';
 import { DraftTypedDecoration } from './decorationParsers';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 

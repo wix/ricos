@@ -21,7 +21,7 @@ import {
   VIDEO_TYPE_LEGACY,
   TABLE_TYPE,
   ANCHOR_TYPE,
-} from '../consts';
+} from '../../consts';
 import { Decoration_Type, Node_Type } from 'ricos-schema';
 
 export enum BlockType {
