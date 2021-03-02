@@ -16,6 +16,8 @@
     Click to see more.
   </summary>
 
+
+
 ### :bug: Bug Fix
 - `ricos-common`
   - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
