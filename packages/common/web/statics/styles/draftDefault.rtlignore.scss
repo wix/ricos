@@ -91,7 +91,6 @@
   @include indent_lists(4, 6);
   .public-DraftStyleDefault-unorderedListItem {
     /*!rtl:begin:ignore*/
-    @include ricosTypography('p', false);
     list-style-type: square;
     position: relative;
     /*!rtl:end:ignore*/
@@ -111,7 +110,6 @@
   }
   .public-DraftStyleDefault-orderedListItem {
     /*!rtl:begin:ignore*/
-    @include ricosTypography('p', false);
     list-style-type: none;
     position: relative;
     /*!rtl:end:ignore*/
