@@ -1,9 +1,15 @@
-import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
+import {
+  EditorPluginConfig,
+  ViewerPluginConfig,
+  CreatePluginFunction,
+} from 'wix-rich-content-common';
 
 export const TABLE_TYPE = 'table';
 
 export interface TablePluginEditorConfig extends EditorPluginConfig {
-  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  innerRCEPlugins?: CreatePluginFunction[];
+  size?: string;
+  alignment: string;
 }
 export interface TablePluginViewerConfig extends ViewerPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
