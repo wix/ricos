@@ -125,15 +125,12 @@
 }
 
 /*! rtl:ignore */
-.orderedList {
+.orderedList, .unorderedList {
   /*! rtl:ignore */
-  @include ricosTypography('p', true);
-}
-
-/*! rtl:ignore */
-.unorderedList {
-  /*! rtl:ignore */
-  @include ricosTypography('p', true);
+  > * {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
 }
 
 .unorderedList.center{
