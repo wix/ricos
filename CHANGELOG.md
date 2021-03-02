@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2234](https://github.com/wix-incubator/rich-content/pull/2234) `fromPlainText` utility converts plain text to rich content
+
 </details>
 <hr/>
 
