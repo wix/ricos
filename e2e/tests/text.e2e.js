@@ -13,8 +13,10 @@ const changeTextColor = title => {
   cy.setColorByHex('d932c3');
   cy.updateTextColor();
   cy.eyesCheckWindow(title);
-  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
-  cy.eyesCheckWindow(title);
+  if (!title.includes('mobile')) {
+    cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
+    cy.eyesCheckWindow(title);
+  }
 };
 
 describe('text', () => {
@@ -326,8 +328,9 @@ describe('text color mobile', () => {
       browser: DEFAULT_MOBILE_BROWSERS,
     });
   });
+  beforeEach(() => cy.switchToMobile());
+
   it('allow to change text color on mobile', function() {
-    cy.switchToMobile();
     changeTextColor(this.test.title);
   });
 });
