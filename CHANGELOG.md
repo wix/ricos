@@ -16,6 +16,14 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2234](https://github.com/wix-incubator/rich-content/pull/2234) `fromPlainText` utility converts plain text to rich content
+
+### :nail_care: Polish
+- `docs`
+  - [#2241](https://github.com/wix-incubator/rich-content/pull/2241) `EditorEventsContext` - doc page improved
+
 </details>
 <hr/>
 
