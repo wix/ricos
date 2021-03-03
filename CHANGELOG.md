@@ -19,10 +19,21 @@
 ### :bug: Bug Fix
 - `color-picker`
   - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update style for mobile devices
+  
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
+    - `p` will no longer override elements of all textual entities
+    - `lineHeight` of an element is now automatically set to 1.5 to keep ratio of growing text (unless provided).
 
 </details>
 <hr/>
 
+## 8.25.1 (March 2, 2021)
+### :bug: Bug Fix
+- `table`
+  - [#2252](https://github.com/wix-incubator/rich-content/pull/2252) drag and drop preview position
+  
 ## 8.25.0 (March 2, 2021)
 ### :rocket: New Feature
 - `ricos-content`
