@@ -71,6 +71,18 @@ class HtmlComponent extends Component {
     }
   };
 
+  getIframeHeight = () => {
+    const { height } = this.props.componentData.config || {};
+    const { iframeHeight } = this.state;
+    //for avoiding unnecessary scroll
+    const maxDiff = Math.min(50, this.state.iframeHeight * 0.1);
+    if (height && iframeHeight && height < iframeHeight && height + maxDiff > iframeHeight) {
+      return iframeHeight;
+    } else {
+      return height || iframeHeight;
+    }
+  };
+
   render() {
     const { html } = this.state;
     const {
