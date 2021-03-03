@@ -133,7 +133,7 @@ const createToolbar: CreatePluginToolbar = (config: {
               if (hasLinksInSelection(editorState)) {
                 config.closeInlinePluginToolbar();
                 return removeLinksInSelection(editorState);
-              } else if (!isDisabled) {
+              } else if (!isDisabled()) {
                 openLinkModal(config);
               }
             },
