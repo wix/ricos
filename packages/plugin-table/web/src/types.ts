@@ -8,8 +8,6 @@ export const TABLE_TYPE = 'table';
 
 export interface TablePluginEditorConfig extends EditorPluginConfig {
   innerRCEPlugins?: CreatePluginFunction[];
-  size?: string;
-  alignment: string;
 }
 export interface TablePluginViewerConfig extends ViewerPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
