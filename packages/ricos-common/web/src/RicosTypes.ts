@@ -33,8 +33,16 @@ export interface RicosProps {
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
-  width?: number;
   /* Changes to this interface should also be reflected in the API docs */
+}
+
+interface EditorEvents {
+  subscribe: (
+    event: string,
+    callback: () => Promise<{ type: string; data: unknown }>
+  ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  dispatch: (event: string) => Promise<unknown>;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -49,14 +57,8 @@ export interface RicosEditorProps extends RicosProps {
   onBusyChange?: OnBusyChangeFunction;
   injectedContent?: RicosContent;
   maxTextLength?: number;
-  editorEvents?: {
-    subscribe: (
-      event: string,
-      callback: () => Promise<{ type: string; data: unknown }>
-    ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
-    unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
-    dispatch: (event: string) => Promise<unknown>;
-  };
+  editorEvents1?: EditorEvents;
+  editorEvents2?: EditorEvents;
 
   /* Changes to this interface should also be reflected in the API docs */
 }

@@ -130,7 +130,7 @@ describe('plugins', () => {
 
       it('expand inner-rce images on full screen', function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
-          .eq(1)
+          .eq(2)
           .parent()
           .click();
         cy.loadOutOfViewImagesInGallery();
@@ -343,12 +343,14 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('render upload modal', function() {
       cy.openSoundCloudModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
     //TODO: fix this flaky tests
+    // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('add a soundcloud URL', function() {
       cy.openSoundCloudModal();
       cy.addSoundCloud().wait(500);

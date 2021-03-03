@@ -152,7 +152,6 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   maxTextLength?: number;
   experiments?: AvailableExperiments;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
-  width?: number;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -170,7 +169,6 @@ interface State {
     experiments?: AvailableExperiments;
     isMobile: boolean;
     t?: TranslationFunction;
-    containerWidth?: number;
   };
 }
 
@@ -232,13 +230,13 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   constructor(props: RichContentEditorProps) {
     super(props);
     const initialEditorState = this.getInitialEditorState();
-    const { experiments, isMobile = false, t, width } = props;
+    const { experiments, isMobile = false, t } = props;
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
       readOnly: false,
-      context: { experiments, isMobile, t, containerWidth: width },
+      context: { experiments, isMobile, t },
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -1007,8 +1005,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { onError, locale, direction, showToolbars = true } = this.props;
+    const { onError, locale, direction, showToolbars = true, isInnerRCE } = this.props;
     const { innerModal } = this.state;
+    const editorStyle = isInnerRCE ? { backgroundColor: 'transparent' } : {};
+
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -1040,6 +1040,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 <div
                   ref={this.setEditorWrapper}
                   className={classNames(styles.editor, theme.editor)}
+                  style={editorStyle}
                 >
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}

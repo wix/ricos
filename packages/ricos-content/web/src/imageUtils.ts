@@ -84,7 +84,7 @@ const getImageFormat = (fileName: string) => {
 
 const getImageSrc = (
   src: ComponentData['src'],
-  helpers?: { getImageUrl: ({ file_name }: { file_name: string }) => string },
+  customGetImageUrl?: ({ file_name }: { file_name: string }) => string,
   options: {
     requiredWidth?: number;
     requiredHeight?: number;
@@ -101,8 +101,8 @@ const getImageSrc = (
           console.error('must provide src url when using static image source!', src); //eslint-disable-line no-console
         }
       } else if (src.source === 'custom') {
-        if (helpers && helpers.getImageUrl) {
-          return helpers.getImageUrl({ file_name: src.file_name }); //eslint-disable-line camelcase
+        if (customGetImageUrl) {
+          return customGetImageUrl({ file_name: src.file_name }); //eslint-disable-line camelcase
         } else {
           console.error('must provide getImageUrl helper when using custom image source!', src); //eslint-disable-line no-console
         }

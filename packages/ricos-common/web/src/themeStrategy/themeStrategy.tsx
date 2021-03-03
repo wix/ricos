@@ -14,11 +14,11 @@ export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyRes
   if (!isEmpty(experiments)) {
     console.debug('themeStrategy experiments', experiments); // eslint-disable-line no-console
   }
-  const { parentClass = '', palette, typography, customStyles } = ricosTheme;
+  const { parentClass = '', palette, paletteConfig, typography, customStyles } = ricosTheme;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
 
   // Create CSS Vars
-  const { paletteVarsObject, colors } = createPalette(palette);
+  const { paletteVarsObject, colors } = createPalette(palette, paletteConfig);
   const typographyVarsObject = createTypography(typography);
   const customsVarsObject = createCustomStyles(customStyles);
 

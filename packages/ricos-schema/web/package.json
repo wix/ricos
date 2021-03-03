@@ -1,6 +1,6 @@
 {
   "name": "ricos-schema",
-  "version": "8.23.1",
+  "version": "8.25.1",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -22,9 +22,9 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "lint": ":",
-    "clean": "rm -rf dist generated",
+    "clean": "rm -rf dist src/generated",
     "prebuild": "yarn clean",
-    "generate": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateSchema.ts",
+    "generate": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} src/generateSchema.ts",
     "buildESM": "tsc",
     "buildCJS": "tsc --module commonjs --outDir dist/cjs",
     "build": "yarn generate && yarn buildESM && yarn buildCJS"
@@ -32,5 +32,6 @@
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "wnp_type": "proto"
 }
