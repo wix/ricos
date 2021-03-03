@@ -15,7 +15,13 @@ const getNameWithoutType = fileName => {
   const s = fileName.split('.');
   return s.slice(0, s.length - 1).join('.');
 };
-
+const filesWithPreview = [
+  'jpg',
+  'png',
+  // 'pdf',
+  'jpeg',
+  'gif',
+];
 class FileUploadViewer extends PureComponent {
   state = {
     resolvedFileUrl: null,
@@ -102,10 +108,10 @@ class FileUploadViewer extends PureComponent {
         infoStyle: this.styles.file_upload_text_error,
       };
     }
-    const translationKey =
-      isLoading || resolvingUrl ? 'UploadFile_Viewer_Loader' : 'UploadFile_Viewer_Download';
+    const fileType = type?.toUpperCase();
+    const translationKey = isLoading || resolvingUrl ? 'UploadFile_Viewer_Loader' : fileType;
     let infoString = t(translationKey, {
-      fileType: type?.toUpperCase(),
+      fileType,
     });
     if (size) {
       infoString = infoString + ' • ' + this.sizeToString(size);
@@ -141,6 +147,13 @@ class FileUploadViewer extends PureComponent {
 
     if (error) {
       return this.renderContainerWithoutLink();
+    }
+    fileUrl =
+      // eslint-disable-next-line max-len
+      'https://download-files.wixmp.com/ugd/f0f74f_2ff83a1acde842db9da23a83ef586a20.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTYxNDc3MjQ0MSwiZXhwIjoxNjE0ODA4NDUxLCJqdGkiOiIyYTIwMDYzYTMxN2EiLCJvYmoiOltbeyJwYXRoIjoiL3VnZC9mMGY3NGZfMmZmODNhMWFjZGU4NDJkYjlkYTIzYTgzZWY1ODZhMjAucGRmIn1dXX0.YSLPZpD7jYGhdFvLa4X9G9dYWdxbho06puUcFxz2zms&filename=sample-PDF.pdf';
+    if (filesWithPreview.includes(type)) {
+      const fileNameIndex = fileUrl.indexOf('&filename');
+      fileUrl = fileNameIndex !== -1 ? fileUrl.slice(0, fileNameIndex) : fileUrl;
     }
 
     return (
@@ -199,7 +212,7 @@ class FileUploadViewer extends PureComponent {
       return null;
     }
 
-    return <iframe ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
+    return <object ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
   }
 
   render() {
