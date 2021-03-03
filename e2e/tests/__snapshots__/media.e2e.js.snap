@@ -2526,10 +2526,10 @@ exports[`plugins > full screen > innerRCE images full screen > expand image on f
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     },
     "1": {
       "data": {
@@ -2815,10 +2815,10 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     },
     "1": {
       "data": {
