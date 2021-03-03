@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, DEFAULT_MOBILE_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, MOBILE_BROWSERS } from './settings';
 import { usePlugins, usePluginsConfig, plugins } from '../cypress/testAppConfig';
 
 const changeTextColor = title => {
@@ -325,7 +325,7 @@ describe('text color mobile', () => {
     cy.eyesOpen({
       appName: 'Text',
       testName: this.test.parent.title,
-      browser: DEFAULT_MOBILE_BROWSERS,
+      browser: MOBILE_BROWSERS,
     });
   });
   beforeEach(() => cy.switchToMobile());
