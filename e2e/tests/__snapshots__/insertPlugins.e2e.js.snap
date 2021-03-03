@@ -317,7 +317,6 @@ exports[`insert plugins tests > side toolbar > should insert video #0`] =
           "alignment": "center",
           "size": "content"
         },
-        "isCustomVideo": false,
         "metadata": {
           "author_name": "Wix.com",
           "author_url": "https://www.youtube.com/user/Wix",
@@ -991,7 +990,6 @@ exports[`insert plugins tests > footer toolbar > should insert video #0`] =
           "alignment": "center",
           "size": "content"
         },
-        "isCustomVideo": false,
         "metadata": {
           "author_name": "Wix.com",
           "author_url": "https://www.youtube.com/user/Wix",

@@ -34,27 +34,23 @@ export default class FullscreenProvider extends Component<Props, State> {
       index: 0,
     };
   }
-
-  getImagesCount(): number {
-    if (this.props.initialState) {
-      return getImagesData(this.props.initialState).images.length;
-    } else {
-      return 0;
-    }
-  }
+  _FullscreenModal;
 
   componentDidMount() {
-    if (this.getImagesCount() > 0) {
+    const imagesData = getImagesData(this.props.initialState || emptyState);
+    if (imagesData.images.length > 0) {
+      this.setState({ expandModeData: imagesData });
       this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { FullscreenModal } = this.state;
     if (nextProps.initialState !== this.props.initialState) {
-      if (!FullscreenModal && this.getImagesCount() > 0) {
+      const imagesData = getImagesData(nextProps.initialState || emptyState);
+      if (!this._FullscreenModal && imagesData.images.length > 0) {
         this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
       }
+      this.setState({ expandModeData: imagesData });
     }
   }
 
@@ -64,13 +60,11 @@ export default class FullscreenProvider extends Component<Props, State> {
       const FullscreenModal = React.lazy(() =>
         import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
       );
-      this.setState({ FullscreenModal });
+      this._FullscreenModal = FullscreenModal;
     }
   }
 
   onClose = () => this.setState({ isExpanded: false });
-
-  setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = config => {
     const { isModalSuspended } = this.props;
@@ -78,7 +72,11 @@ export default class FullscreenProvider extends Component<Props, State> {
       return config;
     }
     const onExpand = (blockKey: string, innerIndex = 0) => {
-      const { expandModeData } = this.state;
+      const { expandModeData, FullscreenModal } = this.state;
+      // protective code in case that image was clicked before fullscreen is set
+      if (!FullscreenModal) {
+        return false;
+      }
       this.setState({
         isExpanded: true,
         // if expandModeData is not defined - expand the first image
@@ -96,14 +94,22 @@ export default class FullscreenProvider extends Component<Props, State> {
     return config;
   };
 
+  onChildHover = () => {
+    const { FullscreenModal } = this.state;
+    if (!FullscreenModal && this._FullscreenModal) {
+      this.setState({
+        FullscreenModal: this._FullscreenModal,
+      });
+    }
+  };
+
   render() {
-    const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
+    const { isExpanded, index, expandModeData, FullscreenModal } = this.state;
     const { children, initialState, isModalSuspended, isMobile, fullscreenProps } = this.props;
     const config = this.addExpand(children.props.config);
-
     return (
       <Fragment>
-        {Children.only(React.cloneElement(children, { config }))}
+        {Children.only(React.cloneElement(children, { config, onHover: this.onChildHover }))}
         {FullscreenModal && (
           <Suspense fallback={<div />}>
             <FullscreenModal
@@ -114,7 +120,6 @@ export default class FullscreenProvider extends Component<Props, State> {
               onClose={this.onClose}
               index={index}
               isMobile={isMobile}
-              setExpandModeData={this.setExpandModeData}
               {...fullscreenProps}
             />
           </Suspense>

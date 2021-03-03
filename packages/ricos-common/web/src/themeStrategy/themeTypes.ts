@@ -70,8 +70,19 @@ export interface RicosTheme {
    * */
   parentClass?: string;
   palette?: PaletteColors | WixPalette | PalettePreset;
+  paletteConfig?: PaletteConfig;
   typography?: RicosTypography;
   customStyles?: RicosCustomStyles;
+}
+
+export interface PaletteConfig {
+  /**
+   * When `true`, attribute `bgColor` provided in `palette` will be the
+   * `background-color` of the inner content container of Ricos.
+   *
+   * Default: `false`
+   */
+  contentBgColor?: boolean;
 }
 
 export interface ThemeStrategyArgs {

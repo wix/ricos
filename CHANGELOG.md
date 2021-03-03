@@ -15,18 +15,48 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-### :rocket: New Feature
-- `plugin-video`
-  - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
 
 ### :bug: Bug Fix
+- `ricos-common`
+  - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
+    - `p` will no longer override elements of all textual entities
+    - `lineHeight` of an element is now automatically set to 1.5 to keep ratio of growing text (unless provided).
 - `link`
   - [#2179](https://github.com/wix/ricos/pull/2179) fix editor scrolling to the top when link modal opens from keyboard shortcuts
 
-
 </details>
 <hr/>
+
+## 8.25.1 (March 2, 2021)
+### :bug: Bug Fix
+- `table`
+  - [#2252](https://github.com/wix-incubator/rich-content/pull/2252) drag and drop preview position
+  
+## 8.25.0 (March 2, 2021)
+### :rocket: New Feature
+- `ricos-content`
+  - [#2234](https://github.com/wix-incubator/rich-content/pull/2234) `fromPlainText` utility converts plain text to rich content
+
+### :nail_care: Polish
+- `docs`
+  - [#2241](https://github.com/wix-incubator/rich-content/pull/2241) `EditorEventsContext` - doc page improved
+### :bug: Bug Fix
+- `image-viewer`
+  - [#2251](https://github.com/wix/ricos/pull/2251) fix useSrcSet use
+## 8.24.1 (March 1, 2021)
+### :nail_care: Polish
+- `editor-common`
+  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
+- `ricos-viewer`
+  - [#2217](https://github.com/wix-incubator/rich-content/pull/2217) render full-screen on hover
+
+### :house: Internal
+- `bundle-analyzer`
+  - [#2238](https://github.com/wix/ricos/pull/2238) editor-common bundle size fixture
+
+### :rocket: New Feature
+- `ricos-theme`
+  - [#2230](https://github.com/wix-incubator/rich-content/pull/2230) `paletteConfig` - configurations for theme. `shouldColorContainer` boolean field
 
 ## 8.24.0 (Feb 28, 2021)
 ### :rocket: New Feature
