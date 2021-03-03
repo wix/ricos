@@ -100,55 +100,62 @@ const createToolbar: CreatePluginToolbar = (config: {
   closeInlinePluginToolbar: () => void;
   t: TranslationFunction;
   innerModal: InnerModalType;
-}) => ({
-  TextButtonMapper: () => ({
-    [FORMATTING_BUTTONS.LINK]: {
-      component: props => (
-        <TextLinkButton
-          insertLinkFn={insertLinkAtCurrentSelection}
-          getEntityData={getEntityData}
-          insertCustomLink={insertCustomLink}
-          isActive={hasLinksInSelection(config.getEditorState())}
-          closeInlinePluginToolbar={config.closeInlinePluginToolbar}
-          tooltipText={config.t('TextLinkButton_Tooltip')}
-          innerModal={config.innerModal}
-          disabled={isAtomicBlockInSelection(config.getEditorState())}
-          {...props}
-        />
-      ),
-      keyBindings: [
-        {
-          keyCommand: {
-            command: 'link',
-            modifiers: [MODIFIERS.COMMAND],
-            key: 'k',
+}) => {
+  const isDisabled = () => isAtomicBlockInSelection(config.getEditorState());
+  const getTooltip = () =>
+    config.t(
+      isDisabled() ? 'TextLinkButton_DisableButtonForPlugins_Tooltip' : 'TextLinkButton_Tooltip'
+    );
+  return {
+    TextButtonMapper: () => ({
+      [FORMATTING_BUTTONS.LINK]: {
+        component: props => (
+          <TextLinkButton
+            insertLinkFn={insertLinkAtCurrentSelection}
+            getEntityData={getEntityData}
+            insertCustomLink={insertCustomLink}
+            isActive={hasLinksInSelection(config.getEditorState())}
+            closeInlinePluginToolbar={config.closeInlinePluginToolbar}
+            tooltipText={getTooltip()}
+            innerModal={config.innerModal}
+            disabled={isDisabled()}
+            {...props}
+          />
+        ),
+        keyBindings: [
+          {
+            keyCommand: {
+              command: 'link',
+              modifiers: [MODIFIERS.COMMAND],
+              key: 'k',
+            },
+            commandHandler: editorState => {
+              if (hasLinksInSelection(editorState)) {
+                config.closeInlinePluginToolbar();
+                return removeLinksInSelection(editorState);
+              } else if (!isDisabled) {
+                openLinkModal(config);
+              }
+            },
           },
-          commandHandler: editorState => {
-            if (hasLinksInSelection(editorState)) {
-              config.closeInlinePluginToolbar();
-              return removeLinksInSelection(editorState);
-            } else if (!isAtomicBlockInSelection(config.getEditorState())) {
-              openLinkModal(config);
-            }
+        ],
+        externalizedButtonProps: {
+          onClick: e => {
+            e.preventDefault();
+            openLinkModal(config);
           },
+          isActive: () => hasLinksInSelection(config.getEditorState()),
+          isDisabled,
+          getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
+          tooltip: getTooltip(),
+          getLabel: () => '', // new key needed?
+          type: BUTTON_TYPES.BUTTON,
         },
-      ],
-      externalizedButtonProps: {
-        onClick: e => {
-          e.preventDefault();
-          openLinkModal(config);
-        },
-        isActive: () => hasLinksInSelection(config.getEditorState()),
-        isDisabled: () => isAtomicBlockInSelection(config.getEditorState()),
-        getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
-        tooltip: config.t('TextLinkButton_Tooltip'),
-        getLabel: () => '', // new key needed?
-        type: BUTTON_TYPES.BUTTON,
       },
-    },
-  }),
-  InlinePluginToolbarButtons: createInlineButtons(config),
-  name: 'link',
-});
+    }),
+    InlinePluginToolbarButtons: createInlineButtons(config),
+    name: 'link',
+  };
+};
 
 export default createToolbar;

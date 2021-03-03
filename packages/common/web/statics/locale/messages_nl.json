@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Instellingen",
 	"LinkPreview_Settings_Tooltip": "Link instellingen",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Om diensten te kunnen verkopen en te delen in je post, ga je naar de appmarkt op je site en installeer je Wix Bookings.",
-	"UnsupportedPlugin_message": "Deze inhoud is alleen toegankelijk via een browser",
+	"UnsupportedPlugin_message": "Dit inhoudsblok kan alleen vanuit een browser worden bewerkt",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Tabel verwijderen",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Enquête (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "Codefragment toevoegen",
