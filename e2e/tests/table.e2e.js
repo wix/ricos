@@ -53,7 +53,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should add rows and columns from table entry points', function() {
+    it.only('should add rows and columns from table entry points', function() {
       cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
       cy.focusTable();
       cy.clickOnAddRow();
