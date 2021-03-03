@@ -1,7 +1,22 @@
-import { RichContent, ImageData, DividerData, Node_Type } from 'ricos-schema';
+import {
+  RichContent,
+  ImageData,
+  DividerData,
+  Node_Type,
+  ParagraphData,
+  TextData,
+} from 'ricos-schema';
 
-type AddMethod<T> = {
+type AddPluginMethod<T> = {
   [P in keyof T]: (data: Partial<T[P]>, content?: RichContent) => RichContent;
+};
+
+type AddTextMethod<T> = {
+  [P in keyof T]: (
+    text: string | TextData,
+    data: Partial<T[P]>,
+    content?: RichContent
+  ) => RichContent;
 };
 
 type Getter<T> = {
@@ -13,22 +28,29 @@ type AddPluginDataMap = {
   addDivider: DividerData;
 };
 
+type AddTextDataMap = {
+  addParagraph: ParagraphData;
+};
+
 type GetPluginDataMap = {
   getImages: ImageData;
   getDividers: DividerData;
+  getParagraphs: ParagraphData;
 };
 
-export type ContentBuilder = AddMethod<AddPluginDataMap>;
+export type ContentBuilder = AddPluginMethod<AddPluginDataMap> & AddTextMethod<AddTextDataMap>;
 export type ContentExtractor = Getter<GetPluginDataMap>;
 
 export const dataByNodeType = (type: Node_Type, data: unknown) =>
   ({
     [Node_Type.IMAGE]: { imageData: data as ImageData },
     [Node_Type.DIVIDER]: { dividerData: data as DividerData },
+    [Node_Type.PARAGRAPH]: { paragraphData: data as ParagraphData },
   }[type]);
 
 export const nodeDataMapByType = (type: Node_Type) =>
   ({
     [Node_Type.IMAGE]: ({ imageData }) => imageData as ImageData,
     [Node_Type.DIVIDER]: ({ dividerData }) => dividerData as DividerData,
+    [Node_Type.PARAGRAPH]: ({ paragraphData }) => paragraphData as ParagraphData,
   }[type]);

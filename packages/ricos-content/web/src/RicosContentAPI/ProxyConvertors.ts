@@ -60,7 +60,7 @@ export class ProxyPlainTextConvertor
     this.conversionService.configure(endpoint);
   }
 
-  async toPlainText(content: RichContent) {
+  toPlainText(content: RichContent) {
     return this.conversionService.convert(content);
   }
 }

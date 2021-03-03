@@ -1,6 +1,6 @@
 import { ContentBuilder, ContentExtractor } from '../types/content-api';
 import { Convertors } from '../types';
-import { RichContent, ImageData, DividerData } from 'ricos-schema';
+import { RichContent, ImageData, DividerData, ParagraphData, TextData } from 'ricos-schema';
 
 type ContentAPIDeps = {
   builder: ContentBuilder;
@@ -33,12 +33,21 @@ export class ContentAPI implements ContentBuilder, ContentExtractor, Convertors 
     return this.content;
   }
 
+  addParagraph(text: string | TextData, data: ParagraphData) {
+    this.content = this.builder.addParagraph(text, data, this.content);
+    return this.content;
+  }
+
   getImages() {
     return this.extractor.getImages(this.content);
   }
 
   getDividers() {
     return this.extractor.getDividers(this.content);
+  }
+
+  getParagraphs() {
+    return this.extractor.getParagraphs(this.content);
   }
 
   toDraft() {

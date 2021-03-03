@@ -1,4 +1,13 @@
-import { RichContent, ImageData, DividerData, Node_Type, Node } from 'ricos-schema';
+import { isString } from 'lodash';
+import {
+  RichContent,
+  ImageData,
+  DividerData,
+  ParagraphData,
+  TextData,
+  Node_Type,
+  Node,
+} from 'ricos-schema';
 import { ContentBuilder, dataByNodeType } from '../types';
 
 export class RicosContentBuilder implements ContentBuilder {
@@ -19,11 +28,38 @@ export class RicosContentBuilder implements ContentBuilder {
     return content;
   }
 
+  addTextNode(type: Node_Type, data: unknown, textData: TextData, content: RichContent) {
+    const node: Node = {
+      type,
+      ...dataByNodeType(type, data),
+      nodes: [
+        {
+          type: Node_Type.TEXT,
+          textData,
+          key: this.generateKey(),
+        },
+      ],
+    };
+    content.nodes.push(node);
+    return content;
+  }
+
   addImage(data: ImageData, content: RichContent) {
     return this.addNode(Node_Type.IMAGE, data, content);
   }
 
   addDivider(data: DividerData, content: RichContent) {
     return this.addNode(Node_Type.DIVIDER, data, content);
+  }
+
+  addParagraph(text: string | TextData, data: ParagraphData, content: RichContent) {
+    const textData: TextData = isString(text)
+      ? {
+          text,
+          decorations: [],
+        }
+      : text;
+
+    return this.addTextNode(Node_Type.PARAGRAPH, data, textData, content);
   }
 }
