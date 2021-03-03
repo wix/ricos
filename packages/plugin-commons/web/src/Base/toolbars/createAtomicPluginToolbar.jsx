@@ -15,7 +15,7 @@ import {
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';
 import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
 
 export default function createAtomicPluginToolbar({
@@ -166,7 +166,7 @@ export default function createAtomicPluginToolbar({
         toolbarNode: findDOMNode(this),
         languageDir,
         isMobile,
-        renderedInTable: innerRCERenderedIn === 'table',
+        renderedInTable: innerRCERenderedIn === TABLE_TYPE,
       });
       this.offsetHeight = updatedOffsetHeight;
       return position;
@@ -423,7 +423,7 @@ export default function createAtomicPluginToolbar({
       const { toolbarStyles: toolbarTheme } = theme || {};
 
       if (this.visibilityFn() && isVisible) {
-        const renderedInTable = innerRCERenderedIn === 'table';
+        const renderedInTable = innerRCERenderedIn === TABLE_TYPE;
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
