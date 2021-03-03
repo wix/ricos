@@ -80,7 +80,6 @@ const addDecoration = (
 };
 
 const createLinkData = (element: Element) => {
-  console.log(element.attrs.find(attr => attr.name === 'href'));
   const url = element.attrs.find(attr => attr.name === 'href')?.value;
   return url ? { linkData: { url } } : {};
 };
