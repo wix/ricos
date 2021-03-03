@@ -32,11 +32,13 @@ export class RicosContentBuilder implements ContentBuilder {
     const node: Node = {
       type,
       ...dataByNodeType(type, data),
+      key: this.generateKey(),
       nodes: [
         {
           type: Node_Type.TEXT,
           textData,
           key: this.generateKey(),
+          nodes: [],
         },
       ],
     };
