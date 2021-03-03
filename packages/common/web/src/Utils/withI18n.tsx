@@ -4,7 +4,6 @@ import i18n from './i18n';
 import createHocName from './createHocName';
 import { LocaleResource } from '../types';
 import { i18n as I18n } from 'i18next';
-import { GlobalContext } from './contexts';
 interface Props {
   locale: string;
   localeResource: LocaleResource;
