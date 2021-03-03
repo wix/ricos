@@ -21,8 +21,8 @@ const getGalleryHeight = width => (width ? Math.floor((width * 3) / 4) : 300);
 
 class GalleryViewer extends React.Component {
   constructor(props) {
-    validate(props.componentData, pluginGallerySchema);
     super(props);
+    validate(props.componentData, pluginGallerySchema);
     this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.containerRef = React.createRef();
     this.state = {

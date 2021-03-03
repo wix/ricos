@@ -28,7 +28,7 @@ export interface BICallbacks {
       | undefined,
     version: string
   ): void;
-  onViewerAction?(pluginId: string, actionName: string, value: string): void;
+  onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
   onViewerLoaded?(isPreview: boolean, version: string): void;
   onOpenEditorSuccess?(version: string): void;
   onPluginChange?(
@@ -53,4 +53,9 @@ export interface BICallbacks {
     errorType: string | undefined,
     version: string
   ): void;
+}
+
+export enum ActionName {
+  GalleryExpand = 'expand_gallery',
+  ImageExpand = 'expand_image',
 }

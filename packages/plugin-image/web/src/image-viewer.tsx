@@ -21,6 +21,7 @@ import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.rtlignore.scss';
 import ExpandIcon from './icons/expand';
 import InPluginInput from './InPluginInput';
+import { ActionName } from 'wix-rich-content-common/src/types/biCallbacksTypes';
 
 const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
@@ -328,7 +329,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
+    helpers.onViewerAction?.(IMAGE_TYPE, ActionName.ImageExpand, '');
     onExpand?.(this.props.blockKey);
   };
 
