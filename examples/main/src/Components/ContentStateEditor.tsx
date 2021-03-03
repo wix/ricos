@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { debounce } from 'lodash';
+import { debounce, isEqual } from 'lodash';
 import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
@@ -36,7 +36,14 @@ import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
 import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 
-const stringifyJSON = obj => JSON.stringify(obj, null, 2);
+function nonSerializedAttribute(key, value) {
+  if (typeof value === 'function') {
+    throw Error('content is not serialized');
+  }
+  return value;
+}
+
+const stringifyJSON = obj => JSON.stringify(obj, nonSerializedAttribute, 2);
 
 interface Props {
   contentState?: RicosContent;
@@ -65,9 +72,10 @@ class ContentStateEditor extends PureComponent<Props> {
   componentWillReceiveProps(nextProps: Props) {
     const { contentState, shouldUseNewContent } = nextProps;
     if (!this.monaco?.editor.hasTextFocus()) {
-      this.setState({
-        value: stringifyJSON(shouldUseNewContent ? ensureRicosContent(contentState) : contentState),
-      });
+      const value = stringifyJSON(
+        shouldUseNewContent ? ensureRicosContent(contentState) : contentState
+      );
+      this.setState({ value });
     }
   }
 

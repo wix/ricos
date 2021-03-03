@@ -20,7 +20,12 @@ import {
   UNDO_REDO_TYPE,
 } from 'wix-rich-content-plugin-undo-redo';
 import { createGalleryPlugin, GALLERY_TYPE, pluginGallery } from 'wix-rich-content-plugin-gallery';
-import { createVideoPlugin, pluginVideo, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
+import {
+  createVideoPlugin,
+  pluginVideo,
+  VIDEO_TYPE,
+  videoButtonsTypes,
+} from 'wix-rich-content-plugin-video';
 import {
   createHtmlPlugin,
   HTML_TYPE,
@@ -49,11 +54,6 @@ import {
   HEADINGS_DROPDOWN_TYPE,
   pluginHeadings,
 } from 'wix-rich-content-plugin-headings';
-import {
-  createSoundCloudPlugin,
-  pluginSoundCloud,
-  SOUND_CLOUD_TYPE,
-} from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin, GIPHY_TYPE, pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
@@ -121,7 +121,6 @@ import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
-import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
@@ -172,7 +171,6 @@ export const ricosEditorPlugins: Record<string, EditorPluginCreator<unknown>> = 
   [HASHTAG_TYPE]: pluginHashtag,
   [EXTERNAL_MENTIONS_TYPE]: pluginMentions,
   [CODE_BLOCK_TYPE]: pluginCodeBlock,
-  [SOUND_CLOUD_TYPE]: pluginSoundCloud,
   [GIPHY_TYPE]: pluginGiphy,
   [HEADERS_MARKDOWN_TYPE]: pluginHeadersMarkdown,
   [MAP_TYPE]: pluginMap,
@@ -205,7 +203,6 @@ export const editorPluginsPartialPreset: CreatePluginFunction[] = [
   createHashtagPlugin,
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
-  createSoundCloudPlugin,
   createGiphyPlugin,
   createHeadersMarkdownPlugin,
   createMapPlugin,
@@ -263,7 +260,6 @@ export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePlugi
   hashtag: createHashtagPlugin,
   mentions: createExternalMentionsPlugin,
   codeBlock: createCodeBlockPlugin,
-  soundCloud: createSoundCloudPlugin,
   giphy: createGiphyPlugin,
   headings: createHeadingsPlugin,
   spoiler: createSpoilerPlugin,
@@ -617,13 +613,6 @@ const config: RichContentEditorProps['config'] = {
     onClick: (event, url) => console.log('link clicked!', url),
     linkTypes: { anchor: true },
   },
-  [SOUND_CLOUD_TYPE]: {
-    // toolbar: {
-    //   icons: {
-    //     InsertPluginButtonIcon: MyCustomIcon,
-    //   },
-    // },
-  },
   [CODE_BLOCK_TYPE]: {
     // toolbar: {
     //   icons: {
@@ -661,6 +650,7 @@ const config: RichContentEditorProps['config'] = {
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+    exposeButtons: [videoButtonsTypes.video, videoButtonsTypes.soundCloud],
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
@@ -733,6 +723,11 @@ const config: RichContentEditorProps['config'] = {
     customStyleFn: customForegroundStyleFn,
     onColorAdded: color => (userColors = [...userColors, color]),
     getUserColors: () => userColors,
+    positionPicker: (buttonRef, panelWidth) => {
+      const { bottom, left } = buttonRef.current.getBoundingClientRect();
+      const panelLeft = left - panelWidth / 2;
+      return { left: panelLeft, top: bottom };
+    },
   },
   uiSettings,
   getToolbarSettings: ({ textButtons }) => [

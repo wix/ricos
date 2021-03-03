@@ -113,7 +113,7 @@ export default class Resizer extends PureComponent {
 Resizer.propTypes = {
   index: PropTypes.number.isRequired,
   size: PropTypes.number,
-  onResize: PropTypes.func.isRequired,
+  onResize: PropTypes.func,
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   horizontal: PropTypes.bool,
   minSize: PropTypes.number,
