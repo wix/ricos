@@ -29,18 +29,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     return children?.props.locale || locale;
   };
 
-  updateLocale = async () => {
-    const { _rcProps: { experiments } = {} } = this.props;
-    await localeStrategy(this.getLocale(), experiments).then(localeData =>
-      this.setState({ localeData, remountKey: !this.state.remountKey })
-    );
-  };
-
   componentDidMount() {
-    if (this.getLocale() !== 'en') {
-      this.updateLocale();
-    }
-
     const { children } = this.props;
 
     const onViewerLoaded =
@@ -49,17 +38,11 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     onViewerLoaded?.(!!isPreview?.(), Version.currentVersion);
   }
 
-  componentWillReceiveProps(newProps: RicosViewerProps) {
-    if (newProps.locale !== this.props.locale) {
-      this.updateLocale();
-    }
-  }
-
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
 
   render() {
     const { children, seoSettings, ...props } = this.props;
-    const { isPreviewExpanded, remountKey, localeData } = this.state;
+    const { isPreviewExpanded, localeData } = this.state;
     const child =
       children && shouldRenderChild('RichContentViewer', children) ? (
         children
@@ -72,7 +55,6 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         isPreviewExpanded={isPreviewExpanded}
         onPreviewExpand={this.onPreviewExpand}
         isViewer
-        key={`viewer-${remountKey}`}
         {...props}
       >
         {React.cloneElement(child, {

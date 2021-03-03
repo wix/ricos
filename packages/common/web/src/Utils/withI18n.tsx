@@ -4,7 +4,7 @@ import i18n from './i18n';
 import createHocName from './createHocName';
 import { LocaleResource } from '../types';
 import { i18n as I18n } from 'i18next';
-
+import { GlobalContext } from './contexts';
 interface Props {
   locale: string;
   localeResource: LocaleResource;
@@ -33,15 +33,33 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
       };
     }
 
+    async componentDidMount() {
+      const { locale, localeResource } = await this.getResourceByLocale(this.props.locale);
+      this.changeLocale({ locale, localeResource });
+    }
+
     componentWillReceiveProps(nextProps) {
       if (this.props.locale !== nextProps.locale) {
         this.changeLocale(nextProps);
       }
     }
 
+    async getResourceByLocale(locale) {
+      try {
+        const localeResource = await import(
+          /* webpackChunkName: "messages_${locale}" */
+          `wix-rich-content-common/dist/statics/locale/messages_${locale}.json`
+        ).then(res => res.default);
+        return { locale, localeResource };
+      } catch (err) {
+        throw new Error(`error while loading locale ${locale}:\n${err}`);
+      }
+    }
+
     changeLocale({ locale, localeResource }) {
       this.i18n.addResourceBundle(locale, 'translation', localeResource);
       this.i18n.changeLanguage(locale, err => {
+        this.forceUpdate();
         if (!err) {
           this.setState({ key: `${I18nWrapper.displayName}-${this.i18n.language}` });
         }
@@ -52,7 +70,7 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
       const { forwardedRef, ...rest } = this.props;
       return (
         <I18nextProvider i18n={this.i18n}>
-          <Translated key={this.state.key} {...rest} ref={forwardedRef} />
+          <Translated {...rest} ref={forwardedRef} />
         </I18nextProvider>
       );
     }
