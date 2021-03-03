@@ -54,6 +54,13 @@ function setLastChangeType(editorState: EditorState, lastChangeType: string) {
   return EditorState.set(editorState, { lastChangeType });
 }
 
+function createNewEditorStateWithChangeType(editorState, lastChangeType) {
+  return setLastChangeType(
+    EditorState.createWithContent(editorState.getCurrentContent()),
+    lastChangeType
+  );
+}
+
 function preserveSelection(editorState: EditorState, newEditorState: EditorState) {
   return EditorState.forceSelection(
     newEditorState,
@@ -241,29 +248,23 @@ function getFixedAccordionData(currentData, newData): EntityToReplace {
   return entityToReplace;
 }
 
-function setPairItemChangeType(editorState, lastChangeType) {
-  return setLastChangeType(
-    EditorState.createWithContent(editorState.getCurrentContent()),
-    lastChangeType
-  );
-}
-
 function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
   return newPairs.map(pair => {
     return {
       key: pair.key,
-      title: setPairItemChangeType(pair.title, lastChangeType),
-      content: setPairItemChangeType(pair.content, lastChangeType),
+      title: createNewEditorStateWithChangeType(pair.title, lastChangeType),
+      content: createNewEditorStateWithChangeType(pair.content, lastChangeType),
     };
   });
 }
 
 function fixBrokenPair(newPairs, currentPairs, brokenPairIndex) {
+  const shouldSetChangeType = newPairs.length === 1;
   ['title', 'content'].forEach(item => {
-    newPairs[brokenPairIndex][item] = setLastChangeType(
-      removeFocus(currentPairs[brokenPairIndex][item]),
-      'undo'
-    );
+    const newEditorState = removeFocus(currentPairs[brokenPairIndex][item]);
+    newPairs[brokenPairIndex][item] = shouldSetChangeType
+      ? setLastChangeType(newEditorState, 'undo')
+      : newEditorState;
   });
   return newPairs;
 }
