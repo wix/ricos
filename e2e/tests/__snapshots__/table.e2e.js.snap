@@ -39,7 +39,6 @@ exports[`plugins > table > should open table modal and create table by the setti
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120
@@ -126,7 +125,6 @@ exports[`plugins > table > should open table modal and create table by the setti
             47,
             47
           ],
-          "size": "content"
         },
         "type": "table"
       },
