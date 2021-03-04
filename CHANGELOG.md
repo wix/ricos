@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `fullscreen`
+  - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues
+
 </details>
 <hr/>
 
