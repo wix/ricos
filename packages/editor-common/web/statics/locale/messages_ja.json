@@ -103,7 +103,7 @@
   "SettingsButton_Tooltip": "設定",
   "LinkPreview_Settings_Tooltip": "リンク設定",
   "Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "サービスを販売し記事でシェアするには、Wix App Market で Wix ストアをインストールしてください。",
-  "UnsupportedPlugin_message": "このコンテンツはブラウザでのみアクセスできます",
+  "UnsupportedPlugin_message": "このコンテンツのブロックはブラウザでのみ編集できます",
   "TablePlugin_Toolbar_DeleteTable_Tooltip": "表を削除",
   "Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "投票 (px)",
   "TextCodeBlock_InsertButton_Tooltip": "コードスニペットを追加",

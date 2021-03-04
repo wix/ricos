@@ -15,9 +15,26 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `fullscreen`
+  - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues
+
 </details>
 <hr/>
 
+## 8.25.2 (March 4, 2021)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
+    - `p` will no longer override elements of all textual entities
+    - `lineHeight` of an element is now automatically set to 1.5 to keep ratio of growing text (unless provided).
+
+## 8.25.1 (March 2, 2021)
+### :bug: Bug Fix
+- `table`
+  - [#2252](https://github.com/wix-incubator/rich-content/pull/2252) drag and drop preview position
+  
 ## 8.25.0 (March 2, 2021)
 ### :rocket: New Feature
 - `ricos-content`

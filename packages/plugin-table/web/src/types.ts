@@ -4,7 +4,7 @@ import {
   CreatePluginFunction,
 } from 'wix-rich-content-common';
 
-export const TABLE_TYPE = 'table';
+export const TABLE_TYPE = 'wix-rich-content-plugin-table';
 
 export interface TablePluginEditorConfig extends EditorPluginConfig {
   innerRCEPlugins?: CreatePluginFunction[];
