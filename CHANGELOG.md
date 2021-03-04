@@ -15,15 +15,15 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.25.3 (March 4, 2021)
 ### :bug: Bug Fix
 - `fullscreen`
   - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues
 - `ricos-editor`
   - [#2257](https://github.com/wix/ricos/pull/2257) `getContent` removes blocks with errors from innerRCE blocks
-
-</details>
-<hr/>
 
 ## 8.25.2 (March 4, 2021)
 ### :bug: Bug Fix
