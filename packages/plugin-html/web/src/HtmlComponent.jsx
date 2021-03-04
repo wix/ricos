@@ -72,38 +72,36 @@ class HtmlComponent extends Component {
   };
 
   getIframeHeight = () => {
-    const { height } = this.props.componentData.config || {};
+    const {
+      settings: { height } = {},
+      componentData: { config },
+    } = this.props;
     const { iframeHeight } = this.state;
     //for avoiding unnecessary scroll
     const maxDiff = Math.min(50, this.state.iframeHeight * 0.1);
-    if (height && iframeHeight && height < iframeHeight && height + maxDiff > iframeHeight) {
-      return iframeHeight;
-    } else {
-      return height || iframeHeight;
-    }
+    const normalizedHeight =
+      config.height &&
+      iframeHeight &&
+      config.height < iframeHeight &&
+      config.height + maxDiff > iframeHeight
+        ? iframeHeight
+        : config.height;
+
+    return normalizedHeight || height || INIT_HEIGHT;
   };
 
   render() {
     const { html } = this.state;
-    const {
-      iframeSandboxDomain,
-      theme,
-      componentData,
-      settings: { width, height } = {},
-    } = this.props;
+    const { iframeSandboxDomain, theme, componentData, settings: { width } = {} } = this.props;
     this.styles = this.styles || mergeStyles({ styles: htmlComponentStyles, theme });
 
     validate(componentData, pluginHtmlSchema);
 
-    const {
-      src,
-      srcType,
-      config: { width: currentWidth, height: currentHeight } = {},
-    } = componentData;
+    const { src, srcType, config: { width: currentWidth } = {} } = componentData;
 
     const style = {
       width: this.props.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
-      height: currentHeight || this.state.iframeHeight || height || INIT_HEIGHT,
+      height: this.getIframeHeight(),
       maxHeight: this.state.iframeHeight,
       maxWidth: '100%',
     };
