@@ -58,4 +58,5 @@ export interface BICallbacks {
 export enum ActionName {
   GalleryExpand = 'expand_gallery',
   ImageExpand = 'expand_image',
+  Click = 'Click',
 }
