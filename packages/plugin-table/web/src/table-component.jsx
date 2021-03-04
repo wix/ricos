@@ -25,7 +25,7 @@ class TableComponent extends React.Component {
       selected: {},
       prevSelection: {},
     };
-    this.innerRceAdditionalProps = { placeholder: '' };
+    this.innerRceAdditionalProps = { placeholder: '', handleReturn: this.handleReturn };
     this.innerEditorsRefs = {};
     this.table = new Table(props.componentData, this.updateTable);
     this.tableRef = createRef();
@@ -51,6 +51,8 @@ class TableComponent extends React.Component {
       this.setSelected();
     }
   }
+
+  handleReturn = () => e => !(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) && 'handled';
 
   getCellState = (i, j) => this.table.getCellContent(i, j) || createEmptyCellEditor();
 

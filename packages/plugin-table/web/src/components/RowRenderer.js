@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class RowRenderer extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.rowsToUpdate?.includes(nextProps.row);
+    return nextProps.rowsToUpdate?.includes(nextProps.row) || false;
   }
 
   setRef = ref => this.props.setRowRef?.(ref, this.props.row);
