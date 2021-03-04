@@ -165,10 +165,10 @@
   ],
   "entityMap": {
     "0": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -1340,10 +1340,10 @@
       }
     },
     "1": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -1729,10 +1729,10 @@
       }
     },
     "2": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -2930,10 +2930,10 @@
       }
     },
     "3": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -3426,10 +3426,10 @@
       }
     },
     "4": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -3555,10 +3555,10 @@
       }
     },
     "5": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {

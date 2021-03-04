@@ -1,6 +1,6 @@
 import createInsertButtons from './insert-buttons';
 import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
-import { TablePluginEditorConfig } from '../types';
+import { TablePluginEditorConfig, TABLE_TYPE } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   t,
@@ -13,7 +13,7 @@ const createToolbar: CreatePluginToolbar = ({
 }) => {
   return {
     InsertButtons: createInsertButtons({ t, settings, isMobile }),
-    name: 'table',
+    name: TABLE_TYPE,
   };
 };
 

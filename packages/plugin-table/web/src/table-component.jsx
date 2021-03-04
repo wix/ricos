@@ -14,6 +14,7 @@ import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-edito
 import { isEmpty, isNumber, cloneDeep } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
+import { TABLE_TYPE } from './types';
 
 class TableComponent extends React.Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class TableComponent extends React.Component {
     return this.props.renderInnerRCE({
       editorState,
       onChange: editorState => this.table.updateCellContent(i, j, editorState),
-      renderedIn: 'table',
+      renderedIn: TABLE_TYPE,
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
       tablePluginMenu: true,

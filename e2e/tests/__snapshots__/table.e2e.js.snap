@@ -128,10 +128,10 @@ exports[`plugins > table > should open table modal and create table by the setti
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -472,10 +472,10 @@ exports[`plugins > table > should select/unSelect all cells #0`] =
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -967,10 +967,10 @@ exports[`plugins > table > should add rows and columns from table entry points #
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -1311,10 +1311,10 @@ exports[`plugins > table > should open table toolbars in different positions #0`
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -1779,10 +1779,10 @@ exports[`plugins > table > should use table toolbars #0`] =
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -2132,10 +2132,10 @@ exports[`plugins > table > should use cell alignment #0`] =
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -2627,10 +2627,10 @@ exports[`plugins > table > should use table toolbar context menu #0`] =
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -2971,10 +2971,10 @@ exports[`plugins > table > should edit cell #0`] =
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
@@ -3511,10 +3511,10 @@ exports[`plugins > table > should test the first and last block logic #0`] =
           ],
           "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     }
   }
 };
