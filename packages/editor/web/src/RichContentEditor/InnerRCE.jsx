@@ -23,7 +23,7 @@ class InnerRCE extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.innerRCERenderedIn === 'table' &&
+      this.props.innerRCERenderedIn === TABLE_TYPE &&
       prevProps.editing === false &&
       prevProps.editing !== this.props.editing
     ) {
