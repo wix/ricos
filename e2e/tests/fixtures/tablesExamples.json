@@ -1316,8 +1316,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             170.651376146789,
             170.651376146789,
@@ -1716,8 +1714,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             "auto",
             "auto"
@@ -2909,8 +2905,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             119.61904761904762,
             193.384126984127,
@@ -3407,8 +3401,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             380,
             151,
@@ -3543,8 +3535,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             10
           ],
@@ -4392,8 +4382,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             10,
             10,
