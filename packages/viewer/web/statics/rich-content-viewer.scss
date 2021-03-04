@@ -58,12 +58,11 @@
   width: 100%;
   height: 100%;
   line-height: 1.5;
-  font-size: 16px;
+  font-size: $paragraphFontSize;
   color: $primary-text-color;
-  background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
-  @include ricosTypography('p', false);
+  background-color: $background-color-container;
 
   &::after {
     content: '';
@@ -114,7 +113,7 @@
 
 .text {
   composes: elementSpacing;
-  color: $ricos-p-color;
+  @include ricosTypography('p', true);
 
   &:empty {
     height: 24px;
@@ -123,6 +122,15 @@
 
 .child {
   display: block;
+}
+
+/*! rtl:ignore */
+.orderedList, .unorderedList {
+  /*! rtl:ignore */
+  > * {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
 }
 
 .unorderedList.center{
@@ -171,8 +179,9 @@
   padding-bottom: 6px;
   padding-inline-start: 18px;
   font-style: normal;
-  border-left-color: $ricos-quote-color;
-  border-right-color: $ricos-quote-color;
+  border-left-color: $ricos-quote-border-color;
+  border-right-color: $ricos-quote-border-color;
+  color: $ricos-quote-color;
   @include ricosTypography('quote', false);
 }
 
@@ -197,12 +206,16 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba($fallbackColor, 0.06);
+  background-color: rgba($fallbackColorTuple, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;
   padding: 2px 25px;
   white-space: pre-wrap;
+
+  .renderedInTable & {
+    margin: 1em 0;
+  }
 }
 
 .normalText {
@@ -222,4 +235,22 @@
 .embed {
   width: max-content;
   border: none;
+}
+
+.horizontalScrollbar {
+  overflow-x: auto;
+}
+
+.horizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.horizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.horizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
 }

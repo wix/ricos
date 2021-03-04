@@ -1,41 +1,34 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { mergeStyles } from 'wix-rich-content-common';
+import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import SettingsMobileHeader from './SettingsMobileHeader';
 import { CloseIcon } from '../Icons';
 import SettingsPanelFooter from '../Components/SettingsPanelFooter';
 import TextInput from '../Components/TextInput';
-import { FOOTER_BUTTON_ALIGNMENT } from '../consts';
+import { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
-import { mergeStyles } from 'wix-rich-content-common';
-import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 
 export default class UrlInputModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isDropdownOpen: false,
+    };
     const { theme = {}, buttonAlignment } = props;
-    const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
     this.styles = mergeStyles({ styles, theme });
-    this.containerClassName = classNames(
-      styles.urlInput_container,
-      endAlignment && this.styles.endAlignment
-    );
-    this.headerTextClassName = classNames(
-      styles.urlInput_header_text,
-      endAlignment && this.styles.endAlignment
-    );
-    this.closeClassName = classNames(
-      styles.urlInput_closeIcon,
-      endAlignment && this.styles.endAlignment
-    );
-    this.headerClassName = classNames(
-      styles.urlInput_header,
-      endAlignment && this.styles.endAlignment
-    );
-    this.inputClassName = classNames(
-      styles.urlInputModal_textInput,
-      endAlignment && this.styles.endAlignment
-    );
+    const endAlignmentStyles =
+      buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END && this.styles.endAlignment;
+    const getClassNames = st => classNames(st, endAlignmentStyles);
+    this.classes = {
+      container: getClassNames(styles.urlInput_container),
+      headerText: getClassNames(styles.urlInput_header_text),
+      closeBtn: getClassNames(styles.urlInput_closeIcon),
+      header: getClassNames(styles.urlInput_header),
+      input: getClassNames(styles.urlInputModal_textInput),
+      topControls: getClassNames(styles.urlInputModal_topControls),
+    };
   }
 
   onUrlChange = url => {
@@ -71,17 +64,34 @@ export default class UrlInputModal extends Component {
       children,
       theme,
       buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER,
+      controlsPosition = MODAL_CONTROLS_POSITION.BOTTOM,
       selected = true,
       textInput = true,
     } = this.props;
-    const { styles } = this;
+    const topControls = controlsPosition === MODAL_CONTROLS_POSITION.TOP;
+    const { styles, classes } = this;
     return (
-      <div className={this.containerClassName} data-hook={dataHook} dir={languageDir}>
-        <CloseIcon className={this.closeClassName} onClick={onCloseRequested} />
-        <div className={this.headerClassName}>
-          <div className={this.headerTextClassName}>{title}</div>
+      <div
+        className={classNames(classes.container, { [classes.topControls]: topControls })}
+        data-hook={dataHook}
+        dir={languageDir}
+      >
+        {topControls && (
+          <SettingsMobileHeader
+            theme={theme}
+            save={() => onConfirm()}
+            cancelLabel="Cancel"
+            saveLabel="Save"
+            cancel={() => onCloseRequested()}
+            dataHookPrefix={'UrlInputModalHeader'}
+          />
+        )}
+
+        {!topControls && <CloseIcon className={classes.closeBtn} onClick={onCloseRequested} />}
+        <div className={classes.header}>
+          <div className={classes.headerText}>{title}</div>
         </div>
-        <div className={this.inputClassName}>
+        <div className={classes.input}>
           {textInput && (
             <TextInput
               onClick={() => this.setState({ isDropdownOpen: true })}
@@ -103,17 +113,19 @@ export default class UrlInputModal extends Component {
           )}
           {children}
         </div>
-        <SettingsPanelFooter
-          className={styles.urlInput_modal_footer}
-          save={() => onConfirm()}
-          cancel={onCloseRequested}
-          saveLabel={t('EmbedURL_Common_CTA_Primary')}
-          cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
-          theme={theme}
-          layoutOptions={{ isModal: true, buttonAlignment }}
-          t={t}
-          selected={selected}
-        />
+        {!topControls && (
+          <SettingsPanelFooter
+            className={styles.urlInput_modal_footer}
+            save={() => onConfirm()}
+            cancel={onCloseRequested}
+            saveLabel={t('EmbedURL_Common_CTA_Primary')}
+            cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
+            theme={theme}
+            layoutOptions={{ isModal: true, buttonAlignment }}
+            t={t}
+            selected={selected}
+          />
+        )}
       </div>
     );
   }
@@ -133,7 +145,8 @@ UrlInputModal.propTypes = {
   onCloseRequested: PropTypes.func.isRequired,
   children: PropTypes.any,
   theme: PropTypes.object,
-  buttonAlignment: PropTypes.bool,
+  buttonAlignment: PropTypes.string,
+  controlsPosition: PropTypes.string,
   selected: PropTypes.bool,
   textInput: PropTypes.object || PropTypes.bool,
 };

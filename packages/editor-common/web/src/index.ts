@@ -7,6 +7,7 @@ export {
   withEditorEvents,
   WithEditorEventsProps,
   EditorEvents,
+  withEditorContext,
 } from './EditorEventsContext';
 
 // Components
@@ -33,11 +34,14 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
+export { undo, redo } from './Utils/handleUndoRedoCommands';
 
 export {
   updateLinkAtCurrentSelection,
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
+  getEntityData,
+  insertCustomLink,
   hasLinksInBlock,
   getLinkRangesInBlock,
   fixPastedLinks,
@@ -71,8 +75,14 @@ export {
   deleteCharacterBeforeCursor,
   createLinkEntityData,
   getCharacterBeforeSelection,
+  isPluginFocused,
   getSelectionRange,
   isInSelectionRange,
+  cloneDeepWithoutEditorState,
+  getEntities,
+  isCursorAtStartOfContent,
+  isCursorAtFirstLine,
+  selectAllContent,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
@@ -127,3 +137,5 @@ export {
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
+
+export { isElementOutOfWindow } from './Utils/overflowUtils';

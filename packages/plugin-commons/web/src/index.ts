@@ -5,9 +5,12 @@ export {
   HEADER_TYPE_MAP,
   DEFAULT_HEADERS_DROPDOWN_OPTIONS,
   FOOTER_BUTTON_ALIGNMENT,
+  MODAL_CONTROLS_POSITION,
+  UNSUPPORTED_BLOCKS_TYPE,
 } from './consts';
 
 export { default as UrlInputModal } from './Modals/UrlInputModal';
+export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
 
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
@@ -44,7 +47,6 @@ export { default as SliderWithInput } from './Components/SliderWithInput';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as TextInput } from './Components/TextInput';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
-export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
 export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 

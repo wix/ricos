@@ -8,6 +8,7 @@ import {
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
+  TABLE_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -31,6 +32,7 @@ class PluginViewer extends PureComponent {
         [styles.anchor]: hasLink,
         [theme.anchor]: hasLink && theme.anchor,
         [styles.embed]: hasLink && html,
+        [styles.horizontalScrollbar]: pluginComponent.withHorizontalScroll,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
@@ -52,14 +54,17 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  innerRCV = ({ contentState, textAlignment, direction, renderedIn }) => {
     const { innerRCEViewerProps } = this.props;
+    const renderedInTable = renderedIn === TABLE_TYPE;
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
         direction={direction}
         {...innerRCEViewerProps}
+        isInnerRcv
+        renderedInTable={renderedInTable}
       />
     );
   };
@@ -77,12 +82,12 @@ class PluginViewer extends PureComponent {
       context,
       blockIndex,
       SpoilerViewerWrapper,
+      blockKey,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
-    const { anchorTarget, relValue, config, theme } = context;
+    const { anchorTarget, relValue, config, theme, isMobile } = context;
     const settings = config?.[type] || {};
-    const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
       type,
       componentData,
@@ -91,6 +96,7 @@ class PluginViewer extends PureComponent {
       entityIndex,
       ...context,
       innerRCV: this.innerRCV,
+      blockKey,
     };
 
     if (Component) {
@@ -108,10 +114,11 @@ class PluginViewer extends PureComponent {
             rel: rel || relValue || 'noopener noreferrer',
           };
         }
-        if (hasAnchor && siteUrl) {
+        if (hasAnchor) {
           const { anchor } = config.link;
+          const href = `#viewer-${anchor}`;
           containerProps = {
-            href: `${siteUrl}#viewer-${anchor}`,
+            href,
             target: '_self',
           };
         }
@@ -124,7 +131,11 @@ class PluginViewer extends PureComponent {
         if (type === 'wix-draft-plugin-image') {
           const { src = {} } = componentData;
           const { size } = config;
-          if (size === 'original' && src.width) {
+          if (
+            src.width &&
+            (size === 'original' ||
+              (isMobile && size === 'inline' && config.width && config.width > 150))
+          ) {
             customStyles = { width: src.width, maxWidth: '100%' };
           }
         }
@@ -207,6 +218,7 @@ PluginViewer.propTypes = {
   }).isRequired,
   innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
+  blockKey: PropTypes.string,
 };
 
 PluginViewer.defaultProps = {
@@ -242,6 +254,8 @@ const getPluginViewers = (
           typeMap={typeMappers}
           innerRCEViewerProps={innerRCEViewerProps}
           SpoilerViewerWrapper={SpoilerViewerWrapper}
+          withHorizontalScroll
+          blockKey={block.key}
         >
           {isInline ? children : null}
         </PluginViewer>

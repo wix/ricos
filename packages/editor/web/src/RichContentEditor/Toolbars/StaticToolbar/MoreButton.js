@@ -5,7 +5,7 @@ import Styles from '../../../../statics/styles/static-toolbar-more-button.scss';
 import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
@@ -51,11 +51,15 @@ class MoreButton extends Component {
   };
 
   render() {
-    const { addPluginMenuProps, isActive, t, theme } = this.props;
+    const { addPluginMenuProps, isActive, t, theme, forceDisabled } = this.props;
     const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
-        className={classnames(this.styles.moreButton, isActive && this.styles.active)}
+        className={classnames(
+          this.styles.moreButton,
+          isActive && this.styles.active,
+          forceDisabled && this.styles.forceDisabled
+        )}
         key="shorcutButton"
         onClick={this.handleClick}
         ref={ref => (this.moreButton = ref)}
@@ -92,6 +96,7 @@ class MoreButton extends Component {
 
 MoreButton.propTypes = {
   addPluginMenuProps: PropTypes.object.isRequired,
+  forceDisabled: PropTypes.bool,
 };
 
 export default MoreButton;

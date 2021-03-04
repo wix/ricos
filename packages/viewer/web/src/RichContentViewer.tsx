@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/aria-props */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import {
@@ -24,8 +27,9 @@ import {
   TextDirection,
   ViewerContextType,
   InlineStyleMapperFunction,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
-import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
@@ -58,12 +62,25 @@ export interface RichContentViewerProps {
   onError: OnErrorFunction;
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
+  localeResource?: Record<string, string>;
+  experiments?: AvailableExperiments;
+  isInnerRcv?: boolean;
+  renderedInTable?: boolean;
+  onHover?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
 class RichContentViewer extends Component<
   RichContentViewerProps,
-  { raw?: RicosContent; error?: string }
+  {
+    raw?: RicosContent;
+    error?: string;
+    context: {
+      experiments?: AvailableExperiments;
+      isMobile: boolean;
+      t?: TranslationFunction;
+    };
+  }
 > {
   styles: Record<string, string>;
   typeMappers: PluginMapping;
@@ -86,6 +103,10 @@ class RichContentViewer extends Component<
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.typeMappers = combineMappers(props.typeMappers);
+    const { experiments, isMobile = false, t } = props;
+    this.state = {
+      context: { experiments, isMobile, t },
+    };
   }
 
   static getInitialState = (props: RichContentViewerProps) => {
@@ -176,7 +197,7 @@ class RichContentViewer extends Component<
   }
 
   render() {
-    const { onError, config = {} } = this.props;
+    const { onError, config = {}, onHover } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -190,15 +211,19 @@ class RichContentViewer extends Component<
         inlineStyleMappers,
         locale,
         addAnchors,
-        isMobile = false,
-        t,
+        renderedInTable,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
       });
-      const editorClassName = classNames(styles.editor, {
-        [styles.rtl]: textDirection === 'rtl',
-      });
+      const editorClassName = classNames(
+        styles.editor,
+        renderedInTable && styles.renderedInTable,
+        renderedInTable && draftDefaultStyles.renderedInTable,
+        {
+          [styles.rtl]: textDirection === 'rtl',
+        }
+      );
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
@@ -208,6 +233,7 @@ class RichContentViewer extends Component<
         inlineStyleMappers: this.props.inlineStyleMappers,
         decorators: this.props.decorators,
         config: this.props.config,
+        t: this.props.t,
       };
 
       const output = convertToReact(
@@ -224,8 +250,12 @@ class RichContentViewer extends Component<
       );
 
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
-          <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
+        <GlobalContext.Provider value={this.state.context}>
+          <div
+            className={wrapperClassName}
+            dir={direction || getLangDir(locale)}
+            onMouseEnter={e => onHover && onHover(e)}
+          >
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>

@@ -34,12 +34,27 @@
   }
 }
 
+.nav_arrow_left, .nav_arrow_right {
+  position: absolute;
+  > svg {
+    filter: drop-shadow(0px 0px 0px black) !important;
+  }
+}
+
+.nav_arrow_left {
+  right: 12px;
+}
+
+.nav_arrow_right {
+  left: 12px;
+}
+
 .close {
   box-sizing: content-box;
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  right: 32px;
+  right: 42px;
   top: 0px;
   @include phone {
     right: 20px;
@@ -63,16 +78,8 @@
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  left: 0px;
+  left: 12px;
   top: 0px;
-  @include phone {
-    left: 20px;
-    top: 20px;
-    > svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
   background: transparent;
   border-radius: 4px;
   width: 25px;
@@ -82,15 +89,23 @@
   cursor: pointer;
 }
 
+.title {
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+}
+
 :global {
-  .gallery-item-title > span {
-    display: block;
-    color: black;
-    font-size: 14px;
-    line-height: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
   @import '~pro-gallery/dist/statics/main.css';
 }
+

@@ -36,4 +36,8 @@
     padding-bottom: 1px;
     display: flex;
   }
+  &.forceDisabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 }

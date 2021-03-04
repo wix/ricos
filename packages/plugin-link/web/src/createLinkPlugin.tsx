@@ -5,6 +5,7 @@ import {
   hasLinksInSelection,
   getVisibleSelectionRect,
   EditorState,
+  createLinkEntityData,
 } from 'wix-rich-content-editor-common';
 import { addLinkPreview, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview/libs/utils';
 import { isValidUrl, CreatePluginFunction } from 'wix-rich-content-common';
@@ -30,7 +31,7 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
   const targetBlank = anchorTarget === '_blank';
   const nofollow = relValue === 'nofollow';
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
-  const toolbar = createLinkToolbar({ ...config, closeInlinePluginToolbar });
+  const toolbar = createLinkToolbar({ ...config, settings, closeInlinePluginToolbar });
 
   const decorators = [
     { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },
@@ -47,7 +48,14 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
       const url = getBlockLinkUrl(linkifyData);
       const blockKey = linkifyData?.block.getKey();
       if (url && blockKey) {
-        addLinkPreview(editorState, config, blockKey, url);
+        const linkData = createLinkEntityData({
+          url,
+          targetBlank,
+          nofollow,
+          anchorTarget,
+          relValue,
+        }) as { url: string; target?: string; rel?: string };
+        addLinkPreview(editorState, config, blockKey, linkData);
       }
     }
     return 'not-handled';
@@ -118,7 +126,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
   const shouldLinkify = (consecutiveString: LinkifyData) =>
     consecutiveString.string.length >= settings.minLinkifyLength &&
     isValidUrl(consecutiveString.string) &&
-    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString));
+    !(rangeContainsEntity(consecutiveString) && blockContainsPlainText(consecutiveString)) &&
+    !settings?.disableAutoLink;
 
   const findLastStringWithNoSpaces = (editorState: EditorState): LinkifyData => {
     const selection = editorState.getSelection();

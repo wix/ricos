@@ -1,7 +1,11 @@
 import React from 'react';
-import { BICallbacks, TranslationFunction } from '../types';
+import { BICallbacks, TranslationFunction, AvailableExperiments } from '../types';
 
-export const GlobalContext = React.createContext<{ isMobile: boolean; t?: TranslationFunction }>({
+export const GlobalContext = React.createContext<{
+  experiments?: AvailableExperiments;
+  isMobile: boolean;
+  t?: TranslationFunction;
+}>({
   isMobile: false,
 });
 

@@ -1,5 +1,5 @@
-// import 'wix-rich-content-plugin-table/dist/styles.min.css';
-// import { tableTypeMapper } from 'wix-rich-content-plugin-table/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import 'wix-rich-content-plugin-table/dist/styles.min.css';
+import { pluginTable } from 'wix-rich-content-plugin-table/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle();
+export default () => createViewerBundle(pluginTable());

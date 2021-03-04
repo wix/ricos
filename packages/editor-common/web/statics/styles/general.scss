@@ -127,3 +127,38 @@ button {
   cursor: pointer;
   display: flex;
 }
+
+.horizontalScrollbarWrapper {
+  position: relative;
+}
+
+.pluginWithHorizontalScrollbar{
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-left: -20px;
+  margin-right: -20px;
+  &.show::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+  }
+  &.hide::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+.horizontalScrollbar {
+  max-width: max-content !important;
+  min-width: 100%;
+}
+
+.pluginWithHorizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.pluginWithHorizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+}
+
+.pluginWithHorizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
+}

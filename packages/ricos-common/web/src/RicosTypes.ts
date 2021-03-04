@@ -32,7 +32,17 @@ export interface RicosProps {
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
+  textAlignment?: TextAlignment;
   /* Changes to this interface should also be reflected in the API docs */
+}
+
+interface EditorEvents {
+  subscribe: (
+    event: string,
+    callback: () => Promise<{ type: string; data: unknown }>
+  ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  dispatch: (event: string) => Promise<unknown>;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -45,6 +55,11 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
+  injectedContent?: RicosContent;
+  maxTextLength?: number;
+  editorEvents1?: EditorEvents;
+  editorEvents2?: EditorEvents;
+
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -64,6 +79,11 @@ export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
+  getContentTraits: () => {
+    isEmpty: boolean;
+    isContentChanged: boolean;
+  };
+  getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
   getContentStatePromise: () => Promise<RicosContent>;
@@ -81,6 +101,8 @@ export interface ModalSettings {
   closeModal?: () => void;
   ariaHiddenId?: string;
   container?: HTMLElement;
+  onModalOpen?: (data: Record<string, unknown>) => void;
+  onModalClose?: () => void;
 }
 
 export interface ToolbarSettings {
@@ -89,12 +111,17 @@ export interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
+export type FullscreenProps = { backgroundColor?: string; foregroundColor?: string };
+
 export interface MediaSettings {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  fullscreenProps?: FullscreenProps;
 }
 
 export interface LinkSettings {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
 }
+
+export type TextAlignment = 'left' | 'right';

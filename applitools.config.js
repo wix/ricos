@@ -16,6 +16,7 @@ module.exports = {
   concurrency: 200,
   dontCloseBatches: true,
   batchName: `${process.env.APPLITOOLS_BATCH_ID ? '' : 'LOCAL - '}${getBranchName()}`,
-  parentBranchName: 'wix-incubator/rich-content/master',
-  branchName: `wix-incubator/rich-content/${getBranchName()}`,
+  parentBranchName: 'wix/ricos/master',
+  branchName: `wix/ricos/${getBranchName()}`,
+  showLogs: false,
 };

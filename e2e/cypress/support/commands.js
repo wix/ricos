@@ -11,12 +11,14 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   SETTINGS_PANEL,
   TOOLBARS,
+  COLOR_PICKER,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
 import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
 import { merge } from 'lodash';
+
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -68,8 +70,12 @@ Cypress.Commands.add('switchToDesktop', () => {
   resizeForDesktop();
 });
 
-Cypress.Commands.add('switchToSeoMode', () => {
+Cypress.Commands.add('switchOnSeoMode', () => {
   isSeoMode = true;
+});
+
+Cypress.Commands.add('switchOffSeoMode', () => {
+  isSeoMode = false;
 });
 
 Cypress.Commands.add('switchToHebrew', () => {
@@ -126,9 +132,9 @@ Cypress.Commands.add('getTwitterButton', () => {
   cy.get('[data-hook="twitter-button"]');
 });
 
-function setSelection(start, offset, container) {
+export function setSelection(start, offset, container) {
   container.then(args => {
-    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const getTextElmentAndLocalOffset = getTextElements(args[0]);
     const document = args[0].ownerDocument;
     const range = document.createRange();
     const startObj = getTextElmentAndLocalOffset(start);
@@ -166,7 +172,7 @@ Cypress.Commands.add('blurEditor', () => {
   cy.getEditor()
     .blur()
     .get('[data-hook=inlineToolbar]')
-    .should('not.visible');
+    .should('not.exist');
 });
 
 Cypress.Commands.add('getEditor', () => {
@@ -235,7 +241,7 @@ Cypress.on('window:before:load', win => {
   };
 });
 
-function getTextElments(rootElement) {
+function getTextElements(rootElement) {
   let textElement,
     offset = 0;
   const textElements = [],
@@ -271,7 +277,25 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   }
   cy.get(
     `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
-  ).click();
+  ).click({ force: true });
+});
+
+Cypress.Commands.add('addColor', () => {
+  cy.get(`[data-hook="${COLOR_PICKER.ADD_COLOR}"]`).click();
+});
+
+Cypress.Commands.add('setColorByHex', color => {
+  cy.get(`[data-hook="${COLOR_PICKER.COLOR_INPUT}"]`)
+    .clear()
+    .type(color);
+});
+
+Cypress.Commands.add('updateTextColor', () => {
+  cy.get(`[data-hook="${COLOR_PICKER.UPDATE_BUTTON}"]`).click({ force: true });
+});
+
+Cypress.Commands.add('resetColor', () => {
+  cy.get(`[data-hook="${COLOR_PICKER.RESET_COLOR}"]`).click();
 });
 
 Cypress.Commands.add('setTextColor', (selection, color) => {

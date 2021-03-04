@@ -1,6 +1,6 @@
 import { CssVarsObject } from './themeTypes';
-export const fallbackColor = '#000000';
-export const fallbackColorBright = '#FFFFFF';
+const defaultFallbackColor = '#000000';
+const defaultFallbackColorBright = '#FFFFFF';
 
 function rgbaToHexA(rgbaArr: string[], withAlpha?: boolean) {
   const rgba = rgbaArr.map((r, index) => {
@@ -30,7 +30,7 @@ function rgbaToHexA(rgbaArr: string[], withAlpha?: boolean) {
 
 export function toHexFormat(color: string): string {
   if (color === 'transparent') {
-    return fallbackColorBright + '00';
+    return defaultFallbackColorBright + '00';
   }
   if ((color.startsWith('rgb(') || color.startsWith('rgba(')) && color.endsWith(')')) {
     const rgba = color.replace(/^(rgba\()|^(rgb\()|(\s)|(\))$/g, '').split(',');
@@ -78,8 +78,8 @@ export function isBright(hexColor: string): boolean {
  * Use this to prevent "bright-on-bright" content occurrence.
  * @param actionColor HEX Format
  */
-export function adaptForeground(actionColor: string): string {
-  return getBrightness(actionColor) < 150 ? actionColor : fallbackColor;
+export function adaptForeground(actionColor: string, fallbackColor?: string): string {
+  return getBrightness(actionColor) < 150 ? actionColor : fallbackColor || defaultFallbackColor;
 }
 
 /**
@@ -138,9 +138,11 @@ export const toDashedKey = (str: string) =>
 const spacing = ' '.repeat(4);
 export const toVarStrings = (varsObject: CssVarsObject) => {
   const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
+  const cleanFromSemicolons = (value: unknown) =>
+    typeof value === 'string' ? value.split(';')[0] : value;
   return Object.entries(varsObject)
     .filter(entry => !!entry[1])
-    .map(entry => convertToRicosKey(entry[0]) + ': ' + entry[1] + ';\n')
+    .map(entry => convertToRicosKey(entry[0]) + ': ' + cleanFromSemicolons(entry[1]) + ';\n')
     .join(spacing);
 };
 
@@ -149,5 +151,5 @@ export const buildCssVars = (parentClass: string, ...varObjects: CssVarsObject[]
     ${varObjects
       .map(toVarStrings)
       .join(spacing)
-      .trimEnd()}
+      .replace(/[\s\t]+$/, '')}
   }\n`;

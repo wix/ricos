@@ -1,0 +1,98 @@
+$opacityTransition: opacity 0.8s ease;
+
+.imageContainer {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.expandContainer {
+  height: 28px;
+  width: 28px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background-color: white;
+  border-radius: 30px;
+  display: none;
+  .imageContainer:hover & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.expandIcon {
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  z-index: 11;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.imageWrapper {
+  overflow: hidden;
+}
+
+.image {
+  display: block;
+  width: 100%;
+}
+
+.imageOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.imageDescription {
+}
+
+.imageTitle {
+}
+
+.imageCaption {
+  display: block;
+  text-align: center;
+  padding: 18px 0;
+  background: none;
+  font-size: 14px;
+}
+
+.imagePreload {
+  position: relative;
+  transition: $opacityTransition;
+  filter: blur(8px);
+}
+
+.imageHighres {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: $opacityTransition;
+
+  &.onlyHighRes {
+    position: relative;
+    opacity: 1;
+  }
+}
+
+@keyframes image_loading {
+  0% {
+    width: 5%;
+    left: -5%;
+  }
+  50% {
+    width: 50%;
+    left: 25%;
+  }
+  100% {
+    width: 5%;
+    left: 100%;
+  }
+}

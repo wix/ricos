@@ -1,20 +1,34 @@
-import { PaletteColors, ThemeGeneratorFunction } from 'wix-rich-content-common';
-import * as utils from '../themeUtils';
+import { PaletteColors } from 'wix-rich-content-common';
+import { adaptForeground, toRgbTuple, toHexFormat } from '../themeUtils';
 import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from '../palettes';
-import { RicosTheme, CssVarsObject } from '../themeTypes';
+import { RicosTheme, CssVarsObject, PaletteConfig } from '../themeTypes';
 
-const createCssVars = (colors: PaletteColors): CssVarsObject => {
-  const { adaptForeground, toRgbTuple } = utils;
-  const { textColor, bgColor: backgroundColor, actionColor } = colors;
+const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsObject => {
+  const { contentBgColor = false } = config || {};
+  const {
+    textColor,
+    bgColor: backgroundColor,
+    actionColor,
+    fallbackColor = '#000000',
+    disabledColor,
+    textColorLow,
+  } = colors;
   return {
     textColor,
     textColorTuple: toRgbTuple(textColor),
     actionColor,
     actionColorTuple: toRgbTuple(actionColor),
-    actionColorFallback: adaptForeground(actionColor),
-    actionColorFallbackTuple: toRgbTuple(adaptForeground(actionColor)),
+    actionColorFallback: adaptForeground(actionColor, fallbackColor),
+    actionColorFallbackTuple: toRgbTuple(adaptForeground(actionColor, fallbackColor)),
     backgroundColor,
     backgroundColorTuple: toRgbTuple(backgroundColor),
+    fallbackColor,
+    fallbackColorTuple: toRgbTuple(fallbackColor),
+    disabledColor,
+    disabledColorTuple: disabledColor ? toRgbTuple(disabledColor) : undefined,
+    textColorLow,
+    textColorLowTuple: textColorLow ? toRgbTuple(textColorLow) : undefined,
+    bgColorContainer: contentBgColor ? backgroundColor : undefined,
   };
 };
 
@@ -31,6 +45,8 @@ const extractColors = (palette: RicosTheme['palette']): PaletteColors => {
       actionColor: getColorValue(palette, COLORS.ACTION_COLOR),
       bgColor: getColorValue(palette, COLORS.BG_COLOR),
       textColor: getColorValue(palette, COLORS.TEXT_COLOR),
+      disabledColor: getColorValue(palette, COLORS.DISABLED_COLOR),
+      textColorLow: getColorValue(palette, COLORS.TEXT_COLOR_LOW),
     };
   } else if (palette && isRicosPalette(palette)) {
     return palette;
@@ -38,17 +54,25 @@ const extractColors = (palette: RicosTheme['palette']): PaletteColors => {
   throw Error('Unrecognized Palette object. Please refer to Ricos Theme Documentation');
 };
 
+interface PaletteStrategyResult {
+  paletteVarsObject: CssVarsObject;
+  colors?: PaletteColors;
+}
+
 export default function createPalette(
   palette?: RicosTheme['palette'],
-  themeGeneratorFunctions: ThemeGeneratorFunction[] = []
-): CssVarsObject {
+  config?: RicosTheme['paletteConfig']
+): PaletteStrategyResult {
   if (!palette) {
-    return {};
+    return { paletteVarsObject: {} };
   }
+
   const colors = extractColors(palette);
   Object.entries(colors).forEach(
-    ([colorName, value]) => (colors[colorName] = utils.toHexFormat(value))
+    ([colorName, value]) =>
+      (colors[colorName] = value && typeof value === 'string' ? toHexFormat(value) : value)
   );
-  themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils));
-  return createCssVars(colors);
+  const paletteVarsObject = createCssVars(colors, config);
+
+  return { paletteVarsObject, colors };
 }

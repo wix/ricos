@@ -7,6 +7,7 @@ import {
 import { Component, DEFAULTS } from './image-component';
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY, ImagePluginEditorConfig } from './types';
 import { CreatePluginFunction } from 'wix-rich-content-common';
+import { isNumber } from 'lodash';
 
 const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config => {
   const type = IMAGE_TYPE;
@@ -15,7 +16,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     t,
     anchorTarget,
     relValue,
-    [type]: settings = {},
+    [type]: settings,
     uiSettings,
     isMobile,
     innerModal,
@@ -29,8 +30,12 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     legacyType: IMAGE_TYPE_LEGACY,
     pluginDecorationProps: (props, componentData) => {
       const size = componentData.config?.size;
+      const width = componentData.config?.width;
       let calulatedProps = props;
-      if (size === 'original' && componentData.src?.width) {
+      if (
+        componentData.src?.width &&
+        (size === 'original' || (isMobile && size === 'inline' && isNumber(width) && width > 150))
+      ) {
         calulatedProps = {
           ...props,
           width: componentData.src.width,
@@ -75,13 +80,13 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     innerModal,
     anchorTarget,
     relValue,
-    settings,
+    settings: settings || {},
     uiSettings,
     t,
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
-    spoilerWrapper: settings.spoiler && spoilerWrapper,
+    spoilerWrapper: settings?.spoiler && spoilerWrapper,
     ...rest,
   });
 };

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/items-list.scss';
 import generalStyles from '../../../statics/styles/general.scss';
+import cx from 'classnames';
 import Item from './Item';
 
 class ItemsList extends PureComponent {
@@ -14,11 +15,12 @@ class ItemsList extends PureComponent {
     onClick: PropTypes.func.isRequired,
     selectedItem: PropTypes.object,
     contentType: PropTypes.string.isRequired,
+    isMobile: PropTypes.boolean,
     t: PropTypes.func.isRequired,
   };
 
   render() {
-    const { products, onClick, selectedItem, contentType, t } = this.props;
+    const { products, onClick, selectedItem, contentType, t, isMobile } = this.props;
     const emptyState = (
       <div className={generalStyles.emptyState}>
         <div className={generalStyles.title}>
@@ -30,7 +32,10 @@ class ItemsList extends PureComponent {
       </div>
     );
     return (
-      <div className={styles.container} data-hook="verticalsItemsList">
+      <div
+        className={cx(styles.container, { [styles.mobile]: isMobile })}
+        data-hook="verticalsItemsList"
+      >
         {products.length > 0
           ? products.map((item, index) => (
               // eslint-disable-next-line react/jsx-indent

@@ -13,8 +13,8 @@ class ImageComponent extends React.Component {
   static alignmentClassName = (componentData, theme, styles, isMobile) =>
     alignmentClassName(componentData, theme, styles, isMobile);
 
-  static sizeClassName = (componentData, theme, styles, isMobile) =>
-    sizeClassName(componentData, theme, styles, isMobile);
+  static sizeClassName = (componentData, theme, styles, isMobile, innerRCERenderedIn) =>
+    sizeClassName(componentData, theme, styles, isMobile, innerRCERenderedIn);
 
   constructor(props) {
     super(props);
@@ -53,10 +53,13 @@ class ImageComponent extends React.Component {
   };
 
   resetLoadingState = error => {
+    let { dataUrl } = this.state;
     if (error) {
       this.props.commonPubsub.set('onMediaUploadError', error);
+    } else {
+      dataUrl = null;
     }
-    this.setState({ isLoading: false, dataUrl: null, error });
+    this.setState({ isLoading: false, dataUrl, error });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 

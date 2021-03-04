@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -21,6 +22,10 @@ class ColorPicker extends PureComponent {
     this.onCustomColorUpdate = this.onCustomColorUpdate.bind(this);
     this.onCustomColorCancel = this.onCustomColorCancel.bind(this);
     this.onCustomColorPicked = this.onCustomColorPicked.bind(this);
+  }
+
+  componentDidMount() {
+    import('./CustomColorPicker'); //prefetch
   }
 
   componentWillReceiveProps(props) {
@@ -54,8 +59,7 @@ class ColorPicker extends PureComponent {
     this.toggleCustomColorPicker();
   }
 
-  onCustomColorCancel(color) {
-    this.setColor(color);
+  onCustomColorCancel() {
     this.toggleCustomColorPicker();
   }
 
@@ -98,7 +102,11 @@ class ColorPicker extends PureComponent {
   renderAddColorButton = () => {
     const { styles } = this;
     return (
-      <div key={`add_color_button_${this.id}`} className={styles.colorPicker_add_color_button}>
+      <div
+        key={`add_color_button_${this.id}`}
+        className={styles.colorPicker_add_color_button}
+        data-hook="addColor"
+      >
         <button
           id={`add_color_button_${this.id}`}
           className={styles.colorPicker_color_button_hidden}
@@ -128,6 +136,7 @@ class ColorPicker extends PureComponent {
         />
         <label // eslint-disable-line
           onClick={this.resetColor}
+          data-hook="resetColor"
           tabIndex={0} // eslint-disable-line
           className={styles.colorPicker_reset_color_label}
           htmlFor={`reset_color_button_${this.id}`}
@@ -151,7 +160,7 @@ class ColorPicker extends PureComponent {
     } = this;
     const { t, isMobile, theme, children } = this.props;
     return (
-      <div className={styles.colorPicker}>
+      <div className={styles.colorPicker} tabIndex={0}>
         {this.state.isCustomColorPickerOpened
           ? this.props.onCustomPickerToggle({
               color: this.state.color,

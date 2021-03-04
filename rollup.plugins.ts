@@ -19,6 +19,7 @@ import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
+import { writeFileSync } from 'fs';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -88,7 +89,7 @@ const typescript = (): Plugin => {
   const absPath = (dir: string) => `${process.cwd()}/${dir}`;
   return typescriptPlugin({
     useTsconfigDeclarationDir: true,
-    check: !!process.env.GITHUB_ACTIONS,
+    check: true,
     tsconfig: `${__dirname}/tsconfig.json`,
     tsconfigOverride: {
       compilerOptions: {
@@ -123,6 +124,10 @@ const commonjs = (): Plugin => {
     {
       path: 'node_modules/immutable/dist/immutable.js',
       exportList: ['List', 'OrderedSet', 'Map'],
+    },
+    {
+      path: 'node_modules/react-google-maps/lib/index.js',
+      exportList: ['withGoogleMap', 'GoogleMap', 'Marker', 'InfoWindow'],
     },
     {
       path: 'node_modules/draft-js/lib/Draft.js',
@@ -167,6 +172,7 @@ const json = (): Plugin => {
       'node_modules/**',
       '../../../node_modules/**',
       '../../../packages/**/package.json',
+      '../../common/web/dist/statics/schemas/*.schema.json',
     ],
   });
 };
@@ -213,6 +219,13 @@ const visualizer = (): Plugin => {
   });
 };
 
+const createFakeStylesFile = (): Plugin => ({
+  name: 'create-fake-styles-file',
+  writeBundle() {
+    writeFileSync('dist/styles.min.css', '');
+  },
+});
+
 let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
@@ -229,6 +242,10 @@ if (!IS_DEV_ENV) {
 
 if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
+}
+
+if (process.env.EXTRACT_CSS === 'false') {
+  _plugins = [..._plugins, createFakeStylesFile()];
 }
 
 const plugins = (shouldExtractCss: boolean) => {

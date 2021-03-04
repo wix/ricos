@@ -60,6 +60,7 @@ class AccordionComponent extends React.Component {
         placeholder={this.titlePlaceholder}
         onBackspaceAtBeginningOfContent={() => this.onTitleBackspace(idx)}
         handleReturn={this.handleTitleReturn(idx)}
+        toolbarsToIgnore={['SideToolbar']}
       />
     );
   };
@@ -83,6 +84,7 @@ class AccordionComponent extends React.Component {
     placeholder,
     onBackspaceAtBeginningOfContent,
     handleReturn,
+    toolbarsToIgnore,
   }) => {
     const { renderInnerRCE } = this.props;
     const direction = this.getDataManager().getDirection();
@@ -101,6 +103,7 @@ class AccordionComponent extends React.Component {
       onBackspaceAtBeginningOfContent,
       direction,
       additionalProps,
+      toolbarsToIgnore,
     });
   };
 
@@ -150,7 +153,7 @@ class AccordionComponent extends React.Component {
   onFocus = e => e.stopPropagation();
 
   render() {
-    const { blockProps, theme, isMobile } = this.props;
+    const { blockProps, theme, t, isMobile } = this.props;
     const pairs = this.getDataManager().getPairs();
     const expandState = this.getDataManager().getExpandState();
     const expandOnlyOne = this.getDataManager().getExpandOnlyOne();
@@ -170,6 +173,7 @@ class AccordionComponent extends React.Component {
                 <AccordionPairs
                   ref={this.accordionRef}
                   theme={theme}
+                  t={t}
                   isMobile={isMobile}
                   pairs={pairs}
                   expandState={expandState}

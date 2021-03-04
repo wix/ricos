@@ -83,7 +83,7 @@ class GalleryViewer extends React.Component {
 
   shouldUpdateDimensions = prevComponentData => {
     const { galleryLayout: prevGalleryLayout } = prevComponentData.styles;
-    const { galleryLayout: currentGalleryLayout } = this.state.styleParams;
+    const { galleryLayout: currentGalleryLayout } = this.props.componentData.styles;
     if (currentGalleryLayout !== prevGalleryLayout) {
       return true;
     }
@@ -95,7 +95,9 @@ class GalleryViewer extends React.Component {
 
   getDimensions = () => {
     const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
-    const height = isHorizontalLayout(this.state.styleParams) ? getGalleryHeight(width) : undefined;
+    const height = isHorizontalLayout(this.props.componentData.styles)
+      ? getGalleryHeight(width)
+      : undefined;
     return { width, height };
   };
 
@@ -109,13 +111,8 @@ class GalleryViewer extends React.Component {
   stateFromProps = props => {
     let items = props.componentData.items || DEFAULTS.items;
     items = items.filter(item => !item.error);
-    const styleParams = this.getStyleParams(
-      { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
-      items
-    );
     return {
       items,
-      styleParams,
     };
   };
 
@@ -130,10 +127,13 @@ class GalleryViewer extends React.Component {
   }
 
   handleGalleryEvents = (name, data) => {
+    const {
+      componentData: { styles: styleParams },
+    } = this.props;
     switch (name) {
       case GALLERY_EVENTS.GALLERY_CHANGE:
         if (this.containerRef.current) {
-          if (!isHorizontalLayout(this.state.styleParams)) {
+          if (!isHorizontalLayout(styleParams)) {
             this.containerRef.current.style.height = `${data.layoutHeight}px`;
           } else {
             this.containerRef.current.style.height = 'auto';
@@ -153,38 +153,12 @@ class GalleryViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.('expand_gallery', GALLERY_TYPE);
-    onExpand?.(this.props.entityIndex, data.idx);
-  };
-
-  hasTitle = items => {
-    return items.some(item => {
-      return item.metadata && item.metadata.title;
-    });
-  };
-
-  getStyleParams = (styleParams, items) => {
-    if (!this.props.isMobile) {
-      return { ...styleParams, allowHover: true };
-    }
-    if (this.hasTitle(items))
-      return {
-        ...styleParams,
-        isVertical: styleParams.galleryLayout === 1,
-        allowTitle: true,
-        galleryTextAlign: 'center',
-        textsHorizontalPadding: 0,
-        imageInfoType: 'NO_BACKGROUND',
-        hoveringBehaviour: 'APPEARS',
-        textsVerticalPadding: 0,
-        titlePlacement: 'SHOW_BELOW',
-        calculateTextBoxHeightMode: 'AUTOMATIC',
-      };
-    return styleParams;
+    helpers.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
+    onExpand?.(this.props.blockKey, data.idx);
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.type !== 'video' ? (
+    return (
       <div className={this.styles.expandContainer}>
         <ExpandIcon
           className={this.styles.expandIcon}
@@ -194,12 +168,12 @@ class GalleryViewer extends React.Component {
           }}
         />
       </div>
-    ) : null;
+    );
   };
 
   renderTitle = title => {
     return title ? (
-      <div className={this.styles.imageTitleContainer}>
+      <div className={styles.imageTitleContainer}>
         <div className={this.styles.imageTitle}>{title}</div>
       </div>
     ) : null;
@@ -211,14 +185,15 @@ class GalleryViewer extends React.Component {
     } = this.props;
     const isExpandEnabled = !disableExpand && onExpand;
     const isClickable = isExpandEnabled || itemProps.link;
-    const itemStyles = classnames(
-      this.styles.galleryItem,
+    const itemOverlayStyles = classnames(
+      this.styles.itemOverlay,
       isClickable && this.styles.clickableItem
     );
     return (
-      <div className={itemStyles}>
+      <div className={itemOverlayStyles}>
         {isExpandEnabled && this.renderExpandIcon(itemProps)}
-        {this.renderTitle(itemProps.title)}
+        {this.renderTitle(itemProps.title, 'HOVER')}
+        {this.props.itemOverlayElement?.(itemProps)}
       </div>
     );
   };
@@ -226,13 +201,22 @@ class GalleryViewer extends React.Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const { theme, settings, seoMode } = this.props;
+    const {
+      theme,
+      settings,
+      seoMode,
+      componentData: { styles: styleParams },
+    } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { scrollingElement, ...galleySettings } = settings;
-    const { styleParams, size } = this.state;
+    const { size } = this.state;
 
     const items = this.getItems();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+    const alwaysShowHover = {
+      hoveringBehaviour: 'NO_CHANGE',
+      alwaysShowHover: 'true' /*alwaysShowHover needed for mobile*/,
+    };
 
     return (
       <div
@@ -247,14 +231,18 @@ class GalleryViewer extends React.Component {
             domId={this.domId}
             allowSSR={!!seoMode}
             items={items}
-            styles={styleParams}
+            styles={{
+              ...DEFAULTS.styles,
+              ...styleParams,
+              ...alwaysShowHover,
+            }}
             container={size}
             settings={galleySettings}
             scrollingElement={scrollingElement}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
-            customHoverRenderer={this.hoverElement}
             viewMode={viewMode}
+            customHoverRenderer={this.hoverElement}
           />
         ) : null}
       </div>
@@ -276,6 +264,7 @@ GalleryViewer.propTypes = {
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
   seoMode: PropTypes.bool,
+  itemOverlayElement: PropTypes.elementType,
 };
 
 export default GalleryViewer;

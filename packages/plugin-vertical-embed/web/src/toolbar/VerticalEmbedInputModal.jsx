@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   UrlInputModal,
   FOOTER_BUTTON_ALIGNMENT,
+  MODAL_CONTROLS_POSITION,
   LoaderIcon,
 } from 'wix-rich-content-plugin-commons';
 import { contentTypeMap } from '../constants';
@@ -95,6 +96,7 @@ export default class VerticalEmbedInputModal extends Component {
         input={inputString}
         isMobile={isMobile}
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
+        controlsPosition={isMobile ? MODAL_CONTROLS_POSITION.TOP : MODAL_CONTROLS_POSITION.BOTTOM}
         selected={selected}
         textInput={textInput}
       >
@@ -107,6 +109,7 @@ export default class VerticalEmbedInputModal extends Component {
             emptyState
           ) : (
             <ItemsList
+              isMobile={isMobile}
               selectedItem={selectedProduct}
               products={products}
               onClick={this.onItemClick}

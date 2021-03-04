@@ -10,11 +10,16 @@ class SettingsComponent extends PureComponent {
     super(props);
     const { settingsObj } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
+    const linkButtonSettings = settingsObj.url
+      ? {
+          url: settingsObj.url,
+          target: settingsObj.target || false,
+          rel: settingsObj.rel || false,
+        }
+      : {};
     this.state = {
-      url: settingsObj.url || '',
       buttonText: settingsObj.buttonText,
-      target: settingsObj.target || false,
-      rel: settingsObj.rel || false,
+      ...linkButtonSettings,
     };
   }
 
@@ -39,10 +44,6 @@ class SettingsComponent extends PureComponent {
 
   handleRelChange = event => {
     this.setState({ rel: event.target.checked });
-  };
-
-  onBlur = event => {
-    this.setState({ target: event.target.checked });
   };
 
   render() {
@@ -88,7 +89,6 @@ class SettingsComponent extends PureComponent {
             <TextInput
               {...textInputBaseProps}
               onChange={this.onLinkChanged}
-              onBlur={this.onBlur}
               value={url}
               placeholder={t('ButtonModal_Link_Input_Placeholder')}
               error={errorTooltip}

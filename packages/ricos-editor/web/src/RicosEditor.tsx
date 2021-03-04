@@ -1,20 +1,36 @@
-import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
+import React, { Component, Fragment, ElementType, FunctionComponent, forwardRef } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState, ContentState, EditorProps } from 'draft-js';
+import { EditorState, ContentState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
-import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { ToolbarType } from 'wix-rich-content-common';
+import {
+  convertToRaw,
+  convertFromRaw,
+  createWithContent,
+} from 'wix-rich-content-editor/libs/editorStateConversion';
+import { isEqual } from 'lodash';
+import {
+  EditorEventsContext as EditorEventsContext1,
+  EditorEvents,
+} from 'wix-rich-content-editor-common';
+import { EditorEventsContext as EditorEventsContext2 } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
+
+import { ToolbarType, Version } from 'wix-rich-content-common';
+
+// eslint-disable-next-line
+const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
+The getContent(postId, isPublishing) API is deprecated and will be removed in ricos v9.0.0`;
 
 interface State {
   StaticToolbar?: ElementType;
-  localeStrategy: { locale?: string; localeResource?: Record<string, string> };
+  localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
+  editorState?: EditorState;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -25,22 +41,50 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange);
-    this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
+    this.dataInstance = createDataConverter(props.onChange, props.content);
+    this.state = { localeData: { locale: props.locale }, remountKey: false };
   }
 
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
-    });
+    const { children, _rcProps } = this.props;
+    const locale = children?.props.locale || this.props.locale;
+    await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
+      this.setState({ localeData, remountKey: !this.state.remountKey })
+    );
   };
 
   componentDidMount() {
     this.updateLocale();
+    const { children } = this.props;
+    const onOpenEditorSuccess =
+      children?.props.helpers?.onOpenEditorSuccess ||
+      this.props._rcProps?.helpers?.onOpenEditorSuccess;
+    onOpenEditorSuccess?.(Version.currentVersion);
+    this.props.editorEvents1?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.props.editorEvents2?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
+
+  componentWillUnmount() {
+    this.props.editorEvents1?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.props.editorEvents2?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+  }
+
+  onPublish = async () => {
+    // TODO: remove this param after getContent(postId) is deprecated
+    await this.editor.publish((undefined as unknown) as string);
+    console.debug('editor publish callback'); // eslint-disable-line
+    return {
+      type: 'EDITOR_PUBLISH',
+      data: await this.getContent(),
+    };
+  };
+
+  publish = async () => {
+    const publishResponse = await this.onPublish();
+    return publishResponse.data;
+  };
 
   setStaticToolbar = ref => {
     if (ref && ref !== this.currentEditorRef) {
@@ -54,9 +98,20 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
+    if (
+      newProps.injectedContent &&
+      !isEqual(this.props.injectedContent, newProps.injectedContent)
+    ) {
+      console.debug('new content provided as editorState'); // eslint-disable-line
+      const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
+      this.setState({ editorState }, () => {
+        this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
+        this.dataInstance.refresh(editorState);
+      });
+    }
   }
 
-  onChange = (childOnChange?: EditorProps['onChange']) => (editorState: EditorState) => {
+  onChange = (childOnChange?: RichContentEditorProps['onChange']) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
     childOnChange?.(editorState);
     this.onBusyChange(editorState.getCurrentContent());
@@ -70,10 +125,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getToolbars = () => this.editor.getToolbars();
 
-  getContent = (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
+  getContentTraits = () => this.dataInstance.getContentTraits();
+
+  getContent = async (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
-      this.editor.publish(postId); //async
+      console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
+      await this.editor.publish(postId); //async
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
@@ -89,7 +147,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
     const res = await getContentStatePromise();
     if (publishId) {
-      this.editor.publish(publishId);
+      console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
+      await this.editor.publish(publishId);
     }
     return res;
   };
@@ -110,8 +169,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   render() {
-    const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
-    const { StaticToolbar, localeStrategy, remountKey } = this.state;
+    const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
+    const { StaticToolbar, localeData, remountKey, editorState } = this.state;
+
+    const contentProp = editorState
+      ? { editorState: { editorState }, content: {} }
+      : { editorState: {}, content: { content } };
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
@@ -133,6 +196,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           isViewer={false}
           key={'editor'}
           toolbarSettings={toolbarSettings}
+          {...contentProp.content}
           {...props}
         >
           {React.cloneElement(child, {
@@ -140,14 +204,32 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             ref: this.setEditorRef,
             editorKey: 'editor',
             setEditorToolbars: this.setStaticToolbar,
+            ...contentProp.editorState,
             ...supportedDraftEditorSettings,
-            ...localeStrategy,
+            ...localeData,
           })}
         </RicosEngine>
       </Fragment>
     );
   }
 }
+
+export default forwardRef<RicosEditor, RicosEditorProps>((props, ref) => (
+  <EditorEventsContext1.Consumer>
+    {contextValue1 => (
+      <EditorEventsContext2.Consumer>
+        {contextValue2 => (
+          <RicosEditor
+            editorEvents1={contextValue1}
+            editorEvents2={contextValue2}
+            {...props}
+            ref={ref}
+          />
+        )}
+      </EditorEventsContext2.Consumer>
+    )}
+  </EditorEventsContext1.Consumer>
+));
 
 const StaticToolbarPortal: FunctionComponent<{
   StaticToolbar?: ElementType;

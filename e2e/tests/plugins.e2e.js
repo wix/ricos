@@ -131,19 +131,19 @@ describe('plugins', () => {
       revealSpoilerOnBlock();
     });
 
-    it(`check spoilers on a video in editor and reveal it in viewer`, () => {
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset));
-      cy.openVideoUploadModal().addVideoFromURL();
-      cy.waitForVideoToLoad();
-      cy.get('[data-hook="videoPlayer"]:first')
-        .parent()
-        .click();
-      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
-      cy.eyesCheckWindow('adding spoiler on a video');
-      editText('spoilerTextArea', 'change the description');
-      editText('revealSpoilerContent', 'change the reveal button content');
-      revealSpoilerOnBlock();
-    });
+    // it(`check spoilers on a video in editor and reveal it in viewer`, () => {
+    //   cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset));
+    //   cy.openVideoUploadModal().addVideoFromURL();
+    //   cy.waitForVideoToLoad();
+    //   cy.get('[data-hook="videoPlayer"]:first')
+    //     .parent()
+    //     .click();
+    //   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+    //   cy.eyesCheckWindow('adding spoiler on a video');
+    //   editText('spoilerTextArea', 'change the description');
+    //   editText('revealSpoilerContent', 'change the reveal button content');
+    //   revealSpoilerOnBlock();
+    // });
   });
 
   context('divider', () => {
@@ -271,30 +271,30 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
-    it('change link preview settings', function() {
+    afterEach('take snapshot', function() {
+      cy.waitForHtmlToLoad();
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('change link preview settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.setLinkSettings();
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('convert link preview to regular link', function() {
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it('convert link preview to regular link', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('backspace key should convert link preview to regular link', function() {
+    it('backspace key should convert link preview to regular link', () => {
       cy.focusEditor()
         .type('{downarrow}{downarrow}')
         .type('{backspace}');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('delete link preview', function() {
+    it('delete link preview', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -306,7 +306,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          LINK_PREVIEW: {
+          linkPreview: {
             enableEmbed: undefined,
             enableLinkPreview: undefined,
           },
@@ -332,7 +332,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          'wix-draft-plugin-link-preview': {
+          linkPreview: {
             enableEmbed: false,
             enableLinkPreview: false,
           },
@@ -454,7 +454,9 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('create link button & customize it', function() {
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click()
@@ -519,7 +521,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
-        'wix-rich-content-plugin-headings': {
+        headings: {
           customHeadings: ['P', 'H2', 'H3'],
         },
       }),
@@ -528,7 +530,8 @@ describe('plugins', () => {
     function setHeader(number, selection) {
       cy.setTextStyle('headingsDropdownButton', selection)
         .get(`[data-hook=headingsDropdownPanel] > :nth-child(${number})`)
-        .click();
+        .click()
+        .wait(500);
     }
 
     function testHeaders(config) {
@@ -607,7 +610,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.all),
       ...usePluginsConfig({
-        LINK: {
+        link: {
           linkTypes: { anchor: true },
         },
       }),
@@ -724,7 +727,17 @@ describe('plugins', () => {
     it('should focus & type', function() {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
         .focusAccordion(1)
-        .type('Yes\n');
+        .type('Yes\n')
+        .focusAccordion(2);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert image in accordion', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
+        .focusAccordion(2)
+        .type('Image in accordion');
+      cy.insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      cy.wait(1000);
       cy.eyesCheckWindow(this.test.title);
     });
 
