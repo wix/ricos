@@ -69,16 +69,7 @@
     {
       "type": "PARAGRAPH",
       "key": "8tjd7",
-      "nodes": [
-        {
-          "type": "PARAGRAPH",
-          "key": "5kfrg",
-          "nodes": [],
-          "paragraphData": {
-            "textAlignment": "LEFT"
-          }
-        }
-      ],
+      "nodes": [],
       "paragraphData": {
         "textAlignment": "LEFT"
       }
@@ -219,16 +210,7 @@
     {
       "type": "PARAGRAPH",
       "key": "dn2pc",
-      "nodes": [
-        {
-          "type": "PARAGRAPH",
-          "key": "13vmc",
-          "nodes": [],
-          "paragraphData": {
-            "textAlignment": "LEFT"
-          }
-        }
-      ],
+      "nodes": [],
       "paragraphData": {
         "textAlignment": "LEFT"
       }
@@ -328,7 +310,7 @@
                   "key": "f0j4v",
                   "nodes": [],
                   "textData": {
-                    "text": "test ",
+                    "text": "test",
                     "decorations": []
                   }
                 }

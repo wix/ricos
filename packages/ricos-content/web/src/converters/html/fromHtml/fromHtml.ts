@@ -11,16 +11,24 @@ import {
 } from '../../nodeUtils';
 
 export const fromHtml = (htmlString: string): RichContent => {
-  const html = parseFragment(removeLineSpaces(htmlString));
-  const nodes: Node[] = getChildElements(html).map(element => parseHtmlElement(element));
-  const content: RichContent = { nodes, metadata: initializeMetadata() };
+  const htmlElement = parseFragment(preprocessHtmlString(htmlString));
+  const nodes: Node[] = getChildNodes(htmlElement);
+  const content: RichContent = {
+    nodes,
+    metadata: initializeMetadata(),
+  };
   return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent;
 };
 
-const parseHtmlElement = (element: Element | TextNode, decorations: Decoration[] = []): Node => {
+const parseHtmlElement = (
+  element: Element | TextNode,
+  decorations: Decoration[] = []
+): Node | Node[] => {
   // TextNode
   if ('value' in element) {
-    return createTextNode(element.value, reduceDecorations(decorations));
+    return element.value === '\n'
+      ? []
+      : createTextNode(element.value, reduceDecorations(decorations));
   }
   // ElementNode
   switch (element.nodeName) {
@@ -44,7 +52,6 @@ const parseHtmlElement = (element: Element | TextNode, decorations: Decoration[]
         level: parseInt(element.nodeName.substring(1), 10),
       });
     case 'p':
-    case 'br':
     default:
       return createParagraphNode(getChildNodes(element, decorations));
   }
@@ -62,12 +69,13 @@ const TAG_TO_NODE_TYPE = {
   li: Node_Type.LIST_ITEM,
 };
 
-const removeLineSpaces = (html: string) =>
+const preprocessHtmlString = (html: string) =>
   html
-    .replace(/\s*\n\s*/g, '')
-    .replace('"<', '<')
-    .replace('>"', '>')
-    .replace(/""/g, '"');
+    .replace(/\s*\n\s*/g, '') // remove spaces between lines (they count as elements)
+    .replace('"<', '<') // remove first `"` if exists
+    .replace('>"', '>') // remove last `"` if exists
+    .replace(/""/g, '"') // convert `""string""` to `"string"`
+    .replace(/<\s*br\s*\/?>/g, '\n'); // replace br tags with new lines
 
 const addDecoration = (
   element: Element,
@@ -76,7 +84,8 @@ const addDecoration = (
   data: Omit<Decoration, 'type'> = {}
 ) => {
   const decoration = createDecoration(type, data);
-  return parseHtmlElement(getChildElements(element)[0], [...decorations, decoration]);
+  const innerElement = getChildElements(element)[0];
+  return parseHtmlElement(innerElement, [...decorations, decoration]);
 };
 
 const createLinkData = (element: Element) => {
@@ -84,8 +93,11 @@ const createLinkData = (element: Element) => {
   return url ? { linkData: { url } } : {};
 };
 
-const getChildNodes = (element: Element, decorations: Decoration[]): Node[] =>
-  getChildElements(element).map(childElement => parseHtmlElement(childElement, decorations));
+const getChildNodes = (
+  element: Element | DocumentFragment,
+  decorations: Decoration[] = []
+): Node[] =>
+  getChildElements(element).flatMap(childElement => parseHtmlElement(childElement, decorations));
 
 const getChildElements = (element: ChildNode | DocumentFragment): (TextNode | Element)[] =>
   'childNodes' in element ? filterCommentElements(element.childNodes) : [];
@@ -93,16 +105,20 @@ const getChildElements = (element: ChildNode | DocumentFragment): (TextNode | El
 const filterCommentElements = (nodes: ChildNode[]): (Element | TextNode)[] =>
   nodes.flatMap((element: ChildNode) => ('data' in element ? [] : element));
 
-const reduceDecorations = (decorations: Decoration[]): Decoration[] =>
-  Object.values(
-    decorations.reduce((decorationMap, { type, ...data }) => {
+type DecorationMap = Record<Decoration_Type, Decoration>;
+
+const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
+  const reducedDecorationsMap: DecorationMap = decorations.reduce(
+    (decorationMap, { type, ...data }) => {
       const currentDecoration: Decoration = decorationMap[type] || { type };
+      const nextDecoration: Decoration = { type, ...data };
       return {
         ...decorationMap,
-        [type]: merge(currentDecoration, {
-          type,
-          ...data,
-        }),
+        [type]: merge(currentDecoration, nextDecoration),
       };
-    }, {})
+    },
+    {} as DecorationMap
   );
+  const reducedDecorations = Object.values(reducedDecorationsMap);
+  return reducedDecorations;
+};
