@@ -8,9 +8,9 @@ const createSoundCloudPlugin: CreatePluginFunction<SoundCloudPluginEditorConfig>
   const type = SOUND_CLOUD_TYPE;
   const { helpers, t, [type]: settings = {}, isMobile, ...rest } = config;
   // eslint-disable-next-line no-console
-  console.warn(
+  console.error(
     // eslint-disable-next-line max-len
-    `Please consume soundCloud plugin through video plugin as described in  https://ricos.js.org/docs/plugins_api/VideoPlugin#sound-cloud-plugin . sound cloud plugin is deprecated and will be removed in v9.0.0`
+    `Sound-cloud plugin is deprecated and will be removed in the next version. Please consume sound-cloud plugin through video plugin as described in  https://ricos.js.org/docs/plugins_api/VideoPlugin#sound-cloud-plugin`
   );
   return createBasePlugin({
     component: Component,
