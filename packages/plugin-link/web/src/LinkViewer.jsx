@@ -45,7 +45,7 @@ class LinkViewer extends Component {
     if (settings) {
       const { onClick } = settings;
       const { anchor, url } = componentData;
-      (async () => helpers?.onViewerAction?.(LINK_TYPE, 'Click', componentData))();
+      helpers?.onViewerAction?.(LINK_TYPE, 'Click', componentData);
       onClick?.(event, componentData?.customData || this.getHref(url, anchor));
       if (anchor) {
         event.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
