@@ -1,9 +1,12 @@
 import { RichContent, Node, Decoration_Type, Node_Type, Decoration, TextData } from 'ricos-schema';
 
 export const toHtml = (content: RichContent): string =>
-  `"\n${content.nodes.flatMap(createHtmlElement).join('\n')}\n"`;
+  `"\n${nodeArrayToHtml(content.nodes, '\n')}\n"`;
 
-const createHtmlElement = (node: Node): string | string[] => {
+const nodeArrayToHtml = (nodes: Node[], separator = ''): string =>
+  nodes.flatMap(nodeToHtml).join(separator);
+
+const nodeToHtml = (node: Node): string | string[] => {
   if (node.type === Node_Type.TEXT && node.textData) {
     return decorateTextElement(node.textData);
   }
@@ -16,9 +19,7 @@ const createHtmlElement = (node: Node): string | string[] => {
     tag = `h${level}`;
   }
   if (tag) {
-    const children = node.nodes
-      .flatMap(createHtmlElement)
-      .join(['ul', 'ol'].includes(tag) ? '\n  ' : '');
+    const children = nodeArrayToHtml(node.nodes);
     return createHtmlTag(tag, children);
   }
   return [];
@@ -34,9 +35,9 @@ const createHtmlAttrs = (decoration: Decoration): Record<string, string> => {
 };
 
 const createHtmlTag = (tag: string, child: string, attrs: Record<string, string> = {}): string => {
-  return `<${tag}${attrsToString(attrs)}>${
-    ['ul', 'ol'].includes(tag) ? `\n  ${child}\n` : child
-  }</${tag}>`;
+  const prefix = tag === 'li' ? '\n  ' : '';
+  const suffix = ['ul', 'ol'].includes(tag) ? '\n' : '';
+  return `${prefix}<${tag}${attrsToString(attrs)}>${child}${suffix}</${tag}>`;
 };
 
 const attrsToString = (attrs: Record<string, string>): string =>
@@ -44,7 +45,7 @@ const attrsToString = (attrs: Record<string, string>): string =>
     .map(([key, value]) => ` ${key}="${value}"`)
     .join('');
 
-const decorateTextElement = ({ text, decorations }: TextData) =>
+const decorateTextElement = ({ text, decorations }: TextData): string =>
   decorations.reduce((child, decoration) => {
     const tag = DECORATION_TO_HTML_TAG[decoration.type];
     return tag ? createHtmlTag(tag, child, createHtmlAttrs(decoration)) : child;
