@@ -5,6 +5,7 @@ import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
 import { TableDataUtil } from './domain/tableDataUtil';
 import classNames from 'classnames';
+import { TABLE_TYPE } from './types';
 
 class TableViewer extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class TableViewer extends Component {
     const { renderInnerRCE, innerRCV } = this.props;
     return renderInnerRCE
       ? renderInnerRCE(i, j)
-      : innerRCV({ contentState: this.table.getCellContent(i, j), renderedIn: 'table' });
+      : innerRCV({ contentState: this.table.getCellContent(i, j), renderedIn: TABLE_TYPE });
   };
 
   createRow = (i, columnsNumber) =>
