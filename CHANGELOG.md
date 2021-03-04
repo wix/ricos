@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `fullscreen`
   - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues
+- `ricos-editor`
+  - [#2257](https://github.com/wix/ricos/pull/2257) `getContent` removes blocks with errors from innerRCE blocks
 
 </details>
 <hr/>
