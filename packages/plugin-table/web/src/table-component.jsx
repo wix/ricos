@@ -14,6 +14,7 @@ import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-edito
 import { isEmpty, isNumber, cloneDeep } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
+import { TABLE_TYPE } from './types';
 
 class TableComponent extends React.Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class TableComponent extends React.Component {
     return this.props.renderInnerRCE({
       editorState,
       onChange: editorState => this.table.updateCellContent(i, j, editorState),
-      renderedIn: 'table',
+      renderedIn: TABLE_TYPE,
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
       tablePluginMenu: true,
@@ -297,6 +298,7 @@ class TableComponent extends React.Component {
     this.setState({ highlightColResizer: false });
     this.resetDrag();
     this.colDropIndex = null;
+    this.position = null;
   };
 
   onRowDragEnd = (e, dragsIndex) => {
@@ -356,22 +358,23 @@ class TableComponent extends React.Component {
   addLastCol = () => this.addCol(this.table.getColNum());
 
   onColDrag = (e, dragsIndex) => {
-    e.movementX > 0 ? (this.movementX = 'right') : e.movementX < 0 && (this.movementX = 'left');
+    !this.position && (this.position = e.pageX);
+    const movementX = e.movementX > 0 ? 'right' : e.movementX < 0 && 'left';
     const colsRefs = Array.from(this.rowsRefs[0]?.children || []);
-    const colsPositions = colsRefs.map(col =>
-      this.movementX === 'right' ? col.offsetLeft + col.offsetWidth : col.offsetLeft
-    );
+    const colsPositions = colsRefs.map(col => col.offsetLeft);
 
     const dragPreviewWidth = this.colsWidth
       .slice(dragsIndex.start, dragsIndex.end + 1)
       .reduce((acc, curr) => acc + curr);
     const lastCol = colsRefs[colsRefs.length - 1];
     const maxLeft = lastCol.offsetLeft + lastCol.offsetWidth + 20 - dragPreviewWidth;
-    const dropLeft = Math.min(e.pageX - dragPreviewWidth + this.getTableScrollLeft(), maxLeft);
+    const diff = e.pageX - this.position;
+    const startPosition = colsPositions[dragsIndex.start];
+    const dropLeft = Math.min(startPosition + diff + this.getTableScrollLeft(), maxLeft);
     colsPositions.forEach((pos, index) => {
       if (
-        (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
-        (this.movementX === 'left' && dropLeft > pos + 15)
+        (movementX === 'right' && dropLeft > pos - 15) ||
+        (movementX === 'left' && dropLeft > pos)
       ) {
         this.colDropIndex = index + 1;
       }

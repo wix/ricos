@@ -24,4 +24,24 @@ describe('CustomTheme', () => {
     const cssVars = createCustomStyles(mocks[2].input);
     expect(cssVars).toStrictEqual(mocks[2].output);
   });
+
+  it('should set lineHeight to 1.5 under the right condition', () => {
+    const cssVars1 = createCustomStyles({ h2: { fontSize: '40px' } });
+    expect(cssVars1).toStrictEqual({
+      'custom-h2-fontSize': '40px',
+      'custom-h2-lineHeight': 1.5,
+    });
+
+    const cssVars2 = createCustomStyles({ h2: { fontSize: '40px', lineHeight: 2 } });
+    expect(cssVars2).toStrictEqual({
+      'custom-h2-fontSize': '40px',
+      'custom-h2-lineHeight': 2,
+    });
+
+    const cssVars3 = createCustomStyles({ h2: { lineHeight: 2 } });
+    expect(cssVars3).toStrictEqual({
+      'custom-h2-fontSize': undefined,
+      'custom-h2-lineHeight': 2,
+    });
+  });
 });

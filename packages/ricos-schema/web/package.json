@@ -1,6 +1,6 @@
 {
   "name": "ricos-schema",
-  "version": "8.24.1",
+  "version": "8.25.1",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -32,6 +32,6 @@
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }, 
+  },
   "wnp_type": "proto"
 }
