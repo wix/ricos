@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `fullscreen`
   - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues
+- `ricos-editor`
+  - [#2257](https://github.com/wix/ricos/pull/2257) `getContent` removes blocks with errors from innerRCE blocks
 
 </details>
 <hr/>
@@ -29,8 +31,6 @@
   - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
     - `p` will no longer override elements of all textual entities
     - `lineHeight` of an element is now automatically set to 1.5 to keep ratio of growing text (unless provided).
-- `ricos-editor`
-  - [#2257](https://github.com/wix/ricos/pull/2257) getContent removes blocks with errors from innerRCE blocks
 
 ## 8.25.1 (March 2, 2021)
 ### :bug: Bug Fix
