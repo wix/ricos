@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, withBICallbacks } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import FileInput from '../Components/FileInput';
@@ -22,7 +22,7 @@ export default ({
   isMobile,
   pluginDefaults,
 }) => {
-  return class InsertPluginButton extends React.PureComponent {
+  class InsertPluginButton extends React.PureComponent {
     static propTypes = {
       className: PropTypes.string,
       onButtonVisible: PropTypes.func,
@@ -39,6 +39,7 @@ export default ({
       pluginMenuButtonRef: PropTypes.any,
       forceDisabled: PropTypes.bool,
       sideToolbar: PropTypes.bool,
+      biCallbacks: PropTypes.object,
     };
 
     constructor(props) {
@@ -65,7 +66,13 @@ export default ({
     }
 
     getButtonProps = () => {
-      const { setEditorState, getEditorState, closePluginMenu, pluginMenuButtonRef } = this.props;
+      const {
+        setEditorState,
+        getEditorState,
+        closePluginMenu,
+        pluginMenuButtonRef,
+        biCallbacks,
+      } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
         button,
@@ -82,6 +89,7 @@ export default ({
         toolbarName: this.toolbarName,
         closePluginMenu,
         pluginMenuButtonRef,
+        biCallbacks,
       });
     };
 
@@ -185,5 +193,7 @@ export default ({
         />
       );
     }
-  };
+  }
+
+  return withBICallbacks(InsertPluginButton);
 };

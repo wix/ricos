@@ -15,6 +15,7 @@ import {
   ToolbarButtonProps,
   Pubsub,
   EditorPluginConfig,
+  BICallbacks,
   Version,
 } from 'wix-rich-content-common';
 import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
@@ -23,6 +24,7 @@ export function generateInsertPluginButtonProps({
   blockType,
   button,
   helpers,
+  biCallbacks,
   pubsub,
   commonPubsub,
   settings,
@@ -39,6 +41,7 @@ export function generateInsertPluginButtonProps({
   blockType: string;
   button: InsertButton;
   helpers: Helpers;
+  biCallbacks: BICallbacks;
   pubsub: Pubsub;
   commonPubsub: Pubsub;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,9 +56,10 @@ export function generateInsertPluginButtonProps({
   pluginMenuButtonRef?: HTMLElement;
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
-  const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
+  const onPluginAdd = () =>
+    biCallbacks.onPluginAdd?.(blockType, toolbarName, Version.currentVersion);
   const onPluginAddStep = (step: onPluginAddStepArgs['step']) => {
-    helpers?.onPluginAddStep?.({
+    biCallbacks.onPluginAddStep?.({
       version: Version.currentVersion,
       entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
@@ -64,7 +68,8 @@ export function generateInsertPluginButtonProps({
       step,
     });
   };
-  const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
+  const onPluginAddSuccess = () =>
+    biCallbacks.onPluginAddSuccess?.(blockType, toolbarName, Version.currentVersion);
 
   function addBlock(data) {
     const { newBlock, newSelection, newEditorState } = createBlock(

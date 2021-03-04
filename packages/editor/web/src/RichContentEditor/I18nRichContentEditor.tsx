@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { withI18n, ToolbarType } from 'wix-rich-content-common';
 import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
-import RichContentEditor, { RichContentEditorProps } from './RichContentEditor';
+import RichContentEditor, {
+  RichContentEditorProps,
+  RichContentEditor as EditorClass,
+} from './RichContentEditor';
 
-const WrappedEditor = withI18n<RichContentEditor, Partial<RichContentEditorProps>>(
+const WrappedEditor = withI18n<typeof RichContentEditor, Partial<RichContentEditorProps>>(
   RichContentEditor,
   englishResources
 );
 
 export default class I18nRichContentEditor extends Component<Partial<RichContentEditorProps>> {
-  editor: RichContentEditor;
+  editor: EditorClass;
   static displayName = 'RichContentEditor';
 
   setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);

@@ -28,6 +28,7 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
+  withBICallbacks,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -268,4 +269,4 @@ class RichContentViewer extends Component<
   }
 }
 
-export default RichContentViewer;
+export default withBICallbacks(RichContentViewer);

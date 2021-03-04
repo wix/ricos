@@ -9,6 +9,7 @@ import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { RicosViewer } from 'ricos-viewer';
+import { withBiMockProvider } from '../utils/mockCallbacksData';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -29,7 +30,7 @@ interface ExampleViewerState {
   disabled: boolean;
 }
 
-export default class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
+class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
   expandModeData;
   viewerRef: RefObject<any>;
   pluginsConfig: RichContentViewerProps['config'];
@@ -84,12 +85,6 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
     } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
-      helpers: {
-        // This is for debugging only
-        onViewerAction: async (actionName, pluginId, value) =>
-          console.log('onViewerAction', actionName, pluginId, value),
-        onViewerLoaded: async (...args) => console.log('onViewerLoaded', ...args),
-      },
       localeResource,
       locale,
       relValue,
@@ -114,9 +109,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
               cssOverride={theme}
               mediaSettings={{ pauseMedia: disabled }}
               seoSettings={seoMode}
-            >
-              <RichContentViewer helpers={viewerProps.helpers} />
-            </RicosViewer>
+            />
           </div>
         ) : (
           <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
@@ -148,3 +141,5 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
     );
   }
 }
+
+export default withBiMockProvider(Viewer);

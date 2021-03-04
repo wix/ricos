@@ -5,7 +5,7 @@ import englishResources from 'wix-rich-content-common/dist/statics/viewer/locale
 import { withI18n } from 'wix-rich-content-common';
 import RichContentViewer, { RichContentViewerProps } from './RichContentViewer';
 
-const WrappedViewer = withI18n<RichContentViewer, Partial<RichContentViewerProps>>(
+const WrappedViewer = withI18n<typeof RichContentViewer, Partial<RichContentViewerProps>>(
   RichContentViewer,
   englishResources
 );

@@ -2,6 +2,7 @@ export { ComponentData, RicosContentBlock, RicosContent, RicosEntityRange } from
 export * from './buttonTypes';
 export * from './themeTypes';
 export * from './commonTypes';
+export * from './contextTypes';
 export * from './editorTypes';
 export * from './mediaUploadTypes';
 export * from './pluginTypes';
