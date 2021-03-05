@@ -57,6 +57,10 @@ class TableComponent extends React.Component {
 
   getCellState = (i, j) => this.table.getCellContent(i, j) || createEmptyCellEditor();
 
+  selectCellContent = (i, j) => {
+    this.table.getCell(i, j).content = this.innerEditorsRefs[`${i}-${j}`].selectAllContent(true);
+  };
+
   updateTable = data => {
     this.updateComponentData(data);
     this.setState({ updateAllRows: true });
@@ -575,6 +579,7 @@ class TableComponent extends React.Component {
               this.tableRef.current?.offsetWidth - this.tableContainer.current?.offsetWidth
             }
             rowsToUpdate={this.getRowsToUpdate()}
+            selectCellContent={this.selectCellContent}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
