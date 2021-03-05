@@ -59,6 +59,7 @@ class TableComponent extends React.Component {
 
   selectCellContent = (i, j) => {
     this.table.getCell(i, j).content = this.innerEditorsRefs[`${i}-${j}`].selectAllContent(true);
+    this.updateComponentData(this.table.componentData);
   };
 
   updateTable = data => {
