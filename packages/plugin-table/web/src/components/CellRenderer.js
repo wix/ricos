@@ -165,6 +165,7 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
       setEditorRef,
+      selectCellContent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
@@ -235,6 +236,7 @@ export default class Cell extends Component {
             selected={selected}
             contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
+            isEditor={selectCellContent}
           >
             {children}
           </Editor>
@@ -267,10 +269,14 @@ class Editor extends Component {
   };
 
   render() {
-    const { children, editing, selected } = this.props;
+    const { children, editing, selected, isEditor } = this.props;
+    const editorStyle = isEditor ? { pointerEvents: 'none' } : {};
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
+      <div
+        className={classNames(styles.editor, editing ? styles.edit : styles.view)}
+        style={editorStyle}
+      >
         {React.cloneElement(children, {
           ref: this.setEditorRef,
           editing,
@@ -287,6 +293,7 @@ Editor.propTypes = {
   children: PropTypes.any,
   contentState: PropTypes.object,
   setIsHighlighted: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  isEditor: PropTypes.bool,
 };
 Cell.propTypes = {
   t: PropTypes.func,
