@@ -15,17 +15,25 @@ export default class Cell extends Component {
     const isCellEditing = this.isEditing(this.props.editing, this.props.selectedCells);
     const isGoIntoEdit = !isCellWasEditing && isCellEditing;
     const isGoOutFromEdit = isCellWasEditing && !isCellEditing;
+    const {
+      selectedCells,
+      isMobile,
+      row,
+      col,
+      selectCellContent,
+      setEditingActive,
+      toolbarRef,
+    } = this.props;
     if (isGoIntoEdit) {
       this.editorRef.focus();
-      this.props.setEditingActive(true);
-      !this.props.isMobile && this.editorRef?.selectAllContent(true);
+      setEditingActive(true);
+      !isMobile && selectCellContent(row, col);
     } else if (isGoOutFromEdit) {
-      this.props.setEditingActive(false);
-      this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
+      setEditingActive(false);
+      toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
-    if (this.props.selected && !prevProps.selected && !isCellEditing && !this.props.isMobile) {
-      this.editorRef?.selectAllContent();
-      const { selectedCells } = this.props;
+    if (this.props.selected && !prevProps.selected && !isCellEditing && !isMobile) {
+      selectCellContent(row, col);
       selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
       this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
@@ -303,4 +311,5 @@ Cell.propTypes = {
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onKeyDown: PropTypes.func,
+  selectCellContent: PropTypes.func,
 };
