@@ -15,7 +15,7 @@ import {
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';
 import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
 
 export default function createAtomicPluginToolbar({
@@ -166,7 +166,7 @@ export default function createAtomicPluginToolbar({
         toolbarNode: findDOMNode(this),
         languageDir,
         isMobile,
-        renderedInTable: innerRCERenderedIn === 'table',
+        renderedInTable: innerRCERenderedIn === TABLE_TYPE,
       });
       this.offsetHeight = updatedOffsetHeight;
       return position;
@@ -246,17 +246,6 @@ export default function createAtomicPluginToolbar({
         innerModal,
         ...commonButtonProps,
       };
-      const defaultButtonProps = {
-        componentData: this.state.componentData,
-        componentState: this.state.componentState,
-        helpers,
-        displayPanel: this.displayPanel,
-        displayInlinePanel: this.displayInlinePanel,
-        hideInlinePanel: this.hidePanels,
-        uiSettings,
-        getEditorBounds,
-        ...buttonProps,
-      };
 
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
@@ -297,14 +286,6 @@ export default function createAtomicPluginToolbar({
           return (
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
-        case BUTTONS.VIDEO_SETTINGS: {
-          const isCustomVideo = !!this.state.componentData.isCustomVideo;
-          const videoSettingsProps = {
-            ...defaultButtonProps,
-            type: BUTTONS.EXTERNAL_MODAL,
-          };
-          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
-        }
         case BUTTONS.LINK_PREVIEW: {
           return (
             <BlockLinkButton
@@ -326,7 +307,19 @@ export default function createAtomicPluginToolbar({
           );
         }
         default:
-          return <Button {...defaultButtonProps} />;
+          return (
+            <Button
+              componentData={this.state.componentData}
+              componentState={this.state.componentState}
+              helpers={helpers}
+              displayPanel={this.displayPanel}
+              displayInlinePanel={this.displayInlinePanel}
+              hideInlinePanel={this.hidePanels}
+              uiSettings={uiSettings}
+              getEditorBounds={getEditorBounds}
+              {...buttonProps}
+            />
+          );
       }
     };
     /*eslint-enable complexity*/
@@ -430,7 +423,7 @@ export default function createAtomicPluginToolbar({
       const { toolbarStyles: toolbarTheme } = theme || {};
 
       if (this.visibilityFn() && isVisible) {
-        const renderedInTable = innerRCERenderedIn === 'table';
+        const renderedInTable = innerRCERenderedIn === TABLE_TYPE;
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(

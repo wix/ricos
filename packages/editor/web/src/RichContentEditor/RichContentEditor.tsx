@@ -148,7 +148,6 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   maxTextLength?: number;
   experiments?: AvailableExperiments;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
-  width?: number;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -166,7 +165,6 @@ interface State {
     experiments?: AvailableExperiments;
     isMobile: boolean;
     t?: TranslationFunction;
-    containerWidth?: number;
   };
 }
 
@@ -228,13 +226,13 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   constructor(props: RichContentEditorProps) {
     super(props);
     const initialEditorState = this.getInitialEditorState();
-    const { experiments, isMobile = false, t, width } = props;
+    const { experiments, isMobile = false, t } = props;
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
       readOnly: false,
-      context: { experiments, isMobile, t, containerWidth: width },
+      context: { experiments, isMobile, t },
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -246,7 +244,19 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.fixDraftSelectionExtend();
   }
+
+  fixDraftSelectionExtend = () => {
+    if (typeof Selection !== 'undefined' && !this.props.isInnerRCE) {
+      const nativeSelectionExtend = Selection.prototype.extend;
+      Selection.prototype.extend = function(...args) {
+        try {
+          return nativeSelectionExtend.apply(this, args);
+        } catch (error) {}
+      };
+    }
+  };
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
