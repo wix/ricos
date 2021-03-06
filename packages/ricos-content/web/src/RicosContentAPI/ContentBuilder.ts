@@ -24,7 +24,7 @@ export class RicosContentBuilder implements ContentBuilder {
       nodes: [],
       key: this.generateKey(),
     };
-    content.nodes.push(node);
+    content.nodes?.push(node);
     return content;
   }
 
@@ -42,7 +42,7 @@ export class RicosContentBuilder implements ContentBuilder {
         },
       ],
     };
-    content.nodes.push(node);
+    content.nodes?.push(node);
     return content;
   }
 
