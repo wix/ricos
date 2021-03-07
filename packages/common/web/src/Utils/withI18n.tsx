@@ -58,9 +58,8 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
     changeLocale({ locale, localeResource }) {
       this.i18n.addResourceBundle(locale, 'translation', localeResource);
       this.i18n.changeLanguage(locale, err => {
-        this.forceUpdate();
         if (!err) {
-          this.setState({ key: `${I18nWrapper.displayName}-${this.i18n.language}` });
+          this.forceUpdate();
         }
       });
     }
