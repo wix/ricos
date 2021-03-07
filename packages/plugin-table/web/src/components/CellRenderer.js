@@ -10,34 +10,35 @@ import { ToolbarType } from 'wix-rich-content-common';
 
 const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
+  componentDidMount() {
+    this.selectCellContent();
+  }
   componentDidUpdate(prevProps) {
     const isCellWasEditing = this.isEditing(prevProps.editing, prevProps.selectedCells);
     const isCellEditing = this.isEditing(this.props.editing, this.props.selectedCells);
     const isGoIntoEdit = !isCellWasEditing && isCellEditing;
     const isGoOutFromEdit = isCellWasEditing && !isCellEditing;
-    const {
-      selectedCells,
-      isMobile,
-      row,
-      col,
-      selectCellContent,
-      setEditingActive,
-      toolbarRef,
-    } = this.props;
+    const { selectedCells, isMobile, setEditingActive, toolbarRef } = this.props;
     if (isGoIntoEdit) {
       this.editorRef.focus();
       setEditingActive(true);
-      !isMobile && selectCellContent(row, col);
+      this.selectCellContent();
     } else if (isGoOutFromEdit) {
       setEditingActive(false);
       toolbarRef?.setEditingTextFormattingToolbarProps(false);
+      this.selectCellContent();
     }
     if (this.props.selected && !prevProps.selected && !isCellEditing && !isMobile) {
-      selectCellContent(row, col);
+      this.selectCellContent();
       selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
       this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
   }
+
+  selectCellContent = () => {
+    const { row, col, selectCellContent, isMobile } = this.props;
+    !isMobile && selectCellContent?.(row, col);
+  };
 
   isSingleCellSelected = (selectedCells = {}) =>
     selectedCells?.start?.i === selectedCells?.end?.i &&
@@ -269,14 +270,10 @@ class Editor extends Component {
   };
 
   render() {
-    const { children, editing, selected, isEditor } = this.props;
-    const editorStyle = isEditor ? { pointerEvents: 'none' } : {};
+    const { children, editing, selected } = this.props;
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div
-        className={classNames(styles.editor, editing ? styles.edit : styles.view)}
-        style={editorStyle}
-      >
+      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
         {React.cloneElement(children, {
           ref: this.setEditorRef,
           editing,
@@ -293,7 +290,6 @@ Editor.propTypes = {
   children: PropTypes.any,
   contentState: PropTypes.object,
   setIsHighlighted: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  isEditor: PropTypes.bool,
 };
 Cell.propTypes = {
   t: PropTypes.func,
