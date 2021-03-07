@@ -11,7 +11,11 @@ interface Props {
   forwardedRef: Ref<any>;
 }
 
-export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleResource) => {
+export default <T, P>(
+  Component: ComponentType,
+  defaultLocaleResource: LocaleResource,
+  { forceRemount = true } = {}
+) => {
   const Translated = translate(undefined, { withRef: true })(Component);
   class I18nWrapper extends PureComponent<Props, { key: string }> {
     i18n: I18n;
@@ -61,7 +65,11 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
       this.i18n.addResourceBundle(locale, 'translation', localeResource);
       this.i18n.changeLanguage(locale, err => {
         if (!err) {
-          this.forceUpdate();
+          if (forceRemount) {
+            this.setState({ key: `${I18nWrapper.displayName}-${this.i18n.language}` });
+          } else {
+            this.forceUpdate();
+          }
         }
       });
     }
@@ -70,7 +78,7 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
       const { forwardedRef, ...rest } = this.props;
       return (
         <I18nextProvider i18n={this.i18n}>
-          <Translated {...rest} ref={forwardedRef} />
+          <Translated key={this.state.key} {...rest} ref={forwardedRef} />
         </I18nextProvider>
       );
     }
