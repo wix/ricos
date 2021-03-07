@@ -79,13 +79,13 @@ class HtmlComponent extends Component {
     const { iframeHeight } = this.state;
     //for avoiding unnecessary scroll
     const maxDiff = Math.min(50, this.state.iframeHeight * 0.1);
-    const normalizedHeight =
-      config.height &&
-      iframeHeight &&
-      config.height < iframeHeight &&
-      config.height + maxDiff > iframeHeight
-        ? iframeHeight
-        : config.height;
+    let normalizedHeight = iframeHeight;
+    if (config.height) {
+      normalizedHeight =
+        iframeHeight && config.height < iframeHeight && config.height + maxDiff > iframeHeight
+          ? iframeHeight
+          : config.height;
+    }
 
     return normalizedHeight || height || INIT_HEIGHT;
   };
