@@ -8,10 +8,7 @@
   height: 100vh;
   z-index: 100001;
   background: white;
-  
-  @include phone {
-    overflow-y: hidden;
-  }
+  overflow: hidden;
 
   :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
     direction: ltr !important;

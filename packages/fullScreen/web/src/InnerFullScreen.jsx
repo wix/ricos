@@ -14,6 +14,7 @@ export default class InnerFullscreen extends Component {
     super(props);
     this.state = { isInFullscreen: false };
     this.getItems();
+    this.containerRef = React.createRef();
   }
 
   static defaultProps = {
@@ -166,11 +167,17 @@ export default class InnerFullscreen extends Component {
 
   customArrowRenderer = direction => this.arrowRenderers[direction];
 
+  getDimensions = () => {
+    const container = this.containerRef.current?.getBoundingClientRect?.();
+    const width = container?.width || document.documentElement.clientWidth;
+    const height = container?.height || document.documentElement.clientHeight;
+    return { width, height };
+  };
+
   render() {
     const { backgroundColor, topMargin, isMobile, index } = this.props;
     const { isInFullscreen } = this.state;
-    const width = document.documentElement.clientWidth;
-    const height = document.documentElement.clientHeight;
+    const { width, height } = this.getDimensions();
     const isHorizontalView = width > height;
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalView);
 
@@ -180,6 +187,7 @@ export default class InnerFullscreen extends Component {
         dir="ltr"
         data-hook={'fullscreen-root'}
         className={isInFullscreen || isMobile ? styles.fullscreen_mode : styles.expand_mode}
+        ref={this.containerRef}
       >
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
