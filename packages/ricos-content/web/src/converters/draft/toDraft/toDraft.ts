@@ -31,7 +31,7 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
   let latestEntityKey = -1;
 
   const parseNodes = (index = 0) => {
-    const node = nodes?.[index];
+    const node = nodes[index];
     if (node) {
       switch (node.type) {
         case Node_Type.BLOCKQUOTE:
@@ -79,45 +79,38 @@ export const toDraft = (ricosContent: RichContent): RicosContent => {
   };
 
   const parseListNode = (node: Node) => {
-    if (node.nodes) {
-      node.nodes.forEach(listItem => {
-        if (listItem.nodes) {
-          const [paragraph, childNode] = listItem.nodes;
-          parseTextNodes(paragraph, {
-            type: TO_DRAFT_LIST_TYPE[node.type],
-            key: listItem.key,
-          });
-          if (childNode) {
-            parseListNode(childNode);
-          }
-        }
+    node.nodes.forEach(listItem => {
+      const [paragraph, childNode] = listItem.nodes;
+      parseTextNodes(paragraph, {
+        type: TO_DRAFT_LIST_TYPE[node.type],
+        key: listItem.key,
       });
-    }
+      if (childNode) {
+        parseListNode(childNode);
+      }
+    });
   };
 
   const parseTextNodes = (node: Node, { type, key }: { type: DraftBlockType; key: string }) => {
-    if (node.nodes) {
-      const { text, decorationMap } = mergeTextNodes(node.nodes);
-      const { inlineStyleDecorations, entityDecorations } = parseDecorations(decorationMap, text);
-      const inlineStyleRanges = parseInlineStyleDecorations(inlineStyleDecorations);
-      const {
-        entityRanges,
-        entityMap,
-        latestEntityKey: newLatestEntityKey,
-      } = parseEntityDecorations(entityDecorations, latestEntityKey);
-      latestEntityKey = newLatestEntityKey;
-      const { depth, ...data } = createTextBlockData(node);
-      addBlock({
-        key,
-        type,
-        text,
-        depth,
-        inlineStyleRanges,
-        entityRanges,
-        data,
-      });
-      draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
-    }
+    const { text, decorationMap } = mergeTextNodes(node.nodes);
+    const { inlineStyleDecorations, entityDecorations } = parseDecorations(decorationMap, text);
+    const inlineStyleRanges = parseInlineStyleDecorations(inlineStyleDecorations);
+    const { entityRanges, entityMap, latestEntityKey: newLatestEntityKey } = parseEntityDecorations(
+      entityDecorations,
+      latestEntityKey
+    );
+    latestEntityKey = newLatestEntityKey;
+    const { depth, ...data } = createTextBlockData(node);
+    addBlock({
+      key,
+      type,
+      text,
+      depth,
+      inlineStyleRanges,
+      entityRanges,
+      data,
+    });
+    draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
 
   const addBlock = (blockProps?: Partial<RicosContentBlock>) => {

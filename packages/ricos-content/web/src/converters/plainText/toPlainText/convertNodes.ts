@@ -4,36 +4,26 @@ import { LINK_TYPE } from '../../../consts';
 import { mergeTextNodes, RangedDecoration } from '../../draft/toDraft/decorationParsers';
 
 export const parseTextNodes = (node: Node) => {
-  if (node.nodes) {
-    const {
-      text,
-      decorationMap: { [LINK_TYPE]: linkDecorations },
-    } = mergeTextNodes(node.nodes);
-    const textWithLinks = addLinksToText(text, linkDecorations);
-    return removeTrailingNewLine(textWithLinks);
-  }
+  const {
+    text,
+    decorationMap: { [LINK_TYPE]: linkDecorations },
+  } = mergeTextNodes(node.nodes);
+  const textWithLinks = addLinksToText(text, linkDecorations);
+  return removeTrailingNewLine(textWithLinks);
 };
 
 const getListSymbol = (index: number, type: Node_Type) =>
   type === Node_Type.ORDERED_LIST ? index + 1 + '. ' : '• ';
 
-const parseList = (listNode: Node): { type: Node_Type; item?: string }[] => {
-  if (listNode.nodes) {
-    return listNode.nodes
-      .map(node => {
-        if (node.nodes) {
-          const [paragraph, childNode] = node.nodes;
-          return [
-            { type: listNode.type, item: parseTextNodes(paragraph) },
-            childNode ? parseList(childNode) : [],
-          ];
-        }
-        return [];
-      })
-      .flat(2);
-  }
-  return [];
-};
+const parseList = (listNode: Node): { type: Node_Type; item: string }[] =>
+  listNode.nodes
+    .map(({ nodes: [paragraph, childNode] }) => {
+      return [
+        { type: listNode.type, item: parseTextNodes(paragraph) },
+        childNode ? parseList(childNode) : [],
+      ];
+    })
+    .flat(2);
 
 export const parseListNode = (node: Node) =>
   parseList(node)
