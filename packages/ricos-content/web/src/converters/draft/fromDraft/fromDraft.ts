@@ -144,7 +144,7 @@ export const fromDraft = (draftJSON: RicosContent): RichContent => {
     while (nextBlock && isListBlock(nextBlock) && nextBlock.depth >= depth) {
       if (nextBlock.depth > depth || nextBlock.type !== listType) {
         const { node, nextIndex } = parseListBlocks(searchIndex);
-        listNodes[listNodes.length - 1].nodes?.push(node);
+        listNodes[listNodes.length - 1].nodes.push(node);
         searchIndex = nextIndex;
       } else {
         listNodes.push(createListItem(nextBlock));
