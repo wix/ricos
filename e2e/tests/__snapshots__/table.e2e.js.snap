@@ -39,7 +39,6 @@ exports[`plugins > table > should open table modal and create table by the setti
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120
@@ -126,7 +125,6 @@ exports[`plugins > table > should open table modal and create table by the setti
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -177,7 +175,6 @@ exports[`plugins > table > should select/unSelect all cells #0`] =
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120,
@@ -470,7 +467,6 @@ exports[`plugins > table > should select/unSelect all cells #0`] =
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -521,7 +517,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120,
@@ -965,7 +960,6 @@ exports[`plugins > table > should add rows and columns from table entry points #
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -1016,7 +1010,6 @@ exports[`plugins > table > should open table toolbars in different positions #0`
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120,
@@ -1309,7 +1302,6 @@ exports[`plugins > table > should open table toolbars in different positions #0`
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -1360,7 +1352,6 @@ exports[`plugins > table > should use table toolbars #0`] =
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colHeader": true,
           "colsMinWidth": [
             120,
@@ -1777,7 +1768,6 @@ exports[`plugins > table > should use table toolbars #0`] =
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -1828,7 +1818,6 @@ exports[`plugins > table > should use cell alignment #0`] =
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120,
@@ -2130,7 +2119,6 @@ exports[`plugins > table > should use cell alignment #0`] =
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -2181,7 +2169,6 @@ exports[`plugins > table > should use table toolbar context menu #0`] =
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120,
@@ -2625,7 +2612,6 @@ exports[`plugins > table > should use table toolbar context menu #0`] =
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -2676,7 +2662,6 @@ exports[`plugins > table > should edit cell #0`] =
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120,
@@ -2969,7 +2954,6 @@ exports[`plugins > table > should edit cell #0`] =
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -3036,7 +3020,6 @@ exports[`plugins > table > should test the first and last block logic #0`] =
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120,
@@ -3509,7 +3492,6 @@ exports[`plugins > table > should test the first and last block logic #0`] =
             47,
             47
           ],
-          "size": "content"
         },
         "type": "wix-rich-content-plugin-table"
       },

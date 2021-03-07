@@ -28,7 +28,7 @@ export const toPlainText = async (
   let plainText = '';
 
   const parseNodes = async (index = 0) => {
-    const node = nodes[index];
+    const node = nodes?.[index];
     if (node) {
       if (index > 0) {
         plainText += '\n';
