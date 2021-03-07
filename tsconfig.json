@@ -12,6 +12,7 @@
     "jsx": "react",
     "lib": ["dom", "ESNext"],
     "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "preserveConstEnums": false,

@@ -17,55 +17,55 @@ class ContentStateBuilder {
   contentState: RicosContent;
 
   // Content
-  h1: ContentBuildMethod;
+  h1!: ContentBuildMethod;
 
-  h2: ContentBuildMethod;
+  h2!: ContentBuildMethod;
 
-  h3: ContentBuildMethod;
+  h3!: ContentBuildMethod;
 
-  h4: ContentBuildMethod;
+  h4!: ContentBuildMethod;
 
-  h5: ContentBuildMethod;
+  h5!: ContentBuildMethod;
 
-  h6: ContentBuildMethod;
+  h6!: ContentBuildMethod;
 
-  quote: ContentBuildMethod;
+  quote!: ContentBuildMethod;
 
-  plain: ContentBuildMethod;
+  plain!: ContentBuildMethod;
 
-  code: ContentBuildMethod;
+  code!: ContentBuildMethod;
 
-  ol: ContentBuildMethod;
+  ol!: ContentBuildMethod;
 
-  ul: ContentBuildMethod;
+  ul!: ContentBuildMethod;
 
   // Plugins
-  image: PluginBuildMethod;
+  image!: PluginBuildMethod;
 
-  video: PluginBuildMethod;
+  video!: PluginBuildMethod;
 
-  gallery: PluginBuildMethod;
+  gallery!: PluginBuildMethod;
 
-  soundCloud: PluginBuildMethod;
+  soundCloud!: PluginBuildMethod;
 
-  giphy: PluginBuildMethod;
+  giphy!: PluginBuildMethod;
 
-  map: PluginBuildMethod;
+  map!: PluginBuildMethod;
 
-  file: PluginBuildMethod;
+  file!: PluginBuildMethod;
 
-  divider: PluginBuildMethod;
+  divider!: PluginBuildMethod;
 
-  link: PluginBuildMethod;
+  link!: PluginBuildMethod;
 
-  linkPreview: PluginBuildMethod;
+  linkPreview!: PluginBuildMethod;
 
   // Interactions
-  readMore: InteractionBuildMethod;
+  readMore!: InteractionBuildMethod;
 
-  seeFullPost: InteractionBuildMethod;
+  seeFullPost!: InteractionBuildMethod;
 
-  imageCounter: InteractionBuildMethod;
+  imageCounter!: InteractionBuildMethod;
 
   constructor(initialState?: RicosContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };

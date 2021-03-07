@@ -183,21 +183,37 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     entities: EntityInstance[];
     blocks: ContentBlock[];
   };
+
   refId: number;
+
   commonPubsub: Pubsub;
+
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
+
   contextualData: EditorContextType;
+
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
+
   editorWrapper: Element;
+
   copySource: { unregister(): void };
+
   updateBounds: (editorBounds?: BoundingRect) => void;
+
   plugins;
+
   focusedBlockKey: string;
+
   pluginKeyBindings;
+
   customStyleFn: DraftEditorProps['customStyleFn'];
+
   toolbars;
+
   innerRCECustomStyleFn;
+
   getSelectedText: (editorState: EditorState) => string;
+
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
     spellCheck: true,
@@ -685,22 +701,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   getToolbarProps = (type = TOOLBARS.INSERT_PLUGIN) => ({
     buttons: this.toolbars[type],
     context: this.contextualData,
-    pubsub: this.commonPubsub,
-  });
-
-  // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
-  publish = async (postId?: string) => {
-    if (!this.props.helpers?.onPublish) {
-      return;
-    }
-    const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
-    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
-  };
-
-  setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
-
-  inPluginEditingMode = false;
-
   setInPluginEditingMode = (shouldEnable: boolean) => {
     // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
     const mode = shouldEnable ? 'render' : 'edit';
@@ -1017,6 +1017,22 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
               </div>
             )}
           </Measure>
+        </GlobalContext.Provider>
+      );
+    } catch (err) {
+      onError(err);
+      return null;
+    }
+  }
+}
+
+export default RichContentEditor;
+
+declare global {
+  interface Window {
+    __RICOS_INFO__: { getContent; getConfig };
+  }
+}
         </GlobalContext.Provider>
       );
     } catch (err) {

@@ -21,6 +21,7 @@ export class ContentAPI implements ContentBuilder, ContentExtractor, Convertors 
     this.builder = deps.builder;
     this.extractor = deps.extractor;
     this.convertors = deps.convertors;
+    this.content = { nodes: [] };
   }
 
   addImage(data: ImageData) {

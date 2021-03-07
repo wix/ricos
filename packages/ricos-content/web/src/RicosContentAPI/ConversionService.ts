@@ -1,7 +1,7 @@
 import { ConversionService } from '../types';
 
 export class ConversionServiceClient<S, T> implements ConversionService<S, T> {
-  endpoint: string;
+  endpoint = '';
 
   configure(endpoint: string) {
     this.endpoint = endpoint;
