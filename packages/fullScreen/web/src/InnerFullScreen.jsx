@@ -168,9 +168,15 @@ export default class InnerFullscreen extends Component {
   customArrowRenderer = direction => this.arrowRenderers[direction];
 
   getDimensions = () => {
+    const { isMobile } = this.props;
+    const { isInFullscreen } = this.state;
     const container = this.containerRef.current?.getBoundingClientRect?.();
     const width = container?.width || document.documentElement.clientWidth;
-    const height = container?.height || document.documentElement.clientHeight;
+    const height = container?.height
+      ? isInFullscreen || isMobile
+        ? container.height
+        : container.height - 70
+      : document.documentElement.clientHeight;
     return { width, height };
   };
 
