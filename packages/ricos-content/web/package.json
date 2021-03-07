@@ -36,6 +36,7 @@
     "test:watchAll": "jest --verbose --watchAll"
   },
   "dependencies": {
+    "parse5": "^6.0.0",
     "ricos-schema": "8.25.4",
     "to-camel-case": "1.0.0",
     "to-constant-case": "1.0.0",
