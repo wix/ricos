@@ -34,7 +34,9 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
 
     async componentDidMount() {
       const { locale, localeResource } = await this.getResourceByLocale(this.props.locale);
-      this.changeLocale({ locale, localeResource });
+      if (locale !== 'en') {
+        this.changeLocale({ locale, localeResource });
+      }
     }
 
     componentWillReceiveProps(nextProps) {
