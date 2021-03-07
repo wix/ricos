@@ -161,6 +161,14 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
+    it('should select all cell content after go out from edit', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
+      cy.focusTable();
+      cy.editCellAndGoOut(0);
+      cy.goToTextStyle();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     // it('should use table toolbar context menu', function() {
     //   cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
     //   cy.focusTable();

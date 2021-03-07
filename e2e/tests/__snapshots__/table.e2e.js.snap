@@ -124,7 +124,7 @@ exports[`plugins > table > should open table modal and create table by the setti
           "rowsHeight": [
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -466,7 +466,7 @@ exports[`plugins > table > should select/unSelect all cells #0`] =
             47,
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -959,7 +959,7 @@ exports[`plugins > table > should add rows and columns from table entry points #
             47,
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -1301,7 +1301,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
             47,
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -1767,7 +1767,7 @@ exports[`plugins > table > should use table toolbars #0`] =
             47,
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -2118,7 +2118,7 @@ exports[`plugins > table > should use cell alignment #0`] =
             47,
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -2611,7 +2611,7 @@ exports[`plugins > table > should use table toolbar context menu #0`] =
             47,
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -2953,7 +2953,7 @@ exports[`plugins > table > should edit cell #0`] =
             47,
             47,
             47
-          ],
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
@@ -3491,7 +3491,349 @@ exports[`plugins > table > should test the first and last block logic #0`] =
             47,
             47,
             47
+          ]
+        },
+        "type": "wix-rich-content-plugin-table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-table"
+    }
+  }
+};
+
+exports[`plugins > table > should select all cell content after go out from edit #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "colsMinWidth": [
+            120,
+            120,
+            120,
+            120
           ],
+          "colsWidth": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "table!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "is",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "table",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "test",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            47,
+            47,
+            47,
+            47
+          ]
         },
         "type": "wix-rich-content-plugin-table"
       },
