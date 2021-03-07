@@ -63,6 +63,10 @@
     }
 }
 
+.editorWrapper:not(.editing) {
+    pointer-events: none;
+}
+
 
 .editor {
     height: 100%;
