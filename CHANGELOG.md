@@ -23,7 +23,7 @@
 </details>
 <hr/>
 
-## 8.25.3 (March 4, 2021)
+## 8.25.4 (March 5, 2021)
 ### :bug: Bug Fix
 - `fullscreen`
   - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues

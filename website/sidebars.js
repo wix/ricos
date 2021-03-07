@@ -63,6 +63,7 @@ module.exports = {
       'dev/theming',
       'dev/release_instructions',
       'dev/testing',
+      'dev/maintenance',
     ],
   },
 };

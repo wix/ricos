@@ -67,11 +67,7 @@ class InnerRCE extends PureComponent {
     return { buttons, context, pubsub };
   };
 
-  selectAllContent = forceSelection => {
-    const { editorState } = this.props;
-    const newEditorState = selectAllContent(editorState, forceSelection);
-    this.props.onChange(newEditorState);
-  };
+  selectAllContent = forceSelection => selectAllContent(this.props.editorState, forceSelection);
 
   focus = () => this.ref.focus();
 
