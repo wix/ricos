@@ -11,30 +11,31 @@ import { ToolbarType } from 'wix-rich-content-common';
 const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
-    if (
-      !this.isEditing(prevProps.editing, prevProps.selectedCells) &&
-      this.isEditing(this.props.editing, this.props.selectedCells)
-    ) {
+    const isCellWasEditing = this.isEditing(prevProps.editing, prevProps.selectedCells);
+    const isCellEditing = this.isEditing(this.props.editing, this.props.selectedCells);
+    const isGoIntoEdit = !isCellWasEditing && isCellEditing;
+    const isGoOutFromEdit = isCellWasEditing && !isCellEditing;
+    const {
+      selectedCells,
+      isMobile,
+      row,
+      col,
+      selectCellContent,
+      setEditingActive,
+      toolbarRef,
+    } = this.props;
+    if (isGoIntoEdit) {
       this.editorRef.focus();
-      this.props.setEditingActive(true);
-      !this.props.isMobile && this.editorRef?.selectAllContent(true);
+      setEditingActive(true);
+      !isMobile && selectCellContent(row, col);
+    } else if (isGoOutFromEdit) {
+      setEditingActive(false);
+      toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
-    if (
-      this.isEditing(prevProps.editing, prevProps.selectedCells) &&
-      !this.isEditing(this.props.editing, this.props.selectedCells)
-    ) {
-      this.props.setEditingActive(false);
-      this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
-    }
-    if (this.props.selected) {
-      if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
-        !this.props.isMobile && this.editorRef?.selectAllContent();
-      }
-      if (!prevProps.selected) {
-        const { selectedCells } = this.props;
-        selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
-        this.tdHeight = this.tdRef?.offsetHeight - 1;
-      }
+    if (this.props.selected && !prevProps.selected && !isCellEditing && !isMobile) {
+      selectCellContent(row, col);
+      selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
+      this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
   }
 
@@ -73,8 +74,6 @@ export default class Cell extends Component {
         e.stopPropagation();
         e.preventDefault();
         this.editorRef.selectAllContent(true);
-      } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey)) {
-        e.preventDefault();
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.altKey || e.shiftKey || e.metaKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
@@ -166,6 +165,7 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
       setEditorRef,
+      selectCellContent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
@@ -236,6 +236,7 @@ export default class Cell extends Component {
             selected={selected}
             contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
+            isEditor={selectCellContent}
           >
             {children}
           </Editor>
@@ -258,8 +259,7 @@ export default class Cell extends Component {
 class Editor extends Component {
   shouldComponentUpdate(nextProps) {
     const { editing, selected, contentState } = this.props;
-    const isContentStateChanged =
-      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
+    const isContentStateChanged = contentState !== nextProps.contentState;
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
@@ -269,10 +269,14 @@ class Editor extends Component {
   };
 
   render() {
-    const { children, editing, selected } = this.props;
+    const { children, editing, selected, isEditor } = this.props;
+    const editorStyle = isEditor ? { pointerEvents: 'none' } : {};
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
+      <div
+        className={classNames(styles.editor, editing ? styles.edit : styles.view)}
+        style={editorStyle}
+      >
         {React.cloneElement(children, {
           ref: this.setEditorRef,
           editing,
@@ -289,6 +293,7 @@ Editor.propTypes = {
   children: PropTypes.any,
   contentState: PropTypes.object,
   setIsHighlighted: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  isEditor: PropTypes.bool,
 };
 Cell.propTypes = {
   t: PropTypes.func,
@@ -313,4 +318,5 @@ Cell.propTypes = {
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onKeyDown: PropTypes.func,
+  selectCellContent: PropTypes.func,
 };

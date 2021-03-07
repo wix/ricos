@@ -175,8 +175,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             10,
             10
