@@ -6,7 +6,6 @@ import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
 import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
-import { debounce } from 'lodash';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -54,7 +53,7 @@ export default class InnerFullscreen extends Component {
     }
   };
 
-  onWindowResize = debounce(() => this.forceUpdate(), 100);
+  onWindowResize = () => this.forceUpdate();
 
   onFullscreenChange = () => this.setState({ isInFullscreen: !!fscreen.fullscreenElement });
 
@@ -175,7 +174,7 @@ export default class InnerFullscreen extends Component {
     let width = document.documentElement.clientWidth;
     let height = document.documentElement.clientHeight;
     if (container) {
-      width = isInFullscreen || isMobile ? container?.width : container?.width - 16;
+      width = isInFullscreen || isMobile ? container?.width : container?.width - 18;
       height = isInFullscreen || isMobile ? container.height : container.height - 70;
     }
     return { width, height };
