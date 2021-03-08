@@ -1,5 +1,5 @@
 import { Node_Type, RichContent, VideoSource } from 'ricos-schema';
-import { RicosContent } from '../../..';
+import { DraftContent } from '../../..';
 import { getParagraphNode } from '../../draft/toDraft/decorationParsers';
 import {
   parseGiphy,
@@ -20,7 +20,7 @@ interface PlainTextOptions {
 }
 
 export const toPlainText = async (
-  content: RichContent | RicosContent,
+  content: RichContent | DraftContent,
   options?: PlainTextOptions
 ): Promise<string> => {
   const ricosContent = RichContent.fromJSON(ensureRicosContent(content));

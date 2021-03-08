@@ -36,7 +36,7 @@ import {
   Version,
   HTML_TYPE,
   GlobalContext,
-  RicosContent,
+  DraftContent,
   RichContentTheme,
   Helpers,
   TranslationFunction,
@@ -109,7 +109,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
   editorKey?: string;
   editorState?: EditorState;
-  initialState?: RicosContent;
+  initialState?: DraftContent;
   theme?: RichContentTheme;
   isMobile?: boolean;
   helpers?: Helpers;

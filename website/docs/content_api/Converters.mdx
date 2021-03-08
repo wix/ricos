@@ -1,0 +1,53 @@
+---
+id: converters
+title: Content Converters
+sidebar_label: Content Converters
+---
+
+## Draft.js
+
+Ricos is in the preparation phase of migrating from a [draft-js](https://draftjs.org) based content to our new [Ricos](https://github.com/wix/ricos/tree/master/packages/ricos-schema/web) schema. To support this we provide conversion functions to & from draft.
+
+```tsx
+fromDraft: (content: DraftContent) => RichContent;
+toDraft: (content: RichContent) => DraftContent;
+```
+
+### Example
+
+```tsx
+import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+import ricosContent from './ricosCotnent.json';
+
+const draftContent: DraftContent = toDraft(ricosContent);
+
+const onChange = (content: DraftContent) => publishContent(fromDraft(content));
+
+<RicosEditor content={draftContent} onChange={onChange} />;
+```
+
+## Plain Text
+
+Ricos is a rich content editor
+
+```tsx
+fromDraft: (content: DraftContent) => RichContent;
+toDraft: (content: RichContent) => DraftContent;
+```
+
+### Example
+
+```tsx
+import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+import ricosContent from './ricosCotnent.json';
+
+const draftContent: DraftContent = toDraft(ricosContent);
+
+const onChange = (content: DraftContent) => publishContent(fromDraft(content));
+
+<RicosEditor content={draftContent} onChange={onChange} />;
+```

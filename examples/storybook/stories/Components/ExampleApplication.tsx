@@ -5,10 +5,10 @@ import ViewerWrapper from './ViewerWrapper';
 import editorSourceCode from '!!raw-loader!../Components/EditorWrapper';
 import viewerSourceCode from '!!raw-loader!../Components/ViewerWrapper';
 import styles from '../Components/styles.scss';
-import { RicosContent, RicosTheme } from 'ricos-editor';
+import { DraftContent, RicosTheme } from 'ricos-editor';
 
 const ExampleApplication: FunctionComponent<{
-  initialState?: RicosContent;
+  initialState?: DraftContent;
   theme?: RicosTheme;
 }> = ({ initialState, theme }) => {
   const [content, setContent] = useState(initialState);

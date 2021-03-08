@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
+import { DraftContent, RicosViewer } from 'ricos-viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
@@ -26,7 +26,7 @@ function getPlugins() {
   ];
 }
 
-const MediaViewer: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const MediaViewer: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosViewer plugins={getPlugins()} content={content} />
 );
 
