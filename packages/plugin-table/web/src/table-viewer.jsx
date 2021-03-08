@@ -83,6 +83,7 @@ class TableViewer extends Component {
       selected = {},
       disableSelectedStyle,
       t,
+      selectCellContent,
     } = this.props;
     return (
       <CellRenderer
@@ -97,6 +98,7 @@ class TableViewer extends Component {
         isMobile={isMobile}
         disableSelectedStyle={disableSelectedStyle}
         t={t}
+        selectCellContent={selectCellContent}
       />
     );
   };
@@ -161,6 +163,7 @@ TableViewer.propTypes = {
   onPaste: PropTypes.func,
   tableOverflowWidth: PropTypes.number,
   rowsToUpdate: PropTypes.array,
+  selectCellContent: PropTypes.func,
 };
 
 export default TableViewer;

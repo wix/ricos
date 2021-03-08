@@ -16,9 +16,18 @@
     Click to see more.
   </summary>
 </details>
+
+### :bug: Bug Fix
+- `headings`
+  - [#2278](https://github.com/wix-incubator/rich-content/pull/2278) triple click display the right heading type
 <hr/>
 
-## 8.25.3 (March 4, 2021)
+## 8.26.0 (March 8, 2021)
+### :rocket: New Feature
+- `ricos-content`
+  - [#2261](https://github.com/wix-incubator/rich-content/pull/2261) `fromHtml` and `toHtml` utility functions convert between rich content and HTML
+
+## 8.25.4 (March 5, 2021)
 ### :bug: Bug Fix
 - `fullscreen`
   - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues
