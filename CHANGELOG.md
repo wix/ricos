@@ -15,13 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.26.2 (March 8, 2021)
 ### :bug: Bug Fix
 - `viewer`
   - [#2282](https://github.com/wix-incubator/rich-content/pull/2282) `customStyles` unordered lists - now influenced by paragraph styles
-
-</details>
-<hr/>
 
 ## 8.26.1 (March 8, 2021)
 ### :bug: Bug Fix
