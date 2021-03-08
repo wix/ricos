@@ -127,10 +127,7 @@
 /*! rtl:ignore */
 .orderedList, .unorderedList {
   /*! rtl:ignore */
-  > * {
-    /*! rtl:ignore */
-    @include ricosTypography('p', true);
-  }
+  @include ricosTypography('p', true);
 }
 
 .unorderedList.center{
