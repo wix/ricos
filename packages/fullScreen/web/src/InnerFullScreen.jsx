@@ -181,7 +181,7 @@ export default class InnerFullscreen extends Component {
     let width = document.documentElement.clientWidth;
     let height = document.documentElement.clientHeight;
     if (container) {
-      width = isInFullscreen || isMobile ? container?.width : container?.width - 18;
+      width = isInFullscreen || isMobile ? container?.width : container?.width - 16;
       height = isInFullscreen || isMobile ? container.height : container.height - 70;
     }
     return { width, height };
@@ -195,40 +195,42 @@ export default class InnerFullscreen extends Component {
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalView);
 
     return (
-      <div
-        style={{ background: backgroundColor, ...topMargin }}
-        dir="ltr"
-        data-hook={'fullscreen-root'}
-        className={isInFullscreen || isMobile ? styles.fullscreen_mode : styles.expand_mode}
-        ref={this.containerRef}
-      >
+      <>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {this.renderCloseButton()}
-        {!isMobile && this.renderFullscreenToggleButton()}
-        <ProGallery
-          items={this.items}
-          currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
-          eventsListener={this.handleGalleryEvents}
-          resizeMediaUrl={fullscreenResizeMediaUrl}
-          container={{ width, height }}
-          styles={{
-            ...layouts[5],
-            galleryLayout: 5,
-            cubeType: 'fit',
-            scrollSnap: true,
-            videoPlay: 'auto',
-            allowSocial: false,
-            loveButton: false,
-            allowTitle: true,
-            defaultShowInfoExpand: 1,
-            showArrows: !isMobile,
-            arrowsPosition,
-            slideshowInfoSize,
-          }}
-          customSlideshowInfoRenderer={this.infoElement}
-          customNavArrowsRenderer={this.customArrowRenderer}
-        />
-      </div>
+        <div
+          style={{ background: backgroundColor, ...topMargin }}
+          dir="ltr"
+          data-hook={'fullscreen-root'}
+          className={isInFullscreen || isMobile ? styles.fullscreen_mode : styles.expand_mode}
+          ref={this.containerRef}
+        >
+          {this.renderCloseButton()}
+          {!isMobile && this.renderFullscreenToggleButton()}
+          <ProGallery
+            items={this.items}
+            currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
+            eventsListener={this.handleGalleryEvents}
+            resizeMediaUrl={fullscreenResizeMediaUrl}
+            container={{ width, height }}
+            styles={{
+              ...layouts[5],
+              galleryLayout: 5,
+              cubeType: 'fit',
+              scrollSnap: true,
+              videoPlay: 'auto',
+              allowSocial: false,
+              loveButton: false,
+              allowTitle: true,
+              defaultShowInfoExpand: 1,
+              showArrows: !isMobile,
+              arrowsPosition,
+              slideshowInfoSize,
+            }}
+            customSlideshowInfoRenderer={this.infoElement}
+            customNavArrowsRenderer={this.customArrowRenderer}
+          />
+        </div>
+      </>
     );
   }
 }
