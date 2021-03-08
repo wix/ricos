@@ -127,7 +127,10 @@
 /*! rtl:ignore */
 .orderedList, .unorderedList {
   /*! rtl:ignore */
-  @include ricosTypography('p', true);
+  &::before {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
   > * {
     /*! rtl:ignore */
     @include ricosTypography('p', true);
