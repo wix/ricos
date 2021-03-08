@@ -129,6 +129,10 @@ describe('plugins', () => {
         cy.switchToHebrew();
       });
 
+      afterEach(() => {
+        cy.switchToEnglish();
+      });
+
       it('expand image on full screen', function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
