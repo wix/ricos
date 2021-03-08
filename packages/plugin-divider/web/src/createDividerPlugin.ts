@@ -7,9 +7,7 @@ import DividerComponent from './components/divider-component';
 import createToolbar from './toolbar/createToolbar';
 import Styles from '../statics/styles/default-styles.scss';
 
-const createDividerPlugin: CreatePluginFunction<DividerPluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createDividerPlugin: CreatePluginFunction<DividerPluginEditorConfig> = config => {
   const type = DIVIDER_TYPE;
   const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
 
@@ -34,6 +32,6 @@ const createDividerPlugin: CreatePluginFunction<DividerPluginEditorConfig> & {
   });
 };
 
-createDividerPlugin.functionName = 'createDividerPlugin';
+createDividerPlugin.functionName = DIVIDER_TYPE;
 
 export { createDividerPlugin, DIVIDER_TYPE };

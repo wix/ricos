@@ -4,9 +4,7 @@ import { FILE_UPLOAD_TYPE, FilePluginEditorConfig } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createFileUploadPlugin: CreatePluginFunction<FilePluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createFileUploadPlugin: CreatePluginFunction<FilePluginEditorConfig> = config => {
   const type = FILE_UPLOAD_TYPE;
   const { helpers, t, [type]: settings = {}, ...rest } = config;
 
@@ -26,6 +24,6 @@ const createFileUploadPlugin: CreatePluginFunction<FilePluginEditorConfig> & {
   });
 };
 
-createFileUploadPlugin.functionName = 'createFileUploadPlugin';
+createFileUploadPlugin.functionName = FILE_UPLOAD_TYPE;
 
 export { createFileUploadPlugin };

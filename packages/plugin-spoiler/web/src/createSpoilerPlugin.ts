@@ -5,9 +5,7 @@ import { styleFnFilter } from './utils/spoilerUtilsFn';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 import { DEFAULTS } from './defaults';
 
-const createSpoilerPlugin: CreatePluginFunction<SpoilerPluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createSpoilerPlugin: CreatePluginFunction<SpoilerPluginEditorConfig> = config => {
   const { helpers, t, [SPOILER_TYPE]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
@@ -24,6 +22,6 @@ const createSpoilerPlugin: CreatePluginFunction<SpoilerPluginEditorConfig> & {
   });
 };
 
-createSpoilerPlugin.functionName = 'createSpoilerPlugin';
+createSpoilerPlugin.functionName = SPOILER_TYPE;
 
 export { createSpoilerPlugin };

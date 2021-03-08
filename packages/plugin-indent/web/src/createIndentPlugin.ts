@@ -4,9 +4,7 @@ import { DEFAULTS } from './defaults';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createIndentPlugin: CreatePluginFunction<IndentPluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createIndentPlugin: CreatePluginFunction<IndentPluginEditorConfig> = config => {
   const { helpers, t, [INDENT_TYPE]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
@@ -21,6 +19,6 @@ const createIndentPlugin: CreatePluginFunction<IndentPluginEditorConfig> & {
   });
 };
 
-createIndentPlugin.functionName = 'createIndentPlugin';
+createIndentPlugin.functionName = INDENT_TYPE;
 
 export { createIndentPlugin };

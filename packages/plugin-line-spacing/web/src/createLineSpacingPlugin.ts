@@ -4,9 +4,7 @@ import createLineSpacingToolbar from './toolbar/createToolbar';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 import { DEFAULTS } from './defaults';
 
-const createLineSpacingPlugin: CreatePluginFunction<LineSpacingPluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createLineSpacingPlugin: CreatePluginFunction<LineSpacingPluginEditorConfig> = config => {
   const type = LINE_SPACING_TYPE;
   const { theme, isMobile, t, [type]: settings = {}, ...rest } = config;
 
@@ -24,6 +22,6 @@ const createLineSpacingPlugin: CreatePluginFunction<LineSpacingPluginEditorConfi
   });
 };
 
-createLineSpacingPlugin.functionName = 'createLineSpacingPlugin';
+createLineSpacingPlugin.functionName = LINE_SPACING_TYPE;
 
 export { createLineSpacingPlugin };

@@ -9,9 +9,7 @@ import { IMAGE_TYPE, IMAGE_TYPE_LEGACY, ImagePluginEditorConfig } from './types'
 import { CreatePluginFunction } from 'wix-rich-content-common';
 import { isNumber } from 'lodash';
 
-const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config => {
   const type = IMAGE_TYPE;
   const {
     helpers,
@@ -93,6 +91,6 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> & {
   });
 };
 
-createImagePlugin.functionName = 'createImagePlugin';
+createImagePlugin.functionName = IMAGE_TYPE;
 
 export { createImagePlugin };

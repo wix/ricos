@@ -5,9 +5,7 @@ import { DEFAULT_BACKGROUND_STYLE_FN_DRAFT, DEFAULTS } from './constants';
 import { isTextHighlight, styleFnFilter } from './text-decorations-utils';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createTextHighlightPlugin: CreatePluginFunction<TextHighlightPluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createTextHighlightPlugin: CreatePluginFunction<TextHighlightPluginEditorConfig> = config => {
   const type = TEXT_HIGHLIGHT_TYPE;
   const { theme, [type]: settings = {}, ...rest } = config;
   const toolbar = createTextHighlightToolbar(config);
@@ -24,6 +22,6 @@ const createTextHighlightPlugin: CreatePluginFunction<TextHighlightPluginEditorC
   });
 };
 
-createTextHighlightPlugin.functionName = 'createTextHighlightPlugin';
+createTextHighlightPlugin.functionName = TEXT_HIGHLIGHT_TYPE;
 
 export { createTextHighlightPlugin };

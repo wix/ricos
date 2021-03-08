@@ -5,26 +5,43 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
+import {
+  LINK_PREVIEW_TYPE,
+  TABLE_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  INDENT_TYPE,
+  LINE_SPACING_TYPE,
+  LINK_TYPE,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GIPHY_TYPE,
+  EMOJI_TYPE,
+  FILE_UPLOAD_TYPE,
+  DIVIDER_TYPE,
+  CODE_BLOCK_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
+  SPOILER_TYPE,
+} from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
 
 const SupportedTablePlugins = [
-  'createTextColorPlugin',
-  'createTextHighlightPlugin',
-  'createIndentPlugin',
-  'createLineSpacingPlugin',
-  'createLinkPlugin',
-  'createImagePlugin',
-  'createVideoPlugin',
-  'createGiphyPlugin',
-  'createEmojiPlugin',
-  'createFileUploadPlugin',
-  'createDividerPlugin',
-  'createCodeBlockPlugin',
-  'createUnsupportedBlocksPlugin',
-  'createSpoilerPlugin',
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  INDENT_TYPE,
+  LINE_SPACING_TYPE,
+  LINK_TYPE,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GIPHY_TYPE,
+  EMOJI_TYPE,
+  FILE_UPLOAD_TYPE,
+  DIVIDER_TYPE,
+  CODE_BLOCK_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
+  SPOILER_TYPE,
 ];
 
 class InnerRCE extends PureComponent {

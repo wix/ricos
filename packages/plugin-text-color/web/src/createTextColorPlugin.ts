@@ -5,9 +5,7 @@ import { DEFAULT_FOREGROUND_STYLE_FN_DRAFT, DEFAULTS } from './constants';
 import { isTextColor, styleFnFilter } from './text-decorations-utils';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createTextColorPlugin: CreatePluginFunction<TextColorPluginEditorConfig> & {
-  functionName?: string;
-} = config => {
+const createTextColorPlugin: CreatePluginFunction<TextColorPluginEditorConfig> = config => {
   const type = TEXT_COLOR_TYPE;
   const { theme, [type]: settings = {}, ...rest } = config;
   const toolbar = createTextColorToolbar(config);
@@ -24,6 +22,6 @@ const createTextColorPlugin: CreatePluginFunction<TextColorPluginEditorConfig> &
   });
 };
 
-createTextColorPlugin.functionName = 'createTextColorPlugin';
+createTextColorPlugin.functionName = TEXT_COLOR_TYPE;
 
 export { createTextColorPlugin };
