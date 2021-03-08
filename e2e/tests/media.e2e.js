@@ -125,15 +125,15 @@ describe('plugins', () => {
 
     context('image full screen in hebrew', () => {
       beforeEach('load editor', () => {
-        cy.loadRicosEditorAndViewer('images');
         cy.switchToHebrew();
+        cy.loadRicosEditorAndViewer('images');
       });
 
       afterEach(() => {
         cy.switchToEnglish();
       });
 
-      it('expand image on full screen', function() {
+      it('expand image on full screen in hebrew', function() {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
