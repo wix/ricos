@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 </details>
+
+### :bug: Bug Fix
+- `headings`
+  - [#2278](https://github.com/wix-incubator/rich-content/pull/2278) triple click display the right heading type
 <hr/>
 
 ## 8.26.0 (March 8, 2021)
