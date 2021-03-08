@@ -80,7 +80,7 @@ class DragAndDropSection extends React.Component {
       visibility: this.isActive(index) && (selectAll ? horizontal : !selectAll) && 'visible',
     };
     if (horizontal) {
-      selectPreviewStyle.height = size - 20;
+      selectPreviewStyle.height = size ? size - 20 : 0;
       this.isActive(index + 1) && (selectPreviewStyle.borderRight = 'none');
       this.isActive(index - 1) && (selectPreviewStyle.borderLeft = 'none');
     } else {
