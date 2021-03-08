@@ -9,7 +9,7 @@ import { IMAGE_TYPE, IMAGE_TYPE_LEGACY, ImagePluginEditorConfig } from './types'
 import { CreatePluginFunction } from 'wix-rich-content-common';
 import { isNumber } from 'lodash';
 
-const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config => {
+function createImagePlugin(config) {
   const type = IMAGE_TYPE;
   const {
     helpers,
@@ -89,6 +89,6 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     spoilerWrapper: settings?.spoiler && spoilerWrapper,
     ...rest,
   });
-};
+}
 
 export { createImagePlugin };
