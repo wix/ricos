@@ -4,7 +4,9 @@ import { GIPHY_TYPE, GiphyPluginEditorConfig } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createGiphyPlugin: CreatePluginFunction<GiphyPluginEditorConfig> = config => {
+const createGiphyPlugin: CreatePluginFunction<GiphyPluginEditorConfig> & {
+  functionName?: string;
+} = config => {
   const type = GIPHY_TYPE;
   const { helpers, t, [type]: settings = {}, isMobile, ...rest } = config;
 
@@ -25,5 +27,7 @@ const createGiphyPlugin: CreatePluginFunction<GiphyPluginEditorConfig> = config 
     ...rest,
   });
 };
+
+createGiphyPlugin.functionName = 'createGiphyPlugin';
 
 export { createGiphyPlugin };

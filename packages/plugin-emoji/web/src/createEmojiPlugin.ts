@@ -5,7 +5,9 @@ import { EMOJI_TYPE, EmojiPluginEditorConfig } from './types';
 import { createEmojiDecorator } from './createEmojiDecorator';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createEmojiPlugin: CreatePluginFunction<EmojiPluginEditorConfig> = config => {
+const createEmojiPlugin: CreatePluginFunction<EmojiPluginEditorConfig> & {
+  functionName?: string;
+} = config => {
   const type = EMOJI_TYPE;
   const {
     helpers,
@@ -45,5 +47,7 @@ const createEmojiPlugin: CreatePluginFunction<EmojiPluginEditorConfig> = config 
     { decorators: createEmojiDecorator() }
   );
 };
+
+createEmojiPlugin.functionName = 'createEmojiPlugin';
 
 export { createEmojiPlugin, EMOJI_TYPE };

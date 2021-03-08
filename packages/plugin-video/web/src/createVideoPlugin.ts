@@ -4,7 +4,9 @@ import { VIDEO_TYPE, VIDEO_TYPE_LEGACY, VideoPluginEditorConfig } from './types'
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config => {
+const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> & {
+  functionName?: string;
+} = config => {
   const {
     helpers,
     t,
@@ -35,5 +37,7 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
     ...rest,
   });
 };
+
+createVideoPlugin.functionName = 'createVideoPlugin';
 
 export { createVideoPlugin };

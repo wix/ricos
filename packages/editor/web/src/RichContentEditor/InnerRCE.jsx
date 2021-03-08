@@ -10,12 +10,29 @@ import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
 
+const SupportedTablePlugins = [
+  'createTextColorPlugin',
+  'createTextHighlightPlugin',
+  'createIndentPlugin',
+  'createLineSpacingPlugin',
+  'createLinkPlugin',
+  'createImagePlugin',
+  'createVideoPlugin',
+  'createGiphyPlugin',
+  'createEmojiPlugin',
+  'createFileUploadPlugin',
+  'createDividerPlugin',
+  'createCodeBlockPlugin',
+  'createUnsupportedBlocksPlugin',
+  'createSpoilerPlugin',
+];
+
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editing } = props;
+    const { config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
-    this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.plugins = this.getPlugins();
     this.state = {
       showToolbars: editing || false,
     };
@@ -30,6 +47,20 @@ class InnerRCE extends PureComponent {
       this.handleAtomicPluginsBorders(true);
     }
   }
+
+  getPlugins = () => {
+    const { config, innerRCERenderedIn, plugins } = this.props;
+    let pluginsList;
+    if (config[innerRCERenderedIn].innerRCEPlugins) {
+      pluginsList = config[innerRCERenderedIn].innerRCEPlugins;
+    } else {
+      pluginsList = plugins;
+    }
+    const innerRCEPlugins = pluginsList.filter(plugin =>
+      SupportedTablePlugins.includes(plugin.functionName)
+    );
+    return innerRCEPlugins;
+  };
 
   cleanConfig = config => {
     let clearConfig = config;

@@ -25,7 +25,9 @@ type LinkifyData = {
   endIndex: number;
 };
 
-const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config => {
+const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> & {
+  functionName?: string;
+} = config => {
   const type = LINK_TYPE;
   const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
   const targetBlank = anchorTarget === '_blank';
@@ -178,5 +180,7 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
     { decorators, handleBeforeInput, handleReturn, onChange }
   );
 };
+
+createLinkPlugin.functionName = 'createLinkPlugin';
 
 export { createLinkPlugin };

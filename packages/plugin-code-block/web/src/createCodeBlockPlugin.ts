@@ -42,7 +42,9 @@ const createUnderlyingPlugin = (/*{ theme }*/): UnderlyingPlugin => ({
   // decorators: [new PrismDecorator(theme)],
 });
 
-const createCodeBlockPlugin: CreatePluginFunction<CodeBlockPluginEditorConfig> = config => {
+const createCodeBlockPlugin: CreatePluginFunction<CodeBlockPluginEditorConfig> & {
+  functionName?: string;
+} = config => {
   const type = CODE_BLOCK_TYPE;
   const {
     helpers,
@@ -79,5 +81,7 @@ const createCodeBlockPlugin: CreatePluginFunction<CodeBlockPluginEditorConfig> =
     plugin
   );
 };
+
+createCodeBlockPlugin.functionName = 'createCodeBlockPlugin';
 
 export { createCodeBlockPlugin };
