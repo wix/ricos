@@ -20,6 +20,8 @@
 ### :bug: Bug Fix
 - `headings`
   - [#2278](https://github.com/wix-incubator/rich-content/pull/2278) triple click display the right heading type
+- `viewer`
+  - [#2281](https://github.com/wix-incubator/rich-content/pull/2281) `customStyles` paragraph styles influence on ordered lists
 <hr/>
 
 ## 8.26.0 (March 8, 2021)
