@@ -30,11 +30,35 @@ const onChange = (content: DraftContent) => publishContent(fromDraft(content));
 
 ## Plain Text
 
-Ricos is a rich content editor
+Ricos is a rich text & rich content editor. The following functions allow converting between plain text and rich content.
+
+### Plain text to rich content
 
 ```tsx
-fromDraft: (content: DraftContent) => RichContent;
-toDraft: (content: RichContent) => DraftContent;
+fromPlainText: (text: string) => RichContent;
+toPlainText: (content: RichContent) => string;
+```
+
+### Example
+
+```tsx
+import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+import ricosContent from './ricosCotnent.json';
+
+const draftContent: DraftContent = toDraft(ricosContent);
+
+const onChange = (content: DraftContent) => publishContent(fromDraft(content));
+
+<RicosEditor content={draftContent} onChange={onChange} />;
+```
+
+### Plain text to rich content
+
+```tsx
+fromPlainText: (text: string) => RichContent;
+toPlainText: (content: RichContent) => string;
 ```
 
 ### Example
