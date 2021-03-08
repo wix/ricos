@@ -15,13 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.26.0 (March 8, 2021)
 ### :rocket: New Feature
 - `ricos-content`
   - [#2261](https://github.com/wix-incubator/rich-content/pull/2261) `fromHtml` and `toHtml` utility functions convert between rich content and HTML
-
-</details>
-<hr/>
 
 ## 8.25.4 (March 5, 2021)
 ### :bug: Bug Fix
