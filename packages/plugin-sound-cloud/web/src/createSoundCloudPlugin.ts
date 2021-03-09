@@ -25,4 +25,6 @@ const createSoundCloudPlugin: CreatePluginFunction<SoundCloudPluginEditorConfig>
   });
 };
 
+createSoundCloudPlugin.functionName = SOUND_CLOUD_TYPE;
+
 export { createSoundCloudPlugin };
