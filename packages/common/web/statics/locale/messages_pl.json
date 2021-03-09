@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Ustawienia",
 	"LinkPreview_Settings_Tooltip": "Ustawienia linku",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Aby sprzedawać usługi online i udostępnić je w poście, przejdź do App Market w swojej witrynie i zainstaluj Wix Bookings.",
-	"UnsupportedPlugin_message": "Dostęp do tej treści jest możliwy tylko w przeglądarce",
+	"UnsupportedPlugin_message": "Ten blok treści można edytować tylko z poziomu przeglądarki",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Usuń tabelę",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Ankieta (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "Dodaj fragment kodu",
