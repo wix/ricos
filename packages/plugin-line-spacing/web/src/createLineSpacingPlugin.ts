@@ -22,4 +22,6 @@ const createLineSpacingPlugin: CreatePluginFunction<LineSpacingPluginEditorConfi
   });
 };
 
+createLineSpacingPlugin.functionName = LINE_SPACING_TYPE;
+
 export { createLineSpacingPlugin };

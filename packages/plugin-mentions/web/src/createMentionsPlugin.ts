@@ -72,4 +72,6 @@ const createExternalMentionsPlugin: CreatePluginFunction<MentionsPluginEditorCon
   );
 };
 
+createExternalMentionsPlugin.functionName = MENTION_TYPE;
+
 export { createExternalMentionsPlugin };
