@@ -22,6 +22,9 @@
 - `plugin-menu`
   - [#2285](https://github.com/wix/ricos/pull/2285) new advanced section
 
+### :rocket: Polish
+- `ricos-viewer`
+	- performance improvment for non-english locale 
 </details>
 <hr/>
 
