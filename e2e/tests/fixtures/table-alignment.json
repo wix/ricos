@@ -36,10 +36,10 @@
   ],
   "entityMap": {
     "0": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -315,8 +315,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             10,
             10,

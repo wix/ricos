@@ -135,6 +135,26 @@ describe('plugins', () => {
       });
     });
 
+    context('image full screen in hebrew', () => {
+      beforeEach('load editor', () => {
+        cy.switchToHebrew();
+        cy.loadRicosEditorAndViewer('images');
+      });
+
+      afterEach(() => {
+        cy.switchToEnglish();
+      });
+
+      it('expand image on full screen in hebrew', function() {
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+          .parent()
+          .click();
+        cy.loadOutOfViewImagesInGallery();
+        cy.waitForGalleryImagesToLoad();
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+      });
+    });
+
     context('innerRCE images full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('inner-rce-images', usePlugins(plugins.all))

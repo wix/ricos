@@ -2,7 +2,7 @@ const imageType = 'wix-draft-plugin-image';
 const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
 const accordionType = 'wix-rich-content-plugin-accordion';
-const tableType = 'table';
+const tableType = 'wix-rich-content-plugin-table';
 
 function imageEntityToGallery(data, index) {
   const src = data.src;

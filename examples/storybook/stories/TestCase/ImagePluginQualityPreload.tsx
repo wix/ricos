@@ -12,6 +12,7 @@ const ImagePluginStory = () => {
 
   const experiments = parseExperiments({
     ['specs.ricos.useQualityPreload']: 'true',
+    ['specs.ricos.useSrcSet']: 'true',
   });
   console.log({ experiments });
   const _rcProps = {

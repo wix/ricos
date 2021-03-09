@@ -42,11 +42,13 @@
 }
 
 .nav_arrow_left {
-  right: 12px;
+  position: fixed;
+  left: 16px;
 }
 
 .nav_arrow_right {
-  left: 12px;
+  position: fixed;
+  right: 16px;
 }
 
 .close {
