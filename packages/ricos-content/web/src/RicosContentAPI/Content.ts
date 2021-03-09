@@ -1,5 +1,4 @@
 import { isString } from 'lodash';
-import { generateKey } from 'wix-rich-content-common';
 import { RichContent } from 'ricos-schema';
 import { ContentAPI } from './ContentAPI';
 import { RicosContentBuilder } from './ContentBuilder';
@@ -19,6 +18,7 @@ import {
 } from '../types';
 
 export type ContentAPIConfig = {
+  generateKey: () => string;
   convertors: {
     toPlainText: PlainTextConvertor | string;
     toDraft: DraftContentConvertor | string;
@@ -35,7 +35,7 @@ const ProxyConvertors = {
 // content API IoC container
 // initializes ContentAPI with dependencies: builder, extractor, convertors
 export function setupContentAPI(config: ContentAPIConfig) {
-  const builder = new RicosContentBuilder(generateKey);
+  const builder = new RicosContentBuilder(config.generateKey);
   const extractor = new RicosContentExtractor();
   const convertors = Object.entries(config.convertors).reduce((convertorList, [key, value]) => {
     if (isString(value)) {
