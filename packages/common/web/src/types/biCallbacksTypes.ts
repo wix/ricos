@@ -28,7 +28,7 @@ export interface BICallbacks {
       | undefined,
     version: string
   ): void;
-  onViewerAction?(pluginId: string, actionName: string, value: string): void;
+  onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
   onViewerLoaded?(isPreview: boolean, version: string): void;
   onOpenEditorSuccess?(version: string): void;
   onPluginChange?(
@@ -54,3 +54,5 @@ export interface BICallbacks {
     version: string
   ): void;
 }
+
+type ActionName = 'expand_gallery' | 'expand_image' | 'Click';

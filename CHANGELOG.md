@@ -15,8 +15,25 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `plugin-link`
+  - [#2262](https://github.com/wix/ricos/pull/2262) `onViewerAction` callback hook now supports link click events
+
 </details>
 <hr/>
+
+## 8.26.2 (March 8, 2021)
+### :bug: Bug Fix
+- `viewer`
+  - [#2282](https://github.com/wix-incubator/rich-content/pull/2282) `customStyles` unordered lists - now influenced by paragraph styles
+
+## 8.26.1 (March 8, 2021)
+### :bug: Bug Fix
+- `headings`
+  - [#2278](https://github.com/wix-incubator/rich-content/pull/2278) triple click display the right heading type
+- `viewer`
+  - [#2281](https://github.com/wix-incubator/rich-content/pull/2281) `customStyles` paragraph styles influence on ordered lists
 
 ## 8.26.0 (March 8, 2021)
 ### :rocket: New Feature
