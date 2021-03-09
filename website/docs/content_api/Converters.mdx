@@ -13,7 +13,7 @@ fromDraft: (content: DraftContent) => RichContent;
 toDraft: (content: RichContent) => DraftContent;
 ```
 
-### Example
+#### Example
 
 ```tsx
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
@@ -36,42 +36,80 @@ Ricos is a rich text & rich content editor. The following functions allow conver
 
 ```tsx
 fromPlainText: (text: string) => RichContent;
+```
+
+#### Example
+
+```tsx
+import { toDraft } from 'ricos-content/libs/migrateSchema';
+import { fromPlainText } from 'ricos-content/libs/fromPlainText';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+
+const TEXT = 'Hello there!';
+
+const content: RichContent = fromPlainText(TEXT);
+const draftContent: DraftContent = toDraft(content);
+
+<RicosEditor content={draftContent} />;
+```
+
+### Rich content to plain text
+
+```tsx
+toPlainText: (content: RichContent, options?: PlainTextOptions) => Promise<string>;
+```
+
+#### Example
+
+```tsx
+import { toPlainText } from 'ricos-content/libs/toPlainText';
+import ricosContent from './ricosCotnent.json';
+
+const text: string = toPlainText(ricosContent);
+
+console.log(text);
+```
+
+## HTML
+
+The following functions provide a utility for converting rich content to and from HTML.
+
+### HTML to rich content
+
+```tsx
+fromHtml: (html: string) => RichContent;
+```
+
+#### Example
+
+```tsx
+import { toDraft } from 'ricos-content/libs/migrateSchema';
+import { fromPlainText } from 'ricos-content/libs/fromPlainText';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+
+const TEXT = 'Hello there!';
+
+const content: RichContent = fromPlainText(TEXT);
+const draftContent: DraftContent = toDraft(content);
+
+<RicosEditor content={draftContent} />;
+```
+
+### Rich content to plain text
+
+```tsx
 toPlainText: (content: RichContent) => string;
 ```
 
-### Example
+#### Example
 
 ```tsx
-import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
-import { RichContent } from 'ricos-schema';
-import { RicosEditor, DraftContent } from 'ricos-editor';
+import { toPlainText } from 'ricos-content/libs/toPlainText';
 import ricosContent from './ricosCotnent.json';
 
-const draftContent: DraftContent = toDraft(ricosContent);
+const text: string = toPlainText(ricosContent);
 
-const onChange = (content: DraftContent) => publishContent(fromDraft(content));
-
-<RicosEditor content={draftContent} onChange={onChange} />;
-```
-
-### Plain text to rich content
-
-```tsx
-fromPlainText: (text: string) => RichContent;
-toPlainText: (content: RichContent) => string;
-```
-
-### Example
-
-```tsx
-import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
-import { RichContent } from 'ricos-schema';
-import { RicosEditor, DraftContent } from 'ricos-editor';
-import ricosContent from './ricosCotnent.json';
-
-const draftContent: DraftContent = toDraft(ricosContent);
-
-const onChange = (content: DraftContent) => publishContent(fromDraft(content));
-
-<RicosEditor content={draftContent} onChange={onChange} />;
+console.log(text);
 ```

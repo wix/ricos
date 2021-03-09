@@ -12,7 +12,6 @@ import {
   parseVerticalEmbed,
   parseVideo,
 } from './convertNodes';
-import { ensureRicosContent } from '../../draft/fromDraft/fromDraft';
 
 interface PlainTextOptions {
   urlShortener?: (url: string) => Promise<string>;
@@ -20,10 +19,10 @@ interface PlainTextOptions {
 }
 
 export const toPlainText = async (
-  content: RichContent | DraftContent,
+  content: RichContent,
   options?: PlainTextOptions
 ): Promise<string> => {
-  const ricosContent = RichContent.fromJSON(ensureRicosContent(content));
+  const ricosContent = RichContent.fromJSON(content);
   const { nodes } = ricosContent;
   let plainText = '';
 
