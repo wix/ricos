@@ -32,6 +32,7 @@ module.exports = {
           'plugins_api/LinkPreviewPlugin',
           'plugins_api/UnsupportedBlocksPlugin',
           'plugins_api/TablePlugin',
+          'plugins_api/HeadingsPlugin',
         ],
       },
       {
@@ -63,6 +64,7 @@ module.exports = {
       'dev/theming',
       'dev/release_instructions',
       'dev/testing',
+      'dev/maintenance',
     ],
   },
 };

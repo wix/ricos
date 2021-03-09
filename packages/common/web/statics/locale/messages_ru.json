@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Настройка",
 	"LinkPreview_Settings_Tooltip": "Настройка ссылки",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Чтобы продавать услуги онлайн и делиться ссылками на них в постах, перейдите в App Market и добавьте Wix Bookings.",
-	"UnsupportedPlugin_message": "Доступ к данным можно получить только через браузер",
+	"UnsupportedPlugin_message": "Этот блок контента можно редактировать только через браузер",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Удалить таблицу",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Опрос (пикс.)",
 	"TextCodeBlock_InsertButton_Tooltip": "Добавить сниппет кода",
