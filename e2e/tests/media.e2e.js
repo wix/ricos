@@ -5,7 +5,6 @@ import {
   PLUGIN_TOOLBAR_BUTTONS,
   GALLERY_SETTINGS,
   GALLERY_IMAGE_SETTINGS,
-  IMAGE_SETTINGS,
   GIPHY_PLUGIN,
   VIDEO_SETTINGS,
   SETTINGS_PANEL,
@@ -353,31 +352,15 @@ context('soundcloud', () => {
     cy.loadRicosEditorAndViewer('empty');
   });
 
-    //TODO: fix this flaky test
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('render upload modal', function() {
-      cy.openSoundCloudModal();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    //TODO: fix this flaky tests
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('add a soundcloud URL', function() {
-      cy.openSoundCloudModal();
-      cy.addSoundCloud().wait(500);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
-        .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
-        .wait(500);
-      cy.focusEditor()
-        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
-        .type('{uparrow}')
-        .type('Will this fix the flakiness?');
-      cy.waitForVideoToLoad();
-      cy.eyesCheckWindow(this.test.title);
-    });
+  //TODO: fix this flaky test
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('render upload modal', function() {
+    cy.openSoundCloudModal();
+    cy.eyesCheckWindow(this.test.title);
   });
 
   //TODO: fix this flaky tests
+  // eslint-disable-next-line mocha/no-skipped-tests
   it.skip('add a soundcloud URL', function() {
     cy.openSoundCloudModal();
     cy.addSoundCloud().wait(500);
@@ -391,6 +374,21 @@ context('soundcloud', () => {
     cy.waitForVideoToLoad();
     cy.eyesCheckWindow(this.test.title);
   });
+});
+
+//TODO: fix this flaky tests
+it.skip('add a soundcloud URL', function() {
+  cy.openSoundCloudModal();
+  cy.addSoundCloud().wait(500);
+  cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
+    .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
+    .wait(500);
+  cy.focusEditor()
+    .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+    .type('{uparrow}')
+    .type('Will this fix the flakiness?');
+  cy.waitForVideoToLoad();
+  cy.eyesCheckWindow(this.test.title);
 });
 
 context('giphy', () => {
