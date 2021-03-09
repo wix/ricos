@@ -19,7 +19,7 @@ export interface VideoPluginViewerConfig extends ViewerPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 export type VideoData = ComponentData & {
-  config: { disableDownload?: boolean };
+  disableDownload?: boolean;
 };
 export interface VideoSettingsProps {
   componentData: VideoData;

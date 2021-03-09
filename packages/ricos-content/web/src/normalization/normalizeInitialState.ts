@@ -8,7 +8,12 @@ import {
   VIDEO_TYPE_LEGACY,
   IMAGE_TYPE_LEGACY,
 } from '../consts';
-import { linkDataNormalizer, imageDataNormalizer, galleryDataNormalizer } from './dataNormalizers';
+import {
+  linkDataNormalizer,
+  imageDataNormalizer,
+  galleryDataNormalizer,
+  videoDataNormalizer,
+} from './dataNormalizers';
 import { ComponentData, RicosContent, NormalizeConfig, RicosEntity } from '../types';
 
 const dataNormalizers: {
@@ -22,6 +27,7 @@ const dataNormalizers: {
   [LINK_TYPE]: linkDataNormalizer,
   [IMAGE_TYPE]: imageDataNormalizer,
   [GALLERY_TYPE]: galleryDataNormalizer,
+  [VIDEO_TYPE]: videoDataNormalizer,
 };
 
 const normalizeComponentData = (
@@ -82,6 +88,7 @@ const entityTypeMap = {
     [LINK_TYPE]: LINK_TYPE,
     [IMAGE_TYPE]: IMAGE_TYPE,
     [GALLERY_TYPE]: GALLERY_TYPE,
+    [VIDEO_TYPE]: VIDEO_TYPE,
   },
 };
 
@@ -146,6 +153,8 @@ const convertAnchorToLinkToUndoOneAppFix = (newEntity: RicosEntity) => {
 
 export default (content: RicosContent, config: NormalizeConfig = {}): RicosContent => {
   const { blocks, entityMap, VERSION } = processContentState(cloneDeep(content), config);
+  // console.log('new entity:', normalizeEntityMap(entityMap, config, content.VERSION || '0.0.0'));
+
   return {
     blocks,
     entityMap: normalizeEntityMap(entityMap, config, content.VERSION || '0.0.0'),

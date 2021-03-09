@@ -76,11 +76,30 @@ class VideoViewer extends Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
+  disableDownloadProps = () => {
+    const { componentData, settings } = this.props;
+    const disableProps = {
+      config: {
+        file: {
+          attributes: {
+            controlsList: 'nodownload',
+          },
+        },
+      },
+    };
+    let disable = {};
+    if (componentData.disableDownload !== undefined) {
+      disable = componentData.disableDownload ? disableProps : {};
+    } else if (settings.disableDownload !== undefined) {
+      disable = settings.disableDownload ? disableProps : {};
+    }
+    return disable;
+  };
+
   render() {
-    const { theme, width, height, disabled, setComponentUrl, settings, componentData } = this.props;
+    const { theme, width, height, disabled, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
-    const disableDownload = settings.disableDownload || componentData.disableDownload;
     setComponentUrl?.(url);
     const props = {
       url,
@@ -89,15 +108,7 @@ class VideoViewer extends Component {
       width,
       height,
       key,
-      ...(disableDownload && {
-        config: {
-          file: {
-            attributes: {
-              controlsList: 'nodownload',
-            },
-          },
-        },
-      }),
+      ...this.disableDownloadProps(),
     };
 
     const isLoaded = this.props.isLoaded || this.state.isLoaded;

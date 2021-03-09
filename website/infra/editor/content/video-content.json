@@ -1,15 +1,6 @@
 {
     "blocks": [
       {
-        "key": "foo",
-        "text": "Video Without download example",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
         "key": "5qbo0",
         "text": " ",
         "type": "atomic",

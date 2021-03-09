@@ -9,6 +9,8 @@ import {
   processedInlineGalleryContentState,
   AnchorInTextContentState,
   AnchorInImageContentState,
+  videoInitialState,
+  videoFixedState,
 } from './Fixtures';
 import { RicosInlineStyleRange, RicosEntityRange, RicosContent, RicosContentBlock } from '../types';
 
@@ -745,6 +747,15 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(AnchorInImageContentState, {});
       expect(actual.entityMap['0'].data.config.link).toEqual({ anchor: 'cjvg0' });
       expect(actual.entityMap['1'].data.config.link).toEqual({ anchor: 'cjvg0' });
+    });
+  });
+
+  describe('Video normalizer', () => {
+    it('should add disableDownload prop to video componentData', () => {
+      const result = normalizeInitialState(videoInitialState, {
+        disableVideoDownload: true,
+      });
+      expect(result).toEqual(videoFixedState);
     });
   });
 });

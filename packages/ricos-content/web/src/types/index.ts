@@ -3,6 +3,7 @@ export type NormalizeConfig = {
   relValue?: string;
   disableInlineImages?: boolean;
   removeInvalidInlinePlugins?: boolean;
+  disableVideoDownload?: boolean;
 };
 
 export interface ComponentData {
