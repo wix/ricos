@@ -57,8 +57,20 @@ const draftContent: DraftContent = toDraft(content);
 ### Rich content to plain text
 
 ```tsx
-toPlainText: (content: RichContent, options?: PlainTextOptions) => Promise<string>;
+toPlainText: (content: RichContent, options?: {
+  urlShortener?: (url: string) => Promise<string>;
+  getVideoUrl?: (src: VideoSource) => Promise<string>;
+}) => Promise<string>;
 ```
+
+#### urlShortener
+
+This function will be called on image source URLs and can be used with URL shortener services.
+
+#### getVideoUrl
+
+Used to resolve a `VideoSource` object into an absolute URL.<br/>
+Defaults to `src => https://video.wixstatic.com/${src.pathname}`
 
 #### Example
 
@@ -73,7 +85,17 @@ console.log(text);
 
 ## HTML
 
-The following functions provide a utility for converting rich content to and from HTML.
+The following functions allow converting rich content to and from HTML.
+
+Supporting:
+
+- Headings
+- Bold
+- Italic
+- Links
+- Lists
+- Line break
+- Emojis
 
 ### HTML to rich content
 
@@ -84,14 +106,13 @@ fromHtml: (html: string) => RichContent;
 #### Example
 
 ```tsx
-import { toDraft } from 'ricos-content/libs/migrateSchema';
-import { fromPlainText } from 'ricos-content/libs/fromPlainText';
+import { fromHtml } from 'ricos-content/libs/htmlConverters';
 import { RichContent } from 'ricos-schema';
 import { RicosEditor, DraftContent } from 'ricos-editor';
 
-const TEXT = 'Hello there!';
+const HTML = '<p><strong>Bold</strong> <em>italic</em> <u>underline</u></p>';
 
-const content: RichContent = fromPlainText(TEXT);
+const content: RichContent = fromHtml(HTML);
 const draftContent: DraftContent = toDraft(content);
 
 <RicosEditor content={draftContent} />;
@@ -100,16 +121,16 @@ const draftContent: DraftContent = toDraft(content);
 ### Rich content to plain text
 
 ```tsx
-toPlainText: (content: RichContent) => string;
+toHtml: (content: RichContent) => string;
 ```
 
 #### Example
 
 ```tsx
-import { toPlainText } from 'ricos-content/libs/toPlainText';
+import { toHtml } from 'ricos-content/libs/htmlConverters';
 import ricosContent from './ricosCotnent.json';
 
-const text: string = toPlainText(ricosContent);
+const html: string = toHtml(ricosContent);
 
-console.log(text);
+document.body.innerHTML = html;
 ```
