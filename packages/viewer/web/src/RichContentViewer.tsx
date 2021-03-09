@@ -234,6 +234,7 @@ class RichContentViewer extends Component<
         decorators: this.props.decorators,
         config: this.props.config,
         t: this.props.t,
+        renderedInTable,
       };
 
       const output = convertToReact(
