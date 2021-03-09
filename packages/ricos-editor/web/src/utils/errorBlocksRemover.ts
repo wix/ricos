@@ -1,6 +1,6 @@
 import {
   RicosEntityMap,
-  RicosContent,
+  DraftContent,
   RicosContentBlock,
   GALLERY_TYPE,
   ACCORDION_TYPE,
@@ -60,7 +60,7 @@ const isErroredBlock = (block: RicosContentBlock, entityMap: RicosEntityMap): bo
   return type === 'atomic' && data.error;
 };
 
-export default function errorBlocksRemover(contentState: RicosContent): RicosContent {
+export default function errorBlocksRemover(contentState: DraftContent): DraftContent {
   const { entityMap } = contentState;
   const newBlocks: RicosContentBlock[] = contentState.blocks.filter(
     (block: RicosContentBlock) => !isErroredBlock(block, entityMap)

@@ -12,7 +12,7 @@ import {
   disableBrowserBackButton,
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
-import { RicosContent } from 'wix-rich-content-common';
+import { DraftContent } from 'wix-rich-content-common';
 import ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
 import { RichContent } from 'ricos-schema';
@@ -24,15 +24,15 @@ const Preview = React.lazy(() => import('../shared/preview/Preview'));
 
 interface ExampleAppProps {
   isMobile?: boolean;
-  onContentStateChange?: (contentState: RicosContent) => void;
-  contentState?: RicosContent;
-  injectedContent?: RicosContent;
+  onContentStateChange?: (contentState: DraftContent) => void;
+  contentState?: DraftContent;
+  injectedContent?: DraftContent;
   setLocale?: (locale: string) => void;
   locale?: string;
   allLocales?: string[];
   editorState?: EditorState;
   onEditorChange?: (editorState: EditorState) => void;
-  onRicosEditorChange?: (contentState: RicosContent) => void;
+  onRicosEditorChange?: (contentState: DraftContent) => void;
   localeResource?: Record<string, string>;
 }
 
@@ -109,7 +109,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
 
   saveContentStateToLocalStorage = debounce(contentState => set('contentState', contentState), 500);
 
-  loadContentStateFromLocalStorage = (): RicosContent => get('contentState');
+  loadContentStateFromLocalStorage = (): DraftContent => get('contentState');
 
   setContentStateEditor = (ref: ContentStateEditorType) => (this.contentStateEditor = ref);
 

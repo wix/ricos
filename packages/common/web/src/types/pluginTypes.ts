@@ -23,7 +23,7 @@ import {
   DraftEditorCommand,
 } from 'draft-js';
 import {
-  RicosContent,
+  DraftContent,
   PREVIEW,
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -272,5 +272,5 @@ export type InlineStyleMapper = Record<string, (children, { key }) => JSX.Elemen
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type InlineStyleMapperFunction<PluginConfig = Record<string, any>> = (
   config: LegacyViewerPluginConfig<PluginConfig>,
-  raw: RicosContent
+  raw: DraftContent
 ) => () => InlineStyleMapper;

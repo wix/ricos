@@ -1,4 +1,4 @@
-import { RicosContent } from '../src';
+import { DraftContent } from '../src';
 
 function formatPluginInfo(plugins: string[]) {
   if (!plugins || plugins.length === 0) {
@@ -16,7 +16,7 @@ export function reportDebuggingInfo({
 }: {
   version: string;
   plugins: string[];
-  getContent: () => RicosContent | undefined;
+  getContent: () => DraftContent | undefined;
   getConfig: () => unknown;
   reporter: string;
 }) {

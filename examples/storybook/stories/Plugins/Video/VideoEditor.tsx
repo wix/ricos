@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 
 const Editor: FunctionComponent<{
-  content?: RicosContent;
+  content?: DraftContent;
   handleFileUpload?: (files, updateEntity) => void;
 }> = ({ content, handleFileUpload }) => (
   <RicosEditor plugins={[pluginVideo({ handleFileUpload })]} content={content} />
