@@ -17,8 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
-  - `plugin-video`
-    - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) added new settings panel for custom videos with download toggle
+- `plugin-video`
+  - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) added new settings panel for custom videos with download toggle
 
 ### :rocket: New Feature
 - `plugin-link`
