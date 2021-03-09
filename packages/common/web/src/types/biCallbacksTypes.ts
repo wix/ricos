@@ -55,8 +55,4 @@ export interface BICallbacks {
   ): void;
 }
 
-export enum ActionName {
-  GalleryExpand = 'expand_gallery',
-  ImageExpand = 'expand_image',
-  Click = 'Click',
-}
+type ActionName = 'expand_gallery' | 'expand_image' | 'Click';
