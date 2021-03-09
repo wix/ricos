@@ -35,7 +35,6 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
-  VIDEO_TYPE,
   GlobalContext,
   RicosContent,
   RichContentTheme,
@@ -501,9 +500,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       anchorTarget,
       relValue,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
-      config,
     } = this.props;
-    const disableVideoDownload = config[VIDEO_TYPE]?.disableDownload;
 
     if (editorState) {
       return editorState;
@@ -514,7 +511,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         relValue,
         disableInlineImages,
         removeInvalidInlinePlugins,
-        disableVideoDownload,
       });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {

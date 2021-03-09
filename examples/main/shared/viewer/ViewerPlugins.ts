@@ -180,7 +180,6 @@ const config: RichContentViewerProps['config'] = {
   },
   [VIDEO_TYPE]: {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-    disableDownload: true,
   },
   uiSettings,
   [ACTION_BUTTON_TYPE]: {
