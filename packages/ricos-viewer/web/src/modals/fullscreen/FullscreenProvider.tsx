@@ -40,7 +40,7 @@ export default class FullscreenProvider extends Component<Props, State> {
     const imagesData = getImagesData(this.props.initialState || emptyState);
     if (imagesData.images.length > 0) {
       this.setState({ expandModeData: imagesData });
-      this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+      this.lazyLoadFullscreen();
     }
   }
 
@@ -48,20 +48,17 @@ export default class FullscreenProvider extends Component<Props, State> {
     if (nextProps.initialState !== this.props.initialState) {
       const imagesData = getImagesData(nextProps.initialState || emptyState);
       if (!this._FullscreenModal && imagesData.images.length > 0) {
-        this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+        this.lazyLoadFullscreen();
       }
       this.setState({ expandModeData: imagesData });
     }
   }
 
-  loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
-    const { locale, localeResource } = this.props.children.props;
-    if (locale === 'en' || localeResource) {
-      const FullscreenModal = React.lazy(() =>
-        import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
-      );
-      this._FullscreenModal = FullscreenModal;
-    }
+  lazyLoadFullscreen() {
+    const FullscreenModal = React.lazy(() =>
+      import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
+    );
+    this._FullscreenModal = FullscreenModal;
   }
 
   onClose = () => this.setState({ isExpanded: false });
