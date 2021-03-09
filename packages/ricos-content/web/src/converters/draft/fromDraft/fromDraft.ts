@@ -1,6 +1,6 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { cloneDeep, isEmpty } from 'lodash';
-import { RicosContent, RicosContentBlock } from '../../..';
+import { DraftContent, RicosContentBlock } from '../../..';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { genKey } from '../../generateRandomKey';
@@ -8,10 +8,10 @@ import { getTextNodes } from './getTextNodes';
 import { getEntity, parseBlockData } from './getRicosEntityData';
 import { createParagraphNode, initializeMetadata } from '../../nodeUtils';
 
-export const ensureRicosContent = (content: RichContent | RicosContent) =>
+export const ensureRicosContent = (content: RichContent | DraftContent) =>
   'blocks' in content ? fromDraft(content) : content;
 
-export const fromDraft = (draftJSON: RicosContent): RichContent => {
+export const fromDraft = (draftJSON: DraftContent): RichContent => {
   const { blocks, entityMap, VERSION: version } = cloneDeep(draftJSON);
   const nodes: Node[] = [];
 

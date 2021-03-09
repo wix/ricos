@@ -23,7 +23,9 @@ class ImageCounter extends PureComponent<Props> {
   };
 
   container: Element;
+
   wrapper: Element;
+
   styles: Record<string, string>;
 
   onClick = (e: React.MouseEvent) => {

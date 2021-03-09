@@ -21,7 +21,7 @@ import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selec
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 import { themes } from '../consumersThemes/themes';
-import { PaletteColors, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { PaletteColors, DraftContent, SEOSettings } from 'wix-rich-content-common';
 import { EditorState } from '@wix/draft-js';
 import { merge } from 'lodash';
 
@@ -69,7 +69,7 @@ const customStyles = [
 interface RicosTestAppProps {
   isMobile: boolean;
   locale?: string;
-  contentState?: RicosContent;
+  contentState?: DraftContent;
   editorState?: EditorState;
   localeResource?: Record<string, string>;
   onRicosEditorChange?: RicosEditorProps['onChange'];

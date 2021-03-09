@@ -49,12 +49,6 @@ const copy = (): Plugin => {
 
 const copyAfterBundleWritten = (): Plugin => {
   const targets = [
-    // create cjs version for lib declaration files
-    {
-      src: ['dist/lib/*.d.ts', '!dist/lib/*.cjs.d.ts'],
-      dest: 'dist/lib',
-      rename: (name: string) => `${name.replace('.d', '')}.cjs.d.ts`,
-    },
     // create viewer entry point declaration files
     {
       src: 'dist/src/viewer.d.ts',

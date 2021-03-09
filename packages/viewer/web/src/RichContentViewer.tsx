@@ -11,7 +11,7 @@ import {
   SPOILER_TYPE,
   GlobalContext,
   Version,
-  RicosContent,
+  DraftContent,
   TranslationFunction,
   SEOSettings,
   Helpers,
@@ -39,7 +39,7 @@ import { combineMappers } from './utils/combineMappers';
 
 export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
-  initialState?: RicosContent;
+  initialState?: DraftContent;
   isMobile?: boolean;
   renderStaticHtml?: boolean;
   helpers?: Helpers;
@@ -73,7 +73,7 @@ export interface RichContentViewerProps {
 class RichContentViewer extends Component<
   RichContentViewerProps,
   {
-    raw?: RicosContent;
+    raw?: DraftContent;
     error?: string;
     context: {
       experiments?: AvailableExperiments;
@@ -83,6 +83,7 @@ class RichContentViewer extends Component<
   }
 > {
   styles: Record<string, string>;
+
   typeMappers: PluginMapping;
 
   static defaultProps: Partial<RichContentViewerProps> = {
@@ -141,7 +142,7 @@ class RichContentViewer extends Component<
       iframeSandboxDomain,
       textAlignment,
     }: RichContentViewerProps,
-    contentState?: RicosContent
+    contentState?: DraftContent
   ): ViewerContextType => {
     deprecateHelpers(helpers, config);
     return {
@@ -234,6 +235,7 @@ class RichContentViewer extends Component<
         decorators: this.props.decorators,
         config: this.props.config,
         t: this.props.t,
+        renderedInTable,
       };
 
       const output = convertToReact(
