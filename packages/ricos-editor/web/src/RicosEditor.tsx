@@ -34,10 +34,13 @@ interface State {
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
-  editor: RichContentEditor;
+  editor!: RichContentEditor;
+
   dataInstance: EditorDataInstance;
+
   isBusy = false;
-  currentEditorRef: ElementType;
+
+  currentEditorRef!: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);

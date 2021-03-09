@@ -50,6 +50,7 @@ class PluginViewer extends PureComponent {
   componentHasLink = () => {
     return this.props?.componentData?.config?.link?.url;
   };
+
   componentHasAnchor = () => {
     return this.props?.componentData?.config?.link?.anchor;
   };

@@ -13,6 +13,7 @@ export default class Cell extends Component {
   componentDidMount() {
     this.selectCellContent();
   }
+
   componentDidUpdate(prevProps) {
     const isCellWasEditing = this.isEditing(prevProps.editing, prevProps.selectedCells);
     const isCellEditing = this.isEditing(this.props.editing, this.props.selectedCells);
