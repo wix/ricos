@@ -501,7 +501,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       relValue,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
     } = this.props;
-
     if (editorState) {
       return editorState;
     }
