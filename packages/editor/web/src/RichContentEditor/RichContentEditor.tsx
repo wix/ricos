@@ -245,7 +245,19 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.fixDraftSelectionExtend();
   }
+
+  fixDraftSelectionExtend = () => {
+    if (typeof Selection !== 'undefined' && !this.props.isInnerRCE) {
+      const nativeSelectionExtend = Selection.prototype.extend;
+      Selection.prototype.extend = function(...args) {
+        try {
+          return nativeSelectionExtend.apply(this, args);
+        } catch (error) {}
+      };
+    }
+  };
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);

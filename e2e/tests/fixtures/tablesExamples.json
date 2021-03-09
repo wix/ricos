@@ -165,10 +165,10 @@
   ],
   "entityMap": {
     "0": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -1316,8 +1316,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             170.651376146789,
             170.651376146789,
@@ -1340,10 +1338,10 @@
       }
     },
     "1": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -1716,8 +1714,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             "auto",
             "auto"
@@ -1729,10 +1725,10 @@
       }
     },
     "2": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -2909,8 +2905,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             119.61904761904762,
             193.384126984127,
@@ -2930,10 +2924,10 @@
       }
     },
     "3": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -3407,8 +3401,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             380,
             151,
@@ -3426,10 +3418,10 @@
       }
     },
     "4": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -3543,8 +3535,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             10
           ],
@@ -3555,10 +3545,10 @@
       }
     },
     "5": {
-      "type": "table",
+      "type": "wix-rich-content-plugin-table",
       "mutability": "IMMUTABLE",
       "data": {
-        "type": "table",
+        "type": "wix-rich-content-plugin-table",
         "config": {
           "rows": {
             "0": {
@@ -4392,8 +4382,6 @@
               }
             }
           },
-          "size": "content",
-          "alignment": "center",
           "colsWidth": [
             10,
             10,

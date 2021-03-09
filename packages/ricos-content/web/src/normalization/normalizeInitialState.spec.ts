@@ -755,7 +755,7 @@ describe('normalizeInitialState', () => {
       const result = normalizeInitialState(videoInitialState, {
         disableVideoDownload: true,
       });
-      expect(result).toEqual(videoFixedState);
+      expect(result).toEqual({ ...videoFixedState, VERSION: Version.currentVersion });
     });
   });
 });
