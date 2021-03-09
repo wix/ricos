@@ -23,7 +23,7 @@ class InnerRCE extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.innerRCERenderedIn === 'table' &&
+      this.props.innerRCERenderedIn === TABLE_TYPE &&
       prevProps.editing === false &&
       prevProps.editing !== this.props.editing
     ) {
@@ -67,11 +67,7 @@ class InnerRCE extends PureComponent {
     return { buttons, context, pubsub };
   };
 
-  selectAllContent = forceSelection => {
-    const { editorState } = this.props;
-    const newEditorState = selectAllContent(editorState, forceSelection);
-    this.props.onChange(newEditorState);
-  };
+  selectAllContent = forceSelection => selectAllContent(this.props.editorState, forceSelection);
 
   focus = () => this.ref.focus();
 

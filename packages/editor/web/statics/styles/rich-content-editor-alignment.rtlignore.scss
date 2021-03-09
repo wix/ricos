@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
 .left {
   /*!rtl:begin:ignore*/
   text-align: left !important;
@@ -27,6 +29,12 @@
     text-align: right !important;
     -noop:1;
   }
+  /*!rtl:end:ignore*/
+}
+
+.orderedList, .unorderedList {
+  /*!rtl:begin:ignore*/
+  @include ricosTypography('p', false);
   /*!rtl:end:ignore*/
 }
 
