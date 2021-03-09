@@ -11,6 +11,7 @@ export default class TextHighlightButton extends Component {
     super(props);
     this.buttonRef = React.createRef();
   }
+
   render() {
     const settings = this.props.config[TEXT_HIGHLIGHT_TYPE];
     const iconTextHighlight = settings?.toolbar?.icons?.InsertPluginButtonIcon || TextHighlightIcon;
