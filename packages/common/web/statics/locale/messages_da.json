@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Indstillinger",
 	"LinkPreview_Settings_Tooltip": "Linkindstillinger",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "For at sælge services og dele dem i dit indlæg skal du gå til App Market på din hjemmeside og installere Wix Stores.",
-	"UnsupportedPlugin_message": "Dette indhold kan kun tilgås i en browser",
+	"UnsupportedPlugin_message": "Denne indholdsblok kan kun redigeres fra en browser",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Slet tabel",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Afstemning (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "Tilføj et kodestykke",
