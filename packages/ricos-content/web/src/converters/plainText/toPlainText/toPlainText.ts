@@ -1,5 +1,4 @@
 import { Node_Type, RichContent, VideoSource } from 'ricos-schema';
-import { DraftContent } from '../../..';
 import { getParagraphNode } from '../../draft/toDraft/decorationParsers';
 import {
   parseGiphy,
