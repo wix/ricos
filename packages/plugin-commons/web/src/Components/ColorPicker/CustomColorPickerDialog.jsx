@@ -1,34 +1,11 @@
 import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
+import ActionButtons from './CustomColorPickerDialog';
 
 const CustomColorPicker = lazy(() => import('./CustomColorPicker'));
 
-const ActionButtons = ({ t, onCancel, onUpdate }) => (
-  <div className={styles.colorPickerDialog_buttons}>
-    <button className={styles.colorPickerDialog_button} onClick={onCancel}>
-      {t('ColorPickerButtonLabel_Cancel')}
-    </button>
-    <button
-      className={classNames(
-        styles.colorPickerDialog_button,
-        styles.colorPickerDialog_button_update
-      )}
-      data-hook="colorPickerUpdateButton"
-      onClick={onUpdate}
-    >
-      {t('ColorPickerButtonLabel_Update')}
-    </button>
-  </div>
-);
-
-ActionButtons.propTypes = {
-  t: PropTypes.func,
-  onCancel: PropTypes.func,
-  onUpdate: PropTypes.func,
-};
 class CustomColorPickerDialog extends Component {
   constructor(props) {
     super(props);
