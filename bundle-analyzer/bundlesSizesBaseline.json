@@ -31,12 +31,12 @@
   "ricos-viewer": 195,
   "ricos-viewer-no-modal": 195,
   "ricos-viewer-with-plugins": 259,
-  "rce": 730,
-  "rce-with-plugins": 937,
-  "ricos-editor": 782,
-  "ricos-editor-no-modal": 782,
+  "rce": 729,
+  "rce-with-plugins": 936,
+  "ricos-editor": 781,
+  "ricos-editor-no-modal": 781,
   "ricos-editor-with-plugins": 988,
   "ricos-common": 17,
   "rich-content-schema": 70,
-  "editor-common": 433
+  "editor-common": 430
 }
