@@ -21,6 +21,7 @@ export type RicosEntity = Overwrite<RawDraftEntity, { mutability: string }>;
 
 export type RicosEntityMap = { [key: string]: RicosEntity };
 
+// Kept for backwards compatibility, use DraftContent instead
 export interface RicosContent
   extends Overwrite<
     RawDraftContentState,
@@ -32,23 +33,4 @@ export interface RicosContent
   VERSION?: string;
 }
 
-export type DraftContent = RicosContent;
-
-export interface PlainTextConvertor {
-  toPlainText(content?: RichContent): Promise<string>;
-}
-
-export interface RicosContentConvertor {
-  toRicos(content?: DraftContent): Promise<RichContent>;
-}
-
-export interface DraftContentConvertor {
-  toDraft(content?: RichContent): Promise<DraftContent>;
-}
-
-export type Convertors = PlainTextConvertor & RicosContentConvertor & DraftContentConvertor;
-
-export type ConversionService<Source, Target> = {
-  convert: (content: Source) => Promise<Target>;
-  configure: (endpoint: string) => void;
-};
+export interface DraftContent extends RicosContent {}

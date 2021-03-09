@@ -51,6 +51,7 @@ const createInsertButtons: CreateInsertButtons = ({
             isMobile,
           })
         : undefined,
+      section: 'BlockToolbar_Section_Advanced',
     },
   ];
 };

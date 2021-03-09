@@ -22,4 +22,6 @@ const createTextColorPlugin: CreatePluginFunction<TextColorPluginEditorConfig> =
   });
 };
 
+createTextColorPlugin.functionName = TEXT_COLOR_TYPE;
+
 export { createTextColorPlugin };

@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
 
 const FileUploadEditor: FunctionComponent<{
-  content?: RicosContent;
+  content?: DraftContent;
   onFilesChange: (files, updateEntity) => void;
 }> = ({ content, onFilesChange }) => {
   const config = {
