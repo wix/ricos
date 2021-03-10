@@ -49,18 +49,3 @@ $FOOTER_HEIGHT: 100px;
   overflow-y: auto;
   overflow-x: hidden;
 }
-.galleryImageSettings_toggleWrapper{
-  p{
-    font-size: 16px;
-  }
-  >div{
-    padding-bottom: 14px;
-    padding-top: 10px;
-  }
-
-  @include phone {
-    p{
-      font-size:14px;
-    }
-  }
-}
