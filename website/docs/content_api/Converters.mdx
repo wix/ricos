@@ -11,6 +11,8 @@ Ricos is in the preparation phase of migrating from a [draft-js](https://draftjs
 ```tsx
 fromDraft: (content: DraftContent) => RichContent;
 toDraft: (content: RichContent) => DraftContent;
+ensureRicosContent: (content: RichContent | DraftContent) => RichContent;
+ensureDraftContent: (content: RichContent | DraftContent) => DraftContent;
 ```
 
 #### Example
