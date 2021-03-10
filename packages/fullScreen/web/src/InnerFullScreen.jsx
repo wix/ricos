@@ -53,14 +53,7 @@ export default class InnerFullscreen extends Component {
     }
   };
 
-  onWindowResize = () => {
-    const viewportmeta = this.containerRef.current.querySelector('meta[name="viewport"]');
-    if (viewportmeta) {
-      viewportmeta.content =
-        'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0';
-    }
-    this.forceUpdate();
-  };
+  onWindowResize = () => this.forceUpdate();
 
   onFullscreenChange = () => this.setState({ isInFullscreen: !!fscreen.fullscreenElement });
 
@@ -181,7 +174,7 @@ export default class InnerFullscreen extends Component {
     let width = document.documentElement.clientWidth;
     let height = document.documentElement.clientHeight;
     if (container) {
-      width = isInFullscreen || isMobile ? container?.width : container?.width - 16;
+      width = isInFullscreen || isMobile ? container?.width : container?.width - 18;
       height = isInFullscreen || isMobile ? container.height : container.height - 70;
     }
     return { width, height };
@@ -202,7 +195,6 @@ export default class InnerFullscreen extends Component {
         className={isInFullscreen || isMobile ? styles.fullscreen_mode : styles.expand_mode}
         ref={this.containerRef}
       >
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
         <ProGallery
