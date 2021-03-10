@@ -24,6 +24,10 @@
 - `plugin-menu`
   - [#2285](https://github.com/wix/ricos/pull/2285) new advanced section
 
+### :bug: Bug Fix
+- `gallery`
+  - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery upload error handling doesnt require data
+
 ### :rocket: Polish
 - `ricos-viewer`
   - performance improvment for non-english locale 
