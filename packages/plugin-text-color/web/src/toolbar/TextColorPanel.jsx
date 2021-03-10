@@ -99,7 +99,7 @@ export default class TextColorPanel extends Component {
           <>
             {isMobile && (
               <>
-                <div className={mergedStyles.colorPicker_headline}>{t(colorPickerHeader)}</div>
+                <div className={mergedStyles.colorPicker_header}>{t(colorPickerHeader)}</div>
                 <div className={mergedStyles.colorPicker_separator} />
               </>
             )}
