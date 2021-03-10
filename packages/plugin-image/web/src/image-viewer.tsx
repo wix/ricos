@@ -15,7 +15,7 @@ import {
   RichContentTheme,
   SEOSettings,
   withHooks,
-  BICallbacks,
+  RicosHooks,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -54,7 +54,7 @@ interface ImageViewerProps {
   setComponentUrl: (highres?: string) => unknown;
   seoMode: SEOSettings;
   blockKey: string;
-  hooks: BICallbacks;
+  hooks: RicosHooks;
 }
 
 interface ImageSrc {

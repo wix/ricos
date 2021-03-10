@@ -26,7 +26,7 @@ import {
   GetEditorState,
   SetEditorState,
   UnderlyingPlugin,
-  BICallbacks,
+  RicosHooks,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
 import { UNSUPPORTED_BLOCKS_TYPE } from '../consts';
@@ -61,7 +61,7 @@ const DEFAULT_SETTINGS = {
 };
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
-  hooks: BICallbacks;
+  hooks: RicosHooks;
   settings: Record<string, any> & EditorPluginConfig;
   customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;

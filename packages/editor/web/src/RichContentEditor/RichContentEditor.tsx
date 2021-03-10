@@ -46,7 +46,7 @@ import {
   NormalizeConfig,
   ModalStyles,
   LegacyEditorPluginConfig,
-  BICallbacks,
+  RicosHooks,
   AnchorTarget,
   RelValue,
   EditorContextType,
@@ -115,7 +115,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   isMobile?: boolean;
   helpers?: Helpers;
   t: TranslationFunction;
-  hooks: BICallbacks;
+  hooks?: RicosHooks;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
   config: LegacyEditorPluginConfig;
@@ -150,7 +150,6 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   maxTextLength?: number;
   experiments?: AvailableExperiments;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
-  hooks?: BICallbacks;
   /** This is a legacy API, changes should be made also in the new Ricos Editor API **/
 }
 
@@ -188,7 +187,7 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
   };
   refId: number;
   commonPubsub: Pubsub;
-  handleCallbacks: (newState: EditorState, hooks?: BICallbacks) => void | undefined;
+  handleCallbacks: (newState: EditorState, hooks?: RicosHooks) => void | undefined;
   contextualData: EditorContextType;
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
   editorWrapper: Element;
@@ -578,7 +577,7 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
 
   createContentMutationEvents = (initialEditorState: EditorState, version: string) => {
     const calculate = createCalcContentDiff(initialEditorState);
-    return (newState: EditorState, { onPluginDelete }: BICallbacks = {}) =>
+    return (newState: EditorState, { onPluginDelete }: RicosHooks = {}) =>
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
         onCallbacks: ({ pluginsDeleted = [] }) => {

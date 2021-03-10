@@ -1,5 +1,5 @@
 import React, { FunctionComponent, PropsWithoutRef } from 'react';
-import { BICallbacks, TranslationFunction, AvailableExperiments } from '../types';
+import { RicosHooks, TranslationFunction, AvailableExperiments } from '../types';
 
 export const GlobalContext = React.createContext<{
   experiments?: AvailableExperiments;
@@ -9,10 +9,10 @@ export const GlobalContext = React.createContext<{
   isMobile: false,
 });
 
-export const BIContext = React.createContext<BICallbacks>({});
+export const BIContext = React.createContext<RicosHooks>({});
 
 type HooksConsumerHoc = <P>(
-  Component: React.ComponentType<P & { hooks: BICallbacks }>
+  Component: React.ComponentType<P & { hooks: RicosHooks }>
 ) => FunctionComponent<PropsWithoutRef<P>>;
 
 export const withHooks: HooksConsumerHoc = Component =>

@@ -5,7 +5,7 @@ export const deprecateHelpers = (
   helpers: Helpers = {},
   config,
   hooks
-  // hooks: BICallbacks
+  // hooks: RicosHooks
 ) => {
   const { onExpand } = helpers;
   if (onExpand) {

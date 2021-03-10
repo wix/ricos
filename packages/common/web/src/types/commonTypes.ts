@@ -1,4 +1,4 @@
-import { BICallbacks } from './biCallbacksTypes';
+import { RicosHooks } from './RicosHooksTypes';
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
 import { ComponentData, DraftContent } from 'ricos-content';
@@ -83,7 +83,7 @@ interface CommonContextType {
 
 export interface EditorContextType extends CommonContextType {
   config: LegacyEditorPluginConfig;
-  hooks: BICallbacks;
+  hooks: RicosHooks;
   setEditorState: (editorState: EditorState) => void;
   getEditorState: () => EditorState;
   getEditorBounds: GetEditorBounds;

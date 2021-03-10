@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Innstillinger",
 	"LinkPreview_Settings_Tooltip": "Lenkeinnstillinger",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "For å selge tjenester og dele dem i innlegget ditt, går du til appmarkedet på siden din og installer Wix Bookings.",
-	"UnsupportedPlugin_message": "Dette innholdet kan kun åpnes i en nettleser",
+	"UnsupportedPlugin_message": "Denne innholdsblokken kan kun redigeres fra en nettleser",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Slett tabell",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Avstemming (piksler)",
 	"TextCodeBlock_InsertButton_Tooltip": "Legg til en kodebit",

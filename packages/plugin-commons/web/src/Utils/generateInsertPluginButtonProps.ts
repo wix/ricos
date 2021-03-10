@@ -15,7 +15,7 @@ import {
   ToolbarButtonProps,
   Pubsub,
   EditorPluginConfig,
-  BICallbacks,
+  RicosHooks,
   Version,
 } from 'wix-rich-content-common';
 import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
@@ -41,7 +41,7 @@ export function generateInsertPluginButtonProps({
   blockType: string;
   button: InsertButton;
   helpers: Helpers;
-  hooks: BICallbacks;
+  hooks: RicosHooks;
   pubsub: Pubsub;
   commonPubsub: Pubsub;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,5 +1,5 @@
 import { deprecateHelpers } from '../../lib/deprecateHelpers';
-import { BICallbacks } from '../types';
+import { RicosHooks } from '../types';
 
 type Config = {
   'wix-draft-plugin-gallery': { onExpand?: () => void };
@@ -43,7 +43,7 @@ describe('Test deprecateHelpers function', () => {
 
   it('should fill all hooks from helpers', () => {
     const func = () => undefined;
-    const helpers: Required<BICallbacks> = {
+    const helpers: Required<RicosHooks> = {
       onMediaUploadEnd: func,
       onMediaUploadStart: func,
       onOpenEditorSuccess: func,
@@ -56,7 +56,7 @@ describe('Test deprecateHelpers function', () => {
       onViewerAction: func,
       onViewerLoaded: func,
     };
-    const hooks: BICallbacks = {};
+    const hooks: RicosHooks = {};
     const config = {};
     deprecateHelpers(helpers, config, hooks);
     expect(hooks).toStrictEqual(helpers);

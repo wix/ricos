@@ -4,12 +4,12 @@ import {
   VideoComponentData,
   FileComponentData,
   ComponentData,
-  BICallbacks,
+  RicosHooks,
 } from '.';
 import { CSSProperties } from 'react';
 import { EditorState } from 'draft-js';
 
-export interface Helpers extends BICallbacksForHelpers {
+export interface Helpers extends RicosHooksForHelpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
   closeModal?: () => void;
   handleFileUpload?: (
@@ -31,7 +31,7 @@ export interface Helpers extends BICallbacksForHelpers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: ((...args: any[]) => any) | undefined;
 }
-interface BICallbacksForHelpers extends BICallbacks {
+interface RicosHooksForHelpers extends RicosHooks {
   // makes version optional
   onPluginAdd?(pluginId: string, entryPoint: string, version?: string): void;
   onPluginAddSuccess?(pluginId: string, entryPoint: string, version?: string): void;

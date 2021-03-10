@@ -1,7 +1,7 @@
 import React from 'react';
-import { BICallbacks, BIContext, ContextProviderHOC } from 'wix-rich-content-common';
+import { RicosHooks, BIContext, ContextProviderHOC } from 'wix-rich-content-common';
 
-export const biMock: Required<BICallbacks> = {
+export const biMock: Required<RicosHooks> = {
   //these are for testing purposes only in our exampleApp
   onPluginAdd: (...args) => console.debug('biPluginAdd', ...args),
   onPluginAddStep: (...args) => console.debug('onPluginAddStep', ...args),
