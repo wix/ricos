@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [#2292](https://github.com/wix/ricos/pull/#2292) fix unsupported-blocks text height issue 
+
 </details>
 <hr/>
 
