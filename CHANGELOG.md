@@ -26,11 +26,11 @@
 
 ### :bug: Bug Fix
 - `gallery`
-  - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery upload error handling doesnt require data
+  - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
 
 ### :rocket: Polish
 - `ricos-viewer`
-  - performance improvment for non-english locale 
+  - performance improvment for non-english locale
 </details>
 <hr/>
 

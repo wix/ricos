@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Loader } from 'wix-rich-content-plugin-commons';
+import { MediaUploadErrorKey } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS, GALLERY_ITEMS_TYPES, createImageItem, createVideoItem } from './defaults';
@@ -174,13 +175,28 @@ class GalleryComponent extends PureComponent {
     }
   };
 
+  getUnsupportedExtensionError = fileName => {
+    return {
+      key: MediaUploadErrorKey.UNSUPPORTED_EXTENSION,
+      args: {
+        extension:
+          fileName
+            .split('.')
+            .pop()
+            ?.toLowerCase() || '',
+      },
+    };
+  };
+
   fileLoaded = (event, file, itemPos) => {
     if (file.type.match('image/*')) {
       const img = new Image();
       img.onload = e => this.imageLoaded(e, file, itemPos);
       img.src = event.target.result;
-    } else {
+    } else if (file.type.match('video/*')) {
       this.handleFileUpload(file, GALLERY_ITEMS_TYPES.VIDEO, itemPos);
+    } else {
+      this.setItemInGallery({}, this.getUnsupportedExtensionError(file.name), itemPos);
     }
   };
 
