@@ -17,6 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `ricos-content`
+  - [#2287](https://github.com/wix/ricos/pull/2287) compareDraftContent util exposed
 - `plugin-link`
   - [#2262](https://github.com/wix/ricos/pull/2262) `onViewerAction` callback hook now supports link click events
 - `plugin-menu`
@@ -24,7 +26,7 @@
 
 ### :rocket: Polish
 - `ricos-viewer`
-	- performance improvment for non-english locale 
+  - performance improvment for non-english locale 
 </details>
 <hr/>
 
