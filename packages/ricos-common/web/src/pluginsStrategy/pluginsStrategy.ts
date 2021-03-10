@@ -1,4 +1,4 @@
-import { merge, isEmpty } from 'lodash';
+import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
   ViewerPluginsStrategy,
@@ -74,7 +74,7 @@ export default function pluginsStrategy({
   childProps,
   cssOverride,
   content,
-  experiments,
+  experiments, // eslint-disable-line
 }: {
   isViewer: boolean;
   plugins: BasePlugin[];
@@ -83,9 +83,6 @@ export default function pluginsStrategy({
   content?: DraftContent;
   experiments?: AvailableExperiments;
 }): PluginsStrategy {
-  if (!isEmpty(experiments)) {
-    console.debug('PluginsStrategy experiments', experiments); // eslint-disable-line no-console
-  }
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isViewer) {
