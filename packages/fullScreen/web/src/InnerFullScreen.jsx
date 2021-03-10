@@ -171,13 +171,16 @@ export default class InnerFullscreen extends Component {
     const { isMobile } = this.props;
     const { isInFullscreen } = this.state;
     const container = this.containerRef.current?.getBoundingClientRect?.();
-    let width = document.documentElement.clientWidth;
-    let height = document.documentElement.clientHeight;
     if (container) {
-      width = isInFullscreen || isMobile ? container?.width : container?.width - 18;
-      height = isInFullscreen || isMobile ? container.height : container.height - 70;
+      let { width, height } = container;
+      width = isInFullscreen || isMobile ? width : width - 18;
+      height = isInFullscreen || isMobile ? height : height - 70;
+      return { width, height };
     }
-    return { width, height };
+    return {
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight,
+    };
   };
 
   render() {
