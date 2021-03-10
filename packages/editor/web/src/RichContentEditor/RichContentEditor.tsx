@@ -2,7 +2,7 @@
 import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, cloneDeep, isEmpty } from 'lodash';
+import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -36,7 +36,7 @@ import {
   Version,
   HTML_TYPE,
   GlobalContext,
-  DraftContent,
+  RicosContent,
   RichContentTheme,
   Helpers,
   TranslationFunction,
@@ -109,7 +109,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
   editorKey?: string;
   editorState?: EditorState;
-  initialState?: DraftContent;
+  initialState?: RicosContent;
   theme?: RichContentTheme;
   isMobile?: boolean;
   helpers?: Helpers;
@@ -267,7 +267,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
-    !isEmpty(this.props.experiments) && console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {
