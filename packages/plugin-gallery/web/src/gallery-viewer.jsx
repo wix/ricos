@@ -203,7 +203,16 @@ class GalleryViewer extends React.Component {
     );
   };
 
-  handleContextMenu = e => this.props.componentData.disableRightClick && e.preventDefault();
+  handleContextMenu = e => {
+    const { componentData, disableRightClick } = this.props;
+    let disabled = false;
+    if (componentData.disableRightClick !== undefined) {
+      disabled = componentData.disableRightClick;
+    } else if (disableRightClick !== undefined) {
+      disabled = disableRightClick;
+    }
+    return disabled && e.preventDefault();
+  };
 
   render() {
     const {

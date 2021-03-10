@@ -16,17 +16,29 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
     relValue,
     [type]: settings = {},
     spoilerWrapper,
+    uiSettings,
     ...rest
   } = config;
   settings.accept = settings.accept || fileInputAccept;
-  const defaultPluginData = {
-    ...DEFAULTS,
-    disableRightClick: !!config?.uiSettings?.disableRightClick,
-    config: {
-      ...DEFAULTS.config,
-      ...settings?.defaultData?.config,
-    },
-  };
+
+  const defaultPluginData =
+    uiSettings?.disableRightClick !== undefined
+      ? {
+          ...DEFAULTS,
+          config: {
+            ...DEFAULTS.config,
+            ...settings?.defaultData?.config,
+          },
+          disableRightClick: uiSettings?.disableRightClick,
+        }
+      : {
+          ...DEFAULTS,
+          config: {
+            ...DEFAULTS.config,
+            ...settings?.defaultData?.config,
+          },
+        };
+
   return createBasePlugin({
     component: Component,
     settings,

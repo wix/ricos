@@ -115,13 +115,16 @@ class RichContentViewer extends Component<
       anchorTarget,
       relValue,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
+      config,
     } = props;
+    const disableRightClick = config.uiSettings?.disableRightClick;
     return initialState
       ? normalizeInitialState(initialState, {
           anchorTarget,
           relValue,
           disableInlineImages,
           removeInvalidInlinePlugins,
+          disableRightClick,
         })
       : undefined;
   };

@@ -1,6 +1,14 @@
 import { Version } from '../../version';
 
-export default (componentData, config, stateVersion: string) => {
+export default (componentData, normalizerConfig, stateVersion: string) => {
+  const shouldNormalizeRightClick =
+    componentData.disableRightClick === undefined &&
+    normalizerConfig.disableRightClick !== undefined;
+
+  if (shouldNormalizeRightClick) {
+    componentData.disableRightClick = normalizerConfig.disableRightClick;
+  }
+
   if (Version.lessThan(stateVersion, '6')) {
     const items = componentData.items.map(item => {
       const { metadata } = item;
