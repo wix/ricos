@@ -73,6 +73,7 @@ export interface SEOSettings {
 interface CommonContextType {
   theme: RichContentTheme;
   t: TranslationFunction;
+  hooks: RicosHooks;
   locale: string;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;

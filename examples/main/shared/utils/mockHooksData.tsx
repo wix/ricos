@@ -1,7 +1,7 @@
 import React from 'react';
 import { RicosHooks, HooksContext, ContextProviderHOC } from 'wix-rich-content-common';
 
-export const biMock: Required<RicosHooks> = {
+export const mockHooks: Required<RicosHooks> = {
   //these are for testing purposes only in our exampleApp
   onPluginAdd: (...args) => console.debug('biPluginAdd', ...args),
   onPluginAddStep: (...args) => console.debug('onPluginAddStep', ...args),
@@ -15,9 +15,3 @@ export const biMock: Required<RicosHooks> = {
   onMediaUploadEnd: (...args) => console.debug('onMediaUploadEnd', ...args),
   onMediaUploadStart: (...args) => console.debug('onMediaUploadStart', ...args),
 };
-
-export const withHooksMockProvider: ContextProviderHOC = Component => props => (
-  <HooksContext.Provider value={biMock}>
-    <Component {...props} />
-  </HooksContext.Provider>
-);

@@ -28,6 +28,7 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
+  HooksContext,
   RicosHooks,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
@@ -37,7 +38,6 @@ import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtli
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import { combineMappers } from './utils/combineMappers';
-
 export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
   initialState?: DraftContent;
@@ -155,6 +155,7 @@ export default class RichContentViewer extends Component<
       relValue,
       config,
       helpers,
+      hooks,
       locale,
       disabled,
       seoMode,
@@ -255,14 +256,16 @@ export default class RichContentViewer extends Component<
 
       return (
         <GlobalContext.Provider value={this.state.context}>
-          <div
-            className={wrapperClassName}
-            dir={direction || getLangDir(locale)}
-            onMouseEnter={e => onHover && onHover(e)}
-          >
-            <div className={editorClassName}>{output}</div>
-            <AccessibilityListener isMobile={this.props.isMobile} />
-          </div>
+          <HooksContext.Provider value={contextualData.hooks}>
+            <div
+              className={wrapperClassName}
+              dir={direction || getLangDir(locale)}
+              onMouseEnter={e => onHover && onHover(e)}
+            >
+              <div className={editorClassName}>{output}</div>
+              <AccessibilityListener isMobile={this.props.isMobile} />
+            </div>
+          </HooksContext.Provider>
         </GlobalContext.Provider>
       );
     } catch (err) {

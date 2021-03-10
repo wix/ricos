@@ -15,7 +15,7 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ModalStyles, DraftContent, TextToolbarType } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
-import { withHooksMockProvider } from '../utils/mockHooksData';
+import { mockHooks } from '../utils/mockHooksData';
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -60,7 +60,7 @@ interface ExampleEditprState {
   MobileToolbar?: ElementType;
   TextToolbar?: ElementType;
 }
-class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
+export default class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
   state: ExampleEditprState = {};
   plugins: RichContentEditorProps['plugins'];
   config: RichContentEditorProps['config'];
@@ -264,6 +264,7 @@ class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
               linkSettings={{ anchorTarget, relValue }}
               locale={locale}
               cssOverride={theme}
+              hooks={mockHooks}
               toolbarSettings={{
                 useStaticTextToolbar: textToolbarType === 'static',
                 getToolbarSettings: this.config.getToolbarSettings,
@@ -289,6 +290,7 @@ class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
               onChange={onChange}
               helpers={this.helpers}
               plugins={this.plugins}
+              hooks={mockHooks}
               // config={Plugins.getConfig(additionalConfig)}
               config={this.config}
               editorKey="random-editorKey-ssr"
@@ -314,5 +316,3 @@ class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
     );
   }
 }
-
-export default withHooksMockProvider(Editor);

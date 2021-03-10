@@ -384,7 +384,7 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
           } = createUploadStartBIData(...args);
-          helpers.onMediaUploadStart?.(
+          hooks.onMediaUploadStart?.(
             correlationId,
             pluginId,
             fileSize,
@@ -405,7 +405,7 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
           } = createUploadEndBIData(...args);
-          helpers.onMediaUploadEnd?.(
+          hooks.onMediaUploadEnd?.(
             correlationId,
             pluginId,
             duration,
@@ -984,8 +984,8 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
         ...themeDesktopStyle,
       });
       return (
-        <HooksContext.Provider value={hooks}>
-          <GlobalContext.Provider value={this.state.context}>
+        <GlobalContext.Provider value={this.state.context}>
+          <HooksContext.Provider value={hooks}>
             <Measure bounds onResize={this.onResize}>
               {({ measureRef }) => (
                 <div
@@ -1019,8 +1019,8 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
                 </div>
               )}
             </Measure>
-          </GlobalContext.Provider>
-        </HooksContext.Provider>
+          </HooksContext.Provider>
+        </GlobalContext.Provider>
       );
     } catch (err) {
       onError(err);

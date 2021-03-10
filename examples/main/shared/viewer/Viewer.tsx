@@ -9,7 +9,7 @@ import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { RicosViewer } from 'ricos-viewer';
-import { withHooksMockProvider } from '../utils/mockHooksData';
+import { mockHooks } from '../utils/mockHooksData';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -30,7 +30,7 @@ interface ExampleViewerState {
   disabled: boolean;
 }
 
-class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
+export default class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
   expandModeData;
   viewerRef: RefObject<any>;
   pluginsConfig: RichContentViewerProps['config'];
@@ -104,6 +104,7 @@ class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
               content={initialState}
               plugins={Plugins.viewerPlugins}
               locale={locale}
+              hooks={mockHooks}
               linkSettings={{ relValue, anchorTarget }}
               isMobile={isMobile}
               cssOverride={theme}
@@ -119,6 +120,7 @@ class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
               inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
               decorators={Plugins.decorators}
               config={this.pluginsConfig}
+              hooks={mockHooks}
               {...viewerProps}
             />
             {this.shouldRenderFullscreen && (
@@ -141,5 +143,3 @@ class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
     );
   }
 }
-
-export default withHooksMockProvider(Viewer);
