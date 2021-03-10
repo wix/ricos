@@ -11,7 +11,7 @@ describe('Test deprecateHelpers function', () => {
   it('should move onExpand func from helpers and add it to plugins config', () => {
     const helpers = { onExpand };
     const config: Config = { 'wix-draft-plugin-gallery': {}, 'wix-draft-plugin-image': {} };
-    deprecateHelpers(helpers, config, {});
+    deprecateHelpers(helpers, config);
     expect(helpers.onExpand).toBe(undefined);
     expect(config['wix-draft-plugin-gallery'].onExpand).toBe(onExpand);
     expect(config['wix-draft-plugin-image'].onExpand).toBe(onExpand);
@@ -23,7 +23,7 @@ describe('Test deprecateHelpers function', () => {
       'wix-draft-plugin-gallery': { onExpand: () => {} },
       'wix-draft-plugin-image': { onExpand: () => {} },
     };
-    deprecateHelpers(helpers, config, {});
+    deprecateHelpers(helpers, config);
     expect(helpers.onExpand).toBe(undefined);
     expect(config['wix-draft-plugin-gallery'].onExpand).toBe(onExpand);
     expect(config['wix-draft-plugin-image'].onExpand).toBe(onExpand);
@@ -35,7 +35,7 @@ describe('Test deprecateHelpers function', () => {
       'wix-draft-plugin-gallery': { onExpand },
       'wix-draft-plugin-image': { onExpand },
     };
-    deprecateHelpers(helpers, config, {});
+    deprecateHelpers(helpers, config);
     expect(helpers.onExpand).toBe(undefined);
     expect(config['wix-draft-plugin-gallery'].onExpand).toBe(onExpand);
     expect(config['wix-draft-plugin-image'].onExpand).toBe(onExpand);

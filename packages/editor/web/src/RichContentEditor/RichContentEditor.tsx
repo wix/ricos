@@ -354,7 +354,7 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
       anchorTarget,
       relValue,
       helpers = {},
-      hooks,
+      hooks = {},
       config,
       isMobile = false,
       shouldRenderOptimizedImages,
@@ -363,7 +363,7 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
       innerRCERenderedIn,
     } = this.props;
 
-    this.fixHelpers(helpers);
+    this.fixHelpers(helpers, config, hooks);
 
     this.contextualData = {
       theme: theme || {},
@@ -373,7 +373,7 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
       relValue,
       helpers,
       hooks: {
-        ...hooks,
+        ...(hooks || {}),
         onMediaUploadStart: (...args) => {
           const {
             correlationId,
@@ -553,11 +553,12 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
-    this.fixHelpers(nextProps.helpers);
+    if (nextProps.helpers) {
+      this.fixHelpers(nextProps.helpers, nextProps.config);
+    }
   }
 
-  fixHelpers(helpers?: Helpers) {
-    const { config, hooks } = this.props;
+  fixHelpers(helpers: Helpers, config, hooks?: RicosHooks) {
     if (helpers?.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;

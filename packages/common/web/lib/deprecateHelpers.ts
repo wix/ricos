@@ -1,24 +1,28 @@
+import { RicosHooks, LegacyEditorPluginConfig, LegacyViewerPluginConfig } from '../src/types';
 import { IMAGE_TYPE, GALLERY_TYPE } from 'ricos-content';
 import { Helpers } from '../src';
 
 export const deprecateHelpers = (
-  helpers: Helpers = {},
-  config,
-  hooks
-  // hooks: RicosHooks
+  helpers: Helpers,
+  config: LegacyEditorPluginConfig | LegacyViewerPluginConfig,
+  hooks?: RicosHooks
 ) => {
   const { onExpand } = helpers;
   if (onExpand) {
-    if (config[GALLERY_TYPE]) {
-      config[GALLERY_TYPE].onExpand = onExpand;
+    const galleryConfig = config[GALLERY_TYPE];
+    const imageConfig = config[IMAGE_TYPE];
+    if (galleryConfig) {
+      galleryConfig.onExpand = onExpand;
     }
-    if (config[IMAGE_TYPE]) {
-      config[IMAGE_TYPE].onExpand = onExpand;
+    if (imageConfig) {
+      imageConfig.onExpand = onExpand;
     }
     // eslint-disable-next-line fp/no-delete
     delete helpers.onExpand;
   }
-  Object.entries(helpers).forEach(([key, value]) => {
-    hooks[key] = value;
-  });
+  if (hooks) {
+    Object.entries(helpers).forEach(([key, value]) => {
+      hooks[key] = value;
+    });
+  }
 };

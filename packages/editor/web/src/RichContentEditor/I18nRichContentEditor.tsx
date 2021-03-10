@@ -3,7 +3,7 @@ import { withI18n, ToolbarType } from 'wix-rich-content-common';
 import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
 import RichContentEditor, { RichContentEditorProps } from './RichContentEditor';
 
-const WrappedEditor = withI18n<typeof RichContentEditor, Partial<RichContentEditorProps>>(
+const WrappedEditor = withI18n<RichContentEditor, Partial<RichContentEditorProps>>(
   RichContentEditor,
   englishResources
 );

@@ -142,7 +142,7 @@ export default class RichContentViewer extends Component<
       seoMode,
       iframeSandboxDomain,
       textAlignment,
-      hooks,
+      hooks = {},
     }: RichContentViewerProps,
     contentState?: DraftContent
   ): ViewerContextType => {
