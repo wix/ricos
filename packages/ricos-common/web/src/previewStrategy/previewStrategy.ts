@@ -1,7 +1,6 @@
 import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { DraftContent, AvailableExperiments } from 'wix-rich-content-common';
-import { isEmpty } from 'lodash';
 
 export default function previewStrategy({
   isViewer,
@@ -9,7 +8,7 @@ export default function previewStrategy({
   onPreviewExpand,
   previewConfig,
   content,
-  experiments,
+  experiments, // eslint-disable-line
 }: {
   isViewer: boolean;
   isPreviewExpanded: boolean;
@@ -18,7 +17,6 @@ export default function previewStrategy({
   content?: DraftContent;
   experiments?: AvailableExperiments;
 }) {
-  !isEmpty(experiments) && console.debug('previewStrategy experiments', experiments); // eslint-disable-line no-console
   if (!isViewer || !previewConfig || !content) {
     return {};
   }
