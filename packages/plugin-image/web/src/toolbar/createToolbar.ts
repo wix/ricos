@@ -33,7 +33,7 @@ const createToolbar: CreatePluginToolbar = ({
       isMobile,
       settings,
     }),
-    InsertButtons: createInsertButtons({ t, settings }),
+    InsertButtons: createInsertButtons({ t, settings, uiSettings }),
     name: 'image',
   };
 };

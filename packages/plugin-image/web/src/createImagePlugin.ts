@@ -11,10 +11,11 @@ import { isNumber } from 'lodash';
 
 const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config => {
   const type = IMAGE_TYPE;
-  const defaultPluginData = {
-    ...DEFAULTS,
-    disableRightClick: !!config?.uiSettings?.disableRightClick,
-  };
+  const defaultPluginData =
+    config?.uiSettings?.disableRightClick !== undefined
+      ? { ...DEFAULTS, disableRightClick: config.uiSettings.disableRightClick }
+      : DEFAULTS;
+
   const {
     helpers,
     t,
