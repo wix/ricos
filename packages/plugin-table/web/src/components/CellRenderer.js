@@ -146,6 +146,8 @@ export default class Cell extends Component {
     }
   };
 
+  onCellClick = () => this.props.isMobile && this.props.onDoubleClick();
+
   render() {
     const {
       row,
@@ -210,6 +212,7 @@ export default class Cell extends Component {
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
+        onClick={this.onCellClick}
         onContextMenu={onContextMenu}
         colSpan={colSpan}
         rowSpan={rowSpan}
