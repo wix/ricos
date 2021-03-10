@@ -59,6 +59,7 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  HooksContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -69,7 +70,6 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
-import { HooksContext } from 'wix-rich-content-common/dist/module.cjs';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
