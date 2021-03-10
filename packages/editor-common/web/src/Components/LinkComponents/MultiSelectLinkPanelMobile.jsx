@@ -33,6 +33,7 @@ class MultiSelectLinkPanelMobile extends PureComponent {
       onChangeAnchorPanel,
       anchorableBlocksData,
       anchorPanelValues,
+      linkTypes,
     } = this.props;
 
     return (
@@ -72,6 +73,7 @@ class MultiSelectLinkPanelMobile extends PureComponent {
               anchorableBlocksData={anchorableBlocksData}
               anchorValues={anchorPanelValues}
               onChange={anchorPanelValues => onChangeAnchorPanel({ anchorPanelValues })}
+              linkTypes={linkTypes}
               {...sharedPanelsProps}
             />
           )}
@@ -96,6 +98,7 @@ MultiSelectLinkPanelMobile.propTypes = {
   onChangeAnchorPanel: PropTypes.func,
   anchorableBlocksData: PropTypes.object,
   anchorPanelValues: PropTypes.object,
+  linkTypes: PropTypes.object,
 };
 
 export default MultiSelectLinkPanelMobile;

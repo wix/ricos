@@ -19,9 +19,10 @@ import { get } from 'lodash';
 class AnchorableElement extends PureComponent {
   constructor(props) {
     super(props);
-    const { block, theme } = props;
+    const { block, theme, linkTypes } = props;
     this.styles = mergeStyles({ styles, theme });
-    this.state = { iconThumbnail: this.getIconThumbnail(block) };
+    const previewElement = linkTypes.anchor.previewElement?.(block);
+    this.state = { iconThumbnail: this.getIconThumbnail(block), previewElement };
   }
 
   componentDidMount() {
@@ -132,7 +133,7 @@ class AnchorableElement extends PureComponent {
 
   render() {
     const { styles } = this;
-    const { iconThumbnail, preview } = this.state;
+    const { iconThumbnail, preview, previewElement } = this.state;
     const { dataHook, onClick, isSelected, t } = this.props;
     return (
       <div
@@ -142,18 +143,24 @@ class AnchorableElement extends PureComponent {
         })}
         onClick={() => onClick({ defaultName: this.getContent() })}
       >
-        <Thumbnail
-          iconThumbnail={iconThumbnail}
-          preview={preview}
-          alt={this.getContent()}
-          previewLoaded={this.previewLoaded}
-          theme={styles}
-        />
+        {previewElement ? (
+          <div className={styles.AnchorableElement_thumbnail}>{previewElement.thumbnail}</div>
+        ) : (
+          <Thumbnail
+            iconThumbnail={iconThumbnail}
+            preview={preview}
+            alt={this.getContent()}
+            previewLoaded={this.previewLoaded}
+            theme={styles}
+          />
+        )}
         <div className={styles.AnchorableElement_contentContainer}>
           <div className={styles.AnchorableElement_contentType}>
-            {t(this.getDataToDisplayByField('type'))}
+            {previewElement ? previewElement.type : t(this.getDataToDisplayByField('type'))}
           </div>
-          <div className={styles.AnchorableElement_blockContent}>{this.getContent()}</div>
+          <div className={styles.AnchorableElement_blockContent}>
+            {previewElement ? previewElement.content : this.getContent()}
+          </div>
         </div>
       </div>
     );
@@ -166,6 +173,7 @@ class AnchorableElement extends PureComponent {
     block: PropTypes.object,
     theme: PropTypes.object,
     isSelected: PropTypes.bool,
+    linkTypes: PropTypes.object,
   };
 }
 

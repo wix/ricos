@@ -54,6 +54,7 @@ class MultiSelectLinkPanelDesktop extends PureComponent {
       onChangeAnchorPanel,
       anchorableBlocksData,
       anchorPanelValues,
+      linkTypes,
     } = this.props;
     return (
       <FocusManager
@@ -85,6 +86,7 @@ class MultiSelectLinkPanelDesktop extends PureComponent {
               anchorableBlocksData={anchorableBlocksData}
               anchorValues={anchorPanelValues}
               onChange={anchorPanelValues => onChangeAnchorPanel({ anchorPanelValues })}
+              linkTypes={linkTypes}
               {...sharedPanelsProps}
             />
           )}
@@ -111,6 +113,7 @@ MultiSelectLinkPanelDesktop.propTypes = {
   onChangeAnchorPanel: PropTypes.func,
   anchorableBlocksData: PropTypes.object,
   anchorPanelValues: PropTypes.object,
+  linkTypes: PropTypes.object,
 };
 
 export default MultiSelectLinkPanelDesktop;
