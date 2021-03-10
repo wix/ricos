@@ -19,7 +19,7 @@
 </details>
 <hr/>
 
-## 8.27.0  (Mar 10, 2021)
+## 8.27.1  (Mar 10, 2021)
 ### :rocket: New Feature
 - `ricos-content`
   - [#2287](https://github.com/wix/ricos/pull/2287) compareDraftContent util exposed
