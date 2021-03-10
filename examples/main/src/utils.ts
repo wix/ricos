@@ -1,7 +1,7 @@
 import { debounce, pick } from 'lodash';
 import { set, get } from 'local-storage';
 import MobileDetect from 'mobile-detect';
-import { normalizeInitialState, isSSR, RicosContent } from 'wix-rich-content-common';
+import { normalizeInitialState, isSSR, DraftContent } from 'wix-rich-content-common';
 import * as CONSTS from './consts';
 
 const mobileDetect = !isSSR() ? new MobileDetect(window.navigator.userAgent) : null;
@@ -26,7 +26,7 @@ export const saveStateToStorage = debounce(state => {
   set(getStorageKey(), stateToStore);
 }, 1000);
 
-export const normalize = (json: RicosContent) => {
+export const normalize = (json: DraftContent) => {
   const { anchorTarget, relValue } = CONSTS;
   return normalizeInitialState(json, {
     anchorTarget,

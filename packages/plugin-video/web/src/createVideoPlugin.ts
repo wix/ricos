@@ -36,4 +36,6 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
   });
 };
 
+createVideoPlugin.functionName = VIDEO_TYPE;
+
 export { createVideoPlugin };

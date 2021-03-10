@@ -19,7 +19,7 @@ import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import TabsWrapper from '../Components/TabsWrapper';
 import apiData from '../Plugins/apiData';
-import { RicosContent, ToolbarSettings } from 'ricos-editor';
+import { DraftContent, ToolbarSettings } from 'ricos-editor';
 import { ToolbarType } from 'wix-rich-content-common';
 import { FooterToolbarConfig } from '../../../main/src/types';
 
@@ -114,7 +114,7 @@ export default () => {
 
       const getToolbarSettings = () => [{ name: ToolbarType.FOOTER, footerToolbarConfig }];
       const editorWrapperProps: {
-        content: RicosContent;
+        content: DraftContent;
         toolbarSettings: ToolbarSettings;
         key?: number;
       } = {
