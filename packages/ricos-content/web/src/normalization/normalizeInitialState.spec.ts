@@ -10,7 +10,6 @@ import {
   AnchorInTextContentState,
   AnchorInImageContentState,
   disableRightClickImageInitialState,
-  disableRightClickImageFixedState,
 } from './Fixtures';
 
 import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
@@ -756,10 +755,7 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(disableRightClickImageInitialState, {
         disableRightClick: true,
       });
-      expect(actual).toEqual({
-        ...disableRightClickImageFixedState,
-        VERSION: Version.currentVersion,
-      });
+      expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
     });
   });
 });

@@ -12,4 +12,3 @@ export { default as AnchorInTextContentState } from './AnchorInTextContentState'
 export { default as AnchorInImageContentState } from './AnchorInImageContentState';
 
 export { default as disableRightClickImageInitialState } from './imageInitialContentState';
-export { default as disableRightClickImageFixedState } from './imageFixedContentState';
