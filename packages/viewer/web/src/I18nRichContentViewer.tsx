@@ -7,7 +7,8 @@ import RichContentViewer, { RichContentViewerProps } from './RichContentViewer';
 
 const WrappedViewer = withI18n<RichContentViewer, Partial<RichContentViewerProps>>(
   RichContentViewer,
-  englishResources
+  englishResources,
+  { forceRemount: false }
 );
 
 export default class I18nRichContentViewer extends Component<Partial<RichContentViewerProps>> {

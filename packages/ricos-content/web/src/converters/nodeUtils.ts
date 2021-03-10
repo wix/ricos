@@ -6,14 +6,21 @@ import {
   Decoration,
   Metadata,
   Timestamp,
+  Decoration_Type,
+  HeadingData,
 } from 'ricos-schema';
+import { Optional } from 'utility-types';
 import { Version } from '..';
 import { genKey } from './generateRandomKey';
 
-export const createParagraphNode = (nodes: Node[] = [], data?: ParagraphData): Node => ({
-  type: Node_Type.PARAGRAPH,
+export const createNode = (type: Node_Type, nodes: Node[] = []): Node => ({
+  type,
   key: genKey(),
   nodes,
+});
+
+export const createParagraphNode = (nodes: Node[] = [], data?: ParagraphData): Node => ({
+  ...createNode(Node_Type.PARAGRAPH, nodes),
   paragraphData: {
     textAlignment: Common_TextAlignment.LEFT,
     ...data,
@@ -21,14 +28,28 @@ export const createParagraphNode = (nodes: Node[] = [], data?: ParagraphData): N
 });
 
 export const createTextNode = (text: string, decorations: Decoration[] = []): Node => ({
-  type: Node_Type.TEXT,
-  key: genKey(),
-  nodes: [],
+  ...createNode(Node_Type.TEXT),
   textData: {
     text,
     decorations,
   },
 });
+
+export const createHeadingNode = (
+  nodes: Node[] = [],
+  data: Optional<HeadingData, 'textAlignment'>
+): Node => ({
+  ...createNode(Node_Type.HEADING, nodes),
+  headingData: {
+    textAlignment: Common_TextAlignment.LEFT,
+    ...data,
+  },
+});
+
+export const createDecoration = (
+  type: Decoration_Type,
+  data: Omit<Decoration, 'type'> = {}
+): Decoration => ({ type, ...data });
 
 export const createTimestamp = (): Timestamp => {
   const timeMS = Date.now();

@@ -27,7 +27,7 @@ export default class HeadingButton extends Component {
     const selection = currentEditorState.getSelection();
     const headingType = currentEditorState
       .getCurrentContent()
-      .blockMap.get(selection.focusKey)
+      .blockMap.get(selection.anchorKey)
       .getType();
     const currentHeading = HEADING_TYPE_TO_ELEMENT[headingType] || 'P';
     this.setState({ currentHeading });

@@ -288,12 +288,14 @@ export default function createAtomicPluginToolbar({
           );
         case BUTTONS.LINK_PREVIEW: {
           return (
-            <BlockLinkButton
-              {...baseLinkProps}
-              unchangedUrl
-              tooltipText={t('LinkPreview_Settings_Tooltip')}
-              icons={button.icons}
-            />
+            !this.state.componentData.html && (
+              <BlockLinkButton
+                {...baseLinkProps}
+                unchangedUrl
+                tooltipText={t('LinkPreview_Settings_Tooltip')}
+                icons={button.icons}
+              />
+            )
           );
         }
         case BUTTONS.DELETE: {
