@@ -1,8 +1,9 @@
 const imageDataNormalizer = (componentData, normalizerConfig) => {
-  if (
+  const shouldNormalizeRightClick =
     componentData.disableRightClick === undefined &&
-    normalizerConfig.disableRightClick !== undefined
-  ) {
+    normalizerConfig.disableRightClick !== undefined;
+
+  if (shouldNormalizeRightClick) {
     componentData.disableRightClick = normalizerConfig.disableRightClick;
   }
 
