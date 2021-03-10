@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.27.0  (Mar 10, 2021)
 ### :rocket: New Feature
 - `plugin-gallery`
   - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons 
@@ -27,12 +31,9 @@
   - [#2262](https://github.com/wix/ricos/pull/2262) `onViewerAction` callback hook now supports link click events
 - `plugin-menu`
   - [#2285](https://github.com/wix/ricos/pull/2285) new advanced section
-
-### :rocket: Polish
+### :nail_care: Polish
 - `ricos-viewer`
-  - performance improvment for non-english locale 
-</details>
-<hr/>
+  - performance improvment for non-english locale
 
 ## 8.26.2 (March 8, 2021)
 ### :bug: Bug Fix
@@ -69,7 +70,7 @@
 ### :bug: Bug Fix
 - `table`
   - [#2252](https://github.com/wix-incubator/rich-content/pull/2252) drag and drop preview position
-  
+
 ## 8.25.0 (March 2, 2021)
 ### :rocket: New Feature
 - `ricos-content`
@@ -160,7 +161,7 @@
 - `ricos-common`
   - [#2183](https://github.com/wix/ricos/pull/2183) `customStyles` fix css-injection with `;` char
 
-## 8.22.4 (Feb 21, 2021)  
+## 8.22.4 (Feb 21, 2021)
 - `common`
   - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
 
@@ -176,7 +177,7 @@
 ### :house: Internal
 - `image`
   - [#2167](https://github.com/wix/ricos/pull/2167) image config type contains optional `consumer` field for Photo Studio's internal BI
-  
+
 ## 8.22.1 (Feb 18, 2021)
 ### :house: Internal
 - `common`
