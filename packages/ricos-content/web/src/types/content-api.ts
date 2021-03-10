@@ -5,6 +5,7 @@ import {
   Node_Type,
   ParagraphData,
   TextData,
+  Decoration,
 } from 'ricos-schema';
 
 type AddPluginMethod<T> = {
@@ -15,6 +16,15 @@ type AddTextMethod<T> = {
   [P in keyof T]: (
     text: string | TextData,
     data: Partial<T[P]>,
+    content?: RichContent
+  ) => RichContent;
+};
+
+type ToggleDecorationMethod = {
+  toggleDecoration: (
+    key: string,
+    decoratedText: string,
+    decorations: Decoration[],
     content?: RichContent
   ) => RichContent;
 };
@@ -38,7 +48,9 @@ type GetPluginDataMap = {
   getParagraphs: ParagraphData;
 };
 
-export type ContentBuilder = AddPluginMethod<AddPluginDataMap> & AddTextMethod<AddTextDataMap>;
+export type ContentBuilder = AddPluginMethod<AddPluginDataMap> &
+  AddTextMethod<AddTextDataMap> &
+  ToggleDecorationMethod;
 export type ContentExtractor = Getter<GetPluginDataMap>;
 
 export const dataByNodeType = (type: Node_Type, data: unknown) =>

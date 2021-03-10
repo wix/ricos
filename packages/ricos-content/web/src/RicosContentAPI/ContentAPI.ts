@@ -11,12 +11,11 @@ export class ContentAPI implements ContentBuilder, ContentExtractor {
 
   extrator: ContentExtractor;
 
-  content: RichContent;
+  content: RichContent = { nodes: [] };
 
   constructor(deps: ContentAPIDeps) {
     this.builder = deps.builder;
     this.extractor = deps.extractor;
-    this.content = { nodes: [] };
   }
 
   addImage(data: ImageData) {

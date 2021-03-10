@@ -7,6 +7,7 @@ import {
   TextData,
   Node_Type,
   Node,
+  Decoration,
 } from 'ricos-schema';
 import { ContentBuilder, dataByNodeType } from '../types';
 
@@ -63,5 +64,14 @@ export class RicosContentBuilder implements ContentBuilder {
       : text;
 
     return this.addTextNode(Node_Type.PARAGRAPH, data, textData, content);
+  }
+
+  toggleDecoration(
+    nodeKey: string,
+    decoratedText: string,
+    decorations: Decoration[],
+    content: RichContent
+  ) {
+    return content;
   }
 }
