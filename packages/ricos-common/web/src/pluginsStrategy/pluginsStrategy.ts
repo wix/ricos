@@ -1,4 +1,4 @@
-import { merge, isEmpty } from 'lodash';
+import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
   ViewerPluginsStrategy,
@@ -8,7 +8,7 @@ import {
 import { RicosCssOverride, RichContentProps } from '../types';
 import {
   AvailableExperiments,
-  RicosContent,
+  DraftContent,
   EditorPlugin,
   ViewerPlugin,
 } from 'wix-rich-content-common';
@@ -25,7 +25,7 @@ const getPluginProps = (
     theme = {},
   }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
   any,
-  content?: RicosContent
+  content?: DraftContent
 ): EditorPluginsStrategy | ViewerPluginsStrategy =>
   isViewer
     ? {
@@ -51,7 +51,7 @@ function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPlugin,
   cssOverride: RicosCssOverride,
-  content?: RicosContent
+  content?: DraftContent
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
   const finalConfig = { ...prev.config, [type]: config };
@@ -74,18 +74,15 @@ export default function pluginsStrategy({
   childProps,
   cssOverride,
   content,
-  experiments,
+  experiments, // eslint-disable-line
 }: {
   isViewer: boolean;
   plugins: BasePlugin[];
   childProps: RichContentProps;
   cssOverride: RicosCssOverride;
-  content?: RicosContent;
+  content?: DraftContent;
   experiments?: AvailableExperiments;
 }): PluginsStrategy {
-  if (!isEmpty(experiments)) {
-    console.debug('PluginsStrategy experiments', experiments); // eslint-disable-line no-console
-  }
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isViewer) {

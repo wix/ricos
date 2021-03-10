@@ -4,11 +4,11 @@ title: Truncate Content
 sidebar_label: Truncate Content
 ---
 
-```js
-truncateContent = (
-  content: RicosContent,
+```tsx
+truncateContent: (
+  content: DraftContent,
   opts?: { wordsCount?: number; maxPlugins?: number; blocksCount?: number }
-): { content: RicosContent; isTruncated: boolean }  
+) => { content: DraftContent; isTruncated: boolean }  
 ```
 
 Truncate existing content according to number of blocks, and optional words count and/or plugin count.

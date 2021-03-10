@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
@@ -17,7 +17,7 @@ const plugins = [
   pluginHtml(),
 ];
 
-const LinkPreviewEditor: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const LinkPreviewEditor: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosEditor plugins={plugins} content={content} />
 );
 
