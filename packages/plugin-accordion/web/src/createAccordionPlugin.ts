@@ -28,4 +28,6 @@ const createAccordionPlugin: CreatePluginFunction<AccordionPluginEditorConfig> =
   });
 };
 
+createAccordionPlugin.functionName = ACCORDION_TYPE;
+
 export { createAccordionPlugin };

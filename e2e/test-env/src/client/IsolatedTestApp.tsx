@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { EditorState, RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import windowContentStateHoc from './WindowContentStateHoc';
-import { RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { DraftContent, SEOSettings } from 'wix-rich-content-common';
 
 interface Props {
   isMobile: boolean;
   locale?: string;
-  contentState?: RicosContent;
+  contentState?: DraftContent;
   editorState?: EditorState;
   localeResource?: Record<string, string>;
   onEditorChange?: RichContentEditorProps['onChange'];
