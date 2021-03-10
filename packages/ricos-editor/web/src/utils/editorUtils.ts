@@ -8,7 +8,7 @@ import { EditorProps } from 'draft-js';
 import { debounce, pick, sortBy, isEqual, isEmpty } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { compare, isContentStateEmpty } from 'ricos-content';
-import { RicosContent, isSSR } from 'wix-rich-content-common';
+import { DraftContent, isSSR } from 'wix-rich-content-common';
 import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
 
@@ -62,7 +62,7 @@ function areBlocksEqual(currentStateBlocks, initialStateBlocks) {
 
 export function createDataConverter(
   onContentChange?: OnContentChangeFunction,
-  initialContent?: RicosContent
+  initialContent?: DraftContent
 ): EditorDataInstance {
   let currContent = initialContent || emptyState;
   let lastContent = currContent;
@@ -92,9 +92,9 @@ export function createDataConverter(
   const getEditorState = () => currEditorState;
 
   const updateTraits = (
-    currContent: RicosContent,
-    lastContent: RicosContent,
-    initialContent: RicosContent
+    currContent: DraftContent,
+    lastContent: DraftContent,
+    initialContent: DraftContent
   ) => {
     const initialBlocksEqual = areBlocksEqual(currContent.blocks, initialContent.blocks);
     const initialEntitiesEqual = isEmpty(

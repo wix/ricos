@@ -8,7 +8,7 @@ import {
 import { RicosCssOverride, RichContentProps } from '../types';
 import {
   AvailableExperiments,
-  RicosContent,
+  DraftContent,
   EditorPlugin,
   ViewerPlugin,
 } from 'wix-rich-content-common';
@@ -25,7 +25,7 @@ const getPluginProps = (
     theme = {},
   }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
   any,
-  content?: RicosContent
+  content?: DraftContent
 ): EditorPluginsStrategy | ViewerPluginsStrategy =>
   isViewer
     ? {
@@ -51,7 +51,7 @@ function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPlugin,
   cssOverride: RicosCssOverride,
-  content?: RicosContent
+  content?: DraftContent
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
   const finalConfig = { ...prev.config, [type]: config };
@@ -80,7 +80,7 @@ export default function pluginsStrategy({
   plugins: BasePlugin[];
   childProps: RichContentProps;
   cssOverride: RicosCssOverride;
-  content?: RicosContent;
+  content?: DraftContent;
   experiments?: AvailableExperiments;
 }): PluginsStrategy {
   if (!isEmpty(experiments)) {

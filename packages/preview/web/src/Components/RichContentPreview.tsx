@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
-import { mergeStyles, RicosContent } from 'wix-rich-content-common';
+import { mergeStyles, DraftContent } from 'wix-rich-content-common';
 import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
 import { ContentStateTransformation } from 'ricos-content/libs/preview';
@@ -9,7 +9,7 @@ import { merge } from 'lodash';
 
 interface Props extends RichContentViewerProps {
   transformation: ContentStateTransformation;
-  initialState: RicosContent;
+  initialState: DraftContent;
 }
 
 interface State {

@@ -20,6 +20,7 @@ export type RicosEntity = Overwrite<RawDraftEntity, { mutability: string }>;
 
 export type RicosEntityMap = { [key: string]: RicosEntity };
 
+// Kept for backwards compatibility, use DraftContent instead
 export interface RicosContent
   extends Overwrite<
     RawDraftContentState,
@@ -30,3 +31,5 @@ export interface RicosContent
   > {
   VERSION?: string;
 }
+
+export interface DraftContent extends RicosContent {}

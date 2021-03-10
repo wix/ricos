@@ -12,7 +12,7 @@ import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { ModalStyles, RicosContent, TextToolbarType } from 'wix-rich-content-common';
+import { ModalStyles, DraftContent, TextToolbarType } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
 import { withBiMockProvider } from '../utils/mockCallbacksData';
@@ -47,9 +47,9 @@ interface ExampleEditprProps {
   shouldMultiSelectImages?: boolean;
   shouldMockUpload?: boolean;
   shouldUseNewContent?: boolean;
-  initialState?: RicosContent;
-  contentState?: RicosContent;
-  injectedContent?: RicosContent;
+  initialState?: DraftContent;
+  contentState?: DraftContent;
+  injectedContent?: DraftContent;
   onRicosEditorChange?: RicosEditorProps['onChange'];
 }
 

@@ -36,7 +36,7 @@ import {
   Version,
   HTML_TYPE,
   GlobalContext,
-  RicosContent,
+  DraftContent,
   RichContentTheme,
   Helpers,
   TranslationFunction,
@@ -110,7 +110,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
   editorKey?: string;
   editorState?: EditorState;
-  initialState?: RicosContent;
+  initialState?: DraftContent;
   theme?: RichContentTheme;
   isMobile?: boolean;
   helpers?: Helpers;
@@ -246,7 +246,19 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.fixDraftSelectionExtend();
   }
+
+  fixDraftSelectionExtend = () => {
+    if (typeof Selection !== 'undefined' && !this.props.isInnerRCE) {
+      const nativeSelectionExtend = Selection.prototype.extend;
+      Selection.prototype.extend = function(...args) {
+        try {
+          return nativeSelectionExtend.apply(this, args);
+        } catch (error) {}
+      };
+    }
+  };
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);

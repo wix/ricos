@@ -5,17 +5,51 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { LINK_PREVIEW_TYPE, TABLE_TYPE } from 'wix-rich-content-common';
+import {
+  LINK_PREVIEW_TYPE,
+  TABLE_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  INDENT_TYPE,
+  LINE_SPACING_TYPE,
+  LINK_TYPE,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GIPHY_TYPE,
+  EMOJI_TYPE,
+  FILE_UPLOAD_TYPE,
+  DIVIDER_TYPE,
+  CODE_BLOCK_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
+  SPOILER_TYPE,
+} from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
 
+const SupportedTablePlugins = [
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  INDENT_TYPE,
+  LINE_SPACING_TYPE,
+  LINK_TYPE,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GIPHY_TYPE,
+  EMOJI_TYPE,
+  FILE_UPLOAD_TYPE,
+  DIVIDER_TYPE,
+  CODE_BLOCK_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
+  SPOILER_TYPE,
+];
+
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editing } = props;
+    const { config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
-    this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.plugins = this.getPlugins();
     this.state = {
       showToolbars: editing || false,
     };
@@ -30,6 +64,20 @@ class InnerRCE extends PureComponent {
       this.handleAtomicPluginsBorders(true);
     }
   }
+
+  getPlugins = () => {
+    const { config, innerRCERenderedIn, plugins } = this.props;
+    let pluginsList;
+    if (config[innerRCERenderedIn].innerRCEPlugins) {
+      pluginsList = config[innerRCERenderedIn].innerRCEPlugins;
+    } else {
+      pluginsList = plugins;
+    }
+    const innerRCEPlugins = pluginsList.filter(plugin =>
+      SupportedTablePlugins.includes(plugin.functionName)
+    );
+    return innerRCEPlugins;
+  };
 
   cleanConfig = config => {
     let clearConfig = config;
@@ -67,11 +115,7 @@ class InnerRCE extends PureComponent {
     return { buttons, context, pubsub };
   };
 
-  selectAllContent = forceSelection => {
-    const { editorState } = this.props;
-    const newEditorState = selectAllContent(editorState, forceSelection);
-    this.props.onChange(newEditorState);
-  };
+  selectAllContent = forceSelection => selectAllContent(this.props.editorState, forceSelection);
 
   focus = () => this.ref.focus();
 

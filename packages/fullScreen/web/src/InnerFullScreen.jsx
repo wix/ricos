@@ -169,10 +169,10 @@ export default class InnerFullscreen extends Component {
   render() {
     const { backgroundColor, topMargin, isMobile, index } = this.props;
     const { isInFullscreen } = this.state;
-    const isHorizontalMobile = isMobile && window.innerWidth > window.screen.height;
+    const width = document.documentElement.clientWidth;
+    const height = document.documentElement.clientHeight;
+    const isHorizontalMobile = isMobile && width > height;
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalMobile);
-    const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
-    const height = isInFullscreen ? window.screen.height : window.innerHeight;
 
     return (
       <div

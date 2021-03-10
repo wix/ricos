@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Inställningar",
 	"LinkPreview_Settings_Tooltip": "Länkinställningar",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "För att sälja tjänster och dela dem i ditt inlägg, gå till App market och installera Wix Bookings.",
-	"UnsupportedPlugin_message": "Det här innehållet kan bara nås via webbläsare",
+	"UnsupportedPlugin_message": "Det här innehållet kan bara redigeras från en webbläsare",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Radera tabell",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Enkät (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "Lägg till ett kodavsnitt",
