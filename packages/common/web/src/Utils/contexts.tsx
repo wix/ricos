@@ -11,13 +11,13 @@ export const GlobalContext = React.createContext<{
 
 export const BIContext = React.createContext<BICallbacks>({});
 
-type BIConsumerHoc = <P>(
-  Component: React.ComponentType<P & { biCallbacks: BICallbacks }>
+type HooksConsumerHoc = <P>(
+  Component: React.ComponentType<P & { hooks: BICallbacks }>
 ) => FunctionComponent<PropsWithoutRef<P>>;
 
-export const withBICallbacks: BIConsumerHoc = Component =>
+export const withHooks: HooksConsumerHoc = Component =>
   React.forwardRef((props, ref) => (
     <BIContext.Consumer>
-      {biCallbacks => <Component {...props} biCallbacks={biCallbacks} ref={ref} />}
+      {hooks => <Component {...props} hooks={hooks} ref={ref} />}
     </BIContext.Consumer>
   ));

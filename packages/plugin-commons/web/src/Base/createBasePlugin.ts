@@ -61,7 +61,7 @@ const DEFAULT_SETTINGS = {
 };
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
-  biCallbacks: BICallbacks;
+  hooks: BICallbacks;
   settings: Record<string, any> & EditorPluginConfig;
   customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
@@ -104,7 +104,7 @@ const createBasePlugin = (
   const pubsub = simplePubsub();
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
-  const biCallbacks = config.biCallbacks;
+  const hooks = config.hooks;
   const isMobile = config.isMobile || false;
   const {
     t,
@@ -184,7 +184,7 @@ const createBasePlugin = (
       blockType: config.type,
       button,
       helpers,
-      biCallbacks,
+      hooks,
       pubsub,
       commonPubsub,
       settings,

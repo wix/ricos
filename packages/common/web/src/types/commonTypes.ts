@@ -83,7 +83,7 @@ interface CommonContextType {
 
 export interface EditorContextType extends CommonContextType {
   config: LegacyEditorPluginConfig;
-  biCallbacks: BICallbacks;
+  hooks: BICallbacks;
   setEditorState: (editorState: EditorState) => void;
   getEditorState: () => EditorState;
   getEditorBounds: GetEditorBounds;

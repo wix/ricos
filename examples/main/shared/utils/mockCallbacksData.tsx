@@ -1,7 +1,7 @@
 import React from 'react';
 import { BICallbacks, BIContext, ContextProviderHOC } from 'wix-rich-content-common';
 
-export const biMock: BICallbacks = {
+export const biMock: Required<BICallbacks> = {
   //these are for testing purposes only in our exampleApp
   onPluginAdd: (...args) => console.debug('biPluginAdd', ...args),
   onPluginAddStep: (...args) => console.debug('onPluginAddStep', ...args),
@@ -12,6 +12,8 @@ export const biMock: BICallbacks = {
   onOpenEditorSuccess: (...args) => console.debug('onOpenEditorSuccess', ...args),
   onViewerAction: (...args) => console.debug('onViewerAction', ...args),
   onViewerLoaded: (...args) => console.debug('onViewerLoaded', ...args),
+  onMediaUploadEnd: (...args) => console.debug('onMediaUploadEnd', ...args),
+  onMediaUploadStart: (...args) => console.debug('onMediaUploadStart', ...args),
 };
 
 export const withBiMockProvider: ContextProviderHOC = Component => props => (

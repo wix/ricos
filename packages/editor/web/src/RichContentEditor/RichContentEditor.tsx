@@ -59,7 +59,7 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
-  withBICallbacks,
+  withHooks,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -115,7 +115,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   isMobile?: boolean;
   helpers?: Helpers;
   t: TranslationFunction;
-  biCallbacks: BICallbacks;
+  hooks: BICallbacks;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
   config: LegacyEditorPluginConfig;
@@ -188,7 +188,7 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
   };
   refId: number;
   commonPubsub: Pubsub;
-  handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
+  handleCallbacks: (newState: EditorState, hooks?: BICallbacks) => void | undefined;
   contextualData: EditorContextType;
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
   editorWrapper: Element;
@@ -356,7 +356,7 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
       anchorTarget,
       relValue,
       helpers = {},
-      biCallbacks,
+      hooks,
       config,
       isMobile = false,
       shouldRenderOptimizedImages,
@@ -374,8 +374,8 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
       anchorTarget,
       relValue,
       helpers,
-      biCallbacks: {
-        ...biCallbacks,
+      hooks: {
+        ...hooks,
         onMediaUploadStart: (...args) => {
           const {
             correlationId,
@@ -589,7 +589,7 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
 
   updateEditorState = (editorState: EditorState) => {
     this.setState({ editorState }, () => {
-      this.handleCallbacks(this.state.editorState, this.props.biCallbacks);
+      this.handleCallbacks(this.state.editorState, this.props.hooks);
       this.props.onChange?.(this.state.editorState);
     });
   };
@@ -1028,7 +1028,7 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
   }
 }
 
-export default withBICallbacks(RichContentEditor);
+export default withHooks(RichContentEditor);
 
 declare global {
   interface Window {

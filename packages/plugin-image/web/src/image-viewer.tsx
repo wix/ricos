@@ -14,7 +14,7 @@ import {
   Helpers,
   RichContentTheme,
   SEOSettings,
-  withBICallbacks,
+  withHooks,
   BICallbacks,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
@@ -54,7 +54,7 @@ interface ImageViewerProps {
   setComponentUrl: (highres?: string) => unknown;
   seoMode: SEOSettings;
   blockKey: string;
-  biCallbacks: BICallbacks;
+  hooks: BICallbacks;
 }
 
 interface ImageSrc {
@@ -329,9 +329,9 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     e.preventDefault();
     const {
       settings: { onExpand },
-      biCallbacks = {},
+      hooks = {},
     } = this.props;
-    biCallbacks.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
+    hooks.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
     onExpand?.(this.props.blockKey);
   };
 
@@ -440,4 +440,4 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   }
 }
 
-export default withBICallbacks(ImageViewer);
+export default withHooks(ImageViewer);

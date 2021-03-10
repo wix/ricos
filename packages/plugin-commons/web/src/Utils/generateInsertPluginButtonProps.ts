@@ -24,7 +24,7 @@ export function generateInsertPluginButtonProps({
   blockType,
   button,
   helpers,
-  biCallbacks,
+  hooks,
   pubsub,
   commonPubsub,
   settings,
@@ -41,7 +41,7 @@ export function generateInsertPluginButtonProps({
   blockType: string;
   button: InsertButton;
   helpers: Helpers;
-  biCallbacks: BICallbacks;
+  hooks: BICallbacks;
   pubsub: Pubsub;
   commonPubsub: Pubsub;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -56,10 +56,9 @@ export function generateInsertPluginButtonProps({
   pluginMenuButtonRef?: HTMLElement;
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
-  const onPluginAdd = () =>
-    biCallbacks.onPluginAdd?.(blockType, toolbarName, Version.currentVersion);
+  const onPluginAdd = () => hooks.onPluginAdd?.(blockType, toolbarName, Version.currentVersion);
   const onPluginAddStep = (step: onPluginAddStepArgs['step']) => {
-    biCallbacks.onPluginAddStep?.({
+    hooks.onPluginAddStep?.({
       version: Version.currentVersion,
       entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
@@ -69,7 +68,7 @@ export function generateInsertPluginButtonProps({
     });
   };
   const onPluginAddSuccess = () =>
-    biCallbacks.onPluginAddSuccess?.(blockType, toolbarName, Version.currentVersion);
+    hooks.onPluginAddSuccess?.(blockType, toolbarName, Version.currentVersion);
 
   function addBlock(data) {
     const { newBlock, newSelection, newEditorState } = createBlock(

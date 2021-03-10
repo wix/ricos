@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, withBICallbacks } from 'wix-rich-content-common';
+import { mergeStyles, withHooks } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import FileInput from '../Components/FileInput';
@@ -39,7 +39,7 @@ export default ({
       pluginMenuButtonRef: PropTypes.any,
       forceDisabled: PropTypes.bool,
       sideToolbar: PropTypes.bool,
-      biCallbacks: PropTypes.object,
+      hooks: PropTypes.object,
     };
 
     constructor(props) {
@@ -71,7 +71,7 @@ export default ({
         getEditorState,
         closePluginMenu,
         pluginMenuButtonRef,
-        biCallbacks,
+        hooks,
       } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
@@ -89,7 +89,7 @@ export default ({
         toolbarName: this.toolbarName,
         closePluginMenu,
         pluginMenuButtonRef,
-        biCallbacks,
+        hooks,
       });
     };
 
@@ -195,5 +195,5 @@ export default ({
     }
   }
 
-  return withBICallbacks(InsertPluginButton);
+  return withHooks(InsertPluginButton);
 };
