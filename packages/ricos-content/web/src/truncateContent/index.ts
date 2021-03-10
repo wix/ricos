@@ -1,13 +1,13 @@
-import { RicosContent, RicosContentBlock, RicosEntityMap } from '..';
+import { DraftContent, RicosContentBlock, RicosEntityMap } from '..';
 
 export const truncateContent = (
-  content: RicosContent, // The content to truncate
+  content: DraftContent, // The content to truncate
   limits: {
     blocksCount?: number; // Limit on number of blocks
     wordsCount?: number; // Limit on number of words
     maxPlugins?: number; // Limit on number of plugin blocks
   } = {}
-): { content: RicosContent; isTruncated: boolean } => {
+): { content: DraftContent; isTruncated: boolean } => {
   const { blocks, entityMap } = content;
   const { wordsCount = Infinity, maxPlugins = Infinity, blocksCount = Infinity } = limits;
   if (

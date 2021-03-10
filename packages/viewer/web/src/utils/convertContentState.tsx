@@ -4,7 +4,7 @@ import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
-  RicosContent,
+  DraftContent,
   TextDirection,
   PluginMapping,
   ViewerContextType,
@@ -26,7 +26,7 @@ import Anchor from '../components/Anchor';
 import styles from '../../statics/rich-content-viewer.scss';
 import { withInteraction } from '../withInteraction';
 
-const isEmptyContentState = (raw?: RicosContent) =>
+const isEmptyContentState = (raw?: DraftContent) =>
   !raw ||
   !raw.blocks ||
   (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
@@ -205,7 +205,7 @@ const getEntities = (
   };
 };
 
-const normalizeContentState = (contentState: RicosContent): RicosContent => ({
+const normalizeContentState = (contentState: DraftContent): DraftContent => ({
   ...contentState,
   blocks: contentState.blocks.map((block, index) => {
     if (block.type === 'atomic') {
@@ -260,7 +260,7 @@ const convertToReact = (
   context: ViewerContextType,
   decorators: Decorator[],
   inlineStyleMappers: InlineStyleMapperFunction[],
-  initSpoilers: (content?: RicosContent) => RicosContent | undefined,
+  initSpoilers: (content?: DraftContent) => DraftContent | undefined,
   SpoilerViewerWrapper: unknown,
   options: { addAnchors?: boolean | string; [key: string]: unknown } = {},
   innerRCEViewerProps?: {

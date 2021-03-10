@@ -1,5 +1,5 @@
 import React from 'react';
-import { RicosContent, RicosEditor, RicosEditorType } from 'ricos-editor';
+import { DraftContent, RicosEditor, RicosEditorType } from 'ricos-editor';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
@@ -45,7 +45,7 @@ function getPlugins(handleVideoUpload, handleFileUpload) {
 }
 
 interface Props {
-  content: RicosContent;
+  content: DraftContent;
   handleFileUpload: (updateEntity) => void;
   handleVideoUpload: (file, updateEntity, removeEntity) => void;
   handleImageUpload: Helpers['handleFileSelection'];
