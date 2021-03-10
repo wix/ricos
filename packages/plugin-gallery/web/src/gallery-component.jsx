@@ -132,7 +132,7 @@ class GalleryComponent extends PureComponent {
         type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;
       const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, type);
       handleFileUpload(file, ({ data, error }) => {
-        const item = createGalleryItem(data, Date.now().toString());
+        const item = data && createGalleryItem(data, Date.now().toString());
         uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
         this.setItemInGallery(item, error, itemIdx);
       });
@@ -179,7 +179,7 @@ class GalleryComponent extends PureComponent {
       const img = new Image();
       img.onload = e => this.imageLoaded(e, file, itemPos);
       img.src = event.target.result;
-    } else if (file.type.match('video/*')) {
+    } else {
       this.handleFileUpload(file, GALLERY_ITEMS_TYPES.VIDEO, itemPos);
     }
   };
