@@ -9,7 +9,7 @@ import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { RicosViewer } from 'ricos-viewer';
-import { withBiMockProvider } from '../utils/mockCallbacksData';
+import { withHooksMockProvider } from '../utils/mockHooksData';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -142,4 +142,4 @@ class Viewer extends PureComponent<ExampleViewerProps, ExampleViewerState> {
   }
 }
 
-export default withBiMockProvider(Viewer);
+export default withHooksMockProvider(Viewer);

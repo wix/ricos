@@ -59,7 +59,6 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
-  withHooks,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -70,6 +69,7 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
+import { HooksContext } from 'wix-rich-content-common/dist/module.cjs';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -179,7 +179,7 @@ function makeBarrelRoll() {
   );
 }
 
-export class RichContentEditor extends Component<RichContentEditorProps, State> {
+export default class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialEditorState: {
     entities: EntityInstance[];
@@ -975,7 +975,7 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
         return null;
       }
       const { isMobile = false } = this.props;
-      const { theme } = this.contextualData;
+      const { theme, hooks } = this.contextualData;
       const themeDesktopStyle = theme.desktop
         ? { [theme.desktop]: !isMobile && theme && theme.desktop }
         : {};
@@ -984,41 +984,43 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
         ...themeDesktopStyle,
       });
       return (
-        <GlobalContext.Provider value={this.state.context}>
-          <Measure bounds onResize={this.onResize}>
-            {({ measureRef }) => (
-              <div
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                style={this.props.style}
-                ref={measureRef}
-                className={wrapperClassName}
-                dir={direction || getLangDir(this.props.locale)}
-                data-id={'rce'}
-              >
-                {this.renderStyleTag()}
+        <HooksContext.Provider value={hooks}>
+          <GlobalContext.Provider value={this.state.context}>
+            <Measure bounds onResize={this.onResize}>
+              {({ measureRef }) => (
                 <div
-                  ref={this.setEditorWrapper}
-                  className={classNames(styles.editor, theme.editor)}
-                  style={editorStyle}
+                  onFocus={this.onFocus}
+                  onBlur={this.onBlur}
+                  style={this.props.style}
+                  ref={measureRef}
+                  className={wrapperClassName}
+                  dir={direction || getLangDir(this.props.locale)}
+                  data-id={'rce'}
                 >
-                  {this.renderAccessibilityListener()}
-                  {this.renderEditor()}
-                  {showToolbars && this.renderToolbars()}
-                  {this.renderInlineModals()}
-                  {this.renderErrorToast()}
-                  <InnerModal
-                    theme={theme}
-                    locale={locale}
-                    innerModal={innerModal}
-                    closeInnerModal={this.closeInnerModal}
-                    editorWrapper={this.editorWrapper}
-                  />
+                  {this.renderStyleTag()}
+                  <div
+                    ref={this.setEditorWrapper}
+                    className={classNames(styles.editor, theme.editor)}
+                    style={editorStyle}
+                  >
+                    {this.renderAccessibilityListener()}
+                    {this.renderEditor()}
+                    {showToolbars && this.renderToolbars()}
+                    {this.renderInlineModals()}
+                    {this.renderErrorToast()}
+                    <InnerModal
+                      theme={theme}
+                      locale={locale}
+                      innerModal={innerModal}
+                      closeInnerModal={this.closeInnerModal}
+                      editorWrapper={this.editorWrapper}
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
-          </Measure>
-        </GlobalContext.Provider>
+              )}
+            </Measure>
+          </GlobalContext.Provider>
+        </HooksContext.Provider>
       );
     } catch (err) {
       onError(err);
@@ -1026,8 +1028,6 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
     }
   }
 }
-
-export default withHooks(RichContentEditor);
 
 declare global {
   interface Window {

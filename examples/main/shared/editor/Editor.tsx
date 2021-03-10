@@ -15,7 +15,7 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ModalStyles, DraftContent, TextToolbarType } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
-import { withBiMockProvider } from '../utils/mockCallbacksData';
+import { withHooksMockProvider } from '../utils/mockHooksData';
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -315,4 +315,4 @@ class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
   }
 }
 
-export default withBiMockProvider(Editor);
+export default withHooksMockProvider(Editor);

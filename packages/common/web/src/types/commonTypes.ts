@@ -1,4 +1,4 @@
-import { RicosHooks } from './RicosHooksTypes';
+import { RicosHooks } from './hooksTypes';
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
 import { ComponentData, DraftContent } from 'ricos-content';

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { withI18n, ToolbarType } from 'wix-rich-content-common';
 import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
-import RichContentEditor, {
-  RichContentEditorProps,
-  RichContentEditor as EditorClass,
-} from './RichContentEditor';
+import RichContentEditor, { RichContentEditorProps } from './RichContentEditor';
 
 const WrappedEditor = withI18n<typeof RichContentEditor, Partial<RichContentEditorProps>>(
   RichContentEditor,
@@ -12,7 +9,7 @@ const WrappedEditor = withI18n<typeof RichContentEditor, Partial<RichContentEdit
 );
 
 export default class I18nRichContentEditor extends Component<Partial<RichContentEditorProps>> {
-  editor: EditorClass;
+  editor: RichContentEditor;
   static displayName = 'RichContentEditor';
 
   setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);
@@ -26,6 +23,7 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
   blur = () => this.editor.blur();
 
   // TODO: remove postId param once the getContent(postId) API is completely deprecated
+  // TODO: remove in v9
   publish = (postId?: string) => this.editor.publish(postId); //async
 
   render() {

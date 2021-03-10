@@ -28,7 +28,6 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
-  withHooks,
   RicosHooks,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
@@ -73,7 +72,7 @@ export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
-class RichContentViewer extends Component<
+export default class RichContentViewer extends Component<
   RichContentViewerProps,
   {
     raw?: DraftContent;
@@ -272,5 +271,3 @@ class RichContentViewer extends Component<
     }
   }
 }
-
-export default withHooks(RichContentViewer);
