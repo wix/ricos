@@ -29,6 +29,7 @@ import {
   InlineStyleMapperFunction,
   AvailableExperiments,
   withBICallbacks,
+  BICallbacks,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -68,6 +69,7 @@ export interface RichContentViewerProps {
   isInnerRcv?: boolean;
   renderedInTable?: boolean;
   onHover?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  hooks?: BICallbacks;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
@@ -141,10 +143,11 @@ class RichContentViewer extends Component<
       seoMode,
       iframeSandboxDomain,
       textAlignment,
+      hooks,
     }: RichContentViewerProps,
     contentState?: DraftContent
   ): ViewerContextType => {
-    deprecateHelpers(helpers, config);
+    deprecateHelpers(helpers, config, hooks);
     return {
       t,
       theme,

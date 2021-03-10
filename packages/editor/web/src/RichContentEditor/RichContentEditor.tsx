@@ -150,7 +150,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   maxTextLength?: number;
   experiments?: AvailableExperiments;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
-  /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
+  hooks?: BICallbacks;
+  /** This is a legacy API, changes should be made also in the new Ricos Editor API **/
 }
 
 interface State {
@@ -557,14 +558,15 @@ export class RichContentEditor extends Component<RichContentEditorProps, State> 
     this.fixHelpers(nextProps.helpers);
   }
 
-  fixHelpers(helpers) {
+  fixHelpers(helpers?: Helpers) {
+    const { config, hooks } = this.props;
     if (helpers?.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete
       delete helpers.onFilesChange;
     }
-    deprecateHelpers(helpers, this.props.config);
+    deprecateHelpers(helpers, config, hooks);
   }
 
   // TODO: get rid of this ASAP!

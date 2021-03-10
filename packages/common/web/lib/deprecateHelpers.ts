@@ -1,7 +1,12 @@
 import { IMAGE_TYPE, GALLERY_TYPE } from 'ricos-content';
 import { Helpers } from '../src';
 
-export const deprecateHelpers = (helpers: Helpers = {}, config) => {
+export const deprecateHelpers = (
+  helpers: Helpers = {},
+  config,
+  hooks
+  // hooks: BICallbacks
+) => {
   const { onExpand } = helpers;
   if (onExpand) {
     if (config[GALLERY_TYPE]) {
@@ -13,4 +18,7 @@ export const deprecateHelpers = (helpers: Helpers = {}, config) => {
     // eslint-disable-next-line fp/no-delete
     delete helpers.onExpand;
   }
+  Object.entries(helpers).forEach(([key, value]) => {
+    hooks[key] = value;
+  });
 };

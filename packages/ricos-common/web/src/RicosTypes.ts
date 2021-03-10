@@ -9,6 +9,7 @@ import {
   RelValue,
   EditorPlugin,
   ViewerPlugin,
+  BICallbacks,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -33,6 +34,7 @@ export interface RicosProps {
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
+  hooks?: BICallbacks;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -59,7 +61,6 @@ export interface RicosEditorProps extends RicosProps {
   maxTextLength?: number;
   editorEvents1?: EditorEvents;
   editorEvents2?: EditorEvents;
-
   /* Changes to this interface should also be reflected in the API docs */
 }
 
