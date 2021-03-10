@@ -10,7 +10,6 @@ import {
   AnchorInTextContentState,
   AnchorInImageContentState,
   videoInitialState,
-  videoFixedState,
 } from './Fixtures';
 import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
 
@@ -752,10 +751,10 @@ describe('normalizeInitialState', () => {
 
   describe('Video normalizer', () => {
     it('should add disableDownload prop to video componentData', () => {
-      const result = normalizeInitialState(videoInitialState, {
+      const actual = normalizeInitialState(videoInitialState, {
         disableVideoDownload: true,
       });
-      expect(result).toEqual({ ...videoFixedState, VERSION: Version.currentVersion });
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
     });
   });
 });
