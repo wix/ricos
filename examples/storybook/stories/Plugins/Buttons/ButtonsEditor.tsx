@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 
 const config = {
@@ -8,7 +8,7 @@ const config = {
 
 const plugins = [pluginActionButton(config), pluginLinkButton()];
 
-const ButtonsEditor: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const ButtonsEditor: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosEditor plugins={plugins} content={content} />
 );
 

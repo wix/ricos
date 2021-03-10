@@ -50,4 +50,6 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
   });
 };
 
+createGalleryPlugin.functionName = GALLERY_TYPE;
+
 export { createGalleryPlugin };

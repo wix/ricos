@@ -65,4 +65,6 @@ const createButtonPlugin = (
   });
 };
 
+createButtonPlugin.functionName = 'wix-rich-content-plugin-button';
+
 export { createLinkButtonPlugin, createActionButtonPlugin, LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE };
