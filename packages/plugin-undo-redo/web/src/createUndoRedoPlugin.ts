@@ -21,4 +21,6 @@ const createUndoRedoPlugin: CreatePluginFunction<UndoRedoPluginEditorConfig> = c
   });
 };
 
+createUndoRedoPlugin.functionName = UNDO_REDO_TYPE;
+
 export { createUndoRedoPlugin };

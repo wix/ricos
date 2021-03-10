@@ -1,6 +1,6 @@
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
-import { ComponentData, RicosContent } from 'ricos-content';
+import { ComponentData, DraftContent } from 'ricos-content';
 import {
   DecorationMode,
   TranslationFunction,
@@ -102,7 +102,7 @@ export interface ViewerContextType extends CommonContextType {
   disabled?: boolean;
   seoMode?: SEOSettings;
   disableRightClick?: boolean;
-  contentState?: RicosContent;
+  contentState?: DraftContent;
   textAlignment?: 'left' | 'right';
 }
 

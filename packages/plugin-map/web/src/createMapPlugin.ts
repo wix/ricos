@@ -31,4 +31,6 @@ const createMapPlugin: CreatePluginFunction<MapPluginEditorConfig> = config => {
   });
 };
 
+createMapPlugin.functionName = MAP_TYPE;
+
 export { createMapPlugin, MAP_TYPE };

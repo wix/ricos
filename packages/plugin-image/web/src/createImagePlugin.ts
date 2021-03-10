@@ -96,4 +96,6 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
   });
 };
 
+createImagePlugin.functionName = IMAGE_TYPE;
+
 export { createImagePlugin };
