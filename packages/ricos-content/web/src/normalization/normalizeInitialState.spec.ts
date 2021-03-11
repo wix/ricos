@@ -10,7 +10,7 @@ import {
   AnchorInTextContentState,
   AnchorInImageContentState,
 } from './Fixtures';
-import { RicosInlineStyleRange, RicosEntityRange, RicosContent, RicosContentBlock } from '../types';
+import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
 
 const createState = ({
   text = 'bla bla bla  bla   ',
@@ -25,10 +25,10 @@ const createState = ({
   type?: RicosContentBlock['type'];
   inlineStyleRanges?: RicosInlineStyleRange[];
   entityRanges?: RicosEntityRange[];
-  entityMap?: RicosContent['entityMap'];
+  entityMap?: DraftContent['entityMap'];
   data?: RicosContentBlock['data'];
-  VERSION?: RicosContent['VERSION'];
-}): RicosContent =>
+  VERSION?: DraftContent['VERSION'];
+}): DraftContent =>
   deepFreeze({
     blocks: [{ text, type, inlineStyleRanges, depth: 0, key: '1', entityRanges, data }],
     entityMap: entityMap || {},
@@ -660,7 +660,7 @@ describe('normalizeInitialState', () => {
       config: {},
     });
 
-    const initialState = (VERSION: string, titleString: string): RicosContent => ({
+    const initialState = (VERSION: string, titleString: string): DraftContent => ({
       blocks: [
         {
           key: 'bmpfl',

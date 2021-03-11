@@ -1,7 +1,7 @@
 import React from 'react';
 import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import {
-  RicosContent,
+  DraftContent,
   RicosEditor,
   RicosEditorProps,
   RicosEditorType,
@@ -189,7 +189,7 @@ const getToolbarSettings = () => [
 ];
 
 interface Props {
-  content?: RicosContent;
+  content?: DraftContent;
   onChange?: RicosEditorProps['onChange'];
   isMobile?: boolean;
   pluginsToDisplay?: string[];

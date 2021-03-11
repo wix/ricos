@@ -38,19 +38,21 @@ import 'wix-rich-content-plugin-table/dist/styles.min.css';
 <RicosViewer plugins={[pluginTable()]} />;
 ```
 
-## Table Config API
+### Currently supported plugins
 
-### `innerRCEPlugins`
+For now, these are the plugins that are supported in the table and can be added when editing a cell:
 
-Controls which plugins will be available to add to the table cells.
-If innerRCEPlugins is not defined - the available plugins will be those you already consume out of the SupportedTablePlugins
-
-```jsx
-  innerRCEPlugins?: SupportedTablePlugins[];
-```
-
-Example value:
-
-```jsx
-[createImagePlugin, createDividerPlugin, createVideoPlugin];
-```
+1. Text color
+2. Text highlight
+3. Indent
+4. Line spacing
+5. Link
+6. Image
+7. Video
+8. Gif
+9. Emoji
+10. File upload
+11. Divider
+12. Code block
+13. Unsupported blocks
+14. Spoiler

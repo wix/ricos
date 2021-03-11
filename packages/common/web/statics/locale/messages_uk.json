@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Налаштування",
 	"LinkPreview_Settings_Tooltip": "Налаштування посилання",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Щоб продавати послуги та поділитися ними в пості, перейдіть до магазину додатків на вашому сайті і встановіть Wix Bookings.",
-	"UnsupportedPlugin_message": "Цей контент доступний лише в браузері",
+	"UnsupportedPlugin_message": "Цей блок можна редагувати лише у браузері",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Видалити таблицю",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Опитування (пікс.)",
 	"TextCodeBlock_InsertButton_Tooltip": "Додати фрагмент коду",

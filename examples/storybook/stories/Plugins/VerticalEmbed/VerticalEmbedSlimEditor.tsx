@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import {
   pluginVerticalEmbed,
   verticalEmbedProviders,
@@ -16,7 +16,7 @@ const plugins = [
   }),
 ];
 
-const VerticalEmbedSlimEditor: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const VerticalEmbedSlimEditor: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosEditor plugins={plugins} content={content} />
 );
 
