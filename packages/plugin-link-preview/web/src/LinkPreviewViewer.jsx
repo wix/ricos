@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate } from 'wix-rich-content-common';
+import { mergeStyles, validate, withPluginContexts } from 'wix-rich-content-common';
+import { LINK_PREVIEW_TYPE } from './types';
 // eslint-disable-next-line max-len
 import pluginLinkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 import styles from '../statics/styles/link-preview.scss';
@@ -17,6 +18,7 @@ class LinkPreviewViewer extends Component {
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
     iframeSandboxDomain: PropTypes.string,
+    hooks: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -37,6 +39,11 @@ class LinkPreviewViewer extends Component {
     validate(pluginLinkPreviewSchema, this.props.componentData);
     this.setState({ imageHeight: this.image?.offsetHeight });
   }
+
+  onClick = () => {
+    const { hooks, componentData } = this.props;
+    hooks.onViewerAction?.(LINK_PREVIEW_TYPE, 'onClick', componentData.config);
+  };
 
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
@@ -81,7 +88,8 @@ class LinkPreviewViewer extends Component {
       return <HtmlComponent {...htmlCompProps} />;
     } else {
       return (
-        <figure className={linkPreview} data-hook="linkPreviewViewer">
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+        <figure className={linkPreview} data-hook="linkPreviewViewer" onClick={this.onClick}>
           <div
             style={{
               width: isMobile ? '110px' : imageHeight,
@@ -103,4 +111,4 @@ class LinkPreviewViewer extends Component {
   }
 }
 
-export default LinkPreviewViewer;
+export default withPluginContexts(LinkPreviewViewer);
