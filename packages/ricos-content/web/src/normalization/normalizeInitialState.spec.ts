@@ -9,7 +9,6 @@ import {
   processedInlineGalleryContentState,
   AnchorInTextContentState,
   AnchorInImageContentState,
-  galleryInitialState,
 } from './Fixtures';
 import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
 
@@ -746,13 +745,6 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(AnchorInImageContentState, {});
       expect(actual.entityMap['0'].data.config.link).toEqual({ anchor: 'cjvg0' });
       expect(actual.entityMap['1'].data.config.link).toEqual({ anchor: 'cjvg0' });
-    });
-  });
-
-  describe('disableRightClick normalizer', () => {
-    it('should add disableRightClick prop to gallery componentData', () => {
-      const actual = normalizeInitialState(galleryInitialState, { disableRightClick: true });
-      expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
     });
   });
 });
