@@ -93,6 +93,9 @@ const ViewerWrapper: FunctionComponent<Props> = ({
       isMobile={isMobile}
       preview={preview}
       mediaSettings={{ fullscreenProps: { backgroundColor: 'black', foregroundColor: 'white' } }}
+      hooks={{
+        onViewerLoaded: (...args) => console.log('onViewerLoaded', ...args),
+      }}
     >
       <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
     </RicosViewer>

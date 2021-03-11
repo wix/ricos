@@ -57,12 +57,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
-    const { children } = this.props;
+    const { children, hooks } = this.props;
     const onOpenEditorSuccess =
       children?.props.helpers?.onOpenEditorSuccess || //TODO: Remove in v9
       children?.props.hooks?.onOpenEditorSuccess ||
       this.props._rcProps?.helpers?.onOpenEditorSuccess || //TODO: Remove in v9
-      this.props._rcProps?.hooks?.onOpenEditorSuccess;
+      this.props._rcProps?.hooks?.onOpenEditorSuccess ||
+      hooks?.onOpenEditorSuccess;
     onOpenEditorSuccess?.(Version.currentVersion);
     this.props.editorEvents1?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
     this.props.editorEvents2?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);

@@ -225,6 +225,9 @@ class EditorWrapper extends React.Component<Props> {
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
+        hooks={{
+          onOpenEditorSuccess: (...args) => console.log('onOpenEditorSuccess', ...args),
+        }}
       >
         <RichContentEditor
           onFocus={onFocus}
