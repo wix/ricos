@@ -26,6 +26,7 @@ export default class InnerFullscreen extends Component {
     document.addEventListener('keydown', this.onEsc);
     window.addEventListener('resize', this.onWindowResize);
     this.addFullscreenChangeListener();
+    this.setState({ size: this.getDimensions() });
   }
 
   componentWillUnmount() {
@@ -53,7 +54,7 @@ export default class InnerFullscreen extends Component {
     }
   };
 
-  onWindowResize = () => this.forceUpdate();
+  onWindowResize = () => this.setState({ size: this.getDimensions() });
 
   onFullscreenChange = () => this.setState({ isInFullscreen: !!fscreen.fullscreenElement });
 
@@ -171,23 +172,17 @@ export default class InnerFullscreen extends Component {
     const { isMobile } = this.props;
     const { isInFullscreen } = this.state;
     const container = this.containerRef.current?.getBoundingClientRect?.();
-    if (container) {
-      let { width, height } = container;
-      width = isInFullscreen || isMobile ? width : width - 18;
-      height = isInFullscreen || isMobile ? height : height - 70;
-      return { width, height };
-    }
-    return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
-    };
+    let { width, height } = container;
+    const isHorizontalMobile = isMobile && width > height;
+    width = isInFullscreen || isMobile ? width : width - 18;
+    height = isInFullscreen || isHorizontalMobile ? height : isMobile ? height - 40 : height - 70;
+    return { width, height };
   };
 
   render() {
     const { backgroundColor, topMargin, isMobile, index } = this.props;
-    const { isInFullscreen } = this.state;
-    const { width, height } = this.getDimensions();
-    const isHorizontalView = width > height;
+    const { isInFullscreen, size } = this.state;
+    const isHorizontalView = size?.width > size?.height;
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalView);
 
     return (
@@ -200,29 +195,31 @@ export default class InnerFullscreen extends Component {
       >
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
-        <ProGallery
-          items={this.items}
-          currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
-          eventsListener={this.handleGalleryEvents}
-          resizeMediaUrl={fullscreenResizeMediaUrl}
-          container={{ width, height }}
-          styles={{
-            ...layouts[5],
-            galleryLayout: 5,
-            cubeType: 'fit',
-            scrollSnap: true,
-            videoPlay: 'auto',
-            allowSocial: false,
-            loveButton: false,
-            allowTitle: true,
-            defaultShowInfoExpand: 1,
-            showArrows: !isMobile,
-            arrowsPosition,
-            slideshowInfoSize,
-          }}
-          customSlideshowInfoRenderer={this.infoElement}
-          customNavArrowsRenderer={this.customArrowRenderer}
-        />
+        {size && (
+          <ProGallery
+            items={this.items}
+            currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
+            eventsListener={this.handleGalleryEvents}
+            resizeMediaUrl={fullscreenResizeMediaUrl}
+            container={size}
+            styles={{
+              ...layouts[5],
+              galleryLayout: 5,
+              cubeType: 'fit',
+              scrollSnap: true,
+              videoPlay: 'auto',
+              allowSocial: false,
+              loveButton: false,
+              allowTitle: true,
+              defaultShowInfoExpand: 1,
+              showArrows: !isMobile,
+              arrowsPosition,
+              slideshowInfoSize,
+            }}
+            customSlideshowInfoRenderer={this.infoElement}
+            customNavArrowsRenderer={this.customArrowRenderer}
+          />
+        )}
       </div>
     );
   }
