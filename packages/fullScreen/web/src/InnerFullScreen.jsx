@@ -26,7 +26,7 @@ export default class InnerFullscreen extends Component {
     document.addEventListener('keydown', this.onEsc);
     window.addEventListener('resize', this.onWindowResize);
     this.addFullscreenChangeListener();
-    this.setState({ size: this.getDimensions() });
+    this.onWindowResize();
   }
 
   componentWillUnmount() {
@@ -54,7 +54,20 @@ export default class InnerFullscreen extends Component {
     }
   };
 
-  onWindowResize = () => this.setState({ size: this.getDimensions() });
+  shouldToggleFullscreenOnMobile = ({ width, height }) => {
+    const { isInFullscreen } = this.state;
+    return (
+      this.props.isMobile &&
+      ((isInFullscreen && height > width) || (!isInFullscreen && height < width))
+    );
+  };
+
+  onWindowResize = () => {
+    const size = this.getDimensions();
+    this.setState({ size }, () => {
+      this.shouldToggleFullscreenOnMobile(size) && this.toggleFullscreenMode();
+    });
+  };
 
   onFullscreenChange = () => this.setState({ isInFullscreen: !!fscreen.fullscreenElement });
 
@@ -71,16 +84,11 @@ export default class InnerFullscreen extends Component {
     }
   };
 
-  getStyleParams = isHorizontalView => {
+  getStyleParams = () => {
     const { isInFullscreen } = this.state;
-    let arrowsPosition = 0;
-    let slideshowInfoSize = 0;
-    if (this.props.isMobile) {
-      slideshowInfoSize = isHorizontalView ? 0 : 40;
-    } else if (!isInFullscreen) {
-      arrowsPosition = 1;
-      slideshowInfoSize = 142;
-    }
+    const { isMobile } = this.props;
+    const arrowsPosition = isInFullscreen || isMobile ? 0 : 1;
+    const slideshowInfoSize = isInFullscreen ? 0 : isMobile ? 40 : 142;
     return { arrowsPosition, slideshowInfoSize };
   };
 
@@ -173,17 +181,15 @@ export default class InnerFullscreen extends Component {
     const { isInFullscreen } = this.state;
     const container = this.containerRef.current?.getBoundingClientRect?.();
     let { width, height } = container;
-    const isHorizontalMobile = isMobile && width > height;
     width = isInFullscreen || isMobile ? width : width - 18;
-    height = isInFullscreen || isHorizontalMobile ? height : isMobile ? height - 40 : height - 70;
+    height = isInFullscreen ? height : isMobile ? height - 40 : height - 70;
     return { width, height };
   };
 
   render() {
     const { backgroundColor, topMargin, isMobile, index } = this.props;
     const { isInFullscreen, size } = this.state;
-    const isHorizontalView = size?.width > size?.height;
-    const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalView);
+    const { arrowsPosition, slideshowInfoSize } = this.getStyleParams();
 
     return (
       <div
