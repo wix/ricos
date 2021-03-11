@@ -49,7 +49,7 @@ module.exports = {
   },
   ricos: {
     'Getting Started': ['ricos/ricos-intro', 'ricos/quick-start', 'ricos/adding-a-viewer'],
-    Features: ['ricos/theming', 'ricos/preview', 'ricos/keyboard_shortcuts'],
+    Features: ['ricos/theming', 'ricos/hooks', 'ricos/preview', 'ricos/keyboard_shortcuts'],
     'Known Issues': ['ricos/adsense', 'ricos/mobile_support', 'ricos/media_handling'],
     'Migration Guides': [
       'ricos/migrations/v7-to-v8',
