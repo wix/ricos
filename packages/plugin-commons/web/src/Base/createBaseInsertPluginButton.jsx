@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, withPluginContexts } from 'wix-rich-content-common';
+import { mergeStyles, withHooks } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import FileInput from '../Components/FileInput';
@@ -195,5 +195,5 @@ export default ({
     }
   }
 
-  return withPluginContexts(InsertPluginButton);
+  return withHooks(InsertPluginButton);
 };

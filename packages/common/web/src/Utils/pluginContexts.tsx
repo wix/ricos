@@ -6,7 +6,7 @@ type HooksConsumerHoc = <P>(
   Component: React.ComponentType<P & { hooks: RicosHooks }>
 ) => FunctionComponent<PropsWithoutRef<P>>;
 
-const withHooks: HooksConsumerHoc = Component =>
+export const withHooks: HooksConsumerHoc = Component =>
   React.forwardRef((props, ref) => (
     <HooksContext.Consumer>
       {hooks => <Component {...props} hooks={hooks} ref={ref} />}

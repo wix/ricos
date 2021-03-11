@@ -153,7 +153,7 @@ class GalleryViewer extends React.Component {
       settings: { onExpand },
       hooks,
     } = this.props;
-    hooks.onViewerAction?.(GALLERY_TYPE, 'expand_gallery', '');
+    hooks.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
     onExpand?.(this.props.blockKey, data.idx);
   };
 
