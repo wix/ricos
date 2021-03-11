@@ -46,7 +46,7 @@ import {
   NormalizeConfig,
   ModalStyles,
   LegacyEditorPluginConfig,
-  BICallbacks,
+  RicosHooks,
   AnchorTarget,
   RelValue,
   EditorContextType,
@@ -59,6 +59,7 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  HooksContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -114,6 +115,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   isMobile?: boolean;
   helpers?: Helpers;
   t: TranslationFunction;
+  hooks?: RicosHooks;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
   config: LegacyEditorPluginConfig;
@@ -148,7 +150,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   maxTextLength?: number;
   experiments?: AvailableExperiments;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
-  /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
+  /** This is a legacy API, changes should be made also in the new Ricos Editor API **/
 }
 
 interface State {
@@ -177,7 +179,7 @@ function makeBarrelRoll() {
   );
 }
 
-class RichContentEditor extends Component<RichContentEditorProps, State> {
+export default class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialEditorState: {
     entities: EntityInstance[];
@@ -185,7 +187,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
   refId: number;
   commonPubsub: Pubsub;
-  handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
+  handleCallbacks: (newState: EditorState, hooks?: RicosHooks) => void | undefined;
   contextualData: EditorContextType;
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
   editorWrapper: Element;
@@ -352,6 +354,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       anchorTarget,
       relValue,
       helpers = {},
+      hooks = {},
       config,
       isMobile = false,
       shouldRenderOptimizedImages,
@@ -360,7 +363,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       innerRCERenderedIn,
     } = this.props;
 
-    this.fixHelpers(helpers);
+    this.fixHelpers(helpers, hooks);
 
     this.contextualData = {
       theme: theme || {},
@@ -368,10 +371,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       locale,
       anchorTarget,
       relValue,
-      helpers: {
-        ...helpers,
-        onPluginAdd: (pluginId: string, entryPoint: string) =>
-          helpers.onPluginAdd?.(pluginId, entryPoint, Version.currentVersion),
+      helpers,
+      hooks: {
+        ...(hooks || {}),
         onMediaUploadStart: (...args) => {
           const {
             correlationId,
@@ -382,7 +384,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
           } = createUploadStartBIData(...args);
-          helpers.onMediaUploadStart?.(
+          hooks.onMediaUploadStart?.(
             correlationId,
             pluginId,
             fileSize,
@@ -403,7 +405,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore
           } = createUploadEndBIData(...args);
-          helpers.onMediaUploadEnd?.(
+          hooks.onMediaUploadEnd?.(
             correlationId,
             pluginId,
             duration,
@@ -414,8 +416,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             Version.currentVersion
           );
         },
-        onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
-          helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
       },
       config,
       isMobile,
@@ -553,17 +553,20 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
-    this.fixHelpers(nextProps.helpers);
+    if (nextProps.helpers) {
+      this.fixHelpers(nextProps.helpers);
+    }
   }
 
-  fixHelpers(helpers) {
-    if (helpers?.onFilesChange) {
+  fixHelpers(helpers: Helpers, hooks?: RicosHooks) {
+    const { config } = this.props;
+    if (helpers.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete
       delete helpers.onFilesChange;
     }
-    deprecateHelpers(helpers, this.props.config);
+    deprecateHelpers(helpers, config, hooks);
   }
 
   // TODO: get rid of this ASAP!
@@ -575,7 +578,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   createContentMutationEvents = (initialEditorState: EditorState, version: string) => {
     const calculate = createCalcContentDiff(initialEditorState);
-    return (newState: EditorState, { onPluginDelete }: BICallbacks = {}) =>
+    return (newState: EditorState, { onPluginDelete }: RicosHooks = {}) =>
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
         onCallbacks: ({ pluginsDeleted = [] }) => {
@@ -586,7 +589,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   updateEditorState = (editorState: EditorState) => {
     this.setState({ editorState }, () => {
-      this.handleCallbacks(this.state.editorState, this.props.helpers);
+      this.handleCallbacks(this.state.editorState, this.props.hooks);
       this.props.onChange?.(this.state.editorState);
     });
   };
@@ -973,7 +976,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         return null;
       }
       const { isMobile = false } = this.props;
-      const { theme } = this.contextualData;
+      const { theme, hooks } = this.contextualData;
       const themeDesktopStyle = theme.desktop
         ? { [theme.desktop]: !isMobile && theme && theme.desktop }
         : {};
@@ -983,39 +986,41 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       });
       return (
         <GlobalContext.Provider value={this.state.context}>
-          <Measure bounds onResize={this.onResize}>
-            {({ measureRef }) => (
-              <div
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                style={this.props.style}
-                ref={measureRef}
-                className={wrapperClassName}
-                dir={direction || getLangDir(this.props.locale)}
-                data-id={'rce'}
-              >
-                {this.renderStyleTag()}
+          <HooksContext.Provider value={hooks}>
+            <Measure bounds onResize={this.onResize}>
+              {({ measureRef }) => (
                 <div
-                  ref={this.setEditorWrapper}
-                  className={classNames(styles.editor, theme.editor)}
-                  style={editorStyle}
+                  onFocus={this.onFocus}
+                  onBlur={this.onBlur}
+                  style={this.props.style}
+                  ref={measureRef}
+                  className={wrapperClassName}
+                  dir={direction || getLangDir(this.props.locale)}
+                  data-id={'rce'}
                 >
-                  {this.renderAccessibilityListener()}
-                  {this.renderEditor()}
-                  {showToolbars && this.renderToolbars()}
-                  {this.renderInlineModals()}
-                  {this.renderErrorToast()}
-                  <InnerModal
-                    theme={theme}
-                    locale={locale}
-                    innerModal={innerModal}
-                    closeInnerModal={this.closeInnerModal}
-                    editorWrapper={this.editorWrapper}
-                  />
+                  {this.renderStyleTag()}
+                  <div
+                    ref={this.setEditorWrapper}
+                    className={classNames(styles.editor, theme.editor)}
+                    style={editorStyle}
+                  >
+                    {this.renderAccessibilityListener()}
+                    {this.renderEditor()}
+                    {showToolbars && this.renderToolbars()}
+                    {this.renderInlineModals()}
+                    {this.renderErrorToast()}
+                    <InnerModal
+                      theme={theme}
+                      locale={locale}
+                      innerModal={innerModal}
+                      closeInnerModal={this.closeInnerModal}
+                      editorWrapper={this.editorWrapper}
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
-          </Measure>
+              )}
+            </Measure>
+          </HooksContext.Provider>
         </GlobalContext.Provider>
       );
     } catch (err) {
@@ -1024,8 +1029,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   }
 }
-
-export default RichContentEditor;
 
 declare global {
   interface Window {

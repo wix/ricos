@@ -25,7 +25,8 @@ export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
 export { getTextDirection, getDirectionFromAlignmentAndTextDirection } from './Utils/textDirection';
-export { GlobalContext } from './Utils/contexts';
+export * from './Utils/contexts';
+export * from './Utils/pluginContexts';
 
 export { isHexColor } from './Utils/colorUtils';
 export { isRtl, getLangDir } from './Utils/rtlUtils';

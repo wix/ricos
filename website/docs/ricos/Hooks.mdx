@@ -1,0 +1,77 @@
+---
+id: hooks
+title: Hooks
+sidebar_label: Hooks
+---
+
+Hooks API allows you to hook into several internal events occuring within Ricos.
+Your callbacks will be triggered according to each hooks' specific purpose.
+
+```jsx
+hooks?: {
+  onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
+  onPluginAddStep?(args): void;
+  onPluginAddSuccess?(pluginId: string, entryPoint: string, version: string): void;
+  onPluginDelete?(pluginId: string, version: string): void;
+  onPublish?(pluginsCount?: Object, pluginsDetails?: { type: string; data: any; }[],
+        version: string): void;
+  onViewerAction?(pluginId: string, actionName: string, value: string): void;
+  onViewerLoaded?(isPreview: boolean, version: string): void;
+  onOpenEditorSuccess?(version: string): void;
+  onPluginChange?(pluginId: string, changeObject: { from: string; to: string },
+        version: string): void;
+  onMediaUploadStart?(correlationId: string, pluginId: string, fileSize?: number,
+        mediaType?: string, version: string): void;
+  onMediaUploadEnd?(correlationId: string, pluginId: string,
+        duration: number, fileSize?: number, mediaType?: string,
+   	    isSuccess: boolean, errorType?: string, version: string): void;
+}
+```
+
+The `hooks` object type is identical both for `RicosEditor` and `RicosViewer`.
+
+| Function              | Description                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `onPluginAdd`         | Triggered when a plugin insert button was clicked (from one of the toolbars).                                 |
+| `onPluginAddStep`     | Triggered when a user reaches an additional step to complete plugin addition (e.g. file upload, emoji picker) |
+| `onPluginAddSuccess`  | Triggered when a plugin was successfully added to the content                                                 |
+| `onPluginDelete`      | Triggered when a plugin is deleted.                                                                           |
+| `onPublish`           | Triggered when you call `this.editor.getContent('...', true)` and provide `true` for `isPublish`              |
+| `onViewerAction`      | Triggered on image expand, determines whether on gallery plugin or image plugin                               |
+| `onViewerLoaded`      | Triggered when Viewer was loaded successfully                                                                 |
+| `onOpenEditorSuccess` | Triggered when Editor was loaded successfully                                                                 |
+| `onMediaUploadStart`  | Triggered when user has started to upload a media file                                                        |
+| `onMediaUploadEnd`    | Triggered when user has finished to upload a media file (whether successfully or not)                         |
+
+```jsx {2}
+<RicosEditor
+  hooks={{
+    onPluginAdd: (pluginId, entryPoint, version) =>
+      console.log('onPluginAdd', pluginId, entryPoint, version),
+    onPluginAddSuccess: (pluginId, entryPoint, version) =>
+      console.log('onPluginAddSuccess', pluginId, entryPoint, version),
+    onPluginDelete: (pluginId, version) => console.log('onPluginDelete', plugin_id, version),
+    onPublish: (pluginsCount, pluginsDetails, version) =>
+      console.log('onOnPublish', pluginsCount, pluginsDetails, version),
+    onViewerAction: (actionName, pluginId) => console.log('onViewerAction', actionName, pluginId),
+  }}
+/>
+```
+
+:::note
+`onViewerAction` is only callback for `RicosViewer`, while the rest are for the `RicosEditor`.
+`hooks` is a work in progress, and more events are planned to be added. Keep in touch with us on slack to influence.
+:::
+
+| Arguments              | Description                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------- |
+| `pluginId: string`     | Name of plugin (e.g `code-block`)                                                               |
+| `entryPoint: string`   | The toolbar from which the plugin was added from (e.g `FOOTER`, `INLINE`)                       |
+| `version: string`      | The version of Ricos (e.g. `7.6.1`)                                                             |
+| `pluginsCount: node`   | Contains the counted usage for each plugin. Example: `{ plugin-hashtag: 3, ...}`                |
+| `pluginsDetails: node` | Contains details about each plugin (for example: image alignment, size, text alignment, etc...) |
+| `actionName: string`   | Name of action that was made on the viewer. Currently sends `expand_image`, `expand_gallery`    |
+
+:::note
+You can [read more](https://ricos.js.org/docs/ricos/ricos-api/#ref) about `getContent` API to further understand when `onPublish` is triggered.
+:::

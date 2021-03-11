@@ -1,5 +1,5 @@
 import React from 'react';
-import { TranslationFunction, AvailableExperiments } from '../types';
+import { RicosHooks, TranslationFunction, AvailableExperiments } from '../types';
 
 export const GlobalContext = React.createContext<{
   experiments?: AvailableExperiments;
@@ -8,3 +8,5 @@ export const GlobalContext = React.createContext<{
 }>({
   isMobile: false,
 });
+
+export const HooksContext = React.createContext<RicosHooks>({});

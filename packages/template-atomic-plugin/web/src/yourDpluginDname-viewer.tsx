@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { mergeStyles, RichContentTheme, ComponentData } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  RichContentTheme,
+  ComponentData,
+  withPluginContexts,
+  RicosHooks,
+} from 'wix-rich-content-common';
 import styles from '../statics/styles/yourDpluginDname.scss';
 import { YourPluginNamePluginViewerConfig } from './types';
 
@@ -7,6 +13,7 @@ interface Props {
   componentData: ComponentData;
   settings: YourPluginNamePluginViewerConfig;
   theme: RichContentTheme;
+  hooks: RicosHooks;
 }
 
 class YourPluginNameViewer extends Component<Props> {
@@ -18,4 +25,4 @@ class YourPluginNameViewer extends Component<Props> {
   }
 }
 
-export default YourPluginNameViewer;
+export default withPluginContexts(YourPluginNameViewer);

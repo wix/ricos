@@ -9,6 +9,7 @@ import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { RicosViewer } from 'ricos-viewer';
+import { mockHooks } from '../utils/mockHooksData';
 
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -84,12 +85,6 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
     } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
-      helpers: {
-        // This is for debugging only
-        onViewerAction: async (actionName, pluginId, value) =>
-          console.log('onViewerAction', actionName, pluginId, value),
-        onViewerLoaded: async (...args) => console.log('onViewerLoaded', ...args),
-      },
       localeResource,
       locale,
       relValue,
@@ -109,14 +104,13 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
               content={initialState}
               plugins={Plugins.viewerPlugins}
               locale={locale}
+              hooks={mockHooks}
               linkSettings={{ relValue, anchorTarget }}
               isMobile={isMobile}
               cssOverride={theme}
               mediaSettings={{ pauseMedia: disabled }}
               seoSettings={seoMode}
-            >
-              <RichContentViewer helpers={viewerProps.helpers} />
-            </RicosViewer>
+            />
           </div>
         ) : (
           <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
@@ -126,6 +120,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
               inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
               decorators={Plugins.decorators}
               config={this.pluginsConfig}
+              hooks={mockHooks}
               {...viewerProps}
             />
             {this.shouldRenderFullscreen && (

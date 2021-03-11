@@ -11,6 +11,6 @@ export * from './commonTypes';
 export * from './editorTypes';
 export * from './mediaUploadTypes';
 export * from './pluginTypes';
-export * from './biCallbacksTypes';
+export * from './hooksTypes';
 export * from './toolbarEnums';
 export * from './toolbarSettingsTypes';

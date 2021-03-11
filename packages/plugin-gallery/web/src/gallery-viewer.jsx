@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles } from 'wix-rich-content-common';
+import { validate, mergeStyles, withPluginContexts } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
@@ -151,9 +151,9 @@ class GalleryViewer extends React.Component {
   handleExpand = data => {
     const {
       settings: { onExpand },
-      helpers = {},
+      hooks,
     } = this.props;
-    helpers.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
+    hooks.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
     onExpand?.(this.props.blockKey, data.idx);
   };
 
@@ -261,10 +261,11 @@ GalleryViewer.propTypes = {
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   helpers: PropTypes.object.isRequired,
+  hooks: PropTypes.object.isRequired,
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
   seoMode: PropTypes.bool,
   itemOverlayElement: PropTypes.elementType,
 };
 
-export default GalleryViewer;
+export default withPluginContexts(GalleryViewer);

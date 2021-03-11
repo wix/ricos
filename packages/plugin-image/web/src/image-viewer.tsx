@@ -14,6 +14,8 @@ import {
   Helpers,
   RichContentTheme,
   SEOSettings,
+  withPluginContexts,
+  RicosHooks,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -52,6 +54,7 @@ interface ImageViewerProps {
   setComponentUrl: (highres?: string) => unknown;
   seoMode: SEOSettings;
   blockKey: string;
+  hooks: RicosHooks;
 }
 
 interface ImageSrc {
@@ -70,7 +73,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   imageRef: RefObject<HTMLImageElement>;
   styles: Record<string, string>;
 
-  constructor(props) {
+  constructor(props: ImageViewerProps) {
     super(props);
     validate(props.componentData, pluginImageSchema);
     this.state = {};
@@ -326,9 +329,9 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     e.preventDefault();
     const {
       settings: { onExpand },
-      helpers = {},
+      hooks,
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
+    hooks.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
     onExpand?.(this.props.blockKey);
   };
 
@@ -437,4 +440,4 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   }
 }
 
-export default ImageViewer;
+export default withPluginContexts(ImageViewer);

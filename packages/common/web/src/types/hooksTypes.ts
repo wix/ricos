@@ -11,7 +11,7 @@ export interface onPluginAddStepArgs extends biCallbackParams {
   entryType: EntryType;
   step: 'FileUploadDialog' | 'PluginModal';
 }
-export interface BICallbacks {
+export interface RicosHooks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
   onPluginAddSuccess?(pluginId: string, entryPoint: string, version: string): void;
   onPluginAddStep?(params: onPluginAddStepArgs): void;

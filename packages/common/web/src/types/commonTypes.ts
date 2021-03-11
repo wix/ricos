@@ -1,3 +1,4 @@
+import { RicosHooks } from './hooksTypes';
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
 import { ComponentData, DraftContent } from 'ricos-content';
@@ -72,6 +73,7 @@ export interface SEOSettings {
 interface CommonContextType {
   theme: RichContentTheme;
   t: TranslationFunction;
+  hooks: RicosHooks;
   locale: string;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -82,6 +84,7 @@ interface CommonContextType {
 
 export interface EditorContextType extends CommonContextType {
   config: LegacyEditorPluginConfig;
+  hooks: RicosHooks;
   setEditorState: (editorState: EditorState) => void;
   getEditorState: () => EditorState;
   getEditorBounds: GetEditorBounds;

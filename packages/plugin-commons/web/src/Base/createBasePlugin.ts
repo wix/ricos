@@ -26,6 +26,7 @@ import {
   GetEditorState,
   SetEditorState,
   UnderlyingPlugin,
+  RicosHooks,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
 import { UNSUPPORTED_BLOCKS_TYPE } from '../consts';
@@ -60,6 +61,7 @@ const DEFAULT_SETTINGS = {
 };
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
+  hooks: RicosHooks;
   settings: Record<string, any> & EditorPluginConfig;
   customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
@@ -102,6 +104,7 @@ const createBasePlugin = (
   const pubsub = simplePubsub();
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
+  const hooks = config.hooks;
   const isMobile = config.isMobile || false;
   const {
     t,
@@ -181,6 +184,7 @@ const createBasePlugin = (
       blockType: config.type,
       button,
       helpers,
+      hooks,
       pubsub,
       commonPubsub,
       settings,

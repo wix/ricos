@@ -28,6 +28,8 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
+  HooksContext,
+  RicosHooks,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -36,7 +38,6 @@ import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtli
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import { combineMappers } from './utils/combineMappers';
-
 export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
   initialState?: DraftContent;
@@ -49,6 +50,7 @@ export interface RichContentViewerProps {
   inlineStyleMappers: InlineStyleMapperFunction[];
   decorators: Decorator[];
   t: TranslationFunction;
+  hooks?: RicosHooks;
   theme: RichContentTheme;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -70,7 +72,7 @@ export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
-class RichContentViewer extends Component<
+export default class RichContentViewer extends Component<
   RichContentViewerProps,
   {
     raw?: DraftContent;
@@ -140,10 +142,11 @@ class RichContentViewer extends Component<
       seoMode,
       iframeSandboxDomain,
       textAlignment,
+      hooks = {},
     }: RichContentViewerProps,
     contentState?: DraftContent
   ): ViewerContextType => {
-    deprecateHelpers(helpers, config);
+    deprecateHelpers(helpers, config, hooks);
     return {
       t,
       theme,
@@ -152,6 +155,7 @@ class RichContentViewer extends Component<
       relValue,
       config,
       helpers,
+      hooks,
       locale,
       disabled,
       seoMode,
@@ -252,14 +256,16 @@ class RichContentViewer extends Component<
 
       return (
         <GlobalContext.Provider value={this.state.context}>
-          <div
-            className={wrapperClassName}
-            dir={direction || getLangDir(locale)}
-            onMouseEnter={e => onHover && onHover(e)}
-          >
-            <div className={editorClassName}>{output}</div>
-            <AccessibilityListener isMobile={this.props.isMobile} />
-          </div>
+          <HooksContext.Provider value={contextualData.hooks}>
+            <div
+              className={wrapperClassName}
+              dir={direction || getLangDir(locale)}
+              onMouseEnter={e => onHover && onHover(e)}
+            >
+              <div className={editorClassName}>{output}</div>
+              <AccessibilityListener isMobile={this.props.isMobile} />
+            </div>
+          </HooksContext.Provider>
         </GlobalContext.Provider>
       );
     } catch (err) {
@@ -268,5 +274,3 @@ class RichContentViewer extends Component<
     }
   }
 }
-
-export default RichContentViewer;
