@@ -26,6 +26,10 @@
 - `*`
   - [#1777](https://github.com/wix/ricos/pull/1777) `HooksContext` replacing `helpers` object
 
+### :bug: Bug Fix
+- `fullscreen`
+  - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
+
 </details>
 <hr/>
 
