@@ -23,9 +23,15 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  createBlock,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
-import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
+import {
+  ContentBlock,
+  EntityInstance,
+  EditorProps as DraftEditorProps,
+  DraftHandleValue,
+} from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
@@ -612,6 +618,34 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return customHeadings;
   };
 
+  handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
+    if (this.props.helpers?.handleFileUpload) {
+      this.props.helpers.handleFileUpload(blobs[0] as File, ({ data, error }) => {
+        const componentData = {
+          config: {
+            alignment: 'center',
+            size: 'content',
+            showTitle: true,
+            showDescription: true,
+            disableExpand: false,
+          },
+          src: data,
+          error,
+        };
+
+        const { newSelection, newEditorState } = createBlock(
+          this.getEditorState(),
+          componentData,
+          'wix-draft-plugin-image'
+        );
+
+        this.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+      });
+    }
+
+    return 'handled';
+  };
+
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       const handled = this.props.handlePastedText(text, html, editorState);
@@ -821,6 +855,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onChange={this.updateEditorState}
         handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
+        handlePastedFiles={this.handlePastedFiles}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
