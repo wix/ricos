@@ -329,7 +329,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     e.preventDefault();
     const {
       settings: { onExpand },
-      hooks = {},
+      hooks,
     } = this.props;
     hooks.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
     onExpand?.(this.props.blockKey);

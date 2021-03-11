@@ -12,7 +12,7 @@ export const GlobalContext = React.createContext<{
 export const HooksContext = React.createContext<RicosHooks>({});
 
 type HooksConsumerHoc = <P>(
-  Component: React.ComponentType<P & { hooks?: RicosHooks }>
+  Component: React.ComponentType<P & { hooks: RicosHooks }>
 ) => FunctionComponent<PropsWithoutRef<P>>;
 
 export const withHooks: HooksConsumerHoc = Component =>
