@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `fullscreen`
+  - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
+
 </details>
 <hr/>
 
