@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { RichContent, Node, Node_Type } from 'ricos-schema';
-import { RicosContent, RicosContentBlock } from '../../..';
+import { DraftContent, RicosContentBlock } from '../../..';
 import { genKey } from '../../generateRandomKey';
 import {
   BlockType,
@@ -19,12 +19,12 @@ import {
   parseEntityDecorations,
 } from './decorationParsers';
 
-export const ensureDraftContent = (content: RichContent | RicosContent) =>
+export const ensureDraftContent = (content: RichContent | DraftContent) =>
   'nodes' in content ? toDraft(content) : content;
 
-export const toDraft = (ricosContent: RichContent): RicosContent => {
+export const toDraft = (ricosContent: RichContent): DraftContent => {
   const { nodes, metadata } = RichContent.toJSON(RichContent.fromJSON(ricosContent)) as RichContent; // using toJSON to remove undefined fields
-  const draftContent: RicosContent = {
+  const draftContent: DraftContent = {
     blocks: [],
     entityMap: {},
   };

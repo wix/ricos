@@ -1,8 +1,8 @@
 import { truncateContent } from 'ricos-content/libs/truncateContent';
-import { RicosContent } from 'ricos-content';
+import { DraftContent } from 'ricos-content';
 
 export const truncateContentState = (
-  contentState: RicosContent,
+  contentState: DraftContent,
   index: number,
   opts: { wordsCount?: number; maxPlugins?: number } = {}
 ) => {

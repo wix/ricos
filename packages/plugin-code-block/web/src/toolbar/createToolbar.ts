@@ -42,6 +42,7 @@ const codeBlockTexButtontMapper: CreatePluginToolbar = config => {
         addBlockHandler: commandHandler,
         type: BUTTON_TYPES.CUSTOM_BLOCK,
         tooltip: config.t('TextCodeBlock_InsertButton_Tooltip'),
+        section: 'BlockToolbar_Section_Advanced',
       },
     ],
     name: CODE_BLOCK_TYPE,

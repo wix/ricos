@@ -1,9 +1,9 @@
 import React from 'react';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { RicosContent } from '../../index';
+import { DraftContent } from '../../index';
 
 interface Props {
-  initialState: RicosContent;
+  initialState: DraftContent;
   isOpen: boolean;
   index: number;
   images: Record<string, unknown>[];

@@ -1,6 +1,6 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
-  RicosContent,
+  DraftContent,
   OnErrorFunction,
   SEOSettings,
   LinkPanelSettings,
@@ -24,7 +24,7 @@ export interface RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: ReactElement;
-  content?: RicosContent;
+  content?: DraftContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
   linkSettings?: LinkSettings;
@@ -55,7 +55,7 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
-  injectedContent?: RicosContent;
+  injectedContent?: DraftContent;
   maxTextLength?: number;
   editorEvents1?: EditorEvents;
   editorEvents2?: EditorEvents;
@@ -75,7 +75,7 @@ export interface ContentStateGetterArgs {
   shouldRemoveErrorBlocks?: boolean;
 }
 
-export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => DraftContent;
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
@@ -86,10 +86,10 @@ export interface EditorDataInstance {
   getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
-  getContentStatePromise: () => Promise<RicosContent>;
+  getContentStatePromise: () => Promise<DraftContent>;
 }
 
-export type OnContentChangeFunction = (content: RicosContent) => void;
+export type OnContentChangeFunction = (content: DraftContent) => void;
 
 export type OnBusyChangeFunction = (isBusy: boolean) => void;
 

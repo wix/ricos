@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 
-.expand_mode {
+.fullscreen_mode, .expand_mode {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,45 +8,30 @@
   height: 100vh;
   z-index: 100001;
   background: white;
-  padding-top: 70px;
-  padding-left: 7px;
-  @include phone {
-    padding-left: 0px;
-    padding-top: 77px;
-  }
 
   :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
     direction: ltr !important;
   }
 }
 
-.fullscreen_mode {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100001;
-  background: white;
-
-  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
-    direction: ltr !important;
-  }
+.expand_mode {
+  padding-top: 70px;
+  padding-left: 7px;
 }
 
 .nav_arrow_left, .nav_arrow_right {
-  position: absolute;
+  position: fixed;
   > svg {
     filter: drop-shadow(0px 0px 0px black) !important;
   }
 }
 
 .nav_arrow_left {
-  right: 12px;
+  left: 16px;
 }
 
 .nav_arrow_right {
-  left: 12px;
+  right: 16px;
 }
 
 .close {
@@ -57,8 +42,8 @@
   right: 42px;
   top: 0px;
   @include phone {
-    right: 20px;
-    top: 20px;
+    right: 0px;
+    top: 5px;
     > svg {
       width: 20px;
       height: 20px;

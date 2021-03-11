@@ -1,0 +1,58 @@
+---
+id: TablePlugin
+title: Table Plugin
+sidebar_label: Table Plugin
+---
+
+import { pluginTable } from 'wix-rich-content-plugin-table';
+import 'wix-rich-content-plugin-table/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Table plugin allows the user to add super cool table!
+
+<div className="card tablePlugin">
+  <RicosEditorWithMobile
+    content={createContent('Add a table!')}
+    placeholder={'Type here!'}
+    plugins={[pluginTable()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginTable } from 'wix-rich-content-plugin-table';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-table/dist/styles.min.css';
+<RicosEditor plugins={[pluginTable()]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginTable } from 'wix-rich-content-plugin-table/dist/module.viewer';
+import 'wix-rich-content-plugin-table/dist/styles.min.css';
+<RicosViewer plugins={[pluginTable()]} />;
+```
+
+### Currently supported plugins
+
+For now, these are the plugins that are supported in the table and can be added when editing a cell:
+
+1. Text color
+2. Text highlight
+3. Indent
+4. Line spacing
+5. Link
+6. Image
+7. Video
+8. Gif
+9. Emoji
+10. File upload
+11. Divider
+12. Code block
+13. Unsupported blocks
+14. Spoiler

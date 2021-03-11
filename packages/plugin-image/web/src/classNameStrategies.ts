@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { camelCase, isNumber, upperFirst } from 'lodash';
-import { ClassNameStrategy, ComponentData } from 'wix-rich-content-common';
+import { ClassNameStrategy, ComponentData, TABLE_TYPE } from 'wix-rich-content-common';
 
 const shouldDisableStyles = (componentData: ComponentData, isMobile: boolean) => {
   const { size, width } = componentData.config || {};
@@ -36,7 +36,7 @@ export const sizeClassName: ClassNameStrategy = (
   if (!size || (isMobile && size === 'original')) {
     return '';
   }
-  const isRenderedInTable = innerRCERenderedIn === 'table';
+  const isRenderedInTable = innerRCERenderedIn === TABLE_TYPE;
   return shouldDisableStyles(componentData, isMobile)
     ? classNames(styles.sizeFullWidth, theme.sizeFullWidth)
     : classNames(
