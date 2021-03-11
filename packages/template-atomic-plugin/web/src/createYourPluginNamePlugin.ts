@@ -25,4 +25,6 @@ const createYourPluginNamePlugin: CreatePluginFunction<YourPluginNamePluginEdito
   });
 };
 
+createYourPluginNamePlugin.functionName = YOUR_PLUGIN_NAME_TYPE;
+
 export { createYourPluginNamePlugin };

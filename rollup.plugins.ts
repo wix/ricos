@@ -19,6 +19,7 @@ import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
+import { writeFileSync } from 'fs';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -48,12 +49,6 @@ const copy = (): Plugin => {
 
 const copyAfterBundleWritten = (): Plugin => {
   const targets = [
-    // create cjs version for lib declaration files
-    {
-      src: ['dist/lib/*.d.ts', '!dist/lib/*.cjs.d.ts'],
-      dest: 'dist/lib',
-      rename: (name: string) => `${name.replace('.d', '')}.cjs.d.ts`,
-    },
     // create viewer entry point declaration files
     {
       src: 'dist/src/viewer.d.ts',
@@ -218,6 +213,13 @@ const visualizer = (): Plugin => {
   });
 };
 
+const createFakeStylesFile = (): Plugin => ({
+  name: 'create-fake-styles-file',
+  writeBundle() {
+    writeFileSync('dist/styles.min.css', '');
+  },
+});
+
 let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
@@ -234,6 +236,10 @@ if (!IS_DEV_ENV) {
 
 if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
+}
+
+if (process.env.EXTRACT_CSS === 'false') {
+  _plugins = [..._plugins, createFakeStylesFile()];
 }
 
 const plugins = (shouldExtractCss: boolean) => {

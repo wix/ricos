@@ -22,4 +22,6 @@ const createSpoilerPlugin: CreatePluginFunction<SpoilerPluginEditorConfig> = con
   });
 };
 
+createSpoilerPlugin.functionName = SPOILER_TYPE;
+
 export { createSpoilerPlugin };

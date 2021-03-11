@@ -2345,7 +2345,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand image on f
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120
@@ -2524,12 +2523,11 @@ exports[`plugins > full screen > innerRCE images full screen > expand image on f
             47,
             47
           ],
-          "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     },
     "1": {
       "data": {
@@ -2680,7 +2678,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
     "0": {
       "data": {
         "config": {
-          "alignment": "center",
           "colsMinWidth": [
             120,
             120
@@ -2813,12 +2810,11 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
             47,
             47
           ],
-          "size": "content"
         },
-        "type": "table"
+        "type": "wix-rich-content-plugin-table"
       },
       "mutability": "IMMUTABLE",
-      "type": "table"
+      "type": "wix-rich-content-plugin-table"
     },
     "1": {
       "data": {

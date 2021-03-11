@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "Mitä haluat linkittää?",
   "HtmlEditPanel_HttpsError": "Varmista, että URL-osoite alkaa HTTPS:llä",
   "Poll_Presets_Popup_Subtitle": "Voit muokata ulkoasua ja tunnelmaa myöhemmin.",
+  "BlockToolbar_Section_Advanced": "Advanced ",
   "SettingsPanelFooter_Done": "Valmis",
   "GallerySettings_Image_Settings": "Muokkaa",
   "GallerySettings_LayoutControlSection_Row": "Rivin korkeus",

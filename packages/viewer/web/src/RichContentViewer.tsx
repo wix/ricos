@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/aria-props */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import {
@@ -8,7 +11,7 @@ import {
   SPOILER_TYPE,
   GlobalContext,
   Version,
-  RicosContent,
+  DraftContent,
   TranslationFunction,
   SEOSettings,
   Helpers,
@@ -36,7 +39,7 @@ import { combineMappers } from './utils/combineMappers';
 
 export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
-  initialState?: RicosContent;
+  initialState?: DraftContent;
   isMobile?: boolean;
   renderStaticHtml?: boolean;
   helpers?: Helpers;
@@ -63,20 +66,19 @@ export interface RichContentViewerProps {
   experiments?: AvailableExperiments;
   isInnerRcv?: boolean;
   renderedInTable?: boolean;
-  width?: number;
+  onHover?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
 class RichContentViewer extends Component<
   RichContentViewerProps,
   {
-    raw?: RicosContent;
+    raw?: DraftContent;
     error?: string;
     context: {
       experiments?: AvailableExperiments;
       isMobile: boolean;
       t?: TranslationFunction;
-      containerWidth?: number;
     };
   }
 > {
@@ -101,9 +103,9 @@ class RichContentViewer extends Component<
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.typeMappers = combineMappers(props.typeMappers);
-    const { experiments, isMobile = false, t, width } = props;
+    const { experiments, isMobile = false, t } = props;
     this.state = {
-      context: { experiments, isMobile, t, containerWidth: width },
+      context: { experiments, isMobile, t },
     };
   }
 
@@ -139,7 +141,7 @@ class RichContentViewer extends Component<
       iframeSandboxDomain,
       textAlignment,
     }: RichContentViewerProps,
-    contentState?: RicosContent
+    contentState?: DraftContent
   ): ViewerContextType => {
     deprecateHelpers(helpers, config);
     return {
@@ -195,7 +197,7 @@ class RichContentViewer extends Component<
   }
 
   render() {
-    const { onError, config = {} } = this.props;
+    const { onError, config = {}, onHover } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -232,6 +234,7 @@ class RichContentViewer extends Component<
         decorators: this.props.decorators,
         config: this.props.config,
         t: this.props.t,
+        renderedInTable,
       };
 
       const output = convertToReact(
@@ -249,7 +252,11 @@ class RichContentViewer extends Component<
 
       return (
         <GlobalContext.Provider value={this.state.context}>
-          <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
+          <div
+            className={wrapperClassName}
+            dir={direction || getLangDir(locale)}
+            onMouseEnter={e => onHover && onHover(e)}
+          >
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>

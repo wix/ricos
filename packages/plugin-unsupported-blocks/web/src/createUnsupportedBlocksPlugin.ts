@@ -19,4 +19,6 @@ const createUnsupportedBlocksPlugin: CreatePluginFunction<UnsupportedBlocksPlugi
   });
 };
 
+createUnsupportedBlocksPlugin.functionName = UNSUPPORTED_BLOCKS_TYPE;
+
 export { createUnsupportedBlocksPlugin };

@@ -14,8 +14,5 @@ export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
 };
 
 export const DEFAULTS = Object.freeze({
-  config: {
-    size: 'content',
-    alignment: 'center',
-  },
+  config: {},
 });
