@@ -363,7 +363,7 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
       innerRCERenderedIn,
     } = this.props;
 
-    this.fixHelpers(helpers, config, hooks);
+    this.fixHelpers(helpers, hooks);
 
     this.contextualData = {
       theme: theme || {},
@@ -554,12 +554,13 @@ export default class RichContentEditor extends Component<RichContentEditorProps,
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
     if (nextProps.helpers) {
-      this.fixHelpers(nextProps.helpers, nextProps.config);
+      this.fixHelpers(nextProps.helpers);
     }
   }
 
-  fixHelpers(helpers: Helpers, config, hooks?: RicosHooks) {
-    if (helpers?.onFilesChange) {
+  fixHelpers(helpers: Helpers, hooks?: RicosHooks) {
+    const { config } = this.props;
+    if (helpers.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete

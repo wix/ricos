@@ -59,8 +59,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.updateLocale();
     const { children } = this.props;
     const onOpenEditorSuccess =
-      children?.props.helpers?.onOpenEditorSuccess ||
-      this.props._rcProps?.helpers?.onOpenEditorSuccess;
+      children?.props.helpers?.onOpenEditorSuccess || //TODO: Remove in v9
+      children?.props.hooks?.onOpenEditorSuccess ||
+      this.props._rcProps?.helpers?.onOpenEditorSuccess || //TODO: Remove in v9
+      this.props._rcProps?.hooks?.onOpenEditorSuccess;
     onOpenEditorSuccess?.(Version.currentVersion);
     this.props.editorEvents1?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
     this.props.editorEvents2?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
@@ -72,7 +74,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   onPublish = async () => {
-    // TODO: remove this param after getContent(postId) is deprecated
+    // TODO: remove this param after getContent(postId) is deprecated (v9)
     await this.editor.publish((undefined as unknown) as string);
     console.debug('editor publish callback'); // eslint-disable-line
     return {

@@ -9,7 +9,7 @@ import {
 import { CSSProperties } from 'react';
 import { EditorState } from 'draft-js';
 
-export interface Helpers extends RicosHooksForHelpers {
+export interface Helpers extends RicosHelpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
   closeModal?: () => void;
   handleFileUpload?: (
@@ -31,10 +31,7 @@ export interface Helpers extends RicosHooksForHelpers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: ((...args: any[]) => any) | undefined;
 }
-interface RicosHooksForHelpers extends RicosHooks {
-  // makes version optional
-  onPluginAdd?(pluginId: string, entryPoint: string, version?: string): void;
-  onPluginAddSuccess?(pluginId: string, entryPoint: string, version?: string): void;
+interface RicosHelpers extends RicosHooks {
   isPreview?: () => boolean;
 }
 
