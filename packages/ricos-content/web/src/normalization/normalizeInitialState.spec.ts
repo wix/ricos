@@ -9,7 +9,7 @@ import {
   processedInlineGalleryContentState,
   AnchorInTextContentState,
   AnchorInImageContentState,
-  disableRightClickImageInitialState,
+  imageGalleryContentState,
 } from './Fixtures';
 
 import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
@@ -751,11 +751,12 @@ describe('normalizeInitialState', () => {
   });
 
   describe('disableRightClick normalizer', () => {
-    it('should add disableRightClick prop to image componentData', () => {
-      const actual = normalizeInitialState(disableRightClickImageInitialState, {
+    it('should add disableRightClick prop to image and gallery componentData', () => {
+      const actual = normalizeInitialState(imageGalleryContentState, {
         disableRightClick: true,
       });
       expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableRightClick).toBeTruthy();
     });
   });
 });
