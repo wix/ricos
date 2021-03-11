@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2295](https://github.com/wix-incubator/rich-content/pull/2295) raise error toast when external upload fails and sends no data
+
 </details>
 <hr/>
 
