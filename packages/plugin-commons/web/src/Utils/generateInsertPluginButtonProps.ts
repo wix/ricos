@@ -162,6 +162,8 @@ export function generateInsertPluginButtonProps({
       handleFileChange(data, (blockKey, file) =>
         setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
       );
+    } else if (error) {
+      commonPubsub.set('onMediaUploadError', error);
     }
   }
 
