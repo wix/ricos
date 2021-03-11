@@ -33,7 +33,10 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     const { children } = this.props;
 
     const onViewerLoaded =
-      children?.props.helpers?.onViewerLoaded || this.props._rcProps?.helpers?.onViewerLoaded;
+      children?.props.helpers?.onViewerLoaded || //TODO: remove in v9
+      children?.props.hooks?.onViewerLoaded ||
+      this.props._rcProps?.helpers?.onViewerLoaded || //TODO: remove in v9
+      this.props._rcProps?.hooks?.onViewerLoaded;
     const isPreview = children?.props.helpers?.isPreview || this.props._rcProps?.helpers?.isPreview;
     onViewerLoaded?.(!!isPreview?.(), Version.currentVersion);
   }
