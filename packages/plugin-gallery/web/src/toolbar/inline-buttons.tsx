@@ -89,7 +89,7 @@ const createInlineButtons: CreateInlineButtons = ({
       type: BUTTONS.EXTERNAL_MODAL,
       icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.GALLERY_SETTINGS,
-      activeTab: 'advanced_settings',
+      activeTab: 'settings',
       modalStyles,
       switchLayout,
       t,

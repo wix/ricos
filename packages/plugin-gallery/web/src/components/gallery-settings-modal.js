@@ -187,10 +187,11 @@ export class GallerySettingsModal extends Component {
   };
 
   otherTab() {
-    if (this.state.activeTab === 'manage_media') return 'advanced_settings';
-    if (this.state.activeTab === 'advanced_settings') return 'advanced_settings';
-    if (this.state.activeTab === 'manage_media') return 'settings';
-    return 'manage_media';
+    let tab = 'settings';
+    if (this.state.activeTab === 'manage_media') tab = 'advanced_settings';
+    if (this.state.activeTab === 'advanced_settings') tab = 'settings';
+    if (this.state.activeTab === 'settings') tab = 'manage_media';
+    return tab;
   }
 
   switchTab() {
