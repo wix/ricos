@@ -152,19 +152,21 @@ class GalleryComponent extends PureComponent {
   handleFilesAdded = ({ data, error, itemIdx }, uploadBIData) => {
     const handleFileAdded = (item, error, idx) => {
       let galleryItem = {};
+      const poster =
+        item.type === GALLERY_ITEMS_TYPES.VIDEO
+          ? { poster: item.poster || item.thumbnail_url }
+          : {};
       if (item) {
         galleryItem = {
           metadata: {
             type: item.type || GALLERY_ITEMS_TYPES.IMAGE,
             height: item.height,
             width: item.width,
+            ...poster,
           },
           itemId: String(item.id),
           url: item.file_name,
         };
-        if (item.type === GALLERY_ITEMS_TYPES.VIDEO) {
-          galleryItem.metadata.poster = item.poster || item.thumbnail_url;
-        }
       }
       uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
       this.setItemInGallery(galleryItem, error, idx);

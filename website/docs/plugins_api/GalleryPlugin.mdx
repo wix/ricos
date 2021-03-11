@@ -99,12 +99,11 @@ scrollingElement: () => JSX.Element;
 ### `modify default config`
 
 :::note
-By default gallery allows uploading images only, to enable videos pass `accept='image/*,video/*'` via config. <br />
-Refrain from passing any other values, gallery doesn't support anything but images and videos, any unsupported file type upload would trigger an error.
+To enable **video** use `accept: 'image/*,video/*'`.
 :::
 
 ```jsx
-     accept: 'image/*,video/*',
+     accept: 'image/* | video/*' | 'image/*,video/*',
      defaultData: {
        config: {
          size: 'small' | 'fullWidth' |'content',
