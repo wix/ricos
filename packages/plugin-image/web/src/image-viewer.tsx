@@ -14,7 +14,7 @@ import {
   Helpers,
   RichContentTheme,
   SEOSettings,
-  withHooks,
+  withPluginContexts,
   RicosHooks,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
@@ -440,4 +440,4 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   }
 }
 
-export default withHooks(ImageViewer);
+export default withPluginContexts(ImageViewer);

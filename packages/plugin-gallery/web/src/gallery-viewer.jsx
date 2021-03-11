@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles, withHooks } from 'wix-rich-content-common';
+import { validate, mergeStyles, withPluginContexts } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
@@ -268,4 +268,4 @@ GalleryViewer.propTypes = {
   itemOverlayElement: PropTypes.elementType,
 };
 
-export default withHooks(GalleryViewer);
+export default withPluginContexts(GalleryViewer);
