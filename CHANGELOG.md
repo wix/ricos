@@ -16,6 +16,16 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#1777](https://github.com/wix/ricos/pull/1777) `hooks` events prop - [Read the Docs](https://ricos.js.org/docs/ricos/hooks)
+- `viewer`
+  - [#1777](https://github.com/wix/ricos/pull/1777) `hooks` events prop - [Read the Docs](https://ricos.js.org/docs/ricos/hooks)
+
+### :house: Internal
+- `*`
+  - [#1777](https://github.com/wix/ricos/pull/1777) `HooksContext` replacing `helpers` object
+
 </details>
 <hr/>
 
