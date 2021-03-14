@@ -12,7 +12,14 @@ import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { ModalStyles, DraftContent, TextToolbarType } from 'wix-rich-content-common';
+import {
+  ModalStyles,
+  DraftContent,
+  TextToolbarType,
+  EventName,
+  PluginEventParams,
+  OnPluginAction,
+} from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
 
@@ -100,6 +107,10 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
   }
 
   initEditorProps() {
+    const onPluginAction: OnPluginAction = async (
+      eventName: EventName,
+      params: PluginEventParams
+    ) => console.log(eventName, params);
     this.helpers = {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
@@ -154,6 +165,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
           modalStyles: null,
         });
       },
+      onPluginAction,
     };
     this.setImageUploadHelper();
   }

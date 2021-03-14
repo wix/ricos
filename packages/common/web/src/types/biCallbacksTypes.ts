@@ -1,4 +1,5 @@
 import { ToolbarType } from './toolbarEnums';
+import { OnPluginAction } from './pluginsBiCallbacksTypes';
 interface biCallbackParams {
   version?: string;
 }
@@ -53,6 +54,7 @@ export interface BICallbacks {
     errorType: string | undefined,
     version: string
   ): void;
+  onPluginAction?: OnPluginAction;
 }
 
 type ActionName = 'expand_gallery' | 'expand_image' | 'Click';

@@ -208,18 +208,23 @@ class TableComponent extends React.Component {
         this.isAllCellsSelected(selected) &&
         (e.key === 'Backspace' || e.key === 'Delete')
       ) {
-        this.props.blockProps.deleteBlock();
+        this.deleteTable();
       } else if (e.keyCode === KEYS_CHARCODE.SPACE) {
         e.ctrlKey && this.handleShortcutSelection(e, getColsRange(selected), this.selectCols);
         e.shiftKey && this.handleShortcutSelection(e, getRowsRange(selected), this.selectRows);
       } else if (e.altKey && e.ctrlKey) {
         if (e.key === '+' || e.key === '=') {
           const selectedCols = this.table.getSelectedCols(getRange(selected));
-          selectedCols ? this.addCol(Math.max(...selectedCols) + 1) : this.addLastCol();
+          selectedCols
+            ? this.addCol(Math.max(...selectedCols) + 1, {
+                source: 'keyboard shortcut',
+                location: 'right',
+              })
+            : this.addLastCol({ source: 'keyboard shortcut' });
         } else if (e.key === '-') {
           const selectedCols = this.table.getSelectedCols(getRange(selected));
           this.isAllCellsSelected(selected)
-            ? this.props.blockProps.deleteBlock()
+            ? this.deleteTable()
             : selectedCols && this.deleteColumn(selectedCols);
         }
       } else if (e.key === 't' && e.ctrlKey) {
@@ -332,10 +337,14 @@ class TableComponent extends React.Component {
     this.setSelected();
   };
 
-  addRow = i => {
+  triggerBi = (eventName, biParams) =>
+    this.props.helpers?.onPluginAction?.(eventName, { plugin_id: TABLE_TYPE, ...biParams });
+
+  addRow = (i, biParams) => {
     if (!isCellsNumberInvalid(this.table.getRowNum() + 1, this.table.getColNum())) {
       this.table.addRow(i);
       this.selectRows({ start: i, end: i });
+      this.triggerBi('tablePluginAddColumnRow', { category: 'row', ...biParams });
     }
   };
 
@@ -353,26 +362,38 @@ class TableComponent extends React.Component {
     return fixedWidth;
   };
 
-  addCol = i => {
+  addCol = (i, biParams) => {
     if (!isCellsNumberInvalid(this.table.getRowNum(), this.table.getColNum() + 1)) {
       this.table.addColumn(i);
       this.selectCols({ start: i, end: i });
+      this.triggerBi('tablePluginAddColumnRow', { category: 'column', ...biParams });
     }
   };
 
   deleteRow = deleteIndexes => {
     this.table.deleteRow(deleteIndexes);
     this.setSelected();
+    this.triggerBi('tablePluginDeleteColumnRow', { category: 'row' });
   };
 
   deleteColumn = deleteIndexes => {
     this.table.deleteColumn(deleteIndexes);
     this.setSelected();
+    this.triggerBi('tablePluginDeleteColumnRow', { category: 'column' });
   };
 
-  addLastRow = () => this.addRow(this.table.getRowNum());
+  deleteTable = () => {
+    this.props.blockProps.deleteBlock();
+    this.triggerBi('tablePluginDeleteColumnRow', { category: 'entire_table' });
+  };
 
-  addLastCol = () => this.addCol(this.table.getColNum());
+  addLastRow = biParams => {
+    this.addRow(this.table.getRowNum(), { ...biParams, location: 'below' });
+  };
+
+  addLastCol = biParams => {
+    this.addCol(this.table.getColNum(), { ...biParams, location: 'right' });
+  };
 
   onColDrag = (e, dragsIndex) => {
     !this.position && (this.position = e.pageX);
@@ -464,7 +485,7 @@ class TableComponent extends React.Component {
   };
 
   render() {
-    const { theme, t, isMobile, settings, blockProps } = this.props;
+    const { theme, t, isMobile, settings } = this.props;
     const {
       selected,
       isEditingActive,
@@ -510,12 +531,13 @@ class TableComponent extends React.Component {
             settings={settings}
             selectRows={this.selectRows}
             selectCols={this.selectCols}
-            deleteBlock={blockProps.deleteBlock}
+            deleteBlock={this.deleteTable}
             isAllCellsSelected={this.isAllCellsSelected(selected)}
             merge={this.merge}
             distributeRows={this.distributeRows}
             distributeColumns={this.distributeColumns}
             getTableScrollLeft={this.getTableScrollLeft}
+            triggerBi={this.triggerBi}
           />
         )}
         {!isMobile && (
@@ -621,6 +643,7 @@ TableComponent.propTypes = {
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
   disableKeyboardEvents: PropTypes.func,
+  helpers: PropTypes.object,
 };
 
 export { TableComponent as Component };

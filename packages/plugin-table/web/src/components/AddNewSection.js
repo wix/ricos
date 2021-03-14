@@ -10,7 +10,7 @@ const AddNewSection = ({ onClick, dataHook, shouldDisable, t }) => {
     <Tooltip content={shouldDisable && t('TablePlugin_SettingsModal_limitError')}>
       <div // eslint-disable-line
         data-hook={dataHook}
-        onClick={onClick}
+        onClick={() => onClick({ source: 'plus button bar' })}
         className={classNames(styles.container, shouldDisable && styles.disabled)}
       >
         <AddIcon />

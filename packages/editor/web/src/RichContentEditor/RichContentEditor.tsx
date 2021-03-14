@@ -59,6 +59,9 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  EventName,
+  PluginEventParams,
+  OnPluginAction,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -361,7 +364,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     } = this.props;
 
     this.fixHelpers(helpers);
-
+    const onPluginAction: OnPluginAction = (eventName: EventName, params: PluginEventParams) =>
+      helpers.onPluginAction?.(eventName, { ...params, version: Version.currentVersion });
     this.contextualData = {
       theme: theme || {},
       t,
@@ -416,6 +420,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         },
         onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
           helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
+        onPluginAction,
       },
       config,
       isMobile,
