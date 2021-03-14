@@ -20,12 +20,6 @@
 - `plugin-video`
   - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) added new settings panel for custom videos with download toggle
 
-### :bug: Bug Fix
-- `gallery`
-  - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
-- `fullscreen`
-  - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
-
 </details>
 <hr/>
 
