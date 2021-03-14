@@ -54,13 +54,12 @@ class ImageSettings extends Component {
     return (
       <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
         <LabeledToggle
-          style={{ paddingTop: 24 }}
           theme={this.props.theme}
           checked={this.state[toggleKey]}
           label={this.props.t(labelKey)}
           onChange={this.toggleState(toggleKey)}
           dataHook={dataHook}
-          tooltipText={tooltipText ? tooltipText : null}
+          tooltipText={tooltipText}
         />
       </div>
     );

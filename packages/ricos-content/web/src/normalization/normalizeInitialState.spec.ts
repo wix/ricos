@@ -1,6 +1,7 @@
 import deepFreeze from 'deep-freeze';
 import normalizeInitialState from './normalizeInitialState';
 import { Version } from '../version';
+import { cloneDeep } from 'lodash';
 import {
   inlineLegacyImageContentState,
   inlineImageContentState,
@@ -751,12 +752,61 @@ describe('normalizeInitialState', () => {
   });
 
   describe('disableRightClick normalizer', () => {
+    let imageGalleryInitialState = imageGalleryContentState;
+
+    beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
+
     it('should add disableRightClick prop to image and gallery componentData', () => {
-      const actual = normalizeInitialState(imageGalleryContentState, {
+      const actual = normalizeInitialState(imageGalleryInitialState, {
         disableRightClick: true,
       });
+
       expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
       expect(actual.entityMap['1'].data.disableRightClick).toBeTruthy();
+    });
+
+    it('disableRightClick should be true in image and false in gallery componentData', () => {
+      const imageGalleryWithRightClickState = {
+        ...imageGalleryInitialState,
+        entityMap: {
+          ...imageGalleryInitialState.entityMap,
+          '0': {
+            ...imageGalleryInitialState.entityMap['0'],
+            data: { ...imageGalleryInitialState.entityMap['0'].data, disableRightClick: false },
+          },
+          '1': {
+            ...imageGalleryInitialState.entityMap['1'],
+            data: { ...imageGalleryInitialState.entityMap['1'].data, disableRightClick: false },
+          },
+        },
+      };
+
+      const actual = normalizeInitialState(imageGalleryWithRightClickState, {
+        disableRightClick: true,
+      });
+
+      expect(actual.entityMap['0'].data.disableRightClick).toBeFalsy();
+      expect(actual.entityMap['1'].data.disableRightClick).toBeFalsy();
+    });
+
+    it('disableRightClick should be true for false in the componentData', () => {
+      const imageGalleryWithRightClickState = {
+        ...imageGalleryInitialState,
+        entityMap: {
+          ...imageGalleryInitialState.entityMap,
+          '1': {
+            ...imageGalleryInitialState.entityMap['1'],
+            data: { ...imageGalleryInitialState.entityMap['1'].data, disableRightClick: false },
+          },
+        },
+      };
+
+      const actual = normalizeInitialState(imageGalleryWithRightClickState, {
+        disableRightClick: true,
+      });
+
+      expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableRightClick).toBeFalsy();
     });
   });
 });
