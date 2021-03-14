@@ -16,7 +16,7 @@ import NormalizerStory from './NormalizerStory';
 import ExternalUndoStory from './ExternalUndoStory';
 import ButtonsTest from './ButtonsTest';
 import DuplicateContent from './DuplicateContent';
-import ImagePluginWithWidth from './ImagePluginWithWidth';
+import ImagePluginQualityPreload from './ImagePluginQualityPreload';
 
 storiesOf('Test Cases', module)
   .add('Groups', GroupsStory)
@@ -34,4 +34,4 @@ storiesOf('Test Cases', module)
   .add('Max Height', MaxHeight)
   .add('Buttons Test', ButtonsTest)
   .add('Duplicated Content', DuplicateContent)
-  .add('Image Plugin With Width', ImagePluginWithWidth);
+  .add('Image Plugin Preload Experiment', ImagePluginQualityPreload);

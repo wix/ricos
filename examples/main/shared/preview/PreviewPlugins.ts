@@ -58,7 +58,7 @@ import { getBaseUrl } from '../../src/utils';
 import {
   InlineStyleMapper,
   InlineStyleMapperFunction,
-  RicosContent,
+  DraftContent,
 } from 'wix-rich-content-common';
 
 const linkPluginSettings = {
@@ -122,7 +122,7 @@ export const config = {
   },
 };
 
-export const getInlineStyleMappers = (raw: RicosContent) => [
+export const getInlineStyleMappers = (raw: DraftContent) => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
 ];

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { debounce } from 'lodash';
-import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
+import { debounce, isEqual } from 'lodash';
+import { getContentStateSchema, isSSR, DraftContent } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -34,11 +34,18 @@ import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
 import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 
-const stringifyJSON = obj => JSON.stringify(obj, null, 2);
+function nonSerializedAttribute(key, value) {
+  if (typeof value === 'function') {
+    throw Error('content is not serialized');
+  }
+  return value;
+}
+
+const stringifyJSON = obj => JSON.stringify(obj, nonSerializedAttribute, 2);
 
 interface Props {
-  contentState?: RicosContent;
-  onChange: (contentState: RicosContent) => void;
+  contentState?: DraftContent;
+  onChange: (contentState: DraftContent) => void;
   shouldUseNewContent?: boolean;
 }
 class ContentStateEditor extends PureComponent<Props> {
@@ -63,9 +70,10 @@ class ContentStateEditor extends PureComponent<Props> {
   componentWillReceiveProps(nextProps: Props) {
     const { contentState, shouldUseNewContent } = nextProps;
     if (!this.monaco?.editor.hasTextFocus()) {
-      this.setState({
-        value: stringifyJSON(shouldUseNewContent ? ensureRicosContent(contentState) : contentState),
-      });
+      const value = stringifyJSON(
+        shouldUseNewContent ? ensureRicosContent(contentState) : contentState
+      );
+      this.setState({ value });
     }
   }
 

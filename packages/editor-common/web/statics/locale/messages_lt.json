@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "Kur turėtų vesti nuoroda?",
   "HtmlEditPanel_HttpsError": "Įsitikinkite, kad URL prasideda nuo HTTPS",
   "Poll_Presets_Popup_Subtitle": "Išvaizdą ir stilių galėsite pakeisti vėliau.",
+  "BlockToolbar_Section_Advanced": "Advanced ",
   "SettingsPanelFooter_Done": "Atlikta",
   "GallerySettings_Image_Settings": "Keisti",
   "GallerySettings_LayoutControlSection_Row": "Eilutės aukštis",

@@ -97,7 +97,7 @@ import {
   Decorator,
   HASHTAG_TYPE,
   PluginTypeMapper,
-  RicosContent,
+  DraftContent,
   UISettings,
   ViewerPlugin,
 } from 'wix-rich-content-common';
@@ -230,7 +230,7 @@ export const getConfig = (additionalConfig = {}): RichContentViewerProps['config
   return _config;
 };
 
-export const getInlineStyleMappers = (raw: RicosContent) => [
+export const getInlineStyleMappers = (raw: DraftContent) => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
   spoilerInlineStyleMapper(config, raw),

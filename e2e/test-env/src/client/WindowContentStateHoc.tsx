@@ -1,7 +1,7 @@
 import React, { ElementType } from 'react';
 import { TABLE_TYPE } from 'wix-rich-content-plugin-table';
 import { ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
-import { RicosContent, RicosEntity, RicosEntityMap } from 'wix-rich-content-common';
+import { DraftContent, RicosEntity, RicosEntityMap } from 'wix-rich-content-common';
 
 type Predicate = (entity: RicosEntity) => boolean;
 
@@ -70,7 +70,7 @@ const putContentStateStateOnWindowForTests = contentState => {
   }
 };
 export default (WrappedComponent: ElementType) => {
-  class WindowContentStateHoc extends React.Component<{ contentState?: RicosContent }> {
+  class WindowContentStateHoc extends React.Component<{ contentState?: DraftContent }> {
     componentDidUpdate(prevProps) {
       const { contentState } = this.props;
       if (prevProps.contentState !== contentState) {
@@ -88,7 +88,7 @@ export default (WrappedComponent: ElementType) => {
 
 declare global {
   interface Window {
-    __CONTENT_STATE__: RicosContent;
-    __CONTENT_SNAPSHOT__: RicosContent;
+    __CONTENT_STATE__: DraftContent;
+    __CONTENT_SNAPSHOT__: DraftContent;
   }
 }

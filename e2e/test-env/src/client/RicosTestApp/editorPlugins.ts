@@ -20,9 +20,8 @@ import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginMap } from 'wix-rich-content-plugin-map';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginVideo, videoButtonsTypes } from 'wix-rich-content-plugin-video';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import {
   pluginVerticalEmbed,
@@ -84,6 +83,7 @@ const defaultConfigs = {
     handleFileSelection: videoHandlers.handleFileSelection,
     enableCustomUploadOnMobile: true,
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+    exposeButtons: [videoButtonsTypes.video, videoButtonsTypes.soundCloud],
   },
   gallery: {
     scrollingElement: () => window,
@@ -114,7 +114,6 @@ const createPlugins = externalConfigs => {
     indent: pluginIndent(),
     hashtag: pluginHashtag(),
     mentions: pluginMentions(),
-    soundCloud: pluginSoundCloud(),
     giphy: pluginGiphy(configs.giphy),
     headers: pluginHeadersMarkdown(),
     map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
@@ -147,6 +146,7 @@ const createPlugins = externalConfigs => {
         pluginLineSpacing().createPlugin,
         pluginLink().createPlugin,
         pluginCodeBlock().createPlugin,
+        pluginImage().createPlugin,
         pluginUnsupportedBlocks().createPlugin,
       ],
     }),

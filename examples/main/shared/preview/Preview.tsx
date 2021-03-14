@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { RichContentPreview } from 'wix-rich-content-preview';
-import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
-import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { isSSR, DraftContent, SEOSettings } from 'wix-rich-content-common';
 import theme from '../theme/theme'; // must import after custom styles
 import 'wix-rich-content-preview/dist/styles.min.css';
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -10,13 +9,11 @@ import Fullscreen from 'wix-rich-content-fullscreen';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/viewer';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
 
-import 'wix-rich-content-fullscreen/dist/styles.min.css';
-
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
 
 interface Props {
-  initialState?: RicosContent;
+  initialState?: DraftContent;
   isMobile?: boolean;
   locale?: string;
   localeResource?: Record<string, string>;

@@ -1,6 +1,6 @@
 import { getUrlMatches } from '../urlValidators';
 import {
-  RicosContent,
+  DraftContent,
   LinkRange,
   RicosEntityRange,
   RicosEntityMap,
@@ -9,7 +9,7 @@ import {
   NormalizationProcessor,
 } from '../types';
 
-export const linkify: NormalizationProcessor<RicosContent> = (
+export const linkify: NormalizationProcessor<DraftContent> = (
   contentState,
   { anchorTarget, relValue }
 ) => {

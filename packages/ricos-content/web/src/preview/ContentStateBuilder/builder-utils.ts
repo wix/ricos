@@ -1,4 +1,4 @@
-import { RicosContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
+import { DraftContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
 import { isArray } from 'lodash';
 import { TextBlockWithEntities } from '../ContentStateAnalyzer/types';
 import mergeEntityData from './mergeEntityData';
@@ -6,7 +6,7 @@ import mergeEntityData from './mergeEntityData';
 type PartialBlockConfig = Partial<RicosContentBlock>;
 
 interface BlockDetails {
-  contentState: RicosContent;
+  contentState: DraftContent;
   text: string;
   type: string;
   config: PartialBlockConfig;
@@ -14,7 +14,7 @@ interface BlockDetails {
 }
 
 interface PluginDetails {
-  contentState: RicosContent;
+  contentState: DraftContent;
   data: Record<string, unknown>;
   config: RicosEntity;
 }
@@ -42,12 +42,12 @@ const createBlock = (
   ...{ ...DEFAULT_BLOCK_CONFIG, ...(config || {}) },
 });
 
-export const addBlock = ({ contentState, text, type, config }: BlockDetails): RicosContent => ({
+export const addBlock = ({ contentState, text, type, config }: BlockDetails): DraftContent => ({
   ...contentState,
   blocks: [...contentState.blocks, createBlock(type, text, config)],
 });
 
-export const addEntity = ({ contentState, data, config }: PluginDetails): RicosContent => {
+export const addEntity = ({ contentState, data, config }: PluginDetails): DraftContent => {
   const mergedEntity = mergeEntityData(data, config);
   return {
     ...contentState,
@@ -58,7 +58,7 @@ export const addEntity = ({ contentState, data, config }: PluginDetails): RicosC
   };
 };
 
-export const addPlugin = ({ contentState, data, config }: PluginDetails): RicosContent => {
+export const addPlugin = ({ contentState, data, config }: PluginDetails): DraftContent => {
   const contentStateWithBlock = addBlock({
     contentState,
     text: ' ',
@@ -86,14 +86,14 @@ export const toArray = (
 ): TextBlockWithEntities[] => (isArray(content) ? content : [content]);
 
 interface BlockMerger extends TextBlockWithEntities {
-  contentState: RicosContent;
+  contentState: DraftContent;
 }
 
 export const mergeBlockWithEntities = ({
   contentState,
   block,
   entities,
-}: BlockMerger): RicosContent => ({
+}: BlockMerger): DraftContent => ({
   ...contentState,
   blocks: [...contentState.blocks, block],
   entityMap: { ...contentState.entityMap, ...entities },
