@@ -23,7 +23,6 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
-  createBlock,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import {
@@ -33,7 +32,12 @@ import {
   DraftHandleValue,
 } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
-import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
+import {
+  HEADINGS_DROPDOWN_TYPE,
+  DEFAULT_HEADINGS,
+  DEFAULT_TITLE_HEADINGS,
+  IMAGE_TYPE,
+} from 'ricos-content';
 import {
   AvailableExperiments,
   AccessibilityListener,
@@ -619,27 +623,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
-    if (this.props.helpers?.handleFileUpload) {
-      this.props.helpers.handleFileUpload(blobs[0] as File, ({ data, error }) => {
-        const componentData = {
-          config: {
-            alignment: 'center',
-            size: 'content',
-            showTitle: true,
-            showDescription: true,
-            disableExpand: false,
-          },
-          src: data,
-          error,
-        };
-
-        const { newSelection, newEditorState } = createBlock(
-          this.getEditorState(),
-          componentData,
-          'wix-draft-plugin-image'
-        );
-
-        this.setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+    const hasImage = this.plugins.find(IMAGE_TYPE);
+    if (hasImage) {
+      const block = this.editor.EditorCommands.insertBlock(IMAGE_TYPE);
+      this.commonPubsub.set('initialState_' + block.key, {
+        userSelectedFiles: { files: [blobs[0]] },
       });
     }
 
