@@ -188,6 +188,7 @@ export const createToolbar: CreatePluginToolbar = ({ isMobile, settings, t }) =>
         ...buttonProps,
         toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE],
         modalStyles: modalStylesByToolbar[TOOLBARS.INSERT_PLUGIN],
+        section: 'BlockToolbar_Section_Advanced',
       },
     ],
     name: 'poll',

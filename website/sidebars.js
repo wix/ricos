@@ -7,7 +7,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Ricos',
-        items: ['ricos/ricos-api'],
+        items: ['ricos/ricos-api', 'ricos/editor-events-context'],
       },
       {
         type: 'category',
@@ -31,12 +31,14 @@ module.exports = {
           'plugins_api/HtmlPlugin',
           'plugins_api/LinkPreviewPlugin',
           'plugins_api/UnsupportedBlocksPlugin',
+          'plugins_api/TablePlugin',
+          'plugins_api/HeadingsPlugin',
         ],
       },
       {
         type: 'category',
         label: 'Content APIs',
-        items: ['content_api/TruncateContent'],
+        items: ['content_api/TruncateContent', 'content_api/converters'],
       },
       {
         type: 'category',
@@ -62,6 +64,7 @@ module.exports = {
       'dev/theming',
       'dev/release_instructions',
       'dev/testing',
+      'dev/maintenance',
     ],
   },
 };

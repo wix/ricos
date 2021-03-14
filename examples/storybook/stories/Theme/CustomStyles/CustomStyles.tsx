@@ -4,21 +4,33 @@ import exapmleState from '../../../../../e2e/tests/fixtures/text-formatting-type
 import ExampleApplication from '../../Components/ExampleApplication';
 import { merge } from 'lodash';
 import { StyleAttr } from './types';
+import { set, get } from 'local-storage';
 import CustomStylesCreator from './StylesPanel';
+
+const storageKey = 'storyCustomStyles';
+const loadStyles = () => get(storageKey) as StyleAttr[];
+const saveStyles = (styles: StyleAttr[]) => set(storageKey, styles);
 
 const createStyle = ([element, property, value]: StyleAttr) => ({
   [element]: { [property]: value },
 });
 
 export default () => {
-  const [stylesArray, setStyles] = useState([
-    ['h3', 'color', 'red'],
-    ['', '', ''],
-  ] as StyleAttr[]);
+  const [stylesArray, setStylesArray] = useState(
+    loadStyles() ||
+      ([
+        ['h3', 'color', 'red'],
+        ['', '', ''],
+      ] as StyleAttr[])
+  );
   const customStyles = stylesArray.reduce(
     (prev, style) => merge({ ...prev }, createStyle(style)),
     {}
   );
+  const setStyles = (styles: StyleAttr[]) => {
+    setStylesArray(styles);
+    saveStyles(styles);
+  };
   return (
     <>
       <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -36,10 +48,7 @@ export default () => {
         >
           here
         </a>
-        <CustomStylesCreator
-          stylesArray={stylesArray}
-          setStyles={newStyles => setStyles(newStyles)}
-        />
+        <CustomStylesCreator stylesArray={stylesArray} setStyles={setStyles} />
         <div style={{ padding: 4 }}>
           <ExampleApplication initialState={exapmleState} theme={{ customStyles }} />
         </div>

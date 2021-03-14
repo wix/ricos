@@ -2,7 +2,7 @@
 import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, cloneDeep, isEmpty } from 'lodash';
+import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -244,7 +244,19 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.fixDraftSelectionExtend();
   }
+
+  fixDraftSelectionExtend = () => {
+    if (typeof Selection !== 'undefined' && !this.props.isInnerRCE) {
+      const nativeSelectionExtend = Selection.prototype.extend;
+      Selection.prototype.extend = function(...args) {
+        try {
+          return nativeSelectionExtend.apply(this, args);
+        } catch (error) {}
+      };
+    }
+  };
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
@@ -255,7 +267,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
-    !isEmpty(this.props.experiments) && console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {

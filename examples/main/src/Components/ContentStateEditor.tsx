@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { debounce, isEqual } from 'lodash';
-import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
+import { getContentStateSchema, isSSR, DraftContent } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -46,8 +46,8 @@ function nonSerializedAttribute(key, value) {
 const stringifyJSON = obj => JSON.stringify(obj, nonSerializedAttribute, 2);
 
 interface Props {
-  contentState?: RicosContent;
-  onChange: (contentState: RicosContent) => void;
+  contentState?: DraftContent;
+  onChange: (contentState: DraftContent) => void;
   shouldUseNewContent?: boolean;
 }
 class ContentStateEditor extends PureComponent<Props> {

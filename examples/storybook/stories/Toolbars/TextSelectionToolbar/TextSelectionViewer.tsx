@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
+import { DraftContent, RicosViewer } from 'ricos-viewer';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 
 class TextSelectionViewer extends Component<
-  { content?: RicosContent },
+  { content?: DraftContent },
   { containerRef?: HTMLDivElement }
 > {
   setRef = (ref: HTMLDivElement) => this.setState({ containerRef: ref });

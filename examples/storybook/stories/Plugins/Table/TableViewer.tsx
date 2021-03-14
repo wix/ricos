@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
+import { DraftContent, RicosViewer } from 'ricos-viewer';
 import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 import { pluginTable } from 'wix-rich-content-plugin-table/dist/module.viewer';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing/dist/module.viewer';
@@ -16,7 +16,7 @@ const plugins = [
   pluginLineSpacing(),
 ];
 
-const TableViewer: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const TableViewer: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosViewer content={content} plugins={plugins} />
 );
 

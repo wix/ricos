@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "Με τι θέλετε να συνδεθείτε;",
   "HtmlEditPanel_HttpsError": "Βεβαιωθείτε ότι η διεύθυνση URL αρχίζει με HTTPS",
   "Poll_Presets_Popup_Subtitle": "Μπορείτε να προσαρμόσετε την εμφάνιση και την αίσθηση αργότερα.",
+  "BlockToolbar_Section_Advanced": "Advanced ",
   "SettingsPanelFooter_Done": "Τέλος",
   "GallerySettings_Image_Settings": "Eπεξεργασία",
   "GallerySettings_LayoutControlSection_Row": "Ύψος σειράς",

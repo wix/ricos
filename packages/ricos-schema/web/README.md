@@ -1,7 +1,7 @@
 ## Rich Contnet Schema
 
 ### Internal Wix projects
-`wix-proto` - contains proto files with Wix field options
+`main/proto` - contains proto files with Wix field options
 
 ### Open source projects
 `generated/proto` - contains proto files without Wix field options

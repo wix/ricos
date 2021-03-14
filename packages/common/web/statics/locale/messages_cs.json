@@ -103,7 +103,7 @@
 	"SettingsButton_Tooltip": "Nastavení",
 	"LinkPreview_Settings_Tooltip": "Nastavení odkazu",
 	"Embed_Vertical_Bookings_EmptyState_NotInstalled_Description": "Chcete-li prodávat služby online a sdílet je v příspěvcích, otevřete na webu App Market a nainstalujte si Wix Bookings.",
-	"UnsupportedPlugin_message": "Přístup k tomuto obsahu je pouze přes prohlížeč",
+	"UnsupportedPlugin_message": "Tento blok obsahu můžete upravit pouze v editoru v prohlížeči",
 	"TablePlugin_Toolbar_DeleteTable_Tooltip": "Odstranit tabulku",
 	"Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll": "Ankety (px)",
 	"TextCodeBlock_InsertButton_Tooltip": "Přidat blok kódu",
