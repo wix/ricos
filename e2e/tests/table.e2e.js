@@ -29,7 +29,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('should open table modal and create table by the settings', function() {
+    it.skip('should open table modal and create table by the settings', function() {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.table));
       cy.openTableModal();
       cy.eyesCheckWindow(this.test.title);
