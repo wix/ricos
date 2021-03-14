@@ -15,11 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
   ### :rocket: New Feature
   - `plugin-video`
     - [#2033](https://github.com/wix-incubator/rich-content/pull/2033) added new settings panel for custom videos with download toggle
-
+    
 ### :bug: Bug Fix
 - `gallery`
   - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
