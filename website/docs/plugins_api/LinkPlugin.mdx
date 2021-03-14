@@ -70,7 +70,7 @@ Make sure you link only to the lines you created`)}
 
 ### `linkTypes`
 
-Supported Links types
+Supported Links types + pass configuration to those types
 
 Default value:
 
@@ -79,6 +79,27 @@ Default value:
   anchor: true;
 }
 ```
+
+### `previewElement`
+
+anchor configuration for customize the preview element that shown in anchor panel.
+
+example:
+
+```jsx
+{
+  linkTypes: {
+      anchor: {
+        previewElement: block => {
+          const previewElement = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
+          return previewElement;
+        },
+      },
+    },
+}
+```
+
+the `block` containing the block properties
 
 ### `disableAutoLink`
 
