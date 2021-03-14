@@ -633,12 +633,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
-    const hasImage = this.plugins.find(IMAGE_TYPE);
+    const hasImage = this.plugins.find(({ blockType }) => blockType === IMAGE_TYPE);
     if (hasImage) {
-      const block = this.editor.EditorCommands.insertBlock(IMAGE_TYPE);
-      this.commonPubsub.set('initialState_' + block.key, {
-        userSelectedFiles: { files: [blobs[0]] },
-      });
+      const block = this.EditorCommands.insertBlock(IMAGE_TYPE, {});
+      if (block) {
+        this.commonPubsub.set('initialState_' + block.getKey(), {
+          userSelectedFiles: { files: [blobs[0]] },
+        });
+      }
     }
 
     return 'handled';
