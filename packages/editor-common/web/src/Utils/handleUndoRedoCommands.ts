@@ -107,16 +107,20 @@ function replaceComponentData(editorState: EditorState, blockKey: string, compon
   currentContent.replaceEntityData(entityKey, componentData);
 }
 
+function fixDraftUndoStackBug(block) {
+  if (block.type === 'atomic') {
+    block.text = ' ';
+  }
+}
+
 // creates a map of blockKey to the block's data and entityData for easier access
 function createBlockEntitiesDataMap(contentState: RicosContent) {
   const blockEntitiesDataMap = {};
   const { blocks, entityMap } = contentState;
   blocks.forEach(block => {
-    const { entityRanges = [], type, key: blockKey } = block;
+    fixDraftUndoStackBug(block);
+    const { entityRanges = [], key: blockKey } = block;
     const entity = entityMap[entityRanges[0]?.key];
-    if (type === 'atomic') {
-      block.text = ' ';
-    }
     blockEntitiesDataMap[blockKey] = { block, entityData: entity?.data };
   });
   return blockEntitiesDataMap;
