@@ -53,6 +53,7 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
+  updateEntityData,
   setEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
@@ -67,6 +68,7 @@ export {
   getPostContentSummary,
   createSelection,
   getBlockType,
+  hasInlineStyle,
   indentSelectedBlocks,
   isTypeText,
   setForceSelection,
@@ -84,6 +86,7 @@ export {
   isCursorAtFirstLine,
   selectAllContent,
 } from './Utils/draftUtils';
+export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {

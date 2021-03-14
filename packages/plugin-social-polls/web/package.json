@@ -39,6 +39,7 @@
     "react-flip-move": "^3.0.4",
     "react-infinite-scroller": "^1.2.4",
     "react-modal": "~3.4.1",
+    "ricos-content": "8.27.1",
     "wix-rich-content-common": "8.27.1",
     "wix-rich-content-editor-common": "8.27.1",
     "wix-rich-content-plugin-commons": "8.27.1"

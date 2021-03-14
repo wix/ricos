@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "Mire szeretnél linkelni?",
   "HtmlEditPanel_HttpsError": "Ügyelj arra, hogy az URL https-sel kezdődjön!",
   "Poll_Presets_Popup_Subtitle": "Később testre szabhatod a megjelenést.",
+  "BlockToolbar_Section_Advanced": "Advanced ",
   "SettingsPanelFooter_Done": "Kész",
   "GallerySettings_Image_Settings": "Szerkeszt",
   "GallerySettings_LayoutControlSection_Row": "Sormagasság",

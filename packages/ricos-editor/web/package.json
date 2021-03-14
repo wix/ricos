@@ -46,6 +46,7 @@
   "dependencies": {
     "react-modal": "~3.4.1",
     "ricos-common": "8.27.1",
+    "ricos-schema": "8.27.1",
     "wix-rich-content-common": "8.27.1",
     "wix-rich-content-editor": "8.27.1",
     "wix-rich-content-editor-common": "8.27.1"

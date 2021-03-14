@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "Куда ведет ссылка?",
   "HtmlEditPanel_HttpsError": "Убедитесь, что URL-адрес начинается с HTTPS",
   "Poll_Presets_Popup_Subtitle": "Вы можете настроить внешний вид и ленту позже.",
+  "BlockToolbar_Section_Advanced": "Advanced ",
   "SettingsPanelFooter_Done": "Готово",
   "GallerySettings_Image_Settings": "Изменить",
   "GallerySettings_LayoutControlSection_Row": "Высота строки",
