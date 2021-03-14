@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `plugin-gallery`
+  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons 
+  
 ### :bug: Bug Fix
 - `gallery`
   - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
@@ -27,10 +31,6 @@
 
 ## 8.27.1  (Mar 10, 2021)
 ### :rocket: New Feature
-- `plugin-gallery`
-  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons 
-  
-  ### :rocket: New Feature
 - `ricos-content`
   - [#2287](https://github.com/wix/ricos/pull/2287) compareDraftContent util exposed
 - `plugin-link`
