@@ -162,17 +162,15 @@ class GalleryViewer extends React.Component {
 
   renderExpandIcon = itemProps => {
     return (
-      this.hasExpand() && (
-        <div className={this.styles.expandContainer}>
-          <ExpandIcon
-            className={this.styles.expandIcon}
-            onClick={e => {
-              e.preventDefault();
-              this.handleExpand(itemProps);
-            }}
-          />
-        </div>
-      )
+      <div className={this.styles.expandContainer}>
+        <ExpandIcon
+          className={this.styles.expandIcon}
+          onClick={e => {
+            e.preventDefault();
+            this.handleExpand(itemProps);
+          }}
+        />
+      </div>
     );
   };
 
@@ -196,7 +194,7 @@ class GalleryViewer extends React.Component {
     );
     return (
       <div className={itemOverlayStyles}>
-        {this.renderExpandIcon(itemProps)}
+        {this.hasExpand() && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title, 'HOVER')}
         {this.props.itemOverlayElement?.(itemProps)}
       </div>

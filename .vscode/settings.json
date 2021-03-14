@@ -1,6 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "prettier.disableLanguages": ["vue", "css", "scss", "sass", "markdown"],
+  "prettier.disableLanguages": ["vue", "sass", "markdown"],
   "[json]": {
     "editor.formatOnSave": false
   },

@@ -210,7 +210,8 @@ export class GallerySettingsModal extends Component {
     }[tab];
   }
   onDoneClick = () => {
-    const { helpers, componentData, pubsub } = this.props;
+    const { helpers, pubsub } = this.props;
+    const componentData = pubsub.get('componentData');
     const newComponentData = {
       ...componentData,
       disableRightClick: !this.state.isRightClickEnabled,
