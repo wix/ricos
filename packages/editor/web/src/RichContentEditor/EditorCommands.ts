@@ -176,7 +176,6 @@ export const createEditorCommands = (
           return newBlock;
         }
       }
-      return;
     },
     updateBlock: <K extends keyof PluginsDataMap>(
       blockKey: string,

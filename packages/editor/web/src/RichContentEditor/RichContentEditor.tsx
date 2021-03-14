@@ -24,6 +24,7 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  SelectionState,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import {
@@ -632,18 +633,31 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return customHeadings;
   };
 
-  handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
-    const hasImage = this.plugins.find(({ blockType }) => blockType === IMAGE_TYPE);
-    if (hasImage) {
-      const block = this.EditorCommands.insertBlock(IMAGE_TYPE, {});
-      if (block) {
-        this.commonPubsub.set('initialState_' + block.getKey(), {
-          userSelectedFiles: { files: [blobs[0]] },
-        });
+  createPluginFromBlobs = (blobs: Blob[]): DraftHandleValue => {
+    if (blobs.length > 0) {
+      const blob = blobs[0];
+      if (blob.type.startsWith('image/')) {
+        const hasImagePlugin = this.plugins.find(({ blockType }) => blockType === IMAGE_TYPE);
+        if (hasImagePlugin) {
+          const block = this.EditorCommands.insertBlock(IMAGE_TYPE, {});
+          if (block) {
+            this.commonPubsub.set('initialState_' + block.getKey(), {
+              userSelectedFiles: { files: [blob] },
+            });
+            return 'handled';
+          }
+        }
       }
     }
+    return 'not-handled';
+  };
 
-    return 'handled';
+  handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
+  };
+
+  handleDroppedFiles = (selection: SelectionState, blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
   };
 
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
@@ -856,6 +870,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
         handlePastedFiles={this.handlePastedFiles}
+        handleDroppedFiles={this.handleDroppedFiles}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
