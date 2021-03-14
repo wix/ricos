@@ -384,15 +384,13 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     }
     return disabled && e.preventDefault();
   };
-  hasExpand = () =>
-    !this.props.componentData?.config?.disableExpand && this.props.settings.onExpand;
+  hasExpand = () => !this.props.componentData.config.disableExpand && this.props.settings.onExpand;
+
   renderExpandIcon = () => {
     return (
-      this.hasExpand() && (
-        <div className={this.styles.expandContainer}>
-          <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-        </div>
-      )
+      <div className={this.styles.expandContainer}>
+        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+      </div>
     );
   };
 
@@ -438,7 +436,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, onlyHiRes)}
-          {this.renderExpandIcon()}
+          {this.hasExpand() && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
