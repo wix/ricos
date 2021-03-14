@@ -19,6 +19,10 @@
 ### :bug: Bug Fix
 - `unsupported-blocks`
   - [#2292](https://github.com/wix/ricos/pull/#2292) fix unsupported-blocks text height issue 
+- `gallery`
+  - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
+- `fullscreen`
+  - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
 
 </details>
 <hr/>
