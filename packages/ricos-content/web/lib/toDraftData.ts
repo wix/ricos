@@ -1,4 +1,4 @@
 export {
   convertNodeDataToDraft,
   convertDecorationDataToDraft,
-} from '../src/migrateSchema/toDraft/convertDraftPluginData';
+} from '../src/converters/draft/toDraft/convertDraftPluginData';
