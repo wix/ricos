@@ -384,7 +384,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     }
     return disabled && e.preventDefault();
   };
-  hasExpand = () => !this.props.componentData.config.disableExpand && this.props.settings.onExpand;
+  hasExpand = () => !this.props.componentData.config?.disableExpand && this.props.settings.onExpand;
 
   renderExpandIcon = () => {
     return (

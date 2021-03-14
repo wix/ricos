@@ -32,7 +32,7 @@ class ImageSettings extends Component {
   propsToState(props) {
     const { componentData } = props;
     const { src, metadata, error, config } = componentData;
-    const isExpandEnabled = !config.disableExpand;
+    const isExpandEnabled = !config?.disableExpand;
     const isRightClickEnabled = !componentData.disableRightClick;
 
     return {
