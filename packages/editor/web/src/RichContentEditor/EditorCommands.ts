@@ -18,7 +18,6 @@ import {
   removeLinksInSelection,
   triggerMention,
   insertMention,
-  ContentBlock,
 } from 'wix-rich-content-editor-common';
 import {
   PluginsDataMap,
@@ -156,7 +155,7 @@ export const createEditorCommands = (
       type: K,
       data?: PluginsDataMap[K],
       settings?: { forceSelection?: boolean; isRicosSchema?: boolean }
-    ): ContentBlock | void => {
+    ): string | void => {
       const { forceSelection = true } = settings || {};
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
@@ -173,7 +172,7 @@ export const createEditorCommands = (
               ? EditorState.forceSelection(newEditorState, newSelection)
               : EditorState.acceptSelection(newEditorState, newSelection)
           );
-          return newBlock;
+          return newBlock.getKey();
         }
       }
     },
