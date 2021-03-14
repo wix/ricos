@@ -12,13 +12,12 @@ class UnsupportedBlocks extends Component<Props> {
 
   render() {
     const { t, theme } = this.props;
-    const alertMessage = <div>{t('UnsupportedPlugin_message')}</div>;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
       <div className={styles.unsupportedBlocks_alert}>
         <CircleInfoIcon />
-        {alertMessage}
+        <div>{t('UnsupportedPlugin_message')}</div>
       </div>
     );
   }
