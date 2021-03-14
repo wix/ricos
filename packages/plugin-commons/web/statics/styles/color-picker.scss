@@ -13,10 +13,8 @@
 }
 
 .colorPicker_header {
-  @include phone {
-    font-size: 16px;
-    padding: 10px 0px 7px 20px;
-  }
+  font-size: 16px;
+  padding: 10px 0px 7px 20px;
 }
 
 .colorPicker_separator {
@@ -31,7 +29,7 @@
 }
 
 %button {
-  @include Desktop {
+  @include desktop {
     margin-top: 12px;
     margin-left: 8px;
   }
@@ -129,7 +127,7 @@
 }
 
 .colorPicker_buttons_container {
-  @include Desktop {
+  @include desktop {
     margin-bottom: 9px;
     width: 180px;
   }

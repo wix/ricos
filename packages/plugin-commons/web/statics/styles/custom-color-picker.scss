@@ -2,7 +2,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins.scss';
 
 .customColorPicker_editable_input_container {
-  @include Desktop{
+  @include desktop{
     margin: 12px auto;
     justify-content: center; 
   }
@@ -30,7 +30,7 @@
 }
 
 .customColorPicker_input_container {
-  @include Desktop{
+  @include desktop{
     width: 126px;
     font-size: 14px;
     margin: 0 8px;
@@ -86,7 +86,7 @@
   @import '~react-colorful/dist/index.css';
   
   .react-colorful {
-    @include Desktop {
+    @include desktop {
       width: 187px !important;
       margin: 12px auto;
       .react-colorful__saturation {
@@ -98,6 +98,7 @@
       margin: 0 auto;
       width: 100% !important;
     }
+    
     .react-colorful__saturation {
       flex-grow: 0 ;
       border-radius: 0;
@@ -107,10 +108,12 @@
         height: 200px !important;
       }
     }
+
     .react-colorful__pointer {
       width: 16px;
       height: 16px;
     }
+
     .react-colorful__last-control {
       border-radius: 0;
       height: 12px;
@@ -122,9 +125,11 @@
         overflow-x: hidden;
       }
     }
+
     .react-colorful__pointer.react-colorful__hue-pointer {
       z-index: 3;
     }
+
     .react-colorful__pointer.react-colorful__hue-pointer .react-colorful__pointer-fill{
       box-shadow: 0 1px 1px rgba(9, 9, 9, 0.1);
       background-color: #ffffff !important;

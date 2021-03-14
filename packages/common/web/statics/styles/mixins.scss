@@ -19,7 +19,7 @@ $phone: 640px;
   }
 }
 
-@mixin Desktop {
+@mixin desktop {
   @media only screen and (min-width: $phone) {
     @content;
   }
