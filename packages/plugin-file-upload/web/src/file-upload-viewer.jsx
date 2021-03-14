@@ -15,13 +15,7 @@ const getNameWithoutType = fileName => {
   const s = fileName.split('.');
   return s.slice(0, s.length - 1).join('.');
 };
-const filesWithPreview = [
-  'jpg',
-  'png',
-  // 'pdf',
-  'jpeg',
-  'gif',
-];
+const filesWithPreview = ['jpg', 'png', 'pdf', 'jpeg', 'gif'];
 class FileUploadViewer extends PureComponent {
   state = {
     resolvedFileUrl: null,
@@ -69,7 +63,7 @@ class FileUploadViewer extends PureComponent {
     const showLoader = isLoading || resolvingUrl;
     const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
     if (showFileIcon) {
-      return <Icon styles={this.styles} className={this.styles.file_upload_icon} />;
+      return null; // todo=>Refactor;
     } else {
       return (
         <div className={isMobile ? this.styles.mobile_status_icon : this.styles.file_upload_state}>
@@ -119,21 +113,42 @@ class FileUploadViewer extends PureComponent {
     return { infoString, infoStyle: this.styles.file_upload_type };
   }
 
-  renderViewerBody({ name, type }) {
-    const { isMobile } = this.props;
+  renderViewerBody({ name, type, downloadUrl, previewUrl, downloadTarget }) {
+    //todo =>Refactor
+    // eslint-disable-next-line react/prop-types
+    const { isMobile, showLoader, showReadyIcon } = this.props;
     const nameWithoutType = getNameWithoutType(name);
     const Icon = getIcon(type);
     const { infoString, infoStyle } = this.getFileInfoString(type);
+    const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
+
     return (
       <>
-        {this.renderIcon(Icon)}
-        {!isMobile && this.renderIcon()}
         <div className={this.styles.file_upload_text_container}>
-          <div className={this.styles.file_upload_name_container}>
-            <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
-            {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
-          </div>
-          <div className={infoStyle}>{infoString}</div>
+          <a
+            href={previewUrl ? previewUrl : downloadUrl}
+            target={downloadTarget}
+            className={this.styles.file_preview_link}
+          >
+            {showFileIcon && <Icon styles={this.styles} className={this.styles.file_upload_icon} />}
+            <div style={{ width: 'calc(100% - 72px)' }}>
+              <div className={this.styles.file_upload_name_container}>
+                <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
+                {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
+              </div>
+              <div className={infoStyle}>{infoString}</div>
+            </div>
+          </a>
+        </div>
+        <div>
+          <a
+            href={downloadUrl}
+            target={downloadTarget}
+            //  className={this.styles.file_download_link}
+          >
+            {this.renderIcon(Icon)}
+            {!isMobile && this.renderIcon()}
+          </a>
         </div>
       </>
     );
@@ -148,18 +163,19 @@ class FileUploadViewer extends PureComponent {
     if (error) {
       return this.renderContainerWithoutLink();
     }
+    let previewUrl;
     fileUrl =
       // eslint-disable-next-line max-len
-      'https://download-files.wixmp.com/ugd/f0f74f_2ff83a1acde842db9da23a83ef586a20.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTYxNDc3MjQ0MSwiZXhwIjoxNjE0ODA4NDUxLCJqdGkiOiIyYTIwMDYzYTMxN2EiLCJvYmoiOltbeyJwYXRoIjoiL3VnZC9mMGY3NGZfMmZmODNhMWFjZGU4NDJkYjlkYTIzYTgzZWY1ODZhMjAucGRmIn1dXX0.YSLPZpD7jYGhdFvLa4X9G9dYWdxbho06puUcFxz2zms&filename=sample-PDF.pdf';
+      'https://download-files.wixmp.com/ugd/f0f74f_2ff83a1acde842db9da23a83ef586a20.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTYxNTQ2MDkwNiwiZXhwIjoxNjE1NDk2OTE2LCJqdGkiOiI4ZTg2MGU0YmE2NjQiLCJvYmoiOltbeyJwYXRoIjoiL3VnZC9mMGY3NGZfMmZmODNhMWFjZGU4NDJkYjlkYTIzYTgzZWY1ODZhMjAucGRmIn1dXX0.S8fK3XsX_mj3gQkM29K5YAIY9Lj3Dq33SNagXUzdCFg&filename=sample-PDF.pdf';
+    const downloadUrl = fileUrl;
     if (filesWithPreview.includes(type)) {
-      const fileNameIndex = fileUrl.indexOf('&filename');
-      fileUrl = fileNameIndex !== -1 ? fileUrl.slice(0, fileNameIndex) : fileUrl;
+      const previewIndexLimit = downloadUrl.indexOf('&filename');
+      previewUrl = previewIndexLimit !== -1 ? downloadUrl.slice(0, previewIndexLimit) : downloadUrl;
     }
-
     return (
-      <a href={fileUrl} target={downloadTarget} className={this.styles.file_upload_link}>
-        {this.renderViewerBody({ name, type })}
-      </a>
+      // <a href={fileUrl} target={downloadTarget} className={this.styles.file_upload_link}>
+      this.renderViewerBody({ name, type, downloadUrl, previewUrl, downloadTarget })
+      // </a>
     );
   }
 
@@ -207,12 +223,11 @@ class FileUploadViewer extends PureComponent {
 
   renderAutoDownloadIframe() {
     const withFileUrlResolver = this.props.settings.resolveFileUrl;
-
     if (!withFileUrlResolver) {
       return null;
     }
 
-    return <object ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
+    return <iframe ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
   }
 
   render() {
@@ -226,7 +241,11 @@ class FileUploadViewer extends PureComponent {
       componentData.error && this.styles.file_upload_error_container
     );
     return (
-      <div className={style} data-hook="fileUploadViewer">
+      <div
+        className={style}
+        data-hook="fileUploadViewer"
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         {viewer}
         {this.renderAutoDownloadIframe()}
       </div>
