@@ -30,6 +30,8 @@ const getAllPluginsNames = ({
     'ricos-editor-no-modal',
     'ricos-editor-with-plugins',
     'ricos-common',
+    'rich-content-schema',
+    'editor-common',
   ];
 
   if (skipPlugins) {
@@ -46,7 +48,8 @@ const getAllPluginsNames = ({
         pkg =>
           pkg.name.indexOf('wix-rich-content-plugin') === 0 &&
           pkg.name !== 'wix-rich-content-plugin-commons' &&
-          pkg.name !== 'wix-rich-content-plugin-unsupported-blocks'
+          pkg.name !== 'wix-rich-content-plugin-unsupported-blocks' &&
+          pkg.name !== 'wix-rich-content-plugin-headings'
       )
       .map(pkg => pkg.name)
       .concat(viewerPakages);

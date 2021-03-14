@@ -37,7 +37,10 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-      - uses: arduino/setup-protoc@v1
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: npx midgard-yarn install --frozen-lockfile
@@ -105,7 +108,10 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-      - uses: arduino/setup-protoc@v1
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: npx midgard-yarn install --frozen-lockfile
@@ -152,7 +158,10 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-      - uses: arduino/setup-protoc@v1
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: npx midgard-yarn install --frozen-lockfile
@@ -177,16 +186,12 @@ jobs:
         id: pr-number
         run: |
           echo "pr-number=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')" >> $GITHUB_ENV
-      - name: Get PR author
-        id: pr-author
-        run: |
-          echo "pr-author=$(curl -s https://api.github.com/repos/wix/ricos/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"  >> $GITHUB_ENV
       - name: Notify fail in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.3
         if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
           channel_id: C0124DH7HHS #ricos-ci
-          status: FAILED ${{ env[env.commit-author] }} ${{ env[env.pr-author] }}
+          status: FAILED ${{ env[env.commit-author] }}
           color: danger
 
       # - name: Get current commit status
@@ -216,15 +221,14 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       Barackos: <@UM3M904MU>
-      barboaron: <@UMJ56Q30W>
       danarish4: <@UEBDPSU2W>
       lxgreen: <@U6FQCJ5GT>
       maimonav: <@UMUB0DSLD>
       mharsat: <@UJAAZU58B>
       noamtwix: <@UEBDQJBMG>
       oded-soffrin: <@U0MN7A3H8>
-      ShamaySapir: <@UM48FG657>
       shaulgo: <@U0SDJ5S30>
       talevy17: <@UM24QHHAR>
-      michael-wix: ' - Michael just added translations'
-      wix-babel-ng: " - Michael's bot added new translations :pokesquirtlewalk:"
+      tamrat-bay: <@U01E6AJC4AV>
+      justame: <@U06D4H3MJ>
+      wix-babel-ng: ' - Babel added new translations :pokesquirtlewalk:'

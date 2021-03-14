@@ -36,6 +36,8 @@ export interface TestAppConfig {
     skipCssOverride?: boolean;
     useCustomStyles?: boolean;
     fallbackColor?: string;
+    disableContainer?: boolean;
+    contentBgColor?: boolean;
   };
   showDefaultPreview?: boolean;
   isNativeUpload?: boolean;

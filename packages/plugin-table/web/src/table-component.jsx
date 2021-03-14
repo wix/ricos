@@ -11,9 +11,10 @@ import { createEmptyCellEditor, isCellsNumberInvalid } from './tableUtil';
 import { AddNewSection, Rows } from './components';
 import TableToolbar from './TableToolbar/TableToolbar';
 import { isPluginFocused, TOOLBARS, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
-import { isEmpty, isNumber, cloneDeep } from 'lodash';
+import { isEmpty, isNumber, cloneDeep, isEqual } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
+import { TABLE_TYPE } from './types';
 
 class TableComponent extends React.Component {
   constructor(props) {
@@ -23,10 +24,11 @@ class TableComponent extends React.Component {
       isEditingActive: false,
       isAllCellsSelected: false,
       selected: {},
+      prevSelection: {},
     };
-    this.innerRceAdditionalProps = { placeholder: '' };
+    this.innerRceAdditionalProps = { placeholder: '', handleReturn: this.handleReturn };
     this.innerEditorsRefs = {};
-    this.table = new Table(props.componentData, this.updateComponentData);
+    this.table = new Table(props.componentData, this.updateTable);
     this.tableRef = createRef();
     this.tableContainer = createRef();
     this.dragPreview = createRef();
@@ -51,14 +53,30 @@ class TableComponent extends React.Component {
     }
   }
 
+  handleReturn = () => e => !(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) && 'handled';
+
   getCellState = (i, j) => this.table.getCellContent(i, j) || createEmptyCellEditor();
+
+  selectCellContent = (i, j) => {
+    this.table.getCell(i, j).content = this.innerEditorsRefs[`${i}-${j}`].selectAllContent(true);
+    this.updateComponentData(this.table.componentData);
+  };
+
+  updateTable = data => {
+    this.updateComponentData(data);
+    this.setState({ updateAllRows: true });
+  };
+
+  updateComponentData = data => {
+    this.props.store.set('componentData', { ...data }, this.props.block.getKey());
+  };
 
   renderInnerRCE = (i, j) => {
     const editorState = this.getCellState(i, j);
     return this.props.renderInnerRCE({
       editorState,
       onChange: editorState => this.table.updateCellContent(i, j, editorState),
-      renderedIn: 'table',
+      renderedIn: TABLE_TYPE,
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
       tablePluginMenu: true,
@@ -138,6 +156,8 @@ class TableComponent extends React.Component {
     const isAllCellsSelected = this.isAllCellsSelected(selected);
     this.setState(
       {
+        updateAllRows: !selected,
+        prevSelection: this.state.selected,
         selected,
         isAllCellsSelected,
         highlightColResizer: false,
@@ -152,7 +172,8 @@ class TableComponent extends React.Component {
     selected && this.table.isAllCellsSelected(selected.start, selected.end);
 
   onSelect = selected => {
-    this.setSelected(this.table.fixSelectedWithMergeCells(selected));
+    !isEqual(selected, this.state.selected) &&
+      this.setSelected(this.table.fixSelectedWithMergeCells(selected));
   };
 
   getFirstCellRef = () => {
@@ -176,12 +197,18 @@ class TableComponent extends React.Component {
     this.table.setNewRows(rows);
   };
 
+  // eslint-disable-next-line complexity
   onKeyDown = e => {
     const { selected } = this.state;
     if (this.shouldHandleKeyDown(e)) {
       if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         this.setAllCellsSelected();
+      } else if (
+        this.isAllCellsSelected(selected) &&
+        (e.key === 'Backspace' || e.key === 'Delete')
+      ) {
+        this.props.blockProps.deleteBlock();
       } else if (e.keyCode === KEYS_CHARCODE.SPACE) {
         e.ctrlKey && this.handleShortcutSelection(e, getColsRange(selected), this.selectCols);
         e.shiftKey && this.handleShortcutSelection(e, getRowsRange(selected), this.selectRows);
@@ -195,6 +222,12 @@ class TableComponent extends React.Component {
             ? this.props.blockProps.deleteBlock()
             : selectedCols && this.deleteColumn(selectedCols);
         }
+      } else if (e.key === 't' && e.ctrlKey) {
+        this.lastFocused = document.activeElement;
+        this.toolbarRef.focus();
+      } else if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+        this.lastFocused && this.lastFocused.focus();
+        this.lastFocused = undefined;
       }
     }
   };
@@ -256,9 +289,6 @@ class TableComponent extends React.Component {
     !this.isAllCellsSelected(this.state.selected) && this.setState({ isAllCellsSelected: false });
   };
 
-  updateComponentData = data =>
-    this.props.store.set('componentData', { ...data }, this.props.block.getKey());
-
   onResizeCol = columnsRefs =>
     this.table.setColWidthAfterResize(columnsRefs, this.tableRef.current.offsetWidth);
 
@@ -285,6 +315,7 @@ class TableComponent extends React.Component {
     this.setState({ highlightColResizer: false });
     this.resetDrag();
     this.colDropIndex = null;
+    this.position = null;
   };
 
   onRowDragEnd = (e, dragsIndex) => {
@@ -344,22 +375,23 @@ class TableComponent extends React.Component {
   addLastCol = () => this.addCol(this.table.getColNum());
 
   onColDrag = (e, dragsIndex) => {
-    e.movementX > 0 ? (this.movementX = 'right') : e.movementX < 0 && (this.movementX = 'left');
+    !this.position && (this.position = e.pageX);
+    const movementX = e.movementX > 0 ? 'right' : e.movementX < 0 && 'left';
     const colsRefs = Array.from(this.rowsRefs[0]?.children || []);
-    const colsPositions = colsRefs.map(col =>
-      this.movementX === 'right' ? col.offsetLeft + col.offsetWidth : col.offsetLeft
-    );
+    const colsPositions = colsRefs.map(col => col.offsetLeft);
 
     const dragPreviewWidth = this.colsWidth
       .slice(dragsIndex.start, dragsIndex.end + 1)
       .reduce((acc, curr) => acc + curr);
     const lastCol = colsRefs[colsRefs.length - 1];
     const maxLeft = lastCol.offsetLeft + lastCol.offsetWidth + 20 - dragPreviewWidth;
-    const dropLeft = Math.min(e.pageX - dragPreviewWidth, maxLeft);
+    const diff = e.pageX - this.position;
+    const startPosition = colsPositions[dragsIndex.start];
+    const dropLeft = Math.min(startPosition + diff + this.getTableScrollLeft(), maxLeft);
     colsPositions.forEach((pos, index) => {
       if (
-        (this.movementX === 'right' && dropLeft + dragPreviewWidth > pos - 15) ||
-        (this.movementX === 'left' && dropLeft > pos + 15)
+        (movementX === 'right' && dropLeft > pos - 15) ||
+        (movementX === 'left' && dropLeft > pos)
       ) {
         this.colDropIndex = index + 1;
       }
@@ -417,8 +449,22 @@ class TableComponent extends React.Component {
 
   onFocus = e => e.stopPropagation();
 
+  getRowsToUpdate = () => {
+    const { selected = {}, prevSelection = {}, updateAllRows } = this.state;
+    return updateAllRows
+      ? [...Array(this.table.getRowNum()).fill(0)].map((row, i) => i)
+      : [...getRowsRange(selected), ...getRowsRange(prevSelection)];
+  };
+
+  getTableScrollLeft = () => {
+    const horizontalScrollbarElement = this.tableContainer?.current?.closest(
+      '[data-id=horizontal-scrollbar-element]'
+    );
+    return horizontalScrollbarElement.scrollLeft;
+  };
+
   render() {
-    const { componentData, theme, t, isMobile, settings, blockProps } = this.props;
+    const { theme, t, isMobile, settings, blockProps } = this.props;
     const {
       selected,
       isEditingActive,
@@ -426,7 +472,6 @@ class TableComponent extends React.Component {
       highlightColResizer,
       isAllCellsSelected,
     } = this.state;
-    this.table.updateComponentData(componentData);
     this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
@@ -470,6 +515,7 @@ class TableComponent extends React.Component {
             merge={this.merge}
             distributeRows={this.distributeRows}
             distributeColumns={this.distributeColumns}
+            getTableScrollLeft={this.getTableScrollLeft}
           />
         )}
         {!isMobile && (
@@ -533,6 +579,8 @@ class TableComponent extends React.Component {
             tableOverflowWidth={
               this.tableRef.current?.offsetWidth - this.tableContainer.current?.offsetWidth
             }
+            rowsToUpdate={this.getRowsToUpdate()}
+            selectCellContent={this.selectCellContent}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>

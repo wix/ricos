@@ -110,10 +110,10 @@ import {
   RawDraftContentState,
   ContentState,
 } from '@wix/draft-js';
-import { RicosContent } from 'wix-rich-content-common';
+import { DraftContent } from 'wix-rich-content-common';
 
-// makes draft-js's convertFromRaw match our own RicosContent type
-export const convertFromRaw = (rawState: RicosContent): ContentState =>
+// makes draft-js's convertFromRaw match our own DraftContent type
+export const convertFromRaw = (rawState: DraftContent): ContentState =>
   convertFromRawDraft(rawState as RawDraftContentState);
 
 export {

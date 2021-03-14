@@ -23,7 +23,7 @@ describe('editor rendering', () => {
 
     beforeEach(() => {
       cy.switchToDesktop();
-      cy.switchToSeoMode();
+      cy.switchOnSeoMode();
     });
 
     after(() => cy.eyesClose());

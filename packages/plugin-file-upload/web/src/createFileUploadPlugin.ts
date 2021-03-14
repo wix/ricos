@@ -25,4 +25,6 @@ const createFileUploadPlugin: CreatePluginFunction<FilePluginEditorConfig> = con
   });
 };
 
+createFileUploadPlugin.functionName = FILE_UPLOAD_TYPE;
+
 export { createFileUploadPlugin };

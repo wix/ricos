@@ -6,19 +6,15 @@ import { defaultTheme } from './defaults';
 import * as utils from './themeUtils';
 import { ThemeStrategyArgs, ThemeStrategyResult } from './themeTypes';
 import { isDefined } from 'ts-is-present';
-import { isEmpty } from 'lodash';
 
 export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyResult {
   const { buildCssVars } = utils;
-  const { ricosTheme = {}, plugins = [], cssOverride = {}, experiments } = args;
-  if (!isEmpty(experiments)) {
-    console.debug('themeStrategy experiments', experiments); // eslint-disable-line no-console
-  }
-  const { parentClass = '', palette, typography, customStyles } = ricosTheme;
+  const { ricosTheme = {}, plugins = [], cssOverride = {} /*, experiments*/ } = args;
+  const { parentClass = '', palette, paletteConfig, typography, customStyles } = ricosTheme;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
 
   // Create CSS Vars
-  const { paletteVarsObject, colors } = createPalette(palette);
+  const { paletteVarsObject, colors } = createPalette(palette, paletteConfig);
   const typographyVarsObject = createTypography(typography);
   const customsVarsObject = createCustomStyles(customStyles);
 

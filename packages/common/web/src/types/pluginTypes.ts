@@ -23,7 +23,7 @@ import {
   DraftEditorCommand,
 } from 'draft-js';
 import {
-  RicosContent,
+  DraftContent,
   PREVIEW,
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -213,24 +213,25 @@ export type BlockRendererFn = (
 } | null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Record<string, any>> = (
-  config: CreatePluginConfig<PluginConfig>
-) => {
-  InlinePluginToolbar?: ComponentType;
-  Toolbar?: ComponentType;
-  InsertPluginButtons: Pick<PluginButton, 'buttonSettings' | 'component'>[];
-  externalizedButtonProps?: ToolbarButtonProps[];
-  blockType: string;
-  InlineModals?: ComponentType[];
-  TextButtonMapper?: TextButtonMapper;
-  pubsub: Pubsub;
-  customStyleFn?: EditorProps['customStyleFn'];
-  decoratorTrigger?: string;
-  blockRendererFn: BlockRendererFn;
-  underlyingPlugin?: {
-    handleKeyCommand: EditorProps['handleKeyCommand'];
-    keyBindingFn: EditorProps['keyBindingFn'];
+export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Record<string, any>> = {
+  (config: CreatePluginConfig<PluginConfig>): {
+    InlinePluginToolbar?: ComponentType;
+    Toolbar?: ComponentType;
+    InsertPluginButtons: Pick<PluginButton, 'buttonSettings' | 'component'>[];
+    externalizedButtonProps?: ToolbarButtonProps[];
+    blockType: string;
+    InlineModals?: ComponentType[];
+    TextButtonMapper?: TextButtonMapper;
+    pubsub: Pubsub;
+    customStyleFn?: EditorProps['customStyleFn'];
+    decoratorTrigger?: string;
+    blockRendererFn: BlockRendererFn;
+    underlyingPlugin?: {
+      handleKeyCommand: EditorProps['handleKeyCommand'];
+      keyBindingFn: EditorProps['keyBindingFn'];
+    };
   };
+  functionName?: string;
 };
 
 export type ModalsMap = Record<string, ComponentType>;
@@ -354,5 +355,5 @@ export type InlineStyleMapper = Record<string, (children, { key }) => JSX.Elemen
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type InlineStyleMapperFunction<PluginConfig = Record<string, any>> = (
   config: LegacyViewerPluginConfig<PluginConfig>,
-  raw: RicosContent
+  raw: DraftContent
 ) => () => InlineStyleMapper;

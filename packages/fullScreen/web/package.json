@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-fullscreen",
-  "version": "8.21.1",
+  "version": "8.27.1",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -26,7 +26,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build:rollup": "rollup --environment MODULE_NAME:fullscreen -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:fullscreen,EXTRACT_CSS:false -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
@@ -44,8 +44,8 @@
   },
   "dependencies": {
     "fscreen": "1.0.2",
-    "wix-rich-content-common": "8.21.1",
-    "wix-rich-content-plugin-gallery": "8.21.1"
+    "wix-rich-content-common": "8.27.1",
+    "wix-rich-content-plugin-gallery": "8.27.1"
   },
   "unpkg": true,
   "publishConfig": {

@@ -14,7 +14,12 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
+import {
+  EditorEventsContext as EditorEventsContext1,
+  EditorEvents,
+} from 'wix-rich-content-editor-common';
+import { EditorEventsContext as EditorEventsContext2 } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
+
 import { ToolbarType, Version } from 'wix-rich-content-common';
 
 // eslint-disable-next-line
@@ -57,11 +62,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       children?.props.helpers?.onOpenEditorSuccess ||
       this.props._rcProps?.helpers?.onOpenEditorSuccess;
     onOpenEditorSuccess?.(Version.currentVersion);
-    this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.props.editorEvents1?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.props.editorEvents2?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
   componentWillUnmount() {
-    this.props.editorEvents?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.props.editorEvents1?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.props.editorEvents2?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
   onPublish = async () => {
@@ -210,9 +217,20 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 }
 
 export default forwardRef<RicosEditor, RicosEditorProps>((props, ref) => (
-  <EditorEventsContext.Consumer>
-    {contextValue => <RicosEditor editorEvents={contextValue} {...props} ref={ref} />}
-  </EditorEventsContext.Consumer>
+  <EditorEventsContext1.Consumer>
+    {contextValue1 => (
+      <EditorEventsContext2.Consumer>
+        {contextValue2 => (
+          <RicosEditor
+            editorEvents1={contextValue1}
+            editorEvents2={contextValue2}
+            {...props}
+            ref={ref}
+          />
+        )}
+      </EditorEventsContext2.Consumer>
+    )}
+  </EditorEventsContext1.Consumer>
 ));
 
 const StaticToolbarPortal: FunctionComponent<{
