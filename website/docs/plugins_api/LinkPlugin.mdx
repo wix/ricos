@@ -80,9 +80,9 @@ Default value:
 }
 ```
 
-### `previewElement`
+### `blockPreview`
 
-anchor configuration for customize the preview element that shown in anchor panel.
+Anchor configuration to customize the preview elements shown in the anchor panel.
 
 example:
 
@@ -90,9 +90,9 @@ example:
 {
   linkTypes: {
       anchor: {
-        previewElement: block => {
-          const previewElement = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
-          return previewElement;
+        blockPreview: block => {
+          const blockPreview = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
+          return blockPreview;
         },
       },
     },

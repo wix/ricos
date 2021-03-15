@@ -75,7 +75,7 @@ class AnchorPanel extends Component {
   render() {
     const { styles } = this;
     const { filter } = this.state;
-    const { ariaProps, t, anchorValues, anchorableBlocksData, theme, linkTypes } = this.props;
+    const { ariaProps, t, anchorValues, anchorableBlocksData, theme, blockPreview } = this.props;
     const { anchorableBlocks } = anchorableBlocksData;
     const filteredAnchorableBlocks =
       filter.value === 'all'
@@ -109,7 +109,7 @@ class AnchorPanel extends Component {
                 onClick={args => this.anchorableElementClicked(block, { ...args })}
                 isSelected={anchorValues.anchor === block.key}
                 t={t}
-                linkTypes={linkTypes}
+                blockPreview={blockPreview}
               />
             </div>
           ))}
@@ -131,6 +131,6 @@ AnchorPanel.propTypes = {
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
   placeholder: PropTypes.string,
-  linkTypes: PropTypes.object,
+  blockPreview: PropTypes.func,
 };
 export default AnchorPanel;

@@ -190,7 +190,7 @@ class LinkPanelContainer extends PureComponent {
       anchorPanelValues,
       isMobile,
       linkPanelWithTitle,
-      linkTypes,
+      blockPreview: linkTypes?.anchor?.blockPreview,
     };
     return this.renderBasicLinkPanel ? (
       <BasicLinkPanel {...propsToPass} />

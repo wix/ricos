@@ -19,10 +19,9 @@ import { get } from 'lodash';
 class AnchorableElement extends PureComponent {
   constructor(props) {
     super(props);
-    const { block, theme, linkTypes } = props;
+    const { block, theme } = props;
     this.styles = mergeStyles({ styles, theme });
-    const previewElement = linkTypes.anchor.previewElement?.(block);
-    this.state = { iconThumbnail: this.getIconThumbnail(block), previewElement };
+    this.state = { iconThumbnail: this.getIconThumbnail(block) };
   }
 
   componentDidMount() {
@@ -131,10 +130,32 @@ class AnchorableElement extends PureComponent {
     this.setState({ iconThumbnail: null });
   };
 
+  getElementsToRender = () => {
+    const { blockPreview, block, t } = this.props;
+    const { iconThumbnail, preview } = this.state;
+    const blockPreviewElement = blockPreview?.(block);
+    const thumbnailToRender = blockPreviewElement ? (
+      <div className={styles.AnchorableElement_thumbnail}>{blockPreviewElement.thumbnail}</div>
+    ) : (
+      <Thumbnail
+        iconThumbnail={iconThumbnail}
+        preview={preview}
+        alt={this.getContent()}
+        previewLoaded={this.previewLoaded}
+        theme={styles}
+      />
+    );
+    const typeToRender = blockPreviewElement
+      ? blockPreviewElement.type
+      : t(this.getDataToDisplayByField('type'));
+    const contentToRender = blockPreviewElement ? blockPreviewElement.content : this.getContent();
+    return { thumbnailToRender, typeToRender, contentToRender };
+  };
+
   render() {
     const { styles } = this;
-    const { iconThumbnail, preview, previewElement } = this.state;
-    const { dataHook, onClick, isSelected, t } = this.props;
+    const { dataHook, onClick, isSelected } = this.props;
+    const { thumbnailToRender, typeToRender, contentToRender } = this.getElementsToRender();
     return (
       <div
         data-hook={dataHook}
@@ -143,24 +164,10 @@ class AnchorableElement extends PureComponent {
         })}
         onClick={() => onClick({ defaultName: this.getContent() })}
       >
-        {previewElement ? (
-          <div className={styles.AnchorableElement_thumbnail}>{previewElement.thumbnail}</div>
-        ) : (
-          <Thumbnail
-            iconThumbnail={iconThumbnail}
-            preview={preview}
-            alt={this.getContent()}
-            previewLoaded={this.previewLoaded}
-            theme={styles}
-          />
-        )}
+        {thumbnailToRender}
         <div className={styles.AnchorableElement_contentContainer}>
-          <div className={styles.AnchorableElement_contentType}>
-            {previewElement ? previewElement.type : t(this.getDataToDisplayByField('type'))}
-          </div>
-          <div className={styles.AnchorableElement_blockContent}>
-            {previewElement ? previewElement.content : this.getContent()}
-          </div>
+          <div className={styles.AnchorableElement_contentType}>{typeToRender}</div>
+          <div className={styles.AnchorableElement_blockContent}>{contentToRender}</div>
         </div>
       </div>
     );
@@ -173,7 +180,7 @@ class AnchorableElement extends PureComponent {
     block: PropTypes.object,
     theme: PropTypes.object,
     isSelected: PropTypes.bool,
-    linkTypes: PropTypes.object,
+    blockPreview: PropTypes.func,
   };
 }
 
