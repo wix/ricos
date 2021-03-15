@@ -20,10 +20,11 @@ const reorderArray = (arr, from, to) => {
 };
 
 class Table extends TableDataUtil {
-  constructor(componentData = {}, saveNewDataFunc) {
+  constructor(componentData = {}, saveNewDataFunc, triggerBi) {
     super(componentData);
     this.saveNewDataFunc = saveNewDataFunc;
     this.contentMaxHeight = 0;
+    this.triggerBi = triggerBi;
   }
 
   setNewRows = rows => {
@@ -148,6 +149,11 @@ class Table extends TableDataUtil {
       const cell = this.getCell(i, j);
       cell.style = { ...(cell.style || {}), ...style };
     });
+    this.triggerBi({
+      button_name: Object.keys(style)[0],
+      category: Object.keys(style)[0],
+      value: Object.values(style)[0],
+    });
     this.setNewRows(this.componentData.config.rows);
   };
 
@@ -185,6 +191,11 @@ class Table extends TableDataUtil {
         ...(cell.border || {}),
         ...cellBorders,
       };
+    });
+    this.triggerBi({
+      button_name: 'border',
+      category: 'cell border',
+      value: borderColor,
     });
     this.setNewRows(this.componentData.config.rows);
   };
@@ -498,11 +509,21 @@ class Table extends TableDataUtil {
   toggleRowHeader = () => {
     this.componentData.config.rowHeader = !this.componentData.config.rowHeader;
     this.saveNewDataFunc(this.componentData);
+    this.triggerBi({
+      button_name: 'header',
+      category: 'row header',
+      value: !this.componentData.config.rowHeader,
+    });
   };
 
   toggleColHeader = () => {
     this.componentData.config.colHeader = !this.componentData.config.colHeader;
     this.saveNewDataFunc(this.componentData);
+    this.triggerBi({
+      button_name: 'header',
+      category: 'column header',
+      value: !this.componentData.config.rowHeader,
+    });
   };
 
   isBothHeaderCellsAndRegularCellsSelected = range => {

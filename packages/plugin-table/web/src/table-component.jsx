@@ -28,7 +28,7 @@ class TableComponent extends React.Component {
     };
     this.innerRceAdditionalProps = { placeholder: '', handleReturn: this.handleReturn };
     this.innerEditorsRefs = {};
-    this.table = new Table(props.componentData, this.updateTable);
+    this.table = new Table(props.componentData, this.updateTable, this.onPluginChange);
     this.tableRef = createRef();
     this.tableContainer = createRef();
     this.dragPreview = createRef();
@@ -52,6 +52,12 @@ class TableComponent extends React.Component {
       this.setSelected();
     }
   }
+
+  onPluginChange = biParams =>
+    this.props.helpers?.onPluginChange?.(TABLE_TYPE, { ...biParams, type: 'cell formatting' });
+
+  triggerBi = (eventName, biParams) =>
+    this.props.helpers?.onPluginAction?.(eventName, { plugin_id: TABLE_TYPE, ...biParams });
 
   handleReturn = () => e => !(e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) && 'handled';
 
@@ -341,9 +347,6 @@ class TableComponent extends React.Component {
     this.dragPreview.current && (this.dragPreview.current.style.visibility = 'hidden');
     this.setSelected();
   };
-
-  triggerBi = (eventName, biParams) =>
-    this.props.helpers?.onPluginAction?.(eventName, { plugin_id: TABLE_TYPE, ...biParams });
 
   addRow = (i, biParams) => {
     if (!isCellsNumberInvalid(this.table.getRowNum() + 1, this.table.getColNum())) {
