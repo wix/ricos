@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package rich_content;
+
+import "common.proto";
+
+message DividerData {
+    enum DividerType {
+        SINGLE = 0;
+        DOUBLE = 1;
+        DASHED = 2;
+        DOTTED = 3;
+    }
+
+    PluginContainerData container_data = 1;
+    DividerType type = 2;
+}

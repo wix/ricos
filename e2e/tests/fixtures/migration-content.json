@@ -265,7 +265,7 @@
       }
     },
     {
-      "key": "s53",
+      "key": "cfsec",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -275,6 +275,54 @@
           "offset": 0,
           "length": 1,
           "key": 11
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "epgkf",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "63lbi",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 12
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "affus",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "s53",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 13
         }
       ],
       "data": {}
@@ -322,7 +370,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 12
+          "key": 14
         }
       ],
       "data": {}
@@ -348,7 +396,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 13
+          "key": 15
         }
       ],
       "data": {}
@@ -374,7 +422,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 14
+          "key": 16
         }
       ],
       "data": {}
@@ -400,7 +448,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 15
+          "key": 17
         }
       ],
       "data": {}
@@ -426,7 +474,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 16
+          "key": 18
         }
       ],
       "data": {}
@@ -452,7 +500,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 17
+          "key": 19
         }
       ],
       "data": {}
@@ -478,7 +526,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 18
+          "key": 20
         }
       ],
       "data": {}
@@ -759,7 +807,7 @@
         {
           "offset": 99,
           "length": 7,
-          "key": 19
+          "key": 21
         }
       ],
       "data": {
@@ -792,7 +840,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 20
+          "key": 22
         }
       ],
       "data": {}
@@ -1066,6 +1114,59 @@
       }
     },
     "11": {
+      "type": "wix-draft-plugin-link-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Link Button",
+            "url": "www.wix.com",
+            "rel": false,
+            "target": true
+          },
+          "design": {
+            "activeButton": 4,
+            "borderRadius": 5,
+            "borderWidth": 7,
+            "padding": 8.5,
+            "background": "#FEFDFD",
+            "color": "#0261FF",
+            "borderColor": "#0261FF"
+          }
+        }
+      }
+    },
+    "12": {
+      "type": "wix-draft-plugin-action-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Action Button"
+          },
+          "design": {
+            "activeButton": 0,
+            "borderRadius": 15,
+            "borderWidth": 0,
+            "padding": 12,
+            "background": "#81B0FF",
+            "color": "#FEFDFD",
+            "borderColor": "#0261FF"
+          }
+        }
+      }
+    },
+    "13": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1077,7 +1178,7 @@
         }
       }
     },
-    "12": {
+    "14": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1103,7 +1204,7 @@
         }
       }
     },
-    "13": {
+    "15": {
       "type": "wix-draft-plugin-map",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1127,7 +1228,7 @@
         }
       }
     },
-    "14": {
+    "16": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1141,7 +1242,7 @@
         "size": 150000
       }
     },
-    "15": {
+    "17": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1155,8 +1256,8 @@
         }
       }
     },
-    "16": {
-      "type": "wix-draft-plugin-sound-cloud",
+    "18": {
+      "type": "wix-draft-plugin-video",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
@@ -1179,10 +1280,11 @@
           "provider_name": "YouTube",
           "width": 480,
           "video_url": "https://youtu.be/BBu5codsO6Y"
-        }
+        },
+        "type": "soundCloud"
       }
     },
-    "17": {
+    "19": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1201,7 +1303,7 @@
         "provider_url": "www.mockUrl.com"
       }
     },
-    "18": {
+    "20": {
       "type": "wix-draft-plugin-poll",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1309,14 +1411,14 @@
         "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
       }
     },
-    "19": {
+    "21": {
       "type": "EMOJI_TYPE",
       "mutability": "IMMUTABLE",
       "data": {
         "emojiUnicode": "👨‍👩‍👦‍👦"
       }
     },
-    "20": {
+    "22": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1337,5 +1439,5 @@
       }
     }
   },
-  "VERSION": "8.11.4"
+  "VERSION": "8.27.1"
 }

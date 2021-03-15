@@ -1,4 +1,5 @@
 /* eslint-disable fp/no-delete */
+import { TextStyle } from 'ricos-schema';
 import { RicosEntityMap, RicosContentBlock } from '../../..';
 import { TO_RICOS_DATA_FIELD, TO_RICOS_PLUGIN_TYPE } from '../consts';
 import { convertBlockDataToRicos, keysToCamelCase } from './convertRicosPluginData';
@@ -15,15 +16,7 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   return { type: TO_RICOS_PLUGIN_TYPE[type], [dataFieldName]: convertBlockDataToRicos(type, data) };
 };
 
-export const parseBlockData = (blockData?: RicosContentBlock['data']) => {
+export const getTextStyle = (blockData?: RicosContentBlock['data']): TextStyle => {
   const { textAlignment, dynamicStyles } = blockData || {};
-  return Object.assign(
-    {},
-    textAlignment !== undefined ? { textAlignment: textAlignment.toUpperCase() } : undefined,
-    dynamicStyles !== undefined
-      ? {
-          dynamicStyles: keysToCamelCase(dynamicStyles),
-        }
-      : undefined
-  );
+  return { textAlignment: textAlignment.toUpperCase(), ...keysToCamelCase(dynamicStyles) };
 };
