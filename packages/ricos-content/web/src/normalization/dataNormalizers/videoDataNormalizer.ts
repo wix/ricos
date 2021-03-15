@@ -1,10 +1,12 @@
 const videoDataNormalizer = (componentData, normalizerConfig) => {
-  if (
+  const shouldNormalizeDisableDownload =
     componentData.disableDownload === undefined &&
-    normalizerConfig.disableVideoDownload !== undefined
-  ) {
+    normalizerConfig.disableVideoDownload !== undefined;
+
+  if (shouldNormalizeDisableDownload) {
     componentData.disableDownload = normalizerConfig.disableVideoDownload;
   }
+
   return componentData;
 };
 

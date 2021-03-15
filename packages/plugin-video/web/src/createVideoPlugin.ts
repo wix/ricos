@@ -19,6 +19,7 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
     settings.disableDownload !== undefined
       ? { ...DEFAULTS, disableDownload: settings.disableDownload }
       : DEFAULTS;
+
   return createBasePlugin({
     component: Component,
     type: VIDEO_TYPE,
