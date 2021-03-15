@@ -752,7 +752,7 @@ describe('normalizeInitialState', () => {
   });
 
   describe('disableRightClick normalizer', () => {
-    let imageGalleryInitialState = imageGalleryContentState;
+    let imageGalleryInitialState: DraftContent = imageGalleryContentState;
 
     beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
 
@@ -766,22 +766,10 @@ describe('normalizeInitialState', () => {
     });
 
     it('disableRightClick should remain false in image and gallery componentData', () => {
-      const imageGalleryWithRightClickState = {
-        ...imageGalleryInitialState,
-        entityMap: {
-          ...imageGalleryInitialState.entityMap,
-          '0': {
-            ...imageGalleryInitialState.entityMap['0'],
-            data: { ...imageGalleryInitialState.entityMap['0'].data, disableRightClick: false },
-          },
-          '1': {
-            ...imageGalleryInitialState.entityMap['1'],
-            data: { ...imageGalleryInitialState.entityMap['1'].data, disableRightClick: false },
-          },
-        },
-      };
+      imageGalleryInitialState.entityMap['0'].data.disableRightClick = false;
+      imageGalleryInitialState.entityMap['1'].data.disableRightClick = false;
 
-      const actual = normalizeInitialState(imageGalleryWithRightClickState, {
+      const actual = normalizeInitialState(imageGalleryInitialState, {
         disableRightClick: true,
       });
 
@@ -790,18 +778,8 @@ describe('normalizeInitialState', () => {
     });
 
     it('disableRightClick should be true in image and false in gallery componentData', () => {
-      const imageGalleryWithRightClickState = {
-        ...imageGalleryInitialState,
-        entityMap: {
-          ...imageGalleryInitialState.entityMap,
-          '1': {
-            ...imageGalleryInitialState.entityMap['1'],
-            data: { ...imageGalleryInitialState.entityMap['1'].data, disableRightClick: false },
-          },
-        },
-      };
-
-      const actual = normalizeInitialState(imageGalleryWithRightClickState, {
+      imageGalleryInitialState.entityMap['1'].data.disableRightClick = false;
+      const actual = normalizeInitialState(imageGalleryInitialState, {
         disableRightClick: true,
       });
 
