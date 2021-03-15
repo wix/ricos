@@ -3,8 +3,14 @@ const imageDataNormalizer = (componentData, normalizerConfig) => {
     componentData.disableRightClick === undefined &&
     normalizerConfig.disableRightClick !== undefined;
 
+  const shouldNormalizeExpand =
+    componentData.disableExpand === undefined && normalizerConfig.disableExpand !== undefined;
+
   if (shouldNormalizeRightClick) {
     componentData.disableRightClick = normalizerConfig.disableRightClick;
+  }
+  if (shouldNormalizeExpand) {
+    componentData.disableExpand = normalizerConfig.disableExpand;
   }
 
   const { width, config = {}, ...rest } = componentData;

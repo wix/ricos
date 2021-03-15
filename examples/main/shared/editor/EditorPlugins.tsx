@@ -456,6 +456,7 @@ const config: RichContentEditorProps['config'] = {
     // },
   },
   [IMAGE_TYPE]: {
+    // disableExpand: true,
     // defaultData: {
     //   config: {
     //     alignment: 'left',

@@ -751,8 +751,28 @@ describe('normalizeInitialState', () => {
     });
   });
 
+  describe('disableExpand normalizer', () => {
+    let imageGalleryInitialState: DraftContent;
+
+    beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
+    it('should add disableExpand prop to image and gallery componentData', () => {
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableExpand: true,
+      });
+      expect(actual.entityMap['0'].data.disableExpand).toBeTruthy();
+    });
+
+    it('disableExpand should remain false in image componentData', () => {
+      imageGalleryInitialState.entityMap['0'].data.disableExpand = false;
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableExpand: true,
+      });
+      expect(actual.entityMap['0'].data.disableExpand).toBeFalsy();
+    });
+  });
+
   describe('disableRightClick normalizer', () => {
-    let imageGalleryInitialState: DraftContent = imageGalleryContentState;
+    let imageGalleryInitialState: DraftContent;
 
     beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
 
@@ -760,7 +780,6 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(imageGalleryInitialState, {
         disableRightClick: true,
       });
-
       expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
       expect(actual.entityMap['1'].data.disableRightClick).toBeTruthy();
     });
@@ -772,7 +791,6 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(imageGalleryInitialState, {
         disableRightClick: true,
       });
-
       expect(actual.entityMap['0'].data.disableRightClick).toBeFalsy();
       expect(actual.entityMap['1'].data.disableRightClick).toBeFalsy();
     });
@@ -782,7 +800,6 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(imageGalleryInitialState, {
         disableRightClick: true,
       });
-
       expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
       expect(actual.entityMap['1'].data.disableRightClick).toBeFalsy();
     });

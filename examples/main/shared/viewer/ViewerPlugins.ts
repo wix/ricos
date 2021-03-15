@@ -9,7 +9,7 @@ import {
   LINK_PREVIEW_TYPE,
   pluginLinkPreview,
 } from 'wix-rich-content-plugin-link-preview/viewer';
-import { imageTypeMapper, pluginImage } from 'wix-rich-content-plugin-image/viewer';
+import { imageTypeMapper, pluginImage} from 'wix-rich-content-plugin-image/viewer';
 import { tableTypeMapper, pluginTable } from 'wix-rich-content-plugin-table/viewer';
 
 import {
@@ -205,7 +205,7 @@ export const viewerPlugins: ViewerPlugin[] = [
   pluginLinkPreview(config[LINK_PREVIEW_TYPE]),
   pluginSoundCloud(),
   pluginMentions(),
-  pluginImage(),
+  pluginImage({ disableExpand: true }),
   pluginTable(),
   pluginGallery(config[GALLERY_TYPE]),
   pluginMap(),

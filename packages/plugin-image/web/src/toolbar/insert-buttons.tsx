@@ -8,14 +8,17 @@ const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
   disableRightClick,
+  disableExpand,
 }: {
   t: TranslationFunction;
   settings: ImagePluginEditorConfig;
   disableRightClick: boolean | undefined;
+  disableExpand: boolean | undefined;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
-  const componentData =
+  const PluginData =
     disableRightClick !== undefined ? { ...DEFAULTS, disableRightClick } : DEFAULTS;
+  const componentData = disableExpand !== undefined ? { ...DEFAULTS, disableExpand } : PluginData;
 
   return [
     {
