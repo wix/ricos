@@ -239,7 +239,7 @@ export class GallerySettingsModal extends Component {
       checked={this.state[toggleKey]}
       label={this.props.t(labelKey)}
       onChange={this.toggleState(toggleKey)}
-      tooltipText={tooltipText ? tooltipText : null}
+      tooltipText={tooltipText}
     />
   );
 

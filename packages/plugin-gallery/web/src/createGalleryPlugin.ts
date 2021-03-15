@@ -28,6 +28,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
       ...settings?.defaultData?.config,
     },
   };
+
   const pluginData =
     uiSettings?.disableRightClick !== undefined
       ? {

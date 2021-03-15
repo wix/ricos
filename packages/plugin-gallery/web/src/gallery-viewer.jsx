@@ -128,10 +128,8 @@ class GalleryViewer extends React.Component {
 
   handleGalleryEvents = (name, data) => {
     const {
-      settings,
-      componentData: { styles: styleParams, config },
+      componentData: { styles: styleParams },
     } = this.props;
-    const disableExpand = settings.disableExpand || config.disableExpand;
 
     switch (name) {
       case GALLERY_EVENTS.GALLERY_CHANGE:
@@ -144,7 +142,7 @@ class GalleryViewer extends React.Component {
         }
         break;
       case GALLERY_EVENTS.ITEM_ACTION_TRIGGERED:
-        !data.linkData.url && !disableExpand && this.handleExpand(data);
+        !data.linkData.url && this.hasExpand() && this.handleExpand(data);
         break;
       default:
         break;

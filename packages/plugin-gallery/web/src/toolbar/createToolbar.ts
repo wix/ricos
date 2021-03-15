@@ -22,9 +22,11 @@ const createToolbar: CreatePluginToolbar = ({
   relValue: RelValue;
   uiSettings: UISettings;
 }) => {
+  const disableRightClick = uiSettings?.disableRightClick;
+
   return {
     InlineButtons: createInlineButtons({ settings, t, anchorTarget, relValue }),
-    InsertButtons: createInsertButtons({ settings, t, uiSettings }),
+    InsertButtons: createInsertButtons({ settings, t, disableRightClick }),
     name: 'gallery',
   };
 };
