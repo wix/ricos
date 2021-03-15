@@ -1,29 +1,29 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
+import styles from '../../../statics/styles/action-buttons.scss';
 
-const ActionButtons = ({ t, onCancel, onUpdate }) => (
-  <div className={styles.colorPickerDialog_buttons}>
-    <button className={styles.colorPickerDialog_button} onClick={onCancel}>
-      {t('ColorPickerButtonLabel_Cancel')}
+const ActionButtons = ({ onCancel, onUpdate, onUpdateDataHook, cancelBtnText, updateBtnText }) => (
+  <div className={styles.action_buttons}>
+    <button className={styles.action_buttons_button} onClick={onCancel}>
+      {cancelBtnText}
     </button>
     <button
-      className={classNames(
-        styles.colorPickerDialog_button,
-        styles.colorPickerDialog_button_update
-      )}
-      data-hook="colorPickerUpdateButton"
+      className={classNames(styles.action_buttons_button, styles.action_buttons_button_update)}
+      data-hook={onUpdateDataHook}
       onClick={onUpdate}
     >
-      {t('ColorPickerButtonLabel_Update')}
+      {updateBtnText}
     </button>
   </div>
 );
 
 ActionButtons.propTypes = {
-  t: PropTypes.func,
   onCancel: PropTypes.func,
   onUpdate: PropTypes.func,
+  onUpdateDataHook: PropTypes.string,
+  cancelBtnText: PropTypes.string,
+  updateBtnText: PropTypes.string,
 };
+
 export default ActionButtons;

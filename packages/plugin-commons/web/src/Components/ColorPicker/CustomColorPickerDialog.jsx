@@ -37,7 +37,15 @@ class CustomColorPickerDialog extends Component {
     const { t, isMobile, theme } = this.props;
     return (
       <div className={styles.colorPickerDialog}>
-        {isMobile && <ActionButtons onCancel={this.onCancel} onUpdate={this.onUpdate} t={t} />}
+        {isMobile && (
+          <ActionButtons
+            onCancel={this.onCancel}
+            onUpdate={this.onUpdate}
+            onCancelText={t('ColorPickerButtonLabel_Cancel')}
+            onUpdateText={t('ColorPickerButtonLabel_Update')}
+            updateDataHook={'colorPickerUpdateButton'}
+          />
+        )}
         <Suspense fallback={<div>Loading...</div>}>
           <CustomColorPicker
             color={this.state.color}
@@ -50,7 +58,13 @@ class CustomColorPickerDialog extends Component {
         {!isMobile && (
           <>
             <hr className={styles.colorPickerDialog_separator} />
-            <ActionButtons onCancel={this.onCancel} onUpdate={this.onUpdate} t={t} />{' '}
+            <ActionButtons
+              onCancel={this.onCancel}
+              onUpdate={this.onUpdate}
+              cancelBtnText={t('ColorPickerButtonLabel_Cancel')}
+              updateBtnText={t('ColorPickerButtonLabel_Update')}
+              onUpdateDataHook={'colorPickerUpdateButton'}
+            />
           </>
         )}
       </div>
