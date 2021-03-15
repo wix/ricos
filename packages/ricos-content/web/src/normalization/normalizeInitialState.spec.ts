@@ -1,6 +1,7 @@
 import deepFreeze from 'deep-freeze';
 import normalizeInitialState from './normalizeInitialState';
 import { Version } from '../version';
+import { cloneDeep } from 'lodash';
 import {
   inlineLegacyImageContentState,
   inlineImageContentState,
@@ -9,7 +10,7 @@ import {
   processedInlineGalleryContentState,
   AnchorInTextContentState,
   AnchorInImageContentState,
-  videoInitialState,
+  videoInitialContentState,
 } from './Fixtures';
 import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
 
@@ -750,11 +751,25 @@ describe('normalizeInitialState', () => {
   });
 
   describe('Video normalizer', () => {
+    let videoInitialState: DraftContent = videoInitialContentState;
+
+    beforeEach(() => (videoInitialState = cloneDeep(videoInitialContentState)));
+
     it('should add disableDownload prop to video componentData', () => {
       const actual = normalizeInitialState(videoInitialState, {
         disableVideoDownload: true,
       });
+
       expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+    });
+
+    it('disableDownload should remain false in the video componentData', () => {
+      videoInitialState.entityMap['0'].data.disableDownload = false;
+      const actual = normalizeInitialState(videoInitialState, {
+        disableVideoDownload: true,
+      });
+
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
     });
   });
 });
