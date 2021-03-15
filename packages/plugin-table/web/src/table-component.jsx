@@ -294,14 +294,17 @@ class TableComponent extends React.Component {
     !this.isAllCellsSelected(this.state.selected) && this.setState({ isAllCellsSelected: false });
   };
 
-  onResizeCol = columnsRefs =>
+  onResizeCol = columnsRefs => {
     this.table.setColWidthAfterResize(columnsRefs, this.tableRef.current.offsetWidth);
-
-  onResizeRow = (i, height) =>
+    this.triggerBi('pluginTableColumnRowAction', { action: 'resize', category: 'column' });
+  };
+  onResizeRow = (i, height) => {
     this.table.setRowHeight(
       getRowsRange(this.table.getRowsSelection({ start: i, end: i })),
       height
     );
+    this.triggerBi('pluginTableColumnRowAction', { action: 'resize', category: 'row' });
+  };
 
   setToolbarRef = ref => (this.toolbarRef = ref);
 
@@ -321,6 +324,7 @@ class TableComponent extends React.Component {
     this.resetDrag();
     this.colDropIndex = null;
     this.position = null;
+    this.triggerBi('pluginTableColumnRowAction', { action: 'reorder', category: 'column' });
   };
 
   onRowDragEnd = (e, dragsIndex) => {
@@ -330,6 +334,7 @@ class TableComponent extends React.Component {
     this.dropTop = null;
     this.dragPadding = null;
     this.rowDropIndex = null;
+    this.triggerBi('pluginTableColumnRowAction', { action: 'reorder', category: 'row' });
   };
 
   resetDrag = () => {
