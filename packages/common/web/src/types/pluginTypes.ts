@@ -48,7 +48,6 @@ import {
   MAP_TYPE,
   EXTERNAL_MENTIONS_TYPE,
   MENTION_TYPE,
-  SOUND_CLOUD_TYPE,
   TEXT_COLOR_TYPE,
   TEXT_HIGHLIGHT_TYPE,
   UNDO_REDO_TYPE,
@@ -101,7 +100,6 @@ export type PluginType =
   | typeof MAP_TYPE
   | typeof EXTERNAL_MENTIONS_TYPE
   | typeof MENTION_TYPE
-  | typeof SOUND_CLOUD_TYPE
   | typeof TEXT_COLOR_TYPE
   | typeof TEXT_HIGHLIGHT_TYPE
   | typeof UNDO_REDO_TYPE

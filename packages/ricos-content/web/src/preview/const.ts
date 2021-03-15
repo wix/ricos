@@ -93,16 +93,6 @@ export const METHOD_PLUGIN_DATA_MAP = Object.freeze({
       },
     },
   },
-  soundCloud: {
-    type: 'wix-draft-plugin-sound-cloud',
-    mutability: 'IMMUTABLE',
-    data: {
-      config: {
-        size: 'content',
-        alignment: 'center',
-      },
-    },
-  },
   giphy: {
     type: 'wix-draft-plugin-giphy',
     mutability: 'IMMUTABLE',

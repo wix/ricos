@@ -451,13 +451,6 @@ const config = {
     // },
     onClick: (event, url) => console.log('link clicked!', url),
   },
-  [SOUND_CLOUD_TYPE]: {
-    // toolbar: {
-    //   icons: {
-    //     InsertPluginButtonIcon: MyCustomIcon,
-    //   },
-    // },
-  },
   [CODE_BLOCK_TYPE]: {
     // toolbar: {
     //   icons: {
