@@ -765,7 +765,7 @@ describe('normalizeInitialState', () => {
       expect(actual.entityMap['1'].data.disableRightClick).toBeTruthy();
     });
 
-    it('disableRightClick should be true in image and false in gallery componentData', () => {
+    it('disableRightClick should remain false in image and gallery componentData', () => {
       const imageGalleryWithRightClickState = {
         ...imageGalleryInitialState,
         entityMap: {
@@ -789,7 +789,7 @@ describe('normalizeInitialState', () => {
       expect(actual.entityMap['1'].data.disableRightClick).toBeFalsy();
     });
 
-    it('disableRightClick should be true for false in the componentData', () => {
+    it('disableRightClick should be true in image and false in gallery componentData', () => {
       const imageGalleryWithRightClickState = {
         ...imageGalleryInitialState,
         entityMap: {
