@@ -117,7 +117,7 @@ export default class BaseTextColor extends Component {
         <Modal
           onRequestClose={() => this.closePanel()}
           isOpen={isPanelOpen}
-          parentSelector={BaseTextColor.getModalParent}
+          parentSelector={settings.getModalContainer || BaseTextColor.getModalParent}
           className={classNames({
             [this.styles.textColorModal]: !isMobile,
             [this.styles.textColorModal_mobile]: isMobile,
