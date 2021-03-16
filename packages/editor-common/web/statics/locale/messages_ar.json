@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "ما الذي تريد الارتباط به؟",
   "HtmlEditPanel_HttpsError": "تأكَّد من أن رابط URL يبدأ بـ HTTPS",
   "Poll_Presets_Popup_Subtitle": "يمكنك تخصيص الشكل وأسلوب العرض لاحقًا.",
+  "BlockToolbar_Section_Advanced": "Advanced ",
   "SettingsPanelFooter_Done": "تم",
   "GallerySettings_Image_Settings": "تحرير",
   "GallerySettings_LayoutControlSection_Row": "ارتفاع الصف",

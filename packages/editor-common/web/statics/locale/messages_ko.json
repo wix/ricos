@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "링크 대상",
   "HtmlEditPanel_HttpsError": "URL이 HTTPS로 시작하는지 확인하세요.",
   "Poll_Presets_Popup_Subtitle": "디자인 및 분위기는 나중에 편집할 수 있습니다.",
+  "BlockToolbar_Section_Advanced": "고급 ",
   "SettingsPanelFooter_Done": "확인",
   "GallerySettings_Image_Settings": "편집하기",
   "GallerySettings_LayoutControlSection_Row": "행 높이",
