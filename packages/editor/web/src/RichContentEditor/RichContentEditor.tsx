@@ -72,6 +72,7 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
+import { getPluginParams } from 'wix-rich-content-plugin-commons';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -418,8 +419,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             Version.currentVersion
           );
         },
-        onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
-          helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
+        onPluginAddSuccess: (pluginId: string, entryPoint: string, params) =>
+          helpers.onPluginAddSuccess?.(pluginId, entryPoint, params, Version.currentVersion),
         onPluginAction,
         onPluginChange: (pluginId: string, changeObj) =>
           helpers.onPluginChange?.(pluginId, changeObj, Version.currentVersion),
@@ -700,7 +701,19 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       return;
     }
     const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
-    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
+    const params = {};
+    pluginsDetails &&
+      Object.entries(pluginsDetails).forEach(([, value]) => {
+        const param = getPluginParams(value)[value.type];
+        param && (params[value.type] = param);
+      });
+    this.props.helpers.onPublish(
+      postId,
+      pluginsCount,
+      pluginsDetails,
+      params,
+      Version.currentVersion
+    );
   };
 
   setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
