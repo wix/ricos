@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
   
+  ### :bug: Bug Fix
+- `unsupported-blocks/accordion/table/spoiler`
+  - [#2307](https://github.com/wix/ricos/pull/#2307) clean disable-right-click prop from unnecessary components
+
 </details>
 <hr/>
 
