@@ -44,9 +44,10 @@ export function replaceComponentData(editorState: EditorState, blockKey: string,
   currentContent.replaceEntityData(entityKey, componentData);
 }
 
-export function getBlocksEntity(blockKey, contentState) {
+export function getBlocksEntityTypeAndData(blockKey, contentState) {
   const entityKey = contentState.getBlockForKey(blockKey)?.getEntityAt(0);
-  return contentState.getEntity(entityKey);
+  const entity = contentState.getEntity(entityKey);
+  return { type: entity.getType(), data: entity.getData() };
 }
 
 function fixDraftUndoStackBug(block) {
