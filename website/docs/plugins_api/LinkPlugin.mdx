@@ -90,7 +90,8 @@ example:
 {
   linkTypes: {
       anchor: {
-        blockPreview: block => {
+        blockPreview: ({ anchorType, data, text, type }) => {
+          console.log({ anchorType, data, text, type });
           const blockPreview = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
           return blockPreview;
         },
@@ -99,7 +100,10 @@ example:
 }
 ```
 
-the `block` containing the block properties
+`anchorType` - block plugin type e.g. "wix-draft-plugin-image", "wix-draft-plugin-video", unstyled...
+`data` - block entity data e.g. src, config...
+`text` - block text
+`type` - block type e.g. "atomic", "unstyled
 
 ### `disableAutoLink`
 

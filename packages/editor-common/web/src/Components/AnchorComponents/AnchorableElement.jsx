@@ -130,10 +130,16 @@ class AnchorableElement extends PureComponent {
     this.setState({ iconThumbnail: null });
   };
 
-  getElementsToRender = () => {
-    const { blockPreview, block, t } = this.props;
+  render() {
+    const { styles } = this;
+    const { dataHook, onClick, isSelected, blockPreview, block, t } = this.props;
     const { iconThumbnail, preview } = this.state;
-    const blockPreviewElement = blockPreview?.(block);
+    const blockPreviewElement = blockPreview?.({
+      anchorType: block.anchorType,
+      data: block.data,
+      text: block.text,
+      type: block.type,
+    });
     const thumbnailToRender = blockPreviewElement ? (
       <div className={styles.AnchorableElement_thumbnail}>{blockPreviewElement.thumbnail}</div>
     ) : (
@@ -149,13 +155,6 @@ class AnchorableElement extends PureComponent {
       ? blockPreviewElement.type
       : t(this.getDataToDisplayByField('type'));
     const contentToRender = blockPreviewElement ? blockPreviewElement.content : this.getContent();
-    return { thumbnailToRender, typeToRender, contentToRender };
-  };
-
-  render() {
-    const { styles } = this;
-    const { dataHook, onClick, isSelected } = this.props;
-    const { thumbnailToRender, typeToRender, contentToRender } = this.getElementsToRender();
     return (
       <div
         data-hook={dataHook}

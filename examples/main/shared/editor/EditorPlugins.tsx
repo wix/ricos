@@ -614,8 +614,8 @@ const config: RichContentEditorProps['config'] = {
     linkTypes: { anchor: true },
     // linkTypes: {
     //   anchor: {
-    //     blockPreview: block => {
-    //       console.log({ block });
+    //     blockPreview: ({ anchorType, data, text, type }) => {
+    //       console.log({ anchorType, data, text, type });
     //       const blockPreview = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
     //       return blockPreview;
     //     },
