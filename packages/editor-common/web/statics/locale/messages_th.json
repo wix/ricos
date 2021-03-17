@@ -186,7 +186,7 @@
   "LinkTo_Modal_Header": "คุณต้องการให้เชื่อมต่อกับสิ่งใด?",
   "HtmlEditPanel_HttpsError": "ตรวจสอบให้แน่ใจว่า URL เริ่มต้นด้วย HTTPS",
   "Poll_Presets_Popup_Subtitle": "คุณสามารถแก้ไขการจัดวางและมุมมองของแบบสำรวจได้ภายหลัง",
-  "BlockToolbar_Section_Advanced": "Advanced ",
+  "BlockToolbar_Section_Advanced": "ขั้นสูง ",
   "SettingsPanelFooter_Done": "เสร็จสิ้น",
   "GallerySettings_Image_Settings": "แก้ไข",
   "GallerySettings_LayoutControlSection_Row": "ความสูงของแถว",
