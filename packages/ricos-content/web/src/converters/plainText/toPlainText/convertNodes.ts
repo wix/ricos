@@ -82,11 +82,6 @@ export const parseVideo = async (
   return text || '';
 };
 
-export const parseSoundCloud = ({ soundCloudData }: Node): string => {
-  const { src } = soundCloudData || {};
-  return src || '';
-};
-
 export const parseGiphy = ({ giphyData }: Node): string => {
   const { originalUrl } = giphyData?.gif || {};
   return originalUrl || '';

@@ -95,7 +95,6 @@ const mergers = {
   'wix-draft-plugin-gallery': galleryMerger,
   'wix-draft-plugin-giphy': giphyMerger,
   'wix-draft-plugin-video': videoMerger,
-  'wix-draft-plugin-sound-cloud': videoMerger,
   'wix-draft-plugin-file-upload': fileMerger,
   'wix-draft-plugin-map': mapMerger,
   'wix-draft-plugin-divider': defaultMerger,

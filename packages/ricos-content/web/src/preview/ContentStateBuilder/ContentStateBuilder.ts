@@ -33,7 +33,6 @@ class ContentStateBuilder {
   image: PluginBuildMethod;
   video: PluginBuildMethod;
   gallery: PluginBuildMethod;
-  soundCloud: PluginBuildMethod;
   giphy: PluginBuildMethod;
   map: PluginBuildMethod;
   file: PluginBuildMethod;
