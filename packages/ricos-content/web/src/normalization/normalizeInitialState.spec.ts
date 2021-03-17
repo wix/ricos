@@ -758,16 +758,21 @@ describe('normalizeInitialState', () => {
     it('should add disableExpand prop to image and gallery componentData', () => {
       const actual = normalizeInitialState(imageGalleryInitialState, {
         disableImagesExpand: true,
+        disableGalleryExpand: true,
       });
       expect(actual.entityMap['0'].data.disableExpand).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableExpand).toBeTruthy();
     });
 
-    it('disableExpand should remain false in image componentData', () => {
+    it('disableExpand should remain false in image and gallery componentData', () => {
       imageGalleryInitialState.entityMap['0'].data.disableExpand = false;
+      imageGalleryInitialState.entityMap['1'].data.disableExpand = false;
       const actual = normalizeInitialState(imageGalleryInitialState, {
         disableImagesExpand: true,
+        disableGalleryExpand: true,
       });
       expect(actual.entityMap['0'].data.disableExpand).toBeFalsy();
+      expect(actual.entityMap['1'].data.disableExpand).toBeFalsy();
     });
   });
 
