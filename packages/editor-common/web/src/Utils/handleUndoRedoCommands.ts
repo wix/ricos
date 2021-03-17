@@ -48,40 +48,56 @@ function getType(type: string) {
   return type;
 }
 
-function checkEntities(currentBlock, contentState, newContentState) {
+function checkInnerRicosEntity(currentBlock, contentState, newContentState) {
   const { key: blockKey } = currentBlock;
   const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
   const { data: newData } = getBlocksEntityTypeAndData(blockKey, newContentState);
-  let entityToReplace: EntityToReplace = { shouldUndoAgain: true };
-  let didChange = false;
+  let entityToReplace;
+  let didInnerRicosChange = false;
   if (INNER_RICOS_TYPES.includes(type)) {
     entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
     const { shouldUndoAgain, fixedData } = entityToReplace;
-    didChange = (shouldUndoAgain && !!fixedData) || !shouldUndoAgain;
-  } else if (!isEqual(currentData, newData)) {
-    const fixedData = entityDataFixers[getType(type)]?.(currentData, newData);
-    entityToReplace.fixedData = fixedData;
-    entityToReplace.shouldUndoAgain = !!fixedData;
-    didChange = true;
+    didInnerRicosChange = (shouldUndoAgain && !!fixedData) || !shouldUndoAgain;
   }
-  return { ...entityToReplace, didChange };
+  return didInnerRicosChange && entityToReplace;
+}
+
+function checkEntity(currentBlock, contentState, newContentState) {
+  const { key: blockKey } = currentBlock;
+  const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
+  const { data: newData } = getBlocksEntityTypeAndData(blockKey, newContentState);
+  const didChange = !isEqual(currentData, newData);
+  let entityToReplace: EntityToReplace = { shouldUndoAgain: !didChange };
+  const fixedData = didChange && entityDataFixers[getType(type)]?.(currentData, newData);
+  if (fixedData) {
+    entityToReplace = {
+      fixedData,
+      shouldUndoAgain: true,
+    };
+  }
+  return didChange && entityToReplace;
 }
 
 function getEntityToReplace(newContentState, contentState): EntityToReplace {
-  let entityToReplace: EntityToReplace = { shouldUndoAgain: true };
+  let entityToReplace;
   contentState
     .getBlockMap()
     .filter(block => doesEntityExistInBothStates(block, contentState, newContentState))
     .some(currentBlock => {
       const { key: blockKey } = currentBlock;
-      const { didChange, ...rest } = checkEntities(currentBlock, contentState, newContentState);
-      entityToReplace = {
-        blockKey,
-        ...rest,
-      };
-      return didChange;
+      const { type } = getBlocksEntityTypeAndData(blockKey, contentState);
+      const entity = INNER_RICOS_TYPES.includes(type)
+        ? checkInnerRicosEntity(currentBlock, contentState, newContentState)
+        : checkEntity(currentBlock, contentState, newContentState);
+      if (entity) {
+        entityToReplace = {
+          blockKey,
+          ...entity,
+        };
+      }
+      return !!entity;
     });
-  return entityToReplace;
+  return entityToReplace || { shouldUndoAgain: true };
 }
 
 // fixes entities in EditorStates
