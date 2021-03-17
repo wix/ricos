@@ -4,6 +4,7 @@ export type NormalizeConfig = {
   disableInlineImages?: boolean;
   removeInvalidInlinePlugins?: boolean;
   disableRightClick?: boolean;
+  disableGalleryExpand?: boolean;
 };
 
 export interface ComponentData {

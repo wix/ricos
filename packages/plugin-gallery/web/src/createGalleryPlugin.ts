@@ -21,7 +21,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
   } = config;
   settings.accept = settings.accept || fileInputAccept;
 
-  const defaultPluginData = {
+  const defaults = {
     ...DEFAULTS,
     config: {
       ...DEFAULTS.config,
@@ -32,10 +32,18 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
   const pluginData =
     uiSettings?.disableRightClick !== undefined
       ? {
-          ...defaultPluginData,
+          ...defaults,
           disableRightClick: uiSettings?.disableRightClick,
         }
-      : defaultPluginData;
+      : defaults;
+
+  const defaultPluginData =
+    settings?.disableExpand !== undefined
+      ? {
+          ...pluginData,
+          disableExpand: settings.disableExpand,
+        }
+      : pluginData;
 
   return createBasePlugin({
     component: Component,
@@ -55,7 +63,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
     relValue,
     disableRightClick: config?.uiSettings?.disableRightClick,
     spoilerWrapper: settings.spoiler && spoilerWrapper,
-    defaultPluginData: pluginData,
+    defaultPluginData,
     ...rest,
   });
 };

@@ -172,9 +172,16 @@ class GalleryViewer extends React.Component {
     );
   };
 
-  hasExpand = () =>
-    !(this.props.settings.disableExpand || this.props.componentData.config.disableExpand) &&
-    this.props.settings.onExpand;
+  hasExpand = () => {
+    const { componentData, settings } = this.props;
+    let disableExpand = false;
+    if (componentData.disableExpand !== undefined) {
+      disableExpand = componentData.disableExpand;
+    } else if (settings.disableExpand !== undefined) {
+      disableExpand = settings.disableExpand;
+    }
+    return !disableExpand && settings.onExpand;
+  };
 
   renderTitle = title => {
     return title ? (

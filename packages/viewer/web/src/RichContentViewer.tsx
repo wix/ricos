@@ -28,6 +28,7 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
+  GALLERY_TYPE,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -118,6 +119,8 @@ class RichContentViewer extends Component<
       config,
     } = props;
     const disableRightClick = config.uiSettings?.disableRightClick;
+    const disableGalleryExpand = config[GALLERY_TYPE]?.disableExpand;
+
     return initialState
       ? normalizeInitialState(initialState, {
           anchorTarget,
@@ -125,6 +128,7 @@ class RichContentViewer extends Component<
           disableInlineImages,
           removeInvalidInlinePlugins,
           disableRightClick,
+          disableGalleryExpand,
         })
       : undefined;
   };

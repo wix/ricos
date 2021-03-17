@@ -23,10 +23,11 @@ const createToolbar: CreatePluginToolbar = ({
   uiSettings: UISettings;
 }) => {
   const disableRightClick = uiSettings?.disableRightClick;
+  const disableExpand = settings?.disableExpand;
 
   return {
     InlineButtons: createInlineButtons({ settings, t, anchorTarget, relValue }),
-    InsertButtons: createInsertButtons({ settings, t, disableRightClick }),
+    InsertButtons: createInsertButtons({ settings, t, disableRightClick, disableExpand }),
     name: 'gallery',
   };
 };

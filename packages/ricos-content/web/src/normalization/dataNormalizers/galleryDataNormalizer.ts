@@ -5,8 +5,16 @@ export default (componentData, normalizerConfig, stateVersion: string) => {
     componentData.disableRightClick === undefined &&
     normalizerConfig.disableRightClick !== undefined;
 
+  const shouldNormalizeExpand =
+    componentData.disableExpand === undefined &&
+    normalizerConfig.disableGalleryExpand !== undefined;
+
   if (shouldNormalizeRightClick) {
     componentData.disableRightClick = normalizerConfig.disableRightClick;
+  }
+
+  if (shouldNormalizeExpand) {
+    componentData.disableExpand = normalizerConfig.disableGalleryExpand;
   }
 
   if (Version.lessThan(stateVersion, '6')) {

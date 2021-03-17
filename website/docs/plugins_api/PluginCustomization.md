@@ -41,7 +41,7 @@ Currently, it exposes a field `hidden` which is expected to be an array of toolb
 
 #### `defaultData`
 
-The `defaultData` setting enables consumers to set the default data for a plugin when it is inserted into the editor.  It is an object with the same fields as the plugins entity data.
+The `defaultData` setting enables consumers to set the default data for a plugin when it is inserted into the editor. It is an object with the same fields as the plugins entity data.
 
 ### Button Plugin Settings
 
@@ -72,7 +72,6 @@ The `defaultData` setting enables consumers to set the default data for a plugin
 | `siteDomain`    | the site domain in order for adsense to work                                                               | none          | No           | both                 |
 | `exposeButtons` | controls what buttons will be exposed to open HTML modal                                                   | ['html']      | No           | editor               |
 
-
 ### Hashtag Plugin Settings
 
 | setting key  | description                                                                                                        | default value | is required? | editor/viewer config |
@@ -100,7 +99,7 @@ The Link Preview Plugin is implemented within the Link Plugin, and is activated 
 
 ```
 
-The `getMetadataUrl` should provide a Website metadata service endpoint URL for a given query URL. The `token` is a security token appended  to request headers (`Authorization` header). The `format`  is the expected response format. Currently the only supported format is 'oembed'.
+The `getMetadataUrl` should provide a Website metadata service endpoint URL for a given query URL. The `token` is a security token appended to request headers (`Authorization` header). The `format` is the expected response format. Currently the only supported format is 'oembed'.
 
 ### Mentions Plugin Settings
 
@@ -128,11 +127,11 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 
 ### Gallery Plugin Settings
 
-| setting key     | description                            | default value | is required? | editor/viewer config |
-| --------------- | -------------------------------------- | ------------- | ------------ | -------------------- |
-| `onExpand`      | called when the user expands an item   | none          | No           | viewer               |
-| `disableExpand` | disables expanding itemes & fullscreen | false         | No           | viewer               |
-
+| setting key                  | description                           | default value | is required? | editor/viewer config                                                                                                                                                               |
+| ---------------------------- | ------------------------------------- | ------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onExpand`                   | called when the user expands an item  | none          | No           | viewer                                                                                                                                                                             |
+| `disableExpand` (deprecated) | disables expanding items & fullscreen | false         | No           | viewer (this option is deprecated! If already used it will be supported and the same behavior will remain. note that now the initial value needs to be set in the editor settings) |
+| `disableExpand`              | disables expanding items & fullscreen | false         | No           | editor                                                                                                                                                                             |
 
 ### Text Color Plugin
 
@@ -149,6 +148,7 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 | `onCustomColorPicked`     | a handler called when a custom color is picked by hue/saturation controls              | noop                                         | No           | editor               |
 
 **Note:** `onCustomPickerToggle` API is intended to be used when there is a need to display the `CustomColorPicker` outside the modal dialog, e.g. as a Settings panel element. The API is called with the following parameters:
+
 - `onCustomColorPicked`(color) -- should be called when a custom color is picked by hue/saturation controls of the `CustomColorPicker`. Usually it should be wired to the `CustomColorPicker`'s _`onChange`_ prop
 - `onCustomColorUpdate`(color) -- should be called when user decides to apply the selected color (e.g. `CustomColorPickerDialog` Update button)
 - `onCustomColorCancel`(color) -- should be called when user decides to cancel the custom color selection (e.g. `CustomColorPickerDialog` Cancel button)
@@ -157,6 +157,7 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 **Note**: `selectionColor` prop is deprecated, please override the `.colorPicker_button_selected::after` class `border-color` rule (theme).
 
 #### Text Color Inline Style Mapper
+
 The `RichContentViewer` exposes the `inlineStyleMappers` prop. The mapper purpose is to provide a mapping `inlineStyle => Component`, that is used by the `RichContentViewer`. The prop value is expected to be an array of functions of the following signature:
 
 ```js
