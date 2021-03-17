@@ -33,14 +33,14 @@ class ImageSettings extends Component {
     const { componentData } = props;
     const { src, metadata, error, disableExpand } = componentData;
     const isExpandEnabled = !disableExpand;
-    const isRightClickEnabled = !componentData.disableRightClick;
+    const isDownloadEnabled = !componentData.disableDownload;
 
     return {
       src,
       metadata,
       error,
       isExpandEnabled,
-      isRightClickEnabled,
+      isDownloadEnabled,
     };
   }
 
@@ -72,9 +72,9 @@ class ImageSettings extends Component {
       dataHook: 'imageExpandToggle',
     },
     {
-      toggleKey: 'isRightClickEnabled',
+      toggleKey: 'isDownloadEnabled',
       labelKey: 'ImagePlugin_Settings_ImageCanBeDownloaded_Label',
-      dataHook: 'imageRightClickToggle',
+      dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip'),
     },
   ];
@@ -110,7 +110,7 @@ class ImageSettings extends Component {
     const { helpers, componentData, pubsub } = this.props;
     const newComponentData = {
       ...componentData,
-      disableRightClick: !this.state.isRightClickEnabled,
+      disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,
     };
     if (this.state.metadata) {

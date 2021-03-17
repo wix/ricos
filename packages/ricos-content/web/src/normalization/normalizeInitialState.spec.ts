@@ -776,37 +776,37 @@ describe('normalizeInitialState', () => {
     });
   });
 
-  describe('disableRightClick normalizer', () => {
+  describe('disableDownload normalizer', () => {
     let imageGalleryInitialState: DraftContent;
 
     beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
 
-    it('should add disableRightClick prop to image and gallery componentData', () => {
+    it('should add disableDownload prop to image and gallery componentData', () => {
       const actual = normalizeInitialState(imageGalleryInitialState, {
-        disableRightClick: true,
+        disableDownload: true,
       });
-      expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
-      expect(actual.entityMap['1'].data.disableRightClick).toBeTruthy();
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeTruthy();
     });
 
-    it('disableRightClick should remain false in image and gallery componentData', () => {
-      imageGalleryInitialState.entityMap['0'].data.disableRightClick = false;
-      imageGalleryInitialState.entityMap['1'].data.disableRightClick = false;
+    it('disableDownload should remain false in image and gallery componentData', () => {
+      imageGalleryInitialState.entityMap['0'].data.disableDownload = false;
+      imageGalleryInitialState.entityMap['1'].data.disableDownload = false;
 
       const actual = normalizeInitialState(imageGalleryInitialState, {
-        disableRightClick: true,
+        disableDownload: true,
       });
-      expect(actual.entityMap['0'].data.disableRightClick).toBeFalsy();
-      expect(actual.entityMap['1'].data.disableRightClick).toBeFalsy();
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeFalsy();
     });
 
-    it('disableRightClick should be true in image and false in gallery componentData', () => {
-      imageGalleryInitialState.entityMap['1'].data.disableRightClick = false;
+    it('disableDownload should be true in image and false in gallery componentData', () => {
+      imageGalleryInitialState.entityMap['1'].data.disableDownload = false;
       const actual = normalizeInitialState(imageGalleryInitialState, {
-        disableRightClick: true,
+        disableDownload: true,
       });
-      expect(actual.entityMap['0'].data.disableRightClick).toBeTruthy();
-      expect(actual.entityMap['1'].data.disableRightClick).toBeFalsy();
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeFalsy();
     });
   });
 });

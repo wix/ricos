@@ -12,8 +12,8 @@ import { isNumber } from 'lodash';
 const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config => {
   const type = IMAGE_TYPE;
   const defaultPluginData =
-    config?.uiSettings?.disableRightClick !== undefined
-      ? { ...DEFAULTS, disableRightClick: config.uiSettings.disableRightClick }
+    config?.uiSettings?.disableDownload !== undefined
+      ? { ...DEFAULTS, disableDownload: config.uiSettings.disableDownload }
       : DEFAULTS;
 
   const PluginData =

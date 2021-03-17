@@ -24,7 +24,7 @@ const createToolbar: CreatePluginToolbar = ({
   relValue: RelValue;
   uiSettings: UISettings;
 }) => {
-  const disableRightClick = uiSettings?.disableRightClick;
+  const disableDownload = uiSettings?.disableDownload;
   const disableExpand = settings?.disableExpand;
 
   return {
@@ -36,7 +36,7 @@ const createToolbar: CreatePluginToolbar = ({
       isMobile,
       settings,
     }),
-    InsertButtons: createInsertButtons({ t, settings, disableRightClick, disableExpand }),
+    InsertButtons: createInsertButtons({ t, settings, disableDownload, disableExpand }),
     name: 'image',
   };
 };

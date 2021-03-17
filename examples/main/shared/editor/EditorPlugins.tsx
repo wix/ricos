@@ -357,7 +357,7 @@ export const uiSettings: UISettings = {
     dropDown: getLinkPanelDropDownConfig(),
     //placeholder: "Enter a URL here",
   },
-  // disableRightClick: true,
+  // disableDownload: false,
 };
 
 export const videoHandlers = {

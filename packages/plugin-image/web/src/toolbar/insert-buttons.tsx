@@ -7,17 +7,17 @@ import { ImagePluginEditorConfig } from '../types';
 const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
-  disableRightClick,
+  disableDownload,
   disableExpand,
 }: {
   t: TranslationFunction;
   settings: ImagePluginEditorConfig;
-  disableRightClick: boolean | undefined;
+  disableDownload: boolean | undefined;
   disableExpand: boolean | undefined;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const PluginData =
-    disableRightClick !== undefined ? { ...DEFAULTS, disableRightClick } : DEFAULTS;
+  disableDownload !== undefined ? { ...DEFAULTS, disableDownload } : DEFAULTS;
   const componentData = disableExpand !== undefined ? { ...DEFAULTS, disableExpand } : PluginData;
 
   return [
