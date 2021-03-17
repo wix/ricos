@@ -15,7 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+</details>
+<hr/>
 
+## 8.27.2  (Mar 15, 2021)
 ### :bug: Bug Fix
 - `unsupported-blocks`
   - [#2292](https://github.com/wix/ricos/pull/#2292) fix unsupported-blocks text height and font size 
@@ -23,10 +27,6 @@
   - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
 - `fullscreen`
   - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
-
-</details>
-<hr/>
-
 ## 8.27.1  (Mar 10, 2021)
 ### :rocket: New Feature
 - `ricos-content`
