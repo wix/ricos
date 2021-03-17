@@ -456,7 +456,6 @@ const config: RichContentEditorProps['config'] = {
     // },
   },
   [IMAGE_TYPE]: {
-    // disableExpand: true,
     // defaultData: {
     //   config: {
     //     alignment: 'left',
@@ -465,6 +464,7 @@ const config: RichContentEditorProps['config'] = {
     //     showDescription: true,
     //   },
     // },
+    // disableExpand: true,
     imageEditorWixSettings: {
       initiator: 'some-initiator',
       siteToken:

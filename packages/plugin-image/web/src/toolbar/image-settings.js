@@ -111,10 +111,7 @@ class ImageSettings extends Component {
     const newComponentData = {
       ...componentData,
       disableRightClick: !this.state.isRightClickEnabled,
-      config: {
-        ...componentData.config,
-        disableExpand: !this.state.isExpandEnabled,
-      },
+      disableExpand: !this.state.isExpandEnabled,
     };
     if (this.state.metadata) {
       newComponentData.metadata = this.state.metadata;

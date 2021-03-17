@@ -119,7 +119,7 @@ class RichContentViewer extends Component<
       config,
     } = props;
     const disableRightClick = config.uiSettings?.disableRightClick;
-    const disableExpand = config[IMAGE_TYPE]?.disableExpand;
+    const disableImagesExpand = config[IMAGE_TYPE]?.disableExpand;
 
     return initialState
       ? normalizeInitialState(initialState, {
@@ -128,7 +128,7 @@ class RichContentViewer extends Component<
           disableInlineImages,
           removeInvalidInlinePlugins,
           disableRightClick,
-          disableExpand,
+          disableImagesExpand,
         })
       : undefined;
   };

@@ -757,7 +757,7 @@ describe('normalizeInitialState', () => {
     beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
     it('should add disableExpand prop to image and gallery componentData', () => {
       const actual = normalizeInitialState(imageGalleryInitialState, {
-        disableExpand: true,
+        disableImagesExpand: true,
       });
       expect(actual.entityMap['0'].data.disableExpand).toBeTruthy();
     });
@@ -765,7 +765,7 @@ describe('normalizeInitialState', () => {
     it('disableExpand should remain false in image componentData', () => {
       imageGalleryInitialState.entityMap['0'].data.disableExpand = false;
       const actual = normalizeInitialState(imageGalleryInitialState, {
-        disableExpand: true,
+        disableImagesExpand: true,
       });
       expect(actual.entityMap['0'].data.disableExpand).toBeFalsy();
     });
