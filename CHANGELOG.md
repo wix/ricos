@@ -16,14 +16,15 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.27.3  (Mar 18, 2021)
 ### :nail_care: Polish
 - `plugin-headings`
   - [#2309](https://github.com/wix/ricos/pull/2309) `Heading 1` is now supported
 - `plugin-headings`
   - [#2310](https://github.com/wix/ricos/pull/2310) `Heading 1` is visible by default
-  
-</details>
-<hr/>
 
 ## 8.27.2  (Mar 15, 2021)
 ### :bug: Bug Fix
