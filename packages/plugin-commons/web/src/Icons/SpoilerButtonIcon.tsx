@@ -2,11 +2,23 @@
 import React from 'react';
 
 const SpoilerButtonIcon = props => (
-  <svg width="19" height="19" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg" {...props}>
-    <path
-      d="M9.5 2a1.5 1.5 0 011.466 1.18C13.29 3.763 15 5.7 15 8v6c0 .552-.492 1-1.1 1h-1.95a2.5 2.5 0 01-4.9 0H5.1c-.608 0-1.1-.448-1.1-1V8c0-2.3 1.709-4.238 4.035-4.82A1.5 1.5 0 019.5 2zm1.414 13H8.086a1.5 1.5 0 002.828 0zM9.5 4C7.015 4 5 5.79 5 7.998V14h9V7.998C14 5.79 11.985 4 9.5 4z"
-      fill="currentColor"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" {...props}>
+    <g fill="none" fillRule="evenodd" strokeLinejoin="round">
+      <g stroke="#000">
+        <g>
+          <g>
+            <path
+              d="M.738 5.514c-.165.306-.165.666 0 .972C1.554 7.996 4.03 11.5 8 11.5c3.97 0 6.445-3.504 7.261-5.014.165-.306.165-.666 0-.972C14.445 4.004 11.97.5 8.001.5 4.03.5 1.553 4.003.737 5.514z"
+              transform="translate(-312 -433) translate(312.5 433) translate(2 4)"
+            />
+            <path
+              d="M10.5 6c0 1.381-1.119 2.5-2.5 2.5S5.5 7.381 5.5 6 6.619 3.5 8 3.5s2.5 1.119 2.5 2.5z"
+              transform="translate(-312 -433) translate(312.5 433) translate(2 4)"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
   </svg>
 );
 
