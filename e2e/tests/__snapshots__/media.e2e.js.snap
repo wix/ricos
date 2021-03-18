@@ -116,8 +116,8 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           "showTitle": true,
           "size": "fullWidth"
         },
+        "disableDownload": false,
         "disableExpand": false,
-        "disableRightClick": false,
         "metadata": {
           "caption": ""
         },
@@ -3026,8 +3026,8 @@ exports[`plugins > image > should disable image expand #0`] =
           "showTitle": true,
           "size": "small"
         },
+        "disableDownload": false,
         "disableExpand": true,
-        "disableRightClick": false,
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
           "height": 3354,

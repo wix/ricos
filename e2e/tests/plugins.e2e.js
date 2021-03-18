@@ -732,7 +732,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it.only('should insert image in accordion', function() {
+    it('should insert image in accordion', function() {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
         .focusAccordion(2)
         .type('Image in accordion');
