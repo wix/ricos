@@ -31,9 +31,9 @@ class ImageSettings extends Component {
 
   propsToState(props) {
     const { componentData } = props;
-    const { src, metadata, error, disableExpand } = componentData;
+    const { src, metadata, error, disableExpand, disableDownload } = componentData;
     const isExpandEnabled = !disableExpand;
-    const isDownloadEnabled = !componentData.disableDownload;
+    const isDownloadEnabled = !disableDownload;
 
     return {
       src,

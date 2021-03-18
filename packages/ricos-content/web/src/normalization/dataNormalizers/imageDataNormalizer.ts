@@ -1,12 +1,11 @@
 const imageDataNormalizer = (componentData, normalizerConfig) => {
-  const shouldNormalizeRightClick =
-    componentData.disableDownload === undefined &&
-    normalizerConfig.disableDownload !== undefined;
+  const shouldNormalizeDisableDownload =
+    componentData.disableDownload === undefined && normalizerConfig.disableDownload !== undefined;
 
   const shouldNormalizeExpand =
     componentData.disableExpand === undefined && normalizerConfig.disableImagesExpand !== undefined;
 
-  if (shouldNormalizeRightClick) {
+  if (shouldNormalizeDisableDownload) {
     componentData.disableDownload = normalizerConfig.disableDownload;
   }
 

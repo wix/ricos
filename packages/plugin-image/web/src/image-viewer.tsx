@@ -38,7 +38,6 @@ interface ImageViewerProps {
     disableDownload?: boolean;
     disableExpand?: boolean;
   };
-  disableDownload?: boolean;
   className: string;
   dataUrl: string;
   settings: ImagePluginViewerConfig;
@@ -377,14 +376,10 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   };
 
   handleContextMenu = e => {
-    const { componentData, disableDownload } = this.props;
-    let disabled = false;
-    if (componentData.disableDownload !== undefined) {
-      disabled = componentData.disableDownload;
-    } else if (disableDownload !== undefined) {
-      disabled = disableDownload;
-    }
-    return disabled && e.preventDefault();
+    const {
+      componentData: { disableDownload },
+    } = this.props;
+    return !!disableDownload && e.preventDefault();
   };
 
   hasExpand = () => {
