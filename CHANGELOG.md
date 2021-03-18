@@ -19,6 +19,11 @@
   ### :bug: Bug Fix
   - `plugin-giphy`
     - Add missing required hotkeys to gif selection, as well as more descriptive alt text
+
+### :nail_care: Polish
+- `plugin-headings`
+  - [#2309](https://github.com/wix/ricos/pull/2309) `Heading 1` is now supported
+  
 </details>
 <hr/>
 
