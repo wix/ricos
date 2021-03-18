@@ -1,4 +1,5 @@
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
+  'header-one': 'H1',
   'header-two': 'H2',
   'header-three': 'H3',
   'header-four': 'H4',
