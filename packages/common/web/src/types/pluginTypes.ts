@@ -251,6 +251,7 @@ export interface LinkPanelSettings {
 export type UISettings = {
   linkPanel?: LinkPanelSettings;
   disableRightClick?: boolean;
+  disableDownload?: boolean;
 };
 
 export interface UnderlyingPlugin

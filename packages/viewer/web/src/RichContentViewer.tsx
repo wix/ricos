@@ -118,7 +118,9 @@ class RichContentViewer extends Component<
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
       config,
     } = props;
+    const { uiSettings } = config;
     const disableVideoDownload = config[VIDEO_TYPE]?.disableDownload;
+    const disableDownload = uiSettings?.disableRightClick || uiSettings?.disableDownload;
 
     return initialState
       ? normalizeInitialState(initialState, {
@@ -127,6 +129,7 @@ class RichContentViewer extends Component<
           disableInlineImages,
           removeInvalidInlinePlugins,
           disableVideoDownload,
+          disableDownload,
         })
       : undefined;
   };

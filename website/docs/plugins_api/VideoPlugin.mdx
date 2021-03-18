@@ -47,10 +47,9 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 
 ## Video Config API
 
-
 ### `Viewer disableDownload (deprecated!)`
 
-#### This option is no longer in use, data that already uses this option will go through data fixing process.
+#### This option is no longer in available, if used the same behavior will remain. disableDownload should be set in the mediaSettings
 
 ```jsx
 disableDownload?: boolean;
@@ -65,32 +64,6 @@ Video without download example
     plugins={[
       pluginVideoViewer({
         disableDownload: true,
-        getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-      }),
-    ]}
-  />
-</div>
-
-###
-
-### `Editor disableDownload`
-
-#### The config is used to define the initial download behavior
-
-Default value:
-
-```jsx
-disableDownload: false;
-```
-
-Video with download example
-
-<div className="card">
-  <RicosViewer
-    content={videoContent}
-    placeholder={'Type here!'}
-    plugins={[
-      pluginVideoViewer({
         getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
       }),
     ]}

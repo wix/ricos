@@ -116,6 +116,7 @@ export type FullscreenProps = { backgroundColor?: string; foregroundColor?: stri
 export interface MediaSettings {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  disableDownload?: boolean;
   fullscreenProps?: FullscreenProps;
 }
 

@@ -4,6 +4,7 @@ export type NormalizeConfig = {
   disableInlineImages?: boolean;
   removeInvalidInlinePlugins?: boolean;
   disableVideoDownload?: boolean;
+  disableDownload?: boolean;
 };
 
 export interface ComponentData {

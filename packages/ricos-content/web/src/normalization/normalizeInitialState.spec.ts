@@ -751,7 +751,7 @@ describe('normalizeInitialState', () => {
   });
 
   describe('Video normalizer', () => {
-    let videoInitialState: DraftContent = videoInitialContentState;
+    let videoInitialState: DraftContent;
 
     beforeEach(() => (videoInitialState = cloneDeep(videoInitialContentState)));
 
@@ -759,7 +759,6 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(videoInitialState, {
         disableVideoDownload: true,
       });
-
       expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
     });
 
@@ -768,7 +767,29 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(videoInitialState, {
         disableVideoDownload: true,
       });
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
+    });
 
+    it('disableDownload should be equal to disableVideoDownload prop in the video componentData', () => {
+      const actual = normalizeInitialState(videoInitialState, {
+        disableVideoDownload: true,
+        disableDownload: false,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+    });
+
+    it('disableDownload prop should be truthy in the video componentData', () => {
+      const actual = normalizeInitialState(videoInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+    });
+
+    it('disableDownload prop should be falsy in the video componentData', () => {
+      videoInitialState.entityMap['0'].data.disableDownload = false;
+      const actual = normalizeInitialState(videoInitialState, {
+        disableDownload: true,
+      });
       expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
     });
   });

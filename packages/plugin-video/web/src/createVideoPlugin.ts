@@ -14,11 +14,9 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
     commonPubsub,
     ...rest
   } = config;
-
+  const disableDownload = config?.uiSettings?.disableDownload;
   const defaultPluginData =
-    settings.disableDownload !== undefined
-      ? { ...DEFAULTS, disableDownload: settings.disableDownload }
-      : DEFAULTS;
+    disableDownload !== undefined ? { ...DEFAULTS, disableDownload } : DEFAULTS;
 
   return createBasePlugin({
     component: Component,
@@ -28,6 +26,7 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
       t,
       settings: { ...settings, commonPubsub },
       isMobile,
+      disableDownload,
     }),
     helpers,
     settings,
