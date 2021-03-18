@@ -15,6 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :nail_care: Polish
+- `plugin-headings`
+  - [#2309](https://github.com/wix/ricos/pull/2309) `Heading 1` is now supported
   
 </details>
 <hr/>
