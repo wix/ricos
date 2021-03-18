@@ -8,7 +8,7 @@ import {
   removeFocus,
   setLastChangeType,
   getBlocksEntityTypeAndData,
-  compareContentBlocks,
+  didBlocksChange,
   doesEntityExistInBothStates,
 } from './undoRedoDraftUtils';
 import {
@@ -111,7 +111,7 @@ function fixBrokenRicosStates(
     fixedEditorState: preserveSelection(editorState, newEditorState),
     shouldUndoAgain: false,
   };
-  if (!compareContentBlocks(contentState, newContentState)) {
+  if (!didBlocksChange(contentState, newContentState)) {
     const { blockKey, fixedData, shouldUndoAgain } = getEntityToReplace(
       newContentState,
       contentState

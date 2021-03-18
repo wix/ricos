@@ -335,7 +335,7 @@ class TableComponent extends React.Component {
   addRow = i => {
     if (!isCellsNumberInvalid(this.table.getRowNum() + 1, this.table.getColNum())) {
       this.table.addRow(i);
-      setTimeout(() => this.selectRows({ start: i, end: i }), 0);
+      this.selectRows({ start: i, end: i });
     }
   };
 
@@ -356,7 +356,7 @@ class TableComponent extends React.Component {
   addCol = i => {
     if (!isCellsNumberInvalid(this.table.getRowNum(), this.table.getColNum() + 1)) {
       this.table.addColumn(i);
-      setTimeout(() => this.selectCols({ start: i, end: i }), 0);
+      this.selectCols({ start: i, end: i });
     }
   };
 

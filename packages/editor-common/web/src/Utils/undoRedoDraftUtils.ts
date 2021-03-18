@@ -57,7 +57,7 @@ function fixDraftUndoStackBug(block) {
   return block;
 }
 
-export function compareContentBlocks(contentState: ContentState, newContentState: ContentState) {
+export function didBlocksChange(contentState: ContentState, newContentState: ContentState) {
   const { blocks: currentBlocks } = convertToRaw(contentState);
   const newBlocks = {};
   convertToRaw(newContentState).blocks.forEach(block => {
