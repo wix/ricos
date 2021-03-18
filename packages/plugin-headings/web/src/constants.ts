@@ -18,4 +18,12 @@ export const HEADER_TYPE_MAP = Object.freeze({
   P: 'unstyled',
 });
 
-export const DEFAULT_HEADERS_DROPDOWN_OPTIONS = Object.freeze(['P', 'H2', 'H3', 'H4', 'H5', 'H6']);
+export const DEFAULT_HEADERS_DROPDOWN_OPTIONS = Object.freeze([
+  'P',
+  'H1',
+  'H2',
+  'H3',
+  'H4',
+  'H5',
+  'H6',
+]);
