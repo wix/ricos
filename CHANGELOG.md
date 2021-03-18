@@ -15,9 +15,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+  ### :bug: Bug Fix
+  - `plugin-giphy`
+    - Add missing required hotkeys to gif selection, as well as more descriptive alt text
 </details>
 <hr/>
+
+
 
 ## 8.27.2  (Mar 15, 2021)
 ### :bug: Bug Fix
