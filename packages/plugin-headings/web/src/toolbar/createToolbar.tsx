@@ -23,6 +23,7 @@ const createToolbar: CreatePluginToolbar = config => {
     helpers,
     t,
     setEditorState,
+    innerModal,
   } = config;
   let isActive: boolean;
 
@@ -113,7 +114,7 @@ const createToolbar: CreatePluginToolbar = config => {
     name: 'Headings',
     TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.HEADINGS]: {
-        component: decorateComponentWithProps(HeadingButton, settings),
+        component: decorateComponentWithProps(HeadingButton, { ...settings, innerModal }),
         externalizedButtonProps: {
           onClose: () => (isActive = false),
           onClick: ({ ref }) => openHeadingPanel(ref),

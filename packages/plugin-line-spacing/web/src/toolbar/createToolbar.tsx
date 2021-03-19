@@ -21,7 +21,7 @@ const spaceAfter = 'padding-bottom';
 
 //TODO: refactor code duplication here and in the LineSpacingButton
 const createToolbar: CreatePluginToolbar = config => {
-  const { getEditorState, setEditorState, helpers, isMobile, theme } = config;
+  const { getEditorState, setEditorState, helpers, isMobile, theme, innerModal } = config;
 
   let oldEditorState;
 
@@ -142,7 +142,10 @@ const createToolbar: CreatePluginToolbar = config => {
   return {
     TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.LINE_SPACING]: {
-        component: decorateComponentWithProps(LineSpacingButton, config[LINE_SPACING_TYPE]),
+        component: decorateComponentWithProps(LineSpacingButton, {
+          ...config[LINE_SPACING_TYPE],
+          innerModal,
+        }),
         externalizedButtonProps: {
           onClick: ({ ref, render }) => openLineSpacingModal({ ref, render }),
           isActive: () => false,

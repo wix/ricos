@@ -5,6 +5,7 @@ import { TEXT_COLOR_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
 import { textForegroundPredicate } from '../text-decorations-utils';
 import { DEFAULT_COLOR } from '../constants';
+
 export default class TextColorButton extends Component {
   constructor(props) {
     super(props);

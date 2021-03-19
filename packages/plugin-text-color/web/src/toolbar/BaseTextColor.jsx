@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Modal from 'react-modal';
 
 import { mergeStyles } from 'wix-rich-content-common';
 import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
-import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import {
+  decorateComponentWithProps,
+  getModalStyles,
+  InlineToolbarButton,
+  EditorState,
+} from 'wix-rich-content-editor-common';
 import TextColorPanel from './TextColorPanel';
 import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';
@@ -24,12 +28,35 @@ export default class BaseTextColor extends Component {
     return document.querySelector('.DraftEditor-root').parentNode;
   }
 
-  openPanel = () => {
-    const { isMobile, setKeepOpen, config, pluginParams } = this.props;
-    if (!isMobile) {
-      setKeepOpen && setKeepOpen(true);
-    }
+  // relies on helpers.openModal
+  openMobilePanel(modalElement) {
+    const { helpers } = this.props;
+    // TODO: CSS styles to inline style
+    // this.styles.textColorModal_mobile
+    // this.styles.textColorModalOverlay_mobile
+    const modalStyles = getModalStyles({
+      fullScreen: true,
+      isMobile: true,
+      customStyles: {
+        content: {
+          top: 'unset',
+          left: 0,
+          backgroundColor: 'white',
+        },
+      },
+    });
 
+    helpers.openModal?.({
+      modalStyles,
+      modalElement,
+      isMobile: true,
+    });
+  }
+
+  // relies on innerModal mechanism
+  openDesktopPanel(modalElement) {
+    const { setKeepOpen, config, pluginParams } = this.props;
+    setKeepOpen?.(true);
     const settings = config[pluginParams.type];
     let position = {};
     if (settings.positionPicker) {
@@ -38,12 +65,61 @@ export default class BaseTextColor extends Component {
       const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
       position = { left: left - PANEL_WIDTH / 2, top: bottom };
     }
-    this.setState({ isPanelOpen: true, panelLeft: position.left, panelTop: position.top });
+    const modalProps = {
+      top: position.top,
+      left: position.left,
+      modalElement,
+      modalStyles: {
+        marginTop: 15,
+        borderRadius: 2,
+        width: 184,
+      },
+    };
+    config.innerModal.openInnerModal(modalProps);
+  }
+
+  openPanel = () => {
+    const {
+      setKeepOpen,
+      config,
+      pluginParams,
+      t,
+      isMobile,
+      theme,
+      getEditorState,
+      setEditorState,
+      uiSettings,
+    } = this.props;
+    const modalElement = decorateComponentWithProps(TextColorPanel, {
+      t,
+      isMobile,
+      theme,
+      closeModal: this.closePanel,
+      editorState: getEditorState(),
+      setEditorState,
+      settings: config[pluginParams.type],
+      uiSettings,
+      setKeepToolbarOpen: setKeepOpen,
+      styleMapper: this.styleMapper,
+      predicate: pluginParams.predicate,
+      defaultColor: pluginParams.defaultColor,
+    });
+    if (isMobile) {
+      this.openMobilePanel(modalElement);
+    } else {
+      this.openDesktopPanel(modalElement);
+    }
   };
 
   closePanel = editorState => {
-    this.setState({ isPanelOpen: false });
-    this.props.setKeepOpen(false);
+    const { helpers, isMobile, config, setKeepOpen } = this.props;
+
+    if (isMobile) {
+      helpers.closeModal?.();
+    } else {
+      setKeepOpen?.(false);
+      config.innerModal.closeInnerModal();
+    }
     this.preserveSelectionState(editorState);
   };
 
@@ -86,22 +162,6 @@ export default class BaseTextColor extends Component {
       active: theme.inlineToolbarButton_active,
     };
 
-    const modalStyle = {
-      content: isMobile
-        ? {
-            top: 'unset',
-            left: 0,
-            backgroundColor: 'white',
-          }
-        : {
-            top: panelTop,
-            left: panelLeft,
-            marginTop: 15,
-            borderRadius: 2,
-            width: 184,
-          },
-    };
-
     return (
       <InlineToolbarButton
         onClick={this.openPanel}
@@ -113,38 +173,7 @@ export default class BaseTextColor extends Component {
         tabIndex={tabIndex}
         icon={pluginParams.icon}
         forwardRef={this.buttonRef}
-      >
-        <Modal
-          onRequestClose={() => this.closePanel()}
-          isOpen={isPanelOpen}
-          parentSelector={BaseTextColor.getModalParent}
-          className={classNames({
-            [this.styles.textColorModal]: !isMobile,
-            [this.styles.textColorModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames({
-            [this.styles.textColorModalOverlay]: !isMobile,
-            [this.styles.textColorModalOverlay_mobile]: isMobile,
-          })}
-          style={modalStyle}
-          ariaHideApp={false}
-        >
-          <TextColorPanel
-            t={t}
-            isMobile={isMobile}
-            theme={theme}
-            closeModal={this.closePanel}
-            editorState={getEditorState()}
-            setEditorState={setEditorState}
-            settings={settings}
-            uiSettings={uiSettings}
-            setKeepToolbarOpen={setKeepOpen}
-            styleMapper={this.styleMapper}
-            predicate={pluginParams.predicate}
-            defaultColor={pluginParams.defaultColor}
-          />
-        </Modal>
-      </InlineToolbarButton>
+      />
     );
   }
 }
