@@ -397,7 +397,9 @@ export const createBlock = (editorState: EditorState, data, type: string) => {
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
   // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
   // so get the block before the space
-  const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+  const newBlock = newEditorState
+    .getCurrentContent()
+    .getBlockBefore(recentlyCreatedKey) as ContentBlock;
   const newSelection = SelectionState.createEmpty(newBlock.getKey());
   return { newBlock, newSelection, newEditorState };
 };
