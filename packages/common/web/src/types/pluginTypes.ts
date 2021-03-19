@@ -79,6 +79,7 @@ import {
   VideoData,
   FileData,
   LinkData,
+  ImageData,
   MentionData as MentionPluginData,
   Node_Type,
   Decoration_Type,
