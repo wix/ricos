@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package rich_content.v1;
+package rich_content;
 
 import "google/protobuf/wrappers.proto";
 
