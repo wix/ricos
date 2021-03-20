@@ -28,10 +28,6 @@ export default class BaseTextColor extends Component {
 
   // relies on helpers.openModal
   openMobilePanel(modalElement) {
-    const { helpers } = this.props;
-    // TODO: CSS styles to inline style
-    // this.styles.textColorModal_mobile
-    // this.styles.textColorModalOverlay_mobile
     const modalStyles = getModalStyles({
       fullScreen: false,
       isMobile: true,
@@ -61,8 +57,7 @@ export default class BaseTextColor extends Component {
         },
       },
     });
-
-    helpers.openModal?.({
+    this.props.helpers.openModal?.({
       modalStyles,
       modalElement,
       isMobile: true,

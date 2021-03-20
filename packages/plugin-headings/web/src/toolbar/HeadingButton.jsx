@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { HEADING_TYPE_TO_ELEMENT, DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
-import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-editor-common';
-import Modal from 'react-modal';
+import { getCumulativeOffset } from 'wix-rich-content-plugin-commons';
+import {
+  decorateComponentWithProps,
+  getModalStyles,
+  InlineToolbarButton,
+  EditorState,
+  RichUtils,
+} from 'wix-rich-content-editor-common';
 import HeadingsDropDownPanel from './HeadingPanel';
-import classNames from 'classnames';
 import styles from '../../statics/styles/headingButtonStyles.scss';
 
 export default class HeadingButton extends Component {
@@ -16,6 +21,7 @@ export default class HeadingButton extends Component {
       currentHeading: 'P',
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.buttonRef = React.createRef();
   }
 
   componentWillReceiveProps() {
@@ -31,19 +37,6 @@ export default class HeadingButton extends Component {
       .getType();
     const currentHeading = HEADING_TYPE_TO_ELEMENT[headingType] || 'P';
     this.setState({ currentHeading });
-  };
-
-  openPanel = () => {
-    this.currentEditorState = this.oldEditorState = this.props.getEditorState();
-    this.selection = this.oldEditorState.getSelection();
-    const { bottom, left } = this.buttonRef.getBoundingClientRect();
-    this.props.setKeepOpen(true);
-    this.setState({ isPanelOpen: true, panelLeft: left - 15, panelTop: bottom });
-  };
-
-  closePanel = () => {
-    this.setState({ isPanelOpen: false });
-    this.props.setKeepOpen(false);
   };
 
   updateHeading = (type, element) => {
@@ -86,19 +79,97 @@ export default class HeadingButton extends Component {
     return document.querySelector('.DraftEditor-root').parentNode;
   }
 
+  // relies on helpers.openModal
+  openMobilePanel(modalElement) {
+    const modalStyles = getModalStyles({
+      fullScreen: false,
+      isMobile: true,
+      customStyles: {
+        content: {
+          position: 'fixed',
+          right: 0,
+          left: 0,
+          bottom: 0,
+          padding: 0,
+          borderRadius: 'unset',
+          transform: 'translate3d(0,0,0)',
+          margin: 0,
+          width: '100%',
+          top: 'auto',
+          height: 362,
+          boxShadow: 'unset',
+        },
+        overlay: {
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.2)',
+          zIndex: '40',
+        },
+      },
+    });
+    this.props.helpers.openModal?.({
+      modalStyles,
+      modalElement,
+      isMobile: true,
+    });
+  }
+
+  // relies on innerModal mechanism
+  openDesktopPanel(modalElement) {
+    const { innerModal, setKeepOpen } = this.props;
+    setKeepOpen?.(true);
+    const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
+    const position = { left: left - 15, top: bottom };
+    const { offsetTop, offsetLeft } = getCumulativeOffset(innerModal.getContainer(), 0, 0);
+    const modalProps = {
+      top: position.top - offsetTop,
+      left: position.left - offsetLeft,
+      modalElement,
+    };
+    innerModal.openInnerModal(modalProps);
+  }
+
+  openPanel = () => {
+    this.currentEditorState = this.oldEditorState = this.props.getEditorState();
+    this.selection = this.oldEditorState.getSelection();
+    const { theme, isMobile, customHeadings } = this.props;
+    const { currentHeading } = this.state;
+    const customHeadingsOptions = customHeadings || DEFAULT_HEADERS_DROPDOWN_OPTIONS;
+    const modalElement = decorateComponentWithProps(HeadingsDropDownPanel, {
+      customHeadingsOptions,
+      isMobile,
+      theme,
+      heading: currentHeading,
+      onSave: this.save,
+      translateHeading: this.translateHeading,
+      ...this.props,
+    });
+    if (isMobile) {
+      this.openMobilePanel(modalElement);
+    } else {
+      this.openDesktopPanel(modalElement);
+    }
+  };
+
+  closePanel = () => {
+    const { helpers, isMobile, innerModal, setKeepOpen } = this.props;
+
+    if (isMobile) {
+      helpers.closeModal?.();
+    } else {
+      setKeepOpen?.(false);
+      innerModal.closeInnerModal();
+    }
+  };
+
   render() {
-    const { theme, isMobile, t, tabIndex, customHeadings } = this.props;
+    const { theme, isMobile, t, tabIndex } = this.props;
     const tooltipText = t('FormattingToolbar_TextStyleButton_Tooltip');
     const dataHookText = 'headingsDropdownButton';
-    const { isPanelOpen, panelTop, panelLeft, currentHeading } = this.state;
-    const { styles } = this;
-    const customHeadingsOptions = customHeadings || DEFAULT_HEADERS_DROPDOWN_OPTIONS;
-    const modalStyle = isMobile
-      ? { left: 0, bottom: 0, right: 0 }
-      : {
-          top: panelTop,
-          left: panelLeft,
-        };
+    const { isPanelOpen, currentHeading } = this.state;
     const buttonContent = this.fixEllipsis(this.translateHeading(currentHeading));
     return (
       <InlineToolbarButton
@@ -111,34 +182,8 @@ export default class HeadingButton extends Component {
         tabIndex={tabIndex}
         buttonContent={buttonContent}
         showArrowIcon
-        ref={ref => (this.buttonRef = ref)}
-      >
-        <Modal
-          isOpen={isPanelOpen}
-          onRequestClose={() => this.save()}
-          className={classNames(styles.headingsModal, {
-            [styles.headingsModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames(styles.headingsModalOverlay, {
-            [styles.headingsModalOverlay_mobile]: isMobile,
-          })}
-          parentSelector={HeadingButton.getModalParent}
-          style={{
-            content: modalStyle,
-          }}
-          ariaHideApp={false}
-        >
-          <HeadingsDropDownPanel
-            customHeadingsOptions={customHeadingsOptions}
-            heading={currentHeading}
-            onSave={this.save}
-            isMobile={isMobile}
-            theme={theme}
-            translateHeading={this.translateHeading}
-            {...this.props}
-          />
-        </Modal>
-      </InlineToolbarButton>
+        ref={this.buttonRef}
+      />
     );
   }
 }
@@ -153,6 +198,7 @@ HeadingButton.propTypes = {
   tabIndex: PropTypes.number,
   setKeepOpen: PropTypes.func,
   customHeadings: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  innerModal: PropTypes.object.isRequired,
 };
 
 HeadingButton.defaultProps = {
