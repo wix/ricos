@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, cloneDeep, isEmpty } from 'lodash';
+import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -267,7 +265,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
-    !isEmpty(this.props.experiments) && console.debug('RCE experiments', this.props.experiments); // eslint-disable-line no-console
   }
 
   componentWillMount() {
@@ -998,6 +995,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 className={wrapperClassName}
                 dir={direction || getLangDir(this.props.locale)}
                 data-id={'rce'}
+                data-hook={!isInnerRCE ? 'root-editor' : 'inner-editor'}
               >
                 {this.renderStyleTag()}
                 <div

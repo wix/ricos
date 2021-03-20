@@ -33,13 +33,31 @@ export default class BaseTextColor extends Component {
     // this.styles.textColorModal_mobile
     // this.styles.textColorModalOverlay_mobile
     const modalStyles = getModalStyles({
-      fullScreen: true,
+      fullScreen: false,
       isMobile: true,
       customStyles: {
         content: {
+          display: 'inline-table',
+          position: 'fixed',
+          boxShadow: '4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1)',
+          margin: 0,
+          bottom: 0,
+          right: 0,
+          transform: 'unset',
+          width: '100%',
+          zIndex: 8,
           top: 'unset',
           left: 0,
           backgroundColor: 'white',
+        },
+        overlay: {
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: 'transparent',
+          zIndex: 8,
         },
       },
     });
@@ -140,20 +158,7 @@ export default class BaseTextColor extends Component {
   }
 
   render() {
-    const {
-      theme,
-      isMobile,
-      t,
-      tabIndex,
-      setEditorState,
-      getEditorState,
-      setKeepOpen,
-      config,
-      uiSettings,
-      pluginParams,
-    } = this.props;
-    const settings = config[pluginParams.type];
-    const { isPanelOpen, panelTop, panelLeft } = this.state;
+    const { theme, isMobile, t, tabIndex, pluginParams } = this.props;
     const tooltip = t(pluginParams.toolTip);
     const buttonStyles = {
       button: theme.inlineToolbarButton,
