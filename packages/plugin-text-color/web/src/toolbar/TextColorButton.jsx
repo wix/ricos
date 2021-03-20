@@ -44,6 +44,7 @@ TextColorButton.propTypes = {
   uiSettings: PropTypes.object,
   config: PropTypes.object,
   setKeepOpen: PropTypes.func,
+  innerModal: PropTypes.object.isRequired,
 };
 
 TextColorButton.defaultProps = {

@@ -43,6 +43,7 @@ export type OpenModalFunction = (data: Record<string, unknown>) => void;
 export type CloseModalFunction = () => void;
 
 export type InnerModalType = {
+  getContainer: () => Element;
   openInnerModal: OpenModalFunction;
   closeInnerModal: CloseModalFunction;
 };

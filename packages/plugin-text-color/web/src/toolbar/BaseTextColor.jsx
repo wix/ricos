@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-
 import { mergeStyles } from 'wix-rich-content-common';
-import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
+import { getSelectionStyles, getCumulativeOffset } from 'wix-rich-content-plugin-commons';
 import {
   decorateComponentWithProps,
   getModalStyles,
@@ -55,7 +53,7 @@ export default class BaseTextColor extends Component {
 
   // relies on innerModal mechanism
   openDesktopPanel(modalElement) {
-    const { setKeepOpen, config, pluginParams } = this.props;
+    const { innerModal, setKeepOpen, config, pluginParams } = this.props;
     setKeepOpen?.(true);
     const settings = config[pluginParams.type];
     let position = {};
@@ -65,17 +63,19 @@ export default class BaseTextColor extends Component {
       const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
       position = { left: left - PANEL_WIDTH / 2, top: bottom };
     }
+    const { offsetTop, offsetLeft } = getCumulativeOffset(innerModal.getContainer(), 0, 0);
     const modalProps = {
-      top: position.top,
-      left: position.left,
+      top: position.top - offsetTop,
+      left: position.left - offsetLeft,
       modalElement,
       modalStyles: {
         marginTop: 15,
         borderRadius: 2,
-        width: 184,
+        minWidth: 184,
+        maxWidth: 209,
       },
     };
-    config.innerModal.openInnerModal(modalProps);
+    innerModal.openInnerModal(modalProps);
   }
 
   openPanel = () => {
@@ -112,13 +112,13 @@ export default class BaseTextColor extends Component {
   };
 
   closePanel = editorState => {
-    const { helpers, isMobile, config, setKeepOpen } = this.props;
+    const { helpers, isMobile, innerModal, setKeepOpen } = this.props;
 
     if (isMobile) {
       helpers.closeModal?.();
     } else {
       setKeepOpen?.(false);
-      config.innerModal.closeInnerModal();
+      innerModal.closeInnerModal();
     }
     this.preserveSelectionState(editorState);
   };
@@ -197,6 +197,7 @@ BaseTextColor.propTypes = {
   setKeepOpen: PropTypes.func,
   pluginParams: PropTypes.object.isRequired,
   buttonRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
+  innerModal: PropTypes.object.isRequired,
 };
 
 BaseTextColor.defaultProps = {

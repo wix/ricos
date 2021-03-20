@@ -1,3 +1,4 @@
+import React from 'react';
 import { getButtonProps } from './getTextColorButtonProps';
 import TextColorButton from './TextColorButton';
 import TextHighlightButton from './TextHighlightButton';
@@ -8,7 +9,7 @@ import { FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 export const createTextColorToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
     [FORMATTING_BUTTONS.TEXT_COLOR]: {
-      component: TextColorButton,
+      component: props => <TextColorButton innerModal={config.innerModal} {...props} />,
       externalizedButtonProps: getButtonProps({ config, type: TEXT_COLOR_TYPE }),
     },
   }),
@@ -18,7 +19,7 @@ export const createTextColorToolbar: CreatePluginToolbar = config => ({
 export const createTextHighlightToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
     [FORMATTING_BUTTONS.TEXT_HIGHLIGHT]: {
-      component: TextHighlightButton,
+      component: props => <TextHighlightButton innerModal={config.innerModal} {...props} />,
       externalizedButtonProps: getButtonProps({ config, type: TEXT_HIGHLIGHT_TYPE }),
     },
   }),
