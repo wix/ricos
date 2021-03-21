@@ -32,7 +32,7 @@ describe('plugins', () => {
     it('should undo and redo image plugin customizations', function() {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
       cy.addImage();
-      cy.enterParagraphs([' Mel frequencies are better than spectograms, change my mind']);
+      cy.enterParagraphs([' testing undo redo for plugins']);
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.addImageTitle();
@@ -56,19 +56,23 @@ describe('plugins', () => {
       cy.focusAccordion(1).type('Yes\n');
       cy.addAccordionPair();
       cy.focusAccordion(2).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      cy.eyesCheckWindow(this.test.title);
       cy.undo()
         .undo()
         .undo()
         .undo()
         .undo()
+        .undo()
         .undo();
+      cy.eyesCheckWindow('undid all changes of accordion');
       cy.redo()
         .redo()
         .redo()
-        .redo()
+        .redo();
+      cy.redo()
         .redo()
         .redo();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow('redid all changes of accordion');
     });
   });
 });
