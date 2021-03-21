@@ -33,10 +33,6 @@ export const STATIC_TOOLBAR_BUTTONS_BASIC = {
   MAP: 'MapPlugin_InsertButton',
   BUTTON: 'ButtonPlugin_InsertButton',
   HTML: 'HTMLCodePlugin_InsertButton',
-  IMAGE: 'ImagePlugin_InsertButton',
-  GALLERY: 'GalleryPlugin_InsertButton',
-  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
-  ACCORDION: 'Accordion_InsertButton',
 };
 
 export const STATIC_TOOLBAR_BUTTONS_WITH_MODAL = {
@@ -71,9 +67,17 @@ export const STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED = {
   // ...STATIC_TOOLBAR_BUTTONS_MEDIA,
 };
 
+export const STATIC_TOOLBAR_BUTTONS_EXPENDED = {
+  IMAGE: 'ImagePlugin_InsertButton',
+  GALLERY: 'GalleryPlugin_InsertButton',
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
+  ACCORDION: 'Accordion_InsertButton',
+};
+
 export const STATIC_TOOLBAR_BUTTONS = {
   ...STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   ...STATIC_TOOLBAR_BUTTONS_EMBED,
+  ...STATIC_TOOLBAR_BUTTONS_EXPENDED,
 };
 
 export const SETTINGS_PANEL = {
