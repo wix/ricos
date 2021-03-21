@@ -186,6 +186,7 @@
 	"LinkTo_Modal_Header": "למה אתה רוצה לקשר?",
 	"HtmlEditPanel_HttpsError": "ודא שכתובת האתר מתחילה ב- HTTPS",
 	"Poll_Presets_Popup_Subtitle": "ניתן להתאים אישית את המראה והסגנון מאוחר יותר.",
+	"BlockToolbar_Section_Advanced": "Advanced ",
 	"SettingsPanelFooter_Done": "סיימתי",
 	"GallerySettings_Image_Settings": "עריכה",
 	"GallerySettings_LayoutControlSection_Row": "גובה השורה",
