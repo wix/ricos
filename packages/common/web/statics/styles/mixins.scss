@@ -19,12 +19,6 @@ $phone: 640px;
   }
 }
 
-@mixin desktop {
-  @media only screen and (min-width: $phone) {
-    @content;
-  }
-}
-
 @mixin fillWithActionColor {
   color: $action-color-fallback;
   fill: $action-color-fallback;
