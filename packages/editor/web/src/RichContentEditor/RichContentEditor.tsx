@@ -1004,6 +1004,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 className={wrapperClassName}
                 dir={direction || getLangDir(this.props.locale)}
                 data-id={'rce'}
+                data-hook={!isInnerRCE ? 'root-editor' : 'inner-editor'}
               >
                 {this.renderStyleTag()}
                 <div

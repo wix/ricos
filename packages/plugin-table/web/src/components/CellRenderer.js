@@ -10,10 +10,6 @@ import { ToolbarType } from 'wix-rich-content-common';
 
 const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
-  componentDidMount() {
-    this.selectCellContent();
-  }
-
   componentDidUpdate(prevProps) {
     const isCellWasEditing = this.isEditing(prevProps.editing, prevProps.selectedCells);
     const isCellEditing = this.isEditing(this.props.editing, this.props.selectedCells);
@@ -150,6 +146,8 @@ export default class Cell extends Component {
     }
   };
 
+  onCellClick = () => this.props.isMobile && this.props.onDoubleClick();
+
   render() {
     const {
       row,
@@ -214,6 +212,7 @@ export default class Cell extends Component {
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
+        onClick={this.onCellClick}
         onContextMenu={onContextMenu}
         colSpan={colSpan}
         rowSpan={rowSpan}

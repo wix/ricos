@@ -6,20 +6,13 @@
     background-color: #f0f4f7;
     color: $primary-text-color;
     height: 52px;
-    padding: 0 8px;
+    padding: 15px 8px;
     display: flex;
     justify-content: start;
     align-items: center;
     border-radius: 10px;
+    font-size: 14px;
       svg{
         margin: 0 8px;
       }
-      p{
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: 400;
-        font-family: Helvetica, sans-serif;
-        width: 282px;
-        margin: 0;
-        }
-  } 
+  }

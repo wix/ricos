@@ -186,6 +186,7 @@
 	"LinkTo_Modal_Header": "Nereye bağlamak istiyorsunuz?",
 	"HtmlEditPanel_HttpsError": "URL'nin HTTPS ile başladığından emin olun",
 	"Poll_Presets_Popup_Subtitle": "Daha sonra görünümü özelleştirebilir ve değiştirebilirsiniz.",
+	"BlockToolbar_Section_Advanced": "Gelişmiş ",
 	"SettingsPanelFooter_Done": "Tamamlandı",
 	"GallerySettings_Image_Settings": "Düzenle",
 	"GallerySettings_LayoutControlSection_Row": "Satır yüksekliği",
