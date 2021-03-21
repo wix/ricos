@@ -23,7 +23,7 @@
   background: rgba(51, 51, 51, 0.1);
   width: auto;
   margin: 11px 0 8px 0;
-  @include phone {
+  .mobile & {
     margin: 0;
   }
 }
@@ -39,8 +39,8 @@
   cursor: pointer;
   outline: 0;
   padding: 0;
-
-  @include phone {
+  .mobile & {
+    margin: 0;
     width: 34px;
     height: 34px;
     justify-self: center;
@@ -66,7 +66,7 @@
     top: -5px;
     left: -5px;
     outline: 0;
-    @include phone {
+    .mobile & {
       top: -8px;
       left: -8px;
       width: 48px;
@@ -94,7 +94,7 @@
 
 .colorPicker_palette {
   width: auto;
-  @include phone {
+  .mobile & {
     margin: 0 auto;
     height: 100%;
   }
@@ -105,7 +105,7 @@
   svg {
     width: 18px;
   }
-  @include phone {
+  .mobile & {
     justify-self: center;
     align-self: center;
     svg {
@@ -130,46 +130,47 @@
   width: 180px;
   display: grid;
   grid-template-columns: repeat(6, auto);
-  @include phone {
+  .mobile & {
+    margin: 0;
     padding: 24px 20px 22px 20px;
     grid-row-gap: 24px;
     width: 100%;
   }
+}
 
-  .colorPicker_color_button_hidden {
-    position: absolute;
-    opacity: 0;
-    width: 0.1px;
-    height: 0.1px;
-    overflow: hidden;
-    z-index: -1;
+.colorPicker_color_button_hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.colorPicker_reset_color_button {
+  line-height: initial;
+}
+
+.colorPicker_reset_color_label {
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: $action-color-fallback;
+  cursor: pointer;
+  .mobile & {
+    font-size: 16px;
   }
+}
 
-  .colorPicker_reset_color_button {
-    line-height: initial;
-  }
-
-  .colorPicker_reset_color_label {
-    font-size: 14px;
-    font-stretch: normal;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 1.5;
-    letter-spacing: normal;
-    color: $action-color-fallback;
-    cursor: pointer;
-    @include phone {
-      font-size: 16px;
-    }
-  }
-
-  .colorPicker_bottom_container {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 10px 0px 10px;
-    @include phone {
-      justify-content: center;
-      margin: 8px 0;
-    }
+.colorPicker_bottom_container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 10px 0px 10px;
+  .mobile & {
+    justify-content: center;
+    margin: 8px 0;
   }
 }

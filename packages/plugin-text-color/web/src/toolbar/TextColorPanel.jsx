@@ -65,19 +65,20 @@ export default class TextColorPanel extends Component {
       setKeepToolbarOpen,
       isMobile,
       defaultColor,
-      colorPickerHeader,
+      colorPickerHeaderKey,
     } = this.props;
     const { colorScheme } = settings;
     const palette = extractPalette(colorScheme);
     const schemeAttributes = extractSchemeAttributes(colorScheme);
     const { onCustomPickerToggle, onCustomColorPicked } = settings;
+    const paletteColors = isMobile ? palette.slice(0, 5) : palette.slice(0, 6);
     return (
       <ColorPicker
         schemeAttributes={schemeAttributes}
         schemeColor={this.state.currentSchemeColor}
         color={this.state.currentColor}
         defaultColor={defaultColor}
-        palette={palette.slice(0, 6)}
+        palette={paletteColors}
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
         onChange={this.setColor}
@@ -99,7 +100,7 @@ export default class TextColorPanel extends Component {
           <>
             {isMobile && (
               <>
-                <div className={mergedStyles.colorPicker_header}>{t(colorPickerHeader)}</div>
+                <div className={mergedStyles.colorPicker_header}>{t(colorPickerHeaderKey)}</div>
                 <div className={mergedStyles.colorPicker_separator} />
               </>
             )}
@@ -147,7 +148,7 @@ TextColorPanel.propTypes = {
   predicate: PropTypes.func,
   defaultColor: PropTypes.string.isRequired,
   onSelect: PropTypes.func,
-  colorPickerHeader: PropTypes.string,
+  colorPickerHeaderKey: PropTypes.string,
 };
 
 export const getInlineColorState = (color, editorState, settings, styleMapper, predicate) => {

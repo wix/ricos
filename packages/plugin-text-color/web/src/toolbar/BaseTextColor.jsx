@@ -142,7 +142,7 @@ export default class BaseTextColor extends Component {
             styleMapper={this.styleMapper}
             predicate={pluginParams.predicate}
             defaultColor={pluginParams.defaultColor}
-            colorPickerHeader={pluginParams.colorPickerHeader}
+            colorPickerHeaderKey={pluginParams.colorPickerHeaderKey}
           />
         </Modal>
       </InlineToolbarButton>

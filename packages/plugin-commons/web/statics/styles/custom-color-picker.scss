@@ -1,6 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette.scss';
 @import '~wix-rich-content-common/dist/statics/styles/mixins.scss';
 
+
 .customColorPicker_editable_input_container {
   margin: 12px auto;
   justify-content: center;
@@ -8,7 +9,7 @@
   align-items: center;
   height: 32px;
   position: relative;
-  @include phone {
+  .mobile & {
     justify-content: space-between;
     height: 40px;
     padding: 0px;
@@ -22,7 +23,7 @@
   width: auto;
   line-height: 20px;
   display: inline-block;
-  @include phone {
+  .mobile & {
     font-size: 16px;
   }
 }
@@ -35,10 +36,10 @@
   display: inline-block;
   height: inherit;
   position: relative;
-  @include phone {
-    margin: 0 20px;
+  .mobile & {
     max-width: 233px;
     font-size: 16px;
+    width: 75%;
   }
 }
 
@@ -48,7 +49,7 @@
   height: 20px;
   border-radius: 15px;
   border: solid 1px #e0e0e3;
-  @include phone {
+  .mobile & {
     width: 24px;
     height: 24px;
   }
@@ -63,7 +64,7 @@
   box-sizing: border-box;
   font-size: inherit;
   font-family: inherit;
-  @include phone {
+  .mobile & {
     padding-left: 32px;
   }
 }
@@ -72,7 +73,7 @@
   top: 50%;
   z-index: 1;
   transform: translate(0, -50%);
-  @include phone {
+  .mobile & {
     height: 14px;
     left: 10px;
   }
@@ -88,7 +89,7 @@
       height: 126px;
     }
     height: 100% !important;
-    @include phone {
+    .mobile & {
       margin: 0 auto;
       width: 100% !important;
     }
@@ -98,7 +99,7 @@
       border-radius: 0;
       overflow: auto;
       border: none;
-      @include phone {
+      .mobile & {
         height: 200px !important;
       }
     }

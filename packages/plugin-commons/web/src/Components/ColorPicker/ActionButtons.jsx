@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/action-buttons.scss';
 
-const ActionButtons = ({ onCancel, onUpdate, cancelBtnText, updateBtnText }) => (
-  <div className={styles.action_buttons}>
+const ActionButtons = ({ onCancel, onUpdate, cancelBtnText, updateBtnText, isMobile }) => (
+  <div className={classNames(styles.action_buttons, { [styles.mobile]: isMobile })}>
     <button className={styles.action_buttons_button} onClick={onCancel}>
       {cancelBtnText}
     </button>

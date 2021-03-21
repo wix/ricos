@@ -2,13 +2,13 @@
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, MOBILE_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, usePluginsConfig, plugins } from '../cypress/testAppConfig';
 
 const changeTextColor = title => {
   cy.loadRicosEditorAndViewer('plain')
     .setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 15])
-    .addColor();
+    .openCustomColorModal();
   cy.eyesCheckWindow(title);
   cy.setColorByHex('d932c3');
   cy.updateTextColor();
@@ -325,7 +325,7 @@ describe('text color mobile', () => {
     cy.eyesOpen({
       appName: 'Text',
       testName: this.test.parent.title,
-      browser: MOBILE_BROWSERS,
+      browser: DEFAULT_MOBILE_BROWSERS,
     });
   });
   beforeEach(() => cy.switchToMobile());

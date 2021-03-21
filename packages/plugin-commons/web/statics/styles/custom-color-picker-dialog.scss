@@ -4,9 +4,9 @@
   width: 209px;
   height: 250px;
   margin: 0;
-  @include phone {
-    width: 100%;
+  &.mobile  {
     height: 330px;
+    width: 100%;
     margin: 0 auto;
   }
 }

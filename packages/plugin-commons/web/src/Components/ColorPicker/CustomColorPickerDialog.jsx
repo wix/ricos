@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
 import ActionButtons from './ActionButtons';
+import classNames from 'classnames';
 
 const CustomColorPicker = lazy(() => import('./CustomColorPicker'));
 
@@ -33,10 +34,11 @@ class CustomColorPickerDialog extends Component {
   }
 
   renderActionButtons = () => {
-    const { t } = this.props;
+    const { t, isMobile } = this.props;
     return (
       <ActionButtons
         t={t}
+        isMobile={isMobile}
         onCancel={this.onCancel}
         onUpdate={this.onUpdate}
         cancelBtnText={t('ColorPickerButtonLabel_Cancel')}
@@ -49,7 +51,7 @@ class CustomColorPickerDialog extends Component {
     const { styles } = this;
     const { t, isMobile, theme } = this.props;
     return (
-      <div className={styles.colorPickerDialog}>
+      <div className={classNames(styles.colorPickerDialog, { [styles.mobile]: isMobile })}>
         {isMobile && this.renderActionButtons()}
         <Suspense fallback={<div>Loading...</div>}>
           <CustomColorPicker
