@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor-common`
+  - [#2317](https://github.com/wix/ricos/pull/2317) deprecation of old `EditorEventsContext` through `index.ts` file
+
 </details>
 <hr/>
 
