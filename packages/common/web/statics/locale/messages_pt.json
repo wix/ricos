@@ -186,6 +186,7 @@
 	"LinkTo_Modal_Header": "Com o que você deseja vincular?",
 	"HtmlEditPanel_HttpsError": "Certifique-se que o URL começa com HTTPS",
 	"Poll_Presets_Popup_Subtitle": "Você pode personalizar o layout mais tarde.",
+	"BlockToolbar_Section_Advanced": "Avançado ",
 	"SettingsPanelFooter_Done": "OK",
 	"GallerySettings_Image_Settings": "Editar",
 	"GallerySettings_LayoutControlSection_Row": "Altura da linha",
