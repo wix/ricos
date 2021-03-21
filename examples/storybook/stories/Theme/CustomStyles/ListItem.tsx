@@ -34,6 +34,7 @@ const ListItem: FunctionComponent<Props> = ({ item, updateStyle, close }) => {
         selectedId={element}
         onSelect={({ id }) => updateStyle([id as string, property, value])}
         options={[
+          'h1',
           'h2',
           'h3',
           'h4',
