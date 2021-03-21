@@ -80,7 +80,7 @@ function checkEntity(currentBlock, contentState, newContentState) {
 
 function getEntityToReplace(newContentState, contentState): EntityToReplace {
   let entityToReplace;
-  contentState
+  const didChange = contentState
     .getBlockMap()
     .filter(block => doesEntityExistInBothStates(block, contentState, newContentState))
     .some(currentBlock => {
@@ -89,15 +89,13 @@ function getEntityToReplace(newContentState, contentState): EntityToReplace {
       const entity = INNER_RICOS_TYPES.includes(type)
         ? checkInnerRicosEntity(currentBlock, contentState, newContentState)
         : checkEntity(currentBlock, contentState, newContentState);
-      if (entity) {
-        entityToReplace = {
-          blockKey,
-          ...entity,
-        };
-      }
+      entityToReplace = {
+        blockKey,
+        ...entity,
+      };
       return !!entity;
     });
-  return entityToReplace || { shouldUndoAgain: true };
+  return (didChange && entityToReplace) || { shouldUndoAgain: true };
 }
 
 // fixes entities in EditorStates
