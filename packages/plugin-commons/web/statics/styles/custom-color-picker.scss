@@ -2,16 +2,14 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins.scss';
 
 .customColorPicker_editable_input_container {
-  @include desktop{
-    margin: 12px auto;
-    justify-content: center; 
-  }
-  display: flex; 
+  margin: 12px auto;
+  justify-content: center;
+  display: flex;
   align-items: center;
   height: 32px;
   position: relative;
   @include phone {
-    justify-content:space-between;
+    justify-content: space-between;
     height: 40px;
     padding: 0px;
     margin: 20px;
@@ -20,7 +18,7 @@
 
 .customColorPicker_input_label {
   font-size: 14px;
-  color:#757575;
+  color: #757575;
   width: auto;
   line-height: 20px;
   display: inline-block;
@@ -30,21 +28,19 @@
 }
 
 .customColorPicker_input_container {
-  @include desktop{
-    width: 126px;
-    font-size: 14px;
-    margin: 0 8px;
-  }
+  width: 126px;
+  font-size: 14px;
+  margin: 0 8px;
   color: #333333;
   display: inline-block;
   height: inherit;
   position: relative;
   @include phone {
     margin: 0 20px;
-    max-width:233px;
+    max-width: 233px;
     font-size: 16px;
   }
-}  
+}
 
 .customColorPicker_currentColor {
   width: 20px;
@@ -58,7 +54,7 @@
   }
 }
 
-.hexColorInput{
+.hexColorInput {
   max-height: 100%;
   border: 1px solid;
   padding-left: 20px;
@@ -67,7 +63,7 @@
   box-sizing: border-box;
   font-size: inherit;
   font-family: inherit;
-  @include phone{
+  @include phone {
     padding-left: 32px;
   }
 }
@@ -76,7 +72,7 @@
   top: 50%;
   z-index: 1;
   transform: translate(0, -50%);
-  @include phone{
+  @include phone {
     height: 14px;
     left: 10px;
   }
@@ -84,23 +80,21 @@
 
 :global {
   @import '~react-colorful/dist/index.css';
-  
+
   .react-colorful {
-    @include desktop {
-      width: 187px !important;
-      margin: 12px auto;
-      .react-colorful__saturation {
-       height: 126px;
-     }
+    width: 187px !important;
+    margin: 12px auto;
+    .react-colorful__saturation {
+      height: 126px;
     }
     height: 100% !important;
     @include phone {
       margin: 0 auto;
       width: 100% !important;
     }
-    
+
     .react-colorful__saturation {
-      flex-grow: 0 ;
+      flex-grow: 0;
       border-radius: 0;
       overflow: auto;
       border: none;
@@ -130,7 +124,7 @@
       z-index: 3;
     }
 
-    .react-colorful__pointer.react-colorful__hue-pointer .react-colorful__pointer-fill{
+    .react-colorful__pointer.react-colorful__hue-pointer .react-colorful__pointer-fill {
       box-shadow: 0 1px 1px rgba(9, 9, 9, 0.1);
       background-color: #ffffff !important;
       filter: blur (10);
