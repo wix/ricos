@@ -186,6 +186,7 @@
   "LinkTo_Modal_Header": "Que souhaitez-vous connecter ?",
   "HtmlEditPanel_HttpsError": "Assurez-vous que l'URL commence par HTTPS",
   "Poll_Presets_Popup_Subtitle": "Vous pourrez modifier le design plus tard.",
+  "BlockToolbar_Section_Advanced": "Avancé ",
   "SettingsPanelFooter_Done": "Terminer",
   "GallerySettings_Image_Settings": "Modifier",
   "GallerySettings_LayoutControlSection_Row": "Hauteur rangée",
