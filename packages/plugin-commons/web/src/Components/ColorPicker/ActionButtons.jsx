@@ -23,6 +23,7 @@ ActionButtons.propTypes = {
   onUpdate: PropTypes.func,
   cancelBtnText: PropTypes.string,
   updateBtnText: PropTypes.string,
+  isMobile: PropTypes.bool,
 };
 
 export default ActionButtons;
