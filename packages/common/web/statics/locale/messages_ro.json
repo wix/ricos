@@ -186,6 +186,7 @@
 	"LinkTo_Modal_Header": "Către ce vrei să introduci un link?",
 	"HtmlEditPanel_HttpsError": "Asigură-te că adresa URL începe cu HTTPS",
 	"Poll_Presets_Popup_Subtitle": "Poți personaliza aspectul mai târziu.",
+	"BlockToolbar_Section_Advanced": "Advanced ",
 	"SettingsPanelFooter_Done": "Terminat",
 	"GallerySettings_Image_Settings": "Editează",
 	"GallerySettings_LayoutControlSection_Row": "Înălțimea rândului",
