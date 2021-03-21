@@ -5,6 +5,7 @@ import {
   ACTION_BUTTON_TYPE,
   DIVIDER_TYPE,
   FILE_UPLOAD_TYPE,
+  HTML_TYPE,
   IMAGE_TYPE,
   LINK_BUTTON_TYPE,
   LINK_PREVIEW_TYPE,
@@ -13,13 +14,17 @@ import {
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
 } from '../../../consts';
-import { PluginContainerData_Spoiler, FileSource } from 'ricos-schema';
-
-const kebabToConstantCase = (str: string) => str.toUpperCase().replace('-', '_');
+import {
+  PluginContainerData_Spoiler,
+  FileSource,
+  PluginContainerData_Width_Type,
+  ButtonData_Type,
+} from 'ricos-schema';
+import { TO_RICOS_DATA } from '../consts';
 
 export const convertBlockDataToRicos = (blockType: string, data) => {
   const newData = cloneDeep(data);
-  const conversionFunctions = {
+  const converters = {
     [VIDEO_TYPE]: convertVideoData,
     [DIVIDER_TYPE]: convertDividerData,
     [IMAGE_TYPE]: convertImageData,
@@ -30,38 +35,45 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     [FILE_UPLOAD_TYPE]: convertFileData,
     [LINK_BUTTON_TYPE]: convertButtonData,
     [ACTION_BUTTON_TYPE]: convertButtonData,
+    [HTML_TYPE]: convertHTMLData,
   };
-  if (blockType in conversionFunctions) {
-    conversionFunctions[blockType](newData, blockType);
-  }
-  if (newData.config) {
+  if (newData.config && blockType !== DIVIDER_TYPE) {
     convertContainerData(newData);
   }
-  return newData;
+  if (blockType in converters) {
+    const convert = converters[blockType];
+    convert(newData, blockType);
+  }
+  const toJSON = data =>
+    TO_RICOS_DATA[blockType]?.toJSON(TO_RICOS_DATA[blockType]?.fromJSON(data)) || data;
+  return toJSON(newData);
 };
 
 const convertContainerData = data => {
-  const { size, alignment } = data.config;
+  const { size, alignment, width } = data.config;
   let spoiler: PluginContainerData_Spoiler | undefined;
   if (data.config.spoiler?.enabled) {
     const { description, buttonContent } = data.config.spoiler;
     spoiler = { description, buttonText: buttonContent };
   }
   data.containerData = {
-    width: kebabToConstantCase(size),
-    alignment: kebabToConstantCase(alignment),
+    width: {
+      type: size && kebabToConstantCase(size),
+      customWidth: typeof width === 'number' ? width : undefined,
+    },
+    alignment: alignment && kebabToConstantCase(alignment),
     spoiler,
   };
 };
 
 const convertVideoData = data => {
-  // src is split into src for objects and url for strings
   if (typeof data.src === 'string') {
     data.video = { src: { url: data.src } };
+    const { thumbnail_url, width, height } = data.metadata;
     data.thumbnail = {
-      src: { url: data.metadata.thumbnail_url },
-      width: data.metadata.width,
-      height: data.metadata.height,
+      src: { url: thumbnail_url },
+      width,
+      height,
     };
   } else if (typeof data.src === 'object') {
     data.video = { src: { custom: data.src.pathname } };
@@ -75,12 +87,15 @@ const convertVideoData = data => {
 
 const convertDividerData = data => {
   has(data, 'type') && (data.type = data.type.toUpperCase());
+  has(data, 'config.size') && (data.width = data.config.size.toUpperCase());
+  has(data, 'config.alignment') && (data.alignment = data.config.alignment.toUpperCase());
+  data.containerData = { width: { type: PluginContainerData_Width_Type.CONTENT } };
 };
 
 const convertImageData = data => {
-  const { id, file_name, width, height } = data.src;
+  const { file_name, width, height } = data.src;
   const { link, anchor, disableExpand } = data.config;
-  data.image = { src: { custom: id || file_name }, width, height };
+  data.image = { src: { custom: file_name }, width, height };
   data.link = anchor ? { anchor } : link;
   data.disableExpand = disableExpand;
   data.altText = data.metadata?.alt;
@@ -126,12 +141,18 @@ const convertButtonData = (data, blockType) => {
     textColor: color,
     borderColor,
   };
-  data.type = blockType;
+  data.type = blockType === ACTION_BUTTON_TYPE ? ButtonData_Type.ACTION : ButtonData_Type.LINK;
   data.text = buttonText;
   if (settings.url) {
-    data.link = { url, rel, target };
+    data.link = { url, rel: rel ? 'nofollow' : undefined, target: target ? '_blank' : '_self' }; // @shaulgo please review logic
   }
 };
+
+const convertHTMLData = data => {
+  data.containerData.width.type = PluginContainerData_Width_Type.CUSTOM;
+};
+
+const kebabToConstantCase = (str: string) => str.toUpperCase().replace('-', '_');
 
 export const keysToCamelCase = obj =>
   Object.fromEntries(Object.entries(obj).map(([key, value]) => [toCamelCase(key), value]));

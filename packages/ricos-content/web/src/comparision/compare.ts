@@ -1,10 +1,14 @@
 /** Based on https://gist.github.com/Yimiprod/7ee176597fef230d1451 */
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any */
 
-import { transform, isEqualWith, isEqual, isObject, omit } from 'lodash';
+import { transform, isEqualWith, isEqual, isObject, omit, pick } from 'lodash';
+import omitDeep from 'omit-deep-lodash';
 
-const IGNORED_KEYS = ['updatedDate'];
+const IGNORED_KEYS = ['updatedDate', 'tempData', 'isCustomVideo'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
+const IGNORED_SRC_KEYS = ['id', 'original_file_name'];
+const IGNORED_BUTTON_DESIGN_KEYS = ['activeButton', 'padding'];
+const OEMBED_KEYS = ['thumbnail_url', 'width', 'height'];
 
 /**
  * Deep diff between two object, using lodash
@@ -15,13 +19,12 @@ const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
 export function compare(object, base, options: { verbose?: boolean; ignoredKeys?: string[] } = {}) {
   const { verbose, ignoredKeys } = options;
   const allIgnoredKeys = [...IGNORED_KEYS, ...(ignoredKeys || [])];
-  const comparator = getComparator(allIgnoredKeys);
   object.blocks && removeEmoji(object);
   base.blocks && removeEmoji(base);
 
   // Ignore ignoredKeys in object top level
-  const objectWithoutIgnored = omit(object, allIgnoredKeys);
-  const basetWithoutIgnored = omit(base, allIgnoredKeys);
+  const objectWithoutIgnored = omitDeep(object, allIgnoredKeys);
+  const basetWithoutIgnored = omitDeep(base, allIgnoredKeys);
 
   function changes(object, base) {
     return transform<any, any>(object, (result, value, key) => {
@@ -48,12 +51,18 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
   return changes(objectWithoutIgnored, basetWithoutIgnored);
 }
 
-const getComparator = (ignoredKeys: string[]) => (left, right, key) => {
-  if (ignoredKeys.includes(key)) {
-    return true;
-  }
+const comparator = (left, right, key) => {
   if (left?.enableVoteRole !== undefined || right?.enableVoteRole !== undefined) {
     return isEqual(omit(left, IGNORED_POLL_CONFIG_KEYS), omit(right, IGNORED_POLL_CONFIG_KEYS));
+  }
+  if (left?.thumbnail_url || right?.thumbnail_url) {
+    return isEqual(pick(left, OEMBED_KEYS), pick(right, OEMBED_KEYS));
+  }
+  if (key === 'src') {
+    return isEqual(omit(left, IGNORED_SRC_KEYS), omit(right, IGNORED_SRC_KEYS));
+  }
+  if (key === 'design') {
+    return isEqual(omit(left, IGNORED_BUTTON_DESIGN_KEYS), omit(right, IGNORED_BUTTON_DESIGN_KEYS));
   }
   return undefined;
 };

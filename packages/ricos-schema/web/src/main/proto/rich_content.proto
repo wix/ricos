@@ -57,10 +57,9 @@ message Node {
         MAP = 16;
         POLL = 17;
         VERTICAL_EMBED = 18;
-        ACTION_BUTTON = 19;
-        LINK_BUTTON = 20;
-        ACCORDION = 21;
-        TABLE = 22;
+        BUTTON = 19;
+        ACCORDION = 20;
+        TABLE = 21;
     }
 
     Type type = 1; // Node type

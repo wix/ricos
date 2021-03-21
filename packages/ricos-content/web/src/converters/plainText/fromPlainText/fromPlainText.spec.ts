@@ -8,7 +8,7 @@ describe('convert from plain text', () => {
     const content = fromPlainText(PLAIN_TEXT);
     expect(
       compare(content, plainTextContent, {
-        ignoredKeys: ['key', 'createdVersion', 'updatedVersion'],
+        ignoredKeys: ['key', 'createdVersion', 'updatedVersion', 'indentation'],
       })
     ).toEqual({});
   });

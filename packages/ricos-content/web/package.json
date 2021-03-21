@@ -36,12 +36,10 @@
     "test:watchAll": "jest --verbose --watchAll"
   },
   "dependencies": {
+    "omit-deep-lodash": "1.1.5",
     "parse5": "^6.0.0",
     "ricos-schema": "8.27.1",
     "to-camel-case": "1.0.0",
-    "to-constant-case": "1.0.0",
-    "to-slug-case": "1.0.0",
-    "to-snake-case": "1.0.0",
     "utility-types": "^3.10.0"
   },
   "peerDependencies": {

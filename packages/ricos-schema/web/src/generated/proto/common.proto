@@ -13,16 +13,16 @@ message TextStyle {
     }
 
     TextAlignment text_alignment = 1;
-    google.protobuf.StringValue line_height = 2; //css value
-    google.protobuf.StringValue padding_top = 3; //css value
-    google.protobuf.StringValue padding_bottom = 4; //css value
+    google.protobuf.StringValue line_height = 2; // css value
+    google.protobuf.StringValue padding_top = 3; // css value
+    google.protobuf.StringValue padding_bottom = 4; // css value
 }
 
 message Link {
     oneof data {
         string url = 1;
-        string anchor = 2; //link in document
-        string custom_data = 3; //serialized object
+        string anchor = 2; // link in document
+        string custom_data = 3; // serialized object
     }
     google.protobuf.StringValue target = 4;
     google.protobuf.StringValue rel = 5;
@@ -59,7 +59,7 @@ message PluginContainerData {
 message FileSource { // passes through srcToUrl function when provided
     oneof data {
         google.protobuf.StringValue url = 1;
-        google.protobuf.StringValue custom = 2; //e.g. an id for media server
+        google.protobuf.StringValue custom = 2; // e.g. an id for media server
     }
 }
 

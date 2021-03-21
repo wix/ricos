@@ -18,5 +18,5 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
 
 export const getTextStyle = (blockData?: RicosContentBlock['data']): TextStyle => {
   const { textAlignment, dynamicStyles } = blockData || {};
-  return { textAlignment: textAlignment.toUpperCase(), ...keysToCamelCase(dynamicStyles) };
+  return { textAlignment: textAlignment?.toUpperCase(), ...keysToCamelCase(dynamicStyles || {}) };
 };

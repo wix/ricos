@@ -286,7 +286,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "63lbi",
@@ -310,7 +312,9 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "left"
+      }
     },
     {
       "key": "s53",
@@ -454,32 +458,6 @@
       "data": {}
     },
     {
-      "key": "8fffe",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
-    },
-    {
-      "key": "1uco7",
-      "text": " ",
-      "type": "atomic",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 18
-        }
-      ],
-      "data": {}
-    },
-    {
       "key": "akn59",
       "text": "",
       "type": "unstyled",
@@ -500,7 +478,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 19
+          "key": 18
         }
       ],
       "data": {}
@@ -526,7 +504,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 20
+          "key": 19
         }
       ],
       "data": {}
@@ -807,7 +785,7 @@
         {
           "offset": 99,
           "length": 7,
-          "key": 21
+          "key": 20
         }
       ],
       "data": {
@@ -840,7 +818,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 22
+          "key": 21
         }
       ],
       "data": {}
@@ -929,8 +907,6 @@
         "config": {
           "alignment": "center",
           "size": "content",
-          "showTitle": true,
-          "showDescription": true,
           "disableExpand": false,
           "link": {
             "url": "www.image-link.com",
@@ -961,10 +937,7 @@
       "data": {
         "config": {
           "size": "content",
-          "alignment": "center",
-          "spoiler": {
-            "enabled": false
-          }
+          "alignment": "center"
         },
         "tempData": false,
         "src": "https://www.youtube.com/watch?v=CoJ23XNHgG0",
@@ -1076,10 +1049,7 @@
           "size": "content",
           "layout": "small",
           "spacing": 0,
-          "disableExpand": false,
-          "spoiler": {
-            "enabled": false
-          }
+          "disableExpand": false
         }
       }
     },
@@ -1119,8 +1089,7 @@
       "data": {
         "config": {
           "alignment": "center",
-          "size": "small",
-          "width": "fit-content"
+          "size": "small"
         },
         "button": {
           "settings": {
@@ -1147,8 +1116,7 @@
       "data": {
         "config": {
           "alignment": "center",
-          "size": "small",
-          "width": "fit-content"
+          "size": "small"
         },
         "button": {
           "settings": {
@@ -1185,12 +1153,6 @@
         "config": {
           "size": "small",
           "alignment": "center"
-        },
-        "configViewer": {
-          "sizes": {
-            "desktop": "original",
-            "mobile": "original"
-          }
         },
         "gif": {
           "originalUrl": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy.gif?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy.gif",
@@ -1257,34 +1219,6 @@
       }
     },
     "18": {
-      "type": "wix-draft-plugin-video",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "size": "content",
-          "alignment": "center"
-        },
-        "src": "https://soundcloud.com/cagdasdemirbilek/narcos-tuyo-rodrigo-amarante",
-        "metadata": {
-          "height": 270,
-          "author_name": "Wix.com",
-          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
-          "thumbnail_width": 480,
-          "type": "video",
-          "version": "1.0",
-          "thumbnail_height": 360,
-          "provider_url": "https://www.youtube.com/",
-          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
-          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
-          "author_url": "https://www.youtube.com/user/Wix",
-          "provider_name": "YouTube",
-          "width": 480,
-          "video_url": "https://youtu.be/BBu5codsO6Y"
-        },
-        "type": "soundCloud"
-      }
-    },
-    "19": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1303,7 +1237,7 @@
         "provider_url": "www.mockUrl.com"
       }
     },
-    "20": {
+    "19": {
       "type": "wix-draft-plugin-poll",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1411,22 +1345,20 @@
         "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
       }
     },
-    "21": {
+    "20": {
       "type": "EMOJI_TYPE",
       "mutability": "IMMUTABLE",
       "data": {
         "emojiUnicode": "👨‍👩‍👦‍👦"
       }
     },
-    "22": {
+    "21": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
           "alignment": "right",
           "size": "small",
-          "showTitle": true,
-          "showDescription": true,
           "disableExpand": false
         },
         "src": {
@@ -1439,5 +1371,5 @@
       }
     }
   },
-  "VERSION": "8.27.1"
+  "VERSION": "8.27.2"
 }
