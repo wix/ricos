@@ -1,5 +1,4 @@
 /* eslint-disable fp/no-delete */
-import toCamelCase from 'to-camel-case';
 import { has, cloneDeep } from 'lodash';
 import {
   ACTION_BUTTON_TYPE,
@@ -153,6 +152,3 @@ const convertHTMLData = data => {
 };
 
 const kebabToConstantCase = (str: string) => str.toUpperCase().replace('-', '_');
-
-export const keysToCamelCase = obj =>
-  Object.fromEntries(Object.entries(obj).map(([key, value]) => [toCamelCase(key), value]));
