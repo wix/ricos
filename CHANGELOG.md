@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `color-picker`
+  - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
+
 ### :house: Internal
 - `editor-common`
   - [#2317](https://github.com/wix/ricos/pull/2317) deprecation of old `EditorEventsContext` through `index.ts` file
@@ -75,10 +79,6 @@
   - [#2257](https://github.com/wix/ricos/pull/2257) `getContent` removes blocks with errors from innerRCE blocks
 
 ## 8.25.2 (March 4, 2021)
-### :bug: Bug Fix
-- `color-picker`
-  - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update style for mobile devices
-  
 ### :bug: Bug Fix
 - `ricos-common`
   - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
