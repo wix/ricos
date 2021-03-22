@@ -210,7 +210,7 @@ class TableComponent extends React.Component {
       ) {
         this.props.blockProps.deleteBlock();
       } else if (e.keyCode === KEYS_CHARCODE.SPACE) {
-        e.ctrlKey && this.handleShortcutSelection(e, getColsRange(selected), this.selectCols);
+        e.ctrlKey && this.handleShortcutSelection(e, getColsRange(selected), this.selectCols, true);
         e.shiftKey && this.handleShortcutSelection(e, getRowsRange(selected), this.selectRows);
       } else if (e.altKey && e.ctrlKey) {
         if (e.key === '+' || e.key === '=') {
@@ -232,11 +232,17 @@ class TableComponent extends React.Component {
     }
   };
 
-  handleShortcutSelection = (e, indexes, selectFunc) => {
-    if (!this.prevSelection) {
+  handleShortcutSelection = (e, indexes, selectFunc, isCol = false) => {
+    const { selected } = this.state;
+    const isAllSectionSelected = isCol
+      ? this.table.getSelectedCols(getRange(selected))
+      : this.table.getSelectedRows(getRange(selected));
+    if (!isAllSectionSelected) {
       this.prevSelection = cloneDeep(this.state.selected);
+      this.lastFocusedCell = document.activeElement;
       selectFunc({ start: Math.min(...indexes), end: Math.max(...indexes) });
     } else {
+      this.lastFocusedCell?.focus();
       this.setSelected(this.prevSelection);
       this.prevSelection = null;
     }
