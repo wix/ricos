@@ -1,0 +1,26 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.container {
+    width: 20px;
+    height: 100%;
+    position: relative;
+
+    .selectAllContainer {
+        width: 100%;
+        height: 20px;
+        position: absolute;
+    }
+
+    .rows {
+        position: absolute;
+        top: 20px;
+        width: 100%;
+        border-bottom: 1px solid rgba($primary-text-color-tuple, 0.15);
+        
+        .rowContainer {
+            width: 100%;
+            position: relative;
+        }
+    }
+}

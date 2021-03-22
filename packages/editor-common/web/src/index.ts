@@ -1,14 +1,6 @@
 /* eslint-disable no-duplicate-imports */
 export * from './Icons';
 
-export {
-  EditorEventsContext,
-  EditorEventsProvider,
-  withEditorEvents,
-  WithEditorEventsProps,
-  EditorEvents,
-} from './EditorEventsContext';
-
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
@@ -39,6 +31,8 @@ export {
   updateLinkAtCurrentSelection,
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
+  getEntityData,
+  insertCustomLink,
   hasLinksInBlock,
   getLinkRangesInBlock,
   fixPastedLinks,
@@ -72,9 +66,14 @@ export {
   deleteCharacterBeforeCursor,
   createLinkEntityData,
   getCharacterBeforeSelection,
+  isPluginFocused,
   getSelectionRange,
   isInSelectionRange,
+  cloneDeepWithoutEditorState,
   getEntities,
+  isCursorAtStartOfContent,
+  isCursorAtFirstLine,
+  selectAllContent,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
@@ -99,10 +98,10 @@ import {
   RawDraftContentState,
   ContentState,
 } from '@wix/draft-js';
-import { RicosContent } from 'wix-rich-content-common';
+import { DraftContent } from 'wix-rich-content-common';
 
-// makes draft-js's convertFromRaw match our own RicosContent type
-export const convertFromRaw = (rawState: RicosContent): ContentState =>
+// makes draft-js's convertFromRaw match our own DraftContent type
+export const convertFromRaw = (rawState: DraftContent): ContentState =>
   convertFromRawDraft(rawState as RawDraftContentState);
 
 export {
@@ -129,3 +128,5 @@ export {
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
+
+export { isElementOutOfWindow } from './Utils/overflowUtils';

@@ -1,15 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction, cloneDeep } from 'lodash';
+import { isFunction } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
-  IMAGE_TYPE,
-  GALLERY_TYPE,
+  TABLE_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -22,6 +21,7 @@ class PluginViewer extends PureComponent {
       componentData,
       styles,
       context: { theme, isMobile },
+      innerRCEViewerProps,
     } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
     const hasLink = this.componentHasLink();
@@ -33,6 +33,8 @@ class PluginViewer extends PureComponent {
         [styles.anchor]: hasLink,
         [theme.anchor]: hasLink && theme.anchor,
         [styles.embed]: hasLink && html,
+        [styles.horizontalScrollbar]: pluginComponent.withHorizontalScroll,
+        [styles.renderedInTable]: innerRCEViewerProps.renderedInTable,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
@@ -54,27 +56,17 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
-  removeExpand = config => {
-    const newConfig = cloneDeep(config);
-    if (newConfig?.[IMAGE_TYPE]?.onExpand) {
-      newConfig[IMAGE_TYPE].onExpand = undefined;
-    }
-    if (newConfig?.[GALLERY_TYPE]?.onExpand) {
-      newConfig[GALLERY_TYPE].onExpand = undefined;
-    }
-    return newConfig;
-  };
-
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  innerRCV = ({ contentState, textAlignment, direction, renderedIn }) => {
     const { innerRCEViewerProps } = this.props;
-    const config = this.removeExpand(innerRCEViewerProps.config);
+    const renderedInTable = renderedIn === TABLE_TYPE;
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
         direction={direction}
         {...innerRCEViewerProps}
-        config={config}
+        isInnerRcv
+        renderedInTable={renderedInTable}
       />
     );
   };
@@ -92,12 +84,12 @@ class PluginViewer extends PureComponent {
       context,
       blockIndex,
       SpoilerViewerWrapper,
+      blockKey,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme, isMobile } = context;
     const settings = config?.[type] || {};
-    const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
       type,
       componentData,
@@ -106,6 +98,7 @@ class PluginViewer extends PureComponent {
       entityIndex,
       ...context,
       innerRCV: this.innerRCV,
+      blockKey,
     };
 
     if (Component) {
@@ -123,10 +116,11 @@ class PluginViewer extends PureComponent {
             rel: rel || relValue || 'noopener noreferrer',
           };
         }
-        if (hasAnchor && siteUrl) {
+        if (hasAnchor) {
           const { anchor } = config.link;
+          const href = `#viewer-${anchor}`;
           containerProps = {
-            href: `${siteUrl}#viewer-${anchor}`,
+            href,
             target: '_self',
           };
         }
@@ -226,6 +220,7 @@ PluginViewer.propTypes = {
   }).isRequired,
   innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
+  blockKey: PropTypes.string,
 };
 
 PluginViewer.defaultProps = {
@@ -261,6 +256,8 @@ const getPluginViewers = (
           typeMap={typeMappers}
           innerRCEViewerProps={innerRCEViewerProps}
           SpoilerViewerWrapper={SpoilerViewerWrapper}
+          withHorizontalScroll
+          blockKey={block.key}
         >
           {isInline ? children : null}
         </PluginViewer>

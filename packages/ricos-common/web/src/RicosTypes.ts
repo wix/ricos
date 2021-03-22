@@ -1,6 +1,6 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
-  RicosContent,
+  DraftContent,
   OnErrorFunction,
   SEOSettings,
   LinkPanelSettings,
@@ -24,7 +24,7 @@ export interface RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: ReactElement;
-  content?: RicosContent;
+  content?: DraftContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
   linkSettings?: LinkSettings;
@@ -32,7 +32,17 @@ export interface RicosProps {
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
+  textAlignment?: TextAlignment;
   /* Changes to this interface should also be reflected in the API docs */
+}
+
+interface EditorEvents {
+  subscribe: (
+    event: string,
+    callback: () => Promise<{ type: string; data: unknown }>
+  ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  dispatch: (event: string) => Promise<unknown>;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -45,7 +55,9 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
-  injectedContent?: RicosContent;
+  injectedContent?: DraftContent;
+  maxTextLength?: number;
+  editorEvents?: EditorEvents;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -61,22 +73,21 @@ export interface ContentStateGetterArgs {
   shouldRemoveErrorBlocks?: boolean;
 }
 
-export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => DraftContent;
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
-  refresh: (
-    editorState: EditorState,
-    contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-  ) => void;
+  getContentTraits: () => {
+    isEmpty: boolean;
+    isContentChanged: boolean;
+  };
+  getEditorState: () => EditorState;
+  refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
-  getContentStatePromise: () => Promise<RicosContent>;
+  getContentStatePromise: () => Promise<DraftContent>;
 }
 
-export type OnContentChangeFunction = (
-  content: RicosContent,
-  contentTraits: { isEmpty: boolean; isContentChanged: boolean }
-) => void;
+export type OnContentChangeFunction = (content: DraftContent) => void;
 
 export type OnBusyChangeFunction = (isBusy: boolean) => void;
 
@@ -88,6 +99,8 @@ export interface ModalSettings {
   closeModal?: () => void;
   ariaHiddenId?: string;
   container?: HTMLElement;
+  onModalOpen?: (data: Record<string, unknown>) => void;
+  onModalClose?: () => void;
 }
 
 export interface ToolbarSettings {
@@ -96,12 +109,17 @@ export interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
+export type FullscreenProps = { backgroundColor?: string; foregroundColor?: string };
+
 export interface MediaSettings {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  fullscreenProps?: FullscreenProps;
 }
 
 export interface LinkSettings {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
 }
+
+export type TextAlignment = 'left' | 'right';

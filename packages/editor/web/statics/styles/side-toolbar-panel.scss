@@ -95,6 +95,9 @@
       &.horizontalMenu {
         height: 38px;
       }
+      &.smallPlusIcon {
+        height: 32px;
+      }
       .pluginName {
         font-size: 12px;
         line-height: 16px;
@@ -102,23 +105,8 @@
       }
 
       &:hover {
-        background-color: rgba($fallbackColor, 0.06);
-
-        // button:not([disabled]) span,
-        // button:not([disabled]) svg,
-        // label:not([disabled]) span,
-        // label:not([disabled]) svg {
-        //   background-color: rgba($primary-text-color-tuple, 0.06);
-        //   color: rgba($primary-text-color-tuple, 0.06);
-        // }
+        background-color: rgba($fallbackColorTuple, 0.06);
       }
-      // &:focus {
-      //   button:not([disabled]) svg,
-      //   label:not([disabled]) svg {
-      //     background-color: rgba($primary-text-color-tuple, 0.06);
-      //     color: rgba($primary-text-color-tuple, 0.06);
-      //   }
-      // }
     }
   }
 }

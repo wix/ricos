@@ -1,24 +1,83 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
-import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
+import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import {
+  LINK_PREVIEW_TYPE,
+  TABLE_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  INDENT_TYPE,
+  LINE_SPACING_TYPE,
+  LINK_TYPE,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GIPHY_TYPE,
+  EMOJI_TYPE,
+  FILE_UPLOAD_TYPE,
+  DIVIDER_TYPE,
+  CODE_BLOCK_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
+  SPOILER_TYPE,
+} from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
+import { isCursorAtStartOfContent, selectAllContent } from 'wix-rich-content-editor-common';
 import ClickOutside from 'react-click-outsider';
 
-class InnerRCE extends Component {
+const SupportedTablePlugins = [
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  INDENT_TYPE,
+  LINE_SPACING_TYPE,
+  LINK_TYPE,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GIPHY_TYPE,
+  EMOJI_TYPE,
+  FILE_UPLOAD_TYPE,
+  DIVIDER_TYPE,
+  CODE_BLOCK_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
+  SPOILER_TYPE,
+];
+
+class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config } = props;
+    const { config, editing } = props;
     this.config = this.cleanConfig(cloneDeep(config));
-    this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.plugins = this.getPlugins();
     this.state = {
-      showToolbars: false,
+      showToolbars: editing || false,
     };
   }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.innerRCERenderedIn === TABLE_TYPE &&
+      prevProps.editing === false &&
+      prevProps.editing !== this.props.editing
+    ) {
+      this.handleAtomicPluginsBorders(true);
+    }
+  }
+
+  getPlugins = () => {
+    const { config, innerRCERenderedIn, plugins } = this.props;
+    let pluginsList;
+    if (config[innerRCERenderedIn].innerRCEPlugins) {
+      pluginsList = config[innerRCERenderedIn].innerRCEPlugins;
+    } else {
+      pluginsList = plugins;
+    }
+    const innerRCEPlugins = pluginsList.filter(plugin =>
+      SupportedTablePlugins.includes(plugin.functionName)
+    );
+    return innerRCEPlugins;
+  };
 
   cleanConfig = config => {
     let clearConfig = config;
@@ -41,44 +100,22 @@ class InnerRCE extends Component {
     return config;
   };
 
-  onFocus = e => {
-    e.stopPropagation();
-    this.props.setEditorToolbars(this.ref);
-    this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
-  };
-
-  onClickOutside = e => {
-    if (
-      this.state.showToolbars &&
-      this.editorWrapper &&
-      e.target &&
-      !e.target.closest('[data-id=rich-content-editor-modal]') &&
-      !this.editorWrapper.contains(e.target)
-    ) {
-      this.setState({ showToolbars: false });
-    }
-  };
-
-  handleAtomicPluginsBorders = () => {
-    const { editing = true } = this.props;
-    const { showToolbars } = this.state;
-    const hideBorder = !showToolbars || !editing;
-    if (this.editorWrapper) {
-      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
-      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
-      atomicBlocks.forEach(block => {
-        const blockDataFocus = block.getAttribute('data-focus');
-        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
-        block.style.boxShadow = hideBorder ? 'none' : '';
-      });
-    }
+  onChange = editorState => {
+    this.props.onChange(editorState);
+    this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
   getToolbars = () => {
     const { MobileToolbar, TextToolbar } = this.ref.getToolbars();
     return { MobileToolbar, TextToolbar };
   };
+
+  getToolbarProps = type => {
+    const { buttons, context, pubsub } = this.ref.getToolbarProps(type);
+    return { buttons, context, pubsub };
+  };
+
+  selectAllContent = forceSelection => selectAllContent(this.props.editorState, forceSelection);
 
   focus = () => this.ref.focus();
 
@@ -90,18 +127,50 @@ class InnerRCE extends Component {
     const { onBackspaceAtBeginningOfContent } = this.props;
 
     if (onBackspaceAtBeginningOfContent) {
-      const selection = editorState.getSelection();
-      const startKey = selection.getStartKey();
       const contentState = editorState.getCurrentContent();
-      const isCollapsed = selection.isCollapsed();
-      const firstBlock = contentState.getBlocksAsArray()[0];
-      const isFirstBlock = firstBlock.getKey() === startKey;
-      const isBeginingOfBlock = selection.getAnchorOffset() === 0;
-      const isUnstyledBlock = firstBlock.getType() === 'unstyled';
+      const isUnstyledBlock = contentState.getBlocksAsArray()[0].getType() === 'unstyled';
 
-      if (isCollapsed && isFirstBlock && isBeginingOfBlock && isUnstyledBlock) {
+      if (isCursorAtStartOfContent(editorState) && isUnstyledBlock) {
         onBackspaceAtBeginningOfContent();
       }
+    }
+  };
+
+  onFocus = e => {
+    e.stopPropagation();
+    this.ref && this.props.setEditorToolbars(this.ref);
+    this.props.setInPluginEditingMode(true);
+    if (!this.state.showToolbars) {
+      this.setState({ showToolbars: true });
+    }
+  };
+
+  onClickOutside = e => {
+    if (
+      this.state.showToolbars &&
+      this.editorWrapper &&
+      e.target &&
+      !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !e.target.closest('[class=ReactModalPortal]') &&
+      !this.editorWrapper.contains(e.target) &&
+      !e.target.closest('[data-hook=table-plugin-cell]')
+    ) {
+      this.setState({ showToolbars: false });
+    }
+  };
+
+  handleAtomicPluginsBorders = enterEditing => {
+    const { editing = true } = this.props;
+    const { showToolbars } = this.state;
+    const hideBorder = !showToolbars || !editing;
+    if (this.editorWrapper) {
+      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
+      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
+      atomicBlocks.forEach(block => {
+        const blockDataFocus = enterEditing ? 'true' : block.getAttribute('data-focus');
+        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
+        block.style.boxShadow = hideBorder ? 'none' : '';
+      });
     }
   };
 
@@ -109,40 +178,53 @@ class InnerRCE extends Component {
     const {
       theme,
       isMobile,
-      direction,
-      additionalProps,
+      additionalProps = {},
       readOnly,
-      editorState,
-      onChange,
+      direction,
       toolbarsToIgnore = [],
+      editorState,
       editing = true,
+      innerRCERenderedIn,
+      tablePluginMenu,
       ...rest
     } = this.props;
     const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
+    const renderedInTable = innerRCERenderedIn === TABLE_TYPE;
+    if (renderedInTable && isMobile) {
+      toolbarsToIgnore.push('SideToolbar');
+    }
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
         <div
           data-id="inner-rce"
           onFocus={this.onFocus}
-          className={classNames(styles.editor, theme.editor, 'inner-rce')}
+          className={classNames(
+            styles.editor,
+            theme.editor,
+            renderedInTable && styles.renderedInTable,
+            renderedInTable && draftDefaultStyles.renderedInTable,
+            'inner-rce'
+          )}
           ref={this.setEditorWrapper}
         >
           <RichContentEditor
             {...rest} // {...rest} need to be before editorState, onChange, plugins
             ref={this.setRef}
             editorState={editorState}
-            onChange={onChange}
+            onChange={this.onChange}
             plugins={this.plugins}
             config={this.config}
             isMobile={isMobile}
             toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
             showToolbars={editing && showToolbars}
             isInnerRCE
+            innerRCERenderedIn={innerRCERenderedIn}
             editorKey="inner-rce"
             readOnly={readOnly}
             onBackspace={this.onBackspaceAtBeginningOfContent}
             direction={direction}
+            tablePluginMenu={tablePluginMenu}
             {...additionalProps}
           />
         </div>
@@ -168,6 +250,7 @@ InnerRCE.propTypes = {
   direction: PropTypes.string,
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
+  tablePluginMenu: PropTypes.bool,
 };
 
 export default InnerRCE;

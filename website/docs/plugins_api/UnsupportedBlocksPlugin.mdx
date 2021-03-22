@@ -1,0 +1,65 @@
+---
+id: UnsupportedBlocksPlugin
+title: UnsupportedBlocks Plugin
+sidebar_label: UnsupportedBlocks Plugin
+---
+
+import { pluginUnsupportedBlocks } from 'wix-rich-content-plugin-unsupported-blocks';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
+import { RicosEditor } from 'ricos-editor';
+const content = {
+    blocks: [
+    {
+      key: "4qi73",
+      text: " ",
+      type: "atomic",
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: 0
+        }
+      ],
+      data: {}
+    },
+    
+  ],
+  entityMap: {
+    0: {
+      type: "an-unsupported-block-type",
+      mutability: "IMMUTABLE",
+      data: {
+        config: {
+          alignment: "center",
+          size: "small",
+          width: "fit-content"
+        }
+      }
+    }
+  },
+  VERSION: "8.15.0"
+}
+
+Unsupported Blocks plugin is used to display an alert message whenever plugin is not supported.
+It is designed for the mobile native app.
+
+<div className="card">
+  <RicosEditor
+    content={content}
+    plugins={[pluginUnsupportedBlocks()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { pluginUnsupportedBlocks } from 'wix-rich-content-plugin-unsupported-blocks';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
+import { RicosEditor } from 'ricos-editor';
+```

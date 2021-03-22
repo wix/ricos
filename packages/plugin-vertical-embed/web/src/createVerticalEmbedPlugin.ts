@@ -30,4 +30,6 @@ const createVerticalEmbedPlugin: CreatePluginFunction<VerticalEmbedPluginEditorC
   });
 };
 
+createVerticalEmbedPlugin.functionName = VERTICAL_EMBED_TYPE;
+
 export { createVerticalEmbedPlugin };

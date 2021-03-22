@@ -25,13 +25,20 @@ export default class BaseTextColor extends Component {
   }
 
   openPanel = () => {
-    const { isMobile, setKeepOpen } = this.props;
+    const { isMobile, setKeepOpen, config, pluginParams } = this.props;
     if (!isMobile) {
       setKeepOpen && setKeepOpen(true);
     }
-    const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
-    const panelLeft = left - PANEL_WIDTH / 2;
-    this.setState({ isPanelOpen: true, panelLeft, panelTop: bottom });
+
+    const settings = config[pluginParams.type];
+    let position = {};
+    if (settings.positionPicker) {
+      position = settings.positionPicker(this.buttonRef, PANEL_WIDTH);
+    } else {
+      const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
+      position = { left: left - PANEL_WIDTH / 2, top: bottom };
+    }
+    this.setState({ isPanelOpen: true, panelLeft: position.left, panelTop: position.top });
   };
 
   closePanel = editorState => {
@@ -90,6 +97,7 @@ export default class BaseTextColor extends Component {
             top: panelTop,
             left: panelLeft,
             marginTop: 15,
+            borderRadius: 2,
             width: 184,
           },
     };

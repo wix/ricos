@@ -1,6 +1,6 @@
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
-import { ComponentData, RicosContent } from 'ricos-content';
+import { ComponentData, DraftContent } from 'ricos-content';
 import {
   DecorationMode,
   TranslationFunction,
@@ -25,8 +25,9 @@ export type RichContentTheme = {
 export type ClassNameStrategy = (
   componentData: ComponentData,
   theme: RichContentTheme,
-  styles: Styles,
-  isMobile: boolean
+  styles: Record<string, string>,
+  isMobile: boolean,
+  innerRCERenderedIn: string
 ) => string;
 
 export type ContainerClassNameStrategy = (theme: RichContentTheme) => string;
@@ -92,6 +93,8 @@ export interface EditorContextType extends CommonContextType {
   innerModal: InnerModalType;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderInnerRCE: (params: any) => JSX.Element;
+  innerRCERenderedIn?: string;
+  disableKeyboardEvents?: (shouldEnable: boolean) => void;
 }
 
 export interface ViewerContextType extends CommonContextType {
@@ -99,6 +102,14 @@ export interface ViewerContextType extends CommonContextType {
   disabled?: boolean;
   seoMode?: SEOSettings;
   disableRightClick?: boolean;
-  contentState?: RicosContent;
+  contentState?: DraftContent;
   textAlignment?: 'left' | 'right';
 }
+
+export type Experiment = {
+  value: string;
+  enabled: boolean;
+  namespace: string;
+};
+
+export type AvailableExperiments = Record<string, Experiment>;

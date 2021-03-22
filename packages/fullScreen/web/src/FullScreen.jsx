@@ -20,8 +20,8 @@ Fullscreen.propTypes = {
   isMobile: PropTypes.bool,
   index: PropTypes.number,
   topMargin: PropTypes.object,
-  backgroundColor: PropTypes.object,
-  foregroundColor: PropTypes.object,
+  backgroundColor: PropTypes.string,
+  foregroundColor: PropTypes.string,
   onClose: PropTypes.func,
   target: PropTypes.elementType,
 };

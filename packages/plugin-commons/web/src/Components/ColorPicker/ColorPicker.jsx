@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -58,8 +59,7 @@ class ColorPicker extends PureComponent {
     this.toggleCustomColorPicker();
   }
 
-  onCustomColorCancel(color) {
-    this.setColor(color);
+  onCustomColorCancel() {
     this.toggleCustomColorPicker();
   }
 
@@ -160,7 +160,7 @@ class ColorPicker extends PureComponent {
     } = this;
     const { t, isMobile, theme, children } = this.props;
     return (
-      <div className={styles.colorPicker}>
+      <div className={styles.colorPicker} tabIndex={0}>
         {this.state.isCustomColorPickerOpened
           ? this.props.onCustomPickerToggle({
               color: this.state.color,

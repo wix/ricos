@@ -26,6 +26,7 @@ const createEditorToolbars = ({
   context,
   pluginButtonProps,
   isInnerRCE,
+  tablePluginMenu,
 }: {
   buttons: {
     pluginButtons: PluginButton[];
@@ -36,6 +37,7 @@ const createEditorToolbars = ({
   context: EditorContextType;
   pluginButtonProps: ToolbarButtonProps[];
   isInnerRCE?: boolean;
+  tablePluginMenu?: boolean;
 }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
@@ -57,6 +59,7 @@ const createEditorToolbars = ({
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
+    tablePluginMenu,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
@@ -65,6 +68,13 @@ const createEditorToolbars = ({
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
+  if (tablePluginMenu) {
+    const sideToolbarSettings = customSettings.find(setting => setting.name === TOOLBARS.SIDE);
+    const pluginMenuSettings = { tablePluginMenu, horizontalMenuLayout: true };
+    !sideToolbarSettings
+      ? customSettings.push({ name: TOOLBARS.SIDE, addPluginMenuConfig: pluginMenuSettings })
+      : (sideToolbarSettings.addPluginMenuConfig = pluginMenuSettings);
+  }
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toolbars: any = {};

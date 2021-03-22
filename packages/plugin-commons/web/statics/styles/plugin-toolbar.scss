@@ -15,6 +15,10 @@
   max-width: 100%;
   transition: transform 0.15s cubic-bezier(0.3, 1.2, 0.2, 1);
   direction: ltr;
+
+  &.overflowToolbar {
+    max-width: unset;
+  }
 }
 
 .pluginToolbar_buttons {

@@ -1,19 +1,19 @@
 {
   "name": "wix-rich-content-plugin-button",
-  "version": "8.10.1",
+  "version": "8.27.4",
   "author": {
     "name": "Bashar Qaddumi",
     "email": "bqaddumi@asaltech.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wix-incubator/rich-content.git"
+    "url": "git+https://github.com/wix/ricos.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wix-incubator/rich-content/issues"
+    "url": "https://github.com/wix/ricos/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/plugin-button",
+  "homepage": "https://github.com/wix/ricos/tree/master/packages/plugin-button",
   "files": [
     "dist",
     "libs",
@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "react-custom-scrollbars": "^4.2.1",
-    "wix-rich-content-common": "8.10.1",
-    "wix-rich-content-editor-common": "8.10.1",
-    "wix-rich-content-plugin-commons": "8.10.1"
+    "wix-rich-content-common": "8.27.4",
+    "wix-rich-content-editor-common": "8.27.4",
+    "wix-rich-content-plugin-commons": "8.27.4"
   },
   "unpkg": true,
   "publishConfig": {

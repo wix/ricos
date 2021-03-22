@@ -5,8 +5,10 @@ import {
   rawWithAnchorsInText,
   dynamicStyles,
   rawWithAnchorsInImage,
+  rawWithOldSoundCloudVersion,
 } from './TestData/conversion-content-state';
 import accordionRawData from './TestData/accordion-raw-data.json';
+import { VIDEO_TYPE } from 'ricos-content';
 import { cloneDeep } from 'lodash';
 
 describe('ContentState conversion', () => {
@@ -39,5 +41,12 @@ describe('ContentState conversion', () => {
     // eslint-disable-next-line no-unused-vars
     const { VERSION: __, ...rawData } = convertToRaw(editorState.getCurrentContent());
     expect(rawData).toEqual(raw);
+  });
+
+  it('should convert old version of sound-cloud plugin correctly', () => {
+    const editorState = EditorState.createWithContent(convertFromRaw(rawWithOldSoundCloudVersion));
+    const newRaw = convertToRaw(editorState.getCurrentContent());
+    expect(newRaw.entityMap['0'].type).toEqual(VIDEO_TYPE);
+    expect(newRaw.entityMap['0'].data.type).toEqual('soundCloud');
   });
 });

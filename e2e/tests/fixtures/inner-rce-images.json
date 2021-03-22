@@ -1,0 +1,286 @@
+{
+  "blocks": [
+    {
+      "key": "193ad",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "nrc3",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "a2c79",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "4kvk0",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-rich-content-plugin-table",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "n48tdy158",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "1bv5bci83",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "l2ryyxkj8",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "eb0feh7ml",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "5o4p6",
+                        "text": " ",
+                        "type": "atomic",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [
+                          {
+                            "offset": 0,
+                            "length": 1,
+                            "key": 0
+                          }
+                        ],
+                        "data": {}
+                      },
+                      {
+                        "key": "3shqt",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "type": "wix-draft-plugin-image",
+                        "mutability": "IMMUTABLE",
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "size": "inline",
+                            "showTitle": true,
+                            "showDescription": true,
+                            "disableExpand": false,
+                            "width": 156
+                          },
+                          "src": {
+                            "id": "bdf64d603f3a5a822d8197f97e4a1dd0",
+                            "original_file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
+                            "file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
+                            "width": 1920,
+                            "height": 1280
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "colsWidth": [
+            10,
+            10
+          ],
+          "rowsHeight": [
+            47,
+            47
+          ],
+          "colsMinWidth": [
+            120,
+            120
+          ]
+        },
+        "type": "wix-rich-content-plugin-table"
+      }
+    },
+    "1": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "first_expanded",
+          "direction": "ltr",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": "fswiqtrr4",
+            "title": {
+              "blocks": [
+                {
+                  "key": "6ag0b",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "b8l94",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "6rhv8",
+                  "text": " ",
+                  "type": "atomic",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [
+                    {
+                      "offset": 0,
+                      "length": 1,
+                      "key": 0
+                    }
+                  ],
+                  "data": {}
+                },
+                {
+                  "key": "4kqae",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "type": "wix-draft-plugin-image",
+                  "mutability": "IMMUTABLE",
+                  "data": {
+                    "config": {
+                      "alignment": "center",
+                      "size": "inline",
+                      "showTitle": true,
+                      "showDescription": true,
+                      "disableExpand": false,
+                      "width": 301
+                    },
+                    "src": {
+                      "id": "2d6bee6fe2a726f213599508722bcb27",
+                      "original_file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+                      "file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+                      "width": 3945,
+                      "height": 5260
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "VERSION": "8.22.0"
+}

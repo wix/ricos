@@ -20,6 +20,15 @@
   pointer-events: initial;
   fill: $primary-text-color;
 
+  &.sideToolbar_smallPlusIcon {
+    height: 18px;
+    width: 18px;
+  }
+
+  &.sideToolbar_popupOpen {
+    transform: rotate(45deg);
+  }
+
   &:hover {
     color: $action-color;
     fill: $action-color;
@@ -39,4 +48,11 @@
   box-shadow: 0 4px 8px 0 rgba(123, 99, 99, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   overflow: hidden;
+}
+
+.plusIcon {
+  color: $action-color;
+  &:hover {
+    opacity: 0.7;
+  }
 }

@@ -1,6 +1,6 @@
-import { RicosContent } from '../types';
+import { DraftContent } from '../types';
 
-export const isContentStateEmpty = (contentState: RicosContent): boolean => {
+export const isContentStateEmpty = (contentState: DraftContent): boolean => {
   const { blocks } = contentState;
   if (blocks.length === 0) {
     return true;

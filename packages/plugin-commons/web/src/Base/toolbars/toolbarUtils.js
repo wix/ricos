@@ -48,6 +48,7 @@ export const getRelativePositionStyle = ({
   toolbarNode,
   languageDir,
   isMobile,
+  renderedInTable,
 }) => {
   const { x, y } = offset;
   const updatedOffsetHeight = offsetHeight || toolbarNode.offsetHeight;
@@ -56,11 +57,20 @@ export const getRelativePositionStyle = ({
   const offsetParentRect = toolbarNode.offsetParent.getBoundingClientRect();
   const offsetParentTop = offsetParentRect.top;
   const offsetParentLeft = offsetParentRect.left;
-  const top = boundingRect.top - toolbarHeight - TOOLBAR_OFFSETS.top - offsetParentTop + y;
+  let top = boundingRect.top - toolbarHeight - TOOLBAR_OFFSETS.top - offsetParentTop + y;
   const tmpLeft =
     boundingRect.left + boundingRect.width / 2 - offsetParentLeft - toolbarWidth / 2 + x;
   const maxLeft = offsetParentRect.right - toolbarWidth - TOOLBAR_OFFSETS.left;
-  const left = calculateLeftOffset(tmpLeft, maxLeft, languageDir, isMobile);
+  let left = calculateLeftOffset(tmpLeft, maxLeft, languageDir, isMobile);
+  if (renderedInTable) {
+    const outerEditor = document && document.querySelector('[data-id=rce]');
+    const outerEditorRect = outerEditor.getBoundingClientRect();
+    if (left + offsetParentLeft - outerEditorRect.left + toolbarWidth > outerEditor.clientWidth) {
+      const maxLeftByWindowWidth = outerEditor.clientWidth - toolbarWidth;
+      left = -1 * offsetParentLeft + maxLeftByWindowWidth + outerEditorRect.left;
+    }
+    top += 5;
+  }
   return {
     position: {
       '--offset-top': `${top}px`,
