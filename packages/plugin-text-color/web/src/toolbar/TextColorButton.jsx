@@ -21,6 +21,7 @@ export default class TextColorButton extends Component {
       type: TEXT_COLOR_TYPE,
       predicate: textForegroundPredicate,
       defaultColor: DEFAULT_COLOR,
+      colorPickerHeaderKey: 'Color_Picker_TextColorButton_Header',
     };
     return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }
