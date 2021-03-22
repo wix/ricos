@@ -43,8 +43,10 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     const convert = converters[blockType];
     convert(newData, blockType);
   }
-  const toJSON = data =>
-    TO_RICOS_DATA[blockType]?.toJSON(TO_RICOS_DATA[blockType]?.fromJSON(data)) || data;
+  const toJSON = data => {
+    const pluginDataMethods = TO_RICOS_DATA[blockType];
+    return pluginDataMethods?.toJSON(pluginDataMethods?.fromJSON(data)) || data;
+  };
   return toJSON(newData);
 };
 
