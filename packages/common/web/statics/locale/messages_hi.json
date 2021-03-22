@@ -186,6 +186,7 @@
 	"LinkTo_Modal_Header": "आप किससे लिंक करना चाहते हैं?",
 	"HtmlEditPanel_HttpsError": "सुनिश्चित करें कि URL HTTPS से शुरू होता है",
 	"Poll_Presets_Popup_Subtitle": "आप बाद में रूप-रंग अनुकूलित कर सकते हैं।",
+	"BlockToolbar_Section_Advanced": "उन्नत ",
 	"SettingsPanelFooter_Done": "संपन्न",
 	"GallerySettings_Image_Settings": "संपादित करें",
 	"GallerySettings_LayoutControlSection_Row": "पंक्ति की ऊंचाई",
