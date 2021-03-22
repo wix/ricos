@@ -7,17 +7,16 @@ import { GalleryPluginEditorConfig } from '../types';
 const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
-  disableRightClick,
+  disableDownload,
   disableExpand,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
-  disableRightClick: boolean | undefined;
-  disableExpand: boolean | undefined;
+  disableDownload?: boolean;
+  disableExpand?: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
-  const pluginData =
-    disableRightClick !== undefined ? { ...DEFAULTS, disableRightClick } : DEFAULTS;
+  const pluginData = disableDownload !== undefined ? { ...DEFAULTS, disableDownload } : DEFAULTS;
   const componentData = disableExpand !== undefined ? { ...pluginData, disableExpand } : pluginData;
 
   return [

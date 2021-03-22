@@ -154,11 +154,13 @@ AdvancedSettingsSection.propTypes = {
 export class GallerySettingsModal extends Component {
   constructor(props) {
     super(props);
-    const { componentData } = this.props;
+    const {
+      componentData: { disableExpand, disableDownload },
+    } = this.props;
     this.state = {
       activeTab: this.props.activeTab,
-      isExpandEnabled: !componentData.disableExpand,
-      isRightClickEnabled: !componentData.disableRightClick,
+      isExpandEnabled: !disableExpand,
+      isDownloadEnabled: !disableDownload,
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.switchTab = this.switchTab.bind(this);
@@ -214,7 +216,7 @@ export class GallerySettingsModal extends Component {
     const componentData = pubsub.get('componentData');
     const newComponentData = {
       ...componentData,
-      disableRightClick: !this.state.isRightClickEnabled,
+      disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,
     };
 
@@ -246,7 +248,7 @@ export class GallerySettingsModal extends Component {
       labelKey: 'GalleryPlugin_Settings_ImagesOpenInExpandMode_Label',
     },
     {
-      toggleKey: 'isRightClickEnabled',
+      toggleKey: 'isDownloadEnabled',
       labelKey: 'GalleryPlugin_Settings_ImagesCanBeDownloaded_Label',
       tooltipText: this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip'),
     },

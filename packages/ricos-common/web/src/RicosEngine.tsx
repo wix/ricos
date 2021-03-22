@@ -105,9 +105,9 @@ export class RicosEngine extends Component<EngineProps> {
       onModalOpen,
       onModalClose,
     } = modalSettings;
-    const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
+    const { pauseMedia, disableDownload, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
-
+    const disableRightClick = mediaSettings.disableRightClick || disableDownload;
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
     const ricosPropsToMerge: RichContentProps = {
@@ -117,7 +117,7 @@ export class RicosEngine extends Component<EngineProps> {
         !isMobile && (textToolbarContainer || useStaticTextToolbar) ? 'static' : 'inline',
       config: {
         getToolbarSettings,
-        uiSettings: { disableRightClick, linkPanel: linkPanelSettings },
+        uiSettings: { disableRightClick, disableDownload, linkPanel: linkPanelSettings },
       },
       initialState: previewContent || content,
       placeholder,

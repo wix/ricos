@@ -2,15 +2,14 @@ import { Version } from '../../version';
 
 export default (componentData, normalizerConfig, stateVersion: string) => {
   const shouldNormalizeRightClick =
-    componentData.disableRightClick === undefined &&
-    normalizerConfig.disableRightClick !== undefined;
+    componentData.disableDownload === undefined && normalizerConfig.disableDownload !== undefined;
 
   const shouldNormalizeExpand =
     componentData.disableExpand === undefined &&
     normalizerConfig.disableGalleryExpand !== undefined;
 
   if (shouldNormalizeRightClick) {
-    componentData.disableRightClick = normalizerConfig.disableRightClick;
+    componentData.disableDownload = normalizerConfig.disableDownload;
   }
 
   if (shouldNormalizeExpand) {

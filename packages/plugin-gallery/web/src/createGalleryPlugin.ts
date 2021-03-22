@@ -30,10 +30,10 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
   };
 
   const pluginData =
-    uiSettings?.disableRightClick !== undefined
+    uiSettings?.disableDownload !== undefined
       ? {
           ...defaults,
-          disableRightClick: uiSettings?.disableRightClick,
+          disableDownload: uiSettings?.disableDownload,
         }
       : defaults;
 
