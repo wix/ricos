@@ -1,10 +1,12 @@
-import { findIndex } from 'lodash/fp';
-import { RichContent, Node } from 'ricos-schema';
+import { find, map, findIndex, has, isString, isArray, isObject } from 'lodash/fp';
+import { RichContent, TextData, Node } from 'ricos-schema';
 
 const fun = (data: unknown) => ({
   fold: fn => fn(data),
   map: fn => fun(fn(data)),
 });
+
+const combine = (f, g) => data => f(g(data));
 
 const append = (node: Node) => (content: RichContent) => ({
   ...content,
@@ -54,6 +56,24 @@ export function addNode({
     ],
     [() => true, () => contentFn.fold(append(node))],
   ])
-    .map(cases => cases.find(([predicate]) => predicate()))
+    .map(find(([predicate]) => predicate()))
+    .fold(([, resolve]) => resolve());
+}
+
+const isTextData = text => isObject(text) && has('text', text) && has('decorations', text);
+
+const toArray = t => [t];
+
+const toTextData = text => ({ text, decorations: [] });
+
+export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
+  const textFn = fun(text);
+  return fun([
+    [() => textFn.fold(isString), () => textFn.fold(combine(toArray, toTextData))],
+    [() => textFn.fold(isTextData), () => textFn.fold(toArray)],
+    [() => textFn.fold(isArray), () => textFn.fold(map(t => (isString(t) ? toTextData(t) : t)))],
+    [() => true, () => []],
+  ])
+    .map(find(([predicate]) => predicate()))
     .fold(([, resolve]) => resolve());
 }

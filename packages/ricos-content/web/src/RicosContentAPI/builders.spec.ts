@@ -1,5 +1,5 @@
-import { Node_Type } from 'ricos-schema';
-import { addNode } from './builders';
+import { Node_Type, TextData } from 'ricos-schema';
+import { addNode, toTextDataArray } from './builder-utils';
 
 describe('addNode util', () => {
   it('should append node, if no index/key provided', () => {
@@ -66,6 +66,34 @@ describe('addNode util', () => {
       ],
     };
     const actual = addNode({ node, content, before: 'foo' });
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('toTextDataArray util', () => {
+  it('should return [] for invalid input', () => {
+    const expected = [];
+    const actual = toTextDataArray((123 as unknown) as TextData);
+    expect(actual).toEqual(expected);
+  });
+
+  it('should convert string to TextData[]', () => {
+    const expected = [{ text: 'test', decorations: [] }];
+    const actual = toTextDataArray('test');
+    expect(actual).toEqual(expected);
+  });
+  it('should convert TextData to TextData[]', () => {
+    const expected = [{ text: 'test', decorations: [] }];
+    const actual = toTextDataArray({ text: 'test', decorations: [] });
+    expect(actual).toEqual(expected);
+  });
+  it('should convert mixed array to TextData[]', () => {
+    const expected = [
+      { text: 'test', decorations: [] },
+      { text: 'foo', decorations: [] },
+      { text: 'bar', decorations: [] },
+    ];
+    const actual = toTextDataArray(['test', { text: 'foo', decorations: [] }, 'bar']);
     expect(actual).toEqual(expected);
   });
 });
