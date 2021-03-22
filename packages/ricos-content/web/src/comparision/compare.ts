@@ -2,7 +2,7 @@
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any */
 
 import { transform, isEqualWith, isEqual, isObject, omit, pick } from 'lodash';
-import omitDeep from 'omit-deep-lodash';
+import omitDeep from 'omit-deep';
 
 const IGNORED_KEYS = ['updatedDate', 'tempData', 'isCustomVideo'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
