@@ -19,7 +19,7 @@
   .mobile & {
     font-size: 16px;
     width: 50px;
-    color: $primary-text-color;
+    color: $fallbackColor;
     background: transparent;
     border: none;
   }
@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   margin: 12px;
-  &.mobile  {
+  &.mobile {
     justify-content: space-between;
     margin: 5px auto;
   }
