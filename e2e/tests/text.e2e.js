@@ -330,6 +330,8 @@ describe('text color mobile', () => {
   });
   beforeEach(() => cy.switchToMobile());
 
+  after(() => cy.eyesClose());
+
   it('allow to change text color on mobile', function() {
     changeTextColor(this.test.title);
   });
