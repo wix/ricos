@@ -8,8 +8,6 @@ import { getTextNodes } from './getTextNodes';
 import { getEntity, getTextStyle } from './getRicosEntityData';
 import { createParagraphNode, initializeMetadata } from '../../nodeUtils';
 
-console.log({ HEADING: Node_Type.HEADING });
-
 export const ensureRicosContent = (content: RichContent | DraftContent) =>
   'blocks' in content ? fromDraft(content) : content;
 
