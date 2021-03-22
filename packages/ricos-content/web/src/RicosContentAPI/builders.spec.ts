@@ -1,0 +1,71 @@
+import { Node_Type } from 'ricos-schema';
+import { addNode } from './builders';
+
+describe('addNode util', () => {
+  it('should append node, if no index/key provided', () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({ key: 'foo', nodes: [], type: Node_Type.PARAGRAPH });
+    const expected = { nodes: [...content.nodes, node] };
+    const actual = addNode({ node, content });
+    expect(actual).toEqual(expected);
+  });
+  it('should insert node at index, if index provided', () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({ key: 'new', nodes: [], type: Node_Type.DIVIDER });
+    const expected = {
+      nodes: [
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'new', nodes: [], type: Node_Type.DIVIDER },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    };
+    const actual = addNode({ node, content, index: 1 });
+    expect(actual).toEqual(expected);
+  });
+  it('should insert node after a node by key, if after key provided', () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({ key: 'new', nodes: [], type: Node_Type.DIVIDER });
+    const expected = {
+      nodes: [
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'new', nodes: [], type: Node_Type.DIVIDER },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    };
+    const actual = addNode({ node, content, after: 'foo' });
+    expect(actual).toEqual(expected);
+  });
+  it('should insert node before a node by key, if before key provided', () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({ key: 'new', nodes: [], type: Node_Type.DIVIDER });
+    const expected = {
+      nodes: [
+        { key: 'new', nodes: [], type: Node_Type.DIVIDER },
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    };
+    const actual = addNode({ node, content, before: 'foo' });
+    expect(actual).toEqual(expected);
+  });
+});

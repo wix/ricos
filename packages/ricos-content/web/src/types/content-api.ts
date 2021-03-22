@@ -5,53 +5,98 @@ import {
   Node_Type,
   ParagraphData,
   TextData,
-  Decoration,
 } from 'ricos-schema';
 
-type AddPluginMethod<T> = {
-  [P in keyof T]: (data: Partial<T[P]>, content?: RichContent) => RichContent;
+type AddMethod<T> = {
+  [P in keyof T]: ({
+    data,
+    index,
+    content,
+  }: {
+    data?: Partial<T[P]>;
+    index?: number;
+    content?: RichContent;
+  }) => RichContent;
 };
 
 type AddTextMethod<T> = {
-  [P in keyof T]: (
-    text: string | TextData,
-    data: Partial<T[P]>,
-    content?: RichContent
-  ) => RichContent;
+  [P in keyof T]: ({
+    text,
+    data,
+    index,
+    content,
+  }: {
+    text?: string | TextData | (string | TextData)[];
+    data?: Partial<T[P]>;
+    index?: number;
+    content?: RichContent;
+  }) => RichContent;
 };
 
-type ToggleDecorationMethod = {
-  toggleDecoration: (
-    key: string,
-    decoratedText: string,
-    decorations: Decoration[],
-    content?: RichContent
-  ) => RichContent;
+type SetMethod<T> = {
+  [P in keyof T]: ({
+    data,
+    key,
+    content,
+  }: {
+    data: T;
+    key: string;
+    content?: RichContent;
+  }) => RichContent;
 };
 
-type Getter<T> = {
-  [P in keyof T]: (content: RichContent) => T[P][];
+type SetTextMethod<T> = {
+  [P in keyof T]: ({
+    text,
+    data,
+    container,
+    key,
+    content,
+  }: {
+    text?: string | TextData | (string | TextData)[];
+    data?: T;
+    container?: T;
+    key: string;
+    content?: RichContent;
+  }) => RichContent;
 };
 
-type AddPluginDataMap = {
+type GetMethod<T> = {
+  [P in keyof T]: (content: RichContent) => Record<string, T[P]>;
+};
+
+type SetMap = {
+  setImage: ImageData;
+  setDivider: DividerData;
+  updateImage: ImageData;
+  updateDivider: DividerData;
+};
+
+type SetTextMap = {
+  setParagraph: ParagraphData;
+  updateParagraph: ParagraphData;
+};
+
+type AddMap = {
   addImage: ImageData;
   addDivider: DividerData;
 };
 
-type AddTextDataMap = {
+type AddTextMap = {
   addParagraph: ParagraphData;
 };
 
-type GetPluginDataMap = {
+type GetMap = {
   getImages: ImageData;
   getDividers: DividerData;
   getParagraphs: ParagraphData;
 };
 
-export type ContentBuilder = AddPluginMethod<AddPluginDataMap> &
-  AddTextMethod<AddTextDataMap> &
-  ToggleDecorationMethod;
-export type ContentExtractor = Getter<GetPluginDataMap>;
+export type ContentBuilder = AddMethod<AddMap> &
+  AddTextMethod<AddTextMap> &
+  SetMethod<SetMap> &
+  SetTextMethod<SetTextMap>;
+export type ContentExtractor = GetMethod<GetMap>;
 
 export const dataByNodeType = (type: Node_Type, data: unknown) =>
   ({
