@@ -15,11 +15,12 @@ const getNameWithoutType = fileName => {
   const s = fileName.split('.');
   return s.slice(0, s.length - 1).join('.');
 };
-const filesWithPreview = ['jpg', 'png', 'pdf', 'jpeg', 'gif'];
+const filesWithPreview = ['jpg', 'png', 'pdf', 'jpeg', 'gif', 'doc', 'docx'];
 class FileUploadViewer extends PureComponent {
   state = {
     resolvedFileUrl: null,
     resolvingUrl: false,
+    currentWidth: 0,
   };
 
   constructor(props) {
@@ -27,7 +28,26 @@ class FileUploadViewer extends PureComponent {
     const { componentData } = props;
     validate(componentData, pluginFileUploadSchema);
     this.iframeRef = React.createRef();
+    this.fileUploadViewerRef = React.createRef();
   }
+
+  breakPoints = { firstBreak: 321, secondBreak: 100 };
+
+  updateDimensions = currentWidth => {
+    console.log('width', currentWidth, this.breakPoints[currentWidth]);
+
+    if (this.breakPoints.firstBreak >= currentWidth) {
+      console.log();
+      this.setState({ currentWidth });
+    }
+  };
+
+  elResizeListener = new ResizeObserver(entries => {
+    entries.forEach(entry => {
+      const cr = entry.contentRect;
+      this.updateDimensions(Math.round(cr.width));
+    });
+  });
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
@@ -36,6 +56,11 @@ class FileUploadViewer extends PureComponent {
     if (!nextProps.isLoading && this.props.isLoading) {
       this.switchReadyIcon();
     }
+  }
+  componentDidMount() {
+    console.log(this.state.currentWidth > 320);
+    this.setState({ currentWidth: this.fileUploadViewerRef.current.offsetWidth });
+    this.elResizeListener.observe(this.fileUploadViewerRef.current);
   }
 
   switchReadyIcon = () => {
@@ -141,13 +166,14 @@ class FileUploadViewer extends PureComponent {
           </a>
         </div>
         <div>
+          {this.state.currentWidth}
           <a
             href={downloadUrl}
             target={downloadTarget}
             //  className={this.styles.file_download_link}
           >
             {this.renderIcon(Icon)}
-            {!isMobile && this.renderIcon()}
+            {!isMobile && this.state.currentWidth > 320 && this.renderIcon()}
           </a>
         </div>
       </>
@@ -166,7 +192,7 @@ class FileUploadViewer extends PureComponent {
     let previewUrl;
     fileUrl =
       // eslint-disable-next-line max-len
-      'https://download-files.wixmp.com/ugd/f0f74f_2ff83a1acde842db9da23a83ef586a20.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTYxNTQ2MDkwNiwiZXhwIjoxNjE1NDk2OTE2LCJqdGkiOiI4ZTg2MGU0YmE2NjQiLCJvYmoiOltbeyJwYXRoIjoiL3VnZC9mMGY3NGZfMmZmODNhMWFjZGU4NDJkYjlkYTIzYTgzZWY1ODZhMjAucGRmIn1dXX0.S8fK3XsX_mj3gQkM29K5YAIY9Lj3Dq33SNagXUzdCFg&filename=sample-PDF.pdf';
+      'https://download-files.wixmp.com/ugd/f0f74f_fe8883de601d4b7f98317b719f18720c.docx?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTYxNjQwMjQzMiwiZXhwIjoxNjE2NDM4NDQyLCJqdGkiOiJhZTZmNjMyMWJhNzAiLCJvYmoiOltbeyJwYXRoIjoiL3VnZC9mMGY3NGZfZmU4ODgzZGU2MDFkNGI3Zjk4MzE3YjcxOWYxODcyMGMuZG9jeCJ9XV19.L8ir_ttPflA20oOk1VziOKOFerugfzI0XeVeNNdhdpc&filename=%D7%97%D7%95%D7%96%D7%94+%D7%93%D7%99%D7%A8%D7%94+%D7%91%D7%99%D7%AA+%D7%90%D7%9C+8+%D7%AA%D7%90+2021-+3+%D7%A9%D7%95%D7%AA%D7%A4%D7%99%D7%9D.docx';
     const downloadUrl = fileUrl;
     if (filesWithPreview.includes(type)) {
       const previewIndexLimit = downloadUrl.indexOf('&filename');
@@ -227,7 +253,7 @@ class FileUploadViewer extends PureComponent {
       return null;
     }
 
-    return <iframe ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
+    // return <iframe ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
   }
 
   render() {
@@ -243,6 +269,7 @@ class FileUploadViewer extends PureComponent {
     return (
       <div
         className={style}
+        ref={this.fileUploadViewerRef}
         data-hook="fileUploadViewer"
         style={{ display: 'flex', alignItems: 'center' }}
       >
