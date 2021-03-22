@@ -132,28 +132,8 @@ class AnchorableElement extends PureComponent {
 
   render() {
     const { styles } = this;
-    const { dataHook, onClick, isSelected, blockPreview, block, t } = this.props;
     const { iconThumbnail, preview } = this.state;
-    const blockPreviewElements = blockPreview?.({
-      type: block.anchorType,
-      data: block.data,
-      text: block.text,
-    });
-    const thumbnailToRender = blockPreviewElements ? (
-      <div className={styles.AnchorableElement_thumbnail}>{blockPreviewElements.thumbnail}</div>
-    ) : (
-      <Thumbnail
-        iconThumbnail={iconThumbnail}
-        preview={preview}
-        alt={this.getContent()}
-        previewLoaded={this.previewLoaded}
-        theme={styles}
-      />
-    );
-    const typeToRender = blockPreviewElements
-      ? blockPreviewElements.type
-      : t(this.getDataToDisplayByField('type'));
-    const contentToRender = blockPreviewElements ? blockPreviewElements.content : this.getContent();
+    const { dataHook, onClick, isSelected, t } = this.props;
     return (
       <div
         data-hook={dataHook}
@@ -162,10 +142,18 @@ class AnchorableElement extends PureComponent {
         })}
         onClick={() => onClick({ defaultName: this.getContent() })}
       >
-        {thumbnailToRender}
+        <Thumbnail
+          iconThumbnail={iconThumbnail}
+          preview={preview}
+          alt={this.getContent()}
+          previewLoaded={this.previewLoaded}
+          theme={styles}
+        />
         <div className={styles.AnchorableElement_contentContainer}>
-          <div className={styles.AnchorableElement_contentType}>{typeToRender}</div>
-          <div className={styles.AnchorableElement_blockContent}>{contentToRender}</div>
+          <div className={styles.AnchorableElement_contentType}>
+            {t(this.getDataToDisplayByField('type'))}
+          </div>
+          <div className={styles.AnchorableElement_blockContent}>{this.getContent()}</div>
         </div>
       </div>
     );
@@ -178,7 +166,6 @@ class AnchorableElement extends PureComponent {
     block: PropTypes.object,
     theme: PropTypes.object,
     isSelected: PropTypes.bool,
-    blockPreview: PropTypes.func,
   };
 }
 

@@ -612,15 +612,6 @@ const config: RichContentEditorProps['config'] = {
     // },
     onClick: (event, url) => console.log('link clicked!', url),
     linkTypes: { anchor: true },
-    // linkTypes: {
-    //   anchor: {
-    //     blockPreview: ({ type, data, text }) => {
-    //       console.log({ type, data, text });
-    //       const blockPreview = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
-    //       return blockPreview;
-    //     },
-    //   },
-    // },
   },
   [CODE_BLOCK_TYPE]: {
     // toolbar: {

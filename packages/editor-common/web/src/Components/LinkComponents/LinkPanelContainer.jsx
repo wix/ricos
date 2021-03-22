@@ -142,7 +142,6 @@ class LinkPanelContainer extends PureComponent {
       tabIndex,
       linkPanelWithTitle,
       unchangedUrl,
-      linkTypes,
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
@@ -190,7 +189,6 @@ class LinkPanelContainer extends PureComponent {
       anchorPanelValues,
       isMobile,
       linkPanelWithTitle,
-      blockPreview: linkTypes?.anchor?.blockPreview,
     };
     return this.renderBasicLinkPanel ? (
       <BasicLinkPanel {...propsToPass} />
