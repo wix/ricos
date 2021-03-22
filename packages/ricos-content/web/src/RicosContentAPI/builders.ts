@@ -12,7 +12,7 @@ const append = (node: Node) => (content: RichContent) => ({
 });
 
 const inRange = (index?: number) => (content: RichContent) =>
-  index && index >= 0 && index < content.nodes.length;
+  typeof index === 'number' && index >= 0 && index < content.nodes.length;
 
 const keyExists = (nodeKey?: string) => (content: RichContent) =>
   content.nodes.some(({ key }) => key === nodeKey);
@@ -54,6 +54,6 @@ export function addNode({
     ],
     [() => true, () => contentFn.fold(append(node))],
   ])
-    .map(arr => arr.find(([predicate]) => predicate()))
+    .map(cases => cases.find(([predicate]) => predicate()))
     .fold(([, resolve]) => resolve());
 }
