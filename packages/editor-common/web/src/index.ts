@@ -1,6 +1,15 @@
 /* eslint-disable no-duplicate-imports */
 export * from './Icons';
 
+export {
+  EditorEventsContext,
+  EditorEventsProvider,
+  withEditorEvents,
+  WithEditorEventsProps,
+  EditorEvents,
+  withEditorContext,
+} from './EditorEventsContext';
+
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';

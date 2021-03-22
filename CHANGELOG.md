@@ -16,6 +16,7 @@
     Click to see more.
   </summary>
 
+<<<<<<< HEAD
 ### :bug: Bug Fix
 - `color-picker`
   - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
@@ -24,6 +25,8 @@
 - `editor-common`
   - [#2317](https://github.com/wix/ricos/pull/2317) deprecation of old `EditorEventsContext` through `index.ts` file
 
+=======
+>>>>>>> parent of ad068e935 ([editor-common] deprecate old EditorEventsContext (#2317))
 </details>
 <hr/>
 

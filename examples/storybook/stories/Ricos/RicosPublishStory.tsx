@@ -6,10 +6,7 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginPoll } from 'wix-rich-content-plugin-social-polls';
 import MobileDetect from 'mobile-detect';
 import ActionButton from '../Components/ActionButton';
-import {
-  withEditorContext,
-  EditorEventsProps,
-} from 'wix-rich-content-editor-common/libs/EditorEventsContext';
+import { withEditorContext, EditorEventsProps } from 'wix-rich-content-editor-common';
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 const plugins = [pluginImage(), pluginGallery(), pluginPoll()];
