@@ -117,7 +117,7 @@ export class RicosEngine extends Component<EngineProps> {
         !isMobile && (textToolbarContainer || useStaticTextToolbar) ? 'static' : 'inline',
       config: {
         getToolbarSettings,
-        uiSettings: { disableRightClick, linkPanel: linkPanelSettings },
+        uiSettings: { disableRightClick, disableDownload, linkPanel: linkPanelSettings },
       },
       initialState: previewContent || content,
       placeholder,
