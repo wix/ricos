@@ -808,5 +808,14 @@ describe('normalizeInitialState', () => {
       expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
       expect(actual.entityMap['1'].data.disableDownload).toBeFalsy();
     });
+
+    it('disableDownload should be true in gallery and false in image componentData', () => {
+      imageGalleryInitialState.entityMap['0'].data.disableDownload = false;
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeTruthy();
+    });
   });
 });

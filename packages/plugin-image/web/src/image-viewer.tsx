@@ -377,9 +377,9 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
 
   handleContextMenu = e => {
     const {
-      componentData: { disableDownload },
+      componentData: { disableDownload = false },
     } = this.props;
-    return !!disableDownload && e.preventDefault();
+    return disableDownload && e.preventDefault();
   };
 
   hasExpand = () => {
