@@ -14,7 +14,7 @@ import {
   setNode as set,
   updateNode as update,
 } from './builder-utils';
-import { dataByNodeType, ContentBuilderClass } from '../types';
+import { dataByNodeType, ContentBuilder as BaseContentBuilder } from '../types';
 
 type AddMethodParams<TData> = {
   data: TData;
@@ -38,7 +38,11 @@ type SetTextMethodParams<T> = SetMethodParams<T> & {
   text?: string | TextData | (string | TextData)[];
 };
 
-export const setupContentBuilder = (generateKey: () => string): ContentBuilderClass => {
+export interface ContentBuilder extends BaseContentBuilder {
+  new (): BaseContentBuilder;
+}
+
+export const setupContentBuilder = (generateKey: () => string): ContentBuilder => {
   function createNode(type: Node_Type, data: unknown): Node {
     return { key: generateKey(), type, ...dataByNodeType(type, data), nodes: [] };
   }
@@ -163,13 +167,7 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilderCl
   }
 
   class RicosContentBuilder {
-    content: RichContent;
-
-    removeNode!: (key: string) => RichContent;
-
-    constructor(content?: RichContent) {
-      this.content = content || { nodes: [] };
-    }
+    removeNode!: (key: string, content: RichContent) => RichContent;
   }
 
   [{ name: 'Paragraph', type: 'PARAGRAPH', dataT: ParagraphData } as const].forEach(
@@ -180,12 +178,13 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilderCl
         index,
         before,
         after,
+        content,
       }: AddTextMethodParams<typeof dataT>): RichContent {
         return addTextNode({
           text,
           type: (type as unknown) as Node_Type,
           data,
-          content: this.content,
+          content,
           index,
           before,
           after,
@@ -196,25 +195,27 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilderCl
         data,
         text,
         key,
+        content,
       }: SetTextMethodParams<typeof dataT>) {
         return updateTextNode({
           text,
           data,
           type: (type as unknown) as Node_Type,
           key,
-          content: this.content,
+          content,
         });
       };
 
       RicosContentBuilder.prototype[`set${name}`] = function({
         data,
         key,
+        content,
       }: SetTextMethodParams<typeof dataT>) {
         return setTextNode({
           data,
           type: (type as unknown) as Node_Type,
           key,
-          content: this.content,
+          content,
         });
       };
     }
@@ -229,11 +230,12 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilderCl
       index,
       before,
       after,
+      content,
     }: AddMethodParams<typeof dataT>): RichContent {
       return addNode({
         type: (type as unknown) as Node_Type,
         data,
-        content: this.content,
+        content,
         index,
         before,
         after,
@@ -243,21 +245,26 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilderCl
     RicosContentBuilder.prototype[`update${name}`] = function({
       data,
       key,
+      content,
     }: SetMethodParams<typeof dataT>) {
-      return updateNode({ data, type: (type as unknown) as Node_Type, key, content: this.content });
+      return updateNode({ data, type: (type as unknown) as Node_Type, key, content });
     };
 
     RicosContentBuilder.prototype[`set${name}`] = function({
       data,
       key,
+      content,
     }: SetMethodParams<typeof dataT>) {
-      return setNode({ data, type: (type as unknown) as Node_Type, key, content: this.content });
+      return setNode({ data, type: (type as unknown) as Node_Type, key, content });
     };
   });
 
-  RicosContentBuilder.prototype.removeNode = function(key) {
-    return remove(key, this.content);
+  RicosContentBuilder.prototype.removeNode = function(
+    key: string,
+    content: RichContent
+  ): RichContent {
+    return remove(key, content);
   };
 
-  return (RicosContentBuilder as unknown) as ContentBuilderClass;
+  return (RicosContentBuilder as unknown) as ContentBuilder;
 };

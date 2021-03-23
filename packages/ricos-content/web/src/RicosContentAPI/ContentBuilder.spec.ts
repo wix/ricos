@@ -30,7 +30,7 @@ describe('RicosContentBuilder', () => {
         },
       ],
     };
-    const actual = builder.addImage({ data: imageData });
+    const actual = builder.addImage({ data: imageData, content: { nodes: [] } });
     expect(actual).toEqual(expected);
   });
   it('should add a paragraph with text to content', () => {
@@ -60,7 +60,11 @@ describe('RicosContentBuilder', () => {
         },
       ],
     };
-    const actual = builder.addParagraph({ text: 'test paragraph', data: paragraphData });
+    const actual = builder.addParagraph({
+      text: 'test paragraph',
+      data: paragraphData,
+      content: { nodes: [] },
+    });
     expect(actual).toEqual(expected);
   });
 });

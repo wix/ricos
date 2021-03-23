@@ -15,7 +15,7 @@ type AddMethod<T> = {
   }: {
     data?: Partial<T[P]>;
     index?: number;
-    content?: RichContent;
+    content: RichContent;
   }) => RichContent;
 };
 
@@ -29,7 +29,7 @@ type AddTextMethod<T> = {
     text?: string | TextData | (string | TextData)[];
     data?: Partial<T[P]>;
     index?: number;
-    content?: RichContent;
+    content: RichContent;
   }) => RichContent;
 };
 
@@ -41,7 +41,7 @@ type SetMethod<T> = {
   }: {
     data: T;
     key: string;
-    content?: RichContent;
+    content: RichContent;
   }) => RichContent;
 };
 
@@ -57,7 +57,7 @@ type SetTextMethod<T> = {
     data?: T;
     container?: T;
     key: string;
-    content?: RichContent;
+    content: RichContent;
   }) => RichContent;
 };
 
@@ -95,13 +95,11 @@ type GetMap = {
 type ContentBuilderType = AddMethod<AddMap> &
   AddTextMethod<AddTextMap> &
   SetMethod<SetMap> &
-  SetTextMethod<SetTextMap>;
+  SetTextMethod<SetTextMap> & {
+    removeNode: (key: string, content: RichContent) => RichContent;
+  };
 
 export interface ContentBuilder extends ContentBuilderType {}
-
-export interface ContentBuilderClass extends ContentBuilder {
-  new (content?: RichContent);
-}
 
 export type ContentExtractor = GetMethod<GetMap>;
 
