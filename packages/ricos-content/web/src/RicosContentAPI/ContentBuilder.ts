@@ -8,7 +8,7 @@ import {
   Node_Type,
   Node,
 } from 'ricos-schema';
-import { addNode, toTextDataArray } from './builder-utils';
+import { addNode, toTextDataArray, removeNode, setNode, updateNode } from './builder-utils';
 import { ContentBuilder, dataByNodeType } from '../types';
 
 type AddMethodParams<TData> = {
@@ -23,7 +23,7 @@ type AddTextMethodParams<T> = AddMethodParams<T> & {
   text: string | TextData | (string | TextData)[];
 };
 
-export class RicosContentBuilder implements ContentBuilder {
+class RicosContentBuilder {
   generateKey: () => string;
 
   constructor(generateKey: () => string) {
@@ -86,30 +86,82 @@ export class RicosContentBuilder implements ContentBuilder {
     return addNode({ node, index, before, after, content });
   }
 
-  addImage({ data, index, before, after, content }: AddMethodParams<ImageData>): RichContent {
-    return this.addNode({ type: Node_Type.IMAGE, data, content, index, before, after });
-  }
+  // static setNode({
+  //   data,
+  //   type,
+  //   key,
+  //   content,
+  // }: {
+  //   data: unknown;
+  //   type: Node_Type;
+  //   key: string;
+  //   content: RichContent;
+  // }): RichContent {}
+  //
+  // static setTextNode({
+  //   text,
+  //   data,
+  //   type,
+  //   key,
+  //   content,
+  // }: {
+  //   text?: string | TextData | (string | TextData)[];
+  //   data?: unknown;
+  //   type: Node_Type;
+  //   key: string;
+  //   content: RichContent;
+  // }): RichContent {}
+  //
+  // addImage({ data, index, before, after, content }: AddMethodParams<ImageData>): RichContent {
+  //   return this.addNode({ type: Node_Type.IMAGE, data, content, index, before, after });
+  // }
+  //
+  // addDivider({ data, index, before, after, content }: AddMethodParams<DividerData>): RichContent {
+  //   return this.addNode({ type: Node_Type.DIVIDER, data, content, index, before, after });
+  // }
+  //
+  // addParagraph({
+  //   data,
+  //   index,
+  //   before,
+  //   after,
+  //   content,
+  //   text,
+  // }: AddTextMethodParams<ParagraphData>): RichContent {
+  //   return this.addTextNode({
+  //     type: Node_Type.PARAGRAPH,
+  //     data,
+  //     content,
+  //     index,
+  //     before,
+  //     after,
+  //     text,
+  //   });
+  // }
 
-  addDivider({ data, index, before, after, content }: AddMethodParams<DividerData>): RichContent {
-    return this.addNode({ type: Node_Type.DIVIDER, data, content, index, before, after });
+  removeNode({ key, content }: { key: string; content: RichContent }): RichContent {
+    return removeNode(key, content);
   }
+}
 
-  addParagraph({
+[
+  { name: 'Image', type: 'IMAGE', dataT: ImageData } as const,
+  { name: 'Divider', type: 'DIVIDER', dataT: DividerData } as const,
+].forEach(({ name, type, dataT }) => {
+  RicosContentBuilder.prototype[`add${name}`] = function({
     data,
     index,
     before,
     after,
     content,
-    text,
-  }: AddTextMethodParams<ParagraphData>): RichContent {
-    return this.addTextNode({
-      type: Node_Type.PARAGRAPH,
+  }: AddTextMethodParams<typeof dataT>): RichContent {
+    return RicosContentBuilder.addNode({
+      type: (type as unknown) as Node_Type,
       data,
       content,
       index,
       before,
       after,
-      text,
     });
-  }
-}
+  };
+});

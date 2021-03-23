@@ -1,4 +1,4 @@
-import { find, map, findIndex, has, isString, isArray, isObject } from 'lodash/fp';
+import { isNil, find, map, findIndex, has, isString, isArray, isObject } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 
 const fun = (data: unknown) => ({
@@ -6,29 +6,72 @@ const fun = (data: unknown) => ({
   map: fn => fun(fn(data)),
 });
 
+const right = (data: unknown) => ({
+  map: fn => right(fn(data)),
+  fold: (_, g) => g(data),
+});
+
+const left = (data: unknown) => ({
+  map: _ => left(data),
+  fold: fn => fn(data),
+});
+
+const fromNullable = (data?: unknown) => (isNil(data) ? left(null) : right(data));
+
 const combine = (f, g) => data => f(g(data));
 
-const append = (node: Node) => (content: RichContent) => ({
+const appendNode = (node: Node) => (content: RichContent) => ({
   ...content,
   nodes: [...content.nodes, node],
 });
 
-const inRange = (index?: number) => (content: RichContent) =>
+const indexInRange = (index?: number) => (content: RichContent) =>
   typeof index === 'number' && index >= 0 && index < content.nodes.length;
 
 const keyExists = (nodeKey?: string) => (content: RichContent) =>
   content.nodes.some(({ key }) => key === nodeKey);
 
-const insert = (node: Node, index: number) => (content: RichContent) => ({
+const insertNode = (node: Node, index: number) => (content: RichContent) => ({
   ...content,
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index)],
 });
 
-const insertByKey = (node: Node, nodeKey: string, isAfter?: boolean) => (content: RichContent) =>
+const replaceNode = (node: Node, index) => (content: RichContent) => ({
+  ...content,
+  nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index + 1)],
+});
+
+// key is preserved
+const replaceNodeByKey = (node: Node, nodeKey: string) => (content: RichContent) => {
+  return fromNullable(
+    fun(content)
+      .map(({ nodes }) => nodes)
+      .map(findIndex(({ key }) => key === nodeKey))
+  ).fold(
+    () => content,
+    index => replaceNode({ ...node, key: nodeKey }, index)(content)
+  );
+};
+
+// key and type are preserved
+const updateNodeByKey = (node: Node, nodeKey: string) => (content: RichContent) => {
+  return fromNullable(
+    fun(content)
+      .map(({ nodes }) => nodes)
+      .map(findIndex(({ key, type }) => key === nodeKey && type === node.type))
+  ).fold(
+    () => content,
+    index => replaceNode({ ...node, key: nodeKey }, index)(content)
+  );
+};
+
+const insertNodeByKey = (node: Node, nodeKey: string, isAfter?: boolean) => (
+  content: RichContent
+) =>
   fun(content)
     .map(({ nodes }) => nodes)
     .map(findIndex(({ key }) => key === nodeKey))
-    .fold(index => insert(node, isAfter ? index + 1 : index)(content));
+    .fold(index => insertNode(node, isAfter ? index + 1 : index)(content));
 
 export function addNode({
   node,
@@ -45,20 +88,52 @@ export function addNode({
 }): RichContent {
   const contentFn = fun(content);
   return fun([
-    [() => contentFn.fold(inRange(index)), () => contentFn.fold(insert(node, <number>index))],
+    [
+      () => contentFn.fold(indexInRange(index)),
+      () => contentFn.fold(insertNode(node, <number>index)),
+    ],
     [
       () => contentFn.fold(keyExists(before)),
-      () => contentFn.fold(insertByKey(node, <string>before)),
+      () => contentFn.fold(insertNodeByKey(node, <string>before)),
     ],
     [
       () => contentFn.fold(keyExists(after)),
-      () => contentFn.fold(insertByKey(node, <string>after, true)),
+      () => contentFn.fold(insertNodeByKey(node, <string>after, true)),
     ],
-    [() => true, () => contentFn.fold(append(node))],
+    [() => true, () => contentFn.fold(appendNode(node))],
   ])
     .map(find(([predicate]) => predicate()))
     .fold(([, resolve]) => resolve());
 }
+
+export function setNode({
+  node,
+  key,
+  content,
+}: {
+  node: Node;
+  key: string;
+  content: RichContent;
+}): RichContent {
+  return fun(content).fold(replaceNodeByKey(node, key));
+}
+
+export function updateNode({
+  node,
+  key,
+  content,
+}: {
+  node: Node;
+  key: string;
+  content: RichContent;
+}): RichContent {
+  return fun(content).fold(updateNodeByKey(node, key));
+}
+
+export const removeNode = (nodeKey: string, content: RichContent) => ({
+  ...content,
+  nodes: content.nodes.filter(({ key }) => key !== nodeKey),
+});
 
 const isTextData = text => isObject(text) && has('text', text) && has('decorations', text);
 
