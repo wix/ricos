@@ -1,5 +1,5 @@
-import { Node_Type, TextData } from 'ricos-schema';
-import { setNode, addNode, toTextDataArray } from './builder-utils';
+import { Node_Type, TextData, DividerData_DividerType } from 'ricos-schema';
+import { updateNode, setNode, addNode, toTextDataArray } from './builder-utils';
 
 describe('addNode util', () => {
   it('should append node, if no index/key provided', () => {
@@ -70,6 +70,56 @@ describe('addNode util', () => {
   });
 });
 
+describe('updateNode util', () => {
+  it('should update existing node', () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'ass', nodes: [], type: Node_Type.DIVIDER },
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({
+      key: 'new',
+      nodes: [],
+      type: Node_Type.DIVIDER,
+      dividerData: { type: DividerData_DividerType.SINGLE },
+    });
+    const actual = updateNode({ node, content, key: 'ass' });
+    const expected = Object.freeze({
+      nodes: [
+        {
+          key: 'ass',
+          nodes: [],
+          type: Node_Type.DIVIDER,
+          dividerData: { type: DividerData_DividerType.SINGLE },
+        },
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    expect(actual).toEqual(expected);
+  });
+
+  it(`should have no effect if node types are not matching`, () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'ass', nodes: [], type: Node_Type.DIVIDER },
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({
+      key: 'new',
+      nodes: [],
+      type: Node_Type.DIVIDER,
+      dividerData: { type: DividerData_DividerType.SINGLE },
+    });
+    const actual = updateNode({ node, content, key: 'foo' });
+    expect(actual).toEqual(content);
+  });
+});
+
 describe('setNode util', () => {
   it('should override existing node', () => {
     const content = Object.freeze({
@@ -91,7 +141,7 @@ describe('setNode util', () => {
     expect(actual).toEqual(expected);
   });
 
-  it(`should have no effect if node does'nt exist`, () => {
+  it(`should have no effect if node doesn't exist`, () => {
     const content = Object.freeze({
       nodes: [
         { key: 'ass', nodes: [], type: Node_Type.DIVIDER },

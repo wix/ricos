@@ -1,4 +1,4 @@
-import { find, map, findIndex, has, isString, isArray, isObject } from 'lodash/fp';
+import { find, map, findIndex, has, isString, isArray } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 
 // functional stuff
@@ -128,18 +128,17 @@ export function updateNode({
   );
 }
 
-const isTextData = text => isObject(text) && has('text', text) && has('decorations', text);
+const isTextData = text => has('text', text) && has('decorations', text);
 
 const toArray = t => [t];
 
 const toTextData = text => ({ text, decorations: [] });
 
 export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
-  const textFn = fun(text);
   return fun([
-    [() => textFn.fold(isString), () => textFn.fold(combine(toArray, toTextData))],
-    [() => textFn.fold(isTextData), () => textFn.fold(toArray)],
-    [() => textFn.fold(isArray), () => textFn.fold(map(t => (isString(t) ? toTextData(t) : t)))],
+    [() => isString(text), () => combine(toArray, toTextData)(text)],
+    [() => isTextData(text), () => toArray(text)],
+    [() => isArray(text), () => fun(text).fold(map(t => (isString(t) ? toTextData(t) : t)))],
     [() => true, () => []],
   ])
     .map(find(([predicate]) => predicate()))
