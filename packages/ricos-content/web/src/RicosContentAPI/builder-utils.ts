@@ -8,12 +8,12 @@ const fun = (data: unknown) => ({
 
 const right = (data: unknown) => ({
   map: fn => right(fn(data)),
-  fold: (_, g) => g(data),
+  fold: (l, r) => r(data),
 });
 
 const left = (data: unknown) => ({
-  map: _ => left(data),
-  fold: fn => fn(data),
+  map: (/*fn*/) => left(data),
+  fold: l => l(data),
 });
 
 const fromNullable = (data?: unknown) => (isNil(data) ? left(null) : right(data));

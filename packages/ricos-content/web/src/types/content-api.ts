@@ -92,10 +92,17 @@ type GetMap = {
   getParagraphs: ParagraphData;
 };
 
-export type ContentBuilder = AddMethod<AddMap> &
+type ContentBuilderType = AddMethod<AddMap> &
   AddTextMethod<AddTextMap> &
   SetMethod<SetMap> &
   SetTextMethod<SetTextMap>;
+
+export interface ContentBuilder extends ContentBuilderType {}
+
+export interface ContentBuilderClass extends ContentBuilder {
+  new (content?: RichContent);
+}
+
 export type ContentExtractor = GetMethod<GetMap>;
 
 export const dataByNodeType = (type: Node_Type, data: unknown) =>
@@ -103,6 +110,7 @@ export const dataByNodeType = (type: Node_Type, data: unknown) =>
     [Node_Type.IMAGE]: { imageData: data as ImageData },
     [Node_Type.DIVIDER]: { dividerData: data as DividerData },
     [Node_Type.PARAGRAPH]: { paragraphData: data as ParagraphData },
+    [Node_Type.TEXT]: { textData: data as TextData },
   }[type]);
 
 export const nodeDataMapByType = (type: Node_Type) =>
