@@ -1,5 +1,5 @@
 import { Node_Type, TextData } from 'ricos-schema';
-import { addNode, toTextDataArray } from './builder-utils';
+import { setNode, addNode, toTextDataArray } from './builder-utils';
 
 describe('addNode util', () => {
   it('should append node, if no index/key provided', () => {
@@ -67,6 +67,41 @@ describe('addNode util', () => {
     };
     const actual = addNode({ node, content, before: 'foo' });
     expect(actual).toEqual(expected);
+  });
+});
+
+describe('setNode util', () => {
+  it('should override existing node', () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'ass', nodes: [], type: Node_Type.DIVIDER },
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({ key: 'new', nodes: [], type: Node_Type.IMAGE });
+    const actual = setNode({ node, content, key: 'ass' });
+    const expected = Object.freeze({
+      nodes: [
+        { key: 'ass', nodes: [], type: Node_Type.IMAGE },
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    expect(actual).toEqual(expected);
+  });
+
+  it(`should have no effect if node does'nt exist`, () => {
+    const content = Object.freeze({
+      nodes: [
+        { key: 'ass', nodes: [], type: Node_Type.DIVIDER },
+        { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
+        { key: 'bar', nodes: [], type: Node_Type.POLL },
+      ],
+    });
+    const node = Object.freeze({ key: 'new', nodes: [], type: Node_Type.IMAGE });
+    const actual = setNode({ node, content, key: 'baz' });
+    expect(actual).toEqual(content);
   });
 });
 
