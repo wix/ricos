@@ -116,6 +116,7 @@ export default class BaseTextColor extends Component {
       styleMapper: this.styleMapper,
       predicate: pluginParams.predicate,
       defaultColor: pluginParams.defaultColor,
+      colorPickerHeaderKey: pluginParams.colorPickerHeaderKey,
     });
     if (isMobile) {
       this.openMobilePanel(modalElement);
