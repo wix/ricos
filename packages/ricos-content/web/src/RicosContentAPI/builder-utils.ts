@@ -3,8 +3,8 @@ import { RichContent, TextData, Node } from 'ricos-schema';
 
 // functional stuff
 const fun = (data: unknown) => ({
-  fold: fn => fn(data),
   map: fn => fun(fn(data)),
+  fold: fn => fn(data),
 });
 
 const right = (data: unknown) => ({
@@ -19,7 +19,7 @@ const left = (data: unknown) => ({
 
 const either = curry((predicate, data) => (predicate(data) ? right(data) : left(data)));
 
-const isIndexFound = either(i => i !== -1);
+const isIndexFound = either(index => index !== -1);
 
 // content transformers
 const appendNode = curry((node: Node, content: RichContent) => ({
