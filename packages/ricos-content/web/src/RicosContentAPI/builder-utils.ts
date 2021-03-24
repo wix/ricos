@@ -2,11 +2,6 @@ import { curry, compose, find, findIndex, has, isString, isArray } from 'lodash/
 import { RichContent, TextData, Node } from 'ricos-schema';
 
 // functional stuff
-const fun = (data: unknown) => ({
-  map: fn => fun(fn(data)),
-  fold: fn => fn(data),
-});
-
 const right = (data: unknown) => ({
   map: fn => right(fn(data)),
   fold: r => r(data),
@@ -27,25 +22,26 @@ const switchCase = compose(
 );
 
 // content transformers
-const appendNode = curry((node: Node, content: RichContent) => ({
+const appendNode = (node: Node, content: RichContent) => ({
   ...content,
   nodes: [...content.nodes, node],
-}));
+});
 
-const insertNode = curry((node: Node, index: number, content: RichContent) => ({
+const insertNode = (node: Node, index: number, content: RichContent) => ({
   ...content,
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index)],
-}));
+});
 
-const replaceNode = curry((node: Node, index: number, content: RichContent) => ({
+const replaceNode = (node: Node, index: number, content: RichContent) => ({
   ...content,
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index + 1)],
-}));
+});
 
 const insertNodeByKey = (content: RichContent, node: Node, nodeKey: string, isAfter?: boolean) =>
-  fun(content.nodes)
-    .map(findIndex(({ key }) => key === nodeKey))
-    .fold(index => insertNode(node, isAfter ? index + 1 : index)(content));
+  compose(
+    (index: number) => insertNode(node, isAfter ? index + 1 : index, content),
+    findIndex(({ key }) => key === nodeKey)
+  )(content.nodes);
 
 export const removeNode = (nodeKey: string, content: RichContent) => ({
   ...content,
@@ -80,7 +76,6 @@ export function addNode({
   ]);
 }
 
-// key is preserved
 export function setNode({
   node,
   key: nodeKey,
@@ -91,12 +86,11 @@ export function setNode({
   content: RichContent;
 }): RichContent {
   return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes)).fold(
-    index => replaceNode({ ...node, key: nodeKey }, index)(content),
+    index => replaceNode({ ...node, key: nodeKey }, index, content),
     () => content
   );
 }
 
-// key and type are preserved
 export function updateNode({
   node,
   key: nodeKey,
@@ -109,7 +103,7 @@ export function updateNode({
   return isIndexFound(
     findIndex(({ key, type }) => key === nodeKey && type === node.type, content.nodes)
   ).fold(
-    index => replaceNode({ ...node, key: nodeKey }, index)(content),
+    index => replaceNode({ ...node, key: nodeKey }, index, content),
     () => content
   );
 }
