@@ -21,6 +21,11 @@ const ImagePluginStory = () => {
 
   return (
     <Page title="Heading 1">
+      <p>
+        Select some text in the editor, then change the heading formatting.
+        <br />
+        Look for <u>Heading 1</u> option
+      </p>
       <ActionButton
         text={`${experimentEnabled ? 'Disable' : 'Enable'} "useHeadingOne" Experiment`}
         onClick={() => {
@@ -29,7 +34,7 @@ const ImagePluginStory = () => {
         }}
       />
 
-      <div>
+      <div style={{ borderColor: 'silver', borderWidth: '1px', borderStyle: 'solid' }}>
         <RicosEditor
           key={viewerKey}
           content={imageContentState}
