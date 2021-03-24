@@ -7,7 +7,7 @@ import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 import { parseExperiments } from 'wix-rich-content-common/libs/experiments';
 
 const ImagePluginStory = () => {
-  const [experimntEnabled, setExperimentEnabled] = useState(false);
+  const [experimentEnabled, setExperimentEnabled] = useState(false);
   const [viewerKey, setViewerKey] = useState(1);
 
   const experiments = parseExperiments({
@@ -22,9 +22,9 @@ const ImagePluginStory = () => {
   return (
     <Page title="Image Plugin With Thumbnail experiment">
       <ActionButton
-        text={`${experimntEnabled ? 'Disable' : 'Enable'} "Quality Thumbnail" Experiment`}
+        text={`${experimentEnabled ? 'Disable' : 'Enable'} "Quality Thumbnail" Experiment`}
         onClick={() => {
-          setExperimentEnabled(!experimntEnabled);
+          setExperimentEnabled(!experimentEnabled);
           setViewerKey(viewerKey + 1);
         }}
       />
@@ -34,7 +34,7 @@ const ImagePluginStory = () => {
           key={viewerKey}
           content={imageContentState}
           plugins={[pluginImage()]}
-          {...(experimntEnabled && { _rcProps })}
+          {...(experimentEnabled && { _rcProps })}
         />
       </div>
     </Page>

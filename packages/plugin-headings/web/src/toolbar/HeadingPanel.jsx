@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/panelStyles.scss';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
 import classNames from 'classnames';
+import { DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
 import { HEADER_TYPE_MAP } from 'wix-rich-content-plugin-commons';
 
 const headingElement = (heading, isSelected, onClick, translateHeading) => {
@@ -48,12 +49,28 @@ export default class HeadingsDropDownPanel extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
+  static contextType = GlobalContext;
+
   onSaveHeading = (type, headingName) => {
     return this.props.onSave(type, headingName);
   };
 
+  defaultHeadings = () => {
+    const { experiments } = this.context;
+    if (experiments?.useHeadingOne.enabled) {
+      const withHeadingOne = [...DEFAULT_HEADERS_DROPDOWN_OPTIONS];
+      withHeadingOne.splice(1, 0, 'H1');
+      return withHeadingOne;
+    }
+    return DEFAULT_HEADERS_DROPDOWN_OPTIONS;
+  };
+
   render() {
-    const { isMobile, translateHeading, customHeadingsOptions } = this.props;
+    const {
+      isMobile,
+      translateHeading,
+      customHeadingsOptions = this.defaultHeadings(),
+    } = this.props;
     const { heading } = this.state;
     const { styles } = this;
     const selected = heading;
