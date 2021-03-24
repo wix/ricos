@@ -91,31 +91,24 @@ const Experiments = ({ items, active, action }) =>
     </li>
   ));
 
-const Palettes = ({ items, active, action }) => (
-  <div className="paletteDropdown">
-    Choose Palette
-    <div className="paletteWrapper">
-      {items.map(({ bgColor, textColor, actionColor }, i) => (
-        <li key={i} className={active === i ? 'active' : null}>
-          <div
-            className={`paletteContainer ${active === i ? 'active' : null}`}
-            onClick={() => action(i)}
-          >
-            <div className="actionColor" style={{ backgroundColor: actionColor }}>
-              <MdInvertColors />
-            </div>
-            {i < 6 ? <div>Light Mode</div> : <div>Dark Mode</div>}
-            <div className="palette">
-              <div style={{ backgroundColor: bgColor }} />
-              <div style={{ backgroundColor: textColor }} />
-              <div style={{ backgroundColor: actionColor }} />
-            </div>
-          </div>
-        </li>
-      ))}
-    </div>
-  </div>
-);
+const Palettes = ({ items, active, action }) =>
+  items.map(({ bgColor, textColor, actionColor }, i) => (
+    <li
+      key={i}
+      className={`paletteContainer ${active === i ? 'active' : null}`}
+      onClick={() => action(i)}
+    >
+      <div className="actionColor" style={{ backgroundColor: actionColor }}>
+        <MdInvertColors />
+      </div>
+      {i < 6 ? <div>Light Mode</div> : <div>Dark Mode</div>}
+      <div className="palette">
+        <div style={{ backgroundColor: bgColor }} />
+        <div style={{ backgroundColor: textColor }} />
+        <div style={{ backgroundColor: actionColor }} />
+      </div>
+    </li>
+  ));
 
 const Fonts = ({ items, active, action }) =>
   items.map(({ h2, p }, i) => (

@@ -189,13 +189,17 @@ body {
                         opacity: 1;
                       }
                     }
+                    .experiment,
+                    .paletteContainer,
+                    .fontContainer {
+                      background-color: $primaryColor;
+                      border: solid 1px $secondaryColor;
+                      padding: 6px;
+                    }
                     .experimentContainer {
                       display: flex;
                       cursor: default !important;
                       .experiment {
-                        background-color: $primaryColor;
-                        border: solid 1px $secondaryColor;
-                        padding: 6px;
                         width: 100%;
                         .scope {
                           font-size: 12px;
@@ -225,48 +229,38 @@ body {
                         }
                       }
                     }
-                    .paletteDropdown {
-                      padding: 15px;
-                      .paletteWrapper {
-                        margin-top: 15px;
-                        display: grid;
-                        background-color: $primaryColor;
-                        padding: 9px;
-                        .paletteContainer {
-                          font-size: 12px;
-                          display: grid;
-                          grid-template-columns: auto auto;
-                          grid-template-rows: auto auto;
-                          grid-column-gap: 6px;
-                          .actionColor {
-                            width: 36px;
-                            height: 36px;
-                            border-radius: 4.4px;
-                            border: solid 1.1px rgba(43, 129, 203, 0.24);
-                            overflow: hidden;
-                            display: flex;
-                            justify-content: center;
-                            grid-row: span 2;
-                            svg {
-                              color: white;
-                            }
-                          }
-                          .palette {
-                            display: grid;
-                            grid-template-columns: auto auto auto;
-                            border: solid 1px $secondaryColor;
-                            width: 140px;
-                            height: 13px;
-                          }
+
+                    .paletteContainer {
+                      margin: 12px;
+                      font-size: 12px;
+                      display: grid;
+                      grid-template-columns: auto auto;
+                      grid-template-rows: auto auto;
+                      grid-column-gap: 3px;
+                      .actionColor {
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 4.4px;
+                        border: solid 1.1px rgba(43, 129, 203, 0.24);
+                        overflow: hidden;
+                        display: flex;
+                        justify-content: center;
+                        grid-row: span 2;
+                        svg {
+                          color: white;
                         }
                       }
+                      .palette {
+                        display: grid;
+                        grid-template-columns: auto auto auto;
+                        border: solid 1px $secondaryColor;
+                        width: 140px;
+                        height: 13px;
+                      }
                     }
-                    .fontContainer {
-                      border: solid 1px $secondaryColor;
-                      background-color: $primaryColor;
-                      padding: 6px;
-                      margin: 12px;
-                    }
+                  }
+                  .fontContainer {
+                    margin: 12px;
                   }
                 }
               }
