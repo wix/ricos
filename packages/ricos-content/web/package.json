@@ -36,7 +36,6 @@
     "test:watchAll": "jest --verbose --watchAll"
   },
   "dependencies": {
-    "omit-deep-lodash": "1.1.5",
     "parse5": "^6.0.0",
     "ricos-schema": "8.27.4",
     "utility-types": "^3.10.0"
