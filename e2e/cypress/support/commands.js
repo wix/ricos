@@ -368,8 +368,8 @@ Cypress.Commands.add('openFooterPluginMenu', () => {
   cy.get('[data-hook="addPluginMenu"]');
 });
 
-Cypress.Commands.add('openSettings', () => {
-  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS[settings]);
   cy.get('[data-hook="settings"]');
 });
 

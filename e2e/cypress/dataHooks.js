@@ -104,7 +104,7 @@ export const IMAGE_SETTINGS = {
   LINK: 'linkPanelInput',
   PREVIEW: 'imagePreview',
   IMAGE_EXPAND_TOGGLE: 'imageExpandToggle',
-  IMAGE_RIGHT_CLICK_TOGGLE: 'imageRightClickToggle',
+  IMAGE_DOWNLOAD_TOGGLE: 'imageDownloadToggle',
 };
 
 export const GALLERY_SETTINGS = {
