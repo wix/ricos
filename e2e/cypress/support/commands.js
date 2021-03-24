@@ -522,12 +522,14 @@ Cypress.Commands.add('undo', () => {
   cy.getEditor()
     .first()
     .type('{cmd+z}');
+  cy.wait(100);
 });
 
 Cypress.Commands.add('redo', () => {
   cy.getEditor()
     .first()
     .type('{cmd+shift+z}');
+  cy.wait(100);
 });
 
 Cypress.Commands.add('addImage', () => {
