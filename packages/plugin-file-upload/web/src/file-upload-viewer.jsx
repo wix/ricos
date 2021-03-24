@@ -37,7 +37,6 @@ class FileUploadViewer extends PureComponent {
     console.log('width', currentWidth, this.breakPoints[currentWidth]);
 
     if (this.breakPoints.firstBreak >= currentWidth) {
-      console.log();
       this.setState({ currentWidth });
     }
   };
@@ -156,13 +155,15 @@ class FileUploadViewer extends PureComponent {
             className={this.styles.file_preview_link}
           >
             {showFileIcon && <Icon styles={this.styles} className={this.styles.file_upload_icon} />}
-            <div style={{ width: 'calc(100% - 72px)' }}>
-              <div className={this.styles.file_upload_name_container}>
-                <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
-                {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
+            {this.state.currentWidth >= 100 && (
+              <div style={{ width: 'calc(100% - 72px)' }}>
+                <div className={this.styles.file_upload_name_container}>
+                  <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
+                  {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
+                </div>
+                <div className={infoStyle}>{infoString}</div>
               </div>
-              <div className={infoStyle}>{infoString}</div>
-            </div>
+            )}
           </a>
         </div>
         <div>
