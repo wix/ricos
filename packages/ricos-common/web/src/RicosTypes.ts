@@ -59,9 +59,7 @@ export interface RicosEditorProps extends RicosProps {
   onBusyChange?: OnBusyChangeFunction;
   injectedContent?: DraftContent;
   maxTextLength?: number;
-  editorEvents1?: EditorEvents;
-  editorEvents2?: EditorEvents;
-
+  editorEvents?: EditorEvents;
   /* Changes to this interface should also be reflected in the API docs */
 }
 

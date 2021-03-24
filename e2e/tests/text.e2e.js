@@ -1,8 +1,23 @@
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, usePluginsConfig, plugins } from '../cypress/testAppConfig';
+
+const changeTextColor = title => {
+  cy.loadRicosEditorAndViewer('plain')
+    .setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 15])
+    .openCustomColorModal();
+  cy.eyesCheckWindow(title);
+  cy.setColorByHex('d932c3');
+  cy.updateTextColor();
+  cy.eyesCheckWindow(title);
+  if (!title.includes('mobile')) {
+    cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
+    cy.eyesCheckWindow(title);
+  }
+};
 
 describe('text', () => {
   before(function() {
@@ -31,15 +46,7 @@ describe('text', () => {
   });
 
   it('allow to change text color', function() {
-    cy.loadRicosEditorAndViewer('plain')
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 15])
-      .addColor();
-    cy.eyesCheckWindow(this.test.title);
-    cy.setColorByHex('d932c3');
-    cy.updateTextColor();
-    cy.eyesCheckWindow(this.test.title);
-    cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
-    cy.eyesCheckWindow(this.test.title);
+    changeTextColor(this.test.title);
   });
 
   it('allow to apply inline styles and links', function() {
@@ -310,6 +317,23 @@ describe('text', () => {
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+});
+
+describe('text color mobile', () => {
+  before(function() {
+    cy.eyesOpen({
+      appName: 'Text',
+      testName: this.test.parent.title,
+      browser: DEFAULT_MOBILE_BROWSERS,
+    });
+  });
+  beforeEach(() => cy.switchToMobile());
+
+  after(() => cy.eyesClose());
+
+  it('allow to change text color on mobile', function() {
+    changeTextColor(this.test.title);
   });
 });
 
