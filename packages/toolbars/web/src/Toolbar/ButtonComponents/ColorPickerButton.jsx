@@ -75,6 +75,7 @@ class ColorPickerButton extends Component {
     const { isModalOpen } = this.state;
     const { colorScheme } = settings;
     const palette = this.extractPalette(colorScheme);
+    const paletteColors = isMobile ? palette.slice(0, 5) : palette.slice(0, 6);
     return (
       <ClickOutside onClickOutside={this.closeModal}>
         <ToolbarButton
@@ -93,7 +94,7 @@ class ColorPickerButton extends Component {
           >
             <ColorPicker
               color={currentColor}
-              palette={palette.slice(0, 6)}
+              palette={paletteColors}
               userColors={userColors.slice(-12)}
               onColorAdded={this.onColorAdded}
               theme={theme}

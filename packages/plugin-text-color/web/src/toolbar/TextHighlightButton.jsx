@@ -22,6 +22,7 @@ export default class TextHighlightButton extends Component {
       type: TEXT_HIGHLIGHT_TYPE,
       predicate: textBackgroundPredicate,
       defaultColor: DEFAULT_HIGHLIGHT_COLOR,
+      colorPickerHeaderKey: 'Color_Picker_TextHighlightButton_Header',
     };
     return <BaseTextColor buttonRef={this.buttonRef} pluginParams={pluginParams} {...this.props} />;
   }
