@@ -1,6 +1,6 @@
 {
   "name": "ricos-content",
-  "version": "8.27.4",
+  "version": "8.27.5",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "parse5": "^6.0.0",
-    "ricos-schema": "8.27.4",
+    "ricos-schema": "8.27.5",
     "utility-types": "^3.10.0"
   },
   "peerDependencies": {
