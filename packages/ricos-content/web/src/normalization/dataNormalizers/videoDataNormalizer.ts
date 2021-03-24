@@ -1,13 +1,14 @@
 const videoDataNormalizer = (componentData, normalizerConfig) => {
+  const isDisableDownloadDefined = componentData.disableDownload !== undefined;
   const shouldNormalizeDisableDownload =
-    componentData.disableDownload === undefined &&
-    normalizerConfig.disableVideoDownload !== undefined;
-  // the first condition normalize the old video config
-  // the second condition normalize disableRightClick(as disableDownload) from the viewer config
+    !isDisableDownloadDefined && normalizerConfig.disableVideoDownload !== undefined;
+
   if (shouldNormalizeDisableDownload) {
+    //normalize the old video config (settings.disableDownload)
     componentData.disableDownload = normalizerConfig.disableVideoDownload;
   } else if (
-    componentData.disableDownload === undefined &&
+    // normalize disableRightClick(as disableDownload) from the USettings (USettings.disableRightClick)
+    !isDisableDownloadDefined &&
     normalizerConfig.disableVideoDownload === undefined &&
     normalizerConfig.disableDownload !== undefined
   ) {
