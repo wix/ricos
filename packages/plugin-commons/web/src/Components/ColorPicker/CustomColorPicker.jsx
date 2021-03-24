@@ -4,12 +4,12 @@ import { mergeStyles } from 'wix-rich-content-common';
 import Styles from '../../../statics/styles/custom-color-picker.scss';
 import { HashtagIcon } from '../../Icons';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
+import classNames from 'classnames';
 
-const CustomColorPicker = ({ t, color, theme, onChange }) => {
+const CustomColorPicker = ({ t, color, theme, onChange, isMobile }) => {
   const styles = mergeStyles({ styles: Styles, theme });
-
   return (
-    <div>
+    <div className={classNames(styles.colorPickerDialog, { [styles.mobile]: isMobile })}>
       <HexColorPicker color={color} onChange={onChange} />
       <div className={styles.customColorPicker_editable_input_container}>
         <div className={styles.customColorPicker_input_label}>

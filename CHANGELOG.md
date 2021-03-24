@@ -21,6 +21,10 @@
 - `plugin-gallery`
   - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
 
+### :bug: Bug Fix
+- `color-picker`
+  - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
+  
 ### :house: Internal
 - `editor-common`
   - [#2317](https://github.com/wix/ricos/pull/2317) deprecation of old `EditorEventsContext` through `index.ts` file
