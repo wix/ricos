@@ -1,4 +1,4 @@
-import { curry, compose, find, map, findIndex, has, isString, isArray } from 'lodash/fp';
+import { curry, compose, find, findIndex, has, isString, isArray } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 
 // functional stuff
@@ -21,6 +21,11 @@ const either = curry((predicate, data) => (predicate(data) ? right(data) : left(
 
 const isIndexFound = either(index => index !== -1);
 
+const switchCase = compose(
+  ([, resolve]) => resolve(),
+  find(([predicate]) => predicate())
+);
+
 // content transformers
 const appendNode = curry((node: Node, content: RichContent) => ({
   ...content,
@@ -37,9 +42,7 @@ const replaceNode = curry((node: Node, index: number, content: RichContent) => (
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index + 1)],
 }));
 
-const insertNodeByKey = (node: Node, nodeKey: string, isAfter?: boolean) => (
-  content: RichContent
-) =>
+const insertNodeByKey = (content: RichContent, node: Node, nodeKey: string, isAfter?: boolean) =>
   fun(content.nodes)
     .map(findIndex(({ key }) => key === nodeKey))
     .fold(index => insertNode(node, isAfter ? index + 1 : index)(content));
@@ -50,10 +53,10 @@ export const removeNode = (nodeKey: string, content: RichContent) => ({
 });
 
 // predicates
-const keyExists = (nodeKey?: string) => (content: RichContent) =>
+const keyExists = (content: RichContent, nodeKey?: string) =>
   content.nodes.some(({ key }) => key === nodeKey);
 
-const indexInRange = (index?: number) => (content: RichContent) =>
+const indexInRange = (content: RichContent, index?: number) =>
   typeof index === 'number' && index >= 0 && index < content.nodes.length;
 
 export function addNode({
@@ -69,24 +72,12 @@ export function addNode({
   after?: string;
   content: RichContent;
 }): RichContent {
-  const contentFn = fun(content);
-  return fun([
-    [
-      () => contentFn.fold(indexInRange(index)),
-      () => contentFn.fold(insertNode(node, <number>index)),
-    ],
-    [
-      () => contentFn.fold(keyExists(before)),
-      () => contentFn.fold(insertNodeByKey(node, <string>before)),
-    ],
-    [
-      () => contentFn.fold(keyExists(after)),
-      () => contentFn.fold(insertNodeByKey(node, <string>after, true)),
-    ],
-    [() => true, () => contentFn.fold(appendNode(node))],
-  ])
-    .map(find(([predicate]) => predicate()))
-    .fold(([, resolve]) => resolve());
+  return switchCase([
+    [() => indexInRange(content, index), () => insertNode(node, <number>index, content)],
+    [() => keyExists(content, before), () => insertNodeByKey(content, node, <string>before)],
+    [() => keyExists(content, after), () => insertNodeByKey(content, node, <string>after, true)],
+    [() => true, () => appendNode(node, content)],
+  ]);
 }
 
 // key is preserved
@@ -130,12 +121,13 @@ const toArray = t => [t];
 const toTextData = text => ({ text, decorations: [] });
 
 export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
-  return fun([
+  return switchCase([
     [() => isString(text), () => compose(toArray, toTextData)(text)],
     [() => isTextData(text), () => toArray(text)],
-    [() => isArray(text), () => fun(text).fold(map(t => (isString(t) ? toTextData(t) : t)))],
+    [
+      () => isArray(text),
+      () => (<(string | TextData)[]>text).map(t => (isString(t) ? toTextData(t) : t)),
+    ],
     [() => true, () => []],
-  ])
-    .map(find(([predicate]) => predicate()))
-    .fold(([, resolve]) => resolve());
+  ]);
 }
