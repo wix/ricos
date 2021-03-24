@@ -280,7 +280,7 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   ).click({ force: true });
 });
 
-Cypress.Commands.add('addColor', () => {
+Cypress.Commands.add('openCustomColorModal', () => {
   cy.get(`[data-hook="${COLOR_PICKER.ADD_COLOR}"]`).click();
 });
 
