@@ -22,6 +22,7 @@
     "react-tiny-fab": "^2.0.0",
     "ricos-editor": "8.27.4",
     "ricos-viewer": "8.27.4",
+    "ricos-common": "8.27.4",
     "whatwg-fetch": "3.4.1",
     "wix-rich-content-fullscreen": "8.27.4",
     "wix-rich-content-plugin-accordion": "8.27.4",
