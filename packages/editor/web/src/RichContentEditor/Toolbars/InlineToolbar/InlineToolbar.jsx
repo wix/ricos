@@ -76,6 +76,8 @@ export default class InlineToolbar extends Component {
       showLeftArrow: false,
     };
 
+    this.toolbarContainer = React.createRef();
+
     this.ToolbarDecoration = props.toolbarDecorationFn();
   }
 
@@ -287,7 +289,7 @@ export default class InlineToolbar extends Component {
 
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
-        <div className={buttonClassNames} dir={getLangDir(locale)}>
+        <div className={buttonClassNames} dir={getLangDir(locale)} ref={this.toolbarContainer}>
           <Measure
             client
             scroll
@@ -301,7 +303,9 @@ export default class InlineToolbar extends Component {
                 {OverrideContent ? (
                   <OverrideContent {...childrenProps} />
                 ) : (
-                  structure.map((Button, index) => <Button key={index} {...childrenProps} />)
+                  structure.map((Button, index) => (
+                    <Button getToolbarRef={() => this.toolbar} key={index} {...childrenProps} />
+                  ))
                 )}
               </div>
             )}
