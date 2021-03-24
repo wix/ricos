@@ -19,7 +19,6 @@ const createYourPluginNamePlugin: CreatePluginFunction<YourPluginNamePluginEdito
     settings,
     t,
     isMobile,
-    disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
     ...rest,
   });

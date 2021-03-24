@@ -16,9 +16,32 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `color-picker`
+  - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
+  
+### :house: Internal
+- `editor-common`
+  - [#2317](https://github.com/wix/ricos/pull/2317) deprecation of old `EditorEventsContext` through `index.ts` file
+
 </details>
 <hr/>
 
+## 8.27.4  (Mar 18, 2021)
+### :nail_care: Polish
+- `plugin-headings`
+  - [#2309](https://github.com/wix/ricos/pull/2309) `Heading 1` is now supported
+- `plugin-headings`
+  - [#2310](https://github.com/wix/ricos/pull/2310) `Heading 1` is visible by default
+
+## 8.27.2  (Mar 15, 2021)
+### :bug: Bug Fix
+- `unsupported-blocks`
+  - [#2292](https://github.com/wix/ricos/pull/#2292) fix unsupported-blocks text height and font size 
+- `gallery`
+  - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
+- `fullscreen`
+  - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
 ## 8.27.1  (Mar 10, 2021)
 ### :rocket: New Feature
 - `ricos-content`
