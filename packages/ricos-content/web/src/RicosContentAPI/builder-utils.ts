@@ -38,10 +38,9 @@ const replaceNode = (node: Node, index: number, content: RichContent) => ({
 });
 
 const insertNodeByKey = (content: RichContent, node: Node, nodeKey: string, isAfter?: boolean) =>
-  compose(
-    (index: number) => insertNode(node, isAfter ? index + 1 : index, content),
-    findIndex(({ key }) => key === nodeKey)
-  )(content.nodes);
+  right(content.nodes)
+    .map(findIndex(({ key }) => key === nodeKey))
+    .fold((index: number) => insertNode(node, isAfter ? index + 1 : index, content));
 
 export const removeNode = (nodeKey: string, content: RichContent) => ({
   ...content,
