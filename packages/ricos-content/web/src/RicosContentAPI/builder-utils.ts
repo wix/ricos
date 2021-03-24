@@ -1,4 +1,4 @@
-import { find, map, findIndex, has, isString, isArray } from 'lodash/fp';
+import { curry, compose, find, map, findIndex, has, isString, isArray } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 
 // functional stuff
@@ -24,23 +24,21 @@ const either = predicate => data => {
 
 const isIndexFound = either(i => i !== -1);
 
-const combine = (f, g) => data => f(g(data));
-
 // content transformers
-const appendNode = (node: Node) => (content: RichContent) => ({
+const appendNode = curry((node: Node, content: RichContent) => ({
   ...content,
   nodes: [...content.nodes, node],
-});
+}));
 
-const insertNode = (node: Node, index: number) => (content: RichContent) => ({
+const insertNode = curry((node: Node, index: number, content: RichContent) => ({
   ...content,
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index)],
-});
+}));
 
-const replaceNode = (node: Node, index: number) => (content: RichContent) => ({
+const replaceNode = curry((node: Node, index: number, content: RichContent) => ({
   ...content,
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index + 1)],
-});
+}));
 
 const insertNodeByKey = (node: Node, nodeKey: string, isAfter?: boolean) => (
   content: RichContent
@@ -136,7 +134,7 @@ const toTextData = text => ({ text, decorations: [] });
 
 export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
   return fun([
-    [() => isString(text), () => combine(toArray, toTextData)(text)],
+    [() => isString(text), () => compose(toArray, toTextData)(text)],
     [() => isTextData(text), () => toArray(text)],
     [() => isArray(text), () => fun(text).fold(map(t => (isString(t) ? toTextData(t) : t)))],
     [() => true, () => []],
