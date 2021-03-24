@@ -122,7 +122,7 @@ export default class HeadingButton extends Component {
     const { innerModal, setKeepOpen } = this.props;
     setKeepOpen?.(true);
     const { bottom, left } = this.buttonRef.current.getBoundingClientRect();
-    const position = { left: left - 15, top: bottom };
+    const position = { left: left - 15, top: bottom + 15 };
     const { offsetTop, offsetLeft } = getCumulativeOffset(innerModal.getContainer(), 0, 0);
     const modalProps = {
       top: position.top - offsetTop,
