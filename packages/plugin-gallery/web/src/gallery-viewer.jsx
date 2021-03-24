@@ -225,8 +225,9 @@ class GalleryViewer extends React.Component {
   getStyleParams = () => {
     const {
       componentData: { styles: styleParams },
+      isMobile,
     } = this.props;
-    if (isHorizontalLayout(styleParams)) {
+    if (isMobile && isHorizontalLayout(styleParams)) {
       styleParams.arrowsSize = 20;
       styleParams.imageMargin = 0;
       if (styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL) {
