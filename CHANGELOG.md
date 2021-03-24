@@ -17,6 +17,8 @@
   </summary>
 
 ### :bug: Bug Fix
+- `color-picker`
+  - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
 - `gallery`
   - [#1705](https://github.com/wix-incubator/rich-content/pull/1705) fix gallery layout styles default and thumbnails ratio
 ### :house: Internal

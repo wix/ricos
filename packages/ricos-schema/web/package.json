@@ -15,7 +15,8 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
   "files": [
-    "dist"
+    "dist",
+    "src/**/*.proto"
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
