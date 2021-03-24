@@ -16,9 +16,9 @@
 }
 
 .file_upload_error_container {
-  border: 1px solid rgba($color: #F64D43, $alpha: 0.8);
+  border: 1px solid rgba($color: #f64d43, $alpha: 0.8);
   &:hover {
-    border: 1px solid rgba($color: #F64D43, $alpha: 1);
+    border: 1px solid rgba($color: #f64d43, $alpha: 1);
   }
 }
 
@@ -92,7 +92,7 @@
   color: $primary-text-color;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  padding-right: 30px;
 }
 
 .file_upload_icon {
@@ -119,12 +119,13 @@
   color: $primary-text-color;
   opacity: 0.6;
   font-family: $ricos-font-family !important;
+  display: flex;
 }
 
 .file_upload_text_error {
   letter-spacing: 0;
   font-size: 14px;
-  color: #F64D43;
+  color: #f64d43;
   font-family: $ricos-font-family !important;
 }
 
@@ -143,4 +144,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.removeMargin {
+  margin: 0;
 }
