@@ -17,10 +17,7 @@ const left = (data: unknown) => ({
   fold: (r, l) => l(data),
 });
 
-const either = predicate => data => {
-  const res = predicate(data);
-  return res ? right(data) : left(data);
-};
+const either = curry((predicate, data) => (predicate(data) ? right(data) : left(data)));
 
 const isIndexFound = either(i => i !== -1);
 
