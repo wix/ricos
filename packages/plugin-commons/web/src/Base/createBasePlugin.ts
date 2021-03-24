@@ -6,7 +6,7 @@ import createInsertPluginButton from './createBaseInsertPluginButton';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import {
   deleteBlock,
-  replaceWithNewEntityData,
+  setBlockNewEntityData,
   getToolbarTheme,
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
@@ -49,12 +49,7 @@ const setData = (
   { getEditorState, setEditorState }: EditorStateFuncs,
   type: string
 ) => newData => {
-  const editorState = replaceWithNewEntityData(
-    getEditorState(),
-    contentBlock.getKey(),
-    newData,
-    type
-  );
+  const editorState = setBlockNewEntityData(getEditorState(), contentBlock.getKey(), newData, type);
   setEditorState(editorState);
 };
 

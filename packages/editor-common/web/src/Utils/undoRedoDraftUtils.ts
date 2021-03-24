@@ -1,5 +1,6 @@
 import { EditorState, ContentState, convertToRaw } from '../index';
 import { isEqual } from 'lodash';
+import { ContentBlock } from '@wix/draft-js';
 
 export function removeCompositionModeFromEditorState(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
@@ -72,8 +73,8 @@ export function didBlocksChange(contentState: ContentState, newContentState: Con
   });
 }
 
-export function doesEntityExistInBothStates(block, contentState, newContentState) {
-  const currentEntity = block.getEntityAt(0) && contentState.getEntity(block.getEntityAt(0));
-  const newEntityKey = newContentState.getBlockForKey(block.key)?.getEntityAt(0);
-  return currentEntity && newEntityKey && newContentState.getEntity(newEntityKey);
+export function doesEntityExistInBothStates(block: ContentBlock, newContentState: ContentState) {
+  const currentEntityKey = block.getEntityAt(0);
+  const newEntityKey = newContentState.getBlockForKey(block.getKey())?.getEntityAt(0);
+  return !!(block.getType() === 'atomic' && currentEntityKey && newEntityKey);
 }

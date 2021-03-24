@@ -45,7 +45,7 @@ export {
   mergeBlockData,
   isAtomicBlockFocused,
   setEntityData,
-  replaceWithNewEntityData,
+  setBlockNewEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
   getBlockAtStartOfSelection,

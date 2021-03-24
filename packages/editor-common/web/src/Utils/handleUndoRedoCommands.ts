@@ -52,13 +52,9 @@ function checkInnerRicosEntity(currentBlock, contentState, newContentState) {
   const { key: blockKey } = currentBlock;
   const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
   const { data: newData } = getBlocksEntityTypeAndData(blockKey, newContentState);
-  let entityToReplace;
-  let didInnerRicosChange = false;
-  if (INNER_RICOS_TYPES.includes(type)) {
-    entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
-    const { shouldUndoAgain, fixedData } = entityToReplace;
-    didInnerRicosChange = (shouldUndoAgain && !!fixedData) || !shouldUndoAgain;
-  }
+  const entityToReplace = innerRicosDataFixers[type]?.(currentData, newData);
+  const { shouldUndoAgain, fixedData } = entityToReplace;
+  const didInnerRicosChange = (shouldUndoAgain && !!fixedData) || !shouldUndoAgain;
   return didInnerRicosChange && entityToReplace;
 }
 
@@ -82,7 +78,7 @@ function getEntityToReplace(newContentState, contentState): EntityToReplace {
   let entityToReplace;
   const didChange = contentState
     .getBlockMap()
-    .filter(block => doesEntityExistInBothStates(block, contentState, newContentState))
+    .filter((block: ContentBlock) => doesEntityExistInBothStates(block, newContentState))
     .some(currentBlock => {
       const { key: blockKey } = currentBlock;
       const { type } = getBlocksEntityTypeAndData(blockKey, contentState);
@@ -156,18 +152,20 @@ function getFixedAccordionEditorStates(currentData, newData) {
     currentPairs,
     newPairs
   );
-  const entityToReplace: EntityToReplace = { shouldUndoAgain: !didChange };
+  let entityToReplace: EntityToReplace = { shouldUndoAgain: !didChange };
   if (item && item !== 'key') {
     const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(
       newPairs[changedPairIndex][item],
       currentPairs[changedPairIndex][item]
     );
     newPairs[changedPairIndex][item] = setLastChangeType(removeFocus(fixedEditorState), 'undo');
-    entityToReplace.fixedData = {
-      ...newData,
-      pairs: newPairs,
+    entityToReplace = {
+      fixedData: {
+        ...newData,
+        pairs: newPairs,
+      },
+      shouldUndoAgain,
     };
-    entityToReplace.shouldUndoAgain = shouldUndoAgain;
   }
   return entityToReplace;
 }
@@ -418,7 +416,7 @@ function getContentStateForRedoStack(editorState: EditorState, prevEditorState: 
   const contentState = editorState.getCurrentContent();
   contentState
     .getBlockMap()
-    .filter(block => doesEntityExistInBothStates(block, contentState, prevContentState))
+    .filter((block: ContentBlock) => doesEntityExistInBothStates(block, prevContentState))
     .forEach((block: ContentBlock) => {
       const blockKey = block.getKey();
       const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
