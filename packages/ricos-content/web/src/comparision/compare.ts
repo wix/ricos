@@ -31,8 +31,8 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
   const objectWithoutIgnored = omitDeep(cloneDeep(object), allIgnoredKeys);
   const basetWithoutIgnored = omitDeep(cloneDeep(base), allIgnoredKeys);
 
-  objectWithoutIgnored.blocks && removeEmoji(object);
-  basetWithoutIgnored.blocks && removeEmoji(base);
+  objectWithoutIgnored.blocks && removeEmoji(objectWithoutIgnored);
+  basetWithoutIgnored.blocks && removeEmoji(basetWithoutIgnored);
 
   function changes(object, base) {
     return transform<any, any>(object, (result, value, key) => {
