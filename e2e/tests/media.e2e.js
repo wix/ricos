@@ -7,6 +7,7 @@ import {
   GALLERY_IMAGE_SETTINGS,
   IMAGE_SETTINGS,
   GIPHY_PLUGIN,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
@@ -300,6 +301,23 @@ describe('plugins', () => {
         cy.get(`[data-hook=${GALLERY_SETTINGS.UPLOAD}]`);
         cy.waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
+      });
+
+      context('settings', () => {
+        it('should disable gallery expand', () => {
+          cy.loadRicosEditorAndViewer('gallery');
+          cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
+          cy.openSettings(['ADV_SETTINGS']);
+          cy.eyesCheckWindow();
+          cy.get(`[data-hook=${GALLERY_SETTINGS.GALLERY_EXPAND_TOGGLE}]`).click();
+          cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+          cy.wait(200);
+          cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`)
+            .eq(1)
+            .parent()
+            .click();
+          cy.eyesCheckWindow();
+        });
       });
       // TODO: title and link image tests
       // // eslint-disable-next-line mocha/no-skipped-tests

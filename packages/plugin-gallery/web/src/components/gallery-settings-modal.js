@@ -231,12 +231,13 @@ export class GallerySettingsModal extends Component {
     }));
   };
 
-  renderToggle = ({ toggleKey, labelKey, tooltipText }) => (
+  renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook }) => (
     <LabeledToggle
       key={toggleKey}
       theme={this.props.theme}
       checked={this.state[toggleKey]}
       label={this.props.t(labelKey)}
+      dataHook={dataHook}
       onChange={this.toggleState(toggleKey)}
       tooltipText={tooltipText}
     />
@@ -246,10 +247,12 @@ export class GallerySettingsModal extends Component {
     {
       toggleKey: 'isExpandEnabled',
       labelKey: 'GalleryPlugin_Settings_ImagesOpenInExpandMode_Label',
+      dataHook: 'galleryExpandToggle',
     },
     {
       toggleKey: 'isDownloadEnabled',
       labelKey: 'GalleryPlugin_Settings_ImagesCanBeDownloaded_Label',
+      dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip'),
     },
   ];
@@ -271,7 +274,7 @@ export class GallerySettingsModal extends Component {
     const componentData = pubsub.get('componentData');
 
     return (
-      <div dir={languageDir}>
+      <div data-hook="settings" dir={languageDir}>
         {isMobile && (
           <GallerySettingsMobileHeader
             theme={this.props.theme}
