@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+
+- `plugin-headings`
+  - [#2321](https://github.com/wix-incubator/rich-content/pull/2321) Heading 1 can now be enabled via feature toggle `useHeadingOne` (only applicable for default config)
+
 </details>
 <hr/>
 
