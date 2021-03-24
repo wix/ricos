@@ -1,16 +1,8 @@
 /** Based on https://gist.github.com/Yimiprod/7ee176597fef230d1451 */
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any, fp/no-delete */
 
-import {
-  transform,
-  isEqualWith,
-  isEqual,
-  isObject,
-  omit,
-  pick,
-  cloneDeepWith,
-  cloneDeep,
-} from 'lodash';
+import { transform, isEqualWith, isEqual, isObject, omit, pick, cloneDeep } from 'lodash';
+import omitDeep from 'omit-deep';
 
 const IGNORED_KEYS = ['updatedDate', 'tempData', 'isCustomVideo'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
@@ -87,16 +79,4 @@ const removeEmoji = object => {
     ...block,
     entityRanges: block.entityRanges.filter(range => !emojiEntityKeys.includes(range.key)),
   }));
-};
-
-const omitDeep = (collection, excludeKeys: string[]) => {
-  function omitFn(value) {
-    if (value && typeof value === 'object') {
-      excludeKeys.forEach(key => {
-        delete value[key];
-      });
-    }
-  }
-
-  return cloneDeepWith(collection, omitFn);
 };
