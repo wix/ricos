@@ -1,7 +1,16 @@
 /** Based on https://gist.github.com/Yimiprod/7ee176597fef230d1451 */
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any, fp/no-delete */
 
-import { transform, isEqualWith, isEqual, isObject, omit, pick, cloneDeepWith } from 'lodash';
+import {
+  transform,
+  isEqualWith,
+  isEqual,
+  isObject,
+  omit,
+  pick,
+  cloneDeepWith,
+  cloneDeep,
+} from 'lodash';
 
 const IGNORED_KEYS = ['updatedDate', 'tempData', 'isCustomVideo'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
@@ -18,12 +27,12 @@ const OEMBED_KEYS = ['thumbnail_url', 'width', 'height'];
 export function compare(object, base, options: { verbose?: boolean; ignoredKeys?: string[] } = {}) {
   const { verbose, ignoredKeys } = options;
   const allIgnoredKeys = [...IGNORED_KEYS, ...(ignoredKeys || [])];
-  object.blocks && removeEmoji(object);
-  base.blocks && removeEmoji(base);
 
-  // Ignore ignoredKeys in object top level
-  const objectWithoutIgnored = omitDeep(object, allIgnoredKeys);
-  const basetWithoutIgnored = omitDeep(base, allIgnoredKeys);
+  const objectWithoutIgnored = omitDeep(cloneDeep(object), allIgnoredKeys);
+  const basetWithoutIgnored = omitDeep(cloneDeep(base), allIgnoredKeys);
+
+  objectWithoutIgnored.blocks && removeEmoji(object);
+  basetWithoutIgnored.blocks && removeEmoji(base);
 
   function changes(object, base) {
     return transform<any, any>(object, (result, value, key) => {
