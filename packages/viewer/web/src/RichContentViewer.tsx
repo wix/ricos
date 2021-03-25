@@ -120,7 +120,7 @@ class RichContentViewer extends Component<
       config,
     } = props;
     const { uiSettings } = config;
-    const disableDownload = uiSettings?.disableRightClick || uiSettings?.disableDownload;
+    const disableDownload = uiSettings?.disableDownload ?? uiSettings?.disableRightClick;
     const disableImagesExpand = config[IMAGE_TYPE]?.disableExpand;
     const disableGalleryExpand = config[GALLERY_TYPE]?.disableExpand;
 
