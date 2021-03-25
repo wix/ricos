@@ -36,19 +36,6 @@ interface BICallbacksForHelpers extends BICallbacks {
   // makes version optional
   onPluginAdd?(pluginId: string, entryPoint: string, version?: string): void;
   onPluginAddSuccess?(pluginId: string, entryPoint: string, params, version?: string): void;
-  onPublish?(
-    postId: string | undefined,
-    pluginsCount: Record<string, number> | undefined,
-    pluginsDetails:
-      | {
-          type: string;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          data: any;
-        }[]
-      | undefined,
-    params,
-    version?: string
-  ): void;
   isPreview?: () => boolean;
   onPluginAction?: OnPluginAction;
 }

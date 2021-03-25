@@ -72,7 +72,6 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
-import { getPluginParams } from 'wix-rich-content-plugin-commons';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -701,19 +700,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       return;
     }
     const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
-    const params = {};
-    pluginsDetails &&
-      Object.entries(pluginsDetails).forEach(([, value]) => {
-        const param = getPluginParams(value)[value.type];
-        param && (params[value.type] = param);
-      });
-    this.props.helpers.onPublish(
-      postId,
-      pluginsCount,
-      pluginsDetails,
-      params,
-      Version.currentVersion
-    );
+    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
   setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));

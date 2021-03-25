@@ -1,6 +1,5 @@
 import { ToolbarType } from './toolbarEnums';
 import { OnPluginAction } from './pluginsBiCallbacksTypes';
-import { TABLE_TYPE } from 'ricos-content';
 interface biCallbackParams {
   version?: string;
 }
@@ -13,19 +12,10 @@ export interface onPluginAddStepArgs extends biCallbackParams {
   entryType: EntryType;
   step: 'FileUploadDialog' | 'PluginModal';
 }
-
 export interface PluginAddSuccessParams {
   rows?: number;
   columns?: number;
 }
-
-export interface PublishParams {
-  [TABLE_TYPE]?: {
-    rows?: number;
-    columns?: number;
-  };
-}
-
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
   onPluginAddSuccess?(
@@ -46,7 +36,6 @@ export interface BICallbacks {
           data: any;
         }[]
       | undefined,
-    params: PublishParams | undefined,
     version: string
   ): void;
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;

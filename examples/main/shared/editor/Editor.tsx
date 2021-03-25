@@ -122,8 +122,8 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
         console.log('biPluginDelete', plugin_id, version),
       onPluginChange: async (plugin_id, changeObj, version) =>
         console.log('biPluginChange', plugin_id, changeObj, version),
-      onPublish: async (postId, pluginsCount, pluginsDetails, params, version) =>
-        console.log('biOnPublish', postId, pluginsCount, pluginsDetails, params, version),
+      onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
+        console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       onOpenEditorSuccess: async version => console.log('onOpenEditorSuccess', version),
       //
       // handleFileUpload: mockImageNativeUploadFunc,
