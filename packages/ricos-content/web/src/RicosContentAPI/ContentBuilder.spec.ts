@@ -12,7 +12,7 @@ import { setupContentBuilder } from './ContentBuilder';
 describe('RicosContentBuilder', () => {
   it('should add image node to content', () => {
     const generateKey = () => 'foo';
-    const RicosContentBuilder = setupContentBuilder(generateKey);
+    const { RicosContentBuilder } = setupContentBuilder(generateKey);
     const builder = new RicosContentBuilder();
     const imageData: ImageData = {
       config: {
@@ -35,7 +35,7 @@ describe('RicosContentBuilder', () => {
   });
   it('should add a paragraph with text to content', () => {
     const generateKey = () => 'foo';
-    const RicosContentBuilder = setupContentBuilder(generateKey);
+    const { RicosContentBuilder } = setupContentBuilder(generateKey);
     const builder = new RicosContentBuilder();
     const paragraphData: ParagraphData = {
       textAlignment: Common_TextAlignment.RIGHT,

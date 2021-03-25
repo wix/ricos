@@ -10,7 +10,7 @@ import {
 import {
   addNode as add,
   toTextDataArray,
-  removeNode as remove,
+  removeNode,
   setNode as set,
   updateNode as update,
 } from './builder-utils';
@@ -42,7 +42,7 @@ export interface ContentBuilder extends BaseContentBuilder {
   new (): BaseContentBuilder;
 }
 
-export const setupContentBuilder = (generateKey: () => string): ContentBuilder => {
+export const setupContentBuilder = (generateKey: () => string) => {
   function createNode(type: Node_Type, data: unknown): Node {
     return { key: generateKey(), type, ...dataByNodeType(type, data), nodes: [] };
   }
@@ -170,9 +170,11 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilder =
     removeNode!: (key: string, content: RichContent) => RichContent;
   }
 
+  const builderApis = {};
+
   [{ name: 'Paragraph', type: 'PARAGRAPH', dataT: ParagraphData } as const].forEach(
     ({ name, type, dataT }) => {
-      RicosContentBuilder.prototype[`add${name}`] = function({
+      builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
         data,
         text,
         index,
@@ -191,7 +193,7 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilder =
         });
       };
 
-      RicosContentBuilder.prototype[`update${name}`] = function({
+      builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
         data,
         text,
         key,
@@ -206,7 +208,7 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilder =
         });
       };
 
-      RicosContentBuilder.prototype[`set${name}`] = function({
+      builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
         data,
         key,
         content,
@@ -225,7 +227,7 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilder =
     { name: 'Image', type: 'IMAGE', dataT: ImageData } as const,
     { name: 'Divider', type: 'DIVIDER', dataT: DividerData } as const,
   ].forEach(({ name, type, dataT }) => {
-    RicosContentBuilder.prototype[`add${name}`] = function({
+    builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
       data,
       index,
       before,
@@ -242,7 +244,7 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilder =
       });
     };
 
-    RicosContentBuilder.prototype[`update${name}`] = function({
+    builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
       data,
       key,
       content,
@@ -250,7 +252,7 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilder =
       return updateNode({ data, type: (type as unknown) as Node_Type, key, content });
     };
 
-    RicosContentBuilder.prototype[`set${name}`] = function({
+    builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
       data,
       key,
       content,
@@ -259,12 +261,11 @@ export const setupContentBuilder = (generateKey: () => string): ContentBuilder =
     };
   });
 
-  RicosContentBuilder.prototype.removeNode = function(
-    key: string,
-    content: RichContent
-  ): RichContent {
-    return remove(key, content);
-  };
+  RicosContentBuilder.prototype.removeNode = removeNode;
 
-  return (RicosContentBuilder as unknown) as ContentBuilder;
+  return {
+    RicosContentBuilder: (RicosContentBuilder as unknown) as ContentBuilder,
+    ...builderApis,
+    removeNode,
+  };
 };
