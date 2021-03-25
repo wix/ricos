@@ -117,7 +117,16 @@ const extractSequentialBlockArrays = ({ blocks }: DraftContent, blockType: strin
 };
 
 const extractMedia = ({ entityMap }: DraftContent) =>
-  Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
+  Object.values(entityMap)
+    .filter(entity => {
+      const { config = {} } = entity.data || {};
+      if ('spoiler' in config) {
+        return !config.spoiler.enabled;
+      } else {
+        return true;
+      }
+    })
+    .reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
 const isMediaItem = (type: string | undefined) =>
   type && ['image', 'video', 'giphy'].includes(type);
