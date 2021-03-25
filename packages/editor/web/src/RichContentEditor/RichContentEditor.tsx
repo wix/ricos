@@ -657,7 +657,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.props.isInnerRCE) {
       this.props.handleUndoCommand?.();
     } else {
-      this.updateEditorState(undo(editorState || this.state.editorState, true));
+      this.updateEditorState(undo(editorState || this.state.editorState));
       this.setState({ readOnly: false });
     }
     return 'handled';

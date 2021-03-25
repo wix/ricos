@@ -438,15 +438,12 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
       );
 }
 
-export const undo = (editorState: EditorState, experimentUndo = false): EditorState => {
+export const undo = (editorState: EditorState): EditorState => {
   if (editorState.getUndoStack().isEmpty()) {
     return editorState;
   }
-  if (experimentUndo) {
-    const newEditorState = shiftRedoStack(EditorState.undo(editorState));
-    return updateUndoEditorState(editorState, newEditorState);
-  }
-  return removeCompositionModeFromEditorState(EditorState.undo(editorState));
+  const newEditorState = shiftRedoStack(EditorState.undo(editorState));
+  return updateUndoEditorState(editorState, newEditorState);
 };
 
 export const redo = (editorState: EditorState): EditorState => {

@@ -57,23 +57,39 @@ describe('plugins', () => {
     it('should undo and redo accordion plugin customizations', function() {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
       cy.addAccordion();
-      cy.focusAccordion(1).type('Yes\n');
+      cy.focusAccordion(1).type('Yes ');
       cy.addAccordionPair();
       cy.focusAccordion(2).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
-      cy.undo()
-        .undo()
-        .undo()
-        .undo()
-        .undo()
-        .undo()
-        .undo();
-      cy.redo()
-        .redo()
-        .redo()
-        .redo();
-      cy.redo()
-        .redo()
-        .redo();
+      cy.wait(1000);
+      cy.undo();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('not.exist');
+      cy.undo();
+      cy.get(`[data-rbd-draggable-context-id=${0}]`)
+        .eq(1)
+        .should('not.exist');
+      cy.wait(100);
+      cy.undo().undo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
+      cy.undo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
+      cy.undo();
+      cy.get('.public-DraftStyleDefault-block > span').should('not.have.text', 'Yes');
+      cy.undo().undo();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('not.exist');
+      cy.redo().redo();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('exist');
+      cy.redo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
+      cy.redo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
+      cy.redo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Yes');
+      cy.redo().redo();
+      cy.get(`[data-rbd-draggable-context-id=${1}]`)
+        .eq(1)
+        .should('exist');
+      cy.redo();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('exist');
       cy.eyesCheckWindow(this.test.title);
     });
   });
