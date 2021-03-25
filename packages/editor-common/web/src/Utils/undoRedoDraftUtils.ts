@@ -21,10 +21,10 @@ export function setLastChangeType(editorState: EditorState, lastChangeType: stri
   return EditorState.set(editorState, { lastChangeType });
 }
 
-export function preserveSelection(editorState: EditorState, newEditorState: EditorState) {
+export function preserveSelection(sourceEditorState: EditorState, targetEditorState: EditorState) {
   return EditorState.forceSelection(
-    newEditorState,
-    editorState.getCurrentContent().getSelectionBefore()
+    targetEditorState,
+    sourceEditorState.getCurrentContent().getSelectionBefore()
   );
 }
 
@@ -73,7 +73,7 @@ export function didBlocksChange(contentState: ContentState, newContentState: Con
   });
 }
 
-export function doesEntityExistInBothStates(block: ContentBlock, newContentState: ContentState) {
+export function doesEntityExistInBoth(block: ContentBlock, newContentState: ContentState) {
   const currentEntityKey = block.getEntityAt(0);
   const newEntityKey = newContentState.getBlockForKey(block.getKey())?.getEntityAt(0);
   return !!(block.getType() === 'atomic' && currentEntityKey && newEntityKey);

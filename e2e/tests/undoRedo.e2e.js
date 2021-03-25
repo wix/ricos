@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /*global cy*/
-import { IMAGE_SETTINGS } from '../cypress/dataHooks';
+import { IMAGE_SETTINGS, PLUGIN_COMPONENT } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
 
@@ -37,16 +37,20 @@ describe('plugins', () => {
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.addImageTitle();
       cy.undo();
-      cy.eyesCheckWindow('remove image caption');
+      cy.get('div').should('not.have.text', 'Title');
       cy.undo();
-      cy.eyesCheckWindow('remove text');
+      cy.get('span').should('not.have.text', 'testing undo redo for plugins');
       cy.undo();
-      cy.eyesCheckWindow('remove image');
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('not.exist');
       cy.redo();
-      cy.eyesCheckWindow('return image');
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('exist');
       cy.redo();
-      cy.eyesCheckWindow('return text');
+      cy.get('.public-DraftStyleDefault-block > [data-offset-key="2s2ri-0-0"] > span').should(
+        'have.text',
+        'testing undo redo for plugins'
+      );
       cy.redo();
+      cy.get('input').should('have.value', 'Title');
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -56,7 +60,6 @@ describe('plugins', () => {
       cy.focusAccordion(1).type('Yes\n');
       cy.addAccordionPair();
       cy.focusAccordion(2).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
-      cy.eyesCheckWindow(this.test.title);
       cy.undo()
         .undo()
         .undo()
@@ -64,7 +67,6 @@ describe('plugins', () => {
         .undo()
         .undo()
         .undo();
-      cy.eyesCheckWindow('undid all changes of accordion');
       cy.redo()
         .redo()
         .redo()
@@ -72,7 +74,7 @@ describe('plugins', () => {
       cy.redo()
         .redo()
         .redo();
-      cy.eyesCheckWindow('redid all changes of accordion');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });

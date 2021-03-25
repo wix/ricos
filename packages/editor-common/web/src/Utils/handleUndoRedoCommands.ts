@@ -9,7 +9,7 @@ import {
   setLastChangeType,
   getBlocksEntityTypeAndData,
   didBlocksChange,
-  doesEntityExistInBothStates,
+  doesEntityExistInBoth,
 } from './undoRedoDraftUtils';
 import {
   IMAGE_TYPE,
@@ -48,7 +48,7 @@ function getType(type: string) {
   return type;
 }
 
-function checkInnerRicosEntity(currentBlock, contentState, newContentState) {
+function getFixedEntityFromInnerRicos(currentBlock, contentState, newContentState) {
   const { key: blockKey } = currentBlock;
   const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
   const { data: newData } = getBlocksEntityTypeAndData(blockKey, newContentState);
@@ -58,7 +58,7 @@ function checkInnerRicosEntity(currentBlock, contentState, newContentState) {
   return didInnerRicosChange && entityToReplace;
 }
 
-function checkEntity(currentBlock, contentState, newContentState) {
+function getFixedEntity(currentBlock, contentState, newContentState) {
   const { key: blockKey } = currentBlock;
   const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
   const { data: newData } = getBlocksEntityTypeAndData(blockKey, newContentState);
@@ -78,13 +78,14 @@ function getEntityToReplace(newContentState, contentState): EntityToReplace {
   let entityToReplace;
   const didChange = contentState
     .getBlockMap()
-    .filter((block: ContentBlock) => doesEntityExistInBothStates(block, newContentState))
+    .filter((block: ContentBlock) => doesEntityExistInBoth(block, newContentState))
     .some(currentBlock => {
       const { key: blockKey } = currentBlock;
       const { type } = getBlocksEntityTypeAndData(blockKey, contentState);
-      const entity = INNER_RICOS_TYPES.includes(type)
-        ? checkInnerRicosEntity(currentBlock, contentState, newContentState)
-        : checkEntity(currentBlock, contentState, newContentState);
+      const fixedEntityGetter = INNER_RICOS_TYPES.includes(type)
+        ? getFixedEntityFromInnerRicos
+        : getFixedEntity;
+      const entity = fixedEntityGetter(currentBlock, contentState, newContentState);
       entityToReplace = {
         blockKey,
         ...entity,
@@ -96,13 +97,13 @@ function getEntityToReplace(newContentState, contentState): EntityToReplace {
 
 // fixes entities in EditorStates
 function fixBrokenRicosStates(
-  newEditorState: EditorState,
+  nextEditorState: EditorState,
   editorState: EditorState
 ): UndoOperationResult {
-  const newContentState = newEditorState.getCurrentContent();
+  const newContentState = nextEditorState.getCurrentContent();
   const contentState = editorState.getCurrentContent();
   const result: UndoOperationResult = {
-    fixedEditorState: preserveSelection(editorState, newEditorState),
+    fixedEditorState: preserveSelection(editorState, nextEditorState),
     shouldUndoAgain: false,
   };
   if (!didBlocksChange(contentState, newContentState)) {
@@ -416,7 +417,7 @@ function getContentStateForRedoStack(editorState: EditorState, prevEditorState: 
   const contentState = editorState.getCurrentContent();
   contentState
     .getBlockMap()
-    .filter((block: ContentBlock) => doesEntityExistInBothStates(block, prevContentState))
+    .filter((block: ContentBlock) => doesEntityExistInBoth(block, prevContentState))
     .forEach((block: ContentBlock) => {
       const blockKey = block.getKey();
       const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
