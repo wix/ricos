@@ -186,7 +186,7 @@
 	"LinkTo_Modal_Header": "リンク先を選択",
 	"HtmlEditPanel_HttpsError": "URL が HTTPS で始まることを確認してください",
 	"Poll_Presets_Popup_Subtitle": "後からいつでも編集することができます。",
-	"BlockToolbar_Section_Advanced": "Advanced ",
+	"BlockToolbar_Section_Advanced": "高度なツール ",
 	"SettingsPanelFooter_Done": "完了",
 	"GallerySettings_Image_Settings": "編集する",
 	"GallerySettings_LayoutControlSection_Row": "行の高さ",

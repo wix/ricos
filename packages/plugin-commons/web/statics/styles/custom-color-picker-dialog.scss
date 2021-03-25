@@ -1,44 +1,17 @@
-@import '~wix-rich-content-common/dist/statics/styles/consts';
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
-@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .colorPickerDialog {
   width: 209px;
   height: 250px;
   margin: 0;
-  @include phone {
-    margin: 27px 18px 15px;
+  &.mobile  {
+    height: 330px;
+    width: 100%;
+    margin: 0 auto;
   }
 }
 
-.colorPickerDialog_button {
-  border: 1px solid $action-color-fallback;;
-  outline: none;
-  background: transparent;
-  line-height: 1.5;
-  font-size: 14px;
-  font-weight: 300;
-  cursor: pointer;
-  flex: none;
-  height: 32px;
-  width: 88px;
-  padding: 0;
-  color: $action-color-fallback;
-  margin: 0 6px;
-}
-
-.colorPickerDialog_button_update {
-  background-color: $action-color-fallback;
-  color: white;
-}
-
-.colorPickerDialog_buttons {
-  display: flex;
-  justify-content:center;
-  margin: 12px;
-}
-
-.colorPickerDialog_separator { 
+.colorPickerDialog_separator {
   border: none;
   height: 1px;
   background: rgba(51, 51, 51, 0.1);
