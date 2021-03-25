@@ -107,7 +107,7 @@ export class RicosEngine extends Component<EngineProps> {
     } = modalSettings;
     const { pauseMedia, disableDownload, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
-    const disableRightClick = mediaSettings.disableRightClick || disableDownload;
+    const disableRightClick = mediaSettings?.disableRightClick ?? disableDownload;
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
     const ricosPropsToMerge: RichContentProps = {
