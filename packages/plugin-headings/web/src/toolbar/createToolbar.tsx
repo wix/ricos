@@ -10,7 +10,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import HeadingButton from './HeadingButton';
 import HeadingsDropDownPanel from './HeadingPanel';
-import { DEFAULT_HEADERS_DROPDOWN_OPTIONS, HEADING_TYPE_TO_ELEMENT } from '../constants';
+import { HEADING_TYPE_TO_ELEMENT } from '../constants';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 import { HEADINGS_DROPDOWN_TYPE } from '../types';
 
@@ -66,7 +66,7 @@ const createToolbar: CreatePluginToolbar = config => {
     currentHeading = getCurrentHeading();
     return (
       <HeadingsDropDownPanel
-        customHeadingsOptions={settings?.customHeadings || DEFAULT_HEADERS_DROPDOWN_OPTIONS}
+        customHeadingsOptions={settings?.customHeadings}
         heading={currentHeading}
         onSave={save}
         isMobile={isMobile}
