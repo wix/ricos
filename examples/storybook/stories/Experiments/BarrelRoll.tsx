@@ -2,7 +2,7 @@ import React from 'react';
 
 import { RichContentEditorBox, Page } from '../Components/StoryParts';
 import { RicosEditor } from 'ricos-editor';
-import './Experiments.global.css';
+import './BarrelRoll.global.css';
 
 export default () => {
   const _rcProps = {
