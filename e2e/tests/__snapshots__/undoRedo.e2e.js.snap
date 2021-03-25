@@ -1,0 +1,224 @@
+exports[`plugins > undo redo > should undo and redo image plugin customizations #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "testing undo redo for plugins",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "metadata": {
+          "caption": "Title"
+        },
+        "src": {
+          "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "height": 1000,
+          "id": "8b72558253b2502b401bb46e5599f22a",
+          "original_file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "width": 1920
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`plugins > undo redo > should undo and redo accordion plugin customizations #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOnlyOne": false,
+          "expandState": "first_expanded"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [
+                    {
+                      "key": 0,
+                      "length": 1,
+                      "offset": 0
+                    }
+                  ],
+                  "inlineStyleRanges": [],
+                  "key": 1,
+                  "text": " ",
+                  "type": "atomic"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 2,
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "data": {
+                    "config": {
+                      "alignment": "center",
+                      "disableExpand": false,
+                      "showDescription": true,
+                      "showTitle": true,
+                      "size": "content"
+                    },
+                    "src": {
+                      "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+                      "height": 1000,
+                      "id": "8b72558253b2502b401bb46e5599f22a",
+                      "original_file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+                      "width": 1920
+                    }
+                  },
+                  "mutability": "IMMUTABLE",
+                  "type": "wix-draft-plugin-image"
+                }
+              }
+            },
+            "key": "syzz39rcc",
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "Yes ",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": "pbd8wx06t",
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};

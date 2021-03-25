@@ -521,6 +521,7 @@ Cypress.Commands.add('openDropdownMenu', (selector = '') => {
 Cypress.Commands.add('undo', () => {
   cy.getEditor()
     .first()
+    .type('{ctrl+z}')
     .type('{cmd+z}');
   cy.wait(100);
 });
@@ -528,6 +529,7 @@ Cypress.Commands.add('undo', () => {
 Cypress.Commands.add('redo', () => {
   cy.getEditor()
     .first()
+    .type('{ctrl+shift+z}')
     .type('{cmd+shift+z}');
   cy.wait(100);
 });
