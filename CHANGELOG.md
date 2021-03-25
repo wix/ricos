@@ -17,11 +17,15 @@
     Click to see more.
   </summary>
 	
-### :bug: Bug Fix
-- `plugin-spoiler`
-  - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
 </details>
 <hr/>
+
+## 8.27.7 (Mar 25, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
 
 ## 8.27.6 (Mar 25, 2021)
 
