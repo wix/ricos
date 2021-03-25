@@ -32,8 +32,6 @@ const getAllPluginsNames = ({
     'ricos-common',
     'ricos-content',
     'rich-content-schema',
-    'toPlainText',
-    'fromPlainText',
     'converters',
     'editor-common',
   ];
