@@ -46,11 +46,6 @@ class FileUploadViewer extends PureComponent {
     }
   };
 
-  resizer = new ResizeObserver(entries => {
-    const currentWidth = Math.round(entries[0].contentRect.width);
-    this.updateDimensions(currentWidth);
-  });
-
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, pluginFileUploadSchema);
@@ -60,7 +55,13 @@ class FileUploadViewer extends PureComponent {
     }
   }
   componentDidMount() {
-    this.resizer.observe(this.fileUploadViewerRef.current);
+    if (window?.ResizeObserver) {
+      this.resizer = new ResizeObserver(entries => {
+        const currentWidth = Math.round(entries[0].contentRect.width);
+        this.updateDimensions(currentWidth);
+        this.resizer.observe(this.fileUploadViewerRef.current);
+      });
+    }
   }
 
   switchReadyIcon = () => {
