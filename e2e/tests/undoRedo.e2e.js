@@ -30,7 +30,7 @@ describe('plugins', () => {
     it('should undo and redo image plugin customizations', function() {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
       cy.addImage();
-      cy.enterParagraphs([' testing undo redo for plugins']);
+      cy.enterText(' testing undo redo for plugins');
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.addImageTitle();
