@@ -24,6 +24,13 @@
 </details>
 <hr/>
 
+## 8.27.6 (Mar 25, 2021)
+
+### :nail_care: Polish
+
+- `plugin-headings`
+  - [#2321](https://github.com/wix-incubator/rich-content/pull/2321) Heading 1 can now be enabled via feature toggle `useHeadingOne` (only applicable for default config)
+
 ## 8.27.5 (Mar 24, 2021)
 
 ### :bug: Bug Fix
