@@ -33,7 +33,7 @@ class FileUploadViewer extends PureComponent {
 
   breakPoints = { firstBreak: 320, secondBreak: 100 };
 
-  shouldUpdateWidthState = () => {
+  shouldUpdateWidth = () => {
     const currentWidth = this.fileUploadViewerRef.current.clientWidth;
     return (
       this.breakPoints.firstBreak >= currentWidth || this.breakPoints.firstBreak < currentWidth
@@ -41,8 +41,8 @@ class FileUploadViewer extends PureComponent {
   };
 
   updateDimensions = currentWidth => {
-    if (this.shouldUpdateWidthState) {
-      this.setState({ currentWidth: currentWidth + 1 });
+    if (this.shouldUpdateWidth) {
+      this.setState({ currentWidth });
     }
   };
 
@@ -60,7 +60,6 @@ class FileUploadViewer extends PureComponent {
     }
   }
   componentDidMount() {
-    this.setState({ currentWidth: this.fileUploadViewerRef.current.offsetWidth });
     this.resizer.observe(this.fileUploadViewerRef.current);
   }
 
@@ -140,7 +139,7 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderViewerBody({ name, type, downloadUrl, previewUrl, downloadTarget }) {
-    //todo =>Refactor
+    //todo => Refactor
     // eslint-disable-next-line react/prop-types
     const { isMobile, showLoader, showReadyIcon } = this.props;
     const nameWithoutType = getNameWithoutType(name);
@@ -164,13 +163,16 @@ class FileUploadViewer extends PureComponent {
             {showFileIcon && (
               <Icon
                 styles={this.styles}
-                className={classNames(this.styles.file_upload_icon, {
-                  [this.styles.removeMargin]: isSecondBreakPoint,
+                className={classNames(styles.file_loader_icon_color, {
+                  [this.styles.file_upload_icon_initial]: !isFirstBreakPoint && !isSecondBreakPoint,
+                  [this.styles.file_upload_icon_first_break]:
+                    isFirstBreakPoint && !isSecondBreakPoint,
+                  [this.styles.file_upload_icon_second_break]: isSecondBreakPoint,
                 })}
               />
             )}
             {!isSecondBreakPoint && (
-              <div style={{ width: 'calc(100% - 72px)' }}>
+              <div style={{ width: 'calc(100% - 75px)' }}>
                 <div className={this.styles.file_upload_name_container}>
                   <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
                   {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
@@ -185,7 +187,7 @@ class FileUploadViewer extends PureComponent {
             href={downloadUrl}
             target={downloadTarget}
             className={this.styles.file_download_link}
-            download="surf"
+            download
           >
             {this.renderIcon(Icon)}
             {!isMobile && !isFirstBreakPoint && this.renderIcon()}
@@ -207,7 +209,7 @@ class FileUploadViewer extends PureComponent {
     let previewUrl;
     fileUrl =
       // eslint-disable-next-line max-len
-      'https://images.pexels.com/photos/416676/pexels-photo-416676.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260';
+      'https://freepngimg.com/thumb/fir%20tree/11-fir-tree-png-image.png';
     const downloadUrl = fileUrl;
     if (filesWithPreview.includes(type)) {
       const previewIndexLimit = downloadUrl.indexOf('&filename');

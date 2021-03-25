@@ -91,14 +91,28 @@
   max-width: 20%;
   color: $primary-text-color;
   white-space: nowrap;
-  overflow: hidden;
+  // overflow: hidden;
   padding-right: 30px;
 }
 
-.file_upload_icon {
+.file_loader_icon_color {
+  color: $action-color;
   margin-right: 12px;
   margin-left: 20px;
-  color: $action-color;
+}
+
+.file_upload_icon_initial {
+  margin-right: 12px;
+  margin-left: 20px;
+}
+
+.file_upload_icon_second_break {
+  margin: 0;
+}
+
+.file_upload_icon_first_break {
+  margin-right: 5px;
+  margin-left: 15px;
 }
 
 /* rtl:ignore */
@@ -148,8 +162,4 @@
 
 .justifyCenter {
   justify-content: center;
-}
-
-.removeMargin {
-  margin: 0;
 }
