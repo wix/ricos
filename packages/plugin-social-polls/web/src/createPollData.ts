@@ -3,14 +3,11 @@ import { DEFAULT_COMPONENT_DATA } from './defaults';
 import { CreatePluginsDataMap, RICOS_POLL_TYPE, Node_Type } from 'wix-rich-content-common';
 import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 
-export const createPollData: CreatePluginsDataMap[typeof RICOS_POLL_TYPE] = (
-  pluginData,
-  currentData,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createPollData: CreatePluginsDataMap[typeof RICOS_POLL_TYPE] | any = (
+  pluginData = {},
   isRicosSchema = false
 ) => {
-  if (!pluginData) {
-    return DEFAULT_COMPONENT_DATA;
-  }
   const pollData = isRicosSchema ? convertNodeDataToDraft(Node_Type.POLL, pluginData) : pluginData;
-  return merge({}, currentData || DEFAULT_COMPONENT_DATA, pollData);
+  return merge({}, DEFAULT_COMPONENT_DATA, pollData);
 };

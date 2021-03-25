@@ -80,14 +80,14 @@ const divider = {
   data: DividerData.fromJSON({
     type: DividerData_DividerType.DOUBLE,
   }),
-  updatedData: DividerData.fromJSON({
+  newData: DividerData.fromJSON({
     type: DividerData_DividerType.DASHED,
   }),
   expectedData: {
     type: 'double',
     config: { size: 'large', alignment: 'center', textWrap: 'nowrap' },
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     type: 'dashed',
     config: { size: 'large', alignment: 'center', textWrap: 'nowrap' },
   },
@@ -108,7 +108,7 @@ const giphy = {
       width: 500,
     },
   }),
-  updatedData: GiphyData.fromJSON({
+  newData: GiphyData.fromJSON({
     gif: {
       originalUrl: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.gif',
       originalMp4: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.mp4',
@@ -142,7 +142,7 @@ const giphy = {
       width: 500,
     },
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     config: {
       alignment: 'center',
       size: 'content',
@@ -170,7 +170,7 @@ const html = {
   type: RICOS_HTML_TYPE,
   nodeType: Node_Type.HTML,
   data: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
-  updatedData: HTMLData.fromJSON({ src: 'www.sport5.co.il' }),
+  newData: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url' }),
   expectedData: {
     config: {
       alignment: 'center',
@@ -180,11 +180,9 @@ const html = {
     src: 'www.wix.com',
     srcType: 'url',
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     config: {
       alignment: 'center',
-      height: 550,
-      width: 0,
     },
     src: 'www.sport5.co.il',
     srcType: 'url',
@@ -225,7 +223,7 @@ const gallery = {
       },
     ],
   }),
-  updatedData: GalleryData.fromJSON({
+  newData: GalleryData.fromJSON({
     items: [
       {
         metadata: {
@@ -304,7 +302,7 @@ const gallery = {
       videoPlay: 'onClick',
     },
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     config: {
       alignment: 'center',
       disableExpand: false,
@@ -364,14 +362,14 @@ const poll = {
     design: {},
     layout: {},
   }),
-  updatedData: PollData.fromJSON({
+  newData: PollData.fromJSON({
     config: { enableVoteRole: false },
     poll: {},
     design: {},
     layout: {},
   }),
   expectedData: {},
-  expectedUpdatedData: {},
+  expectedNewData: {},
 };
 
 // TODO: check about expected data
@@ -381,11 +379,11 @@ const video = {
   data: VideoData.fromJSON({
     url: 'https://www.youtube.com/watch?v=2iDTAGKkixE&ab_channel=QueenClub',
   }),
-  updatedData: VideoData.fromJSON({
+  newData: VideoData.fromJSON({
     url: 'https://www.youtube.com/watch?v=tIA_vrBDC1g&ab_channel=BoyceAvenue',
   }),
   expectedData: {},
-  expectedUpdatedData: {},
+  expectedNewData: {},
 };
 
 const file = {
@@ -399,7 +397,7 @@ const file = {
       alignment: 'left',
     },
   }),
-  updatedData: FileData.fromJSON({
+  newData: FileData.fromJSON({
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'Updated file sample',
     config: {
@@ -418,7 +416,7 @@ const file = {
       downloadTarget: '_blank',
     },
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'Updated file sample',
     config: {
@@ -443,7 +441,7 @@ const image = {
       height: 1000,
     },
   }),
-  updatedData: ImageData.fromJSON({
+  newData: ImageData.fromJSON({
     config: { alignment: ImageConfig_ImageAlignment.LEFT },
     src: {
       id: '2f64886b1998251a4a5e47d25fff5ffa',
@@ -469,7 +467,7 @@ const image = {
       width: 1920,
     },
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     config: {
       alignment: 'left',
       disableExpand: false,
@@ -491,13 +489,13 @@ const link = {
   type: RICOS_LINK_TYPE,
   decorationType: Decoration_Type.LINK,
   data: LinkData.fromJSON({ url: 'www.wix.com' }),
-  updatedData: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
+  newData: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
   expectedData: {
     url: 'www.wix.com',
     rel: 'noopener',
     target: '_self',
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     url: 'www.sport5.co.il',
     rel: 'nofollow',
     target: '_self',
@@ -508,7 +506,7 @@ const mention = {
   type: RICOS_MENTION_TYPE,
   decorationType: Decoration_Type.MENTION,
   data: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), trigger: '@' },
-  updatedData: {
+  newData: {
     mention: MentionData.fromJSON({ name: 'chen', slug: 'blibla' }),
     trigger: '@',
   },
@@ -518,7 +516,7 @@ const mention = {
       slug: 'blabla',
     },
   },
-  expectedUpdatedData: {
+  expectedNewData: {
     mention: {
       name: 'chen',
       slug: 'blibla',

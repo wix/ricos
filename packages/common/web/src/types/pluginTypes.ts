@@ -88,11 +88,9 @@ export { Node_Type, Decoration_Type, LinkData };
 
 export type CreatePluginData<PluginData> = (
   pluginData?: PluginData,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  currentData?: any,
   isRicosSchema?: boolean
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
-Record<string, any> | undefined;
+Record<string, any>;
 
 export type MentionData = { mention: MentionPluginData; trigger: string };
 

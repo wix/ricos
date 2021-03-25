@@ -1,12 +1,8 @@
-import { merge } from 'lodash';
 import { CreatePluginsDataMap, RICOS_MENTION_TYPE } from 'wix-rich-content-common';
 
-export const createMentionData: CreatePluginsDataMap[typeof RICOS_MENTION_TYPE] = (
-  pluginData,
-  currentData
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createMentionData: CreatePluginsDataMap[typeof RICOS_MENTION_TYPE] | any = (
+  pluginData = {}
 ) => {
-  if (!pluginData) {
-    return undefined;
-  }
-  return merge({}, currentData || {}, pluginData);
+  return pluginData;
 };

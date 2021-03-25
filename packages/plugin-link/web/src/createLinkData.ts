@@ -1,5 +1,3 @@
-import { merge } from 'lodash';
-import { DEFAULTS } from './defaults';
 import { CreatePluginsDataMap, RICOS_LINK_TYPE, LinkData } from 'wix-rich-content-common';
 
 const convertLinkData = (data: LinkData) => {
@@ -17,13 +15,7 @@ const convertLinkData = (data: LinkData) => {
   return { ...linkData, url: data.url, href: data.href };
 };
 
-export const createLinkData: CreatePluginsDataMap[typeof RICOS_LINK_TYPE] = (
-  pluginData,
-  currentData
-) => {
-  if (!pluginData) {
-    return undefined;
-  }
-  const linkData = convertLinkData(pluginData);
-  return merge({}, currentData || DEFAULTS, linkData);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createLinkData: CreatePluginsDataMap[typeof RICOS_LINK_TYPE] = pluginData => {
+  return pluginData ? convertLinkData(pluginData) : {};
 };
