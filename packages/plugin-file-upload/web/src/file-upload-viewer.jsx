@@ -36,7 +36,8 @@ class FileUploadViewer extends PureComponent {
   shouldUpdateWidth = () => {
     const currentWidth = this.fileUploadViewerRef.current.clientWidth;
     return (
-      this.breakPoints.firstBreak >= currentWidth || this.breakPoints.firstBreak < currentWidth
+      this.breakPoints.firstBreak >= currentWidth ||
+      (this.breakPoints.firstBreak < currentWidth && currentWidth < 400)
     );
   };
 
@@ -59,9 +60,9 @@ class FileUploadViewer extends PureComponent {
       this.resizer = new ResizeObserver(entries => {
         const currentWidth = Math.round(entries[0].contentRect.width);
         this.updateDimensions(currentWidth);
-        this.resizer.observe(this.fileUploadViewerRef.current);
       });
     }
+    this.resizer.observe(this.fileUploadViewerRef.current);
   }
 
   switchReadyIcon = () => {
@@ -210,7 +211,7 @@ class FileUploadViewer extends PureComponent {
     let previewUrl;
     fileUrl =
       // eslint-disable-next-line max-len
-      'https://freepngimg.com/thumb/fir%20tree/11-fir-tree-png-image.png';
+      'https://wixmp-39ab0c0354ff50648f4c4e4f.appspot.com/_api/download/file?downloadToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1cm46YXBwOjZlYTNhM2FjZjlkYjRkMmE4MzE5NjFhZGM1NGZkY2Q3Iiwib2JqIjpudWxsLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdLCJpc3MiOiJ1cm46YXBwOjZlYTNhM2FjZjlkYjRkMmE4MzE5NjFhZGM1NGZkY2Q3IiwiaWF0IjoxNjE2Njg2ODE1LCJqdGkiOiI3MmY3MjE0Y2I0ZmUiLCJleHAiOjE2MTY2ODcxMjUsInBheWxvYWQiOnsicGF0aCI6Ii84ZmNkYjEwMC1iNTY5LTQ5N2QtODdmNS03OTVkZWVkMDJmMjIvYjRmMmQ1NWNkNGJhNDc1NWFjNmE1YzA2MjA0NWJkNTEtc2FtcGxlLVBERi5wZGYiLCJleHBpcnkiOjMwMCwic2F2ZUFzIjoic2FtcGxlLVBERi5wZGYifX0.HsnQUpIGQDvL9KLQe_Su-EQ894RMvGgnh-0pHD-1l3M';
     const downloadUrl = fileUrl;
     if (filesWithPreview.includes(type)) {
       const previewIndexLimit = downloadUrl.indexOf('&filename');
