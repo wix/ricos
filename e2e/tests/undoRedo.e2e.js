@@ -16,8 +16,6 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  afterEach(() => cy.matchContentSnapshot());
-
   context('undo redo', () => {
     before(function() {
       eyesOpen(this);
