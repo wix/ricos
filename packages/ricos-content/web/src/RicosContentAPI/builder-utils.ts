@@ -1,58 +1,65 @@
-import { curry, compose, find, findIndex, has, isString, isArray } from 'lodash/fp';
+import { curry, compose, map, findIndex, has, isNumber, isString, isArray } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 
 // functional stuff
-const right = (data: unknown) => ({
-  map: fn => right(fn(data)),
-  fold: r => r(data),
+const task = fork => ({
+  fork,
+  map(f) {
+    return task((rej, res) => this.fork(rej, compose(res, f)));
+  },
+  chain(t) {
+    return task((rej, res) => this.fork(rej, x => t(x).fork(rej, res)));
+  },
 });
 
-const left = (data: unknown) => ({
-  map: () => left(data),
-  fold: (r, l) => l(data),
-});
+task.of = (data: unknown) => task((rej, res) => res(data));
 
-const either = curry((predicate, data) => (predicate(data) ? right(data) : left(data)));
+const firstResolved = (tasks, i) =>
+  tasks[i].fork(
+    () => firstResolved(tasks, i + 1),
+    data => data
+  );
 
+const either = curry((predicate: (data: unknown) => boolean, data: unknown) =>
+  task((rej, res) => (predicate(data) ? res(data) : rej(data)))
+);
+
+// predicates
 const isIndexFound = either(index => index !== -1);
 
-const switchCase = compose(
-  ([, resolve]) => resolve(),
-  find(([predicate]) => predicate())
+const isIndexInRange = either(
+  ({ content, index }: { content: RichContent; index?: number }) =>
+    isNumber(index) && index >= 0 && index < content.nodes.length
 );
 
 // content transformers
-const appendNode = (node: Node, content: RichContent) => ({
-  ...content,
-  nodes: [...content.nodes, node],
-});
+const appendNode = (node: Node, content: RichContent) =>
+  task.of({
+    ...content,
+    nodes: [...content.nodes, node],
+  });
 
-const insertNode = (node: Node, index: number, content: RichContent) => ({
-  ...content,
-  nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index)],
-});
+const insertNode = curry((content: RichContent, node: Node, index: number) =>
+  isIndexInRange({ content, index }).map(() => ({
+    ...content,
+    nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index)],
+  }))
+);
 
-const replaceNode = (node: Node, index: number, content: RichContent) => ({
+const replaceNode = curry((node: Node, content: RichContent, index: number) => ({
   ...content,
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index + 1)],
-});
+}));
 
 const insertNodeByKey = (content: RichContent, node: Node, nodeKey: string, isAfter?: boolean) =>
-  right(content.nodes)
-    .map(findIndex(({ key }) => key === nodeKey))
-    .fold((index: number) => insertNode(node, isAfter ? index + 1 : index, content));
+  isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes))
+    .map((index: number) => (isAfter ? index + 1 : index))
+    .chain(insertNode(content, node));
 
 export const removeNode = (nodeKey: string, content: RichContent) => ({
   ...content,
   nodes: content.nodes.filter(({ key }) => key !== nodeKey),
 });
-
-// predicates
-const keyExists = (content: RichContent, nodeKey?: string) =>
-  content.nodes.some(({ key }) => key === nodeKey);
-
-const indexInRange = (content: RichContent, index?: number) =>
-  typeof index === 'number' && index >= 0 && index < content.nodes.length;
 
 export function addNode({
   node,
@@ -67,12 +74,15 @@ export function addNode({
   after?: string;
   content: RichContent;
 }): RichContent {
-  return switchCase([
-    [() => indexInRange(content, index), () => insertNode(node, <number>index, content)],
-    [() => keyExists(content, before), () => insertNodeByKey(content, node, <string>before)],
-    [() => keyExists(content, after), () => insertNodeByKey(content, node, <string>after, true)],
-    [() => true, () => appendNode(node, content)],
-  ]);
+  return firstResolved(
+    [
+      insertNode(content, node, <number>index),
+      insertNodeByKey(content, node, <string>before),
+      insertNodeByKey(content, node, <string>after, true),
+      appendNode(node, content),
+    ],
+    0
+  );
 }
 
 export function setNode({
@@ -84,9 +94,9 @@ export function setNode({
   key: string;
   content: RichContent;
 }): RichContent {
-  return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes)).fold(
-    index => replaceNode({ ...node, key: nodeKey }, index, content),
-    () => content
+  return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes)).fork(
+    () => content,
+    replaceNode({ ...node, key: nodeKey }, content)
   );
 }
 
@@ -101,10 +111,7 @@ export function updateNode({
 }): RichContent {
   return isIndexFound(
     findIndex(({ key, type }) => key === nodeKey && type === node.type, content.nodes)
-  ).fold(
-    index => replaceNode({ ...node, key: nodeKey }, index, content),
-    () => content
-  );
+  ).fork(() => content, replaceNode({ ...node, key: nodeKey }, content));
 }
 
 const isTextData = text => has('text', text) && has('decorations', text);
@@ -114,13 +121,13 @@ const toArray = t => [t];
 const toTextData = text => ({ text, decorations: [] });
 
 export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
-  return switchCase([
-    [() => isString(text), () => compose(toArray, toTextData)(text)],
-    [() => isTextData(text), () => toArray(text)],
+  return firstResolved(
     [
-      () => isArray(text),
-      () => (<(string | TextData)[]>text).map(t => (isString(t) ? toTextData(t) : t)),
+      either(isString, text).map(compose(toArray, toTextData)),
+      either(isTextData, text).map(toArray),
+      either(isArray, text).map(map(t => (isString(t) ? toTextData(t) : t))),
+      task.of([]),
     ],
-    [() => true, () => []],
-  ]);
+    0
+  );
 }
