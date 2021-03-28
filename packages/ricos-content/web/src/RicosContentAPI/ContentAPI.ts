@@ -1,5 +1,6 @@
-import { setupContentBuilder, ContentBuilder } from './ContentBuilder';
-import { setupContentExtractor, ContentExtractor } from './ContentExtractor';
+import { setupContentExtractor } from './RicosContentExtractor';
+import { setupContentBuilder } from './RicosContentBuilder';
+import { ContentBuilder, ContentExtractor } from '../types';
 
 export type ContentAPIConfig = {
   generateKey: () => string;

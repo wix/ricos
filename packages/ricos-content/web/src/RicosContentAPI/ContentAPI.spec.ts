@@ -1,3 +1,4 @@
+import { setupContentAPI } from './ContentAPI';
 import {
   ImageData,
   ImageConfig_ImageSize,
@@ -6,8 +7,7 @@ import {
   Node_Type,
   ParagraphData,
   Common_TextAlignment,
-} from 'ricos-schema';
-import { setupContentAPI } from './Content';
+} from 'ricos-schema/dist/types';
 
 describe('Ricos Content API', () => {
   it('should add image node to content', () => {

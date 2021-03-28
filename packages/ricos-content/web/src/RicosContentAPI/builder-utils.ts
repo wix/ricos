@@ -1,5 +1,5 @@
 import { curry, compose, map, findIndex, has, isNumber, isString, isArray } from 'lodash/fp';
-import { RichContent, TextData, Node } from 'ricos-schema';
+import { RichContent, TextData, Node } from 'ricos-schema/dist/types';
 import { task, either, firstResolved } from '../fp-utils';
 
 // predicates
@@ -52,15 +52,12 @@ export function addNode({
   after?: string;
   content: RichContent;
 }): RichContent {
-  return firstResolved(
-    [
-      insertNode(content, node, <number>index),
-      insertNodeByKey(content, node, <string>before),
-      insertNodeByKey(content, node, <string>after, true),
-      appendNode(node, content),
-    ],
-    0
-  );
+  return firstResolved([
+    insertNode(content, node, <number>index),
+    insertNodeByKey(content, node, <string>before),
+    insertNodeByKey(content, node, <string>after, true),
+    appendNode(node, content),
+  ]);
 }
 
 export function setNode({
@@ -99,13 +96,10 @@ const toArray = t => [t];
 const toTextData = text => ({ text, decorations: [] });
 
 export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
-  return firstResolved(
-    [
-      either(isString, text).map(compose(toArray, toTextData)),
-      either(isTextData, text).map(toArray),
-      either(isArray, text).map(map(t => (isString(t) ? toTextData(t) : t))),
-      task.of([]),
-    ],
-    0
-  );
+  return firstResolved([
+    either(isString, text).map(compose(toArray, toTextData)),
+    either(isTextData, text).map(toArray),
+    either(isArray, text).map(map(t => (isString(t) ? toTextData(t) : t))),
+    task.of([]),
+  ]);
 }

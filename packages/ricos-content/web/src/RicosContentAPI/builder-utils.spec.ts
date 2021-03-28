@@ -1,4 +1,4 @@
-import { Node_Type, TextData, DividerData_DividerType } from 'ricos-schema';
+import { Node_Type, TextData, DividerData_DividerType } from 'ricos-schema/dist/types';
 import { updateNode, setNode, addNode, toTextDataArray } from './builder-utils';
 
 describe('addNode util', () => {

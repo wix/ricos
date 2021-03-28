@@ -1,5 +1,12 @@
-import { ContentExtractor as Base } from '../types';
-import { RichContent, Node_Type, Node, ImageData, DividerData, ParagraphData } from 'ricos-schema';
+import { ContentExtractor } from '../types';
+import {
+  RichContent,
+  Node_Type,
+  Node,
+  ImageData,
+  DividerData,
+  ParagraphData,
+} from 'ricos-schema/dist/types';
 
 const nodeDataMapByType = (node: Node) =>
   ({
@@ -15,12 +22,12 @@ function getNodeDataByType(content: RichContent, nodeType: Node_Type) {
   );
 }
 
-export interface ContentExtractor extends Base {
-  new (): Base;
+export interface RicosExtractor extends ContentExtractor {
+  new (): ContentExtractor;
 }
 
-export const setupContentExtractor = (): Base & {
-  RicosContentExtractor: ContentExtractor;
+export const setupContentExtractor = (): ContentExtractor & {
+  RicosContentExtractor: RicosExtractor;
 } => {
   class RicosContentExtractor {}
 
@@ -37,7 +44,7 @@ export const setupContentExtractor = (): Base & {
   });
 
   return {
-    RicosContentExtractor: (RicosContentExtractor as unknown) as ContentExtractor,
-    ...(extractorAPIs as Base),
+    RicosContentExtractor: (RicosContentExtractor as unknown) as RicosExtractor,
+    ...(extractorAPIs as ContentExtractor),
   };
 };
