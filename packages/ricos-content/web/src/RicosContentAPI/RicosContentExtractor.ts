@@ -1,12 +1,5 @@
 import { ContentExtractor } from '../types';
-import {
-  RichContent,
-  Node_Type,
-  Node,
-  ImageData,
-  DividerData,
-  ParagraphData,
-} from 'ricos-schema/dist/types';
+import { RichContent, Node_Type, Node, ImageData, DividerData, ParagraphData } from 'ricos-schema';
 
 const nodeDataMapByType = (node: Node) =>
   ({

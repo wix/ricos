@@ -7,7 +7,7 @@ import {
   Node_Type,
   ParagraphData,
   Common_TextAlignment,
-} from 'ricos-schema/dist/types';
+} from 'ricos-schema';
 
 describe('Ricos Content API', () => {
   it('should add image node to content', () => {

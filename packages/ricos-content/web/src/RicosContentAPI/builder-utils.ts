@@ -1,5 +1,5 @@
 import { curry, compose, map, findIndex, has, isNumber, isString, isArray } from 'lodash/fp';
-import { RichContent, TextData, Node } from 'ricos-schema/dist/types';
+import { RichContent, TextData, Node } from 'ricos-schema';
 import { task, either, firstResolved } from '../fp-utils';
 
 // predicates

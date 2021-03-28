@@ -6,7 +6,7 @@ import {
   TextData,
   Node_Type,
   Node,
-} from 'ricos-schema/dist/types';
+} from 'ricos-schema';
 import {
   addNode as add,
   toTextDataArray,
