@@ -6,7 +6,6 @@ import {
   RawDraftContentState,
   RawDraftEntityRange,
 } from 'draft-js';
-import { RichContent } from 'ricos-schema';
 
 export type RicosInlineStyleRange = Overwrite<RawDraftInlineStyleRange, { style: string }>;
 
@@ -34,22 +33,3 @@ export interface RicosContent
 }
 
 export interface DraftContent extends RicosContent {}
-
-export interface PlainTextConvertor {
-  toPlainText(content?: RichContent): Promise<string>;
-}
-
-export interface RicosContentConvertor {
-  toRicos(content?: DraftContent): Promise<RichContent>;
-}
-
-export interface DraftContentConvertor {
-  toDraft(content?: RichContent): Promise<DraftContent>;
-}
-
-export type Convertors = PlainTextConvertor & RicosContentConvertor & DraftContentConvertor;
-
-export type ConversionService<Source, Target> = {
-  convert: (content: Source) => Promise<Target>;
-  configure: (endpoint: string) => void;
-};
