@@ -6,18 +6,19 @@ const TS_PROTO_DIR = '../../../node_modules/.bin/protoc-gen-ts_proto';
 
 mkdirSync(GEN_DIR);
 mkdirSync(`${GEN_DIR}/proto`);
+mkdirSync(`${GEN_DIR}/proto/rich_content`);
 
-const schemas = readdirSync('./src/main/proto');
+const schemas = readdirSync('./src/main/proto/rich_content');
 
 schemas.forEach(schema => {
-  const schemaFile = readFileSync(`src/main/proto/${schema}`, 'utf8');
-  writeFileSync(`${GEN_DIR}/proto/${schema}`, schemaFile.replace(/ \[.*\];/g, ';'));
+  const schemaFile = readFileSync(`src/main/proto/rich_content/${schema}`, 'utf8');
+  writeFileSync(`${GEN_DIR}/proto/rich_content/${schema}`, schemaFile.replace(/ \[.*\];/g, ';'));
 });
 
 schemas.forEach(schema =>
   execSync(
     // eslint-disable-next-line max-len
-    `protoc --plugin=${TS_PROTO_DIR} --proto_path ${GEN_DIR}/proto --ts_proto_opt=useOptionals=true,outputEncodeMethods=false,constEnums=true,stringEnums=true,useDate=false,exportCommonSymbols=false,outputPartialMethods=false --ts_proto_out=${GEN_DIR} ${GEN_DIR}/proto/${schema}`
+    `protoc --plugin=${TS_PROTO_DIR} --proto_path ${GEN_DIR}/proto --ts_proto_opt=useOptionals=true,outputEncodeMethods=false,constEnums=true,stringEnums=true,useDate=false,exportCommonSymbols=false,outputPartialMethods=false --ts_proto_out=${GEN_DIR} ${GEN_DIR}/proto/rich_content/${schema}`
   )
 );
 
@@ -26,4 +27,4 @@ const indexFile = schemas.reduce(
   ''
 );
 
-writeFileSync(`${GEN_DIR}/index.ts`, indexFile);
+writeFileSync(`${GEN_DIR}/rich_content/index.ts`, indexFile);
