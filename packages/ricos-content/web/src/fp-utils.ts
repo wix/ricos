@@ -31,7 +31,7 @@ task.of = (data: unknown) => task((rej, res) => res(data)); // lift any data int
 
 // iterate task list, return first successfully resolved result
 export const firstResolved = (tasks: Task[], i = 0) =>
-  [...tasks, task.of(Error('end of task list -- no resolution found'))][i].fork(
+  [...tasks, task.of('end of task list -- no resolution found')][i].fork(
     () => firstResolved(tasks, i + 1),
     identity
   );
