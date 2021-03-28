@@ -187,7 +187,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   commonPubsub: Pubsub;
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
   contextualData: EditorContextType;
-  editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
+  editor: Editor & { setMode: (mode: 'render' | 'edit') => void; editorContainer: HTMLElement };
   editorWrapper: Element;
   copySource: { unregister(): void };
   updateBounds: (editorBounds?: BoundingRect) => void;
@@ -696,7 +696,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
-  setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
+  setEditor = (ref: Editor) => {
+    this.editor = get(ref, 'editor', ref);
+    this.props.config.editorContainer = this.editor.editorContainer;
+    return this.editor;
+  };
 
   inPluginEditingMode = false;
 
