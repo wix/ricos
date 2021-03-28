@@ -12,6 +12,7 @@ class AccordionMobileHeader extends Component {
     this.cancelLabel = t('SettingsPanelFooter_Cancel');
     this.saveLabel = t('SettingsPanelFooter_Save');
   }
+
   render() {
     const { onCancel, onSave } = this.props;
 

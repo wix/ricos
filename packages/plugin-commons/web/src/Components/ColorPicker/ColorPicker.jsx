@@ -148,6 +148,7 @@ class ColorPicker extends PureComponent {
   };
 
   renderPalette = () => this.renderColorButtons(this.props.palette, this.props.schemeAttributes);
+
   renderUserColors = () => this.renderColorButtons(this.props.userColors);
 
   render() {
