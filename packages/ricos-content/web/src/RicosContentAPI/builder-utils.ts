@@ -1,28 +1,6 @@
 import { curry, compose, map, findIndex, has, isNumber, isString, isArray } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
-
-// functional stuff
-const task = fork => ({
-  fork,
-  map(f) {
-    return task((rej, res) => this.fork(rej, compose(res, f)));
-  },
-  chain(t) {
-    return task((rej, res) => this.fork(rej, x => t(x).fork(rej, res)));
-  },
-});
-
-task.of = (data: unknown) => task((rej, res) => res(data));
-
-const firstResolved = (tasks, i) =>
-  tasks[i].fork(
-    () => firstResolved(tasks, i + 1),
-    data => data
-  );
-
-const either = curry((predicate: (data: unknown) => boolean, data: unknown) =>
-  task((rej, res) => (predicate(data) ? res(data) : rej(data)))
-);
+import { task, either, firstResolved } from '../fp-utils';
 
 // predicates
 const isIndexFound = either(index => index !== -1);

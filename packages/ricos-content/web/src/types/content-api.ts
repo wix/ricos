@@ -1,11 +1,4 @@
-import {
-  RichContent,
-  ImageData,
-  DividerData,
-  Node_Type,
-  ParagraphData,
-  TextData,
-} from 'ricos-schema';
+import { RichContent, ImageData, DividerData, ParagraphData, TextData } from 'ricos-schema';
 
 type AddMethod<T> = {
   [P in keyof T]: ({
@@ -102,18 +95,3 @@ type ContentBuilderType = AddMethod<AddMap> &
 export interface ContentBuilder extends ContentBuilderType {}
 
 export type ContentExtractor = GetMethod<GetMap>;
-
-export const dataByNodeType = (type: Node_Type, data: unknown) =>
-  ({
-    [Node_Type.IMAGE]: { imageData: data as ImageData },
-    [Node_Type.DIVIDER]: { dividerData: data as DividerData },
-    [Node_Type.PARAGRAPH]: { paragraphData: data as ParagraphData },
-    [Node_Type.TEXT]: { textData: data as TextData },
-  }[type]);
-
-export const nodeDataMapByType = (type: Node_Type) =>
-  ({
-    [Node_Type.IMAGE]: ({ imageData }) => imageData as ImageData,
-    [Node_Type.DIVIDER]: ({ dividerData }) => dividerData as DividerData,
-    [Node_Type.PARAGRAPH]: ({ paragraphData }) => paragraphData as ParagraphData,
-  }[type]);

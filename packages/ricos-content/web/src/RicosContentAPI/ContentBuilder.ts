@@ -14,7 +14,15 @@ import {
   setNode as set,
   updateNode as update,
 } from './builder-utils';
-import { dataByNodeType, ContentBuilder as BaseContentBuilder } from '../types';
+import { ContentBuilder as BaseContentBuilder } from '../types';
+
+const dataByNodeType = (type: Node_Type, data: unknown) =>
+  ({
+    [Node_Type.IMAGE]: { imageData: data as ImageData },
+    [Node_Type.DIVIDER]: { dividerData: data as DividerData },
+    [Node_Type.PARAGRAPH]: { paragraphData: data as ParagraphData },
+    [Node_Type.TEXT]: { textData: data as TextData },
+  }[type]);
 
 type AddMethodParams<TData> = {
   data: TData;
@@ -42,7 +50,9 @@ export interface ContentBuilder extends BaseContentBuilder {
   new (): BaseContentBuilder;
 }
 
-export const setupContentBuilder = (generateKey: () => string) => {
+export const setupContentBuilder = (
+  generateKey: () => string
+): BaseContentBuilder & { RicosContentBuilder: ContentBuilder } => {
   function createNode(type: Node_Type, data: unknown): Node {
     return { key: generateKey(), type, ...dataByNodeType(type, data), nodes: [] };
   }
@@ -172,7 +182,7 @@ export const setupContentBuilder = (generateKey: () => string) => {
 
   const builderApis = {};
 
-  [{ name: 'Paragraph', type: 'PARAGRAPH', dataT: ParagraphData } as const].forEach(
+  [{ name: 'Paragraph', type: Node_Type.PARAGRAPH, dataT: ParagraphData } as const].forEach(
     ({ name, type, dataT }) => {
       builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
         data,
@@ -224,8 +234,8 @@ export const setupContentBuilder = (generateKey: () => string) => {
   );
 
   [
-    { name: 'Image', type: 'IMAGE', dataT: ImageData } as const,
-    { name: 'Divider', type: 'DIVIDER', dataT: DividerData } as const,
+    { name: 'Image', type: Node_Type.IMAGE, dataT: ImageData } as const,
+    { name: 'Divider', type: Node_Type.DIVIDER, dataT: DividerData } as const,
   ].forEach(({ name, type, dataT }) => {
     builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
       data,
@@ -235,7 +245,7 @@ export const setupContentBuilder = (generateKey: () => string) => {
       content,
     }: AddMethodParams<typeof dataT>): RichContent {
       return addNode({
-        type: (type as unknown) as Node_Type,
+        type,
         data,
         content,
         index,
@@ -249,7 +259,7 @@ export const setupContentBuilder = (generateKey: () => string) => {
       key,
       content,
     }: SetMethodParams<typeof dataT>) {
-      return updateNode({ data, type: (type as unknown) as Node_Type, key, content });
+      return updateNode({ data, type, key, content });
     };
 
     builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
@@ -257,7 +267,7 @@ export const setupContentBuilder = (generateKey: () => string) => {
       key,
       content,
     }: SetMethodParams<typeof dataT>) {
-      return setNode({ data, type: (type as unknown) as Node_Type, key, content });
+      return setNode({ data, type, key, content });
     };
   });
 
@@ -265,7 +275,7 @@ export const setupContentBuilder = (generateKey: () => string) => {
 
   return {
     RicosContentBuilder: (RicosContentBuilder as unknown) as ContentBuilder,
-    ...builderApis,
+    ...(builderApis as BaseContentBuilder),
     removeNode,
   };
 };

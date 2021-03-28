@@ -7,13 +7,12 @@ import {
   ParagraphData,
   Common_TextAlignment,
 } from 'ricos-schema';
-import { setupContentBuilder } from './ContentBuilder';
+import { setupContentAPI } from './Content';
 
-describe('RicosContentBuilder', () => {
+describe('Ricos Content API', () => {
   it('should add image node to content', () => {
     const generateKey = () => 'foo';
-    const { RicosContentBuilder } = setupContentBuilder(generateKey);
-    const builder = new RicosContentBuilder();
+    const api = setupContentAPI({ generateKey });
     const imageData: ImageData = {
       config: {
         size: ImageConfig_ImageSize.SMALL,
@@ -30,13 +29,13 @@ describe('RicosContentBuilder', () => {
         },
       ],
     };
-    const actual = builder.addImage({ data: imageData, content: { nodes: [] } });
+    const actual = api.addImage({ data: imageData, content: { nodes: [] } });
     expect(actual).toEqual(expected);
   });
+
   it('should add a paragraph with text to content', () => {
     const generateKey = () => 'foo';
-    const { RicosContentBuilder } = setupContentBuilder(generateKey);
-    const builder = new RicosContentBuilder();
+    const api = setupContentAPI({ generateKey });
     const paragraphData: ParagraphData = {
       textAlignment: Common_TextAlignment.RIGHT,
     };
@@ -60,11 +59,40 @@ describe('RicosContentBuilder', () => {
         },
       ],
     };
-    const actual = builder.addParagraph({
+    const actual = api.addParagraph({
       text: 'test paragraph',
       data: paragraphData,
       content: { nodes: [] },
     });
+    expect(actual).toEqual(expected);
+  });
+
+  it('should extract all images from content', () => {
+    const generateKey = () => 'foo';
+    const api = setupContentAPI({ generateKey });
+    const imageData: ImageData = {
+      config: {
+        size: ImageConfig_ImageSize.SMALL,
+        alignment: ImageConfig_ImageAlignment.CENTER,
+      },
+    };
+    const content: RichContent = {
+      nodes: [
+        {
+          type: Node_Type.IMAGE,
+          imageData,
+          nodes: [],
+          key: 'foo',
+        },
+      ],
+    };
+
+    const expected = {
+      foo: imageData,
+    };
+
+    const actual = api.getImages(content);
+
     expect(actual).toEqual(expected);
   });
 });
