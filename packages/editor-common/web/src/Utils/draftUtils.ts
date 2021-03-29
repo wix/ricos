@@ -9,6 +9,7 @@ import {
   EntityInstance,
   RawDraftEntity,
   EditorChangeType,
+  genKey,
 } from '@wix/draft-js';
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
@@ -398,8 +399,22 @@ export const createBlock = (editorState: EditorState, data, type: string) => {
   // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
   // so get the block before the space
   const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+  const newBlockKey = newBlock.getKey();
   const newSelection = SelectionState.createEmpty(newBlock.getKey());
-  return { newBlock, newSelection, newEditorState };
+
+  const blockBefore = newEditorState.getCurrentContent().getBlockBefore(newBlockKey);
+  const blockAfter = newEditorState.getCurrentContent().getBlockAfter(newBlockKey);
+
+  const editorStateWithoutEmptyBlockAfter = !isLastBlock(newEditorState, blockAfter.getKey())
+    ? deleteBlock(newEditorState, blockAfter.getKey())
+    : newEditorState;
+  const editorStateWithoutEmptyBlocks =
+    !isFirstBlock(editorStateWithoutEmptyBlockAfter, blockBefore.getKey()) &&
+    (blockBefore.getText() === '' || blockBefore.getText() === '​') //zero-width space (empty table cell)
+      ? deleteBlock(editorStateWithoutEmptyBlockAfter, blockBefore.getKey())
+      : editorStateWithoutEmptyBlockAfter;
+
+  return { newBlock, newSelection, newEditorState: editorStateWithoutEmptyBlocks };
 };
 
 export const deleteBlock = (editorState: EditorState, blockKey: string) => {
@@ -789,4 +804,94 @@ export function selectAllContent(editorState, forceSelection) {
     : EditorState.acceptSelection;
   const newEditorState = setSelectionFunction(editorState, selection);
   return newEditorState;
+}
+
+export function createNewLineBelow(editorState) {
+  const { contentState, selection } = insertNewBlock(editorState, false);
+  const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
+  return EditorState.forceSelection(newEditorState, selection);
+}
+
+export function createNewLineAbove(editorState) {
+  const { contentState, selection } = insertNewBlock(editorState, true);
+  const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
+  return EditorState.forceSelection(newEditorState, selection);
+}
+
+function insertNewBlock(editorState, insertAbove) {
+  const contentState = editorState.getCurrentContent();
+  const selectedBlockKey = editorState.getSelection().getFocusKey();
+  const blockKey = insertAbove
+    ? selectedBlockKey
+    : editorState.getCurrentContent().getKeyAfter(selectedBlockKey);
+  const blockMap = contentState.getBlockMap();
+  const newBlockKey = genKey();
+  const newBlock = new ContentBlock({
+    key: newBlockKey,
+    text: '',
+    type: 'unstyled',
+  });
+  const restOfBlockMap = blockMap.skipUntil((_, k) => k === blockKey);
+  const newBlockMap = blockMap
+    .takeUntil((_, k) => k === blockKey)
+    .concat([[newBlock.getKey(), newBlock]])
+    .merge(restOfBlockMap);
+  const newSelection = createSelection({ blockKey: newBlockKey, anchorOffset: 0, focusOffset: 0 });
+  const newContentState = contentState.merge({
+    blockMap: newBlockMap,
+  });
+  return { contentState: newContentState, selection: newSelection };
+}
+
+function isFirstBlock(editorState: EditorState, blockKey: string) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const firstBlock = blocks[0].getKey();
+  return firstBlock === blockKey;
+}
+
+function isLastBlock(editorState: EditorState, blockKey: string) {
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const lastBlock = blocks[blocks.length - 1].getKey();
+  return lastBlock === blockKey;
+}
+
+export function handleFirstAndLastBlocks(editorState: EditorState) {
+  const contentState = editorState.getCurrentContent();
+  const blocks = contentState.getBlocksAsArray();
+  const blocksKeys = blocks.map(block => block.getKey());
+  const nodeListOfAllBlocks = document.querySelectorAll<HTMLElement>(`[data-editor]`);
+  // eslint-disable-next-line prefer-spread
+  const arrayOfAllBlocks = Array.apply(null, nodeListOfAllBlocks);
+  const relevantBlocks = arrayOfAllBlocks.filter(x =>
+    blocksKeys.includes(x.getAttribute('data-offset-key')?.split('-')[0])
+  );
+  relevantBlocks.forEach(node => {
+    if (node.getAttribute('data-id') === 'top-bottom-block') {
+      node.style.caretColor = 'unset';
+      node.children[0].style.height = 'unset';
+      node.removeAttribute('data-id');
+    }
+  });
+  if (relevantBlocks.length < 3) {
+    return;
+  } else {
+    const firstBlockNode = relevantBlocks[0];
+    const lastBlockNode = relevantBlocks[relevantBlocks.length - 1];
+    const firstBlockKey = firstBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
+    const lastBlockKey = lastBlockNode.getAttribute('data-offset-key')?.split('-')[0] || '';
+    const firstBlockText = contentState.getBlockForKey(firstBlockKey).getText();
+    const lastBlockText = contentState.getBlockForKey(lastBlockKey).getText();
+    // eslint-disable-next-line prettier/prettier
+    if (firstBlockText === '' || firstBlockText === '​') {
+      //zero-width space (empty table cell)
+      firstBlockNode.setAttribute('data-id', 'top-bottom-block');
+      firstBlockNode.style.caretColor = 'transparent';
+      firstBlockNode.children[0].style.height = '1px';
+    }
+    if (lastBlockText === '') {
+      lastBlockNode.setAttribute('data-id', 'top-bottom-block');
+      lastBlockNode.style.caretColor = 'transparent';
+      lastBlockNode.children[0].style.height = '1px';
+    }
+  }
 }

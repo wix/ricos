@@ -82,16 +82,24 @@ export default class SideToolbar extends PureComponent {
       if (displayOptions.displayMode === DISPLAY_MODE.NORMAL) {
         const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
         if (node) {
-          const top = node.getBoundingClientRect().top;
-          const parentTop = node.offsetParent.getBoundingClientRect().top;
-          this.setState({
-            position: {
-              top: top - parentTop + offset.y,
-              ...(isMobile ? { right: offset.x } : { left: offset.x, right: offset.x }),
-              transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
-              transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
-            },
-          });
+          if (node.getAttribute('data-id') === 'top-bottom-block') {
+            this.setState({
+              position: {
+                transform: 'scale(0)',
+              },
+            });
+          } else {
+            const top = node.getBoundingClientRect().top;
+            const parentTop = node.offsetParent.getBoundingClientRect().top;
+            this.setState({
+              position: {
+                top: top - parentTop + offset.y,
+                ...(isMobile ? { right: offset.x } : { left: offset.x, right: offset.x }),
+                transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
+                transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+              },
+            });
+          }
         }
       } else if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
         this.setState({

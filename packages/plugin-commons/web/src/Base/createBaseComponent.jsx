@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -47,6 +49,8 @@ const createBaseComponent = ({
   withHorizontalScroll,
   innerRCERenderedIn,
   disableKeyboardEvents,
+  addNewLineBelow,
+  addNewLineAbove,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -377,6 +381,15 @@ const createBaseComponent = ({
           />
         </div>
       );
+
+      const componentWithEmptyBlocksButtons = (
+        <>
+          <div className={this.styles.addNewLine} onClick={addNewLineAbove} />
+          {component}
+          <div className={this.styles.addNewLine} onClick={addNewLineBelow} />
+        </>
+      );
+
       return withHorizontalScroll ? (
         <div className={styles.horizontalScrollbarWrapper}>
           <div
@@ -386,11 +399,11 @@ const createBaseComponent = ({
               blockProps.isFocused ? styles.show : styles.hide
             )}
           >
-            {component}
+            {componentWithEmptyBlocksButtons}
           </div>
         </div>
       ) : (
-        component
+        componentWithEmptyBlocksButtons
       );
     };
   };

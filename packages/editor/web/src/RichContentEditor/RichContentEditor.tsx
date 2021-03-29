@@ -23,6 +23,7 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  handleFirstAndLastBlocks,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
@@ -59,6 +60,7 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  TABLE_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -599,6 +601,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.setState({ editorState }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
+      if (this.props.innerRCERenderedIn === TABLE_TYPE) {
+        handleFirstAndLastBlocks(this.state.editorState);
+      }
     });
   };
 
