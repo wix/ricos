@@ -221,6 +221,7 @@ class TableToolbar extends Component {
   };
 
   focus = () => this.ref.focus();
+
   setRef = ref => (this.ref = ref);
 
   render() {

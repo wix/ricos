@@ -14,6 +14,7 @@ class ToolbarContainer extends Component {
   componentDidMount() {
     this.setState({ toolbarPosition: this.getToolbarPosition() });
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.toolbarPosition !== this.props.toolbarPosition) {
       // eslint-disable-next-line react/no-did-update-set-state
@@ -22,6 +23,7 @@ class ToolbarContainer extends Component {
   }
 
   setToolbarContainerRef = ref => (this.toolbarContainerRef = ref);
+
   focus = () => this.toolbarContainerRef.focus();
 
   getToolbarPosition = () => {

@@ -67,8 +67,10 @@ interface ImageViewerState {
 
 class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
   preloadRef: RefObject<HTMLImageElement>;
+
   imageRef: RefObject<HTMLImageElement>;
-  styles: Record<string, string>;
+
+  styles!: Record<string, string>;
 
   constructor(props) {
     super(props);

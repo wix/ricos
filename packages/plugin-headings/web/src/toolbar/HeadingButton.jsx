@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { HEADING_TYPE_TO_ELEMENT, DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
+import { HEADING_TYPE_TO_ELEMENT } from '../constants';
 import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-editor-common';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
@@ -100,7 +100,6 @@ export default class HeadingButton extends Component {
     const dataHookText = 'headingsDropdownButton';
     const { isPanelOpen, panelTop, panelLeft, currentHeading } = this.state;
     const { styles } = this;
-    const customHeadingsOptions = customHeadings || DEFAULT_HEADERS_DROPDOWN_OPTIONS;
     const modalStyle = isMobile
       ? { left: 0, bottom: 0, right: 0 }
       : {
@@ -138,7 +137,7 @@ export default class HeadingButton extends Component {
             ariaHideApp={false}
           >
             <HeadingsDropDownPanel
-              customHeadingsOptions={customHeadingsOptions}
+              customHeadingsOptions={customHeadings}
               heading={currentHeading}
               onSave={this.save}
               isMobile={isMobile}
@@ -172,5 +171,4 @@ HeadingButton.propTypes = {
 
 HeadingButton.defaultProps = {
   setKeepOpen: () => {},
-  // getModalContainer: HeadingButton.getModalParent,
 };
