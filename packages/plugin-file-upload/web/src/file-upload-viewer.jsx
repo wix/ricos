@@ -226,7 +226,6 @@ class FileUploadViewer extends PureComponent {
         }
       });
     };
-    // const isSecondBreakPoint() = this.state.currentWidth < this.breakPoints.secondBreak;
 
     const resolveIfEnter = ev => {
       const enterEvent = 13;
