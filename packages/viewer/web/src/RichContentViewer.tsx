@@ -120,7 +120,10 @@ class RichContentViewer extends Component<
       config,
     } = props;
     const { uiSettings } = config;
-    const disableDownload = config[VIDEO_TYPE]?.disableDownload || uiSettings?.disableRightClick;
+    const disableDownload =
+      config[VIDEO_TYPE]?.disableDownload ||
+      uiSettings?.disableRightClick ||
+      uiSettings?.disableDownload;
 
     return initialState
       ? normalizeInitialState(initialState, {

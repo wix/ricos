@@ -360,107 +360,94 @@ describe('plugins', () => {
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
     });
   });
-});
 
-context('soundcloud', () => {
-  before(function() {
-    eyesOpen(this);
+  context('soundcloud', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadRicosEditorAndViewer('empty');
+    });
+
+    after(() => cy.eyesClose());
+
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('render upload modal', function() {
+      cy.openSoundCloudModal();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    //TODO: fix this flaky tests
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('add a soundcloud URL', function() {
+      cy.openSoundCloudModal();
+      cy.addSoundCloud().wait(500);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .wait(500);
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 
-  beforeEach('load editor', () => {
-    cy.switchToDesktop();
-    cy.loadRicosEditorAndViewer('empty');
+  context('giphy', () => {
+    before('load editor', function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    it('render giphy plugin toolbar', function() {
+      cy.loadRicosEditorAndViewer('giphy');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
+        PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
+      );
+      cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
+      cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    // it('should auto focus on add gif', function() {
+    //   cy.loadRicosEditorAndViewer('empty').focusEditor();
+    //   cy.addGif().get('[data-hook=giphyPluginToolbar]');
+    //   cy.window().then(win => {
+    //     win.__CONTENT_SNAPSHOT__ = { mock: true };
+    //   });
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
   });
 
-  //TODO: fix this flaky test
-  // eslint-disable-next-line mocha/no-skipped-tests
-  it.skip('render upload modal', function() {
-    cy.openSoundCloudModal();
-    cy.eyesCheckWindow(this.test.title);
+  context('emoji', () => {
+    before('load editor', function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    // it('render some emojies', function() {
+    //   cy.loadRicosEditorAndViewer('empty');
+    //   cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
+    //   cy.eyesCheckWindow('render emoji modal');
+    //   cy.get(`[data-hook=emoji-5]`).click();
+    //   cy.get(`[data-hook=emoji-group-5]`).click();
+    //   cy.get(`[data-hook=emoji-95]`).click();
+    //   cy.get(`[data-hook=emoji-121]`).click();
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
   });
-
-  //TODO: fix this flaky tests
-  // eslint-disable-next-line mocha/no-skipped-tests
-  it.skip('add a soundcloud URL', function() {
-    cy.openSoundCloudModal();
-    cy.addSoundCloud().wait(500);
-    cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
-      .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
-      .wait(500);
-    cy.focusEditor()
-      .type('{uparrow}') //try to fix bug where sometimes it doesn't type
-      .type('{uparrow}')
-      .type('Will this fix the flakiness?');
-    cy.waitForVideoToLoad();
-    cy.eyesCheckWindow(this.test.title);
-  });
-});
-
-//TODO: fix this flaky tests
-it.skip('add a soundcloud URL', function() {
-  cy.openSoundCloudModal();
-  cy.addSoundCloud().wait(500);
-  cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
-    .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
-    .wait(500);
-  cy.focusEditor()
-    .type('{uparrow}') //try to fix bug where sometimes it doesn't type
-    .type('{uparrow}')
-    .type('Will this fix the flakiness?');
-  cy.waitForVideoToLoad();
-  cy.eyesCheckWindow(this.test.title);
-});
-
-context('giphy', () => {
-  before('load editor', function() {
-    eyesOpen(this);
-  });
-
-  beforeEach('load editor', () => {
-    cy.switchToDesktop();
-  });
-
-  after(() => cy.eyesClose());
-
-  it('render giphy plugin toolbar', function() {
-    cy.loadRicosEditorAndViewer('giphy');
-    cy.openPluginToolbar(PLUGIN_COMPONENT.GIPHY).clickToolbarButton(
-      PLUGIN_TOOLBAR_BUTTONS.SMALL_CENTER
-    );
-    cy.get(`button[data-hook=${PLUGIN_TOOLBAR_BUTTONS.REPLACE}][tabindex=0]`).click();
-    cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}] img`);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  // it('should auto focus on add gif', function() {
-  //   cy.loadRicosEditorAndViewer('empty').focusEditor();
-  //   cy.addGif().get('[data-hook=giphyPluginToolbar]');
-  //   cy.window().then(win => {
-  //     win.__CONTENT_SNAPSHOT__ = { mock: true };
-  //   });
-  //   cy.eyesCheckWindow(this.test.title);
-  // });
-});
-
-context('emoji', () => {
-  before('load editor', function() {
-    eyesOpen(this);
-  });
-
-  beforeEach('load editor', () => {
-    cy.switchToDesktop();
-  });
-
-  after(() => cy.eyesClose());
-
-  // it('render some emojies', function() {
-  //   cy.loadRicosEditorAndViewer('empty');
-  //   cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
-  //   cy.eyesCheckWindow('render emoji modal');
-  //   cy.get(`[data-hook=emoji-5]`).click();
-  //   cy.get(`[data-hook=emoji-group-5]`).click();
-  //   cy.get(`[data-hook=emoji-95]`).click();
-  //   cy.get(`[data-hook=emoji-121]`).click();
-  //   cy.eyesCheckWindow(this.test.title);
-  // });
 });
