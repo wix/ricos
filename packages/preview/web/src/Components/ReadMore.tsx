@@ -17,9 +17,11 @@ interface State {
 }
 
 class ReadMore extends PureComponent<Props, State> {
-  rmContainer: React.RefObject<HTMLDivElement>;
-  rmMocker: React.RefObject<HTMLDivElement>;
-  styles: Record<string, string>;
+  rmContainer!: React.RefObject<HTMLDivElement>;
+
+  rmMocker!: React.RefObject<HTMLDivElement>;
+
+  styles!: Record<string, string>;
 
   constructor(props: Props) {
     super(props);
