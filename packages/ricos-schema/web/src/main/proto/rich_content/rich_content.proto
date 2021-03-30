@@ -10,27 +10,27 @@ syntax = "proto3";
 
 package rich_content;
 
-import "timestamp.proto";
-import "decoration_anchor.proto";
-import "decoration_color.proto";
-import "decoration_link.proto";
-import "decoration_mention.proto";
-import "node_code.proto";
-import "node_heading.proto";
-import "node_paragraph.proto";
-import "plugin_button.proto";
-import "plugin_divider.proto";
-import "plugin_file.proto";
-import "plugin_gallery.proto";
-import "plugin_giphy.proto";
-import "plugin_html.proto";
-import "plugin_image.proto";
-import "plugin_link_preview.proto";
-import "plugin_map.proto";
-import "plugin_poll.proto";
-import "plugin_sound_cloud.proto";
-import "plugin_vertical_embed.proto";
-import "plugin_video.proto";
+import "rich_content/timestamp.proto";
+import "rich_content/decoration_anchor.proto";
+import "rich_content/decoration_color.proto";
+import "rich_content/decoration_link.proto";
+import "rich_content/decoration_mention.proto";
+import "rich_content/node_code.proto";
+import "rich_content/node_heading.proto";
+import "rich_content/node_paragraph.proto";
+import "rich_content/plugin_button.proto";
+import "rich_content/plugin_divider.proto";
+import "rich_content/plugin_file.proto";
+import "rich_content/plugin_gallery.proto";
+import "rich_content/plugin_giphy.proto";
+import "rich_content/plugin_html.proto";
+import "rich_content/plugin_image.proto";
+import "rich_content/plugin_link_preview.proto";
+import "rich_content/plugin_map.proto";
+import "rich_content/plugin_poll.proto";
+import "rich_content/plugin_sound_cloud.proto";
+import "rich_content/plugin_vertical_embed.proto";
+import "rich_content/plugin_video.proto";
 
 message RichContent {
     repeated Node nodes = 1; // List of nodes

@@ -10,13 +10,16 @@ import { LinkPanelDropdown } from './LinkPanelDropdown';
 
 class LinkPanel extends Component {
   state = { showValidation: false };
+
   static defaultProps = {
     targetBlank: true,
     showTargetBlankCheckbox: true,
     showRelValueCheckbox: true,
     isMobile: false,
   };
+
   styles = mergeStyles({ styles, theme: this.props.theme });
+
   textInput = React.createRef();
 
   componentDidMount() {
