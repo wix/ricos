@@ -200,8 +200,6 @@ class FileUploadViewer extends PureComponent {
           [this.styles.file_upload_link_second_break]: this.isSecondBreakPoint(),
         })}
       >
-        <span style={{ position: 'absolute', left: '40%', top: 0 }}>{this.state.currentWidth}</span>
-
         {this.renderViewerBody({ name, type })}
       </a>
     );
