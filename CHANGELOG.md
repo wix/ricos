@@ -16,9 +16,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-	
-</details>
-<hr/>
+
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2308](https://github.com/wix/ricos/pull/2308) increase blur for media, change spoiler button position in formatting toolbar, change spoiler icon
+    </details>
+    <hr/>
 
 ## 8.27.8 (Mar 30, 2021)
 
