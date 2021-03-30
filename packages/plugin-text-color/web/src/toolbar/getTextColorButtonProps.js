@@ -27,12 +27,14 @@ const pluginSettingsByType = {
     icon: TextColorIcon,
     predicate: textForegroundPredicate,
     tooltipKey: 'TextColorButton_Tooltip',
+    colorPickerHeaderKey: 'Color_Picker_TextColorButton_Header',
   },
   [TEXT_HIGHLIGHT_TYPE]: {
     defaultColor: DEFAULT_HIGHLIGHT_COLOR,
     icon: TextHighlightIcon,
     predicate: textBackgroundPredicate,
     tooltipKey: 'TextHighlightButton_Tooltip',
+    colorPickerHeaderKey: 'Color_Picker_TextHighlightButton_Header',
   },
 };
 
@@ -141,6 +143,7 @@ export const getButtonProps = ({ config, type }) => {
         defaultColor={pluginSettings.defaultColor}
         setKeepToolbarOpen={noop}
         onSelect={onSelect}
+        colorPickerHeaderKey={pluginSettings.colorPickerHeaderKey}
       />
     );
   };

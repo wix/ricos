@@ -17,6 +17,7 @@ class ColorPickerButton extends Component {
       userColors: props?.getUserColors?.() || [],
     };
   }
+
   componentWillReceiveProps = nextProps => {
     const currentColor = this.state.currentColor;
     const nextCurrentColor = nextProps.getCurrentColor();
@@ -24,17 +25,21 @@ class ColorPickerButton extends Component {
       this.setState({ currentColor: nextCurrentColor });
     }
   };
+
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
+
   closeModal = () => {
     this.setState({ isModalOpen: false });
   };
+
   onColorAdded = color => {
     this.props.onColorAdded(color);
     const userColors = this.props?.getUserColors?.() || [...this.state.userColors, color];
     this.setState({ userColors });
   };
+
   onChange = color => {
     this.props.onChange(color);
     this.setState({ currentColor: color });
@@ -70,6 +75,7 @@ class ColorPickerButton extends Component {
     const { isModalOpen } = this.state;
     const { colorScheme } = settings;
     const palette = this.extractPalette(colorScheme);
+    const paletteColors = isMobile ? palette.slice(0, 5) : palette.slice(0, 6);
     return (
       <ClickOutside onClickOutside={this.closeModal}>
         <ToolbarButton
@@ -88,7 +94,7 @@ class ColorPickerButton extends Component {
           >
             <ColorPicker
               color={currentColor}
-              palette={palette.slice(0, 6)}
+              palette={paletteColors}
               userColors={userColors.slice(-12)}
               onColorAdded={this.onColorAdded}
               theme={theme}
