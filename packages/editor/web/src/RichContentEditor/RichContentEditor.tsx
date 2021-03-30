@@ -26,7 +26,7 @@ import {
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
-import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
+import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
@@ -178,26 +178,38 @@ function makeBarrelRoll() {
 
 class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  initialEditorState: {
-    entities: EntityInstance[];
-    blocks: ContentBlock[];
-  };
   refId: number;
+
   commonPubsub: Pubsub;
+
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
-  contextualData: EditorContextType;
-  editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
-  editorWrapper: Element;
-  copySource: { unregister(): void };
-  updateBounds: (editorBounds?: BoundingRect) => void;
+
+  contextualData!: EditorContextType;
+
+  editor!: Editor & { setMode: (mode: 'render' | 'edit') => void };
+
+  editorWrapper!: Element;
+
+  copySource!: { unregister(): void };
+
+  updateBounds!: (editorBounds?: BoundingRect) => void;
+
   plugins;
-  focusedBlockKey: string;
+
+  focusedBlockKey!: string;
+
   pluginKeyBindings;
+
   customStyleFn: DraftEditorProps['customStyleFn'];
+
   toolbars;
+
   innerRCECustomStyleFn;
-  EditorCommands: ReturnType<typeof createEditorCommands>;
-  getSelectedText: (editorState: EditorState) => string;
+
+  EditorCommands!: ReturnType<typeof createEditorCommands>;
+
+  getSelectedText!: (editorState: EditorState) => string;
+
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
     spellCheck: true,

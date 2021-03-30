@@ -324,6 +324,7 @@ export default function createAtomicPluginToolbar({
           );
       }
     };
+
     /*eslint-enable complexity*/
     mapComponentDataToButtonProps = (button, componentData) => {
       if (!button.mapComponentDataToButtonProps) {

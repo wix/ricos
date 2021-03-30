@@ -1,6 +1,6 @@
 {
   "name": "ricos-schema",
-  "version": "8.27.6",
+  "version": "8.27.8",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -18,9 +18,9 @@
     "dist",
     "src/**/*.proto"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/cjs/rich_content/index.js",
+  "module": "dist/esm/rich_content/index.js",
+  "types": "dist/types/rich_content/index.d.ts",
   "scripts": {
     "lint": ":",
     "clean": "rm -rf dist src/generated",
