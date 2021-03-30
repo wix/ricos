@@ -16,7 +16,12 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-	
+
+### :bug: Bug Fix
+
+- `plugin-table`
+  - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
+
 </details>
 <hr/>
 
