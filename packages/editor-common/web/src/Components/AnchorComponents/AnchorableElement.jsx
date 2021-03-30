@@ -191,6 +191,7 @@ class Thumbnail extends PureComponent {
     const { theme } = props;
     this.styles = mergeStyles({ styles, theme });
   }
+
   render() {
     // eslint-disable-next-line react/prop-types
     const { iconThumbnail, preview, alt, previewLoaded } = this.props;

@@ -85,6 +85,7 @@ class RichContentViewer extends Component<
   }
 > {
   styles: Record<string, string>;
+
   typeMappers: PluginMapping;
 
   static defaultProps: Partial<RichContentViewerProps> = {

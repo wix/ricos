@@ -33,3 +33,4 @@ export type LinkRange = {
 export type NormalizationProcessor<T> = (processed: T, ...args: any[]) => T;
 
 export * from './contentTypes';
+export * from './content-api';

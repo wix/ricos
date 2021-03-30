@@ -24,6 +24,7 @@ const round = (x, steps) => Math.ceil(x / steps) * steps;
 export default ({ config, store }) => WrappedComponent =>
   class BlockResizeableDecorator extends Component {
     static displayName = `Resizable(${getDisplayName(WrappedComponent)})`;
+
     static WrappedComponent = WrappedComponent.WrappedComponent || WrappedComponent;
 
     static propTypes = {
@@ -37,6 +38,7 @@ export default ({ config, store }) => WrappedComponent =>
       isMobile: PropTypes.bool.isRequired,
       theme: PropTypes.object.isRequired,
     };
+
     static defaultProps = {
       horizontal: 'relative',
       vertical: false,
@@ -45,6 +47,7 @@ export default ({ config, store }) => WrappedComponent =>
       minWidth: 40,
       ...config,
     };
+
     state = {
       hoverPosition: {},
       clicked: false,

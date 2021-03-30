@@ -21,8 +21,21 @@
 - `plugin-image`
   - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
 
+	
 </details>
 <hr/>
+
+## 8.27.8 (Mar 30, 2021)
+
+- `ricos-content`
+  - [#8d2b66e](https://github.com/wix/ricos/commit/8d2b66e) add ensure content methods to converters entry point
+
+## 8.27.7 (Mar 25, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
 
 ## 8.27.6 (Mar 25, 2021)
 

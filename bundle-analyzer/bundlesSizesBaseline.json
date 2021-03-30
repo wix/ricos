@@ -37,6 +37,8 @@
   "ricos-editor-no-modal": 782,
   "ricos-editor-with-plugins": 991,
   "ricos-common": 17,
+  "ricos-content": 49,
   "rich-content-schema": 70,
+  "converters": 317,
   "editor-common": 429
 }
