@@ -26,7 +26,9 @@ export default class AddPluginMenu extends Component {
       this.showSearch && this.styles.withSearch
     );
   }
+
   onChange = value => this.setState({ value }, () => this.container?.scrollTo(0, 0));
+
   render() {
     const {
       getEditorState,

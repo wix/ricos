@@ -16,6 +16,23 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+	
+</details>
+<hr/>
+
+## 8.27.8 (Mar 30, 2021)
+
+- `ricos-content`
+  - [#8d2b66e](https://github.com/wix/ricos/commit/8d2b66e) add ensure content methods to converters entry point
+
+## 8.27.7 (Mar 25, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
+
+## 8.27.6 (Mar 25, 2021)
 
 ### :rocket: New Feature
 
@@ -25,9 +42,6 @@
 
 - `plugin-headings`
   - [#2321](https://github.com/wix-incubator/rich-content/pull/2321) Heading 1 can now be enabled via feature toggle `useHeadingOne` (only applicable for default config)
-
-</details>
-<hr/>
 
 ## 8.27.5 (Mar 24, 2021)
 

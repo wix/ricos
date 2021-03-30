@@ -44,6 +44,7 @@ class VideoViewer extends Component {
       this.props.onReload?.();
     }
   };
+
   componentDidMount() {
     this.setState({ key: 'mounted' }); //remounts reactPlayer after ssr. Fixes bug where internal player id changes in client
   }
