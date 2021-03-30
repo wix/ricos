@@ -23,8 +23,9 @@
   - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
 - `plugin-link-preview`
   - [#2324](https://github.com/wix/ricos/pull/2324) fix large space from bottom link preview plugin
-    </details>
-    <hr/>
+
+</details>
+<hr/>
 
 ## 8.27.6 (Mar 25, 2021)
 

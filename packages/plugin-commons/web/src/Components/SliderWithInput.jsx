@@ -9,7 +9,9 @@ import generalstyles from 'wix-rich-content-editor-common/dist/statics/styles/ge
 
 class SliderWithInput extends Component {
   styles = mergeStyles({ styles, theme: this.props.theme });
+
   id = `sld_${Math.floor(Math.random() * 9999)}`;
+
   state = { inputValue: this.props.value };
 
   componentWillReceiveProps(nextProps) {
@@ -34,6 +36,7 @@ class SliderWithInput extends Component {
   };
 
   getInputMin = () => (isNumber(this.props.inputMin) ? this.props.inputMin : this.props.min);
+
   getInputMax = () => (isNumber(this.props.inputMax) ? this.props.inputMax : this.props.max);
 
   normalizeInputValue = value => Math.min(Math.max(this.getInputMin(), value), this.getInputMax());
