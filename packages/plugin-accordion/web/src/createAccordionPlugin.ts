@@ -20,7 +20,6 @@ const createAccordionPlugin: CreatePluginFunction<AccordionPluginEditorConfig> =
     settings,
     t,
     isMobile,
-    disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
     noPluginBorder: true,
     noPointerEventsOnFocus: true,

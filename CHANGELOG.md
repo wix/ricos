@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+  
+- `unsupported-blocks/accordion/table/spoiler`
+  - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
+  
 ### :bug: Bug Fix
 - `image`
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) aria-hidden attribute fixed
