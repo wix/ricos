@@ -3639,7 +3639,7 @@ exports[`plugins > convert link to link preview > should create link preview fro
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -3697,7 +3697,7 @@ exports[`plugins > convert link to preview > should create link preview from lin
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -3757,7 +3757,7 @@ exports[`plugins > convert link to preview > should embed link that supports emb
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -4460,7 +4460,7 @@ exports[`plugins > convert link to preview > with default config > should create
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -4520,7 +4520,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],

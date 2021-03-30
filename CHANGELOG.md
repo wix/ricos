@@ -20,7 +20,13 @@
 ### :bug: Bug Fix
 
 - `plugin-spoiler`
+
   - [#2308](https://github.com/wix/ricos/pull/2308) increase blur for media, change spoiler button position in formatting toolbar, change spoiler icon
+
+- `plugin-link-preview`
+
+  - [#2324](https://github.com/wix/ricos/pull/2324) remove large space from plugin bottom
+
     </details>
     <hr/>
 
