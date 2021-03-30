@@ -17,21 +17,14 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-
-- `plugin-gallery`
-  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
-
-### :house: Internal
-  
-- `unsupported-blocks/accordion/table/spoiler`
-  - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
-  
 ### :bug: Bug Fix
 - `image`
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) aria-hidden attribute fixed
 - `plugin-spoiler`
   - [#2324](https://github.com/wix/ricos/pull/2324) increase blur for media, spoiler button position in formatting toolbar
+### :nail_care: Polish
+- `common`
+  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) TextButtonMapping and InlineToolbar button types improved
 
 </details>
 <hr/>
