@@ -34,6 +34,7 @@ export default class FullscreenProvider extends Component<Props, State> {
       index: 0,
     };
   }
+
   _FullscreenModal;
 
   componentDidMount() {

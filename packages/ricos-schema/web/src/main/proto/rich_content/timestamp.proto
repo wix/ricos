@@ -30,6 +30,8 @@
 
 syntax = "proto3";
 
+package rich_content;
+
 option csharp_namespace = "Google.Protobuf.WellKnownTypes";
 option cc_enable_arenas = true;
 option go_package = "google.golang.org/protobuf/types/known/timestamppb";

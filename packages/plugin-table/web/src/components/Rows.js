@@ -10,6 +10,7 @@ export default class Rows extends PureComponent {
     super(props);
     this.rows = [props.rowNum];
   }
+
   setContainerSize = (size, index) => (this.rows[index].style.height = size);
 
   render() {
