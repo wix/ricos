@@ -49,7 +49,7 @@ const addLinkPreview = async (
       provider_url,
     };
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
-    setEditorState(RichUtils.insertSoftNewline(newEditorState));
+    setEditorState(newEditorState);
   }
 };
 

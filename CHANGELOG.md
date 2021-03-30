@@ -20,8 +20,12 @@
 ### :rocket: New Feature
 - `plugin-image`
   - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
-
 	
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2324](https://github.com/wix/ricos/pull/2324) increase blur for media, spoiler button position in formatting toolbar
+
 </details>
 <hr/>
 
