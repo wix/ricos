@@ -20,6 +20,11 @@
 </details>
 <hr/>
 
+## 8.27.8 (Mar 30, 2021)
+
+- `ricos-content`
+  - [#8d2b66e](https://github.com/wix/ricos/commit/8d2b66e) add ensure content methods to converters entry point
+
 ## 8.27.7 (Mar 25, 2021)
 
 ### :bug: Bug Fix
