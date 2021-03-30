@@ -127,6 +127,9 @@ class DesignComponent extends PureComponent {
 
   renderColorPicker(color, userColors, onColorAdded, onChange, pickerType, label) {
     const { t, isMobile, theme, palette } = this.props;
+    const paletteColors =
+      (isMobile ? palette?.slice(0, 5) : palette?.slice(0, 7)) || DEFAULT_PALETTE;
+
     return (
       <div>
         <ColorToggleComponent
@@ -142,7 +145,7 @@ class DesignComponent extends PureComponent {
         {this.state.pickerType === pickerType && (
           <ColorPicker
             color={color}
-            palette={palette?.slice(0, 7) || DEFAULT_PALETTE}
+            palette={paletteColors}
             userColors={userColors.slice(0, 100)}
             onColorAdded={onColorAdded}
             theme={this.styles}

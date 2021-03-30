@@ -3,7 +3,7 @@ syntax = "proto3";
 package rich_content;
 
 import "google/protobuf/wrappers.proto";
-import "plugin_video.proto";
+import "rich_content/plugin_video.proto";
 
 
 message SoundCloudData {

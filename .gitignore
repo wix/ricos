@@ -1,7 +1,7 @@
 .DS_Store
 dist
-**/generated/**/*.ts
-!generated/proto/*
+**/generated/rich_content
+**/generated/google
 node_modules
 *npm-debug.log
 lerna-debug.log
