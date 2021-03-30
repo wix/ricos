@@ -12,9 +12,16 @@ import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { ModalStyles, DraftContent, TextToolbarType } from 'wix-rich-content-common';
+import {
+  ModalStyles,
+  DraftContent,
+  TextToolbarType,
+  TranslationFunction,
+} from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
+import { FloatingToolbarContainer, Toolbar } from 'wix-rich-content-toolbars-new';
+import 'wix-rich-content-toolbars-new/dist/styles.min.css';
 
 const modalStyleDefaults: ModalStyles = {
   content: {
@@ -35,6 +42,7 @@ interface ExampleEditprProps {
   editorState?: RichContentEditorProps['editorState'];
   theme?: RichContentEditorProps['theme'];
   isMobile?: boolean;
+  t: TranslationFunction;
   staticToolbar?: boolean;
   locale?: string;
   localeResource?: Record<string, string>;
@@ -218,6 +226,26 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
     return null;
   }
 
+  renderTextFormattingToolbar() {
+    if (this.editor) {
+      const {
+        context: { getEditorState },
+        buttons,
+      } = this.editor.getToolbarProps(TOOLBARS.FORMATTING);
+      const { isMobile, t, theme } = this.props;
+      const buttonsAsArray = Object.values(buttons);
+      const editorState = getEditorState();
+      return (
+        <div style={{ flex: 'none' }} dir="">
+          <FloatingToolbarContainer isMobile={isMobile} editorState={editorState}>
+            <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
+          </FloatingToolbarContainer>
+        </div>
+      );
+    }
+    return null;
+  }
+
   setEditorRef = ref => {
     this.editor = ref;
     this.setEditorToolbars(ref);
@@ -295,6 +323,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
                 <TopToolbar />
               </div>
             )}
+            {this.renderTextFormattingToolbar()}
             <RichContentEditor
               placeholder={'Add some text!'}
               ref={this.setEditorRef}

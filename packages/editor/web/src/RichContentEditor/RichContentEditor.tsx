@@ -728,6 +728,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
+      'InlineTextToolbar',
       this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
       ...toolbarsToIgnoreFromProps,
       ...toolbarsToIgnoreFromState,
