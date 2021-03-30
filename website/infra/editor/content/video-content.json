@@ -33,7 +33,8 @@
               "width": 1920
             }
           },
-          "isCustomVideo": true
+          "isCustomVideo": true,
+          "disableDownload":true
         }
       }
     },

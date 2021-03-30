@@ -757,35 +757,12 @@ describe('normalizeInitialState', () => {
 
     it('should add disableDownload prop to video componentData', () => {
       const actual = normalizeInitialState(videoInitialState, {
-        disableVideoDownload: true,
-      });
-      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
-    });
-
-    it('disableDownload should remain false in the video componentData', () => {
-      videoInitialState.entityMap['0'].data.disableDownload = false;
-      const actual = normalizeInitialState(videoInitialState, {
-        disableVideoDownload: true,
-      });
-      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
-    });
-
-    it('disableDownload should be equal to disableVideoDownload prop in the video componentData', () => {
-      const actual = normalizeInitialState(videoInitialState, {
-        disableVideoDownload: true,
-        disableDownload: false,
-      });
-      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
-    });
-
-    it('disableDownload prop should be truthy in the video componentData', () => {
-      const actual = normalizeInitialState(videoInitialState, {
         disableDownload: true,
       });
       expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
     });
 
-    it('disableDownload prop should be falsy in the video componentData', () => {
+    it('disableDownload should remain false in the video componentData', () => {
       videoInitialState.entityMap['0'].data.disableDownload = false;
       const actual = normalizeInitialState(videoInitialState, {
         disableDownload: true,
