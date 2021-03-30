@@ -16,27 +16,12 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
 ### :house: Internal
   
 - `unsupported-blocks/accordion/table/spoiler`
   - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
-
-### :bug: Bug Fix
-
-- `plugin-spoiler`
-  - [#2324](https://github.com/wix/ricos/pull/2324) increase blur for media, spoiler button position in formatting toolbar
-
-</details>
-<hr/>
-
-## 8.27.8 (Mar 30, 2021)
-
-- `ricos-content`
-  - [#8d2b66e](https://github.com/wix/ricos/commit/8d2b66e) add ensure content methods to converters entry point
-
-## 8.27.7 (Mar 25, 2021)
-
+  
 ### :bug: Bug Fix
 
 - `plugin-spoiler`
