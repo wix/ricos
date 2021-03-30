@@ -18,6 +18,7 @@
   </summary>
   
   ### :house: Internal
+  Z
 - `unsupported-blocks/accordion/table/spoiler`
   - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
 
@@ -36,6 +37,11 @@
 
 - `plugin-spoiler`
   - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
+- `plugin-link-preview`
+  - [#2324](https://github.com/wix/ricos/pull/2324) fix large space from bottom link preview plugin
+
+</details>
+<hr/>
 
 ## 8.27.6 (Mar 25, 2021)
 
