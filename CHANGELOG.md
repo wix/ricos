@@ -17,6 +17,12 @@
     Click to see more.
   </summary>
 	
+### :bug: Bug Fix
+
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive style when used inside innerrce  
+
+
 </details>
 <hr/>
 

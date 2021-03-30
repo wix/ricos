@@ -240,9 +240,7 @@ class FileUploadViewer extends PureComponent {
         onKeyDown={resolveIfEnter}
         role="button"
         tabIndex={0}
-        className={classnames(this.styles.file_upload_link, {
-          [this.styles.file_upload_link_second_break]: this.isSecondBreakPoint(),
-        })}
+        className={this.styles.file_upload_link}
       >
         {this.renderViewerBody({ name, type })}
       </div>
