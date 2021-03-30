@@ -5,7 +5,7 @@ import {
   getSizeStringAsNumber,
 } from './tableDataUtil';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
-import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH } from '../consts';
+import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH, BUTTON_NAME, CATEGORY } from '../consts';
 import { createEmptyCellEditor, createEmptyCell, createEmptyRow } from '../tableUtil';
 import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
@@ -193,8 +193,8 @@ class Table extends TableDataUtil {
       };
     });
     this.triggerBi({
-      button_name: 'border',
-      category: 'cell border',
+      button_name: BUTTON_NAME.BORDER,
+      category: CATEGORY.CELL_BORDER,
       value: borderColor,
     });
     this.setNewRows(this.componentData.config.rows);
@@ -510,8 +510,8 @@ class Table extends TableDataUtil {
     this.componentData.config.rowHeader = !this.componentData.config.rowHeader;
     this.saveNewDataFunc(this.componentData);
     this.triggerBi({
-      button_name: 'header',
-      category: 'row header',
+      button_name: BUTTON_NAME.HEADER,
+      category: CATEGORY.ROW_HEADER,
       value: !this.componentData.config.rowHeader,
     });
   };
@@ -520,8 +520,8 @@ class Table extends TableDataUtil {
     this.componentData.config.colHeader = !this.componentData.config.colHeader;
     this.saveNewDataFunc(this.componentData);
     this.triggerBi({
-      button_name: 'header',
-      category: 'column header',
+      button_name: BUTTON_NAME.HEADER,
+      category: CATEGORY.COLUMN_HEADER,
       value: !this.componentData.config.rowHeader,
     });
   };

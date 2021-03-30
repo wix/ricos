@@ -15,6 +15,7 @@ import { isEmpty, isNumber, cloneDeep, isEqual } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
 import { TABLE_TYPE } from './types';
+import { SOURCE, LOCATION, CATEGORY, ACTION, ACTION_NAME } from './consts';
 
 class TableComponent extends React.Component {
   constructor(props) {
@@ -54,7 +55,10 @@ class TableComponent extends React.Component {
   }
 
   onPluginChange = biParams =>
-    this.props.helpers?.onPluginChange?.(TABLE_TYPE, { ...biParams, type: 'cell formatting' });
+    this.props.helpers?.onPluginChange?.(TABLE_TYPE, {
+      ...biParams,
+      type: CATEGORY.CELL_FORMATTING,
+    });
 
   triggerBi = (eventName, biParams) =>
     this.props.helpers?.onPluginAction?.(eventName, { plugin_id: TABLE_TYPE, ...biParams });
@@ -223,10 +227,10 @@ class TableComponent extends React.Component {
           const selectedCols = this.table.getSelectedCols(getRange(selected));
           selectedCols
             ? this.addCol(Math.max(...selectedCols) + 1, {
-                source: 'keyboard shortcut',
-                location: 'right',
+                source: SOURCE.KEYBOARD_SHORTCUT,
+                location: LOCATION.RIGHT,
               })
-            : this.addLastCol({ source: 'keyboard shortcut' });
+            : this.addLastCol({ source: SOURCE.KEYBOARD_SHORTCUT });
         } else if (e.key === '-') {
           const selectedCols = this.table.getSelectedCols(getRange(selected));
           this.isAllCellsSelected(selected)
@@ -308,14 +312,21 @@ class TableComponent extends React.Component {
 
   onResizeCol = columnsRefs => {
     this.table.setColWidthAfterResize(columnsRefs, this.tableRef.current.offsetWidth);
-    this.triggerBi('pluginTableColumnRowAction', { action: 'resize', category: 'column' });
+    this.triggerBi(ACTION_NAME.COLUMN_ROW_ACTION, {
+      action: ACTION.RESIZE,
+      category: CATEGORY.COLUMN,
+    });
   };
+
   onResizeRow = (i, height) => {
     this.table.setRowHeight(
       getRowsRange(this.table.getRowsSelection({ start: i, end: i })),
       height
     );
-    this.triggerBi('pluginTableColumnRowAction', { action: 'resize', category: 'row' });
+    this.triggerBi(ACTION_NAME.COLUMN_ROW_ACTION, {
+      action: ACTION.RESIZE,
+      category: CATEGORY.ROW,
+    });
   };
 
   setToolbarRef = ref => (this.toolbarRef = ref);
@@ -336,7 +347,10 @@ class TableComponent extends React.Component {
     this.resetDrag();
     this.colDropIndex = null;
     this.position = null;
-    this.triggerBi('pluginTableColumnRowAction', { action: 'reorder', category: 'column' });
+    this.triggerBi(ACTION_NAME.COLUMN_ROW_ACTION, {
+      action: ACTION.REORDER,
+      category: CATEGORY.COLUMN,
+    });
   };
 
   onRowDragEnd = (e, dragsIndex) => {
@@ -346,7 +360,10 @@ class TableComponent extends React.Component {
     this.dropTop = null;
     this.dragPadding = null;
     this.rowDropIndex = null;
-    this.triggerBi('pluginTableColumnRowAction', { action: 'reorder', category: 'row' });
+    this.triggerBi(ACTION_NAME.COLUMN_ROW_ACTION, {
+      action: ACTION.REORDER,
+      category: CATEGORY.ROW,
+    });
   };
 
   resetDrag = () => {
@@ -358,7 +375,7 @@ class TableComponent extends React.Component {
     if (!isCellsNumberInvalid(this.table.getRowNum() + 1, this.table.getColNum())) {
       this.table.addRow(i);
       this.selectRows({ start: i, end: i });
-      this.triggerBi('tablePluginAddColumnRow', { category: 'row', ...biParams });
+      this.triggerBi(ACTION_NAME.ADD_COLUMN_ROW, { category: CATEGORY.ROW, ...biParams });
     }
   };
 
@@ -380,33 +397,33 @@ class TableComponent extends React.Component {
     if (!isCellsNumberInvalid(this.table.getRowNum(), this.table.getColNum() + 1)) {
       this.table.addColumn(i);
       this.selectCols({ start: i, end: i });
-      this.triggerBi('tablePluginAddColumnRow', { category: 'column', ...biParams });
+      this.triggerBi(ACTION_NAME.ADD_COLUMN_ROW, { category: CATEGORY.COLUMN, ...biParams });
     }
   };
 
   deleteRow = deleteIndexes => {
     this.table.deleteRow(deleteIndexes);
     this.setSelected();
-    this.triggerBi('tablePluginDeleteColumnRow', { category: 'row' });
+    this.triggerBi(ACTION_NAME.DELETE_COLUMN_ROW, { category: CATEGORY.ROW });
   };
 
   deleteColumn = deleteIndexes => {
     this.table.deleteColumn(deleteIndexes);
     this.setSelected();
-    this.triggerBi('tablePluginDeleteColumnRow', { category: 'column' });
+    this.triggerBi(ACTION_NAME.DELETE_COLUMN_ROW, { category: CATEGORY.COLUMN });
   };
 
   deleteTable = () => {
     this.props.blockProps.deleteBlock();
-    this.triggerBi('tablePluginDeleteColumnRow', { category: 'entire_table' });
+    this.triggerBi(ACTION_NAME.DELETE_COLUMN_ROW, { category: CATEGORY.ENTIRE_TABLE });
   };
 
   addLastRow = biParams => {
-    this.addRow(this.table.getRowNum(), { ...biParams, location: 'below' });
+    this.addRow(this.table.getRowNum(), { ...biParams, location: LOCATION.BELOW });
   };
 
   addLastCol = biParams => {
-    this.addCol(this.table.getColNum(), { ...biParams, location: 'right' });
+    this.addCol(this.table.getColNum(), { ...biParams, location: LOCATION.RIGHT });
   };
 
   onColDrag = (e, dragsIndex) => {

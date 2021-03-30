@@ -14,12 +14,7 @@ export interface PluginsActionGenericParams {
 
 interface EventsParamsMappers extends TableEventsParamsMappers {}
 
-// export type OnPluginAction = <T extends EventName>(
-//   eventName: T,
-//   params: EventsParamsMappers[T]
-// ) => void;
-
-export type OnPluginAction = <T extends EventName>(
-  eventName: T,
-  params: EventsParamsMappers[T]
+export type OnPluginAction = <K extends keyof EventsParamsMappers>(
+  eventName: K,
+  params: EventsParamsMappers[K]
 ) => void;

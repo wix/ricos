@@ -1,6 +1,7 @@
 import { ContextMenuIcon } from '../icons';
 import { getRange, getColsRange, getRowsRange } from '../domain/tableDataUtil';
 import { isCellsNumberInvalid } from '../tableUtil';
+import { SOURCE, LOCATION, CATEGORY, ACTION_NAME } from '../consts';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
@@ -15,9 +16,9 @@ const selectCol = (selected, selectCols) => {
   selectCols({ start: selectedCol, end: selectedCol });
 };
 const addLastRow = (addRow, table) =>
-  addRow(table.getRowNum(), { source: 'context menu', location: 'below' });
+  addRow(table.getRowNum(), { source: SOURCE.CONTEXT_MENU, location: LOCATION.BELOW });
 const addLastCol = (addCol, table) =>
-  addCol(table.getColNum(), { source: 'context menu', location: 'right' });
+  addCol(table.getColNum(), { source: SOURCE.CONTEXT_MENU, location: LOCATION.RIGHT });
 
 const splitButton = (table, selected, t) => {
   return {
@@ -79,7 +80,8 @@ const addLastColButton = (addCol, table, t, disable) => {
 
 const addRowAboveButton = (addRow, range, t, disable) => {
   return {
-    onClick: () => addRow(getRowIndex(range), { source: 'context menu', location: 'above' }),
+    onClick: () =>
+      addRow(getRowIndex(range), { source: SOURCE.CONTEXT_MENU, location: LOCATION.ABOVE }),
     dataHook: 'insert-above',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertAbove_Button'),
     type: 'text',
@@ -90,7 +92,8 @@ const addRowAboveButton = (addRow, range, t, disable) => {
 
 const addRowBelowButton = (addRow, range, t, disable) => {
   return {
-    onClick: () => addRow(getRowIndex(range) + 1, { source: 'context menu', location: 'below' }),
+    onClick: () =>
+      addRow(getRowIndex(range) + 1, { source: SOURCE.CONTEXT_MENU, location: LOCATION.BELOW }),
     dataHook: 'insert-below',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertBelow_Button'),
     type: 'text',
@@ -110,7 +113,8 @@ const deleteColButton = (deleteColumn, selectedCols, t) => {
 
 const addColRightButton = (addCol, range, t, disable) => {
   return {
-    onClick: () => addCol(getColIndex(range) + 1, { source: 'context menu', location: 'right' }),
+    onClick: () =>
+      addCol(getColIndex(range) + 1, { source: SOURCE.CONTEXT_MENU, location: LOCATION.RIGHT }),
     dataHook: 'insert-right',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRight_Button'),
     type: 'text',
@@ -121,7 +125,8 @@ const addColRightButton = (addCol, range, t, disable) => {
 
 const addColLeftButton = (addCol, range, t, disable) => {
   return {
-    onClick: () => addCol(getColIndex(range), { source: 'context menu', location: 'left' }),
+    onClick: () =>
+      addCol(getColIndex(range), { source: SOURCE.CONTEXT_MENU, location: LOCATION.LEFT }),
     dataHook: 'insert-left',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertLeft_Button'),
     type: 'text',
@@ -278,21 +283,21 @@ export const getContextMenuButtonsProps = (
     ];
   }
   const category = isAllCellsSelected
-    ? 'entire_table'
+    ? CATEGORY.ENTIRE_TABLE
     : selectedRows
-    ? 'row'
+    ? CATEGORY.ROW
     : selectedCols
-    ? 'column'
-    : 'range';
+    ? CATEGORY.COLUMN
+    : CATEGORY.RANGE;
   return [
     {
       type: 'context-menu',
       getIcon: () => ContextMenuIcon,
       dataHook: 'context-menu',
       buttonList: buttons,
-      onContextmenuClick: () => triggerBi('tablePluginClickOnOptionMenu', { category }),
+      onContextmenuClick: () => triggerBi(ACTION_NAME.CONTEXT_MENU_CLICK, { category }),
       onOptionClick: actionName =>
-        triggerBi('tablePluginClickActionFromOptionMenu', { category, actionName }),
+        triggerBi(ACTION_NAME.CONTEXT_MENU_OPTION_CLICK, { category, actionName }),
     },
   ];
 };
