@@ -11,13 +11,20 @@
   & > * {
     pointer-events: none;
   }
-  &.smallBlur {
+}
+
+.smallBlur {
+  & > * {
     filter: blur(30px);
   }
-  &.mediumBlur {
+}
+.mediumBlur {
+  & > * {
     filter: blur(40px);
   }
-  &.largeBlur {
+}
+.largeBlur {
+  & > * {
     filter: blur(50px);
   }
 }
