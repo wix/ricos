@@ -21,6 +21,7 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
+    'lines-between-class-members': ['error', 'always'],
     'quote-props': 'off',
     'react/jsx-closing-tag-location': 'error',
     'react/jsx-closing-bracket-location': [1, 'line-aligned'],

@@ -8,6 +8,9 @@ export interface PreviewRule {
 
 export interface PreviewEntityData extends Record<string, unknown> {
   type: string;
+  spoiler?: {
+    enabled?: boolean;
+  };
 }
 
 export interface PreviewMedia {
