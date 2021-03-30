@@ -17,12 +17,16 @@
     Click to see more.
   </summary>
   
-  ### :house: Internal
-  Z
+### :house: Internal
+  
 - `unsupported-blocks/accordion/table/spoiler`
   - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
 
-	
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2324](https://github.com/wix/ricos/pull/2324) increase blur for media, spoiler button position in formatting toolbar
+
 </details>
 <hr/>
 
