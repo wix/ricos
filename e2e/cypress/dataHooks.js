@@ -105,6 +105,10 @@ export const IMAGE_SETTINGS = {
   PREVIEW: 'imagePreview',
 };
 
+export const VIDEO_SETTINGS = {
+  DOWNLOAD_TOGGLE: 'videoDownloadToggle',
+};
+
 export const GALLERY_SETTINGS = {
   IMAGE: 'galleryItemPreview',
   EDIT_IMAGE: 'galleryItemsSortableItemSettings',
