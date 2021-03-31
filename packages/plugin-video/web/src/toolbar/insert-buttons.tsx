@@ -19,13 +19,17 @@ const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
   isMobile,
+  disableDownload,
 }: {
   t: TranslationFunction;
   settings: VideoPluginEditorConfig;
   isMobile: boolean;
+  disableDownload?: boolean;
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
+  const componentData = disableDownload !== undefined ? { ...DEFAULTS, disableDownload } : DEFAULTS;
+
   const {
     exposeButtons = [videoButtonsTypes.video],
     toolbar,
@@ -45,7 +49,7 @@ const createInsertButtons: CreateInsertButtons = ({
       name: INSERT_PLUGIN_BUTTONS.VIDEO,
       tooltip: t('VideoPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
-      componentData: DEFAULTS,
+      componentData,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(VideoModal, settings),
       modalStyles: getModalStyles({
