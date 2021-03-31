@@ -49,6 +49,48 @@ export const COLORS = Object.freeze({
   color10: '#012055',
 });
 
+export const SOURCE = {
+  KEYBOARD_SHORTCUT: 'keyboard shortcut',
+  PLUS_BUTTON: 'plus button',
+  CONTEXT_MENU: 'context menu',
+};
+
+export const LOCATION = {
+  RIGHT: 'right',
+  LEFT: 'left',
+  ABOVE: 'above',
+  BELOW: 'below',
+};
+
+export const CATEGORY = {
+  COLUMN: 'column',
+  ROW: 'row',
+  ENTIRE_TABLE: 'entire table',
+  CELL_BORDER: 'cell border',
+  ROW_HEADER: 'row header',
+  COLUMN_HEADER: 'column header',
+  CELL_FORMATTING: 'cell formatting',
+  RANGE: 'range',
+};
+
+export const ACTION = {
+  RESIZE: 'resize',
+  REORDER: 'reorder',
+};
+
+export const BUTTON_NAME = {
+  BORDER: 'border',
+  HEADER: 'header',
+};
+
+export const ACTION_NAME = {
+  COLUMN_ROW_ACTION: 'pluginTableColumnRowAction',
+  ADD_COLUMN_ROW: 'tablePluginAddColumnRow',
+  DELETE_COLUMN_ROW: 'tablePluginDeleteColumnRow',
+  CONTEXT_MENU_CLICK: 'tablePluginClickOnOptionMenu',
+  CONTEXT_MENU_OPTION_CLICK: 'tablePluginClickActionFromOptionMenu',
+};
+
 export const CELL_MANUAL_MIN_WIDTH = 65;
 export const CELL_AUTO_MIN_WIDTH = 120;
 export const ROW_DEFAULT_HEIGHT = 47;

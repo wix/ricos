@@ -19,6 +19,8 @@ class ContextMenu extends PureComponent {
     isDisabled: PropTypes.func,
     getIcon: PropTypes.func,
     theme: PropTypes.object,
+    onContextmenuClick: PropTypes.func,
+    onOptionClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -47,9 +49,15 @@ class ContextMenu extends PureComponent {
     });
   };
 
+  handleClick = () => {
+    this.props.onContextmenuClick?.();
+    this.toggleOptions();
+  };
+
   hideOptions = () => this.setState({ isOpen: false });
 
-  onChange = ({ onClick }) => e => {
+  onChange = ({ onClick, text }) => e => {
+    this.props.onOptionClick?.(text);
     onClick(e);
     this.setState({ isOpen: false });
   };
@@ -108,7 +116,7 @@ class ContextMenu extends PureComponent {
         <div className={Styles.buttonWrapper}>
           <ToolbarButton
             isActive={false}
-            onClick={this.toggleOptions}
+            onClick={this.handleClick}
             getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}
