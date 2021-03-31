@@ -241,6 +241,7 @@ class GalleryViewer extends React.Component {
       >
         {size?.width ? (
           <ProGallery
+            options={{ allowContextMenu: true }}
             domId={this.domId}
             allowSSR={!!seoMode}
             items={items}
