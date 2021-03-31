@@ -454,6 +454,7 @@ const config: RichContentEditorProps['config'] = {
     //     size: 'small',
     //   },
     // },
+    // disableExpand: true,
   },
   [IMAGE_TYPE]: {
     // defaultData: {
