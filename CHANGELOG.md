@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+
+- `plugin-video`
+  - [#2331](https://github.com/wix-incubator/rich-content/pull/2331) added new settings panel for custom videos with download toggle
+
 ### :house: Internal
   
 - `unsupported-blocks/accordion/table/spoiler`
@@ -53,6 +58,10 @@
 
 ## 8.27.6 (Mar 25, 2021)
 
+### :rocket: New Feature
+
+- `plugin-video`
+  - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) added new settings panel for custom videos with download toggle
 ### :nail_care: Polish
 
 - `plugin-headings`
