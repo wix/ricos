@@ -374,6 +374,11 @@ Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
   cy.get('[data-hook="settings"]');
 });
 
+Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS[settings]);
+  cy.get('[data-hook="settings"]');
+});
+
 Cypress.Commands.add('openMapSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.MAP}]:first`)
     .parent()

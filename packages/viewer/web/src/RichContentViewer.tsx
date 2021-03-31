@@ -28,6 +28,7 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
+  GALLERY_TYPE,
   VIDEO_TYPE,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
@@ -120,6 +121,7 @@ class RichContentViewer extends Component<
       config,
     } = props;
     const { uiSettings } = config;
+    const disableGalleryExpand = config[GALLERY_TYPE]?.disableExpand;
     const disableDownload =
       config[VIDEO_TYPE]?.disableDownload ||
       uiSettings?.disableRightClick ||
@@ -132,6 +134,7 @@ class RichContentViewer extends Component<
           disableInlineImages,
           removeInvalidInlinePlugins,
           disableDownload,
+          disableGalleryExpand,
         })
       : undefined;
   };
