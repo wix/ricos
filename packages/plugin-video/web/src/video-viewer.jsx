@@ -75,7 +75,7 @@ class VideoViewer extends Component {
     }
   };
 
-  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.componentData.disableDownload && e.preventDefault();
 
   disableDownloadProps = () => {
     const { componentData, settings } = this.props;
