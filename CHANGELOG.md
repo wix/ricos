@@ -16,6 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
+
+## 8.28.0 (Mar 31, 2021)
 
 ### :rocket: New Feature
 
@@ -23,7 +27,6 @@
   - [#2331](https://github.com/wix-incubator/rich-content/pull/2331) added new settings panel for custom videos with download toggle
 - `plugin-gallery`
   - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
-
 
 ### :house: Internal
 
@@ -48,11 +51,7 @@
 ### :nail_care: Polish
 
 - `common`
-
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) TextButtonMapping and InlineToolbarButton types improved
-
-    </details>
-    <hr/>
 
 ## 8.27.8 (Mar 30, 2021)
 
