@@ -75,7 +75,7 @@ export function generateInsertPluginButtonProps({
       blockType
     );
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    onPluginAddSuccess(getPluginParams(data)[blockType]);
+    onPluginAddSuccess(getPluginParams(data, blockType));
     return { newBlock, newSelection, newEditorState };
   }
 
