@@ -1,6 +1,7 @@
 import { ContextMenuIcon } from '../icons';
 import { getRange, getColsRange, getRowsRange } from '../domain/tableDataUtil';
 import { isCellsNumberInvalid } from '../tableUtil';
+import { SOURCE, LOCATION, CATEGORY, ACTION_NAME } from '../consts';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
@@ -14,8 +15,10 @@ const selectCol = (selected, selectCols) => {
   const selectedCol = selected.start.j;
   selectCols({ start: selectedCol, end: selectedCol });
 };
-const addLastRow = (addRow, table) => addRow(table.getRowNum());
-const addLastCol = (addCol, table) => addCol(table.getColNum());
+const addLastRow = (addRow, table) =>
+  addRow(table.getRowNum(), { source: SOURCE.CONTEXT_MENU, location: LOCATION.BELOW });
+const addLastCol = (addCol, table) =>
+  addCol(table.getColNum(), { source: SOURCE.CONTEXT_MENU, location: LOCATION.RIGHT });
 
 const splitButton = (table, selected, t) => {
   return {
@@ -77,7 +80,8 @@ const addLastColButton = (addCol, table, t, disable) => {
 
 const addRowAboveButton = (addRow, range, t, disable) => {
   return {
-    onClick: () => addRow(getRowIndex(range)),
+    onClick: () =>
+      addRow(getRowIndex(range), { source: SOURCE.CONTEXT_MENU, location: LOCATION.ABOVE }),
     dataHook: 'insert-above',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertAbove_Button'),
     type: 'text',
@@ -88,7 +92,8 @@ const addRowAboveButton = (addRow, range, t, disable) => {
 
 const addRowBelowButton = (addRow, range, t, disable) => {
   return {
-    onClick: () => addRow(getRowIndex(range) + 1),
+    onClick: () =>
+      addRow(getRowIndex(range) + 1, { source: SOURCE.CONTEXT_MENU, location: LOCATION.BELOW }),
     dataHook: 'insert-below',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertBelow_Button'),
     type: 'text',
@@ -108,7 +113,8 @@ const deleteColButton = (deleteColumn, selectedCols, t) => {
 
 const addColRightButton = (addCol, range, t, disable) => {
   return {
-    onClick: () => addCol(getColIndex(range) + 1),
+    onClick: () =>
+      addCol(getColIndex(range) + 1, { source: SOURCE.CONTEXT_MENU, location: LOCATION.RIGHT }),
     dataHook: 'insert-right',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertRight_Button'),
     type: 'text',
@@ -119,7 +125,8 @@ const addColRightButton = (addCol, range, t, disable) => {
 
 const addColLeftButton = (addCol, range, t, disable) => {
   return {
-    onClick: () => addCol(getColIndex(range)),
+    onClick: () =>
+      addCol(getColIndex(range), { source: SOURCE.CONTEXT_MENU, location: LOCATION.LEFT }),
     dataHook: 'insert-left',
     text: t('TablePlugin_Toolbar_ContextMenu_InsertLeft_Button'),
     type: 'text',
@@ -179,6 +186,7 @@ const divider = () => {
   };
 };
 
+// eslint-disable-next-line complexity
 export const getContextMenuButtonsProps = (
   isAllCellsSelected,
   selectedRows,
@@ -197,7 +205,8 @@ export const getContextMenuButtonsProps = (
   merge,
   t,
   distributeRows,
-  distributeColumns
+  distributeColumns,
+  triggerBi
 ) => {
   const range = selected && getRange(selected);
   const colsRange = selected && getColsRange(selected);
@@ -273,12 +282,22 @@ export const getContextMenuButtonsProps = (
       selectColButton(selected, selectCols, t),
     ];
   }
+  const category = isAllCellsSelected
+    ? CATEGORY.ENTIRE_TABLE
+    : selectedRows
+    ? CATEGORY.ROW
+    : selectedCols
+    ? CATEGORY.COLUMN
+    : CATEGORY.RANGE;
   return [
     {
       type: 'context-menu',
       getIcon: () => ContextMenuIcon,
       dataHook: 'context-menu',
       buttonList: buttons,
+      onContextmenuClick: () => triggerBi(ACTION_NAME.CONTEXT_MENU_CLICK, { category }),
+      onOptionClick: actionName =>
+        triggerBi(ACTION_NAME.CONTEXT_MENU_OPTION_CLICK, { category, actionName }),
     },
   ];
 };
