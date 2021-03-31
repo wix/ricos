@@ -5,7 +5,7 @@ import {
   getSizeStringAsNumber,
 } from './tableDataUtil';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
-import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH } from '../consts';
+import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH, BUTTON_NAME, CATEGORY } from '../consts';
 import { createEmptyCellEditor, createEmptyCell, createEmptyRow } from '../tableUtil';
 import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
@@ -20,10 +20,11 @@ const reorderArray = (arr, from, to) => {
 };
 
 class Table extends TableDataUtil {
-  constructor(componentData = {}, saveNewDataFunc) {
+  constructor(componentData = {}, saveNewDataFunc, triggerBi) {
     super(componentData);
     this.saveNewDataFunc = saveNewDataFunc;
     this.contentMaxHeight = 0;
+    this.triggerBi = triggerBi;
   }
 
   setNewRows = rows => {
@@ -148,6 +149,11 @@ class Table extends TableDataUtil {
       const cell = this.getCell(i, j);
       cell.style = { ...(cell.style || {}), ...style };
     });
+    this.triggerBi({
+      button_name: Object.keys(style)[0],
+      category: Object.keys(style)[0],
+      value: Object.values(style)[0],
+    });
     this.setNewRows(this.componentData.config.rows);
   };
 
@@ -185,6 +191,11 @@ class Table extends TableDataUtil {
         ...(cell.border || {}),
         ...cellBorders,
       };
+    });
+    this.triggerBi({
+      button_name: BUTTON_NAME.BORDER,
+      category: CATEGORY.CELL_BORDER,
+      value: borderColor,
     });
     this.setNewRows(this.componentData.config.rows);
   };
@@ -498,11 +509,21 @@ class Table extends TableDataUtil {
   toggleRowHeader = () => {
     this.componentData.config.rowHeader = !this.componentData.config.rowHeader;
     this.saveNewDataFunc(this.componentData);
+    this.triggerBi({
+      button_name: BUTTON_NAME.HEADER,
+      category: CATEGORY.ROW_HEADER,
+      value: !this.componentData.config.rowHeader,
+    });
   };
 
   toggleColHeader = () => {
     this.componentData.config.colHeader = !this.componentData.config.colHeader;
     this.saveNewDataFunc(this.componentData);
+    this.triggerBi({
+      button_name: BUTTON_NAME.HEADER,
+      category: CATEGORY.COLUMN_HEADER,
+      value: !this.componentData.config.rowHeader,
+    });
   };
 
   isBothHeaderCellsAndRegularCellsSelected = range => {
