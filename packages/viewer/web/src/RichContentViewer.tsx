@@ -28,6 +28,7 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
+  VIDEO_TYPE,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -116,13 +117,21 @@ class RichContentViewer extends Component<
       anchorTarget,
       relValue,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
+      config,
     } = props;
+    const { uiSettings } = config;
+    const disableDownload =
+      config[VIDEO_TYPE]?.disableDownload ||
+      uiSettings?.disableRightClick ||
+      uiSettings?.disableDownload;
+
     return initialState
       ? normalizeInitialState(initialState, {
           anchorTarget,
           relValue,
           disableInlineImages,
           removeInvalidInlinePlugins,
+          disableDownload,
         })
       : undefined;
   };
