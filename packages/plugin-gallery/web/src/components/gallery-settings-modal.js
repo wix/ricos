@@ -211,6 +211,7 @@ export class GallerySettingsModal extends Component {
       settings: t('GallerySettings_Tab_Settings'),
     }[tab];
   }
+
   onDoneClick = () => {
     const { helpers, pubsub } = this.props;
     const componentData = pubsub.get('componentData');
