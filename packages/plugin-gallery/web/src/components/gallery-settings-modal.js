@@ -220,9 +220,7 @@ export class GallerySettingsModal extends Component {
       disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,
     };
-
     pubsub.update('componentData', newComponentData);
-
     helpers.closeModal();
   };
 
