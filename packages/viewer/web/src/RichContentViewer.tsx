@@ -30,6 +30,7 @@ import {
   AvailableExperiments,
   IMAGE_TYPE,
   GALLERY_TYPE,
+  VIDEO_TYPE,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -121,9 +122,12 @@ class RichContentViewer extends Component<
       config,
     } = props;
     const { uiSettings } = config;
-    const disableDownload = uiSettings?.disableDownload ?? uiSettings?.disableRightClick;
     const disableImagesExpand = config[IMAGE_TYPE]?.disableExpand;
     const disableGalleryExpand = config[GALLERY_TYPE]?.disableExpand;
+    const disableDownload =
+      config[VIDEO_TYPE]?.disableDownload ||
+      uiSettings?.disableRightClick ||
+      uiSettings?.disableDownload;
 
     return initialState
       ? normalizeInitialState(initialState, {

@@ -12,3 +12,5 @@ export { default as AnchorInTextContentState } from './AnchorInTextContentState'
 export { default as AnchorInImageContentState } from './AnchorInImageContentState';
 
 export { default as imageGalleryContentState } from './imageGalleryContentState';
+
+export { default as videoInitialContentState } from './videoInitialContentState';

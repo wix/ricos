@@ -5,8 +5,8 @@ import {
   PLUGIN_TOOLBAR_BUTTONS,
   GALLERY_SETTINGS,
   GALLERY_IMAGE_SETTINGS,
-  IMAGE_SETTINGS,
   GIPHY_PLUGIN,
+  VIDEO_SETTINGS,
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
@@ -74,7 +74,6 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('images');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
       cy.openSettings();
-      cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow({ tag: this.test.title + ' - settings', target: 'window', fully: false });
       cy.addImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - add image title');
@@ -94,19 +93,9 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('should disable image expand', () => {
-      cy.loadRicosEditorAndViewer('images');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
-      cy.openSettings();
-      cy.eyesCheckWindow();
-      cy.get(`[data-hook=${IMAGE_SETTINGS.IMAGE_EXPAND_TOGGLE}]`).click();
-      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
-      cy.wait(200);
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
-        .eq(2)
-        .parent()
-        .click();
-      cy.eyesCheckWindow();
+    it('render image with link', () => {
+      cy.loadRicosEditorAndViewer('image-with-link');
+      cy.getImageLink();
     });
 
     it('render image with loader - loading in component data', () => {
@@ -313,6 +302,23 @@ describe('plugins', () => {
         cy.waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
       });
+
+      context('settings', () => {
+        it('should disable gallery expand', () => {
+          cy.loadRicosEditorAndViewer('gallery');
+          cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
+          cy.openSettings('ADV_SETTINGS');
+          cy.eyesCheckWindow();
+          cy.get(`[data-hook=${GALLERY_SETTINGS.GALLERY_EXPAND_TOGGLE}]`).click();
+          cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+          cy.wait(200);
+          cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`)
+            .eq(1)
+            .parent()
+            .click();
+          cy.eyesCheckWindow();
+        });
+      });
       // TODO: title and link image tests
       // // eslint-disable-next-line mocha/no-skipped-tests
       // it.skip('allow to add a title', function() {
@@ -359,6 +365,16 @@ describe('plugins', () => {
         .type('Will this fix the flakiness?');
       cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should toggle download option', () => {
+      cy.loadRicosEditorAndViewer('video');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO);
+      cy.openSettings();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${VIDEO_SETTINGS.DOWNLOAD_TOGGLE}]`).click();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
     });
   });
 

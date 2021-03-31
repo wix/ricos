@@ -246,7 +246,17 @@ export default function createAtomicPluginToolbar({
         innerModal,
         ...commonButtonProps,
       };
-
+      const defaultButtonProps = {
+        componentData: this.state.componentData,
+        componentState: this.state.componentState,
+        helpers,
+        displayPanel: this.displayPanel,
+        displayInlinePanel: this.displayInlinePanel,
+        hideInlinePanel: this.hidePanels,
+        uiSettings,
+        getEditorBounds,
+        ...buttonProps,
+      };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
@@ -286,6 +296,14 @@ export default function createAtomicPluginToolbar({
           return (
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
+        case BUTTONS.VIDEO_SETTINGS: {
+          const isCustomVideo = !!this.state.componentData.isCustomVideo;
+          const videoSettingsProps = {
+            ...defaultButtonProps,
+            type: BUTTONS.EXTERNAL_MODAL,
+          };
+          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
+        }
         case BUTTONS.LINK_PREVIEW: {
           return (
             !this.state.componentData.html && (
@@ -309,19 +327,7 @@ export default function createAtomicPluginToolbar({
           );
         }
         default:
-          return (
-            <Button
-              componentData={this.state.componentData}
-              componentState={this.state.componentState}
-              helpers={helpers}
-              displayPanel={this.displayPanel}
-              displayInlinePanel={this.displayInlinePanel}
-              hideInlinePanel={this.hidePanels}
-              uiSettings={uiSettings}
-              getEditorBounds={getEditorBounds}
-              {...buttonProps}
-            />
-          );
+          return <Button {...defaultButtonProps} />;
       }
     };
 

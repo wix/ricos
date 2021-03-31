@@ -11,6 +11,7 @@ import {
   AnchorInTextContentState,
   AnchorInImageContentState,
   imageGalleryContentState,
+  videoInitialContentState,
 } from './Fixtures';
 
 import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
@@ -776,7 +777,7 @@ describe('normalizeInitialState', () => {
     });
   });
 
-  describe('disableDownload normalizer', () => {
+  describe('Images/Gallery disableDownload normalizer', () => {
     let imageGalleryInitialState: DraftContent;
 
     beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
@@ -816,6 +817,27 @@ describe('normalizeInitialState', () => {
       });
       expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
       expect(actual.entityMap['1'].data.disableDownload).toBeTruthy();
+    });
+  });
+
+  describe('Video disableDownload normalizer', () => {
+    let videoInitialState: DraftContent;
+
+    beforeEach(() => (videoInitialState = cloneDeep(videoInitialContentState)));
+
+    it('should add disableDownload prop to video componentData', () => {
+      const actual = normalizeInitialState(videoInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+    });
+
+    it('disableDownload should remain false in the video componentData', () => {
+      videoInitialState.entityMap['0'].data.disableDownload = false;
+      const actual = normalizeInitialState(videoInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
     });
   });
 });
