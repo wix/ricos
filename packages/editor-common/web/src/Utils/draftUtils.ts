@@ -656,11 +656,19 @@ export function getFocusedBlockKey(editorState: EditorState) {
   if (selection.isCollapsed()) return selection.getAnchorKey();
 }
 
-export function getBlockInfo(editorState: EditorState, blockKey: string) {
+export function getBlockEntityType(editorState: EditorState, blockKey: string) {
+  return getBlockEntity(editorState, blockKey)?.getType();
+}
+
+function getBlockEntity(editorState: EditorState, blockKey: string) {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(0);
-  const entity = entityKey ? contentState.getEntity(entityKey) : undefined;
+  return entityKey ? contentState.getEntity(entityKey) : undefined;
+}
+
+export function getBlockInfo(editorState: EditorState, blockKey: string) {
+  const entity = getBlockEntity(editorState, blockKey);
   const entityData = entity?.getData();
   const type = entity?.getType();
 

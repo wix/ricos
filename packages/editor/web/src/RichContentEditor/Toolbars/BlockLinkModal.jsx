@@ -7,7 +7,7 @@ export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
   setLinkInBlockData = ({ url, anchor, targetBlank, nofollow }) => {
-    const { pubsub, anchorTarget, relValue, unchangedUrl } = this.props;
+    const { pubsub, anchorTarget, relValue, unchangedUrl, triggerBi } = this.props;
     let target = '_blank',
       rel = 'nofollow';
     if (!targetBlank) {
@@ -28,6 +28,16 @@ export default class BlockLinkModal extends Component {
         key: 'componentLink',
         item,
       });
+      if (anchor) {
+        triggerBi({ anchor, category: 'section' });
+      } else {
+        triggerBi({
+          link: item.url,
+          nofollow,
+          newTab: target === '_blank',
+          category: 'web address',
+        });
+      }
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }
@@ -95,4 +105,5 @@ BlockLinkModal.propTypes = {
   unchangedUrl: PropTypes.bool,
   linkTypes: PropTypes.object,
   editorState: PropTypes.object,
+  triggerBi: PropTypes.func,
 };

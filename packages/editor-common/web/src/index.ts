@@ -53,6 +53,7 @@ export {
   createBlockAndFocus,
   createBlock,
   getBlockInfo,
+  getBlockEntityType,
   getFocusedBlockKey,
   createCalcContentDiff,
   getPostContentSummary,
