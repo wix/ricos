@@ -17,10 +17,36 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
+### :rocket: New Feature
 
+- `plugin-video`
+  - [#2331](https://github.com/wix-incubator/rich-content/pull/2331) added new settings panel for custom videos with download toggle
+
+### :house: Internal
+
+- `unsupported-blocks/accordion/table/spoiler`
+  - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
 - `plugin-table`
   - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) aria-hidden attribute fixed
+- `plugin-spoiler`
+  - [#2324](https://github.com/wix/ricos/pull/2324) increase blur for media, spoiler button position in formatting toolbar
+
+### :house: Internal
+
+- `ricos-content`
+  - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) ContentAPI infra added
+- `general`
+  - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) tsconfig: strictPropertyInitialization; eslint: lines-between-class-members rules
+
+### :nail_care: Polish
+
+- `common`
+  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) TextButtonMapping and InlineToolbarButton types improved
 
 </details>
 <hr/>
@@ -38,6 +64,11 @@
   - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
 
 ## 8.27.6 (Mar 25, 2021)
+
+### :rocket: New Feature
+
+- `plugin-video`
+  - [#2229](https://github.com/wix-incubator/rich-content/pull/2229) added new settings panel for custom videos with download toggle
 
 ### :nail_care: Polish
 
