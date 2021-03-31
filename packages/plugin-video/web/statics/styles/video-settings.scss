@@ -1,0 +1,23 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+  .separator {
+    display: block;
+    margin-top: 16px;
+    width: 100%;
+    height: 1px;
+    background-color: #efeff4;
+  }
+
+  .videoSettingsTitle {
+    font-size: 20px;
+    padding: 24px 0 0 24px;
+  }
+
+  .videoSettings_toggleContainer{
+    padding: 0 24px;
+  }
+
+  .videoSettings_mobile {
+    .videoSettings_toggleContainer{
+      padding-right: 18px;
+     }
+  }

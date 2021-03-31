@@ -152,6 +152,7 @@ class GalleryViewer extends React.Component {
     const {
       componentData: { styles: styleParams },
     } = this.props;
+
     switch (name) {
       case GALLERY_EVENTS.GALLERY_CHANGE:
         if (this.containerRef.current) {
@@ -163,7 +164,7 @@ class GalleryViewer extends React.Component {
         }
         break;
       case GALLERY_EVENTS.ITEM_ACTION_TRIGGERED:
-        !data.linkData.url && this.handleExpand(data);
+        !data.linkData.url && this.hasExpand() && this.handleExpand(data);
         break;
       default:
         break;
@@ -176,7 +177,7 @@ class GalleryViewer extends React.Component {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
-    onExpand?.(this.props.blockKey, data.idx);
+    this.hasExpand() && onExpand?.(this.props.blockKey, data.idx);
   };
 
   renderExpandIcon = itemProps => {
@@ -193,6 +194,17 @@ class GalleryViewer extends React.Component {
     );
   };
 
+  hasExpand = () => {
+    const { componentData, settings } = this.props;
+    let disableExpand = false;
+    if (componentData.disableExpand !== undefined) {
+      disableExpand = componentData.disableExpand;
+    } else if (settings.disableExpand !== undefined) {
+      disableExpand = settings.disableExpand;
+    }
+    return !disableExpand && settings.onExpand;
+  };
+
   renderTitle = title => {
     return title ? (
       <div className={styles.imageTitleContainer}>
@@ -202,25 +214,26 @@ class GalleryViewer extends React.Component {
   };
 
   hoverElement = itemProps => {
-    const {
-      settings: { onExpand, disableExpand },
-    } = this.props;
-    const isExpandEnabled = !disableExpand && onExpand;
-    const isClickable = isExpandEnabled || itemProps.link;
+    const isClickable = this.hasExpand() || itemProps.link;
     const itemOverlayStyles = classnames(
       this.styles.itemOverlay,
       isClickable && this.styles.clickableItem
     );
     return (
       <div className={itemOverlayStyles}>
-        {isExpandEnabled && this.renderExpandIcon(itemProps)}
+        {this.hasExpand() && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title, 'HOVER')}
         {this.props.itemOverlayElement?.(itemProps)}
       </div>
     );
   };
 
-  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+  handleContextMenu = e => {
+    const {
+      componentData: { disableDownload = false },
+    } = this.props;
+    return disableDownload && e.preventDefault();
+  };
 
   getStyleParams = () => {
     const {

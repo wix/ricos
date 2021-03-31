@@ -24,6 +24,57 @@
 </details>
 <hr/>
 
+## 8.28.0 (Mar 31, 2021)
+
+### :rocket: New Feature
+
+- `plugin-video`
+  - [#2331](https://github.com/wix-incubator/rich-content/pull/2331) added new settings panel for custom videos with download toggle
+- `plugin-gallery`
+  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
+
+### :house: Internal
+
+- `unsupported-blocks/accordion/table/spoiler`
+  - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
+- `plugin-table`
+  - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
+- `ricos-content`
+  - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) ContentAPI infra added
+- `general`
+  - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) tsconfig: strictPropertyInitialization; eslint: lines-between-class-members rules
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) aria-hidden attribute fixed
+- `plugin-spoiler`
+  - [#2308](https://github.com/wix/ricos/pull/2308) increase blur for media, change spoiler button position in formatting toolbar, change spoiler icon
+- `plugin-link-preview`
+  - [#2324](https://github.com/wix/ricos/pull/2324) remove large space from plugin bottom
+
+### :nail_care: Polish
+
+- `common`
+  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) TextButtonMapping and InlineToolbarButton types improved
+
+## 8.27.8 (Mar 30, 2021)
+
+- `ricos-content`
+  - [#8d2b66e](https://github.com/wix/ricos/commit/8d2b66e) add ensure content methods to converters entry point
+
+## 8.27.7 (Mar 25, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
+
+### :nail_care: Polish
+
+- `plugin-headings`
+  - [#2321](https://github.com/wix-incubator/rich-content/pull/2321) Heading 1 can now be enabled via feature toggle `useHeadingOne` (only applicable for default config)
+
 ## 8.27.5 (Mar 24, 2021)
 
 ### :bug: Bug Fix

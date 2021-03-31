@@ -357,7 +357,7 @@ export const uiSettings: UISettings = {
     dropDown: getLinkPanelDropDownConfig(),
     //placeholder: "Enter a URL here",
   },
-  // disableRightClick: true,
+  // disableDownload: true,
 };
 
 export const videoHandlers = {
@@ -454,6 +454,7 @@ const config: RichContentEditorProps['config'] = {
     //     size: 'small',
     //   },
     // },
+    // disableExpand: true,
   },
   [IMAGE_TYPE]: {
     // defaultData: {

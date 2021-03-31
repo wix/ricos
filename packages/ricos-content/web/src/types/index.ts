@@ -3,6 +3,8 @@ export type NormalizeConfig = {
   relValue?: string;
   disableInlineImages?: boolean;
   removeInvalidInlinePlugins?: boolean;
+  disableDownload?: boolean;
+  disableGalleryExpand?: boolean;
 };
 
 export interface ComponentData {
@@ -30,3 +32,4 @@ export type LinkRange = {
 export type NormalizationProcessor<T> = (processed: T, ...args: any[]) => T;
 
 export * from './contentTypes';
+export * from './content-api';

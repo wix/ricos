@@ -25,7 +25,7 @@ import {
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
-import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
+import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
@@ -59,6 +59,9 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  EventName,
+  PluginEventParams,
+  OnPluginAction,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -179,25 +182,36 @@ function makeBarrelRoll() {
 
 class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  initialEditorState: {
-    entities: EntityInstance[];
-    blocks: ContentBlock[];
-  };
   refId: number;
+
   commonPubsub: Pubsub;
+
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
-  contextualData: EditorContextType;
-  editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
-  editorWrapper: Element;
-  copySource: { unregister(): void };
-  updateBounds: (editorBounds?: BoundingRect) => void;
+
+  contextualData!: EditorContextType;
+
+  editor!: Editor & { setMode: (mode: 'render' | 'edit') => void };
+
+  editorWrapper!: Element;
+
+  copySource!: { unregister(): void };
+
+  updateBounds!: (editorBounds?: BoundingRect) => void;
+
   plugins;
-  focusedBlockKey: string;
+
+  focusedBlockKey!: string;
+
   pluginKeyBindings;
+
   customStyleFn: DraftEditorProps['customStyleFn'];
+
   toolbars;
+
   innerRCECustomStyleFn;
-  getSelectedText: (editorState: EditorState) => string;
+
+  getSelectedText!: (editorState: EditorState) => string;
+
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
     spellCheck: true,
@@ -361,7 +375,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     } = this.props;
 
     this.fixHelpers(helpers);
-
+    const onPluginAction: OnPluginAction = (eventName: EventName, params: PluginEventParams) =>
+      helpers.onPluginAction?.(eventName, { ...params, version: Version.currentVersion });
     this.contextualData = {
       theme: theme || {},
       t,
@@ -414,8 +429,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             Version.currentVersion
           );
         },
-        onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
-          helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
+        onPluginAddSuccess: (pluginId: string, entryPoint: string, params) =>
+          helpers.onPluginAddSuccess?.(pluginId, entryPoint, params, Version.currentVersion),
+        onPluginAction,
+        onPluginChange: (pluginId: string, changeObj) =>
+          helpers.onPluginChange?.(pluginId, changeObj, Version.currentVersion),
       },
       config,
       isMobile,

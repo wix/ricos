@@ -134,7 +134,7 @@ export const typeMappers: PluginTypeMapper[] = [
 ];
 
 export const uiSettings: UISettings = {
-  disableRightClick: true,
+  // disableRightClick: true, deprecated
 };
 
 const config: RichContentViewerProps['config'] = {
