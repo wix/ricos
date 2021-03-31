@@ -26,6 +26,8 @@
 
 - `unsupported-blocks/accordion/table/spoiler`
   - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
+- `plugin-table`
+  - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
 - `ricos-content`
   - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) ContentAPI infra added
 - `general`

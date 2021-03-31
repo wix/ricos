@@ -1,4 +1,5 @@
 import { ToolbarType } from './toolbarEnums';
+import { OnPluginAction } from './pluginsBiCallbacksTypes';
 interface biCallbackParams {
   version?: string;
 }
@@ -11,9 +12,18 @@ export interface onPluginAddStepArgs extends biCallbackParams {
   entryType: EntryType;
   step: 'FileUploadDialog' | 'PluginModal';
 }
+export interface PluginAddSuccessParams {
+  rows?: number;
+  columns?: number;
+}
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
-  onPluginAddSuccess?(pluginId: string, entryPoint: string, version: string): void;
+  onPluginAddSuccess?(
+    pluginId: string,
+    entryPoint: string,
+    params: PluginAddSuccessParams,
+    version: string
+  ): void;
   onPluginAddStep?(params: onPluginAddStepArgs): void;
   onPluginDelete?(pluginId: string, version: string): void;
   onPublish?(
@@ -53,6 +63,7 @@ export interface BICallbacks {
     errorType: string | undefined,
     version: string
   ): void;
+  onPluginAction?: OnPluginAction;
 }
 
 type ActionName = 'expand_gallery' | 'expand_image' | 'Click';
