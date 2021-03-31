@@ -131,7 +131,7 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 | setting key     | description                            | default value | is required? | editor/viewer config |
 | --------------- | -------------------------------------- | ------------- | ------------ | -------------------- |
 | `onExpand`      | called when the user expands an item   | none          | No           | viewer               |
-| `disableExpand` (deprecated) | disables expanding items & fullscreen | false         | No           | viewer (this option is deprecated! if used it will be supported and the same behavior will remain. note that now the initial value needs to be set in the editor settings)               |
+| `disableExpand` (deprecated) | disables expanding items & fullscreen | false         | No           | viewer               |
 | `disableExpand` | disables expanding items & fullscreen | false         | No           | editor               |
 
 
