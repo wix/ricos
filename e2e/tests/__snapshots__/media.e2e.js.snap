@@ -3206,6 +3206,8 @@ exports[`plugins > gallery > media settings > settings > should disable gallery 
           "size": "content",
           "spacing": 0
         },
+        "disableDownload": false,
+        "disableExpand": true,
         "items": [
           {
             "itemId": "65a6266ba23a8a55da3f469157f15237",

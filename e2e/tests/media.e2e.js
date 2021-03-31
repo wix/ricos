@@ -307,7 +307,7 @@ describe('plugins', () => {
         it('should disable gallery expand', () => {
           cy.loadRicosEditorAndViewer('gallery');
           cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
-          cy.openSettings('ADV_SETTINGS');
+          cy.openSettings(['ADV_SETTINGS']);
           cy.eyesCheckWindow();
           cy.get(`[data-hook=${GALLERY_SETTINGS.GALLERY_EXPAND_TOGGLE}]`).click();
           cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();

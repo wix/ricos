@@ -25,29 +25,38 @@
   - [#2331](https://github.com/wix-incubator/rich-content/pull/2331) added new settings panel for custom videos with download toggle
 - `plugin-image`
   - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
+- `plugin-gallery`
+  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
 
 
 ### :house: Internal
-  
+
 - `unsupported-blocks/accordion/table/spoiler`
   - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
-  
-### :bug: Bug Fix
-- `image`
-  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) aria-hidden attribute fixed
-- `plugin-spoiler`
-  - [#2324](https://github.com/wix/ricos/pull/2324) increase blur for media, spoiler button position in formatting toolbar
-### :house: Internal
+- `plugin-table`
+  - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
 - `ricos-content`
   - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) ContentAPI infra added
 - `general`
   - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) tsconfig: strictPropertyInitialization; eslint: lines-between-class-members rules
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) aria-hidden attribute fixed
+- `plugin-spoiler`
+  - [#2308](https://github.com/wix/ricos/pull/2308) increase blur for media, change spoiler button position in formatting toolbar, change spoiler icon
+- `plugin-link-preview`
+  - [#2324](https://github.com/wix/ricos/pull/2324) remove large space from plugin bottom
+
 ### :nail_care: Polish
+
 - `common`
+
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) TextButtonMapping and InlineToolbarButton types improved
 
-</details>
-<hr/>
+    </details>
+    <hr/>
 
 ## 8.27.8 (Mar 30, 2021)
 
