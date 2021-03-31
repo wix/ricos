@@ -12,6 +12,7 @@ export default class SpoilerViewerWrapper extends Component {
   }
 
   static contextType = GlobalContext;
+
   static propTypes = {
     children: PropTypes.node,
     componentData: PropTypes.object,
