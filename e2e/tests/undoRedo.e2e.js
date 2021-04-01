@@ -53,7 +53,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should undo and redo accordion plugin customizations', function() {
+    it.skip('should undo and redo accordion plugin customizations', function() {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
       cy.addAccordion();
       cy.focusAccordion(1).type('Yes ');
@@ -68,19 +68,19 @@ describe('plugins', () => {
         .should('not.exist');
       cy.wait(100);
       cy.undo().undo();
-      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
-      // cy.undo();
-      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
+      cy.undo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
       cy.undo();
       cy.get('.public-DraftStyleDefault-block > span').should('not.have.text', 'Yes');
       cy.undo().undo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('not.exist');
       cy.redo().redo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('exist');
-      // cy.redo();
-      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
-      // cy.redo();
-      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
+      cy.redo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
+      cy.redo();
+      cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
       cy.redo();
       cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Yes');
       cy.redo().redo();
