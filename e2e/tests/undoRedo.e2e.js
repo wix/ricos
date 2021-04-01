@@ -16,7 +16,7 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  context.skip('undo redo', () => {
+  context('undo redo', () => {
     before(function() {
       eyesOpen(this);
     });
