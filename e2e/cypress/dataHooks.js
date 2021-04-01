@@ -67,9 +67,17 @@ export const STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED = {
   // ...STATIC_TOOLBAR_BUTTONS_MEDIA,
 };
 
+export const STATIC_TOOLBAR_BUTTONS_EXPENDED = {
+  IMAGE: 'ImagePlugin_InsertButton',
+  GALLERY: 'GalleryPlugin_InsertButton',
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
+  ACCORDION: 'Accordion_InsertButton',
+};
+
 export const STATIC_TOOLBAR_BUTTONS = {
   ...STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   ...STATIC_TOOLBAR_BUTTONS_EMBED,
+  ...STATIC_TOOLBAR_BUTTONS_EXPENDED,
 };
 
 export const SETTINGS_PANEL = {
