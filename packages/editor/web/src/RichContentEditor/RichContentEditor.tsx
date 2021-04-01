@@ -23,7 +23,7 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
-  undo,
+  pluginsUndo,
   redo,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
@@ -286,6 +286,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.reportDebuggingInfo();
     this.preloadLibs();
     document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
+    this.commonPubsub.set('undoExperiment', this.getUndoExperiment);
   }
 
   componentWillMount() {
@@ -670,12 +671,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     event?.preventDefault();
   };
 
+  getUndoExperiment = () => this.props.experiments?.useUndoForPlugins?.enabled;
+
   handleUndoCommand = (editorState: EditorState, event) => {
     event?.preventDefault();
     if (this.props.isInnerRCE) {
       this.props.handleUndoCommand?.();
     } else {
-      this.updateEditorState(undo(editorState || this.state.editorState));
+      this.updateEditorState(pluginsUndo(editorState || this.state.editorState));
       this.setState({ readOnly: false });
     }
     return 'handled';
@@ -708,16 +711,20 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       modifiers: [],
       key: 'Escape',
     },
-    {
-      command: COMMANDS.UNDO,
-      modifiers: [MODIFIERS.COMMAND],
-      key: 'z',
-    },
-    {
-      command: COMMANDS.REDO,
-      modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-      key: 'z',
-    },
+    this.getUndoExperiment()
+      ? {
+          command: COMMANDS.UNDO,
+          modifiers: [MODIFIERS.COMMAND],
+          key: 'z',
+        }
+      : {},
+    this.getUndoExperiment()
+      ? {
+          command: COMMANDS.REDO,
+          modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+          key: 'z',
+        }
+      : {},
     this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
       ? {
           command: 'cmdShift7',
@@ -731,8 +738,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     tab: this.handleTabCommand,
     shiftTab: this.handleTabCommand,
     esc: this.handleEscCommand,
-    ricosUndo: this.handleUndoCommand,
-    ricosRedo: this.handleRedoCommand,
+    ...(this.getUndoExperiment()
+      ? { ricosUndo: this.handleUndoCommand, ricosRedo: this.handleRedoCommand }
+      : {}),
     ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
       ? { cmdShift7: makeBarrelRoll }
       : {}),

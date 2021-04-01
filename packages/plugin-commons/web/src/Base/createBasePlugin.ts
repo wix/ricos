@@ -7,6 +7,7 @@ import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginBu
 import {
   deleteBlock,
   setBlockNewEntityData,
+  setEntityData,
   getToolbarTheme,
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
@@ -47,9 +48,12 @@ const getData = (
 const setData = (
   contentBlock: ContentBlock,
   { getEditorState, setEditorState }: EditorStateFuncs,
-  type: string
+  type: string,
+  commonPubsub
 ) => newData => {
-  const editorState = setBlockNewEntityData(getEditorState(), contentBlock.getKey(), newData, type);
+  const editorState = commonPubsub.get('undoExperiment')?.()
+    ? setBlockNewEntityData(getEditorState(), contentBlock.getKey(), newData, type)
+    : setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData);
   setEditorState(editorState);
 };
 
@@ -289,7 +293,12 @@ const createBasePlugin = (
                   { getEditorState },
                   type === UNSUPPORTED_BLOCKS_TYPE
                 ),
-                setData: setData(contentBlock, { getEditorState, setEditorState }, config.type),
+                setData: setData(
+                  contentBlock,
+                  { getEditorState, setEditorState },
+                  config.type,
+                  commonPubsub
+                ),
                 deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
                 type,
               },

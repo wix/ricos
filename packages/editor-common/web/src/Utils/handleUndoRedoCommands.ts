@@ -431,19 +431,26 @@ function getContentStateForRedoStack(editorState: EditorState, prevEditorState: 
 function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState): EditorState {
   const { fixedEditorState, shouldUndoAgain } = fixBrokenRicosStates(newEditorState, editorState);
   return shouldUndoAgain
-    ? undo(fixedEditorState)
+    ? pluginsUndo(fixedEditorState)
     : pushToRedoStack(
         removeCompositionModeFromEditorState(fixedEditorState),
         getContentStateForRedoStack(fixedEditorState, editorState)
       );
 }
 
-export const undo = (editorState: EditorState): EditorState => {
+export const pluginsUndo = (editorState: EditorState): EditorState => {
   if (editorState.getUndoStack().isEmpty()) {
     return editorState;
   }
   const newEditorState = shiftRedoStack(EditorState.undo(editorState));
   return updateUndoEditorState(editorState, newEditorState);
+};
+
+export const undo = (editorState: EditorState): EditorState => {
+  if (editorState.getUndoStack().isEmpty()) {
+    return editorState;
+  }
+  return removeCompositionModeFromEditorState(EditorState.undo(editorState));
 };
 
 export const redo = (editorState: EditorState): EditorState => {
