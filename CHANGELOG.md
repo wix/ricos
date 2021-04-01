@@ -24,6 +24,8 @@
 - `plugin-gallery`
 
 ### :bug: Bug Fix
+- `gallery`
+  - [#1705](https://github.com/wix-incubator/rich-content/pull/1705) fix gallery layout styles default and thumbnails ratio
 - `ricos-editor`
   - [#2336](https://github.com/wix-incubator/rich-content/pull/2336) blocks with errors filter fix
 
@@ -86,7 +88,6 @@
 
 - `color-picker`
   - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
-
 ### :house: Internal
 
 - `editor-common`

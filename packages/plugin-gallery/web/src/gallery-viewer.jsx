@@ -5,7 +5,7 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
-import { DEFAULTS, isHorizontalLayout, sampleItems } from './defaults';
+import { DEFAULTS, isHorizontalLayout, sampleItems, GALLERY_LAYOUTS } from './defaults';
 import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
@@ -16,8 +16,6 @@ import { GALLERY_TYPE } from './types';
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
 const GALLERY_EVENTS = GALLERY_CONSTS.events;
-
-const getGalleryHeight = width => (width ? Math.floor((width * 3) / 4) : 300);
 
 class GalleryViewer extends React.Component {
   constructor(props) {
@@ -93,12 +91,36 @@ class GalleryViewer extends React.Component {
     }
   };
 
+  shouldConsiderThumbnailSize = () => {
+    const {
+      componentData: {
+        styles: { galleryLayout, galleryThumbnailsAlignment },
+      },
+    } = this.props;
+    return (
+      this.props.isMobile &&
+      galleryLayout === GALLERY_LAYOUTS.THUMBNAIL &&
+      ['top', 'bottom'].includes(galleryThumbnailsAlignment)
+    );
+  };
+
+  getGalleryHeight = width => {
+    let height = 305;
+    if (width) {
+      height = this.shouldConsiderThumbnailSize()
+        ? Math.floor((width * 2) / 3) + 95
+        : Math.floor((width * 3) / 4);
+    }
+    return height;
+  };
+
   getDimensions = () => {
     const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
-    const height = isHorizontalLayout(this.props.componentData.styles)
-      ? getGalleryHeight(width)
-      : undefined;
-    return { width, height };
+    if (isHorizontalLayout(this.props.componentData.styles)) {
+      const height = this.getGalleryHeight(width);
+      return { width, height };
+    }
+    return { width };
   };
 
   updateDimensions = debounce(() => {
@@ -213,18 +235,29 @@ class GalleryViewer extends React.Component {
     return disableDownload && e.preventDefault();
   };
 
-  render() {
+  getStyleParams = () => {
     const {
-      theme,
-      settings,
-      seoMode,
       componentData: { styles: styleParams },
+      isMobile,
     } = this.props;
+    if (isMobile && isHorizontalLayout(styleParams)) {
+      styleParams.arrowsSize = 20;
+      styleParams.imageMargin = 0;
+      if (styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL) {
+        styleParams.thumbnailSize = 90;
+      }
+    }
+    return styleParams;
+  };
+
+  render() {
+    const { theme, settings, seoMode } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { scrollingElement, ...galleySettings } = settings;
     const { size } = this.state;
 
     const items = this.getItems();
+    const styleParams = this.getStyleParams();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
     const alwaysShowHover = {
       hoveringBehaviour: 'NO_CHANGE',
