@@ -16,6 +16,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#2336](https://github.com/wix-incubator/rich-content/pull/2336) blocks with errors filter fix
+
 </details>
 <hr/>
 
