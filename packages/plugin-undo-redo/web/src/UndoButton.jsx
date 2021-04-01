@@ -67,6 +67,7 @@ UndoButton.propTypes = {
   tabIndex: PropTypes.number,
   t: PropTypes.func,
   getEditorState: PropTypes.func,
+  commonPubsub: PropTypes.object,
 };
 
 export default UndoButton;

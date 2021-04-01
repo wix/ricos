@@ -37,7 +37,7 @@ const createToolbar: CreatePluginToolbar = ({
   return {
     TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.UNDO]: {
-        component: props => <UndoButton t={t} {...props} />,
+        component: props => <UndoButton t={t} commonPubsub={commonPubsub} {...props} />,
         externalizedButtonProps: {
           type: BUTTON_TYPES.BUTTON,
           getLabel: () => '',
