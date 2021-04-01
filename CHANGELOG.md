@@ -22,6 +22,11 @@
 - `text-slection-toolbar`
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) fix position of text-selection-toolbar in lists
 
+### :house: Internal
+
+- `editor editor-common plugin-undo-redo`
+  - [#1847](https://github.com/wix/ricos/pull/1847) undo redo for plugin customisations experiment enabled
+
 </details>
 <hr/>
 
@@ -31,11 +36,6 @@
 
 - `plugin-image`
   - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
-
-### :house: Internal
-
-- `editor editor-common plugin-undo-redo`
-  - [#1847](https://github.com/wix/ricos/pull/1847) undo redo for plugin customisations experiment enabled
 
 ### :bug: Bug Fix
 
