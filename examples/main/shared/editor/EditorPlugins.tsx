@@ -465,6 +465,7 @@ const config: RichContentEditorProps['config'] = {
     //     showDescription: true,
     //   },
     // },
+    // disableExpand: true,
     imageEditorWixSettings: {
       initiator: 'some-initiator',
       siteToken:

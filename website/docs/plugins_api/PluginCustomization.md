@@ -124,7 +124,8 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 | setting key     | description                            | default value | is required? | editor/viewer config |
 | --------------- | -------------------------------------- | ------------- | ------------ | -------------------- |
 | `onExpand`      | called when the user expands an image  | none          | No           | viewer               |
-| `disableExpand` | disables expanding images & fullscreen | false         | No           | viewer               |
+| `disableExpand` (deprecated!) | disables expanding images & fullscreen | false         | No           | viewer           |
+| `disableExpand` | disables expanding images & fullscreen | false         | No           | editor               |
 
 ### Gallery Plugin Settings
 

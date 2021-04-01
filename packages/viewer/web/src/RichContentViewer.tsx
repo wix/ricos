@@ -28,6 +28,7 @@ import {
   ViewerContextType,
   InlineStyleMapperFunction,
   AvailableExperiments,
+  IMAGE_TYPE,
   GALLERY_TYPE,
   VIDEO_TYPE,
 } from 'wix-rich-content-common';
@@ -121,6 +122,7 @@ class RichContentViewer extends Component<
       config,
     } = props;
     const { uiSettings } = config;
+    const disableImagesExpand = config[IMAGE_TYPE]?.disableExpand;
     const disableGalleryExpand = config[GALLERY_TYPE]?.disableExpand;
     const disableDownload =
       config[VIDEO_TYPE]?.disableDownload ||
@@ -134,6 +136,7 @@ class RichContentViewer extends Component<
           disableInlineImages,
           removeInvalidInlinePlugins,
           disableDownload,
+          disableImagesExpand,
           disableGalleryExpand,
         })
       : undefined;
