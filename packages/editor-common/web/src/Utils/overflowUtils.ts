@@ -29,9 +29,10 @@ export const isElementOutOfWindow = (element: HTMLElement): boolean | undefined 
   if (element && document) {
     const modalOffset = getElementCoordsInWindow(element).left;
     const modalWidth = getWidth(element);
-    const rootEditor = element.closest('[data-hook=root-editor]');
+    const rootEditor = element.closest('[data-hook=root-editor]') as HTMLElement;
+    const editorOffset = rootEditor && getElementCoordsInWindow(rootEditor).left;
     const editorWidth = (rootEditor && rootEditor.getBoundingClientRect().width) || 999999;
-    if (modalWidth + modalOffset > editorWidth) {
+    if (modalWidth + (modalOffset - editorOffset) > editorWidth) {
       return true;
     } else {
       return false;

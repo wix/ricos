@@ -105,6 +105,10 @@ export const IMAGE_SETTINGS = {
   PREVIEW: 'imagePreview',
 };
 
+export const VIDEO_SETTINGS = {
+  DOWNLOAD_TOGGLE: 'videoDownloadToggle',
+};
+
 export const GALLERY_SETTINGS = {
   IMAGE: 'galleryItemPreview',
   EDIT_IMAGE: 'galleryItemsSortableItemSettings',
@@ -114,6 +118,7 @@ export const GALLERY_SETTINGS = {
   DESELECT: 'galleryItemsSortableDeselectAll',
   DELETE: 'galleryItemsSortableDelete',
   UPLOAD: 'galleryItemsSortableFileInputTop',
+  GALLERY_EXPAND_TOGGLE: 'galleryExpandToggle',
 };
 
 export const GALLERY_IMAGE_SETTINGS = {
