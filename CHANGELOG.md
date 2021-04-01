@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `text-slection-toolbar`
+  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) fix position of text-selection-toolbar in lists
+
 </details>
 <hr/>
 

@@ -50,7 +50,7 @@ describe('plugins', () => {
     };
 
     it('render viewer toolbar and tweet', function() {
-      cy.loadRicosEditorAndViewer('plain');
+      cy.loadRicosEditorAndViewer('nested-lists');
       cy.setViewerSelection(476, 98);
       cy.getTwitterButton().should('be.visible');
       cy.eyesCheckWindow(this.test.title);
