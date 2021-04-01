@@ -16,7 +16,7 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  context('undo redo', () => {
+  context.skip('undo redo', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -53,7 +53,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it.skip('should undo and redo accordion plugin customizations', function() {
+    it('should undo and redo accordion plugin customizations', function() {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
       cy.addAccordion();
       cy.focusAccordion(1).type('Yes ');
