@@ -17,6 +17,15 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#2336](https://github.com/wix-incubator/rich-content/pull/2336) blocks with errors filter fix
+
+</details>
+<hr/>
+
+## 8.28.0 (Mar 31, 2021)
+
 ### :rocket: New Feature
 
 - `plugin-video`
@@ -49,11 +58,7 @@
 ### :nail_care: Polish
 
 - `common`
-
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) TextButtonMapping and InlineToolbarButton types improved
-
-    </details>
-    <hr/>
 
 ## 8.27.8 (Mar 30, 2021)
 
