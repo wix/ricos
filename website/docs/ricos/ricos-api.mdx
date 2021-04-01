@@ -93,9 +93,10 @@ foregroundColor: 'black'; <br />
 The string values should be css color strings (e.g `'black'`, `'#2F2E2E'`, etc) <br />
 
 ```jsx
+
 mediaSettings?: {
   pauseMedia?: boolean;
-  disableRightClick?: boolean;
+  disableDownload?: boolean;
   fullscreenProps?: {
   backgroundColor?: string;
   foregroundColor?: string;
@@ -108,9 +109,16 @@ mediaSettings?: {
 When `true`, media like videos will be paused.
 A possible use case is for pausing videos on tab switch.
 
-#### `disableRightClick`
+#### `disableRightClick` (deprecated)
 
 Disables the mouse right click functionality for the gallery, video and image plugins.
+
+#### `disableDownload`
+
+Sets the initial value of disableDownload for image, gallery and video plugins. 
+Images - disables right click. 
+Gallery - disables right click. 
+Video - removes the download option from context menu.
 
 ### `onError`
 

@@ -111,6 +111,8 @@ export const IMAGE_SETTINGS = {
   CAPTION: 'imageSettingsCaptionInput',
   LINK: 'linkPanelInput',
   PREVIEW: 'imagePreview',
+  IMAGE_EXPAND_TOGGLE: 'imageExpandToggle',
+  IMAGE_DOWNLOAD_TOGGLE: 'imageDownloadToggle',
 };
 
 export const VIDEO_SETTINGS = {

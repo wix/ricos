@@ -371,6 +371,7 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('video');
       cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO);
       cy.openSettings();
+      cy.wait(5000);
       cy.eyesCheckWindow();
       cy.get(`[data-hook=${VIDEO_SETTINGS.DOWNLOAD_TOGGLE}]`).click();
       cy.eyesCheckWindow();

@@ -17,14 +17,22 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.29.0 (April 1, 2021)
+
+### :rocket: New Feature
+
+- `plugin-image`
+  - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
+
 ### :bug: Bug Fix
+
 - `gallery`
   - [#1705](https://github.com/wix-incubator/rich-content/pull/1705) fix gallery layout styles default and thumbnails ratio
 - `ricos-editor`
   - [#2336](https://github.com/wix-incubator/rich-content/pull/2336) blocks with errors filter fix
-
-</details>
-<hr/>
 
 ## 8.28.0 (Mar 31, 2021)
 
@@ -83,6 +91,7 @@
 
 - `color-picker`
   - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
+
 ### :house: Internal
 
 - `editor-common`

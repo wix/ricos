@@ -31,6 +31,7 @@ export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig
   };
   defaultData?: {
     config?: ImageConfig;
+    disableExpand?: boolean;
   };
   imageProps?: HTMLImageElement;
   createGalleryForMultipleImages?: boolean;
