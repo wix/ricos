@@ -15,20 +15,17 @@ const UndoButton = props => {
     t,
     getEditorState,
     setEditorState,
+    commonPubsub,
   } = props;
   const editorState = getEditorState();
   const combinedClassName = classNames(theme.undo, className);
   const icon = config?.toolbar?.icons?.Undo || undoIcon;
   const disabled = editorState?.getUndoStack()?.isEmpty?.() || !editorState;
-  const { experiments } = this.context;
+  const isUndoExperiment = commonPubsub.get('undoExperiment')?.();
 
   const onClick = event => {
     event.stopPropagation();
-    setEditorState(
-      experiments?.UseUndoForPlugins?.enabled
-        ? pluginsUndo(getEditorState())
-        : undo(getEditorState())
-    );
+    setEditorState(isUndoExperiment ? pluginsUndo(getEditorState()) : undo(getEditorState()));
   };
 
   if (isMobile)
