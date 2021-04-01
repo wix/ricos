@@ -17,6 +17,12 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+
+- `plugin-image`
+  - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
+- `plugin-gallery`
+
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#2336](https://github.com/wix-incubator/rich-content/pull/2336) blocks with errors filter fix
@@ -30,9 +36,6 @@
 
 - `plugin-video`
   - [#2331](https://github.com/wix-incubator/rich-content/pull/2331) added new settings panel for custom videos with download toggle
-- `plugin-image`
-  - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
-- `plugin-gallery`
   - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
 
 ### :house: Internal
