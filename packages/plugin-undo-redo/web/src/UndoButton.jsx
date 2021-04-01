@@ -25,7 +25,7 @@ const UndoButton = props => {
   const onClick = event => {
     event.stopPropagation();
     setEditorState(
-      experiments?.useUndoForPlugins?.enabled
+      experiments?.UseUndoForPlugins?.enabled
         ? pluginsUndo(getEditorState())
         : undo(getEditorState())
     );

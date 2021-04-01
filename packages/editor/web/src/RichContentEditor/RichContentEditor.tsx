@@ -671,7 +671,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     event?.preventDefault();
   };
 
-  getUndoExperiment = () => this.props.experiments?.useUndoForPlugins?.enabled;
+  getUndoExperiment = () => this.props.experiments?.UseUndoForPlugins?.enabled;
 
   handleUndoCommand = (editorState: EditorState, event) => {
     event?.preventDefault();
