@@ -39,16 +39,12 @@ class FileUploadViewer extends PureComponent {
   isFirstBreakPoint = (divider = 1) =>
     this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.firstBreak / divider;
 
-  shouldUpdateWidth = () => {
-    const currentWidth = this.fileUploadViewerRef.current.clientWidth;
-    return (
-      this.breakPoints.firstBreak >= currentWidth ||
-      (this.breakPoints.firstBreak < currentWidth && currentWidth < 400)
-    );
-  };
+  shouldUpdateWidth = currentWidth =>
+    this.breakPoints.firstBreak >= currentWidth ||
+    (this.breakPoints.firstBreak < currentWidth && currentWidth < 400);
 
   updateDimensions = currentWidth => {
-    if (this.shouldUpdateWidth) {
+    if (this.shouldUpdateWidth(currentWidth)) {
       this.setState({ currentWidth });
     }
   };
@@ -100,7 +96,7 @@ class FileUploadViewer extends PureComponent {
       return (
         <Icon
           styles={this.styles}
-          className={classnames(styles.file_loader_icon_color, styles.file_upload_type_icon, {
+          className={classnames(styles.file_upload_type_icon, {
             [this.styles.file_upload_type_icon_first_break]:
               this.isFirstBreakPoint(2) && !this.isSecondBreakPoint(),
             [this.styles.file_upload_type_icon_second_break]: this.isSecondBreakPoint(),
