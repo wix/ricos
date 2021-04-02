@@ -384,7 +384,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     return disableDownload && e.preventDefault();
   };
 
-  hasExpand = (): boolean => {
+  hasExpand = () => {
     const { componentData, settings } = this.props;
     let disableExpand = false;
     if (componentData.disableExpand !== undefined) {
@@ -392,7 +392,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     } else if (settings.disableExpand !== undefined) {
       disableExpand = settings.disableExpand;
     }
-    return !disableExpand && !!settings.onExpand;
+    return !disableExpand && settings.onExpand;
   };
 
   renderExpandIcon = () => {
@@ -412,7 +412,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const { metadata = {} } = componentData;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
-      [this.styles.pointer]: this.hasExpand(),
+      [this.styles.pointer]: this.hasExpand() as boolean,
     });
     const imageClassName = this.styles.image;
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
