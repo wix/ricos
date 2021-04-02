@@ -1,4 +1,15 @@
-import { curry, compose, map, findIndex, has, isNumber, isString, isArray } from 'lodash/fp';
+import {
+  identity,
+  merge,
+  curry,
+  compose,
+  map,
+  findIndex,
+  has,
+  isNumber,
+  isString,
+  isArray,
+} from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 import { task, either, firstResolved } from '../fp-utils';
 
@@ -24,7 +35,7 @@ const insertNode = curry((content: RichContent, node: Node, index: number) =>
   }))
 );
 
-const replaceNode = curry((node: Node, content: RichContent, index: number) => ({
+const replaceNode = curry((content: RichContent, node: Node, index: number) => ({
   ...content,
   nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index + 1)],
 }));
@@ -71,12 +82,12 @@ export function setNode({
 }): RichContent {
   return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes)).fork(
     () => content,
-    replaceNode({ ...node, key: nodeKey }, content)
+    replaceNode(content, { ...node, key: nodeKey })
   );
 }
 
 export function updateNode({
-  node,
+  node: mergedNode,
   key: nodeKey,
   content,
 }: {
@@ -85,8 +96,11 @@ export function updateNode({
   content: RichContent;
 }): RichContent {
   return isIndexFound(
-    findIndex(({ key, type }) => key === nodeKey && type === node.type, content.nodes)
-  ).fork(() => content, replaceNode({ ...node, key: nodeKey }, content));
+    findIndex(({ key, type }) => key === nodeKey && type === mergedNode.type, content.nodes)
+  )
+    .map((index: number) => ({ node: merge(content.nodes[index], mergedNode), index }))
+    .map(({ node, index }) => replaceNode(content, { ...node, key: nodeKey }, index))
+    .fork(() => content, identity);
 }
 
 const isTextData = text => has('text', text) && has('decorations', text);

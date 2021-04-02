@@ -32,7 +32,7 @@ type SetMethod<T> = {
     key,
     content,
   }: {
-    data: T;
+    data: Partial<T[P]>;
     key: string;
     content: RichContent;
   }) => RichContent;
@@ -42,13 +42,11 @@ type SetTextMethod<T> = {
   [P in keyof T]: ({
     text,
     data,
-    container,
     key,
     content,
   }: {
     text?: string | TextData | (string | TextData)[];
-    data?: T;
-    container?: T;
+    data?: Partial<T[P]>;
     key: string;
     content: RichContent;
   }) => RichContent;
