@@ -34,8 +34,8 @@ module.exports = {
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-use-before-define': 'off',
     'no-mixed-operators': 'off',
-    'no-mixed-spaces-and-tabs': ['error', 'always'],
-    'no-tabs': ['error', 'always'],
+    'no-mixed-spaces-and-tabs': 'error',
+    'no-tabs': 'error',
     'space-before-function-paren': 'off',
     'object-curly-spacing': ['error', 'always'],
     'max-len': [
