@@ -63,6 +63,7 @@ message Node {
         LINK_BUTTON = 21;
         ACCORDION = 22;
         TABLE = 23;
+        BUTTON = 24;
     }
 
     Type type = 1; // Node type

@@ -6,6 +6,18 @@ import {
   TextData,
   Node_Type,
   Node,
+  HTMLData,
+  GiphyData,
+  VideoData,
+  FileData,
+  MapData,
+  ButtonData,
+  GalleryData,
+  CodeData,
+  HeadingData,
+  LinkPreviewData,
+  SoundCloudData,
+  PollData,
 } from 'ricos-schema';
 import {
   addNode as add,
@@ -13,6 +25,7 @@ import {
   removeNode,
   setNode as set,
   updateNode as update,
+  toggleNode as toggle,
 } from './builder-utils';
 import { ContentBuilder } from '../types';
 
@@ -143,6 +156,24 @@ export const setupContentBuilder = (
     return set({ node, key, content });
   }
 
+  function toggleTextNode({
+    text,
+    data,
+    type,
+    key,
+    content,
+  }: {
+    text?: string | TextData | (string | TextData)[];
+    data?: unknown;
+    type: Node_Type;
+    key: string;
+    content: RichContent;
+  }): RichContent {
+    const textData = toTextDataArray(text);
+    const node = createTextNode(type, textData, data);
+    return toggle({ node, key, content });
+  }
+
   function updateNode({
     data,
     type,
@@ -182,60 +213,85 @@ export const setupContentBuilder = (
 
   const builderApis = {};
 
-  [{ name: 'Paragraph', type: Node_Type.PARAGRAPH, dataT: {} as ParagraphData }].forEach(
-    ({ name, type, dataT }) => {
-      builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
-        data,
+  [
+    { name: 'Paragraph', type: Node_Type.PARAGRAPH, dataT: {} as ParagraphData },
+    { name: 'Heading', type: Node_Type.HEADING, dataT: {} as HeadingData },
+    { name: 'Code', type: Node_Type.CODEBLOCK, dataT: {} as CodeData },
+  ].forEach(({ name, type, dataT }) => {
+    builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
+      data,
+      text,
+      index,
+      before,
+      after,
+      content,
+    }: AddTextMethodParams<typeof dataT>): RichContent {
+      return addTextNode({
         text,
+        type,
+        data,
+        content,
         index,
         before,
         after,
-        content,
-      }: AddTextMethodParams<typeof dataT>): RichContent {
-        return addTextNode({
-          text,
-          type,
-          data,
-          content,
-          index,
-          before,
-          after,
-        });
-      };
+      });
+    };
 
-      builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
-        data,
+    builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
+      data,
+      text,
+      key,
+      content,
+    }: SetTextMethodParams<typeof dataT>) {
+      return updateTextNode({
         text,
-        key,
-        content,
-      }: SetTextMethodParams<typeof dataT>) {
-        return updateTextNode({
-          text,
-          data,
-          type,
-          key,
-          content,
-        });
-      };
-
-      builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
         data,
+        type,
         key,
         content,
-      }: SetTextMethodParams<typeof dataT>) {
-        return setTextNode({
-          data,
-          type,
-          key,
-          content,
-        });
-      };
-    }
-  );
+      });
+    };
+
+    builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
+      data,
+      key,
+      content,
+    }: SetTextMethodParams<typeof dataT>) {
+      return setTextNode({
+        data,
+        type,
+        key,
+        content,
+      });
+    };
+
+    builderApis[`toggle${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
+      data,
+      key,
+      content,
+    }: SetTextMethodParams<typeof dataT>) {
+      return toggleTextNode({
+        data,
+        type,
+        key,
+        content,
+      });
+    };
+  });
 
   [
     { name: 'Image', type: Node_Type.IMAGE, dataT: {} as ImageData },
     { name: 'Divider', type: Node_Type.DIVIDER, dataT: {} as DividerData },
+    { name: 'LinkPreview', type: Node_Type.LINK_PREVIEW, dataT: {} as LinkPreviewData },
+    { name: 'Poll', type: Node_Type.POLL, dataT: {} as PollData },
+    { name: 'SoundCloud', type: Node_Type.SOUND_CLOUD, dataT: {} as SoundCloudData },
+    { name: 'File', type: Node_Type.FILE, dataT: {} as FileData },
+    { name: 'Gallery', type: Node_Type.GALLERY, dataT: {} as GalleryData },
+    { name: 'Map', type: Node_Type.MAP, dataT: {} as MapData },
+    { name: 'Video', type: Node_Type.VIDEO, dataT: {} as VideoData },
+    { name: 'Button', type: Node_Type.BUTTON, dataT: {} as ButtonData },
+    { name: 'Giphy', type: Node_Type.GIPHY, dataT: {} as GiphyData },
+    { name: 'Html', type: Node_Type.HTML, dataT: {} as HTMLData },
   ].forEach(({ name, type, dataT }) => {
     builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
       data,

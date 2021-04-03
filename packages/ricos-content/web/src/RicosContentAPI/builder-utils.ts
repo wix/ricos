@@ -86,6 +86,22 @@ export function setNode({
   );
 }
 
+// TODO: validate node can be safely toggled
+export function toggleTextNodeType({
+  node: mergedNode,
+  key: nodeKey,
+  content,
+}: {
+  node: Node;
+  key: string;
+  content: RichContent;
+}): RichContent {
+  return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes))
+    .map((index: number) => ({ node: merge(content.nodes[index], mergedNode), index }))
+    .map(({ node, index }) => replaceNode(content, { ...node, key: nodeKey }, index))
+    .fork(() => content, identity);
+}
+
 export function updateNode({
   node: mergedNode,
   key: nodeKey,
