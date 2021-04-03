@@ -102,6 +102,9 @@
       .mobile & {
         height: 200px !important;
       }
+      .react-colorful__interactive {
+        overflow: hidden;
+      }
     }
 
     .react-colorful__pointer {
@@ -117,7 +120,7 @@
         left: 0;
         top: -5px;
         height: 22px;
-        overflow-x: hidden;
+        overflow: hidden;
       }
     }
 
