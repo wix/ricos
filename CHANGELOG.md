@@ -17,6 +17,10 @@
   </summary>
 
 ### :bug: Bug Fix
+- `link`
+  - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) link panel popup styles for static toolbar
+- `plugin-commons`
+  - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) color-picker: scrollbars in saturation picker
 - `text-slection-toolbar`
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) fix position of text-selection-toolbar in lists
 
