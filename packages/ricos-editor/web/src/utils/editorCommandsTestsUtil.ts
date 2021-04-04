@@ -77,17 +77,17 @@ export const mentionSelection = {
 const divider = {
   type: RICOS_DIVIDER_TYPE,
   nodeType: Node_Type.DIVIDER,
-  data: DividerData.fromJSON({
+  data1: DividerData.fromJSON({
     type: DividerData_DividerType.DOUBLE,
   }),
-  newData: DividerData.fromJSON({
+  data2: DividerData.fromJSON({
     type: DividerData_DividerType.DASHED,
   }),
-  expectedData: {
+  expectedData1: {
     type: 'double',
     config: { size: 'large', alignment: 'center', textWrap: 'nowrap' },
   },
-  expectedNewData: {
+  expectedData2: {
     type: 'dashed',
     config: { size: 'large', alignment: 'center', textWrap: 'nowrap' },
   },
@@ -96,7 +96,7 @@ const divider = {
 const giphy = {
   type: RICOS_GIPHY_TYPE,
   nodeType: Node_Type.GIPHY,
-  data: GiphyData.fromJSON({
+  data1: GiphyData.fromJSON({
     gif: {
       originalUrl: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.gif',
       originalMp4: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.mp4',
@@ -108,7 +108,7 @@ const giphy = {
       width: 500,
     },
   }),
-  newData: GiphyData.fromJSON({
+  data2: GiphyData.fromJSON({
     gif: {
       originalUrl: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.gif',
       originalMp4: 'https://media2.giphy.com/media/wZcio4ufvvdde/giphy.mp4',
@@ -120,7 +120,7 @@ const giphy = {
       width: 300,
     },
   }),
-  expectedData: {
+  expectedData1: {
     config: {
       alignment: 'center',
       size: 'content',
@@ -142,7 +142,7 @@ const giphy = {
       width: 500,
     },
   },
-  expectedNewData: {
+  expectedData2: {
     config: {
       alignment: 'center',
       size: 'content',
@@ -169,9 +169,9 @@ const giphy = {
 const html = {
   type: RICOS_HTML_TYPE,
   nodeType: Node_Type.HTML,
-  data: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
-  newData: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url' }),
-  expectedData: {
+  data1: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
+  data2: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url' }),
+  expectedData1: {
     config: {
       alignment: 'center',
       height: 550,
@@ -180,7 +180,7 @@ const html = {
     src: 'www.wix.com',
     srcType: 'url',
   },
-  expectedNewData: {
+  expectedData2: {
     config: {
       alignment: 'center',
     },
@@ -192,7 +192,7 @@ const html = {
 const gallery = {
   type: RICOS_GALLERY_TYPE,
   nodeType: Node_Type.HTML,
-  data: GalleryData.fromJSON({
+  data1: GalleryData.fromJSON({
     items: [
       {
         metadata: {
@@ -223,7 +223,7 @@ const gallery = {
       },
     ],
   }),
-  newData: GalleryData.fromJSON({
+  data2: GalleryData.fromJSON({
     items: [
       {
         metadata: {
@@ -236,7 +236,7 @@ const gallery = {
       },
     ],
   }),
-  expectedData: {
+  expectedData1: {
     config: {
       alignment: 'center',
       disableExpand: false,
@@ -288,7 +288,7 @@ const gallery = {
       galleryThumbnailsAlignment: 'bottom',
       gotStyleParams: true,
       gridStyle: 1,
-      imageMargin: 20,
+      imageMargin: 5,
       isVertical: false,
       itemClick: 'link',
       loveButton: false,
@@ -302,7 +302,7 @@ const gallery = {
       videoPlay: 'onClick',
     },
   },
-  expectedNewData: {
+  expectedData2: {
     config: {
       alignment: 'center',
       disableExpand: false,
@@ -336,7 +336,7 @@ const gallery = {
       galleryThumbnailsAlignment: 'bottom',
       gotStyleParams: true,
       gridStyle: 1,
-      imageMargin: 20,
+      imageMargin: 5,
       isVertical: false,
       itemClick: 'link',
       loveButton: false,
@@ -356,40 +356,40 @@ const gallery = {
 const poll = {
   type: RICOS_POLL_TYPE,
   nodeType: Node_Type.POLL,
-  data: PollData.fromJSON({
+  data1: PollData.fromJSON({
     config: { enableVoteRole: true },
     poll: {},
     design: {},
     layout: {},
   }),
-  newData: PollData.fromJSON({
+  data2: PollData.fromJSON({
     config: { enableVoteRole: false },
     poll: {},
     design: {},
     layout: {},
   }),
-  expectedData: {},
-  expectedNewData: {},
+  expectedData1: {},
+  expectedData2: {},
 };
 
 // TODO: check about expected data
 const video = {
   type: RICOS_VIDEO_TYPE,
   nodeType: Node_Type.VIDEO,
-  data: VideoData.fromJSON({
+  data1: VideoData.fromJSON({
     url: 'https://www.youtube.com/watch?v=2iDTAGKkixE&ab_channel=QueenClub',
   }),
-  newData: VideoData.fromJSON({
+  data2: VideoData.fromJSON({
     url: 'https://www.youtube.com/watch?v=tIA_vrBDC1g&ab_channel=BoyceAvenue',
   }),
-  expectedData: {},
-  expectedNewData: {},
+  expectedData1: {},
+  expectedData2: {},
 };
 
 const file = {
   type: RICOS_FILE_TYPE,
   nodeType: Node_Type.FILE,
-  data: FileData.fromJSON({
+  data1: FileData.fromJSON({
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'File sample',
     config: {
@@ -397,7 +397,7 @@ const file = {
       alignment: 'left',
     },
   }),
-  newData: FileData.fromJSON({
+  data2: FileData.fromJSON({
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'Updated file sample',
     config: {
@@ -405,7 +405,7 @@ const file = {
       alignment: 'right',
     },
   }),
-  expectedData: {
+  expectedData1: {
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'File sample',
     config: {
@@ -416,7 +416,7 @@ const file = {
       downloadTarget: '_blank',
     },
   },
-  expectedNewData: {
+  expectedData2: {
     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     name: 'Updated file sample',
     config: {
@@ -432,7 +432,7 @@ const file = {
 const image = {
   type: RICOS_IMAGE_TYPE,
   nodeType: Node_Type.IMAGE,
-  data: ImageData.fromJSON({
+  data1: ImageData.fromJSON({
     src: {
       id: '8b72558253b2502b401bb46e5599f22a',
       originalFileName: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg',
@@ -441,7 +441,7 @@ const image = {
       height: 1000,
     },
   }),
-  newData: ImageData.fromJSON({
+  data2: ImageData.fromJSON({
     config: { alignment: ImageConfig_ImageAlignment.LEFT },
     src: {
       id: '2f64886b1998251a4a5e47d25fff5ffa',
@@ -451,7 +451,7 @@ const image = {
       height: 1068,
     },
   }),
-  expectedData: {
+  expectedData1: {
     config: {
       alignment: 'center',
       disableExpand: false,
@@ -467,7 +467,7 @@ const image = {
       width: 1920,
     },
   },
-  expectedNewData: {
+  expectedData2: {
     config: {
       alignment: 'left',
       disableExpand: false,
@@ -488,14 +488,14 @@ const image = {
 const link = {
   type: RICOS_LINK_TYPE,
   decorationType: Decoration_Type.LINK,
-  data: LinkData.fromJSON({ url: 'www.wix.com' }),
-  newData: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
-  expectedData: {
+  data1: LinkData.fromJSON({ url: 'www.wix.com' }),
+  data2: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
+  expectedData1: {
     url: 'www.wix.com',
     rel: 'noopener',
     target: '_self',
   },
-  expectedNewData: {
+  expectedData2: {
     url: 'www.sport5.co.il',
     rel: 'nofollow',
     target: '_self',
@@ -505,18 +505,18 @@ const link = {
 const mention = {
   type: RICOS_MENTION_TYPE,
   decorationType: Decoration_Type.MENTION,
-  data: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), trigger: '@' },
-  newData: {
+  data1: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), trigger: '@' },
+  data2: {
     mention: MentionData.fromJSON({ name: 'chen', slug: 'blibla' }),
     trigger: '@',
   },
-  expectedData: {
+  expectedData1: {
     mention: {
       name: 'aviv',
       slug: 'blabla',
     },
   },
-  expectedNewData: {
+  expectedData2: {
     mention: {
       name: 'chen',
       slug: 'blibla',

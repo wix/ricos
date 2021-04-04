@@ -4,7 +4,8 @@ import {
   RichUtils,
   setTextAlignment,
   createBlock,
-  updateEntityData,
+  setEntityData,
+  blockKeyToEntityKey,
   deleteBlock,
   undo,
   redo,
@@ -46,20 +47,26 @@ import {
   LINK_TYPE,
   RICOS_MENTION_TYPE,
   MENTION_TYPE,
+  CODE_BLOCK_TYPE,
+  HEADER_BLOCK,
+  BLOCKQUOTE,
+  UNSTYLED,
+  NUMBERED_LIST_TYPE,
+  BULLET_LIST_TYPE,
 } from 'wix-rich-content-common';
 
 type TextBlockType =
-  | 'unstyled'
-  | 'ordered-list-item'
-  | 'unordered-list-item'
-  | 'code-block'
-  | 'blockquote'
-  | 'header-one'
-  | 'header-two'
-  | 'header-three'
-  | 'header-four'
-  | 'header-five'
-  | 'header-six';
+  | typeof UNSTYLED
+  | typeof NUMBERED_LIST_TYPE
+  | typeof BULLET_LIST_TYPE
+  | typeof CODE_BLOCK_TYPE
+  | typeof BLOCKQUOTE
+  | typeof HEADER_BLOCK.ONE
+  | typeof HEADER_BLOCK.TWO
+  | typeof HEADER_BLOCK.THREE
+  | typeof HEADER_BLOCK.FOUR
+  | typeof HEADER_BLOCK.FIVE
+  | typeof HEADER_BLOCK.SIX;
 
 type Selection = {
   anchorKey?: string;
@@ -132,7 +139,7 @@ export const createEditorCommands = (
     isRedoStackEmpty: () => getEditorState().getRedoStack().size === 0,
     hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
     getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
-    getSelectedBlockData: () => getEntityData(getEditorState()) || {},
+    getSelectedData: () => getEntityData(getEditorState()) || {},
   };
 
   const textFormattingCommands = {
@@ -172,7 +179,8 @@ export const createEditorCommands = (
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       const pluginData = createPluginData(data, settings?.isRicosSchema);
-      const newEditorState = updateEntityData(getEditorState(), blockKey, pluginData);
+      const entityKey = blockKeyToEntityKey(getEditorState(), blockKey);
+      const newEditorState = setEntityData(getEditorState(), entityKey, pluginData);
       const newSelection = newEditorState.getSelection();
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     },

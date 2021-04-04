@@ -321,10 +321,10 @@ export const getAnchorBlockData = (editorState: EditorState) => {
   return block.get('data').toJS();
 };
 
-export const updateEntityData = (editorState: EditorState, blockKey: string, data) => {
+export const blockKeyToEntityKey = (editorState: EditorState, blockKey: string) => {
   const block = editorState.getCurrentContent().getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(0);
-  return setEntityData(editorState, entityKey, data);
+  return entityKey;
 };
 
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {

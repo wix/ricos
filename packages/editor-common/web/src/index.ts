@@ -44,7 +44,7 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
-  updateEntityData,
+  blockKeyToEntityKey,
   setEntityData,
   setBlockNewEntityData,
   replaceWithEmptyBlock,

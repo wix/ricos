@@ -134,7 +134,7 @@ export default function createAtomicPluginToolbar({
       if (!this.shouldCreate) {
         return;
       }
-      if (focusedBlock && !isSSR() && window.getSelection?.().isCollapsed) {
+      if (focusedBlock && !isSSR() && window.getSelection().isCollapsed) {
         this.showToolbar();
       } else {
         this.hideToolbar();
