@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.29.1 (April 4, 2021)
 ### :bug: Bug Fix
 - `link`
   - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) link panel popup styles for static toolbar
@@ -27,9 +31,6 @@
 ### :house: Internal
 - `editor editor-common plugin-undo-redo`
   - [#1847](https://github.com/wix/ricos/pull/1847) undo redo for plugin customisations experiment enabled
-
-</details>
-<hr/>
 
 ## 8.29.0 (April 1, 2021)
 ### :rocket: New Feature
