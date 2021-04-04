@@ -40,8 +40,7 @@ class FileUploadViewer extends PureComponent {
     this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.firstBreak / divider;
 
   shouldUpdateWidth = currentWidth =>
-    this.breakPoints.firstBreak >= currentWidth ||
-    (this.breakPoints.firstBreak < currentWidth && currentWidth < 400);
+    this.breakPoints.firstBreak >= currentWidth || this.breakPoints.firstBreak < currentWidth;
 
   updateDimensions = currentWidth => {
     if (this.shouldUpdateWidth(currentWidth)) {
