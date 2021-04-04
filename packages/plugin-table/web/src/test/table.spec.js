@@ -15,7 +15,11 @@ describe('Test Table domain functions', () => {
   let componentData, table;
   beforeEach(() => {
     componentData = getMockComponentData();
-    table = new Table(componentData, () => {});
+    table = new Table(
+      componentData,
+      () => {},
+      () => {}
+    );
   });
   afterEach(() => {
     expect(removeBlockKey(convertTableConfigToRaw(componentData.config))).toMatchSnapshot();

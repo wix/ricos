@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package rich_content;
 
-import "common.proto";
+import "rich_content/common.proto";
 
 message CodeData {
     Common.TextAlignment text_alignment = 1;
