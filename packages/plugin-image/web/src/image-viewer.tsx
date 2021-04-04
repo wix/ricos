@@ -35,6 +35,8 @@ interface ImageViewerProps {
     src: { fallback: string; width: number };
     metadata?: { caption?: unknown; alt?: string | undefined };
     [key: string]: unknown;
+    disableDownload?: boolean;
+    disableExpand?: boolean;
   };
   className: string;
   dataUrl: string;
@@ -331,7 +333,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       helpers = {},
     } = this.props;
     helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
-    onExpand?.(this.props.blockKey);
+    this.hasExpand() && onExpand?.(this.props.blockKey);
   };
 
   scrollToAnchor = () => {
@@ -375,7 +377,23 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     }
   };
 
-  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+  handleContextMenu = e => {
+    const {
+      componentData: { disableDownload = false },
+    } = this.props;
+    return disableDownload && e.preventDefault();
+  };
+
+  hasExpand = () => {
+    const { componentData, settings } = this.props;
+    let disableExpand = false;
+    if (componentData.disableExpand !== undefined) {
+      disableExpand = componentData.disableExpand;
+    } else if (settings.disableExpand !== undefined) {
+      disableExpand = settings.disableExpand;
+    }
+    return !disableExpand && settings.onExpand;
+  };
 
   renderExpandIcon = () => {
     return (
@@ -393,10 +411,8 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
-    const hasExpand = !settings.disableExpand && settings.onExpand;
-
     const itemClassName = classNames(this.styles.imageContainer, className, {
-      [this.styles.pointer]: hasExpand,
+      [this.styles.pointer]: this.hasExpand() as boolean,
     });
     const imageClassName = this.styles.image;
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
@@ -429,7 +445,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, onlyHiRes)}
-          {hasExpand && this.renderExpandIcon()}
+          {this.hasExpand() && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
