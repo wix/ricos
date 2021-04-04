@@ -127,6 +127,7 @@ class TableToolbar extends Component {
       merge,
       distributeRows,
       distributeColumns,
+      triggerBi,
     } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
@@ -161,7 +162,8 @@ class TableToolbar extends Component {
       merge,
       t,
       distributeRows,
-      distributeColumns
+      distributeColumns,
+      triggerBi
     );
     const buttons = [
       {
@@ -266,6 +268,7 @@ TableToolbar.propTypes = {
   distributeRows: PropTypes.func,
   distributeColumns: PropTypes.func,
   getTableScrollLeft: PropTypes.func,
+  triggerBi: PropTypes.object,
 };
 
 export default TableToolbar;

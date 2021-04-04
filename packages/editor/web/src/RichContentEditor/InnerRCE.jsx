@@ -100,8 +100,12 @@ class InnerRCE extends PureComponent {
     return config;
   };
 
+  shouldTriggerOnChange = editorState =>
+    !this.props.experiments?.UseUndoForPlugins?.enabled ||
+    !['undo', 'redo'].includes(editorState.getLastChangeType());
+
   onChange = editorState => {
-    this.props.onChange(editorState);
+    this.shouldTriggerOnChange(editorState) && this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
@@ -251,6 +255,7 @@ InnerRCE.propTypes = {
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
   tablePluginMenu: PropTypes.bool,
+  experiments: PropTypes.object,
 };
 
 export default InnerRCE;

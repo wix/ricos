@@ -25,7 +25,7 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
-export { undo, redo } from './Utils/handleUndoRedoCommands';
+export { undo, redo, pluginsUndo } from './Utils/handleUndoRedoCommands';
 
 export {
   updateLinkAtCurrentSelection,
@@ -46,6 +46,7 @@ export {
   isAtomicBlockFocused,
   updateEntityData,
   setEntityData,
+  setBlockNewEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
   getBlockAtStartOfSelection,

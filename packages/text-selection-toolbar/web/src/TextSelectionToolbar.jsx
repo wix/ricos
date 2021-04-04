@@ -40,8 +40,9 @@ export default class TextSelectionToolbar extends React.Component {
       return null;
     }
     const { left } = container.getBoundingClientRect();
+    const topOffset = 10;
     const style = {
-      top: selectedTextPosition.y,
+      top: selectedTextPosition.y - topOffset,
       left: selectedTextPosition.x - left,
     };
 

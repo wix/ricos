@@ -24,6 +24,8 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  pluginsUndo,
+  redo,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
@@ -61,6 +63,9 @@ import {
   SetEditorState,
   TextDirection,
   CreatePluginsDataMap,
+  EventName,
+  PluginEventParams,
+  OnPluginAction,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -141,6 +146,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleReturn?: (
     updateEditorStateCallback: (editorState: EditorState) => void
   ) => DraftEditorProps['handleReturn'];
+  handleUndoCommand?: (editorState?: EditorState) => EditorState;
+  handleRedoCommand?: (editorState?: EditorState) => EditorState;
   tablePluginMenu?: boolean;
   callOnChangeOnNewEditorState?: boolean;
   localeResource?: Record<string, string>;
@@ -280,6 +287,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
+    document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
+    this.commonPubsub.set('undoExperiment', this.getUndoExperiment);
   }
 
   componentWillMount() {
@@ -293,7 +302,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.copySource) {
       this.copySource.unregister();
     }
+    document?.removeEventListener('beforeinput', this.preventDefaultKeyCommands);
   }
+
+  preventDefaultKeyCommands = event => {
+    if (['historyUndo', 'historyRedo'].includes(event.inputType)) {
+      event.preventDefault();
+    }
+  };
 
   // imports dynamic chunks conditionally
   preloadLibs() {
@@ -374,7 +390,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     } = this.props;
 
     this.fixHelpers(helpers);
-
+    const onPluginAction: OnPluginAction = (eventName: EventName, params: PluginEventParams) =>
+      helpers.onPluginAction?.(eventName, { ...params, version: Version.currentVersion });
     this.contextualData = {
       theme: theme || {},
       t,
@@ -427,8 +444,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             Version.currentVersion
           );
         },
-        onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
-          helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
+        onPluginAddSuccess: (pluginId: string, entryPoint: string, params) =>
+          helpers.onPluginAddSuccess?.(pluginId, entryPoint, params, Version.currentVersion),
+        onPluginAction,
+        onPluginChange: (pluginId: string, changeObj) =>
+          helpers.onPluginChange?.(pluginId, changeObj, Version.currentVersion),
       },
       config,
       isMobile,
@@ -662,40 +682,86 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     event?.preventDefault();
   };
 
+  getUndoExperiment = () => this.props.experiments?.UseUndoForPlugins?.enabled;
+
+  handleUndoCommand = (editorState: EditorState, event) => {
+    event?.preventDefault();
+    if (this.props.isInnerRCE) {
+      this.props.handleUndoCommand?.();
+    } else {
+      this.updateEditorState(pluginsUndo(editorState || this.state.editorState));
+      this.setState({ readOnly: false });
+    }
+    return 'handled';
+  };
+
+  handleRedoCommand = (editorState: EditorState, event) => {
+    event?.preventDefault();
+    if (this.props.isInnerRCE) {
+      this.props.handleRedoCommand?.();
+    } else {
+      this.updateEditorState(redo(editorState || this.state.editorState));
+      this.setState({ readOnly: false });
+    }
+    return 'handled';
+  };
+
+  customCommands = [
+    {
+      command: COMMANDS.TAB,
+      modifiers: [],
+      key: 'Tab',
+    },
+    {
+      command: COMMANDS.SHIFT_TAB,
+      modifiers: [MODIFIERS.SHIFT],
+      key: 'Tab',
+    },
+    {
+      command: COMMANDS.ESC,
+      modifiers: [],
+      key: 'Escape',
+    },
+    this.getUndoExperiment()
+      ? {
+          command: COMMANDS.UNDO,
+          modifiers: [MODIFIERS.COMMAND],
+          key: 'z',
+        }
+      : {},
+    this.getUndoExperiment()
+      ? {
+          command: COMMANDS.REDO,
+          modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+          key: 'z',
+        }
+      : {},
+    this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+      ? {
+          command: 'cmdShift7',
+          modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+          key: '7',
+        }
+      : {},
+  ];
+
+  customCommandHandlers = {
+    tab: this.handleTabCommand,
+    shiftTab: this.handleTabCommand,
+    esc: this.handleEscCommand,
+    ...(this.getUndoExperiment()
+      ? { ricosUndo: this.handleUndoCommand, ricosRedo: this.handleRedoCommand }
+      : {}),
+    ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+      ? { cmdShift7: makeBarrelRoll }
+      : {}),
+  };
+
   getCustomCommandHandlers = () => ({
-    commands: [
-      ...this.pluginKeyBindings.commands,
-      {
-        command: COMMANDS.TAB,
-        modifiers: [],
-        key: 'Tab',
-      },
-      {
-        command: COMMANDS.SHIFT_TAB,
-        modifiers: [MODIFIERS.SHIFT],
-        key: 'Tab',
-      },
-      {
-        command: COMMANDS.ESC,
-        modifiers: [],
-        key: 'Escape',
-      },
-      this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
-        ? {
-            command: 'cmdShift7',
-            modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-            key: '7',
-          }
-        : {},
-    ],
-    commandHanders: {
+    commands: [...this.pluginKeyBindings.commands, ...this.customCommands],
+    commandHandlers: {
       ...this.pluginKeyBindings.commandHandlers,
-      tab: this.handleTabCommand,
-      shiftTab: this.handleTabCommand,
-      esc: this.handleEscCommand,
-      ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
-        ? { cmdShift7: makeBarrelRoll }
-        : {}),
+      ...this.customCommandHandlers,
     },
   });
 
@@ -847,7 +913,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
-          this.getCustomCommandHandlers().commandHanders,
+          this.getCustomCommandHandlers().commandHandlers,
           getBlockType(editorState),
           onBackspace,
           innerRCERenderedIn
@@ -902,6 +968,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
+        handleUndoCommand={this.handleUndoCommand}
+        handleRedoCommand={this.handleRedoCommand}
         tablePluginMenu={tablePluginMenu}
       />
     );

@@ -8,6 +8,7 @@ import {
 } from '.';
 import { CSSProperties } from 'react';
 import { EditorState } from 'draft-js';
+import { OnPluginAction } from './pluginsBiCallbacksTypes';
 
 export interface Helpers extends BICallbacksForHelpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
@@ -34,8 +35,9 @@ export interface Helpers extends BICallbacksForHelpers {
 interface BICallbacksForHelpers extends BICallbacks {
   // makes version optional
   onPluginAdd?(pluginId: string, entryPoint: string, version?: string): void;
-  onPluginAddSuccess?(pluginId: string, entryPoint: string, version?: string): void;
+  onPluginAddSuccess?(pluginId: string, entryPoint: string, params, version?: string): void;
   isPreview?: () => boolean;
+  onPluginAction?: OnPluginAction;
 }
 
 export type OnErrorFunction = (error: string) => void;
