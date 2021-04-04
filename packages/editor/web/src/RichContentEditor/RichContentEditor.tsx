@@ -570,7 +570,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.props.direction !== nextProps.direction) {
       this.forceRender();
     }
-    // TODO: new editor state should become initialContentState?
     if (nextProps.editorState && this.props.editorState !== nextProps.editorState) {
       if (this.props.callOnChangeOnNewEditorState) {
         this.updateEditorState(nextProps.editorState);
