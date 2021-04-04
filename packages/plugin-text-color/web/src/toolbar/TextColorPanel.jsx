@@ -58,18 +58,27 @@ export default class TextColorPanel extends Component {
   }
 
   render() {
-    const { theme, settings, t, setKeepToolbarOpen, isMobile, defaultColor } = this.props;
+    const {
+      theme,
+      settings,
+      t,
+      setKeepToolbarOpen,
+      isMobile,
+      defaultColor,
+      colorPickerHeaderKey,
+    } = this.props;
     const { colorScheme } = settings;
     const palette = extractPalette(colorScheme);
     const schemeAttributes = extractSchemeAttributes(colorScheme);
     const { onCustomPickerToggle, onCustomColorPicked } = settings;
+    const paletteColors = isMobile ? palette.slice(0, 5) : palette.slice(0, 6);
     return (
       <ColorPicker
         schemeAttributes={schemeAttributes}
         schemeColor={this.state.currentSchemeColor}
         color={this.state.currentColor}
         defaultColor={defaultColor}
-        palette={palette.slice(0, 6)}
+        palette={paletteColors}
         userColors={this.state.userColors.slice(0, 17)}
         onColorAdded={this.onColorAdded}
         onChange={this.setColor}
@@ -88,17 +97,30 @@ export default class TextColorPanel extends Component {
           renderResetColorButton,
           mergedStyles,
         }) => (
-          <div className={mergedStyles.colorPicker_palette}>
-            <div className={mergedStyles.colorPicker_buttons_container}>
-              {renderPalette()}
-              {renderUserColors()}
+          <>
+            {isMobile && (
+              <>
+                <div className={mergedStyles.colorPicker_header}>{t(colorPickerHeaderKey)}</div>
+                <div className={mergedStyles.colorPicker_separator} />
+              </>
+            )}
+            <div className={mergedStyles.colorPicker_palette}>
+              <div className={mergedStyles.colorPicker_buttons_container}>
+                {renderPalette()}
+                {renderUserColors()}
+                {isMobile && renderAddColorButton()}
+              </div>
+              {!isMobile && (
+                <>
+                  <hr className={mergedStyles.colorPicker_separator} />
+                  <div className={mergedStyles.colorPicker_bottom_container}>
+                    {renderResetColorButton()}
+                    {renderAddColorButton()}
+                  </div>
+                </>
+              )}
             </div>
-            <hr className={mergedStyles.colorPicker_separator} />
-            <div className={mergedStyles.colorPicker_bottom_container}>
-              {renderResetColorButton()}
-              {renderAddColorButton()}
-            </div>
-          </div>
+          </>
         )}
       </ColorPicker>
     );
@@ -126,6 +148,7 @@ TextColorPanel.propTypes = {
   predicate: PropTypes.func,
   defaultColor: PropTypes.string.isRequired,
   onSelect: PropTypes.func,
+  colorPickerHeaderKey: PropTypes.string,
 };
 
 export const getInlineColorState = (color, editorState, settings, styleMapper, predicate) => {

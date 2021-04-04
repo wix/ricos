@@ -1,15 +1,6 @@
 /* eslint-disable no-duplicate-imports */
 export * from './Icons';
 
-export {
-  EditorEventsContext,
-  EditorEventsProvider,
-  withEditorEvents,
-  WithEditorEventsProps,
-  EditorEvents,
-  withEditorContext,
-} from './EditorEventsContext';
-
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
@@ -34,7 +25,7 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
-export { undo, redo } from './Utils/handleUndoRedoCommands';
+export { undo, redo, pluginsUndo } from './Utils/handleUndoRedoCommands';
 
 export {
   updateLinkAtCurrentSelection,
@@ -54,6 +45,7 @@ export {
   mergeBlockData,
   isAtomicBlockFocused,
   setEntityData,
+  setBlockNewEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
   getBlockAtStartOfSelection,

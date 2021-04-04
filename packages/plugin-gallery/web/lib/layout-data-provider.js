@@ -16,7 +16,7 @@ const layouts = [
     cropOnlyFill: false,
     oneRow: false,
     galleryType: 'Columns',
-    imageMargin: 20,
+    imageMargin: 5,
     gallerySizePx: '300',
     allowHover: true,
   }, // Collage
@@ -27,7 +27,7 @@ const layouts = [
     groupTypes: '1',
     fixedColumns: 0,
     numberOfImagesPerRow: 0,
-    imageMargin: 20,
+    imageMargin: 5,
     gallerySizePx: '300',
     gridStyle: 0,
     hasThumbnails: false,
@@ -48,7 +48,7 @@ const layouts = [
     imageResize: false,
     galleryImageRatio: 2,
     numberOfImagesPerRow: 3,
-    imageMargin: 20,
+    imageMargin: 5,
     cubeType: 'fill',
     cubeRatio: 1,
     isVertical: true,
@@ -70,6 +70,7 @@ const layouts = [
   }, // Grid
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     cubeType: 'fill',
@@ -88,12 +89,14 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: false,
     floatingImages: 0,
-    thumbnailSpacings: 0,
+    thumbnailSpacings: 2.5,
+    thumbnailSize: 120,
     galleryMargin: 0,
     allowHover: true,
   }, // Thumbnails
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     isVertical: false,
@@ -109,13 +112,14 @@ const layouts = [
     isColumns: false,
     isSlideshow: false,
     cropOnlyFill: true,
-    imageMargin: 20,
+    imageMargin: 5,
     cubeType: 'fit',
     cubeRatio: '16/9',
     allowHover: true,
   }, // Slider
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     cubeRatio: 1,
@@ -157,11 +161,12 @@ const layouts = [
     isSlider: false,
     isSlideshow: false,
     cropOnlyFill: false,
-    imageMargin: 20,
+    imageMargin: 5,
     allowHover: true,
   }, // Panorama
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     cubeType: 'fill',
@@ -180,7 +185,7 @@ const layouts = [
     isSlider: false,
     isSlideshow: false,
     cropOnlyFill: false,
-    imageMargin: 20,
+    imageMargin: 5,
     allowHover: true,
   }, // Columns
   {}, //magic layout ???

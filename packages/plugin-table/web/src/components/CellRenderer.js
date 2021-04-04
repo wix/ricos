@@ -70,8 +70,6 @@ export default class Cell extends Component {
         e.stopPropagation();
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.stopPropagation();
-        e.preventDefault();
-        this.editorRef.selectAllContent(true);
       }
       const shouldCreateNewLine = e.key === 'Enter' && (e.altKey || e.shiftKey || e.metaKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {

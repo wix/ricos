@@ -9,7 +9,8 @@ const WrappedEditor = withI18n<RichContentEditor, Partial<RichContentEditorProps
 );
 
 export default class I18nRichContentEditor extends Component<Partial<RichContentEditorProps>> {
-  editor: RichContentEditor;
+  editor!: RichContentEditor;
+
   static displayName = 'RichContentEditor';
 
   setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);

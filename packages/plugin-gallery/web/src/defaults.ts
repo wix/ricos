@@ -1,7 +1,7 @@
 import { ImageComponentData, VideoComponentData } from 'wix-rich-content-common';
 
 /* eslint-disable camelcase */
-const GALLERY_LAYOUTS = Object.freeze({
+export const GALLERY_LAYOUTS = Object.freeze({
   EMPTY: -1,
   COLLAGE: 0,
   MASONRY: 1,
@@ -55,7 +55,7 @@ export const DEFAULTS = Object.freeze({
     cubeRatio: 1,
     galleryThumbnailsAlignment: 'bottom',
     isVertical: false,
-    imageMargin: 20,
+    imageMargin: 5,
     thumbnailSpacings: 0,
     cubeType: 'fill',
     enableInfiniteScroll: true,
@@ -96,6 +96,7 @@ export const createImageItem = (
     },
     itemId,
     url: preloadImage ? img.src : img.file_name,
+    tempData: true,
   };
 };
 
@@ -109,6 +110,7 @@ export const createVideoItem = (video: VideoComponentData, itemId: string) => {
     },
     itemId,
     url: video.pathname,
+    tempData: true,
   };
 };
 
