@@ -84,7 +84,8 @@ type GetMethod<T> = {
 };
 
 type SetMap = {
-  setButton: ButtonData;
+  setActionButton: ButtonData;
+  setLinkButton: ButtonData;
   setDivider: DividerData;
   setFileUpload: FileData;
   setGallery: GalleryData;
@@ -96,7 +97,8 @@ type SetMap = {
   setPoll: PollData;
   setSoundCloud: SoundCloudData;
   setVideo: VideoData;
-  updateButton: ButtonData;
+  updateActionButton: ButtonData;
+  updateLinkButton: ButtonData;
   updateDivider: DividerData;
   updateFileUpload: FileData;
   updateGallery: GalleryData;
@@ -123,7 +125,8 @@ type SetTextMap = {
 };
 
 type AddMap = {
-  addButton: ButtonData;
+  addLinkButton: ButtonData;
+  addActionButton: ButtonData;
   addDivider: DividerData;
   addFile: FileData;
   addGallery: GalleryData;
@@ -170,4 +173,6 @@ type ContentBuilderType = AddMethod<AddMap> &
 
 export interface ContentBuilder extends ContentBuilderType {}
 
-export type ContentExtractor = GetMethod<GetMap>;
+type ContentExtractorType = GetMethod<GetMap>;
+
+export interface ContentExtractor extends ContentExtractorType {}
