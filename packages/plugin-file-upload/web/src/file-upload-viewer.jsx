@@ -33,16 +33,14 @@ class FileUploadViewer extends PureComponent {
 
   breakPoints = { firstBreak: 320, secondBreak: 100 };
 
-  shouldUpdateWidth = () => {
-    const currentWidth = this.fileUploadViewerRef.current.clientWidth;
+  shouldUpdateWidth = currentWidth => {
     return (
-      this.breakPoints.firstBreak >= currentWidth ||
-      (this.breakPoints.firstBreak < currentWidth && currentWidth < 400)
+      this.breakPoints.firstBreak >= currentWidth || this.breakPoints.firstBreak < currentWidth
     );
   };
 
   updateDimensions = currentWidth => {
-    if (this.shouldUpdateWidth) {
+    if (this.shouldUpdateWidth(currentWidth)) {
       this.setState({ currentWidth });
     }
   };
@@ -55,6 +53,7 @@ class FileUploadViewer extends PureComponent {
       this.switchReadyIcon();
     }
   }
+
   componentDidMount() {
     if (window?.ResizeObserver) {
       this.resizer = new ResizeObserver(entries => {
