@@ -5,6 +5,7 @@ import styles from '../../../statics/styles/anchor-panel.scss';
 
 class FilterDropdownElement extends PureComponent {
   styles = mergeStyles({ styles, theme: this.props.theme });
+
   render() {
     const { label } = this.props;
     return <div className={this.styles.AnchorPanel_FilterDropdownElement}>{label}</div>;

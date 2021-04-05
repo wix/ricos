@@ -17,6 +17,7 @@ class ColorPickerButton extends Component {
       userColors: props?.getUserColors?.() || [],
     };
   }
+
   componentWillReceiveProps = nextProps => {
     const currentColor = this.state.currentColor;
     const nextCurrentColor = nextProps.getCurrentColor();
@@ -24,17 +25,21 @@ class ColorPickerButton extends Component {
       this.setState({ currentColor: nextCurrentColor });
     }
   };
+
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
+
   closeModal = () => {
     this.setState({ isModalOpen: false });
   };
+
   onColorAdded = color => {
     this.props.onColorAdded(color);
     const userColors = this.props?.getUserColors?.() || [...this.state.userColors, color];
     this.setState({ userColors });
   };
+
   onChange = color => {
     this.props.onChange(color);
     this.setState({ currentColor: color });

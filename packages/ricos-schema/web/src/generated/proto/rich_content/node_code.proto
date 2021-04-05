@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package rich_content;
+
+import "rich_content/common.proto";
+
+message CodeData {
+    TextStyle text_style = 1;
+}
