@@ -26,8 +26,8 @@ export const sizeClassName: ClassNameStrategy = (
   const key = `size${upperFirst(camelCase(size))}`;
   const isRenderedInTable = innerRCERenderedIn === TABLE_TYPE;
   return classNames(styles[key], theme[key], {
-    [styles.renderedInTable]: isRenderedInTable,
-    [theme.renderedInTable]: isRenderedInTable,
+    [styles.atomicPluginRenderedInTable]: isRenderedInTable,
+    [theme.atomicPluginRenderedInTable]: isRenderedInTable,
   });
 };
 

@@ -43,8 +43,8 @@ export const sizeClassName: ClassNameStrategy = (
         styles[`size${upperFirst(camelCase(size))}`],
         theme[`size${upperFirst(camelCase(size))}`],
         {
-          [styles.renderedInTable]: isRenderedInTable,
-          [theme.renderedInTable]: isRenderedInTable,
+          [styles.atomicPluginRenderedInTable]: isRenderedInTable,
+          [theme.atomicPluginRenderedInTable]: isRenderedInTable,
         }
       );
 };

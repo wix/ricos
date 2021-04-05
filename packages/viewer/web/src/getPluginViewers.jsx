@@ -34,7 +34,7 @@ class PluginViewer extends PureComponent {
         [theme.anchor]: hasLink && theme.anchor,
         [styles.embed]: hasLink && html,
         [styles.horizontalScrollbar]: pluginComponent.withHorizontalScroll,
-        [styles.renderedInTable]: innerRCEViewerProps.renderedInTable,
+        [styles.atomicPluginRenderedInTable]: innerRCEViewerProps.renderedInTable,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
