@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `toolbar-button`
+  - [#1882](https://github.com/wix-incubator/rich-content/pull/1882) text-style-button background color fix when disabled on mobile
+
 </details>
 <hr/>
 
