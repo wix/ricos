@@ -489,7 +489,9 @@ const link = {
   type: RICOS_LINK_TYPE,
   decorationType: Decoration_Type.LINK,
   data1: LinkData.fromJSON({ url: 'www.wix.com' }),
+  selection1: selection,
   data2: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
+  selection2: selectionCollapsed,
   expectedData1: {
     url: 'www.wix.com',
     rel: 'noopener',
@@ -506,10 +508,12 @@ const mention = {
   type: RICOS_MENTION_TYPE,
   decorationType: Decoration_Type.MENTION,
   data1: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), trigger: '@' },
+  selection1: endOfSelection,
   data2: {
     mention: MentionData.fromJSON({ name: 'chen', slug: 'blibla' }),
     trigger: '@',
   },
+  selection2: mentionSelection,
   expectedData1: {
     mention: {
       name: 'aviv',
@@ -523,6 +527,8 @@ const mention = {
     },
   },
 };
+
+export const inlineStylesTestConfig = ['bold', 'italic', 'underline'];
 
 export const pluginsTestConfig = {
   divider,

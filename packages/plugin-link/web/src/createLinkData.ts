@@ -17,5 +17,7 @@ const convertLinkData = (data: LinkData) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createLinkData: CreatePluginsDataMap[typeof RICOS_LINK_TYPE] = pluginData => {
-  return pluginData ? convertLinkData(pluginData) : {};
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return convertLinkData(pluginData);
 };
