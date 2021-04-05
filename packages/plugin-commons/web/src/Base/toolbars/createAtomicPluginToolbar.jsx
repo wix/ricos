@@ -15,7 +15,7 @@ import {
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';
 import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
 
 export default function createAtomicPluginToolbar({
@@ -36,6 +36,7 @@ export default function createAtomicPluginToolbar({
   getEditorState,
   linkTypes,
   innerModal,
+  innerRCERenderedIn,
 }) {
   return class BaseToolbar extends Component {
     static propTypes = {
@@ -165,6 +166,7 @@ export default function createAtomicPluginToolbar({
         toolbarNode: findDOMNode(this),
         languageDir,
         isMobile,
+        renderedInTable: innerRCERenderedIn === TABLE_TYPE,
       });
       this.offsetHeight = updatedOffsetHeight;
       return position;
@@ -201,8 +203,15 @@ export default function createAtomicPluginToolbar({
     }
 
     /*eslint-disable complexity*/
-    PluginToolbarButton = ({ button, index, themedStyle, separatorClassNames, tabIndex }) => {
-      const { alignment, size } = this.state.componentData.config || {};
+    PluginToolbarButton = ({
+      button,
+      index,
+      themedStyle,
+      separatorClassNames,
+      tabIndex,
+      componentData,
+    }) => {
+      const { alignment, size } = componentData;
       const icons = settings?.toolbar?.icons || {};
       const buttonByKey = BUTTONS_BY_KEY[button.type];
       const Button = (buttonByKey && buttonByKey(icons[button.keyName])) || BaseToolbarButton;
@@ -237,7 +246,17 @@ export default function createAtomicPluginToolbar({
         innerModal,
         ...commonButtonProps,
       };
-
+      const defaultButtonProps = {
+        componentData: this.state.componentData,
+        componentState: this.state.componentState,
+        helpers,
+        displayPanel: this.displayPanel,
+        displayInlinePanel: this.displayInlinePanel,
+        hideInlinePanel: this.hidePanels,
+        uiSettings,
+        getEditorBounds,
+        ...buttonProps,
+      };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
@@ -277,14 +296,24 @@ export default function createAtomicPluginToolbar({
           return (
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
+        case BUTTONS.VIDEO_SETTINGS: {
+          const isCustomVideo = !!this.state.componentData.isCustomVideo;
+          const videoSettingsProps = {
+            ...defaultButtonProps,
+            type: BUTTONS.EXTERNAL_MODAL,
+          };
+          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
+        }
         case BUTTONS.LINK_PREVIEW: {
           return (
-            <BlockLinkButton
-              {...baseLinkProps}
-              unchangedUrl
-              tooltipText={t('LinkPreview_Settings_Tooltip')}
-              icons={button.icons}
-            />
+            !this.state.componentData.html && (
+              <BlockLinkButton
+                {...baseLinkProps}
+                unchangedUrl
+                tooltipText={t('LinkPreview_Settings_Tooltip')}
+                icons={button.icons}
+              />
+            )
           );
         }
         case BUTTONS.DELETE: {
@@ -298,21 +327,10 @@ export default function createAtomicPluginToolbar({
           );
         }
         default:
-          return (
-            <Button
-              componentData={this.state.componentData}
-              componentState={this.state.componentState}
-              helpers={helpers}
-              displayPanel={this.displayPanel}
-              displayInlinePanel={this.displayInlinePanel}
-              hideInlinePanel={this.hidePanels}
-              uiSettings={uiSettings}
-              getEditorBounds={getEditorBounds}
-              {...buttonProps}
-            />
-          );
+          return <Button {...defaultButtonProps} />;
       }
     };
+
     /*eslint-enable complexity*/
     mapComponentDataToButtonProps = (button, componentData) => {
       if (!button.mapComponentDataToButtonProps) {
@@ -404,6 +422,7 @@ export default function createAtomicPluginToolbar({
         theme,
         PluginToolbarButton: this.PluginToolbarButton,
         structure: this.structure,
+        componentData: this.state.componentData.config || {},
       };
 
       if (!this.shouldCreate) {
@@ -413,10 +432,12 @@ export default function createAtomicPluginToolbar({
       const { toolbarStyles: toolbarTheme } = theme || {};
 
       if (this.visibilityFn() && isVisible) {
+        const renderedInTable = innerRCERenderedIn === TABLE_TYPE;
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
             toolbarStyles.pluginToolbar,
+            renderedInTable && toolbarStyles.overflowToolbar,
             toolbarTheme && toolbarTheme.pluginToolbar
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,

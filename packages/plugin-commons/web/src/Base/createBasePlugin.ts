@@ -6,6 +6,7 @@ import createInsertPluginButton from './createBaseInsertPluginButton';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import {
   deleteBlock,
+  setBlockNewEntityData,
   setEntityData,
   getToolbarTheme,
   TOOLBARS,
@@ -14,7 +15,6 @@ import { ContentBlock, EditorProps } from 'draft-js';
 import {
   CreatePluginConfig,
   EditorPluginConfig,
-  PluginType,
   UISettings,
   Pubsub,
   CreatePluginToolbar,
@@ -29,23 +29,33 @@ import {
   UnderlyingPlugin,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
+import { UNSUPPORTED_BLOCKS_TYPE } from '../consts';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
 const getData = (
   contentBlock: ContentBlock,
-  { getEditorState }: Pick<EditorStateFuncs, 'getEditorState'>
-) => () =>
-  getEditorState?.()
+  { getEditorState }: Pick<EditorStateFuncs, 'getEditorState'>,
+  removeConfigFromData: boolean
+) => () => {
+  const { config, ...rest } = getEditorState?.()
     .getCurrentContent()
     .getEntity(contentBlock.getEntityAt(0))
     .getData();
+  return removeConfigFromData ? { ...rest } : { config, ...rest };
+};
 
 const setData = (
   contentBlock: ContentBlock,
-  { getEditorState, setEditorState }: EditorStateFuncs
-) => newData =>
-  setEditorState(setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData));
+  { getEditorState, setEditorState }: EditorStateFuncs,
+  type: string,
+  commonPubsub
+) => newData => {
+  const editorState = commonPubsub.get('undoExperiment')?.()
+    ? setBlockNewEntityData(getEditorState(), contentBlock.getKey(), newData, type)
+    : setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData);
+  setEditorState(editorState);
+};
 
 const deleteEntity = (
   contentBlock: ContentBlock,
@@ -62,7 +72,8 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
-  type: PluginType;
+  supportedBlockTypes: string[];
+  type: string;
   defaultPluginData: Record<string, unknown>;
   decoratorTrigger?: string;
   toolbar?: ReturnType<CreatePluginToolbar>;
@@ -84,9 +95,11 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
     onPropsChange: (props: any) => void
   ) => void;
   inlineModals?: ComponentType[];
-  legacyType?: PluginType;
+  legacyType?: string;
   noPluginBorder?: boolean;
   noPointerEventsOnFocus?: boolean;
+  withHorizontalScroll?: boolean;
+  innerRCERenderedIn?: string;
 }
 
 const createBasePlugin = (
@@ -121,6 +134,9 @@ const createBasePlugin = (
     decoratorTrigger,
     noPluginBorder,
     noPointerEventsOnFocus,
+    withHorizontalScroll,
+    innerRCERenderedIn,
+    disableKeyboardEvents,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -162,6 +178,7 @@ const createBasePlugin = (
       languageDir,
       getEditorState,
       linkTypes: config.LINK?.linkTypes,
+      innerRCERenderedIn,
     });
 
   const externalizedButtonProps:
@@ -233,6 +250,9 @@ const createBasePlugin = (
       renderInnerRCE,
       noPluginBorder,
       noPointerEventsOnFocus,
+      withHorizontalScroll,
+      innerRCERenderedIn: config.type === 'wix-draft-plugin-divider' ? false : innerRCERenderedIn,
+      disableKeyboardEvents,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =
@@ -252,19 +272,39 @@ const createBasePlugin = (
       const key = contentBlock.getEntityAt(0);
       if (key) {
         const entity = contentState.getEntity(key);
-        const type = entity.getType();
-        if (config.type === type || config.legacyType === type) {
-          return {
-            component: DecoratedCompWithBase,
-            editable: false,
-            props: {
-              getData: getData(contentBlock, { getEditorState }),
-              setData: setData(contentBlock, { getEditorState, setEditorState }),
-              deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
-              type: config.type,
-            },
-          };
+        const entityType = entity.getType();
+        let type;
+        if (config.type === entityType || config.legacyType === entityType) {
+          type = entityType;
+        } else if (
+          config.type === UNSUPPORTED_BLOCKS_TYPE &&
+          !config.supportedBlockTypes?.includes(entityType)
+        ) {
+          type = UNSUPPORTED_BLOCKS_TYPE;
         }
+
+        const blockRenderObject = type
+          ? {
+              component: DecoratedCompWithBase,
+              editable: false,
+              props: {
+                getData: getData(
+                  contentBlock,
+                  { getEditorState },
+                  type === UNSUPPORTED_BLOCKS_TYPE
+                ),
+                setData: setData(
+                  contentBlock,
+                  { getEditorState, setEditorState },
+                  config.type,
+                  commonPubsub
+                ),
+                deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
+                type,
+              },
+            }
+          : null;
+        return blockRenderObject;
       }
     }
     return null;

@@ -12,7 +12,7 @@ const giphy = item => ({
 });
 
 const video = item => {
-  const { isCustom } = item;
+  const { isCustom, thumbnail } = item;
   const { width = 600, height = 480 } = isCustom ? item.url : item;
   const url = isCustom ? item.url.pathname : item.url;
   return {
@@ -20,7 +20,7 @@ const video = item => {
     mediaUrl: url,
     metadata: {
       type: 'video',
-      poster: item.url,
+      poster: thumbnail || item.url,
       videoId: url,
       width,
       height,

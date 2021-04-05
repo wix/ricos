@@ -60,10 +60,9 @@
   line-height: 1.5;
   font-size: $paragraphFontSize;
   color: $primary-text-color;
-  background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
-  @include ricosTypography('p', true);
+  background-color: $background-color-container;
 
   &::after {
     content: '';
@@ -114,7 +113,7 @@
 
 .text {
   composes: elementSpacing;
-  color: $ricos-p-color;
+  @include ricosTypography('p', true);
 
   &:empty {
     height: 24px;
@@ -123,6 +122,19 @@
 
 .child {
   display: block;
+}
+
+/*! rtl:ignore */
+.orderedList, .unorderedList {
+  /*! rtl:ignore */
+  &::before, &::marker {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
+  > * {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
 }
 
 .unorderedList.center{
@@ -198,12 +210,16 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba($fallbackColor, 0.06);
+  background-color: rgba($fallbackColorTuple, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;
   padding: 2px 25px;
   white-space: pre-wrap;
+
+  .renderedInTable & {
+    margin: 1em 0;
+  }
 }
 
 .normalText {
@@ -223,4 +239,22 @@
 .embed {
   width: max-content;
   border: none;
+}
+
+.horizontalScrollbar {
+  overflow-x: auto;
+}
+
+.horizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.horizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.horizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
 }

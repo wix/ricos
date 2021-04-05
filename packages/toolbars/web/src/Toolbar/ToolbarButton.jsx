@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import DropdownArrowIcon from '../icons/DropdownArrowIcon';
 import Styles from './ToolbarButton.scss';
 import { mergeStyles } from 'wix-rich-content-common';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 class ToolbarButton extends Component {
   constructor(props) {
@@ -65,6 +65,7 @@ class ToolbarButton extends Component {
     showArrowIcon: PropTypes.bool,
     asGroupButton: PropTypes.bool,
     asContextButton: PropTypes.bool,
+    disabledStyle: PropTypes.bool,
   };
 
   preventDefault = event => event.preventDefault();
@@ -83,6 +84,7 @@ class ToolbarButton extends Component {
       onClick,
       asGroupButton,
       asContextButton,
+      disabledStyle,
     } = this.props;
     const { styles } = this;
     const arrowIcon = (
@@ -113,7 +115,7 @@ class ToolbarButton extends Component {
 
     const isMenu = !!showArrowIcon;
     return (
-      <Tooltip key={tooltipText} content={tooltipText} tooltipOffset={{ y: -20 }}>
+      <Tooltip key={tooltipText} content={tooltipText} tooltipOffset={{ y: -8 }}>
         <div className={wrapperClassNames}>
           <button
             disabled={disabled}
@@ -124,6 +126,7 @@ class ToolbarButton extends Component {
             onClick={onClick}
             className={classNames(styles.button, {
               [Styles.renderAsContextButton]: asContextButton,
+              [Styles.disabled]: disabledStyle,
             })}
             ref={forwardRef}
             onMouseDown={this.preventDefault}

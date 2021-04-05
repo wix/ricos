@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const HappyPack = require('happypack');
 
 const PATHS = {
   monorepo_root: path.join(__dirname, '..', '..', '..'),
@@ -11,7 +12,7 @@ const PATHS = {
 };
 
 module.exports = env => ({
-  entry: [require.resolve('./polyfills'), path.resolve(PATHS.src, 'index.js')],
+  entry: [require.resolve('./polyfills'), path.resolve(PATHS.src, 'index.jsx')],
   output: {
     path: PATHS.dist,
     filename: '[name].js',
@@ -19,7 +20,7 @@ module.exports = env => ({
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     symlinks: false,
     alias: {
       'wix-rich-content-common': path.resolve(PATHS.monorepo_root, 'packages', 'common', 'web'),
@@ -119,6 +120,11 @@ module.exports = env => ({
           },
         ],
       },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: 'happypack/loader?id=ts',
+      },
     ],
   },
   plugins: [
@@ -165,6 +171,15 @@ module.exports = env => ({
         'wordHighlighter',
         'wordOperations',
         'wordPartOperations',
+      ],
+    }),
+    new HappyPack({
+      id: 'ts',
+      loaders: [
+        {
+          path: 'ts-loader',
+          query: { happyPackMode: true },
+        },
       ],
     }),
   ],

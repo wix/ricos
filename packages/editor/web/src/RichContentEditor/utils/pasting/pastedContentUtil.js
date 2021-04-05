@@ -2,16 +2,42 @@ import { OrderedSet } from 'immutable';
 import rgbToHex from './rgbToHex';
 import { Modifier, SelectionState } from 'wix-rich-content-editor-common';
 import htmlToBlock from './htmlToBlock';
+import { colorNameToHex } from './colorNameToHex';
 import { reduce } from 'lodash';
+
+const isBlack = color => color === '#000000';
+
+const shouldIncludeColor = color => {
+  if (color && !isBlack(color)) {
+    return true;
+  }
+  return false;
+};
+
+const getInlineColors = style => {
+  const styles = [];
+  if (style.color) {
+    const FG = colorNameToHex(style.color) || rgbToHex(style.color);
+    if (shouldIncludeColor(FG)) {
+      styles.push(`{"FG":"${FG}"}`);
+    }
+  }
+
+  if (style.backgroundColor) {
+    const BG = colorNameToHex(style.backgroundColor) || rgbToHex(style.backgroundColor);
+    if (shouldIncludeColor(BG)) {
+      styles.push(`{"BG":"${BG}"}`);
+    }
+  }
+  return styles;
+};
 
 export const pastedContentConfig = customHeadings => {
   return {
     htmlToStyle: (nodeName, node, currentStyle) => {
       if (nodeName === 'span') {
         const styles = [];
-        node.style.color && styles.push(`{"FG":"${rgbToHex(node.style.color)}"}`);
-        node.style.backgroundColor &&
-          styles.push(`{"BG":"${rgbToHex(node.style.backgroundColor)}"}`);
+        styles.push(...getInlineColors(node.style));
         node.style.fontWeight > 500 && styles.push('BOLD');
         // fixes pasting text from google docs
         if (node.style.fontWeight === '400' && currentStyle?.toJS?.()?.includes?.('BOLD')) {

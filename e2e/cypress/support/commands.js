@@ -12,12 +12,14 @@ import {
   SETTINGS_PANEL,
   TOOLBARS,
   COLOR_PICKER,
+  ACCORDION_SETTINGS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
 import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
 import { merge } from 'lodash';
+
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -69,8 +71,12 @@ Cypress.Commands.add('switchToDesktop', () => {
   resizeForDesktop();
 });
 
-Cypress.Commands.add('switchToSeoMode', () => {
+Cypress.Commands.add('switchOnSeoMode', () => {
   isSeoMode = true;
+});
+
+Cypress.Commands.add('switchOffSeoMode', () => {
+  isSeoMode = false;
 });
 
 Cypress.Commands.add('switchToHebrew', () => {
@@ -127,7 +133,7 @@ Cypress.Commands.add('getTwitterButton', () => {
   cy.get('[data-hook="twitter-button"]');
 });
 
-function setSelection(start, offset, container) {
+export function setSelection(start, offset, container) {
   container.then(args => {
     const getTextElmentAndLocalOffset = getTextElements(args[0]);
     const document = args[0].ownerDocument;
@@ -275,7 +281,7 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   ).click({ force: true });
 });
 
-Cypress.Commands.add('addColor', () => {
+Cypress.Commands.add('openCustomColorModal', () => {
   cy.get(`[data-hook="${COLOR_PICKER.ADD_COLOR}"]`).click();
 });
 
@@ -286,7 +292,7 @@ Cypress.Commands.add('setColorByHex', color => {
 });
 
 Cypress.Commands.add('updateTextColor', () => {
-  cy.get(`[data-hook="${COLOR_PICKER.UPDATE_BUTTON}"]`).click();
+  cy.get(`[data-hook="${COLOR_PICKER.UPDATE_BUTTON}"]`).click({ force: true });
 });
 
 Cypress.Commands.add('resetColor', () => {
@@ -363,10 +369,14 @@ Cypress.Commands.add('openFooterPluginMenu', () => {
   cy.get('[data-hook="addPluginMenu"]');
 });
 
-Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
-  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
-  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-  cy.get('[data-hook="imageSettings"]');
+Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS[settings]);
+  cy.get('[data-hook="settings"]');
+});
+
+Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS[settings]);
+  cy.get('[data-hook="settings"]');
 });
 
 Cypress.Commands.add('openMapSettings', () => {
@@ -510,6 +520,34 @@ Cypress.Commands.add('openDropdownMenu', (selector = '') => {
   if (selector) {
     cy.get(selector).click();
   }
+});
+
+Cypress.Commands.add('undo', () => {
+  cy.getEditor()
+    .first()
+    .type('{ctrl+z}')
+    .type('{cmd+z}');
+  cy.wait(100);
+});
+
+Cypress.Commands.add('redo', () => {
+  cy.getEditor()
+    .first()
+    .type('{ctrl+shift+z}')
+    .type('{cmd+shift+z}');
+  cy.wait(100);
+});
+
+Cypress.Commands.add('addImage', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.IMAGE);
+});
+
+Cypress.Commands.add('addAccordion', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
+});
+
+Cypress.Commands.add('addAccordionPair', () => {
+  cy.get(`[data-hook*=${ACCORDION_SETTINGS.NEW_PAIR}]`).click({ force: true });
 });
 
 Cypress.Commands.add('openVideoUploadModal', () => {

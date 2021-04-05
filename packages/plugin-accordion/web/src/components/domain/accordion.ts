@@ -1,6 +1,6 @@
 import { EditorState } from 'wix-rich-content-editor-common';
-import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
-import { Store } from 'wix-rich-content-common';
+import { COMPONENT_DATA, directions, EXPANDED } from '../../defaults';
+import { Store, generateKey } from 'wix-rich-content-common';
 
 type Pair = {
   key: string;
@@ -21,6 +21,7 @@ const EMPTY_PAIR_VALUE = { title: EditorState.createEmpty(), content: EditorStat
 
 export class Accordion {
   componentData: ComponentData;
+
   store: Store;
 
   constructor(store: Store, componentData: ComponentData) {

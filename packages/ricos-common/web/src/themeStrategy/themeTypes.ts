@@ -1,4 +1,9 @@
-import { RichContentTheme, PaletteColors, RicosCustomStyles } from 'wix-rich-content-common';
+import {
+  AvailableExperiments,
+  RichContentTheme,
+  PaletteColors,
+  RicosCustomStyles,
+} from 'wix-rich-content-common';
 import { CSSProperties, ReactElement } from 'react';
 import { BasePlugin } from '../types';
 export type RicosCssOverride = RichContentTheme;
@@ -50,7 +55,7 @@ export interface WixTypographyDefinition {
 export interface RicosTheme {
   /** You'll have to specify a parent `className` if you plan to apply different palettes for multiple
    * Ricos instances living next to each other.
-   * {@link https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#theme Read More}.
+   * {@link https://wix.github.io/ricos/docs/ricos/ricos-api/#theme Read More}.
    *
    * Otherwise, you can ignore this field.
    * @example
@@ -65,11 +70,23 @@ export interface RicosTheme {
    * */
   parentClass?: string;
   palette?: PaletteColors | WixPalette | PalettePreset;
+  paletteConfig?: PaletteConfig;
   typography?: RicosTypography;
   customStyles?: RicosCustomStyles;
 }
 
+export interface PaletteConfig {
+  /**
+   * When `true`, attribute `bgColor` provided in `palette` will be the
+   * `background-color` of the inner content container of Ricos.
+   *
+   * Default: `false`
+   */
+  contentBgColor?: boolean;
+}
+
 export interface ThemeStrategyArgs {
+  experiments?: AvailableExperiments;
   plugins?: BasePlugin[];
   cssOverride?: RicosCssOverride;
   ricosTheme?: RicosTheme;

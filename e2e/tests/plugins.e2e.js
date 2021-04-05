@@ -271,30 +271,30 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
-    it('change link preview settings', function() {
+    afterEach('take snapshot', function() {
+      cy.waitForHtmlToLoad();
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('change link preview settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.setLinkSettings();
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('convert link preview to regular link', function() {
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it('convert link preview to regular link', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('backspace key should convert link preview to regular link', function() {
+    it('backspace key should convert link preview to regular link', () => {
       cy.focusEditor()
         .type('{downarrow}{downarrow}')
         .type('{backspace}');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('delete link preview', function() {
+    it('delete link preview', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -306,7 +306,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          LINK_PREVIEW: {
+          linkPreview: {
             enableEmbed: undefined,
             enableLinkPreview: undefined,
           },
@@ -332,7 +332,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          'wix-draft-plugin-link-preview': {
+          linkPreview: {
             enableEmbed: false,
             enableLinkPreview: false,
           },
@@ -455,6 +455,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
@@ -520,7 +521,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
-        'wix-rich-content-plugin-headings': {
+        headings: {
           customHeadings: ['P', 'H2', 'H3'],
         },
       }),
@@ -609,7 +610,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.all),
       ...usePluginsConfig({
-        LINK: {
+        link: {
           linkTypes: { anchor: true },
         },
       }),

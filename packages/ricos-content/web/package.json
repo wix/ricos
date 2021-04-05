@@ -1,19 +1,19 @@
 {
   "name": "ricos-content",
-  "version": "8.9.2",
+  "version": "8.29.1",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wix-incubator/rich-content.git"
+    "url": "git+https://github.com/wix/ricos.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wix-incubator/rich-content/issues"
+    "url": "https://github.com/wix/ricos/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-content",
+  "homepage": "https://github.com/wix/ricos/tree/master/packages/ricos-content",
   "files": [
     "dist",
     "libs",
@@ -34,6 +34,15 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
+  },
+  "dependencies": {
+    "parse5": "^6.0.0",
+    "ricos-schema": "8.29.1",
+    "to-camel-case": "1.0.0",
+    "to-constant-case": "1.0.0",
+    "to-slug-case": "1.0.0",
+    "to-snake-case": "1.0.0",
+    "utility-types": "^3.10.0"
   },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",

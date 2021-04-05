@@ -9,7 +9,8 @@ const WrappedEditor = withI18n<RichContentEditor, Partial<RichContentEditorProps
 );
 
 export default class I18nRichContentEditor extends Component<Partial<RichContentEditorProps>> {
-  editor: RichContentEditor;
+  editor!: RichContentEditor;
+
   static displayName = 'RichContentEditor';
 
   setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);
@@ -22,7 +23,8 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   blur = () => this.editor.blur();
 
-  publish = (postId: string) => this.editor.publish(postId); //async
+  // TODO: remove postId param once the getContent(postId) API is completely deprecated
+  publish = (postId?: string) => this.editor.publish(postId); //async
 
   render() {
     return <WrappedEditor {...this.props} ref={this.setEditorRef} />;

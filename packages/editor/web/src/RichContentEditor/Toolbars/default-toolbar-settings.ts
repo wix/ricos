@@ -68,6 +68,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
   textButtons,
   pluginTextButtons,
   pluginButtonProps,
+  tablePluginMenu,
 }) => {
   return [
     {
@@ -140,7 +141,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         };
       },
       getPositionOffset: () => ({
-        desktop: { x: -40, y: 0 },
+        desktop: { x: tablePluginMenu ? -23 : -40, y: tablePluginMenu ? 3 : 0 },
         mobile: {
           ios: { x: 0, y: 0 },
           android: { x: 0, y: 0 },

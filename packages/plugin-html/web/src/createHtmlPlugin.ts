@@ -33,4 +33,6 @@ const createHtmlPlugin: CreatePluginFunction<HtmlPluginEditorConfig> = config =>
   });
 };
 
+createHtmlPlugin.functionName = HTML_TYPE;
+
 export { createHtmlPlugin, HTML_TYPE };

@@ -6,6 +6,8 @@ import {
   EditorModals,
   getModalStyles,
   insertLinkAtCurrentSelection,
+  getEntityData,
+  insertCustomLink,
   LinkIcon,
   BUTTON_TYPES,
   FORMATTING_BUTTONS,
@@ -52,9 +54,11 @@ const openLinkModal = ({
   t: TranslationFunction;
 }) => {
   const modalStyles = getModalStyles({
-    fullScreen: false,
+    fullScreen: isMobile,
     isMobile,
-    customStyles: { content: { maxWidth: 'max-content', padding: '1px 20px' } },
+    customStyles: isMobile
+      ? { content: { position: 'fixed' } }
+      : { content: { maxWidth: 'max-content', padding: '1px 20px' } },
   });
   if (helpers && helpers.openModal) {
     const modalProps = {
@@ -102,6 +106,8 @@ const createToolbar: CreatePluginToolbar = (config: {
       component: props => (
         <TextLinkButton
           insertLinkFn={insertLinkAtCurrentSelection}
+          getEntityData={getEntityData}
+          insertCustomLink={insertCustomLink}
           isActive={hasLinksInSelection(config.getEditorState())}
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}

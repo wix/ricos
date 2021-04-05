@@ -105,8 +105,14 @@ class BlockSpoilerComponent extends React.Component {
     const { children, pluginType, width, isMobile } = this.props;
     const { styles, isReveal } = this.state;
     let className = '';
+    let blur = '';
     if (!isReveal) {
-      className = pluginType === 'Gallery' ? styles.hideBlock_gallery : styles.hideBlock;
+      const isGallery = pluginType === 'Gallery';
+      className = isGallery ? styles.hideBlock_gallery : styles.hideBlock;
+      if (!isGallery) {
+        const width = this.elementRef?.offsetWidth;
+        blur = width < 400 ? styles.smallBlur : width < 700 ? styles.mediumBlur : styles.largeBlur;
+      }
     }
 
     return (
@@ -119,7 +125,7 @@ class BlockSpoilerComponent extends React.Component {
       >
         {this.renderSpoilerContainer()}
         <div
-          className={className}
+          className={classNames(className, blur)}
           onClick={this.handleClick}
           role="button"
           tabIndex={0}

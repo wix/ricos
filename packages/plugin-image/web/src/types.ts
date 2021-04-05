@@ -10,12 +10,17 @@ export type ImageEditorWixSettings = {
   mediaRoot: string;
 };
 
-interface ImageConfig {
+export interface ImageConfig {
   size?: string;
   alignment?: string;
   disableExpand?: boolean;
   showTitle?: boolean;
   showDescription?: boolean;
+  link?: {
+    anchor: unknown;
+    url: string;
+  };
+  width?: number;
 }
 
 export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig {
@@ -26,14 +31,19 @@ export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig
   };
   defaultData?: {
     config?: ImageConfig;
+    disableExpand?: boolean;
   };
   imageProps?: HTMLImageElement;
   createGalleryForMultipleImages?: boolean;
   imageEditor?: boolean;
+  consumer?: string;
   imageEditorWixSettings?: ImageEditorWixSettings;
   onImageEditorOpen?: () => void;
 }
 
+type ImageSrc = Record<string, unknown>;
 export interface ImagePluginViewerConfig extends ViewerPluginConfig {
+  onExpand?: (blockkey: string) => unknown;
   disableExpand: boolean;
+  imageProps?: ((src: ImageSrc) => HTMLImageElement) | HTMLImageElement;
 }

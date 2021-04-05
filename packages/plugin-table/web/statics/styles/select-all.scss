@@ -1,0 +1,17 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.selectAll {
+    background-color: rgba($primary-text-color-tuple, 0.4);
+    color: $primary-text-color;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    &.activeSelectAll {
+        background-color: $action-color;
+        color: var(--ricos-background-color,#fff);
+    }
+}

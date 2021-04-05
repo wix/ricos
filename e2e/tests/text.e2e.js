@@ -1,8 +1,23 @@
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, DEFAULT_MOBILE_BROWSERS } from './settings';
+import { usePlugins, usePluginsConfig, plugins } from '../cypress/testAppConfig';
+
+const changeTextColor = title => {
+  cy.loadRicosEditorAndViewer('plain')
+    .setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 15])
+    .openCustomColorModal();
+  cy.eyesCheckWindow(title);
+  cy.setColorByHex('d932c3');
+  cy.updateTextColor();
+  cy.eyesCheckWindow(title);
+  if (!title.includes('mobile')) {
+    cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
+    cy.eyesCheckWindow(title);
+  }
+};
 
 describe('text', () => {
   before(function() {
@@ -31,15 +46,7 @@ describe('text', () => {
   });
 
   it('allow to change text color', function() {
-    cy.loadRicosEditorAndViewer('plain')
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 15])
-      .addColor();
-    cy.eyesCheckWindow(this.test.title);
-    cy.setColorByHex('d932c3');
-    cy.updateTextColor();
-    cy.eyesCheckWindow(this.test.title);
-    cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
-    cy.eyesCheckWindow(this.test.title);
+    changeTextColor(this.test.title);
   });
 
   it('allow to apply inline styles and links', function() {
@@ -144,6 +151,35 @@ describe('text', () => {
     cy.blurEditor();
   });
 
+  it('should insert custom link', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          isCustomModal: true,
+        },
+      }),
+    };
+    const selection = [0, 11];
+    cy.loadRicosEditorAndViewer('empty', testAppConfig)
+      .enterParagraphs(['Custom link.'])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter text without linkify links (disableAutoLink set to true)', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          disableAutoLink: true,
+        },
+      }),
+    };
+    cy.loadRicosEditorAndViewer('empty', testAppConfig).enterParagraphs([
+      'www.wix.com\nwww.wix.com ',
+    ]);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('should paste plain text', function() {
     cy.loadRicosEditorAndViewer()
       .focusEditor()
@@ -198,6 +234,23 @@ describe('text', () => {
     cy.loadRicosEditorAndViewer()
       .enterParagraphs(['Magic! I am blurred.'])
       .type('{esc}');
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter link and further text in current block has no inline style', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs(['wix.com '])
+      .enterParagraphs(['no inline style'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter link and further text in next block has no inline style', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs(['wix.com'])
+      .type('{enter}')
+      .enterParagraphs(['no inline style'])
+      .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
 
@@ -264,6 +317,23 @@ describe('text', () => {
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+});
+
+describe('text color mobile', () => {
+  before(function() {
+    cy.eyesOpen({
+      appName: 'Text',
+      testName: this.test.parent.title,
+      browser: DEFAULT_MOBILE_BROWSERS,
+    });
+  });
+  beforeEach(() => cy.switchToMobile());
+
+  after(() => cy.eyesClose());
+
+  it('allow to change text color on mobile', function() {
+    changeTextColor(this.test.title);
   });
 });
 

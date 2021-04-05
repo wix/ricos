@@ -67,9 +67,17 @@ export const STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED = {
   // ...STATIC_TOOLBAR_BUTTONS_MEDIA,
 };
 
+export const STATIC_TOOLBAR_BUTTONS_EXPENDED = {
+  IMAGE: 'ImagePlugin_InsertButton',
+  GALLERY: 'GalleryPlugin_InsertButton',
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
+  ACCORDION: 'Accordion_InsertButton',
+};
+
 export const STATIC_TOOLBAR_BUTTONS = {
   ...STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   ...STATIC_TOOLBAR_BUTTONS_EMBED,
+  ...STATIC_TOOLBAR_BUTTONS_EXPENDED,
 };
 
 export const SETTINGS_PANEL = {
@@ -103,6 +111,12 @@ export const IMAGE_SETTINGS = {
   CAPTION: 'imageSettingsCaptionInput',
   LINK: 'linkPanelInput',
   PREVIEW: 'imagePreview',
+  IMAGE_EXPAND_TOGGLE: 'imageExpandToggle',
+  IMAGE_DOWNLOAD_TOGGLE: 'imageDownloadToggle',
+};
+
+export const VIDEO_SETTINGS = {
+  DOWNLOAD_TOGGLE: 'videoDownloadToggle',
 };
 
 export const GALLERY_SETTINGS = {
@@ -114,6 +128,7 @@ export const GALLERY_SETTINGS = {
   DESELECT: 'galleryItemsSortableDeselectAll',
   DELETE: 'galleryItemsSortableDelete',
   UPLOAD: 'galleryItemsSortableFileInputTop',
+  GALLERY_EXPAND_TOGGLE: 'galleryExpandToggle',
 };
 
 export const GALLERY_IMAGE_SETTINGS = {
@@ -130,6 +145,37 @@ export const VIDEO_PLUGIN = {
   INPUT: 'videoUploadModalInput',
   ADD: 'videoUploadModalAddButton',
   CUSTOM: 'videoUploadModalCustomVideo',
+};
+
+export const TABLE_PLUGIN = {
+  STATIC_TOOLBAR_BUTTON: 'TablePlugin_InsertButton',
+  ROW_COUNT_INPUT: 'rowCount',
+  COL_COUNT_INPUT: 'columnCount',
+  SUBMIT: 'createTableButton',
+  CELL: 'table-plugin-cell',
+  TEXT_STYLE_BUTTON: 'text-style',
+  BG_COLOR: 'back-ground-color',
+  BORDER_COLOR_BUTTONS: 'border-color-buttons',
+  BORDER_COLOR_AROUND: 'border-color-around',
+  BORDER_COLOR_ALL: 'border-color-all',
+  TEXT_COLOR: 'wix-rich-content-text-color-button',
+  HIGHLIGHT_COLOR: 'wix-rich-content-text-highlight-button',
+  CONTEXT_MENU: 'context-menu',
+  CLEAR: 'clear',
+  DELETE_COLUMN: 'delete-column',
+  DELETE_ROW: 'delete-row',
+  INSERT_RIGHT: 'insert-right',
+  INSERT_LEFT: 'insert-left',
+  INSERT_ABOVE: 'insert-above',
+  INSERT_BELOW: 'insert-below',
+  MERGE: 'merge-cells',
+  SPLIT: 'split-cells',
+  ROW_HEADER: 'row-header',
+  COL_HEADER: 'col-header',
+  ALIGNMENT: 'VerticalAlignment',
+  ALIGN_TOP: 'vertical-alignment-align-top',
+  ALIGN_MIDDLE: 'vertical-alignment-align-middle',
+  ALIGN_BOTTOM: 'vertical-alignment-align-bottom',
 };
 
 export const SOUND_CLOUD = {
@@ -164,6 +210,7 @@ export const PLUGIN_COMPONENT = {
   LINK_PREVIEW: 'linkPreviewViewer',
   BUTTON: 'buttonViewer',
   VERTICAL_EMBED: 'vertical-embed',
+  TABLE: 'TableComponent',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {

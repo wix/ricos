@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
+import { isElementOutOfWindow } from 'wix-rich-content-editor-common';
 
 class ContextMenu extends PureComponent {
   static propTypes = {
@@ -18,6 +19,8 @@ class ContextMenu extends PureComponent {
     isDisabled: PropTypes.func,
     getIcon: PropTypes.func,
     theme: PropTypes.object,
+    onContextmenuClick: PropTypes.func,
+    onOptionClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -33,24 +36,50 @@ class ContextMenu extends PureComponent {
     };
   }
 
-  toggleOptions = () => this.setState({ isOpen: !this.state.isOpen });
+  setModalRef = ref => (this.modalRef = ref);
+
+  toggleOptions = () => {
+    this.setState({ isOpen: !this.state.isOpen }, () => {
+      if (this.state.isOpen && this.modalRef) {
+        const isModalOverflow = isElementOutOfWindow(this.modalRef);
+        this.setState({ position: isModalOverflow ? { right: 0 } : { left: 0 } });
+      } else {
+        this.setState({ position: null });
+      }
+    });
+  };
+
+  handleClick = () => {
+    this.props.onContextmenuClick?.();
+    this.toggleOptions();
+  };
 
   hideOptions = () => this.setState({ isOpen: false });
 
-  onChange = ({ onClick }) => e => {
+  onChange = ({ onClick, text }) => e => {
+    this.props.onOptionClick?.(text);
     onClick(e);
     this.setState({ isOpen: false });
   };
 
   renderOptions = () => {
     const { buttonList, theme } = this.props;
+    const { isOpen, position } = this.state;
+    const display = isOpen ? { display: 'block' } : { display: 'none' };
 
     return (
-      <div className={Styles.modal}>
+      <div
+        className={Styles.modal}
+        ref={this.setModalRef}
+        style={{
+          ...position,
+          ...display,
+        }}
+      >
         {Object.values(buttonList).map((props, i) => {
           if (props) {
             if (props.type === 'divider') {
-              return <div className={Styles.contextMenuDivider} />;
+              return <div key={i} className={Styles.contextMenuDivider} />;
             }
             const buttonProps = {
               ...this.props,
@@ -67,7 +96,8 @@ class ContextMenu extends PureComponent {
                 dataHook={buttonProps.dataHook}
                 isMobile={this.props.isMobile}
                 buttonContent={buttonProps.text}
-                disabled={buttonProps.isDisabled()}
+                disabledStyle={buttonProps.isDisabled()}
+                tooltipText={buttonProps.tooltip}
                 asContextButton
               />
             );
@@ -81,13 +111,12 @@ class ContextMenu extends PureComponent {
 
   render() {
     const { tooltip, dataHook, getButtonStyles, isMobile, getIcon, tabIndex, theme } = this.props;
-    const { isOpen } = this.state;
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
           <ToolbarButton
             isActive={false}
-            onClick={this.toggleOptions}
+            onClick={this.handleClick}
             getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}
@@ -96,7 +125,7 @@ class ContextMenu extends PureComponent {
             theme={theme}
             tabIndex={tabIndex}
           />
-          {isOpen && this.renderOptions()}
+          {this.renderOptions()}
         </div>
       </ClickOutside>
     );

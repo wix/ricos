@@ -37,6 +37,8 @@ export default ({
       toolbarName: PropTypes.string,
       closePluginMenu: PropTypes.func,
       pluginMenuButtonRef: PropTypes.any,
+      forceDisabled: PropTypes.bool,
+      sideToolbar: PropTypes.bool,
     };
 
     constructor(props) {
@@ -85,18 +87,19 @@ export default ({
 
     renderButton = ({ getIcon, getLabel, onClick, dataHook, isDisabled, tooltip }) => {
       const { styles } = this;
-      const { className, showName, tabIndex } = this.props;
+      const { className, showName, tabIndex, forceDisabled, sideToolbar } = this.props;
       const Icon = getIcon();
       const label = getLabel();
       return (
         <button
-          disabled={isDisabled()}
+          disabled={isDisabled() || forceDisabled}
           aria-label={tooltip}
           tabIndex={tabIndex}
           className={classNames(
             className,
             styles.button,
-            showName ? styles.sideToolbarButton : styles.footerToolbarButton
+            sideToolbar ? styles.sideToolbarButton : styles.footerToolbarButton,
+            { [styles.forceDisabled]: isDisabled() || forceDisabled }
           )}
           data-hook={dataHook}
           onClick={onClick}
@@ -123,17 +126,19 @@ export default ({
       dataHook,
       isDisabled,
     }) => {
-      const { showName, tabIndex } = this.props;
+      const { showName, tabIndex, forceDisabled, sideToolbar, className } = this.props;
       const { styles } = this;
       const Icon = getIcon();
       const label = getLabel();
       return (
         <FileInput
-          disabled={isDisabled()}
+          disabled={isDisabled() || forceDisabled}
           dataHook={`${dataHook}_file_input`}
           className={classNames(
+            className,
             styles.button,
-            showName ? styles.sideToolbarButton : styles.footerToolbarButton
+            sideToolbar ? styles.sideToolbarButton : styles.footerToolbarButton,
+            { [styles.forceDisabled]: isDisabled() || forceDisabled }
           )}
           onChange={onChange}
           accept={accept}
@@ -159,7 +164,7 @@ export default ({
       if (!isVisible) {
         return null;
       }
-      const { theme, isMobile } = this.props;
+      const { theme, isMobile, forceDisabled } = this.props;
       const buttonProps = this.getButtonProps();
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
@@ -174,7 +179,7 @@ export default ({
       return (
         <ToolbarButton
           theme={theme}
-          tooltipText={buttonProps.tooltip}
+          tooltipText={!forceDisabled && buttonProps.tooltip}
           button={Button}
           tooltipOffset={{ y: 0 }}
         />

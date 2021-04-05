@@ -8,7 +8,7 @@ export const HEADER_TYPE_MAP = {
   P: 'unstyled',
 };
 
-export const DEFAULT_HEADERS_DROPDOWN_OPTIONS = ['P', 'H2', 'H3', 'H4', 'H5', 'H6'];
+export const DEFAULT_HEADERS_DROPDOWN_OPTIONS = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
 
 export const PLUGIN_DECORATIONS = Object.freeze({
   RESIZEABLE: 'RESIZEABLE',
@@ -39,3 +39,5 @@ export const MODAL_CONTROLS_POSITION = Object.freeze({
   TOP: 'top',
   BOTTOM: 'bottom',
 });
+
+export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';

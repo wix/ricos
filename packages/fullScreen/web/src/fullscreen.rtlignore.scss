@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 
-.expand_mode {
+.fullscreen_mode, .expand_mode {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,30 +8,30 @@
   height: 100vh;
   z-index: 100001;
   background: white;
-  padding-top: 70px;
-  padding-left: 7px;
-  @include phone {
-    padding-left: 0px;
-    padding-top: 77px;
-  }
 
   :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
     direction: ltr !important;
   }
 }
 
-.fullscreen_mode {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100001;
-  background: white;
+.expand_mode {
+  padding-top: 70px;
+  padding-left: 7px;
+}
 
-  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
-    direction: ltr !important;
+.nav_arrow_left, .nav_arrow_right {
+  position: fixed;
+  > svg {
+    filter: drop-shadow(0px 0px 0px black) !important;
   }
+}
+
+.nav_arrow_left {
+  left: 16px;
+}
+
+.nav_arrow_right {
+  right: 16px;
 }
 
 .close {
@@ -39,11 +39,11 @@
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  right: 32px;
+  right: 42px;
   top: 0px;
   @include phone {
-    right: 20px;
-    top: 20px;
+    right: 0px;
+    top: 5px;
     > svg {
       width: 20px;
       height: 20px;
@@ -63,16 +63,8 @@
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  left: 0px;
+  left: 12px;
   top: 0px;
-  @include phone {
-    left: 20px;
-    top: 20px;
-    > svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
   background: transparent;
   border-radius: 4px;
   width: 25px;
@@ -83,7 +75,6 @@
 }
 
 .title {
-  color: black;
   font-size: 14px;
   line-height: 20px;
   white-space: nowrap;
@@ -102,3 +93,4 @@
 :global {
   @import '~pro-gallery/dist/statics/main.css';
 }
+

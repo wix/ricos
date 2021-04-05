@@ -15,6 +15,7 @@ const PluginMenuPluginsSection = ({
   hidePopup,
   splitToSections,
   horizontalMenu,
+  smallPlusIcon,
   pluginMenuButtonRef,
   toolbarName,
   theme = {},
@@ -49,12 +50,17 @@ const PluginMenuPluginsSection = ({
           {pluginsToRender.map(({ component: Component }, index) => (
             <Component
               key={index}
-              className={classNames(styles.buttonWrapper, horizontalMenu && styles.horizontalMenu)}
+              className={classNames(
+                styles.buttonWrapper,
+                horizontalMenu && styles.horizontalMenu,
+                smallPlusIcon && styles.smallPlusIcon
+              )}
               onButtonVisible={() => !isSectionVisible && setIsSectionVisible(true)}
               pluginMenuButtonRef={pluginMenuButtonRef}
               getEditorState={getEditorState}
               setEditorState={setEditorState}
               showName={!horizontalMenu}
+              sideToolbar
               toolbarName={toolbarName}
               hidePopup={hidePopup}
               theme={theme}
@@ -88,6 +94,7 @@ PluginMenuPluginsSection.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   hidePopup: PropTypes.func,
   horizontalMenu: PropTypes.bool,
+  smallPlusIcon: PropTypes.bool,
   isMobile: PropTypes.any,
   pluginMenuButtonRef: PropTypes.any,
   plugins: PropTypes.array.isRequired,

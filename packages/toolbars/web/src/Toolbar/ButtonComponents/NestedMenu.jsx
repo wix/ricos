@@ -12,12 +12,15 @@ class NestedMenu extends Component {
       isModalOpen: false,
     };
   }
+
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
+
   closeModal = () => {
     this.setState({ isModalOpen: false });
   };
+
   onMouseDown = event => {
     event.preventDefault();
   };
@@ -40,7 +43,15 @@ class NestedMenu extends Component {
         />
         {isModalOpen && (
           <div className={styles.modal}>
-            <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonList} vertical />
+            <Toolbar
+              theme={theme}
+              isMobile={isMobile}
+              t={t}
+              buttons={buttonList}
+              nestedMenu
+              vertical
+              afterClick={this.toggleModal}
+            />
           </div>
         )}
       </ClickOutside>

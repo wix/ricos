@@ -3,7 +3,6 @@
 .container {
   width: calc(100% - 24px);
   cursor: pointer;
-  height: 48px;
   display: grid;
   grid-template-areas:
     'img title'
@@ -12,10 +11,10 @@
   grid-column-gap: 20px;
   padding: 17px 0;
   &.selected {
-    background-color: rgba($fallbackColor, 0.1);
+    background-color: rgba($fallbackColorTuple, 0.1);
   }
   &:hover:not(.selected) {
-    background-color: rgba($fallbackColor, 0.06);
+    background-color: rgba($fallbackColorTuple, 0.06);
   }
 
   .image {

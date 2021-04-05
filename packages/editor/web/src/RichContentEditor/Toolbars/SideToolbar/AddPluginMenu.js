@@ -15,7 +15,8 @@ export default class AddPluginMenu extends Component {
     const { addPluginMenuConfig, isMobile, theme } = props;
     this.styles = mergeStyles({ styles: Styles, theme });
     this.showSearch = addPluginMenuConfig?.showSearch && !isMobile;
-    this.horizontalMenu = !addPluginMenuConfig && !isMobile;
+    this.horizontalMenu =
+      (!addPluginMenuConfig || addPluginMenuConfig?.horizontalMenuLayout) && !isMobile;
     this.wrapperClassName = classNames(this.styles.sideToolbarPanelWrapper, {
       [this.styles.horizontalMenu]: this.horizontalMenu,
     });
@@ -25,7 +26,9 @@ export default class AddPluginMenu extends Component {
       this.showSearch && this.styles.withSearch
     );
   }
+
   onChange = value => this.setState({ value }, () => this.container?.scrollTo(0, 0));
+
   render() {
     const {
       getEditorState,
@@ -41,6 +44,7 @@ export default class AddPluginMenu extends Component {
       toolbarName,
       searchablePlugins,
     } = this.props;
+    const smallPlusIcon = addPluginMenuConfig?.tablePluginMenu;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
     return (
@@ -70,6 +74,7 @@ export default class AddPluginMenu extends Component {
             hidePopup={hidePopup}
             splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
+            smallPlusIcon={smallPlusIcon}
             theme={theme}
             pluginMenuButtonRef={pluginMenuButtonRef}
             isMobile={isMobile}

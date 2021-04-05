@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
-import { mergeStyles, RicosContent } from 'wix-rich-content-common';
+import { mergeStyles, DraftContent } from 'wix-rich-content-common';
 import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
 import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import styles from '../../statics/styles/preview.scss';
+import { merge } from 'lodash';
 
 interface Props extends RichContentViewerProps {
   transformation: ContentStateTransformation;
-  initialState: RicosContent;
+  initialState: DraftContent;
 }
 
 interface State {
@@ -21,6 +22,7 @@ class RichContentPreview extends Component<Props, State> {
   };
 
   styles: Record<string, string>;
+
   constructor(props: Props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -45,9 +47,18 @@ class RichContentPreview extends Component<Props, State> {
         onPreviewExpand: this.onPreviewExpand,
       },
     };
+    const isPreviewAddition = {
+      helpers: {
+        isPreview: () => !this.state.isPreviewExpanded,
+      },
+    };
     return (
       <div className={styles.preview_container}>
-        <RichContentViewer initialState={previewState} config={previewConfig} {...rest} />
+        <RichContentViewer
+          initialState={previewState}
+          config={previewConfig}
+          {...merge(rest, isPreviewAddition)}
+        />
       </div>
     );
   }

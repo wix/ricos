@@ -2913,7 +2913,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         }
       ],
       "key": 2,
-      "text": "wix.com",
+      "text": "wix.com ",
       "type": "unstyled"
     },
     {
@@ -3257,7 +3257,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         }
       ],
       "key": 2,
-      "text": "wix.com",
+      "text": "wix.com ",
       "type": "unstyled"
     },
     {
@@ -3639,7 +3639,7 @@ exports[`plugins > convert link to link preview > should create link preview fro
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -3697,7 +3697,7 @@ exports[`plugins > convert link to preview > should create link preview from lin
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -3757,7 +3757,7 @@ exports[`plugins > convert link to preview > should embed link that supports emb
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -4040,8 +4040,7 @@ exports[`plugins > social embed > render upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
-        "socialType": "YouTube"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -4338,10 +4337,7 @@ exports[`plugins > action button > create action button & customize it #0`] =
             "padding": 12
           },
           "settings": {
-            "buttonText": "Click Me",
-            "rel": false,
-            "target": true,
-            "url": ""
+            "buttonText": "Click Me"
           }
         },
         "config": {
@@ -4416,10 +4412,7 @@ exports[`plugins > action button > create action button & click it #0`] =
             "padding": 12
           },
           "settings": {
-            "buttonText": "Click Me",
-            "rel": false,
-            "target": true,
-            "url": ""
+            "buttonText": "Click Me"
           }
         },
         "config": {
@@ -4467,7 +4460,7 @@ exports[`plugins > convert link to preview > with default config > should create
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -4527,7 +4520,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "\n",
+      "text": "",
       "type": "unstyled"
     }
   ],
@@ -4907,8 +4900,7 @@ exports[`plugins > social embed > render twitter upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
-        "socialType": "Twitter"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -4966,8 +4958,7 @@ exports[`plugins > social embed > render instagram upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
-        "socialType": "Instagram"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -5025,8 +5016,7 @@ exports[`plugins > social embed > render youtube upload modals #0`] =
           "size": "content",
           "width": 350
         },
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
-        "socialType": "YouTube"
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-link-preview"
@@ -7216,6 +7206,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                       "showTitle": true,
                       "size": "content"
                     },
+                    "disableExpand": false,
                     "src": {
                       "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
                       "height": 1000,

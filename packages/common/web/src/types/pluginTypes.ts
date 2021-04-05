@@ -23,7 +23,7 @@ import {
   DraftEditorCommand,
 } from 'draft-js';
 import {
-  RicosContent,
+  DraftContent,
   PREVIEW,
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -58,23 +58,22 @@ import {
   POLL_TYPE,
   ACCORDION_TYPE,
   TABLE_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
 } from 'ricos-content';
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
-export type PluginMapping = Partial<
-  {
-    [type in PluginType]: {
-      component: ComponentType;
-      classNameStrategies?: {
-        size?: ClassNameStrategy;
-        alignment?: ClassNameStrategy;
-        textWrap?: ClassNameStrategy;
-        container?: ContainerClassNameStrategy;
-      };
-      elementType?: 'inline' | 'block';
+export type PluginMapping = Partial<{
+  [type: string]: {
+    component: ComponentType;
+    classNameStrategies?: {
+      size?: ClassNameStrategy;
+      alignment?: ClassNameStrategy;
+      textWrap?: ClassNameStrategy;
+      container?: ContainerClassNameStrategy;
     };
-  }
->;
+    elementType?: 'inline' | 'block';
+  };
+}>;
 
 export type PluginTypeMapper = (...args) => PluginMapping;
 
@@ -111,7 +110,8 @@ export type PluginType =
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE
   | typeof ACCORDION_TYPE
-  | typeof TABLE_TYPE;
+  | typeof TABLE_TYPE
+  | typeof UNSUPPORTED_BLOCKS_TYPE;
 
 export type BlockRendererFn = (
   contentBlock: ContentBlock,
@@ -131,24 +131,25 @@ export type BlockRendererFn = (
 } | null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Record<string, any>> = (
-  config: CreatePluginConfig<PluginConfig>
-) => {
-  InlinePluginToolbar?: ComponentType;
-  Toolbar?: ComponentType;
-  InsertPluginButtons: Pick<PluginButton, 'buttonSettings' | 'component'>[];
-  externalizedButtonProps?: ToolbarButtonProps[];
-  blockType: PluginType;
-  InlineModals?: ComponentType[];
-  TextButtonMapper?: TextButtonMapper;
-  pubsub: Pubsub;
-  customStyleFn?: EditorProps['customStyleFn'];
-  decoratorTrigger?: string;
-  blockRendererFn: BlockRendererFn;
-  underlyingPlugin?: {
-    handleKeyCommand: EditorProps['handleKeyCommand'];
-    keyBindingFn: EditorProps['keyBindingFn'];
+export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Record<string, any>> = {
+  (config: CreatePluginConfig<PluginConfig>): {
+    InlinePluginToolbar?: ComponentType;
+    Toolbar?: ComponentType;
+    InsertPluginButtons: Pick<PluginButton, 'buttonSettings' | 'component'>[];
+    externalizedButtonProps?: ToolbarButtonProps[];
+    blockType: string;
+    InlineModals?: ComponentType[];
+    TextButtonMapper?: TextButtonMapper;
+    pubsub: Pubsub;
+    customStyleFn?: EditorProps['customStyleFn'];
+    decoratorTrigger?: string;
+    blockRendererFn: BlockRendererFn;
+    underlyingPlugin?: {
+      handleKeyCommand: EditorProps['handleKeyCommand'];
+      keyBindingFn: EditorProps['keyBindingFn'];
+    };
   };
+  functionName?: string;
 };
 
 export type ModalsMap = Record<string, ComponentType>;
@@ -193,6 +194,7 @@ export interface EditorPluginConfig {
     };
   };
   getIsVisiblePromise?: (...args) => Promise<boolean>;
+  innerRCEPlugins?: CreatePluginFunction[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -208,6 +210,8 @@ export type LegacyEditorPluginConfig<
 > & {
   uiSettings?: UISettings;
   getToolbarSettings?: GetToolbarSettings;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -219,6 +223,8 @@ export type LegacyViewerPluginConfig<PluginConfig = Record<string, any>> = Parti
   uiSettings?: UISettings;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [PREVIEW]?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 export type PluginsDecorator = (component: ComponentType) => ComponentType;
@@ -231,17 +237,21 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
   commonPubsub: Pubsub;
   pluginDefaults: Record<string, unknown>;
   spoilerWrapper?: (component: ComponentType) => ComponentType;
+  supportedBlockTypes: string[];
 }
 
 export interface LinkPanelSettings {
   blankTargetToggleVisibilityFn?: (anchorTarget?: AnchorTarget) => boolean;
   nofollowRelToggleVisibilityFn?: (relValue?: RelValue) => boolean;
   placeholder?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dropDown?: any;
 }
 
 export type UISettings = {
   linkPanel?: LinkPanelSettings;
   disableRightClick?: boolean;
+  disableDownload?: boolean;
 };
 
 export interface UnderlyingPlugin
@@ -263,5 +273,5 @@ export type InlineStyleMapper = Record<string, (children, { key }) => JSX.Elemen
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type InlineStyleMapperFunction<PluginConfig = Record<string, any>> = (
   config: LegacyViewerPluginConfig<PluginConfig>,
-  raw: RicosContent
+  raw: DraftContent
 ) => () => InlineStyleMapper;

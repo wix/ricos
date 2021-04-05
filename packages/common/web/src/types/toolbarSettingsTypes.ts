@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditorState } from 'draft-js';
 import { ComponentType } from 'react';
-import { ToolbarType, InsertButton, ToolbarButtonProps, PluginType } from '.';
+import { ToolbarType, InsertButton, ToolbarButtonProps, TextButtonMapping } from '.';
 
 interface PlatformSettings<T> {
-  desktop: T;
-  mobile: {
-    ios: T;
-    android: T;
+  desktop?: T;
+  mobile?: {
+    ios?: T;
+    android?: T;
   };
 }
 
@@ -17,20 +17,24 @@ export interface ToolbarSettingsFunctions {
   getVisibilityFn?: () => PlatformSettings<(editorState: EditorState) => boolean>;
   getPositionOffset?: () => PlatformSettings<{ x: number; y: number }>;
   getButtons?: () => PlatformSettings<any[]>;
-  getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ComponentType }>;
+  getTextPluginButtons?: () => PlatformSettings<{
+    [key: string]: ComponentType | TextButtonMapping;
+  }>;
   getInstance?: (config: any) => any;
   getDisplayOptions?: () => PlatformSettings<any>;
   getToolbarDecorationFn?: () => PlatformSettings<any>;
   addPluginMenuConfig?: {
-    showSearch: boolean;
-    splitToSections: boolean;
+    showSearch?: boolean;
+    splitToSections?: boolean;
+    tablePluginMenu?: boolean;
+    horizontalMenuLayout?: boolean;
   };
   footerToolbarConfig?: {
     morePluginsMenu?: {
       splitToSections: boolean;
       showSearch: boolean;
     };
-    pluginsToDisplayInToolbar?: PluginType[];
+    pluginsToDisplayInToolbar?: string[];
   };
 }
 
@@ -53,10 +57,12 @@ export type GetToolbarSettings = ({
   pluginButtonNames,
   pluginTextButtons,
   pluginButtonProps,
+  tablePluginMenu,
 }: {
   textButtons: TextButtons;
   pluginButtons: PluginButton[];
   pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
   pluginButtonProps: ToolbarButtonProps[];
+  tablePluginMenu?: boolean;
 }) => ToolbarSettingsFunctions[];

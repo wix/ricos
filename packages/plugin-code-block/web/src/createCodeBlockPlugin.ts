@@ -80,4 +80,6 @@ const createCodeBlockPlugin: CreatePluginFunction<CodeBlockPluginEditorConfig> =
   );
 };
 
+createCodeBlockPlugin.functionName = CODE_BLOCK_TYPE;
+
 export { createCodeBlockPlugin };
