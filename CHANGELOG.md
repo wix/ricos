@@ -19,9 +19,6 @@
 </details>
 <hr/>
 
-## 8.29.2 (April 4, 2021)
-- `translations`
-
 ## 8.29.1 (April 4, 2021)
 ### :bug: Bug Fix
 - `link`
