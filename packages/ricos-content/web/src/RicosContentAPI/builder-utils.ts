@@ -86,6 +86,33 @@ export function setNode({
   );
 }
 
+export function toggleNodeType({
+  node: sourceNode,
+  key: nodeKey,
+  canToggle = () => false,
+  convert,
+  content,
+}: {
+  node: Node;
+  key: string;
+  canToggle: ({ sourceNode, targetNode }: { sourceNode: Node; targetNode: Node }) => boolean;
+  convert: ({
+    sourceNode,
+    targetNode,
+  }: {
+    sourceNode: Partial<Node>;
+    targetNode: Node;
+  }) => Partial<Node>;
+  content: RichContent;
+}): RichContent {
+  const isToggleable = either(canToggle);
+  return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes))
+    .chain((index: number) => isToggleable({ targetNode: content.nodes[index], sourceNode }))
+    .map(({ targetNode, sourceNode }) => convert({ targetNode, sourceNode }))
+    .map((node: Node) => setNode({ node: { ...node, key: nodeKey }, key: nodeKey, content }))
+    .fork(() => content, identity);
+}
+
 export function updateNode({
   node: mergedNode,
   key: nodeKey,
@@ -98,8 +125,8 @@ export function updateNode({
   return isIndexFound(
     findIndex(({ key, type }) => key === nodeKey && type === mergedNode.type, content.nodes)
   )
-    .map((index: number) => ({ node: merge(content.nodes[index], mergedNode), index }))
-    .map(({ node, index }) => replaceNode(content, { ...node, key: nodeKey }, index))
+    .map((index: number) => merge(content.nodes[index], mergedNode))
+    .map((node: Node) => setNode({ node: { ...node, key: nodeKey }, key: nodeKey, content }))
     .fork(() => content, identity);
 }
 
