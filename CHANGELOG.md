@@ -23,6 +23,10 @@
 ### :nail_care: Polish
 - `image`
   - [#2343](https://github.com/wix-incubator/rich-content/pull/2343) skip LCP optimization for png and mobile
+
+### :bug: Bug Fix
+- `mentions`
+  - [#2345](https://github.com/wix-incubator/rich-content/pull/2345) fix panel overflow
   
 ## 8.29.1 (April 4, 2021)
 ### :bug: Bug Fix
