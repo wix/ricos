@@ -15,7 +15,19 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-	 
+
+### :bug: Bug Fix
+
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive style when used inside innerrce   
+
+</details>
+<hr/>
+
+## 8.29.2 (April 4, 2021)
+- `translations`
+
+## 8.29.1 (April 4, 2021)
 ### :bug: Bug Fix
 - `link`
   - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) link panel popup styles for static toolbar
@@ -23,13 +35,12 @@
   - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) color-picker: scrollbars in saturation picker
 - `text-slection-toolbar`
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) fix position of text-selection-toolbar in lists
+- `plugin-image`
+  - [#2341](https://github.com/wix-incubator/rich-content/pull/2341) native selection file accepts only supported image extensions
 
 ### :house: Internal
 - `editor editor-common plugin-undo-redo`
   - [#1847](https://github.com/wix/ricos/pull/1847) undo redo for plugin customisations experiment enabled
-
-</details>
-<hr/>
 
 ## 8.29.0 (April 1, 2021)
 ### :rocket: New Feature
@@ -41,8 +52,6 @@
   - [#1705](https://github.com/wix-incubator/rich-content/pull/1705) fix gallery layout styles default and thumbnails ratio
 - `ricos-editor`
   - [#2336](https://github.com/wix-incubator/rich-content/pull/2336) blocks with errors filter fix
-- `file-upload`
-  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive style when used inside innerrce
 
 ## 8.28.0 (Mar 31, 2021)
 ### :rocket: New Feature
