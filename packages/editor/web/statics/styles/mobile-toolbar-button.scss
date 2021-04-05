@@ -12,8 +12,8 @@
       color: $action-color;
       fill: $action-color;
     }
-    button {
-      background-color: transparent !important;
+    .mobileToolbarButton button {
+      background-color: transparent;
     }
   }
 }
