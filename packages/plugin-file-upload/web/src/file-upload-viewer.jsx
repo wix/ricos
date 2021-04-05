@@ -186,7 +186,6 @@ class FileUploadViewer extends PureComponent {
     if (error) {
       return this.renderContainerWithoutLink();
     }
-
     return (
       <a
         href={fileUrl}

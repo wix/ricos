@@ -172,7 +172,7 @@ const config: RichContentViewerProps['config'] = {
       new Promise(resolve =>
         setTimeout(
           () =>
-            resolve('http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf'),
+            resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
           1000
         )
       ),
