@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `general`
+  - [#2344](https://github.com/wix-incubator/rich-content/pull/2344) fix tooltip z-index to overflow the media settings modal
+
 </details>
 <hr/>
 
