@@ -1,0 +1,29 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import 'sound-cloud-viewer';
+.soundCloud_overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: move;
+}
+
+.soundCloud_overlay ~ * > * {
+  pointer-events: none;
+}
+
+.soundCloud_overlay_message {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 100%;
+  padding: 0px 1%;
+  text-align: center;
+  box-sizing: border-box;
+  transform: translateX(-50%);
+  color: $primary-text-color-light;
+  font-size: 12px;
+}

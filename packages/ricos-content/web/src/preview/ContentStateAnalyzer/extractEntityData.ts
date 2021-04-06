@@ -83,6 +83,7 @@ const converters = {
   'wix-draft-plugin-gallery': galleryConverter,
   'wix-draft-plugin-divider': defaultEntityConverter,
   'wix-draft-plugin-video': videoConverter,
+  'wix-draft-plugin-sound-cloud': videoConverter,
   'wix-draft-plugin-giphy': giphyConverter,
   'wix-draft-plugin-file-upload': fileConverter,
   'wix-draft-plugin-map': mapConverter,

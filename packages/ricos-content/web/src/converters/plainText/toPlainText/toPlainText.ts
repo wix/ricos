@@ -6,6 +6,7 @@ import {
   parseLinkPreview,
   parseListNode,
   parseMap,
+  parseSoundCloud,
   parseTextNodes,
   parseVerticalEmbed,
   parseVideo,
@@ -48,6 +49,9 @@ export const toPlainText = async (
           break;
         case Node_Type.VIDEO:
           plainText += await parseVideo(node, options?.getVideoUrl);
+          break;
+        case Node_Type.SOUND_CLOUD:
+          plainText += parseSoundCloud(node);
           break;
         case Node_Type.GIPHY:
           plainText += parseGiphy(node);

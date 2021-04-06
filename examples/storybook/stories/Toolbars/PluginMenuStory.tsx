@@ -71,6 +71,7 @@ export default (isMobile = false) => {
               { value: 'html', id: 'html' },
               { value: 'image', id: 'image' },
               { value: 'map', id: 'map' },
+              { value: 'soundCloud', id: 'soundCloud' },
               { value: 'video', id: 'video' },
               { value: 'socialEmbed', id: 'socialEmbed' },
               { value: 'verticalEmbed', id: 'verticalEmbed' },
