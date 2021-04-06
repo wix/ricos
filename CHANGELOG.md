@@ -19,7 +19,7 @@
 </details>
 <hr/>
 
-## 8.29.2 (April 5, 2021)
+## 8.29.2 (April 6, 2021)
 ### :nail_care: Polish
 - `image`
   - [#2343](https://github.com/wix-incubator/rich-content/pull/2343) skip LCP optimization for png and mobile
