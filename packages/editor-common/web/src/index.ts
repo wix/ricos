@@ -25,7 +25,7 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
-export { undo, redo } from './Utils/handleUndoRedoCommands';
+export { undo, redo, pluginsUndo } from './Utils/handleUndoRedoCommands';
 
 export {
   updateLinkAtCurrentSelection,
@@ -44,7 +44,9 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
+  blockKeyToEntityKey,
   setEntityData,
+  setBlockNewEntityData,
   replaceWithEmptyBlock,
   deleteBlock,
   getBlockAtStartOfSelection,
@@ -58,6 +60,7 @@ export {
   getPostContentSummary,
   createSelection,
   getBlockType,
+  hasInlineStyle,
   indentSelectedBlocks,
   isTypeText,
   setForceSelection,
@@ -75,6 +78,7 @@ export {
   isCursorAtFirstLine,
   selectAllContent,
 } from './Utils/draftUtils';
+export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {

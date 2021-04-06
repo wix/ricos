@@ -27,6 +27,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,
     [Node_Type.DIVIDER]: convertDividerData,
+    [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
     [Node_Type.GALLERY]: convertGalleryData,
     [Node_Type.POLL]: convertPollData,
@@ -34,7 +35,6 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.HTML]: convertHtmlData,
     [Node_Type.GIPHY]: convertGiphyData,
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
-    [Node_Type.SOUND_CLOUD]: convertSoundCloudData,
   };
   if (nodeType in converters) {
     const convert = converters[nodeType];
@@ -72,6 +72,11 @@ const convertVideoData = data => {
 
 const convertDividerData = data => {
   has(data, 'type') && (data.type = toCamelCase(data.type));
+  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+};
+
+const convertFileData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };
@@ -125,12 +130,6 @@ const convertLinkPreviewData = data => {
   if (has(data, 'providerUrl')) {
     data.provider_url = data.providerUrl;
     delete data.providerUrl;
-  }
-};
-
-const convertSoundCloudData = data => {
-  if (data.metadata) {
-    data.metadata = keysToSnakeCase(data.metadata);
   }
 };
 

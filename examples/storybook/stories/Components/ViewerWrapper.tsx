@@ -17,7 +17,6 @@ import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing/viewer';
 import { pluginLink } from 'wix-rich-content-plugin-link/viewer';
 import { pluginMap } from 'wix-rich-content-plugin-map/viewer';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions/viewer';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/viewer';
 import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed/viewer';
@@ -57,7 +56,6 @@ const plugins = [
   pluginLink(),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
-  pluginSoundCloud(),
   pluginVideo(),
   pluginTextColor(),
   pluginTextHighlight(),

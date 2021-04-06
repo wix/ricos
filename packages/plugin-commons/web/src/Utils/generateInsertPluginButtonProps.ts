@@ -18,6 +18,7 @@ import {
   Version,
 } from 'wix-rich-content-common';
 import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
+import { getPluginParams } from './getPluginParams';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -64,7 +65,8 @@ export function generateInsertPluginButtonProps({
       step,
     });
   };
-  const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
+  const onPluginAddSuccess = (params = {}) =>
+    helpers?.onPluginAddSuccess?.(blockType, toolbarName, params);
 
   function addBlock(data) {
     const { newBlock, newSelection, newEditorState } = createBlock(
@@ -73,7 +75,7 @@ export function generateInsertPluginButtonProps({
       blockType
     );
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    onPluginAddSuccess();
+    onPluginAddSuccess(getPluginParams(data, blockType));
     return { newBlock, newSelection, newEditorState };
   }
 

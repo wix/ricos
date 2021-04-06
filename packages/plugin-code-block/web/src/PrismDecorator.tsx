@@ -19,6 +19,7 @@ const PrismToken: FunctionComponent<{
 
 export default class PrismDecorator implements CompositeDecorator {
   highlighted = {};
+
   theme: RichContentTheme;
 
   constructor(theme = {}) {

@@ -57,6 +57,7 @@ const createBaseComponent = ({
       onClick: PropTypes.func,
       onDragStart: PropTypes.func,
     };
+
     static displayName = createHocName('BaseComponent', PluginComponent);
 
     constructor(props) {

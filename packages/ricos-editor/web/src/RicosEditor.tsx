@@ -32,10 +32,13 @@ interface State {
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
-  editor: RichContentEditor;
+  editor!: RichContentEditor;
+
   dataInstance: EditorDataInstance;
+
   isBusy = false;
-  currentEditorRef: ElementType;
+
+  currentEditorRef!: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -163,6 +166,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.editor = ref;
     this.setStaticToolbar(ref);
   };
+
+  getEditorCommands = () => this.editor.getEditorCommands();
 
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;

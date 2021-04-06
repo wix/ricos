@@ -17,6 +17,9 @@ import {
   DraftContent,
   TextToolbarType,
   AvailableExperiments,
+  EventName,
+  PluginEventParams,
+  OnPluginAction,
 } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
@@ -106,13 +109,17 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
   }
 
   initEditorProps() {
+    const onPluginAction: OnPluginAction = async (
+      eventName: EventName,
+      params: PluginEventParams
+    ) => console.log(eventName, params);
     this.helpers = {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
         console.log('biPluginAdd', plugin_id, entry_point, version),
       onPluginAddStep: async params => console.log('onPluginAddStep', params),
-      onPluginAddSuccess: async (plugin_id, entry_point, version) =>
-        console.log('biPluginAddSuccess', plugin_id, entry_point, version),
+      onPluginAddSuccess: async (plugin_id, entry_point, params, version) =>
+        console.log('biPluginAddSuccess', plugin_id, entry_point, params, version),
       onPluginDelete: async (plugin_id, version) =>
         console.log('biPluginDelete', plugin_id, version),
       onPluginChange: async (plugin_id, changeObj, version) =>
@@ -160,6 +167,7 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
           modalStyles: null,
         });
       },
+      onPluginAction,
     };
     this.setImageUploadHelper();
   }

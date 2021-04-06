@@ -4,6 +4,7 @@ import toCamelCase from 'to-camel-case';
 import { has, cloneDeep } from 'lodash';
 import {
   DIVIDER_TYPE,
+  FILE_UPLOAD_TYPE,
   GALLERY_TYPE,
   GIPHY_TYPE,
   HTML_TYPE,
@@ -11,7 +12,6 @@ import {
   LINK_PREVIEW_TYPE,
   MENTION_TYPE,
   POLL_TYPE,
-  SOUND_CLOUD_TYPE,
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
 } from '../../../consts';
@@ -21,6 +21,7 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
   const conversionFunctions = {
     [VIDEO_TYPE]: convertVideoData,
     [DIVIDER_TYPE]: convertDividerData,
+    [FILE_UPLOAD_TYPE]: convertFileData,
     [IMAGE_TYPE]: convertImageData,
     [GALLERY_TYPE]: convertGalleryData,
     [POLL_TYPE]: convertPollData,
@@ -28,7 +29,6 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     [HTML_TYPE]: convertHtmlData,
     [GIPHY_TYPE]: convertGiphyData,
     [LINK_PREVIEW_TYPE]: convertLinkPreviewData,
-    [SOUND_CLOUD_TYPE]: convertSoundCloudData,
     [MENTION_TYPE]: convertMention,
   };
   if (blockType in conversionFunctions) {
@@ -52,6 +52,11 @@ const convertVideoData = data => {
 
 const convertDividerData = data => {
   has(data, 'type') && (data.type = toConstantCase(data.type));
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
+};
+
+const convertFileData = data => {
   has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };
@@ -102,12 +107,6 @@ const convertGiphyData = data => {
 const convertLinkPreviewData = data => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
   has(data, 'provider_url') && (data.providerUrl = data.provider_url);
-};
-
-const convertSoundCloudData = data => {
-  if (data.metadata) {
-    data.metadata = keysToCamelCase(data.metadata);
-  }
 };
 
 const convertMention = data => {

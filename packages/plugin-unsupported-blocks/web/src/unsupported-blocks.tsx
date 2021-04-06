@@ -8,7 +8,7 @@ interface Props {
   t: TranslationFunction;
 }
 class UnsupportedBlocks extends Component<Props> {
-  styles: Record<string, string>;
+  styles!: Record<string, string>;
 
   render() {
     const { t, theme } = this.props;
