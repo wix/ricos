@@ -23,6 +23,7 @@ const externals = [
   /^wix-rich-content-editor$/,
   /^wix-rich-content-viewer$/,
   /^ricos-content$/,
+  /^ricos-common$/,
   /^react-player$/,
 ];
 
