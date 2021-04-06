@@ -937,8 +937,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onChange={this.updateEditorState}
         handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
-        handlePastedFiles={this.handlePastedFiles}
-        handleDroppedFiles={this.handleDroppedFiles}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
@@ -969,6 +967,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onFocus={onFocus}
         textAlignment={textAlignment}
         readOnly={readOnly || this.state.readOnly}
+        {...(this.props.experiments?.pastedFilesSupport?.enabled && {
+          handlePastedFiles: this.handlePastedFiles,
+          handleDroppedFiles: this.handleDroppedFiles,
+        })}
       />
     );
   };

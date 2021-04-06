@@ -299,6 +299,7 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
               placeholder={'Add some text!'}
               plugins={this.ricosPlugins}
               linkPanelSettings={this.config.uiSettings.linkPanel}
+              _rcProps={{ experiments }}
             >
               <RichContentEditor helpers={helpersWithoutModal} />
             </RicosEditor>
