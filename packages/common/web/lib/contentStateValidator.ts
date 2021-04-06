@@ -11,7 +11,6 @@ import linkPreviewSchema from '../statics/schemas/plugin-link-preview.schema.jso
 import pollsSchema from '../statics/schemas/plugin-polls.schema.json';
 import mapSchema from '../statics/schemas/plugin-map.schema.json';
 import mentionsSchema from '../statics/schemas/plugin-mentions.schema.json';
-import soundCloudSchema from '../statics/schemas/plugin-sound-cloud.schema.json';
 import videoSchema from '../statics/schemas/plugin-video.schema.json';
 import anchorSchema from '../statics/schemas/anchor.schema.json';
 import {
@@ -28,7 +27,6 @@ import {
   POLL_TYPE,
   MAP_TYPE,
   MENTION_TYPE,
-  SOUND_CLOUD_TYPE,
   VIDEO_TYPE,
 } from 'ricos-content';
 
@@ -39,7 +37,6 @@ export const isValidEditorData = payload => {
     [VIDEO_TYPE]: videoSchema,
     [GIPHY_TYPE]: giphySchema,
     [FILE_UPLOAD_TYPE]: fileUploadSchema,
-    [SOUND_CLOUD_TYPE]: soundCloudSchema,
     [MAP_TYPE]: mapSchema,
     [LINK_BUTTON_TYPE]: buttonSchema,
     [ACTION_BUTTON_TYPE]: buttonSchema,

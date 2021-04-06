@@ -6,7 +6,6 @@ import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-d
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
 import videoSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-video.schema.json';
 import giphySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-giphy.schema.json';
-import soundCloudSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-sound-cloud.schema.json';
 import fileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
 import mapSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-map.schema.json';
 import htmlSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-html.schema.json';
@@ -23,7 +22,6 @@ import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
-import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
@@ -92,7 +90,6 @@ class ContentStateEditor extends PureComponent<Props> {
             [VIDEO_TYPE]: videoSchema,
             [GIPHY_TYPE]: giphySchema,
             [FILE_UPLOAD_TYPE]: fileUploadSchema,
-            [SOUND_CLOUD_TYPE]: soundCloudSchema,
             [MAP_TYPE]: mapSchema,
             [HTML_TYPE]: htmlSchema,
             [LINK_TYPE]: linkSchema,
