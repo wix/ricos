@@ -27,6 +27,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,
     [Node_Type.DIVIDER]: convertDividerData,
+    [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
     [Node_Type.GALLERY]: convertGalleryData,
     [Node_Type.POLL]: convertPollData,
@@ -72,6 +73,11 @@ const convertVideoData = data => {
 
 const convertDividerData = data => {
   has(data, 'type') && (data.type = toCamelCase(data.type));
+  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+};
+
+const convertFileData = data => {
   has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
   has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
 };

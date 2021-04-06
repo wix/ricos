@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "image-client-api": "1.2218.0",
+    "ricos-content": "8.29.1",
     "wix-rich-content-common": "8.29.1",
     "wix-rich-content-editor-common": "8.29.1",
     "wix-rich-content-plugin-commons": "8.29.1"
