@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `common`
+  - [#2344](https://github.com/wix-incubator/rich-content/pull/2344) fix tooltip z-index for media settings modal
+
 </details>
 <hr/>
 
