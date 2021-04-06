@@ -90,6 +90,7 @@ export class RicosEngine extends Component<EngineProps> {
       linkPanelSettings = {},
       maxTextLength,
       textAlignment,
+      onAtomicBlockFocus,
     } = this.props;
 
     const { strategyProps, previewContent, htmls } = this.runStrategies();
@@ -131,6 +132,7 @@ export class RicosEngine extends Component<EngineProps> {
       anchorTarget,
       relValue,
       textAlignment,
+      onAtomicBlockFocus,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);

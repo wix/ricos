@@ -710,8 +710,8 @@
       "nodes": [],
       "fileData": {
         "config": {
-          "size": "content",
-          "alignment": "center"
+          "size": "CONTENT",
+          "alignment": "CENTER"
         },
         "name": "image.jpg",
         "type": "jpg",

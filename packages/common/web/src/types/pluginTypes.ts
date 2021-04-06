@@ -28,14 +28,20 @@ import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
   CODE_BLOCK_TYPE,
+  RICOS_DIVIDER_TYPE,
   DIVIDER_TYPE,
   EMOJI_TYPE,
+  RICOS_FILE_TYPE,
   FILE_UPLOAD_TYPE,
+  RICOS_GALLERY_TYPE,
   GALLERY_TYPE,
+  RICOS_GIPHY_TYPE,
   GIPHY_TYPE,
   HASHTAG_TYPE,
   HEADERS_MARKDOWN_TYPE,
+  RICOS_HTML_TYPE,
   HTML_TYPE,
+  RICOS_IMAGE_TYPE,
   IMAGE_TYPE,
   IMAGE_TYPE_LEGACY,
   INDENT_TYPE,
@@ -52,13 +58,88 @@ import {
   TEXT_HIGHLIGHT_TYPE,
   UNDO_REDO_TYPE,
   VERTICAL_EMBED_TYPE,
+  RICOS_VIDEO_TYPE,
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
+  RICOS_POLL_TYPE,
   POLL_TYPE,
   ACCORDION_TYPE,
   TABLE_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
+  RICOS_LINK_TYPE,
+  RICOS_MENTION_TYPE,
 } from 'ricos-content';
+import {
+  DividerData,
+  GiphyData,
+  HTMLData,
+  GalleryData,
+  PollData,
+  VideoData,
+  FileData,
+  LinkData,
+  ImageData,
+  MentionData as MentionPluginData,
+  Node_Type,
+  Decoration_Type,
+} from 'ricos-schema';
+export { Node_Type, Decoration_Type, LinkData };
+
+export type CreatePluginData<PluginData> = (
+  pluginData?: PluginData,
+  isRicosSchema?: boolean
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+Record<string, any>;
+
+export type MentionData = { mention: MentionPluginData; trigger: string };
+
+export interface CreatePluginsDataMap {
+  [RICOS_DIVIDER_TYPE]?: CreatePluginData<DividerData>;
+  [DIVIDER_TYPE]?: CreatePluginData<DividerData>;
+  [RICOS_GIPHY_TYPE]?: CreatePluginData<GiphyData>;
+  [GIPHY_TYPE]?: CreatePluginData<GiphyData>;
+  [RICOS_HTML_TYPE]?: CreatePluginData<HTMLData>;
+  [HTML_TYPE]?: CreatePluginData<HTMLData>;
+  [RICOS_GALLERY_TYPE]?: CreatePluginData<GalleryData>;
+  [GALLERY_TYPE]?: CreatePluginData<GalleryData>;
+  [RICOS_POLL_TYPE]?: CreatePluginData<PollData>;
+  [POLL_TYPE]?: CreatePluginData<PollData>;
+  [RICOS_VIDEO_TYPE]?: CreatePluginData<VideoData>;
+  [VIDEO_TYPE]?: CreatePluginData<VideoData>;
+  [RICOS_FILE_TYPE]?: CreatePluginData<FileData>;
+  [FILE_UPLOAD_TYPE]?: CreatePluginData<FileData>;
+  [RICOS_IMAGE_TYPE]?: CreatePluginData<ImageData>;
+  [IMAGE_TYPE]?: CreatePluginData<ImageData>;
+  [RICOS_LINK_TYPE]?: CreatePluginData<LinkData>;
+  [LINK_TYPE]?: CreatePluginData<LinkData>;
+  [RICOS_MENTION_TYPE]?: CreatePluginData<MentionData>;
+  [MENTION_TYPE]?: CreatePluginData<MentionData>;
+}
+
+export interface PluginsDataMap {
+  [RICOS_DIVIDER_TYPE]?: DividerData;
+  [DIVIDER_TYPE]?: DividerData;
+  [RICOS_GIPHY_TYPE]?: GiphyData;
+  [GIPHY_TYPE]?: GiphyData;
+  [RICOS_HTML_TYPE]?: HTMLData;
+  [HTML_TYPE]?: HTMLData;
+  [RICOS_GALLERY_TYPE]?: GalleryData;
+  [GALLERY_TYPE]?: GalleryData;
+  [RICOS_POLL_TYPE]?: PollData;
+  [POLL_TYPE]?: PollData;
+  [RICOS_VIDEO_TYPE]?: VideoData;
+  [VIDEO_TYPE]?: VideoData;
+  [RICOS_FILE_TYPE]?: FileData;
+  [FILE_UPLOAD_TYPE]?: FileData;
+  [RICOS_IMAGE_TYPE]?: ImageData;
+  [IMAGE_TYPE]?: ImageData;
+}
+
+export interface DecorationsDataMap {
+  [RICOS_LINK_TYPE]?: LinkData;
+  [RICOS_MENTION_TYPE]?: MentionData;
+}
+
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
 export type PluginMapping = Partial<{
@@ -166,6 +247,7 @@ export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<s
   config: PluginConfig;
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
+  createPluginData?: CreatePluginData<PluginConfig>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
