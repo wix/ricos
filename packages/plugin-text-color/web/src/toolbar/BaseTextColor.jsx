@@ -104,7 +104,7 @@ export default class BaseTextColor extends Component {
           },
     };
 
-    if (toolbarName !== 'StaticTextToolbar') {
+    if (isMobile || toolbarName !== 'StaticTextToolbar') {
       return (
         <InlineToolbarButton
           onClick={this.openPanel}

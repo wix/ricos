@@ -100,7 +100,7 @@ export default class HeadingButton extends Component {
           left: panelLeft,
         };
     const buttonContent = this.fixEllipsis(this.translateHeading(currentHeading));
-    if (toolbarName !== 'StaticTextToolbar') {
+    if (isMobile || toolbarName !== 'StaticTextToolbar') {
       return (
         <InlineToolbarButton
           onClick={this.openPanel}

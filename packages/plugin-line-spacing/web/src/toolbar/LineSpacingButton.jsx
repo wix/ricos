@@ -98,7 +98,7 @@ export default class LineSpacingButton extends Component {
           left: panelLeft,
         };
 
-    if (toolbarName !== 'StaticTextToolbar') {
+    if (isMobile || toolbarName !== 'StaticTextToolbar') {
       return (
         <InlineToolbarButton
           onClick={this.openPanel}
