@@ -18,6 +18,8 @@
 
 ### :bug: Bug Fix
 
+- `toolbar`
+  - [#1882](https://github.com/wix-incubator/rich-content/pull/1882) fix buttons bg color issue with mobile "false hover"
 - `common`
   - [#2344](https://github.com/wix-incubator/rich-content/pull/2344) fix tooltip z-index for media settings modal
 
