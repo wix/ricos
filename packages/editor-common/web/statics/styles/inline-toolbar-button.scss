@@ -15,6 +15,9 @@
   &:hover {
     button {
       background-color: rgba($fallbackColorTuple, 0.06);
+      @include phone {
+        background-color: transparent;
+      }
     }
     // .inlineToolbarButton_icon,
     // .inlineToolbarButton_icon svg,
