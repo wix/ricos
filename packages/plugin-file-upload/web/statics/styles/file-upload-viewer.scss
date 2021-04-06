@@ -16,9 +16,9 @@
 }
 
 .file_upload_error_container {
-  border: 1px solid rgba($color: #F64D43, $alpha: 0.8);
+  border: 1px solid rgba($color: #f64d43, $alpha: 0.8);
   &:hover {
-    border: 1px solid rgba($color: #F64D43, $alpha: 1);
+    border: 1px solid rgba($color: #f64d43, $alpha: 1);
   }
 }
 
@@ -43,9 +43,6 @@
   left: 73px;
   width: 60%;
   position: absolute;
-}
-.file_upload_text_container_first_break {
-  left: 50px;
 }
 
 .file_upload_state {
@@ -88,6 +85,10 @@
   margin-right: 30px;
 }
 
+.file_upload_extension_first_break {
+  margin-right: 55px;
+}
+
 .file_upload_type_icon {
   margin-right: 12px;
   margin-left: 20px;
@@ -97,9 +98,6 @@
   margin: 0;
 }
 
-.file_upload_type_icon_first_break {
-  margin-left: 10px;
-}
 /* rtl:ignore */
 .file_loader_icon {
   animation-name: spin;

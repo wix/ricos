@@ -6,6 +6,7 @@ import { LoaderIcon, getIcon, DownloadIcon, ErrorIcon, ReadyIcon } from './icons
 // eslint-disable-next-line max-len
 import pluginFileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import classnames from 'classnames';
 
 const getNameWithoutType = fileName => {
@@ -21,6 +22,7 @@ class FileUploadViewer extends PureComponent {
     resolvedFileUrl: null,
     resolvingUrl: false,
     currentWidth: 0,
+    showTooltip: false,
   };
 
   constructor(props) {
@@ -36,8 +38,8 @@ class FileUploadViewer extends PureComponent {
   isSecondBreakPoint = () =>
     this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.secondBreak;
 
-  isFirstBreakPoint = (divider = 1) =>
-    this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.firstBreak / divider;
+  isFirstBreakPoint = () =>
+    this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.firstBreak;
 
   shouldUpdateWidth = currentWidth =>
     this.breakPoints.firstBreak >= currentWidth || this.breakPoints.firstBreak < currentWidth;
@@ -96,8 +98,6 @@ class FileUploadViewer extends PureComponent {
         <Icon
           styles={this.styles}
           className={classnames(styles.file_upload_type_icon, {
-            [this.styles.file_upload_type_icon_first_break]:
-              this.isFirstBreakPoint(2) && !this.isSecondBreakPoint(),
             [this.styles.file_upload_type_icon_second_break]: this.isSecondBreakPoint(),
           })}
         />
@@ -161,14 +161,18 @@ class FileUploadViewer extends PureComponent {
         {this.renderIcon(Icon)}
         {!isMobile && this.renderIcon()}
         {!this.isSecondBreakPoint() && (
-          <div
-            className={classnames(this.styles.file_upload_text_container, {
-              [this.styles.file_upload_text_container_first_break]: this.isFirstBreakPoint(2),
-            })}
-          >
+          <div className={this.styles.file_upload_text_container}>
             <div className={this.styles.file_upload_name_container}>
               <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
-              {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
+              {type && (
+                <div
+                  className={classnames(this.styles.file_upload_extension, {
+                    [this.styles.file_upload_extension_first_break]: this.isFirstBreakPoint(),
+                  })}
+                >
+                  {'.' + type}
+                </div>
+              )}
             </div>
             <div className={infoStyle}>{infoString}</div>
           </div>
@@ -262,10 +266,12 @@ class FileUploadViewer extends PureComponent {
       componentData.error && this.styles.file_upload_error_container
     );
     return (
-      <div className={style} data-hook="fileUploadViewer" ref={this.fileUploadViewerRef}>
-        {viewer}
-        {this.renderAutoDownloadIframe()}
-      </div>
+      <Tooltip content={this.isFirstBreakPoint() ? componentData.name : null}>
+        <div className={style} data-hook="fileUploadViewer" ref={this.fileUploadViewerRef}>
+          {viewer}
+          {this.renderAutoDownloadIframe()}
+        </div>
+      </Tooltip>
     );
   }
 }
