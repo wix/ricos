@@ -18,8 +18,8 @@
 
 ### :bug: Bug Fix
 
-- `toolbar-button`
-  - [#1882](https://github.com/wix-incubator/rich-content/pull/1882) text-style-button background color fix when disabled on mobile
+- `toolbar`
+  - [#1882](https://github.com/wix-incubator/rich-content/pull/1882) fix text-style-buttons bg color when they are disabled on mobile
 
 </details>
 <hr/>
