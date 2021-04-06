@@ -661,7 +661,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       if (blob.type.startsWith('image/')) {
         const hasImagePlugin = this.plugins.find(({ blockType }) => blockType === IMAGE_TYPE);
         if (hasImagePlugin) {
-          const blockKey = this.EditorCommands.insertBlock(IMAGE_TYPE, {});
+          const blockKey = this.EditorCommands.insertBlock(IMAGE_TYPE);
           if (blockKey) {
             this.commonPubsub.set('initialState_' + blockKey, {
               userSelectedFiles: { files: [blob] },
