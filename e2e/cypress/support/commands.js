@@ -12,6 +12,7 @@ import {
   SETTINGS_PANEL,
   TOOLBARS,
   COLOR_PICKER,
+  ACCORDION_SETTINGS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
@@ -373,6 +374,11 @@ Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
   cy.get('[data-hook="settings"]');
 });
 
+Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS[settings]);
+  cy.get('[data-hook="settings"]');
+});
+
 Cypress.Commands.add('openMapSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.MAP}]:first`)
     .parent()
@@ -514,6 +520,34 @@ Cypress.Commands.add('openDropdownMenu', (selector = '') => {
   if (selector) {
     cy.get(selector).click();
   }
+});
+
+Cypress.Commands.add('undo', () => {
+  cy.getEditor()
+    .first()
+    .type('{ctrl+z}')
+    .type('{cmd+z}');
+  cy.wait(100);
+});
+
+Cypress.Commands.add('redo', () => {
+  cy.getEditor()
+    .first()
+    .type('{ctrl+shift+z}')
+    .type('{cmd+shift+z}');
+  cy.wait(100);
+});
+
+Cypress.Commands.add('addImage', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.IMAGE);
+});
+
+Cypress.Commands.add('addAccordion', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
+});
+
+Cypress.Commands.add('addAccordionPair', () => {
+  cy.get(`[data-hook*=${ACCORDION_SETTINGS.NEW_PAIR}]`).click({ force: true });
 });
 
 Cypress.Commands.add('openVideoUploadModal', () => {
