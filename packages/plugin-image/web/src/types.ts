@@ -24,6 +24,7 @@ export interface ImageConfig {
 }
 
 export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   spoiler?: {
     buttonContent: string | undefined;
     description: string | undefined;

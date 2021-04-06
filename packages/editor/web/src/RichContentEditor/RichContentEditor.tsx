@@ -6,6 +6,7 @@ import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
+import { createEditorCommands } from './EditorCommands';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -43,7 +44,7 @@ import {
   Helpers,
   TranslationFunction,
   CreatePluginFunction,
-  RicosEntity,
+  onAtomicBlockFocus,
   OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
@@ -61,6 +62,7 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  CreatePluginsDataMap,
   EventName,
   PluginEventParams,
   OnPluginAction,
@@ -121,6 +123,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
+  createPluginsDataMap: CreatePluginsDataMap;
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -128,11 +131,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   locale: string;
   shouldRenderOptimizedImages?: boolean;
   onChange?(editorState: EditorState): void;
-  onAtomicBlockFocus?(params: {
-    blockKey?: string;
-    type?: string;
-    data?: RicosEntity['data'];
-  }): void;
+  onAtomicBlockFocus?: onAtomicBlockFocus;
   siteDomain?: string;
   iframeSandboxDomain?: string;
   onError: OnErrorFunction;
@@ -214,6 +213,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   innerRCECustomStyleFn;
 
+  EditorCommands!: ReturnType<typeof createEditorCommands>;
+
   getSelectedText!: (editorState: EditorState) => string;
 
   static defaultProps: Partial<RichContentEditorProps> = {
@@ -262,6 +263,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.initEditorCommands();
     this.fixDraftSelectionExtend();
   }
 
@@ -497,6 +499,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
     this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
+
+  initEditorCommands = () => {
+    const { createPluginsDataMap = {} } = this.props;
+    this.EditorCommands = createEditorCommands(
+      createPluginsDataMap,
+      this.getEditorState,
+      this.updateEditorState
+    );
+  };
 
   initEditorToolbars(
     pluginButtons: PluginButton[],

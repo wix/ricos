@@ -4,13 +4,6 @@ import FileUploadViewer from './file-upload-viewer';
 import { FILE_UPLOAD_TYPE } from './types';
 import { mapExtensionToType } from './mapExtensionToType';
 
-const DEFAULTS = Object.freeze({
-  config: {
-    alignment: 'center',
-    size: 'content',
-  },
-});
-
 class FileUploadComponent extends PureComponent {
   constructor(props) {
     super(props);
@@ -137,4 +130,4 @@ FileUploadComponent.defaultProps = {
   settings: {},
 };
 
-export { FileUploadComponent as Component, DEFAULTS };
+export { FileUploadComponent as Component };
