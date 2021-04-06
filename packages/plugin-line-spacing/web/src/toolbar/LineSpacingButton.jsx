@@ -53,7 +53,6 @@ export default class LineSpacingButton extends Component {
   };
 
   updateSpacing = spacing => {
-    console.debug('updateSpacing');
     const dynamicStyles = spacing;
     const { setEditorState, onUpdate } = this.props;
     const newEditorState = mergeBlockData(this.oldEditorState, { dynamicStyles });
@@ -72,7 +71,6 @@ export default class LineSpacingButton extends Component {
   };
 
   cancel = () => {
-    console.log('cancel');
     const { onUpdate } = this.props;
     this.setEditorState(this.oldEditorState);
     onUpdate(this.oldSpacing);
