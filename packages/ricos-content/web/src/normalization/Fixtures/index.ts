@@ -11,4 +11,6 @@ export { default as processedInlineGalleryContentState } from './processedInline
 export { default as AnchorInTextContentState } from './AnchorInTextContentState';
 export { default as AnchorInImageContentState } from './AnchorInImageContentState';
 
+export { default as imageGalleryContentState } from './imageGalleryContentState';
+
 export { default as videoInitialContentState } from './videoInitialContentState';

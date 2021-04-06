@@ -50,7 +50,7 @@ describe('plugins', () => {
     };
 
     it('render viewer toolbar and tweet', function() {
-      cy.loadRicosEditorAndViewer('plain');
+      cy.loadRicosEditorAndViewer('nested-lists');
       cy.setViewerSelection(476, 98);
       cy.getTwitterButton().should('be.visible');
       cy.eyesCheckWindow(this.test.title);
@@ -371,6 +371,7 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('video');
       cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO);
       cy.openSettings();
+      cy.wait(5000);
       cy.eyesCheckWindow();
       cy.get(`[data-hook=${VIDEO_SETTINGS.DOWNLOAD_TOGGLE}]`).click();
       cy.eyesCheckWindow();
