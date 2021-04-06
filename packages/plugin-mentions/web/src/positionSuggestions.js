@@ -35,7 +35,7 @@ export const positionSuggestions = ({
     relativeRect.left = decoratorRect.left;
   }
 
-  const left = relativeRect.left + relativeRect.scrollLeft;
+  let left = relativeRect.left + relativeRect.scrollLeft;
   let top = relativeRect.top + relativeRect.scrollTop;
 
   const popoverHeight =
@@ -46,6 +46,10 @@ export const positionSuggestions = ({
 
   if (isBelow && reposition) {
     top -= popoverHeight + decoratorRect.height + 14;
+  }
+
+  if (relativeParent && popover.offsetWidth + left > relativeParent.offsetWidth) {
+    left -= popover.offsetWidth - 18;
   }
 
   let transform;

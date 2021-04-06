@@ -24,6 +24,15 @@
 </details>
 <hr/>
 
+## 8.29.2 (April 5, 2021)
+### :nail_care: Polish
+- `image`
+  - [#2343](https://github.com/wix-incubator/rich-content/pull/2343) skip LCP optimization for png and mobile
+
+### :bug: Bug Fix
+- `mentions`
+  - [#2345](https://github.com/wix-incubator/rich-content/pull/2345) fix panel overflow
+  
 ## 8.29.1 (April 4, 2021)
 ### :bug: Bug Fix
 - `link`
@@ -32,6 +41,8 @@
   - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) color-picker: scrollbars in saturation picker
 - `text-slection-toolbar`
   - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) fix position of text-selection-toolbar in lists
+- `plugin-image`
+  - [#2341](https://github.com/wix-incubator/rich-content/pull/2341) native selection file accepts only supported image extensions
 
 ### :house: Internal
 - `editor editor-common plugin-undo-redo`
