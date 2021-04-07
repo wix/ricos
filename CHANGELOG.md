@@ -25,9 +25,9 @@
 ### :bug: Bug Fix
 
 - `toolbar`
-  - [#1882](https://github.com/wix-incubator/rich-content/pull/1882) fix buttons bg color issue with mobile "false hover"
+  - [#1882](https://github.com/wix/ricos/pull/1882) fix buttons bg color issue with mobile "false hover"
 - `common`
-  - [#2344](https://github.com/wix-incubator/rich-content/pull/2344) fix tooltip z-index for media settings modal
+  - [#2344](https://github.com/wix/ricos/pull/2344) fix tooltip z-index for media settings modal
 
 </details>
 <hr/>
@@ -37,31 +37,31 @@
 ### :rocket: New Feature
 
 - `ricos-editor`
-  - [#2044](https://github.com/wix-incubator/rich-content/pull/2044) **beta** Editor Commands
+  - [#2044](https://github.com/wix/ricos/pull/2044) **beta** Editor Commands
 
 ### :nail_care: Polish
 
 - `image`
-  - [#2343](https://github.com/wix-incubator/rich-content/pull/2343) skip LCP optimization for png and mobile
+  - [#2343](https://github.com/wix/ricos/pull/2343) skip LCP optimization for png and mobile
 
 ### :bug: Bug Fix
 
 - `mentions`
 
-  - [#2345](https://github.com/wix-incubator/rich-content/pull/2345) fix panel overflow
+  - [#2345](https://github.com/wix/ricos/pull/2345) fix panel overflow
 
 ## 8.29.1 (April 4, 2021)
 
 ### :bug: Bug Fix
 
 - `link`
-  - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) link panel popup styles for static toolbar
+  - [#2339](https://github.com/wix/ricos/pull/2339) link panel popup styles for static toolbar
 - `plugin-commons`
-  - [#2339](https://github.com/wix-incubator/rich-content/pull/2339) color-picker: scrollbars in saturation picker
+  - [#2339](https://github.com/wix/ricos/pull/2339) color-picker: scrollbars in saturation picker
 - `text-slection-toolbar`
-  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) fix position of text-selection-toolbar in lists
+  - [#2327](https://github.com/wix/ricos/pull/2327) fix position of text-selection-toolbar in lists
 - `plugin-image`
-  - [#2341](https://github.com/wix-incubator/rich-content/pull/2341) native selection file accepts only supported image extensions
+  - [#2341](https://github.com/wix/ricos/pull/2341) native selection file accepts only supported image extensions
 
 ### :house: Internal
 
@@ -73,23 +73,23 @@
 ### :rocket: New Feature
 
 - `plugin-image`
-  - [#2176](https://github.com/wix-incubator/rich-content/pull/2176) update image settings modal to have download and expand options using toggle buttons
+  - [#2176](https://github.com/wix/ricos/pull/2176) update image settings modal to have download and expand options using toggle buttons
 
 ### :bug: Bug Fix
 
 - `gallery`
-  - [#1705](https://github.com/wix-incubator/rich-content/pull/1705) fix gallery layout styles default and thumbnails ratio
+  - [#1705](https://github.com/wix/ricos/pull/1705) fix gallery layout styles default and thumbnails ratio
 - `ricos-editor`
-  - [#2336](https://github.com/wix-incubator/rich-content/pull/2336) blocks with errors filter fix
+  - [#2336](https://github.com/wix/ricos/pull/2336) blocks with errors filter fix
 
 ## 8.28.0 (Mar 31, 2021)
 
 ### :rocket: New Feature
 
 - `plugin-video`
-  - [#2331](https://github.com/wix-incubator/rich-content/pull/2331) added new settings panel for custom videos with download toggle
+  - [#2331](https://github.com/wix/ricos/pull/2331) added new settings panel for custom videos with download toggle
 - `plugin-gallery`
-  - [#2096](https://github.com/wix-incubator/rich-content/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
+  - [#2096](https://github.com/wix/ricos/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
 
 ### :house: Internal
 
@@ -98,14 +98,14 @@
 - `plugin-table`
   - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
 - `ricos-content`
-  - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) ContentAPI infra added
+  - [#2237](https://github.com/wix/ricos/pull/2237) ContentAPI infra added
 - `general`
-  - [#2237](https://github.com/wix-incubator/rich-content/pull/2237) tsconfig: strictPropertyInitialization; eslint: lines-between-class-members rules
+  - [#2237](https://github.com/wix/ricos/pull/2237) tsconfig: strictPropertyInitialization; eslint: lines-between-class-members rules
 
 ### :bug: Bug Fix
 
 - `image`
-  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) aria-hidden attribute fixed
+  - [#2327](https://github.com/wix/ricos/pull/2327) aria-hidden attribute fixed
 - `plugin-spoiler`
   - [#2308](https://github.com/wix/ricos/pull/2308) increase blur for media, change spoiler button position in formatting toolbar, change spoiler icon
 - `plugin-link-preview`
@@ -114,7 +114,7 @@
 ### :nail_care: Polish
 
 - `common`
-  - [#2327](https://github.com/wix-incubator/rich-content/pull/2327) TextButtonMapping and InlineToolbarButton types improved
+  - [#2327](https://github.com/wix/ricos/pull/2327) TextButtonMapping and InlineToolbarButton types improved
 
 ## 8.27.8 (Mar 30, 2021)
 
@@ -131,14 +131,14 @@
 ### :nail_care: Polish
 
 - `plugin-headings`
-  - [#2321](https://github.com/wix-incubator/rich-content/pull/2321) Heading 1 can now be enabled via feature toggle `useHeadingOne` (only applicable for default config)
+  - [#2321](https://github.com/wix/ricos/pull/2321) Heading 1 can now be enabled via feature toggle `useHeadingOne` (only applicable for default config)
 
 ## 8.27.5 (Mar 24, 2021)
 
 ### :bug: Bug Fix
 
 - `color-picker`
-  - [#2159](https://github.com/wix-incubator/rich-content/pull/2159) update color-picker style for mobile devices
+  - [#2159](https://github.com/wix/ricos/pull/2159) update color-picker style for mobile devices
 
 ### :house: Internal
 
@@ -161,9 +161,9 @@
 - `unsupported-blocks`
   - [#2292](https://github.com/wix/ricos/pull/#2292) fix unsupported-blocks text height and font size
 - `gallery`
-  - [#2290](https://github.com/wix-incubator/rich-content/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
+  - [#2290](https://github.com/wix/ricos/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
 - `fullscreen`
-  - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
+  - [#2273](https://github.com/wix/ricos/pull/2273) fix dimension issues
 
 ## 8.27.1 (Mar 10, 2021)
 
@@ -186,30 +186,30 @@
 ### :bug: Bug Fix
 
 - `viewer`
-  - [#2282](https://github.com/wix-incubator/rich-content/pull/2282) `customStyles` unordered lists - now influenced by paragraph styles
+  - [#2282](https://github.com/wix/ricos/pull/2282) `customStyles` unordered lists - now influenced by paragraph styles
 
 ## 8.26.1 (March 8, 2021)
 
 ### :bug: Bug Fix
 
 - `headings`
-  - [#2278](https://github.com/wix-incubator/rich-content/pull/2278) triple click display the right heading type
+  - [#2278](https://github.com/wix/ricos/pull/2278) triple click display the right heading type
 - `viewer`
-  - [#2281](https://github.com/wix-incubator/rich-content/pull/2281) `customStyles` paragraph styles influence on ordered lists
+  - [#2281](https://github.com/wix/ricos/pull/2281) `customStyles` paragraph styles influence on ordered lists
 
 ## 8.26.0 (March 8, 2021)
 
 ### :rocket: New Feature
 
 - `ricos-content`
-  - [#2261](https://github.com/wix-incubator/rich-content/pull/2261) `fromHtml` and `toHtml` utility functions convert between rich content and HTML
+  - [#2261](https://github.com/wix/ricos/pull/2261) `fromHtml` and `toHtml` utility functions convert between rich content and HTML
 
 ## 8.25.4 (March 5, 2021)
 
 ### :bug: Bug Fix
 
 - `fullscreen`
-  - [#2260](https://github.com/wix-incubator/rich-content/pull/2260) fix mobile dimension issues
+  - [#2260](https://github.com/wix/ricos/pull/2260) fix mobile dimension issues
 - `ricos-editor`
   - [#2257](https://github.com/wix/ricos/pull/2257) `getContent` removes blocks with errors from innerRCE blocks
 
@@ -227,19 +227,19 @@
 ### :bug: Bug Fix
 
 - `table`
-  - [#2252](https://github.com/wix-incubator/rich-content/pull/2252) drag and drop preview position
+  - [#2252](https://github.com/wix/ricos/pull/2252) drag and drop preview position
 
 ## 8.25.0 (March 2, 2021)
 
 ### :rocket: New Feature
 
 - `ricos-content`
-  - [#2234](https://github.com/wix-incubator/rich-content/pull/2234) `fromPlainText` utility converts plain text to rich content
+  - [#2234](https://github.com/wix/ricos/pull/2234) `fromPlainText` utility converts plain text to rich content
 
 ### :nail_care: Polish
 
 - `docs`
-  - [#2241](https://github.com/wix-incubator/rich-content/pull/2241) `EditorEventsContext` - doc page improved
+  - [#2241](https://github.com/wix/ricos/pull/2241) `EditorEventsContext` - doc page improved
 
 ### :bug: Bug Fix
 
@@ -251,9 +251,9 @@
 ### :nail_care: Polish
 
 - `editor-common`
-  - [#2203](https://github.com/wix-incubator/rich-content/pull/2203) `EditorEventsContext` separated into lib
+  - [#2203](https://github.com/wix/ricos/pull/2203) `EditorEventsContext` separated into lib
 - `ricos-viewer`
-  - [#2217](https://github.com/wix-incubator/rich-content/pull/2217) render full-screen on hover
+  - [#2217](https://github.com/wix/ricos/pull/2217) render full-screen on hover
 
 ### :house: Internal
 
@@ -263,14 +263,14 @@
 ### :rocket: New Feature
 
 - `ricos-theme`
-  - [#2230](https://github.com/wix-incubator/rich-content/pull/2230) `paletteConfig` - configurations for theme. `shouldColorContainer` boolean field
+  - [#2230](https://github.com/wix/ricos/pull/2230) `paletteConfig` - configurations for theme. `shouldColorContainer` boolean field
 
 ## 8.24.0 (Feb 28, 2021)
 
 ### :rocket: New Feature
 
 - `color`
-  - [#2225](https://github.com/wix-incubator/rich-content/pull/2225) Override panel position
+  - [#2225](https://github.com/wix/ricos/pull/2225) Override panel position
 
 ### :bug: Bug Fix
 
@@ -306,7 +306,7 @@
 ### :rocket: New Feature
 
 - `fullScreen`
-  - [#2206](https://github.com/wix-incubator/rich-content/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
+  - [#2206](https://github.com/wix/ricos/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
 
 ## 8.22.9 (Feb 24, 2021)
 
@@ -363,19 +363,19 @@
 ## 8.22.4 (Feb 21, 2021)
 
 - `common`
-  - [#2157](https://github.com/wix-incubator/rich-content/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
+  - [#2157](https://github.com/wix/ricos/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
 
 ## 8.22.3 (Feb 20, 2021)
 
 ### :rocket: New Feature
 
 - `fullScreen`
-  - [#2069](https://github.com/wix-incubator/rich-content/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
+  - [#2069](https://github.com/wix/ricos/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
 
 ### :house: Internal
 
 - `ricos-viewer`
-  - [#2168](https://github.com/wix-incubator/rich-content/pull/2168) load fullscreen modal if content includes images
+  - [#2168](https://github.com/wix/ricos/pull/2168) load fullscreen modal if content includes images
 
 ## 8.22.2 (Feb 18, 2021)
 
@@ -403,27 +403,27 @@
 ### :rocket: New Feature
 
 - `ricos-editor`
-  - [#2153](https://github.com/wix-incubator/rich-content/pull/2153) getContentTraits expose isLastChangeEdit
+  - [#2153](https://github.com/wix/ricos/pull/2153) getContentTraits expose isLastChangeEdit
 
 ### :bug: Bug Fix
 
 - `link`
-  - [#2144](https://github.com/wix-incubator/rich-content/pull/2144) static toolbar - link modal style fix
+  - [#2144](https://github.com/wix/ricos/pull/2144) static toolbar - link modal style fix
 
 ### :house: Internal
 
 - `ricos-editor`
-  - [#2090](https://github.com/wix-incubator/rich-content/pull/2090) callback `onPluginAddStep` is now available for hooking
-  - [#2156](https://github.com/wix-incubator/rich-content/pull/2156) callback `onPluginAddStep` - added version field
+  - [#2090](https://github.com/wix/ricos/pull/2090) callback `onPluginAddStep` is now available for hooking
+  - [#2156](https://github.com/wix/ricos/pull/2156) callback `onPluginAddStep` - added version field
 - `example`
-  - [#2151](https://github.com/wix-incubator/rich-content/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
+  - [#2151](https://github.com/wix/ricos/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
 
 ## 8.21.1 (Feb 14, 2021)
 
 ### :bug: Bug Fix
 
 - `*`
-  - [#2134](https://github.com/wix-incubator/rich-content/pull/2134) fix `onViewerAction` arguments order
+  - [#2134](https://github.com/wix/ricos/pull/2134) fix `onViewerAction` arguments order
 
 ### :house: Internal
 
@@ -435,38 +435,38 @@
 ### :rocket: New Feature
 
 - `gallery`
-  - [#1926](https://github.com/wix-incubator/rich-content/pull/1926) upload video items in gallery (will be available through wix-ricos soon)
+  - [#1926](https://github.com/wix/ricos/pull/1926) upload video items in gallery (will be available through wix-ricos soon)
 
 ### :bug: Bug Fix
 
 - `vertical-embed`
-  - [#2127](https://github.com/wix-incubator/rich-content/pull/2127) fix css issues
+  - [#2127](https://github.com/wix/ricos/pull/2127) fix css issues
 
 ## 8.20.0 (Feb 9, 2021)
 
 ### :rocket: New Feature
 
 - `ricos-editor`
-  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling
+  - [#2120](https://github.com/wix/ricos/pull/2120) modal events in internal modal handling
 
 ### :bug: Bug Fix
 
 - `link`
-  - [#2119](https://github.com/wix-incubator/rich-content/pull/2119) anchors issues in editor
+  - [#2119](https://github.com/wix/ricos/pull/2119) anchors issues in editor
 
 ## 8.19.4 (Feb 8, 2021)
 
 ### :bug: Bug Fix
 
 - `vertical-embed`
-  - [#2118](https://github.com/wix-incubator/rich-content/pull/2118) fix css
+  - [#2118](https://github.com/wix/ricos/pull/2118) fix css
 
 ## 8.19.3 (Feb 8, 2021)
 
 ### :bug: Bug Fix
 
 - `headings`
-  - [#2116](https://github.com/wix-incubator/rich-content/pull/2116) headings toolbar in external modal
+  - [#2116](https://github.com/wix/ricos/pull/2116) headings toolbar in external modal
 - `link-preview`
   - [#2112](https://github.com/wix/ricos/pull/2112) fix link-preview link data (rel & target)
 
@@ -495,15 +495,15 @@
 - `image`
   - [#2101](https://github.com/wix/ricos/pull/2101) remove duplication of images in browsers reader mode
 - `ricos-common`
-  - [#2102](https://github.com/wix-incubator/rich-content/pull/2102) experiments API: wix-experiments compatibility
+  - [#2102](https://github.com/wix/ricos/pull/2102) experiments API: wix-experiments compatibility
 
 ## 8.19.0 (Feb 4, 2021)
 
 ### :rocket: New Feature
 
 - `common`
-  - [#2081](https://github.com/wix-incubator/rich-content/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
-  - [#2079](https://github.com/wix-incubator/rich-content/pull/2079) experiments infra
+  - [#2081](https://github.com/wix/ricos/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
+  - [#2079](https://github.com/wix/ricos/pull/2079) experiments infra
 
 ### :bug: Bug Fix
 
@@ -515,21 +515,21 @@
 ### :bug: Bug Fix
 
 - `inner-modal`
-  - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
+  - [#2076](https://github.com/wix/ricos/pull/2076) vertical overflow issue
 
 ## 8.18.1 (Feb 2, 2021)
 
 ### :bug: Bug Fix
 
 - `ricos-editor`
-  - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
+  - [#2073](https://github.com/wix/ricos/pull/2073) isContentChanged fixed
 
 ## 8.18.0 (Jan 31, 2021)
 
 ### :rocket: New Feature
 
 - `ricos-common`
-  - [#2065](https://github.com/wix-incubator/rich-content/pull/2065) add textAlignment prop
+  - [#2065](https://github.com/wix/ricos/pull/2065) add textAlignment prop
 
 ## 8.17.11 (Jan 27, 2021)
 
@@ -557,7 +557,7 @@
 ### :rocket: New Feature
 
 - `editor`
-  - [#2034](https://github.com/wix-incubator/rich-content/pull/2034) maxTextLength prop added
+  - [#2034](https://github.com/wix/ricos/pull/2034) maxTextLength prop added
 
 ### :bug: Bug Fix
 
@@ -576,7 +576,7 @@
 ### :rocket: New Feature
 
 - `ricos-content`
-  - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+  - [#2006](https://github.com/wix/ricos/pull/2006) `toPlainText` utility converts rich content to plain text
 
 ### :house: Internal
 
@@ -621,28 +621,28 @@
 ### :rocket: New Feature
 
 - `common`
-  - [#1970](https://github.com/wix-incubator/rich-content/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
+  - [#1970](https://github.com/wix/ricos/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
 
 ### :bug: Bug Fix
 
 - `table`
-  - [#2002](https://github.com/wix-incubator/rich-content/pull/2002) fix reset to default colors for table
+  - [#2002](https://github.com/wix/ricos/pull/2002) fix reset to default colors for table
 - `table`
-  - [#1999](https://github.com/wix-incubator/rich-content/pull/1999) prevent wix focus accessibility
+  - [#1999](https://github.com/wix/ricos/pull/1999) prevent wix focus accessibility
 
 ## 8.16.0 (Jan 18, 2021)
 
 ### :rocket: New Feature
 
 - `unsupportedBlocks`
-  - [#2005](https://github.com/wix-incubator/rich-content/pull/2005) new plugin for informing oneApp users when plugin isn't supported
+  - [#2005](https://github.com/wix/ricos/pull/2005) new plugin for informing oneApp users when plugin isn't supported
 
 ## 8.15.4 (Jan 18, 2021)
 
 ### :bug: Bug Fix
 
 - `unsupportedBlocks`
-  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
+  - [#1993](https://github.com/wix/ricos/pull/1993) update unsupported-blocks translation keys
 
 ### :house: Internal
 
@@ -662,7 +662,7 @@
 ### :rocket: New Feature
 
 - `ricos-editor`
-  - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
+  - [#1990](https://github.com/wix/ricos/pull/1990) `RICOS_PUBLISH` event
 
 ## 8.15.2 (Jan 14, 2021)
 
@@ -676,14 +676,14 @@
 ### :book: Documentation
 
 - `unsupportedBlocks`
-  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
+  - [#1985](https://github.com/wix/ricos/pull/1985) unsupported-blocks-plugin documentation
 
 ## 8.15.0 (Jan 12, 2021)
 
 ### :rocket: New Feature
 
 - `unsupportedBlocks`
-  - [#1969](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when plugin isn't supported
+  - [#1969](https://github.com/wix/ricos/pull/1969) new plugin for informing oneApp users when plugin isn't supported
 
 ## 8.14.2 (Jan 12, 2021)
 
@@ -714,9 +714,9 @@
 ### :rocket: New Feature
 
 - `ricos-viewer`
-  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
+  - [#1916](https://github.com/wix/ricos/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
 - `fullscreen`
-  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
+  - [#1916](https://github.com/wix/ricos/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
 
 ### :bug: Bug Fix
 
@@ -750,7 +750,7 @@
 ### :rocket: New Feature
 
 - `link`
-  - [#1958](https://github.com/wix-incubator/rich-content/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
+  - [#1958](https://github.com/wix/ricos/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
 
 ### :book: Documentation
 
@@ -760,25 +760,25 @@
 ### :bug: Bug Fix
 
 - `ricos-editor`
-  - [#1963](https://github.com/wix-incubator/rich-content/pull/1963) wrapped with EditorEventsContext using typed forwardRef
+  - [#1963](https://github.com/wix/ricos/pull/1963) wrapped with EditorEventsContext using typed forwardRef
 
 ## 8.12.1 (Jan 6, 2021)
 
 ### :bug: Bug Fix
 
 - `fullscreen`
-  - [#1959](https://github.com/wix-incubator/rich-content/pull/1959) fix horizontal orientation image view
+  - [#1959](https://github.com/wix/ricos/pull/1959) fix horizontal orientation image view
 - `file-upload`
-  - [#1962](https://github.com/wix-incubator/rich-content/pull/1962) fix autodownload file after url resolve
+  - [#1962](https://github.com/wix/ricos/pull/1962) fix autodownload file after url resolve
 
 ## 8.12.0 (Jan 6, 2021)
 
 ### :rocket: New Feature
 
 - `editor`
-  - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
+  - [#1954](https://github.com/wix/ricos/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
 - `ricos-editor`
-  - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
+  - [#1956](https://github.com/wix/ricos/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
 
 ### :house: Internal
 
@@ -790,33 +790,33 @@
 ### :rocket: New Feature
 
 - `editor`
-  - [#1944](https://github.com/wix-incubator/rich-content/pull/1944) improve inline color filtering from pasted text
+  - [#1944](https://github.com/wix/ricos/pull/1944) improve inline color filtering from pasted text
 - `link`
-  - [#1892](https://github.com/wix-incubator/rich-content/pull/1892) external link
+  - [#1892](https://github.com/wix/ricos/pull/1892) external link
 
 ### :bug: Bug Fix
 
 - `link`
-  - [#1941](https://github.com/wix-incubator/rich-content/pull/1941) fix: selection after adding link
+  - [#1941](https://github.com/wix/ricos/pull/1941) fix: selection after adding link
 
 ## 8.11.4 (Jan 3, 2021)
 
 ### :bug: Bug Fix
 
 - `text-color`
-  - [#1930](https://github.com/wix-incubator/rich-content/pull/1930) fix color picker css
+  - [#1930](https://github.com/wix/ricos/pull/1930) fix color picker css
 
 ## 8.11.3 (Jan 3, 2021)
 
 ### :rocket: New Feature
 
 - `editor`
-  - [#1939](https://github.com/wix-incubator/rich-content/pull/1939) allow api to disable input (`props.handleBeforeInput` can return handled)
+  - [#1939](https://github.com/wix/ricos/pull/1939) allow api to disable input (`props.handleBeforeInput` can return handled)
 
 ### :bug: Bug Fix
 
 - `editor`
-  - [#1938](https://github.com/wix-incubator/rich-content/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
+  - [#1938](https://github.com/wix/ricos/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
 
 ## 8.11.2 (Dec 31, 2020)
 
@@ -830,34 +830,34 @@
 ### :bug: Bug Fix
 
 - `editor`
-  - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) addPluginMenu - fix override plugin menu styles on mobile
+  - [#1924](https://github.com/wix/ricos/pull/1924) addPluginMenu - fix override plugin menu styles on mobile
 - `inner-rce`
-  - [#1932](https://github.com/wix-incubator/rich-content/pull/1932) disable footer toolbar when inner rce is in focus
+  - [#1932](https://github.com/wix/ricos/pull/1932) disable footer toolbar when inner rce is in focus
 - `gallery`
-  - [#1935](https://github.com/wix-incubator/rich-content/pull/1935) disable progress in mobile native loader
+  - [#1935](https://github.com/wix/ricos/pull/1935) disable progress in mobile native loader
 
 ## 8.11.0 (Dec 28, 2020)
 
 ### :rocket: New Feature
 
 - `viewer`
-  - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
-  - [#1921](https://github.com/wix-incubator/rich-content/pull/1921) `onViewerLoaded` callback includes `isPreview`
+  - [#1915](https://github.com/wix/ricos/pull/1915) `onViewerLoaded` callback is now added to helpers
+  - [#1921](https://github.com/wix/ricos/pull/1921) `onViewerLoaded` callback includes `isPreview`
 - `editor`
-  - [#1922](https://github.com/wix-incubator/rich-content/pull/1922) `onOpenEditorSuccess` callback is now added to helpers
-  - [#1917](https://github.com/wix-incubator/rich-content/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
+  - [#1922](https://github.com/wix/ricos/pull/1922) `onOpenEditorSuccess` callback is now added to helpers
+  - [#1917](https://github.com/wix/ricos/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
 
 ### :house: Internal
 
 - `table`
-  - [#1401](https://github.com/wix-incubator/rich-content/pull/1401) **beta** add table plugin
+  - [#1401](https://github.com/wix/ricos/pull/1401) **beta** add table plugin
 
 ## 8.10.2 (Dec 27, 2020)
 
 ### :bug: Bug Fix
 
 - `gallery`
-  - [#1908](https://github.com/wix-incubator/rich-content/pull/1908) remove option to choose videos in native selection
+  - [#1908](https://github.com/wix/ricos/pull/1908) remove option to choose videos in native selection
 
 ## 8.10.1 (Dec 22, 2020)
 
@@ -947,7 +947,7 @@
 - `editor`
   - [#1859](https://github.com/wix/ricos/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
 - `link`
-  - [#1863](https://github.com/wix-incubator/rich-content/pull/1863) fix - after adding a link the text after is not remained underlined
+  - [#1863](https://github.com/wix/ricos/pull/1863) fix - after adding a link the text after is not remained underlined
 - `emoji` - [#1864](https://github.com/wix/ricos/pull/1864) fix external toolbar popup styles
 - `giphy` - [#1864](https://github.com/wix/ricos/pull/1864) fix external toolbar popup styles
 
