@@ -10,6 +10,7 @@ export default class Rows extends PureComponent {
     super(props);
     this.rows = [props.rowNum];
   }
+
   setContainerSize = (size, index) => (this.rows[index].style.height = size);
 
   render() {
@@ -27,6 +28,7 @@ export default class Rows extends PureComponent {
       rowsHeights,
       isAllCellsSelected,
       rowsRefs,
+      rowsMaxContentHeight,
     } = this.props;
     return (
       <div style={{ display: isEditMode ? 'flex' : 'none' }} className={styles.container}>
@@ -40,7 +42,7 @@ export default class Rows extends PureComponent {
               ref={ref => (this.rows[index] = ref)}
               key={index}
               className={styles.rowContainer}
-              style={{ height: rowsHeights[index] }}
+              style={{ height: rowsHeights[index] || ROW_DEFAULT_HEIGHT }}
             >
               <DragAndDropSection
                 {...rowDragProps}
@@ -58,7 +60,7 @@ export default class Rows extends PureComponent {
                 onResizeStart={onResizeStart}
                 itemsRefs={rowsRefs}
                 setContainerSize={this.setContainerSize}
-                minSize={ROW_DEFAULT_HEIGHT}
+                minSize={Math.max(ROW_DEFAULT_HEIGHT, rowsMaxContentHeight?.[index])}
               />
             </div>
           ))}
@@ -83,4 +85,5 @@ Rows.propTypes = {
   rowsHeights: PropTypes.array,
   isAllCellsSelected: PropTypes.bool,
   rowsRefs: PropTypes.array,
+  rowsMaxContentHeight: PropTypes.array,
 };

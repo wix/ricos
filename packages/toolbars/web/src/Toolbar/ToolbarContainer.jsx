@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ToolbarContainer.scss';
@@ -13,6 +14,7 @@ class ToolbarContainer extends Component {
   componentDidMount() {
     this.setState({ toolbarPosition: this.getToolbarPosition() });
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.toolbarPosition !== this.props.toolbarPosition) {
       // eslint-disable-next-line react/no-did-update-set-state
@@ -21,6 +23,8 @@ class ToolbarContainer extends Component {
   }
 
   setToolbarContainerRef = ref => (this.toolbarContainerRef = ref);
+
+  focus = () => this.toolbarContainerRef.focus();
 
   getToolbarPosition = () => {
     const { toolbarPosition } = this.props;
@@ -48,6 +52,7 @@ class ToolbarContainer extends Component {
     const { toolbarPosition } = this.state;
     return (
       <div
+        tabIndex={0}
         ref={this.setToolbarContainerRef}
         className={styles.container}
         style={{

@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditorState } from 'draft-js';
 import { ComponentType } from 'react';
-import { ToolbarType, InsertButton, ToolbarButtonProps } from '.';
+import { ToolbarType, InsertButton, ToolbarButtonProps, TextButtonMapping } from '.';
 
 interface PlatformSettings<T> {
-  desktop: T;
-  mobile: {
-    ios: T;
-    android: T;
+  desktop?: T;
+  mobile?: {
+    ios?: T;
+    android?: T;
   };
 }
 
@@ -17,7 +17,9 @@ export interface ToolbarSettingsFunctions {
   getVisibilityFn?: () => PlatformSettings<(editorState: EditorState) => boolean>;
   getPositionOffset?: () => PlatformSettings<{ x: number; y: number }>;
   getButtons?: () => PlatformSettings<any[]>;
-  getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ComponentType }>;
+  getTextPluginButtons?: () => PlatformSettings<{
+    [key: string]: ComponentType | TextButtonMapping;
+  }>;
   getInstance?: (config: any) => any;
   getDisplayOptions?: () => PlatformSettings<any>;
   getToolbarDecorationFn?: () => PlatformSettings<any>;

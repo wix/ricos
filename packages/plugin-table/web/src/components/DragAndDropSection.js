@@ -9,12 +9,14 @@ class DragAndDropSection extends React.Component {
     super(props);
     this.state = {};
   }
+
   componentDidMount() {
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
     document.addEventListener('keydown', this.setShiftKey);
     document.addEventListener('keyup', this.removeShiftKey);
   }
+
   componentWillUnmount() {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
@@ -80,7 +82,7 @@ class DragAndDropSection extends React.Component {
       visibility: this.isActive(index) && (selectAll ? horizontal : !selectAll) && 'visible',
     };
     if (horizontal) {
-      selectPreviewStyle.height = size - 20;
+      selectPreviewStyle.height = size ? size - 20 : 0;
       this.isActive(index + 1) && (selectPreviewStyle.borderRight = 'none');
       this.isActive(index - 1) && (selectPreviewStyle.borderLeft = 'none');
     } else {

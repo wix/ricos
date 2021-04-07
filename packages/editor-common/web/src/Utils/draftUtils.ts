@@ -13,7 +13,14 @@ import {
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
+import {
+  RelValue,
+  AnchorTarget,
+  LINK_TYPE,
+  CUSTOM_LINK_TYPE,
+  TextAlignment,
+  InlineStyle,
+} from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
@@ -31,6 +38,9 @@ type CustomLinkData = any;
 
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
+
+export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) =>
+  editorState.getCurrentInlineStyle().has(inlineStyle.toUpperCase());
 
 export function createSelection({
   blockKey,
@@ -278,7 +288,10 @@ export const removeLinksInSelection = (editorState: EditorState) => {
   );
 };
 
-export const getTextAlignment = (editorState: EditorState, defaultAlignment = 'left') => {
+export const getTextAlignment = (
+  editorState: EditorState,
+  defaultAlignment = 'left'
+): TextAlignment => {
   const selection = getSelection(editorState);
   const currentContent = editorState.getCurrentContent();
   const contentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -308,12 +321,37 @@ export const getAnchorBlockData = (editorState: EditorState) => {
   return block.get('data').toJS();
 };
 
+export const blockKeyToEntityKey = (editorState: EditorState, blockKey: string) => {
+  const block = editorState.getCurrentContent().getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(0);
+  return entityKey;
+};
+
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {
   if (entityKey) {
     const contentState = editorState.getCurrentContent();
     contentState.replaceEntityData(entityKey, { ...data });
   }
   return editorState;
+};
+
+export const setBlockNewEntityData = (
+  editorState: EditorState,
+  blockKey: string,
+  data,
+  type: string
+) => {
+  const targetSelection = new SelectionState({
+    anchorKey: blockKey,
+    anchorOffset: 0,
+    focusKey: blockKey,
+    focusOffset: 1,
+  });
+  return addEntity(editorState, targetSelection, {
+    type,
+    data,
+    mutability: 'IMMUTABLE',
+  });
 };
 
 export const isAtomicBlockFocused = (editorState: EditorState) => {
@@ -397,7 +435,9 @@ export const createBlock = (editorState: EditorState, data, type: string) => {
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
   // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
   // so get the block before the space
-  const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+  const newBlock = newEditorState
+    .getCurrentContent()
+    .getBlockBefore(recentlyCreatedKey) as ContentBlock;
   const newSelection = SelectionState.createEmpty(newBlock.getKey());
   return { newBlock, newSelection, newEditorState };
 };
@@ -773,28 +813,6 @@ export function isCursorAtFirstLine(editorState: EditorState) {
 export function isCursorAtStartOfContent(editorState: EditorState) {
   const isStartOfLine = editorState.getSelection().getFocusOffset() === 0;
   return isStartOfLine && isCursorAtFirstLine(editorState);
-}
-
-export function isCursorAtLastLine(editorState: EditorState) {
-  const selection = editorState.getSelection();
-  return (
-    selection.isCollapsed() &&
-    editorState
-      .getCurrentContent()
-      .getBlockMap()
-      .last()
-      .getKey() === selection.getFocusKey()
-  );
-}
-
-export function isCursorAtEndOfContent(editorState: EditorState) {
-  const selection = editorState.getSelection();
-  const lastBlock = editorState
-    .getCurrentContent()
-    .getBlockMap()
-    .last();
-  const isEndOfLine = selection.getFocusOffset() >= lastBlock.getText().length;
-  return isEndOfLine && isCursorAtLastLine(editorState);
 }
 
 export function selectAllContent(editorState, forceSelection) {

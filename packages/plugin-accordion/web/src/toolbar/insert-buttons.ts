@@ -24,6 +24,7 @@ const createInsertButtons: CreateInsertButtons = ({
       isDisabled: () => false,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      section: 'BlockToolbar_Section_Advanced',
     },
   ];
 };

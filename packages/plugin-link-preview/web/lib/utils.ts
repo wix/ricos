@@ -1,3 +1,4 @@
+import { pickBy } from 'lodash';
 import { DEFAULTS } from '../src/defaults';
 import { LINK_PREVIEW_TYPE } from '../src/types';
 import {
@@ -9,7 +10,7 @@ import {
   SelectionState,
   EditorState,
   Modifier,
-  RichUtils,
+  ContentBlock,
 } from 'wix-rich-content-editor-common';
 import { CreatePluginConfig } from 'wix-rich-content-common';
 
@@ -17,9 +18,13 @@ const addLinkPreview = async (
   editorState: EditorState,
   config: CreatePluginConfig,
   blockKey: string,
-  url: string
+  linkData: {
+    url: string;
+    target?: string;
+    rel?: string;
+  }
 ) => {
-  const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
+  const fixedUrl = linkData.url.split('\u21b5').join(''); //remove {enter} char
   const settings = config[LINK_PREVIEW_TYPE] || {};
   const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
   const { setEditorState } = config;
@@ -34,7 +39,7 @@ const addLinkPreview = async (
     const data = {
       config: {
         ...currentConfig,
-        link: { url: fixedUrl, ...currentConfig.link },
+        link: { ...currentConfig.link, ...pickBy(linkData), url: fixedUrl },
         width: html && 350,
       },
       thumbnail_url,
@@ -44,7 +49,7 @@ const addLinkPreview = async (
       provider_url,
     };
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
-    setEditorState(RichUtils.insertSoftNewline(newEditorState));
+    setEditorState(newEditorState);
   }
 };
 
@@ -93,7 +98,7 @@ export const convertLinkPreviewToLink = (editorState: EditorState) => {
   );
   // reread block after insertText
   currentBlock = contentState.getBlockForKey(currentBlock.getKey());
-  const nextBlock = contentState.getBlockAfter(currentBlock.getKey());
+  const nextBlock = contentState.getBlockAfter(currentBlock.getKey()) as ContentBlock;
   newState = EditorState.push(newState, contentState, 'change-block-type');
 
   const editorStateWithLink = changePlainTextUrlToLinkUrl(newState, blockKey, url);

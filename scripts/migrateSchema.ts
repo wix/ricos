@@ -1,20 +1,19 @@
 /* eslint-disable no-console */
-import { writeFileSync, existsSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from 'path';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
-import { RicosContent } from 'ricos-schema';
-import { RicosContent as RicosDraftContent } from 'wix-rich-content-common';
+import { RichContent } from 'ricos-schema';
+import { DraftContent } from 'ricos-content';
 import { compare } from 'ricos-content/libs/comparision';
-import { cloneDeep } from 'lodash';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
 const MIGRATED_FIXTURES_PATH =
-  '../packages/ricos-content/web/src/migrateSchema/fromDraft/migratedFixtures';
+  '../packages/ricos-content/web/src/converters/draft/fromDraft/migratedFixtures';
 const REVERSE_MIGRATED_FIXTURES_PATH =
-  '../packages/ricos-content/web/src/migrateSchema/toDraft/reverseMigratedFixtures';
+  '../packages/ricos-content/web/src/converters/draft/toDraft/reverseMigratedFixtures';
 
 const filename = process.argv[2];
 
-const convertDraftFile = (filename: string): RicosContent => {
+const convertDraftFile = (filename: string): RichContent => {
   const filepath = path.resolve(
     __dirname,
     `${FIXTURES_PATH}/${filename.replace('.json', '')}.json`
@@ -29,7 +28,7 @@ const convertDraftFile = (filename: string): RicosContent => {
   return ricosSchema;
 };
 
-const convertRicosFile = (filename: string): RicosDraftContent => {
+const convertRicosFile = (filename: string): DraftContent => {
   const filepath = path.resolve(
     __dirname,
     `${MIGRATED_FIXTURES_PATH}/${filename.replace('.json', '')}.json`
@@ -45,12 +44,16 @@ const convertRicosFile = (filename: string): RicosDraftContent => {
 };
 
 if (filename) {
-  const originalFixture = cloneDeep(
-    require(path.resolve(__dirname, `${FIXTURES_PATH}/${filename.replace('.json', '')}.json`))
-  );
+  const originalFixture = require(path.resolve(
+    __dirname,
+    `${FIXTURES_PATH}/${filename.replace('.json', '')}.json`
+  ));
   const ricosSchema = convertDraftFile(filename);
   writeFileSync(`${MIGRATED_FIXTURES_PATH}/${filename}.json`, JSON.stringify(ricosSchema, null, 2));
   const draftData = convertRicosFile(filename);
+  if (!existsSync(REVERSE_MIGRATED_FIXTURES_PATH)) {
+    mkdirSync(REVERSE_MIGRATED_FIXTURES_PATH);
+  }
   writeFileSync(
     `${REVERSE_MIGRATED_FIXTURES_PATH}/${filename}.json`,
     JSON.stringify(draftData, null, 2)

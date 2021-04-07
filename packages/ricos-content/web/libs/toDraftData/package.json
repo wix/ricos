@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/toDraftData.cjs.js",
+    "module": "../../dist/lib/toDraftData.js",
+    "types": "../../dist/lib/toDraftData.d.ts"
+}

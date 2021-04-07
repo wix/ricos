@@ -1,4 +1,4 @@
-import createViewerBundle from './RichContentViewerWrapper';
-import { createHeadersMarkdownDecorator } from 'wix-rich-content-plugin-headers-markdown/viewer';
+import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(createHeadersMarkdownDecorator);
+export default () => createViewerBundle(pluginHeadersMarkdown());

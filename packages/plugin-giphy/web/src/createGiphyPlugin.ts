@@ -26,4 +26,6 @@ const createGiphyPlugin: CreatePluginFunction<GiphyPluginEditorConfig> = config 
   });
 };
 
+createGiphyPlugin.functionName = GIPHY_TYPE;
+
 export { createGiphyPlugin };

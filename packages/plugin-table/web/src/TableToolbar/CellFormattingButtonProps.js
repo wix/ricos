@@ -12,7 +12,7 @@ import {
 } from '../icons';
 
 const DEFAULT_PALETTE_BG = Object.freeze([
-  'transparent',
+  '#ff0000',
   '#ffffff',
   '#303030',
   '#3a54b4',
@@ -32,13 +32,15 @@ const DEFAULT_BORDER_COLOR = 'unset';
 
 const getColorsFromComponentData = (selected, table) => {
   const selectionStyle = table.getSelectionStyle(selected, DEFAULT_BG_COLOR, DEFAULT_BORDER_COLOR);
-  const bgColor = selectionStyle.selectionBGColor;
-  const borderColor = selectionStyle.selectionBorderColor;
+  const bgColor = selectionStyle.selectionBGColor || 'unset';
+  const borderColor = selectionStyle.selectionBorderColor || 'unset';
   const verticalAlignment = selectionStyle.selectionVerticalAlign;
+  const cellBorderIsActive = selectionStyle.selectionBorderIsActive;
   return {
     bgCurrentColor: bgColor,
     borderCurrentColor: borderColor,
     verticalAlignment,
+    cellBorderIsActive,
   };
 };
 
@@ -89,15 +91,15 @@ const getHeaderButtons = (selectedRows, selectedCols, table, t) => {
   return [];
 };
 
-const getBorderColorButtons = (selected, settings, table, multipleCellsSelected) => {
+const getBorderColorButtons = (selected, settings, table, multipleCellsSelected, t) => {
   if (multipleCellsSelected) {
     return [
       {
         type: 'nested-menu',
+        tooltip: t('TablePlugin_Toolbar_BorderColor_Tooltip'),
         dataHook: 'border-color-buttons',
         getIcon: () => BorderIcon,
-        isActive: () =>
-          getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
+        isActive: () => getColorsFromComponentData(selected, table).cellBorderIsActive,
         buttonList: [
           {
             dataHook: 'border-color-around',
@@ -111,10 +113,8 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             getIcon: () => BorderOutsideIcon,
             isDisabled: () => {},
             getLabel: () => {},
-            isActive: () =>
-              getColorsFromComponentData(selected, table).borderCurrentColor !==
-              DEFAULT_BORDER_COLOR,
-            onResetColor: () => table.removeCellBorders(getRange(selected)),
+            isActive: () => false,
+            onResetColor: () => table.removeBorderAround(selected),
             type: 'color-picker',
           },
           {
@@ -129,10 +129,8 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
             getIcon: () => BorderIcon,
             isDisabled: () => {},
             getLabel: () => {},
-            isActive: () =>
-              getColorsFromComponentData(selected, table).borderCurrentColor !==
-              DEFAULT_BORDER_COLOR,
-            onResetColor: () => table.removeCellBorders(getRange(selected)),
+            isActive: () => false,
+            onResetColor: () => table.removeAllBorders(getRange(selected)),
             type: 'color-picker',
           },
         ],
@@ -141,6 +139,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
   } else {
     return [
       {
+        tooltip: t('TablePlugin_Toolbar_BorderColor_Tooltip'),
         dataHook: 'border-color-around',
         getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
         onColorAdded: color => settings?.onBorderColorAdded?.(color),
@@ -152,9 +151,8 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
         getIcon: () => BorderIcon,
         isDisabled: () => {},
         getLabel: () => {},
-        isActive: () =>
-          getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
-        onResetColor: () => table.removeCellBorders(getRange(selected)),
+        isActive: () => getColorsFromComponentData(selected, table).cellBorderIsActive,
+        onResetColor: () => table.removeAllBorders(getRange(selected)),
         type: 'color-picker',
       },
     ];
@@ -242,7 +240,7 @@ export const getCellFormattingButtonsProps = (
     {
       type: 'SEPARATOR',
     },
-    ...getBorderColorButtons(selected, settings, table, multipleCellsSelected),
+    ...getBorderColorButtons(selected, settings, table, multipleCellsSelected, t),
     ...getHeaderButtons(selectedRows, selectedCols, table, t),
     ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock, t),
   ];

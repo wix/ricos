@@ -32,4 +32,6 @@ const createDividerPlugin: CreatePluginFunction<DividerPluginEditorConfig> = con
   });
 };
 
+createDividerPlugin.functionName = DIVIDER_TYPE;
+
 export { createDividerPlugin, DIVIDER_TYPE };

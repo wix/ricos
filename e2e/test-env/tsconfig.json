@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "es6",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "lib": ["dom", "ESNext"],
+    "rootDirs": [".", "../../examples/main"]
+  },
+  "files": ["../../external-types.d.ts"],
+  "include": ["src"]
+}

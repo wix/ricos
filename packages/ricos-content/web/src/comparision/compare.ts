@@ -3,19 +3,25 @@
 
 import { transform, isEqualWith, isEqual, isObject, omit } from 'lodash';
 
-const IGNORED_KEYS = ['lastEdited', 'key'];
+const IGNORED_KEYS = ['updatedDate'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
 
 /**
  * Deep diff between two object, using lodash
- * @param  {RicosContent} object Object compared
- * @param  {RicosContent} base   Object to compare with
- * @return {RicosContent}        Return a new object who represent the diff
+ * @param object Object compared
+ * @param base   Object to compare with
+ * @return       Return a new object who represent the diff
  */
-export function compare(object, base, options: { verbose?: boolean } = {}) {
-  const { verbose } = options;
+export function compare(object, base, options: { verbose?: boolean; ignoredKeys?: string[] } = {}) {
+  const { verbose, ignoredKeys } = options;
+  const allIgnoredKeys = [...IGNORED_KEYS, ...(ignoredKeys || [])];
+  const comparator = getComparator(allIgnoredKeys);
   object.blocks && removeEmoji(object);
   base.blocks && removeEmoji(base);
+
+  // Ignore ignoredKeys in object top level
+  const objectWithoutIgnored = omit(object, allIgnoredKeys);
+  const basetWithoutIgnored = omit(base, allIgnoredKeys);
 
   function changes(object, base) {
     return transform<any, any>(object, (result, value, key) => {
@@ -29,7 +35,7 @@ export function compare(object, base, options: { verbose?: boolean } = {}) {
             {
               [key]: {
                 from: baseValue,
-                to: currentValue,
+                to: value,
               },
             },
             { depth: null }
@@ -39,11 +45,11 @@ export function compare(object, base, options: { verbose?: boolean } = {}) {
     });
   }
 
-  return changes(object, base);
+  return changes(objectWithoutIgnored, basetWithoutIgnored);
 }
 
-const comparator = (left, right, key) => {
-  if (IGNORED_KEYS.includes(key)) {
+const getComparator = (ignoredKeys: string[]) => (left, right, key) => {
+  if (ignoredKeys.includes(key)) {
     return true;
   }
   if (left?.enableVoteRole !== undefined || right?.enableVoteRole !== undefined) {

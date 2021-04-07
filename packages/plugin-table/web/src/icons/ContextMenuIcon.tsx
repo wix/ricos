@@ -8,10 +8,8 @@ const ContextMenuIcon = props => (
     viewBox="0 0 20 20"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    xmlnXxlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <title>context menu icon</title>
     <g id="context-menu-icon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g
         id="01-Foundation-/-Icon-Medium-24-(Default)-/-01-Actions-/-09-More-Copy-4"

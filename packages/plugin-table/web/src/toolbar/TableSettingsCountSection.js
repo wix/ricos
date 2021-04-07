@@ -6,14 +6,17 @@ import { TextInput } from 'wix-rich-content-plugin-commons';
 export default class TableSettingsCountSection extends Component {
   onChange = count => this.props.onCountChange(count);
 
-  setInputRef = ref => (this.input = ref);
+  setInputRef = ref => {
+    this.input = ref;
+    this.props.setInputRef?.(ref);
+  };
 
   componentDidMount() {
     this.input.setSelectionRange(0, this.input.value.length);
   }
 
   render() {
-    const { title, theme, input = '', submittedInvalidInput, errorMessage, dataHook } = this.props;
+    const { title, theme, input = '', error, dataHook, showErrorIcon } = this.props;
     return (
       <div className={styles.container}>
         {title}
@@ -21,10 +24,11 @@ export default class TableSettingsCountSection extends Component {
           inputRef={this.setInputRef}
           onChange={this.onChange}
           value={input}
-          error={submittedInvalidInput && errorMessage}
+          error={error}
           theme={theme}
           autoComplete="off"
           dataHook={dataHook}
+          showErrorIcon={showErrorIcon}
         />
       </div>
     );
@@ -36,7 +40,8 @@ TableSettingsCountSection.propTypes = {
   theme: PropTypes.any.isRequired,
   onCountChange: PropTypes.func.isRequired,
   input: PropTypes.string,
-  submittedInvalidInput: PropTypes.bool,
-  errorMessage: PropTypes.string,
+  error: PropTypes.string,
   dataHook: PropTypes.string,
+  showErrorIcon: PropTypes.bool,
+  setInputRef: PropTypes.func,
 };
