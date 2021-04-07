@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.29.3 (April 7, 2021)
+
 ### :rocket: New Feature
 
 - `editor`
@@ -28,9 +33,6 @@
   - [#1882](https://github.com/wix/ricos/pull/1882) fix buttons bg color issue with mobile "false hover"
 - `common`
   - [#2344](https://github.com/wix/ricos/pull/2344) fix tooltip z-index for media settings modal
-
-</details>
-<hr/>
 
 ## 8.29.2 (April 6, 2021)
 
