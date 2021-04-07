@@ -8,8 +8,10 @@ import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/viewer';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/viewer';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/viewer';
+import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 
-const typeMappers = [imageTypeMapper, galleryTypeMapper, videoTypeMapper];
+const typeMappers = [imageTypeMapper, galleryTypeMapper, videoTypeMapper, soundCloudTypeMapper];
 
 export default () => {
   return <RichContentViewer typeMappers={typeMappers} />;

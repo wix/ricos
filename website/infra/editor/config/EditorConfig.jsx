@@ -11,7 +11,7 @@ import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
 import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { createVideoPlugin, VIDEO_TYPE, videoButtonsTypes } from 'wix-rich-content-plugin-video';
+import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { createUnsupportedBlocksPlugin } from 'wix-rich-content-plugin-unsupported-blocks';
@@ -26,6 +26,7 @@ import {
   EXTERNAL_MENTIONS_TYPE,
 } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
+import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import {
   createHeadersMarkdownPlugin,
@@ -66,6 +67,7 @@ import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
@@ -98,6 +100,7 @@ export const editorPluginsPartialPreset = [
   createHashtagPlugin,
   createExternalMentionsPlugin,
   createCodeBlockPlugin,
+  createSoundCloudPlugin,
   createGiphyPlugin,
   createHeadersMarkdownPlugin,
   createMapPlugin,
@@ -136,6 +139,7 @@ export const editorPluginsMap = {
   hashtag: createHashtagPlugin,
   mentions: createExternalMentionsPlugin,
   codeBlock: createCodeBlockPlugin,
+  soundCloud: createSoundCloudPlugin,
   giphy: createGiphyPlugin,
   headers: createHeadersMarkdownPlugin,
   map: createMapPlugin,
@@ -451,6 +455,13 @@ const config = {
     // },
     onClick: (event, url) => console.log('link clicked!', url),
   },
+  [SOUND_CLOUD_TYPE]: {
+    // toolbar: {
+    //   icons: {
+    //     InsertPluginButtonIcon: MyCustomIcon,
+    //   },
+    // },
+  },
   [CODE_BLOCK_TYPE]: {
     // toolbar: {
     //   icons: {
@@ -491,7 +502,6 @@ const config = {
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-    exposeButtons: [videoButtonsTypes.video, videoButtonsTypes.soundCloud],
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',

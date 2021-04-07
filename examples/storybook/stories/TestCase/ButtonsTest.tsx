@@ -14,6 +14,7 @@ import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions';
+import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
@@ -39,6 +40,7 @@ const plugins = [
   pluginLineSpacing(),
   pluginLink(),
   pluginMentions(),
+  pluginSoundCloud(),
   pluginVideo(),
   pluginUndoRedo(),
   pluginEmoji(),
