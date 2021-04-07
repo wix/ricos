@@ -18,7 +18,7 @@
   </summary>
   
   - `general`
-    - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolvbar 
+    - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolbar 
 
 </details>
 <hr/>
