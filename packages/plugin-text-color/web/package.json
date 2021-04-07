@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "react-modal": "~3.4.1",
+    "react-click-outsider": "1.1.1",
     "wix-rich-content-common": "8.29.3",
     "wix-rich-content-editor-common": "8.29.3",
     "wix-rich-content-plugin-commons": "8.29.3"
