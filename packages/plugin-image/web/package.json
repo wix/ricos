@@ -39,7 +39,8 @@
     "ricos-content": "8.29.2",
     "wix-rich-content-common": "8.29.2",
     "wix-rich-content-editor-common": "8.29.2",
-    "wix-rich-content-plugin-commons": "8.29.2"
+    "wix-rich-content-plugin-commons": "8.29.2",
+    "@loadable/component": "^5.14.1"
   },
   "unpkg": true,
   "publishConfig": {
