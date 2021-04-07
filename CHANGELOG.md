@@ -20,7 +20,7 @@
 ### :rocket: New Feature
 
 - `editor`
-  - [#2350](https://github.com/wix/ricos/pull/2350) Paste & drop files support
+  - [#2350](https://github.com/wix/ricos/pull/2350) Paste & drop images support
 
 ### :bug: Bug Fix
 
