@@ -81,7 +81,7 @@ export default class LineSpacingButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar } = this.props;
+    const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar, getModalContainer } = this.props;
     const { isPanelOpen, spacing, panelTop, panelLeft } = this.state;
     const { styles } = this;
     const icon = toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon;
@@ -113,7 +113,7 @@ export default class LineSpacingButton extends Component {
           overlayClassName={classNames(styles.lineSpacingModalOverlay, {
             [styles.lineSpacingModalOverlay_mobile]: isMobile,
           })}
-          parentSelector={LineSpacingButton.getModalParent}
+          parentSelector={getModalContainer}
           style={{
             content: modalStyle,
           }}
@@ -151,9 +151,11 @@ LineSpacingButton.propTypes = {
   settings: PropTypes.object,
   keyName: PropTypes.string,
   toolbar: PropTypes.object,
+  getModalContainer: PropTypes.func,
 };
 
 LineSpacingButton.defaultProps = {
   setKeepOpen: () => {},
   onUpdate: () => {},
+  getModalContainer: LineSpacingButton.getModalParent,
 };

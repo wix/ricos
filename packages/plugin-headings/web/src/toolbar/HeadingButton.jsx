@@ -87,7 +87,15 @@ export default class HeadingButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, customHeadings } = this.props;
+    const {
+      theme,
+      isMobile,
+      t,
+      tabIndex,
+      customHeadings,
+      getModalContainer,
+      getToolbarRef,
+    } = this.props;
     const tooltipText = t('FormattingToolbar_TextStyleButton_Tooltip');
     const dataHookText = 'headingsDropdownButton';
     const { isPanelOpen, panelTop, panelLeft, currentHeading } = this.state;
@@ -112,31 +120,33 @@ export default class HeadingButton extends Component {
         showArrowIcon
         ref={ref => (this.buttonRef = ref)}
       >
-        <Modal
-          isOpen={isPanelOpen}
-          onRequestClose={() => this.save()}
-          className={classNames(styles.headingsModal, {
-            [styles.headingsModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames(styles.headingsModalOverlay, {
-            [styles.headingsModalOverlay_mobile]: isMobile,
-          })}
-          parentSelector={HeadingButton.getModalParent}
-          style={{
-            content: modalStyle,
-          }}
-          ariaHideApp={false}
-        >
-          <HeadingsDropDownPanel
-            customHeadingsOptions={customHeadings}
-            heading={currentHeading}
-            onSave={this.save}
-            isMobile={isMobile}
-            theme={theme}
-            translateHeading={this.translateHeading}
-            {...this.props}
-          />
-        </Modal>
+        {isPanelOpen && (
+          <Modal
+            isOpen={isPanelOpen}
+            onRequestClose={() => this.save()}
+            className={classNames(styles.headingsModal, {
+              [styles.headingsModal_mobile]: isMobile,
+            })}
+            overlayClassName={classNames(styles.headingsModalOverlay, {
+              [styles.headingsModalOverlay_mobile]: isMobile,
+            })}
+            parentSelector={getModalContainer || getToolbarRef || HeadingButton.getModalParent}
+            style={{
+              content: modalStyle,
+            }}
+            ariaHideApp={false}
+          >
+            <HeadingsDropDownPanel
+              customHeadingsOptions={customHeadings}
+              heading={currentHeading}
+              onSave={this.save}
+              isMobile={isMobile}
+              theme={theme}
+              translateHeading={this.translateHeading}
+              {...this.props}
+            />
+          </Modal>
+        )}
       </InlineToolbarButton>
     );
   }
@@ -152,6 +162,11 @@ HeadingButton.propTypes = {
   tabIndex: PropTypes.number,
   setKeepOpen: PropTypes.func,
   customHeadings: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  getModalContainer: PropTypes.func,
+  getToolbarRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.func }),
+  ]),
 };
 
 HeadingButton.defaultProps = {
