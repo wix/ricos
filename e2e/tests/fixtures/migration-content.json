@@ -406,33 +406,7 @@
       "data": {}
     },
     {
-      "key": "8fffe",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
-    },
-    {
-      "key": "1uco7",
-      "text": " ",
-      "type": "atomic",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 16
-        }
-      ],
-      "data": {}
-    },
-    {
-      "key": "akn59",
+      "key": "27jni",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -452,7 +426,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 17
+          "key": 16
         }
       ],
       "data": {}
@@ -478,7 +452,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 18
+          "key": 17
         }
       ],
       "data": {}
@@ -759,7 +733,7 @@
         {
           "offset": 99,
           "length": 7,
-          "key": 19
+          "key": 18
         }
       ],
       "data": {
@@ -792,7 +766,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 20
+          "key": 19
         }
       ],
       "data": {}
@@ -1156,33 +1130,6 @@
       }
     },
     "16": {
-      "type": "wix-draft-plugin-sound-cloud",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "size": "content",
-          "alignment": "center"
-        },
-        "src": "https://soundcloud.com/cagdasdemirbilek/narcos-tuyo-rodrigo-amarante",
-        "metadata": {
-          "height": 270,
-          "author_name": "Wix.com",
-          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
-          "thumbnail_width": 480,
-          "type": "video",
-          "version": "1.0",
-          "thumbnail_height": 360,
-          "provider_url": "https://www.youtube.com/",
-          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
-          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
-          "author_url": "https://www.youtube.com/user/Wix",
-          "provider_name": "YouTube",
-          "width": 480,
-          "video_url": "https://youtu.be/BBu5codsO6Y"
-        }
-      }
-    },
-    "17": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1201,7 +1148,7 @@
         "provider_url": "www.mockUrl.com"
       }
     },
-    "18": {
+    "17": {
       "type": "wix-draft-plugin-poll",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1309,14 +1256,14 @@
         "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
       }
     },
-    "19": {
+    "18": {
       "type": "EMOJI_TYPE",
       "mutability": "IMMUTABLE",
       "data": {
         "emojiUnicode": "👨‍👩‍👦‍👦"
       }
     },
-    "20": {
+    "19": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1337,5 +1284,5 @@
       }
     }
   },
-  "VERSION": "8.11.4"
+  "VERSION": "8.27.1"
 }

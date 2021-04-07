@@ -46,8 +46,6 @@ class ContentStateBuilder {
 
   gallery!: PluginBuildMethod;
 
-  soundCloud!: PluginBuildMethod;
-
   giphy!: PluginBuildMethod;
 
   map!: PluginBuildMethod;

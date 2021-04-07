@@ -12,7 +12,6 @@ import {
   LINK_PREVIEW_TYPE,
   MENTION_TYPE,
   POLL_TYPE,
-  SOUND_CLOUD_TYPE,
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
 } from '../../../consts';
@@ -30,7 +29,6 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     [HTML_TYPE]: convertHtmlData,
     [GIPHY_TYPE]: convertGiphyData,
     [LINK_PREVIEW_TYPE]: convertLinkPreviewData,
-    [SOUND_CLOUD_TYPE]: convertSoundCloudData,
     [MENTION_TYPE]: convertMention,
   };
   if (blockType in conversionFunctions) {
@@ -109,12 +107,6 @@ const convertGiphyData = data => {
 const convertLinkPreviewData = data => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
   has(data, 'provider_url') && (data.providerUrl = data.provider_url);
-};
-
-const convertSoundCloudData = data => {
-  if (data.metadata) {
-    data.metadata = keysToCamelCase(data.metadata);
-  }
 };
 
 const convertMention = data => {
