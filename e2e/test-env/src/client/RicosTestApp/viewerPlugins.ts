@@ -28,7 +28,7 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
 import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
-import { pluginPoll } from 'wix-rich-content-plugin-social-polls/dist/module.viewer';
+import { pluginPoll } from 'wix-rich-content-plugin-social-polls/viewer';
 import { pluginTable } from 'wix-rich-content-plugin-table/viewer';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
