@@ -16,6 +16,9 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+  - `general`
+    - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolvbar 
 
 </details>
 <hr/>
