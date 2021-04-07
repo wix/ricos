@@ -19,10 +19,11 @@ const createYourPluginNamePlugin: CreatePluginFunction<YourPluginNamePluginEdito
     settings,
     t,
     isMobile,
-    disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
     ...rest,
   });
 };
+
+createYourPluginNamePlugin.functionName = YOUR_PLUGIN_NAME_TYPE;
 
 export { createYourPluginNamePlugin };

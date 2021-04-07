@@ -5,7 +5,9 @@ export type OnVisibilityChanged = (sectionName: string, isVisible: boolean) => v
 export interface SectionSettings {
   name: string;
   active?: any;
-  action: (item?: any) => void;
+  getActive?: any;
+  itemsType?: string;
+  action: (item?: any, value?: any) => void;
   items?: string[];
 }
 
@@ -36,6 +38,8 @@ export interface TestAppConfig {
     skipCssOverride?: boolean;
     useCustomStyles?: boolean;
     fallbackColor?: string;
+    disableContainer?: boolean;
+    contentBgColor?: boolean;
   };
   showDefaultPreview?: boolean;
   isNativeUpload?: boolean;

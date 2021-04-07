@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-import "../common.proto";
-
-message RicosAnchor {
-    string anchor = 1 [required = true];
-}

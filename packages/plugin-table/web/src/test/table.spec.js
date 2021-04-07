@@ -1,6 +1,5 @@
 import Table from '../domain/table';
 import { getMockComponentData } from './TestData/cell-content-state';
-import { EditorState } from 'wix-rich-content-editor-common';
 import { convertTableConfigToRaw } from 'wix-rich-content-editor';
 
 const removeBlockKey = config => {
@@ -16,7 +15,11 @@ describe('Test Table domain functions', () => {
   let componentData, table;
   beforeEach(() => {
     componentData = getMockComponentData();
-    table = new Table(componentData, () => {});
+    table = new Table(
+      componentData,
+      () => {},
+      () => {}
+    );
   });
   afterEach(() => {
     expect(removeBlockKey(convertTableConfigToRaw(componentData.config))).toMatchSnapshot();
@@ -40,11 +43,8 @@ describe('Test Table domain functions', () => {
       1
     );
   });
-  it('Test clearRange function', () => {
-    table.clearRange([{ i: 0, j: 0 }]);
-  });
-  it('Test updateCellContent function', () => {
-    table.updateCellContent(0, 0, EditorState.createEmpty());
+  it('Test clearCells function', () => {
+    table.clearCells([{ i: 0, j: 0 }]);
   });
   it('Test setCellsStyle function', () => {
     table.setCellsStyle({ backgroundColor: '#3a54b4' }, [{ i: 0, j: 0 }]);
@@ -53,7 +53,7 @@ describe('Test Table domain functions', () => {
     table.setColumnWidth([{ i: 0, j: 0 }], 96);
   });
   it('Test setRowHeight function', () => {
-    table.setRowHeight([{ i: 0, j: 0 }], 122);
+    table.setRowHeight([0], 122);
   });
   it('Test distributeColumns function', () => {
     table.distributeColumns([0, 1], 122);

@@ -12,24 +12,57 @@ const initConfig = {
   contentInteractionMappers: [interactionMap],
   transformation: defaultTransformation,
 };
+
+/*
+  isViewer,
+  isPreviewExpanded,
+  onPreviewExpand,
+  previewConfig,
+  content,
+  experiments,
+
+ * */
+
 const previewConfig = createPreview(initConfig) as PreviewConfig;
 describe('Preview Strategy', () => {
   describe('Required Props', () => {
     it('isViewer', () => {
-      const strategy = runStrategy(false, false, () => true, previewConfig, intro);
+      const strategy = runStrategy({
+        isViewer: false,
+        isPreviewExpanded: false,
+        onPreviewExpand: () => true,
+        previewConfig,
+        content: intro,
+      });
       expect(strategy).toEqual({});
     });
     it('content', () => {
-      const strategy = runStrategy(true, false, () => true, previewConfig, undefined);
+      const strategy = runStrategy({
+        isViewer: true,
+        isPreviewExpanded: false,
+        onPreviewExpand: () => true,
+        previewConfig,
+      });
       expect(strategy).toEqual({});
     });
     it('preview', () => {
-      const strategy = runStrategy(true, false, () => true, undefined, intro);
+      const strategy = runStrategy({
+        isViewer: true,
+        isPreviewExpanded: false,
+        onPreviewExpand: () => true,
+        content: intro,
+      });
       expect(strategy).toEqual({});
     });
   });
 
-  const strategy = runStrategy(true, false, () => true, previewConfig, intro);
+  const strategy = runStrategy({
+    isViewer: true,
+    isPreviewExpanded: false,
+    onPreviewExpand: () => true,
+    previewConfig,
+    content: intro,
+  });
   it('should create a different initialState (very-big-post.json)', () => {
     expect(strategy).toHaveProperty('initialState');
     expect(strategy.initialState).not.toStrictEqual(intro);

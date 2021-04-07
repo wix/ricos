@@ -6,7 +6,7 @@
 		"examples/storybook",
 		"packages/!(template-*)/web",
 		"bundle-analyzer",
-		"docs"
+		"website"
 	],
 	"resolutions": {
 		"rollup": "1.31.1",
@@ -39,8 +39,8 @@
 		"preRelease": "node scripts/preRelease",
 		"storybook": "npm run start --prefix examples/storybook",
 		"exampleApp": "npm run start --prefix examples/main",
-		"docs": "npm run start --prefix docs",
-		"docs:deploy": "npm run deploy --prefix docs",
+		"docs": "npm run start --prefix website",
+		"docs:deploy": "npm run deploy --prefix website",
 		"saveBundlesSizesBaseline": "npm run build && npm run save --prefix bundle-analyzer",
 		"analyzeBundles": "npm run build && npm run analyzeBundles:nobuild --silent",
 		"analyzeBundles:nobuild": "npm run analyzeAndCompare --prefix bundle-analyzer --silent",
@@ -101,6 +101,7 @@
 		"@types/i18next": "11.9.0",
 		"@types/jest": "^25.2.1",
 		"@types/lodash": "^4.14.149",
+		"@types/parse5": "^6.0.0",
 		"@types/postcss-url": "^8.0.1",
 		"@types/prismjs": "^1.16.1",
 		"@types/prop-types": "^15.7.3",
@@ -160,7 +161,6 @@
 		"postcss-url": "^7.3.2",
 		"prompts": "^2.0.1",
 		"prop-types": "^15.6.2",
-		"protobufjs": "mharsat/protobuf.js",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-svg-loader": "^3.0.3",
@@ -184,6 +184,7 @@
 		"terser-webpack-plugin": "^4.1.0",
 		"ts-jest": "^26.4.4",
 		"ts-node": "^9.0.0",
+		"ts-proto": "1.72.0",
 		"typescript": "^3.8.3",
 		"url-loader": "^4.1.0",
 		"wait-on": "^4.0.2",

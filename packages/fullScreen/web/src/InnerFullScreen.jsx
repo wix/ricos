@@ -14,6 +14,7 @@ export default class InnerFullscreen extends Component {
     super(props);
     this.state = { isInFullscreen: false };
     this.getItems();
+    this.containerRef = React.createRef();
   }
 
   static defaultProps = {
@@ -25,6 +26,7 @@ export default class InnerFullscreen extends Component {
     document.addEventListener('keydown', this.onEsc);
     window.addEventListener('resize', this.onWindowResize);
     this.addFullscreenChangeListener();
+    this.setState({ size: this.getDimensions() });
   }
 
   componentWillUnmount() {
@@ -52,7 +54,7 @@ export default class InnerFullscreen extends Component {
     }
   };
 
-  onWindowResize = () => this.forceUpdate();
+  onWindowResize = () => this.setState({ size: this.getDimensions() });
 
   onFullscreenChange = () => this.setState({ isInFullscreen: !!fscreen.fullscreenElement });
 
@@ -69,12 +71,12 @@ export default class InnerFullscreen extends Component {
     }
   };
 
-  getStyleParams = isHorizontalMobile => {
+  getStyleParams = isHorizontalView => {
     const { isInFullscreen } = this.state;
     let arrowsPosition = 0;
     let slideshowInfoSize = 0;
     if (this.props.isMobile) {
-      slideshowInfoSize = isHorizontalMobile ? 0 : 154;
+      slideshowInfoSize = isHorizontalView ? 0 : 40;
     } else if (!isInFullscreen) {
       arrowsPosition = 1;
       slideshowInfoSize = 142;
@@ -166,48 +168,58 @@ export default class InnerFullscreen extends Component {
 
   customArrowRenderer = direction => this.arrowRenderers[direction];
 
+  getDimensions = () => {
+    const { isMobile } = this.props;
+    const { isInFullscreen } = this.state;
+    const container = this.containerRef.current?.getBoundingClientRect?.();
+    let { width, height } = container;
+    const isHorizontalMobile = isMobile && width > height;
+    width = isInFullscreen || isMobile ? width : width - 18;
+    height = isInFullscreen || isHorizontalMobile ? height : isMobile ? height - 40 : height - 70;
+    return { width, height };
+  };
+
   render() {
     const { backgroundColor, topMargin, isMobile, index } = this.props;
-    const { isInFullscreen } = this.state;
-    const isHorizontalMobile = isMobile && window.innerWidth > window.screen.height;
-    const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalMobile);
-    const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
-    const height = isInFullscreen ? window.screen.height : window.innerHeight;
+    const { isInFullscreen, size } = this.state;
+    const isHorizontalView = size?.width > size?.height;
+    const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalView);
 
     return (
       <div
         style={{ background: backgroundColor, ...topMargin }}
         dir="ltr"
         data-hook={'fullscreen-root'}
-        className={
-          isInFullscreen || isHorizontalMobile ? styles.fullscreen_mode : styles.expand_mode
-        }
+        className={isInFullscreen || isMobile ? styles.fullscreen_mode : styles.expand_mode}
+        ref={this.containerRef}
       >
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
-        <ProGallery
-          items={this.items}
-          currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
-          eventsListener={this.handleGalleryEvents}
-          resizeMediaUrl={fullscreenResizeMediaUrl}
-          container={{ width, height }}
-          styles={{
-            ...layouts[5],
-            galleryLayout: 5,
-            cubeType: 'fit',
-            scrollSnap: true,
-            videoPlay: 'auto',
-            allowSocial: false,
-            loveButton: false,
-            allowTitle: true,
-            defaultShowInfoExpand: 1,
-            showArrows: !isMobile,
-            arrowsPosition,
-            slideshowInfoSize,
-          }}
-          customSlideshowInfoRenderer={this.infoElement}
-          customNavArrowsRenderer={this.customArrowRenderer}
-        />
+        {size && (
+          <ProGallery
+            items={this.items}
+            currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
+            eventsListener={this.handleGalleryEvents}
+            resizeMediaUrl={fullscreenResizeMediaUrl}
+            container={size}
+            styles={{
+              ...layouts[5],
+              galleryLayout: 5,
+              cubeType: 'fit',
+              scrollSnap: true,
+              videoPlay: 'auto',
+              allowSocial: false,
+              loveButton: false,
+              allowTitle: true,
+              defaultShowInfoExpand: 1,
+              showArrows: !isMobile,
+              arrowsPosition,
+              slideshowInfoSize,
+            }}
+            customSlideshowInfoRenderer={this.infoElement}
+            customNavArrowsRenderer={this.customArrowRenderer}
+          />
+        )}
       </div>
     );
   }

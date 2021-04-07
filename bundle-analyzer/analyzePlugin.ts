@@ -24,6 +24,7 @@ if (!pluginName) {
       } else {
         console.log(chalk.green(pluginName, `analyzed`)); //eslint-disable-line
       }
+      setTimeout(() => process.exit(0), 2000);
     }
   );
 }

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
@@ -16,7 +16,7 @@ const plugins = [
   }),
 ];
 
-const TableEditor: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const TableEditor: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosEditor plugins={plugins} content={content} />
 );
 

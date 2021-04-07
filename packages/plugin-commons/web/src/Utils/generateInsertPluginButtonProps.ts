@@ -15,8 +15,10 @@ import {
   ToolbarButtonProps,
   Pubsub,
   EditorPluginConfig,
+  Version,
 } from 'wix-rich-content-common';
-import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
+import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
+import { getPluginParams } from './getPluginParams';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -53,7 +55,18 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
-  const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
+  const onPluginAddStep = (step: onPluginAddStepArgs['step']) => {
+    helpers?.onPluginAddStep?.({
+      version: Version.currentVersion,
+      entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
+      entryPoint: toolbarName,
+      pluginId: blockType,
+      pluginDetails: '',
+      step,
+    });
+  };
+  const onPluginAddSuccess = (params = {}) =>
+    helpers?.onPluginAddSuccess?.(blockType, toolbarName, params);
 
   function addBlock(data) {
     const { newBlock, newSelection, newEditorState } = createBlock(
@@ -62,7 +75,7 @@ export function generateInsertPluginButtonProps({
       blockType
     );
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    onPluginAddSuccess();
+    onPluginAddSuccess(getPluginParams(data, blockType));
     return { newBlock, newSelection, newEditorState };
   }
 
@@ -96,9 +109,11 @@ export function generateInsertPluginButtonProps({
     switch (button.type) {
       case 'file':
         toggleFileSelection();
+        onPluginAddStep('FileUploadDialog');
         break;
       case 'modal':
         toggleButtonModal(event);
+        onPluginAddStep('PluginModal');
         break;
       case 'custom-block':
         addCustomBlock(button);
@@ -153,9 +168,6 @@ export function generateInsertPluginButtonProps({
   }
 
   function toggleButtonModal(event) {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur(); // fixes focus/selction after giphy is inserted
-    }
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {

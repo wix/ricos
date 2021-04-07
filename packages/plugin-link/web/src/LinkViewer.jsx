@@ -23,6 +23,7 @@ class LinkViewer extends Component {
     settings: PropTypes.object,
     isInEditor: PropTypes.bool,
     config: PropTypes.object,
+    helpers: PropTypes.object,
   };
 
   constructor(props) {
@@ -39,18 +40,22 @@ class LinkViewer extends Component {
   }
 
   handleClick = event => {
-    const { componentData, isInEditor, config } = this.props;
+    const { componentData, isInEditor, config, helpers } = this.props;
     const settings = config?.[LINK_TYPE];
     if (settings) {
       const { onClick } = settings;
       const { anchor, url } = componentData;
+      helpers?.onViewerAction?.(LINK_TYPE, 'Click', componentData);
       onClick?.(event, componentData?.customData || this.getHref(url, anchor));
-      if (anchor && !isInEditor) {
-        event.preventDefault();
-        const anchorString = `viewer-${anchor}`;
-        const element = document.getElementById(anchorString);
-        addAnchorTagToUrl(anchorString);
-        anchorScroll(element);
+      if (anchor) {
+        event.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
+        if (!isInEditor) {
+          event.preventDefault();
+          const anchorString = `viewer-${anchor}`;
+          const element = document.getElementById(anchorString);
+          addAnchorTagToUrl(anchorString);
+          anchorScroll(element);
+        }
       }
     }
   };
@@ -73,7 +78,8 @@ class LinkViewer extends Component {
       target: this.getTarget(anchor, target, anchorTarget),
       rel: rel ? rel : relValue || 'noopener',
       className: classNames(this.styles.link, {
-        [this.styles.linkToAnchorInViewer]: anchor && !isInEditor,
+        [this.styles.linkInEditor]: isInEditor,
+        [this.styles.linkInViewer]: !isInEditor,
       }),
       onClick: this.handleClick,
     };

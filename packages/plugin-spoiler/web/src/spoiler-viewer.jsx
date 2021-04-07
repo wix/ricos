@@ -48,7 +48,9 @@ class SpoilerViewer extends Component {
   };
 
   onMouseEnter = () => this.toggleOnHover(true);
+
   onMouseLeave = () => this.toggleOnHover(false);
+
   onKeyUp = e => {
     if (e.key === 'Enter') {
       this.showText();

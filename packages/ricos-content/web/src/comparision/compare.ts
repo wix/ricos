@@ -3,7 +3,7 @@
 
 import { transform, isEqualWith, isEqual, isObject, omit } from 'lodash';
 
-const IGNORED_KEYS = ['lastEdited'];
+const IGNORED_KEYS = ['updatedDate'];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
 
 /**
@@ -14,9 +14,14 @@ const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
  */
 export function compare(object, base, options: { verbose?: boolean; ignoredKeys?: string[] } = {}) {
   const { verbose, ignoredKeys } = options;
-  const comparator = getComparator([...IGNORED_KEYS, ...(ignoredKeys || [])]);
+  const allIgnoredKeys = [...IGNORED_KEYS, ...(ignoredKeys || [])];
+  const comparator = getComparator(allIgnoredKeys);
   object.blocks && removeEmoji(object);
   base.blocks && removeEmoji(base);
+
+  // Ignore ignoredKeys in object top level
+  const objectWithoutIgnored = omit(object, allIgnoredKeys);
+  const basetWithoutIgnored = omit(base, allIgnoredKeys);
 
   function changes(object, base) {
     return transform<any, any>(object, (result, value, key) => {
@@ -30,7 +35,7 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
             {
               [key]: {
                 from: baseValue,
-                to: currentValue,
+                to: value,
               },
             },
             { depth: null }
@@ -40,7 +45,7 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
     });
   }
 
-  return changes(object, base);
+  return changes(objectWithoutIgnored, basetWithoutIgnored);
 }
 
 const getComparator = (ignoredKeys: string[]) => (left, right, key) => {

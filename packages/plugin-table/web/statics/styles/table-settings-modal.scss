@@ -19,23 +19,35 @@
 .tableConfig {
     padding-top: 11px;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 153px 153px;
     grid-column-gap: 11px;
+    grid-row-gap: 12px;
     @include phone {
         padding-top: 20px;
     }
 }
 .submit {
-    width: 100%;
-    background-color: $action-color;
-    color: var(--ricos-background-color,#fff);
-    font-size: 16px;
     height: 36px;
     align-items: center;
-    margin-top: 12px;
     display: flex;
     justify-content: center;
-    cursor: pointer;
+    grid-column: 1/-1;
+    button {
+        color: var(--ricos-background-color,#fff);
+        background-color: $action-color;
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+}
+
+.errorMsg {
+    grid-column: 1/-1;
+    background-color: rgba(223, 49, 49, .1);
+    padding: 16px;
+    font-size: 14px;
 }
 
 .closeButton {

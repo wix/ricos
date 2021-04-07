@@ -9,6 +9,7 @@
     padding: 0;
     &.header {
         background-color: rgba($primary-text-color-tuple, 0.04);
+        font-weight: unset;
     }
     &.selected {
         z-index: 2;
@@ -33,6 +34,38 @@
     }
     .selected:not(.editing):not(.singleSelection) {
         background-color: rgba($action-color-tuple, 0.2);
+    }
+}
+
+.hideLastBlock {
+    &.editorWrapper {
+        :global(.public-DraftEditor-content) > div > :last-child {
+            height: 1px;
+        }
+    }
+    &.viewerWrapper {
+        & > div > div > div > :last-child {
+            height: 1px;
+        }
+    }
+}
+
+.hideFirstBlock {
+    &.editorWrapper {
+        :global(.public-DraftEditor-content) > div > :first-child {
+            height: 1px;
+        }
+    }
+    &.viewerWrapper {
+        & > div > div > div > :first-child {
+            height: 1px;
+        }
+    }
+}
+
+.editorWrapper:not(.editing) {
+    @media only screen and (min-width: 640px) {
+        pointer-events: none;
     }
 }
 
@@ -71,4 +104,14 @@
     &.selected {
         border: 1px double $action-color;
     }
+}
+
+.disableSelection {
+    ::selection { 
+        background: transparent; 
+    }
+    ::-moz-selection { 
+        background: transparent; 
+    }
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

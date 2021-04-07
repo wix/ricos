@@ -10,6 +10,7 @@ export default class Rows extends PureComponent {
     super(props);
     this.rows = [props.rowNum];
   }
+
   setContainerSize = (size, index) => (this.rows[index].style.height = size);
 
   render() {
@@ -41,7 +42,7 @@ export default class Rows extends PureComponent {
               ref={ref => (this.rows[index] = ref)}
               key={index}
               className={styles.rowContainer}
-              style={{ height: rowsHeights[index] }}
+              style={{ height: rowsHeights[index] || ROW_DEFAULT_HEIGHT }}
             >
               <DragAndDropSection
                 {...rowDragProps}

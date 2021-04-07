@@ -52,10 +52,7 @@
   line-height: 1.5;
   font-size: $paragraphFontSize;
   color: $primary-text-color;
-
-  :global(.DraftEditor-editorContainer) {
-    @include ricosTypography('p', false);
-  }
+  background-color: $background-color-container;
 
   &::after {
     content: '';
@@ -97,7 +94,7 @@
 
 .text {
   composes: elementSpacing;
-  color: $ricos-p-color;
+  @include ricosTypography('p', false);
 
   &:empty {
     height: 24px;
@@ -154,6 +151,10 @@
   line-height: 26px;
   padding: 2px 25px;
   white-space: pre-wrap;
+
+  .renderedInTable & {
+    margin: 0;
+  }
 }
 
 .transformed {

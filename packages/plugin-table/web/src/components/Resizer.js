@@ -12,6 +12,7 @@ export default class Resizer extends PureComponent {
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
   }
+
   componentWillUnmount() {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
@@ -44,17 +45,19 @@ export default class Resizer extends PureComponent {
     if (this.curTarget) {
       const diff = this.getPosition(e) - this.position;
       const newSize = this.curSize + diff;
-      const siblingNewSize = this.siblingSize - diff;
-      const { minSize, setContainerSize, horizontal } = this.props;
+      const { minSize, setContainerSize, horizontal, overflowWidth } = this.props;
       if (newSize >= minSize) {
         horizontal &&
           newSize < CELL_AUTO_MIN_WIDTH &&
           this.setMinSize(this.curTarget, newSize + 'px');
         this.setNewSize(this.curTarget, newSize + 'px');
         setContainerSize && setContainerSize(newSize + 'px', this.props.index);
-        siblingNewSize &&
-          siblingNewSize >= CELL_AUTO_MIN_WIDTH &&
-          this.setNewSize(this.siblingCell, siblingNewSize + 'px');
+        if (diff > 0 || (diff <= 0 && overflowWidth <= 0)) {
+          const siblingNewSize = this.siblingSize - diff;
+          siblingNewSize &&
+            siblingNewSize >= CELL_AUTO_MIN_WIDTH &&
+            this.setNewSize(this.siblingCell, siblingNewSize + 'px');
+        }
       }
     }
   };
@@ -111,7 +114,7 @@ export default class Resizer extends PureComponent {
 Resizer.propTypes = {
   index: PropTypes.number.isRequired,
   size: PropTypes.number,
-  onResize: PropTypes.func.isRequired,
+  onResize: PropTypes.func,
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   horizontal: PropTypes.bool,
   minSize: PropTypes.number,
@@ -119,4 +122,5 @@ Resizer.propTypes = {
   itemsRefs: PropTypes.any,
   setContainerSize: PropTypes.func,
   highlightOnly: PropTypes.bool,
+  overflowWidth: PropTypes.number,
 };

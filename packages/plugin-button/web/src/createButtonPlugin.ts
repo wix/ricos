@@ -41,7 +41,8 @@ const createButtonPlugin = (
     [type]: settings = {},
     ...rest
   } = config;
-  settings.isActionButton = type === ACTION_BUTTON_TYPE;
+  const isLinkButton = type === LINK_BUTTON_TYPE;
+  settings.isActionButton = !isLinkButton;
   const styles = mergeStyles({ styles: Styles, theme });
   const rel = relValue === '_nofollow';
   const target = anchorTarget ? anchorTarget === '_blank' : true;
@@ -63,7 +64,7 @@ const createButtonPlugin = (
     }),
     helpers,
     t,
-    defaultPluginData: getDefaultComponentData(rel, target),
+    defaultPluginData: getDefaultComponentData(isLinkButton, rel, target),
     isMobile,
     pluginDecorationProps: (props, componentData) => {
       const width = componentData.config?.width;
@@ -92,5 +93,7 @@ const createButtonPlugin = (
     ...rest,
   });
 };
+
+createButtonPlugin.functionName = 'wix-rich-content-plugin-button';
 
 export { createLinkButtonPlugin, createActionButtonPlugin, LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE };

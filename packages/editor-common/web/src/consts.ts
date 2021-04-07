@@ -14,6 +14,8 @@ export const COMMANDS = Object.freeze({
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
   ESC: 'esc',
+  UNDO: 'ricosUndo',
+  REDO: 'ricosRedo',
 });
 
 export const TEXT_TYPES = Object.freeze([
@@ -43,6 +45,7 @@ export {
 export const KEYS_CHARCODE = {
   ENTER: 13,
   ESCAPE: 27,
+  SPACE: 32,
 };
 
 const ALIGN_LEFT = 'AlignLeft';

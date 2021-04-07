@@ -5,13 +5,12 @@ import {
   getSizeStringAsNumber,
 } from './tableDataUtil';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
-import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH } from '../consts';
+import { ROW_DEFAULT_HEIGHT, CELL_AUTO_MIN_WIDTH, BUTTON_NAME, CATEGORY } from '../consts';
 import { createEmptyCellEditor, createEmptyCell, createEmptyRow } from '../tableUtil';
 import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-common';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
-const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
 const reorderArray = (arr, from, to) => {
   const numOfItemsToReorder = from.end - from.start + 1;
@@ -21,10 +20,11 @@ const reorderArray = (arr, from, to) => {
 };
 
 class Table extends TableDataUtil {
-  constructor(componentData = {}, saveNewDataFunc) {
+  constructor(componentData = {}, saveNewDataFunc, triggerBi) {
     super(componentData);
     this.saveNewDataFunc = saveNewDataFunc;
     this.contentMaxHeight = 0;
+    this.triggerBi = triggerBi;
   }
 
   setNewRows = rows => {
@@ -32,12 +32,18 @@ class Table extends TableDataUtil {
     this.saveNewDataFunc(this.componentData);
   };
 
-  handlePasteCellsOutOfBound = (copiedCellsRange, targetRow, targetCol) => {
+  updateCellContent = (i, j, content) => {
+    const oldContent = this.getCell(i, j).content;
+    if (oldContent !== content) {
+      this.getCell(i, j).content = content;
+      this.saveNewDataFunc(this.componentData);
+    }
+  };
+
+  handlePasteCellsOutOfBound = (copiedCells, targetRow, targetCol) => {
     const rows = this.getRows();
-    const copiedRowsNum =
-      copiedCellsRange[copiedCellsRange.length - 1].i - copiedCellsRange[0].i + 1;
-    const copiedColsNum =
-      copiedCellsRange[copiedCellsRange.length - 1].j - copiedCellsRange[0].j + 1;
+    const copiedRowsNum = copiedCells[copiedCells.length - 1].i - copiedCells[0].i + 1;
+    const copiedColsNum = copiedCells[copiedCells.length - 1].j - copiedCells[0].j + 1;
     const rowNum = this.getRowNum();
     const colNum = this.getColNum();
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
@@ -51,42 +57,37 @@ class Table extends TableDataUtil {
     }
     if (colsOutOfBoundNum > 0) {
       //eslint-disable-next-line
-      Object.entries(rows).forEach(([i, row]) => {
+      Object.entries(rows).forEach(([rowIndex, row]) => {
         [...Array(colsOutOfBoundNum).fill(0)].forEach((value, i) => {
-          const colIndex = i + colNum - 1 + colsOutOfBoundNum;
-          this.addNewColWidth(colIndex, this.getColWidth(i === 0 ? 0 : i - 1));
+          const colIndex = i + colNum;
           row.columns[colIndex] = createEmptyCell();
+          if (rowIndex === '0') {
+            this.addNewColWidth(colIndex, this.getColWidth(i === 0 ? 0 : i - 1));
+            this.addNewColMinWidth(colIndex);
+          }
         });
       });
     }
   };
 
-  pasteCells = (copiedCellsRange, targetRow, targetCol) => {
+  setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
+
+  pasteCells = (copiedCells, targetRow, targetCol) => {
     const rows = this.getRows();
-    this.handlePasteCellsOutOfBound(copiedCellsRange, targetRow, targetCol);
-    const rowDiff = targetRow - copiedCellsRange[0].i;
-    const colDiff = targetCol - copiedCellsRange[0].j;
+    this.handlePasteCellsOutOfBound(copiedCells, targetRow, targetCol);
+    const rowDiff = targetRow - copiedCells[0].i;
+    const colDiff = targetCol - copiedCells[0].j;
     const cellsWithPaste = cloneDeepWithoutEditorState(rows);
-    copiedCellsRange.forEach(({ i, j }) => {
-      setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowDiff, j + colDiff);
+    copiedCells.forEach(({ i, j, content }) => {
+      this.setCellContent(cellsWithPaste, content, i + rowDiff, j + colDiff);
     });
     this.setNewRows(cellsWithPaste);
   };
 
-  clearRange = range => {
+  clearCells = range => {
     const rows = this.getRows();
-    range.forEach(({ i, j }) => setCellContent(rows, createEmptyCellEditor(), i, j));
+    range.forEach(({ i, j }) => this.setCellContent(rows, createEmptyCellEditor(), i, j));
     this.setNewRows(rows);
-  };
-
-  isObjectsEqual = (o1, o2) => JSON.stringify(o1) === JSON.stringify(o2);
-
-  updateCellContent = (i, j, content) => {
-    const oldContent = this.getCell(i, j).content;
-    if (!this.isObjectsEqual(oldContent, content)) {
-      this.getCell(i, j).content = content;
-      this.saveNewDataFunc(this.componentData);
-    }
   };
 
   addNewRowHeight = index => this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
@@ -148,6 +149,11 @@ class Table extends TableDataUtil {
       const cell = this.getCell(i, j);
       cell.style = { ...(cell.style || {}), ...style };
     });
+    this.triggerBi({
+      button_name: Object.keys(style)[0],
+      category: Object.keys(style)[0],
+      value: Object.values(style)[0],
+    });
     this.setNewRows(this.componentData.config.rows);
   };
 
@@ -185,6 +191,11 @@ class Table extends TableDataUtil {
         ...(cell.border || {}),
         ...cellBorders,
       };
+    });
+    this.triggerBi({
+      button_name: BUTTON_NAME.BORDER,
+      category: CATEGORY.CELL_BORDER,
+      value: borderColor,
     });
     this.setNewRows(this.componentData.config.rows);
   };
@@ -245,7 +256,7 @@ class Table extends TableDataUtil {
   };
 
   setRowHeight = (range, height) => {
-    range.forEach(({ i }) => {
+    range.forEach(i => {
       const rowsHeight = this.getRowsHeight();
       rowsHeight[i] = height;
     });
@@ -261,11 +272,13 @@ class Table extends TableDataUtil {
 
   getRowMaxContentHeight = (innerEditorsRefs, range) => {
     let maxContentHeight = 0;
-    range.forEach(({ i, j }) => {
-      const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
-      if (height > maxContentHeight) {
-        maxContentHeight = height;
-      }
+    range.forEach(i => {
+      [...Array(this.getColNum()).fill(0)].forEach((val, j) => {
+        const height = innerEditorsRefs[`${i}-${j}`]?.editorHeight + 20;
+        if (height > maxContentHeight) {
+          maxContentHeight = height;
+        }
+      });
     });
     return maxContentHeight;
   };
@@ -275,10 +288,8 @@ class Table extends TableDataUtil {
 
   getRowsMaxContentHeight = innerEditorsRefs => {
     const rowsMaxContentHeight = [];
-    const colNum = this.getColNum();
     [...Array(this.getRowNum()).fill(0)].forEach((val, i) => {
-      const range = getRange({ start: { i, j: 0 }, end: { i, j: colNum } });
-      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, range));
+      rowsMaxContentHeight.push(this.getRowMaxContentHeight(innerEditorsRefs, [i]));
     });
     return rowsMaxContentHeight;
   };
@@ -356,19 +367,21 @@ class Table extends TableDataUtil {
     const rows = this.getRows();
     const cellsWithoutCol = {};
     const colNum = this.getColNum();
-    this.fixDeletedMergedCellsData(deleteIndexes, true);
+    const deleteIndexesAsNumbers = deleteIndexes.map(i => parseInt(i));
+    this.fixDeletedMergedCellsData(deleteIndexesAsNumbers, true);
     Object.entries(rows).forEach(([i, row]) => {
-      cellsWithoutCol[i] = createEmptyRow(colNum - deleteIndexes.length);
+      cellsWithoutCol[i] = createEmptyRow(colNum - deleteIndexesAsNumbers.length);
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (j < deleteIndexes[0]) {
+        const currColIndex = parseInt(j);
+        if (currColIndex < deleteIndexesAsNumbers[0]) {
           setRowsCell(cellsWithoutCol, column, i, j);
-        } else if (j > deleteIndexes[deleteIndexes.length - 1]) {
-          setRowsCell(cellsWithoutCol, column, i, parseInt(j) - deleteIndexes.length);
+        } else if (currColIndex > deleteIndexesAsNumbers[deleteIndexesAsNumbers.length - 1]) {
+          setRowsCell(cellsWithoutCol, column, i, currColIndex - deleteIndexesAsNumbers.length);
         }
       });
     });
-    this.getColsWidth().splice(deleteIndexes, deleteIndexes.length);
-    this.getColsMinWidth().splice(deleteIndexes, deleteIndexes.length);
+    this.getColsWidth().splice(deleteIndexesAsNumbers, deleteIndexesAsNumbers.length);
+    this.getColsMinWidth().splice(deleteIndexesAsNumbers, deleteIndexesAsNumbers.length);
     this.setNewRows(cellsWithoutCol);
   };
 
@@ -496,11 +509,21 @@ class Table extends TableDataUtil {
   toggleRowHeader = () => {
     this.componentData.config.rowHeader = !this.componentData.config.rowHeader;
     this.saveNewDataFunc(this.componentData);
+    this.triggerBi({
+      button_name: BUTTON_NAME.HEADER,
+      category: CATEGORY.ROW_HEADER,
+      value: !this.componentData.config.rowHeader,
+    });
   };
 
   toggleColHeader = () => {
     this.componentData.config.colHeader = !this.componentData.config.colHeader;
     this.saveNewDataFunc(this.componentData);
+    this.triggerBi({
+      button_name: BUTTON_NAME.HEADER,
+      category: CATEGORY.COLUMN_HEADER,
+      value: !this.componentData.config.rowHeader,
+    });
   };
 
   isBothHeaderCellsAndRegularCellsSelected = range => {

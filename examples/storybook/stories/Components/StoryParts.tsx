@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { FunctionComponent, ReactNode } from 'react';
 import ReactJson from 'react-json-view';
 import SourceCode from './SourceCode';
 import styles from './styles.scss';
-import { RicosContent } from 'ricos-editor';
+import { DraftContent } from 'ricos-editor';
 
 export const Page: FunctionComponent<{ title?: string }> = ({ title, children }) => (
   <div className={styles.page}>
@@ -31,7 +30,7 @@ export const RichContentEditorBox: FunctionComponent<{
   children: ReactNode;
   preset?: string;
   sourcecode?: string;
-  content?: RicosContent;
+  content?: DraftContent;
   title?: string;
 }> = ({ children, preset = '', sourcecode, content, title }) => {
   return (
@@ -60,7 +59,7 @@ export const RichContentViewerBox: FunctionComponent<{
   </div>
 );
 
-export const ContentState: FunctionComponent<{ json?: RicosContent; collapsed?: number }> = ({
+export const ContentState: FunctionComponent<{ json?: DraftContent; collapsed?: number }> = ({
   json,
   collapsed = 1,
 }) => <ReactJson src={json} collapsed={collapsed} />;
