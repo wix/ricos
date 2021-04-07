@@ -29,6 +29,7 @@
 
   &.desktop {
     .editor {
+      transform: translateZ(0);
       :global(.DraftEditor-root) {
         &::after {
           content: '';
@@ -45,6 +46,7 @@
 }
 
 .editor {
+  transform: translateZ(0);
   display: flex;
   flex-direction: column;
   width: 100%;
