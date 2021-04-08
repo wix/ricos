@@ -389,6 +389,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       siteDomain,
       iframeSandboxDomain,
       innerRCERenderedIn,
+      experiments,
     } = this.props;
 
     this.fixHelpers(helpers);
@@ -469,6 +470,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
       disableKeyboardEvents: this.disableKeyboardEvents,
+      experiments,
     };
   };
 
