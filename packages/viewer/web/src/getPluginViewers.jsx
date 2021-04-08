@@ -9,6 +9,10 @@ import {
   textWrapClassName,
   normalizeUrl,
   TABLE_TYPE,
+  IMAGE_TYPE,
+  HTML_TYPE,
+  ACTION_BUTTON_TYPE,
+  LINK_BUTTON_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -128,10 +132,10 @@ class PluginViewer extends PureComponent {
 
         // TODO: more generic logic?
         let customStyles;
-        if (config.size === 'inline' || type === 'wix-draft-plugin-html') {
+        if (config.size === 'inline' || type === HTML_TYPE) {
           customStyles = { width: config.width };
         }
-        if (type === 'wix-draft-plugin-image') {
+        if (type === IMAGE_TYPE) {
           const { src = {} } = componentData;
           const { size } = config;
           if (
@@ -143,7 +147,7 @@ class PluginViewer extends PureComponent {
           }
         }
 
-        if (type === 'wix-draft-plugin-action-button' || type === 'wix-draft-plugin-link-button') {
+        if (type === ACTION_BUTTON_TYPE || type === LINK_BUTTON_TYPE) {
           if (isNumber(config.width)) {
             componentProps.style = { ...componentProps.style, width: config.width };
           }
