@@ -13,7 +13,7 @@ import {
 } from 'ricos-content';
 import {
   DividerData,
-  DividerData_DividerType,
+  DividerData_Type,
   GiphyData,
   HTMLData,
   GalleryData,
@@ -21,7 +21,7 @@ import {
   VideoData,
   FileData,
   ImageData,
-  ImageConfig_ImageAlignment,
+  PluginContainerData_Alignment,
   LinkData,
   Node_Type,
   Decoration_Type,
@@ -78,10 +78,10 @@ const divider = {
   type: RICOS_DIVIDER_TYPE,
   nodeType: Node_Type.DIVIDER,
   data1: DividerData.fromJSON({
-    type: DividerData_DividerType.DOUBLE,
+    type: DividerData_Type.DOUBLE,
   }),
   data2: DividerData.fromJSON({
-    type: DividerData_DividerType.DASHED,
+    type: DividerData_Type.DASHED,
   }),
   expectedData1: {
     type: 'double',
@@ -442,7 +442,7 @@ const image = {
     },
   }),
   data2: ImageData.fromJSON({
-    config: { alignment: ImageConfig_ImageAlignment.LEFT },
+    config: { alignment: PluginContainerData_Alignment.LEFT },
     src: {
       id: '2f64886b1998251a4a5e47d25fff5ffa',
       originalFileName: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg',
