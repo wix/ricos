@@ -243,13 +243,6 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     activePalette && (themeObj.palette = ricosPalettes[activePalette]);
     return themeObj;
   };
-  getHtmlElement = html => {
-    const htmls: ReactElement[] = [];
-    if (html) {
-      htmls.push(html);
-    }
-    return htmls;
-  };
 
   onPaletteChange = i => {
     this.setState({
@@ -267,14 +260,14 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     const { html } = themeStrategy({
       ricosTheme: { ...this.getThemeObj(activeFont, activePalette), ...themeObj },
     });
-    return this.getHtmlElement(html);
+    return html ? [html] : [];
   };
 
   getInitialStyleElement = () => {
     const activePalette = get('activePalette');
     const activeFont = get('activeFont');
     const { html } = themeStrategy({ ricosTheme: this.getThemeObj(activeFont, activePalette) });
-    return this.getHtmlElement(html);
+    return html ? [html] : [];
   };
 
   onSetExperiment = (name: string, value: any) => {
