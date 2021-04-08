@@ -16,6 +16,24 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+  - `general`
+    - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolbar
+
+### :house: Internal
+
+- `editor-common`
+  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
+
+  ### :bug: Bug Fix
+
+  - `fullscreen`
+    - [#2357](https://github.com/wix-incubator/rich-content/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests 
+
+</details>
+<hr/>
+
+## 8.29.3 (April 7, 2021)
 
 ### :rocket: New Feature
 
@@ -30,9 +48,6 @@
   - [#2344](https://github.com/wix/ricos/pull/2344) fix tooltip z-index for media settings modal
 - `file-upload`
   - [#2330](https://github.com/wix/ricos/commit/2330) add responsive style 
-
-</details>
-<hr/>
 
 ## 8.29.2 (April 6, 2021)
 

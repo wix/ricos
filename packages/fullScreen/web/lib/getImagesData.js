@@ -22,10 +22,10 @@ function imageEntityToGallery(data, index) {
 
 const blockToImagesKeys = {
   [imageType]: (entity, blockKey) => {
-    if (!entity.data.config?.disableExpand) return { [blockKey]: 1 };
+    if (!entity.data?.disableExpand) return { [blockKey]: 1 };
   },
   [imageTypeLegacy]: (entity, blockKey) => {
-    if (!entity.data?.config?.disableExpand) return { [blockKey]: 1 };
+    if (!entity.data?.disableExpand) return { [blockKey]: 1 };
   },
   [tableType]: entity => {
     let tableImagesKeys = {};
@@ -52,7 +52,7 @@ const blockToImagesKeys = {
     return accordionImagesKeys;
   },
   [galleryType]: (entity, blockKey) => {
-    if (!entity.data.config.disableExpand) return { [blockKey]: entity.data.items.length };
+    if (!entity.data?.disableExpand) return { [blockKey]: entity.data.items.length };
   },
 };
 
@@ -73,7 +73,7 @@ function innerRceImagesMapper(entityMap, index) {
   Object.entries(entityMap).forEach(([, block]) => {
     if (block.type === imageType || block.type === imageTypeLegacy) {
       block.data?.src &&
-        !block.data?.config?.disableExpand &&
+        !block.data?.disableExpand &&
         images.push(imageEntityToGallery(block.data, index));
     }
   });
@@ -109,11 +109,11 @@ function convertEntityToGalleryItems(entity, index) {
   switch (entity.type) {
     case imageType:
     case imageTypeLegacy:
-      return entity.data.src && !entity.data.config?.disableExpand
+      return entity.data.src && !entity.data?.disableExpand
         ? [imageEntityToGallery(entity.data, index)]
         : [];
     case galleryType: {
-      return entity.data.config.disableExpand ? [] : entity.data.items;
+      return entity.data?.disableExpand ? [] : entity.data.items;
     }
     case tableType: {
       return getTableImages(entity, index);

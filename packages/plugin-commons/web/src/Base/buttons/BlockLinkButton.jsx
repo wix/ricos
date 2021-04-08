@@ -10,6 +10,12 @@ class BlockLinkButton extends Component {
     return !!componentData?.config?.link;
   }
 
+  triggerBi = biParams =>
+    this.props.helpers?.onPluginAction?.('addPluginLink', {
+      plugin_id: this.props.pluginType,
+      ...biParams,
+    });
+
   showLinkPanel = () => {
     document.activeElement.blur();
     const {
@@ -49,6 +55,7 @@ class BlockLinkButton extends Component {
       unchangedUrl,
       linkTypes,
       editorState,
+      triggerBi: this.triggerBi,
     };
     if (isMobile) {
       if (helpers && helpers.openModal) {
@@ -113,6 +120,7 @@ BlockLinkButton.propTypes = {
   toolbarOffsetLeft: PropTypes.string,
   linkTypes: PropTypes.object,
   editorState: PropTypes.object,
+  pluginType: PropTypes.string,
 };
 
 export default BlockLinkButton;
