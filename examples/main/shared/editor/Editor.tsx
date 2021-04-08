@@ -16,6 +16,7 @@ import {
   ModalStyles,
   DraftContent,
   TextToolbarType,
+  AvailableExperiments,
   EventName,
   PluginEventParams,
   OnPluginAction,
@@ -37,7 +38,7 @@ const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
 
-interface ExampleEditprProps {
+interface ExampleEditorProps {
   onChange?: RichContentEditorProps['onChange'];
   editorState?: RichContentEditorProps['editorState'];
   theme?: RichContentEditorProps['theme'];
@@ -57,24 +58,25 @@ interface ExampleEditprProps {
   contentState?: DraftContent;
   injectedContent?: DraftContent;
   onRicosEditorChange?: RicosEditorProps['onChange'];
+  experiments?: AvailableExperiments;
 }
 
-interface ExampleEditprState {
+interface ExampleEditorState {
   showModal?: boolean;
   modalProps?: any;
   modalStyles?: ModalStyles;
   MobileToolbar?: ElementType;
   TextToolbar?: ElementType;
 }
-export default class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
-  state: ExampleEditprState = {};
+export default class Editor extends PureComponent<ExampleEditorProps, ExampleEditorState> {
+  state: ExampleEditorState = {};
   plugins: RichContentEditorProps['plugins'];
   config: RichContentEditorProps['config'];
   helpers: RichContentEditorProps['helpers'];
   editor: RichContentEditor;
   ricosPlugins: RicosEditorProps['plugins'];
 
-  constructor(props: ExampleEditprProps) {
+  constructor(props: ExampleEditorProps) {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
@@ -258,6 +260,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
       contentState,
       injectedContent,
       onRicosEditorChange,
+      experiments,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
@@ -296,6 +299,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               placeholder={'Add some text!'}
               plugins={this.ricosPlugins}
               linkPanelSettings={this.config.uiSettings.linkPanel}
+              _rcProps={{ experiments }}
             >
               <RichContentEditor helpers={helpersWithoutModal} />
             </RicosEditor>
@@ -317,6 +321,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               config={this.config}
               editorKey="random-editorKey-ssr"
               setEditorToolbars={this.setEditorToolbars}
+              experiments={experiments}
               {...editorProps}
             />
             <ReactModal
