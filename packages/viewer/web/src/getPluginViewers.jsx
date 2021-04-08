@@ -9,8 +9,6 @@ import {
   textWrapClassName,
   normalizeUrl,
   TABLE_TYPE,
-  ACTION_BUTTON_TYPE,
-  LINK_BUTTON_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -145,7 +143,7 @@ class PluginViewer extends PureComponent {
           }
         }
 
-        if (type === ACTION_BUTTON_TYPE || type === LINK_BUTTON_TYPE) {
+        if (type === 'wix-draft-plugin-action-button' || type === 'wix-draft-plugin-link-button') {
           if (isNumber(config.width)) {
             componentProps.style = { ...componentProps.style, width: config.width };
           }
