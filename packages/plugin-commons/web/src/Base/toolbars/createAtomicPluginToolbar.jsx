@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { Separator, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { Separator, getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -231,6 +231,8 @@ export default function createAtomicPluginToolbar({
         settings: button.settings,
         ...commonButtonProps,
       };
+      const editorState = getEditorState();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const baseLinkProps = {
         onOverrideContent: this.onOverrideContent,
         helpers,
@@ -240,11 +242,12 @@ export default function createAtomicPluginToolbar({
         relValue,
         uiSettings,
         icons: icons.link,
-        editorState: getEditorState(),
+        editorState,
         linkTypes,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
+        pluginType,
         ...commonButtonProps,
       };
       const defaultButtonProps = {
