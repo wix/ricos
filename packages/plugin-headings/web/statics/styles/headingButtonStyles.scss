@@ -22,3 +22,17 @@
 .headingsModalOverlay_mobile {
     background-color: rgba(0, 0, 0, 0.2);
 }
+
+.headingPopup_button {
+  margin-right: 10px;
+  position: relative;
+  .headingPopup {
+    position: absolute;
+    top: 50px;
+    background: #fff;
+
+    & button {
+      background-color: transparent;
+    }
+  }
+}
