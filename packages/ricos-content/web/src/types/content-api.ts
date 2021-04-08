@@ -17,6 +17,14 @@ import {
   PollData,
 } from 'ricos-schema';
 
+export type PartialDeep<T> = {
+  [P in keyof T]?: T[P] extends (infer U)[]
+    ? PartialDeep<U>[]
+    : T[P] extends Record<string, unknown>
+    ? PartialDeep<T[P]>
+    : T[P];
+};
+
 type AddMethod<T> = {
   [P in keyof T]: ({
     data,
@@ -72,7 +80,7 @@ type SetTextMethod<T> = {
     content,
   }: {
     text?: string | TextData | (string | TextData)[];
-    data?: Partial<T[P]>;
+    data?: PartialDeep<T[P]>;
     key: string;
     content: RichContent;
   }) => RichContent;
