@@ -216,7 +216,7 @@ function setCellChangeType(rows, rowKey, columnKey, lastChangeType) {
   );
 }
 
-function setChangeTypeForNewTableCells(newRows, lastChangeType) {
+function setChangeTypeForTableCells(newRows, lastChangeType) {
   Object.keys(newRows).forEach(rowKey =>
     Object.keys(newRows[rowKey].columns).forEach(columnKey => {
       setCellChangeType(newRows, rowKey, columnKey, lastChangeType);
@@ -388,7 +388,7 @@ const innerRicosChangeTypeSetters = {
       ...prevData,
       config: {
         ...prevData.config,
-        rows: setChangeTypeForNewTableCells(prevData.config.rows, 'redo'),
+        rows: setChangeTypeForTableCells(prevData.config.rows, 'redo'),
       },
     };
   },
