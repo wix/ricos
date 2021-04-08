@@ -293,15 +293,18 @@ function didCellStyleChange(newRow, currentRow) {
 function didTableRowStyleChange(currentData, newData) {
   const { rows: newRows } = newData.config;
   const { rows: currentRows } = currentData.config;
-  return Object.keys(newRows).some(rowKey => {
-    const currentRow = currentRows[rowKey].columns;
-    const newRow = newRows[rowKey].columns;
-    return (
-      !currentRow ||
-      Object.keys(newRow).length !== Object.keys(currentRow).length ||
-      didCellStyleChange(newRow, currentRow)
-    );
-  });
+  return (
+    Object.keys(newRows).length !== Object.keys(currentRows).length ||
+    Object.keys(newRows).some(rowKey => {
+      const currentRow = currentRows[rowKey].columns;
+      const newRow = newRows[rowKey].columns;
+      return (
+        !currentRow ||
+        Object.keys(newRow).length !== Object.keys(currentRow).length ||
+        didCellStyleChange(newRow, currentRow)
+      );
+    })
+  );
 }
 
 function handleTableEntity(currentData, newData): EntityToReplace {
