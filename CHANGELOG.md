@@ -20,10 +20,10 @@
   - `general`
     - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolbar 
 
-### :bug: Bug Fix
+  ### :bug: Bug Fix
 
-- `fullscreen`
-  - [#0](https://github.com/wix-incubator/rich-content/pull/0) fix fullscreen display when images expand is disabled and added unitests 
+  - `fullscreen`
+    - [#2357](https://github.com/wix-incubator/rich-content/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests 
 
 </details>
 <hr/>
