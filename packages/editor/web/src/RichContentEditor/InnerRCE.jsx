@@ -199,6 +199,11 @@ class InnerRCE extends PureComponent {
     if (renderedInTable && isMobile) {
       toolbarsToIgnore.push('SideToolbar');
     }
+    const tableClassNames = classNames(
+      styles.renderedInTable,
+      draftDefaultStyles.renderedInTable,
+      rtlIgnoredStyles.renderedInTable
+    );
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
         <div
@@ -207,9 +212,7 @@ class InnerRCE extends PureComponent {
           className={classNames(
             styles.editor,
             theme.editor,
-            renderedInTable && styles.renderedInTable,
-            renderedInTable && draftDefaultStyles.renderedInTable,
-            renderedInTable && rtlIgnoredStyles.renderedInTable,
+            renderedInTable && tableClassNames,
             'inner-rce'
           )}
           ref={this.setEditorWrapper}
