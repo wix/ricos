@@ -21,11 +21,14 @@ import {
   VideoData,
   FileData,
   ImageData,
-  PluginContainerData_Alignment,
   LinkData,
   Node_Type,
   Decoration_Type,
   MentionData,
+  PluginContainerData_Width_Type,
+  PluginContainerData_Alignment,
+  DividerData_Width,
+  DividerData_Alignment,
 } from 'ricos-schema';
 
 export const content = {
@@ -78,9 +81,15 @@ const divider = {
   type: RICOS_DIVIDER_TYPE,
   nodeType: Node_Type.DIVIDER,
   data1: DividerData.fromJSON({
+    // TODO: fix default behaviour when alignment & width are not passed
+    alignment: DividerData_Alignment.CENTER,
+    width: DividerData_Width.LARGE,
     type: DividerData_Type.DOUBLE,
   }),
   data2: DividerData.fromJSON({
+    // TODO: fix default behaviour when alignment & width are not passed
+    alignment: DividerData_Alignment.CENTER,
+    width: DividerData_Width.LARGE,
     type: DividerData_Type.DASHED,
   }),
   expectedData1: {
@@ -169,8 +178,9 @@ const giphy = {
 const html = {
   type: RICOS_HTML_TYPE,
   nodeType: Node_Type.HTML,
-  data1: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
-  data2: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url' }),
+  // TODO: fix schema to allow empty config
+  data1: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url', config: {} }),
+  data2: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url', config: {} }),
   expectedData1: {
     config: {
       alignment: 'center',
@@ -193,6 +203,8 @@ const gallery = {
   type: RICOS_GALLERY_TYPE,
   nodeType: Node_Type.HTML,
   data1: GalleryData.fromJSON({
+    // TODO: fix schema to allow empty config
+    config: {},
     items: [
       {
         metadata: {
@@ -224,6 +236,8 @@ const gallery = {
     ],
   }),
   data2: GalleryData.fromJSON({
+    // TODO: fix schema to allow empty config
+    config: {},
     items: [
       {
         metadata: {
@@ -390,19 +404,19 @@ const file = {
   type: RICOS_FILE_TYPE,
   nodeType: Node_Type.FILE,
   data1: FileData.fromJSON({
-    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    src: { url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf' },
     name: 'File sample',
-    config: {
-      size: 'small',
-      alignment: 'left',
+    containerData: {
+      width: { type: PluginContainerData_Width_Type.SMALL },
+      alignment: PluginContainerData_Alignment.LEFT,
     },
   }),
   data2: FileData.fromJSON({
-    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    src: { url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf' },
     name: 'Updated file sample',
-    config: {
-      size: 'content',
-      alignment: 'right',
+    containerData: {
+      width: { type: PluginContainerData_Width_Type.CONTENT },
+      alignment: PluginContainerData_Alignment.RIGHT,
     },
   }),
   expectedData1: {
@@ -433,20 +447,18 @@ const image = {
   type: RICOS_IMAGE_TYPE,
   nodeType: Node_Type.IMAGE,
   data1: ImageData.fromJSON({
-    src: {
-      id: '8b72558253b2502b401bb46e5599f22a',
-      originalFileName: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg',
-      fileName: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg',
+    image: {
+      src: { custom: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg' },
       width: 1920,
       height: 1000,
     },
   }),
   data2: ImageData.fromJSON({
-    config: { alignment: PluginContainerData_Alignment.LEFT },
-    src: {
-      id: '2f64886b1998251a4a5e47d25fff5ffa',
-      originalFileName: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg',
-      fileName: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg',
+    containerData: {
+      alignment: PluginContainerData_Alignment.LEFT,
+    },
+    image: {
+      src: { custom: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg' },
       width: 1600,
       height: 1068,
     },
@@ -462,8 +474,7 @@ const image = {
     src: {
       file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg',
       height: 1000,
-      id: '8b72558253b2502b401bb46e5599f22a',
-      original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg',
+      id: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg',
       width: 1920,
     },
   },
@@ -478,8 +489,7 @@ const image = {
     src: {
       file_name: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg',
       height: 1068,
-      id: '2f64886b1998251a4a5e47d25fff5ffa',
-      original_file_name: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg',
+      id: '8bb438_92b217c36c98400a82e5c59bf131d957.jpg',
       width: 1600,
     },
   },
