@@ -197,10 +197,8 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
     const { shouldNativeUpload } = this.props;
     if (shouldNativeUpload) {
       this.helpers.handleFileUpload = mockImageNativeUploadFunc;
-      delete this.helpers.handleFileSelection;
     } else {
       this.helpers.handleFileSelection = mockImageUploadFunc;
-      delete this.helpers.handleFileUpload;
     }
   };
 
