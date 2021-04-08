@@ -11,7 +11,7 @@ export const alignmentClassName: ClassNameStrategy = (componentData, theme, styl
   return classNames(styles[key], theme[key]);
 };
 
-export const sizeClassName: ClassNameStrategy = (componentData, theme, styles, isMobile) => {
+export const sizeClassName: ClassNameStrategy = (componentData, theme, styles) => {
   const { size } = componentData.config || {};
   if (!size) {
     return '';
