@@ -28,16 +28,16 @@ export default class BlockLinkModal extends Component {
         key: 'componentLink',
         item,
       });
-      if (anchor) {
-        triggerBi({ anchor, category: 'section' });
-      } else {
-        triggerBi({
-          link: item.url,
-          nofollow,
-          newTab: target === '_blank',
-          category: 'web address',
-        });
-      }
+
+      const biData = anchor
+        ? { anchor, category: 'section' }
+        : {
+            link: item.url,
+            nofollow,
+            newTab: target === '_blank',
+            category: 'web address',
+          };
+      triggerBi(biData);
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }
