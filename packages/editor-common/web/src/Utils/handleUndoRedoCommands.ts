@@ -186,11 +186,15 @@ function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
     return {
       key: pair.key,
       title: setLastChangeType(
-        EditorState.createWithContent(pair.title.getCurrentContent()),
+        pair.title
+          ? EditorState.createWithContent(pair.title.getCurrentContent())
+          : EditorState.createEmpty(),
         lastChangeType
       ),
       content: setLastChangeType(
-        EditorState.createWithContent(pair.content.getCurrentContent()),
+        pair.content
+          ? EditorState.createWithContent(pair.content?.getCurrentContent())
+          : EditorState.createEmpty(),
         lastChangeType
       ),
     };
@@ -207,25 +211,17 @@ function handleAccordionEntity(currentData, newData): EntityToReplace {
 
 function setCellChangeType(rows, rowKey, columnKey, lastChangeType) {
   rows[rowKey].columns[columnKey].content = setLastChangeType(
-    removeFocus(rows[rowKey].columns[columnKey].content),
+    EditorState.createWithContent(rows[rowKey].columns[columnKey].content.getCurrentContent()),
     lastChangeType
   );
 }
 
-function setChangeTypeForNewTableCells(currentRows, newRows, lastChangeType) {
-  const rowKey = Object.keys(newRows).find(newRowKey => !currentRows[newRowKey]);
-  if (rowKey) {
+function setChangeTypeForNewTableCells(newRows, lastChangeType) {
+  Object.keys(newRows).forEach(rowKey =>
     Object.keys(newRows[rowKey].columns).forEach(columnKey => {
       setCellChangeType(newRows, rowKey, columnKey, lastChangeType);
-    });
-  } else {
-    Object.keys(newRows).forEach(rowKey => {
-      const columnKey = Object.keys(newRows[rowKey].columns).find(
-        columnKey => !currentRows[rowKey].columns[columnKey]
-      );
-      columnKey && setCellChangeType(newRows, rowKey, columnKey, lastChangeType);
-    });
-  }
+    })
+  );
   return newRows;
 }
 
@@ -384,12 +380,12 @@ const innerRicosChangeTypeSetters = {
       pairs: setChangeTypeForAccordionPairs(prevData.pairs, 'redo'),
     };
   },
-  [TABLE_TYPE]: (prevData, currentData) => {
+  [TABLE_TYPE]: prevData => {
     return {
       ...prevData,
       config: {
         ...prevData.config,
-        rows: setChangeTypeForNewTableCells(currentData.config.rows, prevData.config.rows, 'redo'),
+        rows: setChangeTypeForNewTableCells(prevData.config.rows, 'redo'),
       },
     };
   },
@@ -397,17 +393,15 @@ const innerRicosChangeTypeSetters = {
 
 /* Handle undo-redo calls */
 
-function getContentStateForRedoStack(editorState: EditorState, prevEditorState: EditorState) {
+function getContentStateForRedoStack(prevEditorState: EditorState) {
   const prevContentState = prevEditorState.getCurrentContent();
-  const contentState = editorState.getCurrentContent();
-  contentState
+  prevContentState
     .getBlockMap()
-    .filter((block: ContentBlock) => doesEntityExistInBoth(block, prevContentState))
+    .filter((block: ContentBlock) => !!block.getEntityAt(0))
     .forEach((block: ContentBlock) => {
       const blockKey = block.getKey();
-      const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
-      const { data: prevData } = getBlocksEntityTypeAndData(blockKey, prevContentState);
-      const fixedData = innerRicosChangeTypeSetters[type]?.(prevData, currentData);
+      const { type, data: prevData } = getBlocksEntityTypeAndData(blockKey, prevContentState);
+      const fixedData = innerRicosChangeTypeSetters[type]?.(prevData);
       fixedData && replaceComponentData(prevEditorState, blockKey, fixedData);
     });
   return prevEditorState.getCurrentContent();
@@ -419,7 +413,7 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
     ? pluginsUndo(fixedEditorState)
     : pushToRedoStack(
         removeCompositionModeFromEditorState(fixedEditorState),
-        getContentStateForRedoStack(fixedEditorState, editorState)
+        getContentStateForRedoStack(editorState)
       );
 }
 
