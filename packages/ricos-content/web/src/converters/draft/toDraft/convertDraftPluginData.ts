@@ -31,7 +31,6 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.POLL]: convertPollData,
     [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
-    [Node_Type.FILE]: convertFileData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
   };
