@@ -1,6 +1,6 @@
 import React, { PureComponent, RefObject } from 'react';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
-import { isSSR, DraftContent, SEOSettings } from 'wix-rich-content-common';
+import { isSSR, DraftContent, SEOSettings, AvailableExperiments } from 'wix-rich-content-common';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
@@ -21,6 +21,7 @@ interface ExampleViewerProps {
   seoMode?: SEOSettings;
   localeResource?: Record<string, string>;
   shouldUseNewContent?: boolean;
+  experiments: AvailableExperiments;
 }
 
 interface ExampleViewerState {
@@ -81,6 +82,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
       seoMode,
       localeResource,
       shouldUseNewContent,
+      experiments,
     } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
@@ -126,6 +128,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
               inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
               decorators={Plugins.decorators}
               config={this.pluginsConfig}
+              experiments={experiments}
               {...viewerProps}
             />
             {this.shouldRenderFullscreen && (

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { hot } from 'react-hot-loader/root';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ReactElement } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap, debounce } from 'lodash';
 import { set, get } from 'local-storage';
@@ -17,6 +17,9 @@ import ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
 import { RichContent } from 'ricos-schema';
 import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
+import { themeStrategy } from 'ricos-common';
+import { FONTS, EXPERIMENTS, ricosPalettes } from '../../../e2e/tests/resources';
+
 const ContentStateEditor = React.lazy(() => import('./Components/ContentStateEditor'));
 const Editor = React.lazy(() => import('../shared/editor/Editor'));
 const Viewer = React.lazy(() => import('../shared/viewer/Viewer'));
@@ -83,6 +86,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMultiSelectImages: false,
       shouldNativeUpload: false,
       shouldUseNewContent: false,
+      styleElement: [],
       ...localState,
     };
   }
@@ -194,6 +198,27 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
         action: selectedLocale => this.onSetLocale(selectedLocale),
         items: this.props.allLocales,
       },
+      {
+        name: 'Experiments',
+        getActive: this.getExperiments,
+        action: this.onSetExperiment,
+        items: EXPERIMENTS,
+        itemsType: 'experiments',
+      },
+      {
+        name: 'Palettes',
+        getActive: this.getActivePalette,
+        action: this.onPaletteChange,
+        items: ricosPalettes,
+        itemsType: 'palettes',
+      },
+      {
+        name: 'Fonts',
+        getActive: this.getActiveFont,
+        action: this.onFontChange,
+        items: FONTS,
+        itemsType: 'fonts',
+      },
     ];
 
     this.viewerSettings = [
@@ -206,6 +231,43 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           })),
       },
     ];
+  };
+
+  getActivePalette = () => this.state.activePalette;
+  getExperiments = () => this.state.experiments;
+  getActiveFont = () => this.state.activeFont;
+  getThemeObj = () => {
+    const { activeFont, activePalette } = this.state;
+    const themeObj: any = {};
+    activeFont && (themeObj.customStyles = FONTS[activeFont]);
+    activePalette && (themeObj.palette = ricosPalettes[activePalette]);
+    return themeObj;
+  };
+
+  onPaletteChange = i =>
+    this.setState({
+      styleElement: this.getHtmlTheme({ palette: ricosPalettes[i] }),
+      activePalette: i,
+    });
+
+  onFontChange = i =>
+    this.setState({ styleElement: this.getHtmlTheme({ customStyles: FONTS[i] }), activeFont: i });
+
+  getHtmlTheme = themeObj => {
+    const { html } = themeStrategy({ ricosTheme: { ...this.getThemeObj(), ...themeObj } });
+    const htmls: ReactElement[] = [];
+    if (html) {
+      htmls.push(html);
+    }
+    return htmls;
+  };
+
+  onSetExperiment = (name: string, value: any) => {
+    const experiments = {
+      ...this.state.experiments,
+      [name]: { enabled: value && value !== 'false', namespace: 'ricos', value },
+    };
+    this.setState({ experiments });
   };
 
   renderEditor = () => {
@@ -229,6 +291,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       isToolbarShown,
       shouldNativeUpload,
       shouldUseNewContent,
+      experiments,
+      styleElement,
     } = this.state;
 
     return (
@@ -244,6 +308,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           />
           <SectionContent>
             <ErrorBoundary>
+              {...styleElement}
               <Editor
                 onChange={onEditorChange}
                 editorState={editorState}
@@ -260,6 +325,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 contentState={contentState}
                 injectedContent={injectedContent}
                 onRicosEditorChange={onRicosEditorChange}
+                experiments={experiments}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -309,7 +375,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
 
   renderViewer = () => {
     const { contentState, isMobile, locale, localeResource } = this.props;
-    const { isViewerShown, shouldUseNewContent } = this.state;
+    const { isViewerShown, shouldUseNewContent, experiments } = this.state;
 
     return (
       isViewerShown && (
@@ -331,6 +397,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 localeResource={localeResource}
                 scrollingElementFn={this.viewerScrollingElementFn}
                 shouldUseNewContent={shouldUseNewContent}
+                experiments={experiments}
               />
             </ErrorBoundary>
           </SectionContent>

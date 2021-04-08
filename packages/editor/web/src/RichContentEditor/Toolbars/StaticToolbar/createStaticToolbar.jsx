@@ -51,6 +51,7 @@ export default (data = {}) => {
     setEditorState,
     config,
     footerToolbarConfig,
+    name,
   };
 
   const staticToolbarClassName = classNames({
