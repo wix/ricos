@@ -3,6 +3,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 
 .pluginToolbar {
+  outline: 0;
   min-height: 50px;
   top: var(--offset-top);
   left: var(--offset-left);

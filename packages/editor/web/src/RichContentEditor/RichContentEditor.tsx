@@ -643,6 +643,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  focusOnToolbar = () => {
+    const activeToolbar =
+      document &&
+      ((document.querySelectorAll(`[data-hook*=PluginToolbar]`)[0] ||
+        document.querySelectorAll(`[data-hook=inlineToolbar]`)[0]) as HTMLElement);
+
+    activeToolbar && activeToolbar.focus();
+  };
+
   getHeadings = config => {
     const { [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings } = config;
 
@@ -707,6 +716,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   customCommands = [
     {
+      command: COMMANDS.FOCUS_TOOLBAR,
+      modifiers: [MODIFIERS.CTRL],
+      key: 't',
+    },
+    {
       command: COMMANDS.TAB,
       modifiers: [],
       key: 'Tab',
@@ -745,6 +759,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   ];
 
   customCommandHandlers = {
+    focusToolbar: this.focusOnToolbar,
     tab: this.handleTabCommand,
     shiftTab: this.handleTabCommand,
     esc: this.handleEscCommand,
@@ -818,6 +833,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         }
         return (
           <Toolbar
+            removeToolbarFocus={this.focus}
             key={`k${index}`}
             hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
             forceDisabled={
