@@ -242,6 +242,7 @@ class RichContentViewer extends Component<
       const editorClassName = classNames(
         styles.editor,
         renderedInTable && styles.renderedInTable,
+        renderedInTable && viewerStyles.renderedInTable,
         renderedInTable && draftDefaultStyles.renderedInTable,
         {
           [styles.rtl]: textDirection === 'rtl',

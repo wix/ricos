@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 import {
   LINK_PREVIEW_TYPE,
   TABLE_TYPE,
@@ -208,6 +209,7 @@ class InnerRCE extends PureComponent {
             theme.editor,
             renderedInTable && styles.renderedInTable,
             renderedInTable && draftDefaultStyles.renderedInTable,
+            renderedInTable && rtlIgnoredStyles.renderedInTable,
             'inner-rce'
           )}
           ref={this.setEditorWrapper}

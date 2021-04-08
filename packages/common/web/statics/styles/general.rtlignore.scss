@@ -40,7 +40,7 @@
 .sizeFullWidth,
 .textWrapNowrap {
   width: 100%;
-  &.atomicPluginRenderedInTable {
+  .renderedInTable & {
     margin: 0 -8px;
     width: auto;
   }
@@ -57,7 +57,7 @@
 .sizeSmall {
   &:not(.textWrapNowrap) {
     width: 350px;
-    &.atomicPluginRenderedInTable {
+    .renderedInTable & {
       width: 50%;
     }
   }
@@ -68,7 +68,7 @@
     width: 350px;
     margin-left: auto;
     margin-right: auto;
-    &.atomicPluginRenderedInTable {
+    .renderedInTable & {
       width: 150px;
     }
   }
