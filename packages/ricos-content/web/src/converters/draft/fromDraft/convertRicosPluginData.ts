@@ -26,6 +26,7 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
   const converters = {
     [VIDEO_TYPE]: convertVideoData,
     [DIVIDER_TYPE]: convertDividerData,
+    [FILE_UPLOAD_TYPE]: convertFileData,
     [IMAGE_TYPE]: convertImageData,
     [POLL_TYPE]: convertPollData,
     [VERTICAL_EMBED_TYPE]: convertVerticalEmbedData,
@@ -91,6 +92,11 @@ const convertDividerData = data => {
   has(data, 'config.size') && (data.width = data.config.size.toUpperCase());
   has(data, 'config.alignment') && (data.alignment = data.config.alignment.toUpperCase());
   data.containerData = { width: { type: PluginContainerData_Width_Type.CONTENT } };
+};
+
+const convertFileData = data => {
+  has(data, 'config.size') && (data.config.size = toConstantCase(data.config.size));
+  has(data, 'config.alignment') && (data.config.alignment = toConstantCase(data.config.alignment));
 };
 
 const convertImageData = data => {

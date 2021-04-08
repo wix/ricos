@@ -6,6 +6,7 @@ import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
+import { createEditorCommands } from './EditorCommands';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -25,9 +26,10 @@ import {
   MODIFIERS,
   pluginsUndo,
   redo,
+  SelectionState,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
-import { EditorProps as DraftEditorProps } from 'draft-js';
+import { EditorProps as DraftEditorProps, DraftHandleValue } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
@@ -43,7 +45,7 @@ import {
   Helpers,
   TranslationFunction,
   CreatePluginFunction,
-  RicosEntity,
+  onAtomicBlockFocus,
   OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
@@ -61,9 +63,11 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  CreatePluginsDataMap,
   EventName,
   PluginEventParams,
   OnPluginAction,
+  IMAGE_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -121,6 +125,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
+  createPluginsDataMap: CreatePluginsDataMap;
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -128,11 +133,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   locale: string;
   shouldRenderOptimizedImages?: boolean;
   onChange?(editorState: EditorState): void;
-  onAtomicBlockFocus?(params: {
-    blockKey?: string;
-    type?: string;
-    data?: RicosEntity['data'];
-  }): void;
+  onAtomicBlockFocus?: onAtomicBlockFocus;
   siteDomain?: string;
   iframeSandboxDomain?: string;
   onError: OnErrorFunction;
@@ -214,6 +215,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   innerRCECustomStyleFn;
 
+  EditorCommands!: ReturnType<typeof createEditorCommands>;
+
   getSelectedText!: (editorState: EditorState) => string;
 
   static defaultProps: Partial<RichContentEditorProps> = {
@@ -262,6 +265,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.initEditorCommands();
     this.fixDraftSelectionExtend();
   }
 
@@ -498,6 +502,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
+  initEditorCommands = () => {
+    const { createPluginsDataMap = {} } = this.props;
+    this.EditorCommands = createEditorCommands(
+      createPluginsDataMap,
+      this.getEditorState,
+      this.updateEditorState
+    );
+  };
+
   initEditorToolbars(
     pluginButtons: PluginButton[],
     pluginTextButtons: TextButtonMapping[],
@@ -640,6 +653,33 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       : DEFAULT_TITLE_HEADINGS;
 
     return customHeadings;
+  };
+
+  createPluginFromBlobs = (blobs: Blob[]): DraftHandleValue => {
+    if (blobs.length > 0) {
+      const blob = blobs[0];
+      if (blob.type.startsWith('image/')) {
+        const hasImagePlugin = this.plugins.find(({ blockType }) => blockType === IMAGE_TYPE);
+        if (hasImagePlugin) {
+          const blockKey = this.EditorCommands.insertBlock(IMAGE_TYPE);
+          if (blockKey) {
+            this.commonPubsub.set('initialState_' + blockKey, {
+              userSelectedFiles: { files: [blob] },
+            });
+            return 'handled';
+          }
+        }
+      }
+    }
+    return 'not-handled';
+  };
+
+  handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
+  };
+
+  handleDroppedFiles = (_selection: SelectionState, blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
   };
 
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
@@ -927,6 +967,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onFocus={onFocus}
         textAlignment={textAlignment}
         readOnly={readOnly || this.state.readOnly}
+        {...(this.props.experiments?.pastedFilesSupport?.enabled && {
+          handlePastedFiles: this.handlePastedFiles,
+          handleDroppedFiles: this.handleDroppedFiles,
+        })}
       />
     );
   };

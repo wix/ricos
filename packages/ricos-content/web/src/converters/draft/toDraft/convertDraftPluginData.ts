@@ -26,6 +26,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,
     [Node_Type.DIVIDER]: convertDividerData,
+    [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
     [Node_Type.POLL]: convertPollData,
     [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
