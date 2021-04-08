@@ -1,5 +1,5 @@
 import getImagesData from '../../lib/getImagesData';
-import initialContentState from './TestData/imagesContentState';
+import initialContentState from './Fixtures/imagesContentState';
 import { cloneDeep } from 'lodash';
 import { DraftContent } from 'ricos-common';
 
