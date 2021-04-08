@@ -5,7 +5,7 @@ import {
 } from './tableBiCallbacksTypes';
 
 export type GenericEventsName = 'addPluginLink';
-export type EventName = TableEventsName & GenericEventsName;
+export type EventName = TableEventsName | GenericEventsName;
 export type PluginEventParams = TableBiCallbacksParams;
 
 export interface PluginsActionGenericParams {
