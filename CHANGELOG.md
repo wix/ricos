@@ -18,7 +18,12 @@
   </summary>
   
   - `general`
-    - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolbar 
+    - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolbar
+
+### :house: Internal
+
+- `editor-common`
+  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
 
 </details>
 <hr/>
