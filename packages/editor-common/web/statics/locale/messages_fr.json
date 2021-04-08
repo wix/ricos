@@ -429,7 +429,7 @@
   "MapSettings_MapOption_Allow_Dragging_Label": "Permettre de faire glisser",
   "MapSettings_MapOption_Show_View_Control_Label": "Afficher les cartes et vues satellites",
   "HeadingThreeButton_tooltip": "En-tête 3",
-  "GiphyPlugin_InsertButton_Tooltip": "Ajouter un Gif",
+  "GiphyPlugin_InsertButton_Tooltip": "Ajouter un GIF",
   "GalleryPlugin_InsertButton_Tooltip": "Ajouter une galerie",
   "GallerySettings_Radios_Title_Button_Placement": "Positionnement du titre",
   "GiphyPlugin_ApiErrorMsg": "Une erreur s'est produite. Veuillez réessayer plus tard.",
