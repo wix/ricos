@@ -146,9 +146,19 @@ function getChangedAccordionPairIndex(currentPairs, newPairs) {
   return { didChange: changedPairIndex > -1, changedPairIndex, item };
 }
 
+function getNewPairs(currentPairs, newPairs) {
+  return newPairs.map((newPair, index) => {
+    return {
+      key: newPair.key || currentPairs[index].key,
+      title: newPair.title || currentPairs[index].title,
+      content: newPair.content || currentPairs[index].content,
+    };
+  });
+}
+
 function getFixedAccordionEditorStates(currentData, newData) {
   const { pairs: currentPairs } = currentData;
-  const { pairs: newPairs } = newData;
+  const newPairs = getNewPairs(currentPairs, newData.pairs);
   const { didChange, changedPairIndex, item } = getChangedAccordionPairIndex(
     currentPairs,
     newPairs
@@ -187,30 +197,10 @@ function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
   });
 }
 
-function fixBrokenPair(newPairs, currentPairs, brokenPairIndex) {
-  const shouldSetChangeType = newPairs.length === 1;
-  ['title', 'content'].forEach(item => {
-    const newEditorState = removeFocus(currentPairs[brokenPairIndex][item]);
-    newPairs[brokenPairIndex][item] = shouldSetChangeType
-      ? setLastChangeType(newEditorState, 'undo')
-      : newEditorState;
-  });
-  return newPairs;
-}
-
 function handleAccordionEntity(currentData, newData): EntityToReplace {
-  const { pairs: newPairs } = newData;
-  const brokenPairIndex = newPairs.findIndex(pair => !(pair.key && pair.title && pair.content));
-  const didPairBreak = brokenPairIndex > -1;
-  const didChange = didPairBreak || didAccordionConfigChange(currentData, newData);
-  const entityToReplace: EntityToReplace = {
-    shouldUndoAgain: !didChange,
-    fixedData: didPairBreak && {
-      ...newData,
-      pairs: fixBrokenPair(newPairs, currentData.pairs, brokenPairIndex),
-    },
-  };
-  return didChange ? entityToReplace : getFixedAccordionEditorStates(currentData, newData);
+  return didAccordionConfigChange(currentData, newData)
+    ? { shouldUndoAgain: false }
+    : getFixedAccordionEditorStates(currentData, newData);
 }
 
 /* Table Entity Handling */
@@ -319,13 +309,8 @@ function didTableRowStyleChange(currentData, newData) {
 }
 
 function handleTableEntity(currentData, newData): EntityToReplace {
-  const entityToReplace: EntityToReplace = {
-    shouldUndoAgain: !(
-      didTableConfigChange(currentData, newData) || didTableRowStyleChange(currentData, newData)
-    ),
-  };
-  return !entityToReplace.shouldUndoAgain
-    ? entityToReplace
+  return didTableConfigChange(currentData, newData) || didTableRowStyleChange(currentData, newData)
+    ? { shouldUndoAgain: false }
     : getFixedTableData(currentData, newData);
 }
 

@@ -24,6 +24,11 @@
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) Resize buttons
 
+### :house: Internal
+
+- `editor-common`
+  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
+
 </details>
 <hr/>
 
