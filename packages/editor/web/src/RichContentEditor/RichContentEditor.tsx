@@ -27,6 +27,7 @@ import {
   pluginsUndo,
   redo,
   SelectionState,
+  DraftOffsetKey,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps, DraftHandleValue } from 'draft-js';
@@ -198,6 +199,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   editor!: Editor & { setMode: (mode: 'render' | 'edit') => void };
 
   editorWrapper!: Element;
+
+  lastFocusedAtomicPlugin!: string | undefined;
 
   copySource!: { unregister(): void };
 
@@ -648,12 +651,17 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   focusOnToolbar = () => {
-    const activeToolbar =
-      document &&
-      ((document.querySelectorAll(`[data-hook*=PluginToolbar]`)[0] ||
-        document.querySelectorAll(`[data-hook=inlineToolbar]`)[0]) as HTMLElement);
-
-    activeToolbar && activeToolbar.focus();
+    const pluginToolbar = document.querySelectorAll(`[data-hook*=PluginToolbar]`)[0] as HTMLElement;
+    const formattingToolbar = document.querySelectorAll(
+      `[data-hook=inlineToolbar]`
+    )[0] as HTMLElement;
+    if (pluginToolbar && pluginToolbar.dataset.hook !== 'linkPluginToolbar') {
+      this.lastFocusedAtomicPlugin = this.getEditorState()
+        .getSelection()
+        .getFocusKey();
+    }
+    const toolbar = pluginToolbar || formattingToolbar;
+    toolbar && toolbar.focus();
   };
 
   getHeadings = config => {
@@ -844,6 +852,34 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
+  removeToolbarFocus = () => {
+    this.editor.focus();
+    if (this.lastFocusedAtomicPlugin) {
+      const editorState = this.getEditorState();
+      const offsetKey = DraftOffsetKey.encode(this.lastFocusedAtomicPlugin, 0, 0);
+      const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.setStart(node, 0);
+      range.setEnd(node, 0);
+      selection && selection.removeAllRanges();
+      selection && selection.addRange(range);
+      this.setEditorState(
+        EditorState.forceSelection(
+          editorState,
+          new SelectionState({
+            anchorKey: this.lastFocusedAtomicPlugin,
+            anchorOffset: 0,
+            focusKey: this.lastFocusedAtomicPlugin,
+            focusOffset: 0,
+            isBackward: false,
+          })
+        )
+      );
+      this.lastFocusedAtomicPlugin = undefined;
+    }
+  };
+
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
     const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
@@ -864,7 +900,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         }
         return (
           <Toolbar
-            removeToolbarFocus={this.focus}
+            removeToolbarFocus={this.removeToolbarFocus}
             key={`k${index}`}
             hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
             forceDisabled={
