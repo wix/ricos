@@ -239,14 +239,14 @@ class RichContentViewer extends Component<
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !platform || platform === 'desktop',
       });
-      const editorClassName = classNames(
-        styles.editor,
-        renderedInTable && styles.renderedInTable,
-        renderedInTable && draftDefaultStyles.renderedInTable,
-        {
-          [styles.rtl]: textDirection === 'rtl',
-        }
+      const tableClassNames = classNames(
+        styles.renderedInTable,
+        viewerStyles.renderedInTable,
+        draftDefaultStyles.renderedInTable
       );
+      const editorClassName = classNames(styles.editor, renderedInTable && tableClassNames, {
+        [styles.rtl]: textDirection === 'rtl',
+      });
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
