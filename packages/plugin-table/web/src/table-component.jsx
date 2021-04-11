@@ -45,6 +45,10 @@ class TableComponent extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({ updateAllRows: true });
+  }
+
   componentWillReceiveProps(nextProps) {
     if (
       !isPluginFocused(nextProps.block, nextProps.selection) &&

@@ -211,7 +211,7 @@ function handleAccordionEntity(currentData, newData): EntityToReplace {
 
 function setCellChangeType(rows, rowKey, columnKey, lastChangeType) {
   rows[rowKey].columns[columnKey].content = setLastChangeType(
-    EditorState.createWithContent(rows[rowKey].columns[columnKey].content.getCurrentContent()),
+    rows[rowKey].columns[columnKey].content,
     lastChangeType
   );
 }
