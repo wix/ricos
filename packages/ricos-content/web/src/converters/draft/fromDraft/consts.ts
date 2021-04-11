@@ -27,6 +27,7 @@ import {
   VerticalEmbedData,
   VideoData,
   PollData,
+  ImageData,
 } from 'ricos-schema';
 
 export const TO_RICOS_DATA = {
