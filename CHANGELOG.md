@@ -31,6 +31,8 @@
 
 - `fullscreen`
   - [#2357](https://github.com/wix-incubator/rich-content/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests
+- `editor`
+  - [#2367](https://github.com/wix-incubator/rich-content/pull/2367) fix plus button to follow input pointer when there is text alignment or dynamic styles
 
 </details>
 <hr/>
