@@ -21,7 +21,6 @@ class PluginViewer extends PureComponent {
       componentData,
       styles,
       context: { theme, isMobile },
-      innerRCEViewerProps,
     } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
     const hasLink = this.componentHasLink();
@@ -34,7 +33,6 @@ class PluginViewer extends PureComponent {
         [theme.anchor]: hasLink && theme.anchor,
         [styles.embed]: hasLink && html,
         [styles.horizontalScrollbar]: pluginComponent.withHorizontalScroll,
-        [styles.renderedInTable]: innerRCEViewerProps.renderedInTable,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
