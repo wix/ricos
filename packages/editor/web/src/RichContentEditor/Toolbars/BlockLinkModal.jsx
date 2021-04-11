@@ -34,11 +34,11 @@ export default class BlockLinkModal extends Component {
         ? { anchor, category: ANCHOR_CATEGORY }
         : {
             link: item.url,
-            nofollow,
+            rel,
             newTab: isNewTab(target),
             category: WEB_ADDRESS_CATEGORY,
           };
-      triggerBi(biData);
+      triggerBi({ params: biData });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }

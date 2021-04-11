@@ -80,10 +80,12 @@ export default class ButtonInputModal extends Component {
     validUrl &&
       this.props.helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, {
         plugin_id: LINK_BUTTON_TYPE,
-        link: url,
-        newTab: isNewTab(target),
-        category: WEB_ADDRESS_CATEGORY,
-        nofollow: rel,
+        params: {
+          link: url,
+          newTab: isNewTab(target),
+          category: WEB_ADDRESS_CATEGORY,
+          rel,
+        },
       });
   };
 
