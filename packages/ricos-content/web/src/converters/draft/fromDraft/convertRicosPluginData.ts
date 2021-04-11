@@ -19,7 +19,7 @@ import {
   PluginContainerData_Width_Type,
   ButtonData_Type,
 } from 'ricos-schema';
-import { TO_RICOS_DATA } from '../consts';
+import { TO_RICOS_DATA } from './consts';
 
 export const convertBlockDataToRicos = (blockType: string, data) => {
   const newData = cloneDeep(data);

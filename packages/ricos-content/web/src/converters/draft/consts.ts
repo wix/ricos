@@ -21,22 +21,7 @@ import {
   TABLE_TYPE,
   ANCHOR_TYPE,
 } from '../../consts';
-import {
-  ButtonData,
-  Decoration_Type,
-  DividerData,
-  FileData,
-  GalleryData,
-  GiphyData,
-  HTMLData,
-  LinkPreviewData,
-  MapData,
-  Node_Type,
-  PollData,
-  VerticalEmbedData,
-  VideoData,
-  ImageData,
-} from 'ricos-schema';
+import { Decoration_Type, Node_Type } from 'ricos-schema';
 
 export enum BlockType {
   Unstyled = 'unstyled',
@@ -89,24 +74,6 @@ export const TO_RICOS_NODE_TYPE = {
   [VIDEO_TYPE_LEGACY]: Node_Type.VIDEO,
   [POLL_TYPE]: Node_Type.POLL,
   [TABLE_TYPE]: Node_Type.TABLE,
-};
-
-export const TO_RICOS_DATA = {
-  [LINK_BUTTON_TYPE]: ButtonData,
-  [ACTION_BUTTON_TYPE]: ButtonData,
-  [DIVIDER_TYPE]: DividerData,
-  [FILE_UPLOAD_TYPE]: FileData,
-  [GALLERY_TYPE]: GalleryData,
-  [GIPHY_TYPE]: GiphyData,
-  [HTML_TYPE]: HTMLData,
-  [IMAGE_TYPE]: ImageData,
-  [IMAGE_TYPE_LEGACY]: ImageData,
-  [LINK_PREVIEW_TYPE]: LinkPreviewData,
-  [MAP_TYPE]: MapData,
-  [VERTICAL_EMBED_TYPE]: VerticalEmbedData,
-  [VIDEO_TYPE]: VideoData,
-  [VIDEO_TYPE_LEGACY]: VideoData,
-  [POLL_TYPE]: PollData,
 };
 
 const DUPLICATE_KEYS = [IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];

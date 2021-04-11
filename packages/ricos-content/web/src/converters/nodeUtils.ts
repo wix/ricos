@@ -21,7 +21,7 @@ export const createNode = (type: Node_Type, nodes: Node[] = []): Node => ({
 export const createParagraphNode = (nodes: Node[] = [], data?: ParagraphData): Node => ({
   ...createNode(Node_Type.PARAGRAPH, nodes),
   paragraphData: {
-    textStyle: { textAlignment: TextStyle_TextAlignment.LEFT },
+    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,
   },
 });
@@ -37,7 +37,7 @@ export const createTextNode = (text: string, decorations: Decoration[] = []): No
 export const createHeadingNode = (nodes: Node[] = [], data: HeadingData): Node => ({
   ...createNode(Node_Type.HEADING, nodes),
   headingData: {
-    textStyle: { textAlignment: TextStyle_TextAlignment.LEFT },
+    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,
   },
 });
