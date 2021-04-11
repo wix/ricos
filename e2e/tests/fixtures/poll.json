@@ -1,0 +1,95 @@
+{
+    "blocks": [
+      {
+        "key": "50k2j",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "emqjd",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 0
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "6o8e4",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "wix-draft-plugin-poll",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "config": {
+            "alignment": "center",
+            "size": "large",
+            "width": "full-width",
+            "enableVoteRole": false
+          },
+          "poll": {
+            "ownVotes": [],
+            "title": "",
+            "settings": {
+              "multipleVotes": false,
+              "votesDisplay": true,
+              "votersDisplay": true,
+              "voteRole": "SITE_MEMBERS",
+              "resultsVisibility": "VOTERS_ONLY"
+            },
+            "options": [
+              {
+                "title": "",
+                "mediaId": "https://static.wixstatic.com/media/fb62d9f8e7824b2e90b13b971e700b92.jpg"
+              },
+              {
+                "title": "",
+                "mediaId": "https://static.wixstatic.com/media/fb62d9f8e7824b2e90b13b971e700b92.jpg"
+              }
+            ],
+            "mediaId": "https://static.wixstatic.com/media/436483e6ed9e41fe91b9f286d2ea4efb.jpg"
+          },
+          "layout": {
+            "poll": {
+              "type": "list",
+              "direction": "ltr",
+              "enableImage": false
+            },
+            "option": {
+              "enableImage": false
+            }
+          },
+          "design": {
+            "poll": {
+              "backgroundType": "image",
+              "background": "https://static.wixstatic.com/media/2dfdd3_b120b7d9cffd4645bb143beadef13c56~mv2.jpg",
+              "borderRadius": 0
+            },
+            "option": {
+              "borderRadius": 0
+            }
+          },
+          "spoiler": true
+        }
+      }
+    },
+    "VERSION": "8.17.0"
+  }
