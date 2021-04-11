@@ -1,5 +1,5 @@
 /* eslint-disable fp/no-delete */
-import { Node, Node_Type, ButtonData_Type } from 'ricos-schema';
+import { Node, Node_Type, ButtonData_Type, TextStyle_TextAlignment } from 'ricos-schema';
 import {
   RICOS_NODE_TYPE_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_MUTABILITY,
@@ -61,7 +61,7 @@ export const createTextBlockData = (node: Node) => {
   } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
   return JSON.parse(
     JSON.stringify({
-      textAlignment: textAlignment.toLowerCase(),
+      textAlignment: textAlignment !== 'AUTO' ? textAlignment?.toLowerCase() : undefined,
       dynamicStyles: (paddingTop || paddingBottom || lineHeight) && {
         'padding-top': paddingTop,
         'padding-bottom': paddingBottom,

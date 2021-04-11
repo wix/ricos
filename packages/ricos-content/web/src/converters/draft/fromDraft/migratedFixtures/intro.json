@@ -6,7 +6,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "7jp0l",
+          "key": "8tqf1",
           "nodes": [],
           "textData": {
             "text": "Hi! 😃",
@@ -17,7 +17,7 @@
       "headingData": {
         "level": 3,
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         }
       }
     },
@@ -28,7 +28,7 @@
       "headingData": {
         "level": 3,
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         }
       }
     },
@@ -38,7 +38,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "ae0jm",
+          "key": "6k6fb",
           "nodes": [],
           "textData": {
             "text": "Welcome to ",
@@ -47,7 +47,7 @@
         },
         {
           "type": "TEXT",
-          "key": "5q148",
+          "key": "3thgo",
           "nodes": [],
           "textData": {
             "text": "Wix Rich Content",
@@ -74,7 +74,7 @@
         },
         {
           "type": "TEXT",
-          "key": "qqjn",
+          "key": "fh5gh",
           "nodes": [],
           "textData": {
             "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️",
@@ -84,7 +84,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -95,7 +95,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -129,7 +129,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -140,7 +140,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "9icja",
+          "key": "f7te",
           "nodes": [],
           "textData": {
             "text": "Checkout the ",
@@ -149,7 +149,7 @@
         },
         {
           "type": "TEXT",
-          "key": "5rv79",
+          "key": "5dkl",
           "nodes": [],
           "textData": {
             "text": "Example App",
@@ -171,7 +171,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -182,7 +182,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "fnrqg",
+          "key": "6djd8",
           "nodes": [],
           "textData": {
             "text": "Here's a text with a background",
@@ -199,7 +199,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -210,7 +210,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "4nbds",
+          "key": "2v43d",
           "nodes": [],
           "textData": {
             "text": "Heres a text with color",
@@ -230,7 +230,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -244,7 +244,7 @@
           "width": {
             "type": "CONTENT"
           },
-          "alignment": "LEFT"
+          "alignment": "CENTER"
         },
         "type": "DASHED",
         "width": "MEDIUM",
@@ -257,7 +257,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -268,7 +268,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "8dguc",
+          "key": "aomql",
           "nodes": [],
           "textData": {
             "text": "A wise man once said:",
@@ -278,7 +278,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -289,11 +289,11 @@
       "nodes": [
         {
           "type": "PARAGRAPH",
-          "key": "1gdvs",
+          "key": "41fo5",
           "nodes": [
             {
               "type": "TEXT",
-              "key": "genl",
+              "key": "cos8c",
               "nodes": [],
               "textData": {
                 "text": "The Wix Rich Content Editor is the best tool in the world!",
@@ -303,7 +303,7 @@
           ],
           "paragraphData": {
             "textStyle": {
-              "textAlignment": "LEFT"
+              "textAlignment": "AUTO"
             },
             "indentation": 0
           }
@@ -316,7 +316,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -327,7 +327,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "1qqdh",
+          "key": "762r7",
           "nodes": [],
           "textData": {
             "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components.",
@@ -337,7 +337,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -348,7 +348,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -359,7 +359,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "3fu73",
+          "key": "ek571",
           "nodes": [],
           "textData": {
             "text": "Code example:",
@@ -369,7 +369,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -380,7 +380,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "dq5da",
+          "key": "685qg",
           "nodes": [],
           "textData": {
             "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />",
@@ -390,7 +390,7 @@
       ],
       "codeData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         }
       }
     },
@@ -400,7 +400,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "8407e",
+          "key": "b944n",
           "nodes": [],
           "textData": {
             "text": "Pro Gallery Collage:",
@@ -410,7 +410,7 @@
       ],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -421,7 +421,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -496,7 +496,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -507,7 +507,7 @@
       "nodes": [],
       "paragraphData": {
         "textStyle": {
-          "textAlignment": "LEFT"
+          "textAlignment": "AUTO"
         },
         "indentation": 0
       }
@@ -517,8 +517,8 @@
     "createdVersion": "8.11.4",
     "updatedVersion": "8.11.4",
     "updatedDate": {
-      "seconds": 1616316860,
-      "nanos": 705000000
+      "seconds": 1618137534,
+      "nanos": 259000000
     }
   }
 }

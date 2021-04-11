@@ -13,14 +13,14 @@ message DividerData {
     }
 
     enum Width {
-        SMALL = 0;
+        LARGE = 0;
         MEDIUM = 1;
-        LARGE = 2;
+        SMALL = 2;
     }
 
     enum Alignment {
-        LEFT = 0;
-        CENTER = 1;
+        CENTER = 0;
+        LEFT = 1;
         RIGHT = 2;
     }
 

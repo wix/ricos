@@ -181,7 +181,7 @@ const convertButtonData = data => {
 };
 
 const convertHTMLData = data => {
-  delete data.config.size;
+  delete data.config?.size;
 };
 
 const constantToKebabCase = (str: string) => str.toLowerCase().replace('_', '-');

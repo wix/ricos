@@ -81,15 +81,9 @@ const divider = {
   type: RICOS_DIVIDER_TYPE,
   nodeType: Node_Type.DIVIDER,
   data1: DividerData.fromJSON({
-    // TODO: fix default behaviour when alignment & width are not passed
-    alignment: DividerData_Alignment.CENTER,
-    width: DividerData_Width.LARGE,
     type: DividerData_Type.DOUBLE,
   }),
   data2: DividerData.fromJSON({
-    // TODO: fix default behaviour when alignment & width are not passed
-    alignment: DividerData_Alignment.CENTER,
-    width: DividerData_Width.LARGE,
     type: DividerData_Type.DASHED,
   }),
   expectedData1: {
@@ -178,9 +172,8 @@ const giphy = {
 const html = {
   type: RICOS_HTML_TYPE,
   nodeType: Node_Type.HTML,
-  // TODO: fix schema to allow empty config
-  data1: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url', config: {} }),
-  data2: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url', config: {} }),
+  data1: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
+  data2: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url' }),
   expectedData1: {
     config: {
       alignment: 'center',
@@ -201,10 +194,8 @@ const html = {
 
 const gallery = {
   type: RICOS_GALLERY_TYPE,
-  nodeType: Node_Type.HTML,
+  nodeType: Node_Type.GALLERY,
   data1: GalleryData.fromJSON({
-    // TODO: fix schema to allow empty config
-    config: {},
     items: [
       {
         metadata: {
@@ -236,8 +227,6 @@ const gallery = {
     ],
   }),
   data2: GalleryData.fromJSON({
-    // TODO: fix schema to allow empty config
-    config: {},
     items: [
       {
         metadata: {

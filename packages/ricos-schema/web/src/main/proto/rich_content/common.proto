@@ -6,10 +6,11 @@ import "google/protobuf/wrappers.proto";
 
 message TextStyle {
     enum TextAlignment {
-        LEFT = 0;
-        RIGHT = 1;
-        CENTER = 2;
-        JUSTIFY = 3;
+        AUTO = 0;
+        LEFT = 1;
+        RIGHT = 2;
+        CENTER = 3;
+        JUSTIFY = 4;
     }
 
     TextAlignment text_alignment = 1;
@@ -46,9 +47,9 @@ message PluginContainerData {
     }
 
     enum Alignment {
-        LEFT = 0;
-        RIGHT = 1;
-        CENTER = 2;
+        CENTER = 0;
+        LEFT = 1;
+        RIGHT = 2;
     }
 
     Width width = 1;
