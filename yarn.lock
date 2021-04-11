@@ -5843,10 +5843,10 @@
     text-table "^0.2.0"
     webpack-log "^1.1.2"
 
-"@wix/draft-js@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@wix/draft-js/-/draft-js-0.0.10.tgz#b772ea2b3e72a565dac16ca5a687cad908b53894"
-  integrity sha512-+dbXRXzO/7+MYKBkuEaLVT7puR7Hg/88yQZycBGx4SUTjewjz/BGaXpTV+Udd1K7DrhvAkM3LFdF4zwG2CtAbw==
+"@wix/draft-js@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@wix/draft-js/-/draft-js-0.0.11.tgz#e7327883e7e814448a6397a524aa539cf221a70e"
+  integrity sha512-QX4PUea2q86/oMAv024ZxlbhfdAmR4dLVxYejWmauPngy8cfbvW0XkNQlU9JZKtDDFF6RyoqpQQquqBff62Xhg==
   dependencies:
     alex "^8.0.0"
     fbjs "^1.0.0"
