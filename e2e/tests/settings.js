@@ -2,7 +2,6 @@ import { usePlugins, plugins, useConsumerTheming } from '../cypress/testAppConfi
 
 // eslint-disable-next-line prettier/prettier
 export const fixtures = [
-  'headers',
   'images',
   'inline-styles',
   'lists',
@@ -47,6 +46,10 @@ export const fixtures = [
   'all-images-cases-part-2',
   'all-images-cases-part-3',
   'unsupported-blocks',
+  {
+    fixture: 'file-inside-table',
+    config: usePlugins(plugins.all),
+  },
   {
     fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
