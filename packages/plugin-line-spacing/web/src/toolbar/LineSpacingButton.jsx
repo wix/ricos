@@ -87,7 +87,16 @@ export default class LineSpacingButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar, toolbarName } = this.props;
+    const {
+      theme,
+      isMobile,
+      t,
+      tabIndex,
+      defaultSpacing,
+      toolbar,
+      toolbarName,
+      inlinePopups,
+    } = this.props;
     const { isPanelOpen, spacing, panelTop, panelLeft } = this.state;
     const { styles } = this;
     const icon = toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon;
@@ -98,7 +107,7 @@ export default class LineSpacingButton extends Component {
           left: panelLeft,
         };
 
-    if (isMobile || toolbarName !== 'StaticTextToolbar') {
+    if (isMobile || toolbarName !== 'StaticTextToolbar' || !inlinePopups) {
       return (
         <InlineToolbarButton
           onClick={this.openPanel}
@@ -193,9 +202,11 @@ LineSpacingButton.propTypes = {
   keyName: PropTypes.string,
   toolbar: PropTypes.object,
   toolbarName: PropTypes.string,
+  inlinePopups: PropTypes.bool,
 };
 
 LineSpacingButton.defaultProps = {
+  inlinePopups: false,
   setKeepOpen: () => {},
   onUpdate: () => {},
 };
