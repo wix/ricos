@@ -21,12 +21,16 @@
   - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolbar
 
 ### :house: Internal
+
 - `editor-common`
   - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
 
 ### :bug: Bug Fix
+
 - `fullscreen`
   - [#2357](https://github.com/wix-incubator/rich-content/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests
+- `spoiler`
+  - [#2363](https://github.com/wix-incubator/rich-content/pull/2363) remove spoiler button from inline toolbar and add it to settings modal
 
 </details>
 <hr/>
