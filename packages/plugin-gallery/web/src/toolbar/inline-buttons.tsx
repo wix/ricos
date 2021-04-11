@@ -18,11 +18,13 @@ const createInlineButtons: CreateInlineButtons = ({
   anchorTarget,
   relValue,
   settings,
+  isMobile,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
+  isMobile: boolean;
 }) => {
   const icons = settings?.toolbar?.icons || {};
   const spoilerButton = settings.spoiler
@@ -90,10 +92,10 @@ const createInlineButtons: CreateInlineButtons = ({
       icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.GALLERY_SETTINGS,
       activeTab: 'settings',
-      modalStyles,
+      modalStyles: getModalStyles({ isMobile }),
       switchLayout,
       t,
-      mobile: false,
+      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,

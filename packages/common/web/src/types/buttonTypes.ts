@@ -107,4 +107,5 @@ export type CreatePluginToolbar = (
   InlinePluginToolbarButtons?: InlineButton[]; // TODO: this looks like a duplicate. Should be removed.
   InsertButtons?: InsertButton[];
   TextButtonMapper?: TextButtonMapper;
+  isMobile?: boolean;
 };

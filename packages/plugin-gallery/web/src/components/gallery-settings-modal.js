@@ -289,7 +289,9 @@ export class GallerySettingsModal extends Component {
           className={styles.gallerySettings}
           dir={languageDir}
         >
-          <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          {!isMobile && (
+            <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          )}
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab

@@ -18,6 +18,7 @@ const GallerySettingsMobileHeader = ({
     cancel,
     switchTab,
     otherTab,
+    isMediaSettingsModal: true,
     dataHookPrefix: 'gallerySettingsMobileHeader',
     cancelLabel: cancelName || t('GallerySettings_MobileHeader_Cancel'),
     saveLabel: saveName || t('GallerySettings_MobileHeader_Save'),
