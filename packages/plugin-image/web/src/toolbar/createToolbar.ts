@@ -6,6 +6,7 @@ import {
   AnchorTarget,
   RelValue,
   UISettings,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
 import { ImagePluginEditorConfig } from '../types';
 
@@ -16,6 +17,7 @@ const createToolbar: CreatePluginToolbar = ({
   uiSettings,
   isMobile,
   settings,
+  experiments,
 }: {
   t: TranslationFunction;
   settings: ImagePluginEditorConfig;
@@ -23,6 +25,7 @@ const createToolbar: CreatePluginToolbar = ({
   anchorTarget: AnchorTarget;
   relValue: RelValue;
   uiSettings: UISettings;
+  experiments: AvailableExperiments;
 }) => {
   const disableDownload = uiSettings?.disableDownload;
   const disableExpand = settings?.disableExpand;
@@ -35,6 +38,7 @@ const createToolbar: CreatePluginToolbar = ({
       uiSettings,
       isMobile,
       settings,
+      experiments,
     }),
     InsertButtons: createInsertButtons({ t, settings, disableDownload, disableExpand }),
     name: 'image',

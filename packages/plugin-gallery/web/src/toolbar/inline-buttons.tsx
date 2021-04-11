@@ -8,6 +8,7 @@ import {
   TranslationFunction,
   AnchorTarget,
   RelValue,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
 import { GalleryPluginEditorConfig } from '../types';
 
@@ -18,22 +19,26 @@ const createInlineButtons: CreateInlineButtons = ({
   anchorTarget,
   relValue,
   settings,
+  experiments,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
+  experiments: AvailableExperiments;
 }) => {
   const icons = settings?.toolbar?.icons || {};
-  const spoilerButton = settings.spoiler
-    ? [
-        {
-          keyName: 'spoiler',
-          type: BUTTONS.SPOILER,
-          mobile: true,
-        },
-      ]
-    : [];
+  const { spoilerInInlineToolbar } = experiments;
+  const spoilerButton =
+    settings.spoiler && spoilerInInlineToolbar?.enabled
+      ? [
+          {
+            keyName: 'spoiler',
+            type: BUTTONS.SPOILER,
+            mobile: true,
+          },
+        ]
+      : [];
 
   return [
     {

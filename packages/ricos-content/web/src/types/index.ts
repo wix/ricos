@@ -15,6 +15,7 @@ export interface ComponentData {
     url?: string;
     textWrap?: string;
     width?: number | string;
+    spoiler?: { enabled: boolean };
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   src?: any;

@@ -31,9 +31,17 @@ class ImageSettings extends Component {
 
   propsToState(props) {
     const { componentData } = props;
-    const { src, metadata, error, disableExpand, disableDownload } = componentData;
+    const {
+      src,
+      metadata,
+      error,
+      disableExpand,
+      disableDownload,
+      config: { spoiler = {} },
+    } = componentData;
     const isExpandEnabled = !disableExpand;
     const isDownloadEnabled = !disableDownload;
+    const isSpoilerEnabled = spoiler.enabled;
 
     return {
       src,
@@ -41,23 +49,23 @@ class ImageSettings extends Component {
       error,
       isExpandEnabled,
       isDownloadEnabled,
+      isSpoilerEnabled,
     };
   }
 
-  toggleState = key => () => {
-    this.setState(prevState => ({
-      [key]: !prevState[key],
-    }));
+  toggleState = (key, onToggle) => () => {
+    const value = !this.state[key];
+    this.setState({ [key]: value }, onToggle?.(value));
   };
 
-  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText }) => {
+  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText, onToggle }) => {
     return (
       <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
         <LabeledToggle
           theme={this.props.theme}
           checked={this.state[toggleKey]}
           label={this.props.t(labelKey)}
-          onChange={this.toggleState(toggleKey)}
+          onChange={this.toggleState(toggleKey, onToggle)}
           dataHook={dataHook}
           tooltipText={tooltipText}
         />
@@ -76,6 +84,18 @@ class ImageSettings extends Component {
       labelKey: 'ImagePlugin_Settings_ImageCanBeDownloaded_Label',
       dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip'),
+    },
+    {
+      toggleKey: 'isSpoilerEnabled',
+      labelKey: 'Spoiler_Reveal_Image_Placeholder',
+      dataHook: 'imageSpoilerToggle',
+      tooltipText: this.props.t('Spoiler_Reveal_Image_Placeholder'),
+      onToggle: value => {
+        this.props.pubsub.update('componentData', {
+          ...this.props.componentData,
+          ...this.getSpoilerConfig(value),
+        });
+      },
     },
   ];
 
@@ -110,6 +130,7 @@ class ImageSettings extends Component {
     const { helpers, componentData, pubsub } = this.props;
     const newComponentData = {
       ...componentData,
+      ...this.getSpoilerConfig(this.state.isSpoilerEnabled),
       disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,
     };
@@ -120,6 +141,13 @@ class ImageSettings extends Component {
 
     helpers.closeModal();
   };
+
+  getSpoilerConfig = enabled => ({
+    config: {
+      ...this.props.componentData.config,
+      spoiler: { enabled },
+    },
+  });
 
   setBlockLink = item => this.props.pubsub.setBlockData({ key: 'componentLink', item });
 

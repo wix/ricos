@@ -155,12 +155,17 @@ export class GallerySettingsModal extends Component {
   constructor(props) {
     super(props);
     const {
-      componentData: { disableExpand, disableDownload },
+      componentData: {
+        disableExpand,
+        disableDownload,
+        config: { spoiler = {} },
+      },
     } = this.props;
     this.state = {
       activeTab: this.props.activeTab,
       isExpandEnabled: !disableExpand,
       isDownloadEnabled: !disableDownload,
+      isSpoilerEnabled: spoiler.enabled,
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.switchTab = this.switchTab.bind(this);
@@ -217,6 +222,7 @@ export class GallerySettingsModal extends Component {
     const componentData = pubsub.get('componentData');
     const newComponentData = {
       ...componentData,
+      ...this.getSpoilerConfig(this.state.isSpoilerEnabled),
       disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,
     };
@@ -224,20 +230,26 @@ export class GallerySettingsModal extends Component {
     helpers.closeModal();
   };
 
-  toggleState = key => () => {
-    this.setState(prevState => ({
-      [key]: !prevState[key],
-    }));
+  toggleState = (key, onToggle) => () => {
+    const value = !this.state[key];
+    this.setState({ [key]: value }, onToggle?.(value));
   };
 
-  renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook }) => (
+  getSpoilerConfig = enabled => ({
+    config: {
+      ...this.props.componentData.config,
+      spoiler: { enabled },
+    },
+  });
+
+  renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook, onToggle }) => (
     <LabeledToggle
       key={toggleKey}
       theme={this.props.theme}
       checked={this.state[toggleKey]}
       label={this.props.t(labelKey)}
       dataHook={dataHook}
-      onChange={this.toggleState(toggleKey)}
+      onChange={this.toggleState(toggleKey, onToggle)}
       tooltipText={tooltipText}
     />
   );
@@ -253,6 +265,18 @@ export class GallerySettingsModal extends Component {
       labelKey: 'GalleryPlugin_Settings_ImagesCanBeDownloaded_Label',
       dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip'),
+    },
+    {
+      toggleKey: 'isSpoilerEnabled',
+      labelKey: 'Spoiler_Reveal_Image_Placeholder',
+      dataHook: 'imageSpoilerToggle',
+      tooltipText: this.props.t('Spoiler_Reveal_Image_Placeholder'),
+      onToggle: value => {
+        this.props.pubsub.update('componentData', {
+          ...this.props.componentData,
+          ...this.getSpoilerConfig(value),
+        });
+      },
     },
   ];
 

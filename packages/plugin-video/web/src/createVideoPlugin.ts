@@ -12,6 +12,7 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
     isMobile,
     spoilerWrapper,
     commonPubsub,
+    experiments,
     ...rest
   } = config;
   const disableDownload = config?.uiSettings?.disableDownload;
@@ -27,6 +28,7 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
       settings: { ...settings, commonPubsub },
       isMobile,
       disableDownload,
+      experiments,
     }),
     helpers,
     settings,
