@@ -2,23 +2,18 @@ syntax = "proto3";
 
 package rich_content;
 
+import "rich_content/common.proto";
 import "google/protobuf/wrappers.proto";
 
 message HTMLData {
-  string src = 1;
-  google.protobuf.StringValue src_type = 2;
-  HTMLConfig config = 3;
+  PluginContainerData container_data = 1;
+  string src = 2;
+  google.protobuf.StringValue src_type = 3;
+  HTMLConfig config = 4;
 }
 
 message HTMLConfig {
-  enum HTMLAlignment {
-    LEFT = 0;
-    RIGHT = 1;
-    CENTER = 2;
-}
-
   google.protobuf.Int32Value width = 1;
   google.protobuf.Int32Value height = 2;
-  HTMLAlignment alignment = 3;
   google.protobuf.BoolValue safe = 4;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import MobileLinkModal from './MobileLinkModal';
+import { ANCHOR_CATEGORY, WEB_ADDRESS_CATEGORY, isNewTab } from 'wix-rich-content-common';
 
 export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
@@ -30,14 +31,14 @@ export default class BlockLinkModal extends Component {
       });
 
       const biData = anchor
-        ? { anchor, category: 'section' }
+        ? { anchor, category: ANCHOR_CATEGORY }
         : {
             link: item.url,
-            nofollow,
-            newTab: target === '_blank',
-            category: 'web address',
+            rel,
+            newTab: isNewTab(target),
+            category: WEB_ADDRESS_CATEGORY,
           };
-      triggerBi(biData);
+      triggerBi({ params: biData });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }

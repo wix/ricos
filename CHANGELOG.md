@@ -27,13 +27,31 @@
 
 ### :bug: Bug Fix
 
-- `fullscreen`
-  - [#2357](https://github.com/wix-incubator/rich-content/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests
 - `spoiler`
   - [#2363](https://github.com/wix-incubator/rich-content/pull/2363) remove spoiler button from inline toolbar and add it to settings modal
+- `image`
+  - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
 
 </details>
 <hr/>
+
+## 8.29.4 (April 11, 2021)
+
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2357](https://github.com/wix/ricos/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests
+- `editor-common`
+  - [#2368](https://github.com/wix/ricos/pull/2368) fix android issues (update draftjs)
+- `general`
+  - [#2349](https://github.com/wix/ricos/pull/2349) inline plugin popups in static formatting toolbar
+
+### :house: Internal
+
+- `editor-common`
+  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
+- `button-link`
+  - [#2362](https://github.com/wix/ricos/pull/2362) add button link bi
 
 ## 8.29.3 (April 7, 2021)
 
