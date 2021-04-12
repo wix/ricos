@@ -17,7 +17,7 @@ export const fromHtml = (htmlString: string): RichContent => {
     nodes,
     metadata: initializeMetadata(),
   };
-  return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent;
+  return RichContent.fromJSON(content);
 };
 
 const parseHtmlElement = (

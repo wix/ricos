@@ -19,7 +19,7 @@ import {
   parseEntityDecorations,
 } from './decorationParsers';
 
-export const ensureDraftContent = (content: RichContent | DraftContent) =>
+export const ensureDraftContent = (content: RichContent | DraftContent): DraftContent =>
   'nodes' in content ? toDraft(content) : content;
 
 export const toDraft = (ricosContent: RichContent): DraftContent => {

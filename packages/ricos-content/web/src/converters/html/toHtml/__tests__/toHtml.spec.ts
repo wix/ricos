@@ -9,11 +9,11 @@ const complexContentHtml = readFileSync(`${__dirname}/complexContentHtml.html`, 
 
 describe('convert to html', () => {
   it('should convert basic content', () => {
-    const html = toHtml(richTextContent as RichContent);
+    const html = toHtml(RichContent.fromJSON(richTextContent));
     expect(html).toEqual(htmlContent);
   });
   it('should convert complex content', () => {
-    const html = toHtml(complexContent as RichContent);
+    const html = toHtml(RichContent.fromJSON(complexContent));
     expect(html).toEqual(complexContentHtml);
   });
 });

@@ -8,7 +8,7 @@ import { getTextNodes } from './getTextNodes';
 import { getEntity, getTextStyle } from './getRicosEntityData';
 import { createParagraphNode, initializeMetadata } from '../../nodeUtils';
 
-export const ensureRicosContent = (content: RichContent | DraftContent) =>
+export const ensureRicosContent = (content: RichContent | DraftContent): RichContent =>
   'blocks' in content ? fromDraft(content) : content;
 
 export const fromDraft = (draftJSON: DraftContent): RichContent => {
@@ -170,5 +170,5 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     metadata: initializeMetadata(version),
   };
 
-  return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent; // using toJSON to remove undefined fields
+  return RichContent.fromJSON(content);
 };

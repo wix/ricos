@@ -5,7 +5,7 @@ import { toPlainText } from './toPlainText';
 
 describe('convert to plain text', () => {
   it('should convert complex content', async () => {
-    const plainText = await toPlainText(complexContent as RichContent);
+    const plainText = await toPlainText(RichContent.fromJSON(complexContent));
     expect(plainText).toEqual(PLAIN_TEXT);
   });
 });

@@ -10,7 +10,7 @@ syntax = "proto3";
 
 package rich_content;
 
-import "rich_content/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 import "rich_content/decoration_anchor.proto";
 import "rich_content/decoration_color.proto";
 import "rich_content/decoration_link.proto";
@@ -115,5 +115,5 @@ message Decoration {
 message Metadata {
     string created_version = 1; // Rich Content version used to create this schema
     string updated_version = 2; // Rich Content version last used to update this schema
-    Timestamp updated_date = 3; // Time of latest edit
+    google.protobuf.Timestamp updated_date = 3; // Time of latest edit
 }

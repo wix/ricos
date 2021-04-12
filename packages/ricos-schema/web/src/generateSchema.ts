@@ -18,7 +18,7 @@ schemas.forEach(schema => {
 schemas.forEach(schema =>
   execSync(
     // eslint-disable-next-line max-len
-    `protoc --plugin=${TS_PROTO_DIR} --proto_path ${GEN_DIR}/proto --ts_proto_opt=useOptionals=true,outputEncodeMethods=false,constEnums=true,stringEnums=true,useDate=false,exportCommonSymbols=false,outputPartialMethods=false --ts_proto_out=${GEN_DIR} ${GEN_DIR}/proto/rich_content/${schema}`
+    `protoc --plugin=${TS_PROTO_DIR} --proto_path ${GEN_DIR}/proto --ts_proto_opt=useOptionals=true,outputEncodeMethods=false,constEnums=true,stringEnums=true,exportCommonSymbols=false,outputPartialMethods=false --ts_proto_out=${GEN_DIR} ${GEN_DIR}/proto/rich_content/${schema}`
   )
 );
 

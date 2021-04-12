@@ -5,7 +5,6 @@ import {
   Node,
   Decoration,
   Metadata,
-  Timestamp,
   Decoration_Type,
   HeadingData,
 } from 'ricos-schema';
@@ -47,16 +46,8 @@ export const createDecoration = (
   data: Omit<Decoration, 'type'> = {}
 ): Decoration => ({ type, ...data });
 
-export const createTimestamp = (): Timestamp => {
-  const timeMS = Date.now();
-  return {
-    seconds: Math.floor(timeMS / 1000),
-    nanos: (timeMS % 1000) * 1e6,
-  };
-};
-
 export const initializeMetadata = (version?: string): Metadata => ({
   createdVersion: version || Version.currentVersion,
   updatedVersion: version || Version.currentVersion,
-  updatedDate: createTimestamp(),
+  updatedDate: new Date(),
 });
