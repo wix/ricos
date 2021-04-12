@@ -82,6 +82,7 @@ export interface EditorDataInstance {
   getContentTraits: () => {
     isEmpty: boolean;
     isContentChanged: boolean;
+    isLastChangeEdit: boolean;
   };
   getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;
