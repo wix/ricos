@@ -1,15 +1,18 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 
-.fullscreen_mode, .expand_mode {
+.fullscreen_mode,
+.expand_mode {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 100001;
   background: white;
+  overflow: hidden;
 
-  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
+  :global(.pro-gallery .ltr),
+  :global(.pro-gallery .rtl) {
     direction: ltr !important;
   }
 }
@@ -19,7 +22,8 @@
   padding-left: 7px;
 }
 
-.nav_arrow_left, .nav_arrow_right {
+.nav_arrow_left,
+.nav_arrow_right {
   position: fixed;
   > svg {
     filter: drop-shadow(0px 0px 0px black) !important;
@@ -93,4 +97,3 @@
 :global {
   @import '~pro-gallery/dist/statics/main.css';
 }
-
