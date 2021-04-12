@@ -13,7 +13,7 @@
   }
 
   &:hover {
-    button {
+   & > button {
       background-color: rgba($fallbackColorTuple, 0.06);
       @include phone {
         background-color: transparent;
