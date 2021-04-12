@@ -1,5 +1,5 @@
 import {
-  Common_TextAlignment,
+  TextStyle_TextAlignment,
   Node_Type,
   ParagraphData,
   Node,
@@ -9,7 +9,6 @@ import {
   Decoration_Type,
   HeadingData,
 } from 'ricos-schema';
-import { Optional } from 'utility-types';
 import { Version } from '..';
 import { genKey } from './generateRandomKey';
 
@@ -22,7 +21,7 @@ export const createNode = (type: Node_Type, nodes: Node[] = []): Node => ({
 export const createParagraphNode = (nodes: Node[] = [], data?: ParagraphData): Node => ({
   ...createNode(Node_Type.PARAGRAPH, nodes),
   paragraphData: {
-    textAlignment: Common_TextAlignment.LEFT,
+    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,
   },
 });
@@ -35,13 +34,10 @@ export const createTextNode = (text: string, decorations: Decoration[] = []): No
   },
 });
 
-export const createHeadingNode = (
-  nodes: Node[] = [],
-  data: Optional<HeadingData, 'textAlignment'>
-): Node => ({
+export const createHeadingNode = (nodes: Node[] = [], data: HeadingData): Node => ({
   ...createNode(Node_Type.HEADING, nodes),
   headingData: {
-    textAlignment: Common_TextAlignment.LEFT,
+    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,
   },
 });
