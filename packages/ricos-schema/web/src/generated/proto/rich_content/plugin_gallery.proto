@@ -6,9 +6,10 @@ import "rich_content/common.proto";
 import "google/protobuf/wrappers.proto";
 
 message GalleryData {
-  repeated GalleryItem items = 1;
-  GalleryStyles styles = 2;
-  GalleryConfig config = 3;
+  PluginContainerData container_data = 1;
+  repeated GalleryItem items = 2;
+  GalleryStyles styles = 3;
+  GalleryConfig config = 4;
 }
 
 message GalleryStyles {
@@ -54,24 +55,10 @@ message GalleryStyles {
 }
 
 message GalleryConfig {
-  enum GallerySize {
-    CONTENT = 0;
-    SMALL = 1;
-    FULL_WIDTH = 2;
-  }
-  enum GalleryAlignment {
-    LEFT = 0;
-    RIGHT = 1;
-    CENTER = 2;
-  }
-
-  GalleryAlignment alignment = 1;
-  GallerySize size = 2;
-  google.protobuf.StringValue layout = 3;
-  google.protobuf.Int32Value spacing = 4;
-  google.protobuf.StringValue key = 5;
-  Spoiler spoiler = 6;
-  google.protobuf.BoolValue disableExpand = 7;
+  google.protobuf.StringValue layout = 2;
+  google.protobuf.Int32Value spacing = 3;
+  google.protobuf.StringValue key = 4;
+  google.protobuf.BoolValue disableExpand = 5;
 }
 
 message GalleyItemMetadata {

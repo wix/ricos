@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/labeled-toggle.scss';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
+import { InfoIcon } from 'wix-rich-content-editor-common';
 
 export default class LabeledToggle extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class LabeledToggle extends Component {
   }
 
   render() {
-    const { label, onChange, checked, style, dataHook } = this.props;
+    const { label, onChange, checked, style, dataHook, tooltipText } = this.props;
 
     return (
       <div className={this.styles.labeled_toggle_root} style={style}>
@@ -24,6 +25,13 @@ export default class LabeledToggle extends Component {
         >
           <p className={this.styles.labeled_toggle_label}>{label}</p>
         </div>
+        {tooltipText && (
+          <InfoIcon
+            theme={this.props.theme}
+            iconStyles={styles.infoIcon}
+            tooltipText={tooltipText}
+          />
+        )}
         <div
           className={this.styles.labeled_toggle_input_root}
           onClick={onChange}
@@ -66,4 +74,5 @@ LabeledToggle.propTypes = {
   theme: PropTypes.object.isRequired,
   style: PropTypes.object,
   dataHook: PropTypes.string,
+  tooltipText: PropTypes.string,
 };

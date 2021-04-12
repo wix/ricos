@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 import {
   LINK_PREVIEW_TYPE,
   TABLE_TYPE,
@@ -100,8 +101,12 @@ class InnerRCE extends PureComponent {
     return config;
   };
 
+  shouldTriggerOnChange = editorState =>
+    !this.props.experiments?.UseUndoForPlugins?.enabled ||
+    !['undo', 'redo'].includes(editorState.getLastChangeType());
+
   onChange = editorState => {
-    this.props.onChange(editorState);
+    this.shouldTriggerOnChange(editorState) && this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
@@ -194,6 +199,11 @@ class InnerRCE extends PureComponent {
     if (renderedInTable && isMobile) {
       toolbarsToIgnore.push('SideToolbar');
     }
+    const tableClassNames = classNames(
+      styles.renderedInTable,
+      draftDefaultStyles.renderedInTable,
+      rtlIgnoredStyles.renderedInTable
+    );
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
         <div
@@ -202,8 +212,7 @@ class InnerRCE extends PureComponent {
           className={classNames(
             styles.editor,
             theme.editor,
-            renderedInTable && styles.renderedInTable,
-            renderedInTable && draftDefaultStyles.renderedInTable,
+            renderedInTable && tableClassNames,
             'inner-rce'
           )}
           ref={this.setEditorWrapper}
@@ -251,6 +260,7 @@ InnerRCE.propTypes = {
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
   tablePluginMenu: PropTypes.bool,
+  experiments: PropTypes.object,
 };
 
 export default InnerRCE;

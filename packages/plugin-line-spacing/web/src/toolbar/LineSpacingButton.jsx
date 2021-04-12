@@ -8,6 +8,7 @@ import {
   mergeBlockData,
   EditorState,
 } from 'wix-rich-content-editor-common';
+import ClickOutside from 'react-click-outsider';
 
 import LineSpacingIcon from '../icons/LineSpacingIcon';
 import Modal from 'react-modal';
@@ -31,14 +32,19 @@ export default class LineSpacingButton extends Component {
     return pick(dynamicStyles, [lineHeight, spaceBefore, spaceAfter]);
   }
 
-  openPanel = () => {
+  onOpenPanel = () => {
     this.currentEditorState = this.oldEditorState = this.props.getEditorState();
     this.selection = this.oldEditorState.getSelection();
     const spacing = LineSpacingButton.getBlockSpacing(this.oldEditorState);
     this.oldSpacing = spacing;
+    this.setState({ isPanelOpen: true, spacing });
+  };
+
+  openPanel = () => {
+    this.onOpenPanel();
     const { bottom, left } = this.buttonRef.getBoundingClientRect();
     this.props.setKeepOpen(true);
-    this.setState({ isPanelOpen: true, panelLeft: left, panelTop: bottom, spacing });
+    this.setState({ panelLeft: left, panelTop: bottom });
   };
 
   closePanel = () => {
@@ -81,7 +87,16 @@ export default class LineSpacingButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, defaultSpacing, toolbar } = this.props;
+    const {
+      theme,
+      isMobile,
+      t,
+      tabIndex,
+      defaultSpacing,
+      toolbar,
+      toolbarName,
+      inlinePopups,
+    } = this.props;
     const { isPanelOpen, spacing, panelTop, panelLeft } = this.state;
     const { styles } = this;
     const icon = toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon;
@@ -92,46 +107,81 @@ export default class LineSpacingButton extends Component {
           left: panelLeft,
         };
 
-    return (
-      <InlineToolbarButton
-        onClick={this.openPanel}
-        isActive={!!isPanelOpen}
-        theme={theme}
-        isMobile={isMobile}
-        tooltipText={t('LineSpacingButton_Tooltip')}
-        dataHook={'LineSpacingButton'}
-        tabIndex={tabIndex}
-        icon={icon}
-        ref={ref => (this.buttonRef = ref)}
-      >
-        <Modal
-          isOpen={isPanelOpen}
-          onRequestClose={() => this.save()}
-          className={classNames(styles.lineSpacingModal, {
-            [styles.lineSpacingModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames(styles.lineSpacingModalOverlay, {
-            [styles.lineSpacingModalOverlay_mobile]: isMobile,
-          })}
-          parentSelector={LineSpacingButton.getModalParent}
-          style={{
-            content: modalStyle,
-          }}
-          ariaHideApp={false}
+    if (isMobile || toolbarName !== 'StaticTextToolbar' || !inlinePopups) {
+      return (
+        <InlineToolbarButton
+          onClick={this.openPanel}
+          isActive={!!isPanelOpen}
+          theme={theme}
+          isMobile={isMobile}
+          tooltipText={t('LineSpacingButton_Tooltip')}
+          dataHook={'LineSpacingButton'}
+          tabIndex={tabIndex}
+          icon={icon}
+          ref={ref => (this.buttonRef = ref)}
         >
-          <Panel
-            spacing={{ ...defaultSpacing, ...spacing }}
-            onChange={this.updateSpacing}
-            onSave={this.save}
-            onCancel={this.cancel}
-            styles={this.styles}
-            t={t}
-            isMobile={isMobile}
+          <Modal
+            isOpen={isPanelOpen}
+            onRequestClose={() => this.save()}
+            className={classNames(styles.lineSpacingModal, {
+              [styles.lineSpacingModal_mobile]: isMobile,
+            })}
+            overlayClassName={classNames(styles.lineSpacingModalOverlay, {
+              [styles.lineSpacingModalOverlay_mobile]: isMobile,
+            })}
+            parentSelector={LineSpacingButton.getModalParent}
+            style={{
+              content: modalStyle,
+            }}
+            ariaHideApp={false}
+          >
+            <Panel
+              spacing={{ ...defaultSpacing, ...spacing }}
+              onChange={this.updateSpacing}
+              onSave={this.save}
+              onCancel={this.cancel}
+              styles={this.styles}
+              t={t}
+              isMobile={isMobile}
+              theme={theme}
+            />
+          </Modal>
+        </InlineToolbarButton>
+      );
+    } else {
+      return (
+        <div className={styles.lineSpacingPopup_button}>
+          <InlineToolbarButton
+            onClick={this.openPanel}
+            isActive={!!isPanelOpen}
             theme={theme}
-          />
-        </Modal>
-      </InlineToolbarButton>
-    );
+            isMobile={isMobile}
+            tooltipText={t('LineSpacingButton_Tooltip')}
+            dataHook={'LineSpacingButton'}
+            tabIndex={tabIndex}
+            icon={icon}
+            ref={ref => (this.buttonRef = ref)}
+          >
+            {isPanelOpen && (
+              <div className={styles.lineSpacingPopup}>
+                <ClickOutside onClickOutside={() => this.save()}>
+                  <Panel
+                    spacing={{ ...defaultSpacing, ...spacing }}
+                    onChange={this.updateSpacing}
+                    onSave={this.save}
+                    onCancel={this.cancel}
+                    styles={this.styles}
+                    t={t}
+                    isMobile={isMobile}
+                    theme={theme}
+                  />
+                </ClickOutside>
+              </div>
+            )}
+          </InlineToolbarButton>
+        </div>
+      );
+    }
   }
 }
 
@@ -151,9 +201,12 @@ LineSpacingButton.propTypes = {
   settings: PropTypes.object,
   keyName: PropTypes.string,
   toolbar: PropTypes.object,
+  toolbarName: PropTypes.string,
+  inlinePopups: PropTypes.bool,
 };
 
 LineSpacingButton.defaultProps = {
+  inlinePopups: false,
   setKeepOpen: () => {},
   onUpdate: () => {},
 };

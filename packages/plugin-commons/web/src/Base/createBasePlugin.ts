@@ -6,6 +6,7 @@ import createInsertPluginButton from './createBaseInsertPluginButton';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import {
   deleteBlock,
+  setBlockNewEntityData,
   setEntityData,
   getToolbarTheme,
   TOOLBARS,
@@ -46,9 +47,15 @@ const getData = (
 
 const setData = (
   contentBlock: ContentBlock,
-  { getEditorState, setEditorState }: EditorStateFuncs
-) => newData =>
-  setEditorState(setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData));
+  { getEditorState, setEditorState }: EditorStateFuncs,
+  type: string,
+  commonPubsub
+) => newData => {
+  const editorState = commonPubsub.get('undoExperiment')?.()
+    ? setBlockNewEntityData(getEditorState(), contentBlock.getKey(), newData, type)
+    : setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData);
+  setEditorState(editorState);
+};
 
 const deleteEntity = (
   contentBlock: ContentBlock,
@@ -244,7 +251,6 @@ const createBasePlugin = (
       noPluginBorder,
       noPointerEventsOnFocus,
       withHorizontalScroll,
-      innerRCERenderedIn: config.type === 'wix-draft-plugin-divider' ? false : innerRCERenderedIn,
       disableKeyboardEvents,
     });
 
@@ -286,7 +292,12 @@ const createBasePlugin = (
                   { getEditorState },
                   type === UNSUPPORTED_BLOCKS_TYPE
                 ),
-                setData: setData(contentBlock, { getEditorState, setEditorState }),
+                setData: setData(
+                  contentBlock,
+                  { getEditorState, setEditorState },
+                  config.type,
+                  commonPubsub
+                ),
                 deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
                 type,
               },

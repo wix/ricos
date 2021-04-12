@@ -56,7 +56,7 @@ export default class TextLinkButton extends Component {
             content: {
               width: 512,
               maxWidth: 512,
-              height: 380,
+              height: 390,
               padding: 10,
             },
           }

@@ -17,6 +17,10 @@ import {
   DraftContent,
   TextToolbarType,
   TranslationFunction,
+  AvailableExperiments,
+  EventName,
+  PluginEventParams,
+  OnPluginAction,
 } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
@@ -37,7 +41,7 @@ const anchorTarget = '_blank';
 const relValue = 'noopener';
 let shouldMultiSelectImages = false;
 
-interface ExampleEditprProps {
+interface ExampleEditorProps {
   onChange?: RichContentEditorProps['onChange'];
   editorState?: RichContentEditorProps['editorState'];
   theme?: RichContentEditorProps['theme'];
@@ -58,24 +62,25 @@ interface ExampleEditprProps {
   contentState?: DraftContent;
   injectedContent?: DraftContent;
   onRicosEditorChange?: RicosEditorProps['onChange'];
+  experiments?: AvailableExperiments;
 }
 
-interface ExampleEditprState {
+interface ExampleEditorState {
   showModal?: boolean;
   modalProps?: any;
   modalStyles?: ModalStyles;
   MobileToolbar?: ElementType;
   TextToolbar?: ElementType;
 }
-export default class Editor extends PureComponent<ExampleEditprProps, ExampleEditprState> {
-  state: ExampleEditprState = {};
+export default class Editor extends PureComponent<ExampleEditorProps, ExampleEditorState> {
+  state: ExampleEditorState = {};
   plugins: RichContentEditorProps['plugins'];
   config: RichContentEditorProps['config'];
   helpers: RichContentEditorProps['helpers'];
   editor: RichContentEditor;
   ricosPlugins: RicosEditorProps['plugins'];
 
-  constructor(props: ExampleEditprProps) {
+  constructor(props: ExampleEditorProps) {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
@@ -108,13 +113,17 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
   }
 
   initEditorProps() {
+    const onPluginAction: OnPluginAction = async (
+      eventName: EventName,
+      params: PluginEventParams
+    ) => console.log(eventName, params);
     this.helpers = {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
         console.log('biPluginAdd', plugin_id, entry_point, version),
       onPluginAddStep: async params => console.log('onPluginAddStep', params),
-      onPluginAddSuccess: async (plugin_id, entry_point, version) =>
-        console.log('biPluginAddSuccess', plugin_id, entry_point, version),
+      onPluginAddSuccess: async (plugin_id, entry_point, params, version) =>
+        console.log('biPluginAddSuccess', plugin_id, entry_point, params, version),
       onPluginDelete: async (plugin_id, version) =>
         console.log('biPluginDelete', plugin_id, version),
       onPluginChange: async (plugin_id, changeObj, version) =>
@@ -162,6 +171,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
           modalStyles: null,
         });
       },
+      onPluginAction,
     };
     this.setImageUploadHelper();
   }
@@ -274,6 +284,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
       contentState,
       injectedContent,
       onRicosEditorChange,
+      experiments,
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
@@ -312,6 +323,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               placeholder={'Add some text!'}
               plugins={this.ricosPlugins}
               linkPanelSettings={this.config.uiSettings.linkPanel}
+              _rcProps={{ experiments }}
             >
               <RichContentEditor helpers={helpersWithoutModal} />
             </RicosEditor>
@@ -334,6 +346,7 @@ export default class Editor extends PureComponent<ExampleEditprProps, ExampleEdi
               config={this.config}
               editorKey="random-editorKey-ssr"
               setEditorToolbars={this.setEditorToolbars}
+              experiments={experiments}
               {...editorProps}
             />
             <ReactModal

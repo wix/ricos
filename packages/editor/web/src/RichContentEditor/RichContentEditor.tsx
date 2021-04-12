@@ -6,6 +6,7 @@ import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
+import { createEditorCommands } from './EditorCommands';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -23,9 +24,12 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  pluginsUndo,
+  redo,
+  SelectionState,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
-import { EditorProps as DraftEditorProps } from 'draft-js';
+import { EditorProps as DraftEditorProps, DraftHandleValue } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
@@ -41,7 +45,7 @@ import {
   Helpers,
   TranslationFunction,
   CreatePluginFunction,
-  RicosEntity,
+  onAtomicBlockFocus,
   OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
@@ -59,6 +63,11 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  CreatePluginsDataMap,
+  EventName,
+  PluginEventParams,
+  OnPluginAction,
+  IMAGE_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -116,6 +125,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
+  createPluginsDataMap: CreatePluginsDataMap;
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -123,11 +133,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   locale: string;
   shouldRenderOptimizedImages?: boolean;
   onChange?(editorState: EditorState): void;
-  onAtomicBlockFocus?(params: {
-    blockKey?: string;
-    type?: string;
-    data?: RicosEntity['data'];
-  }): void;
+  onAtomicBlockFocus?: onAtomicBlockFocus;
   siteDomain?: string;
   iframeSandboxDomain?: string;
   onError: OnErrorFunction;
@@ -142,6 +148,8 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleReturn?: (
     updateEditorStateCallback: (editorState: EditorState) => void
   ) => DraftEditorProps['handleReturn'];
+  handleUndoCommand?: (editorState?: EditorState) => EditorState;
+  handleRedoCommand?: (editorState?: EditorState) => EditorState;
   tablePluginMenu?: boolean;
   callOnChangeOnNewEditorState?: boolean;
   localeResource?: Record<string, string>;
@@ -207,6 +215,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   innerRCECustomStyleFn;
 
+  EditorCommands!: ReturnType<typeof createEditorCommands>;
+
   getSelectedText!: (editorState: EditorState) => string;
 
   static defaultProps: Partial<RichContentEditorProps> = {
@@ -255,6 +265,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.initEditorCommands();
     this.fixDraftSelectionExtend();
   }
 
@@ -278,6 +289,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
+    document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
+    this.commonPubsub.set('undoExperiment', this.getUndoExperiment);
   }
 
   componentWillMount() {
@@ -291,7 +304,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.copySource) {
       this.copySource.unregister();
     }
+    document?.removeEventListener('beforeinput', this.preventDefaultKeyCommands);
   }
+
+  preventDefaultKeyCommands = event => {
+    if (['historyUndo', 'historyRedo'].includes(event.inputType)) {
+      event.preventDefault();
+    }
+  };
 
   // imports dynamic chunks conditionally
   preloadLibs() {
@@ -369,10 +389,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       siteDomain,
       iframeSandboxDomain,
       innerRCERenderedIn,
+      experiments,
     } = this.props;
 
     this.fixHelpers(helpers);
-
+    const onPluginAction: OnPluginAction = (eventName: EventName, params: PluginEventParams) =>
+      helpers.onPluginAction?.(eventName, { ...params, version: Version.currentVersion });
     this.contextualData = {
       theme: theme || {},
       t,
@@ -425,8 +447,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             Version.currentVersion
           );
         },
-        onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
-          helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
+        onPluginAddSuccess: (pluginId: string, entryPoint: string, params) =>
+          helpers.onPluginAddSuccess?.(pluginId, entryPoint, params, Version.currentVersion),
+        onPluginAction,
+        onPluginChange: (pluginId: string, changeObj) =>
+          helpers.onPluginChange?.(pluginId, changeObj, Version.currentVersion),
       },
       config,
       isMobile,
@@ -445,6 +470,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
       disableKeyboardEvents: this.disableKeyboardEvents,
+      experiments,
     };
   };
 
@@ -478,6 +504,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
+  initEditorCommands = () => {
+    const { createPluginsDataMap = {} } = this.props;
+    this.EditorCommands = createEditorCommands(
+      createPluginsDataMap,
+      this.getEditorState,
+      this.updateEditorState
+    );
+  };
+
   initEditorToolbars(
     pluginButtons: PluginButton[],
     pluginTextButtons: TextButtonMapping[],
@@ -494,6 +529,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       pluginButtonProps,
       isInnerRCE,
       tablePluginMenu,
+      pubsub: this.commonPubsub,
     });
   }
 
@@ -550,7 +586,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.props.direction !== nextProps.direction) {
       this.forceRender();
     }
-    // TODO: new editor state should become initialContentState?
     if (nextProps.editorState && this.props.editorState !== nextProps.editorState) {
       if (this.props.callOnChangeOnNewEditorState) {
         this.updateEditorState(nextProps.editorState);
@@ -623,6 +658,33 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return customHeadings;
   };
 
+  createPluginFromBlobs = (blobs: Blob[]): DraftHandleValue => {
+    if (blobs.length > 0) {
+      const blob = blobs[0];
+      if (blob.type.startsWith('image/')) {
+        const hasImagePlugin = this.plugins.find(({ blockType }) => blockType === IMAGE_TYPE);
+        if (hasImagePlugin) {
+          const blockKey = this.EditorCommands.insertBlock(IMAGE_TYPE);
+          if (blockKey) {
+            this.commonPubsub.set('initialState_' + blockKey, {
+              userSelectedFiles: { files: [blob] },
+            });
+            return 'handled';
+          }
+        }
+      }
+    }
+    return 'not-handled';
+  };
+
+  handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
+  };
+
+  handleDroppedFiles = (_selection: SelectionState, blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
+  };
+
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       const handled = this.props.handlePastedText(text, html, editorState);
@@ -651,40 +713,86 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     event?.preventDefault();
   };
 
+  getUndoExperiment = () => this.props.experiments?.UseUndoForPlugins?.enabled;
+
+  handleUndoCommand = (editorState: EditorState, event) => {
+    event?.preventDefault();
+    if (this.props.isInnerRCE) {
+      this.props.handleUndoCommand?.();
+    } else {
+      this.updateEditorState(pluginsUndo(editorState || this.state.editorState));
+      this.setState({ readOnly: false });
+    }
+    return 'handled';
+  };
+
+  handleRedoCommand = (editorState: EditorState, event) => {
+    event?.preventDefault();
+    if (this.props.isInnerRCE) {
+      this.props.handleRedoCommand?.();
+    } else {
+      this.updateEditorState(redo(editorState || this.state.editorState));
+      this.setState({ readOnly: false });
+    }
+    return 'handled';
+  };
+
+  customCommands = [
+    {
+      command: COMMANDS.TAB,
+      modifiers: [],
+      key: 'Tab',
+    },
+    {
+      command: COMMANDS.SHIFT_TAB,
+      modifiers: [MODIFIERS.SHIFT],
+      key: 'Tab',
+    },
+    {
+      command: COMMANDS.ESC,
+      modifiers: [],
+      key: 'Escape',
+    },
+    this.getUndoExperiment()
+      ? {
+          command: COMMANDS.UNDO,
+          modifiers: [MODIFIERS.COMMAND],
+          key: 'z',
+        }
+      : {},
+    this.getUndoExperiment()
+      ? {
+          command: COMMANDS.REDO,
+          modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+          key: 'z',
+        }
+      : {},
+    this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+      ? {
+          command: 'cmdShift7',
+          modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+          key: '7',
+        }
+      : {},
+  ];
+
+  customCommandHandlers = {
+    tab: this.handleTabCommand,
+    shiftTab: this.handleTabCommand,
+    esc: this.handleEscCommand,
+    ...(this.getUndoExperiment()
+      ? { ricosUndo: this.handleUndoCommand, ricosRedo: this.handleRedoCommand }
+      : {}),
+    ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
+      ? { cmdShift7: makeBarrelRoll }
+      : {}),
+  };
+
   getCustomCommandHandlers = () => ({
-    commands: [
-      ...this.pluginKeyBindings.commands,
-      {
-        command: COMMANDS.TAB,
-        modifiers: [],
-        key: 'Tab',
-      },
-      {
-        command: COMMANDS.SHIFT_TAB,
-        modifiers: [MODIFIERS.SHIFT],
-        key: 'Tab',
-      },
-      {
-        command: COMMANDS.ESC,
-        modifiers: [],
-        key: 'Escape',
-      },
-      this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
-        ? {
-            command: 'cmdShift7',
-            modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-            key: '7',
-          }
-        : {},
-    ],
-    commandHanders: {
+    commands: [...this.pluginKeyBindings.commands, ...this.customCommands],
+    commandHandlers: {
       ...this.pluginKeyBindings.commandHandlers,
-      tab: this.handleTabCommand,
-      shiftTab: this.handleTabCommand,
-      esc: this.handleEscCommand,
-      ...(this.props.experiments?.barrelRoll?.enabled && typeof window !== 'undefined'
-        ? { cmdShift7: makeBarrelRoll }
-        : {}),
+      ...this.customCommandHandlers,
     },
   });
 
@@ -827,7 +935,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         handleReturn={
           handleReturn
             ? handleReturn(this.updateEditorState)
-            : handleReturnCommand(this.updateEditorState)
+            : handleReturnCommand(this.updateEditorState, this.commonPubsub)
         }
         editorState={editorState}
         onChange={this.updateEditorState}
@@ -837,7 +945,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
-          this.getCustomCommandHandlers().commandHanders,
+          this.getCustomCommandHandlers().commandHandlers,
           getBlockType(editorState),
           onBackspace,
           innerRCERenderedIn
@@ -863,6 +971,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onFocus={onFocus}
         textAlignment={textAlignment}
         readOnly={readOnly || this.state.readOnly}
+        {...(this.props.experiments?.pastedFilesSupport?.enabled && {
+          handlePastedFiles: this.handlePastedFiles,
+          handleDroppedFiles: this.handleDroppedFiles,
+        })}
       />
     );
   };
@@ -892,6 +1004,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
+        handleUndoCommand={this.handleUndoCommand}
+        handleRedoCommand={this.handleRedoCommand}
         tablePluginMenu={tablePluginMenu}
       />
     );

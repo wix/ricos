@@ -13,8 +13,8 @@ class ImageComponent extends React.Component {
   static alignmentClassName = (componentData, theme, styles, isMobile) =>
     alignmentClassName(componentData, theme, styles, isMobile);
 
-  static sizeClassName = (componentData, theme, styles, isMobile, innerRCERenderedIn) =>
-    sizeClassName(componentData, theme, styles, isMobile, innerRCERenderedIn);
+  static sizeClassName = (componentData, theme, styles, isMobile) =>
+    sizeClassName(componentData, theme, styles, isMobile);
 
   constructor(props) {
     super(props);
@@ -101,6 +101,7 @@ class ImageComponent extends React.Component {
       config.alignment = imageData.width >= 740 ? 'center' : 'left';
     }
     const componentData = {
+      ...this.props.componentData,
       config,
       src: imageData,
       error,

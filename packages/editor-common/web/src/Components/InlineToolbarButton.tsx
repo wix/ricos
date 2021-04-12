@@ -1,13 +1,30 @@
 /* eslint-disable max-len */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactElement, ReactNode, Ref, FC } from 'react';
 import classNames from 'classnames';
 import ToolbarButton from './ToolbarButton';
 import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
-class InlineToolbarButton extends Component {
+type InlineToolbarButtonProps = {
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  isActive?: boolean;
+  theme?: Record<string, string>;
+  dataHook?: string;
+  isMobile?: boolean;
+  tooltipText: string;
+  tabIndex?: number;
+  icon: (() => JSX.Element) | FC<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  forwardRef?: Ref<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  children?: ReactElement | ReactNode;
+  disabled?: boolean;
+  buttonContent?: string;
+  showArrowIcon?: boolean;
+};
+
+class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
+  styles: Record<string, string>;
+
   constructor(props) {
     super(props);
     const { buttonStyles = {} } = props.theme || {};
@@ -51,28 +68,11 @@ class InlineToolbarButton extends Component {
     };
   }
 
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-    isActive: PropTypes.bool.isRequired,
-    theme: PropTypes.object.isRequired,
-    dataHook: PropTypes.string.isRequired,
-    isMobile: PropTypes.bool,
-    tooltipText: PropTypes.string,
-    tabIndex: PropTypes.number,
-    icon: PropTypes.func.isRequired,
-    children: PropTypes.node,
-    forwardRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
-    disabled: PropTypes.bool,
-    buttonContent: PropTypes.string,
-    showArrowIcon: PropTypes.bool,
-  };
-
   preventDefault = event => event.preventDefault();
 
   render() {
     const {
       isActive,
-      theme,
       tooltipText,
       dataHook,
       tabIndex,
@@ -136,10 +136,10 @@ class InlineToolbarButton extends Component {
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
-    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={codeBlockButton} />;
+    return <ToolbarButton tooltipText={tooltipText} button={codeBlockButton} />;
   }
 }
 
-export default React.forwardRef((props, ref) => (
+export default React.forwardRef<InlineToolbarButton, InlineToolbarButtonProps>((props, ref) => (
   <InlineToolbarButton forwardRef={ref} {...props} />
 ));

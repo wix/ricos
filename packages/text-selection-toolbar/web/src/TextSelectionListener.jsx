@@ -1,7 +1,7 @@
 const getSelectedText = selection => selection.toString().replace(/(\r\n|\r|\n){2,}/g, ' ');
 
 const getSelectionPosition = selection => {
-  const parent = selection.anchorNode.parentNode;
+  const parent = selection.anchorNode.parentNode.closest('[data-id=rich-content-viewer]');
   const parentRect = parent.getBoundingClientRect();
   const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
   const parentTop = parent.offsetTop;

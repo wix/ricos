@@ -1,6 +1,6 @@
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
-import { ComponentData, DraftContent } from 'ricos-content';
+import { ComponentData, DraftContent, RicosEntity } from 'ricos-content';
 import {
   DecorationMode,
   TranslationFunction,
@@ -62,6 +62,16 @@ export type OnConfirmFunction = (
 
 export type TextDirection = 'rtl' | 'ltr';
 
+export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
+
+export type InlineStyle = 'bold' | 'underline' | 'italic';
+
+export type onAtomicBlockFocus = (params: {
+  blockKey?: string;
+  type?: string;
+  data?: RicosEntity['data'];
+}) => void;
+
 export interface SEOSettings {
   paywall?: {
     className?: string;
@@ -95,6 +105,7 @@ export interface EditorContextType extends CommonContextType {
   renderInnerRCE: (params: any) => JSX.Element;
   innerRCERenderedIn?: string;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
+  experiments?: AvailableExperiments;
 }
 
 export interface ViewerContextType extends CommonContextType {

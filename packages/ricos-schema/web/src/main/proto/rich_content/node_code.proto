@@ -5,6 +5,5 @@ package rich_content;
 import "rich_content/common.proto";
 
 message CodeData {
-    Common.TextAlignment text_alignment = 1;
-    Common.DynamicStyles dynamic_styles = 2;
+    TextStyle text_style = 1;
 }

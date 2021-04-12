@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EditorModals, getModalStyles, LinkButton } from 'wix-rich-content-editor-common';
+import { ADD_PLUGIN_LINK_BI } from 'wix-rich-content-common';
 import { isEmpty } from 'lodash';
 
 //Atomic Blocks Link Button
@@ -9,6 +10,12 @@ class BlockLinkButton extends Component {
     const componentData = this.props.pubsub.get('componentData');
     return !!componentData?.config?.link;
   }
+
+  triggerBi = biParams =>
+    this.props.helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, {
+      plugin_id: this.props.pluginType,
+      ...biParams,
+    });
 
   showLinkPanel = () => {
     document.activeElement.blur();
@@ -49,6 +56,7 @@ class BlockLinkButton extends Component {
       unchangedUrl,
       linkTypes,
       editorState,
+      triggerBi: this.triggerBi,
     };
     if (isMobile) {
       if (helpers && helpers.openModal) {
@@ -113,6 +121,7 @@ BlockLinkButton.propTypes = {
   toolbarOffsetLeft: PropTypes.string,
   linkTypes: PropTypes.object,
   editorState: PropTypes.object,
+  pluginType: PropTypes.string,
 };
 
 export default BlockLinkButton;

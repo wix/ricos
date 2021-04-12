@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { Separator } from 'wix-rich-content-editor-common';
+import { Separator, getBlockEntityType } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -230,6 +230,8 @@ export default function createAtomicPluginToolbar({
         settings: button.settings,
         ...commonButtonProps,
       };
+      const editorState = getEditorState();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const baseLinkProps = {
         onOverrideContent: this.onOverrideContent,
         helpers,
@@ -239,14 +241,25 @@ export default function createAtomicPluginToolbar({
         relValue,
         uiSettings,
         icons: icons.link,
-        editorState: getEditorState(),
+        editorState,
         linkTypes,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
+        pluginType,
         ...commonButtonProps,
       };
-
+      const defaultButtonProps = {
+        componentData: this.state.componentData,
+        componentState: this.state.componentState,
+        helpers,
+        displayPanel: this.displayPanel,
+        displayInlinePanel: this.displayInlinePanel,
+        hideInlinePanel: this.hidePanels,
+        uiSettings,
+        getEditorBounds,
+        ...buttonProps,
+      };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
@@ -286,6 +299,14 @@ export default function createAtomicPluginToolbar({
           return (
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
+        case BUTTONS.VIDEO_SETTINGS: {
+          const isCustomVideo = !!this.state.componentData.isCustomVideo;
+          const videoSettingsProps = {
+            ...defaultButtonProps,
+            type: BUTTONS.EXTERNAL_MODAL,
+          };
+          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
+        }
         case BUTTONS.LINK_PREVIEW: {
           return (
             !this.state.componentData.html && (
@@ -309,19 +330,7 @@ export default function createAtomicPluginToolbar({
           );
         }
         default:
-          return (
-            <Button
-              componentData={this.state.componentData}
-              componentState={this.state.componentState}
-              helpers={helpers}
-              displayPanel={this.displayPanel}
-              displayInlinePanel={this.displayInlinePanel}
-              hideInlinePanel={this.hidePanels}
-              uiSettings={uiSettings}
-              getEditorBounds={getEditorBounds}
-              {...buttonProps}
-            />
-          );
+          return <Button {...defaultButtonProps} />;
       }
     };
 
