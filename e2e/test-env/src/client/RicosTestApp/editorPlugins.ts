@@ -83,7 +83,11 @@ const defaultConfigs = {
     handleFileSelection: videoHandlers.handleFileSelection,
     enableCustomUploadOnMobile: true,
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-    exposeButtons: [videoButtonsTypes.video, videoButtonsTypes.soundCloud],
+    exposeButtons: [
+      videoButtonsTypes.video,
+      videoButtonsTypes.soundCloud,
+      videoButtonsTypes.youTube,
+    ],
   },
   gallery: {
     scrollingElement: () => window,

@@ -11,7 +11,7 @@ import {
 export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 
-export const videoButtonsTypes = { video: 'video', soundCloud: 'soundCloud' };
+export const videoButtonsTypes = { video: 'video', soundCloud: 'soundCloud', youTube: 'youTube' };
 export interface VideoPluginEditorConfig extends EditorPluginConfig {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
