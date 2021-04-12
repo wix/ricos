@@ -24,6 +24,11 @@
 - `editor`
   - [#2367](https://github.com/wix/ricos/pull/2367) Fix plus button to follow after input pointer
 
+### :house: Internal
+
+- `editor-common`
+  - [#2361](https://github.com/wix/ricos/pull/2361) fix undo experiment for table
+
 </details>
 <hr/>
 
