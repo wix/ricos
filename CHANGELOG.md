@@ -21,6 +21,8 @@
 
 - `image`
   - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
+- `editor`
+  - [#2367](https://github.com/wix/ricos/pull/2367) Fix plus button to follow after input pointer
 
 </details>
 <hr/>
