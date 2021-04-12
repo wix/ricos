@@ -1,4 +1,4 @@
-import { Node_Type, RichContent, VideoSource } from 'ricos-schema';
+import { Node_Type, RichContent } from 'ricos-schema';
 import { getParagraphNode } from '../../draft/toDraft/decorationParsers';
 import {
   parseGiphy,
@@ -6,7 +6,6 @@ import {
   parseLinkPreview,
   parseListNode,
   parseMap,
-  parseSoundCloud,
   parseTextNodes,
   parseVerticalEmbed,
   parseVideo,
@@ -14,7 +13,7 @@ import {
 
 interface PlainTextOptions {
   urlShortener?: (url: string) => Promise<string>;
-  getVideoUrl?: (src: VideoSource) => Promise<string>;
+  getVideoUrl?: (fileId: string) => Promise<string>;
 }
 
 export const toPlainText = async (
@@ -49,9 +48,6 @@ export const toPlainText = async (
           break;
         case Node_Type.VIDEO:
           plainText += await parseVideo(node, options?.getVideoUrl);
-          break;
-        case Node_Type.SOUND_CLOUD:
-          plainText += parseSoundCloud(node);
           break;
         case Node_Type.GIPHY:
           plainText += parseGiphy(node);

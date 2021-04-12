@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EditorModals, getModalStyles, LinkButton } from 'wix-rich-content-editor-common';
+import { ADD_PLUGIN_LINK_BI } from 'wix-rich-content-common';
 import { isEmpty } from 'lodash';
 
 //Atomic Blocks Link Button
@@ -11,7 +12,7 @@ class BlockLinkButton extends Component {
   }
 
   triggerBi = biParams =>
-    this.props.helpers?.onPluginAction?.('addPluginLink', {
+    this.props.helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, {
       plugin_id: this.props.pluginType,
       ...biParams,
     });

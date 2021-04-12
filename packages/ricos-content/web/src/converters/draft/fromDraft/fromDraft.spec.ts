@@ -185,24 +185,15 @@ describe('migrate from draft', () => {
     };
 
     const expectedNodeData = {
-      config: {
-        size: 'CONTENT',
-        alignment: 'CENTER',
-        showTitle: true,
-        showDescription: true,
-        disableExpand: false,
-      },
-      src: {
-        id: '036c6bf6cef5e4409848eb4eb6f80de1',
-        originalFileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
-        fileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+      containerData: { width: { type: 'CONTENT' }, alignment: 'CENTER' },
+      image: {
+        src: { custom: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg' },
         width: 2898,
         height: 3354,
       },
-      metadata: {
-        alt: 'feet',
-        caption: 'The caption!',
-      },
+      disableExpand: false,
+      altText: 'feet',
+      caption: 'The caption!',
     };
 
     const nodeData = convertBlockDataToRicos(IMAGE_TYPE, blockData);
