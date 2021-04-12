@@ -14,6 +14,7 @@ import handlePastedText from './handlePastedText';
 import blockStyleFn from './blockStyleFn';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
+import { ContentBlock } from '@wix/draft-js';
 import {
   EditorState,
   TOOLBARS,
@@ -27,7 +28,7 @@ import {
   pluginsUndo,
   redo,
   SelectionState,
-  DraftOffsetKey,
+  setSelectionToBlock,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps, DraftHandleValue } from 'draft-js';
@@ -200,7 +201,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   editorWrapper!: Element;
 
-  lastFocusedAtomicPlugin!: string | undefined;
+  lastFocusedAtomicPlugin?: ContentBlock;
 
   copySource!: { unregister(): void };
 
@@ -656,9 +657,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       `[data-hook=inlineToolbar]`
     )[0] as HTMLElement;
     if (pluginToolbar && pluginToolbar.dataset.hook !== 'linkPluginToolbar') {
-      this.lastFocusedAtomicPlugin = this.getEditorState()
-        .getSelection()
-        .getFocusKey();
+      const editorState = this.getEditorState();
+      const focusedAtomicPluginKey = editorState.getSelection().getFocusKey();
+      this.lastFocusedAtomicPlugin = editorState
+        .getCurrentContent()
+        .getBlockForKey(focusedAtomicPluginKey);
     }
     const toolbar = pluginToolbar || formattingToolbar;
     toolbar && toolbar.focus();
@@ -861,27 +864,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   removeToolbarFocus = () => {
     this.editor.focus();
     if (this.lastFocusedAtomicPlugin) {
-      const editorState = this.getEditorState();
-      const offsetKey = DraftOffsetKey.encode(this.lastFocusedAtomicPlugin, 0, 0);
-      const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.setStart(node, 0);
-      range.setEnd(node, 0);
-      selection && selection.removeAllRanges();
-      selection && selection.addRange(range);
-      this.setEditorState(
-        EditorState.forceSelection(
-          editorState,
-          new SelectionState({
-            anchorKey: this.lastFocusedAtomicPlugin,
-            anchorOffset: 0,
-            focusKey: this.lastFocusedAtomicPlugin,
-            focusOffset: 0,
-            isBackward: false,
-          })
-        )
-      );
+      setSelectionToBlock(this.getEditorState(), this.setEditorState, this.lastFocusedAtomicPlugin);
       this.lastFocusedAtomicPlugin = undefined;
     }
   };

@@ -415,7 +415,7 @@ export default function createAtomicPluginToolbar({
 
     onKeyDown = e => {
       if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
-        this.props.removeToolbarFocus && this.props.removeToolbarFocus();
+        this.props.removeToolbarFocus?.();
       }
     };
 

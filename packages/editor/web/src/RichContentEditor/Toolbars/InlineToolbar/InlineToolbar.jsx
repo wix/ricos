@@ -139,7 +139,7 @@ export default class InlineToolbar extends Component {
     return { top, left };
   }
 
-  isToolbarOnFocus = () => this.toolbar && this.toolbar.contains(document.activeElement);
+  isToolbarOnFocus = () => this.toolbar?.contains(document.activeElement);
 
   onSelectionChanged = debounce(() => {
     // need to wait a tick for window.getSelection() to be accurate
@@ -342,7 +342,7 @@ export default class InlineToolbar extends Component {
 
   onKeyDown = e => {
     if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
-      this.props.removeToolbarFocus && this.props.removeToolbarFocus();
+      this.props.removeToolbarFocus?.();
     }
   };
 

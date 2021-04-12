@@ -62,7 +62,7 @@ export default function createInlinePluginToolbar({
       this.resizeObserver?.unobserve(this.ref);
     }
 
-    isToolbarOnFocus = () => this.ref && this.ref.contains(document.activeElement);
+    isToolbarOnFocus = () => this.ref?.contains(document.activeElement);
 
     cursorIsOnInlinePlugin = debounce(() => {
       const toolbarOnFocus = this.isToolbarOnFocus();
