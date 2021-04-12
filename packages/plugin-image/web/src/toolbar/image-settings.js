@@ -87,9 +87,9 @@ class ImageSettings extends Component {
     },
     {
       toggleKey: 'isSpoilerEnabled',
-      labelKey: 'Spoiler_Reveal_Image_Placeholder',
+      labelKey: 'ImageSettings_Spoiler_Toggle',
       dataHook: 'imageSpoilerToggle',
-      tooltipText: this.props.t('Spoiler_Reveal_Image_Placeholder'),
+      tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
       onToggle: value => {
         this.props.pubsub.update('componentData', {
           ...this.props.componentData,
