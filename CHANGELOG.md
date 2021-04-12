@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.29.5 (April 12, 2021)
+
 ### :bug: Bug Fix
 
 - `image`
@@ -28,9 +33,6 @@
 
 - `editor-common`
   - [#2361](https://github.com/wix/ricos/pull/2361) fix undo experiment for table
-
-</details>
-<hr/>
 
 ## 8.29.4 (April 11, 2021)
 
