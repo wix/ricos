@@ -662,6 +662,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
     const toolbar = pluginToolbar || formattingToolbar;
     toolbar && toolbar.focus();
+    setTimeout(() => {
+      // fix bug - selection of text with atomic blocks
+      if (toolbar !== document.activeElement) {
+        toolbar && toolbar.focus();
+      }
+    });
   };
 
   getHeadings = config => {
