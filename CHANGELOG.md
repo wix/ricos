@@ -19,11 +19,30 @@
 
 ### :bug: Bug Fix
 
-- `image`
-  - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
+- `ricos-viewer`
+  - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
 
 </details>
 <hr/>
+
+## 8.29.6 (April 13, 2021)
+
+- `schema`
+  - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
+
+## 8.29.5 (April 12, 2021)
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
+- `editor`
+  - [#2367](https://github.com/wix/ricos/pull/2367) Fix plus button to follow after input pointer
+
+### :house: Internal
+
+- `editor-common`
+  - [#2361](https://github.com/wix/ricos/pull/2361) fix undo experiment for table
 
 ## 8.29.4 (April 11, 2021)
 

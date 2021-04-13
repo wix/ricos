@@ -45,6 +45,10 @@ class TableComponent extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({ updateAllRows: true });
+  }
+
   componentWillReceiveProps(nextProps) {
     if (
       !isPluginFocused(nextProps.block, nextProps.selection) &&
@@ -78,7 +82,7 @@ class TableComponent extends React.Component {
   };
 
   updateComponentData = data => {
-    this.props.store.set('componentData', { ...data }, this.props.block.getKey());
+    this.props.store.update('componentData', { ...data }, this.props.block.getKey());
   };
 
   renderInnerRCE = (i, j) => {
@@ -516,7 +520,7 @@ class TableComponent extends React.Component {
   };
 
   render() {
-    const { theme, t, isMobile, settings } = this.props;
+    const { componentData, theme, t, isMobile, settings } = this.props;
     const {
       selected,
       isEditingActive,
@@ -531,6 +535,7 @@ class TableComponent extends React.Component {
     const isEditMode = !isMobile && isTableOnFocus;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
+    this.table.updateComponentData(componentData);
     return (
       <div
         className={classNames(styles.tableEditorContainer, 'has-custom-focus', {

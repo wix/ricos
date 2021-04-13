@@ -533,6 +533,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       pluginButtonProps,
       isInnerRCE,
       tablePluginMenu,
+      pubsub: this.commonPubsub,
     });
   }
 
@@ -974,7 +975,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         handleReturn={
           handleReturn
             ? handleReturn(this.updateEditorState)
-            : handleReturnCommand(this.updateEditorState)
+            : handleReturnCommand(this.updateEditorState, this.commonPubsub)
         }
         editorState={editorState}
         onChange={this.updateEditorState}

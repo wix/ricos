@@ -10,7 +10,7 @@ const HANDLED = 'handled';
 const NOT_HANDLED = 'not-handled';
 const SPLIT_BLOCK = 'split-block';
 
-export default updateEditorState => (command, editorState) => {
+export default (updateEditorState, pubsub) => (command, editorState) => {
   if (KeyBindingUtil.isSoftNewlineEvent(command)) {
     const newState = RichUtils.insertSoftNewline(editorState);
     updateEditorState(newState);
@@ -27,6 +27,7 @@ export default updateEditorState => (command, editorState) => {
     );
 
     const newState = splitState(editorState, styles);
+    pubsub.set('editorState', newState);
     updateEditorState(newState);
     return HANDLED;
   }
