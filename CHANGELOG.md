@@ -20,6 +20,11 @@
 </details>
 <hr/>
 
+## 8.29.8 (April 13, 2021)
+### :house: Internal
+- `scripts`
+  - trigger loki in npm publish script
+
 ## 8.29.7 (April 13, 2021)
 ### :bug: Bug Fix
 - `ricos-viewer`
