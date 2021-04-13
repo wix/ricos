@@ -56,7 +56,7 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
   const spoilerToggle = {
     toggleKey: 'isSpoilerEnabled',
     labelKey: 'VideoSettings_Spoiler_Toggle',
-    dataHook: 'imageSpoilerToggle',
+    dataHook: 'videoSpoilerToggle',
     tooltipText: 'Spoiler_Toggle_Tooltip',
     checked: isSpoilerEnabled,
     onToggle: () => {

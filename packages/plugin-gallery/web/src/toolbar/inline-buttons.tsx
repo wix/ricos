@@ -19,7 +19,7 @@ const createInlineButtons: CreateInlineButtons = ({
   anchorTarget,
   relValue,
   settings,
-  experiments,
+  experiments = {},
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;

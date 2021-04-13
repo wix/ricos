@@ -20,7 +20,7 @@ const createInlineButtons: CreateInlineButtons = ({
   uiSettings,
   isMobile,
   settings = {},
-  experiments,
+  experiments = {},
 }: {
   t: TranslationFunction;
   settings: ImagePluginEditorConfig;

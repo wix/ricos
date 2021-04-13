@@ -19,7 +19,7 @@ const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
-  experiments,
+  experiments = {},
 }: {
   t: TranslationFunction;
   settings: VideoPluginEditorConfig;

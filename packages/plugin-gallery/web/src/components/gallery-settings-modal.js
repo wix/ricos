@@ -237,7 +237,7 @@ export class GallerySettingsModal extends Component {
 
   getSpoilerConfig = enabled => ({
     config: {
-      ...this.props.componentData.config,
+      ...this.componentData.config,
       spoiler: { enabled },
     },
   });
@@ -269,11 +269,11 @@ export class GallerySettingsModal extends Component {
     {
       toggleKey: 'isSpoilerEnabled',
       labelKey: 'GallerySettings_Spoiler_Toggle',
-      dataHook: 'imageSpoilerToggle',
+      dataHook: 'gallerySpoilerToggle',
       tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
       onToggle: value => {
         this.props.pubsub.update('componentData', {
-          ...this.props.componentData,
+          ...this.componentData,
           ...this.getSpoilerConfig(value),
         });
       },
@@ -294,7 +294,7 @@ export class GallerySettingsModal extends Component {
       accept,
     } = this.props;
     const { activeTab } = this.state;
-    const componentData = pubsub.get('componentData');
+    this.componentData = pubsub.get('componentData');
 
     return (
       <div data-hook="settings" dir={languageDir}>
@@ -322,7 +322,7 @@ export class GallerySettingsModal extends Component {
                 theme={this.props.theme}
               >
                 <ManageMediaSection
-                  data={componentData}
+                  data={this.componentData}
                   store={pubsub.store}
                   helpers={helpers}
                   theme={this.props.theme}
@@ -340,7 +340,7 @@ export class GallerySettingsModal extends Component {
               >
                 <AdvancedSettingsSection
                   theme={this.props.theme}
-                  data={componentData}
+                  data={this.componentData}
                   store={pubsub.store}
                   helpers={helpers}
                   t={t}
