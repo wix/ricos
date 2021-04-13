@@ -194,14 +194,6 @@ export default function createAtomicPluginToolbar({
       }
     };
 
-    scrollToolbar(event, leftDirection) {
-      event.preventDefault();
-      const { clientWidth, scrollWidth } = this.scrollContainer;
-      this.scrollContainer.scrollLeft = leftDirection
-        ? 0
-        : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
-    }
-
     /*eslint-disable complexity*/
     PluginToolbarButton = ({
       button,
