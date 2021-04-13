@@ -1,5 +1,5 @@
 import { RichContent } from 'ricos-schema';
-import complexContent from '../../draft/fromDraft/migratedFixtures/migration-content.json';
+import complexContent from '../../../../statics/json/migratedFixtures/migration-content.json';
 import { PLAIN_TEXT } from './complexPlainText';
 import { toPlainText } from './toPlainText';
 

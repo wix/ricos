@@ -1,6 +1,6 @@
 import { toHtml } from '../toHtml';
 import richTextContent from '../../fromHtml/__tests__/richTextContent.json';
-import complexContent from '../../../draft/fromDraft/migratedFixtures/migration-content.json';
+import complexContent from '../../../../../statics/json/migratedFixtures/migration-content.json';
 import { readFileSync } from 'fs';
 import { RichContent } from 'ricos-schema';
 
