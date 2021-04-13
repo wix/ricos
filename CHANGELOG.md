@@ -25,15 +25,29 @@
 - `editor-common`
   - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
 
+</details>
+<hr/>
+
+## 8.29.6 (April 13, 2021)
+
+- `schema`
+  - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
+
+## 8.29.5 (April 12, 2021)
+
 ### :bug: Bug Fix
 
 - `spoiler`
   - [#2363](https://github.com/wix-incubator/rich-content/pull/2363) remove spoiler button from inline toolbar and add it to settings modal
 - `image`
   - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
+- `editor`
+  - [#2367](https://github.com/wix/ricos/pull/2367) Fix plus button to follow after input pointer
 
-</details>
-<hr/>
+### :house: Internal
+
+- `editor-common`
+  - [#2361](https://github.com/wix/ricos/pull/2361) fix undo experiment for table
 
 ## 8.29.4 (April 11, 2021)
 

@@ -56,9 +56,5 @@ $PANEL_MAX_WIDTH: 360px;
     border-radius: 2px;
     min-width: $PANEL_WIDTH;
     max-width: $PANEL_MAX_WIDTH;
-
-    & button:hover {
-      background-color: unset;
-    }
   }
 }
