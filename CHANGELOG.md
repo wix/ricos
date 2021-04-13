@@ -20,6 +20,10 @@
 ### :nail_care: Polish
 - `schema`
   - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
+### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
 
 </details>
 <hr/>
