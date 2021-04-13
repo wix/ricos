@@ -315,13 +315,13 @@ const buttonConfig = {
   getBorderColors: () => userButtonBorderColors,
   getBackgroundColors: () => userButtonBackgroundColors,
 };
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const config = {
   [LINK_PREVIEW_TYPE]: {
-    enableEmbed: true, // [Twitter, YouTube]
+    enableEmbed: true, // [Twitter, TikTok]
     enableLinkPreview: true,
     fetchData: mockFetchUrlPreviewData(),
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   [EMOJI_TYPE]: {
     // toolbar: {

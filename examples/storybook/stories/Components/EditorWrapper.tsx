@@ -50,7 +50,7 @@ import {
 } from '../../../main/shared/utils/fileUploadUtil';
 import { MockVerticalSearchModule } from '../../../main/shared/utils/verticalEmbedUtil';
 
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
 
 const configs = {
@@ -64,7 +64,7 @@ const configs = {
   },
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],

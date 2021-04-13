@@ -43,7 +43,7 @@ import { videoHandlers } from '../../../../../examples/main/shared/editor/Editor
 // eslint-disable-next-line max-len
 import { MockVerticalSearchModule } from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
 
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
 
 const onLinkAdd = async (customLinkData, saveData) => {
@@ -62,7 +62,7 @@ const defaultConfigs = {
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
     enableEmbed: true,
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   verticalEmbed: {
     verticalsApi: type => new MockVerticalSearchModule(type),

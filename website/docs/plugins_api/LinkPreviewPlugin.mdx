@@ -57,8 +57,6 @@ import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
 <RicosViewer plugins={[pluginLinkPreview(LinkPreviewConfig)]} />;
 ```
 
-### NOTE: LinkPreviewProviders.youTube is about to deprecate. To use youtube plugin you should consume video plugin and expose youtube button. See docs here https://ricos.js.org/docs/plugins_api/VideoPlugin#youtube-plugin
-
 ## Link Preview Config API
 
 ### `enableEmbed`
@@ -104,6 +102,8 @@ none;
 ```
 
 ### `exposeEmbedButtons`
+
+### NOTE: LinkPreviewProviders.youTube is gonna be deprecate. To use youtube plugin you should consume video plugin and expose youtube button. See docs here https://ricos.js.org/docs/plugins_api/VideoPlugin#youtube-plugin
 
 Which embed buttons will display - array with LinkPreviewProvider types [LinkPreviewProviders.Instagram, LinkPreviewProviders.Twitter, ...].
 For provide buttons type you should import LinkPreviewProvider.

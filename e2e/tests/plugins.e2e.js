@@ -11,7 +11,7 @@ import {
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
-import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -357,10 +357,17 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
-
+    const testAppConfig = {
+      plugins: [plugins.linkPreview, plugins.video],
+      pluginsConfig: {
+        [pluginsType.video]: {
+          exposeButtons: ['youTube'],
+        },
+      },
+    };
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.linkPreview));
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
     });
 
     after(() => cy.eyesClose());
