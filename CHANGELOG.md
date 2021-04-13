@@ -20,6 +20,11 @@
 </details>
 <hr/>
 
+## 8.29.6 (April 13, 2021)
+
+- `schema`
+  - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
+
 ## 8.29.5 (April 12, 2021)
 
 ### :bug: Bug Fix
