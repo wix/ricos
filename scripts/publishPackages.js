@@ -71,10 +71,10 @@ function publishPackages() {
     );
     try {
       packages.forEach(({ name, version }) => {
-        execSync(
-          // eslint-disable-next-line max-len
-          `curl -X POST -d 'packageName=${name}&publishedVersion=${version}' http://www.wix.com/_serverless/loki-update-service/trigger-loki`
-        );
+        // eslint-disable-next-line max-len
+        const cmd = `curl -X POST -d 'packageName=${name}&publishedVersion=${version}' https://www.wix.com/_serverless/loki-update-service/trigger-loki`;
+        execSync(cmd);
+        console.log(cmd);
       });
     } catch (e) {
       console.warn(e);
