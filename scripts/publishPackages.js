@@ -73,8 +73,8 @@ function publishPackages() {
       packages.forEach(({ name, version }) => {
         // eslint-disable-next-line max-len
         const cmd = `curl -X POST -d 'packageName=${name}&publishedVersion=${version}' https://www.wix.com/_serverless/loki-update-service/trigger-loki`;
-        execSync(cmd);
-        console.log(cmd);
+        const result = require('child_process').execSync(cmd);
+        console.log({ cmd, result });
       });
     } catch (e) {
       console.warn('failed loki trigger with for package ' + name);
