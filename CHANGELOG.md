@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
+
 </details>
 <hr/>
 

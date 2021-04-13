@@ -42,6 +42,7 @@ export default class FullscreenProvider extends Component<Props, State> {
     if (imagesData.images.length > 0) {
       this.setState({ expandModeData: imagesData });
       this.lazyLoadFullscreen();
+      this.props.isMobile && this.setState({ FullscreenModal: this._FullscreenModal });
     }
   }
 
