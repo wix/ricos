@@ -17,11 +17,15 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
+
 </details>
 <hr/>
 
 ## 8.29.6 (April 13, 2021)
-
+### :bug: Bug Fix
 - `schema`
   - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
 
