@@ -77,6 +77,7 @@ function publishPackages() {
         console.log(cmd);
       });
     } catch (e) {
+      console.warn('failed loki trigger with for package ' + name);
       console.warn(e);
     }
   });
