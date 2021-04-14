@@ -17,6 +17,11 @@
   </summary>
 
 
+### :house: Internal
+
+- `editor`
+  - [#2356](https://github.com/wix/ricos/pull/2356) toolbar navigation with keyboard
+
 </details>
 <hr/>
 

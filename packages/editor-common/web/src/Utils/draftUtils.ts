@@ -10,6 +10,7 @@ import {
   RawDraftEntity,
   EditorChangeType,
 } from '@wix/draft-js';
+import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
@@ -383,30 +384,30 @@ export const replaceWithEmptyBlock = (editorState: EditorState, blockKey: string
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
-// export const setSelectionToBlock = (newEditorState, setEditorState, newActiveBlock) => {
-//   const editorState = newEditorState;
-//   const offsetKey = DraftOffsetKey.encode(newActiveBlock.getKey(), 0, 0);
-//   const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
-//   const selection = window.getSelection();
-//   const range = document.createRange();
-//   range.setStart(node, 0);
-//   range.setEnd(node, 0);
-//   selection.removeAllRanges();
-//   selection.addRange(range);
+export const setSelectionToBlock = (newEditorState, setEditorState, newActiveBlock) => {
+  const editorState = newEditorState;
+  const offsetKey = DraftOffsetKey.encode(newActiveBlock.getKey(), 0, 0);
+  const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
+  const selection = window.getSelection();
+  const range = document.createRange();
+  range.setStart(node, 0);
+  range.setEnd(node, 0);
+  selection?.removeAllRanges();
+  selection?.addRange(range);
 
-//   setEditorState(
-//     EditorState.forceSelection(
-//       editorState,
-//       new SelectionState({
-//         anchorKey: newActiveBlock.getKey(),
-//         anchorOffset: 0,
-//         focusKey: newActiveBlock.getKey(),
-//         focusOffset: 0,
-//         isBackward: false,
-//       })
-//     )
-//   );
-// };
+  setEditorState(
+    EditorState.forceSelection(
+      editorState,
+      new SelectionState({
+        anchorKey: newActiveBlock.getKey(),
+        anchorOffset: 0,
+        focusKey: newActiveBlock.getKey(),
+        focusOffset: 0,
+        isBackward: false,
+      })
+    )
+  );
+};
 
 // **************************** this function is for oneApp ****************************
 export const createBlockAndFocus = (editorState: EditorState, data, pluginType: string) => {
