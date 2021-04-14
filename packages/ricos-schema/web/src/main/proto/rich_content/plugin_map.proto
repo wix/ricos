@@ -2,17 +2,17 @@ syntax = "proto3";
 
 package rich_content;
 
+import "rich_content/common.proto";
 import "google/protobuf/wrappers.proto";
 
 message MapData {
-  google.protobuf.Int32Value zoom = 1;
-  MapConfig config = 2;
-  MapSettings mapSettings = 3;
+  PluginContainerData container_data = 1;
+  google.protobuf.Int32Value zoom = 2;
+  MapConfig config = 3;
+  MapSettings mapSettings = 4;
 }
 
 message MapConfig {
-  google.protobuf.StringValue size = 1;
-  google.protobuf.StringValue alignment = 2;
   google.protobuf.Int32Value height = 3;
   google.protobuf.Int32Value width = 4;
 }

@@ -15,7 +15,7 @@ import {
   EditorContextType,
   ToolbarButtonProps,
   TextButtons,
-  simplePubsub,
+  Pubsub,
 } from 'wix-rich-content-common';
 import { EditorProps } from 'draft-js';
 
@@ -27,6 +27,7 @@ const createEditorToolbars = ({
   pluginButtonProps,
   isInnerRCE,
   tablePluginMenu,
+  pubsub,
 }: {
   buttons: {
     pluginButtons: PluginButton[];
@@ -38,13 +39,12 @@ const createEditorToolbars = ({
   pluginButtonProps: ToolbarButtonProps[];
   isInnerRCE?: boolean;
   tablePluginMenu?: boolean;
+  pubsub: Pubsub;
 }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
   const { isMobile, theme = {} } = context;
-
-  const pubsub = simplePubsub();
 
   const textButtons: TextButtons = {
     mobile: mobileTextButtonList,

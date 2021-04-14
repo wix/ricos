@@ -88,7 +88,7 @@ export default class HeadingButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, toolbarName, customHeadings } = this.props;
+    const { theme, isMobile, t, tabIndex, toolbarName, customHeadings, inlinePopups } = this.props;
     const tooltipText = t('FormattingToolbar_TextStyleButton_Tooltip');
     const dataHookText = 'headingsDropdownButton';
     const { isPanelOpen, panelTop, panelLeft, currentHeading } = this.state;
@@ -100,7 +100,7 @@ export default class HeadingButton extends Component {
           left: panelLeft,
         };
     const buttonContent = this.fixEllipsis(this.translateHeading(currentHeading));
-    if (isMobile || toolbarName !== 'StaticTextToolbar') {
+    if (isMobile || toolbarName !== 'StaticTextToolbar' || !inlinePopups) {
       return (
         <InlineToolbarButton
           onClick={this.openPanel}
@@ -189,8 +189,10 @@ HeadingButton.propTypes = {
   setKeepOpen: PropTypes.func,
   customHeadings: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   toolbarName: PropTypes.string,
+  inlinePopups: PropTypes.bool,
 };
 
 HeadingButton.defaultProps = {
+  inlinePopups: false,
   setKeepOpen: () => {},
 };

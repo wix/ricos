@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package rich_content;
 
+import "rich_content/common.proto";
 import "google/protobuf/wrappers.proto";
 
 message GiphyData {
-    GIFSource gif = 1;
-    GiphyConfig config = 2;
-    GIphyConfigViewer configViewer = 3;
+    PluginContainerData container_data = 1;
+    GIFSource gif = 2;
 }
 
 message GIFSource {
@@ -19,23 +19,4 @@ message GIFSource {
     google.protobuf.StringValue downsized_url = 6;
     google.protobuf.StringValue downsized_still_url = 7;
     google.protobuf.StringValue downsized_small_mp4 = 8;
-}
-
-message GiphyConfig {
-    google.protobuf.StringValue size = 1;
-    google.protobuf.StringValue alignment = 2;
-}
-
-message GIphyConfigViewer {
-    enum GiphyViewerSize {
-        ORIGINAL = 0;
-        DOWNSIZED_SMALL = 1;
-    }
-
-    message GiphyViewerSizes {
-        GiphyViewerSize desktop = 1;
-        GiphyViewerSize mobile = 2;
-    }
-
-    GiphyViewerSizes sizes = 1;
 }
