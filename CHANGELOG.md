@@ -374,6 +374,10 @@
 
 ## 8.21.1 (Feb 14, 2021)
 ### :bug: Bug Fix
+- `image`
+  - [#2137](https://github.com/wix-incubator/rich-content/pull/2137) fix image replace for native uploads
+- `gallery`
+  - [#2137](https://github.com/wix-incubator/rich-content/pull/2137) fix image replace for native uploads in gallery image settings
 - `*`
   - [#2134](https://github.com/wix/ricos/pull/2134) fix `onViewerAction` arguments order
 
