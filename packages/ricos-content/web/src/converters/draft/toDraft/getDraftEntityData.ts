@@ -55,10 +55,8 @@ export const createAtomicEntityData = (node: Node, entityKey: number): RicosEnti
 };
 
 export const createTextBlockData = (node: Node) => {
-  const {
-    textStyle: { textAlignment, paddingTop, paddingBottom, lineHeight },
-    indentation,
-  } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
+  const { textStyle, indentation } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
+  const { textAlignment, paddingTop, paddingBottom, lineHeight } = textStyle || {};
   return JSON.parse(
     JSON.stringify({
       textAlignment: textAlignment !== 'AUTO' ? textAlignment?.toLowerCase() : undefined,
