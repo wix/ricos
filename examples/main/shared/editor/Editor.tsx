@@ -245,10 +245,19 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
       const { isMobile, t, theme } = this.props;
       const buttonsAsArray = Object.values(buttons);
       const editorState = getEditorState();
+      const editorCommands = this.editor.getEditorCommands();
+      const formattingToolbarButtonsKeys = this.config.formattingToolbarButtons;
       return (
         <div style={{ flex: 'none' }} dir="">
           <FloatingToolbarContainer isMobile={isMobile} editorState={editorState}>
-            <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
+            <Toolbar
+              theme={theme}
+              isMobile={isMobile}
+              t={t}
+              buttons={buttonsAsArray}
+              editorCommands={editorCommands}
+              formattingToolbarButtonsKeys={formattingToolbarButtonsKeys}
+            />
           </FloatingToolbarContainer>
         </div>
       );

@@ -10,7 +10,7 @@ import ColorPickerButton from './ButtonComponents/ColorPickerButton';
 import NestedMenu from './ButtonComponents/NestedMenu';
 import ToolbarButton from './ToolbarButton';
 import ContextMenu from './ButtonComponents/ContextMenu';
-
+import { createButtonsList } from './buttonsListCreator';
 class Toolbar extends Component {
   constructor(props) {
     super(props);
@@ -205,7 +205,10 @@ class Toolbar extends Component {
   };
 
   render() {
-    const { buttons, vertical } = this.props;
+    const { buttons, vertical, formattingToolbarButtonsKeys, editorCommands } = this.props;
+    const blabla = createButtonsList(formattingToolbarButtonsKeys, editorCommands);
+    console.log({ buttons });
+    console.log({ blabla });
     this.cleanUnwantedSeparators(buttons);
     const buttonsSeparatedByGaps = this.separateByGaps(buttons);
     return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
@@ -231,6 +234,8 @@ Toolbar.propTypes = {
   vertical: PropTypes.bool,
   afterClick: PropTypes.func,
   setKeepOpen: PropTypes.func,
+  editorCommands: PropTypes.object,
+  formattingToolbarButtonsKeys: PropTypes.array,
 };
 
 export default Toolbar;
