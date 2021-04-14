@@ -70,7 +70,7 @@ function publishPackages() {
       })
     );
     require('axios')
-      .post('https://www.wix.com/_serverless/loki-update-service/trigger-loki', {
+      .post('https://www.wix.com/_serverless/loki-update-service2/trigger-loki', {
         packages,
       })
       .then(res => {
