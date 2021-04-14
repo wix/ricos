@@ -60,16 +60,28 @@ function createNpmRc() {
 
 function publishPackages() {
   getPackages().then(allPackages => {
-    allPackages
-      .filter(pkg => !pkg.private)
-      .forEach(pkg =>
-        release({
-          name: pkg.name,
-          version: pkg.version,
-          registry: pkg.get('publishConfig').registry,
-          path: pkg.location,
-        })
-      );
+    const packages = allPackages.filter(pkg => !pkg.private);
+    packages.forEach(pkg =>
+      release({
+        name: pkg.name,
+        version: pkg.version,
+        registry: pkg.get('publishConfig').registry,
+        path: pkg.location,
+      })
+    );
+    try {
+      packages.forEach(({ name, version }) => {
+        // eslint-disable-next-line max-len
+        const cmd = `curl -X POST -d 'packageName=${name}&publishedVersion=${version}' https://www.wix.com/_serverless/loki-update-service/trigger-loki`;
+        const result = require('child_process')
+          .execSync(cmd)
+          .toString();
+        console.log({ cmd, result });
+      });
+    } catch (e) {
+      console.warn('failed loki trigger with for package ' + name);
+      console.warn(e);
+    }
   });
 }
 

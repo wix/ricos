@@ -61,7 +61,7 @@ const draftContent: DraftContent = toDraft(content);
 ```tsx
 toPlainText: (content: RichContent, options?: {
   urlShortener?: (url: string) => Promise<string>;
-  getVideoUrl?: (src: VideoSource) => Promise<string>;
+  getVideoUrl?: (fileId: string) => Promise<string>;
 }) => Promise<string>;
 ```
 

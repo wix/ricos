@@ -2,19 +2,13 @@ syntax = "proto3";
 
 package rich_content;
 
+import "rich_content/common.proto";
 import "google/protobuf/wrappers.proto";
 
 message FileData {
-  FileConfig config = 1;
-  google.protobuf.StringValue name = 2;
-  google.protobuf.StringValue type = 3;
-  google.protobuf.StringValue url = 4;
-  google.protobuf.StringValue id = 5;
-  google.protobuf.Int32Value size = 6;  
-}
-
-message FileConfig {
-    google.protobuf.StringValue size = 1;
-    google.protobuf.StringValue alignment = 2;
-    google.protobuf.StringValue width = 3;
+  PluginContainerData container_data = 1;
+  FileSource src = 2;
+  google.protobuf.StringValue name = 3;
+  google.protobuf.StringValue type = 4;
+  google.protobuf.Int32Value size = 5;
 }

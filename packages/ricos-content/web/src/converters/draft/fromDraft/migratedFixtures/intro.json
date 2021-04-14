@@ -6,7 +6,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "95apa",
+          "key": "8tqf1",
           "nodes": [],
           "textData": {
             "text": "Hi! 😃",
@@ -16,7 +16,9 @@
       ],
       "headingData": {
         "level": 3,
-        "textAlignment": "LEFT"
+        "textStyle": {
+          "textAlignment": "AUTO"
+        }
       }
     },
     {
@@ -25,7 +27,9 @@
       "nodes": [],
       "headingData": {
         "level": 3,
-        "textAlignment": "LEFT"
+        "textStyle": {
+          "textAlignment": "AUTO"
+        }
       }
     },
     {
@@ -34,7 +38,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "7icsa",
+          "key": "6k6fb",
           "nodes": [],
           "textData": {
             "text": "Welcome to ",
@@ -43,7 +47,7 @@
         },
         {
           "type": "TEXT",
-          "key": "3q3ll",
+          "key": "3thgo",
           "nodes": [],
           "textData": {
             "text": "Wix Rich Content",
@@ -70,7 +74,7 @@
         },
         {
           "type": "TEXT",
-          "key": "1gspi",
+          "key": "fh5gh",
           "nodes": [],
           "textData": {
             "text": " - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️",
@@ -79,8 +83,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -88,8 +94,10 @@
       "key": "4ni77",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -97,6 +105,12 @@
       "key": "9uurj",
       "nodes": [],
       "giphyData": {
+        "containerData": {
+          "width": {
+            "type": "SMALL"
+          },
+          "alignment": "CENTER"
+        },
         "gif": {
           "height": 220,
           "width": 410,
@@ -106,10 +120,6 @@
           "downsizedUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy.gif",
           "downsizedStillUrl": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy_s.gif?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy_s.gif",
           "downsizedSmallMp4": "https://media1.giphy.com/media/dzaUX7CAG0Ihi/giphy-downsized-small.mp4?cid=558f2fbe514494bf97aafab84bd3c2fa772b7f3ec8ade20b&rid=giphy-downsized-small.mp4"
-        },
-        "config": {
-          "size": "small",
-          "alignment": "center"
         }
       }
     },
@@ -118,8 +128,10 @@
       "key": "nujv",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -128,7 +140,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "4jggc",
+          "key": "f7te",
           "nodes": [],
           "textData": {
             "text": "Checkout the ",
@@ -137,7 +149,7 @@
         },
         {
           "type": "TEXT",
-          "key": "dgc6d",
+          "key": "5dkl",
           "nodes": [],
           "textData": {
             "text": "Example App",
@@ -158,8 +170,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -168,7 +182,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "6mmv5",
+          "key": "6djd8",
           "nodes": [],
           "textData": {
             "text": "Here's a text with a background",
@@ -184,8 +198,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -194,7 +210,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "6220e",
+          "key": "2v43d",
           "nodes": [],
           "textData": {
             "text": "Heres a text with color",
@@ -213,8 +229,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -222,12 +240,15 @@
       "key": "6na39",
       "nodes": [],
       "dividerData": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER"
+        },
         "type": "DASHED",
-        "config": {
-          "size": "MEDIUM",
-          "alignment": "CENTER",
-          "textWrap": "nowrap"
-        }
+        "width": "MEDIUM",
+        "alignment": "CENTER"
       }
     },
     {
@@ -235,8 +256,10 @@
       "key": "3b4ah",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -245,7 +268,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "8jafb",
+          "key": "aomql",
           "nodes": [],
           "textData": {
             "text": "A wise man once said:",
@@ -254,8 +277,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -264,11 +289,11 @@
       "nodes": [
         {
           "type": "PARAGRAPH",
-          "key": "ti2g",
+          "key": "41fo5",
           "nodes": [
             {
               "type": "TEXT",
-              "key": "drbck",
+              "key": "cos8c",
               "nodes": [],
               "textData": {
                 "text": "The Wix Rich Content Editor is the best tool in the world!",
@@ -277,8 +302,10 @@
             }
           ],
           "paragraphData": {
-            "textAlignment": "LEFT",
-            "depth": 0
+            "textStyle": {
+              "textAlignment": "AUTO"
+            },
+            "indentation": 0
           }
         }
       ]
@@ -288,8 +315,10 @@
       "key": "8hmrf",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -298,7 +327,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "9fh9d",
+          "key": "762r7",
           "nodes": [],
           "textData": {
             "text": "Our plugins include images, gifs, videos, embeds and Wix components such as Pro Gallery and embedding vertical components.",
@@ -307,8 +336,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -316,8 +347,10 @@
       "key": "7bn5j",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -326,7 +359,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "6serb",
+          "key": "ek571",
           "nodes": [],
           "textData": {
             "text": "Code example:",
@@ -335,8 +368,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -345,7 +380,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "d4ghv",
+          "key": "685qg",
           "nodes": [],
           "textData": {
             "text": "import { RichContentEditor } from 'wix-rich-content-editor';\n\nconst myApp = () => <RichContentEditor />",
@@ -354,7 +389,9 @@
         }
       ],
       "codeData": {
-        "textAlignment": "LEFT"
+        "textStyle": {
+          "textAlignment": "AUTO"
+        }
       }
     },
     {
@@ -363,7 +400,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "fhgh1",
+          "key": "b944n",
           "nodes": [],
           "textData": {
             "text": "Pro Gallery Collage:",
@@ -372,8 +409,10 @@
         }
       ],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -381,8 +420,10 @@
       "key": "dl5nc",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -390,6 +431,12 @@
       "key": "46hkp",
       "nodes": [],
       "galleryData": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER"
+        },
         "items": [
           {
             "metadata": {
@@ -438,8 +485,6 @@
           "galleryType": "Columns"
         },
         "config": {
-          "alignment": "CENTER",
-          "size": "CONTENT",
           "layout": "small",
           "spacing": 0
         }
@@ -450,8 +495,10 @@
       "key": "1qn5s",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     },
     {
@@ -459,8 +506,10 @@
       "key": "5vr9d",
       "nodes": [],
       "paragraphData": {
-        "textAlignment": "LEFT",
-        "depth": 0
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
       }
     }
   ],
@@ -468,8 +517,8 @@
     "createdVersion": "8.11.4",
     "updatedVersion": "8.11.4",
     "updatedDate": {
-      "seconds": 1614621177,
-      "nanos": 536000000
+      "seconds": 1618137534,
+      "nanos": 259000000
     }
   }
 }

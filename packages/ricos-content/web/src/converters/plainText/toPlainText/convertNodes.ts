@@ -1,4 +1,4 @@
-import { Node, Node_Type, VideoSource } from 'ricos-schema';
+import { Node, Node_Type } from 'ricos-schema';
 import { getImageSrc } from '../../../imageUtils';
 import { LINK_TYPE } from '../../../consts';
 import { mergeTextNodes, RangedDecoration } from '../../draft/toDraft/decorationParsers';
@@ -53,8 +53,8 @@ export const parseImage = async (
   { imageData }: Node,
   urlShortener?: (url: string) => Promise<string>
 ): Promise<string> => {
-  const { caption } = imageData?.metadata || {};
-  const { fileName, width, height } = imageData?.src || {};
+  const { caption } = imageData || {};
+  const { src, width, height } = imageData?.image || {};
   const imageUrlOptions = Object.assign(
     {
       imageType: 'highRes',
@@ -63,28 +63,22 @@ export const parseImage = async (
     width && { requiredWidth: width },
     height && { requiredHeight: height }
   );
-  let url: string = getImageSrc({ file_name: fileName }, undefined, imageUrlOptions);
+  let url: string = getImageSrc({ file_name: src?.custom }, undefined, imageUrlOptions);
   if (urlShortener) {
     url = await urlShortener(url);
   }
   return [caption, url].filter(Boolean).join('\n');
 };
 
-const getDefaultVideoUrl = async (src: VideoSource) =>
-  `https://video.wixstatic.com/${src.pathname}`;
+const getDefaultVideoUrl = async (fileId: string) => `https://video.wixstatic.com/${fileId}`;
 
 export const parseVideo = async (
   { videoData }: Node,
-  getVideoUrl: (src: VideoSource) => Promise<string> = getDefaultVideoUrl
+  getVideoUrl: (fileId: string) => Promise<string> = getDefaultVideoUrl
 ): Promise<string> => {
-  const { src, url } = videoData || {};
-  const text = src ? getVideoUrl(src) : url;
+  const { custom, url } = videoData?.video?.src || {};
+  const text = custom ? getVideoUrl(custom) : url;
   return text || '';
-};
-
-export const parseSoundCloud = ({ soundCloudData }: Node): string => {
-  const { src } = soundCloudData || {};
-  return src || '';
 };
 
 export const parseGiphy = ({ giphyData }: Node): string => {
