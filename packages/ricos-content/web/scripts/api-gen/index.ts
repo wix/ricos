@@ -52,7 +52,7 @@ async function run() {
     TE.chain(writeContentToFile(SAFE_TYPES_PATH)),
     TE.map(() => logger(`safe types.d.ts written`)),
     TE.chain(generateRto),
-    TE.map(() => logger(`type decsriptors generated`)),
+    TE.map(modules => logger(`[${Object.keys(modules || {})}] descriptors generated`)),
     TE.chain(() => deleteFile(SAFE_TYPES_PATH)),
     TE.map(() => logger(`safe types.d.ts deleted`)),
     TE.fold(
