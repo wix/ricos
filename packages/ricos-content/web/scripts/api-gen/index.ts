@@ -6,12 +6,17 @@ import { join } from 'lodash/fp';
 import { pipe } from 'fp-ts/lib/function';
 import { generateRtoModules } from 'typeonly';
 
-import { getTypingFileList, getFileContents, writeContentToFile } from './file-operations';
+import {
+  deleteFile,
+  getTypingFileList,
+  getFileContents,
+  writeContentToFile,
+} from './file-operations';
 import { purifyTypes } from './type-operations';
 
 const log = (label: string) => <T>(data: T): T => {
-  console.log(label); // eslint-disable-line no-console
-  console.dir(data); // eslint-disable-line no-console
+  console.log(label, data); // eslint-disable-line no-console
+  // console.dir(data); // eslint-disable-line no-console
   return data;
 };
 
@@ -36,22 +41,28 @@ async function run() {
       E.toError
     );
 
+  const logger = log('TYPE DESCRIPTOR GENERATION:');
+
   const generateTypeDescriptors = pipe(
     getTypingFileList(RICOS_TYPES_DIR_GLOB),
-    TE.map(log('types to process')),
+    TE.map(log('TYPE DESCRIPTOR GENERATION: files to process:')),
     TE.chain(paths => A.array.traverse(TE.taskEither)(paths, getFileContents)),
     TE.map(A.map(purifyTypes)),
     TE.map(types => join('\n', types)),
     TE.chain(writeContentToFile(SAFE_TYPES_PATH)),
+    TE.map(() => logger(`safe types.d.ts written`)),
     TE.chain(generateRto),
+    TE.map(() => logger(`type decsriptors generated`)),
+    TE.chain(() => deleteFile(SAFE_TYPES_PATH)),
+    TE.map(() => logger(`safe types.d.ts deleted`)),
     TE.fold(
-      e => T.of(`error: ${e.message}`),
-      modules => T.of(JSON.stringify(modules))
+      e => T.of(`TYPE DESCRIPTOR GENERATION: ${e.message}`),
+      () => T.of(`TYPE DESCRIPTOR GENERATION: done`)
     )
   );
 
   const modules = await generateTypeDescriptors();
-  console.dir(modules); // eslint-disable-line no-console
+  console.log(modules); // eslint-disable-line no-console
 }
 
 run();
