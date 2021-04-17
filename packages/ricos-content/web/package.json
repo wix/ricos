@@ -37,6 +37,9 @@
     "test:watchAll": "jest --verbose --watchAll"
   },
   "dependencies": {
+    "@typeonly/loader": "^0.5.3",
+    "fp-ts": "^2.10.0",
+    "monocle-ts": "^2.3.9",
     "omit-deep": "0.3.0",
     "parse5": "^6.0.0",
     "ricos-schema": "8.29.12",

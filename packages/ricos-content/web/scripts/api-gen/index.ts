@@ -16,7 +16,6 @@ import { purifyTypes } from './type-operations';
 
 const log = (label: string) => <T>(data: T): T => {
   console.log(label, data); // eslint-disable-line no-console
-  // console.dir(data); // eslint-disable-line no-console
   return data;
 };
 
@@ -56,13 +55,12 @@ async function run() {
     TE.chain(() => deleteFile(SAFE_TYPES_PATH)),
     TE.map(() => logger(`safe types.d.ts deleted`)),
     TE.fold(
-      e => T.of(`TYPE DESCRIPTOR GENERATION: ${e.message}`),
-      () => T.of(`TYPE DESCRIPTOR GENERATION: done`)
+      e => T.of(e.message),
+      () => T.of(`done`)
     )
   );
 
-  const modules = await generateTypeDescriptors();
-  console.log(modules); // eslint-disable-line no-console
+  logger(await generateTypeDescriptors());
 }
 
 run();
