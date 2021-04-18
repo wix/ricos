@@ -1,6 +1,11 @@
 /* eslint-disable max-len */
 /*global cy*/
-import { IMAGE_SETTINGS, PLUGIN_COMPONENT } from '../cypress/dataHooks';
+import {
+  IMAGE_SETTINGS,
+  PLUGIN_COMPONENT,
+  STATIC_TOOLBAR_BUTTONS,
+  TABLE_PLUGIN,
+} from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins, useExperiments } from '../cypress/testAppConfig';
 
@@ -32,7 +37,7 @@ describe('plugins', () => {
         'empty',
         useExperiments({ UseUndoForPlugins: { enabled: true } })
       );
-      cy.addImage();
+      cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.IMAGE);
       cy.enterText(' testing undo redo for plugins');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
       cy.openSettings();
@@ -61,7 +66,7 @@ describe('plugins', () => {
         ...useExperiments({ UseUndoForPlugins: { enabled: true } }),
         ...usePlugins(plugins.all),
       });
-      cy.addAccordion();
+      cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
       cy.focusAccordion(1).type('Yes ');
       cy.addAccordionPair();
       cy.focusAccordion(2).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
@@ -79,7 +84,7 @@ describe('plugins', () => {
       cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
       cy.undo();
       cy.get('.public-DraftStyleDefault-block > span').should('not.have.text', 'Yes');
-      cy.undo().undo();
+      cy.undo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('not.exist');
       cy.redo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('exist');
@@ -95,6 +100,50 @@ describe('plugins', () => {
         .should('exist');
       cy.redo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('exist');
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should undo and redo table plugin customizations', function() {
+      cy.loadRicosEditorAndViewer('empty', {
+        ...useExperiments({ UseUndoForPlugins: { enabled: true } }),
+        ...usePlugins(plugins.all),
+      });
+      cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.TABLE, { force: true });
+      cy.get(`[data-hook=${TABLE_PLUGIN.SUBMIT}]:first`).click();
+      cy.focusTable();
+      // cy.focusAccordion(1).type('Yes ');
+      // cy.addAccordionPair();
+      // cy.focusAccordion(2).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      // cy.wait(1000);
+      // cy.undo();
+      // cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('not.exist');
+      // cy.undo();
+      // cy.get(`[data-rbd-draggable-context-id=${0}]`)
+      //   .eq(1)
+      //   .should('not.exist');
+      // cy.wait(100);
+      // cy.undo().undo();
+      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
+      // cy.undo();
+      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
+      // cy.undo();
+      // cy.get('.public-DraftStyleDefault-block > span').should('not.have.text', 'Yes');
+      // cy.undo().undo();
+      // cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('not.exist');
+      // cy.redo();
+      // cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('exist');
+      // cy.redo();
+      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
+      // cy.redo();
+      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Ye');
+      // cy.redo();
+      // cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Yes');
+      // cy.redo().redo();
+      // cy.get(`[data-rbd-draggable-context-id=${1}]`)
+      //   .eq(1)
+      //   .should('exist');
+      // cy.redo();
+      // cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('exist');
       cy.eyesCheckWindow(this.test.title);
     });
   });
