@@ -145,12 +145,9 @@ class PluginViewer extends PureComponent {
           }
         }
 
-        if (type === ACTION_BUTTON_TYPE || type === LINK_BUTTON_TYPE) {
-          if (isNumber(config.width)) {
-            componentProps.style = { ...componentProps.style, width: config.width };
-          }
+        if ((type === ACTION_BUTTON_TYPE || type === LINK_BUTTON_TYPE) && isNumber(config.width)) {
+          componentProps.style = { width: config.width };
         }
-
         if (customStyles) {
           containerProps.style = customStyles;
         }
