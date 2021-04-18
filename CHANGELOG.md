@@ -19,6 +19,7 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
+  - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block 
 
 </details>
 <hr/>
