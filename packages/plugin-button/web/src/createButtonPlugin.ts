@@ -1,5 +1,10 @@
 import createToolbar from './toolbar/createToolbar';
-import { mergeStyles, CreatePluginFunction, CreatePluginConfig } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  CreatePluginFunction,
+  CreatePluginConfig,
+  ButtonType,
+} from 'wix-rich-content-common';
 import {
   createBasePlugin,
   PLUGIN_DECORATION_PROPS,
@@ -87,7 +92,7 @@ const createButtonPlugin = (
         nextProps
       );
       if (width !== nextWidth) {
-        onPropsChange({ width: nextWidth });
+        onPropsChange({ width: nextWidth, size: ButtonType.CUSTOM });
       }
     },
     ...rest,
