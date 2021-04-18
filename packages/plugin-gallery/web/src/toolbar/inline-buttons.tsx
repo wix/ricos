@@ -11,8 +11,6 @@ import {
 } from 'wix-rich-content-common';
 import { GalleryPluginEditorConfig } from '../types';
 
-const modalStyles = getModalStyles({});
-
 const createInlineButtons: CreateInlineButtons = ({
   t,
   anchorTarget,
@@ -26,6 +24,7 @@ const createInlineButtons: CreateInlineButtons = ({
   relValue: RelValue;
   isMobile: boolean;
 }) => {
+  const modalStyles = getModalStyles({ isMobile });
   const icons = settings?.toolbar?.icons || {};
   const spoilerButton = settings.spoiler
     ? [
@@ -87,12 +86,12 @@ const createInlineButtons: CreateInlineButtons = ({
       accept: settings.accept,
     },
     {
-      keyName: 'advanced_settings',
+      keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.GALLERY_SETTINGS,
       activeTab: 'settings',
-      modalStyles: getModalStyles({ isMobile }),
+      modalStyles,
       switchLayout,
       t,
       mobile: true,
