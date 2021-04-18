@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `editor`
+  - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
 
 </details>
 <hr/>
