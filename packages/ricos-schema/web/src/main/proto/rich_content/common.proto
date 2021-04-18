@@ -21,7 +21,7 @@ message TextStyle {
 
 message Link {
     oneof data {
-        string url = 1 [(wix.api.format) = URL];
+        string url = 1;
         string anchor = 2; // link in document
         string custom_data = 3; // serialized object
     }
@@ -59,7 +59,7 @@ message PluginContainerData {
 
 message FileSource { // passes through srcToUrl function when provided
     oneof data {
-        google.protobuf.StringValue url = 1 [(wix.api.format) = URL];
+        google.protobuf.StringValue url = 1;
         google.protobuf.StringValue custom = 2; // e.g. an id for media server
     }
 }
