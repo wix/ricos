@@ -13,7 +13,8 @@ import {
 import MobileLinkModal from './MobileLinkModal';
 
 export default class TextLinkModal extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     const editorState = this.props.getEditorState();
     this.mode = this.getMode(editorState);
     if (this.mode === 'IMAGE') {
