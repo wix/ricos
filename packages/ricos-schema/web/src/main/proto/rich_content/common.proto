@@ -20,13 +20,31 @@ message TextStyle {
 }
 
 message Link {
-    oneof data {
-        string url = 1;
-        string anchor = 2; // link in document
-        string custom_data = 3; // serialized object
+    message _Link {
+        message Rel {
+            google.protobuf.BoolValue nofollow = 1; //Indicates to search engine crawlers that the link should not be followed
+            google.protobuf.BoolValue sponsored = 2; //paid links
+            google.protobuf.BoolValue user_generated_content = 3; //UoU generated link
+        }
+        enum Target {
+            NEW_TAB  = 0;
+            TOP = 1;
+            PARENT = 2;
+            SELF = 3;
+        }
+
+        oneof data {
+            string url = 1;
+            string anchor = 2; // id of node in document
+        }
+        Target target = 4;
+        Rel rel = 5;
     }
-    google.protobuf.StringValue target = 4;
-    google.protobuf.StringValue rel = 5;
+
+    oneof linkData {
+        _Link link = 1;
+        string custom_data = 2; // serialized object
+    }
 }
 
 message PluginContainerData {
