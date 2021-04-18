@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `gallery`
+  - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
 
 </details>
 <hr/>
