@@ -311,7 +311,7 @@ export class GallerySettingsModal extends Component {
                   accept={accept}
                 />
               </Tab>
-              {!isMobile ? (
+              {!isMobile && (
                 <Tab
                   label={this.tabName('advanced_settings', t)}
                   value={'advanced_settings'}
@@ -325,8 +325,6 @@ export class GallerySettingsModal extends Component {
                     t={t}
                   />
                 </Tab>
-              ) : (
-                <></>
               )}
               <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
                 {this.toggleData.map(toggle => this.renderToggle(toggle))}

@@ -53,19 +53,21 @@ export class Tabs extends Component {
     }
   };
 
+  children = this.props.children.filter(child => child);
+
   getTabHeaders = tabs =>
     React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
 
   renderTabs = () =>
-    React.Children.map(this.props.children, tab =>
+    React.Children.map(this.children, tab =>
       React.cloneElement(tab, {
         selected: this.state.activeTab === tab.props.value,
       })
     );
 
   render() {
-    const { styles, props } = this;
-    const headers = this.getTabHeaders(props.children);
+    const { styles } = this;
+    const headers = this.getTabHeaders(this.children);
     return (
       <div role="tablist" className={styles.tabs} aria-orientation="horizontal">
         <div className={styles.tabs_headers}>
