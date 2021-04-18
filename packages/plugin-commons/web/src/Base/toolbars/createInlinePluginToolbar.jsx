@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
-import { Separator } from 'wix-rich-content-editor-common';
+import { Separator, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { BUTTONS } from '../buttons';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
@@ -22,6 +22,7 @@ export default function createInlinePluginToolbar({
   return class BaseToolbar extends Component {
     static propTypes = {
       hide: PropTypes.bool,
+      removeToolbarFocus: PropTypes.func,
     };
 
     constructor(props) {
@@ -61,15 +62,21 @@ export default function createInlinePluginToolbar({
       this.resizeObserver?.unobserve(this.ref);
     }
 
-    cursorIsOnInlinePlugin = () => {
+    isToolbarOnFocus = () => this.ref?.contains(document.activeElement);
+
+    cursorIsOnInlinePlugin = debounce(() => {
+      const toolbarOnFocus = this.isToolbarOnFocus();
       const { boundingRect, type } = commonPubsub.get('cursorOnInlinePlugin') || {};
+      if (toolbarOnFocus) {
+        return;
+      }
       if (boundingRect && name.toUpperCase() === type) {
         this.pluginBoundingRect = boundingRect;
         this.showToolbar();
       } else {
         this.hideToolbar();
       }
-    };
+    }, 40);
 
     shouldComponentUpdate(_nextProps, nextState) {
       return !!this.state.isVisible || !!nextState.isVisible;
@@ -157,6 +164,12 @@ export default function createInlinePluginToolbar({
       }
     };
 
+    onKeyDown = e => {
+      if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+        this.props.removeToolbarFocus && this.props.removeToolbarFocus();
+      }
+    };
+
     render() {
       const { overrideContent, tabIndex, isVisible } = this.state;
       const { hide } = this.props;
@@ -183,6 +196,8 @@ export default function createInlinePluginToolbar({
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
           ref: this.setRef,
+          onKeyDown: this.onKeyDown,
+          tabIndex: '0',
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';
