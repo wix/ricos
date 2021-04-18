@@ -28,7 +28,6 @@ import "rich_content/plugin_image.proto";
 import "rich_content/plugin_link_preview.proto";
 import "rich_content/plugin_map.proto";
 import "rich_content/plugin_poll.proto";
-import "rich_content/plugin_sound_cloud.proto";
 import "rich_content/plugin_vertical_embed.proto";
 import "rich_content/plugin_video.proto";
 
@@ -57,12 +56,10 @@ message Node {
         LINK_PREVIEW = 15;
         MAP = 16;
         POLL = 17;
-        SOUND_CLOUD = 18;
-        VERTICAL_EMBED = 19;
-        ACTION_BUTTON = 20;
-        LINK_BUTTON = 21;
-        ACCORDION = 22;
-        TABLE = 23;
+        VERTICAL_EMBED = 18;
+        BUTTON = 19;
+        ACCORDION = 20;
+        TABLE = 21;
     }
 
     Type type = 1; // Node type
@@ -82,10 +79,9 @@ message Node {
         MapData map_data = 14;
         ParagraphData paragraph_data = 15;
         PollData poll_data = 16;
-        SoundCloudData sound_cloud_data = 17;
-        TextData text_data = 18;
-        VerticalEmbedData vertical_embed_data = 19;
-        VideoData video_data = 20;
+        TextData text_data = 17;
+        VerticalEmbedData vertical_embed_data = 18;
+        VideoData video_data = 19;
     }
 }
 

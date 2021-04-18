@@ -13,8 +13,8 @@ class ImageComponent extends React.Component {
   static alignmentClassName = (componentData, theme, styles, isMobile) =>
     alignmentClassName(componentData, theme, styles, isMobile);
 
-  static sizeClassName = (componentData, theme, styles, isMobile, innerRCERenderedIn) =>
-    sizeClassName(componentData, theme, styles, isMobile, innerRCERenderedIn);
+  static sizeClassName = (componentData, theme, styles, isMobile) =>
+    sizeClassName(componentData, theme, styles, isMobile);
 
   constructor(props) {
     super(props);

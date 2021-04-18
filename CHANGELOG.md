@@ -24,18 +24,71 @@
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) Resize buttons
 
+### :bug: Bug Fix
+
+- `editor`
+  - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
+
+</details>
+<hr/>
+
+## 8.29.12 (April 13, 2021)
+
+### :house: Internal
+
+- `editor`
+  - [#2356](https://github.com/wix/ricos/pull/2356) toolbar navigation with keyboard
+
+## 8.29.8 (April 13, 2021)
+
+### :house: Internal
+
+- `scripts`
+  - trigger loki in npm publish script
+
+## 8.29.7 (April 13, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
+
+## 8.29.6 (April 13, 2021)
+
+- `schema`
+  - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
+
+## 8.29.5 (April 12, 2021)
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
+- `editor`
+  - [#2367](https://github.com/wix/ricos/pull/2367) Fix plus button to follow after input pointer
+
+### :house: Internal
+
+- `editor-common`
+  - [#2361](https://github.com/wix/ricos/pull/2361) fix undo experiment for table
+
+## 8.29.4 (April 11, 2021)
+
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2357](https://github.com/wix/ricos/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests
+- `editor-common`
+  - [#2368](https://github.com/wix/ricos/pull/2368) fix android issues (update draftjs)
+- `general`
+  - [#2349](https://github.com/wix/ricos/pull/2349) inline plugin popups in static formatting toolbar
+
 ### :house: Internal
 
 - `editor-common`
   - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
-
-  ### :bug: Bug Fix
-
-  - `fullscreen`
-    - [#2357](https://github.com/wix-incubator/rich-content/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests 
-
-</details>
-<hr/>
+- `button-link`
+  - [#2362](https://github.com/wix/ricos/pull/2362) add button link bi
 
 ## 8.29.3 (April 7, 2021)
 

@@ -16,6 +16,7 @@ export const COMMANDS = Object.freeze({
   ESC: 'esc',
   UNDO: 'ricosUndo',
   REDO: 'ricosRedo',
+  FOCUS_TOOLBAR: 'focusToolbar',
 });
 
 export const TEXT_TYPES = Object.freeze([
