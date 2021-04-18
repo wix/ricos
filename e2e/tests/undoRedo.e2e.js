@@ -2,7 +2,7 @@
 /*global cy*/
 import { IMAGE_SETTINGS, PLUGIN_COMPONENT } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, plugins, useExperiments } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -16,7 +16,7 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  context.skip('undo redo', () => {
+  context('undo redo', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -27,8 +27,11 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('should undo and redo image plugin customizations', function() {
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
+    it.skip('should undo and redo image plugin customizations', function() {
+      cy.loadRicosEditorAndViewer(
+        'empty',
+        useExperiments({ UseUndoForPlugins: { enabled: true } })
+      );
       cy.addImage();
       cy.enterText(' testing undo redo for plugins');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
@@ -54,7 +57,10 @@ describe('plugins', () => {
     });
 
     it('should undo and redo accordion plugin customizations', function() {
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
+      cy.loadRicosEditorAndViewer('empty', {
+        ...useExperiments({ UseUndoForPlugins: { enabled: true } }),
+        ...usePlugins(plugins.all),
+      });
       cy.addAccordion();
       cy.focusAccordion(1).type('Yes ');
       cy.addAccordionPair();
@@ -75,7 +81,7 @@ describe('plugins', () => {
       cy.get('.public-DraftStyleDefault-block > span').should('not.have.text', 'Yes');
       cy.undo().undo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('not.exist');
-      cy.redo().redo();
+      cy.redo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('exist');
       cy.redo();
       cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');

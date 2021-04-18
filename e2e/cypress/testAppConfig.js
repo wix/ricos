@@ -77,6 +77,10 @@ export const plugins = {
   table: 'table',
 };
 
+export const useExperiments = experiment => {
+  return { experiments: experiment };
+};
+
 export const pluginsType = {
   linkPreview: 'wix-draft-plugin-link-preview',
 };
