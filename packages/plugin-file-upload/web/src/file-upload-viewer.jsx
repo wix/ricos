@@ -22,7 +22,6 @@ class FileUploadViewer extends PureComponent {
     resolvedFileUrl: null,
     resolvingUrl: false,
     currentWidth: 0,
-    showTooltip: false,
   };
 
   constructor(props) {
@@ -35,20 +34,13 @@ class FileUploadViewer extends PureComponent {
 
   breakPoints = { firstBreak: 320, secondBreak: 140, thirdBreak: 100 };
 
-  isThirdBreakPoint = () =>
-    this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.thirdBreak;
-
-  isSecondBreakPoint = () =>
-    this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.secondBreak;
-
-  isFirstBreakPoint = () =>
-    this.fileUploadViewerRef?.current?.clientWidth < this.breakPoints.firstBreak;
-
-  shouldUpdateWidth = currentWidth =>
-    this.breakPoints.firstBreak >= currentWidth || this.breakPoints.firstBreak < currentWidth;
+  isBreakingPoint = breakPoint => this.fileUploadViewerRef?.current?.clientWidth < breakPoint;
 
   updateDimensions = currentWidth => {
-    if (this.shouldUpdateWidth(currentWidth)) {
+    const shouldUpdateWidth =
+      this.breakPoints.firstBreak >= currentWidth || this.breakPoints.firstBreak < currentWidth;
+
+    if (shouldUpdateWidth) {
       this.setState({ currentWidth });
     }
   };
@@ -101,7 +93,9 @@ class FileUploadViewer extends PureComponent {
         <Icon
           styles={this.styles}
           className={classnames(styles.file_upload_type_icon, {
-            [this.styles.file_upload_type_icon_second_break]: this.isThirdBreakPoint(),
+            [this.styles.file_upload_type_icon_second_break]: this.isBreakingPoint(
+              this.breakPoints.thirdBreak
+            ),
           })}
         />
       );
@@ -115,7 +109,7 @@ class FileUploadViewer extends PureComponent {
           ) : showReadyIcon ? (
             <ReadyIcon />
           ) : (
-            !this.isFirstBreakPoint() && <DownloadIcon />
+            !this.isBreakingPoint(this.breakPoints.firstBreak) && <DownloadIcon />
           )}
         </div>
       );
@@ -163,16 +157,18 @@ class FileUploadViewer extends PureComponent {
       <>
         {this.renderIcon(Icon)}
         {!isMobile && this.renderIcon()}
-        {!this.isThirdBreakPoint() && (
+        {!this.isBreakingPoint(this.breakPoints.thirdBreak) && (
           <div
             className={classnames(this.styles.file_upload_text_container, {
-              [this.styles.file_upload_text_container_second_break]: this.isSecondBreakPoint(),
+              [this.styles.file_upload_text_container_second_break]: this.isBreakingPoint(
+                this.breakPoints.secondBreak
+              ),
             })}
           >
             <div className={this.styles.file_upload_name_container}>
               <div
                 className={classnames(this.styles.file_upload_name, {
-                  [this.styles.displayNone]: this.isSecondBreakPoint(),
+                  [this.styles.displayNone]: this.isBreakingPoint(this.breakPoints.secondBreak),
                 })}
               >
                 {nameWithoutType}
@@ -180,7 +176,9 @@ class FileUploadViewer extends PureComponent {
               {type && (
                 <div
                   className={classnames(this.styles.file_upload_extension, {
-                    [this.styles.file_upload_extension_first_break]: this.isFirstBreakPoint(),
+                    [this.styles.file_upload_extension_first_break]: this.isBreakingPoint(
+                      this.breakPoints.firstBreak
+                    ),
                   })}
                 >
                   {'.' + type}
@@ -208,7 +206,9 @@ class FileUploadViewer extends PureComponent {
         href={fileUrl}
         target={downloadTarget}
         className={classnames(this.styles.file_upload_link, {
-          [this.styles.file_upload_link_second_break]: this.isThirdBreakPoint(),
+          [this.styles.file_upload_link_second_break]: this.isBreakingPoint(
+            this.breakPoints.thirdBreak
+          ),
         })}
       >
         {this.renderViewerBody({ name, type })}
@@ -278,11 +278,11 @@ class FileUploadViewer extends PureComponent {
       this.styles.file_upload_container,
       componentData.error && this.styles.file_upload_error_container
     );
+    const tooltipContent = this.isBreakingPoint(this.breakPoints.firstBreak)
+      ? componentData.name
+      : null;
     return (
-      <Tooltip
-        content={this.isFirstBreakPoint() ? componentData.name : null}
-        tooltipOffset={{ y: 25 }}
-      >
+      <Tooltip content={tooltipContent} tooltipOffset={{ y: 25 }}>
         <div className={style} data-hook="fileUploadViewer" ref={this.fileUploadViewerRef}>
           {viewer}
           {this.renderAutoDownloadIframe()}
