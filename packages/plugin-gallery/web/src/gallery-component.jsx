@@ -44,8 +44,6 @@ class GalleryComponent extends PureComponent {
         { ...this.stateFromProps(nextProps) },
         () => this.setState({ key: !this.state.key }) //fixes gallery height not updating correctly
       );
-    } else if (componentData.items?.length > 0) {
-      this.onLoad(false);
     }
   }
 
@@ -136,6 +134,7 @@ class GalleryComponent extends PureComponent {
         const item = data && createGalleryItem(data, Date.now().toString());
         uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
         this.setItemInGallery(item, error, itemIdx);
+        this.onLoad(false);
       });
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
@@ -181,6 +180,7 @@ class GalleryComponent extends PureComponent {
     if (this.props.store) {
       this.props.store.update('componentState', { isLoading: false });
     }
+    this.onLoad(false);
   };
 
   getUnsupportedExtensionError = fileName => {
