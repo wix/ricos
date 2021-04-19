@@ -17,6 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `ricos-content`
+  - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
 
