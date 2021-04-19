@@ -1,0 +1,109 @@
+{
+    "blocks": [
+      {
+        "key": "foo",
+        "text": "Link 1 Link 2 ",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 6,
+            "style": "UNDERLINE"
+          },
+          {
+            "offset": 7,
+            "length": 6,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 6,
+            "key": 0
+          },
+          {
+            "offset": 7,
+            "length": 6,
+            "key": 1
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "dbp9d",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "2224b",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 2
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "6mhdj",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "LINK",
+        "mutability": "MUTABLE",
+        "data": {
+          "url": "www.wix.com",
+          "target": "_blank",
+          "rel": "noopener"
+        }
+      },
+      "1": {
+        "type": "LINK",
+        "mutability": "MUTABLE",
+        "data": {
+          "url": "www.sport5.co.il",
+          "target": "_blank",
+          "rel": "noopener"
+        }
+      },
+      "2": {
+        "type": "wix-draft-plugin-image",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "showTitle": true,
+            "showDescription": true,
+            "disableExpand": false
+          },
+          "src": {
+            "id": "75318326db54174bea73594c3c25873a",
+            "original_file_name": "8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg",
+            "file_name": "8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg",
+            "width": 1621,
+            "height": 1081
+          }
+        }
+      }
+    },
+    "VERSION": "8.29.12"
+  }
