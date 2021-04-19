@@ -1725,10 +1725,11 @@
       "nodes": [],
       "imageData": {
         "containerData": {
+          "alignment": "RIGHT",
           "width": {
-            "type": "SMALL"
-          },
-          "alignment": "RIGHT"
+            "type": "CUSTOM",
+            "customWidth": 300
+          }
         },
         "image": {
           "src": {
