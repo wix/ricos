@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package rich_content;
-
-message AnchorData {
-    string anchor = 1;
-}

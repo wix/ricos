@@ -13,5 +13,5 @@ export const fromPlainText = (text: string): RichContent => {
     metadata: initializeMetadata(),
   };
 
-  return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent;
+  return RichContent.fromJSON(content);
 };

@@ -5,21 +5,23 @@ import { compare } from '../../../comparision/compare';
 import fixture from '../../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
 import { getTextNodes } from './getTextNodes';
-import ricosFixture from './migratedFixtures/intro.json';
-import complexRicosFixture from './migratedFixtures/migration-content.json';
-import { Node_Type, Decoration_Type } from 'ricos-schema';
+import ricosFixture from '../../../../statics/json/migratedFixtures/intro.json';
+import complexRicosFixture from '../../../../statics/json/migratedFixtures/migration-content.json';
+import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
 import { IMAGE_TYPE } from '../../../consts';
 
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
   it('should migrate intro fixture', () => {
-    expect(compare(fromDraft(fixture), ricosFixture, { ignoredKeys: ['key'] })).toEqual({});
+    expect(
+      compare(fromDraft(fixture), RichContent.fromJSON(ricosFixture), { ignoredKeys: ['key'] })
+    ).toEqual({});
   });
 
   it('should migrate complex fixture', () => {
     expect(
-      compare(fromDraft(complexFixture), complexRicosFixture, {
+      compare(fromDraft(complexFixture), RichContent.fromJSON(complexRicosFixture), {
         ignoredKeys: ['key'],
       })
     ).toEqual({});
