@@ -167,7 +167,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
 
   const content: RichContent = {
     nodes,
-    metadata: initializeMetadata(version),
+    metadata: initializeMetadata(),
   };
 
   return RichContent.fromJSON(content);
