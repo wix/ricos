@@ -50,7 +50,7 @@ class GalleryComponent extends PureComponent {
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
     const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
-    const itemsLeftToUpload = props.componentState?.isLoading || 0;
+    const itemsLeftToUpload = this.state?.itemsLeftToUpload || 0;
     const state = {
       items,
       styles,
@@ -122,6 +122,14 @@ class GalleryComponent extends PureComponent {
     this.state && this.onLoad(true);
   };
 
+  onFileUploadEnd = () => {
+    this.setState(state => {
+      const itemsLeftToUpload = state.itemsLeftToUpload - 1;
+      const isLoading = itemsLeftToUpload > 0;
+      return { itemsLeftToUpload, isLoading };
+    });
+  };
+
   handleFileUpload = (file, type, itemIdx) => {
     const { helpers } = this.props;
     const handleFileUpload = helpers?.handleFileUpload;
@@ -134,7 +142,7 @@ class GalleryComponent extends PureComponent {
         const item = data && createGalleryItem(data, Date.now().toString());
         uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
         this.setItemInGallery(item, error, itemIdx);
-        this.onLoad(false);
+        this.onFileUploadEnd();
       });
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
