@@ -86,7 +86,7 @@ const createInlineButtons: CreateInlineButtons = ({
       accept: settings.accept,
     },
     {
-      keyName: 'settings',
+      keyName: 'advanced_settings',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.GALLERY_SETTINGS,
