@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package rich_content.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message ColorData {
+    google.protobuf.StringValue background = 1;
+    google.protobuf.StringValue foreground = 2;
+}
