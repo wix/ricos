@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
+- `gallery`
+  - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
 
 ### :bug: Bug Fix
 - `editor`
