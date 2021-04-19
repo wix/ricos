@@ -23,10 +23,10 @@ message Link {
     message Rel {
         google.protobuf.BoolValue nofollow = 1; //Indicates to search engine crawlers that the link should not be followed
         google.protobuf.BoolValue sponsored = 2; //paid links
-        google.protobuf.BoolValue user_generated_content = 3; //UoU generated link
+        google.protobuf.BoolValue ugc = 3; //UoU generated link
     }
     enum Target {
-        NEW_TAB  = 0;
+        BLANK  = 0;
         TOP = 1;
         PARENT = 2;
         SELF = 3;
