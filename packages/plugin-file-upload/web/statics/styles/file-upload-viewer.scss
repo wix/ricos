@@ -31,10 +31,9 @@
   justify-content: center;
   align-content: flex-start;
   flex-flow: column wrap;
-}
-
-.file_upload_link_second_break {
-  align-content: center;
+  &.width_three {
+    align-content: center;
+  }
 }
 
 .file_upload_text_container {
@@ -43,10 +42,9 @@
   left: 73px;
   width: 60%;
   position: absolute;
-}
-
-.file_upload_text_container_second_break {
-  left: 62px;
+  &.width_two {
+    left: 62px;
+  }
 }
 
 .file_upload_state {
@@ -80,10 +78,6 @@
   text-overflow: ellipsis;
 }
 
-.displayNone {
-  display: none;
-}
-
 .file_upload_extension {
   text-align: left;
   font-size: 16px;
@@ -91,20 +85,18 @@
   color: $primary-text-color;
   white-space: nowrap;
   margin-right: 30px;
-}
-
-.file_upload_extension_first_break {
-  margin-right: 55px;
+  &.width_one {
+    margin-right: 55px;
+  }
 }
 
 .file_upload_type_icon {
   margin-right: 12px;
   margin-left: 20px;
   color: $action-color;
-}
-
-.file_upload_type_icon_second_break {
-  margin: 0;
+  &.width_three {
+    margin: 0;
+  }
 }
 
 /* rtl:ignore */

@@ -299,7 +299,7 @@ describe('RicosEditor', () => {
       };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (global as any).window.ResizeObserver = class {
+      (global as any).ResizeObserver = class {
         observe() {}
 
         unobserve() {}
