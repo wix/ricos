@@ -17,6 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
 - `ricos-content`
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`

@@ -10,7 +10,7 @@ describe('convert to plain text', () => {
   });
 
   it('should convert complex content with delimiter', async () => {
-    const plainText = await toPlainText(complexContent as RichContent, { delimiter: ' ' });
+    const plainText = await toPlainText(RichContent.fromJSON(complexContent), { delimiter: ' ' });
     expect(plainText).toEqual(PLAIN_TEXT.replace(/\n/g, ' '));
   });
 });
