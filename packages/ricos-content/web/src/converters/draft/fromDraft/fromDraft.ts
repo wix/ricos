@@ -12,7 +12,7 @@ export const ensureRicosContent = (content: RichContent | DraftContent): RichCon
   'blocks' in content ? fromDraft(content) : content;
 
 export const fromDraft = (draftJSON: DraftContent): RichContent => {
-  const { blocks, entityMap, VERSION: version } = cloneDeep(draftJSON);
+  const { blocks, entityMap } = cloneDeep(draftJSON);
   const nodes: Node[] = [];
 
   const parseBlocks = (index = 0) => {
