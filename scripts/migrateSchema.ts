@@ -6,8 +6,7 @@ import { RichContent } from 'ricos-schema';
 import { DraftContent } from 'ricos-content';
 import { compare } from 'ricos-content/libs/comparision';
 const FIXTURES_PATH = '../e2e/tests/fixtures';
-const MIGRATED_FIXTURES_PATH =
-  '../packages/ricos-content/web/src/converters/draft/fromDraft/migratedFixtures';
+const MIGRATED_FIXTURES_PATH = '../packages/ricos-content/web/statics/json/migratedFixtures';
 const REVERSE_MIGRATED_FIXTURES_PATH =
   '../packages/ricos-content/web/src/converters/draft/toDraft/reverseMigratedFixtures';
 
