@@ -207,10 +207,10 @@ class Toolbar extends Component {
   render() {
     const { buttons, vertical, formattingToolbarButtonsKeys, editorCommands } = this.props;
     const blabla = createButtonsList(formattingToolbarButtonsKeys, editorCommands);
-    console.log({ buttons });
-    console.log({ blabla });
-    this.cleanUnwantedSeparators(buttons);
-    const buttonsSeparatedByGaps = this.separateByGaps(buttons);
+    // console.log({ buttons });
+    // console.log({ blabla });
+    this.cleanUnwantedSeparators(blabla);
+    const buttonsSeparatedByGaps = this.separateByGaps(blabla);
     return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
       return (
         <div key={index} className={classNames(styles.toolbar, { [styles.vertical]: vertical })}>

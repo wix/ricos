@@ -762,7 +762,7 @@ const config: RichContentEditorProps['config'] = {
     FORMATTING_BUTTONS.LINE_SPACING,
     FORMATTING_BUTTONS.LINK,
     FORMATTING_BUTTONS.CODE_BLOCK,
-  ]
+  ],
   getToolbarSettings: ({ textButtons }) => [
     {
       name: TOOLBARS.INSERT_PLUGIN,
