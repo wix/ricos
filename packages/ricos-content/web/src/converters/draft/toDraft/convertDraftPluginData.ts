@@ -1,5 +1,5 @@
 /* eslint-disable fp/no-delete */
-import { Node_Type, Decoration_Type } from 'ricos-schema';
+import { Node_Type, Decoration_Type, PluginContainerData_Width_Type } from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
   ENTITY_DECORATION_TO_DATA_FIELD,
@@ -62,7 +62,12 @@ const convertContainerData = data => {
   data.config = Object.assign(
     {},
     data.config,
-    width?.type && { size: constantToKebabCase(width.type) },
+    width?.type && {
+      size:
+        width.type === PluginContainerData_Width_Type.CUSTOM
+          ? 'inline'
+          : constantToKebabCase(width.type),
+    },
     width?.customWidth && { width: width.customWidth },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {

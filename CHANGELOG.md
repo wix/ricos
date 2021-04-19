@@ -17,10 +17,17 @@
   </summary>
 
 ### :rocket: New Feature
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+- `ricos-content`
+  - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
 - `gallery`
   - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
+### :nail_care: Polish
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
 
 ### :bug: Bug Fix
 - `editor`
@@ -45,6 +52,7 @@
   - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
 
 ## 8.29.6 (April 13, 2021)
+### :bug: Bug Fix
 - `schema`
   - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
 
