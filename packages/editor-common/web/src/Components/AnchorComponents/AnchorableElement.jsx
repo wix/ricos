@@ -25,8 +25,8 @@ class AnchorableElement extends PureComponent {
   }
 
   componentDidMount() {
-    const { block } = this.props;
-    if (ANCHORABLE_BLOCKS[block.anchorType].preview) {
+    const { block, blockPreview } = this.props;
+    if (!blockPreview && ANCHORABLE_BLOCKS[block.anchorType].preview) {
       this.getPreview();
     }
   }
