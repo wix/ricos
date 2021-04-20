@@ -30,6 +30,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
+- `link`
+  - [#2384](https://github.com/wix-incubator/rich-content/pull/2384) anchor - fix preview config (crash on componentDidMount)
 
 </details>
 <hr/>
