@@ -84,7 +84,7 @@ const exceedsMaxTextLimit = ({ contentFragment, editorState, maxTextLength, getS
   return contentLength - selectedTextLength + fragmentTextLength > maxTextLength;
 };
 
-export const removeUnssuportedPlugins = (rawContent, isPluginInstalled) => {
+export const removeUnsupportedPlugins = (rawContent, isPluginInstalled) => {
   const { blocks, entityMap } = rawContent;
   const newContent = { blocks: [], entityMap: {} };
 
@@ -114,7 +114,7 @@ const handlePastedTextFromEditor = (
   maxTextLength,
   getSelectedText
 ) => {
-  const rawContent = removeUnssuportedPlugins(getContent(html), isPluginInstalled);
+  const rawContent = removeUnsupportedPlugins(getContent(html), isPluginInstalled);
   const contentFragment = convertFromRaw(rawContent);
   if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength, getSelectedText })) {
     // eslint-disable-next-line no-console

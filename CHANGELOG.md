@@ -30,8 +30,11 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
+  - [#2386](https://github.com/wix-incubator/rich-content/pull/2386) clear unsupported plugins from pasted content
 - `link`
   - [#2384](https://github.com/wix-incubator/rich-content/pull/2384) anchor - fix preview config (crash on componentDidMount)
+- `gallery`
+  - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
 
 </details>
 <hr/>
