@@ -1,6 +1,6 @@
 import handlePastedText, {
   convertParsedEditorStateObjectToRawData,
-  removeUnssuportedPlugins,
+  removeUnsupportedPlugins,
 } from '../src/RichContentEditor/handlePastedText';
 import {
   convertFromRaw,
@@ -112,7 +112,7 @@ describe('Paste text tests', () => {
       }
       return true;
     };
-    const newContent = removeUnssuportedPlugins(raw_data_image_links, mockIsInstalledPlugin);
+    const newContent = removeUnsupportedPlugins(raw_data_image_links, mockIsInstalledPlugin);
     expect(expected_raw_data_image_links).toEqual(newContent);
   });
 });
