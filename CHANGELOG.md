@@ -23,6 +23,8 @@
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
 ### :nail_care: Polish
 - `schema`
   - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
@@ -89,8 +91,6 @@
   - [#1882](https://github.com/wix/ricos/pull/1882) fix buttons bg color issue with mobile "false hover"
 - `common`
   - [#2344](https://github.com/wix/ricos/pull/2344) fix tooltip z-index for media settings modal
-- `file-upload`
-  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive style 
 
 ## 8.29.2 (April 6, 2021)
 ### :rocket: New Feature
