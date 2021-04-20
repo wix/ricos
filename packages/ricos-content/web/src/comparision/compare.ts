@@ -4,7 +4,13 @@
 import { transform, isEqualWith, isEqual, isObject, omit, pick, cloneDeep } from 'lodash';
 import omitDeep from 'omit-deep';
 
-const IGNORED_KEYS = ['updatedDate', 'tempData', 'isCustomVideo'];
+const IGNORED_KEYS = [
+  'updatedTimestamp',
+  'createdTimestamp',
+  'tempData',
+  'isCustomVideo',
+  'VERSION',
+];
 const IGNORED_POLL_CONFIG_KEYS = ['alignment', 'size', 'width'];
 const IGNORED_SRC_KEYS = ['id', 'original_file_name'];
 const IGNORED_BUTTON_DESIGN_KEYS = ['activeButton', 'padding'];

@@ -1,7 +1,6 @@
 import { RichContent, Node, Decoration_Type, Node_Type, Decoration, TextData } from 'ricos-schema';
 
-export const toHtml = (content: RichContent): string =>
-  `"\n${nodeArrayToHtml(content.nodes, '\n')}\n"`;
+export const toHtml = (content: RichContent): string => `${nodeArrayToHtml(content.nodes, '\n')}`;
 
 const nodeArrayToHtml = (nodes: Node[], separator = ''): string =>
   nodes.flatMap(nodeToHtml).join(separator);

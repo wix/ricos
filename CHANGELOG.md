@@ -16,10 +16,25 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+- `ricos-content`
+  - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
+- `button`
+  - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
+### :nail_care: Polish
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
+
 ### :bug: Bug Fix
 - `editor`
   - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
   - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block 
+- `link`
+  - [#2384](https://github.com/wix-incubator/rich-content/pull/2384) anchor - fix preview config (crash on componentDidMount)
+- `gallery`
+  - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
 
 </details>
 <hr/>
@@ -40,6 +55,7 @@
   - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
 
 ## 8.29.6 (April 13, 2021)
+### :bug: Bug Fix
 - `schema`
   - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
 

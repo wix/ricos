@@ -57,9 +57,11 @@ const convertContainerData = data => {
     const { description, buttonContent } = data.config.spoiler;
     spoiler = { description, buttonText: buttonContent };
   }
+  const type =
+    size && (size === 'inline' ? PluginContainerData_Width_Type.CUSTOM : kebabToConstantCase(size));
   data.containerData = {
     width: {
-      type: size && kebabToConstantCase(size),
+      type,
       customWidth: typeof width === 'number' ? width : undefined,
     },
     alignment: alignment && kebabToConstantCase(alignment),
