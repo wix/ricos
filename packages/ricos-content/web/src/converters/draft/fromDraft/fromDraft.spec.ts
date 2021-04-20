@@ -11,6 +11,7 @@ import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
 import { IMAGE_TYPE } from '../../../consts';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
   it('should migrate intro fixture', () => {

@@ -36,6 +36,13 @@
 - `gallery`
   - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
 
+
+### :nail_care: Polish
+- `schema`
+  - [#2383](https://github.com/wix-incubator/rich-content/pull/2383) fix link schema
+
+
+
 </details>
 <hr/>
 
