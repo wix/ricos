@@ -33,7 +33,7 @@ export class Tab extends Component {
         id={`${this.props.value}_panel`}
         className={this.styles.tabs_panel}
       >
-        {this.props.children}
+        {React.Children.toArray(this.props.children).filter(Boolean)}
       </div>
     );
 }
@@ -53,7 +53,7 @@ export class Tabs extends Component {
     }
   };
 
-  children = this.props.children.filter(child => child);
+  children = React.Children.toArray(this.props.children).filter(Boolean);
 
   getTabHeaders = tabs =>
     React.Children.map(tabs, tab => ({ label: tab.props.label, value: tab.props.value }));
