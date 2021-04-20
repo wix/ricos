@@ -37,7 +37,6 @@ export enum ModifierKey {
   CTRL = 'ctrl',
   OPTION = 'option',
   SHIFT = 'shift',
-  ALT = 'alt',
 }
 
 export enum ToolbarType {

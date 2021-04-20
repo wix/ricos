@@ -766,12 +766,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   customCommands = [
     {
       command: COMMANDS.FOCUS_TOOLBAR,
-      modifiers: [MODIFIERS.CTRL],
+      modifiers: [MODIFIERS.OPTION],
       key: 't',
     },
     {
       command: COMMANDS.FOCUS_TOOLBAR,
-      modifiers: [MODIFIERS.ALT],
+      modifiers: [MODIFIERS.CTRL],
       key: 't',
     },
     {
