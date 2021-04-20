@@ -21,24 +21,23 @@ message TextStyle {
 
 message Link {
     message Rel {
-        google.protobuf.BoolValue nofollow = 1; //Indicates to search engine crawlers that the link should not be followed
-        google.protobuf.BoolValue sponsored = 2; //paid links
-        google.protobuf.BoolValue ugc = 3; //UoU generated link
+        google.protobuf.BoolValue nofollow = 1; // Indicates to search engine crawlers that the link should not be followed
+        google.protobuf.BoolValue sponsored = 2; // paid links
+        google.protobuf.BoolValue ugc = 3; // UoU generated link
     }
     enum Target {
-        BLANK  = 0;
-        TOP = 1;
+        TOP = 0;
+        BLANK = 1;
         PARENT = 2;
         SELF = 3;
     }
 
     oneof data {
         string url = 1;
-        string anchor = 2; // id of node in document
+        string anchor = 2; // key of node in document
     }
     Target target = 3;
     Rel rel = 4;
-
     google.protobuf.StringValue custom_data = 5; // serialized object, used for custom/external link panel
 }
 

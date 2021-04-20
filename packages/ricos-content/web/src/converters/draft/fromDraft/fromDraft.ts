@@ -1,6 +1,6 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { cloneDeep, isEmpty } from 'lodash';
-import { DraftContent, RicosContentBlock } from '../../..';
+import { DraftContent, RicosContentBlock } from '../../../types';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { genKey } from '../../generateRandomKey';
