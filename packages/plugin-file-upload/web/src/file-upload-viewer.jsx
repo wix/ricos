@@ -36,15 +36,6 @@ class FileUploadViewer extends PureComponent {
 
   isInResizeRange = resizeWidth => this.fileUploadViewerRef?.current?.clientWidth < resizeWidth;
 
-  updateDimensions = currentWidth => {
-    const shouldUpdateWidth =
-      resizeWidths.first >= currentWidth || resizeWidths.first < currentWidth;
-
-    if (shouldUpdateWidth) {
-      this.setState({ currentWidth });
-    }
-  };
-
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, pluginFileUploadSchema);
@@ -58,9 +49,8 @@ class FileUploadViewer extends PureComponent {
     if (window?.ResizeObserver) {
       this.resizer = new ResizeObserver(
         debounce(entries => {
-          const currentWidth = Math.round(entries[0].contentRect.width);
-          this.updateDimensions(currentWidth);
-        }, 80)
+          this.setState({ currentWidth: Math.round(entries[0].contentRect.width) });
+        }, 60)
       );
     }
     this.resizer.observe(this.fileUploadViewerRef.current);
