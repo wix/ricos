@@ -1,7 +1,5 @@
 /* eslint-disable fp/no-delete */
-import { Node_Type, Decoration_Type } from 'ricos-schema';
-import toCamelCase from 'to-camel-case';
-import toSnakeCase from 'to-snake-case';
+import { Node_Type, Decoration_Type, PluginContainerData_Width_Type } from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
   ENTITY_DECORATION_TO_DATA_FIELD,
@@ -24,26 +22,26 @@ export const convertDecorationToDraftData = decoration => {
 };
 
 export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
+  const newData = cloneDeep(data);
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,
     [Node_Type.DIVIDER]: convertDividerData,
     [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
-    [Node_Type.GALLERY]: convertGalleryData,
     [Node_Type.POLL]: convertPollData,
     [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
-    [Node_Type.HTML]: convertHtmlData,
-    [Node_Type.GIPHY]: convertGiphyData,
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
-    [Node_Type.SOUND_CLOUD]: convertSoundCloudData,
+    [Node_Type.BUTTON]: convertButtonData,
+    [Node_Type.HTML]: convertHTMLData,
   };
+  if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
+    convertContainerData(newData);
+  }
   if (nodeType in converters) {
     const convert = converters[nodeType];
-    const newData = cloneDeep(data);
     convert(newData);
-    return newData;
   }
-  return data;
+  return JSON.parse(JSON.stringify(newData));
 };
 
 export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
@@ -59,68 +57,85 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
   return data;
 };
 
+const convertContainerData = data => {
+  const { width, alignment, spoiler } = data.containerData;
+  data.config = Object.assign(
+    {},
+    data.config,
+    width?.type && {
+      size:
+        width.type === PluginContainerData_Width_Type.CUSTOM
+          ? 'inline'
+          : constantToKebabCase(width.type),
+    },
+    width?.customWidth && { width: width.customWidth },
+    alignment && { alignment: constantToKebabCase(alignment) },
+    spoiler && {
+      spoiler: {
+        enabled: true,
+        description: spoiler.description,
+        buttonContent: spoiler.buttonText,
+      },
+    }
+  );
+  delete data.containerData;
+};
+
 const convertVideoData = data => {
-  if (data.url) {
-    data.src = data.url;
-    delete data.url;
+  const videoSrc = data.video.src;
+  if (videoSrc.url) {
+    data.src = videoSrc.url;
+    const { src, width, height } = data.thumbnail;
+    data.metadata = { thumbnail_url: src.url, width, height };
+  } else if (videoSrc.custom) {
+    const { src, width, height } = data.thumbnail;
+    data.src = {
+      pathname: videoSrc.custom,
+      thumbnail: { pathname: src.custom, width, height },
+    };
   }
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
-  if (data.metadata) {
-    data.metadata = keysToSnakeCase(data.metadata);
-  }
+  delete data.video;
+  delete data.thumbnail;
 };
 
 const convertDividerData = data => {
-  has(data, 'type') && (data.type = toCamelCase(data.type));
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
-};
-
-const convertFileData = data => {
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.config = { textWrap: 'nowrap' };
+  if (has(data, 'width')) {
+    data.config.size = data.width.toLowerCase();
+    delete data.width;
+  }
+  if (has(data, 'alignment')) {
+    data.config.alignment = data.alignment.toLowerCase();
+    delete data.alignment;
+  }
+  delete data.containerData;
 };
 
 const convertImageData = data => {
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
-  if (has(data, 'src.originalFileName')) {
-    data.src.original_file_name = data.src.originalFileName;
-    delete data.src.originalFileName;
-  }
-  if (has(data, 'src.fileName')) {
-    data.src.file_name = data.src.fileName;
-    delete data.src.fileName;
-  }
-};
-
-const convertGalleryData = data => {
-  has(data, 'config.size') && (data.config.size = toCamelCase(data.config.size));
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
+  const { link, config, disableExpand, image, altText, caption } = data;
+  const { src, width, height } = image;
+  data.src = { id: src.custom, file_name: src.custom, width, height };
+  const links = link?.anchor ? { anchor: link?.anchor } : { link };
+  data.config = { ...(config || {}), ...links, disableExpand };
+  data.metadata = (altText || caption) && { caption, alt: altText };
+  delete data.disableExpand;
+  delete data.image;
+  delete data.link;
+  delete data.caption;
+  delete data.altText;
 };
 
 const convertPollData = data => {
-  has(data, 'layout.poll.type') && (data.layout.poll.type = toCamelCase(data.layout.poll.type));
+  has(data, 'layout.poll.type') && (data.layout.poll.type = data.layout.poll.type.toLowerCase());
   has(data, 'layout.poll.direction') &&
-    (data.layout.poll.direction = toCamelCase(data.layout.poll.direction));
+    (data.layout.poll.direction = data.layout.poll.direction.toLowerCase());
   has(data, 'design.poll.backgroundType') &&
-    (data.design.poll.backgroundType = toCamelCase(data.design.poll.backgroundType));
+    (data.design.poll.backgroundType = data.design.poll.backgroundType.toLowerCase());
 };
 
 const convertVerticalEmbedData = data => {
-  has(data, 'type') && (data.type = toCamelCase(data.type));
-};
-
-const convertHtmlData = data => {
-  has(data, 'config.alignment') && (data.config.alignment = toCamelCase(data.config.alignment));
-};
-
-const convertGiphyData = data => {
-  has(data, 'configViewer.sizes.desktop') &&
-    (data.configViewer.sizes.desktop = toCamelCase(data.configViewer.sizes.desktop));
-  has(data, 'configViewer.sizes.mobile') &&
-    (data.configViewer.sizes.mobile = toCamelCase(data.configViewer.sizes.mobile));
+  has(data, 'type') && (data.type = data.type.toLowerCase());
 };
 
 const convertLinkPreviewData = data => {
@@ -134,17 +149,44 @@ const convertLinkPreviewData = data => {
   }
 };
 
-const convertSoundCloudData = data => {
-  if (data.metadata) {
-    data.metadata = keysToSnakeCase(data.metadata);
-  }
-};
-
 const convertMention = data => {
   data.mention = { slug: data.slug, name: data.name };
   delete data.name;
   delete data.slug;
 };
 
-const keysToSnakeCase = obj =>
-  Object.fromEntries(Object.entries(obj).map(([key, value]) => [toSnakeCase(key), value]));
+const convertFileData = data => {
+  const { url, custom } = data.src;
+  data.url = url;
+  data.id = custom;
+  delete data.src;
+};
+
+const convertButtonData = data => {
+  const { link, text, styles } = data;
+  const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles;
+  const { url, rel, target } = link || {};
+  data.button = {
+    settings: {
+      buttonText: text,
+      ...(url ? { url, rel: rel === 'nofollow', target: target === '_blank' } : {}),
+    }, // @shaulgo please review logic
+    design: {
+      borderRadius,
+      borderWidth,
+      background: backgroundColor,
+      color: textColor,
+      borderColor,
+    },
+  };
+  delete data.link;
+  delete data.text;
+  delete data.type;
+  delete data.styles;
+};
+
+const convertHTMLData = data => {
+  delete data.config?.size;
+};
+
+const constantToKebabCase = (str: string) => str.toLowerCase().replace('_', '-');

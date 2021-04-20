@@ -16,7 +16,6 @@ import {
   ParagraphData,
   PollData,
   RichContent,
-  SoundCloudData,
   TextData,
   VideoData,
 } from 'ricos-schema';
@@ -32,7 +31,6 @@ import { ContentBuilder } from '../types';
 
 const dataByNodeType = (type: Node_Type, data: unknown) =>
   ({
-    [Node_Type.ACTION_BUTTON]: { buttonData: data as ButtonData },
     [Node_Type.CODEBLOCK]: { codeData: data as CodeData },
     [Node_Type.DIVIDER]: { dividerData: data as DividerData },
     [Node_Type.HEADING]: { headingData: data as HeadingData },
@@ -41,12 +39,11 @@ const dataByNodeType = (type: Node_Type, data: unknown) =>
     [Node_Type.GIPHY]: { giphyData: data as GiphyData },
     [Node_Type.HTML]: { htmlData: data as HTMLData },
     [Node_Type.IMAGE]: { imageData: data as ImageData },
-    [Node_Type.LINK_BUTTON]: { buttonData: data as ButtonData },
+    [Node_Type.BUTTON]: { buttonData: data as ButtonData },
     [Node_Type.LINK_PREVIEW]: { LinkPreviewData: data as LinkPreviewData },
     [Node_Type.MAP]: { mapData: data as MapData },
     [Node_Type.PARAGRAPH]: { paragraphData: data as ParagraphData },
     [Node_Type.POLL]: { pollData: data as PollData },
-    [Node_Type.SOUND_CLOUD]: { SoundCloudData: data as SoundCloudData },
     [Node_Type.TEXT]: { textData: data as TextData },
     [Node_Type.VIDEO]: { videoData: data as VideoData },
   }[type]);
@@ -315,13 +312,11 @@ export const setupContentBuilder = (
     { name: 'Divider', type: Node_Type.DIVIDER, dataT: {} as DividerData },
     { name: 'LinkPreview', type: Node_Type.LINK_PREVIEW, dataT: {} as LinkPreviewData },
     { name: 'Poll', type: Node_Type.POLL, dataT: {} as PollData },
-    { name: 'SoundCloud', type: Node_Type.SOUND_CLOUD, dataT: {} as SoundCloudData },
     { name: 'File', type: Node_Type.FILE, dataT: {} as FileData },
     { name: 'Gallery', type: Node_Type.GALLERY, dataT: {} as GalleryData },
     { name: 'Map', type: Node_Type.MAP, dataT: {} as MapData },
     { name: 'Video', type: Node_Type.VIDEO, dataT: {} as VideoData },
-    { name: 'LinkButton', type: Node_Type.LINK_BUTTON, dataT: {} as ButtonData },
-    { name: 'ActionButton', type: Node_Type.ACTION_BUTTON, dataT: {} as ButtonData },
+    { name: 'Button', type: Node_Type.BUTTON, dataT: {} as ButtonData },
     { name: 'Giphy', type: Node_Type.GIPHY, dataT: {} as GiphyData },
     { name: 'Html', type: Node_Type.HTML, dataT: {} as HTMLData },
   ].forEach(({ name, type, dataT }) => {

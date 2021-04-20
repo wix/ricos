@@ -122,6 +122,15 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       : WIX_MEDIA_DEFAULT.SIZE;
   }
 
+  getImageDataUrl(): ImageSrc | null {
+    return this.props.dataUrl
+      ? {
+          preload: this.props.dataUrl,
+          highres: this.props.dataUrl,
+        }
+      : null;
+  }
+
   getImageUrl(src): ImageSrc | null {
     const { helpers, seoMode } = this.props || {};
     if (!src && helpers?.handleFileSelection) {
@@ -148,43 +157,40 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       return [requiredWidth, requiredHeight];
     };
 
-    if (this.props.dataUrl) {
-      imageUrl.preload = imageUrl.highres = this.props.dataUrl;
-    } else {
-      let requiredWidth, requiredHeight;
-      let imageSrcOpts = {};
-      const isPNG = /(.*)\.(png)$/.test(src.file_name);
-      /**
+    let requiredWidth, requiredHeight;
+    let imageSrcOpts = {};
+    const isPNG = /(.*)\.(png)$/.test(src.file_name);
+    /**
         PNG files can't reduce quality via Wix services and we want to avoid downloading a big png image that will affect performance.
       **/
-      if (!this.props.isMobile && !isPNG && this.context.experiments?.useQualityPreload?.enabled) {
-        const {
-          componentData: {
-            config: { alignment, width },
-          },
-        } = this.props;
-        const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
-        imageSrcOpts = {
-          imageType: 'quailtyPreload',
-          ...(usePredefinedWidth && { requiredWidth: 300 }),
-        };
-      }
-      imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, imageSrcOpts);
-      if (seoMode) {
-        requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
-        requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
-      } else if (this.state.container) {
-        const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
-        [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
-      }
-
-      imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
-        requiredWidth,
-        requiredHeight,
-        requiredQuality: 90,
-        imageType: 'highRes',
-      });
+    if (!this.props.isMobile && !isPNG && this.context.experiments?.useQualityPreload?.enabled) {
+      const {
+        componentData: {
+          config: { alignment, width },
+        },
+      } = this.props;
+      const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
+      imageSrcOpts = {
+        imageType: 'quailtyPreload',
+        ...(usePredefinedWidth && { requiredWidth: 300 }),
+      };
     }
+    imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, imageSrcOpts);
+    if (seoMode) {
+      requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
+      requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
+    } else if (this.state.container) {
+      const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
+      [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
+    }
+
+    imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
+      requiredWidth,
+      requiredHeight,
+      requiredQuality: 90,
+      imageType: 'highRes',
+    });
+
     if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
@@ -416,7 +422,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       [this.styles.pointer]: this.hasExpand() as boolean,
     });
     const imageClassName = this.styles.image;
-    const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
+    const imageSrc = fallbackImageSrc || this.getImageDataUrl() || this.getImageUrl(data.src);
     let imageProps = {};
     if (data.src && settings && settings.imageProps) {
       imageProps = isFunction(settings.imageProps)

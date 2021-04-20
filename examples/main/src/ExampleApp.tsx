@@ -86,7 +86,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMultiSelectImages: false,
       shouldNativeUpload: false,
       shouldUseNewContent: false,
-      styleElement: [],
+      styleElement: this.getInitialStyleElement(),
+      experiments: get('experiments') || {},
       ...localState,
     };
   }
@@ -236,30 +237,37 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   getActivePalette = () => this.state.activePalette;
   getExperiments = () => this.state.experiments;
   getActiveFont = () => this.state.activeFont;
-  getThemeObj = () => {
-    const { activeFont, activePalette } = this.state;
+  getThemeObj = (activeFont, activePalette) => {
     const themeObj: any = {};
     activeFont && (themeObj.customStyles = FONTS[activeFont]);
     activePalette && (themeObj.palette = ricosPalettes[activePalette]);
     return themeObj;
   };
 
-  onPaletteChange = i =>
+  onPaletteChange = i => {
     this.setState({
       styleElement: this.getHtmlTheme({ palette: ricosPalettes[i] }),
       activePalette: i,
     });
-
-  onFontChange = i =>
+    set('activePalette', i);
+  };
+  onFontChange = i => {
     this.setState({ styleElement: this.getHtmlTheme({ customStyles: FONTS[i] }), activeFont: i });
-
+    set('activeFont', i);
+  };
   getHtmlTheme = themeObj => {
-    const { html } = themeStrategy({ ricosTheme: { ...this.getThemeObj(), ...themeObj } });
-    const htmls: ReactElement[] = [];
-    if (html) {
-      htmls.push(html);
-    }
-    return htmls;
+    const { activeFont, activePalette } = this.state;
+    const { html } = themeStrategy({
+      ricosTheme: { ...this.getThemeObj(activeFont, activePalette), ...themeObj },
+    });
+    return html ? [html] : [];
+  };
+
+  getInitialStyleElement = () => {
+    const activePalette = get('activePalette');
+    const activeFont = get('activeFont');
+    const { html } = themeStrategy({ ricosTheme: this.getThemeObj(activeFont, activePalette) });
+    return html ? [html] : [];
   };
 
   onSetExperiment = (name: string, value: any) => {
@@ -268,6 +276,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       [name]: { enabled: value && value !== 'false', namespace: 'ricos', value },
     };
     this.setState({ experiments });
+    set('experiments', experiments);
   };
 
   renderEditor = () => {

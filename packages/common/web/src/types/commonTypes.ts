@@ -105,6 +105,7 @@ export interface EditorContextType extends CommonContextType {
   renderInnerRCE: (params: any) => JSX.Element;
   innerRCERenderedIn?: string;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
+  experiments?: AvailableExperiments;
 }
 
 export interface ViewerContextType extends CommonContextType {

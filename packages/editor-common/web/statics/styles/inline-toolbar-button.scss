@@ -13,7 +13,7 @@
   }
 
   &:hover {
-    button {
+   & > button {
       background-color: rgba($fallbackColorTuple, 0.06);
       @include phone {
         background-color: transparent;
@@ -37,10 +37,6 @@
   border: 0 none;
   line-height: normal;
   cursor: pointer;
-  &:hover,
-  &:focus {
-    outline: 0;
-  }
   &:disabled {
     cursor: default;
     opacity: 0.4;

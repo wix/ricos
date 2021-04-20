@@ -31,24 +31,15 @@ describe('migrate to draft', () => {
     type: 'IMAGE',
     key: 'eoba3',
     imageData: {
-      config: {
-        size: 'CONTENT',
-        alignment: 'CENTER',
-        showTitle: true,
-        showDescription: true,
-        disableExpand: false,
-      },
-      src: {
-        id: '036c6bf6cef5e4409848eb4eb6f80de1',
-        originalFileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
-        fileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+      containerData: { width: { type: 'CONTENT' }, alignment: 'CENTER' },
+      image: {
+        src: { custom: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg' },
         width: 2898,
         height: 3354,
       },
-      metadata: {
-        alt: 'feet',
-        caption: 'The caption!',
-      },
+      disableExpand: false,
+      altText: 'feet',
+      caption: 'The caption!',
     },
   };
 
@@ -56,13 +47,10 @@ describe('migrate to draft', () => {
     config: {
       alignment: 'center',
       size: 'content',
-      showTitle: true,
-      showDescription: true,
       disableExpand: false,
     },
     src: {
-      id: '036c6bf6cef5e4409848eb4eb6f80de1',
-      original_file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+      id: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
       file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
       width: 2898,
       height: 3354,

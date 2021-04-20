@@ -5850,10 +5850,10 @@
     text-table "^0.2.0"
     webpack-log "^1.1.2"
 
-"@wix/draft-js@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@wix/draft-js/-/draft-js-0.0.10.tgz#b772ea2b3e72a565dac16ca5a687cad908b53894"
-  integrity sha512-+dbXRXzO/7+MYKBkuEaLVT7puR7Hg/88yQZycBGx4SUTjewjz/BGaXpTV+Udd1K7DrhvAkM3LFdF4zwG2CtAbw==
+"@wix/draft-js@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@wix/draft-js/-/draft-js-0.0.11.tgz#e7327883e7e814448a6397a524aa539cf221a70e"
+  integrity sha512-QX4PUea2q86/oMAv024ZxlbhfdAmR4dLVxYejWmauPngy8cfbvW0XkNQlU9JZKtDDFF6RyoqpQQquqBff62Xhg==
   dependencies:
     alex "^8.0.0"
     fbjs "^1.0.0"
@@ -20326,6 +20326,14 @@ omggif@^1.0.9:
   resolved "https://registry.yarnpkg.com/omggif/-/omggif-1.0.10.tgz#ddaaf90d4a42f532e9e7cb3a95ecdd47f17c7b19"
   integrity sha512-LMJTtvgc/nugXj0Vcrrs68Mn2D1r0zf630VNtqtpI1FEO7e+O9FP4gqs9AcnBaSEeoHIPm28u6qgPR0oyEpGSw==
 
+omit-deep@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/omit-deep/-/omit-deep-0.3.0.tgz#21c8af3499bcadd29651a232cbcacbc52445ebec"
+  integrity sha1-IcivNJm8rdKWUaIyy8rLxSRF6+w=
+  dependencies:
+    is-plain-object "^2.0.1"
+    unset-value "^0.1.1"
+
 omit@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/omit/-/omit-1.0.1.tgz#058a01b4b6db1287b36ecb58dfa8e18778958017"
@@ -28023,6 +28031,14 @@ unquote@^1.1.0, unquote@^1.1.1, unquote@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
+
+unset-value@^0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/unset-value/-/unset-value-0.1.2.tgz#506810b867f27c2a5a6e9b04833631f6de58d310"
+  integrity sha1-UGgQuGfyfCpabpsEgzYx9t5Y0xA=
+  dependencies:
+    has-value "^0.3.1"
+    isobject "^3.0.0"
 
 unset-value@^1.0.0:
   version "1.0.0"

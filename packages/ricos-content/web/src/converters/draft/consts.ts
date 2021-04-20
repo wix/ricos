@@ -10,7 +10,6 @@ import {
   LINK_PREVIEW_TYPE,
   MAP_TYPE,
   POLL_TYPE,
-  SOUND_CLOUD_TYPE,
   VIDEO_TYPE,
   VERTICAL_EMBED_TYPE,
   LINK_BUTTON_TYPE,
@@ -58,8 +57,8 @@ export const TO_DRAFT_LIST_TYPE = Object.fromEntries(
 );
 
 export const TO_RICOS_NODE_TYPE = {
-  [LINK_BUTTON_TYPE]: Node_Type.LINK_BUTTON,
-  [ACTION_BUTTON_TYPE]: Node_Type.ACTION_BUTTON,
+  [LINK_BUTTON_TYPE]: Node_Type.BUTTON,
+  [ACTION_BUTTON_TYPE]: Node_Type.BUTTON,
   [DIVIDER_TYPE]: Node_Type.DIVIDER,
   [FILE_UPLOAD_TYPE]: Node_Type.FILE,
   [GALLERY_TYPE]: Node_Type.GALLERY,
@@ -70,7 +69,6 @@ export const TO_RICOS_NODE_TYPE = {
   [ACCORDION_TYPE]: Node_Type.ACCORDION,
   [LINK_PREVIEW_TYPE]: Node_Type.LINK_PREVIEW,
   [MAP_TYPE]: Node_Type.MAP,
-  [SOUND_CLOUD_TYPE]: Node_Type.SOUND_CLOUD,
   [VERTICAL_EMBED_TYPE]: Node_Type.VERTICAL_EMBED,
   [VIDEO_TYPE]: Node_Type.VIDEO,
   [VIDEO_TYPE_LEGACY]: Node_Type.VIDEO,
@@ -115,8 +113,7 @@ export const ENTITY_DECORATION_TO_MUTABILITY = {
 };
 
 export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
-  [Node_Type.LINK_BUTTON]: 'linkButtonData',
-  [Node_Type.ACTION_BUTTON]: 'actionButtonData',
+  [Node_Type.BUTTON]: 'buttonData',
   [Node_Type.DIVIDER]: 'dividerData',
   [Node_Type.FILE]: 'fileData',
   [Node_Type.GALLERY]: 'galleryData',
@@ -126,7 +123,6 @@ export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
   [Node_Type.ACCORDION]: 'accordionData',
   [Node_Type.LINK_PREVIEW]: 'linkPreviewData',
   [Node_Type.MAP]: 'mapData',
-  [Node_Type.SOUND_CLOUD]: 'soundCloudData',
   [Node_Type.VERTICAL_EMBED]: 'verticalEmbedData',
   [Node_Type.VIDEO]: 'videoData',
   [Node_Type.POLL]: 'pollData',

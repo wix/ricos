@@ -2,13 +2,12 @@ import React from 'react';
 import SideToolbar from './SideToolbar';
 import AddPluginFloatingToolbar from './AddPluginFloatingToolbar';
 import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
-import { simplePubsub } from 'wix-rich-content-common';
 import { getPluginMenuTheme } from './utils';
 
 const createSideToolbar = (data = {}) => {
   const {
     name = 'SideToolbar',
-    pubsub = simplePubsub({ isVisible: false }),
+    pubsub,
     theme,
     structure = [],
     visibilityFn,
@@ -85,5 +84,6 @@ export default ({
         />
       ),
     ],
+    pubsub,
   });
 };

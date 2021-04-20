@@ -12,6 +12,7 @@ import {
 } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 import { task, either, firstResolved } from '../fp-utils';
+import { PartialDeep } from '../types';
 
 // predicates
 const isIndexFound = either(index => index !== -1);
@@ -93,16 +94,22 @@ export function toggleNodeType({
   convert,
   content,
 }: {
-  node: Node;
+  node: PartialDeep<Node>;
   key: string;
-  canToggle: ({ sourceNode, targetNode }: { sourceNode: Node; targetNode: Node }) => boolean;
+  canToggle: ({
+    sourceNode,
+    targetNode,
+  }: {
+    sourceNode: PartialDeep<Node>;
+    targetNode: Node;
+  }) => boolean;
   convert: ({
     sourceNode,
     targetNode,
   }: {
-    sourceNode: Partial<Node>;
+    sourceNode: PartialDeep<Node>;
     targetNode: Node;
-  }) => Partial<Node>;
+  }) => PartialDeep<Node>;
   content: RichContent;
 }): RichContent {
   const isToggleable = either(canToggle);
@@ -118,7 +125,7 @@ export function updateNode({
   key: nodeKey,
   content,
 }: {
-  node: Node;
+  node: PartialDeep<Node>;
   key: string;
   content: RichContent;
 }): RichContent {

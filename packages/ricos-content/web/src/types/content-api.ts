@@ -14,9 +14,16 @@ import {
   CodeData,
   HeadingData,
   LinkPreviewData,
-  SoundCloudData,
   PollData,
 } from 'ricos-schema';
+
+export type PartialDeep<T> = {
+  [P in keyof T]?: T[P] extends (infer U)[]
+    ? PartialDeep<U>[]
+    : T[P] extends Record<string, unknown>
+    ? PartialDeep<T[P]>
+    : T[P];
+};
 
 type AddMethod<T> = {
   [P in keyof T]: ({
@@ -73,7 +80,7 @@ type SetTextMethod<T> = {
     content,
   }: {
     text?: string | TextData | (string | TextData)[];
-    data?: Partial<T[P]>;
+    data?: PartialDeep<T[P]>;
     key: string;
     content: RichContent;
   }) => RichContent;
@@ -95,7 +102,6 @@ type SetMap = {
   setLinkPreview: LinkPreviewData;
   setMap: MapData;
   setPoll: PollData;
-  setSoundCloud: SoundCloudData;
   setVideo: VideoData;
   updateActionButton: ButtonData;
   updateLinkButton: ButtonData;
@@ -108,7 +114,6 @@ type SetMap = {
   updateLinkPreview: LinkPreviewData;
   updateMap: MapData;
   updatePoll: PollData;
-  updateSoundCloud: SoundCloudData;
   updateVideo: VideoData;
 };
 
@@ -136,7 +141,6 @@ type AddMap = {
   addLinkPreview: LinkPreviewData;
   addMap: MapData;
   addPoll: PollData;
-  addSoundCloud: SoundCloudData;
   addVideo: VideoData;
 };
 
@@ -152,7 +156,6 @@ type GetMap = {
   getParagraphs: ParagraphData;
   getHeadings: HeadingData;
   getLinkPreviews: LinkPreviewData;
-  getSoundClouds: SoundCloudData;
   getPolls: PollData;
   getCodes: CodeData;
   getGiphy: GiphyData;

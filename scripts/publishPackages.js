@@ -60,16 +60,25 @@ function createNpmRc() {
 
 function publishPackages() {
   getPackages().then(allPackages => {
-    allPackages
-      .filter(pkg => !pkg.private)
-      .forEach(pkg =>
-        release({
-          name: pkg.name,
-          version: pkg.version,
-          registry: pkg.get('publishConfig').registry,
-          path: pkg.location,
-        })
-      );
+    const packages = allPackages.filter(pkg => !pkg.private);
+    packages.forEach(pkg =>
+      release({
+        name: pkg.name,
+        version: pkg.version,
+        registry: pkg.get('publishConfig').registry,
+        path: pkg.location,
+      })
+    );
+    require('axios')
+      .post('https://www.wix.com/_serverless/loki-update-service2/trigger-loki', {
+        packages,
+      })
+      .then(res => {
+        console.log(JSON.stringify(res.data, null, 2));
+      })
+      .catch(error => {
+        console.error(error);
+      });
   });
 }
 
