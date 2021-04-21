@@ -17,12 +17,6 @@ message LinkPreviewData {
 }
 
 message LinkPreviewConfig {
-  message Link {
-    string url = 1;
-    google.protobuf.StringValue rel = 2;
-    google.protobuf.StringValue target = 3;
-  }
-
   Link link = 1;
   google.protobuf.Int32Value width = 2;
 }
