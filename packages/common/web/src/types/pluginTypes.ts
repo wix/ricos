@@ -146,7 +146,7 @@ import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plu
 
 export type PluginMapping = Partial<{
   [type: string]: {
-    component: ComponentType;
+    component: ComponentType | null;
     classNameStrategies?: {
       size?: ClassNameStrategy;
       alignment?: ClassNameStrategy;
