@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `e2e`
+  - [#2381](https://github.com/wix/ricos/pull/2381) undo redo tests improvement
+
 </details>
 <hr/>
 
