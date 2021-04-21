@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
 import { FILE_UPLOAD_TYPE } from './types';
-import { mapExtensionToType } from './mapExtensionToType';
+import { mapExtensionToType } from '../lib/mapExtensionToType';
 
 class FileUploadComponent extends PureComponent {
   constructor(props) {
