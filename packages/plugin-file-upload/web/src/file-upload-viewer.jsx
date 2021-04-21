@@ -88,7 +88,7 @@ class FileUploadViewer extends PureComponent {
       return (
         <Icon
           styles={this.styles}
-          className={classnames(styles.file_upload_type_icon, {
+          className={classnames(this.styles.file_upload_type_icon, {
             [this.styles.width_three]: this.isInResizeRange(resizeWidths.third),
           })}
         />
