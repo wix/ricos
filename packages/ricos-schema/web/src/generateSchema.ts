@@ -19,7 +19,7 @@ schemas.forEach(schema => {
   );
   writeFileSync(
     `${GEN_DIR}/proto/rich_content/v${LATEST_VERSION}/${schema}`,
-    schemaFile.replace(/ \[.*\];/g, ';')
+    schemaFile.replace(/ \[.*\];/g, ';').replace('import "wix/api/validations.proto";\n', '')
   );
 });
 
