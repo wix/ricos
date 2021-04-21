@@ -80,7 +80,7 @@ function getFileTypeFromList(
   return retVal;
 }
 
-export const mapExtensionToType = (extension: string): FileTypes => {
+export const fileExtensionToType = (extension: string): FileTypes => {
   const fileType =
     extension &&
     (getFileTypeFromList(

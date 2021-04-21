@@ -6,7 +6,7 @@ import otherIcon from './otherIcon';
 import imageIcon from './imageIcon';
 import folderIcon from './folderIcon';
 import docIcon from './docIcon';
-import { mapExtensionToType, FileTypes } from '../../lib/mapExtensionToType';
+import { fileExtensionToType, FileTypes } from '../../lib/fileExtensionToType';
 
 const iconMap = {
   [FileTypes.IMAGE]: imageIcon,
@@ -21,5 +21,5 @@ const iconMap = {
 };
 
 export const getIcon = (extension: string) => {
-  return iconMap[mapExtensionToType(extension)];
+  return iconMap[fileExtensionToType(extension)];
 };

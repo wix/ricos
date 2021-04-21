@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
 import { FILE_UPLOAD_TYPE } from './types';
-import { mapExtensionToType } from '../lib/mapExtensionToType';
+import { fileExtensionToType, FileTypes } from '../lib/fileExtensionToType';
 
 class FileUploadComponent extends PureComponent {
   constructor(props) {
@@ -63,7 +63,7 @@ class FileUploadComponent extends PureComponent {
       const uploadBIData = this.props.helpers?.onMediaUploadStart(
         FILE_UPLOAD_TYPE,
         size,
-        mapExtensionToType(type)
+        FileTypes[fileExtensionToType(type)]
       );
       this.setState({ isLoading: true });
       onFileSelected(file, ({ data, error }) =>

@@ -1,5 +1,0 @@
-{
-    "main": "../../dist/lib/mapExtensionToType.cjs.js",
-    "module": "../../dist/lib/mapExtensionToType.js",
-    "types": "../../dist/lib/mapExtensionToType.d.ts"
-}

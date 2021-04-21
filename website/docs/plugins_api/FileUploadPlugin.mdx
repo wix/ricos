@@ -87,7 +87,7 @@ A utility function that maps file extension to file type. <br />
 Usage: <br />
 
 ```jsx
-import { mapExtensionToType, FileTypes } from 'wix-rich-content-plugin-file-upload/libs/mapExtensionToType';
+import { fileExtensionToType, FileTypes } from 'wix-rich-content-plugin-file-upload/libs/fileExtensionToType';
 
 FileTypes: enum {
   IMAGE = 1,
@@ -101,6 +101,6 @@ FileTypes: enum {
   MISC,
 }
 
-mapExtensionToType: (extension: string) => FileTypes
+fileExtensionToType: (extension: string) => FileTypes
 
 ```
