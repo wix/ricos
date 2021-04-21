@@ -418,7 +418,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
-    const itemClassName = classNames(this.styles.imageContainer, className, {
+    const itemClassName = classNames(this.styles.imageWrapper, className, {
       [this.styles.pointer]: this.hasExpand() as boolean,
     });
     const imageClassName = this.styles.image;
@@ -440,14 +440,17 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     return (
       <div
         data-hook="imageViewer"
-        onClick={this.handleClick}
-        className={itemClassName}
-        onKeyDown={this.onKeyDown}
+        className={this.styles.imageContainer}
         ref={this.handleRef}
         onContextMenu={this.handleContextMenu}
         {...accesibilityProps}
       >
-        <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
+        <div
+          className={itemClassName}
+          aria-label={metadata.alt}
+          onClick={this.handleClick}
+          onKeyDown={this.onKeyDown}
+        >
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
