@@ -97,7 +97,6 @@
 		"@types/draft-js": "^0.10.41",
 		"@types/enzyme": "^3.10.5",
 		"@types/enzyme-adapter-react-16": "^1.0.6",
-		"@types/loadable__component": "^5.13.3",
 		"@types/happypack": "^5.0.0",
 		"@types/i18next": "11.9.0",
 		"@types/jest": "^25.2.1",
@@ -198,6 +197,5 @@
 	},
 	"publishConfig": {
 		"registry": "https://registry.npmjs.org/"
-	},
-	"dependencies": {}
+	}
 }

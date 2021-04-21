@@ -2,17 +2,33 @@
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
 import { PluginTypeMapper } from 'wix-rich-content-common';
-import loadable from '@loadable/component';
 
 const imageRenderDescriptor = {
-  component: loadable(() => import(/* webpackChunkName: "image-viewer" */ './image-viewer')),
+  component: null,
   classNameStrategies: {
     size: sizeClassName,
     alignment: alignmentClassName,
   },
 };
 
-export const typeMapper: PluginTypeMapper = () => ({
-  [IMAGE_TYPE_LEGACY]: imageRenderDescriptor,
-  [IMAGE_TYPE]: imageRenderDescriptor,
-});
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+export const typeMapper: PluginTypeMapper = component => {
+  imageRenderDescriptor.component = component;
+  return {
+    [IMAGE_TYPE_LEGACY]: {
+      ...imageRenderDescriptor,
+      component,
+    },
+    [IMAGE_TYPE]: {
+      ...imageRenderDescriptor,
+      component,
+    },
+  };
+};
+
+export const preTypeMapper = component => {
+  return () => {
+    return typeMapper(component);
+  };
+};

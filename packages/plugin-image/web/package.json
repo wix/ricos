@@ -35,7 +35,6 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "@loadable/component": "^5.14.1",
     "image-client-api": "1.2218.0",
     "ricos-content": "8.29.13-alpha.0",
     "wix-rich-content-common": "8.29.13-alpha.0",
