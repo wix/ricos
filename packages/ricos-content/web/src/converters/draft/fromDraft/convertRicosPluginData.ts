@@ -18,6 +18,8 @@ import {
   FileSource,
   PluginContainerData_Width_Type,
   ButtonData_Type,
+  Link,
+  Link_Target,
 } from 'ricos-schema';
 import { TO_RICOS_DATA } from './consts';
 
@@ -43,11 +45,11 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     const convert = converters[blockType];
     convert(newData, blockType);
   }
-  const toJSON = data => {
+  const fromJSON = data => {
     const pluginDataMethods = TO_RICOS_DATA[blockType];
-    return pluginDataMethods?.toJSON(pluginDataMethods?.fromJSON(data)) || data;
+    return pluginDataMethods?.fromJSON(data) || data;
   };
-  return toJSON(newData);
+  return fromJSON(newData);
 };
 
 const convertContainerData = data => {
@@ -57,9 +59,11 @@ const convertContainerData = data => {
     const { description, buttonContent } = data.config.spoiler;
     spoiler = { description, buttonText: buttonContent };
   }
+  const type =
+    size && (size === 'inline' ? PluginContainerData_Width_Type.CUSTOM : kebabToConstantCase(size));
   data.containerData = {
     width: {
-      type: size && kebabToConstantCase(size),
+      type,
       customWidth: typeof width === 'number' ? width : undefined,
     },
     alignment: alignment && kebabToConstantCase(alignment),
@@ -97,7 +101,7 @@ const convertImageData = data => {
   const { file_name, width, height } = data.src;
   const { link, anchor, disableExpand } = data.config;
   data.image = { src: { custom: file_name }, width, height };
-  data.link = anchor ? { anchor } : link;
+  data.link = (link || anchor) && convertLink({ ...link, anchor });
   data.disableExpand = disableExpand;
   data.altText = data.metadata?.alt;
   data.caption = data.metadata?.caption;
@@ -118,6 +122,7 @@ const convertVerticalEmbedData = data => {
 const convertLinkPreviewData = data => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
   has(data, 'provider_url') && (data.providerUrl = data.provider_url);
+  has(data, 'config.link') && (data.config.link = convertLink(data.config.link));
 };
 
 const convertMention = data => {
@@ -144,13 +149,41 @@ const convertButtonData = (data, blockType) => {
   };
   data.type = blockType === ACTION_BUTTON_TYPE ? ButtonData_Type.ACTION : ButtonData_Type.LINK;
   data.text = buttonText;
-  if (settings.url) {
-    data.link = { url, rel: rel ? 'nofollow' : undefined, target: target ? '_blank' : '_self' }; // @shaulgo please review logic
+  if (url) {
+    data.link = convertLink({
+      url,
+      rel: rel ? 'nofollow' : undefined,
+      target: target ? '_blank' : '_top',
+    });
   }
 };
 
 const convertHTMLData = data => {
   data.containerData.width.type = PluginContainerData_Width_Type.CUSTOM;
+};
+
+const convertLink = ({
+  url,
+  rel,
+  target,
+  anchor,
+}: {
+  url?: string;
+  rel?: string;
+  target?: string;
+  anchor?: string;
+}): Link => {
+  const relValues =
+    rel
+      ?.split(' ')
+      .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
+      .map(key => [key, true]) || [];
+  return {
+    anchor,
+    url,
+    rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
+    target: target?.toUpperCase().substring(1) as Link_Target,
+  };
 };
 
 const kebabToConstantCase = (str: string) => str.toUpperCase().replace('-', '_');

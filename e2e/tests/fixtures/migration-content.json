@@ -1278,8 +1278,9 @@
       "data": {
         "config": {
           "alignment": "right",
-          "size": "small",
-          "disableExpand": false
+          "size": "inline",
+          "disableExpand": false,
+          "width": 300
         },
         "src": {
           "id": "91ff5a615e0235157dc1a7e5f66607bf",
@@ -1291,5 +1292,5 @@
       }
     }
   },
-  "VERSION": "8.27.2"
+  "VERSION": "8.29.12"
 }
