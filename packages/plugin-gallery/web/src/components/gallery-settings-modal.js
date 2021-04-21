@@ -292,7 +292,7 @@ export class GallerySettingsModal extends Component {
           {!isMobile && (
             <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
           )}
-          <div className={!isMobile && styles.gallerySettings_tabsContainer}>
+          <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab
                 label={this.tabName('manage_media', t)}

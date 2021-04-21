@@ -1,4 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
 
 $TITLE_HEIGHT: 0px;
 $FOOTER_HEIGHT: 100px;
@@ -24,8 +26,11 @@ $FOOTER_HEIGHT: 100px;
   z-index: 5;
 }
 
-.gallerySettings_tabsContainer{
+.gallerySettings_tabsContainer {
   margin-top: 24px;
+  @include phone {
+    margin-top: 0;
+  }
 }
 
 .gallerySettings_divider {
