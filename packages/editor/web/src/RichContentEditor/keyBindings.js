@@ -80,6 +80,7 @@ function getCommandByShortcut(shortcut, bindingMap) {
     .filter(mapped => mapped.key === shortcut.key && isEqual(mapped.modifiers, shortcut.modifiers))
     .map(mapped => mapped.command);
 
+  console.log(shortcut, commands.length > 0 ? commands[0] : undefined);
   return commands.length > 0 ? commands[0] : undefined;
 }
 
