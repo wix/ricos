@@ -20,13 +20,25 @@ message TextStyle {
 }
 
 message Link {
+    message Rel {
+        google.protobuf.BoolValue nofollow = 1; // Indicates to search engine crawlers that the link should not be followed
+        google.protobuf.BoolValue sponsored = 2; // paid links
+        google.protobuf.BoolValue ugc = 3; // UoU generated link
+    }
+    enum Target {
+        TOP = 0;
+        BLANK = 1;
+        PARENT = 2;
+        SELF = 3;
+    }
+
     oneof data {
         string url = 1;
-        string anchor = 2; // link in document
-        string custom_data = 3; // serialized object
+        string anchor = 2; // key of node in document
     }
-    google.protobuf.StringValue target = 4;
-    google.protobuf.StringValue rel = 5;
+    Target target = 3;
+    Rel rel = 4;
+    google.protobuf.StringValue custom_data = 5; // serialized object, used for custom/external link panel
 }
 
 message PluginContainerData {

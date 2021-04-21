@@ -16,6 +16,18 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block
+
+</details>
+<hr/>
+
+## 8.30.1 (April 21, 2021)
+### :bug: Bug Fix
+- `ricos-schema`
+  - [#e728b63](https://github.com/wix/ricos/commit/e728b63) add missing import for wix proto validations
+## 8.30.0 (April 20, 2021)
 ### :rocket: New Feature
 - `schema`
   - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
@@ -26,15 +38,18 @@
 ### :nail_care: Polish
 - `schema`
   - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
-
 ### :bug: Bug Fix
 - `editor`
   - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
+  - [#2386](https://github.com/wix-incubator/rich-content/pull/2386) clear unsupported plugins from pasted content
+  - [#2387](https://github.com/wix-incubator/rich-content/pull/2387) editor commands allows any data for draft types
 - `link`
   - [#2384](https://github.com/wix-incubator/rich-content/pull/2384) anchor - fix preview config (crash on componentDidMount)
-
-</details>
-<hr/>
+- `gallery`
+  - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
+### :nail_care: Polish
+- `schema`
+  - [#2383](https://github.com/wix-incubator/rich-content/pull/2383) fix link schema
 
 ## 8.29.12 (April 13, 2021)
 ### :house: Internal
