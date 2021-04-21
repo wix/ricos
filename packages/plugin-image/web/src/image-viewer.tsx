@@ -159,7 +159,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
 
     let requiredWidth, requiredHeight;
     let imageSrcOpts = {};
-    const isPNG = /(.*)\.(png)$/.test(src.file_name);
+    const isPNG = /(.*)\.(png)$/.test(src?.file_name);
     /**
         PNG files can't reduce quality via Wix services and we want to avoid downloading a big png image that will affect performance.
       **/
