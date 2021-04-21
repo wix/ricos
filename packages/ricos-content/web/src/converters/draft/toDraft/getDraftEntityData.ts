@@ -20,8 +20,7 @@ const getNodeEntityData = (node: Node) => {
   const data = convertNodeToDraftData(node);
   if (data === undefined) {
     // eslint-disable-next-line no-console
-    console.error(`ERROR! Unknown entity type "${type}"!`);
-    process.exit(1);
+    throw Error(`ERROR! Unknown entity type "${type}"!`);
   }
   return { type: draftPluginType, data };
 };
@@ -40,12 +39,10 @@ export const createDecorationEntityData = (
     });
   if (data === undefined) {
     // eslint-disable-next-line no-console
-    console.error(`ERROR! Unknown entity type "${type}"!`);
-    process.exit(1);
+    throw Error(`ERROR! Unknown entity type "${type}"!`);
   }
 
   const mutability = ENTITY_DECORATION_TO_MUTABILITY[type];
-
   return createEntity(entityKey, { type, mutability, data });
 };
 
