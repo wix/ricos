@@ -69,16 +69,16 @@ function publishPackages() {
         path: pkg.location,
       })
     );
-    require('axios')
-      .post('https://www.wix.com/_serverless/loki-update-service2/trigger-loki', {
-        packages,
-      })
-      .then(res => {
-        console.log(JSON.stringify(res.data, null, 2));
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    //   require('axios')
+    //     .post('https://www.wix.com/_serverless/loki-update-service2/trigger-loki', {
+    //       packages,
+    //     })
+    //     .then(res => {
+    //       console.log(JSON.stringify(res.data, null, 2));
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
   });
 }
 

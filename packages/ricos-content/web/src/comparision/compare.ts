@@ -70,6 +70,9 @@ const comparator = (left, right, key) => {
   if (key === 'design') {
     return isEqual(omit(left, IGNORED_BUTTON_DESIGN_KEYS), omit(right, IGNORED_BUTTON_DESIGN_KEYS));
   }
+  if (key === 'link' && (right.rel === 'noopener' || left.rel === 'noopener')) {
+    return isEqual(omit(left, ['rel']), omit(right, ['rel']));
+  }
   return undefined;
 };
 
