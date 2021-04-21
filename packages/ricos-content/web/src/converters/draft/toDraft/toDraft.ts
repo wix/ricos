@@ -42,8 +42,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
           break;
         case Node_Type.HEADING:
           if (!node.headingData) {
-            console.log(`ERROR! Heading node with no data!`);
-            process.exit(1);
+            throw Error(`ERROR! Heading node with no data!`);
           }
           parseTextNodes(node, { type: HeaderLevel[node.headingData.level], key: node.key });
           break;
@@ -58,8 +57,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
           if (RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]) {
             parseAtomicNode(node);
           } else {
-            console.log(`ERROR! Unknown node type "${node.type}"!`);
-            process.exit(1);
+            throw Error(`ERROR! Unknown node type "${node.type}"!`);
           }
       }
       parseNodes(index + 1);
