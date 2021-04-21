@@ -1,5 +1,6 @@
 import handlePastedText, {
   convertParsedEditorStateObjectToRawData,
+  removeUnsupportedPlugins,
 } from '../src/RichContentEditor/handlePastedText';
 import {
   convertFromRaw,
@@ -20,6 +21,8 @@ import {
   textWithLineSpacingWordHTML,
   textWithLineSpacingWordExpectedRaw,
 } from './TestData/pasted-data';
+import raw_data_image_links from './TestData/raw-data-image-links';
+import expected_raw_data_image_links from './TestData/expected-raw-data-image-links';
 
 const allHeaders = ['h2', 'h3', 'h4', 'h5', 'h6'];
 
@@ -100,5 +103,16 @@ describe('Paste text tests', () => {
     });
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(convertToRaw(editorState.getCurrentContent()));
+  });
+
+  it('should clear unssuported plugins from content', () => {
+    const mockIsInstalledPlugin = pluginType => {
+      if (pluginType === 'wix-draft-plugin-image') {
+        return false;
+      }
+      return true;
+    };
+    const newContent = removeUnsupportedPlugins(raw_data_image_links, mockIsInstalledPlugin);
+    expect(expected_raw_data_image_links).toEqual(newContent);
   });
 });

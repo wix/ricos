@@ -6,20 +6,20 @@ import otherIcon from './otherIcon';
 import imageIcon from './imageIcon';
 import folderIcon from './folderIcon';
 import docIcon from './docIcon';
-import { mapExtensionToType } from '../mapExtensionToType';
+import { fileExtensionToType, FileTypes } from '../../lib/fileExtensionToType';
 
 const iconMap = {
-  image: imageIcon,
-  video: vidAudIcon,
-  audio: vidAudIcon,
-  pdf: pdfIcon,
-  'compressed-file': folderIcon,
-  'ms-word': docIcon,
-  'ms-excel': xlsIcon,
-  'ms-powerpoint': pptIcon,
-  other: otherIcon,
+  [FileTypes.IMAGE]: imageIcon,
+  [FileTypes.VIDEO]: vidAudIcon,
+  [FileTypes.AUDIO]: vidAudIcon,
+  [FileTypes.PDF]: pdfIcon,
+  [FileTypes.ARCHIVE]: folderIcon,
+  [FileTypes.WORD]: docIcon,
+  [FileTypes.EXCEL]: xlsIcon,
+  [FileTypes.POWERPOINT]: pptIcon,
+  [FileTypes.MISC]: otherIcon,
 };
 
 export const getIcon = (extension: string) => {
-  return iconMap[mapExtensionToType(extension)];
+  return iconMap[fileExtensionToType(extension)];
 };
