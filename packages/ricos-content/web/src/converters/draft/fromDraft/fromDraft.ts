@@ -51,8 +51,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
           parseBlocks(index + 1);
           break;
         default:
-          console.log(`ERROR! Unknown block type "${block.type}"!`);
-          process.exit(1);
+          throw Error(`ERROR! Unknown block type "${block.type}"!`);
       }
     }
   };
@@ -85,8 +84,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
       if (Object.keys(HeaderLevel).includes(blockType)) {
         return HeaderLevel[blockType];
       }
-      console.log(`ERROR! Unknown header level "${blockType}"!`);
-      process.exit(1);
+      throw Error(`ERROR! Unknown header level "${blockType}"!`);
     };
     return {
       key: block.key,
