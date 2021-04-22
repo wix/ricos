@@ -303,28 +303,31 @@ describe('plugins', () => {
         cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
       });
 
-      context('settings', () => {
-        it('should disable gallery expand', () => {
-          cy.loadRicosEditorAndViewer('gallery');
-          cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
-          cy.openSettings(['ADV_SETTINGS']);
-          cy.eyesCheckWindow();
-          cy.get(`[data-hook=${GALLERY_SETTINGS.GALLERY_EXPAND_TOGGLE}]`).click();
-          cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
-          cy.wait(200);
-          cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`)
-            .eq(1)
-            .parent()
-            .click();
-          cy.eyesCheckWindow();
-        });
-      });
       // TODO: title and link image tests
       // // eslint-disable-next-line mocha/no-skipped-tests
       // it.skip('allow to add a title', function() {
       //   cy.addGalleryImageTitle().checkTitle();
       //   cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
       // });
+    });
+
+    context('settings', () => {
+      it('should disable gallery expand', () => {
+        cy.loadRicosEditorAndViewer('gallery');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
+        cy.openSettings(['ADV_SETTINGS']);
+        cy.eyesCheckWindow();
+        cy.get(`[data-hook=${GALLERY_SETTINGS.GALLERY_EXPAND_TOGGLE}]`).click();
+        cy.wait(200);
+        cy.eyesCheckWindow();
+        cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+        cy.wait(200);
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`)
+          .eq(1)
+          .parent()
+          .click();
+        cy.eyesCheckWindow();
+      });
     });
   });
 
