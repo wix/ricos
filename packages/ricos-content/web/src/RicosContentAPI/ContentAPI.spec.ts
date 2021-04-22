@@ -1,12 +1,12 @@
 import { setupContentAPI } from './ContentAPI';
 import {
   ImageData,
-  ImageConfig_ImageSize,
-  ImageConfig_ImageAlignment,
+  PluginContainerData_Width_Type,
+  PluginContainerData_Alignment,
   RichContent,
   Node_Type,
   ParagraphData,
-  Common_TextAlignment,
+  TextStyle_TextAlignment,
   Decoration_Type,
 } from 'ricos-schema';
 
@@ -15,9 +15,9 @@ describe('Ricos Content API', () => {
     const generateKey = () => 'foo';
     const api = setupContentAPI({ generateKey });
     const imageData: ImageData = {
-      config: {
-        size: ImageConfig_ImageSize.SMALL,
-        alignment: ImageConfig_ImageAlignment.CENTER,
+      containerData: {
+        width: { type: PluginContainerData_Width_Type.SMALL },
+        alignment: PluginContainerData_Alignment.CENTER,
       },
     };
     const expected: RichContent = {
@@ -38,7 +38,9 @@ describe('Ricos Content API', () => {
     const generateKey = () => 'foo';
     const api = setupContentAPI({ generateKey });
     const paragraphData: ParagraphData = {
-      textAlignment: Common_TextAlignment.RIGHT,
+      textStyle: {
+        textAlignment: TextStyle_TextAlignment.RIGHT,
+      },
     };
     const content: RichContent = {
       nodes: [
@@ -98,7 +100,9 @@ describe('Ricos Content API', () => {
     const generateKey = () => 'foo';
     const api = setupContentAPI({ generateKey });
     const paragraphData: ParagraphData = {
-      textAlignment: Common_TextAlignment.RIGHT,
+      textStyle: {
+        textAlignment: TextStyle_TextAlignment.RIGHT,
+      },
     };
     const expected: RichContent = {
       nodes: [
@@ -128,13 +132,78 @@ describe('Ricos Content API', () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should toggle heading to paragraph node', () => {
+    const generateKey = () => 'foo';
+    const api = setupContentAPI({ generateKey });
+    const paragraphData: ParagraphData = {
+      textStyle: {
+        textAlignment: TextStyle_TextAlignment.RIGHT,
+      },
+    };
+    const content: RichContent = {
+      nodes: [
+        {
+          type: Node_Type.PARAGRAPH,
+          key: 'baz',
+          paragraphData,
+          nodes: [
+            {
+              key: 'boo',
+              type: Node_Type.TEXT,
+              textData: {
+                text: 'text content',
+                decorations: [
+                  {
+                    type: Decoration_Type.BOLD,
+                  },
+                ],
+              },
+              nodes: [],
+            },
+          ],
+        },
+      ],
+    };
+
+    const expected = {
+      nodes: [
+        {
+          type: Node_Type.HEADING,
+          key: 'baz',
+          headingData: {
+            level: 2,
+            textStyle: { textAlignment: TextStyle_TextAlignment.RIGHT },
+          },
+          nodes: [
+            {
+              key: 'boo',
+              type: Node_Type.TEXT,
+              textData: {
+                text: 'text content',
+                decorations: [{ type: Decoration_Type.BOLD }],
+              },
+              nodes: [],
+            },
+          ],
+        },
+      ],
+    };
+
+    const actual = api.toggleHeading({
+      key: 'baz',
+      data: { level: 2, textStyle: { textAlignment: TextStyle_TextAlignment.RIGHT } },
+      content,
+    });
+    expect(actual).toEqual(expected);
+  });
+
   it('should extract all images from content', () => {
     const generateKey = () => 'foo';
     const api = setupContentAPI({ generateKey });
     const imageData: ImageData = {
-      config: {
-        size: ImageConfig_ImageSize.SMALL,
-        alignment: ImageConfig_ImageAlignment.CENTER,
+      containerData: {
+        width: { type: PluginContainerData_Width_Type.SMALL },
+        alignment: PluginContainerData_Alignment.CENTER,
       },
     };
     const content: RichContent = {

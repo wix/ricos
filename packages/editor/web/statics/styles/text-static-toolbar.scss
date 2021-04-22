@@ -4,12 +4,13 @@
 .textToolbar {
   position: relative;
   border: 1px solid #ddd;
+  z-index: 5;
 }
 
 .textToolbar_scrollableContainer {
   width: 100%;
-  padding: 90px 0;
-  margin: -90px 0;
+  padding: 300px 0 !important;
+  margin: -300px 0 !important;
   pointer-events: none;
   margin-left: 15px;
   & > * {

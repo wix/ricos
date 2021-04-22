@@ -3,6 +3,7 @@ import { VIDEO_TYPE, VideoPluginEditorConfig } from './types';
 import { DEFAULTS } from './defaults';
 import { ModalsMap } from './modals';
 import { EditorPluginCreator } from 'wix-rich-content-common';
+import { createVideoData } from './createVideoData';
 
 export const pluginVideo: EditorPluginCreator<VideoPluginEditorConfig> = config => {
   return {
@@ -10,5 +11,6 @@ export const pluginVideo: EditorPluginCreator<VideoPluginEditorConfig> = config 
     type: VIDEO_TYPE,
     createPlugin: createVideoPlugin,
     ModalsMap,
+    createPluginData: createVideoData,
   };
 };

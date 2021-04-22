@@ -105,7 +105,7 @@ FileInput.propTypes = {
 };
 
 FileInput.defaultProps = {
-  accept: 'image/*',
+  accept: '.jpg,.png,.gif,.jpeg,.jpe,.jfif,.bmp,.heic,.heif,.tfif,.tif,.webp',
   multiple: false,
   disabled: false,
 };

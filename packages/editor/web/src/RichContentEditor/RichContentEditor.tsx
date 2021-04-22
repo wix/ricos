@@ -6,6 +6,7 @@ import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
+import { createEditorCommands } from './EditorCommands';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
@@ -13,6 +14,7 @@ import handlePastedText from './handlePastedText';
 import blockStyleFn from './blockStyleFn';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
+import { ContentBlock } from '@wix/draft-js';
 import {
   EditorState,
   TOOLBARS,
@@ -25,9 +27,11 @@ import {
   MODIFIERS,
   pluginsUndo,
   redo,
+  SelectionState,
+  setSelectionToBlock,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
-import { EditorProps as DraftEditorProps } from 'draft-js';
+import { EditorProps as DraftEditorProps, DraftHandleValue } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 import {
@@ -43,7 +47,7 @@ import {
   Helpers,
   TranslationFunction,
   CreatePluginFunction,
-  RicosEntity,
+  onAtomicBlockFocus,
   OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
@@ -61,9 +65,11 @@ import {
   GetEditorState,
   SetEditorState,
   TextDirection,
+  CreatePluginsDataMap,
   EventName,
   PluginEventParams,
   OnPluginAction,
+  IMAGE_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -121,6 +127,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
+  createPluginsDataMap: CreatePluginsDataMap;
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
@@ -128,11 +135,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   locale: string;
   shouldRenderOptimizedImages?: boolean;
   onChange?(editorState: EditorState): void;
-  onAtomicBlockFocus?(params: {
-    blockKey?: string;
-    type?: string;
-    data?: RicosEntity['data'];
-  }): void;
+  onAtomicBlockFocus?: onAtomicBlockFocus;
   siteDomain?: string;
   iframeSandboxDomain?: string;
   onError: OnErrorFunction;
@@ -198,6 +201,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   editorWrapper!: Element;
 
+  lastFocusedAtomicPlugin?: ContentBlock;
+
   copySource!: { unregister(): void };
 
   updateBounds!: (editorBounds?: BoundingRect) => void;
@@ -213,6 +218,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   toolbars;
 
   innerRCECustomStyleFn;
+
+  EditorCommands!: ReturnType<typeof createEditorCommands>;
 
   getSelectedText!: (editorState: EditorState) => string;
 
@@ -262,6 +269,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.initEditorCommands();
     this.fixDraftSelectionExtend();
   }
 
@@ -385,6 +393,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       siteDomain,
       iframeSandboxDomain,
       innerRCERenderedIn,
+      experiments,
     } = this.props;
 
     this.fixHelpers(helpers);
@@ -465,6 +474,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       renderInnerRCE: this.renderInnerRCE,
       innerRCERenderedIn,
       disableKeyboardEvents: this.disableKeyboardEvents,
+      experiments,
     };
   };
 
@@ -498,6 +508,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
+  initEditorCommands = () => {
+    const { createPluginsDataMap = {} } = this.props;
+    this.EditorCommands = createEditorCommands(
+      createPluginsDataMap,
+      this.getEditorState,
+      this.updateEditorState
+    );
+  };
+
   initEditorToolbars(
     pluginButtons: PluginButton[],
     pluginTextButtons: TextButtonMapping[],
@@ -514,6 +533,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       pluginButtonProps,
       isInnerRCE,
       tablePluginMenu,
+      pubsub: this.commonPubsub,
     });
   }
 
@@ -570,7 +590,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.props.direction !== nextProps.direction) {
       this.forceRender();
     }
-    // TODO: new editor state should become initialContentState?
     if (nextProps.editorState && this.props.editorState !== nextProps.editorState) {
       if (this.props.callOnChangeOnNewEditorState) {
         this.updateEditorState(nextProps.editorState);
@@ -633,6 +652,28 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  focusOnToolbar = () => {
+    const pluginToolbar = document.querySelectorAll(`[data-hook*=PluginToolbar]`)[0] as HTMLElement;
+    const formattingToolbar = document.querySelectorAll(
+      `[data-hook=inlineToolbar]`
+    )[0] as HTMLElement;
+    if (pluginToolbar && pluginToolbar.dataset.hook !== 'linkPluginToolbar') {
+      const editorState = this.getEditorState();
+      const focusedAtomicPluginKey = editorState.getSelection().getFocusKey();
+      this.lastFocusedAtomicPlugin = editorState
+        .getCurrentContent()
+        .getBlockForKey(focusedAtomicPluginKey);
+    }
+    const toolbar = pluginToolbar || formattingToolbar;
+    toolbar && toolbar.focus();
+    setTimeout(() => {
+      // fix bug - selection of text with atomic blocks
+      if (toolbar !== document.activeElement) {
+        toolbar && toolbar.focus();
+      }
+    });
+  };
+
   getHeadings = config => {
     const { [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings } = config;
 
@@ -642,6 +683,36 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
     return customHeadings;
   };
+
+  createPluginFromBlobs = (blobs: Blob[]): DraftHandleValue => {
+    if (blobs.length > 0) {
+      const blob = blobs[0];
+      if (blob.type.startsWith('image/')) {
+        const hasImagePlugin = this.plugins.find(({ blockType }) => blockType === IMAGE_TYPE);
+        if (hasImagePlugin) {
+          const blockKey = this.EditorCommands.insertBlock(IMAGE_TYPE);
+          if (blockKey) {
+            this.commonPubsub.set('initialState_' + blockKey, {
+              userSelectedFiles: { files: [blob] },
+            });
+            return 'handled';
+          }
+        }
+      }
+    }
+    return 'not-handled';
+  };
+
+  handlePastedFiles = (blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
+  };
+
+  handleDroppedFiles = (_selection: SelectionState, blobs: Blob[]): DraftHandleValue => {
+    return this.createPluginFromBlobs(blobs);
+  };
+
+  isPluginInstalled = (pluginType: string) =>
+    this.plugins.some(plugin => plugin.blockType === pluginType);
 
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
@@ -653,6 +724,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
     const { config, isInnerRCE, maxTextLength } = this.props;
     const resultEditorState = handlePastedText({
+      isPluginInstalled: this.isPluginInstalled,
       text,
       html,
       editorState,
@@ -697,6 +769,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   customCommands = [
     {
+      command: COMMANDS.FOCUS_TOOLBAR,
+      modifiers: [MODIFIERS.CTRL],
+      key: 't',
+    },
+    {
       command: COMMANDS.TAB,
       modifiers: [],
       key: 'Tab',
@@ -735,6 +812,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   ];
 
   customCommandHandlers = {
+    focusToolbar: this.focusOnToolbar,
     tab: this.handleTabCommand,
     shiftTab: this.handleTabCommand,
     esc: this.handleEscCommand,
@@ -788,6 +866,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
+  removeToolbarFocus = () => {
+    this.editor.focus();
+    if (this.lastFocusedAtomicPlugin) {
+      setSelectionToBlock(this.getEditorState(), this.setEditorState, this.lastFocusedAtomicPlugin);
+      this.lastFocusedAtomicPlugin = undefined;
+    }
+  };
+
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
     const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
@@ -808,6 +894,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         }
         return (
           <Toolbar
+            removeToolbarFocus={this.removeToolbarFocus}
             key={`k${index}`}
             hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
             forceDisabled={
@@ -892,7 +979,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         handleReturn={
           handleReturn
             ? handleReturn(this.updateEditorState)
-            : handleReturnCommand(this.updateEditorState)
+            : handleReturnCommand(this.updateEditorState, this.commonPubsub)
         }
         editorState={editorState}
         onChange={this.updateEditorState}
@@ -928,6 +1015,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onFocus={onFocus}
         textAlignment={textAlignment}
         readOnly={readOnly || this.state.readOnly}
+        {...(this.props.experiments?.pastedFilesSupport?.enabled && {
+          handlePastedFiles: this.handlePastedFiles,
+          handleDroppedFiles: this.handleDroppedFiles,
+        })}
       />
     );
   };

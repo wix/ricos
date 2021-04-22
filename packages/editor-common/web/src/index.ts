@@ -44,6 +44,7 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
+  blockKeyToEntityKey,
   setEntityData,
   setBlockNewEntityData,
   replaceWithEmptyBlock,
@@ -54,11 +55,13 @@ export {
   createBlockAndFocus,
   createBlock,
   getBlockInfo,
+  getBlockEntityType,
   getFocusedBlockKey,
   createCalcContentDiff,
   getPostContentSummary,
   createSelection,
   getBlockType,
+  hasInlineStyle,
   indentSelectedBlocks,
   isTypeText,
   setForceSelection,
@@ -75,7 +78,9 @@ export {
   isCursorAtStartOfContent,
   isCursorAtFirstLine,
   selectAllContent,
+  setSelectionToBlock,
 } from './Utils/draftUtils';
+export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {

@@ -14,3 +14,5 @@ export const addAnchorTagToUrl = anchorString => {
   url.hash = anchorString;
   history.pushState({}, '', url.href);
 };
+
+export const isNewTab = target => target === '_blank';

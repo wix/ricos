@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 import {
   LINK_PREVIEW_TYPE,
   TABLE_TYPE,
@@ -198,6 +199,11 @@ class InnerRCE extends PureComponent {
     if (renderedInTable && isMobile) {
       toolbarsToIgnore.push('SideToolbar');
     }
+    const tableClassNames = classNames(
+      styles.renderedInTable,
+      draftDefaultStyles.renderedInTable,
+      rtlIgnoredStyles.renderedInTable
+    );
     return (
       <ClickOutside onClickOutside={this.onClickOutside}>
         <div
@@ -206,8 +212,7 @@ class InnerRCE extends PureComponent {
           className={classNames(
             styles.editor,
             theme.editor,
-            renderedInTable && styles.renderedInTable,
-            renderedInTable && draftDefaultStyles.renderedInTable,
+            renderedInTable && tableClassNames,
             'inner-rce'
           )}
           ref={this.setEditorWrapper}

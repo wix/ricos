@@ -176,3 +176,18 @@
 .lineSpacingModalOverlay_mobile {
   //background-color: rgba(0, 0, 0, 0.2);
 }
+
+.lineSpacingPopup_button {
+  position: relative;
+  margin-right: 10px;
+  .lineSpacingPopup {
+    position: absolute;
+    top: 50px;
+    left: -146px;
+    background: #fff;
+
+    & button {
+      background-color: transparent;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { camelCase, upperFirst } from 'lodash';
 import { ClassNameStrategy } from '../types';
-import { TABLE_TYPE } from 'ricos-content';
 
 export const alignmentClassName: ClassNameStrategy = (componentData, theme, styles) => {
   const { alignment } = componentData.config || {};
@@ -12,23 +11,13 @@ export const alignmentClassName: ClassNameStrategy = (componentData, theme, styl
   return classNames(styles[key], theme[key]);
 };
 
-export const sizeClassName: ClassNameStrategy = (
-  componentData,
-  theme,
-  styles,
-  isMobile,
-  innerRCERenderedIn
-) => {
+export const sizeClassName: ClassNameStrategy = (componentData, theme, styles) => {
   const { size } = componentData.config || {};
   if (!size) {
     return '';
   }
   const key = `size${upperFirst(camelCase(size))}`;
-  const isRenderedInTable = innerRCERenderedIn === TABLE_TYPE;
-  return classNames(styles[key], theme[key], {
-    [styles.renderedInTable]: isRenderedInTable,
-    [theme.renderedInTable]: isRenderedInTable,
-  });
+  return classNames(styles[key], theme[key]);
 };
 
 export const textWrapClassName: ClassNameStrategy = (componentData, theme, styles) => {

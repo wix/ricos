@@ -45,7 +45,6 @@ const createBaseComponent = ({
   noPluginBorder,
   noPointerEventsOnFocus,
   withHorizontalScroll,
-  innerRCERenderedIn,
   disableKeyboardEvents,
 }) => {
   return class WrappedComponent extends Component {
@@ -293,9 +292,7 @@ const createBaseComponent = ({
         PluginComponent.sizeClassName || sizeClassName,
         PluginComponent.textWrapClassName || textWrapClassName,
         PluginComponent.customClassName,
-      ]).map(strategy =>
-        strategy(this.state.componentData, theme, this.styles, isMobile, innerRCERenderedIn)
-      );
+      ]).map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
 
       const hasFocus = (isFocused ? !noPluginBorder : isPartOfSelection) && isEditorFocused;
 

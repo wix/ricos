@@ -10,10 +10,18 @@ import {
   RawDraftEntity,
   EditorChangeType,
 } from '@wix/draft-js';
+import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
-import { RelValue, AnchorTarget, LINK_TYPE, CUSTOM_LINK_TYPE } from 'wix-rich-content-common';
+import {
+  RelValue,
+  AnchorTarget,
+  LINK_TYPE,
+  CUSTOM_LINK_TYPE,
+  TextAlignment,
+  InlineStyle,
+} from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 
 type LinkDataUrl = {
@@ -31,6 +39,9 @@ type CustomLinkData = any;
 
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
+
+export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) =>
+  editorState.getCurrentInlineStyle().has(inlineStyle.toUpperCase());
 
 export function createSelection({
   blockKey,
@@ -278,7 +289,10 @@ export const removeLinksInSelection = (editorState: EditorState) => {
   );
 };
 
-export const getTextAlignment = (editorState: EditorState, defaultAlignment = 'left') => {
+export const getTextAlignment = (
+  editorState: EditorState,
+  defaultAlignment = 'left'
+): TextAlignment => {
   const selection = getSelection(editorState);
   const currentContent = editorState.getCurrentContent();
   const contentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -306,6 +320,12 @@ export const getAnchorBlockData = (editorState: EditorState) => {
   const anchorKey = editorState.getSelection().getAnchorKey();
   const block = editorState.getCurrentContent().getBlockForKey(anchorKey);
   return block.get('data').toJS();
+};
+
+export const blockKeyToEntityKey = (editorState: EditorState, blockKey: string) => {
+  const block = editorState.getCurrentContent().getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(0);
+  return entityKey;
 };
 
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {
@@ -364,30 +384,30 @@ export const replaceWithEmptyBlock = (editorState: EditorState, blockKey: string
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
-// export const setSelectionToBlock = (newEditorState, setEditorState, newActiveBlock) => {
-//   const editorState = newEditorState;
-//   const offsetKey = DraftOffsetKey.encode(newActiveBlock.getKey(), 0, 0);
-//   const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
-//   const selection = window.getSelection();
-//   const range = document.createRange();
-//   range.setStart(node, 0);
-//   range.setEnd(node, 0);
-//   selection.removeAllRanges();
-//   selection.addRange(range);
+export const setSelectionToBlock = (newEditorState, setEditorState, newActiveBlock) => {
+  const editorState = newEditorState;
+  const offsetKey = DraftOffsetKey.encode(newActiveBlock.getKey(), 0, 0);
+  const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
+  const selection = window.getSelection();
+  const range = document.createRange();
+  range.setStart(node, 0);
+  range.setEnd(node, 0);
+  selection?.removeAllRanges();
+  selection?.addRange(range);
 
-//   setEditorState(
-//     EditorState.forceSelection(
-//       editorState,
-//       new SelectionState({
-//         anchorKey: newActiveBlock.getKey(),
-//         anchorOffset: 0,
-//         focusKey: newActiveBlock.getKey(),
-//         focusOffset: 0,
-//         isBackward: false,
-//       })
-//     )
-//   );
-// };
+  setEditorState(
+    EditorState.forceSelection(
+      editorState,
+      new SelectionState({
+        anchorKey: newActiveBlock.getKey(),
+        anchorOffset: 0,
+        focusKey: newActiveBlock.getKey(),
+        focusOffset: 0,
+        isBackward: false,
+      })
+    )
+  );
+};
 
 // **************************** this function is for oneApp ****************************
 export const createBlockAndFocus = (editorState: EditorState, data, pluginType: string) => {
@@ -677,11 +697,19 @@ export function getFocusedBlockKey(editorState: EditorState) {
   if (selection.isCollapsed()) return selection.getAnchorKey();
 }
 
-export function getBlockInfo(editorState: EditorState, blockKey: string) {
+export function getBlockEntityType(editorState: EditorState, blockKey: string) {
+  return getBlockEntity(editorState, blockKey)?.getType();
+}
+
+function getBlockEntity(editorState: EditorState, blockKey: string) {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(0);
-  const entity = entityKey ? contentState.getEntity(entityKey) : undefined;
+  return entityKey ? contentState.getEntity(entityKey) : undefined;
+}
+
+export function getBlockInfo(editorState: EditorState, blockKey: string) {
+  const entity = getBlockEntity(editorState, blockKey);
   const entityData = entity?.getData();
   const type = entity?.getType();
 

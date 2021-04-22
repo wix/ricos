@@ -9,6 +9,7 @@ import {
   RelValue,
   EditorPlugin,
   ViewerPlugin,
+  onAtomicBlockFocus,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -33,6 +34,7 @@ export interface RicosProps {
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
+  onAtomicBlockFocus?: onAtomicBlockFocus;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -80,6 +82,7 @@ export interface EditorDataInstance {
   getContentTraits: () => {
     isEmpty: boolean;
     isContentChanged: boolean;
+    isLastChangeEdit: boolean;
   };
   getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;

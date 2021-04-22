@@ -5,7 +5,9 @@ export type OnVisibilityChanged = (sectionName: string, isVisible: boolean) => v
 export interface SectionSettings {
   name: string;
   active?: any;
-  action: (item?: any) => void;
+  getActive?: any;
+  itemsType?: string;
+  action: (item?: any, value?: any) => void;
   items?: string[];
 }
 

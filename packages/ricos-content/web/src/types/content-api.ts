@@ -1,13 +1,42 @@
-import { RichContent, ImageData, DividerData, ParagraphData, TextData } from 'ricos-schema';
+import {
+  RichContent,
+  ImageData,
+  DividerData,
+  ParagraphData,
+  TextData,
+  HTMLData,
+  GiphyData,
+  VideoData,
+  FileData,
+  MapData,
+  ButtonData,
+  GalleryData,
+  CodeData,
+  HeadingData,
+  LinkPreviewData,
+  PollData,
+} from 'ricos-schema';
+
+export type PartialDeep<T> = {
+  [P in keyof T]?: T[P] extends (infer U)[]
+    ? PartialDeep<U>[]
+    : T[P] extends Record<string, unknown>
+    ? PartialDeep<T[P]>
+    : T[P];
+};
 
 type AddMethod<T> = {
   [P in keyof T]: ({
     data,
     index,
+    before,
+    after,
     content,
   }: {
     data?: Partial<T[P]>;
     index?: number;
+    before?: string;
+    after?: string;
     content: RichContent;
   }) => RichContent;
 };
@@ -17,11 +46,15 @@ type AddTextMethod<T> = {
     text,
     data,
     index,
+    before,
+    after,
     content,
   }: {
     text?: string | TextData | (string | TextData)[];
     data?: Partial<T[P]>;
     index?: number;
+    before?: string;
+    after?: string;
     content: RichContent;
   }) => RichContent;
 };
@@ -38,6 +71,7 @@ type SetMethod<T> = {
   }) => RichContent;
 };
 
+// Common API for set, update and toggle text node
 type SetTextMethod<T> = {
   [P in keyof T]: ({
     text,
@@ -46,7 +80,7 @@ type SetTextMethod<T> = {
     content,
   }: {
     text?: string | TextData | (string | TextData)[];
-    data?: Partial<T[P]>;
+    data?: PartialDeep<T[P]>;
     key: string;
     content: RichContent;
   }) => RichContent;
@@ -57,23 +91,62 @@ type GetMethod<T> = {
 };
 
 type SetMap = {
-  setImage: ImageData;
+  setActionButton: ButtonData;
+  setLinkButton: ButtonData;
   setDivider: DividerData;
-  updateImage: ImageData;
+  setFileUpload: FileData;
+  setGallery: GalleryData;
+  setGiphy: GiphyData;
+  setHtml: HTMLData;
+  setImage: ImageData;
+  setLinkPreview: LinkPreviewData;
+  setMap: MapData;
+  setPoll: PollData;
+  setVideo: VideoData;
+  updateActionButton: ButtonData;
+  updateLinkButton: ButtonData;
   updateDivider: DividerData;
+  updateFileUpload: FileData;
+  updateGallery: GalleryData;
+  updateGiphy: GiphyData;
+  updateHtml: HTMLData;
+  updateImage: ImageData;
+  updateLinkPreview: LinkPreviewData;
+  updateMap: MapData;
+  updatePoll: PollData;
+  updateVideo: VideoData;
 };
 
 type SetTextMap = {
+  setCode: CodeData;
+  setHeading: HeadingData;
   setParagraph: ParagraphData;
+  updateCode: CodeData;
+  updateHeading: HeadingData;
   updateParagraph: ParagraphData;
+  toggleCode: CodeData;
+  toggleHeading: HeadingData;
+  toggleParagraph: ParagraphData;
 };
 
 type AddMap = {
-  addImage: ImageData;
+  addLinkButton: ButtonData;
+  addActionButton: ButtonData;
   addDivider: DividerData;
+  addFile: FileData;
+  addGallery: GalleryData;
+  addGiphy: GiphyData;
+  addHtml: HTMLData;
+  addImage: ImageData;
+  addLinkPreview: LinkPreviewData;
+  addMap: MapData;
+  addPoll: PollData;
+  addVideo: VideoData;
 };
 
 type AddTextMap = {
+  addCode: CodeData;
+  addHeading: HeadingData;
   addParagraph: ParagraphData;
 };
 
@@ -81,6 +154,17 @@ type GetMap = {
   getImages: ImageData;
   getDividers: DividerData;
   getParagraphs: ParagraphData;
+  getHeadings: HeadingData;
+  getLinkPreviews: LinkPreviewData;
+  getPolls: PollData;
+  getCodes: CodeData;
+  getGiphy: GiphyData;
+  getButtons: ButtonData;
+  getVideos: VideoData;
+  getMaps: MapData;
+  getGalleries: GalleryData;
+  getFiles: FileData;
+  getHtmls: HTMLData;
 };
 
 type ContentBuilderType = AddMethod<AddMap> &
@@ -92,4 +176,6 @@ type ContentBuilderType = AddMethod<AddMap> &
 
 export interface ContentBuilder extends ContentBuilderType {}
 
-export type ContentExtractor = GetMethod<GetMap>;
+type ContentExtractorType = GetMethod<GetMap>;
+
+export interface ContentExtractor extends ContentExtractorType {}

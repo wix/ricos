@@ -3,6 +3,7 @@
 $borderRadius: 6px;
 
 .inlineToolbar {
+  outline: 0;
   min-height: 50px;
   left: var(--offset-left);
   top: var(--offset-top);

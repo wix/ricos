@@ -251,7 +251,6 @@ const createBasePlugin = (
       noPluginBorder,
       noPointerEventsOnFocus,
       withHorizontalScroll,
-      innerRCERenderedIn: config.type === 'wix-draft-plugin-divider' ? false : innerRCERenderedIn,
       disableKeyboardEvents,
     });
 
