@@ -1,3 +1,4 @@
+import { RicosTheme } from './../themeStrategy/themeTypes';
 import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
