@@ -24,6 +24,10 @@ export class Tab extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
+  componentDidMount() {
+    this.children = React.Children.toArray(this.props.children).filter(Boolean);
+  }
+
   render = () =>
     this.props.selected && (
       <div
@@ -33,7 +37,7 @@ export class Tab extends Component {
         id={`${this.props.value}_panel`}
         className={this.styles.tabs_panel}
       >
-        {React.Children.toArray(this.props.children).filter(Boolean)}
+        {this.children}
       </div>
     );
 }
