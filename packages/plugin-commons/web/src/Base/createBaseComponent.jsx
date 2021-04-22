@@ -78,19 +78,6 @@ const createBaseComponent = ({
       return top >= 0 && left >= 0 && bottom <= height && right <= width;
     };
 
-    findScrollingElement = element => {
-      const isElement = element instanceof HTMLElement;
-      const overflowY = isElement && window.getComputedStyle(element).overflowY;
-      const isScrollable =
-        !['visible', 'hidden'].includes(overflowY) && element.scrollHeight >= element.clientHeight;
-
-      return (
-        (isScrollable && element) ||
-        this.findScrollingElement(element.parentElement) ||
-        document.body
-      );
-    };
-
     onResizeElement = blockKey => element => {
       const elementTarget = element[0].target;
       const boundingRect = this.getBoundingClientRectAsObject(elementTarget);
@@ -99,9 +86,7 @@ const createBaseComponent = ({
       const shouldScroll = focusedBlock === blockKey && !this.isInViewport(boundingRect);
 
       if (shouldScroll) {
-        const scrollingElement = this.findScrollingElement(elementTarget);
-        const { top, bottom } = boundingRect;
-        scrollingElement.scrollTop += bottom - top;
+        elementTarget.scrollIntoView();
       } else if (shouldResize) {
         const batchUpdates = {};
         batchUpdates.boundingRect = boundingRect;
