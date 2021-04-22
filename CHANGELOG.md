@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `fullscreen`
+  - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
+
 </details>
 <hr/>
 
