@@ -71,12 +71,38 @@ const createBaseComponent = ({
       this.setState(this.stateFromProps(nextProps));
     }
 
+    isInViewport = boundingRect => {
+      const { top, left, bottom, right } = boundingRect;
+      const height = window.innerHeight || document.documentElement.clientHeight;
+      const width = window.innerWidth || document.documentElement.clientWidth;
+      return top >= 0 && left >= 0 && bottom <= height && right <= width;
+    };
+
+    findScrollingElement = element => {
+      const isElement = element instanceof HTMLElement;
+      const overflowY = isElement && window.getComputedStyle(element).overflowY;
+      const isScrollable =
+        !['visible', 'hidden'].includes(overflowY) && element.scrollHeight >= element.clientHeight;
+
+      return (
+        (isScrollable && element) ||
+        this.findScrollingElement(element.parentElement) ||
+        document.body
+      );
+    };
+
     onResizeElement = blockKey => element => {
-      const boundingRect = this.getBoundingClientRectAsObject(element[0].target);
+      const elementTarget = element[0].target;
+      const boundingRect = this.getBoundingClientRectAsObject(elementTarget);
       const focusedBlock = pubsub.get('focusedBlock');
       const shouldResize = boundingRect.width !== 0 && focusedBlock === blockKey;
+      const shouldScroll = focusedBlock === blockKey && !this.isInViewport(boundingRect);
 
-      if (shouldResize) {
+      if (shouldScroll) {
+        const scrollingElement = this.findScrollingElement(elementTarget);
+        const { top, bottom } = boundingRect;
+        scrollingElement.scrollTop += bottom - top;
+      } else if (shouldResize) {
         const batchUpdates = {};
         batchUpdates.boundingRect = boundingRect;
         batchUpdates.focusedBlock = focusedBlock;
