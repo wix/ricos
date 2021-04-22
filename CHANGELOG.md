@@ -23,6 +23,17 @@
 </details>
 <hr/>
 
+## 8.30.2 (April 22, 2021)
+### :bug: Bug Fix
+- `editor`
+  - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block
+- `external-toolbar`
+  - [#2391](https://github.com/wix-incubator/rich-content/pull/2391) add events and bookings to vertical embed
+
+## 8.30.1 (April 21, 2021)
+### :bug: Bug Fix
+- `ricos-schema`
+  - [#e728b63](https://github.com/wix/ricos/commit/e728b63) add missing import for wix proto validations
 ## 8.30.0 (April 20, 2021)
 ### :rocket: New Feature
 - `schema`
