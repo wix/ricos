@@ -74,7 +74,7 @@
     "wix-style-react": "^9.0.0"
   },
   "devDependencies": {
-    "@storybook/addon-viewport": "^5.3.18",
+    "@storybook/addon-viewport": "^6.2.8",
     "yoshi": "^4.31.0",
     "yoshi-style-dependencies": "^4.23.7"
   },
