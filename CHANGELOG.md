@@ -19,7 +19,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block
-
+- `ricos-content`
+  - [#2393](https://github.com/wix-incubator/rich-content/pull/2393) draft converters handle undefined values in content
 </details>
 <hr/>
 
