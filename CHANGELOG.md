@@ -16,13 +16,16 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `image`
-  - [#2390](https://github.com/wix-incubator/rich-content/pull/2390) click on image caption doesnt open expand mode
 
 </details>
 <hr/>
 
+## 8.30.3 (April 22, 2021)
+### :bug: Bug Fix
+- `image`
+  - [#2390](https://github.com/wix-incubator/rich-content/pull/2390) click on image caption doesnt open expand mode
+- `ricos-content`
+  - [#2393](https://github.com/wix-incubator/rich-content/pull/2393) draft converters handle undefined values in content
 ## 8.30.2 (April 22, 2021)
 ### :bug: Bug Fix
 - `editor`
