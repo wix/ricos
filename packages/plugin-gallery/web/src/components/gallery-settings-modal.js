@@ -277,8 +277,8 @@ export class GallerySettingsModal extends Component {
         {isMobile && (
           <GallerySettingsMobileHeader
             theme={this.props.theme}
-            cancel={() => this.revertComponentData()}
-            save={() => helpers.closeModal()}
+            cancel={this.revertComponentData}
+            save={this.onDoneClick}
             switchTab={this.switchTab}
             otherTab={this.tabName(this.otherTab(), t)}
             t={t}
@@ -289,7 +289,9 @@ export class GallerySettingsModal extends Component {
           className={styles.gallerySettings}
           dir={languageDir}
         >
-          <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          {!isMobile && (
+            <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          )}
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab
@@ -309,19 +311,21 @@ export class GallerySettingsModal extends Component {
                   accept={accept}
                 />
               </Tab>
-              <Tab
-                label={this.tabName('advanced_settings', t)}
-                value={'advanced_settings'}
-                theme={this.props.theme}
-              >
-                <AdvancedSettingsSection
+              {!isMobile && (
+                <Tab
+                  label={this.tabName('advanced_settings', t)}
+                  value={'advanced_settings'}
                   theme={this.props.theme}
-                  data={componentData}
-                  store={pubsub.store}
-                  helpers={helpers}
-                  t={t}
-                />
-              </Tab>
+                >
+                  <AdvancedSettingsSection
+                    theme={this.props.theme}
+                    data={componentData}
+                    store={pubsub.store}
+                    helpers={helpers}
+                    t={t}
+                  />
+                </Tab>
+              )}
               <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
                 {this.toggleData.map(toggle => this.renderToggle(toggle))}
               </Tab>
@@ -330,7 +334,7 @@ export class GallerySettingsModal extends Component {
           {!isMobile && (
             <SettingsPanelFooter
               fixed
-              cancel={() => this.revertComponentData()}
+              cancel={this.revertComponentData}
               save={this.onDoneClick}
               theme={this.props.theme}
               t={t}
