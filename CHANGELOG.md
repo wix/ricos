@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block
+- `external-toolbar`
+  - [#2391](https://github.com/wix-incubator/rich-content/pull/2391) add events and bookings to vertical embed
 
 </details>
 <hr/>
