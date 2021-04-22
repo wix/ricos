@@ -1,4 +1,9 @@
-import { EditorState, SelectionState, DraftOffsetKey } from 'wix-rich-content-editor-common';
+import {
+  EditorState,
+  SelectionState,
+  DraftOffsetKey,
+  Modifier,
+} from 'wix-rich-content-editor-common';
 
 function setNativeSelectionToBlock(block) {
   const offsetKey = DraftOffsetKey.encode(block.getKey(), 0, 0);
@@ -11,6 +16,20 @@ function setNativeSelectionToBlock(block) {
   selection.addRange(range);
 }
 
+function getNewBlockMap(content, startKey, edgeBlockKey) {
+  let newBlockMap = content.getBlockMap();
+  if (startKey !== edgeBlockKey) {
+    newBlockMap = newBlockMap.delete(startKey);
+  } else {
+    const currentBlock = content.getBlockForKey(edgeBlockKey);
+    if (currentBlock.getType() === 'blockquote' && currentBlock.getText() === '') {
+      const blockSelection = SelectionState.createEmpty(startKey);
+      newBlockMap = Modifier.setBlockType(content, blockSelection, 'unstyled').getBlockMap();
+    }
+  }
+  return newBlockMap;
+}
+
 function removeBlockAdjacentToAtomic(editorState, isAbove) {
   const content = editorState.getCurrentContent();
   const startKey = editorState.getSelection().getStartKey();
@@ -19,8 +38,7 @@ function removeBlockAdjacentToAtomic(editorState, isAbove) {
     : content.getBlockBefore(startKey);
   const edgeBlockKey = isAbove ? content.getFirstBlock().key : content.getLastBlock().key;
 
-  const blockMap =
-    edgeBlockKey !== startKey ? content.getBlockMap().delete(startKey) : content.getBlockMap();
+  const blockMap = getNewBlockMap(content, startKey, edgeBlockKey);
   const newSelection = SelectionState.createEmpty(adjacentBlock.getKey());
 
   const withoutCurrentBlock = content.merge({
