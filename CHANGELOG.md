@@ -19,6 +19,8 @@
 ### :house: Internal
 - `fullscreen`
   - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
+- `docs`
+  - [#2337](https://github.com/wix-incubator/rich-content/pull/2337) docs removed from workspaces (build failure fix)
 
 </details>
 <hr/>
