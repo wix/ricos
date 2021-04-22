@@ -78,3 +78,29 @@ MediaUploadError?: {
 ```
 
 <br />
+
+## lib utility functions
+
+### `File extension to file type mapper`
+
+A utility function that maps file extension to file type. <br />
+Usage: <br />
+
+```jsx
+import { fileExtensionToType, FileTypes } from 'wix-rich-content-plugin-file-upload/libs/fileExtensionToType';
+
+FileTypes: enum {
+  IMAGE = 1,
+  VIDEO,
+  WORD,
+  EXCEL,
+  ARCHIVE,
+  PDF,
+  POWERPOINT,
+  AUDIO,
+  MISC,
+}
+
+fileExtensionToType: (extension: string) => FileTypes
+
+```
