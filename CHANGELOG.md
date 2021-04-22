@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor`
+  - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
 
 </details>
 <hr/>
