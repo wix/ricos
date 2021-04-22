@@ -1,5 +1,11 @@
 /* eslint-disable fp/no-delete */
-import { Node_Type, Decoration_Type } from 'ricos-schema';
+import {
+  Node_Type,
+  Decoration_Type,
+  PluginContainerData_Width_Type,
+  Link,
+  Link_Target,
+} from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
   ENTITY_DECORATION_TO_DATA_FIELD,
@@ -62,7 +68,12 @@ const convertContainerData = data => {
   data.config = Object.assign(
     {},
     data.config,
-    width?.type && { size: constantToKebabCase(width.type) },
+    width?.type && {
+      size:
+        width.type === PluginContainerData_Width_Type.CUSTOM
+          ? 'inline'
+          : constantToKebabCase(width.type),
+    },
     width?.customWidth && { width: width.customWidth },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
@@ -111,7 +122,7 @@ const convertImageData = data => {
   const { link, config, disableExpand, image, altText, caption } = data;
   const { src, width, height } = image;
   data.src = { id: src.custom, file_name: src.custom, width, height };
-  const links = link?.anchor ? { anchor: link?.anchor } : { link };
+  const links = link?.anchor ? { anchor: link?.anchor } : { link: link && convertLink(link) };
   data.config = { ...(config || {}), ...links, disableExpand };
   data.metadata = (altText || caption) && { caption, alt: altText };
   delete data.disableExpand;
@@ -142,6 +153,7 @@ const convertLinkPreviewData = data => {
     data.provider_url = data.providerUrl;
     delete data.providerUrl;
   }
+  has(data, 'config.link') && (data.config.link = convertLink(data.config.link));
 };
 
 const convertMention = data => {
@@ -160,12 +172,12 @@ const convertFileData = data => {
 const convertButtonData = data => {
   const { link, text, styles } = data;
   const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles;
-  const { url, rel, target } = link || {};
+  const { url, rel, target } = (link as Link) || {};
   data.button = {
     settings: {
       buttonText: text,
-      ...(url ? { url, rel: rel === 'nofollow', target: target === '_blank' } : {}),
-    }, // @shaulgo please review logic
+      ...(url ? { url, rel: !!rel?.nofollow, target: target === Link_Target.BLANK } : {}),
+    },
     design: {
       borderRadius,
       borderWidth,
@@ -183,5 +195,26 @@ const convertButtonData = data => {
 const convertHTMLData = data => {
   delete data.config?.size;
 };
+
+const convertLink = ({
+  url,
+  rel,
+  target,
+  anchor,
+}: Link): {
+  url?: string;
+  rel?: string;
+  target?: string;
+  anchor?: string;
+} => ({
+  anchor,
+  url,
+  rel:
+    rel &&
+    Object.entries(rel)
+      .flatMap(([key, value]) => (value ? key : []))
+      .join(' '),
+  target: target && '_' + target.toLowerCase(),
+});
 
 const constantToKebabCase = (str: string) => str.toLowerCase().replace('_', '-');
