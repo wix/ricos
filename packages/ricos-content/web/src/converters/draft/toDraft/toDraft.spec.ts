@@ -4,7 +4,12 @@ import fixture from '../../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
 import anchorBlocksFixture from '../../../../../../../e2e/tests/fixtures/all-blocks-with-anchors.json';
 import { ANCHOR_TYPE } from '../../..';
-import { Decoration_Type, Node_Type } from 'ricos-schema';
+import {
+  Decoration_Type,
+  Node_Type,
+  PluginContainerData_Alignment,
+  PluginContainerData_Width_Type,
+} from 'ricos-schema';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
 const fixtures = { intro: fixture, complex: complexFixture };
@@ -28,10 +33,13 @@ describe('migrate to draft', () => {
 
   const imageNodeData = {
     nodes: [],
-    type: 'IMAGE',
+    type: Node_Type.IMAGE,
     key: 'eoba3',
     imageData: {
-      containerData: { width: { type: 'CONTENT' }, alignment: 'CENTER' },
+      containerData: {
+        width: { type: PluginContainerData_Width_Type.CONTENT },
+        alignment: PluginContainerData_Alignment.CENTER,
+      },
       image: {
         src: { custom: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg' },
         width: 2898,
@@ -74,7 +82,7 @@ describe('migrate to draft', () => {
   });
 
   const mentionDecoration = {
-    type: 'MENTION',
+    type: Decoration_Type.MENTION,
     mentionData: {
       name: 'Test One',
       slug: 'testone',
