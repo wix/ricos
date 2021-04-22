@@ -1,3 +1,4 @@
+import { RicosTheme } from './../themeStrategy/themeTypes';
 import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
@@ -71,6 +72,7 @@ function viewerStrategy(
 }
 
 export default function pluginsStrategy({
+  ricosTheme, // eslint-disable-line
   isViewer,
   plugins = [],
   childProps,
@@ -78,6 +80,7 @@ export default function pluginsStrategy({
   content,
   experiments, // eslint-disable-line
 }: {
+  ricosTheme?: RicosTheme;
   isViewer: boolean;
   plugins: BasePlugin[];
   childProps: RichContentProps;
