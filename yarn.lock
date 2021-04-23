@@ -12472,11 +12472,6 @@ fp-ts@^2.10.0:
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.10.2.tgz#1df0ccabf10a611a9c64eccfd5d0ae0ea0fc13ea"
   integrity sha512-YB/FSwESW8C3kVCbbyFiZSXXoQEJ/SaeHHorL6KCKHoPIPV6v/hyfMiXBPMjW7O7D9jfxlRs6VeCRonfqi1Tcg==
 
-fraction.js@^4.0.13:
-  version "4.0.13"
-  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.0.13.tgz#3c1c315fa16b35c85fffa95725a36fa729c69dfe"
-  integrity sha512-E1fz2Xs9ltlUp+qbiyx9wmt2n9dRzPsS11Jtdb8D2o+cC7wr9xkkKsVKJuBX0ST+LVS+LhLO+SbLJNtfWcJvXA==
-
 fragment-cache@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/fragment-cache/-/fragment-cache-0.2.1.tgz#4290fad27f13e89be7f33799c6bc5a0abfff0d19"
