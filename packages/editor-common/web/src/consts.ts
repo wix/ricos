@@ -98,6 +98,8 @@ export const INSERT_PLUGIN_BUTTONS = Object.freeze({
   TIKTOK: 'TikTok_InsertButton',
   TWITTER: 'Twitter_InsertButton',
   STORES: 'Stores_InsertButton',
+  EVENTS: 'Events_InsertButton',
+  BOOKINGS: 'Bookings_InsertButton',
   BUTTON: 'ButtonPlugin_InsertButton',
   CODE_BLOCK: 'CodeblockPlugin_InsertButton',
   SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',

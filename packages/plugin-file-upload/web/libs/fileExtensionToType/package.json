@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/fileExtensionToType.cjs.js",
+    "module": "../../dist/lib/fileExtensionToType.js",
+    "types": "../../dist/lib/fileExtensionToType.d.ts"
+}

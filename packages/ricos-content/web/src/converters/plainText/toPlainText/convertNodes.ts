@@ -25,10 +25,10 @@ const parseList = (listNode: Node): { type: Node_Type; item: string }[] =>
     })
     .flat(2);
 
-export const parseListNode = (node: Node) =>
+export const parseListNode = (node: Node, delimiter: string) =>
   parseList(node)
     .map(({ type, item }, index) => getListSymbol(index, type) + item)
-    .join('\n');
+    .join(delimiter);
 
 export const addLinksToText = (text: string, linkDecorations: RangedDecoration[] = []) =>
   linkDecorations
@@ -51,6 +51,7 @@ const removeTrailingNewLine = (text: string) =>
 
 export const parseImage = async (
   { imageData }: Node,
+  delimiter: string,
   urlShortener?: (url: string) => Promise<string>
 ): Promise<string> => {
   const { caption } = imageData || {};
@@ -67,7 +68,7 @@ export const parseImage = async (
   if (urlShortener) {
     url = await urlShortener(url);
   }
-  return [caption, url].filter(Boolean).join('\n');
+  return [caption, url].filter(Boolean).join(delimiter);
 };
 
 const getDefaultVideoUrl = async (fileId: string) => `https://video.wixstatic.com/${fileId}`;
@@ -91,13 +92,13 @@ export const parseMap = ({ mapData }: Node): string => {
   return address || '';
 };
 
-export const parseVerticalEmbed = ({ verticalEmbedData }: Node): string => {
+export const parseVerticalEmbed = ({ verticalEmbedData }: Node, delimiter: string): string => {
   const { html, name } = verticalEmbedData?.selectedProduct || {};
   const href = html
     ?.replace(/.*href="/g, '')
     .replace(/.*=http/g, 'http')
     .replace(/" .*/g, '');
-  return [name, href].filter(Boolean).join('\n');
+  return [name, href].filter(Boolean).join(delimiter);
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {

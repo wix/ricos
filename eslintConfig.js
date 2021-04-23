@@ -31,9 +31,11 @@ module.exports = {
     'react/jsx-handler-names': 'off',
     camelcase: 'off',
     'max-params': 'off',
-    'no-console': 'error',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-use-before-define': 'off',
     'no-mixed-operators': 'off',
+    'no-mixed-spaces-and-tabs': 'error',
+    'no-tabs': 'error',
     'space-before-function-paren': 'off',
     'object-curly-spacing': ['error', 'always'],
     'max-len': [
