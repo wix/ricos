@@ -44,6 +44,7 @@ interface ExampleEditorProps {
   theme?: RichContentEditorProps['theme'];
   isMobile?: boolean;
   staticToolbar?: boolean;
+  externalToolbarToShow: TOOLBARS;
   locale?: string;
   localeResource?: Record<string, string>;
   externalToolbar?: ElementType;
@@ -221,11 +222,11 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
   };
 
   renderExternalToolbar() {
-    const { externalToolbar: ExternalToolbar } = this.props;
+    const { externalToolbar: ExternalToolbar, externalToolbarToShow } = this.props;
     if (ExternalToolbar && this.editor) {
       return (
         <div className="toolbar">
-          <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.FORMATTING)} theme={theme} />
+          <ExternalToolbar {...this.editor.getToolbarProps(externalToolbarToShow)} theme={theme} />
         </div>
       );
     }
