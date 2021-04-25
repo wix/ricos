@@ -278,8 +278,8 @@ export class GallerySettingsModal extends Component {
 
   renderTabs = isMobile =>
     isMobile
-      ? [this.tabsList().mangeMedia, this.tabsList().advancedSettings, this.tabsList().settings]
-      : [this.tabsList().mangeMedia, this.tabsList().settings];
+      ? [this.tabsList().mangeMedia, this.tabsList().settings]
+      : [this.tabsList().mangeMedia, this.tabsList().advancedSettings, this.tabsList().settings];
 
   renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook }) => (
     <LabeledToggle
