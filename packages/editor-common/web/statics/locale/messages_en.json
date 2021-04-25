@@ -93,7 +93,7 @@
   "HtmlEditPanel_UrlInput_Placeholder": "HTTPS only",
   "HtmlEditPanel_HtmlInput_DefaultText": "<p> Hello World! </p>",
   "ImagePlugin_InsertButton_Tooltip": "Add an image",
-  "ImagePlugin_Settings_ImageOpensInExpandMode_Label": "Open in expand mode when clicked",
+  "ImagePlugin_Settings_ImageOpensInExpandMode_Label": "Expand mode",
   "ImagePlugin_Settings_ImageCanBeDownloaded_Label": "Show option to download",
   "ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip": "Your readers will be able to download your image.",
   "ImageSettings_MobileHeader_Cancel": "Cancel",
