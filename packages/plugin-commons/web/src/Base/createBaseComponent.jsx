@@ -90,8 +90,7 @@ const createBaseComponent = ({
     };
 
     onResizeElement = blockKey => element => {
-      const elementTarget = element[0].target;
-      const boundingRect = this.getBoundingClientRectAsObject(elementTarget);
+      const boundingRect = this.getBoundingClientRectAsObject(element[0].target);
       const focusedBlock = pubsub.get('focusedBlock');
       const shouldResize = boundingRect.width !== 0 && focusedBlock === blockKey;
 
