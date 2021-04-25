@@ -276,14 +276,10 @@ export class GallerySettingsModal extends Component {
     ),
   });
 
-  renderTabs = () => ({
-    desktop: [
-      this.tabsList().mangeMedia,
-      this.tabsList().advancedSettings,
-      this.tabsList().settings,
-    ],
-    mobile: [this.tabsList().mangeMedia, this.tabsList().settings],
-  });
+  renderTabs = isMobile =>
+    isMobile
+      ? [this.tabsList().mangeMedia, this.tabsList().advancedSettings, this.tabsList().settings]
+      : [this.tabsList().mangeMedia, this.tabsList().settings];
 
   renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook }) => (
     <LabeledToggle
@@ -338,9 +334,7 @@ export class GallerySettingsModal extends Component {
           )}
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
-              {isMobile
-                ? this.renderTabs().mobile.map(tab => tab)
-                : this.renderTabs().desktop.map(tab => tab)}
+              {this.renderTabs(isMobile).mobile.map(tab => tab)}
             </Tabs>
           </div>
           {!isMobile && (
