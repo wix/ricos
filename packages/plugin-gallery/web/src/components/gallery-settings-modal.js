@@ -334,7 +334,7 @@ export class GallerySettingsModal extends Component {
           )}
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
-              {this.renderTabs(isMobile).mobile.map(tab => tab)}
+              {this.renderTabs(isMobile).map(tab => tab)}
             </Tabs>
           </div>
           {!isMobile && (
