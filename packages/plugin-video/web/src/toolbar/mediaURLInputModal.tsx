@@ -58,22 +58,29 @@ export default class MediaURLInputModal extends Component<Props, State> {
     }
   };
 
-  render() {
-    const { url, submittedInvalidUrl } = this.state;
+  getRenderData = () => {
     const {
       t,
       isMobile,
-      languageDir,
-      helpers,
       componentData: { type },
     } = this.props;
-    const { youTube, soundCloud } = videoButtonsTypes;
-    const isYouTube = type === youTube;
-    const isSoundCloud = type === soundCloud;
+    const isYouTube = type === videoButtonsTypes.youTube;
+    const isSoundCloud = type === videoButtonsTypes.soundCloud;
     const title = isYouTube
       ? 'EmbedURL_Social_YouTube_Title'
       : isSoundCloud &&
         (isMobile ? 'SoundCloudUploadModal_Header_Mobile' : 'SoundCloudUploadModal_Header');
+    const placeholder = isYouTube
+      ? t('EmbedURL_Social_YouTube_Placeholder')
+      : isSoundCloud && t('SoundCloudUploadModal_Input_Placeholder');
+    const dataHook = isYouTube ? 'socialEmbedUploadModal' : isSoundCloud && 'soundCloudUploadModal';
+    return { title, placeholder, dataHook };
+  };
+
+  render() {
+    const { url, submittedInvalidUrl } = this.state;
+    const { t, languageDir, helpers } = this.props;
+    const { title, placeholder, dataHook } = this.getRenderData();
     return (
       <UrlInputModal
         onConfirm={this.onConfirm}
@@ -83,14 +90,10 @@ export default class MediaURLInputModal extends Component<Props, State> {
         languageDir={languageDir}
         title={t(`${title}`)}
         submittedInvalidUrl={submittedInvalidUrl}
-        dataHook={isYouTube ? 'socialEmbedUploadModal' : isSoundCloud && 'soundCloudUploadModal'}
+        dataHook={dataHook}
         onInputChange={url => this.setState({ url })}
         errorMessage={t('SoundCloudUploadModal_Input_InvalidUrl')}
-        placeholder={
-          isYouTube
-            ? t('EmbedURL_Social_YouTube_Placeholder')
-            : isSoundCloud && t('SoundCloudUploadModal_Input_Placeholder')
-        }
+        placeholder={placeholder}
         onCloseRequested={helpers.closeModal}
       />
     );
