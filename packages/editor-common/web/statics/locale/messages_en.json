@@ -107,7 +107,7 @@
   "ImageSettings_Link_Label": "Link",
   "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open link settings.",
   "ImageEditorButton_Tooltip": "Edit image",
-  "ImageSettings_Spoiler_Toggle": "Mark image as spoiler",
+  "ImageSettings_Spoiler_Toggle": "Spoiler alert",
   "Spoiler_Toggle_Tooltip": "This will blur out the content so your readers can have a choice to reveal it or not.",
   "EmbedURL_Common_CTA_Primary": "Add",
   "EmbedURL_Common_CTA_Secondary": "Cancel",
