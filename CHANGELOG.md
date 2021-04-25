@@ -21,7 +21,9 @@
   - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
 - `docs`
   - [#2337](https://github.com/wix-incubator/rich-content/pull/2337) docs removed from workspaces (build failure fix)
-
+### :bug: Bug Fix
+- `image viewer`
+  - [#2398](https://github.com/wix-incubator/rich-content/pull/2398)  Avoid exception when image src missing
 </details>
 <hr/>
 
