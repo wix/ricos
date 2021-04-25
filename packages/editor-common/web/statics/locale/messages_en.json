@@ -217,7 +217,7 @@
   "GallerySettings_Radios_Scroll_Direction": "Scroll direction",
   "GallerySettings_Image_Ratio": "Image ratio",
   "GallerySettings_Thumbnail_Placement": "Thumbnail placement",
-  "GallerySettings_Spoiler_Toggle": "Mark gallery as spoiler",
+  "GallerySettings_Spoiler_Toggle": "Spoiler alert",
   "ButtonPlugin_InsertButton_Tooltip": "Add a button",
   "ButtonModal_InputName_Placeholder": "Add text here",
   "ButtonModal_InputLink_ErrorMessage": "Check the URL and try again",
