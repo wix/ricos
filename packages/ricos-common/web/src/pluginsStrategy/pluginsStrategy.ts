@@ -1,4 +1,3 @@
-import { RicosTheme } from './../themeStrategy/themeTypes';
 import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
@@ -55,6 +54,7 @@ function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPlugin,
   cssOverride: RicosCssOverride,
+  themeData: ThemeData,
   content?: DraftContent
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
@@ -99,7 +99,7 @@ export default function pluginsStrategy({
       inlineStyleMappers: [],
     };
     strategy = plugins.reduce(
-      (prev, curr) => viewerStrategy(prev, curr, cssOverride, content),
+      (prev, curr) => viewerStrategy(prev, curr, cssOverride, themeData, content),
       emptyStrategy
     );
   } else {
