@@ -16,6 +16,6 @@ export { isContentStateEmpty } from './contentStateUtils/contentStateUtils';
 
 export { createContent } from './contentStateUtils/createContent';
 
-export { getImageSrc, WIX_MEDIA_DEFAULT } from './imageUtils';
+export { isPNG, getImageSrc, WIX_MEDIA_DEFAULT } from './imageUtils';
 
 export { compare } from './comparision/compare';
