@@ -176,7 +176,7 @@
   "GalleryPlugin_Layout_Columns": "Columns",
   "GalleryPlugin_Layout_Slides": "Slider",
   "GalleryPlugin_Layouts_Title": "Choose a gallery layout",
-  "GalleryPlugin_Settings_ImagesOpenInExpandMode_Label": "Open in expand mode when clicked",
+  "GalleryPlugin_Settings_ImagesOpenInExpandMode_Label": "Expand mode",
   "GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip": "Your readers will be able to download your images.",
   "GalleryPlugin_Settings_ImagesCanBeDownloaded_Label": "Show option to download",
   "GalleryPlugin_Settings_Tab_ManageMedia": "Media",
