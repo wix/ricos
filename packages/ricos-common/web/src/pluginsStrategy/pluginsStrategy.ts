@@ -1,4 +1,3 @@
-import { RicosTheme } from './../themeStrategy/themeTypes';
 import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
@@ -12,6 +11,7 @@ import {
   DraftContent,
   EditorPlugin,
   ViewerPlugin,
+  ThemeData,
 } from 'wix-rich-content-common';
 
 const getPluginProps = (
@@ -54,6 +54,7 @@ function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPlugin,
   cssOverride: RicosCssOverride,
+  themeData: ThemeData,
   content?: DraftContent
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
@@ -72,7 +73,7 @@ function viewerStrategy(
 }
 
 export default function pluginsStrategy({
-  ricosTheme, // eslint-disable-line
+  themeData,
   isViewer,
   plugins = [],
   childProps,
@@ -80,7 +81,7 @@ export default function pluginsStrategy({
   content,
   experiments, // eslint-disable-line
 }: {
-  ricosTheme?: RicosTheme;
+  themeData: ThemeData;
   isViewer: boolean;
   plugins: BasePlugin[];
   childProps: RichContentProps;
@@ -92,18 +93,18 @@ export default function pluginsStrategy({
 
   if (isViewer) {
     const emptyStrategy: ViewerPluginsStrategy = {
-      config: {},
+      config: { themeData },
       typeMappers: [],
       decorators: [],
       inlineStyleMappers: [],
     };
     strategy = plugins.reduce(
-      (prev, curr) => viewerStrategy(prev, curr, cssOverride, content),
+      (prev, curr) => viewerStrategy(prev, curr, cssOverride, themeData, content),
       emptyStrategy
     );
   } else {
     const emptyStrategy: EditorPluginsStrategy = {
-      config: {},
+      config: { themeData },
       plugins: [],
       ModalsMap: {},
       createPluginsDataMap: {},

@@ -15,6 +15,7 @@ import {
   RelValue,
   ThemeGeneratorFunction,
   RichContentTheme,
+  ThemeData,
 } from '.';
 import {
   ContentBlock,
@@ -244,10 +245,14 @@ interface BasePluginConfig {
   theme?: ThemeGeneratorFunction;
 }
 
+interface PluginConfigDefaults {
+  themeData: ThemeData;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<string, any>>
   extends BasePluginConfig {
-  config: PluginConfig;
+  config: PluginConfig & PluginConfigDefaults;
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
   createPluginData?: CreatePluginData<PluginConfig>;
@@ -255,7 +260,7 @@ export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<s
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasePluginConfig {
-  config: PluginConfig;
+  config: PluginConfig & PluginConfigDefaults;
   typeMapper?: PluginTypeMapper;
   inlineStyleMapper?: InlineStyleMapperFunction;
   decorator?: RicosDecorator;
