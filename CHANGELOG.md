@@ -15,13 +15,32 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.30.4 (April 25, 2021)
+### :house: Internal
+- `fullscreen`
+  - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
+- `docs`
+  - [#2337](https://github.com/wix-incubator/rich-content/pull/2337) docs removed from workspaces (build failure fix)
+### :bug: Bug Fix
+- `image viewer`
+  - [#2398](https://github.com/wix-incubator/rich-content/pull/2398)  Avoid exception when image src missing
+- `editor`
+  - [#2385](https://github.com/wix-incubator/rich-content/pull/2385) toolbar shortcuts in mac & windows
+## 8.30.3 (April 22, 2021)
+### :bug: Bug Fix
+- `image`
+  - [#2390](https://github.com/wix-incubator/rich-content/pull/2390) click on image caption doesnt open expand mode
+- `ricos-content`
+  - [#2393](https://github.com/wix-incubator/rich-content/pull/2393) draft converters handle undefined values in content
+## 8.30.2 (April 22, 2021)
 ### :bug: Bug Fix
 - `editor`
   - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block
-
-</details>
-<hr/>
+- `external-toolbar`
+  - [#2391](https://github.com/wix-incubator/rich-content/pull/2391) add events and bookings to vertical embed
 
 ## 8.30.1 (April 21, 2021)
 ### :bug: Bug Fix
