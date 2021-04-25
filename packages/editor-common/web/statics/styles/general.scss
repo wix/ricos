@@ -49,6 +49,17 @@
   display: none;
 }
 
+.addNewLine {
+  height: 8px;
+  width: 100%;
+  z-index: 1;
+  // transition: height 1s;
+  &:hover {
+    height: 28px;
+    cursor: pointer;
+  }
+}
+
 .pluginContainer,
 .pluginContainerReadOnly {
   position: relative;

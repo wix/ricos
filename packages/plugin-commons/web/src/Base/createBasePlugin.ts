@@ -10,6 +10,8 @@ import {
   setEntityData,
   getToolbarTheme,
   TOOLBARS,
+  createNewLineBelow,
+  createNewLineAbove,
 } from 'wix-rich-content-editor-common';
 import { ContentBlock, EditorProps } from 'draft-js';
 import {
@@ -223,6 +225,16 @@ const createBasePlugin = (
   const PluginComponent =
     spoilerWrapper && config.component ? spoilerWrapper(config.component) : config.component;
 
+  const addNewLineBelow = () => {
+    const editorState = getEditorState();
+    const newState = createNewLineBelow(editorState);
+    commonPubsub.get('setEditorState')?.(newState);
+  };
+  const addNewLineAbove = () => {
+    const editorState = getEditorState();
+    const newState = createNewLineAbove(editorState);
+    commonPubsub.get('setEditorState')?.(newState);
+  };
   const BaseComponent: ComponentType | undefined =
     PluginComponent &&
     createBaseComponent({
@@ -252,6 +264,8 @@ const createBasePlugin = (
       noPointerEventsOnFocus,
       withHorizontalScroll,
       disableKeyboardEvents,
+      addNewLineBelow,
+      addNewLineAbove,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =
