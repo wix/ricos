@@ -24,10 +24,6 @@ export class Tab extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  componentDidMount() {
-    this.children = React.Children.toArray(this.props.children).filter(Boolean);
-  }
-
   render = () =>
     this.props.selected && (
       <div
@@ -37,7 +33,7 @@ export class Tab extends Component {
         id={`${this.props.value}_panel`}
         className={this.styles.tabs_panel}
       >
-        {this.children}
+        {this.props.children}
       </div>
     );
 }
@@ -49,10 +45,6 @@ export class Tabs extends Component {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = { activeTab: props.value };
-  }
-
-  componentDidMount() {
-    this.children = React.Children.toArray(this.props.children).filter(Boolean);
   }
 
   componentWillReceiveProps = nextProps => {
@@ -72,8 +64,8 @@ export class Tabs extends Component {
     );
 
   render() {
-    const { styles } = this;
-    const headers = this.getTabHeaders(this.props.children);
+    const { styles, props } = this;
+    const headers = this.getTabHeaders(props.children);
     return (
       <div role="tablist" className={styles.tabs} aria-orientation="horizontal">
         <div className={styles.tabs_headers}>

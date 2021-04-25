@@ -230,6 +230,61 @@ export class GallerySettingsModal extends Component {
     }));
   };
 
+  tabsList = () => ({
+    mangeMedia: (
+      <Tab
+        label={this.tabName('manage_media', this.props.t)}
+        value={'manage_media'}
+        theme={this.props.theme}
+      >
+        <ManageMediaSection
+          data={this.props.pubsub.get('componentData')}
+          store={this.props.pubsub.store}
+          helpers={this.props.helpers}
+          theme={this.props.theme}
+          t={this.props.t}
+          anchorTarget={this.props.anchorTarget}
+          relValue={this.props.relValue}
+          uiSettings={this.props.uiSettings}
+          accept={this.props.accept}
+        />
+      </Tab>
+    ),
+    advancedSettings: (
+      <Tab
+        label={this.tabName('advanced_settings', this.props.t)}
+        value={'advanced_settings'}
+        theme={this.props.theme}
+      >
+        <AdvancedSettingsSection
+          theme={this.props.theme}
+          data={this.props.pubsub.get('componentData')}
+          store={this.props.pubsub.store}
+          helpers={this.props.helpers}
+          t={this.props.t}
+        />
+      </Tab>
+    ),
+    settings: (
+      <Tab
+        label={this.tabName('settings', this.props.t)}
+        value={'settings'}
+        theme={this.props.theme}
+      >
+        {this.toggleData.map(toggle => this.renderToggle(toggle))}
+      </Tab>
+    ),
+  });
+
+  renderTabs = () => ({
+    desktop: [
+      this.tabsList().mangeMedia,
+      this.tabsList().advancedSettings,
+      this.tabsList().settings,
+    ],
+    mobile: [this.tabsList().mangeMedia, this.tabsList().settings],
+  });
+
   renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook }) => (
     <LabeledToggle
       key={toggleKey}
@@ -258,19 +313,8 @@ export class GallerySettingsModal extends Component {
 
   render() {
     const styles = this.styles;
-    const {
-      pubsub,
-      helpers,
-      t,
-      isMobile,
-      anchorTarget,
-      relValue,
-      uiSettings,
-      languageDir,
-      accept,
-    } = this.props;
+    const { t, isMobile, languageDir } = this.props;
     const { activeTab } = this.state;
-    const componentData = pubsub.get('componentData');
 
     return (
       <div data-hook="settings" dir={languageDir}>
@@ -294,41 +338,9 @@ export class GallerySettingsModal extends Component {
           )}
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
-              <Tab
-                label={this.tabName('manage_media', t)}
-                value={'manage_media'}
-                theme={this.props.theme}
-              >
-                <ManageMediaSection
-                  data={componentData}
-                  store={pubsub.store}
-                  helpers={helpers}
-                  theme={this.props.theme}
-                  t={t}
-                  anchorTarget={anchorTarget}
-                  relValue={relValue}
-                  uiSettings={uiSettings}
-                  accept={accept}
-                />
-              </Tab>
-              {!isMobile && (
-                <Tab
-                  label={this.tabName('advanced_settings', t)}
-                  value={'advanced_settings'}
-                  theme={this.props.theme}
-                >
-                  <AdvancedSettingsSection
-                    theme={this.props.theme}
-                    data={componentData}
-                    store={pubsub.store}
-                    helpers={helpers}
-                    t={t}
-                  />
-                </Tab>
-              )}
-              <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
-                {this.toggleData.map(toggle => this.renderToggle(toggle))}
-              </Tab>
+              {isMobile
+                ? this.renderTabs().mobile.map(tab => tab)
+                : this.renderTabs().desktop.map(tab => tab)}
             </Tabs>
           </div>
           {!isMobile && (
