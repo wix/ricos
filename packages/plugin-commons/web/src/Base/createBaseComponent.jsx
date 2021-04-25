@@ -73,9 +73,20 @@ const createBaseComponent = ({
 
     isInViewport = boundingRect => {
       const { top, left, bottom, right } = boundingRect;
-      const height = window.innerHeight || document.documentElement.clientHeight;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
       const width = window.innerWidth || document.documentElement.clientWidth;
-      return top >= 0 && left >= 0 && bottom <= height && right <= width;
+      return top >= 0 && left >= 0 && bottom <= windowHeight && right <= width;
+    };
+
+    scrollIntoViewIfNeeded = blockKey => {
+      const boundingRect = this.getBoundingClientRectAsObject(this.containerRef.current);
+      const focusedBlock = pubsub.get('focusedBlock');
+      if (boundingRect.height === 0) {
+        // Required in order to wait for images to load their source
+        setTimeout(() => this.scrollIntoViewIfNeeded(blockKey), 100);
+      } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
+        this.containerRef.current.scrollIntoView();
+      }
     };
 
     onResizeElement = blockKey => element => {
@@ -83,11 +94,8 @@ const createBaseComponent = ({
       const boundingRect = this.getBoundingClientRectAsObject(elementTarget);
       const focusedBlock = pubsub.get('focusedBlock');
       const shouldResize = boundingRect.width !== 0 && focusedBlock === blockKey;
-      const shouldScroll = focusedBlock === blockKey && !this.isInViewport(boundingRect);
 
-      if (shouldScroll) {
-        elementTarget.scrollIntoView();
-      } else if (shouldResize) {
+      if (shouldResize) {
         const batchUpdates = {};
         batchUpdates.boundingRect = boundingRect;
         batchUpdates.focusedBlock = focusedBlock;
@@ -136,6 +144,7 @@ const createBaseComponent = ({
         this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement(blockKey), 40));
         this.resizeObserver?.observe(this.containerRef.current);
       }
+      this.scrollIntoViewIfNeeded(blockKey);
     }
 
     componentDidUpdate() {
