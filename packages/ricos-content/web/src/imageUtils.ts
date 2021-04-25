@@ -122,4 +122,11 @@ const getImageSrc = (
   return src;
 };
 
-export { getImageSrc, DEFAULT as WIX_MEDIA_DEFAULT };
+const isPNG = (src?: ComponentData['src']): boolean => {
+  if (!src || !src.file_name) {
+    return false;
+  }
+  return /(.*)\.(png)$/.test(src.file_name);
+};
+
+export { isPNG, getImageSrc, DEFAULT as WIX_MEDIA_DEFAULT };
