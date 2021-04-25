@@ -7,6 +7,7 @@ import {
   validate,
   isSSR,
   getImageSrc,
+  isPNG,
   WIX_MEDIA_DEFAULT,
   anchorScroll,
   addAnchorTagToUrl,
@@ -159,11 +160,14 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
 
     let requiredWidth, requiredHeight;
     let imageSrcOpts = {};
-    const isPNG = /(.*)\.(png)$/.test(src.file_name);
     /**
         PNG files can't reduce quality via Wix services and we want to avoid downloading a big png image that will affect performance.
       **/
-    if (!this.props.isMobile && !isPNG && this.context.experiments?.useQualityPreload?.enabled) {
+    if (
+      !this.props.isMobile &&
+      !isPNG(src) &&
+      this.context.experiments?.useQualityPreload?.enabled
+    ) {
       const {
         componentData: {
           config: { alignment, width },
@@ -175,6 +179,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
         ...(usePredefinedWidth && { requiredWidth: 300 }),
       };
     }
+
     imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, imageSrcOpts);
     if (seoMode) {
       requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
