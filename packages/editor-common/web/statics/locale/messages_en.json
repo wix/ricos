@@ -128,7 +128,7 @@
   "VideoUploadModal_CustomVideoHeader": "Or, upload a video from your computer",
   "VideoUploadModal_CustomVideoClickText": "Upload Video",
   "VideoPlugin_InsertButton_Tooltip": "Add a video",
-  "VideoPlugin_Settings_VideoCanBeDownloaded_Label": "Show option to download",
+  "VideoPlugin_Settings_VideoCanBeDownloaded_Label": "Download option",
   "VideoPlugin_Settings_VideoCanBeDownloaded_Tooltip": "Your readers will be able to download your video.",
   "VideoPlugin_Settings_Header": "Video",
   "VideoUploadModal_Header": "Paste a URL from YouTube, Vimeo or Facebook",
