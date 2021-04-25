@@ -24,6 +24,8 @@
 ### :bug: Bug Fix
 - `image viewer`
   - [#2398](https://github.com/wix-incubator/rich-content/pull/2398)  Avoid exception when image src missing
+- `editor`
+  - [#2385](https://github.com/wix-incubator/rich-content/pull/2385) toolbar shortcuts in mac & windows
 </details>
 <hr/>
 
