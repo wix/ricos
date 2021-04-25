@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.30.4 (April 25, 2021)
 ### :house: Internal
 - `fullscreen`
   - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
@@ -26,9 +29,6 @@
   - [#2398](https://github.com/wix-incubator/rich-content/pull/2398)  Avoid exception when image src missing
 - `editor`
   - [#2385](https://github.com/wix-incubator/rich-content/pull/2385) toolbar shortcuts in mac & windows
-</details>
-<hr/>
-
 ## 8.30.3 (April 22, 2021)
 ### :bug: Bug Fix
 - `image`
