@@ -1,6 +1,6 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
 import { cloneDeep, isEmpty } from 'lodash';
-import { DraftContent, RicosContentBlock } from '../../..';
+import { DraftContent, RicosContentBlock } from '../../../types';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { genKey } from '../../generateRandomKey';
@@ -8,11 +8,11 @@ import { getTextNodes } from './getTextNodes';
 import { getEntity, getTextStyle } from './getRicosEntityData';
 import { createParagraphNode, initializeMetadata } from '../../nodeUtils';
 
-export const ensureRicosContent = (content: RichContent | DraftContent) =>
+export const ensureRicosContent = (content: RichContent | DraftContent): RichContent =>
   'blocks' in content ? fromDraft(content) : content;
 
 export const fromDraft = (draftJSON: DraftContent): RichContent => {
-  const { blocks, entityMap, VERSION: version } = cloneDeep(draftJSON);
+  const { blocks, entityMap } = cloneDeep(draftJSON);
   const nodes: Node[] = [];
 
   const parseBlocks = (index = 0) => {
@@ -51,8 +51,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
           parseBlocks(index + 1);
           break;
         default:
-          console.log(`ERROR! Unknown block type "${block.type}"!`);
-          process.exit(1);
+          throw Error(`ERROR! Unknown block type "${block.type}"!`);
       }
     }
   };
@@ -85,8 +84,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
       if (Object.keys(HeaderLevel).includes(blockType)) {
         return HeaderLevel[blockType];
       }
-      console.log(`ERROR! Unknown header level "${blockType}"!`);
-      process.exit(1);
+      throw Error(`ERROR! Unknown header level "${blockType}"!`);
     };
     return {
       key: block.key,
@@ -167,8 +165,8 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
 
   const content: RichContent = {
     nodes,
-    metadata: initializeMetadata(version),
+    metadata: initializeMetadata(),
   };
 
-  return RichContent.toJSON(RichContent.fromJSON(content)) as RichContent; // using toJSON to remove undefined fields
+  return RichContent.fromJSON(content);
 };

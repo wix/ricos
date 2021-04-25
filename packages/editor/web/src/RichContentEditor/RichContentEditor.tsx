@@ -711,6 +711,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return this.createPluginFromBlobs(blobs);
   };
 
+  isPluginInstalled = (pluginType: string) =>
+    this.plugins.some(plugin => plugin.blockType === pluginType);
+
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       const handled = this.props.handlePastedText(text, html, editorState);
@@ -721,6 +724,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
     const { config, isInnerRCE, maxTextLength } = this.props;
     const resultEditorState = handlePastedText({
+      isPluginInstalled: this.isPluginInstalled,
       text,
       html,
       editorState,
@@ -764,6 +768,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   customCommands = [
+    {
+      command: COMMANDS.FOCUS_TOOLBAR,
+      modifiers: [MODIFIERS.ALT],
+      key: 't',
+    },
     {
       command: COMMANDS.FOCUS_TOOLBAR,
       modifiers: [MODIFIERS.CTRL],

@@ -69,19 +69,16 @@ function publishPackages() {
         path: pkg.location,
       })
     );
-    try {
-      packages.forEach(({ name, version }) => {
-        // eslint-disable-next-line max-len
-        const cmd = `curl -X POST -d 'packageName=${name}&publishedVersion=${version}' https://www.wix.com/_serverless/loki-update-service/trigger-loki`;
-        const result = require('child_process')
-          .execSync(cmd)
-          .toString();
-        console.log({ cmd, result });
-      });
-    } catch (e) {
-      console.warn('failed loki trigger with for package ' + name);
-      console.warn(e);
-    }
+    //   require('axios')
+    //     .post('https://www.wix.com/_serverless/loki-update-service2/trigger-loki', {
+    //       packages,
+    //     })
+    //     .then(res => {
+    //       console.log(JSON.stringify(res.data, null, 2));
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
   });
 }
 

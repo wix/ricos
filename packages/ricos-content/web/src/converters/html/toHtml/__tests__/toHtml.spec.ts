@@ -1,6 +1,6 @@
 import { toHtml } from '../toHtml';
 import richTextContent from '../../fromHtml/__tests__/richTextContent.json';
-import complexContent from '../../../draft/fromDraft/migratedFixtures/migration-content.json';
+import complexContent from '../../../../../statics/json/migratedFixtures/migration-content.json';
 import { readFileSync } from 'fs';
 import { RichContent } from 'ricos-schema';
 
@@ -9,11 +9,11 @@ const complexContentHtml = readFileSync(`${__dirname}/complexContentHtml.html`, 
 
 describe('convert to html', () => {
   it('should convert basic content', () => {
-    const html = toHtml(richTextContent as RichContent);
+    const html = toHtml(RichContent.fromJSON(richTextContent));
     expect(html).toEqual(htmlContent);
   });
   it('should convert complex content', () => {
-    const html = toHtml(complexContent as RichContent);
+    const html = toHtml(RichContent.fromJSON(complexContent));
     expect(html).toEqual(complexContentHtml);
   });
 });
