@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { Separator, getBlockEntityType } from 'wix-rich-content-editor-common';
+import { Separator, getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -41,6 +41,7 @@ export default function createAtomicPluginToolbar({
   return class BaseToolbar extends Component {
     static propTypes = {
       hide: PropTypes.bool,
+      removeToolbarFocus: PropTypes.func,
     };
 
     constructor(props) {
@@ -193,14 +194,6 @@ export default function createAtomicPluginToolbar({
         });
       }
     };
-
-    scrollToolbar(event, leftDirection) {
-      event.preventDefault();
-      const { clientWidth, scrollWidth } = this.scrollContainer;
-      this.scrollContainer.scrollLeft = leftDirection
-        ? 0
-        : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
-    }
 
     /*eslint-disable complexity*/
     PluginToolbarButton = ({
@@ -411,6 +404,12 @@ export default function createAtomicPluginToolbar({
       ) : null;
     }
 
+    onKeyDown = e => {
+      if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+        this.props.removeToolbarFocus?.();
+      }
+    };
+
     onClick = e => {
       e.preventDefault();
     };
@@ -444,6 +443,9 @@ export default function createAtomicPluginToolbar({
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
           onClick: this.onClick,
+          onKeyDown: this.onKeyDown,
+          ref: this.handleToolbarRef,
+          tabIndex: '0',
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';

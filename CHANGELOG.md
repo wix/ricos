@@ -16,19 +16,106 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-- `general`
-  - [#2349](https://github.com/wix-incubator/rich-content/pull/2349) inline plugin popups in static formatting toolbar
-
-### :house: Internal
-
-- `editor-common`
-  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
-
 </details>
 <hr/>
 
+## 8.30.4 (April 25, 2021)
+
+### :house: Internal
+
+- `fullscreen`
+  - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
+- `docs`
+  - [#2337](https://github.com/wix-incubator/rich-content/pull/2337) docs removed from workspaces (build failure fix)
+
+### :bug: Bug Fix
+
+- `image viewer`
+  - [#2398](https://github.com/wix-incubator/rich-content/pull/2398) Avoid exception when image src missing
+- `editor`
+  - [#2385](https://github.com/wix-incubator/rich-content/pull/2385) toolbar shortcuts in mac & windows
+
+## 8.30.3 (April 22, 2021)
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2390](https://github.com/wix-incubator/rich-content/pull/2390) click on image caption doesnt open expand mode
+- `ricos-content`
+  - [#2393](https://github.com/wix-incubator/rich-content/pull/2393) draft converters handle undefined values in content
+
+## 8.30.2 (April 22, 2021)
+
+### :bug: Bug Fix
+
+- `editor`
+  - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block
+- `external-toolbar`
+  - [#2391](https://github.com/wix-incubator/rich-content/pull/2391) add events and bookings to vertical embed
+
+## 8.30.1 (April 21, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-schema`
+  - [#e728b63](https://github.com/wix/ricos/commit/e728b63) add missing import for wix proto validations
+
+## 8.30.0 (April 20, 2021)
+
+### :rocket: New Feature
+
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+- `ricos-content`
+  - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
+- `button`
+  - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
+
+### :nail_care: Polish
+
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
+
+### :bug: Bug Fix
+
+- `editor`
+  - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
+  - [#2386](https://github.com/wix-incubator/rich-content/pull/2386) clear unsupported plugins from pasted content
+  - [#2387](https://github.com/wix-incubator/rich-content/pull/2387) editor commands allows any data for draft types
+- `link`
+  - [#2384](https://github.com/wix-incubator/rich-content/pull/2384) anchor - fix preview config (crash on componentDidMount)
+- `gallery`
+  - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
+
+### :nail_care: Polish
+
+- `schema`
+  - [#2383](https://github.com/wix-incubator/rich-content/pull/2383) fix link schema
+
+## 8.29.12 (April 13, 2021)
+
+### :house: Internal
+
+- `editor`
+  - [#2356](https://github.com/wix/ricos/pull/2356) toolbar navigation with keyboard
+
+## 8.29.8 (April 13, 2021)
+
+### :house: Internal
+
+- `scripts`
+  - trigger loki in npm publish script
+
+## 8.29.7 (April 13, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
+
 ## 8.29.6 (April 13, 2021)
+
+### :bug: Bug Fix
 
 - `schema`
   - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
@@ -37,8 +124,6 @@
 
 ### :bug: Bug Fix
 
-- `spoiler`
-  - [#2363](https://github.com/wix-incubator/rich-content/pull/2363) remove spoiler button from inline toolbar and add it to settings modal
 - `image`
   - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
 - `editor`

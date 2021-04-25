@@ -5,11 +5,10 @@ import {
   Node,
   Decoration,
   Metadata,
-  Timestamp,
   Decoration_Type,
   HeadingData,
+  LATEST_VERSION,
 } from 'ricos-schema';
-import { Version } from '..';
 import { genKey } from './generateRandomKey';
 
 export const createNode = (type: Node_Type, nodes: Node[] = []): Node => ({
@@ -47,16 +46,8 @@ export const createDecoration = (
   data: Omit<Decoration, 'type'> = {}
 ): Decoration => ({ type, ...data });
 
-export const createTimestamp = (): Timestamp => {
-  const timeMS = Date.now();
-  return {
-    seconds: Math.floor(timeMS / 1000),
-    nanos: (timeMS % 1000) * 1e6,
-  };
-};
-
-export const initializeMetadata = (version?: string): Metadata => ({
-  createdVersion: version || Version.currentVersion,
-  updatedVersion: version || Version.currentVersion,
-  updatedDate: createTimestamp(),
+export const initializeMetadata = (version?: number): Metadata => ({
+  version: version || LATEST_VERSION,
+  createdTimestamp: new Date(),
+  updatedTimestamp: new Date(),
 });

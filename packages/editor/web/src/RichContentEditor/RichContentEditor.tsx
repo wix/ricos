@@ -14,6 +14,7 @@ import handlePastedText from './handlePastedText';
 import blockStyleFn from './blockStyleFn';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
+import { ContentBlock } from '@wix/draft-js';
 import {
   EditorState,
   TOOLBARS,
@@ -27,6 +28,7 @@ import {
   pluginsUndo,
   redo,
   SelectionState,
+  setSelectionToBlock,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps, DraftHandleValue } from 'draft-js';
@@ -198,6 +200,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   editor!: Editor & { setMode: (mode: 'render' | 'edit') => void };
 
   editorWrapper!: Element;
+
+  lastFocusedAtomicPlugin?: ContentBlock;
 
   copySource!: { unregister(): void };
 
@@ -648,6 +652,28 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  focusOnToolbar = () => {
+    const pluginToolbar = document.querySelectorAll(`[data-hook*=PluginToolbar]`)[0] as HTMLElement;
+    const formattingToolbar = document.querySelectorAll(
+      `[data-hook=inlineToolbar]`
+    )[0] as HTMLElement;
+    if (pluginToolbar && pluginToolbar.dataset.hook !== 'linkPluginToolbar') {
+      const editorState = this.getEditorState();
+      const focusedAtomicPluginKey = editorState.getSelection().getFocusKey();
+      this.lastFocusedAtomicPlugin = editorState
+        .getCurrentContent()
+        .getBlockForKey(focusedAtomicPluginKey);
+    }
+    const toolbar = pluginToolbar || formattingToolbar;
+    toolbar && toolbar.focus();
+    setTimeout(() => {
+      // fix bug - selection of text with atomic blocks
+      if (toolbar !== document.activeElement) {
+        toolbar && toolbar.focus();
+      }
+    });
+  };
+
   getHeadings = config => {
     const { [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings } = config;
 
@@ -685,6 +711,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return this.createPluginFromBlobs(blobs);
   };
 
+  isPluginInstalled = (pluginType: string) =>
+    this.plugins.some(plugin => plugin.blockType === pluginType);
+
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       const handled = this.props.handlePastedText(text, html, editorState);
@@ -695,6 +724,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
     const { config, isInnerRCE, maxTextLength } = this.props;
     const resultEditorState = handlePastedText({
+      isPluginInstalled: this.isPluginInstalled,
       text,
       html,
       editorState,
@@ -739,6 +769,16 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   customCommands = [
     {
+      command: COMMANDS.FOCUS_TOOLBAR,
+      modifiers: [MODIFIERS.ALT],
+      key: 't',
+    },
+    {
+      command: COMMANDS.FOCUS_TOOLBAR,
+      modifiers: [MODIFIERS.CTRL],
+      key: 't',
+    },
+    {
       command: COMMANDS.TAB,
       modifiers: [],
       key: 'Tab',
@@ -777,6 +817,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   ];
 
   customCommandHandlers = {
+    focusToolbar: this.focusOnToolbar,
     tab: this.handleTabCommand,
     shiftTab: this.handleTabCommand,
     esc: this.handleEscCommand,
@@ -830,6 +871,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
+  removeToolbarFocus = () => {
+    this.editor.focus();
+    if (this.lastFocusedAtomicPlugin) {
+      setSelectionToBlock(this.getEditorState(), this.setEditorState, this.lastFocusedAtomicPlugin);
+      this.lastFocusedAtomicPlugin = undefined;
+    }
+  };
+
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
     const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
@@ -850,6 +899,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         }
         return (
           <Toolbar
+            removeToolbarFocus={this.removeToolbarFocus}
             key={`k${index}`}
             hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
             forceDisabled={
