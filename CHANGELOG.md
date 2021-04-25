@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `gallery`
+  - [#2402](https://github.com/wix-incubator/rich-content/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
+  
 </details>
 <hr/>
 
