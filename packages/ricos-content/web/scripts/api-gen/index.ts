@@ -20,14 +20,14 @@ const log = (label: string) => <T>(data: T): T => {
 };
 
 async function run() {
-  const RICOS_TYPES_DIR_GLOB = `${__dirname}/../../../../ricos-schema/web/dist/types/rich_content/*.d.ts`;
-  const SAFE_TYPES_PATH = `${__dirname}/../../statics/types.d.ts`;
+  const RICOS_TYPES_DIR_GLOB = `${__dirname}/../../../../ricos-schema/web/dist/types/rich_content/v1/*.d.ts`;
+  const SAFE_TYPES_PATH = `${__dirname}/../../statics/v1.d.ts`;
 
   const generateRto = () =>
     TE.tryCatch(
       () =>
         generateRtoModules({
-          modulePaths: ['./types'],
+          modulePaths: ['./v1'],
           readFiles: {
             sourceDir: `${__dirname}/../../statics`,
           },

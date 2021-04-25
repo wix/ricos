@@ -62,6 +62,7 @@ export const purifyTypes = flow(
   removeConvertors,
   fixEmptyTypes,
   toLines,
+  A.filter(linesWith('const ')),
   compact,
   mergeLines
 );
