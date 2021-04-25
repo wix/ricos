@@ -423,7 +423,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.video),
       ...usePluginsConfig({
-        [pluginsType.video]: {
+        video: {
           exposeButtons: ['youTube'],
         },
       }),

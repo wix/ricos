@@ -1,20 +1,12 @@
 export const pluginsType = {
   linkPreview: 'wix-draft-plugin-link-preview',
   html: 'wix-draft-plugin-html',
-  video: 'wix-rich-content-plugin-video',
+  video: 'wix-draft-plugin-video',
 };
 
 export const defaultConfig = {
   plugins: ['partialPreset'],
   toolbarConfig: {},
-  pluginsConfig: {
-    [pluginsType.html]: {
-      exposeButtons: ['html'],
-    },
-    [pluginsType.video]: {
-      exposeButtons: ['video', 'soundCloud'],
-    },
-  },
 };
 
 export const getPluginMenuConfig = (addPluginMenuConfig = {}) => {
