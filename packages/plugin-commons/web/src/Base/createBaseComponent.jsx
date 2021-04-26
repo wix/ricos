@@ -381,9 +381,9 @@ const createBaseComponent = ({
 
       const componentWithEmptyBlocksButtons = (
         <>
-          <div className={this.styles.addNewLine} onClick={addNewLineAbove} />
+          {hasFocus && <div className={this.styles.addNewLine} onClick={addNewLineAbove} />}
           {component}
-          <div className={this.styles.addNewLine} onClick={addNewLineBelow} />
+          {hasFocus && <div className={this.styles.addNewLine} onClick={addNewLineBelow} />}
         </>
       );
 

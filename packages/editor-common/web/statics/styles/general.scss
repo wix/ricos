@@ -53,9 +53,9 @@
   height: 8px;
   width: 100%;
   z-index: 1;
-  // transition: height 1s;
+  background-color: $action-color;
+  opacity: 0.15;
   &:hover {
-    height: 28px;
     cursor: pointer;
   }
 }
