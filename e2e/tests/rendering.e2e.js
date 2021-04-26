@@ -1,30 +1,18 @@
 /*global cy Cypress*/
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
 import { testSeoFixtures, testFixtures } from './testFixtures';
 
-const eyesOpener = testName => {
+const eyesOpener = (testName, browser = DEFAULT_DESKTOP_BROWSERS) => {
   cy.eyesOpen({
     appName: 'Rendering',
     testName,
-    browser: DEFAULT_DESKTOP_BROWSERS,
+    browser,
   });
 };
 
 describe('editor rendering', () => {
   before(function() {
     if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
-  });
-
-  context('desktop', () => {
-    before(function() {
-      eyesOpener(this.test.parent.title);
-    });
-
-    beforeEach(() => cy.switchToDesktop());
-
-    after(() => cy.eyesClose());
-
-    testFixtures();
   });
 
   context('seo', () => {
@@ -34,11 +22,48 @@ describe('editor rendering', () => {
 
     beforeEach(() => {
       cy.switchToDesktop();
-      cy.switchToSeoMode();
+      cy.switchOnSeoMode();
     });
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
+
+    afterEach(() => {
+      cy.switchOffSeoMode();
+    });
 
     testSeoFixtures();
+  });
+
+  context('desktop', () => {
+    before(function() {
+      eyesOpener(this.test.parent.title);
+    });
+
+    beforeEach(() => {
+      cy.switchToDesktop();
+    });
+
+    after(() => {
+      cy.eyesClose();
+    });
+
+    testFixtures();
+  });
+
+  context('firefoxDesktop', () => {
+    before(function() {
+      eyesOpener(this.test.parent.title, FIREFOX_BROWSER);
+    });
+
+    beforeEach(() => {
+      cy.switchToDesktop();
+    });
+
+    after(() => {
+      cy.eyesClose();
+    });
+    testFixtures();
   });
 });

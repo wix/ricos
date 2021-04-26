@@ -8,6 +8,7 @@ export default class TextSearchInput extends Component {
     this.input.focus();
     this.input.setSelectionRange(0, this.input.value.length);
   }
+
   onChange = e => this.props.onChange(e.target.value);
 
   onCloseRequested = () => {
@@ -17,6 +18,11 @@ export default class TextSearchInput extends Component {
   handleKeyPress = e => {
     if (e.charCode === KEYS_CHARCODE.ESCAPE) {
       this.onCloseRequested();
+    }
+    if (e.charCode === KEYS_CHARCODE.ENTER) {
+      const elements = Array.from(document.querySelectorAll('button,input'));
+      const searchInputIndex = elements.indexOf(e.target);
+      elements[searchInputIndex + 1]?.click();
     }
   };
 

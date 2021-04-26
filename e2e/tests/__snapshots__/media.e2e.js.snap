@@ -116,6 +116,8 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           "showTitle": true,
           "size": "fullWidth"
         },
+        "disableDownload": false,
+        "disableExpand": false,
         "metadata": {
           "caption": ""
         },
@@ -408,7 +410,7 @@ exports[`plugins > full screen > gallery full screen > expand gallery image on f
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -567,7 +569,7 @@ exports[`plugins > gallery > render gallery plugin #0`] =
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -1288,6 +1290,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
           }
         ],
         "styles": {
+          "allowHover": true,
           "cropOnlyFill": false,
           "cubeImages": true,
           "cubeRatio": 0.35,
@@ -1342,7 +1345,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -1484,7 +1487,7 @@ exports[`plugins > gallery > organize media > allow to manipulate the media item
         "items": [],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -1626,7 +1629,7 @@ exports[`plugins > gallery > media settings > allow to update media content #0`]
         "items": [],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -2218,6 +2221,875 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 0,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 2,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "Override the digital divide with additional clickthroughs from DevOps.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 8,
+          "offset": 0,
+          "style": "BOLD"
+        },
+        {
+          "length": 10,
+          "offset": 91,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 6,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 89,
+          "offset": 0,
+          "style": "{\"FG\":\"#212121\"}"
+        },
+        {
+          "length": 7,
+          "offset": 18,
+          "style": "BOLD"
+        }
+      ],
+      "key": 8,
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 29,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 9,
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 78,
+          "offset": 0,
+          "style": "{\"FG\":\"color4\"}"
+        }
+      ],
+      "key": 10,
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 89,
+          "offset": 0,
+          "style": "{\"FG\":\"#212121\"}"
+        }
+      ],
+      "key": 11,
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "ordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 12,
+      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 18,
+          "offset": 9,
+          "style": "{\"BG\":\"color4\"}"
+        }
+      ],
+      "key": 13,
+      "text": "Override the digital divide with additional clickthroughs from DevOps.",
+      "type": "unordered-list-item"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 14,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > full screen > innerRCE images full screen > expand image on full screen #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "colsMinWidth": [
+            120,
+            120
+          ],
+          "colsWidth": [
+            10,
+            10
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      },
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [
+                          {
+                            "key": 0,
+                            "length": 1,
+                            "offset": 0
+                          }
+                        ],
+                        "inlineStyleRanges": [],
+                        "key": 1,
+                        "text": " ",
+                        "type": "atomic"
+                      },
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 2,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "disableExpand": false,
+                            "showDescription": true,
+                            "showTitle": true,
+                            "size": "inline",
+                            "width": 143
+                          },
+                          "src": {
+                            "file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
+                            "height": 5600,
+                            "id": "2d3b675ea857dc41158bad3b28300824",
+                            "original_file_name": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg",
+                            "width": 3737
+                          }
+                        },
+                        "mutability": "IMMUTABLE",
+                        "type": "wix-draft-plugin-image"
+                      }
+                    }
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      },
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [
+                          {
+                            "key": 0,
+                            "length": 1,
+                            "offset": 0
+                          }
+                        ],
+                        "inlineStyleRanges": [],
+                        "key": 1,
+                        "text": " ",
+                        "type": "atomic"
+                      },
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 2,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "disableExpand": false,
+                            "showDescription": true,
+                            "showTitle": true,
+                            "size": "inline",
+                            "width": 156
+                          },
+                          "src": {
+                            "file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
+                            "height": 1280,
+                            "id": "bdf64d603f3a5a822d8197f97e4a1dd0",
+                            "original_file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
+                            "width": 1920
+                          }
+                        },
+                        "mutability": "IMMUTABLE",
+                        "type": "wix-draft-plugin-image"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            47,
+            47
+          ]
+        },
+        "type": "wix-rich-content-plugin-table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-table"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOnlyOne": false,
+          "expandState": "first_expanded"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [
+                    {
+                      "key": 0,
+                      "length": 1,
+                      "offset": 0
+                    }
+                  ],
+                  "inlineStyleRanges": [],
+                  "key": 1,
+                  "text": " ",
+                  "type": "atomic"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 2,
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "data": {
+                    "config": {
+                      "alignment": "center",
+                      "disableExpand": false,
+                      "showDescription": true,
+                      "showTitle": true,
+                      "size": "inline",
+                      "width": 301
+                    },
+                    "src": {
+                      "file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+                      "height": 5260,
+                      "id": "2d6bee6fe2a726f213599508722bcb27",
+                      "original_file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+                      "width": 3945
+                    }
+                  },
+                  "mutability": "IMMUTABLE",
+                  "type": "wix-draft-plugin-image"
+                }
+              }
+            },
+            "key": "fswiqtrr4",
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > full screen > innerRCE images full screen > expand inner-rce images on full screen #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "colsMinWidth": [
+            120,
+            120
+          ],
+          "colsWidth": [
+            10,
+            10
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "​",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      },
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [
+                          {
+                            "key": 0,
+                            "length": 1,
+                            "offset": 0
+                          }
+                        ],
+                        "inlineStyleRanges": [],
+                        "key": 1,
+                        "text": " ",
+                        "type": "atomic"
+                      },
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 2,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "disableExpand": false,
+                            "showDescription": true,
+                            "showTitle": true,
+                            "size": "inline",
+                            "width": 156
+                          },
+                          "src": {
+                            "file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
+                            "height": 1280,
+                            "id": "bdf64d603f3a5a822d8197f97e4a1dd0",
+                            "original_file_name": "8bb438_8ba11077006942a2b685027502fb91c8.jpg",
+                            "width": 1920
+                          }
+                        },
+                        "mutability": "IMMUTABLE",
+                        "type": "wix-draft-plugin-image"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            47,
+            47
+          ]
+        },
+        "type": "wix-rich-content-plugin-table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-table"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOnlyOne": false,
+          "expandState": "first_expanded"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [
+                    {
+                      "key": 0,
+                      "length": 1,
+                      "offset": 0
+                    }
+                  ],
+                  "inlineStyleRanges": [],
+                  "key": 1,
+                  "text": " ",
+                  "type": "atomic"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 2,
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "data": {
+                    "config": {
+                      "alignment": "center",
+                      "disableExpand": false,
+                      "showDescription": true,
+                      "showTitle": true,
+                      "size": "inline",
+                      "width": 301
+                    },
+                    "src": {
+                      "file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+                      "height": 5260,
+                      "id": "2d6bee6fe2a726f213599508722bcb27",
+                      "original_file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+                      "width": 3945
+                    }
+                  },
+                  "mutability": "IMMUTABLE",
+                  "type": "wix-draft-plugin-image"
+                }
+              }
+            },
+            "key": "fswiqtrr4",
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": 0,
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > video > should toggle download option #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "disableDownload": true,
+        "isCustomVideo": true,
+        "src": {
+          "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
+          "thumbnail": {
+            "height": 1080,
+            "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
+            "width": 1920
+          }
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > full screen > image full screen in hebrew > expand image on full screen in hebrew #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
       "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
       "type": "unstyled"
     },
@@ -2227,17 +3099,23 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 1,
-      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "text": "",
       "type": "unstyled"
     },
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [],
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-      "type": "unstyled"
+      "text": " ",
+      "type": "atomic"
     },
     {
       "data": {},
@@ -2245,7 +3123,7 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 3,
-      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "text": "",
       "type": "unstyled"
     },
     {
@@ -2254,7 +3132,7 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 4,
-      "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
+      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
       "type": "unstyled"
     },
     {
@@ -2263,7 +3141,7 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 5,
-      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
+      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
       "type": "unstyled"
     },
     {
@@ -2272,7 +3150,31 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 6,
-      "text": "Override the digital divide with additional clickthroughs from DevOps.",
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 7,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 8,
+      "text": "",
       "type": "unstyled"
     },
     {
@@ -2280,10 +3182,210 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 7,
-      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "key": 9,
+      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
       "type": "unstyled"
     }
   ],
-  "entityMap": {}
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "showDescription": true,
+          "showTitle": true,
+          "size": "small"
+        },
+        "src": {
+          "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
+          "height": 3354,
+          "id": "036c6bf6cef5e4409848eb4eb6f80de1",
+          "original_file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
+          "width": 2898
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
+          "height": 3526,
+          "id": "b12907da5fbb55a31a760e49fb0bb4e6",
+          "original_file_name": "8bb438_83e03311e53a47ce9ba8bda910fdad88.jpg",
+          "width": 5177
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`plugins > gallery > media settings > settings > should disable gallery expand #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "This is a test of the gallery plugin.",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 4,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 5,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 6,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "layout": "small",
+          "size": "content",
+          "spacing": 0
+        },
+        "disableDownload": false,
+        "disableExpand": true,
+        "items": [
+          {
+            "itemId": "65a6266ba23a8a55da3f469157f15237",
+            "metadata": {
+              "height": 1893,
+              "width": 2839
+            },
+            "url": "8bb438_2d651ff17f644d0db766521a18bf888b.jpg"
+          },
+          {
+            "itemId": "ea8ec1609e052b7f196935318316299d",
+            "metadata": {
+              "height": 2829,
+              "width": 4200
+            },
+            "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
+          }
+        ],
+        "styles": {
+          "allowDownload": false,
+          "allowHover": true,
+          "allowSocial": false,
+          "cubeRatio": 1,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "fullscreen": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "gallerySizeType": "px",
+          "galleryThumbnailsAlignment": "bottom",
+          "gotStyleParams": true,
+          "gridStyle": 1,
+          "imageMargin": 20,
+          "isVertical": false,
+          "itemClick": "link",
+          "loveButton": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "numberOfImagesPerRow": 3,
+          "oneRow": false,
+          "showArrows": false,
+          "thumbnailSize": 120,
+          "thumbnailSpacings": 0,
+          "titlePlacement": "SHOW_ON_HOVER"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-gallery"
+    },
+    "1": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
+          "height": 1081,
+          "id": "d052fe7e6db2fd246708f8e56ddc3684",
+          "original_file_name": "8bb438_4a6550d4df364f9890180f52243fb396.jpg",
+          "width": 1621
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
 };

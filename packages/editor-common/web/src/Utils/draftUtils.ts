@@ -10,17 +10,38 @@ import {
   RawDraftEntity,
   EditorChangeType,
 } from '@wix/draft-js';
+import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
-import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
+import {
+  RelValue,
+  AnchorTarget,
+  LINK_TYPE,
+  CUSTOM_LINK_TYPE,
+  TextAlignment,
+  InlineStyle,
+} from 'wix-rich-content-common';
+import { Optional } from 'utility-types';
 
-type LinkData = {
+type LinkDataUrl = {
   url: string;
-  targetBlank: boolean;
-  nofollow: boolean;
-  anchorTarget: string;
-  relValue: string;
+  targetBlank?: boolean;
+  nofollow?: boolean;
+  anchorTarget?: string;
+  relValue?: string;
 };
+
+type LinkData = LinkDataUrl & { anchor?: string };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type CustomLinkData = any;
+
+const isEditorState = value => value?.getCurrentContent && value;
+export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
+
+export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) =>
+  editorState.getCurrentInlineStyle().has(inlineStyle.toUpperCase());
 
 export function createSelection({
   blockKey,
@@ -42,22 +63,52 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkData
+  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
-
-  return insertLink(editorState, selection, {
+  const linkEntityData = createLinkEntityData({
     url,
     targetBlank,
     nofollow,
     anchorTarget,
     relValue,
   });
+
+  return insertLink(editorState, selection, linkEntityData);
+};
+
+export const getEntityData = (editorState: EditorState) => {
+  const selection = getSelection(editorState);
+  const contentState = editorState.getCurrentContent();
+  const blockKey = selection.getStartKey();
+  const block = contentState.getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(selection.getStartOffset());
+  if (entityKey) {
+    const entity = contentState.getEntity(entityKey);
+    const entityData = entity?.getData();
+    return entityData;
+  }
+  return null;
+};
+
+export const insertCustomLink = (editorState: EditorState, customData: CustomLinkData) => {
+  const selection = getSelection(editorState);
+  const editorStateWithLink = isSelectionBelongsToExistingLink(editorState, selection)
+    ? updateLink(editorState, selection, { customData })
+    : insertLink(editorState, selection, { customData });
+
+  const newEditorState = EditorState.forceSelection(
+    editorStateWithLink,
+    selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
+  );
+
+  return newEditorState;
 };
 
 export const updateLinkAtCurrentSelection = (editorState: EditorState, data): EditorState => {
   const selection = getSelection(editorState);
-  const editorStateWithLink = updateLink(selection, editorState, data);
+  const linkEntityData = createLinkEntityData(data);
+  const editorStateWithLink = updateLink(editorState, selection, linkEntityData);
   return EditorState.forceSelection(
     editorStateWithLink,
     selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
@@ -74,7 +125,7 @@ export const getBlockAtStartOfSelection = (editorState: EditorState) => {
 
 export const insertLinkAtCurrentSelection = (
   editorState: EditorState,
-  { text, ...entityData }: { text: string } & LinkData
+  { text, ...entityData }: { text?: string } & LinkDataUrl
 ) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
@@ -91,17 +142,18 @@ export const insertLinkAtCurrentSelection = (
     }) as SelectionState;
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-  const editorStateWithLink = isSelectionBelongsToExsistingLink(newEditorState, selection)
-    ? updateLink(selection, newEditorState, entityData)
-    : insertLink(newEditorState, selection, entityData);
-
-  return EditorState.forceSelection(
-    editorStateWithLink,
-    selection.merge({ anchorOffset: selection.getFocusOffset() }) as SelectionState
-  );
+  const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+  const linkEntityData = createLinkEntityData(entityData);
+  const editorStateWithLink = isExistsLink
+    ? updateLink(newEditorState, selection, linkEntityData)
+    : insertLink(newEditorState, selection, linkEntityData);
+  const editorStateSelection = isExistsLink
+    ? selection.merge({ anchorOffset: selection.getFocusOffset() })
+    : editorStateWithLink.getCurrentContent().getSelectionAfter();
+  return EditorState.forceSelection(editorStateWithLink, editorStateSelection as SelectionState);
 };
 
-function isSelectionBelongsToExsistingLink(editorState: EditorState, selection: SelectionState) {
+function isSelectionBelongsToExistingLink(editorState: EditorState, selection: SelectionState) {
   const startOffset = selection.getStartOffset();
   const endOffset = selection.getEndOffset();
   return getSelectedLinks(editorState).find(({ range }) => {
@@ -109,41 +161,61 @@ function isSelectionBelongsToExsistingLink(editorState: EditorState, selection: 
   });
 }
 
-function updateLink(selection: SelectionState, editorState: EditorState, linkData: LinkData) {
+function updateLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  linkData: LinkData | CustomLinkData
+) {
   const blockKey = selection.getStartKey();
   const block = editorState.getCurrentContent().getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(selection.getStartOffset());
-  return setEntityData(editorState, entityKey, createLinkEntityData(linkData));
+  return setEntityData(editorState, entityKey, linkData);
 }
 
-function preventLinkInlineStyleForNewLine(editorState: EditorState, selection: SelectionState) {
+function preventLinkInlineStyleForFurtherText(editorState: EditorState, selection: SelectionState) {
   const focusOffset = selection.getFocusOffset();
   const selectionForSpace: SelectionState = createSelection({
     blockKey: selection.getAnchorKey(),
     anchorOffset: focusOffset,
     focusOffset,
   });
-  //insert dummy space after link for preventing underline inline style to the new line
+  //insert dummy space after link for preventing underline inline style for further text
   return Modifier.insertText(editorState.getCurrentContent(), selectionForSpace, ' ');
 }
 
-function insertLink(editorState: EditorState, selection: SelectionState, linkData: LinkData) {
+function insertLink(
+  editorState: EditorState,
+  selection: SelectionState,
+  data: LinkData | CustomLinkData
+) {
   const oldSelection = editorState.getSelection();
+  const type = data?.customData ? CUSTOM_LINK_TYPE : LINK_TYPE;
   const editorWithLink = addEntity(editorState, selection, {
-    type: 'LINK',
-    data: createLinkEntityData(linkData),
+    type,
+    data,
     mutability: 'MUTABLE',
   });
-  const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey(); //check weather press enter or space after link
-  const contentState = isNewLine
-    ? preventLinkInlineStyleForNewLine(editorWithLink, selection)
-    : editorWithLink.getCurrentContent();
+  const contentWithLink = editorWithLink.getCurrentContent();
+  const selectedTextLength = contentWithLink.getBlockForKey(oldSelection.getAnchorKey()).getText()
+    .length;
+  const shouldPreventInlineStyleAtCurrentBlock =
+    selectedTextLength - selection.getFocusOffset() === 0;
+  const isNewLine = selection.getAnchorKey() !== oldSelection.getAnchorKey();
+  const preventInlineStyle = shouldPreventInlineStyleAtCurrentBlock || isNewLine;
+
+  const contentState = preventInlineStyle
+    ? preventLinkInlineStyleForFurtherText(editorWithLink, selection)
+    : contentWithLink;
+
+  const selectionAfter = isNewLine
+    ? contentWithLink.getSelectionAfter()
+    : contentState.getSelectionAfter();
 
   return EditorState.push(
     editorState,
     Modifier.applyInlineStyle(contentState, selection, 'UNDERLINE').set(
       'selectionAfter',
-      oldSelection
+      selectionAfter
     ) as ContentState,
     'change-inline-style'
   );
@@ -151,18 +223,23 @@ function insertLink(editorState: EditorState, selection: SelectionState, linkDat
 
 export function createLinkEntityData({
   url,
+  anchor,
   targetBlank,
   nofollow,
   anchorTarget,
   relValue,
 }: LinkData) {
-  const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-  const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
-  return {
-    url,
-    target,
-    rel,
-  };
+  if (url) {
+    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
+    return {
+      url,
+      target,
+      rel,
+    };
+  } else {
+    return { anchor };
+  }
 }
 
 function addEntity(
@@ -212,7 +289,10 @@ export const removeLinksInSelection = (editorState: EditorState) => {
   );
 };
 
-export const getTextAlignment = (editorState: EditorState, defaultAlignment = 'left') => {
+export const getTextAlignment = (
+  editorState: EditorState,
+  defaultAlignment = 'left'
+): TextAlignment => {
   const selection = getSelection(editorState);
   const currentContent = editorState.getCurrentContent();
   const contentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -242,12 +322,37 @@ export const getAnchorBlockData = (editorState: EditorState) => {
   return block.get('data').toJS();
 };
 
+export const blockKeyToEntityKey = (editorState: EditorState, blockKey: string) => {
+  const block = editorState.getCurrentContent().getBlockForKey(blockKey);
+  const entityKey = block.getEntityAt(0);
+  return entityKey;
+};
+
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {
   if (entityKey) {
     const contentState = editorState.getCurrentContent();
-    contentState.replaceEntityData(entityKey, cloneDeep(data));
+    contentState.replaceEntityData(entityKey, { ...data });
   }
   return editorState;
+};
+
+export const setBlockNewEntityData = (
+  editorState: EditorState,
+  blockKey: string,
+  data,
+  type: string
+) => {
+  const targetSelection = new SelectionState({
+    anchorKey: blockKey,
+    anchorOffset: 0,
+    focusKey: blockKey,
+    focusOffset: 1,
+  });
+  return addEntity(editorState, targetSelection, {
+    type,
+    data,
+    mutability: 'IMMUTABLE',
+  });
 };
 
 export const isAtomicBlockFocused = (editorState: EditorState) => {
@@ -279,30 +384,30 @@ export const replaceWithEmptyBlock = (editorState: EditorState, blockKey: string
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
-// export const setSelectionToBlock = (newEditorState, setEditorState, newActiveBlock) => {
-//   const editorState = newEditorState;
-//   const offsetKey = DraftOffsetKey.encode(newActiveBlock.getKey(), 0, 0);
-//   const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
-//   const selection = window.getSelection();
-//   const range = document.createRange();
-//   range.setStart(node, 0);
-//   range.setEnd(node, 0);
-//   selection.removeAllRanges();
-//   selection.addRange(range);
+export const setSelectionToBlock = (newEditorState, setEditorState, newActiveBlock) => {
+  const editorState = newEditorState;
+  const offsetKey = DraftOffsetKey.encode(newActiveBlock.getKey(), 0, 0);
+  const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
+  const selection = window.getSelection();
+  const range = document.createRange();
+  range.setStart(node, 0);
+  range.setEnd(node, 0);
+  selection?.removeAllRanges();
+  selection?.addRange(range);
 
-//   setEditorState(
-//     EditorState.forceSelection(
-//       editorState,
-//       new SelectionState({
-//         anchorKey: newActiveBlock.getKey(),
-//         anchorOffset: 0,
-//         focusKey: newActiveBlock.getKey(),
-//         focusOffset: 0,
-//         isBackward: false,
-//       })
-//     )
-//   );
-// };
+  setEditorState(
+    EditorState.forceSelection(
+      editorState,
+      new SelectionState({
+        anchorKey: newActiveBlock.getKey(),
+        anchorOffset: 0,
+        focusKey: newActiveBlock.getKey(),
+        focusOffset: 0,
+        isBackward: false,
+      })
+    )
+  );
+};
 
 // **************************** this function is for oneApp ****************************
 export const createBlockAndFocus = (editorState: EditorState, data, pluginType: string) => {
@@ -321,13 +426,19 @@ export const createBlockAndFocus = (editorState: EditorState, data, pluginType: 
 export const createBlock = (editorState: EditorState, data, type: string) => {
   const currentEditorState = editorState;
   const contentState = currentEditorState.getCurrentContent();
-  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const contentStateWithEntity = contentState.createEntity(
+    type,
+    'IMMUTABLE',
+    cloneDeepWithoutEditorState(data)
+  );
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
   // when adding atomic block, there is the atomic itself, and then there is a text block with one space,
   // so get the block before the space
-  const newBlock = newEditorState.getCurrentContent().getBlockBefore(recentlyCreatedKey);
+  const newBlock = newEditorState
+    .getCurrentContent()
+    .getBlockBefore(recentlyCreatedKey) as ContentBlock;
   const newSelection = SelectionState.createEmpty(newBlock.getKey());
   return { newBlock, newSelection, newEditorState };
 };
@@ -438,7 +549,7 @@ function removeLink(editorState: EditorState, blockKey: string, [start, end]: [n
 
 export function createEntity(
   editorState: EditorState,
-  { type, mutability = 'MUTABLE', data }: RawDraftEntity
+  { type, mutability = 'MUTABLE', data }: Optional<RawDraftEntity, 'mutability'>
 ) {
   return editorState
     .getCurrentContent()
@@ -462,7 +573,7 @@ function getSelection(editorState: EditorState) {
 }
 
 // TODO: refactor function @Barackos
-export const getEntities = (editorState: EditorState, entityType?: string) => {
+export const getEntities = (editorState: EditorState, entityType?: string): EntityInstance[] => {
   const currentContent = editorState.getCurrentContent();
   const entities: EntityInstance[] = [];
 
@@ -470,12 +581,17 @@ export const getEntities = (editorState: EditorState, entityType?: string) => {
     block?.findEntityRanges(
       character => {
         const char = character.getEntity();
-        const entity = !!char && currentContent.getEntity(char);
-        // regular text block
-        if (entity === false) {
-          entities.push(({ type: 'text' } as unknown) as EntityInstance);
-        } else if (!entityType || entity.getType() === entityType) {
-          entities.push(entity);
+        if (char) {
+          const entity = currentContent.getEntity(char);
+          if (!entityType || entity.getType() === entityType) {
+            entities.push(entity);
+          }
+        } else {
+          // regular text block
+          entities.push({
+            getType: () => 'text',
+            getData: () => '',
+          } as EntityInstance);
         }
         return false;
       },
@@ -485,7 +601,7 @@ export const getEntities = (editorState: EditorState, entityType?: string) => {
   return entities;
 };
 
-const countByType = obj => countBy(obj, x => x.type);
+const countByType = (obj: { getType: () => string }[]) => countBy(obj, x => x.getType());
 
 const getBlockTypePlugins = (blocks: ContentBlock[]) =>
   blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
@@ -507,6 +623,30 @@ export function getPostContentSummary(editorState: EditorState) {
   };
 }
 
+const countByTypeField = obj => countBy(obj, x => x.type);
+
+const calculateContentDiff = (prevState, newState, onCallbacks) => {
+  const prevEntities = countByTypeField(getEntities(prevState));
+  const currEntities = countByTypeField(getEntities(newState));
+  const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
+  const currBlocks = newState.getCurrentContent().getBlocksAsArray();
+  const prevBlockPlugins = countByTypeField(getBlockTypePlugins(prevBlocks));
+  const currBlockPlugins = countByTypeField(getBlockTypePlugins(currBlocks));
+
+  const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
+  const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
+
+  const pluginsDeleted: string[] = [];
+  Object.keys(prevPluginsTotal)
+    .filter(type => type !== 'undefined')
+    .forEach(type => {
+      const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+      times(deletedCount, () => pluginsDeleted.push(type));
+    });
+
+  onCallbacks({ pluginsDeleted });
+};
+
 //ATM, it only looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
@@ -514,24 +654,7 @@ export const createCalcContentDiff = (editorState: EditorState) => {
   let prevState = editorState;
   return debounce((newState, { shouldCalculate, onCallbacks }) => {
     if (!shouldCalculate) return;
-    const countByType = obj => countBy(obj, x => x.type);
-    const prevEntities = countByType(getEntities(prevState));
-    const currEntities = countByType(getEntities(newState));
-    const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
-    const currBlocks = newState.getCurrentContent().getBlocksAsArray();
-    const prevBlockPlugins = countByType(getBlockTypePlugins(prevBlocks));
-    const currBlockPlugins = countByType(getBlockTypePlugins(currBlocks));
-
-    const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
-    const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
-
-    const pluginsDeleted: string[] = [];
-    Object.keys(prevPluginsTotal).forEach(type => {
-      const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
-      times(deletedCount, () => pluginsDeleted.push(type));
-    });
-
-    onCallbacks({ pluginsDeleted });
+    calculateContentDiff(prevState, newState, onCallbacks);
     prevState = newState;
   }, 300);
 };
@@ -548,7 +671,7 @@ function createLastChangeSelection(editorState: EditorState): SelectionState {
 
 export function fixPastedLinks(
   editorState: EditorState,
-  { anchorTarget, relValue }: { anchorTarget: string; relValue: string }
+  { anchorTarget, relValue }: { anchorTarget?: AnchorTarget; relValue?: RelValue }
 ) {
   const lastChangeSelection = createLastChangeSelection(editorState);
   const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));
@@ -571,14 +694,22 @@ export function fixPastedLinks(
 
 export function getFocusedBlockKey(editorState: EditorState) {
   const selection = editorState.getSelection();
-  return selection.isCollapsed() && selection.getAnchorKey();
+  if (selection.isCollapsed()) return selection.getAnchorKey();
 }
 
-export function getBlockInfo(editorState: EditorState, blockKey: string) {
+export function getBlockEntityType(editorState: EditorState, blockKey: string) {
+  return getBlockEntity(editorState, blockKey)?.getType();
+}
+
+function getBlockEntity(editorState: EditorState, blockKey: string) {
   const contentState = editorState.getCurrentContent();
   const block = contentState.getBlockForKey(blockKey);
   const entityKey = block.getEntityAt(0);
-  const entity = entityKey ? contentState.getEntity(entityKey) : undefined;
+  return entityKey ? contentState.getEntity(entityKey) : undefined;
+}
+
+export function getBlockInfo(editorState: EditorState, blockKey: string) {
+  const entity = getBlockEntity(editorState, blockKey);
   const entityData = entity?.getData();
   const type = entity?.getType();
 
@@ -670,4 +801,41 @@ export function deleteCharacterBeforeCursor(editorState: EditorState) {
     newState = EditorState.push(editorState, newContentState, 'delete-string' as EditorChangeType);
   }
   return newState;
+}
+
+export function isPluginFocused(block: ContentBlock, selection: SelectionState) {
+  return block.getKey() === selection.getAnchorKey();
+}
+
+export function isCursorAtFirstLine(editorState: EditorState) {
+  const selection = editorState.getSelection();
+  return (
+    selection.isCollapsed() &&
+    editorState
+      .getCurrentContent()
+      .getBlockMap()
+      .first()
+      .getKey() === selection.getFocusKey()
+  );
+}
+
+export function isCursorAtStartOfContent(editorState: EditorState) {
+  const isStartOfLine = editorState.getSelection().getFocusOffset() === 0;
+  return isStartOfLine && isCursorAtFirstLine(editorState);
+}
+
+export function selectAllContent(editorState, forceSelection) {
+  const currentContent = editorState.getCurrentContent();
+  const selection = editorState.getSelection().merge({
+    anchorKey: currentContent.getFirstBlock().getKey(),
+    anchorOffset: 0,
+
+    focusOffset: currentContent.getLastBlock().getText().length,
+    focusKey: currentContent.getLastBlock().getKey(),
+  });
+  const setSelectionFunction = forceSelection
+    ? EditorState.forceSelection
+    : EditorState.acceptSelection;
+  const newEditorState = setSelectionFunction(editorState, selection);
+  return newEditorState;
 }

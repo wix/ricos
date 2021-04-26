@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import imageClientAPI from 'image-client-api';
+import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import { mergeStyles } from 'wix-rich-content-common';
 import {
   FileInput,
   Image,
   InputWithLabel,
-  LinkPanel,
   SettingsSection,
   SettingsPanelFooter,
-  FocusManager,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
+import { FocusManager, LinkPanel } from 'wix-rich-content-editor-common';
 import { BackIcon, DeleteIcon, ReplaceIcon, NextIcon, PreviousIcon } from '../../icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';
 import GallerySettingsMobileHeader from './gallery-settings-mobile-header';
@@ -50,6 +49,7 @@ class ImageSettings extends Component {
     );
 
   onTitleChange = title => this.props.onUpdateItem({ title });
+
   onAltTextChange = altText => this.props.onUpdateItem({ altText });
 
   onLinkPanelChange = linkPanelValues => {
@@ -77,6 +77,7 @@ class ImageSettings extends Component {
     nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
     isValid,
   });
+
   render() {
     const styles = this.styles;
     const {
@@ -155,6 +156,8 @@ class ImageSettings extends Component {
                     className={styles.galleryImageSettings_image}
                     src={this.getMediaUrl(image)}
                     theme={theme}
+                    error={image.error}
+                    t={t}
                   />
                   <div
                     className={classNames(styles.galleryImageSettings_nav, {
@@ -279,6 +282,7 @@ ImageSettings.propTypes = {
   image: PropTypes.shape({
     url: PropTypes.string.isRequired,
     metadata: PropTypes.object.isRequired,
+    error: PropTypes.object,
   }).isRequired,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

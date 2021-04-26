@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SliderWithInput } from 'wix-rich-content-editor-common';
+import { SliderWithInput } from 'wix-rich-content-plugin-commons';
 
 const propTypes = {
   value: PropTypes.number,

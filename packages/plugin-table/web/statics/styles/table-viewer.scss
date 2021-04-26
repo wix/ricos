@@ -1,0 +1,25 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+.viewMode, .editMode, .container {
+    &:focus, > span:focus {
+        outline: none;
+    }
+}
+
+.container {
+    width: 100%;
+    min-width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    thead {
+        border-right: 1px solid rgba(var(--ricos-text-color-tuple,33,33,33),.15);
+    }
+    .cell {
+        min-width: 10px;
+    }
+}
+
+.viewMode {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

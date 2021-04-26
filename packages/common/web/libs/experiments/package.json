@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/experiments.cjs.js",
+    "module": "../../dist/lib/experiments.js",
+    "types": "../../dist/lib/experiments.d.ts"
+}

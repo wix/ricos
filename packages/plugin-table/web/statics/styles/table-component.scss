@@ -1,0 +1,74 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.tableEditorContainer, .tableWrapper {
+    &:focus {
+        outline: none;
+    }
+}
+
+.tableEditorContainer {
+    display: grid;
+    grid-template-rows: auto max-content;
+    grid-template-columns: 20px auto max-content;  
+    position: unset;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    &.viewMode {
+        grid-template-columns: 100%;  
+    }
+
+    .dragPreview {
+        background-color: $action-color;
+        opacity: 0.1;
+        position: absolute;
+    }
+}
+
+.tableWrapper {
+    position: relative;
+    max-width: 100%;
+    padding-bottom: 0;
+}
+
+.viewMode {
+    margin-left: 20px;
+    margin-right: 20px;
+} 
+
+.editMode {
+    margin-right: 20px;
+}
+
+.addRow, .addCol {
+    display: none;
+    .editMode & {
+        display: flex;
+    } 
+}
+
+.addRow {
+    grid-row-start: 2;
+    width: 100%;
+    height: 20px;
+    grid-column: 1/ span 2;
+}
+
+.addCol {
+    grid-column-start: 3;
+    width: 20px;
+    height: calc(100% + 20px);
+    margin-right: -20px;
+}
+
+.innerRce {
+    position: inherit; 
+    cursor: pointer; 
+    height: 100%;
+
+    .readOnly {
+        height: 100%;
+    }
+}

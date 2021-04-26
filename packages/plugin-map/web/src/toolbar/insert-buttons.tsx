@@ -1,21 +1,24 @@
-import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { InsertPluginIcon } from '../icons';
-import { DEFAULTS } from '../constants';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { TOOLBARS, INSERT_PLUGIN_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import InsertPluginIcon from '../icons/InsertPluginIcon';
+import { DEFAULTS } from '../defaults';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { MapPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = ({
-  helpers,
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: MapPluginEditorConfig;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
-      name: 'MapPlugin_InsertButton',
-      tooltipText: t('MapPlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: icon,
-      // NOTE: settings contains google maps sdk key, should not be exposed
+      type: BUTTON_TYPES.BUTTON,
+      name: INSERT_PLUGIN_BUTTONS.MAP,
+      tooltip: t('MapPlugin_InsertButton_Tooltip'),
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      getIcon: () => icon,
       componentData: {
         config: {
           size: settings.size || DEFAULTS.size,
@@ -25,8 +28,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
         },
         mapSettings: settings.mapSettings,
       },
-      helpers,
-      t,
+      section: 'BlockToolbar_Section_Advanced',
     },
   ];
 };

@@ -1,11 +1,15 @@
+/*! rtl:ignore */
 .rtl {
     /*!rtl:begin:ignore*/
     direction: rtl;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
 
+/*! rtl:ignore */
 .ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
     /*!rtl:end:ignore*/
+    -noop:1;
   }

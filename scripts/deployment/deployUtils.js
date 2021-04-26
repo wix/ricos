@@ -22,5 +22,5 @@ exports.generateSubdomain = (exampleName, isPullRequest) => {
 
   const branchName = GITHUB_REF.split('/').pop();
   const postfix = !branchName.startsWith('release') ? branchName : version;
-  return exampleName + `-${postfix.replace(/(\.)|(\/)/g, '-')}`;
+  return exampleName + '-' + postfix.replace(/(\.)|(\/)/g, '-').replace(/^v(\d-)/, '$1');
 };

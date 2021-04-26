@@ -1,0 +1,18 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.unsupportedBlocks_alert{
+    max-width: 375px;
+    margin: 0 auto;
+    background-color: #f0f4f7;
+    color: $primary-text-color;
+    height: 52px;
+    padding: 15px 8px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 14px;
+      svg{
+        margin: 0 8px;
+      }
+  }

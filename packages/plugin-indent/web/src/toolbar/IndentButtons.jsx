@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { InlineToolbarButton, indentSelectedBlocks } from 'wix-rich-content-editor-common';
-import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
-import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
+import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
+import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 
 function indentButton(props) {
   const {

@@ -1,0 +1,30 @@
+.borderT, .borderB, .borderL, .borderR {
+    position: absolute;
+}
+
+.borderR, .borderL {
+    height: calc(100% + 1px);
+    width: 1px;
+    top: 0;
+}
+
+.borderR {
+    right: -1px;
+}
+
+.borderL {
+    left: -1px;
+}
+
+.borderT, .borderB {
+    width: calc(100% + 1px);
+    height: 1px;
+}
+
+.borderT {
+    top: -1px;
+}
+
+.borderB {
+    bottom: -1px;
+}

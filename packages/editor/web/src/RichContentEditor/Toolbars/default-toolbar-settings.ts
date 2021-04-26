@@ -1,7 +1,11 @@
 import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
-import { createSideToolbar } from './SideToolbar';
+import createSideToolbar from './SideToolbar/createSideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
+import {
+  createInsertPluginToolbarButtonProps,
+  createFormattingToolbarButtonProps,
+} from './createExternalToolbarButtonProps';
 import { EditorState } from 'draft-js';
 import { GetToolbarSettings } from 'wix-rich-content-common';
 
@@ -50,19 +54,74 @@ const defaultTextPluginButtons = {
   },
 };
 
+const defaultShouldCreate = {
+  desktop: false,
+  mobile: {
+    android: false,
+    ios: false,
+  },
+};
+
 export const getDefaultToolbarSettings: GetToolbarSettings = ({
   pluginButtons,
+  pluginButtonNames,
   textButtons,
   pluginTextButtons,
+  pluginButtonProps,
+  tablePluginMenu,
 }) => {
   return [
     {
-      name: TOOLBARS.EXTERNAL,
-      shouldCreate: () => ({
-        desktop: false,
+      name: TOOLBARS.INSERT_PLUGIN,
+      getInstance: createInsertPluginToolbarButtonProps.bind({}, pluginButtonProps),
+      shouldCreate: () => defaultShouldCreate,
+      getButtons: () => ({
+        desktop: pluginButtonNames,
         mobile: {
-          android: false,
-          ios: false,
+          ios: pluginButtonNames,
+          android: pluginButtonNames,
+        },
+      }),
+      // anything below is not in use
+      getPositionOffset: () => defaultOffset,
+      getTextPluginButtons: () => defaultTextPluginButtons,
+      getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
+      getVisibilityFn: () => ({
+        desktop: defaultInlineToolbarVisibilityFn,
+        mobile: {
+          ios: defaultInlineToolbarVisibilityFn,
+          android: defaultInlineToolbarVisibilityFn,
+        },
+      }),
+    },
+    {
+      name: TOOLBARS.FORMATTING,
+      shouldCreate: () => defaultShouldCreate,
+      getInstance: createFormattingToolbarButtonProps,
+      getButtons: () => ({
+        desktop: textButtons.desktop,
+        mobile: {
+          android: textButtons.mobile,
+          ios: textButtons.mobile,
+        },
+      }),
+      getTextPluginButtons: () => ({
+        desktop: pluginTextButtons,
+        mobile: {
+          android: pluginTextButtons,
+          ios: pluginTextButtons,
+        },
+      }),
+      // not in use
+      getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
+      getVisibilityFn: () => ({
+        desktop: defaultInlineToolbarVisibilityFn,
+        mobile: {
+          ios: defaultInlineToolbarVisibilityFn,
+          android: defaultInlineToolbarVisibilityFn,
         },
       }),
     },
@@ -82,7 +141,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         };
       },
       getPositionOffset: () => ({
-        desktop: { x: -40, y: 0 },
+        desktop: { x: tablePluginMenu ? -23 : -40, y: tablePluginMenu ? 3 : 0 },
         mobile: {
           ios: { x: 0, y: 0 },
           android: { x: 0, y: 0 },
@@ -138,8 +197,8 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getTextPluginButtons: () => ({
         desktop: {},
         mobile: {
-          ios: pluginTextButtons.mobile,
-          android: pluginTextButtons.mobile,
+          ios: pluginTextButtons,
+          android: pluginTextButtons,
         },
       }),
       getVisibilityFn: () => ({
@@ -210,7 +269,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: pluginTextButtons.desktop,
+        desktop: pluginTextButtons,
         mobile: {
           ios: {},
           android: {},
@@ -245,9 +304,9 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: pluginTextButtons.desktop,
+        desktop: pluginTextButtons,
         mobile: {
-          ios: pluginTextButtons.mobile,
+          ios: pluginTextButtons,
           android: {},
         },
       }),

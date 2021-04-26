@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  mergeStyles,
-  normalizeUrl,
-  isValidUrl,
-  validate,
-  pluginHtmlSchema,
-} from 'wix-rich-content-common';
+import { mergeStyles, normalizeUrl, isValidUrl, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginHtmlSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-html.schema.json';
 
-import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './defaults';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
@@ -75,27 +71,37 @@ class HtmlComponent extends Component {
     }
   };
 
+  getIframeHeight = () => {
+    const {
+      settings: { height } = {},
+      componentData: { config },
+    } = this.props;
+    const { iframeHeight } = this.state;
+    //for avoiding unnecessary scroll
+    const maxDiff = Math.min(50, this.state.iframeHeight * 0.1);
+    let normalizedHeight = iframeHeight;
+    if (config.height) {
+      normalizedHeight =
+        iframeHeight && config.height < iframeHeight && config.height + maxDiff > iframeHeight
+          ? iframeHeight
+          : config.height;
+    }
+
+    return normalizedHeight || height || INIT_HEIGHT;
+  };
+
   render() {
     const { html } = this.state;
-    const {
-      iframeSandboxDomain,
-      theme,
-      componentData,
-      settings: { width, height } = {},
-    } = this.props;
+    const { iframeSandboxDomain, theme, componentData, settings: { width } = {} } = this.props;
     this.styles = this.styles || mergeStyles({ styles: htmlComponentStyles, theme });
 
     validate(componentData, pluginHtmlSchema);
 
-    const {
-      src,
-      srcType,
-      config: { width: currentWidth, height: currentHeight } = {},
-    } = componentData;
+    const { src, srcType, config: { width: currentWidth } = {} } = componentData;
 
     const style = {
       width: this.props.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
-      height: currentHeight || this.state.iframeHeight || height || INIT_HEIGHT,
+      height: this.getIframeHeight(),
       maxHeight: this.state.iframeHeight,
       maxWidth: '100%',
     };

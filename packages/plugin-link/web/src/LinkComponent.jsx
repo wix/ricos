@@ -23,6 +23,7 @@ const Link = ({
       anchorTarget={anchorTarget}
       relValue={relValue}
       settings={settings}
+      isInEditor
       {...otherProps}
     >
       {children}

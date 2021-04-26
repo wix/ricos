@@ -1,0 +1,3 @@
+@function helvetica($primary-font) {
+    @return $primary-font, Helvetica, Arial, sans-serif;
+  }

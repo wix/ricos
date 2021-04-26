@@ -1,0 +1,161 @@
+---
+id: HtmlPlugin
+title: Html Plugin
+sidebar_label: Html Plugin
+---
+
+import { pluginHtml } from 'wix-rich-content-plugin-html';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+HTML plugin enables users to embed content in an iframe (either source code or by URL)
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add an Html')}
+    placeholder={'Type here!'}
+    plugins={[pluginHtml()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginHtml } from 'wix-rich-content-plugin-html';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosEditor plugins={[pluginHtml(HtmlConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosViewer plugins={[pluginHtml(HtmlConfig)]} />;
+```
+
+## Html Config API
+
+### `maxWidth`
+
+The maximum component width in pixels. note: this value is dynamicaly limited by the editor boundaries
+
+```jsx
+maxWidth?: number;
+```
+
+Default value:
+
+```jsx
+940;
+```
+
+### `minWidth`
+
+The minimum component width in pixels
+
+```jsx
+minWidth?: number;
+```
+
+Default value:
+
+```jsx
+35;
+```
+
+### `width`
+
+The initial component width in pixels
+
+```jsx
+width?: number;
+```
+
+Default value:
+
+```jsx
+740;
+```
+
+### `minHeight`
+
+The minimum component height in pixels
+
+```jsx
+minHeight?: number;
+```
+
+Default value:
+
+```jsx
+35;
+```
+
+### `maxHeight`
+
+The maximum component height in pixels
+
+```jsx
+maxHeight?: number;
+```
+
+Default value:
+
+```jsx
+1200;
+```
+
+## Adsense Plugin
+
+Adsense plugin is part of the html plugin. To use it we need to expose a button with `exposeButtons` and add the `siteDomain`:
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add adsense')}
+    placeholder={'Type here!'}
+    plugins={[pluginHtml({ exposeButtons: ['adsense'], siteDomain: 'https://www.wix.com' })]}
+  />
+</div>
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginHtml, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosEditor plugins={[pluginHtml({ exposeButtons: [htmlButtonsTypes.adsense], , siteDomain: 'https://dana.wixsite.com/mysite' })]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import 'wix-rich-content-plugin-html/dist/styles.min.css';
+<RicosViewer plugins={[pluginHtml()]} />;
+```
+
+### `siteDomain` **Required**
+
+Adsense will not work with out the siteDomain
+
+```jsx
+siteDomain?: string;
+```
+
+### `exposeButtons` **Required**
+
+The buttons exposed by the plugin
+
+```jsx
+exposeButtons?: array;
+```
+
+Example value:
+
+```jsx
+[htmlButtonsTypes.html, htmlButtonsTypes.adsense];
+```
+<br />

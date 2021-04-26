@@ -11,7 +11,7 @@ const chalk = require('chalk');
 
 // const execSync = require('child_process').execSync;
 // const exec = cmd => execSync(cmd, { stdio: 'inherit' });
-const CHOICES = fs.readdirSync(`${__dirname}/templates`);
+const CHOICES = ['atomic-plugin'];
 
 const gitConfig = getGitConfig.sync({ include: true, type: 'global' });
 
@@ -64,7 +64,7 @@ inquirer.prompt(QUESTIONS).then(answers => {
   const { pluginChoice, pluginName, pluginAuthorName, pluginAuthorMailAddress } = answers;
   console.log(chalk.yellow(`Generating ${pluginName} ${pluginChoice} 🤸‍♂`));
 
-  const templatePath = `${__dirname}/templates/${pluginChoice}`;
+  const templatePath = `${CURR_DIR}/packages/template-${pluginChoice}`;
   const pluginPackagePath = `packages/plugin-${pluginName}`;
 
   fs.mkdirSync(`${CURR_DIR}/${pluginPackagePath}`);
@@ -126,13 +126,13 @@ function addPluginToProject(projectPath, pluginName) {
     if (err) {
       console.log(chalk.red('Fail to read package.json', projectPath, err));
     } else {
-      const pckageJsonObj = JSON.parse(data);
+      const packageJsonObj = JSON.parse(data);
       const newDependency = `wix-rich-content-plugin-${pluginName}`;
-      pckageJsonObj.dependencies = {
-        ...pckageJsonObj.dependencies,
+      packageJsonObj.dependencies = {
+        ...packageJsonObj.dependencies,
         [newDependency]: version,
       };
-      const packageJson = JSON.stringify(pckageJsonObj, null, 2);
+      const packageJson = JSON.stringify(packageJsonObj, null, 2);
       fs.writeFile(filePath, packageJson, 'utf8', () => {
         console.log(chalk.bold.green(`${pluginName}-plugin added successfully 🎉🎊🎉🎊`));
         // exec(`npm i && npm run build && cd ${projectPath} && npm run start`);

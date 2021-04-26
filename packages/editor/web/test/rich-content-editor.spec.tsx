@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import TestData from './TestData/initial-state';
-import RichContentEditor from '../src/RichContentEditor';
+import RichContentEditor from '../src/RichContentEditor/I18nRichContentEditor';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow } = Enzyme;

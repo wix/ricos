@@ -1,7 +1,23 @@
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER, DEFAULT_MOBILE_BROWSERS } from './settings';
+import { usePlugins, usePluginsConfig, plugins } from '../cypress/testAppConfig';
+
+const changeTextColor = title => {
+  cy.loadRicosEditorAndViewer('plain')
+    .setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 15])
+    .openCustomColorModal();
+  cy.eyesCheckWindow(title);
+  cy.setColorByHex('d932c3');
+  cy.updateTextColor();
+  cy.eyesCheckWindow(title);
+  if (!title.includes('mobile')) {
+    cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, [20, 5]).resetColor();
+    cy.eyesCheckWindow(title);
+  }
+};
 
 describe('text', () => {
   before(function() {
@@ -27,6 +43,10 @@ describe('text', () => {
       .setEditorSelection(0, 0)
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to change text color', function() {
+    changeTextColor(this.test.title);
   });
 
   it('allow to apply inline styles and links', function() {
@@ -123,14 +143,41 @@ describe('text', () => {
       .get(`[data-hook=linkPanelContainerDone]`)
       .click();
     // check url button
-    cy.get(`[data-hook=linkPluginToolbar] a`).should(
-      'have.attr',
-      'href',
-      'https://www.google.com/'
-    );
+    cy.setEditorSelection(5, 0)
+      .get(`[data-hook=linkPluginToolbar] a`)
+      .should('have.attr', 'href', 'https://www.google.com/');
     // remove link
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
     cy.blurEditor();
+  });
+
+  it('should insert custom link', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          isCustomModal: true,
+        },
+      }),
+    };
+    const selection = [0, 11];
+    cy.loadRicosEditorAndViewer('empty', testAppConfig)
+      .enterParagraphs(['Custom link.'])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection);
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter text without linkify links (disableAutoLink set to true)', function() {
+    const testAppConfig = {
+      ...usePluginsConfig({
+        link: {
+          disableAutoLink: true,
+        },
+      }),
+    };
+    cy.loadRicosEditorAndViewer('empty', testAppConfig).enterParagraphs([
+      'www.wix.com\nwww.wix.com ',
+    ]);
+    cy.eyesCheckWindow(this.test.title);
   });
 
   it('should paste plain text', function() {
@@ -179,6 +226,30 @@ describe('text', () => {
       .type('{enter}')
       .type('{enter}')
       .enterParagraphs(['I am centered!'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('esc key event should make editor blurred', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs(['Magic! I am blurred.'])
+      .type('{esc}');
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter link and further text in current block has no inline style', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs(['wix.com '])
+      .enterParagraphs(['no inline style'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('should enter link and further text in next block has no inline style', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs(['wix.com'])
+      .type('{enter}')
+      .enterParagraphs(['no inline style'])
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
@@ -246,5 +317,63 @@ describe('text', () => {
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+});
+
+describe('text color mobile', () => {
+  before(function() {
+    cy.eyesOpen({
+      appName: 'Text',
+      testName: this.test.parent.title,
+      browser: DEFAULT_MOBILE_BROWSERS,
+    });
+  });
+  beforeEach(() => cy.switchToMobile());
+
+  after(() => cy.eyesClose());
+
+  it('allow to change text color on mobile', function() {
+    changeTextColor(this.test.title);
+  });
+});
+
+describe('textFirefox', () => {
+  before(function() {
+    cy.eyesOpen({
+      appName: 'textFirefox',
+      testName: this.test.parent.title,
+      browser: FIREFOX_BROWSER,
+    });
+  });
+
+  beforeEach(() => cy.switchToDesktop());
+
+  afterEach(() => cy.matchContentSnapshot());
+
+  after(() => cy.eyesClose());
+
+  it('Enter click and space should keep the line when justified', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs([
+        '   Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster. Iterative approaches to corporate strategy foster.',
+      ])
+      .setEditorSelection(0, 184)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
+      .setEditorSelection(184, 0)
+      .type('{enter}')
+      .type('{enter}')
+      .enterParagraphs([' '])
+      .type('{enter}')
+      .enterParagraphs(['next line'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to create justify lists', function() {
+    cy.loadRicosEditorAndViewer('plain', {}, true)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
   });
 });

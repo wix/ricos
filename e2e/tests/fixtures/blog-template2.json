@@ -1,0 +1,129 @@
+{
+  "blocks": [
+    {
+      "key": "1ebsm",
+      "text": "We’ve made it quick and convenient for you to manage your blog from anywhere. In this blog post we’ll share the ways you can post to your Wix Blog.  ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "afbbr",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "71v5q",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "dk6fm",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cpjev",
+      "text": "Blogging from Your Wix Blog Dashboard",
+      "type": "header-two",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "c12an",
+      "text": "On the dashboard, you have everything you need to manage your blog in one place. You can create new posts, set categories and more. To head to your Dashboard, open the Wix Editor and click on Blog > Posts. ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "628af",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2uj4f",
+      "text": "Blogging from Your Published Site",
+      "type": "header-two",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5ka5i",
+      "text": "Did you know that you can blog right from your published website? After you publish your site, go to your website’s URL and login with your Wix account. There you can write and edit posts, manage comments, pin posts and more! Just click on the 3 dot icon ( ⠇) to see all the things you can do. ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1ia4l",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6lqok",
+      "text": "#bloggingtips #WixBlog ",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "src": {
+          "original_file_name": "a27d24_74a5c4593cc1454683305dbaa50c80cb~mv2_d_1880_1560_s_2.png",
+          "file_name": "a27d24_74a5c4593cc1454683305dbaa50c80cb~mv2_d_1880_1560_s_2.png",
+          "width": 1880,
+          "height": 1560
+        },
+        "config": {
+          "size": "content",
+          "alignment": "center",
+          "key": "71v5q"
+        }
+      }
+    }
+  },
+  "VERSION": "7.12.3"
+}

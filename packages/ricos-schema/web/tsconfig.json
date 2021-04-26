@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "dist/types",
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES5",
+    "lib": ["dom", "ESNext"],
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "outDir": "dist/esm"
+  },
+  "include": ["src/generated"]
+}

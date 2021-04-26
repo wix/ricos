@@ -1,13 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
-
-const DEFAULTS = Object.freeze({
-  config: {
-    alignment: 'center',
-    size: 'small',
-  },
-});
+import { FILE_UPLOAD_TYPE } from './types';
+import { fileExtensionToType, FileTypes } from '../lib/fileExtensionToType';
 
 class FileUploadComponent extends PureComponent {
   constructor(props) {
@@ -47,26 +42,42 @@ class FileUploadComponent extends PureComponent {
     return state;
   };
 
-  handleFilesSelected = files => {
-    const { onFileSelected } = this.props.settings;
-    if (onFileSelected && files.length > 0) {
-      this.setState({ isLoading: true, error: null });
-      onFileSelected(files[0], ({ data, error }) => this.handleFilesAdded({ data, error }));
-    } else {
-      this.resetLoadingState({ msg: 'Missing upload function' });
-    }
-  };
-
-  handleFilesAdded = ({ data, error }) => {
-    if (error) {
-      this.resetLoadingState(error);
-      return;
-    }
+  updateComponentData = data => {
     const { setData } = this.props.blockProps;
     const componentData = { ...this.props.componentData, ...data };
     setData(componentData);
-    this.props.store.update('componentData', { ...data }, this.props.block.getKey());
-    this.resetLoadingState();
+    this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
+  };
+
+  handleFilesSelected = files => {
+    const { onFileSelected } = this.props.settings;
+    if (onFileSelected && files.length > 0) {
+      const file = files[0];
+      const name = file.name;
+      let type;
+      if (name && name.includes('.')) {
+        type = name.split('.').pop();
+      }
+      const size = file.size;
+      this.updateComponentData({ name, type, size, tempData: true });
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(
+        FILE_UPLOAD_TYPE,
+        size,
+        FileTypes[fileExtensionToType(type)]
+      );
+      this.setState({ isLoading: true });
+      onFileSelected(file, ({ data, error }) =>
+        this.handleFilesAdded({ data, error, uploadBIData })
+      );
+    } else {
+      this.resetLoadingState({ msg: 'missing upload function' });
+    }
+  };
+
+  handleFilesAdded = ({ data, error, uploadBIData }) => {
+    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
+    this.updateComponentData({ ...data, tempData: undefined, error });
+    this.resetLoadingState(error);
   };
 
   getLoadingParams = componentState => {
@@ -75,22 +86,26 @@ class FileUploadComponent extends PureComponent {
   };
 
   resetLoadingState = error => {
-    this.setState({ isLoading: false, errorMsg: error?.msg });
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
+    this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {
-    const { componentData, theme, setComponentUrl } = this.props;
-    const { errorMsg, isLoading } = this.state;
+    const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
+    const { isLoading } = this.state;
 
     return (
       <FileUploadViewer
         componentData={componentData}
         isLoading={isLoading}
-        error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
+        t={t}
+        isMobile={isMobile}
       />
     );
   }
@@ -103,12 +118,16 @@ FileUploadComponent.propTypes = {
   store: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
 };
 
 FileUploadComponent.defaultProps = {
   settings: {},
 };
 
-export { FileUploadComponent as Component, DEFAULTS };
+export { FileUploadComponent as Component };

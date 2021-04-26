@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/comparision.cjs.js",
+    "module": "../../dist/lib/comparision.js",
+    "types": "../../dist/lib/comparision.d.ts"
+}

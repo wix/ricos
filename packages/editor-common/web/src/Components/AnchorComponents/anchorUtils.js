@@ -1,4 +1,18 @@
 import { getBlockInfo } from '../../Utils/draftUtils';
+import {
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GALLERY_TYPE,
+  GIPHY_TYPE,
+  HEADER_BLOCK,
+  UNSTYLED,
+  CODE_BLOCK_TYPE,
+  BLOCKQUOTE,
+  MAP_TYPE,
+  FILE_UPLOAD_TYPE,
+  LINK_BUTTON_TYPE,
+  ACTION_BUTTON_TYPE,
+} from 'wix-rich-content-common';
 
 export const getAnchorableBlocks = editorState => {
   const anchorableBlocks = [];
@@ -70,33 +84,31 @@ const mapAtomicBlocks = (block, editorState) => {
 const isAtomicBlock = block => block.type === 'atomic';
 
 const buttonsType = contentEntityType =>
-  contentEntityType === 'wix-draft-plugin-link-button' ||
-  contentEntityType === 'wix-draft-plugin-action-button';
+  contentEntityType === LINK_BUTTON_TYPE || contentEntityType === ACTION_BUTTON_TYPE;
 
 const headersType = blockType =>
-  blockType === 'header-two' ||
-  blockType === 'header-three' ||
-  blockType === 'header-four' ||
-  blockType === 'header-five' ||
-  blockType === 'header-six';
+  blockType === HEADER_BLOCK.TWO ||
+  blockType === HEADER_BLOCK.THREE ||
+  blockType === HEADER_BLOCK.FOUR ||
+  blockType === HEADER_BLOCK.FIVE ||
+  blockType === HEADER_BLOCK.SIX;
 
 const anchorableAtomicPlugins = atomicPluginType =>
-  atomicPluginType === 'wix-draft-plugin-image' ||
-  atomicPluginType === 'wix-draft-plugin-gallery' ||
-  atomicPluginType === 'wix-draft-plugin-video' ||
-  atomicPluginType === 'wix-draft-plugin-map' ||
-  atomicPluginType === 'wix-draft-plugin-link-button' ||
-  atomicPluginType === 'wix-draft-plugin-poll' ||
-  atomicPluginType === 'wix-draft-plugin-action-button' ||
-  atomicPluginType === 'wix-draft-plugin-giphy' ||
-  atomicPluginType === 'wix-draft-plugin-file-upload';
+  atomicPluginType === IMAGE_TYPE ||
+  atomicPluginType === GALLERY_TYPE ||
+  atomicPluginType === VIDEO_TYPE ||
+  atomicPluginType === MAP_TYPE ||
+  atomicPluginType === LINK_BUTTON_TYPE ||
+  atomicPluginType === ACTION_BUTTON_TYPE ||
+  atomicPluginType === GIPHY_TYPE ||
+  atomicPluginType === FILE_UPLOAD_TYPE;
 
 const anchorableInlineElement = blockType =>
-  blockType === 'unstyled' ||
-  blockType === 'header-two' ||
-  blockType === 'header-three' ||
-  blockType === 'header-four' ||
-  blockType === 'header-five' ||
-  blockType === 'header-six' ||
-  blockType === 'code-block' ||
-  blockType === 'blockquote';
+  blockType === UNSTYLED ||
+  blockType === HEADER_BLOCK.TWO ||
+  blockType === HEADER_BLOCK.THREE ||
+  blockType === HEADER_BLOCK.FOUR ||
+  blockType === HEADER_BLOCK.FIVE ||
+  blockType === HEADER_BLOCK.SIX ||
+  blockType === CODE_BLOCK_TYPE ||
+  blockType === BLOCKQUOTE;

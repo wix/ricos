@@ -19,6 +19,7 @@ class PollHeaderComponent extends PureComponent {
         })}
       >
         <TextField
+          autofocus
           textAutoResize
           maxLength={160}
           className={styles.title}

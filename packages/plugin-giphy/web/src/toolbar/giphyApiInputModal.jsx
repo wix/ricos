@@ -53,7 +53,7 @@ export default class GiphyApiInputModal extends Component {
           <TextSearchInput
             inputRef={ref => (this.input = ref)}
             onClose={this.onCloseRequested}
-            placeHolder={t('GiphyUploadModal_Input_Placeholder')}
+            placeHolder={t('GiphyUploadModal_Search_Placeholder')}
             onChange={this.onChange}
             value={this.state.searchTag}
             data-hook="giphyUploadModalInput"

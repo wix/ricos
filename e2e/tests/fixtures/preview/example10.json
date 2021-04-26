@@ -1,0 +1,518 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "Some usual text",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "deopo",
+      "text": "That supports style with textColor and textBackground",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 14,
+          "length": 5,
+          "style": "BOLD"
+        },
+        {
+          "offset": 14,
+          "length": 5,
+          "style": "ITALIC"
+        },
+        {
+          "offset": 14,
+          "length": 5,
+          "style": "UNDERLINE"
+        },
+        {
+          "offset": 25,
+          "length": 9,
+          "style": "{\"FG\":\"#c30303\"}"
+        },
+        {
+          "offset": 39,
+          "length": 14,
+          "style": "{\"BG\":\"#ffffff00\"}"
+        },
+        {
+          "offset": 39,
+          "length": 14,
+          "style": "{\"BG\":\"#c0c0c0\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1sik8",
+      "text": "with some other line",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 20,
+          "style": "{\"BG\":\"#ffffff00\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "adgmt",
+      "text": "However, this line won't be shown initially in preview. You'll have to click `Read more` to see it, as default rule to trigger readMore is 3 lines.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 147,
+          "style": "{\"BG\":\"#ffffff00\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2daq4",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "40dkp",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "rlea",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ajugs",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "fkaa5",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "fqp50",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "f3l3e",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "49lt7",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5a2i0",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "9k0gk",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "f0n5f",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "1d45i",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "49v3a",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8ops5",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 4
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "dnqdb",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "f9li9",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "61ie6",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 5
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "efnvi",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "bg24d",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ckkn3",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 6
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "2710e",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2ecai",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2e86a",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 7
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "92b0d",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-video",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center"
+        },
+        "src": {
+          "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
+          "thumbnail": {
+            "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
+            "height": 1080,
+            "width": 1920
+          }
+        },
+        "isCustomVideo": true
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-video",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center"
+        },
+        "tempData": false,
+        "src": "https://www.youtube.com/watch?v=ASe9-yoCk9k",
+        "metadata": {
+          "version": "1.0",
+          "thumbnail_url": "https://i.ytimg.com/vi/jhXlnvYZZQs/hqdefault.jpg",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "provider_name": "YouTube",
+          "width": 480,
+          "title": "Wix.com Official 2018 Big Game Ad with Rhett & Link — Extended Version",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/jhXlnvYZZQs?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "height": 270,
+          "author_name": "Wix.com",
+          "thumbnail_width": 480,
+          "type": "video",
+          "video_url": "https://youtu.be/jhXlnvYZZQs"
+        }
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-giphy",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "content",
+          "alignment": "center"
+        },
+        "configViewer": {
+          "sizes": {
+            "desktop": "original",
+            "mobile": "original"
+          }
+        },
+        "gif": {
+          "originalUrl": "https://media2.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.gif?cid=558f2fbeh2i5a2o44ta0ti98ldfxbefyfzd7xdac0bnh1hzn&rid=giphy.gif",
+          "originalMp4": "https://media2.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.mp4?cid=558f2fbeh2i5a2o44ta0ti98ldfxbefyfzd7xdac0bnh1hzn&rid=giphy.mp4",
+          "stillUrl": "https://media2.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy_s.gif?cid=558f2fbeh2i5a2o44ta0ti98ldfxbefyfzd7xdac0bnh1hzn&rid=giphy_s.gif",
+          "downsizedUrl": "https://media2.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy-downsized.gif?cid=558f2fbeh2i5a2o44ta0ti98ldfxbefyfzd7xdac0bnh1hzn&rid=giphy-downsized.gif",
+          "downsizedStillUrl": "https://media2.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy-downsized_s.gif?cid=558f2fbeh2i5a2o44ta0ti98ldfxbefyfzd7xdac0bnh1hzn&rid=giphy-downsized_s.gif",
+          "downsizedSmallMp4": "https://media2.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy-downsized-small.mp4?cid=558f2fbeh2i5a2o44ta0ti98ldfxbefyfzd7xdac0bnh1hzn&rid=giphy-downsized-small.mp4",
+          "height": 268,
+          "width": 268
+        }
+      }
+    },
+    "3": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "15f407e0947a3680a2261a41cb6abbb6",
+          "original_file_name": "8bb438_b2d862605f684658926e6ee05e954880.jpg",
+          "file_name": "8bb438_b2d862605f684658926e6ee05e954880.jpg",
+          "width": 1920,
+          "height": 1280
+        }
+      }
+    },
+    "4": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "c6b5cd1f1316311ec3560d6fb7d50958",
+          "original_file_name": "8bb438_17a7e143ea0148959ef6c5663158ade0.jpg",
+          "file_name": "8bb438_17a7e143ea0148959ef6c5663158ade0.jpg",
+          "width": 5200,
+          "height": 3467
+        }
+      }
+    },
+    "5": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "bc1243ce59ebe679f463d6a9dfbd1068",
+          "original_file_name": "8bb438_215d5a60549f49fdb8fe2afe5ae2019e.jpg",
+          "file_name": "8bb438_215d5a60549f49fdb8fe2afe5ae2019e.jpg",
+          "width": 5120,
+          "height": 3413
+        }
+      }
+    },
+    "6": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "338f76721bc5a127ebf0b01306abf35e",
+          "original_file_name": "8bb438_a8a7ff22738445faa74cf7f68866f4d8.jpg",
+          "file_name": "8bb438_a8a7ff22738445faa74cf7f68866f4d8.jpg",
+          "width": 3542,
+          "height": 4722
+        }
+      }
+    },
+    "7": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "22883fe4ca22b25b5b19c8640d21d524",
+          "original_file_name": "8bb438_2a22b3e85bb1434e81f6fbd4878fb4ae.jpg",
+          "file_name": "8bb438_2a22b3e85bb1434e81f6fbd4878fb4ae.jpg",
+          "width": 5600,
+          "height": 3728
+        }
+      }
+    }
+  },
+  "VERSION": "7.12.3"
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { LINE_DOUBLE } from '../constants';
+import { LINE_DOUBLE } from '../defaults';
 
 const lineProps = (width, lineDistance = 1) => ({
   x2: width,

@@ -1,5 +1,4 @@
-import TextSelectionToolbar from './TextSelectionToolbar.jsx';
-import ViewerInlineToolBar from './ViewerInlineToolBar.jsx';
-import TwitterButton from './TwitterButton.jsx';
+import TextSelectionToolbar from './TextSelectionToolbar';
+import TwitterButton from './TwitterButton';
 
-export { TextSelectionToolbar, ViewerInlineToolBar, TwitterButton };
+export { TextSelectionToolbar, TwitterButton };

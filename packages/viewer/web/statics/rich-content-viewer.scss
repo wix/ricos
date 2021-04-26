@@ -27,6 +27,7 @@
           content: '';
           display: table;
           clear: both;
+          line-height: 0;
         }
       }
 
@@ -57,16 +58,17 @@
   width: 100%;
   height: 100%;
   line-height: 1.5;
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-size: $paragraphFontSize;
   color: $primary-text-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
+  background-color: $background-color-container;
 
   &::after {
     content: '';
     display: table;
     clear: both;
+    line-height: 0;
   }
 }
 
@@ -111,94 +113,113 @@
 
 .text {
   composes: elementSpacing;
+  @include ricosTypography('p', true);
 
   &:empty {
     height: 24px;
   }
 }
 
-.justify {
-  white-space: pre-line !important;
-  text-align: justify !important;
+.child {
+  display: block;
+}
 
-  & > * {
-    white-space: pre-line !important;
-    text-align: justify !important;
+/*! rtl:ignore */
+.orderedList, .unorderedList {
+  /*! rtl:ignore */
+  &::before, &::marker {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
+  > * {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
+}
+
+.unorderedList.center{
+  list-style-position: inside;
+}
+
+.contentCenterAlignment{
+  display: inline;
+}
+
+.justify {
+  white-space: pre-wrap !important;
+  text-align: justify !important;
+}
+
+@mixin justifySafariOrFirefox {
+  white-space: pre-line !important;
+}
+
+// Css hack for Safari only. 
+// was taken from: https://stackoverflow.com/questions/16348489/is-there-a-css-hack-for-safari-only-not-chrome
+
+@media not all and (min-resolution:.001dpcm){ 
+  @supports (-webkit-appearance:none) {
+    .hasJustifyText {
+      @include justifySafariOrFirefox;
+    }
+  }
+}
+// Css hack for Firefox only. 
+// was taken from: https://css-tricks.com/snippets/css/css-hacks-targeting-firefox/
+
+@-moz-document url-prefix()  {
+  .hasJustifyText {
+    @include justifySafariOrFirefox;
   }
 }
 
 .quote {
   composes: blockStyleSpacing;
-  border-left-width: 3px;
-  border-left-style: solid;
-  font-size: 18px;
-  line-height: 26px;
-  padding: 6px 0 6px 18px;
+  border-inline-start-width: 3px;
+  border-inline-start-style: solid;
+  font-size: $quoteFontSize;
+  line-height: $quoteLineHeight;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-start: 18px;
   font-style: normal;
+  border-left-color: $ricos-quote-border-color;
+  border-right-color: $ricos-quote-border-color;
+  color: $ricos-quote-color;
+  @include ricosTypography('quote', false);
 }
 
 .headerOne,
 .headerTwo,
-.headerThree {
+.headerThree,
+.headerFour,
+.headerFive,
+.headerSix {
   composes: elementSpacing;
   font: inherit;
 }
 
-.headerOne {
-  font-size: 32px;
-  line-height: $headerOneHeight;
-  min-height: $headerOneHeight;
-}
-
-.headerTwo {
-  font-size: 28px;
-  line-height: $headerTwoHeight;
-  min-height: $headerTwoHeight;
-}
-
-.headerThree {
-  font-size: 22px;
-  line-height: $headerThreeHeight;
-  min-height: $headerThreeHeight;
-}
-
-.orderedList {
-  composes: elementSpacing;
-}
-
-.orderedListContainer {
-  outline: none;
-  padding: 0;
-  margin: 0;
-
-  [dir] & > * {
-    margin-inline-start: 40px;
-  }
-}
-
-.unorderedList {
-  composes: elementSpacing;
-}
-
-.unorderedListContainer {
-  outline: none;
-  padding: 0;
-  margin: 0;
-
-  [dir] & > * {
-    margin-inline-start: 40px;
+@each $headerName in $headerNames {
+  $i: index($headerNames, $headerName);
+  .header#{$headerName} {
+    @include ricosTypography('h#{$i}', true);
+    color: var(--ricos-custom-h#{$i}-color, $primary-text-color);
   }
 }
 
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba($fallbackColorTuple, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;
   padding: 2px 25px;
   white-space: pre-wrap;
+
+  .renderedInTable & {
+    margin: 1em 0;
+  }
 }
 
 .normalText {
@@ -218,4 +239,22 @@
 .embed {
   width: max-content;
   border: none;
+}
+
+.horizontalScrollbar {
+  overflow-x: auto;
+}
+
+.horizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.horizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.horizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
 }

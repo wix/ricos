@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { translate } from 'react-i18next';
 import { mergeStyles } from 'wix-rich-content-common';
-import { decorateComponentWithProps, SettingsSection } from 'wix-rich-content-editor-common';
+import { SettingsSection } from 'wix-rich-content-plugin-commons';
+import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import { Spacing, ItemsPerRow, ThumbnailSize } from './gallery-controls/sliders';
 import {
@@ -92,8 +93,8 @@ class LayoutControlsSection extends Component {
     thumbnailSpacing: {
       component: Spacing,
       props: {
-        onChange: value => this.applyGallerySetting({ thumbnailSpacings: value }),
-        value: this.getValueFromComponentStyles('thumbnailSpacings'),
+        onChange: value => this.applyGallerySetting({ thumbnailSpacings: value / 2 }),
+        value: this.getValueFromComponentStyles('thumbnailSpacings') * 2,
         t,
       },
     },

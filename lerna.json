@@ -9,15 +9,10 @@
       "message": "[*] chore(release): %s"
     }
   },
-  "packages": [
-    "e2e/test-env",
-    "examples/main",
-    "examples/storybook",
-    "packages/**/*",
-    "plugins-bundle-analyzer"
-  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "7.11.0"
+  "version": "8.30.4"
 }

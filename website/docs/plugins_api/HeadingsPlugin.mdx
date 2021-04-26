@@ -1,0 +1,55 @@
+---
+id: HeadingsPlugin
+title: Headings Plugin
+sidebar_label: Headings Plugin
+---
+
+import { pluginHeadings } from 'wix-rich-content-plugin-headings';
+import 'wix-rich-content-plugin-headings/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Headings plugin enables users to set different headings type to their content
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Highlight the text and set heading using text formatting toolbar')}
+    placeholder={'Type here!'}
+    plugins={[pluginHeadings()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginHeadings } from 'wix-rich-content-plugin-headings';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-headings/dist/styles.min.css';
+<RicosEditor plugins={[pluginHeadings(HeadingsConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginHeadings } from 'wix-rich-content-plugin-headings/dist/module.viewer';
+import 'wix-rich-content-plugin-headings/dist/styles.min.css';
+<RicosViewer plugins={[pluginHeadings(HeadingsConfig)]} />;
+```
+
+## Headings Config API
+
+### `customHeadings`
+
+The types of headings that user can set
+
+```jsx
+customHeadings?: HeadingType[];
+```
+
+Default value:
+
+```jsx
+['P', 'H2', 'H3', 'H4', 'H5', 'H6'];
+```

@@ -1,5 +1,6 @@
 import InlineToolbar from './InlineToolbar';
-import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { simplePubsub } from 'wix-rich-content-common';
 
 const createInlineToolbar = (config = {}) => {
   const {

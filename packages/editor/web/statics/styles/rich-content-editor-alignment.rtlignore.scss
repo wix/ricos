@@ -1,19 +1,53 @@
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
 .left {
+  /*!rtl:begin:ignore*/
+  text-align: left !important;
   &>* {
-    /*!rtl:ignore*/
     text-align: left !important;
   }
+  /*!rtl:end:ignore*/
 }
 
 .center {
+  /*!rtl:begin:ignore*/
+  text-align: center !important;
+  -noop:1;
   &>* {
     text-align: center !important;
+    -noop:1;
   }
+  /*!rtl:end:ignore*/
 }
 
 .right {
+  /*!rtl:begin:ignore*/
+  text-align: right !important;
+  -noop:1;
+
   &>* {
-    /*!rtl:ignore*/
     text-align: right !important;
+    -noop:1;
   }
+  /*!rtl:end:ignore*/
+}
+
+.orderedList, .unorderedList {
+  /*!rtl:begin:ignore*/
+  @include ricosTypography('p', false);
+  /*!rtl:end:ignore*/
+}
+
+.orderedList.center, .unorderedList.center{
+  /*!rtl:begin:ignore*/
+  & > div{
+    display: inline;
+  }
+  /*!rtl:end:ignore*/
+}
+
+.unorderedList.center{
+  /*!rtl:begin:ignore*/
+  list-style-position: inside;
+  /*!rtl:end:ignore*/
 }

@@ -1,18 +1,40 @@
-import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
+import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
+import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import {
+  CreateInlineButtons,
+  TranslationFunction,
+  AnchorTarget,
+  RelValue,
+} from 'wix-rich-content-common';
+import { GalleryPluginEditorConfig } from '../types';
 
-const modalStyles = getModalStyles();
+const modalStyles = getModalStyles({});
 
-const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue' | 'settings'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   anchorTarget,
   relValue,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: GalleryPluginEditorConfig;
+  anchorTarget: AnchorTarget;
+  relValue: RelValue;
 }) => {
   const icons = settings?.toolbar?.icons || {};
+  const spoilerButton = settings.spoiler
+    ? [
+        {
+          keyName: 'spoiler',
+          type: BUTTONS.SPOILER,
+          mobile: true,
+        },
+      ]
+    : [];
+
   return [
     {
       keyName: 'add',
@@ -47,6 +69,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
+    ...spoilerButton,
     {
       keyName: 'manage_media',
       type: BUTTONS.EXTERNAL_MODAL,
@@ -66,7 +89,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
       type: BUTTONS.EXTERNAL_MODAL,
       icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.GALLERY_SETTINGS,
-      activeTab: 'advanced_settings',
+      activeTab: 'settings',
       modalStyles,
       switchLayout,
       t,
@@ -74,6 +97,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,
+      accept: settings.accept,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

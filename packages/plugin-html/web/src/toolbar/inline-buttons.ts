@@ -4,7 +4,7 @@ import {
   SizeSmallLeftIcon,
   SizeSmallCenterIcon,
   SizeSmallRightIcon,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { EditIcon } from '../icons';
 import {
   MAX_ALIGNMENT_WIDTH,
@@ -15,9 +15,10 @@ import {
   MAX_HEIGHT_INPUT,
   SRC_TYPE_HTML,
   SRC_TYPE_URL,
-} from '../constants';
+} from '../defaults';
 import EditPanel from './HtmlEditPanel';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, GetEditorBounds } from 'wix-rich-content-common';
+import { HtmlPluginEditorConfig } from '../types';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const editorBounds = getEditorBounds?.();
@@ -32,9 +33,12 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
 };
 
-const createInlineButtons: CreateInlineButtons<'settings' | 'getEditorBounds'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   settings = {},
   getEditorBounds,
+}: {
+  settings: HtmlPluginEditorConfig;
+  getEditorBounds: GetEditorBounds;
 }) => {
   const {
     maxWidth,

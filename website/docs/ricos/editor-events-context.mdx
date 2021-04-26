@@ -1,0 +1,47 @@
+---
+id: editor-events-context
+title: EditorEventsContext
+sidebar_label: EditorEvents Context
+---
+
+import { EditorContextExample } from '../../infra/editor/components/EditorContextExample.tsx';
+import { withEditorContext } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
+
+## `withEditorContext`
+
+`withEditorContext` is a High-Order component, allowing to trigger `publish` event when content editing is done.
+
+Return value is a promise with finalized content.
+
+```ts
+editorEvents: {
+  publish: () => Promise<DraftContent>
+}
+```
+
+### Usage Example
+
+```jsx {5}
+import { withEditorContext } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
+
+const YourComponent = ({ editorEvents }) => {
+  const onPublish = async () => {
+    const content = await editorEvents.publish();
+    alert(JSON.stringify(content));
+  };
+  return (
+    <>
+      <RicosEditor content={content} />
+      <input type="button" onClick={onPublish} value="publish" />
+    </>
+  );
+};
+
+export default withEditorContext(YourComponent);
+```
+
+<div className="card">
+  <EditorContextExample />
+</div>

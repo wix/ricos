@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LinkPanelContainer } from 'wix-rich-content-editor-common';
-import { LinkIcon } from '../Icons';
-import styles from '../../../statics/styles/mobile-link-modal.scss';
 
 export default class MobileLinkModal extends Component {
   render() {
     const {
       url,
+      anchor,
       targetBlank,
       anchorTarget,
       relValue,
@@ -20,43 +19,41 @@ export default class MobileLinkModal extends Component {
       onDelete,
       t,
       uiSettings,
+      editorState,
       unchangedUrl,
+      linkTypes,
     } = this.props;
-    const mobileLinkModalTitle = t('MobileLinkModal_Title');
+    const baseLinkProps = {
+      editorState,
+      url,
+      anchor,
+      targetBlank,
+      anchorTarget,
+      relValue,
+      nofollow,
+      theme,
+      isActive,
+      isMobile,
+      onDone,
+      onCancel,
+      onDelete,
+      t,
+      ariaProps: { 'aria-labelledby': 'mob_link_modal_hdr' },
+      uiSettings,
+      hidePanel: { onCancel },
+      unchangedUrl,
+      linkTypes,
+    };
     return (
       <div>
-        <div className={styles.mobileLinkModal_titleContainer}>
-          <div className={styles.mobileLinkModal_linkIconContainer}>
-            <LinkIcon />
-          </div>
-          <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>
-            {mobileLinkModalTitle}
-          </h3>
-        </div>
-        <LinkPanelContainer
-          url={url}
-          targetBlank={targetBlank}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          nofollow={nofollow}
-          theme={theme}
-          isActive={isActive}
-          isMobile={isMobile}
-          onDone={onDone}
-          onCancel={onCancel}
-          hidePanel={onCancel}
-          onDelete={onDelete}
-          t={t}
-          ariaProps={{ 'aria-labelledby': 'mob_link_modal_hdr' }}
-          uiSettings={uiSettings}
-          unchangedUrl={unchangedUrl}
-        />
+        <LinkPanelContainer linkPanelWithTitle {...baseLinkProps} />
       </div>
     );
   }
 }
 
 MobileLinkModal.propTypes = {
+  editorState: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -64,6 +61,7 @@ MobileLinkModal.propTypes = {
   isActive: PropTypes.bool,
   isMobile: PropTypes.bool,
   url: PropTypes.string,
+  anchor: PropTypes.string,
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
@@ -71,4 +69,5 @@ MobileLinkModal.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,
+  linkTypes: PropTypes.object,
 };

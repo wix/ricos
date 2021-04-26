@@ -1,21 +1,32 @@
 import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import {
+  CreatePluginToolbar,
+  TranslationFunction,
+  GetEditorState,
+  SetEditorState,
+} from 'wix-rich-content-common';
+import { EmojiPluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
-  helpers,
   t,
   isMobile,
   getEditorState,
   setEditorState,
+}: {
+  t: TranslationFunction;
+  settings: EmojiPluginEditorConfig;
+  isMobile: boolean;
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
 }) => {
   return {
     InsertButtons: isMobile
       ? []
       : createInsertButtons({
           settings,
-          helpers,
           t,
+          isMobile,
           getEditorState,
           setEditorState,
         }),

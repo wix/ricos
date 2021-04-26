@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ColorPicker, SliderWithInput, SettingsSection } from 'wix-rich-content-editor-common';
+import { ColorPicker, SliderWithInput, SettingsSection } from 'wix-rich-content-plugin-commons';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import ButtonSample from '../components/button-sample';
@@ -127,6 +127,9 @@ class DesignComponent extends PureComponent {
 
   renderColorPicker(color, userColors, onColorAdded, onChange, pickerType, label) {
     const { t, isMobile, theme, palette } = this.props;
+    const paletteColors =
+      (isMobile ? palette?.slice(0, 5) : palette?.slice(0, 7)) || DEFAULT_PALETTE;
+
     return (
       <div>
         <ColorToggleComponent
@@ -142,7 +145,7 @@ class DesignComponent extends PureComponent {
         {this.state.pickerType === pickerType && (
           <ColorPicker
             color={color}
-            palette={palette?.slice(0, 7) || DEFAULT_PALETTE}
+            palette={paletteColors}
             userColors={userColors.slice(0, 100)}
             onColorAdded={onColorAdded}
             theme={this.styles}

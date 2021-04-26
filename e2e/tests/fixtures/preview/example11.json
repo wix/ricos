@@ -1,0 +1,111 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "f0n5f",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "1d45i",
+      "text": "Preview takes the first text fragment and displays it as if it was the first.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8ops5",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "dnqdb",
+      "text": "That's why this line won't be displayed in preview, because there's an image between the fragments.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "f9li9",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "15f407e0947a3680a2261a41cb6abbb6",
+          "original_file_name": "8bb438_b2d862605f684658926e6ee05e954880.jpg",
+          "file_name": "8bb438_b2d862605f684658926e6ee05e954880.jpg",
+          "width": 1920,
+          "height": 1280
+        }
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "c6b5cd1f1316311ec3560d6fb7d50958",
+          "original_file_name": "8bb438_17a7e143ea0148959ef6c5663158ade0.jpg",
+          "file_name": "8bb438_17a7e143ea0148959ef6c5663158ade0.jpg",
+          "width": 5200,
+          "height": 3467
+        }
+      }
+    }
+  },
+  "VERSION": "7.12.3"
+}

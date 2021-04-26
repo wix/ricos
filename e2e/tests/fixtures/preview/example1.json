@@ -1,0 +1,15 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "Some usual text",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {},
+  "VERSION": "7.12.3"
+}

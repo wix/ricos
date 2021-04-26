@@ -1,0 +1,148 @@
+---
+id: LinkPlugin
+title: Link Plugin
+sidebar_label: Link Plugin
+---
+
+import { pluginLink } from 'wix-rich-content-plugin-link';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Link plugin allow the user to add links
+
+<div id="top-section" className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add Link to your favorite website')}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginLink({
+        linkTypes: { anchor: false },
+      }),
+    ]}
+  />
+</div>
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginLink } from 'wix-rich-content-plugin-link';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+<RicosEditor plugins={[pluginLink(LinkConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+<RicosViewer plugins={[pluginLink(LinkConfig)]} />;
+```
+
+## Link Config API
+
+### `Link Preview`
+
+The Link Preview Plugin is implemented within the Link Plugin,
+and is activated once the Link Plugin Settings object contains preview field.
+For further information check the PreviewPlugin page.
+
+Default value:
+
+```jsx
+none;
+```
+
+### Anchor (Link To Section)
+
+Anchor option allows users to navigate to a certain section of the website
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent(`Try it yourself, add new lines and use the link to section option. 
+Make sure you link only to the lines you created`)}
+    placeholder={'Type here!'}
+    plugins={[pluginLink()]}
+  />
+</div>
+
+### `linkTypes`
+
+Supported Links types + pass configuration to those types
+
+Default value:
+
+```jsx
+{
+  anchor: true;
+}
+```
+
+### `blockPreview`
+
+Anchor configuration to customize the preview elements shown in the anchor panel.
+
+example:
+
+```jsx
+{
+  linkTypes: {
+      anchor: {
+        blockPreview: ({ type, data, text }) => {
+          console.log({ type, data, text });
+          const blockPreview = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
+          return blockPreview;
+        },
+      },
+    },
+}
+```
+
+`type` - block plugin type e.g. "wix-draft-plugin-image", "wix-draft-plugin-video", unstyled...
+`data` - block entity data e.g. src, config...
+`text` - block text
+
+### `disableAutoLink`
+
+Disable auto linkify links.
+
+Default value:
+
+```jsx
+disableAutoLink: false;
+```
+
+### Custom Link
+
+Allows users to render custom link panel, save their data, and get it by the `onClick` event.
+
+### `onLinkAdd`
+
+```jsx
+onLinkAdd?: (CustomLinkData: any, saveData: (CustomLinkData: any) => void ) => void
+```
+
+`onLinkAdd` is a function provided to give you the option to customize our default link behaviour,
+you can render your own link panel, and call `saveData` function to save your changes.<br />
+To get your saved data, you will need to use `onClick` event in the viewer, check it out below.<br />
+
+### Viewer Config
+
+### `onClick`
+
+```jsx
+onClick?: (event: React.MouseEvent<HTMLElement>, data: string | CustomLinkData) => void;
+```
+
+`data` can be resulted of two types:
+
+1. `string` - the url for the following link.
+2. `CustomLinkData: any` - custom link data, can be any data you wish to save.
+
+Default value:
+
+```jsx
+none;
+```

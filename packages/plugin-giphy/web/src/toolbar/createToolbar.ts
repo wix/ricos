@@ -1,11 +1,20 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
+import { GiphyPluginEditorConfig } from '../types';
 
-const createToolbar: CreatePluginToolbar = ({ helpers, t, settings, isMobile }) => {
+const createToolbar: CreatePluginToolbar = ({
+  t,
+  settings,
+  isMobile,
+}: {
+  t: TranslationFunction;
+  settings: GiphyPluginEditorConfig;
+  isMobile: boolean;
+}) => {
   return {
     InlineButtons: createInlineButtons({ t, settings, isMobile }),
-    InsertButtons: createInsertButtons({ helpers, t, settings, isMobile }),
+    InsertButtons: createInsertButtons({ t, settings, isMobile }),
     name: 'giphy',
   };
 };

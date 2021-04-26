@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, pluginVideoSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginVideoSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-video.schema.json';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
@@ -42,15 +44,25 @@ class VideoViewer extends Component {
       this.props.onReload?.();
     }
   };
+
   componentDidMount() {
     this.setState({ key: 'mounted' }); //remounts reactPlayer after ssr. Fixes bug where internal player id changes in client
   }
 
   normalizeUrl = url => (url.toLowerCase().indexOf('vimeo') === 0 ? 'https://' + url : url); //vimeo player needs urls prefixed with http[s]
 
+  findFormalVideoRatio = ratio => {
+    const baseRatios = [1, 5 / 4, 4 / 3, 3 / 2, 16 / 10, 16 / 9, 1.85, 2, 2.35, 2.39, 3];
+    const videoRatios = [...baseRatios, ...baseRatios.map(x => 1 / x)];
+    const findClosest = (arr, target) =>
+      arr.reduce((prev, curr) => (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev));
+    const closest = findClosest(videoRatios, ratio);
+    return Math.abs(closest - ratio) > 0.01 ? ratio : closest;
+  };
+
   getVideoRatio = wrapper => {
     const element = wrapper.querySelector('iframe, video');
-    return element.clientHeight / element.clientWidth;
+    return this.findFormalVideoRatio(element.clientHeight / element.clientWidth);
   };
 
   onReactPlayerReady = () => {
@@ -63,13 +75,32 @@ class VideoViewer extends Component {
     }
   };
 
-  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+  handleContextMenu = e => this.props.componentData.disableDownload && e.preventDefault();
+
+  disableDownloadProps = () => {
+    const { componentData, settings } = this.props;
+    const disableProps = {
+      config: {
+        file: {
+          attributes: {
+            controlsList: 'nodownload',
+          },
+        },
+      },
+    };
+    let disable = {};
+    if (componentData.disableDownload !== undefined) {
+      disable = componentData.disableDownload ? disableProps : {};
+    } else if (settings.disableDownload !== undefined) {
+      disable = settings.disableDownload ? disableProps : {};
+    }
+    return disable;
+  };
 
   render() {
     const { theme, width, height, disabled, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
-
     setComponentUrl?.(url);
     const props = {
       url,
@@ -78,6 +109,7 @@ class VideoViewer extends Component {
       width,
       height,
       key,
+      ...this.disableDownloadProps(),
     };
 
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
@@ -94,7 +126,6 @@ class VideoViewer extends Component {
     );
   }
 }
-
 VideoViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   onStart: PropTypes.func,
@@ -109,10 +140,8 @@ VideoViewer.propTypes = {
   isLoaded: PropTypes.bool,
   onReload: PropTypes.func,
 };
-
 VideoViewer.defaultProps = {
   width: '100%',
   height: '100%',
 };
-
 export default VideoViewer;

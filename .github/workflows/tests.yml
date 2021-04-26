@@ -36,10 +36,14 @@ jobs:
             node_modules
             */*/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npx midgard-yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -55,24 +59,25 @@ jobs:
       - name: Run tests with Knapsack Pro
         env:
           KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          #          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
           APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
         run: |
+          # fix video recording bug
+          echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
           $(npm bin)/knapsack-pro-cypress
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: cypress-screenshots-${{ matrix.ci_node_index }}
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-videos-visual-${{ matrix.ci_node_index }}
-          path: e2e/cypress/videos
+          path: |
+            e2e/cypress/screenshots
+            e2e/cypress/videos
+            **/applitools.log
 
   e2e-visual-applitoolsSendCompletion:
     needs: e2e-visual
@@ -102,10 +107,14 @@ jobs:
             node_modules
             */*/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npx midgard-yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -117,23 +126,24 @@ jobs:
       - name: Run tests with Knapsack Pro
         env:
           KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          #          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
           APPLITOOLS_IS_DISABLED: true
         run: |
+          # fix video recording bug
+          echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
           $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: cypress-screenshots-${{ matrix.ci_node_index }}
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: cypress-videos-contentState-${{ job.status }}-${{ matrix.ci_node_index }}
-          path: e2e/cypress/videos
+          path: |
+            e2e/cypress/screenshots
+            e2e/cypress/videos
+            **/applitools.log
 
   lint-and-unit-tests:
     runs-on: ubuntu-18.04
@@ -147,10 +157,14 @@ jobs:
             node_modules
             */*/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npx midgard-yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -167,58 +181,54 @@ jobs:
       - name: Get commit author
         id: commit-author
         run: |
-          echo "::set-env name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')"
+          echo "commit-author=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')" >> $GITHUB_ENV
       - name: Get PR number
         id: pr-number
         run: |
-          echo "::set-env name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')"
-      - name: Get PR author
-        id: pr-author
-        run: |
-          echo "::set-env name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
+          echo "pr-number=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')" >> $GITHUB_ENV
       - name: Notify fail in Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
+        uses: voxmedia/github-action-slack-notify-build@v1.1.3
         if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
-          channel_id: C0124DH7HHS #rich-content-ci
-          status: FAILED ${{ env[env.commit-author] }} ${{ env[env.pr-author] }}
+          channel_id: C0124DH7HHS #ricos-ci
+          status: FAILED ${{ env[env.commit-author] }}
           color: danger
 
       # - name: Get current commit status
       #   id: current-status
       #   run: |
-      #     echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
+      #     echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
       - name: Get previous commit
         id: previous-commit
         run: |
-          echo "::set-env name=previous-commit::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"
+          echo "previous-commit=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"  >> $GITHUB_ENV
       # - name: Get previous commit status
       #   id: previous-status
       #   run: |
-      #     echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
+      #     echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix/ricos/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
       - name: Get previous commit status
         id: previous-status
         run: |
-          echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))"
+          echo "previous-status=$(echo $(curl -s https://api.github.com/repos/wix/ricos/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))" >> $GITHUB_ENV
       - name: Notify recovery in Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
+        uses: voxmedia/github-action-slack-notify-build@v1.1.3
         if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
-          channel_id: C0124DH7HHS #rich-content-ci
+          channel_id: C0124DH7HHS #ricos-ci
           status: 'RECOVERED  :celebrate:'
           color: '#28a745'
     env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       Barackos: <@UM3M904MU>
-      barboaron: <@UMJ56Q30W>
       danarish4: <@UEBDPSU2W>
       lxgreen: <@U6FQCJ5GT>
       maimonav: <@UMUB0DSLD>
       mharsat: <@UJAAZU58B>
       noamtwix: <@UEBDQJBMG>
       oded-soffrin: <@U0MN7A3H8>
-      ShamaySapir: <@UM48FG657>
       shaulgo: <@U0SDJ5S30>
       talevy17: <@UM24QHHAR>
-      michael-wix: ' - Michael just added translations'
-      wix-babel-ng: " - Michael's bot added new translations :pokesquirtlewalk:"
+      tamrat-bay: <@U01E6AJC4AV>
+      justame: <@U06D4H3MJ>
+      wix-babel-ng: ' - Babel added new translations :pokesquirtlewalk:'

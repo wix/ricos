@@ -48,6 +48,11 @@ const COMMAND_BY_SHORTCUT = [
     key: '8',
   },
   {
+    command: COMMANDS.CODE,
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+    key: 'j',
+  },
+  {
     command: COMMANDS.BLOCKQUOTE,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: '9',
@@ -67,6 +72,7 @@ function getModifiers(e) {
     ...(usesMacOSHeuristics(e) && isCtrlKeyCommand(e) ? [MODIFIERS.CTRL] : []),
     ...(isOptionKeyCommand(e) ? [MODIFIERS.OPTION] : []),
     ...(e.shiftKey ? [MODIFIERS.SHIFT] : []),
+    ...(e.altKey ? [MODIFIERS.ALT] : []),
   ];
 }
 

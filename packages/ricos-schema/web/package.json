@@ -1,0 +1,38 @@
+{
+  "name": "ricos-schema",
+  "version": "8.30.4",
+  "author": {
+    "name": "Matan Harsat",
+    "email": "matanha@wix.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix-incubator/rich-content.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wix-incubator/rich-content/issues"
+  },
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
+  "files": [
+    "dist",
+    "src/**/*.proto"
+  ],
+  "main": "dist/cjs/rich_content/v1/index.js",
+  "module": "dist/esm/rich_content/v1/index.js",
+  "types": "dist/types/rich_content/v1/index.d.ts",
+  "scripts": {
+    "lint": ":",
+    "clean": "rm -rf dist src/generated",
+    "prebuild": "yarn clean",
+    "generate": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} src/generateSchema.ts",
+    "buildESM": "tsc",
+    "buildCJS": "tsc --module commonjs --outDir dist/cjs",
+    "build": "yarn generate && yarn buildESM && yarn buildCJS"
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "wnp_type": "proto"
+}

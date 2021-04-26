@@ -1,76 +1,75 @@
-import React, { Component, Children, FunctionComponent } from 'react';
-import createThemeStrategy, { ThemeStrategyFunction } from './themeStrategy/themeStrategy';
+import React, { Component, Children, FunctionComponent, ReactElement } from 'react';
+
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
-import localeStrategy from './localeStrategy/localeStrategy';
+import themeStrategy from './themeStrategy/themeStrategy';
 import { merge } from 'lodash';
-import { isDefined } from 'ts-is-present';
-import {
-  RicosEditorProps,
-  RicosViewerProps,
-  RichContentChild,
-  RichContentProps,
-  ThemeGeneratorFunction,
-} from './types';
+
+import previewStrategy from './previewStrategy/previewStrategy';
+import { PreviewConfig } from 'wix-rich-content-preview';
+import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
-  children: RichContentChild;
+  children: ReactElement;
+  plugins?: BasePlugin[];
   RicosModal: FunctionComponent;
   isViewer: boolean;
+  isPreviewExpanded?: boolean;
+  onPreviewExpand?: PreviewConfig['onPreviewExpand'];
 }
 
-interface EngineState {
-  localeStrategy: RichContentProps;
-}
-
-export class RicosEngine extends Component<EngineProps, EngineState> {
-  themeStrategy: ThemeStrategyFunction;
-  constructor(props: EngineProps) {
-    super(props);
-    this.state = { localeStrategy: { locale: props.locale } };
-    this.themeStrategy = createThemeStrategy();
-  }
-
+export class RicosEngine extends Component<EngineProps> {
   static defaultProps = { locale: 'en', isMobile: false };
 
-  updateLocale = async () => {
-    const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData });
-    });
-  };
-
-  componentDidMount() {
-    this.updateLocale();
-  }
-
-  componentWillReceiveProps(newProps: EngineProps) {
-    if (newProps.locale !== this.props.locale) {
-      this.updateLocale();
-    }
-  }
-
   runStrategies() {
-    const { cssOverride, theme, plugins = [], isViewer = false, content, children } = this.props;
-    const { localeStrategy } = this.state;
-
-    const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
-      .map(plugin => plugin.theme)
-      .filter(isDefined);
-
-    const { theme: themeStrategyResult, rawCss } = this.themeStrategy({
-      isViewer,
-      themeGeneratorFunctions,
-      palette: theme?.palette,
+    const {
       cssOverride,
+      plugins = [],
+      isViewer = false,
+      content,
+      preview,
+      theme: ricosTheme,
+      isPreviewExpanded = false,
+      onPreviewExpand,
+      children,
+      _rcProps,
+    } = this.props;
+
+    const { theme, html } = themeStrategy({
+      plugins,
+      cssOverride,
+      ricosTheme,
+      experiments: _rcProps?.experiments,
+    });
+    const htmls: ReactElement[] = [];
+    if (html) {
+      htmls.push(html);
+    }
+
+    const strategiesProps = merge(
+      { theme },
+      pluginsStrategy({
+        isViewer,
+        plugins,
+        childProps: children.props,
+        cssOverride: theme,
+        content,
+        experiments: _rcProps?.experiments,
+      })
+    );
+
+    const { initialState: previewContent, ...previewStrategyResult } = previewStrategy({
+      isViewer,
+      isPreviewExpanded,
+      onPreviewExpand,
+      previewConfig: preview,
+      content,
+      experiments: _rcProps?.experiments,
     });
 
     return {
-      strategyProps: merge(
-        { theme: themeStrategyResult },
-        pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
-        localeStrategy
-      ),
-      rawCss,
+      strategyProps: merge(strategiesProps, previewStrategyResult),
+      previewContent,
+      htmls,
     };
   }
 
@@ -81,40 +80,75 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       isMobile,
       toolbarSettings,
       modalSettings = {},
+      isPreviewExpanded,
       placeholder,
       content,
       RicosModal,
       onError,
+      mediaSettings = {},
+      linkSettings = {},
+      linkPanelSettings = {},
+      maxTextLength,
+      textAlignment,
+      onAtomicBlockFocus,
     } = this.props;
 
-    const { strategyProps, rawCss } = this.runStrategies();
+    const { strategyProps, previewContent, htmls } = this.runStrategies();
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
 
-    const { openModal, closeModal, ariaHiddenId } = modalSettings;
-
+    const {
+      openModal,
+      closeModal,
+      ariaHiddenId,
+      container,
+      onModalOpen,
+      onModalClose,
+    } = modalSettings;
+    const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
+    const { anchorTarget, relValue } = linkSettings;
+    const disableDownload = mediaSettings?.disableDownload || disableRightClick;
     // any of ricos props that should be merged into child
+    const isPreview = () => !!(previewContent && !isPreviewExpanded);
     const ricosPropsToMerge: RichContentProps = {
       isMobile,
+      maxTextLength,
       textToolbarType:
         !isMobile && (textToolbarContainer || useStaticTextToolbar) ? 'static' : 'inline',
-      config: { getToolbarSettings },
-      initialState: content,
+      config: {
+        getToolbarSettings,
+        uiSettings: { disableDownload, linkPanel: linkPanelSettings },
+      },
+      initialState: previewContent || content,
       placeholder,
       onError,
       helpers: {
         openModal,
         closeModal,
+        isPreview,
       },
+      disabled: pauseMedia,
+      anchorTarget,
+      relValue,
+      textAlignment,
+      onAtomicBlockFocus,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
+
     return [
-      <style type="text/css" key={'styleElement'}>
-        {rawCss}
-      </style>,
-      <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
+      ...htmls,
+      <RicosModal
+        ariaHiddenId={ariaHiddenId}
+        isModalSuspended={isPreview()}
+        container={container}
+        fullscreenProps={fullscreenProps}
+        {...mergedRCProps}
+        key={'ricosElement'}
+        onModalOpen={onModalOpen}
+        onModalClose={onModalClose}
+      >
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </RicosModal>,
     ];

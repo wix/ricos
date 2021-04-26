@@ -2,21 +2,22 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { Tabs, Tab, SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
+import { KEYS_CHARCODE, FocusManager, ErrorIcon } from 'wix-rich-content-editor-common';
 import {
-  Tabs,
-  Tab,
-  FocusManager,
-  ErrorIcon,
-  SettingsPanelFooter,
-  KEYS_CHARCODE,
-} from 'wix-rich-content-editor-common';
-import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
+  mergeStyles,
+  isValidUrl,
+  isNewTab,
+  ADD_PLUGIN_LINK_BI,
+  WEB_ADDRESS_CATEGORY,
+} from 'wix-rich-content-common';
 import DesignComponent from '../components/design-component';
 import SettingsComponent from '../components/settings-component';
 import Navbar from '../components/navbar';
 import PreviewComponent from '../components/preview-component';
 import { settingsTabValue, designTabValue } from '../constants';
 import styles from '../../statics/styles/button-input-modal.scss';
+import { LINK_BUTTON_TYPE } from '../types';
 export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ export default class ButtonInputModal extends Component {
     } = this.props;
 
     this.state = {
-      validUrl: isValidUrl(button.settings.url),
+      validUrl: button.settings?.url && isValidUrl(button.settings.url),
       settings: { ...button.settings },
       design: { ...button.design },
       initialComponentData: { ...button },
@@ -71,6 +72,23 @@ export default class ButtonInputModal extends Component {
     }
   };
 
+  triggerLinkBi = () => {
+    const {
+      settings: { rel, target, url },
+      validUrl,
+    } = this.state;
+    validUrl &&
+      this.props.helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, {
+        plugin_id: LINK_BUTTON_TYPE,
+        params: {
+          link: url,
+          newTab: isNewTab(target),
+          category: WEB_ADDRESS_CATEGORY,
+          rel,
+        },
+      });
+  };
+
   onConfirm = () => {
     const { validUrl, shouldShowLink } = this.state;
     const {
@@ -78,6 +96,7 @@ export default class ButtonInputModal extends Component {
     } = this.props;
     if (!shouldShowLink || validUrl) {
       this.setState({ submitted: true, isOpen: false });
+      this.triggerLinkBi();
       closeModal();
     } else {
       this.setState({ activeTab: settingsTabValue });
@@ -207,6 +226,7 @@ export default class ButtonInputModal extends Component {
             <div>
               <div
                 role="heading"
+                aria-level={2}
                 aria-labelledby="button_modal_hdr"
                 className={styles.button_inputModal_header}
               >

@@ -12,8 +12,7 @@
   cursor: pointer;
   &:hover,
   &:focus {
-    outline: 0;
-    color: $accent-color;
+    color: $action-color;
   }
 }
 
@@ -24,10 +23,6 @@
   &:last-child {
     margin-right: 0;
   }
-}
-
-.textLabelButton_label {
-  outline: none;
 }
 
 .textLabelButton_icon {

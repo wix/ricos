@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import { debounce } from 'lodash';
-import { DISPLAY_MODE, getVisibleSelectionRect } from 'wix-rich-content-editor-common';
+import {
+  DISPLAY_MODE,
+  getVisibleSelectionRect,
+  KEYS_CHARCODE,
+} from 'wix-rich-content-editor-common';
 import stylesRtlIgnore from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
 import styles from '../../../../statics/styles/inline-toolbar.scss';
 import { getLangDir } from 'wix-rich-content-common';
@@ -50,6 +54,7 @@ export default class InlineToolbar extends Component {
     }),
     toolbarDecorationFn: PropTypes.func,
     locale: PropTypes.string.isRequired,
+    removeToolbarFocus: PropTypes.func,
   };
 
   static defaultProps = {
@@ -134,6 +139,8 @@ export default class InlineToolbar extends Component {
     return { top, left };
   }
 
+  isToolbarOnFocus = () => this.toolbar?.contains(document.activeElement);
+
   onSelectionChanged = debounce(() => {
     // need to wait a tick for window.getSelection() to be accurate
     // when focusing editor with already present selection
@@ -143,8 +150,13 @@ export default class InlineToolbar extends Component {
     }
 
     const { displayOptions } = this.props;
+    const toolbarOnFocus = this.isToolbarOnFocus();
 
-    if (displayOptions.displayMode === DISPLAY_MODE.NORMAL && !this.state.keepOpen) {
+    if (
+      displayOptions.displayMode === DISPLAY_MODE.NORMAL &&
+      !this.state.keepOpen &&
+      !toolbarOnFocus
+    ) {
       const { top, left } = this.getRelativePosition();
       this.setState({ position: { '--offset-top': `${top}px`, '--offset-left': `${left}px` } });
     }
@@ -162,8 +174,9 @@ export default class InlineToolbar extends Component {
       isVisible = visibilityFn(editorState);
     }
 
-    // TODO: Test readonly mode and possibly set isVisible to false if the editor is readonly
-    return isVisible || overrideContent || extendContent || keepOpen;
+    const toolbarOnFocus = this.isToolbarOnFocus();
+
+    return isVisible || overrideContent || extendContent || keepOpen || toolbarOnFocus || false;
   };
 
   isVisible = () => this.state.isVisible;
@@ -283,6 +296,7 @@ export default class InlineToolbar extends Component {
       relValue,
       t,
       tabIndex,
+      toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
     };
 
     return (
@@ -326,6 +340,14 @@ export default class InlineToolbar extends Component {
     );
   }
 
+  onKeyDown = e => {
+    if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+      this.props.removeToolbarFocus?.();
+    }
+  };
+
+  onClick = e => e.preventDefault();
+
   render() {
     //checking false since undefined is not good
     if (this.isVisible() === false) {
@@ -335,6 +357,8 @@ export default class InlineToolbar extends Component {
     const { toolbarStyles } = theme || {};
 
     const props = {
+      onClick: this.onClick,
+      onKeyDown: this.onKeyDown,
       className: classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar),
       style: this.getStyle(),
       tabIndex: this.isVisible() ? 0 : -1,

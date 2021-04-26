@@ -7,18 +7,14 @@ import {
 } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { findIndex } from 'lodash';
-import imageClientAPI from 'image-client-api';
+import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FileInput, Loader } from 'wix-rich-content-editor-common';
-
+import { FileInput, Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
+import { GALLERY_ITEMS_TYPES } from '../../defaults';
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
-
-//eslint-disable-next-line no-unused-vars
-const EMPTY_SMALL_PLACEHOLDER =
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 const onKeyDown = (e, handler) => {
   if (e.key === 'Enter' || e.key === ' ') {
@@ -79,7 +75,8 @@ const SortableItem = sortableElement(props => {
     let url;
     if (!isLocalObjectUrl(item)) {
       url = imageClientAPI.getScaleToFillImageURL(
-        prefix + (item.metadata.type !== 'video' ? item.url : item.metadata.poster),
+        prefix +
+          (item.metadata.type !== GALLERY_ITEMS_TYPES.VIDEO ? item.url : item.metadata.poster),
         item.metadata.width,
         item.metadata.height,
         imageSize,
@@ -126,6 +123,7 @@ const SortableItem = sortableElement(props => {
         ) : (
           <Loader theme={theme} />
         )}
+        {item.error && <MediaItemErrorMsg error={item.error} t={t} isTooltip />}
       </div>
     );
   }
@@ -348,14 +346,16 @@ export class SortableComponent extends Component {
   state = this.propsToState(this.props);
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(
-      {
-        items: arrayMove(this.state.items, oldIndex, newIndex),
-      },
-      () => {
-        this.props.onItemsChange(this.state.items);
-      }
-    );
+    if (oldIndex !== newIndex) {
+      this.setState(
+        {
+          items: arrayMove(this.state.items, oldIndex, newIndex),
+        },
+        () => {
+          this.props.onItemsChange(this.state.items);
+        }
+      );
+    }
   };
 
   clickAction = itemIdx => {

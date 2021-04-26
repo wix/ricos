@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 process.on('unhandledRejection', error => {
   throw error;
 });
@@ -10,14 +8,16 @@ const chalk = require('chalk');
 const prompts = require('prompts');
 const argv = require('yargs').argv;
 const pkg = require('../package.json');
+const { clearScrean, log } = require('./cmdLineUtils');
 
 const lernaPath = path.resolve(__dirname, '../node_modules/.bin/lerna');
 
-// resets the console
-process.stdout.write('\x1Bc');
+clearScrean();
+log.title(`Starting the release process for ${pkg.name}`);
 
-console.log(chalk.underline(`Starting the release process for ${pkg.name}`));
-console.log();
+cp.execSync('find ./*/ -maxdepth 3 -name "package-lock.json" -type f -delete', {
+  stdio: 'inherit',
+});
 
 prompts({
   type: 'confirm',
@@ -26,12 +26,12 @@ prompts({
   message: 'Did you remember to update changelog with the new version?',
 }).then(({ value }) => {
   if (!value) {
-    console.log();
-    console.log(chalk.cyan('So do it now 👇'));
-    console.log();
-    console.log(path.resolve(__dirname, '../CHANGELOG.md'));
-    console.log();
-    console.log(chalk.red('Release aborted'));
+    log.space();
+    log.cyan(chalk.cyan('So do it now 👇'));
+    log.space();
+    log.msg(path.resolve(__dirname, '../CHANGELOG.md'));
+    log.space();
+    log.error(chalk.red('Release aborted'));
   } else {
     try {
       let lernaCmd = `${lernaPath} version --exact --no-commit-hooks --force-publish="*"`;

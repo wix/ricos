@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { UrlInputModal } from 'wix-rich-content-editor-common';
+import { UrlInputModal } from 'wix-rich-content-plugin-commons';
 import { DEFAULTS } from '../defaults';
 
 export default class EmbedURLInputModal extends Component {
@@ -16,8 +16,7 @@ export default class EmbedURLInputModal extends Component {
   onConfirm = () => {
     const { url } = this.state;
     if (url) {
-      const { componentData, pubsub, onConfirm, helpers } = this.props;
-      const { fetchData } = componentData;
+      const { componentData, pubsub, onConfirm, helpers, fetchData } = this.props;
       fetchData(url).then(({ html }) => {
         if (!html) {
           this.setState({ submittedInvalidUrl: true });
@@ -44,12 +43,7 @@ export default class EmbedURLInputModal extends Component {
 
   render() {
     const { url, submittedInvalidUrl } = this.state;
-    const {
-      t,
-      languageDir,
-      componentData: { socialType },
-      helpers,
-    } = this.props;
+    const { t, languageDir, socialType, helpers } = this.props;
 
     return (
       <UrlInputModal
@@ -77,4 +71,6 @@ EmbedURLInputModal.propTypes = {
   componentData: PropTypes.object.isRequired,
   t: PropTypes.func,
   languageDir: PropTypes.string,
+  fetchData: PropTypes.func,
+  socialType: PropTypes.string,
 };

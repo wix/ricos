@@ -20,6 +20,33 @@ export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
   };
 };
 
+export const useTheming = ({
+  paletteType,
+  skipCssOverride,
+  useCustomStyles,
+  fallbackColor,
+  disableContainer,
+  contentBgColor,
+}) => {
+  return {
+    theme: {
+      paletteType,
+      skipCssOverride,
+      useCustomStyles,
+      fallbackColor,
+      disableContainer,
+      contentBgColor,
+    },
+  };
+};
+
+export const useConsumerTheming = (consumer, applyOuterStyle) => {
+  return {
+    consumer,
+    applyOuterStyle,
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
@@ -30,8 +57,13 @@ export const usePluginsConfig = pluginsConfig => {
   };
 };
 
+export const useUploadConfig = {
+  isNativeUpload: true,
+};
+
 export const plugins = {
   embedsPreset: 'embedsPreset',
+  spoilerPreset: 'spoilerPreset',
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
   actionButton: 'actionButton',
@@ -39,6 +71,10 @@ export const plugins = {
   headings: 'headings',
   textPlugins: 'textPlugins',
   all: 'all',
+  giphy: 'giphy',
+  emoji: 'emoji',
+  accordion: 'accordion',
+  table: 'table',
 };
 
 export const pluginsType = {

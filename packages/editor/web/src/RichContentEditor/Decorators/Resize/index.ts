@@ -1,7 +1,8 @@
 import createDecorator from './createDecorator';
+import { EditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
-export default config => {
-  const store = {
+export default (config): EditorPlugin & { decorator } => {
+  const store: Partial<PluginFunctions> = {
     getEditorRef: undefined,
     getEditorState: undefined,
     setEditorState: undefined,

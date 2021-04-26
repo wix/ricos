@@ -2,7 +2,8 @@
 import React, { PureComponent } from 'react';
 import { merge } from 'lodash';
 
-import { SelectionList, Separator } from 'wix-rich-content-editor-common';
+import { SelectionList } from 'wix-rich-content-plugin-commons';
+import { Separator } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { getRandomValue } from '../../../helpers';
@@ -12,7 +13,7 @@ import {
   BACKGROUND_TYPE,
   POLL_IMAGES_POOL,
   OPTION_IMAGES_POOL,
-} from '../../../constants';
+} from '../../../defaults';
 import { ListPollIcon, GridPollIcon, WithImagePollIcon, RemoveIcon } from '../../../assets/icons';
 
 import styles from './poll-preset-selector.scss';

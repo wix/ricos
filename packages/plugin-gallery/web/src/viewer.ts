@@ -1,9 +1,10 @@
 import { typeMapper } from './typeMapper';
-import { GALLERY_TYPE } from './types';
-import { DEFAULTS } from './constants';
+import { GALLERY_TYPE, GalleryPluginViewerConfig } from './types';
+import { DEFAULTS } from './defaults';
+import { ViewerPluginCreator } from 'wix-rich-content-common';
 export { typeMapper as galleryTypeMapper, GALLERY_TYPE };
 
-export const pluginGallery = (config = {}) => {
+export const pluginGallery: ViewerPluginCreator<GalleryPluginViewerConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: GALLERY_TYPE,

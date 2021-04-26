@@ -1,5 +1,7 @@
 /*global cy*/
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
+import { getFooterToolbarConfig } from '../cypress/testAppConfig';
+import { PLUGIN_COMPONENT } from '../cypress/dataHooks';
 
 describe('rtl', () => {
   beforeEach(() => cy.switchToHebrew());
@@ -18,6 +20,16 @@ describe('rtl', () => {
     beforeEach(() => cy.switchToDesktop());
 
     after(() => cy.eyesClose());
+
+    it('render plugin shortcut with search in rtl', function() {
+      cy.loadRicosEditorAndViewer(
+        'newLines',
+        getFooterToolbarConfig({ morePluginsMenu: { showSearch: true } })
+      )
+        .focusEditor()
+        .openFooterPluginMenu();
+      cy.eyesCheckWindow(this.test.title);
+    });
 
     it('render plugin toolbar in rtl', function() {
       cy.loadRicosEditorAndViewer()
@@ -43,7 +55,8 @@ describe('rtl', () => {
 
     it('render external modal in rtl', function() {
       cy.loadRicosEditorAndViewer('images')
-        .openImageSettings()
+        .openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+        .openSettings()
         .get('[data-hook="imageSettingsCaptionInput"]')
         .blur();
       cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
@@ -83,8 +96,9 @@ describe('rtl', () => {
 
     it('render external modal in rtl', function() {
       cy.loadRicosEditorAndViewer('images')
-        .openImageSettings()
-        .get('[aria-label="Cancel"]')
+        .openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+        .openSettings()
+        .get('[data-hook="ImageSettingsMobileHeaderCancel"]')
         .blur();
       cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });

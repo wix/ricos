@@ -1,0 +1,34 @@
+$TITLE_HEIGHT: 70px;
+$FOOTER_HEIGHT: 96px;
+
+.accordionModal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: #333333;
+  background: #fff;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.accordionModalTitle {
+  position: absolute;
+  margin: 24px 0 0 24px;
+  font-size: 20px;
+}
+
+.accordionModal_scrollContainer {
+  margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
+  width: 100%;
+}
+
+.accordionModal_mobile {
+  margin: 0 auto;
+}
+
+
+
+
+

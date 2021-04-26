@@ -6,14 +6,27 @@ import handleTabCommand from './handleTabCommand';
 
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 
-export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
+const isUndoRedo = command => command === COMMANDS.UNDO || command === COMMANDS.REDO;
+
+export default (updateEditorState, customHandlers, blockType, onBackspace, innerRCERenderedIn) => (
+  command,
+  editorState
+) => {
   let newState;
 
   if (customHandlers[command]) {
     if (isTab(command)) {
-      newState = handleTabCommand(editorState, blockType, customHandlers, command);
+      newState = handleTabCommand(
+        editorState,
+        blockType,
+        customHandlers,
+        command,
+        innerRCERenderedIn
+      );
+    } else if (isUndoRedo(command)) {
+      return customHandlers[command](editorState, event);
     } else {
-      newState = customHandlers[command](editorState);
+      newState = customHandlers[command](editorState, event);
     }
   } else {
     switch (command) {
@@ -32,6 +45,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
         newState = RichUtils.toggleBlockType(editorState, command);
         break;
       case COMMANDS.BACKSPACE:
+        onBackspace?.(editorState);
         newState = handleBackspaceCommand(editorState);
         break;
       case COMMANDS.DELETE:

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LAYOUT } from '../../constants';
+import { LAYOUT } from '../../defaults';
 import { withRCEHelpers } from '../rce-helpers-context';
 
 import { PollGridOption } from './PollGridOption';

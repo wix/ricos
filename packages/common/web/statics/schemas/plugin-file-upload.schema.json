@@ -50,6 +50,13 @@
         "title": "The File URL Schema",
         "default": "",
         "examples": ["http://example.com/landscape.jpg"]
+      },
+      "id": {
+        "$id": "/properties/id",
+        "type": "string",
+        "title": "The File ID Schema ",
+        "default": "",
+        "examples": ["d3dd72_e4310321765e48f44803b92424d5edb8"]
       }
     }
   }

@@ -1,0 +1,59 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.title {
+    font-size: 16px;
+    @include phone {
+        font-size: 20px;
+    }
+}
+.subtitle {
+    padding-top: 7px;
+    font-size: 12px; 
+    color: #969696;
+    @include phone {
+        font-size: 14px;
+        padding-top: 12px;
+    }
+}
+.tableConfig {
+    padding-top: 11px;
+    display: grid;
+    grid-template-columns: 153px 153px;
+    grid-column-gap: 11px;
+    grid-row-gap: 12px;
+    @include phone {
+        padding-top: 20px;
+    }
+}
+.submit {
+    height: 36px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    grid-column: 1/-1;
+    button {
+        color: var(--ricos-background-color,#fff);
+        background-color: $action-color;
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+}
+
+.errorMsg {
+    grid-column: 1/-1;
+    background-color: rgba(223, 49, 49, .1);
+    padding: 16px;
+    font-size: 14px;
+}
+
+.closeButton {
+    position: absolute;
+    cursor: pointer;
+    color: black;
+    right: 30px;
+    top: 50px;
+}

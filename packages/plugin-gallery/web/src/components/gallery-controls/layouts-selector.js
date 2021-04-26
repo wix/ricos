@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { getGalleryLayouts } from '../../layout-helper';
 import { mergeStyles } from 'wix-rich-content-common';
-import { SelectionList } from 'wix-rich-content-editor-common';
+import { SelectionList } from 'wix-rich-content-plugin-commons';
 import styles from '../../../statics/styles/layout-selector.scss';
 
 class LayoutSelector extends Component {

@@ -1,4 +1,6 @@
 const nodeExternals = require('webpack-node-externals');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HappyPack = require('happypack');
 const path = require('path');
 
 const output = {
@@ -15,7 +17,7 @@ const common = {
     hints: false,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   optimization: {
     splitChunks: {
@@ -36,34 +38,46 @@ const babelRule = {
   },
 };
 
-const scssRule = {
+const scssRule = topLoader => ({
   test: /\.scss$/,
   use: [
-    {
-      loader: 'style-loader',
-    },
+    topLoader,
     {
       loader: 'css-loader',
       options: {
-        modules: true,
         importLoaders: 1,
-        localIdentName: '[name]_[local]',
+        modules: {
+          localIdentName: '[name]_[local]',
+        },
       },
     },
     {
       loader: 'sass-loader',
     },
   ],
-};
-
-const scssServerRule = { ...scssRule, use: [...scssRule.use] };
-scssServerRule.use.shift();
+});
 
 const urlRule = {
   test: /\.(woff|eot|ttf|svg|woff2)$/,
   issuer: /\.(s)?css$/,
   use: ['url-loader'],
 };
+
+const typescriptRule = {
+  test: /\.tsx?$/,
+  exclude: /node_modules/,
+  loader: 'happypack/loader?id=ts',
+};
+
+const happyPackPlugin = new HappyPack({
+  id: 'ts',
+  loaders: [
+    {
+      path: 'ts-loader',
+      query: { happyPackMode: true },
+    },
+  ],
+});
 
 const config = [
   {
@@ -73,15 +87,19 @@ const config = [
       index: './src/client/index',
     },
     output,
+    plugins: [happyPackPlugin],
     module: {
       rules: [
         babelRule,
-        scssRule,
+        scssRule({
+          loader: 'style-loader',
+        }),
         urlRule,
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
         },
+        typescriptRule,
       ],
     },
   },
@@ -98,15 +116,23 @@ const config = [
     },
     target: 'node',
     externals: [nodeExternals({ whitelist: [/.css/, /^wix-rich-content/] })],
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+      }),
+      happyPackPlugin,
+    ],
     module: {
       rules: [
         babelRule,
-        scssServerRule,
+        scssRule(MiniCssExtractPlugin.loader),
         urlRule,
         {
           test: /\.css$/,
-          use: { loader: 'css-loader', options: { exportOnlyLocals: true } },
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
+        typescriptRule,
       ],
     },
   },

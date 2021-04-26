@@ -1,55 +1,68 @@
-import { TOOLBARS, EditorState } from 'wix-rich-content-editor-common';
+import {
+  TOOLBARS,
+  INSERT_PLUGIN_BUTTONS,
+  BUTTON_TYPES,
+  undo,
+  redo,
+  pluginsUndo,
+} from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import {
+  CreateInsertButtons,
+  TranslationFunction,
+  GetEditorState,
+  SetEditorState,
+} from 'wix-rich-content-common';
+import { UndoRedoPluginEditorConfig } from './types';
 
-const createInsertButtons: CreateInsertButtons<
-  'helpers' | 't' | 'settings' | 'UndoButton' | 'RedoButton'
-> = ({ helpers, t, settings, UndoButton, RedoButton }) => {
+const createInsertButtons: CreateInsertButtons = ({
+  t,
+  settings,
+  getEditorState,
+  setEditorState,
+  isPluginExperiment,
+}: {
+  t: TranslationFunction;
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
+  settings: UndoRedoPluginEditorConfig;
+  isPluginExperiment: boolean | undefined;
+}) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
   return [
     {
-      type: 'undo-redo',
-      name: 'UndoPlugin_InsertButton',
-      tooltipText: t('Undo Button'),
-      toolbars: [TOOLBARS.FOOTER],
-      Icon: undoIcon,
+      type: BUTTON_TYPES.BUTTON,
+      name: INSERT_PLUGIN_BUTTONS.UNDO,
+      tooltip: t('UndoButton_Tooltip'),
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.FOOTER],
+      getIcon: () => undoIcon,
       componentData: {},
-      wrappingComponent: UndoButton,
-      helpers,
-      t,
-      mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
-        onClick: e => {
-          e.preventDefault();
-          setEditorState(EditorState.undo(getEditorState()));
-        },
-        isDisabled: () =>
-          getEditorState()
-            .getUndoStack()
-            .isEmpty(),
-      }),
+      onClick: e => {
+        e.preventDefault();
+        setEditorState(isPluginExperiment ? pluginsUndo(getEditorState()) : undo(getEditorState()));
+      },
+      isDisabled: () =>
+        getEditorState()
+          .getUndoStack()
+          .isEmpty(),
     },
     {
-      type: 'undo-redo',
-      name: 'RedoPlugin_InsertButton',
-      tooltipText: t('Redo Button'),
-      toolbars: [TOOLBARS.FOOTER],
-      Icon: redoIcon,
+      type: BUTTON_TYPES.BUTTON,
+      name: INSERT_PLUGIN_BUTTONS.REDO,
+      tooltip: t('RedoButton_Tooltip'),
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.FOOTER],
+      getIcon: () => redoIcon,
       componentData: {},
-      wrappingComponent: RedoButton,
-      helpers,
-      t,
-      mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
-        onClick: e => {
-          e.preventDefault();
-          setEditorState(EditorState.redo(getEditorState()));
-        },
-        isDisabled: () =>
-          getEditorState()
-            .getRedoStack()
-            .isEmpty(),
-      }),
+      onClick: e => {
+        e.preventDefault();
+        setEditorState(redo(getEditorState()));
+      },
+      isDisabled: () =>
+        getEditorState()
+          .getRedoStack()
+          .isEmpty(),
     },
   ];
 };

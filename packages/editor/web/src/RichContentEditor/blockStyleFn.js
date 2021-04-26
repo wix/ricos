@@ -6,6 +6,7 @@ import {
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
 } from 'wix-rich-content-common';
+import { isListType } from 'ricos-content';
 
 const styles = { ...editorStyles, ...alignmentStyles };
 const types = {
@@ -21,9 +22,6 @@ const types = {
   'ordered-list-item': 'orderedList',
   'unordered-list-item': 'unorderedList',
 };
-const isList = type => {
-  return type === 'ordered-list-item' || type === 'unordered-list-item';
-};
 
 const listAlignmentClass = (textAlignment, textDirection) => {
   const direction = getDirectionFromAlignmentAndTextDirection(textAlignment, textDirection);
@@ -35,26 +33,27 @@ const textBlockAlignmentClass = (textAlignment, textDirection) => {
   return `public-DraftStyleDefault-text-${direction}`;
 };
 
-export default (theme, styleToClass) => {
+export default (theme, styleToClass, defaultTextAlignment) => {
   return contentBlock => {
     const {
       type,
       depth,
       text,
-      data: { textAlignment, dynamicStyles = {} },
+      data: { textAlignment = defaultTextAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
 
-    const key = types[type] || 'text';
+    const textDirection = getTextDirection(text);
 
+    const key = types[type] || 'text';
     const classList = [styles[key], theme[key]];
 
     if (type !== 'atomic') {
       classList.push(
         styles[textAlignment],
         theme[textAlignment],
-        isList(type)
-          ? listAlignmentClass(textAlignment, getTextDirection(text))
-          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, getTextDirection(text))]
+        isListType(type)
+          ? listAlignmentClass(textAlignment, textDirection)
+          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, textDirection)]
       );
     }
 

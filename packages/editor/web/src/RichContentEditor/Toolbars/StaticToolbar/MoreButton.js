@@ -5,7 +5,7 @@ import Styles from '../../../../statics/styles/static-toolbar-more-button.scss';
 import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
-import ClickOutside from 'react-click-outside';
+import ClickOutside from 'react-click-outsider';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
@@ -19,7 +19,7 @@ class MoreButton extends Component {
     if (!splitToSections) {
       this.plugins = structure.map(plugin => ({
         ...plugin,
-        section: 'BlockToolbar_Section_NoSections',
+        section: 'BlockToolbar_Section_NoSections_ShortcutToolbar',
       }));
     } else {
       this.plugins = structure;
@@ -35,7 +35,8 @@ class MoreButton extends Component {
       const clientRect = this.moreButton.getBoundingClientRect();
       const pluginMenuPosition = {
         right: clientRect.right >= window.innerWidth && 0,
-        left: clientRect.right < window.innerWidth && clientRect.left - 200,
+        left: clientRect.right < window.innerWidth && clientRect.left - 135,
+        top: clientRect.top < 400 && 40,
       };
       this.setState({ pluginMenuPosition });
     }
@@ -50,18 +51,22 @@ class MoreButton extends Component {
   };
 
   render() {
-    const { addPluginMenuProps, isActive, t } = this.props;
+    const { addPluginMenuProps, isActive, t, theme, forceDisabled } = this.props;
     const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
-        className={classnames(this.styles.moreButton, isActive && this.styles.active)}
+        className={classnames(
+          this.styles.moreButton,
+          isActive && this.styles.active,
+          forceDisabled && this.styles.forceDisabled
+        )}
         key="shorcutButton"
         onClick={this.handleClick}
         ref={ref => (this.moreButton = ref)}
         data-hook="moreButton"
       >
-        <ShortcutIcon />
-        {t('Shortcut_Toolbar_ViewAll_Blocks')}
+        <ShortcutIcon className={this.styles.icon} />
+        <div className={this.styles.buttonText}>{t('Shortcut_Toolbar_ViewAll_Blocks')}</div>
       </div>,
       showPluginMenu && (
         <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
@@ -72,6 +77,7 @@ class MoreButton extends Component {
           >
             <AddPluginMenu
               {...addPluginMenuProps}
+              theme={{ ...theme, buttonStyles: null }}
               t={t}
               addPluginMenuConfig={this.addPluginMenuConfig}
               plugins={this.plugins}
@@ -90,6 +96,7 @@ class MoreButton extends Component {
 
 MoreButton.propTypes = {
   addPluginMenuProps: PropTypes.object.isRequired,
+  forceDisabled: PropTypes.bool,
 };
 
 export default MoreButton;

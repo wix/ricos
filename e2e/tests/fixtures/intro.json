@@ -26,7 +26,7 @@
     },
     {
       "key": "7cqs0",
-      "text": "Welcome to Wix Rich Content - An Open Source, React based, super charged rich content editor with an extensible plugin system ⚡️",
+      "text": "Welcome to Wix Rich Content - An Open Source, React based, supercharged rich content editor with an extensible plugin system ⚡️",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [
@@ -51,6 +51,11 @@
           "offset": 11,
           "length": 16,
           "key": 1
+        },
+        {
+          "offset": 125,
+          "length": 2,
+          "key": 2
         }
       ],
       "data": {}
@@ -74,7 +79,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 2
+          "key": 3
         }
       ],
       "data": {}
@@ -104,7 +109,7 @@
         {
           "offset": 13,
           "length": 11,
-          "key": 3
+          "key": 4
         }
       ],
       "data": {}
@@ -133,12 +138,12 @@
         {
           "offset": 0,
           "length": 23,
-          "style": "{\"FG\":\"#830063\"}"
+          "style": "BOLD"
         },
         {
           "offset": 0,
           "length": 23,
-          "style": "BOLD"
+          "style": "{\"FG\":\"#830063\"}"
         }
       ],
       "entityRanges": [],
@@ -149,23 +154,12 @@
       "text": " ",
       "type": "atomic",
       "depth": 0,
-      "inlineStyleRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "style": "{\"FG\":\"#830063\"}"
-        },
-        {
-          "offset": 0,
-          "length": 1,
-          "style": "BOLD"
-        }
-      ],
+      "inlineStyleRanges": [],
       "entityRanges": [
         {
           "offset": 0,
           "length": 1,
-          "key": 4
+          "key": 5
         }
       ],
       "data": {}
@@ -270,7 +264,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 5
+          "key": 6
         }
       ],
       "data": {}
@@ -312,6 +306,13 @@
       }
     },
     "2": {
+      "type": "EMOJI_TYPE",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "emojiUnicode": "⚡️"
+      }
+    },
+    "3": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
@@ -331,7 +332,7 @@
         }
       }
     },
-    "3": {
+    "4": {
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
@@ -340,7 +341,7 @@
         "rel": "noopener"
       }
     },
-    "4": {
+    "5": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -352,7 +353,7 @@
         }
       }
     },
-    "5": {
+    "6": {
       "type": "wix-draft-plugin-gallery",
       "mutability": "IMMUTABLE",
       "data": {
@@ -401,7 +402,7 @@
           "oneRow": false,
           "galleryType": "Columns",
           "imageMargin": 20,
-          "gallerySizePx": "300"
+          "gallerySizePx": 300
         },
         "config": {
           "alignment": "center",
@@ -412,5 +413,5 @@
       }
     }
   },
-  "VERSION": "7.1.2"
+  "VERSION": "8.11.4"
 }

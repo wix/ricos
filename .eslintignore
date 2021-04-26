@@ -1,6 +1,7 @@
 .DS_Store
 package-lock.json
 dist
+generated
 node_modules
 *npm-debug.log
 lerna-debug.log

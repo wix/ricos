@@ -3,7 +3,7 @@ import { fixturesToTestOnSeo, DEFAULT_DESKTOP_BROWSERS } from './settings';
 
 const testFixtureOnSsr = fixture =>
   it(`render ${fixture} in ssr`, function() {
-    cy.loadTestAppOnSsr(fixture, 'rce');
+    cy.loadTestAppOnSsr(fixture, 'ricos');
     cy.eyesCheckWindow(this.test.title);
   });
 
@@ -23,7 +23,7 @@ describe('editor rendering', () => {
 
     beforeEach(() => {
       cy.switchToDesktop();
-      cy.switchToSeoMode();
+      cy.switchOnSeoMode();
     });
 
     after(() => cy.eyesClose());

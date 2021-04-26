@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*global cy*/
 import {
   PLUGIN_COMPONENT,
@@ -5,6 +6,9 @@ import {
   DIVIDER_DROPDOWN_OPTIONS,
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
+  INLINE_TOOLBAR_BUTTONS,
+  ACCORDION_SETTINGS,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
@@ -34,6 +38,13 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
+    it('render html plugin with url', function() {
+      cy.loadRicosEditorAndViewer('empty')
+        .addUrl()
+        .waitForHtmlToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     it('render html plugin toolbar', function() {
       cy.loadRicosEditorAndViewer('empty')
         .addHtml()
@@ -43,6 +54,96 @@ describe('plugins', () => {
         .click();
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+
+  context('spoiler', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+    it(`check text spoilers in editor and reveal it in viewer`, () => {
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
+        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
+        'Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
+      ]);
+
+      cy.setTextStyle('textSpoilerButton', [15, 5]);
+      cy.blurEditor();
+      cy.setTextStyle('textSpoilerButton', [30, 10]);
+      cy.eyesCheckWindow('adding some spoilers');
+      cy.setLink([5, 5], 'https://www.wix.com/');
+      cy.setTextStyle('textSpoilerButton', [0, 13]);
+      cy.eyesCheckWindow('adding spoiler around link');
+      cy.setTextStyle('textSpoilerButton', [20, 10]);
+      cy.eyesCheckWindow('apply spoiler on two existing spoilers');
+      cy.setTextStyle('textSpoilerButton', [20, 5]);
+      cy.eyesCheckWindow('split spoiler');
+      cy.setTextStyle('textSpoilerButton', [70, 35]);
+      cy.eyesCheckWindow('spoiler on multiple blocks');
+      cy.get('[data-hook="spoiler_0"]:first').click();
+      cy.eyesCheckWindow('reveal spoiler');
+      cy.get('[data-hook="spoiler_3"]:last').click();
+      cy.eyesCheckWindow('reveal spoiler on multiple blocks');
+    });
+
+    function editText(dataHook, title) {
+      cy.get(`[data-hook="${dataHook}"]`)
+        .click()
+        .type(' - In Plugin Editing')
+        .blur();
+      cy.eyesCheckWindow(title);
+    }
+
+    function revealSpoilerOnBlock() {
+      cy.get('[data-hook="revealSpoilerBtn"]').click({ multiple: true });
+      cy.eyesCheckWindow('reveal spoiler in viewer');
+    }
+
+    it(`check spoilers on an image in editor and reveal it in viewer`, () => {
+      cy.loadRicosEditorAndViewer('images', usePlugins(plugins.spoilerPreset));
+      cy.get('[data-hook="imageViewer"]:first')
+        .parent()
+        .click();
+      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+      cy.eyesCheckWindow('adding spoiler on an image');
+      editText('spoilerTextArea', 'change the description');
+      editText('revealSpoilerContent', 'change the reveal button content');
+      revealSpoilerOnBlock();
+    });
+
+    it(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
+      cy.loadRicosEditorAndViewer('gallery', usePlugins(plugins.spoilerPreset));
+      cy.get('[data-hook="galleryViewer"]:first')
+        .parent()
+        .click();
+      cy.get('[data-hook="baseToolbarButton_layout"]').click();
+      cy.get('[data-hook="Slideshow_dropdown_option"]').click();
+      cy.wait(100);
+      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+      cy.eyesCheckWindow('adding spoiler on a gallery');
+      editText('spoilerTextArea', 'change the description');
+      editText('revealSpoilerContent', 'change the reveal button content');
+      revealSpoilerOnBlock();
+    });
+
+    // it(`check spoilers on a video in editor and reveal it in viewer`, () => {
+    //   cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset));
+    //   cy.openVideoUploadModal().addVideoFromURL();
+    //   cy.waitForVideoToLoad();
+    //   cy.get('[data-hook="videoPlayer"]:first')
+    //     .parent()
+    //     .click();
+    //   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+    //   cy.eyesCheckWindow('adding spoiler on a video');
+    //   editText('spoilerTextArea', 'change the description');
+    //   editText('revealSpoilerContent', 'change the reveal button content');
+    //   revealSpoilerOnBlock();
+    // });
   });
 
   context('divider', () => {
@@ -170,30 +271,30 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
-    it('change link preview settings', function() {
+    afterEach('take snapshot', function() {
+      cy.waitForHtmlToLoad();
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('change link preview settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.setLinkSettings();
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('convert link preview to regular link', function() {
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it('convert link preview to regular link', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('backspace key should convert link preview to regular link', function() {
+    it('backspace key should convert link preview to regular link', () => {
       cy.focusEditor()
         .type('{downarrow}{downarrow}')
         .type('{backspace}');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('delete link preview', function() {
+    it('delete link preview', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -205,7 +306,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          LINK_PREVIEW: {
+          linkPreview: {
             enableEmbed: undefined,
             enableLinkPreview: undefined,
           },
@@ -231,7 +332,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          'wix-draft-plugin-link-preview': {
+          linkPreview: {
             enableEmbed: false,
             enableLinkPreview: false,
           },
@@ -291,14 +392,15 @@ describe('plugins', () => {
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 1.'])
         .tab({ shift: true })
-        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.'])
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
-        .tab({ shift: true })
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
+        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.']);
+
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
+      // .tab({ shift: true })
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -319,6 +421,7 @@ describe('plugins', () => {
       it('render upload modals', function() {
         embedTypes.forEach(embedType => {
           cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+          cy.get(`[data-hook=verticalsImage]`).eq(3);
           cy.eyesCheckWindow(this.test.title);
           cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
         });
@@ -351,7 +454,9 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('create link button & customize it', function() {
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it.skip('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click()
@@ -378,15 +483,20 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
     it('create action button & customize it', function() {
+      cy.focusEditor();
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .wait(100)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
-        .click()
+        .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
-        .click()
+        .click({ force: true })
+        .wait(100)
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}] button`)
+        .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click();
+        .click({ force: true });
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -411,8 +521,8 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
-        HeadingsDropdown: {
-          dropDownOptions: ['P', 'H2', 'H3'],
+        headings: {
+          customHeadings: ['P', 'H2', 'H3'],
         },
       }),
     };
@@ -420,7 +530,8 @@ describe('plugins', () => {
     function setHeader(number, selection) {
       cy.setTextStyle('headingsDropdownButton', selection)
         .get(`[data-hook=headingsDropdownPanel] > :nth-child(${number})`)
-        .click();
+        .click()
+        .wait(500);
     }
 
     function testHeaders(config) {
@@ -437,12 +548,34 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('Change headers - with dropDownOptions config', () => {
+    it('Change headers - with customHeadings config', () => {
       testHeaders(testAppConfig);
     });
 
-    it('Change headers - without dropDownOptions config', () => {
+    it('Change headers - without customHeadings config', () => {
       testHeaders(usePlugins(plugins.headings));
+    });
+  });
+
+  context('Headers markdown', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Headers markdown',
+        testName: this.test.parent.title,
+        browser: DEFAULT_DESKTOP_BROWSERS,
+      });
+    });
+
+    beforeEach(() => cy.switchToDesktop());
+
+    after(() => cy.eyesClose());
+
+    it('Should render header-two', function() {
+      cy.loadRicosEditorAndViewer()
+        .type('{$h')
+        .type('2}Header-two{$h')
+        .type('}');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -469,6 +602,162 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer()
         .enterParagraphs(['Highlight.'])
         .setHighlightColor([0, 9], 'color4');
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('anchor', () => {
+    const testAppConfig = {
+      ...usePlugins(plugins.all),
+      ...usePluginsConfig({
+        link: {
+          linkTypes: { anchor: true },
+        },
+      }),
+    };
+
+    function selectAnchorAndSave() {
+      cy.get(`[data-hook=test-blockKey`).click({ force: true });
+      cy.get(`[data-hook=linkPanelContainerDone]`).click();
+    }
+
+    // before(function() {
+    //   eyesOpen(this);
+    // });
+    // after(() => cy.eyesClose());
+
+    context('anchor desktop', () => {
+      before(function() {
+        cy.eyesOpen({
+          appName: 'anchor',
+          testName: this.test.parent.title,
+          browser: DEFAULT_DESKTOP_BROWSERS,
+        });
+      });
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
+      });
+      after(() => cy.eyesClose());
+
+      it('should create anchor in text', function() {
+        cy.setEditorSelection(0, 6);
+        cy.wait(500);
+        cy.get(`[data-hook=inlineToolbar] [data-hook=${INLINE_TOOLBAR_BUTTONS.LINK}]`).click({
+          force: true,
+        });
+        cy.get(`[data-hook=linkPanelContainer] [data-hook=anchor-radio]`).click();
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+
+      it('should create anchor in image', function() {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK);
+        cy.get(`[data-hook=linkPanelContainer] [data-hook=anchor-radio]`).click();
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+    });
+
+    context('anchor mobile', () => {
+      before(function() {
+        cy.eyesOpen({
+          appName: 'anchor',
+          testName: this.test.parent.title,
+          browser: DEFAULT_MOBILE_BROWSERS,
+        });
+      });
+      beforeEach('load editor', () => {
+        cy.switchToMobile();
+        cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
+      });
+      after(() => cy.eyesClose());
+
+      it('should create anchor in text', function() {
+        cy.setEditorSelection(0, 6);
+        cy.get(`[data-hook=mobileToolbar] [data-hook=LinkButton]`).click({ force: true });
+        cy.get(`[data-hook=linkPanelContainerAnchorTab]`).click({ force: true });
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+
+      it('should create anchor in image', function() {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK);
+        cy.get(`[data-hook=linkPanelContainerAnchorTab]`).click({ force: true });
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+    });
+  });
+
+  context('accordion', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    const setAccordionSetting = setting => {
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=${setting}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+    };
+
+    it('should change accordion settings', function() {
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
+      cy.getAccordion();
+      setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
+      cy.eyesCheckWindow(this.test.title);
+      setAccordionSetting(ACCORDION_SETTINGS.COLLAPSED);
+      cy.eyesCheckWindow(this.test.title);
+      setAccordionSetting(ACCORDION_SETTINGS.EXPANDED);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should focus & type', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+        .focusAccordion(1)
+        .type('Yes\n')
+        .focusAccordion(2);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert image in accordion', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
+        .focusAccordion(2)
+        .type('Image in accordion');
+      cy.insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      cy.wait(1000);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should collapse first pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+        .getAccordion()
+        .toggleCollapseExpand(0);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should have only one expanded pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
+      setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
+      cy.getAccordion().toggleCollapseExpand(1);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should delete second pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion));
+      cy.focusAccordion(3).type('{backspace}');
       cy.eyesCheckWindow(this.test.title);
     });
   });

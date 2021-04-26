@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/EditorEventsContext.cjs.js",
+    "module": "../../dist/lib/EditorEventsContext.js",
+    "types": "../../dist/lib/EditorEventsContext.d.ts"
+}

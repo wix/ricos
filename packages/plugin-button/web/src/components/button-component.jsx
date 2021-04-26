@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { normalizeUrl } from 'wix-rich-content-common';
-import { alignmentClassName, sizeClassName } from '../classNameStrategies.js';
+import { alignmentClassName, sizeClassName } from '../classNameStrategies';
 import ButtonViewer from './button-viewer';
 
 class ButtonComponent extends PureComponent {
@@ -18,23 +18,27 @@ class ButtonComponent extends PureComponent {
     } = this.props;
     const { theme } = this.props;
     const buttonText = button.settings.buttonText;
-    const target = button.settings.target ? '_blank' : '_self';
-    const rel = button.settings.rel ? 'nofollow' : '';
+    const url = button.settings?.url;
+    let linkButtonSettings = {};
+    if (url) {
+      linkButtonSettings = {
+        url: normalizeUrl(url),
+        target: button.settings.target ? '_blank' : '_self',
+        rel: button.settings.rel ? 'nofollow' : '',
+      };
+    }
     const style = {
       border: '0px solid blue',
       ...this.props.style,
       ...button.design,
     };
-    const url = button.settings.url;
     return (
       <ButtonViewer
-        url={normalizeUrl(url)}
         style={style}
-        target={target}
-        rel={rel}
         buttonText={buttonText}
         theme={theme}
         onClick={onClick}
+        {...linkButtonSettings}
       />
     );
   }

@@ -8,7 +8,8 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
-} from 'wix-rich-content-editor-common';
+  LabeledToggle,
+} from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 
@@ -19,7 +20,6 @@ class ImageSettings extends Component {
     this.initialState = { ...this.state };
     const { t, theme } = props;
     this.styles = mergeStyles({ styles, theme });
-
     this.updateLabel = t('ImageSettings_Update');
     this.headerText = t('ImageSettings_Header');
     this.captionLabel = t('ImageSettings_Caption_Label');
@@ -30,14 +30,54 @@ class ImageSettings extends Component {
   }
 
   propsToState(props) {
-    const {
-      componentData: { src, metadata },
-    } = props;
+    const { componentData } = props;
+    const { src, metadata, error, disableExpand, disableDownload } = componentData;
+    const isExpandEnabled = !disableExpand;
+    const isDownloadEnabled = !disableDownload;
+
     return {
       src,
       metadata,
+      error,
+      isExpandEnabled,
+      isDownloadEnabled,
     };
   }
+
+  toggleState = key => () => {
+    this.setState(prevState => ({
+      [key]: !prevState[key],
+    }));
+  };
+
+  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText }) => {
+    return (
+      <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
+        <LabeledToggle
+          theme={this.props.theme}
+          checked={this.state[toggleKey]}
+          label={this.props.t(labelKey)}
+          onChange={this.toggleState(toggleKey)}
+          dataHook={dataHook}
+          tooltipText={tooltipText}
+        />
+      </div>
+    );
+  };
+
+  toggleData = [
+    {
+      toggleKey: 'isExpandEnabled',
+      labelKey: 'ImagePlugin_Settings_ImageOpensInExpandMode_Label',
+      dataHook: 'imageExpandToggle',
+    },
+    {
+      toggleKey: 'isDownloadEnabled',
+      labelKey: 'ImagePlugin_Settings_ImageCanBeDownloaded_Label',
+      dataHook: 'imageDownloadToggle',
+      tooltipText: this.props.t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip'),
+    },
+  ];
 
   componentDidMount() {
     this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
@@ -48,7 +88,8 @@ class ImageSettings extends Component {
   }
 
   onComponentUpdate = () => {
-    this.setState({ src: this.props.pubsub.get('componentData').src });
+    const componentData = this.props.pubsub.get('componentData');
+    this.setState({ src: componentData.src, error: componentData?.error });
   };
 
   revertComponentData() {
@@ -65,17 +106,18 @@ class ImageSettings extends Component {
     this.setState({ metadata: { ...metadata, ...value } });
   };
 
-  addMetadataToBlock = () => {
-    const { pubsub } = this.props;
-    const metadata = this.state.metadata || {};
-    pubsub.update('componentData', { metadata });
-  };
-
   onDoneClick = () => {
-    const { helpers } = this.props;
+    const { helpers, componentData, pubsub } = this.props;
+    const newComponentData = {
+      ...componentData,
+      disableDownload: !this.state.isDownloadEnabled,
+      disableExpand: !this.state.isExpandEnabled,
+    };
     if (this.state.metadata) {
-      this.addMetadataToBlock();
+      newComponentData.metadata = this.state.metadata;
     }
+    pubsub.update('componentData', newComponentData);
+
     helpers.closeModal();
   };
 
@@ -83,10 +125,9 @@ class ImageSettings extends Component {
 
   render() {
     const { helpers, theme, t, isMobile, languageDir } = this.props;
-    const { src, metadata = {} } = this.state;
-
+    const { src, error, metadata = {} } = this.state;
     return (
-      <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
+      <div className={this.styles.imageSettings} data-hook="settings" dir={languageDir}>
         {isMobile ? (
           <ImageSettingsMobileHeader
             t={t}
@@ -105,6 +146,7 @@ class ImageSettings extends Component {
         >
           <SettingsSection
             theme={theme}
+            className={this.styles.imageSettingsImageSection}
             ariaProps={{
               'aria-label': 'image preview',
               role: 'region',
@@ -116,12 +158,14 @@ class ImageSettings extends Component {
                 alt={metadata.alt || 'image preview'}
                 resizeMode={'contain'}
                 className={this.styles.imageSettingsImage}
-                src={getImageSrc(src, helpers, {
+                src={getImageSrc(src, helpers?.getImageUrl, {
                   requiredWidth: 1000,
                   requiredHeight: 250,
                   requiredQuality: 80,
                 })}
                 theme={theme}
+                error={error}
+                t={t}
               />
             ) : (
               <div className={this.styles.imageSettingsImage}>
@@ -129,41 +173,51 @@ class ImageSettings extends Component {
               </div>
             )}
           </SettingsSection>
-          <SettingsSection
-            theme={theme}
-            className={this.styles.imageSettingsSection}
-            ariaProps={{ 'aria-label': 'image caption', role: 'region' }}
-          >
-            <InputWithLabel
+          <div className={this.styles.imageSettings_inputsWrapper}>
+            <SettingsSection
               theme={theme}
-              id="imageSettingsCaptionInput"
-              label={this.captionLabel}
-              placeholder={this.captionInputPlaceholder}
-              value={metadata.caption || ''}
-              onChange={caption => this.metadataUpdated(metadata, { caption })}
-              dataHook="imageSettingsCaptionInput"
-            />
-          </SettingsSection>
-          <SettingsSection
-            theme={theme}
-            className={this.styles.imageSettingsSection}
-            ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}
-          >
-            <InputWithLabel
+              className={this.styles.imageSettingsSection}
+              ariaProps={{ 'aria-label': 'image caption', role: 'region' }}
+            >
+              <InputWithLabel
+                theme={theme}
+                id="imageSettingsCaptionInput"
+                label={this.captionLabel}
+                placeholder={this.captionInputPlaceholder}
+                value={metadata.caption || ''}
+                onChange={caption => this.metadataUpdated(metadata, { caption })}
+                dataHook="imageSettingsCaptionInput"
+              />
+            </SettingsSection>
+            <SettingsSection
               theme={theme}
-              id="imageSettingsAltInput"
-              label={this.altLabel}
-              placeholder={this.altInputPlaceholder}
-              tooltipTextKey={this.altTooltip}
-              t={t}
-              value={metadata.alt || ''}
-              onChange={alt => this.metadataUpdated(metadata, { alt })}
-              dataHook="imageSettingsAltInput"
-              isMobile={isMobile}
-            />
-          </SettingsSection>
+              className={this.styles.imageSettingsSection}
+              ariaProps={{ 'aria-label': 'image alt text', role: 'region' }}
+            >
+              <InputWithLabel
+                theme={theme}
+                id="imageSettingsAltInput"
+                label={this.altLabel}
+                placeholder={this.altInputPlaceholder}
+                t={t}
+                value={metadata.alt || ''}
+                onChange={alt => this.metadataUpdated(metadata, { alt })}
+                dataHook="imageSettingsAltInput"
+                tooltipTextKey={this.altTooltip}
+                isMobile={isMobile}
+              />
+            </SettingsSection>
+            <SettingsSection
+              theme={theme}
+              ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
+            >
+              <div className={this.styles.imageSettingsLabel}>
+                {this.toggleData.map(toggle => this.renderToggle(toggle))}
+              </div>
+            </SettingsSection>
+          </div>
         </div>
-        {isMobile ? null : (
+        {!isMobile && (
           <SettingsPanelFooter
             fixed
             theme={theme}

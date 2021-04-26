@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
@@ -15,6 +15,7 @@ const PluginMenuPluginsSection = ({
   hidePopup,
   splitToSections,
   horizontalMenu,
+  smallPlusIcon,
   pluginMenuButtonRef,
   toolbarName,
   theme = {},
@@ -22,7 +23,7 @@ const PluginMenuPluginsSection = ({
   searchablePlugins,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
-  const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
+  const pluginsForTag = searchTag && getPluginsForTag(searchTag.toLowerCase(), t);
   const filteredPluginsBySearchTag = (pluginsArray = []) =>
     pluginsArray.filter(({ name }) => pluginsForTag.includes(name));
   const pluginsToDisplay = !searchTag
@@ -35,7 +36,8 @@ const PluginMenuPluginsSection = ({
     );
   }
 
-  const pluginSectionRenderer = section => {
+  function PluginsSection({ section }) {
+    const [isSectionVisible, setIsSectionVisible] = useState(false);
     const pluginsToRender = section
       ? pluginsToDisplay.filter(
           ({ section: pluginSection = 'BlockToolbar_Section_Basic' }) => pluginSection === section
@@ -43,28 +45,35 @@ const PluginMenuPluginsSection = ({
       : pluginsToDisplay;
     return (
       <div className={classNames(styles.section, horizontalMenu && styles.horizontalMenu)}>
-        {section && <div className={styles.pluginsSection}>{t(section)}</div>}
+        {isSectionVisible && section && <div className={styles.pluginsSection}>{t(section)}</div>}
         <div className={classNames(styles.buttonsWrapper, horizontalMenu && styles.horizontalMenu)}>
           {pluginsToRender.map(({ component: Component }, index) => (
-            <div
+            <Component
               key={index}
-              className={classNames(styles.buttonWrapper, horizontalMenu && styles.horizontalMenu)}
-            >
-              <Component
-                pluginMenuButtonRef={pluginMenuButtonRef}
-                getEditorState={getEditorState}
-                setEditorState={setEditorState}
-                showName={!horizontalMenu}
-                toolbarName={toolbarName}
-                hidePopup={hidePopup}
-                theme={theme}
-                closePluginMenu={!isMobile && hidePopup}
-              />
-            </div>
+              className={classNames(
+                styles.buttonWrapper,
+                horizontalMenu && styles.horizontalMenu,
+                smallPlusIcon && styles.smallPlusIcon
+              )}
+              onButtonVisible={() => !isSectionVisible && setIsSectionVisible(true)}
+              pluginMenuButtonRef={pluginMenuButtonRef}
+              getEditorState={getEditorState}
+              setEditorState={setEditorState}
+              showName={!horizontalMenu}
+              sideToolbar
+              toolbarName={toolbarName}
+              hidePopup={hidePopup}
+              theme={theme}
+              closePluginMenu={!isMobile ? hidePopup : undefined}
+            />
           ))}
         </div>
       </div>
     );
+  }
+
+  PluginsSection.propTypes = {
+    section: PropTypes.any,
   };
 
   const sections = [];
@@ -74,24 +83,28 @@ const PluginMenuPluginsSection = ({
         !sections.includes(section) && sections.push(section)
     );
 
-  if (sections.length > 0) {
-    return getSortedSections(sections).map(section => pluginSectionRenderer(section));
-  } else {
-    return pluginSectionRenderer();
-  }
+  return sections.length > 0 ? (
+    getSortedSections(sections).map(section => <PluginsSection section={section} key={section} />)
+  ) : (
+    <PluginsSection />
+  );
 };
 
 PluginMenuPluginsSection.propTypes = {
   getEditorState: PropTypes.func.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  plugins: PropTypes.array.isRequired,
-  t: PropTypes.func,
-  searchTag: PropTypes.string,
   hidePopup: PropTypes.func,
-  splitToSections: PropTypes.bool,
   horizontalMenu: PropTypes.bool,
-  theme: PropTypes.object,
+  smallPlusIcon: PropTypes.bool,
+  isMobile: PropTypes.any,
+  pluginMenuButtonRef: PropTypes.any,
+  plugins: PropTypes.array.isRequired,
+  searchTag: PropTypes.string,
   searchablePlugins: PropTypes.array,
+  setEditorState: PropTypes.func.isRequired,
+  splitToSections: PropTypes.bool,
+  t: PropTypes.func,
+  theme: PropTypes.object,
+  toolbarName: PropTypes.any,
 };
 
 export default PluginMenuPluginsSection;

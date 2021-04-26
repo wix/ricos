@@ -1,0 +1,38 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.radioGroupHorizontal_title {
+  display: block;
+  margin-bottom: 9px;
+}
+
+.radioGroupHorizontal_group {
+  display: flex;
+  align-items: center;
+  color: $fallbackColor;
+
+  label {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  span {
+    vertical-align: text-bottom;
+  }
+}
+
+.radioGroupHorizontal_groupTwoColumns {
+  label {
+    width: 50%;
+  }
+}
+
+.radioGroupHorizontal_groupInline {
+  label + label {
+    margin-left: 36px;
+  }
+}
+
+.radioGroupHorizontal_readOnly {
+  opacity: 0.5;
+  pointer-events: none;
+}

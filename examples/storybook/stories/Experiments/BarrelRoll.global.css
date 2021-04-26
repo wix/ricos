@@ -1,0 +1,33 @@
+.barrelRoll {
+  animation-name: barrelRoll;
+  -webkit-animation-name: barrelRoll;
+
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease;
+  -webkit-animation-timing-function: ease;
+
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+
+  visibility: visible !important;
+}
+
+@keyframes barrelRoll {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes barrelRoll {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}

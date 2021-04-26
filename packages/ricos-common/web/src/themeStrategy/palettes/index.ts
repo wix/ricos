@@ -1,2 +1,2 @@
-export { palettes } from './palettes';
-export { assertPalette, COLORS } from './utils';
+export { default as presets } from './presets';
+export * from './wixPaletteUtils';

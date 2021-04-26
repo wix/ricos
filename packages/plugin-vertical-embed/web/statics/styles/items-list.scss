@@ -2,4 +2,9 @@
   height: 320px;
   width: 100%;
   overflow: auto;
+
+  &.mobile {
+    height: calc(100vh - 230px);
+  }
+
 }

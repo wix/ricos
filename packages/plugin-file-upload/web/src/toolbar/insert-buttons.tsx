@@ -1,25 +1,26 @@
-import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { DEFAULTS } from '../file-upload-component';
+import { TOOLBARS, INSERT_PLUGIN_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { DEFAULTS } from '../defaults';
 import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { FilePluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'helpers' | 'settings' | 't' | 'settings'> = ({
-  helpers,
+const createInsertButtons: CreateInsertButtons = ({
   settings,
   t,
+}: {
+  t: TranslationFunction;
+  settings: FilePluginEditorConfig;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
-      type: 'file',
+      type: BUTTON_TYPES.FILE,
       multi: true,
-      name: 'UploadFilePlugin_InsertButton',
-      tooltipText: t('FileUploadInsertButton_tooltip'),
-      Icon: icon,
+      name: INSERT_PLUGIN_BUTTONS.FILE,
+      tooltip: t('FileUploadInsertButton_tooltip'),
+      getIcon: () => icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      helpers,
-      settings,
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };
