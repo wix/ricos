@@ -4,12 +4,12 @@ on:
     branches:
       - master
     paths:
-      - '.github/**'
+      - '.website/**'
   pull_request:
     branches:
       - master
     paths:
-      - '.github/**'
+      - '.website/**'
 jobs:
   checks:
     if: github.event_name != 'push'
