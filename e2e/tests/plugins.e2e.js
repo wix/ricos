@@ -713,8 +713,8 @@ describe('plugins', () => {
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
     };
 
-    it('should change accordion settings', function() {
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
+    it.only('should change accordion settings', function() {
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.all));
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);
@@ -725,7 +725,7 @@ describe('plugins', () => {
     });
 
     it('should focus & type', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
         .focusAccordion(1)
         .type('Yes\n')
         .focusAccordion(2);
@@ -742,21 +742,21 @@ describe('plugins', () => {
     });
 
     it('should collapse first pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
         .getAccordion()
         .toggleCollapseExpand(0);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should have only one expanded pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all)).getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
       cy.getAccordion().toggleCollapseExpand(1);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should delete second pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion));
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all));
       cy.focusAccordion(3).type('{backspace}');
       cy.eyesCheckWindow(this.test.title);
     });
