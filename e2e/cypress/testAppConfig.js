@@ -7,6 +7,14 @@ export const pluginsType = {
 export const defaultConfig = {
   plugins: ['partialPreset'],
   toolbarConfig: {},
+  pluginsConfig: {
+    [pluginsType.html]: {
+      exposeButtons: ['html'],
+    },
+    [pluginsType.video]: {
+      exposeButtons: ['video', 'soundCloud'],
+    },
+  },
 };
 
 export const getPluginMenuConfig = (addPluginMenuConfig = {}) => {
