@@ -713,7 +713,7 @@ describe('plugins', () => {
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
     };
 
-    it('should change accordion settings', function() {
+    it.only('should change accordion settings', function() {
       cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
