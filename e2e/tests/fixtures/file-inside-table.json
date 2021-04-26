@@ -1,339 +1,375 @@
 {
-    "blocks": [
-      {
-        "key": "6c7if",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "ac51q",
-        "text": " ",
-        "type": "atomic",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [
-          {
-            "offset": 0,
-            "length": 1,
-            "key": 0
-          }
-        ],
-        "data": {}
-      },
-      {
-        "key": "dcuba",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      }
-    ],
-    "entityMap": {
-      "0": {
-        "type": "wix-rich-content-plugin-table",
-        "mutability": "IMMUTABLE",
-        "data": {
-          "config": {
-            "rows": {
-              "0": {
-                "columns": {
-                  "0": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "lijram5zf",
-                          "text": "​",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {}
-                    }
-                  },
-                  "1": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "zfj82toot",
-                          "text": "",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        },
-                        {
-                          "key": "987v4",
-                          "text": " ",
-                          "type": "atomic",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [
-                            {
-                              "offset": 0,
-                              "length": 1,
-                              "key": 0
-                            }
-                          ],
-                          "data": {}
-                        },
-                        {
-                          "key": "71v9",
-                          "text": "",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {
-                        "0": {
-                          "type": "wix-draft-plugin-file-upload",
-                          "mutability": "IMMUTABLE",
-                          "data": {
-                            "config": {
-                              "alignment": "center",
-                              "size": "content"
-                            },
-                            "name": "image.jpg",
-                            "type": "jpg",
-                            "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
-                            "size": 150000
+  "blocks": [
+    {
+      "key": "eh30j",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "d6lse",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "2g99k",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7b926",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-rich-content-plugin-table",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "8x4m23o9x",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "eriq",
+                        "text": " ",
+                        "type": "atomic",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [
+                          {
+                            "offset": 0,
+                            "length": 1,
+                            "key": 0
                           }
-                        }
+                        ],
+                        "data": {}
+                      },
+                      {
+                        "key": "cv0q6",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
                       }
-                    }
-                  },
-                  "2": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "ygz2hfuru",
-                          "text": "",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        },
-                        {
-                          "key": "bbfup",
-                          "text": " ",
-                          "type": "atomic",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [
-                            {
-                              "offset": 0,
-                              "length": 1,
-                              "key": 0
-                            }
-                          ],
-                          "data": {}
-                        },
-                        {
-                          "key": "9b4dt",
-                          "text": "",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {
-                        "0": {
-                          "type": "wix-draft-plugin-file-upload",
-                          "mutability": "IMMUTABLE",
-                          "data": {
-                            "config": {
-                              "alignment": "center",
-                              "size": "content"
-                            },
-                            "name": "music.mp3",
-                            "type": "mp3",
-                            "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
-                            "size": 150000
-                          }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "type": "wix-draft-plugin-file-upload",
+                        "mutability": "IMMUTABLE",
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "size": "content"
+                          },
+                          "configViewer": {
+                            "downloadTarget": "_blank"
+                          },
+                          "name": "document.pdf",
+                          "type": "pdf",
+                          "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                          "size": 150000
                         }
                       }
                     }
                   }
-                }
-              },
-              "1": {
-                "columns": {
-                  "0": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "zuuhusr3g",
-                          "text": "",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        },
-                        {
-                          "key": "7nr76",
-                          "text": " ",
-                          "type": "atomic",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [
-                            {
-                              "offset": 0,
-                              "length": 1,
-                              "key": 0
-                            }
-                          ],
-                          "data": {}
-                        },
-                        {
-                          "key": "4a3uv",
-                          "text": "",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {
-                        "0": {
-                          "type": "wix-draft-plugin-file-upload",
-                          "mutability": "IMMUTABLE",
-                          "data": {
-                            "config": {
-                              "alignment": "center",
-                              "size": "content"
-                            },
-                            "name": "music.mp3",
-                            "type": "mp3",
-                            "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
-                            "size": 150000
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "qjvly9ovl",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "8198r",
+                        "text": " ",
+                        "type": "atomic",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [
+                          {
+                            "offset": 0,
+                            "length": 1,
+                            "key": 0
                           }
+                        ],
+                        "data": {}
+                      },
+                      {
+                        "key": "13cn2",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "type": "wix-draft-plugin-file-upload",
+                        "mutability": "IMMUTABLE",
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "size": "content"
+                          },
+                          "configViewer": {
+                            "downloadTarget": "_blank"
+                          },
+                          "name": "music.mp3",
+                          "type": "mp3",
+                          "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                          "size": 150000
                         }
                       }
                     }
-                  },
-                  "1": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "lif6pjbe5",
-                          "text": "​",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {}
-                    }
-                  },
-                  "2": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "yh8v2ae0h",
-                          "text": "​",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {}
-                    }
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "r70gwit06",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "ab1tm",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "51vh7",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
                   }
                 }
-              },
-              "2": {
-                "columns": {
-                  "0": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "s0e8l3bjw",
-                          "text": "​",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "se098k2wr",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "f2j3id237",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "h5n06u387",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "3cdok",
+                        "text": " ",
+                        "type": "atomic",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [
+                          {
+                            "offset": 0,
+                            "length": 1,
+                            "key": 0
+                          }
+                        ],
+                        "data": {}
+                      },
+                      {
+                        "key": "693hm",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "type": "wix-draft-plugin-file-upload",
+                        "mutability": "IMMUTABLE",
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "size": "content"
+                          },
+                          "configViewer": {
+                            "downloadTarget": "_blank"
+                          },
+                          "name": "document.pdf",
+                          "type": "pdf",
+                          "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                          "size": 150000
                         }
-                      ],
-                      "entityMap": {}
-                    }
-                  },
-                  "1": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "8sx3piszq",
-                          "text": "​",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {}
-                    }
-                  },
-                  "2": {
-                    "content": {
-                      "blocks": [
-                        {
-                          "key": "oaj874cuy",
-                          "text": "​",
-                          "type": "unstyled",
-                          "depth": 0,
-                          "inlineStyleRanges": [],
-                          "entityRanges": [],
-                          "data": {}
-                        }
-                      ],
-                      "entityMap": {}
+                      }
                     }
                   }
                 }
               }
             },
-            "colsWidth": [
-              100.64726426076834,
-              566.0162980209547,
-              186.34691501746215
-            ],
-            "rowsHeight": [
-              47,
-              47,
-              47
-            ],
-            "colsMinWidth": [
-              101,
-              119,
-              120
-            ]
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "07psoxks4",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "2cw96fj71",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "ytrz289bm",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
           },
-          "type": "wix-rich-content-plugin-table"
-        }
+          "colsWidth": [
+            348.7364620938628,
+            123.5523465703971,
+            77.71841155234657
+          ],
+          "rowsHeight": [
+            47,
+            47,
+            47
+          ],
+          "colsMinWidth": [
+            118,
+            119,
+            65
+          ]
+        },
+        "type": "wix-rich-content-plugin-table"
       }
-    },
-    "VERSION": "8.29.3"
-  }
+    }
+  },
+  "VERSION": "8.30.4"
+}
