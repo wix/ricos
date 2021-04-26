@@ -12,6 +12,7 @@ import {
 } from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
+import { DIVIDER } from '../consts';
 
 class ImageSettings extends Component {
   constructor(props) {
@@ -58,8 +59,10 @@ class ImageSettings extends Component {
     this.setState({ [key]: value }, onToggle?.(value));
   };
 
-  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText, onToggle }) => {
-    return (
+  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText, onToggle, type }) => {
+    return type === DIVIDER ? (
+      <div className={this.styles.divider} />
+    ) : (
       <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
         <LabeledToggle
           theme={this.props.theme}
@@ -84,6 +87,9 @@ class ImageSettings extends Component {
       labelKey: 'ImagePlugin_Settings_ImageCanBeDownloaded_Label',
       dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip'),
+    },
+    {
+      type: DIVIDER,
     },
     {
       toggleKey: 'isSpoilerEnabled',

@@ -15,7 +15,7 @@ import LayoutControlsSection from './layout-controls-section';
 import { SortableComponent } from './gallery-controls/gallery-items-sortable';
 import layoutData from '../../lib/layout-data-provider';
 import GallerySettingsMobileHeader from './gallery-controls/gallery-settings-mobile-header';
-
+const DIVIDER = 'divider';
 class ManageMediaSection extends Component {
   applyItems = items => {
     const { data, store } = this.props;
@@ -242,17 +242,20 @@ export class GallerySettingsModal extends Component {
     },
   });
 
-  renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook, onToggle }) => (
-    <LabeledToggle
-      key={toggleKey}
-      theme={this.props.theme}
-      checked={this.state[toggleKey]}
-      label={this.props.t(labelKey)}
-      dataHook={dataHook}
-      onChange={this.toggleState(toggleKey, onToggle)}
-      tooltipText={tooltipText}
-    />
-  );
+  renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook, onToggle, type }) =>
+    type === DIVIDER ? (
+      <div className={this.styles.divider} />
+    ) : (
+      <LabeledToggle
+        key={toggleKey}
+        theme={this.props.theme}
+        checked={this.state[toggleKey]}
+        label={this.props.t(labelKey)}
+        dataHook={dataHook}
+        onChange={this.toggleState(toggleKey, onToggle)}
+        tooltipText={tooltipText}
+      />
+    );
 
   toggleData = [
     {
@@ -265,6 +268,9 @@ export class GallerySettingsModal extends Component {
       labelKey: 'GalleryPlugin_Settings_ImagesCanBeDownloaded_Label',
       dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip'),
+    },
+    {
+      type: DIVIDER,
     },
     {
       toggleKey: 'isSpoilerEnabled',
