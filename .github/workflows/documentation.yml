@@ -2,7 +2,7 @@ name: documentation
 on:
   push:
     branches:
-      - deploy-docs-action
+      - master
     paths:
       - '.github/**'
 jobs:
