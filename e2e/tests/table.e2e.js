@@ -63,7 +63,7 @@ describe('plugins', () => {
     });
 
     it('should open table toolbars in different positions', function() {
-      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
       cy.focusTable();
       cy.focusCell(0);
       cy.eyesCheckWindow(this.test.title);
@@ -82,7 +82,7 @@ describe('plugins', () => {
     });
 
     it('should edit cell', function() {
-      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
       cy.focusTable();
       cy.editCell(0);
       cy.eyesCheckWindow(this.test.title);
