@@ -358,12 +358,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
     const testAppConfig = {
-      plugins: [plugins.linkPreview, plugins.video],
-      pluginsConfig: {
-        [pluginsType.video]: {
-          exposeButtons: ['youTube'],
-        },
-      },
+      plugins: [plugins.linkPreview],
     };
     beforeEach('load editor', () => {
       cy.switchToDesktop();
@@ -371,7 +366,7 @@ describe('plugins', () => {
     });
 
     after(() => cy.eyesClose());
-    const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
+    const embedTypes = ['TWITTER', 'INSTAGRAM'];
     embedTypes.forEach(embedType => {
       it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
