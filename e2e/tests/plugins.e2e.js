@@ -696,7 +696,7 @@ describe('plugins', () => {
     });
   });
 
-  context('accordion', () => {
+  context.only('accordion', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -713,7 +713,7 @@ describe('plugins', () => {
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
     };
 
-    it.only('should change accordion settings', function() {
+    it('should change accordion settings', function() {
       cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.all));
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
