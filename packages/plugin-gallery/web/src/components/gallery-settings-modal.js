@@ -276,8 +276,8 @@ export class GallerySettingsModal extends Component {
     ),
   });
 
-  tabsToRender = isMobile =>
-    isMobile
+  tabsToRender = () =>
+    this.props.isMobile
       ? [this.tabsList().mangeMedia, this.tabsList().settings]
       : [this.tabsList().mangeMedia, this.tabsList().advancedSettings, this.tabsList().settings];
 
@@ -334,7 +334,7 @@ export class GallerySettingsModal extends Component {
           )}
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
-              {this.tabsToRender(isMobile).map(tab => tab)}
+              {this.tabsToRender().map(tab => tab)}
             </Tabs>
           </div>
           {!isMobile && (
