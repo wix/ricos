@@ -424,7 +424,7 @@ describe('plugins', () => {
       ...usePlugins(plugins.video),
       ...usePluginsConfig({
         video: {
-          exposeButtons: ['youTube'],
+          exposeButtons: ['video', 'soundCloud', 'youTube'],
         },
       }),
     };
