@@ -9,7 +9,6 @@ import {
   EntityInstance,
   RawDraftEntity,
   EditorChangeType,
-  genKey,
 } from '@wix/draft-js';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
@@ -858,43 +857,6 @@ export function selectAllContent(editorState, forceSelection) {
     : EditorState.acceptSelection;
   const newEditorState = setSelectionFunction(editorState, selection);
   return newEditorState;
-}
-
-export function createNewLineBelow(editorState) {
-  const { contentState, selection } = insertNewBlock(editorState, false);
-  const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
-  return EditorState.forceSelection(newEditorState, selection);
-}
-
-export function createNewLineAbove(editorState) {
-  const { contentState, selection } = insertNewBlock(editorState, true);
-  const newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
-  return EditorState.forceSelection(newEditorState, selection);
-}
-
-function insertNewBlock(editorState, insertAbove) {
-  const contentState = editorState.getCurrentContent();
-  const selectedBlockKey = editorState.getSelection().getFocusKey();
-  const blockKey = insertAbove
-    ? selectedBlockKey
-    : editorState.getCurrentContent().getKeyAfter(selectedBlockKey);
-  const blockMap = contentState.getBlockMap();
-  const newBlockKey = genKey();
-  const newBlock = new ContentBlock({
-    key: newBlockKey,
-    text: '',
-    type: 'unstyled',
-  });
-  const restOfBlockMap = blockMap.skipUntil((_, k) => k === blockKey);
-  const newBlockMap = blockMap
-    .takeUntil((_, k) => k === blockKey)
-    .concat([[newBlock.getKey(), newBlock]])
-    .merge(restOfBlockMap);
-  const newSelection = createSelection({ blockKey: newBlockKey, anchorOffset: 0, focusOffset: 0 });
-  const newContentState = contentState.merge({
-    blockMap: newBlockMap,
-  });
-  return { contentState: newContentState, selection: newSelection };
 }
 
 function isFirstBlock(editorState: EditorState, blockKey: string) {

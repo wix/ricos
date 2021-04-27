@@ -79,8 +79,6 @@ export {
   isCursorAtFirstLine,
   selectAllContent,
   setSelectionToBlock,
-  createNewLineBelow,
-  createNewLineAbove,
 } from './Utils/draftUtils';
 export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';

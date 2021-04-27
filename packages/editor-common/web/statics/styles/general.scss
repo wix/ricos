@@ -49,17 +49,6 @@
   display: none;
 }
 
-.addNewLine {
-  height: 8px;
-  width: 100%;
-  z-index: 1;
-  background-color: $action-color;
-  opacity: 0.15;
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .pluginContainer,
 .pluginContainerReadOnly {
   position: relative;
