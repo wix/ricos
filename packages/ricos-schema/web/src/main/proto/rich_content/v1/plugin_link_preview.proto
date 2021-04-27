@@ -13,7 +13,6 @@ message LinkPreviewData {
   google.protobuf.StringValue description = 5;
   google.protobuf.StringValue provider_url = 6;
   google.protobuf.StringValue html = 7;
-  google.protobuf.StringValue socialType = 8;
 }
 
 message LinkPreviewConfig {

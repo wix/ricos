@@ -7,9 +7,8 @@ import "google/protobuf/wrappers.proto";
 
 message MapData {
   PluginContainerData container_data = 1;
-  google.protobuf.Int32Value zoom = 2;
-  MapConfig config = 3;
-  MapSettings mapSettings = 4;
+  MapConfig config = 2;
+  MapSettings mapSettings = 3;
 }
 
 message MapConfig {
@@ -28,4 +27,5 @@ message MapSettings {
   google.protobuf.StringValue locationDisplayName = 8;
   google.protobuf.StringValue mode = 9;
   google.protobuf.Int32Value zoom = 10;
+  google.protobuf.BoolValue isViewControlShown = 11;
 }
