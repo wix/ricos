@@ -26,13 +26,12 @@ class TableViewer extends Component {
   });
 
   renderCell = (i, j) => {
-    const { renderInnerRCE, innerRCV, isMobile } = this.props;
+    const { renderInnerRCE, innerRCV } = this.props;
     return renderInnerRCE
       ? renderInnerRCE(i, j)
       : innerRCV({
           contentState: this.table.getCellContent(i, j),
           renderedIn: TABLE_TYPE,
-          isMobile,
         });
   };
 

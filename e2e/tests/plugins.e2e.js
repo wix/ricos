@@ -715,7 +715,7 @@ describe('plugins', () => {
 
     it('should change accordion settings', function() {
       cy.loadRicosEditorAndViewer('accordion-rich-text', {
-        plugins: [plugins.accordion, plugins.link],
+        plugins: [plugins.accordion, plugins.link, plugins.textPlugins],
       });
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);

@@ -59,7 +59,7 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
-  innerRCV = ({ contentState, textAlignment, direction, renderedIn, isMobile }) => {
+  innerRCV = ({ contentState, textAlignment, direction, renderedIn }) => {
     const { innerRCEViewerProps } = this.props;
     const renderedInTable = renderedIn === TABLE_TYPE;
     return (
@@ -70,7 +70,6 @@ class PluginViewer extends PureComponent {
         {...innerRCEViewerProps}
         isInnerRcv
         renderedInTable={renderedInTable}
-        isMobile={isMobile}
       />
     );
   };
