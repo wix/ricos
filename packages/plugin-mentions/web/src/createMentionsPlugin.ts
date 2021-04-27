@@ -22,7 +22,7 @@ export interface Settings {
   visibleItemsBeforeOverflow?: number; // how many items should be visible before overflowing
   getMentions: (search: string) => Promise<Mention[]>;
   onMentionClick?: (mention?: Mention) => void;
-  onMentionHover?: (mention?: Mention) => void;
+  onMentionHover?: (mention: Mention, ref: HTMLDivElement | null) => void;
   repositionSuggestions: boolean; // when you are in iframe and want suggestions to be repositioned if they go out of iframe
   entryHeight: number; // suggestion entry height
   additionalHeight: number; // extra spacing in suggestion popup
