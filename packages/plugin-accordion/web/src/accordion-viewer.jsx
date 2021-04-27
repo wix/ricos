@@ -32,10 +32,10 @@ class AccordionViewer extends Component {
   };
 
   renderInnerRCV = contentState => {
-    const { innerRCV, componentData } = this.props;
+    const { innerRCV, componentData, isMobile } = this.props;
     const textAlignment = getTextAlignment(componentData);
     const direction = getDirection(componentData);
-    return innerRCV({ contentState, textAlignment, direction });
+    return innerRCV({ contentState, textAlignment, direction, isMobile });
   };
 
   renderTitle = idx => {

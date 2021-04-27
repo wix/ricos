@@ -75,6 +75,7 @@ export const plugins = {
   emoji: 'emoji',
   accordion: 'accordion',
   table: 'table',
+  link: 'link',
 };
 
 export const pluginsType = {
