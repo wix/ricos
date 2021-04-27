@@ -30,116 +30,132 @@ import {
   CodeBlockIcon,
 } from '../icons';
 
-const buttonsIconTranslator = {
-  HEADINGS: () => null,
-  Bold: BoldIcon,
-  Italic: ItalicIcon,
-  Underline: UnderlineIcon,
-  TEXT_COLOR: TextColorIcon,
-  TEXT_HIGHLIGHT: TextHighlightIcon,
-  Title: TitleIcon,
-  Blockquote: BlockQuoteIcon,
-  Alignment: AlignLeftIcon,
-  OrderedList: OrderedListIcon,
-  UnorderedList: UnorderedListIcon,
-  DECREASE_INDENT: decreaseIndentPluginIcon,
-  INCREASE_INDENT: increaseIndentPluginIcon,
-  SPOILER: SpoilerButtonIcon,
-  LINE_SPACING: LineSpacingIcon,
-  LINK: LinkIcon,
-  CODE_BLOCK: CodeBlockIcon,
-};
-
-const buttonsDataHookTranslator = {
-  HEADINGS: 'headingsDropdownButton',
-  Bold: 'textInlineStyleButton_BOLD',
-  Italic: 'textInlineStyleButton_ITALIC',
-  Underline: 'textInlineStyleButton_UNDERLINE',
-  TEXT_COLOR: 'wix-rich-content-text-color-button',
-  TEXT_HIGHLIGHT: 'wix-rich-content-text-highlight-button',
-  Title: 'textBlockStyleButton_Title',
-  Blockquote: 'textBlockStyleButton_Quote',
-  Alignment: 'Alignment',
-  OrderedList: 'textBlockStyleButton_NumberedList',
-  UnorderedList: 'textBlockStyleButton_BulletedList',
-  DECREASE_INDENT: 'DECREASE_INDENT',
-  INCREASE_INDENT: 'INCREASE_INDENT',
-  SPOILER: 'spoilerButton',
-  LINE_SPACING: 'LINE_SPACING',
-  LINK: 'LINK',
-  CODE_BLOCK: 'CODE_BLOCK',
-};
-
-const buttonsTooltipTranslator = {
-  HEADINGS: 'Text style',
-  Bold: 'Bold',
-  Italic: 'Italic',
-  Underline: 'Underline',
-  TEXT_COLOR: 'Text color',
-  TEXT_HIGHLIGHT: 'Highlight color',
-  Title: 'Title',
-  Blockquote: 'Quote',
-  Alignment: 'Alignment',
-  OrderedList: 'Numbered list',
-  UnorderedList: 'Bulleted list',
-  DECREASE_INDENT: 'Decrease indent',
-  INCREASE_INDENT: 'Increase indent',
-  SPOILER: 'Spoiler',
-  LINE_SPACING: 'Line spacing',
-  LINK: 'Link',
-  CODE_BLOCK: 'Code snippet',
-};
-
-const buttonsLabelTranslator = {
-  HEADINGS: 'Paragraph',
-};
-
-const buttonsArrowTranslator = {
-  HEADINGS: true,
-};
-
-const buttonsActionTranslator = {
-  HEADINGS: 'HEADINGS',
-  Bold: 'Bold',
-  Italic: 'Italic',
-  Underline: 'Underline',
-  TEXT_COLOR: 'TEXT_COLOR',
-  TEXT_HIGHLIGHT: 'TEXT_HIGHLIGHT',
-  Title: 'Title',
-  Blockquote: BLOCKQUOTE,
-  Alignment: 'Alignment',
-  OrderedList: NUMBERED_LIST_TYPE,
-  UnorderedList: BULLET_LIST_TYPE,
-  DECREASE_INDENT: 'DECREASE_INDENT',
-  INCREASE_INDENT: 'INCREASE_INDENT',
-  SPOILER: 'SPOILER',
-  LINE_SPACING: 'LINE_SPACING',
-  LINK: 'LINK',
-  CODE_BLOCK: CODE_BLOCK_TYPE,
-};
-
-const buttonsTypeTranslator = {
-  DROPDOWN: ['HEADINGS', 'TEXT_COLOR', 'TEXT_HIGHLIGHT', 'LINE_SPACING'],
-  SEPARATOR: ['Separator'],
-  button: [
-    'Bold',
-    'Italic',
-    'Underline',
-    'Title',
-    // 'Quote',
-    'Blockquote',
-    // 'NumberedList',
-    'OrderedList',
-    // 'BulletedList',
-    'UnorderedList',
-    'DECREASE_INDENT',
-    'INCREASE_INDENT',
-    'SPOILER',
-    'LINK',
-    'CODE_BLOCK',
-    'Alignment',
-  ],
-  // GROUP: ['Alignment'],
+const buttonsFullData = {
+  HEADINGS: {
+    icon: () => null,
+    dataHook: 'headingsDropdownButton',
+    tooltip: 'Text style',
+    label: 'Paragraph',
+    arrow: true,
+    action: 'HEADINGS',
+    type: 'DROPDOWN',
+  },
+  Separator: {
+    type: 'SEPARATOR',
+  },
+  Bold: {
+    icon: BoldIcon,
+    dataHook: 'textInlineStyleButton_BOLD',
+    tooltip: 'Bold',
+    action: 'Bold',
+    type: 'button',
+  },
+  Italic: {
+    icon: ItalicIcon,
+    dataHook: 'textInlineStyleButton_ITALIC',
+    tooltip: 'Italic',
+    action: 'Italic',
+    type: 'button',
+  },
+  Underline: {
+    icon: UnderlineIcon,
+    dataHook: 'textInlineStyleButton_UNDERLINE',
+    tooltip: 'Underline',
+    action: 'Underline',
+    type: 'button',
+  },
+  TEXT_COLOR: {
+    icon: TextColorIcon,
+    dataHook: 'wix-rich-content-text-color-button',
+    tooltip: 'Text color',
+    action: 'TEXT_COLOR',
+    type: 'DROPDOWN',
+  },
+  TEXT_HIGHLIGHT: {
+    icon: TextHighlightIcon,
+    dataHook: 'wix-rich-content-text-highlight-button',
+    tooltip: 'Highlight color',
+    action: 'TEXT_HIGHLIGHT',
+    type: 'DROPDOWN',
+  },
+  Title: {
+    icon: TitleIcon,
+    dataHook: 'textBlockStyleButton_Title',
+    tooltip: 'Title',
+    action: 'Title',
+    type: 'button',
+  },
+  Blockquote: {
+    icon: BlockQuoteIcon,
+    dataHook: 'textBlockStyleButton_Quote',
+    tooltip: 'Quote',
+    action: BLOCKQUOTE,
+    type: 'button',
+  },
+  Alignment: {
+    icon: AlignLeftIcon,
+    dataHook: 'Alignment',
+    tooltip: 'Alignment',
+    action: 'Alignment',
+    type: 'button',
+    // type: 'GROUP',
+  },
+  OrderedList: {
+    icon: OrderedListIcon,
+    dataHook: 'textBlockStyleButton_NumberedList',
+    tooltip: 'Numbered list',
+    action: NUMBERED_LIST_TYPE,
+    type: 'button',
+  },
+  UnorderedList: {
+    icon: UnorderedListIcon,
+    dataHook: 'textBlockStyleButton_BulletedList',
+    tooltip: 'Bulleted list',
+    action: BULLET_LIST_TYPE,
+    type: 'button',
+  },
+  DECREASE_INDENT: {
+    icon: decreaseIndentPluginIcon,
+    dataHook: 'DECREASE_INDENT',
+    tooltip: 'Decrease indent',
+    action: 'DECREASE_INDENT',
+    type: 'button',
+  },
+  INCREASE_INDENT: {
+    icon: increaseIndentPluginIcon,
+    dataHook: 'INCREASE_INDENT',
+    tooltip: 'Increase indent',
+    action: 'INCREASE_INDENT',
+    type: 'button',
+  },
+  SPOILER: {
+    icon: SpoilerButtonIcon,
+    dataHook: 'spoilerButton',
+    tooltip: 'Spoiler',
+    action: 'SPOILER',
+    type: 'button',
+  },
+  LINE_SPACING: {
+    icon: LineSpacingIcon,
+    dataHook: 'LINE_SPACING',
+    tooltip: 'Line spacing',
+    action: 'LINE_SPACING',
+    type: 'DROPDOWN',
+  },
+  LINK: {
+    icon: LinkIcon,
+    dataHook: 'LINK',
+    tooltip: 'Link',
+    action: 'LINK',
+    type: 'button',
+  },
+  CODE_BLOCK: {
+    icon: CodeBlockIcon,
+    dataHook: 'CODE_BLOCK',
+    tooltip: 'Code snippet',
+    action: CODE_BLOCK_TYPE,
+    type: 'button',
+  },
 };
 
 const inlineStyleButtons = ['Bold', 'Italic', 'Underline'];
@@ -171,10 +187,10 @@ const handleButtonIsActive = (buttonsList, index, editorCommands) => {
   const buttonName = buttonsList[index].name;
   if (inlineStyleButtons.includes(buttonName)) {
     buttonsList[index].isActive = () =>
-      editorCommands.hasInlineStyle(buttonsActionTranslator[buttonName]);
+      editorCommands.hasInlineStyle(buttonsFullData[buttonName].action);
   } else if (textBlockButtons.includes(buttonName)) {
     buttonsList[index].isActive = () =>
-      editorCommands.isBlockTypeSelected(buttonsActionTranslator[buttonName]);
+      editorCommands.isBlockTypeSelected(buttonsFullData[buttonName].action);
   } else {
     buttonsList[index].isActive = () => false;
   }
@@ -184,50 +200,48 @@ const handleButtonOnClick = (buttonsList, index, editorCommands) => {
   const buttonName = buttonsList[index].name;
   if (inlineStyleButtons.includes(buttonName)) {
     buttonsList[index].onClick = () =>
-      editorCommands.toggleInlineStyle(buttonsActionTranslator[buttonName]);
+      editorCommands.toggleInlineStyle(buttonsFullData[buttonName].action);
   } else if (textBlockButtons.includes(buttonName)) {
     buttonsList[index].onClick = () =>
-      editorCommands.setBlockType(buttonsActionTranslator[buttonName]);
+      editorCommands.setBlockType(buttonsFullData[buttonName].action);
   } else {
     buttonsList[index].onClick = () => console.log('click');
   }
 };
 
 const handleButtonArrow = (buttonsList, index) => {
-  if (Object.keys(buttonsArrowTranslator).includes(buttonsList[index].name)) {
-    buttonsList[index].arrow = () => buttonsArrowTranslator[buttonsList[index].name];
+  if (buttonsFullData[buttonsList[index].name].arrow) {
+    buttonsList[index].arrow = buttonsFullData[buttonsList[index].name].arrow;
   }
 };
 
 const handleButtonLabel = (buttonsList, index) => {
-  if (Object.keys(buttonsLabelTranslator).includes(buttonsList[index].name)) {
-    buttonsList[index].getLabel = () => buttonsLabelTranslator[buttonsList[index].name];
+  if (buttonsFullData[buttonsList[index].name].label) {
+    buttonsList[index].getLabel = () => buttonsFullData[buttonsList[index].name].label;
   }
 };
 
 const handleButtonTooltip = (buttonsList, index) => {
-  if (Object.keys(buttonsTooltipTranslator).includes(buttonsList[index].name)) {
-    buttonsList[index].tooltip = buttonsTooltipTranslator[buttonsList[index].name];
+  if (buttonsFullData[buttonsList[index].name].tooltip) {
+    buttonsList[index].tooltip = buttonsFullData[buttonsList[index].name].tooltip;
   }
 };
 
 const handleButtonDataHook = (buttonsList, index) => {
-  if (Object.keys(buttonsDataHookTranslator).includes(buttonsList[index].name)) {
-    buttonsList[index].dataHook = buttonsDataHookTranslator[buttonsList[index].name];
+  if (buttonsFullData[buttonsList[index].name].dataHook) {
+    buttonsList[index].dataHook = buttonsFullData[buttonsList[index].name].dataHook;
   }
 };
 
 const handleButtonIcon = (buttonsList, index) => {
-  if (Object.keys(buttonsIconTranslator).includes(buttonsList[index].name)) {
-    buttonsList[index].getIcon = () => buttonsIconTranslator[buttonsList[index].name];
+  if (buttonsFullData[buttonsList[index].name].icon) {
+    buttonsList[index].getIcon = () => buttonsFullData[buttonsList[index].name].icon;
   }
 };
 
 const handleButtonType = (buttonsList, index) => {
-  for (const [key, value] of Object.entries(buttonsTypeTranslator)) {
-    if (value.some(buttonName => buttonName === buttonsList[index].name)) {
-      buttonsList[index].type = key;
-    }
+  if (buttonsFullData[buttonsList[index].name].type) {
+    buttonsList[index].type = buttonsFullData[buttonsList[index].name].type;
   }
 };
 
