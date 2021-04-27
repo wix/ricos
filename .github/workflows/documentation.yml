@@ -8,8 +8,6 @@ on:
   pull_request:
     branches:
       - master
-    paths:
-      - '.website/**'
 jobs:
   checks:
     if: github.event_name != 'push'
