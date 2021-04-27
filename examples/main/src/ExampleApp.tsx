@@ -12,7 +12,7 @@ import {
   disableBrowserBackButton,
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
-import { DraftContent } from 'wix-rich-content-common';
+import { DraftContent, ToolbarType } from 'wix-rich-content-common';
 import ContentStateEditorType from './Components/ContentStateEditor';
 import { EditorState } from 'draft-js';
 import { RichContent } from 'ricos-schema';
@@ -88,6 +88,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldUseNewContent: false,
       styleElement: this.getInitialStyleElement(),
       experiments: get('experiments') || {},
+      externalToolbarToShow: ToolbarType.FORMATTING,
       ...localState,
     };
   }
@@ -141,6 +142,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldMockUpload,
       shouldMultiSelectImages,
       staticToolbar,
+      externalToolbarToShow,
       shouldNativeUpload,
       shouldUseNewContent,
     } = this.state;
@@ -192,6 +194,13 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
         name: 'Static Toolbar',
         active: staticToolbar,
         action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
+      },
+      {
+        name: 'External Toolbar',
+        active: externalToolbarToShow,
+        action: selectedExternalToolbar =>
+          this.setState({ externalToolbarToShow: selectedExternalToolbar }),
+        items: [ToolbarType.FORMATTING, ToolbarType.INSERT_PLUGIN],
       },
       {
         name: 'Locale',
@@ -294,6 +303,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     const {
       isEditorShown,
       staticToolbar,
+      externalToolbarToShow,
       shouldMockUpload,
       shouldMultiSelectImages,
       editorIsMobile,
@@ -327,6 +337,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 shouldNativeUpload={shouldNativeUpload}
                 shouldUseNewContent={shouldUseNewContent}
                 staticToolbar={staticToolbar}
+                externalToolbarToShow={externalToolbarToShow}
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}

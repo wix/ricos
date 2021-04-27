@@ -1,15 +1,13 @@
+import { ComponentData, BICallbacks } from '.';
+import { CSSProperties } from 'react';
+import { EditorState } from 'draft-js';
+import { OnPluginAction } from './pluginsBiCallbacksTypes';
 import {
   UpdateEntityFunc,
   ImageComponentData,
   VideoComponentData,
   FileComponentData,
-  ComponentData,
-  BICallbacks,
-} from '.';
-import { CSSProperties } from 'react';
-import { EditorState } from 'draft-js';
-import { OnPluginAction } from './pluginsBiCallbacksTypes';
-
+} from 'ricos-content';
 export interface Helpers extends BICallbacksForHelpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
   closeModal?: () => void;

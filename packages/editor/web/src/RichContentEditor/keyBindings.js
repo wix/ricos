@@ -72,6 +72,7 @@ function getModifiers(e) {
     ...(usesMacOSHeuristics(e) && isCtrlKeyCommand(e) ? [MODIFIERS.CTRL] : []),
     ...(isOptionKeyCommand(e) ? [MODIFIERS.OPTION] : []),
     ...(e.shiftKey ? [MODIFIERS.SHIFT] : []),
+    ...(e.altKey ? [MODIFIERS.ALT] : []),
   ];
 }
 

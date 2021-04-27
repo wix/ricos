@@ -2,7 +2,10 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 
+$MARGIN_LEFT: 10px;
+
 .pluginToolbar {
+  outline: 0;
   min-height: 50px;
   top: var(--offset-top);
   left: var(--offset-left);
@@ -12,9 +15,10 @@
   background: #fff;
   border-radius: $toolbarBorderRadius;
   z-index: 4;
-  max-width: 100%;
+  max-width: calc(100% - #{$MARGIN_LEFT});
   transition: transform 0.15s cubic-bezier(0.3, 1.2, 0.2, 1);
   direction: ltr;
+  margin-left: $MARGIN_LEFT;
 
   &.overflowToolbar {
     max-width: unset;

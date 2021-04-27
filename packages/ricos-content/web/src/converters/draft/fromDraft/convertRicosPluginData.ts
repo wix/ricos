@@ -18,8 +18,16 @@ import {
   FileSource,
   PluginContainerData_Width_Type,
   ButtonData_Type,
+  Link,
+  Link_Target,
 } from 'ricos-schema';
 import { TO_RICOS_DATA } from './consts';
+import {
+  ComponentData,
+  FileComponentData,
+  ImageComponentData,
+  VideoComponentData,
+} from '../../../types';
 
 export const convertBlockDataToRicos = (blockType: string, data) => {
   const newData = cloneDeep(data);
@@ -43,34 +51,41 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     const convert = converters[blockType];
     convert(newData, blockType);
   }
-  const toJSON = data => {
+  const fromJSON = data => {
     const pluginDataMethods = TO_RICOS_DATA[blockType];
-    return pluginDataMethods?.toJSON(pluginDataMethods?.fromJSON(data)) || data;
+    return pluginDataMethods?.fromJSON(data) || data;
   };
-  return toJSON(newData);
+  return fromJSON(newData);
 };
 
-const convertContainerData = data => {
-  const { size, alignment, width } = data.config;
-  let spoiler: PluginContainerData_Spoiler | undefined;
-  if (data.config.spoiler?.enabled) {
-    const { description, buttonContent } = data.config.spoiler;
-    spoiler = { description, buttonText: buttonContent };
+const convertContainerData = (data: { config?: ComponentData['config']; containerData }) => {
+  const { size, alignment, width, spoiler } = data.config || {};
+  let newSpoiler: PluginContainerData_Spoiler | undefined;
+  if (spoiler?.enabled) {
+    const { description, buttonContent } = spoiler;
+    newSpoiler = { description, buttonText: buttonContent };
   }
+  const type =
+    size && (size === 'inline' ? PluginContainerData_Width_Type.CUSTOM : kebabToConstantCase(size));
   data.containerData = {
     width: {
-      type: size && kebabToConstantCase(size),
+      type,
       customWidth: typeof width === 'number' ? width : undefined,
     },
     alignment: alignment && kebabToConstantCase(alignment),
-    spoiler,
+    spoiler: newSpoiler,
   };
 };
 
-const convertVideoData = data => {
+const convertVideoData = (data: {
+  src?: string | VideoComponentData;
+  metadata?: { thumbnail_url?: string; width?: number; height?: number };
+  video;
+  thumbnail;
+}) => {
   if (typeof data.src === 'string') {
     data.video = { src: { url: data.src } };
-    const { thumbnail_url, width, height } = data.metadata;
+    const { thumbnail_url, width, height } = data.metadata || {};
     data.thumbnail = {
       src: { url: thumbnail_url },
       width,
@@ -86,24 +101,39 @@ const convertVideoData = data => {
   }
 };
 
-const convertDividerData = data => {
-  has(data, 'type') && (data.type = data.type.toUpperCase());
-  has(data, 'config.size') && (data.width = data.config.size.toUpperCase());
-  has(data, 'config.alignment') && (data.alignment = data.config.alignment.toUpperCase());
+const convertDividerData = (data: {
+  type?: string;
+  config?: ComponentData['config'];
+  width;
+  alignment;
+  containerData;
+}) => {
+  has(data, 'type') && (data.type = data.type?.toUpperCase());
+  has(data, 'config.size') && (data.width = data.config?.size?.toUpperCase());
+  has(data, 'config.alignment') && (data.alignment = data.config?.alignment?.toUpperCase());
   data.containerData = { width: { type: PluginContainerData_Width_Type.CONTENT } };
 };
 
-const convertImageData = data => {
-  const { file_name, width, height } = data.src;
-  const { link, anchor, disableExpand } = data.config;
+const convertImageData = (data: {
+  src?: ImageComponentData;
+  config?: ComponentData['config'];
+  metadata?: { alt?: string; caption?: string };
+  image;
+  link;
+  disableExpand;
+  altText;
+  caption;
+}) => {
+  const { file_name, width, height } = data.src || {};
+  const { link, anchor, disableExpand } = data.config || {};
   data.image = { src: { custom: file_name }, width, height };
-  data.link = anchor ? { anchor } : link;
+  data.link = (link || anchor) && convertLink({ ...link, anchor });
   data.disableExpand = disableExpand;
   data.altText = data.metadata?.alt;
   data.caption = data.metadata?.caption;
 };
 
-const convertPollData = data => {
+const convertPollData = (data: { layout; design }) => {
   has(data, 'layout.poll.type') && (data.layout.poll.type = data.layout.poll.type.toUpperCase());
   has(data, 'layout.poll.direction') &&
     (data.layout.poll.direction = data.layout.poll.direction.toUpperCase());
@@ -111,30 +141,44 @@ const convertPollData = data => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toUpperCase());
 };
 
-const convertVerticalEmbedData = data => {
-  has(data, 'type') && (data.type = data.type.toUpperCase());
+const convertVerticalEmbedData = (data: { type?: string }) => {
+  has(data, 'type') && (data.type = data.type?.toUpperCase());
 };
 
-const convertLinkPreviewData = data => {
+const convertLinkPreviewData = (data: {
+  thumbnail_url?: string;
+  provider_url?: string;
+  config?: { link };
+  thumbnailUrl;
+  providerUrl;
+}) => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
   has(data, 'provider_url') && (data.providerUrl = data.provider_url);
+  data.config?.link && (data.config.link = convertLink(data.config?.link));
 };
 
-const convertMention = data => {
-  data.name = data.mention.name;
-  data.slug = data.mention.slug;
+const convertMention = (data: {
+  mention?: { name?: string; slug?: string };
+  name?: string;
+  slug?: string;
+}) => {
+  data.name = data.mention?.name;
+  data.slug = data.mention?.slug;
   delete data.mention;
 };
 
-const convertFileData = data => {
+const convertFileData = (data: FileComponentData & { src }) => {
   const src: FileSource = { url: data.url, custom: data.id };
   data.src = src;
 };
 
-const convertButtonData = (data, blockType) => {
-  const { settings, design } = data.button;
-  const { borderRadius, borderWidth, background, color, borderColor } = design;
-  const { buttonText, url, rel, target } = settings;
+const convertButtonData = (
+  data: { button?: { settings; design }; styles; type; text; link },
+  blockType: string
+) => {
+  const { settings, design } = data.button || {};
+  const { borderRadius, borderWidth, background, color, borderColor } = design || {};
+  const { buttonText, url, rel, target } = settings || {};
   data.styles = {
     borderRadius,
     borderWidth,
@@ -144,13 +188,41 @@ const convertButtonData = (data, blockType) => {
   };
   data.type = blockType === ACTION_BUTTON_TYPE ? ButtonData_Type.ACTION : ButtonData_Type.LINK;
   data.text = buttonText;
-  if (settings.url) {
-    data.link = { url, rel: rel ? 'nofollow' : undefined, target: target ? '_blank' : '_self' }; // @shaulgo please review logic
+  if (url) {
+    data.link = convertLink({
+      url,
+      rel: rel ? 'nofollow' : undefined,
+      target: target ? '_blank' : '_top',
+    });
   }
 };
 
 const convertHTMLData = data => {
   data.containerData.width.type = PluginContainerData_Width_Type.CUSTOM;
+};
+
+const convertLink = ({
+  url,
+  rel,
+  target,
+  anchor,
+}: {
+  url?: string;
+  rel?: string;
+  target?: string;
+  anchor?: string;
+}): Link => {
+  const relValues =
+    rel
+      ?.split(' ')
+      .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
+      .map(key => [key, true]) || [];
+  return {
+    anchor,
+    url,
+    rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
+    target: target?.toUpperCase().substring(1) as Link_Target,
+  };
 };
 
 const kebabToConstantCase = (str: string) => str.toUpperCase().replace('-', '_');
