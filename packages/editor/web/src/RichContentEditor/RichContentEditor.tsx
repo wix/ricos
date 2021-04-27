@@ -670,7 +670,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       buttonToFocus.focus();
       setTimeout(() => {
         // fix bug - selection of text with atomic blocks
-        if (toolbar !== document.activeElement) {
+        if (buttonToFocus !== document.activeElement) {
           buttonToFocus.focus();
         }
       });
