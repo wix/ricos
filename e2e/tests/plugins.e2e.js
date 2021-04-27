@@ -696,7 +696,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('accordion', () => {
+  context('accordion', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -714,7 +714,7 @@ describe('plugins', () => {
     };
 
     it('should change accordion settings', function() {
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.all));
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);
@@ -725,7 +725,7 @@ describe('plugins', () => {
     });
 
     it('should focus & type', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
         .focusAccordion(1)
         .type('Yes\n')
         .focusAccordion(2);
@@ -742,21 +742,21 @@ describe('plugins', () => {
     });
 
     it('should collapse first pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
         .getAccordion()
         .toggleCollapseExpand(0);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should have only one expanded pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all)).getAccordion();
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
       cy.getAccordion().toggleCollapseExpand(1);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should delete second pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all));
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion));
       cy.focusAccordion(3).type('{backspace}');
       cy.eyesCheckWindow(this.test.title);
     });
