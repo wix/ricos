@@ -16,13 +16,15 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `mentions`
-  - [#2407](https://github.com/wix/ricos/pull/2407) add onMentionHover
   
 
 </details>
 <hr/>
+
+## 8.31.0 (April 25, 2021)
+### :rocket: New Feature
+- `mentions`
+  - [#2407](https://github.com/wix/ricos/pull/2407) add onMentionHover
 
 ## 8.30.4 (April 25, 2021)
 ### :house: Internal
