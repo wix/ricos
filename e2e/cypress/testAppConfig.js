@@ -1,9 +1,18 @@
+export const pluginsType = {
+  linkPreview: 'wix-draft-plugin-link-preview',
+  html: 'wix-draft-plugin-html',
+  video: 'wix-draft-plugin-video',
+};
+
 export const defaultConfig = {
   plugins: ['partialPreset'],
   toolbarConfig: {},
   pluginsConfig: {
-    'wix-draft-plugin-html': {
+    [pluginsType.html]: {
       exposeButtons: ['html'],
+    },
+    [pluginsType.video]: {
+      exposeButtons: ['video', 'soundCloud'],
     },
   },
 };
@@ -75,8 +84,5 @@ export const plugins = {
   emoji: 'emoji',
   accordion: 'accordion',
   table: 'table',
-};
-
-export const pluginsType = {
-  linkPreview: 'wix-draft-plugin-link-preview',
+  video: 'video',
 };
