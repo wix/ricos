@@ -63,7 +63,7 @@ describe('plugins', () => {
     });
 
     it('should open table toolbars in different positions', function() {
-      cy.loadRicosEditorAndViewer('table', { plugins: [plugins.table, plugins.textPlugins] });
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
       cy.focusTable();
       cy.focusCell(0);
       cy.eyesCheckWindow(this.test.title);
