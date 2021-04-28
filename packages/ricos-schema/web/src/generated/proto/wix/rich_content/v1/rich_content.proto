@@ -10,7 +10,6 @@ syntax = "proto3";
 
 package wix.rich_content.v1;
 
-import "wix/api/validations.proto";
 import "google/protobuf/timestamp.proto";
 import "wix/rich_content/v1/decoration_anchor.proto";
 import "wix/rich_content/v1/decoration_color.proto";
@@ -114,7 +113,7 @@ message Decoration {
 }
 
 message Metadata {
-    uint32 version = 1 [(wix.api.min) = 1]; // Schema version
-    google.protobuf.Timestamp created_timestamp = 2 [(wix.api.readOnly) = true]; // Time content was created
+    uint32 version = 1; // Schema version
+    google.protobuf.Timestamp created_timestamp = 2; // Time content was created
     google.protobuf.Timestamp updated_timestamp = 3; // Time of latest edit
 }
