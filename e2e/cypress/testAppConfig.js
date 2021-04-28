@@ -62,7 +62,7 @@ export const useUploadConfig = {
 };
 
 export const plugins = {
-  embedsPreset: 'embedsPreset',
+  embedsPreset: 'cc',
   spoilerPreset: 'spoilerPreset',
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
@@ -75,7 +75,6 @@ export const plugins = {
   emoji: 'emoji',
   accordion: 'accordion',
   table: 'table',
-  link: 'link',
 };
 
 export const pluginsType = {

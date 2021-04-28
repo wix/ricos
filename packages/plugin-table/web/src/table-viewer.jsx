@@ -29,10 +29,7 @@ class TableViewer extends Component {
     const { renderInnerRCE, innerRCV } = this.props;
     return renderInnerRCE
       ? renderInnerRCE(i, j)
-      : innerRCV({
-          contentState: this.table.getCellContent(i, j),
-          renderedIn: TABLE_TYPE,
-        });
+      : innerRCV({ contentState: this.table.getCellContent(i, j), renderedIn: TABLE_TYPE });
   };
 
   createRow = (i, columnsNumber) =>
