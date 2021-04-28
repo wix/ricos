@@ -14,7 +14,7 @@ const schemas = readdirSync(`./src/main/proto/wix/rich_content/v${LATEST_VERSION
 
 schemas.forEach(schema => {
   const schemaFile = readFileSync(
-    `src/main/proto/rich_content/v${LATEST_VERSION}/${schema}`,
+    `src/main/proto/wix/rich_content/v${LATEST_VERSION}/${schema}`,
     'utf8'
   );
   writeFileSync(
