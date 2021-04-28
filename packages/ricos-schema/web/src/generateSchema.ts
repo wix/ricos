@@ -10,7 +10,7 @@ mkdirSync(`${GEN_DIR}/proto`);
 mkdirSync(`${GEN_DIR}/proto/rich_content`);
 mkdirSync(`${GEN_DIR}/proto/rich_content/v${LATEST_VERSION}`);
 
-const schemas = readdirSync(`./src/main/proto/rich_content/v${LATEST_VERSION}`);
+const schemas = readdirSync(`./src/main/proto/wix/rich_content/v${LATEST_VERSION}`);
 
 schemas.forEach(schema => {
   const schemaFile = readFileSync(
@@ -19,7 +19,10 @@ schemas.forEach(schema => {
   );
   writeFileSync(
     `${GEN_DIR}/proto/rich_content/v${LATEST_VERSION}/${schema}`,
-    schemaFile.replace(/ \[.*\];/g, ';').replace('import "wix/api/validations.proto";\n', '')
+    schemaFile
+      .replace(/ \[.*\];/g, ';')
+      .replace('import "wix/api/validations.proto";\n', '')
+      .replace('package wix.rich_content', 'package rich_content')
   );
 });
 

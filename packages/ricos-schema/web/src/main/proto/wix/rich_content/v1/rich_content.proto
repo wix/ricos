@@ -8,7 +8,7 @@
 
 syntax = "proto3";
 
-package rich_content.v1;
+package wix.rich_content.v1;
 
 import "wix/api/validations.proto";
 import "google/protobuf/timestamp.proto";
