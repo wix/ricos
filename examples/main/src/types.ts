@@ -40,6 +40,7 @@ export interface TestAppConfig {
     fallbackColor?: string;
     disableContainer?: boolean;
     contentBgColor?: boolean;
+    floatingActionColor?: string;
   };
   showDefaultPreview?: boolean;
   isNativeUpload?: boolean;
