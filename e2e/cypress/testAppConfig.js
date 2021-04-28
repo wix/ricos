@@ -62,7 +62,7 @@ export const useUploadConfig = {
 };
 
 export const plugins = {
-  embedsPreset: 'cc',
+  embedsPreset: 'embedsPreset',
   spoilerPreset: 'spoilerPreset',
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
