@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 @mixin svg-fill {
   svg {
@@ -22,4 +22,9 @@ $phone: 640px;
 @mixin fillWithActionColor {
   color: $action-color-fallback;
   fill: $action-color-fallback;
+}
+
+@mixin fillWithFloatingActionColor {
+  color: $floating-action-color;
+  fill: $floating-action-color;
 }

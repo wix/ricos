@@ -78,7 +78,7 @@
   height: 52px;
 }
 .tabs_headers_option_selected {
-  border-bottom: solid 3px $action-color-fallback;
+  border-bottom: solid 3px $floating-action-color;
 }
 .header_icon {
   margin-right: 12px;
@@ -121,7 +121,6 @@
 .button_inputModal_tabLabel {
   margin-top: 15px;
   display: block;
-
 }
 
 .button_inputModal_scrollbar_thumb {
@@ -160,11 +159,11 @@
   font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
-  background-color: $action-color-fallback;
+  background-color: $floating-action-color;
 }
 .button_secondary {
   font-size: 16px;
   line-height: 1.5;
-  color: $action-color-fallback;
-  border: 1px solid $action-color-fallback;
+  color: $floating-action-color;
+  border: 1px solid $floating-action-color;
 }

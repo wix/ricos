@@ -1,11 +1,11 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "~wix-rich-content-common/dist/statics/styles/fonts";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 .link {
   color: $ricos-link-color;
   @include ricosTypography('link', false);
 }
-.linkInEditor{
+.linkInEditor {
   &:hover {
     cursor: text;
   }
@@ -22,7 +22,7 @@
 }
 
 .toolbarUrl {
-  color: $action-color-fallback;
+  color: $floating-action-color;
   max-width: 270px;
   white-space: nowrap;
   overflow: hidden;
