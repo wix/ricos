@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package rich_content.v1;
+
+import "wix/rich_content/v1/common.proto";
+import "google/protobuf/wrappers.proto";
+
+message ButtonData {
+    message ButtonStyles {
+        google.protobuf.Int32Value border_width = 1; // number of pixels
+        google.protobuf.Int32Value border_radius = 2; // number of pixels
+        google.protobuf.StringValue text_color = 3; // hex color
+        google.protobuf.StringValue border_color = 4; // hex color
+        google.protobuf.StringValue background_color = 5; // hex color
+    }
+    enum Type {
+        LINK = 0;
+        ACTION = 1;
+    }
+
+    PluginContainerData container_data = 1;
+    Type type = 2;
+    ButtonStyles styles = 3;
+    google.protobuf.StringValue text = 4;
+    Link link = 5;
+}
+
