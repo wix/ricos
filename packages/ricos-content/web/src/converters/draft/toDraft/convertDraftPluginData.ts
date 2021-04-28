@@ -209,12 +209,12 @@ const convertButtonData = (data: Partial<ButtonData> & { button }) => {
 };
 
 const convertHTMLData = data => {
-  const { html, url } = data;
+  const { html, url, config = {} } = data;
   const srcType = html ? 'html' : 'url';
   data.srcType = srcType;
   data.src = html ? html : url;
   delete data[srcType];
-  delete data.config.size;
+  config.size && delete data.config.size;
 };
 
 const convertLink = ({
