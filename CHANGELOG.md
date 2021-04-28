@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :nail_care: Polish
+- `schema`
+  - [#2411](https://github.com/wix/ricos/pull/2411) change wix rich content schema proto package name
+
 </details>
 <hr/>
 
