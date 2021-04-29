@@ -21,4 +21,9 @@ export const normalizeUrl = (url: string) => (linkify.match(url) || [{}])[0].url
 
 export const startsWithHttps = (url: string) => /^https:/.test(url);
 
+const startsWithHttp = (url: string) => /^http:/.test(url);
+
+export const getValidUrl = url =>
+  !startsWithHttps(url) && !startsWithHttp(url) ? `http://${url}` : url;
+
 export const hasProtocol = (url: string) => /^[a-z]+:/i.test(url);

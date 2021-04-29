@@ -147,13 +147,11 @@ const convertVerticalEmbedData = (data: { type?: string }) => {
 
 const convertLinkPreviewData = (data: {
   thumbnail_url?: string;
-  provider_url?: string;
   config?: { link };
   thumbnailUrl;
   providerUrl;
 }) => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
-  has(data, 'provider_url') && (data.providerUrl = data.provider_url);
   data.config?.link && (data.config.link = convertLink(data.config?.link));
 };
 

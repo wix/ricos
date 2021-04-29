@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate } from 'wix-rich-content-common';
+import { mergeStyles, validate, getValidUrl } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginLinkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 import styles from '../statics/styles/link-preview.scss';
@@ -50,12 +50,11 @@ class LinkPreviewViewer extends Component {
       description,
       thumbnail_url: thumbnailUrl,
       html,
-      provider_url: providerUrl,
       config: {
         link: { url },
       },
     } = componentData;
-
+    const providerUrl = new URL(getValidUrl(url)).host;
     const {
       linkPreview,
       linkPreviewUrl,

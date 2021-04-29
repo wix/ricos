@@ -881,8 +881,7 @@
         },
         "title": "A mock title",
         "thumbnailUrl": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
-        "description": "A mock description",
-        "providerUrl": "www.mockUrl.com"
+        "description": "A mock description"
       }
     },
     {
