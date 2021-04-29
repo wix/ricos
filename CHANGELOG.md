@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `schema`
+  - [#2419](https://github.com/wix/ricos/pull/2419) remove `rich_content` proto package
+
 </details>
 <hr/>
 
