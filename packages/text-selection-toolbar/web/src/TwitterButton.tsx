@@ -30,10 +30,10 @@ const TwitterButton: FunctionComponent<{ selectedText: string }> = ({ selectedTe
   return (
     <button
       data-hook="twitter-button"
-      className={styles.option}
+      className={styles.button}
       onClick={() => openTwitter(selectedText)}
     >
-      {<Twitter className={styles.tweet} />}
+      <Twitter />
     </button>
   );
 };

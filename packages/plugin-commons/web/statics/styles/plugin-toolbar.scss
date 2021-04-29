@@ -34,6 +34,11 @@ $MARGIN_LEFT: 10px;
     display: none;
     width: 0 !important;
   }
+
+  & button:focus {
+    outline: 5px auto Highlight !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
+  }
 }
 
 .pluginToolbar_panel {
