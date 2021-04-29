@@ -15,8 +15,16 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+  
+
 </details>
 <hr/>
+
+## 8.31.0 (April 25, 2021)
+### :rocket: New Feature
+- `mentions`
+  - [#2407](https://github.com/wix/ricos/pull/2407) add onMentionHover
 
 ## 8.30.4 (April 25, 2021)
 ### :house: Internal
@@ -29,6 +37,7 @@
   - [#2398](https://github.com/wix-incubator/rich-content/pull/2398)  Avoid exception when image src missing
 - `editor`
   - [#2385](https://github.com/wix-incubator/rich-content/pull/2385) toolbar shortcuts in mac & windows
+  
 ## 8.30.3 (April 22, 2021)
 ### :bug: Bug Fix
 - `image`
@@ -46,6 +55,7 @@
 ### :bug: Bug Fix
 - `ricos-schema`
   - [#e728b63](https://github.com/wix/ricos/commit/e728b63) add missing import for wix proto validations
+
 ## 8.30.0 (April 20, 2021)
 ### :rocket: New Feature
 - `schema`
