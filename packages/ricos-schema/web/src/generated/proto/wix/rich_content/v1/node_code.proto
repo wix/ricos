@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package wix.rich_content.v1;
+
+import "wix/rich_content/v1/common.proto";
+
+message CodeData {
+    TextStyle text_style = 1;
+}
