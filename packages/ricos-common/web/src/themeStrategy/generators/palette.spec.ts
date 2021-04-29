@@ -19,8 +19,8 @@ describe('Palette', () => {
     fallbackColorTuple: '0, 0, 0',
     textColorLow: undefined,
     textColorLowTuple: undefined,
-    floatingActionColor: undefined,
-    floatingActionColorTuple: undefined,
+    settingsActionColor: undefined,
+    settingsActionColorTuple: undefined,
   };
 
   const wixExpected = {

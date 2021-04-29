@@ -14,7 +14,7 @@ const ThemeSelector = () => {
   const [isFallback, setFallback] = useState(false);
   const [isFloatingBM, setFloatingBM] = useState(false);
   const fallbackColor = isFallback ? '#FF0000' : undefined;
-  const floatingActionColor = isFloatingBM ? '#3899EC' : undefined;
+  const settingsActionColor = isFloatingBM ? '#3899EC' : undefined;
 
   useEffect(() => {
     document.onkeyup = event => {
@@ -81,7 +81,7 @@ const ThemeSelector = () => {
           key={palettePage}
           initialState={exapmleState}
           theme={{
-            palette: { ...palette, fallbackColor, floatingActionColor },
+            palette: { ...palette, fallbackColor, settingsActionColor },
             customStyles: FONTS[fontPage],
           }}
         />

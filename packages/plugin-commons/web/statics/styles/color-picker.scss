@@ -121,7 +121,7 @@
 .colorPicker_add_color_label {
   width: 18px;
   height: 18px;
-  color: $floating-action-color;
+  color: $settings-action-color;
   cursor: pointer;
   position: relative;
 }
@@ -159,7 +159,7 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: normal;
-  color: $floating-action-color;
+  color: $settings-action-color;
   cursor: pointer;
   .mobile & {
     font-size: 16px;

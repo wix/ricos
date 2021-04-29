@@ -15,7 +15,7 @@
   display: flex;
 }
 .checkbox_inputLabel:hover .checkbox_icon_unchecked {
-  background-color: rgba($floating-action-color-tuple, 0.2);
+  background-color: rgba($settings-action-color-tuple, 0.2);
 }
 .checkbox_icon {
   width: 16px;
@@ -23,14 +23,14 @@
   padding: 3px 2px;
   border-radius: 3px;
   background-color: #fff;
-  border: solid 1px $floating-action-color;
+  border: solid 1px $settings-action-color;
   display: inline-block;
   vertical-align: text-bottom;
   color: #fff;
   box-sizing: border-box;
 
   &:hover {
-    color: rgba($floating-action-color-tuple, 0.1);
+    color: rgba($settings-action-color-tuple, 0.1);
   }
 
   .checkbox_input:focus + & {
@@ -44,12 +44,12 @@
   height: 19px;
   padding-top: 2px;
   &:hover {
-    color: $floating-action-color;
+    color: $settings-action-color;
   }
 }
 
 .checkbox_icon_checked {
-  background-color: $floating-action-color;
+  background-color: $settings-action-color;
 }
 
 .checkbox_check {

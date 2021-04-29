@@ -12,7 +12,7 @@ const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsOb
     fallbackColor = '#000000',
     disabledColor,
     textColorLow,
-    floatingActionColor,
+    settingsActionColor,
   } = colors;
   return {
     textColor,
@@ -30,8 +30,8 @@ const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsOb
     textColorLow,
     textColorLowTuple: textColorLow ? toRgbTuple(textColorLow) : undefined,
     bgColorContainer: contentBgColor ? backgroundColor : undefined,
-    floatingActionColor,
-    floatingActionColorTuple: floatingActionColor ? toRgbTuple(floatingActionColor) : undefined,
+    settingsActionColor,
+    settingsActionColorTuple: settingsActionColor ? toRgbTuple(settingsActionColor) : undefined,
   };
 };
 

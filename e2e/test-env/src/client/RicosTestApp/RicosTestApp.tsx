@@ -32,12 +32,12 @@ const onVideoSelected = (url: string, updateEntity) => {
 const determinePalette = (
   paletteType: 'light' | 'dark',
   fallbackColor?: string,
-  floatingActionColor?: string
+  settingsActionColor?: string
 ): PaletteColors =>
   paletteType
     ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], {
         fallbackColor,
-        floatingActionColor,
+        settingsActionColor,
       })
     : undefined;
 const setBackground = (palette: PaletteColors, disableContainer: boolean) =>
@@ -102,12 +102,12 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
       useCustomStyles,
       fallbackColor,
       contentBgColor,
-      floatingActionColor,
+      settingsActionColor,
     } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType, fallbackColor, floatingActionColor);
+    const palette = determinePalette(paletteType, fallbackColor, settingsActionColor);
     const isNativeUpload = testAppConfig?.isNativeUpload;
 
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
@@ -169,12 +169,12 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
       useCustomStyles,
       fallbackColor,
       contentBgColor,
-      floatingActionColor,
+      settingsActionColor,
     } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType, fallbackColor, floatingActionColor);
+    const palette = determinePalette(paletteType, fallbackColor, settingsActionColor);
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}

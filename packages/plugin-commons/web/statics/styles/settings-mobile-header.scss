@@ -12,7 +12,7 @@
       position: fixed;
       display: block;
       padding: 0 9px;
-      background: $floating-action-color;
+      background: $settings-action-color;
     }
   }
 
@@ -82,7 +82,7 @@
     cursor: pointer;
 
     &:hover {
-      background: $floating-action-color;
+      background: $settings-action-color;
       color: white;
     }
   }

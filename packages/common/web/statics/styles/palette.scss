@@ -20,9 +20,9 @@ $background-color: var(--ricos-background-color, unset); // color 1
 $background-color-tuple: var(--ricos-background-color-tuple);
 $background-color-container: var(--ricos-bg-color-container, unset);
 
-$floating-action-color: var(--ricos-floating-action-color, $action-color-fallback); // color 8
-$floating-action-color-tuple: var(
-  --ricos-floating-action-color-tuple,
+$settings-action-color: var(--ricos-settings-action-color, $action-color-fallback); // color 8
+$settings-action-color-tuple: var(
+  --ricos-settings-action-color-tuple,
   $action-color-fallback-tuple
 );
 

@@ -8,7 +8,7 @@
 
 @mixin block-select {
   cursor: default;
-  box-shadow: 0 0 0 3px $floating-action-color;
+  box-shadow: 0 0 0 3px $settings-action-color;
 }
 
 $phone: 640px;
@@ -24,7 +24,7 @@ $phone: 640px;
   fill: $action-color-fallback;
 }
 
-@mixin fillWithFloatingActionColor {
-  color: $floating-action-color;
-  fill: $floating-action-color;
+@mixin fillWithsettingsActionColor {
+  color: $settings-action-color;
+  fill: $settings-action-color;
 }

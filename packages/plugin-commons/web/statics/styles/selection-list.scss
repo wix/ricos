@@ -27,9 +27,9 @@
 }
 
 .selectionListOption_selected {
-  color: $floating-action-color;
-  background-color: rgba($floating-action-color-tuple, 0.1);
+  color: $settings-action-color;
+  background-color: rgba($settings-action-color-tuple, 0.1);
   &.selectionListOption {
-    background-color: rgba($floating-action-color-tuple, 0.1);
+    background-color: rgba($settings-action-color-tuple, 0.1);
   }
 }

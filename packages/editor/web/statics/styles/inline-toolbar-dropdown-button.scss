@@ -8,13 +8,13 @@
 
   &:hover {
     .inlineToolbarDropdownButton_active svg {
-      // @include fillWithFloatingActionColor();
+      // @include fillWithsettingsActionColor();
     }
     > div:not(.inlineToolbarDropdown_options) button {
       background-color: rgba($fallbackColorTuple, 0.06);
 
       svg {
-        // @include fillWithFloatingActionColor();
+        // @include fillWithsettingsActionColor();
       }
     }
   }
@@ -24,7 +24,7 @@
 }
 
 .inlineToolbarDropdownButton_active svg {
-  // @include fillWithFloatingActionColor();
+  // @include fillWithsettingsActionColor();
 }
 
 .inlineToolbarDropdown_options {
