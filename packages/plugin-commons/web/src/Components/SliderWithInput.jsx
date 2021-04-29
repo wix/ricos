@@ -31,6 +31,10 @@ class SliderWithInput extends Component {
     this.setState({ inputValue });
   };
 
+  handleSliderChange = inputValue => {
+    this.setState({ inputValue });
+  };
+
   getInputMin = () => (isNumber(this.props.inputMin) ? this.props.inputMin : this.props.min);
 
   getInputMax = () => (isNumber(this.props.inputMax) ? this.props.inputMax : this.props.max);
@@ -38,17 +42,7 @@ class SliderWithInput extends Component {
   normalizeInputValue = value => Math.min(Math.max(this.getInputMin(), value), this.getInputMax());
 
   render() {
-    const {
-      label,
-      min,
-      max,
-      onChange,
-      theme,
-      sliderDataHook,
-      inputDataHook,
-      tooltipTextKey,
-      t,
-    } = this.props;
+    const { label, min, max, theme, sliderDataHook, inputDataHook, tooltipTextKey, t } = this.props;
     const { inputValue } = this.state;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
     ariaProps = {
@@ -73,7 +67,8 @@ class SliderWithInput extends Component {
             theme={theme}
             value={inputValue}
             dataHook={sliderDataHook}
-            onChange={onChange}
+            onChange={this.handleSliderChange}
+            onSubmit={this.submitInputValue}
             min={min}
             max={max}
             className={this.styles.sliderWithInput_slider}
