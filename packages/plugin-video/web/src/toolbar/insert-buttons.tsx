@@ -7,7 +7,7 @@ import {
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
 import VideoModal from './videoModal';
-import { VideoInsertPluginIcon, SoundCloudInsertPluginIcon } from '../icons';
+import { VideoInsertPluginIcon, SoundCloudInsertPluginIcon, YoutubeIcon } from '../icons';
 import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
@@ -71,6 +71,21 @@ const createInsertButtons: CreateInsertButtons = ({
         fullScreen: false,
         isMobile,
       }),
+    },
+    [videoButtonsTypes.youTube]: {
+      type: BUTTON_TYPES.MODAL,
+      name: INSERT_PLUGIN_BUTTONS.YOUTUBE,
+      tooltip: t('EmbedURL_Social_YouTube_Title'),
+      getIcon: () => YoutubeIcon,
+      componentData: { ...DEFAULTS, type: videoButtonsTypes.youTube },
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      modalElement: decorateComponentWithProps(VideoModal, settings),
+      modalStyles: getModalStyles({
+        customStyles,
+        fullScreen: false,
+        isMobile,
+      }),
+      section: 'BlockToolbar_Section_Embed_Anywhere',
     },
   };
   return exposeButtons.map(buttonType => buttonsMap[buttonType]);
