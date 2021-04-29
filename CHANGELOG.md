@@ -16,12 +16,14 @@
     Click to see more.
   </summary>
 
-  
+### :nail_care: Polish
+- `schema`
+  - [#2411](https://github.com/wix/ricos/pull/2411) change wix rich content schema proto package name
 
 </details>
 <hr/>
 
-## 8.31.0 (April 25, 2021)
+## 8.31.0 (April 28, 2021)
 ### :rocket: New Feature
 - `mentions`
   - [#2407](https://github.com/wix/ricos/pull/2407) add onMentionHover
