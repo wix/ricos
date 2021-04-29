@@ -65,9 +65,9 @@ message PluginContainerData {
     }
 
     Width width = 1;
-    google.protobuf.Int32Value custom_height = 2;
-    Alignment alignment = 3;
-    Spoiler spoiler = 4;
+    Alignment alignment = 2;
+    Spoiler spoiler = 3;
+    google.protobuf.Int32Value custom_height = 4;
 }
 
 message FileSource { // passes through srcToUrl function when provided
