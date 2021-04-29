@@ -19,12 +19,16 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#2402](https://github.com/wix-incubator/rich-content/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
-- `TextSelectionToolbar`
-  - [#2417](https://github.com/wix-incubator/rich-content/pull/2417) fix position + css
-
 
 </details>
 <hr/>
+
+## 8.31.2 (April 28, 2021)
+### :bug: Bug Fix
+- `TextSelectionToolbar`
+  - [#2417](https://github.com/wix/ricos/pull/2417) fix position + css
+- `ricos-content`
+  - [#c9a1453f](https://github.com/wix/ricos/commit/c9a1453f) fix link compare
 
 ## 8.31.1 (April 28, 2021)
 ### :nail_care: Polish
