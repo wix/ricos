@@ -19,6 +19,11 @@
 </details>
 <hr/>
 
+## 8.31.3 (April 28, 2021)
+### :nail_care: Polish
+- `schema`
+  - [#2419](https://github.com/wix/ricos/pull/2419) remove `rich_content` proto package
+
 ## 8.31.2 (April 28, 2021)
 ### :bug: Bug Fix
 - `TextSelectionToolbar`
