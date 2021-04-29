@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
+
 </details>
 <hr/>
 
