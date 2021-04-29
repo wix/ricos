@@ -16,14 +16,13 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
 
+## 8.31.2 (April 28, 2021)
 ### :bug: Bug Fix
 - `TextSelectionToolbar`
   - [#2417](https://github.com/wix-incubator/rich-content/pull/2417) fix position + css
-
-
-</details>
-<hr/>
 
 ## 8.31.1 (April 28, 2021)
 ### :nail_care: Polish
