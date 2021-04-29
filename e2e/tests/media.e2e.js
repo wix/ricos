@@ -8,9 +8,10 @@ import {
   GIPHY_PLUGIN,
   VIDEO_SETTINGS,
   SETTINGS_PANEL,
+  STATIC_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -411,6 +412,30 @@ describe('plugins', () => {
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.waitForVideoToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('youTube', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    const testAppConfig = {
+      ...usePlugins(plugins.video),
+      ...usePluginsConfig({
+        video: {
+          exposeButtons: ['video', 'soundCloud', 'youTube'],
+        },
+      }),
+    };
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
+    });
+
+    after(() => cy.eyesClose());
+    it(`open youTube modal`, function() {
+      cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS.YOUTUBE);
       cy.eyesCheckWindow(this.test.title);
     });
   });

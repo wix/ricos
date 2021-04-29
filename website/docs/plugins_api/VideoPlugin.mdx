@@ -50,6 +50,7 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 ### `Viewer disableDownload (deprecated!)`
 
 #### disableDownload should be set in the mediaSettings of the editor.
+
 ```jsx
 disableDownload?: boolean;
 ```
@@ -143,7 +144,7 @@ see documentation above.
 
 <div className="card">
   <RicosEditorWithMobile
-    content={createContent('Add A Video!')}
+    content={createContent('Add A SoundCloud!')}
     placeholder={'Type here!'}
     plugins={[
       pluginVideo({
@@ -183,4 +184,54 @@ Example value:
 
 ```jsx
 [videoButtonsTypes.video, videoButtonsTypes.soundCloud];
+```
+
+## YouTube Plugin
+
+YouTube toolbar button is part of the Video plugin. To use it we need to expose a button with `exposeButtons`:
+
+see documentation above.
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add A YouTube!')}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginVideo({
+        handleFileUpload: mockVideoNativeUploadFunc,
+        getVideoUrl,
+        exposeButtons: ['youTube', 'video'],
+      }),
+    ]}
+  />
+</div>
+<br />
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
+import { pluginVideo, videoButtonsTypes } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosEditor plugins={[pluginVideo({ exposeButtons: [videoButtonsTypes.youTube] })]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosViewer plugins={[pluginVideo(VideoConfig)]} />;
+```
+
+### `exposeButtons`
+
+The buttons exposed by the plugin
+
+```jsx
+exposeButtons?: array;
+```
+
+Example value:
+
+```jsx
+[videoButtonsTypes.youTube, videoButtonsTypes.video, videoButtonsTypes.soundCloud];
 ```
