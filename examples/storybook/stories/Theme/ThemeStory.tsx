@@ -81,7 +81,11 @@ const ThemeSelector = () => {
           key={palettePage}
           initialState={exapmleState}
           theme={{
-            palette: { ...palette, fallbackColor, settingsActionColor },
+            palette: { ...palette, fallbackColor },
+            paletteConfig: {
+              settingsActionColor,
+              focusActionColor: settingsActionColor,
+            },
             customStyles: FONTS[fontPage],
           }}
         />

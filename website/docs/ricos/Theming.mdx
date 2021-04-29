@@ -76,10 +76,6 @@ When `ActionColor` is too bright, it is replaced with `FallbackColor` when used 
 Therefore this color should remain relatively dark.
 Default is black.
 
-##### `settingsActionColor`
-Override the `actionColor` of floating panels & settings modals.
-Default is black.
-
 ##### `textColorLow`
 Work in progress
 
@@ -106,6 +102,23 @@ The recommended practice of changing the background is to wrap Ricos with your o
 However, in case you want to change the content background, you should pass `contentBgColor: true`
 
 Default value: `false`.
+
+##### `settingsActionColor`
+
+Override the `actionColor` of floating panels & settings modals.
+Default is `actionColor`.
+
+:::note
+Only applicable for `RicosEditor`
+:::
+
+##### `focusActionColor`
+Override the `actionColor` of plugin when focused / clicked
+Default is `actionColor`.
+
+:::note
+Only applicable for `RicosEditor`
+:::
 
 ## Custom Styles
 

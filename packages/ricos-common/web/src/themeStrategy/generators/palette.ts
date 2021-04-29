@@ -4,7 +4,7 @@ import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from
 import { RicosTheme, CssVarsObject, PaletteConfig } from '../themeTypes';
 
 const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsObject => {
-  const { contentBgColor = false } = config || {};
+  const { contentBgColor = false, focusActionColor, settingsActionColor } = config || {};
   const {
     textColor,
     bgColor: backgroundColor,
@@ -12,7 +12,6 @@ const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsOb
     fallbackColor = '#000000',
     disabledColor,
     textColorLow,
-    settingsActionColor,
   } = colors;
   return {
     textColor,
@@ -32,6 +31,8 @@ const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsOb
     bgColorContainer: contentBgColor ? backgroundColor : undefined,
     settingsActionColor,
     settingsActionColorTuple: settingsActionColor ? toRgbTuple(settingsActionColor) : undefined,
+    focusActionColor,
+    focusActionColorTuple: focusActionColor ? toRgbTuple(focusActionColor) : undefined,
   };
 };
 

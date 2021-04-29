@@ -21,6 +21,8 @@ describe('Palette', () => {
     textColorLowTuple: undefined,
     settingsActionColor: undefined,
     settingsActionColorTuple: undefined,
+    focusActionColor: undefined,
+    focusActionColorTuple: undefined,
   };
 
   const wixExpected = {

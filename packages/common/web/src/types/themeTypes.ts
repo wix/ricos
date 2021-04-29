@@ -28,10 +28,6 @@ export interface PaletteColors {
    * When `ActionColor` is too bright, it is replaced with `FallbackColor` when used on bright backgrounds (e.g modals, toolbars).
    * Therefore this color should remain relatively dark. */
   fallbackColor?: string;
-  /** Override the `actionColor` of floating panels, toolbars & settings modals.
-   * @default actionColor
-   */
-  settingsActionColor?: string;
 }
 export interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils, customStyles?: RicosCustomStyles): void;
