@@ -9,6 +9,7 @@ import {
   TranslationFunction,
   TextDirection,
 } from 'wix-rich-content-common';
+import { videoButtonsTypes } from '../types';
 
 interface Props {
   onConfirm?: OnConfirmFunction;
@@ -25,7 +26,7 @@ interface State {
   submittedInvalidUrl: boolean;
 }
 
-export default class SoundCloudURLInputModal extends Component<Props, State> {
+export default class MediaURLInputModal extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const { componentData } = this.props;
@@ -57,10 +58,29 @@ export default class SoundCloudURLInputModal extends Component<Props, State> {
     }
   };
 
+  getRenderData = () => {
+    const {
+      t,
+      isMobile,
+      componentData: { type },
+    } = this.props;
+    const isYouTube = type === videoButtonsTypes.youTube;
+    const isSoundCloud = type === videoButtonsTypes.soundCloud;
+    const title = isYouTube
+      ? 'EmbedURL_Social_YouTube_Title'
+      : isSoundCloud &&
+        (isMobile ? 'SoundCloudUploadModal_Header_Mobile' : 'SoundCloudUploadModal_Header');
+    const placeholder = isYouTube
+      ? t('EmbedURL_Social_YouTube_Placeholder')
+      : isSoundCloud && t('SoundCloudUploadModal_Input_Placeholder');
+    const dataHook = isYouTube ? 'socialEmbedUploadModal' : isSoundCloud && 'soundCloudUploadModal';
+    return { title, placeholder, dataHook };
+  };
+
   render() {
     const { url, submittedInvalidUrl } = this.state;
-    const { t, isMobile, languageDir, helpers } = this.props;
-
+    const { t, languageDir, helpers } = this.props;
+    const { title, placeholder, dataHook } = this.getRenderData();
     return (
       <UrlInputModal
         onConfirm={this.onConfirm}
@@ -68,14 +88,12 @@ export default class SoundCloudURLInputModal extends Component<Props, State> {
         input={url}
         t={t}
         languageDir={languageDir}
-        title={
-          !isMobile ? t('SoundCloudUploadModal_Header') : t('SoundCloudUploadModal_Header_Mobile')
-        }
+        title={t(`${title}`)}
         submittedInvalidUrl={submittedInvalidUrl}
-        dataHook={'soundCloudUploadModal'}
+        dataHook={dataHook}
         onInputChange={url => this.setState({ url })}
         errorMessage={t('SoundCloudUploadModal_Input_InvalidUrl')}
-        placeholder={t('SoundCloudUploadModal_Input_Placeholder')}
+        placeholder={placeholder}
         onCloseRequested={helpers.closeModal}
       />
     );
