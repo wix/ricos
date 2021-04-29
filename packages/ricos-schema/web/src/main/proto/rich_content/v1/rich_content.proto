@@ -12,25 +12,25 @@ package rich_content.v1;
 
 import "wix/api/validations.proto";
 import "google/protobuf/timestamp.proto";
-import "rich_content/v1/decoration_anchor.proto";
-import "rich_content/v1/decoration_color.proto";
-import "rich_content/v1/decoration_link.proto";
-import "rich_content/v1/decoration_mention.proto";
-import "rich_content/v1/node_code.proto";
-import "rich_content/v1/node_heading.proto";
-import "rich_content/v1/node_paragraph.proto";
-import "rich_content/v1/plugin_button.proto";
-import "rich_content/v1/plugin_divider.proto";
-import "rich_content/v1/plugin_file.proto";
-import "rich_content/v1/plugin_gallery.proto";
-import "rich_content/v1/plugin_giphy.proto";
-import "rich_content/v1/plugin_html.proto";
-import "rich_content/v1/plugin_image.proto";
-import "rich_content/v1/plugin_link_preview.proto";
-import "rich_content/v1/plugin_map.proto";
-import "rich_content/v1/plugin_poll.proto";
-import "rich_content/v1/plugin_vertical_embed.proto";
-import "rich_content/v1/plugin_video.proto";
+import "wix/rich_content/v1/decoration_anchor.proto";
+import "wix/rich_content/v1/decoration_color.proto";
+import "wix/rich_content/v1/decoration_link.proto";
+import "wix/rich_content/v1/decoration_mention.proto";
+import "wix/rich_content/v1/node_code.proto";
+import "wix/rich_content/v1/node_heading.proto";
+import "wix/rich_content/v1/node_paragraph.proto";
+import "wix/rich_content/v1/plugin_button.proto";
+import "wix/rich_content/v1/plugin_divider.proto";
+import "wix/rich_content/v1/plugin_file.proto";
+import "wix/rich_content/v1/plugin_gallery.proto";
+import "wix/rich_content/v1/plugin_giphy.proto";
+import "wix/rich_content/v1/plugin_html.proto";
+import "wix/rich_content/v1/plugin_image.proto";
+import "wix/rich_content/v1/plugin_link_preview.proto";
+import "wix/rich_content/v1/plugin_map.proto";
+import "wix/rich_content/v1/plugin_poll.proto";
+import "wix/rich_content/v1/plugin_vertical_embed.proto";
+import "wix/rich_content/v1/plugin_video.proto";
 
 message RichContent {
     repeated Node nodes = 1; // List of nodes
