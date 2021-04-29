@@ -7,9 +7,9 @@ import "google/protobuf/wrappers.proto";
 
 message LinkPreviewData {
   PluginContainerData container_data = 1;
-  google.protobuf.StringValue title = 2;
-  google.protobuf.StringValue thumbnail_url = 3;
-  google.protobuf.StringValue description = 4;
-  google.protobuf.StringValue html = 5;
-  Link link = 6;
+  Link link = 2;
+  google.protobuf.StringValue title = 3;
+  google.protobuf.StringValue thumbnail_url = 4;
+  google.protobuf.StringValue description = 5;
+  google.protobuf.StringValue html = 6;
 }
