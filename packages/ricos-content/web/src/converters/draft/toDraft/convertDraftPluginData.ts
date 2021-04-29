@@ -212,7 +212,7 @@ const convertHTMLData = data => {
   const { html, url, config = {} } = data;
   const srcType = html ? 'html' : 'url';
   data.srcType = srcType;
-  data.src = html ? html : url;
+  data.src = html || url;
   delete data[srcType];
   config.size && delete data.config.size;
 };
