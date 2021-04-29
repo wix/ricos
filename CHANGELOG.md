@@ -16,6 +16,12 @@
     Click to see more.
   </summary>
 
+
+### :bug: Bug Fix
+- `TextSelectionToolbar`
+  - [#2417](https://github.com/wix-incubator/rich-content/pull/2417) fix position + css
+
+
 </details>
 <hr/>
 
