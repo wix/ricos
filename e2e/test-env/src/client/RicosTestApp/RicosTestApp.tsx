@@ -29,15 +29,10 @@ const VIEWER_ONLY = false;
 const onVideoSelected = (url: string, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
-const determinePalette = (
-  paletteType: 'light' | 'dark',
-  fallbackColor?: string,
-  settingsActionColor?: string
-): PaletteColors =>
+const determinePalette = (paletteType: 'light' | 'dark', fallbackColor?: string): PaletteColors =>
   paletteType
     ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], {
         fallbackColor,
-        settingsActionColor,
       })
     : undefined;
 const setBackground = (palette: PaletteColors, disableContainer: boolean) =>
@@ -103,11 +98,12 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
       fallbackColor,
       contentBgColor,
       settingsActionColor,
+      focusActionColor,
     } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType, fallbackColor, settingsActionColor);
+    const palette = determinePalette(paletteType, fallbackColor);
     const isNativeUpload = testAppConfig?.isNativeUpload;
 
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
@@ -143,7 +139,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         locale={locale}
         theme={{
           palette,
-          paletteConfig: { contentBgColor },
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
           customStyles: useCustomStyles ? customStyles : {},
         }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
@@ -170,11 +166,12 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
       fallbackColor,
       contentBgColor,
       settingsActionColor,
+      focusActionColor,
     } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType, fallbackColor, settingsActionColor);
+    const palette = determinePalette(paletteType, fallbackColor);
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}
@@ -183,7 +180,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         locale={locale}
         theme={{
           palette,
-          paletteConfig: { contentBgColor },
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
           customStyles: useCustomStyles ? customStyles : {},
         }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
