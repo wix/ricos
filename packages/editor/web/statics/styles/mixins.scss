@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 @mixin svg-fill {
   svg {
@@ -8,7 +8,7 @@
 
 @mixin block-select {
   cursor: default;
-  box-shadow: 0 0 0 3px $action-color;
+  box-shadow: 0 0 0 3px $floating-action-color;
 }
 
 $phone: 640px;

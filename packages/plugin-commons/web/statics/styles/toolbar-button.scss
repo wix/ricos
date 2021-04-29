@@ -29,7 +29,7 @@
   &.footerToolbarButton:focus:not([disabled]) {
     .icon {
       cursor: pointer;
-      color: $action-color;
+      color: $floating-action-color;
       @include svg-fill;
     }
   }

@@ -19,15 +19,15 @@
   height: 100%;
   border-left: 1px solid #ededed;
   padding: 24px;
-  color: $action-color;
+  color: $floating-action-color;
 
   &:hover,
   &:focus {
-      color: rgba($action-color-tuple, 0.7);
-      @include svg-fill;
+    color: rgba($floating-action-color-tuple, 0.7);
+    @include svg-fill;
   }
   &.active {
-    color: $action-color;
+    color: $floating-action-color;
   }
   .buttonText {
     padding-left: 4px;
