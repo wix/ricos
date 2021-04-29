@@ -21,10 +21,8 @@ class Slider extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.onChange(nextProps.value);
-    }
+  static getDerivedStateFromProps(props, state) {
+    return props.value !== state.value ? { value: props.value } : {};
   }
 
   onChange(value) {

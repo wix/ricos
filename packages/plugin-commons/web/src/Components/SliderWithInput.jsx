@@ -12,16 +12,11 @@ class SliderWithInput extends Component {
 
   id = `sld_${Math.floor(Math.random() * 9999)}`;
 
-  state = { inputValue: this.props.value };
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.setState({ inputValue: this.normalizeInputValue(nextProps.value) });
-    }
-  }
+  state = { inputValue: this.props.defaultValue };
 
   handleInputChange = event => {
-    this.setState({ inputValue: event.target.valueAsNumber || 0 });
+    const inputValue = event.target.valueAsNumber || 0;
+    this.setState({ inputValue });
   };
 
   submitInputValueDebounced = debounce(() => {
@@ -31,8 +26,9 @@ class SliderWithInput extends Component {
   }, 800);
 
   submitInputValue = () => {
-    this.submitInputValueDebounced();
-    this.submitInputValueDebounced.flush();
+    const inputValue = this.normalizeInputValue(this.state.inputValue);
+    this.props.onChange(inputValue);
+    this.setState({ inputValue });
   };
 
   getInputMin = () => (isNumber(this.props.inputMin) ? this.props.inputMin : this.props.min);
@@ -44,7 +40,6 @@ class SliderWithInput extends Component {
   render() {
     const {
       label,
-      value,
       min,
       max,
       onChange,
@@ -54,12 +49,13 @@ class SliderWithInput extends Component {
       tooltipTextKey,
       t,
     } = this.props;
+    const { inputValue } = this.state;
     let ariaProps = label ? { 'aria-labelledby': `${this.id}_lbl` } : {};
     ariaProps = {
       ...ariaProps,
       'aria-valuemin': min,
       'aria-valuemax': max,
-      'aria-valuenow': value,
+      'aria-valuenow': inputValue,
     };
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
@@ -75,7 +71,7 @@ class SliderWithInput extends Component {
         <div className={this.styles.sliderWithInput_content}>
           <Slider
             theme={theme}
-            value={value}
+            value={inputValue}
             dataHook={sliderDataHook}
             onChange={onChange}
             min={min}
@@ -86,12 +82,11 @@ class SliderWithInput extends Component {
           <input
             tabIndex={0}
             type="number"
-            value={this.state.inputValue}
+            value={inputValue}
             data-hook={inputDataHook}
             {...ariaProps}
             onChange={this.handleInputChange}
             onBlur={this.submitInputValue}
-            onMouseUp={this.submitInputValue}
             onKeyUp={this.submitInputValueDebounced}
             className={this.styles.sliderWithInput_input}
             min={this.getInputMin()}
@@ -108,7 +103,7 @@ class SliderWithInput extends Component {
 
 SliderWithInput.propTypes = {
   label: PropTypes.string,
-  value: PropTypes.number.isRequired,
+  defaultValue: PropTypes.number.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   inputMax: PropTypes.number,
