@@ -1,6 +1,6 @@
 .DS_Store
 dist
-**/generated/rich_content
+**/generated/wix/rich_content
 **/generated/google
 node_modules
 *npm-debug.log

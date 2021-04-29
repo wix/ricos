@@ -16,12 +16,21 @@
     Click to see more.
   </summary>
 
-  
+
+### :bug: Bug Fix
+- `TextSelectionToolbar`
+  - [#2417](https://github.com/wix-incubator/rich-content/pull/2417) fix position + css
+
 
 </details>
 <hr/>
 
-## 8.31.0 (April 25, 2021)
+## 8.31.1 (April 28, 2021)
+### :nail_care: Polish
+- `schema`
+  - [#2411](https://github.com/wix/ricos/pull/2411) change wix rich content schema proto package name
+
+## 8.31.0 (April 28, 2021)
 ### :rocket: New Feature
 - `mentions`
   - [#2407](https://github.com/wix/ricos/pull/2407) add onMentionHover
