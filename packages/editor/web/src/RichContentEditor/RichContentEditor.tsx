@@ -665,13 +665,16 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         .getBlockForKey(focusedAtomicPluginKey);
     }
     const toolbar = pluginToolbar || formattingToolbar;
-    toolbar && toolbar.focus();
-    setTimeout(() => {
-      // fix bug - selection of text with atomic blocks
-      if (toolbar !== document.activeElement) {
-        toolbar && toolbar.focus();
-      }
-    });
+    if (toolbar) {
+      const buttonToFocus = toolbar.querySelectorAll('Button')[0] as HTMLElement;
+      buttonToFocus.focus();
+      setTimeout(() => {
+        // fix bug - selection of text with atomic blocks
+        if (buttonToFocus !== document.activeElement) {
+          buttonToFocus.focus();
+        }
+      });
+    }
   };
 
   getHeadings = config => {
