@@ -1,11 +1,11 @@
 /* eslint-disable fp/no-loops */
+import React from 'react';
 import {
   CODE_BLOCK_TYPE,
   BLOCKQUOTE,
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
 } from 'wix-rich-content-common';
-
 import {
   BoldIcon,
   ItalicIcon,
@@ -30,6 +30,8 @@ import {
   CodeBlockIcon,
 } from '../icons';
 
+import HeadingsDropDownPanel from '../modals/HeadingPanel';
+
 const buttonsFullData = {
   HEADINGS: {
     icon: () => null,
@@ -38,7 +40,10 @@ const buttonsFullData = {
     label: 'Paragraph',
     arrow: true,
     action: 'HEADINGS',
-    type: 'DROPDOWN',
+    type: 'modal',
+    modal: props => <HeadingsDropDownPanel {...props} />,
+    onSave: 'HEADINGS',
+    // onSave: (type, headingName) => console.log({ type, headingName }),
   },
   Separator: {
     type: 'SEPARATOR',
@@ -200,9 +205,26 @@ export const createButtonsList = (formattingButtonsKeys, editorCommands) => {
     handleButtonOnClick(buttonsList, index, editorCommands);
     handleButtonIsActive(buttonsList, index, editorCommands);
     handleButtonIsDisabled(buttonsList, index);
+    handleButtonModal(buttonsList, index);
+    handleButtonOnSave(buttonsList, index, editorCommands);
     handleGroupButtons(buttonsList, buttonKey, index, editorCommands);
   });
   return buttonsList;
+};
+
+const handleButtonOnSave = (buttonsList, index, editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].onSave) {
+    buttonsList[index].onSave = type => {
+      console.log({ type });
+      editorCommands.setBlockType(type);
+    };
+  }
+};
+
+const handleButtonModal = (buttonsList, index) => {
+  if (buttonsFullData[buttonsList[index].name].modal) {
+    buttonsList[index].modal = buttonsFullData[buttonsList[index].name].modal;
+  }
 };
 
 const handleButtonIsDisabled = (buttonsList, index) => {

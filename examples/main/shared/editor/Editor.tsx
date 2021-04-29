@@ -21,6 +21,7 @@ import {
   EventName,
   PluginEventParams,
   OnPluginAction,
+  getLangDir,
 } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps } from 'ricos-editor';
@@ -243,13 +244,14 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
         context: { getEditorState },
         buttons,
       } = this.editor.getToolbarProps(TOOLBARS.FORMATTING);
-      const { isMobile, t, theme } = this.props;
+      const { isMobile, theme, locale } = this.props;
       const buttonsAsArray = Object.values(buttons);
       const editorState = getEditorState();
       const editorCommands = this.editor.getEditorCommands();
+      const t = this.editor.getT();
       const formattingToolbarButtonsKeys = this.config.formattingToolbarButtons;
       return (
-        <div style={{ flex: 'none' }} dir="">
+        <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
           <FloatingToolbarContainer isMobile={isMobile} editorState={editorState}>
             <Toolbar
               theme={theme}
