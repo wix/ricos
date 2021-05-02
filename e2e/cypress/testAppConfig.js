@@ -36,6 +36,8 @@ export const useTheming = ({
   fallbackColor,
   disableContainer,
   contentBgColor,
+  settingsActionColor,
+  focusActionColor,
 }) => {
   return {
     theme: {
@@ -45,6 +47,8 @@ export const useTheming = ({
       fallbackColor,
       disableContainer,
       contentBgColor,
+      settingsActionColor,
+      focusActionColor,
     },
   };
 };

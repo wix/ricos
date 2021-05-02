@@ -147,7 +147,6 @@
   }
 }
 
-
 .huePointer_vertical_line {
   @include phone {
     width: 1px;
@@ -254,7 +253,7 @@
 }
 
 .sliderWithInput_input:focus {
-  border-bottom: 1px $action-color-fallback solid;
+  border-bottom: 1px $settings-action-color solid;
   border-radius: 0px;
 }
 
@@ -279,7 +278,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: $action-color-fallback;
+  background: $settings-action-color;
   cursor: pointer;
   margin-top: -4px;
 }
@@ -307,7 +306,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: $action-color-fallback;
+  background: $settings-action-color;
   cursor: pointer;
 }
 
@@ -334,7 +333,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: $action-color-fallback;
+  background: $settings-action-color;
   cursor: pointer;
   margin-top: 2px;
 }
