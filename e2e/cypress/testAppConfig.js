@@ -90,3 +90,7 @@ export const plugins = {
   table: 'table',
   video: 'video',
 };
+
+export const useExperiments = experiment => {
+  return { experiments: experiment };
+};

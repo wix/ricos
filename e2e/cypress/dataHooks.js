@@ -72,6 +72,7 @@ export const STATIC_TOOLBAR_BUTTONS_EXPENDED = {
   GALLERY: 'GalleryPlugin_InsertButton',
   FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
   ACCORDION: 'Accordion_InsertButton',
+  TABLE: 'TablePlugin_InsertButton',
 };
 
 export const STATIC_TOOLBAR_BUTTONS = {

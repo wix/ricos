@@ -145,6 +145,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
+        _rcProps={{ experiments: testAppConfig.experiments }}
       >
         <RichContentEditor
           helpers={{
