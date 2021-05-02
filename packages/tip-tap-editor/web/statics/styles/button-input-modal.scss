@@ -1,0 +1,169 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.button_inputModal_container {
+  @include phone {
+    padding: 33px 20px;
+    padding-bottom: 10px;
+  }
+}
+
+.button_inputModal_design_component_container {
+  @include phone {
+    padding-top: 24px;
+    padding-bottom: 0;
+  }
+}
+
+.button_inputModal_focus_manager {
+  border-top: none;
+}
+
+.button_inputModal_separator {
+  border-top: solid 1px #ccc;
+}
+
+.button_inputModal_scroll {
+  height: calc(100vh - 152px);
+  overflow-y: scroll;
+  @include phone {
+    height: calc(100vh - 155px);
+    overflow-x: hidden;
+  }
+}
+
+.button_inputModal_header {
+  display: flex;
+  align-items: center;
+  margin-top: 1px;
+  padding: 18px 30px 21px;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.button_inputModal_header_text {
+  font-size: 20px;
+  width: 100%;
+  margin-top: 13px;
+  margin-bottom: 10px;
+  color: #333333;
+  @include phone {
+    font-size: 20px;
+    line-height: 1.4;
+    color: #000000;
+    margin-top: 0px;
+  }
+}
+
+.button_inputModal_design_header_text {
+  font-size: 16px;
+  margin: 10px 0px;
+  width: 100%;
+  @include phone {
+    padding-left: 20px;
+    margin: 9px 0px 0px;
+    padding-bottom: 8px;
+    font-size: 16px;
+  }
+}
+
+.tabs_headers_option {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  font-size: 16px;
+  font-weight: normal;
+}
+.tabs_headers {
+  border-bottom: none;
+  height: 52px;
+}
+.tabs_headers_option_selected {
+  border-bottom: solid 3px $settings-action-color;
+}
+.header_icon {
+  margin-right: 12px;
+}
+.errorMessage {
+  color: red;
+}
+
+.button_inputModal_errorIcon {
+  position: absolute;
+  top: 2px;
+  left: 150px;
+  color: #f97972;
+}
+.tabs_headers_option + .tabs_headers_option {
+  border-left: 0;
+}
+.button_inputModal_modal_footer {
+  padding-right: 29px;
+  padding-left: 30px;
+}
+
+.button_inputModal_settingTab {
+  position: relative;
+  width: 100%;
+}
+.scroll_container {
+  overflow-y: scroll;
+  height: 634px;
+}
+
+.tabs_panel {
+  height: calc(100vh - 242px);
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0px 30px 0px;
+  padding-right: 0px;
+}
+
+.button_inputModal_tabLabel {
+  margin-top: 15px;
+  display: block;
+}
+
+.button_inputModal_scrollbar_thumb {
+  background: #000000;
+  border-radius: 4px;
+  width: 4px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.scrollbar_thumb:hover {
+  opacity: 0.8;
+}
+
+.button_inputModal_customize_scrollbar_container {
+  height: 100%;
+}
+
+.settingsPanel_save {
+  width: 165px;
+  height: 42px;
+}
+.settingsPanel_cancel + .settingsPanel_save {
+  margin-left: 30px;
+}
+
+.settingsPanel_footer {
+  border-top: 0;
+}
+
+.settingsPanel_cancel {
+  width: 165px;
+  height: 42px;
+}
+.button_primary {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: $settings-action-color;
+}
+.button_secondary {
+  font-size: 16px;
+  line-height: 1.5;
+  color: $settings-action-color;
+  border: 1px solid $settings-action-color;
+}

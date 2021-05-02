@@ -10,3 +10,4 @@ require('./RicosComponents/');
 require('./Experiments/');
 require('./TestCase/');
 require('./UploadMedia/');
+require('./TipTap/');
