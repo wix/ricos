@@ -34,6 +34,8 @@
     "react-syntax-highlighter": "12.2.1",
     "ricos-editor": "8.31.3",
     "ricos-viewer": "8.31.3",
+    "ricos-content": "8.31.3",
+    "ricos-schema": "8.31.3",
     "thread-loader": "^3.0.0",
     "ts-loader": "^8.0.4",
     "wix-rich-content-common": "8.31.3",
