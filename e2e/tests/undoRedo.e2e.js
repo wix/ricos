@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /*global cy*/
-import { IMAGE_SETTINGS, PLUGIN_COMPONENT } from '../cypress/dataHooks';
+import { IMAGE_SETTINGS, PLUGIN_COMPONENT, STATIC_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, plugins, useExperiments } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -16,7 +16,7 @@ const eyesOpen = ({
   });
 
 describe('plugins', () => {
-  context.skip('undo redo', () => {
+  context('undo redo', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -28,9 +28,13 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('should undo and redo image plugin customizations', function() {
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
-      cy.addImage();
-      cy.enterText(' testing undo redo for plugins');
+      cy.loadRicosEditorAndViewer(
+        'empty',
+        useExperiments({ UseUndoForPlugins: { enabled: true } })
+      );
+      cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.IMAGE, { force: true });
+      cy.wait(500);
+      cy.enterText('testing undo redo for plugins');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
       cy.openSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
@@ -44,7 +48,7 @@ describe('plugins', () => {
       cy.redo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('exist');
       cy.redo();
-      cy.get('.public-DraftStyleDefault-block > [data-offset-key="2s2ri-0-0"] > span').should(
+      cy.get('.public-DraftStyleDefault-block > span').should(
         'have.text',
         'testing undo redo for plugins'
       );
@@ -54,8 +58,11 @@ describe('plugins', () => {
     });
 
     it('should undo and redo accordion plugin customizations', function() {
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.all));
-      cy.addAccordion();
+      cy.loadRicosEditorAndViewer('empty', {
+        ...useExperiments({ UseUndoForPlugins: { enabled: true } }),
+        ...usePlugins(plugins.all),
+      });
+      cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
       cy.focusAccordion(1).type('Yes ');
       cy.addAccordionPair();
       cy.focusAccordion(2).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
@@ -73,9 +80,9 @@ describe('plugins', () => {
       cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
       cy.undo();
       cy.get('.public-DraftStyleDefault-block > span').should('not.have.text', 'Yes');
-      cy.undo().undo();
+      cy.undo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('not.exist');
-      cy.redo().redo();
+      cy.redo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('exist');
       cy.redo();
       cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
@@ -89,6 +96,51 @@ describe('plugins', () => {
         .should('exist');
       cy.redo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('exist');
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should undo and redo table plugin customizations', function() {
+      cy.loadRicosEditorAndViewer('empty', {
+        ...useExperiments({ UseUndoForPlugins: { enabled: true } }),
+        ...usePlugins(plugins.all),
+      });
+      cy.openTableModal();
+      cy.addTableFromModal(2, 2);
+      cy.focusTable();
+      cy.editCell(0, 'wow');
+      cy.clickOnAddRow();
+      cy.clickOnAddCol();
+      cy.focusTable();
+      cy.clickOnRowDrag(0);
+      cy.paintBG();
+      cy.goToTextStyle();
+      cy.paintTableTextColor();
+      cy.paintTableHighlightColor();
+      cy.undo();
+      cy.undo();
+      cy.undo();
+      cy.undo();
+      cy.get(`[data-hook*=colDrag-${2}]`).should('not.exist');
+      cy.undo();
+      cy.undo();
+      cy.get(`[data-hook*=rowDrag-${2}]`).should('not.exist');
+      cy.undo();
+      cy.undo();
+      cy.get('.public-DraftStyleDefault-block > span').should('not.have.text');
+      cy.undo();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.TABLE}]:first`).should('not.exist');
+      cy.redo();
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.TABLE}]:first`).should('exist');
+      cy.redo();
+      cy.redo();
+      cy.redo();
+      cy.redo();
+      cy.redo();
+      cy.get(`[data-hook*=rowDrag-${2}]`).should('exist');
+      cy.get(`[data-hook*=colDrag-${2}]`).should('exist');
+      cy.redo();
+      cy.redo();
+      cy.redo();
       cy.eyesCheckWindow(this.test.title);
     });
   });
