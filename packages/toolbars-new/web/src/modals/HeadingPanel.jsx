@@ -7,13 +7,7 @@ import { HEADER_TYPE_MAP } from 'wix-rich-content-plugin-commons';
 
 export const DEFAULT_HEADERS_DROPDOWN_OPTIONS = Object.freeze(['P', 'H2', 'H3', 'H4', 'H5', 'H6']);
 
-const translateHeading = (option = 'P', t) => {
-  return option === 'P'
-    ? t('FormattingToolbar_TextStyle_Paragraph')
-    : t('FormattingToolbar_TextStyle_Heading', { number: option.slice(-1) });
-};
-
-const headingElement = (heading, isSelected, onClick, t) => {
+const headingElement = (heading, isSelected, onClick, t, translateHeading) => {
   const content = translateHeading(heading, t);
   const type = HEADER_TYPE_MAP[heading];
   return (
@@ -23,6 +17,7 @@ const headingElement = (heading, isSelected, onClick, t) => {
         isSelected ? styles.headingsPanel_selectedHeading : ''
       )}
       onClick={() => onClick(type, heading)}
+      onMouseDown={event => event.preventDefault()}
     >
       {content}
     </button>
@@ -31,14 +26,22 @@ const headingElement = (heading, isSelected, onClick, t) => {
 
 class Panel extends Component {
   render() {
-    const { customHeadingsOptions, selected, onSave, styles, isMobile, t } = this.props;
+    const {
+      customHeadingsOptions,
+      selected,
+      onSave,
+      styles,
+      isMobile,
+      t,
+      translateHeading,
+    } = this.props;
     return (
       <div
         className={isMobile ? styles.headingsMobilePanel : styles.headingsPanel}
         data-hook="headingsDropdownPanel"
       >
         {customHeadingsOptions.map(heading => {
-          return headingElement(heading, selected === heading, onSave, t);
+          return headingElement(heading, selected === heading, onSave, t, translateHeading);
         })}
       </div>
     );
@@ -68,7 +71,12 @@ export default class HeadingsDropDownPanel extends Component {
   };
 
   render() {
-    const { isMobile, customHeadingsOptions = this.defaultHeadings(), t } = this.props;
+    const {
+      isMobile,
+      customHeadingsOptions = this.defaultHeadings(),
+      t,
+      translateHeading,
+    } = this.props;
     const { heading } = this.state;
     const { styles } = this;
     const selected = heading;
@@ -86,6 +94,7 @@ export default class HeadingsDropDownPanel extends Component {
           isMobile={isMobile}
           customHeadingsOptions={customHeadingsOptions}
           t={t}
+          translateHeading={translateHeading}
         />
       </div>
     );
@@ -100,6 +109,7 @@ HeadingsDropDownPanel.propTypes = {
   heading: PropTypes.string,
   customHeadingsOptions: PropTypes.array,
   t: PropTypes.func,
+  translateHeading: PropTypes.func,
 };
 
 HeadingsDropDownPanel.defaultProps = { heading: 'P' };

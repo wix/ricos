@@ -29,21 +29,29 @@ import {
   LineSpacingIcon,
   CodeBlockIcon,
 } from '../icons';
-
 import HeadingsDropDownPanel from '../modals/HeadingPanel';
+
+export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
+  'header-one': 'H1',
+  'header-two': 'H2',
+  'header-three': 'H3',
+  'header-four': 'H4',
+  'header-five': 'H5',
+  'header-six': 'H6',
+  unstyled: 'P',
+});
 
 const buttonsFullData = {
   HEADINGS: {
     icon: () => null,
     dataHook: 'headingsDropdownButton',
     tooltip: 'Text style',
-    label: 'Paragraph',
+    label: 'HEADINGS',
     arrow: true,
     action: 'HEADINGS',
     type: 'modal',
-    modal: props => <HeadingsDropDownPanel {...props} />,
+    modal: props => <HeadingsDropDownPanel {...props} translateHeading={translateHeading} />,
     onSave: 'HEADINGS',
-    // onSave: (type, headingName) => console.log({ type, headingName }),
   },
   Separator: {
     type: 'SEPARATOR',
@@ -192,7 +200,7 @@ const inlineStyleButtons = ['Bold', 'Italic', 'Underline'];
 
 const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedList'];
 
-export const createButtonsList = (formattingButtonsKeys, editorCommands) => {
+export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
   const buttonsList = [];
   formattingButtonsKeys.forEach((buttonKey, index) => {
     handleButtonName(buttonsList, buttonKey, index, editorCommands);
@@ -200,12 +208,12 @@ export const createButtonsList = (formattingButtonsKeys, editorCommands) => {
     handleButtonIcon(buttonsList, index);
     handleButtonDataHook(buttonsList, index);
     handleButtonTooltip(buttonsList, index);
-    handleButtonLabel(buttonsList, index);
+    handleButtonLabel(buttonsList, index, editorCommands, t);
     handleButtonArrow(buttonsList, index);
     handleButtonOnClick(buttonsList, index, editorCommands);
     handleButtonIsActive(buttonsList, index, editorCommands);
     handleButtonIsDisabled(buttonsList, index);
-    handleButtonModal(buttonsList, index);
+    handleButtonModal(buttonsList, index, editorCommands, t);
     handleButtonOnSave(buttonsList, index, editorCommands);
     handleGroupButtons(buttonsList, buttonKey, index, editorCommands);
   });
@@ -221,9 +229,15 @@ const handleButtonOnSave = (buttonsList, index, editorCommands) => {
   }
 };
 
-const handleButtonModal = (buttonsList, index) => {
+const handleButtonModal = (buttonsList, index, editorCommands, t) => {
   if (buttonsFullData[buttonsList[index].name].modal) {
     buttonsList[index].modal = buttonsFullData[buttonsList[index].name].modal;
+    if (buttonsFullData[buttonsList[index].name].action === 'HEADINGS') {
+      const Modal = buttonsFullData[buttonsList[index].name].modal;
+      buttonsList[index].modal = props => (
+        <Modal {...props} heading={getCurrentHeading(editorCommands, t)} />
+      );
+    }
   }
 };
 
@@ -263,9 +277,12 @@ const handleButtonArrow = (buttonsList, index) => {
   }
 };
 
-const handleButtonLabel = (buttonsList, index) => {
+const handleButtonLabel = (buttonsList, index, editorCommands, t) => {
   if (buttonsFullData[buttonsList[index].name].label) {
     buttonsList[index].getLabel = () => buttonsFullData[buttonsList[index].name].label;
+    if (buttonsFullData[buttonsList[index].name].action === 'HEADINGS') {
+      buttonsList[index].getLabel = () => translateHeading(getCurrentHeading(editorCommands), t);
+    }
   }
 };
 
@@ -333,4 +350,20 @@ const addGroupButtonsData = (buttonsList, index, innerButtonKey, editorCommands)
   currentInnerButton.isActive = () =>
     editorCommands.getTextAlignment() === buttonsFullData[innerButtonKey].action;
   currentInnerButton.isDisabled = () => false;
+};
+
+const getCurrentHeading = editorCommands => {
+  let currentHeading = 'P';
+  Object.keys(HEADING_TYPE_TO_ELEMENT).forEach(headingType => {
+    if (editorCommands.isBlockTypeSelected(headingType)) {
+      currentHeading = HEADING_TYPE_TO_ELEMENT[headingType];
+    }
+  });
+  return currentHeading;
+};
+
+const translateHeading = (option = 'P', t) => {
+  return option === 'P'
+    ? t('FormattingToolbar_TextStyle_Paragraph')
+    : t('FormattingToolbar_TextStyle_Heading', { number: option.slice(-1) });
 };

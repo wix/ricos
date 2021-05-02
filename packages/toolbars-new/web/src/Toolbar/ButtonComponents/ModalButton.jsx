@@ -18,11 +18,18 @@ class ModalButton extends Component {
   };
 
   closeModal = () => {
-    this.setState({ isModalOpen: false });
+    if (this.state.isModalOpen) {
+      this.setState({ isModalOpen: false });
+    }
+  };
+
+  onSave = (...args) => {
+    this.props.onSave(...args);
+    this.closeModal();
   };
 
   render() {
-    const { modal, dropDownProps, onSelect, theme, t, onSave } = this.props;
+    const { modal, dropDownProps, onSelect, theme, t } = this.props;
     const {
       isActive,
       tooltip,
@@ -56,7 +63,7 @@ class ModalButton extends Component {
             data-id="table-formatting-toolbar-modal"
             className={classNames(styles.modal, styles.withoutPadding)}
           >
-            {modal({ closeCustomModal: this.closeModal, onSelect, t, onSave })}
+            {modal({ closeCustomModal: this.closeModal, onSelect, t, onSave: this.onSave })}
           </div>
         )}
       </ClickOutside>
