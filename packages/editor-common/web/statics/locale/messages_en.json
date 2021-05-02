@@ -95,7 +95,7 @@
   "ImagePlugin_InsertButton_Tooltip": "Add an image",
   "ImagePlugin_Settings_ImageOpensInExpandMode_Label": "Expand mode",
   "ImagePlugin_Settings_ImageCanBeDownloaded_Label": "Right click to download",
-  "ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip": "Give readers the option to download your image.",
+  "ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip": "Readers will be able to download this image by right clicking on it and selecting save image as.",
   "ImageSettings_MobileHeader_Cancel": "Cancel",
   "ImageSettings_MobileHeader_Save": "Save",
   "ImageSettings_Update": "Save",
