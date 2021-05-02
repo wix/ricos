@@ -36,6 +36,8 @@ export const useTheming = ({
   fallbackColor,
   disableContainer,
   contentBgColor,
+  settingsActionColor,
+  focusActionColor,
 }) => {
   return {
     theme: {
@@ -45,6 +47,8 @@ export const useTheming = ({
       fallbackColor,
       disableContainer,
       contentBgColor,
+      settingsActionColor,
+      focusActionColor,
     },
   };
 };
@@ -85,4 +89,8 @@ export const plugins = {
   accordion: 'accordion',
   table: 'table',
   video: 'video',
+};
+
+export const useExperiments = experiment => {
+  return { experiments: experiment };
 };

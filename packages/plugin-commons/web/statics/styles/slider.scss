@@ -6,8 +6,8 @@
 // Version 1.4.1
 // MIT License
 
-// $track-color: $action-color-fallback;
-// $thumb-color: $action-color-fallback;
+// $track-color: $settings-action-color;
+// $thumb-color: $settings-action-color;
 
 $thumb-radius: 8px !default;
 $thumb-height: 16px !default;
@@ -42,7 +42,7 @@ $track-radius: 3px !default;
 
 @mixin thumb {
   @include shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
-  background: $action-color-fallback;
+  background: $settings-action-color;
   border: $thumb-border-width solid $thumb-border-color;
   border-radius: $thumb-radius;
   cursor: pointer;
@@ -60,22 +60,22 @@ $track-radius: 3px !default;
 
   &:focus {
     &::-webkit-slider-runnable-track {
-      background: $action-color-fallback;
+      background: $settings-action-color;
     }
 
     &::-ms-fill-lower {
-      background: $action-color-fallback;
+      background: $settings-action-color;
     }
 
     &::-ms-fill-upper {
-      background: $action-color-fallback;
+      background: $settings-action-color;
     }
   }
 
   &::-webkit-slider-runnable-track {
     @include track;
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: $action-color-fallback;
+    background: $settings-action-color;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius;
   }
@@ -89,7 +89,7 @@ $track-radius: 3px !default;
   &::-moz-range-track {
     @include track;
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: $action-color-fallback;
+    background: $settings-action-color;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius;
   }
@@ -109,14 +109,14 @@ $track-radius: 3px !default;
 
   &::-ms-fill-lower {
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: $action-color-fallback;
+    background: $settings-action-color;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius * 2;
   }
 
   &::-ms-fill-upper {
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: $action-color-fallback;
+    background: $settings-action-color;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius * 2;
   }
