@@ -31,16 +31,6 @@ schemas.forEach(schema => {
   );
 });
 
-// TEMPORARY DUPLICATION
-mkdirSyncDeep(`src/main/proto/rich_content/v${LATEST_VERSION}`);
-schemas.forEach(schema => {
-  const schemaFile = readFileSync(`src/main/proto/${PACKAGE_PATH}/${schema}`, 'utf8');
-  writeFileSync(
-    `src/main/proto/rich_content/v${LATEST_VERSION}/${schema}`,
-    schemaFile.replace('package wix.rich_content', 'package rich_content')
-  );
-});
-
 schemas.forEach(schema =>
   execSync(
     // eslint-disable-next-line max-len

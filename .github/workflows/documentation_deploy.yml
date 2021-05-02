@@ -1,35 +1,10 @@
-name: documentation
+name: documentation_deploy
 on:
   push:
     branches:
       - master
-    paths:
-      - '.website/**'
-  pull_request:
-    branches:
-      - master
 jobs:
-  checks:
-    if: github.event_name != 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: Test Build
-        run: |
-          cd website
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
-          npm run build
   gh-release:
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
