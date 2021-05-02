@@ -126,30 +126,8 @@ const createPlugins = externalConfigs => {
     undoRedo: pluginUndoRedo(),
     headings: pluginHeadings(configs.headings),
     spoiler: pluginSpoiler(),
-    accordion: pluginAccordion({
-      innerRCEPlugins: [
-        pluginTextColor(configs.textColor).createPlugin,
-        pluginTextHighlight(configs.textHighlight).createPlugin,
-        pluginIndent().createPlugin,
-        pluginLineSpacing().createPlugin,
-        pluginLink().createPlugin,
-        pluginCodeBlock().createPlugin,
-        pluginImage().createPlugin,
-        pluginUnsupportedBlocks().createPlugin,
-      ],
-    }),
-    table: pluginTable({
-      innerRCEPlugins: [
-        pluginTextColor(configs.textColor).createPlugin,
-        pluginTextHighlight(configs.textHighlight).createPlugin,
-        pluginIndent().createPlugin,
-        pluginLineSpacing().createPlugin,
-        pluginLink().createPlugin,
-        pluginCodeBlock().createPlugin,
-        pluginImage().createPlugin,
-        pluginUnsupportedBlocks().createPlugin,
-      ],
-    }),
+    accordion: pluginAccordion(),
+    table: pluginTable(),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
     unsupportedBlocks: pluginUnsupportedBlocks(),
   };
