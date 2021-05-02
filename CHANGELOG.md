@@ -15,15 +15,19 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
+
+## 8.32.0 (May 2, 2021)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2413](https://github.com/wix-incubator/rich-content/pull/2413) action color can now be separated for settings panels & focus on plugin. See [settingsActionColor & focusActionColor API](https://ricos.js.org/docs/ricos/Theming#settingsactioncolor)
 
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
 - `gallery`
   - [#2402](https://github.com/wix-incubator/rich-content/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
-
-</details>
-<hr/>
 
 ## 8.31.3 (April 28, 2021)
 ### :nail_care: Polish
