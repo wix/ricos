@@ -31,7 +31,9 @@ const onVideoSelected = (url: string, updateEntity) => {
 };
 const determinePalette = (paletteType: 'light' | 'dark', fallbackColor?: string): PaletteColors =>
   paletteType
-    ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], { fallbackColor })
+    ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], {
+        fallbackColor,
+      })
     : undefined;
 const setBackground = (palette: PaletteColors, disableContainer: boolean) =>
   !disableContainer && palette ? { backgroundColor: palette.bgColor } : {};
@@ -89,8 +91,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
   renderEditor = () => {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor, contentBgColor } =
-      testAppConfig.theme || {};
+    const {
+      skipCssOverride,
+      paletteType,
+      useCustomStyles,
+      fallbackColor,
+      contentBgColor,
+      settingsActionColor,
+      focusActionColor,
+    } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -130,7 +139,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         locale={locale}
         theme={{
           palette,
-          paletteConfig: { contentBgColor },
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
           customStyles: useCustomStyles ? customStyles : {},
         }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
@@ -151,8 +160,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor, contentBgColor } =
-      testAppConfig.theme || {};
+    const {
+      skipCssOverride,
+      paletteType,
+      useCustomStyles,
+      fallbackColor,
+      contentBgColor,
+      settingsActionColor,
+      focusActionColor,
+    } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -165,7 +181,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         locale={locale}
         theme={{
           palette,
-          paletteConfig: { contentBgColor },
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
           customStyles: useCustomStyles ? customStyles : {},
         }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
