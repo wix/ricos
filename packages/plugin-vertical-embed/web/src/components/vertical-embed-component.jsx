@@ -19,8 +19,7 @@ class VerticalEmbedComponent extends PureComponent {
       settings: { slimLayout = false },
     } = this.props;
 
-    const { selectedProduct } = componentData;
-    const { html } = selectedProduct;
+    const { html } = componentData;
 
     return (
       <div

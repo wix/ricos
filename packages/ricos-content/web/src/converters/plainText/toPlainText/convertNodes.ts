@@ -93,12 +93,12 @@ export const parseMap = ({ mapData }: Node): string => {
 };
 
 export const parseVerticalEmbed = ({ verticalEmbedData }: Node, delimiter: string): string => {
-  const { html, name } = verticalEmbedData?.selectedProduct || {};
+  const { html } = verticalEmbedData || {};
   const href = html
     ?.replace(/.*href="/g, '')
     .replace(/.*=http/g, 'http')
     .replace(/" .*/g, '');
-  return [name, href].filter(Boolean).join(delimiter);
+  return [href].filter(Boolean).join(delimiter);
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {

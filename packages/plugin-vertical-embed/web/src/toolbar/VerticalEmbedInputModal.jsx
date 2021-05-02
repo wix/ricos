@@ -46,7 +46,7 @@ export default class VerticalEmbedInputModal extends Component {
     const addFunc = onConfirm || onReplace;
     addFunc({
       ...componentData,
-      selectedProduct,
+      html: selectedProduct.html,
     });
     helpers.closeModal();
   };

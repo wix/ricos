@@ -411,27 +411,6 @@
     },
     {
       "type": "PARAGRAPH",
-      "key": "bh14p",
-      "nodes": [
-        {
-          "type": "TEXT",
-          "key": "bub6v",
-          "nodes": [],
-          "textData": {
-            "text": "flowers",
-            "decorations": []
-          }
-        }
-      ],
-      "paragraphData": {
-        "textStyle": {
-          "textAlignment": "AUTO"
-        },
-        "indentation": 0
-      }
-    },
-    {
-      "type": "PARAGRAPH",
       "key": "d0kcf",
       "nodes": [
         {
