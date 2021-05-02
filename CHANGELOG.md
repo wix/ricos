@@ -19,9 +19,16 @@
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
+- `gallery`
+  - [#2402](https://github.com/wix-incubator/rich-content/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
 
 </details>
 <hr/>
+
+## 8.31.3 (April 28, 2021)
+### :nail_care: Polish
+- `schema`
+  - [#2419](https://github.com/wix/ricos/pull/2419) remove `rich_content` proto package
 
 ## 8.31.2 (April 28, 2021)
 ### :bug: Bug Fix
