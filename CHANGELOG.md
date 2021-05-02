@@ -19,6 +19,9 @@
 ### :rocket: New Feature
 - `file-upload`
   - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+### :house: Internal
+- `editor`
+  - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
 
 </details>
 <hr/>
