@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+
 </details>
 <hr/>
 
@@ -93,8 +98,6 @@
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
-- `file-upload`
-  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
 ### :nail_care: Polish
 - `schema`
   - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
