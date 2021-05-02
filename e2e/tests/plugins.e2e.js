@@ -716,7 +716,9 @@ describe('plugins', () => {
     };
 
     it('should change accordion settings', function() {
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
+      cy.loadRicosEditorAndViewer('accordion-rich-text', {
+        plugins: [plugins.accordion, plugins.embedsPreset, plugins.textPlugins],
+      });
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);
