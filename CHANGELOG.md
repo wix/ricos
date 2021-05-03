@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `file-upload`
   - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+- `gallery`
+  - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
 ### :house: Internal
 - `editor`
   - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
@@ -101,8 +103,6 @@
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`
   - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
-- `gallery`
-  - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
 ### :nail_care: Polish
 - `schema`
   - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
