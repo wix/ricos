@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import cx from 'classnames';
 import { Page } from '../Components/StoryParts';
 import { TipTapEditor } from 'tip-tap-editor';
-
+import './TipTapEditor.scss';
 
 export default () => {
     return (

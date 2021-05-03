@@ -35,8 +35,10 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "@tiptap/core": "latest",
-    "@tiptap/starter-kit": "latest"
+    "@tiptap/core": "^2.0.0",
+    "@tiptap/starter-kit": "^2.0.0",
+    "@tiptap/extension-underline": "^2.0.0",
+    "@tiptap/extension-bold":  "^2.0.0"
   },
   "unpkg": true,
   "publishConfig": {
