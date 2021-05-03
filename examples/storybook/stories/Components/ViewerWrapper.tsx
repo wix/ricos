@@ -72,7 +72,7 @@ interface Props {
   content?: DraftContent;
   isMobile?: boolean;
   preview?: RicosViewerProps['preview'];
-  addAnchors?: RichContentViewerProps['addAnchors'];
+  addAnchors?: RicosViewerProps['addAnchors'];
   normalize?: RichContentViewerProps['normalize'];
   theme?: RicosTheme;
 }
