@@ -16,9 +16,9 @@
 }
 
 .file_upload_error_container {
-  border: 1px solid rgba($color: #F64D43, $alpha: 0.8);
+  border: 1px solid rgba($color: #f64d43, $alpha: 0.8);
   &:hover {
-    border: 1px solid rgba($color: #F64D43, $alpha: 1);
+    border: 1px solid rgba($color: #f64d43, $alpha: 1);
   }
 }
 
@@ -31,6 +31,9 @@
   justify-content: center;
   align-content: flex-start;
   flex-flow: column wrap;
+  &.width_three {
+    align-content: center;
+  }
 }
 
 .file_upload_text_container {
@@ -39,6 +42,9 @@
   left: 73px;
   width: 60%;
   position: absolute;
+  &.width_two {
+    left: 62px;
+  }
 }
 
 .file_upload_state {
@@ -78,14 +84,19 @@
   max-width: 20%;
   color: $primary-text-color;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-right: 30px;
+  &.width_one {
+    margin-right: 55px;
+  }
 }
 
-.file_upload_icon {
+.file_upload_type_icon {
   margin-right: 12px;
   margin-left: 20px;
   color: $action-color;
+  &.width_three {
+    margin: 0;
+  }
 }
 
 /* rtl:ignore */
@@ -106,18 +117,20 @@
   color: $primary-text-color;
   opacity: 0.6;
   font-family: $ricos-font-family !important;
+  text-align: initial;
 }
 
 .file_upload_text_error {
   letter-spacing: 0;
   font-size: 14px;
-  color: #F64D43;
+  color: #f64d43;
   font-family: $ricos-font-family !important;
 }
 
 .file_upload_icon_frame {
   stroke: var(--ricos-background-color, white);
 }
+
 .file_upload_icon_background {
   fill: var(--ricos-background-color, white);
 }
