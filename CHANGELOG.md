@@ -15,6 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :rocket: New Feature
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
 
 ### :bug: Bug Fix
 - `ricos-viewer`
