@@ -29,6 +29,9 @@ class ButtonComponent extends PureComponent {
     }
     const style = {
       border: '0px solid blue',
+      color: this.props.settings.colors?.color1 || '#FEFDFD',
+      backgroundColor: this.props.settings.colors?.color8 || '#0261FF',
+      borderColor: this.props.settings?.colors.color8 || '#0261FF',
       ...this.props.style,
       ...button.design,
     };
