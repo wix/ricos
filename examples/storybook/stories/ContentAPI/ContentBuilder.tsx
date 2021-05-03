@@ -47,19 +47,23 @@ const Sidebar: FC = () => {
   );
 };
 
-const EditPanel: FC<EditTextProps> = ({}) => {
+const EditPanel: FC<EditTextProps> = ({ onAdd }) => {
   const [text, setText] = useState(undefined as string);
   const [alignment, setAlignment] = useState(undefined as string);
   return (
     <Layout>
       <Cell>
-        <InputWithLabel label="Text" onChange={e => setText(e.currentTarget.value)} />
+        <InputWithLabel label="Text" value={text} onChange={e => setText(e.currentTarget.value)} />
       </Cell>
       <Cell>
-        <InputWithLabel label="Alignment" />
+        <InputWithLabel
+          label="Alignment"
+          value={alignment}
+          onChange={e => setAlignment(e.currentTarget.value)}
+        />
       </Cell>
       <Cell>
-        <Button>Add</Button>
+        <Button onClick={() => onAdd({ text, alignment })}>Add</Button>
       </Cell>
     </Layout>
   );
@@ -95,7 +99,7 @@ export default () => {
             <Sidebar />
           </Cell>
           <Cell span={2}>
-            <EditPanel />
+            <EditPanel onAdd={({ text, alignment }) => {}} />
           </Cell>
           <Cell span={3}>
             <div style={{ paddingInlineStart: '60px' }}>

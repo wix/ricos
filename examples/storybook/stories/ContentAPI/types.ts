@@ -1,5 +1,5 @@
 interface EditPanelProps<T> {
-  onClick: (args: T) => void;
+  onAdd: (args: T) => void;
 }
 
 type EditTextProps = EditPanelProps<{
