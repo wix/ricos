@@ -5,6 +5,7 @@ import {
   PLUGIN_TOOLBAR_BUTTONS,
   GALLERY_SETTINGS,
   GALLERY_IMAGE_SETTINGS,
+  IMAGE_SETTINGS,
   GIPHY_PLUGIN,
   VIDEO_SETTINGS,
   SETTINGS_PANEL,
@@ -102,6 +103,23 @@ describe('plugins', () => {
     it('render image with loader - loading in component data', () => {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.get(`[data-hook=loader]`).should('to.be.visible');
+    });
+
+    it('should disable image expand', () => {
+      cy.loadRicosEditorAndViewer('images');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+      cy.openSettings();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${IMAGE_SETTINGS.IMAGE_EXPAND_TOGGLE}]`).click();
+      cy.wait(200);
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.wait(200);
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
+        .eq(2)
+        .parent()
+        .click();
+      cy.eyesCheckWindow();
     });
   });
 
