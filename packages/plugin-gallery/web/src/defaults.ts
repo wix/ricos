@@ -114,5 +114,5 @@ export const createVideoItem = (video: VideoComponentData, itemId: string) => {
   };
 };
 
-export const isHorizontalLayout = ({ galleryLayout }) =>
-  HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;
+export const isHorizontalLayout = ({ galleryLayout, oneRow }) =>
+  HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1 || oneRow;

@@ -297,6 +297,13 @@ describe('RicosEditor', () => {
 
         observe() {}
       };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (global as any).ResizeObserver = class {
+        observe() {}
+
+        unobserve() {}
+      };
     });
 
     describe('Editor text formatting API', () => {
