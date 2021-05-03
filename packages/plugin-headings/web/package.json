@@ -35,7 +35,7 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "react-click-outsider": "1.1.1",
+    "react-modal": "~3.4.1",
     "wix-rich-content-common": "8.32.0",
     "wix-rich-content-editor-common": "8.32.0",
     "wix-rich-content-plugin-commons": "8.32.0"
