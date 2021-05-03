@@ -164,7 +164,10 @@ const convertLinkPreviewData = data => {
     data.thumbnail_url = data.thumbnailUrl;
     delete data.thumbnailUrl;
   }
-  has(data, 'config.link') && (data.config.link = convertLink(data.config.link));
+  if (has(data, 'link')) {
+    data.config.link = convertLink(data.link);
+    delete data.link;
+  }
 };
 
 const convertMention = (data: Partial<MentionData> & { mention }) => {

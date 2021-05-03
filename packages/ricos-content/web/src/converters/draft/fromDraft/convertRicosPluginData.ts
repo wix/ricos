@@ -149,10 +149,10 @@ const convertLinkPreviewData = (data: {
   thumbnail_url?: string;
   config?: { link };
   thumbnailUrl;
-  providerUrl;
+  link;
 }) => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
-  data.config?.link && (data.config.link = convertLink(data.config?.link));
+  data.config?.link && (data.link = convertLink(data.config?.link));
 };
 
 const convertMention = (data: {

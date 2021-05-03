@@ -12,7 +12,9 @@ const ThemeSelector = () => {
   const [palettePage, setPalettePage] = useState(0);
   const [fontPage, setFontPage] = useState(0);
   const [isFallback, setFallback] = useState(false);
+  const [isFloatingBM, setFloatingBM] = useState(false);
   const fallbackColor = isFallback ? '#FF0000' : undefined;
+  const settingsActionColor = isFloatingBM ? '#3899EC' : undefined;
 
   useEffect(() => {
     document.onkeyup = event => {
@@ -67,11 +69,25 @@ const ThemeSelector = () => {
         <ToggleSwitch checked={isFallback} onChange={({ target }) => setFallback(target.checked)} />
         <span>Use RED fallback color</span>
       </div>
+      <div>
+        <ToggleSwitch
+          checked={isFloatingBM}
+          onChange={({ target }) => setFloatingBM(target.checked)}
+        />
+        <span>Use BM Blue floating action color</span>
+      </div>
       <div style={{ backgroundColor: palette.bgColor, padding: 4 }}>
         <ExampleApplication
           key={palettePage}
           initialState={exapmleState}
-          theme={{ palette: { ...palette, fallbackColor }, customStyles: FONTS[fontPage] }}
+          theme={{
+            palette: { ...palette, fallbackColor },
+            paletteConfig: {
+              settingsActionColor,
+              focusActionColor: settingsActionColor,
+            },
+            customStyles: FONTS[fontPage],
+          }}
         />
       </div>
     </>
