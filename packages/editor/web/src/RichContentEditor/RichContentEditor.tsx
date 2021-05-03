@@ -191,6 +191,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   refId: number;
 
+  editorRef: HTMLDivElement | null;
+
   commonPubsub: Pubsub;
 
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
@@ -271,6 +273,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.initPlugins();
     this.initEditorCommands();
     this.fixDraftSelectionExtend();
+    this.editorRef = null;
   }
 
   fixDraftSelectionExtend = () => {
@@ -295,7 +298,20 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.preloadLibs();
     document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
     this.commonPubsub.set('undoExperiment', this.getUndoExperiment);
+    if (!this.props.isInnerRCE && this.editorRef) {
+      this.editorRef.parentElement?.addEventListener('click', this.onEditorClickOutside);
+    }
   }
+
+  onEditorClickOutside = e => {
+    const { editorState } = this.state;
+    const isClickOutside =
+      e.target && !(e.target as HTMLElement).closest('[data-hook=root-editor]');
+    if (isClickOutside) {
+      this.disableFocusInSelection(editorState);
+      this.commonPubsub.set('focusedBlock', null);
+    }
+  };
 
   componentWillMount() {
     this.updateBounds = (editorBounds?: BoundingRect) => {
@@ -1167,7 +1183,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 style={this.props.style}
-                ref={measureRef}
+                ref={ref => {
+                  this.editorRef = ref;
+                  measureRef(ref);
+                }}
                 className={wrapperClassName}
                 dir={direction || getLangDir(this.props.locale)}
                 data-id={'rce'}
