@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+</details>
+<hr/>
+
+## 8.33.0 (May 3, 2021)
 ### :rocket: New Feature
 - `file-upload`
   - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
@@ -27,9 +30,6 @@
 ### :house: Internal
 - `editor`
   - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
-
-</details>
-<hr/>
 
 ## 8.32.0 (May 2, 2021)
 ### :rocket: New Feature
