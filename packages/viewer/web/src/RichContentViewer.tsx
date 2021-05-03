@@ -258,6 +258,7 @@ class RichContentViewer extends Component<
         config,
         t,
         renderedInTable,
+        isMobile,
       };
 
       const output = convertToReact(

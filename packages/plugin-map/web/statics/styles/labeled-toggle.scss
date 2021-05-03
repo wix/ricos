@@ -57,7 +57,7 @@
   margin: 0;
 }
 
-.infoIcon{
+.infoIcon {
   margin-left: 4px;
   cursor: pointer;
   fill: $primary-text-color;
@@ -82,7 +82,7 @@
 
 .labeled_toggle_label {
   font-size: 16px;
-  @include phone{
+  @include phone {
     font-size: 14px;
   }
 }
@@ -93,7 +93,7 @@
   border-radius: 12px;
   background-color: #aaa;
   &_checked {
-    background-color: $action-color;
+    background-color: $settings-action-color;
   }
 }
 

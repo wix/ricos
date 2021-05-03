@@ -30,8 +30,8 @@
   }
 
   &:hover {
-    color: $action-color;
-    fill: $action-color;
+    color: $settings-action-color;
+    fill: $settings-action-color;
   }
 }
 
@@ -51,7 +51,7 @@
 }
 
 .plusIcon {
-  color: $action-color;
+  color: $settings-action-color;
   &:hover {
     opacity: 0.7;
   }
