@@ -15,6 +15,7 @@ import EditorWrapper from '../Components/EditorWrapper';
 import { setupContentBuilder } from 'ricos-content/libs/Content';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { emptyState } from 'ricos-common';
+import styles from './ContentBuilder.scss';
 
 const Sidebar: FC = () => {
   const [selected, setSelected] = useState(0);
@@ -36,16 +37,23 @@ const Sidebar: FC = () => {
   })) as ComposerSidebarItem[];
 
   return (
-    <ComposerSidebar size="large" labelPlacement="end" items={plugins} selectedId={selected} />
+    <ComposerSidebar
+      className={styles.composer}
+      size="large"
+      labelPlacement="end"
+      items={plugins}
+      selectedId={selected}
+    />
   );
 };
 
-const EditPanel: FC = () => {
+const EditPanel: FC<EditTextProps> = ({}) => {
+  const [text, setText] = useState(undefined as string);
   const [alignment, setAlignment] = useState(undefined as string);
   return (
     <Layout>
       <Cell>
-        <InputWithLabel label="Text" />
+        <InputWithLabel label="Text" onChange={e => setText(e.currentTarget.value)} />
       </Cell>
       <Cell>
         <InputWithLabel label="Alignment" />
@@ -82,7 +90,7 @@ export default () => {
         <a target="_blank" rel="noreferrer" href="https://wix.github.io/ricos/docs/ricos/theming">
           here
         </a>
-        <Layout cols={6} gap={0} alignItems="top">
+        <Layout cols={6} alignItems="top" justifyItems="stretch">
           <Cell span={1}>
             <Sidebar />
           </Cell>
