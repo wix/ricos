@@ -172,8 +172,8 @@ const giphy = {
 const html = {
   type: RICOS_HTML_TYPE,
   nodeType: Node_Type.HTML,
-  data1: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
-  data2: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url' }),
+  data1: HTMLData.fromJSON({ url: 'www.wix.com' }),
+  data2: HTMLData.fromJSON({ url: 'www.sport5.co.il' }),
   expectedData1: {
     config: {
       alignment: 'center',
