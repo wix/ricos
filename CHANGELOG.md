@@ -15,10 +15,15 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
 ### :rocket: New Feature
 - `file-upload`
   - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#2427](https://github.com/wix-incubator/rich-content/pull/2427) support RichContentViewer's `addAnchors` prop
+
 ### :house: Internal
 - `editor`
   - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
