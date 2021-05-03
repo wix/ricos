@@ -92,9 +92,10 @@ const ViewerWrapper: FunctionComponent<Props> = ({
       content={content}
       isMobile={isMobile}
       preview={preview}
+      addAnchors={addAnchors}
       mediaSettings={{ fullscreenProps: { backgroundColor: 'black', foregroundColor: 'white' } }}
     >
-      <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
+      <RichContentViewer normalize={normalize} />
     </RicosViewer>
   );
 };
