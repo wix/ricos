@@ -59,7 +59,7 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
 };
 
 const convertContainerData = (data: { config?: ComponentData['config']; containerData }) => {
-  const { size, alignment, width, spoiler } = data.config || {};
+  const { size, alignment, width, spoiler, height } = data.config || {};
   let newSpoiler: PluginContainerData_Spoiler | undefined;
   if (spoiler?.enabled) {
     const { description, buttonContent } = spoiler;
@@ -72,6 +72,7 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
       type,
       customWidth: typeof width === 'number' ? width : undefined,
     },
+    customHeight: typeof height === 'number' ? height : undefined,
     alignment: alignment && kebabToConstantCase(alignment),
     spoiler: newSpoiler,
   };
@@ -197,6 +198,8 @@ const convertButtonData = (
 
 const convertHTMLData = data => {
   data.containerData.width.type = PluginContainerData_Width_Type.CUSTOM;
+  const { src, srcType } = data;
+  data[srcType] = src;
 };
 
 const convertLink = ({

@@ -544,19 +544,15 @@
       "key": "2sbna",
       "nodes": [],
       "htmlData": {
-        "src": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">How we cut cost on 55% of our storage without deleting a single file? We understood that NOT all files should be treated equally. <br><br>Here’s the full story:<a href=\"https://t.co/zC3d0uBkEA\">https://t.co/zC3d0uBkEA</a> <a href=\"https://t.co/j8ND7GfOEg\">pic.twitter.com/j8ND7GfOEg</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1348206215336259584?ref_src=twsrc%5Etfw\">January 10, 2021</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
         "containerData": {
           "alignment": "CENTER",
           "width": {
             "type": "CUSTOM",
             "customWidth": 350
-          }
+          },
+          "customHeight": 490
         },
-        "srcType": "html",
-        "config": {
-          "width": 350,
-          "height": 490
-        }
+        "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">How we cut cost on 55% of our storage without deleting a single file? We understood that NOT all files should be treated equally. <br><br>Here’s the full story:<a href=\"https://t.co/zC3d0uBkEA\">https://t.co/zC3d0uBkEA</a> <a href=\"https://t.co/j8ND7GfOEg\">pic.twitter.com/j8ND7GfOEg</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1348206215336259584?ref_src=twsrc%5Etfw\">January 10, 2021</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>"
       }
     },
     {
@@ -772,7 +768,8 @@
           "width": {
             "type": "CONTENT",
             "customWidth": 286
-          }
+          },
+          "customHeight": 271
         },
         "config": {
           "height": 271,
