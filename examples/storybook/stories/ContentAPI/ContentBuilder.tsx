@@ -5,7 +5,7 @@ import {
   Cell,
   ComposerSidebarItem,
   FormField,
-  Input,
+  InputWithLabel,
   Button,
 } from 'wix-style-react';
 import * as Icons from 'wix-ui-icons-common';
@@ -22,7 +22,12 @@ const Sidebar: FC = () => {
   const plugins = [
     ['Text', Icons.SentenceCase],
     ['Image', Icons.Image],
+    ['Video', Icons.VideoCamera],
+    ['File', Icons.Attachment],
+    ['Divider', Icons.Divider],
+    ['Button', Icons.SquareRatio],
     ['Gallery', Icons.LayoutGallery],
+    ['Html', Icons.Code],
   ].map(([label, Icon], id) => ({
     id,
     label,
@@ -40,14 +45,10 @@ const EditPanel: FC = () => {
   return (
     <Layout>
       <Cell>
-        <FormField label="Text">
-          <Input />
-        </FormField>
+        <InputWithLabel label="Text" />
       </Cell>
       <Cell>
-        <FormField label="Alignment">
-          <Input />
-        </FormField>
+        <InputWithLabel label="Alignment" />
       </Cell>
       <Cell>
         <Button>Add</Button>
