@@ -23,7 +23,7 @@
 - `editor`
   - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
 - `image`
-  - [#2426](https://github.com/wix-incubator/rich-content/pull/2426) fix disable image expand test
+  - [#2426](https://github.com/wix-incubator/rich-content/pull/2426) add disable image expand test
 
 </details>
 <hr/>
