@@ -6,9 +6,12 @@ export const Paragraph: FC<ParagraphPanel> = ({ addFunc }) => {
   const [text, setText] = useState(undefined as string);
   const [textAlignment, setTextAlignment] = useState(undefined as string);
   const onAdd = () => {
-    addFunc('addParagraph', { text, data: { textStyle: { textAlignment: undefined } } });
-    // setText('');
-    // setTextAlignment('');
+    addFunc('addParagraph', {
+      text,
+      data: { textStyle: { textAlignment: undefined } },
+    });
+    setText('');
+    setTextAlignment('');
   };
   return (
     <Layout>
