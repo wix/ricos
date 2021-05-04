@@ -17,6 +17,8 @@ import postcssRTL from 'postcss-rtl';
 import replacePlugin from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
+import stylable from '@stylable/rollup-plugin';
+
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 import { writeFileSync } from 'fs';
@@ -172,6 +174,7 @@ const json = (): Plugin => {
 };
 
 const postcss = (shouldExtract: boolean): Plugin => {
+  // @ts-ignore
   return postcssPlugin({
     minimize: {
       // reduceIdents: false,
@@ -208,6 +211,7 @@ const uglify = (): Plugin => {
 };
 
 const visualizer = (): Plugin => {
+  // @ts-ignore
   return visualizerPlugin({
     sourcemap: true,
   });
@@ -221,6 +225,7 @@ const createFakeStylesFile = (): Plugin => ({
 });
 
 let _plugins: Plugin[] = [
+  // @ts-ignore
   svgr(),
   resolveAlias(),
   resolve(),
@@ -228,6 +233,7 @@ let _plugins: Plugin[] = [
   commonjs(),
   json(),
   typescript(),
+  stylable(),
 ];
 
 if (!IS_DEV_ENV) {

@@ -10,6 +10,8 @@ import {
   Loader,
   LabeledToggle,
 } from 'wix-rich-content-plugin-commons';
+
+import { Button } from 'wix-style-react';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 
@@ -216,6 +218,10 @@ class ImageSettings extends Component {
               </div>
             </SettingsSection>
           </div>
+        </div>
+        <div>
+          <div>Button!!!</div>
+          <Button>Im a button</Button>
         </div>
         {!isMobile && (
           <SettingsPanelFooter
