@@ -171,8 +171,7 @@ const config: RichContentViewerProps['config'] = {
     resolveFileUrl: () =>
       new Promise(resolve =>
         setTimeout(
-          () =>
-            resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
+          () => resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
           1000
         )
       ),
@@ -234,10 +233,10 @@ export const getConfig = (additionalConfig = {}): RichContentViewerProps['config
   return _config;
 };
 
-export const getInlineStyleMappers = (raw: DraftContent) => [
+export const getInlineStyleMappers = (raw: DraftContent, onViewerAction) => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
-  spoilerInlineStyleMapper(config, raw),
+  spoilerInlineStyleMapper(config, raw, onViewerAction),
 ];
 
 export const decorators: Decorator[] = [

@@ -12,7 +12,8 @@ type StateChangeCallback = (state: Record<string, any>) => void;
 
 export const spoilerInlineStyleMapper: InlineStyleMapperFunction<SpoilerPluginViewerConfig> = (
   config,
-  raw = { blocks: [], entityMap: {} }
+  raw = { blocks: [], entityMap: {} },
+  onViewerAction
 ) => {
   const settings = config[SPOILER_TYPE] || {};
   const rawBlocks = getBlocksFromContentState(raw);
@@ -31,6 +32,7 @@ export const spoilerInlineStyleMapper: InlineStyleMapperFunction<SpoilerPluginVi
             callAllCallbacks={callAllCallbacks}
             children={children}
             key={key}
+            onViewerAction={onViewerAction}
           />
         );
       }

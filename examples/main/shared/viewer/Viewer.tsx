@@ -125,7 +125,10 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
             <RichContentViewer
               typeMappers={Plugins.typeMappers}
               // @ts-ignore
-              inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+              inlineStyleMappers={Plugins.getInlineStyleMappers(
+                initialState,
+                viewerProps.helpers.onViewerAction
+              )}
               decorators={Plugins.decorators}
               config={this.pluginsConfig}
               experiments={experiments}
