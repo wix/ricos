@@ -101,6 +101,7 @@ const createEditorToolbars = ({
         getToolbarDecorationFn,
         addPluginMenuConfig,
         footerToolbarConfig,
+        onClick,
       }) => {
         toolbars[name] = getInstance?.({
           ...context,
@@ -120,6 +121,7 @@ const createEditorToolbars = ({
           refId,
           addPluginMenuConfig,
           footerToolbarConfig,
+          onClick,
         });
       }
     );
