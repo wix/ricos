@@ -23,7 +23,9 @@ export const startsWithHttps = (url: string) => /^https:/.test(url);
 
 const startsWithHttp = (url: string) => /^http:/.test(url);
 
-export const getValidUrl = url =>
-  !startsWithHttps(url) && !startsWithHttp(url) ? `http://${url}` : url;
+export const getHost = url =>
+  url && !startsWithHttps(url) && !startsWithHttp(url)
+    ? new URL(`http://${url}`).host
+    : new URL(url).host;
 
 export const hasProtocol = (url: string) => /^[a-z]+:/i.test(url);

@@ -6,7 +6,7 @@ export {
   getUrlMatches,
   startsWithHttps,
   hasProtocol,
-  getValidUrl,
+  getHost,
 } from './urlValidators/urlValidators';
 
 export * from './consts';
