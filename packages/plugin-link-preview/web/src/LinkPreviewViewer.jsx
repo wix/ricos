@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -7,6 +8,7 @@ import { mergeStyles, validate, getHost } from 'wix-rich-content-common';
 import pluginLinkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 import styles from '../statics/styles/link-preview.scss';
 import HtmlComponent from 'wix-rich-content-plugin-html/libs/HtmlComponent';
+import { LINK_PREVIEW_TYPE } from './types';
 
 class LinkPreviewViewer extends Component {
   static propTypes = {
@@ -17,6 +19,7 @@ class LinkPreviewViewer extends Component {
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
     iframeSandboxDomain: PropTypes.string,
+    helpers: PropTypes.object,
   };
 
   constructor(props) {
@@ -39,6 +42,9 @@ class LinkPreviewViewer extends Component {
   }
 
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
+
+  onLinkPreviewClick = () =>
+    this.props.helpers.onViewerAction?.(LINK_PREVIEW_TYPE, 'link_preview_click');
 
   render() {
     const { componentData, theme, isMobile, settings, iframeSandboxDomain } = this.props;
@@ -79,7 +85,12 @@ class LinkPreviewViewer extends Component {
       return <HtmlComponent {...htmlCompProps} />;
     } else {
       return (
-        <figure className={linkPreview} data-hook="linkPreviewViewer">
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+        <figure
+          className={linkPreview}
+          data-hook="linkPreviewViewer"
+          onClick={this.onLinkPreviewClick}
+        >
           <div
             style={{
               width: isMobile ? '110px' : imageHeight,

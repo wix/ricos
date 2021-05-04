@@ -15,16 +15,30 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-### :rocket: New Feature
-- `file-upload`
-  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
-### :house: Internal
-- `editor`
-  - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
+  
+  ### :bug: Bug Fix
+  - `link`
+    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
+  - `general`
+    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
 
 </details>
 <hr/>
+
+## 8.33.0 (May 3, 2021)
+### :rocket: New Feature
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+- `gallery`
+  - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
+
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#2427](https://github.com/wix-incubator/rich-content/pull/2427) support RichContentViewer's `addAnchors` prop
+
+### :house: Internal
+- `editor`
+  - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
 
 ## 8.32.0 (May 2, 2021)
 ### :rocket: New Feature

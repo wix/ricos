@@ -36,6 +36,7 @@ export interface ToolbarSettingsFunctions {
     };
     pluginsToDisplayInToolbar?: string[];
   };
+  onClick?: () => void;
 }
 
 export type TextButtons = {
