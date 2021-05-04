@@ -24,8 +24,8 @@ export default () => {
   useEffect(() => {
     const doIt = () =>
       addFunc('addParagraph', { text: 'Bla', data: { textStyle: { textAlignment: undefined } } });
-    // doIt();
-    setTimeout(doIt, 1000);
+    doIt();
+    // setTimeout(doIt, 1000);
   }, []);
   return (
     <>
