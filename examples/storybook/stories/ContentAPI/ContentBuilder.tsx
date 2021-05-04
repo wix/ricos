@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Layout, Cell } from 'wix-style-react';
 import { Page } from '../Components/StoryParts';
 import theme from '../../../main/shared/theme/theme';
@@ -9,24 +9,22 @@ import { emptyState } from 'ricos-common';
 import { Paragraph } from './Panels';
 import { Sidebar } from './Sidebar';
 import { AddFunctor } from './types';
+import { newKey } from './blockKeyGenerator';
+import ViewerWrapper from '../Components/ViewerWrapper';
+
+const app = setupContentBuilder(() => newKey(5));
 
 export default () => {
-  const app = useMemo(() => setupContentBuilder(() => 'foo'), []);
   const [content, setContent] = useState(emptyState);
   const addFunc: AddFunctor = useMemo(
     () => (element, args) => {
       const currentContent = fromDraft(content);
       const newContent = app[element]({ ...(args as any), content: currentContent });
-      setContent(toDraft(newContent));
+      const contentAsDraft = toDraft(newContent);
+      setContent(contentAsDraft);
     },
-    [app, content]
+    [content]
   );
-  useEffect(() => {
-    const doIt = () =>
-      addFunc('addParagraph', { text: 'Bla', data: { textStyle: { textAlignment: undefined } } });
-    doIt();
-    // setTimeout(doIt, 1000);
-  }, []);
   return (
     <>
       <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -49,7 +47,7 @@ export default () => {
           </Cell>
           <Cell span={3}>
             <div style={{ paddingInlineStart: '60px' }}>
-              <EditorWrapper theme={theme} content={content} />
+              <ViewerWrapper theme={theme} content={content} />
             </div>
           </Cell>
         </Layout>
