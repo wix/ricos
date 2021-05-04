@@ -21,6 +21,12 @@ export default () => {
     },
     [app, content]
   );
+  useEffect(() => {
+    const doIt = () =>
+      addFunc('addParagraph', { text: 'Bla', data: { textStyle: { textAlignment: undefined } } });
+    // doIt();
+    setTimeout(doIt, 1000);
+  }, []);
   return (
     <>
       <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -39,7 +45,7 @@ export default () => {
             <Sidebar />
           </Cell>
           <Cell span={2}>
-            <Paragraph addFunc={args => addFunc('addParagraph', args)} />
+            <Paragraph addFunc={addFunc} />
           </Cell>
           <Cell span={3}>
             <div style={{ paddingInlineStart: '60px' }}>

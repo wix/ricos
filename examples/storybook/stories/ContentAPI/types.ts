@@ -7,7 +7,7 @@ export type AddFunctor = <T extends keyof BuilderFunctions>(
 ) => void;
 
 export interface EditPanelProps<T extends keyof BuilderFunctions> {
-  addFunc: (args: Omit<Parameters<BuilderFunctions[T]>['0'], 'content'>) => void;
+  addFunc: AddFunctor;
 }
 
 export interface ParagraphPanel extends EditPanelProps<'addParagraph'> {}
