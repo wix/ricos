@@ -15,6 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+  ### :bug: Bug Fix
+  - `link`
+    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
+  - `general`
+    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
+
 </details>
 <hr/>
 
@@ -22,6 +29,8 @@
 ### :rocket: New Feature
 - `file-upload`
   - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+- `gallery`
+  - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
 
 ### :bug: Bug Fix
 - `ricos-viewer`
