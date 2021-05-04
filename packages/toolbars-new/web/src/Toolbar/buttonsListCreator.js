@@ -29,7 +29,7 @@ import {
   LineSpacingIcon,
   CodeBlockIcon,
 } from '../icons';
-import HeadingsDropDownPanel from '../modals/HeadingPanel';
+import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',
