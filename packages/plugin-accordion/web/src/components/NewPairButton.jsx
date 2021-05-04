@@ -9,12 +9,12 @@ export default function NewPairButton(props) {
   return (
     //using 'div' element instead of 'button' to fix a bug of focus on element in Firefox in OSX
     // further reading, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#Clicking_and_focus#Clicking_and_focus
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       role="button"
       tabIndex="0"
       className={styles.new_pair_container}
       onClick={props.onClick}
+      onKeyPress={props.onClick}
       data-hook={dataHook}
     >
       <div className={styles.new_pair_button}>

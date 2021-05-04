@@ -770,6 +770,22 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return 'handled';
   };
 
+  getTabCommands = () =>
+    !this.props.isInnerRCE
+      ? [
+          {
+            command: COMMANDS.TAB,
+            modifiers: [],
+            key: 'Tab',
+          },
+          {
+            command: COMMANDS.SHIFT_TAB,
+            modifiers: [MODIFIERS.SHIFT],
+            key: 'Tab',
+          },
+        ]
+      : [];
+
   customCommands = [
     {
       command: COMMANDS.FOCUS_TOOLBAR,
@@ -782,16 +798,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       key: 't',
     },
     {
-      command: COMMANDS.TAB,
-      modifiers: [],
-      key: 'Tab',
-    },
-    {
-      command: COMMANDS.SHIFT_TAB,
-      modifiers: [MODIFIERS.SHIFT],
-      key: 'Tab',
-    },
-    {
+      ...this.getTabCommands(),
       command: COMMANDS.ESC,
       modifiers: [],
       key: 'Escape',
@@ -976,7 +983,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       handleReturn,
       readOnly,
       onBackspace,
-      innerRCERenderedIn,
     } = this.props;
     const { editorState } = this.state;
     const { theme } = this.contextualData;
@@ -999,8 +1005,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHandlers,
           getBlockType(editorState),
-          onBackspace,
-          innerRCERenderedIn
+          onBackspace
         )}
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
