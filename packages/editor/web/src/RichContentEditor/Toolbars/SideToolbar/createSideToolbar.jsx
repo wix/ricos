@@ -57,6 +57,7 @@ export default ({
   toolbarDecorationFn,
   config,
   addPluginMenuConfig,
+  onClick,
 }) => {
   const toolbarButtonTheme = getPluginMenuTheme(theme, isMobile);
   return createSideToolbar({
@@ -81,6 +82,7 @@ export default ({
           helpers={helpers}
           t={t}
           addPluginMenuConfig={addPluginMenuConfig}
+          onClick={onClick}
         />
       ),
     ],
