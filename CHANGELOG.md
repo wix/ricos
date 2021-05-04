@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+### :bug: Bug Fix
+- `link`
+  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
+- `general`
+  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
 </details>
 <hr/>
 
