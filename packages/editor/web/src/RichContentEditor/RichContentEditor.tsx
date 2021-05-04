@@ -797,8 +797,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       modifiers: [MODIFIERS.CTRL],
       key: 't',
     },
+    ...this.getTabCommands(),
     {
-      ...this.getTabCommands(),
       command: COMMANDS.ESC,
       modifiers: [],
       key: 'Escape',
