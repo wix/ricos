@@ -102,7 +102,7 @@ class AccordionPairs extends Component {
   };
 
   render() {
-    const { pairs, PairWrapper, t, theme, renderTitle, renderContent } = this.props;
+    const { pairs, PairWrapper, t, theme, renderTitle, renderContent, helpers } = this.props;
     const { pairsState } = this.state;
 
     return pairs.map((pair, idx) => (
@@ -118,6 +118,7 @@ class AccordionPairs extends Component {
           theme={theme}
           renderTitle={renderTitle}
           renderContent={renderContent}
+          helpers={helpers}
         />
       </PairWrapper>
     ));
@@ -133,6 +134,7 @@ AccordionPairs.propTypes = {
   expandOnlyOne: PropTypes.object,
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
+  helpers: PropTypes.object,
   //Editor prop
   PairWrapper: PropTypes.object,
 };
