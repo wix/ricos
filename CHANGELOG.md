@@ -17,6 +17,8 @@
   </summary>
   
   ### :bug: Bug Fix
+  - `plugin-commons`
+    - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
   - `link`
     - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
   - `general`
