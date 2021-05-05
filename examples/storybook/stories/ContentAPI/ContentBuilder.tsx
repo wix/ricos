@@ -5,7 +5,7 @@ import theme from '../../../main/shared/theme/theme';
 import { setupContentBuilder } from 'ricos-content/libs/Content';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { emptyState } from 'ricos-common';
-import { Paragraph } from './Panels';
+import { Paragraph } from './PluginPanels';
 import { Sidebar } from './Sidebar';
 import { AddFunctor, EditPanelProps, Plugins } from './types';
 import styles from './ContentBuilder.scss';

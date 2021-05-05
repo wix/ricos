@@ -1,21 +1,18 @@
 import React, { FC, useState } from 'react';
 import { Layout, Cell, InputWithLabel, Button, Dropdown } from 'wix-style-react';
-import { TextStyle_TextAlignment } from 'ricos-schema';
-import { ParagraphPanel } from '../types';
+import { EditPanelProps } from '../types';
 
 const alignOptions = ['AUTO', 'LEFT', 'RIGHT', 'CENTER', 'JUSTIFY'].map((value, id) => ({
   id,
   value,
 }));
 
-export const Paragraph: FC<ParagraphPanel> = ({ addFunc }) => {
+export const Paragraph: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
   const [text, setText] = useState(undefined as string);
   const [selectedAlignment, setSelectedAlignment] = useState(-1);
   const onAdd = () => {
-    const textAlignment = alignOptions[selectedAlignment]?.value as TextStyle_TextAlignment;
-    addFunc('addParagraph', {
-      text,
-      data: { textStyle: { textAlignment } },
+    addFunc('addImage', {
+      data: {},
     });
     setText('');
     setSelectedAlignment(-1);

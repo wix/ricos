@@ -11,6 +11,9 @@ export interface EditPanelProps<T extends keyof BuilderFunctions> {
   addFunc: AddFunctor;
 }
 
-export interface ParagraphPanel extends EditPanelProps<'addParagraph'> {}
+export interface AbstractPanelProps<T> {
+  obj: T;
+  setter: (obj: T) => void;
+}
 
 export type Plugins = [string, FC<any>, FC<EditPanelProps<any>>?][];
