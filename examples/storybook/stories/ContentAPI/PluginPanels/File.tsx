@@ -32,6 +32,7 @@ export const File: FC<EditPanelProps<'addFile'>> = ({ addFunc }) => {
         <InputWithLabel
           label="size"
           value={size}
+          type="number"
           onChange={e => setSize(e.currentTarget.valueAsNumber)}
         />
         <InputWithLabel label="type" value={type} onChange={e => setType(e.currentTarget.value)} />
