@@ -2,10 +2,8 @@ import React, { FC, useState } from 'react';
 import { Layout, Cell, Button, InputWithLabel } from 'wix-style-react';
 import {
   emptyCommonBuilderFields,
-  emptyMedia,
   emptyPluginContainerData,
   PNLCommonFields,
-  PNLMedia,
   PNLContainerData,
 } from '../AbstractPanels';
 import { EditPanelProps } from '../types';

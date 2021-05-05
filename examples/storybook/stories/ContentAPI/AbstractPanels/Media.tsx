@@ -16,13 +16,13 @@ export const PNLMedia: FC<AbstractPanelProps<Media>> = ({ obj, setter, title }) 
         <InputWithLabel
           label="height"
           type="number"
-          value={height || ''}
+          value={height}
           onChange={e => set({ height: e.currentTarget.valueAsNumber })}
         />
         <InputWithLabel
           label="width"
           type="number"
-          value={width || ''}
+          value={width}
           onChange={e => set({ width: e.currentTarget.valueAsNumber })}
         />
         <p className={t.h2}>src:</p>

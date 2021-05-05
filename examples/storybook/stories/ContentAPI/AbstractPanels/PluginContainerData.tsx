@@ -2,13 +2,7 @@ import React, { FC } from 'react';
 import { Layout, Cell, InputWithLabel, Typography as t, Dropdown } from 'wix-style-react';
 import { PluginContainerData, PluginContainerData_Alignment } from 'ricos-schema';
 import { AbstractPanelProps } from '../types';
-import { createAbstractPanelSetter } from './utils';
-
-const alignments = ['LEFT', 'RIGHT', 'CENTER'];
-const options = alignments.map((value, id) => ({
-  id,
-  value,
-}));
+import { alignmentOptions, alignments, createAbstractPanelSetter } from './utils';
 
 export const emptyPluginContainerData: PluginContainerData = {
   alignment: 'LEFT' as PluginContainerData_Alignment,
@@ -24,7 +18,7 @@ export const PNLContainerData: FC<AbstractPanelProps<PluginContainerData>> = ({ 
         <Dropdown
           placeholder="Text Alignment"
           selectedId={alignments.indexOf(alignment)}
-          options={options}
+          options={alignmentOptions}
           onSelect={({ id }) => set({ alignment: alignments[id] })}
         />
       </Cell>
@@ -32,7 +26,7 @@ export const PNLContainerData: FC<AbstractPanelProps<PluginContainerData>> = ({ 
         <InputWithLabel
           label="customHeight"
           type="number"
-          value={customHeight || ''}
+          value={customHeight}
           onChange={e => set({ customHeight: e.currentTarget.valueAsNumber })}
         />
         <p className={t.h2}>src:</p>

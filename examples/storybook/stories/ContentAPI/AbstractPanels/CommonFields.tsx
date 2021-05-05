@@ -27,7 +27,7 @@ export const PNLCommonFields: FC<AbstractPanelProps<CommonBuilderFields>> = ({ o
         <InputWithLabel
           label="index"
           type="number"
-          value={index || ''}
+          value={index}
           onChange={e => set({ index: e.currentTarget.valueAsNumber })}
         />
       </Cell>
