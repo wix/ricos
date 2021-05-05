@@ -1,21 +1,20 @@
 import React, { FC, useState } from 'react';
-import * as Icons from 'wix-ui-icons-common';
 import styles from './ContentBuilder.scss';
 import { ComposerSidebar, ComposerSidebarItem } from 'wix-style-react';
 
-export const Sidebar: FC = () => {
+interface SidebarProps {
+  plugins: [string, FC<any>][];
+  setPanel: (id: number) => void;
+}
+
+export const Sidebar: FC<SidebarProps> = ({ plugins, setPanel }) => {
   const [selected, setSelected] = useState(0);
-  const onSelect = (id: number) => setSelected(selected !== id ? id : -1);
-  const plugins = [
-    ['Text', Icons.SentenceCase],
-    ['Image', Icons.Image],
-    ['Video', Icons.VideoCamera],
-    ['File', Icons.Attachment],
-    ['Divider', Icons.Divider],
-    ['Button', Icons.SquareRatio],
-    ['Gallery', Icons.LayoutGallery],
-    ['Html', Icons.Code],
-  ].map(([label, Icon], id) => ({
+  const onSelect = (id: number) => {
+    const newSelection = selected !== id ? id : -1;
+    setSelected(newSelection);
+    setPanel(newSelection);
+  };
+  const items = plugins.map(([label, Icon], id) => ({
     id,
     label,
     icon: <Icon />,
@@ -27,7 +26,7 @@ export const Sidebar: FC = () => {
       className={styles.composer}
       size="large"
       labelPlacement="end"
-      items={plugins}
+      items={items}
       selectedId={selected}
     />
   );
