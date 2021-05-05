@@ -16,15 +16,16 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
 ### :bug: Bug Fix
-
-- `ricos-editor`
-  - [#2428](https://github.com/wix-incubator/rich-content/pull/2428) hide inline toolbar when click outside the editor
+- `plugin-commons`
+  - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
 - `link`
   - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
 - `general`
   - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
+- `ricos-editor`
+  - [#2428](https://github.com/wix-incubator/rich-content/pull/2428) hide inline toolbar when click outside the editor
 
 </details>
 <hr/>
