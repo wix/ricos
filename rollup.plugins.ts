@@ -1,12 +1,12 @@
 import { resolve as pathResolve } from 'path';
 import svgr from '@svgr/rollup';
-import resolvePlugin from 'rollup-plugin-node-resolve';
+import resolvePlugin from '@rollup/plugin-node-resolve';
 import aliasPlugin from '@rollup/plugin-alias';
 import copyPlugin from 'rollup-plugin-copy';
 /* @ts-ignore typescript-plugin external types issue */
-import babelPlugin from 'rollup-plugin-babel';
+import babelPlugin from '@rollup/plugin-babel';
 import typescriptPlugin from 'rollup-plugin-typescript2';
-import commonjsPlugin from 'rollup-plugin-commonjs';
+import commonjsPlugin from '@rollup/plugin-commonjs';
 import jsonPlugin from '@rollup/plugin-json';
 import postcssPlugin from 'rollup-plugin-postcss';
 /* @ts-ignore typescript-plugin external types issue */
@@ -14,7 +14,7 @@ import postcssExclude from 'postcss-exclude-files';
 import postcssURL from 'postcss-url';
 /* @ts-ignore typescript-plugin external types issue */
 import postcssRTL from 'postcss-rtl';
-import replacePlugin from 'rollup-plugin-replace';
+import replacePlugin from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
@@ -62,6 +62,10 @@ const copyAfterBundleWritten = (): Plugin => {
       dest: 'dist',
       rename: () => 'module.viewer.cjs.d.ts',
     },
+    {
+      src: ['dist/es/*.css'],
+      dest: 'dist',
+    },
   ];
 
   return copyPlugin({
@@ -75,7 +79,7 @@ const babel = (): Plugin => {
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**'],
-    runtimeHelpers: true,
+    babelHelpers: 'runtime',
   });
 };
 
@@ -116,7 +120,7 @@ const commonjs = (): Plugin => {
       exportList: ['getScaleToFillImageURL', 'getScaleToFitImageURL'],
     },
     {
-      path: 'node_modules/immutable/dist/immutable.js',
+      path: 'node_modules/immutable/dist/llup/plugin-typescriptimmutable.js',
       exportList: ['List', 'OrderedSet', 'Map'],
     },
     {
@@ -156,7 +160,7 @@ const commonjs = (): Plugin => {
     namedExports[path] = exportList;
     namedExports[relativePath + path] = exportList;
   });
-  return commonjsPlugin({ namedExports });
+  return commonjsPlugin();
 };
 
 const json = (): Plugin => {
