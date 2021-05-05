@@ -18,7 +18,7 @@ export const PNLTextStyle: FC<AbstractPanelProps<TextStyle>> = ({ obj, setter })
   return (
     <Layout>
       <Cell>
-        <p className={t.h2}>Text Style:</p>
+        <p className={t.h1}>Text Style:</p>
         <Dropdown
           placeholder="Text Alignment"
           selectedId={alignments.indexOf(textAlignment)}

@@ -11,7 +11,7 @@ export const PNLCommonFields: FC<AbstractPanelProps<CommonBuilderFields>> = ({ o
   return (
     <Layout>
       <Cell>
-        <p className={t.h2}>Common Fields:</p>
+        <p className={t.h1}>Common Fields:</p>
         <InputWithLabel
           label="after"
           type="string"

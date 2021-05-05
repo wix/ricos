@@ -26,7 +26,7 @@ export const PNLLink: FC<AbstractPanelProps<Link>> = ({ obj, setter }) => {
   return (
     <Layout>
       <Cell>
-        <p className={t.h2}>Link:</p>
+        <p className={t.h1}>Link:</p>
         <InputWithLabel
           label="url"
           type="string"
@@ -58,7 +58,7 @@ export const PNLLink: FC<AbstractPanelProps<Link>> = ({ obj, setter }) => {
         </HorizontalField>
       </Cell>
       <Cell>
-        <p className={t.h3}>rel:</p>
+        <p className={t.h2}>rel:</p>
         <HorizontalField label="nofollow">
           <ToggleSwitch
             checked={nofollow}

@@ -1,12 +1,20 @@
 import React, { FC, useState } from 'react';
 import { Layout, Cell, InputWithLabel, Button, ToggleSwitch } from 'wix-style-react';
-import { emptyCommonBuilderFields, emptyLink, PNLCommonFields, PNLLink } from '../AbstractPanels';
+import {
+  emptyCommonBuilderFields,
+  emptyLink,
+  emptyMedia,
+  PNLCommonFields,
+  PNLLink,
+  PNLMedia,
+} from '../AbstractPanels';
 import { HorizontalField } from '../HorizontalField';
 import { EditPanelProps } from '../types';
 
 export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
   const [commonFields, setCommonFields] = useState(emptyCommonBuilderFields);
   const [link, setLink] = useState(emptyLink);
+  const [media, setMedia] = useState(emptyMedia);
   const [altText, setAltText] = useState(undefined as string);
   const [caption, setCaption] = useState(undefined as string);
   const [disableExpand, setDisableExpand] = useState(undefined as boolean);
@@ -17,6 +25,7 @@ export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
         caption,
         disableExpand,
         link,
+        image: media,
       },
       ...commonFields,
     });
@@ -45,6 +54,7 @@ export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
         </HorizontalField>
       </Cell>
       <Cell>
+        <PNLMedia obj={media} setter={setMedia} />
         <PNLLink obj={link} setter={setLink} />
         <PNLCommonFields obj={commonFields} setter={setCommonFields} />
         <Button onClick={onAdd}>Add</Button>
