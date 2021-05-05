@@ -22,6 +22,7 @@ export default function createAtomicPluginToolbar({
   buttons,
   theme,
   pubsub,
+  commonPubsub,
   helpers,
   settings,
   isMobile,
