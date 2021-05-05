@@ -116,7 +116,7 @@ class RichContentViewer extends Component<
 
   initConfig = () => {
     const { config, helpers } = this.props;
-    const onViewerAction = (helpers as Helpers).onViewerAction;
+    const onViewerAction = helpers?.onViewerAction;
     if (config[SPOILER_TYPE] && onViewerAction) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (config[SPOILER_TYPE] as any).onViewerAction = onViewerAction;
