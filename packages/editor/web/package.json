@@ -48,7 +48,6 @@
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",
-    "draftjs-conductor": "1.0.1",
     "forked-draft-js-focus-plugin": "^3.0.1",
     "react-click-outsider": "1.1.1",
     "react-measure": "~2.3.0",
