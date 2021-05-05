@@ -73,6 +73,7 @@ export default function createAtomicPluginToolbar({
 
     componentDidMount() {
       pubsub.subscribe('focusedBlock', this.onVisibilityChanged);
+      commonPubsub.subscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.subscribe('componentState', this.onComponentStateChanged);
       pubsub.subscribe('componentData', this.onComponentDataChanged);
       this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
