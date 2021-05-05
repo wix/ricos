@@ -8,7 +8,6 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   const { type, data } = entityMap[key];
   const dataFieldName = TO_RICOS_DATA_FIELD[type];
   if (dataFieldName === undefined) {
-    // eslint-disable-next-line no-console
     throw Error(`ERROR! Unknown entity type "${type}"!`);
   }
 
