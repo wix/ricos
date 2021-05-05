@@ -552,7 +552,6 @@
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "product",
         "selectedProduct": {
           "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",
@@ -566,7 +565,6 @@
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "event",
         "selectedProduct": {
           "id": "ed97b710-1182-4c53-ab79-b938138d09e7",
@@ -580,7 +578,6 @@
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "booking",
         "selectedProduct": {
           "id": "285fe974-e729-4381-a874-7640d7f71ad8",
