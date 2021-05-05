@@ -14,6 +14,7 @@ export interface EditPanelProps<T extends keyof BuilderFunctions> {
 export interface AbstractPanelProps<T> {
   obj: T;
   setter: (obj: T) => void;
+  title?: string;
 }
 
 export type Plugins = [string, FC<any>, FC<EditPanelProps<any>>?][];

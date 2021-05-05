@@ -6,13 +6,13 @@ import { createAbstractPanelSetter } from './utils';
 
 export const emptyMedia: Media = {};
 
-export const PNLMedia: FC<AbstractPanelProps<Media>> = ({ obj, setter }) => {
+export const PNLMedia: FC<AbstractPanelProps<Media>> = ({ obj, setter, title }) => {
   const set = createAbstractPanelSetter(obj, setter);
   const { height, src: { custom, url } = {}, width } = obj;
   return (
     <Layout>
       <Cell>
-        <p className={t.h1}>Media:</p>
+        <p className={t.h1}>{title || 'Media:'}</p>
         <InputWithLabel
           label="height"
           type="number"
