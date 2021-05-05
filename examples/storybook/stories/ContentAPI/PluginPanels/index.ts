@@ -1,3 +1,4 @@
+export * from './Html';
 export * from './Gallery';
 export * from './Button';
 export * from './Divider';
