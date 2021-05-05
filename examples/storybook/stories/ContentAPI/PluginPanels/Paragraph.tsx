@@ -16,6 +16,7 @@ export const Paragraph: FC<EditPanelProps<'addParagraph'>> = ({ addFunc }) => {
     addFunc('addParagraph', {
       text,
       data: { textStyle },
+      ...commonFields,
     });
     setTextStyle(emptyTextStyle);
     setText('');
