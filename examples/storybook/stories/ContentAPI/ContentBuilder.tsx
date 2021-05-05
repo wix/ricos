@@ -1,16 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import { Layout, Cell } from 'wix-style-react';
 import { Page } from '../Components/StoryParts';
-import theme from '../../../main/shared/theme/theme';
 import { setupContentBuilder } from 'ricos-content/libs/Content';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { emptyState } from 'ricos-common';
 import { Paragraph } from './PluginPanels';
 import { Sidebar } from './Sidebar';
 import { AddFunctor, EditPanelProps, Plugins } from './types';
-import styles from './ContentBuilder.scss';
 import { newKey } from './blockKeyGenerator';
 import ViewerWrapper from '../Components/ViewerWrapper';
+import theme from '../../../main/shared/theme/theme';
+import styles from './ContentBuilder.scss';
 import * as Icons from 'wix-ui-icons-common';
 
 const app = setupContentBuilder(() => newKey(5));

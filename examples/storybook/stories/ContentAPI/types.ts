@@ -17,3 +17,9 @@ export interface AbstractPanelProps<T> {
 }
 
 export type Plugins = [string, FC<any>, FC<EditPanelProps<any>>?][];
+
+export interface CommonBuilderFields {
+  index?: number;
+  before?: string;
+  after?: string;
+}
