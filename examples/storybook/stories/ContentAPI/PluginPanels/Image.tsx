@@ -4,9 +4,11 @@ import {
   emptyCommonBuilderFields,
   emptyLink,
   emptyMedia,
+  emptyPluginContainerData,
   PNLCommonFields,
   PNLLink,
   PNLMedia,
+  PNLContainerData,
 } from '../AbstractPanels';
 import { HorizontalField } from '../HorizontalField';
 import { EditPanelProps } from '../types';
@@ -18,6 +20,7 @@ export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
   const [altText, setAltText] = useState(undefined as string);
   const [caption, setCaption] = useState(undefined as string);
   const [disableExpand, setDisableExpand] = useState(undefined as boolean);
+  const [containerData, setContainerData] = useState(emptyPluginContainerData);
   const onAdd = () => {
     addFunc('addImage', {
       data: {
@@ -26,6 +29,7 @@ export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
         disableExpand,
         link,
         image: media,
+        containerData,
       },
       ...commonFields,
     });
@@ -53,6 +57,7 @@ export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
       <Cell>
         <PNLMedia obj={media} setter={setMedia} />
         <PNLLink obj={link} setter={setLink} />
+        <PNLContainerData obj={containerData} setter={setContainerData} />
         <PNLCommonFields obj={commonFields} setter={setCommonFields} />
         <Button onClick={onAdd}>Add</Button>
       </Cell>
