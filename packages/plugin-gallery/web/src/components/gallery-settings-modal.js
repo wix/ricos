@@ -242,6 +242,57 @@ export class GallerySettingsModal extends Component {
     },
   });
 
+  tabsList = () => ({
+    mangeMedia: (
+      <Tab
+        label={this.tabName('manage_media', this.props.t)}
+        value={'manage_media'}
+        theme={this.props.theme}
+      >
+        <ManageMediaSection
+          data={this.props.pubsub.get('componentData')}
+          store={this.props.pubsub.store}
+          helpers={this.props.helpers}
+          theme={this.props.theme}
+          t={this.props.t}
+          anchorTarget={this.props.anchorTarget}
+          relValue={this.props.relValue}
+          uiSettings={this.props.uiSettings}
+          accept={this.props.accept}
+        />
+      </Tab>
+    ),
+    advancedSettings: (
+      <Tab
+        label={this.tabName('advanced_settings', this.props.t)}
+        value={'advanced_settings'}
+        theme={this.props.theme}
+      >
+        <AdvancedSettingsSection
+          theme={this.props.theme}
+          data={this.props.pubsub.get('componentData')}
+          store={this.props.pubsub.store}
+          helpers={this.props.helpers}
+          t={this.props.t}
+        />
+      </Tab>
+    ),
+    settings: (
+      <Tab
+        label={this.tabName('settings', this.props.t)}
+        value={'settings'}
+        theme={this.props.theme}
+      >
+        {this.toggleData.map(toggle => this.renderToggle(toggle))}
+      </Tab>
+    ),
+  });
+
+  tabsToRender = () =>
+    this.props.isMobile
+      ? [this.tabsList().mangeMedia, this.tabsList().settings]
+      : [this.tabsList().mangeMedia, this.tabsList().advancedSettings, this.tabsList().settings];
+
   renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook, onToggle, type }) =>
     type === DIVIDER ? (
       <div className={this.styles.divider} />
@@ -288,17 +339,7 @@ export class GallerySettingsModal extends Component {
 
   render() {
     const styles = this.styles;
-    const {
-      pubsub,
-      helpers,
-      t,
-      isMobile,
-      anchorTarget,
-      relValue,
-      uiSettings,
-      languageDir,
-      accept,
-    } = this.props;
+    const { t, isMobile, languageDir, pubsub } = this.props;
     const { activeTab } = this.state;
     this.componentData = pubsub.get('componentData');
 
@@ -307,8 +348,8 @@ export class GallerySettingsModal extends Component {
         {isMobile && (
           <GallerySettingsMobileHeader
             theme={this.props.theme}
-            cancel={() => this.revertComponentData()}
-            save={() => helpers.closeModal()}
+            cancel={this.revertComponentData}
+            save={this.onDoneClick}
             switchTab={this.switchTab}
             otherTab={this.tabName(this.otherTab(), t)}
             t={t}
@@ -319,48 +360,18 @@ export class GallerySettingsModal extends Component {
           className={styles.gallerySettings}
           dir={languageDir}
         >
-          <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          {!isMobile && (
+            <div className={styles.gallerySettings_title}>{t('GallerySettings_Header')}</div>
+          )}
           <div className={styles.gallerySettings_tabsContainer}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
-              <Tab
-                label={this.tabName('manage_media', t)}
-                value={'manage_media'}
-                theme={this.props.theme}
-              >
-                <ManageMediaSection
-                  data={this.componentData}
-                  store={pubsub.store}
-                  helpers={helpers}
-                  theme={this.props.theme}
-                  t={t}
-                  anchorTarget={anchorTarget}
-                  relValue={relValue}
-                  uiSettings={uiSettings}
-                  accept={accept}
-                />
-              </Tab>
-              <Tab
-                label={this.tabName('advanced_settings', t)}
-                value={'advanced_settings'}
-                theme={this.props.theme}
-              >
-                <AdvancedSettingsSection
-                  theme={this.props.theme}
-                  data={this.componentData}
-                  store={pubsub.store}
-                  helpers={helpers}
-                  t={t}
-                />
-              </Tab>
-              <Tab label={this.tabName('settings', t)} value={'settings'} theme={this.props.theme}>
-                {this.toggleData.map(toggle => this.renderToggle(toggle))}
-              </Tab>
+              {this.tabsToRender().map(tab => tab)}
             </Tabs>
           </div>
           {!isMobile && (
             <SettingsPanelFooter
               fixed
-              cancel={() => this.revertComponentData()}
+              cancel={this.revertComponentData}
               save={this.onDoneClick}
               theme={this.props.theme}
               t={t}

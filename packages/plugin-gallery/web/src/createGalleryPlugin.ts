@@ -59,6 +59,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
       anchorTarget,
       relValue,
       experiments,
+      isMobile: config.isMobile,
     }),
     helpers,
     anchorTarget,

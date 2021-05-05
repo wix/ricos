@@ -1,7 +1,7 @@
-@import "~wix-rich-content-common/dist/statics/styles/consts";
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
-@import "~wix-rich-content-common/dist/statics/styles/palette";
-@import "~wix-rich-content-common/dist/statics/styles/fonts";
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 //*** GENERIC ***//
 .flex {
@@ -34,13 +34,13 @@
   top: 0;
   left: 0;
   cursor: move;
-  &.noPointerEventsOnFocus{
+  &.noPointerEventsOnFocus {
     pointer-events: none;
   }
 }
 
 .hideTextSelection {
-  ::selection{
+  ::selection {
     background: transparent;
   }
 }
@@ -63,7 +63,7 @@
 
   &:hover {
     @include block-select;
-    &.noBorder{
+    &.noBorder {
       box-shadow: none;
     }
   }
@@ -119,7 +119,7 @@ button {
   padding-top: 2px;
   height: 17px;
   &:hover {
-    color: $action-color-fallback;
+    color: $settings-action-color;
   }
 }
 
@@ -132,13 +132,13 @@ button {
   position: relative;
 }
 
-.pluginWithHorizontalScrollbar{
+.pluginWithHorizontalScrollbar {
   overflow-x: auto;
   overflow-y: hidden;
   margin-left: -20px;
   margin-right: -20px;
   &.show::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
   }
   &.hide::-webkit-scrollbar-thumb {
     background-color: transparent;

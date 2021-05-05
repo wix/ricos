@@ -33,6 +33,9 @@ $FOOTER_HEIGHT: 100px;
     opacity: 0.3;
     background-color: #000000;
   }
+  @include phone {
+    margin-top: 0;
+  }
 }
 
 .gallerySettings_divider {

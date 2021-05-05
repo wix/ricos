@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
@@ -6,6 +7,7 @@ import { isEqual } from 'lodash';
 import { validate } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginMapSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-map.schema.json';
+import { MAP_TYPE } from './types';
 
 const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap
@@ -69,6 +71,8 @@ export class MapViewer extends Component {
 
   setRootElementRef = elm => (this.element = elm);
 
+  onClick = () => this.props.helpers.onViewerAction?.(MAP_TYPE, 'map_click');
+
   render() {
     const {
       componentData: { mapSettings, config: { width, height } = {} },
@@ -82,7 +86,8 @@ export class MapViewer extends Component {
     };
 
     return (
-      <div ref={this.setRootElementRef} style={style} data-hook="mapViewer">
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      <div ref={this.setRootElementRef} style={style} data-hook="mapViewer" onClick={this.onClick}>
         <ReactGoogleMapLoader
           params={{
             key: googleMapApiKey || '',
@@ -130,4 +135,5 @@ MapViewer.propTypes = {
     googleMapApiKey: PropTypes.string,
     mapSettings: PropTypes.object,
   }).isRequired,
+  helpers: PropTypes.object,
 };

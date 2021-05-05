@@ -78,6 +78,7 @@ export class RicosEngine extends Component<EngineProps> {
       _rcProps,
       children,
       isMobile,
+      addAnchors,
       toolbarSettings,
       modalSettings = {},
       isPreviewExpanded,
@@ -112,6 +113,7 @@ export class RicosEngine extends Component<EngineProps> {
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
     const ricosPropsToMerge: RichContentProps = {
+      addAnchors,
       isMobile,
       maxTextLength,
       textToolbarType:

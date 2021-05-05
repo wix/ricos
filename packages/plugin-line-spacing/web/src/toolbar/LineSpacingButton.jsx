@@ -7,8 +7,8 @@ import {
   InlineToolbarButton,
   mergeBlockData,
   EditorState,
+  ClickOutside,
 } from 'wix-rich-content-editor-common';
-import ClickOutside from 'react-click-outsider';
 
 import LineSpacingIcon from '../icons/LineSpacingIcon';
 import Modal from 'react-modal';

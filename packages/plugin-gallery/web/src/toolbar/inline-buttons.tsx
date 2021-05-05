@@ -12,21 +12,22 @@ import {
 } from 'wix-rich-content-common';
 import { GalleryPluginEditorConfig } from '../types';
 
-const modalStyles = getModalStyles({});
-
 const createInlineButtons: CreateInlineButtons = ({
   t,
   anchorTarget,
   relValue,
   settings,
   experiments = {},
+  isMobile,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
   experiments: AvailableExperiments;
+  isMobile: boolean;
 }) => {
+  const modalStyles = getModalStyles({ isMobile });
   const icons = settings?.toolbar?.icons || {};
   const { spoilerInInlineToolbar } = experiments;
   const spoilerButton =
@@ -98,7 +99,7 @@ const createInlineButtons: CreateInlineButtons = ({
       modalStyles,
       switchLayout,
       t,
-      mobile: false,
+      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,
