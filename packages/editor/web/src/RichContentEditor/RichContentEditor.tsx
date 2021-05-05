@@ -305,9 +305,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   onEditorClickOutside = e => {
     const { editorState } = this.state;
-    const isClickOutside =
-      e.target && !(e.target as HTMLElement).closest('[data-hook=root-editor]');
-    if (isClickOutside) {
+    const clickInEditor = e.target.closest('[data-hook=root-editor]');
+    const clickInModal = e.target.closest('[data-id=rich-content-editor-modal]');
+    if (!clickInEditor && !clickInModal) {
       this.disableFocusInSelection(editorState);
       this.commonPubsub.set('focusedBlock', null);
     }
