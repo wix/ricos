@@ -30,6 +30,7 @@ import {
   CodeBlockIcon,
 } from '../icons';
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
+// import LinkPanelContainer from '../modals/link/LinkComponents/LinkPanelContainer';
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',
@@ -186,6 +187,7 @@ const buttonsFullData = {
     tooltip: 'Link',
     action: 'LINK',
     type: 'button',
+    // modal: props => <LinkPanelContainer {...props} />,
   },
   CODE_BLOCK: {
     icon: CodeBlockIcon,
@@ -266,6 +268,12 @@ const handleButtonOnClick = (buttonsList, index, editorCommands) => {
   } else if (textBlockButtons.includes(buttonName)) {
     buttonsList[index].onClick = () =>
       editorCommands.setBlockType(buttonsFullData[buttonName].action);
+  } else if (buttonsFullData[buttonName].action === 'LINK') {
+    buttonsList[index].onClick = () => {
+      console.log('hasLinkInSelection = ', editorCommands.hasLinkInSelection());
+      console.log('getLinkDataInSelection = ', editorCommands.getLinkDataInSelection());
+      // console.log('getLinkData = ', getLinkData(editorCommands));
+    };
   } else {
     buttonsList[index].onClick = () => console.log('click');
   }
@@ -351,6 +359,15 @@ const addGroupButtonsData = (buttonsList, index, innerButtonKey, editorCommands)
     editorCommands.getTextAlignment() === buttonsFullData[innerButtonKey].action;
   currentInnerButton.isDisabled = () => false;
 };
+
+// const getLinkData = editorCommands => {
+//   const linkData = editorCommands.getLinkDataInSelection();
+//   const { url, anchor, target, rel } = linkData || {};
+//   const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
+//   const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
+//   const ariaProps = { 'aria-labelledby': 'mob_link_modal_hdr' };
+//   return { url, anchor, targetBlank, nofollow, ariaProps };
+// };
 
 const getCurrentHeading = editorCommands => {
   let currentHeading = 'P';
