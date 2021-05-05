@@ -24,9 +24,9 @@ class DesignComponent extends PureComponent {
         padding: designObj.padding,
         borderRadius: designObj.borderRadius,
         activeButton: designObj.activeButton,
-        color: designObj?.color || colors.color1 || '#FEFDFD',
-        borderColor: designObj?.borderColor || colors.color8 || '#0261FF',
-        background: designObj?.background || colors.color8 || '#0261FF',
+        color: designObj?.color || colors?.color1 || '#FEFDFD',
+        borderColor: designObj?.borderColor || colors?.color8 || '#0261FF',
+        background: designObj?.background || colors?.color8 || '#0261FF',
       },
       customBackgroundColors: (getBackgroundColors && getBackgroundColors()) || DEFAULT_PALETTE,
       customTextColors: (getTextColors && getTextColors()) || DEFAULT_PALETTE,
@@ -39,8 +39,26 @@ class DesignComponent extends PureComponent {
   componentDidUpdate = () => {
     const { design } = this.state;
     if (JSON.stringify(this.originalDesign) !== JSON.stringify(design)) {
-      this.props.onDesignChange(this.state.design);
+      if (this.isColorChanged()) {
+        this.props.onDesignChange(design);
+      } else {
+        this.props.onDesignChange({
+          borderWidth: design.borderWidth,
+          padding: design.padding,
+          borderRadius: design.borderRadius,
+          activeButton: design.activeButton,
+        });
+      }
     }
+  };
+
+  isColorChanged = () => {
+    const { design } = this.state;
+    return (
+      design.color !== this.originalDesign.color ||
+      design.borderColor !== this.originalDesign.borderColor ||
+      design.background !== this.originalDesign.background
+    );
   };
 
   onBackgroundColorAdded = color => {
