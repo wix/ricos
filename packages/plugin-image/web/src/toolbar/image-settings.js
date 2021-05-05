@@ -81,6 +81,7 @@ class ImageSettings extends Component {
       toggleKey: 'isExpandEnabled',
       labelKey: 'ImagePlugin_Settings_ImageOpensInExpandMode_Label',
       dataHook: 'imageExpandToggle',
+      tooltipText: this.props.t('ImageSettings_Expand_Mode_Toggle'),
     },
     {
       toggleKey: 'isDownloadEnabled',

@@ -313,6 +313,7 @@ export class GallerySettingsModal extends Component {
       toggleKey: 'isExpandEnabled',
       labelKey: 'GalleryPlugin_Settings_ImagesOpenInExpandMode_Label',
       dataHook: 'galleryExpandToggle',
+      tooltipText: this.props.t('GallerySettings_Expand_Mode_Toggle'),
     },
     {
       toggleKey: 'isDownloadEnabled',
