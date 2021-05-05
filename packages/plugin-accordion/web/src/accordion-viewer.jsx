@@ -49,7 +49,7 @@ class AccordionViewer extends Component {
   };
 
   render() {
-    const { theme, t, componentData, isMobile } = this.props;
+    const { theme, t, componentData, isMobile, helpers } = this.props;
     const { config, pairs } = componentData;
     const { direction, expandState, expandOnlyOne } = config;
 
@@ -64,6 +64,7 @@ class AccordionViewer extends Component {
           expandOnlyOne={expandOnlyOne}
           renderTitle={this.renderTitle}
           renderContent={this.renderContent}
+          helpers={helpers}
         />
       </div>
     );
@@ -76,6 +77,7 @@ AccordionViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   innerRCV: PropTypes.func,
   isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
 };
 
 export default AccordionViewer;
