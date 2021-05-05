@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Layout, Cell, Dropdown, InputWithLabel } from 'wix-style-react';
+import { Layout, Cell, Dropdown, InputWithLabel, Typography as t } from 'wix-style-react';
 import { TextStyle } from 'ricos-schema';
 import { AbstractPanelProps } from '../types';
 import { createAbstractPanelSetter } from './utils';
@@ -10,7 +10,7 @@ const options = alignments.map((value, id) => ({
   value,
 }));
 
-export const textStyleEmpty = { textAlignment: undefined } as TextStyle;
+export const emptyTextStyle = { textAlignment: undefined } as TextStyle;
 
 export const PNLTextStyle: FC<AbstractPanelProps<TextStyle>> = ({ obj, setter }) => {
   const set = createAbstractPanelSetter(obj, setter);
@@ -18,6 +18,7 @@ export const PNLTextStyle: FC<AbstractPanelProps<TextStyle>> = ({ obj, setter })
   return (
     <Layout>
       <Cell>
+        <p className={t.h3}>Text Style:</p>
         <Dropdown
           placeholder="Text Alignment"
           selectedId={alignments.indexOf(textAlignment)}

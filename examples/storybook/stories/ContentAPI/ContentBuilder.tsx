@@ -4,7 +4,7 @@ import { Page } from '../Components/StoryParts';
 import { setupContentBuilder } from 'ricos-content/libs/Content';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { emptyState } from 'ricos-common';
-import { Paragraph } from './PluginPanels';
+import { Paragraph, Image } from './PluginPanels';
 import { Sidebar } from './Sidebar';
 import { AddFunctor, EditPanelProps, Plugins } from './types';
 import { newKey } from './blockKeyGenerator';
@@ -17,7 +17,7 @@ const app = setupContentBuilder(() => newKey(5));
 
 const plugins: Plugins = [
   ['Text', Icons.SentenceCase, Paragraph],
-  ['Image', Icons.Image],
+  ['Image', Icons.Image, Image],
   ['Video', Icons.VideoCamera],
   ['File', Icons.Attachment],
   ['Divider', Icons.Divider],

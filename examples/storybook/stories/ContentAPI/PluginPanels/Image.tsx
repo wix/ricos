@@ -7,7 +7,7 @@ const alignOptions = ['AUTO', 'LEFT', 'RIGHT', 'CENTER', 'JUSTIFY'].map((value, 
   value,
 }));
 
-export const Paragraph: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
+export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
   const [text, setText] = useState(undefined as string);
   const [selectedAlignment, setSelectedAlignment] = useState(-1);
   const onAdd = () => {
