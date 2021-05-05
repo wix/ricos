@@ -4,7 +4,7 @@ import { Page } from '../Components/StoryParts';
 import { setupContentBuilder } from 'ricos-content/libs/Content';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { emptyState } from 'ricos-common';
-import { Paragraph, Image, Video, File, Divider, Button } from './PluginPanels';
+import { Paragraph, Image, Video, File, Divider, Button, Gallery } from './PluginPanels';
 import { Sidebar } from './Sidebar';
 import { AddFunctor, EditPanelProps, Plugins } from './types';
 import { newKey } from './blockKeyGenerator';
@@ -22,7 +22,7 @@ const plugins: Plugins = [
   ['File', Icons.Attachment, File],
   ['Divider', Icons.Divider, Divider],
   ['Button', Icons.SquareRatio, Button],
-  ['Gallery', Icons.LayoutGallery],
+  ['Gallery', Icons.LayoutGallery, Gallery],
   ['Html', Icons.Code],
 ];
 
