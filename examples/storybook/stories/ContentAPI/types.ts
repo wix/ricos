@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { setupContentBuilder } from 'ricos-content/libs/Content';
 
 export type BuilderFunctions = Omit<ReturnType<typeof setupContentBuilder>, 'RicosContentBuilder'>;
@@ -11,3 +12,5 @@ export interface EditPanelProps<T extends keyof BuilderFunctions> {
 }
 
 export interface ParagraphPanel extends EditPanelProps<'addParagraph'> {}
+
+export type Plugins = [string, FC<any>, FC<EditPanelProps<any>>?][];

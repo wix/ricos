@@ -1,3 +1,10 @@
 .composer {
   flex-direction: row-reverse !important;
 }
+
+.viewer {
+  border: solid 1px #b8deff;
+  padding: 8px;
+  border-radius: 5px;
+  min-height: 200px;
+}
