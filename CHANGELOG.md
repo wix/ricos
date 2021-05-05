@@ -17,6 +17,8 @@
   </summary>
   
   ### :bug: Bug Fix
+  - `external-toolbar`
+    - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
   - `plugin-commons`
     - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
   - `link`
