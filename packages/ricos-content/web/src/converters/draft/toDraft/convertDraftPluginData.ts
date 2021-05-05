@@ -74,7 +74,7 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
 };
 
 const convertContainerData = (data: { containerData?: PluginContainerData; config }) => {
-  const { width, alignment, spoiler } = data.containerData || {};
+  const { width, alignment, spoiler, customHeight } = data.containerData || {};
   data.config = Object.assign(
     {},
     data.config,
@@ -85,6 +85,7 @@ const convertContainerData = (data: { containerData?: PluginContainerData; confi
           : constantToKebabCase(width.type),
     },
     width?.customWidth && { width: width.customWidth },
+    customHeight && { height: customHeight },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
@@ -208,7 +209,12 @@ const convertButtonData = (data: Partial<ButtonData> & { button }) => {
 };
 
 const convertHTMLData = data => {
-  delete data.config?.size;
+  const { html, url, config = {} } = data;
+  const srcType = html ? 'html' : 'url';
+  data.srcType = srcType;
+  data.src = html || url;
+  delete data[srcType];
+  config.size && delete data.config.size;
 };
 
 const convertLink = ({
