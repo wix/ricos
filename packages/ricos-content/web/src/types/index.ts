@@ -15,6 +15,7 @@ export interface ComponentData {
     url?: string;
     textWrap?: string;
     width?: number | string;
+    height?: number;
     spoiler?: { enabled?: boolean; description?: string; buttonContent?: string };
     link?: { url?: string; rel?: string; target?: string };
     anchor?: string;

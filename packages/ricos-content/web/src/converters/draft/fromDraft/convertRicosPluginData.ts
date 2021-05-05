@@ -59,7 +59,7 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
 };
 
 const convertContainerData = (data: { config?: ComponentData['config']; containerData }) => {
-  const { size, alignment, width, spoiler } = data.config || {};
+  const { size, alignment, width, spoiler, height } = data.config || {};
   let newSpoiler: PluginContainerData_Spoiler | undefined;
   if (spoiler?.enabled) {
     const { description, buttonContent } = spoiler;
@@ -72,6 +72,7 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
       type,
       customWidth: typeof width === 'number' ? width : undefined,
     },
+    customHeight: typeof height === 'number' ? height : undefined,
     alignment: alignment && kebabToConstantCase(alignment),
     spoiler: newSpoiler,
   };
@@ -147,14 +148,12 @@ const convertVerticalEmbedData = (data: { type?: string }) => {
 
 const convertLinkPreviewData = (data: {
   thumbnail_url?: string;
-  provider_url?: string;
   config?: { link };
   thumbnailUrl;
-  providerUrl;
+  link;
 }) => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
-  has(data, 'provider_url') && (data.providerUrl = data.provider_url);
-  data.config?.link && (data.config.link = convertLink(data.config?.link));
+  data.config?.link && (data.link = convertLink(data.config?.link));
 };
 
 const convertMention = (data: {
@@ -199,6 +198,8 @@ const convertButtonData = (
 
 const convertHTMLData = data => {
   data.containerData.width.type = PluginContainerData_Width_Type.CUSTOM;
+  const { src, srcType } = data;
+  data[srcType] = src;
 };
 
 const convertLink = ({

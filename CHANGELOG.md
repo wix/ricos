@@ -15,13 +15,68 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
   
+  ### :bug: Bug Fix
+  - `external-toolbar`
+    - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
+  - `plugin-commons`
+    - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
+  - `link`
+    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
+  - `general`
+    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
 
 </details>
 <hr/>
 
-## 8.31.0 (April 25, 2021)
+## 8.33.0 (May 3, 2021)
+### :rocket: New Feature
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+- `gallery`
+  - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
+
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#2427](https://github.com/wix-incubator/rich-content/pull/2427) support RichContentViewer's `addAnchors` prop
+
+### :house: Internal
+- `editor`
+  - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
+
+## 8.32.0 (May 2, 2021)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2413](https://github.com/wix-incubator/rich-content/pull/2413) action color can now be separated for settings panels & focus on plugin. See [settingsActionColor & focusActionColor API](https://ricos.js.org/docs/ricos/Theming#settingsactioncolor)
+
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
+- `gallery`
+  - [#2402](https://github.com/wix-incubator/rich-content/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
+  
+### :house: Internal
+- `e2e`
+  - [#2381](https://github.com/wix/ricos/pull/2381) undo redo tests improvement
+
+## 8.31.3 (April 28, 2021)
+### :nail_care: Polish
+- `schema`
+  - [#2419](https://github.com/wix/ricos/pull/2419) remove `rich_content` proto package
+
+## 8.31.2 (April 28, 2021)
+### :bug: Bug Fix
+- `TextSelectionToolbar`
+  - [#2417](https://github.com/wix/ricos/pull/2417) fix position + css
+- `ricos-content`
+  - [#c9a1453f](https://github.com/wix/ricos/commit/c9a1453f) fix link compare
+
+## 8.31.1 (April 28, 2021)
+### :nail_care: Polish
+- `schema`
+  - [#2411](https://github.com/wix/ricos/pull/2411) change wix rich content schema proto package name
+
+## 8.31.0 (April 28, 2021)
 ### :rocket: New Feature
 - `mentions`
   - [#2407](https://github.com/wix/ricos/pull/2407) add onMentionHover

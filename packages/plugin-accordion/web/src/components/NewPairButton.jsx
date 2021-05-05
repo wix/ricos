@@ -6,15 +6,17 @@ import styles from '../../statics/styles/new-pair-button.rtlignore.scss';
 const dataHook = 'AccordionNewPair_button';
 
 export default function NewPairButton(props) {
+  const onKeyPress = e => (e.key === 'Enter' || e.key === ' ') && props.onClick(e);
+
   return (
     //using 'div' element instead of 'button' to fix a bug of focus on element in Firefox in OSX
     // further reading, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#Clicking_and_focus#Clicking_and_focus
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       role="button"
       tabIndex="0"
       className={styles.new_pair_container}
       onClick={props.onClick}
+      onKeyPress={onKeyPress}
       data-hook={dataHook}
     >
       <div className={styles.new_pair_button}>
