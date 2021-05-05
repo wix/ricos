@@ -59,19 +59,19 @@ export const PNLLink: FC<AbstractPanelProps<Link>> = ({ obj, setter }) => {
       </Cell>
       <Cell>
         <p className={t.h2}>rel:</p>
-        <HorizontalField label="nofollow">
+        <HorizontalField label="nofollow" withStartPadding>
           <ToggleSwitch
             checked={nofollow}
             onChange={e => set({ rel: { nofollow: e.currentTarget.checked } })}
           />
         </HorizontalField>
-        <HorizontalField label="sponsored">
+        <HorizontalField label="sponsored" withStartPadding>
           <ToggleSwitch
             checked={sponsored}
             onChange={e => set({ rel: { sponsored: e.currentTarget.checked } })}
           />
         </HorizontalField>
-        <HorizontalField label="ugc">
+        <HorizontalField label="ugc" withStartPadding>
           <ToggleSwitch
             checked={ugc}
             onChange={e => set({ rel: { ugc: e.currentTarget.checked } })}

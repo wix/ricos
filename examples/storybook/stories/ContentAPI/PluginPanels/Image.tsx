@@ -29,9 +29,6 @@ export const Image: FC<EditPanelProps<'addImage'>> = ({ addFunc }) => {
       },
       ...commonFields,
     });
-    setCommonFields(emptyCommonBuilderFields);
-    setAltText('');
-    setCaption('');
   };
   return (
     <Layout>
