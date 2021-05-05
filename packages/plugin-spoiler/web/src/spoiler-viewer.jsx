@@ -14,7 +14,7 @@ class SpoilerViewer extends Component {
     callAllCallbacks: PropTypes.func,
     stateChangeCallBacks: PropTypes.array,
     dataHook: PropTypes.string,
-    onViewerAction: PropTypes.func,
+    settings: PropTypes.object,
   };
 
   static contextType = GlobalContext;
@@ -38,7 +38,7 @@ class SpoilerViewer extends Component {
   handleClick = event => {
     event.preventDefault();
     this.showText();
-    this.props.onViewerAction(SPOILER_TYPE, 'reveal_text');
+    this.props.settings.onViewerAction?.(SPOILER_TYPE, 'reveal_text');
   };
 
   showText = () => {
