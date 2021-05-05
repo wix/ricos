@@ -15,6 +15,7 @@ class ButtonComponent extends PureComponent {
     const {
       componentData: { button },
       settings: { onClick },
+      helpers,
     } = this.props;
     const { theme } = this.props;
     const buttonText = button.settings.buttonText;
@@ -41,6 +42,7 @@ class ButtonComponent extends PureComponent {
         buttonText={buttonText}
         theme={theme}
         onClick={onClick}
+        helpers={helpers}
         {...linkButtonSettings}
       />
     );
@@ -54,6 +56,7 @@ ButtonComponent.propTypes = {
   settings: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
   theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object,
 };
 
 export default ButtonComponent;

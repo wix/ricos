@@ -846,7 +846,11 @@ const config: RichContentEditorProps['config'] = {
       //   };
       // },
     },
-    { name: TOOLBARS.SIDE, addPluginMenuConfig },
+    {
+      name: TOOLBARS.SIDE,
+      addPluginMenuConfig,
+      // onClick: () => console.log('plus button clicked!'),
+    },
     { name: TOOLBARS.MOBILE, addPluginMenuConfig },
     { name: TOOLBARS.FOOTER, footerToolbarConfig },
     {
