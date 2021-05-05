@@ -15,16 +15,20 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :nail_care: Polish
+- `plugin-headings`
+  - [#2454](https://github.com/wix-incubator/rich-content/pull/2454) clear `h1` wire on experiment `useHeadingOne`
   
-  ### :bug: Bug Fix
-  - `external-toolbar`
-    - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
-  - `plugin-commons`
-    - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
-  - `link`
-    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
-  - `general`
-    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
+### :bug: Bug Fix
+- `external-toolbar`
+  - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
+- `plugin-commons`
+  - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
+- `link`
+  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
+- `general`
+  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
 
 </details>
 <hr/>
