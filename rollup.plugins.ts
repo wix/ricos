@@ -187,6 +187,7 @@ const postcss = (shouldExtract: boolean): Plugin => {
     },
     extract: shouldExtract && 'dist/styles.min.css',
     plugins: [
+      // **/*.st.scss
       postcssExclude({
         filter: '**/*.rtlignore.scss',
         plugins: [postcssRTL()],
@@ -225,6 +226,7 @@ const createFakeStylesFile = (): Plugin => ({
 });
 
 let _plugins: Plugin[] = [
+  stylable(),
   // @ts-ignore
   svgr(),
   resolveAlias(),
@@ -233,7 +235,6 @@ let _plugins: Plugin[] = [
   commonjs(),
   json(),
   typescript(),
-  stylable(),
 ];
 
 if (!IS_DEV_ENV) {
