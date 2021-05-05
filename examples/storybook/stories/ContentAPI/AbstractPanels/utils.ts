@@ -18,3 +18,6 @@ export const dividerTypesOptions = prepareForDropdown(dividerTypes);
 
 export const dividerWidth = ['LARGE', 'MEDIUM', 'SMALL'];
 export const dividerWidthOptions = prepareForDropdown(dividerWidth);
+
+export const buttonTypes = ['LINK', 'ACTION'];
+export const buttonTypesOptions = prepareForDropdown(buttonTypes);
