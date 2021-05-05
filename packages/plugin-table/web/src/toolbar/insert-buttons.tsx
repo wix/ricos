@@ -22,17 +22,20 @@ const createInsertButtons: CreateInsertButtons = ({
   isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
+  const buttonProps = {
+    type: BUTTON_TYPES.MODAL,
+    name: 'TablePlugin_InsertButton',
+    getLabel: () => t('TablePlugin_InsertButton'),
+    tooltip: t('TablePlugin_InsertButton_Tooltip'),
+    getIcon: () => icon,
+    isActive: () => false,
+    isDisabled: () => false,
+    componentData: getDefaultsSettings(),
+    modalElement: decorateComponentWithProps(tableSettingsModal, { ...settings, isMobile }),
+  };
   return [
     {
-      type: BUTTON_TYPES.MODAL,
-      name: 'TablePlugin_InsertButton',
-      getLabel: () => t('TablePlugin_InsertButton'),
-      tooltip: t('TablePlugin_InsertButton_Tooltip'),
-      getIcon: () => icon,
-      isActive: () => false,
-      isDisabled: () => false,
-      componentData: getDefaultsSettings(),
-      modalElement: decorateComponentWithProps(tableSettingsModal, { ...settings, isMobile }),
+      ...buttonProps,
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalStylesFn: ({ buttonRef, toolbarName }) => {
         return getBottomToolbarModalStyles(
@@ -52,6 +55,15 @@ const createInsertButtons: CreateInsertButtons = ({
           })
         : undefined,
       section: 'BlockToolbar_Section_Advanced',
+    },
+    {
+      ...buttonProps,
+      modalStyles: getModalStyles({
+        customStyles: isMobile ? {} : DesktopFlyOutModalStyles,
+        fullScreen: false,
+        isMobile,
+      }),
+      toolbars: [TOOLBARS.INSERT_PLUGIN],
     },
   ];
 };
