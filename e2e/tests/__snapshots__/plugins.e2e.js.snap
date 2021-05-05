@@ -3654,7 +3654,6 @@ exports[`plugins > convert link to link preview > should create link preview fro
           "size": "content"
         },
         "description": "A mock description",
-        "provider_url": "www.mockUrl.com",
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "title": "A mock title"
       },
@@ -3714,7 +3713,6 @@ exports[`plugins > convert link to preview > should create link preview from lin
           "size": "content"
         },
         "description": "A mock description",
-        "provider_url": "www.mockUrl.com",
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "title": "A mock title"
       },
@@ -4477,7 +4475,6 @@ exports[`plugins > convert link to preview > with default config > should create
           "size": "content"
         },
         "description": "A mock description",
-        "provider_url": "www.mockUrl.com",
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "title": "A mock title"
       },

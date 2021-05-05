@@ -578,12 +578,9 @@
             "customWidth": 350
           }
         },
-        "config": {
-          "link": {
-            "target": "BLANK",
-            "url": "https://twitter.com/CNN/status/1244886173409034240"
-          },
-          "width": 350
+        "link": {
+          "target": "BLANK",
+          "url": "https://twitter.com/CNN/status/1244886173409034240"
         },
         "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">Eleven veterans who live at the Soldiers&#39; Home in Holyoke, Massachusetts, have died and five of them tested positive for coronavirus.<br><br>Tests are still pending for five other veterans who passed away, and the status of the last one is unknown, officials say <a href=\"https://t.co/rTVjn9FiBC\">https://t.co/rTVjn9FiBC</a></p>&mdash; CNN (@CNN) <a href=\"https://twitter.com/CNN/status/1244886173409034240?ref_src=twsrc%5Etfw\">March 31, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n"
       }
@@ -869,16 +866,13 @@
             "type": "CONTENT"
           }
         },
-        "config": {
-          "link": {
-            "target": "BLANK",
-            "url": "www.wix.com"
-          }
+        "link": {
+          "target": "BLANK",
+          "url": "www.wix.com"
         },
         "title": "A mock title",
         "thumbnailUrl": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
-        "description": "A mock description",
-        "providerUrl": "www.mockUrl.com"
+        "description": "A mock description"
       }
     },
     {
