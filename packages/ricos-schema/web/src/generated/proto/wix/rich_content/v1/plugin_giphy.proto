@@ -7,12 +7,10 @@ import "google/protobuf/wrappers.proto";
 
 message GiphyData {
     PluginContainerData container_data = 1;
-    GIFSource gif = 2;
+    GIFUrls gif = 2;
 }
 
-message GIFSource {
-    int32 height = 1;
-    int32 width = 2;
+message GIFUrls {
     string original_url = 3;
     string still_url = 4;
     google.protobuf.StringValue original_mp4 = 5;
