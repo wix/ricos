@@ -356,6 +356,5 @@ export type InlineStyleMapper = Record<string, (children, { key }) => JSX.Elemen
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type InlineStyleMapperFunction<PluginConfig = Record<string, any>> = (
   config: LegacyViewerPluginConfig<PluginConfig>,
-  raw: DraftContent,
-  onViewerAction?: () => void
+  raw: DraftContent
 ) => () => InlineStyleMapper;
