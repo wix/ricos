@@ -9,8 +9,7 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   const dataFieldName = TO_RICOS_DATA_FIELD[type];
   if (dataFieldName === undefined) {
     // eslint-disable-next-line no-console
-    console.error(`ERROR! Unknown entity type "${type}"!`);
-    process.exit(1);
+    throw Error(`ERROR! Unknown entity type "${type}"!`);
   }
 
   return { type: TO_RICOS_PLUGIN_TYPE[type], [dataFieldName]: convertBlockDataToRicos(type, data) };
