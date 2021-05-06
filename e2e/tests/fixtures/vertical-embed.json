@@ -57,7 +57,6 @@
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "product",
         "selectedProduct": {
           "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",

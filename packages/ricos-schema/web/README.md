@@ -4,7 +4,7 @@
 `main/proto` - contains proto files with Wix field options
 
 ### Open source projects
-`generated/proto` - contains proto files without Wix field options
+`generated/proto` - contains proto files without Wix field options, generated from `main/proto`
 
 ### JS/TS utilities & types
 Can be consumed from npm
