@@ -1,12 +1,11 @@
-name: update
+name: deploy examples
 on:
   push:
-    tags:
-      - v9.*
-      - v8.*
-      - v7.*
     branches:
-      - '**'
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
   surge-examples:
     runs-on: ubuntu-18.04
