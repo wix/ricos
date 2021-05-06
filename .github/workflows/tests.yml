@@ -1,10 +1,11 @@
 name: tests
 on:
   push:
-    tags-ignore:
-      - '**'
-    branches-ignore:
-      - 'release*'
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 env:
   captureVideos: 'true'
   captureImages: 'true'
