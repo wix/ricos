@@ -28,6 +28,8 @@
     - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
   - `html-embed`
     - [#2450](https://github.com/wix-incubator/rich-content/pull/2450) fixes embeded iframes width to be 100% fixed
+  - `file-upload`
+    - [#2461](https://github.com/wix-incubator/rich-content/pull/2461) restore old design to include the download key
 
 </details>
 <hr/>
