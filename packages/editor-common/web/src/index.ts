@@ -4,6 +4,8 @@ export * from './Icons';
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
+export { default as ClickOutside } from './Components/ClickOutside/ClickOutside';
+export { default as useClickOutside } from './Components/ClickOutside/useClickOutside';
 
 export { default as Dropdown } from './Components/Dropdown';
 
@@ -44,6 +46,7 @@ export {
   getAnchorBlockData,
   mergeBlockData,
   isAtomicBlockFocused,
+  blockKeyToEntityKey,
   setEntityData,
   setBlockNewEntityData,
   replaceWithEmptyBlock,
@@ -54,11 +57,13 @@ export {
   createBlockAndFocus,
   createBlock,
   getBlockInfo,
+  getBlockEntityType,
   getFocusedBlockKey,
   createCalcContentDiff,
   getPostContentSummary,
   createSelection,
   getBlockType,
+  hasInlineStyle,
   indentSelectedBlocks,
   isTypeText,
   setForceSelection,
@@ -76,7 +81,9 @@ export {
   isCursorAtFirstLine,
   selectAllContent,
   isAtomicBlockInSelection,
+  setSelectionToBlock,
 } from './Utils/draftUtils';
+export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {

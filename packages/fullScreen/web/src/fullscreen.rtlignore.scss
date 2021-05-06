@@ -1,6 +1,7 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 
-.fullscreen_mode, .expand_mode {
+.fullscreen_mode,
+.expand_mode {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +10,8 @@
   z-index: 100001;
   background: white;
 
-  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
+  :global(.pro-gallery .ltr),
+  :global(.pro-gallery .rtl) {
     direction: ltr !important;
   }
 }
@@ -19,7 +21,8 @@
   padding-left: 7px;
 }
 
-.nav_arrow_left, .nav_arrow_right {
+.nav_arrow_left,
+.nav_arrow_right {
   position: fixed;
   > svg {
     filter: drop-shadow(0px 0px 0px black) !important;
@@ -35,14 +38,14 @@
 }
 
 .close {
-  box-sizing: content-box;
+  box-sizing: border-box;
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  right: 42px;
+  right: 62px;
   top: 0px;
   @include phone {
-    right: 0px;
+    right: 20px;
     top: 5px;
     > svg {
       width: 20px;
@@ -59,7 +62,7 @@
 }
 
 .expand_button {
-  box-sizing: content-box;
+  box-sizing: border-box;
   z-index: 1001;
   padding: 10px;
   position: fixed;
@@ -93,4 +96,3 @@
 :global {
   @import '~pro-gallery/dist/statics/main.css';
 }
-

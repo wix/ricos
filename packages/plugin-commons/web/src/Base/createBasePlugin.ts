@@ -162,6 +162,7 @@ const createBasePlugin = (
         all: config.toolbar.InlineButtons,
         hidden: settings?.toolbar?.hidden || [],
       },
+      commonPubsub,
       theme: { ...toolbarTheme, ...config.theme },
       pubsub,
       helpers,
@@ -251,7 +252,6 @@ const createBasePlugin = (
       noPluginBorder,
       noPointerEventsOnFocus,
       withHorizontalScroll,
-      innerRCERenderedIn: config.type === 'wix-draft-plugin-divider' ? false : innerRCERenderedIn,
       disableKeyboardEvents,
     });
 

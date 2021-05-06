@@ -57,7 +57,10 @@ export default class TextLinkButton extends Component {
               width: 512,
               maxWidth: 512,
               height: 390,
-              padding: 10,
+              border: '1px solid rgb(237, 237, 237)',
+              borderRadius: '6px',
+              boxShadow: 'rgba(0, 0, 0, 0.07) 0px 4px 8px 0px',
+              padding: '0px 19px',
             },
           }
         : {

@@ -111,7 +111,17 @@ class RichContentViewer extends Component<
     this.state = {
       context: { experiments, isMobile, t },
     };
+    this.initConfig();
   }
+
+  initConfig = () => {
+    const { config, helpers } = this.props;
+    const onViewerAction = helpers?.onViewerAction;
+    if (config[SPOILER_TYPE] && onViewerAction) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (config[SPOILER_TYPE] as any).onViewerAction = onViewerAction;
+    }
+  };
 
   static getInitialState = (props: RichContentViewerProps) => {
     const {
@@ -239,14 +249,14 @@ class RichContentViewer extends Component<
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !platform || platform === 'desktop',
       });
-      const editorClassName = classNames(
-        styles.editor,
-        renderedInTable && styles.renderedInTable,
-        renderedInTable && draftDefaultStyles.renderedInTable,
-        {
-          [styles.rtl]: textDirection === 'rtl',
-        }
+      const tableClassNames = classNames(
+        styles.renderedInTable,
+        viewerStyles.renderedInTable,
+        draftDefaultStyles.renderedInTable
       );
+      const editorClassName = classNames(styles.editor, renderedInTable && tableClassNames, {
+        [styles.rtl]: textDirection === 'rtl',
+      });
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
@@ -258,6 +268,7 @@ class RichContentViewer extends Component<
         config,
         t,
         renderedInTable,
+        isMobile,
       };
 
       const output = convertToReact(

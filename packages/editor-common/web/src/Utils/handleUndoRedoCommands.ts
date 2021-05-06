@@ -146,9 +146,19 @@ function getChangedAccordionPairIndex(currentPairs, newPairs) {
   return { didChange: changedPairIndex > -1, changedPairIndex, item };
 }
 
+function getNewPairs(currentPairs, newPairs) {
+  return newPairs.map((newPair, index) => {
+    return {
+      key: newPair.key || currentPairs[index].key,
+      title: newPair.title || currentPairs[index].title,
+      content: newPair.content || currentPairs[index].content,
+    };
+  });
+}
+
 function getFixedAccordionEditorStates(currentData, newData) {
   const { pairs: currentPairs } = currentData;
-  const { pairs: newPairs } = newData;
+  const newPairs = getNewPairs(currentPairs, newData.pairs);
   const { didChange, changedPairIndex, item } = getChangedAccordionPairIndex(
     currentPairs,
     newPairs
@@ -176,66 +186,42 @@ function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
     return {
       key: pair.key,
       title: setLastChangeType(
-        EditorState.createWithContent(pair.title.getCurrentContent()),
+        pair.title
+          ? EditorState.createWithContent(pair.title.getCurrentContent())
+          : EditorState.createEmpty(),
         lastChangeType
       ),
       content: setLastChangeType(
-        EditorState.createWithContent(pair.content.getCurrentContent()),
+        pair.content
+          ? EditorState.createWithContent(pair.content?.getCurrentContent())
+          : EditorState.createEmpty(),
         lastChangeType
       ),
     };
   });
 }
 
-function fixBrokenPair(newPairs, currentPairs, brokenPairIndex) {
-  const shouldSetChangeType = newPairs.length === 1;
-  ['title', 'content'].forEach(item => {
-    const newEditorState = removeFocus(currentPairs[brokenPairIndex][item]);
-    newPairs[brokenPairIndex][item] = shouldSetChangeType
-      ? setLastChangeType(newEditorState, 'undo')
-      : newEditorState;
-  });
-  return newPairs;
-}
-
 function handleAccordionEntity(currentData, newData): EntityToReplace {
-  const { pairs: newPairs } = newData;
-  const brokenPairIndex = newPairs.findIndex(pair => !(pair.key && pair.title && pair.content));
-  const didPairBreak = brokenPairIndex > -1;
-  const didChange = didPairBreak || didAccordionConfigChange(currentData, newData);
-  const entityToReplace: EntityToReplace = {
-    shouldUndoAgain: !didChange,
-    fixedData: didPairBreak && {
-      ...newData,
-      pairs: fixBrokenPair(newPairs, currentData.pairs, brokenPairIndex),
-    },
-  };
-  return didChange ? entityToReplace : getFixedAccordionEditorStates(currentData, newData);
+  return didAccordionConfigChange(currentData, newData)
+    ? { shouldUndoAgain: false }
+    : getFixedAccordionEditorStates(currentData, newData);
 }
 
 /* Table Entity Handling */
 
 function setCellChangeType(rows, rowKey, columnKey, lastChangeType) {
   rows[rowKey].columns[columnKey].content = setLastChangeType(
-    removeFocus(rows[rowKey].columns[columnKey].content),
+    rows[rowKey].columns[columnKey].content,
     lastChangeType
   );
 }
 
-function setChangeTypeForNewTableCells(currentRows, newRows, lastChangeType) {
-  const rowKey = Object.keys(newRows).find(newRowKey => !currentRows[newRowKey]);
-  if (rowKey) {
+function setChangeTypeForTableCells(newRows, lastChangeType) {
+  Object.keys(newRows).forEach(rowKey =>
     Object.keys(newRows[rowKey].columns).forEach(columnKey => {
       setCellChangeType(newRows, rowKey, columnKey, lastChangeType);
-    });
-  } else {
-    Object.keys(newRows).forEach(rowKey => {
-      const columnKey = Object.keys(newRows[rowKey].columns).find(
-        columnKey => !currentRows[rowKey].columns[columnKey]
-      );
-      columnKey && setCellChangeType(newRows, rowKey, columnKey, lastChangeType);
-    });
-  }
+    })
+  );
   return newRows;
 }
 
@@ -307,25 +293,23 @@ function didCellStyleChange(newRow, currentRow) {
 function didTableRowStyleChange(currentData, newData) {
   const { rows: newRows } = newData.config;
   const { rows: currentRows } = currentData.config;
-  return Object.keys(newRows).some(rowKey => {
-    const currentRow = currentRows[rowKey].columns;
-    const newRow = newRows[rowKey].columns;
-    return (
-      !currentRow ||
-      Object.keys(newRow).length !== Object.keys(currentRow).length ||
-      didCellStyleChange(newRow, currentRow)
-    );
-  });
+  return (
+    Object.keys(newRows).length !== Object.keys(currentRows).length ||
+    Object.keys(newRows).some(rowKey => {
+      const currentRow = currentRows[rowKey].columns;
+      const newRow = newRows[rowKey].columns;
+      return (
+        !currentRow ||
+        Object.keys(newRow).length !== Object.keys(currentRow).length ||
+        didCellStyleChange(newRow, currentRow)
+      );
+    })
+  );
 }
 
 function handleTableEntity(currentData, newData): EntityToReplace {
-  const entityToReplace: EntityToReplace = {
-    shouldUndoAgain: !(
-      didTableConfigChange(currentData, newData) || didTableRowStyleChange(currentData, newData)
-    ),
-  };
-  return !entityToReplace.shouldUndoAgain
-    ? entityToReplace
+  return didTableConfigChange(currentData, newData) || didTableRowStyleChange(currentData, newData)
+    ? { shouldUndoAgain: false }
     : getFixedTableData(currentData, newData);
 }
 
@@ -399,12 +383,12 @@ const innerRicosChangeTypeSetters = {
       pairs: setChangeTypeForAccordionPairs(prevData.pairs, 'redo'),
     };
   },
-  [TABLE_TYPE]: (prevData, currentData) => {
+  [TABLE_TYPE]: prevData => {
     return {
       ...prevData,
       config: {
         ...prevData.config,
-        rows: setChangeTypeForNewTableCells(currentData.config.rows, prevData.config.rows, 'redo'),
+        rows: setChangeTypeForTableCells(prevData.config.rows, 'redo'),
       },
     };
   },
@@ -412,17 +396,15 @@ const innerRicosChangeTypeSetters = {
 
 /* Handle undo-redo calls */
 
-function getContentStateForRedoStack(editorState: EditorState, prevEditorState: EditorState) {
+function getContentStateForRedoStack(prevEditorState: EditorState) {
   const prevContentState = prevEditorState.getCurrentContent();
-  const contentState = editorState.getCurrentContent();
-  contentState
+  prevContentState
     .getBlockMap()
-    .filter((block: ContentBlock) => doesEntityExistInBoth(block, prevContentState))
+    .filter((block: ContentBlock) => !!block.getEntityAt(0))
     .forEach((block: ContentBlock) => {
       const blockKey = block.getKey();
-      const { type, data: currentData } = getBlocksEntityTypeAndData(blockKey, contentState);
-      const { data: prevData } = getBlocksEntityTypeAndData(blockKey, prevContentState);
-      const fixedData = innerRicosChangeTypeSetters[type]?.(prevData, currentData);
+      const { type, data: prevData } = getBlocksEntityTypeAndData(blockKey, prevContentState);
+      const fixedData = innerRicosChangeTypeSetters[type]?.(prevData);
       fixedData && replaceComponentData(prevEditorState, blockKey, fixedData);
     });
   return prevEditorState.getCurrentContent();
@@ -434,7 +416,7 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
     ? pluginsUndo(fixedEditorState)
     : pushToRedoStack(
         removeCompositionModeFromEditorState(fixedEditorState),
-        getContentStateForRedoStack(fixedEditorState, editorState)
+        getContentStateForRedoStack(editorState)
       );
 }
 

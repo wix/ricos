@@ -315,13 +315,13 @@ const buttonConfig = {
   getBorderColors: () => userButtonBorderColors,
   getBackgroundColors: () => userButtonBackgroundColors,
 };
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const config = {
   [LINK_PREVIEW_TYPE]: {
-    enableEmbed: true, // [Twitter, YouTube]
+    enableEmbed: true, // [Twitter, TikTok]
     enableLinkPreview: true,
     fetchData: mockFetchUrlPreviewData(),
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   [EMOJI_TYPE]: {
     // toolbar: {
@@ -567,7 +567,7 @@ const config = {
         data.push({
           name,
           type,
-          url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+          url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         });
       });
       setTimeout(() => updateEntity({ data }), 500);

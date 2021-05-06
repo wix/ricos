@@ -1,4 +1,10 @@
-import { Node_Type, TextData, DividerData_DividerType } from 'ricos-schema';
+import {
+  Node_Type,
+  TextData,
+  DividerData_Type,
+  DividerData_Width,
+  DividerData_Alignment,
+} from 'ricos-schema';
 import { updateNode, setNode, addNode, toTextDataArray } from './builder-utils';
 
 describe('addNode util', () => {
@@ -83,7 +89,11 @@ describe('updateNode util', () => {
       key: 'new',
       nodes: [],
       type: Node_Type.DIVIDER,
-      dividerData: { type: DividerData_DividerType.SINGLE },
+      dividerData: {
+        type: DividerData_Type.SINGLE,
+        width: DividerData_Width.SMALL,
+        alignment: DividerData_Alignment.CENTER,
+      },
     });
     const actual = updateNode({ node, content, key: 'ass' });
     const expected = Object.freeze({
@@ -92,7 +102,12 @@ describe('updateNode util', () => {
           key: 'ass',
           nodes: [],
           type: Node_Type.DIVIDER,
-          dividerData: { type: DividerData_DividerType.SINGLE },
+          dividerData: {
+            type: DividerData_Type.SINGLE,
+
+            width: DividerData_Width.SMALL,
+            alignment: DividerData_Alignment.CENTER,
+          },
         },
         { key: 'foo', nodes: [], type: Node_Type.PARAGRAPH },
         { key: 'bar', nodes: [], type: Node_Type.POLL },
@@ -109,12 +124,16 @@ describe('updateNode util', () => {
         { key: 'bar', nodes: [], type: Node_Type.POLL },
       ],
     });
-    const node = Object.freeze({
+    const node = {
       key: 'new',
-      nodes: [],
+      // nodes: [],
       type: Node_Type.DIVIDER,
-      dividerData: { type: DividerData_DividerType.SINGLE },
-    });
+      dividerData: {
+        type: DividerData_Type.SINGLE,
+        width: DividerData_Width.SMALL,
+        alignment: DividerData_Alignment.CENTER,
+      },
+    };
     const actual = updateNode({ node, content, key: 'foo' });
     expect(actual).toEqual(content);
   });

@@ -7,6 +7,7 @@ import {
   validate,
   isSSR,
   getImageSrc,
+  isPNG,
   WIX_MEDIA_DEFAULT,
   anchorScroll,
   addAnchorTagToUrl,
@@ -122,6 +123,15 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       : WIX_MEDIA_DEFAULT.SIZE;
   }
 
+  getImageDataUrl(): ImageSrc | null {
+    return this.props.dataUrl
+      ? {
+          preload: this.props.dataUrl,
+          highres: this.props.dataUrl,
+        }
+      : null;
+  }
+
   getImageUrl(src): ImageSrc | null {
     const { helpers, seoMode } = this.props || {};
     if (!src && helpers?.handleFileSelection) {
@@ -148,42 +158,44 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       return [requiredWidth, requiredHeight];
     };
 
-    if (this.props.dataUrl) {
-      imageUrl.preload = imageUrl.highres = this.props.dataUrl;
-    } else {
-      let requiredWidth, requiredHeight;
-      let imageSrcOpts = {};
-      if (
-        this.context.experiments?.useQualityPreoad?.enabled ||
-        this.context.experiments?.useQualityPreload?.enabled
-      ) {
-        const {
-          componentData: {
-            config: { alignment, width },
-          },
-        } = this.props;
-        const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
-        imageSrcOpts = {
-          imageType: 'quailtyPreload',
-          ...(usePredefinedWidth && { requiredWidth: 300 }),
-        };
-      }
-      imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, imageSrcOpts);
-      if (seoMode) {
-        requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
-        requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
-      } else if (this.state.container) {
-        const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
-        [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
-      }
-
-      imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
-        requiredWidth,
-        requiredHeight,
-        requiredQuality: 90,
-        imageType: 'highRes',
-      });
+    let requiredWidth, requiredHeight;
+    let imageSrcOpts = {};
+    /**
+        PNG files can't reduce quality via Wix services and we want to avoid downloading a big png image that will affect performance.
+      **/
+    if (
+      !this.props.isMobile &&
+      !isPNG(src) &&
+      this.context.experiments?.useQualityPreload?.enabled
+    ) {
+      const {
+        componentData: {
+          config: { alignment, width },
+        },
+      } = this.props;
+      const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
+      imageSrcOpts = {
+        imageType: 'quailtyPreload',
+        ...(usePredefinedWidth && { requiredWidth: 300 }),
+      };
     }
+
+    imageUrl.preload = getImageSrc(src, helpers?.getImageUrl, imageSrcOpts);
+    if (seoMode) {
+      requiredWidth = src?.width && Math.min(src.width, SEO_IMAGE_WIDTH);
+      requiredHeight = this.calculateHeight(SEO_IMAGE_WIDTH, src);
+    } else if (this.state.container) {
+      const desiredWidth = this.state.container.getBoundingClientRect().width || src?.width;
+      [requiredWidth, requiredHeight] = getImageDimensions(desiredWidth, this.props.isMobile);
+    }
+
+    imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
+      requiredWidth,
+      requiredHeight,
+      requiredQuality: 90,
+      imageType: 'highRes',
+    });
+
     if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
@@ -332,7 +344,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
+    helpers.onViewerAction?.(IMAGE_TYPE, 'Click', 'expand_image');
     this.hasExpand() && onExpand?.(this.props.blockKey);
   };
 
@@ -411,11 +423,11 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
-    const itemClassName = classNames(this.styles.imageContainer, className, {
+    const itemClassName = classNames(this.styles.imageWrapper, className, {
       [this.styles.pointer]: this.hasExpand() as boolean,
     });
     const imageClassName = this.styles.image;
-    const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
+    const imageSrc = fallbackImageSrc || this.getImageDataUrl() || this.getImageUrl(data.src);
     let imageProps = {};
     if (data.src && settings && settings.imageProps) {
       imageProps = isFunction(settings.imageProps)
@@ -433,14 +445,17 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     return (
       <div
         data-hook="imageViewer"
-        onClick={this.handleClick}
-        className={itemClassName}
-        onKeyDown={this.onKeyDown}
+        className={this.styles.imageContainer}
         ref={this.handleRef}
         onContextMenu={this.handleContextMenu}
         {...accesibilityProps}
       >
-        <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
+        <div
+          className={itemClassName}
+          aria-label={metadata.alt}
+          onClick={this.handleClick}
+          onKeyDown={this.onKeyDown}
+        >
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&

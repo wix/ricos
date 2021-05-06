@@ -72,7 +72,7 @@ interface Props {
   content?: DraftContent;
   isMobile?: boolean;
   preview?: RicosViewerProps['preview'];
-  addAnchors?: RichContentViewerProps['addAnchors'];
+  addAnchors?: RicosViewerProps['addAnchors'];
   normalize?: RichContentViewerProps['normalize'];
   theme?: RicosTheme;
 }
@@ -92,9 +92,10 @@ const ViewerWrapper: FunctionComponent<Props> = ({
       content={content}
       isMobile={isMobile}
       preview={preview}
+      addAnchors={addAnchors}
       mediaSettings={{ fullscreenProps: { backgroundColor: 'black', foregroundColor: 'white' } }}
     >
-      <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
+      <RichContentViewer normalize={normalize} />
     </RicosViewer>
   );
 };

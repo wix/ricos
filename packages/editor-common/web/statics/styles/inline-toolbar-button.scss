@@ -13,17 +13,20 @@
   }
 
   &:hover {
-    button {
+    & > button {
       background-color: rgba($fallbackColorTuple, 0.06);
+      @include phone {
+        background-color: transparent;
+      }
     }
     // .inlineToolbarButton_icon,
     // .inlineToolbarButton_icon svg,
     // .inlineToolbarDropdownButton_icon svg {
-    //   @include fillWithActionColor();
+    //   @include fillWithsettingsActionColor();
     // }
   }
   &.inlineToolbarButton_active button {
-    background-color: rgba($action-color-fallback-tuple, 0.1);
+    background-color: rgba($settings-action-color-tuple, 0.1);
   }
 }
 
@@ -34,10 +37,6 @@
   border: 0 none;
   line-height: normal;
   cursor: pointer;
-  &:hover,
-  &:focus {
-    outline: 0;
-  }
   &:disabled {
     cursor: default;
     opacity: 0.4;
@@ -58,8 +57,8 @@
 }
 
 .inlineToolbarButton_active {
-  color: $action-color-fallback;
-  fill: $action-color-fallback;
+  color: $settings-action-color;
+  fill: $settings-action-color;
   @include svg-fill;
 }
 

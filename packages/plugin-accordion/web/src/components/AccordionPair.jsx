@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import ExpandCollapseButton from '../components/ExpandCollapseButton';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
+import { ACCORDION_TYPE } from '../types';
 
 class AccordionPair extends Component {
   constructor(props) {
@@ -34,8 +35,9 @@ class AccordionPair extends Component {
   };
 
   onClick = () => {
-    const { isExpanded, onCollapseClick, onExpandClick, idx } = this.props;
+    const { isExpanded, onCollapseClick, onExpandClick, idx, helpers } = this.props;
     isExpanded ? onCollapseClick(idx) : onExpandClick(idx);
+    helpers.onViewerAction?.(ACCORDION_TYPE, 'Click', `${isExpanded ? 'collapse' : 'expand'}`);
   };
 
   render() {
@@ -71,6 +73,7 @@ AccordionPair.propTypes = {
   onExpandClick: PropTypes.func.isRequired,
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
+  helpers: PropTypes.object,
 };
 
 export default AccordionPair;

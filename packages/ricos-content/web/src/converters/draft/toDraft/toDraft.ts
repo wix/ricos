@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { RichContent, Node, Node_Type } from 'ricos-schema';
-import { DraftContent, RicosContentBlock } from '../../..';
+import { DraftContent, RicosContentBlock, Version } from '../../..';
 import { genKey } from '../../generateRandomKey';
 import {
   BlockType,
@@ -19,11 +19,11 @@ import {
   parseEntityDecorations,
 } from './decorationParsers';
 
-export const ensureDraftContent = (content: RichContent | DraftContent) =>
+export const ensureDraftContent = (content: RichContent | DraftContent): DraftContent =>
   'nodes' in content ? toDraft(content) : content;
 
 export const toDraft = (ricosContent: RichContent): DraftContent => {
-  const { nodes, metadata } = RichContent.toJSON(RichContent.fromJSON(ricosContent)) as RichContent; // using toJSON to remove undefined fields
+  const { nodes } = RichContent.toJSON(RichContent.fromJSON(ricosContent)) as RichContent; // using toJSON to remove undefined fields
   const draftContent: DraftContent = {
     blocks: [],
     entityMap: {},
@@ -42,8 +42,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
           break;
         case Node_Type.HEADING:
           if (!node.headingData) {
-            console.log(`ERROR! Heading node with no data!`);
-            process.exit(1);
+            throw Error(`ERROR! Heading node with no data!`);
           }
           parseTextNodes(node, { type: HeaderLevel[node.headingData.level], key: node.key });
           break;
@@ -58,8 +57,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
           if (RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]) {
             parseAtomicNode(node);
           } else {
-            console.log(`ERROR! Unknown node type "${node.type}"!`);
-            process.exit(1);
+            throw Error(`ERROR! Unknown node type "${node.type}"!`);
           }
       }
       parseNodes(index + 1);
@@ -131,6 +129,6 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
 
   parseNodes();
 
-  draftContent.VERSION = metadata?.updatedVersion;
+  draftContent.VERSION = Version.currentVersion;
   return draftContent;
 };

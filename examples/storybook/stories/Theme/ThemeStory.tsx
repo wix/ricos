@@ -3,23 +3,18 @@ import { Layout, Palette, ToggleSwitch } from 'wix-style-react';
 import { Page, Section, ContentState } from '../Components/StoryParts';
 import exapmleState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
 import { wixPalettes, ricosPalettes } from '../../../../e2e/tests/resources/palettesExample';
+import { FONTS } from '../../../../e2e/tests/resources/fontsExample';
 import ExampleApplication from '../Components/ExampleApplication';
 import { SelectorCell } from './SelectorCell';
 const palettes = Object.keys(wixPalettes);
-const FONTS = [
-  { h2: { fontFamily: 'Arial' }, p: { fontFamily: 'Comic Sans MS' } },
-  { h2: { fontFamily: 'Comic Sans MS' }, p: { fontFamily: 'Bookman' } },
-  { h2: { fontFamily: 'Yellowtail' }, p: { fontFamily: 'Palatino' } },
-  { h2: { fontFamily: 'Palatino' }, p: { fontFamily: 'Yellowtail' } },
-  { h2: { fontFamily: 'Impact' }, p: { fontFamily: 'Georgia' } },
-  { h2: { fontFamily: 'Georgia' }, p: { fontFamily: 'Impact' } },
-];
 
 const ThemeSelector = () => {
   const [palettePage, setPalettePage] = useState(0);
   const [fontPage, setFontPage] = useState(0);
   const [isFallback, setFallback] = useState(false);
+  const [isFloatingBM, setFloatingBM] = useState(false);
   const fallbackColor = isFallback ? '#FF0000' : undefined;
+  const settingsActionColor = isFloatingBM ? '#3899EC' : undefined;
 
   useEffect(() => {
     document.onkeyup = event => {
@@ -74,11 +69,25 @@ const ThemeSelector = () => {
         <ToggleSwitch checked={isFallback} onChange={({ target }) => setFallback(target.checked)} />
         <span>Use RED fallback color</span>
       </div>
+      <div>
+        <ToggleSwitch
+          checked={isFloatingBM}
+          onChange={({ target }) => setFloatingBM(target.checked)}
+        />
+        <span>Use BM Blue floating action color</span>
+      </div>
       <div style={{ backgroundColor: palette.bgColor, padding: 4 }}>
         <ExampleApplication
           key={palettePage}
           initialState={exapmleState}
-          theme={{ palette: { ...palette, fallbackColor }, customStyles: FONTS[fontPage] }}
+          theme={{
+            palette: { ...palette, fallbackColor },
+            paletteConfig: {
+              settingsActionColor,
+              focusActionColor: settingsActionColor,
+            },
+            customStyles: FONTS[fontPage],
+          }}
         />
       </div>
     </>

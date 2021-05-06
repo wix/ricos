@@ -44,3 +44,17 @@ $PANEL_MAX_WIDTH: 360px;
   background-color: transparent;
   z-index: 8;
 }
+
+.textColorPopup_button {
+  margin-right: 10px;
+  position: relative;
+  .textColorPopup {
+    position: absolute;
+    top: 50px;
+    background: #fff;
+    border: 1px solid #ededed;
+    border-radius: 2px;
+    min-width: $PANEL_WIDTH;
+    max-width: $PANEL_MAX_WIDTH;
+  }
+}

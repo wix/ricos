@@ -16,6 +16,10 @@ https://twitter.com/CNN/status/1244886173409034240
 
 
 
+
+
+
+
 songs = pd.read_csv(SONGS_FILE)
 
 https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy.gif?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy.gif
@@ -26,8 +30,6 @@ Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel
 
 flowers
 https://sapirs0.wixsite.com/mysite/product-page/flowers
-
-https://soundcloud.com/cagdasdemirbilek/narcos-tuyo-rodrigo-amarante
 
 www.wix.com
 

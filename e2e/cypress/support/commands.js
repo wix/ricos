@@ -542,14 +542,6 @@ Cypress.Commands.add('redo', () => {
   cy.wait(100);
 });
 
-Cypress.Commands.add('addImage', () => {
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.IMAGE);
-});
-
-Cypress.Commands.add('addAccordion', () => {
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
-});
-
 Cypress.Commands.add('addAccordionPair', () => {
   cy.get(`[data-hook*=${ACCORDION_SETTINGS.NEW_PAIR}]`).click({ force: true });
 });

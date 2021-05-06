@@ -84,8 +84,37 @@ const exceedsMaxTextLimit = ({ contentFragment, editorState, maxTextLength, getS
   return contentLength - selectedTextLength + fragmentTextLength > maxTextLength;
 };
 
-const handlePastedTextFromEditor = (html, editorState, maxTextLength, getSelectedText) => {
-  const rawContent = getContent(html);
+export const removeUnsupportedPlugins = (rawContent, isPluginInstalled) => {
+  const { blocks, entityMap } = rawContent;
+  const newContent = { blocks: [], entityMap: {} };
+
+  blocks.forEach(block => {
+    let shouldAddBlock = false;
+    const { entityRanges } = block;
+
+    Object.entries(entityRanges).forEach(([, value]) => {
+      const entity = entityMap[value.key];
+      if (isPluginInstalled(entity.type)) {
+        newContent.entityMap[value.key] = entity;
+        shouldAddBlock = true;
+      }
+    });
+
+    if (shouldAddBlock || block.type !== 'atomic') {
+      newContent.blocks.push(block);
+    }
+  });
+  return newContent;
+};
+
+const handlePastedTextFromEditor = (
+  isPluginInstalled,
+  html,
+  editorState,
+  maxTextLength,
+  getSelectedText
+) => {
+  const rawContent = removeUnsupportedPlugins(getContent(html), isPluginInstalled);
   const contentFragment = convertFromRaw(rawContent);
   if (exceedsMaxTextLimit({ contentFragment, editorState, maxTextLength, getSelectedText })) {
     // eslint-disable-next-line no-console
@@ -176,6 +205,7 @@ export const convertParsedEditorStateObjectToRawData = rawContent => {
 const isCopyFromEditor = html => !!getContent(html);
 
 export default ({
+  isPluginInstalled,
   text,
   html,
   editorState,
@@ -185,7 +215,13 @@ export default ({
   getSelectedText,
 }) => {
   return isCopyFromEditor(html) && !pasteWithoutAtomic
-    ? handlePastedTextFromEditor(html, editorState, maxTextLength, getSelectedText)
+    ? handlePastedTextFromEditor(
+        isPluginInstalled,
+        html,
+        editorState,
+        maxTextLength,
+        getSelectedText
+      )
     : handlePastedTextFromOutsideEditor({
         text,
         html: normalizeHTML(html),

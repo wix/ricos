@@ -1,4 +1,4 @@
-import { Node, Node_Type, VideoSource } from 'ricos-schema';
+import { Node, Node_Type } from 'ricos-schema';
 import { getImageSrc } from '../../../imageUtils';
 import { LINK_TYPE } from '../../../consts';
 import { mergeTextNodes, RangedDecoration } from '../../draft/toDraft/decorationParsers';
@@ -25,10 +25,10 @@ const parseList = (listNode: Node): { type: Node_Type; item: string }[] =>
     })
     .flat(2);
 
-export const parseListNode = (node: Node) =>
+export const parseListNode = (node: Node, delimiter: string) =>
   parseList(node)
     .map(({ type, item }, index) => getListSymbol(index, type) + item)
-    .join('\n');
+    .join(delimiter);
 
 export const addLinksToText = (text: string, linkDecorations: RangedDecoration[] = []) =>
   linkDecorations
@@ -51,10 +51,11 @@ const removeTrailingNewLine = (text: string) =>
 
 export const parseImage = async (
   { imageData }: Node,
+  delimiter: string,
   urlShortener?: (url: string) => Promise<string>
 ): Promise<string> => {
-  const { caption } = imageData?.metadata || {};
-  const { fileName, width, height } = imageData?.src || {};
+  const { caption } = imageData || {};
+  const { src, width, height } = imageData?.image || {};
   const imageUrlOptions = Object.assign(
     {
       imageType: 'highRes',
@@ -63,28 +64,22 @@ export const parseImage = async (
     width && { requiredWidth: width },
     height && { requiredHeight: height }
   );
-  let url: string = getImageSrc({ file_name: fileName }, undefined, imageUrlOptions);
+  let url: string = getImageSrc({ file_name: src?.custom }, undefined, imageUrlOptions);
   if (urlShortener) {
     url = await urlShortener(url);
   }
-  return [caption, url].filter(Boolean).join('\n');
+  return [caption, url].filter(Boolean).join(delimiter);
 };
 
-const getDefaultVideoUrl = async (src: VideoSource) =>
-  `https://video.wixstatic.com/${src.pathname}`;
+const getDefaultVideoUrl = async (fileId: string) => `https://video.wixstatic.com/${fileId}`;
 
 export const parseVideo = async (
   { videoData }: Node,
-  getVideoUrl: (src: VideoSource) => Promise<string> = getDefaultVideoUrl
+  getVideoUrl: (fileId: string) => Promise<string> = getDefaultVideoUrl
 ): Promise<string> => {
-  const { src, url } = videoData || {};
-  const text = src ? getVideoUrl(src) : url;
+  const { custom, url } = videoData?.video?.src || {};
+  const text = custom ? getVideoUrl(custom) : url;
   return text || '';
-};
-
-export const parseSoundCloud = ({ soundCloudData }: Node): string => {
-  const { src } = soundCloudData || {};
-  return src || '';
 };
 
 export const parseGiphy = ({ giphyData }: Node): string => {
@@ -97,16 +92,16 @@ export const parseMap = ({ mapData }: Node): string => {
   return address || '';
 };
 
-export const parseVerticalEmbed = ({ verticalEmbedData }: Node): string => {
+export const parseVerticalEmbed = ({ verticalEmbedData }: Node, delimiter: string): string => {
   const { html, name } = verticalEmbedData?.selectedProduct || {};
   const href = html
     ?.replace(/.*href="/g, '')
     .replace(/.*=http/g, 'http')
     .replace(/" .*/g, '');
-  return [name, href].filter(Boolean).join('\n');
+  return [name, href].filter(Boolean).join(delimiter);
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {
-  const { url } = linkPreviewData?.config?.link || {};
+  const { url } = linkPreviewData?.link || {};
   return url || '';
 };

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { Separator } from 'wix-rich-content-editor-common';
+import { Separator, getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -22,6 +22,7 @@ export default function createAtomicPluginToolbar({
   buttons,
   theme,
   pubsub,
+  commonPubsub,
   helpers,
   settings,
   isMobile,
@@ -41,6 +42,7 @@ export default function createAtomicPluginToolbar({
   return class BaseToolbar extends Component {
     static propTypes = {
       hide: PropTypes.bool,
+      removeToolbarFocus: PropTypes.func,
     };
 
     constructor(props) {
@@ -72,6 +74,7 @@ export default function createAtomicPluginToolbar({
 
     componentDidMount() {
       pubsub.subscribe('focusedBlock', this.onVisibilityChanged);
+      commonPubsub.subscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.subscribe('componentState', this.onComponentStateChanged);
       pubsub.subscribe('componentData', this.onComponentDataChanged);
       this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
@@ -194,14 +197,6 @@ export default function createAtomicPluginToolbar({
       }
     };
 
-    scrollToolbar(event, leftDirection) {
-      event.preventDefault();
-      const { clientWidth, scrollWidth } = this.scrollContainer;
-      this.scrollContainer.scrollLeft = leftDirection
-        ? 0
-        : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
-    }
-
     /*eslint-disable complexity*/
     PluginToolbarButton = ({
       button,
@@ -230,6 +225,8 @@ export default function createAtomicPluginToolbar({
         settings: button.settings,
         ...commonButtonProps,
       };
+      const editorState = getEditorState();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const baseLinkProps = {
         onOverrideContent: this.onOverrideContent,
         helpers,
@@ -239,11 +236,12 @@ export default function createAtomicPluginToolbar({
         relValue,
         uiSettings,
         icons: icons.link,
-        editorState: getEditorState(),
+        editorState,
         linkTypes,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
+        pluginType,
         ...commonButtonProps,
       };
       const defaultButtonProps = {
@@ -409,6 +407,12 @@ export default function createAtomicPluginToolbar({
       ) : null;
     }
 
+    onKeyDown = e => {
+      if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+        this.props.removeToolbarFocus?.();
+      }
+    };
+
     onClick = e => {
       e.preventDefault();
     };
@@ -442,6 +446,9 @@ export default function createAtomicPluginToolbar({
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
           onClick: this.onClick,
+          onKeyDown: this.onKeyDown,
+          ref: this.handleToolbarRef,
+          tabIndex: '0',
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';

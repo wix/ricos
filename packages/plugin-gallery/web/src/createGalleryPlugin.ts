@@ -4,7 +4,7 @@ import { Component, DEFAULTS } from './gallery-component';
 import { GALLERY_TYPE, GalleryPluginEditorConfig } from './types';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const fileInputAccept = 'image/*';
+const fileInputAccept = '.jpg,.png,.gif,.jpeg,.jpe,.jfif,.bmp,.heic,.heif,.tfif,.tif,.webp';
 
 const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = config => {
   const type = GALLERY_TYPE;
@@ -57,6 +57,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
       t,
       anchorTarget,
       relValue,
+      isMobile: config.isMobile,
     }),
     helpers,
     anchorTarget,

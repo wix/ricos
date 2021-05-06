@@ -4,7 +4,12 @@ import fixture from '../../../../../../../e2e/tests/fixtures/intro.json';
 import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
 import anchorBlocksFixture from '../../../../../../../e2e/tests/fixtures/all-blocks-with-anchors.json';
 import { ANCHOR_TYPE } from '../../..';
-import { Decoration_Type, Node_Type } from 'ricos-schema';
+import {
+  Decoration_Type,
+  Node_Type,
+  PluginContainerData_Alignment,
+  PluginContainerData_Width_Type,
+} from 'ricos-schema';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
 const fixtures = { intro: fixture, complex: complexFixture };
@@ -28,27 +33,21 @@ describe('migrate to draft', () => {
 
   const imageNodeData = {
     nodes: [],
-    type: 'IMAGE',
+    type: Node_Type.IMAGE,
     key: 'eoba3',
     imageData: {
-      config: {
-        size: 'CONTENT',
-        alignment: 'CENTER',
-        showTitle: true,
-        showDescription: true,
-        disableExpand: false,
+      containerData: {
+        width: { type: PluginContainerData_Width_Type.CONTENT },
+        alignment: PluginContainerData_Alignment.CENTER,
       },
-      src: {
-        id: '036c6bf6cef5e4409848eb4eb6f80de1',
-        originalFileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
-        fileName: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+      image: {
+        src: { custom: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg' },
         width: 2898,
         height: 3354,
       },
-      metadata: {
-        alt: 'feet',
-        caption: 'The caption!',
-      },
+      disableExpand: false,
+      altText: 'feet',
+      caption: 'The caption!',
     },
   };
 
@@ -56,13 +55,10 @@ describe('migrate to draft', () => {
     config: {
       alignment: 'center',
       size: 'content',
-      showTitle: true,
-      showDescription: true,
       disableExpand: false,
     },
     src: {
-      id: '036c6bf6cef5e4409848eb4eb6f80de1',
-      original_file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
+      id: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
       file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
       width: 2898,
       height: 3354,
@@ -86,7 +82,7 @@ describe('migrate to draft', () => {
   });
 
   const mentionDecoration = {
-    type: 'MENTION',
+    type: Decoration_Type.MENTION,
     mentionData: {
       name: 'Test One',
       slug: 'testone',

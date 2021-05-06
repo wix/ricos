@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction } from 'lodash';
+import { isFunction, isNumber } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
@@ -9,6 +9,10 @@ import {
   textWrapClassName,
   normalizeUrl,
   TABLE_TYPE,
+  IMAGE_TYPE,
+  HTML_TYPE,
+  ACTION_BUTTON_TYPE,
+  LINK_BUTTON_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -21,7 +25,6 @@ class PluginViewer extends PureComponent {
       componentData,
       styles,
       context: { theme, isMobile },
-      innerRCEViewerProps,
     } = this.props;
     const { size, alignment, textWrap, custom } = pluginComponent.classNameStrategies || {};
     const hasLink = this.componentHasLink();
@@ -34,7 +37,6 @@ class PluginViewer extends PureComponent {
         [theme.anchor]: hasLink && theme.anchor,
         [styles.embed]: hasLink && html,
         [styles.horizontalScrollbar]: pluginComponent.withHorizontalScroll,
-        [styles.renderedInTable]: innerRCEViewerProps.renderedInTable,
       },
       isFunction(alignment)
         ? alignment(componentData, theme, styles, isMobile)
@@ -128,10 +130,10 @@ class PluginViewer extends PureComponent {
 
         // TODO: more generic logic?
         let customStyles;
-        if (config.size === 'inline' || type === 'wix-draft-plugin-html') {
+        if (config.size === 'inline' || type === HTML_TYPE) {
           customStyles = { width: config.width };
         }
-        if (type === 'wix-draft-plugin-image') {
+        if (type === IMAGE_TYPE) {
           const { src = {} } = componentData;
           const { size } = config;
           if (
@@ -141,6 +143,10 @@ class PluginViewer extends PureComponent {
           ) {
             customStyles = { width: src.width, maxWidth: '100%' };
           }
+        }
+
+        if ((type === ACTION_BUTTON_TYPE || type === LINK_BUTTON_TYPE) && isNumber(config.width)) {
+          componentProps.style = { width: config.width };
         }
         if (customStyles) {
           containerProps.style = customStyles;

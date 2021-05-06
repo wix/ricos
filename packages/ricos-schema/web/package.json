@@ -1,6 +1,6 @@
 {
   "name": "ricos-schema",
-  "version": "8.29.1",
+  "version": "8.33.1",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -18,9 +18,9 @@
     "dist",
     "src/**/*.proto"
   ],
-  "main": "dist/cjs/rich_content/index.js",
-  "module": "dist/esm/rich_content/index.js",
-  "types": "dist/types/rich_content/index.d.ts",
+  "main": "dist/cjs/wix/rich_content/v1/index.js",
+  "module": "dist/esm/wix/rich_content/v1/index.js",
+  "types": "dist/types/wix/rich_content/v1/index.d.ts",
   "scripts": {
     "lint": ":",
     "clean": "rm -rf dist src/generated",

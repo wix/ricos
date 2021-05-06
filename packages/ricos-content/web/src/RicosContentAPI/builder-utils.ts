@@ -12,6 +12,7 @@ import {
 } from 'lodash/fp';
 import { RichContent, TextData, Node } from 'ricos-schema';
 import { task, either, firstResolved } from '../fp-utils';
+import { PartialDeep } from '../types';
 
 // predicates
 const isIndexFound = either(index => index !== -1);
@@ -86,20 +87,53 @@ export function setNode({
   );
 }
 
+export function toggleNodeType({
+  node: sourceNode,
+  key: nodeKey,
+  canToggle = () => false,
+  convert,
+  content,
+}: {
+  node: PartialDeep<Node>;
+  key: string;
+  canToggle: ({
+    sourceNode,
+    targetNode,
+  }: {
+    sourceNode: PartialDeep<Node>;
+    targetNode: Node;
+  }) => boolean;
+  convert: ({
+    sourceNode,
+    targetNode,
+  }: {
+    sourceNode: PartialDeep<Node>;
+    targetNode: Node;
+  }) => PartialDeep<Node>;
+  content: RichContent;
+}): RichContent {
+  const isToggleable = either(canToggle);
+  return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes))
+    .chain((index: number) => isToggleable({ targetNode: content.nodes[index], sourceNode }))
+    .map(({ targetNode, sourceNode }) => convert({ targetNode, sourceNode }))
+    .map((node: Node) => setNode({ node: { ...node, key: nodeKey }, key: nodeKey, content }))
+    .fork(() => content, identity);
+}
+
 export function updateNode({
   node: mergedNode,
   key: nodeKey,
   content,
 }: {
-  node: Node;
+  node: PartialDeep<Node>;
   key: string;
   content: RichContent;
 }): RichContent {
   return isIndexFound(
     findIndex(({ key, type }) => key === nodeKey && type === mergedNode.type, content.nodes)
   )
-    .map((index: number) => ({ node: merge(content.nodes[index], mergedNode), index }))
-    .map(({ node, index }) => replaceNode(content, { ...node, key: nodeKey }, index))
+    .map((index: number) => merge(content.nodes[index], mergedNode))
+    .map((node: Node) => setNode({ node: { ...node, key: nodeKey }, key: nodeKey, content }))
     .fork(() => content, identity);
 }
 

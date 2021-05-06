@@ -5,6 +5,7 @@ import {
   ViewerPlugin,
   EditorPlugin,
   InlineStyleMapper,
+  CreatePluginsDataMap,
 } from 'wix-rich-content-common';
 
 export type BasePlugin = EditorPlugin & ViewerPlugin;
@@ -14,6 +15,7 @@ export interface EditorPluginsStrategy {
   config: Record<string, any>;
   plugins: CreatePluginFunction[];
   ModalsMap: ModalsMap;
+  createPluginsDataMap: CreatePluginsDataMap;
 }
 
 export interface ViewerPluginsStrategy {
