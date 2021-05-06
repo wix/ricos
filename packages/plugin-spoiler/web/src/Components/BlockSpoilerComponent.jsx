@@ -5,6 +5,7 @@ import SpoilerContainer from './SpoilerContainer';
 import classNames from 'classnames';
 import styles from '../../statics/styles/spoiler.scss';
 import { debounce } from 'lodash';
+import { SPOILER_TYPE } from '../types';
 
 const Overlay = ({ hideOverlay, pluginType }) =>
   !hideOverlay ? (
@@ -52,8 +53,10 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   onRevealSpoiler = e => {
+    const { helpers, type } = this.props;
     e.preventDefault();
     this.setState({ isReveal: true });
+    helpers.onViewerAction?.(SPOILER_TYPE, `spoiler_reveal_${type}`);
   };
 
   renderSpoilerContainer = () => {
@@ -68,6 +71,7 @@ class BlockSpoilerComponent extends React.Component {
       handleDescriptionChange,
       isMobile,
       t,
+      helpers,
     } = this.props;
 
     const width = this.elementRef?.offsetWidth;
@@ -88,6 +92,7 @@ class BlockSpoilerComponent extends React.Component {
           handleDescriptionChange={handleDescriptionChange}
           isMobile={isMobile}
           t={t}
+          helpers={helpers}
         />
       )
     );
@@ -155,6 +160,8 @@ BlockSpoilerComponent.propTypes = {
   width: PropTypes.object,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default BlockSpoilerComponent;
