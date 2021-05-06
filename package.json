@@ -8,8 +8,7 @@
     "bundle-analyzer",
     "!website"
   ],
-  "resolutions": {
-    "rollup": "1.31.1",
+  "resolutions": {    
     "@types/react-i18next/@types/i18next": "11.9.0",
     "ab-translate": "1.1.557",
     "@types/react": "^16.13.1"
@@ -91,6 +90,7 @@
     "@lerna/project": "^3.18.0",
     "@rollup/plugin-alias": "^3.0.1",
     "@rollup/plugin-json": "^4.0.0",
+    "@stylable/rollup-plugin": "4.1.0-alpha.3",
     "@svgr/rollup": "^5.4.0",
     "@testing-library/react": "^9.4.0",
     "@types/classnames": "^2.2.10",
@@ -165,7 +165,7 @@
     "react-dom": "^16.13.1",
     "react-svg-loader": "^3.0.3",
     "replace-in-file": "^6.1.0",
-    "rollup": "^1.31.1",
+    "rollup": "^2.0.0",
     "rollup-plugin-analyzer": "^3.0.0",
     "rollup-plugin-babel": "^4.3.0",
     "rollup-plugin-commonjs": "^10.1.0",
