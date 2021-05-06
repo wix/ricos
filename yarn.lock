@@ -4319,10 +4319,10 @@
   dependencies:
     postcss "5 - 7"
 
-"@types/draft-js@^0.10.41":
-  version "0.10.45"
-  resolved "https://registry.yarnpkg.com/@types/draft-js/-/draft-js-0.10.45.tgz#4ab5b0785fcacdea7d5a836d0024158fa8108e70"
-  integrity sha512-ozmVQEI088kGQfY2XPB0b+YRNbkv1mxdxcLieBLCc2F4IkVWMs6mnIaEbBRExmM3H/Amm9CvhlmIYmDL4CjBvA==
+"@types/draft-js@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@types/draft-js/-/draft-js-0.11.2.tgz#0b3b78a61f186a4cb48c0ad8b059275200a53c63"
+  integrity sha512-oETFZPBenedmGD1wzuRWv0sMBvM1Whj2kX/oyJbPdzOaDPQ1FHOS4NoDONLlHIDiak6n2z9Pbfq04yY46Tni7Q==
   dependencies:
     "@types/react" "*"
     immutable "~3.7.4"
@@ -10454,11 +10454,6 @@ draft-js@^0.11.7:
     fbjs "^2.0.0"
     immutable "~3.7.4"
     object-assign "^4.1.1"
-
-draftjs-conductor@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/draftjs-conductor/-/draftjs-conductor-1.0.1.tgz#4f7e65f5a7cbf4e24bb047de2f596fe9bbadff33"
-  integrity sha512-j+DcuLkuaVgSoLxFPwQZhDRC5gU4+AhRTo8N32UXVlm76uOuihXtjBgGOv8WvIJdEPaRZSR+4UpYZRid+36Kzw==
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -27104,10 +27099,10 @@ wix-ui-core@^3.0.186:
     wix-ui-test-utils "^1.0.151"
     yoshi-stylable-dependencies "^4.49.0"
 
-wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.308:
-  version "2.0.312"
-  resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.312.tgz#9966247f1ddf72919173742ccd24ad10b6a2cb71"
-  integrity sha512-Vub9QAtmSsYrUis70jatgGfrQ6xHWLuRPIQbyRL36Ps4/sWgtG9ArO7w2L90Qq1bR/EVTkOGwcqocHaoINCFww==
+wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.308, wix-ui-icons-common@^2.0.313:
+  version "2.0.313"
+  resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.313.tgz#57c50629c4e135f28be099d9ce2eb2913841f5a3"
+  integrity sha512-HQt3jZXeEXOCpLQKrgSE+i+qMxGCJJuBtEsyxxJl5wK937oBnkGnp+Oj6UYmeE2aTz3qQ5qlSF6wgJWbKqyOsw==
   dependencies:
     fuse.js "^6.4.5"
     use-debounce "^4.0.0"
