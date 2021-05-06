@@ -88,8 +88,8 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
     const viewerProps = {
       helpers: {
         // This is for debugging only
-        onViewerAction: async (actionName, pluginId, value) =>
-          console.log('onViewerAction', actionName, pluginId, value),
+        onViewerAction: async (pluginId, actionName, value) =>
+          console.log('onViewerAction', pluginId, actionName, value),
         onViewerLoaded: async (...args) => console.log('onViewerLoaded', ...args),
       },
       localeResource,

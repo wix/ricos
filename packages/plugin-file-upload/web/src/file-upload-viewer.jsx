@@ -254,7 +254,7 @@ class FileUploadViewer extends PureComponent {
     return <iframe ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
   }
 
-  onFileClick = () => this.props.helpers.onViewerAction?.(FILE_UPLOAD_TYPE, 'download_file');
+  onFileClick = () => this.props.helpers.onViewerAction?.(FILE_UPLOAD_TYPE, 'Click');
 
   render() {
     const { componentData, theme, setComponentUrl } = this.props;

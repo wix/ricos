@@ -344,7 +344,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
+    helpers.onViewerAction?.(IMAGE_TYPE, 'Click', 'expand_image');
     this.hasExpand() && onExpand?.(this.props.blockKey);
   };
 

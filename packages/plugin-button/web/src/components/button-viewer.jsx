@@ -11,7 +11,7 @@ class ButtonViewer extends PureComponent {
     const isActionButton = this.isActionButton();
     this.props.helpers.onViewerAction?.(
       isActionButton ? ACTION_BUTTON_TYPE : LINK_BUTTON_TYPE,
-      'button_click'
+      'Click'
     );
     isActionButton && this.props.onClick(args);
   };
