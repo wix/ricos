@@ -190,6 +190,7 @@ const getToolbarSettings = () => [
 
 interface Props {
   content?: DraftContent;
+  injectedContent?: DraftContent;
   onChange?: RicosEditorProps['onChange'];
   isMobile?: boolean;
   pluginsToDisplay?: string[];
@@ -213,7 +214,16 @@ class EditorWrapper extends React.Component<Props> {
     : plugins;
 
   render() {
-    const { content, theme, onChange, isMobile, toolbarSettings, onBlur, onFocus } = this.props;
+    const {
+      content,
+      injectedContent,
+      theme,
+      onChange,
+      isMobile,
+      toolbarSettings,
+      onBlur,
+      onFocus,
+    } = this.props;
 
     return (
       <RicosEditor
@@ -221,6 +231,7 @@ class EditorWrapper extends React.Component<Props> {
         plugins={this.editorPlugins}
         theme={theme}
         content={content}
+        injectedContent={injectedContent}
         isMobile={isMobile}
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
