@@ -21,6 +21,15 @@
 - `file-upload`
   - [#2461](https://github.com/wix-incubator/rich-content/pull/2461) restore old design to include the download key
   
+### :rocket: New Feature
+- `accordion`
+  - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+- `table`
+  - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+
+### :bug: Bug Fix
+- `editor`
+  - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
 </details>
 <hr/>
 
