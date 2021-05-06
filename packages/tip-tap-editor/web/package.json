@@ -36,9 +36,8 @@
   },
   "dependencies": {
     "@tiptap/core": "^2.0.0",
-    "@tiptap/starter-kit": "^2.0.0",
-    "@tiptap/extension-underline": "^2.0.0",
-    "@tiptap/extension-bold":  "^2.0.0"
+    "@tiptap/starter-kit": "latest",
+    "@tiptap/extension-underline": "latest"
   },
   "unpkg": true,
   "publishConfig": {
