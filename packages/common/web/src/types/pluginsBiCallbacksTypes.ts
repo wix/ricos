@@ -4,12 +4,15 @@ import {
   TableEventsParamsMappers,
 } from './tableBiCallbacksTypes';
 
-export type GenericEventsName = 'addPluginLink';
+export type GenericEventsName =
+  | 'addPluginLink'
+  | 'settingsModalOpenedForPlugin'
+  | 'settingsModalClosedForPlugin';
 export type EventName = TableEventsName | GenericEventsName;
 export type PluginEventParams = TableBiCallbacksParams;
 
 export interface PluginsActionGenericParams {
-  version: string;
+  version?: string;
   plugin_id: string;
 }
 interface AddPluginLinkParams extends PluginsActionGenericParams {
@@ -20,8 +23,22 @@ interface AddPluginLinkParams extends PluginsActionGenericParams {
   anchor?: string;
 }
 
+interface AddPluginLinkParams extends PluginsActionGenericParams {
+  category: string;
+  link?: string;
+  nofollow?: boolean;
+  newTab?: string;
+  anchor?: string;
+}
+
+interface SettingsModalParams extends PluginsActionGenericParams {
+  settingSessionId: string;
+}
+
 export interface GenericParamsMappers {
   addPluginLink: AddPluginLinkParams;
+  settingsModalOpenedForPlugin: SettingsModalParams;
+  settingsModalClosedForPlugin: SettingsModalParams;
 }
 
 interface EventsParamsMappers extends TableEventsParamsMappers, GenericParamsMappers {}
