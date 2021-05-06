@@ -15,12 +15,16 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
   ### :bug: Bug Fix
   - `link`
     - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
   - `general`
     - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
+
+  ### :rocket: New Feature
+  - `plugin-link`
+    - [#2468](https://github.com/wix/ricos/pull/2468) add optional `customAnchorScroll` function as alternative to built-in scrolling and url replacement
 
 </details>
 <hr/>
@@ -50,7 +54,7 @@
   - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
 - `gallery`
   - [#2402](https://github.com/wix-incubator/rich-content/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
-  
+
 ### :house: Internal
 - `e2e`
   - [#2381](https://github.com/wix/ricos/pull/2381) undo redo tests improvement
@@ -88,7 +92,7 @@
   - [#2398](https://github.com/wix-incubator/rich-content/pull/2398)  Avoid exception when image src missing
 - `editor`
   - [#2385](https://github.com/wix-incubator/rich-content/pull/2385) toolbar shortcuts in mac & windows
-  
+
 ## 8.30.3 (April 22, 2021)
 ### :bug: Bug Fix
 - `image`
