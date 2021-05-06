@@ -31,7 +31,7 @@ const TwitterButton: FunctionComponent<{
   onViewerAction?: (pluginId: string, action: string, value: string) => void;
 }> = ({ selectedText, onViewerAction }) => {
   const onClick = selectedText => {
-    onViewerAction?.('TWITTER', 'click_to_tweet', selectedText);
+    onViewerAction?.('TWITTER', 'Click', selectedText);
     openTwitter(selectedText);
   };
   return (

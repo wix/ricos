@@ -71,7 +71,7 @@ export class MapViewer extends Component {
 
   setRootElementRef = elm => (this.element = elm);
 
-  onClick = () => this.props.helpers.onViewerAction?.(MAP_TYPE, 'map_click');
+  onClick = () => this.props.helpers.onViewerAction?.(MAP_TYPE, 'Click');
 
   render() {
     const {
