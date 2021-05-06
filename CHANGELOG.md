@@ -16,21 +16,29 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-  ### :bug: Bug Fix
-  - `external-toolbar`
-    - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
-  - `plugin-commons`
-    - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
-  - `link`
-    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
-  - `general`
-    - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
-  - `html-embed`
-    - [#2450](https://github.com/wix-incubator/rich-content/pull/2450) fixes embeded iframes width to be 100% fixed
-
 </details>
 <hr/>
+
+## 8.33.1 (May 6, 2021)
+### :book: Documentation
+- `storybook`
+  - [#2421](https://github.com/wix-incubator/rich-content/pull/2421) ContentBuilder API
+
+### :bug: Bug Fix
+- `external-toolbar`
+  - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
+- `plugin-commons`
+  - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
+- `link`
+  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
+- `general`
+  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
+- `html-embed`
+  - [#2450](https://github.com/wix-incubator/rich-content/pull/2450) fixes embeded iframes width to be 100% fixed
+
+### :nail_care: Polish
+- `ricos-content`
+  - [#2421](https://github.com/wix-incubator/rich-content/pull/2421) ContentBuilder exposed separately
 
 ## 8.33.0 (May 3, 2021)
 
