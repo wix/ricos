@@ -38,7 +38,7 @@ class SpoilerViewer extends Component {
   handleClick = event => {
     event.preventDefault();
     this.showText();
-    this.props.settings.onViewerAction?.(SPOILER_TYPE, 'reveal_text');
+    this.props.settings.onViewerAction?.(SPOILER_TYPE, 'Click', 'reveal_text');
   };
 
   showText = () => {

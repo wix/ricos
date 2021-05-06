@@ -37,10 +37,7 @@ class AccordionPair extends Component {
   onClick = () => {
     const { isExpanded, onCollapseClick, onExpandClick, idx, helpers } = this.props;
     isExpanded ? onCollapseClick(idx) : onExpandClick(idx);
-    helpers.onViewerAction?.(
-      ACCORDION_TYPE,
-      `${isExpanded ? 'collapse' : 'expand'}_collapsible_list`
-    );
+    helpers.onViewerAction?.(ACCORDION_TYPE, 'Click', `${isExpanded ? 'collapse' : 'expand'}`);
   };
 
   render() {

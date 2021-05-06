@@ -14,7 +14,12 @@ class VerticalEmbedComponent extends PureComponent {
     validate(props.componentData, verticalEmbedSchema);
   }
 
-  onClick = () => this.props.helpers.onViewerAction?.(VERTICAL_EMBED_TYPE, 'vertical_embed_click');
+  onClick = () =>
+    this.props.helpers.onViewerAction?.(
+      VERTICAL_EMBED_TYPE,
+      'Click',
+      this.props.componentData.type
+    );
 
   render() {
     const {
