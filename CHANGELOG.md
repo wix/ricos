@@ -29,6 +29,9 @@
 
 ### :bug: Bug Fix
 - `editor`
+  - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
+
+  </details>
 <hr/>
 
 ## 8.33.1 (May 6, 2021)
