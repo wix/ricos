@@ -1,30 +1,40 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useMemo, useState } from 'react';
 import { RichContentEditorBox, RichContentViewerBox, Section } from './StoryParts';
 import EditorWrapper from './EditorWrapper';
 import ViewerWrapper from './ViewerWrapper';
 import editorSourceCode from '!!raw-loader!../Components/EditorWrapper';
 import viewerSourceCode from '!!raw-loader!../Components/ViewerWrapper';
-import styles from '../Components/styles.scss';
+import styles from './styles.scss';
 import { DraftContent, RicosTheme } from 'ricos-editor';
 
 const ExampleApplication: FunctionComponent<{
   initialState?: DraftContent;
   theme?: RicosTheme;
-}> = ({ initialState, theme }) => {
+  display?: 'Editor' | 'Viewer' | 'Both';
+}> = ({ initialState, theme, display = 'Both' }) => {
   const [content, setContent] = useState(initialState);
+  const showEditor = useMemo(() => display === 'Both' || display === 'Editor', [display]);
+  const showViewer = useMemo(() => display === 'Both' || display === 'Viewer', [display]);
 
   return (
     <Section type={Section.Types.COMPARISON}>
-      <RichContentEditorBox sourcecode={editorSourceCode}>
-        <EditorWrapper
-          content={content}
-          theme={{ ...theme, parentClass: styles['rce-wrapper'] }}
-          onChange={setContent}
-        />
-      </RichContentEditorBox>
-      <RichContentViewerBox sourcecode={viewerSourceCode}>
-        <ViewerWrapper content={content} theme={{ ...theme, parentClass: styles['rcv-wrapper'] }} />
-      </RichContentViewerBox>
+      {showEditor && (
+        <RichContentEditorBox sourcecode={editorSourceCode}>
+          <EditorWrapper
+            content={content}
+            theme={{ ...theme, parentClass: styles['rce-wrapper'] }}
+            onChange={setContent}
+          />
+        </RichContentEditorBox>
+      )}
+      {showViewer && (
+        <RichContentViewerBox sourcecode={viewerSourceCode}>
+          <ViewerWrapper
+            content={content}
+            theme={{ ...theme, parentClass: styles['rcv-wrapper'] }}
+          />
+        </RichContentViewerBox>
+      )}
     </Section>
   );
 };
