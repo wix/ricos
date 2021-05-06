@@ -623,6 +623,12 @@ const config: RichContentEditorProps['config'] = {
     //     },
     //   },
     // },
+    // customAnchorScroll: (event, anchor) => {
+    //   const anchorString = `viewer-${anchor}`;
+    //   const element = document.getElementById(anchorString);
+    //   // ... do custom logic here
+    //   element.scrollIntoView({ behavior: 'smooth' });
+    // },
   },
   [CODE_BLOCK_TYPE]: {
     // toolbar: {
