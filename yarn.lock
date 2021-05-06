@@ -27104,10 +27104,10 @@ wix-ui-core@^3.0.186:
     wix-ui-test-utils "^1.0.151"
     yoshi-stylable-dependencies "^4.49.0"
 
-wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.308:
-  version "2.0.312"
-  resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.312.tgz#9966247f1ddf72919173742ccd24ad10b6a2cb71"
-  integrity sha512-Vub9QAtmSsYrUis70jatgGfrQ6xHWLuRPIQbyRL36Ps4/sWgtG9ArO7w2L90Qq1bR/EVTkOGwcqocHaoINCFww==
+wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.308, wix-ui-icons-common@^2.0.313:
+  version "2.0.313"
+  resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.313.tgz#57c50629c4e135f28be099d9ce2eb2913841f5a3"
+  integrity sha512-HQt3jZXeEXOCpLQKrgSE+i+qMxGCJJuBtEsyxxJl5wK937oBnkGnp+Oj6UYmeE2aTz3qQ5qlSF6wgJWbKqyOsw==
   dependencies:
     fuse.js "^6.4.5"
     use-debounce "^4.0.0"

@@ -34,6 +34,8 @@
     "react-syntax-highlighter": "12.2.1",
     "ricos-editor": "8.33.0",
     "ricos-viewer": "8.33.0",
+    "ricos-content": "8.33.0",
+    "ricos-schema": "8.33.0",
     "thread-loader": "^3.0.0",
     "ts-loader": "^8.0.4",
     "wix-rich-content-common": "8.33.0",
@@ -71,6 +73,7 @@
     "wix-rich-content-preview": "8.33.0",
     "wix-rich-content-text-selection-toolbar": "8.33.0",
     "wix-rich-content-viewer": "8.33.0",
+    "wix-ui-icons-common": "^2.0.313",
     "wix-style-react": "^9.0.0"
   },
   "devDependencies": {
