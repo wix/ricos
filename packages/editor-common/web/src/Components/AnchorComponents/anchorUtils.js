@@ -31,6 +31,20 @@ export const getAnchorableBlocks = editorState => {
           ? mapAtomicBlocks(block, editorState)
           : mapInlineBlocks(block);
         anchorableBlocks.push(anchorableBlock);
+      } else if (isInnerRCEBlock(block, editorState)) {
+        const { type, entityData } = getBlockInfo(editorState, block.key);
+        if (type === 'wix-rich-content-plugin-accordion') {
+          entityData.pairs.forEach(pair => {
+            const titleEditorState = pair.title;
+            addInnerRCEBlocksToAnchorableList(titleEditorState, anchorableBlocks, selectedBlockKey);
+            const contentEditorState = pair.content;
+            addInnerRCEBlocksToAnchorableList(
+              contentEditorState,
+              anchorableBlocks,
+              selectedBlockKey
+            );
+          });
+        }
       }
     });
 
@@ -41,6 +55,27 @@ export const getAnchorableBlocks = editorState => {
 export const filterAnchorableBlocks = (array, filter) => {
   return array.filter(block => block.anchorType === filter);
 };
+
+function addInnerRCEBlocksToAnchorableList(editorState, anchorableBlocks, selectedBlockKey) {
+  const contentState = editorState.getCurrentContent();
+  contentState
+    .getBlockMap()
+    .filter(block => selectedBlockKey !== block.key)
+    .forEach(block => {
+      if (isAnchorableBlock(block, editorState)) {
+        const anchorableBlock = isAtomicBlock(block)
+          ? mapAtomicBlocks(block, editorState)
+          : mapInlineBlocks(block);
+        anchorableBlocks.push(anchorableBlock);
+      }
+    });
+}
+
+function isInnerRCEBlock(block, editorState) {
+  const { type } = getBlockInfo(editorState, block.key);
+  const rceInRcePlugins = ['wix-rich-content-plugin-table', 'wix-rich-content-plugin-accordion'];
+  return rceInRcePlugins.includes(type);
+}
 
 const mapBlocksTypesAndIndexes = (block, typesWithIndexes) => {
   if (!typesWithIndexes[block.anchorType]) {
