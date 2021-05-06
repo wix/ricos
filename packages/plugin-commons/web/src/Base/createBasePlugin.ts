@@ -162,6 +162,7 @@ const createBasePlugin = (
         all: config.toolbar.InlineButtons,
         hidden: settings?.toolbar?.hidden || [],
       },
+      commonPubsub,
       theme: { ...toolbarTheme, ...config.theme },
       pubsub,
       helpers,
