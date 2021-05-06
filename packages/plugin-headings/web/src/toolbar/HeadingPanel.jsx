@@ -55,20 +55,11 @@ export default class HeadingsDropDownPanel extends Component {
     return this.props.onSave(type, headingName);
   };
 
-  defaultHeadings = () => {
-    const { experiments } = this.context;
-    const defaults = [...DEFAULT_HEADERS_DROPDOWN_OPTIONS];
-    if (experiments?.useHeadingOne?.enabled) {
-      defaults.splice(1, 0, 'H1');
-    }
-    return defaults;
-  };
-
   render() {
     const {
       isMobile,
       translateHeading,
-      customHeadingsOptions = this.defaultHeadings(),
+      customHeadingsOptions = DEFAULT_HEADERS_DROPDOWN_OPTIONS,
     } = this.props;
     const { heading } = this.state;
     const { styles } = this;
