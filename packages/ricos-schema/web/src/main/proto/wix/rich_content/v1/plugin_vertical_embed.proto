@@ -20,7 +20,6 @@ message VerticalEmbedData {
     
     VerticalType type = 1;
     SelectedProduct selectedProduct = 2;
-    VerticalEmbedConfig config = 3;
 }
 
 message VerticalEmbedConfig {}
