@@ -102,6 +102,6 @@ export const parseVerticalEmbed = ({ verticalEmbedData }: Node, delimiter: strin
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {
-  const { url } = linkPreviewData?.config?.link || {};
+  const { url } = linkPreviewData?.link || {};
   return url || '';
 };

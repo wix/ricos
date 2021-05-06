@@ -197,7 +197,7 @@ const createBaseComponent = ({
 
     onComponentLinkChange = linkData => {
       if (!linkData) {
-        this.updateLinkData(null);
+        this.removeLinkData();
         return;
       }
       const { url, anchor, target, rel } = linkData;
@@ -218,6 +218,13 @@ const createBaseComponent = ({
         this.updateComponentConfig({ spoiler: data });
       }
     };
+
+    removeLinkData() {
+      const componentData = pubsub.get('componentData');
+      const { config } = componentData;
+      const { link: _, ...rest } = config;
+      pubsub.set('componentData', { ...componentData, config: { ...rest } });
+    }
 
     updateLinkData = link => {
       pubsub.update('componentData', { config: { link: null } }); // clean the link data (prevent deep merging bug with anchor/link)

@@ -6,7 +6,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "eeplb",
+          "key": "5bm9n",
           "nodes": [],
           "textData": {
             "text": "Lorem ipsum dolor sit amet",
@@ -19,7 +19,7 @@
         },
         {
           "type": "TEXT",
-          "key": "6nva1",
+          "key": "ck1k8",
           "nodes": [],
           "textData": {
             "text": " 😎, ",
@@ -28,7 +28,7 @@
         },
         {
           "type": "TEXT",
-          "key": "eb8sq",
+          "key": "fse8o",
           "nodes": [],
           "textData": {
             "text": "consectetur adipiscing",
@@ -41,7 +41,7 @@
         },
         {
           "type": "TEXT",
-          "key": "fkrek",
+          "key": "ej04t",
           "nodes": [],
           "textData": {
             "text": " elit. Quisque quis ex ",
@@ -50,7 +50,7 @@
         },
         {
           "type": "TEXT",
-          "key": "afrlt",
+          "key": "d42s5",
           "nodes": [],
           "textData": {
             "text": "auctor",
@@ -63,7 +63,7 @@
         },
         {
           "type": "TEXT",
-          "key": "s8ro",
+          "key": "9sh8p",
           "nodes": [],
           "textData": {
             "text": ", facilisis lectus id, sodales ipsum. In ",
@@ -72,7 +72,7 @@
         },
         {
           "type": "TEXT",
-          "key": "51i5h",
+          "key": "735pu",
           "nodes": [],
           "textData": {
             "text": "sagittis ",
@@ -85,7 +85,7 @@
         },
         {
           "type": "TEXT",
-          "key": "42ld2",
+          "key": "ds2ou",
           "nodes": [],
           "textData": {
             "text": "ultrices",
@@ -101,7 +101,7 @@
         },
         {
           "type": "TEXT",
-          "key": "an9mf",
+          "key": "81h76",
           "nodes": [],
           "textData": {
             "text": " sem",
@@ -114,7 +114,7 @@
         },
         {
           "type": "TEXT",
-          "key": "2khun",
+          "key": "530ua",
           "nodes": [],
           "textData": {
             "text": " ac elementum. Ut ",
@@ -123,7 +123,7 @@
         },
         {
           "type": "TEXT",
-          "key": "easfq",
+          "key": "9n3ac",
           "nodes": [],
           "textData": {
             "text": "ut",
@@ -144,7 +144,7 @@
         },
         {
           "type": "TEXT",
-          "key": "fu132",
+          "key": "dkhl",
           "nodes": [],
           "textData": {
             "text": " iaculis ex. ",
@@ -153,7 +153,7 @@
         },
         {
           "type": "TEXT",
-          "key": "4b93o",
+          "key": "7qdc7",
           "nodes": [],
           "textData": {
             "text": "Lorem ipsum",
@@ -166,7 +166,7 @@
         },
         {
           "type": "TEXT",
-          "key": "e6qva",
+          "key": "4ibrk",
           "nodes": [],
           "textData": {
             "text": " dolor sit ",
@@ -175,7 +175,7 @@
         },
         {
           "type": "TEXT",
-          "key": "dlk18",
+          "key": "3in72",
           "nodes": [],
           "textData": {
             "text": "@amet",
@@ -192,7 +192,7 @@
         },
         {
           "type": "TEXT",
-          "key": "bmbhn",
+          "key": "5sqgg",
           "nodes": [],
           "textData": {
             "text": ", consectetur adipiscing elit. In hac ",
@@ -201,7 +201,7 @@
         },
         {
           "type": "TEXT",
-          "key": "1jfr2",
+          "key": "1amk4",
           "nodes": [],
           "textData": {
             "text": "habitasse ",
@@ -217,7 +217,7 @@
         },
         {
           "type": "TEXT",
-          "key": "88qt2",
+          "key": "bcbmj",
           "nodes": [],
           "textData": {
             "text": "platea",
@@ -234,7 +234,7 @@
         },
         {
           "type": "TEXT",
-          "key": "d48uc",
+          "key": "ql0p",
           "nodes": [],
           "textData": {
             "text": " dictumst",
@@ -250,7 +250,7 @@
         },
         {
           "type": "TEXT",
-          "key": "2ert8",
+          "key": "2nerf",
           "nodes": [],
           "textData": {
             "text": ". Aenean placerat, quam eget vestibulum ",
@@ -259,7 +259,7 @@
         },
         {
           "type": "TEXT",
-          "key": "bgt7g",
+          "key": "b2b5f",
           "nodes": [],
           "textData": {
             "text": "varius",
@@ -280,7 +280,7 @@
         },
         {
           "type": "TEXT",
-          "key": "bk3ts",
+          "key": "edq5g",
           "nodes": [],
           "textData": {
             "text": ", nisl ligula vulputate ",
@@ -289,7 +289,7 @@
         },
         {
           "type": "TEXT",
-          "key": "a85af",
+          "key": "1ka2m",
           "nodes": [],
           "textData": {
             "text": "tortor",
@@ -308,7 +308,7 @@
         },
         {
           "type": "TEXT",
-          "key": "2aghk",
+          "key": "ah8oc",
           "nodes": [],
           "textData": {
             "text": ", id lacinia odio magna eu arcu.",
@@ -578,12 +578,9 @@
             "customWidth": 350
           }
         },
-        "config": {
-          "link": {
-            "target": "BLANK",
-            "url": "https://twitter.com/CNN/status/1244886173409034240"
-          },
-          "width": 350
+        "link": {
+          "target": "BLANK",
+          "url": "https://twitter.com/CNN/status/1244886173409034240"
         },
         "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">Eleven veterans who live at the Soldiers&#39; Home in Holyoke, Massachusetts, have died and five of them tested positive for coronavirus.<br><br>Tests are still pending for five other veterans who passed away, and the status of the last one is unknown, officials say <a href=\"https://t.co/rTVjn9FiBC\">https://t.co/rTVjn9FiBC</a></p>&mdash; CNN (@CNN) <a href=\"https://twitter.com/CNN/status/1244886173409034240?ref_src=twsrc%5Etfw\">March 31, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n"
       }
@@ -702,7 +699,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "63qsp",
+          "key": "k82n",
           "nodes": [],
           "textData": {
             "text": "songs = pd.read_csv(SONGS_FILE)",
@@ -844,8 +841,7 @@
           "name": "flowers",
           "imageSrc": "https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg",
           "html": "<a class=\"vertical-embed-link\" href=\"https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers\" target=\"_blank\"><div class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">flowers</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Comprar ahora</div></div></div></div></a>"
-        },
-        "config": {}
+        }
       }
     },
     {
@@ -870,16 +866,13 @@
             "type": "CONTENT"
           }
         },
-        "config": {
-          "link": {
-            "target": "BLANK",
-            "url": "www.wix.com"
-          }
+        "link": {
+          "target": "BLANK",
+          "url": "www.wix.com"
         },
         "title": "A mock title",
         "thumbnailUrl": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
-        "description": "A mock description",
-        "providerUrl": "www.mockUrl.com"
+        "description": "A mock description"
       }
     },
     {
@@ -1005,11 +998,11 @@
       "nodes": [
         {
           "type": "PARAGRAPH",
-          "key": "e9me8",
+          "key": "d7kff",
           "nodes": [
             {
               "type": "TEXT",
-              "key": "dpcqu",
+              "key": "2m03l",
               "nodes": [],
               "textData": {
                 "text": "Nunc eros ante , porttitor ",
@@ -1018,7 +1011,7 @@
             },
             {
               "type": "TEXT",
-              "key": "afef7",
+              "key": "8o30a",
               "nodes": [],
               "textData": {
                 "text": "sed",
@@ -1031,7 +1024,7 @@
             },
             {
               "type": "TEXT",
-              "key": "b0efd",
+              "key": "3qba9",
               "nodes": [],
               "textData": {
                 "text": " tempor nec, sagittis non mi. Nulla non ",
@@ -1040,7 +1033,7 @@
             },
             {
               "type": "TEXT",
-              "key": "fer99",
+              "key": "3adb",
               "nodes": [],
               "textData": {
                 "text": "vulputate",
@@ -1053,7 +1046,7 @@
             },
             {
               "type": "TEXT",
-              "key": "9tntj",
+              "key": "fdp0p",
               "nodes": [],
               "textData": {
                 "text": " ",
@@ -1062,7 +1055,7 @@
             },
             {
               "type": "TEXT",
-              "key": "el547",
+              "key": "dhc24",
               "nodes": [],
               "textData": {
                 "text": "magna",
@@ -1078,7 +1071,7 @@
             },
             {
               "type": "TEXT",
-              "key": "e5co9",
+              "key": "bufqv",
               "nodes": [],
               "textData": {
                 "text": ", semper convallis sapien.",
@@ -1097,7 +1090,7 @@
     },
     {
       "type": "ORDERED_LIST",
-      "key": "d3a23",
+      "key": "88bqh",
       "nodes": [
         {
           "type": "LIST_ITEM",
@@ -1105,11 +1098,11 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "8dle5",
+              "key": "171bu",
               "nodes": [
                 {
                   "type": "TEXT",
-                  "key": "34l86",
+                  "key": "2ptnv",
                   "nodes": [],
                   "textData": {
                     "text": "In imperdiet eros elementum nulla fringilla sollicitudin.",
@@ -1126,7 +1119,7 @@
             },
             {
               "type": "ORDERED_LIST",
-              "key": "e2kvc",
+              "key": "cjgoa",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1134,11 +1127,11 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "44tdh",
+                      "key": "dlke9",
                       "nodes": [
                         {
                           "type": "TEXT",
-                          "key": "anf7p",
+                          "key": "cajkg",
                           "nodes": [],
                           "textData": {
                             "text": "Proin dictum aliquam sapien at pretium.",
@@ -1155,7 +1148,7 @@
                     },
                     {
                       "type": "ORDERED_LIST",
-                      "key": "apavt",
+                      "key": "bpu38",
                       "nodes": [
                         {
                           "type": "LIST_ITEM",
@@ -1163,11 +1156,11 @@
                           "nodes": [
                             {
                               "type": "PARAGRAPH",
-                              "key": "dvveo",
+                              "key": "5298q",
                               "nodes": [
                                 {
                                   "type": "TEXT",
-                                  "key": "9fcg1",
+                                  "key": "b4ua4",
                                   "nodes": [],
                                   "textData": {
                                     "text": "Quisque pulvinar ac erat vitae imperdiet.",
@@ -1184,7 +1177,7 @@
                             },
                             {
                               "type": "ORDERED_LIST",
-                              "key": "fpmf8",
+                              "key": "4ths7",
                               "nodes": [
                                 {
                                   "type": "LIST_ITEM",
@@ -1192,11 +1185,11 @@
                                   "nodes": [
                                     {
                                       "type": "PARAGRAPH",
-                                      "key": "cljd9",
+                                      "key": "5ipqr",
                                       "nodes": [
                                         {
                                           "type": "TEXT",
-                                          "key": "4m4ne",
+                                          "key": "77q4p",
                                           "nodes": [],
                                           "textData": {
                                             "text": "Phasellus ultricies urna ut ultrices imperdiet.",
@@ -1213,7 +1206,7 @@
                                     },
                                     {
                                       "type": "ORDERED_LIST",
-                                      "key": "5eakm",
+                                      "key": "6v9kc",
                                       "nodes": [
                                         {
                                           "type": "LIST_ITEM",
@@ -1221,11 +1214,11 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "7r4sj",
+                                              "key": "3ofk4",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
-                                                  "key": "1jrea",
+                                                  "key": "36o1k",
                                                   "nodes": [],
                                                   "textData": {
                                                     "text": "Nulla non varius ipsum, sit amet consectetur quam.",
@@ -1248,11 +1241,11 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "96qsd",
+                                              "key": "978th",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
-                                                  "key": "8hpsc",
+                                                  "key": "e9kma",
                                                   "nodes": [],
                                                   "textData": {
                                                     "text": "Nunc scelerisque fringilla aliquet.",
@@ -1291,11 +1284,11 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "f1gd5",
+              "key": "5ab6i",
               "nodes": [
                 {
                   "type": "TEXT",
-                  "key": "cqrg3",
+                  "key": "6ui3h",
                   "nodes": [],
                   "textData": {
                     "text": "Praesent purus nibh, sodales",
@@ -1312,7 +1305,7 @@
             },
             {
               "type": "BULLET_LIST",
-              "key": "7h982",
+              "key": "2en48",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1320,11 +1313,11 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "94pb1",
+                      "key": "3hdhu",
                       "nodes": [
                         {
                           "type": "TEXT",
-                          "key": "c9nnb",
+                          "key": "3l2o0",
                           "nodes": [],
                           "textData": {
                             "text": "non efficitur a",
@@ -1351,11 +1344,11 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "aa6a0",
+              "key": "431eo",
               "nodes": [
                 {
                   "type": "TEXT",
-                  "key": "bcs3m",
+                  "key": "5ms4i",
                   "nodes": [],
                   "textData": {
                     "text": "consequat ac ante.",
@@ -1387,7 +1380,7 @@
     },
     {
       "type": "BULLET_LIST",
-      "key": "5t8rb",
+      "key": "617de",
       "nodes": [
         {
           "type": "LIST_ITEM",
@@ -1395,11 +1388,11 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "9cee2",
+              "key": "cndc8",
               "nodes": [
                 {
                   "type": "TEXT",
-                  "key": "5nfhf",
+                  "key": "nu2d",
                   "nodes": [],
                   "textData": {
                     "text": "Aenean sed posuere odio.",
@@ -1416,7 +1409,7 @@
             },
             {
               "type": "BULLET_LIST",
-              "key": "1hsef",
+              "key": "fbrjk",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1424,11 +1417,11 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "5brh",
+                      "key": "4hfmp",
                       "nodes": [
                         {
                           "type": "TEXT",
-                          "key": "f25r9",
+                          "key": "f5ut9",
                           "nodes": [],
                           "textData": {
                             "text": "Pellentesque imperdiet maximus turpis nec faucibus.",
@@ -1445,7 +1438,7 @@
                     },
                     {
                       "type": "BULLET_LIST",
-                      "key": "24c3d",
+                      "key": "94cj5",
                       "nodes": [
                         {
                           "type": "LIST_ITEM",
@@ -1453,11 +1446,11 @@
                           "nodes": [
                             {
                               "type": "PARAGRAPH",
-                              "key": "fl6h6",
+                              "key": "282h3",
                               "nodes": [
                                 {
                                   "type": "TEXT",
-                                  "key": "2mts",
+                                  "key": "aaojs",
                                   "nodes": [],
                                   "textData": {
                                     "text": "Nulla at tempus lectus,",
@@ -1474,7 +1467,7 @@
                             },
                             {
                               "type": "BULLET_LIST",
-                              "key": "ajoi0",
+                              "key": "76nm4",
                               "nodes": [
                                 {
                                   "type": "LIST_ITEM",
@@ -1482,11 +1475,11 @@
                                   "nodes": [
                                     {
                                       "type": "PARAGRAPH",
-                                      "key": "eitso",
+                                      "key": "fq8ui",
                                       "nodes": [
                                         {
                                           "type": "TEXT",
-                                          "key": "48n5d",
+                                          "key": "4mml8",
                                           "nodes": [],
                                           "textData": {
                                             "text": "non tempor tortor.",
@@ -1503,7 +1496,7 @@
                                     },
                                     {
                                       "type": "BULLET_LIST",
-                                      "key": "3ietu",
+                                      "key": "5ddp",
                                       "nodes": [
                                         {
                                           "type": "LIST_ITEM",
@@ -1511,11 +1504,11 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "e4s0a",
+                                              "key": "1p8bf",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
-                                                  "key": "7ok6r",
+                                                  "key": "8pei7",
                                                   "nodes": [],
                                                   "textData": {
                                                     "text": "Vivamus mauris",
@@ -1538,11 +1531,11 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "8hema",
+                                              "key": "fah1u",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
-                                                  "key": "c34lq",
+                                                  "key": "1vkeo",
                                                   "nodes": [],
                                                   "textData": {
                                                     "text": "diam",
@@ -1581,11 +1574,11 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "c8g7j",
+              "key": "42ud6",
               "nodes": [
                 {
                   "type": "TEXT",
-                  "key": "jrmb",
+                  "key": "dqtui",
                   "nodes": [],
                   "textData": {
                     "text": "Auctor in sollicitudin eget, suscipit sed nulla.",
@@ -1608,11 +1601,11 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "8mg9i",
+              "key": "72tbl",
               "nodes": [
                 {
                   "type": "TEXT",
-                  "key": "4ajrv",
+                  "key": "3bjqf",
                   "nodes": [],
                   "textData": {
                     "text": "Aenean sapien lectus, interdum ultrices enim a, sodales ultrices mi. Quisque ut mi metus.",
@@ -1648,7 +1641,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "32o4b",
+          "key": "762b2",
           "nodes": [],
           "textData": {
             "text": "Donec sit amet sapien quis velit ultrices sollicitudin id facilisis ligula.",
@@ -1684,7 +1677,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "b9aub",
+          "key": "f4k7b",
           "nodes": [],
           "textData": {
             "text": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.",
@@ -1741,7 +1734,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "2rt55",
+          "key": "61lv6",
           "nodes": [],
           "textData": {
             "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק.",
@@ -1762,7 +1755,7 @@
       "nodes": [
         {
           "type": "TEXT",
-          "key": "o964",
+          "key": "d6c92",
           "nodes": [],
           "textData": {
             "text": "בראיט ולחת צורק מונחף, בגורמי מגמש.\n",
@@ -1791,7 +1784,7 @@
   ],
   "metadata": {
     "version": 1,
-    "createdTimestamp": "2021-04-20T11:46:10.400Z",
-    "updatedTimestamp": "2021-04-20T11:46:10.400Z"
+    "createdTimestamp": "2021-05-05T07:41:53.316Z",
+    "updatedTimestamp": "2021-05-05T07:41:53.316Z"
   }
 }
