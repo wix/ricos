@@ -2,7 +2,7 @@ import { Command, Extension } from '@tiptap/core'
 
 type LineHeightOptions = {
     types: string[],
-    defaultLineHeight: number
+    defaultLineHeight: string;
 }
 
 declare module '@tiptap/core' {
@@ -11,11 +11,11 @@ declare module '@tiptap/core' {
             /**
              * Set the text align attribute
              */
-            setLineHeight: (lineHeight: number) => Command,
+            setLineHeight: (lineHeight: string) => Command,
             /**
              * Unset the text align attribute
              */
-            usetLineHeight: () => Command,
+            unsetLineHeight: () => Command,
         }
     }
 }
@@ -25,7 +25,7 @@ export const LineHeight = Extension.create<LineHeightOptions>({
 
     defaultOptions: {
         types: ['paragraph'],
-        defaultLineHeight: 20
+        defaultLineHeight: 'normal'
     },
 
     addGlobalAttributes() {
@@ -36,15 +36,11 @@ export const LineHeight = Extension.create<LineHeightOptions>({
                     lineHeight: {
                         default: this.options.defaultLineHeight,
                         renderHTML: attributes => {
-                            console.log({ attributes })
                             return ({
-                                style: `line-height: ${attributes.lineHeight}px`,
+                                style: `line-height: ${attributes.lineHeight}`,
                             })
                         }
-                        ,
-                        parseHTML: element => ({
-                            textAlign: element.style.lineHeight || this.options.defaultLineHeight,
-                        }),
+
                     },
                 },
             },
@@ -53,11 +49,10 @@ export const LineHeight = Extension.create<LineHeightOptions>({
 
     addCommands() {
         return {
-            setLineHeight: (lineHeight: number) => ({ commands }) => {
-                console.log('setLineHeight', lineHeight)
+            setLineHeight: (lineHeight: string) => ({ commands }) => {
                 return this.options.types.every(type => commands.updateAttributes(type, { lineHeight: lineHeight }))
             },
-            unsetTextAlign: () => ({ commands }) => {
+            unsetLineHeight: () => ({ commands }) => {
                 return this.options.types.every(type => commands.resetAttributes(type, 'lineHeight'))
             },
         }
@@ -65,7 +60,8 @@ export const LineHeight = Extension.create<LineHeightOptions>({
 
     addKeyboardShortcuts() {
         return {
-            'Mod-Shift-l': () => this.editor.commands.setLineHeight(40),
+            'Mod-Shift-l': () => this.editor.commands.setLineHeight('20px'),
+            'Mod-Shift-m': () => this.editor.commands.unsetLineHeight(),
         }
     },
 })
