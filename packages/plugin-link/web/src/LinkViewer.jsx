@@ -43,7 +43,7 @@ class LinkViewer extends Component {
     const { componentData, isInEditor, config, helpers } = this.props;
     const settings = config?.[LINK_TYPE];
     if (settings) {
-      const { onClick } = settings;
+      const { onClick, customAnchorScroll } = settings;
       const { anchor, url } = componentData;
       helpers?.onViewerAction?.(LINK_TYPE, 'Click', componentData);
       onClick?.(event, componentData?.customData || this.getHref(url, anchor));
@@ -54,7 +54,7 @@ class LinkViewer extends Component {
           const anchorString = `viewer-${anchor}`;
           const element = document.getElementById(anchorString);
           addAnchorTagToUrl(anchorString);
-          anchorScroll(element);
+          customAnchorScroll ? customAnchorScroll(element) : anchorScroll(element);
         }
       }
     }
