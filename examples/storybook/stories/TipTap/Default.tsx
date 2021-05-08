@@ -7,10 +7,11 @@ import { TipTapEditor } from 'tip-tap-editor';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import './TipTapEditor.scss';
 import { ensureDraftContent, toDraft } from 'ricos-content/dist/lib/migrateSchema';
+import theme from '../../../main/shared/theme/theme';
 
 
 export default () => {
-    const theme = {}
+
     const [draftContent, setDraftContent] = useState(null);
 
     return (
