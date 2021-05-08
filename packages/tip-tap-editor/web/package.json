@@ -22,6 +22,7 @@
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
+  "test": "echo 'no tests to run'",
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",

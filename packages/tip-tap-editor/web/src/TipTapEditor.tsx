@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react';
 import { defaultExtensions } from '@tiptap/starter-kit';
 import { Editor } from '@tiptap/core';
+//@ts-ignore
 import LineHeight from './extensions/extension-line-height';
 import { convertProsMirrorContentToRicosContent } from './convertor';
 

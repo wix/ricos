@@ -4215,29 +4215,7 @@
     "@testing-library/dom" "^6.15.0"
     "@types/testing-library__react" "^9.1.2"
 
-"@tiptap/core@^2.0.0-beta.45":
-  version "2.0.0-beta.45"
-  resolved "https://registry.npmjs.org/@tiptap/core/-/core-2.0.0-beta.45.tgz#59877664aff1b6caf82bf5a8f8b766c1ac8ef1cc"
-  integrity sha512-M8f/jAW8CoBGxRZywvhZkaS4m5FVk+2GUd8YsqZI4rYHuWjxPYwhOx6yIK5lMhbPwTfKpX4ocn/NYImeukrZiQ==
-  dependencies:
-    "@types/prosemirror-commands" "^1.0.4"
-    "@types/prosemirror-inputrules" "^1.0.4"
-    "@types/prosemirror-keymap" "^1.0.4"
-    "@types/prosemirror-model" "^1.13.0"
-    "@types/prosemirror-schema-list" "^1.0.3"
-    "@types/prosemirror-state" "^1.2.6"
-    "@types/prosemirror-transform" "^1.1.2"
-    "@types/prosemirror-view" "^1.17.1"
-    prosemirror-commands "^1.1.7"
-    prosemirror-inputrules "^1.1.3"
-    prosemirror-keymap "^1.1.3"
-    prosemirror-model "^1.14.1"
-    prosemirror-schema-list "^1.1.4"
-    prosemirror-state "^1.3.4"
-    prosemirror-transform "^1.3.2"
-    prosemirror-view "^1.18.4"
-
-"@tiptap/core@^2.0.0-beta.53":
+"@tiptap/core@^2.0.0-beta.45", "@tiptap/core@^2.0.0-beta.53":
   version "2.0.0-beta.53"
   resolved "https://registry.npmjs.org/@tiptap/core/-/core-2.0.0-beta.53.tgz#fc6f57921d813b3b1f12ed92c6e7b9bbc347b4e5"
   integrity sha512-zspO2tGlMW8tRZNfLIhcIis0ZSwhAGfdcwvPfJtksN4u1OXgtzvH261DwKdN9OrV6kwOPuN5WiSyRxgAoRXcMA==
