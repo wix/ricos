@@ -304,11 +304,7 @@
 	"GallerySettings_Spacing_Between_Items_Tooltip": "Nastavte mezery mezi věcmi ve Vaší galerii.",
 	"Embed_Vertical_Events_Title": "Přidat akci",
 	"VideoUploadModal_CustomVideoHeader": "Nebo nahrajte video z počítače",
-<<<<<<< HEAD
-	"ImageSettings_Expand_Mode_Toggle": "Clicking on the image will expand it.",
-=======
 	"ImageSettings_Expand_Mode_Toggle": "Kliknutí na obrázek jej roztáhne.",
->>>>>>> master
 	"TitleButton_tooltip": "Velikost písma",
 	"Poll_PollSettings_Tab_Settings_Section_Voting_Multiselect": "Uživatelé mohou vybrat více odpovědí",
 	"TextLinkButton_Tooltip": "Odkaz",
@@ -402,11 +398,7 @@
 	"LinkTo_Modal_Section_Item_Paragraph": "Odstavec",
 	"Accordion_AccordionSettings_Tab_Settings_Direction_Title_Tooltip": "Zobrazte směr čtení seznamu ve stejném směru, jako je směr čtení jazyka použitého na webu.",
 	"SizeSmallButton_Tooltip": "Malé",
-<<<<<<< HEAD
-	"GallerySettings_Expand_Mode_Toggle": "Clicking on images will expand them.",
-=======
 	"GallerySettings_Expand_Mode_Toggle": "Kliknutí na obrázky je roztáhne.",
->>>>>>> master
 	"MapSettings_MapOption_Show_Street_View_Label": "Zobrazit street view",
 	"AlignTextDropdownButton_Tooltip": "Zarovnání",
 	"LinkPanel_Nofollow_Checkbox": "Říct Googlu, aby ignoroval tento odkaz (nofollow)",
