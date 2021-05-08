@@ -4,7 +4,6 @@
 import React, { useEffect } from 'react';
 import { defaultExtensions } from '@tiptap/starter-kit';
 import { Editor } from '@tiptap/core';
-//@ts-ignore
 import LineHeight from './extensions/extension-line-height';
 import { convertProsMirrorContentToRicosContent } from './convertor';
 
@@ -17,6 +16,7 @@ const TipTapEditor = ({ onUpdate }: TipTapEditorProps) => {
     const editor = new Editor({
       //@ts-ignore
       element: document.querySelector('#tip-tap-editor'),
+      //@ts-ignore
       extensions: [...defaultExtensions(), LineHeight],
       injectCSS: false,
       onUpdate: ({ editor }) => {
