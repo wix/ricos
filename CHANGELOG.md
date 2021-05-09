@@ -17,9 +17,16 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `storybook`
+  - [#2472](https://github.com/wix-incubator/rich-content/pull/2472) ContentBuilder API - added additional plugins
+
 ### :nail_care: Polish
 - `plugin-headings`
   - [#2454](https://github.com/wix-incubator/rich-content/pull/2454) clear `h1` wire on experiment `useHeadingOne`
+- `ricos-content`
+  - [#2462](https://github.com/wix-incubator/rich-content/pull/2462) remove unfinalized plugins from ContentAPI
 
 ### :rocket: New Feature
 - `accordion`
@@ -29,11 +36,18 @@
 - `table`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
 
+
 ### :bug: Bug Fix
 - `editor`
   - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
 
-  </details>
+
+### :house: Internal
+- `e2e`
+  - [#2458](https://github.com/wix-incubator/rich-content/pull/2458) update to cypress 7
+
+
+</details>
 <hr/>
 
 ## 8.33.1 (May 6, 2021)

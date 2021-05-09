@@ -28,8 +28,8 @@ export const Video: FC<EditPanelProps<'addVideo'>> = ({ addFunc }) => {
   return (
     <Layout>
       <Cell>
-        <PNLMedia obj={video} setter={setVideo} title="Video" />
-        <PNLMedia obj={thumbnail} setter={setThumbnail} title="Thumbnail" />
+        <PNLMedia obj={video} setter={setVideo} title="Media (Video)" />
+        <PNLMedia obj={thumbnail} setter={setThumbnail} title="Media (Thumbnail)" />
         <PNLContainerData obj={containerData} setter={setContainerData} />
         <PNLCommonFields obj={commonFields} setter={setCommonFields} />
         <Button onClick={onAdd}>Add</Button>
