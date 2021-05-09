@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
@@ -77,7 +78,7 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import InnerRCE from './InnerRCE';
 import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import InnerModal from './InnerModal';
-import { registerCopySource } from 'draftjs-conductor';
+import { onCutAndCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
 
@@ -176,6 +177,7 @@ interface State {
     isMobile: boolean;
     t?: TranslationFunction;
   };
+  undoRedoStackChanged: boolean;
 }
 
 // experiment example code
@@ -204,8 +206,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   editorWrapper!: Element;
 
   lastFocusedAtomicPlugin?: ContentBlock;
-
-  copySource!: { unregister(): void };
 
   updateBounds!: (editorBounds?: BoundingRect) => void;
 
@@ -260,6 +260,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       toolbarsToIgnore: [],
       readOnly: false,
       context: { experiments, isMobile, t },
+      undoRedoStackChanged: false,
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -292,7 +293,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 
   componentDidMount() {
-    this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
@@ -321,9 +321,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    if (this.copySource) {
-      this.copySource.unregister();
-    }
     document?.removeEventListener('beforeinput', this.preventDefaultKeyCommands);
   }
 
@@ -650,8 +647,17 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       });
   };
 
+  didUndoRedoStackChange = (newEditorState: EditorState) => {
+    const { editorState } = this.state;
+    return (
+      editorState.getUndoStack().isEmpty() !== newEditorState.getUndoStack().isEmpty() ||
+      editorState.getRedoStack().isEmpty() !== newEditorState.getRedoStack().isEmpty()
+    );
+  };
+
   updateEditorState = (editorState: EditorState) => {
-    this.setState({ editorState }, () => {
+    const undoRedoStackChanged = this.didUndoRedoStackChange(editorState);
+    this.setState({ editorState, undoRedoStackChanged }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
     });
@@ -907,7 +913,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
-    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
+    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [], undoRedoStackChanged } = this.state;
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
@@ -931,6 +937,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             forceDisabled={
               plugin.name === 'FooterToolbar' && !this.props.isInnerRCE && this.inPluginEditingMode
             }
+            shouldUpdate={plugin.name === 'FooterToolbar' && undoRedoStackChanged}
           />
         );
       }
@@ -1042,6 +1049,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ariaMultiline={ariaMultiline}
         onBlur={onBlur}
         onFocus={onFocus}
+        // @ts-ignore
+        onCut={onCutAndCopy}
+        // @ts-ignore
+        onCopy={onCutAndCopy}
         textAlignment={textAlignment}
         readOnly={readOnly || this.state.readOnly}
         {...(this.props.experiments?.pastedFilesSupport?.enabled && {
