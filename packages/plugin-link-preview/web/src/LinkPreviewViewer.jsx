@@ -44,7 +44,11 @@ class LinkPreviewViewer extends Component {
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
   onLinkPreviewClick = () =>
-    this.props.helpers.onViewerAction?.(LINK_PREVIEW_TYPE, 'link_preview_click');
+    this.props.helpers.onViewerAction?.(
+      LINK_PREVIEW_TYPE,
+      'Click',
+      this.props.componentData.config.link.url
+    );
 
   render() {
     const { componentData, theme, isMobile, settings, iframeSandboxDomain } = this.props;
