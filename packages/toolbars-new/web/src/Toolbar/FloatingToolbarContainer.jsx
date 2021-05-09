@@ -52,7 +52,10 @@ class FloatingToolbarContainer extends PureComponent {
     }
 
     let left =
-      selectionRect.left - toolbarParentRect.left + selectionRect.width / 2 - halfToolbarWidth;
+      Math.round(selectionRect.left) -
+      Math.round(toolbarParentRect.left) +
+      Math.round(selectionRect.width / 2) -
+      Math.round(halfToolbarWidth);
     // make sure we're not out of bounds, adjust position if we are
     if (selectionRect.left - toolbarParentRect.left < halfToolbarWidth) {
       left = 0;
@@ -81,19 +84,9 @@ class FloatingToolbarContainer extends PureComponent {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ toolbarPosition: { top: `${top}px`, left: `${left}px` } });
     }
-    const { editorState } = this.props;
+    const { showFormattingToolbar } = this.props;
     const { isVisible } = this.state;
-    const selection = editorState.getSelection();
-    const isTextMarked = editorState
-      ? editorState
-          .getCurrentContent()
-          .getBlockMap()
-          .filter(x => x.getType() === 'unstyled')
-          .some(x => x.getText() !== '' && x.getText() !== '​') //zero-width space
-      : false;
-    const showFormattingToolbar =
-      (!selection.isCollapsed() && selection.getHasFocus() && isTextMarked) || this.state.keepOpen;
-    if (isVisible !== showFormattingToolbar) {
+    if (isVisible !== (showFormattingToolbar || this.state.keepOpen)) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ isVisible: showFormattingToolbar });
     }
@@ -127,7 +120,7 @@ class FloatingToolbarContainer extends PureComponent {
 FloatingToolbarContainer.propTypes = {
   children: PropTypes.any,
   isMobile: PropTypes.bool,
-  editorState: PropTypes.object,
+  showFormattingToolbar: PropTypes.bool,
   // isInnerRCE: PropTypes.bool,
 };
 

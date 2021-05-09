@@ -247,12 +247,17 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
       const { isMobile, theme, locale } = this.props;
       const buttonsAsArray = Object.values(buttons);
       const editorState = getEditorState();
+      const selection = editorState.getSelection();
+      const showFormattingToolbar = !selection.isCollapsed() && selection.getHasFocus();
       const editorCommands = this.editor.getEditorCommands();
       const t = this.editor.getT();
       const formattingToolbarButtonsKeys = this.config.formattingToolbarButtons;
       return (
         <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
-          <FloatingToolbarContainer isMobile={isMobile} editorState={editorState}>
+          <FloatingToolbarContainer
+            isMobile={isMobile}
+            showFormattingToolbar={showFormattingToolbar}
+          >
             <Toolbar
               theme={theme}
               isMobile={isMobile}
