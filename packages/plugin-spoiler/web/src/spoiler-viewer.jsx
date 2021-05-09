@@ -4,6 +4,7 @@ import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import classnames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
+import { SPOILER_TYPE } from './types';
 
 class SpoilerViewer extends Component {
   static propTypes = {
@@ -13,6 +14,7 @@ class SpoilerViewer extends Component {
     callAllCallbacks: PropTypes.func,
     stateChangeCallBacks: PropTypes.array,
     dataHook: PropTypes.string,
+    settings: PropTypes.object,
   };
 
   static contextType = GlobalContext;
@@ -36,6 +38,7 @@ class SpoilerViewer extends Component {
   handleClick = event => {
     event.preventDefault();
     this.showText();
+    this.props.settings.onViewerAction?.(SPOILER_TYPE, 'Click', 'reveal_text');
   };
 
   showText = () => {
