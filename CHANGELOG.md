@@ -24,6 +24,8 @@
 ### :rocket: New Feature
 - `accordion`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+  - [#2441](https://github.com/wix/ricos/commit/2441) scroll to item on expand/collapse
+  - [#2441](https://github.com/wix/ricos/commit/2441) (Command | Ctrl) + A shortcut selects all content in section
 - `table`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
 

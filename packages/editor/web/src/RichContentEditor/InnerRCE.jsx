@@ -261,6 +261,8 @@ InnerRCE.propTypes = {
   editing: PropTypes.bool,
   tablePluginMenu: PropTypes.bool,
   experiments: PropTypes.object,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 export default InnerRCE;
