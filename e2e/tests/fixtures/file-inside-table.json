@@ -1,0 +1,228 @@
+{
+  "blocks": [
+    {
+      "key": "eh30j",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "d6lse",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "2g99k",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7b926",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-rich-content-plugin-table",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "8x4m23o9x",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "eriq",
+                        "text": " ",
+                        "type": "atomic",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [
+                          {
+                            "offset": 0,
+                            "length": 1,
+                            "key": 0
+                          }
+                        ],
+                        "data": {}
+                      },
+                      {
+                        "key": "cv0q6",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "type": "wix-draft-plugin-file-upload",
+                        "mutability": "IMMUTABLE",
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "size": "content"
+                          },
+                          "configViewer": {
+                            "downloadTarget": "_blank"
+                          },
+                          "name": "document.pdf",
+                          "type": "pdf",
+                          "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                          "size": 150000
+                        }
+                      }
+                    }
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "qjvly9ovl",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "se098k2wr",
+                        "text": "​",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "qjvly9ovl",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      },
+                      {
+                        "key": "8198r",
+                        "text": " ",
+                        "type": "atomic",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [
+                          {
+                            "offset": 0,
+                            "length": 1,
+                            "key": 0
+                          }
+                        ],
+                        "data": {}
+                      },
+                      {
+                        "key": "13cn2",
+                        "text": "",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {
+                      "0": {
+                        "type": "wix-draft-plugin-file-upload",
+                        "mutability": "IMMUTABLE",
+                        "data": {
+                          "config": {
+                            "alignment": "center",
+                            "size": "content"
+                          },
+                          "configViewer": {
+                            "downloadTarget": "_blank"
+                          },
+                          "name": "music.mp3",
+                          "type": "mp3",
+                          "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                          "size": 150000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "colsWidth": [
+            421.2081784386617,
+            95.01672862453532
+          ],
+          "rowsHeight": [
+            47,
+            47
+          ],
+          "colsMinWidth": [
+            118,
+            97
+          ]
+        },
+        "type": "wix-rich-content-plugin-table"
+      }
+    }
+  },
+  "VERSION": "8.30.4"
+}

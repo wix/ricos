@@ -104,6 +104,8 @@ class AccordionComponent extends React.Component {
       direction,
       additionalProps,
       toolbarsToIgnore,
+      onFocus: () => this.props.disableKeyboardEvents(true),
+      onBlur: () => this.props.disableKeyboardEvents(false),
     });
   };
 
@@ -153,7 +155,7 @@ class AccordionComponent extends React.Component {
   onFocus = e => e.stopPropagation();
 
   render() {
-    const { blockProps, theme, t, isMobile } = this.props;
+    const { blockProps, theme, t, isMobile, helpers } = this.props;
     const pairs = this.getDataManager().getPairs();
     const expandState = this.getDataManager().getExpandState();
     const expandOnlyOne = this.getDataManager().getExpandOnlyOne();
@@ -181,6 +183,7 @@ class AccordionComponent extends React.Component {
                   renderTitle={this.renderTitle}
                   renderContent={this.renderContent}
                   PairWrapper={this.PairWrapper}
+                  helpers={helpers}
                 />
                 {provided.placeholder}
               </div>
@@ -202,8 +205,10 @@ AccordionComponent.propTypes = {
   store: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  disableKeyboardEvents: PropTypes.func.isRequired,
   renderInnerRCE: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  helpers: PropTypes.object.isRequired,
 };
 
 export { AccordionComponent as Component, DEFAULTS };

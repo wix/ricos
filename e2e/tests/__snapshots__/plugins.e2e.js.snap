@@ -1398,7 +1398,7 @@ exports[`plugins > file-upload > render file-upload plugin toolbar #0`] =
         },
         "name": "receipt.pdf",
         "type": "pdf",
-        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+        "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-file-upload"
@@ -3654,7 +3654,6 @@ exports[`plugins > convert link to link preview > should create link preview fro
           "size": "content"
         },
         "description": "A mock description",
-        "provider_url": "www.mockUrl.com",
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "title": "A mock title"
       },
@@ -3714,7 +3713,6 @@ exports[`plugins > convert link to preview > should create link preview from lin
           "size": "content"
         },
         "description": "A mock description",
-        "provider_url": "www.mockUrl.com",
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "title": "A mock title"
       },
@@ -4477,7 +4475,6 @@ exports[`plugins > convert link to preview > with default config > should create
           "size": "content"
         },
         "description": "A mock description",
-        "provider_url": "www.mockUrl.com",
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "title": "A mock title"
       },
@@ -4694,7 +4691,6 @@ exports[`plugins > verticals embed > verticals embed widget > should replace wid
   "entityMap": {
     "0": {
       "data": {
-        "config": {},
         "selectedProduct": {
           "html": "<a class=\"vertical-embed-link\" href=\"https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers\" target=\"_blank\"><div class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">flowers</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Comprar ahora</div></div></div></div></a>",
           "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
@@ -4835,7 +4831,7 @@ exports[`plugins > headings > Change headers - without customHeadings config #0`
       "inlineStyleRanges": [],
       "key": 0,
       "text": "Leverage agile frameworks",
-      "type": "header-three"
+      "type": "header-two"
     },
     {
       "data": {},
@@ -4844,7 +4840,7 @@ exports[`plugins > headings > Change headers - without customHeadings config #0`
       "inlineStyleRanges": [],
       "key": 1,
       "text": "to provide a robust synopsis for high level overviews.",
-      "type": "header-two"
+      "type": "header-one"
     }
   ],
   "entityMap": {}

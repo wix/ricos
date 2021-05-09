@@ -1,4 +1,4 @@
-import { PluginType, RichContentTheme } from 'wix-rich-content-common';
+import { PluginType, AvailableExperiments } from 'wix-rich-content-common';
 
 export type OnVisibilityChanged = (sectionName: string, isVisible: boolean) => void;
 
@@ -40,7 +40,10 @@ export interface TestAppConfig {
     fallbackColor?: string;
     disableContainer?: boolean;
     contentBgColor?: boolean;
+    settingsActionColor?: string;
+    focusActionColor?: string;
   };
   showDefaultPreview?: boolean;
   isNativeUpload?: boolean;
+  experiments?: AvailableExperiments;
 }

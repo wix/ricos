@@ -19,6 +19,10 @@ describe('Palette', () => {
     fallbackColorTuple: '0, 0, 0',
     textColorLow: undefined,
     textColorLowTuple: undefined,
+    settingsActionColor: undefined,
+    settingsActionColorTuple: undefined,
+    focusActionColor: undefined,
+    focusActionColorTuple: undefined,
   };
 
   const wixExpected = {

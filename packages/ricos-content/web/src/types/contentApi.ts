@@ -7,6 +7,7 @@ import {
   HTMLData,
   GiphyData,
   VideoData,
+  VerticalEmbedData,
   FileData,
   MapData,
   ButtonData,
@@ -142,6 +143,7 @@ type AddMap = {
   addMap: MapData;
   addPoll: PollData;
   addVideo: VideoData;
+  addVericalEmbed: VerticalEmbedData;
 };
 
 type AddTextMap = {
@@ -167,12 +169,7 @@ type GetMap = {
   getHtmls: HTMLData;
 };
 
-type ContentBuilderType = AddMethod<AddMap> &
-  AddTextMethod<AddTextMap> &
-  SetMethod<SetMap> &
-  SetTextMethod<SetTextMap> & {
-    removeNode: (key: string, content: RichContent) => RichContent;
-  };
+type ContentBuilderType = AddMethod<AddMap> & AddTextMethod<AddTextMap>;
 
 export interface ContentBuilder extends ContentBuilderType {}
 
