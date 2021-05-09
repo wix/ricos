@@ -30,25 +30,23 @@ class RichContentModal extends Component<Props> {
   settingSessionId?: string;
 
   componentDidMount() {
-    const { triggerSettingsBi, helpers, pluginId = '' } = this.props;
-    if (triggerSettingsBi) {
-      this.settingSessionId = generateKey();
-      helpers?.onPluginAction?.(OPEN_SETTINGS_MODAL_BI, {
-        plugin_id: pluginId,
-        settingSessionId: this.settingSessionId,
-      });
-    }
+    this.settingSessionId = generateKey();
+    this.triggerBi(OPEN_SETTINGS_MODAL_BI);
   }
 
   componentWillUnmount() {
+    this.triggerBi(CLOSE_SETTINGS_MODAL_BI);
+  }
+
+  triggerBi = action => {
     const { triggerSettingsBi, helpers, pluginId = '' } = this.props;
-    if (triggerSettingsBi && this.settingSessionId) {
-      helpers?.onPluginAction?.(CLOSE_SETTINGS_MODAL_BI, {
+    if (triggerSettingsBi) {
+      helpers?.onPluginAction?.(action, {
         plugin_id: pluginId,
         settingSessionId: this.settingSessionId,
       });
     }
-  }
+  };
 
   render() {
     const { modalElement, modalDecorations, locale, ...modalProps } = this.props;
