@@ -20,6 +20,7 @@ import {
 import layoutData from '../lib/layout-data-provider';
 import { ComponentType } from 'react';
 import { Store, TranslationFunction, ComponentData } from 'wix-rich-content-common';
+import { GALLERY_LAYOUTS } from './defaults';
 
 type GalleryLayout = { value: number; label: string; icon: ComponentType };
 
@@ -41,26 +42,82 @@ export const getCurrentLayout = (store: Store, t: TranslationFunction) => {
 
 export const getGalleryLayouts = (t: TranslationFunction): GalleryLayout[] => {
   return [
-    { value: 2, label: t('GalleryPlugin_Layout_Grid'), icon: LayoutGridIcon },
-    { value: 1, label: t('GalleryPlugin_Layout_Masonry'), icon: LayoutMasonryIcon },
-    { value: 0, label: t('GalleryPlugin_Layout_Collage'), icon: LayoutCollageIcon },
-    { value: 3, label: t('GalleryPlugin_Layout_Thumbnails'), icon: LayoutThumbnailsIcon },
-    { value: 9, label: t('GalleryPlugin_Layout_Slideshow'), icon: LayoutSlideshowIcon },
-    { value: 6, label: t('GalleryPlugin_Layout_Panorama'), icon: LayoutPanoramaIcon },
-    { value: 7, label: t('GalleryPlugin_Layout_Columns'), icon: LayoutColumnsIcon },
-    { value: 4, label: t('GalleryPlugin_Layout_Slides'), icon: LayoutSlidesIcon },
+    { value: GALLERY_LAYOUTS.GRID, label: t('GalleryPlugin_Layout_Grid'), icon: LayoutGridIcon },
+    {
+      value: GALLERY_LAYOUTS.MASONRY,
+      label: t('GalleryPlugin_Layout_Masonry'),
+      icon: LayoutMasonryIcon,
+    },
+    {
+      value: GALLERY_LAYOUTS.COLLAGE,
+      label: t('GalleryPlugin_Layout_Collage'),
+      icon: LayoutCollageIcon,
+    },
+    {
+      value: GALLERY_LAYOUTS.THUMBNAIL,
+      label: t('GalleryPlugin_Layout_Thumbnails'),
+      icon: LayoutThumbnailsIcon,
+    },
+    {
+      value: GALLERY_LAYOUTS.SLIDESHOW,
+      label: t('GalleryPlugin_Layout_Slideshow'),
+      icon: LayoutSlideshowIcon,
+    },
+    {
+      value: GALLERY_LAYOUTS.PANORAMA,
+      label: t('GalleryPlugin_Layout_Panorama'),
+      icon: LayoutPanoramaIcon,
+    },
+    {
+      value: GALLERY_LAYOUTS.COLUMN,
+      label: t('GalleryPlugin_Layout_Columns'),
+      icon: LayoutColumnsIcon,
+    },
+    {
+      value: GALLERY_LAYOUTS.SLIDER,
+      label: t('GalleryPlugin_Layout_Slides'),
+      icon: LayoutSlidesIcon,
+    },
   ];
 };
 
 export const galleryLayoutsDropdown = (t: TranslationFunction): GalleryLayout[] => {
   return [
-    { value: 2, label: t('GalleryPlugin_Layout_Grid'), icon: GridIconSmall },
-    { value: 1, label: t('GalleryPlugin_Layout_Masonry'), icon: MasonryIconSmall },
-    { value: 0, label: t('GalleryPlugin_Layout_Collage'), icon: CollageIconSmall },
-    { value: 3, label: t('GalleryPlugin_Layout_Thumbnails'), icon: ThumbnailsIconSmall },
-    { value: 9, label: t('GalleryPlugin_Layout_Slideshow'), icon: SlideshowIconSmall },
-    { value: 6, label: t('GalleryPlugin_Layout_Panorama'), icon: PanoramaIconSmall },
-    { value: 7, label: t('GalleryPlugin_Layout_Columns'), icon: ColumnsIconSmall },
-    { value: 4, label: t('GalleryPlugin_Layout_Slides'), icon: SlidesIconSmall },
+    { value: GALLERY_LAYOUTS.GRID, label: t('GalleryPlugin_Layout_Grid'), icon: GridIconSmall },
+    {
+      value: GALLERY_LAYOUTS.MASONRY,
+      label: t('GalleryPlugin_Layout_Masonry'),
+      icon: MasonryIconSmall,
+    },
+    {
+      value: GALLERY_LAYOUTS.COLLAGE,
+      label: t('GalleryPlugin_Layout_Collage'),
+      icon: CollageIconSmall,
+    },
+    {
+      value: GALLERY_LAYOUTS.THUMBNAIL,
+      label: t('GalleryPlugin_Layout_Thumbnails'),
+      icon: ThumbnailsIconSmall,
+    },
+    {
+      value: GALLERY_LAYOUTS.SLIDESHOW,
+      label: t('GalleryPlugin_Layout_Slideshow'),
+      icon: SlideshowIconSmall,
+    },
+    {
+      value: GALLERY_LAYOUTS.PANORAMA,
+      label: t('GalleryPlugin_Layout_Panorama'),
+      icon: PanoramaIconSmall,
+    },
+    {
+      value: GALLERY_LAYOUTS.COLUMN,
+      label: t('GalleryPlugin_Layout_Columns'),
+      icon: ColumnsIconSmall,
+    },
+    {
+      value: GALLERY_LAYOUTS.SLIDER,
+      label: t('GalleryPlugin_Layout_Slides'),
+      icon: SlidesIconSmall,
+    },
   ];
 };
