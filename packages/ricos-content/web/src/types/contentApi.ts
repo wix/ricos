@@ -7,7 +7,6 @@ import {
   HTMLData,
   GiphyData,
   VideoData,
-  VerticalEmbedData,
   FileData,
   MapData,
   ButtonData,
@@ -136,14 +135,9 @@ type AddMap = {
   addDivider: DividerData;
   addFile: FileData;
   addGallery: GalleryData;
-  addGiphy: GiphyData;
   addHtml: HTMLData;
   addImage: ImageData;
-  addLinkPreview: LinkPreviewData;
-  addMap: MapData;
-  addPoll: PollData;
   addVideo: VideoData;
-  addVericalEmbed: VerticalEmbedData;
 };
 
 type AddTextMap = {
