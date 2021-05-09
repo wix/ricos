@@ -53,10 +53,10 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   onRevealSpoiler = e => {
-    const { helpers, type } = this.props;
+    const { helpers, pluginType } = this.props;
     e.preventDefault();
     this.setState({ isReveal: true });
-    helpers.onViewerAction?.(SPOILER_TYPE, `spoiler_reveal_${type}`);
+    helpers.onViewerAction?.(SPOILER_TYPE, 'Click', `reveal_${pluginType}`);
   };
 
   renderSpoilerContainer = () => {

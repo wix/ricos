@@ -1,1 +1,1 @@
-export { setupContentAPI } from '../src/RicosContentAPI/ContentAPI';
+export { setupContentBuilder } from '../src/RicosContentAPI/RicosContentBuilder';

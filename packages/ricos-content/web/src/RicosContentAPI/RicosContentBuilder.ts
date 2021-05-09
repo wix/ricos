@@ -1,4 +1,3 @@
-import { pick, merge } from 'lodash/fp';
 import {
   ButtonData,
   CodeData,
@@ -19,14 +18,7 @@ import {
   TextData,
   VideoData,
 } from 'ricos-schema';
-import {
-  addNode as add,
-  toTextDataArray,
-  removeNode,
-  setNode as set,
-  updateNode as update,
-  toggleNodeType,
-} from './builder-utils';
+import { addNode as add, toTextDataArray } from './builder-utils';
 import { ContentBuilder } from '../types';
 
 const dataByNodeType = (type: Node_Type, data: unknown) =>
@@ -57,16 +49,6 @@ type AddMethodParams<TData> = {
 };
 
 type AddTextMethodParams<T> = AddMethodParams<T> & {
-  text?: string | TextData | (string | TextData)[];
-};
-
-type SetMethodParams<TData> = {
-  data: TData;
-  key: string;
-  content: RichContent;
-};
-
-type SetTextMethodParams<T> = SetMethodParams<T> & {
   text?: string | TextData | (string | TextData)[];
 };
 
@@ -134,107 +116,7 @@ export const setupContentBuilder = (
     return add({ node, index, before, after, content });
   }
 
-  function setNode({
-    data,
-    type,
-    key,
-    content,
-  }: {
-    data: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const node = createNode(type, data);
-    return set({ node, key, content });
-  }
-
-  function setTextNode({
-    text,
-    data,
-    type,
-    key,
-    content,
-  }: {
-    text?: string | TextData | (string | TextData)[];
-    data?: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const textData = toTextDataArray(text);
-    const node = createTextNode(type, textData, data);
-    return set({ node, key, content });
-  }
-
-  function toggleTextNode({
-    text,
-    data,
-    type,
-    key,
-    content,
-  }: {
-    text?: string | TextData | (string | TextData)[];
-    data?: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const textData = toTextDataArray(text);
-    const node = createTextNode(type, textData, data);
-    return toggleNodeType({
-      node,
-      key,
-      content,
-      convert: ({ sourceNode, targetNode }) =>
-        pick(Object.keys(sourceNode), merge(targetNode, sourceNode)),
-      canToggle: ({ targetNode }) =>
-        [
-          Node_Type.PARAGRAPH,
-          Node_Type.CODEBLOCK,
-          Node_Type.BLOCKQUOTE,
-          Node_Type.LIST_ITEM,
-          Node_Type.HEADING,
-        ].includes(targetNode.type),
-    });
-  }
-
-  function updateNode({
-    data,
-    type,
-    key,
-    content,
-  }: {
-    data: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const node = createNode(type, data);
-    return update({ node, key, content });
-  }
-
-  function updateTextNode({
-    text,
-    data,
-    type,
-    key,
-    content,
-  }: {
-    text?: string | TextData | (string | TextData)[];
-    data?: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const textData = toTextDataArray(text);
-    const node = createTextNode(type, textData, data);
-    return update({ node, key, content });
-  }
-
-  class RicosContentBuilder {
-    removeNode!: (key: string, content: RichContent) => RichContent;
-  }
+  class RicosContentBuilder {}
 
   const builderApis = {};
 
@@ -262,47 +144,6 @@ export const setupContentBuilder = (
         index,
         before,
         after,
-      });
-    };
-
-    builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
-      data,
-      text,
-      key,
-      content,
-    }: SetTextMethodParams<typeof dataT>) {
-      return updateTextNode({
-        text,
-        data,
-        type,
-        key,
-        content,
-      });
-    };
-
-    builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetTextMethodParams<typeof dataT>) {
-      return setTextNode({
-        data,
-        type,
-        key,
-        content,
-      });
-    };
-
-    builderApis[`toggle${name}`] = RicosContentBuilder.prototype[`toggle${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetTextMethodParams<typeof dataT>) {
-      return toggleTextNode({
-        data,
-        type,
-        key,
-        content,
       });
     };
   });
@@ -336,29 +177,10 @@ export const setupContentBuilder = (
         after,
       });
     };
-
-    builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetMethodParams<typeof dataT>) {
-      return updateNode({ data, type, key, content });
-    };
-
-    builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetMethodParams<typeof dataT>) {
-      return setNode({ data, type, key, content });
-    };
   });
-
-  RicosContentBuilder.prototype.removeNode = removeNode;
 
   return {
     RicosContentBuilder: (RicosContentBuilder as unknown) as RicosBuilder,
     ...(builderApis as ContentBuilder),
-    removeNode,
   };
 };
