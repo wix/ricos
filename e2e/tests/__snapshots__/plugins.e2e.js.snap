@@ -4831,7 +4831,7 @@ exports[`plugins > headings > Change headers - without customHeadings config #0`
       "inlineStyleRanges": [],
       "key": 0,
       "text": "Leverage agile frameworks",
-      "type": "header-three"
+      "type": "header-two"
     },
     {
       "data": {},
@@ -4840,7 +4840,7 @@ exports[`plugins > headings > Change headers - without customHeadings config #0`
       "inlineStyleRanges": [],
       "key": 1,
       "text": "to provide a robust synopsis for high level overviews.",
-      "type": "header-two"
+      "type": "header-one"
     }
   ],
   "entityMap": {}
