@@ -109,11 +109,9 @@ export function generateInsertPluginButtonProps({
     switch (button.type) {
       case 'file':
         toggleFileSelection();
-        onPluginAddStep('FileUploadDialog');
         break;
       case 'modal':
         toggleButtonModal(event);
-        onPluginAddStep('PluginModal');
         break;
       case 'custom-block':
         addCustomBlock(button);
@@ -161,9 +159,10 @@ export function generateInsertPluginButtonProps({
       const handleFilesAdded = shouldCreateGallery(data)
         ? (blockKey: string) => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : (blockKey: string) => pubsub.getBlockHandler('handleFilesAdded', blockKey);
-      handleFileChange(data, (blockKey, file) =>
-        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
-      );
+      handleFileChange(data, (blockKey, file) => {
+        onPluginAddStep('FileUploadDialog');
+        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }));
+      });
     }
   }
 
@@ -192,6 +191,7 @@ export function generateInsertPluginButtonProps({
         theme,
         componentData: button.componentData,
         onConfirm: obj => {
+          onPluginAddStep('PluginModal');
           const data = addBlock(obj);
           addedBlockKey = data.newBlock;
           return data;
