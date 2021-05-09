@@ -73,7 +73,7 @@ const layouts = [
   {
     showArrows: true,
     arrowsSize: 23,
-    cubeType: 'fit',
+    cubeType: 'fill',
     floatingImages: 0,
     slideshowInfoSize: 0,
     allowHover: true,
