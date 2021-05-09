@@ -51,10 +51,14 @@ class LinkViewer extends Component {
         event.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
         if (!isInEditor) {
           event.preventDefault();
-          const anchorString = `viewer-${anchor}`;
-          const element = document.getElementById(anchorString);
-          addAnchorTagToUrl(anchorString);
-          customAnchorScroll ? customAnchorScroll(element) : anchorScroll(element);
+          if (customAnchorScroll) {
+            customAnchorScroll(event, anchor);
+          } else {
+            const anchorString = `viewer-${anchor}`;
+            const element = document.getElementById(anchorString);
+            addAnchorTagToUrl(anchorString);
+            anchorScroll(element);
+          }
         }
       }
     }
