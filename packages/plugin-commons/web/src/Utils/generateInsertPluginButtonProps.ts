@@ -55,13 +55,13 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
-  const onPluginAddStep = (step: onPluginAddStepArgs['step']) => {
+  const onPluginAddStep = (step: onPluginAddStepArgs['step'], blockKey: string) => {
     helpers?.onPluginAddStep?.({
       version: Version.currentVersion,
       entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
       pluginId: blockType,
-      pluginDetails: '',
+      pluginDetails: blockKey,
       step,
     });
   };
@@ -160,7 +160,7 @@ export function generateInsertPluginButtonProps({
         ? (blockKey: string) => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : (blockKey: string) => pubsub.getBlockHandler('handleFilesAdded', blockKey);
       handleFileChange(data, (blockKey, file) => {
-        onPluginAddStep('FileUploadDialog');
+        onPluginAddStep('FileUploadDialog', blockKey);
         setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }));
       });
     }
@@ -191,9 +191,9 @@ export function generateInsertPluginButtonProps({
         theme,
         componentData: button.componentData,
         onConfirm: obj => {
-          onPluginAddStep('PluginModal');
           const data = addBlock(obj);
           addedBlockKey = data.newBlock;
+          onPluginAddStep('PluginModal', addedBlockKey);
           return data;
         },
         pubsub,
