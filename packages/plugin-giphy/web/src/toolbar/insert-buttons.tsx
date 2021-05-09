@@ -51,29 +51,38 @@ const createInsertButtons: CreateInsertButtons = ({
     tooltip: t('GiphyPlugin_InsertButton_Tooltip'),
     getIcon: () => icon,
     componentData: settings.componentDataDefaults || DEFAULTS,
-    modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
   };
 
   return [
-    {
-      ...buttonProps,
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE, TOOLBARS.MOBILE],
-      modalStyles: modalStylesByToolbar[TOOLBARS.FOOTER],
-      modalStylesFn: ({ buttonRef, toolbarName }) => {
-        return getBottomToolbarModalStyles(
-          buttonRef,
-          {
-            customStyles: DESKTOP_FLY_OUT_MODAL_STYLES,
-            isMobile,
-          },
-          toolbarName
-        );
-      },
-    },
+    ...(settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE, TOOLBARS.MOBILE]).map(
+      entry_point => ({
+        ...buttonProps,
+        modalElement: decorateComponentWithProps(GiphyApiInputModal, {
+          ...settings,
+          entry_point,
+        }),
+        toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE, TOOLBARS.MOBILE],
+        modalStyles: modalStylesByToolbar[TOOLBARS.FOOTER],
+        modalStylesFn: ({ buttonRef, toolbarName }) => {
+          return getBottomToolbarModalStyles(
+            buttonRef,
+            {
+              customStyles: DESKTOP_FLY_OUT_MODAL_STYLES,
+              isMobile,
+            },
+            toolbarName
+          );
+        },
+      })
+    ),
     {
       ...buttonProps,
       toolbars: [TOOLBARS.INSERT_PLUGIN],
       modalStyles: modalStylesByToolbar[TOOLBARS.INSERT_PLUGIN],
+      modalElement: decorateComponentWithProps(GiphyApiInputModal, {
+        ...settings,
+        entry_point: TOOLBARS.INSERT_PLUGIN,
+      }),
     },
   ];
 };

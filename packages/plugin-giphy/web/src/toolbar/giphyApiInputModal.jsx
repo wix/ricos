@@ -5,6 +5,8 @@ import { TextSearchInput } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
 import GiphySelector from './giphySelector';
 import { CloseIcon } from '../icons';
+import { debounce } from 'lodash';
+import { GIPHY_TYPE } from '../types';
 
 export default class GiphyApiInputModal extends Component {
   constructor(props) {
@@ -15,7 +17,19 @@ export default class GiphyApiInputModal extends Component {
     };
   }
 
-  onChange = searchTag => this.setState({ searchTag });
+  triggerBi = debounce(() => {
+    const { helpers, entry_point } = this.props;
+    helpers.onPluginAction('searchInsideThePlugin', {
+      searchTerm: this.state.value,
+      plugin_id: GIPHY_TYPE,
+      entry_point,
+    });
+  }, 200);
+
+  onChange = searchTag => {
+    this.setState({ searchTag });
+    this.triggerBi();
+  };
 
   onCloseRequested = () => {
     this.setState({ isOpen: false });
@@ -77,4 +91,5 @@ GiphyApiInputModal.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
+  entry_point: PropTypes.string,
 };
