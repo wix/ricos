@@ -1,4 +1,6 @@
 import { Overwrite } from 'utility-types';
+import { isArray, isObject } from 'lodash';
+import { RichContent } from 'ricos-schema';
 import {
   RawDraftInlineStyleRange,
   RawDraftContentBlock,
@@ -33,3 +35,11 @@ export interface RicosContent
 }
 
 export interface DraftContent extends RicosContent {}
+
+export function isDraftContent(content): content is DraftContent {
+  return isArray(content.blocks) && isObject(content.entityMap);
+}
+
+export function isRichContent(content): content is RichContent {
+  return isArray(content.nodes);
+}
