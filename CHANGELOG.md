@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `storybook`
+  - [#2472](https://github.com/wix-incubator/rich-content/pull/2472) ContentBuilder API - added additional plugins
+
 ### :nail_care: Polish
 
 - `plugin-headings`
