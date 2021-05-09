@@ -1,0 +1,38 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.button_container {
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 5px;
+  padding: 12px;
+  border-style: none;
+  border-width: 0px;
+  text-decoration: none;
+  color: white;
+  background-color: $action-color;
+}
+
+.button_text {
+  text-align: center;
+  height: 16px;
+  min-width: 16px;
+  max-width: 716px;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include phone {
+    max-width: calc(100vw - 89px);
+  }
+}
+
+.button_size_content {
+  width: auto;
+}

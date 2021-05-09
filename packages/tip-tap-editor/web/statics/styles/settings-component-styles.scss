@@ -1,0 +1,139 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.button_settingsComponent_header_ButtonText {
+  font-size: 14px;
+  margin: 7px 0 7px 0;
+  line-height: 1.5;
+  height: 22px;
+  font-weight: normal;
+  @include phone {
+    margin: 0px 0px;
+    font-weight: normal;
+    margin-top: 4px;
+  }
+}
+.button_settingsComponent_header_ButtonLink {
+  font-size: 14px;
+  margin: 9px 0 7px 0;
+  line-height: 1.5;
+  height: 22px;
+  font-weight: normal;
+  @include phone {
+    margin: 2px 0;
+    margin-bottom: 1px;
+    font-weight: normal;
+  }
+}
+.settingTab {
+  margin-top: 6px;
+  margin-left: 0px;
+}
+.button_settingsComponent_errorMessage {
+  color: #ee5951;
+  font-size: 12px;
+  padding-top: 7px;
+  @include phone {
+    padding-top: 18px;
+    width: 213px;
+    margin-left: 1px;
+    line-height: 1.5;
+  }
+}
+.button_settingsComponent_checkBoxes {
+  padding-top: 13px;
+  @include phone {
+    padding-top: 22px;
+    padding-bottom: 1px;
+  }
+}
+.checkbox {
+  margin-bottom: 15px;
+  outline: none;
+  @include phone {
+    margin-bottom: 22px;
+  }
+}
+
+.modal_footer {
+  padding: 30px 0px;
+}
+.button_settingsComponent_name_feild {
+  padding-bottom: 8px;
+  @include phone {
+    padding-bottom: 28px;
+  }
+}
+.button_settingsComponent_section_content {
+  padding-right: 30px;
+  padding-top: 22px;
+  @include phone {
+    padding-right: 0px;
+    padding-top: 16px;
+  }
+}
+.textInput_errorIcon {
+  width: 18px;
+  height: 18px;
+  @include phone {
+    right: 0px;
+    top: -6px;
+  }
+}
+.textInput_input {
+  padding-bottom: 1px;
+  padding-left: 17px;
+  border-radius: 0px;
+  font-size: 16px;
+  @include phone {
+    border: none;
+    border-bottom: 1px solid #000000;
+    border-radius: 0;
+    padding-left: 0;
+    padding-top: 3px;
+    font-size: 16px;
+    margin-top: 7px;
+  }
+}
+
+.textInput_input::placeholder {
+  font-size: 14px;
+  color: #333333;
+}
+// checkboxes theme
+.checkbox:hover .checkbox_icon_unchecked {
+  background-color: #fff;
+}
+
+.checkbox_wrapper {
+  display: inherit;
+}
+
+.checkbox_inputLabel:hover .checkbox_icon_unchecked {
+  background-color: #fff;
+  color: $settings-action-color;
+}
+
+.checkbox_infoIcon {
+  padding-top: 2px;
+}
+
+.checkbox_icon {
+  border-radius: 1px;
+  background-color: #fff;
+  border: solid 1px #000;
+
+  &:hover {
+    color: rgba($settings-action-color-tuple, 0.1);
+  }
+}
+
+.checkbox_icon_checked {
+  background-color: #fff;
+  color: $settings-action-color;
+}
+
+.checkbox_label {
+  margin-left: 20px;
+  font-size: 16px;
+}
