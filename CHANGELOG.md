@@ -17,16 +17,23 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `plugin-headings`
+  - [#2454](https://github.com/wix-incubator/rich-content/pull/2454) clear `h1` wire on experiment `useHeadingOne`
+
 ### :rocket: New Feature
 - `accordion`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+  - [#2441](https://github.com/wix/ricos/commit/2441) scroll to item on expand/collapse
+  - [#2441](https://github.com/wix/ricos/commit/2441) (Command | Ctrl) + A shortcut selects all content in section
 - `table`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
 
 ### :bug: Bug Fix
 - `editor`
   - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
-</details>
+
+  </details>
 <hr/>
 
 ## 8.33.1 (May 6, 2021)

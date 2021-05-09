@@ -63,9 +63,9 @@ describe('plugins', () => {
         ...usePlugins(plugins.all),
       });
       cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
-      cy.focusAccordion(1).type('Yes ');
+      cy.focusAccordion(0).type('Yes ');
       cy.addAccordionPair();
-      cy.focusAccordion(2).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      cy.focusAccordion(1).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
       cy.wait(1000);
       cy.undo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('not.exist');
