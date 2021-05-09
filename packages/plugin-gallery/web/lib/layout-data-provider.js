@@ -70,7 +70,14 @@ const layouts = [
   }, // Columns
   // Unused layouts - check for support.
   {}, // Magic
-  {}, // Fullsize
+  {
+    showArrows: true,
+    arrowsSize: 23,
+    cubeType: 'fit',
+    floatingImages: 0,
+    slideshowInfoSize: 0,
+    allowHover: true,
+  }, // Fullsize
   {}, // Bricks
   {}, // Mix
   {}, // Alternate
