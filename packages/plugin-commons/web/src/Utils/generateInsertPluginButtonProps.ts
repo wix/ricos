@@ -97,7 +97,7 @@ export function generateInsertPluginButtonProps({
       editorState = newEditorState;
       selection = selection || newSelection;
       updateEntity(newBlock.getKey(), file);
-      onPluginAddSuccess();
+      onPluginAddSuccess({ pluginDetails: newBlock.getKey() });
     });
 
     return { newEditorState: editorState, newSelection: selection as SelectionState };
