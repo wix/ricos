@@ -4,7 +4,7 @@ import {
   TableEventsParamsMappers,
 } from './tableBiCallbacksTypes';
 
-export type GenericEventsName = 'addPluginLink';
+export type GenericEventsName = 'addPluginLink' | 'searchForPlugin';
 export type EventName = TableEventsName | GenericEventsName;
 export type PluginEventParams = TableBiCallbacksParams;
 
@@ -20,8 +20,15 @@ interface AddPluginLinkParams extends PluginsActionGenericParams {
   anchor?: string;
 }
 
+interface SearchForPluginParams extends PluginsActionGenericParams {
+  searchTerm: string;
+  pluginsDetails?: string;
+  entry_point?: string;
+}
+
 export interface GenericParamsMappers {
   addPluginLink: AddPluginLinkParams;
+  searchForPlugin: SearchForPluginParams;
 }
 
 interface EventsParamsMappers extends TableEventsParamsMappers, GenericParamsMappers {}
