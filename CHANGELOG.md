@@ -18,10 +18,14 @@
   </summary>
 
 ### :nail_care: Polish
+
 - `plugin-headings`
   - [#2454](https://github.com/wix-incubator/rich-content/pull/2454) clear `h1` wire on experiment `useHeadingOne`
+- `ricos-content`
+  - [#2462](https://github.com/wix-incubator/rich-content/pull/2462) remove unfinalized plugins from ContentAPI
 
 ### :rocket: New Feature
+
 - `accordion`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
   - [#2441](https://github.com/wix/ricos/commit/2441) scroll to item on expand/collapse
@@ -30,18 +34,23 @@
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
 
 ### :bug: Bug Fix
+
 - `editor`
+
   - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
 
-  </details>
-<hr/>
+      </details>
+    <hr/>
 
 ## 8.33.1 (May 6, 2021)
+
 ### :book: Documentation
+
 - `storybook`
   - [#2421](https://github.com/wix-incubator/rich-content/pull/2421) ContentBuilder API
 
 ### :bug: Bug Fix
+
 - `external-toolbar`
   - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
 - `plugin-commons`
@@ -54,6 +63,7 @@
   - [#2450](https://github.com/wix-incubator/rich-content/pull/2450) fixes embeded iframes width to be 100% fixed
 
 ### :nail_care: Polish
+
 - `ricos-content`
   - [#2421](https://github.com/wix-incubator/rich-content/pull/2421) ContentBuilder exposed separately
 
