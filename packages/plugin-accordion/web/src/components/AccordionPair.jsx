@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, anchorScroll } from 'wix-rich-content-common';
 import ExpandCollapseButton from '../components/ExpandCollapseButton';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
 import { ACCORDION_TYPE } from '../types';
@@ -12,6 +12,7 @@ class AccordionPair extends Component {
     this.styles = mergeStyles({ styles, theme });
     this.titleEditorRef = React.createRef();
     this.contentEditorRef = React.createRef();
+    this.pairRef = React.createRef();
   }
 
   focusTitle = () => this.titleEditorRef.current?.focus();
@@ -34,10 +35,20 @@ class AccordionPair extends Component {
     );
   };
 
-  onClick = () => {
+  onClick = e => {
     const { isExpanded, onCollapseClick, onExpandClick, idx, helpers } = this.props;
     isExpanded ? onCollapseClick(idx) : onExpandClick(idx);
     helpers.onViewerAction?.(ACCORDION_TYPE, 'Click', `${isExpanded ? 'collapse' : 'expand'}`);
+
+    e.preventDefault();
+    // Let scrolling begin after pair is rendered
+    setTimeout(() => anchorScroll(this.pairRef));
+  };
+
+  onKeyDown = e => {
+    if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+      e.stopPropagation();
+    }
   };
 
   render() {
@@ -45,7 +56,12 @@ class AccordionPair extends Component {
 
     return (
       <>
-        <div className={this.styles.titleContainer}>
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions*/}
+        <div
+          className={this.styles.titleContainer}
+          onKeyDown={this.onKeyDown}
+          ref={ref => (this.pairRef = ref)}
+        >
           <ExpandCollapseButton
             isExpanded={isExpanded}
             onClick={this.onClick}
