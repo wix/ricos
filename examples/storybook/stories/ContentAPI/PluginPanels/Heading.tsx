@@ -8,20 +8,20 @@ import {
   emptyCommonBuilderFields,
 } from '../AbstractPanels';
 
-export const Paragraph: FC<EditPanelProps<'addParagraph'>> = ({ addFunc }) => {
+export const Heading: FC<EditPanelProps<'addHeading'>> = ({ addFunc }) => {
   const [textStyle, setTextStyle] = useState(emptyTextStyle);
   const [commonFields, setCommonFields] = useState(emptyCommonBuilderFields);
   const [text, setText] = useState(undefined as string);
   const [indentation, setIndentation] = useState(undefined as number);
+  const [level, setLevel] = useState(undefined as number);
   const onAdd = () => {
-    addFunc('addParagraph', {
+    addFunc('addHeading', {
       text,
-      data: { textStyle, indentation },
+      data: { textStyle, indentation, level },
       ...commonFields,
     });
     setTextStyle(emptyTextStyle);
     setText('');
-    setIndentation(undefined);
   };
   return (
     <Layout>
@@ -32,6 +32,12 @@ export const Paragraph: FC<EditPanelProps<'addParagraph'>> = ({ addFunc }) => {
           value={indentation}
           type="number"
           onChange={e => setIndentation(e.currentTarget.valueAsNumber)}
+        />
+        <InputWithLabel
+          label="Level (1-6)"
+          value={level}
+          type="number"
+          onChange={e => setLevel(e.currentTarget.valueAsNumber)}
         />
         <PNLTextStyle obj={textStyle} setter={setTextStyle} />
         <PNLCommonFields obj={commonFields} setter={setCommonFields} />
