@@ -46,10 +46,6 @@ export default () => {
   const panels = createPanels({ addFunc });
   return (
     <Page title="Content Builder">
-      See Usage{' '}
-      <a target="_blank" rel="noreferrer" href="https://wix.github.io/ricos/docs/ricos/theming">
-        here
-      </a>
       <Layout cols={6} alignItems="top" justifyItems="stretch">
         <Cell span={1}>
           <Sidebar plugins={plugins} setPanel={setSelectedPanel} />
