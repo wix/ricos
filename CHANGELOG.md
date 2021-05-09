@@ -16,7 +16,22 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-</details>
+
+### :nail_care: Polish
+- `plugin-headings`
+  - [#2454](https://github.com/wix-incubator/rich-content/pull/2454) clear `h1` wire on experiment `useHeadingOne`
+
+### :rocket: New Feature
+- `accordion`
+  - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+- `table`
+  - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+
+### :bug: Bug Fix
+- `editor`
+  - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
+
+  </details>
 <hr/>
 
 ## 8.33.1 (May 6, 2021)
