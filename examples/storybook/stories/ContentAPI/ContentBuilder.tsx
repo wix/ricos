@@ -28,8 +28,8 @@ const app = setupContentBuilder(() => newKey(5));
 
 const plugins: Plugins = [
   ['Paragraph', Icons.SentenceCase, Paragraph],
-  ['Heading', Icons.SentenceCase, Heading],
-  ['Code', Icons.SentenceCase, Code],
+  ['Heading', Icons.Rename, Heading],
+  ['Code', Icons.Code, Code],
   ['Image', Icons.Image, Image],
   ['Video', Icons.VideoCamera, Video],
   ['File', Icons.Attachment, File],
