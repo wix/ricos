@@ -37,11 +37,7 @@ jobs:
 
       - run: npm run build
       - run: npm run deploy
+      - run: npm run deployPRComment
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-  yarn-lock-dedup:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - run: npx yarn-deduplicate --fail --list yarn.lock
