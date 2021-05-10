@@ -24,6 +24,7 @@ function Slider(props) {
         return;
     }
   };
+
   return (
     <input
       {...ariaProps}
@@ -36,7 +37,7 @@ function Slider(props) {
       min={min}
       max={max}
       onMouseUp={e => onSubmit(e.target.valueAsNumber)}
-      onKeyUp={e => onKeyUp(e)}
+      onKeyUp={onKeyUp}
     />
   );
 }
