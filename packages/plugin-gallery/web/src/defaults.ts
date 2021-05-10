@@ -104,9 +104,13 @@ export const createVideoItem = (video: VideoComponentData, itemId: string) => {
   return {
     metadata: {
       type: 'video',
-      height: video.thumbnail.height,
-      width: video.thumbnail.width,
-      poster: video.thumbnail.pathname,
+      height: video.height,
+      width: video.width,
+      poster: {
+        url: video.thumbnail.pathname,
+        height: video.thumbnail.height,
+        width: video.thumbnail.width,
+      },
     },
     itemId,
     url: video.pathname,

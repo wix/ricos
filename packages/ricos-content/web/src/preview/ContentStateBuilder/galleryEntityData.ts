@@ -1,18 +1,31 @@
-const giphy = item => ({
-  mediaUrl: item.mp4,
-  metadata: {
-    type: 'video',
-    videoUrl: item.mp4,
-    videoId: item.url,
-    poster: item.url,
-    source: 'giphy',
-    width: item.width || 600,
-    height: item.height || 480,
-  },
-});
+const giphy = item => {
+  const { width = 600, height = 480 } = item;
+  return {
+    mediaUrl: item.mp4,
+    metadata: {
+      type: 'video',
+      videoUrl: item.mp4,
+      videoId: item.url,
+      poster: {
+        url: item.url,
+        width,
+        height,
+      },
+      source: 'giphy',
+      width,
+      height,
+    },
+  };
+};
 
 const video = item => {
-  const { isCustom, thumbnail } = item;
+  const {
+    isCustom,
+    thumbnail: { pathname: thmbUrl, width: thmbWidth, height: thmbHeight },
+    thumbnail_url,
+    thumbnail_width,
+    thumbnail_height,
+  } = item;
   const { width = 600, height = 480 } = isCustom ? item.url : item;
   const url = isCustom ? item.url.pathname : item.url;
   return {
@@ -20,7 +33,11 @@ const video = item => {
     mediaUrl: url,
     metadata: {
       type: 'video',
-      poster: thumbnail || item.url,
+      poster: {
+        url: thmbUrl || thumbnail_url || item.url,
+        width: thmbWidth || thumbnail_width,
+        height: thmbHeight || thumbnail_height,
+      },
       videoId: url,
       width,
       height,

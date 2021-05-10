@@ -1,5 +1,6 @@
-import { normalizeUrl } from 'wix-rich-content-common';
-import { getAbsoluteUrl } from './baseUrlConverter';
+/* eslint-disable complexity */
+import { normalizeUrl, isValidUrl } from 'wix-rich-content-common';
+import { getAbsoluteUrl, isAbsoluteUrl } from './baseUrlConverter';
 
 /**
  * convertItemData - converts the old gallery metadata format to the new metaData format
@@ -41,10 +42,20 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
         };
         const {
           pathname,
-          thumbnail: { pathname: thumbPathname } = {},
+          thumbnail: { pathname: thumbPathname, width, height } = {},
         } = convertedData.metaData.poster;
         if (pathname && thumbPathname) {
-          convertedData.metaData.poster = getAbsoluteUrl(thumbPathname, 'image');
+          convertedData.metaData.poster = {
+            url: getAbsoluteUrl(thumbPathname, 'image'),
+            width,
+            height,
+          };
+        } else if (isValidUrl(convertedData.metaData.poster)) {
+          convertedData.metaData.poster = {
+            url: convertedData.metaData.poster,
+            width: convertedData.metaData.width,
+            height: convertedData.metaData.height,
+          };
         }
       }
 
