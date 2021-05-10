@@ -13,8 +13,13 @@ All the building blocks (e.g. ImageData objects) are defined in `ricos-schema` p
 
 ## Instantiation
 
+The ContentBuilder depends on key generation utility `() => string` which provides unique node keys. The `wix-rich-content-common` package exports such utility.
+
 ```ts
-TBD
+import { setupContentBuilder } from 'ricos-content/libs/Content';
+import { generateKey } from 'wix-rich-content-common';
+
+const api = setupContentBuilder(generateKey);
 ```
 
 ## Append / insert new content
