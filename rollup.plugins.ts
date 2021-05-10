@@ -113,56 +113,6 @@ const typescript = (): Plugin => {
   });
 };
 
-const commonjs = (): Plugin => {
-  const named = [
-    {
-      path: 'node_modules/image-client-api/dist/imageClientSDK.js',
-      exportList: ['getScaleToFillImageURL', 'getScaleToFitImageURL'],
-    },
-    {
-      path: 'node_modules/immutable/dist/llup/plugin-typescriptimmutable.js',
-      exportList: ['List', 'OrderedSet', 'Map'],
-    },
-    {
-      path: 'node_modules/react-google-maps/lib/index.js',
-      exportList: ['withGoogleMap', 'GoogleMap', 'Marker', 'InfoWindow'],
-    },
-    {
-      path: 'node_modules/draft-js/lib/Draft.js',
-      exportList: [
-        'SelectionState',
-        'Modifier',
-        'EditorState',
-        'AtomicBlockUtils',
-        'RichUtils',
-        'convertToRaw',
-        'convertFromRaw',
-        'getVisibleSelectionRect',
-        'DefaultDraftBlockRenderMap',
-        'KeyBindingUtil',
-        'genKey',
-        'ContentBlock',
-        'BlockMapBuilder',
-        'CharacterMetadata',
-        'ContentState',
-        'Entity',
-        'RawDraftContentState',
-        'EditorChangeType',
-        'convertFromHTML',
-      ],
-    },
-  ];
-
-  const relativePath = '../../../';
-
-  const namedExports: { [packageName: string]: string[] } = {};
-  named.forEach(({ path, exportList }) => {
-    namedExports[path] = exportList;
-    namedExports[relativePath + path] = exportList;
-  });
-  return commonjsPlugin();
-};
-
 const json = (): Plugin => {
   return jsonPlugin({
     include: [
@@ -229,7 +179,7 @@ let _plugins: Plugin[] = [
   resolveAlias(),
   resolve(),
   babel(),
-  commonjs(),
+  commonjsPlugin(),
   json(),
   typescript(),
 ];
