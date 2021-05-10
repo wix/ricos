@@ -17,6 +17,18 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2480](https://github.com/wix-incubator/rich-content/pull/2480) ContentBuilder: addBulletList, addOrderedList
+
+### :bug: Bug Fix
+- `file-upload`
+  - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) improve file loading logic
+
+</details>
+<hr/>
+
+## 8.33.2 (May 10, 2021)
 ### :house: Internal
 
 - `storybook`
@@ -40,17 +52,13 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
-- `file-upload`
-  - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) improve file loading logic
+- `general`
+  - [#2442](https://github.com/wix-incubator/rich-content/pull/2442) modal's accessibility
 
 
 ### :house: Internal
 - `e2e`
   - [#2458](https://github.com/wix-incubator/rich-content/pull/2458) update to cypress 7
-
-
-</details>
-<hr/>
 
 ## 8.33.1 (May 6, 2021)
 ### :book: Documentation
