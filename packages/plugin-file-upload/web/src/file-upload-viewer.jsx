@@ -238,7 +238,9 @@ class FileUploadViewer extends PureComponent {
         onKeyDown={resolveIfEnter}
         role="button"
         tabIndex={0}
-        className={this.styles.file_upload_link}
+        className={classnames(this.styles.file_upload_link, {
+          [this.styles.width_three]: this.isInResizeRange(resizeWidths.third),
+        })}
       >
         {this.renderViewerBody({ name, type })}
       </div>
