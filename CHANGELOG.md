@@ -40,6 +40,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
+- `file-upload`
+  - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) improve file loading logic
 
 
 ### :house: Internal
