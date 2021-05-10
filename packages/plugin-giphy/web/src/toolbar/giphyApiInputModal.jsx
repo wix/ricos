@@ -18,11 +18,11 @@ export default class GiphyApiInputModal extends Component {
   }
 
   triggerBi = debounce(() => {
-    const { helpers, entry_point } = this.props;
+    const { helpers, toolbarName } = this.props;
     helpers.onPluginAction('searchInsideThePlugin', {
       searchTerm: this.state.value,
       plugin_id: GIPHY_TYPE,
-      entry_point,
+      entry_point: toolbarName,
     });
   }, 200);
 
@@ -91,5 +91,5 @@ GiphyApiInputModal.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
-  entry_point: PropTypes.string,
+  toolbarName: PropTypes.string,
 };

@@ -201,6 +201,7 @@ export function generateInsertPluginButtonProps({
         t,
         isMobile,
         blockKey: addedBlockKey,
+        toolbarName,
       });
     }
   }
