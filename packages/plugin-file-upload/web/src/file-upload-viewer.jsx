@@ -8,6 +8,7 @@ import pluginFileUploadSchema from 'wix-rich-content-common/dist/statics/schemas
 import styles from '../statics/styles/file-upload-viewer.scss';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import classnames from 'classnames';
+import { FILE_UPLOAD_TYPE } from './types';
 
 const getNameWithoutType = fileName => {
   if (!fileName || !fileName.includes('.')) {
@@ -194,6 +195,7 @@ class FileUploadViewer extends PureComponent {
         className={classnames(this.styles.file_upload_link, {
           [this.styles.width_three]: this.isInResizeRange(resizeWidths.third),
         })}
+        onClick={this.onFileClick}
       >
         {this.renderViewerBody({ name, type })}
       </a>
@@ -252,6 +254,8 @@ class FileUploadViewer extends PureComponent {
     return <iframe ref={this.iframeRef} style={{ display: 'none' }} title="file" />;
   }
 
+  onFileClick = () => this.props.helpers.onViewerAction?.(FILE_UPLOAD_TYPE, 'Click');
+
   render() {
     const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
@@ -284,6 +288,7 @@ FileUploadViewer.propTypes = {
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
 };
 
 FileUploadViewer.defaultProps = {

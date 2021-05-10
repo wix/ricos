@@ -126,8 +126,7 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
       onPluginAddStep: async params => console.log('onPluginAddStep', params),
       onPluginAddSuccess: async (plugin_id, entry_point, params, version) =>
         console.log('biPluginAddSuccess', plugin_id, entry_point, params, version),
-      onPluginDelete: async (plugin_id, version) =>
-        console.log('biPluginDelete', plugin_id, version),
+      onPluginDelete: async params => console.log('biPluginDelete', params),
       onPluginChange: async (plugin_id, changeObj, version) =>
         console.log('biPluginChange', plugin_id, changeObj, version),
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>

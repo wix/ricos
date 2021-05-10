@@ -135,12 +135,8 @@ type AddMap = {
   addDivider: DividerData;
   addFile: FileData;
   addGallery: GalleryData;
-  addGiphy: GiphyData;
   addHtml: HTMLData;
   addImage: ImageData;
-  addLinkPreview: LinkPreviewData;
-  addMap: MapData;
-  addPoll: PollData;
   addVideo: VideoData;
 };
 
@@ -167,12 +163,7 @@ type GetMap = {
   getHtmls: HTMLData;
 };
 
-type ContentBuilderType = AddMethod<AddMap> &
-  AddTextMethod<AddTextMap> &
-  SetMethod<SetMap> &
-  SetTextMethod<SetTextMap> & {
-    removeNode: (key: string, content: RichContent) => RichContent;
-  };
+type ContentBuilderType = AddMethod<AddMap> & AddTextMethod<AddTextMap>;
 
 export interface ContentBuilder extends ContentBuilderType {}
 

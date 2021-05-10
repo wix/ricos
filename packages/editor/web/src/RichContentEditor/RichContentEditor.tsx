@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
@@ -77,7 +78,7 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import InnerRCE from './InnerRCE';
 import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import InnerModal from './InnerModal';
-import { registerCopySource } from 'draftjs-conductor';
+import { onCutAndCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
 
@@ -176,6 +177,7 @@ interface State {
     isMobile: boolean;
     t?: TranslationFunction;
   };
+  undoRedoStackChanged: boolean;
 }
 
 // experiment example code
@@ -191,6 +193,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   refId: number;
 
+  editorRef: HTMLDivElement | null;
+
   commonPubsub: Pubsub;
 
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
@@ -202,8 +206,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   editorWrapper!: Element;
 
   lastFocusedAtomicPlugin?: ContentBlock;
-
-  copySource!: { unregister(): void };
 
   updateBounds!: (editorBounds?: BoundingRect) => void;
 
@@ -258,6 +260,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       toolbarsToIgnore: [],
       readOnly: false,
       context: { experiments, isMobile, t },
+      undoRedoStackChanged: false,
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -271,6 +274,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.initPlugins();
     this.initEditorCommands();
     this.fixDraftSelectionExtend();
+    this.editorRef = null;
   }
 
   fixDraftSelectionExtend = () => {
@@ -289,13 +293,25 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 
   componentDidMount() {
-    this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
     document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
     this.commonPubsub.set('undoExperiment', this.getUndoExperiment);
+    if (!this.props.isInnerRCE && this.editorRef) {
+      this.editorRef.parentElement?.addEventListener('click', this.onEditorClickOutside);
+    }
   }
+
+  onEditorClickOutside = e => {
+    const { editorState } = this.state;
+    const clickInEditor = e.target.closest('[data-hook=root-editor]');
+    const clickInModal = e.target.closest('[data-id=rich-content-editor-modal]');
+    if (!clickInEditor && !clickInModal) {
+      this.disableFocusInSelection(editorState);
+      this.commonPubsub.set('focusedBlock', null);
+    }
+  };
 
   componentWillMount() {
     this.updateBounds = (editorBounds?: BoundingRect) => {
@@ -305,9 +321,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    if (this.copySource) {
-      this.copySource.unregister();
-    }
     document?.removeEventListener('beforeinput', this.preventDefaultKeyCommands);
   }
 
@@ -629,13 +642,24 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
         onCallbacks: ({ pluginsDeleted = [] }) => {
-          pluginsDeleted.forEach(type => onPluginDelete?.(type, version));
+          pluginsDeleted.forEach(pluginId =>
+            onPluginDelete?.({ pluginId, version, pluginDetails: undefined })
+          );
         },
       });
   };
 
+  didUndoRedoStackChange = (newEditorState: EditorState) => {
+    const { editorState } = this.state;
+    return (
+      editorState.getUndoStack().isEmpty() !== newEditorState.getUndoStack().isEmpty() ||
+      editorState.getRedoStack().isEmpty() !== newEditorState.getRedoStack().isEmpty()
+    );
+  };
+
   updateEditorState = (editorState: EditorState) => {
-    this.setState({ editorState }, () => {
+    const undoRedoStackChanged = this.didUndoRedoStackChange(editorState);
+    this.setState({ editorState, undoRedoStackChanged }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
     });
@@ -770,6 +794,22 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return 'handled';
   };
 
+  getTabCommands = () =>
+    !this.props.isInnerRCE
+      ? [
+          {
+            command: COMMANDS.TAB,
+            modifiers: [],
+            key: 'Tab',
+          },
+          {
+            command: COMMANDS.SHIFT_TAB,
+            modifiers: [MODIFIERS.SHIFT],
+            key: 'Tab',
+          },
+        ]
+      : [];
+
   customCommands = [
     {
       command: COMMANDS.FOCUS_TOOLBAR,
@@ -781,16 +821,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       modifiers: [MODIFIERS.CTRL],
       key: 't',
     },
-    {
-      command: COMMANDS.TAB,
-      modifiers: [],
-      key: 'Tab',
-    },
-    {
-      command: COMMANDS.SHIFT_TAB,
-      modifiers: [MODIFIERS.SHIFT],
-      key: 'Tab',
-    },
+    ...this.getTabCommands(),
     {
       command: COMMANDS.ESC,
       modifiers: [],
@@ -889,7 +920,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
-    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
+    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [], undoRedoStackChanged } = this.state;
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
@@ -914,6 +945,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             forceDisabled={
               plugin.name === 'FooterToolbar' && !this.props.isInnerRCE && this.inPluginEditingMode
             }
+            shouldUpdate={plugin.name === 'FooterToolbar' && undoRedoStackChanged}
           />
         );
       }
@@ -982,7 +1014,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       handleReturn,
       readOnly,
       onBackspace,
-      innerRCERenderedIn,
     } = this.props;
     const { editorState } = this.state;
     const { theme } = this.contextualData;
@@ -1005,8 +1036,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHandlers,
           getBlockType(editorState),
-          onBackspace,
-          innerRCERenderedIn
+          onBackspace
         )}
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
@@ -1027,6 +1057,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ariaMultiline={ariaMultiline}
         onBlur={onBlur}
         onFocus={onFocus}
+        // @ts-ignore
+        onCut={onCutAndCopy}
+        // @ts-ignore
+        onCopy={onCutAndCopy}
         textAlignment={textAlignment}
         readOnly={readOnly || this.state.readOnly}
         {...(this.props.experiments?.pastedFilesSupport?.enabled && {
@@ -1047,6 +1081,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     additionalProps,
     toolbarsToIgnore,
     tablePluginMenu,
+    onFocus,
+    onBlur,
   }) => {
     return (
       <InnerRCE
@@ -1065,6 +1101,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         handleUndoCommand={this.handleUndoCommand}
         handleRedoCommand={this.handleRedoCommand}
         tablePluginMenu={tablePluginMenu}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     );
   };
@@ -1173,7 +1211,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 style={this.props.style}
-                ref={measureRef}
+                ref={ref => {
+                  this.editorRef = ref;
+                  measureRef(ref);
+                }}
                 className={wrapperClassName}
                 dir={direction || getLangDir(this.props.locale)}
                 data-id={'rce'}

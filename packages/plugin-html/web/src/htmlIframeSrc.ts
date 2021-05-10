@@ -19,7 +19,7 @@ export default `
       }
       body > iframe {
         margin: 0 !important;
-        width: 100% !important;
+        width: calc(100vw - 2px) !important;
       }
       body::before,
       body::after {
