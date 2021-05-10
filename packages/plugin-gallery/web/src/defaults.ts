@@ -96,7 +96,7 @@ export const createImageItem = (
     },
     itemId,
     url: preloadImage ? img.src : img.file_name,
-    tempData: true,
+    tempData: preloadImage,
   };
 };
 
@@ -110,7 +110,6 @@ export const createVideoItem = (video: VideoComponentData, itemId: string) => {
     },
     itemId,
     url: video.pathname,
-    tempData: true,
   };
 };
 
