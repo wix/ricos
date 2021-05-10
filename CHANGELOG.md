@@ -17,16 +17,19 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `ricos-content`
-  - [#2480](https://github.com/wix-incubator/rich-content/pull/2480) ContentBuilder: addBulletList, addOrderedList
 
 </details>
 <hr/>
 
+## 8.34.0 (May 10, 2021)
+### :rocket: New Feature
+- `ricos-content`
+  - [#2480](https://github.com/wix-incubator/rich-content/pull/2480) ContentBuilder: addBulletList, addOrderedList
+### :book: Documentation
+- [#2480](https://github.com/wix-incubator/rich-content/pull/2480) Content Builder API
+
 ## 8.33.2 (May 10, 2021)
 ### :house: Internal
-
 - `storybook`
   - [#2472](https://github.com/wix-incubator/rich-content/pull/2472) ContentBuilder API - added additional plugins
 
