@@ -24,12 +24,6 @@ export type TableEventsName =
   | 'tablePluginDeleteColumnRow'
   | 'tablePluginClickOnOptionMenu'
   | 'tablePluginClickActionFromOptionMenu';
-export type TableBiCallbacksParams =
-  | TablePluginAddColumnRowParams
-  | TablePluginClickOnContextMenuParams
-  | TablePluginDeleteColumnRowParams
-  | TablePluginClickActionFromOptionMenuParams;
-
 export interface TableEventsParamsMappers {
   tablePluginAddColumnRow: TablePluginAddColumnRowParams;
   tablePluginDeleteColumnRow: TablePluginDeleteColumnRowParams;

@@ -1,28 +1,15 @@
-import {
-  TableEventsName,
-  TableBiCallbacksParams,
-  TableEventsParamsMappers,
-} from './tableBiCallbacksTypes';
+import { TableEventsName, TableEventsParamsMappers } from './tableBiCallbacksTypes';
 
 export type GenericEventsName =
   | 'addPluginLink'
   | 'settingsModalOpenedForPlugin'
   | 'settingsModalClosedForPlugin';
 export type EventName = TableEventsName | GenericEventsName;
-export type PluginEventParams = TableBiCallbacksParams;
 
 export interface PluginsActionGenericParams {
   version: string;
   plugin_id: string;
 }
-interface AddPluginLinkParams extends PluginsActionGenericParams {
-  category: string;
-  link?: string;
-  nofollow?: boolean;
-  newTab?: string;
-  anchor?: string;
-}
-
 interface AddPluginLinkParams extends PluginsActionGenericParams {
   category: string;
   link?: string;
