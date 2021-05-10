@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2416](https://github.com/wix-incubator/rich-content/pull/2416) fix sliders drag and input issues
 
 </details>
 <hr/>
