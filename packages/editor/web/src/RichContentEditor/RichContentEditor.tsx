@@ -642,7 +642,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
         onCallbacks: ({ pluginsDeleted = [] }) => {
-          pluginsDeleted.forEach(type => onPluginDelete?.(type, version));
+          pluginsDeleted.forEach(pluginId =>
+            onPluginDelete?.({ pluginId, version, pluginDetails: undefined })
+          );
         },
       });
   };
