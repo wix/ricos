@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2480](https://github.com/wix-incubator/rich-content/pull/2480) ContentBuilder: addBulletList, addOrderedList
 
 </details>
 <hr/>
