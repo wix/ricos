@@ -4,7 +4,18 @@ import { Page } from '../Components/StoryParts';
 import { setupContentBuilder } from 'ricos-content/libs/Content';
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { emptyState } from 'ricos-common';
-import { Paragraph, Image, Video, File, Divider, Button, Gallery, Html } from './PluginPanels';
+import {
+  Paragraph,
+  Image,
+  Video,
+  File,
+  Divider,
+  Button,
+  Gallery,
+  Html,
+  Heading,
+  Code,
+} from './PluginPanels';
 import { Sidebar } from './Sidebar';
 import { AddFunctor, EditPanelProps, Plugins } from './types';
 import { newKey } from './blockKeyGenerator';
@@ -16,7 +27,9 @@ import * as Icons from 'wix-ui-icons-common';
 const app = setupContentBuilder(() => newKey(5));
 
 const plugins: Plugins = [
-  ['Text', Icons.SentenceCase, Paragraph],
+  ['Paragraph', Icons.SentenceCase, Paragraph],
+  ['Heading', Icons.Rename, Heading],
+  ['Code', Icons.Code, Code],
   ['Image', Icons.Image, Image],
   ['Video', Icons.VideoCamera, Video],
   ['File', Icons.Attachment, File],
@@ -46,10 +59,6 @@ export default () => {
   const panels = createPanels({ addFunc });
   return (
     <Page title="Content Builder">
-      See Usage{' '}
-      <a target="_blank" rel="noreferrer" href="https://wix.github.io/ricos/docs/ricos/theming">
-        here
-      </a>
       <Layout cols={6} alignItems="top" justifyItems="stretch">
         <Cell span={1}>
           <Sidebar plugins={plugins} setPanel={setSelectedPanel} />

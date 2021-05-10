@@ -1,9 +1,17 @@
 /*global cy Cypress*/
 import { fixturesToTestOnSeo, DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePluginsConfig } from '../cypress/testAppConfig';
 
 const testFixtureOnSsr = fixture =>
   it(`render ${fixture} in ssr`, function() {
-    cy.loadTestAppOnSsr(fixture, 'ricos');
+    const testAppConfig = {
+      ...usePluginsConfig({
+        video: {
+          exposeButtons: ['video', 'soundCloud', 'youTube'],
+        },
+      }),
+    };
+    cy.loadTestAppOnSsr(fixture, 'ricos', testAppConfig);
     cy.eyesCheckWindow(this.test.title);
   });
 
