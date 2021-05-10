@@ -49,6 +49,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
+    [Node_Type.MAP]: convertMapData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
     convertContainerData(newData);
@@ -214,6 +215,35 @@ const convertHTMLData = data => {
   data.src = html || url;
   delete data[srcType];
   config.size && delete data.config.size;
+};
+
+const convertMapData = data => {
+  const {
+    draggable,
+    marker,
+    streetViewControl,
+    zoomControl,
+    locationName,
+    viewModeControl,
+  } = data.mapSettings;
+  data.mapSettings.isDraggingAllowed = draggable;
+  data.mapSettings.isMarkerShown = marker;
+  data.mapSettings.isStreetViewControlShown = streetViewControl;
+  data.mapSettings.isZoomControlShown = zoomControl;
+  data.mapSettings.locationDisplayName = locationName;
+  delete data.mapSettings.draggable;
+  delete data.mapSettings.marker;
+  delete data.mapSettings.streetViewControl;
+  delete data.mapSettings.zoomControl;
+  delete data.mapSettings.locationName;
+
+  if (viewModeControl) {
+    data.mapSettings.isViewControlShown = viewModeControl;
+    delete data.mapSettings.viewModeControl;
+  }
+
+  data.mapSettings.zoom = 18;
+  data.mapSettings.mode = 'roadmap';
 };
 
 const convertLink = ({
