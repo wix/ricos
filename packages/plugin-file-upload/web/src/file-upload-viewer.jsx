@@ -68,9 +68,8 @@ class FileUploadViewer extends PureComponent {
   };
 
   renderContainerWithoutLink = () => {
-    const {
-      componentData: { name, type },
-    } = this.props;
+    const { tempDataPlaceHolder, componentData } = this.props;
+    const { name, type } = tempDataPlaceHolder ? tempDataPlaceHolder : componentData;
     return (
       <div className={this.styles.file_upload_link}>{this.renderViewerBody({ name, type })}</div>
     );
@@ -120,13 +119,9 @@ class FileUploadViewer extends PureComponent {
   };
 
   getFileInfoString(type) {
-    const {
-      componentData: { size, error },
-      t,
-      isLoading,
-    } = this.props;
+    const { componentData, t, isLoading, tempDataPlaceHolder } = this.props;
     const { resolvingUrl } = this.state;
-    if (error) {
+    if (componentData.error) {
       return {
         infoString: t('UploadFile_Error_Generic_Item'),
         infoStyle: this.styles.file_upload_text_error,
@@ -137,6 +132,7 @@ class FileUploadViewer extends PureComponent {
     let infoString = t(translationKey, {
       fileType,
     });
+    const size = componentData.size || tempDataPlaceHolder?.size;
     if (size) {
       infoString = infoString + ' • ' + this.sizeToString(size);
     }
@@ -182,10 +178,11 @@ class FileUploadViewer extends PureComponent {
   renderViewer(fileUrl) {
     const {
       componentData: { name, type, error },
+      tempDataPlaceHolder,
     } = this.props;
     const { downloadTarget } = this.props.settings;
 
-    if (error) {
+    if (error || tempDataPlaceHolder) {
       return this.renderContainerWithoutLink();
     }
     return (
@@ -257,11 +254,12 @@ class FileUploadViewer extends PureComponent {
   onFileClick = () => this.props.helpers.onViewerAction?.(FILE_UPLOAD_TYPE, 'Click');
 
   render() {
-    const { componentData, theme, setComponentUrl } = this.props;
+    const { componentData, theme, setComponentUrl, tempDataPlaceHolder } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const fileUrl = componentData.url || this.state.resolvedFileUrl;
     setComponentUrl?.(fileUrl);
-    const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
+    const viewer =
+      fileUrl || tempDataPlaceHolder ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
     const style = classnames(
       this.styles.file_upload_container,
       componentData.error && this.styles.file_upload_error_container
@@ -283,6 +281,7 @@ class FileUploadViewer extends PureComponent {
 FileUploadViewer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   componentData: PropTypes.object.isRequired,
+  tempDataPlaceHolder: PropTypes.object,
   settings: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
