@@ -1,6 +1,6 @@
 import React, { Component, ComponentType } from 'react';
 import FocusManager from '../Components/FocusManager';
-import { DECORATION_MODE, OPEN_SETTINGS_MODAL_BI, CLOSE_SETTINGS_MODAL_BI } from '../consts';
+import { DECORATION_MODE } from '../consts';
 import { getLangDir, ModalDecorations, Helpers, generateKey } from 'wix-rich-content-common';
 
 const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
@@ -31,11 +31,11 @@ class RichContentModal extends Component<Props> {
 
   componentDidMount() {
     this.settingSessionId = generateKey();
-    this.triggerBi(OPEN_SETTINGS_MODAL_BI);
+    this.triggerBi('settingsModalOpenedForPlugin');
   }
 
   componentWillUnmount() {
-    this.triggerBi(CLOSE_SETTINGS_MODAL_BI);
+    this.triggerBi('settingsModalClosedForPlugin');
   }
 
   triggerBi = action => {

@@ -12,7 +12,7 @@ export type EventName = TableEventsName | GenericEventsName;
 export type PluginEventParams = TableBiCallbacksParams;
 
 export interface PluginsActionGenericParams {
-  version?: string;
+  version: string;
   plugin_id: string;
 }
 interface AddPluginLinkParams extends PluginsActionGenericParams {

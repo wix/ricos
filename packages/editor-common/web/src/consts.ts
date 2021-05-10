@@ -121,6 +121,3 @@ export const BUTTON_TYPES = Object.freeze({
   DROPDOWN: 'DROPDOWN',
   GROUP: 'GROUP',
 });
-
-export const OPEN_SETTINGS_MODAL_BI = 'settingsModalOpenedForPlugin';
-export const CLOSE_SETTINGS_MODAL_BI = 'settingsModalClosedForPlugin';
