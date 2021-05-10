@@ -1,10 +1,12 @@
-import { TableEventsName, TableEventsParamsMappers } from './tableBiCallbacksTypes';
+import {
+  TableEventsName,
+  TableBiCallbacksParams,
+  TableEventsParamsMappers,
+} from './tableBiCallbacksTypes';
 
-export type GenericEventsName =
-  | 'addPluginLink'
-  | 'settingsModalOpenedForPlugin'
-  | 'settingsModalClosedForPlugin';
+export type GenericEventsName = 'addPluginLink';
 export type EventName = TableEventsName | GenericEventsName;
+export type PluginEventParams = TableBiCallbacksParams;
 
 export interface PluginsActionGenericParams {
   version: string;
@@ -18,14 +20,8 @@ interface AddPluginLinkParams extends PluginsActionGenericParams {
   anchor?: string;
 }
 
-interface SettingsModalParams extends PluginsActionGenericParams {
-  settingSessionId: string;
-}
-
 export interface GenericParamsMappers {
   addPluginLink: AddPluginLinkParams;
-  settingsModalOpenedForPlugin: SettingsModalParams;
-  settingsModalClosedForPlugin: SettingsModalParams;
 }
 
 interface EventsParamsMappers extends TableEventsParamsMappers, GenericParamsMappers {}
