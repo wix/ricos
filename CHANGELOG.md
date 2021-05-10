@@ -40,6 +40,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
+- `general`
+  - [#2442](https://github.com/wix-incubator/rich-content/pull/2442) modal's accessibility
 
 
 ### :house: Internal
