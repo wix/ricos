@@ -71,7 +71,8 @@ class FileUploadComponent extends PureComponent {
       this.updateComponentData(tempDataPlaceHolder);
       return { tempDataPlaceHolder, isLoading: true };
     } else {
-      this.resetLoadingState({ msg: 'missing upload function' });
+      this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
+      return { isLoading: false };
     }
   };
 
