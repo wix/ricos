@@ -2,7 +2,12 @@ const github = require('@actions/github');
 
 async function gitPRComment(message, header) {
   const { REPO_TOKEN } = process.env;
-  if (REPO_TOKEN) {
+  if (!REPO_TOKEN) {
+    console.error("missing REPO_TOKEN")
+  }
+  if (!context.payload.pull_request) {
+    console.error("not running in pull request event")
+  }
     const context = github.context;
     const issue_number = context.payload.pull_request.number;
 
