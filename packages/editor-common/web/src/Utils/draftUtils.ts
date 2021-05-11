@@ -6,7 +6,6 @@ import {
   AtomicBlockUtils,
   ContentBlock,
   ContentState,
-  EntityInstance,
   RawDraftEntity,
   EditorChangeType,
 } from '@wix/draft-js';
@@ -23,6 +22,11 @@ import {
   InlineStyle,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
+import {
+  getBlockTypePlugins,
+  getContentSummary,
+  getEntities,
+} from 'wix-rich-content-common/libs/contentAnalytics';
 
 type LinkDataUrl = {
   url: string;
@@ -572,55 +576,9 @@ function getSelection(editorState: EditorState) {
   return selection;
 }
 
-// TODO: refactor function @Barackos
-export const getEntities = (editorState: EditorState, entityType?: string): EntityInstance[] => {
-  const currentContent = editorState.getCurrentContent();
-  const entities: EntityInstance[] = [];
-
-  currentContent.getBlockMap().forEach(block => {
-    block?.findEntityRanges(
-      character => {
-        const char = character.getEntity();
-        if (char) {
-          const entity = currentContent.getEntity(char);
-          if (!entityType || entity.getType() === entityType) {
-            entities.push(entity);
-          }
-        } else {
-          // regular text block
-          entities.push({
-            getType: () => 'text',
-            getData: () => '',
-          } as EntityInstance);
-        }
-        return false;
-      },
-      () => {}
-    );
-  });
-  return entities;
-};
-
-const countByType = (obj: { getType: () => string }[]) => countBy(obj, x => x.getType());
-
-const getBlockTypePlugins = (blocks: ContentBlock[]) =>
-  blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
-
 export function getPostContentSummary(editorState: EditorState) {
   if (Object.entries(editorState).length === 0) return;
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const entries = getEntities(editorState);
-  const blockPlugins = getBlockTypePlugins(blocks);
-  const pluginsDetails = entries
-    .filter(entry => entry.getType() !== 'text')
-    .map(entry => ({ type: entry.getType(), data: entry.getData() }));
-  return {
-    pluginsCount: {
-      ...countByType(blockPlugins),
-      ...countByType(entries),
-    },
-    pluginsDetails,
-  };
+  return getContentSummary(editorState.getCurrentContent());
 }
 
 const countByTypeField = obj => countBy(obj, x => x.type);
@@ -632,8 +590,8 @@ const calculateContentDiff = (
   newState: EditorState,
   onCallbacks: OnCallbacks
 ) => {
-  const prevEntities = countByTypeField(getEntities(prevState));
-  const currEntities = countByTypeField(getEntities(newState));
+  const prevEntities = countByTypeField(getEntities(prevState.getCurrentContent()));
+  const currEntities = countByTypeField(getEntities(newState.getCurrentContent()));
   const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
   const currBlocks = newState.getCurrentContent().getBlocksAsArray();
   const prevBlockPlugins = countByTypeField(getBlockTypePlugins(prevBlocks));
