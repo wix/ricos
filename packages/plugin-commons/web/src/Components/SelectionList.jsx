@@ -116,7 +116,7 @@ class SelectionList extends Component {
           .map(item => this.mapItemToOptionData(item))
           .map(({ item, option, selected }, i) => (
             <SelectionListOption
-              tabIndex={i === 0 ? 0 : -1}
+              tabIndex={0}
               selected={selected}
               focused={i === this.state.focusIndex}
               dataHook={item.dataHook}
