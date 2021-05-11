@@ -37,7 +37,16 @@ const RicosPublishStory: FunctionComponent<EditorEventsProps> = ({ editorEvents 
       </h4>
       <Section>
         <RichContentEditorBox>
-          <RicosEditor isMobile={isMobile} plugins={plugins} modalSettings={modalSettings} />
+          <RicosEditor
+            isMobile={isMobile}
+            plugins={plugins}
+            modalSettings={modalSettings}
+            _rcProps={{
+              helpers: {
+                onPublish: async (...args) => console.log('biOnPublish', args),
+              },
+            }}
+          />
           <ActionButton
             text={'Publish'}
             onClick={async () => {
