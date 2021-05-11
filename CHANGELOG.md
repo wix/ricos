@@ -16,6 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
+
+## 8.34.1 (May 11, 2021)
 
 ### :rocket: New Feature
 
@@ -26,9 +30,6 @@
 
 - `viewer`
   - [#2482](https://github.com/wix/ricos/pull/2482) Fix hooks order & add first and last hooks
-
-</details>
-<hr/>
 
 ## 8.34.0 (May 10, 2021)
 
