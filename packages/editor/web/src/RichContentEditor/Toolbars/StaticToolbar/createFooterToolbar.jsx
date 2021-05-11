@@ -65,6 +65,7 @@ export default ({
   toolbarDecorationFn,
   footerToolbarConfig,
   t,
+  helpers,
 }) => {
   const footerTheme = getFooterTheme(theme);
   return createStaticToolbar({
@@ -77,5 +78,6 @@ export default ({
     toolbarDecorationFn,
     footerToolbarConfig,
     t,
+    helpers,
   });
 };
