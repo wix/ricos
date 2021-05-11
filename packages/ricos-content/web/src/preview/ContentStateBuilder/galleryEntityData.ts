@@ -18,26 +18,29 @@ const giphy = item => {
   };
 };
 
+const getPoster = item => {
+  const url =
+    item.url.thumbnail?.pathname ||
+    item.thumbnail?.pathname ||
+    item.thumbnail_url ||
+    item.thumbnail;
+  const width =
+    item.url.thumbnail?.width || item.thumbnail?.width || item.thumbnail_width || item.width;
+  const height =
+    item.url.thumbnail?.height || item.thumbnail?.height || item.thumbnail_height || item.height;
+  return { url, width, height };
+};
+
 const video = item => {
-  const {
-    isCustom,
-    thumbnail: { pathname: thmbUrl, width: thmbWidth, height: thmbHeight },
-    thumbnail_url,
-    thumbnail_width,
-    thumbnail_height,
-  } = item;
+  const { isCustom } = item;
   const { width = 600, height = 480 } = isCustom ? item.url : item;
-  const url = isCustom ? item.url.pathname : item.url;
+  const url = isCustom ? item.url?.pathname : item.url;
   return {
     url,
     mediaUrl: url,
     metadata: {
       type: 'video',
-      poster: {
-        url: thmbUrl || thumbnail_url || item.url,
-        width: thmbWidth || thumbnail_width,
-        height: thmbHeight || thumbnail_height,
-      },
+      poster: getPoster(item),
       videoId: url,
       width,
       height,

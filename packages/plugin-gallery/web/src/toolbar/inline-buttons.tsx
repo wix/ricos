@@ -2,7 +2,7 @@ import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
-import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
+import { getGalleryLayouts, switchLayout, getCurrentLayout } from '../layout-helper';
 import {
   CreateInlineButtons,
   TranslationFunction,
@@ -55,7 +55,7 @@ const createInlineButtons: CreateInlineButtons = ({
     {
       keyName: 'layout',
       type: BUTTONS.DROPDOWN,
-      options: galleryLayoutsDropdown(t),
+      options: getGalleryLayouts(t),
       onChange: switchLayout,
       getValue: getCurrentLayout,
       mobile: true,

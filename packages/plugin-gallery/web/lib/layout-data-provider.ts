@@ -1,5 +1,22 @@
-const layouts = [
-  {
+export enum GALLERY_LAYOUTS {
+  EMPTY = -1,
+  COLLAGE,
+  MASONRY,
+  GRID,
+  THUMBNAIL,
+  SLIDER,
+  SLIDESHOW,
+  PANORAMA,
+  COLUMN,
+  MAGIC,
+  FULLSIZE,
+  BRICKS,
+  MIX,
+  ALTERNATE,
+}
+
+export const layoutData = {
+  [GALLERY_LAYOUTS.COLLAGE]: {
     showArrows: false,
     isVertical: true,
     oneRow: false,
@@ -7,16 +24,16 @@ const layouts = [
     imageMargin: 5,
     gallerySizePx: '300',
     allowHover: true,
-  }, // Collage
-  {
+  },
+  [GALLERY_LAYOUTS.MASONRY]: {
     showArrows: false,
     numberOfImagesPerRow: 0,
     imageMargin: 5,
     gallerySizePx: '300',
     gridStyle: 0,
     allowHover: true,
-  }, // Masonry
-  {
+  },
+  [GALLERY_LAYOUTS.GRID]: {
     showArrows: false,
     imageResize: false,
     galleryImageRatio: 2,
@@ -27,8 +44,8 @@ const layouts = [
     isVertical: true,
     oneRow: false,
     allowHover: true,
-  }, // Grid
-  {
+  },
+  [GALLERY_LAYOUTS.THUMBNAIL]: {
     showArrows: true,
     arrowsSize: 23,
     galleryThumbnailsAlignment: 'bottom',
@@ -36,51 +53,44 @@ const layouts = [
     thumbnailSpacings: 2.5,
     thumbnailSize: 120,
     allowHover: true,
-  }, // Thumbnails
-  {
+  },
+  [GALLERY_LAYOUTS.SLIDER]: {
     showArrows: true,
     arrowsSize: 23,
     imageMargin: 5,
     cubeType: 'fit',
     cubeRatio: '16/9',
     allowHover: true,
-  }, // Slider
-  {
+  },
+  [GALLERY_LAYOUTS.SLIDESHOW]: {
     showArrows: true,
     arrowsSize: 23,
     cubeType: 'fit',
     floatingImages: 0,
     slideshowInfoSize: 0,
     allowHover: true,
-  }, // Slideshow
-  {
+  },
+  [GALLERY_LAYOUTS.PANORAMA]: {
     showArrows: false,
     hasThumbnails: false,
     galleryThumbnailsAlignment: 'none',
     imageMargin: 5,
     allowHover: true,
-  }, // Panorama
-  {
+  },
+  [GALLERY_LAYOUTS.COLUMN]: {
     showArrows: true,
     arrowsSize: 23,
     hasThumbnails: false,
     galleryThumbnailsAlignment: 'none',
     imageMargin: 5,
     allowHover: true,
-  }, // Columns
-  // Unused layouts - check for support.
-  {}, // Magic
-  {
+  },
+  [GALLERY_LAYOUTS.FULLSIZE]: {
     showArrows: true,
     arrowsSize: 23,
     cubeType: 'fill',
     floatingImages: 0,
     slideshowInfoSize: 0,
     allowHover: true,
-  }, // Fullsize
-  {}, // Bricks
-  {}, // Mix
-  {}, // Alternate
-];
-
-export default layouts;
+  },
+};

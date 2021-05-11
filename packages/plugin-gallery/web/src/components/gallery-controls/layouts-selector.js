@@ -14,7 +14,7 @@ class LayoutSelector extends Component {
   }
 
   getLayouts = t => {
-    return getGalleryLayouts(t).map(layout => {
+    return getGalleryLayouts(t, false).map(layout => {
       return {
         layoutId: layout.value,
         name: layout.label,

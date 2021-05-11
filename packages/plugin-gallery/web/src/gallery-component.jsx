@@ -158,21 +158,16 @@ class GalleryComponent extends PureComponent {
 
   handleFilesAdded = ({ data, error, itemIdx }, uploadBIData) => {
     const handleFileAdded = (item, error, idx) => {
-      const {
-        thumbnail: { pathname, width: thmbWidth, height: thmbHeight },
-        thumbnail_url,
-        thumbnail_width,
-        thumbnail_height,
-      } = item;
       let galleryItem = {};
+      const { thumbnail: { pathname: url, width: thmbWidth, height: thmbHeight } = {} } = item;
       const { height, width } = item;
       const poster =
         item.type === GALLERY_ITEMS_TYPES.VIDEO
           ? {
-              poster: item.poster || {
-                url: pathname || thumbnail_url,
-                width: thmbWidth || thumbnail_width,
-                height: thmbHeight || thumbnail_height,
+              poster: {
+                url,
+                width: thmbWidth,
+                height: thmbHeight,
               },
             }
           : {};
