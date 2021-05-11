@@ -17,6 +17,16 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+
+- `common`
+  - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
+
+</details>
+<hr/>
+
+## 8.34.1 (May 11, 2021)
+
 ### :rocket: New Feature
 
 - `image`
@@ -26,9 +36,6 @@
 
 - `viewer`
   - [#2482](https://github.com/wix/ricos/pull/2482) Fix hooks order & add first and last hooks
-
-</details>
-<hr/>
 
 ## 8.34.0 (May 10, 2021)
 
