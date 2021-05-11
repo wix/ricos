@@ -25,8 +25,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ci_node_total: [5] # Set N number of parallel jobs you want to run tests on.
-        ci_node_index: [0, 1, 2, 3, 4] # set N-1 indexes for parallel jobs
+        ci_node_total: [4] # Set N number of parallel jobs you want to run tests on.
+        ci_node_index: [0, 1, 2, 3] # set N-1 indexes for parallel jobs
 
     steps:
       - uses: actions/checkout@v2
