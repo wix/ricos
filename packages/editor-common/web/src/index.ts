@@ -76,7 +76,6 @@ export {
   getSelectionRange,
   isInSelectionRange,
   cloneDeepWithoutEditorState,
-  getEntities,
   isCursorAtStartOfContent,
   isCursorAtFirstLine,
   selectAllContent,
