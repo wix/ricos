@@ -5,6 +5,7 @@ import { Version } from 'wix-rich-content-common';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
+import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
 
 interface State {
   isPreviewExpanded: boolean;
@@ -30,12 +31,19 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   };
 
   componentDidMount() {
-    const { children } = this.props;
+    const { children, content } = this.props;
 
     const onViewerLoaded =
       children?.props.helpers?.onViewerLoaded || this.props._rcProps?.helpers?.onViewerLoaded;
     const isPreview = children?.props.helpers?.isPreview || this.props._rcProps?.helpers?.isPreview;
-    onViewerLoaded?.(!!isPreview?.(), Version.currentVersion);
+    const currentContent =
+      content || children?.props.initialState || this.props._rcProps?.initialState;
+    const { pluginsCount } = (currentContent && getContentSummary(currentContent)) || {};
+    onViewerLoaded?.({
+      isPreview: !!isPreview?.(),
+      version: Version.currentVersion,
+      pluginsCount,
+    });
   }
 
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });

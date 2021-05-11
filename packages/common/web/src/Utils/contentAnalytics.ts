@@ -1,46 +1,18 @@
-import { ContentBlock, ContentState, EntityInstance } from 'draft-js';
+import { RicosContent, RicosContentBlock } from 'ricos-content';
 import { countBy } from 'lodash';
 
-export const getBlockTypePlugins = (blocks: ContentBlock[]) =>
-  blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
+export const getBlockTypePlugins = (blocks: RicosContentBlock[]) =>
+  blocks.filter(block => block.type !== 'unstyled' && block.type !== 'atomic');
 
-export const getEntities = (content: ContentState, entityType?: string): EntityInstance[] => {
-  const entities: EntityInstance[] = [];
+export const countByType = (obj: { type: string }[]) => countBy(obj, x => x.type);
 
-  content.getBlockMap().forEach(block => {
-    block?.findEntityRanges(
-      character => {
-        const char = character.getEntity();
-        if (char) {
-          const entity = content.getEntity(char);
-          if (!entityType || entity.getType() === entityType) {
-            entities.push(entity);
-          }
-        } else {
-          // regular text block
-          entities.push({
-            getType: () => 'text',
-            getData: () => '',
-          } as EntityInstance);
-        }
-        return false;
-      },
-      () => {}
-    );
-  });
-  return entities;
-};
-
-export const countByType = (obj: { getType: () => string }[]) => countBy(obj, x => x.getType());
-
-export function getContentSummary(content: ContentState) {
-  if (content.getBlocksAsArray().length === 0) return;
-  const blocks = content.getBlocksAsArray();
-  const entries = getEntities(content);
+export function getContentSummary(content: RicosContent) {
+  const { blocks, entityMap } = content;
   const blockPlugins = getBlockTypePlugins(blocks);
+  const entries = Object.values(entityMap);
   const pluginsDetails = entries
-    .filter(entry => entry.getType() !== 'text')
-    .map(entry => ({ type: entry.getType(), data: entry.getData() }));
+    .filter(entry => entry.type !== 'text')
+    .map(entry => ({ type: entry.type, data: entry.data }));
   return {
     pluginsCount: {
       ...countByType(blockPlugins),

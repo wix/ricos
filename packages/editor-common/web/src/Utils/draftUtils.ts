@@ -1,3 +1,4 @@
+import { convertToRaw } from '..';
 import {
   EditorState,
   Modifier,
@@ -8,6 +9,7 @@ import {
   ContentState,
   RawDraftEntity,
   EditorChangeType,
+  EntityInstance,
 } from '@wix/draft-js';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
@@ -22,11 +24,7 @@ import {
   InlineStyle,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
-import {
-  getBlockTypePlugins,
-  getContentSummary,
-  getEntities,
-} from 'wix-rich-content-common/libs/contentAnalytics';
+import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
 
 type LinkDataUrl = {
   url: string;
@@ -578,10 +576,40 @@ function getSelection(editorState: EditorState) {
 
 export function getPostContentSummary(editorState: EditorState) {
   if (Object.entries(editorState).length === 0) return;
-  return getContentSummary(editorState.getCurrentContent());
+  return getContentSummary(convertToRaw(editorState.getCurrentContent()));
 }
 
 const countByTypeField = obj => countBy(obj, x => x.type);
+
+const getBlockTypePlugins = (blocks: ContentBlock[]) =>
+  blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
+
+export const getEntities = (content: ContentState, entityType?: string): EntityInstance[] => {
+  const entities: EntityInstance[] = [];
+
+  content.getBlockMap().forEach(block => {
+    block?.findEntityRanges(
+      character => {
+        const char = character.getEntity();
+        if (char) {
+          const entity = content.getEntity(char);
+          if (!entityType || entity.getType() === entityType) {
+            entities.push(entity);
+          }
+        } else {
+          // regular text block
+          entities.push({
+            getType: () => 'text',
+            getData: () => '',
+          } as EntityInstance);
+        }
+        return false;
+      },
+      () => {}
+    );
+  });
+  return entities;
+};
 
 type OnCallbacks = (params: { pluginsDeleted: string[] }) => void;
 
