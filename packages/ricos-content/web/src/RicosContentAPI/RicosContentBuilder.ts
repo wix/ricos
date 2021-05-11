@@ -17,9 +17,10 @@ import {
   RichContent,
   TextData,
   VideoData,
+  TextStyle_TextAlignment,
 } from 'ricos-schema';
-import { addNode as add, toTextDataArray } from './builder-utils';
-import { ContentBuilder } from '../types';
+import { addNode as add, toTextDataArray, toListDataArray } from './builder-utils';
+import { ContentBuilder, ListItemData } from '../types';
 
 const dataByNodeType = (type: Node_Type, data: unknown) =>
   ({
@@ -52,6 +53,16 @@ type AddTextMethodParams<T> = AddMethodParams<T> & {
   text?: string | TextData | (string | TextData)[];
 };
 
+type AddListMethodParams = {
+  items: string | TextData | ListItemData | (string | TextData | ListItemData)[];
+  data?: ParagraphData;
+  type: Node_Type.ORDERED_LIST | Node_Type.BULLET_LIST;
+  index?: number;
+  before?: string;
+  after?: string;
+  content: RichContent;
+};
+
 export interface RicosBuilder extends ContentBuilder {
   new (): ContentBuilder;
 }
@@ -61,6 +72,18 @@ export const setupContentBuilder = (
 ): ContentBuilder & { RicosContentBuilder: RicosBuilder } => {
   function createNode(type: Node_Type, data: unknown): Node {
     return { key: generateKey(), type, ...dataByNodeType(type, data), nodes: [] };
+  }
+
+  function createListNode(type: Node_Type, items: ListItemData[]) {
+    return {
+      type,
+      key: generateKey(),
+      nodes: items.map(({ text, data }) => ({
+        type: Node_Type.LIST_ITEM,
+        key: generateKey(),
+        nodes: [createTextNode(Node_Type.PARAGRAPH, text, data)],
+      })),
+    };
   }
 
   function createTextNode(type: Node_Type, text: TextData[], data: unknown): Node {
@@ -116,6 +139,25 @@ export const setupContentBuilder = (
     return add({ node, index, before, after, content });
   }
 
+  const defaultParagraphData = {
+    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
+    indentation: 0,
+  };
+
+  function addListNode({
+    items,
+    data = defaultParagraphData,
+    type,
+    index,
+    before,
+    after,
+    content,
+  }: AddListMethodParams): RichContent {
+    const listItemData = toListDataArray(items, data);
+    const node = createListNode(type, listItemData);
+    return add({ node, index, before, after, content });
+  }
+
   class RicosContentBuilder {}
 
   const builderApis = {};
@@ -125,8 +167,6 @@ export const setupContentBuilder = (
     { name: 'Heading', type: Node_Type.HEADING, dataT: {} as HeadingData },
     { name: 'Code', type: Node_Type.CODEBLOCK, dataT: {} as CodeData },
     { name: 'Blockquote', type: Node_Type.BLOCKQUOTE, dataT: {} as never },
-    { name: 'BulletListItem', type: Node_Type.BULLET_LIST, dataT: {} as never },
-    { name: 'OrderedListItem', type: Node_Type.ORDERED_LIST, dataT: {} as never },
   ].forEach(({ name, type, dataT }) => {
     builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
       data,
@@ -147,6 +187,24 @@ export const setupContentBuilder = (
       });
     };
   });
+
+  [
+    { name: 'BulletList', type: Node_Type.BULLET_LIST },
+    { name: 'OrderedList', type: Node_Type.ORDERED_LIST },
+  ].forEach(
+    ({ name, type }: { name: string; type: Node_Type.ORDERED_LIST | Node_Type.BULLET_LIST }) => {
+      builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
+        items,
+        data,
+        index,
+        before,
+        after,
+        content,
+      }: AddListMethodParams): RichContent {
+        return addListNode({ items, data, type, index, before, after, content });
+      };
+    }
+  );
 
   [
     { name: 'Image', type: Node_Type.IMAGE, dataT: {} as ImageData },
