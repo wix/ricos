@@ -3,9 +3,9 @@ import { VideoSettingsProps } from '../types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import Styles from '../../statics/styles/video-settings.scss';
+import { LabeledToggle } from 'wix-rich-content-components';
 import {
   SettingsSection,
-  LabeledToggle,
   SettingsPanelFooter,
   SettingsMobileHeader,
 } from 'wix-rich-content-plugin-commons';
