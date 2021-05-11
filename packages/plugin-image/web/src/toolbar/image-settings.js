@@ -8,8 +8,8 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
+  LabeledToggle,
 } from 'wix-rich-content-plugin-commons';
-import { LabeledToggle } from 'wix-rich-content-ui-components';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 
