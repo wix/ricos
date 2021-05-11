@@ -13,6 +13,7 @@ stats.html
 .env
 applitools.private.config.js
 
+
 #Webstorm
 **/.idea/*
 *.iml
@@ -45,3 +46,6 @@ applitools.config.js
 !intro.json
 !migration-content.json
 **/reverseMigratedFixtures
+
+# Generated Merged Translations
+packages/common/web/statics/locale
