@@ -31,14 +31,14 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   };
 
   componentDidMount() {
-    const { children, content } = this.props;
+    const { children } = this.props;
 
     const onViewerLoaded =
       children?.props.helpers?.onViewerLoaded || this.props._rcProps?.helpers?.onViewerLoaded;
     const isPreview = children?.props.helpers?.isPreview || this.props._rcProps?.helpers?.isPreview;
-    const currentContent =
-      content || children?.props.initialState || this.props._rcProps?.initialState;
-    const { pluginsCount } = (currentContent && getContentSummary(currentContent)) || {};
+    const content =
+      this.props.content || children?.props.initialState || this.props._rcProps?.initialState;
+    const { pluginsCount } = (content && getContentSummary(content)) || {};
     onViewerLoaded?.({
       isPreview: !!isPreview?.(),
       version: Version.currentVersion,
