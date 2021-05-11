@@ -59,7 +59,7 @@ export const LineHeight = Extension.create<LineHeightOptions>({
 
   addKeyboardShortcuts() {
     return {
-      'Mod-Shift-l': () => this.editor.commands.setLineHeight('20px'),
+      'Mod-Shift-l': () => this.editor.commands.setLineHeight('100px'),
       'Mod-Shift-m': () => this.editor.commands.unsetLineHeight(),
     };
   },

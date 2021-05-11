@@ -10,8 +10,5 @@ require('./RicosComponents/');
 require('./Experiments/');
 require('./TestCase/');
 require('./UploadMedia/');
-<<<<<<< HEAD
 require('./TipTap/');
-=======
 require('./ContentAPI/');
->>>>>>> master
