@@ -625,7 +625,13 @@ export function getPostContentSummary(editorState: EditorState) {
 
 const countByTypeField = obj => countBy(obj, x => x.type);
 
-const calculateContentDiff = (prevState, newState, onCallbacks) => {
+type OnCallbacks = (params: { pluginsDeleted: string[] }) => void;
+
+const calculateContentDiff = (
+  prevState: EditorState,
+  newState: EditorState,
+  onCallbacks: OnCallbacks
+) => {
   const prevEntities = countByTypeField(getEntities(prevState));
   const currEntities = countByTypeField(getEntities(newState));
   const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();

@@ -18,10 +18,40 @@
   </summary>
 
 ### :nail_care: Polish
-- `plugin-headings`
-  - [#2454](https://github.com/wix-incubator/rich-content/pull/2454) clear `h1` wire on experiment `useHeadingOne`
+
+- `viewer`
+  - [#2482](https://github.com/wix/ricos/pull/2482) Fix hooks order & add first and last hooks
+
+</details>
+<hr/>
+
+## 8.34.0 (May 10, 2021)
 
 ### :rocket: New Feature
+
+- `ricos-content`
+  - [#2480](https://github.com/wix/ricos/pull/2480) ContentBuilder: addBulletList, addOrderedList
+
+### :book: Documentation
+
+- [#2480](https://github.com/wix/ricos/pull/2480) Content Builder API
+
+## 8.33.2 (May 10, 2021)
+
+### :house: Internal
+
+- `storybook`
+  - [#2472](https://github.com/wix/ricos/pull/2472) ContentBuilder API - added additional plugins
+
+### :nail_care: Polish
+
+- `plugin-headings`
+  - [#2454](https://github.com/wix/ricos/pull/2454) clear `h1` wire on experiment `useHeadingOne`
+- `ricos-content`
+  - [#2462](https://github.com/wix/ricos/pull/2462) remove unfinalized plugins from ContentAPI
+
+### :rocket: New Feature
+
 - `accordion`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
   - [#2441](https://github.com/wix/ricos/commit/2441) scroll to item on expand/collapse
@@ -30,32 +60,41 @@
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
 
 ### :bug: Bug Fix
-- `editor`
-  - [#2451](https://github.com/wix-incubator/rich-content/pull/2451) render static toolbar buttons on undo-redo changes
 
-  </details>
-<hr/>
+- `editor`
+  - [#2451](https://github.com/wix/ricos/pull/2451) render static toolbar buttons on undo-redo changes
+- `general`
+  - [#2442](https://github.com/wix/ricos/pull/2442) modal's accessibility
+
+### :house: Internal
+
+- `e2e`
+  - [#2458](https://github.com/wix/ricos/pull/2458) update to cypress 7
 
 ## 8.33.1 (May 6, 2021)
+
 ### :book: Documentation
+
 - `storybook`
-  - [#2421](https://github.com/wix-incubator/rich-content/pull/2421) ContentBuilder API
+  - [#2421](https://github.com/wix/ricos/pull/2421) ContentBuilder API
 
 ### :bug: Bug Fix
+
 - `external-toolbar`
-  - [#2424](https://github.com/wix-incubator/rich-content/pull/2424) add table to external toolbar
+  - [#2424](https://github.com/wix/ricos/pull/2424) add table to external toolbar
 - `plugin-commons`
-  - [#2446](https://github.com/wix-incubator/rich-content/pull/2446) link entry removed rather set to null on link removal
+  - [#2446](https://github.com/wix/ricos/pull/2446) link entry removed rather set to null on link removal
 - `link`
-  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) static toolbar link popup styles fixed
+  - [#2435](https://github.com/wix/ricos/pull/2435) static toolbar link popup styles fixed
 - `general`
-  - [#2435](https://github.com/wix-incubator/rich-content/pull/2435) ClickOutside for inline popups supports drag out
+  - [#2435](https://github.com/wix/ricos/pull/2435) ClickOutside for inline popups supports drag out
 - `html-embed`
-  - [#2450](https://github.com/wix-incubator/rich-content/pull/2450) fixes embeded iframes width to be 100% fixed
+  - [#2450](https://github.com/wix/ricos/pull/2450) fixes embeded iframes width to be 100% fixed
 
 ### :nail_care: Polish
+
 - `ricos-content`
-  - [#2421](https://github.com/wix-incubator/rich-content/pull/2421) ContentBuilder exposed separately
+  - [#2421](https://github.com/wix/ricos/pull/2421) ContentBuilder exposed separately
 
 ## 8.33.0 (May 3, 2021)
 
@@ -69,19 +108,19 @@
 ### :bug: Bug Fix
 
 - `ricos-viewer`
-  - [#2427](https://github.com/wix-incubator/rich-content/pull/2427) support RichContentViewer's `addAnchors` prop
+  - [#2427](https://github.com/wix/ricos/pull/2427) support RichContentViewer's `addAnchors` prop
 
 ### :house: Internal
 
 - `editor`
-  - [#2397](https://github.com/wix-incubator/rich-content/pull/2397) fix undo experiment accordion crash
+  - [#2397](https://github.com/wix/ricos/pull/2397) fix undo experiment accordion crash
 
 ## 8.32.0 (May 2, 2021)
 
 ### :rocket: New Feature
 
 - `ricos-editor`
-  - [#2413](https://github.com/wix-incubator/rich-content/pull/2413) action color can now be separated for settings panels & focus on plugin. See [settingsActionColor & focusActionColor API](https://ricos.js.org/docs/ricos/Theming#settingsactioncolor)
+  - [#2413](https://github.com/wix/ricos/pull/2413) action color can now be separated for settings panels & focus on plugin. See [settingsActionColor & focusActionColor API](https://ricos.js.org/docs/ricos/Theming#settingsactioncolor)
 
 ### :bug: Bug Fix
 
@@ -89,7 +128,7 @@
   - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
 - `gallery`
 
-  - [#2402](https://github.com/wix-incubator/rich-content/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
+  - [#2402](https://github.com/wix/ricos/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
 
 ### :house: Internal
 
@@ -133,33 +172,33 @@
 - `fullscreen`
   - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
 - `docs`
-  - [#2337](https://github.com/wix-incubator/rich-content/pull/2337) docs removed from workspaces (build failure fix)
+  - [#2337](https://github.com/wix/ricos/pull/2337) docs removed from workspaces (build failure fix)
 
 ### :bug: Bug Fix
 
 - `image viewer`
-  - [#2398](https://github.com/wix-incubator/rich-content/pull/2398) Avoid exception when image src missing
+  - [#2398](https://github.com/wix/ricos/pull/2398) Avoid exception when image src missing
 - `editor`
 
-  - [#2385](https://github.com/wix-incubator/rich-content/pull/2385) toolbar shortcuts in mac & windows
+  - [#2385](https://github.com/wix/ricos/pull/2385) toolbar shortcuts in mac & windows
 
 ## 8.30.3 (April 22, 2021)
 
 ### :bug: Bug Fix
 
 - `image`
-  - [#2390](https://github.com/wix-incubator/rich-content/pull/2390) click on image caption doesnt open expand mode
+  - [#2390](https://github.com/wix/ricos/pull/2390) click on image caption doesnt open expand mode
 - `ricos-content`
-  - [#2393](https://github.com/wix-incubator/rich-content/pull/2393) draft converters handle undefined values in content
+  - [#2393](https://github.com/wix/ricos/pull/2393) draft converters handle undefined values in content
 
 ## 8.30.2 (April 22, 2021)
 
 ### :bug: Bug Fix
 
 - `editor`
-  - [#2380](https://github.com/wix-incubator/rich-content/pull/2380) delete last quote block before atomic block
+  - [#2380](https://github.com/wix/ricos/pull/2380) delete last quote block before atomic block
 - `external-toolbar`
-  - [#2391](https://github.com/wix-incubator/rich-content/pull/2391) add events and bookings to vertical embed
+  - [#2391](https://github.com/wix/ricos/pull/2391) add events and bookings to vertical embed
 
 ## 8.30.1 (April 21, 2021)
 
@@ -187,18 +226,18 @@
 ### :bug: Bug Fix
 
 - `editor`
-  - [#2378](https://github.com/wix-incubator/rich-content/pull/2378) link modal supports image links (static toolbar flow)
-  - [#2386](https://github.com/wix-incubator/rich-content/pull/2386) clear unsupported plugins from pasted content
-  - [#2387](https://github.com/wix-incubator/rich-content/pull/2387) editor commands allows any data for draft types
+  - [#2378](https://github.com/wix/ricos/pull/2378) link modal supports image links (static toolbar flow)
+  - [#2386](https://github.com/wix/ricos/pull/2386) clear unsupported plugins from pasted content
+  - [#2387](https://github.com/wix/ricos/pull/2387) editor commands allows any data for draft types
 - `link`
-  - [#2384](https://github.com/wix-incubator/rich-content/pull/2384) anchor - fix preview config (crash on componentDidMount)
+  - [#2384](https://github.com/wix/ricos/pull/2384) anchor - fix preview config (crash on componentDidMount)
 - `gallery`
   - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
 
 ### :nail_care: Polish
 
 - `schema`
-  - [#2383](https://github.com/wix-incubator/rich-content/pull/2383) fix link schema
+  - [#2383](https://github.com/wix/ricos/pull/2383) fix link schema
 
 ## 8.29.12 (April 13, 2021)
 
