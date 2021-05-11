@@ -1,4 +1,3 @@
-const github = require('@actions/github');
 exports.EXAMPLES_TO_DEPLOY = [
   {
     name: 'rich-content',
