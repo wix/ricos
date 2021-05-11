@@ -574,7 +574,7 @@ function getSelection(editorState: EditorState) {
   return selection;
 }
 
-export function getPostContentSummary(editorState: EditorState) {
+export function getEditorContentSummary(editorState: EditorState) {
   if (Object.entries(editorState).length === 0) return;
   return getContentSummary(convertToRaw(editorState.getCurrentContent()));
 }

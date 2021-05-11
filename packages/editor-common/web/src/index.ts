@@ -60,7 +60,7 @@ export {
   getBlockEntityType,
   getFocusedBlockKey,
   createCalcContentDiff,
-  getPostContentSummary,
+  getEditorContentSummary,
   createSelection,
   getBlockType,
   hasInlineStyle,
