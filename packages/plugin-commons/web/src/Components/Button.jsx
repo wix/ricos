@@ -31,6 +31,7 @@ class Button extends Component {
         {...ariaProps}
         data-hook={dataHook}
         onClick={onClick}
+        tabIndex="0"
         className={classNames(this.styles[`button_${type}`], className)}
       >
         {children}
