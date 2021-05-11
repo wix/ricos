@@ -254,7 +254,7 @@ class GalleryViewer extends React.Component {
   render() {
     const { theme, settings, seoMode } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { scrollingElement, ...galleySettings } = settings;
+    const { scrollingElement, ...gallerySettings } = settings;
     const { size } = this.state;
 
     const items = this.getItems();
@@ -285,7 +285,7 @@ class GalleryViewer extends React.Component {
               ...alwaysShowHover,
             }}
             container={size}
-            settings={galleySettings}
+            settings={gallerySettings}
             scrollingElement={scrollingElement}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}

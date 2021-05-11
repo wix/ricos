@@ -40,6 +40,12 @@ class ViewerAnchors extends React.Component {
     });
   };
 
+  numberAll = () => {
+    this.addEveryParagraph(1, 1, el => {
+      return 'Anchor below ' + (el.getAttribute('data-hook') || 'no-id');
+    });
+  };
+
   render() {
     return (
       <Page title="Viewer Anchors Demo">
@@ -53,6 +59,9 @@ class ViewerAnchors extends React.Component {
         </div>
         <div>
           <Button onClick={() => this.markAll()}>Check Anchors type</Button>
+        </div>
+        <div>
+          <Button onClick={() => this.numberAll()}>Check Anchors Number</Button>
         </div>
         <RichContentViewerBox preset="blog-preset">
           <ViewerWrapper content={fixture} addAnchors={anchorPrefix} />

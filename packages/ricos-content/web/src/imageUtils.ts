@@ -24,6 +24,7 @@ const ceilDimension = (dim: Dimension) => ({ w: Math.ceil(dim.w), h: Math.ceil(d
 
 const createUrl = (
   src: ComponentData['src'],
+  removeUsm?: boolean,
   rw?: number,
   rh?: number,
   rq?: number,
@@ -35,7 +36,7 @@ const createUrl = (
   if (type === 'quailtyPreload') {
     return createQuailtyPreloadUrl(src);
   }
-  return createHiResUrl(src, rw, rh, rq);
+  return createHiResUrl(src, rw, rh, rq, removeUsm);
 };
 
 const createPreloadUrl = (
@@ -73,9 +74,21 @@ const createHiResUrl = (
   { file_name: fileName, width: w, height: h }: ComponentData['src'] = {},
   rw = DEFAULT.SIZE,
   rh = DEFAULT.SIZE,
-  rq = DEFAULT.QUALITY
+  rq = DEFAULT.QUALITY,
+  removeUsm = false
 ) =>
-  fileName ? imageClientAPI.getScaleToFitImageURL(fileName, w, h, rw, rh, { quality: rq }) : '';
+  fileName
+    ? imageClientAPI.getScaleToFitImageURL(fileName, w, h, rw, rh, {
+        quality: rq,
+        ...(removeUsm && {
+          unsharpMask: {
+            amount: 0,
+            radius: 0,
+            threshold: 0,
+          },
+        }),
+      })
+    : '';
 
 const getImageFormat = (fileName: string) => {
   const matches = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/i.exec(fileName);
@@ -90,6 +103,7 @@ const getImageSrc = (
     requiredHeight?: number;
     requiredQuality?: number;
     imageType?: string;
+    removeUsm?: boolean;
   } = {}
 ) => {
   if (typeof src === 'object') {
@@ -110,6 +124,7 @@ const getImageSrc = (
     } else if (src.file_name) {
       const url = createUrl(
         src,
+        options.removeUsm,
         options.requiredWidth,
         options.requiredHeight,
         options.requiredQuality,
