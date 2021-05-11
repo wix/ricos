@@ -310,10 +310,9 @@ describe('text', () => {
         .focusEditor()
         .enterParagraphs(['Text should not include indentation.'])
         .type('{selectall}')
-        .tab()
+        .type('{meta}{m}')
         .moveCursorToStart()
-        .type('{selectall}')
-        .tab({ shift: true })
+        .type('{meta}{shift}{m}')
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
     });

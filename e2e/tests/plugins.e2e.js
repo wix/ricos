@@ -11,7 +11,7 @@ import {
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
-import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -389,11 +389,11 @@ describe('plugins', () => {
     it('create nested lists using tab & shift-tab', function() {
       cy.loadRicosEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
-        .tab()
+        .type('{meta}{m}')
         .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])
-        .tab()
+        .type('{meta}{m}')
         .enterParagraphs(['\n Hey I am an ordered list in depth 1.'])
-        .tab({ shift: true })
+        .type('{meta}{shift}{m}')
         .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.']);
 
       // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])

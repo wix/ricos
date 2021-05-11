@@ -1,5 +1,10 @@
 /* eslint-disable no-restricted-globals */
-import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
+import {
+  COMMANDS,
+  mergeBlockData,
+  RichUtils,
+  indentSelectedBlocks,
+} from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 import handleTabCommand from './handleTabCommand';
@@ -37,6 +42,12 @@ export default (updateEditorState, customHandlers, blockType, onBackspace) => (
       case COMMANDS.BLOCKQUOTE:
       case COMMANDS.CODE:
         newState = RichUtils.toggleBlockType(editorState, command);
+        break;
+      case COMMANDS.INCREASE_INDENT:
+        newState = indentSelectedBlocks(editorState, 1);
+        break;
+      case COMMANDS.DECREASE_INDENT:
+        newState = indentSelectedBlocks(editorState, -1);
         break;
       case COMMANDS.BACKSPACE:
         onBackspace?.(editorState);
