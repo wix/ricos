@@ -22,7 +22,7 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
   createCalcContentDiff,
-  getPostContentSummary,
+  getEditorContentSummary,
   getBlockType,
   COMMANDS,
   MODIFIERS,
@@ -242,7 +242,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     editorState: EditorState,
     callBack: (...args) => boolean = () => true
   ) => {
-    const postSummary = getPostContentSummary(editorState || {});
+    const postSummary = getEditorContentSummary(editorState || {});
     callBack({ postId, ...postSummary });
   };
 
@@ -886,7 +886,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (!this.props.helpers?.onPublish) {
       return;
     }
-    const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
+    const { pluginsCount, pluginsDetails } = getEditorContentSummary(this.state.editorState) || {};
     this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
