@@ -17,7 +17,7 @@ import {
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
 import { withInteraction } from './withInteraction';
-
+import Anchor from './components/Anchor.tsx';
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
     const {
@@ -240,7 +240,7 @@ const getPluginViewers = (
   typeMappers,
   context,
   styles,
-  addAnchorFnc,
+  addAnchorsPrefix,
   innerRCEViewerProps
 ) => {
   const res = {};
@@ -271,11 +271,17 @@ const getPluginViewers = (
       );
 
       const wrappedPluginViewer = withInteraction(pluginViewer, interactions, context);
-      const shouldAddAnchor = addAnchorFnc && !isInline;
+
+      let anchorElement;
+      if (addAnchorsPrefix && !isInline) {
+        const anchorType = type.replace('wix-draft-plugin-', '').toLowerCase();
+        const anchorKey = `${addAnchorsPrefix}${block.data.index + 1}`;
+        anchorElement = <Anchor type={anchorType} anchorKey={anchorKey} />;
+      }
       return (
         <React.Fragment key={`${i}_${key}`}>
           {wrappedPluginViewer}
-          {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
+          {anchorElement}
         </React.Fragment>
       );
     };
