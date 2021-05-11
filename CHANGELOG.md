@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+
+- `image`
+  - [#2483](https://github.com/wix/ricos/pull/2483) remove unsharp mask from image url's (experiment `removeUsmFromImageUrls`)
+
 ### :nail_care: Polish
 
 - `viewer`
