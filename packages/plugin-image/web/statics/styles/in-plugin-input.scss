@@ -1,13 +1,22 @@
-.inPluginInput {
-    border: none;
-    line-height: 21px;
-    width: 100%;
-    position: inherit;
-    z-index: 1;
-    font: inherit;
-    font-size: 14px;
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
-    &[readonly] {
-        cursor: pointer;
-    }
+.inPluginInput {
+  border: none;
+  line-height: 21px;
+  width: 100%;
+  position: inherit;
+  z-index: 1;
+  font: inherit;
+  color: $primary-text-color;
+  @include ricosTypography('p', false);
+
+  &.link {
+    @include ricosTypography('link', true);
+    color: $ricos-link-color;
+  }
+
+  &[readonly] {
+    cursor: pointer;
+  }
 }
