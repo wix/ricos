@@ -25,16 +25,16 @@ const RicosPublishStory: FunctionComponent<EditorEventsProps> = ({ editorEvents 
 
   return (
     <Page title="Ricos - editorEvents.publish()">
-      {/* <h4>
+      <h4>
         See Usage{' '}
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://wix.github.io/ricos/docs/ricos/ricos-api/#refgetcontentpromise"
+          href="https://ricos.js.org/docs/ricos/editor-events-context"
         >
           here
         </a>
-      </h4> */}
+      </h4>
       <Section>
         <RichContentEditorBox>
           <RicosEditor isMobile={isMobile} plugins={plugins} modalSettings={modalSettings} />
