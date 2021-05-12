@@ -51,8 +51,6 @@ const getBlockStyleClasses = (
   return classNames(classes, directionClass, mergedStyles[alignmentClass]);
 };
 
-let blockCount = 0;
-
 const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicStyles);
 
 const getInline = (inlineStyleMappers, mergedStyles) =>
@@ -131,20 +129,21 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
 
         const wrappedBlock = withInteraction(inner, interactions, context);
         const wrapperKey = `${blockProps.keys[i]}_wrap`;
-        const shouldAddAnchors = addAnchorsPrefix && !isEmptyBlock(child);
         let resultBlock = <React.Fragment key={wrapperKey}>{wrappedBlock}</React.Fragment>;
 
-        if (shouldAddAnchors) {
-          blockCount++;
-          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
+        const getAnchorType = () => {
+          if (isEmptyBlock(child)) {
+            return 'empty-line';
+          }
+          return typeof type === 'string' ? type : 'paragraph';
+        };
+
+        if (addAnchorsPrefix) {
+          const anchorKey = `${addAnchorsPrefix}${blockIndex + 1}`;
           resultBlock = (
             <React.Fragment key={wrapperKey}>
               {wrappedBlock}
-              <Anchor
-                type={typeof type === 'string' ? type : 'paragraph'}
-                key={anchorKey}
-                anchorKey={anchorKey}
-              />
+              <Anchor type={getAnchorType()} key={anchorKey} anchorKey={anchorKey} />
             </React.Fragment>
           );
         }
@@ -191,15 +190,7 @@ const getEntities = (
       typeMappers,
       context,
       styles,
-      type => {
-        if (addAnchorsPrefix) {
-          blockCount++;
-          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
-          return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
-        } else {
-          return null;
-        }
-      },
+      addAnchorsPrefix,
       innerRCEViewerProps
     ),
   };
@@ -209,7 +200,10 @@ const normalizeContentState = (contentState: DraftContent): DraftContent => ({
   ...contentState,
   blocks: contentState.blocks.map((block, index) => {
     if (block.type === 'atomic') {
-      return block;
+      return {
+        ...block,
+        data: { index },
+      };
     }
 
     const textDirection = getTextDirection(block.text);
@@ -282,8 +276,8 @@ const convertToReact = (
     : normalizedContentState;
 
   const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
-  blockCount = 0;
-  return redraft(
+
+  let result = redraft(
     newContentState,
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
@@ -300,6 +294,18 @@ const convertToReact = (
     },
     { ...redraftOptions, ...restOptions }
   );
+  if (addAnchors) {
+    const firstAnchorKey = `${addAnchorsPrefix}-first`;
+    const lastAnchorKey = `${addAnchorsPrefix}-last`;
+    result = (
+      <>
+        <Anchor type={'first'} anchorKey={firstAnchorKey} />
+        {result}
+        <Anchor type={'last'} anchorKey={lastAnchorKey} />
+      </>
+    );
+  }
+  return result;
 };
 
 // renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)

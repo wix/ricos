@@ -5,4 +5,5 @@ export const EXPERIMENTS = [
   { name: 'tableCellsLimit', scope: 'ricos', input: [100, 200, 300, 500, 1000] },
   { name: 'UseUndoForPlugins', scope: 'ricos' },
   { name: 'spoilerInSettings', scope: 'ricos' },
+  { name: 'removeUsmFromImageUrls', scope: 'ricos' },
 ];
