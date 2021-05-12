@@ -133,7 +133,6 @@ class GalleryComponent extends PureComponent {
   handleFileUpload = (file, type, itemIdx) => {
     const { helpers } = this.props;
     const handleFileUpload = helpers?.handleFileUpload;
-
     if (handleFileUpload) {
       const createGalleryItem =
         type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;

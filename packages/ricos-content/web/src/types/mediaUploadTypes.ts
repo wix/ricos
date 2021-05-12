@@ -69,8 +69,8 @@ export interface ImageComponentData {
 
 export interface VideoComponentData {
   pathname: string;
-  height: number;
-  width: number;
+  height?: number;
+  width?: number;
   thumbnail: {
     pathname: string;
     height: number;
