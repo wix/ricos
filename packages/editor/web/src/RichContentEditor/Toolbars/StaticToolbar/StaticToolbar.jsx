@@ -128,6 +128,7 @@ export default class StaticToolbar extends React.PureComponent {
       t,
       forceDisabled,
       shouldUpdate,
+      helpers,
     } = this.props;
     const { toolbarStyles } = theme || {};
     const { showLeftArrow, showRightArrow, overrideContent: OverrideContent } = this.state;
@@ -160,6 +161,7 @@ export default class StaticToolbar extends React.PureComponent {
       setEditorState: pubsub.get('setEditorState'),
       isMobile,
       searchablePlugins: this.props.structure,
+      helpers,
     };
     return (
       <div className={buttonClassNames}>

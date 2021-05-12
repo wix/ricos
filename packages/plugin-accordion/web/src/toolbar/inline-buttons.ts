@@ -2,6 +2,7 @@ import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
+import { ACCORDION_TYPE } from '../types';
 
 const modalStyles = {
   customStyles: {
@@ -26,6 +27,8 @@ const createInlineButtons: CreateInlineButtons = ({ t }: { t: TranslationFunctio
       modalStyles: getModalStyles(modalStyles),
       t,
       mobile: true,
+      triggerSettingsBi: true,
+      pluginId: ACCORDION_TYPE,
     },
     { keyName: 'separator', mobile: false, type: BUTTONS.SEPARATOR },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },

@@ -138,6 +138,8 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       return null;
     }
 
+    const removeUsm = this.context.experiments?.removeUsmFromImageUrls?.enabled;
+
     const imageUrl: ImageSrc = {
       preload: '',
       highres: '',
@@ -175,6 +177,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       } = this.props;
       const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
       imageSrcOpts = {
+        removeUsm,
         imageType: 'quailtyPreload',
         ...(usePredefinedWidth && { requiredWidth: 300 }),
       };
@@ -190,6 +193,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     }
 
     imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
+      removeUsm,
       requiredWidth,
       requiredHeight,
       requiredQuality: 90,

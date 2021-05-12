@@ -10,9 +10,9 @@ import {
   isString,
   isArray,
 } from 'lodash/fp';
-import { RichContent, TextData, Node } from 'ricos-schema';
+import { ParagraphData, RichContent, TextData, Node } from 'ricos-schema';
 import { task, either, firstResolved } from '../fp-utils';
-import { PartialDeep } from '../types';
+import { PartialDeep, ListItemData } from '../types';
 
 // predicates
 const isIndexFound = either(index => index !== -1);
@@ -143,6 +143,27 @@ const toArray = t => [t];
 
 const toTextData = text => ({ text, decorations: [] });
 
+const toListItemData = curry((data: ParagraphData, text: TextData[]) => ({ data, text }));
+
+export function toListDataArray(
+  items: string | TextData | ListItemData | (string | TextData | ListItemData)[],
+  data: ParagraphData
+): ListItemData[] {
+  return firstResolved([
+    either(isString, items).map(compose(toArray, toListItemData(data), toArray, toTextData)),
+    either(isTextData, items).map(compose(toArray, toListItemData(data), toArray)),
+    either(isArray, items).map(
+      map(item =>
+        firstResolved([
+          either(isString, item).map(compose(toListItemData(data), toArray, toTextData)),
+          either(isTextData, item).map(compose(toListItemData(data), toArray)),
+          task.of(item),
+        ])
+      )
+    ),
+    task.of([]),
+  ]);
+}
 export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
   return firstResolved([
     either(isString, text).map(compose(toArray, toTextData)),

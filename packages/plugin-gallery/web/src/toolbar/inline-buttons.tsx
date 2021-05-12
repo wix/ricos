@@ -9,7 +9,7 @@ import {
   AnchorTarget,
   RelValue,
 } from 'wix-rich-content-common';
-import { GalleryPluginEditorConfig } from '../types';
+import { GalleryPluginEditorConfig, GALLERY_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
@@ -99,6 +99,8 @@ const createInlineButtons: CreateInlineButtons = ({
       anchorTarget,
       relValue,
       accept: settings.accept,
+      triggerSettingsBi: true,
+      pluginId: GALLERY_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
