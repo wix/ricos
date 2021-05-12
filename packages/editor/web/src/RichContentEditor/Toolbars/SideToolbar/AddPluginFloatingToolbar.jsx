@@ -139,6 +139,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
       t,
       addPluginMenuConfig,
       isMobile,
+      helpers,
     } = this.props;
     const { toolbarStyles } = theme || {};
     const popoupClassNames = classNames(
@@ -172,6 +173,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
           theme={theme}
           pluginMenuButtonRef={this.selectButton}
           toolbarName={TOOLBARS.SIDE}
+          helpers={helpers}
         />
       </div>
     );

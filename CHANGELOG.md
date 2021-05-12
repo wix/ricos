@@ -16,6 +16,12 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :nail_care: Polish
+
+- `common`
+  - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
+
 </details>
 <hr/>
 
