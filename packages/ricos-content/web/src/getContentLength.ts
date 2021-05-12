@@ -19,10 +19,12 @@ export function getContentLength(content: RawRichContent | DraftContent): number
       .getAll(content)
       .join('\n').length;
   } else if (isRichContent(content)) {
-    return getRichContentTextTraversal()
+    const text = getRichContentTextTraversal()
       .asFold()
       .getAll(content)
-      .join('\n').length;
+      .join('\n');
+    console.log(text); // eslint-disable-line no-console
+    return text.length;
   }
 
   return NaN;
@@ -34,12 +36,14 @@ function getRichContentTextTraversal() {
   const nestedNodeLens = Lens.fromProp<Node>()('nodes');
   const textDataLens = Lens.fromNullableProp<Node>()('textData', { text: '', decorations: [] });
   const textLens = Lens.fromProp<TextData>()('text');
-  return nodeLens
-    .composeTraversal(nodeTraversal.filter(n => n.nodes.length > 0))
-    .composeLens(nestedNodeLens)
-    .composeTraversal(nodeTraversal.filter(n => n.type === 'TEXT'))
-    .composeLens(textDataLens)
-    .composeLens(textLens);
+  return (
+    nodeLens
+      // .composeTraversal(nodeTraversal.filter(n => n.nodes.length > 0))
+      // .composeLens(nestedNodeLens)
+      .composeTraversal(nodeTraversal.filter(n => n.type === 'TEXT'))
+      .composeLens(textDataLens)
+      .composeLens(textLens)
+  );
 }
 
 function getDraftTextTraversal() {
