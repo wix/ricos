@@ -1,5 +1,5 @@
 {
-  "name": "wix-rich-content-components",
+  "name": "wix-rich-content-ui-components",
   "private": true,
   "version": "8.34.0",
   "author": {
@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/wix/ricos/issues"
   },
-  "homepage": "https://github.com/wix/ricos/tree/master/rich-content-components",
+  "homepage": "https://github.com/wix/ricos/tree/master/rich-content-ui-components",
   "files": [
     "dist", "libs", "viewer"
   ],
@@ -25,7 +25,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build:rollup": "rollup --environment MODULE_NAME:components -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:ui-components -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
