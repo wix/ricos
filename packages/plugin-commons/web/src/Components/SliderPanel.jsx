@@ -20,7 +20,7 @@ const SliderPanel = props => {
       <SliderWithInput
         {...mappedProps}
         theme={theme}
-        value={getValue(props)}
+        defaultValue={getValue(props)}
         onChange={onChange({ ...props, getEditorBounds })}
         sliderDataHook="sliderPanel_Slider"
         inputDataHook="sliderPanel_Input"

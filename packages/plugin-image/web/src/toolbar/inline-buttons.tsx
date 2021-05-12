@@ -10,7 +10,7 @@ import {
   RelValue,
   UISettings,
 } from 'wix-rich-content-common';
-import { ImagePluginEditorConfig } from '../types';
+import { ImagePluginEditorConfig, IMAGE_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
@@ -82,6 +82,8 @@ const createInlineButtons: CreateInlineButtons = ({
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       uiSettings,
+      triggerSettingsBi: true,
+      pluginId: IMAGE_TYPE,
     },
     { keyName: 'link', type: BUTTONS.LINK, mobile: true },
     {

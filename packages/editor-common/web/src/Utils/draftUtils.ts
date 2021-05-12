@@ -1,3 +1,4 @@
+import { convertToRaw } from '..';
 import {
   EditorState,
   Modifier,
@@ -6,9 +7,9 @@ import {
   AtomicBlockUtils,
   ContentBlock,
   ContentState,
-  EntityInstance,
   RawDraftEntity,
   EditorChangeType,
+  EntityInstance,
 } from '@wix/draft-js';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
@@ -23,6 +24,7 @@ import {
   InlineStyle,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
+import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
 
 type LinkDataUrl = {
   url: string;
@@ -572,17 +574,25 @@ function getSelection(editorState: EditorState) {
   return selection;
 }
 
-// TODO: refactor function @Barackos
-export const getEntities = (editorState: EditorState, entityType?: string): EntityInstance[] => {
-  const currentContent = editorState.getCurrentContent();
+export function getEditorContentSummary(editorState: EditorState) {
+  if (Object.entries(editorState).length === 0) return;
+  return getContentSummary(convertToRaw(editorState.getCurrentContent()));
+}
+
+const countByTypeField = obj => countBy(obj, x => x.type);
+
+const getBlockTypePlugins = (blocks: ContentBlock[]) =>
+  blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
+
+export const getEntities = (content: ContentState, entityType?: string): EntityInstance[] => {
   const entities: EntityInstance[] = [];
 
-  currentContent.getBlockMap().forEach(block => {
+  content.getBlockMap().forEach(block => {
     block?.findEntityRanges(
       character => {
         const char = character.getEntity();
         if (char) {
-          const entity = currentContent.getEntity(char);
+          const entity = content.getEntity(char);
           if (!entityType || entity.getType() === entityType) {
             entities.push(entity);
           }
@@ -601,30 +611,6 @@ export const getEntities = (editorState: EditorState, entityType?: string): Enti
   return entities;
 };
 
-const countByType = (obj: { getType: () => string }[]) => countBy(obj, x => x.getType());
-
-const getBlockTypePlugins = (blocks: ContentBlock[]) =>
-  blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
-
-export function getPostContentSummary(editorState: EditorState) {
-  if (Object.entries(editorState).length === 0) return;
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const entries = getEntities(editorState);
-  const blockPlugins = getBlockTypePlugins(blocks);
-  const pluginsDetails = entries
-    .filter(entry => entry.getType() !== 'text')
-    .map(entry => ({ type: entry.getType(), data: entry.getData() }));
-  return {
-    pluginsCount: {
-      ...countByType(blockPlugins),
-      ...countByType(entries),
-    },
-    pluginsDetails,
-  };
-}
-
-const countByTypeField = obj => countBy(obj, x => x.type);
-
 type OnCallbacks = (params: { pluginsDeleted: string[] }) => void;
 
 const calculateContentDiff = (
@@ -632,8 +618,8 @@ const calculateContentDiff = (
   newState: EditorState,
   onCallbacks: OnCallbacks
 ) => {
-  const prevEntities = countByTypeField(getEntities(prevState));
-  const currEntities = countByTypeField(getEntities(newState));
+  const prevEntities = countByTypeField(getEntities(prevState.getCurrentContent()));
+  const currEntities = countByTypeField(getEntities(newState.getCurrentContent()));
   const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
   const currBlocks = newState.getCurrentContent().getBlocksAsArray();
   const prevBlockPlugins = countByTypeField(getBlockTypePlugins(prevBlocks));

@@ -18,6 +18,12 @@ export interface onPluginDeleteArgs extends biCallbackParams {
   pluginDetails: unknown;
 }
 
+export interface onViewerLoadedArgs extends biCallbackParams {
+  isPreview: boolean;
+  pluginsCount: boolean;
+  version: string;
+}
+
 export interface PluginAddSuccessParams {
   rows?: number;
   columns?: number;
@@ -45,7 +51,7 @@ export interface BICallbacks {
     version: string
   ): void;
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
-  onViewerLoaded?(isPreview: boolean, version: string): void;
+  onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
   onPluginChange?(
     pluginId: string,
