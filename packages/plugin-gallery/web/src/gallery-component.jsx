@@ -158,9 +158,9 @@ class GalleryComponent extends PureComponent {
   handleFilesAdded = ({ data, error, itemIdx }) => {
     const handleFileAdded = (item, error, idx) => {
       let galleryItem = {};
-      const createGalleryItem =
-        item?.type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;
       if (item) {
+        const createGalleryItem =
+          item.type === GALLERY_ITEMS_TYPES.VIDEO ? createVideoItem : createImageItem;
         galleryItem = createGalleryItem(item, String(item.id));
       }
       this.setItemInGallery(galleryItem, error, idx);
