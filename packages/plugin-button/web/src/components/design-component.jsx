@@ -213,7 +213,7 @@ class DesignComponent extends PureComponent {
               <div className={styles.button_designComponent_input_container_width}>
                 <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
-                    value={parseInt(design.borderWidth)}
+                    defaultValue={parseInt(design.borderWidth)}
                     min={0}
                     max={15}
                     label={t('ButtonModal_Width_Input')}
@@ -225,7 +225,7 @@ class DesignComponent extends PureComponent {
               <div className={styles.button_designComponent_input_container_corner}>
                 <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
-                    value={parseInt(design.borderRadius)}
+                    defaultValue={parseInt(design.borderRadius)}
                     min={0}
                     max={15}
                     label={t('ButtonModal_Radius_Input')}
