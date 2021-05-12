@@ -1,0 +1,39 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+%button {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button_primary {
+  @extend %button;
+  color: #fff;
+  background-color: $settings-action-color;
+
+  &:hover:not([disabled]) {
+    background-color: rgba($settings-action-color-tuple, 0.8);
+  }
+
+  &:disabled {
+    cursor: auto;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.button_secondary {
+  @extend %button;
+  border: 1px solid $settings-action-color;
+  background: #fff;
+  color: $settings-action-color;
+  &:hover,
+  &:active {
+    border-color: rgba($settings-action-color-tuple, 0.6);
+    color: rgba($settings-action-color-tuple, 0.6);
+  }
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}

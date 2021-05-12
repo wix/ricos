@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { Tabs, Tab, SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
+import { Tabs, Tab } from 'wix-rich-content-plugin-commons';
+import { SettingsPanelFooter } from 'wix-rich-content-ui-components';
 import { KEYS_CHARCODE, FocusManager, ErrorIcon } from 'wix-rich-content-editor-common';
 import {
   mergeStyles,

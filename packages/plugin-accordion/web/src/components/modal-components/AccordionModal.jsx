@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import { Accordion } from '../domain/accordion';
-import { SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
+import { SettingsPanelFooter } from 'wix-rich-content-ui-components';
 import AccordionSettings from './AccordionSettings';
 import AccordionMobileHeader from './AccordionMobileHeader';
 import styles from '../../../statics/styles/accordion-modal.scss';
