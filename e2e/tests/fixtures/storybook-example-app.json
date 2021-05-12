@@ -398,6 +398,18 @@
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
+        "config": {
+          "size": "small",
+          "alignment": "right",
+          "showTitle": true,
+          "disableExpand": false,
+          "showDescription": true,
+          "link": {
+            "url": "www.wix.com",
+            "target": "_blank",
+            "rel": "noopener"
+          }
+        },
         "src": {
           "id": "bcb5bc2f8a914694b8dc0c9ff2575f79",
           "width": 5120,
@@ -405,12 +417,8 @@
           "file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
           "original_file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg"
         },
-        "config": {
-          "size": "small",
-          "alignment": "right",
-          "showTitle": true,
-          "disableExpand": false,
-          "showDescription": true
+        "metadata": {
+          "caption": "Image Caption Example (with link)"
         }
       }
     },
@@ -589,5 +597,5 @@
       }
     }
   },
-  "VERSION": "8.5.0"
+  "VERSION": "8.34.1"
 }
