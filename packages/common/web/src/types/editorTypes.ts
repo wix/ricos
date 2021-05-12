@@ -36,6 +36,7 @@ interface BICallbacksForHelpers extends BICallbacks {
   onPluginAddSuccess?(pluginId: string, entryPoint: string, params, version?: string): void;
   isPreview?: () => boolean;
   onPluginAction?: OnPluginAction;
+  onViewerAction?: (pluginId: string, action: string, value: string) => void;
 }
 
 export type OnErrorFunction = (error: string) => void;

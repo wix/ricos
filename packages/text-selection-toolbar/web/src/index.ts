@@ -1,4 +1,4 @@
 import TextSelectionToolbar from './TextSelectionToolbar';
-import TwitterButton from './TwitterButton';
+import { TEXT_SELECTION_TOOLBAR_TYPE, TEXT_SELECTION_TOOLBAR_BUTTONS } from './consts';
 
-export { TextSelectionToolbar, TwitterButton };
+export { TextSelectionToolbar, TEXT_SELECTION_TOOLBAR_TYPE, TEXT_SELECTION_TOOLBAR_BUTTONS };

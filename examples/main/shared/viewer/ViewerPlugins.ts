@@ -69,6 +69,10 @@ import {
 } from '../../src/text-color-style-fn';
 
 import { pollTypeMapper, pluginPoll, POLL_TYPE } from 'wix-rich-content-plugin-social-polls/viewer';
+import {
+  TEXT_SELECTION_TOOLBAR_TYPE,
+  TEXT_SELECTION_TOOLBAR_BUTTONS,
+} from 'wix-rich-content-text-selection-toolbar';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -171,8 +175,7 @@ const config: RichContentViewerProps['config'] = {
     resolveFileUrl: () =>
       new Promise(resolve =>
         setTimeout(
-          () =>
-            resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
+          () => resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
           1000
         )
       ),
@@ -193,6 +196,9 @@ const config: RichContentViewerProps['config'] = {
       console.log(`'${text}' hashtag clicked!`);
     },
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+  },
+  [TEXT_SELECTION_TOOLBAR_TYPE]: {
+    buttons: [TEXT_SELECTION_TOOLBAR_BUTTONS.TWITTER],
   },
 };
 

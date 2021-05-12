@@ -6,7 +6,6 @@ import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/viewer';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { RicosViewer } from 'ricos-viewer';
 
@@ -142,16 +141,6 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
             )}
           </div>
         )}
-        {!isMobile ? (
-          <TextSelectionToolbar container={this.viewerRef.current}>
-            {selectedText => (
-              <TwitterButton
-                selectedText={selectedText}
-                onViewerAction={viewerProps.helpers.onViewerAction}
-              />
-            )}
-          </TextSelectionToolbar>
-        ) : null}
       </>
     );
   }

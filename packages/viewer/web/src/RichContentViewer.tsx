@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/aria-props */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { Component } from 'react';
+import React, { Component, createRef, RefObject } from 'react';
 import classNames from 'classnames';
 import {
   mergeStyles,
@@ -39,6 +39,10 @@ import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtli
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import { combineMappers } from './utils/combineMappers';
+import {
+  TextSelectionToolbar,
+  TEXT_SELECTION_TOOLBAR_TYPE,
+} from 'wix-rich-content-text-selection-toolbar';
 
 export interface RichContentViewerProps {
   /** This is a legacy API, changes should be made also in the new Ricos Viewer API **/
@@ -89,6 +93,9 @@ class RichContentViewer extends Component<
 
   typeMappers: PluginMapping;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  viewerRef: RefObject<any>;
+
   static defaultProps: Partial<RichContentViewerProps> = {
     theme: {},
     decorators: [],
@@ -112,6 +119,7 @@ class RichContentViewer extends Component<
       context: { experiments, isMobile, t },
     };
     this.initConfig();
+    this.viewerRef = createRef();
   }
 
   initConfig = () => {
@@ -239,6 +247,7 @@ class RichContentViewer extends Component<
       platform,
       t,
       typeMappers,
+      helpers,
     } = this.props;
     try {
       if (this.state.error) {
@@ -286,17 +295,27 @@ class RichContentViewer extends Component<
 
       const dataId = isInnerRcv ? {} : { 'data-id': 'rich-content-viewer' };
       return (
-        <GlobalContext.Provider value={this.state.context}>
-          <div
-            className={wrapperClassName}
-            dir={direction || getLangDir(locale)}
-            onMouseEnter={e => onHover && onHover(e)}
-            {...dataId}
-          >
-            <div className={editorClassName}>{output}</div>
-            <AccessibilityListener isMobile={isMobile} />
-          </div>
-        </GlobalContext.Provider>
+        <>
+          <GlobalContext.Provider value={this.state.context}>
+            <div
+              ref={this.viewerRef}
+              className={wrapperClassName}
+              dir={direction || getLangDir(locale)}
+              onMouseEnter={e => onHover && onHover(e)}
+              {...dataId}
+            >
+              <div className={editorClassName}>{output}</div>
+              <AccessibilityListener isMobile={isMobile} />
+            </div>
+          </GlobalContext.Provider>
+          {!isMobile && config[TEXT_SELECTION_TOOLBAR_TYPE]?.buttons ? (
+            <TextSelectionToolbar
+              container={this.viewerRef?.current?.parentElement}
+              settings={config[TEXT_SELECTION_TOOLBAR_TYPE]}
+              onViewerAction={helpers?.onViewerAction}
+            />
+          ) : null}
+        </>
       );
     } catch (err) {
       onError(err);

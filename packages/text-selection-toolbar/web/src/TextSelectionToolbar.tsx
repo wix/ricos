@@ -2,9 +2,14 @@ import React from 'react';
 import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
 import addTextSelectionListener from './TextSelectionListener';
 import { debounce } from 'lodash';
+import { buttonsMap } from './consts';
 
 export default class TextSelectionToolbar extends React.Component<
-  { container: HTMLElement; children: (string) => JSX.Element },
+  {
+    container: HTMLElement;
+    settings: { buttons: string[] };
+    onViewerAction?: (pluginId: string, action: string, value: string) => void;
+  },
   { selectedText: string; selectedTextPosition?: { x: number; y: number } }
 > {
   constructor(props) {
@@ -39,7 +44,7 @@ export default class TextSelectionToolbar extends React.Component<
 
   render() {
     const { selectedText, selectedTextPosition } = this.state;
-    const { container, children } = this.props;
+    const { container, settings, onViewerAction } = this.props;
     if (!selectedText || !selectedTextPosition) {
       return null;
     }
@@ -53,7 +58,12 @@ export default class TextSelectionToolbar extends React.Component<
 
     return (
       <div className={styles.toolbar} style={style}>
-        {children(selectedText)}
+        {settings.buttons.map(buttonName => {
+          const Button = buttonsMap[buttonName];
+          return (
+            <Button key={buttonName} selectedText={selectedText} onViewerAction={onViewerAction} />
+          );
+        })}
       </div>
     );
   }
