@@ -20,7 +20,11 @@
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#2416](https://github.com/wix-incubator/rich-content/pull/2416) fix sliders drag and input issues
-  
+
+### :nail_care: Polish
+
+- `common`
+  - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
 
 </details>
 <hr/>
@@ -38,7 +42,6 @@
   - [#2482](https://github.com/wix/ricos/pull/2482) Fix hooks order & add first and last hooks
 
 ## 8.34.0 (May 10, 2021)
-
 
 ### :rocket: New Feature
 
@@ -140,7 +143,6 @@
 - `plugin-commons`
   - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
 - `gallery`
-
   - [#2402](https://github.com/wix/ricos/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
 
 ### :house: Internal
@@ -192,7 +194,6 @@
 - `image viewer`
   - [#2398](https://github.com/wix/ricos/pull/2398) Avoid exception when image src missing
 - `editor`
-
   - [#2385](https://github.com/wix/ricos/pull/2385) toolbar shortcuts in mac & windows
 
 ## 8.30.3 (April 22, 2021)
