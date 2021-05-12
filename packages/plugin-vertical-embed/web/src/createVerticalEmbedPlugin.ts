@@ -1,5 +1,4 @@
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
-import { DEFAULTS } from './constants';
 import { VERTICAL_EMBED_TYPE, VerticalEmbedPluginEditorConfig } from './types';
 import VerticalEmbedComponent from './components/vertical-embed-component';
 import createToolbar from './toolbar/createToolbar';
@@ -23,7 +22,7 @@ const createVerticalEmbedPlugin: CreatePluginFunction<VerticalEmbedPluginEditorC
     }),
     helpers,
     t,
-    defaultPluginData: DEFAULTS,
+    defaultPluginData: {},
     isMobile,
     locale,
     ...rest,

@@ -138,7 +138,7 @@ export class DesignSettingsSection extends Component {
           max={20}
           label={t('Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll')}
           onChange={this.handlePollBorderRadiusChange}
-          value={parseInt(design.poll?.borderRadius)}
+          defaultValue={parseInt(design.poll?.borderRadius)}
           theme={this.props.theme}
         />
         <SliderWithInput
@@ -146,7 +146,7 @@ export class DesignSettingsSection extends Component {
           max={10}
           label={t('Poll_PollSettings_Tab_Design_Section_CornerRadius_Answers')}
           onChange={this.handleOptionBorderRadiusChange}
-          value={parseInt(design.option?.borderRadius)}
+          defaultValue={parseInt(design.option?.borderRadius)}
           theme={this.props.theme}
         />
       </section>

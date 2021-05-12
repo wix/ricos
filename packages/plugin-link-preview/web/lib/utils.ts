@@ -29,7 +29,7 @@ const addLinkPreview = async (
   const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
   const { setEditorState } = config;
   const linkPreviewData = await fetchData(fixedUrl);
-  const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
+  const { thumbnail_url, title, description, html } = linkPreviewData;
   if (
     shouldAddEmbed(html, enableEmbed, fixedUrl) ||
     shouldAddLinkPreview(title, thumbnail_url, enableLinkPreview)
@@ -46,7 +46,6 @@ const addLinkPreview = async (
       title,
       description,
       html,
-      provider_url,
     };
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
     setEditorState(newEditorState);

@@ -1,4 +1,4 @@
-name: update
+name: deploy example
 on:
   push:
     tags:
@@ -6,7 +6,10 @@ on:
       - v8.*
       - v7.*
     branches:
-      - '**'
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
   surge-examples:
     runs-on: ubuntu-18.04
@@ -34,11 +37,8 @@ jobs:
 
       - run: npm run build
       - run: npm run deploy
+      - run: npm run deployPRComment
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-  yarn-lock-dedup:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - run: npx yarn-deduplicate --fail --list yarn.lock
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
