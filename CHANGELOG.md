@@ -23,6 +23,8 @@
 
 ### :nail_care: Polish
 
+- `image`
+  - [#2488](https://github.com/wix/ricos/pull/2488) fix caption text styling to match ricos theme
 - `common`
   - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
 
