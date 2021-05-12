@@ -19,9 +19,6 @@ export const getDefaultComponentData = (isLinkButton, rel, target) => {
         borderRadius: 0,
         borderWidth: 0,
         padding: 12,
-        background: getColors().color8,
-        color: getColors().color1,
-        borderColor: getColors().color8,
       },
     },
   };
