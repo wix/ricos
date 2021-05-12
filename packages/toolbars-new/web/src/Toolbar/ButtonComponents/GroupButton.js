@@ -108,9 +108,9 @@ class GroupButton extends PureComponent {
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
           <ToolbarButton
-            isActive={isActive()}
+            isActive={isOpen || isActive()}
             onClick={this.toggleOptions}
-            // showArrowIcon
+            showArrowIcon
             getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}

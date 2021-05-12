@@ -25,7 +25,8 @@
 }
 
 .headingsPanel_selectedHeading {
-    background-color: rgba(0, 0, 0, .1) !important;
+    background-color: rgba($action-color-fallback-tuple, 0.1) !important;
+    color: $action-color-fallback;
 }
 
 .headingsMobilePanel {

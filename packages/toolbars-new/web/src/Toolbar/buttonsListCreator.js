@@ -180,6 +180,7 @@ const buttonsFullData = {
     tooltip: 'Line spacing',
     action: 'LINE_SPACING',
     type: 'DROPDOWN',
+    arrow: true,
   },
   LINK: {
     icon: LinkIcon,

@@ -46,7 +46,7 @@ class ModalButton extends Component {
     return (
       <ClickOutside className={styles.buttonWrapper} onClickOutside={this.closeModal}>
         <ToolbarButton
-          isActive={isActive()}
+          isActive={isModalOpen || isActive()}
           onClick={this.toggleModal}
           showArrowIcon={arrow}
           tooltipText={tooltip}

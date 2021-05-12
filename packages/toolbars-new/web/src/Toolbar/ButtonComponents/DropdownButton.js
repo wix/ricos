@@ -52,7 +52,7 @@ class DropdownButton extends Component {
       getLabel,
     } = this.props;
     const disabledState = isDisabled() || disabled;
-    const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
+    const buttonProps = arrow && getLabel ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
       <div>
         <ClickOutside onClickOutside={this.onDropDownClose(onClose)}>
