@@ -49,7 +49,7 @@ const getAllPluginsNames = ({
       .filter(
         pkg =>
           pkg.name.indexOf('wix-rich-content-plugin') === 0 &&
-          pkg.name !== 'wix-rich-content-plugin-commons' &&
+          pkg.name !== 'wix-rich-content-ui-components' &&
           pkg.name !== 'wix-rich-content-plugin-unsupported-blocks' &&
           pkg.name !== 'wix-rich-content-plugin-headings'
       )
