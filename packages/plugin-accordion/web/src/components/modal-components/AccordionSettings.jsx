@@ -5,10 +5,10 @@ import { Separator, InfoIcon } from 'wix-rich-content-editor-common';
 import {
   RadioGroupVertical,
   SelectionList,
+  LabeledToggle,
   LTRIcon,
   RTLIcon,
 } from 'wix-rich-content-plugin-commons';
-import { LabeledToggle } from 'wix-rich-content-ui-components';
 import { directions, EXPANDED, COLLAPSED, FIRST_EXPANDED } from '../../defaults';
 import styles from '../../../statics/styles/accordion-settings.scss';
 
