@@ -39,7 +39,13 @@ export const getCurrentLayout = (store: Store, t: TranslationFunction) => {
   return getGalleryLayouts(t).find(layout => layout.value === galleryLayout);
 };
 
-export const getGalleryLayouts = (t: TranslationFunction, isDropdown = true): GalleryLayout[] => {
+export const getGalleryLayoutsDropdown = (t: TranslationFunction): GalleryLayout[] =>
+  getGalleryLayouts(t);
+
+export const getGalleryLayoutsSettings = (t: TranslationFunction): GalleryLayout[] =>
+  getGalleryLayouts(t, false);
+
+const getGalleryLayouts = (t: TranslationFunction, isDropdown = true): GalleryLayout[] => {
   return [
     {
       value: GALLERY_LAYOUTS.GRID,

@@ -129,9 +129,7 @@ export const resizeMediaUrl = (
   allowWatermark = false,
   focalPoint
 ) => {
-  originalUrl = originalUrl || item.url;
-  sharpParams = sharpParams || {};
-  if (originalUrl?.indexOf('base64') !== -1) {
+  if (originalUrl.indexOf('base64') !== -1) {
     return originalUrl;
   }
   /* eslint-disable no-param-reassign */
