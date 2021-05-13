@@ -306,16 +306,18 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
 
   renderCaption(caption) {
     const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
+    const { imageCaption, link } = this.styles;
+    const classes = classNames(imageCaption, this.hasLink() && link);
     return onCaptionChange ? (
       <InPluginInput
         setInPluginEditingMode={setInPluginEditingMode}
-        className={this.styles.imageCaption}
+        className={classes}
         value={caption}
         onChange={onCaptionChange}
         setFocusToBlock={setFocusToBlock}
       />
     ) : (
-      <span dir="auto" className={this.styles.imageCaption}>
+      <span dir="auto" className={classes}>
         {caption}
       </span>
     );

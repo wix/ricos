@@ -26,7 +26,7 @@ export const ItemsPerRow = props => {
 };
 ItemsPerRow.propTypes = propTypes;
 ItemsPerRow.defaultProps = {
-  value: 3,
+  defaultValue: 3,
 };
 
 export const Spacing = props => {
@@ -45,7 +45,7 @@ export const Spacing = props => {
 };
 Spacing.propTypes = propTypes;
 Spacing.defaultProps = {
-  value: 20,
+  defaultValue: 20,
 };
 
 export const ThumbnailSize = props => (
@@ -60,5 +60,5 @@ export const ThumbnailSize = props => (
 );
 ThumbnailSize.propTypes = propTypes;
 ThumbnailSize.defaultProps = {
-  value: 120,
+  defaultValue: 120,
 };
