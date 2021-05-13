@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { FocusManager } from 'wix-rich-content-editor-common';
-import { Tabs, Tab } from 'wix-rich-content-plugin-commons';
 import {
+  Tabs,
+  Tab,
   LabeledToggle,
   SettingsSection,
   SettingsPanelFooter,
