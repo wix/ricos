@@ -23,9 +23,12 @@
 
 ### :nail_care: Polish
 
+- `editor`
+  - [#2489](https://github.com/wix/ricos/pull/2489) fix action color on editor element focus (+ fallback box-shadow)
 - `image`
   - [#2488](https://github.com/wix/ricos/pull/2488) fix caption text styling to match ricos theme
 - `common`
+  - [#2489](https://github.com/wix/ricos/pull/2489) fix action color on editor element focus (+ fallback box-shadow)
   - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
 
 ### :bug: Bug Fix

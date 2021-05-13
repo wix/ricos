@@ -5,17 +5,35 @@ try {
   privateConfig = require('./applitools.private.config.js');
 } catch (e) {}
 
+function getGithubBranchName() {
+  const isPullRequest = !!process.env.GITHUB_HEAD_REF;
+  return isPullRequest
+    ? process.env.GITHUB_HEAD_REF
+    : process.env.GITHUB_REF.split('/')
+        .slice(2)
+        .join('/')
+        .replace(/\//g, '-');
+}
+
+function getLocalBranchName() {
+  return (
+    'LOCAL - ' +
+    execSync('git rev-parse --abbrev-ref HEAD')
+      .toString()
+      .trim()
+  );
+}
+
 function getBranchName() {
-  return execSync('git rev-parse --abbrev-ref HEAD')
-    .toString()
-    .trim();
+  return process.env.GITHUB_HEAD_REF ? getGithubBranchName() : getLocalBranchName();
 }
 
 module.exports = {
   ...privateConfig,
   concurrency: 200,
   dontCloseBatches: true,
-  batchName: `${process.env.APPLITOOLS_BATCH_ID ? '' : 'LOCAL - '}${getBranchName()}`,
+  batchName: getBranchName(),
+  batchId: process.env.COMMIT_SHA || Math.random().toString(),
   parentBranchName: 'wix/ricos/master',
   branchName: `wix/ricos/${getBranchName()}`,
   showLogs: false,
