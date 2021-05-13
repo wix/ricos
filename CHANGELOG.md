@@ -16,8 +16,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+</details>
+<hr/>
+
+## 8.34.2 (May 13, 2011)
+
 ### :bug: Bug Fix
+
 - `plugin-commons`
   - [#2416](https://github.com/wix-incubator/rich-content/pull/2416) fix sliders drag and input issues
 
@@ -31,9 +37,6 @@
 - `common`
   - [#2489](https://github.com/wix/ricos/pull/2489) fix action color on editor element focus (+ fallback box-shadow)
   - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
-
-</details>
-<hr/>
 
 ## 8.34.1 (May 11, 2021)
 
