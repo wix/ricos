@@ -12,8 +12,8 @@ import {
   UnderlineIcon,
   BlockQuoteIcon,
   TitleIcon,
-  // TitleOneIcon,
-  // TitleTwoIcon,
+  TitleOneIcon,
+  TitleTwoIcon,
   OrderedListIcon,
   UnorderedListIcon,
   LinkIcon,
@@ -93,10 +93,20 @@ const buttonsFullData = {
     type: 'DROPDOWN',
   },
   Title: {
-    icon: TitleIcon,
+    unstyled: {
+      icon: TitleIcon,
+      action: 'header-two',
+    },
+    'header-two': {
+      icon: TitleOneIcon,
+      action: 'header-three',
+    },
+    'header-three': {
+      icon: TitleTwoIcon,
+      action: 'unstyled',
+    },
     dataHook: 'textBlockStyleButton_Title',
     tooltip: 'Title',
-    action: 'Title',
     type: 'button',
   },
   Blockquote: {
@@ -216,29 +226,47 @@ export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
     handleButtonOnClick(buttonsList, index, editorCommands);
     handleButtonIsActive(buttonsList, index, editorCommands);
     handleButtonIsDisabled(buttonsList, index);
-    handleButtonModal(buttonsList, index, editorCommands, t);
+    handleButtonModal(buttonsList, index, editorCommands);
     handleButtonOnSave(buttonsList, index, editorCommands);
     handleGroupButtons(buttonsList, buttonKey, index, editorCommands);
+    buttonKey === 'Title' && handleTitleButton(buttonsList, index, editorCommands);
   });
   return buttonsList;
 };
 
+const handleTitleButton = (buttonsList, index, editorCommands) => {
+  const currentHeading = getCurrentHeading(editorCommands);
+  let headingKey;
+  switch (currentHeading) {
+    case 'H2':
+      headingKey = 'header-two';
+      break;
+    case 'H3':
+      headingKey = 'header-three';
+      break;
+    default:
+      headingKey = 'unstyled';
+      break;
+  }
+  buttonsList[index].getIcon = () => buttonsFullData[buttonsList[index].name][headingKey].icon;
+  buttonsList[index].onClick = () =>
+    editorCommands.setBlockType(buttonsFullData[buttonsList[index].name][headingKey].action);
+  buttonsList[index].isActive = () => headingKey === 'header-three' || headingKey === 'header-two';
+};
+
 const handleButtonOnSave = (buttonsList, index, editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onSave) {
-    buttonsList[index].onSave = type => {
-      console.log({ type });
-      editorCommands.setBlockType(type);
-    };
+    buttonsList[index].onSave = type => editorCommands.setBlockType(type);
   }
 };
 
-const handleButtonModal = (buttonsList, index, editorCommands, t) => {
+const handleButtonModal = (buttonsList, index, editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].modal) {
     buttonsList[index].modal = buttonsFullData[buttonsList[index].name].modal;
     if (buttonsFullData[buttonsList[index].name].action === 'HEADINGS') {
       const Modal = buttonsFullData[buttonsList[index].name].modal;
       buttonsList[index].modal = props => (
-        <Modal {...props} heading={getCurrentHeading(editorCommands, t)} />
+        <Modal {...props} heading={getCurrentHeading(editorCommands)} />
       );
     }
   }
