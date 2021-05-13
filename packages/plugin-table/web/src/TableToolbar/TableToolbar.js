@@ -86,15 +86,12 @@ class TableToolbar extends Component {
   };
 
   getToolbarPosition = () => {
-    const { getFirstCellRef, tableWidth } = this.props;
+    const { getFirstCellRef, tableWidth, getTableScrollLeft } = this.props;
     const firstCellRef = getFirstCellRef();
     if (firstCellRef && tableWidth) {
       const extraTopOffset = firstCellRef.offsetTop === 20 ? 60 : 41;
       const cellOffsetLeft = firstCellRef.offsetLeft;
-      const horizontalScrollbarElement = firstCellRef.closest(
-        '[data-id=horizontal-scrollbar-element]'
-      );
-      const xPosition = cellOffsetLeft - horizontalScrollbarElement.scrollLeft;
+      const xPosition = cellOffsetLeft - getTableScrollLeft();
       return {
         x: xPosition < 0 ? 0 : xPosition,
         offsetLeftInsideContainer: xPosition,
@@ -130,6 +127,7 @@ class TableToolbar extends Component {
       merge,
       distributeRows,
       distributeColumns,
+      triggerBi,
     } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
@@ -164,7 +162,8 @@ class TableToolbar extends Component {
       merge,
       t,
       distributeRows,
-      distributeColumns
+      distributeColumns,
+      triggerBi
     );
     const buttons = [
       {
@@ -197,10 +196,10 @@ class TableToolbar extends Component {
     this.cleanFirstButtonAsSeparator(buttonsAsArray);
     return (
       <>
-        <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
+        <button className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
           <GoBackIcon />
           <div className={styles.goBackLabel}>{t('TablePlugin_Toolbar_GoBack_Button')}</div>
-        </div>
+        </button>
         <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
       </>
     );
@@ -223,6 +222,10 @@ class TableToolbar extends Component {
     this.setState({ editingToolbarProps });
   };
 
+  focus = () => this.ref.focus();
+
+  setRef = ref => (this.ref = ref);
+
   render() {
     const { selected, isEditingActive } = this.props;
     const { isTextFormattingOpen, combinedToolbarProps, editingToolbarProps } = this.state;
@@ -231,7 +234,7 @@ class TableToolbar extends Component {
         {isEditingActive ? (
           editingToolbarProps && this.renderEditingTextFormattingToolbar()
         ) : (
-          <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
+          <ToolbarContainer ref={this.setRef} toolbarPosition={this.getToolbarPosition()}>
             {isTextFormattingOpen
               ? combinedToolbarProps && this.renderTextFormattingToolbar()
               : this.renderMainToolbar()}
@@ -264,6 +267,8 @@ TableToolbar.propTypes = {
   merge: PropTypes.func,
   distributeRows: PropTypes.func,
   distributeColumns: PropTypes.func,
+  getTableScrollLeft: PropTypes.func,
+  triggerBi: PropTypes.object,
 };
 
 export default TableToolbar;

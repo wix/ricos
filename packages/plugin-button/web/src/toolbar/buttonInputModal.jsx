@@ -4,13 +4,20 @@ import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Tabs, Tab, SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
 import { KEYS_CHARCODE, FocusManager, ErrorIcon } from 'wix-rich-content-editor-common';
-import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  isValidUrl,
+  isNewTab,
+  ADD_PLUGIN_LINK_BI,
+  WEB_ADDRESS_CATEGORY,
+} from 'wix-rich-content-common';
 import DesignComponent from '../components/design-component';
 import SettingsComponent from '../components/settings-component';
 import Navbar from '../components/navbar';
 import PreviewComponent from '../components/preview-component';
 import { settingsTabValue, designTabValue } from '../constants';
 import styles from '../../statics/styles/button-input-modal.scss';
+import { LINK_BUTTON_TYPE } from '../types';
 export default class ButtonInputModal extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +72,23 @@ export default class ButtonInputModal extends Component {
     }
   };
 
+  triggerLinkBi = () => {
+    const {
+      settings: { rel, target, url },
+      validUrl,
+    } = this.state;
+    validUrl &&
+      this.props.helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, {
+        plugin_id: LINK_BUTTON_TYPE,
+        params: {
+          link: url,
+          newTab: isNewTab(target),
+          category: WEB_ADDRESS_CATEGORY,
+          rel,
+        },
+      });
+  };
+
   onConfirm = () => {
     const { validUrl, shouldShowLink } = this.state;
     const {
@@ -72,6 +96,7 @@ export default class ButtonInputModal extends Component {
     } = this.props;
     if (!shouldShowLink || validUrl) {
       this.setState({ submitted: true, isOpen: false });
+      this.triggerLinkBi();
       closeModal();
     } else {
       this.setState({ activeTab: settingsTabValue });

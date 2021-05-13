@@ -4,7 +4,7 @@ import { Component, DEFAULTS } from './gallery-component';
 import { GALLERY_TYPE, GalleryPluginEditorConfig } from './types';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const fileInputAccept = 'image/*';
+const fileInputAccept = '.jpg,.png,.gif,.jpeg,.jpe,.jfif,.bmp,.heic,.heif,.tfif,.tif,.webp';
 
 const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = config => {
   const type = GALLERY_TYPE;
@@ -16,13 +16,35 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
     relValue,
     [type]: settings = {},
     spoilerWrapper,
+    uiSettings,
     ...rest
   } = config;
   settings.accept = settings.accept || fileInputAccept;
-  const defaultPluginData = {
+
+  const defaults = {
     ...DEFAULTS,
-    config: { ...DEFAULTS.config, ...settings?.defaultData?.config },
+    config: {
+      ...DEFAULTS.config,
+      ...settings?.defaultData?.config,
+    },
   };
+
+  const pluginData =
+    uiSettings?.disableDownload !== undefined
+      ? {
+          ...defaults,
+          disableDownload: uiSettings?.disableDownload,
+        }
+      : defaults;
+
+  const defaultPluginData =
+    settings?.disableExpand !== undefined
+      ? {
+          ...pluginData,
+          disableExpand: settings.disableExpand,
+        }
+      : pluginData;
+
   return createBasePlugin({
     component: Component,
     settings,
@@ -35,6 +57,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
       t,
       anchorTarget,
       relValue,
+      isMobile: config.isMobile,
     }),
     helpers,
     anchorTarget,
@@ -45,5 +68,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
     ...rest,
   });
 };
+
+createGalleryPlugin.functionName = GALLERY_TYPE;
 
 export { createGalleryPlugin };

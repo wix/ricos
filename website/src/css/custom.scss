@@ -74,6 +74,21 @@ a code {
 	background-color: #f5f6f7;
 }
 
+input {
+	box-sizing: border-box !important;
+}
+
+.tablePlugin table {
+	margin-bottom: 0;
+	tr {
+		background-color:white !important;
+		border-top: unset;
+	}
+	th, td {
+		border: unset;
+	}
+}
+
 /* .markdown {
 	h1 {
 		--ifm-h1-font-size: unset;

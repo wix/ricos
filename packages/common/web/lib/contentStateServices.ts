@@ -1,15 +1,11 @@
-import { RicosContent } from '../src';
+import { truncateContent } from 'ricos-content/libs/truncateContent';
+import { DraftContent } from 'ricos-content';
 
-export const truncateContentState = (contentState: RicosContent, index: number) => {
-  if (index < 0 || index > contentState.blocks.length) {
-    return contentState;
-  }
-  const newEntityMap = {};
-  const newBlocks = [...contentState.blocks.slice(0, index)];
-  newBlocks.forEach(block => {
-    block.entityRanges.forEach(entity => {
-      newEntityMap[entity.key] = contentState.entityMap[entity.key];
-    });
-  });
-  return { ...contentState, blocks: newBlocks, entityMap: newEntityMap };
+export const truncateContentState = (
+  contentState: DraftContent,
+  index: number,
+  opts: { wordsCount?: number; maxPlugins?: number } = {}
+) => {
+  const { content } = truncateContent(contentState, { ...opts, blocksCount: index });
+  return content;
 };

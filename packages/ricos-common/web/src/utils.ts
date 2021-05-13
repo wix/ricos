@@ -1,8 +1,8 @@
 import { Children, ReactElement, ComponentClass } from 'react';
 import { RichContentProps } from './types';
-import { RicosContent } from 'wix-rich-content-common';
+import { DraftContent } from 'wix-rich-content-common';
 
-export const emptyState: RicosContent = { blocks: [], entityMap: {} };
+export const emptyState: DraftContent = { blocks: [], entityMap: {} };
 
 export const shouldRenderChild = (
   expectedChildName: 'RichContentViewer' | 'RichContentEditor',

@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
-import { RicosContent, RicosTheme, RicosViewer, RicosViewerProps } from 'ricos-viewer';
+import { DraftContent, RicosTheme, RicosViewer, RicosViewerProps } from 'ricos-viewer';
 import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button/viewer';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/viewer';
@@ -70,10 +69,10 @@ const plugins = [
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 
 interface Props {
-  content?: RicosContent;
+  content?: DraftContent;
   isMobile?: boolean;
   preview?: RicosViewerProps['preview'];
-  addAnchors?: RichContentViewerProps['addAnchors'];
+  addAnchors?: RicosViewerProps['addAnchors'];
   normalize?: RichContentViewerProps['normalize'];
   theme?: RicosTheme;
 }
@@ -93,9 +92,10 @@ const ViewerWrapper: FunctionComponent<Props> = ({
       content={content}
       isMobile={isMobile}
       preview={preview}
+      addAnchors={addAnchors}
       mediaSettings={{ fullscreenProps: { backgroundColor: 'black', foregroundColor: 'white' } }}
     >
-      <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
+      <RichContentViewer normalize={normalize} />
     </RicosViewer>
   );
 };

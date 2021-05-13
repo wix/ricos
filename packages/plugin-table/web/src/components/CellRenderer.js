@@ -11,32 +11,31 @@ import { ToolbarType } from 'wix-rich-content-common';
 const tableKeysToIgnoreOnEdit = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'];
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
-    if (
-      !this.isEditing(prevProps.editing, prevProps.selectedCells) &&
-      this.isEditing(this.props.editing, this.props.selectedCells)
-    ) {
+    const isCellWasEditing = this.isEditing(prevProps.editing, prevProps.selectedCells);
+    const isCellEditing = this.isEditing(this.props.editing, this.props.selectedCells);
+    const isGoIntoEdit = !isCellWasEditing && isCellEditing;
+    const isGoOutFromEdit = isCellWasEditing && !isCellEditing;
+    const { selectedCells, isMobile, setEditingActive, toolbarRef } = this.props;
+    if (isGoIntoEdit) {
       this.editorRef.focus();
-      this.props.setEditingActive(true);
-      !this.props.isMobile && this.editorRef?.selectAllContent(true);
+      setEditingActive(true);
+      this.selectCellContent();
+    } else if (isGoOutFromEdit) {
+      setEditingActive(false);
+      toolbarRef?.setEditingTextFormattingToolbarProps(false);
+      this.selectCellContent();
+    }
+    if (this.props.selected && !prevProps.selected && !isCellEditing && !isMobile) {
+      this.selectCellContent();
+      selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
       this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
-    if (
-      this.isEditing(prevProps.editing, prevProps.selectedCells) &&
-      !this.isEditing(this.props.editing, this.props.selectedCells)
-    ) {
-      this.props.setEditingActive(false);
-      this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
-    }
-    if (this.props.selected) {
-      if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
-        !this.props.isMobile && this.editorRef?.selectAllContent();
-      }
-      if (!prevProps.selected) {
-        const { selectedCells } = this.props;
-        selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
-      }
-    }
   }
+
+  selectCellContent = () => {
+    const { row, col, selectCellContent, isMobile } = this.props;
+    !isMobile && selectCellContent?.(row, col);
+  };
 
   isSingleCellSelected = (selectedCells = {}) =>
     selectedCells?.start?.i === selectedCells?.end?.i &&
@@ -71,15 +70,15 @@ export default class Cell extends Component {
         e.stopPropagation();
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.stopPropagation();
-        e.preventDefault();
-        this.editorRef.selectAllContent(true);
-      } else if (e.key === 'Enter' && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
-        e.preventDefault();
       }
-      const shouldCreateNewLine = e.key === 'Enter' && (e.ctrlKey || e.metaKey || e.shiftKey);
+      const shouldCreateNewLine = e.key === 'Enter' && (e.altKey || e.shiftKey || e.metaKey);
       if (!tableKeysToIgnoreOnEdit.includes(e.key) && !shouldCreateNewLine) {
         onKeyDown(e);
       }
+    } else if (!editing && tableKeysToIgnoreOnEdit.includes(e.key)) {
+      onKeyDown(e);
+      e.stopPropagation();
+      e.preventDefault();
     }
   };
 
@@ -120,6 +119,33 @@ export default class Cell extends Component {
     return !isMobile && shouldShowSelectedStyle ? { ...borders, ...cellSelectionBorders } : borders;
   };
 
+  hideBlocks = () => {
+    const { row, col, table, setEditorRef } = this.props;
+    const editorState = table.getCellContent(row, col);
+    const blocks = setEditorRef
+      ? editorState.getCurrentContent().getBlocksAsArray()
+      : editorState.blocks;
+    if (blocks.length >= 3) {
+      let lastBlockText;
+      let firstBlockText;
+      if (setEditorRef) {
+        const currentContent = editorState.getCurrentContent();
+        lastBlockText = currentContent.getLastBlock().getText();
+        firstBlockText = currentContent.getFirstBlock().getText();
+      } else {
+        lastBlockText = blocks[blocks.length - 1].text;
+        firstBlockText = blocks[0].text;
+      }
+      const hideFirstBlock = firstBlockText === '' || firstBlockText === '​'; //zero-width space
+      const hideLastBlock = lastBlockText === '' || lastBlockText === '​'; //zero-width space
+      return { hideFirstBlock, hideLastBlock };
+    } else {
+      return {};
+    }
+  };
+
+  onCellClick = () => this.props.isMobile && this.props.onDoubleClick();
+
   render() {
     const {
       row,
@@ -136,6 +162,8 @@ export default class Cell extends Component {
       table,
       isMobile,
       disableSelectedStyle,
+      setEditorRef,
+      selectCellContent,
     } = this.props;
     const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col) || {};
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
@@ -143,22 +171,32 @@ export default class Cell extends Component {
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const range = selectedCells && getRange(selectedCells);
     const cellBorders = this.getCellBorders(border, shouldShowSelectedStyle);
-    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
-    toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
-    const Selection = this.editorRef && isEditing && table.getCellContent(row, col).getSelection();
+    const editorState = this.editorRef && isEditing && table.getCellContent(row, col);
+    const Selection = editorState && editorState.getSelection();
+    const cellContentContainText = editorState
+      ? editorState
+          .getCurrentContent()
+          .getBlockMap()
+          .filter(x => x.getType() === 'unstyled')
+          .some(x => x.getText() !== '' && x.getText() !== '​') //zero-width space
+      : false;
     const showFormattingToolbar =
       this.editorRef &&
       isEditing &&
       ((!Selection.isCollapsed() && Selection.getHasFocus()) ||
-        (document && document.querySelector('[data-id="rich-content-editor-modal"]')));
+        (document && document.querySelector('[data-id="rich-content-editor-modal"]'))) &&
+      cellContentContainText;
     if (showFormattingToolbar) {
+      const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps?.(ToolbarType.FORMATTING));
+      toolbarButtons && this.fixReactModalButtons(toolbarButtons);
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(toolbarButtons);
     } else if (isEditing) {
       this.props.toolbarRef?.setEditingTextFormattingToolbarProps(false);
     }
     const editorWrapperStyle = this.getEditorWrapperStyle(additionalStyles, isEditing);
+    const { hideFirstBlock, hideLastBlock } = this.hideBlocks();
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -172,6 +210,7 @@ export default class Cell extends Component {
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
+        onClick={this.onCellClick}
         onContextMenu={onContextMenu}
         colSpan={colSpan}
         rowSpan={rowSpan}
@@ -183,6 +222,9 @@ export default class Cell extends Component {
       >
         <div
           className={classNames(
+            setEditorRef ? styles.editorWrapper : styles.viewerWrapper,
+            !isEditing && hideFirstBlock && styles.hideFirstBlock,
+            !isEditing && hideLastBlock && styles.hideLastBlock,
             !isMobile && isEditing && styles.editing,
             !isEditing && styles.disableSelection
           )}
@@ -193,6 +235,7 @@ export default class Cell extends Component {
             selected={selected}
             contentState={table.getCellContent(row, col)}
             setEditorRef={this.setEditorRef}
+            isEditor={selectCellContent}
           >
             {children}
           </Editor>
@@ -215,8 +258,7 @@ export default class Cell extends Component {
 class Editor extends Component {
   shouldComponentUpdate(nextProps) {
     const { editing, selected, contentState } = this.props;
-    const isContentStateChanged =
-      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
+    const isContentStateChanged = contentState !== nextProps.contentState;
     return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
@@ -270,4 +312,5 @@ Cell.propTypes = {
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onKeyDown: PropTypes.func,
+  selectCellContent: PropTypes.func,
 };

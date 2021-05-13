@@ -1,5 +1,5 @@
 import { version } from '../../package.json';
-import { RicosContent } from '../types';
+import { DraftContent } from '../types';
 type BlockType =
   | 'unstyled'
   | 'blockquote'
@@ -10,7 +10,7 @@ type BlockType =
   | 'header-five'
   | 'header-six';
 
-export const createContent = (text: string, type: BlockType = 'unstyled'): RicosContent => {
+export const createContent = (text: string, type: BlockType = 'unstyled'): DraftContent => {
   return {
     blocks: [
       {

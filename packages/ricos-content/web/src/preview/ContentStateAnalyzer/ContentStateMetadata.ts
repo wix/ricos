@@ -1,5 +1,5 @@
 import { ExposedBlocks, PreviewMetadata, ExposedGroupBlocks } from './../types';
-import { RicosContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
+import { DraftContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { merge, cloneDeep, groupBy } from 'lodash';
@@ -11,7 +11,7 @@ import {
 } from './types';
 
 const extractTextBlocksWithEntities = (
-  { blocks, entityMap }: RicosContent,
+  { blocks, entityMap }: DraftContent,
   blockFilter: BlockFilter
 ): TextBlockWithEntities[] =>
   blocks.filter(blockFilter).reduce((texts, block) => {
@@ -28,11 +28,11 @@ const extractTextBlocksWithEntities = (
     return [...texts, { block: _block, entities }];
   }, []);
 
-const extractTextBlockArray = (raw: RicosContent, blockTypeFilter: BlockTypeFilter) =>
+const extractTextBlockArray = (raw: DraftContent, blockTypeFilter: BlockTypeFilter) =>
   extractTextBlocksWithEntities(raw, ({ type, text }) => blockTypeFilter(type) && text.length > 0);
 
 const extractBatchesByType = (
-  { blocks, entityMap }: RicosContent,
+  { blocks, entityMap }: DraftContent,
   blockTypeFilter: BlockTypeFilter
 ) => {
   let current = 0,
@@ -60,7 +60,7 @@ const extractBatchesByType = (
   return batchesWithEntities;
 };
 
-const createTextFragments = (raw: RicosContent): TextBlockWithEntities[] =>
+const createTextFragments = (raw: DraftContent): TextBlockWithEntities[] =>
   extractBatchesByType(raw, type => type !== 'atomic')
     .filter(batch => batch.length)
     .map(batch => {
@@ -96,7 +96,7 @@ const createTextFragments = (raw: RicosContent): TextBlockWithEntities[] =>
 //  [{li1}, {li2}, {li3}]
 // ]
 // useful for list and code fragments extraction
-const extractSequentialBlockArrays = ({ blocks }: RicosContent, blockType: string) => {
+const extractSequentialBlockArrays = ({ blocks }: DraftContent, blockType: string) => {
   const emptyAcc: SequentialBlockArrays = { list: [], lastItemIndex: -1 };
   const blockArrayResult = blocks.reduce((result, block, idx) => {
     if (block.type === blockType) {
@@ -116,15 +116,24 @@ const extractSequentialBlockArrays = ({ blocks }: RicosContent, blockType: strin
   return blockArrayResult.list.filter(arr => arr.length > 0);
 };
 
-const extractMedia = ({ entityMap }: RicosContent) =>
-  Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
+const extractMedia = ({ entityMap }: DraftContent) =>
+  Object.values(entityMap)
+    .filter(entity => {
+      const { config = {} } = entity.data || {};
+      if ('spoiler' in config) {
+        return !config.spoiler.enabled;
+      } else {
+        return true;
+      }
+    })
+    .reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
 const isMediaItem = (type: string | undefined) =>
   type && ['image', 'video', 'giphy'].includes(type);
 
-const countEntities = ({ entityMap }: RicosContent) => Object.values(entityMap).length;
+const countEntities = ({ entityMap }: DraftContent) => Object.values(entityMap).length;
 
-const getContentStateMetadata = (raw: RicosContent) => {
+const getContentStateMetadata = (raw: DraftContent) => {
   const mediaEntities = extractMedia(raw);
   const galleryItems = mediaEntities.filter(({ isGalleryItem }) => isGalleryItem);
   const singleMediaItems = mediaEntities.filter(

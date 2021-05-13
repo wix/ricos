@@ -78,6 +78,7 @@ export class RicosEngine extends Component<EngineProps> {
       _rcProps,
       children,
       isMobile,
+      addAnchors,
       toolbarSettings,
       modalSettings = {},
       isPreviewExpanded,
@@ -90,6 +91,7 @@ export class RicosEngine extends Component<EngineProps> {
       linkPanelSettings = {},
       maxTextLength,
       textAlignment,
+      onAtomicBlockFocus,
     } = this.props;
 
     const { strategyProps, previewContent, htmls } = this.runStrategies();
@@ -107,17 +109,18 @@ export class RicosEngine extends Component<EngineProps> {
     } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
-
+    const disableDownload = mediaSettings?.disableDownload || disableRightClick;
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
     const ricosPropsToMerge: RichContentProps = {
+      addAnchors,
       isMobile,
       maxTextLength,
       textToolbarType:
         !isMobile && (textToolbarContainer || useStaticTextToolbar) ? 'static' : 'inline',
       config: {
         getToolbarSettings,
-        uiSettings: { disableRightClick, linkPanel: linkPanelSettings },
+        uiSettings: { disableDownload, linkPanel: linkPanelSettings },
       },
       initialState: previewContent || content,
       placeholder,
@@ -131,6 +134,7 @@ export class RicosEngine extends Component<EngineProps> {
       anchorTarget,
       relValue,
       textAlignment,
+      onAtomicBlockFocus,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);

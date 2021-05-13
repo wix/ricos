@@ -32,6 +32,6 @@ function getInnerRCEBlocks(object) {
 }
 
 function isInnerRCEExists(entityMap) {
-  const rceInRcePlugins = ['table', 'wix-rich-content-plugin-accordion'];
+  const rceInRcePlugins = ['wix-rich-content-plugin-table', 'wix-rich-content-plugin-accordion'];
   return Object.values(entityMap).some(entity => rceInRcePlugins.includes(entity.type));
 }

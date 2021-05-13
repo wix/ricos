@@ -12,6 +12,7 @@ export default class Resizer extends PureComponent {
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
   }
+
   componentWillUnmount() {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
@@ -113,7 +114,7 @@ export default class Resizer extends PureComponent {
 Resizer.propTypes = {
   index: PropTypes.number.isRequired,
   size: PropTypes.number,
-  onResize: PropTypes.func.isRequired,
+  onResize: PropTypes.func,
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   horizontal: PropTypes.bool,
   minSize: PropTypes.number,

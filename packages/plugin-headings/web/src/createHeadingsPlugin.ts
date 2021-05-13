@@ -18,4 +18,6 @@ const createHeadingsPlugin: CreatePluginFunction<HeadingsPluginEditorConfig> = c
   });
 };
 
+createHeadingsPlugin.functionName = HEADINGS_DROPDOWN_TYPE;
+
 export { createHeadingsPlugin };

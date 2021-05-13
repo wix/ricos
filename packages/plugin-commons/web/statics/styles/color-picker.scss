@@ -1,6 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/consts';
-@import "~wix-rich-content-common/dist/statics/styles/fonts";
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .colorPicker {
@@ -12,21 +12,27 @@
   border-color: #000;
 }
 
+.colorPicker_header {
+  color: $fallbackColor;
+  font-size: 16px;
+  padding: 10px 0px 7px 20px;
+}
+
 .colorPicker_separator {
   border: none;
   height: 1px;
   background: rgba(51, 51, 51, 0.1);
   width: auto;
   margin: 11px 0 8px 0;
-  @include phone {
+  .mobile & {
     margin: 0;
-    margin-top: 22px;
   }
 }
 
 %button {
   position: relative;
   margin-top: 12px;
+  margin-left: 8px;
   -webkit-flex: none;
   flex: none;
   width: 20px;
@@ -34,14 +40,12 @@
   cursor: pointer;
   outline: 0;
   padding: 0;
-  margin-left: 8px;
-
-  @include phone {
-    margin-top: 22px;
-    margin-left: calc((100% - 6 * 18px) / 5);
-    &:nth-child(6n + 1) {
-      margin-left: 0;
-    }
+  .mobile & {
+    margin: 0;
+    width: 34px;
+    height: 34px;
+    justify-self: center;
+    align-self: center;
   }
 }
 
@@ -50,7 +54,7 @@
   border-radius: 50%;
   border: solid 1px #ccc;
   &::after {
-    content: " ";
+    content: ' ';
     border-radius: 50%;
     width: 28px;
     height: 28px;
@@ -63,6 +67,12 @@
     top: -5px;
     left: -5px;
     outline: 0;
+    .mobile & {
+      top: -8px;
+      left: -8px;
+      width: 48px;
+      height: 48px;
+    }
   }
   &.colorPicker_button_transparent {
     background: linear-gradient(
@@ -70,7 +80,8 @@
       white calc(50% - 0.8px),
       red 50%,
       white calc(50% + 0.8px),
-      white 100%);
+      white 100%
+    );
   }
   &:hover,
   &:focus,
@@ -84,32 +95,46 @@
 
 .colorPicker_palette {
   width: auto;
-  @include phone {
-    margin: 0 18px 24px;
+  .mobile & {
+    margin: 0 auto;
+    height: 100%;
   }
 }
 
 .colorPicker_add_color_button {
   margin-top: -2px;
+  svg {
+    width: 18px;
+  }
+  .mobile & {
+    justify-self: center;
+    align-self: center;
+    svg {
+      height: 34px;
+      width: 34px;
+      transform: none;
+      vertical-align: bottom;
+    }
+  }
 }
 
 .colorPicker_add_color_label {
   width: 18px;
   height: 18px;
-  color: $action-color-fallback;
+  color: $settings-action-color;
   cursor: pointer;
   position: relative;
 }
 
 .colorPicker_buttons_container {
   margin-bottom: 9px;
-  flex-direction: row;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
   width: 180px;
-  @include phone {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  .mobile & {
+    margin: 0;
+    padding: 24px 20px 22px 20px;
+    grid-row-gap: 24px;
     width: 100%;
   }
 }
@@ -134,12 +159,19 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: normal;
-  color: $action-color-fallback;
+  color: $settings-action-color;
   cursor: pointer;
+  .mobile & {
+    font-size: 16px;
+  }
 }
 
 .colorPicker_bottom_container {
   display: flex;
   justify-content: space-between;
   margin: 10px 10px 0px 10px;
+  .mobile & {
+    justify-content: center;
+    margin: 8px 0;
+  }
 }

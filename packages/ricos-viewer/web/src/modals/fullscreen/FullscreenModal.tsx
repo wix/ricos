@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import getImagesData from 'wix-rich-content-fullscreen/libs/getImagesData';
+import React from 'react';
 import Fullscreen from 'wix-rich-content-fullscreen';
-import { ExpandModeData } from './FullscreenProvider';
-import { RicosContent } from '../../index';
+import { DraftContent } from '../../index';
 
 interface Props {
-  initialState: RicosContent;
-  setExpandModeData: (data: ExpandModeData) => void;
+  initialState: DraftContent;
   isOpen: boolean;
   index: number;
   images: Record<string, unknown>[];
@@ -17,42 +14,26 @@ interface Props {
   foregroundColor: string;
 }
 
-export default class ViewerModal extends Component<Props> {
-  constructor(props) {
-    super(props);
-    props.setExpandModeData(getImagesData(props.initialState));
-    this.state = {
-      disabled: false,
-    };
-  }
+const ViewerModal: React.FC<Props> = ({
+  index,
+  isOpen,
+  images,
+  onClose,
+  isMobile,
+  backgroundColor,
+  foregroundColor,
+}) => {
+  return (
+    <Fullscreen
+      isOpen={isOpen}
+      images={images}
+      onClose={onClose}
+      isMobile={isMobile}
+      index={index}
+      backgroundColor={backgroundColor}
+      foregroundColor={foregroundColor}
+    />
+  );
+};
 
-  componentDidUpdate(prevProps) {
-    const { initialState } = this.props;
-    if (prevProps.initialState !== initialState) {
-      this.props.setExpandModeData(getImagesData(initialState));
-    }
-  }
-
-  render() {
-    const {
-      index,
-      isOpen,
-      images,
-      onClose,
-      isMobile,
-      backgroundColor,
-      foregroundColor,
-    } = this.props;
-    return (
-      <Fullscreen
-        isOpen={isOpen}
-        images={images}
-        onClose={onClose}
-        isMobile={isMobile}
-        index={index}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-      />
-    );
-  }
-}
+export default ViewerModal;

@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
+import { pluginEmoji } from 'wix-rich-content-plugin-emoji/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-import createViewerBundle from './RichContentViewerWrapper';
-
-export default () => createViewerBundle();
+export default () => createViewerBundle(pluginEmoji());

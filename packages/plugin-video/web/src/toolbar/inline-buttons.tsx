@@ -1,13 +1,15 @@
-import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
-import VideoSelectionInputModal from './videoSelectionInputModal';
+import { Modals } from '../modals';
+import VideoModal from './videoModal';
+
 import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
 import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
-import { VideoPluginEditorConfig } from '../types';
+import { VideoPluginEditorConfig, VIDEO_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
@@ -50,7 +52,7 @@ const createInlineButtons: CreateInlineButtons = ({
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon,
-      modalElement: decorateComponentWithProps(VideoSelectionInputModal, {
+      modalElement: decorateComponentWithProps(VideoModal, {
         ...settings,
       }),
       modalStyles: getModalStyles({
@@ -61,6 +63,21 @@ const createInlineButtons: CreateInlineButtons = ({
       mobile: true,
       tooltipTextKey: 'ReplaceVideoButton_Tooltip',
       t,
+    },
+    {
+      keyName: 'settings',
+      type: BUTTONS.VIDEO_SETTINGS,
+      icon: PluginSettingsIcon,
+      modalName: Modals.VIDEO_SETTINGS,
+      modalStyles: getModalStyles({
+        isMobile,
+      }),
+      t,
+      mobile: true,
+      tooltipTextKey: 'SettingsButton_Tooltip',
+      settings,
+      triggerSettingsBi: true,
+      pluginId: VIDEO_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

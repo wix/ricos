@@ -8,7 +8,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba($primary-text-color-tuple, 0.1);
-    &:hover {
+    &:hover:not(.disabled) {
         color: $action-color;
         background-color: rgba($action-color-tuple, 0.2);
     }

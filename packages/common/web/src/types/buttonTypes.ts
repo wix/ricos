@@ -87,19 +87,17 @@ type KeyBinding = {
 };
 
 export type TextButtonMapping = {
-  [type: string]: {
-    component?: ComponentType;
-    isMobile?: boolean;
-    position?: {
-      mobile?: number;
-      desktop?: number;
-    };
-    keyBindings?: KeyBinding[];
-    externalizedButtonProps: ToolbarButtonProps;
+  component?: ComponentType;
+  isMobile?: boolean;
+  position?: {
+    mobile?: number;
+    desktop?: number;
   };
+  keyBindings?: KeyBinding[];
+  externalizedButtonProps?: ToolbarButtonProps;
 };
 
-export type TextButtonMapper = (pubsub?: Pubsub) => TextButtonMapping;
+export type TextButtonMapper = (pubsub?: Pubsub) => { [key: string]: TextButtonMapping };
 
 export type CreatePluginToolbar = (
   config
@@ -109,4 +107,5 @@ export type CreatePluginToolbar = (
   InlinePluginToolbarButtons?: InlineButton[]; // TODO: this looks like a duplicate. Should be removed.
   InsertButtons?: InsertButton[];
   TextButtonMapper?: TextButtonMapper;
+  isMobile?: boolean;
 };

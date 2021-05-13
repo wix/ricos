@@ -53,14 +53,15 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 Text Color and Text Highlight have exactly the same config but both require it to be passed to them seperatly for flexability.
 :::
 
-| setting key               | description                                                                            | default value                             | is required? | editor/viewer config |
-| ------------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------- | ------------ | -------------------- |
-| `colorScheme`             | custom-style to hex-color map: `{ color1: { color: '#fff', index: 0 }, ... }`          | none (DEFAULT_PALETTE is used by default) | No           | editor               |
-| `styleSelectionPredicate` | a function that tells the plugin which inline styles are relevant: `string => boolean` | `style => isHexColor(style)`              | No           | both                 |
-| `customStyleFn` (1)       | a function that converts an inline-style to CSS style: `DraftInlineStyle => object`    | DEFAULT_STYLE_FN_DRAFT                    | No           | editor               |
-| `customStyleFn` (2)       | a function that converts an inline-style to CSS style: `string => object`              | DEFAULT_STYLE_FN                          | No           | viewer               |
-| `onColorAdded`            | a handler called when a custom color is added                                          | none                                      | No           | editor               |
-| `getUserColors`           | a function that returns user-defined custom colors                                     | none                                      | No           | editor               |
+| setting key               | description                                                                                       | default value                             | is required? | editor/viewer config |
+| ------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------ | -------------------- |
+| `colorScheme`             | custom-style to hex-color map: `{ color1: { color: '#fff', index: 0 }, ... }`                     | none (DEFAULT_PALETTE is used by default) | No           | editor               |
+| `styleSelectionPredicate` | a function that tells the plugin which inline styles are relevant: `string => boolean`            | `style => isHexColor(style)`              | No           | both                 |
+| `customStyleFn` (1)       | a function that converts an inline-style to CSS style: `DraftInlineStyle => object`               | DEFAULT_STYLE_FN_DRAFT                    | No           | editor               |
+| `customStyleFn` (2)       | a function that converts an inline-style to CSS style: `string => object`                         | DEFAULT_STYLE_FN                          | No           | viewer               |
+| `onColorAdded`            | a handler called when a custom color is added                                                     | none                                      | No           | editor               |
+| `getUserColors`           | a function that returns user-defined custom colors                                                | none                                      | No           | editor               |
+| `positionPicker`          | a function that overrides the color pickers positioning: `(buttonRef, panelWidth) => {left, top}` | none                                      | No           | editor               |
 
 ### Usage exmaple with custom colors
 

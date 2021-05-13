@@ -1,6 +1,6 @@
 import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import { RicosContent, AvailableExperiments } from 'wix-rich-content-common';
+import { DraftContent, AvailableExperiments } from 'wix-rich-content-common';
 
 export default function previewStrategy({
   isViewer,
@@ -8,16 +8,15 @@ export default function previewStrategy({
   onPreviewExpand,
   previewConfig,
   content,
-  experiments,
+  experiments, // eslint-disable-line
 }: {
   isViewer: boolean;
   isPreviewExpanded: boolean;
   onPreviewExpand: PreviewConfig['onPreviewExpand'];
   previewConfig?: PreviewConfig;
-  content?: RicosContent;
+  content?: DraftContent;
   experiments?: AvailableExperiments;
 }) {
-  console.debug('previewStrategy experiments', experiments); // eslint-disable-line no-console
   if (!isViewer || !previewConfig || !content) {
     return {};
   }

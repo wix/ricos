@@ -1,6 +1,7 @@
 .DS_Store
 dist
-generated
+**/generated/wix/rich_content
+**/generated/google
 node_modules
 *npm-debug.log
 lerna-debug.log
@@ -11,6 +12,7 @@ maven
 stats.html
 .env
 applitools.private.config.js
+
 
 #Webstorm
 **/.idea/*
@@ -40,7 +42,10 @@ applitools.config.js
 **/website/build/
 
 # ricos content migration
-**/migratedFixtures
+**/migratedFixtures/**
 !intro.json
 !migration-content.json
 **/reverseMigratedFixtures
+
+# Generated Merged Translations
+packages/common/web/statics/locale

@@ -104,9 +104,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "eoba3",
@@ -130,9 +128,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "767fl",
@@ -156,9 +152,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "f179j",
@@ -182,9 +176,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "1d5ah",
@@ -208,9 +200,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "2sbna",
@@ -234,9 +224,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "fg6am",
@@ -260,12 +248,10 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
-      "key": "s53",
+      "key": "cfsec",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -280,40 +266,16 @@
       "data": {}
     },
     {
-      "key": "e3sob",
+      "key": "epgkf",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
-      "key": "6mjbs",
-      "text": "songs = pd.read_csv(SONGS_FILE)",
-      "type": "code-block",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
-    },
-    {
-      "key": "1i4ff",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
-    },
-    {
-      "key": "98ccj",
+      "key": "63lbi",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -328,18 +290,16 @@
       "data": {}
     },
     {
-      "key": "b3jqi",
+      "key": "affus",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
-      "key": "3cgrh",
+      "key": "s53",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -354,18 +314,34 @@
       "data": {}
     },
     {
-      "key": "eqnso",
+      "key": "e3sob",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
-      "key": "ept6s",
+      "key": "6mjbs",
+      "text": "songs = pd.read_csv(SONGS_FILE)",
+      "type": "code-block",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1i4ff",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "98ccj",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -380,18 +356,16 @@
       "data": {}
     },
     {
-      "key": "5t7u4",
+      "key": "b3jqi",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
-      "key": "dm5qe",
+      "key": "3cgrh",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -406,18 +380,16 @@
       "data": {}
     },
     {
-      "key": "8fffe",
+      "key": "eqnso",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
-      "key": "1uco7",
+      "key": "ept6s",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -432,18 +404,16 @@
       "data": {}
     },
     {
-      "key": "akn59",
+      "key": "5t7u4",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
-      "key": "2pjv8",
+      "key": "dm5qe",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -458,15 +428,37 @@
       "data": {}
     },
     {
+      "key": "akn59",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "2pjv8",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 18
+        }
+      ],
+      "data": {}
+    },
+    {
       "key": "61el8",
       "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "9qfd3",
@@ -478,7 +470,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 18
+          "key": 19
         }
       ],
       "data": {}
@@ -506,9 +498,7 @@
         }
       ],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "ev9r2",
@@ -517,9 +507,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "aha4n",
@@ -528,9 +516,7 @@
       "depth": 1,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "ft9ku",
@@ -539,9 +525,7 @@
       "depth": 2,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "4brg",
@@ -550,9 +534,7 @@
       "depth": 3,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "ctmpp",
@@ -561,9 +543,7 @@
       "depth": 4,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "ba8lb",
@@ -572,9 +552,7 @@
       "depth": 4,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "9ofc",
@@ -583,9 +561,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "5h4cb",
@@ -594,9 +570,7 @@
       "depth": 1,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "a47kn",
@@ -605,9 +579,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "187sj",
@@ -616,9 +588,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "2qdp5",
@@ -627,9 +597,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "10oj0",
@@ -638,9 +606,7 @@
       "depth": 1,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "1qucc",
@@ -649,9 +615,7 @@
       "depth": 2,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "3dppt",
@@ -660,9 +624,7 @@
       "depth": 3,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "3l0io",
@@ -671,9 +633,7 @@
       "depth": 4,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "55he5",
@@ -682,9 +642,7 @@
       "depth": 4,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "7vpfq",
@@ -704,9 +662,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "34c4j",
@@ -715,9 +671,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "5qcnb",
@@ -759,7 +713,7 @@
         {
           "offset": 99,
           "length": 7,
-          "key": 19
+          "key": 20
         }
       ],
       "data": {
@@ -778,9 +732,7 @@
       "depth": 1,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "79dta",
@@ -792,7 +744,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 20
+          "key": 21
         }
       ],
       "data": {}
@@ -804,9 +756,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "eb7g5",
@@ -815,9 +765,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     },
     {
       "key": "5rm16",
@@ -826,9 +774,7 @@
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
+      "data": {}
     }
   ],
   "entityMap": {
@@ -881,8 +827,6 @@
         "config": {
           "alignment": "center",
           "size": "content",
-          "showTitle": true,
-          "showDescription": true,
           "disableExpand": false,
           "link": {
             "url": "www.image-link.com",
@@ -913,10 +857,7 @@
       "data": {
         "config": {
           "size": "content",
-          "alignment": "center",
-          "spoiler": {
-            "enabled": false
-          }
+          "alignment": "center"
         },
         "tempData": false,
         "src": "https://www.youtube.com/watch?v=CoJ23XNHgG0",
@@ -1028,10 +969,7 @@
           "size": "content",
           "layout": "small",
           "spacing": 0,
-          "disableExpand": false,
-          "spoiler": {
-            "enabled": false
-          }
+          "disableExpand": false
         }
       }
     },
@@ -1062,11 +1000,61 @@
           },
           "width": 350
         },
-        "socialType": "Twitter",
         "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">Eleven veterans who live at the Soldiers&#39; Home in Holyoke, Massachusetts, have died and five of them tested positive for coronavirus.<br><br>Tests are still pending for five other veterans who passed away, and the status of the last one is unknown, officials say <a href=\"https://t.co/rTVjn9FiBC\">https://t.co/rTVjn9FiBC</a></p>&mdash; CNN (@CNN) <a href=\"https://twitter.com/CNN/status/1244886173409034240?ref_src=twsrc%5Etfw\">March 31, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n"
       }
     },
     "11": {
+      "type": "wix-draft-plugin-link-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Link Button",
+            "url": "www.wix.com",
+            "rel": false,
+            "target": true
+          },
+          "design": {
+            "activeButton": 4,
+            "borderRadius": 5,
+            "borderWidth": 7,
+            "padding": 8.5,
+            "background": "#FEFDFD",
+            "color": "#0261FF",
+            "borderColor": "#0261FF"
+          }
+        }
+      }
+    },
+    "12": {
+      "type": "wix-draft-plugin-action-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "small"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "Action Button"
+          },
+          "design": {
+            "activeButton": 0,
+            "borderRadius": 15,
+            "borderWidth": 0,
+            "padding": 12,
+            "background": "#81B0FF",
+            "color": "#FEFDFD",
+            "borderColor": "#0261FF"
+          }
+        }
+      }
+    },
+    "13": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1078,19 +1066,13 @@
         }
       }
     },
-    "12": {
+    "14": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
           "size": "small",
           "alignment": "center"
-        },
-        "configViewer": {
-          "sizes": {
-            "desktop": "original",
-            "mobile": "original"
-          }
         },
         "gif": {
           "originalUrl": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy.gif?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy.gif",
@@ -1104,7 +1086,7 @@
         }
       }
     },
-    "13": {
+    "15": {
       "type": "wix-draft-plugin-map",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1128,7 +1110,7 @@
         }
       }
     },
-    "14": {
+    "16": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1138,15 +1120,14 @@
         },
         "name": "image.jpg",
         "type": "jpg",
-        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
+        "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
         "size": 150000
       }
     },
-    "15": {
+    "17": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "product",
         "selectedProduct": {
           "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
@@ -1156,34 +1137,7 @@
         }
       }
     },
-    "16": {
-      "type": "wix-draft-plugin-sound-cloud",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "size": "content",
-          "alignment": "center"
-        },
-        "src": "https://soundcloud.com/cagdasdemirbilek/narcos-tuyo-rodrigo-amarante",
-        "metadata": {
-          "height": 270,
-          "author_name": "Wix.com",
-          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
-          "thumbnail_width": 480,
-          "type": "video",
-          "version": "1.0",
-          "thumbnail_height": 360,
-          "provider_url": "https://www.youtube.com/",
-          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
-          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
-          "author_url": "https://www.youtube.com/user/Wix",
-          "provider_name": "YouTube",
-          "width": 480,
-          "video_url": "https://youtu.be/BBu5codsO6Y"
-        }
-      }
-    },
-    "17": {
+    "18": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1198,11 +1152,10 @@
         },
         "thumbnail_url": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "title": "A mock title",
-        "description": "A mock description",
-        "provider_url": "www.mockUrl.com"
+        "description": "A mock description"
       }
     },
-    "18": {
+    "19": {
       "type": "wix-draft-plugin-poll",
       "mutability": "IMMUTABLE",
       "data": {
@@ -1310,23 +1263,22 @@
         "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
       }
     },
-    "19": {
+    "20": {
       "type": "EMOJI_TYPE",
       "mutability": "IMMUTABLE",
       "data": {
         "emojiUnicode": "👨‍👩‍👦‍👦"
       }
     },
-    "20": {
+    "21": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
           "alignment": "right",
-          "size": "small",
-          "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "size": "inline",
+          "disableExpand": false,
+          "width": 300
         },
         "src": {
           "id": "91ff5a615e0235157dc1a7e5f66607bf",
@@ -1338,5 +1290,5 @@
       }
     }
   },
-  "VERSION": "8.11.4"
+  "VERSION": "8.29.12"
 }

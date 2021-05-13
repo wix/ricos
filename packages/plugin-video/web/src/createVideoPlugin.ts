@@ -14,6 +14,9 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
     commonPubsub,
     ...rest
   } = config;
+  const disableDownload = config?.uiSettings?.disableDownload;
+  const defaultPluginData =
+    disableDownload !== undefined ? { ...DEFAULTS, disableDownload } : DEFAULTS;
 
   return createBasePlugin({
     component: Component,
@@ -23,17 +26,20 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
       t,
       settings: { ...settings, commonPubsub },
       isMobile,
+      disableDownload,
     }),
     helpers,
     settings,
     t,
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    defaultPluginData: DEFAULTS,
+    defaultPluginData,
     spoilerWrapper: settings.spoiler && spoilerWrapper,
     commonPubsub,
     ...rest,
   });
 };
+
+createVideoPlugin.functionName = VIDEO_TYPE;
 
 export { createVideoPlugin };

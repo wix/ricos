@@ -8,17 +8,16 @@ interface Props {
   t: TranslationFunction;
 }
 class UnsupportedBlocks extends Component<Props> {
-  styles: Record<string, string>;
+  styles!: Record<string, string>;
 
   render() {
     const { t, theme } = this.props;
-    const alertMessage = <p>{t('UnsupportedPlugin_message')}</p>;
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     return (
       <div className={styles.unsupportedBlocks_alert}>
         <CircleInfoIcon />
-        {alertMessage}
+        <div>{t('UnsupportedPlugin_message')}</div>
       </div>
     );
   }

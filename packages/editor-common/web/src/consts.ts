@@ -14,6 +14,9 @@ export const COMMANDS = Object.freeze({
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
   ESC: 'esc',
+  UNDO: 'ricosUndo',
+  REDO: 'ricosRedo',
+  FOCUS_TOOLBAR: 'focusToolbar',
 });
 
 export const TEXT_TYPES = Object.freeze([
@@ -43,6 +46,7 @@ export {
 export const KEYS_CHARCODE = {
   ENTER: 13,
   ESCAPE: 27,
+  SPACE: 32,
 };
 
 const ALIGN_LEFT = 'AlignLeft';
@@ -94,6 +98,8 @@ export const INSERT_PLUGIN_BUTTONS = Object.freeze({
   TIKTOK: 'TikTok_InsertButton',
   TWITTER: 'Twitter_InsertButton',
   STORES: 'Stores_InsertButton',
+  EVENTS: 'Events_InsertButton',
+  BOOKINGS: 'Bookings_InsertButton',
   BUTTON: 'ButtonPlugin_InsertButton',
   CODE_BLOCK: 'CodeblockPlugin_InsertButton',
   SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',

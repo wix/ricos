@@ -11,7 +11,6 @@ const VerticalAlignmentTop = props => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <title>Icons / Formatting / Vertical aligment up</title>
     <g
       id="Icons-/-Formatting-/-Vertical-aligment-up"
       stroke="none"

@@ -87,4 +87,6 @@ const createLinkPreviewPlugin: CreatePluginFunction<LinkPreviewPluginEditorConfi
   return basePluginProps;
 };
 
+createLinkPreviewPlugin.functionName = LINK_PREVIEW_TYPE;
+
 export { createLinkPreviewPlugin };

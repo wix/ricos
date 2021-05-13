@@ -21,20 +21,18 @@ const getElementCoordsInWindow = (elem: HTMLElement): ElementCoords => {
   return { top: Math.round(top), left: Math.round(left) };
 };
 
-const getWindowWidth = (): number => {
-  return window.innerWidth;
-};
-
 const getWidth = (element: HTMLElement): number => {
   return element.clientWidth;
 };
 
 export const isElementOutOfWindow = (element: HTMLElement): boolean | undefined => {
-  if (window && document) {
+  if (element && document) {
     const modalOffset = getElementCoordsInWindow(element).left;
     const modalWidth = getWidth(element);
-    const windowWidth = getWindowWidth();
-    if (modalWidth + modalOffset > windowWidth) {
+    const rootEditor = element.closest('[data-hook=root-editor]') as HTMLElement;
+    const editorOffset = rootEditor && getElementCoordsInWindow(rootEditor).left;
+    const editorWidth = (rootEditor && rootEditor.getBoundingClientRect().width) || 999999;
+    if (modalWidth + (modalOffset - editorOffset) > editorWidth) {
       return true;
     } else {
       return false;

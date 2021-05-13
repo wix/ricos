@@ -1,0 +1,40 @@
+@keyframes animateElement{
+  0% {
+    opacity:0;
+    transform:  translate(0px,5px);
+  }
+  100% {
+    opacity:1;
+    transform:  translate(0px,0px);
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 6px 0px 6px 0px;
+  >div, >input {
+    flex-grow: 1;
+    margin: 0px 4px 0px 4px;
+  }
+  .close {
+    margin-right: 8px;
+  }
+
+  transition: all 0.3 ease;
+  animation: animateElement linear .3s;
+  animation-iteration-count: 1;
+}
+
+.panel {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+
+  .addItem {
+    margin-top: 12px;
+  }
+}
+

@@ -3,6 +3,9 @@ export type NormalizeConfig = {
   relValue?: string;
   disableInlineImages?: boolean;
   removeInvalidInlinePlugins?: boolean;
+  disableDownload?: boolean;
+  disableImagesExpand?: boolean;
+  disableGalleryExpand?: boolean;
 };
 
 export interface ComponentData {
@@ -12,6 +15,11 @@ export interface ComponentData {
     url?: string;
     textWrap?: string;
     width?: number | string;
+    height?: number;
+    spoiler?: { enabled?: boolean; description?: string; buttonContent?: string };
+    link?: { url?: string; rel?: string; target?: string };
+    anchor?: string;
+    disableExpand?: boolean;
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   src?: any;
@@ -30,3 +38,5 @@ export type LinkRange = {
 export type NormalizationProcessor<T> = (processed: T, ...args: any[]) => T;
 
 export * from './contentTypes';
+export * from './contentApi';
+export * from './mediaUploadTypes';

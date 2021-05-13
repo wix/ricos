@@ -1,9 +1,10 @@
 import { PaletteColors } from 'wix-rich-content-common';
 import { adaptForeground, toRgbTuple, toHexFormat } from '../themeUtils';
 import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from '../palettes';
-import { RicosTheme, CssVarsObject } from '../themeTypes';
+import { RicosTheme, CssVarsObject, PaletteConfig } from '../themeTypes';
 
-const createCssVars = (colors: PaletteColors): CssVarsObject => {
+const createCssVars = (colors: PaletteColors, config?: PaletteConfig): CssVarsObject => {
+  const { contentBgColor = false, focusActionColor, settingsActionColor } = config || {};
   const {
     textColor,
     bgColor: backgroundColor,
@@ -27,6 +28,11 @@ const createCssVars = (colors: PaletteColors): CssVarsObject => {
     disabledColorTuple: disabledColor ? toRgbTuple(disabledColor) : undefined,
     textColorLow,
     textColorLowTuple: textColorLow ? toRgbTuple(textColorLow) : undefined,
+    bgColorContainer: contentBgColor ? backgroundColor : undefined,
+    settingsActionColor,
+    settingsActionColorTuple: settingsActionColor ? toRgbTuple(settingsActionColor) : undefined,
+    focusActionColor,
+    focusActionColorTuple: focusActionColor ? toRgbTuple(focusActionColor) : undefined,
   };
 };
 
@@ -57,15 +63,20 @@ interface PaletteStrategyResult {
   colors?: PaletteColors;
 }
 
-export default function createPalette(palette?: RicosTheme['palette']): PaletteStrategyResult {
+export default function createPalette(
+  palette?: RicosTheme['palette'],
+  config?: RicosTheme['paletteConfig']
+): PaletteStrategyResult {
   if (!palette) {
     return { paletteVarsObject: {} };
   }
+
   const colors = extractColors(palette);
   Object.entries(colors).forEach(
-    ([colorName, value]) => (colors[colorName] = value && toHexFormat(value))
+    ([colorName, value]) =>
+      (colors[colorName] = value && typeof value === 'string' ? toHexFormat(value) : value)
   );
-  const paletteVarsObject = createCssVars(colors);
+  const paletteVarsObject = createCssVars(colors, config);
 
   return { paletteVarsObject, colors };
 }

@@ -3,7 +3,7 @@ import {
   RicosEntityRange,
   RicosContentBlock,
   NormalizationProcessor,
-  RicosContent,
+  DraftContent,
 } from '../types';
 
 const imagesTypes = ['wix-draft-plugin-image', 'IMAGE'];
@@ -30,7 +30,7 @@ const filterRangesByType = (
 
 const inlinePluginsRemover: (options?: {
   imagesOnly?: boolean;
-}) => NormalizationProcessor<RicosContent> = ({ imagesOnly = false } = {}) => contentState => {
+}) => NormalizationProcessor<DraftContent> = ({ imagesOnly = false } = {}) => contentState => {
   const newBlocks = contentState.blocks.map((block: RicosContentBlock) => {
     const { entityRanges = [], type } = block;
     const isAtomic = type === 'atomic';

@@ -10,35 +10,770 @@
 > - :nail_care: Polish
 
 ## [Unreleased]
+
 <details>
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2416](https://github.com/wix-incubator/rich-content/pull/2416) fix sliders drag and input issues
+
+### :nail_care: Polish
+
+- `editor`
+  - [#2489](https://github.com/wix/ricos/pull/2489) fix action color on editor element focus (+ fallback box-shadow)
+- `image`
+  - [#2488](https://github.com/wix/ricos/pull/2488) fix caption text styling to match ricos theme
+- `common`
+  - [#2489](https://github.com/wix/ricos/pull/2489) fix action color on editor element focus (+ fallback box-shadow)
+  - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
+
 </details>
 <hr/>
 
-## 8.20.0 (Feb 9, 2021)
+## 8.34.1 (May 11, 2021)
+
 ### :rocket: New Feature
-- `ricos-editor`
-  - [#2120](https://github.com/wix-incubator/rich-content/pull/2120) modal events in internal modal handling 
+
+- `image`
+  - [#2483](https://github.com/wix/ricos/pull/2483) remove unsharp mask from image url's (experiment `removeUsmFromImageUrls`)
+
+### :nail_care: Polish
+
+- `viewer`
+  - [#2482](https://github.com/wix/ricos/pull/2482) Fix hooks order & add first and last hooks
+
+## 8.34.0 (May 10, 2021)
+
+### :rocket: New Feature
+
+- `ricos-content`
+  - [#2480](https://github.com/wix/ricos/pull/2480) ContentBuilder: addBulletList, addOrderedList
+
+### :book: Documentation
+
+- [#2480](https://github.com/wix/ricos/pull/2480) Content Builder API
+
+## 8.33.2 (May 10, 2021)
+
+### :house: Internal
+
+- `storybook`
+  - [#2472](https://github.com/wix/ricos/pull/2472) ContentBuilder API - added additional plugins
+
+### :nail_care: Polish
+
+- `plugin-headings`
+  - [#2454](https://github.com/wix/ricos/pull/2454) clear `h1` wire on experiment `useHeadingOne`
+- `ricos-content`
+  - [#2462](https://github.com/wix/ricos/pull/2462) remove unfinalized plugins from ContentAPI
+
+### :rocket: New Feature
+
+- `accordion`
+  - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+  - [#2441](https://github.com/wix/ricos/commit/2441) scroll to item on expand/collapse
+  - [#2441](https://github.com/wix/ricos/commit/2441) (Command | Ctrl) + A shortcut selects all content in section
+- `table`
+  - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
+
 ### :bug: Bug Fix
+
+- `editor`
+  - [#2451](https://github.com/wix/ricos/pull/2451) render static toolbar buttons on undo-redo changes
+- `general`
+  - [#2442](https://github.com/wix/ricos/pull/2442) modal's accessibility
+
+### :house: Internal
+
+- `e2e`
+  - [#2458](https://github.com/wix/ricos/pull/2458) update to cypress 7
+
+## 8.33.1 (May 6, 2021)
+
+### :book: Documentation
+
+- `storybook`
+  - [#2421](https://github.com/wix/ricos/pull/2421) ContentBuilder API
+
+### :bug: Bug Fix
+
+- `external-toolbar`
+  - [#2424](https://github.com/wix/ricos/pull/2424) add table to external toolbar
+- `plugin-commons`
+  - [#2446](https://github.com/wix/ricos/pull/2446) link entry removed rather set to null on link removal
 - `link`
-  - [#2119](https://github.com/wix-incubator/rich-content/pull/2119) anchors issues in editor
-## 8.19.4 (Feb 8, 2021)
+  - [#2435](https://github.com/wix/ricos/pull/2435) static toolbar link popup styles fixed
+- `general`
+  - [#2435](https://github.com/wix/ricos/pull/2435) ClickOutside for inline popups supports drag out
+- `html-embed`
+  - [#2450](https://github.com/wix/ricos/pull/2450) fixes embeded iframes width to be 100% fixed
+
+### :nail_care: Polish
+
+- `ricos-content`
+  - [#2421](https://github.com/wix/ricos/pull/2421) ContentBuilder exposed separately
+
+## 8.33.0 (May 3, 2021)
+
+### :rocket: New Feature
+
+- `file-upload`
+  - [#2330](https://github.com/wix/ricos/commit/2330) add responsive design
+- `gallery`
+  - [#2364](https://github.com/wix/ricos/pull/2364) gallery settings for mobile devices
+
 ### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2427](https://github.com/wix/ricos/pull/2427) support RichContentViewer's `addAnchors` prop
+
+### :house: Internal
+
+- `editor`
+  - [#2397](https://github.com/wix/ricos/pull/2397) fix undo experiment accordion crash
+
+## 8.32.0 (May 2, 2021)
+
+### :rocket: New Feature
+
+- `ricos-editor`
+  - [#2413](https://github.com/wix/ricos/pull/2413) action color can now be separated for settings panels & focus on plugin. See [settingsActionColor & focusActionColor API](https://ricos.js.org/docs/ricos/Theming#settingsactioncolor)
+
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
+- `gallery`
+  - [#2402](https://github.com/wix/ricos/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
+
+### :house: Internal
+
+- `e2e`
+  - [#2381](https://github.com/wix/ricos/pull/2381) undo redo tests improvement
+
+## 8.31.3 (April 28, 2021)
+
+### :nail_care: Polish
+
+- `schema`
+  - [#2419](https://github.com/wix/ricos/pull/2419) remove `rich_content` proto package
+
+## 8.31.2 (April 28, 2021)
+
+### :bug: Bug Fix
+
+- `TextSelectionToolbar`
+  - [#2417](https://github.com/wix/ricos/pull/2417) fix position + css
+- `ricos-content`
+  - [#c9a1453f](https://github.com/wix/ricos/commit/c9a1453f) fix link compare
+
+## 8.31.1 (April 28, 2021)
+
+### :nail_care: Polish
+
+- `schema`
+  - [#2411](https://github.com/wix/ricos/pull/2411) change wix rich content schema proto package name
+
+## 8.31.0 (April 28, 2021)
+
+### :rocket: New Feature
+
+- `mentions`
+  - [#2407](https://github.com/wix/ricos/pull/2407) add onMentionHover
+
+## 8.30.4 (April 25, 2021)
+
+### :house: Internal
+
+- `fullscreen`
+  - [#2392](https://github.com/wix/ricos/pull/2392) replace content-box with border-box
+- `docs`
+  - [#2337](https://github.com/wix/ricos/pull/2337) docs removed from workspaces (build failure fix)
+
+### :bug: Bug Fix
+
+- `image viewer`
+  - [#2398](https://github.com/wix/ricos/pull/2398) Avoid exception when image src missing
+- `editor`
+  - [#2385](https://github.com/wix/ricos/pull/2385) toolbar shortcuts in mac & windows
+
+## 8.30.3 (April 22, 2021)
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2390](https://github.com/wix/ricos/pull/2390) click on image caption doesnt open expand mode
+- `ricos-content`
+  - [#2393](https://github.com/wix/ricos/pull/2393) draft converters handle undefined values in content
+
+## 8.30.2 (April 22, 2021)
+
+### :bug: Bug Fix
+
+- `editor`
+  - [#2380](https://github.com/wix/ricos/pull/2380) delete last quote block before atomic block
+- `external-toolbar`
+  - [#2391](https://github.com/wix/ricos/pull/2391) add events and bookings to vertical embed
+
+## 8.30.1 (April 21, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-schema`
+  - [#e728b63](https://github.com/wix/ricos/commit/e728b63) add missing import for wix proto validations
+
+## 8.30.0 (April 20, 2021)
+
+### :rocket: New Feature
+
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+- `ricos-content`
+  - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
+- `button`
+  - [#2056](https://github.com/wix/ricos/pull/2056) resizable buttons
+
+### :nail_care: Polish
+
+- `schema`
+  - [#2373](https://github.com/wix/ricos/pull/2373) use protobuf native Timestamp
+
+### :bug: Bug Fix
+
+- `editor`
+  - [#2378](https://github.com/wix/ricos/pull/2378) link modal supports image links (static toolbar flow)
+  - [#2386](https://github.com/wix/ricos/pull/2386) clear unsupported plugins from pasted content
+  - [#2387](https://github.com/wix/ricos/pull/2387) editor commands allows any data for draft types
+- `link`
+  - [#2384](https://github.com/wix/ricos/pull/2384) anchor - fix preview config (crash on componentDidMount)
+- `gallery`
+  - [#2379](https://github.com/wix/ricos/pull/2379) gallery loader disappears only when all items are uploaded
+
+### :nail_care: Polish
+
+- `schema`
+  - [#2383](https://github.com/wix/ricos/pull/2383) fix link schema
+
+## 8.29.12 (April 13, 2021)
+
+### :house: Internal
+
+- `editor`
+  - [#2356](https://github.com/wix/ricos/pull/2356) toolbar navigation with keyboard
+
+## 8.29.8 (April 13, 2021)
+
+### :house: Internal
+
+- `scripts`
+  - trigger loki in npm publish script
+
+## 8.29.7 (April 13, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2370](https://github.com/wix/ricos/pull/2370) fullscreen loads on remount on mobile
+
+## 8.29.6 (April 13, 2021)
+
+### :bug: Bug Fix
+
+- `schema`
+  - [#2374](https://github.com/wix/ricos/pull/2374) remove wix.api.format URL proto option
+
+## 8.29.5 (April 12, 2021)
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2369](https://github.com/wix/ricos/pull/2369) Support preload image when pasting images using handleFileSelection
+- `editor`
+  - [#2367](https://github.com/wix/ricos/pull/2367) Fix plus button to follow after input pointer
+
+### :house: Internal
+
+- `editor-common`
+  - [#2361](https://github.com/wix/ricos/pull/2361) fix undo experiment for table
+
+## 8.29.4 (April 11, 2021)
+
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2357](https://github.com/wix/ricos/pull/2357) fix fullscreen display when images expand is disabled and added uni-tests
+- `editor-common`
+  - [#2368](https://github.com/wix/ricos/pull/2368) fix android issues (update draftjs)
+- `general`
+  - [#2349](https://github.com/wix/ricos/pull/2349) inline plugin popups in static formatting toolbar
+
+### :house: Internal
+
+- `editor-common`
+  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
+- `button-link`
+  - [#2362](https://github.com/wix/ricos/pull/2362) add button link bi
+
+## 8.29.3 (April 7, 2021)
+
+### :rocket: New Feature
+
+- `editor`
+  - [#2350](https://github.com/wix/ricos/pull/2350) Paste & drop images support
+
+### :bug: Bug Fix
+
+- `toolbar`
+  - [#1882](https://github.com/wix/ricos/pull/1882) fix buttons bg color issue with mobile "false hover"
+- `common`
+  - [#2344](https://github.com/wix/ricos/pull/2344) fix tooltip z-index for media settings modal
+
+## 8.29.2 (April 6, 2021)
+
+### :rocket: New Feature
+
+- `ricos-editor`
+  - [#2044](https://github.com/wix/ricos/pull/2044) **beta** Editor Commands
+
+### :nail_care: Polish
+
+- `image`
+  - [#2343](https://github.com/wix/ricos/pull/2343) skip LCP optimization for png and mobile
+
+### :bug: Bug Fix
+
+- `mentions`
+
+  - [#2345](https://github.com/wix/ricos/pull/2345) fix panel overflow
+
+## 8.29.1 (April 4, 2021)
+
+### :bug: Bug Fix
+
+- `link`
+  - [#2339](https://github.com/wix/ricos/pull/2339) link panel popup styles for static toolbar
+- `plugin-commons`
+  - [#2339](https://github.com/wix/ricos/pull/2339) color-picker: scrollbars in saturation picker
+- `text-slection-toolbar`
+  - [#2327](https://github.com/wix/ricos/pull/2327) fix position of text-selection-toolbar in lists
+- `plugin-image`
+  - [#2341](https://github.com/wix/ricos/pull/2341) native selection file accepts only supported image extensions
+
+### :house: Internal
+
+- `editor editor-common plugin-undo-redo`
+  - [#1847](https://github.com/wix/ricos/pull/1847) undo redo for plugin customisations experiment enabled
+
+## 8.29.0 (April 1, 2021)
+
+### :rocket: New Feature
+
+- `plugin-image`
+  - [#2176](https://github.com/wix/ricos/pull/2176) update image settings modal to have download and expand options using toggle buttons
+
+### :bug: Bug Fix
+
+- `gallery`
+  - [#1705](https://github.com/wix/ricos/pull/1705) fix gallery layout styles default and thumbnails ratio
+- `ricos-editor`
+  - [#2336](https://github.com/wix/ricos/pull/2336) blocks with errors filter fix
+
+## 8.28.0 (Mar 31, 2021)
+
+### :rocket: New Feature
+
+- `plugin-video`
+  - [#2331](https://github.com/wix/ricos/pull/2331) added new settings panel for custom videos with download toggle
+- `plugin-gallery`
+  - [#2096](https://github.com/wix/ricos/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
+
+### :house: Internal
+
+- `unsupported-blocks/accordion/table/spoiler`
+  - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
+- `plugin-table`
+  - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
+- `ricos-content`
+  - [#2237](https://github.com/wix/ricos/pull/2237) ContentAPI infra added
+- `general`
+  - [#2237](https://github.com/wix/ricos/pull/2237) tsconfig: strictPropertyInitialization; eslint: lines-between-class-members rules
+
+### :bug: Bug Fix
+
+- `image`
+  - [#2327](https://github.com/wix/ricos/pull/2327) aria-hidden attribute fixed
+- `plugin-spoiler`
+  - [#2308](https://github.com/wix/ricos/pull/2308) increase blur for media, change spoiler button position in formatting toolbar, change spoiler icon
+- `plugin-link-preview`
+  - [#2324](https://github.com/wix/ricos/pull/2324) remove large space from plugin bottom
+
+### :nail_care: Polish
+
+- `common`
+  - [#2327](https://github.com/wix/ricos/pull/2327) TextButtonMapping and InlineToolbarButton types improved
+
+## 8.27.8 (Mar 30, 2021)
+
+- `ricos-content`
+  - [#8d2b66e](https://github.com/wix/ricos/commit/8d2b66e) add ensure content methods to converters entry point
+
+## 8.27.7 (Mar 25, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-spoiler`
+  - [#2318](https://github.com/wix/ricos/pull/2318) filter spoilered media from preview
+
+### :nail_care: Polish
+
+- `plugin-headings`
+  - [#2321](https://github.com/wix/ricos/pull/2321) Heading 1 can now be enabled via feature toggle `useHeadingOne` (only applicable for default config)
+
+## 8.27.5 (Mar 24, 2021)
+
+### :bug: Bug Fix
+
+- `color-picker`
+  - [#2159](https://github.com/wix/ricos/pull/2159) update color-picker style for mobile devices
+
+### :house: Internal
+
+- `editor-common`
+  - [#2317](https://github.com/wix/ricos/pull/2317) deprecation of old `EditorEventsContext` through `index.ts` file
+
+## 8.27.4 (Mar 18, 2021)
+
+### :nail_care: Polish
+
+- `plugin-headings`
+  - [#2309](https://github.com/wix/ricos/pull/2309) `Heading 1` is now supported
+- `plugin-headings`
+  - [#2310](https://github.com/wix/ricos/pull/2310) `Heading 1` is visible by default
+
+## 8.27.2 (Mar 15, 2021)
+
+### :bug: Bug Fix
+
+- `unsupported-blocks`
+  - [#2292](https://github.com/wix/ricos/pull/#2292) fix unsupported-blocks text height and font size
+- `gallery`
+  - [#2290](https://github.com/wix/ricos/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
+- `fullscreen`
+  - [#2273](https://github.com/wix/ricos/pull/2273) fix dimension issues
+
+## 8.27.1 (Mar 10, 2021)
+
+### :rocket: New Feature
+
+- `ricos-content`
+  - [#2287](https://github.com/wix/ricos/pull/2287) compareDraftContent util exposed
+- `plugin-link`
+  - [#2262](https://github.com/wix/ricos/pull/2262) `onViewerAction` callback hook now supports link click events
+- `plugin-menu`
+  - [#2285](https://github.com/wix/ricos/pull/2285) new advanced section
+
+### :nail_care: Polish
+
+- `ricos-viewer`
+  - performance improvment for non-english locale
+
+## 8.26.2 (March 8, 2021)
+
+### :bug: Bug Fix
+
+- `viewer`
+  - [#2282](https://github.com/wix/ricos/pull/2282) `customStyles` unordered lists - now influenced by paragraph styles
+
+## 8.26.1 (March 8, 2021)
+
+### :bug: Bug Fix
+
+- `headings`
+  - [#2278](https://github.com/wix/ricos/pull/2278) triple click display the right heading type
+- `viewer`
+  - [#2281](https://github.com/wix/ricos/pull/2281) `customStyles` paragraph styles influence on ordered lists
+
+## 8.26.0 (March 8, 2021)
+
+### :rocket: New Feature
+
+- `ricos-content`
+  - [#2261](https://github.com/wix/ricos/pull/2261) `fromHtml` and `toHtml` utility functions convert between rich content and HTML
+
+## 8.25.4 (March 5, 2021)
+
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2260](https://github.com/wix/ricos/pull/2260) fix mobile dimension issues
+- `ricos-editor`
+  - [#2257](https://github.com/wix/ricos/pull/2257) `getContent` removes blocks with errors from innerRCE blocks
+
+## 8.25.2 (March 4, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-common`
+  - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
+    - `p` will no longer override elements of all textual entities
+    - `lineHeight` of an element is now automatically set to 1.5 to keep ratio of growing text (unless provided).
+
+## 8.25.1 (March 2, 2021)
+
+### :bug: Bug Fix
+
+- `table`
+  - [#2252](https://github.com/wix/ricos/pull/2252) drag and drop preview position
+
+## 8.25.0 (March 2, 2021)
+
+### :rocket: New Feature
+
+- `ricos-content`
+  - [#2234](https://github.com/wix/ricos/pull/2234) `fromPlainText` utility converts plain text to rich content
+
+### :nail_care: Polish
+
+- `docs`
+  - [#2241](https://github.com/wix/ricos/pull/2241) `EditorEventsContext` - doc page improved
+
+### :bug: Bug Fix
+
+- `image-viewer`
+  - [#2251](https://github.com/wix/ricos/pull/2251) fix useSrcSet use
+
+## 8.24.1 (March 1, 2021)
+
+### :nail_care: Polish
+
+- `editor-common`
+  - [#2203](https://github.com/wix/ricos/pull/2203) `EditorEventsContext` separated into lib
+- `ricos-viewer`
+  - [#2217](https://github.com/wix/ricos/pull/2217) render full-screen on hover
+
+### :house: Internal
+
+- `bundle-analyzer`
+  - [#2238](https://github.com/wix/ricos/pull/2238) editor-common bundle size fixture
+
+### :rocket: New Feature
+
+- `ricos-theme`
+  - [#2230](https://github.com/wix/ricos/pull/2230) `paletteConfig` - configurations for theme. `shouldColorContainer` boolean field
+
+## 8.24.0 (Feb 28, 2021)
+
+### :rocket: New Feature
+
+- `color`
+  - [#2225](https://github.com/wix/ricos/pull/2225) Override panel position
+
+### :bug: Bug Fix
+
+- `video`
+  - [#2212](https://github.com/wix/ricos/pull/2212) fix crash when data is not provided upon upload error
+
+### :nail_care: Polish
+
+- `ricos-content`
+  - [#2192](https://github.com/wix/ricos/pull/2192) Truncate - docs & finialize API
+
+## 8.23.1 (Feb 27, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2216](https://github.com/wix/ricos/pull/2216) display error on block when unsupported error key is given when file upload fails
+
+### :house: Internal
+
+- `e2e`
+  - [#2220](https://github.com/wix/ricos/pull/2220) tests env fix - load theme on SSR, and remove seoMode for non-seo tests
+
+### :nail_care: Polish
+
+- `ricos-viewer`
+  - [#2222](https://github.com/wix/ricos/pull/2222) optimization(translations): skip redundant remount
+- `image`
+  - [#2213](https://github.com/wix/ricos/pull/2213) increase preload quality
+
+## 8.23.0 (Feb 24, 2021)
+
+### :rocket: New Feature
+
+- `fullScreen`
+  - [#2206](https://github.com/wix/ricos/pull/2206) fullscreen styles are bundled and so there's no need to import its `styles.min.css`
+
+## 8.22.9 (Feb 24, 2021)
+
+### :bug: Bug Fix
+
+- `common`
+  - [#2199](https://github.com/wix/ricos/pull/2199) bgColor fallback was undefined, influencing plugins
+
+### :house: Internal
+
+- `storybook`
+  - [#2191](https://github.com/wix/ricos/pull/2191) Theming - Custom Styles + refactor
+
+### :nail_care: Polish
+
+- `image`
+  - [#2207](https://github.com/wix/ricos/pull/2207) quality preload experiment
+
+## 8.22.8 (Feb 23, 2021)
+
+### :bug: Bug Fix
+
+- `editor`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+- `viewer`
+  - [#2193](https://github.com/wix/ricos/pull/2193) fix content re-render issue
+
+## 8.22.7 (Feb 22, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-link`
+  - [#2182](https://github.com/wix/ricos/pull/2182) open link panel from external toolbar in mobile
+
+### :house: Internal
+
+- `common`
+  - [#2189](https://github.com/wix/ricos/pull/2189) experiments: support non-boolean values
+
+## 8.22.6 (Feb 22, 2021)
+
+### :nail_care: Polish
+
+- `image`
+  - [#2184](https://github.com/wix/ricos/pull/2184) thumbnail quality by `imageThumbnailQuality` experiment
+
+## 8.22.5 (Feb 21, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-common`
+  - [#2183](https://github.com/wix/ricos/pull/2183) `customStyles` fix css-injection with `;` char
+
+## 8.22.4 (Feb 21, 2021)
+
+- `common`
+  - [#2157](https://github.com/wix/ricos/pull/2157) feature(truncateContentState): additional params support & "Read More" usage example
+
+## 8.22.3 (Feb 20, 2021)
+
+### :rocket: New Feature
+
+- `fullScreen`
+  - [#2069](https://github.com/wix/ricos/pull/2069) allow full-screen mode for inner-rce images and organize full-screen images in order
+
+### :house: Internal
+
+- `ricos-viewer`
+  - [#2168](https://github.com/wix/ricos/pull/2168) load fullscreen modal if content includes images
+
+## 8.22.2 (Feb 18, 2021)
+
+### :house: Internal
+
+- `image`
+  - [#2167](https://github.com/wix/ricos/pull/2167) image config type contains optional `consumer` field for Photo Studio's internal BI
+
+## 8.22.1 (Feb 18, 2021)
+
+### :house: Internal
+
+- `common`
+  - [#2161](https://github.com/wix/ricos/pull/2161) add container width optional prop
+
+### :bug: Bug Fix
+
+- `editor`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+- `viewer`
+  - [#2164](https://github.com/wix/ricos/pull/2164) fix Ricos `bgColor` not taking effect
+
+## 8.22.0 (Feb 16, 2021)
+
+### :rocket: New Feature
+
+- `ricos-editor`
+  - [#2153](https://github.com/wix/ricos/pull/2153) getContentTraits expose isLastChangeEdit
+
+### :bug: Bug Fix
+
+- `link`
+  - [#2144](https://github.com/wix/ricos/pull/2144) static toolbar - link modal style fix
+
+### :house: Internal
+
+- `ricos-editor`
+  - [#2090](https://github.com/wix/ricos/pull/2090) callback `onPluginAddStep` is now available for hooking
+  - [#2156](https://github.com/wix/ricos/pull/2156) callback `onPluginAddStep` - added version field
+- `example`
+  - [#2151](https://github.com/wix/ricos/pull/2151) allow editing content in new `RichContent` schema via "Use New Content" setting
+
+## 8.21.1 (Feb 14, 2021)
+
+### :bug: Bug Fix
+
+- `*`
+  - [#2134](https://github.com/wix/ricos/pull/2134) fix `onViewerAction` arguments order
+
+### :house: Internal
+
+- `viewer`
+  - [#2138](https://github.com/wix/ricos/pull/2138) viewer performance
+
+## 8.21.0 (Feb 10, 2021)
+
+### :rocket: New Feature
+
+- `gallery`
+  - [#1926](https://github.com/wix/ricos/pull/1926) upload video items in gallery (will be available through wix-ricos soon)
+
+### :bug: Bug Fix
+
 - `vertical-embed`
-  - [#2118](https://github.com/wix-incubator/rich-content/pull/2118) fix css
+  - [#2127](https://github.com/wix/ricos/pull/2127) fix css issues
+
+## 8.20.0 (Feb 9, 2021)
+
+### :rocket: New Feature
+
+- `ricos-editor`
+  - [#2120](https://github.com/wix/ricos/pull/2120) modal events in internal modal handling
+
+### :bug: Bug Fix
+
+- `link`
+  - [#2119](https://github.com/wix/ricos/pull/2119) anchors issues in editor
+
+## 8.19.4 (Feb 8, 2021)
+
+### :bug: Bug Fix
+
+- `vertical-embed`
+  - [#2118](https://github.com/wix/ricos/pull/2118) fix css
 
 ## 8.19.3 (Feb 8, 2021)
+
 ### :bug: Bug Fix
+
 - `headings`
-  - [#2116](https://github.com/wix-incubator/rich-content/pull/2116) headings toolbar in external modal
+  - [#2116](https://github.com/wix/ricos/pull/2116) headings toolbar in external modal
 - `link-preview`
   - [#2112](https://github.com/wix/ricos/pull/2112) fix link-preview link data (rel & target)
 
 ## 8.19.2 (Feb 8, 2021)
+
 ### :bug: Bug Fix
+
 - `editor`
   - [#2099](https://github.com/wix/ricos/pull/2099) fix `onOpenEditorSuccess` unwanted triggers
 - `viewer`
@@ -47,74 +782,104 @@
   - [#2108](https://github.com/wix/ricos/pull/2108) fix anchor not scrolling in wix site
 - `editor`
   - [#2111](https://github.com/wix/ricos/pull/2111) fix horizontal side toolbar theme
+
 ### :house: Internal
+
 - `button`
   - [#2082](https://github.com/wix/ricos/pull/2082) remove link data from action-button
 
 ## 8.19.1 (Feb 6, 2021)
+
 ### :bug: Bug Fix
+
 - `image`
   - [#2101](https://github.com/wix/ricos/pull/2101) remove duplication of images in browsers reader mode
 - `ricos-common`
-  - [#2102](https://github.com/wix-incubator/rich-content/pull/2102) experiments API: wix-experiments compatibility
+  - [#2102](https://github.com/wix/ricos/pull/2102) experiments API: wix-experiments compatibility
 
 ## 8.19.0 (Feb 4, 2021)
+
 ### :rocket: New Feature
+
 - `common`
-  - [#2081](https://github.com/wix-incubator/rich-content/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
-  - [#2079](https://github.com/wix-incubator/rich-content/pull/2079) experiments infra
+  - [#2081](https://github.com/wix/ricos/pull/2081) support for palette colors 3 & 4 (`disabledTextColor` & `textColorLow`)
+  - [#2079](https://github.com/wix/ricos/pull/2079) experiments infra
+
 ### :bug: Bug Fix
+
 - `unsupported-blocks`
   - [#2078](https://github.com/wix/ricos/pull/2078) fix unsupported-blocks container height issue
 
 ## 8.18.3 (Feb 2, 2021)
+
 ### :bug: Bug Fix
+
 - `inner-modal`
-  - [#2076](https://github.com/wix-incubator/rich-content/pull/2076) vertical overflow issue
+  - [#2076](https://github.com/wix/ricos/pull/2076) vertical overflow issue
+
 ## 8.18.1 (Feb 2, 2021)
+
 ### :bug: Bug Fix
+
 - `ricos-editor`
-  - [#2073](https://github.com/wix-incubator/rich-content/pull/2073) isContentChanged fixed
+  - [#2073](https://github.com/wix/ricos/pull/2073) isContentChanged fixed
 
 ## 8.18.0 (Jan 31, 2021)
+
 ### :rocket: New Feature
+
 - `ricos-common`
-  - [#2065](https://github.com/wix-incubator/rich-content/pull/2065) add textAlignment prop
+  - [#2065](https://github.com/wix/ricos/pull/2065) add textAlignment prop
 
 ## 8.17.11 (Jan 27, 2021)
+
 ### :bug: Bug Fix
+
 - `unsupported-blocks`
   - [#2058](https://github.com/wix/ricos/pull/2058) bg color update
 
-
 ## 8.17.10 (Jan 27, 2021)
+
 ### :bug: Bug Fix
+
 - `link`
   - [#2049](https://github.com/wix/ricos/pull/2049) fix url data changing rel/target when only one of them is present
 
 ## 8.17.9 (Jan 26, 2021)
+
 ### :bug: Bug Fix
+
 - `link`
   - [#2038](https://github.com/wix/ricos/pull/2038) fix anchor's tag overriding url,add `href` value & remove `siteUrl` prop
 
 ## 8.17.8 (Jan 25, 2021)
+
 ### :rocket: New Feature
+
 - `editor`
-  - [#2034](https://github.com/wix-incubator/rich-content/pull/2034) maxTextLength prop added
+  - [#2034](https://github.com/wix/ricos/pull/2034) maxTextLength prop added
+
 ### :bug: Bug Fix
+
 - `table`
   - [#2046](https://github.com/wix/ricos/pull/2046) cell selection background color style
 
 ## 8.17.7 (Jan 25, 2021)
+
 ### :bug: Bug Fix
+
 - `ricos-common`
   - [#2041](https://github.com/wix/ricos/pull/2041) remove draft dependency in migration tool
 
 ## 8.17.6 (Jan 22, 2021)
+
 ### :rocket: New Feature
+
 - `ricos-content`
-  - [#2006](https://github.com/wix-incubator/rich-content/pull/2006) `toPlainText` utility converts rich content to plain text
+  - [#2006](https://github.com/wix/ricos/pull/2006) `toPlainText` utility converts rich content to plain text
+
 ### :house: Internal
+
 - `example`
   - [#2026](https://github.com/wix/ricos/pull/2026) convert to TypeScript
 - `storybook`
@@ -123,46 +888,64 @@
   - [#2026](https://github.com/wix/ricos/pull/2026) convert test-env to TypeScript
 
 ## 8.17.5 (Jan 20, 2021)
+
 ### :house: Internal
+
 - `gallery`
   - [#2023](https://github.com/wix/ricos/pull/2023) bump pro-gallery to 2.4.13
 
 ## 8.17.4 (Jan 20, 2021)
+
 ### :bug: Bug Fix
+
 - `link`
   - [#2021](https://github.com/wix/ricos/pull/2021) fix anchors click deletes url params
   - [#2022](https://github.com/wix/ricos/pull/2021) fix link panel in Safari
 
 ## 8.17.3 (Jan 19, 2021)
+
 ### :bug: Bug Fix
+
 - `editor`
   - [#2019](https://github.com/wix/ricos/pull/2019) fix inline toolbar ui bug
+
 ## 8.17.2 (Jan 19, 2021)
+
 ### :house: Internal
+
 - `common`
   - [#2012](https://github.com/wix/ricos/pull/2012) merge translations
 
 ## 8.17.0 (Jan 19, 2021)
+
 ### :rocket: New Feature
+
 - `common`
-  - [#1970](https://github.com/wix-incubator/rich-content/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
+  - [#1970](https://github.com/wix/ricos/pull/1970) new theme palette fields: `textColorLow`, `disabledColor`, `fallbackColor`
+
 ### :bug: Bug Fix
+
 - `table`
-  - [#2002](https://github.com/wix-incubator/rich-content/pull/2002) fix reset to default colors for table
+  - [#2002](https://github.com/wix/ricos/pull/2002) fix reset to default colors for table
 - `table`
-  - [#1999](https://github.com/wix-incubator/rich-content/pull/1999) prevent wix focus accessibility
+  - [#1999](https://github.com/wix/ricos/pull/1999) prevent wix focus accessibility
 
 ## 8.16.0 (Jan 18, 2021)
+
 ### :rocket: New Feature
+
 - `unsupportedBlocks`
-  - [#2005](https://github.com/wix-incubator/rich-content/pull/2005) new plugin for informing oneApp users when plugin isn't supported
+  - [#2005](https://github.com/wix/ricos/pull/2005) new plugin for informing oneApp users when plugin isn't supported
 
 ## 8.15.4 (Jan 18, 2021)
+
 ### :bug: Bug Fix
+
 - `unsupportedBlocks`
-  - [#1993](https://github.com/wix-incubator/rich-content/pull/1993) update unsupported-blocks translation keys
+  - [#1993](https://github.com/wix/ricos/pull/1993) update unsupported-blocks translation keys
 
 ### :house: Internal
+
 - `e2e`
   - [#1983](https://github.com/wix/ricos/commit/1983) extend url limit length
 - `editor`
@@ -175,27 +958,37 @@
   - [#2000](https://github.com/wix/ricos/pull/2000) remove position fixed from reset button
 
 ## 8.15.3 (Jan 14, 2021)
+
 ### :rocket: New Feature
+
 - `ricos-editor`
-  - [#1990](https://github.com/wix-incubator/rich-content/pull/1990) `RICOS_PUBLISH` event
+  - [#1990](https://github.com/wix/ricos/pull/1990) `RICOS_PUBLISH` event
 
 ## 8.15.2 (Jan 14, 2021)
+
 ### :house: Internal
+
 - `common`
   - [#1994](https://github.com/wix/ricos/commit/1994) added new media upload error keys
 
 ## 8.15.1 (Jan 13, 2021)
+
 ### :book: Documentation
+
 - `unsupportedBlocks`
-  - [#1985](https://github.com/wix-incubator/rich-content/pull/1985) unsupported-blocks-plugin documentation
+  - [#1985](https://github.com/wix/ricos/pull/1985) unsupported-blocks-plugin documentation
 
 ## 8.15.0 (Jan 12, 2021)
+
 ### :rocket: New Feature
+
 - `unsupportedBlocks`
-  - [#1969](https://github.com/wix-incubator/rich-content/pull/1969) new plugin for informing oneApp users when plugin isn't supported
+  - [#1969](https://github.com/wix/ricos/pull/1969) new plugin for informing oneApp users when plugin isn't supported
 
 ## 8.14.2 (Jan 12, 2021)
+
 ### :bug: Bug Fix
+
 - `table`
   - [#1972](https://github.com/wix/ricos/commit/1972) fix table responsive and table resize
 - `table`
@@ -210,150 +1003,208 @@
   - [#1974](https://github.com/wix/ricos/commit/1974) fix rows and columns selection on edit cell
 
 ## 8.14.1 (Jan 11, 2021)
+
 ### :bug: Bug Fix
+
 - `editor`
   - [#1973](https://github.com/wix/ricos/commit/1973) fix `convertToRaw` when inner-rce is undefined (only for Rce-on-Rce plugins)
 
 ## 8.14.0 (Jan 10, 2021)
+
 ### :rocket: New Feature
+
 - `ricos-viewer`
-  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
+  - [#1916](https://github.com/wix/ricos/pull/1916) customize fullscreen `backgroundColor` and `foregroundColor` via `fullscreenProps` object in `mediaSettings`
 - `fullscreen`
-  - [#1916](https://github.com/wix-incubator/rich-content/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
+  - [#1916](https://github.com/wix/ricos/pull/1916) `backgroundColor` and `foregroundColor` props support, icon design improvement
 
 ### :bug: Bug Fix
+
 - `image`
   - [#1968](https://github.com/wix/ricos/commit/1968) image preview isn't displayed with error
+
 ### :house: Internal
+
 - `editor`
   - [#1968](https://github.com/wix/ricos/commit/1968) error toast custom messages don't go through translation (i18next console warnings fix)
 
 ## 8.13.3 (Jan 7, 2021)
+
 - `editor-common`
   - [#1966](https://github.com/wix/ricos/pull/1966) export withEditorContext
 
 ## 8.13.2 (Jan 7, 2021)
+
 - `editor-common`
   - [#1965](https://github.com/wix/ricos/pull/1965) Editor context lib
 
 ## 8.13.1 (Jan 7, 2021)
+
 ### :bug: Bug Fix
+
 - `link`
   - [#c3b615bc](https://github.com/wix/ricos/commit/c3b615bc) link not working in viewer
 
 ## 8.13.0 (Jan 6, 2021)
+
 ### :rocket: New Feature
+
 - `link`
-  - [#1958](https://github.com/wix-incubator/rich-content/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
+  - [#1958](https://github.com/wix/ricos/pull/1958) add `disableAutoLink` & refactor `externalLink` to `customLink`
+
 ### :book: Documentation
+
 - `link`
   - [#1958](https://github.com/wix/ricos/pull/1958) Update link documentation with `customLink` & `disableAutoLink` capabilities
-### :bug: Bug Fix
-- `ricos-editor`
-  - [#1963](https://github.com/wix-incubator/rich-content/pull/1963) wrapped with EditorEventsContext using typed forwardRef
 
+### :bug: Bug Fix
+
+- `ricos-editor`
+  - [#1963](https://github.com/wix/ricos/pull/1963) wrapped with EditorEventsContext using typed forwardRef
 
 ## 8.12.1 (Jan 6, 2021)
+
 ### :bug: Bug Fix
+
 - `fullscreen`
-  - [#1959](https://github.com/wix-incubator/rich-content/pull/1959) fix horizontal orientation image view
+  - [#1959](https://github.com/wix/ricos/pull/1959) fix horizontal orientation image view
 - `file-upload`
-  - [#1962](https://github.com/wix-incubator/rich-content/pull/1962) fix autodownload file after url resolve
+  - [#1962](https://github.com/wix/ricos/pull/1962) fix autodownload file after url resolve
 
 ## 8.12.0 (Jan 6, 2021)
+
 ### :rocket: New Feature
+
 - `editor`
-  - [#1954](https://github.com/wix-incubator/rich-content/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
+  - [#1954](https://github.com/wix/ricos/pull/1954) Returning `not-handled` from handlePastedText goes to our implementation of paste
 - `ricos-editor`
-  - [#1956](https://github.com/wix-incubator/rich-content/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
+  - [#1956](https://github.com/wix/ricos/pull/1956) publish API: `getContent(postId, isPublish)` deprecation warning; `editorEvents.publish()` + `editorRef.publish()` APIs added
+
 ### :house: Internal
+
 - `gallery`
   - [#1947](https://github.com/wix/ricos/pull/1947) bump pro-gallery to 2.4.7
 
 ## 8.11.5 (Jan 5, 2021)
-### :rocket: New Feature
-- `editor`
-  - [#1944](https://github.com/wix-incubator/rich-content/pull/1944) improve inline color filtering from pasted text
-- `link`
-  - [#1892](https://github.com/wix-incubator/rich-content/pull/1892) external link
-### :bug: Bug Fix
-- `link`
-  - [#1941](https://github.com/wix-incubator/rich-content/pull/1941) fix: selection after adding link
 
+### :rocket: New Feature
+
+- `editor`
+  - [#1944](https://github.com/wix/ricos/pull/1944) improve inline color filtering from pasted text
+- `link`
+  - [#1892](https://github.com/wix/ricos/pull/1892) external link
+
+### :bug: Bug Fix
+
+- `link`
+  - [#1941](https://github.com/wix/ricos/pull/1941) fix: selection after adding link
 
 ## 8.11.4 (Jan 3, 2021)
+
 ### :bug: Bug Fix
+
 - `text-color`
-  - [#1930](https://github.com/wix-incubator/rich-content/pull/1930) fix color picker css
+  - [#1930](https://github.com/wix/ricos/pull/1930) fix color picker css
 
 ## 8.11.3 (Jan 3, 2021)
+
 ### :rocket: New Feature
+
 - `editor`
-  - [#1939](https://github.com/wix-incubator/rich-content/pull/1939) allow api to disable input (`props.handleBeforeInput` can return handled)
+  - [#1939](https://github.com/wix/ricos/pull/1939) allow api to disable input (`props.handleBeforeInput` can return handled)
+
 ### :bug: Bug Fix
+
 - `editor`
-  - [#1938](https://github.com/wix-incubator/rich-content/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
+  - [#1938](https://github.com/wix/ricos/pull/1938) call updateEditorState when new editorState is given (by passing `callOnChangeOnNewEditorState` = true prop)
 
 ## 8.11.2 (Dec 31, 2020)
+
 ### :bug: Bug Fix
+
 - `vertical-embed`
   - [#1934](https://github.com/wix/ricos/pull/1934) Mobile UI fix
+
 ## 8.11.1 (Dec 31, 2020)
+
 ### :bug: Bug Fix
+
 - `editor`
-  - [#1924](https://github.com/wix-incubator/rich-content/pull/1924) addPluginMenu - fix override plugin menu styles on mobile
+  - [#1924](https://github.com/wix/ricos/pull/1924) addPluginMenu - fix override plugin menu styles on mobile
 - `inner-rce`
-  - [#1932](https://github.com/wix-incubator/rich-content/pull/1932) disable footer toolbar when inner rce is in focus
+  - [#1932](https://github.com/wix/ricos/pull/1932) disable footer toolbar when inner rce is in focus
 - `gallery`
-  - [#1935](https://github.com/wix-incubator/rich-content/pull/1935) disable progress in mobile native loader
+  - [#1935](https://github.com/wix/ricos/pull/1935) disable progress in mobile native loader
 
 ## 8.11.0 (Dec 28, 2020)
+
 ### :rocket: New Feature
+
 - `viewer`
-  - [#1915](https://github.com/wix-incubator/rich-content/pull/1915) `onViewerLoaded` callback is now added to helpers
-  - [#1921](https://github.com/wix-incubator/rich-content/pull/1921) `onViewerLoaded` callback includes `isPreview`
+  - [#1915](https://github.com/wix/ricos/pull/1915) `onViewerLoaded` callback is now added to helpers
+  - [#1921](https://github.com/wix/ricos/pull/1921) `onViewerLoaded` callback includes `isPreview`
 - `editor`
-  - [#1922](https://github.com/wix-incubator/rich-content/pull/1922) `onOpenEditorSuccess` callback is now added to helpers
-  - [#1917](https://github.com/wix-incubator/rich-content/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
+  - [#1922](https://github.com/wix/ricos/pull/1922) `onOpenEditorSuccess` callback is now added to helpers
+  - [#1917](https://github.com/wix/ricos/pull/1917) better support of inline colors on pasted text & disable applying inline color `black` (for theme)
+
 ### :house: Internal
+
 - `table`
-  - [#1401](https://github.com/wix-incubator/rich-content/pull/1401) **beta** add table plugin
+  - [#1401](https://github.com/wix/ricos/pull/1401) **beta** add table plugin
 
 ## 8.10.2 (Dec 27, 2020)
+
 ### :bug: Bug Fix
+
 - `gallery`
-  - [#1908](https://github.com/wix-incubator/rich-content/pull/1908) remove option to choose videos in native selection
+  - [#1908](https://github.com/wix/ricos/pull/1908) remove option to choose videos in native selection
 
 ## 8.10.1 (Dec 22, 2020)
+
 ### :bug: Bug Fix
+
 - `gallery`
   - [#1298](https://github.com/wix/ricos/pull/1298) fix mobile native item loader
+
 ### :book: Documentation
+
 - [#1899](https://github.com/wix/ricos/pull/1899) algolia search integrated
 
 ## 8.10.0 (Dec 22, 2020)
+
 ### :rocket: New Feature
+
 - `ricos-editor`
   - [#1886](https://github.com/wix/ricos/pull/1886) `injectedContent` prop allows injecting content to mounted editor without remount
+
 ### :bug: Bug Fix
+
 - `gallery`
   - [#1897](https://github.com/wix/ricos/pull/1897) fix gallery styles (college layout)
 
 ## 8.9.2 (Dec 21, 2020)
+
 ### :bug: Bug Fix
+
 - `link`
   - [#1884](https://github.com/wix/ricos/pull/1884) fix opening different link modal when using keyboard shortcut & externalToolbar
+
 ### :house: Internal
+
 - `editor`
   - [#1890](https://github.com/wix/ricos/pull/1890) switch from react-click-outside to 'react-click-outsider'
 
 ## 8.9.1 (Dec 21, 2020)
+
 ### :house: Internal
+
 - `native-polyfill`
   - [#1887](https://github.com/wix/ricos/pull/1887) add native polyfills (button, accordion, link-preview & sound-cloud)
 
 ## 8.9.0 (Dec 20, 2020)
+
 ### :rocket: New Feature
+
 - `ricos-editor`
   - [#1875](https://github.com/wix/ricos/pull/1875) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
 - `mobileNativeLoader`
@@ -362,16 +1213,21 @@
   - [#1881](https://github.com/wix/ricos/pull/1881) mobile native item loader
 
 ### :house: Internal
+
 - `editor-common`
   - [#1880](https://github.com/wix/ricos/pull/1880) moved `handleUndoRedoCommands` to editor-common
 
 ## 8.8.2 (Dec 16, 2020)
+
 ### :bug: Bug Fix
+
 - `editor`
   - [#1845](https://github.com/wix/ricos/pull/1845) disable list item block type override when single block is pasted
 
 ## 8.8.1 (Dec 14, 2020)
+
 ### :bug: Bug Fix
+
 - `button`
   - [#1860](https://github.com/wix/ricos/pull/1860) fix `open in a new tab` radio button behaviour
 - `emoji`
@@ -380,70 +1236,92 @@
   - [#1864](https://github.com/wix/ricos/pull/1864) fix the external toolbar popup styles
 
 ## 8.8.0 (Dec 13, 2020)
+
 ### :rocket: New Feature
+
 - `theming`
   - [#1862](https://github.com/wix/ricos/pull/1862) quote border color
 
 ### :bug: Bug Fix
+
 - `editor`
   - [#1859](https://github.com/wix/ricos/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
 - `link`
-  - [#1863](https://github.com/wix-incubator/rich-content/pull/1863) fix - after adding a link the text after is not remained underlined
-- `emoji`
-	- [#1864](https://github.com/wix/ricos/pull/1864) fix external toolbar popup styles
-- `giphy`
-	- [#1864](https://github.com/wix/ricos/pull/1864) fix external toolbar popup styles
+  - [#1863](https://github.com/wix/ricos/pull/1863) fix - after adding a link the text after is not remained underlined
+- `emoji` - [#1864](https://github.com/wix/ricos/pull/1864) fix external toolbar popup styles
+- `giphy` - [#1864](https://github.com/wix/ricos/pull/1864) fix external toolbar popup styles
+
 ### :book: Documentation
+
 - [#1856](https://github.com/wix/ricos/pull/1856) README + documentation improved
 
 ## 8.7.6 (Dec 11, 2020)
+
 ### :bug: Bug Fix
+
 - `vertical embed`
   - [#1855](https://github.com/wix/ricos/pull/1855) Theme adaption
 
 ## 8.7.5 (Dec 10, 2020)
+
 ### :bug: Bug Fix
+
 - `gallery`
   - [#1853](https://github.com/wix/ricos/pull/1853) removed image titles from mobile galleries
 
 ## 8.7.4 (Dec 10, 2020)
+
 ### :bug: Bug Fix
+
 - `ricos-editor`
   - [#1850](https://github.com/wix/ricos/pull/1850) settings modal overlay appears above wix ad
 
 ### :house: Internal
+
 - `test-env`
   - [#1848](https://github.com/wix/ricos/pull/1848) theme `customStyles` coverage
 
 ## 8.7.3 (Dec 10, 2020)
+
 ### :rocket: New Feature
+
 - `editor`
   - [#1830](https://github.com/wix/ricos/pull/1830) conditional buttons
 
 ## 8.7.2 (Dec 9, 2020)
+
 ### :bug: Bug Fix
+
 - `giphy`
   - [#1840](https://github.com/wix/ricos/pull/1840) prevent giphy crash on bad content
 - `headers-markdown`
   - [#1841](https://github.com/wix/ricos/pull/1841) don't pull `wix-rich-content-plugin-commons` into viewer
 
 ## 8.7.1 (Dec 8, 2020)
+
 ### :house: Internal
+
 - `gallery`
   - [#1838](https://github.com/wix/ricos/pull/1838) bump pro-gallery to 2.3.0
 - `general`
   - [#1836](https://github.com/wix/ricos/pull/1836) moved to midgard-yarn
 
 ## 8.7.0 (Dec 7, 2020)
+
 ### :rocket: New Feature
+
 - `editor`
   - [#1814](https://github.com/wix/ricos/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+
 ### :bug: Bug Fix
+
 - `file-upload`
   - [#1799](https://github.com/wix/ricos/pull/1799) remove example `resolveFileUrl` from Ricos default
 - `fullscreen`
   - [#1828](https://github.com/wix/ricos/pull/1828) fix mobile swipe crash
+
 ### :house: Internal
+
 - `fullscreen`
   - [#1828](https://github.com/wix/ricos/pull/1828) split `Fullscreen` to `Fullscreen` and `InnerFullscreen` and improved image index tracking
 

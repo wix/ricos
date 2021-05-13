@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
+import { DraftContent, RicosViewer } from 'ricos-viewer';
 import { pluginActionButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
 
 const buttonConfig = {
@@ -11,7 +11,7 @@ const buttonConfig = {
 
 const plugins = [pluginActionButton(buttonConfig)];
 
-const ButtonsViewer: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const ButtonsViewer: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosViewer content={content} plugins={plugins} />
 );
 

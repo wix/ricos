@@ -4,6 +4,7 @@ import {
   BUTTON_TYPES,
   undo,
   redo,
+  pluginsUndo,
 } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
@@ -20,11 +21,13 @@ const createInsertButtons: CreateInsertButtons = ({
   settings,
   getEditorState,
   setEditorState,
+  isPluginExperiment,
 }: {
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
   settings: UndoRedoPluginEditorConfig;
+  isPluginExperiment: boolean | undefined;
 }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
@@ -38,7 +41,7 @@ const createInsertButtons: CreateInsertButtons = ({
       componentData: {},
       onClick: e => {
         e.preventDefault();
-        setEditorState(undo(getEditorState()));
+        setEditorState(isPluginExperiment ? pluginsUndo(getEditorState()) : undo(getEditorState()));
       },
       isDisabled: () =>
         getEditorState()

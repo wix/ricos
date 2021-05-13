@@ -28,6 +28,8 @@ export const BLOCK_TYPES = Object.freeze([
 
 export const UNSTYLED = 'unstyled';
 export const BLOCKQUOTE = 'blockquote';
+export const NUMBERED_LIST_TYPE = 'ordered-list-item';
+export const BULLET_LIST_TYPE = 'unordered-list-item';
 
 export const isListType = (type: string): boolean =>
   type === 'ordered-list-item' || type === 'unordered-list-item';
@@ -66,7 +68,7 @@ export const VERTICAL_EMBED_TYPE = 'wix-draft-plugin-vertical-embed';
 export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 export const POLL_TYPE = 'wix-draft-plugin-poll';
-export const TABLE_TYPE = 'table';
+export const TABLE_TYPE = 'wix-rich-content-plugin-table';
 export const ANCHOR_TYPE = 'ANCHOR';
 export const PREVIEW = 'PREVIEW';
 export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';

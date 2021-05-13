@@ -13,5 +13,5 @@
     "sourceMap": true,
     "outDir": "dist/esm"
   },
-  "include": ["generated"]
+  "include": ["src/generated"]
 }

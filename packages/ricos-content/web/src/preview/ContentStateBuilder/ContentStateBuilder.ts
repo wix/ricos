@@ -1,5 +1,5 @@
 import Version from '../../version/versioningUtils';
-import { RicosContent } from '../../types/contentTypes';
+import { DraftContent } from '../../types/contentTypes';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
 import { toArray, mergeBlockWithEntities, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';
@@ -14,39 +14,60 @@ type PluginBuildMethod = (pluginData: PluginData) => ContentStateBuilder;
 type InteractionBuildMethod = (settings?: Record<string, unknown>) => ContentStateBuilder;
 
 class ContentStateBuilder {
-  contentState: RicosContent;
+  contentState: DraftContent;
 
   // Content
-  h1: ContentBuildMethod;
-  h2: ContentBuildMethod;
-  h3: ContentBuildMethod;
-  h4: ContentBuildMethod;
-  h5: ContentBuildMethod;
-  h6: ContentBuildMethod;
-  quote: ContentBuildMethod;
-  plain: ContentBuildMethod;
-  code: ContentBuildMethod;
-  ol: ContentBuildMethod;
-  ul: ContentBuildMethod;
+  h1!: ContentBuildMethod;
+
+  h2!: ContentBuildMethod;
+
+  h3!: ContentBuildMethod;
+
+  h4!: ContentBuildMethod;
+
+  h5!: ContentBuildMethod;
+
+  h6!: ContentBuildMethod;
+
+  quote!: ContentBuildMethod;
+
+  plain!: ContentBuildMethod;
+
+  code!: ContentBuildMethod;
+
+  ol!: ContentBuildMethod;
+
+  ul!: ContentBuildMethod;
 
   // Plugins
-  image: PluginBuildMethod;
-  video: PluginBuildMethod;
-  gallery: PluginBuildMethod;
-  soundCloud: PluginBuildMethod;
-  giphy: PluginBuildMethod;
-  map: PluginBuildMethod;
-  file: PluginBuildMethod;
-  divider: PluginBuildMethod;
-  link: PluginBuildMethod;
-  linkPreview: PluginBuildMethod;
+  image!: PluginBuildMethod;
+
+  video!: PluginBuildMethod;
+
+  gallery!: PluginBuildMethod;
+
+  soundCloud!: PluginBuildMethod;
+
+  giphy!: PluginBuildMethod;
+
+  map!: PluginBuildMethod;
+
+  file!: PluginBuildMethod;
+
+  divider!: PluginBuildMethod;
+
+  link!: PluginBuildMethod;
+
+  linkPreview!: PluginBuildMethod;
 
   // Interactions
-  readMore: InteractionBuildMethod;
-  seeFullPost: InteractionBuildMethod;
-  imageCounter: InteractionBuildMethod;
+  readMore!: InteractionBuildMethod;
 
-  constructor(initialState?: RicosContent) {
+  seeFullPost!: InteractionBuildMethod;
+
+  imageCounter!: InteractionBuildMethod;
+
+  constructor(initialState?: DraftContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }
 
@@ -63,7 +84,7 @@ Object.keys({
     textBlocksWithEntities: TextBlockWithEntities | TextBlockWithEntities[]
   ) {
     const textContentArray = toArray(textBlocksWithEntities) as TextBlockWithEntities[];
-    this.contentState = textContentArray.reduce((state: RicosContent, { block, entities }) => {
+    this.contentState = textContentArray.reduce((state: DraftContent, { block, entities }) => {
       const mergedState = mergeBlockWithEntities({
         contentState: state,
         block,

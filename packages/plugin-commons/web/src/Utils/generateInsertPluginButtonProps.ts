@@ -15,8 +15,10 @@ import {
   ToolbarButtonProps,
   Pubsub,
   EditorPluginConfig,
+  Version,
 } from 'wix-rich-content-common';
-import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
+import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
+import { getPluginParams } from './getPluginParams';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -53,7 +55,18 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
-  const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
+  const onPluginAddStep = (step: onPluginAddStepArgs['step'], blockKey: string) => {
+    helpers?.onPluginAddStep?.({
+      version: Version.currentVersion,
+      entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
+      entryPoint: toolbarName,
+      pluginId: blockType,
+      pluginDetails: blockKey,
+      step,
+    });
+  };
+  const onPluginAddSuccess = (params = {}) =>
+    helpers?.onPluginAddSuccess?.(blockType, toolbarName, params);
 
   function addBlock(data) {
     const { newBlock, newSelection, newEditorState } = createBlock(
@@ -62,7 +75,7 @@ export function generateInsertPluginButtonProps({
       blockType
     );
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    onPluginAddSuccess();
+    onPluginAddSuccess(getPluginParams(data, blockType));
     return { newBlock, newSelection, newEditorState };
   }
 
@@ -84,7 +97,7 @@ export function generateInsertPluginButtonProps({
       editorState = newEditorState;
       selection = selection || newSelection;
       updateEntity(newBlock.getKey(), file);
-      onPluginAddSuccess();
+      onPluginAddSuccess({ pluginDetails: newBlock.getKey() });
     });
 
     return { newEditorState: editorState, newSelection: selection as SelectionState };
@@ -146,16 +159,14 @@ export function generateInsertPluginButtonProps({
       const handleFilesAdded = shouldCreateGallery(data)
         ? (blockKey: string) => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : (blockKey: string) => pubsub.getBlockHandler('handleFilesAdded', blockKey);
-      handleFileChange(data, (blockKey, file) =>
-        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
-      );
+      handleFileChange(data, (blockKey, file) => {
+        onPluginAddStep('FileUploadDialog', blockKey);
+        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }));
+      });
     }
   }
 
   function toggleButtonModal(event) {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur(); // fixes focus/selction after giphy is inserted
-    }
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {
@@ -182,6 +193,7 @@ export function generateInsertPluginButtonProps({
         onConfirm: obj => {
           const data = addBlock(obj);
           addedBlockKey = data.newBlock;
+          onPluginAddStep('PluginModal', addedBlockKey);
           return data;
         },
         pubsub,
@@ -189,6 +201,7 @@ export function generateInsertPluginButtonProps({
         t,
         isMobile,
         blockKey: addedBlockKey,
+        toolbarName,
       });
     }
   }

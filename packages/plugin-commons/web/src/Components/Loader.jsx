@@ -68,6 +68,7 @@ class Loader extends React.Component {
   componentWillUnmount() {
     this.resetFakeLoader && this.resetFakeLoader();
   }
+
   initiateStyles() {
     if (!this.styles) {
       const theme = this.props.theme;

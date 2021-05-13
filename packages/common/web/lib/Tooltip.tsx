@@ -27,9 +27,11 @@ class Tooltip extends React.Component<Props> {
     tooltipOffset: { x: 0, y: 0 },
   };
 
-  disabled: boolean;
-  mousePosition: { x: number; y: number };
-  timeoutId: NodeJS.Timeout;
+  disabled = false;
+
+  mousePosition: { x: number; y: number } = { x: 0, y: 0 };
+
+  timeoutId!: NodeJS.Timeout;
 
   state = {
     tooltipVisible: false,

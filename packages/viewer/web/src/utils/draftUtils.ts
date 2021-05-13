@@ -1,4 +1,4 @@
-import { RicosContent } from 'wix-rich-content-common';
+import { DraftContent } from 'wix-rich-content-common';
 
-export const getBlockIndex = (content: RicosContent, blockKey: string) =>
+export const getBlockIndex = (content: DraftContent, blockKey: string) =>
   content.blocks.findIndex(block => block.key === blockKey);

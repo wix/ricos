@@ -12,6 +12,7 @@ class MultiSelectLinkPanelMobileTabs extends PureComponent {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
+
   render() {
     const { styles } = this;
     const { t, radioGroupValue, changeRadioGroup } = this.props;

@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 
-const DividerEditor: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const DividerEditor: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosEditor plugins={[pluginDivider()]} content={content} />
 );
 

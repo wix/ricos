@@ -7,7 +7,7 @@ import {
   createWithContent,
   EditorState,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isSSR, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { isSSR, DraftContent, SEOSettings } from 'wix-rich-content-common';
 import { getRequestedLocale, normalize } from '../src/utils';
 import { TestAppConfig } from '../src/types';
 
@@ -17,7 +17,7 @@ interface Props {
   mode?: Mode;
   allLocales?: string[];
   debounce?: number;
-  initialState?: RicosContent;
+  initialState?: DraftContent;
   locale?: string;
   seoMode?: SEOSettings;
   isMobile?: boolean;
@@ -27,7 +27,8 @@ interface Props {
 
 interface State {
   editorState?: EditorState;
-  contentState?: RicosContent;
+  contentState?: DraftContent;
+  injectedContent?: DraftContent;
   localeResource?: Record<string, string>;
   locale?: string;
   remountKey?: boolean;
@@ -53,7 +54,7 @@ class RichContentApp extends PureComponent<Props, State> {
     locale = getRequestedLocale(),
     mode,
   }: {
-    initialState?: RicosContent;
+    initialState?: DraftContent;
     locale?: string;
     mode?: Mode;
   }) => {
@@ -87,9 +88,9 @@ class RichContentApp extends PureComponent<Props, State> {
     this.updateContentState(editorState);
   };
 
-  onRicosEditorChange = (contentState: RicosContent) => this.setState({ contentState });
+  onRicosEditorChange = (contentState: DraftContent) => this.setState({ contentState });
 
-  onContentStateChange = (contentState: RicosContent) => {
+  onContentStateChange = (contentState: DraftContent) => {
     this.setState({
       contentState,
     });
@@ -101,12 +102,22 @@ class RichContentApp extends PureComponent<Props, State> {
     this.setState({ contentState: convertToRaw(editorState.getCurrentContent()) });
   };
 
-  updateEditorState = (contentState: RicosContent) => {
-    this.setState({ editorState: createWithContent(convertFromRaw(normalize(contentState))) });
+  updateEditorState = (contentState: DraftContent) => {
+    this.setState({
+      editorState: createWithContent(convertFromRaw(normalize(contentState))),
+      injectedContent: contentState,
+    });
   };
 
   render() {
-    const { editorState, contentState, localeResource, locale, remountKey } = this.state;
+    const {
+      editorState,
+      contentState,
+      localeResource,
+      locale,
+      remountKey,
+      injectedContent,
+    } = this.state;
     const { allLocales, seoMode, isMobile, app: App, testAppConfig } = this.props;
     return (
       <App
@@ -119,6 +130,7 @@ class RichContentApp extends PureComponent<Props, State> {
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
         onRicosEditorChange={this.onRicosEditorChange}
+        injectedContent={injectedContent}
         onContentStateChange={this.onContentStateChange}
         setLocale={this.setLocaleResource}
         seoMode={seoMode}

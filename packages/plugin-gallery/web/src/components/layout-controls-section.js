@@ -15,6 +15,11 @@ import {
 import ImageRatioSelector from './gallery-controls/image-ratio-selector';
 import ThumbnailPlacementSelector from './gallery-controls/thumbnail-placement-selector';
 
+const scrollDirectionOptions = {
+  horizontal: { oneRow: true, showArrows: true, isVertical: false },
+  vertical: { oneRow: false, showArrows: false },
+};
+
 class Separator extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
@@ -66,7 +71,7 @@ class LayoutControlsSection extends Component {
       component: ItemsPerRow,
       props: {
         onChange: value => this.applyGallerySetting({ numberOfImagesPerRow: value }),
-        value: this.getValueFromComponentStyles('numberOfImagesPerRow'),
+        defaultValue: this.getValueFromComponentStyles('numberOfImagesPerRow'),
         t,
       },
     },
@@ -74,7 +79,7 @@ class LayoutControlsSection extends Component {
       component: ThumbnailSize,
       props: {
         onChange: value => this.applyGallerySetting({ gallerySizePx: value }),
-        value: this.getValueFromComponentStyles('gallerySizePx'),
+        defaultValue: this.getValueFromComponentStyles('gallerySizePx'),
         options: {
           label: this.getValueFromComponentStyles('isVertical')
             ? t('GallerySettings_LayoutControlSection_Column')
@@ -86,15 +91,15 @@ class LayoutControlsSection extends Component {
       component: Spacing,
       props: {
         onChange: value => this.applyGallerySetting({ imageMargin: value }),
-        value: this.getValueFromComponentStyles('imageMargin'),
+        defaultValue: this.getValueFromComponentStyles('imageMargin'),
         t,
       },
     },
     thumbnailSpacing: {
       component: Spacing,
       props: {
-        onChange: value => this.applyGallerySetting({ thumbnailSpacings: value }),
-        value: this.getValueFromComponentStyles('thumbnailSpacings'),
+        onChange: value => this.applyGallerySetting({ thumbnailSpacings: value / 2 }),
+        defaultValue: this.getValueFromComponentStyles('thumbnailSpacings') * 2,
         t,
       },
     },
@@ -136,7 +141,7 @@ class LayoutControlsSection extends Component {
       component: ScrollDirection,
       props: {
         onChange: value => {
-          return this.applyGallerySetting({ oneRow: value === 'horizontal', isVertical: false });
+          return this.applyGallerySetting(scrollDirectionOptions[value]);
         },
         value: this.getValueFromComponentStyles('oneRow') ? 'horizontal' : 'vertical',
         t,

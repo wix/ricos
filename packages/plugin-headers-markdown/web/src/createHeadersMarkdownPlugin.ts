@@ -4,7 +4,7 @@ import { createHeadersMarkdownDecorator } from './viewer';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 import { DEFAULTS } from './defaults';
 
-export const createHeadersMarkdownPlugin: CreatePluginFunction<HeadersMarkdownPluginEditorConfig> = config => {
+const createHeadersMarkdownPlugin: CreatePluginFunction<HeadersMarkdownPluginEditorConfig> = config => {
   const { [type]: settings = {} } = config;
   const plugin = {
     decorators: [createHeadersMarkdownDecorator(config)],
@@ -12,3 +12,7 @@ export const createHeadersMarkdownPlugin: CreatePluginFunction<HeadersMarkdownPl
 
   return createBasePlugin({ settings, type, defaultPluginData: DEFAULTS, ...config }, plugin);
 };
+
+createHeadersMarkdownPlugin.functionName = type;
+
+export { createHeadersMarkdownPlugin };

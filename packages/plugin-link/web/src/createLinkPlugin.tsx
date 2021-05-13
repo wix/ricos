@@ -179,4 +179,6 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
   );
 };
 
+createLinkPlugin.functionName = LINK_TYPE;
+
 export { createLinkPlugin };

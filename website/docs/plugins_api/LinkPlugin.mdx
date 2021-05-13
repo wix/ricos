@@ -70,7 +70,7 @@ Make sure you link only to the lines you created`)}
 
 ### `linkTypes`
 
-Supported Links types
+Supported Links types + pass configuration to those types
 
 Default value:
 
@@ -79,6 +79,30 @@ Default value:
   anchor: true;
 }
 ```
+
+### `blockPreview`
+
+Anchor configuration to customize the preview elements shown in the anchor panel.
+
+example:
+
+```jsx
+{
+  linkTypes: {
+      anchor: {
+        blockPreview: ({ type, data, text }) => {
+          console.log({ type, data, text });
+          const blockPreview = { thumbnail: <div>bla1</div>, type: 'bla2', content: 'bla3' };
+          return blockPreview;
+        },
+      },
+    },
+}
+```
+
+`type` - block plugin type e.g. "wix-draft-plugin-image", "wix-draft-plugin-video", unstyled...
+`data` - block entity data e.g. src, config...
+`text` - block text
 
 ### `disableAutoLink`
 

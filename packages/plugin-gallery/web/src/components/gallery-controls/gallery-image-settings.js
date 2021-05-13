@@ -49,6 +49,7 @@ class ImageSettings extends Component {
     );
 
   onTitleChange = title => this.props.onUpdateItem({ title });
+
   onAltTextChange = altText => this.props.onUpdateItem({ altText });
 
   onLinkPanelChange = linkPanelValues => {
@@ -78,6 +79,7 @@ class ImageSettings extends Component {
     isValid,
     sponsored,
   });
+
   render() {
     const styles = this.styles;
     const {

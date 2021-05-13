@@ -13,10 +13,11 @@ const createUnsupportedBlocksPlugin: CreatePluginFunction<UnsupportedBlocksPlugi
     settings,
     t,
     isMobile,
-    disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
     ...rest,
   });
 };
+
+createUnsupportedBlocksPlugin.functionName = UNSUPPORTED_BLOCKS_TYPE;
 
 export { createUnsupportedBlocksPlugin };

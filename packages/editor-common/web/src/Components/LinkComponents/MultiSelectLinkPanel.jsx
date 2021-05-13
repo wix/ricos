@@ -34,6 +34,7 @@ MultiSelectLinkPanel.propTypes = {
   ariaProps: PropTypes.object,
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
+  blockPreview: PropTypes.func,
 };
 
 export default MultiSelectLinkPanel;

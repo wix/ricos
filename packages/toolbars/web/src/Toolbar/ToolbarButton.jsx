@@ -65,6 +65,7 @@ class ToolbarButton extends Component {
     showArrowIcon: PropTypes.bool,
     asGroupButton: PropTypes.bool,
     asContextButton: PropTypes.bool,
+    disabledStyle: PropTypes.bool,
   };
 
   preventDefault = event => event.preventDefault();
@@ -83,6 +84,7 @@ class ToolbarButton extends Component {
       onClick,
       asGroupButton,
       asContextButton,
+      disabledStyle,
     } = this.props;
     const { styles } = this;
     const arrowIcon = (
@@ -124,6 +126,7 @@ class ToolbarButton extends Component {
             onClick={onClick}
             className={classNames(styles.button, {
               [Styles.renderAsContextButton]: asContextButton,
+              [Styles.disabled]: disabledStyle,
             })}
             ref={forwardRef}
             onMouseDown={this.preventDefault}

@@ -18,6 +18,7 @@ const ImageSettingsMobileHeader = ({
     cancel,
     switchTab,
     otherTab,
+    isMediaSettingsModal: true,
     dataHookPrefix: 'ImageSettingsMobileHeader',
     cancelLabel: cancelName || t('ImageSettings_MobileHeader_Cancel'),
     saveLabel: saveName || t('ImageSettings_MobileHeader_Save'),

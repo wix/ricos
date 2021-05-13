@@ -20,6 +20,7 @@ The theming API provides an ability to customize the style of your plugins, tool
 ```tsx
 theme?: {
   palette?: PaletteColors | PalettePreset;
+  paletteConfig?: PaletteConfig;
   customStyles?: RicosCustomStyles;
   parentClass?: string;
 }
@@ -35,7 +36,7 @@ The structure here is based on 3 color properties (aka `Palette`):
 - Action Color
 - Background Color
 
-Check this [Theme Playground](http://rich-content-storybook-master.surge.sh/?path=/story/ricos--ricos-theme) to understand the influence of each color on plugins, toolbars and modals.
+Check this [Theme Playground](http://rich-content-storybook-master.surge.sh/?path=/story/theme--palette) to understand the influence of each color on plugins, toolbars and modals.
 
 You can also modify colors of specific elements (like text headers / links). See [Custom Styles](./Theming#custom-styles) API below.
 
@@ -43,7 +44,7 @@ You can also modify colors of specific elements (like text headers / links). See
 
 ```jsx
 const palette = {
-  bgColor: '#0E092B',
+  bgColor: '#0E092B', // Please read note down below
   textColor: '#FFFFFF',
   actionColor: '#D6FF00',
 };
@@ -63,7 +64,12 @@ const palette = {
   />
 </div>
 
-Palette can receive 3 more optional fields:
+:::note
+`bgColor` will not set a `background-color` for Ricos' content by default.
+Please read the `contentBgColor` under PaletteConfig section below.
+:::
+
+Palette can receive few more optional fields:
 
 ##### `fallbackColor`
 When `ActionColor` is too bright, it is replaced with `FallbackColor` when used on bright backgrounds (e.g modals, toolbars).
@@ -83,6 +89,36 @@ Pick a palette preset by name. Currently supports 'darkTheme' only.
 ```jsx
 <RicosEditor theme={{ palette: 'darkTheme' }} />
 ```
+
+## PaletteConfig
+
+##### `contentBgColor`
+If set to true, Ricos' internal content container would be colored with `bgColor`.
+
+Ricos' background color is transparent by default.
+
+The recommended practice of changing the background is to wrap Ricos with your own container, set with your own background.
+
+However, in case you want to change the content background, you should pass `contentBgColor: true`
+
+Default value: `false`.
+
+##### `settingsActionColor`
+
+Override the `actionColor` of floating panels & settings modals.
+Default is `actionColor`.
+
+:::note
+Only applicable for `RicosEditor`
+:::
+
+##### `focusActionColor`
+Override the `actionColor` of plugin when focused / clicked
+Default is `actionColor`.
+
+:::note
+Only applicable for `RicosEditor`
+:::
 
 ## Custom Styles
 

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
-import { getContentStateSchema, isSSR, RicosContent } from 'wix-rich-content-common';
+import { debounce, isEqual } from 'lodash';
+import { getContentStateSchema, isSSR, DraftContent } from 'wix-rich-content-common';
 
 import dividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
 import imageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -35,15 +34,29 @@ import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
 import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor, { ChangeHandler, EditorWillMount } from 'react-monaco-editor';
+import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
 
-const stringifyJSON = obj => JSON.stringify(obj, null, 2);
+function nonSerializedAttribute(key, value) {
+  if (typeof value === 'function') {
+    throw Error('content is not serialized');
+  }
+  return value;
+}
 
-class ContentStateEditor extends PureComponent<{
-  contentState: RicosContent;
-  onChange: (contentState: RicosContent) => void;
-}> {
+const stringifyJSON = obj => JSON.stringify(obj, nonSerializedAttribute, 2);
+
+interface Props {
+  contentState?: DraftContent;
+  onChange: (contentState: DraftContent) => void;
+  shouldUseNewContent?: boolean;
+}
+class ContentStateEditor extends PureComponent<Props> {
   state = {
-    value: stringifyJSON(this.props.contentState),
+    value: stringifyJSON(
+      this.props.shouldUseNewContent
+        ? ensureRicosContent(this.props.contentState)
+        : this.props.contentState
+    ),
   };
   editorOptions = {
     codeLens: false,
@@ -56,15 +69,19 @@ class ContentStateEditor extends PureComponent<{
   };
   monaco: MonacoEditor;
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
+    const { contentState, shouldUseNewContent } = nextProps;
     if (!this.monaco?.editor.hasTextFocus()) {
-      this.setState({ value: stringifyJSON(nextProps.contentState) });
+      const value = stringifyJSON(
+        shouldUseNewContent ? ensureRicosContent(contentState) : contentState
+      );
+      this.setState({ value });
     }
   }
 
   editorWillMount: EditorWillMount = monaco => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-      validate: true,
+      validate: !this.props.shouldUseNewContent,
       schemas: [
         {
           uri: 'https://wix-rich-content/content-state-schema.json', // scema id
@@ -100,7 +117,7 @@ class ContentStateEditor extends PureComponent<{
   updateContentState = debounce(value => {
     if (value !== '') {
       try {
-        this.props.onChange(JSON.parse(value));
+        this.props.onChange(ensureDraftContent(JSON.parse(value)));
       } catch (e) {
         console.error(`Error parsing JSON: ${e.message}`);
       }

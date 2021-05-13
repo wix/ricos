@@ -1,21 +1,24 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction, cloneDeep } from 'lodash';
+import { isFunction, isNumber } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
+  TABLE_TYPE,
   IMAGE_TYPE,
-  GALLERY_TYPE,
   getRelValue,
+  HTML_TYPE,
+  ACTION_BUTTON_TYPE,
+  LINK_BUTTON_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
 import { withInteraction } from './withInteraction';
-
+import Anchor from './components/Anchor.tsx';
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
     const {
@@ -52,32 +55,22 @@ class PluginViewer extends PureComponent {
   componentHasLink = () => {
     return this.props?.componentData?.config?.link?.url;
   };
+
   componentHasAnchor = () => {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
-  removeExpand = config => {
-    const newConfig = cloneDeep(config);
-    if (newConfig?.[IMAGE_TYPE]?.onExpand) {
-      newConfig[IMAGE_TYPE].onExpand = undefined;
-    }
-    if (newConfig?.[GALLERY_TYPE]?.onExpand) {
-      newConfig[GALLERY_TYPE].onExpand = undefined;
-    }
-    return newConfig;
-  };
-
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  innerRCV = ({ contentState, textAlignment, direction, renderedIn }) => {
     const { innerRCEViewerProps } = this.props;
-    const config = this.removeExpand(innerRCEViewerProps.config);
+    const renderedInTable = renderedIn === TABLE_TYPE;
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
         direction={direction}
         {...innerRCEViewerProps}
-        config={config}
         isInnerRcv
+        renderedInTable={renderedInTable}
       />
     );
   };
@@ -95,6 +88,7 @@ class PluginViewer extends PureComponent {
       context,
       blockIndex,
       SpoilerViewerWrapper,
+      blockKey,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -108,6 +102,7 @@ class PluginViewer extends PureComponent {
       entityIndex,
       ...context,
       innerRCV: this.innerRCV,
+      blockKey,
     };
 
     if (Component) {
@@ -136,10 +131,10 @@ class PluginViewer extends PureComponent {
 
         // TODO: more generic logic?
         let customStyles;
-        if (config.size === 'inline' || type === 'wix-draft-plugin-html') {
+        if (config.size === 'inline' || type === HTML_TYPE) {
           customStyles = { width: config.width };
         }
-        if (type === 'wix-draft-plugin-image') {
+        if (type === IMAGE_TYPE) {
           const { src = {} } = componentData;
           const { size } = config;
           if (
@@ -149,6 +144,10 @@ class PluginViewer extends PureComponent {
           ) {
             customStyles = { width: src.width, maxWidth: '100%' };
           }
+        }
+
+        if ((type === ACTION_BUTTON_TYPE || type === LINK_BUTTON_TYPE) && isNumber(config.width)) {
+          componentProps.style = { width: config.width };
         }
         if (customStyles) {
           containerProps.style = customStyles;
@@ -229,6 +228,7 @@ PluginViewer.propTypes = {
   }).isRequired,
   innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
+  blockKey: PropTypes.string,
 };
 
 PluginViewer.defaultProps = {
@@ -241,7 +241,7 @@ const getPluginViewers = (
   typeMappers,
   context,
   styles,
-  addAnchorFnc,
+  addAnchorsPrefix,
   innerRCEViewerProps
 ) => {
   const res = {};
@@ -265,17 +265,24 @@ const getPluginViewers = (
           innerRCEViewerProps={innerRCEViewerProps}
           SpoilerViewerWrapper={SpoilerViewerWrapper}
           withHorizontalScroll
+          blockKey={block.key}
         >
           {isInline ? children : null}
         </PluginViewer>
       );
 
       const wrappedPluginViewer = withInteraction(pluginViewer, interactions, context);
-      const shouldAddAnchor = addAnchorFnc && !isInline;
+
+      let anchorElement;
+      if (addAnchorsPrefix && !isInline) {
+        const anchorType = type.replace('wix-draft-plugin-', '').toLowerCase();
+        const anchorKey = `${addAnchorsPrefix}${block.data.index + 1}`;
+        anchorElement = <Anchor type={anchorType} anchorKey={anchorKey} />;
+      }
       return (
         <React.Fragment key={`${i}_${key}`}>
           {wrappedPluginViewer}
-          {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
+          {anchorElement}
         </React.Fragment>
       );
     };

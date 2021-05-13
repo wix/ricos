@@ -6,8 +6,11 @@ export const getNextValue = (array: readonly string[], currentValue: string) =>
 
 export class Divider {
   type: string;
+
   config: ComponentData['config'] & { size: string; alignment: string };
+
   size: string;
+
   alignment: string;
 
   constructor({ type, config }: ComponentData = {}) {

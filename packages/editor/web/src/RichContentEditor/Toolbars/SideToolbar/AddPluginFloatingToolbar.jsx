@@ -63,8 +63,10 @@ export default class AddPluginFloatingToolbar extends PureComponent {
   onClick = event => {
     event.preventDefault();
     event.stopPropagation();
-    const { isMobile } = this.props;
-    if (!isMobile) {
+    const { isMobile, onClick } = this.props;
+    if (onClick) {
+      onClick();
+    } else if (!isMobile) {
       this.togglePopup();
     } else {
       this.openAddPluginModal();
@@ -137,6 +139,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
       t,
       addPluginMenuConfig,
       isMobile,
+      helpers,
     } = this.props;
     const { toolbarStyles } = theme || {};
     const popoupClassNames = classNames(
@@ -170,6 +173,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
           theme={theme}
           pluginMenuButtonRef={this.selectButton}
           toolbarName={TOOLBARS.SIDE}
+          helpers={helpers}
         />
       </div>
     );
@@ -240,4 +244,5 @@ AddPluginFloatingToolbar.propTypes = {
   helpers: PropTypes.object,
   t: PropTypes.func,
   addPluginMenuConfig: PropTypes.object,
+  onClick: PropTypes.func,
 };

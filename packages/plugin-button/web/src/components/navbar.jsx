@@ -8,6 +8,7 @@ class Navbar extends PureComponent {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
+
   render() {
     return (
       <div className={this.styles.button_navbar_container}>

@@ -1,43 +1,66 @@
 import theme from '../theme/theme';
-import { ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button/viewer';
-import { VIDEO_TYPE, videoTypeMapper } from 'wix-rich-content-plugin-video/viewer';
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/viewer';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html/viewer';
-import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/viewer';
-import { LINK_TYPE, linkTypeMapper } from 'wix-rich-content-plugin-link/viewer';
+import { videoTypeMapper, VIDEO_TYPE, pluginVideo } from 'wix-rich-content-plugin-video/viewer';
+import { dividerTypeMapper, pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
+import { htmlTypeMapper, pluginHtml } from 'wix-rich-content-plugin-html/viewer';
+import { soundCloudTypeMapper, pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/viewer';
+import { linkTypeMapper, LINK_TYPE, pluginLink } from 'wix-rich-content-plugin-link/viewer';
 import {
-  LINK_PREVIEW_TYPE,
   linkPreviewTypeMapper,
+  LINK_PREVIEW_TYPE,
+  pluginLinkPreview,
 } from 'wix-rich-content-plugin-link-preview/viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
-import { tableTypeMapper } from 'wix-rich-content-plugin-table/viewer';
+import { imageTypeMapper, pluginImage } from 'wix-rich-content-plugin-image/viewer';
+import { tableTypeMapper, pluginTable } from 'wix-rich-content-plugin-table/viewer';
 
-import { galleryTypeMapper, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/viewer';
-import { mapTypeMapper } from 'wix-rich-content-plugin-map/viewer';
-import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
-import { buttonTypeMapper } from 'wix-rich-content-plugin-button/viewer';
-import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/viewer';
-import { verticalEmbedTypeMapper } from 'wix-rich-content-plugin-vertical-embed/viewer';
+import {
+  galleryTypeMapper,
+  pluginGallery,
+  GALLERY_TYPE,
+} from 'wix-rich-content-plugin-gallery/viewer';
+import { mapTypeMapper, pluginMap } from 'wix-rich-content-plugin-map/viewer';
+import { giphyTypeMapper, pluginGiphy, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
+import {
+  buttonTypeMapper,
+  pluginActionButton,
+  ACTION_BUTTON_TYPE,
+} from 'wix-rich-content-plugin-button/viewer';
+import { HashtagDecorator, pluginHashtag } from 'wix-rich-content-plugin-hashtag/viewer';
+import {
+  verticalEmbedTypeMapper,
+  pluginVerticalEmbed,
+} from 'wix-rich-content-plugin-vertical-embed/viewer';
 import {
   createHeadersMarkdownDecorator,
   HEADERS_MARKDOWN_TYPE,
+  pluginHeadersMarkdown,
 } from 'wix-rich-content-plugin-headers-markdown';
-import { CodeBlockDecorator } from 'wix-rich-content-plugin-code-block/viewer';
-import { MENTION_TYPE, mentionsTypeMapper } from 'wix-rich-content-plugin-mentions/viewer';
-import { fileUploadTypeMapper, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload/viewer';
+import { CodeBlockDecorator, pluginCodeBlock } from 'wix-rich-content-plugin-code-block/viewer';
+import {
+  mentionsTypeMapper,
+  MENTION_TYPE,
+  pluginMentions,
+} from 'wix-rich-content-plugin-mentions/viewer';
+import {
+  fileUploadTypeMapper,
+  pluginFileUpload,
+  FILE_UPLOAD_TYPE,
+} from 'wix-rich-content-plugin-file-upload/viewer';
 import {
   textColorInlineStyleMapper,
   TEXT_COLOR_TYPE,
   TEXT_HIGHLIGHT_TYPE,
   textHighlightInlineStyleMapper,
+  pluginTextColor,
+  pluginTextHighlight,
 } from 'wix-rich-content-plugin-text-color/viewer';
 import {
   spoilerInlineStyleMapper,
   initSpoilersContentState,
   SpoilerViewerWrapper,
   SPOILER_TYPE,
+  pluginSpoiler,
 } from 'wix-rich-content-plugin-spoiler/viewer';
-import { accordionTypeMapper } from 'wix-rich-content-plugin-accordion/viewer';
+import { accordionTypeMapper, pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -45,7 +68,7 @@ import {
   viewerCustomBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 
-import { pollTypeMapper, POLL_TYPE } from 'wix-rich-content-plugin-social-polls/viewer';
+import { pollTypeMapper, pluginPoll, POLL_TYPE } from 'wix-rich-content-plugin-social-polls/viewer';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -71,12 +94,19 @@ import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 
-import { getBaseUrl } from '../../src/utils';
 import { RichContentViewerProps } from 'wix-rich-content-viewer';
-import { Decorator, PluginTypeMapper, RicosContent, UISettings } from 'wix-rich-content-common';
+import {
+  Decorator,
+  HASHTAG_TYPE,
+  PluginTypeMapper,
+  DraftContent,
+  UISettings,
+  ViewerPlugin,
+} from 'wix-rich-content-common';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
+  siteUrl: 'http://localhost:3000/', //siteUrl is for anchor SEO
 };
 const mentionsPluginSettings = {
   onMentionClick: mention => console.log('mention clicked!', mention),
@@ -104,7 +134,7 @@ export const typeMappers: PluginTypeMapper[] = [
 ];
 
 export const uiSettings: UISettings = {
-  disableRightClick: true,
+  // disableRightClick: true, deprecated
 };
 
 const config: RichContentViewerProps['config'] = {
@@ -142,7 +172,7 @@ const config: RichContentViewerProps['config'] = {
       new Promise(resolve =>
         setTimeout(
           () =>
-            resolve('http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf'),
+            resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
           1000
         )
       ),
@@ -157,7 +187,40 @@ const config: RichContentViewerProps['config'] = {
       window.alert('onClick event..');
     },
   },
+  [HASHTAG_TYPE]: {
+    onClick: (event, text) => {
+      event.preventDefault();
+      console.log(`'${text}' hashtag clicked!`);
+    },
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+  },
 };
+
+export const viewerPlugins: ViewerPlugin[] = [
+  pluginVideo(config[VIDEO_TYPE]),
+  pluginActionButton(config[ACTION_BUTTON_TYPE]),
+  pluginDivider(),
+  pluginHtml(),
+  pluginLink(config[LINK_TYPE]),
+  pluginLinkPreview(config[LINK_PREVIEW_TYPE]),
+  pluginSoundCloud(),
+  pluginMentions(),
+  pluginImage(),
+  pluginTable(),
+  pluginGallery(config[GALLERY_TYPE]),
+  pluginMap(),
+  pluginFileUpload(config[FILE_UPLOAD_TYPE]),
+  pluginGiphy(config[GIPHY_TYPE]),
+  pluginPoll(config[POLL_TYPE]),
+  pluginVerticalEmbed(),
+  pluginAccordion(),
+  pluginHashtag(config[HASHTAG_TYPE]),
+  pluginHeadersMarkdown(),
+  pluginCodeBlock(),
+  pluginTextColor(config[TEXT_COLOR_TYPE]),
+  pluginTextHighlight(config[TEXT_HIGHLIGHT_TYPE]),
+  pluginSpoiler(),
+];
 
 export const getConfig = (additionalConfig = {}): RichContentViewerProps['config'] => {
   let _config = { ...config };
@@ -171,7 +234,7 @@ export const getConfig = (additionalConfig = {}): RichContentViewerProps['config
   return _config;
 };
 
-export const getInlineStyleMappers = (raw: RicosContent) => [
+export const getInlineStyleMappers = (raw: DraftContent) => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
   spoilerInlineStyleMapper(config, raw),
@@ -180,11 +243,7 @@ export const getInlineStyleMappers = (raw: RicosContent) => [
 export const decorators: Decorator[] = [
   new HashtagDecorator({
     theme,
-    onClick: (event, text) => {
-      event.preventDefault();
-      console.log(`'${text}' hashtag clicked!`);
-    },
-    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    ...config[HASHTAG_TYPE],
   }),
   new CodeBlockDecorator({ theme }),
   createHeadersMarkdownDecorator(config),

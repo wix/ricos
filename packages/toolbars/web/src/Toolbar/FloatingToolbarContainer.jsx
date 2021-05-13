@@ -58,6 +58,7 @@ class FloatingToolbarContainer extends PureComponent {
     const { top, left } = this.getRelativePosition();
     this.setState({ toolbarPosition: { top: `${top}px`, left: `${left}px` } });
   }
+
   componentDidUpdate() {
     const { top, left } = this.getRelativePosition();
     const { toolbarPosition } = this.state;

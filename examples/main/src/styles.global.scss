@@ -2,10 +2,11 @@ $headerHeight: 42px;
 $iconSize: 20px;
 $borderRadius: 4px;
 $transitionLength: 0.3s;
-$primaryColor: lightslategrey;
-$secondaryColor: #8495a6;
-$iconColor: white;
-$hoverColor: #ccc;
+$primaryColor: #f9f9f9;
+$secondaryColor: rgba(51, 51, 51, 0.1);
+$iconColor: black;
+$active: #0461ff;
+$hoverBackground: rgba(18, 107, 255, 0.1);
 
 @mixin mobile {
   @media only screen and (max-width: 640px) {
@@ -35,11 +36,13 @@ body {
       padding-left: 0;
     }
     .toolbar {
-      height: 40px;
-      background: lightslategrey;
+      height: 36px;
+      background: white;
       position: absolute;
-      top: -42px;
+      top: -40px;
       right: 50px;
+      border-radius: 2px;
+      border: solid 1px $secondaryColor;
     }
 
     .wrapper {
@@ -75,13 +78,14 @@ body {
             display: flex;
             justify-content: space-between;
             background: $primaryColor;
-            color: white;
+            color: black;
 
             .title {
               display: flex;
               padding: 10px 0 10px 10px;
 
               svg {
+                padding-right: 6px;
                 position: relative;
                 top: 2px;
                 cursor: pointer;
@@ -90,7 +94,7 @@ body {
                 height: $iconSize;
 
                 &:hover {
-                  color: $hoverColor;
+                  color: #ccc;
                 }
               }
 
@@ -106,13 +110,13 @@ body {
               padding-right: 10px;
 
               svg {
-                color: $iconColor;
+                color: $active;
                 width: $iconSize;
                 height: $iconSize;
                 margin-top: 12px;
 
                 &:hover {
-                  color: $hoverColor;
+                  color: rgba(18, 107, 255, 0.8);
                 }
               }
 
@@ -129,24 +133,26 @@ body {
                 position: absolute;
                 top: $headerHeight;
                 right: 5px;
-                background: $primaryColor;
+                background: #ffffff;
                 transition: all $transitionLength ease;
                 z-index: 3;
-                box-shadow: -1px 6px 8px -4px rgba(0, 0, 0, 0.75);
-                border-radius: 0 0 $borderRadius $borderRadius;
+                padding: 12px 0 12px 0;
+                border: solid 1px $secondaryColor;
 
                 ul {
                   margin: 0;
                   padding: 0;
                   list-style: none;
+                  background-color: white;
 
                   li {
                     position: relative;
                     white-space: nowrap;
                     padding: 8px 10px;
 
-                    &:hover {
-                      background: #91a2b3;
+                    &:hover:not(.experimentContainer) {
+                      color: $active;
+                      background: $hoverBackground;
 
                       & > ul {
                         visibility: visible;
@@ -163,7 +169,7 @@ body {
                     }
 
                     &.active {
-                      background: #67727d;
+                      color: $active;
                     }
 
                     ul {
@@ -175,15 +181,86 @@ body {
                       opacity: 0;
                       max-height: 230px;
                       transition: all $transitionLength ease;
-                      background: $primaryColor;
-                      box-shadow: -1px 6px 8px -4px rgba(0, 0, 0, 0.75);
-                      border-radius: $borderRadius 0 $borderRadius $borderRadius;
+                      border: solid 1px $secondaryColor;
+                      color: black;
 
                       &:hover {
                         visibility: visible;
                         opacity: 1;
                       }
                     }
+                    .experiment,
+                    .paletteContainer,
+                    .fontContainer {
+                      background-color: $primaryColor;
+                      border: solid 1px $secondaryColor;
+                      padding: 6px;
+                    }
+                    .experimentContainer {
+                      display: flex;
+                      cursor: default !important;
+                      .experiment {
+                        width: 100%;
+                        .scope {
+                          font-size: 12px;
+                        }
+                        .experimentTitle {
+                          font-size: 14px;
+                        }
+                        .options {
+                          display: grid;
+                          grid-column: 100%;
+                          grid-auto-flow: column;
+                          padding-top: 9px;
+                          .option {
+                            font-size: 12px;
+                            text-align: center;
+                            border: solid 1px $secondaryColor;
+                            background-color: #ffffff;
+                            padding: 6px 8px;
+                            cursor: pointer;
+                            &:hover,
+                            &.active {
+                              cursor: pointer;
+                              color: $active;
+                              background: $hoverBackground;
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                    .paletteContainer {
+                      margin: 12px;
+                      font-size: 12px;
+                      display: grid;
+                      grid-template-columns: auto auto;
+                      grid-template-rows: auto auto;
+                      grid-column-gap: 3px;
+                      .actionColor {
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 4.4px;
+                        border: solid 1.1px rgba(43, 129, 203, 0.24);
+                        overflow: hidden;
+                        display: flex;
+                        justify-content: center;
+                        grid-row: span 2;
+                        svg {
+                          color: white;
+                        }
+                      }
+                      .palette {
+                        display: grid;
+                        grid-template-columns: auto auto auto;
+                        border: solid 1px $secondaryColor;
+                        width: 140px;
+                        height: 13px;
+                      }
+                    }
+                  }
+                  .fontContainer {
+                    margin: 12px;
                   }
                 }
               }
@@ -197,7 +274,6 @@ body {
             padding-bottom: 10px;
 
             .editor {
-              min-height: 100%;
               display: flex;
               flex-direction: column;
 
@@ -240,6 +316,10 @@ body {
                   }
                 }
               }
+
+              .ricos-editor-modal {
+                position: absolute;
+              }
             }
 
             .react-monaco-editor-container {
@@ -249,6 +329,8 @@ body {
             .editor,
             .viewer {
               padding: 10px 50px 0;
+              background-color: var(--ricos-background-color, unset);
+              min-height: 100%;
 
               @include mobile {
                 padding: 0;
@@ -260,8 +342,8 @@ body {
         .splitter {
           cursor: column-resize;
           z-index: 5;
-          width: 3px;
-          background: $secondaryColor;
+          width: 1px;
+          background: rgba(51, 51, 51, 0.2);
           border-right: 1px solid $primaryColor;
           border-left: 1px solid $primaryColor;
         }

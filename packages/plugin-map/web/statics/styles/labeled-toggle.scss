@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .labeled_toggle_input_container {
   position: relative;
@@ -41,10 +42,7 @@
 }
 
 .labeled_toggle_root {
-  padding-top: 30px;
-  @include phone {
-    padding-top: 0px;
-  }
+  padding-top: 24px;
 }
 
 .labeled_toggle_root + .labeled_toggle_root {
@@ -57,6 +55,12 @@
   width: 100%;
   height: 100%;
   margin: 0;
+}
+
+.infoIcon {
+  margin-left: 4px;
+  cursor: pointer;
+  fill: $primary-text-color;
 }
 
 .labeled_toggle_switch {
@@ -77,7 +81,10 @@
 }
 
 .labeled_toggle_label {
-  font-size: 14px;
+  font-size: 16px;
+  @include phone {
+    font-size: 14px;
+  }
 }
 
 .labeled_toggle_track {
@@ -86,12 +93,12 @@
   border-radius: 12px;
   background-color: #aaa;
   &_checked {
-    background-color: $action-color;
+    background-color: $settings-action-color;
   }
 }
 
 .labeled_toggle_slider {
-  background-color: #fff;
+  background-color: $action-color-fallback-bright;
   position: absolute;
   width: 22px;
   height: 21px;

@@ -108,6 +108,7 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 | ---------------------------- | ------------------------------------------------------------------------------------------ | ------------- | ------------ | -------------------- |
 | `getMentions`                | function that retrieves a list of suggestions according to provided search query parameter | none          | Yes          | both                 |
 | `onMentionClick`             | optional Mention click handler                                                             | none          | No           | both                 |
+| `onMentionHover`             | optional Mention hover handler                                                             | none          | No           | both                 |
 | `getMentionLink`             | given the mention return link for it                                                       | none          | Yes          | both                 |
 | `visibleItemsBeforeOverflow` | boolean how many items should be visible before overflowing                                | none          | No           | editor               |
 
@@ -124,14 +125,16 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 | setting key     | description                            | default value | is required? | editor/viewer config |
 | --------------- | -------------------------------------- | ------------- | ------------ | -------------------- |
 | `onExpand`      | called when the user expands an image  | none          | No           | viewer               |
-| `disableExpand` | disables expanding images & fullscreen | false         | No           | viewer               |
+| `disableExpand` (deprecated!) | disables expanding images & fullscreen | false         | No           | viewer           |
+| `disableExpand` | disables expanding images & fullscreen | false         | No           | editor               |
 
 ### Gallery Plugin Settings
 
 | setting key     | description                            | default value | is required? | editor/viewer config |
 | --------------- | -------------------------------------- | ------------- | ------------ | -------------------- |
 | `onExpand`      | called when the user expands an item   | none          | No           | viewer               |
-| `disableExpand` | disables expanding itemes & fullscreen | false         | No           | viewer               |
+| `disableExpand` (deprecated) | disables expanding items & fullscreen | false         | No           | viewer               |
+| `disableExpand` | disables expanding items & fullscreen | false         | No           | editor               |
 
 
 ### Text Color Plugin

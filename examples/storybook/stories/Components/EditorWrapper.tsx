@@ -1,7 +1,7 @@
 import React from 'react';
 import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import {
-  RicosContent,
+  DraftContent,
   RicosEditor,
   RicosEditorProps,
   RicosEditorType,
@@ -28,9 +28,8 @@ import { pluginLineSpacing, createLineSpacingPlugin } from 'wix-rich-content-plu
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginMap, createMapPlugin } from 'wix-rich-content-plugin-map';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginVideo, videoButtonsTypes } from 'wix-rich-content-plugin-video';
 import { pluginPoll } from 'wix-rich-content-plugin-social-polls';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import {
@@ -51,7 +50,7 @@ import {
 } from '../../../main/shared/utils/fileUploadUtil';
 import { MockVerticalSearchModule } from '../../../main/shared/utils/verticalEmbedUtil';
 
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
 
 const configs = {
@@ -65,7 +64,7 @@ const configs = {
   },
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
@@ -130,8 +129,10 @@ const plugins = [
   pluginLink(),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
-  pluginSoundCloud(),
-  pluginVideo({ getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}` }),
+  pluginVideo({
+    getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+    exposeButtons: [videoButtonsTypes.video, videoButtonsTypes.soundCloud],
+  }),
   pluginLinkPreview(configs.linkPreview),
   pluginPoll(),
   pluginUndoRedo(),
@@ -157,7 +158,6 @@ const pluginsMap = {
   link: pluginLink(),
   map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   mentions: pluginMentions(),
-  soundCloud: pluginSoundCloud(),
   video: pluginVideo(),
   socialEmbed: pluginLinkPreview(configs.linkPreview),
   polls: pluginPoll(),
@@ -189,7 +189,8 @@ const getToolbarSettings = () => [
 ];
 
 interface Props {
-  content?: RicosContent;
+  content?: DraftContent;
+  injectedContent?: DraftContent;
   onChange?: RicosEditorProps['onChange'];
   isMobile?: boolean;
   pluginsToDisplay?: string[];
@@ -213,7 +214,16 @@ class EditorWrapper extends React.Component<Props> {
     : plugins;
 
   render() {
-    const { content, theme, onChange, isMobile, toolbarSettings, onBlur, onFocus } = this.props;
+    const {
+      content,
+      injectedContent,
+      theme,
+      onChange,
+      isMobile,
+      toolbarSettings,
+      onBlur,
+      onFocus,
+    } = this.props;
 
     return (
       <RicosEditor
@@ -221,6 +231,7 @@ class EditorWrapper extends React.Component<Props> {
         plugins={this.editorPlugins}
         theme={theme}
         content={content}
+        injectedContent={injectedContent}
         isMobile={isMobile}
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}

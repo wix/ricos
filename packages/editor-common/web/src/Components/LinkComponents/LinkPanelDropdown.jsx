@@ -65,6 +65,7 @@ export class LinkPanelDropdown extends Component {
     items: this.props.getItems(),
     fallbackChanged: false,
   };
+
   styles = mergeStyles({ styles, theme: this.props.theme });
 
   handleDropDownStateChange = changes => {
@@ -163,6 +164,7 @@ export class LinkPanelDropdown extends Component {
 
 class Input extends Component {
   textInput = React.createRef();
+
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
     const { selectText } = this.props;
@@ -174,6 +176,7 @@ class Input extends Component {
       this.textInput.current.selectionEnd = this.textInput.current.value.length;
     }
   }
+
   render() {
     // eslint-disable-next-line react/prop-types, no-unused-vars
     const { selectText, ...inputProps } = this.props;

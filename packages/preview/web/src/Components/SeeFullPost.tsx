@@ -16,7 +16,8 @@ interface Props {
 }
 
 class SeeFullPost extends PureComponent<Props> {
-  styles: Record<string, string>;
+  styles!: Record<string, string>;
+
   onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();

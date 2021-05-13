@@ -24,7 +24,6 @@ const createTablePlugin: CreatePluginFunction<TablePluginEditorConfig> = config 
       settings,
       t,
       isMobile,
-      disableRightClick: config?.uiSettings?.disableRightClick,
       defaultPluginData: getDefaultsSettings(),
       noPluginBorder: true,
       noPointerEventsOnFocus: true,

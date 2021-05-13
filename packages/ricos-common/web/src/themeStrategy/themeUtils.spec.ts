@@ -65,4 +65,8 @@ describe('CSS Variables Creation Mechanism', () => {
   it('should wrap css vars under a parent className, if given', () => {
     expect(buildCssVars('editorWrapper', subset1)).toStrictEqual(expected2);
   });
+  it('should refuse semicolon character in value', () => {
+    const variables = { fontFamily: 'Arial;text-decoration:underline' };
+    expect(toVarStrings(variables)).toStrictEqual('--ricos-font-family: Arial;\n');
+  });
 });

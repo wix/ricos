@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
 
-const SpoilerEditor: FunctionComponent<{ content?: RicosContent }> = ({ content }) => (
+const SpoilerEditor: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
   <RicosEditor plugins={[pluginSpoiler()]} content={content} />
 );
 

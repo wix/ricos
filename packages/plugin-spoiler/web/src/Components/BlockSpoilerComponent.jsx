@@ -5,6 +5,7 @@ import SpoilerContainer from './SpoilerContainer';
 import classNames from 'classnames';
 import styles from '../../statics/styles/spoiler.scss';
 import { debounce } from 'lodash';
+import { SPOILER_TYPE } from '../types';
 
 const Overlay = ({ hideOverlay, pluginType }) =>
   !hideOverlay ? (
@@ -52,8 +53,10 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   onRevealSpoiler = e => {
+    const { helpers, pluginType } = this.props;
     e.preventDefault();
     this.setState({ isReveal: true });
+    helpers.onViewerAction?.(SPOILER_TYPE, 'Click', `reveal_${pluginType}`);
   };
 
   renderSpoilerContainer = () => {
@@ -68,6 +71,7 @@ class BlockSpoilerComponent extends React.Component {
       handleDescriptionChange,
       isMobile,
       t,
+      helpers,
     } = this.props;
 
     const width = this.elementRef?.offsetWidth;
@@ -88,6 +92,7 @@ class BlockSpoilerComponent extends React.Component {
           handleDescriptionChange={handleDescriptionChange}
           isMobile={isMobile}
           t={t}
+          helpers={helpers}
         />
       )
     );
@@ -105,8 +110,14 @@ class BlockSpoilerComponent extends React.Component {
     const { children, pluginType, width, isMobile } = this.props;
     const { styles, isReveal } = this.state;
     let className = '';
+    let blur = '';
     if (!isReveal) {
-      className = pluginType === 'Gallery' ? styles.hideBlock_gallery : styles.hideBlock;
+      const isGallery = pluginType === 'Gallery';
+      className = isGallery ? styles.hideBlock_gallery : styles.hideBlock;
+      if (!isGallery) {
+        const width = this.elementRef?.offsetWidth;
+        blur = width < 400 ? styles.smallBlur : width < 700 ? styles.mediumBlur : styles.largeBlur;
+      }
     }
 
     return (
@@ -119,7 +130,7 @@ class BlockSpoilerComponent extends React.Component {
       >
         {this.renderSpoilerContainer()}
         <div
-          className={className}
+          className={classNames(className, blur)}
           onClick={this.handleClick}
           role="button"
           tabIndex={0}
@@ -149,6 +160,8 @@ BlockSpoilerComponent.propTypes = {
   width: PropTypes.object,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default BlockSpoilerComponent;

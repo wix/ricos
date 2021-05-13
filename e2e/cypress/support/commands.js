@@ -12,6 +12,7 @@ import {
   SETTINGS_PANEL,
   TOOLBARS,
   COLOR_PICKER,
+  ACCORDION_SETTINGS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
@@ -70,8 +71,12 @@ Cypress.Commands.add('switchToDesktop', () => {
   resizeForDesktop();
 });
 
-Cypress.Commands.add('switchToSeoMode', () => {
+Cypress.Commands.add('switchOnSeoMode', () => {
   isSeoMode = true;
+});
+
+Cypress.Commands.add('switchOffSeoMode', () => {
+  isSeoMode = false;
 });
 
 Cypress.Commands.add('switchToHebrew', () => {
@@ -100,8 +105,8 @@ Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, ...config) =>
   run('ricos', fixtureName, merge(...config))
 );
 
-Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
-  cy.request(getUrl(compName, fixtureName))
+Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName, config) => {
+  cy.request(getUrl(compName, fixtureName, config))
     .its('body')
     .then(html => {
       // remove the application code bundle
@@ -276,7 +281,7 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   ).click({ force: true });
 });
 
-Cypress.Commands.add('addColor', () => {
+Cypress.Commands.add('openCustomColorModal', () => {
   cy.get(`[data-hook="${COLOR_PICKER.ADD_COLOR}"]`).click();
 });
 
@@ -364,10 +369,14 @@ Cypress.Commands.add('openFooterPluginMenu', () => {
   cy.get('[data-hook="addPluginMenu"]');
 });
 
-Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
-  shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
-  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-  cy.get('[data-hook="imageSettings"]');
+Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS[settings]);
+  cy.get('[data-hook="settings"]');
+});
+
+Cypress.Commands.add('openSettings', (settings = ['SETTINGS']) => {
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS[settings]);
+  cy.get('[data-hook="settings"]');
 });
 
 Cypress.Commands.add('openMapSettings', () => {
@@ -511,6 +520,26 @@ Cypress.Commands.add('openDropdownMenu', (selector = '') => {
   if (selector) {
     cy.get(selector).click();
   }
+});
+
+Cypress.Commands.add('undo', () => {
+  cy.getEditor()
+    .first()
+    .type('{ctrl+z}')
+    .type('{cmd+z}');
+  cy.wait(100);
+});
+
+Cypress.Commands.add('redo', () => {
+  cy.getEditor()
+    .first()
+    .type('{ctrl+shift+z}')
+    .type('{cmd+shift+z}');
+  cy.wait(100);
+});
+
+Cypress.Commands.add('addAccordionPair', () => {
+  cy.get(`[data-hook*=${ACCORDION_SETTINGS.NEW_PAIR}]`).click({ force: true });
 });
 
 Cypress.Commands.add('openVideoUploadModal', () => {

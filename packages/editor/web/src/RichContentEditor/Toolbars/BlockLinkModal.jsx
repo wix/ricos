@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import LinkModal from './LinkModal';
+import { ANCHOR_CATEGORY, WEB_ADDRESS_CATEGORY, isNewTab } from 'wix-rich-content-common';
 
 export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
   setLinkInBlockData = ({ url, anchor, targetBlank, nofollow, sponsored }) => {
-    const { pubsub, anchorTarget, relValue, unchangedUrl } = this.props;
+    const { pubsub, anchorTarget, relValue, unchangedUrl, triggerBi } = this.props;
     let target = '_blank',
       rel = 'nofollow';
     if (!targetBlank) {
@@ -29,6 +30,16 @@ export default class BlockLinkModal extends Component {
         key: 'componentLink',
         item,
       });
+
+      const biData = anchor
+        ? { anchor, category: ANCHOR_CATEGORY }
+        : {
+            link: item.url,
+            rel,
+            newTab: isNewTab(target),
+            category: WEB_ADDRESS_CATEGORY,
+          };
+      triggerBi({ params: biData });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }
@@ -98,4 +109,5 @@ BlockLinkModal.propTypes = {
   unchangedUrl: PropTypes.bool,
   linkTypes: PropTypes.object,
   editorState: PropTypes.object,
+  triggerBi: PropTypes.func,
 };

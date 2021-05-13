@@ -17,7 +17,7 @@ interface Props {
 }
 
 class ViewportRenderer extends Component<Props> {
-  styles: Record<string, string>;
+  styles!: Record<string, string>;
 
   static defaultProps = {
     placeholderStyle: {},

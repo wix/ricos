@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginHtml, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
 
-const HtmlWithDomainStory: FunctionComponent<{ content?: RicosContent }> = ({ content }) => {
+const HtmlWithDomainStory: FunctionComponent<{ content?: DraftContent }> = ({ content }) => {
   const { html, adsense } = htmlButtonsTypes;
   return (
     <RicosEditor

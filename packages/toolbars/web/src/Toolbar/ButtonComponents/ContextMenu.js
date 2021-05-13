@@ -19,6 +19,8 @@ class ContextMenu extends PureComponent {
     isDisabled: PropTypes.func,
     getIcon: PropTypes.func,
     theme: PropTypes.object,
+    onContextmenuClick: PropTypes.func,
+    onOptionClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -47,9 +49,15 @@ class ContextMenu extends PureComponent {
     });
   };
 
+  handleClick = () => {
+    this.props.onContextmenuClick?.();
+    this.toggleOptions();
+  };
+
   hideOptions = () => this.setState({ isOpen: false });
 
-  onChange = ({ onClick }) => e => {
+  onChange = ({ onClick, text }) => e => {
+    this.props.onOptionClick?.(text);
     onClick(e);
     this.setState({ isOpen: false });
   };
@@ -57,7 +65,7 @@ class ContextMenu extends PureComponent {
   renderOptions = () => {
     const { buttonList, theme } = this.props;
     const { isOpen, position } = this.state;
-    const visibility = isOpen ? { visibility: 'visible' } : { visibility: 'hidden' };
+    const display = isOpen ? { display: 'block' } : { display: 'none' };
 
     return (
       <div
@@ -65,13 +73,13 @@ class ContextMenu extends PureComponent {
         ref={this.setModalRef}
         style={{
           ...position,
-          ...visibility,
+          ...display,
         }}
       >
         {Object.values(buttonList).map((props, i) => {
           if (props) {
             if (props.type === 'divider') {
-              return <div className={Styles.contextMenuDivider} />;
+              return <div key={i} className={Styles.contextMenuDivider} />;
             }
             const buttonProps = {
               ...this.props,
@@ -88,7 +96,8 @@ class ContextMenu extends PureComponent {
                 dataHook={buttonProps.dataHook}
                 isMobile={this.props.isMobile}
                 buttonContent={buttonProps.text}
-                disabled={buttonProps.isDisabled()}
+                disabledStyle={buttonProps.isDisabled()}
+                tooltipText={buttonProps.tooltip}
                 asContextButton
               />
             );
@@ -107,7 +116,7 @@ class ContextMenu extends PureComponent {
         <div className={Styles.buttonWrapper}>
           <ToolbarButton
             isActive={false}
-            onClick={this.toggleOptions}
+            onClick={this.handleClick}
             getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}

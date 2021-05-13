@@ -22,9 +22,11 @@ class ImageCounter extends PureComponent<Props> {
     imageSelector: images => (images && images.length > 0 ? [images[images.length - 1]] : []),
   };
 
-  container: Element;
-  wrapper: Element;
-  styles: Record<string, string>;
+  container!: Element;
+
+  wrapper!: Element;
+
+  styles!: Record<string, string>;
 
   onClick = (e: React.MouseEvent) => {
     const { onClick, onPreviewExpand } = this.props;

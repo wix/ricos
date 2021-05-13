@@ -91,11 +91,12 @@ const getHeaderButtons = (selectedRows, selectedCols, table, t) => {
   return [];
 };
 
-const getBorderColorButtons = (selected, settings, table, multipleCellsSelected) => {
+const getBorderColorButtons = (selected, settings, table, multipleCellsSelected, t) => {
   if (multipleCellsSelected) {
     return [
       {
         type: 'nested-menu',
+        tooltip: t('TablePlugin_Toolbar_BorderColor_Tooltip'),
         dataHook: 'border-color-buttons',
         getIcon: () => BorderIcon,
         isActive: () => getColorsFromComponentData(selected, table).cellBorderIsActive,
@@ -138,6 +139,7 @@ const getBorderColorButtons = (selected, settings, table, multipleCellsSelected)
   } else {
     return [
       {
+        tooltip: t('TablePlugin_Toolbar_BorderColor_Tooltip'),
         dataHook: 'border-color-around',
         getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
         onColorAdded: color => settings?.onBorderColorAdded?.(color),
@@ -238,7 +240,7 @@ export const getCellFormattingButtonsProps = (
     {
       type: 'SEPARATOR',
     },
-    ...getBorderColorButtons(selected, settings, table, multipleCellsSelected),
+    ...getBorderColorButtons(selected, settings, table, multipleCellsSelected, t),
     ...getHeaderButtons(selectedRows, selectedCols, table, t),
     ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock, t),
   ];

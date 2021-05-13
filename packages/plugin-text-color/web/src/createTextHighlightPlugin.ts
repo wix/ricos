@@ -22,4 +22,6 @@ const createTextHighlightPlugin: CreatePluginFunction<TextHighlightPluginEditorC
   });
 };
 
+createTextHighlightPlugin.functionName = TEXT_HIGHLIGHT_TYPE;
+
 export { createTextHighlightPlugin };

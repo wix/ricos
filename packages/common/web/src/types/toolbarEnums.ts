@@ -29,6 +29,7 @@ export enum ButtonType {
   SPOILER = 'spoiler',
   DELETE = 'delete',
   LINK_PREVIEW = 'link-preview',
+  VIDEO_SETTINGS = 'video-settings',
 }
 
 export enum ModifierKey {
@@ -36,6 +37,7 @@ export enum ModifierKey {
   CTRL = 'ctrl',
   OPTION = 'option',
   SHIFT = 'shift',
+  ALT = 'alt',
 }
 
 export enum ToolbarType {

@@ -1,5 +1,5 @@
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
-import { giphyTypeMapper } from 'wix-rich-content-plugin-giphy/viewer';
-import createViewerBundle from './RichContentViewerWrapper';
+import { pluginGiphy } from 'wix-rich-content-plugin-giphy/viewer';
+import { createViewerBundle } from './createViewerBundle';
 
-export default () => createViewerBundle(giphyTypeMapper);
+export default () => createViewerBundle(pluginGiphy());

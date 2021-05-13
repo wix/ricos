@@ -11,7 +11,6 @@ const BorderOutside = props => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <title>Icons / Formatting / border color outside only</title>
     <g
       id="Icons-/-Formatting-/-border-color-outside-only"
       stroke="none"

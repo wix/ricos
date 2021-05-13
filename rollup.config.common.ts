@@ -125,4 +125,4 @@ const output: OutputOptions[] = process.env.DYNAMIC_IMPORT
       },
     ];
 
-export default commonConfig(output, true);
+export default commonConfig(output, process.env.EXTRACT_CSS !== 'false');

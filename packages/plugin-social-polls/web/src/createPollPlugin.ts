@@ -6,7 +6,7 @@ import { POLL_TYPE, PollPluginEditorConfig } from './types';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 import { DEFAULT_COMPONENT_DATA } from './defaults';
 
-export const createPollPlugin: CreatePluginFunction<PollPluginEditorConfig> = config => {
+const createPollPlugin: CreatePluginFunction<PollPluginEditorConfig> = config => {
   const { helpers, theme, t, [POLL_TYPE]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
@@ -28,3 +28,7 @@ export const createPollPlugin: CreatePluginFunction<PollPluginEditorConfig> = co
     ...rest,
   });
 };
+
+createPollPlugin.functionName = POLL_TYPE;
+
+export { createPollPlugin };

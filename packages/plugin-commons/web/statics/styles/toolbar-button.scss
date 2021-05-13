@@ -29,7 +29,7 @@
   &.footerToolbarButton:focus:not([disabled]) {
     .icon {
       cursor: pointer;
-      color: $action-color;
+      color: $settings-action-color;
       @include svg-fill;
     }
   }
@@ -62,7 +62,6 @@
 }
 
 .mobile {
-
   .button {
     width: 100%;
     height: 100%;
@@ -71,7 +70,7 @@
     &:focus:not([disabled]) {
       .icon {
         cursor: pointer;
-        color: $action-color-fallback;
+        color: $settings-action-color;
         @include svg-fill;
       }
     }

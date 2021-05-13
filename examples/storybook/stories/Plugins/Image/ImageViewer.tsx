@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { RicosContent, RicosViewer } from 'ricos-viewer';
+import { DraftContent, RicosViewer } from 'ricos-viewer';
 import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 
 const ImageViewer: FunctionComponent<{
-  content?: RicosContent;
+  content?: DraftContent;
   imageConfig?: Parameters<typeof pluginImage>[0];
 }> = ({ content, imageConfig }) => (
   <RicosViewer content={content} plugins={[pluginImage(imageConfig)]} />

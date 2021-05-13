@@ -25,6 +25,7 @@ const createInsertButtons: CreateInsertButtons = ({
       getIcon: () => icon,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       componentData: getDefaultComponentData(isLinkButton, rel, target),
+      section: 'BlockToolbar_Section_Advanced',
     },
   ];
 };

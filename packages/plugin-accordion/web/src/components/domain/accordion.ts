@@ -21,6 +21,7 @@ const EMPTY_PAIR_VALUE = { title: EditorState.createEmpty(), content: EditorStat
 
 export class Accordion {
   componentData: ComponentData;
+
   store: Store;
 
   constructor(store: Store, componentData: ComponentData) {

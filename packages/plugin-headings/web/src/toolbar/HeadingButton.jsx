@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { HEADING_TYPE_TO_ELEMENT, DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
-import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-editor-common';
+import { HEADING_TYPE_TO_ELEMENT } from '../constants';
+import {
+  ClickOutside,
+  InlineToolbarButton,
+  EditorState,
+  RichUtils,
+} from 'wix-rich-content-editor-common';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
 import classNames from 'classnames';
@@ -27,7 +32,7 @@ export default class HeadingButton extends Component {
     const selection = currentEditorState.getSelection();
     const headingType = currentEditorState
       .getCurrentContent()
-      .blockMap.get(selection.focusKey)
+      .blockMap.get(selection.anchorKey)
       .getType();
     const currentHeading = HEADING_TYPE_TO_ELEMENT[headingType] || 'P';
     this.setState({ currentHeading });
@@ -87,12 +92,11 @@ export default class HeadingButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, customHeadings } = this.props;
+    const { theme, isMobile, t, tabIndex, toolbarName, customHeadings, inlinePopups } = this.props;
     const tooltipText = t('FormattingToolbar_TextStyleButton_Tooltip');
     const dataHookText = 'headingsDropdownButton';
     const { isPanelOpen, panelTop, panelLeft, currentHeading } = this.state;
     const { styles } = this;
-    const customHeadingsOptions = customHeadings || DEFAULT_HEADERS_DROPDOWN_OPTIONS;
     const modalStyle = isMobile
       ? { left: 0, bottom: 0, right: 0 }
       : {
@@ -100,46 +104,81 @@ export default class HeadingButton extends Component {
           left: panelLeft,
         };
     const buttonContent = this.fixEllipsis(this.translateHeading(currentHeading));
-    return (
-      <InlineToolbarButton
-        onClick={this.openPanel}
-        isActive={isPanelOpen}
-        theme={theme}
-        isMobile={isMobile}
-        tooltipText={tooltipText}
-        dataHook={dataHookText}
-        tabIndex={tabIndex}
-        buttonContent={buttonContent}
-        showArrowIcon
-        ref={ref => (this.buttonRef = ref)}
-      >
-        <Modal
-          isOpen={isPanelOpen}
-          onRequestClose={() => this.save()}
-          className={classNames(styles.headingsModal, {
-            [styles.headingsModal_mobile]: isMobile,
-          })}
-          overlayClassName={classNames(styles.headingsModalOverlay, {
-            [styles.headingsModalOverlay_mobile]: isMobile,
-          })}
-          parentSelector={HeadingButton.getModalParent}
-          style={{
-            content: modalStyle,
-          }}
-          ariaHideApp={false}
+    if (isMobile || toolbarName !== 'StaticTextToolbar' || !inlinePopups) {
+      return (
+        <InlineToolbarButton
+          onClick={this.openPanel}
+          isActive={isPanelOpen}
+          theme={theme}
+          isMobile={isMobile}
+          tooltipText={tooltipText}
+          dataHook={dataHookText}
+          tabIndex={tabIndex}
+          buttonContent={buttonContent}
+          showArrowIcon
+          ref={ref => (this.buttonRef = ref)}
         >
-          <HeadingsDropDownPanel
-            customHeadingsOptions={customHeadingsOptions}
-            heading={currentHeading}
-            onSave={this.save}
-            isMobile={isMobile}
+          <Modal
+            isOpen={isPanelOpen}
+            onRequestClose={() => this.save()}
+            className={classNames(styles.headingsModal, {
+              [styles.headingsModal_mobile]: isMobile,
+            })}
+            overlayClassName={classNames(styles.headingsModalOverlay, {
+              [styles.headingsModalOverlay_mobile]: isMobile,
+            })}
+            parentSelector={HeadingButton.getModalParent}
+            style={{
+              content: modalStyle,
+            }}
+            ariaHideApp={false}
+          >
+            <HeadingsDropDownPanel
+              customHeadingsOptions={customHeadings}
+              heading={currentHeading}
+              onSave={this.save}
+              isMobile={isMobile}
+              theme={theme}
+              translateHeading={this.translateHeading}
+              {...this.props}
+            />
+          </Modal>
+        </InlineToolbarButton>
+      );
+    } else {
+      return (
+        <div className={styles.headingPopup_button}>
+          <InlineToolbarButton
+            onClick={this.openPanel}
+            isActive={isPanelOpen}
             theme={theme}
-            translateHeading={this.translateHeading}
-            {...this.props}
-          />
-        </Modal>
-      </InlineToolbarButton>
-    );
+            isMobile={isMobile}
+            tooltipText={tooltipText}
+            dataHook={dataHookText}
+            tabIndex={tabIndex}
+            buttonContent={buttonContent}
+            showArrowIcon
+            ref={ref => (this.buttonRef = ref)}
+          >
+            {isPanelOpen && (
+              <div className={styles.headingPopup}>
+                <ClickOutside onClickOutside={() => this.save()}>
+                  <HeadingsDropDownPanel
+                    customHeadingsOptions={customHeadings}
+                    heading={currentHeading}
+                    onSave={this.save}
+                    isMobile={isMobile}
+                    theme={theme}
+                    translateHeading={this.translateHeading}
+                    {...this.props}
+                  />
+                </ClickOutside>
+              </div>
+            )}
+          </InlineToolbarButton>
+        </div>
+      );
+    }
   }
 }
 
@@ -153,8 +192,11 @@ HeadingButton.propTypes = {
   tabIndex: PropTypes.number,
   setKeepOpen: PropTypes.func,
   customHeadings: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  toolbarName: PropTypes.string,
+  inlinePopups: PropTypes.bool,
 };
 
 HeadingButton.defaultProps = {
+  inlinePopups: false,
   setKeepOpen: () => {},
 };

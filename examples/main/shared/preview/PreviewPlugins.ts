@@ -35,6 +35,13 @@ import {
   styleSelectionPredicate,
 } from '../../src/text-color-style-fn';
 
+import {
+  spoilerInlineStyleMapper,
+  initSpoilersContentState,
+  SpoilerViewerWrapper,
+  SPOILER_TYPE,
+} from 'wix-rich-content-plugin-spoiler/viewer';
+
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-viewer/dist/styles.min.css';
@@ -55,12 +62,13 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 
 import { getBaseUrl } from '../../src/utils';
 import {
   InlineStyleMapper,
   InlineStyleMapperFunction,
-  RicosContent,
+  DraftContent,
 } from 'wix-rich-content-common';
 
 const linkPluginSettings = {
@@ -115,7 +123,7 @@ export const config = {
       new Promise(resolve =>
         setTimeout(
           () =>
-            resolve('http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf'),
+            resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
           1000
         )
       ),
@@ -123,11 +131,13 @@ export const config = {
   [VIDEO_TYPE]: {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
+  [SPOILER_TYPE]: { initSpoilersContentState, SpoilerViewerWrapper },
 };
 
-export const getInlineStyleMappers = (raw: RicosContent) => [
+export const getInlineStyleMappers = (raw: DraftContent) => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
+  spoilerInlineStyleMapper(config, raw),
 ];
 
 export const getConfig = (additionalConfig = {}) => {

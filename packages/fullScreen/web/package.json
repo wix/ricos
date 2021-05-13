@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-fullscreen",
-  "version": "8.20.0",
+  "version": "8.34.1",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -26,13 +26,14 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build:rollup": "rollup --environment MODULE_NAME:fullscreen -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:fullscreen,EXTRACT_CSS:false -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 BUILD_CJS=1 npm run build:rollup -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
+    "test": "jest --verbose"
   },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
@@ -44,11 +45,27 @@
   },
   "dependencies": {
     "fscreen": "1.0.2",
-    "wix-rich-content-common": "8.20.0",
-    "wix-rich-content-plugin-gallery": "8.20.0"
+    "wix-rich-content-common": "8.34.1",
+    "wix-rich-content-plugin-gallery": "8.34.1"
   },
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }

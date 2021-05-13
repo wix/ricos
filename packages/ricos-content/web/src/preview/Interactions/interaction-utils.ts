@@ -1,9 +1,9 @@
-import { RicosContent, RicosContentBlock } from '../../types/contentTypes';
+import { DraftContent, RicosContentBlock } from '../../types/contentTypes';
 import { INTERACTIONS } from '../const';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 
 interface InteractionDataMerger {
-  contentState: RicosContent;
+  contentState: DraftContent;
   settings: Record<string, unknown>;
   blockFilter: (block: RicosContentBlock) => unknown;
   type: string;
@@ -16,7 +16,7 @@ const interactionDataMerger = ({
   blockFilter = () => {},
   type,
   schema = [],
-}: InteractionDataMerger): RicosContent => {
+}: InteractionDataMerger): DraftContent => {
   if (!contentState.blocks || contentState.blocks.length === 0) {
     return contentState;
   }

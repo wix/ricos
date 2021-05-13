@@ -8,6 +8,7 @@ export default class TextSearchInput extends Component {
     this.input.focus();
     this.input.setSelectionRange(0, this.input.value.length);
   }
+
   onChange = e => this.props.onChange(e.target.value);
 
   onCloseRequested = () => {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { Separator } from 'wix-rich-content-editor-common';
+import { Separator, getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -15,7 +15,7 @@ import {
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';
 import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
 
 export default function createAtomicPluginToolbar({
@@ -41,6 +41,7 @@ export default function createAtomicPluginToolbar({
   return class BaseToolbar extends Component {
     static propTypes = {
       hide: PropTypes.bool,
+      removeToolbarFocus: PropTypes.func,
     };
 
     constructor(props) {
@@ -167,7 +168,7 @@ export default function createAtomicPluginToolbar({
         toolbarNode: findDOMNode(this),
         languageDir,
         isMobile,
-        renderedInTable: innerRCERenderedIn === 'table',
+        renderedInTable: innerRCERenderedIn === TABLE_TYPE,
       });
       this.offsetHeight = updatedOffsetHeight;
       return position;
@@ -194,14 +195,6 @@ export default function createAtomicPluginToolbar({
         });
       }
     };
-
-    scrollToolbar(event, leftDirection) {
-      event.preventDefault();
-      const { clientWidth, scrollWidth } = this.scrollContainer;
-      this.scrollContainer.scrollLeft = leftDirection
-        ? 0
-        : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
-    }
 
     /*eslint-disable complexity*/
     PluginToolbarButton = ({
@@ -231,6 +224,8 @@ export default function createAtomicPluginToolbar({
         settings: button.settings,
         ...commonButtonProps,
       };
+      const editorState = getEditorState();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const baseLinkProps = {
         onOverrideContent: this.onOverrideContent,
         helpers,
@@ -240,14 +235,25 @@ export default function createAtomicPluginToolbar({
         relValue,
         uiSettings,
         icons: icons.link,
-        editorState: getEditorState(),
+        editorState,
         linkTypes,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
+        pluginType,
         ...commonButtonProps,
       };
-
+      const defaultButtonProps = {
+        componentData: this.state.componentData,
+        componentState: this.state.componentState,
+        helpers,
+        displayPanel: this.displayPanel,
+        displayInlinePanel: this.displayInlinePanel,
+        hideInlinePanel: this.hidePanels,
+        uiSettings,
+        getEditorBounds,
+        ...buttonProps,
+      };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
@@ -287,14 +293,24 @@ export default function createAtomicPluginToolbar({
           return (
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
+        case BUTTONS.VIDEO_SETTINGS: {
+          const isCustomVideo = !!this.state.componentData.isCustomVideo;
+          const videoSettingsProps = {
+            ...defaultButtonProps,
+            type: BUTTONS.EXTERNAL_MODAL,
+          };
+          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
+        }
         case BUTTONS.LINK_PREVIEW: {
           return (
-            <BlockLinkButton
-              {...baseLinkProps}
-              unchangedUrl
-              tooltipText={t('LinkPreview_Settings_Tooltip')}
-              icons={button.icons}
-            />
+            !this.state.componentData.html && (
+              <BlockLinkButton
+                {...baseLinkProps}
+                unchangedUrl
+                tooltipText={t('LinkPreview_Settings_Tooltip')}
+                icons={button.icons}
+              />
+            )
           );
         }
         case BUTTONS.DELETE: {
@@ -308,21 +324,10 @@ export default function createAtomicPluginToolbar({
           );
         }
         default:
-          return (
-            <Button
-              componentData={this.state.componentData}
-              componentState={this.state.componentState}
-              helpers={helpers}
-              displayPanel={this.displayPanel}
-              displayInlinePanel={this.displayInlinePanel}
-              hideInlinePanel={this.hidePanels}
-              uiSettings={uiSettings}
-              getEditorBounds={getEditorBounds}
-              {...buttonProps}
-            />
-          );
+          return <Button {...defaultButtonProps} />;
       }
     };
+
     /*eslint-enable complexity*/
     mapComponentDataToButtonProps = (button, componentData) => {
       if (!button.mapComponentDataToButtonProps) {
@@ -401,6 +406,12 @@ export default function createAtomicPluginToolbar({
       ) : null;
     }
 
+    onKeyDown = e => {
+      if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+        this.props.removeToolbarFocus?.();
+      }
+    };
+
     onClick = e => {
       e.preventDefault();
     };
@@ -424,7 +435,7 @@ export default function createAtomicPluginToolbar({
       const { toolbarStyles: toolbarTheme } = theme || {};
 
       if (this.visibilityFn() && isVisible) {
-        const renderedInTable = innerRCERenderedIn === 'table';
+        const renderedInTable = innerRCERenderedIn === TABLE_TYPE;
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
@@ -434,6 +445,9 @@ export default function createAtomicPluginToolbar({
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
           onClick: this.onClick,
+          onKeyDown: this.onKeyDown,
+          ref: this.handleToolbarRef,
+          tabIndex: '0',
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';

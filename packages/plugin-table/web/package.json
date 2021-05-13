@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-table",
-  "version": "8.20.0",
+  "version": "8.34.1",
   "author": {
     "name": "undefined",
     "email": "noamt@wix.com"
@@ -36,11 +36,11 @@
     "test": "jest --verbose"
   },
   "dependencies": {
-    "wix-react-datasheet": "1.5.6",
-    "wix-rich-content-common": "8.20.0",
-    "wix-rich-content-editor-common": "8.20.0",
-    "wix-rich-content-plugin-commons": "8.20.0",
-    "wix-rich-content-toolbars": "8.20.0"
+    "wix-react-datasheet": "1.5.7",
+    "wix-rich-content-common": "8.34.1",
+    "wix-rich-content-editor-common": "8.34.1",
+    "wix-rich-content-plugin-commons": "8.34.1",
+    "wix-rich-content-toolbars": "8.34.1"
   },
   "unpkg": true,
   "publishConfig": {

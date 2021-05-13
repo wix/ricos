@@ -1,15 +1,16 @@
 import { isFunction } from 'lodash';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadata';
-import { RicosContent } from '../../types/contentTypes';
+import { DraftContent } from '../../types/contentTypes';
 import { PreviewRule } from '../types';
 
 interface Constructor extends PreviewRule {
-  initialPreviewState?: RicosContent;
+  initialPreviewState?: DraftContent;
 }
 class ContentStateTransformation {
   rules: PreviewRule[];
-  previewState?: RicosContent;
+
+  previewState?: DraftContent;
 
   constructor({ _if, _then, initialPreviewState }: Constructor) {
     this.rules = [];
@@ -25,7 +26,7 @@ class ContentStateTransformation {
     return this;
   }
 
-  apply(contentState: RicosContent) {
+  apply(contentState: DraftContent) {
     const previewStateBuilder = new ContentStateBuilder(this.previewState);
     const metadata = getContentStateMetadata(contentState);
     const appliedRuleBuilder = this.rules.reduce((builder, rule) => {

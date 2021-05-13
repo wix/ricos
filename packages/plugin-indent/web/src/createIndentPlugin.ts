@@ -19,4 +19,6 @@ const createIndentPlugin: CreatePluginFunction<IndentPluginEditorConfig> = confi
   });
 };
 
+createIndentPlugin.functionName = INDENT_TYPE;
+
 export { createIndentPlugin };

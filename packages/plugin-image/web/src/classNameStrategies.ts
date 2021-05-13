@@ -25,26 +25,15 @@ export const alignmentClassName: ClassNameStrategy = (componentData, theme, styl
   return classNames(styles[`align${upperFirst(align)}`], theme[`align${upperFirst(align)}`]);
 };
 
-export const sizeClassName: ClassNameStrategy = (
-  componentData,
-  theme,
-  styles,
-  isMobile,
-  innerRCERenderedIn
-) => {
+export const sizeClassName: ClassNameStrategy = (componentData, theme, styles, isMobile) => {
   const { size } = componentData.config || {};
   if (!size || (isMobile && size === 'original')) {
     return '';
   }
-  const isRenderedInTable = innerRCERenderedIn === 'table';
   return shouldDisableStyles(componentData, isMobile)
     ? classNames(styles.sizeFullWidth, theme.sizeFullWidth)
     : classNames(
         styles[`size${upperFirst(camelCase(size))}`],
-        theme[`size${upperFirst(camelCase(size))}`],
-        {
-          [styles.renderedInTable]: isRenderedInTable,
-          [theme.renderedInTable]: isRenderedInTable,
-        }
+        theme[`size${upperFirst(camelCase(size))}`]
       );
 };

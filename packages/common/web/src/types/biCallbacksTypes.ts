@@ -1,7 +1,43 @@
+import { ToolbarType } from './toolbarEnums';
+import { OnPluginAction } from './pluginsBiCallbacksTypes';
+interface biCallbackParams {
+  version?: string;
+}
+
+type EntryType = ToolbarType;
+export interface onPluginAddStepArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
+  entryPoint: ToolbarType;
+  entryType: EntryType;
+  step: 'FileUploadDialog' | 'PluginModal';
+}
+
+export interface onPluginDeleteArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
+}
+
+export interface onViewerLoadedArgs extends biCallbackParams {
+  isPreview: boolean;
+  pluginsCount: boolean;
+  version: string;
+}
+
+export interface PluginAddSuccessParams {
+  rows?: number;
+  columns?: number;
+}
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
-  onPluginAddSuccess?(pluginId: string, entryPoint: string, version: string): void;
-  onPluginDelete?(pluginId: string, version: string): void;
+  onPluginAddSuccess?(
+    pluginId: string,
+    entryPoint: string,
+    params: PluginAddSuccessParams,
+    version: string
+  ): void;
+  onPluginAddStep?(params: onPluginAddStepArgs): void;
+  onPluginDelete?(params: onPluginDeleteArgs): void;
   onPublish?(
     postId: string | undefined,
     pluginsCount: Record<string, number> | undefined,
@@ -14,8 +50,8 @@ export interface BICallbacks {
       | undefined,
     version: string
   ): void;
-  onViewerAction?(pluginId: string, actionName: string, value: string): void;
-  onViewerLoaded?(isPreview: boolean, version: string): void;
+  onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
+  onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
   onPluginChange?(
     pluginId: string,
@@ -39,4 +75,7 @@ export interface BICallbacks {
     errorType: string | undefined,
     version: string
   ): void;
+  onPluginAction?: OnPluginAction;
 }
+
+type ActionName = 'expand_gallery' | 'expand_image' | 'Click';

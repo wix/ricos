@@ -12,12 +12,17 @@ describe('Palette', () => {
     actionColorFallbackTuple: '0, 0, 0',
     backgroundColor: '#0E092B',
     backgroundColorTuple: '14, 9, 43',
+    bgColorContainer: undefined,
     disabledColor: undefined,
     disabledColorTuple: undefined,
     fallbackColor: '#000000',
     fallbackColorTuple: '0, 0, 0',
     textColorLow: undefined,
     textColorLowTuple: undefined,
+    settingsActionColor: undefined,
+    settingsActionColorTuple: undefined,
+    focusActionColor: undefined,
+    focusActionColorTuple: undefined,
   };
 
   const wixExpected = {
@@ -64,5 +69,29 @@ describe('Palette', () => {
       textColor: 'transparent',
     });
     expect(cssVars).toStrictEqual(transparentExpected);
+  });
+
+  it('should not color container by default', () => {
+    const { paletteVarsObject: cssVars } = createPalette({
+      actionColor: '#000000',
+      bgColor: '#000000',
+      textColor: '#000000',
+    });
+    expect(Object.keys(cssVars)).not.toContain('contentBgColor');
+  });
+
+  it('should color container if told to', () => {
+    const { paletteVarsObject: cssVars } = createPalette(
+      {
+        actionColor: '#000000',
+        bgColor: '#111111',
+        textColor: '#000000',
+      },
+      {
+        contentBgColor: true,
+      }
+    );
+    expect(Object.keys(cssVars)).toContain('bgColorContainer');
+    expect(cssVars.bgColorContainer).toEqual('#111111');
   });
 });

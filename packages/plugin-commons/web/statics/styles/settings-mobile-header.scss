@@ -2,16 +2,18 @@
 
 .root {
   .header {
-    display: block;
-    padding: 0 9px;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     line-height: 50px;
     box-sizing: border-box;
-    background: $action-color-fallback;
     z-index: 5;
+    &:not(.media) {
+      position: fixed;
+      display: block;
+      padding: 0 9px;
+      background: $settings-action-color;
+    }
   }
 
   .headerPlaceholder {
@@ -26,9 +28,29 @@
     border: none;
     background-color: transparent;
     color: #fff;
-    font-size: 14px;
-    line-height: 40px;
-    padding: 0 9px;
+    &:not(.media) {
+      font-size: 14px;
+      line-height: 40px;
+      padding: 0 9px;
+    }
+  }
+
+  .media {
+    border-bottom: 1px solid #ededed;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    background: $background-color;
+    .button {
+      padding: 14px 12px 15px 18px;
+      font-size: 16px;
+    }
+    .done {
+      color: $action-color;
+    }
+    .cancel {
+      color: inherit;
+    }
   }
 
   .menuIcon {
@@ -60,7 +82,7 @@
     cursor: pointer;
 
     &:hover {
-      background: $action-color-fallback;
+      background: $settings-action-color;
       color: white;
     }
   }
@@ -77,17 +99,14 @@
     .header {
       position: absolute;
       width: 100%;
-
     }
-    
+
     .headerPlaceholder {
       display: none;
     }
 
     .menu {
       position: absolute;
-
     }
-    
   }
 }

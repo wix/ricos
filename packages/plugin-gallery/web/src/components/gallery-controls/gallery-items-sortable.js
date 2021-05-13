@@ -13,7 +13,7 @@ import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles } from 'wix-rich-content-common';
 import { FileInput, Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
-
+import { GALLERY_ITEMS_TYPES } from '../../defaults';
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
 const onKeyDown = (e, handler) => {
@@ -75,7 +75,8 @@ const SortableItem = sortableElement(props => {
     let url;
     if (!isLocalObjectUrl(item)) {
       url = imageClientAPI.getScaleToFillImageURL(
-        prefix + (item.metadata.type !== 'video' ? item.url : item.metadata.poster),
+        prefix +
+          (item.metadata.type !== GALLERY_ITEMS_TYPES.VIDEO ? item.url : item.metadata.poster),
         item.metadata.width,
         item.metadata.height,
         imageSize,
@@ -345,14 +346,16 @@ export class SortableComponent extends Component {
   state = this.propsToState(this.props);
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(
-      {
-        items: arrayMove(this.state.items, oldIndex, newIndex),
-      },
-      () => {
-        this.props.onItemsChange(this.state.items);
-      }
-    );
+    if (oldIndex !== newIndex) {
+      this.setState(
+        {
+          items: arrayMove(this.state.items, oldIndex, newIndex),
+        },
+        () => {
+          this.props.onItemsChange(this.state.items);
+        }
+      );
+    }
   };
 
   clickAction = itemIdx => {

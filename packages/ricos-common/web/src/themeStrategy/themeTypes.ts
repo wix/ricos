@@ -70,8 +70,31 @@ export interface RicosTheme {
    * */
   parentClass?: string;
   palette?: PaletteColors | WixPalette | PalettePreset;
+  paletteConfig?: PaletteConfig;
   typography?: RicosTypography;
   customStyles?: RicosCustomStyles;
+}
+
+export interface PaletteConfig {
+  /**
+   * When `true`, attribute `bgColor` provided in `palette` will be the
+   * `background-color` of the inner content container of Ricos.
+   *
+   * Default: `false`
+   */
+  contentBgColor?: boolean;
+  /** Override the `actionColor` of floating panels, toolbars & settings modals.
+   *
+   * **Note:** `RicosEditor` only.
+   * @default actionColor
+   */
+  settingsActionColor?: string;
+  /** Override the `actionColor` of plugin when focused / clicked.
+   *
+   * **Note:** `RicosEditor` only.
+   * @default actionColor
+   */
+  focusActionColor?: string;
 }
 
 export interface ThemeStrategyArgs {

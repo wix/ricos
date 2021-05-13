@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Loader } from 'wix-rich-content-plugin-commons';
+import { MediaUploadErrorKey } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
-import { DEFAULTS, imageItem } from './defaults';
+import { DEFAULTS, GALLERY_ITEMS_TYPES, createImageItem, createVideoItem } from './defaults';
 import { GALLERY_TYPE } from './types';
 import styles from '../statics/styles/gallery-component.scss';
 
@@ -43,15 +44,13 @@ class GalleryComponent extends PureComponent {
         { ...this.stateFromProps(nextProps) },
         () => this.setState({ key: !this.state.key }) //fixes gallery height not updating correctly
       );
-    } else if (componentData.items?.length > 0) {
-      this.onLoad(false);
     }
   }
 
   stateFromProps = props => {
     const items = props.componentData.items || []; // || DEFAULTS.items;
     const styles = { ...DEFAULTS.styles, ...(props.componentData.styles || {}) };
-    const itemsLeftToUpload = props.componentState?.isLoading || 0;
+    const itemsLeftToUpload = this.state?.itemsLeftToUpload || 0;
     const state = {
       items,
       styles,
@@ -123,36 +122,58 @@ class GalleryComponent extends PureComponent {
     this.state && this.onLoad(true);
   };
 
-  imageLoaded = (event, file, itemPos) => {
-    const img = event.target;
-    const item = imageItem(img, Date.now().toString());
-    const itemIdx = this.setItemInGallery(item, itemPos);
+  onFileUploadEnd = () => {
+    this.setState(state => {
+      const itemsLeftToUpload = state.itemsLeftToUpload - 1;
+      const isLoading = itemsLeftToUpload > 0;
+      return { itemsLeftToUpload, isLoading };
+    });
+  };
+
+  handleFileUpload = (file, type, itemIdx) => {
     const { helpers } = this.props;
     const handleFileUpload = helpers?.handleFileUpload;
 
     if (handleFileUpload) {
-      const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, 'image');
-      handleFileUpload(file, ({ data, error }) =>
-        this.handleFilesAdded({ data, error, itemIdx }, uploadBIData)
-      );
+      const createGalleryItem =
+        type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, type);
+      handleFileUpload(file, ({ data, error }) => {
+        const item = data && createGalleryItem(data, Date.now().toString());
+        uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
+        this.setItemInGallery(item, error, itemIdx);
+        this.onFileUploadEnd();
+      });
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
     }
   };
 
+  imageLoaded = (event, file, itemPos) => {
+    const img = event.target;
+    const item = createImageItem(img, Date.now().toString(), true);
+    const itemIdx = this.setItemInGallery(item, itemPos);
+    this.handleFileUpload(file, GALLERY_ITEMS_TYPES.IMAGE, itemIdx);
+  };
+
   handleFilesAdded = ({ data, error, itemIdx }, uploadBIData) => {
     const handleFileAdded = (item, error, idx) => {
-      const galleryItem = {
-        metadata: {
-          type: item.type || 'image',
-          height: item.height,
-          width: item.width,
-        },
-        itemId: String(item.id),
-        url: item.file_name,
-      };
-      if (item.type === 'video') {
-        galleryItem.metadata.poster = item.poster || item.thumbnail_url;
+      let galleryItem = {};
+      const poster =
+        item.type === GALLERY_ITEMS_TYPES.VIDEO
+          ? { poster: item.poster || item.thumbnail_url }
+          : {};
+      if (item) {
+        galleryItem = {
+          metadata: {
+            type: item.type || GALLERY_ITEMS_TYPES.IMAGE,
+            height: item.height,
+            width: item.width,
+            ...poster,
+          },
+          itemId: String(item.id),
+          url: item.file_name,
+        };
       }
       uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
       this.setItemInGallery(galleryItem, error, idx);
@@ -164,22 +185,23 @@ class GalleryComponent extends PureComponent {
     } else {
       handleFileAdded(data, error, itemIdx);
     }
+    if (this.props.store) {
+      this.props.store.update('componentState', { isLoading: false });
+    }
+    this.onLoad(false);
   };
 
-  videoLoaded = (event, file, itemPos) => {
-    const { helpers } = this.props;
-    const hasFileChangeHelper = helpers && helpers.onVideoSelected;
-
-    if (hasFileChangeHelper) {
-      const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, 'video');
-      helpers.onVideoSelected(file, video => {
-        // eslint-disable-next-line camelcase
-        const data = { ...video, id: Date.now().toString(), file_name: video.video_url };
-        this.handleFilesAdded({ data, itemPos }, uploadBIData);
-      });
-    } else {
-      console.warn('Missing upload function'); //eslint-disable-line no-console
-    }
+  getUnsupportedExtensionError = fileName => {
+    return {
+      key: MediaUploadErrorKey.UNSUPPORTED_EXTENSION,
+      args: {
+        extension:
+          fileName
+            .split('.')
+            .pop()
+            ?.toLowerCase() || '',
+      },
+    };
   };
 
   fileLoaded = (event, file, itemPos) => {
@@ -188,7 +210,9 @@ class GalleryComponent extends PureComponent {
       img.onload = e => this.imageLoaded(e, file, itemPos);
       img.src = event.target.result;
     } else if (file.type.match('video/*')) {
-      this.videoLoaded(event, file, itemPos);
+      this.handleFileUpload(file, GALLERY_ITEMS_TYPES.VIDEO, itemPos);
+    } else {
+      this.setItemInGallery({}, this.getUnsupportedExtensionError(file.name), itemPos);
     }
   };
 

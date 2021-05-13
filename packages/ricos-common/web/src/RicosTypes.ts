@@ -1,6 +1,6 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
-  RicosContent,
+  DraftContent,
   OnErrorFunction,
   SEOSettings,
   LinkPanelSettings,
@@ -9,6 +9,7 @@ import {
   RelValue,
   EditorPlugin,
   ViewerPlugin,
+  onAtomicBlockFocus,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -24,7 +25,7 @@ export interface RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: ReactElement;
-  content?: RicosContent;
+  content?: DraftContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
   linkSettings?: LinkSettings;
@@ -33,7 +34,17 @@ export interface RicosProps {
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
+  onAtomicBlockFocus?: onAtomicBlockFocus;
   /* Changes to this interface should also be reflected in the API docs */
+}
+
+interface EditorEvents {
+  subscribe: (
+    event: string,
+    callback: () => Promise<{ type: string; data: unknown }>
+  ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
+  dispatch: (event: string) => Promise<unknown>;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -46,21 +57,13 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
-  injectedContent?: RicosContent;
+  injectedContent?: DraftContent;
   maxTextLength?: number;
-  editorEvents?: {
-    subscribe: (
-      event: string,
-      callback: () => Promise<{ type: string; data: unknown }>
-    ) => (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
-    unsubscribe: (event: string, callback: () => Promise<{ type: string; data: unknown }>) => void;
-    dispatch: (event: string) => Promise<unknown>;
-  };
-
+  editorEvents?: EditorEvents;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
-export interface RicosViewerProps extends RicosProps {
+export interface RicosViewerProps extends RicosProps, Pick<RichContentViewerProps, 'addAnchors'> {
   /* Changes to this interface should also be reflected in the API docs */
   plugins?: ViewerPlugin[];
   preview?: PreviewConfig;
@@ -72,21 +75,22 @@ export interface ContentStateGetterArgs {
   shouldRemoveErrorBlocks?: boolean;
 }
 
-export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => DraftContent;
 
 export interface EditorDataInstance {
   getContentState: ContentStateGetter;
   getContentTraits: () => {
     isEmpty: boolean;
     isContentChanged: boolean;
+    isLastChangeEdit: boolean;
   };
   getEditorState: () => EditorState;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
-  getContentStatePromise: () => Promise<RicosContent>;
+  getContentStatePromise: () => Promise<DraftContent>;
 }
 
-export type OnContentChangeFunction = (content: RicosContent) => void;
+export type OnContentChangeFunction = (content: DraftContent) => void;
 
 export type OnBusyChangeFunction = (isBusy: boolean) => void;
 
@@ -113,6 +117,7 @@ export type FullscreenProps = { backgroundColor?: string; foregroundColor?: stri
 export interface MediaSettings {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  disableDownload?: boolean;
   fullscreenProps?: FullscreenProps;
 }
 

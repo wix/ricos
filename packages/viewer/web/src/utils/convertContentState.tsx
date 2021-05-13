@@ -4,7 +4,7 @@ import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
-  RicosContent,
+  DraftContent,
   TextDirection,
   PluginMapping,
   ViewerContextType,
@@ -13,7 +13,6 @@ import {
   LegacyViewerPluginConfig,
   InlineStyleMapperFunction,
 } from 'wix-rich-content-common';
-import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -27,16 +26,13 @@ import Anchor from '../components/Anchor';
 import styles from '../../statics/rich-content-viewer.scss';
 import { withInteraction } from '../withInteraction';
 
-const isEmptyContentState = (raw?: RicosContent) =>
+const isEmptyContentState = (raw?: DraftContent) =>
   !raw ||
   !raw.blocks ||
   (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const isEmptyBlock = ([_, data]) => data && data.length === 0;
-
-const getBlockDepth = (contentState, key) =>
-  contentState.blocks.find(block => block.key === key).depth || 0;
 
 const getBlockStyleClasses = (
   mergedStyles: Record<string, string>,
@@ -54,8 +50,6 @@ const getBlockStyleClasses = (
 
   return classNames(classes, directionClass, mergedStyles[alignmentClass]);
 };
-
-let blockCount = 0;
 
 const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicStyles);
 
@@ -75,7 +69,6 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
       blockProps,
       getBlockStyleClasses,
       blockDataToStyle,
-      getBlockDepth,
       context,
     };
     return <List {...props} />;
@@ -85,7 +78,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const alignment = blockProps.data[i]?.textAlignment || context.textAlignment;
-        const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
+        const depth = blockProps.data[i].depth;
         const blockDirection = getDirectionFromAlignmentAndTextDirection(
           alignment,
           textDirection || blockProps.data[i]?.textDirection
@@ -98,7 +91,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           'ltr'}`;
 
         const ChildTag = typeof type === 'string' ? type : type(child);
-        const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
+        const blockIndex = blockProps.data[i].index;
         const { interactions } = blockProps.data[i];
 
         const _child = isEmptyBlock(child) ? <br /> : child;
@@ -136,20 +129,21 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
 
         const wrappedBlock = withInteraction(inner, interactions, context);
         const wrapperKey = `${blockProps.keys[i]}_wrap`;
-        const shouldAddAnchors = addAnchorsPrefix && !isEmptyBlock(child);
         let resultBlock = <React.Fragment key={wrapperKey}>{wrappedBlock}</React.Fragment>;
 
-        if (shouldAddAnchors) {
-          blockCount++;
-          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
+        const getAnchorType = () => {
+          if (isEmptyBlock(child)) {
+            return 'empty-line';
+          }
+          return typeof type === 'string' ? type : 'paragraph';
+        };
+
+        if (addAnchorsPrefix) {
+          const anchorKey = `${addAnchorsPrefix}${blockIndex + 1}`;
           resultBlock = (
             <React.Fragment key={wrapperKey}>
               {wrappedBlock}
-              <Anchor
-                type={typeof type === 'string' ? type : 'paragraph'}
-                key={anchorKey}
-                anchorKey={anchorKey}
-              />
+              <Anchor type={getAnchorType()} key={anchorKey} anchorKey={anchorKey} />
             </React.Fragment>
           );
         }
@@ -196,32 +190,29 @@ const getEntities = (
       typeMappers,
       context,
       styles,
-      type => {
-        if (addAnchorsPrefix) {
-          blockCount++;
-          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
-          return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
-        } else {
-          return null;
-        }
-      },
+      addAnchorsPrefix,
       innerRCEViewerProps
     ),
   };
 };
 
-const normalizeContentState = (contentState: RicosContent): RicosContent => ({
+const normalizeContentState = (contentState: DraftContent): DraftContent => ({
   ...contentState,
-  blocks: contentState.blocks.map(block => {
+  blocks: contentState.blocks.map((block, index) => {
     if (block.type === 'atomic') {
-      return block;
+      return {
+        ...block,
+        data: { index },
+      };
     }
 
-    const data = { ...block.data };
-    const direction = getTextDirection(block.text);
-    if (direction === 'rtl') {
-      data.textDirection = direction;
-    }
+    const textDirection = getTextDirection(block.text);
+    const data = {
+      ...block.data,
+      depth: block.depth,
+      index,
+      ...(textDirection === 'rtl' && { textDirection }),
+    };
 
     let text = block.text;
     if (endsWith(text, '\n')) {
@@ -263,7 +254,7 @@ const convertToReact = (
   context: ViewerContextType,
   decorators: Decorator[],
   inlineStyleMappers: InlineStyleMapperFunction[],
-  initSpoilers: (content?: RicosContent) => RicosContent | undefined,
+  initSpoilers: (content?: DraftContent) => DraftContent | undefined,
   SpoilerViewerWrapper: unknown,
   options: { addAnchors?: boolean | string; [key: string]: unknown } = {},
   innerRCEViewerProps?: {
@@ -285,8 +276,8 @@ const convertToReact = (
     : normalizedContentState;
 
   const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
-  blockCount = 0;
-  return redraft(
+
+  let result = redraft(
     newContentState,
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
@@ -303,6 +294,18 @@ const convertToReact = (
     },
     { ...redraftOptions, ...restOptions }
   );
+  if (addAnchors) {
+    const firstAnchorKey = `${addAnchorsPrefix}-first`;
+    const lastAnchorKey = `${addAnchorsPrefix}-last`;
+    result = (
+      <>
+        <Anchor type={'first'} anchorKey={firstAnchorKey} />
+        {result}
+        <Anchor type={'last'} anchorKey={lastAnchorKey} />
+      </>
+    );
+  }
+  return result;
 };
 
 // renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)

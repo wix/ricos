@@ -21,19 +21,22 @@ import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selec
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 import { themes } from '../consumersThemes/themes';
-import { PaletteColors, RicosContent, SEOSettings } from 'wix-rich-content-common';
+import { PaletteColors, DraftContent, SEOSettings } from 'wix-rich-content-common';
 import { EditorState } from '@wix/draft-js';
 import { merge } from 'lodash';
 
+const VIEWER_ONLY = false;
 const onVideoSelected = (url: string, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 const determinePalette = (paletteType: 'light' | 'dark', fallbackColor?: string): PaletteColors =>
   paletteType
-    ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], { fallbackColor })
+    ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], {
+        fallbackColor,
+      })
     : undefined;
-const setBackground = (palette: PaletteColors) =>
-  palette ? { backgroundColor: palette.bgColor } : {};
+const setBackground = (palette: PaletteColors, disableContainer: boolean) =>
+  !disableContainer && palette ? { backgroundColor: palette.bgColor } : {};
 const setForeground = (palette: PaletteColors) => (palette ? { color: palette.textColor } : {});
 const customStyles = [
   'h1',
@@ -68,7 +71,7 @@ const customStyles = [
 interface RicosTestAppProps {
   isMobile: boolean;
   locale?: string;
-  contentState?: RicosContent;
+  contentState?: DraftContent;
   editorState?: EditorState;
   localeResource?: Record<string, string>;
   onRicosEditorChange?: RicosEditorProps['onChange'];
@@ -88,8 +91,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
   renderEditor = () => {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
-      testAppConfig.theme || {};
+    const {
+      skipCssOverride,
+      paletteType,
+      useCustomStyles,
+      fallbackColor,
+      contentBgColor,
+      settingsActionColor,
+      focusActionColor,
+    } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -127,10 +137,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
+        theme={{
+          palette,
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
+          customStyles: useCustomStyles ? customStyles : {},
+        }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
+        _rcProps={{ experiments: testAppConfig.experiments }}
       >
         <RichContentEditor
           helpers={{
@@ -145,8 +160,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor } =
-      testAppConfig.theme || {};
+    const {
+      skipCssOverride,
+      paletteType,
+      useCustomStyles,
+      fallbackColor,
+      contentBgColor,
+      settingsActionColor,
+      focusActionColor,
+    } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -157,7 +179,11 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
+        theme={{
+          palette,
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
+          customStyles: useCustomStyles ? customStyles : {},
+        }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
@@ -167,7 +193,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
 
   render() {
     const { isMobile, testAppConfig = {} } = this.props;
-    const { theme: { paletteType } = {}, applyOuterStyle } = testAppConfig;
+    const { theme: { paletteType, disableContainer } = {}, applyOuterStyle } = testAppConfig;
     const palette = determinePalette(paletteType);
     const addStyle = applyOuterStyle
       ? { color: 'white', fontFamily: 'Times', backgroundColor: 'black' }
@@ -175,15 +201,17 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
     return (
       <div
         className={`testApp ${isMobile ? 'mobile' : ''}`}
-        style={{ ...setBackground(palette), ...addStyle }}
+        style={{ ...setBackground(palette, disableContainer), ...addStyle }}
       >
-        <div>
-          <h3 style={setForeground(palette)}>Editor</h3>
-          <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
-            {this.renderEditor()}
+        {!VIEWER_ONLY && (
+          <div>
+            <h3 style={setForeground(palette)}>Editor</h3>
+            <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
+              {this.renderEditor()}
+            </div>
           </div>
-        </div>
-        <div>
+        )}
+        <div className={`${VIEWER_ONLY ? 'full-width' : ''}`}>
           <h3 style={setForeground(palette)}>Viewer</h3>
           <div
             className="rcWrapper rcv"

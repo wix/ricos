@@ -20,9 +20,8 @@ import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginMap } from 'wix-rich-content-plugin-map';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
-import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginVideo, videoButtonsTypes } from 'wix-rich-content-plugin-video';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import {
   pluginVerticalEmbed,
@@ -44,7 +43,7 @@ import { videoHandlers } from '../../../../../examples/main/shared/editor/Editor
 // eslint-disable-next-line max-len
 import { MockVerticalSearchModule } from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
 
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
 
 const onLinkAdd = async (customLinkData, saveData) => {
@@ -63,7 +62,7 @@ const defaultConfigs = {
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
     enableEmbed: true,
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   verticalEmbed: {
     verticalsApi: type => new MockVerticalSearchModule(type),
@@ -84,6 +83,7 @@ const defaultConfigs = {
     handleFileSelection: videoHandlers.handleFileSelection,
     enableCustomUploadOnMobile: true,
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+    exposeButtons: [videoButtonsTypes.video, videoButtonsTypes.soundCloud],
   },
   gallery: {
     scrollingElement: () => window,
@@ -114,7 +114,6 @@ const createPlugins = externalConfigs => {
     indent: pluginIndent(),
     hashtag: pluginHashtag(),
     mentions: pluginMentions(),
-    soundCloud: pluginSoundCloud(),
     giphy: pluginGiphy(configs.giphy),
     headers: pluginHeadersMarkdown(),
     map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
@@ -127,29 +126,8 @@ const createPlugins = externalConfigs => {
     undoRedo: pluginUndoRedo(),
     headings: pluginHeadings(configs.headings),
     spoiler: pluginSpoiler(),
-    accordion: pluginAccordion({
-      innerRCEPlugins: [
-        pluginTextColor(configs.textColor).createPlugin,
-        pluginTextHighlight(configs.textHighlight).createPlugin,
-        pluginIndent().createPlugin,
-        pluginLineSpacing().createPlugin,
-        pluginLink().createPlugin,
-        pluginCodeBlock().createPlugin,
-        pluginImage().createPlugin,
-        pluginUnsupportedBlocks().createPlugin,
-      ],
-    }),
-    table: pluginTable({
-      innerRCEPlugins: [
-        pluginTextColor(configs.textColor).createPlugin,
-        pluginTextHighlight(configs.textHighlight).createPlugin,
-        pluginIndent().createPlugin,
-        pluginLineSpacing().createPlugin,
-        pluginLink().createPlugin,
-        pluginCodeBlock().createPlugin,
-        pluginUnsupportedBlocks().createPlugin,
-      ],
-    }),
+    accordion: pluginAccordion(),
+    table: pluginTable(),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
     unsupportedBlocks: pluginUnsupportedBlocks(),
   };

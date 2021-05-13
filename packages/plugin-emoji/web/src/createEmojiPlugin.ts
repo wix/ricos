@@ -46,4 +46,6 @@ const createEmojiPlugin: CreatePluginFunction<EmojiPluginEditorConfig> = config 
   );
 };
 
+createEmojiPlugin.functionName = EMOJI_TYPE;
+
 export { createEmojiPlugin, EMOJI_TYPE };

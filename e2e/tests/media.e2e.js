@@ -5,10 +5,14 @@ import {
   PLUGIN_TOOLBAR_BUTTONS,
   GALLERY_SETTINGS,
   GALLERY_IMAGE_SETTINGS,
-  IMAGE_SETTINGS,
   GIPHY_PLUGIN,
+  IMAGE_SETTINGS,
+  VIDEO_SETTINGS,
+  SETTINGS_PANEL,
+  STATIC_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -48,7 +52,7 @@ describe('plugins', () => {
     };
 
     it('render viewer toolbar and tweet', function() {
-      cy.loadRicosEditorAndViewer('plain');
+      cy.loadRicosEditorAndViewer('nested-lists');
       cy.setViewerSelection(476, 98);
       cy.getTwitterButton().should('be.visible');
       cy.eyesCheckWindow(this.test.title);
@@ -70,14 +74,14 @@ describe('plugins', () => {
 
     it('render image toolbar and settings', function() {
       cy.loadRicosEditorAndViewer('images');
-      cy.openImageSettings();
-      cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+      cy.openSettings();
       cy.eyesCheckWindow({ tag: this.test.title + ' - settings', target: 'window', fully: false });
       cy.addImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - add image title');
       cy.editImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
-      cy.openImageSettings(false).deleteImageTitle();
+      cy.openSettings().deleteImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
@@ -99,6 +103,23 @@ describe('plugins', () => {
     it('render image with loader - loading in component data', () => {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.get(`[data-hook=loader]`).should('to.be.visible');
+    });
+
+    it('should disable image expand', () => {
+      cy.loadRicosEditorAndViewer('images');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+      cy.openSettings();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${IMAGE_SETTINGS.IMAGE_EXPAND_TOGGLE}]`).click();
+      cy.wait(200);
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.wait(200);
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
+        .eq(2)
+        .parent()
+        .click();
+      cy.eyesCheckWindow();
     });
   });
 
@@ -122,36 +143,75 @@ describe('plugins', () => {
       });
     });
 
+    context('image full screen in hebrew', () => {
+      beforeEach('load editor', () => {
+        cy.switchToHebrew();
+        cy.loadRicosEditorAndViewer('images');
+      });
+
+      afterEach(() => {
+        cy.switchToEnglish();
+      });
+
+      it('expand image on full screen in hebrew', function() {
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
+          .parent()
+          .click();
+        cy.loadOutOfViewImagesInGallery();
+        cy.waitForGalleryImagesToLoad();
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+      });
+    });
+
+    context('innerRCE images full screen', () => {
+      beforeEach('load editor', () =>
+        cy.loadRicosEditorAndViewer('inner-rce-images', usePlugins(plugins.all))
+      );
+
+      it('expand inner-rce images on full screen', function() {
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]`)
+          .eq(2)
+          .parent()
+          .click();
+        cy.loadOutOfViewImagesInGallery();
+        cy.waitForGalleryImagesToLoad();
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        })
+          .eq(1)
+          .should('be.visible');
+        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+      });
+    });
+
     context('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy.loadRicosEditorAndViewer('gallery').waitForGalleryImagesToLoad()
       );
 
       it('expand gallery image on full screen', () => {
-        cy.get(
-          '#pro-gallery-inner-container-v-0 > .pro-gallery-parent-container > #pro-gallery-container > #pro-gallery-margin-container > a[data-id="ea8ec1609e052b7f196935318316299d"] > #pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > .gallery-item-content',
-          {
-            timeout: 10000,
-          }
-        ).click({ force: true });
-        cy.get(
-          '#pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
-          {
-            timeout: 10000,
-          }
-        ).should('be.visible');
+        cy.get('[data-hook=ricos-viewer] [data-hook=item-wrapper]', {
+          timeout: 10000,
+        })
+          .eq(1)
+          .click({ force: true });
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
         // cy.eyesCheckWindow({
         //   tag: 'gallery fullscreen open on second image',
         //   target: 'window',
         //   fully: false,
         // });
         cy.get(`[data-hook=${'nav-arrow-back'}]`).click({ force: true });
-        cy.get(
-          '#pgi65a6266ba23a8a55da3f469157f15237_0 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
-          {
-            timeout: 10000,
-          }
-        ).should('be.visible');
+        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+          timeout: 10000,
+        }).should('be.visible');
         // cy.eyesCheckWindow({
         //   tag: 'gallery fullscreen previous image',
         //   target: 'window',
@@ -261,12 +321,32 @@ describe('plugins', () => {
         cy.waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - delete all items');
       });
+
       // TODO: title and link image tests
       // // eslint-disable-next-line mocha/no-skipped-tests
       // it.skip('allow to add a title', function() {
       //   cy.addGalleryImageTitle().checkTitle();
       //   cy.eyesCheckWindow(this.test.parent.title + ' - ' + this.test.title);
       // });
+    });
+
+    context('settings', () => {
+      it('should disable gallery expand', () => {
+        cy.loadRicosEditorAndViewer('gallery');
+        cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY);
+        cy.openSettings(['ADV_SETTINGS']);
+        cy.eyesCheckWindow();
+        cy.get(`[data-hook=${GALLERY_SETTINGS.GALLERY_EXPAND_TOGGLE}]`).click();
+        cy.wait(200);
+        cy.eyesCheckWindow();
+        cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+        cy.wait(200);
+        cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`)
+          .eq(1)
+          .parent()
+          .click();
+        cy.eyesCheckWindow();
+      });
     });
   });
 
@@ -308,6 +388,17 @@ describe('plugins', () => {
       cy.waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
+
+    it('should toggle download option', () => {
+      cy.loadRicosEditorAndViewer('video');
+      cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO);
+      cy.openSettings();
+      cy.wait(5000);
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${VIDEO_SETTINGS.DOWNLOAD_TOGGLE}]`).click();
+      cy.eyesCheckWindow();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+    });
   });
 
   context('soundcloud', () => {
@@ -323,12 +414,14 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('render upload modal', function() {
       cy.openSoundCloudModal();
       cy.eyesCheckWindow(this.test.title);
     });
 
     //TODO: fix this flaky tests
+    // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('add a soundcloud URL', function() {
       cy.openSoundCloudModal();
       cy.addSoundCloud().wait(500);
@@ -340,6 +433,30 @@ describe('plugins', () => {
         .type('{uparrow}')
         .type('Will this fix the flakiness?');
       cy.waitForVideoToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('youTube', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    const testAppConfig = {
+      ...usePlugins(plugins.video),
+      ...usePluginsConfig({
+        video: {
+          exposeButtons: ['video', 'soundCloud', 'youTube'],
+        },
+      }),
+    };
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
+    });
+
+    after(() => cy.eyesClose());
+    it(`open youTube modal`, function() {
+      cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS.YOUTUBE);
       cy.eyesCheckWindow(this.test.title);
     });
   });

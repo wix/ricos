@@ -28,6 +28,7 @@ const createInsertButtons: CreateInsertButtons = ({
         },
         mapSettings: settings.mapSettings,
       },
+      section: 'BlockToolbar_Section_Advanced',
     },
   ];
 };

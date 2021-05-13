@@ -20,13 +20,14 @@ $PANEL_MAX_WIDTH: 360px;
   display: inline-table;
   position: fixed;
   box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);
-  margin: 0px;
+  margin: 0 auto;
   bottom: 0px;
   left: 0px;
   right: 0px;
   top: unset;
   transform: unset;
   width: 100%;
+  max-width: 640px;
   z-index: 8;
   &:focus {
     box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 8px 0 rgba(0, 0, 0, 0.1);
@@ -42,4 +43,18 @@ $PANEL_MAX_WIDTH: 360px;
   right: 0;
   background-color: transparent;
   z-index: 8;
+}
+
+.textColorPopup_button {
+  margin-right: 10px;
+  position: relative;
+  .textColorPopup {
+    position: absolute;
+    top: 50px;
+    background: #fff;
+    border: 1px solid #ededed;
+    border-radius: 2px;
+    min-width: $PANEL_WIDTH;
+    max-width: $PANEL_MAX_WIDTH;
+  }
 }

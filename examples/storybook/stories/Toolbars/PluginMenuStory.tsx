@@ -3,7 +3,7 @@ import { Section, Page, RichContentEditorBox } from '../Components/StoryParts';
 import EditorWrapper from '../Components/EditorWrapper';
 import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
 import { Box, MultiSelectCheckbox, Checkbox } from 'wix-style-react';
-import { RicosContent, ToolbarSettings } from 'ricos-editor';
+import { DraftContent, ToolbarSettings } from 'ricos-editor';
 
 export default (isMobile = false) => {
   class PluginMenuStory extends Component<
@@ -96,7 +96,7 @@ export default (isMobile = false) => {
         : () => [];
       const editorWrapperProps: {
         isMobile: boolean;
-        content: RicosContent;
+        content: DraftContent;
         toolbarSettings: ToolbarSettings;
         pluginsToDisplay: string[];
         key?: number;

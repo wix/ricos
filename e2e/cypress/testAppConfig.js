@@ -1,9 +1,18 @@
+export const pluginsType = {
+  linkPreview: 'wix-draft-plugin-link-preview',
+  html: 'wix-draft-plugin-html',
+  video: 'wix-draft-plugin-video',
+};
+
 export const defaultConfig = {
   plugins: ['partialPreset'],
   toolbarConfig: {},
   pluginsConfig: {
-    'wix-draft-plugin-html': {
+    [pluginsType.html]: {
       exposeButtons: ['html'],
+    },
+    [pluginsType.video]: {
+      exposeButtons: ['video', 'soundCloud'],
     },
   },
 };
@@ -20,9 +29,27 @@ export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
   };
 };
 
-export const useTheming = ({ paletteType, skipCssOverride, useCustomStyles, fallbackColor }) => {
+export const useTheming = ({
+  paletteType,
+  skipCssOverride,
+  useCustomStyles,
+  fallbackColor,
+  disableContainer,
+  contentBgColor,
+  settingsActionColor,
+  focusActionColor,
+}) => {
   return {
-    theme: { paletteType, skipCssOverride, useCustomStyles, fallbackColor },
+    theme: {
+      paletteType,
+      skipCssOverride,
+      useCustomStyles,
+      fallbackColor,
+      disableContainer,
+      contentBgColor,
+      settingsActionColor,
+      focusActionColor,
+    },
   };
 };
 
@@ -61,8 +88,9 @@ export const plugins = {
   emoji: 'emoji',
   accordion: 'accordion',
   table: 'table',
+  video: 'video',
 };
 
-export const pluginsType = {
-  linkPreview: 'wix-draft-plugin-link-preview',
+export const useExperiments = experiment => {
+  return { experiments: experiment };
 };

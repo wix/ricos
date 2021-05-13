@@ -11,7 +11,6 @@ const VerticalAlignmentMiddle = props => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <title>Icons / Formatting / Vertical aligment middle</title>
     <g
       id="Icons-/-Formatting-/-Vertical-aligment-middle"
       stroke="none"

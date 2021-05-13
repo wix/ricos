@@ -62,7 +62,7 @@
   color: $primary-text-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
-  @include ricosTypography('p', true);
+  background-color: $background-color-container;
 
   &::after {
     content: '';
@@ -113,7 +113,7 @@
 
 .text {
   composes: elementSpacing;
-  color: $ricos-p-color;
+  @include ricosTypography('p', true);
 
   &:empty {
     height: 24px;
@@ -122,6 +122,19 @@
 
 .child {
   display: block;
+}
+
+/*! rtl:ignore */
+.orderedList, .unorderedList {
+  /*! rtl:ignore */
+  &::before, &::marker {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
+  > * {
+    /*! rtl:ignore */
+    @include ricosTypography('p', true);
+  }
 }
 
 .unorderedList.center{
@@ -203,6 +216,10 @@
   line-height: 26px;
   padding: 2px 25px;
   white-space: pre-wrap;
+
+  .renderedInTable & {
+    margin: 1em 0;
+  }
 }
 
 .normalText {

@@ -15,11 +15,12 @@ const createSpoilerPlugin: CreatePluginFunction<SpoilerPluginEditorConfig> = con
     settings,
     t,
     isMobile,
-    disableRightClick: config?.uiSettings?.disableRightClick,
     customStyleFn: styleFnFilter(),
     defaultPluginData: DEFAULTS,
     ...rest,
   });
 };
+
+createSpoilerPlugin.functionName = SPOILER_TYPE;
 
 export { createSpoilerPlugin };

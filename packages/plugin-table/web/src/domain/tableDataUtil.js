@@ -41,7 +41,7 @@ export const getColsRange = ({ start, end }) => getSectionRange(start, end, 'j')
 
 export const getRowsRange = ({ start, end }) => getSectionRange(start, end, 'i');
 
-const getSectionRange = (start, end, key) => {
+const getSectionRange = (start = {}, end = {}, key) => {
   const ranges = [];
   range(start[key], end[key]).map(index => ranges.push(index));
   return ranges;

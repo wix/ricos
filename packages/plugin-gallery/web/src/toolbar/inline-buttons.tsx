@@ -9,21 +9,22 @@ import {
   AnchorTarget,
   RelValue,
 } from 'wix-rich-content-common';
-import { GalleryPluginEditorConfig } from '../types';
-
-const modalStyles = getModalStyles({});
+import { GalleryPluginEditorConfig, GALLERY_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
   anchorTarget,
   relValue,
   settings,
+  isMobile,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
+  isMobile: boolean;
 }) => {
+  const modalStyles = getModalStyles({ isMobile });
   const icons = settings?.toolbar?.icons || {};
   const spoilerButton = settings.spoiler
     ? [
@@ -89,14 +90,17 @@ const createInlineButtons: CreateInlineButtons = ({
       type: BUTTONS.EXTERNAL_MODAL,
       icon: icons.advanced_settings || PluginSettingsIcon,
       modalName: Modals.GALLERY_SETTINGS,
-      activeTab: 'advanced_settings',
+      activeTab: 'settings',
       modalStyles,
       switchLayout,
       t,
-      mobile: false,
+      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,
+      accept: settings.accept,
+      triggerSettingsBi: true,
+      pluginId: GALLERY_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

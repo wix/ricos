@@ -8,7 +8,7 @@ import {
 import { RicosCssOverride, RichContentProps } from '../types';
 import {
   AvailableExperiments,
-  RicosContent,
+  DraftContent,
   EditorPlugin,
   ViewerPlugin,
 } from 'wix-rich-content-common';
@@ -19,13 +19,14 @@ const getPluginProps = (
     config = {},
     plugins = [],
     ModalsMap = {},
+    createPluginsDataMap = {},
     typeMappers = [],
     decorators = [],
     inlineStyleMappers = [],
     theme = {},
   }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
   any,
-  content?: RicosContent
+  content?: DraftContent
 ): EditorPluginsStrategy | ViewerPluginsStrategy =>
   isViewer
     ? {
@@ -36,14 +37,15 @@ const getPluginProps = (
           ? inlineStyleMappers.map(mapper => mapper(config, content))
           : [],
       }
-    : { config, plugins, ModalsMap };
+    : { config, plugins, ModalsMap, createPluginsDataMap };
 
 function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPlugin) {
-  const { type, config, createPlugin, ModalsMap } = curr;
+  const { type, config, createPlugin, ModalsMap, createPluginData } = curr;
   return {
     config: { ...prev.config, [type]: config },
     plugins: createPlugin ? prev.plugins.concat(createPlugin) : prev.plugins,
     ModalsMap: { ...prev.ModalsMap, ...ModalsMap },
+    createPluginsDataMap: { ...prev.createPluginsDataMap, [type]: createPluginData },
   };
 }
 
@@ -51,7 +53,7 @@ function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPlugin,
   cssOverride: RicosCssOverride,
-  content?: RicosContent
+  content?: DraftContent
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
   const finalConfig = { ...prev.config, [type]: config };
@@ -74,18 +76,15 @@ export default function pluginsStrategy({
   childProps,
   cssOverride,
   content,
-  experiments,
+  experiments, // eslint-disable-line
 }: {
   isViewer: boolean;
   plugins: BasePlugin[];
   childProps: RichContentProps;
   cssOverride: RicosCssOverride;
-  content?: RicosContent;
+  content?: DraftContent;
   experiments?: AvailableExperiments;
 }): PluginsStrategy {
-  if (experiments) {
-    console.debug('PluginsStrategy experiments', experiments); // eslint-disable-line no-console
-  }
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
 
   if (isViewer) {
@@ -100,7 +99,12 @@ export default function pluginsStrategy({
       emptyStrategy
     );
   } else {
-    const emptyStrategy: EditorPluginsStrategy = { config: {}, plugins: [], ModalsMap: {} };
+    const emptyStrategy: EditorPluginsStrategy = {
+      config: {},
+      plugins: [],
+      ModalsMap: {},
+      createPluginsDataMap: {},
+    };
     strategy = plugins.reduce((prev, curr) => editorStrategy(prev, curr), emptyStrategy);
   }
 

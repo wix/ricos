@@ -12,9 +12,11 @@ class ModalButton extends Component {
       isModalOpen: false,
     };
   }
+
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
+
   closeModal = () => {
     this.setState({ isModalOpen: false });
   };

@@ -1,10 +1,10 @@
-import { RicosContentBlock, RicosContent, RicosEntityRange } from '../types';
+import { RicosContentBlock, DraftContent, RicosEntityRange } from '../types';
 
-export const hasLinksInBlock = (block: RicosContentBlock, contentState: RicosContent) => {
+export const hasLinksInBlock = (block: RicosContentBlock, contentState: DraftContent) => {
   return getLinkRangesInBlock(block, contentState).length > 0;
 };
 
-export const getLinkRangesInBlock = (block: RicosContentBlock, contentState: RicosContent) => {
+export const getLinkRangesInBlock = (block: RicosContentBlock, contentState: DraftContent) => {
   const ranges: [number, number][] = [];
   block.entityRanges.forEach((entityRange: RicosEntityRange) => {
     const entityType = contentState.entityMap[entityRange.key]?.type;

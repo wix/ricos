@@ -1,6 +1,6 @@
 import { EditorState } from 'draft-js';
 import React, { PureComponent } from 'react';
-import { RicosContent } from 'ricos-editor';
+import { DraftContent } from 'ricos-editor';
 import { SEOSettings } from 'wix-rich-content-common';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
 import Preview from '../../../../examples/main/shared/preview/Preview';
@@ -9,7 +9,7 @@ import windowContentStateHoc from './WindowContentStateHoc';
 interface Props {
   isMobile: boolean;
   locale?: string;
-  contentState?: RicosContent;
+  contentState?: DraftContent;
   editorState?: EditorState;
   localeResource?: Record<string, string>;
   onEditorChange?: RichContentEditorProps['onChange'];

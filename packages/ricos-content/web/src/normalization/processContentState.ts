@@ -9,7 +9,7 @@ import { linkify } from './linkify';
 import inlinePluginsRemover from './inlinePluginsRemover';
 import {
   NormalizeConfig,
-  RicosContent,
+  DraftContent,
   RicosContentBlock,
   RicosInlineStyleRange,
   NormalizationProcessor,
@@ -18,7 +18,7 @@ import {
 // NOTE: the processor order is important
 const contentStateProcessingStrategies: (
   config: NormalizeConfig
-) => { version?: string; processors: NormalizationProcessor<RicosContent>[] }[] = config => {
+) => { version?: string; processors: NormalizationProcessor<DraftContent>[] }[] = config => {
   const { disableInlineImages, removeInvalidInlinePlugins } = config;
 
   const strategies = [{ version: '<3.4.7', processors: [linkify] }];
@@ -71,12 +71,12 @@ const isVersionCompatible = (strategy: { version?: string }, contentStateVersion
 const applyStrategies: (
   strategies: {
     version?: string;
-    processors: NormalizationProcessor<RicosContent | RicosContentBlock>[];
+    processors: NormalizationProcessor<DraftContent | RicosContentBlock>[];
   }[],
-  processed: RicosContentBlock | RicosContent,
+  processed: RicosContentBlock | DraftContent,
   version: string,
   ...args: any // eslint-disable-line @typescript-eslint/no-explicit-any
-) => ReturnType<NormalizationProcessor<RicosContent | RicosContentBlock>> = (
+) => ReturnType<NormalizationProcessor<DraftContent | RicosContentBlock>> = (
   strategies,
   processed,
   version,
@@ -98,7 +98,7 @@ const applyStrategies: (
   return processedUnit;
 };
 
-export const processContentState = (contentState: RicosContent, config: NormalizeConfig) => {
+export const processContentState = (contentState: DraftContent, config: NormalizeConfig) => {
   const { VERSION: contentStateVersion = '0.0.0' } = contentState;
 
   //process the whole state
@@ -109,7 +109,7 @@ export const processContentState = (contentState: RicosContent, config: Normaliz
     config
   );
 
-  const { blocks, entityMap } = processedState as RicosContent;
+  const { blocks, entityMap } = processedState as DraftContent;
 
   return {
     blocks: blocks.map((block: RicosContentBlock) => {

@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useRef } from 'react';
-import { RicosContent, RicosEditor } from 'ricos-editor';
+import { DraftContent, RicosEditor } from 'ricos-editor';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 
 const DividerEditor: FunctionComponent<{
-  content?: RicosContent;
-  injectedContent?: RicosContent;
+  content?: DraftContent;
+  injectedContent?: DraftContent;
   maxTextLength?: number;
 }> = ({ content, injectedContent, maxTextLength }) => {
   const editorRef = useRef();

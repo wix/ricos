@@ -11,7 +11,7 @@ import {
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
-import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -271,30 +271,30 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
-    it('change link preview settings', function() {
+    afterEach('take snapshot', function() {
+      cy.waitForHtmlToLoad();
+      cy.triggerLinkPreviewViewerUpdate();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('change link preview settings', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.setLinkSettings();
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('convert link preview to regular link', function() {
+    //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
+    it('convert link preview to regular link', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
       cy.clickToolbarButton('baseToolbarButton_replaceToLink');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('backspace key should convert link preview to regular link', function() {
+    it('backspace key should convert link preview to regular link', () => {
       cy.focusEditor()
         .type('{downarrow}{downarrow}')
         .type('{backspace}');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
-    it('delete link preview', function() {
+    it('delete link preview', () => {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW).wait(100);
       cy.clickToolbarButton('blockButton_delete');
-      cy.triggerLinkPreviewViewerUpdate();
-      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -357,14 +357,16 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
-
+    const testAppConfig = {
+      plugins: [plugins.linkPreview],
+    };
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.linkPreview));
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
     });
 
     after(() => cy.eyesClose());
-    const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
+    const embedTypes = ['TWITTER', 'INSTAGRAM'];
     embedTypes.forEach(embedType => {
       it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
@@ -455,6 +457,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     //TODO: fix this flaky test
+    // eslint-disable-next-line mocha/no-skipped-tests
     it.skip('create link button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
@@ -713,7 +716,9 @@ describe('plugins', () => {
     };
 
     it('should change accordion settings', function() {
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
+      cy.loadRicosEditorAndViewer('accordion-rich-text', {
+        plugins: [plugins.accordion, plugins.embedsPreset, plugins.textPlugins],
+      });
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);

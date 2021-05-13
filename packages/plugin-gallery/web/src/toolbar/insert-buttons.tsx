@@ -7,11 +7,18 @@ import { GalleryPluginEditorConfig } from '../types';
 const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
+  disableDownload,
+  disableExpand,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
+  disableDownload?: boolean;
+  disableExpand?: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
+  const pluginData = disableDownload !== undefined ? { ...DEFAULTS, disableDownload } : DEFAULTS;
+  const componentData = disableExpand !== undefined ? { ...pluginData, disableExpand } : pluginData;
+
   return [
     {
       type: BUTTON_TYPES.FILE,
@@ -19,7 +26,7 @@ const createInsertButtons: CreateInsertButtons = ({
       name: INSERT_PLUGIN_BUTTONS.GALLERY,
       tooltip: t('GalleryPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
-      componentData: DEFAULTS,
+      componentData,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];

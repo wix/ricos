@@ -1,6 +1,7 @@
 import deepFreeze from 'deep-freeze';
 import normalizeInitialState from './normalizeInitialState';
 import { Version } from '../version';
+import { cloneDeep } from 'lodash';
 import {
   inlineLegacyImageContentState,
   inlineImageContentState,
@@ -9,8 +10,11 @@ import {
   processedInlineGalleryContentState,
   AnchorInTextContentState,
   AnchorInImageContentState,
+  imageGalleryContentState,
+  videoInitialContentState,
 } from './Fixtures';
-import { RicosInlineStyleRange, RicosEntityRange, RicosContent, RicosContentBlock } from '../types';
+
+import { RicosInlineStyleRange, RicosEntityRange, DraftContent, RicosContentBlock } from '../types';
 
 const createState = ({
   text = 'bla bla bla  bla   ',
@@ -25,10 +29,10 @@ const createState = ({
   type?: RicosContentBlock['type'];
   inlineStyleRanges?: RicosInlineStyleRange[];
   entityRanges?: RicosEntityRange[];
-  entityMap?: RicosContent['entityMap'];
+  entityMap?: DraftContent['entityMap'];
   data?: RicosContentBlock['data'];
-  VERSION?: RicosContent['VERSION'];
-}): RicosContent =>
+  VERSION?: DraftContent['VERSION'];
+}): DraftContent =>
   deepFreeze({
     blocks: [{ text, type, inlineStyleRanges, depth: 0, key: '1', entityRanges, data }],
     entityMap: entityMap || {},
@@ -660,7 +664,7 @@ describe('normalizeInitialState', () => {
       config: {},
     });
 
-    const initialState = (VERSION: string, titleString: string): RicosContent => ({
+    const initialState = (VERSION: string, titleString: string): DraftContent => ({
       blocks: [
         {
           key: 'bmpfl',
@@ -745,6 +749,95 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(AnchorInImageContentState, {});
       expect(actual.entityMap['0'].data.config.link).toEqual({ anchor: 'cjvg0' });
       expect(actual.entityMap['1'].data.config.link).toEqual({ anchor: 'cjvg0' });
+    });
+  });
+
+  describe('disableExpand normalizer', () => {
+    let imageGalleryInitialState: DraftContent;
+
+    beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
+    it('should add disableExpand prop to image and gallery componentData', () => {
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableImagesExpand: true,
+        disableGalleryExpand: true,
+      });
+      expect(actual.entityMap['0'].data.disableExpand).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableExpand).toBeTruthy();
+    });
+
+    it('disableExpand should remain false in image and gallery componentData', () => {
+      imageGalleryInitialState.entityMap['0'].data.disableExpand = false;
+      imageGalleryInitialState.entityMap['1'].data.disableExpand = false;
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableImagesExpand: true,
+        disableGalleryExpand: true,
+      });
+      expect(actual.entityMap['0'].data.disableExpand).toBeFalsy();
+      expect(actual.entityMap['1'].data.disableExpand).toBeFalsy();
+    });
+  });
+
+  describe('Images/Gallery disableDownload normalizer', () => {
+    let imageGalleryInitialState: DraftContent;
+
+    beforeEach(() => (imageGalleryInitialState = cloneDeep(imageGalleryContentState)));
+
+    it('should add disableDownload prop to image and gallery componentData', () => {
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeTruthy();
+    });
+
+    it('disableDownload should remain false in image and gallery componentData', () => {
+      imageGalleryInitialState.entityMap['0'].data.disableDownload = false;
+      imageGalleryInitialState.entityMap['1'].data.disableDownload = false;
+
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeFalsy();
+    });
+
+    it('disableDownload should be true in image and false in gallery componentData', () => {
+      imageGalleryInitialState.entityMap['1'].data.disableDownload = false;
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeFalsy();
+    });
+
+    it('disableDownload should be true in gallery and false in image componentData', () => {
+      imageGalleryInitialState.entityMap['0'].data.disableDownload = false;
+      const actual = normalizeInitialState(imageGalleryInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
+      expect(actual.entityMap['1'].data.disableDownload).toBeTruthy();
+    });
+  });
+
+  describe('Video disableDownload normalizer', () => {
+    let videoInitialState: DraftContent;
+
+    beforeEach(() => (videoInitialState = cloneDeep(videoInitialContentState)));
+
+    it('should add disableDownload prop to video componentData', () => {
+      const actual = normalizeInitialState(videoInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeTruthy();
+    });
+
+    it('disableDownload should remain false in the video componentData', () => {
+      videoInitialState.entityMap['0'].data.disableDownload = false;
+      const actual = normalizeInitialState(videoInitialState, {
+        disableDownload: true,
+      });
+      expect(actual.entityMap['0'].data.disableDownload).toBeFalsy();
     });
   });
 });

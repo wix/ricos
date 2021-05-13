@@ -5,11 +5,11 @@ import contentState from '../../../../../e2e/tests/fixtures/empty.json';
 import MediaEditor from './MediaEditor';
 import MediaViewer from './MediaViewer';
 import { getMediaUploadErrorFunctions } from './upload-functions';
-import { RicosContent, RicosEditorType } from 'ricos-editor';
+import { DraftContent, RicosEditorType } from 'ricos-editor';
 
 export default class ErrorBlocksRemovalApp extends Component<
   {},
-  { isEditing: boolean; content: RicosContent }
+  { isEditing: boolean; content: DraftContent }
 > {
   editor: RicosEditorType;
 

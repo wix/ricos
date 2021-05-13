@@ -21,6 +21,7 @@ export default class ToolbarContent extends PureComponent {
     super(props);
     this.state = { showLeftArrow: false, showRightArrow: false };
   }
+
   scrollToolbar(event, leftDirection) {
     event.preventDefault();
     const { clientWidth, scrollWidth } = this.scrollContainer;

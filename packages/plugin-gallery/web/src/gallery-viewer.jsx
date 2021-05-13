@@ -5,7 +5,7 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
-import { DEFAULTS, isHorizontalLayout, sampleItems } from './defaults';
+import { DEFAULTS, isHorizontalLayout, sampleItems, GALLERY_LAYOUTS } from './defaults';
 import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
@@ -16,8 +16,6 @@ import { GALLERY_TYPE } from './types';
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
 const GALLERY_EVENTS = GALLERY_CONSTS.events;
-
-const getGalleryHeight = width => (width ? Math.floor((width * 3) / 4) : 300);
 
 class GalleryViewer extends React.Component {
   constructor(props) {
@@ -93,12 +91,36 @@ class GalleryViewer extends React.Component {
     }
   };
 
+  shouldConsiderThumbnailSize = () => {
+    const {
+      componentData: {
+        styles: { galleryLayout, galleryThumbnailsAlignment },
+      },
+    } = this.props;
+    return (
+      this.props.isMobile &&
+      galleryLayout === GALLERY_LAYOUTS.THUMBNAIL &&
+      ['top', 'bottom'].includes(galleryThumbnailsAlignment)
+    );
+  };
+
+  getGalleryHeight = width => {
+    let height = 305;
+    if (width) {
+      height = this.shouldConsiderThumbnailSize()
+        ? Math.floor((width * 2) / 3) + 95
+        : Math.floor((width * 3) / 4);
+    }
+    return height;
+  };
+
   getDimensions = () => {
     const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
-    const height = isHorizontalLayout(this.props.componentData.styles)
-      ? getGalleryHeight(width)
-      : undefined;
-    return { width, height };
+    if (isHorizontalLayout(this.props.componentData.styles)) {
+      const height = this.getGalleryHeight(width);
+      return { width, height };
+    }
+    return { width };
   };
 
   updateDimensions = debounce(() => {
@@ -130,6 +152,7 @@ class GalleryViewer extends React.Component {
     const {
       componentData: { styles: styleParams },
     } = this.props;
+
     switch (name) {
       case GALLERY_EVENTS.GALLERY_CHANGE:
         if (this.containerRef.current) {
@@ -141,7 +164,7 @@ class GalleryViewer extends React.Component {
         }
         break;
       case GALLERY_EVENTS.ITEM_ACTION_TRIGGERED:
-        !data.linkData.url && this.handleExpand(data);
+        !data.linkData.url && this.hasExpand() && this.handleExpand(data);
         break;
       default:
         break;
@@ -153,12 +176,12 @@ class GalleryViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.('expand_gallery', GALLERY_TYPE);
-    onExpand?.(this.props.entityIndex, data.idx);
+    helpers.onViewerAction?.(GALLERY_TYPE, 'Click', 'expand_gallery');
+    this.hasExpand() && onExpand?.(this.props.blockKey, data.idx);
   };
 
   renderExpandIcon = itemProps => {
-    return itemProps.type !== 'video' ? (
+    return (
       <div className={this.styles.expandContainer}>
         <ExpandIcon
           className={this.styles.expandIcon}
@@ -168,7 +191,18 @@ class GalleryViewer extends React.Component {
           }}
         />
       </div>
-    ) : null;
+    );
+  };
+
+  hasExpand = () => {
+    const { componentData, settings } = this.props;
+    let disableExpand = false;
+    if (componentData.disableExpand !== undefined) {
+      disableExpand = componentData.disableExpand;
+    } else if (settings.disableExpand !== undefined) {
+      disableExpand = settings.disableExpand;
+    }
+    return !disableExpand && settings.onExpand;
   };
 
   renderTitle = title => {
@@ -180,38 +214,50 @@ class GalleryViewer extends React.Component {
   };
 
   hoverElement = itemProps => {
-    const {
-      settings: { onExpand, disableExpand },
-    } = this.props;
-    const isExpandEnabled = !disableExpand && onExpand;
-    const isClickable = isExpandEnabled || itemProps.link;
+    const isClickable = this.hasExpand() || itemProps.link;
     const itemOverlayStyles = classnames(
       this.styles.itemOverlay,
       isClickable && this.styles.clickableItem
     );
     return (
       <div className={itemOverlayStyles}>
-        {isExpandEnabled && this.renderExpandIcon(itemProps)}
+        {this.hasExpand() && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title, 'HOVER')}
         {this.props.itemOverlayElement?.(itemProps)}
       </div>
     );
   };
 
-  handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+  handleContextMenu = e => {
+    const {
+      componentData: { disableDownload = false },
+    } = this.props;
+    return disableDownload && e.preventDefault();
+  };
+
+  getStyleParams = () => {
+    const {
+      componentData: { styles: styleParams },
+      isMobile,
+    } = this.props;
+    if (isMobile && isHorizontalLayout(styleParams)) {
+      styleParams.arrowsSize = 20;
+      styleParams.imageMargin = 0;
+      if (styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL) {
+        styleParams.thumbnailSize = 90;
+      }
+    }
+    return styleParams;
+  };
 
   render() {
-    const {
-      theme,
-      settings,
-      seoMode,
-      componentData: { styles: styleParams },
-    } = this.props;
+    const { theme, settings, seoMode } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { scrollingElement, ...galleySettings } = settings;
+    const { scrollingElement, ...gallerySettings } = settings;
     const { size } = this.state;
 
     const items = this.getItems();
+    const styleParams = this.getStyleParams();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
     const alwaysShowHover = {
       hoveringBehaviour: 'NO_CHANGE',
@@ -228,6 +274,7 @@ class GalleryViewer extends React.Component {
       >
         {size?.width ? (
           <ProGallery
+            options={{ allowContextMenu: true }}
             domId={this.domId}
             allowSSR={!!seoMode}
             items={items}
@@ -237,7 +284,7 @@ class GalleryViewer extends React.Component {
               ...alwaysShowHover,
             }}
             container={size}
-            settings={galleySettings}
+            settings={gallerySettings}
             scrollingElement={scrollingElement}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}

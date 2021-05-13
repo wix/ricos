@@ -195,7 +195,12 @@ export const getBottomToolbarModalStyles = (
     inline,
     isMobile,
   });
-  const height = parseInt(customStyles.content?.height?.toString().slice(0, 3) || '0', 10);
+  const height = parseInt(
+    customStyles.content?.minHeight?.toString().slice(0, 3) ||
+      customStyles.content?.height?.toString().slice(0, 3) ||
+      '0',
+    10
+  );
   const modalWidth = parseInt(customStyles.content?.width?.toString().slice(0, 3) || '0', 10);
   const windowWidth = window && window.innerWidth;
   const { top, left, right, width } = buttonRef.getBoundingClientRect();

@@ -33,4 +33,6 @@ const createHashtagPlugin: CreatePluginFunction<HashtagPluginEditorConfig> = con
   );
 };
 
+createHashtagPlugin.functionName = HASHTAG_TYPE;
+
 export { createHashtagPlugin };

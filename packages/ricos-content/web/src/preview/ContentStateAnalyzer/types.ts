@@ -1,4 +1,4 @@
-import { RicosContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
+import { DraftContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
 
 export type BlockFilter = (block: RicosContentBlock) => boolean;
 export type BlockTypeFilter = (type: RicosContentBlock['type']) => boolean;
@@ -9,7 +9,7 @@ export interface TextBlockWithEntities {
 }
 
 export interface SequentialBlockArrays {
-  list: RicosContent['blocks'][];
+  list: DraftContent['blocks'][];
   lastItemIndex: number;
 }
 

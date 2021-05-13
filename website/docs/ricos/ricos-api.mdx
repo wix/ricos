@@ -27,10 +27,10 @@ Read more about backward compatibility in [Migrating from rich-content](./migrat
 ### `content`
 
 ```jsx
-content?: RicosContent
+content?: DraftContent
 ```
 
-A `RicosContent` is an immutable object that saves the entire content created by a `RicosEditor`. For `RicosViewer` this is a requirement, it will set the content to display. For the `RicosEditor` this will set its initial state.
+A `DraftContent` is an immutable object that saves the entire content created by a `RicosEditor`. For `RicosViewer` this is a requirement, it will set the content to display. For the `RicosEditor` this will set its initial state.
 
 ### `cssOverride`
 
@@ -93,9 +93,10 @@ foregroundColor: 'black'; <br />
 The string values should be css color strings (e.g `'black'`, `'#2F2E2E'`, etc) <br />
 
 ```jsx
+
 mediaSettings?: {
   pauseMedia?: boolean;
-  disableRightClick?: boolean;
+  disableDownload?: boolean;
   fullscreenProps?: {
   backgroundColor?: string;
   foregroundColor?: string;
@@ -108,9 +109,16 @@ mediaSettings?: {
 When `true`, media like videos will be paused.
 A possible use case is for pausing videos on tab switch.
 
-#### `disableRightClick`
+#### `disableRightClick` (deprecated)
 
 Disables the mouse right click functionality for the gallery, video and image plugins.
+
+#### `disableDownload`
+
+Sets the initial value of disableDownload for image, gallery and video plugins.
+Images - disables right click.
+Gallery - disables right click.
+Video - removes the download option from context menu.
 
 ### `onError`
 
@@ -169,7 +177,7 @@ draft-js props, as described in [https://draftjs.org/docs/api-reference-editor](
 ### `injectedContent`
 
 ```
-injectedContent?: RicosContent
+injectedContent?: DraftContent
 ```
 
 Similar to [content](#content) prop; allows content to be injected to mounted RicosEditor without need for remount.
@@ -258,7 +266,7 @@ A function that will be called with `true` when the editor is busy, e.g. when a 
 ### `onChange`
 
 ```jsx
-onChange?: (content: RicosContent) => void
+onChange?: (content: DraftContent) => void
 ```
 
 A callback that runs whenever the editor's content is edited.
@@ -287,12 +295,14 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                                                    | Description                       |
-| ------------------------------------------------------------------------------------------- | --------------------------------- |
-| `focus(): void`                                                                             | Focuses the editor                |
-| `blur(): void`                                                                              | Blurs the editor                  |
-| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise    |
-| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`        | button props for external toolbar |
+| Function                                                                                        | Description                       |
+| ----------------------------------------------------------------------------------------------- | --------------------------------- |
+| `focus(): void`                                                                                 | Focuses the editor                |
+| `blur(): void`                                                                                  | Blurs the editor                  |
+| `getContent(): DraftContent`                                                                    | Retrieves current content         |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<DraftContent>`     | Retrieves current content promise |
+| `getContentTraits(): { isEmpty: boolean; isContentChanged: boolean; isLastChangeEdit: boolean}` | Retrieves current content traits  |
+| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`            | button props for external toolbar |
 
 #### Usage example:
 
@@ -309,7 +319,7 @@ class MyComponent extends React.Component {
 
 #### `ref.getContentPromise`
 
-Returns (promise) of the Content Data (RicosContent type).
+Returns (promise) of the Content Data (DraftContent type).
 publishId - used for BI (`onPublish` event), set it when called before publishing a an editor's content in your app.
 flush - trigger blur of the editor to force changes (such as composition mode in android) before getting the content
 
@@ -417,3 +427,7 @@ An object allows extended configuration.
 
 className - Content blocked by a payall will be marked up using this string (This class will be used by Googlebot to discern between paid and free content on a page level)
 index - number of free content blocks
+
+#### `addAnchors`
+
+TODO

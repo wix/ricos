@@ -1,8 +1,9 @@
 import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
+import ActionButtons from './ActionButtons';
+import classNames from 'classnames';
 
 const CustomColorPicker = lazy(() => import('./CustomColorPicker'));
 
@@ -32,11 +33,26 @@ class CustomColorPickerDialog extends Component {
     this.props.onUpdate(this.state.color);
   }
 
+  renderActionButtons = () => {
+    const { t, isMobile } = this.props;
+    return (
+      <ActionButtons
+        t={t}
+        isMobile={isMobile}
+        onCancel={this.onCancel}
+        onUpdate={this.onUpdate}
+        cancelBtnText={t('ColorPickerButtonLabel_Cancel')}
+        updateBtnText={t('ColorPickerButtonLabel_Update')}
+      />
+    );
+  };
+
   render() {
     const { styles } = this;
     const { t, isMobile, theme } = this.props;
     return (
-      <div className={styles.colorPickerDialog}>
+      <div className={classNames(styles.colorPickerDialog, { [styles.mobile]: isMobile })}>
+        {isMobile && this.renderActionButtons()}
         <Suspense fallback={<div>Loading...</div>}>
           <CustomColorPicker
             color={this.state.color}
@@ -46,22 +62,12 @@ class CustomColorPickerDialog extends Component {
             theme={theme}
           />
         </Suspense>
-        <hr className={styles.colorPickerDialog_separator} />
-        <div className={styles.colorPickerDialog_buttons}>
-          <button className={styles.colorPickerDialog_button} onClick={this.onCancel}>
-            {t('ColorPickerButtonLabel_Cancel')}
-          </button>
-          <button
-            className={classNames(
-              styles.colorPickerDialog_button,
-              styles.colorPickerDialog_button_update
-            )}
-            data-hook="colorPickerUpdateButton"
-            onClick={this.onUpdate}
-          >
-            {t('ColorPickerButtonLabel_Update')}
-          </button>
-        </div>
+        {!isMobile && (
+          <>
+            <hr className={styles.colorPickerDialog_separator} />
+            {this.renderActionButtons()}
+          </>
+        )}
       </div>
     );
   }

@@ -67,9 +67,18 @@ export const STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED = {
   // ...STATIC_TOOLBAR_BUTTONS_MEDIA,
 };
 
+export const STATIC_TOOLBAR_BUTTONS_EXPENDED = {
+  IMAGE: 'ImagePlugin_InsertButton',
+  GALLERY: 'GalleryPlugin_InsertButton',
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
+  ACCORDION: 'Accordion_InsertButton',
+  TABLE: 'TablePlugin_InsertButton',
+};
+
 export const STATIC_TOOLBAR_BUTTONS = {
   ...STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   ...STATIC_TOOLBAR_BUTTONS_EMBED,
+  ...STATIC_TOOLBAR_BUTTONS_EXPENDED,
 };
 
 export const SETTINGS_PANEL = {
@@ -103,6 +112,12 @@ export const IMAGE_SETTINGS = {
   CAPTION: 'imageSettingsCaptionInput',
   LINK: 'linkPanelInput',
   PREVIEW: 'imagePreview',
+  IMAGE_EXPAND_TOGGLE: 'imageExpandToggle',
+  IMAGE_DOWNLOAD_TOGGLE: 'imageDownloadToggle',
+};
+
+export const VIDEO_SETTINGS = {
+  DOWNLOAD_TOGGLE: 'videoDownloadToggle',
 };
 
 export const GALLERY_SETTINGS = {
@@ -114,6 +129,7 @@ export const GALLERY_SETTINGS = {
   DESELECT: 'galleryItemsSortableDeselectAll',
   DELETE: 'galleryItemsSortableDelete',
   UPLOAD: 'galleryItemsSortableFileInputTop',
+  GALLERY_EXPAND_TOGGLE: 'galleryExpandToggle',
 };
 
 export const GALLERY_IMAGE_SETTINGS = {

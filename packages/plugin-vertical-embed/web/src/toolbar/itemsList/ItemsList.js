@@ -10,6 +10,7 @@ class ItemsList extends PureComponent {
     super(props);
     this.state = { selectedItem: {} };
   }
+
   static propTypes = {
     products: PropTypes.array.isRequired,
     onClick: PropTypes.func.isRequired,

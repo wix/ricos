@@ -1,0 +1,138 @@
+---
+id: converters
+title: Content Converters
+sidebar_label: Content Converters
+---
+
+## Draft.js
+
+Ricos is in the preparation phase of migrating from a [draft-js](https://draftjs.org) based content to our new [Ricos](https://github.com/wix/ricos/tree/master/packages/ricos-schema/web) schema. To support this we provide conversion functions to & from draft.
+
+```tsx
+fromDraft: (content: DraftContent) => RichContent;
+toDraft: (content: RichContent) => DraftContent;
+ensureRicosContent: (content: RichContent | DraftContent) => RichContent;
+ensureDraftContent: (content: RichContent | DraftContent) => DraftContent;
+```
+
+#### Example
+
+```tsx
+import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+import ricosContent from './ricosCotnent.json';
+
+const draftContent: DraftContent = toDraft(ricosContent);
+
+const onChange = (content: DraftContent) => publishContent(fromDraft(content));
+
+<RicosEditor content={draftContent} onChange={onChange} />;
+```
+
+## Plain Text
+
+Ricos is a rich text & rich content editor. The following functions allow converting between plain text and rich content.
+
+### Plain text to rich content
+
+```tsx
+fromPlainText: (text: string) => RichContent;
+```
+
+#### Example
+
+```tsx
+import { toDraft } from 'ricos-content/libs/migrateSchema';
+import { fromPlainText } from 'ricos-content/libs/fromPlainText';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+
+const TEXT = 'Hello there!';
+
+const content: RichContent = fromPlainText(TEXT);
+const draftContent: DraftContent = toDraft(content);
+
+<RicosEditor content={draftContent} />;
+```
+
+### Rich content to plain text
+
+```tsx
+toPlainText: (content: RichContent, options?: {
+  urlShortener?: (url: string) => Promise<string>;
+  getVideoUrl?: (fileId: string) => Promise<string>;
+}) => Promise<string>;
+```
+
+#### urlShortener
+
+This function will be called on image source URLs and can be used with URL shortener services.
+
+#### getVideoUrl
+
+Used to resolve a `VideoSource` object into an absolute URL.<br/>
+Defaults to `src => https://video.wixstatic.com/${src.pathname}`
+
+#### Example
+
+```tsx
+import { toPlainText } from 'ricos-content/libs/toPlainText';
+import ricosContent from './ricosCotnent.json';
+
+const text: string = toPlainText(ricosContent);
+
+console.log(text);
+```
+
+## HTML
+
+The following functions allow converting rich content to and from HTML.
+
+Supporting:
+
+- Headings
+- Bold
+- Italic
+- Links
+- Lists
+- Line break
+- Emojis
+
+### HTML to rich content
+
+```tsx
+fromHtml: (html: string) => RichContent;
+```
+
+#### Example
+
+```tsx
+import { fromHtml } from 'ricos-content/libs/htmlConverters';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+
+const HTML = '<p><strong>Bold</strong> <em>italic</em> <u>underline</u></p>';
+
+const content: RichContent = fromHtml(HTML);
+const draftContent: DraftContent = toDraft(content);
+
+<RicosEditor content={draftContent} />;
+```
+
+### Rich content to plain text
+
+```tsx
+toHtml: (content: RichContent) => string;
+```
+
+#### Example
+
+```tsx
+import { toHtml } from 'ricos-content/libs/htmlConverters';
+import ricosContent from './ricosCotnent.json';
+
+const html: string = toHtml(ricosContent);
+
+document.body.innerHTML = html;
+```

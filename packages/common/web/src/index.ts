@@ -15,7 +15,7 @@ export {
 } from './Utils/classNameStrategies';
 export { mergeStyles } from './Utils/mergeStyles';
 
-export { anchorScroll, addAnchorTagToUrl } from './Utils/anchor';
+export { anchorScroll, addAnchorTagToUrl, isNewTab } from './Utils/anchor';
 
 export * from 'ricos-content';
 
@@ -34,3 +34,4 @@ export { simplePubsub, Pubsub, Store } from './Utils/simplePubsub';
 export { generateKey } from './Utils/generateKey';
 export { getRelValue } from './Utils/getRelValue';
 export { getBlocksFromContentState } from './Utils/innerRCEBlocksUtils';
+export * from './consts';

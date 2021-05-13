@@ -1,7 +1,8 @@
 import { convertFromRaw, EditorState } from 'wix-rich-content-editor-common';
+import { TABLE_TYPE } from '../../types';
 
 export const getMockComponentData = () => ({
-  type: 'table',
+  type: TABLE_TYPE,
   config: {
     alignment: 'center',
     colsWidth: [10, 10],

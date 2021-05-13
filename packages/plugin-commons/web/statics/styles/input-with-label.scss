@@ -39,9 +39,10 @@
 }
 
 .infoIcon {
-  vertical-align: text-bottom;
-  height: 17px;
+  margin-left: 4px;
+  position: relative;
+  bottom: 5px;
   &:hover {
-    color: $action-color-fallback;
+    color: $settings-action-color;
   }
 }

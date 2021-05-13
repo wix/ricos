@@ -10,7 +10,7 @@ import {
   SelectionState,
   EditorState,
   Modifier,
-  RichUtils,
+  ContentBlock,
 } from 'wix-rich-content-editor-common';
 import { CreatePluginConfig } from 'wix-rich-content-common';
 
@@ -29,7 +29,7 @@ const addLinkPreview = async (
   const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
   const { setEditorState } = config;
   const linkPreviewData = await fetchData(fixedUrl);
-  const { thumbnail_url, title, description, html, provider_url } = linkPreviewData;
+  const { thumbnail_url, title, description, html } = linkPreviewData;
   if (
     shouldAddEmbed(html, enableEmbed, fixedUrl) ||
     shouldAddLinkPreview(title, thumbnail_url, enableLinkPreview)
@@ -46,10 +46,9 @@ const addLinkPreview = async (
       title,
       description,
       html,
-      provider_url,
     };
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
-    setEditorState(RichUtils.insertSoftNewline(newEditorState));
+    setEditorState(newEditorState);
   }
 };
 
@@ -98,7 +97,7 @@ export const convertLinkPreviewToLink = (editorState: EditorState) => {
   );
   // reread block after insertText
   currentBlock = contentState.getBlockForKey(currentBlock.getKey());
-  const nextBlock = contentState.getBlockAfter(currentBlock.getKey());
+  const nextBlock = contentState.getBlockAfter(currentBlock.getKey()) as ContentBlock;
   newState = EditorState.push(newState, contentState, 'change-block-type');
 
   const editorStateWithLink = changePlainTextUrlToLinkUrl(newState, blockKey, url);

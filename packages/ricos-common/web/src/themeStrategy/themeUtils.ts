@@ -138,9 +138,11 @@ export const toDashedKey = (str: string) =>
 const spacing = ' '.repeat(4);
 export const toVarStrings = (varsObject: CssVarsObject) => {
   const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
+  const cleanFromSemicolons = (value: unknown) =>
+    typeof value === 'string' ? value.split(';')[0] : value;
   return Object.entries(varsObject)
     .filter(entry => !!entry[1])
-    .map(entry => convertToRicosKey(entry[0]) + ': ' + entry[1] + ';\n')
+    .map(entry => convertToRicosKey(entry[0]) + ': ' + cleanFromSemicolons(entry[1]) + ';\n')
     .join(spacing);
 };
 

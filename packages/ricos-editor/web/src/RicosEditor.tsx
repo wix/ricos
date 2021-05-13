@@ -14,7 +14,10 @@ import {
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
-import { EditorEventsContext, EditorEvents } from 'wix-rich-content-editor-common';
+import {
+  EditorEventsContext,
+  EditorEvents,
+} from 'wix-rich-content-editor-common/libs/EditorEventsContext';
 import { ToolbarType, Version } from 'wix-rich-content-common';
 
 // eslint-disable-next-line
@@ -29,10 +32,13 @@ interface State {
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
-  editor: RichContentEditor;
+  editor!: RichContentEditor;
+
   dataInstance: EditorDataInstance;
+
   isBusy = false;
-  currentEditorRef: ElementType;
+
+  currentEditorRef!: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -160,6 +166,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.editor = ref;
     this.setStaticToolbar(ref);
   };
+
+  getEditorCommands = () => this.editor.getEditorCommands();
 
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;

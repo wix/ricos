@@ -17,7 +17,7 @@
     background-color: transparent;
 
     &:hover {
-      color: $action-color-fallback;
+      color: $settings-action-color;
       cursor: pointer;
     }
   }
@@ -25,7 +25,7 @@
 
 .lineHeightsPanel_selectedLineHeight,
 .lineSpacingMobilePanel_selectedLineHeight {
-  color: $action-color-fallback;
+  color: $settings-action-color;
 }
 
 .lineSpacingMobilePanel {
@@ -65,7 +65,7 @@
   }
 
   :nth-child(2) {
-    color: $action-color-fallback;
+    color: $settings-action-color;
   }
 }
 
@@ -135,7 +135,7 @@
   }
 
   :nth-child(2) {
-    color: $action-color-fallback;
+    color: $settings-action-color;
   }
 }
 
@@ -175,4 +175,19 @@
 }
 .lineSpacingModalOverlay_mobile {
   //background-color: rgba(0, 0, 0, 0.2);
+}
+
+.lineSpacingPopup_button {
+  position: relative;
+  margin-right: 10px;
+  .lineSpacingPopup {
+    position: absolute;
+    top: 50px;
+    left: -146px;
+    background: #fff;
+
+    & button {
+      background-color: transparent;
+    }
+  }
 }

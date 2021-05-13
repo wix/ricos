@@ -5,6 +5,8 @@ import { TextSearchInput } from 'wix-rich-content-editor-common';
 import PluginMenuPluginsSection from './PluginMenuPluginsSection';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
+import { getPluginsIdForTag } from '../../pluginsSearchTags';
+import { debounce } from 'lodash';
 
 export default class AddPluginMenu extends Component {
   constructor(props) {
@@ -26,7 +28,21 @@ export default class AddPluginMenu extends Component {
       this.showSearch && this.styles.withSearch
     );
   }
-  onChange = value => this.setState({ value }, () => this.container?.scrollTo(0, 0));
+
+  triggerBi = debounce(() => {
+    const { t, helpers, isMoreMenu } = this.props;
+    helpers.onPluginAction('searchForPlugin', {
+      searchTerm: this.state.value,
+      pluginsDetails: getPluginsIdForTag(this.state.value.toLowerCase(), t).join(', '),
+      entry_point: isMoreMenu ? 'footerToolbar' : 'sideToolbar',
+    });
+  }, 200);
+
+  onChange = value => {
+    this.setState({ value }, () => this.container?.scrollTo(0, 0));
+    this.triggerBi();
+  };
+
   render() {
     const {
       getEditorState,
@@ -98,4 +114,6 @@ AddPluginMenu.propTypes = {
   pluginMenuButtonRef: PropTypes.any,
   toolbarName: PropTypes.string,
   searchablePlugins: PropTypes.array,
+  helpers: PropTypes.object,
+  isMoreMenu: PropTypes.bool,
 };

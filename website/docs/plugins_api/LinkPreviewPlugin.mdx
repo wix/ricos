@@ -40,10 +40,13 @@ Link Preview with inline-embed: for this Usage, html plugin should also be insta
 ```jsx
 /* Editor */
 import { RicosEditor } from 'ricos-editor';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
+import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
+
+const { Youtube, Instagram, Twitter, TikTok } = LinkPreviewProviders;
+const LinkPreviewConfig = { exposeEmbedButtons: [Youtube, Instagram, Twitter, TikTok] };
 <RicosEditor plugins={[pluginLinkPreview(LinkPreviewConfig), pluginLink({})]} />;
 
 /* Viewer */
@@ -57,7 +60,7 @@ import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
 
 ### `enableEmbed`
 
-Allows to display provider embed if exist (can be true/false/[Twitter, YouTube,..]
+Allows to display provider embed if exist (can be true/false/[LinkPreviewProviders.Twitter, LinkPreviewProviders.YouTube,..]
 
 ```jsx
 enableEmbed?: one of boolean, array;
@@ -99,11 +102,13 @@ none;
 
 ### `exposeEmbedButtons`
 
-Which embed buttons will display - array with LinkPreviewProvider types [Instagram, Twitter, ...].
+### NOTE: LinkPreviewProviders.youTube is gonna be deprecate. To use youtube plugin you should consume video plugin and expose youtube button. See docs here https://ricos.js.org/docs/plugins_api/VideoPlugin#youtube-plugin
+
+Which embed buttons will display - array with LinkPreviewProvider types [LinkPreviewProviders.Instagram, LinkPreviewProviders.Twitter, ...].
 For provide buttons type you should import LinkPreviewProvider.
 
 ```jsx
-minHeight?: array;
+LinkPreviewProviders?: array;
 ```
 
 Default value:

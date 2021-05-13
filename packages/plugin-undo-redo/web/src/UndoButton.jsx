@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
-import { InlineToolbarButton, undo } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton, undo, pluginsUndo } from 'wix-rich-content-editor-common';
 
 const UndoButton = props => {
   const {
@@ -15,15 +15,17 @@ const UndoButton = props => {
     t,
     getEditorState,
     setEditorState,
+    commonPubsub,
   } = props;
   const editorState = getEditorState();
   const combinedClassName = classNames(theme.undo, className);
   const icon = config?.toolbar?.icons?.Undo || undoIcon;
   const disabled = editorState?.getUndoStack()?.isEmpty?.() || !editorState;
+  const isUndoExperiment = commonPubsub.get('undoExperiment')?.();
 
   const onClick = event => {
     event.stopPropagation();
-    setEditorState(undo(getEditorState()));
+    setEditorState(isUndoExperiment ? pluginsUndo(getEditorState()) : undo(getEditorState()));
   };
 
   if (isMobile)

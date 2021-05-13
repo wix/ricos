@@ -98,8 +98,12 @@ scrollingElement: () => JSX.Element;
 
 ### `modify default config`
 
+:::note
+To enable **video** use `accept: 'image/*,video/*'`.
+:::
+
 ```jsx
-     accept: 'image/*',
+     accept: 'image/* | video/*' | 'image/*,video/*',
      defaultData: {
        config: {
          size: 'small' | 'fullWidth' |'content',
@@ -113,7 +117,7 @@ scrollingElement: () => JSX.Element;
 Default value:
 
 ```jsx
-       accept: 'image/*,video/*',
+       accept: '.jpg,.png,.gif,.jpeg,.jpe,.jfif,.bmp,.heic,.heif,.tfif,.tif,.webp',
        config: {
          size: 'content',
          alignment: 'center',
