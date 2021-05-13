@@ -127,6 +127,22 @@ function tests({ isDesktop }) {
     testFlow(isDesktop, this.test.title);
   });
 
+  it('dark palette, no cssOverride, settingsActionColor=blue', function() {
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      usePlugins(plugins.all),
+      useTheming({
+        paletteType: 'dark',
+        skipCssOverride: true,
+        settingsActionColor: '%233899EC',
+        focusActionColor: '%233899EC',
+      })
+    ).focusEditor();
+    cy.wait(2000);
+    cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
+  });
+
   it('customStyles', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',

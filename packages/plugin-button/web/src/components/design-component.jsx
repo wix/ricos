@@ -24,19 +24,41 @@ class DesignComponent extends PureComponent {
         padding: designObj.padding,
         borderRadius: designObj.borderRadius,
         activeButton: designObj.activeButton,
-        color: designObj?.color || colors.color1,
-        borderColor: designObj?.borderColor || colors.color8,
-        background: designObj?.background || colors.color8,
+        color: designObj?.color || colors?.color1 || '#FEFDFD',
+        borderColor: designObj?.borderColor || colors?.color8 || '#0261FF',
+        background: designObj?.background || colors?.color8 || '#0261FF',
       },
       customBackgroundColors: (getBackgroundColors && getBackgroundColors()) || DEFAULT_PALETTE,
       customTextColors: (getTextColors && getTextColors()) || DEFAULT_PALETTE,
       customBorderColors: (getBorderColors && getBorderColors()) || DEFAULT_PALETTE,
       pickerType: '',
     };
+    this.originalDesign = this.state.design;
   }
 
   componentDidUpdate = () => {
-    this.props.onDesignChange(this.state.design);
+    const { design } = this.state;
+    if (JSON.stringify(this.originalDesign) !== JSON.stringify(design)) {
+      if (this.isColorChanged()) {
+        this.props.onDesignChange(design);
+      } else {
+        this.props.onDesignChange({
+          borderWidth: design.borderWidth,
+          padding: design.padding,
+          borderRadius: design.borderRadius,
+          activeButton: design.activeButton,
+        });
+      }
+    }
+  };
+
+  isColorChanged = () => {
+    const { design } = this.state;
+    return (
+      design.color !== this.originalDesign.color ||
+      design.borderColor !== this.originalDesign.borderColor ||
+      design.background !== this.originalDesign.background
+    );
   };
 
   onBackgroundColorAdded = color => {
@@ -213,7 +235,7 @@ class DesignComponent extends PureComponent {
               <div className={styles.button_designComponent_input_container_width}>
                 <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
-                    value={parseInt(design.borderWidth)}
+                    defaultValue={parseInt(design.borderWidth)}
                     min={0}
                     max={15}
                     label={t('ButtonModal_Width_Input')}
@@ -225,7 +247,7 @@ class DesignComponent extends PureComponent {
               <div className={styles.button_designComponent_input_container_corner}>
                 <div className={styles.button_designComponent_slider_with_input}>
                   <SliderWithInput
-                    value={parseInt(design.borderRadius)}
+                    defaultValue={parseInt(design.borderRadius)}
                     min={0}
                     max={15}
                     label={t('ButtonModal_Radius_Input')}

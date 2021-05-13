@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .header {
@@ -40,9 +40,9 @@
   align-items: center;
 
   &.poll_header_button_primary {
-    color: $action-color-fallback;
+    color: $settings-action-color;
   }
-  
+
   &.poll_header_button_secondary {
     color: inherit;
   }
@@ -103,7 +103,7 @@
   flex-direction: row;
   align-items: center;
   margin: 5px 0;
-  
+
   &.radioPanel {
     margin: 10px 0 20px;
     display: flex;

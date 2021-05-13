@@ -38,7 +38,11 @@ module.exports = {
       {
         type: 'category',
         label: 'Content APIs',
-        items: ['content_api/TruncateContent', 'content_api/converters'],
+        items: [
+          'content_api/TruncateContent',
+          'content_api/converters',
+          'content_api/ContentBuilder',
+        ],
       },
       {
         type: 'category',

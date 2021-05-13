@@ -39,12 +39,11 @@ class InPluginInput extends Component<Props> {
 
   onChange: ChangeEventHandler<HTMLInputElement> = e => this.props.onChange?.(e.target.value);
 
-  className = classnames(styles.inPluginInput, this.props.className);
-
   render() {
+    const className = classnames(styles.inPluginInput, this.props.className);
     return (
       <input
-        className={this.className}
+        className={className}
         value={this.props.value}
         onChange={this.onChange}
         onFocus={this.handleFocus}

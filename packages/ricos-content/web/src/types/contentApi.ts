@@ -25,6 +25,27 @@ export type PartialDeep<T> = {
     : T[P];
 };
 
+type AddListMethod = ({
+  items,
+  data,
+  index,
+  before,
+  after,
+  content,
+}: {
+  items: string | TextData | ListItemData | (string | TextData | ListItemData)[];
+  data?: ParagraphData;
+  index?: number;
+  before?: string;
+  after?: string;
+  content: RichContent;
+}) => RichContent;
+
+type AddLists = {
+  addOrderedList: AddListMethod;
+  addBulletList: AddListMethod;
+};
+
 type AddMethod<T> = {
   [P in keyof T]: ({
     data,
@@ -135,12 +156,8 @@ type AddMap = {
   addDivider: DividerData;
   addFile: FileData;
   addGallery: GalleryData;
-  addGiphy: GiphyData;
   addHtml: HTMLData;
   addImage: ImageData;
-  addLinkPreview: LinkPreviewData;
-  addMap: MapData;
-  addPoll: PollData;
   addVideo: VideoData;
 };
 
@@ -167,12 +184,12 @@ type GetMap = {
   getHtmls: HTMLData;
 };
 
-type ContentBuilderType = AddMethod<AddMap> &
-  AddTextMethod<AddTextMap> &
-  SetMethod<SetMap> &
-  SetTextMethod<SetTextMap> & {
-    removeNode: (key: string, content: RichContent) => RichContent;
-  };
+export type ListItemData = {
+  text: TextData[];
+  data: ParagraphData;
+};
+
+type ContentBuilderType = AddMethod<AddMap> & AddTextMethod<AddTextMap> & AddLists;
 
 export interface ContentBuilder extends ContentBuilderType {}
 

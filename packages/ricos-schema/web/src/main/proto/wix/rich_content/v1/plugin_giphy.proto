@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package wix.rich_content.v1;
+
+import "wix/rich_content/v1/common.proto";
+import "google/protobuf/wrappers.proto";
+
+message GiphyData {
+    PluginContainerData container_data = 1;
+    GIFSource gif = 2;
+}
+
+message GIFSource {
+    int32 height = 1;
+    int32 width = 2;
+    string original_url = 3;
+    string still_url = 4;
+    google.protobuf.StringValue original_mp4 = 5;
+    google.protobuf.StringValue downsized_url = 6;
+    google.protobuf.StringValue downsized_still_url = 7;
+    google.protobuf.StringValue downsized_small_mp4 = 8;
+}

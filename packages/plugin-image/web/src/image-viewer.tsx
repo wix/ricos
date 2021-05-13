@@ -138,6 +138,8 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       return null;
     }
 
+    const removeUsm = this.context.experiments?.removeUsmFromImageUrls?.enabled;
+
     const imageUrl: ImageSrc = {
       preload: '',
       highres: '',
@@ -175,6 +177,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       } = this.props;
       const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
       imageSrcOpts = {
+        removeUsm,
         imageType: 'quailtyPreload',
         ...(usePredefinedWidth && { requiredWidth: 300 }),
       };
@@ -190,6 +193,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     }
 
     imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
+      removeUsm,
       requiredWidth,
       requiredHeight,
       requiredQuality: 90,
@@ -302,16 +306,18 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
 
   renderCaption(caption) {
     const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
+    const { imageCaption, link } = this.styles;
+    const classes = classNames(imageCaption, this.hasLink() && link);
     return onCaptionChange ? (
       <InPluginInput
         setInPluginEditingMode={setInPluginEditingMode}
-        className={this.styles.imageCaption}
+        className={classes}
         value={caption}
         onChange={onCaptionChange}
         setFocusToBlock={setFocusToBlock}
       />
     ) : (
-      <span dir="auto" className={this.styles.imageCaption}>
+      <span dir="auto" className={classes}>
         {caption}
       </span>
     );
@@ -344,7 +350,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(IMAGE_TYPE, 'expand_image', '');
+    helpers.onViewerAction?.(IMAGE_TYPE, 'Click', 'expand_image');
     this.hasExpand() && onExpand?.(this.props.blockKey);
   };
 

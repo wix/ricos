@@ -15,6 +15,7 @@ class ButtonComponent extends PureComponent {
     const {
       componentData: { button },
       settings: { onClick },
+      helpers,
     } = this.props;
     const { theme } = this.props;
     const buttonText = button.settings.buttonText;
@@ -29,6 +30,9 @@ class ButtonComponent extends PureComponent {
     }
     const style = {
       border: '0px solid blue',
+      color: this.props.settings.colors?.color1 || '#FEFDFD',
+      backgroundColor: this.props.settings.colors?.color8 || '#0261FF',
+      borderColor: this.props.settings.colors?.color8 || '#0261FF',
       ...this.props.style,
       ...button.design,
     };
@@ -38,6 +42,7 @@ class ButtonComponent extends PureComponent {
         buttonText={buttonText}
         theme={theme}
         onClick={onClick}
+        helpers={helpers}
         {...linkButtonSettings}
       />
     );
@@ -51,6 +56,7 @@ ButtonComponent.propTypes = {
   settings: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
   theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object,
 };
 
 export default ButtonComponent;

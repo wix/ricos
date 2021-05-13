@@ -11,7 +11,7 @@ import {
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
-import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -357,14 +357,16 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
-
+    const testAppConfig = {
+      plugins: [plugins.linkPreview],
+    };
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.linkPreview));
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
     });
 
     after(() => cy.eyesClose());
-    const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
+    const embedTypes = ['TWITTER', 'INSTAGRAM'];
     embedTypes.forEach(embedType => {
       it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
@@ -714,7 +716,9 @@ describe('plugins', () => {
     };
 
     it('should change accordion settings', function() {
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
+      cy.loadRicosEditorAndViewer('accordion-rich-text', {
+        plugins: [plugins.accordion, plugins.embedsPreset, plugins.textPlugins],
+      });
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);

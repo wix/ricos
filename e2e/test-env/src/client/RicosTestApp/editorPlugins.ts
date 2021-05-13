@@ -43,7 +43,7 @@ import { videoHandlers } from '../../../../../examples/main/shared/editor/Editor
 // eslint-disable-next-line max-len
 import { MockVerticalSearchModule } from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
 
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
 
 const onLinkAdd = async (customLinkData, saveData) => {
@@ -62,7 +62,7 @@ const defaultConfigs = {
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
     enableEmbed: true,
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   verticalEmbed: {
     verticalsApi: type => new MockVerticalSearchModule(type),
@@ -126,30 +126,8 @@ const createPlugins = externalConfigs => {
     undoRedo: pluginUndoRedo(),
     headings: pluginHeadings(configs.headings),
     spoiler: pluginSpoiler(),
-    accordion: pluginAccordion({
-      innerRCEPlugins: [
-        pluginTextColor(configs.textColor).createPlugin,
-        pluginTextHighlight(configs.textHighlight).createPlugin,
-        pluginIndent().createPlugin,
-        pluginLineSpacing().createPlugin,
-        pluginLink().createPlugin,
-        pluginCodeBlock().createPlugin,
-        pluginImage().createPlugin,
-        pluginUnsupportedBlocks().createPlugin,
-      ],
-    }),
-    table: pluginTable({
-      innerRCEPlugins: [
-        pluginTextColor(configs.textColor).createPlugin,
-        pluginTextHighlight(configs.textHighlight).createPlugin,
-        pluginIndent().createPlugin,
-        pluginLineSpacing().createPlugin,
-        pluginLink().createPlugin,
-        pluginCodeBlock().createPlugin,
-        pluginImage().createPlugin,
-        pluginUnsupportedBlocks().createPlugin,
-      ],
-    }),
+    accordion: pluginAccordion(),
+    table: pluginTable(),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
     unsupportedBlocks: pluginUnsupportedBlocks(),
   };

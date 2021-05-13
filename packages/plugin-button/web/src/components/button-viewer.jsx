@@ -3,16 +3,28 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/default-styles.scss';
+import { ACTION_BUTTON_TYPE, LINK_BUTTON_TYPE } from '../types';
 class ButtonViewer extends PureComponent {
+  isActionButton = () => Boolean(this.props.onClick);
+
+  onClick = args => {
+    const isActionButton = this.isActionButton();
+    this.props.helpers.onViewerAction?.(
+      isActionButton ? ACTION_BUTTON_TYPE : LINK_BUTTON_TYPE,
+      'Click'
+    );
+    isActionButton && this.props.onClick(args);
+  };
+
   render() {
-    const { theme, onClick } = this.props;
+    const { theme } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, style, target, rel, buttonText } = this.props;
-    const isActionButton = Boolean(onClick);
+    const isActionButton = this.isActionButton();
     const Component = isActionButton ? 'div' : 'a';
     let props = { className: this.styles.button_container, style };
     props = isActionButton
-      ? { onClick, ...props }
+      ? { ...props }
       : {
           href: url,
           target,
@@ -20,7 +32,7 @@ class ButtonViewer extends PureComponent {
           ...props,
         };
     return (
-      <Component {...props} data-hook="buttonViewer">
+      <Component {...props} data-hook="buttonViewer" onClick={this.onClick}>
         <div className={this.styles.button_text}>{buttonText}</div>
       </Component>
     );
@@ -35,6 +47,7 @@ ButtonViewer.propTypes = {
   buttonText: PropTypes.string,
   theme: PropTypes.object.isRequired,
   onClick: PropTypes.func,
+  helpers: PropTypes.object,
 };
 
 export default ButtonViewer;

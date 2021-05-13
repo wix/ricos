@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package rich_content.v1;
-
-message MentionData {
-    string name = 1;
-    string slug = 2;
-}

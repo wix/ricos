@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headings",
-  "version": "8.30.4",
+  "version": "8.34.1",
   "author": {
     "name": "Bar Boaron",
     "email": "barb@wix.com"
@@ -35,10 +35,10 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "react-click-outsider": "1.1.1",
-    "wix-rich-content-common": "8.30.4",
-    "wix-rich-content-editor-common": "8.30.4",
-    "wix-rich-content-plugin-commons": "8.30.4"
+    "react-modal": "~3.4.1",
+    "wix-rich-content-common": "8.34.1",
+    "wix-rich-content-editor-common": "8.34.1",
+    "wix-rich-content-plugin-commons": "8.34.1"
   },
   "unpkg": true,
   "publishConfig": {

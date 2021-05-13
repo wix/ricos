@@ -50,7 +50,7 @@ import {
 } from '../../../main/shared/utils/fileUploadUtil';
 import { MockVerticalSearchModule } from '../../../main/shared/utils/verticalEmbedUtil';
 
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
 
 const configs = {
@@ -64,7 +64,7 @@ const configs = {
   },
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
@@ -190,6 +190,7 @@ const getToolbarSettings = () => [
 
 interface Props {
   content?: DraftContent;
+  injectedContent?: DraftContent;
   onChange?: RicosEditorProps['onChange'];
   isMobile?: boolean;
   pluginsToDisplay?: string[];
@@ -213,7 +214,16 @@ class EditorWrapper extends React.Component<Props> {
     : plugins;
 
   render() {
-    const { content, theme, onChange, isMobile, toolbarSettings, onBlur, onFocus } = this.props;
+    const {
+      content,
+      injectedContent,
+      theme,
+      onChange,
+      isMobile,
+      toolbarSettings,
+      onBlur,
+      onFocus,
+    } = this.props;
 
     return (
       <RicosEditor
@@ -221,6 +231,7 @@ class EditorWrapper extends React.Component<Props> {
         plugins={this.editorPlugins}
         theme={theme}
         content={content}
+        injectedContent={injectedContent}
         isMobile={isMobile}
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}

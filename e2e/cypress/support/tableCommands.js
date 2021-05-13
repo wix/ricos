@@ -13,7 +13,7 @@ Cypress.Commands.add('openTableModal', () => {
 
 Cypress.Commands.add('addTableFromModal', (rowNum, colNum) => {
   cy.setTableRowNumAndColNum(rowNum, colNum);
-  cy.get(`[data-hook*=${TABLE_PLUGIN.SUBMIT}]`).click();
+  cy.get(`[data-hook*=${TABLE_PLUGIN.SUBMIT}]`).click({ force: true });
 });
 
 Cypress.Commands.add('setTableRowNumAndColNum', (rowNum, colNum) => {
@@ -35,11 +35,11 @@ Cypress.Commands.add('focusCell', cellIndex => {
     .trigger('mouseup');
 });
 
-Cypress.Commands.add('editCell', cellIndex => {
+Cypress.Commands.add('editCell', (cellIndex, text = 'table!!') => {
   cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`)
     .eq(cellIndex)
     .click()
-    .type('table!!');
+    .type(text);
 });
 
 Cypress.Commands.add('editCellAndGoOut', cellIndex => {

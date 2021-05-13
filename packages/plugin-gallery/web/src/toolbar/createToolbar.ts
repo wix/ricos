@@ -15,18 +15,20 @@ const createToolbar: CreatePluginToolbar = ({
   anchorTarget,
   relValue,
   uiSettings,
+  isMobile,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
   uiSettings: UISettings;
+  isMobile: boolean;
 }) => {
   const disableDownload = uiSettings?.disableDownload;
   const disableExpand = settings?.disableExpand;
 
   return {
-    InlineButtons: createInlineButtons({ settings, t, anchorTarget, relValue }),
+    InlineButtons: createInlineButtons({ settings, t, anchorTarget, relValue, isMobile }),
     InsertButtons: createInsertButtons({ settings, t, disableDownload, disableExpand }),
     name: 'gallery',
   };

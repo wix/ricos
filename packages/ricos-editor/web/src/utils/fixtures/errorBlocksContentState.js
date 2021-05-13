@@ -383,7 +383,7 @@ export default {
         },
         name: 'document.pdf',
         type: 'pdf',
-        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+        url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
         size: 150000,
         error: {
           msg: 'This is a custom error message',
