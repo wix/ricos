@@ -70,6 +70,7 @@ export interface RichContentViewerProps {
   isInnerRcv?: boolean;
   renderedInTable?: boolean;
   onHover?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  ['text-selection-toolbar']?: boolean;
   /** This is a legacy API, changes should be made also in the new Ricos Viewer API **/
 }
 

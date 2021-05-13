@@ -358,3 +358,5 @@ export type InlineStyleMapperFunction<PluginConfig = Record<string, any>> = (
   config: LegacyViewerPluginConfig<PluginConfig>,
   raw: DraftContent
 ) => () => InlineStyleMapper;
+
+export const TEXT_SELECTION_TOOLBAR = 'text-selection-toolbar';
