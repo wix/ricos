@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette";
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 %resizeableHandle {
   content: '';
@@ -7,7 +7,7 @@
   height: 14px;
   z-index: 1;
   background: #fff;
-  border: 2px solid $action-color;
+  border: 2px solid $focus-action-color;
   position: absolute;
   top: calc(50% - 7px);
 }

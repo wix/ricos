@@ -9,7 +9,7 @@ import {
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
 import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
-import { VideoPluginEditorConfig } from '../types';
+import { VideoPluginEditorConfig, VIDEO_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
@@ -76,6 +76,8 @@ const createInlineButtons: CreateInlineButtons = ({
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       settings,
+      triggerSettingsBi: true,
+      pluginId: VIDEO_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

@@ -26,8 +26,8 @@ $settings-action-color-tuple: var(
   $action-color-fallback-tuple
 );
 
-$focus-action-color: var(--ricos-focus-action-color, $action-color-fallback); // color 8
-$focus-action-color-tuple: var(--ricos-focus-action-color-tuple, $action-color-fallback-tuple);
+$focus-action-color: var(--ricos-focus-action-color, $action-color); // color 8
+$focus-action-color-tuple: var(--ricos-focus-action-color-tuple, $action-color-tuple);
 
 $ricos-p-color: var(--ricos-custom-p-color, unset);
 $ricos-quote-border-color: var(--ricos-custom-quote-border-color, $action-color);
