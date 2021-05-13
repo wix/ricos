@@ -73,6 +73,7 @@
     "wix-rich-content-preview": "8.34.0",
     "wix-rich-content-text-selection-toolbar": "8.34.0",
     "wix-rich-content-viewer": "8.34.0",
+    "wix-rich-content-ui-components": "8.34.0",
     "wix-style-react": "^9.0.0",
     "wix-ui-icons-common": "^2.0.313"
   },
