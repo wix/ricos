@@ -1,6 +1,6 @@
 // Components
 export { default as Button } from './Components/Button';
-// export { default as FileInput } from './Components/FileInput';
+export { default as FileInput } from './Components/FileInput';
 // export { default as Image } from './Components/Image';
 // export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as LabeledToggle } from './Components/LabeledToggle';
