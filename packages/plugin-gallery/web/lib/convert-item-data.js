@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import { normalizeUrl, isValidUrl } from 'wix-rich-content-common';
-import { getAbsoluteUrl, isAbsoluteUrl } from './baseUrlConverter';
+import { getAbsoluteUrl } from './baseUrlConverter';
 
 /**
  * convertItemData - converts the old gallery metadata format to the new metaData format
