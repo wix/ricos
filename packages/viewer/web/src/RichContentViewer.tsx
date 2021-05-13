@@ -111,17 +111,7 @@ class RichContentViewer extends Component<
     this.state = {
       context: { experiments, isMobile, t },
     };
-    this.initConfig();
   }
-
-  initConfig = () => {
-    const { config, helpers } = this.props;
-    const onViewerAction = helpers?.onViewerAction;
-    if (config[SPOILER_TYPE] && onViewerAction) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (config[SPOILER_TYPE] as any).onViewerAction = onViewerAction;
-    }
-  };
 
   static getInitialState = (props: RichContentViewerProps) => {
     const {
