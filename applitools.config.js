@@ -25,7 +25,7 @@ function getLocalBranchName() {
 }
 
 function getBranchName() {
-  return process.env.GITHUB_HEAD_REF ? getGithubBranchName() : getLocalBranchName();
+  return process.env.CI ? getGithubBranchName() : getLocalBranchName();
 }
 
 module.exports = {
