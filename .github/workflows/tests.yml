@@ -1,4 +1,10 @@
 name: tests
+
+# Ensures that only one task per branch will run at a time
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
@@ -12,14 +18,6 @@ env:
   COMMIT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
 jobs:
-  cleanup-runs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
-        if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/master'"
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-
   e2e-visual:
     runs-on: ubuntu-18.04
     strategy:

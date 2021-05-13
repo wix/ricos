@@ -1,4 +1,9 @@
 name: documentation_pr
+# Ensures that only one task per branch will run at a time
+concurrency:
+  group: documentation_pr-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
     branches:
