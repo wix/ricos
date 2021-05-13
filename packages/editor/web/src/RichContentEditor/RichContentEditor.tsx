@@ -22,7 +22,7 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
   createCalcContentDiff,
-  getPostContentSummary,
+  getEditorContentSummary,
   getBlockType,
   COMMANDS,
   MODIFIERS,
@@ -193,8 +193,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   refId: number;
 
-  editorRef: HTMLDivElement | null;
-
   commonPubsub: Pubsub;
 
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
@@ -242,7 +240,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     editorState: EditorState,
     callBack: (...args) => boolean = () => true
   ) => {
-    const postSummary = getPostContentSummary(editorState || {});
+    const postSummary = getEditorContentSummary(editorState || {});
     callBack({ postId, ...postSummary });
   };
 
@@ -274,7 +272,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.initPlugins();
     this.initEditorCommands();
     this.fixDraftSelectionExtend();
-    this.editorRef = null;
   }
 
   fixDraftSelectionExtend = () => {
@@ -298,20 +295,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.preloadLibs();
     document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
     this.commonPubsub.set('undoExperiment', this.getUndoExperiment);
-    if (!this.props.isInnerRCE && this.editorRef) {
-      this.editorRef.parentElement?.addEventListener('click', this.onEditorClickOutside);
-    }
   }
-
-  onEditorClickOutside = e => {
-    const { editorState } = this.state;
-    const clickInEditor = e.target.closest('[data-hook=root-editor]');
-    const clickInModal = e.target.closest('[data-id=rich-content-editor-modal]');
-    if (!clickInEditor && !clickInModal) {
-      this.disableFocusInSelection(editorState);
-      this.commonPubsub.set('focusedBlock', null);
-    }
-  };
 
   componentWillMount() {
     this.updateBounds = (editorBounds?: BoundingRect) => {
@@ -642,7 +626,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
         onCallbacks: ({ pluginsDeleted = [] }) => {
-          pluginsDeleted.forEach(type => onPluginDelete?.(type, version));
+          pluginsDeleted.forEach(pluginId =>
+            onPluginDelete?.({ pluginId, version, pluginDetails: undefined })
+          );
         },
       });
   };
@@ -884,7 +870,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (!this.props.helpers?.onPublish) {
       return;
     }
-    const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
+    const { pluginsCount, pluginsDetails } = getEditorContentSummary(this.state.editorState) || {};
     this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
@@ -1203,10 +1189,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 style={this.props.style}
-                ref={ref => {
-                  this.editorRef = ref;
-                  measureRef(ref);
-                }}
+                ref={measureRef}
                 className={wrapperClassName}
                 dir={direction || getLangDir(this.props.locale)}
                 data-id={'rce'}

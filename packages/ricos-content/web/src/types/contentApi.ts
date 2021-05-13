@@ -7,7 +7,6 @@ import {
   HTMLData,
   GiphyData,
   VideoData,
-  VerticalEmbedData,
   FileData,
   MapData,
   ButtonData,
@@ -24,6 +23,27 @@ export type PartialDeep<T> = {
     : T[P] extends Record<string, unknown>
     ? PartialDeep<T[P]>
     : T[P];
+};
+
+type AddListMethod = ({
+  items,
+  data,
+  index,
+  before,
+  after,
+  content,
+}: {
+  items: string | TextData | ListItemData | (string | TextData | ListItemData)[];
+  data?: ParagraphData;
+  index?: number;
+  before?: string;
+  after?: string;
+  content: RichContent;
+}) => RichContent;
+
+type AddLists = {
+  addOrderedList: AddListMethod;
+  addBulletList: AddListMethod;
 };
 
 type AddMethod<T> = {
@@ -136,14 +156,9 @@ type AddMap = {
   addDivider: DividerData;
   addFile: FileData;
   addGallery: GalleryData;
-  addGiphy: GiphyData;
   addHtml: HTMLData;
   addImage: ImageData;
-  addLinkPreview: LinkPreviewData;
-  addMap: MapData;
-  addPoll: PollData;
   addVideo: VideoData;
-  addVericalEmbed: VerticalEmbedData;
 };
 
 type AddTextMap = {
@@ -169,7 +184,12 @@ type GetMap = {
   getHtmls: HTMLData;
 };
 
-type ContentBuilderType = AddMethod<AddMap> & AddTextMethod<AddTextMap>;
+export type ListItemData = {
+  text: TextData[];
+  data: ParagraphData;
+};
+
+type ContentBuilderType = AddMethod<AddMap> & AddTextMethod<AddTextMap> & AddLists;
 
 export interface ContentBuilder extends ContentBuilderType {}
 

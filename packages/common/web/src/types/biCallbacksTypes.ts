@@ -12,6 +12,18 @@ export interface onPluginAddStepArgs extends biCallbackParams {
   entryType: EntryType;
   step: 'FileUploadDialog' | 'PluginModal';
 }
+
+export interface onPluginDeleteArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
+}
+
+export interface onViewerLoadedArgs extends biCallbackParams {
+  isPreview: boolean;
+  pluginsCount: boolean;
+  version: string;
+}
+
 export interface PluginAddSuccessParams {
   rows?: number;
   columns?: number;
@@ -25,7 +37,7 @@ export interface BICallbacks {
     version: string
   ): void;
   onPluginAddStep?(params: onPluginAddStepArgs): void;
-  onPluginDelete?(pluginId: string, version: string): void;
+  onPluginDelete?(params: onPluginDeleteArgs): void;
   onPublish?(
     postId: string | undefined,
     pluginsCount: Record<string, number> | undefined,
@@ -39,7 +51,7 @@ export interface BICallbacks {
     version: string
   ): void;
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
-  onViewerLoaded?(isPreview: boolean, version: string): void;
+  onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
   onPluginChange?(
     pluginId: string,

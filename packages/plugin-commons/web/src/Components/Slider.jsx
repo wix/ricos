@@ -1,38 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/slider.scss';
 
-class Slider extends Component {
-  static propTypes = {
-    value: PropTypes.number.isRequired,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    theme: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    dataHook: PropTypes.string,
-    ariaProps: PropTypes.object,
-  };
+function Slider(props) {
+  const mergedStyles = mergeStyles({ styles, theme: props.theme });
+  const { min, max, onChange, dataHook, ariaProps, value, onSubmit } = props;
 
-  constructor(props) {
-    super(props);
-    this.state = { value: props.value };
-    this.styles = mergeStyles({ styles, theme: props.theme });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.onChange(nextProps.value);
-    }
-  }
-
-  onChange(value) {
-    this.setState({ value });
-    this.props.onChange(value);
-  }
-
-  onKeyUp(event) {
+  const onKeyUp = event => {
     switch (event.key) {
       case 'ArrowUp':
       case 'ArrowDown':
@@ -42,31 +18,39 @@ class Slider extends Component {
       case 'End':
       case 'PageUp':
       case 'PageDown':
-        this.props.onChange(event.target.valueAsNumber);
+        onSubmit(event.target.valueAsNumber);
         break;
       default:
         return;
     }
-  }
+  };
 
-  render() {
-    const { min, max, onChange, dataHook, ariaProps } = this.props;
-    return (
-      <input
-        {...ariaProps}
-        tabIndex={0}
-        type={'range'}
-        className={classNames(this.styles.slider, this.styles.wrapperSlider)}
-        data-hook={dataHook}
-        onChange={e => this.onChange(e.target.valueAsNumber)}
-        value={this.state.value}
-        min={min}
-        max={max}
-        onMouseUp={e => onChange(e.target.valueAsNumber)}
-        onKeyUp={e => this.onKeyUp(e)}
-      />
-    );
-  }
+  return (
+    <input
+      {...ariaProps}
+      tabIndex={0}
+      type={'range'}
+      className={classNames(mergedStyles.slider, mergedStyles.wrapperSlider)}
+      data-hook={dataHook}
+      onChange={e => onChange(e.target.valueAsNumber)}
+      value={value}
+      min={min}
+      max={max}
+      onMouseUp={e => onSubmit(e.target.valueAsNumber)}
+      onKeyUp={onKeyUp}
+    />
+  );
 }
+
+Slider.propTypes = {
+  value: PropTypes.number.isRequired,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  theme: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  dataHook: PropTypes.string,
+  ariaProps: PropTypes.object,
+};
 
 export default Slider;

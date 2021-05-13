@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import createFocusTrap from 'focus-trap';
+import { createFocusTrap } from 'focus-trap';
 
 const checkedProps = ['active', 'paused', 'tag', 'focusTrapOptions', '_createFocusTrap'];
 

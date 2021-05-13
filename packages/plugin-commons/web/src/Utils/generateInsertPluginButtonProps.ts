@@ -55,13 +55,13 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
-  const onPluginAddStep = (step: onPluginAddStepArgs['step']) => {
+  const onPluginAddStep = (step: onPluginAddStepArgs['step'], blockKey: string) => {
     helpers?.onPluginAddStep?.({
       version: Version.currentVersion,
       entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
       pluginId: blockType,
-      pluginDetails: '',
+      pluginDetails: blockKey,
       step,
     });
   };
@@ -97,7 +97,7 @@ export function generateInsertPluginButtonProps({
       editorState = newEditorState;
       selection = selection || newSelection;
       updateEntity(newBlock.getKey(), file);
-      onPluginAddSuccess();
+      onPluginAddSuccess({ pluginDetails: newBlock.getKey() });
     });
 
     return { newEditorState: editorState, newSelection: selection as SelectionState };
@@ -109,11 +109,9 @@ export function generateInsertPluginButtonProps({
     switch (button.type) {
       case 'file':
         toggleFileSelection();
-        onPluginAddStep('FileUploadDialog');
         break;
       case 'modal':
         toggleButtonModal(event);
-        onPluginAddStep('PluginModal');
         break;
       case 'custom-block':
         addCustomBlock(button);
@@ -161,9 +159,10 @@ export function generateInsertPluginButtonProps({
       const handleFilesAdded = shouldCreateGallery(data)
         ? (blockKey: string) => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : (blockKey: string) => pubsub.getBlockHandler('handleFilesAdded', blockKey);
-      handleFileChange(data, (blockKey, file) =>
-        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
-      );
+      handleFileChange(data, (blockKey, file) => {
+        onPluginAddStep('FileUploadDialog', blockKey);
+        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }));
+      });
     }
   }
 
@@ -194,6 +193,7 @@ export function generateInsertPluginButtonProps({
         onConfirm: obj => {
           const data = addBlock(obj);
           addedBlockKey = data.newBlock;
+          onPluginAddStep('PluginModal', addedBlockKey);
           return data;
         },
         pubsub,
@@ -201,6 +201,7 @@ export function generateInsertPluginButtonProps({
         t,
         isMobile,
         blockKey: addedBlockKey,
+        toolbarName,
       });
     }
   }
