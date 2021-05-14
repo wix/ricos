@@ -17,6 +17,14 @@
     Click to see more.
   </summary>
 
+## 8.34.2 (May 14, 2011)
+
+### :bug: Bug Fix
+
+- `text-toolbar-selection`
+
+  - [#2509](https://github.com/wix-incubator/rich-content/pull/2509) fix scrollY toolbar position
+
 </details>
 <hr/>
 
