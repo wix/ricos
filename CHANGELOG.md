@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+  ### :bug: Bug Fix
+- `file-upload`
+  - [#2461](https://github.com/wix-incubator/rich-content/pull/2461) add 'download' key 
+
 </details>
 <hr/>
 
