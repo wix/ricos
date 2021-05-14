@@ -31,6 +31,7 @@ const excludedExternalsRegexArr = [
   /react-click-outsider/,
   /wix-rich-content-editor-common\/.*?\.scss/,
   /wix-rich-content-common\/.*?\.scss/,
+  /wix-ui-tpa/,
 ];
 
 const localPrefixes = ['\0', '.', '/'];

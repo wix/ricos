@@ -16,6 +16,8 @@ import {
   RichContentTheme,
   SEOSettings,
 } from 'wix-rich-content-common';
+import { Image } from 'wix-ui-tpa/Image';
+
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
@@ -465,6 +467,13 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
         {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
+
+        <Image
+          src="c5f754_dd75514d14fa4057b4f4a6cc8ce7add3~mv2.jpg"
+          width={480}
+          height={360}
+          alt="Garfield smiles and puts his hand over chest"
+        />
       </div>
     );
   }

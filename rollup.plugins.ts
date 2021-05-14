@@ -20,6 +20,7 @@ import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 import { writeFileSync } from 'fs';
+import stylable from '@stylable/rollup-plugin';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -175,6 +176,7 @@ const createFakeStylesFile = (): Plugin => ({
 });
 
 let _plugins: Plugin[] = [
+  stylable(),
   svgr(),
   resolveAlias(),
   resolve(),
