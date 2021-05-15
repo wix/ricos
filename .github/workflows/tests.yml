@@ -9,7 +9,7 @@ on:
 env:
   captureVideos: 'true'
   captureImages: 'true'
-  APPLITOOLS_BATCH_ID: ${{ github.sha }}
+  COMMIT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
 jobs:
   cleanup-runs:
@@ -88,7 +88,7 @@ jobs:
       - name: Update Applitools batch status
         uses: wei/curl@v1.1.1
         with:
-          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.COMMIT_SHA }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
 
   content-state-tests:
     runs-on: ubuntu-18.04
@@ -182,11 +182,11 @@ jobs:
       - name: Get commit author
         id: commit-author
         run: |
-          echo "commit-author=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')" >> $GITHUB_ENV
+          echo "commit-author=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ env.COMMIT_SHA }} | jq '.author.login' | sed 's/\"//g')" >> $GITHUB_ENV
       - name: Get PR number
         id: pr-number
         run: |
-          echo "pr-number=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')" >> $GITHUB_ENV
+          echo "pr-number=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ env.COMMIT_SHA }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')" >> $GITHUB_ENV
       - name: Notify fail in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.3
         if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
@@ -198,11 +198,11 @@ jobs:
       # - name: Get current commit status
       #   id: current-status
       #   run: |
-      #     echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
+      #     echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix/ricos/commits/${{ env.COMMIT_SHA }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
       - name: Get previous commit
         id: previous-commit
         run: |
-          echo "previous-commit=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"  >> $GITHUB_ENV
+          echo "previous-commit=$(curl -s https://api.github.com/repos/wix/ricos/commits/${{ env.COMMIT_SHA }} | jq '.parents[0].sha' | sed 's/\"//g')"  >> $GITHUB_ENV
       # - name: Get previous commit status
       #   id: previous-status
       #   run: |

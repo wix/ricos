@@ -11,6 +11,7 @@ import {
   setBlockNewEntityData,
 } from 'wix-rich-content-editor-common';
 import MobileLinkModal from './MobileLinkModal';
+import { ANCHOR_CATEGORY, WEB_ADDRESS_CATEGORY, ADD_PLUGIN_LINK_BI } from 'wix-rich-content-common';
 
 export default class TextLinkModal extends Component {
   constructor(props) {
@@ -33,7 +34,14 @@ export default class TextLinkModal extends Component {
 
   createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName }) => {
     if (!isEmpty(url) || !isEmpty(anchor)) {
-      const { getEditorState, setEditorState, anchorTarget, relValue, insertLinkFn } = this.props;
+      const {
+        getEditorState,
+        setEditorState,
+        anchorTarget,
+        relValue,
+        insertLinkFn,
+        helpers,
+      } = this.props;
       const editorState = getEditorState();
       if (this.mode === 'TEXT') {
         const newEditorState = insertLinkFn(getEditorState(), {
@@ -71,6 +79,15 @@ export default class TextLinkModal extends Component {
         );
         setEditorState(newEditorState);
       }
+      const params = anchor
+        ? { anchor, category: ANCHOR_CATEGORY }
+        : {
+            link: url,
+            rel: nofollow ? 'nofollow' : relValue,
+            newTab: !!targetBlank,
+            category: WEB_ADDRESS_CATEGORY,
+          };
+      helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, { plugin_id: this.mode, params });
     }
     this.props.hidePopup();
   };
@@ -169,4 +186,5 @@ TextLinkModal.propTypes = {
   insertLinkFn: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
   linkTypes: PropTypes.object,
+  helpers: PropTypes.object,
 };
