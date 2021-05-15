@@ -7,8 +7,8 @@ import {
   LabeledToggle,
   SettingsSection,
   SettingsPanelFooter,
+  SettingsMobileHeader,
 } from 'wix-rich-content-ui-components';
-import { SettingsMobileHeader } from 'wix-rich-content-plugin-commons';
 
 const VideoSettings: React.FC<VideoSettingsProps> = ({
   componentData,
