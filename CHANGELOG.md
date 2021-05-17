@@ -16,7 +16,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+</details>
+<hr/>
+
+## 8.35.0  (May 17, 2021)
 ### :rocket: New Feature
 - `link`
   - [#2511](https://github.com/wix-incubator/rich-content/pull/2511) `toolbar.inlineToolbar` config added (disables inline link toolbar)
@@ -25,10 +29,8 @@
 - `ricos-editor`
   - [#2512](https://github.com/wix-incubator/rich-content/pull/2512) null content defaults to empty in `getContentTraits`
 - `file-upload`
-  - [#2510](https://github.com/wix-incubator/rich-content/pull/2510) add 'download' key 
+  - [#2510](https://github.com/wix-incubator/rich-content/pull/2510) add 'download' key
 
-</details>
-<hr/>
 
 ## 8.34.3 (May 14, 2011)
 
