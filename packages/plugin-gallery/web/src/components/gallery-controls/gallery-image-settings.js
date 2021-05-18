@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import { mergeStyles } from 'wix-rich-content-common';
-import { InputWithLabel } from 'wix-rich-content-plugin-commons';
 import {
   Image,
   FileInput,
+  InputWithLabel,
   SettingsSection,
   SettingsPanelFooter,
 } from 'wix-rich-content-ui-components';
