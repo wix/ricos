@@ -17,20 +17,27 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check plugin container exists before using it
+
 </details>
 <hr/>
 
-## 8.35.0  (May 17, 2021)
+## 8.35.0 (May 17, 2021)
+
 ### :rocket: New Feature
+
 - `link`
   - [#2511](https://github.com/wix-incubator/rich-content/pull/2511) `toolbar.inlineToolbar` config added (disables inline link toolbar)
 
 ### :bug: Bug Fix
+
 - `ricos-editor`
   - [#2512](https://github.com/wix-incubator/rich-content/pull/2512) null content defaults to empty in `getContentTraits`
 - `file-upload`
   - [#2510](https://github.com/wix-incubator/rich-content/pull/2510) add 'download' key
-
 
 ## 8.34.3 (May 14, 2011)
 
