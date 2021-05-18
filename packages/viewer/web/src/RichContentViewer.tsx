@@ -72,6 +72,7 @@ export interface RichContentViewerProps {
   onHover?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setRef?: React.RefObject<any>;
+  onMouseOver?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   /** This is a legacy API, changes should be made also in the new Ricos Viewer API **/
 }
 
@@ -232,6 +233,7 @@ class RichContentViewer extends Component<
       t,
       typeMappers,
       setRef = () => {},
+      onMouseOver = () => {},
     } = this.props;
     try {
       if (this.state.error) {
@@ -280,11 +282,13 @@ class RichContentViewer extends Component<
       const dataId = isInnerRcv ? {} : { 'data-id': 'rich-content-viewer' };
       return (
         <GlobalContext.Provider value={this.state.context}>
+          {/* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events*/}
           <div
             className={wrapperClassName}
             dir={direction || getLangDir(locale)}
             onMouseEnter={e => onHover && onHover(e)}
             ref={setRef}
+            onMouseOver={onMouseOver}
             {...dataId}
           >
             <div className={editorClassName}>{output}</div>

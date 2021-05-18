@@ -6,17 +6,21 @@ import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
 import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
-import TextSelectionToolbarProvider from './textSelectionToolbar/TextSelectionToolbarProvider';
+import loadable from '@loadable/component';
 
+const TextSelectionToolbar = loadable(() => import('./TextSelectionToolbar'));
 interface State {
   isPreviewExpanded: boolean;
   localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
+  renderToolbar: boolean;
 }
 
 export class RicosViewer extends Component<RicosViewerProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   viewerRef!: HTMLElement;
+
+  renderToolbar: boolean;
 
   constructor(props: RicosViewerProps) {
     super(props);
@@ -24,7 +28,9 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
       isPreviewExpanded: false,
       localeData: { locale: props.locale },
       remountKey: false,
+      renderToolbar: false,
     };
+    this.renderToolbar = false;
   }
 
   static defaultProps = { locale: 'en' };
@@ -58,16 +64,24 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
 
   setRef = ref => ref && (this.viewerRef = ref);
 
+  loadTextSelection = () => {
+    const { textSelectionToolbar, isMobile } = this.props;
+    const needTextSelectionToolbar = textSelectionToolbar && !isMobile;
+    if (needTextSelectionToolbar && !this.state.renderToolbar) {
+      TextSelectionToolbar.preload();
+      this.setState({ renderToolbar: true });
+    }
+  };
+
   render() {
-    const { children, seoSettings, textSelectionToolbar, ...props } = this.props;
-    const { isPreviewExpanded, localeData } = this.state;
+    const { children, seoSettings, ...props } = this.props;
+    const { isPreviewExpanded, localeData, renderToolbar } = this.state;
     const child =
       children && shouldRenderChild('RichContentViewer', children) ? (
         children
       ) : (
         <RichContentViewer />
       );
-    const needTextSelectionToolbar = textSelectionToolbar && !this.props.isMobile;
     return [
       <RicosEngine
         key="viewer"
@@ -80,11 +94,12 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         {React.cloneElement(child, {
           seoMode: seoSettings,
           setRef: this.setRef,
+          onMouseOver: this.loadTextSelection,
           ...localeData,
         })}
       </RicosEngine>,
-      needTextSelectionToolbar ? (
-        <TextSelectionToolbarProvider
+      renderToolbar ? (
+        <TextSelectionToolbar
           onButtonClick={this.getBiCallback('onViewerAction')}
           container={this.viewerRef}
         />
