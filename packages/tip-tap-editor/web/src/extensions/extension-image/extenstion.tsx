@@ -9,6 +9,8 @@ export default Node.create({
 
   atom: true,
 
+  content: 'inline*',
+
   addAttributes() {
     return {
       imageData: {},
@@ -24,10 +26,11 @@ export default Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['react-component', mergeAttributes(HTMLAttributes)];
+    return ['react-component', mergeAttributes(HTMLAttributes), 0];
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(Component);
+    // eslint-disable-next-line new-cap
+    return ReactNodeViewRenderer(Component());
   },
 });
