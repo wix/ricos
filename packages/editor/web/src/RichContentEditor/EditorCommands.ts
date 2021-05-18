@@ -19,6 +19,7 @@ import {
   removeLinksInSelection,
   triggerMention,
   insertMention,
+  indentSelectedBlocks,
 } from 'wix-rich-content-editor-common';
 import {
   PluginsDataMap,
@@ -53,6 +54,7 @@ import {
   UNSTYLED,
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
+  INDENT_TYPE,
 } from 'wix-rich-content-common';
 
 type TextBlockType =
@@ -96,6 +98,7 @@ const PLUGIN_TYPE_MAP = {
   [IMAGE_TYPE]: IMAGE_TYPE,
   [VIDEO_TYPE]: VIDEO_TYPE,
   [POLL_TYPE]: POLL_TYPE,
+  [INDENT_TYPE]: INDENT_TYPE,
 };
 
 const triggerDecorationsMap = {
@@ -105,6 +108,10 @@ const triggerDecorationsMap = {
 const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
   [RICOS_MENTION_TYPE]: insertMention,
+};
+
+const textDecorationMap = {
+  [INDENT_TYPE]: indentSelectedBlocks,
 };
 
 const deleteDecorationsMapFuncs = {
@@ -151,6 +158,12 @@ export const createEditorCommands = (
     setTextAlignment: (textAlignment: TextAlignment): void =>
       setEditorState(setTextAlignment(getEditorState(), textAlignment)),
     setSelection,
+    setTextDecoration: (type, data) => {
+      const newEditorState = textDecorationMap[type]?.(getEditorState(), data);
+      if (newEditorState) {
+        setEditorState(newEditorState);
+      }
+    },
   };
 
   const pluginsCommands = {

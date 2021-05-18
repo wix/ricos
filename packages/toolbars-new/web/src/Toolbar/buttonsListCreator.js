@@ -5,6 +5,7 @@ import {
   BLOCKQUOTE,
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
+  INDENT_TYPE,
 } from 'wix-rich-content-common';
 import {
   BoldIcon,
@@ -167,14 +168,14 @@ const buttonsFullData = {
     icon: decreaseIndentPluginIcon,
     dataHook: 'DECREASE_INDENT',
     tooltip: 'Decrease indent',
-    action: 'DECREASE_INDENT',
+    action: INDENT_TYPE,
     type: 'button',
   },
   INCREASE_INDENT: {
     icon: increaseIndentPluginIcon,
     dataHook: 'INCREASE_INDENT',
     tooltip: 'Increase indent',
-    action: 'INCREASE_INDENT',
+    action: INDENT_TYPE,
     type: 'button',
   },
   SPOILER: {
@@ -212,6 +213,8 @@ const buttonsFullData = {
 const inlineStyleButtons = ['Bold', 'Italic', 'Underline'];
 
 const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedList'];
+
+const textDecorationButtons = ['DECREASE_INDENT', 'INCREASE_INDENT'];
 
 export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
   const buttonsList = [];
@@ -297,6 +300,14 @@ const handleButtonOnClick = (buttonsList, index, editorCommands) => {
   } else if (textBlockButtons.includes(buttonName)) {
     buttonsList[index].onClick = () =>
       editorCommands.setBlockType(buttonsFullData[buttonName].action);
+  } else if (textDecorationButtons.includes(buttonName)) {
+    if (buttonName === 'DECREASE_INDENT') {
+      buttonsList[index].onClick = () =>
+        editorCommands.setTextDecoration(buttonsFullData[buttonName].action, -1);
+    } else if (buttonName === 'INCREASE_INDENT') {
+      buttonsList[index].onClick = () =>
+        editorCommands.setTextDecoration(buttonsFullData[buttonName].action, 1);
+    }
   } else if (buttonsFullData[buttonName].action === 'LINK') {
     buttonsList[index].onClick = () => {
       console.log('hasLinkInSelection = ', editorCommands.hasLinkInSelection());
