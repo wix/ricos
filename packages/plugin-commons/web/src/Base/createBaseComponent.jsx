@@ -79,13 +79,15 @@ const createBaseComponent = ({
     };
 
     scrollIntoViewIfNeeded = blockKey => {
-      const boundingRect = this.getBoundingClientRectAsObject(this.containerRef.current);
-      const focusedBlock = pubsub.get('focusedBlock');
-      if (boundingRect.height === 0) {
-        // Required in order to wait for images to load their source
-        setTimeout(() => this.scrollIntoViewIfNeeded(blockKey), 100);
-      } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
-        this.containerRef.current.scrollIntoView();
+      if (this.containerRef.current) {
+        const boundingRect = this.getBoundingClientRectAsObject(this.containerRef.current);
+        const focusedBlock = pubsub.get('focusedBlock');
+        if (boundingRect.height === 0) {
+          // Required in order to wait for images to load their source
+          setTimeout(() => this.scrollIntoViewIfNeeded(blockKey), 100);
+        } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
+          this.containerRef.current.scrollIntoView();
+        }
       }
     };
 
