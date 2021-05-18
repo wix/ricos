@@ -71,7 +71,13 @@ class FileUploadViewer extends PureComponent {
     const { tempDataPlaceHolder, componentData } = this.props;
     const { name, type } = tempDataPlaceHolder ? tempDataPlaceHolder : componentData;
     return (
-      <div className={this.styles.file_upload_link}>{this.renderViewerBody({ name, type })}</div>
+      <div
+        className={classnames(this.styles.file_upload_link, {
+          [this.styles.width_three]: this.isInResizeRange(resizeWidths.third),
+        })}
+      >
+        {this.renderViewerBody({ name, type })}
+      </div>
     );
   };
 
@@ -127,10 +133,10 @@ class FileUploadViewer extends PureComponent {
         infoStyle: this.styles.file_upload_text_error,
       };
     }
-    const fileType = type?.toUpperCase();
-    const translationKey = isLoading || resolvingUrl ? 'UploadFile_Viewer_Loader' : fileType;
+    const translationKey =
+      isLoading || resolvingUrl ? 'UploadFile_Viewer_Loader' : 'UploadFile_Viewer_Download';
     let infoString = t(translationKey, {
-      fileType,
+      fileType: type?.toUpperCase(),
     });
     const size = componentData.size || tempDataPlaceHolder?.size;
     if (size) {
@@ -234,7 +240,9 @@ class FileUploadViewer extends PureComponent {
         onKeyDown={resolveIfEnter}
         role="button"
         tabIndex={0}
-        className={this.styles.file_upload_link}
+        className={classnames(this.styles.file_upload_link, {
+          [this.styles.width_three]: this.isInResizeRange(resizeWidths.third),
+        })}
       >
         {this.renderViewerBody({ name, type })}
       </div>

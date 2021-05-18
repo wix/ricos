@@ -137,3 +137,18 @@ import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
 
 export { isElementOutOfWindow } from './Utils/overflowUtils';
+
+export const emptyDraftContent = {
+  entityMap: {},
+  blocks: [
+    {
+      text: '',
+      key: 'foo',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+};
