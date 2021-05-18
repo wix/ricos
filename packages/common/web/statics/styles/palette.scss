@@ -30,6 +30,7 @@ $focus-action-color: var(--ricos-focus-action-color, $action-color); // color 8
 $focus-action-color-tuple: var(--ricos-focus-action-color-tuple, $action-color-tuple);
 
 $ricos-p-color: var(--ricos-custom-p-color, unset);
+$ricos-p-color-fallbackToPrimary: var(--ricos-custom-p-color, $primary-text-color);
 $ricos-quote-border-color: var(--ricos-custom-quote-border-color, $action-color);
 $ricos-quote-color: var(--ricos-custom-quote-color, unset);
 $ricos-link-color: var(--ricos-custom-link-color, $action-color);
