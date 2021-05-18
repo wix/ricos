@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Loader } from 'wix-rich-content-plugin-commons';
+import { Loader } from 'wix-rich-content-ui-components';
 import { MediaUploadErrorKey } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';

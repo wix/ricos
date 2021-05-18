@@ -12,8 +12,7 @@ import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Loader } from 'wix-rich-content-plugin-commons';
-import { FileInput, MediaItemErrorMsg } from 'wix-rich-content-ui-components';
+import { FileInput, MediaItemErrorMsg, Loader } from 'wix-rich-content-ui-components';
 import { GALLERY_ITEMS_TYPES } from '../../defaults';
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
