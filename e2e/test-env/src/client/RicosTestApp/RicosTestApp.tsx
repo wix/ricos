@@ -20,12 +20,7 @@ import { createPreview } from 'wix-rich-content-preview';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 import { themes } from '../consumersThemes/themes';
-import {
-  PaletteColors,
-  DraftContent,
-  SEOSettings,
-  TEXT_SELECTION_TOOLBAR,
-} from 'wix-rich-content-common';
+import { PaletteColors, DraftContent, SEOSettings } from 'wix-rich-content-common';
 import { EditorState } from '@wix/draft-js';
 import { merge } from 'lodash';
 
@@ -191,7 +186,7 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
-        _rcProps={{ config: { [TEXT_SELECTION_TOOLBAR]: true } }}
+        textSelectionToolbar
       />
     );
   };

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { DraftContent, RicosViewer } from 'ricos-viewer';
-import { TEXT_SELECTION_TOOLBAR } from 'wix-rich-content-common';
 class TextSelectionViewer extends Component<
   { content?: DraftContent },
   { containerRef?: HTMLDivElement }
@@ -11,7 +10,7 @@ class TextSelectionViewer extends Component<
     const { content } = this.props;
     return (
       <div data-hook="viewer" style={{ position: 'relative', paddingTop: '8px' }} ref={this.setRef}>
-        <RicosViewer content={content} _rcProps={{ config: { [TEXT_SELECTION_TOOLBAR]: true } }} />
+        <RicosViewer content={content} textSelectionToolbar />
       </div>
     );
   }

@@ -70,7 +70,8 @@ export interface RichContentViewerProps {
   isInnerRcv?: boolean;
   renderedInTable?: boolean;
   onHover?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  ['text-selection-toolbar']?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setRef?: React.RefObject<any>;
   /** This is a legacy API, changes should be made also in the new Ricos Viewer API **/
 }
 
@@ -230,6 +231,7 @@ class RichContentViewer extends Component<
       platform,
       t,
       typeMappers,
+      setRef = () => {},
     } = this.props;
     try {
       if (this.state.error) {
@@ -282,6 +284,7 @@ class RichContentViewer extends Component<
             className={wrapperClassName}
             dir={direction || getLangDir(locale)}
             onMouseEnter={e => onHover && onHover(e)}
+            ref={setRef}
             {...dataId}
           >
             <div className={editorClassName}>{output}</div>
