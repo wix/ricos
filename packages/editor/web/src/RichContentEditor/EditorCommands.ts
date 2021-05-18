@@ -98,7 +98,6 @@ const PLUGIN_TYPE_MAP = {
   [IMAGE_TYPE]: IMAGE_TYPE,
   [VIDEO_TYPE]: VIDEO_TYPE,
   [POLL_TYPE]: POLL_TYPE,
-  [INDENT_TYPE]: INDENT_TYPE,
 };
 
 const triggerDecorationsMap = {
@@ -108,9 +107,6 @@ const triggerDecorationsMap = {
 const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
   [RICOS_MENTION_TYPE]: insertMention,
-};
-
-const textDecorationMap = {
   [INDENT_TYPE]: indentSelectedBlocks,
 };
 
@@ -158,12 +154,6 @@ export const createEditorCommands = (
     setTextAlignment: (textAlignment: TextAlignment): void =>
       setEditorState(setTextAlignment(getEditorState(), textAlignment)),
     setSelection,
-    setTextDecoration: (type, data) => {
-      const newEditorState = textDecorationMap[type]?.(getEditorState(), data);
-      if (newEditorState) {
-        setEditorState(newEditorState);
-      }
-    },
   };
 
   const pluginsCommands = {
@@ -208,7 +198,7 @@ export const createEditorCommands = (
     ) => {
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
-      const pluginData = createPluginData(data, settings?.isRicosSchema);
+      const pluginData = createPluginData ? createPluginData(data, settings?.isRicosSchema) : data;
       const newEditorState = insertDecorationsMap[type]?.(getEditorState(), pluginData);
       if (newEditorState) {
         setEditorState(newEditorState);

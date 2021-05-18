@@ -214,7 +214,7 @@ const inlineStyleButtons = ['Bold', 'Italic', 'Underline'];
 
 const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedList'];
 
-const textDecorationButtons = ['DECREASE_INDENT', 'INCREASE_INDENT'];
+const decorationButtons = ['DECREASE_INDENT', 'INCREASE_INDENT'];
 
 export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
   const buttonsList = [];
@@ -300,13 +300,13 @@ const handleButtonOnClick = (buttonsList, index, editorCommands) => {
   } else if (textBlockButtons.includes(buttonName)) {
     buttonsList[index].onClick = () =>
       editorCommands.setBlockType(buttonsFullData[buttonName].action);
-  } else if (textDecorationButtons.includes(buttonName)) {
+  } else if (decorationButtons.includes(buttonName)) {
     if (buttonName === 'DECREASE_INDENT') {
       buttonsList[index].onClick = () =>
-        editorCommands.setTextDecoration(buttonsFullData[buttonName].action, -1);
+        editorCommands.insertDecoration(buttonsFullData[buttonName].action, -1);
     } else if (buttonName === 'INCREASE_INDENT') {
       buttonsList[index].onClick = () =>
-        editorCommands.setTextDecoration(buttonsFullData[buttonName].action, 1);
+        editorCommands.insertDecoration(buttonsFullData[buttonName].action, 1);
     }
   } else if (buttonsFullData[buttonName].action === 'LINK') {
     buttonsList[index].onClick = () => {
