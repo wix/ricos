@@ -9,7 +9,7 @@ export {
   UNSUPPORTED_BLOCKS_TYPE,
 } from './consts';
 
-export { default as UrlInputModal } from './Modals/UrlInputModal';
+// export { default as UrlInputModal } from './Modals/UrlInputModal';
 // export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
 
 //Base
@@ -44,7 +44,7 @@ export { default as SettingsPanelFooter } from './Components/SettingsPanelFooter
 // export { default as SettingsSection } from './Components/SettingsSection';
 export { default as Slider } from './Components/Slider';
 export { default as SliderWithInput } from './Components/SliderWithInput';
-export { Tab, Tabs } from './Components/Tabs';
+// export { Tab, Tabs } from './Components/Tabs';
 // export { default as TextInput } from './Components/TextInput';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as Loader } from './Components/Loader';
