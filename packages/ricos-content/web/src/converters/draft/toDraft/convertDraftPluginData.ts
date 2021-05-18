@@ -225,25 +225,28 @@ const convertMapData = data => {
     zoomControl,
     locationName,
     viewModeControl,
+    initialZoom,
+    mapType,
   } = data.mapSettings;
   data.mapSettings.isDraggingAllowed = draggable;
   data.mapSettings.isMarkerShown = marker;
   data.mapSettings.isStreetViewControlShown = streetViewControl;
   data.mapSettings.isZoomControlShown = zoomControl;
   data.mapSettings.locationDisplayName = locationName;
+  data.mapSettings.zoom = initialZoom;
+  data.mapSettings.mode = mapType;
   delete data.mapSettings.draggable;
   delete data.mapSettings.marker;
   delete data.mapSettings.streetViewControl;
   delete data.mapSettings.zoomControl;
   delete data.mapSettings.locationName;
+  delete data.mapSettings.initialZoom;
+  delete data.mapSettings.mapType;
 
   if (viewModeControl) {
     data.mapSettings.isViewControlShown = viewModeControl;
     delete data.mapSettings.viewModeControl;
   }
-
-  data.mapSettings.zoom = 18;
-  data.mapSettings.mode = 'roadmap';
 };
 
 const convertLink = ({

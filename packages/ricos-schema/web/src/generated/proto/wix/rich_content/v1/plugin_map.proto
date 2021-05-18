@@ -26,4 +26,6 @@ message MapSettings {
   google.protobuf.DoubleValue lng = 7;
   google.protobuf.StringValue locationName = 8;
   google.protobuf.BoolValue viewModeControl = 9;
+  google.protobuf.Int32Value initialZoom = 10;
+  google.protobuf.StringValue mapType = 11;
 }

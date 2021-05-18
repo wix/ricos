@@ -212,12 +212,17 @@ const convertMapData = data => {
     isZoomControlShown,
     locationDisplayName,
     isViewControlShown,
+    zoom,
+    mode,
   } = data.mapSettings;
   data.mapSettings.draggable = isDraggingAllowed;
   data.mapSettings.marker = isMarkerShown;
   data.mapSettings.streetViewControl = isStreetViewControlShown;
   data.mapSettings.zoomControl = isZoomControlShown;
   data.mapSettings.locationName = locationDisplayName;
+  data.mapSettings.initialZoom = zoom;
+  data.mapSettings.mapType = mode;
+
   if (has(data.mapSettings, 'isViewControlShown')) {
     data.mapSettings.viewModeControl = isViewControlShown;
   }
