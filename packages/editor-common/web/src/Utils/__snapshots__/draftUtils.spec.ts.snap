@@ -1885,8 +1885,10 @@ EditorState {
 
 exports[`Test draftUtils functions Test draftUtils Links functions Test getLinkDataInSelection function 1`] = `
 Object {
-  "rel": "noopener",
-  "sponsored": undefined,
+  "rel": Object {
+    "nofollow": true,
+    "sponsored": true,
+  },
   "target": "_blank",
   "url": "www.google.com",
 }
@@ -1956,8 +1958,10 @@ Object {
   "entityMap": Object {
     "0": Object {
       "data": Object {
-        "rel": "noopener",
-        "sponsored": undefined,
+        "rel": Object {
+          "nofollow": true,
+          "sponsored": true,
+        },
         "target": "_blank",
         "url": "www.google.com",
       },
@@ -2032,8 +2036,10 @@ Object {
   "entityMap": Object {
     "0": Object {
       "data": Object {
-        "rel": "noopener",
-        "sponsored": undefined,
+        "rel": Object {
+          "nofollow": true,
+          "sponsored": true,
+        },
         "target": "_blank",
         "url": "www.google.com",
       },
@@ -2108,8 +2114,10 @@ Object {
   "entityMap": Object {
     "0": Object {
       "data": Object {
-        "rel": "noopener",
-        "sponsored": undefined,
+        "rel": Object {
+          "nofollow": true,
+          "sponsored": true,
+        },
         "target": "_blank",
         "url": "www.google.com",
       },

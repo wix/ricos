@@ -75,7 +75,7 @@ class MultiSelectLinkPanelDesktop extends PureComponent {
             <div className={styles.multiSelectLinkPanel_LinkPanelContainer}>
               <LinkPanel
                 linkValues={linkPanelValues}
-                onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
+                onChange={linkPanelValues => onChangeLinkPanel(linkPanelValues)}
                 showTargetBlankCheckbox={showTargetBlankCheckbox}
                 showRelValueCheckbox={showRelValueCheckbox}
                 showSponsoredRelValueCheckbox={showSponsoredRelValueCheckbox}

@@ -10,7 +10,6 @@ import {
   normalizeUrl,
   TABLE_TYPE,
   IMAGE_TYPE,
-  getRelValue,
   HTML_TYPE,
   ACTION_BUTTON_TYPE,
   LINK_BUTTON_TYPE,
@@ -92,7 +91,7 @@ class PluginViewer extends PureComponent {
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
-    const { anchorTarget, relValue, config, theme, isMobile } = context;
+    const { anchorTarget, config, theme, isMobile } = context;
     const settings = config?.[type] || {};
     const componentProps = {
       type,
@@ -113,11 +112,11 @@ class PluginViewer extends PureComponent {
         const ContainerElement = hasLink || hasAnchor ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
-          const { url, target, rel, sponsored } = config.link;
+          const { url, target, rel } = config.link;
           containerProps = {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
-            rel: getRelValue({ relValue, rel, sponsored }),
+            rel: `noopener noreferrer ${rel}`,
           };
         }
         if (hasAnchor) {
@@ -215,7 +214,6 @@ PluginViewer.propTypes = {
   context: PropTypes.shape({
     theme: PropTypes.object.isRequired,
     anchorTarget: PropTypes.string.isRequired,
-    relValue: PropTypes.string.isRequired,
     config: PropTypes.object.isRequired,
     isMobile: PropTypes.bool.isRequired,
     helpers: PropTypes.object.isRequired,

@@ -16,7 +16,6 @@ import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import {
-  RelValue,
   AnchorTarget,
   LINK_TYPE,
   CUSTOM_LINK_TYPE,
@@ -25,14 +24,13 @@ import {
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
+import { Link_Rel } from 'ricos-schema';
 
 type LinkDataUrl = {
   url: string;
   targetBlank?: boolean;
-  nofollow?: boolean;
+  rel?: Link_Rel;
   anchorTarget?: string;
-  relValue?: string;
-  sponsored?: boolean;
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
@@ -66,16 +64,14 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue, sponsored }: LinkDataUrl
+  { url, targetBlank, rel, anchorTarget }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   const linkEntityData = createLinkEntityData({
     url,
     targetBlank,
-    nofollow,
+    rel,
     anchorTarget,
-    relValue,
-    sponsored,
   });
 
   return insertLink(editorState, selection, linkEntityData);
@@ -225,23 +221,13 @@ function insertLink(
   );
 }
 
-export function createLinkEntityData({
-  url,
-  anchor,
-  targetBlank,
-  nofollow,
-  anchorTarget,
-  relValue,
-  sponsored,
-}: LinkData) {
+export function createLinkEntityData({ url, anchor, targetBlank, rel, anchorTarget }: LinkData) {
   if (url) {
     const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
     return {
       url,
       target,
       rel,
-      sponsored,
     };
   } else {
     return { anchor };
@@ -667,7 +653,7 @@ function createLastChangeSelection(editorState: EditorState): SelectionState {
 
 export function fixPastedLinks(
   editorState: EditorState,
-  { anchorTarget, relValue }: { anchorTarget?: AnchorTarget; relValue?: RelValue }
+  { anchorTarget, rel }: { anchorTarget?: AnchorTarget; rel?: Link_Rel }
 ) {
   const lastChangeSelection = createLastChangeSelection(editorState);
   const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));
@@ -681,7 +667,7 @@ export function fixPastedLinks(
       content.replaceEntityData(entityKey, {
         url,
         target: anchorTarget || '_self',
-        rel: relValue || 'noopener noreferrer',
+        rel: `noopener noreferrer ${rel}`,
       });
     }
   });

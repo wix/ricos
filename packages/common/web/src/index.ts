@@ -32,6 +32,5 @@ export { isRtl, getLangDir } from './Utils/rtlUtils';
 
 export { simplePubsub, Pubsub, Store } from './Utils/simplePubsub';
 export { generateKey } from './Utils/generateKey';
-export { getRelValue } from './Utils/getRelValue';
 export { getBlocksFromContentState } from './Utils/innerRCEBlocksUtils';
 export * from './consts';

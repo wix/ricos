@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getLinkDataInSelection } from 'wix-rich-content-editor-common';
 import styles from '../../statics/link-viewer.scss';
-import { normalizeUrl, mergeStyles, anchorScroll, getRelValue } from 'wix-rich-content-common';
+import { normalizeUrl, mergeStyles, anchorScroll } from 'wix-rich-content-common';
 
 export default class UrlLinkButton extends Component {
   constructor(props) {
@@ -26,14 +26,14 @@ export default class UrlLinkButton extends Component {
 
   render() {
     const { styles } = this;
-    const { getEditorState, t, relValue } = this.props;
+    const { getEditorState, t } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url = '', anchor, target, rel, sponsored } = linkData || {};
+    const { url = '', anchor, target, rel } = linkData || {};
     const href = url ? normalizeUrl(url) : undefined;
     const anchorProps = {
       href,
       target: target || '_self',
-      rel: getRelValue({ relValue, rel, sponsored }),
+      rel: `noopener noreferrer ${rel}`,
       className: classNames(styles.toolbarUrl, { [styles.toolbarUrlAnchor]: anchor }),
       onMouseDown: this.preventDefault,
       onClick: anchor && this.handleClick,
@@ -49,6 +49,5 @@ export default class UrlLinkButton extends Component {
 UrlLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
-  relValue: PropTypes.string,
   t: PropTypes.func,
 };

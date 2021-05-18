@@ -7,6 +7,7 @@ import { merge } from 'lodash';
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
+import { convertRelStringToObject } from 'wix-rich-content-common';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: ReactElement;
@@ -109,6 +110,15 @@ export class RicosEngine extends Component<EngineProps> {
     } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
+    let { rel } = linkSettings;
+    if (relValue) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        // eslint-disable-next-line max-len
+        `relValue is deprecated, Please use rel prop instead.`
+      );
+      rel = convertRelStringToObject(relValue) || rel;
+    }
     const disableDownload = mediaSettings?.disableDownload || disableRightClick;
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
@@ -131,6 +141,7 @@ export class RicosEngine extends Component<EngineProps> {
         isPreview,
       },
       disabled: pauseMedia,
+      rel,
       anchorTarget,
       relValue,
       textAlignment,

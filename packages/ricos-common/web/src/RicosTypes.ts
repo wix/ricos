@@ -18,6 +18,7 @@ import { RicosCssOverride } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
 import { RichContentViewerProps } from 'wix-rich-content-viewer';
+import { Link_Rel } from 'ricos-schema';
 
 export type RichContentProps = Partial<RichContentEditorProps | RichContentViewerProps>;
 
@@ -124,6 +125,7 @@ export interface MediaSettings {
 export interface LinkSettings {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
+  rel?: Link_Rel;
 }
 
 export type TextAlignment = 'left' | 'right';

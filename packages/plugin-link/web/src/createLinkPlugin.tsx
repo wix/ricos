@@ -27,9 +27,8 @@ type LinkifyData = {
 
 const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config => {
   const type = LINK_TYPE;
-  const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
+  const { theme, anchorTarget, rel, [type]: settings = {}, commonPubsub, ...rest } = config;
   const targetBlank = anchorTarget === '_blank';
-  const nofollow = relValue === 'nofollow';
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
   const toolbar = createLinkToolbar({ ...config, settings, closeInlinePluginToolbar });
 
@@ -51,9 +50,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
         const linkData = createLinkEntityData({
           url,
           targetBlank,
-          nofollow,
+          rel,
           anchorTarget,
-          relValue,
         }) as { url: string; target?: string; rel?: string };
         addLinkPreview(editorState, config, blockKey, linkData);
       }
@@ -110,7 +108,7 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
     }
     let newEditorState = editorState;
     if (isPasteChange(editorState)) {
-      newEditorState = fixPastedLinks(editorState, { anchorTarget, relValue });
+      newEditorState = fixPastedLinks(editorState, { anchorTarget, rel });
     } else if (linkifyData) {
       newEditorState = addLinkAt(linkifyData, editorState);
     }
@@ -157,9 +155,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
       url: string,
       anchorTarget,
-      relValue,
+      rel,
       targetBlank,
-      nofollow,
     });
   };
 
@@ -169,7 +166,7 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
       toolbar,
       type,
       anchorTarget,
-      relValue,
+      rel,
       settings,
       commonPubsub,
       defaultPluginData: DEFAULTS,

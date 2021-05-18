@@ -11,7 +11,13 @@ import {
   setBlockNewEntityData,
 } from 'wix-rich-content-editor-common';
 import LinkModal from './LinkModal';
-import { ANCHOR_CATEGORY, WEB_ADDRESS_CATEGORY, ADD_PLUGIN_LINK_BI } from 'wix-rich-content-common';
+import {
+  ANCHOR_CATEGORY,
+  WEB_ADDRESS_CATEGORY,
+  ADD_PLUGIN_LINK_BI,
+  convertRelObjectToString,
+  convertRelStringToObject,
+} from 'wix-rich-content-common';
 
 export default class TextLinkModal extends Component {
   constructor(props) {
@@ -32,7 +38,7 @@ export default class TextLinkModal extends Component {
     this.props.hidePopup();
   };
 
-  createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName, sponsored }) => {
+  createLinkEntity = ({ url, anchor, targetBlank, rel, defaultName }) => {
     if (!isEmpty(url) || !isEmpty(anchor)) {
       const {
         getEditorState,
@@ -48,10 +54,9 @@ export default class TextLinkModal extends Component {
           url,
           anchor,
           targetBlank,
-          nofollow,
+          rel: convertRelObjectToString(rel),
           anchorTarget,
           relValue,
-          sponsored,
           text: defaultName,
         });
         setEditorState(newEditorState);
@@ -67,7 +72,7 @@ export default class TextLinkModal extends Component {
                   link: {
                     url,
                     target: targetBlank ? '_blank' : anchorTarget,
-                    rel: nofollow ? 'nofollow' : relValue,
+                    rel: convertRelObjectToString(rel),
                   },
                 }),
           },
@@ -84,7 +89,7 @@ export default class TextLinkModal extends Component {
         ? { anchor, category: ANCHOR_CATEGORY }
         : {
             link: url,
-            rel: nofollow ? 'nofollow' : relValue,
+            rel: convertRelObjectToString(rel),
             newTab: !!targetBlank,
             category: WEB_ADDRESS_CATEGORY,
           };
@@ -145,17 +150,15 @@ export default class TextLinkModal extends Component {
       linkTypes,
     } = this.props;
     const linkData = this.getLinkData(getEditorState());
-    const { url, anchor, target, rel, sponsored } = linkData || {};
+    const { url, anchor, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
-    const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
       <LinkModal
         editorState={getEditorState()}
         url={url}
         anchor={anchor}
         targetBlank={targetBlank}
-        nofollow={nofollow}
-        sponsored={sponsored}
+        rel={convertRelStringToObject(rel)}
         theme={theme}
         isActive={!isEmpty(linkData)}
         isMobile={isMobile}

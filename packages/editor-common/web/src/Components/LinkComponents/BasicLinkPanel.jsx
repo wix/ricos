@@ -57,7 +57,7 @@ class BasicLinkPanel extends PureComponent {
         <div className={styles.linkPanel_content}>
           <LinkPanel
             linkValues={linkPanelValues}
-            onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
+            onChange={linkPanelValues => onChangeLinkPanel(linkPanelValues)}
             showTargetBlankCheckbox={showTargetBlankCheckbox}
             showRelValueCheckbox={showRelValueCheckbox}
             showSponsoredRelValueCheckbox={showSponsoredRelValueCheckbox}

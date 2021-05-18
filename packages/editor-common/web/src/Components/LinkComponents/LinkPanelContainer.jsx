@@ -13,8 +13,7 @@ class LinkPanelContainer extends PureComponent {
       url,
       anchor,
       targetBlank,
-      nofollow,
-      sponsored,
+      rel,
       editorState,
       linkTypes,
       unchangedUrl,
@@ -30,7 +29,7 @@ class LinkPanelContainer extends PureComponent {
       ? getAnchorableBlocks(editorState)
       : undefined;
     this.state = {
-      linkPanelValues: { url, targetBlank, nofollow, sponsored },
+      linkPanelValues: { url, targetBlank, rel },
       anchorPanelValues: this.renderBasicLinkPanel
         ? undefined
         : {
@@ -122,11 +121,11 @@ class LinkPanelContainer extends PureComponent {
   };
 
   onChangeLinkPanel = linkPanelValues => {
-    this.setState(linkPanelValues);
+    this.setState({ linkPanelValues });
   };
 
   onChangeAnchorPanel = anchorPanelValues => {
-    this.setState(anchorPanelValues);
+    this.setState({ anchorPanelValues });
   };
 
   render() {
@@ -219,6 +218,7 @@ LinkPanelContainer.propTypes = {
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
+  rel: PropTypes.object,
   nofollow: PropTypes.bool,
   sponsored: PropTypes.bool,
   isActive: PropTypes.bool,

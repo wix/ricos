@@ -60,8 +60,7 @@ const linkData = {
   targetBlank: true,
   nofollow: false,
   anchorTarget: '_blank',
-  relValue: 'noopener',
-  sponsored: undefined,
+  rel: { sponsored: true, nofollow: true },
 };
 const BLOCK_KEY1 = '50k2j';
 const BLOCK_KEY2 = '1u5r4';

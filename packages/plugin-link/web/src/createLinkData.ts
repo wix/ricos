@@ -1,18 +1,21 @@
-import { CreatePluginsDataMap, RICOS_LINK_TYPE, LinkData } from 'wix-rich-content-common';
+import { CreatePluginsDataMap, RICOS_LINK_TYPE } from 'wix-rich-content-common';
 
-const convertLinkData = (data: LinkData) => {
+type LinkData = {
+  url: string;
+  target?: string;
+  rel?: string;
+  anchorTarget?: string;
+  href?: string;
+};
+
+const convertLinkData = ({ url, target, href, rel }: LinkData) => {
   let linkData = {};
-  if (data.target === '_blank') {
+  if (target === '_blank') {
     linkData = { ...linkData, targetBlank: true };
   } else {
-    linkData = { ...linkData, anchorTarget: data.target || '_self' };
+    linkData = { ...linkData, anchorTarget: target || '_self' };
   }
-  if (data.rel === 'nofollow') {
-    linkData = { ...linkData, nofollow: true };
-  } else {
-    linkData = { ...linkData, relValue: data.rel || 'noopener' };
-  }
-  return { ...linkData, url: data.url, href: data.href };
+  return { ...linkData, url, href, rel };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
