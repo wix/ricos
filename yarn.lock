@@ -24990,13 +24990,6 @@ to-camel-case@1.0.0:
   dependencies:
     to-space-case "^1.0.0"
 
-to-constant-case@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/to-constant-case/-/to-constant-case-1.0.0.tgz#63f52729b00e85188be7e0e361789e5eabaa081b"
-  integrity sha1-Y/UnKbAOhRiL5+DjYXieXquqCBs=
-  dependencies:
-    to-snake-case "^1.0.0"
-
 to-fast-properties@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
@@ -25048,20 +25041,6 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
-
-to-slug-case@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/to-slug-case/-/to-slug-case-1.0.0.tgz#92acde53471055a33c830719e8eb78387206d813"
-  integrity sha1-kqzeU0cQVaM8gwcZ6Ot4OHIG2BM=
-  dependencies:
-    to-space-case "^1.0.0"
-
-to-snake-case@1.0.0, to-snake-case@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/to-snake-case/-/to-snake-case-1.0.0.tgz#ce746913897946019a87e62edfaeaea4c608ab8c"
-  integrity sha1-znRpE4l5RgGah+Yu366upMYIq4w=
-  dependencies:
-    to-space-case "^1.0.0"
 
 to-space-case@^1.0.0:
   version "1.0.0"
