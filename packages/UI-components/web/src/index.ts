@@ -28,6 +28,8 @@ export { default as TextInput } from './Components/TextInput';
 // export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
+export { default as InfoIcon } from './Components/InfoIcon';
+export { default as Checkbox } from './Components/Checkbox';
 
 // export { getSelectionStyles } from './Utils/inlineStyleUtils';
 

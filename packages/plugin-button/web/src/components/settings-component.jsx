@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput } from 'wix-rich-content-ui-components';
-import { Checkbox } from 'wix-rich-content-editor-common';
+import { TextInput, Checkbox } from 'wix-rich-content-ui-components';
 import { isValidUrl, mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 

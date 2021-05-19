@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '../../statics/styles/labeled-toggle.scss';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { InfoIcon } from 'wix-rich-content-editor-common';
+import InfoIcon from '../Components/InfoIcon';
 
 export default class LabeledToggle extends Component {
   constructor(props) {

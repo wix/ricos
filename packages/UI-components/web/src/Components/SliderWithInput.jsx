@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce, isNumber } from 'lodash';
-import { InfoIcon } from 'wix-rich-content-editor-common';
+import InfoIcon from '../Components/InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import Slider from './Slider';
 import styles from '../../statics/styles/slider-with-input.scss';
