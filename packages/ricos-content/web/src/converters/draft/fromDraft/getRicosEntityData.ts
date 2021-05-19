@@ -1,5 +1,6 @@
+import { pickBy, identity } from 'lodash';
 /* eslint-disable fp/no-delete */
-import { TextStyle } from 'ricos-schema';
+import { TextStyle, Node_Style } from 'ricos-schema';
 import { RicosEntityMap, RicosContentBlock } from '../../..';
 import { TO_RICOS_DATA_FIELD, TO_RICOS_PLUGIN_TYPE } from '../consts';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
@@ -21,4 +22,11 @@ export const getTextStyle = (blockData?: RicosContentBlock['data']): TextStyle =
   const { 'line-height': lineHeight, 'padding-top': paddingTop, 'padding-bottom': paddingBottom } =
     dynamicStyles || {};
   return { textAlignment: textAlignment?.toUpperCase(), lineHeight, paddingTop, paddingBottom };
+};
+
+export const getNodeStyle = (blockData?: RicosContentBlock['data']): Node_Style => {
+  const { dynamicStyles } = blockData || {};
+  const { 'padding-top': paddingTop, 'padding-bottom': paddingBottom, backgroundColor } =
+    dynamicStyles || {};
+  return pickBy({ paddingTop, paddingBottom, backgroundColor }, identity);
 };

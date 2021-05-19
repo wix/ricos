@@ -1,6 +1,7 @@
 import {
   TextStyle_TextAlignment,
   Node_Type,
+  Node_Style,
   ParagraphData,
   Node,
   Decoration,
@@ -17,8 +18,13 @@ export const createNode = (type: Node_Type, nodes: Node[] = []): Node => ({
   nodes,
 });
 
-export const createParagraphNode = (nodes: Node[] = [], data?: ParagraphData): Node => ({
+export const createParagraphNode = (
+  nodes: Node[] = [],
+  data?: ParagraphData,
+  style?: Node_Style
+): Node => ({
   ...createNode(Node_Type.PARAGRAPH, nodes),
+  style,
   paragraphData: {
     textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,

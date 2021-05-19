@@ -12,6 +12,7 @@ package wix.rich_content.v1;
 
 import "wix/api/validations.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 import "wix/rich_content/v1/decoration_anchor.proto";
 import "wix/rich_content/v1/decoration_color.proto";
 import "wix/rich_content/v1/decoration_link.proto";
@@ -84,6 +85,13 @@ message Node {
         VerticalEmbedData vertical_embed_data = 18;
         VideoData video_data = 19;
     }
+
+    message Style {
+        google.protobuf.StringValue paddingTop = 1;
+        google.protobuf.StringValue paddingBottom = 2;
+        google.protobuf.StringValue backgroundColor = 3;
+    }
+    Style style = 20;
 }
 
 message TextData {
