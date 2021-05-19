@@ -19,7 +19,7 @@ export const convertRelObjectToString = ({ nofollow, sponsored, ugc }: Link_Rel)
     relString += `${UGC}`;
   }
 
-  return relString;
+  return relString.trim();
 };
 
 export const convertRelStringToObject = (rel: string) => {
