@@ -13,8 +13,7 @@ export default class UrlLinkButton extends Component {
   }
 
   handleClick = event => {
-    const { getEditorState, settings } = this.props;
-    const customAnchorScroll = settings?.customAnchorScroll;
+    const { getEditorState, customAnchorScroll } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
     const { anchor = '' } = linkData || {};
     if (customAnchorScroll) {
@@ -54,6 +53,7 @@ export default class UrlLinkButton extends Component {
 UrlLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
+  customAnchorScroll: PropTypes.func,
   settings: PropTypes.object,
   t: PropTypes.func,
 };

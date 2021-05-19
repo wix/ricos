@@ -20,6 +20,7 @@ class LinkViewer extends Component {
     children: PropTypes.node,
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
+    customAnchorScroll: PropTypes.func,
     settings: PropTypes.object,
     isInEditor: PropTypes.bool,
     config: PropTypes.object,
@@ -40,10 +41,10 @@ class LinkViewer extends Component {
   }
 
   handleClick = event => {
-    const { componentData, isInEditor, config, helpers } = this.props;
+    const { componentData, isInEditor, config, helpers, customAnchorScroll } = this.props;
     const settings = config?.[LINK_TYPE];
     if (settings) {
-      const { onClick, customAnchorScroll } = settings;
+      const { onClick } = settings;
       const { anchor, url } = componentData;
       helpers?.onViewerAction?.(LINK_TYPE, 'Click', componentData);
       onClick?.(event, componentData?.customData || this.getHref(url, anchor));
