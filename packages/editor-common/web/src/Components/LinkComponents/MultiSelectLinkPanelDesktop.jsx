@@ -44,9 +44,9 @@ class MultiSelectLinkPanelDesktop extends PureComponent {
     const {
       t,
       ariaProps,
-      showTargetBlankCheckbox,
-      showRelValueCheckbox,
-      showSponsoredRelValueCheckbox,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+      showSponsoredCheckbox,
       sharedPanelsProps,
       buttonsProps,
       radioGroupValue,
@@ -76,9 +76,9 @@ class MultiSelectLinkPanelDesktop extends PureComponent {
               <LinkPanel
                 linkValues={linkPanelValues}
                 onChange={linkPanelValues => onChangeLinkPanel(linkPanelValues)}
-                showTargetBlankCheckbox={showTargetBlankCheckbox}
-                showRelValueCheckbox={showRelValueCheckbox}
-                showSponsoredRelValueCheckbox={showSponsoredRelValueCheckbox}
+                showNewTabCheckbox={showNewTabCheckbox}
+                showNoFollowCheckbox={showNoFollowCheckbox}
+                showSponsoredCheckbox={showSponsoredCheckbox}
                 {...sharedPanelsProps}
               />
             </div>
@@ -104,9 +104,9 @@ MultiSelectLinkPanelDesktop.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
-  showTargetBlankCheckbox: PropTypes.bool,
-  showRelValueCheckbox: PropTypes.bool,
-  showSponsoredRelValueCheckbox: PropTypes.bool,
+  showNewTabCheckbox: PropTypes.bool,
+  showNoFollowCheckbox: PropTypes.bool,
+  showSponsoredCheckbox: PropTypes.bool,
   sharedPanelsProps: PropTypes.object,
   buttonsProps: PropTypes.object,
   radioGroupValue: PropTypes.string,

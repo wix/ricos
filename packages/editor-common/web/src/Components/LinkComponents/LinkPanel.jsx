@@ -14,9 +14,9 @@ class LinkPanel extends Component {
 
   static defaultProps = {
     targetBlank: true,
-    showTargetBlankCheckbox: true,
-    showRelValueCheckbox: true,
-    showSponsoredRelValueCheckbox: true,
+    showNewTabCheckbox: true,
+    showNoFollowCheckbox: true,
+    showSponsoredCheckbox: true,
     isMobile: false,
   };
 
@@ -118,9 +118,9 @@ class LinkPanel extends Component {
     const {
       theme,
       ariaProps,
-      showTargetBlankCheckbox,
-      showRelValueCheckbox,
-      showSponsoredRelValueCheckbox,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+      showSponsoredCheckbox,
       t,
       linkValues,
       unchangedUrl,
@@ -144,7 +144,7 @@ class LinkPanel extends Component {
           </div>
         )}
         <div className={styles.checkboxesContainer}>
-          {showTargetBlankCheckbox && (
+          {showNewTabCheckbox && (
             <Checkbox
               label={t('LinkPanel_Target_Checkbox')}
               theme={theme}
@@ -153,7 +153,7 @@ class LinkPanel extends Component {
               onChange={this.handleTargetChange}
             />
           )}
-          {showRelValueCheckbox && (
+          {showNoFollowCheckbox && (
             <Checkbox
               label={t('LinkPanel_Nofollow_Checkbox')}
               theme={theme}
@@ -165,7 +165,7 @@ class LinkPanel extends Component {
               isMobile={isMobile}
             />
           )}
-          {showSponsoredRelValueCheckbox && (
+          {showSponsoredCheckbox && (
             <Checkbox
               label={t('LinkPanel_Sponsored_Checkbox')}
               theme={theme}
@@ -193,9 +193,9 @@ LinkPanel.propTypes = {
     rel: PropTypes.object,
   }).isRequired,
   ariaProps: PropTypes.object,
-  showTargetBlankCheckbox: PropTypes.bool,
-  showRelValueCheckbox: PropTypes.bool,
-  showSponsoredRelValueCheckbox: PropTypes.bool,
+  showNewTabCheckbox: PropTypes.bool,
+  showNoFollowCheckbox: PropTypes.bool,
+  showSponsoredCheckbox: PropTypes.bool,
   dropDown: PropTypes.object,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,

@@ -191,28 +191,40 @@ Similar to [content](#content) prop; allows content to be injected to mounted Ri
 
 ```jsx
 linkPanelSettings?: {
-  blankTargetToggleVisibilityFn?: (anchorTarget: string) => boolean;
-  nofollowRelToggleVisibilityFn?: (relValue: string) => boolean;
-  sponsoredRelToggleVisibilityFn?: (relValue: string) => boolean;
+  showNewTabCheckbox?: boolean;
+  showNoFollowCheckbox?: boolean;
+  showSponsoredCheckbox?: boolean;
+  blankTargetToggleVisibilityFn?: () => boolean;
+  nofollowRelToggleVisibilityFn?: () => boolean;
   placeholder?: string;}
 ```
 
 Settings for the link panel component.
 
+#### `showNewTabCheckbox`
+
+Determines the 'Open link in a new tab' link panel checkbox visiblity.
+By default, it's visible.
+
+#### `showNoFollowCheckbox`
+
+Determines the 'Add a nofollow tag' link panel checkbox visiblity.
+By default, it's visible.
+
+#### `showSponsoredCheckbox`
+
+Determines the 'Mark as a sponsored link' link panel checkbox visiblity.
+By default, it's visible.
+
 #### `blankTargetToggleVisibilityFn`
 
 Determines the 'Open link in a new tab' link panel checkbox visiblity.
-By default, its predicate is `anchorTarget !== '_blank'`
+By default, it's visible.
 
 #### `nofollowRelToggleVisibilityFn`
 
 Determines the 'Add a nofollow tag' link panel checkbox visiblity.
-By default, its predicate is `relValue !== 'nofollow'`
-
-#### `sponsoredRelToggleVisibilityFn`
-
-Determines the 'Mark as a sponsored link' link panel checkbox visiblity.
-By default, its predicate is ?????
+By default, it's visible.
 
 #### `placeholder`
 

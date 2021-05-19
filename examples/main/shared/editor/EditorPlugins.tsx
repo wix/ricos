@@ -354,7 +354,7 @@ export const uiSettings: UISettings = {
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
-    sponsoredRelToggleVisibilityFn: () => true,
+    showSponsoredCheckbox: true,
     dropDown: getLinkPanelDropDownConfig(),
     //placeholder: "Enter a URL here",
   },

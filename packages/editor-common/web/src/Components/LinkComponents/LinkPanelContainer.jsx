@@ -132,7 +132,6 @@ class LinkPanelContainer extends PureComponent {
     const { radioGroupValue, linkPanelValues, anchorPanelValues } = this.state;
     const {
       theme,
-      anchorTarget,
       isMobile,
       t,
       ariaProps,
@@ -145,16 +144,7 @@ class LinkPanelContainer extends PureComponent {
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
-    const {
-      blankTargetToggleVisibilityFn,
-      nofollowRelToggleVisibilityFn,
-      sponsoredRelToggleVisibilityFn,
-    } = linkPanel || {};
-    const showTargetBlankCheckbox =
-      blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
-    const showRelValueCheckbox = nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn();
-    const showSponsoredRelValueCheckbox =
-      sponsoredRelToggleVisibilityFn && sponsoredRelToggleVisibilityFn();
+    const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
     const sharedPanelsProps = {
       theme,
@@ -181,9 +171,9 @@ class LinkPanelContainer extends PureComponent {
       theme,
       t,
       ariaProps,
-      showTargetBlankCheckbox,
-      showRelValueCheckbox,
-      showSponsoredRelValueCheckbox,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+      showSponsoredCheckbox,
       sharedPanelsProps,
       buttonsProps,
       radioGroupValue,

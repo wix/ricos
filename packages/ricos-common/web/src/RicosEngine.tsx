@@ -111,6 +111,30 @@ export class RicosEngine extends Component<EngineProps> {
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
     const { anchorTarget, relValue, customAnchorScroll } = linkSettings;
     let { rel } = linkSettings;
+    const {
+      blankTargetToggleVisibilityFn,
+      nofollowRelToggleVisibilityFn,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+    } = linkPanelSettings;
+    if (blankTargetToggleVisibilityFn) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        // eslint-disable-next-line max-len
+        `blankTargetToggleVisibilityFn is deprecated, Please use showNewTabCheckbox prop instead.`
+      );
+      linkPanelSettings.showNewTabCheckbox =
+        linkPanelSettings.blankTargetToggleVisibilityFn?.() || showNewTabCheckbox;
+    }
+    if (nofollowRelToggleVisibilityFn) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        // eslint-disable-next-line max-len
+        `nofollowRelToggleVisibilityFn is deprecated, Please use showNoFollowCheckbox prop instead.`
+      );
+      linkPanelSettings.showNoFollowCheckbox =
+        linkPanelSettings.nofollowRelToggleVisibilityFn?.() || showNoFollowCheckbox;
+    }
     if (relValue) {
       // eslint-disable-next-line no-console
       console.warn(

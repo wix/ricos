@@ -88,8 +88,6 @@ class ImageSettings extends Component {
       theme,
       isMobile,
       t,
-      anchorTarget,
-      relValue,
       onNextItem,
       onPreviousItem,
       onDeleteItem,
@@ -100,18 +98,8 @@ class ImageSettings extends Component {
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
-    const {
-      blankTargetToggleVisibilityFn,
-      nofollowRelToggleVisibilityFn,
-      sponsoredRelToggleVisibilityFn,
-      placeholder,
-    } = linkPanel || {};
-    const showTargetBlankCheckbox =
-      blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
-    const showRelValueCheckbox =
-      nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
-    const showSponsoredRelValueCheckbox =
-      sponsoredRelToggleVisibilityFn && sponsoredRelToggleVisibilityFn(relValue);
+    const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox, placeholder } =
+      linkPanel || {};
     const { metadata = {} } = image || {};
 
     const altText = typeof metadata.altText === 'string' ? metadata.altText : metadata.title;
@@ -254,9 +242,9 @@ class ImageSettings extends Component {
                     <LinkPanel
                       linkValues={this.linkToLinkPanel(metadata.link || {})}
                       onChange={this.onLinkPanelChange}
-                      showTargetBlankCheckbox={showTargetBlankCheckbox}
-                      showRelValueCheckbox={showRelValueCheckbox}
-                      showSponsoredRelValueCheckbox={showSponsoredRelValueCheckbox}
+                      showNewTabCheckbox={showNewTabCheckbox}
+                      showNoFollowCheckbox={showNoFollowCheckbox}
+                      showSponsoredCheckbox={showSponsoredCheckbox}
                       theme={theme}
                       t={t}
                       ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
@@ -302,7 +290,6 @@ ImageSettings.propTypes = {
   isMobile: PropTypes.bool,
   t: PropTypes.func,
   anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
   visibleLeftArrow: PropTypes.bool,
   visibleRightArrow: PropTypes.bool,
   uiSettings: PropTypes.object,
