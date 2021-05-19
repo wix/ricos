@@ -29,7 +29,7 @@
 }
 
 .layoutsSelector_icon_selected {
-  color: $settings-action-color;
+  color: $settings-action-color-fallback;
 }
 
 @supports not (display: grid) {
