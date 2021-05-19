@@ -20,7 +20,8 @@
 ### :bug: Bug Fix
 
 - `plugin-commons`
-  - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check plugin container exists before using it
+  - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check if plugin container exists before using it
+  - [#2516](https://github.com/wix-incubator/rich-content/pull/2516) set a threshold for waiting for a component to load (for scrolling)
 
 </details>
 <hr/>
