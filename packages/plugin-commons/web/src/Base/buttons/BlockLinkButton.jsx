@@ -42,7 +42,25 @@ class BlockLinkButton extends Component {
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
       unchangedUrl;
-    const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
+    const customStyles =
+      !isMobile && !OriginalLinkPanel
+        ? {
+            content: {
+              width: 512,
+              maxWidth: 512,
+              height: 390,
+              border: '1px solid rgb(237, 237, 237)',
+              borderRadius: '6px',
+              boxShadow: 'rgba(0, 0, 0, 0.07) 0px 4px 8px 0px',
+              padding: '0px 19px',
+            },
+          }
+        : {
+            content: {
+              position: 'fixed',
+            },
+          };
+    const modalStyles = getModalStyles({ fullScreen: isMobile, isMobile, customStyles });
     const commonPanelProps = {
       componentState,
       helpers,
@@ -58,31 +76,31 @@ class BlockLinkButton extends Component {
       editorState,
       triggerBi: this.triggerBi,
     };
-    if (isMobile) {
-      if (helpers && helpers.openModal) {
-        const modalProps = {
-          modalStyles,
-          hidePopup: helpers.closeModal,
-          isMobile,
-          ...commonPanelProps,
-        };
-        helpers.openModal(modalProps);
-      } else {
-        //eslint-disable-next-line no-console
-        console.error(
-          'Open external helper function is not defined for toolbar button with keyName ' + keyName
-        );
-      }
-    } else {
+    // if (isMobile) {
+    if (helpers && helpers.openModal) {
       const modalProps = {
-        hidePopup: innerModal.closeInnerModal,
-        top: toolbarOffsetTop,
-        left: toolbarOffsetLeft,
-        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'none', padding: '0 19px' },
+        modalStyles,
+        hidePopup: helpers.closeModal,
+        isMobile,
         ...commonPanelProps,
       };
-      innerModal.openInnerModal(modalProps);
+      helpers.openModal(modalProps);
+    } else {
+      //eslint-disable-next-line no-console
+      console.error(
+        'Open external helper function is not defined for toolbar button with keyName ' + keyName
+      );
     }
+    // } else {
+    //   const modalProps = {
+    //     hidePopup: innerModal.closeInnerModal,
+    //     top: toolbarOffsetTop,
+    //     left: toolbarOffsetLeft,
+    //     modalStyles: OriginalLinkPanel ? null : { maxWidth: 'none', padding: '0 19px' },
+    //     ...commonPanelProps,
+    //   };
+    //   innerModal.openInnerModal(modalProps);
+    // }
   };
 
   render() {
