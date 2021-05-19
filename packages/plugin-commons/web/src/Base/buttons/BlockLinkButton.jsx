@@ -42,6 +42,7 @@ class BlockLinkButton extends Component {
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
       unchangedUrl;
+    const { externalPopups = false } = uiSettings.linkPanel;
     const customStyles =
       !isMobile && !OriginalLinkPanel
         ? {
@@ -76,31 +77,31 @@ class BlockLinkButton extends Component {
       editorState,
       triggerBi: this.triggerBi,
     };
-    // if (isMobile) {
-    if (helpers && helpers.openModal) {
+    if (isMobile || externalPopups) {
+      if (helpers && helpers.openModal) {
+        const modalProps = {
+          modalStyles,
+          hidePopup: helpers.closeModal,
+          isMobile,
+          ...commonPanelProps,
+        };
+        helpers.openModal(modalProps);
+      } else {
+        //eslint-disable-next-line no-console
+        console.error(
+          'Open external helper function is not defined for toolbar button with keyName ' + keyName
+        );
+      }
+    } else {
       const modalProps = {
-        modalStyles,
-        hidePopup: helpers.closeModal,
-        isMobile,
+        hidePopup: innerModal.closeInnerModal,
+        top: toolbarOffsetTop,
+        left: toolbarOffsetLeft,
+        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'none', padding: '0 19px' },
         ...commonPanelProps,
       };
-      helpers.openModal(modalProps);
-    } else {
-      //eslint-disable-next-line no-console
-      console.error(
-        'Open external helper function is not defined for toolbar button with keyName ' + keyName
-      );
+      innerModal.openInnerModal(modalProps);
     }
-    // } else {
-    //   const modalProps = {
-    //     hidePopup: innerModal.closeInnerModal,
-    //     top: toolbarOffsetTop,
-    //     left: toolbarOffsetLeft,
-    //     modalStyles: OriginalLinkPanel ? null : { maxWidth: 'none', padding: '0 19px' },
-    //     ...commonPanelProps,
-    //   };
-    //   innerModal.openInnerModal(modalProps);
-    // }
   };
 
   render() {
