@@ -567,6 +567,8 @@
   - [#2239](https://github.com/wix/ricos/pull/2239) `customStyles`:
     - `p` will no longer override elements of all textual entities
     - `lineHeight` of an element is now automatically set to 1.5 to keep ratio of growing text (unless provided).
+- `link`
+  - [#2179](https://github.com/wix/ricos/pull/2179) fix editor scrolling to the top when link modal opens from keyboard shortcuts
 
 ## 8.25.1 (March 2, 2021)
 
