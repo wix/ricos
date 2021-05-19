@@ -40,14 +40,7 @@ export default class TextLinkModal extends Component {
 
   createLinkEntity = ({ url, anchor, targetBlank, rel, defaultName }) => {
     if (!isEmpty(url) || !isEmpty(anchor)) {
-      const {
-        getEditorState,
-        setEditorState,
-        anchorTarget,
-        relValue,
-        insertLinkFn,
-        helpers,
-      } = this.props;
+      const { getEditorState, setEditorState, anchorTarget, insertLinkFn, helpers } = this.props;
       const editorState = getEditorState();
       if (this.mode === 'TEXT') {
         const newEditorState = insertLinkFn(getEditorState(), {
@@ -56,7 +49,6 @@ export default class TextLinkModal extends Component {
           targetBlank,
           rel: convertRelObjectToString(rel),
           anchorTarget,
-          relValue,
           text: defaultName,
         });
         setEditorState(newEditorState);
@@ -139,16 +131,7 @@ export default class TextLinkModal extends Component {
   }
 
   render() {
-    const {
-      getEditorState,
-      theme,
-      isMobile,
-      anchorTarget,
-      relValue,
-      t,
-      uiSettings,
-      linkTypes,
-    } = this.props;
+    const { getEditorState, theme, isMobile, anchorTarget, t, uiSettings, linkTypes } = this.props;
     const linkData = this.getLinkData(getEditorState());
     const { url, anchor, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
@@ -163,7 +146,6 @@ export default class TextLinkModal extends Component {
         isActive={!isEmpty(linkData)}
         isMobile={isMobile}
         anchorTarget={anchorTarget}
-        relValue={relValue}
         onDone={this.createLinkEntity}
         onCancel={this.onCancel}
         onDelete={this.deleteLink}
@@ -186,7 +168,6 @@ TextLinkModal.propTypes = {
   nofollow: PropTypes.bool,
   sponsored: PropTypes.bool,
   anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,

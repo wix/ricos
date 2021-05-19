@@ -58,7 +58,6 @@ export default class BlockLinkModal extends Component {
       theme,
       isMobile,
       anchorTarget,
-      relValue,
       t,
       uiSettings,
       unchangedUrl,
@@ -78,7 +77,6 @@ export default class BlockLinkModal extends Component {
         isActive={!!componentLink}
         isMobile={isMobile}
         anchorTarget={anchorTarget}
-        relValue={relValue}
         onDone={this.setLinkInBlockData}
         onCancel={this.hidePopup}
         onDelete={this.deleteLink}
@@ -100,7 +98,6 @@ BlockLinkModal.propTypes = {
   isMobile: PropTypes.bool,
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,

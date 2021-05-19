@@ -24,7 +24,6 @@ MultiSelectLinkPanel.propTypes = {
   anchor: PropTypes.string,
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
   nofollow: PropTypes.bool,
   isActive: PropTypes.bool,
   isMobile: PropTypes.bool,
