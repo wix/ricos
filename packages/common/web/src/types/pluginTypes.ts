@@ -11,8 +11,6 @@ import {
   TextButtonMapper,
   GetEditorState,
   SetEditorState,
-  AnchorTarget,
-  RelValue,
   ThemeGeneratorFunction,
   RichContentTheme,
 } from '.';
