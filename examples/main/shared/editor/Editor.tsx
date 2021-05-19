@@ -31,8 +31,6 @@ interface ExampleEditorProps {
   scrollingElementFn?: any;
   testAppConfig?: TestAppConfig;
   mockImageIndex?: number;
-  shouldMultiSelectImages?: boolean;
-  shouldMockUpload?: boolean;
   contentState?: DraftContent;
   injectedContent?: DraftContent;
   onRicosEditorChange?: RicosEditorProps['onChange'];

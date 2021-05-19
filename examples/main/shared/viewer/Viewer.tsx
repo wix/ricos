@@ -1,5 +1,5 @@
 import React, { PureComponent, RefObject } from 'react';
-import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { DraftContent, SEOSettings, AvailableExperiments } from 'wix-rich-content-common';
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
