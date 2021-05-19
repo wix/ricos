@@ -5,7 +5,7 @@ import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { genKey } from '../../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
-import { getEntity, getTextStyle } from './getRicosEntityData';
+import { getEntity, getNodeStyle, getTextStyle } from './getRicosEntityData';
 import { createParagraphNode, initializeMetadata } from '../../nodeUtils';
 
 export const ensureRicosContent = (content: RichContent | DraftContent): RichContent =>
@@ -60,6 +60,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     return {
       key: block.key,
       nodes: [],
+      style: getNodeStyle(block.data),
       ...getEntity(block.entityRanges[0].key, entityMap),
     };
   };
@@ -68,12 +69,14 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     key: block.key,
     type: Node_Type.BLOCKQUOTE,
     nodes: [parseTextBlock(block)],
+    style: getNodeStyle(block.data),
   });
 
   const parseCodeBlock = (block: RicosContentBlock): Node => ({
     key: block.key,
     type: Node_Type.CODEBLOCK,
     nodes: getTextNodes(block, entityMap),
+    style: getNodeStyle(block.data),
     codeData: {
       textStyle: getTextStyle(block.data),
     },
@@ -95,11 +98,16 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
         textStyle: getTextStyle(block.data),
       },
       nodes: getTextNodes(block, entityMap),
+      style: getNodeStyle(block.data),
     };
   };
 
   const parseTextBlock = (block: RicosContentBlock): Node => {
-    const paragraphNode: Node = createParagraphNode([], { textStyle: getTextStyle(block.data) });
+    const paragraphNode: Node = createParagraphNode(
+      [],
+      { textStyle: getTextStyle(block.data) },
+      getNodeStyle(block.data)
+    );
 
     switch (block.type) {
       case BlockType.Unstyled:
@@ -156,6 +164,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
         key: genKey(),
         type: FROM_DRAFT_LIST_TYPE[listType],
         nodes: listNodes,
+        style: getNodeStyle(blocks[searchIndex].data),
       },
       nextIndex: searchIndex,
     };
