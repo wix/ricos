@@ -21,6 +21,8 @@
 
 - `*`
   - [#2517](https://github.com/wix-incubator/rich-content/pull/2517) settings action color fix - several elements were wired to use fallback mechanism, unnecessarily
+- `link-toolbar`
+  - [#2515](https://github.com/wix/ricos/pull/2515) update link toolbar when moving from link to link
 - `plugin-commons`
   - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check if plugin container exists before using it
   - [#2516](https://github.com/wix-incubator/rich-content/pull/2516) set a threshold for waiting for a component to load (for scrolling)
