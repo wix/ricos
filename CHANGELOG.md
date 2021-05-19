@@ -21,6 +21,8 @@
 
 - `editor viewer`
   - [#2459](https://github.com/wix-incubator/rich-content/pull/2459) added `customAnchorScroll` prop support through `linkSettings`
+- `plugin-commons`
+  - [#2519](https://github.com/wix-incubator/rich-content/pull/2519) `uiSettings.linkPanel.externalPopups` config for link popup appearance
 
 ### :bug: Bug Fix
 
