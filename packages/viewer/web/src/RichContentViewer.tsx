@@ -119,7 +119,7 @@ class RichContentViewer extends Component<
     const {
       initialState,
       anchorTarget,
-      relValue,
+      rel,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
       config,
     } = props;
@@ -134,7 +134,7 @@ class RichContentViewer extends Component<
     return initialState
       ? normalizeInitialState(initialState, {
           anchorTarget,
-          relValue,
+          rel,
           disableInlineImages,
           removeInvalidInlinePlugins,
           disableDownload,

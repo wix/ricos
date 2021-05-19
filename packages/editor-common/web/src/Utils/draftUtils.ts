@@ -29,7 +29,7 @@ import { Link_Rel } from 'ricos-schema';
 type LinkDataUrl = {
   url: string;
   targetBlank?: boolean;
-  rel?: Link_Rel;
+  rel?: string;
   anchorTarget?: string;
 };
 
@@ -667,7 +667,7 @@ export function fixPastedLinks(
       content.replaceEntityData(entityKey, {
         url,
         target: anchorTarget || '_self',
-        rel: `noopener noreferrer ${rel}`,
+        rel,
       });
     }
   });

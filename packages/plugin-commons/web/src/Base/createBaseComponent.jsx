@@ -202,14 +202,13 @@ const createBaseComponent = ({
         this.removeLinkData();
         return;
       }
-      const { url, anchor, target, rel, sponsored } = linkData;
+      const { url, anchor, target, rel } = linkData;
       if (this.isMeAndIdle()) {
         const link = url
           ? {
               url,
               target,
               rel,
-              sponsored,
             }
           : { anchor };
         this.updateLinkData(link);

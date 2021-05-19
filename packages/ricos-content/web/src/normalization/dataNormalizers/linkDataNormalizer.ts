@@ -9,7 +9,7 @@ const validate = ({ targetBlank, nofollow, target, rel }) =>
 
 const linkDataNormalizer = (
   componentData,
-  { anchorTarget, rel }: { anchorTarget: string; rel: Link_Rel }
+  { anchorTarget, rel = {} }: { anchorTarget: string; rel: Link_Rel }
 ) => {
   // converts { targetBlank, nofollow } => { target, rel }
   const { targetBlank, nofollow, ...rest } = componentData;

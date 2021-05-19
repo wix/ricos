@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageClientAPI from 'image-client-api/dist/imageClientSDK';
-import { mergeStyles } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  convertRelStringToObject,
+  convertRelObjectToString,
+} from 'wix-rich-content-common';
 import {
   FileInput,
   Image,
@@ -56,28 +60,22 @@ class ImageSettings extends Component {
     this.props.onUpdateItem({ link: this.linkPanelToLink(linkPanelValues) });
   };
 
-  linkPanelToLink = ({ url, targetBlank, nofollow, isValid, sponsored }) => ({
+  linkPanelToLink = ({ url, targetBlank, rel, isValid }) => ({
     url,
     target: targetBlank
       ? '_blank'
       : this.props.anchorTarget !== '_blank'
       ? this.props.anchorTarget
       : '_self',
-    rel: nofollow
-      ? 'nofollow'
-      : this.props.relValue !== 'nofollow'
-      ? this.props.relValue
-      : 'noopener',
+    rel: convertRelObjectToString(rel),
     isValid,
-    sponsored,
   });
 
-  linkToLinkPanel = ({ url = '', target, rel, isValid, sponsored }) => ({
+  linkToLinkPanel = ({ url = '', target, rel, isValid }) => ({
     url,
     targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
-    nofollow: rel ? rel === 'nofollow' : this.props.relValue === 'nofollow',
+    rel: convertRelStringToObject(rel),
     isValid,
-    sponsored,
   });
 
   render() {
