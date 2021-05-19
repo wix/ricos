@@ -22,7 +22,7 @@
 }
 
 .toolbarUrl {
-  color: $settings-action-color;
+  color: $settings-action-color-fallback;
   max-width: 270px;
   white-space: nowrap;
   overflow: hidden;

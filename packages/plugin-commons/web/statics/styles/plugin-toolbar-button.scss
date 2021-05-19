@@ -15,7 +15,7 @@
   }
 
   .pluginToolbarButton_active {
-    background-color: rgba($settings-action-color-tuple, 0.1);
+    background-color: rgba($settings-action-color-fallback-tuple, 0.1);
     @include fillWithSettingsActionColor();
   }
 }
@@ -46,7 +46,7 @@
 
   &:not(.pluginToolbarButton_disabled) {
     &.pluginToolbarButton_active {
-      color: $settings-action-color;
+      color: $settings-action-color-fallback;
       @include fillWithSettingsActionColor();
       @include svg-fill;
     }
