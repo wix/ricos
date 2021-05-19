@@ -10,6 +10,7 @@ import {
   EditorPlugin,
   ViewerPlugin,
   onAtomicBlockFocus,
+  CustomAnchorScroll,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -124,6 +125,7 @@ export interface MediaSettings {
 export interface LinkSettings {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
+  customAnchorScroll?: CustomAnchorScroll;
 }
 
 export type TextAlignment = 'left' | 'right';
