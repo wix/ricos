@@ -28,17 +28,17 @@ function handleText(text: string, maxTextLength: number) {
 
 const TwitterButton: FunctionComponent<{
   selectedText: string;
-  onViewerAction?: (pluginId: string, action: string, value: string) => void;
-}> = ({ selectedText, onViewerAction }) => {
-  const onClick = selectedText => {
-    onViewerAction?.('TWITTER', 'Click', selectedText);
+  onClick?: (selectedText: string) => void;
+}> = ({ selectedText, onClick }) => {
+  const handleOnClick = selectedText => {
+    onClick?.(selectedText);
     openTwitter(selectedText);
   };
   return (
     <button
       data-hook="twitter-button"
       className={styles.button}
-      onClick={() => onClick(selectedText)}
+      onClick={() => handleOnClick(selectedText)}
     >
       <Twitter />
     </button>
