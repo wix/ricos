@@ -351,7 +351,7 @@ export default class Editor extends PureComponent<ExampleEditorProps, ExampleEdi
                 <TopToolbar />
               </div>
             )}
-            {this.renderTextFormattingToolbar()}
+            {experiments?.newFormattingToolbar?.enabled && this.renderTextFormattingToolbar()}
             <RichContentEditor
               placeholder={'Add some text!'}
               ref={this.setEditorRef}
