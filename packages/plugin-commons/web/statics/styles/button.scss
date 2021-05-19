@@ -8,10 +8,10 @@
 .button_primary {
   @extend %button;
   color: #fff;
-  background-color: $settings-action-color;
+  background-color: $settings-action-color-fallback;
 
   &:hover:not([disabled]) {
-    background-color: rgba($settings-action-color-tuple, 0.8);
+    background-color: rgba($settings-action-color-fallback-tuple, 0.8);
   }
 
   &:disabled {
@@ -23,13 +23,13 @@
 
 .button_secondary {
   @extend %button;
-  border: 1px solid $settings-action-color;
+  border: 1px solid $settings-action-color-fallback;
   background: #fff;
-  color: $settings-action-color;
+  color: $settings-action-color-fallback;
   &:hover,
   &:active {
-    border-color: rgba($settings-action-color-tuple, 0.6);
-    color: rgba($settings-action-color-tuple, 0.6);
+    border-color: rgba($settings-action-color-fallback-tuple, 0.6);
+    color: rgba($settings-action-color-fallback-tuple, 0.6);
   }
 
   &:disabled {

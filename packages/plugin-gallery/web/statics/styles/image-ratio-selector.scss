@@ -42,7 +42,7 @@
 }
 
 .imageRatioSelector_ratioButton_selected {
-  background-color: $settings-action-color;
+  background-color: $settings-action-color-fallback;
 }
 
 .imageRatioSelector_ratioLabel {
