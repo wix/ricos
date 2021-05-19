@@ -15,7 +15,7 @@ import {
   OnPluginAction,
 } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
-import { RicosEditor, RicosEditorProps } from 'ricos-editor';
+import { RicosEditor, RicosEditorProps, RicosEditorType } from 'ricos-editor';
 
 const anchorTarget = '_blank';
 const relValue = 'noopener';
@@ -40,7 +40,7 @@ interface ExampleEditorProps {
 export default class Editor extends PureComponent<ExampleEditorProps> {
   config: RichContentEditorProps['config'];
   helpers: RichContentEditorProps['helpers'];
-  editor: RichContentEditor;
+  editor: RicosEditorType;
   ricosPlugins: RicosEditorProps['plugins'];
 
   constructor(props: ExampleEditorProps) {
@@ -158,6 +158,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
         {this.renderExternalToolbar()}
         <div className="editor">
           <RicosEditor
+            ref={ref => (this.editor = ref)}
             onChange={onRicosEditorChange}
             content={contentState}
             injectedContent={injectedContent}
