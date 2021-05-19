@@ -234,6 +234,7 @@ exports[`text > allow to apply inline styles and links #0`] =
   "entityMap": {
     "0": {
       "data": {
+        "rel": "",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -241,6 +242,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "1": {
       "data": {
+        "rel": "",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -248,6 +250,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "2": {
       "data": {
+        "rel": "",
         "url": "https://www.sport5.co.il/"
       },
       "mutability": "MUTABLE",
@@ -255,6 +258,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "3": {
       "data": {
+        "rel": "",
         "url": "https://www.one.co.il/"
       },
       "mutability": "MUTABLE",
