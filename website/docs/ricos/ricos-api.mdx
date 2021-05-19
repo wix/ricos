@@ -6,6 +6,9 @@ sidebar_label: Ricos API
 
 import { RicosEditor } from 'ricos-editor';
 import 'ricos-editor/dist/styles.min.css';
+import 'ricos-viewer/dist/styles.min.css';
+import viewerContent from '../../infra/editor/content/intro.json';
+import { RicosViewer } from 'ricos-viewer';
 
 ## Ricos Common API
 
@@ -430,3 +433,20 @@ index - number of free content blocks
 #### `addAnchors`
 
 TODO
+
+#### `textSelectionToolbar`
+
+When given a truthy value, text-selection-toolbar appears inline when selecting some text and allows tweet text.
+
+```jsx
+import { RicosViewer } from 'ricos-viewer';
+import 'ricos-viewer/dist/styles.min.css';
+
+<RicosViewer textSelectionToolbar />;
+```
+
+Select some text below to see text-selection-toolbar
+
+<div className="card">
+  <RicosViewer content={viewerContent} textSelectionToolbar />
+</div>

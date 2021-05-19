@@ -69,6 +69,7 @@ export interface RicosViewerProps extends RicosProps, Pick<RichContentViewerProp
   plugins?: ViewerPlugin[];
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
+  textSelectionToolbar?: boolean;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
