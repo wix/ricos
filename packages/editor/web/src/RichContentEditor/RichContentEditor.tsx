@@ -57,6 +57,7 @@ import {
   BICallbacks,
   AnchorTarget,
   RelValue,
+  CustomAnchorScroll,
   EditorContextType,
   PluginButton,
   TextButtonMapping,
@@ -135,6 +136,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
   rel?: Link_Rel;
+  customAnchorScroll?: CustomAnchorScroll;
   style?: CSSProperties;
   locale: string;
   shouldRenderOptimizedImages?: boolean;
@@ -386,6 +388,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       locale,
       anchorTarget,
       rel,
+      customAnchorScroll,
       helpers = {},
       config,
       isMobile = false,
@@ -405,6 +408,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       locale,
       anchorTarget,
       rel,
+      customAnchorScroll,
       helpers: {
         ...helpers,
         onPluginAdd: (pluginId: string, entryPoint: string) =>

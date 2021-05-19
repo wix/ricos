@@ -109,7 +109,7 @@ export class RicosEngine extends Component<EngineProps> {
       onModalClose,
     } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
-    const { anchorTarget, relValue } = linkSettings;
+    const { anchorTarget, relValue, customAnchorScroll } = linkSettings;
     let { rel } = linkSettings;
     if (relValue) {
       // eslint-disable-next-line no-console
@@ -144,6 +144,7 @@ export class RicosEngine extends Component<EngineProps> {
       rel,
       anchorTarget,
       relValue,
+      customAnchorScroll,
       textAlignment,
       onAtomicBlockFocus,
     };

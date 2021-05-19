@@ -66,15 +66,20 @@ Will render in mobile optimized mode
 ### `linkSettings`
 
 ```jsx
+
+CustomAnchorScroll: (event: Event, anchor: string) => void;
+
 linkSettings?: {
   anchorTarget?: string;
   relValue?: string;
+  customAnchorScroll?: CustomAnchorScroll;
 }
 ```
 
 Defines the behavior of links.
 anchorTarget - as defined in [HTMLAnchorElement.target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target)
 relValue - as defined in [HTMLAnchorElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/rel)
+customAnchorScroll - enables overriding the default anchor scroll behaviour
 
 ### `locale`
 

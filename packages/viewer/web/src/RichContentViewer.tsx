@@ -20,6 +20,7 @@ import {
   RichContentTheme,
   AnchorTarget,
   RelValue,
+  CustomAnchorScroll,
   LegacyViewerPluginConfig,
   OnErrorFunction,
   NormalizeConfig,
@@ -57,6 +58,7 @@ export interface RichContentViewerProps {
   anchorTarget?: AnchorTarget;
   rel?: Link_Rel;
   relValue?: RelValue;
+  customAnchorScroll?: CustomAnchorScroll;
   config: LegacyViewerPluginConfig;
   textDirection?: TextDirection;
   direction?: TextDirection;
@@ -151,6 +153,7 @@ class RichContentViewer extends Component<
       isMobile = false,
       anchorTarget,
       relValue,
+      customAnchorScroll,
       config,
       helpers = {},
       locale,
@@ -168,6 +171,7 @@ class RichContentViewer extends Component<
       isMobile,
       anchorTarget,
       relValue,
+      customAnchorScroll,
       config,
       helpers,
       locale,
