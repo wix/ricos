@@ -111,7 +111,7 @@
 
 .checkbox_inputLabel:hover .checkbox_icon_unchecked {
   background-color: #fff;
-  color: $settings-action-color;
+  color: $settings-action-color-fallback;
 }
 
 .checkbox_infoIcon {
@@ -124,13 +124,13 @@
   border: solid 1px #000;
 
   &:hover {
-    color: rgba($settings-action-color-tuple, 0.1);
+    color: rgba($settings-action-color-fallback-tuple, 0.1);
   }
 }
 
 .checkbox_icon_checked {
   background-color: #fff;
-  color: $settings-action-color;
+  color: $settings-action-color-fallback;
 }
 
 .checkbox_label {

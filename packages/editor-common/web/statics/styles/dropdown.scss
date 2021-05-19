@@ -92,15 +92,15 @@ $dropdown-font-size: 14px;
   white-space: nowrap;
 
   .divider {
-    color: $settings-action-color;
+    color: $settings-action-color-fallback;
   }
 
   &:hover {
-    color: $settings-action-color;
+    color: $settings-action-color-fallback;
 
     svg {
-      color: $settings-action-color;
-      fill: $settings-action-color;
+      color: $settings-action-color-fallback;
+      fill: $settings-action-color-fallback;
     }
   }
 

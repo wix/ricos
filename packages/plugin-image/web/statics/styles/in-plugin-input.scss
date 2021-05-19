@@ -8,15 +8,9 @@
   position: inherit;
   z-index: 1;
   font: inherit;
-  color: $primary-text-color;
-  @include ricosTypography('p', false);
+  @include ricosTypography('p', true);
   font-size: 14px;
-
-  &.link {
-    @include ricosTypography('link', true);
-    color: $ricos-link-color;
-    font-size: 14px;
-  }
+  color: $ricos-p-color-fallbackToPrimary;
 
   &[readonly] {
     cursor: pointer;

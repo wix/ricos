@@ -175,17 +175,16 @@ describe('plugins', () => {
           .click();
         cy.loadOutOfViewImagesInGallery();
         cy.waitForGalleryImagesToLoad();
-        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+        cy.get('img[data-idx="0"]', {
           timeout: 10000,
         }).should('be.visible');
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
-        cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
-        cy.get('[data-hook=fullscreen-root] [data-hook=image-item]', {
+        cy.get('[data-hook=nav-arrow-next]').click({ force: true });
+
+        cy.get('[data-hook=nav-arrow-back]').should('be.visible');
+        cy.get('img[data-idx="1"]', {
           timeout: 10000,
-        })
-          .eq(1)
-          .should('be.visible');
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        }).should('be.visible');
       });
     });
 
