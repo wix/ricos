@@ -50,7 +50,7 @@
     "wix-rich-content-fullscreen": "8.35.0",
     "wix-rich-content-text-selection-toolbar": "8.35.0",
     "wix-rich-content-viewer": "8.35.0",
-    "@loadable/component": "^5.15.0"
+    "@loadable/component": "^5.14.1"
   },
   "jest": {
     "globals": {
