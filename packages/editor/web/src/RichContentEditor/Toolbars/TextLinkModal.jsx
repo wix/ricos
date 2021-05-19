@@ -165,8 +165,6 @@ TextLinkModal.propTypes = {
   url: PropTypes.string,
   isMobile: PropTypes.bool,
   targetBlank: PropTypes.bool,
-  nofollow: PropTypes.bool,
-  sponsored: PropTypes.bool,
   anchorTarget: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,

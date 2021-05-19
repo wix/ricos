@@ -216,8 +216,6 @@ LinkPanelContainer.propTypes = {
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
   rel: PropTypes.object,
-  nofollow: PropTypes.bool,
-  sponsored: PropTypes.bool,
   isActive: PropTypes.bool,
   isMobile: PropTypes.bool,
   onOverrideContent: PropTypes.func,

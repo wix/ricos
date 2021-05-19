@@ -87,7 +87,7 @@ class MultiSelectLinkPanelDesktop extends PureComponent {
             <AnchorPanel
               anchorableBlocksData={anchorableBlocksData}
               anchorValues={anchorPanelValues}
-              onChange={anchorPanelValues => onChangeAnchorPanel({ anchorPanelValues })}
+              onChange={anchorPanelValues => onChangeAnchorPanel(anchorPanelValues)}
               blockPreview={blockPreview}
               {...sharedPanelsProps}
             />
