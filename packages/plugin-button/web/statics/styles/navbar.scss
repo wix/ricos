@@ -2,7 +2,7 @@
 
 .button_navbar_container {
   height: 50px;
-  background: $settings-action-color;
+  background: $settings-action-color-fallback;
   color: #fff;
 }
 .button_navbar_settingOptions {

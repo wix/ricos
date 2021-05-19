@@ -17,13 +17,57 @@
     Click to see more.
   </summary>
 
-### :nail_care: Polish
+### :bug: Bug Fix
 
-- `common`
-  - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
+- `*`
+  - [#2517](https://github.com/wix-incubator/rich-content/pull/2517) settings action color fix - several elements were wired to use fallback mechanism, unnecessarily
+- `link-toolbar`
+  - [#2515](https://github.com/wix/ricos/pull/2515) update link toolbar when moving from link to link
+- `plugin-commons`
+  - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check if plugin container exists before using it
+  - [#2516](https://github.com/wix-incubator/rich-content/pull/2516) set a threshold for waiting for a component to load (for scrolling)
 
 </details>
 <hr/>
+
+## 8.35.0 (May 17, 2021)
+
+### :rocket: New Feature
+
+- `link`
+  - [#2511](https://github.com/wix-incubator/rich-content/pull/2511) `toolbar.inlineToolbar` config added (disables inline link toolbar)
+
+### :bug: Bug Fix
+
+- `ricos-editor`
+  - [#2512](https://github.com/wix-incubator/rich-content/pull/2512) null content defaults to empty in `getContentTraits`
+- `file-upload`
+  - [#2510](https://github.com/wix-incubator/rich-content/pull/2510) add 'download' key
+
+## 8.34.3 (May 14, 2011)
+
+### :bug: Bug Fix
+
+- `text-toolbar-selection`
+  - [#2509](https://github.com/wix-incubator/rich-content/pull/2509) fix scrollY toolbar position
+
+## 8.34.2 (May 13, 2011)
+
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2416](https://github.com/wix-incubator/rich-content/pull/2416) fix sliders drag and input issues
+
+### :nail_care: Polish
+
+- `editor`
+  - [#2489](https://github.com/wix/ricos/pull/2489) fix action color on editor element focus (+ fallback box-shadow)
+- `image`
+  - [#2488](https://github.com/wix/ricos/pull/2488) fix caption text styling to match ricos theme
+  - [#2507](https://github.com/wix/ricos/pull/2507) new theme guideline for caption text when link is attached
+- `common`
+  - [#2489](https://github.com/wix/ricos/pull/2489) fix action color on editor element focus (+ fallback box-shadow)
+  - [#2486](https://github.com/wix/ricos/pull/2486) onViewerLoaded now contains `pluginsCount`
 
 ## 8.34.1 (May 11, 2021)
 
@@ -139,7 +183,6 @@
 - `plugin-commons`
   - [#2397](https://github.com/wix/ricos/pull/2397) scroll to plugin added out of view
 - `gallery`
-
   - [#2402](https://github.com/wix/ricos/pull/2402) galleries on horizontal `scrollDirection` have height and arrows
 
 ### :house: Internal
@@ -191,7 +234,6 @@
 - `image viewer`
   - [#2398](https://github.com/wix/ricos/pull/2398) Avoid exception when image src missing
 - `editor`
-
   - [#2385](https://github.com/wix/ricos/pull/2385) toolbar shortcuts in mac & windows
 
 ## 8.30.3 (April 22, 2021)
