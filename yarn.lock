@@ -4210,6 +4210,169 @@
     "@testing-library/dom" "^6.15.0"
     "@types/testing-library__react" "^9.1.2"
 
+"@tiptap/core@^2.0.0-beta.45", "@tiptap/core@^2.0.0-beta.53":
+  version "2.0.0-beta.53"
+  resolved "https://registry.npmjs.org/@tiptap/core/-/core-2.0.0-beta.53.tgz#fc6f57921d813b3b1f12ed92c6e7b9bbc347b4e5"
+  integrity sha512-zspO2tGlMW8tRZNfLIhcIis0ZSwhAGfdcwvPfJtksN4u1OXgtzvH261DwKdN9OrV6kwOPuN5WiSyRxgAoRXcMA==
+  dependencies:
+    "@types/prosemirror-commands" "^1.0.4"
+    "@types/prosemirror-inputrules" "^1.0.4"
+    "@types/prosemirror-keymap" "^1.0.4"
+    "@types/prosemirror-model" "^1.13.0"
+    "@types/prosemirror-schema-list" "^1.0.3"
+    "@types/prosemirror-state" "^1.2.6"
+    "@types/prosemirror-transform" "^1.1.2"
+    "@types/prosemirror-view" "^1.17.1"
+    prosemirror-commands "^1.1.7"
+    prosemirror-inputrules "^1.1.3"
+    prosemirror-keymap "^1.1.3"
+    prosemirror-model "^1.14.1"
+    prosemirror-schema-list "^1.1.4"
+    prosemirror-state "^1.3.4"
+    prosemirror-transform "^1.3.2"
+    prosemirror-view "^1.18.4"
+
+"@tiptap/extension-blockquote@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-blockquote/-/extension-blockquote-2.0.0-beta.11.tgz#ca0be20501506a5555f39c4ec61d0fb3fb8a1713"
+  integrity sha512-lIE+VYm22rtDPe6nCxisn5YfSibP/oJwiaOdcYNVqBHNx49PDyYKqCT4EO7RWBw2CqZ+SuPIabrU0JYkjmHU7g==
+  dependencies:
+    prosemirror-inputrules "^1.1.3"
+
+"@tiptap/extension-bold@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-bold/-/extension-bold-2.0.0-beta.11.tgz#d8ac973d2795fc46231e5969d922ce8c3f7404b8"
+  integrity sha512-ppak6sIYp2amVWwbU714rGrd+uN0jPLrg3RNh3+uZOuFNEeJK9IHuumhVqIiHqAd1aJ/m9M+tz2x5mrk0M/T3g==
+
+"@tiptap/extension-bullet-list@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-bullet-list/-/extension-bullet-list-2.0.0-beta.11.tgz#6d3ccc047120bdd7576f0d1d286ae61a03c8b96e"
+  integrity sha512-2Fq3uoq1tkwghUezuPO/5UcFEZUn7Ksn7CZ9MY0nPGONazxf2oHPbQjjH/jQW4b9H/qsDBVrxgype+qsW9cOkA==
+  dependencies:
+    prosemirror-inputrules "^1.1.3"
+
+"@tiptap/extension-code-block@^2.0.0-beta.13":
+  version "2.0.0-beta.13"
+  resolved "https://registry.npmjs.org/@tiptap/extension-code-block/-/extension-code-block-2.0.0-beta.13.tgz#9a41d103ed5b5a4810564c67105a89725b12559a"
+  integrity sha512-IjYxiEkHmcRQu9qSc/InalurSxQD33ti39VqwDRZqKKG0rkAZSJhKyETdopVjr3EuE6YIp38CJdQfma7OENUXw==
+  dependencies:
+    prosemirror-inputrules "^1.1.3"
+
+"@tiptap/extension-code@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-code/-/extension-code-2.0.0-beta.11.tgz#484d63cde6ad5951e9075e2a47ebe0f6b633742f"
+  integrity sha512-8u69zfc5Rd7QKZ3bZTj2IC4hJx34pT6lZ5u8XPS9DTlEPEXBp3XWgpZxuxFmoNhABqEPHYyBJao5eINtfQhhRg==
+
+"@tiptap/extension-document@^2.0.0-beta.10":
+  version "2.0.0-beta.10"
+  resolved "https://registry.npmjs.org/@tiptap/extension-document/-/extension-document-2.0.0-beta.10.tgz#2ccf4e5496f6b15c6bfa4f720b89af74fb871df4"
+  integrity sha512-ugWixuQnZnmeXCk6Tp0lFWLdER5WL2QHJ9QOXSYoiT0LIfDivRhDvm4a0C0pToUL+f++jzfI8jcIvroHATWwVg==
+
+"@tiptap/extension-dropcursor@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-dropcursor/-/extension-dropcursor-2.0.0-beta.11.tgz#620120a7f95e7cf21e6a3362ba38b2eacfa98a88"
+  integrity sha512-FwNoazT3BbvFsYxoQrmtVgLG1owEVhtoeaHndIWzMNxOGCWa96JtXsPgch9hSzQzb95qA5TFrFAftF/d5fkG8w==
+  dependencies:
+    "@types/prosemirror-dropcursor" "^1.0.1"
+    prosemirror-dropcursor "^1.3.4"
+
+"@tiptap/extension-gapcursor@^2.0.0-beta.15":
+  version "2.0.0-beta.15"
+  resolved "https://registry.npmjs.org/@tiptap/extension-gapcursor/-/extension-gapcursor-2.0.0-beta.15.tgz#6bafbd095e8673449f976935200f22a623d4043c"
+  integrity sha512-1qV9Wy4xa2oKD3JT5htK0Eu+tsPdknfXzWpdQT/P1NmTGk/Ysfy7CuipYNMaYD31NAreumXrC3CyDvel+1xo/A==
+  dependencies:
+    "@types/prosemirror-gapcursor" "^1.0.3"
+    prosemirror-gapcursor "^1.1.5"
+
+"@tiptap/extension-hard-break@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-hard-break/-/extension-hard-break-2.0.0-beta.11.tgz#b2d457bb5c4f97d052b2537a7624d9609822ef65"
+  integrity sha512-jjJDY6buBu/2hGp4lpO+jrfMPfqnTaRJxMVv21eZylFHsEvrBFfy5yAj5RdLaqHg8RO3Av2aRwztXFn6oiEQ1Q==
+
+"@tiptap/extension-heading@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-heading/-/extension-heading-2.0.0-beta.11.tgz#9da6864aeafaeed83551559932253c9ab16621fb"
+  integrity sha512-ymhb5q7iBIGFGU4hRrsVFJDx6zOUqF9qBBzufD44lT4KukFEqxjOO1RofOKI5V8VOTuhfx/hAt67fvwh4UR5iQ==
+  dependencies:
+    prosemirror-inputrules "^1.1.3"
+
+"@tiptap/extension-history@^2.0.0-beta.10":
+  version "2.0.0-beta.10"
+  resolved "https://registry.npmjs.org/@tiptap/extension-history/-/extension-history-2.0.0-beta.10.tgz#bb14500e193118295eb8c55ae4c2ddc5f2ae5d72"
+  integrity sha512-iy6H4Y63hvIkD+W1YJ5fOpvhRXHurRuypZajnupommxRigorA3z8MTySsUs7PIKx3vYvxYjr4dKS/6Shs72DSQ==
+  dependencies:
+    "@types/prosemirror-history" "^1.0.2"
+    prosemirror-history "^1.1.3"
+
+"@tiptap/extension-horizontal-rule@^2.0.0-beta.14":
+  version "2.0.0-beta.14"
+  resolved "https://registry.npmjs.org/@tiptap/extension-horizontal-rule/-/extension-horizontal-rule-2.0.0-beta.14.tgz#bc23541ab5885c25a804b6b6f3c0ed2e505f7327"
+  integrity sha512-gCqJWhdqTfYKntlZ9dNlImFdFawRzfDbXDiffsnu1hqrEwCTweR5mWE+8qayRDL/JAEAqsFDLbgyPrYZQ1bvbA==
+  dependencies:
+    prosemirror-state "^1.3.4"
+
+"@tiptap/extension-italic@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-italic/-/extension-italic-2.0.0-beta.11.tgz#fa5668ede5dd5373277da4bafc26415a2771d7f6"
+  integrity sha512-bm7iYB6HZTWa/ncU83hcAvjXjB7hei86xG5u+Hl2d11PvR6j/6srn1FWcXmf/2xwuWI/mUCTpl+ZfkoY7oTu9w==
+
+"@tiptap/extension-list-item@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-list-item/-/extension-list-item-2.0.0-beta.11.tgz#22639904f9fdee8b80e344fe142e9065e9451337"
+  integrity sha512-HKA9q2q9AobbB3er12FbXAy3rHVd41LXFKegpP/2Fle3gembN+VlazSXqHHWzlbaHgQAVn1MP6pnwaDFDYGNeA==
+
+"@tiptap/extension-ordered-list@^2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.npmjs.org/@tiptap/extension-ordered-list/-/extension-ordered-list-2.0.0-beta.11.tgz#37dd6cbb8b271bf8902ffcbad2a2e282ea078f6e"
+  integrity sha512-EYv8jKahmGgumIz/MHfI1zsGTz7YgTII7WdKPG8C3hpkDdkg/tb28Ue14CXlQ2hSGWjFTf1U0gHgHcPaJHMYJg==
+  dependencies:
+    prosemirror-inputrules "^1.1.3"
+
+"@tiptap/extension-paragraph@^2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "https://registry.npmjs.org/@tiptap/extension-paragraph/-/extension-paragraph-2.0.0-beta.12.tgz#849aad4294a341abd93781174dbdc369d9b7570c"
+  integrity sha512-qzURExCJ9gKLnzRE219BWp0S/wNNhX8NQI+ipMSIRoh5wZInCHwZnObRLsGuQI/qH/lQ0Y0QYWzA8VknCaH1kA==
+
+"@tiptap/extension-strike@^2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "https://registry.npmjs.org/@tiptap/extension-strike/-/extension-strike-2.0.0-beta.12.tgz#0a7452e92d5042c8884eda38f6496a1ecc28e264"
+  integrity sha512-qAJiC31BmRUOnDzGmMev2PMR5hhTIGIlH3aeZDiIsfiGCUleuyM3qJHIasq11W4Yap0s52qsSGI0+cmdVkbR/w==
+
+"@tiptap/extension-text@^2.0.0-beta.10":
+  version "2.0.0-beta.10"
+  resolved "https://registry.npmjs.org/@tiptap/extension-text/-/extension-text-2.0.0-beta.10.tgz#50681ba2c8e8a54305a89efb1adb0e68d683e4eb"
+  integrity sha512-4AdB5e88FmDbBWe9nTOCpvV5QpY2RoBKMqdSTsJcBhxGCXspomgOjbjYMtMabNkhd5mt76l2l65TyjRKSh5BCQ==
+
+"@tiptap/extension-underline@latest":
+  version "2.0.0-beta.12"
+  resolved "https://registry.npmjs.org/@tiptap/extension-underline/-/extension-underline-2.0.0-beta.12.tgz#f2e86ca21b6534401c0f45a74842462dcb009519"
+  integrity sha512-4Wpf3xvp6YPb+hKA3zDbU8ucWlf0B7yq8ACTIBRnTcz55UPNfkuEe1pm3jRQSRSMJ/917VVSxCgnnD6jFJ6e9g==
+
+"@tiptap/starter-kit@^2.0.0-beta.45":
+  version "2.0.0-beta.50"
+  resolved "https://registry.npmjs.org/@tiptap/starter-kit/-/starter-kit-2.0.0-beta.50.tgz#6ac15bf911c45364c8a19f9505deb30c85b07330"
+  integrity sha512-oio13vCfL9VmM4OedkwxX4hRtDHp7tw4shZxoi1uUIfAEJ369Yn/U50GDQF+zXa1MQLiyo2mmbA56rJKCqeXZg==
+  dependencies:
+    "@tiptap/core" "^2.0.0-beta.53"
+    "@tiptap/extension-blockquote" "^2.0.0-beta.11"
+    "@tiptap/extension-bold" "^2.0.0-beta.11"
+    "@tiptap/extension-bullet-list" "^2.0.0-beta.11"
+    "@tiptap/extension-code" "^2.0.0-beta.11"
+    "@tiptap/extension-code-block" "^2.0.0-beta.13"
+    "@tiptap/extension-document" "^2.0.0-beta.10"
+    "@tiptap/extension-dropcursor" "^2.0.0-beta.11"
+    "@tiptap/extension-gapcursor" "^2.0.0-beta.15"
+    "@tiptap/extension-hard-break" "^2.0.0-beta.11"
+    "@tiptap/extension-heading" "^2.0.0-beta.11"
+    "@tiptap/extension-history" "^2.0.0-beta.10"
+    "@tiptap/extension-horizontal-rule" "^2.0.0-beta.14"
+    "@tiptap/extension-italic" "^2.0.0-beta.11"
+    "@tiptap/extension-list-item" "^2.0.0-beta.11"
+    "@tiptap/extension-ordered-list" "^2.0.0-beta.11"
+    "@tiptap/extension-paragraph" "^2.0.0-beta.12"
+    "@tiptap/extension-strike" "^2.0.0-beta.12"
+    "@tiptap/extension-text" "^2.0.0-beta.10"
+
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
@@ -4580,14 +4743,73 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/prosemirror-model@*":
+"@types/prosemirror-commands@*", "@types/prosemirror-commands@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/@types/prosemirror-commands/-/prosemirror-commands-1.0.4.tgz#d08551415127d93ae62e7239d30db0b5e7208e22"
+  integrity sha512-utDNYB3EXLjAfYIcRWJe6pn3kcQ5kG4RijbT/0Y/TFOm6yhvYS/D9eJVnijdg9LDjykapcezchxGRqFD5LcyaQ==
+  dependencies:
+    "@types/prosemirror-model" "*"
+    "@types/prosemirror-state" "*"
+    "@types/prosemirror-view" "*"
+
+"@types/prosemirror-dropcursor@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@types/prosemirror-dropcursor/-/prosemirror-dropcursor-1.0.1.tgz#3ba98dd861ff2a62559e70f453f996a1ef5ec55d"
+  integrity sha512-nHokhFypOZjknolZBm2XShlR7fx1IUcCiA3S2fBwmAraWu6zv3gboDSwwFpoS9UB2xKc4ismAmBxh2bpL3YNkg==
+  dependencies:
+    "@types/prosemirror-state" "*"
+
+"@types/prosemirror-gapcursor@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/@types/prosemirror-gapcursor/-/prosemirror-gapcursor-1.0.3.tgz#989e98c734e01e2ed4cab39992e60a1b0646cab6"
+  integrity sha512-kBVjjbMmUk7ZsgpI1NOyY15makulu1skEGr+V9GgY7GQnT9vqjo8/XiNSgSj9s9vRTsTb/KAaTI9KJwWlhbhxQ==
+  dependencies:
+    "@types/prosemirror-model" "*"
+    "@types/prosemirror-state" "*"
+
+"@types/prosemirror-history@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/@types/prosemirror-history/-/prosemirror-history-1.0.2.tgz#f90a009a0dcd71393faa69ce705593dec76347a1"
+  integrity sha512-AcfpWo+HkIuvq/H2zYjIMi2jxa2GWfYaTNiFTB2sigjkpWNM93CIlb7Cimy/4vNH8lVPp0GwLBjYIMRX6zOUyA==
+  dependencies:
+    "@types/prosemirror-model" "*"
+    "@types/prosemirror-state" "*"
+
+"@types/prosemirror-inputrules@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/@types/prosemirror-inputrules/-/prosemirror-inputrules-1.0.4.tgz#4cb75054d954aa0f6f42099be05eb6c0e6958bae"
+  integrity sha512-lJIMpOjO47SYozQybUkpV6QmfuQt7GZKHtVrvS+mR5UekA8NMC5HRIVMyaIauJLWhKU6oaNjpVaXdw41kh165g==
+  dependencies:
+    "@types/prosemirror-model" "*"
+    "@types/prosemirror-state" "*"
+
+"@types/prosemirror-keymap@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/@types/prosemirror-keymap/-/prosemirror-keymap-1.0.4.tgz#f73c79810e8d0e0a20d153d84f998f02e5afbc0c"
+  integrity sha512-ycevwkqUh+jEQtPwqO7sWGcm+Sybmhu8MpBsM8DlO3+YTKnXbKA6SDz/+q14q1wK3UA8lHJyfR+v+GPxfUSemg==
+  dependencies:
+    "@types/prosemirror-commands" "*"
+    "@types/prosemirror-model" "*"
+    "@types/prosemirror-state" "*"
+    "@types/prosemirror-view" "*"
+
+"@types/prosemirror-model@*", "@types/prosemirror-model@^1.13.0":
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/@types/prosemirror-model/-/prosemirror-model-1.13.0.tgz#d05937e918c3cac2cf49630ccab04a65fc5fffd6"
   integrity sha512-EIUr2R38Zh9n1eA8BQ1C3NX/XLV9U44DhNVk8x3Sth2RW+wa7jNA82XHMPOoapsOTfmpnh32xaHBOzREiBqdPQ==
   dependencies:
     "@types/orderedmap" "*"
 
-"@types/prosemirror-state@*", "@types/prosemirror-state@^1.2.5":
+"@types/prosemirror-schema-list@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/@types/prosemirror-schema-list/-/prosemirror-schema-list-1.0.3.tgz#bdf1893a7915fbdc5c49b3cac9368e96213d70de"
+  integrity sha512-uWybOf+M2Ea7rlbs0yLsS4YJYNGXYtn4N+w8HCw3Vvfl6wBAROzlMt0gV/D/VW/7J/LlAjwMezuGe8xi24HzXA==
+  dependencies:
+    "@types/orderedmap" "*"
+    "@types/prosemirror-model" "*"
+    "@types/prosemirror-state" "*"
+
+"@types/prosemirror-state@*", "@types/prosemirror-state@^1.2.5", "@types/prosemirror-state@^1.2.6":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@types/prosemirror-state/-/prosemirror-state-1.2.6.tgz#bb0169084239a8393b354c6fda5420fc347d6bab"
   integrity sha512-tJo0wC+/cQvbrPDVx01Fnng9Fs41bAMVxgJY1KLOyIsUPN0otUN1KdoQurLMmHNHTvIna9ZXxjZD//xJKLYfJw==
@@ -4596,14 +4818,14 @@
     "@types/prosemirror-transform" "*"
     "@types/prosemirror-view" "*"
 
-"@types/prosemirror-transform@*":
+"@types/prosemirror-transform@*", "@types/prosemirror-transform@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@types/prosemirror-transform/-/prosemirror-transform-1.1.2.tgz#fe883c19a5a9f1882346a294efd09d55c6764c7a"
   integrity sha512-Ozyvs5Dquc49gaFysmC4gNhv6E65r569HSzw4RXdZgIljZ5Y9K4kHFlDvsWBBDH19+1178X9LMmM9J620O6Bug==
   dependencies:
     "@types/prosemirror-model" "*"
 
-"@types/prosemirror-view@*":
+"@types/prosemirror-view@*", "@types/prosemirror-view@^1.17.1":
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/@types/prosemirror-view/-/prosemirror-view-1.17.1.tgz#0895df5a57ae6e68d4f3f8020d9be4ef52192980"
   integrity sha512-PNiGGc6BffxHQzMR09UUilsBR8xFPDsKiPIXb4K/g56voPIvqq1pqySnWFfSR50Vo4ZL0tss3VBLWiiiKzVahQ==
@@ -19096,6 +19318,11 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
+orderedmap@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/orderedmap/-/orderedmap-1.1.1.tgz#c618e77611b3b21d0fe3edc92586265e0059c789"
+  integrity sha512-3Ux8um0zXbVacKUkcytc0u3HgC0b0bBLT+I60r2J/En72cI0nZffqrA7Xtf2Hqs27j1g82llR5Mhbd0Z1XW4AQ==
+
 original@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/original/-/original-1.0.2.tgz#e442a61cffe1c5fd20a65f3261c26663b303f25f"
@@ -20736,6 +20963,98 @@ property-information@^5.0.0:
   integrity sha512-YUHSPk+A30YPv+0Qf8i9Mbfe/C0hdPXk1s1jPVToV8pk8BQtpw10ct89Eo7OWkutrwqvT0eicAxlOg3dOAu8JA==
   dependencies:
     xtend "^4.0.0"
+
+prosemirror-commands@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.npmjs.org/prosemirror-commands/-/prosemirror-commands-1.1.7.tgz#5b31ae0fe82835d36d22c780641c0b651f27dd03"
+  integrity sha512-tuQr8q5euDjE+WAHWmu1JMLYWsPfUDH80QLLpnQrPYOPysO26FZyyHwEvA0+hUzvF8fOt1oMj0+/YM9UsPkZiA==
+  dependencies:
+    prosemirror-model "^1.0.0"
+    prosemirror-state "^1.0.0"
+    prosemirror-transform "^1.0.0"
+
+prosemirror-dropcursor@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.npmjs.org/prosemirror-dropcursor/-/prosemirror-dropcursor-1.3.4.tgz#a7f799ff9ecb520d3e1dbb3cb39d27ce41066618"
+  integrity sha512-eVmpMG5+fmvANT3xDzRirmG240rB/piI31ExIfW0Mkvo5/cYC/lm1fFMAOzjO22uc5OQXiodRqOnyE05+g3UqA==
+  dependencies:
+    prosemirror-state "^1.0.0"
+    prosemirror-transform "^1.1.0"
+    prosemirror-view "^1.1.0"
+
+prosemirror-gapcursor@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.npmjs.org/prosemirror-gapcursor/-/prosemirror-gapcursor-1.1.5.tgz#0c37fd6cbb1d7c46358c2e7397f8da9a8b5c6246"
+  integrity sha512-SjbUZq5pgsBDuV3hu8GqgIpZR5eZvGLM+gPQTqjVVYSMUCfKW3EGXTEYaLHEl1bGduwqNC95O3bZflgtAb4L6w==
+  dependencies:
+    prosemirror-keymap "^1.0.0"
+    prosemirror-model "^1.0.0"
+    prosemirror-state "^1.0.0"
+    prosemirror-view "^1.0.0"
+
+prosemirror-history@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npmjs.org/prosemirror-history/-/prosemirror-history-1.1.3.tgz#4f76a1e71db4ef7cdf0e13dec6d8da2aeaecd489"
+  integrity sha512-zGDotijea+vnfnyyUGyiy1wfOQhf0B/b6zYcCouBV8yo6JmrE9X23M5q7Nf/nATywEZbgRLG70R4DmfSTC+gfg==
+  dependencies:
+    prosemirror-state "^1.2.2"
+    prosemirror-transform "^1.0.0"
+    rope-sequence "^1.3.0"
+
+prosemirror-inputrules@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npmjs.org/prosemirror-inputrules/-/prosemirror-inputrules-1.1.3.tgz#93f9199ca02473259c30d7e352e4c14022d54638"
+  integrity sha512-ZaHCLyBtvbyIHv0f5p6boQTIJjlD6o2NPZiEaZWT2DA+j591zS29QQEMT4lBqwcLW3qRSf7ZvoKNbf05YrsStw==
+  dependencies:
+    prosemirror-state "^1.0.0"
+    prosemirror-transform "^1.0.0"
+
+prosemirror-keymap@^1.0.0, prosemirror-keymap@^1.1.3:
+  version "1.1.4"
+  resolved "https://registry.npmjs.org/prosemirror-keymap/-/prosemirror-keymap-1.1.4.tgz#8b481bf8389a5ac40d38dbd67ec3da2c7eac6a6d"
+  integrity sha512-Al8cVUOnDFL4gcI5IDlG6xbZ0aOD/i3B17VT+1JbHWDguCgt/lBHVTHUBcKvvbSg6+q/W4Nj1Fu6bwZSca3xjg==
+  dependencies:
+    prosemirror-state "^1.0.0"
+    w3c-keyname "^2.2.0"
+
+prosemirror-model@^1.0.0, prosemirror-model@^1.1.0, prosemirror-model@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.npmjs.org/prosemirror-model/-/prosemirror-model-1.14.1.tgz#d784c67f95a5d66b853e82ff9a87a50353ef9cd5"
+  integrity sha512-vZcbI+24VloFefKZkDnMaEpipL/vSKKPdFiik4KOnTzq3e6AO7+CAOixZ2G/SsfRaYC965XvnOIEbhIQdgki7w==
+  dependencies:
+    orderedmap "^1.1.0"
+
+prosemirror-schema-list@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.npmjs.org/prosemirror-schema-list/-/prosemirror-schema-list-1.1.4.tgz#471f9caf2d2bed93641d2e490434c0d2d4330df1"
+  integrity sha512-pNTuZflacFOBlxrTcWSdWhjoB8BaucwfJVp/gJNxztOwaN3wQiC65axclXyplf6TKgXD/EkWfS/QAov3/Znadw==
+  dependencies:
+    prosemirror-model "^1.0.0"
+    prosemirror-transform "^1.0.0"
+
+prosemirror-state@^1.0.0, prosemirror-state@^1.2.2, prosemirror-state@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.npmjs.org/prosemirror-state/-/prosemirror-state-1.3.4.tgz#4c6b52628216e753fc901c6d2bfd84ce109e8952"
+  integrity sha512-Xkkrpd1y/TQ6HKzN3agsQIGRcLckUMA9u3j207L04mt8ToRgpGeyhbVv0HI7omDORIBHjR29b7AwlATFFf2GLA==
+  dependencies:
+    prosemirror-model "^1.0.0"
+    prosemirror-transform "^1.0.0"
+
+prosemirror-transform@^1.0.0, prosemirror-transform@^1.1.0, prosemirror-transform@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/prosemirror-transform/-/prosemirror-transform-1.3.2.tgz#5620ebe7379e6fae4f34ecc881886cb22ce96579"
+  integrity sha512-/G6d/u9Mf6Bv3H1XR8VxhpjmUO75LYmnvj+s3ZfZpakU1hnQbsvCEybml1B3f2IWUAAQRFkbO1PnsbFhLZsYsw==
+  dependencies:
+    prosemirror-model "^1.0.0"
+
+prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.18.4:
+  version "1.18.4"
+  resolved "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.18.4.tgz#179141df117cf414434ade08115f2e233d135f6d"
+  integrity sha512-6oi62XRK5WxhMX1Amjk5uMsWILUEcFbFF75i09BzpAdI+5glhs7heCaRvKOj4v3YRJ7LJVkOXS9xvjetlE3+pA==
+  dependencies:
+    prosemirror-model "^1.1.0"
+    prosemirror-state "^1.0.0"
+    prosemirror-transform "^1.1.0"
 
 proto-list@~1.2.1:
   version "1.2.4"
@@ -22835,6 +23154,11 @@ rollup@1.31.1, rollup@^0.63.4, rollup@^1.23.1, rollup@^1.31.1:
     "@types/estree" "*"
     "@types/node" "*"
     acorn "^7.1.0"
+
+rope-sequence@^1.3.0:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/rope-sequence/-/rope-sequence-1.3.2.tgz#a19e02d72991ca71feb6b5f8a91154e48e3c098b"
+  integrity sha512-ku6MFrwEVSVmXLvy3dYph3LAMNS0890K7fabn+0YIRQ2T96T9F4gkFf0vf0WW0JUraNWwGRtInEpH7yO4tbQZg==
 
 rst-selector-parser@^2.2.3:
   version "2.2.3"
@@ -26361,6 +26685,11 @@ w3c-hr-time@^1.0.1, w3c-hr-time@^1.0.2:
   integrity sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ==
   dependencies:
     browser-process-hrtime "^1.0.0"
+
+w3c-keyname@^2.2.0:
+  version "2.2.4"
+  resolved "https://registry.npmjs.org/w3c-keyname/-/w3c-keyname-2.2.4.tgz#4ade6916f6290224cdbd1db8ac49eab03d0eef6b"
+  integrity sha512-tOhfEwEzFLJzf6d1ZPkYfGj+FWhIpBux9ppoP3rlclw3Z0BZv3N7b7030Z1kYth+6rDuAsXUFr+d0VE6Ed1ikw==
 
 w3c-xmlserializer@^1.1.2:
   version "1.1.2"

@@ -1,0 +1,24 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.button_navbar_container {
+  height: 50px;
+  background: $settings-action-color;
+  color: #fff;
+}
+.button_navbar_settingOptions {
+  height: 21px;
+  font-size: 14px;
+  padding: 15px 14px;
+}
+.button_navbar_button {
+  height: 100%;
+  width: 50%;
+  display: inline-block;
+  background: inherit;
+  border: none;
+  font-size: 13px;
+  text-align: left;
+  font-weight: 300;
+  line-height: 1.62;
+  color: #ffffff;
+}
