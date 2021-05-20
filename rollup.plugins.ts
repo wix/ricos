@@ -134,6 +134,7 @@ const postcss = (shouldExtract: boolean): Plugin => {
       /*  @ts-ignore: cssnanoOptions typing is wrong */
       normalizeWhitespace: false,
     },
+    exclude: /\.st\.css$/i,
     modules: {
       generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
     },
