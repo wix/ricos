@@ -18,9 +18,7 @@ export default () => {
         <Page title="Default Editor">
             <div style={{ display: 'flex' }}>
                 <div style={{ border: 'solid 1px red', width: '50%' }}>
-                    <TipTapEditor onUpdate={({ content }) => {
-                        setDraftContent(ensureDraftContent(content))
-                    }} />
+                   
                 </div>
                 <div style={{ border: 'solid 1px red', width: '50%' }}>
                     <ViewerWrapper content={draftContent} theme={{ ...theme }} />

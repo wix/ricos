@@ -83,9 +83,9 @@ const createBaseComponent = ({
       const focusedBlock = pubsub.get('focusedBlock');
       if (boundingRect.height === 0) {
         // Required in order to wait for images to load their source
-        setTimeout(() => this.scrollIntoViewIfNeeded(blockKey), 100);
+        // setTimeout(() => this.scrollIntoViewIfNeeded(blockKey), 100);
       } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
-        this.containerRef.current.scrollIntoView();
+        // this.containerRef.current.scrollIntoView();
       }
     };
 

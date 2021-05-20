@@ -36,11 +36,27 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "@tiptap/core": "^2.0.0-beta.45",
-    "@tiptap/starter-kit": "^2.0.0-beta.45",
-    "@tiptap/react": "^2.0.0-beta.45",
-    "@tiptap/extension-code-block":"^2.0.0-beta.45",
-    "@tiptap/extension-underline": "^2.0.0-beta.45"
+    "@tiptap/core": "2.0.0-beta.54",
+    "@tiptap/extension-blockquote": "2.0.0-beta.13",
+    "@tiptap/extension-bold": "2.0.0-beta.13",
+    "@tiptap/extension-bullet-list": "2.0.0-beta.13",
+    "@tiptap/extension-code": "2.0.0-beta.13",
+    "@tiptap/extension-code-block": "2.0.0-beta.15",
+    "@tiptap/extension-document": "2.0.0-beta.12",
+    "@tiptap/extension-dropcursor": "2.0.0-beta.13",
+    "@tiptap/extension-gapcursor": "2.0.0-beta.17",
+    "@tiptap/extension-hard-break": "2.0.0-beta.13",
+    "@tiptap/extension-heading": "2.0.0-beta.13",
+    "@tiptap/extension-history": "2.0.0-beta.12",
+    "@tiptap/extension-horizontal-rule": "2.0.0-beta.16",
+    "@tiptap/extension-italic": "2.0.0-beta.13",
+    "@tiptap/extension-list-item": "2.0.0-beta.13",
+    "@tiptap/extension-ordered-list": "2.0.0-beta.13",
+    "@tiptap/extension-paragraph": "^2.0.0-beta.14",
+    "@tiptap/extension-strike": "2.0.0-beta.14",
+    "@tiptap/extension-text": "2.0.0-beta.12",
+    "@tiptap/react": "2.0.0-beta.41",
+    "@tiptap/starter-kit": "2.0.0-beta.51"
   },
   "unpkg": true,
   "publishConfig": {

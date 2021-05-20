@@ -1,9 +1,20 @@
-import { Node, mergeAttributes } from '@tiptap/core';
+import { Node, mergeAttributes, Command } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import Component from './Component';
 
+declare module '@tiptap/core' {
+  interface Commands {
+    reactComponent: {
+      /**
+       * Toggle a paragraph
+       */
+      setImageSrc: () => Command;
+    };
+  }
+}
+
 export default Node.create({
-  name: 'reactComponent',
+  name: 'imageComponent',
 
   group: 'block',
 
@@ -14,6 +25,25 @@ export default Node.create({
   addAttributes() {
     return {
       imageData: {},
+    };
+  },
+
+  addCommands() {
+    return {
+      setImageSrc: () => ({ commands }) => {
+        const cmd = commands.updateAttributes('imageComponent', {
+          imageData: {
+            image: {
+              src: {
+                custom: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+              },
+            },
+          },
+        });
+        console.log({ commands, cmd });
+
+        return cmd;
+      },
     };
   },
 

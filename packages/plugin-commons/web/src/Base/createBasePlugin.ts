@@ -327,6 +327,15 @@ const createBasePlugin = (
     ...commonProps,
     blockRendererFn,
     ...(underlyingPlugin || {}),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    component: () => {
+      return {
+        commonProps,
+        underlyingPlugin,
+        Component: DecoratedCompWithBase,
+      };
+    },
   };
 };
 

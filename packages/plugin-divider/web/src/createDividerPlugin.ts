@@ -32,6 +32,35 @@ const createDividerPlugin: CreatePluginFunction<DividerPluginEditorConfig> = con
   });
 };
 
+const createDividerPlugin2 = (config = {}) => {
+  const type = DIVIDER_TYPE;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
+
+  const styles = mergeStyles({ styles: Styles, theme });
+
+  return {
+    component: DividerComponent,
+    props: {
+      settings,
+      theme,
+      type,
+      toolbar: createToolbar({
+        settings,
+        helpers,
+        styles,
+        theme,
+        t,
+      }),
+      helpers,
+      t,
+      defaultPluginData: DEFAULTS,
+      ...rest,
+    },
+  };
+};
+
 createDividerPlugin.functionName = DIVIDER_TYPE;
 
-export { createDividerPlugin, DIVIDER_TYPE };
+export { createDividerPlugin, DIVIDER_TYPE, createDividerPlugin2 };

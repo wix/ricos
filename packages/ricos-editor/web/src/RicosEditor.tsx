@@ -57,7 +57,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   componentDidMount() {
-    this.updateLocale();
+    // this.updateLocale(); // makes problems to tiptap editor
     const { children } = this.props;
     const onOpenEditorSuccess =
       children?.props.helpers?.onOpenEditorSuccess ||

@@ -81,6 +81,7 @@ import InnerModal from './InnerModal';
 import { onCutAndCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
+import { TipTapEditor } from 'tip-tap-editor';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -1011,55 +1012,63 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const { theme } = this.contextualData;
 
     return (
-      <Editor
-        ref={this.setEditor}
-        handleReturn={
-          handleReturn
-            ? handleReturn(this.updateEditorState)
-            : handleReturnCommand(this.updateEditorState, this.commonPubsub)
+      <>
+        {
+          // @ts-ignore
+          <TipTapEditor onUpdate={() => {}} plugins={this.plugins} editorProps={this.props} />
         }
-        editorState={editorState}
-        onChange={this.updateEditorState}
-        handleBeforeInput={this.handleBeforeInput}
-        handlePastedText={this.handlePastedText}
-        plugins={this.plugins}
-        blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
-        handleKeyCommand={handleKeyCommand(
-          this.updateEditorState,
-          this.getCustomCommandHandlers().commandHandlers,
-          getBlockType(editorState),
-          onBackspace
-        )}
-        editorKey={editorKey}
-        keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
-        customStyleFn={this.customStyleFn}
-        tabIndex={tabIndex}
-        placeholder={placeholder || ''}
-        spellCheck={spellCheck}
-        stripPastedStyles={stripPastedStyles}
-        autoCapitalize={autoCapitalize}
-        autoComplete={autoComplete}
-        autoCorrect={autoCorrect}
-        ariaActiveDescendantID={ariaActiveDescendantID}
-        ariaAutoComplete={ariaAutoComplete}
-        ariaControls={ariaControls}
-        ariaDescribedBy={ariaDescribedBy}
-        ariaExpanded={ariaExpanded}
-        ariaLabel={ariaLabel}
-        ariaMultiline={ariaMultiline}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        // @ts-ignore
-        onCut={onCutAndCopy}
-        // @ts-ignore
-        onCopy={onCutAndCopy}
-        textAlignment={textAlignment}
-        readOnly={readOnly || this.state.readOnly}
-        {...(this.props.experiments?.pastedFilesSupport?.enabled && {
-          handlePastedFiles: this.handlePastedFiles,
-          handleDroppedFiles: this.handleDroppedFiles,
-        })}
-      />
+        <div>
+          <Editor
+            ref={this.setEditor}
+            handleReturn={
+              handleReturn
+                ? handleReturn(this.updateEditorState)
+                : handleReturnCommand(this.updateEditorState, this.commonPubsub)
+            }
+            editorState={editorState}
+            onChange={this.updateEditorState}
+            handleBeforeInput={this.handleBeforeInput}
+            handlePastedText={this.handlePastedText}
+            plugins={this.plugins}
+            blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
+            handleKeyCommand={handleKeyCommand(
+              this.updateEditorState,
+              this.getCustomCommandHandlers().commandHandlers,
+              getBlockType(editorState),
+              onBackspace
+            )}
+            editorKey={editorKey}
+            keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
+            customStyleFn={this.customStyleFn}
+            tabIndex={tabIndex}
+            placeholder={placeholder || ''}
+            spellCheck={spellCheck}
+            stripPastedStyles={stripPastedStyles}
+            autoCapitalize={autoCapitalize}
+            autoComplete={autoComplete}
+            autoCorrect={autoCorrect}
+            ariaActiveDescendantID={ariaActiveDescendantID}
+            ariaAutoComplete={ariaAutoComplete}
+            ariaControls={ariaControls}
+            ariaDescribedBy={ariaDescribedBy}
+            ariaExpanded={ariaExpanded}
+            ariaLabel={ariaLabel}
+            ariaMultiline={ariaMultiline}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            // @ts-ignore
+            onCut={onCutAndCopy}
+            // @ts-ignore
+            onCopy={onCutAndCopy}
+            textAlignment={textAlignment}
+            readOnly={readOnly || this.state.readOnly}
+            {...(this.props.experiments?.pastedFilesSupport?.enabled && {
+              handlePastedFiles: this.handlePastedFiles,
+              handleDroppedFiles: this.handleDroppedFiles,
+            })}
+          />
+        </div>
+      </>
     );
   };
 
@@ -1193,43 +1202,38 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       });
       return (
         <GlobalContext.Provider value={this.state.context}>
-          <Measure bounds onResize={this.onResize}>
-            {({ measureRef }) => (
-              <div
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                style={this.props.style}
-                ref={ref => {
-                  this.editorRef = ref;
-                  measureRef(ref);
-                }}
-                className={wrapperClassName}
-                dir={direction || getLangDir(this.props.locale)}
-                data-id={'rce'}
-                data-hook={!isInnerRCE ? 'root-editor' : 'inner-editor'}
-              >
-                {this.renderStyleTag()}
-                <div
-                  ref={this.setEditorWrapper}
-                  className={classNames(styles.editor, theme.editor)}
-                  style={editorStyle}
-                >
-                  {this.renderAccessibilityListener()}
-                  {this.renderEditor()}
-                  {showToolbars && this.renderToolbars()}
-                  {this.renderInlineModals()}
-                  {this.renderErrorToast()}
-                  <InnerModal
-                    theme={theme}
-                    locale={locale}
-                    innerModal={innerModal}
-                    closeInnerModal={this.closeInnerModal}
-                    editorWrapper={this.editorWrapper}
-                  />
-                </div>
-              </div>
-            )}
-          </Measure>
+          <div
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            style={this.props.style}
+            ref={ref => {
+              this.editorRef = ref;
+            }}
+            className={wrapperClassName}
+            dir={direction || getLangDir(this.props.locale)}
+            data-id={'rce'}
+            data-hook={!isInnerRCE ? 'root-editor' : 'inner-editor'}
+          >
+            {this.renderStyleTag()}
+            <div
+              ref={this.setEditorWrapper}
+              className={classNames(styles.editor, theme.editor)}
+              style={editorStyle}
+            >
+              {this.renderAccessibilityListener()}
+              {this.renderEditor()}
+              {showToolbars && this.renderToolbars()}
+              {this.renderInlineModals()}
+              {this.renderErrorToast()}
+              <InnerModal
+                theme={theme}
+                locale={locale}
+                innerModal={innerModal}
+                closeInnerModal={this.closeInnerModal}
+                editorWrapper={this.editorWrapper}
+              />
+            </div>
+          </div>
         </GlobalContext.Provider>
       );
     } catch (err) {
