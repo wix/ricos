@@ -1,8 +1,6 @@
-import { Link_Rel } from 'ricos-schema';
-
 export type NormalizeConfig = {
   anchorTarget?: string;
-  rel?: Link_Rel;
+  relValue?: string;
   disableInlineImages?: boolean;
   removeInvalidInlinePlugins?: boolean;
   disableDownload?: boolean;

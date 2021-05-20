@@ -4,7 +4,7 @@ const SPONSORED = 'sponsored';
 const NO_FOLLOW = 'nofollow';
 const UGC = 'ugc';
 
-export const convertRelObjectToString = (relObject: Link_Rel) => {
+export const convertRelObjectToString = (relObject?: Link_Rel) => {
   if (!relObject) {
     return undefined;
   }

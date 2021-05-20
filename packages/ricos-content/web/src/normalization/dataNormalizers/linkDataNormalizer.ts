@@ -1,6 +1,3 @@
-import { Link_Rel } from 'ricos-schema';
-import { convertRelObjectToString } from '../../linkUtils';
-
 const isUndefined = val => val === undefined;
 const isDefined = val => !isUndefined(val);
 
@@ -9,7 +6,7 @@ const validate = ({ targetBlank, nofollow, target, rel }) =>
 
 const linkDataNormalizer = (
   componentData,
-  { anchorTarget, rel = {} }: { anchorTarget: string; rel: Link_Rel }
+  { anchorTarget, relValue }: { anchorTarget: string; relValue: string }
 ) => {
   // converts { targetBlank, nofollow } => { target, rel }
   const { targetBlank, nofollow, ...rest } = componentData;
@@ -19,7 +16,7 @@ const linkDataNormalizer = (
 
   return {
     target: targetBlank ? '_blank' : anchorTarget || '_self',
-    rel: nofollow ? 'nofollow' : convertRelObjectToString(rel),
+    rel: nofollow ? 'nofollow' : relValue,
     ...rest,
   };
 };

@@ -21,10 +21,10 @@ import {
   CUSTOM_LINK_TYPE,
   TextAlignment,
   InlineStyle,
+  RelValue,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
-import { Link_Rel } from 'ricos-schema';
 
 type LinkDataUrl = {
   url: string;
@@ -653,7 +653,7 @@ function createLastChangeSelection(editorState: EditorState): SelectionState {
 
 export function fixPastedLinks(
   editorState: EditorState,
-  { anchorTarget, rel }: { anchorTarget?: AnchorTarget; rel?: Link_Rel }
+  { anchorTarget, relValue }: { anchorTarget?: AnchorTarget; relValue?: RelValue }
 ) {
   const lastChangeSelection = createLastChangeSelection(editorState);
   const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));
@@ -667,7 +667,7 @@ export function fixPastedLinks(
       content.replaceEntityData(entityKey, {
         url,
         target: anchorTarget || '_self',
-        rel,
+        rel: relValue,
       });
     }
   });

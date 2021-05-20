@@ -10,7 +10,6 @@ import {
 } from '.';
 import { BoundingRect } from 'react-measure';
 import { ContentBlock, SelectionState, EditorState } from 'draft-js';
-import { Link_Rel } from 'ricos-schema';
 
 export { Pubsub, Store } from '../Utils/simplePubsub';
 
@@ -87,7 +86,6 @@ interface CommonContextType {
   locale: string;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
-  rel?: Link_Rel;
   customAnchorScroll?: CustomAnchorScroll;
   helpers: Helpers;
   isMobile: boolean;

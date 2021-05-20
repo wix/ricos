@@ -83,7 +83,6 @@ import InnerModal from './InnerModal';
 import { onCutAndCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
-import { Link_Rel } from 'ricos-schema';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -135,7 +134,6 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
-  rel?: Link_Rel;
   customAnchorScroll?: CustomAnchorScroll;
   style?: CSSProperties;
   locale: string;
@@ -387,7 +385,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       t,
       locale,
       anchorTarget,
-      rel,
+      relValue,
       customAnchorScroll,
       helpers = {},
       config,
@@ -407,7 +405,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       t,
       locale,
       anchorTarget,
-      rel,
+      relValue,
       customAnchorScroll,
       helpers: {
         ...helpers,
@@ -552,7 +550,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       editorState,
       initialState,
       anchorTarget,
-      rel,
+      relValue,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
     } = this.props;
     if (editorState) {
@@ -561,7 +559,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (initialState) {
       const rawContentState = normalizeInitialState(initialState, {
         anchorTarget,
-        rel,
+        relValue,
         disableInlineImages,
         removeInvalidInlinePlugins,
       });

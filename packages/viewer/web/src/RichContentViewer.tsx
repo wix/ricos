@@ -40,7 +40,6 @@ import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtli
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import { combineMappers } from './utils/combineMappers';
-import { Link_Rel } from 'ricos-schema';
 
 export interface RichContentViewerProps {
   /** This is a legacy API, changes should be made also in the new Ricos Viewer API **/
@@ -56,7 +55,6 @@ export interface RichContentViewerProps {
   t: TranslationFunction;
   theme: RichContentTheme;
   anchorTarget?: AnchorTarget;
-  rel?: Link_Rel;
   relValue?: RelValue;
   customAnchorScroll?: CustomAnchorScroll;
   config: LegacyViewerPluginConfig;
@@ -124,7 +122,7 @@ class RichContentViewer extends Component<
     const {
       initialState,
       anchorTarget,
-      rel,
+      relValue,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
       config,
     } = props;
@@ -139,7 +137,7 @@ class RichContentViewer extends Component<
     return initialState
       ? normalizeInitialState(initialState, {
           anchorTarget,
-          rel,
+          relValue,
           disableInlineImages,
           removeInvalidInlinePlugins,
           disableDownload,

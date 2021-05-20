@@ -7,7 +7,7 @@ import { merge } from 'lodash';
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
-import { convertRelStringToObject } from 'wix-rich-content-common';
+import { convertRelStringToObject, convertRelObjectToString } from 'wix-rich-content-common';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: ReactElement;
@@ -109,8 +109,8 @@ export class RicosEngine extends Component<EngineProps> {
       onModalClose,
     } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
-    const { anchorTarget, relValue, customAnchorScroll } = linkSettings;
-    let { rel } = linkSettings;
+    const { anchorTarget, customAnchorScroll } = linkSettings;
+    let { relValue, rel } = linkSettings;
     const {
       blankTargetToggleVisibilityFn,
       nofollowRelToggleVisibilityFn,
@@ -143,6 +143,7 @@ export class RicosEngine extends Component<EngineProps> {
       );
       rel = convertRelStringToObject(relValue) || rel;
     }
+    relValue = convertRelObjectToString(rel);
     const disableDownload = mediaSettings?.disableDownload || disableRightClick;
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
@@ -165,7 +166,6 @@ export class RicosEngine extends Component<EngineProps> {
         isPreview,
       },
       disabled: pauseMedia,
-      rel,
       anchorTarget,
       relValue,
       customAnchorScroll,
