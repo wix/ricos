@@ -78,7 +78,7 @@
   height: 52px;
 }
 .tabs_headers_option_selected {
-  border-bottom: solid 3px $settings-action-color;
+  border-bottom: solid 3px $settings-action-color-fallback;
 }
 .header_icon {
   margin-right: 12px;
@@ -159,11 +159,11 @@
   font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
-  background-color: $settings-action-color;
+  background-color: $settings-action-color-fallback;
 }
 .button_secondary {
   font-size: 16px;
   line-height: 1.5;
-  color: $settings-action-color;
-  border: 1px solid $settings-action-color;
+  color: $settings-action-color-fallback;
+  border: 1px solid $settings-action-color-fallback;
 }
