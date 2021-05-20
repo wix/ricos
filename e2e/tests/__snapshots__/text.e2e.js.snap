@@ -394,7 +394,6 @@ exports[`text > allow to enter hashtag with link #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "rel": "",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -410,7 +409,6 @@ exports[`text > allow to enter hashtag with link #0`] =
     },
     "2": {
       "data": {
-        "rel": "",
         "url": "thisislink#youknow.com"
       },
       "mutability": "MUTABLE",
