@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
-
+import './textSelectionToolbarStyles.css';
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onButtonClick?: (pluginId: string, action: string, value: string) => void;

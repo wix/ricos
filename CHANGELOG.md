@@ -17,8 +17,20 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2525](https://github.com/wix-incubator/rich-content/pull/2525) fix onPluginAdd timing
+
 </details>
 <hr/>
+
+## 8.36.1 (May 20, 2021)
+
+### :bug: Bug Fix
+
+- `text selection toolbar`
+  - [#2522](https://github.com/wix-incubator/rich-content/pull/2522) import textSelectionToolbar styles from ricos viewer
 
 ## 8.36.0 (May 19, 2021)
 
@@ -277,7 +289,7 @@
 ### :rocket: New Feature
 
 - `schema`
-  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich content schema set to version 1 🥇
 - `ricos-content`
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`
