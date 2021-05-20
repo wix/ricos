@@ -91,6 +91,7 @@ export function generateInsertPluginButtonProps({
   }
 
   function addCustomBlock(buttonData: InsertButton) {
+    onPluginAdd();
     buttonData.addBlockHandler?.(getEditorState());
     onPluginAddSuccess();
   }
@@ -116,7 +117,6 @@ export function generateInsertPluginButtonProps({
 
   function onClick(event: MouseEvent) {
     event.preventDefault();
-    onPluginAdd();
     switch (button.type) {
       case 'file':
         toggleFileSelection();
@@ -128,6 +128,7 @@ export function generateInsertPluginButtonProps({
         addCustomBlock(button);
         break;
       case BUTTON_TYPES.BUTTON:
+        onPluginAdd();
         if (button.onClick) {
           button.onClick(event);
         } else {
@@ -135,6 +136,7 @@ export function generateInsertPluginButtonProps({
         }
         break;
       default:
+        onPluginAdd();
         addBlock(button.componentData || {});
         break;
     }
@@ -166,6 +168,7 @@ export function generateInsertPluginButtonProps({
   }
 
   function handleExternalFileChanged({ data, error }) {
+    onPluginAdd();
     if (data) {
       const handleFilesAdded = shouldCreateGallery(data)
         ? (blockKey: string) => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
@@ -178,6 +181,7 @@ export function generateInsertPluginButtonProps({
   }
 
   function toggleButtonModal(event) {
+    onPluginAdd();
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {
