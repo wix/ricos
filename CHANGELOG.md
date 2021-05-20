@@ -21,6 +21,7 @@
 
 - `plugin-commons`
   - [#2525](https://github.com/wix-incubator/rich-content/pull/2525) fix onPluginAdd timing
+  - [#2527](https://github.com/wix-incubator/rich-content/pull/2527) fix onPluginAddStep's `pluginDetails` (blockKey)
 
 </details>
 <hr/>
