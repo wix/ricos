@@ -64,9 +64,7 @@ export interface RicosEditorProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
 }
 
-export interface RicosViewerProps
-  extends RicosProps,
-    Pick<RichContentViewerProps, 'addAnchors' | 'experiments'> {
+export interface RicosViewerProps extends RicosProps, Pick<RichContentViewerProps, 'addAnchors'> {
   /* Changes to this interface should also be reflected in the API docs */
   plugins?: ViewerPlugin[];
   preview?: PreviewConfig;

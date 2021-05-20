@@ -38,7 +38,7 @@ interface ExampleEditorProps {
 }
 
 export default class Editor extends PureComponent<ExampleEditorProps> {
-  config: RichContentEditorProps['config'];
+  getToolbarSettings: RichContentEditorProps['config']['getToolbarSettings'];
   helpers: RichContentEditorProps['helpers'];
   editor: RicosEditorType;
   ricosPlugins: RicosEditorProps['plugins'];
@@ -65,7 +65,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       pluginsConfig.getToolbarSettings = getToolbarSettings;
     }
 
-    this.config = pluginsConfig;
+    this.getToolbarSettings = pluginsConfig.getToolbarSettings;
     this.ricosPlugins = Object.entries(Plugins.ricosEditorPlugins).map(([pluginType, plugin]) =>
       pluginType in pluginsConfig ? plugin(pluginsConfig[pluginType]) : plugin()
     );
@@ -106,17 +106,6 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
     };
     this.setImageUploadHelper();
   }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.shouldNativeUpload !== this.props.shouldNativeUpload) {
-      this.toggleFileUploadMechanism();
-    }
-  }
-
-  toggleFileUploadMechanism = () => {
-    this.setImageUploadHelper();
-    this.config = Plugins.toggleNativeUploadConfig(this.config, this.props.shouldNativeUpload);
-  };
 
   setImageUploadHelper = () => {
     const { shouldNativeUpload } = this.props;
@@ -167,12 +156,11 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             cssOverride={theme}
             toolbarSettings={{
               useStaticTextToolbar: textToolbarType === 'static',
-              getToolbarSettings: this.config.getToolbarSettings,
+              getToolbarSettings: this.getToolbarSettings,
             }}
             isMobile={isMobile}
             placeholder={'Add some text!'}
             plugins={this.ricosPlugins}
-            linkPanelSettings={this.config.uiSettings.linkPanel}
             _rcProps={{ experiments }}
           >
             <RichContentEditor helpers={this.helpers} />
