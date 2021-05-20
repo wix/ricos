@@ -8,7 +8,7 @@ import { isDecoration, isNode, toDataField } from '../utils';
 
 export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const { type, ...content } = convertFromProse(proseDocument);
+  const { type: _, ...content } = convertFromProse(proseDocument);
   if (!content.metadata) {
     content.metadata = initializeMetadata();
   }
@@ -27,20 +27,20 @@ const FIELDS_MAP = {
   marks: 'decorations',
 };
 
-const convertType = object => ({ ...object, type: object.type.toUpperCase() });
+const typeToUpper = object => ({ ...object, type: object.type.toUpperCase() });
 
 const isTextNode = value => value?.type === 'text' && 'marks' in value;
 
 const moveTextData = object => {
   const { marks, text, ...newValue } = object;
-  newValue.attrs = { marks, text };
+  return { ...newValue, attrs: { marks, text } }; // immutability
   return newValue;
 };
 
 const convertDataField = object => {
   const dataField = DATA_FIELDS_MAP[object.type];
   const { attrs, ...newValue } = object;
-  if (attrs) {
+  return { ...newValue, ...(attrs ? {[dataField]: attrs} : {}) };
     return { ...newValue, [dataField]: attrs };
   }
   return newValue;

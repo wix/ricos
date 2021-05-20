@@ -7,7 +7,7 @@ export const isDecoration = object => DECORATION_TYPES.includes(object?.type?.to
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const toDataField = (type: string) =>
+export const toDataFieldName = (type: string) =>
   type
     .toLowerCase()
     .split('_')

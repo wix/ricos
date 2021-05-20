@@ -23,9 +23,9 @@ const FIELDS_MAP = {
   ...DATA_FIELDS_MAP,
 };
 
-const convertType = (object: Node | Decoration) => ({ ...object, type: object.type.toLowerCase() });
+const typeToLower = (object: Node | Decoration) => ({ ...object, type: object.type.toLowerCase() });
 
-const moveTextData = (node: Node) => {
+const flattenTextData = (node: Node) => {
   const { textData, ...newNode } = node;
   return { ...newNode, ...textData };
 };
