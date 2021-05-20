@@ -1,7 +1,7 @@
 import {
   TextStyle_TextAlignment,
   Node_Type,
-  Node_Style,
+  NodeStyle,
   ParagraphData,
   Node,
   Decoration,
@@ -12,19 +12,19 @@ import {
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
 
-export const createNode = (type: Node_Type, nodes: Node[] = []): Node => ({
+export const createNode = (type: Node_Type, nodes: Node[] = [], style?: NodeStyle): Node => ({
   type,
   key: genKey(),
   nodes,
+  style,
 });
 
 export const createParagraphNode = (
   nodes: Node[] = [],
   data?: ParagraphData,
-  style?: Node_Style
+  style?: NodeStyle
 ): Node => ({
-  ...createNode(Node_Type.PARAGRAPH, nodes),
-  style,
+  ...createNode(Node_Type.PARAGRAPH, nodes, style),
   paragraphData: {
     textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,
