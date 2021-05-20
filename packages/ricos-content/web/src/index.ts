@@ -19,6 +19,4 @@ export { createContent } from './contentStateUtils/createContent';
 
 export { isPNG, getImageSrc, WIX_MEDIA_DEFAULT } from './imageUtils';
 
-export { convertRelObjectToString, convertRelStringToObject } from './linkUtils';
-
 export { compare } from './comparision/compare';

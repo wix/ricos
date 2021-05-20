@@ -116,7 +116,7 @@ class PluginViewer extends PureComponent {
           containerProps = {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
-            rel: `noopener noreferrer ${rel}`,
+            rel: `noopener noreferrer ${rel || ''}`.trim(),
           };
         }
         if (hasAnchor) {

@@ -37,7 +37,7 @@ export default class UrlLinkButton extends Component {
     const anchorProps = {
       href,
       target: target || '_self',
-      rel: `noopener noreferrer ${rel}`,
+      rel: `noopener noreferrer ${rel || ''}`.trim(),
       className: classNames(styles.toolbarUrl, { [styles.toolbarUrlAnchor]: anchor }),
       onMouseDown: this.preventDefault,
       onClick: anchor && this.handleClick,

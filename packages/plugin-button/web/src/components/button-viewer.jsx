@@ -28,7 +28,7 @@ class ButtonViewer extends PureComponent {
       : {
           href: url,
           target,
-          rel,
+          rel: `noopener noreferrer ${rel || ''}`.trim(),
           ...props,
         };
     return (

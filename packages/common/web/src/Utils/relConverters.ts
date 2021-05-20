@@ -1,4 +1,8 @@
-import { Link_Rel } from 'ricos-schema';
+type Link_Rel = {
+  nofollow?: boolean;
+  sponsored?: boolean;
+  ugc?: boolean;
+};
 
 const SPONSORED = 'sponsored';
 const NO_FOLLOW = 'nofollow';

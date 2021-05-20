@@ -81,7 +81,7 @@ class LinkViewer extends Component {
     const anchorProps = {
       href: this.getHref(url, anchor),
       target: this.getTarget(anchor, target, anchorTarget),
-      rel: `noopener noreferrer ${rel}`,
+      rel: `noopener noreferrer ${rel || ''}`.trim(),
       className: classNames(this.styles.link, {
         [this.styles.linkInEditor]: isInEditor,
         [this.styles.linkInViewer]: !isInEditor,
