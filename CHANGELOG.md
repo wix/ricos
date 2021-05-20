@@ -17,14 +17,36 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.36.1 (May 20, 2021)
+
 ### :bug: Bug Fix
 
+- `text selection toolbar`
+  - [#2522](https://github.com/wix-incubator/rich-content/pull/2522) import textSelectionToolbar styles from ricos viewer
+
+## 8.36.0 (May 19, 2021)
+
+### :rocket: New Feature
+
+- `editor viewer`
+  - [#2459](https://github.com/wix-incubator/rich-content/pull/2459) added `customAnchorScroll` prop support through `linkSettings`
+- `plugin-commons`
+  - [#2519](https://github.com/wix-incubator/rich-content/pull/2519) `uiSettings.linkPanel.externalPopups` config for link popup appearance
+- `text-selection-toolbar`
+  - [#2508](https://github.com/wix-private/wix-ricos/pull/2508) add textSelectionToolbar api to ricos-viewer
+
+### :bug: Bug Fix
+
+- `*`
+  - [#2517](https://github.com/wix-incubator/rich-content/pull/2517) settings action color fix - several elements were wired to use fallback mechanism, unnecessarily
+- `link-toolbar`
+  - [#2515](https://github.com/wix/ricos/pull/2515) update link toolbar when moving from link to link
 - `plugin-commons`
   - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check if plugin container exists before using it
   - [#2516](https://github.com/wix-incubator/rich-content/pull/2516) set a threshold for waiting for a component to load (for scrolling)
-
-</details>
-<hr/>
 
 ## 8.35.0 (May 17, 2021)
 

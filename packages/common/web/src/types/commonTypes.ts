@@ -36,6 +36,7 @@ export { TranslationFunction, ResourceKey as LocaleResource } from 'i18next';
 
 export type AnchorTarget = HTMLAnchorElement['target'];
 export type RelValue = HTMLAnchorElement['rel'];
+export type CustomAnchorScroll = (event: Event, anchor: string) => void;
 
 export type GetEditorBounds = () => BoundingRect | undefined;
 
@@ -85,6 +86,7 @@ interface CommonContextType {
   locale: string;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
+  customAnchorScroll?: CustomAnchorScroll;
   helpers: Helpers;
   isMobile: boolean;
   iframeSandboxDomain?: string;

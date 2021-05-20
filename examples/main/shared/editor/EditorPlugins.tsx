@@ -353,6 +353,7 @@ let userColors = [];
 
 export const uiSettings: UISettings = {
   linkPanel: {
+    externalPopups: true,
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),

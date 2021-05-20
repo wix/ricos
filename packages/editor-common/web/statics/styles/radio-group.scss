@@ -40,6 +40,6 @@
   border-color: rgba(0, 0, 0, 0.6);
 
   &::after {
-    background-color: $settings-action-color;
+    background-color: $settings-action-color-fallback;
   }
 }
