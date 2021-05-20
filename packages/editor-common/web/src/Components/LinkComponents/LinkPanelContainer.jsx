@@ -9,22 +9,12 @@ import { isEmpty } from 'lodash';
 class LinkPanelContainer extends PureComponent {
   constructor(props) {
     super(props);
-    const {
-      url,
-      anchor,
-      targetBlank,
-      rel,
-      editorState,
-      linkTypes,
-      unchangedUrl,
-      originalLinkPanel,
-    } = this.props;
+    const { url, anchor, targetBlank, rel, editorState, linkTypes, unchangedUrl } = this.props;
     this.renderBasicLinkPanel =
       !linkTypes ||
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
-      unchangedUrl ||
-      originalLinkPanel;
+      unchangedUrl;
     this.anchorableBlocksData = !this.renderBasicLinkPanel
       ? getAnchorableBlocks(editorState)
       : undefined;
@@ -130,19 +120,8 @@ class LinkPanelContainer extends PureComponent {
 
   render() {
     const { radioGroupValue, linkPanelValues, anchorPanelValues } = this.state;
-    const {
-      theme,
-      isMobile,
-      t,
-      ariaProps,
-      uiSettings,
-      isActive,
-      tabIndex,
-      linkPanelWithTitle,
-      unchangedUrl,
-      linkTypes,
-    } = this.props;
-
+    const ariaProps = { 'aria-labelledby': 'mob_link_modal_hdr' };
+    const { theme, isMobile, t, uiSettings, isActive, unchangedUrl, linkTypes } = this.props;
     const { linkPanel } = uiSettings || {};
     const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
@@ -162,7 +141,6 @@ class LinkPanelContainer extends PureComponent {
       isActive,
       theme,
       t,
-      tabIndex,
       isDoneButtonEnable: this.isDoneButtonEnable(),
       unchangedUrl,
       isMobile,
@@ -184,7 +162,6 @@ class LinkPanelContainer extends PureComponent {
       anchorableBlocksData: this.anchorableBlocksData,
       anchorPanelValues,
       isMobile,
-      linkPanelWithTitle,
       blockPreview: linkTypes?.anchor?.blockPreview,
     };
     return this.renderBasicLinkPanel ? (
@@ -197,27 +174,21 @@ class LinkPanelContainer extends PureComponent {
 
 LinkPanelContainer.propTypes = {
   editorState: PropTypes.object.isRequired,
-  onDone: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  hidePanel: PropTypes.func.isRequired,
   url: PropTypes.string,
   anchor: PropTypes.string,
   targetBlank: PropTypes.bool,
-  anchorTarget: PropTypes.string,
   rel: PropTypes.object,
+  theme: PropTypes.object.isRequired,
   isActive: PropTypes.bool,
   isMobile: PropTypes.bool,
-  onOverrideContent: PropTypes.func,
-  theme: PropTypes.object.isRequired,
-  t: PropTypes.func,
-  ariaProps: PropTypes.object,
-  tabIndex: PropTypes.number,
+  anchorTarget: PropTypes.string,
+  onDone: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   uiSettings: PropTypes.object,
+  t: PropTypes.func,
   linkTypes: PropTypes.object,
   unchangedUrl: PropTypes.bool,
-  originalLinkPanel: PropTypes.bool,
-  linkPanelWithTitle: PropTypes.bool,
 };
 
 export default LinkPanelContainer;

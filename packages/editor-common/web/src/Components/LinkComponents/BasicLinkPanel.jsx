@@ -41,7 +41,6 @@ class BasicLinkPanel extends PureComponent {
       linkPanelValues,
       onChangeLinkPanel,
       isMobile,
-      linkPanelWithTitle,
     } = this.props;
     const linkPanelContainerClassName = classNames(styles.linkPanel_container, {
       [styles.linkPanel_container_isMobile]: isMobile,
@@ -53,7 +52,7 @@ class BasicLinkPanel extends PureComponent {
         role="form"
         {...ariaProps}
       >
-        {isMobile && linkPanelWithTitle && this.renderMobileTitle()}
+        {isMobile && this.renderMobileTitle()}
         <div className={styles.linkPanel_content}>
           <LinkPanel
             linkValues={linkPanelValues}
@@ -84,7 +83,6 @@ BasicLinkPanel.propTypes = {
   linkPanelValues: PropTypes.object,
   onChangeLinkPanel: PropTypes.func,
   isMobile: PropTypes.bool,
-  linkPanelWithTitle: PropTypes.bool,
 };
 
 export default BasicLinkPanel;

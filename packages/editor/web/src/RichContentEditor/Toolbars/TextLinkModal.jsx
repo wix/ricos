@@ -9,8 +9,8 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
   setBlockNewEntityData,
+  LinkPanelContainer,
 } from 'wix-rich-content-editor-common';
-import LinkModal from './LinkModal';
 import {
   ANCHOR_CATEGORY,
   WEB_ADDRESS_CATEGORY,
@@ -136,7 +136,7 @@ export default class TextLinkModal extends Component {
     const { url, anchor, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     return (
-      <LinkModal
+      <LinkPanelContainer
         editorState={getEditorState()}
         url={url}
         anchor={anchor}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import LinkModal from './LinkModal';
+import { LinkPanelContainer } from 'wix-rich-content-editor-common';
 import {
   ANCHOR_CATEGORY,
   WEB_ADDRESS_CATEGORY,
@@ -68,7 +68,8 @@ export default class BlockLinkModal extends Component {
     const { url, anchor, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     return (
-      <LinkModal
+      <LinkPanelContainer
+        editorState={editorState}
         url={url}
         anchor={anchor}
         targetBlank={targetBlank}
@@ -82,9 +83,8 @@ export default class BlockLinkModal extends Component {
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
-        unchangedUrl={unchangedUrl}
         linkTypes={linkTypes}
-        editorState={editorState}
+        unchangedUrl={unchangedUrl}
       />
     );
   }
