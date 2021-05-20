@@ -1,8 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput } from 'wix-rich-content-plugin-commons';
-import { Checkbox } from 'wix-rich-content-editor-common';
-import { isValidUrl, mergeStyles } from 'wix-rich-content-common';
+import { LinkPanel } from 'wix-rich-content-editor-common';
+import {
+  isValidUrl,
+  mergeStyles,
+  convertRelObjectToString,
+  convertRelStringToObject,
+} from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 
 class SettingsComponent extends PureComponent {
@@ -13,8 +18,8 @@ class SettingsComponent extends PureComponent {
     const linkButtonSettings = settingsObj.url
       ? {
           url: settingsObj.url,
-          target: settingsObj.target || false,
-          rel: settingsObj.rel || false,
+          target: settingsObj.target,
+          rel: settingsObj.rel,
         }
       : {};
     this.state = {
@@ -38,24 +43,32 @@ class SettingsComponent extends PureComponent {
     this.setState({ url }, () => this.props.isValidUrl(validUrl));
   };
 
-  handleTargetChange = event => {
-    this.setState({ target: event.target.checked });
-  };
+  linkPanelToLink = ({ url, targetBlank, rel }) => ({
+    url,
+    target: targetBlank
+      ? '_blank'
+      : this.props.anchorTarget !== '_blank'
+      ? this.props.anchorTarget
+      : '_self',
+    rel: convertRelObjectToString(rel),
+  });
 
-  handleRelChange = event => {
-    this.setState({ rel: event.target.checked });
+  linkToLinkPanel = ({ url = '', target, rel }) => ({
+    url,
+    targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
+    rel: convertRelStringToObject(rel),
+  });
+
+  onLinkPanelChange = linkPanelValues => {
+    this.setState({ ...this.linkPanelToLink(linkPanelValues) });
   };
 
   render() {
-    const { t, linkInputRef, isMobile, validUrl, shouldShowLink } = this.props;
+    const { t, shouldShowLink, uiSettings, theme } = this.props;
     const { buttonText, url, target, rel } = this.state;
-    const errorTooltip = !validUrl ? t('ButtonModal_Invalid_Link') : null;
-    let style;
-    if (!validUrl) {
-      style = { paddingTop: isMobile ? '21px' : '25px' };
-    } else {
-      style = { paddingTop: isMobile ? '33px' : '34px' };
-    }
+    const { linkPanel } = uiSettings || {};
+    const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
+
     const textInputBaseProps = {
       inputRef: ref => (this.input = ref),
       type: 'text',
@@ -80,44 +93,18 @@ class SettingsComponent extends PureComponent {
         </div>
         {shouldShowLink && (
           <>
-            <div
-              className={this.styles.button_settingsComponent_header_ButtonLink}
-              ref={linkInputRef}
-            >
+            <div className={this.styles.button_settingsComponent_header_ButtonLink}>
               {t('ButtonModal_Button_Link')}
             </div>
-            <TextInput
-              {...textInputBaseProps}
-              onChange={this.onLinkChanged}
-              value={url}
-              placeholder={t('ButtonModal_Link_Input_Placeholder')}
-              error={errorTooltip}
-              showTooltip={false}
+            <LinkPanel
+              linkValues={this.linkToLinkPanel({ url, target, rel })}
+              onChange={this.onLinkPanelChange}
+              showNewTabCheckbox={showNewTabCheckbox}
+              showNoFollowCheckbox={showNoFollowCheckbox}
+              showSponsoredCheckbox={showSponsoredCheckbox}
+              theme={theme}
+              t={t}
             />
-            {!validUrl ? (
-              <div className={this.styles.button_settingsComponent_errorMessage}>
-                {t('ButtonModal_InputLink_ErrorMessage')}
-              </div>
-            ) : null}
-            <div style={style} className={this.styles.button_settingsComponent_checkBoxes}>
-              <Checkbox
-                label={t('LinkPanel_Target_Checkbox')}
-                theme={this.styles}
-                checked={target}
-                dataHook="linkPanelBlankCheckbox"
-                onChange={this.handleTargetChange}
-              />
-              <Checkbox
-                label={t('LinkPanel_Nofollow_Checkbox')}
-                theme={this.styles}
-                checked={rel}
-                dataHook="linkPanelRelCheckbox"
-                onChange={this.handleRelChange}
-                tooltipTextKey={'LinkPanel_Nofollow_Checkbox_Tooltip'}
-                t={t}
-                isMobile={isMobile}
-              />
-            </div>
           </>
         )}
       </div>
@@ -134,9 +121,10 @@ SettingsComponent.propTypes = {
   validUrl: PropTypes.bool,
   isMobile: PropTypes.bool,
   onKeyPress: PropTypes.func,
-  linkInputRef: PropTypes.func,
   onBlur: PropTypes.func,
   shouldShowLink: PropTypes.bool,
+  anchorTarget: PropTypes.string,
+  uiSettings: PropTypes.object,
 };
 
 export default SettingsComponent;

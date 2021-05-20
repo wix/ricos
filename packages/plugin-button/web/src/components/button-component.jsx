@@ -24,8 +24,8 @@ class ButtonComponent extends PureComponent {
     if (url) {
       linkButtonSettings = {
         url: normalizeUrl(url),
-        target: button.settings.target ? '_blank' : '_self',
-        rel: button.settings.rel ? 'nofollow' : '',
+        target: button.settings.target,
+        rel: button.settings.rel,
       };
     }
     const style = {
