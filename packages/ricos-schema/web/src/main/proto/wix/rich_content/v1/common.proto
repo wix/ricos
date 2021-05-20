@@ -42,6 +42,7 @@ message Link {
 }
 
 message PluginContainerData {
+    // A spoiler blurs the content of a plugin such that its content is hidden
     message Spoiler {
         google.protobuf.StringValue description = 1;
         google.protobuf.StringValue button_text = 2;
