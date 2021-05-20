@@ -176,8 +176,8 @@ const createFakeStylesFile = (): Plugin => ({
 });
 
 let _plugins: Plugin[] = [
-  stylable(),
   svgr(),
+  stylable(),
   resolveAlias(),
   resolve(),
   babel(),

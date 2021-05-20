@@ -16,6 +16,7 @@ import {
   RichContentTheme,
   SEOSettings,
 } from 'wix-rich-content-common';
+import Svg from './example.svg';
 import { Image } from 'wix-ui-tpa/Image';
 
 // eslint-disable-next-line max-len
@@ -452,6 +453,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
         onContextMenu={this.handleContextMenu}
         {...accesibilityProps}
       >
+        <Svg />
         <div
           className={itemClassName}
           aria-label={metadata.alt}
