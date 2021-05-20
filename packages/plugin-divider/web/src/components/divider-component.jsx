@@ -28,6 +28,8 @@ class DividerComponent extends PureComponent {
     const editorWidth = editorBounds && editorBounds.width ? editorBounds.width : '100%';
     const divider = new Divider(this.props.componentData);
     const { type, size, alignment } = divider;
+    console.log('divider props', this.props);
+
     const className = classNames(
       this.styles['divider-container'],
       this.styles[`divider-container--${type}`],

@@ -7,9 +7,10 @@ export default Node.create({
   group: 'block',
 
   atom: true,
+  selectable: true,
 
   content: 'inline*',
-
+  draggable: true,
   addAttributes() {
     return {
       dividerData: {},

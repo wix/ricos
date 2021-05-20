@@ -76,31 +76,42 @@ const content = {
         },
       ],
     },
+
     {
       type: 'divider',
       attrs: {
-        type: 'SINGLE',
-        width: 'LARGE',
-        alignment: 'CENTER',
-        containerData: {
-          alignment: 'CENTER',
-          width: {
-            type: 'CONTENT',
+        dividerData: {
+          type: 'SINGLE',
+          config: {
+            width: 'SMALL',
+            alignment: 'CENTER',
+            containerData: {
+              alignment: 'CENTER',
+              width: {
+                type: 'CONTENT',
+              },
+            },
           },
         },
       },
+    },
+    {
+      type: 'paragraph',
+      attrs: {},
+      content: [
+        {
+          type: 'text',
+          text: 'nachshon',
+        },
+      ],
     },
   ],
 };
 
 const TipTapEditor = ({ editorProps, onUpdate }) => {
   // console.log({ Paragraph, Document });
-  const divider = pluginDivider({});
-  console.log({ divider });
-  //@ts-ignore
-  // const plugin = divider.createPlugin({});
-  console.log({ Paragraph });
-  console.log({ useEditor });
+  // const divider = pluginDivider({});
+
   const editor = useEditor({
     content,
     extensions: [...starterKitExtensions],

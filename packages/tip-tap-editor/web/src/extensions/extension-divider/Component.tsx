@@ -6,14 +6,19 @@ import classNames from 'classnames';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
-const Component = ({ isSelected, node }) => {
+const Component = props => {
+  const { selected, node, getPos } = props;
+
+  //@ts-ignore
+  window.editor = props.editor;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editorProps: any = useContext(EditorPropsContext);
+  const isSelected = selected;
   if (!editorProps) {
     return null;
   }
 
-  console.log({ isSelected });
+  console.log({ isSelected, props, pos: getPos() });
   const dividerPlugin = createDividerPlugin2(editorProps);
   const dividerProps = dividerPlugin.props;
   const Divider = dividerPlugin.component;
@@ -47,10 +52,15 @@ const Component = ({ isSelected, node }) => {
       [mergedStyles.hideTextSelection]: !isSelected,
     }
   );
+
+  console.log({
+    dividerProps,
+    attrs: node.attrs,
+  });
   return (
     <NodeViewWrapper as="div">
       <div className={ContainerClassNames}>
-        <Divider {...dividerProps} />
+        <Divider {...dividerProps} componentData={node.attrs.dividerData} />
       </div>
     </NodeViewWrapper>
   );
