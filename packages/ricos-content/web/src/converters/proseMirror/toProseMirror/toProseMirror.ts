@@ -33,10 +33,10 @@ const flattenTextData = (node: Node) => {
 const convertValue = value => {
   let newValue = value;
   if (isNode(newValue) || isDecoration(newValue)) {
-    newValue = convertType(newValue);
+    newValue = typeToLower(newValue);
   }
   if (newValue?.textData) {
-    newValue = moveTextData(newValue);
+    newValue = flattenTextData(newValue);
   }
   return newValue;
 };

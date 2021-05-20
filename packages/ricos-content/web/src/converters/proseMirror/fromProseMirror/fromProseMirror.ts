@@ -4,10 +4,9 @@ import { JSONContent } from '@tiptap/core';
 import { DECORATION_TYPES, NODE_TYPES } from '../consts';
 import { initializeMetadata } from '../../nodeUtils';
 import { genKey } from '../../generateRandomKey';
-import { isDecoration, isNode, toDataField } from '../utils';
+import { isDecoration, isNode, toDataFieldName } from '../utils';
 
 export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const { type: _, ...content } = convertFromProse(proseDocument);
   if (!content.metadata) {
     content.metadata = initializeMetadata();
@@ -18,7 +17,7 @@ export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
 const TYPES = [...NODE_TYPES, ...DECORATION_TYPES];
 
 const DATA_FIELDS_MAP = {
-  ...TYPES.reduce((map, type) => ({ ...map, [type]: toDataField(type) }), {}),
+  ...TYPES.reduce((map, type) => ({ ...map, [type]: toDataFieldName(type) }), {}),
   [Node_Type.CODEBLOCK]: 'codeData',
 };
 
@@ -33,17 +32,13 @@ const isTextNode = value => value?.type === 'text' && 'marks' in value;
 
 const moveTextData = object => {
   const { marks, text, ...newValue } = object;
-  return { ...newValue, attrs: { marks, text } }; // immutability
-  return newValue;
+  return { ...newValue, attrs: { marks, text } };
 };
 
 const convertDataField = object => {
   const dataField = DATA_FIELDS_MAP[object.type];
   const { attrs, ...newValue } = object;
-  return { ...newValue, ...(attrs ? {[dataField]: attrs} : {}) };
-    return { ...newValue, [dataField]: attrs };
-  }
-  return newValue;
+  return { ...newValue, ...(attrs ? { [dataField]: attrs } : {}) };
 };
 
 const convertValue = value => {
@@ -52,7 +47,7 @@ const convertValue = value => {
     newValue = moveTextData(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
-    newValue = convertType(newValue);
+    newValue = typeToUpper(newValue);
     newValue = convertDataField(newValue);
   }
   if (isNode(newValue) && !newValue.key) {

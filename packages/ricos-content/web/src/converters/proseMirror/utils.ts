@@ -1,11 +1,10 @@
+import { capitalize } from 'lodash';
 import { DECORATION_TYPES, NODE_TYPES } from './consts';
 
 export const isNode = object =>
   NODE_TYPES.includes(object?.type?.toUpperCase()) && ('nodes' in object || 'content' in object);
 
 export const isDecoration = object => DECORATION_TYPES.includes(object?.type?.toUpperCase());
-
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export const toDataFieldName = (type: string) =>
   type
