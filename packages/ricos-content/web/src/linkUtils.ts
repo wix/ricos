@@ -26,7 +26,7 @@ export const convertRelObjectToString = (relObject?: Link_Rel) => {
   return relString.trim();
 };
 
-export const convertRelStringToObject = (rel: string) => {
+export const convertRelStringToObject = (rel?: string) => {
   const relObject: Link_Rel = {};
   if (!rel) {
     return relObject;

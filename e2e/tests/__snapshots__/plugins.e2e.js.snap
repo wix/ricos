@@ -4580,7 +4580,6 @@ exports[`plugins > convert link to preview > with custom config > should not cre
   "entityMap": {
     "0": {
       "data": {
-        "rel": "",
         "url": "www.wix.com"
       },
       "mutability": "MUTABLE",
