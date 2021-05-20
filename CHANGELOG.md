@@ -20,6 +20,13 @@
 </details>
 <hr/>
 
+## 8.36.1 (May 20, 2021)
+
+### :bug: Bug Fix
+
+- `text selection toolbar`
+  - [#2522](https://github.com/wix-incubator/rich-content/pull/2522) import textSelectionToolbar styles from ricos viewer
+
 ## 8.36.0 (May 19, 2021)
 
 ### :rocket: New Feature
