@@ -1,0 +1,61 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+.button_colorPicker {
+  height: auto;
+  width: 100%;
+  margin-bottom: 25px;
+  position: relative;
+  @include phone {
+    padding-bottom: 8px;
+    height: 30px;
+  }
+}
+
+.button_colorPicker_label {
+  position: absolute;
+  color: #000;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 18px;
+  top: calc(50% - 9px);
+  left: 0px;
+  @include phone {
+    top: calc(50% - 18px);
+  }
+}
+.button_colorPicker_picker {
+  width: 50%;
+  height: auto;
+  direction: rtl;
+  display: inline-block;
+}
+
+.button_colorPicker_pickerButton {
+  width: 20px;
+  height: 20px;
+  border-radius: 28px;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  @include phone {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.button_marginBottomOpenedColorPicker {
+  margin-bottom: 7px;
+  @include phone {
+    margin-bottom: -4px;
+  }
+}
+.button_marginBottomClosedColorPicker {
+  margin-bottom: 24px;
+  @include phone {
+    margin-bottom: 6px;
+  }
+}
