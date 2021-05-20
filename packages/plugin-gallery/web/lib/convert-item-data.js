@@ -50,7 +50,7 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
             width,
             height,
           };
-        } else if (isValidUrl(convertedData.metaData.poster)) {
+        } else if (typeof convertedData.metaData.poster === 'string') {
           convertedData.metaData.poster = {
             url: convertedData.metaData.poster,
             width: convertedData.metaData.width,
