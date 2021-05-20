@@ -91,12 +91,13 @@ message Node {
         VideoData video_data = 19;
     }
 
-    message Style {
-        google.protobuf.StringValue paddingTop = 1;
-        google.protobuf.StringValue paddingBottom = 2;
-        google.protobuf.StringValue backgroundColor = 3;
-    }
-    Style style = 20;
+    NodeStyle style = 20;
+}
+
+message NodeStyle {
+    google.protobuf.StringValue paddingTop = 1;
+    google.protobuf.StringValue paddingBottom = 2;
+    google.protobuf.StringValue backgroundColor = 3;
 }
 
 message TextData {
