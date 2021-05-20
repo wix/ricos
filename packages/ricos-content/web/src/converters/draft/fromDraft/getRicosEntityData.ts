@@ -24,9 +24,11 @@ export const getTextStyle = (blockData?: RicosContentBlock['data']): TextStyle =
   return { textAlignment: textAlignment?.toUpperCase(), lineHeight, paddingTop, paddingBottom };
 };
 
-export const getNodeStyle = (blockData?: RicosContentBlock['data']): NodeStyle => {
+export const getNodeStyle = (blockData?: RicosContentBlock['data']): NodeStyle | undefined => {
   const { dynamicStyles } = blockData || {};
   const { 'padding-top': paddingTop, 'padding-bottom': paddingBottom, backgroundColor } =
     dynamicStyles || {};
-  return pickBy({ paddingTop, paddingBottom, backgroundColor }, identity);
+  const style = pickBy({ paddingTop, paddingBottom, backgroundColor }, identity);
+  const hasStyle = Object.values(style).length > 0;
+  return hasStyle ? style : undefined;
 };
