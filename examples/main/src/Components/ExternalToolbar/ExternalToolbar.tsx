@@ -116,7 +116,7 @@ class ExternalToolbar extends Component<{
   };
 
   render() {
-    const { buttons } = this.props;
+    const { buttons = {} } = this.props;
     return (
       <div className={styles.toolbar}>
         {Object.values(buttons).map((buttonProps: any, i) => {
