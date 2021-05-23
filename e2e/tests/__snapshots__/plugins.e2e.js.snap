@@ -3765,7 +3765,7 @@ exports[`plugins > convert link to preview > should embed link that supports emb
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
