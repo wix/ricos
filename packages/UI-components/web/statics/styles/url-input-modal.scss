@@ -2,19 +2,18 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .urlInput_container {
-
   padding: 80px 120px;
 
-  &.endAlignment, &.urlInputModal_topControls {    
+  &.endAlignment,
+  &.urlInputModal_topControls {
     padding: 24px;
   }
-  
-  &:not(.urlInputModal_topControls) {    
+
+  &:not(.urlInputModal_topControls) {
     @include phone {
       padding: 160px 33px !important;
     }
   }
-
 
   .urlInput_closeIcon {
     position: absolute;
@@ -46,7 +45,7 @@
 
   .urlInput_header_text {
     line-height: 28px;
-    font-size: 20px;  
+    font-size: 20px;
     text-align: center;
   }
 
@@ -54,7 +53,6 @@
     padding-left: 24px;
     text-align: left;
   }
-
 
   .urlInput_header_subtitle {
     font-size: 16px;
@@ -93,5 +91,3 @@
     }
   }
 }
-
-

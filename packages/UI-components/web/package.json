@@ -3,7 +3,7 @@
   "private": true,
   "version": "8.36.1",
   "author": {
-    "name": "undefined",
+    "name": "tamrat bayeh",
     "email": "tamratb@wix.com"
   },
   "repository": {
@@ -34,9 +34,9 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.34.3",
-    "wix-rich-content-editor-common": "8.34.3",
-    "wix-rich-content-plugin-commons": "8.34.3"
+    "wix-rich-content-common": "8.36.1",
+    "wix-rich-content-editor-common": "8.36.1",
+    "wix-rich-content-plugin-commons": "8.36.1"
   },
   "unpkg": true,
   "publishConfig": {
