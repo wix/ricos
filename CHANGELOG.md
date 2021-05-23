@@ -17,6 +17,12 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2525](https://github.com/wix-incubator/rich-content/pull/2525) fix onPluginAdd timing
+  - [#2527](https://github.com/wix-incubator/rich-content/pull/2527) fix onPluginAddStep's `pluginDetails` (blockKey)
+
 </details>
 <hr/>
 
@@ -284,7 +290,7 @@
 ### :rocket: New Feature
 
 - `schema`
-  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich content schema set to version 1 🥇
 - `ricos-content`
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`

@@ -1,5 +1,5 @@
 /* eslint-disable fp/no-delete */
-import { Node, Node_Type, ButtonData_Type } from 'ricos-schema';
+import { Node, Node_Type, ButtonData_Type, TextStyle } from 'ricos-schema';
 import {
   RICOS_NODE_TYPE_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_MUTABILITY,
@@ -52,10 +52,9 @@ export const createAtomicEntityData = (node: Node, entityKey: number): RicosEnti
 };
 
 export const createTextBlockData = (node: Node) => {
-  const {
-    textStyle: { textAlignment, paddingTop, paddingBottom, lineHeight },
-    indentation,
-  } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
+  const { textStyle, indentation }: { textStyle?: TextStyle; indentation?: number } =
+    node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
+  const { textAlignment, paddingTop, paddingBottom, lineHeight } = textStyle || {};
   return JSON.parse(
     JSON.stringify({
       textAlignment: textAlignment !== 'AUTO' ? textAlignment?.toLowerCase() : undefined,
