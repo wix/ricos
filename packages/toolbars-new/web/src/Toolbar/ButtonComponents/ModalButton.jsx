@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -14,18 +15,45 @@ class ModalButton extends Component {
   }
 
   toggleModal = () => {
-    this.setState({ isModalOpen: !this.state.isModalOpen });
+    const { isModalOpen } = this.state;
+    const {
+      dropDownProps: { saveState, saveSelection },
+      setKeepOpen,
+    } = this.props;
+    this.setState({ isModalOpen: !isModalOpen });
+    if (!isModalOpen) {
+      saveSelection?.();
+      saveState?.();
+      setKeepOpen?.(true);
+    }
   };
 
   closeModal = () => {
     if (this.state.isModalOpen) {
+      const { setKeepOpen } = this.props;
       this.setState({ isModalOpen: false });
+      setKeepOpen?.(false);
     }
   };
 
   onSave = (...args) => {
     this.props.onSave(...args);
     this.closeModal();
+  };
+
+  onCancel = () => {
+    const {
+      dropDownProps: { onCancel },
+    } = this.props;
+    onCancel?.();
+    this.closeModal(false);
+  };
+
+  onChange = (...args) => {
+    const {
+      dropDownProps: { onChange },
+    } = this.props;
+    onChange?.(...args);
   };
 
   render() {
@@ -42,7 +70,7 @@ class ModalButton extends Component {
       getLabel,
     } = dropDownProps;
     const { isModalOpen } = this.state;
-    const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
+    const buttonProps = arrow && getLabel ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
       <ClickOutside className={styles.buttonWrapper} onClickOutside={this.closeModal}>
         <ToolbarButton
@@ -62,8 +90,18 @@ class ModalButton extends Component {
           <div
             data-id="table-formatting-toolbar-modal"
             className={classNames(styles.modal, styles.withoutPadding)}
+            onMouseDown={event => event.preventDefault()}
           >
-            {modal({ closeCustomModal: this.closeModal, onSelect, t, onSave: this.onSave })}
+            {modal({
+              closeCustomModal: this.closeModal,
+              onSelect,
+              t,
+              onSave: this.onSave,
+              theme,
+              isMobile,
+              onCancel: this.onCancel,
+              onChange: this.onChange,
+            })}
           </div>
         )}
       </ClickOutside>
@@ -78,6 +116,7 @@ ModalButton.propTypes = {
   onSave: PropTypes.func,
   theme: PropTypes.object,
   t: PropTypes.func,
+  setKeepOpen: PropTypes.func,
 };
 
 export default ModalButton;

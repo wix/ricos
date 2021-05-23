@@ -6,6 +6,7 @@ import {
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
   INDENT_TYPE,
+  LINE_SPACING_TYPE,
 } from 'wix-rich-content-common';
 import {
   BoldIcon,
@@ -31,6 +32,7 @@ import {
   CodeBlockIcon,
 } from '../icons';
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
+import Panel from '../modals/line-spacing/LineSpacingPanel';
 // import LinkPanelContainer from '../modals/link/LinkComponents/LinkPanelContainer';
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
@@ -189,9 +191,15 @@ const buttonsFullData = {
     icon: LineSpacingIcon,
     dataHook: 'LINE_SPACING',
     tooltip: 'Line spacing',
-    action: 'LINE_SPACING',
-    type: 'DROPDOWN',
+    action: LINE_SPACING_TYPE,
+    type: 'modal',
+    modal: props => <Panel {...props} />,
+    onSave: 'LINE_SPACING',
     arrow: true,
+    saveState: true,
+    onCancel: 'LINE_SPACING',
+    onChange: 'LINE_SPACING',
+    saveSelection: true,
   },
   LINK: {
     icon: LinkIcon,
@@ -212,9 +220,9 @@ const buttonsFullData = {
 
 const inlineStyleButtons = ['Bold', 'Italic', 'Underline'];
 
-const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedList'];
+const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedList', 'HEADINGS'];
 
-const decorationButtons = ['DECREASE_INDENT', 'INCREASE_INDENT'];
+const decorationButtons = ['DECREASE_INDENT', 'INCREASE_INDENT', 'LINE_SPACING'];
 
 export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
   const buttonsList = [];
@@ -231,10 +239,51 @@ export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
     handleButtonIsDisabled(buttonsList, index);
     handleButtonModal(buttonsList, index, editorCommands);
     handleButtonOnSave(buttonsList, index, editorCommands);
+    handleButtonOnCancel(buttonsList, index, editorCommands);
+    handleButtonOnChange(buttonsList, index, editorCommands);
     handleGroupButtons(buttonsList, buttonKey, index, editorCommands);
     buttonKey === 'Title' && handleTitleButton(buttonsList, index, editorCommands);
+    handleButtonSaveState(buttonsList, index, editorCommands);
+    handleButtonSaveSelection(buttonsList, index, editorCommands);
   });
   return buttonsList;
+};
+
+const handleButtonOnChange = (buttonsList, index, editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].onChange) {
+    const buttonName = buttonsList[index].name;
+    if (buttonName === 'LINE_SPACING') {
+      buttonsList[index].onChange = type => {
+        updateSpacing(type, editorCommands, buttonName);
+      };
+    }
+  }
+};
+
+const handleButtonOnCancel = (buttonsList, index, editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].onCancel) {
+    const buttonName = buttonsList[index].name;
+    if (buttonName === 'LINE_SPACING') {
+      buttonsList[index].onCancel = () => editorCommands.loadEditorState();
+    }
+  }
+};
+
+const handleButtonSaveState = (buttonsList, index, editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].saveState) {
+    buttonsList[index].saveState = () => {
+      editorCommands.saveSelectionState();
+      editorCommands.saveEditorState();
+    };
+  }
+};
+
+const handleButtonSaveSelection = (buttonsList, index, editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].saveSelection) {
+    buttonsList[index].saveSelection = () => {
+      editorCommands.saveSelectionState();
+    };
+  }
 };
 
 const handleTitleButton = (buttonsList, index, editorCommands) => {
@@ -259,18 +308,37 @@ const handleTitleButton = (buttonsList, index, editorCommands) => {
 
 const handleButtonOnSave = (buttonsList, index, editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onSave) {
-    buttonsList[index].onSave = type => editorCommands.setBlockType(type);
+    const buttonName = buttonsList[index].name;
+    if (textBlockButtons.includes(buttonName)) {
+      buttonsList[index].onSave = type => editorCommands.setBlockType(type);
+    } else if (decorationButtons.includes(buttonName)) {
+      buttonsList[index].onSave = type => {
+        if (buttonName === 'LINE_SPACING') {
+          if (type) {
+            updateSpacing(type, editorCommands, buttonName);
+            setTimeout(() => editorCommands.loadSelectionState());
+          } else {
+            editorCommands.loadEditorState();
+          }
+        }
+      };
+    }
   }
 };
 
 const handleButtonModal = (buttonsList, index, editorCommands) => {
-  if (buttonsFullData[buttonsList[index].name].modal) {
-    buttonsList[index].modal = buttonsFullData[buttonsList[index].name].modal;
-    if (buttonsFullData[buttonsList[index].name].action === 'HEADINGS') {
-      const Modal = buttonsFullData[buttonsList[index].name].modal;
+  const buttonName = buttonsList[index].name;
+  if (buttonsFullData[buttonName].modal) {
+    buttonsList[index].modal = buttonsFullData[buttonName].modal;
+    if (buttonsFullData[buttonName].action === 'HEADINGS') {
+      const Modal = buttonsFullData[buttonName].modal;
       buttonsList[index].modal = props => (
         <Modal {...props} heading={getCurrentHeading(editorCommands)} />
       );
+    } else if (buttonName === 'LINE_SPACING') {
+      const Modal = buttonsFullData[buttonName].modal;
+      const spacing = editorCommands.getBlockSpacing();
+      buttonsList[index].modal = props => <Modal {...props} spacing={spacing} />;
     }
   }
 };
@@ -423,4 +491,9 @@ const translateHeading = (option = 'P', t) => {
   return option === 'P'
     ? t('FormattingToolbar_TextStyle_Paragraph')
     : t('FormattingToolbar_TextStyle_Heading', { number: option.slice(-1) });
+};
+
+const updateSpacing = (type, editorCommands, buttonName) => {
+  const dynamicStyles = type;
+  editorCommands.insertDecoration(buttonsFullData[buttonName].action, { dynamicStyles });
 };

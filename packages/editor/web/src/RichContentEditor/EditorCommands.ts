@@ -1,3 +1,4 @@
+import { pick } from 'lodash';
 import {
   EditorState,
   SelectionState,
@@ -20,6 +21,8 @@ import {
   triggerMention,
   insertMention,
   indentSelectedBlocks,
+  mergeBlockData,
+  getAnchorBlockData,
 } from 'wix-rich-content-editor-common';
 import {
   PluginsDataMap,
@@ -55,6 +58,7 @@ import {
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
   INDENT_TYPE,
+  LINE_SPACING_TYPE,
 } from 'wix-rich-content-common';
 
 type TextBlockType =
@@ -108,11 +112,19 @@ const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
   [RICOS_MENTION_TYPE]: insertMention,
   [INDENT_TYPE]: indentSelectedBlocks,
+  [LINE_SPACING_TYPE]: mergeBlockData,
 };
 
 const deleteDecorationsMapFuncs = {
   [RICOS_LINK_TYPE]: removeLinksInSelection,
 };
+
+const lineHeight = 'line-height';
+const spaceBefore = 'padding-top';
+const spaceAfter = 'padding-bottom';
+
+let savedEditorState;
+let savedSelectionState;
 
 export const createEditorCommands = (
   createPluginsDataMap,
@@ -131,6 +143,28 @@ export const createEditorCommands = (
       )
     );
 
+  const getBlockSpacing = () => {
+    const { dynamicStyles = {} } = getAnchorBlockData(getEditorState());
+    return pick(dynamicStyles, [lineHeight, spaceBefore, spaceAfter]);
+  };
+
+  const saveEditorState = () => {
+    savedEditorState = getEditorState();
+  };
+
+  const saveSelectionState = () => {
+    savedSelectionState = getEditorState().getSelection();
+  };
+
+  const loadEditorState = () => {
+    const selection = savedEditorState.getSelection();
+    setEditorState(EditorState.forceSelection(savedEditorState, selection));
+  };
+
+  const loadSelectionState = () => {
+    setEditorState(EditorState.forceSelection(getEditorState(), savedSelectionState));
+  };
+
   const editorState = {
     // TODO: check if needed, plus type error using SelectionState, not sure why
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -143,6 +177,11 @@ export const createEditorCommands = (
     hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
     getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
     getSelectedData: () => getEntityData(getEditorState()) || {},
+    getBlockSpacing,
+    saveEditorState,
+    loadEditorState,
+    saveSelectionState,
+    loadSelectionState,
   };
 
   const textFormattingCommands = {

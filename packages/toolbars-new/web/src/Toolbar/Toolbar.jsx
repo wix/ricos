@@ -123,7 +123,7 @@ class Toolbar extends Component {
   };
 
   renderModal = buttonProps => {
-    const { isMobile, tabIndex, t } = this.props;
+    const { isMobile, tabIndex, t, setKeepOpen } = this.props;
     const dropDownProps = {
       tabIndex,
       isMobile,
@@ -137,6 +137,7 @@ class Toolbar extends Component {
         onSave={buttonProps.onSave}
         dropDownProps={dropDownProps}
         t={t}
+        setKeepOpen={setKeepOpen}
       />
     );
   };

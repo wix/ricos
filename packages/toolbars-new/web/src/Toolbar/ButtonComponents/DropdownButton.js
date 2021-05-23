@@ -22,16 +22,24 @@ class DropdownButton extends Component {
     setKeepOpen: PropTypes.func,
   };
 
+  constructor(props) {
+    super(props);
+    this.isDropDownOpen = false;
+  }
+
   handleDropDownClick = onClick => () => {
     if (this.buttonRef) {
       this.props.setKeepOpen?.(true);
       onClick({ ref: this.buttonRef });
+      this.isDropDownOpen = true;
     }
   };
 
   onDropDownClose = onClose => () => {
-    this.props.setKeepOpen?.(false);
-    onClose();
+    if (this.isDropDownOpen) {
+      this.props.setKeepOpen?.(false);
+      onClose();
+    }
   };
 
   render() {

@@ -17,7 +17,6 @@ const headingElement = (heading, isSelected, onClick, t, translateHeading) => {
         isSelected ? styles.headingsPanel_selectedHeading : ''
       )}
       onClick={() => onClick(type, heading)}
-      onMouseDown={event => event.preventDefault()}
     >
       {content}
     </button>
