@@ -28,9 +28,8 @@ import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics
 
 type LinkDataUrl = {
   url: string;
-  targetBlank?: boolean;
+  target?: string;
   rel?: string;
-  anchorTarget?: string;
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
@@ -64,14 +63,13 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, rel, anchorTarget }: LinkDataUrl
+  { url, target, rel }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   const linkEntityData = createLinkEntityData({
     url,
-    targetBlank,
+    target,
     rel,
-    anchorTarget,
   });
 
   return insertLink(editorState, selection, linkEntityData);
@@ -221,9 +219,8 @@ function insertLink(
   );
 }
 
-export function createLinkEntityData({ url, anchor, targetBlank, rel, anchorTarget }: LinkData) {
+export function createLinkEntityData({ url, anchor, target, rel }: LinkData) {
   if (url) {
-    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
     return {
       url,
       target,

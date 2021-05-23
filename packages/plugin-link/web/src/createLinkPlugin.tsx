@@ -8,7 +8,11 @@ import {
   createLinkEntityData,
 } from 'wix-rich-content-editor-common';
 import { addLinkPreview, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview/libs/utils';
-import { isValidUrl, CreatePluginFunction } from 'wix-rich-content-common';
+import {
+  isValidUrl,
+  CreatePluginFunction,
+  convertTargetBooleanToString,
+} from 'wix-rich-content-common';
 import React, { KeyboardEvent } from 'react';
 import { LINK_TYPE, LinkPluginEditorConfig } from './types';
 import { Component } from './LinkComponent';
@@ -28,7 +32,7 @@ type LinkifyData = {
 const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config => {
   const type = LINK_TYPE;
   const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
-  const targetBlank = anchorTarget === '_blank';
+  const target = convertTargetBooleanToString(undefined, anchorTarget);
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
   const toolbar = createLinkToolbar({ ...config, settings, closeInlinePluginToolbar });
 
@@ -49,9 +53,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
       if (url && blockKey) {
         const linkData = createLinkEntityData({
           url,
-          targetBlank,
+          target,
           rel: relValue,
-          anchorTarget,
         }) as { url: string; target?: string; rel?: string };
         addLinkPreview(editorState, config, blockKey, linkData);
       }
@@ -154,9 +157,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
   const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
       url: string,
-      anchorTarget,
       rel: relValue,
-      targetBlank,
+      target,
     });
   };
 

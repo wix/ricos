@@ -8,6 +8,8 @@ import {
   isNewTab,
   convertRelObjectToString,
   convertRelStringToObject,
+  convertTargetStringToBoolean,
+  convertTargetBooleanToString,
 } from 'wix-rich-content-common';
 
 export default class BlockLinkModal extends Component {
@@ -15,10 +17,8 @@ export default class BlockLinkModal extends Component {
 
   setLinkInBlockData = ({ url, anchor, targetBlank, rel }) => {
     const { pubsub, anchorTarget, unchangedUrl, triggerBi } = this.props;
-    let target = '_blank';
-    if (!targetBlank) {
-      target = anchorTarget !== '_blank' ? anchorTarget : '_self';
-    }
+    const target = convertTargetBooleanToString(targetBlank, anchorTarget);
+
     if (!isEmpty(url) || !isEmpty(anchor) || unchangedUrl) {
       const item = anchor
         ? { anchor }
@@ -66,7 +66,7 @@ export default class BlockLinkModal extends Component {
     } = this.props;
     const componentLink = pubsub.get('componentData')?.config?.link;
     const { url, anchor, target, rel } = componentLink || {};
-    const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
+    const targetBlank = convertTargetStringToBoolean(target, anchorTarget);
     return (
       <LinkPanelContainer
         editorState={editorState}

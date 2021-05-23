@@ -7,15 +7,17 @@ import {
   mergeStyles,
   convertRelObjectToString,
   convertRelStringToObject,
+  convertTargetStringToBoolean,
+  convertTargetBooleanToString,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 
 class SettingsComponent extends PureComponent {
   constructor(props) {
     super(props);
-    const { settingsObj } = this.props;
+    const { settingsObj, shouldShowLink } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const linkButtonSettings = settingsObj.url
+    const linkButtonSettings = shouldShowLink
       ? {
           url: settingsObj.url,
           target: settingsObj.target,
@@ -43,21 +45,23 @@ class SettingsComponent extends PureComponent {
     this.setState({ url }, () => this.props.isValidUrl(validUrl));
   };
 
-  linkPanelToLink = ({ url, targetBlank, rel }) => ({
-    url,
-    target: targetBlank
-      ? '_blank'
-      : this.props.anchorTarget !== '_blank'
-      ? this.props.anchorTarget
-      : '_self',
-    rel: convertRelObjectToString(rel),
-  });
+  linkPanelToLink = ({ url, targetBlank, rel }) => {
+    const { anchorTarget } = this.props;
+    return {
+      url,
+      target: convertTargetBooleanToString(targetBlank, anchorTarget),
+      rel: convertRelObjectToString(rel),
+    };
+  };
 
-  linkToLinkPanel = ({ url = '', target, rel }) => ({
-    url,
-    targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
-    rel: convertRelStringToObject(rel),
-  });
+  linkToLinkPanel = ({ url, target, rel }) => {
+    const { anchorTarget } = this.props;
+    return {
+      url,
+      targetBlank: convertTargetStringToBoolean(target, anchorTarget),
+      rel: convertRelStringToObject(rel),
+    };
+  };
 
   onLinkPanelChange = linkPanelValues => {
     this.setState({ ...this.linkPanelToLink(linkPanelValues) });

@@ -23,7 +23,6 @@ const createInsertButtons: CreateInsertButtons = ({
   anchorTarget: AnchorTarget;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
-  const target = anchorTarget || 'blank';
   const isLinkButton = !settings.isActionButton;
   return [
     {
@@ -32,7 +31,7 @@ const createInsertButtons: CreateInsertButtons = ({
       tooltip: customTooltip || t('ButtonPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      componentData: getDefaultComponentData(isLinkButton, relValue, target),
+      componentData: getDefaultComponentData(isLinkButton, relValue, anchorTarget),
       section: 'BlockToolbar_Section_Advanced',
     },
   ];

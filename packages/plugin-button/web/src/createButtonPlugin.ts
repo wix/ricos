@@ -44,7 +44,6 @@ const createButtonPlugin = (
   const isLinkButton = type === LINK_BUTTON_TYPE;
   settings.isActionButton = !isLinkButton;
   const styles = mergeStyles({ styles: Styles, theme });
-  const target = anchorTarget || '_blank';
   const customTooltip = settings.insertButtonTooltip;
   return createBasePlugin({
     component: ButtonComponent,
@@ -65,7 +64,7 @@ const createButtonPlugin = (
     }),
     helpers,
     t,
-    defaultPluginData: getDefaultComponentData(isLinkButton, relValue, target),
+    defaultPluginData: getDefaultComponentData(isLinkButton, relValue, anchorTarget),
     isMobile,
     pluginDecorationProps: (props, componentData) => {
       const width = componentData.config?.width;

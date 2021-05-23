@@ -6,6 +6,8 @@ import {
   mergeStyles,
   convertRelStringToObject,
   convertRelObjectToString,
+  convertTargetStringToBoolean,
+  convertTargetBooleanToString,
 } from 'wix-rich-content-common';
 import {
   FileInput,
@@ -60,23 +62,25 @@ class ImageSettings extends Component {
     this.props.onUpdateItem({ link: this.linkPanelToLink(linkPanelValues) });
   };
 
-  linkPanelToLink = ({ url, targetBlank, rel, isValid }) => ({
-    url,
-    target: targetBlank
-      ? '_blank'
-      : this.props.anchorTarget !== '_blank'
-      ? this.props.anchorTarget
-      : '_self',
-    rel: convertRelObjectToString(rel),
-    isValid,
-  });
+  linkPanelToLink = ({ url, targetBlank, rel, isValid }) => {
+    const { anchorTarget } = this.props;
+    return {
+      url,
+      target: convertTargetBooleanToString(targetBlank, anchorTarget),
+      rel: convertRelObjectToString(rel),
+      isValid,
+    };
+  };
 
-  linkToLinkPanel = ({ url = '', target, rel, isValid }) => ({
-    url,
-    targetBlank: target ? target === '_blank' : this.props.anchorTarget === '_blank',
-    rel: convertRelStringToObject(rel),
-    isValid,
-  });
+  linkToLinkPanel = ({ url = '', target, rel, isValid }) => {
+    const { anchorTarget } = this.props;
+    return {
+      url,
+      targetBlank: convertTargetStringToBoolean(target, anchorTarget),
+      rel: convertRelStringToObject(rel),
+      isValid,
+    };
+  };
 
   render() {
     const styles = this.styles;

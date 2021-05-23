@@ -22,7 +22,6 @@ class BasicLinkPanel extends PureComponent {
           <LinkIcon />
         </div>
         <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>
-          {/*TODO: should be deleted?*/}
           {t('MobileLinkModal_Title')}
         </h3>
       </div>

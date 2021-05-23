@@ -17,6 +17,8 @@ import {
   ADD_PLUGIN_LINK_BI,
   convertRelObjectToString,
   convertRelStringToObject,
+  convertTargetStringToBoolean,
+  convertTargetBooleanToString,
 } from 'wix-rich-content-common';
 
 export default class TextLinkModal extends Component {
@@ -42,13 +44,13 @@ export default class TextLinkModal extends Component {
     if (!isEmpty(url) || !isEmpty(anchor)) {
       const { getEditorState, setEditorState, anchorTarget, insertLinkFn, helpers } = this.props;
       const editorState = getEditorState();
+      const target = convertTargetBooleanToString(targetBlank, anchorTarget);
       if (this.mode === 'TEXT') {
         const newEditorState = insertLinkFn(getEditorState(), {
           url,
           anchor,
-          targetBlank,
           rel: convertRelObjectToString(rel),
-          anchorTarget,
+          target,
           text: defaultName,
         });
         setEditorState(newEditorState);
@@ -63,7 +65,7 @@ export default class TextLinkModal extends Component {
               : {
                   link: {
                     url,
-                    target: targetBlank ? '_blank' : anchorTarget,
+                    target,
                     rel: convertRelObjectToString(rel),
                   },
                 }),
@@ -134,7 +136,7 @@ export default class TextLinkModal extends Component {
     const { getEditorState, theme, isMobile, anchorTarget, t, uiSettings, linkTypes } = this.props;
     const linkData = this.getLinkData(getEditorState());
     const { url, anchor, target, rel } = linkData || {};
-    const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
+    const targetBlank = convertTargetStringToBoolean(target, anchorTarget);
     return (
       <LinkPanelContainer
         editorState={getEditorState()}

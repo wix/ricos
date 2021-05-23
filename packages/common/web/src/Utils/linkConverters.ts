@@ -7,6 +7,8 @@ type Link_Rel = {
 const SPONSORED = 'sponsored';
 const NO_FOLLOW = 'nofollow';
 const UGC = 'ugc';
+const SELF = '_self';
+const BLANK = '_blank';
 
 export const convertRelObjectToString = (relObject?: Link_Rel) => {
   if (!relObject) {
@@ -47,4 +49,15 @@ export const convertRelStringToObject = (rel?: string) => {
   }
 
   return relObject;
+};
+
+export const convertTargetStringToBoolean = (target?: string, anchorTarget?: string) =>
+  target === BLANK || anchorTarget === BLANK;
+
+export const convertTargetBooleanToString = (targetBlank?: boolean, anchorTarget?: string) => {
+  if (targetBlank) {
+    return BLANK;
+  } else if (targetBlank === false) {
+    return SELF;
+  } else return anchorTarget || SELF;
 };

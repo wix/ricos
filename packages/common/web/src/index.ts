@@ -14,7 +14,12 @@ export {
   depthClassName,
 } from './Utils/classNameStrategies';
 export { mergeStyles } from './Utils/mergeStyles';
-export { convertRelObjectToString, convertRelStringToObject } from './Utils/relConverters';
+export {
+  convertRelObjectToString,
+  convertRelStringToObject,
+  convertTargetStringToBoolean,
+  convertTargetBooleanToString,
+} from './Utils/linkConverters';
 
 export { anchorScroll, addAnchorTagToUrl, isNewTab } from './Utils/anchor';
 
