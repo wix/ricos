@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.36.2 (May 23, 2021)
+
 ### :bug: Bug Fix
 
 - `plugin-commons`
@@ -25,8 +30,10 @@
 - `undo-redo`
   - [#2530](https://github.com/wix-incubator/rich-content/pull/2530) fix mobile buttons tooltip
 
-</details>
-<hr/>
+### :house: Internal
+
+- `gallery`
+  - [#2463](https://github.com/wix/ricos/pull/2463) bump `ProGallery` to v3.1.14
 
 ## 8.36.1 (May 20, 2021)
 

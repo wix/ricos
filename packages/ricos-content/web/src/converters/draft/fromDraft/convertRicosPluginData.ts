@@ -12,6 +12,7 @@ import {
   POLL_TYPE,
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
+  MAP_TYPE,
 } from '../../../consts';
 import {
   PluginContainerData_Spoiler,
@@ -43,6 +44,7 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     [LINK_BUTTON_TYPE]: convertButtonData,
     [ACTION_BUTTON_TYPE]: convertButtonData,
     [HTML_TYPE]: convertHTMLData,
+    [MAP_TYPE]: convertMapData,
   };
   if (newData.config && blockType !== DIVIDER_TYPE) {
     convertContainerData(newData);
@@ -200,6 +202,30 @@ const convertHTMLData = data => {
   data.containerData.width.type = PluginContainerData_Width_Type.CUSTOM;
   const { src, srcType } = data;
   data[srcType] = src;
+};
+
+const convertMapData = data => {
+  const {
+    isDraggingAllowed,
+    isMarkerShown,
+    isStreetViewControlShown,
+    isZoomControlShown,
+    locationDisplayName,
+    isViewControlShown,
+    zoom,
+    mode,
+  } = data.mapSettings;
+  data.mapSettings.draggable = isDraggingAllowed;
+  data.mapSettings.marker = isMarkerShown;
+  data.mapSettings.streetViewControl = isStreetViewControlShown;
+  data.mapSettings.zoomControl = isZoomControlShown;
+  data.mapSettings.locationName = locationDisplayName;
+  data.mapSettings.initialZoom = zoom;
+  data.mapSettings.mapType = mode;
+
+  if (has(data.mapSettings, 'isViewControlShown')) {
+    data.mapSettings.viewModeControl = isViewControlShown;
+  }
 };
 
 const convertLink = ({
