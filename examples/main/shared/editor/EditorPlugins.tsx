@@ -353,8 +353,10 @@ let userColors = [];
 export const uiSettings: UISettings = {
   linkPanel: {
     externalPopups: true,
-    blankTargetToggleVisibilityFn: () => true,
-    nofollowRelToggleVisibilityFn: () => true,
+    // blankTargetToggleVisibilityFn: () => true, // deprecated
+    // nofollowRelToggleVisibilityFn: () => true, // deprecated
+    showNewTabCheckbox: true,
+    showNoFollowCheckbox: true,
     showSponsoredCheckbox: true,
     dropDown: getLinkPanelDropDownConfig(),
     //placeholder: "Enter a URL here",
