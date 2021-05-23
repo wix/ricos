@@ -7,6 +7,7 @@ import { genKey } from '../../generateRandomKey';
 import { isDecoration, isNode, toDataFieldName } from '../utils';
 
 export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { type: _, ...content } = convertFromProse(proseDocument);
   if (!content.metadata) {
     content.metadata = initializeMetadata();
