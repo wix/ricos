@@ -2298,7 +2298,6 @@ exports[`text > should enter link and further text in next block has no inline s
   "entityMap": {
     "0": {
       "data": {
-        "rel": "",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",

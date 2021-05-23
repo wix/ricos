@@ -4527,7 +4527,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
