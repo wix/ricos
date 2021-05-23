@@ -34,7 +34,7 @@ const RedoButton = props => {
         isActive={false}
         theme={theme}
         isMobile={isMobile}
-        tooltipText={t('redoButton_Tooltip')}
+        tooltipText={t('RedoButton_Tooltip')}
         dataHook={'redoButton'}
         tabindex={tabIndex}
         icon={redoIcon}
