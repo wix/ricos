@@ -53,6 +53,7 @@ describe('plugins', () => {
 
     it('render viewer toolbar and tweet', function() {
       cy.loadRicosEditorAndViewer('nested-lists');
+      cy.getViewer().trigger('mouseover');
       cy.setViewerSelection(476, 98);
       cy.getTwitterButton().should('be.visible');
       cy.eyesCheckWindow(this.test.title);

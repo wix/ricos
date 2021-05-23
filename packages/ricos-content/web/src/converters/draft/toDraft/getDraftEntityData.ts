@@ -1,5 +1,5 @@
 /* eslint-disable fp/no-delete */
-import { Node, Node_Type, ButtonData_Type } from 'ricos-schema';
+import { Node, Node_Type, ButtonData_Type, TextStyle } from 'ricos-schema';
 import {
   RICOS_NODE_TYPE_TO_DATA_FIELD,
   ENTITY_DECORATION_TO_MUTABILITY,
@@ -53,7 +53,7 @@ export const createAtomicEntityData = (node: Node, entityKey: number): RicosEnti
 
 const getDynamicStyles = (node: Node) => {
   const { textStyle } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
-  const { textAlignment, lineHeight } = textStyle;
+  const { textAlignment, lineHeight } = textStyle || {};
   const paddingTop = node.style?.paddingTop || textStyle?.paddingTop;
   const paddingBottom = node.style?.paddingBottom || textStyle?.paddingBottom;
   return {
