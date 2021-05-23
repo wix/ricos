@@ -2,22 +2,26 @@
 import path from 'path';
 import chalk from 'chalk';
 import { writeFileSync } from 'fs';
-import { fromDraft } from './draft';
-import { toPlainText } from './plainText';
-import { toHtml } from './html';
-import { toProseMirror } from './proseMirror';
-import migrationContent from '../../../../../e2e/tests/fixtures/migration-content.json';
+import { fromDraft } from '../packages/ricos-content/web/src/converters/draft';
+import { toPlainText } from '../packages/ricos-content/web/src/converters/plainText';
+import { toHtml } from '../packages/ricos-content/web/src/converters/html';
+import { toProseMirror } from '../packages/ricos-content/web/src/converters/proseMirror';
+import migrationContent from '../e2e/tests/fixtures/migration-content.json';
 import { RichContent } from 'ricos-schema';
 
 const getAbsPath = (relPath: string) => path.resolve(__dirname, relPath);
 
 const RICH_CONTENT_BASELINE = getAbsPath(
-  '../../statics/json/migratedFixtures/migration-content.json'
+  '../packages/ricos-content/web/statics/json/migratedFixtures/migration-content.json'
 );
-const PLAIN_TEXT_BASELINE = getAbsPath('../converters/plainText/toPlainText/complexPlainText.ts');
-const HTML_BASELINE = getAbsPath('../converters/html/toHtml/__tests__/complexContentHtml.html');
+const PLAIN_TEXT_BASELINE = getAbsPath(
+  '../packages/ricos-content/web/src/converters/plainText/toPlainText/complexPlainText.ts'
+);
+const HTML_BASELINE = getAbsPath(
+  '../packages/ricos-content/web/src/converters/html/toHtml/__tests__/complexContentHtml.html'
+);
 const PROSE_MIRROR_BASELINE = getAbsPath(
-  '../converters/proseMirror/toProseMirror/__tests__/migrationContentProse.json'
+  '../packages/ricos-content/web/src/converters/proseMirror/toProseMirror/__tests__/migrationContentProse.json'
 );
 
 enum Target {
