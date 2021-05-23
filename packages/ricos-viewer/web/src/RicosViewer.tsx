@@ -37,7 +37,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   componentDidMount() {
     const { children } = this.props;
 
-    const onViewerLoaded = this.getBiCallback('onViewerLoadedd');
+    const onViewerLoaded = this.getBiCallback('onViewerLoaded');
     const isPreview = children?.props.helpers?.isPreview || this.props._rcProps?.helpers?.isPreview;
     const content =
       this.props.content || children?.props.initialState || this.props._rcProps?.initialState;
