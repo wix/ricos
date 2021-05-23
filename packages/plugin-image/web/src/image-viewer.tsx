@@ -16,7 +16,6 @@ import {
   RichContentTheme,
   SEOSettings,
 } from 'wix-rich-content-common';
-import Svg from './example.svg';
 import { Image } from 'wix-ui-tpa/Image';
 
 // eslint-disable-next-line max-len
@@ -445,6 +444,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     const onlyHiRes = seoMode || isGif;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
+    console.log('data.src', data);
     return (
       <div
         data-hook="imageViewer"
@@ -453,29 +453,23 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
         onContextMenu={this.handleContextMenu}
         {...accesibilityProps}
       >
-        <Svg />
         <div
           className={itemClassName}
           aria-label={metadata.alt}
           onClick={this.handleClick}
           onKeyDown={this.onKeyDown}
         >
-          {shouldRenderPreloadImage &&
-            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-          {shouldRenderImage &&
-            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, onlyHiRes)}
+          {/* {shouldRenderPreloadImage &&
+            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)} */}
+          {/* {shouldRenderImage &&
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, onlyHiRes)} */}
+          {/* @ts-ignore */}
+          <Image src={data.src.file_name} width={480} height={360} alt={metadata.alt} />
           {this.hasExpand() && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
         {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
-
-        <Image
-          src="c5f754_dd75514d14fa4057b4f4a6cc8ce7add3~mv2.jpg"
-          width={480}
-          height={360}
-          alt="Garfield smiles and puts his hand over chest"
-        />
       </div>
     );
   }

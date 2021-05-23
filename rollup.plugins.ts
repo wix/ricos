@@ -177,8 +177,10 @@ const createFakeStylesFile = (): Plugin => ({
 });
 
 let _plugins: Plugin[] = [
-  svgr(),
   stylable(),
+  svgr({
+    include: /\.svg$/i,
+  }),
   resolveAlias(),
   resolve(),
   babel(),

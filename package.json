@@ -166,7 +166,7 @@
     "react-dom": "^16.13.1",
     "react-svg-loader": "^3.0.3",
     "replace-in-file": "^6.1.0",
-    "rollup": "^2.47.0",
+    "rollup": "2.47.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.1.0",
