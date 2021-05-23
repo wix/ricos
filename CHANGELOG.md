@@ -17,14 +17,23 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.36.2 (May 23, 2021)
+
 ### :bug: Bug Fix
 
 - `plugin-commons`
   - [#2525](https://github.com/wix-incubator/rich-content/pull/2525) fix onPluginAdd timing
   - [#2527](https://github.com/wix-incubator/rich-content/pull/2527) fix onPluginAddStep's `pluginDetails` (blockKey)
+- `undo-redo`
+  - [#2530](https://github.com/wix-incubator/rich-content/pull/2530) fix mobile buttons tooltip
 
-</details>
-<hr/>
+### :house: Internal
+
+- `gallery`
+  - [#2463](https://github.com/wix/ricos/pull/2463) bump `ProGallery` to v3.1.14
 
 ## 8.36.1 (May 20, 2021)
 

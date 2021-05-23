@@ -4654,14 +4654,7 @@
     "@types/prosemirror-transform" "*"
     "@types/prosemirror-view" "*"
 
-"@types/prosemirror-transform@*":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@types/prosemirror-transform/-/prosemirror-transform-1.1.2.tgz#fe883c19a5a9f1882346a294efd09d55c6764c7a"
-  integrity sha512-Ozyvs5Dquc49gaFysmC4gNhv6E65r569HSzw4RXdZgIljZ5Y9K4kHFlDvsWBBDH19+1178X9LMmM9J620O6Bug==
-  dependencies:
-    "@types/prosemirror-model" "*"
-
-"@types/prosemirror-transform@^1.1.3":
+"@types/prosemirror-transform@*", "@types/prosemirror-transform@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@types/prosemirror-transform/-/prosemirror-transform-1.1.3.tgz#cf30d275976978d1c0317d0659145426fc49ce6f"
   integrity sha512-qtnd4jMoBgUAF2Vy2uRCVY4/LN3d069PP9XTIKrfk7mwWPYKonBYv1NsaBGTpK26sOPu0p7eJNZwaiNYmbfIwA==
@@ -20671,28 +20664,28 @@ private@^0.1.6, private@~0.1.5:
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
   integrity sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==
 
-pro-gallery-lib@2.4.13:
-  version "2.4.13"
-  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-2.4.13.tgz#8410288287289c3f1b47367639c7dbf279fbd536"
-  integrity sha512-64/4Qoxo28yIBKSQAh4lhxR1FDhh5fwvOysC7Hs/z4kWBGzofdqadIFO9sSWn5akKx41H2/LOGdqt035W5MBHQ==
+pro-gallery-lib@3.1.14:
+  version "3.1.14"
+  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-3.1.14.tgz#beaf78a0a8a1601349bfcb946ab24c951a548538"
+  integrity sha512-WUWVTSzRQZdciZ+UCQ5PeDSL/lFr/oPq9Fca4jOwa0ca3UBFOZ7GWDqM6fY1AXWC24sf/PO0KtvdZIrKF9a1Pg==
   dependencies:
-    pro-layouts "2.4.8"
+    pro-layouts "3.1.14"
 
-pro-gallery@2.4.13:
-  version "2.4.13"
-  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-2.4.13.tgz#ad43da8000cc7ed80d690f29cc231aa7c6a5e77e"
-  integrity sha512-ECUworYB0KXX2p1kylZwmipD25hyPziBt/HEhhWUwgBHctR7pCadDXuaSG5dKNmeK4KvvpF52MP6Dxym7VM1xw==
+pro-gallery@3.1.14:
+  version "3.1.14"
+  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-3.1.14.tgz#d8962582c8f4ea45ca725caa05e240863096301f"
+  integrity sha512-RwWfVyyHO+DaLlSEwg2sJ/7C+jueiYBvR+iOIHz6Vu6tocO/n+d9vYv05IZn3wTiIRMvbjNkb+lDneLMe4bOkQ==
   dependencies:
     "@vimeo/player" "2.8.2"
     hls.js "^0.14.12"
-    pro-gallery-lib "2.4.13"
-    pro-layouts "2.4.8"
+    pro-gallery-lib "3.1.14"
+    pro-layouts "3.1.14"
     react-player "^2.6.2"
 
-pro-layouts@2.4.8:
-  version "2.4.8"
-  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-2.4.8.tgz#3f3067364b23f2be2ea92a5d4ded45d70616b3ec"
-  integrity sha512-jIkevToAcsOwjKIg0H6bUGqwqxv2soUMCqmz5jyLCEnhIPyBrDLCSiG5U3AueDJWR+n3rI3dn/QpigPluH6GJw==
+pro-layouts@3.1.14:
+  version "3.1.14"
+  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-3.1.14.tgz#bdb10ec6ba3a6d4afb4fbe3ab046744b64338c4a"
+  integrity sha512-HQsDQwVwcHVzg7PjP2uIbM/y1sPEwMTzbipgDYdi9Bnz9z58+P+b0++qqkF056Q8GChpczoA/H/jQp+az2YWOw==
 
 process-nextick-args@~1.0.6:
   version "1.0.7"

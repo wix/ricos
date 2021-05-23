@@ -773,21 +773,17 @@
           },
           "customHeight": 271
         },
-        "config": {
-          "height": 271,
-          "width": 286
-        },
         "mapSettings": {
           "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-          "isDraggingAllowed": true,
-          "isMarkerShown": true,
-          "isStreetViewControlShown": false,
-          "isZoomControlShown": false,
+          "draggable": true,
+          "marker": true,
+          "streetViewControl": false,
+          "zoomControl": false,
           "lat": 32.097235,
           "lng": 34.77427,
-          "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
-          "mode": "roadmap",
-          "zoom": 18
+          "locationName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "initialZoom": 18,
+          "mapType": "roadmap"
         }
       }
     },
