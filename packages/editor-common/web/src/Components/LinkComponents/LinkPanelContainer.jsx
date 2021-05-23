@@ -9,12 +9,12 @@ import { isEmpty } from 'lodash';
 class LinkPanelContainer extends PureComponent {
   constructor(props) {
     super(props);
-    const { url, anchor, targetBlank, rel, editorState, linkTypes, unchangedUrl } = this.props;
+    const { url, anchor, targetBlank, rel, editorState, linkTypes, hideUrlInput } = this.props;
     this.renderBasicLinkPanel =
       !linkTypes ||
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
-      unchangedUrl;
+      hideUrlInput;
     this.anchorableBlocksData = !this.renderBasicLinkPanel
       ? getAnchorableBlocks(editorState)
       : undefined;
@@ -44,7 +44,7 @@ class LinkPanelContainer extends PureComponent {
       switch (radioGroupValue) {
         case RADIO_GROUP_VALUES.EXTERNAL_LINK: {
           const { linkPanelValues } = this.state;
-          return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.unchangedUrl;
+          return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.hideUrlInput;
         }
         case RADIO_GROUP_VALUES.ANCHOR: {
           const { anchorPanelValues } = this.state;
@@ -57,7 +57,7 @@ class LinkPanelContainer extends PureComponent {
       }
     } else {
       const { linkPanelValues } = this.state;
-      return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.unchangedUrl;
+      return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.hideUrlInput;
     }
   };
 
@@ -93,7 +93,7 @@ class LinkPanelContainer extends PureComponent {
 
   onDoneLink = () => {
     const { linkPanelValues } = this.state;
-    if ((linkPanelValues.isValid && linkPanelValues.url) || this.props.unchangedUrl) {
+    if ((linkPanelValues.isValid && linkPanelValues.url) || this.props.hideUrlInput) {
       this.props.onDone(linkPanelValues);
     } else if (linkPanelValues.url === '') {
       this.onDelete();
@@ -121,7 +121,7 @@ class LinkPanelContainer extends PureComponent {
   render() {
     const { radioGroupValue, linkPanelValues, anchorPanelValues } = this.state;
     const ariaProps = { 'aria-labelledby': 'mob_link_modal_hdr' };
-    const { theme, isMobile, t, uiSettings, isActive, unchangedUrl, linkTypes } = this.props;
+    const { theme, isMobile, t, uiSettings, isActive, hideUrlInput, linkTypes } = this.props;
     const { linkPanel } = uiSettings || {};
     const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
@@ -131,7 +131,7 @@ class LinkPanelContainer extends PureComponent {
       onEscape: this.onCancel,
       t,
       ariaProps: linkPanelAriaProps,
-      unchangedUrl,
+      hideUrlInput,
       ...uiSettings?.linkPanel,
     };
     const buttonsProps = {
@@ -142,7 +142,7 @@ class LinkPanelContainer extends PureComponent {
       theme,
       t,
       isDoneButtonEnable: this.isDoneButtonEnable(),
-      unchangedUrl,
+      hideUrlInput,
       isMobile,
     };
     const propsToPass = {
@@ -188,7 +188,7 @@ LinkPanelContainer.propTypes = {
   uiSettings: PropTypes.object,
   t: PropTypes.func,
   linkTypes: PropTypes.object,
-  unchangedUrl: PropTypes.bool,
+  hideUrlInput: PropTypes.bool,
 };
 
 export default LinkPanelContainer;

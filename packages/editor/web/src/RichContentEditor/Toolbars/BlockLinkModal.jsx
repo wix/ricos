@@ -16,10 +16,10 @@ export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
   setLinkInBlockData = ({ url, anchor, targetBlank, rel }) => {
-    const { pubsub, anchorTarget, unchangedUrl, triggerBi } = this.props;
+    const { pubsub, anchorTarget, hideUrlInput, triggerBi } = this.props;
     const target = convertTargetBooleanToString(targetBlank, anchorTarget);
 
-    if (!isEmpty(url) || !isEmpty(anchor) || unchangedUrl) {
+    if (!isEmpty(url) || !isEmpty(anchor) || hideUrlInput) {
       const item = anchor
         ? { anchor }
         : {
@@ -60,7 +60,7 @@ export default class BlockLinkModal extends Component {
       anchorTarget,
       t,
       uiSettings,
-      unchangedUrl,
+      hideUrlInput,
       linkTypes,
       editorState,
     } = this.props;
@@ -84,7 +84,7 @@ export default class BlockLinkModal extends Component {
         uiSettings={uiSettings}
         t={t}
         linkTypes={linkTypes}
-        unchangedUrl={unchangedUrl}
+        hideUrlInput={hideUrlInput}
       />
     );
   }
@@ -100,7 +100,7 @@ BlockLinkModal.propTypes = {
   anchorTarget: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
-  unchangedUrl: PropTypes.bool,
+  hideUrlInput: PropTypes.bool,
   linkTypes: PropTypes.object,
   editorState: PropTypes.object,
   triggerBi: PropTypes.func,

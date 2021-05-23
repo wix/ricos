@@ -50,9 +50,7 @@ class LinkPanel extends Component {
     this.onChange({ rel: { sponsored: event.target.checked } });
   };
 
-  onChange = changes => {
-    this.props.onChange({ ...merge(this.props.linkValues, changes) });
-  };
+  onChange = changes => this.props.onChange(merge({}, this.props.linkValues, changes));
 
   handleKeyDown = e => {
     const { onEnter, onEscape } = this.props;
@@ -123,16 +121,16 @@ class LinkPanel extends Component {
       showSponsoredCheckbox,
       t,
       linkValues,
-      unchangedUrl,
+      hideUrlInput,
       isMobile,
     } = this.props;
 
     const { targetBlank, rel } = linkValues;
-    const { nofollow, sponsored /*, ugc*/ } = rel || {};
+    const { nofollow, sponsored } = rel || {};
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
-        {!unchangedUrl && (
+        {!hideUrlInput && (
           /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
           <div className={styles.linkPanel_Input} onKeyDown={this.handleKeyDown}>
             {this.getInput()}
@@ -172,8 +170,6 @@ class LinkPanel extends Component {
               checked={sponsored}
               dataHook="linkPanelSponsoredCheckbox"
               onChange={this.handleSponsoredChange}
-              t={t}
-              isMobile={isMobile}
             />
           )}
         </div>
@@ -200,7 +196,7 @@ LinkPanel.propTypes = {
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
   placeholder: PropTypes.string,
-  unchangedUrl: PropTypes.bool,
+  hideUrlInput: PropTypes.bool,
   isMobile: PropTypes.bool,
 };
 export default LinkPanel;
