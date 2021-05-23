@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.36.2 (May 23, 2021)
+
 ### :bug: Bug Fix
 
 - `plugin-commons`
@@ -29,9 +34,6 @@
 
 - `gallery`
   - [#2463](https://github.com/wix/ricos/pull/2463) bump `ProGallery` to v3.1.14
-
-</details>
-<hr/>
 
 ## 8.36.1 (May 20, 2021)
 
