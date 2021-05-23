@@ -235,6 +235,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "0": {
       "data": {
         "rel": "",
+        "target": "_self",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -243,6 +244,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "1": {
       "data": {
         "rel": "",
+        "target": "_self",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -251,6 +253,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "2": {
       "data": {
         "rel": "",
+        "target": "_self",
         "url": "https://www.sport5.co.il/"
       },
       "mutability": "MUTABLE",
@@ -259,6 +262,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "3": {
       "data": {
         "rel": "",
+        "target": "_self",
         "url": "https://www.one.co.il/"
       },
       "mutability": "MUTABLE",
@@ -394,6 +398,7 @@ exports[`text > allow to enter hashtag with link #0`] =
   "entityMap": {
     "0": {
       "data": {
+        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -402,6 +407,7 @@ exports[`text > allow to enter hashtag with link #0`] =
     "1": {
       "data": {
         "rel": "",
+        "target": "_self",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -409,6 +415,7 @@ exports[`text > allow to enter hashtag with link #0`] =
     },
     "2": {
       "data": {
+        "target": "_self",
         "url": "thisislink#youknow.com"
       },
       "mutability": "MUTABLE",
@@ -2253,6 +2260,7 @@ exports[`text > should enter link and further text in current block has no inlin
   "entityMap": {
     "0": {
       "data": {
+        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -2298,6 +2306,7 @@ exports[`text > should enter link and further text in next block has no inline s
   "entityMap": {
     "0": {
       "data": {
+        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",

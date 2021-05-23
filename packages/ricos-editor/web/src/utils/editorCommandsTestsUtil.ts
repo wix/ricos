@@ -487,9 +487,9 @@ const image = {
 const link = {
   type: RICOS_LINK_TYPE,
   decorationType: Decoration_Type.LINK,
-  data1: LinkData.fromJSON({ url: 'www.wix.com', rel: 'nofollow' }),
+  data1: LinkData.fromJSON({ url: 'www.wix.com', rel: 'nofollow', target: '_self' }),
   selection1: selection,
-  data2: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'sponsored' }),
+  data2: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'sponsored', target: '_self' }),
   selection2: selectionCollapsed,
   expectedData1: {
     url: 'www.wix.com',
