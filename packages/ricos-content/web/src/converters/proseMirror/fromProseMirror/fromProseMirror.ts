@@ -1,4 +1,4 @@
-import { transform, isObject } from 'lodash';
+import { transform, isObject, merge } from 'lodash';
 import { Node_Type, RichContent } from 'ricos-schema';
 import { JSONContent } from '@tiptap/core';
 import { DECORATION_TYPES, NODE_TYPES } from '../consts';
@@ -39,7 +39,13 @@ const moveTextData = object => {
 const convertDataField = object => {
   const dataField = DATA_FIELDS_MAP[object.type];
   const { attrs, ...newValue } = object;
-  return { ...newValue, ...(attrs ? { [dataField]: attrs } : {}) };
+  const { style, ...restAttrs } = attrs || {};
+  return merge(
+    { ...newValue },
+    style && { style },
+    Object.keys(restAttrs).length && { [dataField]: restAttrs }
+  );
+  // return { ...newValue, ...(attrs ? { [dataField]: attrs } : {}) };
 };
 
 const convertValue = value => {

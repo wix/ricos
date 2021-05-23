@@ -1,4 +1,4 @@
-import { transform, isObject } from 'lodash';
+import { transform, isObject, merge } from 'lodash';
 import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap/core';
@@ -37,6 +37,15 @@ const convertValue = value => {
   }
   if (newValue?.textData) {
     newValue = flattenTextData(newValue);
+  }
+  if (isNode(newValue) && newValue?.style) {
+    const { style, ...rest } = newValue;
+    const dataFields = Object.keys(rest)
+      .filter(key => !!FIELDS_MAP[key]) // ['nodes', 'paragraphData']
+      .filter(key => key.includes('Data')); // ['paragraphData']
+    if (dataFields.length) {
+      newValue = merge({ [dataFields[0]]: { style } }, rest);
+    }
   }
   return newValue;
 };

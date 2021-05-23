@@ -95,9 +95,9 @@ message Node {
 }
 
 message NodeStyle {
-    google.protobuf.StringValue paddingTop = 1;
-    google.protobuf.StringValue paddingBottom = 2;
-    google.protobuf.StringValue backgroundColor = 3;
+    google.protobuf.StringValue padding_top = 1;
+    google.protobuf.StringValue padding_bottom = 2;
+    google.protobuf.StringValue background_color = 3;
 }
 
 message TextData {

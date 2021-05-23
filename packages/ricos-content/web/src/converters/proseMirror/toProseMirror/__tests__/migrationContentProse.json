@@ -271,7 +271,9 @@
       ],
       "attrs": {
         "textStyle": {
-          "textAlignment": "JUSTIFY",
+          "textAlignment": "JUSTIFY"
+        },
+        "style": {
           "paddingTop": "0px",
           "paddingBottom": "0px"
         },
@@ -1553,7 +1555,9 @@
       "attrs": {
         "level": 3,
         "textStyle": {
-          "textAlignment": "JUSTIFY",
+          "textAlignment": "JUSTIFY"
+        },
+        "style": {
           "paddingTop": "0px",
           "paddingBottom": "0px"
         }
@@ -1565,7 +1569,9 @@
       "content": [],
       "attrs": {
         "textStyle": {
-          "textAlignment": "JUSTIFY",
+          "textAlignment": "JUSTIFY"
+        },
+        "style": {
           "paddingTop": "0px",
           "paddingBottom": "0px"
         },
@@ -1587,7 +1593,9 @@
       "attrs": {
         "textStyle": {
           "textAlignment": "JUSTIFY",
-          "lineHeight": "2.5",
+          "lineHeight": "2.5"
+        },
+        "style": {
           "paddingTop": "0px",
           "paddingBottom": "0px"
         },
