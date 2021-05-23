@@ -12,14 +12,18 @@ export default class UrlLinkButton extends Component {
     this.styles = mergeStyles({ styles, theme });
   }
 
-  handleClick = () => {
-    const { getEditorState } = this.props;
+  handleClick = event => {
+    const { getEditorState, customAnchorScroll } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
     const { anchor = '' } = linkData || {};
-    const nodeListOfAllblocks = document.querySelectorAll(`[data-editor]`);
-    const arrayOfAllblocks = Array.apply(null, nodeListOfAllblocks);
-    const element = arrayOfAllblocks.find(block => block.dataset.offsetKey === `${anchor}-0-0`);
-    anchorScroll(element);
+    if (customAnchorScroll) {
+      customAnchorScroll(event, anchor);
+    } else {
+      const nodeListOfAllblocks = document.querySelectorAll(`[data-editor]`);
+      const arrayOfAllblocks = Array.apply(null, nodeListOfAllblocks);
+      const element = arrayOfAllblocks.find(block => block.dataset.offsetKey === `${anchor}-0-0`);
+      anchorScroll(element);
+    }
   };
 
   preventDefault = event => event.preventDefault();
@@ -49,5 +53,7 @@ export default class UrlLinkButton extends Component {
 UrlLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
+  customAnchorScroll: PropTypes.func,
+  settings: PropTypes.object,
   t: PropTypes.func,
 };

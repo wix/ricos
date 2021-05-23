@@ -25,6 +25,6 @@ $phone: 640px;
 }
 
 @mixin fillWithSettingsActionColor {
-  color: $settings-action-color;
-  fill: $settings-action-color;
+  color: $settings-action-color-fallback;
+  fill: $settings-action-color-fallback;
 }

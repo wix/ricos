@@ -20,12 +20,41 @@
 ### :bug: Bug Fix
 
 - `plugin-commons`
-  - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check plugin container exists before using it
+  - [#2525](https://github.com/wix-incubator/rich-content/pull/2525) fix onPluginAdd timing
+  - [#2527](https://github.com/wix-incubator/rich-content/pull/2527) fix onPluginAddStep's `pluginDetails` (blockKey)
 - `file-upload`
   - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) improve file loading logic
 
 </details>
 <hr/>
+
+## 8.36.1 (May 20, 2021)
+
+### :bug: Bug Fix
+
+- `text selection toolbar`
+  - [#2522](https://github.com/wix-incubator/rich-content/pull/2522) import textSelectionToolbar styles from ricos viewer
+
+## 8.36.0 (May 19, 2021)
+
+### :rocket: New Feature
+
+- `editor viewer`
+  - [#2459](https://github.com/wix-incubator/rich-content/pull/2459) added `customAnchorScroll` prop support through `linkSettings`
+- `plugin-commons`
+  - [#2519](https://github.com/wix-incubator/rich-content/pull/2519) `uiSettings.linkPanel.externalPopups` config for link popup appearance
+- `text-selection-toolbar`
+  - [#2508](https://github.com/wix-private/wix-ricos/pull/2508) add textSelectionToolbar api to ricos-viewer
+
+### :bug: Bug Fix
+
+- `*`
+  - [#2517](https://github.com/wix-incubator/rich-content/pull/2517) settings action color fix - several elements were wired to use fallback mechanism, unnecessarily
+- `link-toolbar`
+  - [#2515](https://github.com/wix/ricos/pull/2515) update link toolbar when moving from link to link
+- `plugin-commons`
+  - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check if plugin container exists before using it
+  - [#2516](https://github.com/wix-incubator/rich-content/pull/2516) set a threshold for waiting for a component to load (for scrolling)
 
 ## 8.35.0 (May 17, 2021)
 
@@ -263,7 +292,7 @@
 ### :rocket: New Feature
 
 - `schema`
-  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich content schema set to version 1 🥇
 - `ricos-content`
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`

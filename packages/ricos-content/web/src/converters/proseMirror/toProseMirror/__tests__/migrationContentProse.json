@@ -1,0 +1,1685 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "key": "foo",
+      "content": [
+        {
+          "type": "text",
+          "key": "5bm9n",
+          "content": [],
+          "text": "Lorem ipsum dolor sit amet",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "ck1k8",
+          "content": [],
+          "text": " 😎, ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "fse8o",
+          "content": [],
+          "text": "consectetur adipiscing",
+          "marks": [
+            {
+              "type": "underline"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "ej04t",
+          "content": [],
+          "text": " elit. Quisque quis ex ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "d42s5",
+          "content": [],
+          "text": "auctor",
+          "marks": [
+            {
+              "type": "italic"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "9sh8p",
+          "content": [],
+          "text": ", facilisis lectus id, sodales ipsum. In ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "735pu",
+          "content": [],
+          "text": "sagittis ",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "ds2ou",
+          "content": [],
+          "text": "ultrices",
+          "marks": [
+            {
+              "type": "bold"
+            },
+            {
+              "type": "underline"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "81h76",
+          "content": [],
+          "text": " sem",
+          "marks": [
+            {
+              "type": "underline"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "530ua",
+          "content": [],
+          "text": " ac elementum. Ut ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "9n3ac",
+          "content": [],
+          "text": "ut",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "url": "www.google.com",
+                "rel": "noopener",
+                "target": "_blank"
+              }
+            },
+            {
+              "type": "underline"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "dkhl",
+          "content": [],
+          "text": " iaculis ex. ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "7qdc7",
+          "content": [],
+          "text": "Lorem ipsum",
+          "marks": [
+            {
+              "type": "spoiler"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "4ibrk",
+          "content": [],
+          "text": " dolor sit ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "3in72",
+          "content": [],
+          "text": "@amet",
+          "marks": [
+            {
+              "type": "mention",
+              "attrs": {
+                "name": "amet",
+                "slug": "amet"
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "5sqgg",
+          "content": [],
+          "text": ", consectetur adipiscing elit. In hac ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "1amk4",
+          "content": [],
+          "text": "habitasse ",
+          "marks": [
+            {
+              "type": "color",
+              "colorData": {
+                "foreground": "color4"
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "bcbmj",
+          "content": [],
+          "text": "platea",
+          "marks": [
+            {
+              "type": "color",
+              "colorData": {
+                "background": "color3",
+                "foreground": "color4"
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "ql0p",
+          "content": [],
+          "text": " dictumst",
+          "marks": [
+            {
+              "type": "color",
+              "colorData": {
+                "background": "color3"
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "2nerf",
+          "content": [],
+          "text": ". Aenean placerat, quam eget vestibulum ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "b2b5f",
+          "content": [],
+          "text": "varius",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "url": "www.link.com",
+                "rel": "noopener",
+                "target": "_blank"
+              }
+            },
+            {
+              "type": "underline"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "edq5g",
+          "content": [],
+          "text": ", nisl ligula vulputate ",
+          "marks": []
+        },
+        {
+          "type": "text",
+          "key": "1ka2m",
+          "content": [],
+          "text": "tortor",
+          "marks": [
+            {
+              "type": "anchor",
+              "attrs": {
+                "anchor": "98ccj"
+              }
+            },
+            {
+              "type": "underline"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "key": "ah8oc",
+          "content": [],
+          "text": ", id lacinia odio magna eu arcu.",
+          "marks": []
+        }
+      ],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "JUSTIFY",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "945oe",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "image",
+      "key": "eoba3",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER",
+          "spoiler": {
+            "description": "SPOILER ALERT!!!",
+            "buttonText": "What's behind door number 1?"
+          }
+        },
+        "image": {
+          "src": {
+            "custom": "8bb438_67a68c0652d740bab508f68662acc882.jpg"
+          },
+          "width": 3192,
+          "height": 2124
+        },
+        "link": {
+          "url": "www.image-link.com",
+          "target": "BLANK"
+        },
+        "disableExpand": false,
+        "caption": "Dad holding his baby"
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "e83vf",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "video",
+      "key": "767fl",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER"
+        },
+        "video": {
+          "src": {
+            "url": "https://www.youtube.com/watch?v=CoJ23XNHgG0"
+          }
+        },
+        "thumbnail": {
+          "src": {
+            "url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg"
+          },
+          "width": 480,
+          "height": 270
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "5brkh",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "video",
+      "key": "f179j",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "SMALL"
+          },
+          "alignment": "CENTER"
+        },
+        "video": {
+          "src": {
+            "custom": "video/d3dd72_9397c7bfa03f4fa8920b16bdd667f73b/1080p/mp4/file.mp4"
+          }
+        },
+        "thumbnail": {
+          "src": {
+            "custom": "media/d3dd72_9397c7bfa03f4fa8920b16bdd667f73bf000.jpg"
+          },
+          "width": 1920,
+          "height": 1080
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "9a5gj",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "gallery",
+      "key": "1d5ah",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER"
+        },
+        "items": [
+          {
+            "metadata": {
+              "height": 3733,
+              "width": 5600,
+              "type": "image"
+            },
+            "itemId": "2c2698b83ba64574db5e28ed54064081",
+            "url": "8bb438_0ab44689f626435c94b9a5b996524aba.jpg",
+            "selected": false
+          },
+          {
+            "metadata": {
+              "height": 1922,
+              "width": 1920,
+              "type": "image"
+            },
+            "itemId": "a327950f89cc4994f34a0cd0d4a71473",
+            "url": "8bb438_6a7159be0f944dde9098fe566bf22831.jpg",
+            "selected": false
+          },
+          {
+            "metadata": {
+              "height": 3727,
+              "width": 5600,
+              "type": "image"
+            },
+            "itemId": "f6db1b532552aa00e9549b5c97e6770a",
+            "url": "8bb438_cabd67053eae45e7ab273832504717ff.jpg",
+            "selected": false
+          }
+        ],
+        "styles": {
+          "galleryLayout": 2,
+          "gallerySizeType": "px",
+          "gallerySizePx": 300,
+          "oneRow": false,
+          "cubeRatio": 1,
+          "galleryThumbnailsAlignment": "bottom",
+          "isVertical": false,
+          "numberOfImagesPerRow": 3,
+          "imageMargin": 20,
+          "thumbnailSpacings": 0,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "allowHover": true,
+          "itemClick": "link",
+          "showArrows": false,
+          "gridStyle": 1,
+          "loveButton": false,
+          "allowSocial": false,
+          "allowDownload": false,
+          "galleryMargin": 0,
+          "fullscreen": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "thumbnailSize": 120,
+          "gotStyleParams": true,
+          "showVideoPlayButton": true,
+          "videoPlay": "onClick"
+        },
+        "config": {
+          "layout": "small",
+          "spacing": 0,
+          "disableExpand": false
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "cifeq",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "html",
+      "key": "2sbna",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CUSTOM",
+            "customWidth": 350
+          },
+          "alignment": "CENTER",
+          "customHeight": 490
+        },
+        "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">How we cut cost on 55% of our storage without deleting a single file? We understood that NOT all files should be treated equally. <br><br>Here’s the full story:<a href=\"https://t.co/zC3d0uBkEA\">https://t.co/zC3d0uBkEA</a> <a href=\"https://t.co/j8ND7GfOEg\">pic.twitter.com/j8ND7GfOEg</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1348206215336259584?ref_src=twsrc%5Etfw\">January 10, 2021</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>"
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "89ir3",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "link_preview",
+      "key": "fg6am",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT",
+            "customWidth": 350
+          },
+          "alignment": "CENTER"
+        },
+        "link": {
+          "url": "https://twitter.com/CNN/status/1244886173409034240",
+          "target": "BLANK"
+        },
+        "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">Eleven veterans who live at the Soldiers&#39; Home in Holyoke, Massachusetts, have died and five of them tested positive for coronavirus.<br><br>Tests are still pending for five other veterans who passed away, and the status of the last one is unknown, officials say <a href=\"https://t.co/rTVjn9FiBC\">https://t.co/rTVjn9FiBC</a></p>&mdash; CNN (@CNN) <a href=\"https://twitter.com/CNN/status/1244886173409034240?ref_src=twsrc%5Etfw\">March 31, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n"
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "atona",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "button",
+      "key": "cfsec",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "SMALL"
+          },
+          "alignment": "CENTER"
+        },
+        "type": "link",
+        "styles": {
+          "borderWidth": 7,
+          "borderRadius": 5,
+          "textColor": "#0261FF",
+          "borderColor": "#0261FF",
+          "backgroundColor": "#FEFDFD"
+        },
+        "text": "Link Button",
+        "link": {
+          "url": "www.wix.com",
+          "target": "BLANK"
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "epgkf",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "button",
+      "key": "63lbi",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "SMALL"
+          },
+          "alignment": "CENTER"
+        },
+        "type": "ACTION",
+        "styles": {
+          "borderWidth": 0,
+          "borderRadius": 15,
+          "textColor": "#FEFDFD",
+          "borderColor": "#0261FF",
+          "backgroundColor": "#81B0FF"
+        },
+        "text": "Action Button"
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "affus",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "divider",
+      "key": "s53",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER"
+        },
+        "type": "DOUBLE",
+        "width": "MEDIUM",
+        "alignment": "CENTER"
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "e3sob",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "codeblock",
+      "key": "6mjbs",
+      "content": [
+        {
+          "type": "text",
+          "key": "k82n",
+          "content": [],
+          "text": "songs = pd.read_csv(SONGS_FILE)",
+          "marks": []
+        }
+      ],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "1i4ff",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "giphy",
+      "key": "98ccj",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "SMALL"
+          },
+          "alignment": "CENTER"
+        },
+        "gif": {
+          "height": 281,
+          "width": 500,
+          "originalUrl": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy.gif?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy.gif",
+          "stillUrl": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy_s.gif?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy_s.gif",
+          "originalMp4": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy.mp4?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy.mp4",
+          "downsizedUrl": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy-downsized.gif?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy-downsized.gif",
+          "downsizedStillUrl": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy-downsized_s.gif?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy-downsized_s.gif",
+          "downsizedSmallMp4": "https://media1.giphy.com/media/Cn44PUsTVimwBAtIRx/giphy-downsized-small.mp4?cid=558f2fbejldbq3cgzrasbh2j4z47w8nn51qcbjzc6dg7g7af&rid=giphy-downsized-small.mp4"
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "b3jqi",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "map",
+      "key": "3cgrh",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT",
+            "customWidth": 286
+          },
+          "alignment": "CENTER",
+          "customHeight": 271
+        },
+        "config": {
+          "height": 271,
+          "width": 286
+        },
+        "mapSettings": {
+          "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "isDraggingAllowed": true,
+          "isMarkerShown": true,
+          "isStreetViewControlShown": false,
+          "isZoomControlShown": false,
+          "lat": 32.097235,
+          "lng": 34.77427,
+          "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "mode": "roadmap",
+          "zoom": 18
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "eqnso",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "file",
+      "key": "ept6s",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER"
+        },
+        "src": {
+          "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+        },
+        "name": "image.jpg",
+        "type": "jpg",
+        "size": 150000
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "5t7u4",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "vertical_embed",
+      "key": "dm5qe",
+      "content": [],
+      "attrs": {
+        "type": "PRODUCT",
+        "selectedProduct": {
+          "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
+          "name": "flowers",
+          "imageSrc": "https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg",
+          "html": "<a class=\"vertical-embed-link\" href=\"https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers\" target=\"_blank\"><div class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">flowers</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Comprar ahora</div></div></div></div></a>"
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "akn59",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "link_preview",
+      "key": "2pjv8",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CONTENT"
+          },
+          "alignment": "CENTER"
+        },
+        "link": {
+          "url": "www.wix.com",
+          "target": "BLANK"
+        },
+        "title": "A mock title",
+        "thumbnailUrl": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
+        "description": "A mock description"
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "61el8",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "poll",
+      "key": "9qfd3",
+      "content": [],
+      "attrs": {
+        "config": {
+          "enableVoteRole": false
+        },
+        "poll": {
+          "anonymousCount": 0,
+          "count": 13,
+          "createdBy": "3efa7e86-fc25-4ef1-a002-19769b84202f",
+          "creatorFlag": true,
+          "id": "f3fa62b4-6d75-4016-a895-acb793ca6f5c",
+          "mediaId": "https://static.wixstatic.com/media/436483e6ed9e41fe91b9f286d2ea4efb.jpg",
+          "options": [
+            {
+              "anonymousCount": 0,
+              "count": 5,
+              "id": "067ed3b5-f19d-4886-8f23-acd84a586522",
+              "latestVoters": [
+                "84856a9a-f25f-4d8f-a774-56e0b8927bbe",
+                "15c6f37e-c980-46ba-b450-11415ca5b4fe",
+                "2bff5b99-e56c-421d-b5ec-cd432a5b6961",
+                "3efa7e86-fc25-4ef1-a002-19769b84202f",
+                "28ba5b75-0c82-4239-86e3-131879cb96e7"
+              ],
+              "mediaId": "https://static.wixstatic.com/media/3efa7e_f12aec64c02f464c9d3f0f6d62ec7384~mv2.png",
+              "rating": 38,
+              "title": "Cafe Nordoy"
+            },
+            {
+              "anonymousCount": 0,
+              "count": 4,
+              "id": "ee32a57f-bf6c-425a-a20c-e678bcf4a73b",
+              "latestVoters": [
+                "3efa7e86-fc25-4ef1-a002-19769b84202f",
+                "dd0d2b42-ba5f-47e9-8a53-26c61c08f9ec",
+                "3f3fa379-9a5a-4306-8a95-f79915ef479d",
+                "7b3cad1d-bce1-4529-b402-d1e1e74962f1"
+              ],
+              "mediaId": "https://static.wixstatic.com/media/3efa7e_c6ebbeecf9b4494f91244656beee6e78~mv2.jpg",
+              "rating": 31,
+              "title": "קפה רוטשילד 65"
+            },
+            {
+              "anonymousCount": 0,
+              "count": 3,
+              "id": "41679bf9-89ba-41f2-81d3-832d567531da",
+              "latestVoters": [
+                "15c6f37e-c980-46ba-b450-11415ca5b4fe",
+                "13633644-d00c-4456-a189-1575ea044f10",
+                "7b3cad1d-bce1-4529-b402-d1e1e74962f1"
+              ],
+              "mediaId": "https://static.wixstatic.com/media/3efa7e_26d7f9c215944dbcb783c6b16f536c33~mv2.jpg",
+              "rating": 23,
+              "title": "האחים"
+            },
+            {
+              "anonymousCount": 0,
+              "count": 1,
+              "id": "378c6042-55cc-4e4a-9f0c-77824bee4964",
+              "latestVoters": [
+                "dd0d2b42-ba5f-47e9-8a53-26c61c08f9ec"
+              ],
+              "mediaId": "https://static.wixstatic.com/media/3efa7e_d9b16be508ce41aa8e635d0e9e97b923~mv2.jpeg",
+              "rating": 8,
+              "title": "הוטל מונטיפיורי"
+            }
+          ],
+          "ownVotes": [
+            "067ed3b5-f19d-4886-8f23-acd84a586522",
+            "ee32a57f-bf6c-425a-a20c-e678bcf4a73b"
+          ],
+          "title": "Where do you want to have breakfast tomorrow to use the monthly budget?",
+          "settings": {
+            "multipleVotes": true,
+            "resultsVisibility": "VOTERS_ONLY",
+            "voteRole": "SITE_MEMBERS",
+            "votersDisplay": true,
+            "votesDisplay": true
+          }
+        },
+        "layout": {
+          "poll": {
+            "type": "GRID",
+            "direction": "LTR",
+            "enableImage": false
+          },
+          "option": {
+            "enableImage": true
+          }
+        },
+        "design": {
+          "poll": {
+            "backgroundType": "IMAGE",
+            "background": "https://static.wixstatic.com/media/2dfdd3_b120b7d9cffd4645bb143beadef13c56~mv2.jpg",
+            "borderRadius": 0
+          },
+          "option": {
+            "borderRadius": 0
+          }
+        },
+        "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ"
+      }
+    },
+    {
+      "type": "blockquote",
+      "key": "f5rqu",
+      "content": [
+        {
+          "type": "paragraph",
+          "key": "d7kff",
+          "content": [
+            {
+              "type": "text",
+              "key": "2m03l",
+              "content": [],
+              "text": "Nunc eros ante , porttitor ",
+              "marks": []
+            },
+            {
+              "type": "text",
+              "key": "8o30a",
+              "content": [],
+              "text": "sed",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "key": "3qba9",
+              "content": [],
+              "text": " tempor nec, sagittis non mi. Nulla non ",
+              "marks": []
+            },
+            {
+              "type": "text",
+              "key": "3adb",
+              "content": [],
+              "text": "vulputate",
+              "marks": [
+                {
+                  "type": "underline"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "key": "fdp0p",
+              "content": [],
+              "text": " ",
+              "marks": []
+            },
+            {
+              "type": "text",
+              "key": "dhc24",
+              "content": [],
+              "text": "magna",
+              "marks": [
+                {
+                  "type": "color",
+                  "colorData": {
+                    "background": "color4"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "key": "bufqv",
+              "content": [],
+              "text": ", semper convallis sapien.",
+              "marks": []
+            }
+          ],
+          "attrs": {
+            "textStyle": {
+              "textAlignment": "AUTO"
+            },
+            "indentation": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "ordered_list",
+      "key": "88bqh",
+      "content": [
+        {
+          "type": "list_item",
+          "key": "ev9r2",
+          "content": [
+            {
+              "type": "paragraph",
+              "key": "171bu",
+              "content": [
+                {
+                  "type": "text",
+                  "key": "2ptnv",
+                  "content": [],
+                  "text": "In imperdiet eros elementum nulla fringilla sollicitudin.",
+                  "marks": []
+                }
+              ],
+              "attrs": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            },
+            {
+              "type": "ordered_list",
+              "key": "cjgoa",
+              "content": [
+                {
+                  "type": "list_item",
+                  "key": "aha4n",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "key": "dlke9",
+                      "content": [
+                        {
+                          "type": "text",
+                          "key": "cajkg",
+                          "content": [],
+                          "text": "Proin dictum aliquam sapien at pretium.",
+                          "marks": []
+                        }
+                      ],
+                      "attrs": {
+                        "textStyle": {
+                          "textAlignment": "AUTO"
+                        },
+                        "indentation": 1
+                      }
+                    },
+                    {
+                      "type": "ordered_list",
+                      "key": "bpu38",
+                      "content": [
+                        {
+                          "type": "list_item",
+                          "key": "ft9ku",
+                          "content": [
+                            {
+                              "type": "paragraph",
+                              "key": "5298q",
+                              "content": [
+                                {
+                                  "type": "text",
+                                  "key": "b4ua4",
+                                  "content": [],
+                                  "text": "Quisque pulvinar ac erat vitae imperdiet.",
+                                  "marks": []
+                                }
+                              ],
+                              "attrs": {
+                                "textStyle": {
+                                  "textAlignment": "AUTO"
+                                },
+                                "indentation": 2
+                              }
+                            },
+                            {
+                              "type": "ordered_list",
+                              "key": "4ths7",
+                              "content": [
+                                {
+                                  "type": "list_item",
+                                  "key": "4brg",
+                                  "content": [
+                                    {
+                                      "type": "paragraph",
+                                      "key": "5ipqr",
+                                      "content": [
+                                        {
+                                          "type": "text",
+                                          "key": "77q4p",
+                                          "content": [],
+                                          "text": "Phasellus ultricies urna ut ultrices imperdiet.",
+                                          "marks": []
+                                        }
+                                      ],
+                                      "attrs": {
+                                        "textStyle": {
+                                          "textAlignment": "AUTO"
+                                        },
+                                        "indentation": 3
+                                      }
+                                    },
+                                    {
+                                      "type": "ordered_list",
+                                      "key": "6v9kc",
+                                      "content": [
+                                        {
+                                          "type": "list_item",
+                                          "key": "ctmpp",
+                                          "content": [
+                                            {
+                                              "type": "paragraph",
+                                              "key": "3ofk4",
+                                              "content": [
+                                                {
+                                                  "type": "text",
+                                                  "key": "36o1k",
+                                                  "content": [],
+                                                  "text": "Nulla non varius ipsum, sit amet consectetur quam.",
+                                                  "marks": []
+                                                }
+                                              ],
+                                              "attrs": {
+                                                "textStyle": {
+                                                  "textAlignment": "AUTO"
+                                                },
+                                                "indentation": 4
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "list_item",
+                                          "key": "ba8lb",
+                                          "content": [
+                                            {
+                                              "type": "paragraph",
+                                              "key": "978th",
+                                              "content": [
+                                                {
+                                                  "type": "text",
+                                                  "key": "e9kma",
+                                                  "content": [],
+                                                  "text": "Nunc scelerisque fringilla aliquet.",
+                                                  "marks": []
+                                                }
+                                              ],
+                                              "attrs": {
+                                                "textStyle": {
+                                                  "textAlignment": "AUTO"
+                                                },
+                                                "indentation": 4
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "key": "9ofc",
+          "content": [
+            {
+              "type": "paragraph",
+              "key": "5ab6i",
+              "content": [
+                {
+                  "type": "text",
+                  "key": "6ui3h",
+                  "content": [],
+                  "text": "Praesent purus nibh, sodales",
+                  "marks": []
+                }
+              ],
+              "attrs": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            },
+            {
+              "type": "bullet_list",
+              "key": "2en48",
+              "content": [
+                {
+                  "type": "list_item",
+                  "key": "5h4cb",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "key": "3hdhu",
+                      "content": [
+                        {
+                          "type": "text",
+                          "key": "3l2o0",
+                          "content": [],
+                          "text": "non efficitur a",
+                          "marks": []
+                        }
+                      ],
+                      "attrs": {
+                        "textStyle": {
+                          "textAlignment": "AUTO"
+                        },
+                        "indentation": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "key": "a47kn",
+          "content": [
+            {
+              "type": "paragraph",
+              "key": "431eo",
+              "content": [
+                {
+                  "type": "text",
+                  "key": "5ms4i",
+                  "content": [],
+                  "text": "consequat ac ante.",
+                  "marks": []
+                }
+              ],
+              "attrs": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "key": "187sj",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "bullet_list",
+      "key": "617de",
+      "content": [
+        {
+          "type": "list_item",
+          "key": "2qdp5",
+          "content": [
+            {
+              "type": "paragraph",
+              "key": "cndc8",
+              "content": [
+                {
+                  "type": "text",
+                  "key": "nu2d",
+                  "content": [],
+                  "text": "Aenean sed posuere odio.",
+                  "marks": []
+                }
+              ],
+              "attrs": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            },
+            {
+              "type": "bullet_list",
+              "key": "fbrjk",
+              "content": [
+                {
+                  "type": "list_item",
+                  "key": "10oj0",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "key": "4hfmp",
+                      "content": [
+                        {
+                          "type": "text",
+                          "key": "f5ut9",
+                          "content": [],
+                          "text": "Pellentesque imperdiet maximus turpis nec faucibus.",
+                          "marks": []
+                        }
+                      ],
+                      "attrs": {
+                        "textStyle": {
+                          "textAlignment": "AUTO"
+                        },
+                        "indentation": 1
+                      }
+                    },
+                    {
+                      "type": "bullet_list",
+                      "key": "94cj5",
+                      "content": [
+                        {
+                          "type": "list_item",
+                          "key": "1qucc",
+                          "content": [
+                            {
+                              "type": "paragraph",
+                              "key": "282h3",
+                              "content": [
+                                {
+                                  "type": "text",
+                                  "key": "aaojs",
+                                  "content": [],
+                                  "text": "Nulla at tempus lectus,",
+                                  "marks": []
+                                }
+                              ],
+                              "attrs": {
+                                "textStyle": {
+                                  "textAlignment": "AUTO"
+                                },
+                                "indentation": 2
+                              }
+                            },
+                            {
+                              "type": "bullet_list",
+                              "key": "76nm4",
+                              "content": [
+                                {
+                                  "type": "list_item",
+                                  "key": "3dppt",
+                                  "content": [
+                                    {
+                                      "type": "paragraph",
+                                      "key": "fq8ui",
+                                      "content": [
+                                        {
+                                          "type": "text",
+                                          "key": "4mml8",
+                                          "content": [],
+                                          "text": "non tempor tortor.",
+                                          "marks": []
+                                        }
+                                      ],
+                                      "attrs": {
+                                        "textStyle": {
+                                          "textAlignment": "AUTO"
+                                        },
+                                        "indentation": 3
+                                      }
+                                    },
+                                    {
+                                      "type": "bullet_list",
+                                      "key": "5ddp",
+                                      "content": [
+                                        {
+                                          "type": "list_item",
+                                          "key": "3l0io",
+                                          "content": [
+                                            {
+                                              "type": "paragraph",
+                                              "key": "1p8bf",
+                                              "content": [
+                                                {
+                                                  "type": "text",
+                                                  "key": "8pei7",
+                                                  "content": [],
+                                                  "text": "Vivamus mauris",
+                                                  "marks": []
+                                                }
+                                              ],
+                                              "attrs": {
+                                                "textStyle": {
+                                                  "textAlignment": "AUTO"
+                                                },
+                                                "indentation": 4
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "list_item",
+                                          "key": "55he5",
+                                          "content": [
+                                            {
+                                              "type": "paragraph",
+                                              "key": "fah1u",
+                                              "content": [
+                                                {
+                                                  "type": "text",
+                                                  "key": "1vkeo",
+                                                  "content": [],
+                                                  "text": "diam",
+                                                  "marks": []
+                                                }
+                                              ],
+                                              "attrs": {
+                                                "textStyle": {
+                                                  "textAlignment": "AUTO"
+                                                },
+                                                "indentation": 4
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "key": "7vpfq",
+          "content": [
+            {
+              "type": "paragraph",
+              "key": "42ud6",
+              "content": [
+                {
+                  "type": "text",
+                  "key": "dqtui",
+                  "content": [],
+                  "text": "Auctor in sollicitudin eget, suscipit sed nulla.",
+                  "marks": []
+                }
+              ],
+              "attrs": {
+                "textStyle": {
+                  "textAlignment": "RIGHT"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "key": "anvvr",
+          "content": [
+            {
+              "type": "paragraph",
+              "key": "72tbl",
+              "content": [
+                {
+                  "type": "text",
+                  "key": "3bjqf",
+                  "content": [],
+                  "text": "Aenean sapien lectus, interdum ultrices enim a, sodales ultrices mi. Quisque ut mi metus.",
+                  "marks": []
+                }
+              ],
+              "attrs": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "key": "34c4j",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "heading",
+      "key": "5qcnb",
+      "content": [
+        {
+          "type": "text",
+          "key": "762b2",
+          "content": [],
+          "text": "Donec sit amet sapien quis velit ultrices sollicitudin id facilisis ligula.",
+          "marks": []
+        }
+      ],
+      "attrs": {
+        "level": 3,
+        "textStyle": {
+          "textAlignment": "JUSTIFY",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "a8obk",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "JUSTIFY",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "55t98",
+      "content": [
+        {
+          "type": "text",
+          "key": "f4k7b",
+          "content": [],
+          "text": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.",
+          "marks": []
+        }
+      ],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "JUSTIFY",
+          "lineHeight": "2.5",
+          "paddingTop": "0px",
+          "paddingBottom": "0px"
+        },
+        "indentation": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "27i88",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 1
+      }
+    },
+    {
+      "type": "image",
+      "key": "79dta",
+      "content": [],
+      "attrs": {
+        "containerData": {
+          "width": {
+            "type": "CUSTOM",
+            "customWidth": 300
+          },
+          "alignment": "RIGHT"
+        },
+        "image": {
+          "src": {
+            "custom": "8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg"
+          },
+          "width": 1920,
+          "height": 1280
+        },
+        "disableExpand": false
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "dcre3",
+      "content": [
+        {
+          "type": "text",
+          "key": "61lv6",
+          "content": [],
+          "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק.",
+          "marks": []
+        }
+      ],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "eb7g5",
+      "content": [
+        {
+          "type": "text",
+          "key": "d6c92",
+          "content": [],
+          "text": "בראיט ולחת צורק מונחף, בגורמי מגמש.\n",
+          "marks": []
+        }
+      ],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "paragraph",
+      "key": "5rm16",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "createdTimestamp": "2021-05-05T07:41:53.316Z",
+    "updatedTimestamp": "2021-05-05T07:41:53.316Z"
+  }
+}

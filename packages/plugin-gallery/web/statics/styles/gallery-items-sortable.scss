@@ -44,7 +44,7 @@
   }
 
   &:hover {
-    border-color: $settings-action-color;
+    border-color: $settings-action-color-fallback;
   }
 }
 
@@ -68,7 +68,7 @@
   box-sizing: border-box;
 
   &.itemContainerSelected {
-    box-shadow: 0 0 0 3px $settings-action-color;
+    box-shadow: 0 0 0 3px $settings-action-color-fallback;
   }
 
   &.mobile {
