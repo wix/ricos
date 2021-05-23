@@ -36,7 +36,7 @@ const UndoButton = props => {
         isActive={false}
         theme={theme}
         isMobile={isMobile}
-        tooltipText={t('undoButton_Tooltip')}
+        tooltipText={t('UndoButton_Tooltip')}
         dataHook={'undoButton'}
         tabIndex={tabIndex}
         icon={icon}

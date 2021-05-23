@@ -146,7 +146,9 @@ const createToolbar: CreatePluginToolbar = (config: {
       },
     },
   }),
-  InlinePluginToolbarButtons: createInlineButtons(config),
+  ...(config[LINK_TYPE]?.toolbar?.inlineToolbar === false
+    ? {}
+    : { InlinePluginToolbarButtons: createInlineButtons(config) }),
   name: 'link',
 });
 
