@@ -24,6 +24,8 @@
 
 ### :bug: Bug Fix
 
+- `ricos-viewer`
+  - [#2531](https://github.com/wix-incubator/rich-content/pull/2531) callbacks - `onViewerLoaded` not called
 - `plugin-commons`
   - [#2525](https://github.com/wix-incubator/rich-content/pull/2525) fix onPluginAdd timing
   - [#2527](https://github.com/wix-incubator/rich-content/pull/2527) fix onPluginAddStep's `pluginDetails` (blockKey)
