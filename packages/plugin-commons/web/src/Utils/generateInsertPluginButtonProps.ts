@@ -15,9 +15,12 @@ import {
   ToolbarButtonProps,
   Pubsub,
   EditorPluginConfig,
+  GetEditorState,
+  onPluginAddStepArgs,
+  PluginAddParams,
+  SetEditorState,
   Version,
 } from 'wix-rich-content-common';
-import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
 import { getPluginParams } from './getPluginParams';
 
 export function generateInsertPluginButtonProps({
@@ -55,11 +58,16 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
-  const onPluginAddStep = (step: onPluginAddStepArgs['step'], blockKey: string) => {
+  const onPluginAddStep = (
+    step: onPluginAddStepArgs['step'],
+    blockKey: string,
+    params?: PluginAddParams
+  ) => {
     helpers?.onPluginAddStep?.({
       version: Version.currentVersion,
       entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
+      params,
       pluginId: blockType,
       pluginDetails: blockKey,
       step,
@@ -68,14 +76,17 @@ export function generateInsertPluginButtonProps({
   const onPluginAddSuccess = (params = {}) =>
     helpers?.onPluginAddSuccess?.(blockType, toolbarName, params);
 
-  function addBlock(data) {
+  function addBlock(data, beforeAdd?: (blockKey: string, params?: PluginAddParams) => void) {
     const { newBlock, newSelection, newEditorState } = createBlock(
       getEditorState(),
       data,
       blockType
     );
+    const params = getPluginParams(data, blockType);
+    const blockKey = newBlock.getKey();
+    beforeAdd?.(blockKey, params);
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    onPluginAddSuccess(getPluginParams(data, blockType));
+    onPluginAddSuccess(params); //TOOD: support pluginDetails / pluginUniqueId
     return { newBlock, newSelection, newEditorState };
   }
 
@@ -195,9 +206,8 @@ export function generateInsertPluginButtonProps({
         theme,
         componentData: button.componentData,
         onConfirm: obj => {
-          const data = addBlock(obj);
+          const data = addBlock(obj, (key, params) => onPluginAddStep('PluginModal', key, params));
           addedBlockKey = data.newBlock;
-          onPluginAddStep('PluginModal', addedBlockKey);
           return data;
         },
         pubsub,
