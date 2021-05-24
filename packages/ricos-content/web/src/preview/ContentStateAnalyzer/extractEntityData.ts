@@ -28,6 +28,7 @@ const galleryConverter: PluginConverter = entity =>
     width: metadata.width,
     id: itemId,
     type: 'image',
+    metadata,
     isGalleryItem: true,
   }));
 
