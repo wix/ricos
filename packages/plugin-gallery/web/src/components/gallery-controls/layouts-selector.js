@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { getGalleryLayouts } from '../../layout-helper';
+import { getGalleryLayoutsSettings } from '../../layout-helper';
 import { mergeStyles } from 'wix-rich-content-common';
 import { SelectionList } from 'wix-rich-content-ui-components';
 import styles from '../../../statics/styles/layout-selector.scss';
@@ -14,7 +14,7 @@ class LayoutSelector extends Component {
   }
 
   getLayouts = t => {
-    return getGalleryLayouts(t).map(layout => {
+    return getGalleryLayoutsSettings(t).map(layout => {
       return {
         layoutId: layout.value,
         name: layout.label,

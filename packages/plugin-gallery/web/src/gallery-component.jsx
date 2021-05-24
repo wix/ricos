@@ -133,7 +133,6 @@ class GalleryComponent extends PureComponent {
   handleFileUpload = (file, type, itemIdx) => {
     const { helpers } = this.props;
     const handleFileUpload = helpers?.handleFileUpload;
-
     if (handleFileUpload) {
       const createGalleryItem =
         type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;
@@ -156,26 +155,14 @@ class GalleryComponent extends PureComponent {
     this.handleFileUpload(file, GALLERY_ITEMS_TYPES.IMAGE, itemIdx);
   };
 
-  handleFilesAdded = ({ data, error, itemIdx }, uploadBIData) => {
+  handleFilesAdded = ({ data, error, itemIdx }) => {
     const handleFileAdded = (item, error, idx) => {
       let galleryItem = {};
-      const poster =
-        item.type === GALLERY_ITEMS_TYPES.VIDEO
-          ? { poster: item.poster || item.thumbnail_url }
-          : {};
       if (item) {
-        galleryItem = {
-          metadata: {
-            type: item.type || GALLERY_ITEMS_TYPES.IMAGE,
-            height: item.height,
-            width: item.width,
-            ...poster,
-          },
-          itemId: String(item.id),
-          url: item.file_name,
-        };
+        const createGalleryItem =
+          item.type === GALLERY_ITEMS_TYPES.VIDEO ? createVideoItem : createImageItem;
+        galleryItem = createGalleryItem(item, String(item.id));
       }
-      uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
       this.setItemInGallery(galleryItem, error, idx);
     };
     if (data instanceof Array) {
