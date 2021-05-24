@@ -72,26 +72,25 @@ message Node {
     Type type = 1; // Node type
     string key = 2; // Node unique indentifier
     repeated Node nodes = 3; // List of child nodes
+    NodeStyle style = 4;
     oneof data {
-        ButtonData button_data = 4;
-        CodeData code_data = 5;
-        DividerData divider_data = 6;
-        FileData file_data = 7;
-        GalleryData gallery_data = 8;
-        GiphyData giphy_data = 9;
-        HeadingData heading_data = 10;
-        HTMLData html_data = 11;
-        ImageData image_data = 12;
-        LinkPreviewData link_preview_data = 13;
-        MapData map_data = 14;
-        ParagraphData paragraph_data = 15;
-        PollData poll_data = 16;
-        TextData text_data = 17;
-        VerticalEmbedData vertical_embed_data = 18;
-        VideoData video_data = 19;
+        ButtonData button_data = 5;
+        CodeData code_data = 6;
+        DividerData divider_data = 7;
+        FileData file_data = 8;
+        GalleryData gallery_data = 9;
+        GiphyData giphy_data = 10;
+        HeadingData heading_data = 11;
+        HTMLData html_data = 12;
+        ImageData image_data = 13;
+        LinkPreviewData link_preview_data = 14;
+        MapData map_data = 15;
+        ParagraphData paragraph_data = 16;
+        PollData poll_data = 17;
+        TextData text_data = 18;
+        VerticalEmbedData vertical_embed_data = 19;
+        VideoData video_data = 20;
     }
-
-    NodeStyle style = 20;
 }
 
 message NodeStyle {
