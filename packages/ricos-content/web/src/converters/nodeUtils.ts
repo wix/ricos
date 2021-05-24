@@ -1,4 +1,3 @@
-import { merge } from 'lodash';
 import {
   TextStyle_TextAlignment,
   Node_Type,
