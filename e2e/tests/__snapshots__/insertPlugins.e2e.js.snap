@@ -199,7 +199,6 @@ exports[`insert plugins tests > side toolbar > should insert button #0`] =
           },
           "settings": {
             "buttonText": "Click Me",
-            "target": "blank"
             "url": ""
           }
         },
@@ -868,8 +867,6 @@ exports[`insert plugins tests > footer toolbar > should insert button #0`] =
           },
           "settings": {
             "buttonText": "Click Me",
-            "rel": false,
-            "target": true,
             "url": ""
           }
         },
