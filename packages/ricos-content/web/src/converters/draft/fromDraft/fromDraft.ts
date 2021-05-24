@@ -1,5 +1,5 @@
 /* eslint-disable no-console, fp/no-loops, no-case-declarations */
-import { cloneDeep, isEmpty, merge } from 'lodash';
+import { cloneDeep, isEmpty } from 'lodash';
 import { DraftContent, RicosContentBlock } from '../../../types';
 import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
@@ -58,41 +58,35 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
 
   const parseAtomicBlock = (block: RicosContentBlock): Node => {
     const style = getNodeStyle(block.data);
-    return merge(
-      {
-        key: block.key,
-        nodes: [],
-        ...getEntity(block.entityRanges[0].key, entityMap),
-      },
-      style && { style }
-    );
+    return {
+      key: block.key,
+      nodes: [],
+      style,
+      ...getEntity(block.entityRanges[0].key, entityMap),
+    };
   };
 
   const parseQuoteBlock = (block: RicosContentBlock): Node => {
     const style = getNodeStyle(block.data);
-    return merge(
-      {
-        key: block.key,
-        type: Node_Type.BLOCKQUOTE,
-        nodes: [parseTextBlock(block)],
-      },
-      style && { style }
-    );
+    return {
+      key: block.key,
+      type: Node_Type.BLOCKQUOTE,
+      nodes: [parseTextBlock(block)],
+      style,
+    };
   };
 
   const parseCodeBlock = (block: RicosContentBlock): Node => {
     const style = getNodeStyle(block.data);
-    return merge(
-      {
-        key: block.key,
-        type: Node_Type.CODEBLOCK,
-        nodes: getTextNodes(block, entityMap),
-        codeData: {
-          textStyle: getTextStyle(block.data),
-        },
+    return {
+      key: block.key,
+      type: Node_Type.CODEBLOCK,
+      nodes: getTextNodes(block, entityMap),
+      style,
+      codeData: {
+        textStyle: getTextStyle(block.data),
       },
-      style && { style }
-    );
+    };
   };
 
   const parseHeadingBlock = (block: RicosContentBlock): Node => {
@@ -103,19 +97,17 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
       throw Error(`ERROR! Unknown header level "${blockType}"!`);
     };
     const style = getNodeStyle(block.data);
-    return merge(
-      {
-        key: block.key,
-        type: Node_Type.HEADING,
-        headingData: {
-          level: getLevel(block.type),
-          indentation: block.depth || undefined,
-          textStyle: getTextStyle(block.data),
-        },
-        nodes: getTextNodes(block, entityMap),
+    return {
+      key: block.key,
+      type: Node_Type.HEADING,
+      headingData: {
+        level: getLevel(block.type),
+        indentation: block.depth || undefined,
+        textStyle: getTextStyle(block.data),
       },
-      style && { style }
-    );
+      nodes: getTextNodes(block, entityMap),
+      style,
+    };
   };
 
   const parseTextBlock = (block: RicosContentBlock): Node => {
@@ -176,14 +168,12 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     }
     const style = getNodeStyle(blocks[searchIndex].data);
     return {
-      node: merge(
-        {
-          key: genKey(),
-          type: FROM_DRAFT_LIST_TYPE[listType],
-          nodes: listNodes,
-        },
-        style && { style }
-      ),
+      node: {
+        key: genKey(),
+        type: FROM_DRAFT_LIST_TYPE[listType],
+        nodes: listNodes,
+        style,
+      },
       nextIndex: searchIndex,
     };
   };
