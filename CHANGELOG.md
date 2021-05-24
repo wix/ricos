@@ -24,6 +24,13 @@
 - `ricos-content`
   - [#2520](https://github.com/wix-incubator/rich-content/pull/2520) added a style property to Node, representing node-level styles
 
+### :house: Internal
+
+- `ricos-viewer`
+  - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onViewerLoaded`
+- `ricos-editor`
+  - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onOpenEditorSuccess`
+
 </details>
 <hr/>
 
