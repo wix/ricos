@@ -40,8 +40,7 @@ const convertValue = value => {
   }
   if (isNode(newValue) && newValue.style) {
     const { style, ...rest } = newValue;
-    const dataFields = Object.keys(rest)
-      .filter(key => !!FIELDS_MAP[key] && key.includes('Data'))
+    const dataFields = Object.keys(rest).filter(key => !!FIELDS_MAP[key] && key.includes('Data'));
     if (dataFields.length > 0) {
       newValue = merge({ [dataFields[0]]: { style } }, rest);
     }
