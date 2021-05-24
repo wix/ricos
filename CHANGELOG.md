@@ -17,6 +17,13 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `ricos-viewer`
+  - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onViewerLoaded`
+- `ricos-editor`
+  - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onOpenEditorSuccess`
+
 </details>
 <hr/>
 
