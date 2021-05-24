@@ -56,38 +56,29 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     }
   };
 
-  const parseAtomicBlock = (block: RicosContentBlock): Node => {
-    const style = getNodeStyle(block.data);
-    return {
-      key: block.key,
-      nodes: [],
-      style,
-      ...getEntity(block.entityRanges[0].key, entityMap),
-    };
-  };
+  const parseAtomicBlock = (block: RicosContentBlock): Node => ({
+    key: block.key,
+    nodes: [],
+    style: getNodeStyle(block.data),
+    ...getEntity(block.entityRanges[0].key, entityMap),
+  });
 
-  const parseQuoteBlock = (block: RicosContentBlock): Node => {
-    const style = getNodeStyle(block.data);
-    return {
-      key: block.key,
-      type: Node_Type.BLOCKQUOTE,
-      nodes: [parseTextBlock(block)],
-      style,
-    };
-  };
+  const parseQuoteBlock = (block: RicosContentBlock): Node => ({
+    key: block.key,
+    type: Node_Type.BLOCKQUOTE,
+    nodes: [parseTextBlock(block)],
+    style: getNodeStyle(block.data),
+  });
 
-  const parseCodeBlock = (block: RicosContentBlock): Node => {
-    const style = getNodeStyle(block.data);
-    return {
-      key: block.key,
-      type: Node_Type.CODEBLOCK,
-      nodes: getTextNodes(block, entityMap),
-      style,
-      codeData: {
-        textStyle: getTextStyle(block.data),
-      },
-    };
-  };
+  const parseCodeBlock = (block: RicosContentBlock): Node => ({
+    key: block.key,
+    type: Node_Type.CODEBLOCK,
+    nodes: getTextNodes(block, entityMap),
+    style: getNodeStyle(block.data),
+    codeData: {
+      textStyle: getTextStyle(block.data),
+    },
+  });
 
   const parseHeadingBlock = (block: RicosContentBlock): Node => {
     const getLevel = (blockType: string) => {
@@ -96,7 +87,6 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
       }
       throw Error(`ERROR! Unknown header level "${blockType}"!`);
     };
-    const style = getNodeStyle(block.data);
     return {
       key: block.key,
       type: Node_Type.HEADING,
@@ -106,7 +96,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
         textStyle: getTextStyle(block.data),
       },
       nodes: getTextNodes(block, entityMap),
-      style,
+      style: getNodeStyle(block.data),
     };
   };
 
@@ -166,13 +156,12 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
       }
       nextBlock = blocks[searchIndex];
     }
-    const style = getNodeStyle(blocks[searchIndex].data);
     return {
       node: {
         key: genKey(),
         type: FROM_DRAFT_LIST_TYPE[listType],
         nodes: listNodes,
-        style,
+        style: getNodeStyle(blocks[searchIndex].data),
       },
       nextIndex: searchIndex,
     };
