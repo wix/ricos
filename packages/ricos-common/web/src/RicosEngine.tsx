@@ -7,7 +7,10 @@ import { merge } from 'lodash';
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
-import { convertRelStringToObject, convertRelObjectToString } from 'wix-rich-content-common';
+import {
+  convertRelStringToObject,
+  convertRelObjectToString,
+} from 'wix-rich-content-common/libs/linkConverters';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: ReactElement;

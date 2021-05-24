@@ -11,6 +11,7 @@ import {
   ViewerPlugin,
   onAtomicBlockFocus,
   CustomAnchorScroll,
+  Link_Rel,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -122,12 +123,6 @@ export interface MediaSettings {
   disableDownload?: boolean;
   fullscreenProps?: FullscreenProps;
 }
-
-type Link_Rel = {
-  nofollow?: boolean;
-  sponsored?: boolean;
-  ugc?: boolean;
-};
 
 export interface LinkSettings {
   anchorTarget?: AnchorTarget;
