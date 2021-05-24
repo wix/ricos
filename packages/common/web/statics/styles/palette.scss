@@ -20,8 +20,10 @@ $background-color: var(--ricos-background-color, unset); // color 1
 $background-color-tuple: var(--ricos-background-color-tuple);
 $background-color-container: var(--ricos-bg-color-container, unset);
 
-$settings-action-color: var(--ricos-settings-action-color, $action-color-fallback); // color 8
-$settings-action-color-tuple: var(
+$settings-action-color: var(--ricos-settings-action-color, $action-color); // color 8
+$settings-action-color-tuple: var(--ricos-settings-action-color-tuple, $action-color-tuple);
+$settings-action-color-fallback: var(--ricos-settings-action-color, $action-color-fallback);
+$settings-action-color-fallback-tuple: var(
   --ricos-settings-action-color-tuple,
   $action-color-fallback-tuple
 );
@@ -30,6 +32,7 @@ $focus-action-color: var(--ricos-focus-action-color, $action-color); // color 8
 $focus-action-color-tuple: var(--ricos-focus-action-color-tuple, $action-color-tuple);
 
 $ricos-p-color: var(--ricos-custom-p-color, unset);
+$ricos-p-color-fallbackToPrimary: var(--ricos-custom-p-color, $primary-text-color);
 $ricos-quote-border-color: var(--ricos-custom-quote-border-color, $action-color);
 $ricos-quote-color: var(--ricos-custom-quote-color, unset);
 $ricos-link-color: var(--ricos-custom-link-color, $action-color);

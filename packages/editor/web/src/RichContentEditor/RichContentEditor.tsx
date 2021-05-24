@@ -30,6 +30,7 @@ import {
   redo,
   SelectionState,
   setSelectionToBlock,
+  emptyDraftContent,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps, DraftHandleValue } from 'draft-js';
@@ -56,6 +57,7 @@ import {
   BICallbacks,
   AnchorTarget,
   RelValue,
+  CustomAnchorScroll,
   EditorContextType,
   PluginButton,
   TextButtonMapping,
@@ -132,6 +134,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
+  customAnchorScroll?: CustomAnchorScroll;
   style?: CSSProperties;
   locale: string;
   shouldRenderOptimizedImages?: boolean;
@@ -383,6 +386,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       locale,
       anchorTarget,
       relValue,
+      customAnchorScroll,
       helpers = {},
       config,
       isMobile = false,
@@ -402,6 +406,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       locale,
       anchorTarget,
       relValue,
+      customAnchorScroll,
       helpers: {
         ...helpers,
         onPluginAdd: (pluginId: string, entryPoint: string) =>
@@ -560,20 +565,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
-      const emptyContentState = convertFromRaw({
-        //this is needed for ssr. Otherwise the key will be generated randomly on both server and client.
-        entityMap: {},
-        blocks: [
-          {
-            text: '',
-            key: 'foo',
-            type: 'unstyled',
-            depth: 0,
-            inlineStyleRanges: [],
-            entityRanges: [],
-          },
-        ],
-      });
+      //this is needed for ssr. Otherwise the key will be generated randomly on both server and client.
+      const emptyContentState = convertFromRaw(emptyDraftContent);
       return EditorState.createWithContent(emptyContentState);
     }
   }

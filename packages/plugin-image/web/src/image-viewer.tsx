@@ -15,6 +15,7 @@ import {
   Helpers,
   RichContentTheme,
   SEOSettings,
+  CustomAnchorScroll,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -55,6 +56,7 @@ interface ImageViewerProps {
   setComponentUrl: (highres?: string) => unknown;
   seoMode: SEOSettings;
   blockKey: string;
+  customAnchorScroll?: CustomAnchorScroll;
 }
 
 interface ImageSrc {
@@ -354,16 +356,21 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     this.hasExpand() && onExpand?.(this.props.blockKey);
   };
 
-  scrollToAnchor = () => {
+  scrollToAnchor = e => {
     const {
       componentData: {
         config: { link: { anchor } = {} },
       },
+      customAnchorScroll,
     } = this.props;
-    const anchorString = `viewer-${anchor}`;
-    const element = document.getElementById(anchorString);
-    addAnchorTagToUrl(anchorString);
-    anchorScroll(element);
+    if (customAnchorScroll) {
+      customAnchorScroll(e, anchor as string);
+    } else {
+      const anchorString = `viewer-${anchor}`;
+      const element = document.getElementById(anchorString);
+      addAnchorTagToUrl(anchorString);
+      anchorScroll(element);
+    }
   };
 
   hasLink = () => this.props.componentData?.config?.link?.url;
@@ -383,7 +390,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     } else if (this.hasAnchor()) {
       e.preventDefault();
       e.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
-      this.scrollToAnchor();
+      this.scrollToAnchor(e);
     } else {
       this.handleExpand(e);
     }

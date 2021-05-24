@@ -51,11 +51,21 @@ export const createAtomicEntityData = (node: Node, entityKey: number): RicosEnti
   return createEntity(entityKey, { type, mutability: 'IMMUTABLE', data });
 };
 
+const getDynamicStyles = (node: Node) => {
+  const { textStyle } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
+  const { textAlignment, lineHeight } = textStyle || {};
+  const { paddingTop, paddingBottom } = node.style || {};
+  return {
+    textAlignment,
+    lineHeight,
+    paddingTop,
+    paddingBottom,
+  };
+};
+
 export const createTextBlockData = (node: Node) => {
-  const {
-    textStyle: { textAlignment, paddingTop, paddingBottom, lineHeight },
-    indentation,
-  } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
+  const { indentation } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
+  const { textAlignment, lineHeight, paddingTop, paddingBottom } = getDynamicStyles(node);
   return JSON.parse(
     JSON.stringify({
       textAlignment: textAlignment !== 'AUTO' ? textAlignment?.toLowerCase() : undefined,
