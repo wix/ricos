@@ -20,6 +20,13 @@
 </details>
 <hr/>
 
+## 8.36.3 (May 23, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2531](https://github.com/wix-incubator/rich-content/pull/2531) callbacks - `onViewerLoaded` not called
+
 ## 8.36.2 (May 23, 2021)
 
 ### :bug: Bug Fix
