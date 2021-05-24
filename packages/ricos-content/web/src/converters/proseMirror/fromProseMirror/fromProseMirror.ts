@@ -1,4 +1,4 @@
-import { transform, isObject, merge } from 'lodash';
+import { transform, isObject, pickBy, identity } from 'lodash';
 import { Node_Type, RichContent } from 'ricos-schema';
 import { JSONContent } from '@tiptap/core';
 import { DECORATION_TYPES, NODE_TYPES } from '../consts';
@@ -38,18 +38,22 @@ const moveTextData = object => {
 const convertDataField = object => {
   const dataField = DATA_FIELDS_MAP[object.type];
   const { attrs, ...newValue } = object;
-  const { style, ...restAttrs } = attrs || {};
-  return merge(
-    { ...newValue },
-    style && { style },
-    Object.keys(restAttrs).length && { [dataField]: restAttrs }
-  );
+  return { ...newValue, ...(attrs ? { [dataField]: attrs } : {}) };
+};
+
+const moveNodeStyle = object => {
+  const { attrs: { style, ...rest } = { style }, ...newValue } = object;
+  const attrs = Object.keys(rest).length > 0 && rest;
+  return pickBy({ ...newValue, attrs, style }, identity);
 };
 
 const convertValue = value => {
   let newValue = value;
   if (isTextNode(newValue)) {
     newValue = moveTextData(newValue);
+  }
+  if (isNode(newValue)) {
+    newValue = moveNodeStyle(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
     newValue = typeToUpper(newValue);
