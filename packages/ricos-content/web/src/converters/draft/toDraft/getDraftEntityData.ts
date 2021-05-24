@@ -54,8 +54,7 @@ export const createAtomicEntityData = (node: Node, entityKey: number): RicosEnti
 const getDynamicStyles = (node: Node) => {
   const { textStyle } = node[RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]] || {};
   const { textAlignment, lineHeight } = textStyle || {};
-  const paddingTop = node.style?.paddingTop || textStyle?.paddingTop;
-  const paddingBottom = node.style?.paddingBottom || textStyle?.paddingBottom;
+  const { paddingTop, paddingBottom } = node.style || {};
   return {
     textAlignment,
     lineHeight,
