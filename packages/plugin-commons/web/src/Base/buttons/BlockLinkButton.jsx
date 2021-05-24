@@ -42,7 +42,26 @@ class BlockLinkButton extends Component {
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
       unchangedUrl;
-    const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
+    const { externalPopups = false } = uiSettings.linkPanel;
+    const customStyles =
+      !isMobile && !OriginalLinkPanel
+        ? {
+            content: {
+              width: 512,
+              maxWidth: 512,
+              height: 390,
+              border: '1px solid rgb(237, 237, 237)',
+              borderRadius: '6px',
+              boxShadow: 'rgba(0, 0, 0, 0.07) 0px 4px 8px 0px',
+              padding: '0px 19px',
+            },
+          }
+        : {
+            content: {
+              position: 'fixed',
+            },
+          };
+    const modalStyles = getModalStyles({ fullScreen: isMobile, isMobile, customStyles });
     const commonPanelProps = {
       componentState,
       helpers,
@@ -58,7 +77,7 @@ class BlockLinkButton extends Component {
       editorState,
       triggerBi: this.triggerBi,
     };
-    if (isMobile) {
+    if (isMobile || externalPopups) {
       if (helpers && helpers.openModal) {
         const modalProps = {
           modalStyles,

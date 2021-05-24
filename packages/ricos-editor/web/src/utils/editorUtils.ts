@@ -6,10 +6,11 @@ import {
 } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { EditorProps } from 'draft-js';
 import { debounce, pick } from 'lodash';
-import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
+import { DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { isContentStateEmpty } from 'ricos-content';
 import { isContentEqual } from 'ricos-content/libs/comapareDraftContent';
 import { DraftContent, isSSR } from 'wix-rich-content-common';
+import { emptyDraftContent } from 'wix-rich-content-editor-common';
 import { EditorDataInstance, OnContentChangeFunction, ContentStateGetter } from '../index';
 import errorBlocksRemover from './errorBlocksRemover';
 
@@ -26,13 +27,14 @@ export function createDataConverter(
   onContentChange?: OnContentChangeFunction,
   initialContent?: DraftContent
 ): EditorDataInstance {
-  let currContent = initialContent || emptyState;
+  const initialOrEmptyContent = initialContent || emptyDraftContent;
+  let currContent = initialOrEmptyContent;
   let lastContent = currContent;
   let currEditorState = initialContent
     ? createWithContent(convertFromRaw(initialContent))
     : createEmpty();
   let currTraits = {
-    isEmpty: initialContent ? isContentStateEmpty(initialContent) : true,
+    isEmpty: isContentStateEmpty(currContent),
     isContentChanged: false,
     isLastChangeEdit: false,
   };
@@ -68,15 +70,11 @@ export function createDataConverter(
   };
 
   const getContentTraits = () => {
-    if (!initialContent) {
-      return currTraits;
-    }
     if (!isUpdated) {
       const currState = currEditorState.getCurrentContent();
       lastContent = currContent;
       currContent = convertToRaw(currState);
-      console.assert(lastContent !== currContent, 'equal by ref!');
-      updateTraits(currContent, lastContent, initialContent);
+      updateTraits(currContent, lastContent, initialOrEmptyContent);
       isUpdated = true;
     }
     return currTraits;
@@ -87,10 +85,7 @@ export function createDataConverter(
       const currState = currEditorState.getCurrentContent();
       lastContent = currContent;
       currContent = convertToRaw(currState);
-      console.assert(lastContent !== currContent, 'equal by ref!');
-      if (initialContent) {
-        updateTraits(currContent, lastContent, initialContent);
-      }
+      updateTraits(currContent, lastContent, initialOrEmptyContent);
       isUpdated = true;
     }
 

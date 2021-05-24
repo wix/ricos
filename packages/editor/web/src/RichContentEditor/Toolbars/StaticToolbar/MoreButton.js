@@ -86,6 +86,7 @@ class MoreButton extends Component {
               hidePopup={() => this.togglePopup(false)}
               pluginMenuButtonRef={this.moreButton}
               toolbarName={TOOLBARS.SHORTCUT}
+              isMoreMenu
             />
           </div>
         </ClickOutside>

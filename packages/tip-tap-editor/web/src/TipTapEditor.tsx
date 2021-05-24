@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-new */
 import React from 'react';
-
+import Toolbar from './Toolbar';
 // import LineHeight from './extensions/extension-line-height';
 // import Image from './extensions/extension-image';
 import { convertProsMirrorContentToRicosContent } from './convertor';
@@ -28,6 +28,7 @@ import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
 import Divider from './extensions/extension-divider';
+
 
 const starterKitExtensions = [
   Blockquote,
@@ -148,6 +149,7 @@ const TipTapEditor = ({ editorProps, onUpdate }) => {
   //     .run();
   return (
     <div>
+      <Toolbar editor={editor} />
       <EditorPropsContext.Provider value={editorProps}>
         <EditorContent editor={editor} />
       </EditorPropsContext.Provider>

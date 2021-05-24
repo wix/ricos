@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "8.33.1",
+  "version": "8.36.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -51,9 +51,30 @@
     "forked-draft-js-focus-plugin": "^3.0.1",
     "react-click-outsider": "1.1.1",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "8.33.1",
-    "wix-rich-content-editor-common": "8.33.1",
-    "wix-rich-content-plugin-commons": "8.33.1"
+    "wix-rich-content-common": "8.36.1",
+    "wix-rich-content-editor-common": "8.36.1",
+    "wix-rich-content-plugin-commons": "8.36.1",
+    "@tiptap/core": "2.0.0-beta.54",
+    "@tiptap/extension-blockquote": "2.0.0-beta.13",
+    "@tiptap/extension-bold": "2.0.0-beta.13",
+    "@tiptap/extension-bullet-list": "2.0.0-beta.13",
+    "@tiptap/extension-code": "2.0.0-beta.13",
+    "@tiptap/extension-code-block": "2.0.0-beta.15",
+    "@tiptap/extension-document": "2.0.0-beta.12",
+    "@tiptap/extension-dropcursor": "2.0.0-beta.13",
+    "@tiptap/extension-gapcursor": "2.0.0-beta.17",
+    "@tiptap/extension-hard-break": "2.0.0-beta.13",
+    "@tiptap/extension-heading": "2.0.0-beta.13",
+    "@tiptap/extension-history": "2.0.0-beta.12",
+    "@tiptap/extension-horizontal-rule": "2.0.0-beta.16",
+    "@tiptap/extension-italic": "2.0.0-beta.13",
+    "@tiptap/extension-list-item": "2.0.0-beta.13",
+    "@tiptap/extension-ordered-list": "2.0.0-beta.13",
+    "@tiptap/extension-paragraph": "^2.0.0-beta.14",
+    "@tiptap/extension-strike": "2.0.0-beta.14",
+    "@tiptap/extension-text": "2.0.0-beta.12",
+    "@tiptap/react": "2.0.0-beta.41",
+    "@tiptap/starter-kit": "2.0.0-beta.51"
   },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
