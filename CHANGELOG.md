@@ -17,14 +17,22 @@
     Click to see more.
   </summary>
 
-### :nail_care: Polish
 
+### :bug: Bug Fix
+- `viewer` `editor`
+  - [#2540](https://github.com/wix-incubator/rich-content/pull/2540) Fix text justification alignment in firefox/safari
+
+
+### :nail_care: Polish
 - `plugin-button`
   - [#2537](https://github.com/wix-incubator/rich-content/pull/2537) remove button presets
-### :house: Internal
 
+
+### :house: Internal
 - `common`
   - [#2403](https://github.com/wix-incubator/rich-content/pull/2403) `ThemeData` object is now passed inside `config`, available for plugins
+
+
 
 </details>
 <hr/>
