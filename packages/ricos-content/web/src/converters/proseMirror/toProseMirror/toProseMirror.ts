@@ -31,14 +31,16 @@ const flattenTextData = (node: Node) => {
   return { ...newNode, ...textData };
 };
 
+const styleAsData = value => {
+  const { style, ...rest } = value;
+  const dataField = DATA_FIELDS_MAP[value.type];
+  return merge({ [dataField]: { style } }, rest);
+};
+
 const convertValue = value => {
   let newValue = value;
   if (isNode(newValue) && newValue.style) {
-    const { style, ...rest } = newValue;
-    const dataField = DATA_FIELDS_MAP[newValue.type];
-    if (dataField) {
-      newValue = merge({ [dataField]: { style } }, rest);
-    }
+    newValue = styleAsData(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
     newValue = typeToLower(newValue);
