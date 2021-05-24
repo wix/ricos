@@ -70,7 +70,7 @@ export default (data = {}) => {
       return editorState;
     },
     Toolbar: props => (
-      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
+      <div className={staticToolbarClassName} dir={getLangDir(locale)} style={{ flex: 0 }}>
         <StaticToolbar {...toolbarProps} {...props} />
       </div>
     ),
