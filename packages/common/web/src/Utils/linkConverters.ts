@@ -47,8 +47,7 @@ export const convertRelStringToObject = (rel?: string) => {
   return relObject;
 };
 
-export const convertTargetStringToBoolean = (target?: string, anchorTarget?: string) =>
-  target === BLANK || anchorTarget === BLANK;
+export const convertTargetStringToBoolean = (target?: string) => target === BLANK;
 
 export const convertTargetBooleanToString = (targetBlank?: boolean, anchorTarget?: string) => {
   if (targetBlank) {

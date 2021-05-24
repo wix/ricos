@@ -76,7 +76,7 @@ class ImageSettings extends Component {
     const { anchorTarget } = this.props;
     return {
       url,
-      targetBlank: convertTargetStringToBoolean(target, anchorTarget),
+      targetBlank: convertTargetStringToBoolean(target || anchorTarget),
       rel: convertRelStringToObject(rel),
       isValid,
     };

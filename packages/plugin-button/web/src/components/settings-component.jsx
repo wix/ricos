@@ -55,10 +55,9 @@ class SettingsComponent extends PureComponent {
   };
 
   linkToLinkPanel = ({ url, target, rel }) => {
-    const { anchorTarget } = this.props;
     return {
       url,
-      targetBlank: convertTargetStringToBoolean(target, anchorTarget),
+      targetBlank: convertTargetStringToBoolean(target),
       rel: convertRelStringToObject(rel),
     };
   };

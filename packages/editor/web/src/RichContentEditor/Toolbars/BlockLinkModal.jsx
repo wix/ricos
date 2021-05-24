@@ -65,8 +65,8 @@ export default class BlockLinkModal extends Component {
       editorState,
     } = this.props;
     const componentLink = pubsub.get('componentData')?.config?.link;
-    const { url, anchor, target, rel } = componentLink || {};
-    const targetBlank = convertTargetStringToBoolean(target, anchorTarget);
+    const { url, anchor, target = anchorTarget, rel } = componentLink || {};
+    const targetBlank = convertTargetStringToBoolean(target);
     return (
       <LinkPanelContainer
         editorState={editorState}

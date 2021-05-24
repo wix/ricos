@@ -135,8 +135,8 @@ export default class TextLinkModal extends Component {
   render() {
     const { getEditorState, theme, isMobile, anchorTarget, t, uiSettings, linkTypes } = this.props;
     const linkData = this.getLinkData(getEditorState());
-    const { url, anchor, target, rel } = linkData || {};
-    const targetBlank = convertTargetStringToBoolean(target, anchorTarget);
+    const { url, anchor, target = anchorTarget, rel } = linkData || {};
+    const targetBlank = convertTargetStringToBoolean(target);
     return (
       <LinkPanelContainer
         editorState={getEditorState()}
