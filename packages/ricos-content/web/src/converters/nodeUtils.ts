@@ -1,6 +1,8 @@
+import { merge } from 'lodash';
 import {
   TextStyle_TextAlignment,
   Node_Type,
+  NodeStyle,
   ParagraphData,
   Node,
   Decoration,
@@ -11,14 +13,22 @@ import {
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
 
-export const createNode = (type: Node_Type, nodes: Node[] = []): Node => ({
-  type,
-  key: genKey(),
-  nodes,
-});
+export const createNode = (type: Node_Type, nodes: Node[] = [], style?: NodeStyle): Node =>
+  merge(
+    {
+      type,
+      key: genKey(),
+      nodes,
+    },
+    style && { style }
+  );
 
-export const createParagraphNode = (nodes: Node[] = [], data?: ParagraphData): Node => ({
-  ...createNode(Node_Type.PARAGRAPH, nodes),
+export const createParagraphNode = (
+  nodes: Node[] = [],
+  data?: ParagraphData,
+  style?: NodeStyle
+): Node => ({
+  ...createNode(Node_Type.PARAGRAPH, nodes, style),
   paragraphData: {
     textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,

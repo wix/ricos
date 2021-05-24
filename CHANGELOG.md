@@ -17,6 +17,13 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+
+- `ricos-schema`
+  - [#2520](https://github.com/wix-incubator/rich-content/pull/2520) added a style property to Node, representing node-level styles
+- `ricos-content`
+  - [#2520](https://github.com/wix-incubator/rich-content/pull/2520) added a style property to Node, representing node-level styles
+
 ### :house: Internal
 
 - `ricos-viewer`
