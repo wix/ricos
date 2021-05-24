@@ -16,6 +16,7 @@ export { default as Image } from './Components/Image';
 export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as LabeledToggle } from './Components/LabeledToggle';
 export { default as Panel } from './Components/Panel'; //!Todo => Where is it imported ?
+export { default as SliderPanel } from './Components/SliderPanel';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
 export { default as RadioGroupVertical } from './Components/RadioGroupVertical';
 export { default as SelectionList } from './Components/SelectionList';
@@ -30,6 +31,10 @@ export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
+export { default as RadioGroup } from './Components/RadioGroup';
+export { default as Dropdown } from './Components/Dropdown';
+
+export * from './Icons';
 
 // export { getSelectionStyles } from './Utils/inlineStyleUtils';
 

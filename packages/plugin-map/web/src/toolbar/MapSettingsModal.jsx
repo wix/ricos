@@ -6,11 +6,11 @@ import {
   SettingsPanelFooter,
   LabeledToggle,
   TextInput,
+  SearchIcon,
 } from 'wix-rich-content-ui-components';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
-import { SearchIcon } from '../icons/SearchIcon';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classNames from 'classnames';
 

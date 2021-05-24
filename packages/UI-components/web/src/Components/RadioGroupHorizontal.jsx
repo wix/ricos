@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { RadioGroup } from 'wix-rich-content-editor-common';
+import RadioGroup from './RadioGroup';
 import InfoIcon from '../Components/InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/radio-group-horizontal.scss';
