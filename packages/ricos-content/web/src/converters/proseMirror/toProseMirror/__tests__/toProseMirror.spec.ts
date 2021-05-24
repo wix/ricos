@@ -7,6 +7,7 @@ import { toProseMirror } from '../toProseMirror';
 describe('convert to ProseMirror', () => {
   it('should convert content', () => {
     const proseDocument = toProseMirror(RichContent.fromJSON(migrationContent));
-    expect(compare(proseDocument, migrationContentProse, { ignoredKeys: ['key'] })).toEqual({});
+    expect(proseDocument).toEqual(migrationContentProse);
+    // expect(compare(proseDocument, migrationContentProse, { ignoredKeys: ['key'] })).toEqual({});
   });
 });
