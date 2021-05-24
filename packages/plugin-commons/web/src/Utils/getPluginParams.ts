@@ -1,12 +1,7 @@
-import {
-  PluginAddParams,
-  ComponentData,
-  TABLE_TYPE,
-  LINK_PREVIEW_TYPE,
-} from 'wix-rich-content-common';
+import { PluginAddParams, TABLE_TYPE, LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 
 interface Data {
-  componentData: ComponentData;
+  componentData;
   buttonName: string;
 }
 
