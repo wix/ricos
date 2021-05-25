@@ -43,12 +43,6 @@ export default (updateEditorState, customHandlers, blockType, onBackspace) => (
       case COMMANDS.CODE:
         newState = RichUtils.toggleBlockType(editorState, command);
         break;
-      case COMMANDS.INCREASE_INDENT:
-        newState = indentSelectedBlocks(editorState, 1);
-        break;
-      case COMMANDS.DECREASE_INDENT:
-        newState = indentSelectedBlocks(editorState, -1);
-        break;
       case COMMANDS.BACKSPACE:
         onBackspace?.(editorState);
         newState = handleBackspaceCommand(editorState);
