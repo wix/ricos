@@ -10,12 +10,19 @@ import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
 import generalStyles from '../../statics/styles/general.scss';
+
+const LOADING = 'LOADING';
+const NO_ITEMS = 'NO_ITEMS';
+const READY = 'READY';
+const FAILED = 'FAILED';
+const NOT_FOUND = 'NOT_FOUND';
+
 export default class VerticalEmbedInputModal extends Component {
   state = {
     errorMsg: '',
     products: [],
     selectedProduct: this.props.componentData?.selectedProduct || null,
-    status: 'LOADING',
+    status: LOADING,
   };
 
   componentDidMount() {
@@ -25,15 +32,21 @@ export default class VerticalEmbedInputModal extends Component {
       locale,
     } = this.props;
     this.verticalApi = verticalsApi(type, locale);
-    this.verticalApi.search('').then(products => {
-      this.setState({ products, status: products.length === 0 ? 'NO_ITEMS' : 'READY' });
-    });
+    try {
+      this.verticalApi.search('').then(products => {
+        this.setState({ products, status: products.length === 0 ? NO_ITEMS : READY });
+      });
+    } catch (e) {
+      console.error('failed to load products ', e);
+      this.setState({ products: [], status: FAILED });
+    }
   }
 
   onInputChange = (inputString = '') => {
-    this.verticalApi.search(inputString).then(products => {
-      this.setState({ products, status: products.length === 0 ? 'NOT_FOUND' : 'READY' });
-    });
+    this.state.status !== FAILED &&
+      this.verticalApi.search(inputString).then(products => {
+        this.setState({ products, status: products.length === 0 ? NOT_FOUND : READY });
+      });
     this.setState({ inputString });
   };
 
@@ -80,7 +93,7 @@ export default class VerticalEmbedInputModal extends Component {
         </div>
       </div>
     );
-    const show = status !== 'NO_ITEMS';
+    const show = status !== NO_ITEMS;
     const textInput = show ? { searchIcon: true } : false;
 
     return (
@@ -101,11 +114,11 @@ export default class VerticalEmbedInputModal extends Component {
         textInput={textInput}
       >
         <div className={styles.itemsWrapper}>
-          {status === 'LOADING' ? (
+          {status === LOADING ? (
             <div className={generalStyles.emptyState}>
               <LoaderIcon className={styles.fileLoaderIcon} />
             </div>
-          ) : status === 'NOT_FOUND' ? (
+          ) : status === NOT_FOUND ? (
             emptyState
           ) : (
             <ItemsList
