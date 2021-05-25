@@ -29,7 +29,7 @@ const COMMAND_BY_SHORTCUT = [
   },
   {
     command: COMMANDS.JUSTIFY,
-    modifiers: [MODIFIERS.COMMAND],
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: 'j',
   },
   {
@@ -41,11 +41,6 @@ const COMMAND_BY_SHORTCUT = [
     command: COMMANDS.BULLET_LIST,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: '8',
-  },
-  {
-    command: COMMANDS.CODE,
-    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: 'c',
   },
   {
     command: COMMANDS.BLOCKQUOTE,
