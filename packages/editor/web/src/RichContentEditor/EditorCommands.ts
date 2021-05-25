@@ -133,7 +133,7 @@ export const createEditorCommands = (
     // TODO: check if needed, plus type error using SelectionState, not sure why
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     _getSelection: (): any => getEditorState().getSelection(),
-    _getAnchorableBlocks: () => getAnchorableBlocks(getEditorState()),
+    getAnchorableBlocks: () => getAnchorableBlocks(getEditorState()),
     getTextAlignment: () => getTextAlignment(getEditorState()),
     hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
     isBlockTypeSelected: (type: TextBlockType) => getBlockType(getEditorState()) === type,
