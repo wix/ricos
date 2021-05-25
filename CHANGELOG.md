@@ -21,6 +21,10 @@
 
 - `plugin-button`
   - [#2537](https://github.com/wix-incubator/rich-content/pull/2537) remove button presets
+### :house: Internal
+
+- `common`
+  - [#2403](https://github.com/wix-incubator/rich-content/pull/2403) `ThemeData` object is now passed inside `config`, available for plugins
 
 </details>
 <hr/>
