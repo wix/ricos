@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/default-styles.scss';
 import { ACTION_BUTTON_TYPE, LINK_BUTTON_TYPE } from '../types';
+import { merge } from 'lodash';
 class ButtonViewer extends PureComponent {
   isActionButton = () => Boolean(this.props.onClick);
 
@@ -13,26 +14,22 @@ class ButtonViewer extends PureComponent {
       isActionButton ? ACTION_BUTTON_TYPE : LINK_BUTTON_TYPE,
       'Click'
     );
-    isActionButton && this.props.onClick(args);
+    if (isActionButton) {
+      this.props.onClick(args);
+    }
   };
 
   render() {
-    const { theme } = this.props;
+    const { theme, url, style, target, rel, buttonText } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { url, style, target, rel, buttonText } = this.props;
     const isActionButton = this.isActionButton();
     const Component = isActionButton ? 'div' : 'a';
-    let props = { className: this.styles.button_container, style };
-    props = isActionButton
-      ? { ...props }
-      : {
-          href: url,
-          target,
-          rel,
-          ...props,
-        };
+    const props = merge(
+      { onClick: this.onClick, className: this.styles.button_container, style },
+      isActionButton && { href: url, target, rel }
+    );
     return (
-      <Component {...props} data-hook="buttonViewer" onClick={this.onClick}>
+      <Component {...props} data-hook="buttonViewer">
         <div className={this.styles.button_text}>{buttonText}</div>
       </Component>
     );
