@@ -27,7 +27,7 @@ const ButtonViewer: FC<Props> = ({
   rel,
   buttonText,
 }) => {
-  const styles = useMemo(() => mergeStyles({ styles: Styles, theme }), []);
+  const styles = mergeStyles({ styles: Styles, theme });
   const isActionButton = useMemo(() => Boolean(onClick), [onClick]);
   const onClickHandler: Props['onClick'] = useCallback(
     args => {
