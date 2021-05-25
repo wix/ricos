@@ -245,14 +245,10 @@ interface BasePluginConfig {
   theme?: ThemeGeneratorFunction;
 }
 
-interface PluginConfigDefaults {
-  themeData: ThemeData;
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<string, any>>
   extends BasePluginConfig {
-  config: PluginConfig & PluginConfigDefaults;
+  config: PluginConfig;
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
   createPluginData?: CreatePluginData<PluginConfig>;
@@ -260,7 +256,7 @@ export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<s
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasePluginConfig {
-  config: PluginConfig & PluginConfigDefaults;
+  config: PluginConfig;
   typeMapper?: PluginTypeMapper;
   inlineStyleMapper?: InlineStyleMapperFunction;
   decorator?: RicosDecorator;
@@ -298,6 +294,7 @@ export type LegacyEditorPluginConfig<
 > & {
   uiSettings?: UISettings;
   getToolbarSettings?: GetToolbarSettings;
+  themeData?: ThemeData;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
