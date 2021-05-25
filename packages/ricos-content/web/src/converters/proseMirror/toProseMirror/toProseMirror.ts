@@ -1,4 +1,5 @@
-import { transform, isObject } from 'lodash';
+import { DATA_FIELDS_MAP } from './../utils';
+import { transform, isObject, merge } from 'lodash';
 import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap/core';
@@ -12,7 +13,7 @@ export const toProseMirror = (richContent: RichContent): JSONContent => {
   return content;
 };
 
-const DATA_FIELDS_MAP = Object.fromEntries(
+const PROSE_DATA_FIELDS_MAP = Object.fromEntries(
   Object.values(TO_RICOS_DATA_FIELD)
     .concat('textData')
     .map(value => [value, 'attrs'])
@@ -20,7 +21,7 @@ const DATA_FIELDS_MAP = Object.fromEntries(
 const FIELDS_MAP = {
   nodes: 'content',
   decorations: 'marks',
-  ...DATA_FIELDS_MAP,
+  ...PROSE_DATA_FIELDS_MAP,
 };
 
 const typeToLower = (object: Node | Decoration) => ({ ...object, type: object.type.toLowerCase() });
@@ -30,8 +31,17 @@ const flattenTextData = (node: Node) => {
   return { ...newNode, ...textData };
 };
 
+const styleAsData = value => {
+  const { style, ...rest } = value;
+  const dataField = DATA_FIELDS_MAP[value.type];
+  return merge({ [dataField]: { style } }, rest);
+};
+
 const convertValue = value => {
   let newValue = value;
+  if (isNode(newValue) && newValue.style) {
+    newValue = styleAsData(newValue);
+  }
   if (isNode(newValue) || isDecoration(newValue)) {
     newValue = typeToLower(newValue);
   }
