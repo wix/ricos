@@ -51,6 +51,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   updateLocale = async () => {
     const { children, _rcProps } = this.props;
     const locale = children?.props.locale || this.props.locale;
+    const isTiptapEditor = _rcProps?.experiments?.tiptapEditor?.enabled;
+    if (isTiptapEditor) {
+      return false;
+    }
+
     await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
       this.setState({ localeData, remountKey: !this.state.remountKey })
     );
