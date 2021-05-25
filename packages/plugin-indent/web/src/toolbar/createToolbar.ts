@@ -3,6 +3,9 @@ import {
   BUTTON_TYPES,
   FORMATTING_BUTTONS,
   indentSelectedBlocks,
+  MODIFIERS,
+  COMMANDS,
+  EditorState,
 } from 'wix-rich-content-editor-common';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
@@ -61,6 +64,16 @@ const createToolbar: CreatePluginToolbar = ({
           // TODO: should be disabled when no indent?
           isDisabled: () => isAtomicBlockFocused(getEditorState()),
         },
+        keyBindings: [
+          {
+            keyCommand: {
+              command: COMMANDS.DECREASE_INDENT,
+              modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+              key: 'm',
+            },
+            commandHandler: (editorState: EditorState) => indentSelectedBlocks(editorState, -1),
+          },
+        ],
       },
       [FORMATTING_BUTTONS.INCREASE_INDENT]: {
         component: IncreaseIndentButton,
@@ -78,6 +91,16 @@ const createToolbar: CreatePluginToolbar = ({
           // TODO: should be disabled when no indent?
           isDisabled: () => isAtomicBlockFocused(getEditorState()),
         },
+        keyBindings: [
+          {
+            keyCommand: {
+              command: COMMANDS.INCREASE_INDENT,
+              modifiers: [MODIFIERS.COMMAND],
+              key: 'm',
+            },
+            commandHandler: (editorState: EditorState) => indentSelectedBlocks(editorState, 1),
+          },
+        ],
       },
     }),
     name: 'indent',
