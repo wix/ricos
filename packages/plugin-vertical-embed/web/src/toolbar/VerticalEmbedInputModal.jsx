@@ -14,7 +14,6 @@ import generalStyles from '../../statics/styles/general.scss';
 const LOADING = 'LOADING';
 const NO_ITEMS = 'NO_ITEMS';
 const READY = 'READY';
-const FAILED = 'FAILED';
 const NOT_FOUND = 'NOT_FOUND';
 
 export default class VerticalEmbedInputModal extends Component {
@@ -38,15 +37,14 @@ export default class VerticalEmbedInputModal extends Component {
       });
     } catch (e) {
       console.error('failed to load products ', e);
-      this.setState({ products: [], status: FAILED });
+      this.setState({ products: [], status: NO_ITEMS });
     }
   }
 
   onInputChange = (inputString = '') => {
-    this.state.status !== FAILED &&
-      this.verticalApi.search(inputString).then(products => {
-        this.setState({ products, status: products.length === 0 ? NOT_FOUND : READY });
-      });
+    this.verticalApi.search(inputString).then(products => {
+      this.setState({ products, status: products.length === 0 ? NOT_FOUND : READY });
+    });
     this.setState({ inputString });
   };
 
