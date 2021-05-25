@@ -11,7 +11,11 @@ interface Props {
 
 const YourPluginNameViewer: FC<Props> = ({ theme }) => {
   const classes = useMemo(() => mergeStyles({ styles, theme }), [theme]);
-  return <div className={classes.container}>This is my new yourDpluginDname plugin!</div>;
+  return (
+    <div className={classes.container} data-hook="yourDpluginDname-container">
+      This is my new yourDpluginDname plugin!
+    </div>
+  );
 };
 
 export default YourPluginNameViewer;
