@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FC, useMemo } from 'react';
 import { mergeStyles, RichContentTheme, ComponentData } from 'wix-rich-content-common';
 import styles from '../statics/styles/yourDpluginDname.scss';
 import { YourPluginNamePluginViewerConfig } from './types';
@@ -9,13 +9,9 @@ interface Props {
   theme: RichContentTheme;
 }
 
-class YourPluginNameViewer extends Component<Props> {
-  styles: Record<string, string>;
-
-  render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    return <div>This is my new yourDpluginDname plugin!</div>;
-  }
-}
+const YourPluginNameViewer: FC<Props> = ({ theme }) => {
+  const classes = useMemo(() => mergeStyles({ styles, theme }), [theme]);
+  return <div className={classes.container}>This is my new yourDpluginDname plugin!</div>;
+};
 
 export default YourPluginNameViewer;
