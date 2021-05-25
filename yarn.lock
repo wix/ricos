@@ -23045,6 +23045,25 @@ rgba-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
+ricos-content@8.36.3:
+  version "8.36.3"
+  resolved "https://registry.npmjs.org/ricos-content/-/ricos-content-8.36.3.tgz#0f5b3ecc3e05b5a0fcda0b76d582dea491d970df"
+  integrity sha512-leyRqX+XpHsNa9PTnq9muNh/ILEm1f7TsGQ6iVYN2IHJr8crZmHakdZD/D/MaINK3W7E9ZVa+2Bx+qUF6nQDzg==
+  dependencies:
+    omit-deep "0.3.0"
+    parse5 "^6.0.0"
+    ricos-schema "8.36.3"
+    to-camel-case "1.0.0"
+    to-constant-case "1.0.0"
+    to-slug-case "1.0.0"
+    to-snake-case "1.0.0"
+    utility-types "^3.10.0"
+
+ricos-schema@8.36.3:
+  version "8.36.3"
+  resolved "https://registry.npmjs.org/ricos-schema/-/ricos-schema-8.36.3.tgz#f9df9abc953d2947ad82c9055fbb5dc052aa8f62"
+  integrity sha512-wC6Qv9WmN+F+eiX03Q4VUBIxsIOopN3B6ZxB9ggCcx3yOV577glTUIyMm4LqdBJcNdxQma1AMapAJKT6i2JYXg==
+
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
