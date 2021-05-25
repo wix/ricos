@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.36.4 (May 25, 2021)
+
 ### :nail_care: Polish
 
 - `ricos-schema`
@@ -30,9 +35,6 @@
   - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onViewerLoaded`
 - `ricos-editor`
   - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onOpenEditorSuccess`
-
-</details>
-<hr/>
 
 ## 8.36.3 (May 23, 2021)
 
