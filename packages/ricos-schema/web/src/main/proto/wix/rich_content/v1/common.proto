@@ -15,8 +15,6 @@ message TextStyle {
 
     TextAlignment text_alignment = 1;
     google.protobuf.StringValue line_height = 2; // CSS value
-    google.protobuf.StringValue padding_top = 3; // CSS value
-    google.protobuf.StringValue padding_bottom = 4; // CSS value
 }
 
 message Link {

@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 import React from 'react';
+import { version } from '../package.json';
 import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RICOS_MENTION_TYPE } from 'wix-rich-content-common';
+import { BICallbacks, RICOS_MENTION_TYPE } from 'wix-rich-content-common';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
 import { pluginDivider } from '../../../plugin-divider/web/src';
@@ -274,6 +275,14 @@ describe('RicosEditor', () => {
     expect(rceProps.tabIndex).toEqual(-1);
     expect(rceProps.spellCheck).toEqual(true);
     expect(rceProps).not.toHaveProperty('notADraftSetting');
+  });
+  it('should trigger onOpenEditorSuccess upon mount', () => {
+    let reportedVersion = '';
+    const onOpenEditorSuccessMock: BICallbacks['onOpenEditorSuccess'] = v => (reportedVersion = v);
+    const fn = jest.fn(onOpenEditorSuccessMock);
+    getRicosEditor({ _rcProps: { helpers: { onOpenEditorSuccess: fn } } });
+    expect(fn).toBeCalledTimes(1);
+    expect(reportedVersion).toEqual(version);
   });
   describe('Modal API', () => {
     it('should pass openModal & closeModal to helpers', () => {

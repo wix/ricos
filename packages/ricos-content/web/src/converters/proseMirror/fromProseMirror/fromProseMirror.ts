@@ -1,10 +1,9 @@
-import { transform, isObject } from 'lodash';
-import { Node_Type, RichContent } from 'ricos-schema';
+import { transform, isObject, pickBy, identity } from 'lodash';
+import { RichContent } from 'ricos-schema';
 import { JSONContent } from '@tiptap/core';
-import { DECORATION_TYPES, NODE_TYPES } from '../consts';
 import { initializeMetadata } from '../../nodeUtils';
 import { genKey } from '../../generateRandomKey';
-import { isDecoration, isNode, toDataFieldName } from '../utils';
+import { DATA_FIELDS_MAP, isDecoration, isNode } from '../utils';
 
 export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
   const { type: _, ...content } = convertFromProse(proseDocument);
@@ -12,13 +11,6 @@ export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
     content.metadata = initializeMetadata();
   }
   return content;
-};
-
-const TYPES = [...NODE_TYPES, ...DECORATION_TYPES];
-
-const DATA_FIELDS_MAP = {
-  ...TYPES.reduce((map, type) => ({ ...map, [type]: toDataFieldName(type) }), {}),
-  [Node_Type.CODEBLOCK]: 'codeData',
 };
 
 const FIELDS_MAP = {
@@ -41,10 +33,19 @@ const convertDataField = object => {
   return { ...newValue, ...(attrs ? { [dataField]: attrs } : {}) };
 };
 
+const moveNodeStyle = object => {
+  const { attrs: { style, ...rest } = { style }, ...newValue } = object;
+  const attrs = Object.keys(rest).length > 0 && rest;
+  return pickBy({ ...newValue, attrs, style }, identity);
+};
+
 const convertValue = value => {
   let newValue = value;
   if (isTextNode(newValue)) {
     newValue = moveTextData(newValue);
+  }
+  if (isNode(newValue)) {
+    newValue = moveNodeStyle(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
     newValue = typeToUpper(newValue);

@@ -77,9 +77,10 @@ export function generateInsertPluginButtonProps({
     helpers?.onPluginAddSuccess?.(blockType, toolbarName, params);
 
   function addBlock(data, beforeAdd?: (blockKey: string, params?: PluginAddParams) => void) {
+    const { componentData } = data;
     const { newBlock, newSelection, newEditorState } = createBlock(
       getEditorState(),
-      data,
+      componentData,
       blockType
     );
     const params = getPluginParams(data, blockType);
@@ -117,6 +118,7 @@ export function generateInsertPluginButtonProps({
 
   function onClick(event: MouseEvent) {
     event.preventDefault();
+    const { name, componentData } = button;
     switch (button.type) {
       case 'file':
         toggleFileSelection();
@@ -132,12 +134,12 @@ export function generateInsertPluginButtonProps({
         if (button.onClick) {
           button.onClick(event);
         } else {
-          addBlock(button.componentData || {});
+          addBlock({ name, componentData });
         }
         break;
       default:
         onPluginAdd();
-        addBlock(button.componentData || {});
+        addBlock({ name, componentData });
         break;
     }
     closePluginMenu?.();
@@ -205,10 +207,13 @@ export function generateInsertPluginButtonProps({
         modalStyles,
         theme,
         componentData: button.componentData,
-        onConfirm: obj => {
-          const data = addBlock(obj, (key, params) => onPluginAddStep('PluginModal', key, params));
-          addedBlockKey = data.newBlock;
-          return data;
+        onConfirm: componentData => {
+          const data = { componentData, buttonName: button.name };
+          const blockData = addBlock(data, (key, params) =>
+            onPluginAddStep('PluginModal', key, params)
+          );
+          addedBlockKey = blockData.newBlock;
+          return blockData;
         },
         pubsub,
         helpers,
