@@ -352,6 +352,7 @@ let userColors = [];
 
 export const uiSettings: UISettings = {
   linkPanel: {
+    externalPopups: true,
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
     dropDown: getLinkPanelDropDownConfig(),
@@ -411,7 +412,7 @@ const buttonConfig = {
   getBorderColors: () => userButtonBorderColors,
   getBackgroundColors: () => userButtonBackgroundColors,
 };
-const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { Instagram, Twitter, TikTok } = LinkPreviewProviders;
 const { html, adsense } = htmlButtonsTypes;
 const config: RichContentEditorProps['config'] = {
   [SPOILER_TYPE]: {
@@ -422,10 +423,10 @@ const config: RichContentEditorProps['config'] = {
     siteToken: process.env.POLLS_API_KEY,
   },
   [LINK_PREVIEW_TYPE]: {
-    enableEmbed: true, // [Twitter, YouTube]
+    enableEmbed: true, // [Twitter, TikTok]
     enableLinkPreview: true,
     fetchData: mockFetchUrlPreviewData(),
-    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    exposeEmbedButtons: [Instagram, Twitter, TikTok],
   },
   [EMOJI_TYPE]: {
     // toolbar: {
@@ -661,7 +662,11 @@ const config: RichContentEditorProps['config'] = {
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-    exposeButtons: [videoButtonsTypes.video, videoButtonsTypes.soundCloud],
+    exposeButtons: [
+      videoButtonsTypes.video,
+      videoButtonsTypes.soundCloud,
+      videoButtonsTypes.youTube,
+    ],
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
@@ -842,7 +847,11 @@ const config: RichContentEditorProps['config'] = {
       //   };
       // },
     },
-    { name: TOOLBARS.SIDE, addPluginMenuConfig },
+    {
+      name: TOOLBARS.SIDE,
+      addPluginMenuConfig,
+      // onClick: () => console.log('plus button clicked!'),
+    },
     { name: TOOLBARS.MOBILE, addPluginMenuConfig },
     { name: TOOLBARS.FOOTER, footerToolbarConfig },
     {

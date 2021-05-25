@@ -2,25 +2,37 @@ $primary-color-dark: #455a64;
 $primary-color-light: #fbfbfb;
 $primary-text-color-light: #e6e6e6;
 $secondary-text-color: #757575;
-$primary-text-color: var(--ricos-text-color, #212121);                  // color 5
-$primary-text-color-tuple: var(--ricos-text-color-tuple, (33,33,33));
+$primary-text-color: var(--ricos-text-color, #212121); // color 5
+$primary-text-color-tuple: var(--ricos-text-color-tuple, (33, 33, 33));
 
-$ricos-text-color-low: var(--ricos-text-color-low, #969696);            // color 4
+$ricos-text-color-low: var(--ricos-text-color-low, #969696); // color 4
 $ricos-text-color-low-tuple: var(--ricos-text-color-low-tuple, (150, 150, 150));
-$ricos-disabled-color: var(--ricos-disabled-color, #747474);            // color 3
-$ricos-disabled-color-tuple: var(--ricos-disabled-color-tuple, (116,116,116));
+$ricos-disabled-color: var(--ricos-disabled-color, #747474); // color 3
+$ricos-disabled-color-tuple: var(--ricos-disabled-color-tuple, (116, 116, 116));
 
-$action-color: var(--ricos-action-color, #0261ff);                      // color 8
-$action-color-tuple: var(--ricos-action-color-tuple, (2,97,255));
+$action-color: var(--ricos-action-color, #0261ff); // color 8
+$action-color-tuple: var(--ricos-action-color-tuple, (2, 97, 255));
 $action-color-fallback: var(--ricos-action-color-fallback, #0261ff);
-$action-color-fallback-tuple: var(--ricos-action-color-fallback-tuple, (2,97,255));
+$action-color-fallback-tuple: var(--ricos-action-color-fallback-tuple, (2, 97, 255));
 $action-color-fallback-bright: #ffffff;
-$action-color-fallback-bright-tuple: 255,255,255;
-$background-color: var(--ricos-background-color, unset);                  // color 1
+$action-color-fallback-bright-tuple: 255, 255, 255;
+$background-color: var(--ricos-background-color, unset); // color 1
 $background-color-tuple: var(--ricos-background-color-tuple);
 $background-color-container: var(--ricos-bg-color-container, unset);
 
+$settings-action-color: var(--ricos-settings-action-color, $action-color); // color 8
+$settings-action-color-tuple: var(--ricos-settings-action-color-tuple, $action-color-tuple);
+$settings-action-color-fallback: var(--ricos-settings-action-color, $action-color-fallback);
+$settings-action-color-fallback-tuple: var(
+  --ricos-settings-action-color-tuple,
+  $action-color-fallback-tuple
+);
+
+$focus-action-color: var(--ricos-focus-action-color, $action-color); // color 8
+$focus-action-color-tuple: var(--ricos-focus-action-color-tuple, $action-color-tuple);
+
 $ricos-p-color: var(--ricos-custom-p-color, unset);
+$ricos-p-color-fallbackToPrimary: var(--ricos-custom-p-color, $primary-text-color);
 $ricos-quote-border-color: var(--ricos-custom-quote-border-color, $action-color);
 $ricos-quote-color: var(--ricos-custom-quote-color, unset);
 $ricos-link-color: var(--ricos-custom-link-color, $action-color);
@@ -29,6 +41,6 @@ $ricos-hashtag-color: var(--ricos-custom-hashtag-color, $action-color);
 $modal-input-color: #333333;
 $toolbar-font-color: #333333;
 $toolbar-border-color: #ededed;
-$fallbackColor: var(--ricos-fallback-color ,#000000);
-$fallbackColorTuple: var(--ricos-fallback-color-tuple ,(0,0,0));
+$fallbackColor: var(--ricos-fallback-color, #000000);
+$fallbackColorTuple: var(--ricos-fallback-color-tuple, (0, 0, 0));
 $fallbackColorBright: #ffffff;

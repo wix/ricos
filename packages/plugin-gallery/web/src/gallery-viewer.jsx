@@ -5,8 +5,9 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
-import { DEFAULTS, isHorizontalLayout, sampleItems, GALLERY_LAYOUTS } from './defaults';
+import { DEFAULTS, isHorizontalLayout, sampleItems } from './defaults';
 import { resizeMediaUrl } from '../lib/resize-media-url';
+import { GALLERY_LAYOUTS } from '../lib/layout-data-provider';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
@@ -176,7 +177,7 @@ class GalleryViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onViewerAction?.(GALLERY_TYPE, 'expand_gallery');
+    helpers.onViewerAction?.(GALLERY_TYPE, 'Click', 'expand_gallery');
     this.hasExpand() && onExpand?.(this.props.blockKey, data.idx);
   };
 
@@ -253,7 +254,7 @@ class GalleryViewer extends React.Component {
   render() {
     const { theme, settings, seoMode } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { scrollingElement, ...galleySettings } = settings;
+    const { scrollingElement, ...gallerySettings } = settings;
     const { size } = this.state;
 
     const items = this.getItems();
@@ -284,7 +285,7 @@ class GalleryViewer extends React.Component {
               ...alwaysShowHover,
             }}
             container={size}
-            settings={galleySettings}
+            settings={gallerySettings}
             scrollingElement={scrollingElement}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}

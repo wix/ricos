@@ -3,7 +3,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .action_buttons_button {
-  border: 1px solid $action-color-fallback;
+  border: 1px solid $settings-action-color-fallback;
   outline: none;
   background: transparent;
   line-height: 1.5;
@@ -14,7 +14,7 @@
   height: 32px;
   width: 88px;
   padding: 0;
-  color: $action-color-fallback;
+  color: $settings-action-color-fallback;
   margin: 0 6px;
   .mobile & {
     font-size: 16px;
@@ -26,11 +26,11 @@
 }
 
 .action_buttons_button_update {
-  background-color: $action-color-fallback;
+  background-color: $settings-action-color-fallback;
   color: white;
   .mobile & {
     background-color: transparent;
-    color: $action-color-fallback;
+    color: $settings-action-color-fallback;
   }
 }
 

@@ -1,4 +1,3 @@
-import { pick, merge } from 'lodash/fp';
 import {
   ButtonData,
   CodeData,
@@ -18,16 +17,10 @@ import {
   RichContent,
   TextData,
   VideoData,
+  TextStyle_TextAlignment,
 } from 'ricos-schema';
-import {
-  addNode as add,
-  toTextDataArray,
-  removeNode,
-  setNode as set,
-  updateNode as update,
-  toggleNodeType,
-} from './builder-utils';
-import { ContentBuilder } from '../types';
+import { addNode as add, toTextDataArray, toListDataArray } from './builder-utils';
+import { ContentBuilder, ListItemData } from '../types';
 
 const dataByNodeType = (type: Node_Type, data: unknown) =>
   ({
@@ -60,14 +53,14 @@ type AddTextMethodParams<T> = AddMethodParams<T> & {
   text?: string | TextData | (string | TextData)[];
 };
 
-type SetMethodParams<TData> = {
-  data: TData;
-  key: string;
+type AddListMethodParams = {
+  items: string | TextData | ListItemData | (string | TextData | ListItemData)[];
+  data?: ParagraphData;
+  type: Node_Type.ORDERED_LIST | Node_Type.BULLET_LIST;
+  index?: number;
+  before?: string;
+  after?: string;
   content: RichContent;
-};
-
-type SetTextMethodParams<T> = SetMethodParams<T> & {
-  text?: string | TextData | (string | TextData)[];
 };
 
 export interface RicosBuilder extends ContentBuilder {
@@ -79,6 +72,18 @@ export const setupContentBuilder = (
 ): ContentBuilder & { RicosContentBuilder: RicosBuilder } => {
   function createNode(type: Node_Type, data: unknown): Node {
     return { key: generateKey(), type, ...dataByNodeType(type, data), nodes: [] };
+  }
+
+  function createListNode(type: Node_Type, items: ListItemData[]) {
+    return {
+      type,
+      key: generateKey(),
+      nodes: items.map(({ text, data }) => ({
+        type: Node_Type.LIST_ITEM,
+        key: generateKey(),
+        nodes: [createTextNode(Node_Type.PARAGRAPH, text, data)],
+      })),
+    };
   }
 
   function createTextNode(type: Node_Type, text: TextData[], data: unknown): Node {
@@ -134,107 +139,26 @@ export const setupContentBuilder = (
     return add({ node, index, before, after, content });
   }
 
-  function setNode({
-    data,
+  const defaultParagraphData = {
+    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
+    indentation: 0,
+  };
+
+  function addListNode({
+    items,
+    data = defaultParagraphData,
     type,
-    key,
+    index,
+    before,
+    after,
     content,
-  }: {
-    data: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const node = createNode(type, data);
-    return set({ node, key, content });
+  }: AddListMethodParams): RichContent {
+    const listItemData = toListDataArray(items, data);
+    const node = createListNode(type, listItemData);
+    return add({ node, index, before, after, content });
   }
 
-  function setTextNode({
-    text,
-    data,
-    type,
-    key,
-    content,
-  }: {
-    text?: string | TextData | (string | TextData)[];
-    data?: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const textData = toTextDataArray(text);
-    const node = createTextNode(type, textData, data);
-    return set({ node, key, content });
-  }
-
-  function toggleTextNode({
-    text,
-    data,
-    type,
-    key,
-    content,
-  }: {
-    text?: string | TextData | (string | TextData)[];
-    data?: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const textData = toTextDataArray(text);
-    const node = createTextNode(type, textData, data);
-    return toggleNodeType({
-      node,
-      key,
-      content,
-      convert: ({ sourceNode, targetNode }) =>
-        pick(Object.keys(sourceNode), merge(targetNode, sourceNode)),
-      canToggle: ({ targetNode }) =>
-        [
-          Node_Type.PARAGRAPH,
-          Node_Type.CODEBLOCK,
-          Node_Type.BLOCKQUOTE,
-          Node_Type.LIST_ITEM,
-          Node_Type.HEADING,
-        ].includes(targetNode.type),
-    });
-  }
-
-  function updateNode({
-    data,
-    type,
-    key,
-    content,
-  }: {
-    data: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const node = createNode(type, data);
-    return update({ node, key, content });
-  }
-
-  function updateTextNode({
-    text,
-    data,
-    type,
-    key,
-    content,
-  }: {
-    text?: string | TextData | (string | TextData)[];
-    data?: unknown;
-    type: Node_Type;
-    key: string;
-    content: RichContent;
-  }): RichContent {
-    const textData = toTextDataArray(text);
-    const node = createTextNode(type, textData, data);
-    return update({ node, key, content });
-  }
-
-  class RicosContentBuilder {
-    removeNode!: (key: string, content: RichContent) => RichContent;
-  }
+  class RicosContentBuilder {}
 
   const builderApis = {};
 
@@ -243,8 +167,6 @@ export const setupContentBuilder = (
     { name: 'Heading', type: Node_Type.HEADING, dataT: {} as HeadingData },
     { name: 'Code', type: Node_Type.CODEBLOCK, dataT: {} as CodeData },
     { name: 'Blockquote', type: Node_Type.BLOCKQUOTE, dataT: {} as never },
-    { name: 'BulletListItem', type: Node_Type.BULLET_LIST, dataT: {} as never },
-    { name: 'OrderedListItem', type: Node_Type.ORDERED_LIST, dataT: {} as never },
   ].forEach(({ name, type, dataT }) => {
     builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
       data,
@@ -264,48 +186,25 @@ export const setupContentBuilder = (
         after,
       });
     };
-
-    builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
-      data,
-      text,
-      key,
-      content,
-    }: SetTextMethodParams<typeof dataT>) {
-      return updateTextNode({
-        text,
-        data,
-        type,
-        key,
-        content,
-      });
-    };
-
-    builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetTextMethodParams<typeof dataT>) {
-      return setTextNode({
-        data,
-        type,
-        key,
-        content,
-      });
-    };
-
-    builderApis[`toggle${name}`] = RicosContentBuilder.prototype[`toggle${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetTextMethodParams<typeof dataT>) {
-      return toggleTextNode({
-        data,
-        type,
-        key,
-        content,
-      });
-    };
   });
+
+  [
+    { name: 'BulletList', type: Node_Type.BULLET_LIST },
+    { name: 'OrderedList', type: Node_Type.ORDERED_LIST },
+  ].forEach(
+    ({ name, type }: { name: string; type: Node_Type.ORDERED_LIST | Node_Type.BULLET_LIST }) => {
+      builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
+        items,
+        data,
+        index,
+        before,
+        after,
+        content,
+      }: AddListMethodParams): RichContent {
+        return addListNode({ items, data, type, index, before, after, content });
+      };
+    }
+  );
 
   [
     { name: 'Image', type: Node_Type.IMAGE, dataT: {} as ImageData },
@@ -336,29 +235,10 @@ export const setupContentBuilder = (
         after,
       });
     };
-
-    builderApis[`update${name}`] = RicosContentBuilder.prototype[`update${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetMethodParams<typeof dataT>) {
-      return updateNode({ data, type, key, content });
-    };
-
-    builderApis[`set${name}`] = RicosContentBuilder.prototype[`set${name}`] = function({
-      data,
-      key,
-      content,
-    }: SetMethodParams<typeof dataT>) {
-      return setNode({ data, type, key, content });
-    };
   });
-
-  RicosContentBuilder.prototype.removeNode = removeNode;
 
   return {
     RicosContentBuilder: (RicosContentBuilder as unknown) as RicosBuilder,
     ...(builderApis as ContentBuilder),
-    removeNode,
   };
 };

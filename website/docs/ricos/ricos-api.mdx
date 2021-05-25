@@ -6,6 +6,9 @@ sidebar_label: Ricos API
 
 import { RicosEditor } from 'ricos-editor';
 import 'ricos-editor/dist/styles.min.css';
+import 'ricos-viewer/dist/styles.min.css';
+import viewerContent from '../../infra/editor/content/intro.json';
+import { RicosViewer } from 'ricos-viewer';
 
 ## Ricos Common API
 
@@ -66,15 +69,20 @@ Will render in mobile optimized mode
 ### `linkSettings`
 
 ```jsx
+
+CustomAnchorScroll: (event: Event, anchor: string) => void;
+
 linkSettings?: {
   anchorTarget?: string;
   relValue?: string;
+  customAnchorScroll?: CustomAnchorScroll;
 }
 ```
 
 Defines the behavior of links.
 anchorTarget - as defined in [HTMLAnchorElement.target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target)
 relValue - as defined in [HTMLAnchorElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/rel)
+customAnchorScroll - enables overriding the default anchor scroll behaviour
 
 ### `locale`
 
@@ -115,9 +123,9 @@ Disables the mouse right click functionality for the gallery, video and image pl
 
 #### `disableDownload`
 
-Sets the initial value of disableDownload for image, gallery and video plugins. 
-Images - disables right click. 
-Gallery - disables right click. 
+Sets the initial value of disableDownload for image, gallery and video plugins.
+Images - disables right click.
+Gallery - disables right click.
 Video - removes the download option from context menu.
 
 ### `onError`
@@ -421,3 +429,24 @@ An object allows extended configuration.
 
 className - Content blocked by a payall will be marked up using this string (This class will be used by Googlebot to discern between paid and free content on a page level)
 index - number of free content blocks
+
+#### `addAnchors`
+
+TODO
+
+#### `textSelectionToolbar`
+
+When given a truthy value, text-selection-toolbar appears inline when selecting some text and allows tweet text.
+
+```jsx
+import { RicosViewer } from 'ricos-viewer';
+import 'ricos-viewer/dist/styles.min.css';
+
+<RicosViewer textSelectionToolbar />;
+```
+
+Select some text below to see text-selection-toolbar
+
+<div className="card" style={{position: 'relative' }}>
+  <RicosViewer content={viewerContent} textSelectionToolbar />
+</div>

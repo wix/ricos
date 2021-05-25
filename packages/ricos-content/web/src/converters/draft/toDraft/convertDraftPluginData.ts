@@ -1,10 +1,19 @@
 /* eslint-disable fp/no-delete */
 import {
+  Node,
   Node_Type,
   Decoration_Type,
   PluginContainerData_Width_Type,
   Link,
   Link_Target,
+  ImageData,
+  Decoration,
+  PluginContainerData,
+  VideoData,
+  DividerData,
+  MentionData,
+  FileData,
+  ButtonData,
 } from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
@@ -13,15 +22,16 @@ import {
   FROM_RICOS_ENTITY_TYPE,
   TO_RICOS_DATA_FIELD,
 } from '../consts';
+import { ComponentData, FileComponentData } from '../../../types';
 
-export const convertNodeToDraftData = node => {
+export const convertNodeToDraftData = (node: Node) => {
   const { type } = node;
   const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
   const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
   return convertNodeDataToDraft(type, node[dataFieldName]);
 };
 
-export const convertDecorationToDraftData = decoration => {
+export const convertDecorationToDraftData = (decoration: Decoration) => {
   const { type } = decoration;
   const dataFieldName = ENTITY_DECORATION_TO_DATA_FIELD[FROM_RICOS_DECORATION_TYPE[type]];
   return convertDecorationDataToDraft(type, decoration[dataFieldName]);
@@ -39,6 +49,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
+    [Node_Type.MAP]: convertMapData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
     convertContainerData(newData);
@@ -63,8 +74,8 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
   return data;
 };
 
-const convertContainerData = data => {
-  const { width, alignment, spoiler } = data.containerData;
+const convertContainerData = (data: { containerData?: PluginContainerData; config }) => {
+  const { width, alignment, spoiler, customHeight } = data.containerData || {};
   data.config = Object.assign(
     {},
     data.config,
@@ -75,6 +86,7 @@ const convertContainerData = data => {
           : constantToKebabCase(width.type),
     },
     width?.customWidth && { width: width.customWidth },
+    customHeight && { height: customHeight },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
@@ -87,41 +99,46 @@ const convertContainerData = data => {
   delete data.containerData;
 };
 
-const convertVideoData = data => {
-  const videoSrc = data.video.src;
-  if (videoSrc.url) {
+const convertVideoData = (data: VideoData & { src; metadata }) => {
+  const videoSrc = data.video?.src;
+  if (videoSrc?.url) {
     data.src = videoSrc.url;
-    const { src, width, height } = data.thumbnail;
-    data.metadata = { thumbnail_url: src.url, width, height };
-  } else if (videoSrc.custom) {
-    const { src, width, height } = data.thumbnail;
+    const { src, width, height } = data.thumbnail || {};
+    data.metadata = { thumbnail_url: src?.url, width, height };
+  } else if (videoSrc?.custom) {
+    const { src, width, height } = data.thumbnail || {};
     data.src = {
       pathname: videoSrc.custom,
-      thumbnail: { pathname: src.custom, width, height },
+      thumbnail: { pathname: src?.custom, width, height },
     };
   }
   delete data.video;
   delete data.thumbnail;
 };
 
-const convertDividerData = data => {
+const convertDividerData = (
+  data: Partial<DividerData> & {
+    type;
+    config?: ComponentData['config'];
+  }
+) => {
   has(data, 'type') && (data.type = data.type.toLowerCase());
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
-    data.config.size = data.width.toLowerCase();
+    data.config.size = data.width?.toLowerCase();
     delete data.width;
   }
   if (has(data, 'alignment')) {
-    data.config.alignment = data.alignment.toLowerCase();
+    data.config.alignment = data.alignment?.toLowerCase();
     delete data.alignment;
   }
   delete data.containerData;
 };
 
-const convertImageData = data => {
+const convertImageData = (data: ImageData & { src; config; metadata }) => {
   const { link, config, disableExpand, image, altText, caption } = data;
-  const { src, width, height } = image;
-  data.src = { id: src.custom, file_name: src.custom, width, height };
+  const { src, width, height } = image || {};
+  data.src = { id: src?.custom, file_name: src?.custom, width, height };
   const links = link?.anchor ? { anchor: link?.anchor } : { link: link && convertLink(link) };
   data.config = { ...(config || {}), ...links, disableExpand };
   data.metadata = (altText || caption) && { caption, alt: altText };
@@ -149,30 +166,29 @@ const convertLinkPreviewData = data => {
     data.thumbnail_url = data.thumbnailUrl;
     delete data.thumbnailUrl;
   }
-  if (has(data, 'providerUrl')) {
-    data.provider_url = data.providerUrl;
-    delete data.providerUrl;
+  if (has(data, 'link')) {
+    data.config.link = convertLink(data.link);
+    delete data.link;
   }
-  has(data, 'config.link') && (data.config.link = convertLink(data.config.link));
 };
 
-const convertMention = data => {
+const convertMention = (data: Partial<MentionData> & { mention }) => {
   data.mention = { slug: data.slug, name: data.name };
   delete data.name;
   delete data.slug;
 };
 
-const convertFileData = data => {
-  const { url, custom } = data.src;
+const convertFileData = (data: FileData & FileComponentData) => {
+  const { url, custom } = data.src || {};
   data.url = url;
   data.id = custom;
   delete data.src;
 };
 
-const convertButtonData = data => {
+const convertButtonData = (data: Partial<ButtonData> & { button }) => {
   const { link, text, styles } = data;
-  const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles;
-  const { url, rel, target } = (link as Link) || {};
+  const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles || {};
+  const { url, rel, target } = link || {};
   data.button = {
     settings: {
       buttonText: text,
@@ -193,7 +209,44 @@ const convertButtonData = data => {
 };
 
 const convertHTMLData = data => {
-  delete data.config?.size;
+  const { html, url, config = {} } = data;
+  const srcType = html ? 'html' : 'url';
+  data.srcType = srcType;
+  data.src = html || url;
+  delete data[srcType];
+  config.size && delete data.config.size;
+};
+
+const convertMapData = data => {
+  const {
+    draggable,
+    marker,
+    streetViewControl,
+    zoomControl,
+    locationName,
+    viewModeControl,
+    initialZoom,
+    mapType,
+  } = data.mapSettings;
+  data.mapSettings.isDraggingAllowed = draggable;
+  data.mapSettings.isMarkerShown = marker;
+  data.mapSettings.isStreetViewControlShown = streetViewControl;
+  data.mapSettings.isZoomControlShown = zoomControl;
+  data.mapSettings.locationDisplayName = locationName;
+  data.mapSettings.zoom = initialZoom;
+  data.mapSettings.mode = mapType;
+  delete data.mapSettings.draggable;
+  delete data.mapSettings.marker;
+  delete data.mapSettings.streetViewControl;
+  delete data.mapSettings.zoomControl;
+  delete data.mapSettings.locationName;
+  delete data.mapSettings.initialZoom;
+  delete data.mapSettings.mapType;
+
+  if (viewModeControl) {
+    data.mapSettings.isViewControlShown = viewModeControl;
+    delete data.mapSettings.viewModeControl;
+  }
 };
 
 const convertLink = ({

@@ -50,6 +50,7 @@ export default class TextLinkButton extends Component {
 
     const OriginalLinkPanel =
       !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
+    const { externalPopups = false } = uiSettings.linkPanel;
     const customStyles =
       !isMobile && !OriginalLinkPanel
         ? {
@@ -57,7 +58,10 @@ export default class TextLinkButton extends Component {
               width: 512,
               maxWidth: 512,
               height: 390,
-              padding: 10,
+              border: '1px solid rgb(237, 237, 237)',
+              borderRadius: '6px',
+              boxShadow: 'rgba(0, 0, 0, 0.07) 0px 4px 8px 0px',
+              padding: '0px 19px',
             },
           }
         : {
@@ -84,7 +88,7 @@ export default class TextLinkButton extends Component {
       closeInlinePluginToolbar,
       linkTypes,
     };
-    if (isMobile || linkModal) {
+    if (externalPopups || isMobile || linkModal) {
       if (helpers && helpers.openModal) {
         const modalProps = {
           modalStyles,

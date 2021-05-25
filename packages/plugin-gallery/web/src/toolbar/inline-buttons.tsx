@@ -2,28 +2,29 @@ import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
-import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
+import { getGalleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
 import {
   CreateInlineButtons,
   TranslationFunction,
   AnchorTarget,
   RelValue,
 } from 'wix-rich-content-common';
-import { GalleryPluginEditorConfig } from '../types';
-
-const modalStyles = getModalStyles({});
+import { GalleryPluginEditorConfig, GALLERY_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
   anchorTarget,
   relValue,
   settings,
+  isMobile,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
+  isMobile: boolean;
 }) => {
+  const modalStyles = getModalStyles({ isMobile });
   const icons = settings?.toolbar?.icons || {};
   const spoilerButton = settings.spoiler
     ? [
@@ -54,7 +55,7 @@ const createInlineButtons: CreateInlineButtons = ({
     {
       keyName: 'layout',
       type: BUTTONS.DROPDOWN,
-      options: galleryLayoutsDropdown(t),
+      options: getGalleryLayoutsDropdown(t),
       onChange: switchLayout,
       getValue: getCurrentLayout,
       mobile: true,
@@ -93,11 +94,13 @@ const createInlineButtons: CreateInlineButtons = ({
       modalStyles,
       switchLayout,
       t,
-      mobile: false,
+      mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,
       accept: settings.accept,
+      triggerSettingsBi: true,
+      pluginId: GALLERY_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

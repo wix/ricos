@@ -66,7 +66,7 @@
   &.linkPanel_Footer_mobile {
     padding: 12px 18px 14px;
     &.multiSelectLinkPanel_Footer {
-      background-color: $action-color-fallback;
+      background-color: $settings-action-color-fallback;
       padding: 10px 10px;
     }
   }
@@ -96,10 +96,10 @@
   margin: 0 0 0 20px;
   height: auto;
   border-right: 1px solid rgba(51, 51, 51, 0.1);
-  &.linkPanel_VerticalDividerNarrowMargin{
+  &.linkPanel_VerticalDividerNarrowMargin {
     margin: 0 13px;
   }
-  &.linkPanel_VerticalDivider_mobile{
+  &.linkPanel_VerticalDivider_mobile {
     margin: 0 20px;
     &.multiSelectLinkPanel_VerticalDivider {
       border-right: 1px solid white;
@@ -113,7 +113,7 @@
 }
 
 .linkPanel_enabled {
-  color: $action-color-fallback;
+  color: $settings-action-color-fallback;
 }
 
 .multiSelectLinkPanel_header {
@@ -133,10 +133,10 @@
   text-align: center;
 }
 
-.multiSelectLinkPanel_mobileHeaderIcon { 
-  width: 19px; 
-  height: 19px; 
-  margin-right: 11px; 
+.multiSelectLinkPanel_mobileHeaderIcon {
+  width: 19px;
+  height: 19px;
+  margin-right: 11px;
 }
 
 .multiSelectLinkPanel_radioButtons {
@@ -159,25 +159,25 @@
   }
 }
 
-.multiSelectLinkPanel_tabsWrapper{
+.multiSelectLinkPanel_tabsWrapper {
   display: flex;
   border-bottom: 1px solid gainsboro;
   margin-bottom: 12px;
-  
-  .multiSelectLinkPanel_tab{
+
+  .multiSelectLinkPanel_tab {
     display: flex;
     height: 30px;
     padding-bottom: 8px;
     width: 100%;
     justify-content: center;
     align-items: center;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
-  
-  .multiSelectLinkPanel_tabSelected{
-    border-bottom: 2px solid $action-color-fallback;
-    color: $action-color-fallback;
+
+  .multiSelectLinkPanel_tabSelected {
+    border-bottom: 2px solid $settings-action-color-fallback;
+    color: $settings-action-color-fallback;
   }
 }

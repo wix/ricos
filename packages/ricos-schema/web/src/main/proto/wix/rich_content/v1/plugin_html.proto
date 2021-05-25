@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package wix.rich_content.v1;
+
+import "wix/rich_content/v1/common.proto";
+
+message HTMLData {
+  PluginContainerData container_data = 1;
+  oneof data {
+    string url = 2;
+    string html = 3; 
+  }
+}

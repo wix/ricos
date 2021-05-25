@@ -334,6 +334,7 @@ export interface LinkPanelSettings {
   placeholder?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dropDown?: any;
+  externalPopups?: boolean;
 }
 
 export type UISettings = {

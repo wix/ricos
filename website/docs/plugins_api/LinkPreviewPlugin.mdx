@@ -21,7 +21,6 @@ Link Preview with inline-embed: for this Usage, html plugin should also be insta
     placeholder={'Type here!'}
     plugins={[
       pluginLinkPreview({
-        exposeEmbedButtons: ['Youtube', 'Instagram', 'Twitter', 'TikTok'],
         fetchData: () => ({
           title: 'A mock title',
           description: 'A mock description',
@@ -102,6 +101,8 @@ none;
 ```
 
 ### `exposeEmbedButtons`
+
+### NOTE: LinkPreviewProviders.youTube is gonna be deprecate. To use youtube plugin you should consume video plugin and expose youtube button. See docs here https://ricos.js.org/docs/plugins_api/VideoPlugin#youtube-plugin
 
 Which embed buttons will display - array with LinkPreviewProvider types [LinkPreviewProviders.Instagram, LinkPreviewProviders.Twitter, ...].
 For provide buttons type you should import LinkPreviewProvider.

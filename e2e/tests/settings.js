@@ -48,6 +48,10 @@ export const fixtures = [
   'all-images-cases-part-3',
   'unsupported-blocks',
   {
+    fixture: 'file-inside-table',
+    config: usePlugins(plugins.all),
+  },
+  {
     fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
   },

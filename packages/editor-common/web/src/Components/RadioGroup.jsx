@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -102,7 +103,7 @@ class RadioGroup extends Component {
                 type={'radio'}
                 checked={checked}
               />
-              <span className={styles.radioGroup_button} />
+              <span className={styles.radioGroup_button} tabIndex="0" />
               <span className={styles.radioGroup_label}>{option.labelText}</span>
             </label>
           );

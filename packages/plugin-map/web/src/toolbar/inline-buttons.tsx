@@ -9,7 +9,7 @@ import {
   Helpers,
   ComponentData,
 } from 'wix-rich-content-common';
-import { MapPluginEditorConfig } from '../types';
+import { MapPluginEditorConfig, MAP_TYPE } from '../types';
 
 const getAlignmentButtonPropsFn = (getEditorBounds: GetEditorBounds) => ({
   componentData,
@@ -92,6 +92,8 @@ const createInlineButtons: CreateInlineButtons = ({
       helpers,
       t,
       settings,
+      triggerSettingsBi: true,
+      pluginId: MAP_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

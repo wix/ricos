@@ -193,11 +193,8 @@ exports[`insert plugins tests > side toolbar > should insert button #0`] =
         "button": {
           "design": {
             "activeButton": 0,
-            "background": "#0261FF",
-            "borderColor": "#0261FF",
             "borderRadius": 0,
             "borderWidth": 0,
-            "color": "#FFFFFF",
             "padding": 12
           },
           "settings": {
@@ -486,7 +483,7 @@ exports[`insert plugins tests > side toolbar > should insert file_upload #0`] =
         },
         "name": "music.mp3",
         "type": "mp3",
-        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+        "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-file-upload"
@@ -602,7 +599,7 @@ exports[`insert plugins tests > side toolbar > should upload native file_upload 
         "name": "music.mp3",
         "size": 5,
         "type": "mp3",
-        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+        "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-file-upload"
@@ -866,11 +863,8 @@ exports[`insert plugins tests > footer toolbar > should insert button #0`] =
         "button": {
           "design": {
             "activeButton": 0,
-            "background": "#0261FF",
-            "borderColor": "#0261FF",
             "borderRadius": 0,
             "borderWidth": 0,
-            "color": "#FFFFFF",
             "padding": 12
           },
           "settings": {
@@ -1159,7 +1153,7 @@ exports[`insert plugins tests > footer toolbar > should insert file_upload #0`] 
         },
         "name": "music.mp3",
         "type": "mp3",
-        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+        "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-file-upload"
@@ -1275,7 +1269,7 @@ exports[`insert plugins tests > footer toolbar > should upload native file_uploa
         "name": "music.mp3",
         "size": 5,
         "type": "mp3",
-        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+        "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-file-upload"

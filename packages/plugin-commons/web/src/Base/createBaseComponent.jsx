@@ -71,6 +71,26 @@ const createBaseComponent = ({
       this.setState(this.stateFromProps(nextProps));
     }
 
+    isInViewport = boundingRect => {
+      const { top, left, bottom, right } = boundingRect;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const width = window.innerWidth || document.documentElement.clientWidth;
+      return top >= 0 && left >= 0 && bottom <= windowHeight && right <= width;
+    };
+
+    scrollIntoViewIfNeeded = (blockKey, threshold = 0) => {
+      if (this.containerRef.current) {
+        const boundingRect = this.getBoundingClientRectAsObject(this.containerRef.current);
+        const focusedBlock = pubsub.get('focusedBlock');
+        if (boundingRect.height === 0 && threshold < 500) {
+          // Required in order to wait for images to load their source
+          setTimeout(() => this.scrollIntoViewIfNeeded(blockKey, threshold + 1), 100);
+        } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
+          this.containerRef.current.scrollIntoView();
+        }
+      }
+    };
+
     onResizeElement = blockKey => element => {
       const boundingRect = this.getBoundingClientRectAsObject(element[0].target);
       const focusedBlock = pubsub.get('focusedBlock');
@@ -125,6 +145,7 @@ const createBaseComponent = ({
         this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement(blockKey), 40));
         this.resizeObserver?.observe(this.containerRef.current);
       }
+      this.scrollIntoViewIfNeeded(blockKey);
     }
 
     componentDidUpdate() {
@@ -178,7 +199,7 @@ const createBaseComponent = ({
 
     onComponentLinkChange = linkData => {
       if (!linkData) {
-        this.updateLinkData(null);
+        this.removeLinkData();
         return;
       }
       const { url, anchor, target, rel } = linkData;
@@ -199,6 +220,13 @@ const createBaseComponent = ({
         this.updateComponentConfig({ spoiler: data });
       }
     };
+
+    removeLinkData() {
+      const componentData = pubsub.get('componentData');
+      const { config } = componentData;
+      const { link: _, ...rest } = config;
+      pubsub.set('componentData', { ...componentData, config: { ...rest } });
+    }
 
     updateLinkData = link => {
       pubsub.update('componentData', { config: { link: null } }); // clean the link data (prevent deep merging bug with anchor/link)

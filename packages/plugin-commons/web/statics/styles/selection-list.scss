@@ -27,9 +27,9 @@
 }
 
 .selectionListOption_selected {
-  color: $action-color-fallback;
-  background-color: rgba($action-color-fallback-tuple, 0.1);
+  color: $settings-action-color-fallback;
+  background-color: rgba($settings-action-color-fallback-tuple, 0.1);
   &.selectionListOption {
-    background-color: rgba($action-color-fallback-tuple, 0.1);
+    background-color: rgba($settings-action-color-fallback-tuple, 0.1);
   }
 }

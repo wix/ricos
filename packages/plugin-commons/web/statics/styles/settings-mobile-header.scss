@@ -12,10 +12,10 @@
       position: fixed;
       display: block;
       padding: 0 9px;
-      background: $action-color-fallback;
+      background: $settings-action-color-fallback;
     }
   }
-  
+
   .headerPlaceholder {
     display: block;
     position: relative;
@@ -41,7 +41,7 @@
     justify-content: space-between;
     padding: 0 5px;
     background: $background-color;
-    .button{
+    .button {
       padding: 14px 12px 15px 18px;
       font-size: 16px;
     }
@@ -82,7 +82,7 @@
     cursor: pointer;
 
     &:hover {
-      background: $action-color-fallback;
+      background: $settings-action-color-fallback;
       color: white;
     }
   }
@@ -100,7 +100,7 @@
       position: absolute;
       width: 100%;
     }
-    
+
     .headerPlaceholder {
       display: none;
     }
@@ -108,6 +108,5 @@
     .menu {
       position: absolute;
     }
-
   }
 }

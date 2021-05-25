@@ -26,14 +26,21 @@ function handleText(text: string, maxTextLength: number) {
   return content;
 }
 
-const TwitterButton: FunctionComponent<{ selectedText: string }> = ({ selectedText }) => {
+const TwitterButton: FunctionComponent<{
+  selectedText: string;
+  onClick?: (selectedText: string) => void;
+}> = ({ selectedText, onClick }) => {
+  const handleOnClick = selectedText => {
+    onClick?.(selectedText);
+    openTwitter(selectedText);
+  };
   return (
     <button
       data-hook="twitter-button"
-      className={styles.option}
-      onClick={() => openTwitter(selectedText)}
+      className={styles.button}
+      onClick={() => handleOnClick(selectedText)}
     >
-      {<Twitter className={styles.tweet} />}
+      <Twitter />
     </button>
   );
 };

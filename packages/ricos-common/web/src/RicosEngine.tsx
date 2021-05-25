@@ -79,6 +79,7 @@ export class RicosEngine extends Component<EngineProps> {
       _rcProps,
       children,
       isMobile,
+      addAnchors,
       toolbarSettings,
       modalSettings = {},
       isPreviewExpanded,
@@ -108,11 +109,12 @@ export class RicosEngine extends Component<EngineProps> {
       onModalClose,
     } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
-    const { anchorTarget, relValue } = linkSettings;
+    const { anchorTarget, relValue, customAnchorScroll } = linkSettings;
     const disableDownload = mediaSettings?.disableDownload || disableRightClick;
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
     const ricosPropsToMerge: RichContentProps = {
+      addAnchors,
       isMobile,
       maxTextLength,
       textToolbarType:
@@ -132,6 +134,7 @@ export class RicosEngine extends Component<EngineProps> {
       disabled: pauseMedia,
       anchorTarget,
       relValue,
+      customAnchorScroll,
       textAlignment,
       onAtomicBlockFocus,
     };

@@ -84,6 +84,18 @@ export interface PaletteConfig {
    * Default: `false`
    */
   contentBgColor?: boolean;
+  /** Override the `actionColor` of floating panels, toolbars & settings modals.
+   *
+   * **Note:** `RicosEditor` only.
+   * @default actionColor
+   */
+  settingsActionColor?: string;
+  /** Override the `actionColor` of plugin when focused / clicked.
+   *
+   * **Note:** `RicosEditor` only.
+   * @default actionColor
+   */
+  focusActionColor?: string;
 }
 
 export interface ThemeStrategyArgs {
