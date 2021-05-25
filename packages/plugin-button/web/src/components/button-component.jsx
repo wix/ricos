@@ -56,7 +56,9 @@ ButtonComponent.propTypes = {
   settings: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
   theme: PropTypes.object.isRequired,
+  themeData: PropTypes.object.isRequired,
   helpers: PropTypes.object,
+  config: PropTypes.object,
 };
 
 export default ButtonComponent;
