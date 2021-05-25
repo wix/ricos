@@ -8,7 +8,7 @@ import {
   Decoration_Type,
   Node_Type,
   PluginContainerData_Alignment,
-  PluginContainerData_Width_Type,
+  PluginContainerData_Width,
 } from 'ricos-schema';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
@@ -37,7 +37,7 @@ describe('migrate to draft', () => {
     key: 'eoba3',
     imageData: {
       containerData: {
-        width: { type: PluginContainerData_Width_Type.CONTENT },
+        width: PluginContainerData_Width.CONTENT,
         alignment: PluginContainerData_Alignment.CENTER,
       },
       image: {

@@ -3,7 +3,6 @@ import {
   Node,
   Node_Type,
   Decoration_Type,
-  PluginContainerData_Width_Type,
   Link,
   Link_Target,
   ImageData,
@@ -75,17 +74,12 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
 };
 
 const convertContainerData = (data: { containerData?: PluginContainerData; config }) => {
-  const { width, alignment, spoiler, customHeight } = data.containerData || {};
+  const { width, customWidth, alignment, spoiler, customHeight } = data.containerData || {};
   data.config = Object.assign(
     {},
     data.config,
-    width?.type && {
-      size:
-        width.type === PluginContainerData_Width_Type.CUSTOM
-          ? 'inline'
-          : constantToKebabCase(width.type),
-    },
-    width?.customWidth && { width: width.customWidth },
+    width && { size: constantToKebabCase(width) },
+    customWidth && { width: customWidth },
     customHeight && { height: customHeight },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {

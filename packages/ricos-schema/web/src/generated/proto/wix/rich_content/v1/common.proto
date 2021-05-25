@@ -50,28 +50,25 @@ message PluginContainerData {
         google.protobuf.StringValue description = 1;
         google.protobuf.StringValue button_text = 2;
     }
-    message Width {
-        enum Type {
-            CONTENT = 0;
-            SMALL = 1;
-            ORIGINAL = 2;
-            FULL_WIDTH = 3;
-            CUSTOM = 4;
-        }
-        Type type = 1;
-        google.protobuf.Int32Value custom_width = 2;
+    enum Width {
+        CONTENT = 0;
+        SMALL = 1;
+        ORIGINAL = 2;
+        FULL_WIDTH = 3;
     }
-
     enum Alignment {
         CENTER = 0;
         LEFT = 1;
         RIGHT = 2;
     }
 
-    Width width = 1;
-    Alignment alignment = 2;
-    Spoiler spoiler = 3;
-    google.protobuf.Int32Value custom_height = 4;
+    oneof data {
+        Width width = 1;
+        google.protobuf.Int32Value custom_width = 2;
+    }
+    Alignment alignment = 3;
+    Spoiler spoiler = 4;
+    google.protobuf.Int32Value custom_height = 5;
 }
 
 message FileSource {
