@@ -1,4 +1,3 @@
-import { translate } from 'react-i18next';
 import {
   BUTTONS,
   SizeSmallLeftIcon,
@@ -17,7 +16,7 @@ import {
   SRC_TYPE_URL,
 } from '../defaults';
 import EditPanel from './HtmlEditPanel';
-import { CreateInlineButtons, GetEditorBounds } from 'wix-rich-content-common';
+import { CreateInlineButtons, GetEditorBounds, translate } from 'wix-rich-content-common';
 import { HtmlPluginEditorConfig } from '../types';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
