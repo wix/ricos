@@ -1,3 +1,4 @@
+import { AugmentedRequired } from 'utility-types/dist/mapped-types';
 import { CSSProperties } from 'react';
 
 export interface ThemeUtils {
@@ -29,8 +30,14 @@ export interface PaletteColors {
    * Therefore this color should remain relatively dark. */
   fallbackColor?: string;
 }
+
+export interface ThemeData {
+  colors?: PaletteColors;
+  utils: ThemeUtils;
+  customStyles?: RicosCustomStyles;
+}
 export interface ThemeGeneratorFunction {
-  (colors: PaletteColors, utils: ThemeUtils, customStyles?: RicosCustomStyles): void;
+  (themeData: AugmentedRequired<ThemeData, 'colors'>): void;
 }
 
 export interface CustomTextualStyle {

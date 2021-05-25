@@ -1,10 +1,9 @@
-import { PaletteColors, RicosCustomStyles, ThemeUtils } from 'wix-rich-content-common';
-import { DEFAULT_CONFIG, COLORS } from './constants';
+import { ThemeGeneratorFunction } from 'wix-rich-content-common';
+import { DEFAULT_CONFIG } from './constants';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const WRAPPER_PALETTE: any = {};
 export const DEFAULT_PALETTE = ['#FFFFFF', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
-export const getColors = () => ({ ...COLORS, ...WRAPPER_PALETTE });
 export const getDefaultComponentData = (isLinkButton, rel, target) => {
   const linkButtonSettings = isLinkButton ? { url: '', rel, target } : {};
   return {
@@ -24,11 +23,7 @@ export const getDefaultComponentData = (isLinkButton, rel, target) => {
   };
 };
 
-export const theme = (
-  colors: PaletteColors,
-  utils: ThemeUtils,
-  customStyles: RicosCustomStyles = {}
-) => {
+export const theme: ThemeGeneratorFunction = ({ colors, utils, customStyles = {} }) => {
   const { textColor, bgColor, actionColor } = colors;
   const { isBright } = utils;
   const buttonColor = customStyles.button?.color || actionColor;

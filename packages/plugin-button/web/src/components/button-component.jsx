@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { normalizeUrl } from 'wix-rich-content-common';
 import { alignmentClassName, sizeClassName } from '../classNameStrategies';
 import ButtonViewer from './button-viewer';
 
-class ButtonComponent extends PureComponent {
+class ButtonComponent extends Component {
   static alignmentClassName = (componentData, theme, styles, isMobile) =>
     alignmentClassName(componentData, theme, styles, isMobile);
 
@@ -31,7 +31,7 @@ class ButtonComponent extends PureComponent {
     const style = {
       border: '0px solid blue',
       color: this.props.settings.colors?.color1 || '#FEFDFD',
-      backgroundColor: this.props.settings.colors?.color8 || '#0261FF',
+      background: this.props.settings.colors?.color8 || '#0261FF',
       borderColor: this.props.settings.colors?.color8 || '#0261FF',
       ...this.props.style,
       ...button.design,

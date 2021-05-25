@@ -17,6 +17,74 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+
+- `plugin-button`
+  - [#2537](https://github.com/wix-incubator/rich-content/pull/2537) remove button presets
+### :house: Internal
+
+- `common`
+  - [#2403](https://github.com/wix-incubator/rich-content/pull/2403) `ThemeData` object is now passed inside `config`, available for plugins
+
+</details>
+<hr/>
+
+## 8.36.4 (May 25, 2021)
+
+### :nail_care: Polish
+
+- `ricos-schema`
+  - [#2520](https://github.com/wix-incubator/rich-content/pull/2520) added a style property to Node, representing node-level styles
+- `ricos-content`
+  - [#2520](https://github.com/wix-incubator/rich-content/pull/2520) added a style property to Node, representing node-level styles
+
+### :house: Internal
+
+- `ricos-viewer`
+  - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onViewerLoaded`
+- `ricos-editor`
+  - [#2534](https://github.com/wix-incubator/rich-content/pull/2534) unit test - `onOpenEditorSuccess`
+
+## 8.36.3 (May 23, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-viewer`
+  - [#2531](https://github.com/wix-incubator/rich-content/pull/2531) callbacks - `onViewerLoaded` not called
+
+## 8.36.2 (May 23, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2525](https://github.com/wix-incubator/rich-content/pull/2525) fix onPluginAdd timing
+  - [#2527](https://github.com/wix-incubator/rich-content/pull/2527) fix onPluginAddStep's `pluginDetails` (blockKey)
+- `undo-redo`
+  - [#2530](https://github.com/wix-incubator/rich-content/pull/2530) fix mobile buttons tooltip
+
+### :house: Internal
+
+- `gallery`
+  - [#2463](https://github.com/wix/ricos/pull/2463) bump `ProGallery` to v3.1.14
+
+## 8.36.1 (May 20, 2021)
+
+### :bug: Bug Fix
+
+- `text selection toolbar`
+  - [#2522](https://github.com/wix-incubator/rich-content/pull/2522) import textSelectionToolbar styles from ricos viewer
+
+## 8.36.0 (May 19, 2021)
+
+### :rocket: New Feature
+
+- `editor viewer`
+  - [#2459](https://github.com/wix-incubator/rich-content/pull/2459) added `customAnchorScroll` prop support through `linkSettings`
+- `plugin-commons`
+  - [#2519](https://github.com/wix-incubator/rich-content/pull/2519) `uiSettings.linkPanel.externalPopups` config for link popup appearance
+- `text-selection-toolbar`
+  - [#2508](https://github.com/wix-private/wix-ricos/pull/2508) add textSelectionToolbar api to ricos-viewer
+
 ### :bug: Bug Fix
 
 - `*`
@@ -26,9 +94,6 @@
 - `plugin-commons`
   - [#2514](https://github.com/wix-incubator/rich-content/pull/2514) check if plugin container exists before using it
   - [#2516](https://github.com/wix-incubator/rich-content/pull/2516) set a threshold for waiting for a component to load (for scrolling)
-
-</details>
-<hr/>
 
 ## 8.35.0 (May 17, 2021)
 
@@ -266,7 +331,7 @@
 ### :rocket: New Feature
 
 - `schema`
-  - [#2373](https://github.com/wix/ricos/pull/2373) rich cotnent schema set to version 1 🥇
+  - [#2373](https://github.com/wix/ricos/pull/2373) rich content schema set to version 1 🥇
 - `ricos-content`
   - [#2382](https://github.com/wix/ricos/pull/2382) add `delimiter` option to `toPlainText`
 - `button`

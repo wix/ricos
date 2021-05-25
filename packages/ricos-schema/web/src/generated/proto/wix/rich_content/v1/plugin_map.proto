@@ -13,25 +13,19 @@ import "google/protobuf/wrappers.proto";
 
 message MapData {
   PluginContainerData container_data = 1;
-  google.protobuf.Int32Value zoom = 2;
-  MapConfig config = 3;
-  MapSettings mapSettings = 4;
-}
-
-message MapConfig {
-  google.protobuf.Int32Value height = 3;
-  google.protobuf.Int32Value width = 4;
+  MapSettings mapSettings = 2;
 }
 
 message MapSettings {
   google.protobuf.StringValue address = 1;
-  google.protobuf.BoolValue isDraggingAllowed = 2;
-  google.protobuf.BoolValue isMarkerShown = 3;
-  google.protobuf.BoolValue isStreetViewControlShown = 4;
-  google.protobuf.BoolValue isZoomControlShown = 5;
+  google.protobuf.BoolValue draggable = 2;
+  google.protobuf.BoolValue marker = 3;
+  google.protobuf.BoolValue streetViewControl = 4;
+  google.protobuf.BoolValue zoomControl = 5;
   google.protobuf.DoubleValue lat = 6;
   google.protobuf.DoubleValue lng = 7;
-  google.protobuf.StringValue locationDisplayName = 8;
-  google.protobuf.StringValue mode = 9;
-  google.protobuf.Int32Value zoom = 10;
+  google.protobuf.StringValue locationName = 8;
+  google.protobuf.BoolValue viewModeControl = 9;
+  google.protobuf.Int32Value initialZoom = 10;
+  google.protobuf.StringValue mapType = 11;
 }

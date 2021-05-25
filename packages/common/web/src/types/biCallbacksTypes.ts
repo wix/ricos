@@ -4,12 +4,33 @@ interface biCallbackParams {
   version?: string;
 }
 
+export type PluginAddParams =
+  | {
+      // Table
+      columns: number;
+      rows: number;
+    }
+  | {
+      // Embeds
+      link: string;
+      service: string;
+    }
+  | {
+      // Wix Embed
+      id: unknown;
+    }
+  | {
+      // Poll
+      type: 'text in a list' | 'text & main image' | 'images in a grid';
+    };
+
 type EntryType = ToolbarType;
 export interface onPluginAddStepArgs extends biCallbackParams {
   pluginId: string;
   pluginDetails: unknown;
   entryPoint: ToolbarType;
   entryType: EntryType;
+  params?: PluginAddParams;
   step: 'FileUploadDialog' | 'PluginModal';
 }
 
@@ -24,16 +45,12 @@ export interface onViewerLoadedArgs extends biCallbackParams {
   version: string;
 }
 
-export interface PluginAddSuccessParams {
-  rows?: number;
-  columns?: number;
-}
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
   onPluginAddSuccess?(
     pluginId: string,
     entryPoint: string,
-    params: PluginAddSuccessParams,
+    params: PluginAddParams,
     version: string
   ): void;
   onPluginAddStep?(params: onPluginAddStepArgs): void;
