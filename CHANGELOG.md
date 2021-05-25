@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+
+- `plugin-button`
+  - [#2537](https://github.com/wix-incubator/rich-content/pull/2537) remove button presets
+
 </details>
 <hr/>
 
