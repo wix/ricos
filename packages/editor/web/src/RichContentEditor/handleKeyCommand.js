@@ -1,10 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import {
-  COMMANDS,
-  mergeBlockData,
-  RichUtils,
-  indentSelectedBlocks,
-} from 'wix-rich-content-editor-common';
+import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 import handleTabCommand from './handleTabCommand';
