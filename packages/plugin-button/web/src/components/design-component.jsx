@@ -37,28 +37,7 @@ class DesignComponent extends PureComponent {
   }
 
   componentDidUpdate = () => {
-    const { design } = this.state;
-    if (JSON.stringify(this.originalDesign) !== JSON.stringify(design)) {
-      if (this.isColorChanged()) {
-        this.props.onDesignChange(design);
-      } else {
-        this.props.onDesignChange({
-          borderWidth: design.borderWidth,
-          padding: design.padding,
-          borderRadius: design.borderRadius,
-          activeButton: design.activeButton,
-        });
-      }
-    }
-  };
-
-  isColorChanged = () => {
-    const { design } = this.state;
-    return (
-      design.color !== this.originalDesign.color ||
-      design.borderColor !== this.originalDesign.borderColor ||
-      design.background !== this.originalDesign.background
-    );
+    this.props.onDesignChange(this.state.design);
   };
 
   onBackgroundColorAdded = color => {
