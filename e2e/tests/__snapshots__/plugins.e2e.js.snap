@@ -4469,7 +4469,7 @@ exports[`plugins > convert link to preview > with default config > should create
           "alignment": "center",
           "link": {
             "rel": "",
-            "target": "_top",
+            "target": "_self",
             "url": "www.wix.com"
           },
           "size": "content"
@@ -4528,7 +4528,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
           "alignment": "center",
           "link": {
             "rel": "",
-            "target": "_top",
+            "target": "_self",
             "url": "www.mockUrl.com"
           },
           "size": "content",
@@ -4580,7 +4580,7 @@ exports[`plugins > convert link to preview > with custom config > should not cre
   "entityMap": {
     "0": {
       "data": {
-        "target": "_top",
+        "target": "_self",
         "url": "www.wix.com"
       },
       "mutability": "MUTABLE",
@@ -4626,7 +4626,7 @@ exports[`plugins > convert link to preview > with custom config > should not emb
   "entityMap": {
     "0": {
       "data": {
-        "target": "_top",
+        "target": "_self",
         "url": "www.mockUrl.com"
       },
       "mutability": "MUTABLE",
@@ -5201,7 +5201,7 @@ exports[`plugins > spoiler > check text spoilers in editor and reveal it in view
     "0": {
       "data": {
         "rel": "",
-        "target": "_top",
+        "target": "_self",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
