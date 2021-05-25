@@ -9,14 +9,23 @@ import { isEmpty } from 'lodash';
 class LinkPanelContainer extends PureComponent {
   constructor(props) {
     super(props);
-    const { url, anchor, targetBlank, rel, editorState, linkTypes, hideUrlInput } = this.props;
+    const {
+      url,
+      anchor,
+      targetBlank,
+      rel,
+      editorState,
+      linkTypes,
+      hideUrlInput,
+      anchorableBlocksData,
+    } = this.props;
     this.renderBasicLinkPanel =
       !linkTypes ||
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
       hideUrlInput;
     this.anchorableBlocksData = !this.renderBasicLinkPanel
-      ? getAnchorableBlocks(editorState)
+      ? anchorableBlocksData || getAnchorableBlocks(editorState)
       : undefined;
     this.state = {
       linkPanelValues: { url, targetBlank, rel },
@@ -173,7 +182,8 @@ class LinkPanelContainer extends PureComponent {
 }
 
 LinkPanelContainer.propTypes = {
-  editorState: PropTypes.object.isRequired,
+  editorState: PropTypes.object.isRequired, // will be removed when all usages of this class will pass anchorableBlocksData
+  anchorableBlocksData: PropTypes.object,
   url: PropTypes.string,
   anchor: PropTypes.string,
   targetBlank: PropTypes.bool,
