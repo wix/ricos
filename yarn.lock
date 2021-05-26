@@ -3861,6 +3861,14 @@
     telejson "^3.2.0"
     util-deprecate "^1.0.2"
 
+"@stylable/build-tools@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@stylable/build-tools/-/build-tools-4.2.3.tgz#73641c31c6ab54c18cd1bef57774ef1595688d57"
+  integrity sha512-Uq7Iz74mtUR2Hr714Sivcn0ftPb2sxa2SDevIRWUMigHyHwYKNLkiqZlXXiFvVdmfMyBnPnOZqCorgZOXNYTHw==
+  dependencies:
+    "@stylable/core" "^4.2.3"
+    find-config "^1.0.0"
+
 "@stylable/core@1.4.0", "@stylable/core@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@stylable/core/-/core-1.4.0.tgz#5f32ccea0ad6de1853f24930bd10402f151f2340"
@@ -3898,6 +3906,26 @@
     postcss "^8.2.6"
     postcss-js "^3.0.3"
     postcss-nested "^5.0.3"
+    postcss-safe-parser "^5.0.2"
+    postcss-selector-matches "^4.0.0"
+    postcss-value-parser "^4.1.0"
+    toky "^0.1.0"
+
+"@stylable/core@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@stylable/core/-/core-4.2.3.tgz#96cd5ae96f6dc818cf0b6c797708fc02513eb9a0"
+  integrity sha512-BzRf+k4XCgR2Xkw4pyET3SP+hoBv3J42JEGnJPXCX3J8P3KXrg+pTfZan+qhsD+ouzDNMd7HMHhD8svHfc4l3A==
+  dependencies:
+    css-selector-tokenizer "^0.7.3"
+    deindent "^0.1.0"
+    enhanced-resolve "^5.8.2"
+    is-vendor-prefixed "^4.0.0"
+    jest-docblock "^26.0.0"
+    lodash.clonedeep "^4.5.0"
+    lodash.clonedeepwith "^4.5.0"
+    postcss "^8.2.15"
+    postcss-js "^3.0.3"
+    postcss-nested "^5.0.5"
     postcss-safe-parser "^5.0.2"
     postcss-selector-matches "^4.0.0"
     postcss-value-parser "^4.1.0"
@@ -3942,6 +3970,13 @@
   dependencies:
     "@stylable/core" "^3.12.3"
 
+"@stylable/module-utils@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@stylable/module-utils/-/module-utils-4.2.3.tgz#006da546185c83346860cdde7607e2be77854646"
+  integrity sha512-PDKoTAYbIVUNFbrqupgDrx8fkjPTmgBlND4qoefmVRSkJ5zqsFNbQvj2BQXCfw1iY6BGrw5sV00WtzcsPuSmiQ==
+  dependencies:
+    "@stylable/core" "^4.2.3"
+
 "@stylable/node@1.4.0", "@stylable/node@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@stylable/node/-/node-1.4.0.tgz#e1924dbcca1ed56f8eff1f21073881514ac6c73d"
@@ -3969,6 +4004,15 @@
     "@stylable/module-utils" "^3.12.3"
     find-config "^1.0.0"
 
+"@stylable/node@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@stylable/node/-/node-4.2.3.tgz#053fcc026a3fc3d420e8c99d80b6ffa7f27515f3"
+  integrity sha512-Z9I0cmGrfrlpgYYBwjGudRGP616jlEf9jOmGLS3dwLGODrs39hBZigMtQYONb061q5zrQH1njfieCfPC1HZiVw==
+  dependencies:
+    "@stylable/core" "^4.2.3"
+    "@stylable/module-utils" "^4.2.3"
+    find-config "^1.0.0"
+
 "@stylable/optimizer@^3.6.2":
   version "3.12.3"
   resolved "https://registry.yarnpkg.com/@stylable/optimizer/-/optimizer-3.12.3.tgz#ffd0738b47864bde39fdcff23adb987c0a0f558a"
@@ -3977,6 +4021,28 @@
     "@stylable/core" "^3.12.3"
     csso "^4.2.0"
     postcss "^8.2.6"
+
+"@stylable/optimizer@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@stylable/optimizer/-/optimizer-4.2.3.tgz#16d135cb97fb9aa3051674ca18f47bdca5bf8f93"
+  integrity sha512-jNf/K1SU5oc8I7ftgNbLruVxmQfm2G41YqYpLylrJCH1QjAcZApZCwmGiie4Seb2DEb+u6BiyFW2WXflZh4nvg==
+  dependencies:
+    "@stylable/core" "^4.2.3"
+    csso "^4.2.0"
+    postcss "^8.2.15"
+
+"@stylable/rollup-plugin@4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@stylable/rollup-plugin/-/rollup-plugin-4.2.3.tgz#7973cf576255c856f57e4f8389d98986a1816858"
+  integrity sha512-wzhEtlsyJILSs3Yje90MjhSiMiiltShn/hKlCAmNOMdKeSnQo7/lp+/AP96NVptQQJWr3Ad3trthuiWPZ3pYng==
+  dependencies:
+    "@stylable/build-tools" "^4.2.3"
+    "@stylable/node" "^4.2.3"
+    "@stylable/optimizer" "^4.2.3"
+    "@stylable/runtime" "^4.2.3"
+    decache "4.6.0"
+    mime "^2.5.2"
+    toky "^0.1.0"
 
 "@stylable/runtime@^1.4.0":
   version "1.4.0"
@@ -3987,6 +4053,11 @@
   version "3.12.3"
   resolved "https://registry.yarnpkg.com/@stylable/runtime/-/runtime-3.12.3.tgz#87e100c86dc5c7e1cc8788d6daa42a18e1014c57"
   integrity sha512-yf7rQUphWKImso57OZxOO7/vkwl7B/NTHmn0yowzPdB5vo+jp103u3H9u5nqByUuERDK5xhqjZdwwTmlaZFW3A==
+
+"@stylable/runtime@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@stylable/runtime/-/runtime-4.2.3.tgz#218a072fc55b7516066d26af6cee3fb0163e7c1a"
+  integrity sha512-z58nCsPRkYM1H1wbRurOFoIIApxW7GEW3LmX7IXFQJx34yoZXxxcdHYL87PHfMwutWJYY7/qnakOUHn0q9MLNg==
 
 "@stylable/uni-driver@^2.4.1":
   version "2.5.3"
@@ -7658,6 +7729,11 @@ caller-path@^2.0.0:
   dependencies:
     caller-callsite "^2.0.0"
 
+callsite@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
+  integrity sha1-KAOY5dZkvXQDi28JBRU+borxvCA=
+
 callsites@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-2.0.0.tgz#06eb84f00eea413da86affefacbffb36093b3c50"
@@ -9785,6 +9861,13 @@ debuglog@^1.0.1:
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
   integrity sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=
 
+decache@4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/decache/-/decache-4.6.0.tgz#87026bc6e696759e82d57a3841c4e251a30356e8"
+  integrity sha512-PppOuLiz+DFeaUvFXEYZjLxAkKiMYH/do/b/MxpDe/8AgKBi5GhZxridoVIbBq72GDbL36e4p0Ce2jTGUwwU+w==
+  dependencies:
+    callsite "^1.0.0"
+
 decamelize-keys@^1.0.0, decamelize-keys@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/decamelize-keys/-/decamelize-keys-1.1.0.tgz#d171a87933252807eb3cb61dc1c1445d078df2d9"
@@ -10669,6 +10752,14 @@ enhanced-resolve@^4.0.0, enhanced-resolve@^4.1.0, enhanced-resolve@^4.1.1, enhan
     graceful-fs "^4.1.2"
     memory-fs "^0.5.0"
     tapable "^1.0.0"
+
+enhanced-resolve@^5.8.2:
+  version "5.8.2"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.8.2.tgz#15ddc779345cbb73e97c611cd00c01c1e7bf4d8b"
+  integrity sha512-F27oB3WuHDzvR2DOGNTaYy0D5o0cnrv8TeI482VM4kYgQd/FT9lUQwuNsJ0oOHtBUq7eiW5ytqzp7nBFknL+GA==
+  dependencies:
+    graceful-fs "^4.2.4"
+    tapable "^2.2.0"
 
 enquire.js@^2.1.6:
   version "2.1.6"
@@ -12308,6 +12399,14 @@ focus-lock@^0.8.1:
   integrity sha512-/LFZOIo82WDsyyv7h7oc0MJF9ACOvDRdx9rWPZ2pgMfNWu/z8hQDBtOchuB/0BVLmuFOZjV02YwUVzNsWx/EzA==
   dependencies:
     tslib "^1.9.3"
+
+focus-trap@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-5.1.0.tgz#64a0bfabd95c382103397dbc96bfef3a3cf8e5ad"
+  integrity sha512-CkB/nrO55069QAUjWFBpX6oc+9V90Qhgpe6fBWApzruMq5gnlh90Oo7iSSDK7pKiV5ugG6OY2AXM5mxcmL3lwQ==
+  dependencies:
+    tabbable "^4.0.0"
+    xtend "^4.0.1"
 
 focus-trap@~2.4.6:
   version "2.4.6"
@@ -17016,7 +17115,7 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lodash-es@^4.2.1:
+lodash-es@^4.17.15, lodash-es@^4.2.1:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
@@ -17891,7 +17990,7 @@ mime@1.6.0, mime@^1.2.11, mime@^1.3.4, mime@^1.4.1:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-mime@^2.0.3, mime@^2.4.4:
+mime@^2.0.3, mime@^2.4.4, mime@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.5.2.tgz#6e3dc6cc2b9510643830e5f19d5cb753da5eeabe"
   integrity sha512-tqkh47FzKeCPD2PUiPB6pkbMzsCasjxAfC62/Wap5qrUWcb+sFasXUC5I3gYM5iBM8v/Qpn4UK0x+j0iHyFPDg==
@@ -18315,6 +18414,11 @@ nanoid@^3.1.22:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.22.tgz#b35f8fb7d151990a8aebd5aa5015c03cf726f844"
   integrity sha512-/2ZUaJX2ANuLtTvqTlgqBQNJoQO398KyJgZloL0PZkC0dpysjncRUPsFe3DUPzz/y3h+u7C46np8RMuvF3jsSQ==
 
+nanoid@^3.1.23:
+  version "3.1.23"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
+  integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -18648,6 +18752,11 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
+
+normalize-scroll-left@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/normalize-scroll-left/-/normalize-scroll-left-0.2.1.tgz#978fdd04bfeb2d3543e16696814285557c127502"
+  integrity sha512-YanMJCtsykxVQuWiwQR531bbyPtMt/jpUKy2XcVVe/oHiDgYme0NmuEZfceLeZhFbrQtO/GS/9KvWbSfDGRblA==
 
 normalize-url@1.9.1, normalize-url@^1.9.1:
   version "1.9.1"
@@ -20235,7 +20344,7 @@ postcss-nested@^4.1.2:
     postcss "^7.0.32"
     postcss-selector-parser "^6.0.2"
 
-postcss-nested@^5.0.3:
+postcss-nested@^5.0.3, postcss-nested@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/postcss-nested/-/postcss-nested-5.0.5.tgz#f0a107d33a9fab11d7637205f5321e27223e3603"
   integrity sha512-GSRXYz5bccobpTzLQZXOnSOfKl6TwVr5CyAQJUPub4nuRJSOECK5AqurxVgmtxP48p0Kc/ndY/YyS1yqldX0Ew==
@@ -20490,6 +20599,15 @@ postcss@^8.1.0, postcss@^8.1.6, postcss@^8.2.6:
   dependencies:
     colorette "^1.2.2"
     nanoid "^3.1.22"
+    source-map "^0.6.1"
+
+postcss@^8.2.15:
+  version "8.2.15"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.15.tgz#9e66ccf07292817d226fc315cbbf9bc148fbca65"
+  integrity sha512-2zO3b26eJD/8rb106Qu2o7Qgg52ND5HPjcyQiK2B98O388h43A448LCslC0dI2P97wCAQRJsFvwTRcXxTKds+Q==
+  dependencies:
+    colorette "^1.2.2"
+    nanoid "^3.1.23"
     source-map "^0.6.1"
 
 prefix-style@2.0.1:
@@ -21685,6 +21803,17 @@ react-reflex@^3.0.13:
     prop-types "^15.5.8"
     react-measure "^2.0.2"
 
+react-resize-detector@^4.1.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/react-resize-detector/-/react-resize-detector-4.2.3.tgz#7df258668a30bdfd88e655bbdb27db7fd7b23127"
+  integrity sha512-4AeS6lxdz2KOgDZaOVt1duoDHrbYwSrUX32KeM9j6t9ISyRphoJbTRCMS1aPFxZHFqcCGLT1gMl3lEcSWZNW0A==
+  dependencies:
+    lodash "^4.17.15"
+    lodash-es "^4.17.15"
+    prop-types "^15.7.2"
+    raf-schd "^4.0.2"
+    resize-observer-polyfill "^1.5.1"
+
 react-scroll-sync@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/react-scroll-sync/-/react-scroll-sync-0.8.0.tgz#61fabed2afc47d41e6938819d620799da3610548"
@@ -22805,7 +22934,7 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.42.3, rollup@^2.47.0:
+rollup@2.47.0, rollup@^2.42.3:
   version "2.47.0"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.47.0.tgz#9d958aeb2c0f6a383cacc0401dff02b6e252664d"
   integrity sha512-rqBjgq9hQfW0vRmz+0S062ORRNJXvwRpzxhFXORvar/maZqY6za3rgQ/p1Glg+j1hnc1GtYyQCPiAei95uTElg==
@@ -24532,6 +24661,11 @@ tabbable@^1.0.3:
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-1.1.3.tgz#0e4ee376f3631e42d7977a074dbd2b3827843081"
   integrity sha512-nOWwx35/JuDI4ONuF0ZTo6lYvI0fY0tZCH1ErzY2EXfu4az50ZyiUX8X073FLiZtmWUVlkRnuXsehjJgCw9tYg==
 
+tabbable@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-4.0.0.tgz#5bff1d1135df1482cf0f0206434f15eadbeb9261"
+  integrity sha512-H1XoH1URcBOa/rZZWxLxHCtOdVUEev+9vo5YdYhC9tCY4wnybX+VQrCYuy9ubkg69fCBxCONJOSLGfw0DWMffQ==
+
 table@^5.2.3:
   version "5.4.6"
   resolved "https://registry.yarnpkg.com/table/-/table-5.4.6.tgz#1292d19500ce3f86053b05f0e8e7e4a3bb21079e"
@@ -24561,6 +24695,11 @@ tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
   integrity sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==
+
+tapable@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.0.tgz#5c373d281d9c672848213d0e037d1c4165ab426b"
+  integrity sha512-FBk4IesMV1rBxX2tfiK8RAmogtWn53puLOQlvO8XuwlgxcYbP4mVPS9Ph4aeamSyyVjOl24aYWAuc8U5kCVwMw==
 
 tar@^2.0.0:
   version "2.2.2"
@@ -27051,6 +27190,56 @@ wix-style-react@^9.0.0:
     wix-ui-test-utils "^1.0.178"
     yoshi-stylable-dependencies "^4.86.0"
 
+wix-style-react@^9.114.0:
+  version "9.114.0"
+  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.114.0.tgz#292b3c74c67b877dd3b45a466044a87f67b6a9b0"
+  integrity sha512-e8DbXxc0xgZ59wg3mdxhMp9J5NpvS77Cj8Zt0yrrT9BqdIPNeyrZ6MpGonVRdQ750z9bFjkjVScCEnkVHBiqsA==
+  dependencies:
+    "@babel/runtime" "^7.12.18"
+    "@date-fns/upgrade" "^1.0.3"
+    "@loadable/component" "^5.14.1"
+    "@stylable/dom-test-kit" "^3.12.2"
+    "@types/color" "^2.0.1"
+    bootstrap-sass "^3.4.1"
+    chart.js "^2.9.4"
+    classnames "^2.2.6"
+    color "^2.0.1"
+    css-element-queries "^1.2.3"
+    d3 "^6.3.1"
+    date-fns "^2.16.1"
+    difference "^1.0.2"
+    dnd-core "^2.6.0"
+    draft-convert "^2.1.10"
+    draft-js "^0.11.7"
+    draft-js-export-html "^1.4.1"
+    gradient-parser "^0.1.5"
+    hoist-non-react-methods "^1.1.0"
+    howler "^2.2.1"
+    lodash "4.17.19"
+    moment "^2.29.1"
+    omit "^1.0.1"
+    prop-types "^15.7.2"
+    rc-slider "9.3.0"
+    react-chartjs-2 "^2.11.1"
+    react-day-picker "^7.4.8"
+    react-dnd "^2.6.0"
+    react-dnd-html5-backend "^5.0.1"
+    react-modal "3.10.1"
+    react-motion "^0.5.2"
+    react-portal "^4.2.1"
+    react-scroll-sync "^0.8.0"
+    react-slick "^0.27.13"
+    react-transition-group "^2.9.0"
+    react-window "^1.8.6"
+    shallowequal "^1.1.0"
+    slick-carousel "^1.8.1"
+    wix-animations "^1.0.407"
+    wix-eventually "^2.3.0"
+    wix-ui-core "^3.0.186"
+    wix-ui-icons-common "^2.0.308"
+    wix-ui-test-utils "^1.0.178"
+    yoshi-stylable-dependencies "^4.86.0"
+
 wix-tpa-style-loader@1.0.13:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/wix-tpa-style-loader/-/wix-tpa-style-loader-1.0.13.tgz#71ef076aa4f412f099b6310fbdfe4285389a5c77"
@@ -27106,6 +27295,23 @@ wix-ui-test-utils@^1.0.151, wix-ui-test-utils@^1.0.178:
     "@unidriver/jsdom-react" "^1.2.1"
     "@unidriver/protractor" "^1.1.5"
     "@unidriver/puppeteer" "^1.1.2"
+
+wix-ui-tpa@^2.43.0:
+  version "2.43.0"
+  resolved "https://registry.yarnpkg.com/wix-ui-tpa/-/wix-ui-tpa-2.43.0.tgz#bacd68e773ac380e353179e5567acafdfef47e34"
+  integrity sha512-i693enVjpA5on44CZf3FNZ2E7D4tvUUPbMyli6QrsI8GsGNPzHle9FZ0DXBo2t+G6mMHzXxZH6lJ4cbSYIuDvA==
+  dependencies:
+    "@stylable/dom-test-kit" "^3.12.2"
+    classnames "^2.2.6"
+    date-fns "^2.16.1"
+    focus-trap "^5.1.0"
+    lodash "^4.17.11"
+    normalize-scroll-left "^0.2.1"
+    react-resize-detector "^4.1.3"
+    wix-style-react "^9.114.0"
+    wix-ui-core "^3.0.186"
+    wix-ui-icons-common "^2.0.308"
+    yoshi-stylable-dependencies "^4.86.0"
 
 wnpm-ci@8.0.127:
   version "8.0.127"
