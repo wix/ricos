@@ -57,6 +57,7 @@
     "wix-rich-content-plugin-undo-redo": "8.36.6",
     "wix-rich-content-plugin-vertical-embed": "8.36.6",
     "wix-rich-content-plugin-video": "8.36.6",
-    "wix-rich-content-viewer": "8.36.6"
+    "wix-rich-content-viewer": "8.36.6",
+    "wix-rich-content-ui-components": "8.36.6"  
   }
 }
