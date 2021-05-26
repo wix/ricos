@@ -17,16 +17,30 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.36.6 (May 26, 2021)
+
+### :bug: Bug Fix
+
+- `button`
+  - [#2545](https://github.com/wix-incubator/rich-content/pull/2545) Wire to palette colors when created
+
 ### :house: Internal
 
 - `template-atomic-plugin`
   - [#2547](https://github.com/wix-incubator/rich-content/pull/2547) Fixed lint issues when creating a new plugin
 
 - `ui-components`
-  - [#000](https://github.com/wix-incubator/rich-content/pull/000) new folder to concentrate all the ui components
+  - [#2549](https://github.com/wix-incubator/rich-content/pull/2549) new folder to concentrate all the ui components
 
 </details>
 <hr/>
+- `storybook`
+  - [#2548](https://github.com/wix-incubator/rich-content/pull/2548) button coverage
+- `e2e`
+  - [#2548](https://github.com/wix-incubator/rich-content/pull/2548) button coverage
 
 ## 8.36.5 (May 25, 2021)
 
