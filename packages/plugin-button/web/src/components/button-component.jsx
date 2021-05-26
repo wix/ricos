@@ -14,10 +14,12 @@ class ButtonComponent extends Component {
   render() {
     const {
       componentData: { button },
-      settings: { onClick },
+      settings: { onClick, themeData },
+      config,
       helpers,
     } = this.props;
     const { theme } = this.props;
+    const { colors: { actionColor, bgColor } = {} } = themeData || config?.themeData || {};
     const buttonText = button.settings.buttonText;
     const url = button.settings?.url;
     let linkButtonSettings = {};
@@ -30,9 +32,9 @@ class ButtonComponent extends Component {
     }
     const style = {
       border: '0px solid blue',
-      color: this.props.settings.colors?.color1 || '#FEFDFD',
-      background: this.props.settings.colors?.color8 || '#0261FF',
-      borderColor: this.props.settings.colors?.color8 || '#0261FF',
+      color: this.props.settings.colors?.color1 || bgColor,
+      background: this.props.settings.colors?.color8 || actionColor,
+      borderColor: this.props.settings.colors?.color8 || actionColor,
       ...this.props.style,
       ...button.design,
     };
@@ -56,7 +58,9 @@ ButtonComponent.propTypes = {
   settings: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
   theme: PropTypes.object.isRequired,
+  themeData: PropTypes.object.isRequired,
   helpers: PropTypes.object,
+  config: PropTypes.object,
 };
 
 export default ButtonComponent;
