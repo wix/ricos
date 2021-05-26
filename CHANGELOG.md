@@ -30,6 +30,8 @@
   - [#2550](https://github.com/wix/ricos/pull/2550) media extractor for SEO
 - `plugin-commons`
   - [#2554](https://github.com/wix/ricos/pull/2554) `onPluginModalOpened` callback
+- `editor`
+  - [#2557](https://github.com/wix/ricos/pull/2557) `onMenuLoad` callback
 
 </details>
 <hr/>
