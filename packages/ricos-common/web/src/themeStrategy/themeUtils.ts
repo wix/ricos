@@ -78,7 +78,10 @@ export function isBright(hexColor: string): boolean {
  * Use this to prevent "bright-on-bright" content occurrence.
  * @param actionColor HEX Format
  */
-export function adaptForeground(actionColor: string, fallbackColor?: string): string {
+export function adaptForeground(actionColor?: string, fallbackColor?: string): string | undefined {
+  if (!actionColor) {
+    return undefined;
+  }
   return getBrightness(actionColor) < 150 ? actionColor : fallbackColor || defaultFallbackColor;
 }
 
@@ -111,7 +114,10 @@ function hexToRgbA(hexColor: string) {
  * @param hexColor color in HEX format
  * @returns RGB tuple
  */
-export function toRgbTuple(hexColor: string) {
+export function toRgbTuple(hexColor?: string) {
+  if (!hexColor) {
+    return undefined;
+  }
   const { r, g, b } = hexToRgbA(hexColor);
   return `${r}, ${g}, ${b}`;
 }
