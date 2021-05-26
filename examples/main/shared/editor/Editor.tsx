@@ -42,6 +42,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
   helpers: RichContentEditorProps['helpers'];
   editor: RicosEditorType;
   ricosPlugins: RicosEditorProps['plugins'];
+  staticToolbarContainer: HTMLDivElement;
 
   constructor(props: ExampleEditorProps) {
     super(props);
@@ -145,6 +146,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
     return (
       <div style={{ height: '100%' }}>
         {this.renderExternalToolbar()}
+        <div ref={ref => (this.staticToolbarContainer = ref)} />
         <div className="editor">
           <RicosEditor
             ref={ref => (this.editor = ref)}
@@ -156,6 +158,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             cssOverride={theme}
             toolbarSettings={{
               useStaticTextToolbar: textToolbarType === 'static',
+              textToolbarContainer: this.staticToolbarContainer,
               getToolbarSettings: this.getToolbarSettings,
             }}
             isMobile={isMobile}
