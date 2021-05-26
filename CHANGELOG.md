@@ -21,6 +21,10 @@
 
 - `ui-components`
   - [#2549](https://github.com/wix-incubator/rich-content/pull/2549) new folder to concentrate all the ui components
+  
+### :rocket: New Feature
+- `ricos-content`
+  - [#2550](https://github.com/wix/ricos/pull/2550) media extractor for SEO
 
 </details>
 <hr/>
