@@ -37,7 +37,6 @@
     "updateBaselines": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} ../../../scripts/updateBaselines"
   },
   "dependencies": {
-    "@typeonly/loader": "^0.5.3",
     "fp-ts": "^2.10.0",
     "monocle-ts": "^2.3.9",
     "omit-deep": "0.3.0",
