@@ -119,7 +119,7 @@ const convertDividerData = (
   has(data, 'type') && (data.type = data.type.toLowerCase());
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
-    data.config.size = data.width?.size?.toLowerCase();
+    data.config.size = data.width?.toLowerCase();
     delete data.width;
   }
   if (has(data, 'alignment')) {
