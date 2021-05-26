@@ -53,11 +53,11 @@ message PluginContainerData {
         }
         oneof data {
             Type size = 1;
-            google.protobuf.Int32Value custom = 2;
+            google.protobuf.StringValue custom = 2;
         }
     }
     message Height {
-        google.protobuf.Int32Value custom = 1;
+        google.protobuf.StringValue custom = 1;
     }
     enum Alignment {
         CENTER = 0;
