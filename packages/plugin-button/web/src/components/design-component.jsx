@@ -13,25 +13,47 @@ class DesignComponent extends PureComponent {
     this.styles = mergeStyles({ styles: dcStyle, theme: props.theme });
     const { designObj } = this.props;
     const {
-      settings: { colors, getTextColors, getBorderColors, getBackgroundColors },
+      settings,
+      settings: { colors, themeData },
+      config,
     } = this.props;
+    const { colors: { actionColor, bgColor } = {} } = themeData || config?.themeData || {};
     this.state = {
       design: {
         borderWidth: designObj.borderWidth,
         padding: designObj.padding,
         borderRadius: designObj.borderRadius,
         activeButton: designObj.activeButton,
-        color: designObj?.color || colors?.color1 || '#FEFDFD',
-        borderColor: designObj?.borderColor || colors?.color8 || '#0261FF',
-        background: designObj?.background || colors?.color8 || '#0261FF',
+        color: designObj?.color || colors?.color1 || bgColor,
+        borderColor: designObj?.borderColor || colors?.color8 || actionColor,
+        background: designObj?.background || colors?.color8 || actionColor,
       },
-      customBackgroundColors: (getBackgroundColors && getBackgroundColors()) || DEFAULT_PALETTE,
-      customTextColors: (getTextColors && getTextColors()) || DEFAULT_PALETTE,
-      customBorderColors: (getBorderColors && getBorderColors()) || DEFAULT_PALETTE,
+      ...this.withColorOptions(settings),
       pickerType: '',
     };
     this.originalDesign = this.state.design;
   }
+
+  withColorOptions = settings => {
+    const { getTextColors, getBorderColors, getBackgroundColors, themeData } = settings;
+    const { colors: { actionColor, bgColor } = {} } = themeData;
+    const customBackgroundColors =
+      (getBackgroundColors && getBackgroundColors()) || DEFAULT_PALETTE;
+    const customTextColors = (getTextColors && getTextColors()) || DEFAULT_PALETTE;
+    const customBorderColors = (getBorderColors && getBorderColors()) || DEFAULT_PALETTE;
+    if (bgColor) {
+      customTextColors.push(bgColor);
+    }
+    if (actionColor) {
+      customBackgroundColors.push(actionColor);
+      customBorderColors.push(actionColor);
+    }
+    return {
+      customBackgroundColors,
+      customTextColors,
+      customBorderColors,
+    };
+  };
 
   componentDidUpdate = () => {
     this.props.onDesignChange(this.state.design);
@@ -230,6 +252,7 @@ DesignComponent.propTypes = {
   t: PropTypes.func,
   designObj: PropTypes.object,
   settings: PropTypes.object,
+  config: PropTypes.object,
   onDesignChange: PropTypes.func.isRequired,
   getTextColors: PropTypes.func,
   getBorderColors: PropTypes.func,
