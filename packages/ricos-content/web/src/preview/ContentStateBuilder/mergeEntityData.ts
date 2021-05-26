@@ -11,15 +11,18 @@ const defaultMerger: Merger = (mediaInfo, entity) => ({
   },
 });
 
-const imageMerger: Merger = ({ url, width, height, metadata, link, source = null }, entity) => ({
+const imageMerger: Merger = (
+  { url, width, height, alt = '', caption = '', link, source = null },
+  entity
+) => ({
   ...entity,
   data: {
     ...entity.data,
     config: {
       ...entity.data.config,
-      link,
+      ...(link ? { link } : {}),
     },
-    metadata,
+    metadata: { alt, caption },
     src: {
       width,
       height,

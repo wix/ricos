@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#2550](https://github.com/wix/ricos/pull/2550) media extractor for SEO
+
 </details>
 <hr/>
 
