@@ -21,7 +21,9 @@
 
 - `ui-components`
   - [#2549](https://github.com/wix-incubator/rich-content/pull/2549) new folder to concentrate all the ui components
-
+  
+- `ui-components`
+  - [#2553](https://github.com/wix-incubator/rich-content/pull/2553) moved labeledToggle component into ui-components
 </details>
 <hr/>
 
