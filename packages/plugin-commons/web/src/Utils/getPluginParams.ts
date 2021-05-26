@@ -4,6 +4,7 @@ import {
   LINK_PREVIEW_TYPE,
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
+  POLL_TYPE,
 } from 'wix-rich-content-common';
 
 interface Data {
@@ -34,6 +35,10 @@ const getVerticalEmbedParams = componentData => ({
   id: componentData?.selectedProduct?.id,
 });
 
+const getPollParams = componentData => ({
+  type: componentData?.layout?.poll?.type,
+});
+
 export const getPluginParams = (data: Data, blockType: string): PluginAddParams | undefined => {
   const { componentData, buttonName } = data;
   switch (blockType) {
@@ -45,6 +50,8 @@ export const getPluginParams = (data: Data, blockType: string): PluginAddParams 
       return getVideoParams(componentData, buttonName);
     case VERTICAL_EMBED_TYPE:
       return getVerticalEmbedParams(componentData);
+    case POLL_TYPE:
+      return getPollParams(componentData);
     default:
       return undefined;
   }
