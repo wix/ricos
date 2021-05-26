@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/extract-media.cjs.js",
+    "module": "../../dist/lib/extract-media.js",
+    "types": "../../dist/lib/extract-media.d.ts"
+}
