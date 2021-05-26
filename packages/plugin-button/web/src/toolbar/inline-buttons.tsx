@@ -3,7 +3,7 @@ import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-edi
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
 import { CreateInlineButtons } from 'wix-rich-content-common';
-import { ButtonPluginEditorConfig } from '../types';
+import { ButtonPluginEditorConfig, ACTION_BUTTON_TYPE } from '../types';
 
 const DesktopCustomModalStyles = {
   content: {
@@ -43,6 +43,8 @@ const createInlineButtons: CreateInlineButtons = ({
       tooltipTextKey: 'SettingsButton_Tooltip',
       settings,
       isMobile,
+      triggerSettingsBi: true,
+      pluginId: ACTION_BUTTON_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

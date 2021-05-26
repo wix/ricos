@@ -7,7 +7,7 @@ import {
   CHARACTERS,
   getCharacterBeforeSelection,
 } from 'wix-rich-content-editor-common';
-import { isListType, TABLE_TYPE } from 'ricos-content';
+import { isListType } from 'ricos-content';
 
 const isCodeBlock = blockType => blockType === 'code-block';
 
@@ -32,11 +32,9 @@ const handleTabOnText = editorState => {
   return newState;
 };
 
-export default (editorState, blockType, customHandlers, command, innerRCERenderedIn) => {
+export default (editorState, blockType, customHandlers, command) => {
   let newState;
-  if (innerRCERenderedIn === TABLE_TYPE) {
-    newState = customHandlers[command](editorState);
-  } else if (isListType(blockType)) {
+  if (isListType(blockType)) {
     newState = indentSelectedBlocks(editorState, getDirection());
   } else if (isTypeText(blockType)) {
     newState = handleTabOnText(editorState);

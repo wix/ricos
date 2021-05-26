@@ -172,8 +172,8 @@ const giphy = {
 const html = {
   type: RICOS_HTML_TYPE,
   nodeType: Node_Type.HTML,
-  data1: HTMLData.fromJSON({ src: 'www.wix.com', srcType: 'url' }),
-  data2: HTMLData.fromJSON({ src: 'www.sport5.co.il', srcType: 'url' }),
+  data1: HTMLData.fromJSON({ url: 'www.wix.com' }),
+  data2: HTMLData.fromJSON({ url: 'www.sport5.co.il' }),
   expectedData1: {
     config: {
       alignment: 'center',
@@ -393,7 +393,7 @@ const file = {
   type: RICOS_FILE_TYPE,
   nodeType: Node_Type.FILE,
   data1: FileData.fromJSON({
-    src: { url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf' },
+    src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'File sample',
     containerData: {
       width: { type: PluginContainerData_Width_Type.SMALL },
@@ -401,7 +401,7 @@ const file = {
     },
   }),
   data2: FileData.fromJSON({
-    src: { url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf' },
+    src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'Updated file sample',
     containerData: {
       width: { type: PluginContainerData_Width_Type.CONTENT },
@@ -409,7 +409,7 @@ const file = {
     },
   }),
   expectedData1: {
-    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     name: 'File sample',
     config: {
       size: 'small',
@@ -420,7 +420,7 @@ const file = {
     },
   },
   expectedData2: {
-    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     name: 'Updated file sample',
     config: {
       size: 'content',

@@ -105,8 +105,8 @@ Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, ...config) =>
   run('ricos', fixtureName, merge(...config))
 );
 
-Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
-  cy.request(getUrl(compName, fixtureName))
+Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName, config) => {
+  cy.request(getUrl(compName, fixtureName, config))
     .its('body')
     .then(html => {
       // remove the application code bundle
@@ -536,14 +536,6 @@ Cypress.Commands.add('redo', () => {
     .type('{ctrl+shift+z}')
     .type('{cmd+shift+z}');
   cy.wait(100);
-});
-
-Cypress.Commands.add('addImage', () => {
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.IMAGE);
-});
-
-Cypress.Commands.add('addAccordion', () => {
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
 });
 
 Cypress.Commands.add('addAccordionPair', () => {

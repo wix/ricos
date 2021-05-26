@@ -17,7 +17,6 @@ import {
   mockTestFileNativeUpload,
 } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 import { createPreview } from 'wix-rich-content-preview';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 import { themes } from '../consumersThemes/themes';
@@ -31,7 +30,9 @@ const onVideoSelected = (url: string, updateEntity) => {
 };
 const determinePalette = (paletteType: 'light' | 'dark', fallbackColor?: string): PaletteColors =>
   paletteType
-    ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], { fallbackColor })
+    ? merge(paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9], {
+        fallbackColor,
+      })
     : undefined;
 const setBackground = (palette: PaletteColors, disableContainer: boolean) =>
   !disableContainer && palette ? { backgroundColor: palette.bgColor } : {};
@@ -89,8 +90,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
   renderEditor = () => {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor, contentBgColor } =
-      testAppConfig.theme || {};
+    const {
+      skipCssOverride,
+      paletteType,
+      useCustomStyles,
+      fallbackColor,
+      contentBgColor,
+      settingsActionColor,
+      focusActionColor,
+    } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -130,12 +138,13 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         locale={locale}
         theme={{
           palette,
-          paletteConfig: { contentBgColor },
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
           customStyles: useCustomStyles ? customStyles : {},
         }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
+        _rcProps={{ experiments: testAppConfig.experiments }}
       >
         <RichContentEditor
           helpers={{
@@ -150,8 +159,15 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, paletteType, useCustomStyles, fallbackColor, contentBgColor } =
-      testAppConfig.theme || {};
+    const {
+      skipCssOverride,
+      paletteType,
+      useCustomStyles,
+      fallbackColor,
+      contentBgColor,
+      settingsActionColor,
+      focusActionColor,
+    } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -164,12 +180,13 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
         locale={locale}
         theme={{
           palette,
-          paletteConfig: { contentBgColor },
+          paletteConfig: { contentBgColor, settingsActionColor, focusActionColor },
           customStyles: useCustomStyles ? customStyles : {},
         }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
+        textSelectionToolbar
       />
     );
   };
@@ -203,9 +220,6 @@ class RicosTestApp extends PureComponent<RicosTestAppProps> {
             ref={this.viewerRef}
           >
             {this.renderViewer()}
-            <TextSelectionToolbar container={this.viewerRef.current}>
-              {selectedText => <TwitterButton selectedText={selectedText} />}
-            </TextSelectionToolbar>
           </div>
         </div>
       </div>

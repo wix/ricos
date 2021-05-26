@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { hot } from 'react-hot-loader/root';
-import React, { PureComponent, ReactElement } from 'react';
+import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap, debounce } from 'lodash';
 import { set, get } from 'local-storage';
@@ -12,11 +12,9 @@ import {
   disableBrowserBackButton,
 } from './utils';
 import { SectionSettings, OnVisibilityChanged } from './types';
-import { DraftContent } from 'wix-rich-content-common';
+import { DraftContent, ToolbarType } from 'wix-rich-content-common';
 import ContentStateEditorType from './Components/ContentStateEditor';
-import { EditorState } from 'draft-js';
-import { RichContent } from 'ricos-schema';
-import { ensureDraftContent, ensureRicosContent } from 'ricos-content/libs/migrateSchema';
+import { ensureDraftContent } from 'ricos-content/libs/migrateSchema';
 import { themeStrategy } from 'ricos-common';
 import { FONTS, EXPERIMENTS, ricosPalettes } from '../../../e2e/tests/resources';
 
@@ -33,8 +31,6 @@ interface ExampleAppProps {
   setLocale?: (locale: string) => void;
   locale?: string;
   allLocales?: string[];
-  editorState?: EditorState;
-  onEditorChange?: (editorState: EditorState) => void;
   onRicosEditorChange?: (contentState: DraftContent) => void;
   localeResource?: Record<string, string>;
 }
@@ -48,8 +44,6 @@ interface ExampleAppState {
   viewerResetKey?: number;
   previewResetKey?: number;
   editorResetKey?: number;
-  shouldMockUpload?: boolean;
-  shouldMultiSelectImages?: boolean;
   shouldNativeUpload?: boolean;
   shouldUseNewContent?: boolean;
   [key: string]: any;
@@ -82,12 +76,11 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       viewerResetKey: 0,
       previewResetKey: 0,
       editorResetKey: 0,
-      shouldMockUpload: true,
-      shouldMultiSelectImages: false,
       shouldNativeUpload: false,
       shouldUseNewContent: false,
       styleElement: this.getInitialStyleElement(),
       experiments: get('experiments') || {},
+      externalToolbarToShow: ToolbarType.FORMATTING,
       ...localState,
     };
   }
@@ -138,9 +131,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   initSectionsSettings = () => {
     const {
       editorIsMobile,
-      shouldMockUpload,
-      shouldMultiSelectImages,
       staticToolbar,
+      externalToolbarToShow,
       shouldNativeUpload,
       shouldUseNewContent,
     } = this.state;
@@ -152,14 +144,6 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
           this.setState(state => ({
             editorIsMobile: !state.editorIsMobile,
             editorResetKey: state.editorResetKey + 1,
-          })),
-      },
-      {
-        name: 'Mock Upload',
-        active: shouldMockUpload,
-        action: () =>
-          this.setState(state => ({
-            shouldMockUpload: !state.shouldMockUpload,
           })),
       },
       {
@@ -181,17 +165,20 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
         },
       },
       {
-        name: 'Multi-Select Images',
-        active: shouldMultiSelectImages,
+        name: 'Static Toolbar',
+        active: staticToolbar,
         action: () =>
           this.setState(state => ({
-            shouldMultiSelectImages: !state.shouldMultiSelectImages,
+            staticToolbar: !state.staticToolbar,
+            editorResetKey: state.editorResetKey + 1,
           })),
       },
       {
-        name: 'Static Toolbar',
-        active: staticToolbar,
-        action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
+        name: 'External Toolbar',
+        active: externalToolbarToShow,
+        action: selectedExternalToolbar =>
+          this.setState({ externalToolbarToShow: selectedExternalToolbar }),
+        items: [ToolbarType.FORMATTING, ToolbarType.INSERT_PLUGIN],
       },
       {
         name: 'Locale',
@@ -235,8 +222,11 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   getActivePalette = () => this.state.activePalette;
+
   getExperiments = () => this.state.experiments;
+
   getActiveFont = () => this.state.activeFont;
+
   getThemeObj = (activeFont, activePalette) => {
     const themeObj: any = {};
     activeFont && (themeObj.customStyles = FONTS[activeFont]);
@@ -251,10 +241,12 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     });
     set('activePalette', i);
   };
+
   onFontChange = i => {
     this.setState({ styleElement: this.getHtmlTheme({ customStyles: FONTS[i] }), activeFont: i });
     set('activeFont', i);
   };
+
   getHtmlTheme = themeObj => {
     const { activeFont, activePalette } = this.state;
     const { html } = themeStrategy({
@@ -280,26 +272,13 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderEditor = () => {
-    const {
-      allLocales,
-      editorState,
-      onEditorChange,
-      locale,
-      localeResource,
-      isMobile,
-      contentState,
-      injectedContent,
-      onRicosEditorChange,
-    } = this.props;
+    const { locale, isMobile, contentState, injectedContent, onRicosEditorChange } = this.props;
     const {
       isEditorShown,
       staticToolbar,
-      shouldMockUpload,
-      shouldMultiSelectImages,
+      externalToolbarToShow,
       editorIsMobile,
-      isToolbarShown,
       shouldNativeUpload,
-      shouldUseNewContent,
       experiments,
       styleElement,
     } = this.state;
@@ -319,16 +298,11 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
             <ErrorBoundary>
               {...styleElement}
               <Editor
-                onChange={onEditorChange}
-                editorState={editorState}
                 isMobile={editorIsMobile || isMobile}
-                shouldMockUpload={shouldMockUpload}
-                shouldMultiSelectImages={shouldMultiSelectImages}
                 shouldNativeUpload={shouldNativeUpload}
-                shouldUseNewContent={shouldUseNewContent}
                 staticToolbar={staticToolbar}
+                externalToolbarToShow={externalToolbarToShow}
                 locale={locale}
-                localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}
                 externalToolbar={ExternalToolbar}
                 contentState={contentState}
@@ -383,8 +357,8 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
   };
 
   renderViewer = () => {
-    const { contentState, isMobile, locale, localeResource } = this.props;
-    const { isViewerShown, shouldUseNewContent, experiments } = this.state;
+    const { contentState, isMobile, locale } = this.props;
+    const { isViewerShown, experiments } = this.state;
 
     return (
       isViewerShown && (
@@ -403,9 +377,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 initialState={contentState}
                 isMobile={this.state.viewerIsMobile || isMobile}
                 locale={locale}
-                localeResource={localeResource}
                 scrollingElementFn={this.viewerScrollingElementFn}
-                shouldUseNewContent={shouldUseNewContent}
                 experiments={experiments}
               />
             </ErrorBoundary>

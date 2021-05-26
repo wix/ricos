@@ -3389,3 +3389,19 @@ exports[`plugins > gallery > media settings > settings > should disable gallery 
     }
   }
 };
+
+exports[`plugins > youTube > open youTube modal #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};

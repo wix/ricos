@@ -11,8 +11,8 @@
   border-style: none;
   border-width: 0px;
   text-decoration: none;
-  color: white;
   background-color: $action-color;
+  border-color: $action-color;
 }
 
 .button_text {
@@ -27,6 +27,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--ricos-background-color, white);
 
   @include phone {
     max-width: calc(100vw - 89px);

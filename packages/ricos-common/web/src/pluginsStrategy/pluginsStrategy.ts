@@ -11,6 +11,7 @@ import {
   DraftContent,
   EditorPlugin,
   ViewerPlugin,
+  ThemeData,
 } from 'wix-rich-content-common';
 
 const getPluginProps = (
@@ -71,6 +72,7 @@ function viewerStrategy(
 }
 
 export default function pluginsStrategy({
+  themeData,
   isViewer,
   plugins = [],
   childProps,
@@ -78,6 +80,7 @@ export default function pluginsStrategy({
   content,
   experiments, // eslint-disable-line
 }: {
+  themeData: ThemeData;
   isViewer: boolean;
   plugins: BasePlugin[];
   childProps: RichContentProps;
@@ -89,7 +92,7 @@ export default function pluginsStrategy({
 
   if (isViewer) {
     const emptyStrategy: ViewerPluginsStrategy = {
-      config: {},
+      config: { themeData },
       typeMappers: [],
       decorators: [],
       inlineStyleMappers: [],
@@ -100,7 +103,7 @@ export default function pluginsStrategy({
     );
   } else {
     const emptyStrategy: EditorPluginsStrategy = {
-      config: {},
+      config: { themeData },
       plugins: [],
       ModalsMap: {},
       createPluginsDataMap: {},

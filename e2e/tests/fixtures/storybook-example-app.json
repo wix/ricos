@@ -126,7 +126,22 @@
       "data": {}
     },
     {
-      "key": "eodbt",
+      "key": "2ibim",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "726op",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -135,7 +150,7 @@
       "data": {}
     },
     {
-      "key": "726op",
+      "key": "fu5ne",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -153,7 +168,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 3
+          "key": 4
         }
       ],
       "data": {}
@@ -168,7 +183,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 4
+          "key": 5
         }
       ],
       "data": {}
@@ -228,7 +243,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 5
+          "key": 6
         }
       ],
       "data": {}
@@ -279,7 +294,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 6
+          "key": 7
         }
       ],
       "data": {}
@@ -321,7 +336,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 7
+          "key": 8
         }
       ],
       "data": {}
@@ -354,7 +369,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 8
+          "key": 9
         }
       ],
       "data": {}
@@ -378,7 +393,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 9
+          "key": 10
         }
       ],
       "data": {}
@@ -398,6 +413,18 @@
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
+        "config": {
+          "size": "small",
+          "alignment": "right",
+          "showTitle": true,
+          "disableExpand": false,
+          "showDescription": true,
+          "link": {
+            "url": "www.wix.com",
+            "target": "_blank",
+            "rel": "noopener"
+          }
+        },
         "src": {
           "id": "bcb5bc2f8a914694b8dc0c9ff2575f79",
           "width": 5120,
@@ -405,12 +432,8 @@
           "file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
           "original_file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg"
         },
-        "config": {
-          "size": "small",
-          "alignment": "right",
-          "showTitle": true,
-          "disableExpand": false,
-          "showDescription": true
+        "metadata": {
+          "caption": "Image Caption Example (with link)"
         }
       }
     },
@@ -434,6 +457,28 @@
       }
     },
     "3": {
+      "type": "wix-draft-plugin-action-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "מדליק מי שמקליק ראשון"
+          },
+          "design": {
+            "borderWidth": 0,
+            "padding": 12,
+            "borderRadius": 0,
+            "activeButton": 0
+          }
+        }
+      }
+    },
+    "4": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -445,7 +490,7 @@
         }
       }
     },
-    "4": {
+    "5": {
       "type": "wix-draft-plugin-gallery",
       "mutability": "IMMUTABLE",
       "data": {
@@ -515,11 +560,11 @@
         }
       }
     },
-    "5": {
+    "6": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
-        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
+        "url": "https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
         "name": "music.mp3",
         "size": 150000,
         "type": "mp3",
@@ -529,7 +574,7 @@
         }
       }
     },
-    "6": {
+    "7": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -548,11 +593,10 @@
         "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg"
       }
     },
-    "7": {
+    "8": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "product",
         "selectedProduct": {
           "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",
@@ -562,11 +606,10 @@
         }
       }
     },
-    "8": {
+    "9": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "event",
         "selectedProduct": {
           "id": "ed97b710-1182-4c53-ab79-b938138d09e7",
@@ -576,11 +619,10 @@
         }
       }
     },
-    "9": {
+    "10": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {},
         "type": "booking",
         "selectedProduct": {
           "id": "285fe974-e729-4381-a874-7640d7f71ad8",
@@ -592,5 +634,5 @@
       }
     }
   },
-  "VERSION": "8.5.0"
+  "VERSION": "8.36.5"
 }

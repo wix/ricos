@@ -22,6 +22,10 @@ $borderRadius: 6px;
 .inlineToolbar_buttons {
   display: flex;
   height: 50px;
+  & button:focus {
+    outline: 5px auto Highlight !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
+  }
 }
 
 .inlineToolbar_overrideContent {

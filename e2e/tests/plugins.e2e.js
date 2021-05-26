@@ -11,7 +11,7 @@ import {
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
-import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -357,14 +357,16 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
-
+    const testAppConfig = {
+      plugins: [plugins.linkPreview],
+    };
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.linkPreview));
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
     });
 
     after(() => cy.eyesClose());
-    const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
+    const embedTypes = ['TWITTER', 'INSTAGRAM'];
     embedTypes.forEach(embedType => {
       it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
@@ -456,20 +458,20 @@ describe('plugins', () => {
 
     //TODO: fix this flaky test
     // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('create link button & customize it', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
-        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
-        .click()
-        .get(`[data-hook*=ButtonInputModal][placeholder="Enter a URL"]`)
-        .type('www.wix.com')
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click();
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it.skip('create link button & customize it', function() {
+    //   cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+    //     .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+    //     .click()
+    //     .get(`[data-hook*=ButtonInputModal][placeholder="Enter a URL"]`)
+    //     .type('www.wix.com')
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+    //     .click();
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
   });
 
   context('action button', () => {
@@ -482,23 +484,23 @@ describe('plugins', () => {
     );
 
     after(() => cy.eyesClose());
-    it('create action button & customize it', function() {
-      cy.focusEditor();
-      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
-        .wait(100)
-        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
-        .click({ force: true })
-        .wait(100)
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
-        .click({ force: true })
-        .wait(100)
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}] button`)
-        .click({ force: true })
-        .wait(100)
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click({ force: true });
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it('create action button & customize it', function() {
+    //   cy.focusEditor();
+    //   cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+    //     .wait(100)
+    //     .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+    //     .click({ force: true })
+    //     .wait(100)
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+    //     .click({ force: true })
+    //     .wait(100)
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}] button`)
+    //     .click({ force: true })
+    //     .wait(100)
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+    //     .click({ force: true });
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
 
     it('create action button & click it', function() {
       const stub = cy.stub();
@@ -714,7 +716,9 @@ describe('plugins', () => {
     };
 
     it('should change accordion settings', function() {
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
+      cy.loadRicosEditorAndViewer('accordion-rich-text', {
+        plugins: [plugins.accordion, plugins.embedsPreset, plugins.textPlugins],
+      });
       cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);

@@ -17,7 +17,7 @@
     background-color: transparent;
 
     &:hover {
-      color: $action-color-fallback;
+      color: $settings-action-color-fallback;
       cursor: pointer;
     }
   }
@@ -25,7 +25,7 @@
 
 .lineHeightsPanel_selectedLineHeight,
 .lineSpacingMobilePanel_selectedLineHeight {
-  color: $action-color-fallback;
+  color: $settings-action-color-fallback;
 }
 
 .lineSpacingMobilePanel {
@@ -65,7 +65,7 @@
   }
 
   :nth-child(2) {
-    color: $action-color-fallback;
+    color: $settings-action-color-fallback;
   }
 }
 
@@ -135,7 +135,7 @@
   }
 
   :nth-child(2) {
-    color: $action-color-fallback;
+    color: $settings-action-color-fallback;
   }
 }
 

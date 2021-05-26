@@ -8,7 +8,7 @@ import {
   TOOLBARS,
   isElementOutOfWindow,
 } from 'wix-rich-content-editor-common';
-import { isSSR } from 'wix-rich-content-common';
+import { isSSR, Version } from 'wix-rich-content-common';
 import { PlusIcon, PlusIconSmall } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import AddPluginMenu from './AddPluginMenu';
@@ -63,8 +63,14 @@ export default class AddPluginFloatingToolbar extends PureComponent {
   onClick = event => {
     event.preventDefault();
     event.stopPropagation();
-    const { isMobile } = this.props;
-    if (!isMobile) {
+    const { isMobile, onClick, helpers } = this.props;
+    helpers.onMenuLoad?.({
+      version: Version.currentVersion,
+      menu: 'SIDE',
+    });
+    if (onClick) {
+      onClick();
+    } else if (!isMobile) {
       this.togglePopup();
     } else {
       this.openAddPluginModal();
@@ -137,6 +143,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
       t,
       addPluginMenuConfig,
       isMobile,
+      helpers,
     } = this.props;
     const { toolbarStyles } = theme || {};
     const popoupClassNames = classNames(
@@ -170,6 +177,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
           theme={theme}
           pluginMenuButtonRef={this.selectButton}
           toolbarName={TOOLBARS.SIDE}
+          helpers={helpers}
         />
       </div>
     );
@@ -240,4 +248,5 @@ AddPluginFloatingToolbar.propTypes = {
   helpers: PropTypes.object,
   t: PropTypes.func,
   addPluginMenuConfig: PropTypes.object,
+  onClick: PropTypes.func,
 };

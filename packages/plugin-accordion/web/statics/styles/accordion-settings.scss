@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
 
 .title {
   margin: 0;
@@ -6,38 +6,38 @@
   line-height: 1.5;
 }
 
-.settingsContainer{
+.settingsContainer {
   padding: 24px 24px 20px;
 }
 
-.separator{
-    margin: 20px 0 !important;
+.separator {
+  margin: 20px 0 !important;
 }
 
 .direction_selector {
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 1fr;
-    grid-column-gap: 10px;
-    margin: 25px 0;
-  
-    @include phone {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  grid-column-gap: 10px;
+  margin: 25px 0;
+
+  @include phone {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.direction_selector_option{
-  p{
+.direction_selector_option {
+  p {
     margin-block-start: 1em;
     margin-block-end: 1em;
   }
 
-  svg{
+  svg {
     padding-top: 10px;
   }
 
   svg,
   p {
-    color: $action-color;
-    fill: $action-color;
+    color: $settings-action-color;
+    fill: $settings-action-color;
   }
 }
