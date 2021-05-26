@@ -4,7 +4,7 @@ import { CSSProperties } from 'react';
 export interface ThemeUtils {
   isBright: (hexColor: string) => boolean;
   adaptForeground: (actionColor?: string, fallbackColor?: string) => string | undefined;
-  toCssRgbA: (hexColor: string, opacity: number) => string;
+  toCssRgbA: (hexColor: string | undefined, opacity: number) => string | undefined;
 }
 
 /** Colors scheme for `Ricos`.

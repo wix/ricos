@@ -130,7 +130,10 @@ export function toRgbTuple(hexColor?: string) {
  * @param hexColor color in HEX format
  * @returns RGB object
  */
-export function toCssRgbA(hexColor: string, opacity: number): string {
+export function toCssRgbA(hexColor: string | undefined, opacity: number): string | undefined {
+  if (!hexColor) {
+    return hexColor;
+  }
   if (/^#([A-Fa-f\d]{2}){1,4}$/.test(hexColor)) {
     const { r, g, b, a } = hexToRgbA(hexColor);
     return `rgba(${r}, ${g}, ${b}, ${opacity * (a || 1)})`;
