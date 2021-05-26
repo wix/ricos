@@ -3,7 +3,7 @@ import { CSSProperties } from 'react';
 
 export interface ThemeUtils {
   isBright: (hexColor: string) => boolean;
-  adaptForeground: (actionColor: string, fallbackColor?: string) => string;
+  adaptForeground: (actionColor?: string, fallbackColor?: string) => string;
   toCssRgbA: (hexColor: string, opacity: number) => string;
 }
 
