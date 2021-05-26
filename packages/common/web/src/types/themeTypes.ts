@@ -20,9 +20,9 @@ export interface ThemeUtils {
  * ```
  */
 export interface PaletteColors {
-  actionColor: string;
-  bgColor: string;
-  textColor: string;
+  actionColor?: string;
+  bgColor?: string;
+  textColor?: string;
   textColorLow?: string;
   disabledColor?: string;
   /** Default is black.
