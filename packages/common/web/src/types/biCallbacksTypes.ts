@@ -53,10 +53,7 @@ export interface onPluginModalOpenedArgs extends biCallbackParams {
 }
 
 export interface onMenuLoadArgs extends biCallbackParams {
-  pluginId: string;
-  pluginDetails: unknown;
-  entryPoint: ToolbarType;
-  entryType: EntryType;
+  menu: EntryType;
 }
 
 export interface BICallbacks {

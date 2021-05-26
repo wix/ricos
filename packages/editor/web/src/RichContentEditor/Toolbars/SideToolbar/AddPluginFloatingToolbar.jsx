@@ -66,8 +66,7 @@ export default class AddPluginFloatingToolbar extends PureComponent {
     const { isMobile, onClick, helpers } = this.props;
     helpers.onMenuLoad?.({
       version: Version.currentVersion,
-      entryPoint: 'SIDE',
-      entryType: 'SIDE',
+      menu: 'SIDE',
     });
     if (onClick) {
       onClick();
