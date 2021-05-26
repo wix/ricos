@@ -22,6 +22,11 @@
 - `plugin-commons`
   - [#2552](https://github.com/wix-incubator/rich-content/pull/2552) `addPluginStep` params specification for polls plugin
 
+### :rocket: New Feature
+
+- `ricos-content`
+  - [#2550](https://github.com/wix/ricos/pull/2550) media extractor for SEO
+
 </details>
 <hr/>
 
