@@ -89,6 +89,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       onOpenEditorSuccess: async version => console.log('onOpenEditorSuccess', version),
+      onPluginModalOpened: async params => console.log('onPluginModalOpened', params),
       //
       // handleFileUpload: mockImageNativeUploadFunc,
       handleFileSelection: mockImageUploadFunc,
