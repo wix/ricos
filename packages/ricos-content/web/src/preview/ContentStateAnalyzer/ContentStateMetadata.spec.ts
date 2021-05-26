@@ -998,7 +998,8 @@ describe('content state media metadata', () => {
       url: '8bb438_c1089eafb4ab405ba328b528e3ecc63e.jpg',
       width: 1920,
       link: { rel: 'nofollow', target: '_blank', url: 'images.com' },
-      metadata: { alt: 'alt text', caption: 'image caption' },
+      alt: 'alt text',
+      caption: 'image caption',
     },
     {
       height: 2800,
@@ -1007,6 +1008,8 @@ describe('content state media metadata', () => {
       id: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
       isGalleryItem: true,
       width: 4200,
+      alt: '',
+      caption: '',
     },
     {
       height: 1280,
@@ -1015,6 +1018,8 @@ describe('content state media metadata', () => {
       id: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
       isGalleryItem: true,
       width: 1920,
+      alt: '',
+      caption: '',
     },
     {
       height: 1081,
@@ -1023,10 +1028,13 @@ describe('content state media metadata', () => {
       id: '8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg',
       isGalleryItem: true,
       width: 1621,
+      alt: '',
+      caption: '',
     },
     {
       type: 'video',
       isCustom: true,
+      caption: 'iJustine | Create a Website with Wix Artificial Design Intelligence',
       thumbnail: 'https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg',
       url: 'http://mirrors.standaloneinstaller.com/video-sample/jellyfish-25-mbps-hd-hevc.mp4',
     },
