@@ -17,7 +17,7 @@ import {
 import {
   PluginContainerData_Spoiler,
   FileSource,
-  PluginContainerData_Width,
+  PluginContainerData_Width_Type,
   ButtonData_Type,
   Link,
   Link_Target,
@@ -68,13 +68,13 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
     newSpoiler = { description, buttonText: buttonContent };
   }
   data.containerData = {
-    customHeight: typeof height === 'number' ? height : undefined,
     alignment: alignment && kebabToConstantCase(alignment),
     spoiler: newSpoiler,
   };
+  typeof height === 'number' && (data.containerData.height = { custom: height });
   typeof width === 'number'
-    ? (data.containerData.customWidth = width)
-    : size && (data.containerData.width = kebabToConstantCase(size));
+    ? (data.containerData.width = { custom: width })
+    : size && (data.containerData.width = { size: kebabToConstantCase(size) });
 };
 
 const convertVideoData = (data: {
@@ -111,7 +111,7 @@ const convertDividerData = (data: {
   has(data, 'type') && (data.type = data.type?.toUpperCase());
   has(data, 'config.size') && (data.width = data.config?.size?.toUpperCase());
   has(data, 'config.alignment') && (data.alignment = data.config?.alignment?.toUpperCase());
-  data.containerData = { width: PluginContainerData_Width.CONTENT };
+  data.containerData = { width: { size: PluginContainerData_Width_Type.CONTENT } };
 };
 
 const convertImageData = (data: {

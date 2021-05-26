@@ -70,7 +70,7 @@ addBulletList({
 const api = setupContentBuilder(generateKey);
 const imageData: ImageData = {
   containerData: {
-    width: { type: PluginContainerData_Width.SMALL },
+    width: { size: PluginContainerData_Width_Type.SMALL },
     alignment: PluginContainerData_Alignment.CENTER,
   },
   image: {...},

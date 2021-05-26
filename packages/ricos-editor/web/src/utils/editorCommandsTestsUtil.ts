@@ -25,7 +25,7 @@ import {
   Node_Type,
   Decoration_Type,
   MentionData,
-  PluginContainerData_Width,
+  PluginContainerData_Width_Type,
   PluginContainerData_Alignment,
   DividerData_Width,
   DividerData_Alignment,
@@ -396,7 +396,7 @@ const file = {
     src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'File sample',
     containerData: {
-      width: { type: PluginContainerData_Width.SMALL },
+      width: { size: PluginContainerData_Width_Type.SMALL },
       alignment: PluginContainerData_Alignment.LEFT,
     },
   }),
@@ -404,7 +404,7 @@ const file = {
     src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'Updated file sample',
     containerData: {
-      width: { type: PluginContainerData_Width.CONTENT },
+      width: { size: PluginContainerData_Width_Type.CONTENT },
       alignment: PluginContainerData_Alignment.RIGHT,
     },
   }),

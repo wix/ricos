@@ -74,13 +74,13 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
 };
 
 const convertContainerData = (data: { containerData?: PluginContainerData; config }) => {
-  const { width, customWidth, alignment, spoiler, customHeight } = data.containerData || {};
+  const { width, alignment, spoiler, height } = data.containerData || {};
   data.config = Object.assign(
     {},
     data.config,
-    width && { size: constantToKebabCase(width) },
-    customWidth && { width: customWidth },
-    customHeight && { height: customHeight },
+    width?.size && { size: constantToKebabCase(width.size) },
+    width?.custom && { width: width.custom },
+    height?.custom && { height: height.custom },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
@@ -119,7 +119,7 @@ const convertDividerData = (
   has(data, 'type') && (data.type = data.type.toLowerCase());
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
-    data.config.size = data.width?.toLowerCase();
+    data.config.size = data.width?.size?.toLowerCase();
     delete data.width;
   }
   if (has(data, 'alignment')) {
