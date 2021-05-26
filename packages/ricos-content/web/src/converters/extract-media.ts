@@ -3,21 +3,28 @@ import { getImageSrc } from '../imageUtils';
 import extractEntityData from '../preview/ContentStateAnalyzer/extractEntityData';
 
 const toSeoImage = entityData => {
-  const { url, width, height, isGalleryItem, metadata = {} } = entityData;
+  const { url, width, height, alt = '', caption = '' } = entityData;
   const imageUrl = getImageSrc({ file_name: url }, undefined, {
     imageType: 'highRes',
     requiredQuality: 90,
     requiredHeight: height as number,
     requiredWidth: width as number,
   });
-  const imageAlt = metadata[isGalleryItem ? 'altText' : 'alt'] || '';
-  const imageCaption = metadata[isGalleryItem ? 'title' : 'caption'] || '';
-  return { imageUrl, imageWidth: width, imageHeight: height, imageAlt, imageCaption };
+  return { imageUrl, imageWidth: width, imageHeight: height, imageAlt: alt, imageCaption: caption };
 };
 
 const toSeoVideo = entityData => {
-  const { url, thumbnail } = entityData;
-  return { videoThumbnailUrl: thumbnail, videoContentUrl: url };
+  const { url, thumbnail, caption = '' } = entityData;
+  const videoThumbnailUrl = thumbnail.startsWith('media/')
+    ? `https://static.wixstatic.com/${thumbnail}`
+    : thumbnail;
+  const videoContentUrl = url.startsWith('video/') ? `https://video.wixstatic.com/${url}` : url;
+  return { videoThumbnailUrl, videoContentUrl, videoName: caption };
+};
+
+const gifToSeoVideo = entityData => {
+  const { mp4: videoContentUrl, thumbnail: videoThumbnailUrl } = entityData;
+  return { videoThumbnailUrl, videoContentUrl, videoName: '' };
 };
 
 export const extractMedia = ({ entityMap }: DraftContent) =>
@@ -31,4 +38,6 @@ export const extractMedia = ({ entityMap }: DraftContent) =>
       ].includes(entity.type)
     )
     .reduce((media, entity) => [...media, ...extractEntityData(entity)], [])
-    .map(entityData => ({ image: toSeoImage, video: toSeoVideo }[entityData.type](entityData)));
+    .map(entityData =>
+      ({ image: toSeoImage, video: toSeoVideo, giphy: gifToSeoVideo }[entityData.type](entityData))
+    );

@@ -1,3 +1,4 @@
+import { has, isString } from 'lodash';
 import { RicosEntity } from '../../types/contentTypes';
 import { PreviewEntityData } from '../types';
 /*
@@ -16,21 +17,33 @@ const imageConverter: PluginConverter = entity => [
     height: entity.data.src.height,
     url: entity.data.src.file_name,
     type: 'image',
-    metadata: entity.data.metadata,
+    alt: entity.data.metadata.alt || '',
+    caption: entity.data.metadata.caption || '',
     link: entity.data.config.link,
   },
 ];
 
 const galleryConverter: PluginConverter = entity =>
-  entity.data.items.map(({ metadata, url, itemId }) => ({
-    url,
-    height: metadata.height,
-    width: metadata.width,
-    id: itemId,
-    type: 'image',
-    metadata,
-    isGalleryItem: true,
-  }));
+  entity.data.items.map(({ metadata, url, itemId }) =>
+    metadata.type === 'video'
+      ? {
+          type: 'video',
+          url,
+          thumbnail: metadata.poster?.url || '',
+          caption: metadata.title || '',
+          isGalleryItem: true,
+        }
+      : {
+          url,
+          height: metadata.height,
+          width: metadata.width,
+          id: itemId,
+          type: metadata.type || 'image',
+          alt: metadata.altText || '',
+          caption: metadata.title || '',
+          isGalleryItem: true,
+        }
+  );
 
 const giphyConverter: PluginConverter = entity => [
   {
@@ -45,13 +58,15 @@ const giphyConverter: PluginConverter = entity => [
 ];
 
 const videoConverter: PluginConverter = ({ data: { src, isCustomVideo, metadata = {} } }) => {
-  const { thumbnail_url } = metadata;
+  const url = isString(src) ? src : src.pathname;
+  const thumbnail = has(src, 'thumbnail') ? src.thumbnail?.pathname : metadata.thumbnail_url || '';
   return [
     {
       type: 'video',
-      url: src,
+      url,
       isCustom: isCustomVideo,
-      thumbnail: thumbnail_url,
+      thumbnail,
+      caption: metadata.title || '',
     },
   ];
 };
