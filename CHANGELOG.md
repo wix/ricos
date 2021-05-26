@@ -18,8 +18,11 @@
   </summary>
 
 ### :rocket: New Feature
+
 - `ricos-content`
   - [#2550](https://github.com/wix/ricos/pull/2550) media extractor for SEO
+- `plugin-commons`
+  - [#2554](https://github.com/wix/ricos/pull/2554) `onPluginModalOpened` callback
 
 </details>
 <hr/>
