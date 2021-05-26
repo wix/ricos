@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MediaUploadErrorKey } from 'wix-rich-content-common';
-import { Trans } from 'react-i18next';
+import { MediaUploadErrorKey, Trans } from 'wix-rich-content-common';
 import Toast from './Toast';
 
 const errorMap = {
