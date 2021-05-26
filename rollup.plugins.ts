@@ -19,7 +19,7 @@ import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
 import stylable from '@stylable/rollup-plugin';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
@@ -176,6 +176,20 @@ const createFakeStylesFile = (): Plugin => ({
   },
 });
 
+const mergeStyleable = (): Plugin => ({
+  name: 'merge-styleable',
+  writeBundle() {
+    try {
+      const stylable = readFileSync('dist/stylable.css', 'utf8');
+      const css = readFileSync('dist/styles.min.css', 'utf8');
+      writeFileSync('dist/styles.min.css', stylable + css);
+    } catch (e) {
+      if (e.code !== 'ENOENT') {
+        throw e;
+      }
+    }
+  },
+});
 let _plugins: Plugin[] = [
   stylable(),
   svgr({
@@ -197,12 +211,14 @@ if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
 }
 
-if (process.env.EXTRACT_CSS === 'false') {
-  _plugins = [..._plugins, createFakeStylesFile()];
-}
-
 const plugins = (shouldExtractCss: boolean) => {
+  if (!shouldExtractCss) {
+    _plugins = [..._plugins, createFakeStylesFile()];
+  }
   _plugins.push(postcss(shouldExtractCss));
+  if (shouldExtractCss) {
+    _plugins.push(mergeStyleable());
+  }
   return _plugins;
 };
 const lastEntryPlugins = [libsPackageJsonGeneratorPlugin(), copy(), copyAfterBundleWritten()];
