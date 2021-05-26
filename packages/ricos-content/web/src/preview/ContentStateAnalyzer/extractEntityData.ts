@@ -17,8 +17,8 @@ const imageConverter: PluginConverter = entity => [
     height: entity.data.src.height,
     url: entity.data.src.file_name,
     type: 'image',
-    alt: entity.data.metadata.alt || '',
-    caption: entity.data.metadata.caption || '',
+    alt: entity.data.metadata?.alt || '',
+    caption: entity.data.metadata?.caption || '',
     link: entity.data.config.link,
   },
 ];
