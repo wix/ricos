@@ -17,8 +17,53 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+
+- `plugin-commons`
+  - [#2552](https://github.com/wix-incubator/rich-content/pull/2552) `addPluginStep` params specification for polls plugin
+
+### :rocket: New Feature
+
+- `ricos-content`
+  - [#2550](https://github.com/wix/ricos/pull/2550) media extractor for SEO
+- `plugin-commons`
+  - [#2554](https://github.com/wix/ricos/pull/2554) `onPluginModalOpened` callback
+
 </details>
 <hr/>
+
+## 8.36.6 (May 26, 2021)
+
+### :bug: Bug Fix
+
+- `button`
+  - [#2545](https://github.com/wix-incubator/rich-content/pull/2545) Wire to palette colors when created
+
+### :house: Internal
+
+- `template-atomic-plugin`
+  - [#2547](https://github.com/wix-incubator/rich-content/pull/2547) Fixed lint issues when creating a new plugin
+- `storybook`
+  - [#2548](https://github.com/wix-incubator/rich-content/pull/2548) button coverage
+- `e2e`
+  - [#2548](https://github.com/wix-incubator/rich-content/pull/2548) button coverage
+
+## 8.36.5 (May 25, 2021)
+
+### :bug: Bug Fix
+
+- `viewer` `editor`
+  - [#2540](https://github.com/wix-incubator/rich-content/pull/2540) Fix text justification alignment in firefox/safari
+
+### :nail_care: Polish
+
+- `plugin-button`
+  - [#2537](https://github.com/wix-incubator/rich-content/pull/2537) remove button presets
+
+### :house: Internal
+
+- `common`
+  - [#2403](https://github.com/wix-incubator/rich-content/pull/2403) `ThemeData` object is now passed inside `config`, available for plugins
 
 ## 8.36.4 (May 25, 2021)
 
