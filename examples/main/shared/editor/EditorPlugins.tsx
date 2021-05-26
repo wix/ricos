@@ -132,7 +132,6 @@ import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
 import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
-// import 'wix-rich-content-ui-components/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
