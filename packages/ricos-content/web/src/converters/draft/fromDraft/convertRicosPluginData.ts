@@ -13,6 +13,8 @@ import {
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
   MAP_TYPE,
+  SOCIAL_EMBED_TYPE,
+  VIDEO_EMBED_TYPE,
 } from '../../../consts';
 import {
   PluginContainerData_Spoiler,
@@ -45,6 +47,8 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     [ACTION_BUTTON_TYPE]: convertButtonData,
     [HTML_TYPE]: convertHTMLData,
     [MAP_TYPE]: convertMapData,
+    [SOCIAL_EMBED_TYPE]: convertSocialEmbed,
+    [VIDEO_EMBED_TYPE]: convertVideoEmbed,
   };
   if (newData.config && blockType !== DIVIDER_TYPE) {
     convertContainerData(newData);
@@ -81,27 +85,44 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
 };
 
 const convertVideoData = (data: {
-  src?: string | VideoComponentData;
+  src: VideoComponentData;
   metadata?: { thumbnail_url?: string; width?: number; height?: number };
   video;
   thumbnail;
 }) => {
-  if (typeof data.src === 'string') {
-    data.video = { src: { url: data.src } };
-    const { thumbnail_url, width, height } = data.metadata || {};
-    data.thumbnail = {
-      src: { url: thumbnail_url },
-      width,
-      height,
-    };
-  } else if (typeof data.src === 'object') {
-    data.video = { src: { custom: data.src.pathname } };
-    data.thumbnail = {
-      src: { custom: data.src.thumbnail.pathname },
-      width: data.src.thumbnail.width,
-      height: data.src.thumbnail.height,
-    };
-  }
+  data.video = { src: { custom: data.src.pathname } };
+  data.thumbnail = {
+    src: { custom: data.src.thumbnail.pathname },
+    width: data.src.thumbnail.width,
+    height: data.src.thumbnail.height,
+  };
+};
+
+const convertVideoEmbed = (data: {
+  src?: string | VideoComponentData;
+  metadata?;
+  video;
+  thumbnailUrl;
+  videoUrl;
+  providerName;
+  type;
+  title;
+  html;
+  thumbnailHeight;
+  thumbnailWidth;
+  height;
+  width;
+}) => {
+  data.width = data.metadata?.width;
+  data.height = data.metadata?.height;
+  data.thumbnailUrl = data.metadata?.thumbnail_url;
+  data.thumbnailWidth = data.metadata?.thumbnail_width;
+  data.thumbnailHeight = data.metadata?.thumbnail_height;
+  data.title = data.metadata?.title;
+  data.html = data.metadata?.html;
+  data.type = data.metadata?.type;
+  data.providerName = data.metadata?.provider_name;
+  data.videoUrl = data.metadata?.video_url;
 };
 
 const convertDividerData = (data: {
@@ -144,8 +165,20 @@ const convertPollData = (data: { layout; design }) => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toUpperCase());
 };
 
-const convertVerticalEmbedData = (data: { type?: string }) => {
-  has(data, 'type') && (data.type = data.type?.toUpperCase());
+const convertVerticalEmbedData = (data: {
+  type;
+  selectedProduct;
+  thumbnailUrl;
+  title;
+  src;
+  providerName;
+  html;
+}) => {
+  data.thumbnailUrl = data.selectedProduct.imageSrc;
+  data.title = data.selectedProduct.name;
+  data.src = data.selectedProduct.id;
+  data.providerName = 'wix';
+  data.html = data.selectedProduct.html;
 };
 
 const convertLinkPreviewData = (data: {
@@ -153,9 +186,17 @@ const convertLinkPreviewData = (data: {
   config?: { link };
   thumbnailUrl;
   link;
+  type;
 }) => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
-  data.config?.link && (data.link = convertLink(data.config?.link));
+  data.config?.link && (data.link = convertLink(data.config.link));
+};
+
+const convertSocialEmbed = (data: { type; thumbnailUrl; thumbnail_url; src; config }) => {
+  data.type = 'rich';
+  const url = data.config?.link?.url;
+  url && (data.src = url);
+  data.thumbnailUrl = data.thumbnail_url;
 };
 
 const convertMention = (data: {

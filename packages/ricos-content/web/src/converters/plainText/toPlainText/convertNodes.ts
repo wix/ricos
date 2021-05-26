@@ -77,9 +77,9 @@ export const parseVideo = async (
   { videoData }: Node,
   getVideoUrl: (fileId: string) => Promise<string> = getDefaultVideoUrl
 ): Promise<string> => {
-  const { custom, url } = videoData?.video?.src || {};
-  const text = custom ? getVideoUrl(custom) : url;
-  return text || '';
+  const { custom } = videoData?.video?.src || {};
+  const text = custom ? getVideoUrl(custom) : '';
+  return text;
 };
 
 export const parseGiphy = ({ giphyData }: Node): string => {
@@ -92,13 +92,18 @@ export const parseMap = ({ mapData }: Node): string => {
   return address || '';
 };
 
-export const parseVerticalEmbed = ({ verticalEmbedData }: Node, delimiter: string): string => {
-  const { html, name } = verticalEmbedData?.selectedProduct || {};
-  const href = html
-    ?.replace(/.*href="/g, '')
-    .replace(/.*=http/g, 'http')
-    .replace(/" .*/g, '');
-  return [name, href].filter(Boolean).join(delimiter);
+export const parseEmbed = ({ oembedData }: Node, delimiter: string): string => {
+  const { html, title, type, src } = oembedData || {};
+  if (type === 'video') {
+    return src || '';
+  } else if (html) {
+    const href = html
+      ?.replace(/.*href="/g, '')
+      .replace(/.*=http/g, 'http')
+      .replace(/" .*/g, '');
+    return [title, href].filter(Boolean).join(delimiter);
+  }
+  return '';
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {

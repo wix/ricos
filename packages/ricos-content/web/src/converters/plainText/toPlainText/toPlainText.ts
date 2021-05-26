@@ -7,7 +7,7 @@ import {
   parseListNode,
   parseMap,
   parseTextNodes,
-  parseVerticalEmbed,
+  parseEmbed,
   parseVideo,
 } from './convertNodes';
 
@@ -57,8 +57,8 @@ export const toPlainText = async (
         case Node_Type.MAP:
           plainText += parseMap(node);
           break;
-        case Node_Type.VERTICAL_EMBED:
-          plainText += parseVerticalEmbed(node, delimiter);
+        case Node_Type.OEMBED:
+          plainText += parseEmbed(node, delimiter);
           break;
         case Node_Type.LINK_PREVIEW:
           plainText += parseLinkPreview(node);

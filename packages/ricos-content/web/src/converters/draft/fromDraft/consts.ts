@@ -14,6 +14,8 @@ import {
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
   POLL_TYPE,
+  SOCIAL_EMBED_TYPE,
+  VIDEO_EMBED_TYPE,
 } from '../../../consts';
 import {
   ButtonData,
@@ -24,7 +26,7 @@ import {
   HTMLData,
   LinkPreviewData,
   MapData,
-  VerticalEmbedData,
+  OembedData,
   VideoData,
   PollData,
   ImageData,
@@ -42,8 +44,10 @@ export const TO_RICOS_DATA = {
   [IMAGE_TYPE_LEGACY]: ImageData,
   [LINK_PREVIEW_TYPE]: LinkPreviewData,
   [MAP_TYPE]: MapData,
-  [VERTICAL_EMBED_TYPE]: VerticalEmbedData,
+  [VERTICAL_EMBED_TYPE]: OembedData,
   [VIDEO_TYPE]: VideoData,
   [VIDEO_TYPE_LEGACY]: VideoData,
   [POLL_TYPE]: PollData,
+  [SOCIAL_EMBED_TYPE]: OembedData,
+  [VIDEO_EMBED_TYPE]: OembedData,
 };

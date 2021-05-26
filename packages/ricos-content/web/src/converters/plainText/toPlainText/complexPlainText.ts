@@ -12,7 +12,9 @@ https://video.wixstatic.com/video/d3dd72_9397c7bfa03f4fa8920b16bdd667f73b/1080p/
 
 
 
-https://twitter.com/CNN/status/1244886173409034240
+https://twitter.com/CNN/status/1244886173409034240?ref_src=twsrc%5Etfw">March 31, 2020</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js
+
 
 
 

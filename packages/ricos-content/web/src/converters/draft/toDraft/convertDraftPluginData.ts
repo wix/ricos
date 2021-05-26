@@ -45,7 +45,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
     [Node_Type.POLL]: convertPollData,
-    [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
+    [Node_Type.OEMBED]: convertOEmbedData,
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
@@ -100,18 +100,11 @@ const convertContainerData = (data: { containerData?: PluginContainerData; confi
 };
 
 const convertVideoData = (data: VideoData & { src; metadata }) => {
-  const videoSrc = data.video?.src;
-  if (videoSrc?.url) {
-    data.src = videoSrc.url;
-    const { src, width, height } = data.thumbnail || {};
-    data.metadata = { thumbnail_url: src?.url, width, height };
-  } else if (videoSrc?.custom) {
-    const { src, width, height } = data.thumbnail || {};
-    data.src = {
-      pathname: videoSrc.custom,
-      thumbnail: { pathname: src?.custom, width, height },
-    };
-  }
+  const { src, width, height } = data.thumbnail || {};
+  data.src = {
+    pathname: data.video?.src?.custom,
+    thumbnail: { pathname: src?.custom, width, height },
+  };
   delete data.video;
   delete data.thumbnail;
 };
@@ -157,8 +150,66 @@ const convertPollData = data => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toLowerCase());
 };
 
+const convertOEmbedData = data => {
+  switch (data.type) {
+    case 'video': {
+      data.metadata = {
+        thumbnail_url: data.thumbnailUrl,
+        width: data.width,
+        height: data.height,
+        provider_name: data.providerName,
+        thumbnail_height: data.thumbnailHeight,
+        thumbnail_width: data.thumbnailWidth,
+        type: data.type,
+        title: data.title,
+      };
+      delete data.thumbnailUrl;
+      delete data.thumbnailWidth;
+      delete data.thumbnailHeight;
+      delete data.width;
+      delete data.height;
+      delete data.providerName;
+      delete data.type;
+      delete data.title;
+      delete data.html;
+      break;
+    }
+    case 'rich': {
+      const link = { url: data.src, target: '_blank' };
+      data.config = { ...(data?.config || {}), link };
+      delete data.type;
+      delete data.src;
+      break;
+    }
+    case 'product': {
+      convertVerticalEmbedData(data);
+      break;
+    }
+    case 'event': {
+      convertVerticalEmbedData(data);
+      break;
+    }
+    case 'booking': {
+      convertVerticalEmbedData(data);
+      break;
+    }
+    default:
+      break;
+  }
+};
+
 const convertVerticalEmbedData = data => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.selectedProduct = {
+    id: data.src,
+    name: data.title,
+    imageSrc: data.thumbnailUrl,
+    html: data.html,
+  };
+  delete data.src;
+  delete data.title;
+  delete data.thumbnailUrl;
+  delete data.html;
+  delete data.providerName;
 };
 
 const convertLinkPreviewData = data => {

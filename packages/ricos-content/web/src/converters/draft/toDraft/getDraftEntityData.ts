@@ -6,7 +6,15 @@ import {
   FROM_RICOS_ENTITY_TYPE,
   TO_RICOS_DECORATION_TYPE,
 } from '../consts';
-import { ACTION_BUTTON_TYPE, LINK_BUTTON_TYPE, RicosEntity, RicosEntityMap } from '../../..';
+import {
+  ACTION_BUTTON_TYPE,
+  LINK_BUTTON_TYPE,
+  VIDEO_TYPE,
+  LINK_PREVIEW_TYPE,
+  VERTICAL_EMBED_TYPE,
+  RicosEntity,
+  RicosEntityMap,
+} from '../../..';
 import { DraftTypedDecoration } from './decorationParsers';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
@@ -16,6 +24,16 @@ const getNodeEntityData = (node: Node) => {
   if (type === Node_Type.BUTTON) {
     draftPluginType =
       node.buttonData?.type === ButtonData_Type.ACTION ? ACTION_BUTTON_TYPE : LINK_BUTTON_TYPE;
+  }
+  if (type === Node_Type.OEMBED) {
+    const embedTypesMapper = {
+      video: VIDEO_TYPE,
+      rich: LINK_PREVIEW_TYPE,
+      product: VERTICAL_EMBED_TYPE,
+      booking: VERTICAL_EMBED_TYPE,
+      event: VERTICAL_EMBED_TYPE,
+    };
+    draftPluginType = node.oembedData?.type && embedTypesMapper[node.oembedData.type];
   }
   const data = convertNodeToDraftData(node);
   if (data === undefined) {

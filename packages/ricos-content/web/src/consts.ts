@@ -73,6 +73,10 @@ export const ANCHOR_TYPE = 'ANCHOR';
 export const PREVIEW = 'PREVIEW';
 export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
 
+export const SOCIAL_EMBED_TYPE = 'SOCIAL_EMBED_TYPE';
+export const VIDEO_EMBED_TYPE = 'VIDEO_EMBED_TYPE';
+export const OEMBED_TYPE = 'OEMBED';
+
 // ricos plugin types
 export const RICOS_ACCORDION_TYPE = 'ricos-accordion';
 export const RICOS_ACTION_BUTTON_TYPE = 'ricos-action-button';
