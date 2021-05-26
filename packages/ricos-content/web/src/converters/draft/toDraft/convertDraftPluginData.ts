@@ -51,7 +51,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.MAP]: convertMapData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
-    convertContainerData(newData);
+    convertContainerData(newData, nodeType);
   }
   if (nodeType in converters) {
     const convert = converters[nodeType];
@@ -73,7 +73,10 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
   return data;
 };
 
-const convertContainerData = (data: { containerData?: PluginContainerData; config }) => {
+const convertContainerData = (
+  data: { containerData?: PluginContainerData; config },
+  nodeType: string
+) => {
   const { width, alignment, spoiler, height } = data.containerData || {};
   data.config = Object.assign(
     {},
@@ -90,6 +93,11 @@ const convertContainerData = (data: { containerData?: PluginContainerData; confi
       },
     }
   );
+  if (nodeType === Node_Type.IMAGE && width?.custom) {
+    data.config.size = 'inline';
+  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+    data.config.size = 'content';
+  }
   delete data.containerData;
 };
 
