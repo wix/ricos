@@ -22,6 +22,7 @@ import {
   CUSTOM_LINK_TYPE,
   TextAlignment,
   InlineStyle,
+  SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
@@ -42,8 +43,13 @@ type CustomLinkData = any;
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
-export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) =>
-  editorState.getCurrentInlineStyle().has(inlineStyle.toUpperCase());
+export const getDraftInlineStyle = (inlineStyle: InlineStyle) =>
+  inlineStyle === 'spoiler' ? SPOILER_TYPE : inlineStyle.toUpperCase();
+
+export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) => {
+  const draftInlineStyle = getDraftInlineStyle(inlineStyle);
+  return editorState.getCurrentInlineStyle().has(draftInlineStyle);
+};
 
 export function createSelection({
   blockKey,
