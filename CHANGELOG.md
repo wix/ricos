@@ -36,7 +36,6 @@
 
 - `template-atomic-plugin`
   - [#2547](https://github.com/wix-incubator/rich-content/pull/2547) Fixed lint issues when creating a new plugin
-
 - `storybook`
   - [#2548](https://github.com/wix-incubator/rich-content/pull/2548) button coverage
 - `e2e`
