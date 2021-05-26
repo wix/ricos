@@ -24,26 +24,30 @@ const imageConverter: PluginConverter = entity => [
 ];
 
 const galleryConverter: PluginConverter = entity =>
-  entity.data.items.map(({ metadata, url, itemId }) =>
-    metadata.type === 'video'
-      ? {
-          type: 'video',
-          url,
-          thumbnail: metadata.poster?.url || '',
-          caption: metadata.title || '',
-          isGalleryItem: true,
-        }
-      : {
-          url,
-          height: metadata.height,
-          width: metadata.width,
-          id: itemId,
-          type: metadata.type || 'image',
-          alt: metadata.altText || '',
-          caption: metadata.title || '',
-          isGalleryItem: true,
-        }
-  );
+  entity.data.items
+    .filter(
+      ({ metadata }) => !metadata.type || metadata.type === 'image' || metadata.type === 'video'
+    )
+    .map(({ metadata, url, itemId }) =>
+      metadata.type === 'video'
+        ? {
+            type: 'video',
+            url,
+            thumbnail: metadata.poster?.url || '',
+            caption: metadata.title || '',
+            isGalleryItem: true,
+          }
+        : {
+            url,
+            height: metadata.height,
+            width: metadata.width,
+            id: itemId,
+            type: 'image',
+            alt: metadata.altText || '',
+            caption: metadata.title || '',
+            isGalleryItem: true,
+          }
+    );
 
 const giphyConverter: PluginConverter = entity => [
   {
