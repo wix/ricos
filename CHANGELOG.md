@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `ui-components`
+  - [#2549](https://github.com/wix-incubator/rich-content/pull/2549) new folder to concentrate all the ui component
+
 </details>
 <hr/>
 
