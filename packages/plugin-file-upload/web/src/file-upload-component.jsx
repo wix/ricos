@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
 import { FILE_UPLOAD_TYPE } from './types';
-import { fileExtensionToType, FileTypes } from '../lib/fileExtensionToType';
+import { uploadFile, handleUploadFinished } from 'wix-rich-content-plugin-commons';
 
 class FileUploadComponent extends PureComponent {
   constructor(props) {
@@ -42,6 +42,11 @@ class FileUploadComponent extends PureComponent {
     return state;
   };
 
+  onLocalLoad = componentData => {
+    this.updateComponentData(componentData);
+    this.setState({ isLoading: true });
+  };
+
   updateComponentData = data => {
     const { setData } = this.props.blockProps;
     const componentData = { ...this.props.componentData, ...data };
@@ -49,49 +54,44 @@ class FileUploadComponent extends PureComponent {
     this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
   };
 
-  handleFilesSelected = files => {
-    const { onFileSelected } = this.props.settings;
-    if (onFileSelected && files.length > 0) {
-      const file = files[0];
-      const name = file.name;
-      let type;
-      if (name && name.includes('.')) {
-        type = name.split('.').pop();
-      }
-      const size = file.size;
-      this.updateComponentData({ name, type, size, tempData: true });
-      const uploadBIData = this.props.helpers?.onMediaUploadStart(
-        FILE_UPLOAD_TYPE,
-        size,
-        FileTypes[fileExtensionToType(type)]
-      );
-      this.setState({ isLoading: true });
-      onFileSelected(file, ({ data, error }) =>
-        this.handleFilesAdded({ data, error, uploadBIData })
-      );
-    } else {
-      this.resetLoadingState({ msg: 'missing upload function' });
-    }
+  onUploadFinished = ({ componentData }) => {
+    this.updateComponentData(componentData);
+    this.setState({ isLoading: false });
+    //mark the external state as not loading
+    this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
-  handleFilesAdded = ({ data, error, uploadBIData }) => {
-    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
-    this.updateComponentData({ ...data, tempData: undefined, error });
-    this.resetLoadingState(error);
+  handleFilesSelected = files => {
+    const BI = {
+      onMediaUploadStart: this.props.helpers.onMediaUploadStart,
+      onMediaUploadEnd: this.props.helpers.onMediaUploadEnd,
+    };
+    uploadFile(
+      files,
+      this.onLocalLoad,
+      this.onUploadFinished,
+      this.props.settings.onFileSelected,
+      BI,
+      FILE_UPLOAD_TYPE,
+      this.props.componentData,
+      this.props.commonPubsub
+    );
+  };
+
+  handleFilesAdded = ({ data, error }) => {
+    handleUploadFinished(
+      data,
+      error,
+      this.onUploadFinished,
+      this.props.commonPubsub,
+      FILE_UPLOAD_TYPE,
+      this.props.componentData
+    );
   };
 
   getLoadingParams = componentState => {
     const { isLoading, userSelectedFiles } = componentState;
     return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
-  };
-
-  resetLoadingState = error => {
-    if (error) {
-      this.props.commonPubsub.set('onMediaUploadError', error);
-    }
-    this.setState({ isLoading: false });
-    //mark the external state as not loading
-    this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {

@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { TextInput, CloseIcon, Button } from 'wix-rich-content-plugin-commons';
+import {
+  TextInput,
+  CloseIcon,
+  Button,
+  uploadFile,
+  handleUploadFinished,
+} from 'wix-rich-content-plugin-commons';
 import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { mergeStyles, isValidExactUrl } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
@@ -77,34 +83,22 @@ export default class VideoSelectionInputModal extends Component {
     this.input.setSelectionRange(0, this.input.value.length);
   }
 
-  loadLocalVideo = file => {
-    const src = URL.createObjectURL(file);
-    const { componentData } = this.props;
-    this.onConfirm({ ...componentData, src, isCustomVideo: true, tempData: true });
-  };
-
-  handleError = error => {
-    if (error) {
-      this.props.commonPubsub.set('onMediaUploadError', error);
-    }
-  };
-
-  updateVideoComponent = ({ data, error }, uploadBIData, componentData, isCustomVideo = false) => {
-    let { src } = componentData;
-    if (data) {
-      const { pathname, thumbnail, url } = data;
-      src = pathname ? { pathname, thumbnail } : url;
-    }
-    uploadBIData && this.props.helpers.onMediaUploadEnd(uploadBIData, error);
-    this.setComponentData({ ...componentData, src, error, isCustomVideo, tempData: !!error });
-    this.handleError(error);
+  getOnUploadFinished = (isCustomVideo, shouldSetComponentData = true) => {
+    return ({ componentData, error }) =>
+      shouldSetComponentData
+        ? this.setComponentData({ ...componentData, error, isCustomVideo })
+        : this.onConfirm({ ...componentData, error, isCustomVideo });
   };
 
   addVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
-    const { pathname, thumbnail, url } = data;
-    const src = pathname ? { pathname, thumbnail } : url;
-    this.onConfirm({ ...componentData, src, error, isCustomVideo });
-    this.handleError(error);
+    handleUploadFinished(
+      data,
+      error,
+      this.getOnUploadFinished(isCustomVideo, false),
+      this.props.commonPubsub,
+      VIDEO_TYPE,
+      this.props.componentData
+    );
   };
 
   setComponentData = data => {
@@ -115,14 +109,31 @@ export default class VideoSelectionInputModal extends Component {
     this.props.pubsub.update('componentData', data, this.blockKey);
   };
 
+  onLocalLoad = ({ url: src, tempData }) => {
+    this.onConfirm({ ...this.props.componentData, src, isCustomVideo: true, tempData });
+  };
+
   handleNativeFileUpload = () => {
-    const { componentData, handleFileUpload: consumerHandleFileUpload } = this.props;
-    const file = this.inputFile.files[0];
-    this.loadLocalVideo(file);
-    const uploadBIData = this.props.helpers?.onMediaUploadStart(VIDEO_TYPE, file.size, 'video');
-    consumerHandleFileUpload(file, ({ data, error }) => {
-      this.updateVideoComponent({ data, error }, uploadBIData, componentData, true);
-    });
+    const {
+      componentData,
+      handleFileUpload: consumerHandleFileUpload,
+      commonPubsub,
+      helpers: { onMediaUploadStart, onMediaUploadEnd },
+    } = this.props;
+    const BI = {
+      onMediaUploadStart,
+      onMediaUploadEnd,
+    };
+    uploadFile(
+      this.inputFile.files,
+      this.onLocalLoad,
+      this.getOnUploadFinished(true),
+      consumerHandleFileUpload,
+      BI,
+      VIDEO_TYPE,
+      componentData,
+      commonPubsub
+    );
     this.closeModal();
   };
 

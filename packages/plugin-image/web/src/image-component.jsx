@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
+import {
+  Loader,
+  MediaItemErrorMsg,
+  uploadFile,
+  handleUploadFinished,
+} from 'wix-rich-content-plugin-commons';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
@@ -52,63 +57,46 @@ class ImageComponent extends React.Component {
     return state;
   };
 
-  resetLoadingState = error => {
+  onUploadFinished = ({ componentData, error }) => {
+    componentData &&
+      this.props.store.update('componentData', componentData, this.props.block.getKey());
     let { dataUrl } = this.state;
-    if (error) {
-      this.props.commonPubsub.set('onMediaUploadError', error);
-    } else {
+    if (!error) {
       dataUrl = null;
     }
     this.setState({ isLoading: false, dataUrl, error });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
-  uploadFile = file => {
-    const handleFileUpload = this.props?.helpers?.handleFileUpload;
-    if (handleFileUpload) {
-      const uploadBIData = this.props.helpers?.onMediaUploadStart(IMAGE_TYPE, file.size, 'image');
-      handleFileUpload(file, ({ data, error }) =>
-        this.handleFilesAdded({ data, error, uploadBIData })
-      );
-    } else {
-      this.resetLoadingState({ msg: 'Missing upload function' });
-    }
-  };
+  onLocalLoad = ({ url: dataUrl }) => this.setState({ isLoading: true, error: false, dataUrl });
 
   handleFilesSelected = files => {
-    const file = files[0];
-    if (file) {
-      this.fileReader(file).then(dataUrl => {
-        this.setState({ isLoading: true, error: false, dataUrl });
-        this.uploadFile(file);
-      });
-    }
+    const BI = {
+      onMediaUploadStart: this.props.helpers.onMediaUploadStart,
+      onMediaUploadEnd: this.props.helpers.onMediaUploadEnd,
+    };
+    uploadFile(
+      files,
+      this.onLocalLoad,
+      this.onUploadFinished,
+      this.props.helpers.handleFileUpload,
+      BI,
+      IMAGE_TYPE,
+      this.props.componentData,
+      this.props.commonPubsub
+    );
     return { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER };
   };
 
-  fileReader(file) {
-    return new Promise(resolve => {
-      const fr = new FileReader();
-      fr.onload = e => resolve(e.target.result);
-      fr.readAsDataURL(file);
-    });
-  }
-
-  handleFilesAdded = ({ data, error, uploadBIData }) => {
-    const imageData = data?.length ? data[0] : data;
-    const config = { ...this.props.componentData.config };
-    if (!config.alignment) {
-      config.alignment = imageData.width >= 740 ? 'center' : 'left';
-    }
-    const componentData = {
-      ...this.props.componentData,
-      config,
-      src: imageData,
+  handleFilesAdded = ({ data, error }) => {
+    handleUploadFinished(
+      data,
       error,
-    };
-    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
-    this.props.store.update('componentData', componentData, this.props.block.getKey());
-    this.resetLoadingState(error);
+      this.onUploadFinished,
+      this.props.commonPubsub,
+      IMAGE_TYPE,
+      this.props.componentData
+    );
   };
 
   handleMetadataChange = newMetadata => {
