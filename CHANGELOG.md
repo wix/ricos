@@ -33,6 +33,10 @@
 - `editor`
   - [#2557](https://github.com/wix/ricos/pull/2557) `onMenuLoad` callback
 
+### :house: Internal
+- `gallery`
+  - [#2558](https://github.com/wix-incubator/rich-content/pull/2558)  revert to pro gallery back to v2 (requested by blog)
+
 </details>
 <hr/>
 
