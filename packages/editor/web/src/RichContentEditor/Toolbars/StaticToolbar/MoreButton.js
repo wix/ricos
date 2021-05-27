@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
 import ClickOutside from 'react-click-outsider';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, Version } from 'wix-rich-content-common';
 
 class MoreButton extends Component {
   constructor(props) {
@@ -46,7 +46,14 @@ class MoreButton extends Component {
 
   handleClick = () => {
     const { showPluginMenu } = this.state;
+    const { helpers } = this.props;
     this.calculatePluginMenuPosition();
+    if (!showPluginMenu) {
+      helpers.onMenuLoad?.({ 
+        version: Version.currentVersion, 
+        menu: 'SHORTCUT',
+      })
+    }
     this.togglePopup(!showPluginMenu);
   };
 
@@ -98,6 +105,7 @@ class MoreButton extends Component {
 MoreButton.propTypes = {
   addPluginMenuProps: PropTypes.object.isRequired,
   forceDisabled: PropTypes.bool,
+  helpers: PropTypes.object,
 };
 
 export default MoreButton;
