@@ -43,8 +43,14 @@ type CustomLinkData = any;
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
-export const getDraftInlineStyle = (inlineStyle: InlineStyle) =>
-  inlineStyle === 'spoiler' ? SPOILER_TYPE : inlineStyle.toUpperCase();
+const draftInlineStyle = {
+  bold: 'BOLD',
+  underline: 'UNDERLINE',
+  italic: 'ITALIC',
+  spoiler: SPOILER_TYPE,
+};
+
+export const getDraftInlineStyle = (inlineStyle: InlineStyle) => draftInlineStyle[inlineStyle];
 
 export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) => {
   const draftInlineStyle = getDraftInlineStyle(inlineStyle);
