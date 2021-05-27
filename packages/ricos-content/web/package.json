@@ -44,6 +44,8 @@
     "to-constant-case": "1.0.0",
     "to-slug-case": "1.0.0",
     "to-snake-case": "1.0.0",
+    "monocle-ts": "^2.3.9",
+    "fp-ts": "^2.10.5",
     "utility-types": "^3.10.0"
   },
   "peerDependencies": {
