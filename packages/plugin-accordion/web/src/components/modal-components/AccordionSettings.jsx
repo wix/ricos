@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { Separator, InfoIcon } from 'wix-rich-content-editor-common';
 import { LabeledToggle } from 'wix-rich-content-ui-components';
-import '../../styles.css';
 import {
   RadioGroupVertical,
   SelectionList,
