@@ -1,5 +1,4 @@
-/* eslint-disable complexity */
-import { normalizeUrl, isValidUrl } from 'wix-rich-content-common';
+import { normalizeUrl } from 'wix-rich-content-common';
 import { getAbsoluteUrl } from './baseUrlConverter';
 
 /**
@@ -42,20 +41,10 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
         };
         const {
           pathname,
-          thumbnail: { pathname: thumbPathname, width, height } = {},
+          thumbnail: { pathname: thumbPathname } = {},
         } = convertedData.metaData.poster;
         if (pathname && thumbPathname) {
-          convertedData.metaData.poster = {
-            url: getAbsoluteUrl(thumbPathname, 'image'),
-            width,
-            height,
-          };
-        } else if (typeof convertedData.metaData.poster === 'string') {
-          convertedData.metaData.poster = {
-            url: convertedData.metaData.poster,
-            width: convertedData.metaData.width,
-            height: convertedData.metaData.height,
-          };
+          convertedData.metaData.poster = getAbsoluteUrl(thumbPathname, 'image');
         }
       }
 
