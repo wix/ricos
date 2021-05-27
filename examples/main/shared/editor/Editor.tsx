@@ -48,6 +48,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
   helpers: RichContentEditorProps['helpers'];
   editor: RicosEditorType;
   ricosPlugins: RicosEditorProps['plugins'];
+  staticToolbarContainer: HTMLDivElement;
 
   constructor(props: ExampleEditorProps) {
     super(props);
@@ -96,6 +97,8 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       onOpenEditorSuccess: async version => console.log('onOpenEditorSuccess', version),
+      onPluginModalOpened: async params => console.log('onPluginModalOpened', params),
+      onMenuLoad: async params => console.log('onMenuLoad', params),
       //
       // handleFileUpload: mockImageNativeUploadFunc,
       handleFileSelection: mockImageUploadFunc,
@@ -189,6 +192,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
     return (
       <div style={{ height: '100%' }}>
         {this.renderExternalToolbar()}
+        <div ref={ref => (this.staticToolbarContainer = ref)} />
         <div className="editor">
           {experiments?.newFormattingToolbar?.enabled && this.renderTextFormattingToolbar()}
           <RicosEditor
@@ -201,6 +205,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             cssOverride={theme}
             toolbarSettings={{
               useStaticTextToolbar: textToolbarType === 'static',
+              textToolbarContainer: this.staticToolbarContainer,
               getToolbarSettings: this.getToolbarSettings,
             }}
             isMobile={isMobile}

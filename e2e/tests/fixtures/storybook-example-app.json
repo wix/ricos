@@ -126,7 +126,22 @@
       "data": {}
     },
     {
-      "key": "eodbt",
+      "key": "2ibim",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "726op",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -135,7 +150,7 @@
       "data": {}
     },
     {
-      "key": "726op",
+      "key": "fu5ne",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -153,7 +168,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 3
+          "key": 4
         }
       ],
       "data": {}
@@ -168,7 +183,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 4
+          "key": 5
         }
       ],
       "data": {}
@@ -228,7 +243,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 5
+          "key": 6
         }
       ],
       "data": {}
@@ -279,7 +294,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 6
+          "key": 7
         }
       ],
       "data": {}
@@ -321,7 +336,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 7
+          "key": 8
         }
       ],
       "data": {}
@@ -354,7 +369,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 8
+          "key": 9
         }
       ],
       "data": {}
@@ -378,7 +393,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 9
+          "key": 10
         }
       ],
       "data": {}
@@ -442,6 +457,28 @@
       }
     },
     "3": {
+      "type": "wix-draft-plugin-action-button",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "width": "fit-content"
+        },
+        "button": {
+          "settings": {
+            "buttonText": "מדליק מי שמקליק ראשון"
+          },
+          "design": {
+            "borderWidth": 0,
+            "padding": 12,
+            "borderRadius": 0,
+            "activeButton": 0
+          }
+        }
+      }
+    },
+    "4": {
       "type": "wix-draft-plugin-divider",
       "mutability": "IMMUTABLE",
       "data": {
@@ -453,7 +490,7 @@
         }
       }
     },
-    "4": {
+    "5": {
       "type": "wix-draft-plugin-gallery",
       "mutability": "IMMUTABLE",
       "data": {
@@ -523,7 +560,7 @@
         }
       }
     },
-    "5": {
+    "6": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
@@ -537,7 +574,7 @@
         }
       }
     },
-    "6": {
+    "7": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -556,7 +593,7 @@
         "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg"
       }
     },
-    "7": {
+    "8": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
@@ -569,7 +606,7 @@
         }
       }
     },
-    "8": {
+    "9": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
@@ -582,7 +619,7 @@
         }
       }
     },
-    "9": {
+    "10": {
       "type": "wix-draft-plugin-vertical-embed",
       "mutability": "IMMUTABLE",
       "data": {
@@ -597,5 +634,5 @@
       }
     }
   },
-  "VERSION": "8.34.1"
+  "VERSION": "8.36.5"
 }

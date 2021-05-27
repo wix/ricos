@@ -7,6 +7,7 @@ import createExternalToolbarPlugin from './externalToolbarPlugin';
 import createListPlugin from 'draft-js-list-plugin';
 import { EditorProps, DraftDecorator } from 'draft-js';
 import {
+  createJustificationFixDecorator,
   CreatePluginFunction,
   CreatePluginConfig,
   EditorContextType,
@@ -128,6 +129,7 @@ const createPlugins = ({
     dndPlugin,
     listPlugin,
     externalToolbarPlugin,
+    { decorators: [createJustificationFixDecorator()] },
     ...wixPlugins,
   ];
 

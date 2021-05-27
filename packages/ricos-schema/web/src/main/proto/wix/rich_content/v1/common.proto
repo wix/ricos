@@ -50,12 +50,15 @@ message PluginContainerData {
             SMALL = 1;
             ORIGINAL = 2;
             FULL_WIDTH = 3;
-            CUSTOM = 4;
         }
-        Type type = 1;
-        google.protobuf.Int32Value custom_width = 2;
+        oneof data {
+            Type size = 1;
+            google.protobuf.StringValue custom = 2;
+        }
     }
-
+    message Height {
+        google.protobuf.StringValue custom = 1;
+    }
     enum Alignment {
         CENTER = 0;
         LEFT = 1;
@@ -65,7 +68,7 @@ message PluginContainerData {
     Width width = 1;
     Alignment alignment = 2;
     Spoiler spoiler = 3;
-    google.protobuf.Int32Value custom_height = 4;
+    Height height = 4;
 }
 
 message FileSource {

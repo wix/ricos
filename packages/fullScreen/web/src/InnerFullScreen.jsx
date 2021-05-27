@@ -5,10 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
-import {
-  layoutData,
-  GALLERY_LAYOUTS,
-} from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
+import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -206,8 +203,8 @@ export default class InnerFullscreen extends Component {
             resizeMediaUrl={fullscreenResizeMediaUrl}
             container={size}
             styles={{
-              ...layoutData[GALLERY_LAYOUTS.SLIDESHOW],
-              galleryLayout: GALLERY_LAYOUTS.SLIDESHOW,
+              ...layouts[5],
+              galleryLayout: 5,
               cubeType: 'fit',
               scrollSnap: true,
               videoPlay: 'auto',

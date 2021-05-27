@@ -35,3 +35,5 @@ export { generateKey } from './Utils/generateKey';
 
 export { getBlocksFromContentState } from './Utils/innerRCEBlocksUtils';
 export * from './consts';
+
+export { default as createJustificationFixDecorator } from './draftDecorators/createJustificationFixDecorator';
