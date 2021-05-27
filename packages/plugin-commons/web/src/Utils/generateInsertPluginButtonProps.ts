@@ -73,6 +73,15 @@ export function generateInsertPluginButtonProps({
       step,
     });
   };
+  const onPluginModalOpened = () => {
+    helpers?.onPluginModalOpened?.({
+      version: Version.currentVersion,
+      entryType: toolbarName,
+      entryPoint: toolbarName,
+      pluginId: blockType,
+      pluginDetails: undefined,
+    });
+  };
   const onPluginAddSuccess = (params = {}) =>
     helpers?.onPluginAddSuccess?.(blockType, toolbarName, params);
 
@@ -185,6 +194,7 @@ export function generateInsertPluginButtonProps({
   function toggleButtonModal(event) {
     onPluginAdd();
     if (helpers && helpers.openModal) {
+      onPluginModalOpened();
       let modalStyles = {};
       if (button.modalStyles) {
         modalStyles = button.modalStyles;
