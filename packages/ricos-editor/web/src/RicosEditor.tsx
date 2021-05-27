@@ -171,6 +171,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getT = () => this.editor.getT();
 
+  removeToolbarFocus = () => this.editor.removeToolbarFocus();
+
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
     const { StaticToolbar, localeData, remountKey, editorState } = this.state;

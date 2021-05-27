@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ToolbarContainer.scss';
-import { getVisibleSelectionRect } from 'wix-rich-content-editor-common';
+import { getVisibleSelectionRect, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { debounce } from 'lodash';
 
 const TOOLBAR_OFFSET = 5;
@@ -76,26 +77,36 @@ class FloatingToolbarContainer extends PureComponent {
     const { toolbarPosition, keepOpen } = this.state;
     const reactModalElement = document.querySelector('[data-id="rich-content-editor-modal"]');
     const pluginMenuElement = document.querySelector('[data-hook="addPluginMenu"]');
+    const toolbarOnFocus = this.isToolbarOnFocus();
     if (
       !reactModalElement &&
       !pluginMenuElement &&
       (`${top}px` !== toolbarPosition.top || `${left}px` !== toolbarPosition.left) &&
-      !keepOpen
+      !keepOpen &&
+      !toolbarOnFocus
     ) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ toolbarPosition: { top: `${top}px`, left: `${left}px` } });
     }
     const { showFormattingToolbar } = this.props;
     const { isVisible } = this.state;
-    if (isVisible !== (showFormattingToolbar || this.state.keepOpen)) {
+    if (isVisible !== (showFormattingToolbar || this.state.keepOpen || toolbarOnFocus)) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ isVisible: showFormattingToolbar });
     }
   }, 40);
 
+  isToolbarOnFocus = () => this.toolbarContainerRef?.current?.contains(document.activeElement);
+
   setKeepOpen = keepOpen => this.setState({ keepOpen });
 
   setToolbarContainerRef = ref => (this.toolbarContainerRef = ref);
+
+  onKeyDown = e => {
+    if (e.keyCode === KEYS_CHARCODE.ESCAPE) {
+      this.props.removeToolbarFocus?.();
+    }
+  };
 
   render() {
     const { children } = this.props;
@@ -111,6 +122,7 @@ class FloatingToolbarContainer extends PureComponent {
           transform: isVisible ? 'scale(1)' : 'scale(0)',
         }}
         data-id="floating-toolbar"
+        onKeyDown={this.onKeyDown}
       >
         {React.cloneElement(children, { setKeepOpen: this.setKeepOpen })}
       </div>
@@ -123,6 +135,7 @@ FloatingToolbarContainer.propTypes = {
   isMobile: PropTypes.bool,
   showFormattingToolbar: PropTypes.bool,
   // isInnerRCE: PropTypes.bool,
+  removeToolbarFocus: PropTypes.func,
 };
 
 export default FloatingToolbarContainer;

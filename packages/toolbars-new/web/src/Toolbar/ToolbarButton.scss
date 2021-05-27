@@ -35,9 +35,10 @@
   line-height: 1.5;
   cursor: pointer;
   // &:hover,
-  // &:focus {
-  //   outline: 0;
-  // }
+  &:focus {
+    outline: 5px auto Highlight !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
+  }
   &:disabled, &.disabled {
     cursor: default;
     opacity: 0.4;

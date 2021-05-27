@@ -150,12 +150,14 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       const showFormattingToolbar = !selection.isCollapsed() && selection.getHasFocus();
       const editorCommands = this.editor.getEditorCommands();
       const t = this.editor.getT();
+      const removeToolbarFocus = () => this.editor.removeToolbarFocus();
       const formattingToolbarButtonsKeys = this.config.formattingToolbarButtons;
       return (
         <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
           <FloatingToolbarContainer
             isMobile={isMobile}
             showFormattingToolbar={showFormattingToolbar}
+            removeToolbarFocus={removeToolbarFocus}
           >
             <Toolbar
               theme={theme}
