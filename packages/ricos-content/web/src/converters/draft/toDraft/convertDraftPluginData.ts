@@ -82,8 +82,8 @@ const convertContainerData = (
     {},
     data.config,
     width?.size && { size: constantToKebabCase(width.size) },
-    width?.custom && { width: width.custom },
-    height?.custom && { height: height.custom },
+    width?.custom && { width: parseInt(width.custom) },
+    height?.custom && { height: parseInt(height.custom) },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
