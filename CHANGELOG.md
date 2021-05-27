@@ -17,21 +17,30 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.39.0 (May 27, 2021)
+
 ### :rocket: New Feature
+
 - `ricos-content`
   - [#2559](https://github.com/wix-incubator/rich-content/pull/2559) getContentLength
 
 ### :house: Internal
+
 - `ui-components`
   - [#2549](https://github.com/wix-incubator/rich-content/pull/2549) new folder to concentrate all the ui components
   
 - `ui-components`
   - [#2553](https://github.com/wix-incubator/rich-content/pull/2553) moved labeledToggle component into ui-components
 
-</details>
-<hr/>
+### :bug: Bug Fix
 
-## 8.38.0 (May 28, 2021)
+- `ricos-common`
+  - [#2560](https://github.com/wix-incubator/rich-content/pull/2560) theme's `palette` object printed error for single field input
+
+## 8.38.0 (May 27, 2021)
 
 ### :rocket: New Feature
 
