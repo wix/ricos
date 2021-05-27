@@ -1,7 +1,7 @@
 {
   "name": "wix-rich-content-ui-components",
   "private": true,
-  "version": "8.38.0",
+  "version": "8.39.0",
   "author": {
     "name": "tamrat bayeh",
     "email": "tamratb@wix.com"
@@ -16,7 +16,9 @@
   },
   "homepage": "https://github.com/wix/ricos/tree/master/rich-content-ui-components",
   "files": [
-    "dist", "libs", "viewer"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -34,8 +36,8 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.38.0",
-    "wix-rich-content-editor-common": "8.38.0"
+    "wix-rich-content-common": "8.39.0",
+    "wix-rich-content-editor-common": "8.39.0"
   },
   "unpkg": true,
   "publishConfig": {
