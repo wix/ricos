@@ -17,8 +17,11 @@
     Click to see more.
   </summary>
 
-### :house: Internal
+### :rocket: New Feature
+- `ricos-content`
+  - [#2559](https://github.com/wix-incubator/rich-content/pull/2559) getContentLength
 
+### :house: Internal
 - `ui-components`
   - [#2549](https://github.com/wix-incubator/rich-content/pull/2549) new folder to concentrate all the ui component
 
