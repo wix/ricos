@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/getContentLength.cjs.js",
+    "module": "../../dist/lib/getContentLength.js",
+    "types": "../../dist/lib/getContentLength.d.ts"
+}
