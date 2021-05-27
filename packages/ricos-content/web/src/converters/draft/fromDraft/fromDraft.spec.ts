@@ -180,7 +180,7 @@ describe('migrate from draft', () => {
     };
 
     const expectedNodeData = {
-      containerData: { width: { size: 'CONTENT' }, alignment: 'CENTER' },
+      containerData: { width: { type: 'CONTENT' }, alignment: 'CENTER' },
       image: {
         src: { custom: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg' },
         width: 2898,

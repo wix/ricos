@@ -67,14 +67,17 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
     const { description, buttonContent } = spoiler;
     newSpoiler = { description, buttonText: buttonContent };
   }
+  const type =
+    size && (size === 'inline' ? PluginContainerData_Width_Type.CUSTOM : kebabToConstantCase(size));
   data.containerData = {
+    width: {
+      type,
+      customWidth: typeof width === 'number' ? width : undefined,
+    },
+    customHeight: typeof height === 'number' ? height : undefined,
     alignment: alignment && kebabToConstantCase(alignment),
     spoiler: newSpoiler,
   };
-  typeof height === 'number' && (data.containerData.height = { custom: height });
-  typeof width === 'number'
-    ? (data.containerData.width = { custom: width })
-    : size && (data.containerData.width = { size: kebabToConstantCase(size) });
 };
 
 const convertVideoData = (data: {
@@ -111,7 +114,7 @@ const convertDividerData = (data: {
   has(data, 'type') && (data.type = data.type?.toUpperCase());
   has(data, 'config.size') && (data.width = data.config?.size?.toUpperCase());
   has(data, 'config.alignment') && (data.alignment = data.config?.alignment?.toUpperCase());
-  data.containerData = { width: { size: PluginContainerData_Width_Type.CONTENT } };
+  data.containerData = { width: { type: PluginContainerData_Width_Type.CONTENT } };
 };
 
 const convertImageData = (data: {
@@ -196,6 +199,7 @@ const convertButtonData = (
 };
 
 const convertHTMLData = data => {
+  data.containerData.width.type = PluginContainerData_Width_Type.CUSTOM;
   const { src, srcType } = data;
   data[srcType] = src;
 };

@@ -37,7 +37,7 @@ describe('migrate to draft', () => {
     key: 'eoba3',
     imageData: {
       containerData: {
-        width: { size: PluginContainerData_Width_Type.CONTENT },
+        width: { type: PluginContainerData_Width_Type.CONTENT },
         alignment: PluginContainerData_Alignment.CENTER,
       },
       image: {

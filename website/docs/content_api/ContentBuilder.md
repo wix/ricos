@@ -1,7 +1,7 @@
 ---
 id: ContentBuilder
-title: Content Builder
-sidebar_label: Content Builder
+title:  Content Builder
+sidebar_label:  Content Builder
 ---
 
 This doc focuses on various API types, and not the exhaustive list of APIs. Examples based on Image demonstrate the “block” plugin related APIs like Image, Divider, etc -- all the plugins that require a separate block (unlike “inline” plugins).
@@ -23,7 +23,6 @@ const api = setupContentBuilder(generateKey);
 ```
 
 ## Append / insert new content
-
 The _add_ methods add new content nodes. The node position is defined either by index (i.e. sequential number inside nodes collection), or by before/after key (adds the content relatively to a given existing node addressed by key). If no index/before/after keys provided, the new content appended to the end.
 
 ```ts
@@ -46,10 +45,10 @@ addParagraph({
 ```
 
 ### Adding bullet/ordered list
-
 The list addition API is a bit different. It accepts _items_ parameter which contains textual data, and an optional _data_ parameter.
 
 This parameter determines the default data for paragraph that contains text. At the moment, lists support only paragraphs as list item containers.
+
 
 ```ts
 addBulletList({
@@ -65,12 +64,11 @@ addBulletList({
 ### Examples
 
 #### Image
-
 ```ts
 const api = setupContentBuilder(generateKey);
 const imageData: ImageData = {
   containerData: {
-    width: { size: PluginContainerData_Width_Type.SMALL },
+    width: { type: PluginContainerData_Width_Type.SMALL },
     alignment: PluginContainerData_Alignment.CENTER,
   },
   image: {...},
@@ -94,7 +92,6 @@ returns the following content:
 ```
 
 #### List
-
 ```ts
 const paragraphData: ParagraphData = {
   textStyle: {
