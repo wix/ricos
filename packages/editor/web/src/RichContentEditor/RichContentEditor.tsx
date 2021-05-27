@@ -83,6 +83,7 @@ import InnerModal from './InnerModal';
 import { onCutAndCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
+import '../styles.css';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,

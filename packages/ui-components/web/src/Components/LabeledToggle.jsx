@@ -13,7 +13,6 @@ export default class LabeledToggle extends Component {
 
   render() {
     const { label, onChange, checked, style, dataHook, tooltipText } = this.props;
-
     return (
       <div className={this.styles.labeled_toggle_root} style={style}>
         <div
