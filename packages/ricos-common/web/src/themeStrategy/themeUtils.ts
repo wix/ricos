@@ -67,7 +67,10 @@ function getBrightness(hexCode: string): number {
  * Ricos Brightness standard
  * @param hexColor Color in HEX format
  */
-export function isBright(hexColor: string): boolean {
+export function isBright(hexColor?: string): boolean {
+  if (!hexColor) {
+    return false;
+  }
   return getBrightness(hexColor) > 150;
 }
 
