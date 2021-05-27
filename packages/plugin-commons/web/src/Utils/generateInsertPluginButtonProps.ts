@@ -15,9 +15,12 @@ import {
   ToolbarButtonProps,
   Pubsub,
   EditorPluginConfig,
+  GetEditorState,
+  onPluginAddStepArgs,
+  PluginAddParams,
+  SetEditorState,
   Version,
 } from 'wix-rich-content-common';
-import { GetEditorState, onPluginAddStepArgs, SetEditorState } from 'wix-rich-content-common/src';
 import { getPluginParams } from './getPluginParams';
 
 export function generateInsertPluginButtonProps({
@@ -55,31 +58,50 @@ export function generateInsertPluginButtonProps({
   closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
-  const onPluginAddStep = (step: onPluginAddStepArgs['step'], blockKey: string) => {
+  const onPluginAddStep = (
+    step: onPluginAddStepArgs['step'],
+    blockKey: string,
+    params?: PluginAddParams
+  ) => {
     helpers?.onPluginAddStep?.({
       version: Version.currentVersion,
       entryType: toolbarName, //plusButton = SIDE, moreButton = SHORTCUT, footer = FOOTER
       entryPoint: toolbarName,
+      params,
       pluginId: blockType,
       pluginDetails: blockKey,
       step,
     });
   };
+  const onPluginModalOpened = () => {
+    helpers?.onPluginModalOpened?.({
+      version: Version.currentVersion,
+      entryType: toolbarName,
+      entryPoint: toolbarName,
+      pluginId: blockType,
+      pluginDetails: undefined,
+    });
+  };
   const onPluginAddSuccess = (params = {}) =>
     helpers?.onPluginAddSuccess?.(blockType, toolbarName, params);
 
-  function addBlock(data) {
+  function addBlock(data, beforeAdd?: (blockKey: string, params?: PluginAddParams) => void) {
+    const { componentData } = data;
     const { newBlock, newSelection, newEditorState } = createBlock(
       getEditorState(),
-      data,
+      componentData,
       blockType
     );
+    const params = getPluginParams(data, blockType);
+    const blockKey = newBlock.getKey();
+    beforeAdd?.(blockKey, params);
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    onPluginAddSuccess(getPluginParams(data, blockType));
+    onPluginAddSuccess(params); //TOOD: support pluginDetails / pluginUniqueId
     return { newBlock, newSelection, newEditorState };
   }
 
   function addCustomBlock(buttonData: InsertButton) {
+    onPluginAdd();
     buttonData.addBlockHandler?.(getEditorState());
     onPluginAddSuccess();
   }
@@ -105,7 +127,7 @@ export function generateInsertPluginButtonProps({
 
   function onClick(event: MouseEvent) {
     event.preventDefault();
-    onPluginAdd();
+    const { name, componentData } = button;
     switch (button.type) {
       case 'file':
         toggleFileSelection();
@@ -117,14 +139,16 @@ export function generateInsertPluginButtonProps({
         addCustomBlock(button);
         break;
       case BUTTON_TYPES.BUTTON:
+        onPluginAdd();
         if (button.onClick) {
           button.onClick(event);
         } else {
-          addBlock(button.componentData || {});
+          addBlock({ name, componentData });
         }
         break;
       default:
-        addBlock(button.componentData || {});
+        onPluginAdd();
+        addBlock({ name, componentData });
         break;
     }
     closePluginMenu?.();
@@ -155,6 +179,7 @@ export function generateInsertPluginButtonProps({
   }
 
   function handleExternalFileChanged({ data, error }) {
+    onPluginAdd();
     if (data) {
       const handleFilesAdded = shouldCreateGallery(data)
         ? (blockKey: string) => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
@@ -167,7 +192,9 @@ export function generateInsertPluginButtonProps({
   }
 
   function toggleButtonModal(event) {
+    onPluginAdd();
     if (helpers && helpers.openModal) {
+      onPluginModalOpened();
       let modalStyles = {};
       if (button.modalStyles) {
         modalStyles = button.modalStyles;
@@ -190,17 +217,20 @@ export function generateInsertPluginButtonProps({
         modalStyles,
         theme,
         componentData: button.componentData,
-        onConfirm: obj => {
-          const data = addBlock(obj);
-          addedBlockKey = data.newBlock;
-          onPluginAddStep('PluginModal', addedBlockKey);
-          return data;
+        onConfirm: componentData => {
+          const data = { componentData, buttonName: button.name };
+          const blockData = addBlock(data, (key, params) =>
+            onPluginAddStep('PluginModal', key, params)
+          );
+          addedBlockKey = blockData.newBlock;
+          return blockData;
         },
         pubsub,
         helpers,
         t,
         isMobile,
         blockKey: addedBlockKey,
+        toolbarName,
       });
     }
   }

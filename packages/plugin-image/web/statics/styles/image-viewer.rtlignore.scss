@@ -1,9 +1,13 @@
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 $opacityTransition: opacity 0.8s ease;
 
 .imageContainer {
   display: block;
   position: relative;
   overflow: hidden;
+  @include ricosTypography('p', true);
 }
 .expandContainer {
   height: 28px;
@@ -60,7 +64,9 @@ $opacityTransition: opacity 0.8s ease;
   text-align: center;
   padding: 18px 0;
   background: none;
+  @include ricosTypography('p', true);
   font-size: 14px;
+  color: $ricos-p-color-fallbackToPrimary;
 }
 
 .imagePreload {

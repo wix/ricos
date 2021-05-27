@@ -189,33 +189,6 @@
   padding: 30px 0px;
 }
 
-.button_designComponent_samples {
-  border-bottom: 1px solid #cccccc;
-  padding-top: 27px;
-  padding-bottom: 8px;
-  margin-right: 30px;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto;
-  @include phone {
-    width: 100%;
-    height: auto;
-    border-bottom: 0;
-    padding-bottom: 32px;
-    padding-top: 20px;
-    white-space: nowrap;
-    position: relative;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-.button_designComponent_samples_container {
-  position: relative;
-  padding-top: 5px;
-}
-
 .button_designComponent_input_container_width {
   padding-bottom: 19px;
 }
@@ -253,7 +226,7 @@
 }
 
 .sliderWithInput_input:focus {
-  border-bottom: 1px $settings-action-color solid;
+  border-bottom: 1px $settings-action-color-fallback solid;
   border-radius: 0px;
 }
 
@@ -278,7 +251,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: $settings-action-color;
+  background: $settings-action-color-fallback;
   cursor: pointer;
   margin-top: -4px;
 }
@@ -306,7 +279,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: $settings-action-color;
+  background: $settings-action-color-fallback;
   cursor: pointer;
 }
 
@@ -333,7 +306,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: $settings-action-color;
+  background: $settings-action-color-fallback;
   cursor: pointer;
   margin-top: 2px;
 }

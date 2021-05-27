@@ -6,7 +6,6 @@ import {
   LinkButtonPluginEditorConfig,
   ActionButtonPluginEditorConfig,
 } from './types';
-import { theme } from './defaults';
 import { ViewerPluginCreator } from 'wix-rich-content-common';
 export { typeMapper as buttonTypeMapper, LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE };
 
@@ -15,7 +14,6 @@ const pluginButton = (type, config) => {
     config: { ...DEFAULT_CONFIG, ...config },
     type,
     typeMapper,
-    theme,
   };
 };
 

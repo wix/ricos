@@ -20,15 +20,13 @@ message TextStyle {
     }
 
     TextAlignment text_alignment = 1;
-    google.protobuf.StringValue line_height = 2; // css value
-    google.protobuf.StringValue padding_top = 3; // css value
-    google.protobuf.StringValue padding_bottom = 4; // css value
+    google.protobuf.StringValue line_height = 2; // CSS value
 }
 
 message Link {
     message Rel {
         google.protobuf.BoolValue nofollow = 1; // Indicates to search engine crawlers that the link should not be followed
-        google.protobuf.BoolValue sponsored = 2; // paid links
+        google.protobuf.BoolValue sponsored = 2; // Paid links
         google.protobuf.BoolValue ugc = 3; // UoU generated link
     }
     enum Target {
@@ -40,11 +38,11 @@ message Link {
 
     oneof data {
         string url = 1;
-        string anchor = 2; // key of node in document
+        string anchor = 2; // Key of linked node in document
     }
     Target target = 3;
     Rel rel = 4;
-    google.protobuf.StringValue custom_data = 5; // serialized object, used for custom/external link panel
+    google.protobuf.StringValue custom_data = 5; // Serialized object, used for custom/external link panel
 }
 
 message PluginContainerData {
@@ -76,10 +74,10 @@ message PluginContainerData {
     google.protobuf.Int32Value custom_height = 4;
 }
 
-message FileSource { // passes through srcToUrl function when provided
+message FileSource {
     oneof data {
-        google.protobuf.StringValue url = 1;
-        google.protobuf.StringValue custom = 2; // e.g. an id for media server
+        google.protobuf.StringValue url = 1; // Absolute URL
+        google.protobuf.StringValue custom = 2; // ID that will be resolved to a URL by a resolver function
     }
 }
 

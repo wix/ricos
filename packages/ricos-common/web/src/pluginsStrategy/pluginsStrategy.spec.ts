@@ -1,11 +1,13 @@
 import pluginsStrategy from './pluginsStrategy';
 import getType from 'jest-get-type';
 import { BasePlugin } from './pluginTypes';
+import * as utils from '../themeStrategy/themeUtils';
 
 describe('PluginsStrategy', () => {
   const driver = {
     runStrategy: (isViewer: boolean, plugins: BasePlugin[] = []) =>
       pluginsStrategy({
+        themeData: { utils },
         isViewer,
         plugins,
         childProps: {},

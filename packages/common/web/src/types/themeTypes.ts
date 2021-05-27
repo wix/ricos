@@ -1,9 +1,10 @@
+import { AugmentedRequired } from 'utility-types/dist/mapped-types';
 import { CSSProperties } from 'react';
 
 export interface ThemeUtils {
   isBright: (hexColor: string) => boolean;
-  adaptForeground: (actionColor: string, fallbackColor?: string) => string;
-  toCssRgbA: (hexColor: string, opacity: number) => string;
+  adaptForeground: (actionColor?: string, fallbackColor?: string) => string | undefined;
+  toCssRgbA: (hexColor: string | undefined, opacity: number) => string | undefined;
 }
 
 /** Colors scheme for `Ricos`.
@@ -19,9 +20,9 @@ export interface ThemeUtils {
  * ```
  */
 export interface PaletteColors {
-  actionColor: string;
-  bgColor: string;
-  textColor: string;
+  actionColor?: string;
+  bgColor?: string;
+  textColor?: string;
   textColorLow?: string;
   disabledColor?: string;
   /** Default is black.
@@ -29,8 +30,14 @@ export interface PaletteColors {
    * Therefore this color should remain relatively dark. */
   fallbackColor?: string;
 }
+
+export interface ThemeData {
+  colors?: PaletteColors;
+  utils: ThemeUtils;
+  customStyles?: RicosCustomStyles;
+}
 export interface ThemeGeneratorFunction {
-  (colors: PaletteColors, utils: ThemeUtils, customStyles?: RicosCustomStyles): void;
+  (themeData: AugmentedRequired<ThemeData, 'colors'>): void;
 }
 
 export interface CustomTextualStyle {

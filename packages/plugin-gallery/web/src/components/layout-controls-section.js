@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { translate } from 'react-i18next';
 import { mergeStyles } from 'wix-rich-content-common';
 import { SettingsSection } from 'wix-rich-content-plugin-commons';
 import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
@@ -71,7 +70,7 @@ class LayoutControlsSection extends Component {
       component: ItemsPerRow,
       props: {
         onChange: value => this.applyGallerySetting({ numberOfImagesPerRow: value }),
-        value: this.getValueFromComponentStyles('numberOfImagesPerRow'),
+        defaultValue: this.getValueFromComponentStyles('numberOfImagesPerRow'),
         t,
       },
     },
@@ -79,7 +78,7 @@ class LayoutControlsSection extends Component {
       component: ThumbnailSize,
       props: {
         onChange: value => this.applyGallerySetting({ gallerySizePx: value }),
-        value: this.getValueFromComponentStyles('gallerySizePx'),
+        defaultValue: this.getValueFromComponentStyles('gallerySizePx'),
         options: {
           label: this.getValueFromComponentStyles('isVertical')
             ? t('GallerySettings_LayoutControlSection_Column')
@@ -91,7 +90,7 @@ class LayoutControlsSection extends Component {
       component: Spacing,
       props: {
         onChange: value => this.applyGallerySetting({ imageMargin: value }),
-        value: this.getValueFromComponentStyles('imageMargin'),
+        defaultValue: this.getValueFromComponentStyles('imageMargin'),
         t,
       },
     },
@@ -99,7 +98,7 @@ class LayoutControlsSection extends Component {
       component: Spacing,
       props: {
         onChange: value => this.applyGallerySetting({ thumbnailSpacings: value / 2 }),
-        value: this.getValueFromComponentStyles('thumbnailSpacings') * 2,
+        defaultValue: this.getValueFromComponentStyles('thumbnailSpacings') * 2,
         t,
       },
     },
