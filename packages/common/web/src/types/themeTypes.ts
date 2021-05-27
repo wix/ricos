@@ -3,8 +3,8 @@ import { CSSProperties } from 'react';
 
 export interface ThemeUtils {
   isBright: (hexColor: string) => boolean;
-  adaptForeground: (actionColor: string, fallbackColor?: string) => string;
-  toCssRgbA: (hexColor: string, opacity: number) => string;
+  adaptForeground: (actionColor?: string, fallbackColor?: string) => string | undefined;
+  toCssRgbA: (hexColor: string | undefined, opacity: number) => string | undefined;
 }
 
 /** Colors scheme for `Ricos`.
@@ -20,9 +20,9 @@ export interface ThemeUtils {
  * ```
  */
 export interface PaletteColors {
-  actionColor: string;
-  bgColor: string;
-  textColor: string;
+  actionColor?: string;
+  bgColor?: string;
+  textColor?: string;
   textColorLow?: string;
   disabledColor?: string;
   /** Default is black.

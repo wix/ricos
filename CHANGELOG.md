@@ -26,6 +26,8 @@
 
 - `plugin-commons`
   - [#2552](https://github.com/wix-incubator/rich-content/pull/2552) `addPluginStep` params specification for polls plugin
+- `ricos-common`
+  - [#2555](https://github.com/wix-incubator/rich-content/pull/2555) theme's `palette` object can receive partial object (e.g. only actionColor)
 
 ### :rocket: New Feature
 
