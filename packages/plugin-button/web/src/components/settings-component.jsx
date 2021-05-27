@@ -15,9 +15,9 @@ import styles from '../../statics/styles/settings-component-styles.scss';
 class SettingsComponent extends PureComponent {
   constructor(props) {
     super(props);
-    const { settingsObj, shouldShowLink } = this.props;
+    const { settingsObj, showLinkPanel } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const linkButtonSettings = shouldShowLink
+    const linkButtonSettings = showLinkPanel
       ? {
           url: settingsObj.url,
           target: settingsObj.target,
@@ -67,7 +67,7 @@ class SettingsComponent extends PureComponent {
   };
 
   render() {
-    const { t, shouldShowLink, uiSettings, theme } = this.props;
+    const { t, showLinkPanel, uiSettings, theme } = this.props;
     const { buttonText, url, target, rel } = this.state;
     const { linkPanel } = uiSettings || {};
     const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
@@ -94,7 +94,7 @@ class SettingsComponent extends PureComponent {
             />
           </div>
         </div>
-        {shouldShowLink && (
+        {showLinkPanel && (
           <>
             <div className={this.styles.button_settingsComponent_header_ButtonLink}>
               {t('ButtonModal_Button_Link')}
@@ -125,7 +125,7 @@ SettingsComponent.propTypes = {
   isMobile: PropTypes.bool,
   onKeyPress: PropTypes.func,
   onBlur: PropTypes.func,
-  shouldShowLink: PropTypes.bool,
+  showLinkPanel: PropTypes.bool,
   anchorTarget: PropTypes.string,
   uiSettings: PropTypes.object,
 };

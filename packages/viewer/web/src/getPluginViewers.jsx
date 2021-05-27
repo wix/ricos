@@ -13,6 +13,8 @@ import {
   HTML_TYPE,
   ACTION_BUTTON_TYPE,
   LINK_BUTTON_TYPE,
+  getRelValue,
+  getTargetValue,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -112,11 +114,11 @@ class PluginViewer extends PureComponent {
         const ContainerElement = hasLink || hasAnchor ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
-          const { url, target, rel } = config.link;
+          const { url, target = anchorTarget, rel } = config.link;
           containerProps = {
             href: normalizeUrl(url),
-            target: target || anchorTarget || '_self',
-            rel: `noopener noreferrer ${rel || ''}`.trim(),
+            target: getTargetValue(target),
+            rel: getRelValue(rel),
           };
         }
         if (hasAnchor) {
@@ -124,7 +126,7 @@ class PluginViewer extends PureComponent {
           const href = `#viewer-${anchor}`;
           containerProps = {
             href,
-            target: '_self',
+            target: '_top',
           };
         }
 

@@ -235,7 +235,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "0": {
       "data": {
         "rel": "",
-        "target": "_self",
+        "target": "_top",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -244,7 +244,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "1": {
       "data": {
         "rel": "",
-        "target": "_self",
+        "target": "_top",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -253,7 +253,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "2": {
       "data": {
         "rel": "",
-        "target": "_self",
+        "target": "_top",
         "url": "https://www.sport5.co.il/"
       },
       "mutability": "MUTABLE",
@@ -262,7 +262,7 @@ exports[`text > allow to apply inline styles and links #0`] =
     "3": {
       "data": {
         "rel": "",
-        "target": "_self",
+        "target": "_top",
         "url": "https://www.one.co.il/"
       },
       "mutability": "MUTABLE",
@@ -398,7 +398,6 @@ exports[`text > allow to enter hashtag with link #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -407,7 +406,7 @@ exports[`text > allow to enter hashtag with link #0`] =
     "1": {
       "data": {
         "rel": "",
-        "target": "_self",
+        "target": "_top",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -415,7 +414,6 @@ exports[`text > allow to enter hashtag with link #0`] =
     },
     "2": {
       "data": {
-        "target": "_self",
         "url": "thisislink#youknow.com"
       },
       "mutability": "MUTABLE",
@@ -1616,8 +1614,6 @@ exports[`text > should paste html correctly #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "https://en.wikipedia.org/wiki/Anchor_text"
       },
       "mutability": "MUTABLE",
@@ -2260,7 +2256,6 @@ exports[`text > should enter link and further text in current block has no inlin
   "entityMap": {
     "0": {
       "data": {
-        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -2306,7 +2301,6 @@ exports[`text > should enter link and further text in next block has no inline s
   "entityMap": {
     "0": {
       "data": {
-        "target": "_self",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",

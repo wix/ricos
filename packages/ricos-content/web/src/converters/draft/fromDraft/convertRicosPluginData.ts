@@ -192,8 +192,8 @@ const convertButtonData = (
   if (url) {
     data.link = convertLink({
       url,
-      rel: rel ? 'nofollow' : undefined,
-      target: target ? '_blank' : '_top',
+      rel,
+      target,
     });
   }
 };

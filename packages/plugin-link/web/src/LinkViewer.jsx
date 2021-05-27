@@ -7,6 +7,8 @@ import {
   validate,
   anchorScroll,
   addAnchorTagToUrl,
+  getRelValue,
+  getTargetValue,
 } from 'wix-rich-content-common';
 import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
 import { isEqual } from 'lodash';
@@ -67,21 +69,13 @@ class LinkViewer extends Component {
 
   getHref = (url, anchor) => (url ? normalizeUrl(url) : `#viewer-${anchor}`);
 
-  getTarget(anchor, target, anchorTarget) {
-    if (anchor) {
-      return '_self';
-    } else {
-      return target ? target : anchorTarget || '_self';
-    }
-  }
-
   render() {
     const { componentData, anchorTarget, children, isInEditor } = this.props;
-    const { url, anchor, target, rel } = componentData;
+    const { url, anchor, target = anchorTarget, rel } = componentData;
     const anchorProps = {
       href: this.getHref(url, anchor),
-      target: this.getTarget(anchor, target, anchorTarget),
-      rel: `noopener noreferrer ${rel || ''}`.trim(),
+      target: anchor ? '_top' : getTargetValue(target),
+      rel: getRelValue(rel),
       className: classNames(this.styles.link, {
         [this.styles.linkInEditor]: isInEditor,
         [this.styles.linkInViewer]: !isInEditor,

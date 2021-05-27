@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, getRelValue, getTargetValue } from 'wix-rich-content-common';
 import styles from '../../statics/styles/default-styles.scss';
 import { ACTION_BUTTON_TYPE, LINK_BUTTON_TYPE } from '../types';
 class ButtonViewer extends PureComponent {
@@ -17,9 +17,8 @@ class ButtonViewer extends PureComponent {
   };
 
   render() {
-    const { theme } = this.props;
+    const { theme, url, anchorTarget, style, target = anchorTarget, rel, buttonText } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const { url, style, target, rel, buttonText } = this.props;
     const isActionButton = this.isActionButton();
     const Component = isActionButton ? 'div' : 'a';
     let props = { className: this.styles.button_container, style };
@@ -27,8 +26,8 @@ class ButtonViewer extends PureComponent {
       ? { ...props }
       : {
           href: url,
-          target,
-          rel: `noopener noreferrer ${rel || ''}`.trim(),
+          target: getTargetValue(target),
+          rel: getRelValue(rel),
           ...props,
         };
     return (
@@ -43,6 +42,7 @@ ButtonViewer.propTypes = {
   url: PropTypes.string,
   style: PropTypes.object,
   target: PropTypes.string,
+  anchorTarget: PropTypes.string,
   rel: PropTypes.string,
   buttonText: PropTypes.string,
   theme: PropTypes.object.isRequired,

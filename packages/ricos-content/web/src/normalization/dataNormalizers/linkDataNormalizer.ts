@@ -15,7 +15,7 @@ const linkDataNormalizer = (
   }
 
   return {
-    target: targetBlank ? '_blank' : anchorTarget || '_self',
+    target: targetBlank ? '_blank' : anchorTarget,
     rel: nofollow ? 'nofollow' : relValue,
     ...rest,
   };

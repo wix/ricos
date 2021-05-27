@@ -5,7 +5,6 @@ import {
   Decoration_Type,
   PluginContainerData_Width_Type,
   Link,
-  Link_Target,
   ImageData,
   Decoration,
   PluginContainerData,
@@ -188,11 +187,11 @@ const convertFileData = (data: FileData & FileComponentData) => {
 const convertButtonData = (data: Partial<ButtonData> & { button }) => {
   const { link, text, styles } = data;
   const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles || {};
-  const { url, rel, target } = link || {};
+  const convertedLink = link ? convertLink(link) : {};
   data.button = {
     settings: {
       buttonText: text,
-      ...(url ? { url, rel: !!rel?.nofollow, target: target === Link_Target.BLANK } : {}),
+      ...convertedLink,
     },
     design: {
       borderRadius,

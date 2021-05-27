@@ -31,7 +31,7 @@ export default class ButtonInputModal extends Component {
       initialComponentData: { ...button },
       isHover: false,
       activeTab: settingsTabValue,
-      shouldShowLink: !this.props.settings.isActionButton,
+      showLinkPanel: !this.props.settings.isActionButton,
     };
 
     this.setScrollbarRef = element => {
@@ -131,7 +131,7 @@ export default class ButtonInputModal extends Component {
 
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel, isMobile } = this.props;
-    const { shouldShowLink } = this.state;
+    const { showLinkPanel } = this.state;
     const { styles } = this;
     const settingTabLabel = (
       <div className={styles.button_inputModal_settingTab}>
@@ -152,7 +152,7 @@ export default class ButtonInputModal extends Component {
         onSettingsChange={this.onSettingsChanged.bind(this)}
         settingsObj={this.state.settings}
         onKeyPress={this.handleKeyPress}
-        shouldShowLink={shouldShowLink}
+        showLinkPanel={showLinkPanel}
       />
     );
     const designComponent = (

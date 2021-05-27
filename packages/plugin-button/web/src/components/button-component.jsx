@@ -16,6 +16,7 @@ class ButtonComponent extends PureComponent {
       componentData: { button },
       settings: { onClick },
       helpers,
+      anchorTarget,
     } = this.props;
     const { theme } = this.props;
     const buttonText = button.settings.buttonText;
@@ -43,6 +44,7 @@ class ButtonComponent extends PureComponent {
         theme={theme}
         onClick={onClick}
         helpers={helpers}
+        anchorTarget={anchorTarget}
         {...linkButtonSettings}
       />
     );
@@ -52,6 +54,7 @@ class ButtonComponent extends PureComponent {
 ButtonComponent.propTypes = {
   componentData: PropTypes.object,
   style: PropTypes.object,
+  anchorTarget: PropTypes.string,
   buttonObj: PropTypes.object,
   settings: PropTypes.object.isRequired,
   blockProps: PropTypes.object,

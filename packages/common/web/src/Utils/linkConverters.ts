@@ -3,7 +3,7 @@ import { Link_Rel } from '../index';
 const SPONSORED = 'sponsored';
 const NO_FOLLOW = 'nofollow';
 const UGC = 'ugc';
-const SELF = '_self';
+const TOP = '_top';
 const BLANK = '_blank';
 
 export const convertRelObjectToString = (relObject?: Link_Rel) => {
@@ -52,7 +52,13 @@ export const convertTargetStringToBoolean = (target?: string) => target === BLAN
 export const convertTargetBooleanToString = (targetBlank?: boolean, anchorTarget?: string) => {
   if (targetBlank) {
     return BLANK;
-  } else if (targetBlank === false) {
-    return SELF;
-  } else return anchorTarget || SELF;
+  }
+  if (!anchorTarget || anchorTarget === BLANK) {
+    return TOP;
+  }
+  return anchorTarget;
 };
+
+export const getRelValue = (rel?: string) => `noopener noreferrer ${rel || ''}`.trim();
+
+export const getTargetValue = (target?: string) => target || TOP;

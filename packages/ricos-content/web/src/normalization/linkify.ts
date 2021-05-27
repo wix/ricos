@@ -81,8 +81,8 @@ const createEntity = (
       mutability: 'MUTABLE',
       data: {
         url,
-        target: anchorTarget || '_blank',
-        rel: relValue || 'noopener',
+        target: anchorTarget,
+        rel: relValue,
       },
     },
   };
