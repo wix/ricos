@@ -39,9 +39,7 @@ export const isRicosPalette = (palette: RicosTheme['palette']) =>
   palette &&
   typeof palette !== 'string' &&
   !Array.isArray(palette) &&
-  palette.actionColor &&
-  palette.textColor &&
-  palette.bgColor;
+  (palette.actionColor || palette.textColor || palette.bgColor);
 
 export const getColorByCode = (wixPalette: WixPalette, code: number): WixColor => {
   const idx = code <= 5 ? code - 1 : code - 6;

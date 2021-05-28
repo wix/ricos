@@ -17,10 +17,41 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.39.0 (May 27, 2021)
+
+### :rocket: New Feature
+
+- `ricos-content`
+  - [#2559](https://github.com/wix-incubator/rich-content/pull/2559) getContentLength
+
+### :house: Internal
+
+- `ui-components`
+  - [#2549](https://github.com/wix-incubator/rich-content/pull/2549) new folder to concentrate all the ui component
+
+### :bug: Bug Fix
+
+- `ricos-common`
+  - [#2560](https://github.com/wix-incubator/rich-content/pull/2560) theme's `palette` object printed error for single field input
+
+## 8.38.0 (May 27, 2021)
+
+### :rocket: New Feature
+
+- `ricos-schema`
+  - [#2543](https://github.com/wix/ricos/pull/2543) containerData width field refactor
+
+## 8.37.0 (May 27, 2021)
+
 ### :nail_care: Polish
 
 - `plugin-commons`
   - [#2552](https://github.com/wix-incubator/rich-content/pull/2552) `addPluginStep` params specification for polls plugin
+- `ricos-common`
+  - [#2555](https://github.com/wix-incubator/rich-content/pull/2555) theme's `palette` object can receive partial object (e.g. only actionColor)
 
 ### :rocket: New Feature
 
@@ -31,8 +62,10 @@
 - `editor`
   - [#2557](https://github.com/wix/ricos/pull/2557) `onMenuLoad` callback
 
-</details>
-<hr/>
+### :house: Internal
+
+- `gallery`
+  - [#2558](https://github.com/wix-incubator/rich-content/pull/2558) revert to pro gallery back to v2 (requested by blog)
 
 ## 8.36.6 (May 26, 2021)
 

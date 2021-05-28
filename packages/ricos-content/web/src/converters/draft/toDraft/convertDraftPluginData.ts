@@ -3,7 +3,6 @@ import {
   Node,
   Node_Type,
   Decoration_Type,
-  PluginContainerData_Width_Type,
   Link,
   Link_Target,
   ImageData,
@@ -52,7 +51,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.MAP]: convertMapData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
-    convertContainerData(newData);
+    convertContainerData(newData, nodeType);
   }
   if (nodeType in converters) {
     const convert = converters[nodeType];
@@ -74,19 +73,17 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
   return data;
 };
 
-const convertContainerData = (data: { containerData?: PluginContainerData; config }) => {
-  const { width, alignment, spoiler, customHeight } = data.containerData || {};
+const convertContainerData = (
+  data: { containerData?: PluginContainerData; config },
+  nodeType: string
+) => {
+  const { width, alignment, spoiler, height } = data.containerData || {};
   data.config = Object.assign(
     {},
     data.config,
-    width?.type && {
-      size:
-        width.type === PluginContainerData_Width_Type.CUSTOM
-          ? 'inline'
-          : constantToKebabCase(width.type),
-    },
-    width?.customWidth && { width: width.customWidth },
-    customHeight && { height: customHeight },
+    width?.size && { size: constantToKebabCase(width.size) },
+    width?.custom && { width: parseInt(width.custom) },
+    height?.custom && { height: parseInt(height.custom) },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
@@ -96,6 +93,11 @@ const convertContainerData = (data: { containerData?: PluginContainerData; confi
       },
     }
   );
+  if (nodeType === Node_Type.IMAGE && width?.custom) {
+    data.config.size = 'inline';
+  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+    data.config.size = 'content';
+  }
   delete data.containerData;
 };
 
