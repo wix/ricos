@@ -462,7 +462,7 @@
   "Map_plugin_search_tags": "bản đồ đường địa điểm vị trí truy cập đồ thị ảnh chụp véc-tơ khám phá địa lý tập bản đồ thành phố quốc gia khu vực vùng lân cận vùng",
   "UploadFile_Error_StorageExceeded_Visitor": "Không thể tải tệp lên ngay bây giờ. Liên hệ với chủ sở hữu trang web để biết thêm thông tin.",
   "UploadFile_Error_Generic_Toast_Multiple": "{{errors}} tệp không được tải lên. Hãy thử lại.",
-  "TablePlugin_Toolbar_VerticalAlignment_AlignMiddle_Tooltip": "Căn giữa",
+  "TablePlugin_Toolbar_VerticalAlignment_AlignMiddle_Tooltip": "Căn chính giữa",
   "Poll_PollSettings_Tab_Design_Section_Background_Color_Pick": "Chọn một màu sắc",
   "SizeOriginalButton_Tooltip": "Kích thước ban đầu",
   "HeadingThreeButton_label": "Tiêu đề 3",
