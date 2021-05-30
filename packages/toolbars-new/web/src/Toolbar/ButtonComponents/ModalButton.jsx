@@ -25,6 +25,8 @@ class ModalButton extends Component {
       saveSelection?.();
       saveState?.();
       setKeepOpen?.(true);
+    } else {
+      setKeepOpen?.(false);
     }
   };
 
