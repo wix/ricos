@@ -22,7 +22,7 @@ export function getContentLength(content: RichContent | DraftContent): number {
 }
 
 function getRichContentTextLength(content: RichContent): number {
-  return extract(content)
+  return extract(content.nodes)
     .map(({ textData }) => textData?.text || '')
     .get()
     .reduce((count, line) => count + line.length, 0);

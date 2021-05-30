@@ -1,6 +1,7 @@
 import * as T from 'fp-ts/lib/Tree';
+import { compact, isArray } from 'lodash';
 import { Prism, fromTraversable, Traversal, Lens } from 'monocle-ts';
-import { RichContent, Node, Node_Type } from 'ricos-schema';
+import { Node, Node_Type } from 'ricos-schema';
 
 export interface Extractor<DT> {
   filter: (predicate: (data: DT) => boolean) => Extractor<DT>;
@@ -8,11 +9,10 @@ export interface Extractor<DT> {
   get: () => DT[];
 }
 
-const unfoldTree = (content: RichContent) =>
-  T.unfoldTree<Node, Node>({ key: 'root', type: Node_Type.PARAGRAPH, nodes: content.nodes }, n => [
-    n,
-    n.nodes,
-  ]);
+const unfoldTree = (nodes: Node | Node[]) => {
+  const root = isArray(nodes) ? { key: 'root', type: Node_Type.UNRECOGNIZED, nodes } : nodes;
+  return T.unfoldTree<Node, Node>(root, n => [n, n.nodes]);
+};
 
 class TraversalExtractor<DT> implements Extractor<DT> {
   traversal: Traversal<T.Tree<Node>, DT>;
@@ -41,9 +41,9 @@ class TraversalExtractor<DT> implements Extractor<DT> {
   }
 
   get() {
-    return this.traversal.asFold().getAll(this.tree);
+    return compact(this.traversal.asFold().getAll(this.tree));
   }
 }
 
-export const extract = (content: RichContent): Extractor<Node> =>
-  new TraversalExtractor<Node>(fromTraversable(T.tree)<Node>(), unfoldTree(content));
+export const extract = (nodes: Node | Node[]): Extractor<Node> =>
+  new TraversalExtractor<Node>(fromTraversable(T.tree)<Node>(), unfoldTree(nodes));

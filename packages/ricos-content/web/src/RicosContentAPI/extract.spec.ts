@@ -1,13 +1,22 @@
 import { extract } from './extract';
-import { RichContent } from 'ricos-schema';
+import { RichContent, Node_Type } from 'ricos-schema';
 import rawContent from '../../../../../e2e/tests/fixtures/text-blocks-new.json';
 
 describe('Content extract', () => {
-  it('should extract all the content text', () => {
-    const text = extract(RichContent.fromJSON(rawContent))
-      .map(({ textData, key }) => ({ key, textData: textData || { text: '', decorations: [] } }))
-      .map(({ textData, key }) => ({ key, text: textData.text }))
+  it('should extract the bullet list texts', () => {
+    const nodes = RichContent.fromJSON(rawContent).nodes.filter(
+      ({ type }) => type === Node_Type.BULLET_LIST
+    );
+
+    const actual = extract(nodes)
+      .map(({ textData }) => textData?.text)
       .get();
-    console.dir(text); // eslint-disable-line no-console
+
+    const expected = [
+      // eslint-disable-next-line max-len
+      'Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.',
+      'Override the digital divide with additional clickthroughs from DevOps.',
+    ];
+    expect(actual).toStrictEqual(expected);
   });
 });
