@@ -1,6 +1,6 @@
 {
   "name": "ricos-content",
-  "version": "8.37.0",
+  "version": "8.39.0",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -37,9 +37,11 @@
     "updateBaselines": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} ../../../scripts/updateBaselines"
   },
   "dependencies": {
+    "fp-ts": "^2.10.5",
+    "monocle-ts": "^2.3.9",
     "omit-deep": "0.3.0",
     "parse5": "^6.0.0",
-    "ricos-schema": "8.37.0",
+    "ricos-schema": "8.39.0",
     "to-camel-case": "1.0.0",
     "to-constant-case": "1.0.0",
     "to-slug-case": "1.0.0",
