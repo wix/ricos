@@ -22,6 +22,11 @@ export default () => {
             <VerticalEmbedSlimEditor content={fixtrue} />
           </RichContentEditorBox>
         </Section>
+        <Section title="Error from server">
+          <RichContentEditorBox sourcecode={editorSourcecode} content={fixtrue}>
+            <VerticalEmbedEditor content={fixtrue} withError />
+          </RichContentEditorBox>
+        </Section>
         <Section title="Content State">
           <ContentState json={fixtrue} />
         </Section>

@@ -12,6 +12,7 @@ import {
   redo,
   getTextAlignment,
   hasInlineStyle,
+  getDraftInlineStyle,
   getBlockType,
   hasLinksInSelection,
   getLinkDataInSelection,
@@ -187,8 +188,10 @@ export const createEditorCommands = (
   const textFormattingCommands = {
     undo: (): void => setEditorState(undo(getEditorState())),
     redo: (): void => setEditorState(redo(getEditorState())),
-    toggleInlineStyle: (style: InlineStyle): void =>
-      setEditorState(RichUtils.toggleInlineStyle(getEditorState(), style.toUpperCase())),
+    toggleInlineStyle: (inlineStyle: InlineStyle): void =>
+      setEditorState(
+        RichUtils.toggleInlineStyle(getEditorState(), getDraftInlineStyle(inlineStyle))
+      ),
     setBlockType,
     setTextAlignment: (textAlignment: TextAlignment): void =>
       setEditorState(setTextAlignment(getEditorState(), textAlignment)),
