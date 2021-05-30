@@ -5,10 +5,9 @@ import rawContent from '../../../../../e2e/tests/fixtures/text-blocks-new.json';
 describe('Content extract', () => {
   it('should extract all the content text', () => {
     const text = extract(RichContent.fromJSON(rawContent))
-      .map(({ textData }) => textData)
-      .filter(data => !!data)
-      .map(({ text }) => text)
+      .map(({ textData, key }) => ({ key, textData: textData || { text: '', decorations: [] } }))
+      .map(({ textData, key }) => ({ key, text: textData.text }))
       .get();
-    console.log(text);
+    console.dir(text); // eslint-disable-line no-console
   });
 });
