@@ -389,7 +389,7 @@ describe('plugins', () => {
 
     // TODO: figure out how to test keyboard combinations of command/ctrl keys in cypress ci
     // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('create nested lists using tab & shift-tab', function() {
+    it.skip('create nested lists using CMD+M/CMD+SHIFT+M', function() {
       cy.loadRicosEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .type('{command+m}')

@@ -307,7 +307,7 @@ describe('text', () => {
 
     // TODO: figure out how to test keyboard combinations of command/ctrl keys in cypress ci
     // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('allow to apply indent when clicking tab/shift+tab on selected block', function() {
+    it.skip('allow to apply indent when clicking CMD+M on selected block', function() {
       cy.loadRicosEditorAndViewer('', usePlugins(plugins.textPlugins))
         .focusEditor()
         .enterParagraphs(['Text should not include indentation.'])
