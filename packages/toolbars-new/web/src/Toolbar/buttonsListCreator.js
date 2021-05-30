@@ -184,7 +184,7 @@ const buttonsFullData = {
     icon: SpoilerButtonIcon,
     dataHook: 'spoilerButton',
     tooltip: 'Spoiler',
-    action: 'SPOILER',
+    action: 'spoiler',
     type: 'button',
   },
   LINE_SPACING: {
@@ -218,7 +218,7 @@ const buttonsFullData = {
   },
 };
 
-const inlineStyleButtons = ['Bold', 'Italic', 'Underline'];
+const inlineStyleButtons = ['Bold', 'Italic', 'Underline', 'SPOILER'];
 
 const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedList', 'HEADINGS'];
 
