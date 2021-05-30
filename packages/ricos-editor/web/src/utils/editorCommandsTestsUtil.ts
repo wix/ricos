@@ -527,7 +527,7 @@ const mention = {
   },
 };
 
-export const inlineStylesTestConfig = ['bold', 'italic', 'underline'];
+export const inlineStylesTestConfig = ['bold', 'italic', 'underline', 'spoiler'];
 
 export const pluginsTestConfig = {
   divider,
