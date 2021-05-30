@@ -129,9 +129,6 @@ export const resizeMediaUrl = (
   allowWatermark = false,
   focalPoint
 ) => {
-  // assign default parameters
-  originalUrl = originalUrl || '';
-  sharpParams = sharpParams || {};
   if (originalUrl.indexOf('base64') !== -1) {
     return originalUrl;
   }

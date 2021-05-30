@@ -1,0 +1,209 @@
+{
+  "nodes": [
+    {
+      "type": "PARAGRAPH",
+      "key": "50k2j",
+      "nodes": [
+        {
+          "type": "TEXT",
+          "key": "c4om",
+          "nodes": [],
+          "textData": {
+            "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews.",
+            "decorations": []
+          }
+        }
+      ],
+      "paragraphData": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "ORDERED_LIST",
+      "key": "3s1pl",
+      "nodes": [
+        {
+          "type": "LIST_ITEM",
+          "key": "d4hhc",
+          "nodes": [
+            {
+              "type": "PARAGRAPH",
+              "key": "892gd",
+              "nodes": [
+                {
+                  "type": "TEXT",
+                  "key": "f75ns",
+                  "nodes": [],
+                  "textData": {
+                    "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+                    "decorations": []
+                  }
+                }
+              ],
+              "paragraphData": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "LIST_ITEM",
+          "key": "a4ikl",
+          "nodes": [
+            {
+              "type": "PARAGRAPH",
+              "key": "ane7v",
+              "nodes": [],
+              "paragraphData": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "LIST_ITEM",
+          "key": "8e46b",
+          "nodes": [
+            {
+              "type": "PARAGRAPH",
+              "key": "61hrq",
+              "nodes": [
+                {
+                  "type": "TEXT",
+                  "key": "eim3k",
+                  "nodes": [],
+                  "textData": {
+                    "text": "Check if the list above displays correctly!",
+                    "decorations": []
+                  }
+                }
+              ],
+              "paragraphData": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "PARAGRAPH",
+      "key": "87u",
+      "nodes": [
+        {
+          "type": "TEXT",
+          "key": "caesb",
+          "nodes": [],
+          "textData": {
+            "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+            "decorations": []
+          }
+        }
+      ],
+      "paragraphData": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "BULLET_LIST",
+      "key": "drg8t",
+      "nodes": [
+        {
+          "type": "LIST_ITEM",
+          "key": "dp96d",
+          "nodes": [
+            {
+              "type": "PARAGRAPH",
+              "key": "707o1",
+              "nodes": [
+                {
+                  "type": "TEXT",
+                  "key": "5ue7t",
+                  "nodes": [],
+                  "textData": {
+                    "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+                    "decorations": []
+                  }
+                }
+              ],
+              "paragraphData": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "LIST_ITEM",
+          "key": "7vnq7",
+          "nodes": [
+            {
+              "type": "PARAGRAPH",
+              "key": "k87q",
+              "nodes": [
+                {
+                  "type": "TEXT",
+                  "key": "5pcsa",
+                  "nodes": [],
+                  "textData": {
+                    "text": "Override the digital divide with additional clickthroughs from DevOps.",
+                    "decorations": []
+                  }
+                }
+              ],
+              "paragraphData": {
+                "textStyle": {
+                  "textAlignment": "AUTO"
+                },
+                "indentation": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "PARAGRAPH",
+      "key": "am5bt",
+      "nodes": [
+        {
+          "type": "TEXT",
+          "key": "3gg6b",
+          "nodes": [],
+          "textData": {
+            "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+            "decorations": []
+          }
+        }
+      ],
+      "paragraphData": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "createdTimestamp": "2021-05-09T19:20:40.508Z",
+    "updatedTimestamp": "2021-05-09T19:20:40.508Z"
+  }
+}

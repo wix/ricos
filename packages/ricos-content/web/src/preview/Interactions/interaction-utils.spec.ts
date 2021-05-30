@@ -87,6 +87,10 @@ describe('seeFullPost interaction', () => {
           showDescription: false,
           showTitle: false,
         },
+        metadata: {
+          alt: '',
+          caption: '',
+        },
         interactions: [
           {
             type: 'SEE_FULL_CONTENT',
@@ -125,6 +129,10 @@ describe('image counter interaction', () => {
           alignment: 'center',
           showDescription: false,
           showTitle: false,
+        },
+        metadata: {
+          alt: '',
+          caption: '',
         },
         interactions: [
           {

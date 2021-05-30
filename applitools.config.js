@@ -30,7 +30,7 @@ function getBranchName() {
 
 module.exports = {
   ...privateConfig,
-  concurrency: 200,
+  testConcurrency: 200,
   dontCloseBatches: true,
   batchName: getBranchName(),
   batchId: process.env.COMMIT_SHA || Math.random().toString(),
