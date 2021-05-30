@@ -5,7 +5,7 @@ export { default as AccessibilityListener } from './Components/AccessibilityList
 export { default as ViewportRenderer } from './Components/ViewportRenderer';
 
 // Utils
-export { default as withI18n } from './Utils/withI18n';
+export { default as withI18n, translate, Trans } from './Utils/withI18n';
 export { default as createHocName } from './Utils/createHocName';
 export {
   sizeClassName,
@@ -42,3 +42,5 @@ export { simplePubsub, Pubsub, Store } from './Utils/simplePubsub';
 export { generateKey } from './Utils/generateKey';
 export { getBlocksFromContentState } from './Utils/innerRCEBlocksUtils';
 export * from './consts';
+
+export { default as createJustificationFixDecorator } from './draftDecorators/createJustificationFixDecorator';

@@ -65,6 +65,7 @@ export {
   createSelection,
   getBlockType,
   hasInlineStyle,
+  getDraftInlineStyle,
   indentSelectedBlocks,
   isTypeText,
   setForceSelection,

@@ -23,6 +23,7 @@ import {
   InlineStyle,
   RelValue,
   getTargetValue,
+  SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
@@ -41,8 +42,19 @@ type CustomLinkData = any;
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
-export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) =>
-  editorState.getCurrentInlineStyle().has(inlineStyle.toUpperCase());
+const draftInlineStyle = {
+  bold: 'BOLD',
+  underline: 'UNDERLINE',
+  italic: 'ITALIC',
+  spoiler: SPOILER_TYPE,
+};
+
+export const getDraftInlineStyle = (inlineStyle: InlineStyle) => draftInlineStyle[inlineStyle];
+
+export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) => {
+  const draftInlineStyle = getDraftInlineStyle(inlineStyle);
+  return editorState.getCurrentInlineStyle().has(draftInlineStyle);
+};
 
 export function createSelection({
   blockKey,

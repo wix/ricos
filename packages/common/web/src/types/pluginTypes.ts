@@ -13,6 +13,7 @@ import {
   SetEditorState,
   ThemeGeneratorFunction,
   RichContentTheme,
+  ThemeData,
 } from '.';
 import {
   ContentBlock,
@@ -291,6 +292,7 @@ export type LegacyEditorPluginConfig<
 > & {
   uiSettings?: UISettings;
   getToolbarSettings?: GetToolbarSettings;
+  themeData?: ThemeData;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };

@@ -85,9 +85,25 @@ export default class ButtonInputModal extends Component {
     const {
       helpers: { closeModal },
     } = this.props;
+    const { initialComponentData, design } = this.state;
+    if (!initialComponentData.design.color && this.currentColorEqualToConfig()) {
+      this.removeColorsFromComponentData(design);
+    }
     this.setState({ submitted: true, isOpen: false });
     this.triggerLinkBi();
     closeModal();
+  };
+
+  currentColorEqualToConfig = () => {
+    const { design } = this.state;
+    const {
+      settings: { colors },
+    } = this.props;
+    return (
+      (design.color === colors?.color1 || design.color === '#FEFDFD') &&
+      (design.borderColor === colors?.color8 || design.borderColor === '#0261FF') &&
+      (design.background === colors?.color8 || design.background === '#0261FF')
+    );
   };
 
   handleKeyPress = e => {
@@ -107,6 +123,9 @@ export default class ButtonInputModal extends Component {
       helpers: { closeModal },
     } = this.props;
     const { initialComponentData } = this.state;
+    if (!initialComponentData.design.color) {
+      this.removeColorsFromComponentData(initialComponentData.design);
+    }
     if (onCloseRequested) {
       onCloseRequested({ ...componentData, button: initialComponentData });
     } else {
@@ -115,6 +134,19 @@ export default class ButtonInputModal extends Component {
 
     this.setState({ isOpen: false });
     closeModal();
+  };
+
+  removeColorsFromComponentData = design => {
+    const { pubsub } = this.props;
+    const designToSave = {
+      borderWidth: design.borderWidth,
+      padding: design.padding,
+      borderRadius: design.borderRadius,
+      activeButton: design.activeButton,
+    };
+    const componentDataToSave = pubsub.get('componentData');
+    componentDataToSave.button.design = designToSave;
+    pubsub.set('componentData', componentDataToSave);
   };
 
   handleOnMouseEnterDesign = () => {

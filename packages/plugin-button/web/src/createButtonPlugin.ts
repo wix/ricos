@@ -34,6 +34,7 @@ const createButtonPlugin = (
   const {
     helpers,
     theme,
+    themeData,
     t,
     anchorTarget,
     relValue,
@@ -43,12 +44,14 @@ const createButtonPlugin = (
   } = config;
   const isLinkButton = type === LINK_BUTTON_TYPE;
   settings.isActionButton = !isLinkButton;
+  settings.themeData = themeData;
   const styles = mergeStyles({ styles: Styles, theme });
   const customTooltip = settings.insertButtonTooltip;
   return createBasePlugin({
     component: ButtonComponent,
     settings,
     theme,
+    themeData,
     type,
     anchorTarget,
     relValue,

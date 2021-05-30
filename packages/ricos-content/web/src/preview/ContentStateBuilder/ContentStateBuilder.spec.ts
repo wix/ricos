@@ -56,7 +56,8 @@ describe('content state media builder', () => {
           height: 1920,
           width: 1920,
           link: { rel: 'nofollow', target: '_blank', url: 'images.com' },
-          metadata: { alt: 'alt text', caption: 'image caption' },
+          alt: 'alt text',
+          caption: 'image caption',
         },
         config: {
           showDescription: true,
@@ -255,7 +256,8 @@ describe('content state interactions', () => {
           height: 1920,
           width: 1920,
           link: { rel: 'nofollow', target: '_blank', url: 'images.com' },
-          metadata: { alt: 'alt text', caption: 'image caption' },
+          alt: 'alt text',
+          caption: 'image caption',
         },
         config: {
           showDescription: true,

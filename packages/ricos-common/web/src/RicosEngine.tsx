@@ -38,7 +38,7 @@ export class RicosEngine extends Component<EngineProps> {
       _rcProps,
     } = this.props;
 
-    const { theme, html } = themeStrategy({
+    const { theme, html, themeData } = themeStrategy({
       plugins,
       cssOverride,
       ricosTheme,
@@ -52,6 +52,7 @@ export class RicosEngine extends Component<EngineProps> {
     const strategiesProps = merge(
       { theme },
       pluginsStrategy({
+        themeData,
         isViewer,
         plugins,
         childProps: children.props,

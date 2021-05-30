@@ -32,6 +32,7 @@ import {
   IMAGE_TYPE,
   GALLERY_TYPE,
   VIDEO_TYPE,
+  createJustificationFixDecorator,
 } from 'wix-rich-content-common';
 import draftDefaultStyles from 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -228,7 +229,6 @@ class RichContentViewer extends Component<
       isInnerRcv,
       textDirection,
       direction,
-      decorators,
       inlineStyleMappers,
       locale,
       addAnchors,
@@ -239,6 +239,7 @@ class RichContentViewer extends Component<
       setRef = () => {},
       onMouseOver = () => {},
     } = this.props;
+    const decorators = [...this.props.decorators, createJustificationFixDecorator()];
     try {
       if (this.state.error) {
         onError(this.state.error);
