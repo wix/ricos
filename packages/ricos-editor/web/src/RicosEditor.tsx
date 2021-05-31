@@ -192,10 +192,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     return (
       <Fragment key={`${remountKey}`}>
-        <StaticToolbarPortal
-          StaticToolbar={StaticToolbar}
-          textToolbarContainer={toolbarSettings?.textToolbarContainer}
-        />
+        {!this.props._rcProps?.experiments?.newFormattingToolbar?.enabled && (
+          <StaticToolbarPortal
+            StaticToolbar={StaticToolbar}
+            textToolbarContainer={toolbarSettings?.textToolbarContainer}
+          />
+        )}
         <RicosEngine
           RicosModal={RicosModal}
           isViewer={false}

@@ -17,7 +17,11 @@ import {
   getLangDir,
 } from 'wix-rich-content-common';
 import { TestAppConfig } from '../../src/types';
-import { FloatingToolbarContainer, Toolbar } from 'wix-rich-content-toolbars-new';
+import {
+  FloatingToolbarContainer,
+  Toolbar,
+  StaticToolbarContainer,
+} from 'wix-rich-content-toolbars-new';
 import 'wix-rich-content-toolbars-new/dist/styles.min.css';
 import { RicosEditor, RicosEditorProps, RicosEditorType } from 'ricos-editor';
 
@@ -49,6 +53,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
   editor: RicosEditorType;
   ricosPlugins: RicosEditorProps['plugins'];
   staticToolbarContainer: HTMLDivElement;
+  staticToolbarRef!: Element;
 
   constructor(props: ExampleEditorProps) {
     super(props);
@@ -146,7 +151,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
         context: { getEditorState },
         buttons,
       } = this.editor.getToolbarProps(TOOLBARS.FORMATTING);
-      const { isMobile, theme, locale } = this.props;
+      const { isMobile, theme, locale, staticToolbar } = this.props;
       const buttonsAsArray = Object.values(buttons);
       const editorState = getEditorState();
       const selection = editorState.getSelection();
@@ -155,21 +160,29 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       const t = this.editor.getT();
       const removeToolbarFocus = () => this.editor.removeToolbarFocus();
       const formattingToolbarButtonsKeys = this.config.formattingToolbarButtons;
-      return (
+      const ToolbarToRender = (
+        <Toolbar
+          theme={theme}
+          isMobile={isMobile}
+          t={t}
+          buttons={buttonsAsArray}
+          editorCommands={editorCommands}
+          formattingToolbarButtonsKeys={formattingToolbarButtonsKeys}
+        />
+      );
+      const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
+      return textToolbarType === 'static' ? (
+        <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
+          <StaticToolbarContainer>{ToolbarToRender}</StaticToolbarContainer>
+        </div>
+      ) : (
         <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
           <FloatingToolbarContainer
             isMobile={isMobile}
             showFormattingToolbar={showFormattingToolbar}
             removeToolbarFocus={removeToolbarFocus}
           >
-            <Toolbar
-              theme={theme}
-              isMobile={isMobile}
-              t={t}
-              buttons={buttonsAsArray}
-              editorCommands={editorCommands}
-              formattingToolbarButtonsKeys={formattingToolbarButtonsKeys}
-            />
+            {ToolbarToRender}
           </FloatingToolbarContainer>
         </div>
       );
