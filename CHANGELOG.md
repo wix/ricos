@@ -22,6 +22,11 @@
 - `general`
   - [#2487](https://github.com/wix-incubator/rich-content/pull/2487) keyboard shortcuts
 
+  ### :house: Internal
+
+- `ui-components`
+  - [#2563](https://github.com/wix-incubator/rich-content/pull/2563) moved Button component into ui-components folder
+
 </details>
 <hr/>
 
