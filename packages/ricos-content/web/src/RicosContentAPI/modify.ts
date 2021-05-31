@@ -39,8 +39,9 @@ class TraversalModifier implements Modifier {
     const selectedKeys = compact(this.traversal.asFold().getAll(this.tree)).map(({ key }) => key);
     const cleverFold = T.fold<Node, Node>((value, forest) => {
       const nodes = forest.reduce((prev, curr) => {
-        const leaf = curr.key in selectedKeys ? setter(curr) : curr;
-        return [...prev, isArray(leaf) ? leaf : [leaf]];
+        const leaf = selectedKeys.includes(curr.key) ? setter(curr) : curr;
+        const item = isArray(leaf) ? leaf : [leaf];
+        return [...prev, ...item];
       }, [] as Node[]) as Node[];
       value.nodes = nodes;
       return value;
