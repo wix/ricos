@@ -17,13 +17,20 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.39.1 (May 31, 2021)
+
+### :bug: Bug Fix
+
+- `button`
+  - [#2561](https://github.com/wix-incubator/rich-content/pull/2561) link data rendered in action button
+
 ### :nail_care: Polish
 
 - `general`
   - [#2487](https://github.com/wix-incubator/rich-content/pull/2487) keyboard shortcuts
-
-</details>
-<hr/>
 
 ## 8.39.0 (May 27, 2021)
 
