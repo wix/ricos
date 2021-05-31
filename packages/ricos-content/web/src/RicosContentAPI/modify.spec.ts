@@ -27,5 +27,6 @@ describe('Content modify', () => {
       }));
 
     expect(actual).toStrictEqual(expected);
+    expect(actual).not.toEqual(content);
   });
 });
