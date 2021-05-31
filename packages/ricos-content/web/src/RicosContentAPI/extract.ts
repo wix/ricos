@@ -6,6 +6,7 @@ import { Node, Node_Type } from 'ricos-schema';
 export interface Extractor<DT> {
   filter: (predicate: (data: DT) => boolean) => Extractor<DT>;
   map: <MT>(mapper: (data: DT) => MT) => Extractor<MT>;
+  chain: <CT>(mapper: (data: DT) => Extractor<CT>) => Extractor<CT>[];
   get: () => DT[];
 }
 
@@ -38,6 +39,10 @@ class TraversalExtractor<DT> implements Extractor<DT> {
       ),
       this.tree
     );
+  }
+
+  chain<CT>(mapper: (data: DT) => TraversalExtractor<CT>): Extractor<CT>[] {
+    return this.get().map(dt => mapper(dt));
   }
 
   get() {
