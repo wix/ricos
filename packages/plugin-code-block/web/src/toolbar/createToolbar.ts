@@ -1,5 +1,6 @@
 import {
   MODIFIERS,
+  COMMANDS,
   FORMATTING_BUTTONS,
   TOOLBARS,
   BUTTON_TYPES,
@@ -26,9 +27,9 @@ const codeBlockTexButtontMapper: CreatePluginToolbar = config => {
         keyBindings: [
           {
             keyCommand: {
-              command: 'code-block',
-              modifiers: [MODIFIERS.COMMAND],
-              key: '0',
+              command: COMMANDS.CODE,
+              modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+              key: 'c',
             },
             commandHandler,
           },
