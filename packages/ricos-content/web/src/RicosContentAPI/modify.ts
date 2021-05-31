@@ -35,14 +35,13 @@ class TraversalModifier implements Modifier {
   }
 
   set(setter: (node: Node) => Node | Node[]) {
-    // this.traversal.modify(setter);
     const selectedKeys = compact(this.traversal.asFold().getAll(this.tree)).map(({ key }) => key);
     const cleverFold = T.fold<Node, Node>((value, forest) => {
       const nodes = forest.reduce((prev, curr) => {
-        const leaf = selectedKeys.includes(curr.key) ? setter(curr) : curr;
-        const item = isArray(leaf) ? leaf : [leaf];
+        const mapped = selectedKeys.includes(curr.key) ? setter(curr) : curr;
+        const item = isArray(mapped) ? mapped : [mapped];
         return [...prev, ...item];
-      }, [] as Node[]) as Node[];
+      }, [] as Node[]);
       value.nodes = nodes;
       return value;
     });
