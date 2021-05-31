@@ -22,6 +22,11 @@
 - `general`
   - [#2487](https://github.com/wix-incubator/rich-content/pull/2487) keyboard shortcuts
 
+### :house: Internal
+
+- `ui-components`
+  - [#2562](https://github.com/wix-incubator/rich-content/pull/2562) moved selectionList component into ui-components folder
+
 </details>
 <hr/>
 
