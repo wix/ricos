@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+  ### :bug: Bug Fix
+  - `plugin-giphy`
+    - Add missing hotkeys to giphy selector and more descriptive alt text
+
 </details>
 <hr/>
 

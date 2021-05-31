@@ -103,16 +103,17 @@ class GiphySelector extends Component {
     return () => this.selectGif(componentData);
   };
 
-  getBoundKeyPress = giphy => {
+  getBoundKeyDown = giphy => {
     const componentData = this.convertGiphyToComponentData(giphy);
     return e => {
       const { onCloseRequested } = this.props;
-      // escape
-      if (e.charCode === 27) {
+
+      if (e.key === 'Escape') {
         onCloseRequested();
       }
-      // enter
-      if (e.charCode === 13) {
+
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
         this.selectGif(componentData);
       }
     };
@@ -163,13 +164,13 @@ class GiphySelector extends Component {
                       role="button"
                       tabIndex="0"
                       className={styles.giphy_selecter_gif_img_container}
-                      onKeyPress={this.getBoundKeyPress(giphy)}
+                      onKeyDown={this.getBoundKeyDown(giphy)}
                       onClick={this.getBoundOnClick(giphy)}
                     >
                       <img
                         className={styles.giphy_selecter_gif_img}
                         src={giphy.images.fixed_width_downsampled.url}
-                        alt={'gif'}
+                        alt={giphy.title}
                       />
                     </div>
                   );
