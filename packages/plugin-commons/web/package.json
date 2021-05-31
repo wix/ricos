@@ -37,7 +37,8 @@
     "react-colorful": "^4.4.3",
     "react-measure": "~2.3.0",
     "wix-rich-content-common": "8.39.0",
-    "wix-rich-content-editor-common": "8.39.0"
+    "wix-rich-content-editor-common": "8.39.0",
+    "wix-rich-content-ui-components": "8.39.0"
   },
   "unpkg": true,
   "publishConfig": {

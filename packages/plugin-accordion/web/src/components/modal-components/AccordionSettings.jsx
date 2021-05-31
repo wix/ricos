@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { Separator, InfoIcon } from 'wix-rich-content-editor-common';
+import { SelectionList } from 'wix-rich-content-ui-components';
 import {
   RadioGroupVertical,
-  SelectionList,
   LabeledToggle,
   LTRIcon,
   RTLIcon,
