@@ -32,6 +32,7 @@ module.exports = {
           'plugins_api/LinkPreviewPlugin',
           'plugins_api/UnsupportedBlocksPlugin',
           'plugins_api/TablePlugin',
+          'plugins_api/AccordionPlugin',
           'plugins_api/HeadingsPlugin',
         ],
       },

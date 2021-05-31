@@ -1,0 +1,58 @@
+---
+id: AccordionPlugin
+title: Accordion Plugin
+sidebar_label: Accordion Plugin
+---
+
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Accordion plugin allows the user to add super cool collpasible list!
+
+<div className="card accordionPlugin">
+  <RicosEditorWithMobile
+    content={createContent('Add a collapsible list!')}
+    placeholder={'Type here!'}
+    plugins={[pluginAccordion()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+<RicosEditor plugins={[pluginAccordion()]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
+import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+<RicosViewer plugins={[pluginAccordion()]} />;
+```
+
+### Currently supported plugins
+
+For now, these are the plugins that are supported in the accordion and can be added when editing a cell:
+
+1. Text color
+2. Text highlight
+3. Indent
+4. Line spacing
+5. Link
+6. Image
+7. Video
+8. Gif
+9. Emoji
+10. File upload
+11. Divider
+12. Code block
+13. Unsupported blocks
+14. Spoiler
