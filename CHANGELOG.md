@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `ui-components`
+  - [#2566](https://github.com/wix-incubator/rich-content/pull/2566) moved Tabs/Tab components into ui-components folder
+
 </details>
 <hr/>
 
