@@ -1,12 +1,12 @@
 import { resolve as pathResolve } from 'path';
 import svgr from '@svgr/rollup';
-import resolvePlugin from '@rollup/plugin-node-resolve';
+import resolvePlugin from 'rollup-plugin-node-resolve';
 import aliasPlugin from '@rollup/plugin-alias';
 import copyPlugin from 'rollup-plugin-copy';
 /* @ts-ignore typescript-plugin external types issue */
-import babelPlugin from '@rollup/plugin-babel';
+import babelPlugin from 'rollup-plugin-babel';
 import typescriptPlugin from 'rollup-plugin-typescript2';
-import commonjsPlugin from '@rollup/plugin-commonjs';
+import commonjsPlugin from 'rollup-plugin-commonjs';
 import jsonPlugin from '@rollup/plugin-json';
 import postcssPlugin from 'rollup-plugin-postcss';
 /* @ts-ignore typescript-plugin external types issue */
@@ -14,7 +14,7 @@ import postcssExclude from 'postcss-exclude-files';
 import postcssURL from 'postcss-url';
 /* @ts-ignore typescript-plugin external types issue */
 import postcssRTL from 'postcss-rtl';
-import replacePlugin from '@rollup/plugin-replace';
+import replacePlugin from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
@@ -62,10 +62,6 @@ const copyAfterBundleWritten = (): Plugin => {
       dest: 'dist',
       rename: () => 'module.viewer.cjs.d.ts',
     },
-    {
-      src: ['dist/es/*.css'],
-      dest: 'dist',
-    },
   ];
 
   return copyPlugin({
@@ -79,7 +75,7 @@ const babel = (): Plugin => {
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**'],
-    babelHelpers: 'runtime',
+    runtimeHelpers: true,
   });
 };
 
@@ -111,6 +107,56 @@ const typescript = (): Plugin => {
     // verbosity: 3,
     // clean: true,
   });
+};
+
+const commonjs = (): Plugin => {
+  const named = [
+    {
+      path: 'node_modules/image-client-api/dist/imageClientSDK.js',
+      exportList: ['getScaleToFillImageURL', 'getScaleToFitImageURL'],
+    },
+    {
+      path: 'node_modules/immutable/dist/immutable.js',
+      exportList: ['List', 'OrderedSet', 'Map'],
+    },
+    {
+      path: 'node_modules/react-google-maps/lib/index.js',
+      exportList: ['withGoogleMap', 'GoogleMap', 'Marker', 'InfoWindow'],
+    },
+    {
+      path: 'node_modules/draft-js/lib/Draft.js',
+      exportList: [
+        'SelectionState',
+        'Modifier',
+        'EditorState',
+        'AtomicBlockUtils',
+        'RichUtils',
+        'convertToRaw',
+        'convertFromRaw',
+        'getVisibleSelectionRect',
+        'DefaultDraftBlockRenderMap',
+        'KeyBindingUtil',
+        'genKey',
+        'ContentBlock',
+        'BlockMapBuilder',
+        'CharacterMetadata',
+        'ContentState',
+        'Entity',
+        'RawDraftContentState',
+        'EditorChangeType',
+        'convertFromHTML',
+      ],
+    },
+  ];
+
+  const relativePath = '../../../';
+
+  const namedExports: { [packageName: string]: string[] } = {};
+  named.forEach(({ path, exportList }) => {
+    namedExports[path] = exportList;
+    namedExports[relativePath + path] = exportList;
+  });
+  return commonjsPlugin({ namedExports });
 };
 
 const json = (): Plugin => {
@@ -179,7 +225,7 @@ let _plugins: Plugin[] = [
   resolveAlias(),
   resolve(),
   babel(),
-  commonjsPlugin(),
+  commonjs(),
   json(),
   typescript(),
 ];

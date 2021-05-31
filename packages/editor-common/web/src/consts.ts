@@ -17,8 +17,6 @@ export const COMMANDS = Object.freeze({
   UNDO: 'ricosUndo',
   REDO: 'ricosRedo',
   FOCUS_TOOLBAR: 'focusToolbar',
-  INCREASE_INDENT: 'increase-indent',
-  DECREASE_INDENT: 'decrease-indent',
 });
 
 export const TEXT_TYPES = Object.freeze([

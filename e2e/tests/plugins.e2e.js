@@ -11,7 +11,7 @@ import {
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
-import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -386,17 +386,14 @@ describe('plugins', () => {
     beforeEach('load editor', () => cy.loadRicosEditorAndViewer());
 
     after(() => cy.eyesClose());
-
-    // TODO: figure out how to test keyboard combinations of command/ctrl keys in cypress ci
-    // eslint-disable-next-line mocha/no-skipped-tests
-    it.skip('create nested lists using CMD+M/CMD+SHIFT+M', function() {
+    it('create nested lists using tab & shift-tab', function() {
       cy.loadRicosEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
-        .type('{command+m}')
+        .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])
-        .type('{command+m}')
+        .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 1.'])
-        .type('{command+shift+m}')
+        .tab({ shift: true })
         .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.']);
 
       // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])

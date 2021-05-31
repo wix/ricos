@@ -29,18 +29,28 @@ const COMMAND_BY_SHORTCUT = [
   },
   {
     command: COMMANDS.JUSTIFY,
-    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+    modifiers: [MODIFIERS.COMMAND],
     key: 'j',
   },
   {
     command: COMMANDS.NUMBERED_LIST,
-    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: '7',
+    modifiers: [MODIFIERS.COMMAND],
+    key: 'm',
   },
   {
     command: COMMANDS.BULLET_LIST,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+    key: 'l',
+  },
+  {
+    command: COMMANDS.CODE,
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: '8',
+  },
+  {
+    command: COMMANDS.CODE,
+    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+    key: 'j',
   },
   {
     command: COMMANDS.BLOCKQUOTE,
