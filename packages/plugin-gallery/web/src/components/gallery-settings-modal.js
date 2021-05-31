@@ -6,9 +6,8 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   LabeledToggle,
-  Tabs,
-  Tab,
 } from 'wix-rich-content-plugin-commons';
+import { Tabs, Tab } from 'wix-rich-content-ui-components';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import LayoutControlsSection from './layout-controls-section';
