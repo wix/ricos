@@ -239,10 +239,13 @@ class EditorWrapper extends React.Component<Props> {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
         _rcProps={rcProps}
+
       >
         <RichContentEditor
           onFocus={onFocus}
           onBlur={onBlur}
+          //@ts-ignore
+          tiptapPlugins={[]}
           helpers={{ handleFileUpload: mockImageNativeUploadFunc }}
         />
       </RicosEditor>

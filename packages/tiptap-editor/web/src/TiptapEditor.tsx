@@ -22,8 +22,10 @@ import BulletList from '@tiptap/extension-bullet-list';
 import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
-import { fromProseMirror } from 'ricos-content/libs/converters';
-// import Divider from './extensions/extension-divider';
+import { RichContent } from 'ricos-schema';
+
+import { fromProseMirror, toProseMirror } from 'ricos-content/libs/converters';
+import { createDivider } from './extensions/extension-divider';
 
 const starterKitExtensions = [
   Blockquote,
@@ -43,7 +45,7 @@ const starterKitExtensions = [
   OrderedList,
   Paragraph,
   Strike,
-  // Divider,
+  createDivider(),
   Text,
 ];
 
@@ -53,32 +55,69 @@ type TipTapEditorProps = {
   editorProps: unknown & Record<string, unknown>[];
 };
 
-const content = {
-  type: 'doc',
-  content: [
+const dataJSON = {
+  nodes: [
     {
-      type: 'paragraph',
-      attrs: {},
-      content: [
+      type: 'PARAGRAPH',
+      key: '81ob3',
+      nodes: [
         {
-          type: 'text',
-          text: 'yaron',
+          type: 'TEXT',
+          key: '6hb3g',
+          nodes: [],
+          textData: {
+            text: 'yaron 123',
+            decorations: [],
+          },
         },
       ],
+      paragraphData: {
+        textStyle: {
+          textAlignment: 'AUTO',
+          lineHeight: '20px',
+        },
+        indentation: 0,
+      },
     },
     {
-      type: 'paragraph',
-      attrs: {},
-      content: [
-        {
-          type: 'text',
-          text: 'nachshon',
+      type: 'DIVIDER',
+      key: '7619f',
+      nodes: [],
+      dividerData: {
+        type: 'DOUBLE',
+        width: 'LARGE',
+        alignment: 'LEFT',
+        containerData: {
+          alignment: 'CENTER',
+          width: {
+            type: 'CONTENT',
+          },
         },
-      ],
+      },
+    },
+    {
+      type: 'PARAGRAPH',
+      key: 'd9j2a',
+      nodes: [],
+      paragraphData: {
+        textStyle: {
+          textAlignment: 'AUTO',
+        },
+        indentation: 0,
+      },
     },
   ],
+  metadata: {
+    version: 1,
+    createdTimestamp: '2021-05-26T22:48:09.161Z',
+    updatedTimestamp: '2021-05-26T22:48:09.161Z',
+  },
 };
-
+const content = toProseMirror(RichContent.fromJSON(dataJSON));
+// eslint-disable-next-line fp/no-delete
+delete content.metadata;
+// eslint-disable-next-line no-console
+console.log('yaron123', { content });
 const TipTapEditor = ({ editorProps, onUpdate }) => {
   const editor = useEditor({
     content,
