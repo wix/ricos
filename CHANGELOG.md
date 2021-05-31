@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+
+- `general`
+  - [#2487](https://github.com/wix-incubator/rich-content/pull/2487) keyboard shortcuts
+
 </details>
 <hr/>
 
