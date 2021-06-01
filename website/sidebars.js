@@ -42,6 +42,7 @@ module.exports = {
         items: [
           'content_api/TruncateContent',
           'content_api/converters',
+          'content_api/extract_media',
           'content_api/ContentBuilder',
         ],
       },
