@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :rocket: New Feature
+- `ricos-content`
+  - [#2573](https://github.com/wix/ricos/pull/2573) content extractor API
 
 
 </details>
