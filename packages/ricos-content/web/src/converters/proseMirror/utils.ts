@@ -1,13 +1,27 @@
+import { JSONContent } from '@tiptap/core';
 import { capitalize } from 'lodash';
-import { Node_Type } from 'ricos-schema';
+import { Decoration, Node, Node_Type, RichContent } from 'ricos-schema';
 import { DECORATION_TYPES, NODE_TYPES } from './consts';
 
 const TYPES = [...NODE_TYPES, ...DECORATION_TYPES];
 
-export const isNode = object =>
+export const isNode = (object): object is Node =>
   NODE_TYPES.includes(object?.type?.toUpperCase()) && ('nodes' in object || 'content' in object);
 
-export const isDecoration = object => DECORATION_TYPES.includes(object?.type?.toUpperCase());
+export const isDecoration = (object): object is Decoration =>
+  DECORATION_TYPES.includes(object?.type?.toUpperCase());
+
+export const isRichContent = (object): object is RichContent => !!object?.nodes && !isNode(object);
+
+export const isProseContent = (object): object is JSONContent =>
+  !!object?.content && !isNode(object);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getImageNode = <T extends { content?: any; nodes?: any }>({
+  content,
+  nodes,
+}: T): T extends RichContent ? Node : T extends JSONContent ? JSONContent : undefined =>
+  (nodes || content).find(({ type }) => type.toUpperCase() === Node_Type.IMAGE) || {};
 
 export const toDataFieldName = (type: string) =>
   type

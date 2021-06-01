@@ -1,16 +1,17 @@
 import { transform, isObject, pickBy, identity } from 'lodash';
-import { RichContent } from 'ricos-schema';
+import { RichContent, Node } from 'ricos-schema';
 import { JSONContent } from '@tiptap/core';
 import { initializeMetadata } from '../../nodeUtils';
 import { genKey } from '../../generateRandomKey';
-import { DATA_FIELDS_MAP, isDecoration, isNode } from '../utils';
+import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent } from '../utils';
 
-export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
-  const { type: _, ...content } = convertFromProse(proseDocument);
-  if (!content.metadata) {
-    content.metadata = initializeMetadata();
-  }
-  return content;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const fromProseMirror = <T extends JSONContent | Record<string, any>>(
+  proseContent: T
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): T extends JSONContent ? RichContent | Node : Record<string, any> => {
+  const { richContent } = convertFromProse({ richContent: proseContent });
+  return richContent;
 };
 
 const FIELDS_MAP = {
@@ -21,6 +22,13 @@ const FIELDS_MAP = {
 const typeToUpper = object => ({ ...object, type: object.type.toUpperCase() });
 
 const isTextNode = value => value?.type === 'text' && 'marks' in value;
+
+const removeDocType = ({ type: _, ...content }: JSONContent) => content;
+
+const addMetadata = ({ metadata, ...content }: JSONContent) => ({
+  metadata: metadata || initializeMetadata(),
+  ...content,
+});
 
 const moveTextData = object => {
   const { marks, text, ...newValue } = object;
@@ -41,6 +49,10 @@ const moveNodeStyle = object => {
 
 const convertValue = value => {
   let newValue = value;
+  if (isProseContent(newValue)) {
+    newValue = removeDocType(newValue);
+    newValue = addMetadata(newValue);
+  }
   if (isTextNode(newValue)) {
     newValue = moveTextData(newValue);
   }
