@@ -1,22 +1,22 @@
 ---
-id: AccordionPlugin
-title: Accordion Plugin
-sidebar_label: Accordion Plugin
+id: CollapsibleListPlugin
+title: CollapsibleList Plugin
+sidebar_label: CollapsibleList Plugin
 ---
 
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
 import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
-Accordion plugin allows the user to add super cool collpasible list!
+CollapsibleList plugin allows the user to add super cool collpasible list!
 
-<div className="card accordionPlugin">
+<div className="card collapsibleListPlugin">
   <RicosEditorWithMobile
     content={createContent('Add a collapsible list!')}
     placeholder={'Type here!'}
-    plugins={[pluginAccordion()]}
+    plugins={[pluginCollapsibleList()]}
   />
 </div>
 <br />
@@ -26,21 +26,21 @@ Accordion plugin allows the user to add super cool collpasible list!
 ```jsx
 /* Editor */
 import { RicosEditor } from 'ricos-editor';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list';
 import 'ricos-editor/dist/styles.min.css';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-<RicosEditor plugins={[pluginAccordion()]} />;
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
+<RicosEditor plugins={[pluginCollapsibleList()]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos-viewer';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-<RicosViewer plugins={[pluginAccordion()]} />;
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list/dist/module.viewer';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
+<RicosViewer plugins={[pluginCollapsibleList()]} />;
 ```
 
 ### Currently supported plugins
 
-For now, these are the plugins that are supported in the accordion and can be added when editing a cell:
+For now, these are the plugins that are supported in the collapsible list and can be added when editing a cell:
 
 1. Text color
 2. Text highlight

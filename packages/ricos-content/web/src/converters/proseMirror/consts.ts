@@ -21,7 +21,7 @@ export const NODE_TYPES = [
   Node_Type.POLL,
   Node_Type.VERTICAL_EMBED,
   Node_Type.BUTTON,
-  Node_Type.ACCORDION,
+  Node_Type.COLLAPSIBLE_LIST,
   Node_Type.TABLE,
 ];
 

@@ -315,7 +315,7 @@ export default {
       },
     },
     '3': {
-      type: 'wix-rich-content-plugin-accordion',
+      type: 'wix-rich-content-plugin-collapsible-list',
       mutability: 'IMMUTABLE',
       data: {
         config: {

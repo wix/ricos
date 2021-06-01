@@ -12754,16 +12754,6 @@ wix-rich-content-fullscreen@8.36.1:
     wix-rich-content-common "8.36.1"
     wix-rich-content-plugin-gallery "8.36.1"
 
-wix-rich-content-plugin-accordion@8.36.1:
-  version "8.36.1"
-  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-accordion/-/wix-rich-content-plugin-accordion-8.36.1.tgz#3b4422de14d7c53d3cd82abfd4c43ed4387989bd"
-  integrity sha512-qBbLEvuVk6N37RAHmEwmR1y9F53z7Gl0d4wruwMnKn819z4jZY1GmYSuhy8YJal2qI5fzh/PknVDiVHYrqpTcQ==
-  dependencies:
-    react-beautiful-dnd "13.0.0"
-    wix-rich-content-common "8.36.1"
-    wix-rich-content-editor-common "8.36.1"
-    wix-rich-content-plugin-commons "8.36.1"
-
 wix-rich-content-plugin-button@8.36.1:
   version "8.36.1"
   resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-button/-/wix-rich-content-plugin-button-8.36.1.tgz#3a2a94e65edd9506d8a65947aae2d79bdab54cb2"
