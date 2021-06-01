@@ -1,5 +1,5 @@
-import { DATA_FIELDS_MAP, isRichContent } from './../utils';
-import { transform, isObject, merge } from 'lodash';
+import { DATA_FIELDS_MAP, isDataFieldName, isRichContent } from './../utils';
+import { transform, isObject, pickBy, identity } from 'lodash';
 import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap/core';
@@ -32,34 +32,44 @@ const FIELDS_MAP = {
   ...PROSE_DATA_FIELDS_MAP,
 };
 
+const fieldMapper = (fieldName: string | number | symbol, value) =>
+  isDataFieldName(fieldName, value) ? 'attrs' : FIELDS_MAP[fieldName] || fieldName;
+
 const typeToLower = (object: Node | Decoration) => ({ ...object, type: object.type.toLowerCase() });
 
 const addDocType = (content: RichContent) => ({ type: 'doc', ...content });
+
+const moveMetadata = ({ metadata, ...content }: RichContent) => ({
+  ...content,
+  attrs: { metadata },
+});
 
 const flattenTextData = (node: Node) => {
   const { textData, ...newNode } = node;
   return { ...newNode, ...textData };
 };
 
-const styleAsData = value => {
-  const { style, ...rest } = value;
-  const dataField = DATA_FIELDS_MAP[value.type];
-  return merge({ [dataField]: { style } }, rest);
+const moveToData = (node: Node) => {
+  const { style, key, ...rest } = node;
+  const dataFieldName = DATA_FIELDS_MAP[node.type];
+  const dataField = { ...node[dataFieldName], ...pickBy({ style, key }, identity) };
+  return { ...rest, [dataFieldName]: dataField };
 };
 
 const convertValue = value => {
   let newValue = value;
   if (isRichContent(newValue)) {
     newValue = addDocType(newValue);
-  }
-  if (isNode(newValue) && newValue.style) {
-    newValue = styleAsData(newValue);
-  }
-  if (isNode(newValue) || isDecoration(newValue)) {
-    newValue = typeToLower(newValue);
+    newValue = moveMetadata(newValue);
   }
   if (newValue?.textData) {
     newValue = flattenTextData(newValue);
+  }
+  if (isNode(newValue)) {
+    newValue = moveToData(newValue);
+  }
+  if (isNode(newValue) || isDecoration(newValue)) {
+    newValue = typeToLower(newValue);
   }
   return newValue;
 };
@@ -68,7 +78,7 @@ const convertToProse = obj => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return transform<any, any>(obj, (result, value, key) => {
     const convertedValue = convertValue(value);
-    const convertedKey = FIELDS_MAP[key] || key;
+    const convertedKey = fieldMapper(key, convertedValue);
     result[convertedKey] = isObject(convertedValue)
       ? convertToProse(convertedValue)
       : convertedValue;

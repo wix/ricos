@@ -16,20 +16,20 @@ describe('convert from ProseMirror', () => {
   describe('to RichContent', () => {
     const content = RichContent.fromJSON(migrationContent);
     it('should convert content', () => {
-      const proseContent = fromProseMirror(toProseMirror(content));
-      expect(proseContent).toEqual(migrationContent);
+      const richContent = fromProseMirror(toProseMirror(content));
+      expect(richContent).toEqual(migrationContent);
     });
     it('should convert node', () => {
       const imageNode = getImageNode(content);
-      const proseContent = fromProseMirror(toProseMirror(imageNode));
-      expect(proseContent).toEqual(imageNode);
+      const richContent = fromProseMirror(toProseMirror(imageNode));
+      expect(richContent).toEqual(imageNode);
     });
     it('should convert node data', () => {
       const imageNode = getImageNode(content);
-      const proseContent = fromProseMirror(
+      const richContent = fromProseMirror(
         toProseMirror(imageNode).attrs as Record<string, unknown>
       );
-      expect(proseContent).toEqual(imageNode.imageData);
+      expect(richContent).toEqual(imageNode.imageData);
     });
   });
   describe('to Draft', () => {

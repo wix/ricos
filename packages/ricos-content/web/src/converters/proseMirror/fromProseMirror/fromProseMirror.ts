@@ -10,7 +10,8 @@ export const fromProseMirror = <T extends JSONContent | Record<string, any>>(
   proseContent: T
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): T extends JSONContent ? RichContent | Node : Record<string, any> => {
-  const { richContent } = convertFromProse({ richContent: proseContent });
+  let { richContent } = convertFromProse({ richContent: proseContent });
+  richContent = removeKeyFromData(richContent);
   return richContent;
 };
 
@@ -23,16 +24,21 @@ const typeToUpper = object => ({ ...object, type: object.type.toUpperCase() });
 
 const isTextNode = value => value?.type === 'text' && 'marks' in value;
 
+const removeKeyFromData = value => {
+  const { key: _, ...newValue } = value;
+  return isNode(value) ? value : newValue;
+};
+
 const removeDocType = ({ type: _, ...content }: JSONContent) => content;
 
-const addMetadata = ({ metadata, ...content }: JSONContent) => ({
-  metadata: metadata || initializeMetadata(),
+const addMetadata = ({ attrs, ...content }: JSONContent) => ({
+  metadata: attrs?.metadata || initializeMetadata(),
   ...content,
 });
 
 const moveTextData = object => {
-  const { marks, text, ...newValue } = object;
-  return { ...newValue, attrs: { marks, text } };
+  const { marks, text, attrs, ...newValue } = object;
+  return { ...newValue, attrs: { ...attrs, marks, text } };
 };
 
 const convertDataField = object => {
@@ -41,10 +47,11 @@ const convertDataField = object => {
   return { ...newValue, ...(attrs ? { [dataField]: attrs } : {}) };
 };
 
-const moveNodeStyle = object => {
-  const { attrs: { style, ...rest } = { style }, ...newValue } = object;
-  const attrs = Object.keys(rest).length > 0 && rest;
-  return pickBy({ ...newValue, attrs, style }, identity);
+const movefromAttrs = (object: JSONContent) => {
+  const { attrs, ...newValue } = object;
+  const { style, key = genKey(), ...rest } = attrs || {};
+  const newAttrs = Object.keys(rest).length > 0 ? rest : undefined;
+  return pickBy({ ...newValue, attrs: newAttrs, style, key }, identity);
 };
 
 const convertValue = value => {
@@ -57,14 +64,11 @@ const convertValue = value => {
     newValue = moveTextData(newValue);
   }
   if (isNode(newValue)) {
-    newValue = moveNodeStyle(newValue);
+    newValue = movefromAttrs(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
     newValue = typeToUpper(newValue);
     newValue = convertDataField(newValue);
-  }
-  if (isNode(newValue) && !newValue.key) {
-    newValue.key = genKey();
   }
   return newValue;
 };

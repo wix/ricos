@@ -28,6 +28,9 @@ export const getImageNode = <T extends { content?: any; nodes?: any }>({
 export const getImageBlockData = (content: DraftContent): any =>
   Object.values(content.entityMap).find(({ type }) => type === IMAGE_TYPE)?.data;
 
+export const isDataFieldName = (fieldName: string | number | symbol, value) =>
+  value?.key && fieldName.toString().includes('Data');
+
 export const toDataFieldName = (type: string) =>
   type
     .toLowerCase()
