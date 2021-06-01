@@ -43,6 +43,7 @@ module.exports = {
           'content_api/converters',
           'content_api/ContentBuilder',
           'content_api/content_extract',
+          'content_api/content_modify',
         ],
       },
       {
