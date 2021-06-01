@@ -41,7 +41,7 @@ const ButtonViewer: FC<Props> = ({
   const Component = isActionButton ? 'div' : 'a';
   const props = merge(
     { className: styles.button_container, style },
-    isActionButton && { href: url, target, rel }
+    !isActionButton && { href: url, target, rel }
   );
   return (
     <Component {...props} data-hook="buttonViewer" onClick={onClickHandler}>
