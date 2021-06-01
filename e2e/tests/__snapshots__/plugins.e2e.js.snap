@@ -5199,7 +5199,6 @@ exports[`plugins > spoiler > check text spoilers in editor and reveal it in view
     "0": {
       "data": {
         "rel": "",
-        "target": "_top",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",

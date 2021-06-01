@@ -17,11 +17,6 @@ const anchorTarget = '_blank';
 const defaultRelValue = 'noopener noreferrer';
 const dynamicRelValue = `${defaultRelValue} ${relString}`;
 
-const compare = (relObject1, relObject2) =>
-  relObject1.nofollow === relObject2.nofollow &&
-  relObject1.sponsored === relObject2.sponsored &&
-  relObject1.ugc === relObject2.ugc;
-
 describe('Test link converters', () => {
   it('should convert rel object to string', () => {
     const converted = convertRelObjectToString(relObject);
@@ -30,7 +25,7 @@ describe('Test link converters', () => {
 
   it('should convert rel string to object', () => {
     const converted = convertRelStringToObject(relString);
-    expect(compare(converted, relObject)).toBeTruthy();
+    expect(converted).toEqual(relObject);
   });
 
   it('should convert target string to boolean', () => {

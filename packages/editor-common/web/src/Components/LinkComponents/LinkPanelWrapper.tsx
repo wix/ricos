@@ -26,8 +26,8 @@ class LinkPanelWrapper extends Component<LinkPanelWrapperProps> {
         : linkValues.target;
     const relObject = merge({}, convertRelStringToObject(linkValues.rel), { nofollow, sponsored });
     const rel = convertRelObjectToString(relObject);
-    const result = { ...linkValues, target, rel, ...rest };
-    this.props.onChange(result);
+    const newLinkValues = { ...linkValues, target, rel, ...rest };
+    this.props.onChange(newLinkValues);
   };
 
   render() {
