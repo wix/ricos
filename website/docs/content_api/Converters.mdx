@@ -21,7 +21,7 @@ ensureDraftContent: (content: RichContent | DraftContent) => DraftContent;
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { RichContent } from 'ricos-schema';
 import { RicosEditor, DraftContent } from 'ricos-editor';
-import ricosContent from './ricosCotnent.json';
+import ricosContent from './ricosContent.json';
 
 const draftContent: DraftContent = toDraft(ricosContent);
 
@@ -135,4 +135,47 @@ import ricosContent from './ricosCotnent.json';
 const html: string = toHtml(ricosContent);
 
 document.body.innerHTML = html;
+```
+
+## ProseMirror
+
+The following functions allow converting rich content to and from ProseMirror.
+
+### HTML to rich content
+
+```tsx
+fromProseMirror: (content: ProseContent) => RichContent;
+fromProseMirror: (node: ProseContent) => Node; // Convert a single node
+fromProseMirror: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
+```
+
+#### Example
+
+```tsx
+import { fromProseMirror } from 'ricos-content/libs/converters';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+import proseContent from './proseContent.json';
+
+const content: RichContent = fromProseMirror(proseContent);
+const draftContent: DraftContent = toDraft(content);
+
+<RicosEditor content={draftContent} />;
+```
+
+### Rich content to plain text
+
+```tsx
+toProseMirror: (content: RichContent) => ProseContent;
+toProseMirror: (node: Node) => ProseContent; // Convert a single node
+toProseMirror: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
+```
+
+#### Example
+
+```tsx
+import { toProseMirror } from 'ricos-content/libs/converters';
+import ricosContent from './ricosCotnent.json';
+
+const content: ProseContent = toProseMirror(ricosContent);
 ```
