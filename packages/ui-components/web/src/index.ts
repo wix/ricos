@@ -3,7 +3,7 @@
 // } from './consts';
 
 // // Components
-// export { default as Button } from './Components/Button';
+export { default as Button } from './Components/Button';
 // export { default as FileInput } from './Components/FileInput';
 // export { default as Image } from './Components/Image';
 // export { default as InputWithLabel } from './Components/InputWithLabel';
