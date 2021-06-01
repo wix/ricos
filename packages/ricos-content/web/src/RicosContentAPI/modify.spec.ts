@@ -1,9 +1,8 @@
 import { modify } from './modify';
-import { compare } from '..';
 import { Node_Type, RichContent } from 'ricos-schema';
-import rawContent from '../../statics/json/modifyFixtures/images-dividers.json';
-import rawContentAltText from '../../statics/json/modifyFixtures/images-dividers-with-alt-text.json';
-import rawContentDoubleDividers from '../../statics/json/modifyFixtures/images-dividers2x.json';
+import rawContent from '../../tests/modifyFixtures/images-dividers.json';
+import rawContentAltText from '../../tests/modifyFixtures/images-dividers-with-alt-text.json';
+import rawContentDoubleDividers from '../../tests/modifyFixtures/images-dividers2x.json';
 
 describe('Content modify', () => {
   it('Should add alt text for images', () => {
@@ -31,6 +30,6 @@ describe('Content modify', () => {
       .filter(({ type }) => type === Node_Type.DIVIDER)
       .set(n => [n, n]);
 
-    expect(compare(actual, expected, { ignoredKeys: ['key'] })).toEqual({});
+    expect(actual).toEqual(expected);
   });
 });
