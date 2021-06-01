@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/wix/ricos/issues"
   },
-  "homepage": "https://github.com/wix/ricos/tree/master/rich-content-plugin-collapsible-list",
+  "homepage": "https://github.com/wix/ricos/tree/master/packages/plugin-collapsible-list",
   "files": [
     "dist",
     "libs",
