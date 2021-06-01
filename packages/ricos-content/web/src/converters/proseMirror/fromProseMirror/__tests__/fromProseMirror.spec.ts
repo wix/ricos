@@ -1,22 +1,50 @@
-import { RichContent } from 'ricos-schema';
+import { Node_Type, RichContent } from 'ricos-schema';
 import migrationContent from '../../../../../statics/json/migratedFixtures/migration-content.json';
-import { toProseMirror } from '../../toProseMirror/toProseMirror';
-import { getImageNode } from '../../utils';
-import { fromProseMirror } from '../fromProseMirror';
+import migrationContentProse from '../../toProseMirror/__tests__/migrationContentProse.json';
+import draftMigrationContent from '../../../../../../../../e2e/tests/fixtures/migration-content.json';
+import {
+  toProseMirror,
+  fromProseMirror,
+  proseMirrorToDraft,
+  proseMirrorNodeDataToDraft,
+} from '../..';
+import { getImageBlockData, getImageNode } from '../../utils';
+import { compare } from '../../../..';
+import { JSONContent } from '@tiptap/core';
 
 describe('convert from ProseMirror', () => {
-  it('should convert content', () => {
-    const content = fromProseMirror(toProseMirror(RichContent.fromJSON(migrationContent)));
-    expect(content).toEqual(migrationContent);
+  describe('to RichContent', () => {
+    const content = RichContent.fromJSON(migrationContent);
+    it('should convert content', () => {
+      const proseContent = fromProseMirror(toProseMirror(content));
+      expect(proseContent).toEqual(migrationContent);
+    });
+    it('should convert node', () => {
+      const imageNode = getImageNode(content);
+      const proseContent = fromProseMirror(toProseMirror(imageNode));
+      expect(proseContent).toEqual(imageNode);
+    });
+    it('should convert node data', () => {
+      const imageNode = getImageNode(content);
+      const proseContent = fromProseMirror(
+        toProseMirror(imageNode).attrs as Record<string, unknown>
+      );
+      expect(proseContent).toEqual(imageNode.imageData);
+    });
   });
-  it('should convert node', () => {
-    const imageNode = getImageNode(RichContent.fromJSON(migrationContent));
-    const content = fromProseMirror(toProseMirror(imageNode));
-    expect(content).toEqual(imageNode);
-  });
-  it('should convert node data', () => {
-    const imageNode = getImageNode(RichContent.fromJSON(migrationContent));
-    const content = fromProseMirror(toProseMirror(imageNode).attrs as Record<string, unknown>);
-    expect(content).toEqual(imageNode.imageData);
+  describe('to Draft', () => {
+    it('should convert content', () => {
+      const draftContent = proseMirrorToDraft(migrationContentProse);
+      expect(compare(draftContent, draftMigrationContent, { ignoredKeys: ['key'] })).toEqual({});
+    });
+    it('should convert node data', () => {
+      const imageNode = getImageNode(migrationContentProse);
+      const imageData = proseMirrorNodeDataToDraft(Node_Type.IMAGE, imageNode.attrs as JSONContent);
+      expect(
+        compare(imageData, getImageBlockData(draftMigrationContent), {
+          ignoredKeys: ['key', 'src'],
+        })
+      ).toEqual({});
+    });
   });
 });

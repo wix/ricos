@@ -1,6 +1,7 @@
 import { JSONContent } from '@tiptap/core';
 import { capitalize } from 'lodash';
 import { Decoration, Node, Node_Type, RichContent } from 'ricos-schema';
+import { DraftContent, IMAGE_TYPE } from '../..';
 import { DECORATION_TYPES, NODE_TYPES } from './consts';
 
 const TYPES = [...NODE_TYPES, ...DECORATION_TYPES];
@@ -22,6 +23,10 @@ export const getImageNode = <T extends { content?: any; nodes?: any }>({
   nodes,
 }: T): T extends RichContent ? Node : T extends JSONContent ? JSONContent : undefined =>
   (nodes || content).find(({ type }) => type.toUpperCase() === Node_Type.IMAGE) || {};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getImageBlockData = (content: DraftContent): any =>
+  Object.values(content.entityMap).find(({ type }) => type === IMAGE_TYPE)?.data;
 
 export const toDataFieldName = (type: string) =>
   type
