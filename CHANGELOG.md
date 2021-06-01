@@ -16,15 +16,22 @@
     Click to see more.
   </summary>
 
-
-### :house: Internal
-- `ui-components`
-  - [#2553](https://github.com/wix-incubator/rich-content/pull/2553) moved labeledToggle component into ui-components
-  - [#2563](https://github.com/wix-incubator/rich-content/pull/2563) moved Button component into ui-components folder
+### :rocket: New Feature
+- `ricos-content`
+  - [#2573](https://github.com/wix/ricos/pull/2573) content extractor API
 
 
 </details>
 <hr/>
+
+## 8.40.1 (Jun 1, 2021)
+### :bug: Bug Fix
+- `common`
+  - [#2572](https://github.com/wix-incubator/rich-content/pull/2572) fix double link when text is justified on safari/firefox
+### :house: Internal
+- `ui-components`
+  - [#2553](https://github.com/wix-incubator/rich-content/pull/2553) moved labeledToggle component into ui-components
+  - [#2563](https://github.com/wix-incubator/rich-content/pull/2563) moved Button component into ui-components folder
 
 ## 8.40.0 (May 31, 2021)
 ### :house: Internal
