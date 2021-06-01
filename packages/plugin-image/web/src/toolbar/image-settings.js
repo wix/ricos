@@ -6,10 +6,10 @@ import {
   Image,
   InputWithLabel,
   SettingsPanelFooter,
-  SettingsSection,
   Loader,
   LabeledToggle,
 } from 'wix-rich-content-plugin-commons';
+import { SettingsSection } from 'wix-rich-content-ui-components';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 

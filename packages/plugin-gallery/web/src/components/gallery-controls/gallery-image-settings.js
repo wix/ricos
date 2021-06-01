@@ -7,9 +7,9 @@ import {
   FileInput,
   Image,
   InputWithLabel,
-  SettingsSection,
   SettingsPanelFooter,
 } from 'wix-rich-content-plugin-commons';
+import { SettingsSection } from 'wix-rich-content-ui-components';
 import { FocusManager, LinkPanel } from 'wix-rich-content-editor-common';
 import { BackIcon, DeleteIcon, ReplaceIcon, NextIcon, PreviousIcon } from '../../icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';
