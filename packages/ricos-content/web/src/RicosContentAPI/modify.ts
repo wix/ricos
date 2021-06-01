@@ -3,15 +3,27 @@ import { compact, isArray } from 'lodash';
 import { Prism, fromTraversable, Traversal } from 'monocle-ts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 
+type ModifierSetter = (node: Node) => Node | Node[];
 export interface Modifier {
   filter: (pred: (node: Node) => boolean) => Modifier;
-  set: (setter: (node: Node) => Node | Node[]) => RichContent;
+  set: (setter: ModifierSetter) => RichContent;
 }
 
 const unfoldTree = (nodes: Node | Node[]) => {
   const root = isArray(nodes) ? { key: 'root', type: Node_Type.UNRECOGNIZED, nodes } : nodes;
   return T.unfoldTree<Node, Node>(root, n => [n, n.nodes]);
 };
+
+const foldTree = (tree: T.Tree<Node>, setter: ModifierSetter, keysToSet: string[]) =>
+  T.fold<Node, Node>((value, forest) => {
+    const nodes = forest.reduce((prev, curr) => {
+      const mapped = keysToSet.includes(curr.key) ? setter(curr) : curr;
+      const item = isArray(mapped) ? mapped : [mapped];
+      return [...prev, ...item];
+    }, [] as Node[]);
+    value.nodes = nodes;
+    return value;
+  })(tree);
 
 class TraversalModifier implements Modifier {
   content: RichContent;
@@ -34,18 +46,9 @@ class TraversalModifier implements Modifier {
     );
   }
 
-  set(setter: (node: Node) => Node | Node[]) {
-    const selectedKeys = compact(this.traversal.asFold().getAll(this.tree)).map(({ key }) => key);
-    const cleverFold = T.fold<Node, Node>((value, forest) => {
-      const nodes = forest.reduce((prev, curr) => {
-        const mapped = selectedKeys.includes(curr.key) ? setter(curr) : curr;
-        const item = isArray(mapped) ? mapped : [mapped];
-        return [...prev, ...item];
-      }, [] as Node[]);
-      value.nodes = nodes;
-      return value;
-    });
-    const root = cleverFold(this.tree);
+  set(setter: ModifierSetter) {
+    const keysToSet = compact(this.traversal.asFold().getAll(this.tree)).map(({ key }) => key);
+    const root = foldTree(this.tree, setter, keysToSet);
     return { ...this.content, nodes: root.nodes };
   }
 }
