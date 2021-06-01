@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { EditorPropsContext } from '../../context';
 import { NodeViewWrapper } from '@tiptap/react';
 import {
@@ -9,7 +9,6 @@ import {
 } from './styles';
 import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import generalRTLIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
-import classNames from 'classnames';
 const stylesWithRTL = { ...generalStyles, ...generalRTLIgnoredStyles };
 
 const EditorContextConsumer = ({ children }) => {
@@ -28,59 +27,44 @@ const getComponentStyles = ({ componentData, theme, isFocused }) => {
     textWrapClassName: getTextWrapClassName(stylesWithRTL, theme, textWrap),
   };
 };
-function useForceUpdate() {
-  const [, setValue] = useState(0);
-
-  return () => setValue(value => value + 1);
-}
 
 const BaseExtensionComponentHOC = Component => {
   return props => {
     return (
       <EditorContextConsumer>
         {context => {
-          // const componentData = props.node.attrs;
-
           const componentData = {
             config: {
               size: 'small',
-              alignment: 'right',
+              alignment: 'left',
               textWrap: 'nowrap',
             },
-            type: 'double',
+            type: 'single',
           };
-          const forceUpdate = useForceUpdate();
-
-          const { editor, getPos } = props;
-          let selected = props.selected;
-          console.log({ props });
-          editor.on('selectionUpdate', ({ editor }) => {
-            // The selection has changed.
-            console.log('selection changed', getPos());
-
-            const position = getPos();
-            console.log(' position', position);
-            console.log(' editor.state.selection.$from', editor.state.selection.$from.pos);
-            if (
-              position >= editor.state.selection.$from.pos &&
-              position <= editor.state.selection.$to.pos
-            ) {
-              forceUpdate();
-
-              selected = true;
-            } else {
-              selected = false;
-            }
+          const [isSelected, setSelected] = useState(false);
+          useEffect(() => {
+            editor.on('selectionUpdate', ({ editor }) => {
+              const position = getPos();
+              if (
+                position >= editor.state.selection.$from.pos &&
+                position <= editor.state.selection.$to.pos
+              ) {
+                setSelected(true);
+              } else {
+                setSelected(false);
+              }
+            });
           });
 
+          const { editor, getPos } = props;
+          const selected = props.selected;
           const { theme } = context;
           const componentStyles = getComponentStyles({
             componentData,
             theme,
-            isFocused: selected,
+            isFocused: isSelected || selected,
           });
 
-          console.log(componentStyles, classNames(componentStyles));
           return (
             <NodeViewWrapper as="div">
               <div className={Object.values(componentStyles).join(' ')}>

@@ -4,7 +4,6 @@ import { PluginProps } from '../../types';
 
 const Divider: React.FC<PluginProps> = ({ context, componentData }) => {
   const { isMobile, theme } = context;
-  console.log({ componentData });
   return (
     <div>
       <DividerComponent componentData={componentData} isMobile={isMobile} theme={theme} />

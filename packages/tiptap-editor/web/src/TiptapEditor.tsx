@@ -126,7 +126,6 @@ const TipTapEditor = ({ editorProps, onUpdate }) => {
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();
       const convertedContent = fromProseMirror(newContent as JSONContent);
-      console.log({ newContent });
       onUpdate({ content: convertedContent });
     },
   });

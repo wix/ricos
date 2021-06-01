@@ -291,7 +291,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   componentDidUpdate() {
-    console.log('component did update');
     this.handleBlockFocus(this.state.editorState);
   }
 

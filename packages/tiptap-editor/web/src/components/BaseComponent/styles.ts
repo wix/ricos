@@ -30,6 +30,5 @@ export const getTextWrapClassName = (styles, theme, textWrap) => {
     return '';
   }
   const key = `textWrap${upperFirst(camelCase(textWrap))}`;
-  console.log({ getTextWrapClassName: key });
   return classNames(styles[key], theme[key]);
 };
