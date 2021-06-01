@@ -3,10 +3,9 @@ import { compact, isArray } from 'lodash';
 import { Prism, fromTraversable, Traversal } from 'monocle-ts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 
-type ModifierSetter = (node: Node) => Node | Node[];
 export interface Modifier {
   filter: (pred: (node: Node) => boolean) => Modifier;
-  set: (setter: ModifierSetter) => RichContent;
+  set: (setter: (node: Node) => Node | Node[]) => RichContent;
 }
 
 const unfoldTree = (nodes: Node | Node[]) => {
@@ -14,7 +13,7 @@ const unfoldTree = (nodes: Node | Node[]) => {
   return T.unfoldTree<Node, Node>(root, n => [n, n.nodes]);
 };
 
-const foldTree = (tree: T.Tree<Node>, setter: ModifierSetter, keysToSet: string[]) =>
+const foldTree = (tree: T.Tree<Node>, setter: (node: Node) => Node | Node[], keysToSet: string[]) =>
   T.fold<Node, Node>((value, forest) => {
     const nodes = forest.reduce((prev, curr) => {
       const mapped = keysToSet.includes(curr.key) ? setter(curr) : curr;
@@ -46,7 +45,7 @@ class TraversalModifier implements Modifier {
     );
   }
 
-  set(setter: ModifierSetter) {
+  set(setter: (node: Node) => Node | Node[]) {
     const keysToSet = compact(this.traversal.asFold().getAll(this.tree)).map(({ key }) => key);
     const root = foldTree(this.tree, setter, keysToSet);
     return { ...this.content, nodes: root.nodes };
