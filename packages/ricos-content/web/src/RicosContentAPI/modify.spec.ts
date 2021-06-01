@@ -1,20 +1,14 @@
-import { cloneDeep } from 'lodash';
 import { modify } from './modify';
+import { compare } from '..';
 import { Node_Type, RichContent } from 'ricos-schema';
-import rawContent from '../../statics/json/migratedFixtures/migration-content.json';
+import rawContent from '../../statics/json/modifyFixtures/images-dividers.json';
+import rawContentAltText from '../../statics/json/modifyFixtures/images-dividers-with-alt-text.json';
+import rawContentDoubleDividers from '../../statics/json/modifyFixtures/images-dividers2x.json';
 
 describe('Content modify', () => {
   it('Should add alt text for images', () => {
     const content = RichContent.fromJSON(rawContent);
-    const expected = cloneDeep(content);
-    expected.nodes.forEach(node => {
-      if (node.type === Node_Type.IMAGE) {
-        node.imageData = {
-          ...node.imageData,
-          altText: node.imageData?.altText || 'Custom alt text',
-        };
-      }
-    });
+    const expected = RichContent.fromJSON(rawContentAltText);
 
     const actual = modify(content)
       .filter(n => n.type === Node_Type.IMAGE)
@@ -27,25 +21,16 @@ describe('Content modify', () => {
       }));
 
     expect(actual).toStrictEqual(expected);
-    expect(actual).not.toEqual(content);
   });
 
   it('Should duplicate all dividers', () => {
     const content = RichContent.fromJSON(rawContent);
-    const expected = cloneDeep(content);
-    expected.nodes = [];
-    content.nodes.forEach(node => {
-      expected.nodes.push(node);
-      if (node.type === Node_Type.DIVIDER) {
-        expected.nodes.push(node);
-      }
-    });
+    const expected = RichContent.fromJSON(rawContentDoubleDividers);
 
     const actual = modify(content)
       .filter(({ type }) => type === Node_Type.DIVIDER)
       .set(n => [n, n]);
 
-    expect(actual).toStrictEqual(expected);
-    expect(actual).not.toEqual(content);
+    expect(compare(actual, expected, { ignoredKeys: ['key'] })).toEqual({});
   });
 });
