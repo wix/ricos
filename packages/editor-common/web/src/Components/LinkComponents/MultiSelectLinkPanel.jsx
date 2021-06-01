@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import LinkPanel from './LinkPanel';
+import LinkPanelWrapper from './LinkPanelWrapper';
 import AnchorPanel from '../AnchorComponents/AnchorPanel';
 import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -156,7 +156,7 @@ class MultiSelectLinkPanel extends PureComponent {
           )}
           {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
             <div className={linkPanelContainerClassName}>
-              <LinkPanel
+              <LinkPanelWrapper
                 linkValues={linkPanelValues}
                 onChange={onChangeLinkPanel}
                 showNewTabCheckbox={showNewTabCheckbox}

@@ -126,7 +126,7 @@ class PluginViewer extends PureComponent {
           const href = `#viewer-${anchor}`;
           containerProps = {
             href,
-            target: '_top',
+            target: '_self',
           };
         }
 

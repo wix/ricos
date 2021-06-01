@@ -6,13 +6,13 @@ import BasicLinkPanel from './BasicLinkPanel';
 import MultiSelectLinkPanel from './MultiSelectLinkPanel';
 import { isEmpty } from 'lodash';
 
-class LinkPanelContainer extends PureComponent {
+class LinkModal extends PureComponent {
   constructor(props) {
     super(props);
     const {
       url,
       anchor,
-      targetBlank,
+      target,
       rel,
       editorState,
       linkTypes,
@@ -28,7 +28,11 @@ class LinkPanelContainer extends PureComponent {
       ? anchorableBlocksData || getAnchorableBlocks(editorState)
       : undefined;
     this.state = {
-      linkPanelValues: { url, targetBlank, rel },
+      linkPanelValues: {
+        url,
+        target,
+        rel,
+      },
       anchorPanelValues: this.renderBasicLinkPanel
         ? undefined
         : {
@@ -130,7 +134,16 @@ class LinkPanelContainer extends PureComponent {
   render() {
     const { radioGroupValue, linkPanelValues, anchorPanelValues } = this.state;
     const ariaProps = { 'aria-labelledby': 'mob_link_modal_hdr' };
-    const { theme, isMobile, t, uiSettings, isActive, hideUrlInput, linkTypes } = this.props;
+    const {
+      theme,
+      isMobile,
+      t,
+      uiSettings,
+      isActive,
+      hideUrlInput,
+      linkTypes,
+      anchorTarget,
+    } = this.props;
     const { linkPanel } = uiSettings || {};
     const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
@@ -142,6 +155,7 @@ class LinkPanelContainer extends PureComponent {
       ariaProps: linkPanelAriaProps,
       hideUrlInput,
       ...uiSettings?.linkPanel,
+      anchorTarget,
     };
     const buttonsProps = {
       onDone: this.onDone,
@@ -181,13 +195,13 @@ class LinkPanelContainer extends PureComponent {
   }
 }
 
-LinkPanelContainer.propTypes = {
+LinkModal.propTypes = {
   editorState: PropTypes.object.isRequired, // will be removed when all usages of this class will pass anchorableBlocksData
   anchorableBlocksData: PropTypes.object,
   url: PropTypes.string,
   anchor: PropTypes.string,
-  targetBlank: PropTypes.bool,
-  rel: PropTypes.object,
+  target: PropTypes.bool,
+  rel: PropTypes.string,
   theme: PropTypes.object.isRequired,
   isActive: PropTypes.bool,
   isMobile: PropTypes.bool,
@@ -201,4 +215,4 @@ LinkPanelContainer.propTypes = {
   hideUrlInput: PropTypes.bool,
 };
 
-export default LinkPanelContainer;
+export default LinkModal;

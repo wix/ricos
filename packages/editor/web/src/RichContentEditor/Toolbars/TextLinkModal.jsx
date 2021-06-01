@@ -9,17 +9,9 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
   setBlockNewEntityData,
-  LinkPanelContainer,
+  LinkModal,
 } from 'wix-rich-content-editor-common';
-import {
-  ANCHOR_CATEGORY,
-  WEB_ADDRESS_CATEGORY,
-  ADD_PLUGIN_LINK_BI,
-  convertRelObjectToString,
-  convertRelStringToObject,
-  convertTargetStringToBoolean,
-  convertTargetBooleanToString,
-} from 'wix-rich-content-common';
+import { ANCHOR_CATEGORY, WEB_ADDRESS_CATEGORY, ADD_PLUGIN_LINK_BI } from 'wix-rich-content-common';
 
 export default class TextLinkModal extends Component {
   constructor(props) {
@@ -40,16 +32,15 @@ export default class TextLinkModal extends Component {
     this.props.hidePopup();
   };
 
-  createLinkEntity = ({ url, anchor, targetBlank, rel, defaultName }) => {
+  createLinkEntity = ({ url, anchor, target, rel, defaultName }) => {
     if (!isEmpty(url) || !isEmpty(anchor)) {
-      const { getEditorState, setEditorState, anchorTarget, insertLinkFn, helpers } = this.props;
+      const { getEditorState, setEditorState, insertLinkFn, helpers } = this.props;
       const editorState = getEditorState();
-      const target = convertTargetBooleanToString(targetBlank, anchorTarget);
       if (this.mode === 'TEXT') {
         const newEditorState = insertLinkFn(getEditorState(), {
           url,
           anchor,
-          rel: convertRelObjectToString(rel),
+          rel,
           target,
           text: defaultName,
         });
@@ -66,7 +57,7 @@ export default class TextLinkModal extends Component {
                   link: {
                     url,
                     target,
-                    rel: convertRelObjectToString(rel),
+                    rel,
                   },
                 }),
           },
@@ -83,8 +74,8 @@ export default class TextLinkModal extends Component {
         ? { anchor, category: ANCHOR_CATEGORY }
         : {
             link: url,
-            rel: convertRelObjectToString(rel),
-            newTab: !!targetBlank,
+            rel,
+            newTab: target === '_blank',
             category: WEB_ADDRESS_CATEGORY,
           };
       helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, { plugin_id: this.mode, params });
@@ -136,14 +127,13 @@ export default class TextLinkModal extends Component {
     const { getEditorState, theme, isMobile, anchorTarget, t, uiSettings, linkTypes } = this.props;
     const linkData = this.getLinkData(getEditorState());
     const { url, anchor, target = anchorTarget, rel } = linkData || {};
-    const targetBlank = convertTargetStringToBoolean(target);
     return (
-      <LinkPanelContainer
+      <LinkModal
         editorState={getEditorState()}
         url={url}
         anchor={anchor}
-        targetBlank={targetBlank}
-        rel={convertRelStringToObject(rel)}
+        target={target}
+        rel={rel}
         theme={theme}
         isActive={!isEmpty(linkData)}
         isMobile={isMobile}
@@ -166,7 +156,6 @@ TextLinkModal.propTypes = {
   theme: PropTypes.object.isRequired,
   url: PropTypes.string,
   isMobile: PropTypes.bool,
-  targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,

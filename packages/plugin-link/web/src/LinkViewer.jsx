@@ -74,7 +74,7 @@ class LinkViewer extends Component {
     const { url, anchor, target = anchorTarget, rel } = componentData;
     const anchorProps = {
       href: this.getHref(url, anchor),
-      target: anchor ? '_top' : getTargetValue(target),
+      target: anchor ? '_self' : getTargetValue(target),
       rel: getRelValue(rel),
       className: classNames(this.styles.link, {
         [this.styles.linkInEditor]: isInEditor,

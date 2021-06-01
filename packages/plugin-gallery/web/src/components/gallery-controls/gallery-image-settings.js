@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageClientAPI from 'image-client-api/dist/imageClientSDK';
-import {
-  mergeStyles,
-  convertRelStringToObject,
-  convertRelObjectToString,
-  convertTargetStringToBoolean,
-  convertTargetBooleanToString,
-} from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import {
   FileInput,
   Image,
@@ -16,7 +10,7 @@ import {
   SettingsSection,
   SettingsPanelFooter,
 } from 'wix-rich-content-plugin-commons';
-import { FocusManager, LinkPanel } from 'wix-rich-content-editor-common';
+import { FocusManager, LinkPanelWrapper } from 'wix-rich-content-editor-common';
 import { BackIcon, DeleteIcon, ReplaceIcon, NextIcon, PreviousIcon } from '../../icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';
 import GallerySettingsMobileHeader from './gallery-settings-mobile-header';
@@ -59,27 +53,7 @@ class ImageSettings extends Component {
   onAltTextChange = altText => this.props.onUpdateItem({ altText });
 
   onLinkPanelChange = linkPanelValues => {
-    this.props.onUpdateItem({ link: this.linkPanelToLink(linkPanelValues) });
-  };
-
-  linkPanelToLink = ({ url, targetBlank, rel, isValid }) => {
-    const { anchorTarget } = this.props;
-    return {
-      url,
-      target: convertTargetBooleanToString(targetBlank, anchorTarget),
-      rel: convertRelObjectToString(rel),
-      isValid,
-    };
-  };
-
-  linkToLinkPanel = ({ url = '', target, rel, isValid }) => {
-    const { anchorTarget } = this.props;
-    return {
-      url,
-      targetBlank: convertTargetStringToBoolean(target || anchorTarget),
-      rel: convertRelStringToObject(rel),
-      isValid,
-    };
+    this.props.onUpdateItem({ link: linkPanelValues });
   };
 
   render() {
@@ -243,8 +217,8 @@ class ImageSettings extends Component {
                     <span id="gallery_image_link_lbl" className={this.styles.inputWithLabel_label}>
                       {this.linkLabel}
                     </span>
-                    <LinkPanel
-                      linkValues={this.linkToLinkPanel(metadata.link || {})}
+                    <LinkPanelWrapper
+                      linkValues={metadata.link || {}}
                       onChange={this.onLinkPanelChange}
                       showNewTabCheckbox={showNewTabCheckbox}
                       showNoFollowCheckbox={showNoFollowCheckbox}

@@ -1,15 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput } from 'wix-rich-content-plugin-commons';
-import { LinkPanel } from 'wix-rich-content-editor-common';
-import {
-  isValidUrl,
-  mergeStyles,
-  convertRelObjectToString,
-  convertRelStringToObject,
-  convertTargetStringToBoolean,
-  convertTargetBooleanToString,
-} from 'wix-rich-content-common';
+import { LinkPanelWrapper } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 
 class SettingsComponent extends PureComponent {
@@ -40,35 +33,14 @@ class SettingsComponent extends PureComponent {
 
   onTextChanged = buttonText => this.setState({ buttonText });
 
-  onLinkChanged = url => {
-    const validUrl = isValidUrl(url) || !url;
-    this.setState({ url }, () => this.props.isValidUrl(validUrl));
-  };
-
-  linkPanelToLink = ({ url, targetBlank, rel }) => {
-    const { anchorTarget } = this.props;
-    return {
-      url,
-      target: convertTargetBooleanToString(targetBlank, anchorTarget),
-      rel: convertRelObjectToString(rel),
-    };
-  };
-
-  linkToLinkPanel = ({ url, target, rel }) => {
-    return {
-      url,
-      targetBlank: convertTargetStringToBoolean(target),
-      rel: convertRelStringToObject(rel),
-    };
-  };
-
   onLinkPanelChange = linkPanelValues => {
-    this.setState({ ...this.linkPanelToLink(linkPanelValues) });
+    this.setState(linkPanelValues);
   };
 
   render() {
     const { t, showLinkPanel, uiSettings, theme } = this.props;
     const { buttonText, url, target, rel } = this.state;
+    const linkValues = { url, target, rel };
     const { linkPanel } = uiSettings || {};
     const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
 
@@ -99,8 +71,8 @@ class SettingsComponent extends PureComponent {
             <div className={this.styles.button_settingsComponent_header_ButtonLink}>
               {t('ButtonModal_Button_Link')}
             </div>
-            <LinkPanel
-              linkValues={this.linkToLinkPanel({ url, target, rel })}
+            <LinkPanelWrapper
+              linkValues={linkValues}
               onChange={this.onLinkPanelChange}
               showNewTabCheckbox={showNewTabCheckbox}
               showNoFollowCheckbox={showNoFollowCheckbox}

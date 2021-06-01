@@ -11,7 +11,7 @@ import { addLinkPreview, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-
 import { isValidUrl, CreatePluginFunction } from 'wix-rich-content-common';
 import React, { KeyboardEvent } from 'react';
 import { LINK_TYPE, LinkPluginEditorConfig } from './types';
-import { Component } from './LinkComponent';
+import LinkViewer from './LinkViewer';
 import { linkEntityStrategy } from './strategy';
 import createLinkToolbar from './toolbar/createToolbar';
 import { DEFAULTS } from './defaults';
@@ -36,9 +36,18 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
   const decorators = [
     {
       strategy: linkEntityStrategy,
-      component: props => (
-        <Component {...props} anchorTarget={anchorTarget} relValue={relValue} theme={theme} />
-      ),
+      component: props => {
+        const componentData = props?.contentState.getEntity(props?.entityKey).getData();
+        return (
+          <LinkViewer
+            componentData={componentData}
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            theme={theme}
+            {...props}
+          />
+        );
+      },
     },
   ];
   let linkifyData: LinkifyData | undefined;

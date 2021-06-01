@@ -1,31 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import { LinkPanelContainer } from 'wix-rich-content-editor-common';
-import {
-  ANCHOR_CATEGORY,
-  WEB_ADDRESS_CATEGORY,
-  isNewTab,
-  convertRelObjectToString,
-  convertRelStringToObject,
-  convertTargetStringToBoolean,
-  convertTargetBooleanToString,
-} from 'wix-rich-content-common';
+import { LinkModal } from 'wix-rich-content-editor-common';
+import { ANCHOR_CATEGORY, WEB_ADDRESS_CATEGORY, isNewTab } from 'wix-rich-content-common';
 
 export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
-  setLinkInBlockData = ({ url, anchor, targetBlank, rel }) => {
-    const { pubsub, anchorTarget, hideUrlInput, triggerBi } = this.props;
-    const target = convertTargetBooleanToString(targetBlank, anchorTarget);
-
+  setLinkInBlockData = ({ url, anchor, target, rel }) => {
+    const { pubsub, hideUrlInput, triggerBi } = this.props;
     if (!isEmpty(url) || !isEmpty(anchor) || hideUrlInput) {
       const item = anchor
         ? { anchor }
         : {
             url: url || pubsub.get('componentData')?.config?.link?.url,
             target,
-            rel: convertRelObjectToString(rel),
+            rel,
           };
       pubsub.setBlockData({
         key: 'componentLink',
@@ -36,7 +26,7 @@ export default class BlockLinkModal extends Component {
         ? { anchor, category: ANCHOR_CATEGORY }
         : {
             link: item.url,
-            rel: convertRelObjectToString(rel),
+            rel,
             newTab: isNewTab(target),
             category: WEB_ADDRESS_CATEGORY,
           };
@@ -66,14 +56,13 @@ export default class BlockLinkModal extends Component {
     } = this.props;
     const componentLink = pubsub.get('componentData')?.config?.link;
     const { url, anchor, target = anchorTarget, rel } = componentLink || {};
-    const targetBlank = convertTargetStringToBoolean(target);
     return (
-      <LinkPanelContainer
+      <LinkModal
         editorState={editorState}
         url={url}
         anchor={anchor}
-        targetBlank={targetBlank}
-        rel={convertRelStringToObject(rel)}
+        target={target}
+        rel={rel}
         theme={theme}
         isActive={!!componentLink}
         isMobile={isMobile}
@@ -96,7 +85,6 @@ BlockLinkModal.propTypes = {
   theme: PropTypes.object.isRequired,
   url: PropTypes.string,
   isMobile: PropTypes.bool,
-  targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,

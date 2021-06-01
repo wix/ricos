@@ -7,13 +7,11 @@ import Checkbox from '../Checkbox';
 import { ErrorIcon } from '../../Icons';
 import styles from '../../../statics/styles/link-panel.scss';
 import { LinkPanelDropdown } from './LinkPanelDropdown';
-import { merge } from 'lodash';
 
 class LinkPanel extends Component {
   state = { showValidation: false };
 
   static defaultProps = {
-    targetBlank: true,
     showNewTabCheckbox: true,
     showNoFollowCheckbox: true,
     showSponsoredCheckbox: true,
@@ -43,14 +41,14 @@ class LinkPanel extends Component {
   };
 
   handleNofollowChange = event => {
-    this.onChange({ rel: { nofollow: event.target.checked } });
+    this.onChange({ nofollow: event.target.checked });
   };
 
   handleSponsoredChange = event => {
-    this.onChange({ rel: { sponsored: event.target.checked } });
+    this.onChange({ sponsored: event.target.checked });
   };
 
-  onChange = changes => this.props.onChange(merge({}, this.props.linkValues, changes));
+  onChange = changes => this.props.onChange(changes);
 
   handleKeyDown = e => {
     const { onEnter, onEscape } = this.props;
@@ -125,8 +123,7 @@ class LinkPanel extends Component {
       isMobile,
     } = this.props;
 
-    const { targetBlank, rel } = linkValues;
-    const { nofollow, sponsored } = rel || {};
+    const { targetBlank, nofollow, sponsored } = linkValues;
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
@@ -186,7 +183,8 @@ LinkPanel.propTypes = {
     url: PropTypes.string,
     isValid: PropTypes.bool,
     targetBlank: PropTypes.bool,
-    rel: PropTypes.object,
+    nofollow: PropTypes.bool,
+    sponsored: PropTypes.bool,
   }).isRequired,
   ariaProps: PropTypes.object,
   showNewTabCheckbox: PropTypes.bool,
@@ -198,5 +196,6 @@ LinkPanel.propTypes = {
   placeholder: PropTypes.string,
   hideUrlInput: PropTypes.bool,
   isMobile: PropTypes.bool,
+  anchorTarget: PropTypes.string,
 };
 export default LinkPanel;
