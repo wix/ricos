@@ -1,43 +1,60 @@
-import { DraftContent } from '../types/contentTypes';
+import { RichContent } from 'ricos-schema';
+import { DraftContent, isDraftContent } from '../types/contentTypes';
+import { fromDraft } from './draft/fromDraft/fromDraft';
 import { getImageSrc } from '../imageUtils';
-import extractEntityData from '../preview/ContentStateAnalyzer/extractEntityData';
-
-const toSeoImage = entityData => {
-  const { url, width, height, alt = '', caption = '' } = entityData;
-  const imageUrl = getImageSrc({ file_name: url }, undefined, {
-    imageType: 'highRes',
-    requiredQuality: 90,
-    requiredHeight: height as number,
-    requiredWidth: width as number,
-  });
-  return { imageUrl, imageWidth: width, imageHeight: height, imageAlt: alt, imageCaption: caption };
-};
-
-const toSeoVideo = entityData => {
-  const { url, thumbnail, caption = '' } = entityData;
-  const videoThumbnailUrl = thumbnail.startsWith('media/')
-    ? `https://static.wixstatic.com/${thumbnail}`
-    : thumbnail;
-  const videoContentUrl = url.startsWith('video/') ? `https://video.wixstatic.com/${url}` : url;
-  return { videoThumbnailUrl, videoContentUrl, videoName: caption };
-};
+import { extract } from '../RicosContentAPI/extract';
 
 const gifToSeoVideo = entityData => {
   const { mp4: videoContentUrl, thumbnail: videoThumbnailUrl } = entityData;
   return { videoThumbnailUrl, videoContentUrl, videoName: '' };
 };
 
-export const extractMedia = ({ entityMap }: DraftContent) =>
-  Object.values(entityMap)
-    .filter(entity =>
-      [
-        'wix-draft-plugin-image',
-        'wix-draft-plugin-giphy',
-        'wix-draft-plugin-gallery',
-        'wix-draft-plugin-video',
-      ].includes(entity.type)
-    )
-    .reduce((media, entity) => [...media, ...extractEntityData(entity)], [])
-    .map(entityData =>
-      ({ image: toSeoImage, video: toSeoVideo, giphy: gifToSeoVideo }[entityData.type](entityData))
-    );
+const mapImageData = (content: RichContent) =>
+  extract(content.nodes)
+    .map(({ imageData }) => imageData || {})
+    .map(({ altText, caption, image = {} }) => ({
+      imageAlt: altText || '',
+      imageCaption: caption || '',
+      imageHeight: image.height || 0,
+      imageWidth: image.width || 0,
+      imageUrl: image.src?.url || '',
+    }))
+    .map(data => ({
+      ...data,
+      imageUrl: getImageSrc({ file_name: data.imageUrl }, undefined, {
+        imageType: 'highRes',
+        requiredQuality: 90,
+        requiredHeight: data.imageHeight,
+        requiredWidth: data.imageWidth,
+      }),
+    }))
+    .get();
+
+const mapVideoData = (content: RichContent) =>
+  extract(content.nodes)
+    .map(({ videoData }) => videoData || {})
+    .map(({ video = {}, thumbnail = {} }) => ({
+      videoContentUrl: video.src?.url || '',
+      videoThumbnailUrl: thumbnail.src?.url || '',
+    }))
+    .map(data => ({
+      videoThumbnailUrl: data.videoThumbnailUrl.startsWith('media/')
+        ? `https://static.wixstatic.com/${data.videoThumbnailUrl}`
+        : data.videoThumbnailUrl,
+      videoContentUrl: data.videoContentUrl.startsWith('video/')
+        ? `https://video.wixstatic.com/${data.videoContentUrl}`
+        : data.videoContentUrl,
+    }))
+    .get();
+
+const mapGifToVideoData = (content: RichContent) =>
+  extract(content.nodes)
+    .map(({ giphyData }) => giphyData?.gif || {})
+    .map(({ originalMp4 = '', stillUrl = '' }) => ({
+      videoThumbnailUrl: stillUrl,
+      videoContentUrl: originalMp4,
+    }));
+
+export const extractMedia = (content: RichContent | DraftContent) => {
+  const richContent = isDraftContent(content) ? fromDraft(content) : content;
+};
