@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `ui-components`
+  - [#2553](https://github.com/wix-incubator/rich-content/pull/2553) moved labeledToggle component into ui-components
+
 </details>
 <hr/>
 
