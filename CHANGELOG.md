@@ -17,6 +17,11 @@
   </summary>
 
 
+### :bug: Bug Fix
+- `common`
+  - [#2572](https://github.com/wix-incubator/rich-content/pull/2572) fix double link when text is justified on safari/firefox
+
+
 ### :house: Internal
 - `ui-components`
   - [#2553](https://github.com/wix-incubator/rich-content/pull/2553) moved labeledToggle component into ui-components
