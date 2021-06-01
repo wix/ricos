@@ -29,4 +29,23 @@ describe('Content modify', () => {
     expect(actual).toStrictEqual(expected);
     expect(actual).not.toEqual(content);
   });
+
+  it('Should duplicate all dividers', () => {
+    const content = RichContent.fromJSON(rawContent);
+    const expected = cloneDeep(content);
+    expected.nodes = [];
+    content.nodes.forEach(node => {
+      expected.nodes.push(node);
+      if (node.type === Node_Type.DIVIDER) {
+        expected.nodes.push(node);
+      }
+    });
+
+    const actual = modify(content)
+      .filter(({ type }) => type === Node_Type.DIVIDER)
+      .set(n => [n, n]);
+
+    expect(actual).toStrictEqual(expected);
+    expect(actual).not.toEqual(content);
+  });
 });
