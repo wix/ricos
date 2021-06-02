@@ -28,7 +28,26 @@ import {
   SetEditorState,
   TextAlignment,
   InlineStyle,
+  ACCORDION_TYPE,
+  ACTION_BUTTON_TYPE,
+  LINK_BUTTON_TYPE,
+  EMOJI_TYPE,
+  HASHTAG_TYPE,
+  HEADERS_MARKDOWN_TYPE,
+  LINE_SPACING_TYPE,
+  INDENT_TYPE,
+  TABLE_TYPE,
+  EXTERNAL_LINK_TYPE,
+  LINK_PREVIEW_TYPE,
+  SPOILER_TYPE,
+  UNDO_REDO_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+  VERTICAL_EMBED_TYPE,
   IMAGE_TYPE,
+  SOUND_CLOUD_TYPE,
+  MAP_TYPE,
+  HEADINGS_DROPDOWN_TYPE,
   DIVIDER_TYPE,
   FILE_UPLOAD_TYPE,
   GALLERY_TYPE,
@@ -36,25 +55,48 @@ import {
   HTML_TYPE,
   POLL_TYPE,
   VIDEO_TYPE,
+  LINK_TYPE,
+  MENTION_TYPE,
+  CODE_BLOCK_TYPE,
+  RICOS_ACCORDION_TYPE,
+  RICOS_ACTION_BUTTON_TYPE,
+  RICOS_LINK_BUTTON_TYPE,
+  RICOS_EMOJI_TYPE,
+  RICOS_HASHTAG_TYPE,
+  RICOS_HEADERS_MARKDOWN_TYPE,
+  RICOS_LINE_SPACING_TYPE,
+  RICOS_INDENT_TYPE,
+  RICOS_TABLE_TYPE,
+  RICOS_EXTERNAL_LINK_TYPE,
+  RICOS_LINK_PREVIEW_TYPE,
+  RICOS_SPOILER_TYPE,
+  RICOS_UNDO_REDO_TYPE,
+  RICOS_HEADINGS_DROPDOWN_TYPE,
+  RICOS_MAP_TYPE,
+  RICOS_SOUND_CLOUD_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
+  RICOS_VERTICAL_EMBED_TYPE,
+  RICOS_IMAGE_TYPE,
   RICOS_DIVIDER_TYPE,
+  RICOS_FILE_TYPE,
   RICOS_GALLERY_TYPE,
   RICOS_GIPHY_TYPE,
   RICOS_HTML_TYPE,
-  RICOS_IMAGE_TYPE,
-  RICOS_VIDEO_TYPE,
   RICOS_POLL_TYPE,
-  RICOS_FILE_TYPE,
+  RICOS_VIDEO_TYPE,
   RICOS_LINK_TYPE,
-  LINK_TYPE,
   RICOS_MENTION_TYPE,
-  MENTION_TYPE,
-  CODE_BLOCK_TYPE,
+  RICOS_CODE_BLOCK_TYPE,
   HEADER_BLOCK,
   BLOCKQUOTE,
   UNSTYLED,
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
+  UNSUPPORTED_BLOCKS_TYPE,
 } from 'wix-rich-content-common';
+
+type PluginsList = string[];
 
 type TextBlockType =
   | typeof UNSTYLED
@@ -78,7 +120,7 @@ type Selection = {
   hasFocus?: boolean;
 };
 
-const PLUGIN_TYPE_MAP = {
+const TO_DRAFT_PLUGIN_TYPE_MAP = {
   [RICOS_DIVIDER_TYPE]: DIVIDER_TYPE,
   [RICOS_FILE_TYPE]: FILE_UPLOAD_TYPE,
   [RICOS_GALLERY_TYPE]: GALLERY_TYPE,
@@ -99,6 +141,41 @@ const PLUGIN_TYPE_MAP = {
   [POLL_TYPE]: POLL_TYPE,
 };
 
+const TO_RICOS_PLUGIN_TYPE_MAP = {
+  [DIVIDER_TYPE]: RICOS_DIVIDER_TYPE,
+  [FILE_UPLOAD_TYPE]: RICOS_FILE_TYPE,
+  [GALLERY_TYPE]: RICOS_GALLERY_TYPE,
+  [GIPHY_TYPE]: RICOS_GIPHY_TYPE,
+  [HTML_TYPE]: RICOS_HTML_TYPE,
+  [IMAGE_TYPE]: RICOS_IMAGE_TYPE,
+  [VIDEO_TYPE]: RICOS_VIDEO_TYPE,
+  [POLL_TYPE]: RICOS_POLL_TYPE,
+  [LINK_TYPE]: RICOS_LINK_TYPE,
+  [MENTION_TYPE]: RICOS_MENTION_TYPE,
+  [ACCORDION_TYPE]: RICOS_ACCORDION_TYPE,
+  [ACTION_BUTTON_TYPE]: RICOS_ACTION_BUTTON_TYPE,
+  [LINK_BUTTON_TYPE]: RICOS_LINK_BUTTON_TYPE,
+  [CODE_BLOCK_TYPE]: RICOS_CODE_BLOCK_TYPE,
+  [EMOJI_TYPE]: RICOS_EMOJI_TYPE,
+  [HASHTAG_TYPE]: RICOS_HASHTAG_TYPE,
+  [HEADERS_MARKDOWN_TYPE]: RICOS_HEADERS_MARKDOWN_TYPE,
+  [INDENT_TYPE]: RICOS_INDENT_TYPE,
+  [LINE_SPACING_TYPE]: RICOS_LINE_SPACING_TYPE,
+  [TABLE_TYPE]: RICOS_TABLE_TYPE,
+  [EXTERNAL_LINK_TYPE]: RICOS_EXTERNAL_LINK_TYPE,
+  [LINK_PREVIEW_TYPE]: RICOS_LINK_PREVIEW_TYPE,
+  [SPOILER_TYPE]: RICOS_SPOILER_TYPE,
+  [UNDO_REDO_TYPE]: RICOS_UNDO_REDO_TYPE,
+  [HEADINGS_DROPDOWN_TYPE]: RICOS_HEADINGS_DROPDOWN_TYPE,
+  [MAP_TYPE]: RICOS_MAP_TYPE,
+  [SOUND_CLOUD_TYPE]: RICOS_SOUND_CLOUD_TYPE,
+  [TEXT_COLOR_TYPE]: RICOS_TEXT_COLOR_TYPE,
+  [TEXT_HIGHLIGHT_TYPE]: RICOS_TEXT_HIGHLIGHT_TYPE,
+  [VERTICAL_EMBED_TYPE]: RICOS_VERTICAL_EMBED_TYPE,
+};
+
+export const PluginsToExclude = [UNSUPPORTED_BLOCKS_TYPE];
+
 const triggerDecorationsMap = {
   [RICOS_MENTION_TYPE]: triggerMention,
 };
@@ -114,6 +191,7 @@ const deleteDecorationsMapFuncs = {
 
 export const createEditorCommands = (
   createPluginsDataMap,
+  plugins,
   getEditorState: GetEditorState,
   setEditorState: SetEditorState
 ) => {
@@ -129,6 +207,9 @@ export const createEditorCommands = (
       )
     );
 
+  const normalizePluginsList = (pluginsList: PluginsList) =>
+    pluginsList.filter(pluginName => pluginName && !PluginsToExclude.includes[pluginName]);
+
   const editorState = {
     // TODO: check if needed, plus type error using SelectionState, not sure why
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -141,6 +222,13 @@ export const createEditorCommands = (
     hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
     getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
     getSelectedData: () => getEntityData(getEditorState()) || {},
+    getPluginsList: (settings?: { isRicosSchema?: boolean }): PluginsList => {
+      const { isRicosSchema } = settings || {};
+      const pluginsList = plugins?.map(plugin =>
+        isRicosSchema ? TO_RICOS_PLUGIN_TYPE_MAP[plugin.blockType] : plugin.blockType
+      );
+      return normalizePluginsList(pluginsList);
+    },
   };
 
   const textFormattingCommands = {
@@ -162,7 +250,7 @@ export const createEditorCommands = (
       data?: PluginsDataMap[K],
       settings?: { isRicosSchema?: boolean }
     ): string => {
-      const draftType = PLUGIN_TYPE_MAP[type];
+      const draftType = TO_DRAFT_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       const pluginData = createPluginData(data, settings?.isRicosSchema);
       const { newBlock, newSelection, newEditorState } = createBlock(
@@ -179,7 +267,7 @@ export const createEditorCommands = (
       data?: PluginsDataMap[K],
       settings?: { isRicosSchema?: boolean }
     ) => {
-      const draftType = PLUGIN_TYPE_MAP[type];
+      const draftType = TO_DRAFT_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       const pluginData = createPluginData(data, settings?.isRicosSchema);
       const entityKey = blockKeyToEntityKey(getEditorState(), blockKey);
@@ -196,7 +284,7 @@ export const createEditorCommands = (
       data?: DecorationsDataMap[K],
       settings?: { isRicosSchema?: boolean }
     ) => {
-      const draftType = PLUGIN_TYPE_MAP[type];
+      const draftType = TO_DRAFT_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       const pluginData = createPluginData(data, settings?.isRicosSchema);
       const newEditorState = insertDecorationsMap[type]?.(getEditorState(), pluginData);

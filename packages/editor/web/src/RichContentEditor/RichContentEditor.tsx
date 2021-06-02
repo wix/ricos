@@ -514,6 +514,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const { createPluginsDataMap = {} } = this.props;
     this.EditorCommands = createEditorCommands(
       createPluginsDataMap,
+      this.plugins,
       this.getEditorState,
       this.updateEditorState
     );
