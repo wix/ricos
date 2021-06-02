@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Loader } from 'wix-rich-content-plugin-commons';
-import { MediaUploadErrorKey } from 'wix-rich-content-common';
+import { Loader, uploadFile, handleUploadFinished } from 'wix-rich-content-plugin-commons';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
-import { DEFAULTS, GALLERY_ITEMS_TYPES, createImageItem, createVideoItem } from './defaults';
+import { DEFAULTS } from './defaults';
 import { GALLERY_TYPE } from './types';
 import styles from '../statics/styles/gallery-component.scss';
 
@@ -78,17 +77,17 @@ class GalleryComponent extends PureComponent {
     return state;
   };
 
-  setItemInGallery = (item, error, itemPos) => {
+  setItemInGallery = (item, itemPos) => {
     const shouldAdd = typeof itemPos === 'undefined';
     let { items, styles, key } = this.state;
     let itemIdx;
     if (shouldAdd) {
       itemIdx = items.length;
-      items = [...items, { ...item, error }];
+      items = [...items, item];
     } else {
       itemIdx = itemPos;
       items = [...items];
-      items[itemPos] = { ...item, error };
+      items[itemPos] = item;
     }
 
     //when updating componentData on an async method like this one,
@@ -107,17 +106,39 @@ class GalleryComponent extends PureComponent {
         config: {},
       });
     }
-    if (error) {
-      this.props.commonPubsub.set('onMediaUploadError', error);
-    }
     return itemIdx;
+  };
+
+  onLocalLoad = (item, itemPos) => {
+    return item && this.setItemInGallery(item, itemPos);
+  };
+
+  onUploadFinished = (item, itemPos) => {
+    this.setItemInGallery(item, itemPos);
+    this.setState(state => {
+      const itemsLeftToUpload = state.itemsLeftToUpload - 1;
+      const isLoading = itemsLeftToUpload > 0;
+      return { itemsLeftToUpload, isLoading };
+    });
   };
 
   handleFilesSelected = (files, itemPos) => {
     Array(...files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = e => this.fileLoaded(e, file, itemPos);
-      reader.readAsDataURL(file);
+      const BI = {
+        onMediaUploadStart: this.props.helpers.onMediaUploadStart,
+        onMediaUploadEnd: this.props.helpers.onMediaUploadEnd,
+      };
+      uploadFile(
+        [file],
+        this.onLocalLoad,
+        this.onUploadFinished,
+        this.props.helpers.handleFileUpload,
+        BI,
+        GALLERY_TYPE,
+        this.props.componentData,
+        this.props.commonPubsub,
+        itemPos
+      );
     });
     this.state && this.onLoad(true);
   };
@@ -130,53 +151,17 @@ class GalleryComponent extends PureComponent {
     });
   };
 
-  handleFileUpload = (file, type, itemIdx) => {
-    const { helpers } = this.props;
-    const handleFileUpload = helpers?.handleFileUpload;
-
-    if (handleFileUpload) {
-      const createGalleryItem =
-        type === GALLERY_ITEMS_TYPES.IMAGE ? createImageItem : createVideoItem;
-      const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, type);
-      handleFileUpload(file, ({ data, error }) => {
-        const item = data && createGalleryItem(data, Date.now().toString());
-        uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
-        this.setItemInGallery(item, error, itemIdx);
-        this.onFileUploadEnd();
-      });
-    } else {
-      console.warn('Missing upload function'); //eslint-disable-line no-console
-    }
-  };
-
-  imageLoaded = (event, file, itemPos) => {
-    const img = event.target;
-    const item = createImageItem(img, Date.now().toString(), true);
-    const itemIdx = this.setItemInGallery(item, itemPos);
-    this.handleFileUpload(file, GALLERY_ITEMS_TYPES.IMAGE, itemIdx);
-  };
-
-  handleFilesAdded = ({ data, error, itemIdx }, uploadBIData) => {
+  handleFilesAdded = ({ data, error, itemIdx }) => {
     const handleFileAdded = (item, error, idx) => {
-      let galleryItem = {};
-      const poster =
-        item.type === GALLERY_ITEMS_TYPES.VIDEO
-          ? { poster: item.poster || item.thumbnail_url }
-          : {};
-      if (item) {
-        galleryItem = {
-          metadata: {
-            type: item.type || GALLERY_ITEMS_TYPES.IMAGE,
-            height: item.height,
-            width: item.width,
-            ...poster,
-          },
-          itemId: String(item.id),
-          url: item.file_name,
-        };
-      }
-      uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
-      this.setItemInGallery(galleryItem, error, idx);
+      handleUploadFinished(
+        item,
+        error,
+        this.onUploadFinished,
+        this.props.commonPubsub,
+        GALLERY_TYPE,
+        this.props.componentData,
+        idx
+      );
     };
     if (data instanceof Array) {
       data.forEach(item => {
@@ -189,31 +174,6 @@ class GalleryComponent extends PureComponent {
       this.props.store.update('componentState', { isLoading: false });
     }
     this.onLoad(false);
-  };
-
-  getUnsupportedExtensionError = fileName => {
-    return {
-      key: MediaUploadErrorKey.UNSUPPORTED_EXTENSION,
-      args: {
-        extension:
-          fileName
-            .split('.')
-            .pop()
-            ?.toLowerCase() || '',
-      },
-    };
-  };
-
-  fileLoaded = (event, file, itemPos) => {
-    if (file.type.match('image/*')) {
-      const img = new Image();
-      img.onload = e => this.imageLoaded(e, file, itemPos);
-      img.src = event.target.result;
-    } else if (file.type.match('video/*')) {
-      this.handleFileUpload(file, GALLERY_ITEMS_TYPES.VIDEO, itemPos);
-    } else {
-      this.setItemInGallery({}, this.getUnsupportedExtensionError(file.name), itemPos);
-    }
   };
 
   renderLoader = () => {

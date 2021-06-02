@@ -54,8 +54,8 @@ class FileUploadComponent extends PureComponent {
     this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
   };
 
-  onUploadFinished = ({ componentData }) => {
-    this.updateComponentData(componentData);
+  onUploadFinished = ({ data }) => {
+    this.updateComponentData(data);
     this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });

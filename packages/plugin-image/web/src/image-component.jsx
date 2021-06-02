@@ -57,9 +57,8 @@ class ImageComponent extends React.Component {
     return state;
   };
 
-  onUploadFinished = ({ componentData, error }) => {
-    componentData &&
-      this.props.store.update('componentData', componentData, this.props.block.getKey());
+  onUploadFinished = ({ data, error }) => {
+    data && this.props.store.update('componentData', data, this.props.block.getKey());
     let { dataUrl } = this.state;
     if (!error) {
       dataUrl = null;
@@ -68,7 +67,7 @@ class ImageComponent extends React.Component {
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
-  onLocalLoad = ({ url: dataUrl }) => this.setState({ isLoading: true, error: false, dataUrl });
+  onLocalLoad = ({ dataUrl }) => this.setState({ isLoading: true, error: false, dataUrl });
 
   handleFilesSelected = files => {
     const BI = {

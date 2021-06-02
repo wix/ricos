@@ -84,10 +84,10 @@ export default class VideoSelectionInputModal extends Component {
   }
 
   getOnUploadFinished = (isCustomVideo, shouldSetComponentData = true) => {
-    return ({ componentData, error }) =>
+    return ({ data, error }) =>
       shouldSetComponentData
-        ? this.setComponentData({ ...componentData, error, isCustomVideo })
-        : this.onConfirm({ ...componentData, error, isCustomVideo });
+        ? this.setComponentData({ ...data, error, isCustomVideo })
+        : this.onConfirm({ ...data, error, isCustomVideo });
   };
 
   addVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
@@ -109,7 +109,7 @@ export default class VideoSelectionInputModal extends Component {
     this.props.pubsub.update('componentData', data, this.blockKey);
   };
 
-  onLocalLoad = ({ url: src, tempData }) => {
+  onLocalLoad = ({ src, tempData }) => {
     this.onConfirm({ ...this.props.componentData, src, isCustomVideo: true, tempData });
   };
 
