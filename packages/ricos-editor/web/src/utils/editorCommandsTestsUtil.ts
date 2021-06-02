@@ -27,8 +27,6 @@ import {
   MentionData,
   PluginContainerData_Width_Type,
   PluginContainerData_Alignment,
-  DividerData_Width,
-  DividerData_Alignment,
 } from 'ricos-schema';
 
 export const content = {
@@ -527,7 +525,7 @@ const mention = {
   },
 };
 
-export const inlineStylesTestConfig = ['bold', 'italic', 'underline'];
+export const inlineStylesTestConfig = ['bold', 'italic', 'underline', 'spoiler'];
 
 export const pluginsTestConfig = {
   divider,
