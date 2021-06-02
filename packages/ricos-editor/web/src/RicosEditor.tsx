@@ -1,5 +1,10 @@
 import React, { Component, Fragment, ElementType, FunctionComponent, forwardRef } from 'react';
-import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
+import {
+  RicosEngine,
+  shouldRenderChild,
+  localeStrategy,
+  getBiCallback as getCallback,
+} from 'ricos-common';
 import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
@@ -38,11 +43,16 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   isBusy = false;
 
+  firstMutationLatch = true;
+
+  getBiCallback: typeof getCallback;
+
   currentEditorRef!: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange, props.content);
+    this.getBiCallback = getCallback.bind(this);
     this.state = { localeData: { locale: props.locale }, remountKey: false };
   }
 
