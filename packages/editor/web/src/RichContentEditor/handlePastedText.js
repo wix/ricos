@@ -12,7 +12,7 @@ import {
 } from './utils/pasting/pastedContentUtil';
 import normalizeHTML from './utils/pasting/normalizeHTML';
 import { convertFromRaw } from '../../lib/editorStateConversion';
-import { ACCORDION_TYPE, isListType } from 'ricos-content';
+import { COLLAPSIBLE_LIST_TYPE, isListType } from 'ricos-content';
 
 const clearAtomicBlockEntities = editorState => {
   let contentState = editorState.getCurrentContent();
@@ -188,7 +188,7 @@ const getCurrentContent = editorState => {
 export const convertParsedEditorStateObjectToRawData = rawContent => {
   Object.keys(rawContent.entityMap).forEach(entityKey => {
     const currentEntity = rawContent.entityMap[entityKey];
-    if (currentEntity.type === ACCORDION_TYPE) {
+    if (currentEntity.type === COLLAPSIBLE_LIST_TYPE) {
       const { pairs } = currentEntity.data;
       currentEntity.data.pairs = pairs.map(pair => {
         return {

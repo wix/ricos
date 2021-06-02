@@ -20,6 +20,10 @@
 
 - `ui-components`
   - [#2575](https://github.com/wix-incubator/rich-content/pull/2575) moved InputWithLabel component into ui-components folder
+  
+### :rocket: New Feature
+- `collapsible-list`
+  - [#2565](https://github.com/wix/ricos/pull/2565) Collapsible List Plugin
 
 </details>
 <hr/>
@@ -225,7 +229,7 @@
 - `ricos-content`
   - [#2462](https://github.com/wix/ricos/pull/2462) remove unfinalized plugins from ContentAPI
 ### :rocket: New Feature
-- `accordion`
+- `collapsible-list`
   - [#2455](https://github.com/wix/ricos/commit/2455) copy/paste plugin
   - [#2441](https://github.com/wix/ricos/commit/2441) scroll to item on expand/collapse
   - [#2441](https://github.com/wix/ricos/commit/2441) (Command | Ctrl) + A shortcut selects all content in section
@@ -270,7 +274,7 @@
   - [#2427](https://github.com/wix/ricos/pull/2427) support RichContentViewer's `addAnchors` prop
 ### :house: Internal
 - `editor`
-  - [#2397](https://github.com/wix/ricos/pull/2397) fix undo experiment accordion crash
+  - [#2397](https://github.com/wix/ricos/pull/2397) fix undo experiment collapsible-list crash
 
 ## 8.32.0 (May 2, 2021)
 ### :rocket: New Feature
@@ -402,7 +406,7 @@
   - [#2349](https://github.com/wix/ricos/pull/2349) inline plugin popups in static formatting toolbar
 ### :house: Internal
 - `editor-common`
-  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty accordions in undo stack
+  - [#2358](https://github.com/wix/ricos/pull/2358) skip ghost changes on empty collapsible-lists in undo stack
 - `button-link`
   - [#2362](https://github.com/wix/ricos/pull/2362) add button link bi
 
@@ -459,7 +463,7 @@
 - `plugin-gallery`
   - [#2096](https://github.com/wix/ricos/pull/2096) update gallery settings modal to have download and expand options using toggle buttons
 ### :house: Internal
-- `unsupported-blocks/accordion/table/spoiler`
+- `unsupported-blocks/collapsible-list/table/spoiler`
   - [#2307](https://github.com/wix/ricos/pull/2307) clean disable-right-click prop from unnecessary components
 - `plugin-table`
   - [#2303](https://github.com/wix/ricos/pull/2303) add table bi
@@ -1039,7 +1043,7 @@
 ## 8.9.1 (Dec 21, 2020)
 ### :house: Internal
 - `native-polyfill`
-  - [#1887](https://github.com/wix/ricos/pull/1887) add native polyfills (button, accordion, link-preview & sound-cloud)
+  - [#1887](https://github.com/wix/ricos/pull/1887) add native polyfills (button, collapsible-list, link-preview & sound-cloud)
 
 ## 8.9.0 (Dec 20, 2020)
 ### :rocket: New Feature
@@ -1154,8 +1158,8 @@
 
   - [#1808](https://github.com/wix/ricos/pull/1808) buttons' custom color ([customStyles API](https://wix.github.io/ricos/docs/ricos/theming#custom-styles))
 
-- `accordion`
-  - [#1798](https://github.com/wix/ricos/pull/1798) accordion screen reader (accessibility)
+- `collapsible-list`
+  - [#1798](https://github.com/wix/ricos/pull/1798) collapsible-list screen reader (accessibility)
 ### :bug: Bug Fix
 - `gallery`
   - [#1811](https://github.com/wix/ricos/pull/1811) gallery item titles appearing on mobile
@@ -1212,8 +1216,8 @@
 - `general`
   - [#1762](https://github.com/wix/ricos/pull/1762) externalise image-client-api and import from image-client-api/dist/imageClientSDK
 ### :bug: Bug Fix
-- `accordion`
-  - [#1766](https://github.com/wix/ricos/pull/1766) accordion's viewer accessibility
+- `collapsible-list`
+  - [#1766](https://github.com/wix/ricos/pull/1766) collapsible-list's viewer accessibility
 
 ## 8.5.1 (Nov 16, 2020)
 ### :bug: Bug Fix
@@ -1229,8 +1233,8 @@
 ### :bug: Bug Fix
 - `common`
   - [#1761](https://github.com/wix/ricos/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
-- `accordion`
-  - [#1759](https://github.com/wix/ricos/pull/1759) fix accordion's focus when editor is not focused
+- `collapsible-list`
+  - [#1759](https://github.com/wix/ricos/pull/1759) fix collapsible-list's focus when editor is not focused
 - `social-polls`
   - [#1748](https://github.com/wix/ricos/pull/1748) editor accessibility
 ### :house: Internal
@@ -1274,8 +1278,8 @@
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#1721](https://github.com/wix/ricos/pull/1721) fix `isFocused = true` prop value when plugin is selected (not focused)
-- `accordion`
-  - [#1721](https://github.com/wix/ricos/pull/1721) disable text selection when accordion is selected (not focused)
+- `collapsible-list`
+  - [#1721](https://github.com/wix/ricos/pull/1721) disable text selection when collapsible-list is selected (not focused)
 - `common`
   - [#1742](https://github.com/wix/ricos/pull/1742) unset default `.text` fontSize
 ### :house: Internal
@@ -1367,7 +1371,7 @@
   - [#1690](https://github.com/wix/ricos/pull/1690) a11y improved in popup
 - `plugin-link`
   - [#1666](https://github.com/wix/ricos/pull/1666) anchor - scroll location on sites with fixed headers
-- `accordion`
+- `collapsible-list`
   - [#1687](https://github.com/wix/ricos/pull/1687) fix "getIn" error (draftjs bug)
 ### :book: Documentation
 - `emoji`
@@ -1427,10 +1431,10 @@
 ### :bug: Bug Fix
 - `list`
   - [#1632](https://github.com/wix/ricos/pull/1632) centered lists
-- `accordion`
+- `collapsible-list`
   - [#1629](https://github.com/wix/ricos/pull/1629) bug fixes
 ### :house: Internal
-- `accordion`
+- `collapsible-list`
   - [#1596](https://github.com/wix/ricos/pull/1596) bundle size reduced
 ### :book: Documentation
 - `gallery`
@@ -1460,7 +1464,7 @@
     - plugin toolbar - several menu buttons height was different, creating a misalignment
 - `storybook`
   - [#1630](https://github.com/wix/ricos/pull/1630) fixed total bold font in RicosTheme page
-- `accordion`
+- `collapsible-list`
   - [#1631](https://github.com/wix/ricos/pull/1631) buttons wiring
 ### :house: Internal
 - `general`
@@ -1499,7 +1503,7 @@
   - [#1601](https://github.com/wix/ricos/pull/1601) correct image is displayed on horizontal layouts
 - `editor`
   - [#1623](https://github.com/wix/ricos/pull/1623) toast link font styles
-- `accordion`
+- `collapsible-list`
   - [#1595](https://github.com/wix/ricos/pull/1595) Firefox bugs & css fixes
 
 ## 7.21.4 (Oct 8, 2020)
@@ -1541,13 +1545,13 @@
 ### :house: Internal
 - `inner-rce`
   - [#1579](https://github.com/wix/ricos/pull/1579) create new contentState without version
-- `accordion` _alpha_
-  - [#4bcd4c57](https://github.com/wix/ricos/commit/4bcd4c57) publish accordion to npm
+- `collapsible-list` _alpha_
+  - [#4bcd4c57](https://github.com/wix/ricos/commit/4bcd4c57) publish collapsible-list to npm
 
 ## 7.21.0 (Sep 29, 2020)
 ### :rocket: New Feature
-- `accordion` _alpha_
-  - [#1416](https://github.com/wix/ricos/pull/1416) Accordion plugin
+- `collapsible-list` _alpha_
+  - [#1416](https://github.com/wix/ricos/pull/1416) Collapsible List plugin
 - `editor`
 
   - [#1418](https://github.com/wix/ricos/pull/1418) error toast appears when uploading media fails

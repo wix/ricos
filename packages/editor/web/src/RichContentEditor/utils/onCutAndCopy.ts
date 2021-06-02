@@ -1,5 +1,5 @@
 // Copied from https://github.com/thibaudcolas/draftjs-conductor/blob/e8abd65b653f6eca239d4119ba635ada34bc0b0a/src/lib/api/copypaste.js
-// Used our convertToRaw to support Accordion & Table
+// Used our convertToRaw to support Collapsible List & Table
 
 import { EditorState, ContentState } from 'wix-rich-content-editor-common';
 import { convertToRaw } from '../../../lib/editorStateConversion';

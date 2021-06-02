@@ -27,7 +27,7 @@ import {
   styleSelectionPredicate,
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list/viewer';
 import { pluginTable } from 'wix-rich-content-plugin-table/viewer';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
@@ -88,7 +88,7 @@ const plugins = {
   highlight: pluginTextHighlight(configs.textHighlight),
   textColor: pluginTextColor(configs.textColor),
   spoiler: pluginSpoiler(),
-  accordion: pluginAccordion(),
+  collapsibleList: pluginCollapsibleList(),
   table: pluginTable(),
   emoji: pluginEmoji(),
   verticalEmbed: pluginVerticalEmbed(),
