@@ -13,7 +13,7 @@ export const shouldRenderChild = (
   return !!children && childName === expectedChildName;
 };
 
-export function getBiCallback(key: keyof BICallbacks) {
+export function getBiCallback<T extends keyof BICallbacks>(key: T): BICallbacks[T] | undefined {
   const { children, _rcProps } = this.props;
   return children?.props.helpers?.[key] || _rcProps?.helpers?.[key];
 }

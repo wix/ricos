@@ -25,7 +25,8 @@ const wait = ms => {
 
 export function createDataConverter(
   onContentChange?: OnContentChangeFunction,
-  initialContent?: DraftContent
+  initialContent?: DraftContent,
+  onInitialContentChanged?: () => void
 ): EditorDataInstance {
   const initialOrEmptyContent = initialContent || emptyDraftContent;
   let currContent = initialOrEmptyContent;
@@ -67,6 +68,9 @@ export function createDataConverter(
       isContentChanged: !initialContentEqual,
       isLastChangeEdit: !lastContentEqual,
     };
+    if (!initialContentEqual) {
+      onInitialContentChanged?.();
+    }
   };
 
   const getContentTraits = () => {

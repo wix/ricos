@@ -34,6 +34,7 @@ interface State {
   localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
   editorState?: EditorState;
+  firstMutationLatch: boolean;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -43,17 +44,23 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   isBusy = false;
 
-  firstMutationLatch = true;
-
   getBiCallback: typeof getCallback;
 
   currentEditorRef!: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange, props.content);
+    this.dataInstance = createDataConverter(
+      props.onChange,
+      props.content,
+      this.onInitialContentChanged
+    );
     this.getBiCallback = getCallback.bind(this);
-    this.state = { localeData: { locale: props.locale }, remountKey: false };
+    this.state = {
+      localeData: { locale: props.locale },
+      remountKey: false,
+      firstMutationLatch: true,
+    };
   }
 
   static defaultProps = { locale: 'en' };
@@ -114,11 +121,23 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       console.debug('new content provided as editorState'); // eslint-disable-line
       const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
       this.setState({ editorState }, () => {
-        this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
+        this.dataInstance = createDataConverter(
+          this.props.onChange,
+          this.props.injectedContent,
+          this.onInitialContentChanged
+        );
         this.dataInstance.refresh(editorState);
       });
     }
   }
+
+  onInitialContentChanged = () => {
+    const { firstMutationLatch } = this.state;
+    if (firstMutationLatch) {
+      this.getBiCallback('onContentAdded')?.({ version: Version.currentVersion });
+      this.setState({ firstMutationLatch: false });
+    }
+  };
 
   onChange = (childOnChange?: RichContentEditorProps['onChange']) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
