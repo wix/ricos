@@ -27,8 +27,6 @@ import {
   MentionData,
   PluginContainerData_Width_Type,
   PluginContainerData_Alignment,
-  DividerData_Width,
-  DividerData_Alignment,
 } from 'ricos-schema';
 
 export const content = {

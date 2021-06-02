@@ -57,7 +57,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     const convert = converters[nodeType];
     convert(newData);
   }
-  return JSON.parse(JSON.stringify(newData));
+  return JSON.parse(JSON.stringify(newData)); // remove undefined values
 };
 
 export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
