@@ -20,19 +20,10 @@ function FileUploadComponent(props) {
 
 FileUploadComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  componentState: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
-  block: PropTypes.object.isRequired,
-  blockProps: PropTypes.object.isRequired,
-  commonPubsub: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
-  helpers: PropTypes.object,
-  handleUploadStart: PropTypes.func.isRequired,
-  handleUploadFinished: PropTypes.func.isRequired,
   tempData: PropTypes.object,
   isLoading: PropTypes.bool,
 };

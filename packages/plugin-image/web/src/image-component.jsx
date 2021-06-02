@@ -84,7 +84,6 @@ class ImageComponent extends React.Component {
 
 ImageComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  componentState: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
@@ -99,9 +98,6 @@ ImageComponent.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
-  commonPubsub: PropTypes.object.isRequired,
-  handleUploadStart: PropTypes.func.isRequired,
-  handleUploadFinished: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   tempData: PropTypes.object,
 };
