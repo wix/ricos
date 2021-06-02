@@ -12,7 +12,7 @@ import {
   deleteButton,
   BlockSpoilerButton,
 } from '../buttons';
-import Panel from '../../Components/Panel';
+import { Panel } from 'wix-rich-content-ui-components';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
 import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';
