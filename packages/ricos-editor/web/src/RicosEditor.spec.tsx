@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 import React from 'react';
+import { version } from '../package.json';
 import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RICOS_MENTION_TYPE } from 'wix-rich-content-common';
+import { BICallbacks, RICOS_MENTION_TYPE } from 'wix-rich-content-common';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
 import { pluginDivider } from '../../../plugin-divider/web/src';
@@ -16,6 +17,7 @@ import { pluginFileUpload } from '../../../plugin-file-upload/web/src';
 import { pluginImage } from '../../../plugin-image/web/src';
 import { pluginLink } from '../../../plugin-link/web/src';
 import { pluginMentions } from '../../../plugin-mentions/web/src';
+import { pluginSpoiler } from '../../../plugin-spoiler/web/src';
 import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 import {
   content,
@@ -44,6 +46,7 @@ const plugins = [
   pluginLink(),
   pluginHashtag(),
   pluginMentions(),
+  pluginSpoiler(),
 ];
 
 const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
@@ -84,7 +87,7 @@ const isMention = type => type === RICOS_MENTION_TYPE;
 
 const toggleInlineStyleTest = result => inlineStyle =>
   it(`should ${result ? '' : 'not '}have ${inlineStyle} inline style`, () => {
-    const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     ricosEditor.getEditorCommands().setSelection(blockKey, selection);
     ricosEditor.getEditorCommands().toggleInlineStyle(inlineStyle);
     !result && ricosEditor.getEditorCommands().toggleInlineStyle(inlineStyle);
@@ -274,6 +277,14 @@ describe('RicosEditor', () => {
     expect(rceProps.tabIndex).toEqual(-1);
     expect(rceProps.spellCheck).toEqual(true);
     expect(rceProps).not.toHaveProperty('notADraftSetting');
+  });
+  it('should trigger onOpenEditorSuccess upon mount', () => {
+    let reportedVersion = '';
+    const onOpenEditorSuccessMock: BICallbacks['onOpenEditorSuccess'] = v => (reportedVersion = v);
+    const fn = jest.fn(onOpenEditorSuccessMock);
+    getRicosEditor({ _rcProps: { helpers: { onOpenEditorSuccess: fn } } });
+    expect(fn).toBeCalledTimes(1);
+    expect(reportedVersion).toEqual(version);
   });
   describe('Modal API', () => {
     it('should pass openModal & closeModal to helpers', () => {

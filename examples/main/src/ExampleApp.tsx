@@ -167,7 +167,11 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       {
         name: 'Static Toolbar',
         active: staticToolbar,
-        action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
+        action: () =>
+          this.setState(state => ({
+            staticToolbar: !state.staticToolbar,
+            editorResetKey: state.editorResetKey + 1,
+          })),
       },
       {
         name: 'External Toolbar',

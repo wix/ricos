@@ -16,7 +16,7 @@ describe('Ricos Content Builder', () => {
     const api = setupContentBuilder(generateKey);
     const imageData: ImageData = {
       containerData: {
-        width: { type: PluginContainerData_Width_Type.SMALL },
+        width: { size: PluginContainerData_Width_Type.SMALL },
         alignment: PluginContainerData_Alignment.CENTER,
       },
     };
