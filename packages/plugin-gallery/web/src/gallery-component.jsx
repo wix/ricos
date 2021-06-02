@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Loader, uploadFile, handleUploadFinished } from 'wix-rich-content-plugin-commons';
+import { Loader } from 'wix-rich-content-plugin-commons';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS } from './defaults';
@@ -113,8 +113,8 @@ class GalleryComponent extends PureComponent {
     return item && this.setItemInGallery(item, itemPos);
   };
 
-  onUploadFinished = (item, itemPos) => {
-    this.setItemInGallery(item, itemPos);
+  onUploadFinished = ({ data, itemIndex }) => {
+    this.setItemInGallery(data, itemIndex);
     this.setState(state => {
       const itemsLeftToUpload = state.itemsLeftToUpload - 1;
       const isLoading = itemsLeftToUpload > 0;
@@ -124,21 +124,7 @@ class GalleryComponent extends PureComponent {
 
   handleFilesSelected = (files, itemPos) => {
     Array(...files).forEach(file => {
-      const BI = {
-        onMediaUploadStart: this.props.helpers.onMediaUploadStart,
-        onMediaUploadEnd: this.props.helpers.onMediaUploadEnd,
-      };
-      uploadFile(
-        [file],
-        this.onLocalLoad,
-        this.onUploadFinished,
-        this.props.helpers.handleFileUpload,
-        BI,
-        GALLERY_TYPE,
-        this.props.componentData,
-        this.props.commonPubsub,
-        itemPos
-      );
+      this.props.handleUploadStart([file], this.onLocalLoad, this.onUploadFinished, itemPos);
     });
     this.state && this.onLoad(true);
   };
@@ -152,16 +138,8 @@ class GalleryComponent extends PureComponent {
   };
 
   handleFilesAdded = ({ data, error, itemIdx }) => {
-    const handleFileAdded = (item, error, idx) => {
-      handleUploadFinished(
-        item,
-        error,
-        this.onUploadFinished,
-        this.props.commonPubsub,
-        GALLERY_TYPE,
-        this.props.componentData,
-        idx
-      );
+    const handleFileAdded = (data, error, idx) => {
+      this.props.handleUploadFinished(data, error, this.onUploadFinished, idx);
     };
     if (data instanceof Array) {
       data.forEach(item => {
@@ -231,6 +209,8 @@ GalleryComponent.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
+  handleUploadStart: PropTypes.func.isRequired,
+  handleUploadFinished: PropTypes.func.isRequired,
 };
 
 export { GalleryComponent as Component, DEFAULTS };

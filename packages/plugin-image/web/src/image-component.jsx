@@ -70,32 +70,12 @@ class ImageComponent extends React.Component {
   onLocalLoad = ({ dataUrl }) => this.setState({ isLoading: true, error: false, dataUrl });
 
   handleFilesSelected = files => {
-    const BI = {
-      onMediaUploadStart: this.props.helpers.onMediaUploadStart,
-      onMediaUploadEnd: this.props.helpers.onMediaUploadEnd,
-    };
-    uploadFile(
-      files,
-      this.onLocalLoad,
-      this.onUploadFinished,
-      this.props.helpers.handleFileUpload,
-      BI,
-      IMAGE_TYPE,
-      this.props.componentData,
-      this.props.commonPubsub
-    );
+    this.props.handleUploadStart(files, this.onLocalLoad, this.onUploadFinished);
     return { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER };
   };
 
   handleFilesAdded = ({ data, error }) => {
-    handleUploadFinished(
-      data,
-      error,
-      this.onUploadFinished,
-      this.props.commonPubsub,
-      IMAGE_TYPE,
-      this.props.componentData
-    );
+    this.props.handleUploadFinished(data, error, this.onUploadFinished);
   };
 
   handleMetadataChange = newMetadata => {
@@ -183,6 +163,8 @@ ImageComponent.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
   commonPubsub: PropTypes.object.isRequired,
+  handleUploadStart: PropTypes.func.isRequired,
+  handleUploadFinished: PropTypes.func.isRequired,
 };
 
 export { ImageComponent as Component, DEFAULTS };

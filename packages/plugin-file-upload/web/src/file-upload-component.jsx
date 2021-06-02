@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
 import { FILE_UPLOAD_TYPE } from './types';
-import { uploadFile, handleUploadFinished } from 'wix-rich-content-plugin-commons';
 
 class FileUploadComponent extends PureComponent {
   constructor(props) {
@@ -62,31 +61,11 @@ class FileUploadComponent extends PureComponent {
   };
 
   handleFilesSelected = files => {
-    const BI = {
-      onMediaUploadStart: this.props.helpers.onMediaUploadStart,
-      onMediaUploadEnd: this.props.helpers.onMediaUploadEnd,
-    };
-    uploadFile(
-      files,
-      this.onLocalLoad,
-      this.onUploadFinished,
-      this.props.settings.onFileSelected,
-      BI,
-      FILE_UPLOAD_TYPE,
-      this.props.componentData,
-      this.props.commonPubsub
-    );
+    this.props.handleUploadStart(files, this.onLocalLoad, this.onUploadFinished);
   };
 
   handleFilesAdded = ({ data, error }) => {
-    handleUploadFinished(
-      data,
-      error,
-      this.onUploadFinished,
-      this.props.commonPubsub,
-      FILE_UPLOAD_TYPE,
-      this.props.componentData
-    );
+    this.props.handleUploadFinished(data, error, this.onUploadFinished);
   };
 
   getLoadingParams = componentState => {
@@ -124,6 +103,8 @@ FileUploadComponent.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
+  handleUploadStart: PropTypes.func.isRequired,
+  handleUploadFinished: PropTypes.func.isRequired,
 };
 
 FileUploadComponent.defaultProps = {

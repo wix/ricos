@@ -3,6 +3,7 @@ import {
   createBasePlugin,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
+  createBaseMediaPlugin,
 } from 'wix-rich-content-plugin-commons';
 import { Component, DEFAULTS } from './image-component';
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY, ImagePluginEditorConfig } from './types';
@@ -35,7 +36,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
   } = config;
 
   return createBasePlugin({
-    component: Component,
+    component: createBaseMediaPlugin({ PluginComponent: Component, pluginType: IMAGE_TYPE }),
     type: IMAGE_TYPE,
     legacyType: IMAGE_TYPE_LEGACY,
     pluginDecorationProps: (props, componentData) => {

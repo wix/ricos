@@ -5,10 +5,7 @@ import {
   GALLERY_TYPE,
   VIDEO_TYPE,
   FILE_UPLOAD_TYPE,
-  Pubsub,
-  MediaUploadError,
   VideoComponentData,
-  ImageComponentData,
 } from 'wix-rich-content-common';
 import {
   fileExtensionToType,
@@ -25,7 +22,7 @@ const galleryItemBuilder = {
       },
       itemId,
       url: preloadImage ? img.src : img.file_name,
-      tempData: true,
+      tempData: preloadImage,
     };
   },
   [FileTypes.VIDEO]: (video: VideoComponentData, itemId: string) => {
@@ -38,12 +35,11 @@ const galleryItemBuilder = {
       },
       itemId,
       url: video.pathname,
-      tempData: true,
     };
   },
 };
 
-const dataBuilder = {
+export const dataBuilder = {
   [IMAGE_TYPE]: ({ data, error }, componentData) => {
     const imageData = data?.length ? data[0] : data;
     const config = { ...componentData.config };
@@ -70,13 +66,13 @@ const dataBuilder = {
   },
   [GALLERY_TYPE]: ({ data, error }, componentData, fileType) => {
     const type =
-      fileType ||
+      FileTypes[fileType] ||
       fileExtensionToType(data.file_name?.split('.').pop() || data.pathname?.split('.').pop());
     return { ...galleryItemBuilder[type]?.(data, data.id || Date.now().toString()), error };
   },
 };
 
-const tempDataBuilder = {
+export const tempDataBuilder = {
   [IMAGE_TYPE]: ({ url }) => {
     return { dataUrl: url };
   },
@@ -98,96 +94,9 @@ const tempDataBuilder = {
   },
 };
 
-const fileReader = (file: File) => {
-  return new Promise(resolve => {
-    const fr = new FileReader();
-    fr.onload = e => resolve(e.target?.result);
-    fr.readAsDataURL(file);
-  });
-};
-
-export const handleUploadFinished = (
-  data: Record<string, unknown> | undefined,
-  error: MediaUploadError,
-  onUploadFinished: (data: uploadData) => void,
-  commonPubsub: Pubsub,
-  pluginType: string,
-  componentData?: Record<string, unknown>,
-  itemIndex?: number,
-  itemType?: string
-) => {
-  if (error) {
-    commonPubsub.set('onMediaUploadError', error);
-  }
-  return onUploadFinished({
-    data: data && dataBuilder[pluginType]?.({ data, error }, componentData, itemIndex, itemType),
-    error,
-    itemIndex,
-  });
-};
-
-interface uploadData {
-  data;
-  error: MediaUploadError;
-  itemIndex?: number;
-}
-
-interface TempData {
-  url: string;
-  name: string;
-  size: number;
-  type: string | undefined;
-}
-
-export const uploadFile = (
-  files: File[],
-  onLocalLoad: (tempData: TempData, itemPos?: number) => number | undefined,
-  onUploadFinished: (data: uploadData) => void,
-  handleFileUpload: (file: File, updateEntity: ({ data, error }) => void) => void,
-  BI,
-  pluginType: string,
-  componentData,
-  commonPubsub: Pubsub,
-  itemPos?: number
-) => {
-  const file = files[0];
-  if (file) {
-    fileReader(file).then((url: string) => {
-      const extension = file.name.split('.').pop();
-      const fileType = extension && FileTypes[fileExtensionToType(extension)];
-      const tempData = tempDataBuilder[pluginType]?.(
-        {
-          url,
-          file,
-          type: extension,
-        },
-        fileType
-      );
-      const itemIndex = onLocalLoad?.(tempData, itemPos);
-      if (handleFileUpload) {
-        const uploadBIData = BI?.onMediaUploadStart(pluginType, file.size, fileType);
-        handleFileUpload(file, ({ data, error }) => {
-          BI?.onMediaUploadEnd(uploadBIData, error);
-          handleUploadFinished(
-            data,
-            error,
-            onUploadFinished,
-            commonPubsub,
-            pluginType,
-            componentData,
-            itemIndex,
-            fileType
-          );
-        });
-      } else {
-        handleUploadFinished(
-          undefined,
-          { msg: 'Missing upload function' },
-          onUploadFinished,
-          commonPubsub,
-          pluginType
-        );
-      }
-    });
-  }
+export const uploadFunctionGetter = {
+  [IMAGE_TYPE]: props => props.helpers?.handleFileUpload,
+  [VIDEO_TYPE]: props => props.handleFileUpload,
+  [FILE_UPLOAD_TYPE]: props => props.settings?.onFileSelected,
+  [GALLERY_TYPE]: props => props.helpers?.handleFileUpload,
 };

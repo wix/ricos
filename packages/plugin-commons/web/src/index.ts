@@ -29,6 +29,7 @@ export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';
 export { default as createBaseInsertPluginButton } from './Base/createBaseInsertPluginButton';
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
+export { default as createBaseMediaPlugin } from './Base/createBaseMediaPlugin';
 
 // Components
 export { default as FileInput } from './Components/FileInput';
@@ -49,5 +50,3 @@ export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
-
-export { uploadFile, handleUploadFinished } from './Utils/mediaUploadFunctions';

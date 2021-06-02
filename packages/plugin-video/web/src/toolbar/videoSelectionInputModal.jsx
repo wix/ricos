@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  TextInput,
-  CloseIcon,
-  uploadFile,
-  handleUploadFinished,
-} from 'wix-rich-content-plugin-commons';
+import { TextInput, CloseIcon } from 'wix-rich-content-plugin-commons';
 import { Button } from 'wix-rich-content-ui-components';
 import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { mergeStyles, isValidExactUrl } from 'wix-rich-content-common';
@@ -91,14 +86,7 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   addVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
-    handleUploadFinished(
-      data,
-      error,
-      this.getOnUploadFinished(isCustomVideo, false),
-      this.props.commonPubsub,
-      VIDEO_TYPE,
-      this.props.componentData
-    );
+    this.props.handleUploadFinished(data, error, this.getOnUploadFinished(isCustomVideo, false));
   };
 
   setComponentData = data => {
@@ -114,26 +102,8 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   handleNativeFileUpload = () => {
-    const {
-      componentData,
-      handleFileUpload: consumerHandleFileUpload,
-      commonPubsub,
-      helpers: { onMediaUploadStart, onMediaUploadEnd },
-    } = this.props;
-    const BI = {
-      onMediaUploadStart,
-      onMediaUploadEnd,
-    };
-    uploadFile(
-      this.inputFile.files,
-      this.onLocalLoad,
-      this.getOnUploadFinished(true),
-      consumerHandleFileUpload,
-      BI,
-      VIDEO_TYPE,
-      componentData,
-      commonPubsub
-    );
+    const { componentData, handleUploadStart } = this.props;
+    handleUploadStart(this.inputFile.files, this.onLocalLoad, this.getOnUploadFinished(true));
     this.closeModal();
   };
 
@@ -264,4 +234,6 @@ VideoSelectionInputModal.propTypes = {
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
   blockKey: PropTypes.string,
+  handleUploadStart: PropTypes.func.isRequired,
+  handleUploadFinished: PropTypes.func.isRequired,
 };
