@@ -9,9 +9,112 @@ import {
   FileTypes,
 } from 'wix-rich-content-plugin-file-upload/libs/fileExtensionToType';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
+import Loader from '../Components/Loader';
+import { MediaItemErrorMsg } from 'wix-rich-content-ui-components';
 
-const createBaseMediaPlugin = ({ PluginComponent, pluginType }) => {
-  return class MediaPlugin extends Component {
+class MediaPlugin extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLoading: false, tempData: null };
+  }
+
+  componentDidMount() {
+    const { block, store } = this.props;
+    if (store) {
+      const blockKey = block.getKey();
+      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
+      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+    }
+    this.updateComponent();
+  }
+
+  componentDidUpdate() {
+    this.updateComponent();
+  }
+
+  updateComponent() {
+    const componentState = this.props.componentState || {};
+    const { isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
+    if (!isLoading && userSelectedFiles) {
+      //lets continue the uploading process
+      if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
+        this.handleFilesSelected(userSelectedFiles.files);
+      }
+      setTimeout(() => {
+        //needs to be async since this function is called during constructor and we do not want the update to call set state on other components
+        this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null });
+      }, 0);
+    }
+  }
+
+  getLoadingParams = componentState => {
+    //check if the file upload is coming on the regular state
+    const { isLoading, userSelectedFiles } = componentState;
+    return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
+  };
+
+  onUploadFinished = ({ data, error }) => {
+    const { setData } = this.props.blockProps;
+    // setData({ ...this.props.componentData, ...data });
+    data && this.props.store.update('componentData', data, this.props.block.getKey());
+    let { tempData } = this.state;
+    if (!error) {
+      tempData = null;
+    }
+    this.setState({ isLoading: false, tempData, error });
+    this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
+  };
+
+  onLocalLoad = tempData => this.setState({ tempData });
+
+  handleFilesSelected = files => {
+    this.props.handleUploadStart(files, this.onLocalLoad, this.onUploadFinished);
+    this.setState({ isLoading: true });
+  };
+
+  handleFilesAdded = ({ data, error }) => {
+    this.props.handleUploadFinished(data, error, this.onUploadFinished);
+  };
+
+  renderLoader = () => {
+    return <Loader type={'medium'} />;
+  };
+
+  render() {
+    const { componentData, Component, t, isOverlayLoader } = this.props;
+    const { isLoading, tempData } = this.state;
+    const { error } = componentData;
+    return (
+      <>
+        <Component {...this.props} isLoading={isLoading} tempData={tempData} />
+        {isOverlayLoader && (this.state.isLoading || componentData?.loading) && this.renderLoader()}
+        {isOverlayLoader && error && <MediaItemErrorMsg error={error} t={t} />}
+      </>
+    );
+  }
+}
+
+MediaPlugin.propTypes = {
+  componentData: PropTypes.object.isRequired,
+  componentState: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired,
+  block: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  handleUploadStart: PropTypes.func.isRequired,
+  handleUploadFinished: PropTypes.func.isRequired,
+  isOverlayLoader: PropTypes.bool,
+  Component: PropTypes.any,
+  blockProps: PropTypes.object,
+};
+
+const createBaseMediaPlugin = ({
+  PluginComponent,
+  pluginType,
+  isPluginViewer = false,
+  isOverlayLoader = true,
+}) => {
+  return class MediaUploadWrapper extends Component {
     static propTypes = {
       componentData: PropTypes.object.isRequired,
       children: PropTypes.any,
@@ -75,7 +178,15 @@ const createBaseMediaPlugin = ({ PluginComponent, pluginType }) => {
     };
 
     render() {
-      return (
+      return isPluginViewer ? (
+        <MediaPlugin
+          Component={PluginComponent}
+          {...this.props}
+          handleUploadStart={this.uploadFile}
+          handleUploadFinished={this.handleUploadFinished}
+          isOverlayLoader={isOverlayLoader}
+        />
+      ) : (
         <PluginComponent
           {...this.props}
           handleUploadStart={this.uploadFile}

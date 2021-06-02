@@ -12,7 +12,11 @@ const VideoModal = props => {
   } = props;
   const Comp = meidaTypes.includes(type)
     ? MediaURLInputModal
-    : createBaseMediaPlugin({ PluginComponent: VideoSelectionInputModal, pluginType: VIDEO_TYPE });
+    : createBaseMediaPlugin({
+        PluginComponent: VideoSelectionInputModal,
+        pluginType: VIDEO_TYPE,
+        isPluginViewer: false,
+      });
   return <Comp {...props} />;
 };
 

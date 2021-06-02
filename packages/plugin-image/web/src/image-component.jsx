@@ -19,60 +19,13 @@ class ImageComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = this.stateFromProps(props);
 
     const { block, store } = this.props;
     if (store) {
       const blockKey = block.getKey();
-      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
       store.setBlockHandler('handleMetadataChange', blockKey, this.handleMetadataChange.bind(this));
     }
   }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.stateFromProps(nextProps));
-  }
-
-  stateFromProps = props => {
-    const componentState = props.componentState || {};
-
-    let state = {};
-    const { isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
-    if (!isLoading && userSelectedFiles) {
-      //lets continue the uploading process
-      if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-        state = this.handleFilesSelected(userSelectedFiles.files);
-      }
-      setTimeout(() => {
-        //needs to be async since this function is called during constructor and we do not want the update to call set state on other components
-        this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null });
-      }, 0);
-    }
-
-    return state;
-  };
-
-  onUploadFinished = ({ data, error }) => {
-    data && this.props.store.update('componentData', data, this.props.block.getKey());
-    let { dataUrl } = this.state;
-    if (!error) {
-      dataUrl = null;
-    }
-    this.setState({ isLoading: false, dataUrl, error });
-    this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
-  };
-
-  onLocalLoad = ({ dataUrl }) => this.setState({ isLoading: true, error: false, dataUrl });
-
-  handleFilesSelected = files => {
-    this.props.handleUploadStart(files, this.onLocalLoad, this.onUploadFinished);
-    return { isLoading: true, dataUrl: EMPTY_SMALL_PLACEHOLDER };
-  };
-
-  handleFilesAdded = ({ data, error }) => {
-    this.props.handleUploadFinished(data, error, this.onUploadFinished);
-  };
 
   handleMetadataChange = newMetadata => {
     const { componentData } = this.props;
@@ -84,17 +37,7 @@ class ImageComponent extends React.Component {
     );
   };
 
-  getLoadingParams = componentState => {
-    //check if the file upload is coming on the regular state
-    const { isLoading, userSelectedFiles } = componentState;
-    return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
-  };
-
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
-
-  renderLoader = () => {
-    return <Loader type={'medium'} />;
-  };
 
   render() {
     const {
@@ -126,16 +69,14 @@ class ImageComponent extends React.Component {
           componentData={componentData}
           onClick={onClick}
           className={className}
-          isLoading={this.state.isLoading}
-          dataUrl={this.state.dataUrl}
+          isLoading={this.props.isLoading}
+          dataUrl={this.props.tempData?.dataUrl}
           settings={settings}
           defaultCaption={this.props.t('ImageViewer_Caption')}
           onCaptionChange={this.handleCaptionChange}
           setFocusToBlock={blockProps.setFocusToBlock}
           setComponentUrl={setComponentUrl}
         />
-        {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
-        {error && <MediaItemErrorMsg error={error} t={t} />}
       </>
     );
   }
@@ -161,6 +102,8 @@ ImageComponent.propTypes = {
   commonPubsub: PropTypes.object.isRequired,
   handleUploadStart: PropTypes.func.isRequired,
   handleUploadFinished: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  tempData: PropTypes.object,
 };
 
 export { ImageComponent as Component, DEFAULTS };
