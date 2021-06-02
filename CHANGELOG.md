@@ -17,14 +17,22 @@
   </summary>
 
 ### :rocket: New Feature
-- `ricos-content`
-  - [#2573](https://github.com/wix/ricos/pull/2573) content extractor API
 - `collapsible-list`
   - [#2565](https://github.com/wix/ricos/pull/2565) Collapsible List Plugin
 
-
 </details>
 <hr/>
+
+## 8.41.0 (Jun 2, 2021)
+### :rocket: New Feature
+- `ricos-content`
+  - [#2573](https://github.com/wix/ricos/pull/2573) content extractor API
+  - [#2567](https://github.com/wix/ricos/pull/2567) content modifier API
+
+### :house: Internal
+
+- `ui-components`
+  - [#2579](https://github.com/wix-incubator/rich-content/pull/2579) made ui-components public 
 
 ## 8.40.1 (Jun 1, 2021)
 ### :bug: Bug Fix
@@ -47,6 +55,14 @@
 ### :nail_care: Polish
 - `general`
   - [#2487](https://github.com/wix-incubator/rich-content/pull/2487) keyboard shortcuts
+
+### :house: Internal
+
+- `ui-components`
+  - [#2564](https://github.com/wix-incubator/rich-content/pull/2564) moved MediaItemErrMsg component into ui-components folder
+
+</details>
+<hr/>
 
 ## 8.39.0 (May 27, 2021)
 ### :rocket: New Feature
