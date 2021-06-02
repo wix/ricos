@@ -53,6 +53,14 @@
 - `general`
   - [#2487](https://github.com/wix-incubator/rich-content/pull/2487) keyboard shortcuts
 
+### :house: Internal
+
+- `ui-components`
+  - [#2564](https://github.com/wix-incubator/rich-content/pull/2564) moved MediaItemErrMsg component into ui-components folder
+
+</details>
+<hr/>
+
 ## 8.39.0 (May 27, 2021)
 ### :rocket: New Feature
 - `ricos-content`
