@@ -21,6 +21,11 @@
   - [#2573](https://github.com/wix/ricos/pull/2573) content extractor API
   - [#2567](https://github.com/wix/ricos/pull/2567) content modifier API
 
+### :house: Internal
+
+- `ui-components`
+  - [#2579](https://github.com/wix-incubator/rich-content/pull/2579) made ui-components public 
+
 </details>
 <hr/>
 
