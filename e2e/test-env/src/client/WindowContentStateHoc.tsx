@@ -1,6 +1,6 @@
 import React, { ElementType } from 'react';
 import { TABLE_TYPE } from 'wix-rich-content-plugin-table';
-import { ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
+import { COLLAPSIBLE_LIST_TYPE } from 'wix-rich-content-plugin-collapsible-list';
 import { DraftContent, RicosEntity, RicosEntityMap } from 'wix-rich-content-common';
 
 type Predicate = (entity: RicosEntity) => boolean;
@@ -13,7 +13,7 @@ interface InnerRceFixer {
 const removeKeyFromBlocks = blocks => blocks.map((block, index) => ({ ...block, key: index }));
 
 const isTable: Predicate = entity => entity.type === TABLE_TYPE;
-const isAccordion: Predicate = entity => entity.type === ACCORDION_TYPE;
+const isCollapsibleList: Predicate = entity => entity.type === COLLAPSIBLE_LIST_TYPE;
 
 type Row = Record<string, Columns>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,7 +34,7 @@ const innerRceFixers: InnerRceFixer[] = [
     },
   },
   {
-    predicate: isAccordion,
+    predicate: isCollapsibleList,
     entityFixer: entity => {
       const { pairs } = entity.data;
       pairs.forEach(pair => {

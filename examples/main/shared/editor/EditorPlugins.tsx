@@ -94,10 +94,10 @@ import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin, pluginIndent, INDENT_TYPE } from 'wix-rich-content-plugin-indent';
 import { createTablePlugin, pluginTable, TABLE_TYPE } from 'wix-rich-content-plugin-table';
 import {
-  createAccordionPlugin,
-  ACCORDION_TYPE,
-  pluginAccordion,
-} from 'wix-rich-content-plugin-accordion';
+  createCollapsibleListPlugin,
+  COLLAPSIBLE_LIST_TYPE,
+  pluginCollapsibleList,
+} from 'wix-rich-content-plugin-collapsible-list';
 import {
   createUnsupportedBlocksPlugin,
   pluginUnsupportedBlocks,
@@ -130,7 +130,7 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
 import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 
 import {
@@ -188,7 +188,7 @@ export const ricosEditorPlugins: Record<string, EditorPluginCreator<unknown>> = 
   [INDENT_TYPE]: pluginIndent,
   [ACTION_BUTTON_TYPE]: pluginActionButton,
   [POLL_TYPE]: pluginPoll,
-  [ACCORDION_TYPE]: pluginAccordion,
+  [COLLAPSIBLE_LIST_TYPE]: pluginCollapsibleList,
   [TABLE_TYPE]: pluginTable,
 };
 
@@ -242,7 +242,7 @@ export const editorPlugins: CreatePluginFunction[] = [
   createIndentPlugin,
   createActionButtonPlugin,
   createPollPlugin,
-  createAccordionPlugin,
+  createCollapsibleListPlugin,
   createTablePlugin,
   ...editorPluginsPartialPreset,
 ];
@@ -274,7 +274,7 @@ export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePlugi
   undoRedo: createUndoRedoPlugin,
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
-  accordion: createAccordionPlugin,
+  collapsibleList: createCollapsibleListPlugin,
   table: createTablePlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
@@ -577,7 +577,7 @@ const config: RichContentEditorProps['config'] = {
         )
       ),
   },
-  [ACCORDION_TYPE]: {
+  [COLLAPSIBLE_LIST_TYPE]: {
     innerRCEPlugins: [
       createTextColorPlugin,
       createTextHighlightPlugin,

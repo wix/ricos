@@ -6174,7 +6174,7 @@ exports[`plugins > html > render html plugin with url #0`] =
   }
 };
 
-exports[`plugins > accordion > should change accordion settings #0`] =
+exports[`plugins > collapsible list > should change collapsible list settings #0`] =
 {
   "blocks": [
     {
@@ -6656,12 +6656,12 @@ exports[`plugins > accordion > should change accordion settings #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should focus & type #0`] =
+exports[`plugins > collapsible list > should focus & type #0`] =
 {
   "blocks": [
     {
@@ -6772,12 +6772,12 @@ exports[`plugins > accordion > should focus & type #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should collapse first pair #0`] =
+exports[`plugins > collapsible list > should collapse first pair #0`] =
 {
   "blocks": [
     {
@@ -6888,12 +6888,12 @@ exports[`plugins > accordion > should collapse first pair #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should have only one expanded pair #0`] =
+exports[`plugins > collapsible list > should have only one expanded pair #0`] =
 {
   "blocks": [
     {
@@ -7004,12 +7004,12 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should delete second pair #0`] =
+exports[`plugins > collapsible list > should delete second pair #0`] =
 {
   "blocks": [
     {
@@ -7089,7 +7089,7 @@ exports[`plugins > accordion > should delete second pair #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
@@ -7110,7 +7110,7 @@ exports[`plugins > Headers markdown > Should render header-two #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > accordion > should insert image in accordion #0`] =
+exports[`plugins > collapsible list > should insert image in collapsible list #0`] =
 {
   "blocks": [
     {
@@ -7165,7 +7165,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": 0,
-                  "text": "Image in accordion",
+                  "text": "Image in collapsible list",
                   "type": "unstyled"
                 },
                 {
@@ -7267,7 +7267,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };

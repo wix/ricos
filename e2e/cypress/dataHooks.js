@@ -71,7 +71,7 @@ export const STATIC_TOOLBAR_BUTTONS_EXPENDED = {
   IMAGE: 'ImagePlugin_InsertButton',
   GALLERY: 'GalleryPlugin_InsertButton',
   FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
-  ACCORDION: 'Accordion_InsertButton',
+  COLLAPSIBLE_LIST: 'CollapsibleList_InsertButton',
   TABLE: 'TablePlugin_InsertButton',
 };
 
@@ -197,7 +197,7 @@ export const GIPHY_PLUGIN = {
 };
 
 export const PLUGIN_COMPONENT = {
-  ACCORDION: 'accordionComponent',
+  COLLAPSIBLE_LIST: 'collapsibleListComponent',
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
   GALLERY: 'galleryViewer',
@@ -232,13 +232,13 @@ export const SOCIAL_EMBED = {
   ADD: 'settingPanelFooterDone',
 };
 
-export const ACCORDION_SETTINGS = {
+export const COLLAPSIBLE_LIST_SETTINGS = {
   RTL_DIRECTION: 'rtlDirection',
   LTR_DIRECTION: 'ltrDirection',
   COLLAPSED: 'Collapsed',
   EXPANDED: 'Expanded',
   FIRST_EXPANDED: 'FirstExpanded',
-  NEW_PAIR: 'AccordionNewPair_button',
+  NEW_PAIR: 'CollapsibleListNewPair_button',
   ONE_PAIR_EXPANDED: 'onePairExpanded',
 };
 

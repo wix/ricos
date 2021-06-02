@@ -7,7 +7,7 @@ import {
   rawWithAnchorsInImage,
   rawWithOldSoundCloudVersion,
 } from './TestData/conversion-content-state';
-import accordionRawData from './TestData/accordion-raw-data.json';
+import collapsibleListRawData from './TestData/collapsible-list-raw-data.json';
 import { VIDEO_TYPE } from 'ricos-content';
 import { cloneDeep } from 'lodash';
 
@@ -34,8 +34,8 @@ describe('ContentState conversion', () => {
     expect(newRaw.entityMap['1'].data.config.link).toEqual(undefined);
   });
 
-  it('should convert Accordion from raw & convert it back to raw correctly', () => {
-    const { VERSION: _, ...raw } = accordionRawData;
+  it('should convert Collapsible List from raw & convert it back to raw correctly', () => {
+    const { VERSION: _, ...raw } = collapsibleListRawData;
     const rawCopy = cloneDeep(raw);
     const editorState = EditorState.createWithContent(convertFromRaw(rawCopy));
     // eslint-disable-next-line no-unused-vars
