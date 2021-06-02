@@ -3,6 +3,7 @@ import {
   RichContentTheme,
   PaletteColors,
   RicosCustomStyles,
+  ThemeData,
 } from 'wix-rich-content-common';
 import { CSSProperties, ReactElement } from 'react';
 import { BasePlugin } from '../types';
@@ -107,6 +108,7 @@ export interface ThemeStrategyArgs {
 export interface ThemeStrategyResult {
   theme: RicosCssOverride;
   html?: ReactElement;
+  themeData: ThemeData;
 }
 
 export type CssVarsObject = Record<string, unknown>;

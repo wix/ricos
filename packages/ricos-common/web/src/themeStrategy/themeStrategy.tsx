@@ -4,6 +4,7 @@ import createTypography from './generators/typography';
 import createCustomStyles from './generators/customStyles';
 import { defaultTheme } from './defaults';
 import * as utils from './themeUtils';
+import { ThemeData } from 'wix-rich-content-common';
 import { ThemeStrategyArgs, ThemeStrategyResult } from './themeTypes';
 import { isDefined } from 'ts-is-present';
 
@@ -18,9 +19,15 @@ export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyRes
   const typographyVarsObject = createTypography(typography);
   const customsVarsObject = createCustomStyles(customStyles);
 
+  const themeData: ThemeData = {
+    colors,
+    utils,
+    customStyles,
+  };
+
   // Run themeGenerators
   if (colors) {
-    themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils, customStyles));
+    themeGeneratorFunctions.forEach(themeGen => themeGen({ colors, utils, customStyles }));
   }
 
   const html = (
@@ -32,5 +39,6 @@ export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyRes
   return {
     theme: { ...defaultTheme, ...cssOverride },
     html,
+    themeData,
   };
 }

@@ -65,7 +65,7 @@ export type TextDirection = 'rtl' | 'ltr';
 
 export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
 
-export type InlineStyle = 'bold' | 'underline' | 'italic';
+export type InlineStyle = 'bold' | 'underline' | 'italic' | 'spoiler';
 
 export type onAtomicBlockFocus = (params: {
   blockKey?: string;

@@ -27,8 +27,6 @@ import {
   MentionData,
   PluginContainerData_Width_Type,
   PluginContainerData_Alignment,
-  DividerData_Width,
-  DividerData_Alignment,
 } from 'ricos-schema';
 
 export const content = {
@@ -396,7 +394,7 @@ const file = {
     src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'File sample',
     containerData: {
-      width: { type: PluginContainerData_Width_Type.SMALL },
+      width: { size: PluginContainerData_Width_Type.SMALL },
       alignment: PluginContainerData_Alignment.LEFT,
     },
   }),
@@ -404,7 +402,7 @@ const file = {
     src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'Updated file sample',
     containerData: {
-      width: { type: PluginContainerData_Width_Type.CONTENT },
+      width: { size: PluginContainerData_Width_Type.CONTENT },
       alignment: PluginContainerData_Alignment.RIGHT,
     },
   }),
@@ -527,7 +525,7 @@ const mention = {
   },
 };
 
-export const inlineStylesTestConfig = ['bold', 'italic', 'underline'];
+export const inlineStylesTestConfig = ['bold', 'italic', 'underline', 'spoiler'];
 
 export const pluginsTestConfig = {
   divider,

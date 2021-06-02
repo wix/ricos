@@ -8,15 +8,16 @@ import { MockVerticalSearchModule } from '../../../../main/shared/utils/vertical
 
 const { event, booking, product } = verticalEmbedProviders;
 
-const plugins = [
+const getPlugins = withError => [
   pluginVerticalEmbed({
-    verticalsApi: type => new MockVerticalSearchModule(type),
+    verticalsApi: type => (withError ? new Error() : new MockVerticalSearchModule(type)),
     exposeEmbedButtons: [product, event, booking],
   }),
 ];
 
-const VerticalEmbedEditor: FunctionComponent<{ content?: DraftContent }> = ({ content }) => (
-  <RicosEditor plugins={plugins} content={content} />
-);
+const VerticalEmbedEditor: FunctionComponent<{ content?: DraftContent; withError?: boolean }> = ({
+  content,
+  withError,
+}) => <RicosEditor plugins={getPlugins(withError)} content={content} />;
 
 export default VerticalEmbedEditor;

@@ -21,7 +21,7 @@ export type PluginAddParams =
     }
   | {
       // Poll
-      type: 'text in a list' | 'text & main image' | 'images in a grid';
+      type: 'list' | 'grid';
     };
 
 type EntryType = ToolbarType;
@@ -43,6 +43,17 @@ export interface onViewerLoadedArgs extends biCallbackParams {
   isPreview: boolean;
   pluginsCount: boolean;
   version: string;
+}
+
+export interface onPluginModalOpenedArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
+  entryPoint: ToolbarType;
+  entryType: EntryType;
+}
+
+export interface onMenuLoadArgs extends biCallbackParams {
+  menu: EntryType;
 }
 
 export interface BICallbacks {
@@ -92,6 +103,8 @@ export interface BICallbacks {
     errorType: string | undefined,
     version: string
   ): void;
+  onPluginModalOpened?(params: onPluginModalOpenedArgs): void;
+  onMenuLoad?(params: onMenuLoadArgs): void;
   onPluginAction?: OnPluginAction;
 }
 

@@ -193,6 +193,7 @@ export default class StaticToolbar extends React.PureComponent {
         {this.shouldShowSortcut ? (
           <MoreButton
             t={t}
+            helpers={helpers}
             theme={theme}
             addPluginMenuProps={addPluginMenuProps}
             footerToolbarConfig={footerToolbarConfig}
