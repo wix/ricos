@@ -113,7 +113,7 @@ const dataJSON = {
     updatedTimestamp: '2021-05-26T22:48:09.161Z',
   },
 };
-//@ts-ignore
+
 const content = toProseMirror(RichContent.fromJSON(dataJSON));
 // eslint-disable-next-line fp/no-delete
 delete content.metadata;
