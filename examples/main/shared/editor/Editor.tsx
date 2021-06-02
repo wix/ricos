@@ -19,6 +19,7 @@ import { RicosEditor, RicosEditorProps, RicosEditorType } from 'ricos-editor';
 
 const anchorTarget = '_blank';
 const rel = { nofollow: true };
+const STATIC_TOOLBAR = 'static';
 
 interface ExampleEditorProps {
   theme?: RichContentEditorProps['theme'];
@@ -143,7 +144,8 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       onRicosEditorChange,
       experiments,
     } = this.props;
-    const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
+    const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? STATIC_TOOLBAR : null;
+    const useStaticTextToolbar = textToolbarType === STATIC_TOOLBAR;
 
     return (
       <div style={{ height: '100%' }}>
@@ -159,8 +161,8 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             locale={locale}
             cssOverride={theme}
             toolbarSettings={{
-              useStaticTextToolbar: textToolbarType === 'static',
-              textToolbarContainer: this.staticToolbarContainer,
+              useStaticTextToolbar: useStaticTextToolbar,
+              textToolbarContainer: useStaticTextToolbar && this.staticToolbarContainer,
               getToolbarSettings: this.getToolbarSettings,
             }}
             isMobile={isMobile}
