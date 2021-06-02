@@ -20,6 +20,11 @@
 - `collapsible-list`
   - [#2565](https://github.com/wix/ricos/pull/2565) Collapsible List Plugin
 
+### :house: Internal
+
+- `ui-components`
+  - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
+
 </details>
 <hr/>
 
