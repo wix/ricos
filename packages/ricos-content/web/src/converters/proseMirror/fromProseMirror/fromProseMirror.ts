@@ -1,16 +1,18 @@
 import { transform, isObject, pickBy, identity } from 'lodash';
-import { RichContent } from 'ricos-schema';
+import { RichContent, Node } from 'ricos-schema';
 import { JSONContent } from '@tiptap/core';
 import { initializeMetadata } from '../../nodeUtils';
 import { genKey } from '../../generateRandomKey';
-import { DATA_FIELDS_MAP, isDecoration, isNode } from '../utils';
+import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent } from '../utils';
 
-export const fromProseMirror = (proseDocument: JSONContent): RichContent => {
-  const { type: _, ...content } = convertFromProse(proseDocument);
-  if (!content.metadata) {
-    content.metadata = initializeMetadata();
-  }
-  return content;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const fromProseMirror = <T extends JSONContent | Record<string, any>>(
+  proseContent: T
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): T extends JSONContent ? RichContent | Node : Record<string, any> => {
+  let { richContent } = convertFromProse({ richContent: proseContent });
+  richContent = removeKeyFromData(richContent);
+  return richContent;
 };
 
 const FIELDS_MAP = {
@@ -22,9 +24,21 @@ const typeToUpper = object => ({ ...object, type: object.type.toUpperCase() });
 
 const isTextNode = value => value?.type === 'text' && 'marks' in value;
 
+const removeKeyFromData = value => {
+  const { key: _, ...newValue } = value;
+  return isNode(value) ? value : newValue;
+};
+
+const removeDocType = ({ type: _, ...content }: JSONContent) => content;
+
+const addMetadata = ({ attrs, ...content }: JSONContent) => ({
+  metadata: attrs?.metadata || initializeMetadata(),
+  ...content,
+});
+
 const moveTextData = object => {
-  const { marks, text, ...newValue } = object;
-  return { ...newValue, attrs: { marks, text } };
+  const { marks, text, attrs, ...newValue } = object;
+  return { ...newValue, attrs: { ...attrs, marks, text } };
 };
 
 const convertDataField = object => {
@@ -33,26 +47,28 @@ const convertDataField = object => {
   return { ...newValue, ...(attrs ? { [dataField]: attrs } : {}) };
 };
 
-const moveNodeStyle = object => {
-  const { attrs: { style, ...rest } = { style }, ...newValue } = object;
-  const attrs = Object.keys(rest).length > 0 && rest;
-  return pickBy({ ...newValue, attrs, style }, identity);
+const movefromAttrs = (object: JSONContent) => {
+  const { attrs, ...newValue } = object;
+  const { style, key = genKey(), ...rest } = attrs || {};
+  const newAttrs = Object.keys(rest).length > 0 ? rest : undefined;
+  return pickBy({ ...newValue, attrs: newAttrs, style, key }, identity);
 };
 
 const convertValue = value => {
   let newValue = value;
+  if (isProseContent(newValue)) {
+    newValue = removeDocType(newValue);
+    newValue = addMetadata(newValue);
+  }
   if (isTextNode(newValue)) {
     newValue = moveTextData(newValue);
   }
   if (isNode(newValue)) {
-    newValue = moveNodeStyle(newValue);
+    newValue = movefromAttrs(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
     newValue = typeToUpper(newValue);
     newValue = convertDataField(newValue);
-  }
-  if (isNode(newValue) && !newValue.key) {
-    newValue.key = genKey();
   }
   return newValue;
 };
