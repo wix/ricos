@@ -11,7 +11,7 @@ import { merge } from 'lodash';
 
 interface LinkPanelWrapperProps {
   anchorTarget: AnchorTarget;
-  linkValues: { url?: string; rel?: string; target?: string; anchor?: string };
+  linkValues: { url?: string; rel?: string; target?: string };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (changes: any) => void;
 }
@@ -32,10 +32,10 @@ class LinkPanelWrapper extends Component<LinkPanelWrapperProps> {
 
   render() {
     const { linkValues } = this.props;
-    const { rel, target, ...rest } = linkValues;
+    const { rel, target, url = '', ...rest } = linkValues;
     const { nofollow, sponsored } = convertRelStringToObject(rel) || {};
     const targetBlank = convertTargetStringToBoolean(target);
-    const linkPanelValues = { ...rest, targetBlank, nofollow, sponsored };
+    const linkPanelValues = { ...rest, targetBlank, nofollow, sponsored, url };
 
     return <LinkPanel {...this.props} linkValues={linkPanelValues} onChange={this.onChange} />;
   }
