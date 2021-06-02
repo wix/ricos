@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.41.0 (Jun 2, 2021)
 ### :rocket: New Feature
 - `ricos-content`
   - [#2573](https://github.com/wix/ricos/pull/2573) content extractor API
@@ -25,9 +30,6 @@
 
 - `ui-components`
   - [#2579](https://github.com/wix-incubator/rich-content/pull/2579) made ui-components public 
-
-</details>
-<hr/>
 
 ## 8.40.1 (Jun 1, 2021)
 ### :bug: Bug Fix
