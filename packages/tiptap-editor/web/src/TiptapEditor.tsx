@@ -66,7 +66,7 @@ const dataJSON = {
           key: '6hb3g',
           nodes: [],
           textData: {
-            text: 'yaron 123',
+            text: 'yaron 321',
             decorations: [],
           },
         },
@@ -113,6 +113,7 @@ const dataJSON = {
     updatedTimestamp: '2021-05-26T22:48:09.161Z',
   },
 };
+//@ts-ignore
 const content = toProseMirror(RichContent.fromJSON(dataJSON));
 // eslint-disable-next-line fp/no-delete
 delete content.metadata;

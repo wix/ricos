@@ -9,8 +9,9 @@ import {
 } from './styles';
 import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import generalRTLIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
-const stylesWithRTL = { ...generalStyles, ...generalRTLIgnoredStyles };
+import { proseMirrorNodeDataToDraft } from 'ricos-content/libs/converters';
 
+const stylesWithRTL = { ...generalStyles, ...generalRTLIgnoredStyles };
 const EditorContextConsumer = ({ children }) => {
   const editorContext = useContext(EditorPropsContext);
   return children(editorContext);
@@ -33,14 +34,8 @@ const BaseExtensionComponentHOC = Component => {
     return (
       <EditorContextConsumer>
         {context => {
-          const componentData = {
-            config: {
-              size: 'small',
-              alignment: 'left',
-              textWrap: 'nowrap',
-            },
-            type: 'single',
-          };
+          const componentData = proseMirrorNodeDataToDraft(props.node.type, props.node.attrs);
+
           const [isSelected, setSelected] = useState(false);
           useEffect(() => {
             editor.on('selectionUpdate', ({ editor }) => {
