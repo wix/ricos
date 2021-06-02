@@ -104,6 +104,7 @@ const getImageSrc = (
     requiredQuality?: number;
     imageType?: string;
     removeUsm?: boolean;
+    relative?: boolean;
   } = {}
 ) => {
   if (typeof src === 'object') {
@@ -122,6 +123,9 @@ const getImageSrc = (
         }
       }
     } else if (src.file_name) {
+      if (options.relative) {
+        return src.file_name;
+      }
       const url = createUrl(
         src,
         options.removeUsm,
