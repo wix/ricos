@@ -68,13 +68,16 @@ Will render in mobile optimized mode
 
 ### `linkSettings`
 
-```jsx
+*** `relValue` is Deprecated ***, please use `rel` instead.
 
+
+```jsx
 CustomAnchorScroll: (event: Event, anchor: string) => void;
 
 linkSettings?: {
   anchorTarget?: string;
   relValue?: string;
+  rel?: { nofollow?: boolean; sponsored?: boolean; ugc?: boolean; };
   customAnchorScroll?: CustomAnchorScroll;
 }
 ```
@@ -197,7 +200,8 @@ linkPanelSettings?: {
   showNewTabCheckbox?: boolean;
   showNoFollowCheckbox?: boolean;
   showSponsoredCheckbox?: boolean;
-  placeholder?: string;}
+  placeholder?: string;
+}
 ```
 
 Settings for the link panel component.
