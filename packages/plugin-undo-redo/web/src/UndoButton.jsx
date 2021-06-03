@@ -8,6 +8,7 @@ const UndoButton = props => {
   const {
     isMobile,
     theme = {},
+    helpers,
     children,
     className,
     config,
@@ -34,6 +35,7 @@ const UndoButton = props => {
         disabled={disabled}
         onClick={onClick}
         isActive={false}
+        helpers={helpers}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('UndoButton_Tooltip')}
@@ -60,6 +62,7 @@ const UndoButton = props => {
 UndoButton.propTypes = {
   children: PropTypes.node,
   theme: PropTypes.any,
+  helpers: PropTypes.object,
   setEditorState: PropTypes.func,
   isMobile: PropTypes.bool,
   className: PropTypes.string,
