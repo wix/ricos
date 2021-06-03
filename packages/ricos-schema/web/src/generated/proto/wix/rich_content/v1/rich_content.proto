@@ -65,7 +65,7 @@ message Node {
         POLL = 17;
         VERTICAL_EMBED = 18;
         BUTTON = 19;
-        ACCORDION = 20;
+        COLLAPSIBLE_LIST = 20;
         TABLE = 21;
     }
 

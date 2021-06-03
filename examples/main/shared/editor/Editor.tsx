@@ -26,7 +26,8 @@ import 'wix-rich-content-toolbars-new/dist/styles.min.css';
 import { RicosEditor, RicosEditorProps, RicosEditorType } from 'ricos-editor';
 
 const anchorTarget = '_blank';
-const relValue = 'noopener';
+const rel = { nofollow: true };
+const STATIC_TOOLBAR = 'static';
 
 interface ExampleEditorProps {
   theme?: RichContentEditorProps['theme'];
@@ -211,7 +212,8 @@ export default class Editor extends PureComponent<ExampleEditorProps, State> {
       onRicosEditorChange,
       experiments,
     } = this.props;
-    const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? 'static' : null;
+    const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? STATIC_TOOLBAR : null;
+    const useStaticTextToolbar = textToolbarType === STATIC_TOOLBAR;
 
     return (
       <div style={{ height: '100%' }}>
@@ -224,17 +226,18 @@ export default class Editor extends PureComponent<ExampleEditorProps, State> {
             onChange={onRicosEditorChange}
             content={contentState}
             injectedContent={injectedContent}
-            linkSettings={{ anchorTarget, relValue }}
+            linkSettings={{ anchorTarget, rel }}
             locale={locale}
             cssOverride={theme}
             toolbarSettings={{
-              useStaticTextToolbar: textToolbarType === 'static',
-              textToolbarContainer: this.staticToolbarContainer,
+              useStaticTextToolbar: useStaticTextToolbar,
+              textToolbarContainer: useStaticTextToolbar && this.staticToolbarContainer,
               getToolbarSettings: this.getToolbarSettings,
             }}
             isMobile={isMobile}
             placeholder={'Add some text!'}
             plugins={this.ricosPlugins}
+            linkPanelSettings={Plugins.uiSettings.linkPanel}
             _rcProps={{ experiments }}
           >
             <RichContentEditor helpers={this.helpers} setActiveEditor={this.setActiveEditor} />

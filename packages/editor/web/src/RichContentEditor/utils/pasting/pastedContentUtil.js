@@ -54,8 +54,6 @@ export const pastedContentConfig = customHeadings => {
       if (nodeName === 'a' && node.parentNode.tagName !== 'LI') {
         return createEntity('LINK', 'MUTABLE', {
           url: node.href,
-          target: '_blank',
-          rel: 'noopener',
         });
       }
       return null;
