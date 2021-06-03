@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2584](https://github.com/wix/ricos/pull/2584) `onContentEdited` callback
 
 </details>
 <hr/>
