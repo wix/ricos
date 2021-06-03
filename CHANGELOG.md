@@ -16,11 +16,13 @@
     Click to see more.
   </summary>
 
-### :house: Internal
+### :rocket: New Feature
+- `ricos-editor`
+  - [#2584](https://github.com/wix/ricos/pull/2584) `onContentEdited` callback
 
+### :house: Internal
 - `ui-components`
   - [#2575](https://github.com/wix-incubator/rich-content/pull/2575) moved InputWithLabel component into ui-components folder
-  
 
 </details>
 <hr/>
