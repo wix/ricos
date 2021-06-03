@@ -123,7 +123,7 @@ class LinkPanel extends Component {
       isMobile,
     } = this.props;
 
-    const { targetBlank, nofollow, sponsored } = linkValues;
+    const { targetBlank = true, nofollow, sponsored } = linkValues;
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
