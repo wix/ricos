@@ -34,7 +34,7 @@ interface State {
   localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
   editorState?: EditorState;
-  firstMutationLatch: boolean;
+  initialContentChanged: boolean;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -59,7 +59,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.state = {
       localeData: { locale: props.locale },
       remountKey: false,
-      firstMutationLatch: true,
+      initialContentChanged: true,
     };
   }
 
@@ -132,10 +132,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   onInitialContentChanged = () => {
-    const { firstMutationLatch } = this.state;
-    if (firstMutationLatch) {
+    const { initialContentChanged } = this.state;
+    if (initialContentChanged) {
       this.getBiCallback('onContentEdited')?.({ version: Version.currentVersion });
-      this.setState({ firstMutationLatch: false });
+      this.setState({ initialContentChanged: false });
     }
   };
 
