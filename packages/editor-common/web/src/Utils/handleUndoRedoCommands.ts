@@ -16,7 +16,7 @@ import {
   VIDEO_TYPE,
   FILE_UPLOAD_TYPE,
   GALLERY_TYPE,
-  ACCORDION_TYPE,
+  COLLAPSIBLE_LIST_TYPE,
   TABLE_TYPE,
   POLL_TYPE,
 } from 'wix-rich-content-common';
@@ -25,7 +25,7 @@ import { isEqual } from 'lodash';
 /* Type declarations */
 
 const IGNORE_TYPE = 'ignore';
-const INNER_RICOS_TYPES = [ACCORDION_TYPE, TABLE_TYPE];
+const INNER_RICOS_TYPES = [COLLAPSIBLE_LIST_TYPE, TABLE_TYPE];
 
 // new plugins should be added while they are not supported
 const PLUGINS_TO_IGNORE: string[] = [POLL_TYPE];
@@ -117,15 +117,15 @@ function fixBrokenRicosStates(
   return result;
 }
 
-/* Accordion Entity Handling */
+/* Collapsible List Entity Handling */
 
-function didAccordionConfigChange(currentData, newData): boolean {
+function didCollapsibleListConfigChange(currentData, newData): boolean {
   const { pairs: currentPairs } = currentData;
   const { pairs: newPairs } = newData;
   return newPairs.length !== currentPairs.length || !isEqual(currentData.config, newData.config);
 }
 
-function checkAccordionPair(currentPair, newPair): string | boolean {
+function checkCollapsibleListPair(currentPair, newPair): string | boolean {
   const { key: newKey, title: newTitle, content: newContent } = newPair;
   const { key: currentKey, title: currentTitle, content: currentContent } = currentPair;
   return (
@@ -135,12 +135,12 @@ function checkAccordionPair(currentPair, newPair): string | boolean {
   );
 }
 
-// checks if an accordion pair changed and if so returns the changed pair index and an indictor (title or content)
-function getChangedAccordionPairIndex(currentPairs, newPairs) {
+// checks if an collapsible list pair changed and if so returns the changed pair index and an indictor (title or content)
+function getChangedCollapsibleListPairIndex(currentPairs, newPairs) {
   let item;
   const changedPairIndex = newPairs.findIndex((newPair, index) => {
     const currentPair = currentPairs[index];
-    item = checkAccordionPair(currentPair, newPair);
+    item = checkCollapsibleListPair(currentPair, newPair);
     return !!item;
   });
   return { didChange: changedPairIndex > -1, changedPairIndex, item };
@@ -156,10 +156,10 @@ function getNewPairs(currentPairs, newPairs) {
   });
 }
 
-function getFixedAccordionEditorStates(currentData, newData) {
+function getFixedCollapsibleListEditorStates(currentData, newData) {
   const { pairs: currentPairs } = currentData;
   const newPairs = getNewPairs(currentPairs, newData.pairs);
-  const { didChange, changedPairIndex, item } = getChangedAccordionPairIndex(
+  const { didChange, changedPairIndex, item } = getChangedCollapsibleListPairIndex(
     currentPairs,
     newPairs
   );
@@ -181,7 +181,7 @@ function getFixedAccordionEditorStates(currentData, newData) {
   return entityToReplace;
 }
 
-function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
+function setChangeTypeForCollapsibleListPairs(newPairs, lastChangeType) {
   return newPairs.map(pair => {
     return {
       key: pair.key,
@@ -201,10 +201,10 @@ function setChangeTypeForAccordionPairs(newPairs, lastChangeType) {
   });
 }
 
-function handleAccordionEntity(currentData, newData): EntityToReplace {
-  return didAccordionConfigChange(currentData, newData)
+function handleCollapsibleListEntity(currentData, newData): EntityToReplace {
+  return didCollapsibleListConfigChange(currentData, newData)
     ? { shouldUndoAgain: false }
-    : getFixedAccordionEditorStates(currentData, newData);
+    : getFixedCollapsibleListEditorStates(currentData, newData);
 }
 
 /* Table Entity Handling */
@@ -372,15 +372,16 @@ const entityDataFixers = {
 };
 
 const innerRicosDataFixers = {
-  [ACCORDION_TYPE]: (currentData, newData) => handleAccordionEntity(currentData, newData),
+  [COLLAPSIBLE_LIST_TYPE]: (currentData, newData) =>
+    handleCollapsibleListEntity(currentData, newData),
   [TABLE_TYPE]: (currentData, newData) => handleTableEntity(currentData, newData),
 };
 
 const innerRicosChangeTypeSetters = {
-  [ACCORDION_TYPE]: prevData => {
+  [COLLAPSIBLE_LIST_TYPE]: prevData => {
     return {
       ...prevData,
-      pairs: setChangeTypeForAccordionPairs(prevData.pairs, 'redo'),
+      pairs: setChangeTypeForCollapsibleListPairs(prevData.pairs, 'redo'),
     };
   },
   [TABLE_TYPE]: prevData => {

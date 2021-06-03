@@ -13,6 +13,8 @@ import {
   HTML_TYPE,
   ACTION_BUTTON_TYPE,
   LINK_BUTTON_TYPE,
+  getRelValue,
+  getTargetValue,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -91,7 +93,7 @@ class PluginViewer extends PureComponent {
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
-    const { anchorTarget, relValue, config, theme, isMobile } = context;
+    const { anchorTarget, config, theme, isMobile } = context;
     const settings = config?.[type] || {};
     const componentProps = {
       type,
@@ -112,11 +114,11 @@ class PluginViewer extends PureComponent {
         const ContainerElement = hasLink || hasAnchor ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
-          const { url, target, rel } = config.link;
+          const { url, target = anchorTarget, rel } = config.link;
           containerProps = {
             href: normalizeUrl(url),
-            target: target || anchorTarget || '_self',
-            rel: rel || relValue || 'noopener noreferrer',
+            target: getTargetValue(target),
+            rel: getRelValue(rel),
           };
         }
         if (hasAnchor) {
@@ -214,7 +216,6 @@ PluginViewer.propTypes = {
   context: PropTypes.shape({
     theme: PropTypes.object.isRequired,
     anchorTarget: PropTypes.string.isRequired,
-    relValue: PropTypes.string.isRequired,
     config: PropTypes.object.isRequired,
     isMobile: PropTypes.bool.isRequired,
     helpers: PropTypes.object.isRequired,

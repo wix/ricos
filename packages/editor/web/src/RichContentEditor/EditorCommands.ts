@@ -20,6 +20,7 @@ import {
   removeLinksInSelection,
   triggerMention,
   insertMention,
+  getAnchorableBlocks,
 } from 'wix-rich-content-editor-common';
 import {
   PluginsDataMap,
@@ -213,7 +214,8 @@ export const createEditorCommands = (
   const editorState = {
     // TODO: check if needed, plus type error using SelectionState, not sure why
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getSelection: (): any => getEditorState().getSelection(),
+    _getSelection: (): any => getEditorState().getSelection(),
+    getAnchorableBlocks: () => getAnchorableBlocks(getEditorState()),
     getTextAlignment: () => getTextAlignment(getEditorState()),
     hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
     isBlockTypeSelected: (type: TextBlockType) => getBlockType(getEditorState()) === type,

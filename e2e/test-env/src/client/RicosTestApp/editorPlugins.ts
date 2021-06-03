@@ -10,7 +10,7 @@ import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list';
 import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
@@ -126,7 +126,7 @@ const createPlugins = externalConfigs => {
     undoRedo: pluginUndoRedo(),
     headings: pluginHeadings(configs.headings),
     spoiler: pluginSpoiler(),
-    accordion: pluginAccordion(),
+    collapsibleList: pluginCollapsibleList(),
     table: pluginTable(),
     verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
     unsupportedBlocks: pluginUnsupportedBlocks(),

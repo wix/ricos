@@ -9,7 +9,7 @@ export const fixtures = [
   'nested-lists',
   'aligment_with_punctuations',
   {
-    fixture: 'multiple-accordions-rich-text',
+    fixture: 'multiple-collapsible-lists-rich-text',
     config: usePlugins(plugins.all),
   },
   'indent_blocks_lists_with_alignment',

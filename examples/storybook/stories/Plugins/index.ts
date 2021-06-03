@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/react';
 import LinkPreviewStory from './LinkPreview';
 import GalleryPluginStory from './Gallery';
 import DividerPluginStory from './Divider';
-import AccordionPluginStory from './Accordion';
+import CollapsibleListPluginStory from './CollapsibleList';
 import HeadingsPluginStory from './Headings';
 import SpoilerPluginStory from './Spoiler';
 import AnchorPluginStory from './Anchor';
@@ -17,7 +17,7 @@ import TablePluginStory from './Table';
 
 storiesOf('Plugins', module)
   .add('Divider', DividerPluginStory)
-  .add('Accordion', AccordionPluginStory)
+  .add('Collapsible List', CollapsibleListPluginStory)
   .add('Spoiler', SpoilerPluginStory)
   .add('Headings', HeadingsPluginStory)
   .add('Anchor', AnchorPluginStory)

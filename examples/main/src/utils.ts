@@ -27,10 +27,9 @@ export const saveStateToStorage = debounce(state => {
 }, 1000);
 
 export const normalize = (json: DraftContent) => {
-  const { anchorTarget, relValue } = CONSTS;
+  const { anchorTarget } = CONSTS;
   return normalizeInitialState(json, {
     anchorTarget,
-    relValue,
   });
 };
 

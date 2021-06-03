@@ -57,10 +57,8 @@ const getEditorStateWithSelectionAt = (editorState, blockKey) => {
 };
 const linkData = {
   url: 'www.google.com',
-  targetBlank: true,
-  nofollow: false,
-  anchorTarget: '_blank',
-  relValue: 'noopener',
+  target: '_blank',
+  rel: 'nofollow sponsored',
 };
 const BLOCK_KEY1 = '50k2j';
 const BLOCK_KEY2 = '1u5r4';

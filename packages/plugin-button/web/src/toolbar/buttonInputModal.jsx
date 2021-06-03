@@ -3,10 +3,9 @@ import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Tabs, Tab, SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
-import { KEYS_CHARCODE, FocusManager, ErrorIcon } from 'wix-rich-content-editor-common';
+import { KEYS_CHARCODE, FocusManager } from 'wix-rich-content-editor-common';
 import {
   mergeStyles,
-  isValidUrl,
   isNewTab,
   ADD_PLUGIN_LINK_BI,
   WEB_ADDRESS_CATEGORY,
@@ -27,23 +26,18 @@ export default class ButtonInputModal extends Component {
     } = this.props;
 
     this.state = {
-      validUrl: button.settings?.url && isValidUrl(button.settings.url),
       settings: { ...button.settings },
       design: { ...button.design },
       initialComponentData: { ...button },
       isHover: false,
       activeTab: settingsTabValue,
-      shouldShowLink: !this.props.settings.isActionButton,
+      showLinkPanel: !this.props.settings.isActionButton,
     };
 
     this.setScrollbarRef = element => {
       this.scrollbarRef = element;
     };
   }
-
-  onValidUrl = validUrl => {
-    this.setState({ validUrl });
-  };
 
   onSettingsChanged = settings => {
     const { design } = this.state;
@@ -75,22 +69,19 @@ export default class ButtonInputModal extends Component {
   triggerLinkBi = () => {
     const {
       settings: { rel, target, url },
-      validUrl,
     } = this.state;
-    validUrl &&
-      this.props.helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, {
-        plugin_id: LINK_BUTTON_TYPE,
-        params: {
-          link: url,
-          newTab: isNewTab(target),
-          category: WEB_ADDRESS_CATEGORY,
-          rel,
-        },
-      });
+    this.props.helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, {
+      plugin_id: LINK_BUTTON_TYPE,
+      params: {
+        link: url,
+        newTab: isNewTab(target),
+        category: WEB_ADDRESS_CATEGORY,
+        rel,
+      },
+    });
   };
 
   onConfirm = () => {
-    const { validUrl, shouldShowLink } = this.state;
     const {
       helpers: { closeModal },
     } = this.props;
@@ -98,14 +89,9 @@ export default class ButtonInputModal extends Component {
     if (!initialComponentData.design.color && this.currentColorEqualToConfig()) {
       this.removeColorsFromComponentData(design);
     }
-    if (!shouldShowLink || validUrl) {
-      this.setState({ submitted: true, isOpen: false });
-      this.triggerLinkBi();
-      closeModal();
-    } else {
-      this.setState({ activeTab: settingsTabValue });
-      this.linkInput.scrollIntoView(false);
-    }
+    this.setState({ submitted: true, isOpen: false });
+    this.triggerLinkBi();
+    closeModal();
   };
 
   currentColorEqualToConfig = () => {
@@ -177,18 +163,13 @@ export default class ButtonInputModal extends Component {
 
   render() {
     const { theme, t, uiSettings, doneLabel, cancelLabel, isMobile } = this.props;
-    const { shouldShowLink } = this.state;
+    const { showLinkPanel } = this.state;
     const { styles } = this;
     const settingTabLabel = (
       <div className={styles.button_inputModal_settingTab}>
         <div className={styles.button_inputModal_tabTitle}>
           <p className={styles.button_inputModal_tabLabel}>{t('ButtonModal_Settings_Tab')}</p>
         </div>
-        {shouldShowLink && (
-          <div className={styles.button_inputModal_errorIcon}>
-            {!this.state.validUrl ? <ErrorIcon width="18" height="18" /> : null}
-          </div>
-        )}
       </div>
     );
     const designTabLabel = (
@@ -200,15 +181,10 @@ export default class ButtonInputModal extends Component {
         theme={theme}
         uiSettings={uiSettings}
         {...this.props}
-        isValidUrl={this.onValidUrl.bind(this)}
         onSettingsChange={this.onSettingsChanged.bind(this)}
-        validUrl={this.state.validUrl}
         settingsObj={this.state.settings}
         onKeyPress={this.handleKeyPress}
-        linkInputRef={ref => {
-          this.linkInput = ref;
-        }}
-        shouldShowLink={shouldShowLink}
+        showLinkPanel={showLinkPanel}
       />
     );
     const designComponent = (
