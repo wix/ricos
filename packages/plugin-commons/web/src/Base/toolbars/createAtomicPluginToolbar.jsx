@@ -215,6 +215,7 @@ export default function createAtomicPluginToolbar({
         isMobile,
         t,
         pubsub,
+        helpers,
       };
 
       const buttonProps = {

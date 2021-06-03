@@ -25,11 +25,12 @@ class BlockSpoilerButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, tabIndex, tooltipText } = this.props;
+    const { theme, helpers, isMobile, tabIndex, tooltipText } = this.props;
     return (
       <InlineToolbarButton
         onClick={this.handleClick}
         isActive={this.isActive}
+        helpers={helpers}
         dataHook={'spoilerButton'}
         theme={theme}
         isMobile={isMobile}
@@ -44,6 +45,7 @@ class BlockSpoilerButton extends Component {
 BlockSpoilerButton.propTypes = {
   pubsub: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object,
   isMobile: PropTypes.bool,
   tabIndex: PropTypes.number,
   tooltipText: PropTypes.string,
