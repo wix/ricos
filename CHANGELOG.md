@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `ui-components`
+  - [#2575](https://github.com/wix-incubator/rich-content/pull/2575) moved InputWithLabel component into ui-components folder
+  
 
 </details>
 <hr/>
