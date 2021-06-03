@@ -11,8 +11,6 @@ import {
   TextButtonMapper,
   GetEditorState,
   SetEditorState,
-  AnchorTarget,
-  RelValue,
   ThemeGeneratorFunction,
   RichContentTheme,
   ThemeData,
@@ -326,8 +324,11 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
 }
 
 export interface LinkPanelSettings {
-  blankTargetToggleVisibilityFn?: (anchorTarget?: AnchorTarget) => boolean;
-  nofollowRelToggleVisibilityFn?: (relValue?: RelValue) => boolean;
+  blankTargetToggleVisibilityFn?: () => boolean;
+  nofollowRelToggleVisibilityFn?: () => boolean;
+  showNewTabCheckbox?: boolean;
+  showNoFollowCheckbox?: boolean;
+  showSponsoredCheckbox?: boolean;
   placeholder?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dropDown?: any;

@@ -16,12 +16,13 @@ import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import {
-  RelValue,
   AnchorTarget,
   LINK_TYPE,
   CUSTOM_LINK_TYPE,
   TextAlignment,
   InlineStyle,
+  RelValue,
+  getTargetValue,
   SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
@@ -29,10 +30,8 @@ import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics
 
 type LinkDataUrl = {
   url: string;
-  targetBlank?: boolean;
-  nofollow?: boolean;
-  anchorTarget?: string;
-  relValue?: string;
+  target?: string;
+  rel?: string;
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
@@ -77,15 +76,13 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
+  { url, target, rel }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   const linkEntityData = createLinkEntityData({
     url,
-    targetBlank,
-    nofollow,
-    anchorTarget,
-    relValue,
+    target,
+    rel,
   });
 
   return insertLink(editorState, selection, linkEntityData);
@@ -235,17 +232,8 @@ function insertLink(
   );
 }
 
-export function createLinkEntityData({
-  url,
-  anchor,
-  targetBlank,
-  nofollow,
-  anchorTarget,
-  relValue,
-}: LinkData) {
+export function createLinkEntityData({ url, anchor, target, rel }: LinkData) {
   if (url) {
-    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
     return {
       url,
       target,
@@ -688,8 +676,8 @@ export function fixPastedLinks(
     if (url) {
       content.replaceEntityData(entityKey, {
         url,
-        target: anchorTarget || '_self',
-        rel: relValue || 'noopener noreferrer',
+        target: getTargetValue(anchorTarget),
+        rel: relValue,
       });
     }
   });

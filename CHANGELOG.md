@@ -16,9 +16,16 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.42.0 (Jun 3, 2021)
 ### :rocket: New Feature
 - `collapsible-list`
   - [#2565](https://github.com/wix/ricos/pull/2565) Collapsible List Plugin
+- `link`
+  - [#2107](https://github.com/wix/ricos/pull/2107) Link SEO, added `sponsored` checkbox
 
 ### :house: Internal
 
@@ -27,6 +34,13 @@
 
 </details>
 <hr/>
+### :nail_care: Polish
+- `link`
+  - [#2107](https://github.com/wix/ricos/pull/2107) Link components
+
+### :book: Documentation
+- `link`
+  - [#2107](https://github.com/wix/ricos/pull/2107) `linkPanelSettings` & `linkSettings` API update
 
 ## 8.41.0 (Jun 2, 2021)
 ### :rocket: New Feature
