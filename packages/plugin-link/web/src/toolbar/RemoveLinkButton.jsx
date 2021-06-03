@@ -12,7 +12,7 @@ export default class RemoveLinkButton extends Component {
   };
 
   render() {
-    const { theme, isMobile, t, tabIndex } = this.props;
+    const { theme, helpers, isMobile, t, tabIndex } = this.props;
     const linkButtonTooltip = t('LinkPanelContainer_RemoveButton');
     const buttonStyles = {
       button: theme.inlineToolbarButton,
@@ -23,6 +23,7 @@ export default class RemoveLinkButton extends Component {
     return (
       <InlineToolbarButton
         onClick={this.deleteLink}
+        helpers={helpers}
         theme={{ ...theme, ...buttonStyles }}
         isMobile={isMobile}
         tooltipText={linkButtonTooltip}
@@ -38,6 +39,7 @@ RemoveLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object,
   isMobile: PropTypes.bool,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
