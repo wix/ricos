@@ -58,6 +58,9 @@ export interface onMenuLoadArgs extends biCallbackParams {
 }
 
 export interface onContentEditedArgs extends biCallbackParams {}
+export interface onToolbarButtonClickArgs extends biCallbackParams {
+  buttonName: string;
+}
 
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
@@ -85,6 +88,7 @@ export interface BICallbacks {
   onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
   onContentEdited?(params: onContentEditedArgs): void;
+  onToolbarButtonClick?(params: onToolbarButtonClickArgs): void;
   onPluginChange?(
     pluginId: string,
     changeObject: { from: string; to: string },
