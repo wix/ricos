@@ -89,6 +89,7 @@ export default class LineSpacingButton extends Component {
   render() {
     const {
       theme,
+      helpers,
       isMobile,
       t,
       tabIndex,
@@ -112,6 +113,7 @@ export default class LineSpacingButton extends Component {
         <InlineToolbarButton
           onClick={this.openPanel}
           isActive={!!isPanelOpen}
+          helpers={helpers}
           theme={theme}
           isMobile={isMobile}
           tooltipText={t('LineSpacingButton_Tooltip')}
@@ -154,6 +156,7 @@ export default class LineSpacingButton extends Component {
           <InlineToolbarButton
             onClick={this.openPanel}
             isActive={!!isPanelOpen}
+            helpers={helpers}
             theme={theme}
             isMobile={isMobile}
             tooltipText={t('LineSpacingButton_Tooltip')}
