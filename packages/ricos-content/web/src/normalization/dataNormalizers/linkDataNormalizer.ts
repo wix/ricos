@@ -15,8 +15,8 @@ const linkDataNormalizer = (
   }
 
   return {
-    target: targetBlank ? '_blank' : anchorTarget || '_self',
-    rel: nofollow ? 'nofollow' : relValue || 'noopener',
+    target: targetBlank ? '_blank' : anchorTarget,
+    rel: nofollow ? 'nofollow' : relValue,
     ...rest,
   };
 };
