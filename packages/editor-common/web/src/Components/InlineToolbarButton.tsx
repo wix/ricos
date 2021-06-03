@@ -91,7 +91,6 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
       disabled,
       buttonContent,
       showArrowIcon,
-      onClick,
     } = this.props;
     const { styles } = this;
     const arrowIcon = (
@@ -128,7 +127,7 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
           aria-label={tooltipText}
           aria-pressed={isActive}
           data-hook={dataHook}
-          onClick={onClick}
+          onClick={this.onClick}
           className={styles.button}
           ref={forwardRef}
           onMouseDown={this.preventDefault}
