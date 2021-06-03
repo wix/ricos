@@ -24,6 +24,10 @@
 - `ui-components`
   - [#2575](https://github.com/wix-incubator/rich-content/pull/2575) moved InputWithLabel component into ui-components folder
 
+### :bug: Bug Fix
+- `vertical-embed`
+  - [#2587](https://github.com/wix-incubator/rich-content/pull/2587) fix vertical-embed rtl direction display
+
 </details>
 <hr/>
 

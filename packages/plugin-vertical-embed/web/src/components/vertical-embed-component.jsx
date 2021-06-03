@@ -37,6 +37,7 @@ class VerticalEmbedComponent extends PureComponent {
         className={classnames(className, styles.card, { [styles.slimLayout]: slimLayout })}
         data-hook="vertical-embed"
         onClick={this.onClick}
+        style={{ direction: 'unset' }}
       >
         {/* eslint-disable-next-line react/no-danger*/}
         <div dangerouslySetInnerHTML={{ __html: html }} />
