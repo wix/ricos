@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `link`
+  - [#2588](https://github.com/wix-incubator/rich-content/pull/2588) hide sponsored checkbox in link panel by default
+
 ### :rocket: New Feature
 - `ricos-editor`
   - [#2584](https://github.com/wix/ricos/pull/2584) `onContentEdited` callback
