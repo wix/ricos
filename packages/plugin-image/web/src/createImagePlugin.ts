@@ -39,7 +39,6 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     component: createBaseMediaPlugin({
       PluginComponent: Component,
       pluginType: IMAGE_TYPE,
-      isPluginViewer: true,
     }),
     type: IMAGE_TYPE,
     legacyType: IMAGE_TYPE_LEGACY,

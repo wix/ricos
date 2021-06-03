@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   IMAGE_TYPE,
   GALLERY_TYPE,

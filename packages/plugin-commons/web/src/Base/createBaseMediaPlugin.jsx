@@ -61,8 +61,6 @@ class MediaPlugin extends Component {
   };
 
   onUploadFinished = ({ data, error }) => {
-    const { setData } = this.props.blockProps;
-    // setData({ ...this.props.componentData, ...data });
     data && this.props.store.update('componentData', data, this.props.block.getKey());
     let { tempData } = this.state;
     if (!error) {
@@ -122,14 +120,13 @@ MediaPlugin.propTypes = {
   handleUploadFinished: PropTypes.func.isRequired,
   isOverlayLoader: PropTypes.bool,
   Component: PropTypes.any,
-  blockProps: PropTypes.object,
   commonPubsub: PropTypes.object,
 };
 
 const createBaseMediaPlugin = ({
   PluginComponent,
   pluginType,
-  isPluginViewer = false,
+  isPluginViewer = true,
   isOverlayLoader = true,
 }) => {
   return class MediaUploadWrapper extends Component {

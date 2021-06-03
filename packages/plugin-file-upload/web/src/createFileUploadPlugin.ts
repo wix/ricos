@@ -13,7 +13,6 @@ const createFileUploadPlugin: CreatePluginFunction<FilePluginEditorConfig> = con
     component: createBaseMediaPlugin({
       PluginComponent: Component,
       pluginType: FILE_UPLOAD_TYPE,
-      isPluginViewer: true,
       isOverlayLoader: false,
     }),
     type: FILE_UPLOAD_TYPE,
