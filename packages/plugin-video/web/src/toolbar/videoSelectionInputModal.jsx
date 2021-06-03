@@ -103,7 +103,7 @@ export default class VideoSelectionInputModal extends Component {
 
   handleNativeFileUpload = () => {
     const { componentData, handleUploadStart } = this.props;
-    handleUploadStart(this.inputFile.files, this.onLocalLoad, this.getOnUploadFinished(true));
+    handleUploadStart(this.inputFile.files[0], this.onLocalLoad, this.getOnUploadFinished(true));
     this.closeModal();
   };
 

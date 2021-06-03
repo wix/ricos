@@ -58,26 +58,24 @@ class ImageComponent extends React.Component {
 
     const { error } = componentData;
     return (
-      <>
-        <ImageViewer
-          theme={theme}
-          isMobile={isMobile}
-          helpers={helpers}
-          disableRightClick={disableRightClick}
-          getInPluginEditingMode={getInPluginEditingMode}
-          setInPluginEditingMode={setInPluginEditingMode}
-          componentData={componentData}
-          onClick={onClick}
-          className={className}
-          isLoading={this.props.isLoading}
-          dataUrl={this.props.tempData?.dataUrl}
-          settings={settings}
-          defaultCaption={this.props.t('ImageViewer_Caption')}
-          onCaptionChange={this.handleCaptionChange}
-          setFocusToBlock={blockProps.setFocusToBlock}
-          setComponentUrl={setComponentUrl}
-        />
-      </>
+      <ImageViewer
+        theme={theme}
+        isMobile={isMobile}
+        helpers={helpers}
+        disableRightClick={disableRightClick}
+        getInPluginEditingMode={getInPluginEditingMode}
+        setInPluginEditingMode={setInPluginEditingMode}
+        componentData={componentData}
+        onClick={onClick}
+        className={className}
+        isLoading={this.props.isLoading}
+        dataUrl={this.props.tempData?.dataUrl}
+        settings={settings}
+        defaultCaption={this.props.t('ImageViewer_Caption')}
+        onCaptionChange={this.handleCaptionChange}
+        setFocusToBlock={blockProps.setFocusToBlock}
+        setComponentUrl={setComponentUrl}
+      />
     );
   }
 }

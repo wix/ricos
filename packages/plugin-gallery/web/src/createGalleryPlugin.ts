@@ -46,7 +46,11 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
       : pluginData;
 
   return createBasePlugin({
-    component: createBaseMediaPlugin({ PluginComponent: Component, pluginType: GALLERY_TYPE }),
+    component: createBaseMediaPlugin({
+      PluginComponent: Component,
+      pluginType: GALLERY_TYPE,
+      isPluginViewer: true,
+    }),
     settings,
     theme,
     t,

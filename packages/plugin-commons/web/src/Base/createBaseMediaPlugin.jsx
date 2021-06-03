@@ -17,6 +17,11 @@ class MediaPlugin extends Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: false, tempData: null };
+    props.commonPubsub?.setBlockHandler(
+      'galleryHandleFilesAdded',
+      this.blockKey,
+      this.handleFilesAdded.bind(this)
+    );
   }
 
   componentDidMount() {
@@ -40,6 +45,7 @@ class MediaPlugin extends Component {
       //lets continue the uploading process
       if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
         this.handleFilesSelected(userSelectedFiles.files);
+        this.setState({ itemsLeftToUpload: userSelectedFiles.files.length, isLoading: true });
       }
       setTimeout(() => {
         //needs to be async since this function is called during constructor and we do not want the update to call set state on other components
@@ -62,19 +68,30 @@ class MediaPlugin extends Component {
     if (!error) {
       tempData = null;
     }
-    this.setState({ isLoading: false, tempData, error });
+    this.setState(state => {
+      const itemsLeftToUpload = state.itemsLeftToUpload - 1;
+      const isLoading = itemsLeftToUpload > 0;
+      return { itemsLeftToUpload, isLoading, tempData };
+    });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   onLocalLoad = tempData => this.setState({ tempData });
 
   handleFilesSelected = files => {
-    this.props.handleUploadStart(files, this.onLocalLoad, this.onUploadFinished);
-    this.setState({ isLoading: true });
+    Array(...files).forEach(file => {
+      this.props.handleUploadStart(file, this.onLocalLoad, this.onUploadFinished);
+    });
   };
 
   handleFilesAdded = ({ data, error }) => {
-    this.props.handleUploadFinished(data, error, this.onUploadFinished);
+    if (data instanceof Array) {
+      data.forEach((item, index) => {
+        this.props.handleUploadFinished(item, error[index] || error, this.onUploadFinished);
+      });
+    } else {
+      this.props.handleUploadFinished(data, error, this.onUploadFinished);
+    }
   };
 
   renderLoader = () => {
@@ -106,6 +123,7 @@ MediaPlugin.propTypes = {
   isOverlayLoader: PropTypes.bool,
   Component: PropTypes.any,
   blockProps: PropTypes.object,
+  commonPubsub: PropTypes.object,
 };
 
 const createBaseMediaPlugin = ({
@@ -117,7 +135,6 @@ const createBaseMediaPlugin = ({
   return class MediaUploadWrapper extends Component {
     static propTypes = {
       componentData: PropTypes.object.isRequired,
-      children: PropTypes.any,
       commonPubsub: PropTypes.object,
       helpers: PropTypes.object,
     };
@@ -134,27 +151,24 @@ const createBaseMediaPlugin = ({
         commonPubsub.set('onMediaUploadError', error);
       }
       return onUploadFinished({
-        data: data && dataBuilder[pluginType]?.({ data, error }, componentData, fileType),
+        data:
+          data && dataBuilder[pluginType]?.({ data, error }, componentData, fileType, itemIndex),
         error,
-        itemIndex,
       });
     };
 
-    uploadFile = (files, onLocalLoad, onUploadFinished, itemPos) => {
-      const file = files[0];
+    uploadFile = (file, onLocalLoad, onUploadFinished, itemPos) => {
       if (file) {
         this.fileReader(file).then(url => {
           const extension = file.name.split('.').pop();
           const fileType = extension && FileTypes[fileExtensionToType(extension)];
-          const tempData = tempDataBuilder[pluginType]?.(
-            {
-              url,
-              file,
-              type: extension,
-            },
-            fileType
-          );
-          const itemIndex = onLocalLoad?.(tempData, itemPos);
+          const { componentData } = this.props;
+          const tempData = tempDataBuilder[pluginType]?.({
+            url,
+            file,
+            type: extension,
+          });
+          onLocalLoad?.(tempData);
           const handleFileUpload = uploadFunctionGetter[pluginType](this.props);
           if (handleFileUpload) {
             const {
@@ -163,7 +177,7 @@ const createBaseMediaPlugin = ({
             const uploadBIData = onMediaUploadStart(pluginType, file.size, fileType);
             handleFileUpload(file, ({ data, error }) => {
               onMediaUploadEnd(uploadBIData, error);
-              this.handleUploadFinished(data, error, onUploadFinished, itemIndex, fileType);
+              this.handleUploadFinished(data, error, onUploadFinished, itemPos, fileType);
             });
           } else {
             this.handleUploadFinished(

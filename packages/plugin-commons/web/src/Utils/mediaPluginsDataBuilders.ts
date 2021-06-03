@@ -7,13 +7,10 @@ import {
   FILE_UPLOAD_TYPE,
   VideoComponentData,
 } from 'wix-rich-content-common';
-import {
-  fileExtensionToType,
-  FileTypes,
-} from 'wix-rich-content-plugin-file-upload/libs/fileExtensionToType';
+import { fileExtensionToType, FileTypes } from '../Utils/fileExtensionToType';
 
 const galleryItemBuilder = {
-  [FileTypes.IMAGE]: (img, itemId: string, preloadImage?: boolean | undefined) => {
+  [FileTypes.IMAGE]: (img, itemId: string, preloadImage?: boolean) => {
     return {
       metadata: {
         type: 'image',
@@ -25,7 +22,7 @@ const galleryItemBuilder = {
       tempData: preloadImage,
     };
   },
-  [FileTypes.VIDEO]: (video: VideoComponentData, itemId: string) => {
+  [FileTypes.VIDEO]: (video: VideoComponentData, itemId: string, preloadImage?: boolean) => {
     return {
       metadata: {
         type: 'video',
@@ -35,8 +32,20 @@ const galleryItemBuilder = {
       },
       itemId,
       url: video.pathname,
+      tempData: preloadImage,
     };
   },
+};
+
+const setItemInGallery = (item, componentData, itemPos?: number) => {
+  let { items, styles } = componentData;
+  if (typeof itemPos === 'undefined') {
+    items = [...items, item];
+  } else {
+    items = [...items];
+    items[itemPos] = item;
+  }
+  return { items, styles, config: {} };
 };
 
 export const dataBuilder = {
@@ -64,11 +73,15 @@ export const dataBuilder = {
   [FILE_UPLOAD_TYPE]: ({ data, error }, componentData) => {
     return { ...componentData, ...data, error, tempData: undefined };
   },
-  [GALLERY_TYPE]: ({ data, error }, componentData, fileType) => {
+  [GALLERY_TYPE]: ({ data, error }, componentData, fileType, itemIndex) => {
     const type =
       FileTypes[fileType] ||
       fileExtensionToType(data.file_name?.split('.').pop() || data.pathname?.split('.').pop());
-    return { ...galleryItemBuilder[type]?.(data, data.id || Date.now().toString()), error };
+    return setItemInGallery(
+      { ...galleryItemBuilder[type]?.(data, data.id || Date.now().toString()), error },
+      componentData,
+      itemIndex
+    );
   },
 };
 
@@ -82,15 +95,6 @@ export const tempDataBuilder = {
   [FILE_UPLOAD_TYPE]: ({ file, type }) => {
     const { name, size } = file;
     return { name, size, type, tempData: true };
-  },
-  [GALLERY_TYPE]: ({ url: src, file: { height, width } }, fileType) => {
-    if (fileType === FileTypes.IMAGE) {
-      return galleryItemBuilder[FileTypes.IMAGE](
-        { src, height, width },
-        Date.now().toString(),
-        true
-      );
-    }
   },
 };
 
