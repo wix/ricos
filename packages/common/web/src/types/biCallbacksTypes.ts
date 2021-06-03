@@ -1,5 +1,6 @@
 import { ToolbarType } from './toolbarEnums';
 import { OnPluginAction } from './pluginsBiCallbacksTypes';
+import { getContentSummary } from '../Utils/contentAnalytics';
 interface biCallbackParams {
   version?: string;
 }
@@ -41,7 +42,7 @@ export interface onPluginDeleteArgs extends biCallbackParams {
 
 export interface onViewerLoadedArgs extends biCallbackParams {
   isPreview: boolean;
-  pluginsCount: boolean;
+  pluginsCount: ReturnType<typeof getContentSummary>['pluginsCount'];
   version: string;
 }
 
