@@ -1,5 +1,6 @@
 import { ToolbarType } from './toolbarEnums';
 import { OnPluginAction } from './pluginsBiCallbacksTypes';
+import { getContentSummary } from '../Utils/contentAnalytics';
 interface biCallbackParams {
   version?: string;
 }
@@ -41,7 +42,7 @@ export interface onPluginDeleteArgs extends biCallbackParams {
 
 export interface onViewerLoadedArgs extends biCallbackParams {
   isPreview: boolean;
-  pluginsCount: boolean;
+  pluginsCount: ReturnType<typeof getContentSummary>['pluginsCount'];
   version: string;
 }
 
@@ -55,6 +56,8 @@ export interface onPluginModalOpenedArgs extends biCallbackParams {
 export interface onMenuLoadArgs extends biCallbackParams {
   menu: EntryType;
 }
+
+export interface onContentEditedArgs extends biCallbackParams {}
 
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
@@ -81,6 +84,7 @@ export interface BICallbacks {
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
   onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
+  onContentEdited?(params: onContentEditedArgs): void;
   onPluginChange?(
     pluginId: string,
     changeObject: { from: string; to: string },
