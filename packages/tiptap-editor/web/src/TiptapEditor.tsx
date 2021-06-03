@@ -22,9 +22,8 @@ import BulletList from '@tiptap/extension-bullet-list';
 import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
-import { RichContent } from 'ricos-schema';
 
-import { fromProseMirror, toProseMirror } from 'ricos-content/libs/converters';
+import { draftToProseMirror, proseMirrorToDraft } from 'ricos-content/libs/converters';
 import { createDivider } from './extensions/extension-divider';
 
 const starterKitExtensions = [
@@ -33,7 +32,13 @@ const starterKitExtensions = [
   BulletList,
   Code,
   CodeBlock,
-  Document,
+  Document.extend({
+    addAttributes() {
+      return {
+        metadata: {},
+      };
+    },
+  }),
   Dropcursor,
   Gapcursor,
   HardBreak,
@@ -54,80 +59,29 @@ type TipTapEditorProps = {
   plugins: Record<string, unknown>[];
   editorProps: unknown & Record<string, unknown>[];
 };
-
-const dataJSON = {
-  nodes: [
-    {
-      type: 'PARAGRAPH',
-      key: '81ob3',
-      nodes: [
-        {
-          type: 'TEXT',
-          key: '6hb3g',
-          nodes: [],
-          textData: {
-            text: 'yaron 321',
-            decorations: [],
-          },
-        },
-      ],
-      paragraphData: {
-        textStyle: {
-          textAlignment: 'AUTO',
-          lineHeight: '20px',
-        },
-        indentation: 0,
-      },
-    },
-    {
-      type: 'DIVIDER',
-      key: '7619f',
-      nodes: [],
-      dividerData: {
-        type: 'DOUBLE',
-        width: 'LARGE',
-        alignment: 'LEFT',
-        containerData: {
-          alignment: 'CENTER',
-          width: {
-            type: 'CONTENT',
-          },
-        },
-      },
-    },
-    {
-      type: 'PARAGRAPH',
-      key: 'd9j2a',
-      nodes: [],
-      paragraphData: {
-        textStyle: {
-          textAlignment: 'AUTO',
-        },
-        indentation: 0,
-      },
-    },
-  ],
-  metadata: {
-    version: 1,
-    createdTimestamp: '2021-05-26T22:48:09.161Z',
-    updatedTimestamp: '2021-05-26T22:48:09.161Z',
-  },
-};
-
-const content = toProseMirror(RichContent.fromJSON(dataJSON));
-// eslint-disable-next-line fp/no-delete
-delete content.metadata;
-// eslint-disable-next-line no-console
-console.log('yaron123', { content });
 const TipTapEditor = ({ editorProps, onUpdate }) => {
+  // draft to Prose
+
+  const content = draftToProseMirror(editorProps.initialState);
   const editor = useEditor({
     content,
     extensions: [...starterKitExtensions],
     injectCSS: true,
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();
-      const convertedContent = fromProseMirror(newContent as JSONContent);
-      onUpdate({ content: convertedContent });
+      // this is a workaround because some paragraph doesn't have content property (empty)
+      const newContent2 = newContent.content.map(node => {
+        if (node.type === 'paragraph') {
+          return {
+            content: [],
+            ...node,
+          };
+        } else {
+          return node;
+        }
+      });
+      const convertedContent = proseMirrorToDraft(newContent2 as JSONContent);
+      onUpdate && onUpdate(convertedContent);
     },
   });
 

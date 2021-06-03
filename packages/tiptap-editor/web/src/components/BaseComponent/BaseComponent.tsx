@@ -9,7 +9,7 @@ import {
 } from './styles';
 import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import generalRTLIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
-import { proseMirrorNodeDataToDraft } from 'ricos-content/libs/converters';
+import { proseMirrorNodeDataToDraft, toProseMirror } from 'ricos-content/libs/converters';
 
 const stylesWithRTL = { ...generalStyles, ...generalRTLIgnoredStyles };
 const EditorContextConsumer = ({ children }) => {
@@ -34,9 +34,22 @@ const BaseExtensionComponentHOC = Component => {
     return (
       <EditorContextConsumer>
         {context => {
-          const componentData = proseMirrorNodeDataToDraft(props.node.type, props.node.attrs);
+          const componentData = proseMirrorNodeDataToDraft(
+            props.node.type.name.toUpperCase(),
+            props.node.attrs
+          );
 
           const [isSelected, setSelected] = useState(false);
+          const { editor, getPos } = props;
+          const selected = props.selected;
+          const { theme } = context;
+
+          const componentStyles = getComponentStyles({
+            componentData: toProseMirror(componentData),
+            theme,
+            isFocused: isSelected || selected,
+          });
+
           useEffect(() => {
             editor.on('selectionUpdate', ({ editor }) => {
               const position = getPos();
@@ -49,15 +62,6 @@ const BaseExtensionComponentHOC = Component => {
                 setSelected(false);
               }
             });
-          });
-
-          const { editor, getPos } = props;
-          const selected = props.selected;
-          const { theme } = context;
-          const componentStyles = getComponentStyles({
-            componentData,
-            theme,
-            isFocused: isSelected || selected,
           });
 
           return (

@@ -1,7 +1,7 @@
 import { createNodeExtension } from '../../extension';
 import Divider from './divider';
-import { DEFAULTS, createDividerData } from 'wix-rich-content-plugin-divider';
-
+import { DividerData } from 'ricos-schema';
 export const createDivider = () => {
-  return createNodeExtension('divider', Divider, createDividerData(DEFAULTS));
+  const attrs = DividerData.fromJSON({});
+  return createNodeExtension('divider', Divider, attrs);
 };
