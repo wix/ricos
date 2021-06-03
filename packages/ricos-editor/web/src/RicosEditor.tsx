@@ -134,7 +134,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   onInitialContentChanged = () => {
     const { firstMutationLatch } = this.state;
     if (firstMutationLatch) {
-      this.getBiCallback('onContentAdded')?.({ version: Version.currentVersion });
+      this.getBiCallback('onContentEdited')?.({ version: Version.currentVersion });
       this.setState({ firstMutationLatch: false });
     }
   };
