@@ -46,7 +46,11 @@ interface ExampleEditorProps {
   experiments?: AvailableExperiments;
 }
 
-export default class Editor extends PureComponent<ExampleEditorProps> {
+interface State {
+  activeEditor?: any;
+}
+
+export default class Editor extends PureComponent<ExampleEditorProps, State> {
   getToolbarSettings: RichContentEditorProps['config']['getToolbarSettings'];
   config: RichContentEditorProps['config'];
   helpers: RichContentEditorProps['helpers'];
@@ -82,6 +86,11 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
     this.ricosPlugins = Object.entries(Plugins.ricosEditorPlugins).map(([pluginType, plugin]) =>
       pluginType in pluginsConfig ? plugin(pluginsConfig[pluginType]) : plugin()
     );
+    this.state = { activeEditor: null };
+  }
+
+  componentDidMount() {
+    this.setState({ activeEditor: this.editor });
   }
 
   initEditorProps() {
@@ -146,17 +155,14 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
   }
 
   renderTextFormattingToolbar() {
-    if (this.editor) {
-      const {
-        context: { getEditorState },
-        buttons,
-      } = this.editor.getToolbarProps(TOOLBARS.FORMATTING);
+    const { activeEditor } = this.state;
+    if (activeEditor) {
+      const { buttons } = activeEditor.getToolbarProps(TOOLBARS.FORMATTING);
       const { isMobile, theme, locale, staticToolbar } = this.props;
       const buttonsAsArray = Object.values(buttons);
-      const editorState = getEditorState();
-      const selection = editorState.getSelection();
+      const editorCommands = activeEditor.getEditorCommands();
+      const selection = editorCommands.getSelection();
       const showFormattingToolbar = !selection.isCollapsed() && selection.getHasFocus();
-      const editorCommands = this.editor.getEditorCommands();
       const t = this.editor.getT();
       const removeToolbarFocus = () => this.editor.removeToolbarFocus();
       const formattingToolbarButtonsKeys = this.config.formattingToolbarButtons;
@@ -189,6 +195,11 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
     }
     return null;
   }
+
+  setActiveEditor = ref => {
+    const activeEditor = ref || this.editor;
+    this.setState({ activeEditor });
+  };
 
   render() {
     const {
@@ -226,7 +237,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             plugins={this.ricosPlugins}
             _rcProps={{ experiments }}
           >
-            <RichContentEditor helpers={this.helpers} />
+            <RichContentEditor helpers={this.helpers} setActiveEditor={this.setActiveEditor} />
           </RicosEditor>
         </div>
       </div>

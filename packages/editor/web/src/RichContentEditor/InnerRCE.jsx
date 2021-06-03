@@ -144,6 +144,7 @@ class InnerRCE extends PureComponent {
   onFocus = e => {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
+    this.ref && this.props.setActiveEditor(this.ref);
     this.props.setInPluginEditingMode(true);
     if (!this.state.showToolbars) {
       this.setState({ showToolbars: true });
@@ -255,6 +256,7 @@ InnerRCE.propTypes = {
   onBackspaceAtBeginningOfContent: PropTypes.func,
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
+  setActiveEditor: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   direction: PropTypes.string,
   toolbarsToIgnore: PropTypes.array,
