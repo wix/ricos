@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ToolbarButton from './ToolbarButton';
 import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
-import { mergeStyles } from 'wix-rich-content-common';
+import { Helpers, mergeStyles, Version } from 'wix-rich-content-common';
 
 type InlineToolbarButtonProps = {
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -20,6 +20,7 @@ type InlineToolbarButtonProps = {
   disabled?: boolean;
   buttonContent?: string;
   showArrowIcon?: boolean;
+  helpers?: Helpers;
 };
 
 class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
@@ -69,6 +70,15 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
   }
 
   preventDefault = event => event.preventDefault();
+
+  onClick: InlineToolbarButtonProps['onClick'] = e => {
+    const { onClick, helpers, dataHook } = this.props;
+    helpers?.onToolbarButtonClick?.({
+      buttonName: dataHook || '',
+      version: Version.currentVersion,
+    });
+    onClick?.(e);
+  };
 
   render() {
     const {
