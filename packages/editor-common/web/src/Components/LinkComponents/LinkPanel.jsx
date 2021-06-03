@@ -14,7 +14,7 @@ class LinkPanel extends Component {
   static defaultProps = {
     showNewTabCheckbox: true,
     showNoFollowCheckbox: true,
-    showSponsoredCheckbox: true,
+    showSponsoredCheckbox: false,
     isMobile: false,
   };
 
