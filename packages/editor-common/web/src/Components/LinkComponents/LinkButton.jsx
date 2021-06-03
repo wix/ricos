@@ -11,6 +11,7 @@ LinkButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
   theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object,
   isMobile: PropTypes.bool,
   tooltipText: PropTypes.string,
   tabIndex: PropTypes.number,
