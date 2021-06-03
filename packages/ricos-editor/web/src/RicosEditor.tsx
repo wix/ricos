@@ -1,5 +1,10 @@
 import React, { Component, Fragment, ElementType, FunctionComponent, forwardRef } from 'react';
-import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
+import {
+  RicosEngine,
+  shouldRenderChild,
+  localeStrategy,
+  getBiCallback as getCallback,
+} from 'ricos-common';
 import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
@@ -29,6 +34,7 @@ interface State {
   localeData: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
   editorState?: EditorState;
+  initialContentChanged: boolean;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -38,12 +44,23 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   isBusy = false;
 
+  getBiCallback: typeof getCallback;
+
   currentEditorRef!: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(props.onChange, props.content);
-    this.state = { localeData: { locale: props.locale }, remountKey: false };
+    this.dataInstance = createDataConverter(
+      props.onChange,
+      props.content,
+      this.onInitialContentChanged
+    );
+    this.getBiCallback = getCallback.bind(this);
+    this.state = {
+      localeData: { locale: props.locale },
+      remountKey: false,
+      initialContentChanged: true,
+    };
   }
 
   static defaultProps = { locale: 'en' };
@@ -104,11 +121,23 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       console.debug('new content provided as editorState'); // eslint-disable-line
       const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
       this.setState({ editorState }, () => {
-        this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
+        this.dataInstance = createDataConverter(
+          this.props.onChange,
+          this.props.injectedContent,
+          this.onInitialContentChanged
+        );
         this.dataInstance.refresh(editorState);
       });
     }
   }
+
+  onInitialContentChanged = () => {
+    const { initialContentChanged } = this.state;
+    if (initialContentChanged) {
+      this.getBiCallback('onContentEdited')?.({ version: Version.currentVersion });
+      this.setState({ initialContentChanged: false });
+    }
+  };
 
   onChange = (childOnChange?: RichContentEditorProps['onChange']) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
