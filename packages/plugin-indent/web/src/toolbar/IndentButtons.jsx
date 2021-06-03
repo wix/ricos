@@ -7,6 +7,7 @@ import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 function indentButton(props) {
   const {
     theme,
+    helpers,
     isMobile,
     t,
     tabIndex,
@@ -26,6 +27,7 @@ function indentButton(props) {
           setEditorState(newState);
         }
       }}
+      helpers={helpers}
       theme={theme}
       isMobile={isMobile}
       tooltipText={t(tooltipKey)}
