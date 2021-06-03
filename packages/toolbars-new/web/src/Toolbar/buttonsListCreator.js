@@ -378,11 +378,14 @@ const handleButtonOnClick = (buttonsList, index, editorCommands) => {
     }
   } else if (buttonsFullData[buttonName].action === 'LINK') {
     buttonsList[index].onClick = () => {
+      // eslint-disable-next-line no-console
       console.log('hasLinkInSelection = ', editorCommands.hasLinkInSelection());
+      // eslint-disable-next-line no-console
       console.log('getLinkDataInSelection = ', editorCommands.getLinkDataInSelection());
       // console.log('getLinkData = ', getLinkData(editorCommands));
     };
   } else {
+    // eslint-disable-next-line no-console
     buttonsList[index].onClick = () => console.log('click');
   }
 };
