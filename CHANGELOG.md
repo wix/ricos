@@ -19,6 +19,16 @@
 ### :rocket: New Feature
 - `collapsible-list`
   - [#2565](https://github.com/wix/ricos/pull/2565) Collapsible List Plugin
+- `link`
+  - [#2107](https://github.com/wix/ricos/pull/2107) Link SEO, added `sponsored` checkbox
+
+### :nail_care: Polish
+- `link`
+  - [#2107](https://github.com/wix/ricos/pull/2107) Link components
+
+### :book: Documentation
+- `link`
+  - [#2107](https://github.com/wix/ricos/pull/2107) `linkPanelSettings` & `linkSettings` API updated
 
 </details>
 <hr/>

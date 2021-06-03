@@ -3765,7 +3765,7 @@ exports[`plugins > convert link to preview > should embed link that supports emb
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -4468,7 +4468,7 @@ exports[`plugins > convert link to preview > with default config > should create
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.wix.com"
           },
@@ -4527,7 +4527,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -4889,7 +4889,7 @@ exports[`plugins > social embed > render twitter upload modals #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -4947,7 +4947,7 @@ exports[`plugins > social embed > render instagram upload modals #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -5198,6 +5198,7 @@ exports[`plugins > spoiler > check text spoilers in editor and reveal it in view
   "entityMap": {
     "0": {
       "data": {
+        "rel": "",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",

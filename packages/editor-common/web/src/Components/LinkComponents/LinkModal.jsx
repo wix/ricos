@@ -6,30 +6,33 @@ import BasicLinkPanel from './BasicLinkPanel';
 import MultiSelectLinkPanel from './MultiSelectLinkPanel';
 import { isEmpty } from 'lodash';
 
-class LinkPanelContainer extends PureComponent {
+class LinkModal extends PureComponent {
   constructor(props) {
     super(props);
     const {
       url,
       anchor,
-      targetBlank,
-      nofollow,
+      target,
+      rel,
       editorState,
       linkTypes,
-      unchangedUrl,
-      originalLinkPanel,
+      hideUrlInput,
+      anchorableBlocksData,
     } = this.props;
     this.renderBasicLinkPanel =
       !linkTypes ||
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
-      unchangedUrl ||
-      originalLinkPanel;
+      hideUrlInput;
     this.anchorableBlocksData = !this.renderBasicLinkPanel
-      ? getAnchorableBlocks(editorState)
+      ? anchorableBlocksData || getAnchorableBlocks(editorState)
       : undefined;
     this.state = {
-      linkPanelValues: { url, targetBlank, nofollow },
+      linkPanelValues: {
+        url,
+        target,
+        rel,
+      },
       anchorPanelValues: this.renderBasicLinkPanel
         ? undefined
         : {
@@ -54,7 +57,7 @@ class LinkPanelContainer extends PureComponent {
       switch (radioGroupValue) {
         case RADIO_GROUP_VALUES.EXTERNAL_LINK: {
           const { linkPanelValues } = this.state;
-          return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.unchangedUrl;
+          return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.hideUrlInput;
         }
         case RADIO_GROUP_VALUES.ANCHOR: {
           const { anchorPanelValues } = this.state;
@@ -67,7 +70,7 @@ class LinkPanelContainer extends PureComponent {
       }
     } else {
       const { linkPanelValues } = this.state;
-      return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.unchangedUrl;
+      return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.hideUrlInput;
     }
   };
 
@@ -103,7 +106,7 @@ class LinkPanelContainer extends PureComponent {
 
   onDoneLink = () => {
     const { linkPanelValues } = this.state;
-    if ((linkPanelValues.isValid && linkPanelValues.url) || this.props.unchangedUrl) {
+    if ((linkPanelValues.isValid && linkPanelValues.url) || this.props.hideUrlInput) {
       this.props.onDone(linkPanelValues);
     } else if (linkPanelValues.url === '') {
       this.onDelete();
@@ -121,36 +124,28 @@ class LinkPanelContainer extends PureComponent {
   };
 
   onChangeLinkPanel = linkPanelValues => {
-    this.setState(linkPanelValues);
+    this.setState({ linkPanelValues });
   };
 
   onChangeAnchorPanel = anchorPanelValues => {
-    this.setState(anchorPanelValues);
+    this.setState({ anchorPanelValues });
   };
 
   render() {
     const { radioGroupValue, linkPanelValues, anchorPanelValues } = this.state;
+    const ariaProps = { 'aria-labelledby': 'mob_link_modal_hdr' };
     const {
       theme,
-      anchorTarget,
-      relValue,
       isMobile,
       t,
-      ariaProps,
       uiSettings,
       isActive,
-      tabIndex,
-      linkPanelWithTitle,
-      unchangedUrl,
+      hideUrlInput,
       linkTypes,
+      anchorTarget,
     } = this.props;
-
     const { linkPanel } = uiSettings || {};
-    const { blankTargetToggleVisibilityFn, nofollowRelToggleVisibilityFn } = linkPanel || {};
-    const showTargetBlankCheckbox =
-      blankTargetToggleVisibilityFn && blankTargetToggleVisibilityFn(anchorTarget);
-    const showRelValueCheckbox =
-      nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
+    const { showNewTabCheckbox, showNoFollowCheckbox, showSponsoredCheckbox } = linkPanel || {};
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
     const sharedPanelsProps = {
       theme,
@@ -158,8 +153,9 @@ class LinkPanelContainer extends PureComponent {
       onEscape: this.onCancel,
       t,
       ariaProps: linkPanelAriaProps,
-      unchangedUrl,
+      hideUrlInput,
       ...uiSettings?.linkPanel,
+      anchorTarget,
     };
     const buttonsProps = {
       onDone: this.onDone,
@@ -168,17 +164,17 @@ class LinkPanelContainer extends PureComponent {
       isActive,
       theme,
       t,
-      tabIndex,
       isDoneButtonEnable: this.isDoneButtonEnable(),
-      unchangedUrl,
+      hideUrlInput,
       isMobile,
     };
     const propsToPass = {
       theme,
       t,
       ariaProps,
-      showTargetBlankCheckbox,
-      showRelValueCheckbox,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+      showSponsoredCheckbox,
       sharedPanelsProps,
       buttonsProps,
       radioGroupValue,
@@ -189,7 +185,6 @@ class LinkPanelContainer extends PureComponent {
       anchorableBlocksData: this.anchorableBlocksData,
       anchorPanelValues,
       isMobile,
-      linkPanelWithTitle,
       blockPreview: linkTypes?.anchor?.blockPreview,
     };
     return this.renderBasicLinkPanel ? (
@@ -200,30 +195,24 @@ class LinkPanelContainer extends PureComponent {
   }
 }
 
-LinkPanelContainer.propTypes = {
-  editorState: PropTypes.object.isRequired,
+LinkModal.propTypes = {
+  editorState: PropTypes.object.isRequired, // will be removed when all usages of this class will pass anchorableBlocksData
+  anchorableBlocksData: PropTypes.object,
+  url: PropTypes.string,
+  anchor: PropTypes.string,
+  target: PropTypes.bool,
+  rel: PropTypes.string,
+  theme: PropTypes.object.isRequired,
+  isActive: PropTypes.bool,
+  isMobile: PropTypes.bool,
+  anchorTarget: PropTypes.string,
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  hidePanel: PropTypes.func.isRequired,
-  url: PropTypes.string,
-  anchor: PropTypes.string,
-  targetBlank: PropTypes.bool,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  nofollow: PropTypes.bool,
-  isActive: PropTypes.bool,
-  isMobile: PropTypes.bool,
-  onOverrideContent: PropTypes.func,
-  theme: PropTypes.object.isRequired,
-  t: PropTypes.func,
-  ariaProps: PropTypes.object,
-  tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
+  t: PropTypes.func,
   linkTypes: PropTypes.object,
-  unchangedUrl: PropTypes.bool,
-  originalLinkPanel: PropTypes.bool,
-  linkPanelWithTitle: PropTypes.bool,
+  hideUrlInput: PropTypes.bool,
 };
 
-export default LinkPanelContainer;
+export default LinkModal;
