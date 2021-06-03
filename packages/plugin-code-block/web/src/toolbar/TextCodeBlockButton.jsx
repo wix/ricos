@@ -11,7 +11,16 @@ export default class TextCodeBlockButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, setEditorState, getEditorState, config } = this.props;
+    const {
+      theme,
+      helpers,
+      isMobile,
+      t,
+      tabIndex,
+      setEditorState,
+      getEditorState,
+      config,
+    } = this.props;
     const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon || CodeBlockIcon;
     return (
       <InlineToolbarButton
@@ -19,6 +28,7 @@ export default class TextCodeBlockButton extends Component {
           setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, getEditorState()))
         }
         isActive={this.isActive}
+        helpers={helpers}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('TextCodeBlockButton_Tooltip')}
