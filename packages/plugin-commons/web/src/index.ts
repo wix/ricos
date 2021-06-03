@@ -34,7 +34,6 @@ export { default as createBaseMediaPlugin } from './Base/createBaseMediaPlugin';
 // Components
 export { default as FileInput } from './Components/FileInput';
 export { default as Image } from './Components/Image';
-export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as Panel } from './Components/Panel';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
 export { default as RadioGroupVertical } from './Components/RadioGroupVertical';

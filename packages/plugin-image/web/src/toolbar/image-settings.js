@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
-import { LabeledToggle } from 'wix-rich-content-ui-components';
+import { LabeledToggle, InputWithLabel } from 'wix-rich-content-ui-components';
 import {
   Image,
-  InputWithLabel,
   SettingsPanelFooter,
   SettingsSection,
   Loader,
