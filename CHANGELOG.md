@@ -17,6 +17,11 @@
   </summary>
 
 
+### :bug: Bug Fix
+- `common`
+  - [#2592](https://github.com/wix-incubator/rich-content/pull/2592) disable justification on SSR
+
+
 
 </details>
 <hr/>
