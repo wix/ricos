@@ -6,7 +6,6 @@ import {
 } from '../Utils/mediaPluginsDataBuilders';
 import { fileExtensionToType, FileTypes } from '../Utils/fileExtensionToType';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
 import Loader from '../Components/Loader';
 import { MediaItemErrorMsg } from 'wix-rich-content-ui-components';
 
