@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   dataBuilder,
   tempDataBuilder,
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import Loader from '../Components/Loader';
 import { MediaItemErrorMsg } from 'wix-rich-content-ui-components';
 
-class MediaPlugin extends Component {
+class MediaPlugin extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isLoading: false, tempData: null };
@@ -125,7 +125,7 @@ const createBaseMediaPlugin = ({
   isPluginViewer = true,
   isOverlayLoader = true,
 }) => {
-  return class MediaUploadWrapper extends Component {
+  return class MediaUploadWrapper extends PureComponent {
     static propTypes = {
       componentData: PropTypes.object.isRequired,
       commonPubsub: PropTypes.object,

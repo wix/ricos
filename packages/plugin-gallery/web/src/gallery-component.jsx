@@ -1,10 +1,8 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Loader } from 'wix-rich-content-plugin-commons';
-import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS } from './defaults';
-import { GALLERY_TYPE } from './types';
 import styles from '../statics/styles/gallery-component.scss';
 
 const renderMobileNativeLoader = ({ url }) =>
@@ -34,10 +32,6 @@ function GalleryComponent(props) {
 
 GalleryComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  componentState: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
-  commonPubsub: PropTypes.object,
-  blockProps: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
@@ -48,8 +42,6 @@ GalleryComponent.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
-  handleUploadStart: PropTypes.func.isRequired,
-  handleUploadFinished: PropTypes.func.isRequired,
 };
 
 export { GalleryComponent as Component, DEFAULTS };
