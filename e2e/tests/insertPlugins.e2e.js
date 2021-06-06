@@ -25,6 +25,7 @@ const modalHandler = (INPUT, ADD_BUTTON, LINK) => {
 
 const additionalCommands = {
   VIDEO: () => {
+    cy.wait(500);
     modalHandler(VIDEO_PLUGIN.INPUT, VIDEO_PLUGIN.ADD, LINKS.YOUTUBE);
   },
   SOUND_CLOUD: () => {
