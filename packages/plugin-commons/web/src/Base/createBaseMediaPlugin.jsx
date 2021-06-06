@@ -4,10 +4,7 @@ import {
   tempDataBuilder,
   uploadFunctionGetter,
 } from '../Utils/mediaPluginsDataBuilders';
-import {
-  fileExtensionToType,
-  FileTypes,
-} from 'wix-rich-content-plugin-file-upload/libs/fileExtensionToType';
+import { fileExtensionToType, FileTypes } from '../Utils/fileExtensionToType';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import Loader from '../Components/Loader';
