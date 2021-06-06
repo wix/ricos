@@ -97,14 +97,16 @@ class MediaPlugin extends PureComponent {
     return (
       <>
         <Component {...this.props} isLoading={isLoading} tempData={tempData} />
-        <Suspense fallback={<div />}>
-          <MediaPluginOverlay
-            error={error}
-            t={t}
-            isOverlayLoader={isOverlayLoader}
-            isLoading={isLoading || componentData?.loading}
-          />
-        </Suspense>
+        {isOverlayLoader && (
+          <Suspense fallback={<div />}>
+            <MediaPluginOverlay
+              error={error}
+              t={t}
+              isOverlayLoader={isOverlayLoader}
+              isLoading={isLoading || componentData?.loading}
+            />
+          </Suspense>
+        )}
       </>
     );
   }
