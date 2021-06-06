@@ -18,7 +18,7 @@
 
 ### :bug: Bug Fix
 - `ricos-content`
-  - [#2594](https://github.com/wix-incubator/rich-content/pull/2594) listItem style removal
+  - [#2594](https://github.com/wix-incubator/rich-content/pull/2594) list style removal
 
 </details>
 <hr/>
