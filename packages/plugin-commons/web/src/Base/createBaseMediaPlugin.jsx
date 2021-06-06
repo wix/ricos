@@ -1,4 +1,4 @@
-import React, { PureComponent, Suspense } from 'react';
+import React, { PureComponent } from 'react';
 import {
   dataBuilder,
   tempDataBuilder,
@@ -6,9 +6,9 @@ import {
 } from '../Utils/mediaPluginsDataBuilders';
 import { fileExtensionToType, FileTypes } from '../Utils/fileExtensionToType';
 import PropTypes from 'prop-types';
+import Loader from '../Components/Loader';
+import { MediaItemErrorMsg } from 'wix-rich-content-ui-components';
 import { GALLERY_TYPE } from 'wix-rich-content-common';
-
-const MediaPluginOverlay = React.lazy(() => import('../Components/MediaPluginOverlay'));
 
 class MediaPlugin extends PureComponent {
   constructor(props) {
@@ -90,6 +90,10 @@ class MediaPlugin extends PureComponent {
     }
   };
 
+  renderLoader = () => {
+    return <Loader type={'medium'} />;
+  };
+
   render() {
     const { componentData, Component, t, isOverlayLoader } = this.props;
     const { isLoading, tempData } = this.state;
@@ -97,16 +101,8 @@ class MediaPlugin extends PureComponent {
     return (
       <>
         <Component {...this.props} isLoading={isLoading} tempData={tempData} />
-        {isOverlayLoader && (
-          <Suspense fallback={<div />}>
-            <MediaPluginOverlay
-              error={error}
-              t={t}
-              isOverlayLoader={isOverlayLoader}
-              isLoading={isLoading || componentData?.loading}
-            />
-          </Suspense>
-        )}
+        {isOverlayLoader && (this.state.isLoading || componentData?.loading) && this.renderLoader()}
+        {isOverlayLoader && error && <MediaItemErrorMsg error={error} t={t} />}
       </>
     );
   }

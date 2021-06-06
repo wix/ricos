@@ -6,7 +6,7 @@ import otherIcon from './otherIcon';
 import imageIcon from './imageIcon';
 import folderIcon from './folderIcon';
 import docIcon from './docIcon';
-import { fileExtensionToType, FileTypes } from 'wix-rich-content-plugin-commons';
+import { fileExtensionToType, FileTypes } from '../../lib/fileExtensionToType';
 
 const iconMap = {
   [FileTypes.IMAGE]: imageIcon,
