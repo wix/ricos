@@ -48,7 +48,7 @@ interface ExampleEditorProps {
 }
 
 interface State {
-  activeEditor?: any;
+  activeEditor?: RicosEditorType | RichContentEditor;
 }
 
 export default class Editor extends PureComponent<ExampleEditorProps, State> {
@@ -163,10 +163,10 @@ export default class Editor extends PureComponent<ExampleEditorProps, State> {
       const { isMobile, theme, locale, staticToolbar } = this.props;
       const buttonsAsArray = Object.values(buttons);
       const editorCommands = activeEditor.getEditorCommands();
-      const selection = editorCommands.getSelection();
+      const selection = (editorCommands as any)._getSelection();
       const showFormattingToolbar = !selection.isCollapsed() && selection.getHasFocus();
-      const t = this.editor.getT();
-      const removeToolbarFocus = () => this.editor.removeToolbarFocus();
+      const t = activeEditor.getT();
+      const removeToolbarFocus = () => activeEditor.removeToolbarFocus();
       const formattingToolbarButtonsKeys = this.config.formattingToolbarButtons;
       const ToolbarToRender = (
         <Toolbar

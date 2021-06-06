@@ -659,9 +659,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const formattingToolbar = document.querySelectorAll(
       `[data-hook=inlineToolbar]`
     )[0] as HTMLElement;
-    const newFormattingToolbar = document.querySelectorAll(
-      `[data-id="floating-toolbar"]`
-    )[0] as HTMLElement;
+    const newFormattingToolbar = document.querySelectorAll(`[data-id="toolbar"]`)[0] as HTMLElement;
     if (pluginToolbar && pluginToolbar.dataset.hook !== 'linkPluginToolbar') {
       const editorState = this.getEditorState();
       const focusedAtomicPluginKey = editorState.getSelection().getFocusKey();
@@ -887,7 +885,19 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const mode = shouldEnable ? 'render' : 'edit';
     this.editor?.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
-    const toolbarsToIgnore: ToolbarsToIgnore = shouldEnable ? ['SideToolbar'] : [];
+    const { toolbarsToIgnore: currentToolbarsToIgnore } = this.state;
+    const toolbarsToIgnore: ToolbarsToIgnore = currentToolbarsToIgnore;
+    if (shouldEnable) {
+      const index = toolbarsToIgnore.indexOf('SideToolbar');
+      if (index === -1) {
+        toolbarsToIgnore.push('SideToolbar');
+      }
+    } else {
+      const index = toolbarsToIgnore.indexOf('SideToolbar');
+      if (index !== -1) {
+        toolbarsToIgnore.splice(index, 1);
+      }
+    }
     this.setState({ toolbarsToIgnore });
   };
 

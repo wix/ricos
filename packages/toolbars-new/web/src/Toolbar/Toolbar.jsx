@@ -216,7 +216,11 @@ class Toolbar extends Component {
     const buttonsSeparatedByGaps = this.separateByGaps(blabla);
     return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
       return (
-        <div key={index} className={classNames(styles.toolbar, { [styles.vertical]: vertical })}>
+        <div
+          data-id="toolbar"
+          key={index}
+          className={classNames(styles.toolbar, { [styles.vertical]: vertical })}
+        >
           {buttonsWithoutGaps.map((buttonProps, i) => {
             const Button = this.buttonMap[buttonProps.type];
             return <Button {...buttonProps} key={i} />;
