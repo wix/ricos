@@ -19,9 +19,8 @@
 ### :house: Internal
 - `gallery`
   - [#2590](https://github.com/wix/ricos/pull/2590) bump `ProGallery` to v3.1.14
-
-
-
+- `editor`
+  - [#2593](https://github.com/wix/ricos/pull/2593) fix cut behavior
 
 </details>
 <hr/>
