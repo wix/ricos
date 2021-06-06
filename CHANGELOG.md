@@ -20,15 +20,22 @@
 </details>
 <hr/>
 
+## 8.43.0 (Jun 6, 2021)
+### :house: Internal
+- `gallery`
+  - [#2590](https://github.com/wix/ricos/pull/2590) bump `ProGallery` to v3.1.14
+## 8.42.2 (Jun 6, 2021)
+### :bug: Bug Fix
+- `common`
+  - [#2592](https://github.com/wix-incubator/rich-content/pull/2592) disable justification on SSR
+
 ## 8.42.1 (Jun 3, 2021)
 ### :nail_care: Polish
 - `link`
   - [#2588](https://github.com/wix-incubator/rich-content/pull/2588) hide sponsored checkbox in link panel by default
-
 ### :rocket: New Feature
 - `ricos-editor`
   - [#2584](https://github.com/wix/ricos/pull/2584) `onContentEdited` callback
-
 ### :house: Internal
 - `ui-components`
   - [#2575](https://github.com/wix-incubator/rich-content/pull/2575) moved InputWithLabel component into ui-components folder
@@ -39,11 +46,9 @@
   - [#2565](https://github.com/wix/ricos/pull/2565) Collapsible List Plugin
 - `link`
   - [#2107](https://github.com/wix/ricos/pull/2107) Link SEO, added `sponsored` checkbox
-
 ### :nail_care: Polish
 - `link`
   - [#2107](https://github.com/wix/ricos/pull/2107) Link components
-
 ### :book: Documentation
 - `link`
   - [#2107](https://github.com/wix/ricos/pull/2107) `linkPanelSettings` & `linkSettings` API update
@@ -53,9 +58,7 @@
 - `ricos-content`
   - [#2573](https://github.com/wix/ricos/pull/2573) content extractor API
   - [#2567](https://github.com/wix/ricos/pull/2567) content modifier API
-
 ### :house: Internal
-
 - `ui-components`
   - [#2579](https://github.com/wix-incubator/rich-content/pull/2579) made ui-components public 
 
@@ -80,14 +83,9 @@
 ### :nail_care: Polish
 - `general`
   - [#2487](https://github.com/wix-incubator/rich-content/pull/2487) keyboard shortcuts
-
 ### :house: Internal
-
 - `ui-components`
   - [#2564](https://github.com/wix-incubator/rich-content/pull/2564) moved MediaItemErrMsg component into ui-components folder
-
-</details>
-<hr/>
 
 ## 8.39.0 (May 27, 2021)
 ### :rocket: New Feature
