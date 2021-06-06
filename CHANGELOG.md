@@ -16,16 +16,14 @@
     Click to see more.
   </summary>
 
-### :house: Internal
-- `gallery`
-  - [#2590](https://github.com/wix/ricos/pull/2590) bump `ProGallery` to v3.1.14
-
-
-
 
 </details>
 <hr/>
 
+## 8.43.0 (Jun 6, 2021)
+### :house: Internal
+- `gallery`
+  - [#2590](https://github.com/wix/ricos/pull/2590) bump `ProGallery` to v3.1.14
 ## 8.42.2 (Jun 6, 2021)
 ### :bug: Bug Fix
 - `common`
