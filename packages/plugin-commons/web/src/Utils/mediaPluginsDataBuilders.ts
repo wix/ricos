@@ -78,7 +78,7 @@ export const dataBuilder = {
       const { pathname, thumbnail, url } = data;
       src = pathname ? { pathname, thumbnail } : url;
     }
-    return { ...componentData, src, error, tempData: !!error };
+    return { ...componentData, src, error, tempData: undefined };
   },
   [FILE_UPLOAD_TYPE]: ({ data, error }, componentData) => {
     return { ...componentData, ...data, error, tempData: undefined };
