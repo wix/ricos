@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `gallery`
+  - [#-](https://github.com/wix/ricos/pull/-) bump `ProGallery` to v3.1.14
 
 </details>
 <hr/>
