@@ -21,8 +21,15 @@
   - [#2590](https://github.com/wix/ricos/pull/2590) bump `ProGallery` to v3.1.14
 
 
+
+
 </details>
 <hr/>
+
+## 8.42.2 (Jun 6, 2021)
+### :bug: Bug Fix
+- `common`
+  - [#2592](https://github.com/wix-incubator/rich-content/pull/2592) disable justification on SSR
 
 ## 8.42.1 (Jun 3, 2021)
 ### :nail_care: Polish
