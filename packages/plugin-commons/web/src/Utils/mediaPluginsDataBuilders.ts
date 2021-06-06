@@ -4,11 +4,16 @@ import {
   VIDEO_TYPE,
   FILE_UPLOAD_TYPE,
   VideoComponentData,
+  ImageComponentData,
 } from 'wix-rich-content-common';
 import { fileExtensionToType, FileTypes } from '../Utils/fileExtensionToType';
 
 const galleryItemBuilder = {
-  [FileTypes.IMAGE]: (img, itemId: string, preloadImage?: boolean) => {
+  [FileTypes.IMAGE]: (
+    img: ImageComponentData & HTMLImageElement,
+    itemId: string,
+    preloadImage?: boolean | undefined
+  ) => {
     return {
       metadata: {
         type: 'image',
@@ -20,13 +25,20 @@ const galleryItemBuilder = {
       tempData: preloadImage,
     };
   },
-  [FileTypes.VIDEO]: (video: VideoComponentData, itemId: string, preloadImage?: boolean) => {
+  [FileTypes.VIDEO]: (
+    video: VideoComponentData,
+    itemId: string,
+    preloadImage?: boolean | undefined
+  ) => {
+    const {
+      thumbnail: { pathname: poster, width, height },
+    } = video;
     return {
       metadata: {
         type: 'video',
-        height: video.thumbnail.height,
-        width: video.thumbnail.width,
-        poster: video.thumbnail.pathname,
+        height: video.height || height,
+        width: video.width || width,
+        poster,
       },
       itemId,
       url: video.pathname,
