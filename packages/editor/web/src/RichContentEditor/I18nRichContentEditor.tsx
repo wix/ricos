@@ -8,7 +8,7 @@ const WrappedEditor = withI18n<RichContentEditor, Partial<RichContentEditorProps
   englishResources
 );
 
-type excludeFromEditorCommandsAPI = '_getSelection';
+type excludeFromEditorCommandsAPI = '_setSelection';
 
 export default class I18nRichContentEditor extends Component<Partial<RichContentEditorProps>> {
   editor!: RichContentEditor;

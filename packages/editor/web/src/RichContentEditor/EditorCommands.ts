@@ -113,6 +113,11 @@ type TextBlockType =
   | typeof HEADER_BLOCK.SIX;
 
 type Selection = {
+  getIsFocused?: () => boolean;
+  getIsCollapsed?: () => boolean;
+};
+
+type draftSelection = {
   anchorKey?: string;
   anchorOffset?: number;
   focusKey?: string;
@@ -200,7 +205,7 @@ export const createEditorCommands = (
     setEditorState(RichUtils.toggleBlockType(getEditorState(), type));
   };
 
-  const setSelection = (blockKey: string, selection?: Selection): void =>
+  const _setSelection = (blockKey: string, selection: draftSelection): void =>
     setEditorState(
       EditorState.forceSelection(
         getEditorState(),
@@ -212,9 +217,10 @@ export const createEditorCommands = (
     pluginsList.filter(pluginName => pluginName && !PluginsToExclude.includes[pluginName]);
 
   const editorState = {
-    // TODO: check if needed, plus type error using SelectionState, not sure why
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    _getSelection: (): any => getEditorState().getSelection(),
+    getSelection: (): Selection => {
+      const { isCollapsed, getHasFocus } = getEditorState().getSelection();
+      return { getIsCollapsed: isCollapsed, getIsFocused: getHasFocus };
+    },
     getAnchorableBlocks: () => getAnchorableBlocks(getEditorState()),
     getTextAlignment: () => getTextAlignment(getEditorState()),
     hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
@@ -243,7 +249,7 @@ export const createEditorCommands = (
     setBlockType,
     setTextAlignment: (textAlignment: TextAlignment): void =>
       setEditorState(setTextAlignment(getEditorState(), textAlignment)),
-    setSelection,
+    _setSelection,
   };
 
   const pluginsCommands = {
