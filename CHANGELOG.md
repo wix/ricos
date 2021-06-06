@@ -20,8 +20,10 @@
 - `gallery`
   - [#2590](https://github.com/wix/ricos/pull/2590) bump `ProGallery` to v3.1.14
 
+### :house: Internal
 
-
+- `ui-components`
+  - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
 
 </details>
 <hr/>
@@ -49,13 +51,6 @@
 - `link`
   - [#2107](https://github.com/wix/ricos/pull/2107) Link SEO, added `sponsored` checkbox
 
-### :house: Internal
-
-- `ui-components`
-  - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
-
-</details>
-<hr/>
 ### :nail_care: Polish
 - `link`
   - [#2107](https://github.com/wix/ricos/pull/2107) Link components
