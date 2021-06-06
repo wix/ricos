@@ -21,6 +21,25 @@ class VerticalEmbedComponent extends PureComponent {
       this.props.componentData.type
     );
 
+  htmlDirFixer = html => {
+    const dirStyle = 'style="direction:';
+    const isRtlSite = this.props.locale === 'he' || this.props.locale === 'ar';
+    let fixedHTML = html;
+    if (html.includes(dirStyle) && isRtlSite) {
+      const dirStart = html.indexOf(dirStyle) + dirStyle.length;
+      const isLtrDir = html[dirStart] + html[dirStart + 1] + html[dirStart + 2] === 'ltr';
+      if (isLtrDir) {
+        fixedHTML = html
+          .split('')
+          .map((c, i) =>
+            i === dirStart ? html[dirStart + 2] : i === dirStart + 2 ? html[dirStart] : c
+          )
+          .join('');
+      }
+    }
+    return fixedHTML;
+  };
+
   render() {
     const {
       componentData,
@@ -30,6 +49,7 @@ class VerticalEmbedComponent extends PureComponent {
 
     const { selectedProduct } = componentData;
     const { html } = selectedProduct;
+    const fixedHTML = this.htmlDirFixer(html);
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -37,10 +57,9 @@ class VerticalEmbedComponent extends PureComponent {
         className={classnames(className, styles.card, { [styles.slimLayout]: slimLayout })}
         data-hook="vertical-embed"
         onClick={this.onClick}
-        style={{ direction: 'unset' }}
       >
         {/* eslint-disable-next-line react/no-danger*/}
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div dangerouslySetInnerHTML={{ __html: fixedHTML }} />
       </div>
     );
   }
@@ -51,6 +70,7 @@ VerticalEmbedComponent.propTypes = {
   className: PropTypes.string,
   settings: PropTypes.object,
   helpers: PropTypes.object,
+  locale: PropTypes.string,
 };
 
 export default VerticalEmbedComponent;
