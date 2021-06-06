@@ -50,11 +50,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props: RicosEditorProps) {
     super(props);
-    this.dataInstance = createDataConverter(
-      props.onChange,
-      props.content,
-      this.onInitialContentChanged
-    );
+    this.dataInstance = createDataConverter(props.onChange, props.content);
     this.getBiCallback = getCallback.bind(this);
     this.state = {
       localeData: { locale: props.locale },
@@ -121,11 +117,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       console.debug('new content provided as editorState'); // eslint-disable-line
       const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
       this.setState({ editorState }, () => {
-        this.dataInstance = createDataConverter(
-          this.props.onChange,
-          this.props.injectedContent,
-          this.onInitialContentChanged
-        );
+        this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
         this.dataInstance.refresh(editorState);
       });
     }
@@ -141,6 +133,9 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   onChange = (childOnChange?: RichContentEditorProps['onChange']) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
+    if (this.getContentTraits().isContentChanged) {
+      this.onInitialContentChanged();
+    }
     childOnChange?.(editorState);
     this.onBusyChange(editorState.getCurrentContent());
   };
