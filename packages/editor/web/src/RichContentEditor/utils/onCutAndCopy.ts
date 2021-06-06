@@ -5,6 +5,8 @@ import { EditorState, ContentState } from 'wix-rich-content-editor-common';
 import { convertToRaw } from '../../../lib/editorStateConversion';
 import getContentStateFragment from 'draft-js/lib/getContentStateFragment';
 import getDraftEditorSelection from 'draft-js/lib/getDraftEditorSelection';
+import editOnCopy from 'draft-js/lib/editOnCopy';
+import editOnCut from 'draft-js/lib/editOnCut';
 
 // Custom attribute to store Draft.js content in the HTML clipboard.
 const FRAGMENT_ATTR = 'data-draftjs-conductor-fragment';
@@ -48,7 +50,7 @@ const getSelectedContent = (editorState: EditorState, editorRoot: HTMLElement) =
   return isEmpty ? null : fragment;
 };
 
-export const onCutAndCopy = (ref, e) => {
+const onCutAndCopy = (ref, e) => {
   const selection = window.getSelection();
 
   // Completely skip event handling if clipboardData is not supported (IE11 is out).
@@ -86,4 +88,14 @@ export const onCutAndCopy = (ref, e) => {
 
     e.preventDefault();
   }
+};
+
+export const onCopy = (ref, e) => {
+  onCutAndCopy(ref, e);
+  editOnCopy(ref, e);
+};
+
+export const onCut = (ref, e) => {
+  onCutAndCopy(ref, e);
+  editOnCut(ref, e);
 };
