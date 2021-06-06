@@ -18,7 +18,7 @@
 
 ### :house: Internal
 - `gallery`
-  - [#-](https://github.com/wix/ricos/pull/-) bump `ProGallery` to v3.1.14
+  - [#2590](https://github.com/wix/ricos/pull/2590) bump `ProGallery` to v3.1.14
 
 </details>
 <hr/>
