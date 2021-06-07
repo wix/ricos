@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { debounce, isNumber } from 'lodash';
 import { InfoIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
-import Slider from './Slider';
+import { Slider } from 'wix-rich-content-ui-components';
 import styles from '../../statics/styles/slider-with-input.scss';
 import generalstyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 
