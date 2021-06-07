@@ -7,6 +7,7 @@ import {
   InlineToolbarButton,
   EditorState,
   RichUtils,
+  hasBlockType,
 } from 'wix-rich-content-editor-common';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
@@ -53,9 +54,17 @@ export default class HeadingButton extends Component {
   };
 
   updateHeading = (type, element) => {
-    const { setEditorState, getEditorState } = this.props;
-    const newEditorState = RichUtils.toggleBlockType(getEditorState(), type);
+    const { setEditorState, getEditorState, helpers } = this.props;
+    const editorState = getEditorState();
+    const isAddEvent = !hasBlockType(type, editorState);
+    const newEditorState = RichUtils.toggleBlockType(editorState, type);
+    helpers?.onToolbarButtonClick?.({
+      buttonName: this.dataHookText,
+      value: type,
+    });
+    isAddEvent && helpers?.onPluginAdd?.(type, 'FormattingToolbar');
     setEditorState(EditorState.forceSelection(newEditorState, this.selection));
+    isAddEvent && helpers?.onPluginAddSuccess?.(type, 'FormattingToolbar');
     this.currentEditorState = newEditorState;
     this.setState({ currentHeading: element });
   };
