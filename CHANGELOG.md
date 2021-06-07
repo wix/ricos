@@ -17,11 +17,15 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `editor`
+  - [#2603](https://github.com/wix/ricos/pull/2603) fix insertDecoration (link) from Editor Commands
+
 ### :house: Internal
 
 - `ui-components`
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
-
 
 </details>
 <hr/>
