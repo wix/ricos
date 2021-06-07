@@ -16,6 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :house: Internal
+- `ui-components`
+  - [#2571](https://github.com/wix-incubator/rich-content/pull/2571) moved SettingsSection component into ui-components folder
 
 ### :house: Internal
 
