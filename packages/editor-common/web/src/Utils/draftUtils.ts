@@ -140,7 +140,14 @@ export const insertLinkAtCurrentSelection = (
 ) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
-  if (selection.isCollapsed()) {
+  let editorStateWithLink, editorStateSelection;
+  const linkEntityData = createLinkEntityData(entityData);
+  const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+
+  if (isExistsLink) {
+    editorStateWithLink = updateLink(newEditorState, selection, linkEntityData);
+    editorStateSelection = selection.merge({ anchorOffset: selection.getFocusOffset() });
+  } else if (selection.isCollapsed()) {
     const { url } = entityData;
     const urlToInsertWhenCollapsed = text ? text : url;
     const contentState = Modifier.insertText(
@@ -152,15 +159,10 @@ export const insertLinkAtCurrentSelection = (
       focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
     }) as SelectionState;
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
+  } else {
+    editorStateWithLink = insertLink(newEditorState, selection, linkEntityData);
+    editorStateSelection = editorStateWithLink.getCurrentContent().getSelectionAfter();
   }
-  const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
-  const linkEntityData = createLinkEntityData(entityData);
-  const editorStateWithLink = isExistsLink
-    ? updateLink(newEditorState, selection, linkEntityData)
-    : insertLink(newEditorState, selection, linkEntityData);
-  const editorStateSelection = isExistsLink
-    ? selection.merge({ anchorOffset: selection.getFocusOffset() })
-    : editorStateWithLink.getCurrentContent().getSelectionAfter();
   return EditorState.forceSelection(editorStateWithLink, editorStateSelection as SelectionState);
 };
 
