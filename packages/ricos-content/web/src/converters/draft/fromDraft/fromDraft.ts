@@ -161,7 +161,6 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
         key: genKey(),
         type: FROM_DRAFT_LIST_TYPE[listType],
         nodes: listNodes,
-        style: getNodeStyle(blocks[searchIndex].data),
       },
       nextIndex: searchIndex,
     };
