@@ -81,9 +81,9 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
       this.setState({ blockTypeIndex }, () => {
         const blockType = this.activeBlockType;
         const isAddEvent = blockType !== 'unstyled';
-        isAddEvent && helpers?.onPluginAdd(blockType, 'FormattingToolbar');
+        isAddEvent && helpers?.onPluginAdd?.(blockType, 'FormattingToolbar');
         setEditorState(RichUtils.toggleBlockType(getEditorState(), blockType));
-        isAddEvent && helpers?.onPluginAddSuccess(blockType, 'FormattingToolbar');
+        isAddEvent && helpers?.onPluginAddSuccess?.(blockType, 'FormattingToolbar');
       });
     };
 
