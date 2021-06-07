@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `ui-components`
+  - [##2596](https://github.com/wix-incubator/rich-content/pull/#2596) moved fileInput component into ui-components folder
+  
 </details>
 <hr/>
 
