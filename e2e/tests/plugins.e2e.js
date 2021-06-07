@@ -124,7 +124,7 @@ describe('plugins', () => {
       revealSpoilerOnBlock();
     });
 
-    it.only(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
+    it(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
       cy.loadRicosEditorAndViewer('gallery', usePlugins(plugins.spoilerPreset));
       cy.get('[data-hook="galleryViewer"]:first')
         .parent()
