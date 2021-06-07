@@ -21,6 +21,7 @@ export default class HeadingButton extends Component {
       currentHeading: 'P',
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.dataHookText = 'headingsDropdownButton';
   }
 
   componentWillReceiveProps() {
@@ -103,7 +104,6 @@ export default class HeadingButton extends Component {
       inlinePopups,
     } = this.props;
     const tooltipText = t('FormattingToolbar_TextStyleButton_Tooltip');
-    const dataHookText = 'headingsDropdownButton';
     const { isPanelOpen, panelTop, panelLeft, currentHeading } = this.state;
     const { styles } = this;
     const modalStyle = isMobile
@@ -122,7 +122,7 @@ export default class HeadingButton extends Component {
           theme={theme}
           isMobile={isMobile}
           tooltipText={tooltipText}
-          dataHook={dataHookText}
+          dataHook={this.dataHookText}
           tabIndex={tabIndex}
           buttonContent={buttonContent}
           showArrowIcon
@@ -165,7 +165,7 @@ export default class HeadingButton extends Component {
             theme={theme}
             isMobile={isMobile}
             tooltipText={tooltipText}
-            dataHook={dataHookText}
+            dataHook={this.dataHookText}
             tabIndex={tabIndex}
             buttonContent={buttonContent}
             showArrowIcon
