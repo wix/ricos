@@ -19,12 +19,9 @@ export { default as LabeledToggle } from './Components/LabeledToggle';
 // export { Tab, Tabs } from './Components/Tabs';
 // export { default as TextInput } from './Components/TextInput';
 // export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
-<<<<<<< HEAD
 export { default as Loader } from './Components/Loader';
 // export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
-=======
 // export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
->>>>>>> master
 
 // export { getSelectionStyles } from './Utils/inlineStyleUtils';
