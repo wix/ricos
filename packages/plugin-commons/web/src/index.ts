@@ -33,7 +33,6 @@ export { default as baseToolbarButton } from './Base/baseToolbarButton';
 // Components
 export { default as FileInput } from './Components/FileInput';
 export { default as Image } from './Components/Image';
-export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
 export { default as RadioGroupVertical } from './Components/RadioGroupVertical';
 export { default as SelectionList } from './Components/SelectionList';
 export { default as SettingsPanelFooter } from './Components/SettingsPanelFooter';
