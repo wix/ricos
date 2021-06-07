@@ -73,7 +73,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render image toolbar and settings', function() {
+    it.only('render image toolbar and settings', function() {
       cy.loadRicosEditorAndViewer('images');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
       cy.openSettings();
