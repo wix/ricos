@@ -4,7 +4,6 @@ import {
   Node_Type,
   Decoration_Type,
   Link,
-  Link_Target,
   ImageData,
   Decoration,
   PluginContainerData,
@@ -57,7 +56,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     const convert = converters[nodeType];
     convert(newData);
   }
-  return JSON.parse(JSON.stringify(newData));
+  return JSON.parse(JSON.stringify(newData)); // remove undefined values
 };
 
 export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
@@ -190,11 +189,11 @@ const convertFileData = (data: FileData & FileComponentData) => {
 const convertButtonData = (data: Partial<ButtonData> & { button }) => {
   const { link, text, styles } = data;
   const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles || {};
-  const { url, rel, target } = link || {};
+  const convertedLink = link ? convertLink(link) : {};
   data.button = {
     settings: {
       buttonText: text,
-      ...(url ? { url, rel: !!rel?.nofollow, target: target === Link_Target.BLANK } : {}),
+      ...convertedLink,
     },
     design: {
       borderRadius,

@@ -305,7 +305,7 @@ export default function createAtomicPluginToolbar({
             !this.state.componentData.html && (
               <BlockLinkButton
                 {...baseLinkProps}
-                unchangedUrl
+                hideUrlInput
                 tooltipText={t('LinkPreview_Settings_Tooltip')}
                 icons={button.icons}
               />
