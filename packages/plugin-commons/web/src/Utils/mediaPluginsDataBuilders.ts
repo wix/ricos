@@ -6,17 +6,21 @@ import {
   VideoComponentData,
   ImageComponentData,
 } from 'wix-rich-content-common';
-import { fileExtensionToType, FileTypes } from '../Utils/fileExtensionToType';
+
+export const GALLERY_FILE_TYPES = {
+  IMAGE: 'image',
+  VIDEO: 'video',
+};
 
 const galleryItemBuilder = {
-  [FileTypes.IMAGE]: (
+  [GALLERY_FILE_TYPES.IMAGE]: (
     img: ImageComponentData & HTMLImageElement,
     itemId: string,
     preloadImage?: boolean | undefined
   ) => {
     return {
       metadata: {
-        type: 'image',
+        type: GALLERY_FILE_TYPES.IMAGE,
         height: img.height,
         width: img.width,
       },
@@ -25,7 +29,7 @@ const galleryItemBuilder = {
       tempData: preloadImage,
     };
   },
-  [FileTypes.VIDEO]: (
+  [GALLERY_FILE_TYPES.VIDEO]: (
     video: VideoComponentData,
     itemId: string,
     preloadImage?: boolean | undefined
@@ -35,7 +39,7 @@ const galleryItemBuilder = {
     } = video;
     return {
       metadata: {
-        type: 'video',
+        type: GALLERY_FILE_TYPES.VIDEO,
         height: video.height || height,
         width: video.width || width,
         poster,
@@ -85,8 +89,7 @@ export const dataBuilder = {
   },
   [GALLERY_TYPE]: ({ data, error }, componentData, fileType, itemIndex) => {
     const type =
-      FileTypes[fileType] ||
-      fileExtensionToType(data.file_name?.split('.').pop() || data.pathname?.split('.').pop());
+      fileType || data.type || data.thumbnail ? GALLERY_FILE_TYPES.VIDEO : GALLERY_FILE_TYPES.IMAGE;
     return setItemInGallery(
       { ...galleryItemBuilder[type]?.(data, data.id || Date.now().toString()), error },
       componentData,

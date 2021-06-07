@@ -3,8 +3,8 @@ import {
   dataBuilder,
   tempDataBuilder,
   uploadFunctionGetter,
+  GALLERY_FILE_TYPES,
 } from '../Utils/mediaPluginsDataBuilders';
-import { fileExtensionToType, FileTypes } from '../Utils/fileExtensionToType';
 import PropTypes from 'prop-types';
 import Loader from '../Components/Loader';
 import { MediaItemErrorMsg } from 'wix-rich-content-ui-components';
@@ -126,6 +126,14 @@ MediaPlugin.propTypes = {
   pluginType: PropTypes.string,
 };
 
+const getGalleryFileType = type => {
+  return type.match('image/*')
+    ? GALLERY_FILE_TYPES.IMAGE
+    : type.match('video/*')
+    ? GALLERY_FILE_TYPES.VIDEO
+    : '';
+};
+
 const createBaseMediaPlugin = ({
   PluginComponent,
   pluginType,
@@ -161,7 +169,7 @@ const createBaseMediaPlugin = ({
       if (file) {
         this.fileReader(file).then(url => {
           const extension = file.name.split('.').pop();
-          const fileType = extension && FileTypes[fileExtensionToType(extension)];
+
           const { componentData } = this.props;
           const tempData = tempDataBuilder[pluginType]?.({
             url,
@@ -174,7 +182,8 @@ const createBaseMediaPlugin = ({
             const {
               helpers: { onMediaUploadStart, onMediaUploadEnd },
             } = this.props;
-            const uploadBIData = onMediaUploadStart(pluginType, file.size, fileType);
+            const uploadBIData = onMediaUploadStart(pluginType, file.size, file.type);
+            const fileType = getGalleryFileType(file.type);
             handleFileUpload(file, ({ data, error }) => {
               onMediaUploadEnd(uploadBIData, error);
               this.handleUploadFinished(data, error, onUploadFinished, itemPos, fileType);

@@ -48,4 +48,3 @@ export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as Loader } from './Components/Loader';
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
-export { FileTypes, fileExtensionToType } from './Utils/fileExtensionToType';
