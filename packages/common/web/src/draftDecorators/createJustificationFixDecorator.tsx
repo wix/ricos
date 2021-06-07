@@ -2,22 +2,52 @@ import React from 'react';
 import { isSSR } from '../index';
 import { DraftDecorator } from 'draft-js';
 
+function isInEditor(contentBlock) {
+  return contentBlock.toJS; //check if immutable to determine if editor or viewer
+}
+
+function getTextAlignment(contentBlock) {
+  return isInEditor(contentBlock)
+    ? contentBlock.getData().get('textAlignment')
+    : contentBlock?.data?.textAlignment;
+}
+
+function getEntityAt(i, block) {
+  return isInEditor(block)
+    ? block.getEntityAt(i)
+    : block.entityRanges.find(({ offset, length }) => i > offset && i < offset + length)?.key;
+}
+
+function getEntityType(block, contentState, entityKey) {
+  return isInEditor(block)
+    ? entityKey !== null && contentState.getEntity(entityKey).getType()
+    : contentState.entityMap[entityKey]?.type;
+}
+
+function isLinkType(type) {
+  return type === 'LINK' || type === 'ricos-plugin-custom-link';
+}
+
+function isInLink(i, block, contentState) {
+  const entityKey = getEntityAt(i, block);
+  const type = getEntityType(block, contentState, entityKey);
+  return isLinkType(type);
+}
+
+function isChrome() {
+  return !isSSR() && !!window.chrome;
+}
+
 export default function createJustificationFixDecorator(): DraftDecorator {
-  const isTextJustified = contentBlock => {
-    const textAlignment = contentBlock.toJS //check if immutable (editor/viewer)
-      ? contentBlock.getData().get('textAlignment')
-      : contentBlock?.data?.textAlignment;
-    return textAlignment === 'justify';
-  };
-
-  const isChrome = () => !isSSR() && !!window.chrome;
-
-  const strategy = (contentBlock, callback) => {
-    if (!isChrome() && isTextJustified(contentBlock)) {
+  const isTextJustified = contentBlock => getTextAlignment(contentBlock) === 'justify';
+  const strategy = (contentBlock, callback, contentState) => {
+    if (!isSSR() && !isChrome() && isTextJustified(contentBlock)) {
       const regex = /\s[^\s]/g;
       const str = contentBlock.getText();
-      Array.from(str.matchAll(regex), (match: { index: number }) => match.index).forEach(index => {
-        callback(index, index + 1);
+      Array.from(str.matchAll(regex), (match: { index: number }) => match.index).forEach(i => {
+        if (!isInLink(i, contentBlock, contentState)) {
+          callback(i, i + 1);
+        }
       });
     }
   };

@@ -46,8 +46,6 @@ const createButtonPlugin = (
   settings.isActionButton = !isLinkButton;
   settings.themeData = themeData;
   const styles = mergeStyles({ styles: Styles, theme });
-  const rel = relValue === '_nofollow';
-  const target = anchorTarget ? anchorTarget === '_blank' : true;
   const customTooltip = settings.insertButtonTooltip;
   return createBasePlugin({
     component: ButtonComponent,
@@ -64,10 +62,12 @@ const createButtonPlugin = (
       t,
       isMobile,
       customTooltip,
+      relValue,
+      anchorTarget,
     }),
     helpers,
     t,
-    defaultPluginData: getDefaultComponentData(isLinkButton, rel, target),
+    defaultPluginData: getDefaultComponentData(isLinkButton, relValue, anchorTarget),
     isMobile,
     pluginDecorationProps: (props, componentData) => {
       const width = componentData.config?.width;

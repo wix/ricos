@@ -10,9 +10,9 @@ export { default as useClickOutside } from './Components/ClickOutside/useClickOu
 export { default as Dropdown } from './Components/Dropdown';
 
 export { default as FocusManager } from './Components/FocusManager';
-export { default as LinkPanel } from './Components/LinkComponents/LinkPanel';
+export { default as LinkPanelWrapper } from './Components/LinkComponents/LinkPanelWrapper';
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
-export { default as LinkPanelContainer } from './Components/LinkComponents/LinkPanelContainer';
+export { default as LinkModal } from './Components/LinkComponents/LinkModal';
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as Separator } from './Components/Separator';
 export { default as ToolbarButton } from './Components/ToolbarButton';
@@ -28,6 +28,7 @@ export { default as decorateComponentWithProps } from './Utils/decorateComponent
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 export { undo, redo, pluginsUndo } from './Utils/handleUndoRedoCommands';
+export { getAnchorableBlocks } from './Components/AnchorComponents/anchorUtils';
 
 export {
   updateLinkAtCurrentSelection,

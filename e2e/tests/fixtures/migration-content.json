@@ -1015,8 +1015,8 @@
           "settings": {
             "buttonText": "Link Button",
             "url": "www.wix.com",
-            "rel": false,
-            "target": true
+            "rel": "nofollow",
+            "target": "_blank"
           },
           "design": {
             "activeButton": 4,

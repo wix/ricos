@@ -110,6 +110,7 @@ exports[`plugins > image > render image toolbar and settings #0`] =
         "config": {
           "alignment": "center",
           "link": {
+            "rel": "",
             "url": "www.wix.com"
           },
           "showDescription": true,
@@ -2728,7 +2729,7 @@ exports[`plugins > full screen > innerRCE images full screen > expand image on f
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
@@ -3015,7 +3016,7 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };

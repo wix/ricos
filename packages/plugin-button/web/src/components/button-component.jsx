@@ -17,6 +17,7 @@ class ButtonComponent extends Component {
       settings: { onClick, themeData },
       config,
       helpers,
+      anchorTarget,
     } = this.props;
     const { theme } = this.props;
     const { colors: { actionColor, bgColor } = {} } = themeData || config?.themeData || {};
@@ -26,8 +27,8 @@ class ButtonComponent extends Component {
     if (url) {
       linkButtonSettings = {
         url: normalizeUrl(url),
-        target: button.settings.target ? '_blank' : '_self',
-        rel: button.settings.rel ? 'nofollow' : '',
+        target: button.settings.target,
+        rel: button.settings.rel,
       };
     }
     const style = {
@@ -45,6 +46,7 @@ class ButtonComponent extends Component {
         theme={theme}
         onClick={onClick}
         helpers={helpers}
+        anchorTarget={anchorTarget}
         {...linkButtonSettings}
       />
     );
@@ -54,6 +56,7 @@ class ButtonComponent extends Component {
 ButtonComponent.propTypes = {
   componentData: PropTypes.object,
   style: PropTypes.object,
+  anchorTarget: PropTypes.string,
   buttonObj: PropTypes.object,
   settings: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
