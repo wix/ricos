@@ -21,11 +21,15 @@
 
 - `editor`
   - [#2593](https://github.com/wix/ricos/pull/2593) fix cut behavior
+  
 ### :house: Internal
 
 - `ui-components`
+  - [#2577](https://github.com/wix-incubator/rich-content/pull/2577) moved Loader component into ui-components folder
+- `ui-components`
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
-
+- `ui-components`
+  - [#2571](https://github.com/wix-incubator/rich-content/pull/2571) moved SettingsSection component into ui-components folder
 
 </details>
 <hr/>
