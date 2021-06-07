@@ -44,10 +44,5 @@ export { default as SliderWithInput } from './Components/SliderWithInput';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as TextInput } from './Components/TextInput';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
-<<<<<<< HEAD
-export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
-=======
-export { default as Loader } from './Components/Loader';
->>>>>>> master
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
