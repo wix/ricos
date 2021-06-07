@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Button } from 'wix-rich-content-ui-components';
+import Button from './Button';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-panel-footer.scss';
 import { FOOTER_BUTTON_ALIGNMENT } from '../consts';

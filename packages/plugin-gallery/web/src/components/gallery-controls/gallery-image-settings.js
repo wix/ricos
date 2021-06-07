@@ -3,13 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import { mergeStyles } from 'wix-rich-content-common';
-import {
-  FileInput,
-  Image,
-  SettingsSection,
-  SettingsPanelFooter,
-} from 'wix-rich-content-plugin-commons';
-import { InputWithLabel } from 'wix-rich-content-ui-components';
+import { FileInput, Image, SettingsSection } from 'wix-rich-content-plugin-commons';
+import { SettingsPanelFooter, InputWithLabel } from 'wix-rich-content-ui-components';
 import { FocusManager, LinkPanelWrapper } from 'wix-rich-content-editor-common';
 import { BackIcon, DeleteIcon, ReplaceIcon, NextIcon, PreviousIcon } from '../../icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';

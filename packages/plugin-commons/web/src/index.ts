@@ -36,7 +36,6 @@ export { default as Image } from './Components/Image';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
 export { default as RadioGroupVertical } from './Components/RadioGroupVertical';
 export { default as SelectionList } from './Components/SelectionList';
-export { default as SettingsPanelFooter } from './Components/SettingsPanelFooter';
 export { default as SettingsSection } from './Components/SettingsSection';
 export { default as Slider } from './Components/Slider';
 export { default as SliderWithInput } from './Components/SliderWithInput';

@@ -5,7 +5,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import SettingsMobileHeader from './SettingsMobileHeader';
 import { CloseIcon } from '../Icons';
-import SettingsPanelFooter from '../Components/SettingsPanelFooter';
+import { SettingsPanelFooter } from 'wix-rich-content-ui-components';
 import TextInput from '../Components/TextInput';
 import { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
