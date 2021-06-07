@@ -87,6 +87,26 @@ anchorTarget - as defined in [HTMLAnchorElement.target](https://developer.mozill
 relValue - as defined in [HTMLAnchorElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/rel)
 customAnchorScroll - enables overriding the default anchor scroll behaviour
 
+Examples:
+
+1. Links created by the User:
+
+```jsx
+linkSettings: {
+  anchorTarget: '_blank',
+  rel: { nofollow: false, sponsored: false, ugc: false },
+}
+```
+
+2. Links created by UoU:
+
+```jsx
+linkSettings: {
+  anchorTarget: '_blank',
+  rel: { nofollow: true, sponsored: false, ugc: true },
+}
+```
+
 ### `locale`
 
 ```jsx
@@ -239,6 +259,28 @@ By default, it's visible.
 
 Determines the placeholder to use for the link panel.
 By default, its value is `"Enter a URL here"` translated by localization
+
+Examples:
+
+1. Links created by the User:
+
+```jsx
+linkPanelSettings: {
+  showNewTabCheckbox: true;
+  showNoFollowCheckbox: true;
+  showSponsoredCheckbox: true;
+}
+```
+
+2. Links created by UoU:
+
+```jsx
+linkPanelSettings: {
+  showNewTabCheckbox: false;
+  showNoFollowCheckbox: false;
+  showSponsoredCheckbox: false;
+}
+```
 
 ### `maxTextLength`
 
