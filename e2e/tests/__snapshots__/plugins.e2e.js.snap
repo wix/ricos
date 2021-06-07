@@ -116,7 +116,8 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           },
           "showDescription": true,
           "showTitle": true,
-          "size": "fullWidth"
+          "size": "fullWidth",
+          "spoiler": {}
         },
         "metadata": {
           "caption": ""
