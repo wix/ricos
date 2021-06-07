@@ -5,6 +5,8 @@ import { EditorState, ContentState } from 'wix-rich-content-editor-common';
 import { convertToRaw } from '../../../lib/editorStateConversion';
 import getContentStateFragment from 'draft-js/lib/getContentStateFragment';
 import getDraftEditorSelection from 'draft-js/lib/getDraftEditorSelection';
+import editOnCopy from 'draft-js/lib/editOnCopy';
+import editOnCut from 'draft-js/lib/editOnCut';
 
 // Custom attribute to store Draft.js content in the HTML clipboard.
 const FRAGMENT_ATTR = 'data-draftjs-conductor-fragment';
@@ -90,13 +92,10 @@ const onCutAndCopy = (ref, e) => {
 
 export const onCopy = (ref, e) => {
   onCutAndCopy(ref, e);
-  import(/* webpackPrefetch: true */ 'draft-js/lib/editOnCopy').then(editOnCopy =>
-    editOnCopy?.default?.(ref, e)
-  );
+  editOnCopy(ref, e);
 };
+
 export const onCut = (ref, e) => {
   onCutAndCopy(ref, e);
-  import(/* webpackPrefetch: true */ 'draft-js/lib/editOnCut').then(editOnCut =>
-    editOnCut?.default?.(ref, e)
-  );
+  editOnCut(ref, e);
 };
