@@ -88,6 +88,7 @@ export interface BICallbacks {
   onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
   onContentEdited?(params: onContentEditedArgs): void;
+  /** evid: 3 - 'changePlugin' */
   onToolbarButtonClick?(params: onToolbarButtonClickArgs): void;
   onPluginChange?(
     pluginId: string,

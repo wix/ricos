@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { setTextAlignment } from 'wix-rich-content-editor-common';
-
+import { Version } from 'wix-rich-content-common';
 import TextButton from '../TextButton';
 
 export default ({ alignment, Icon, tooltipTextKey }) =>
@@ -12,6 +12,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       alignment: PropTypes.string,
       onClick: PropTypes.func,
       theme: PropTypes.object.isRequired,
+      helpers: PropTypes.object,
       isMobile: PropTypes.bool,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
@@ -20,7 +21,13 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
     isActive = () => this.props.alignment === alignment;
 
     handleClick = () => {
-      const { onClick, getEditorState, setEditorState } = this.props;
+      const { onClick, helpers, t, getEditorState, setEditorState } = this.props;
+      const tooltipText = t(tooltipTextKey);
+      const textForHooks = tooltipText.replace(/\s+/, '');
+      helpers?.onToolbarButtonClick?.({
+        buttonName: textForHooks,
+        version: Version.currentVersion,
+      });
       if (onClick) {
         onClick(alignment);
       } else {

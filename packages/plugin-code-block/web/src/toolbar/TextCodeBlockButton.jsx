@@ -22,11 +22,16 @@ export default class TextCodeBlockButton extends Component {
       config,
     } = this.props;
     const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon || CodeBlockIcon;
+    const onClick = () => {
+      const editorState = getEditorState();
+      const isAddEvent = !hasBlockType(CODE_BLOCK_TYPE, editorState);
+      isAddEvent && helpers?.onPluginAdd(CODE_BLOCK_TYPE, 'FormattingToolbar');
+      setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
+      isAddEvent && helpers?.onPluginAddSuccess(CODE_BLOCK_TYPE, 'FormattingToolbar');
+    };
     return (
       <InlineToolbarButton
-        onClick={() =>
-          setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, getEditorState()))
-        }
+        onClick={onClick}
         isActive={this.isActive}
         helpers={helpers}
         theme={theme}

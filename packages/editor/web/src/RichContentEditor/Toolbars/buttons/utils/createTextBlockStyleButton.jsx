@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RichUtils } from 'wix-rich-content-editor-common';
+import { Version } from 'wix-rich-content-common';
 import TextButton from '../TextButton';
 
 export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
@@ -9,6 +10,7 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
       getEditorState: PropTypes.func.isRequired,
       setEditorState: PropTypes.func.isRequired,
       theme: PropTypes.object.isRequired,
+      helpers: PropTypes.object,
       isVisible: PropTypes.bool,
       isMobile: PropTypes.bool,
       t: PropTypes.func,
@@ -74,11 +76,14 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
 
     setBlockStyle = event => {
       event.preventDefault();
-      const { getEditorState, setEditorState } = this.props;
+      const { getEditorState, setEditorState, helpers } = this.props;
       const blockTypeIndex = this.nextBlockTypeIndex();
       this.setState({ blockTypeIndex }, () => {
         const blockType = this.activeBlockType;
+        const isAddEvent = blockType !== 'unstyled';
+        isAddEvent && helpers?.onPluginAdd(blockType, 'FormattingToolbar');
         setEditorState(RichUtils.toggleBlockType(getEditorState(), blockType));
+        isAddEvent && helpers?.onPluginAddSuccess(blockType, 'FormattingToolbar');
       });
     };
 
@@ -89,10 +94,17 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
 
     render() {
       const { Icon } = this;
-      const { theme, isMobile, t, tabIndex } = this.props;
+      const { theme, helpers, isMobile, t, tabIndex } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textBlockStyleButton_${textForHooks}`;
+      const onClick = event => {
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+          version: Version.currentVersion,
+        });
+        this.setBlockStyle(event);
+      };
 
       return (
         <TextButton
@@ -100,7 +112,7 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
           theme={theme}
           isMobile={isMobile}
           isActive={this.blockTypeIsActive}
-          onClick={this.setBlockStyle}
+          onClick={onClick}
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}
