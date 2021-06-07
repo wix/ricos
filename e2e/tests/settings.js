@@ -9,7 +9,7 @@ export const fixtures = [
   'nested-lists',
   'aligment_with_punctuations',
   {
-    fixture: 'multiple-accordions-rich-text',
+    fixture: 'multiple-collapsible-lists-rich-text',
     config: usePlugins(plugins.all),
   },
   'indent_blocks_lists_with_alignment',
@@ -68,7 +68,5 @@ export const fixtures = [
 export const fixturesToTestOnSeo = ['images'];
 
 export const DEFAULT_DESKTOP_BROWSERS = [{ width: 1440, height: 900, name: 'chrome' }];
-
-export const FIREFOX_BROWSER = [{ width: 1440, height: 900, name: 'firefox' }];
 
 export const DEFAULT_MOBILE_BROWSERS = [{ deviceName: 'iPhone X' }, { deviceName: 'iPad' }];

@@ -1,7 +1,9 @@
 import React from 'react';
 import { RicosViewer, RicosViewerProps } from './index';
 import { RichContentViewer } from 'wix-rich-content-viewer';
+import { BICallbacks } from 'wix-rich-content-common';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
+import { version } from '../package.json';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -23,6 +25,7 @@ const getRCV = (ricosViewerProps?: RicosViewerProps, asWrapper?: boolean) => {
     </RicosViewer>
   );
   const element = shallow(toRender)
+    .find('RicosEngine')
     .dive()
     .children();
 
@@ -78,5 +81,26 @@ describe('RicosViewer', () => {
     expect(JSON.stringify({ ...rcvProps, theme: {} })).toStrictEqual(
       JSON.stringify({ ...rcvPropsWrapped, theme: {} })
     );
+  });
+  it('should trigger onViewerLoaded upon mount', () => {
+    let args = {};
+    const onViewerLoadedMock: BICallbacks['onViewerLoaded'] = params => (args = params);
+    const fn = jest.fn(onViewerLoadedMock);
+    getRicosViewer({ _rcProps: { helpers: { onViewerLoaded: fn } } });
+    expect(fn).toBeCalledTimes(1);
+    expect(args).toStrictEqual({
+      isPreview: false,
+      pluginsCount: {
+        EMOJI_TYPE: 2,
+        LINK: 2,
+        blockquote: 1,
+        'code-block': 1,
+        'header-three': 2,
+        'wix-draft-plugin-divider': 1,
+        'wix-draft-plugin-gallery': 1,
+        'wix-draft-plugin-giphy': 1,
+      },
+      version,
+    });
   });
 });

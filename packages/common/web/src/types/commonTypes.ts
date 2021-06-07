@@ -10,6 +10,7 @@ import {
 } from '.';
 import { BoundingRect } from 'react-measure';
 import { ContentBlock, SelectionState, EditorState } from 'draft-js';
+export { Link_Rel } from 'ricos-schema';
 
 export { Pubsub, Store } from '../Utils/simplePubsub';
 
@@ -36,6 +37,7 @@ export { TranslationFunction, ResourceKey as LocaleResource } from 'i18next';
 
 export type AnchorTarget = HTMLAnchorElement['target'];
 export type RelValue = HTMLAnchorElement['rel'];
+export type CustomAnchorScroll = (event: Event, anchor: string) => void;
 
 export type GetEditorBounds = () => BoundingRect | undefined;
 
@@ -64,7 +66,7 @@ export type TextDirection = 'rtl' | 'ltr';
 
 export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
 
-export type InlineStyle = 'bold' | 'underline' | 'italic';
+export type InlineStyle = 'bold' | 'underline' | 'italic' | 'spoiler';
 
 export type onAtomicBlockFocus = (params: {
   blockKey?: string;
@@ -85,6 +87,7 @@ interface CommonContextType {
   locale: string;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
+  customAnchorScroll?: CustomAnchorScroll;
   helpers: Helpers;
   isMobile: boolean;
   iframeSandboxDomain?: string;

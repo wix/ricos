@@ -27,8 +27,6 @@ import {
   MentionData,
   PluginContainerData_Width_Type,
   PluginContainerData_Alignment,
-  DividerData_Width,
-  DividerData_Alignment,
 } from 'ricos-schema';
 
 export const content = {
@@ -396,7 +394,7 @@ const file = {
     src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'File sample',
     containerData: {
-      width: { type: PluginContainerData_Width_Type.SMALL },
+      width: { size: PluginContainerData_Width_Type.SMALL },
       alignment: PluginContainerData_Alignment.LEFT,
     },
   }),
@@ -404,7 +402,7 @@ const file = {
     src: { url: 'https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
     name: 'Updated file sample',
     containerData: {
-      width: { type: PluginContainerData_Width_Type.CONTENT },
+      width: { size: PluginContainerData_Width_Type.CONTENT },
       alignment: PluginContainerData_Alignment.RIGHT,
     },
   }),
@@ -487,18 +485,18 @@ const image = {
 const link = {
   type: RICOS_LINK_TYPE,
   decorationType: Decoration_Type.LINK,
-  data1: LinkData.fromJSON({ url: 'www.wix.com' }),
+  data1: LinkData.fromJSON({ url: 'www.wix.com', rel: 'nofollow', target: '_self' }),
   selection1: selection,
-  data2: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
+  data2: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'sponsored', target: '_self' }),
   selection2: selectionCollapsed,
   expectedData1: {
     url: 'www.wix.com',
-    rel: 'noopener',
+    rel: 'nofollow',
     target: '_self',
   },
   expectedData2: {
     url: 'www.sport5.co.il',
-    rel: 'nofollow',
+    rel: 'sponsored',
     target: '_self',
   },
 };
@@ -527,7 +525,7 @@ const mention = {
   },
 };
 
-export const inlineStylesTestConfig = ['bold', 'italic', 'underline'];
+export const inlineStylesTestConfig = ['bold', 'italic', 'underline', 'spoiler'];
 
 export const pluginsTestConfig = {
   divider,

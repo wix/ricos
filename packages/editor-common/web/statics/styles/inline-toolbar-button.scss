@@ -22,11 +22,11 @@
     // .inlineToolbarButton_icon,
     // .inlineToolbarButton_icon svg,
     // .inlineToolbarDropdownButton_icon svg {
-    //   @include fillWithsettingsActionColor();
+    //   @include fillWithSettingsActionColor();
     // }
   }
   &.inlineToolbarButton_active button {
-    background-color: rgba($settings-action-color-tuple, 0.1);
+    background-color: rgba($settings-action-color-fallback-tuple, 0.1);
   }
 }
 
@@ -57,8 +57,8 @@
 }
 
 .inlineToolbarButton_active {
-  color: $settings-action-color;
-  fill: $settings-action-color;
+  color: $settings-action-color-fallback;
+  fill: $settings-action-color-fallback;
   @include svg-fill;
 }
 

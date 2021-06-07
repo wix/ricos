@@ -6,6 +6,9 @@ sidebar_label: Ricos API
 
 import { RicosEditor } from 'ricos-editor';
 import 'ricos-editor/dist/styles.min.css';
+import 'ricos-viewer/dist/styles.min.css';
+import viewerContent from '../../infra/editor/content/intro.json';
+import { RicosViewer } from 'ricos-viewer';
 
 ## Ricos Common API
 
@@ -65,16 +68,24 @@ Will render in mobile optimized mode
 
 ### `linkSettings`
 
+*** `relValue` is Deprecated ***, please use `rel` instead.
+
+
 ```jsx
+CustomAnchorScroll: (event: Event, anchor: string) => void;
+
 linkSettings?: {
   anchorTarget?: string;
   relValue?: string;
+  rel?: { nofollow?: boolean; sponsored?: boolean; ugc?: boolean; };
+  customAnchorScroll?: CustomAnchorScroll;
 }
 ```
 
 Defines the behavior of links.
 anchorTarget - as defined in [HTMLAnchorElement.target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target)
 relValue - as defined in [HTMLAnchorElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/rel)
+customAnchorScroll - enables overriding the default anchor scroll behaviour
 
 ### `locale`
 
@@ -186,22 +197,43 @@ Similar to [content](#content) prop; allows content to be injected to mounted Ri
 
 ```jsx
 linkPanelSettings?: {
-  blankTargetToggleVisibilityFn?: (anchorTarget: string) => boolean;
-  nofollowRelToggleVisibilityFn?: (relValue: string) => boolean;
-  placeholder?: string;}
+  showNewTabCheckbox?: boolean;
+  showNoFollowCheckbox?: boolean;
+  showSponsoredCheckbox?: boolean;
+  placeholder?: string;
+}
 ```
 
 Settings for the link panel component.
 
-#### `blankTargetToggleVisibilityFn`
+#### `showNewTabCheckbox`
 
 Determines the 'Open link in a new tab' link panel checkbox visiblity.
-By default, its predicate is `anchorTarget !== '_blank'`
+By default, it's visible.
+
+#### `showNoFollowCheckbox`
+
+Determines the 'Add a nofollow tag' link panel checkbox visiblity.
+By default, it's visible.
+
+#### `showSponsoredCheckbox`
+
+Determines the 'Mark as a sponsored link' link panel checkbox visiblity.
+By default, it's hidden.
+
+#### `blankTargetToggleVisibilityFn`
+
+*** Deprecated ***, please use `showNewTabCheckbox` instead.
+
+Determines the 'Open link in a new tab' link panel checkbox visiblity.
+By default, it's visible.
 
 #### `nofollowRelToggleVisibilityFn`
 
+*** Deprecated ***, please use `showNoFollowCheckbox` instead.
+
 Determines the 'Add a nofollow tag' link panel checkbox visiblity.
-By default, its predicate is `relValue !== 'nofollow'`
+By default, it's visible.
 
 #### `placeholder`
 
@@ -425,3 +457,20 @@ index - number of free content blocks
 #### `addAnchors`
 
 TODO
+
+#### `textSelectionToolbar`
+
+When given a truthy value, text-selection-toolbar appears inline when selecting some text and allows tweet text.
+
+```jsx
+import { RicosViewer } from 'ricos-viewer';
+import 'ricos-viewer/dist/styles.min.css';
+
+<RicosViewer textSelectionToolbar />;
+```
+
+Select some text below to see text-selection-toolbar
+
+<div className="card" style={{position: 'relative' }}>
+  <RicosViewer content={viewerContent} textSelectionToolbar />
+</div>

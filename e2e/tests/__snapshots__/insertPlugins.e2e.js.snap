@@ -193,17 +193,12 @@ exports[`insert plugins tests > side toolbar > should insert button #0`] =
         "button": {
           "design": {
             "activeButton": 0,
-            "background": "#0261FF",
-            "borderColor": "#0261FF",
             "borderRadius": 0,
             "borderWidth": 0,
-            "color": "#FFFFFF",
             "padding": 12
           },
           "settings": {
             "buttonText": "Click Me",
-            "rel": false,
-            "target": true,
             "url": ""
           }
         },
@@ -866,17 +861,12 @@ exports[`insert plugins tests > footer toolbar > should insert button #0`] =
         "button": {
           "design": {
             "activeButton": 0,
-            "background": "#0261FF",
-            "borderColor": "#0261FF",
             "borderRadius": 0,
             "borderWidth": 0,
-            "color": "#FFFFFF",
             "padding": 12
           },
           "settings": {
             "buttonText": "Click Me",
-            "rel": false,
-            "target": true,
             "url": ""
           }
         },

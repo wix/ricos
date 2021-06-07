@@ -146,7 +146,7 @@ export const rawContent = {
   ],
   entityMap: {
     '0': {
-      type: 'wix-rich-content-plugin-accordion',
+      type: 'wix-rich-content-plugin-collapsible-list',
       mutability: 'IMMUTABLE',
       data: {
         config: {
@@ -671,7 +671,7 @@ export const expectedRawContent = {
   ],
   entityMap: {
     '0': {
-      type: 'wix-rich-content-plugin-accordion',
+      type: 'wix-rich-content-plugin-collapsible-list',
       mutability: 'IMMUTABLE',
       data: {
         config: {

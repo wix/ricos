@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { merge, compact, debounce } from 'lodash';
 import classNames from 'classnames';
+import '../styles.scss';
 import {
   alignmentClassName,
   sizeClassName,
@@ -78,14 +79,16 @@ const createBaseComponent = ({
       return top >= 0 && left >= 0 && bottom <= windowHeight && right <= width;
     };
 
-    scrollIntoViewIfNeeded = blockKey => {
-      const boundingRect = this.getBoundingClientRectAsObject(this.containerRef.current);
-      const focusedBlock = pubsub.get('focusedBlock');
-      if (boundingRect.height === 0) {
-        // Required in order to wait for images to load their source
-        setTimeout(() => this.scrollIntoViewIfNeeded(blockKey), 100);
-      } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
-        this.containerRef.current.scrollIntoView();
+    scrollIntoViewIfNeeded = (blockKey, threshold = 0) => {
+      if (this.containerRef.current) {
+        const boundingRect = this.getBoundingClientRectAsObject(this.containerRef.current);
+        const focusedBlock = pubsub.get('focusedBlock');
+        if (boundingRect.height === 0 && threshold < 500) {
+          // Required in order to wait for images to load their source
+          setTimeout(() => this.scrollIntoViewIfNeeded(blockKey, threshold + 1), 100);
+        } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
+          this.containerRef.current.scrollIntoView();
+        }
       }
     };
 

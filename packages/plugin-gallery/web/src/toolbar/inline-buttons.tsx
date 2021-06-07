@@ -2,7 +2,7 @@ import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
-import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
+import { getGalleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
 import {
   CreateInlineButtons,
   TranslationFunction,
@@ -10,7 +10,7 @@ import {
   RelValue,
   AvailableExperiments,
 } from 'wix-rich-content-common';
-import { GalleryPluginEditorConfig } from '../types';
+import { GalleryPluginEditorConfig, GALLERY_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
@@ -60,7 +60,7 @@ const createInlineButtons: CreateInlineButtons = ({
     {
       keyName: 'layout',
       type: BUTTONS.DROPDOWN,
-      options: galleryLayoutsDropdown(t),
+      options: getGalleryLayoutsDropdown(t),
       onChange: switchLayout,
       getValue: getCurrentLayout,
       mobile: true,
@@ -104,6 +104,8 @@ const createInlineButtons: CreateInlineButtons = ({
       anchorTarget,
       relValue,
       accept: settings.accept,
+      triggerSettingsBi: true,
+      pluginId: GALLERY_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

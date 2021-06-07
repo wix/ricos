@@ -1,0 +1,44 @@
+name: deploy example
+on:
+  push:
+    tags:
+      - v9.*
+      - v8.*
+      - v7.*
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  surge-examples:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: cache
+        id: cache
+        uses: actions/cache@master
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+            ~/.cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: npm install + bootstrap
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npx midgard-yarn install --frozen-lockfile
+      - name: lerna link
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run link
+
+      - run: npm run build
+      - run: npm run deploy
+      - run: npm run deployPRComment
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

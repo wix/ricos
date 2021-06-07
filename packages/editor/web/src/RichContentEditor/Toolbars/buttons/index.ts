@@ -49,6 +49,7 @@ export const mobileTextButtonList = [
 ];
 
 export const pluginButtonNames = [
+  INSERT_PLUGIN_BUTTONS.TABLE,
   INSERT_PLUGIN_BUTTONS.INSTAGRAM,
   INSERT_PLUGIN_BUTTONS.TWITTER,
   INSERT_PLUGIN_BUTTONS.YOUTUBE,

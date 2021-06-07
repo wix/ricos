@@ -1,3 +1,4 @@
+import { convertToRaw } from '..';
 import {
   EditorState,
   Modifier,
@@ -6,30 +7,31 @@ import {
   AtomicBlockUtils,
   ContentBlock,
   ContentState,
-  EntityInstance,
   RawDraftEntity,
   EditorChangeType,
+  EntityInstance,
 } from '@wix/draft-js';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import {
-  RelValue,
   AnchorTarget,
   LINK_TYPE,
   CUSTOM_LINK_TYPE,
   TextAlignment,
   InlineStyle,
+  RelValue,
+  getTargetValue,
+  SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
+import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
 
 type LinkDataUrl = {
   url: string;
-  targetBlank?: boolean;
-  nofollow?: boolean;
-  anchorTarget?: string;
-  relValue?: string;
+  target?: string;
+  rel?: string;
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
@@ -40,8 +42,19 @@ type CustomLinkData = any;
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
-export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) =>
-  editorState.getCurrentInlineStyle().has(inlineStyle.toUpperCase());
+const draftInlineStyle = {
+  bold: 'BOLD',
+  underline: 'UNDERLINE',
+  italic: 'ITALIC',
+  spoiler: SPOILER_TYPE,
+};
+
+export const getDraftInlineStyle = (inlineStyle: InlineStyle) => draftInlineStyle[inlineStyle];
+
+export const hasInlineStyle = (inlineStyle: InlineStyle, editorState: EditorState) => {
+  const draftInlineStyle = getDraftInlineStyle(inlineStyle);
+  return editorState.getCurrentInlineStyle().has(draftInlineStyle);
+};
 
 export function createSelection({
   blockKey,
@@ -63,15 +76,13 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
+  { url, target, rel }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   const linkEntityData = createLinkEntityData({
     url,
-    targetBlank,
-    nofollow,
-    anchorTarget,
-    relValue,
+    target,
+    rel,
   });
 
   return insertLink(editorState, selection, linkEntityData);
@@ -221,17 +232,8 @@ function insertLink(
   );
 }
 
-export function createLinkEntityData({
-  url,
-  anchor,
-  targetBlank,
-  nofollow,
-  anchorTarget,
-  relValue,
-}: LinkData) {
+export function createLinkEntityData({ url, anchor, target, rel }: LinkData) {
   if (url) {
-    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
     return {
       url,
       target,
@@ -572,17 +574,25 @@ function getSelection(editorState: EditorState) {
   return selection;
 }
 
-// TODO: refactor function @Barackos
-export const getEntities = (editorState: EditorState, entityType?: string): EntityInstance[] => {
-  const currentContent = editorState.getCurrentContent();
+export function getEditorContentSummary(editorState: EditorState) {
+  if (Object.entries(editorState).length === 0) return;
+  return getContentSummary(convertToRaw(editorState.getCurrentContent()));
+}
+
+const countByTypeField = obj => countBy(obj, x => x.type);
+
+const getBlockTypePlugins = (blocks: ContentBlock[]) =>
+  blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
+
+export const getEntities = (content: ContentState, entityType?: string): EntityInstance[] => {
   const entities: EntityInstance[] = [];
 
-  currentContent.getBlockMap().forEach(block => {
+  content.getBlockMap().forEach(block => {
     block?.findEntityRanges(
       character => {
         const char = character.getEntity();
         if (char) {
-          const entity = currentContent.getEntity(char);
+          const entity = content.getEntity(char);
           if (!entityType || entity.getType() === entityType) {
             entities.push(entity);
           }
@@ -601,33 +611,15 @@ export const getEntities = (editorState: EditorState, entityType?: string): Enti
   return entities;
 };
 
-const countByType = (obj: { getType: () => string }[]) => countBy(obj, x => x.getType());
+type OnCallbacks = (params: { pluginsDeleted: string[] }) => void;
 
-const getBlockTypePlugins = (blocks: ContentBlock[]) =>
-  blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');
-
-export function getPostContentSummary(editorState: EditorState) {
-  if (Object.entries(editorState).length === 0) return;
-  const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const entries = getEntities(editorState);
-  const blockPlugins = getBlockTypePlugins(blocks);
-  const pluginsDetails = entries
-    .filter(entry => entry.getType() !== 'text')
-    .map(entry => ({ type: entry.getType(), data: entry.getData() }));
-  return {
-    pluginsCount: {
-      ...countByType(blockPlugins),
-      ...countByType(entries),
-    },
-    pluginsDetails,
-  };
-}
-
-const countByTypeField = obj => countBy(obj, x => x.type);
-
-const calculateContentDiff = (prevState, newState, onCallbacks) => {
-  const prevEntities = countByTypeField(getEntities(prevState));
-  const currEntities = countByTypeField(getEntities(newState));
+const calculateContentDiff = (
+  prevState: EditorState,
+  newState: EditorState,
+  onCallbacks: OnCallbacks
+) => {
+  const prevEntities = countByTypeField(getEntities(prevState.getCurrentContent()));
+  const currEntities = countByTypeField(getEntities(newState.getCurrentContent()));
   const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
   const currBlocks = newState.getCurrentContent().getBlocksAsArray();
   const prevBlockPlugins = countByTypeField(getBlockTypePlugins(prevBlocks));
@@ -684,8 +676,8 @@ export function fixPastedLinks(
     if (url) {
       content.replaceEntityData(entityKey, {
         url,
-        target: anchorTarget || '_self',
-        rel: relValue || 'noopener noreferrer',
+        target: getTargetValue(anchorTarget),
+        rel: relValue,
       });
     }
   });

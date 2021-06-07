@@ -1,4 +1,4 @@
-import { setupContentAPI } from './ContentAPI';
+import { setupContentBuilder } from './RicosContentBuilder';
 import {
   ImageData,
   PluginContainerData_Width_Type,
@@ -10,13 +10,13 @@ import {
   Decoration_Type,
 } from 'ricos-schema';
 
-describe('Ricos Content API', () => {
+describe('Ricos Content Builder', () => {
   it('should add image node to content', () => {
     const generateKey = () => 'foo';
-    const api = setupContentAPI({ generateKey });
+    const api = setupContentBuilder(generateKey);
     const imageData: ImageData = {
       containerData: {
-        width: { type: PluginContainerData_Width_Type.SMALL },
+        width: { size: PluginContainerData_Width_Type.SMALL },
         alignment: PluginContainerData_Alignment.CENTER,
       },
     };
@@ -34,71 +34,9 @@ describe('Ricos Content API', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should update paragraph text', () => {
-    const generateKey = () => 'foo';
-    const api = setupContentAPI({ generateKey });
-    const paragraphData: ParagraphData = {
-      textStyle: {
-        textAlignment: TextStyle_TextAlignment.RIGHT,
-      },
-    };
-    const content: RichContent = {
-      nodes: [
-        {
-          type: Node_Type.PARAGRAPH,
-          key: 'foo',
-          paragraphData,
-          nodes: [
-            {
-              key: 'boo',
-              type: Node_Type.TEXT,
-              textData: {
-                text: 'test paragraph',
-                decorations: [
-                  {
-                    type: Decoration_Type.BOLD,
-                  },
-                ],
-              },
-              nodes: [],
-            },
-          ],
-        },
-      ],
-    };
-
-    const expected = {
-      nodes: [
-        {
-          type: Node_Type.PARAGRAPH,
-          key: 'foo',
-          paragraphData,
-          nodes: [
-            {
-              key: 'foo', // nested node keys are not preserved atm
-              type: Node_Type.TEXT,
-              textData: {
-                text: 'updated text',
-                decorations: [{ type: Decoration_Type.ITALIC }],
-              },
-              nodes: [],
-            },
-          ],
-        },
-      ],
-    };
-
-    const actual = api.updateParagraph({
-      text: { text: 'updated text', decorations: [{ type: Decoration_Type.ITALIC }] },
-      key: 'foo',
-      content,
-    });
-    expect(actual).toEqual(expected);
-  });
-
   it('should add a paragraph with text to content', () => {
     const generateKey = () => 'foo';
-    const api = setupContentAPI({ generateKey });
+    const api = setupContentBuilder(generateKey);
     const paragraphData: ParagraphData = {
       textStyle: {
         textAlignment: TextStyle_TextAlignment.RIGHT,
@@ -132,97 +70,176 @@ describe('Ricos Content API', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should toggle heading to paragraph node', () => {
+  it('should add bullet list with string items to content', () => {
     const generateKey = () => 'foo';
-    const api = setupContentAPI({ generateKey });
+    const api = setupContentBuilder(generateKey);
     const paragraphData: ParagraphData = {
       textStyle: {
         textAlignment: TextStyle_TextAlignment.RIGHT,
       },
     };
-    const content: RichContent = {
+    const expected: RichContent = {
       nodes: [
         {
-          type: Node_Type.PARAGRAPH,
-          key: 'baz',
-          paragraphData,
+          type: Node_Type.BULLET_LIST,
+          key: 'foo',
           nodes: [
             {
-              key: 'boo',
-              type: Node_Type.TEXT,
-              textData: {
-                text: 'text content',
-                decorations: [
-                  {
-                    type: Decoration_Type.BOLD,
-                  },
-                ],
-              },
-              nodes: [],
+              type: Node_Type.LIST_ITEM,
+              key: 'foo',
+              nodes: [
+                {
+                  type: Node_Type.PARAGRAPH,
+                  key: 'foo',
+                  paragraphData,
+                  nodes: [
+                    {
+                      key: 'foo',
+                      type: Node_Type.TEXT,
+                      textData: {
+                        text: 'item1',
+                        decorations: [],
+                      },
+                      nodes: [],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: Node_Type.LIST_ITEM,
+              key: 'foo',
+              nodes: [
+                {
+                  type: Node_Type.PARAGRAPH,
+                  key: 'foo',
+                  paragraphData,
+                  nodes: [
+                    {
+                      key: 'foo',
+                      type: Node_Type.TEXT,
+                      textData: {
+                        text: 'item2',
+                        decorations: [],
+                      },
+                      nodes: [],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
       ],
     };
-
-    const expected = {
-      nodes: [
-        {
-          type: Node_Type.HEADING,
-          key: 'baz',
-          headingData: {
-            level: 2,
-            textStyle: { textAlignment: TextStyle_TextAlignment.RIGHT },
-          },
-          nodes: [
-            {
-              key: 'boo',
-              type: Node_Type.TEXT,
-              textData: {
-                text: 'text content',
-                decorations: [{ type: Decoration_Type.BOLD }],
-              },
-              nodes: [],
-            },
-          ],
-        },
-      ],
-    };
-
-    const actual = api.toggleHeading({
-      key: 'baz',
-      data: { level: 2, textStyle: { textAlignment: TextStyle_TextAlignment.RIGHT } },
-      content,
+    const actual = api.addBulletList({
+      items: ['item1', 'item2'],
+      data: paragraphData,
+      content: { nodes: [] },
     });
     expect(actual).toEqual(expected);
   });
 
-  it('should extract all images from content', () => {
+  it('should add ordered list with mixed items to content', () => {
     const generateKey = () => 'foo';
-    const api = setupContentAPI({ generateKey });
-    const imageData: ImageData = {
-      containerData: {
-        width: { type: PluginContainerData_Width_Type.SMALL },
-        alignment: PluginContainerData_Alignment.CENTER,
+    const api = setupContentBuilder(generateKey);
+    const paragraphData: ParagraphData = {
+      textStyle: {
+        textAlignment: TextStyle_TextAlignment.RIGHT,
       },
     };
-    const content: RichContent = {
+    const textDataItem1 = {
+      text: 'item1',
+      decorations: [{ type: Decoration_Type.BOLD }],
+    };
+    const listItem2 = {
+      text: [{ text: 'item2', decorations: [{ type: Decoration_Type.ITALIC }] }],
+      data: { textStyle: { textAlignment: TextStyle_TextAlignment.AUTO }, indentation: 2 },
+    };
+    const expected: RichContent = {
       nodes: [
         {
-          type: Node_Type.IMAGE,
-          imageData,
-          nodes: [],
+          type: Node_Type.ORDERED_LIST,
           key: 'foo',
+          nodes: [
+            {
+              type: Node_Type.LIST_ITEM,
+              key: 'foo',
+              nodes: [
+                {
+                  type: Node_Type.PARAGRAPH,
+                  key: 'foo',
+                  paragraphData,
+                  nodes: [
+                    {
+                      key: 'foo',
+                      type: Node_Type.TEXT,
+                      textData: {
+                        text: 'item1',
+                        decorations: [{ type: Decoration_Type.BOLD }],
+                      },
+                      nodes: [],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: Node_Type.LIST_ITEM,
+              key: 'foo',
+              nodes: [
+                {
+                  type: Node_Type.PARAGRAPH,
+                  key: 'foo',
+                  paragraphData: {
+                    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
+                    indentation: 2,
+                  },
+                  nodes: [
+                    {
+                      key: 'foo',
+                      type: Node_Type.TEXT,
+                      textData: {
+                        text: 'item2',
+                        decorations: [{ type: Decoration_Type.ITALIC }],
+                      },
+                      nodes: [],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: Node_Type.LIST_ITEM,
+              key: 'foo',
+              nodes: [
+                {
+                  type: Node_Type.PARAGRAPH,
+                  key: 'foo',
+                  paragraphData,
+                  nodes: [
+                    {
+                      key: 'foo',
+                      type: Node_Type.TEXT,
+                      textData: {
+                        text: 'item3',
+                        decorations: [],
+                      },
+                      nodes: [],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
       ],
     };
-
-    const expected = {
-      foo: imageData,
-    };
-
-    const actual = api.getImages(content);
-
+    const actual = api.addOrderedList({
+      items: [textDataItem1, listItem2, 'item3'],
+      data: paragraphData,
+      content: { nodes: [] },
+    });
     expect(actual).toEqual(expected);
   });
 });

@@ -59,6 +59,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'lodash/import-scope': [2, 'member'],
     'operator-linebreak': 'off',
+    'no-unused-vars': 'off',
     indent: 'off',
     curly: 'off',
   },

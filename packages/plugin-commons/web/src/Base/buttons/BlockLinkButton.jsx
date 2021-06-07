@@ -30,7 +30,7 @@ class BlockLinkButton extends Component {
       relValue,
       t,
       uiSettings,
-      unchangedUrl,
+      hideUrlInput,
       innerModal,
       toolbarOffsetTop,
       toolbarOffsetLeft,
@@ -41,8 +41,27 @@ class BlockLinkButton extends Component {
       !linkTypes ||
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
-      unchangedUrl;
-    const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
+      hideUrlInput;
+    const { externalPopups = false } = uiSettings.linkPanel;
+    const customStyles =
+      !isMobile && !OriginalLinkPanel
+        ? {
+            content: {
+              width: 512,
+              maxWidth: 512,
+              height: 390,
+              border: '1px solid rgb(237, 237, 237)',
+              borderRadius: '6px',
+              boxShadow: 'rgba(0, 0, 0, 0.07) 0px 4px 8px 0px',
+              padding: '0px 19px',
+            },
+          }
+        : {
+            content: {
+              position: 'fixed',
+            },
+          };
+    const modalStyles = getModalStyles({ fullScreen: isMobile, isMobile, customStyles });
     const commonPanelProps = {
       componentState,
       helpers,
@@ -53,12 +72,12 @@ class BlockLinkButton extends Component {
       relValue,
       modalName: EditorModals.BLOCK_LINK_MODAL,
       uiSettings,
-      unchangedUrl,
+      hideUrlInput,
       linkTypes,
       editorState,
       triggerBi: this.triggerBi,
     };
-    if (isMobile) {
+    if (isMobile || externalPopups) {
       if (helpers && helpers.openModal) {
         const modalProps = {
           modalStyles,
@@ -114,7 +133,7 @@ BlockLinkButton.propTypes = {
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
   icons: PropTypes.object,
-  unchangedUrl: PropTypes.bool,
+  hideUrlInput: PropTypes.bool,
   tooltipText: PropTypes.string,
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,

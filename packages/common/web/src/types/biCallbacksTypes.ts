@@ -1,8 +1,29 @@
 import { ToolbarType } from './toolbarEnums';
 import { OnPluginAction } from './pluginsBiCallbacksTypes';
+import { getContentSummary } from '../Utils/contentAnalytics';
 interface biCallbackParams {
   version?: string;
 }
+
+export type PluginAddParams =
+  | {
+      // Table
+      columns: number;
+      rows: number;
+    }
+  | {
+      // Embeds
+      link: string;
+      service: string;
+    }
+  | {
+      // Wix Embed
+      id: unknown;
+    }
+  | {
+      // Poll
+      type: 'list' | 'grid';
+    };
 
 type EntryType = ToolbarType;
 export interface onPluginAddStepArgs extends biCallbackParams {
@@ -10,22 +31,44 @@ export interface onPluginAddStepArgs extends biCallbackParams {
   pluginDetails: unknown;
   entryPoint: ToolbarType;
   entryType: EntryType;
+  params?: PluginAddParams;
   step: 'FileUploadDialog' | 'PluginModal';
 }
-export interface PluginAddSuccessParams {
-  rows?: number;
-  columns?: number;
+
+export interface onPluginDeleteArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
 }
+
+export interface onViewerLoadedArgs extends biCallbackParams {
+  isPreview: boolean;
+  pluginsCount: ReturnType<typeof getContentSummary>['pluginsCount'];
+  version: string;
+}
+
+export interface onPluginModalOpenedArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
+  entryPoint: ToolbarType;
+  entryType: EntryType;
+}
+
+export interface onMenuLoadArgs extends biCallbackParams {
+  menu: EntryType;
+}
+
+export interface onContentEditedArgs extends biCallbackParams {}
+
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
   onPluginAddSuccess?(
     pluginId: string,
     entryPoint: string,
-    params: PluginAddSuccessParams,
+    params: PluginAddParams,
     version: string
   ): void;
   onPluginAddStep?(params: onPluginAddStepArgs): void;
-  onPluginDelete?(pluginId: string, version: string): void;
+  onPluginDelete?(params: onPluginDeleteArgs): void;
   onPublish?(
     postId: string | undefined,
     pluginsCount: Record<string, number> | undefined,
@@ -39,8 +82,9 @@ export interface BICallbacks {
     version: string
   ): void;
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
-  onViewerLoaded?(isPreview: boolean, version: string): void;
+  onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
+  onContentEdited?(params: onContentEditedArgs): void;
   onPluginChange?(
     pluginId: string,
     changeObject: { from: string; to: string },
@@ -63,6 +107,8 @@ export interface BICallbacks {
     errorType: string | undefined,
     version: string
   ): void;
+  onPluginModalOpened?(params: onPluginModalOpenedArgs): void;
+  onMenuLoad?(params: onMenuLoadArgs): void;
   onPluginAction?: OnPluginAction;
 }
 

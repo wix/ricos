@@ -7,7 +7,7 @@ import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import { pluginTable } from 'wix-rich-content-plugin-table';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { Helpers } from 'wix-rich-content-common';
 
@@ -33,7 +33,7 @@ function getPlugins(handleVideoUpload, handleFileUpload) {
         pluginImage().createPlugin,
       ],
     }),
-    pluginAccordion({
+    pluginCollapsibleList({
       innerRCEPlugins: [
         pluginTextColor().createPlugin,
         pluginTextHighlight().createPlugin,

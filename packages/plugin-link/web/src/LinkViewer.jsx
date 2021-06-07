@@ -7,6 +7,8 @@ import {
   validate,
   anchorScroll,
   addAnchorTagToUrl,
+  getRelValue,
+  getTargetValue,
 } from 'wix-rich-content-common';
 import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
 import { isEqual } from 'lodash';
@@ -20,6 +22,7 @@ class LinkViewer extends Component {
     children: PropTypes.node,
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
+    customAnchorScroll: PropTypes.func,
     settings: PropTypes.object,
     isInEditor: PropTypes.bool,
     config: PropTypes.object,
@@ -40,7 +43,7 @@ class LinkViewer extends Component {
   }
 
   handleClick = event => {
-    const { componentData, isInEditor, config, helpers } = this.props;
+    const { componentData, isInEditor, config, helpers, customAnchorScroll } = this.props;
     const settings = config?.[LINK_TYPE];
     if (settings) {
       const { onClick } = settings;
@@ -51,10 +54,14 @@ class LinkViewer extends Component {
         event.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
         if (!isInEditor) {
           event.preventDefault();
-          const anchorString = `viewer-${anchor}`;
-          const element = document.getElementById(anchorString);
-          addAnchorTagToUrl(anchorString);
-          anchorScroll(element);
+          if (customAnchorScroll) {
+            customAnchorScroll(event, anchor);
+          } else {
+            const anchorString = `viewer-${anchor}`;
+            const element = document.getElementById(anchorString);
+            addAnchorTagToUrl(anchorString);
+            anchorScroll(element);
+          }
         }
       }
     }
@@ -62,21 +69,13 @@ class LinkViewer extends Component {
 
   getHref = (url, anchor) => (url ? normalizeUrl(url) : `#viewer-${anchor}`);
 
-  getTarget(anchor, target, anchorTarget) {
-    if (anchor) {
-      return '_self';
-    } else {
-      return target ? target : anchorTarget || '_self';
-    }
-  }
-
   render() {
-    const { componentData, anchorTarget, relValue, children, isInEditor } = this.props;
-    const { url, anchor, target, rel } = componentData;
+    const { componentData, anchorTarget, children, isInEditor } = this.props;
+    const { url, anchor, target = anchorTarget, rel } = componentData;
     const anchorProps = {
       href: this.getHref(url, anchor),
-      target: this.getTarget(anchor, target, anchorTarget),
-      rel: rel ? rel : relValue || 'noopener',
+      target: anchor ? '_self' : getTargetValue(target),
+      rel: getRelValue(rel),
       className: classNames(this.styles.link, {
         [this.styles.linkInEditor]: isInEditor,
         [this.styles.linkInViewer]: !isInEditor,
