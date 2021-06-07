@@ -21,6 +21,8 @@
 
 - `ui-components`
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
+- `ui-components`
+  - [#2599](https://github.com/wix-incubator/rich-content/pull/2599) moved RadioGroupVertical component into ui-components folder
 
 
 </details>
