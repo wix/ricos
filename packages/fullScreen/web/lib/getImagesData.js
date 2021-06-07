@@ -1,7 +1,7 @@
 const imageType = 'wix-draft-plugin-image';
 const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
-const accordionType = 'wix-rich-content-plugin-accordion';
+const collapsibleListType = 'wix-rich-content-plugin-collapsible-list';
 const tableType = 'wix-rich-content-plugin-table';
 
 function imageEntityToGallery(data, index) {
@@ -39,17 +39,17 @@ const blockToImagesKeys = {
     });
     return tableImagesKeys;
   },
-  [accordionType]: entity => {
-    let accordionImagesKeys = {};
+  [collapsibleListType]: entity => {
+    let collapsibleListType = {};
     entity.data?.pairs.forEach(pair => {
       const blockKeys = contentTraverser(pair.content);
       const imageKeys = blockKeys.length ? Object.assign(...blockKeys) : {};
-      accordionImagesKeys = {
-        ...accordionImagesKeys,
+      collapsibleListType = {
+        ...collapsibleListType,
         ...imageKeys,
       };
     });
-    return accordionImagesKeys;
+    return collapsibleListType;
   },
   [galleryType]: (entity, blockKey) => {
     if (!entity.data?.disableExpand) return { [blockKey]: entity.data.items.length };
@@ -97,12 +97,15 @@ function getTableImages(entity, index) {
     .flat();
 }
 
-function getAccordionImages(entity, index) {
-  let accordionImages = [];
+function getCollapsibleListImages(entity, index) {
+  let collapsibleListType = [];
   entity.data.pairs.forEach(pair => {
-    accordionImages = [...accordionImages, ...innerRceImagesMapper(pair.content.entityMap, index)];
+    collapsibleListType = [
+      ...collapsibleListType,
+      ...innerRceImagesMapper(pair.content.entityMap, index),
+    ];
   });
-  return accordionImages;
+  return collapsibleListType;
 }
 
 function convertEntityToGalleryItems(entity, index) {
@@ -118,8 +121,8 @@ function convertEntityToGalleryItems(entity, index) {
     case tableType: {
       return getTableImages(entity, index);
     }
-    case accordionType: {
-      return getAccordionImages(entity, index);
+    case collapsibleListType: {
+      return getCollapsibleListImages(entity, index);
     }
     default:
       return [];

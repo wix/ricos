@@ -33,7 +33,6 @@ export { default as baseToolbarButton } from './Base/baseToolbarButton';
 // Components
 export { default as FileInput } from './Components/FileInput';
 export { default as Image } from './Components/Image';
-export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as Panel } from './Components/Panel';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
 export { default as RadioGroupVertical } from './Components/RadioGroupVertical';
@@ -45,6 +44,10 @@ export { default as SliderWithInput } from './Components/SliderWithInput';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as TextInput } from './Components/TextInput';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
+<<<<<<< HEAD
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
+=======
+export { default as Loader } from './Components/Loader';
+>>>>>>> master
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';

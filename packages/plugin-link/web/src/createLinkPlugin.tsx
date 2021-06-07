@@ -11,7 +11,7 @@ import { addLinkPreview, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-
 import { isValidUrl, CreatePluginFunction } from 'wix-rich-content-common';
 import React, { KeyboardEvent } from 'react';
 import { LINK_TYPE, LinkPluginEditorConfig } from './types';
-import { Component } from './LinkComponent';
+import LinkViewer from './LinkViewer';
 import { linkEntityStrategy } from './strategy';
 import createLinkToolbar from './toolbar/createToolbar';
 import { DEFAULTS } from './defaults';
@@ -28,13 +28,27 @@ type LinkifyData = {
 const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config => {
   const type = LINK_TYPE;
   const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
-  const targetBlank = anchorTarget === '_blank';
-  const nofollow = relValue === 'nofollow';
+  const target = anchorTarget;
+  const rel = relValue;
   settings.minLinkifyLength = settings.minLinkifyLength || 6;
   const toolbar = createLinkToolbar({ ...config, settings, closeInlinePluginToolbar });
 
   const decorators = [
-    { strategy: linkEntityStrategy, component: props => <Component {...props} theme={theme} /> },
+    {
+      strategy: linkEntityStrategy,
+      component: props => {
+        const componentData = props?.contentState.getEntity(props?.entityKey).getData();
+        return (
+          <LinkViewer
+            componentData={componentData}
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            theme={theme}
+            {...props}
+          />
+        );
+      },
+    },
   ];
   let linkifyData: LinkifyData | undefined;
 
@@ -50,10 +64,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
       if (url && blockKey) {
         const linkData = createLinkEntityData({
           url,
-          targetBlank,
-          nofollow,
-          anchorTarget,
-          relValue,
+          target,
+          rel,
         }) as { url: string; target?: string; rel?: string };
         addLinkPreview(editorState, config, blockKey, linkData);
       }
@@ -156,10 +168,8 @@ const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config =>
   const addLinkAt = ({ string, index, endIndex, blockKey }, editorState) => {
     return insertLinkInPosition(editorState, blockKey, index, endIndex, {
       url: string,
-      anchorTarget,
-      relValue,
-      targetBlank,
-      nofollow,
+      rel,
+      target,
     });
   };
 

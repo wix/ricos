@@ -1,7 +1,7 @@
 import React, { Component, Suspense } from 'react';
-import { RicosEngine, shouldRenderChild } from 'ricos-common';
+import { RicosEngine, shouldRenderChild, getBiCallback as getCallback } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { BICallbacks, Version } from 'wix-rich-content-common';
+import { Version } from 'wix-rich-content-common';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
@@ -18,8 +18,11 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   viewerRef!: HTMLElement;
 
+  getBiCallback: typeof getCallback;
+
   constructor(props: RicosViewerProps) {
     super(props);
+    this.getBiCallback = getCallback.bind(this);
     this.state = {
       isPreviewExpanded: false,
       localeData: { locale: props.locale },
@@ -50,11 +53,6 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   }
 
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
-
-  getBiCallback = (key: keyof BICallbacks) => {
-    const { children, _rcProps } = this.props;
-    return children?.props.helpers?.[key] || _rcProps?.helpers?.[key];
-  };
 
   setRef = ref => ref && (this.viewerRef = ref);
 

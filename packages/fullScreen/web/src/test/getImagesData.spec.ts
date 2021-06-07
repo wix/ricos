@@ -37,10 +37,10 @@ describe('get images from content', () => {
     expect(imageKeys).toBe(numOfImageKeys - 1);
   });
 
-  it('should get 7 of the images when image expand inside accordion is enabled', () => {
+  it('should get 7 of the images when image expand inside collapsible list is enabled', () => {
     imagesContentState.entityMap['3'].data.pairs['1'].content.entityMap[
       '0'
-    ].data.disableExpand = false; // image inside accordion
+    ].data.disableExpand = false; // image inside collapsible list
 
     const res = getImagesData(imagesContentState);
     const imageKeys = Object.keys(res.imageMap).length;

@@ -7,6 +7,10 @@ import { merge } from 'lodash';
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
+import {
+  convertRelStringToObject,
+  convertRelObjectToString,
+} from 'wix-rich-content-common/libs/linkConverters';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: ReactElement;
@@ -109,7 +113,41 @@ export class RicosEngine extends Component<EngineProps> {
       onModalClose,
     } = modalSettings;
     const { pauseMedia, disableRightClick, fullscreenProps } = mediaSettings;
-    const { anchorTarget, relValue, customAnchorScroll } = linkSettings;
+    const { anchorTarget, customAnchorScroll } = linkSettings;
+    let { relValue, rel } = linkSettings;
+    const {
+      blankTargetToggleVisibilityFn,
+      nofollowRelToggleVisibilityFn,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+    } = linkPanelSettings;
+    if (blankTargetToggleVisibilityFn) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        // eslint-disable-next-line max-len
+        `blankTargetToggleVisibilityFn is deprecated, Please use showNewTabCheckbox prop instead.`
+      );
+      linkPanelSettings.showNewTabCheckbox =
+        linkPanelSettings.blankTargetToggleVisibilityFn?.() || showNewTabCheckbox;
+    }
+    if (nofollowRelToggleVisibilityFn) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        // eslint-disable-next-line max-len
+        `nofollowRelToggleVisibilityFn is deprecated, Please use showNoFollowCheckbox prop instead.`
+      );
+      linkPanelSettings.showNoFollowCheckbox =
+        linkPanelSettings.nofollowRelToggleVisibilityFn?.() || showNoFollowCheckbox;
+    }
+    if (relValue) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        // eslint-disable-next-line max-len
+        `relValue is deprecated, Please use rel prop instead.`
+      );
+      rel = convertRelStringToObject(relValue) || rel;
+    }
+    relValue = convertRelObjectToString(rel);
     const disableDownload = mediaSettings?.disableDownload || disableRightClick;
     // any of ricos props that should be merged into child
     const isPreview = () => !!(previewContent && !isPreviewExpanded);
