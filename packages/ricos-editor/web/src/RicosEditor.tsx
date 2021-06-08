@@ -23,7 +23,14 @@ import {
   EditorEventsContext,
   EditorEvents,
 } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
-import { ToolbarType, Version } from 'wix-rich-content-common';
+import { ToolbarType, Version, getLangDir, TextButtons } from 'wix-rich-content-common';
+import {
+  FloatingToolbarContainer,
+  Toolbar,
+  StaticToolbarContainer,
+} from 'wix-rich-content-toolbars-new';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { mobileTextButtonList, desktopTextButtonList } from './';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -35,6 +42,7 @@ interface State {
   remountKey: boolean;
   editorState?: EditorState;
   initialContentChanged: boolean;
+  activeEditor?: RicosEditor | RichContentEditor | null;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -56,6 +64,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       localeData: { locale: props.locale },
       remountKey: false,
       initialContentChanged: true,
+      activeEditor: null,
     };
   }
 
@@ -77,6 +86,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       this.props._rcProps?.helpers?.onOpenEditorSuccess;
     onOpenEditorSuccess?.(Version.currentVersion);
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.setState({ activeEditor: this.editor });
   }
 
   componentWillUnmount() {
@@ -98,11 +108,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return publishResponse.data;
   };
 
-  setStaticToolbar = ref => {
+  setActiveEditor = ref => {
     if (ref && ref !== this.currentEditorRef) {
       this.currentEditorRef = ref;
       const { MobileToolbar, TextToolbar } = ref.getToolbars();
-      this.setState({ StaticToolbar: MobileToolbar || TextToolbar });
+      this.setState({ StaticToolbar: MobileToolbar || TextToolbar, activeEditor: ref });
     }
   };
 
@@ -188,7 +198,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   setEditorRef = (ref: RichContentEditor) => {
     this.editor = ref;
-    this.setStaticToolbar(ref);
+    this.setActiveEditor(ref);
   };
 
   getEditorCommands = () => this.editor.getEditorCommands();
@@ -196,6 +206,64 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   getT = () => this.editor.getT();
 
   removeToolbarFocus = () => this.editor.removeToolbarFocus();
+
+  renderTextFormattingToolbar() {
+    const { activeEditor } = this.state;
+    if (activeEditor) {
+      const { buttons } = activeEditor.getToolbarProps(TOOLBARS.FORMATTING);
+      const { StaticToolbar } = this.state;
+      const {
+        isMobile,
+        theme,
+        locale,
+        toolbarSettings: { getToolbarSettings = () => [] } = {},
+      } = this.props;
+      const buttonsAsArray = Object.values(buttons);
+      const editorCommands = activeEditor.getEditorCommands();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const selection = (editorCommands as any)._getSelection();
+      const showFormattingToolbar = !selection.isCollapsed() && selection.getHasFocus();
+      const t = activeEditor.getT();
+      const removeToolbarFocus = () => activeEditor.removeToolbarFocus();
+      const textButtons: TextButtons = {
+        mobile: mobileTextButtonList,
+        desktop: desktopTextButtonList,
+      };
+      const formattingToolbarSetting = getToolbarSettings({ textButtons }).find(
+        toolbar => toolbar?.name === 'INLINE'
+      );
+      const formattingToolbarButtonsKeys = formattingToolbarSetting?.getButtons?.();
+      const ToolbarToRender = (
+        <Toolbar
+          theme={theme}
+          isMobile={isMobile}
+          t={t}
+          buttons={buttonsAsArray}
+          editorCommands={editorCommands}
+          formattingToolbarButtonsKeys={
+            isMobile ? formattingToolbarButtonsKeys?.mobile : formattingToolbarButtonsKeys?.desktop
+          }
+        />
+      );
+      const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
+      return textToolbarType === 'static' ? (
+        <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
+          <StaticToolbarContainer>{ToolbarToRender}</StaticToolbarContainer>
+        </div>
+      ) : (
+        <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
+          <FloatingToolbarContainer
+            isMobile={isMobile}
+            showFormattingToolbar={showFormattingToolbar}
+            removeToolbarFocus={removeToolbarFocus}
+          >
+            {ToolbarToRender}
+          </FloatingToolbarContainer>
+        </div>
+      );
+    }
+    return null;
+  }
 
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
@@ -214,14 +282,17 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         <RichContentEditor />
       );
 
+    const newFormattingToolbar = this.props._rcProps?.experiments?.newFormattingToolbar?.enabled;
+
     return (
       <Fragment key={`${remountKey}`}>
-        {!this.props._rcProps?.experiments?.newFormattingToolbar?.enabled && (
+        {!newFormattingToolbar && (
           <StaticToolbarPortal
             StaticToolbar={StaticToolbar}
             textToolbarContainer={toolbarSettings?.textToolbarContainer}
           />
         )}
+        {newFormattingToolbar && this.renderTextFormattingToolbar()}
         <RicosEngine
           RicosModal={RicosModal}
           isViewer={false}
@@ -234,7 +305,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             onChange: this.onChange(child.props.onChange),
             ref: this.setEditorRef,
             editorKey: 'editor',
-            setEditorToolbars: this.setStaticToolbar,
+            setEditorToolbars: this.setActiveEditor,
             ...contentProp.editorState,
             ...supportedDraftEditorSettings,
             ...localeData,

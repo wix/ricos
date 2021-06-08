@@ -55,8 +55,7 @@
     "wix-rich-content-plugin-vertical-embed": "8.43.1",
     "wix-rich-content-plugin-video": "8.43.1",
     "wix-rich-content-preview": "8.43.1",
-    "wix-rich-content-text-selection-toolbar": "8.43.1",
-    "wix-rich-content-toolbars-new": "8.43.1"
+    "wix-rich-content-text-selection-toolbar": "8.43.1"
   },
   "scripts": {
     "clean": "rm -rf dist/",
