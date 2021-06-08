@@ -60,7 +60,7 @@ export default class LineSpacingButton extends Component {
     setEditorState(newEditorState);
     helpers?.onToolbarButtonClick?.({
       buttonName: this.dataHookName,
-      value: spacing,
+      value: spacing?.['line-height'],
     });
     this.currentEditorState = newEditorState;
     onUpdate(dynamicStyles);
@@ -122,7 +122,7 @@ export default class LineSpacingButton extends Component {
           theme={theme}
           isMobile={isMobile}
           tooltipText={t('LineSpacingButton_Tooltip')}
-          dataHook={'LineSpacingButton'}
+          dataHook={this.dataHookName}
           tabIndex={tabIndex}
           icon={icon}
           ref={ref => (this.buttonRef = ref)}
