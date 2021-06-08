@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput } from 'wix-rich-content-plugin-commons';
+import { TextInput } from 'wix-rich-content-ui-components';
 import { Input } from 'wix-style-react';
 import Search from 'wix-ui-icons-common/Search';
 import { Section, Page } from '../Components/StoryParts';
