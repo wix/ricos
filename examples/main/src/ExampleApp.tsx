@@ -269,6 +269,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     };
     this.setState({ experiments });
     set('experiments', experiments);
+    window.location.reload();
   };
 
   renderEditor = () => {

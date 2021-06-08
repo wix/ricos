@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/table-settings-counter.scss';
-import { TextInput } from 'wix-rich-content-plugin-commons';
+import { TextInput } from 'wix-rich-content-ui-components';
 
 export default class TableSettingsCountSection extends Component {
   onChange = count => this.props.onCountChange(count);

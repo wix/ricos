@@ -116,7 +116,8 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           },
           "showDescription": true,
           "showTitle": true,
-          "size": "fullWidth"
+          "size": "fullWidth",
+          "spoiler": {}
         },
         "metadata": {
           "caption": ""
@@ -5327,6 +5328,8 @@ exports[`plugins > spoiler > check spoilers on an image in editor and reveal it 
             "enabled": true
           }
         },
+        "disableDownload": false,
+        "disableExpand": false,
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
           "height": 3354,
@@ -5453,6 +5456,8 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
             "enabled": true
           }
         },
+        "disableDownload": false,
+        "disableExpand": false,
         "items": [
           {
             "itemId": "65a6266ba23a8a55da3f469157f15237",

@@ -115,7 +115,8 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           },
           "showDescription": true,
           "showTitle": true,
-          "size": "fullWidth"
+          "size": "fullWidth",
+          "spoiler": {}
         },
         "disableDownload": false,
         "disableExpand": false,
@@ -3063,7 +3064,8 @@ exports[`plugins > video > should toggle download option #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "size": "content"
+          "size": "content",
+          "spoiler": {}
         },
         "disableDownload": true,
         "isCustomVideo": true,

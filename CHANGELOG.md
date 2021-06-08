@@ -16,14 +16,24 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
 ### :house: Internal
 
 - `ui-components`
+  - [#2596](https://github.com/wix-incubator/rich-content/pull/2596) moved fileInput component into ui-components folder
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
-- `ui-components`
+  - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved Slider component into ui-components folder
+  - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved SliderWithInput component into ui-components folder
+  - [#2577](https://github.com/wix-incubator/rich-content/pull/2577) moved Loader component into ui-components folder
+  - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
   - [#2600](https://github.com/wix-incubator/rich-content/pull/2600) moved SettingsPanelFooter component into ui-components folder
+  - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved TextInput component into ui-components folder
+  - [#2571](https://github.com/wix-incubator/rich-content/pull/2571) moved SettingsSection component into ui-components folder
 
+### :rocket: New Feature
+
+- `spoiler`
+  - [#2326](https://github.com/wix/ricos/pull/2326) remove spoiler from inline toolbar and add it to settings modal
 
 </details>
 <hr/>
