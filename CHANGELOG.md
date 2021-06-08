@@ -16,7 +16,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+
+</details>
+<hr/>
+
+## 8.44.0 (Jun 8, 2021)
+
 ### :house: Internal
 
 - `ui-components`
@@ -33,9 +39,6 @@
 
 - `spoiler`
   - [#2326](https://github.com/wix/ricos/pull/2326) remove spoiler from inline toolbar and add it to settings modal
-
-</details>
-<hr/>
 
 ## 8.43.1 (Jun 6, 2021)
 
