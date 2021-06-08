@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
-import { SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import ReactGooglePlacesSuggest from 'react-google-places-suggest';
 import styles from '../../statics/styles/map-settings-modal.scss';
-import { LabeledToggle, SettingsSection, TextInput } from 'wix-rich-content-ui-components';
+import {
+  LabeledToggle,
+  SettingsSection,
+  TextInput,
+  SettingsPanelFooter,
+} from 'wix-rich-content-ui-components';
 import { SearchIcon } from '../icons/SearchIcon';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classNames from 'classnames';
