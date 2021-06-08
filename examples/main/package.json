@@ -7,6 +7,7 @@
     "email": "jonathanb@wix.com"
   },
   "dependencies": {
+    "source-map-loader": "^1.1.3",
     "casual-browserify": "1.5.19-2",
     "local-storage": "2.0.0",
     "mobile-detect": "^1.4.1",
@@ -29,6 +30,7 @@
     "wix-rich-content-plugin-code-block": "8.43.1",
     "wix-rich-content-plugin-collapsible-list": "8.43.1",
     "wix-rich-content-plugin-commons": "8.43.1",
+    "wix-rich-content-ui-components": "8.43.1",
     "wix-rich-content-plugin-divider": "8.43.1",
     "wix-rich-content-plugin-emoji": "8.43.1",
     "wix-rich-content-plugin-file-upload": "8.43.1",
