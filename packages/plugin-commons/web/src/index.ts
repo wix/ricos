@@ -33,7 +33,6 @@ export { default as baseToolbarButton } from './Base/baseToolbarButton';
 // Components
 export { default as Image } from './Components/Image';
 export { default as SelectionList } from './Components/SelectionList';
-export { default as SettingsPanelFooter } from './Components/SettingsPanelFooter';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 

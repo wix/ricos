@@ -30,6 +30,13 @@
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
   - [#2599](https://github.com/wix-incubator/rich-content/pull/2599) moved RadioGroupVertical component into ui-components folder
   - [#2598](https://github.com/wix-incubator/rich-content/pull/2598) moved RadioGroupHorizontal component into ui-components folder
+  - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved Slider component into ui-components folder
+  - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved SliderWithInput component into ui-components folder
+  - [#2577](https://github.com/wix-incubator/rich-content/pull/2577) moved Loader component into ui-components folder
+  - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
+  - [#2600](https://github.com/wix-incubator/rich-content/pull/2600) moved SettingsPanelFooter component into ui-components folder
+  - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved TextInput component into ui-components folder
+  - [#2571](https://github.com/wix-incubator/rich-content/pull/2571) moved SettingsSection component into ui-components folder
 
 ### :rocket: New Feature
 
