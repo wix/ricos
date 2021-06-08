@@ -72,10 +72,11 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
   preventDefault = event => event.preventDefault();
 
   onClick: InlineToolbarButtonProps['onClick'] = e => {
-    const { onClick, helpers, dataHook } = this.props;
+    const { onClick, helpers, dataHook, isActive, children } = this.props;
     helpers?.onToolbarButtonClick?.({
       buttonName: dataHook || '',
       version: Version.currentVersion,
+      value: !children ? String(!isActive) : undefined,
     });
     onClick?.(e);
   };
