@@ -9,9 +9,6 @@ export {
   UNSUPPORTED_BLOCKS_TYPE,
 } from './consts';
 
-export { default as UrlInputModal } from './Modals/UrlInputModal';
-export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
-
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
 export {
@@ -32,7 +29,6 @@ export { default as baseToolbarButton } from './Base/baseToolbarButton';
 
 // Components
 export { default as Image } from './Components/Image';
-export { default as SelectionList } from './Components/SelectionList';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 
