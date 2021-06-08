@@ -22,13 +22,27 @@
 - `editor`
   - [#2603](https://github.com/wix/ricos/pull/2603) fix insertDecoration (link) from Editor Commands
 
+</details>
+<hr/>
+
+## 8.44.0 (Jun 8, 2021)
+
 ### :house: Internal
 
 - `ui-components`
+  - [#2596](https://github.com/wix-incubator/rich-content/pull/2596) moved fileInput component into ui-components folder
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
+  - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved Slider component into ui-components folder
+  - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved SliderWithInput component into ui-components folder
+  - [#2577](https://github.com/wix-incubator/rich-content/pull/2577) moved Loader component into ui-components folder
+  - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
+  - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved TextInput component into ui-components folder
+  - [#2571](https://github.com/wix-incubator/rich-content/pull/2571) moved SettingsSection component into ui-components folder
 
-</details>
-<hr/>
+### :rocket: New Feature
+
+- `spoiler`
+  - [#2326](https://github.com/wix/ricos/pull/2326) remove spoiler from inline toolbar and add it to settings modal
 
 ## 8.43.1 (Jun 6, 2021)
 
