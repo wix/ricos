@@ -109,7 +109,15 @@ describe('plugins', () => {
       cy.get('[data-hook="imageViewer"]:first')
         .parent()
         .click();
-      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      // check spoiler from inline toolbar
+      // cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      //check spoiler from settings modal
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=imageSpoilerToggle]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+
       cy.eyesCheckWindow('adding spoiler on an image');
       editText('spoilerTextArea', 'change the description');
       editText('revealSpoilerContent', 'change the reveal button content');
@@ -124,7 +132,14 @@ describe('plugins', () => {
       cy.get('[data-hook="baseToolbarButton_layout"]').click();
       cy.get('[data-hook="Slideshow_dropdown_option"]').click();
       cy.wait(100);
-      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      // check spoiler from inline toolbar
+      // cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      //check spoiler from settings modal
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS);
+      cy.get(`[data-hook=gallerySpoilerToggle]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
       cy.eyesCheckWindow('adding spoiler on a gallery');
       editText('spoilerTextArea', 'change the description');
       editText('revealSpoilerContent', 'change the reveal button content');
