@@ -21,7 +21,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
   font-size: 20px;
 }
 
-.imageSettingsImageSection{
+.imageSettingsImageSection {
   padding: 0 24px;
   @include phone {
     padding: 0;
@@ -43,13 +43,20 @@ $MOBILE_HEADER_HEIGHT: 50px;
 
 .imageSettingsLabel {
   margin-bottom: 5px;
+  .divider {
+    margin-top: 24px;
+    width: 100%;
+    height: 1px;
+    opacity: 0.3;
+    background-color: #000000;
+  }
 }
 .imageSettings_scrollContainer {
   margin: $TITLE_HEIGHT auto $FOOTER_HEIGHT auto;
   width: 100%;
 }
 
-.imageSettings_inputsWrapper{
+.imageSettings_inputsWrapper {
   padding: 0 24px;
   @include phone {
     padding: 0 20px;
