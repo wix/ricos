@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SliderWithInput from './SliderWithInput';
+import { SliderWithInput } from 'wix-rich-content-ui-components';
 import styles from '../../statics/styles/slider-panel.scss';
 
 const SliderPanel = props => {

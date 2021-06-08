@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput } from 'wix-rich-content-plugin-commons';
+import { TextInput } from 'wix-rich-content-ui-components';
 import { LinkPanelWrapper } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
