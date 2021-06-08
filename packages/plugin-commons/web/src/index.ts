@@ -31,7 +31,6 @@ export { default as createBaseInsertPluginButton } from './Base/createBaseInsert
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
 
 // Components
-export { default as FileInput } from './Components/FileInput';
 export { default as Image } from './Components/Image';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
 export { default as RadioGroupVertical } from './Components/RadioGroupVertical';
@@ -39,8 +38,6 @@ export { default as SelectionList } from './Components/SelectionList';
 export { default as SettingsPanelFooter } from './Components/SettingsPanelFooter';
 export { default as SettingsSection } from './Components/SettingsSection';
 export { Tab, Tabs } from './Components/Tabs';
-export { default as TextInput } from './Components/TextInput';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
-export { default as Loader } from './Components/Loader';
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
