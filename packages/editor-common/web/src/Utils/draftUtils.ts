@@ -147,19 +147,20 @@ export const insertLinkAtCurrentSelection = (
   if (isExistsLink) {
     editorStateWithLink = updateLink(newEditorState, selection, linkEntityData);
     editorStateSelection = selection.merge({ anchorOffset: selection.getFocusOffset() });
-  } else if (selection.isCollapsed()) {
-    const { url } = entityData;
-    const urlToInsertWhenCollapsed = text ? text : url;
-    const contentState = Modifier.insertText(
-      editorState.getCurrentContent(),
-      selection,
-      urlToInsertWhenCollapsed
-    );
-    selection = selection.merge({
-      focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
-    }) as SelectionState;
-    newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   } else {
+    if (selection.isCollapsed()) {
+      const { url } = entityData;
+      const urlToInsertWhenCollapsed = text ? text : url;
+      const contentState = Modifier.insertText(
+        editorState.getCurrentContent(),
+        selection,
+        urlToInsertWhenCollapsed
+      );
+      selection = selection.merge({
+        focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
+      }) as SelectionState;
+      newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
+    }
     editorStateWithLink = insertLink(newEditorState, selection, linkEntityData);
     editorStateSelection = editorStateWithLink.getCurrentContent().getSelectionAfter();
   }
