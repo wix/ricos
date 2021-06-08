@@ -4,7 +4,12 @@ import InlineToolbarButton from '../InlineToolbarButton';
 import { LinkIcon } from '../../Icons';
 
 const LinkButton = ({ icon, ...otherProps }) => (
-  <InlineToolbarButton icon={icon || LinkIcon} dataHook={'LinkButton'} {...otherProps} />
+  <InlineToolbarButton
+    isLastAddStep={false}
+    icon={icon || LinkIcon}
+    dataHook={'LinkButton'}
+    {...otherProps}
+  />
 );
 
 LinkButton.propTypes = {
