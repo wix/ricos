@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Image } from 'wix-rich-content-plugin-commons';
 import {
+  Image,
   InputWithLabel,
   SettingsSection,
   FileInput,

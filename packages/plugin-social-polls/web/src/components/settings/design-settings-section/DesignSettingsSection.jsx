@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { ColorPicker, SelectionList } from 'wix-rich-content-plugin-commons';
-import { SliderWithInput } from 'wix-rich-content-ui-components';
+import { ColorPicker } from 'wix-rich-content-plugin-commons';
+import { SliderWithInput, SelectionList } from 'wix-rich-content-ui-components';
 import { Separator } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
