@@ -5,7 +5,8 @@
 // // Components
 export { default as Button } from './Components/Button';
 export { default as FileInput } from './Components/FileInput';
-// export { default as Image } from './Components/Image';
+// export { default as FileInput } from './Components/FileInput';
+export { default as Image } from './Components/Image';
 export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as LabeledToggle } from './Components/LabeledToggle';
 export { default as Panel } from './Components/Panel';
@@ -18,7 +19,6 @@ export { default as SliderWithInput } from './Components/SliderWithInput';
 export { default as Slider } from './Components/Slider';
 export { default as TextInput } from './Components/TextInput';
 export { Tab, Tabs } from './Components/Tabs';
-// export { default as TextInput } from './Components/TextInput';
 // export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
