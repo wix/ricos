@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `ui-components`
+  - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved SelectionList/Tabs/Tab/Image components into ui-components folder
 
 </details>
 <hr/>
@@ -34,7 +38,6 @@
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
   - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved TextInput component into ui-components folder
   - [#2571](https://github.com/wix-incubator/rich-content/pull/2571) moved SettingsSection component into ui-components folder
-  - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved SelectionList/Tabs/Tab/Image components into ui-components folder
 
 ### :rocket: New Feature
 

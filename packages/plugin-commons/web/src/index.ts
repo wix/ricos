@@ -36,7 +36,6 @@ export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizont
 export { default as RadioGroupVertical } from './Components/RadioGroupVertical';
 export { default as SelectionList } from './Components/SelectionList';
 export { default as SettingsPanelFooter } from './Components/SettingsPanelFooter';
-export { Tab, Tabs } from './Components/Tabs';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
