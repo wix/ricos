@@ -33,7 +33,7 @@ export const toPlainText = async (
         plainText += delimiter;
       }
       switch (node.type) {
-        case Node_Type.CODEBLOCK:
+        case Node_Type.CODE_BLOCK:
         case Node_Type.PARAGRAPH:
         case Node_Type.HEADING:
           plainText += parseTextNodes(node);
