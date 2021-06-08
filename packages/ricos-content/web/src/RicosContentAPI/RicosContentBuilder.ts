@@ -1,6 +1,6 @@
 import {
   ButtonData,
-  CodeData,
+  CodeBlockData,
   DividerData,
   FileData,
   GalleryData,
@@ -24,7 +24,7 @@ import { ContentBuilder, ListItemData } from '../types';
 
 const dataByNodeType = (type: Node_Type, data: unknown) =>
   ({
-    [Node_Type.CODEBLOCK]: { codeData: data as CodeData },
+    [Node_Type.CODE_BLOCK]: { codeBlockData: data as CodeBlockData },
     [Node_Type.DIVIDER]: { dividerData: data as DividerData },
     [Node_Type.HEADING]: { headingData: data as HeadingData },
     [Node_Type.FILE]: { fileData: data as FileData },
@@ -165,7 +165,7 @@ export const setupContentBuilder = (
   [
     { name: 'Paragraph', type: Node_Type.PARAGRAPH, dataT: {} as ParagraphData },
     { name: 'Heading', type: Node_Type.HEADING, dataT: {} as HeadingData },
-    { name: 'Code', type: Node_Type.CODEBLOCK, dataT: {} as CodeData },
+    { name: 'Code', type: Node_Type.CODE_BLOCK, dataT: {} as CodeBlockData },
     { name: 'Blockquote', type: Node_Type.BLOCKQUOTE, dataT: {} as never },
   ].forEach(({ name, type, dataT }) => {
     builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
