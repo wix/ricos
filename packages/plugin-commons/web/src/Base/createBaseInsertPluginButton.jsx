@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
-import FileInput from '../Components/FileInput';
+import { FileInput } from 'wix-rich-content-ui-components';
 import { ToolbarButton, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/toolbar-button.scss';
 
