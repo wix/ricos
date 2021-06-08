@@ -15,6 +15,8 @@ export { default as Panel } from './Components/Panel';
 // export { default as SettingsPanelFooter } from './Components/SettingsPanelFooter';
 export { default as SettingsSection } from './Components/SettingsSection';
 // export { default as Slider } from './Components/Slider';
+export { default as SliderWithInput } from './Components/SliderWithInput';
+export { default as Slider } from './Components/Slider';
 // export { default as SliderWithInput } from './Components/SliderWithInput';
 // export { Tab, Tabs } from './Components/Tabs';
 export { default as TextInput } from './Components/TextInput';
