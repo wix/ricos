@@ -42,7 +42,7 @@ export default ({ style, Icon, tooltipTextKey }) =>
         helpers?.onToolbarButtonClick?.({
           buttonName: textForHooks,
           version: Version.currentVersion,
-          value: !this.isActive(),
+          value: String(!this.isActive()),
         });
         this.toggleStyle(e);
       };
