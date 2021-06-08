@@ -20,7 +20,7 @@
 ### :house: Internal
 
 - `ui-components`
-  - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved SelectionList/Tabs/Tab/Image components into ui-components folder
+  - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved SelectionList/Tabs/Tab/Image/SliderPanel components into ui-components folder
 
 </details>
 <hr/>
