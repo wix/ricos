@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextButton from '../TextButton';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, Version } from 'wix-rich-content-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outsider';
 
@@ -17,6 +17,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       isMobile: PropTypes.bool,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      helpers: PropTypes.object,
     };
 
     constructor(props) {
@@ -93,10 +94,17 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         selected: { Icon },
         isOpen,
       } = this.state;
-      const { isMobile, tabIndex, t } = this.props;
+      const { isMobile, tabIndex, t, helpers } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textDropDownButton_${textForHooks}`;
+      const onClick = () => {
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+          version: Version.currentVersion,
+        });
+        this.showOptions();
+      };
 
       return (
         <div className={this.styles.inlineToolbarDropdown_wrapper}>
@@ -105,7 +113,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
             theme={this.theme}
             isMobile={isMobile}
             dataHook={dataHookText}
-            onClick={this.showOptions}
+            onClick={onClick}
             tabIndex={tabIndex}
             tooltipText={tooltipText}
             tooltipOffset={{ y: -10 }}

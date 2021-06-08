@@ -25,6 +25,7 @@ export default class LineSpacingButton extends Component {
     super(props);
     this.state = { showPanel: false };
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.dataHookName = 'LineSpacingButton';
   }
 
   static getBlockSpacing(editorState) {
@@ -54,9 +55,13 @@ export default class LineSpacingButton extends Component {
 
   updateSpacing = spacing => {
     const dynamicStyles = spacing;
-    const { setEditorState, onUpdate } = this.props;
+    const { setEditorState, onUpdate, helpers } = this.props;
     const newEditorState = mergeBlockData(this.oldEditorState, { dynamicStyles });
     setEditorState(newEditorState);
+    helpers?.onToolbarButtonClick?.({
+      buttonName: this.dataHookName,
+      value: spacing,
+    });
     this.currentEditorState = newEditorState;
     onUpdate(dynamicStyles);
   };
@@ -160,7 +165,7 @@ export default class LineSpacingButton extends Component {
             theme={theme}
             isMobile={isMobile}
             tooltipText={t('LineSpacingButton_Tooltip')}
-            dataHook={'LineSpacingButton'}
+            dataHook={this.dataHookName}
             tabIndex={tabIndex}
             icon={icon}
             ref={ref => (this.buttonRef = ref)}

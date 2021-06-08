@@ -21,12 +21,11 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
     isActive = () => this.props.alignment === alignment;
 
     handleClick = () => {
-      const { onClick, helpers, t, getEditorState, setEditorState } = this.props;
-      const tooltipText = t(tooltipTextKey);
-      const textForHooks = tooltipText.replace(/\s+/, '');
+      const { onClick, helpers, getEditorState, setEditorState } = this.props;
       helpers?.onToolbarButtonClick?.({
-        buttonName: textForHooks,
+        buttonName: 'Alignment',
         version: Version.currentVersion,
+        value: alignment,
       });
       if (onClick) {
         onClick(alignment);
