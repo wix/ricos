@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import SelectionList from '../Components/SelectionList';
+import { SelectionList } from 'wix-rich-content-ui-components';
 import { MoreIcon } from '../Icons';
 import styles from '../../statics/styles/settings-mobile-header.scss';
 import { mergeStyles } from 'wix-rich-content-common';
