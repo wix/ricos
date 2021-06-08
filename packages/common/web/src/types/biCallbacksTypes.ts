@@ -59,7 +59,22 @@ export interface onMenuLoadArgs extends biCallbackParams {
 
 export interface onContentEditedArgs extends biCallbackParams {}
 export interface onToolbarButtonClickArgs extends biCallbackParams {
+  /** The name of the button the user clicked on (`Bold`, `Italic`, `SpoilerButton`, ...) */
   buttonName: string;
+  /** Toolbar / Sidebar/ else */
+  origin?: string;
+  /** toolbar type (PluginsToolbar / FormattingToolbar) */
+  type?: 'FormattingToolbar' | 'PluginsToolbar' | string;
+  /** The new value that was changed (center, right...) */
+  value?: string;
+  /** Category of change (alignment / size / settings...) */
+  category?: string;
+  /** Plugin's Type (e.g. `LINK_TYPE`, `HASHTAG_TYPE`...) */
+  pluginId?: string;
+  /** Draft: `blockKey` of plugin. Prose: not yet decided */
+  pluginUniqueId?: string;
+  /** Additional specification of plugin */
+  pluginDetails?: string;
 }
 
 export interface BICallbacks {
