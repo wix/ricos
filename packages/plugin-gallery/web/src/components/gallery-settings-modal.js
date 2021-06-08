@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { FocusManager } from 'wix-rich-content-editor-common';
-import { LabeledToggle, Tabs, Tab, SettingsSection } from 'wix-rich-content-ui-components';
-import { SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
+import {
+  Tabs,
+  Tab,
+  LabeledToggle,
+  SettingsSection,
+  SettingsPanelFooter,
+} from 'wix-rich-content-ui-components';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import LayoutControlsSection from './layout-controls-section';
