@@ -12,7 +12,17 @@ import {
 } from 'ricos-schema';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
-const fixtures = { intro: fixture, complex: complexFixture };
+const SIMPLE_DRAFT_CONTENT = {
+  blocks: [
+    {
+      text:
+        // eslint-disable-next-line max-len
+        'VOLNÁ MÍSTA DNES 8. 6. 2021\n17:30 KOLA - Šárka\n18:30 BŘICHO, ZÁDA - Monika\nVOLNÁ MÍSTA ZÍTRA 9. 6.\n18:30 JOGA - Kristián\n18:30 BOLAVÁ ZÁDA - Ingrid\n17:30 KOLA - Sandra\n18:30 KOLA - Monika\nTěšíme se na Vás. :)',
+    },
+  ],
+};
+
+const fixtures = { simple: SIMPLE_DRAFT_CONTENT, intro: fixture, complex: complexFixture };
 
 describe('migrate to draft', () => {
   Object.entries(fixtures).forEach(([name, content]) =>
