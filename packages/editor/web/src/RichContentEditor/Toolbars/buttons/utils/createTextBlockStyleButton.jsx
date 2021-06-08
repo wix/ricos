@@ -74,13 +74,19 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
       return nextBlockTypeIndex > -1 ? nextBlockTypeIndex : undefined;
     };
 
-    setBlockStyle = event => {
+    setBlockStyle = (event, textForHooks) => {
       event.preventDefault();
       const { getEditorState, setEditorState, helpers } = this.props;
       const blockTypeIndex = this.nextBlockTypeIndex();
       this.setState({ blockTypeIndex }, () => {
         const blockType = this.activeBlockType;
         const isAddEvent = blockType !== 'unstyled';
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+          version: Version.currentVersion,
+          value: String(isAddEvent),
+          pluginId: isAddEvent ? blockType : this.selectionBlockType,
+        });
         isAddEvent && helpers?.onPluginAdd?.(blockType, 'FormattingToolbar');
         setEditorState(RichUtils.toggleBlockType(getEditorState(), blockType));
         isAddEvent && helpers?.onPluginAddSuccess?.(blockType, 'FormattingToolbar');
@@ -94,25 +100,17 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
 
     render() {
       const { Icon } = this;
-      const { theme, helpers, isMobile, t, tabIndex } = this.props;
+      const { theme, isMobile, t, tabIndex } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textBlockStyleButton_${textForHooks}`;
-      const onClick = event => {
-        helpers?.onToolbarButtonClick?.({
-          buttonName: textForHooks,
-          version: Version.currentVersion,
-        });
-        this.setBlockStyle(event);
-      };
-
       return (
         <TextButton
           icon={Icon}
           theme={theme}
           isMobile={isMobile}
           isActive={this.blockTypeIsActive}
-          onClick={onClick}
+          onClick={event => this.setBlockStyle(event, textForHooks)}
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}
