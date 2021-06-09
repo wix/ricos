@@ -45,15 +45,25 @@ class DesignComponent extends PureComponent {
   };
 
   withColorOptions = settings => {
-    const { designObj } = this.props;
+    const { designObj = {} } = this.props;
+    const { color, borderColor, background } = designObj;
     const { getTextColors, getBorderColors, getBackgroundColors } = settings;
     const customColors = Object.values(this.getUserColors()).filter(c => !!c);
+    const hasCustomColors = customColors.length > 0;
+
     const customBackgroundColors =
-      (getBackgroundColors && getBackgroundColors()) || customColors || DEFAULT_PALETTE;
-    const customTextColors = (getTextColors && getTextColors()) || customColors || DEFAULT_PALETTE;
+      (getBackgroundColors && getBackgroundColors()) ||
+      (hasCustomColors && customColors) ||
+      DEFAULT_PALETTE;
+
+    const customTextColors =
+      (getTextColors && getTextColors()) || (hasCustomColors && customColors) || DEFAULT_PALETTE;
+
     const customBorderColors =
-      (getBorderColors && getBorderColors()) || customColors || DEFAULT_PALETTE;
-    const { color, borderColor, background } = designObj || {};
+      (getBorderColors && getBorderColors()) ||
+      (hasCustomColors && customColors) ||
+      DEFAULT_PALETTE;
+
     if (color && !customTextColors.includes(color)) {
       customTextColors.push(color);
     }
