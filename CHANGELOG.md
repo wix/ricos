@@ -20,6 +20,7 @@
 ### :bug: Bug Fix
 
 - `editor`
+  - [#2593](https://github.com/wix/ricos/pull/2593) fix cut behavior
   - [#2603](https://github.com/wix/ricos/pull/2603) fix insertDecoration (link) from Editor Commands
 ### :nail_care: Polish
 
