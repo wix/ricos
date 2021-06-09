@@ -7,27 +7,30 @@ import {
 } from '../Utils/mediaPluginsDataBuilders';
 import PropTypes from 'prop-types';
 import { MediaItemErrorMsg, Loader } from 'wix-rich-content-ui-components';
-import { GALLERY_TYPE } from 'wix-rich-content-common';
+import {
+  GALLERY_TYPE,
+  alignmentClassName,
+  sizeClassName,
+  textWrapClassName,
+} from 'wix-rich-content-common';
 
 class MediaPlugin extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isLoading: false, tempData: null };
-    props.pluginType === GALLERY_TYPE &&
-      props.commonPubsub?.setBlockHandler(
-        'galleryHandleFilesAdded',
-        this.blockKey,
-        this.handleFilesAdded.bind(this)
-      );
   }
 
   componentDidMount() {
-    const { block, store } = this.props;
-    if (store) {
-      const blockKey = block.getKey();
-      store.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-      store.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
-    }
+    const { block, store, commonPubsub, pluginType } = this.props;
+    const blockKey = block.getKey();
+    store?.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
+    store?.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+    pluginType === GALLERY_TYPE &&
+      commonPubsub?.setBlockHandler(
+        'galleryHandleFilesAdded',
+        blockKey,
+        this.handleFilesAdded.bind(this)
+      );
     this.updateComponent();
   }
 
@@ -145,6 +148,21 @@ const createBaseMediaPlugin = ({
       commonPubsub: PropTypes.object,
       helpers: PropTypes.object,
     };
+
+    static alignmentClassName = (componentData, theme, styles, isMobile) =>
+      PluginComponent.alignmentClassName?.(componentData, theme, styles, isMobile) ||
+      alignmentClassName(componentData, theme, styles, isMobile);
+
+    static sizeClassName = (componentData, theme, styles, isMobile) =>
+      PluginComponent.sizeClassName?.(componentData, theme, styles, isMobile) ||
+      sizeClassName(componentData, theme, styles, isMobile);
+
+    static textWrapClassName = (componentData, theme, styles, isMobile) =>
+      PluginComponent.textWrapClassName?.(componentData, theme, styles, isMobile) ||
+      textWrapClassName(componentData, theme, styles, isMobile);
+
+    static customClassName = (componentData, theme, styles, isMobile) =>
+      PluginComponent.customClassName?.(componentData, theme, styles, isMobile);
 
     fileReader = file => {
       return new Promise(resolve => {
