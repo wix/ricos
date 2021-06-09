@@ -17,7 +17,12 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `editor`
+  - [#2593](https://github.com/wix/ricos/pull/2593) fix cut behavior
 ### :nail_care: Polish
+
 - `schema`
   - [#2606](https://github.com/wix-incubator/rich-content/pull/2606) code block type refactor
 ### :house: Internal
