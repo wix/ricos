@@ -17,22 +17,28 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.44.1 (Jun 9, 2021)
+
 ### :bug: Bug Fix
 
 - `editor`
   - [#2593](https://github.com/wix/ricos/pull/2593) fix cut behavior
   - [#2603](https://github.com/wix/ricos/pull/2603) fix insertDecoration (link) from Editor Commands
+- `button`
+  - [#2609](https://github.com/wix/ricos/pull/2609) Default Colors were always shown on settings panel configurations
+
 ### :nail_care: Polish
 
 - `schema`
   - [#2606](https://github.com/wix-incubator/rich-content/pull/2606) code block type refactor
+
 ### :house: Internal
 
 - `ui-components`
   - [#2607](https://github.com/wix-incubator/rich-content/pull/2607) moved SelectionList/Tabs/Tab/Image/SliderPanel components into ui-components folder
-
-</details>
-<hr/>
 
 ## 8.44.0 (Jun 8, 2021)
 
