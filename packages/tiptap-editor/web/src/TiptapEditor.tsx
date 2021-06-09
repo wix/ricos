@@ -6,7 +6,8 @@ import { EditorPropsContext } from './context';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Gapcursor from '@tiptap/extension-gapcursor';
 import Document from '@tiptap/extension-document';
-
+import Underline from '@tiptap/extension-underline';
+import Highlight from '@tiptap/extension-highlight';
 import Text from '@tiptap/extension-text';
 import History from '@tiptap/extension-history';
 import Bold from '@tiptap/extension-bold';
@@ -29,6 +30,8 @@ import { createDivider } from './extensions/extension-divider';
 const starterKitExtensions = [
   Blockquote,
   Bold,
+  Underline,
+  Highlight,
   BulletList,
   Code,
   CodeBlock,
