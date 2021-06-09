@@ -14,13 +14,13 @@ import {
   ACTION_BUTTON_TYPE,
 } from 'wix-rich-content-common';
 
-export const getAnchorableBlocks = editorState => {
+export const getAnchorableBlocks = (editorState, selectedBlock) => {
   const anchorableBlocks = [];
   const typesWithIndexes = {};
 
   const contentState = editorState.getCurrentContent();
   const selection = editorState.getSelection();
-  const selectedBlockKey = selection.getStartKey();
+  const selectedBlockKey = selectedBlock || selection.getStartKey();
 
   contentState
     .getBlockMap()
@@ -36,12 +36,12 @@ export const getAnchorableBlocks = editorState => {
         if (type === 'wix-rich-content-plugin-collapsible-list') {
           entityData.pairs.forEach(pair => {
             const titleEditorState = pair.title;
-            addInnerRCEBlocksToAnchorableList(titleEditorState, anchorableBlocks, selectedBlockKey);
+            anchorableBlocks.push(
+              ...getAnchorableBlocks(titleEditorState, selectedBlockKey).anchorableBlocks
+            );
             const contentEditorState = pair.content;
-            addInnerRCEBlocksToAnchorableList(
-              contentEditorState,
-              anchorableBlocks,
-              selectedBlockKey
+            anchorableBlocks.push(
+              ...getAnchorableBlocks(contentEditorState, selectedBlockKey).anchorableBlocks
             );
           });
         }
@@ -55,21 +55,6 @@ export const getAnchorableBlocks = editorState => {
 export const filterAnchorableBlocks = (array, filter) => {
   return array.filter(block => block.anchorType === filter);
 };
-
-function addInnerRCEBlocksToAnchorableList(editorState, anchorableBlocks, selectedBlockKey) {
-  const contentState = editorState.getCurrentContent();
-  contentState
-    .getBlockMap()
-    .filter(block => selectedBlockKey !== block.key)
-    .forEach(block => {
-      if (isAnchorableBlock(block, editorState)) {
-        const anchorableBlock = isAtomicBlock(block)
-          ? mapAtomicBlocks(block, editorState)
-          : mapInlineBlocks(block);
-        anchorableBlocks.push(anchorableBlock);
-      }
-    });
-}
 
 function isInnerRCEBlock(block, editorState) {
   const { type } = getBlockInfo(editorState, block.key);
