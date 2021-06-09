@@ -89,7 +89,9 @@ export const dataBuilder = {
   },
   [GALLERY_TYPE]: ({ data, error }, componentData, fileType, itemIndex) => {
     const type =
-      fileType || data.type || data.thumbnail ? GALLERY_FILE_TYPES.VIDEO : GALLERY_FILE_TYPES.IMAGE;
+      fileType ||
+      data.type ||
+      (data.thumbnail ? GALLERY_FILE_TYPES.VIDEO : GALLERY_FILE_TYPES.IMAGE);
     return setItemInGallery(
       { ...galleryItemBuilder[type]?.(data, data.id || Date.now().toString()), error },
       componentData,

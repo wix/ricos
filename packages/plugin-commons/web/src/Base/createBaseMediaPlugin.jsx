@@ -85,7 +85,11 @@ class MediaPlugin extends PureComponent {
   handleFilesAdded = ({ data, error }) => {
     if (data instanceof Array) {
       data.forEach((item, index) => {
-        this.props.handleUploadFinished(item, error[index] || error, this.onUploadFinished);
+        this.props.handleUploadFinished(
+          item,
+          (error instanceof Array && error[index]) || error,
+          this.onUploadFinished
+        );
       });
     } else {
       this.props.handleUploadFinished(data, error, this.onUploadFinished);
