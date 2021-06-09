@@ -1,25 +1,20 @@
 import { DraftContent } from '../types/contentTypes';
-import { getImageSrc } from '../imageUtils';
 import extractEntityData from '../preview/ContentStateAnalyzer/extractEntityData';
 
 const toSeoImage = entityData => {
   const { url, width, height, alt = '', caption = '' } = entityData;
-  const imageUrl = getImageSrc({ file_name: url }, undefined, {
-    imageType: 'highRes',
-    requiredQuality: 90,
-    requiredHeight: height as number,
-    requiredWidth: width as number,
-  });
-  return { imageUrl, imageWidth: width, imageHeight: height, imageAlt: alt, imageCaption: caption };
+  return {
+    imageUrl: url,
+    imageWidth: width,
+    imageHeight: height,
+    imageAlt: alt,
+    imageCaption: caption,
+  };
 };
 
 const toSeoVideo = entityData => {
   const { url, thumbnail, caption = '' } = entityData;
-  const videoThumbnailUrl = thumbnail.startsWith('media/')
-    ? `https://static.wixstatic.com/${thumbnail}`
-    : thumbnail;
-  const videoContentUrl = url.startsWith('video/') ? `https://video.wixstatic.com/${url}` : url;
-  return { videoThumbnailUrl, videoContentUrl, videoName: caption };
+  return { videoThumbnailUrl: thumbnail, videoContentUrl: url, videoName: caption };
 };
 
 const gifToSeoVideo = entityData => {

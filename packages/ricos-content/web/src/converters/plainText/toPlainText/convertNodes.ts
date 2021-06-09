@@ -1,5 +1,4 @@
 import { Node, Node_Type } from 'ricos-schema';
-import { getImageSrc } from '../../../imageUtils';
 import { LINK_TYPE } from '../../../consts';
 import { mergeTextNodes, RangedDecoration } from '../../draft/toDraft/decorationParsers';
 
@@ -49,22 +48,16 @@ const insertInText = (text: string, pos: number, insertedText: string) =>
 const removeTrailingNewLine = (text: string) =>
   text.endsWith('\n') ? text.substring(0, text.length - 1) : text;
 
+const toAbsoluteImageUrl = (url?: string) => !!url && `https://static.wixstatic.com/${url}`;
+
 export const parseImage = async (
   { imageData }: Node,
   delimiter: string,
   urlShortener?: (url: string) => Promise<string>
 ): Promise<string> => {
   const { caption } = imageData || {};
-  const { src, width, height } = imageData?.image || {};
-  const imageUrlOptions = Object.assign(
-    {
-      imageType: 'highRes',
-      requiredQuality: 90,
-    },
-    width && { requiredWidth: width },
-    height && { requiredHeight: height }
-  );
-  let url: string = getImageSrc({ file_name: src?.custom }, undefined, imageUrlOptions);
+  const { src } = imageData?.image || {};
+  let url = toAbsoluteImageUrl(src?.custom) || '';
   if (urlShortener) {
     url = await urlShortener(url);
   }
