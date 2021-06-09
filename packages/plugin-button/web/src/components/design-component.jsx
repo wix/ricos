@@ -15,10 +15,9 @@ class DesignComponent extends PureComponent {
     const { designObj } = this.props;
     const {
       settings,
-      settings: { colors, themeData },
-      config,
+      settings: { colors },
     } = this.props;
-    const { colors: { actionColor, bgColor } = {} } = themeData || config?.themeData || {};
+    const { actionColor, bgColor } = this.getUserColors();
     this.state = {
       design: {
         borderWidth: designObj.borderWidth,
@@ -35,19 +34,34 @@ class DesignComponent extends PureComponent {
     this.originalDesign = this.state.design;
   }
 
+  getUserColors = () => {
+    const {
+      settings: { themeData },
+      config,
+    } = this.props;
+    const { colors: { actionColor, bgColor, textColor } = {} } =
+      themeData || config?.themeData || {};
+    return { actionColor, bgColor, textColor };
+  };
+
   withColorOptions = settings => {
-    const { getTextColors, getBorderColors, getBackgroundColors, themeData } = settings;
-    const { colors: { actionColor, bgColor } = {} } = themeData;
+    const { designObj } = this.props;
+    const { getTextColors, getBorderColors, getBackgroundColors } = settings;
+    const customColors = Object.values(this.getUserColors()).filter(c => !!c);
     const customBackgroundColors =
-      (getBackgroundColors && getBackgroundColors()) || DEFAULT_PALETTE;
-    const customTextColors = (getTextColors && getTextColors()) || DEFAULT_PALETTE;
-    const customBorderColors = (getBorderColors && getBorderColors()) || DEFAULT_PALETTE;
-    if (bgColor) {
-      customTextColors.push(bgColor);
+      (getBackgroundColors && getBackgroundColors()) || customColors || DEFAULT_PALETTE;
+    const customTextColors = (getTextColors && getTextColors()) || customColors || DEFAULT_PALETTE;
+    const customBorderColors =
+      (getBorderColors && getBorderColors()) || customColors || DEFAULT_PALETTE;
+    const { color, borderColor, background } = designObj || {};
+    if (color && !customTextColors.includes(color)) {
+      customTextColors.push(color);
     }
-    if (actionColor) {
-      customBackgroundColors.push(actionColor);
-      customBorderColors.push(actionColor);
+    if (borderColor && !customBorderColors.includes(borderColor)) {
+      customBorderColors.push(borderColor);
+    }
+    if (background && !customBackgroundColors.includes(background)) {
+      customBackgroundColors.push(background);
     }
     return {
       customBackgroundColors,
