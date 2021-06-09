@@ -4520,8 +4520,8 @@
 
 "@tiptap/extension-highlight@^2.0.0-beta.13":
   version "2.0.0-beta.14"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@tiptap/extension-highlight/-/extension-highlight-2.0.0-beta.14.tgz#eb9d815611415481a5f9a33a6308a72e16111b22"
-  integrity sha1-652BVhFBVIGl+aM6YwinLhYRGyI=
+  resolved "https://registry.npmjs.org/@tiptap/extension-highlight/-/extension-highlight-2.0.0-beta.14.tgz#eb9d815611415481a5f9a33a6308a72e16111b22"
+  integrity sha512-AYSjIW5qX0TaWrzq0QhcPfbwF51Zl1o+/mwgFP+UPcr3Uiaw+zBw/EB2Yl3vG8eQ8/sY1PMqAPFE5nJ40Ea3cA==
 
 "@tiptap/extension-history@2.0.0-beta.12":
   version "2.0.0-beta.12"
@@ -4604,8 +4604,8 @@
 
 "@tiptap/extension-underline@^2.0.0-beta.13":
   version "2.0.0-beta.15"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@tiptap/extension-underline/-/extension-underline-2.0.0-beta.15.tgz#9ec2aad3e7930fb1de204709200cc5757dd238cf"
-  integrity sha1-nsKq0+eTD7HeIEcJIAzFdX3SOM8=
+  resolved "https://registry.npmjs.org/@tiptap/extension-underline/-/extension-underline-2.0.0-beta.15.tgz#9ec2aad3e7930fb1de204709200cc5757dd238cf"
+  integrity sha512-xrdNYXBuDaiKBByAuJ8Z9g+1w4I1pp8Id6ZbhxnljiTIwtX6SD/Pp4z/4dKhXNSpHvipyaFEXY0CVpxzbSEk5w==
 
 "@tiptap/react@2.0.0-beta.41":
   version "2.0.0-beta.41"
