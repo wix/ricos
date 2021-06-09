@@ -9,7 +9,7 @@ import {
   FileData,
   ButtonData,
   GalleryData,
-  CodeData,
+  CodeBlockData,
   HeadingData,
 } from 'ricos-schema';
 
@@ -88,7 +88,7 @@ type AddMap = {
 };
 
 type AddTextMap = {
-  addCode: CodeData;
+  addCode: CodeBlockData;
   addHeading: HeadingData;
   addParagraph: ParagraphData;
 };

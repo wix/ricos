@@ -17,6 +17,19 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `editor`
+  - [#2593](https://github.com/wix/ricos/pull/2593) fix cut behavior
+  - [#2603](https://github.com/wix/ricos/pull/2603) fix insertDecoration (link) from Editor Commands
+### :nail_care: Polish
+
+- `schema`
+  - [#2606](https://github.com/wix-incubator/rich-content/pull/2606) code block type refactor
+### :house: Internal
+
+- `ui-components`
+  - [#2607](https://github.com/wix-incubator/rich-content/pull/2607) moved SelectionList/Tabs/Tab/Image/SliderPanel components into ui-components folder
 
 </details>
 <hr/>
@@ -28,10 +41,13 @@
 - `ui-components`
   - [#2596](https://github.com/wix-incubator/rich-content/pull/2596) moved fileInput component into ui-components folder
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
+  - [#2599](https://github.com/wix-incubator/rich-content/pull/2599) moved RadioGroupVertical component into ui-components folder
+  - [#2599](https://github.com/wix-incubator/rich-content/pull/2599) moved RadioGroupHorizontal component into ui-components folder
   - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved Slider component into ui-components folder
   - [#2602](https://github.com/wix-incubator/rich-content/pull/2602) moved SliderWithInput component into ui-components folder
   - [#2577](https://github.com/wix-incubator/rich-content/pull/2577) moved Loader component into ui-components folder
   - [#2582](https://github.com/wix-incubator/rich-content/pull/2582) moved Panel component into ui-components folder
+  - [#2599](https://github.com/wix-incubator/rich-content/pull/2599) moved SettingsPanelFooter component into ui-components folder
   - [#2604](https://github.com/wix-incubator/rich-content/pull/2604) moved TextInput component into ui-components folder
   - [#2571](https://github.com/wix-incubator/rich-content/pull/2571) moved SettingsSection component into ui-components folder
 

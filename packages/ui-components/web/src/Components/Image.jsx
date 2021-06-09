@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from '../../statics/styles/image.scss';
 import { mergeStyles } from 'wix-rich-content-common';
-import { MediaItemErrorMsg } from 'wix-rich-content-ui-components';
+import MediaItemErrorMsg from './MediaItemErrorMsg';
 
 class Image extends Component {
   static propTypes = {

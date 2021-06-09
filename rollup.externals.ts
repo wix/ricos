@@ -15,8 +15,8 @@ const externals = [
   'react-i18next',
   'react-flip-move',
   'image-client-api/dist/imageClientSDK',
+  '@wix/draft-js',
   /^punycode$/,
-  /^@wix\/draft-js$/,
   /^jss$/, //issue with ESM in CJS
   /^jss-plugin-camel-case$/, //issue with ESM in CJS
   /^jss-plugin-nested$/, //issue with ESM in CJS
