@@ -15,6 +15,7 @@ import Modal from 'react-modal';
 import Panel from './LineSpacingPanel';
 import classNames from 'classnames';
 import styles from '../../statics/styles/styles.scss';
+import { LINE_SPACING_TYPE } from '../types';
 
 const lineHeight = 'line-height';
 const spaceBefore = 'padding-top';
@@ -125,6 +126,7 @@ export default class LineSpacingButton extends Component {
           dataHook={this.dataHookName}
           tabIndex={tabIndex}
           icon={icon}
+          pluginType={LINE_SPACING_TYPE}
           ref={ref => (this.buttonRef = ref)}
         >
           <Modal
@@ -168,6 +170,7 @@ export default class LineSpacingButton extends Component {
             dataHook={this.dataHookName}
             tabIndex={tabIndex}
             icon={icon}
+            pluginType={LINE_SPACING_TYPE}
             ref={ref => (this.buttonRef = ref)}
           >
             {isPanelOpen && (

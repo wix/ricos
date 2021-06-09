@@ -40,6 +40,7 @@ export default class TextCodeBlockButton extends Component {
         dataHook={'TextCodeBlockButton'}
         tabIndex={tabIndex}
         icon={icon}
+        pluginType={CODE_BLOCK_TYPE}
       />
     );
   }

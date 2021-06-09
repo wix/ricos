@@ -69,7 +69,7 @@ export interface onToolbarButtonClickArgs extends biCallbackParams {
   value?: string;
   /** Category of change (alignment / size / settings...) */
   category?: string;
-  /** Plugin's Type (e.g. `LINK_TYPE`, `HASHTAG_TYPE`...) */
+  /** Plugin's Type (e.g. values of `LINK_TYPE`, `HASHTAG_TYPE`...) */
   pluginId?: string;
   /** Draft: `blockKey` of plugin. Prose: not yet decided */
   pluginUniqueId?: string;

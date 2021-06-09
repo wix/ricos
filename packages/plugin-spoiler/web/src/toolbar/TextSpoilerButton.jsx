@@ -47,6 +47,7 @@ export default class TextSpoilerButton extends PureComponent {
         tabIndex={tabIndex}
         icon={SpoilerButtonIcon}
         isActive={isActive}
+        pluginType={SPOILER_TYPE}
       />
     );
   }

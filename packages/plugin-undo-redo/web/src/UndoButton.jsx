@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
 import { InlineToolbarButton, undo, pluginsUndo } from 'wix-rich-content-editor-common';
+import { UNDO_REDO_TYPE } from './types';
 
 const UndoButton = props => {
   const {
@@ -41,6 +42,7 @@ const UndoButton = props => {
         tooltipText={t('UndoButton_Tooltip')}
         dataHook={'undoButton'}
         tabIndex={tabIndex}
+        pluginType={UNDO_REDO_TYPE}
         icon={icon}
       >
         {children}

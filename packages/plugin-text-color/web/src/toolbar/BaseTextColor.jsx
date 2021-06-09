@@ -117,6 +117,7 @@ export default class BaseTextColor extends Component {
           tabIndex={tabIndex}
           icon={pluginParams.icon}
           forwardRef={this.buttonRef}
+          pluginType={pluginParams.type}
         >
           <Modal
             onRequestClose={() => this.closePanel()}
@@ -165,6 +166,7 @@ export default class BaseTextColor extends Component {
             tabIndex={tabIndex}
             icon={pluginParams.icon}
             forwardRef={this.buttonRef}
+            pluginType={pluginParams.type}
           >
             {isPanelOpen && (
               <div className={styles.textColorPopup}>

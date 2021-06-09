@@ -22,6 +22,7 @@ type InlineToolbarButtonProps = {
   showArrowIcon?: boolean;
   helpers?: Helpers;
   isLastAddStep?: boolean;
+  pluginType?: string;
 };
 
 class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
@@ -77,9 +78,18 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
   preventDefault = event => event.preventDefault();
 
   onClick: InlineToolbarButtonProps['onClick'] = e => {
-    const { onClick, isLastAddStep, helpers, dataHook, isActive, children } = this.props;
+    const {
+      onClick,
+      isLastAddStep,
+      helpers,
+      pluginType,
+      dataHook,
+      isActive,
+      children,
+    } = this.props;
     helpers?.onToolbarButtonClick?.({
       buttonName: dataHook || '',
+      pluginId: pluginType,
       version: Version.currentVersion,
       value: !isLastAddStep || children ? undefined : String(!isActive),
     });

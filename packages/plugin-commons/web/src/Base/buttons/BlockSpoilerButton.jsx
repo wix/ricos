@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InlineToolbarButton } from 'wix-rich-content-editor-common';
 import SpoilerButtonIcon from '../../Icons/SpoilerButtonIcon';
+import { SPOILER_TYPE } from 'wix-rich-content-common';
 
 class BlockSpoilerButton extends Component {
   handleClick = event => {
@@ -37,6 +38,7 @@ class BlockSpoilerButton extends Component {
         tooltipText={tooltipText}
         tabIndex={tabIndex}
         icon={SpoilerButtonIcon}
+        pluginType={SPOILER_TYPE}
       />
     );
   }

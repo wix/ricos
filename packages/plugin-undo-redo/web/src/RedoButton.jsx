@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import redoIcon from './icons/RedoIcon';
 import { InlineToolbarButton, redo } from 'wix-rich-content-editor-common';
+import { UNDO_REDO_TYPE } from './types';
 
 const RedoButton = props => {
   const {
@@ -39,6 +40,7 @@ const RedoButton = props => {
         tooltipText={t('RedoButton_Tooltip')}
         dataHook={'redoButton'}
         tabindex={tabIndex}
+        pluginType={UNDO_REDO_TYPE}
         icon={redoIcon}
       >
         {children}

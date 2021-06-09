@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { HEADINGS_DROPDOWN_TYPE, mergeStyles } from 'wix-rich-content-common';
 import { HEADING_TYPE_TO_ELEMENT } from '../constants';
 import {
   ClickOutside,
@@ -59,6 +59,7 @@ export default class HeadingButton extends Component {
     const isAddEvent = !hasBlockType(type, editorState);
     const newEditorState = RichUtils.toggleBlockType(editorState, type);
     helpers?.onToolbarButtonClick?.({
+      pluginId: HEADINGS_DROPDOWN_TYPE,
       buttonName: this.dataHookText,
       value: type,
     });
@@ -135,6 +136,7 @@ export default class HeadingButton extends Component {
           tabIndex={tabIndex}
           buttonContent={buttonContent}
           showArrowIcon
+          pluginType={HEADINGS_DROPDOWN_TYPE}
           ref={ref => (this.buttonRef = ref)}
         >
           <Modal
@@ -178,6 +180,7 @@ export default class HeadingButton extends Component {
             tabIndex={tabIndex}
             buttonContent={buttonContent}
             showArrowIcon
+            pluginType={HEADINGS_DROPDOWN_TYPE}
             ref={ref => (this.buttonRef = ref)}
           >
             {isPanelOpen && (
