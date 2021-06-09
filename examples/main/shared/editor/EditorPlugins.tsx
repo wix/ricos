@@ -352,7 +352,7 @@ let userColors = [];
 
 export const uiSettings: UISettings = {
   linkPanel: {
-    externalPopups: true,
+    externalPopups: false,
     // blankTargetToggleVisibilityFn: () => true, // deprecated
     // nofollowRelToggleVisibilityFn: () => true, // deprecated
     showNewTabCheckbox: true,
