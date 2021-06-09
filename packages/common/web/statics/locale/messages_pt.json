@@ -490,7 +490,7 @@
 	"ButtonModal_Text_Color": "Texto",
 	"LinkTo_Modal_Section_Filter_Maps": "Mapas",
 	"ButtonModal_Color_Section": "Cores do Botão",
-	"DividerPlugin_InsertButton_Tooltip": "Adicionar divisor",
+	"DividerPlugin_InsertButton_Tooltip": "Adicionar separador",
 	"UploadAudio_Error_MP3_Unsupported_Stereo_Format": "Esse arquivo de áudio não está em um formato mono compatível e não pode ser carregado. Tente um arquivo diferente.",
 	"AlignTextRightButton_Tooltip": "Alinhar para Direita",
 	"Redo_plugin_search_tags": "refazer reverter atualizar alterar mudar voltar",

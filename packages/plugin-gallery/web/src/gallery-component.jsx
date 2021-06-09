@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader } from 'wix-rich-content-plugin-commons';
+import { Loader } from 'wix-rich-content-ui-components';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS } from './defaults';
 import styles from '../statics/styles/gallery-component.scss';

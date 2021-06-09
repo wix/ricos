@@ -700,7 +700,7 @@
       }
     },
     {
-      "type": "codeblock",
+      "type": "code_block",
       "content": [
         {
           "type": "text",

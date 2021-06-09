@@ -32,6 +32,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     isMobile,
     innerModal,
     spoilerWrapper,
+    experiments,
     ...rest
   } = config;
 
@@ -89,6 +90,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
       uiSettings,
       isMobile,
       settings,
+      experiments,
     }),
     helpers,
     innerModal,

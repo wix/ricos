@@ -17,6 +17,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
     [type]: settings = {},
     spoilerWrapper,
     uiSettings,
+    experiments,
     ...rest
   } = config;
   settings.accept = settings.accept || fileInputAccept;
@@ -60,6 +61,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
       t,
       anchorTarget,
       relValue,
+      experiments,
       isMobile: config.isMobile,
     }),
     helpers,

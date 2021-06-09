@@ -6,8 +6,7 @@ import {
   GALLERY_FILE_TYPES,
 } from '../Utils/mediaPluginsDataBuilders';
 import PropTypes from 'prop-types';
-import Loader from '../Components/Loader';
-import { MediaItemErrorMsg } from 'wix-rich-content-ui-components';
+import { MediaItemErrorMsg, Loader } from 'wix-rich-content-ui-components';
 import { GALLERY_TYPE } from 'wix-rich-content-common';
 
 class MediaPlugin extends PureComponent {
