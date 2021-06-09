@@ -9,8 +9,8 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
   setBlockNewEntityData,
+  LinkModal,
 } from 'wix-rich-content-editor-common';
-import MobileLinkModal from './MobileLinkModal';
 import { ANCHOR_CATEGORY, WEB_ADDRESS_CATEGORY, ADD_PLUGIN_LINK_BI } from 'wix-rich-content-common';
 
 export default class TextLinkModal extends Component {
@@ -32,25 +32,16 @@ export default class TextLinkModal extends Component {
     this.props.hidePopup();
   };
 
-  createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName }) => {
+  createLinkEntity = ({ url, anchor, target, rel, defaultName }) => {
     if (!isEmpty(url) || !isEmpty(anchor)) {
-      const {
-        getEditorState,
-        setEditorState,
-        anchorTarget,
-        relValue,
-        insertLinkFn,
-        helpers,
-      } = this.props;
+      const { getEditorState, setEditorState, insertLinkFn, helpers } = this.props;
       const editorState = getEditorState();
       if (this.mode === 'TEXT') {
         const newEditorState = insertLinkFn(getEditorState(), {
           url,
           anchor,
-          targetBlank,
-          nofollow,
-          anchorTarget,
-          relValue,
+          rel,
+          target,
           text: defaultName,
         });
         setEditorState(newEditorState);
@@ -65,8 +56,8 @@ export default class TextLinkModal extends Component {
               : {
                   link: {
                     url,
-                    target: targetBlank ? '_blank' : anchorTarget,
-                    rel: nofollow ? 'nofollow' : relValue,
+                    target,
+                    rel,
                   },
                 }),
           },
@@ -83,8 +74,8 @@ export default class TextLinkModal extends Component {
         ? { anchor, category: ANCHOR_CATEGORY }
         : {
             link: url,
-            rel: nofollow ? 'nofollow' : relValue,
-            newTab: !!targetBlank,
+            rel,
+            newTab: target === '_blank',
             category: WEB_ADDRESS_CATEGORY,
           };
       helpers?.onPluginAction?.(ADD_PLUGIN_LINK_BI, { plugin_id: this.mode, params });
@@ -133,32 +124,20 @@ export default class TextLinkModal extends Component {
   }
 
   render() {
-    const {
-      getEditorState,
-      theme,
-      isMobile,
-      anchorTarget,
-      relValue,
-      t,
-      uiSettings,
-      linkTypes,
-    } = this.props;
+    const { getEditorState, theme, isMobile, anchorTarget, t, uiSettings, linkTypes } = this.props;
     const linkData = this.getLinkData(getEditorState());
-    const { url, anchor, target, rel } = linkData || {};
-    const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
-    const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
+    const { url, anchor, target = anchorTarget, rel } = linkData || {};
     return (
-      <MobileLinkModal
+      <LinkModal
         editorState={getEditorState()}
         url={url}
         anchor={anchor}
-        targetBlank={targetBlank}
-        nofollow={nofollow}
+        target={target}
+        rel={rel}
         theme={theme}
         isActive={!isEmpty(linkData)}
         isMobile={isMobile}
         anchorTarget={anchorTarget}
-        relValue={relValue}
         onDone={this.createLinkEntity}
         onCancel={this.onCancel}
         onDelete={this.deleteLink}
@@ -177,10 +156,7 @@ TextLinkModal.propTypes = {
   theme: PropTypes.object.isRequired,
   url: PropTypes.string,
   isMobile: PropTypes.bool,
-  targetBlank: PropTypes.bool,
-  nofollow: PropTypes.bool,
   anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,

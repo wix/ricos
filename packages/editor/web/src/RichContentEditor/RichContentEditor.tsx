@@ -80,7 +80,7 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import InnerRCE from './InnerRCE';
 import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import InnerModal from './InnerModal';
-import { onCutAndCopy } from './utils/onCutAndCopy';
+import { onCut, onCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
 
@@ -1055,9 +1055,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onBlur={onBlur}
         onFocus={onFocus}
         // @ts-ignore
-        onCut={onCutAndCopy}
+        onCut={onCut}
         // @ts-ignore
-        onCopy={onCutAndCopy}
+        onCopy={onCopy}
         textAlignment={textAlignment}
         readOnly={readOnly || this.state.readOnly}
         {...(this.props.experiments?.pastedFilesSupport?.enabled && {

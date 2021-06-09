@@ -7,7 +7,7 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
   INLINE_TOOLBAR_BUTTONS,
-  ACCORDION_SETTINGS,
+  COLLAPSIBLE_LIST_SETTINGS,
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
@@ -109,7 +109,15 @@ describe('plugins', () => {
       cy.get('[data-hook="imageViewer"]:first')
         .parent()
         .click();
-      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      // check spoiler from inline toolbar
+      // cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      //check spoiler from settings modal
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=imageSpoilerToggle]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+
       cy.eyesCheckWindow('adding spoiler on an image');
       editText('spoilerTextArea', 'change the description');
       editText('revealSpoilerContent', 'change the reveal button content');
@@ -124,7 +132,14 @@ describe('plugins', () => {
       cy.get('[data-hook="baseToolbarButton_layout"]').click();
       cy.get('[data-hook="Slideshow_dropdown_option"]').click();
       cy.wait(100);
-      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      // check spoiler from inline toolbar
+      // cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+
+      //check spoiler from settings modal
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS);
+      cy.get(`[data-hook=gallerySpoilerToggle]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
       cy.eyesCheckWindow('adding spoiler on a gallery');
       editText('spoilerTextArea', 'change the description');
       editText('revealSpoilerContent', 'change the reveal button content');
@@ -701,7 +716,7 @@ describe('plugins', () => {
     });
   });
 
-  context('accordion', () => {
+  context('collapsible list', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -712,59 +727,62 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    const setAccordionSetting = setting => {
+    const setCollapsibleListSetting = setting => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
       cy.get(`[data-hook=${setting}]`).click();
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
     };
 
-    it('should change accordion settings', function() {
-      cy.loadRicosEditorAndViewer('accordion-rich-text', {
-        plugins: [plugins.accordion, plugins.embedsPreset, plugins.textPlugins],
+    it('should change collapsible list settings', function() {
+      cy.loadRicosEditorAndViewer('collapsible-list-rich-text', {
+        plugins: [plugins.collapsibleList, plugins.embedsPreset, plugins.textPlugins],
       });
-      cy.getAccordion();
-      setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
+      cy.getCollapsibleList();
+      setCollapsibleListSetting(COLLAPSIBLE_LIST_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);
-      setAccordionSetting(ACCORDION_SETTINGS.COLLAPSED);
+      setCollapsibleListSetting(COLLAPSIBLE_LIST_SETTINGS.COLLAPSED);
       cy.eyesCheckWindow(this.test.title);
-      setAccordionSetting(ACCORDION_SETTINGS.EXPANDED);
+      setCollapsibleListSetting(COLLAPSIBLE_LIST_SETTINGS.EXPANDED);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should focus & type', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
-        .focusAccordion(1)
+      cy.loadRicosEditorAndViewer('empty-collapsible-list', usePlugins(plugins.collapsibleList))
+        .focusCollapsibleList(1)
         .type('Yes\n')
-        .focusAccordion(2);
+        .focusCollapsibleList(2);
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should insert image in accordion', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
-        .focusAccordion(2)
-        .type('Image in accordion');
+    it('should insert image in collapsible list', function() {
+      cy.loadRicosEditorAndViewer('empty-collapsible-list', usePlugins(plugins.all))
+        .focusCollapsibleList(2)
+        .type('Image in collapsible list');
       cy.insertPluginFromSideToolbar('ImagePlugin_InsertButton');
       cy.wait(1000);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should collapse first pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
-        .getAccordion()
+      cy.loadRicosEditorAndViewer('empty-collapsible-list', usePlugins(plugins.collapsibleList))
+        .getCollapsibleList()
         .toggleCollapseExpand(0);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should have only one expanded pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
-      setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
-      cy.getAccordion().toggleCollapseExpand(1);
+      cy.loadRicosEditorAndViewer(
+        'empty-collapsible-list',
+        usePlugins(plugins.collapsibleList)
+      ).getCollapsibleList();
+      setCollapsibleListSetting(COLLAPSIBLE_LIST_SETTINGS.ONE_PAIR_EXPANDED);
+      cy.getCollapsibleList().toggleCollapseExpand(1);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should delete second pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion));
-      cy.focusAccordion(3).type('{backspace}');
+      cy.loadRicosEditorAndViewer('empty-collapsible-list', usePlugins(plugins.collapsibleList));
+      cy.focusCollapsibleList(3).type('{backspace}');
       cy.eyesCheckWindow(this.test.title);
     });
   });
