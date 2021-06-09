@@ -130,7 +130,7 @@ export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
   [Node_Type.PARAGRAPH]: 'paragraphData',
   [Node_Type.LIST_ITEM]: 'paragraphData',
   [Node_Type.HEADING]: 'headingData',
-  [Node_Type.CODEBLOCK]: 'codeData',
+  [Node_Type.CODE_BLOCK]: 'codeBlockData',
   [Node_Type.BLOCKQUOTE]: 'paragraphData',
 } as const;
 
@@ -144,7 +144,7 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.HeaderFour]: 'headingData',
   [BlockType.HeaderFive]: 'headingData',
   [BlockType.HeaderSix]: 'headingData',
-  [BlockType.CodeBlock]: 'codeData',
+  [BlockType.CodeBlock]: 'codeBlockData',
   [BlockType.Blockquote]: 'paragraphData',
 };
 

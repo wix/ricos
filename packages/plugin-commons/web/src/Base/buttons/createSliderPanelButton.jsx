@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SliderPanel from '../../Components/SliderPanel';
+import { SliderPanel } from 'wix-rich-content-ui-components';
 import BaseToolbarButton from '../baseToolbarButton';
 import BUTTONS from './keys';
 

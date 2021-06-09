@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
-import { Image, SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
 import {
+  SettingsPanelFooter,
   SettingsSection,
   LabeledToggle,
   InputWithLabel,
+  Image,
   Loader,
 } from 'wix-rich-content-ui-components';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';

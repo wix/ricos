@@ -39,7 +39,7 @@ export const toDataFieldName = (type: string) =>
     .join('')
     .concat('Data');
 
-export const DATA_FIELDS_MAP = {
-  ...TYPES.reduce((map, type) => ({ ...map, [type]: toDataFieldName(type) }), {}),
-  [Node_Type.CODEBLOCK]: 'codeData',
-};
+export const DATA_FIELDS_MAP = TYPES.reduce(
+  (map, type) => ({ ...map, [type]: toDataFieldName(type) }),
+  {}
+);
