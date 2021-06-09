@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import InlineToolbarButton from '../InlineToolbarButton';
 import { LinkIcon } from '../../Icons';
 
+const dataHook = 'LinkButton';
+
 const LinkButton = ({ icon, ...otherProps }) => (
   <InlineToolbarButton
     isLastAddStep={false}
     icon={icon || LinkIcon}
-    dataHook={'LinkButton'}
+    dataHook={dataHook}
     {...otherProps}
   />
 );
+
+LinkButton.dataHook = dataHook;
 
 LinkButton.propTypes = {
   onClick: PropTypes.func.isRequired,
