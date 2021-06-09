@@ -8,9 +8,7 @@ export const createNodeExtension = (name, Component, componentDataDefaults) => {
     group: 'block',
 
     atom: true,
-    selectable: true,
 
-    content: 'inline*',
     draggable: true,
 
     addAttributes() {
@@ -26,7 +24,7 @@ export const createNodeExtension = (name, Component, componentDataDefaults) => {
     },
 
     renderHTML({ HTMLAttributes }) {
-      return [`${name}-component`, mergeAttributes(HTMLAttributes), 0];
+      return [`${name}-component`, mergeAttributes(HTMLAttributes)];
     },
 
     addNodeView() {

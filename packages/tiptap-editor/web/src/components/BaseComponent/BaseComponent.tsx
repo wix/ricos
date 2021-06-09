@@ -57,16 +57,16 @@ const BaseExtensionComponentHOC = Component => {
                 position >= editor.state.selection.$from.pos &&
                 position <= editor.state.selection.$to.pos
               ) {
-                setSelected(true);
+                // setSelected(true);
               } else {
-                setSelected(false);
+                // setSelected(false);
               }
             });
           });
 
           return (
             <NodeViewWrapper as="div">
-              <div className={Object.values(componentStyles).join(' ')}>
+              <div data-drag-handle className={Object.values(componentStyles).join(' ')}>
                 <Component {...props} context={context} componentData={componentData} />
               </div>
             </NodeViewWrapper>

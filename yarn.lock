@@ -23434,27 +23434,6 @@ rgba-regex@^1.0.0:
   resolved "https://registry.npmjs.org/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
-ricos-content@8.40.1:
-  version "8.40.1"
-  resolved "https://registry.npmjs.org/ricos-content/-/ricos-content-8.40.1.tgz#3da7556b383547b1d1605605f194a585d71c63e2"
-  integrity sha512-UGKTRZDcQxjgSD21XgVIFTfqhVzwyCJlRClsgbESO37zas1NWUMiXCNoAWd2Fd57v45ZLteFrN7YuYCRwyG+Yg==
-  dependencies:
-    fp-ts "^2.10.5"
-    monocle-ts "^2.3.9"
-    omit-deep "0.3.0"
-    parse5 "^6.0.0"
-    ricos-schema "8.40.1"
-    to-camel-case "1.0.0"
-    to-constant-case "1.0.0"
-    to-slug-case "1.0.0"
-    to-snake-case "1.0.0"
-    utility-types "^3.10.0"
-
-ricos-schema@8.40.1:
-  version "8.40.1"
-  resolved "https://registry.npmjs.org/ricos-schema/-/ricos-schema-8.40.1.tgz#a4eca1751be90f5fd6b8055a998d104d7fb2bc96"
-  integrity sha512-t5RY9NMqfwZ8ssZ8OGdL1cmO13rgdkMCZibA1FL2WOIyN0rAEm+Gdt8wLz8G3p45vpTKjRy5ku1+4zgfupjY0g==
-
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@^2.7.1:
   version "2.7.1"
   resolved "https://registry.npmjs.org/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
@@ -27792,57 +27771,6 @@ wix-redraft@^1.1.2:
   integrity sha512-T0LhyOL+MVs0FWYxS6kza9hNnW8ZPZh0ca+Z7LV/Y/HZ7Iomed1nR58hhyKA2pmE0M30YPLc0bAuoWplj1rkyQ==
   dependencies:
     punycode "^1.4.1"
-
-wix-rich-content-common@8.40.1:
-  version "8.40.1"
-  resolved "https://registry.npmjs.org/wix-rich-content-common/-/wix-rich-content-common-8.40.1.tgz#182f3d3edef260ff27bdc9abcd7a7cc4a5e4bf16"
-  integrity sha512-fszrgRJEJ8QUuNRSyUwDhZfmm3HQywGHbVVMwRMY7bYKL12OjkdyoElLeUxQigPttIL6qHNlb/Cpk6m+OOyEKw==
-  dependencies:
-    i18next "~10.6.0"
-    jsonschema "~1.2.4"
-    linkify-it "^2.1.0"
-    react-i18next "^7.0.0"
-    react-intersection-observer "~8.24.1"
-    react-portal-tooltip "^2.4.7"
-    ricos-content "8.40.1"
-
-wix-rich-content-editor-common@8.40.1:
-  version "8.40.1"
-  resolved "https://registry.npmjs.org/wix-rich-content-editor-common/-/wix-rich-content-editor-common-8.40.1.tgz#f3b0dc06f308ec88cbb362228a34e46683990ac6"
-  integrity sha512-Y0Yptbrjc+ALsjKt+liqfG1jze4k2TDyM4SsF8lclQqlHS6sXXTzmqwYXFH5JO7MQEVcaoMHSuTTxYfZcs41Fg==
-  dependencies:
-    "@wix/draft-js" "0.0.11"
-    downshift "3.2.12"
-    focus-trap "6.4.0"
-    react-window "~1.5.0"
-    wix-rich-content-common "8.40.1"
-
-wix-rich-content-plugin-commons@8.40.1:
-  version "8.40.1"
-  resolved "https://registry.npmjs.org/wix-rich-content-plugin-commons/-/wix-rich-content-plugin-commons-8.40.1.tgz#3b28ce3e1c9c7afd642765d095e92fd489892b6b"
-  integrity sha512-R3RVZrthLX/8PSJ6YXNqNesDpfvhgdIVpK5pBmnmiQqqg33MXU6zWxULatycSySoNFAIRKu5Ab49ts3m8sta1Q==
-  dependencies:
-    react-colorful "^4.4.3"
-    react-measure "~2.3.0"
-    wix-rich-content-common "8.40.1"
-    wix-rich-content-editor-common "8.40.1"
-    wix-rich-content-ui-components "8.40.1"
-
-wix-rich-content-plugin-divider@8.40.1:
-  version "8.40.1"
-  resolved "https://registry.npmjs.org/wix-rich-content-plugin-divider/-/wix-rich-content-plugin-divider-8.40.1.tgz#55e179219e8c76b12983bd92a1523df2f853f1a6"
-  integrity sha512-cBNh9MNoOLjI2mMW8LnWQ8savHbbhWxQkvm75Ko4XNgnaW2U3QkoXSJwlXw9z5ppP68XKkh6U/UoubWZy7d4Hw==
-  dependencies:
-    ricos-content "8.40.1"
-    wix-rich-content-common "8.40.1"
-    wix-rich-content-editor-common "8.40.1"
-    wix-rich-content-plugin-commons "8.40.1"
-
-wix-rich-content-ui-components@8.40.1:
-  version "8.44.1"
-  dependencies:
-    wix-rich-content-common "8.44.1"
-    wix-rich-content-editor-common "8.44.1"
 
 wix-statics-parent@*:
   version "1.0.1134"
