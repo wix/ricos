@@ -22,7 +22,7 @@ import "wix/rich_content/v1/decoration_anchor.proto";
 import "wix/rich_content/v1/decoration_color.proto";
 import "wix/rich_content/v1/decoration_link.proto";
 import "wix/rich_content/v1/decoration_mention.proto";
-import "wix/rich_content/v1/node_code.proto";
+import "wix/rich_content/v1/node_code_block.proto";
 import "wix/rich_content/v1/node_heading.proto";
 import "wix/rich_content/v1/node_paragraph.proto";
 import "wix/rich_content/v1/plugin_button.proto";
@@ -52,7 +52,7 @@ message Node {
         ORDERED_LIST = 4;
         LIST_ITEM = 5;
         BLOCKQUOTE = 6;
-        CODEBLOCK = 7;
+        CODE_BLOCK = 7;
         VIDEO = 8;
         DIVIDER = 9;
         FILE = 10;
@@ -75,7 +75,7 @@ message Node {
     NodeStyle style = 4;
     oneof data {
         ButtonData button_data = 5;
-        CodeData code_data = 6;
+        CodeBlockData code_block_data = 6;
         DividerData divider_data = 7;
         FileData file_data = 8;
         GalleryData gallery_data = 9;
