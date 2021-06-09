@@ -21,6 +21,7 @@ const getComponentStyles = ({ componentData, theme, isFocused }) => {
   const alignment = componentData?.config?.alignment;
   const size = componentData?.config?.size;
   const textWrap = componentData?.config?.textWrap;
+
   return {
     alignmentClassName: getAlignmentClassName(stylesWithRTL, alignment, theme),
     sizeClassName: getSizeClassName(stylesWithRTL, size, theme),
@@ -57,9 +58,9 @@ const BaseExtensionComponentHOC = Component => {
                 position >= editor.state.selection.$from.pos &&
                 position <= editor.state.selection.$to.pos
               ) {
-                // setSelected(true);
+                setSelected(true);
               } else {
-                // setSelected(false);
+                setSelected(false);
               }
             });
           });

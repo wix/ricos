@@ -8,7 +8,7 @@ export const createNodeExtension = (name, Component, componentDataDefaults) => {
     group: 'block',
 
     atom: true,
-
+    selectable: true,
     draggable: true,
 
     addAttributes() {
