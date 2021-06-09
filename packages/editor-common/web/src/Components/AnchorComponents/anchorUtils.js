@@ -14,7 +14,7 @@ import {
   ACTION_BUTTON_TYPE,
 } from 'wix-rich-content-common';
 
-export const getAnchorableBlocks = (editorState, selectedBlock) => {
+export const getAnchorableBlocks = (editorState, selectedBlock = undefined) => {
   const anchorableBlocks = [];
   const typesWithIndexes = {};
 
