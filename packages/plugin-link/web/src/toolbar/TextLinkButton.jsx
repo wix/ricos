@@ -75,14 +75,18 @@ export default class TextLinkButton extends Component {
       isMobile,
       customStyles,
     });
-    const insertLink = (...args) => {
+    const onToolbarClick = value =>
       helpers?.onToolbarButtonClick?.({
+        pluginId: LINK_TYPE,
         buttonName: LinkButton.dataHook || '',
         version: Version.currentVersion,
-        value: String(true),
+        value,
       });
+    const insertLink = (...args) => {
+      onToolbarClick(String(true));
       return insertLinkFn?.(...args);
     };
+    const onLinkRemoval = () => onToolbarClick(String(false));
     const commonPanelProps = {
       helpers,
       modalName: EditorModals.TEXT_LINK_MODAL,
@@ -94,6 +98,7 @@ export default class TextLinkButton extends Component {
       getEditorState,
       setEditorState,
       insertLinkFn: insertLink,
+      onLinkRemoval,
       closeInlinePluginToolbar,
       linkTypes,
     };

@@ -84,7 +84,7 @@ export default class TextLinkModal extends Component {
   };
 
   deleteLink = () => {
-    const { getEditorState, setEditorState, closeInlinePluginToolbar } = this.props;
+    const { getEditorState, setEditorState, closeInlinePluginToolbar, onLinkRemoval } = this.props;
     const editorState = getEditorState();
     if (this.mode === 'TEXT') {
       const newEditorState = removeLinksInSelection(editorState, setEditorState);
@@ -100,6 +100,7 @@ export default class TextLinkModal extends Component {
       );
       setEditorState(newEditorState);
     }
+    onLinkRemoval?.();
     closeInlinePluginToolbar();
     this.props.hidePopup();
   };
@@ -160,6 +161,7 @@ TextLinkModal.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
+  onLinkRemoval: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
   linkTypes: PropTypes.object,
   helpers: PropTypes.object,
