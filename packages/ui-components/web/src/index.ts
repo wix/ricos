@@ -1,6 +1,7 @@
-// export {
+export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION } from './consts';
 
-// } from './consts';
+export { default as UrlInputModal } from './Modals/UrlInputModal';
+export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
 
 export * from './Icons';
 
