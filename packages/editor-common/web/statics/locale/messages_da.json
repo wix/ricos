@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "Overskrift 3",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Design",
   "ButtonPlugin_Navbar_Update_button": "Gem",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "Fjern link",
   "ButtonModal_Link_Input_Placeholder": "Indtast en URL",
   "LinkPanelContainer_CancelButton": "Annuller",

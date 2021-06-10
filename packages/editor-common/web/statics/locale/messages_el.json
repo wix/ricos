@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "Επικεφαλίδα 3",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Σχεδιασμός",
   "ButtonPlugin_Navbar_Update_button": "Αποθήκευση",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "Κατάργηση συνδέσμου",
   "ButtonModal_Link_Input_Placeholder": "Πληκτρολόγηση διεύθυνσης URL",
   "LinkPanelContainer_CancelButton": "Ακύρωση",

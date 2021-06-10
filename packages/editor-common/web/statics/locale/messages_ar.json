@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "عنوان 3",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "التصميم",
   "ButtonPlugin_Navbar_Update_button": "حفظ",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "حذف الرابط",
   "ButtonModal_Link_Input_Placeholder": "أدخِل رابط URL",
   "LinkPanelContainer_CancelButton": "إلغاء",
