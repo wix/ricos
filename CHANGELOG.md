@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+  - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved MobileSettingsHeader/UrlInputModal components into ui-components folder
+
 </details>
 <hr/>
 
@@ -39,7 +43,6 @@
 
 - `ui-components`
   - [#2607](https://github.com/wix-incubator/rich-content/pull/2607) moved SelectionList/Tabs/Tab/Image/SliderPanel components into ui-components folder
-  - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved MobileSettingsHeader/UrlInputModal components into ui-components folder
 
 ## 8.44.0 (Jun 8, 2021)
 
