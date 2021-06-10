@@ -18,8 +18,9 @@
   </summary>
 
 ### :house: Internal
-
+- `ui-components`
   - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved SettingsMobileHeader/UrlInputModal components into ui-components folder
+  - [#2612](https://github.com/wix-incubator/rich-content/pull/2612) moved InfoIcon components into ui-components folder
 
 </details>
 <hr/>
