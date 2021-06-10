@@ -1,13 +1,4 @@
-export {
-  //   TOOLBAR_OFFSETS,
-  //   PLUGIN_DECORATION_PROPS,
-  //   PLUGIN_DECORATIONS,
-  //   HEADER_TYPE_MAP,
-  //   DEFAULT_HEADERS_DROPDOWN_OPTIONS,
-  //   UNSUPPORTED_BLOCKS_TYPE,
-  FOOTER_BUTTON_ALIGNMENT,
-  MODAL_CONTROLS_POSITION,
-} from './consts';
+export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION } from './consts';
 
 export { default as UrlInputModal } from './Modals/UrlInputModal';
 export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
