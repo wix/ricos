@@ -2,12 +2,12 @@
 export * from './Icons';
 
 // Components
-export { default as InfoIcon } from './Components/InfoIcon';
-export { default as Checkbox } from './Components/Checkbox';
+// export { default as InfoIcon } from './Components/InfoIcon';
+// export { default as Checkbox } from './Components/Checkbox';
 export { default as ClickOutside } from './Components/ClickOutside/ClickOutside';
 export { default as useClickOutside } from './Components/ClickOutside/useClickOutside';
 
-export { default as Dropdown } from './Components/Dropdown';
+// export { default as Dropdown } from './Components/Dropdown';
 
 export { default as FocusManager } from './Components/FocusManager';
 export { default as LinkPanelWrapper } from './Components/LinkComponents/LinkPanelWrapper';

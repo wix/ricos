@@ -2,6 +2,8 @@
 
 // } from './consts';
 
+export * from './Icons';
+
 // Components
 export { default as Button } from './Components/Button';
 export { default as FileInput } from './Components/FileInput';

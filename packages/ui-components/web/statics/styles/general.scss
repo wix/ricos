@@ -1,0 +1,164 @@
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
+//*** GENERIC ***//
+.flex {
+  display: flex;
+}
+
+// *:focus,
+.focused {
+}
+
+.visuallyHidden {
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+//*** BLOCK ***//
+.hasFocus {
+  @include block-select;
+}
+
+.overlay {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: move;
+  &.noPointerEventsOnFocus {
+    pointer-events: none;
+  }
+}
+
+.hideTextSelection {
+  ::selection {
+    background: transparent;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.pluginContainer,
+.pluginContainerReadOnly {
+  position: relative;
+}
+
+.pluginContainerReadOnly {
+  @extend .fontElementMap;
+}
+
+.pluginContainer {
+  @extend .fontElementMap;
+
+  &:hover {
+    @include block-select;
+    &.noBorder {
+      box-shadow: none;
+    }
+  }
+}
+
+.pluginContainerMobile {
+  max-width: 100%;
+}
+
+//*** PANEL ***//
+.panelContainer {
+  @extend .fontElementMap;
+  position: absolute;
+  display: flex;
+  padding: 12px 24px;
+  background: white;
+  color: $secondary-text-color;
+  border: 1px solid #ddd;
+  border-radius: $toolbarBorderRadius;
+  box-shadow: rgb(220, 220, 220) 1px 1px 3px 1px;
+}
+
+:global {
+  .ReactModal__Body--open {
+    overflow-y: hidden;
+  }
+
+  .ReactModal__Content {
+    font-weight: 300;
+    direction: ltr;
+  }
+
+  .ReactModalPortal {
+    @extend .glob_fontElementMap;
+  }
+}
+
+button {
+  @extend .fontElementMap;
+}
+
+.isImage {
+  text-decoration: none;
+  color: #333333;
+}
+
+.anchor {
+  display: block;
+}
+
+.infoIcon {
+  vertical-align: text-bottom;
+  padding-top: 2px;
+  height: 17px;
+  &:hover {
+    color: $settings-action-color-fallback;
+  }
+}
+
+.infoContainer {
+  cursor: pointer;
+  display: flex;
+}
+
+.horizontalScrollbarWrapper {
+  position: relative;
+}
+
+.pluginWithHorizontalScrollbar {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-left: -20px;
+  margin-right: -20px;
+  &.show::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &.hide::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+.horizontalScrollbar {
+  max-width: max-content !important;
+  min-width: 100%;
+}
+
+.pluginWithHorizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.pluginWithHorizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+}
+
+.pluginWithHorizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
+}

@@ -2,7 +2,7 @@
 import React, { Component, ReactElement, ReactNode, Ref, FC } from 'react';
 import classNames from 'classnames';
 import ToolbarButton from './ToolbarButton';
-import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
+import { DropdownArrowIcon } from '../Icons';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
