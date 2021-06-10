@@ -1,15 +1,14 @@
-import { DATA_FIELDS_MAP, isDataFieldName, isRichContent } from './../utils';
+import { DATA_FIELDS_MAP, isDataFieldName, isRichContent, isDecoration, isNode } from '../utils';
 import { transform, isObject, pickBy, identity } from 'lodash';
 import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap/core';
-import { isDecoration, isNode } from '../utils';
 import toCamelCase from 'to-camel-case';
 
 declare const a: RichContent;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const toProseMirror = <T extends RichContent | Node | Record<string, any>>(
+export const toTiptap = <T extends RichContent | Node | Record<string, any>>(
   richContent: T
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): T extends RichContent | Node ? JSONContent : Record<string, any> => {

@@ -7,7 +7,7 @@ import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent } from '../utils'
 import toConstantCase from 'to-constant-case';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fromProseMirror = <T extends JSONContent | Record<string, any>>(
+export const fromTiptap = <T extends JSONContent | Record<string, any>>(
   proseContent: T
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): T extends JSONContent ? RichContent | Node : Record<string, any> => {
