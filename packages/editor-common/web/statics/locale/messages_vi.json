@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "Tiêu đề 3",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Thiết kế",
   "ButtonPlugin_Navbar_Update_button": "Lưu",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "Loại bỏ liên kết",
   "ButtonModal_Link_Input_Placeholder": "Nhập một URL",
   "LinkPanelContainer_CancelButton": "Hủy",
