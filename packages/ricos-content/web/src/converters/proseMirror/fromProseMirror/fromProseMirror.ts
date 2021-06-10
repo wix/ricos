@@ -4,6 +4,7 @@ import { JSONContent } from '@tiptap/core';
 import { initializeMetadata } from '../../nodeUtils';
 import { genKey } from '../../generateRandomKey';
 import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent } from '../utils';
+import toConstantCase from 'to-constant-case';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const fromProseMirror = <T extends JSONContent | Record<string, any>>(
@@ -20,7 +21,7 @@ const FIELDS_MAP = {
   marks: 'decorations',
 };
 
-const typeToUpper = object => ({ ...object, type: object.type.toUpperCase() });
+const typeToConstantCase = object => ({ ...object, type: toConstantCase(object.type) });
 
 const isTextNode = value => value?.type === 'text' && 'marks' in value;
 
@@ -67,7 +68,7 @@ const convertValue = value => {
     newValue = movefromAttrs(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
-    newValue = typeToUpper(newValue);
+    newValue = typeToConstantCase(newValue);
     newValue = convertDataField(newValue);
   }
   return newValue;

@@ -4,6 +4,7 @@ import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap/core';
 import { isDecoration, isNode } from '../utils';
+import toCamelCase from 'to-camel-case';
 
 declare const a: RichContent;
 
@@ -35,7 +36,10 @@ const FIELDS_MAP = {
 const fieldMapper = (fieldName: string | number | symbol, value) =>
   isDataFieldName(fieldName, value) ? 'attrs' : FIELDS_MAP[fieldName] || fieldName;
 
-const typeToLower = (object: Node | Decoration) => ({ ...object, type: object.type.toLowerCase() });
+const typeToCamelCase = (object: Node | Decoration) => ({
+  ...object,
+  type: toCamelCase(object.type),
+});
 
 const addDocType = (content: RichContent) => ({ type: 'doc', ...content });
 
@@ -69,7 +73,7 @@ const convertValue = value => {
     newValue = moveToData(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
-    newValue = typeToLower(newValue);
+    newValue = typeToCamelCase(newValue);
   }
   return newValue;
 };

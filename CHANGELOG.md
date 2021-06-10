@@ -17,10 +17,6 @@
     Click to see more.
   </summary>
 
-### :nail_care: Polish
-- `schema`
-  - [#2606](https://github.com/wix-incubator/rich-content/pull/2606) code block type refactor
-
 </details>
 <hr/>
 

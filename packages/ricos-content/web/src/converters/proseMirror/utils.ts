@@ -2,12 +2,28 @@ import { JSONContent } from '@tiptap/core';
 import { capitalize } from 'lodash';
 import { Decoration, Node, Node_Type, RichContent } from 'ricos-schema';
 import { DraftContent, IMAGE_TYPE } from '../..';
-import { DECORATION_TYPES, NODE_TYPES } from './consts';
+import { RICOS_NODE_TYPE_TO_DATA_FIELD } from '../draft/consts';
+import { DECORATION_TYPES, NODE_MAP, NODE_TYPES } from './consts';
+import toCamelCase from 'to-camel-case';
+import toConstantCase from 'to-constant-case';
 
 const TYPES = [...NODE_TYPES, ...DECORATION_TYPES];
 
+const isTextNode = (object): boolean =>
+  object?.type?.toUpperCase() === Node_Type.TEXT && ('text' in object || 'textData' in object);
+
+const isParagraphNode = (object): boolean => object?.type?.toUpperCase() === Node_Type.PARAGRAPH;
+
+const hasData = (object): boolean =>
+  RICOS_NODE_TYPE_TO_DATA_FIELD[object?.type] in object || 'attrs' in object;
+
+const hasChildren = (object): boolean => 'nodes' in object || 'content' in object;
+
+const hasChildrenOrData = (object): boolean =>
+  NODE_MAP[toConstantCase(object?.type || '')] && (hasChildren(object) || hasData(object));
+
 export const isNode = (object): object is Node =>
-  NODE_TYPES.includes(object?.type?.toUpperCase()) && ('nodes' in object || 'content' in object);
+  isTextNode(object) || isParagraphNode(object) || hasChildrenOrData(object);
 
 export const isDecoration = (object): object is Decoration =>
   DECORATION_TYPES.includes(object?.type?.toUpperCase());
@@ -32,8 +48,7 @@ export const isDataFieldName = (fieldName: string | number | symbol, value) =>
   value?.key && fieldName.toString().includes('Data');
 
 export const toDataFieldName = (type: string) =>
-  type
-    .toLowerCase()
+  toCamelCase(type)
     .split('_')
     .map((str, index) => (index === 0 ? str : capitalize(str)))
     .join('')
