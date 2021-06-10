@@ -2,7 +2,6 @@
 export * from './Icons';
 
 // Components
-export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 export { default as ClickOutside } from './Components/ClickOutside/ClickOutside';
 export { default as useClickOutside } from './Components/ClickOutside/useClickOutside';

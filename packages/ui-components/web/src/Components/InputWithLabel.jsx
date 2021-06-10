@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import classNames from 'classnames';
-import { InfoIcon } from 'wix-rich-content-editor-common';
+import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/input-with-label.scss';
-import generalstyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
+import generalStyles from '../../statics/styles/general.scss';
 
 class InputWithLabel extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class InputWithLabel extends Component {
     if (label) {
       return (
         <label htmlFor={id}>
-          <div className={generalstyles.infoContainer}>
+          <div className={generalStyles.infoContainer}>
             <span className={styles.inputWithLabel_label}>{label}</span>
             {showTooltip && (
               <InfoIcon iconStyles={styles.infoIcon} tooltipText={t(tooltipTextKey)} />
