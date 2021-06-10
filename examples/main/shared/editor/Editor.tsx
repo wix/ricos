@@ -36,6 +36,7 @@ interface ExampleEditorProps {
   injectedContent?: DraftContent;
   onRicosEditorChange?: RicosEditorProps['onChange'];
   experiments?: AvailableExperiments;
+  externalPopups: boolean;
 }
 
 export default class Editor extends PureComponent<ExampleEditorProps> {
@@ -145,6 +146,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       injectedContent,
       onRicosEditorChange,
       experiments,
+      externalPopups,
     } = this.props;
     const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? STATIC_TOOLBAR : null;
     const useStaticTextToolbar = textToolbarType === STATIC_TOOLBAR;
@@ -170,7 +172,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             isMobile={isMobile}
             placeholder={'Add some text!'}
             plugins={this.ricosPlugins}
-            linkPanelSettings={Plugins.uiSettings.linkPanel}
+            linkPanelSettings={{ ...Plugins.uiSettings.linkPanel, externalPopups }}
             _rcProps={{ experiments }}
           >
             <RichContentEditor helpers={this.helpers} />

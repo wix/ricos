@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UrlInputModal, MODAL_CONTROLS_POSITION } from 'wix-rich-content-plugin-commons';
+import { UrlInputModal, MODAL_CONTROLS_POSITION } from 'wix-rich-content-ui-components';
 import { Section, Page } from '../Components/StoryParts';
 import styles from './TextInputStory.scss';
 import { Dropdown } from 'wix-style-react';
