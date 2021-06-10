@@ -105,7 +105,7 @@ class BlockLinkButton extends Component {
   };
 
   render() {
-    const { theme, isMobile, tabIndex, icons, tooltipText, helpers } = this.props;
+    const { theme, isMobile, tabIndex, icons, tooltipText, helpers, pluginType } = this.props;
     return (
       <LinkButton
         onClick={this.showLinkPanel}
@@ -115,6 +115,7 @@ class BlockLinkButton extends Component {
         isMobile={isMobile}
         tooltipText={tooltipText}
         tabIndex={tabIndex}
+        pluginType={pluginType}
         icon={icons}
       />
     );
