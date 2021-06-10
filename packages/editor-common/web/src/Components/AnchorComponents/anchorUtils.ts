@@ -13,9 +13,13 @@ import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
 } from 'wix-rich-content-common';
+import { EditorState, ContentBlock } from '@wix/draft-js';
 
-export const getAnchorableBlocks = (editorState, selectedBlock = undefined) => {
-  const anchorableBlocks = [];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnchorableBlockType = any;
+
+export const getAnchorableBlocks = (editorState: EditorState, selectedBlock?: string) => {
+  const anchorableBlocks: AnchorableBlockType[] = [];
   const typesWithIndexes = {};
 
   const contentState = editorState.getCurrentContent();
@@ -24,15 +28,15 @@ export const getAnchorableBlocks = (editorState, selectedBlock = undefined) => {
 
   contentState
     .getBlockMap()
-    .filter(block => selectedBlockKey !== block.key)
+    .filter(block => selectedBlockKey !== block?.getKey())
     .forEach(block => {
-      if (isAnchorableBlock(block, editorState)) {
+      if (block && isAnchorableBlock(block, editorState)) {
         const anchorableBlock = isAtomicBlock(block)
           ? mapAtomicBlocks(block, editorState)
           : mapInlineBlocks(block);
         anchorableBlocks.push(anchorableBlock);
-      } else if (isInnerRCEBlock(block, editorState)) {
-        const { type, entityData } = getBlockInfo(editorState, block.key);
+      } else if (block && isInnerRCEBlock(block, editorState)) {
+        const { type, entityData } = getBlockInfo(editorState, block?.getKey() || '');
         if (type === 'wix-rich-content-plugin-collapsible-list') {
           entityData.pairs.forEach(pair => {
             const titleEditorState = pair.title;
@@ -56,8 +60,8 @@ export const filterAnchorableBlocks = (array, filter) => {
   return array.filter(block => block.anchorType === filter);
 };
 
-function isInnerRCEBlock(block, editorState) {
-  const { type } = getBlockInfo(editorState, block.key);
+function isInnerRCEBlock(block: ContentBlock, editorState: EditorState) {
+  const { type } = getBlockInfo(editorState, block.getKey());
   const rceInRcePlugins = [
     // 'wix-rich-content-plugin-table',
     'wix-rich-content-plugin-collapsible-list',
@@ -74,25 +78,25 @@ const mapBlocksTypesAndIndexes = (block, typesWithIndexes) => {
   block.index = typesWithIndexes[block.anchorType];
 };
 
-const isAnchorableBlock = (block, editorState) => {
+const isAnchorableBlock = (block: ContentBlock, editorState: EditorState) => {
   if (isAtomicBlock(block)) {
-    const { type } = getBlockInfo(editorState, block.key);
+    const { type } = getBlockInfo(editorState, block.getKey());
     return anchorableAtomicPlugins(type);
   } else {
-    return anchorableInlineElement(block.type) && /\S/.test(block.text);
+    return anchorableInlineElement(block.getType()) && /\S/.test(block.getText());
   }
 };
 
-const mapInlineBlocks = block => {
-  let blockType = block.type;
+const mapInlineBlocks = (block: ContentBlock) => {
+  let blockType = block.getType();
   if (headersType(blockType)) {
     blockType = 'header';
   }
   return { ...block.toJS(), anchorType: blockType };
 };
 
-const mapAtomicBlocks = (block, editorState) => {
-  const { type, entityData } = getBlockInfo(editorState, block.key);
+const mapAtomicBlocks = (block: ContentBlock, editorState: EditorState) => {
+  const { type, entityData } = getBlockInfo(editorState, block.getKey());
   let contentEntityType = type;
   if (buttonsType(contentEntityType)) {
     contentEntityType = 'buttons';
@@ -104,7 +108,7 @@ const mapAtomicBlocks = (block, editorState) => {
   };
 };
 
-const isAtomicBlock = block => block.type === 'atomic';
+const isAtomicBlock = (block: ContentBlock) => block.getType() === 'atomic';
 
 const buttonsType = contentEntityType =>
   contentEntityType === LINK_BUTTON_TYPE || contentEntityType === ACTION_BUTTON_TYPE;
