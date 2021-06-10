@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
-import { UrlInputModal } from 'wix-rich-content-plugin-commons';
+import { UrlInputModal } from 'wix-rich-content-ui-components';
 import {
   OnConfirmFunction,
   Pubsub,
