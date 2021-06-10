@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InlineToolbarButton from '../InlineToolbarButton';
 import { LinkIcon } from '../../Icons';
-import { LINK_TYPE } from 'wix-rich-content-common';
 
 const dataHook = 'LinkButton';
 
@@ -11,7 +10,6 @@ const LinkButton = ({ icon, ...otherProps }) => (
     isLastAddStep={false}
     icon={icon || LinkIcon}
     dataHook={dataHook}
-    pluginType={LINK_TYPE}
     {...otherProps}
   />
 );
@@ -25,6 +23,7 @@ LinkButton.propTypes = {
   helpers: PropTypes.object,
   isMobile: PropTypes.bool,
   tooltipText: PropTypes.string,
+  pluginType: PropTypes.string,
   tabIndex: PropTypes.number,
   icon: PropTypes.func,
 };

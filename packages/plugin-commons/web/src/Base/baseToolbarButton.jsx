@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FileInput } from 'wix-rich-content-ui-components';
 import { ToolbarButton, Dropdown } from 'wix-rich-content-editor-common';
+import { Version } from 'wix-rich-content-common';
 import BUTTONS from './buttons/keys';
 
 class BaseToolbarButton extends React.Component {
@@ -72,6 +73,7 @@ class BaseToolbarButton extends React.Component {
       anchorTarget,
       relValue,
       componentState,
+      pluginType,
       keyName,
       pubsub,
       onClick,
@@ -81,6 +83,12 @@ class BaseToolbarButton extends React.Component {
       modalStylesFn,
       ...otherProps
     } = this.props;
+
+    helpers?.onToolbarButtonClick?.({
+      version: Version.currentVersion,
+      buttonName: keyName,
+      pluginId: pluginType,
+    });
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
       const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
@@ -334,6 +342,7 @@ BaseToolbarButton.propTypes = {
   hideInlinePanel: PropTypes.func.isRequired,
   uiSettings: PropTypes.object,
   settings: PropTypes.object,
+  pluginType: PropTypes.string,
 };
 
 BaseToolbarButton.defaultProps = {

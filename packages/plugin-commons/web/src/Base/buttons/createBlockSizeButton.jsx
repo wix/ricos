@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
+import { Version } from 'wix-rich-content-common';
 
 export default ({ size, Icon, tooltipTextKey }) =>
   class BlockSizeButton extends Component {
@@ -15,16 +16,25 @@ export default ({ size, Icon, tooltipTextKey }) =>
       tooltipText: PropTypes.string,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      helpers: PropTypes.object,
+      pluginType: PropTypes.string,
     };
 
     isActive = () => this.props.size === size;
 
     handleClick = event => {
       event.preventDefault();
-      if (this.props.disabled) {
+      const { disabled, setLayoutProps, helpers, pluginType } = this.props;
+      if (disabled) {
         return;
       }
-      this.props.setLayoutProps({ size });
+      helpers?.onToolbarButtonClick?.({
+        version: Version.currentVersion,
+        buttonName: 'Size',
+        pluginId: pluginType,
+        value: `${size}`,
+      });
+      setLayoutProps({ size });
     };
 
     preventBubblingUp = event => {

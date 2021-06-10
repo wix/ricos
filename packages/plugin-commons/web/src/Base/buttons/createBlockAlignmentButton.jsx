@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
+import { Version } from 'wix-rich-content-common';
 
 export default ({ alignment, Icon, tooltipTextKey }) =>
   class BlockAlignmentButton extends Component {
@@ -16,16 +17,25 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       tabIndex: PropTypes.number,
       icon: PropTypes.func,
       keyName: PropTypes.string.isRequired,
+      helpers: PropTypes.object,
+      pluginType: PropTypes.string,
     };
 
     isActive = () => this.props.alignment === alignment;
 
     handleClick = event => {
       event.preventDefault();
-      if (this.props.disabled) {
+      const { disabled, setLayoutProps, helpers, pluginType } = this.props;
+      if (disabled) {
         return;
       }
-      this.props.setLayoutProps({ alignment });
+      helpers?.onToolbarButtonClick?.({
+        version: Version.currentVersion,
+        buttonName: 'Alignment',
+        pluginId: pluginType,
+        value: `${alignment}`,
+      });
+      setLayoutProps({ alignment });
     };
 
     preventBubblingUp = event => {

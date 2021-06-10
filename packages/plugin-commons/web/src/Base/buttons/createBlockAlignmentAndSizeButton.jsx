@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
+import { Version } from 'wix-rich-content-common';
 
 export default ({ alignment, size, Icon, tooltipTextKey }) =>
   class BlockAlignmentAndSizeButton extends Component {
@@ -16,20 +17,29 @@ export default ({ alignment, size, Icon, tooltipTextKey }) =>
       tooltipText: PropTypes.string,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      helpers: PropTypes.object,
+      pluginType: PropTypes.string,
     };
 
     isActive = () => this.props.alignment === alignment && this.props.size === size;
 
     handleClick = event => {
       event.preventDefault();
-      if (this.props.disabled) {
+      const { keyName, pluginType, helpers, setLayoutProps, disabled } = this.props;
+      if (disabled) {
         return;
       }
+      helpers?.onToolbarButtonClick?.({
+        version: Version.currentVersion,
+        buttonName: 'AlignmentAndSize',
+        pluginId: pluginType,
+        value: `${alignment}|${size}`,
+      });
       // aligning a custom size block (inline) should not change size
-      if (this.props.keyName.includes('align') && this.props.size === 'inline') {
-        this.props.setLayoutProps({ alignment });
+      if (keyName.includes('align') && this.props.size === 'inline') {
+        setLayoutProps({ alignment });
       } else {
-        this.props.setLayoutProps({ alignment, size });
+        setLayoutProps({ alignment, size });
       }
     };
 

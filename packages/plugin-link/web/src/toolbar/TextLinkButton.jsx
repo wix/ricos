@@ -151,6 +151,7 @@ export default class TextLinkButton extends Component {
         isMobile={isMobile}
         tooltipText={tooltipText}
         tabIndex={tabIndex}
+        pluginType={LINK_TYPE}
         icon={insertLinkIcon}
       />
     );
