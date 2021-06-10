@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "3. fejléc",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Tervezés (dizájn)",
   "ButtonPlugin_Navbar_Update_button": "Mentés",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "Link eltávolítása",
   "ButtonModal_Link_Input_Placeholder": "Írd be az URL-t!",
   "LinkPanelContainer_CancelButton": "Mégse",
