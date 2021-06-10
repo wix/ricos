@@ -221,6 +221,7 @@ linkPanelSettings?: {
   showNoFollowCheckbox?: boolean;
   showSponsoredCheckbox?: boolean;
   placeholder?: string;
+  externalPopups?: boolean;
 }
 ```
 
@@ -259,6 +260,12 @@ By default, it's visible.
 
 Determines the placeholder to use for the link panel.
 By default, its value is `"Enter a URL here"` translated by localization
+
+#### `externalPopups`
+
+Determines the position of the link modal.
+Passing *true* places the link modal on the topmost layer.
+By default, this value is false.
 
 Examples:
 

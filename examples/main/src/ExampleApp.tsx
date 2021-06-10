@@ -182,7 +182,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
         items: [ToolbarType.FORMATTING, ToolbarType.INSERT_PLUGIN],
       },
       {
-        name: 'External Popups',
+        name: 'External Link Popups',
         active: externalPopups,
         action: () =>
           this.setState(state => ({
