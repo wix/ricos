@@ -6,7 +6,6 @@ import {
   LinkButton,
   EditorModals,
 } from 'wix-rich-content-editor-common';
-import { Version } from 'wix-rich-content-common';
 import { LINK_TYPE } from '../types';
 import { isEmpty } from 'lodash';
 
@@ -75,18 +74,6 @@ export default class TextLinkButton extends Component {
       isMobile,
       customStyles,
     });
-    const onToolbarClick = value =>
-      helpers?.onToolbarButtonClick?.({
-        pluginId: LINK_TYPE,
-        buttonName: LinkButton.dataHook || '',
-        version: Version.currentVersion,
-        value,
-      });
-    const insertLink = (...args) => {
-      onToolbarClick(String(true));
-      return insertLinkFn?.(...args);
-    };
-    const onLinkRemoval = () => onToolbarClick(String(false));
     const commonPanelProps = {
       helpers,
       modalName: EditorModals.TEXT_LINK_MODAL,
@@ -97,8 +84,7 @@ export default class TextLinkButton extends Component {
       uiSettings,
       getEditorState,
       setEditorState,
-      insertLinkFn: insertLink,
-      onLinkRemoval,
+      insertLinkFn,
       closeInlinePluginToolbar,
       linkTypes,
     };
