@@ -208,8 +208,15 @@ class Toolbar extends Component {
   };
 
   render() {
-    const { buttons, vertical, formattingToolbarButtonsKeys, editorCommands, t } = this.props;
-    const blabla = createButtonsList(formattingToolbarButtonsKeys, editorCommands, t);
+    const {
+      buttons,
+      vertical,
+      formattingToolbarButtonsKeys,
+      editorCommands,
+      t,
+      plugins,
+    } = this.props;
+    const blabla = createButtonsList(formattingToolbarButtonsKeys, editorCommands, t, plugins);
     // console.log({ buttons });
     // console.log({ blabla });
     this.cleanUnwantedSeparators(blabla);
@@ -243,6 +250,7 @@ Toolbar.propTypes = {
   setKeepOpen: PropTypes.func,
   editorCommands: PropTypes.object,
   formattingToolbarButtonsKeys: PropTypes.array,
+  plugins: PropTypes.array,
 };
 
 export default Toolbar;

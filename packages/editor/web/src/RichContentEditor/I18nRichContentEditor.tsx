@@ -23,6 +23,8 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   getT = () => this.editor.getT();
 
+  getPlugins = () => this.editor.getPlugins();
+
   removeToolbarFocus = () => this.editor.removeToolbarFocus();
 
   focus = () => this.editor.focus();

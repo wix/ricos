@@ -42,7 +42,7 @@ interface State {
   remountKey: boolean;
   editorState?: EditorState;
   initialContentChanged: boolean;
-  activeEditor?: RicosEditor | RichContentEditor | null;
+  activeEditor?: RichContentEditor | null;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -207,6 +207,14 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   removeToolbarFocus = () => this.editor.removeToolbarFocus();
 
+  getPluginsKey = () => {
+    const { activeEditor } = this.state;
+    const rawPlugins = activeEditor?.getPlugins?.();
+    const plugins = rawPlugins.filter(plugin => plugin?.blockType !== undefined);
+    const pluginsKeys = plugins.map(plugin => plugin.blockType);
+    return pluginsKeys;
+  };
+
   renderTextFormattingToolbar() {
     const { activeEditor } = this.state;
     if (activeEditor) {
@@ -232,7 +240,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       const formattingToolbarSetting = getToolbarSettings({ textButtons }).find(
         toolbar => toolbar?.name === 'INLINE'
       );
-      const formattingToolbarButtonsKeys = formattingToolbarSetting?.getButtons?.();
+      const allFormattingToolbarButtons = formattingToolbarSetting?.getButtons?.();
+      const formattingToolbarButtons = isMobile
+        ? allFormattingToolbarButtons?.mobile
+        : allFormattingToolbarButtons?.desktop;
+      const plugins = this.getPluginsKey();
       const ToolbarToRender = (
         <Toolbar
           theme={theme}
@@ -240,9 +252,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           t={t}
           buttons={buttonsAsArray}
           editorCommands={editorCommands}
-          formattingToolbarButtonsKeys={
-            isMobile ? formattingToolbarButtonsKeys?.mobile : formattingToolbarButtonsKeys?.desktop
-          }
+          formattingToolbarButtonsKeys={formattingToolbarButtons}
+          plugins={plugins}
         />
       );
       const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;

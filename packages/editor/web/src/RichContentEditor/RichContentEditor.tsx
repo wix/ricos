@@ -865,6 +865,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return t;
   };
 
+  getPlugins = () => {
+    return this.plugins;
+  };
+
   getEditorCommands = () => this.EditorCommands;
 
   // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)

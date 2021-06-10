@@ -47,6 +47,7 @@ export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
 
 const buttonsFullData = {
   HEADINGS: {
+    plugin: 'wix-rich-content-plugin-headings',
     icon: () => null,
     dataHook: 'headingsDropdownButton',
     tooltip: 'Text style',
@@ -82,6 +83,7 @@ const buttonsFullData = {
     type: 'button',
   },
   TEXT_COLOR: {
+    plugin: 'wix-rich-content-text-color',
     icon: TextColorIcon,
     dataHook: 'wix-rich-content-text-color-button',
     tooltip: 'Text color',
@@ -89,6 +91,7 @@ const buttonsFullData = {
     type: 'DROPDOWN',
   },
   TEXT_HIGHLIGHT: {
+    plugin: 'wix-rich-content-text-highlight',
     icon: TextHighlightIcon,
     dataHook: 'wix-rich-content-text-highlight-button',
     tooltip: 'Highlight color',
@@ -167,6 +170,7 @@ const buttonsFullData = {
     type: 'button',
   },
   DECREASE_INDENT: {
+    plugin: 'wix-rich-content-plugin-indent',
     icon: decreaseIndentPluginIcon,
     dataHook: 'DECREASE_INDENT',
     tooltip: 'Decrease indent',
@@ -174,6 +178,7 @@ const buttonsFullData = {
     type: 'button',
   },
   INCREASE_INDENT: {
+    plugin: 'wix-rich-content-plugin-indent',
     icon: increaseIndentPluginIcon,
     dataHook: 'INCREASE_INDENT',
     tooltip: 'Increase indent',
@@ -181,6 +186,7 @@ const buttonsFullData = {
     type: 'button',
   },
   SPOILER: {
+    plugin: 'wix-rich-content-plugin-spoiler',
     icon: SpoilerButtonIcon,
     dataHook: 'spoilerButton',
     tooltip: 'Spoiler',
@@ -188,6 +194,7 @@ const buttonsFullData = {
     type: 'button',
   },
   LINE_SPACING: {
+    plugin: 'line-spacing',
     icon: LineSpacingIcon,
     dataHook: 'LINE_SPACING',
     tooltip: 'Line spacing',
@@ -202,6 +209,7 @@ const buttonsFullData = {
     saveSelection: true,
   },
   LINK: {
+    plugin: 'LINK',
     icon: LinkIcon,
     dataHook: 'LINK',
     tooltip: 'Link',
@@ -210,6 +218,7 @@ const buttonsFullData = {
     // modal: props => <LinkPanelContainer {...props} />,
   },
   CODE_BLOCK: {
+    plugin: 'code-block',
     icon: CodeBlockIcon,
     dataHook: 'CODE_BLOCK',
     tooltip: 'Code snippet',
@@ -224,7 +233,7 @@ const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedL
 
 const decorationButtons = ['DECREASE_INDENT', 'INCREASE_INDENT', 'LINE_SPACING'];
 
-export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
+export const createButtonsList = (formattingButtonsKeys, editorCommands, t, plugins) => {
   const buttonsList = [];
   formattingButtonsKeys.forEach((buttonKey, index) => {
     handleButtonName(buttonsList, buttonKey, index, editorCommands);
@@ -246,7 +255,18 @@ export const createButtonsList = (formattingButtonsKeys, editorCommands, t) => {
     handleButtonSaveState(buttonsList, index, editorCommands);
     handleButtonSaveSelection(buttonsList, index, editorCommands);
   });
-  return buttonsList;
+  const filteredButtonsList = filterButtonsByPlugins(buttonsList, plugins);
+  return filteredButtonsList;
+};
+
+const filterButtonsByPlugins = (buttonsList, plugins) => {
+  return buttonsList.filter(button => {
+    if (buttonsFullData[button.name].plugin) {
+      return plugins.includes(buttonsFullData[button.name].plugin);
+    } else {
+      return true;
+    }
+  });
 };
 
 const handleButtonOnChange = (buttonsList, index, editorCommands) => {
