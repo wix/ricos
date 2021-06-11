@@ -4,15 +4,13 @@ export interface ParagraphOptions {
   HTMLAttributes: Record<string, unknown>;
 }
 
-declare module '@tiptap/core' {
-  interface Commands {
-    paragraph: {
-      /**
-       * Toggle a paragraph
-       */
-      setParagraph: () => Command;
-    };
-  }
+interface Commands {
+  paragraph: {
+    /**
+     * Toggle a paragraph
+     */
+    setParagraph: () => Command;
+  };
 }
 
 export const Paragraph = Node.create<ParagraphOptions>({
