@@ -36,6 +36,9 @@ export const convertDecorationToDraftData = (decoration: Decoration) => {
 };
 
 export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
+  if (!data) {
+    throw Error(`No data for ${nodeType}`);
+  }
   const newData = cloneDeep(data);
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,

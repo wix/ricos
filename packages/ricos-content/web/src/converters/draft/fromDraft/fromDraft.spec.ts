@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 
-import { fromDraft } from './fromDraft';
+import { toDraft, fromDraft } from '..';
 import { compare } from '../../../comparision/compare';
 import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
+import buggy1 from '../../../../../../../e2e/tests/fixtures/buggy/atomicWithNoEntityRanges.json';
+import buggy2 from '../../../../../../../e2e/tests/fixtures/buggy/buggy.json';
 import { getTextNodes } from './getTextNodes';
 import complexRicosFixture from '../../../../statics/json/migratedFixtures/migration-content.json';
 import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
@@ -12,6 +14,13 @@ import { IMAGE_TYPE } from '../../../consts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
+  const fixtures = { buggy1, buggy2 };
+  Object.entries(fixtures).forEach(([name, content]) =>
+    it(`should migrate ${name} fixture`, () => {
+      expect(compareWithConverted(content)).toEqual({});
+    })
+  );
+
   it('should migrate complex fixture', () => {
     expect(
       compare(fromDraft(complexFixture), RichContent.fromJSON(complexRicosFixture), {
@@ -257,3 +266,5 @@ describe('migrate from draft', () => {
     ).toEqual({});
   });
 });
+
+const compareWithConverted = content => compare(toDraft(fromDraft(content)), content);

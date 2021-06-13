@@ -236,15 +236,22 @@ const convertLink = ({
   anchor?: string;
 }): Link => {
   const relValues =
-    rel
-      ?.split(' ')
+    (rel || '')
+      .split(' ')
       .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
       .map(key => [key, true]) || [];
+  let _target;
+  try {
+    _target = target?.toUpperCase().substring(1);
+  } catch (e) {
+    console.warn('Target is not string', target);
+    _target = '';
+  }
   return {
     anchor,
     url,
     rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
-    target: target?.toUpperCase().substring(1) as Link_Target,
+    target: _target,
   };
 };
 
