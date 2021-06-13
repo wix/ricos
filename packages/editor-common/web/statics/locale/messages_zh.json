@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "標題 3",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "設計",
   "ButtonPlugin_Navbar_Update_button": "保存",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "移除連結",
   "ButtonModal_Link_Input_Placeholder": "請輸入網址",
   "LinkPanelContainer_CancelButton": "取消",
