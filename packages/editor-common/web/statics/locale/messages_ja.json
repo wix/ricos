@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "見出し 3",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "デザイン",
   "ButtonPlugin_Navbar_Update_button": "保存する",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "リンクを削除",
   "ButtonModal_Link_Input_Placeholder": "URL を入力する",
   "LinkPanelContainer_CancelButton": "キャンセル",
