@@ -240,7 +240,6 @@ const convertLink = ({
       ?.split(' ')
       .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
       .map(key => [key, true]) || [];
-
   return {
     anchor,
     url,
