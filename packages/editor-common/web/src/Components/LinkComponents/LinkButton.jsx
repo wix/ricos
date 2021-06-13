@@ -6,12 +6,7 @@ import { LinkIcon } from '../../Icons';
 const dataHook = 'LinkButton';
 
 const LinkButton = ({ icon, ...otherProps }) => (
-  <InlineToolbarButton
-    isLastAddStep={false}
-    icon={icon || LinkIcon}
-    dataHook={dataHook}
-    {...otherProps}
-  />
+  <InlineToolbarButton icon={icon || LinkIcon} dataHook={dataHook} {...otherProps} />
 );
 
 LinkButton.dataHook = dataHook;

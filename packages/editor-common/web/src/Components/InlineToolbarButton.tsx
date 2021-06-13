@@ -21,16 +21,11 @@ type InlineToolbarButtonProps = {
   buttonContent?: string;
   showArrowIcon?: boolean;
   helpers?: Helpers;
-  isLastAddStep?: boolean;
   pluginType?: string;
 };
 
 class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
   styles: Record<string, string>;
-
-  static defaultProps = {
-    isLastAddStep: true,
-  };
 
   constructor(props) {
     super(props);
@@ -78,19 +73,11 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
   preventDefault = event => event.preventDefault();
 
   onClick: InlineToolbarButtonProps['onClick'] = e => {
-    const {
-      onClick,
-      isLastAddStep,
-      helpers,
-      pluginType,
-      dataHook,
-      isActive,
-      children,
-    } = this.props;
+    const { onClick, helpers, pluginType, dataHook, isActive, children } = this.props;
     helpers?.onToolbarButtonClick?.({
       buttonName: dataHook || '',
       pluginId: pluginType,
-      value: !isLastAddStep || children ? undefined : String(!isActive),
+      value: children ? undefined : String(!isActive),
     });
     onClick?.(e);
   };
