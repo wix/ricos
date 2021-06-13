@@ -22,7 +22,6 @@ import {
   TrashIcon,
 } from '../../Icons';
 import { AlignLeftIcon, AlignTextCenterIcon, AlignRightIcon } from 'wix-rich-content-editor-common';
-import { Version } from 'wix-rich-content-common';
 
 export { BUTTONS };
 
@@ -160,7 +159,7 @@ export const widthButton = icon =>
     Icon: icon || WidthIcon,
     tooltipTextKey: 'ChangeDimensions_Width_Tooltip',
     getValue: ({ componentData }) => componentData.config.width,
-    onChange: ({ getEditorBounds, store, helpers, pluginType }) => width => {
+    onChange: ({ getEditorBounds, store }) => width => {
       const bounds = getEditorBounds();
       const editorWidth = bounds ? bounds.width : 740;
       if (width >= editorWidth && store.get('componentData')?.config.alignment) {
@@ -168,12 +167,6 @@ export const widthButton = icon =>
       }
 
       store.update('componentData', { config: { width } });
-      helpers?.onToolbarButtonClick?.({
-        version: Version.currentVersion,
-        buttonName: 'Width',
-        pluginId: pluginType,
-        value: String(width),
-      });
     },
   });
 
@@ -182,15 +175,7 @@ export const heightButton = icon =>
     Icon: icon || HeightIcon,
     tooltipTextKey: 'ChangeDimensions_Height_Tooltip',
     getValue: ({ componentData }) => componentData.config.height,
-    onChange: ({ store, helpers, pluginType }) => height => {
-      store.update('componentData', { config: { height } });
-      helpers?.onToolbarButtonClick?.({
-        version: Version.currentVersion,
-        buttonName: 'Height',
-        pluginId: pluginType,
-        value: String(height),
-      });
-    },
+    onChange: ({ store }) => height => store.update('componentData', { config: { height } }),
   });
 
 export const BUTTONS_BY_KEY = {
