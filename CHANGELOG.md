@@ -19,8 +19,12 @@
 
 ### :house: Internal
 - `ui-components`
-  - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved SettingsMobileHeader/UrlInputModal components into ui-components folder
   - [#2612](https://github.com/wix-incubator/rich-content/pull/2612) moved InfoIcon components into ui-components folder
+- `plugin-commons`
+  - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved SettingsMobileHeader/UrlInputModal components into ui-components folder
+- `tiptap-editor`
+  - [#2546](https://github.com/wix-incubator/rich-content/pull/2546) package added
+  
 
 </details>
 <hr/>
