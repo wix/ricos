@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
+import { MediaItemErrorMsg, Loader } from 'wix-rich-content-ui-components';
 
 class ImageComponent extends React.Component {
   static alignmentClassName = (componentData, theme, styles, isMobile) =>
@@ -48,27 +49,33 @@ class ImageComponent extends React.Component {
       setInPluginEditingMode,
       setComponentUrl,
       t,
+      error,
+      isLoading,
     } = this.props;
 
     return (
-      <ImageViewer
-        theme={theme}
-        isMobile={isMobile}
-        helpers={helpers}
-        disableRightClick={disableRightClick}
-        getInPluginEditingMode={getInPluginEditingMode}
-        setInPluginEditingMode={setInPluginEditingMode}
-        componentData={componentData}
-        onClick={onClick}
-        className={className}
-        isLoading={this.props.isLoading}
-        dataUrl={this.props.tempData?.dataUrl}
-        settings={settings}
-        defaultCaption={this.props.t('ImageViewer_Caption')}
-        onCaptionChange={this.handleCaptionChange}
-        setFocusToBlock={blockProps.setFocusToBlock}
-        setComponentUrl={setComponentUrl}
-      />
+      <>
+        <ImageViewer
+          theme={theme}
+          isMobile={isMobile}
+          helpers={helpers}
+          disableRightClick={disableRightClick}
+          getInPluginEditingMode={getInPluginEditingMode}
+          setInPluginEditingMode={setInPluginEditingMode}
+          componentData={componentData}
+          onClick={onClick}
+          className={className}
+          isLoading={this.props.isLoading}
+          dataUrl={this.props.tempData?.dataUrl}
+          settings={settings}
+          defaultCaption={this.props.t('ImageViewer_Caption')}
+          onCaptionChange={this.handleCaptionChange}
+          setFocusToBlock={blockProps.setFocusToBlock}
+          setComponentUrl={setComponentUrl}
+        />
+        {!error && isLoading && <Loader type={'medium'} />}
+        {error && <MediaItemErrorMsg error={error} t={t} />}
+      </>
     );
   }
 }
@@ -91,6 +98,7 @@ ImageComponent.propTypes = {
   setComponentUrl: PropTypes.func,
   isLoading: PropTypes.bool,
   tempData: PropTypes.object,
+  error: PropTypes.object,
 };
 
 export { ImageComponent as Component, DEFAULTS };

@@ -14,122 +14,106 @@ import {
   textWrapClassName,
 } from 'wix-rich-content-common';
 
-class MediaPlugin extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { isLoading: false, tempData: null };
-  }
+const createBaseMediaPlugin = PluginComponent => {
+  return class BaseMediaPlugin extends PureComponent {
+    static propTypes = {
+      componentData: PropTypes.object.isRequired,
+      componentState: PropTypes.object.isRequired,
+      store: PropTypes.object.isRequired,
+      block: PropTypes.object.isRequired,
+      t: PropTypes.func.isRequired,
+      handleUploadStart: PropTypes.func.isRequired,
+      handleUploadFinished: PropTypes.func.isRequired,
+      commonPubsub: PropTypes.object,
+      type: PropTypes.string,
+    };
 
-  componentDidMount() {
-    const { block, store, commonPubsub, pluginType } = this.props;
-    const blockKey = block.getKey();
-    store?.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
-    store?.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
-    pluginType === GALLERY_TYPE &&
-      commonPubsub?.setBlockHandler(
-        'galleryHandleFilesAdded',
-        blockKey,
-        this.handleFilesAdded.bind(this)
-      );
-    this.updateComponent();
-  }
-
-  componentDidUpdate() {
-    this.updateComponent();
-  }
-
-  updateComponent() {
-    const componentState = this.props.componentState || {};
-    const { isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
-    if (!isLoading && userSelectedFiles) {
-      //lets continue the uploading process
-      if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-        this.handleFilesSelected(userSelectedFiles.files);
-        this.setState({ itemsLeftToUpload: userSelectedFiles.files.length, isLoading: true });
-      }
-      setTimeout(() => {
-        //needs to be async since this function is called during constructor and we do not want the update to call set state on other components
-        this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null });
-      }, 0);
+    constructor(props) {
+      super(props);
+      this.state = { isLoading: false, tempData: null };
     }
-  }
 
-  getLoadingParams = componentState => {
-    //check if the file upload is coming on the regular state
-    const { isLoading, userSelectedFiles } = componentState;
-    return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
-  };
-
-  onUploadFinished = ({ data, error }) => {
-    data && this.props.store.update('componentData', data, this.props.block.getKey());
-    let { tempData } = this.state;
-    if (!error) {
-      tempData = null;
-    }
-    this.setState(state => {
-      const itemsLeftToUpload = state.itemsLeftToUpload - 1;
-      const isLoading = itemsLeftToUpload > 0;
-      return { itemsLeftToUpload, isLoading, tempData };
-    });
-    this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
-  };
-
-  onLocalLoad = tempData => this.setState({ tempData });
-
-  handleFilesSelected = files => {
-    Array(...files).forEach(file => {
-      this.props.handleUploadStart(file, this.onLocalLoad, this.onUploadFinished);
-    });
-  };
-
-  handleFilesAdded = ({ data, error }) => {
-    if (data instanceof Array) {
-      data.forEach((item, index) => {
-        this.props.handleUploadFinished(
-          item,
-          (error instanceof Array && error[index]) || error,
-          this.onUploadFinished
+    componentDidMount() {
+      const { block, store, commonPubsub, type } = this.props;
+      const blockKey = block.getKey();
+      store?.setBlockHandler('handleFilesSelected', blockKey, this.handleFilesSelected.bind(this));
+      store?.setBlockHandler('handleFilesAdded', blockKey, this.handleFilesAdded.bind(this));
+      type === GALLERY_TYPE &&
+        commonPubsub?.setBlockHandler(
+          'galleryHandleFilesAdded',
+          blockKey,
+          this.handleFilesAdded.bind(this)
         );
+      this.updateComponent();
+    }
+
+    componentDidUpdate() {
+      this.updateComponent();
+    }
+
+    updateComponent() {
+      const componentState = this.props.componentState || {};
+      const { isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
+      if (!isLoading && userSelectedFiles) {
+        //lets continue the uploading process
+        if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
+          this.handleFilesSelected(userSelectedFiles.files);
+          this.setState({ itemsLeftToUpload: userSelectedFiles.files.length, isLoading: true });
+        }
+        setTimeout(() => {
+          //needs to be async since this function is called during constructor and we do not want the update to call set state on other components
+          this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null });
+        }, 0);
+      }
+    }
+
+    getLoadingParams = componentState => {
+      //check if the file upload is coming on the regular state
+      const { isLoading, userSelectedFiles } = componentState;
+      return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
+    };
+
+    onUploadFinished = ({ data, error }) => {
+      data && this.props.store.update('componentData', data, this.props.block.getKey());
+      let { tempData } = this.state;
+      if (!error) {
+        tempData = null;
+      }
+      this.setState(state => {
+        const itemsLeftToUpload = state.itemsLeftToUpload - 1;
+        const isLoading = itemsLeftToUpload > 0;
+        return { itemsLeftToUpload, isLoading, tempData };
       });
-    } else {
-      this.props.handleUploadFinished(data, error, this.onUploadFinished);
+      this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
+    };
+
+    onLocalLoad = tempData => this.setState({ tempData });
+
+    handleFilesSelected = files => {
+      Array(...files).forEach(file => {
+        this.props.handleUploadStart(file, this.onLocalLoad, this.onUploadFinished);
+      });
+    };
+
+    handleFilesAdded = ({ data, error }) => {
+      if (data instanceof Array) {
+        data.forEach((item, index) => {
+          this.props.handleUploadFinished(
+            item,
+            (error instanceof Array && error[index]) || error,
+            this.onUploadFinished
+          );
+        });
+      } else {
+        this.props.handleUploadFinished(data, error, this.onUploadFinished);
+      }
+    };
+
+    render() {
+      const { isLoading, tempData } = this.state;
+      return <PluginComponent {...this.props} isLoading={isLoading} tempData={tempData} />;
     }
   };
-
-  renderLoader = () => {
-    return <Loader type={'medium'} />;
-  };
-
-  render() {
-    const {
-      componentData: { loading, error },
-      Component,
-      t,
-      isOverlayLoader,
-    } = this.props;
-    const { isLoading, tempData } = this.state;
-    return (
-      <>
-        <Component {...this.props} isLoading={isLoading} tempData={tempData} />
-        {isOverlayLoader && (isLoading || loading) && this.renderLoader()}
-        {isOverlayLoader && error && <MediaItemErrorMsg error={error} t={t} />}
-      </>
-    );
-  }
-}
-
-MediaPlugin.propTypes = {
-  componentData: PropTypes.object.isRequired,
-  componentState: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
-  block: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired,
-  handleUploadStart: PropTypes.func.isRequired,
-  handleUploadFinished: PropTypes.func.isRequired,
-  isOverlayLoader: PropTypes.bool,
-  Component: PropTypes.any,
-  commonPubsub: PropTypes.object,
-  pluginType: PropTypes.string,
 };
 
 const getGalleryFileType = type => {
@@ -140,33 +124,25 @@ const getGalleryFileType = type => {
     : '';
 };
 
-const createBaseMediaPlugin = ({
-  PluginComponent,
-  pluginType,
-  isPluginViewer = true,
-  isOverlayLoader = true,
-}) => {
+const createMediaUploadWrapper = PluginComponent => {
   return class MediaUploadWrapper extends PureComponent {
     static propTypes = {
       componentData: PropTypes.object.isRequired,
       commonPubsub: PropTypes.object,
       helpers: PropTypes.object,
+      type: PropTypes.string,
     };
 
-    static alignmentClassName = (componentData, theme, styles, isMobile) =>
-      PluginComponent.alignmentClassName?.(componentData, theme, styles, isMobile) ||
-      alignmentClassName(componentData, theme, styles, isMobile);
+    static alignmentClassName = (...args) =>
+      PluginComponent.alignmentClassName?.(args) || alignmentClassName(args);
 
-    static sizeClassName = (componentData, theme, styles, isMobile) =>
-      PluginComponent.sizeClassName?.(componentData, theme, styles, isMobile) ||
-      sizeClassName(componentData, theme, styles, isMobile);
+    static sizeClassName = (...args) =>
+      PluginComponent.sizeClassName?.(args) || sizeClassName(args);
 
-    static textWrapClassName = (componentData, theme, styles, isMobile) =>
-      PluginComponent.textWrapClassName?.(componentData, theme, styles, isMobile) ||
-      textWrapClassName(componentData, theme, styles, isMobile);
+    static textWrapClassName = (...args) =>
+      PluginComponent.textWrapClassName?.(args) || textWrapClassName(args);
 
-    static customClassName = (componentData, theme, styles, isMobile) =>
-      PluginComponent.customClassName?.(componentData, theme, styles, isMobile);
+    static customClassName = (...args) => PluginComponent.customClassName?.(args);
 
     fileReader = file => {
       return new Promise(resolve => {
@@ -175,35 +151,35 @@ const createBaseMediaPlugin = ({
     };
 
     handleUploadFinished = (data, error, onUploadFinished, itemIndex, fileType) => {
-      const { commonPubsub, componentData } = this.props;
+      const { commonPubsub, componentData, type } = this.props;
       if (error) {
         commonPubsub.set('onMediaUploadError', error);
       }
       return onUploadFinished({
-        data:
-          data && dataBuilder[pluginType]?.({ data, error }, componentData, fileType, itemIndex),
+        data: data && dataBuilder[type]?.({ data, error }, componentData, fileType, itemIndex),
         error,
       });
     };
 
     uploadFile = (file, onLocalLoad, onUploadFinished, itemPos) => {
+      const { type } = this.props;
       if (file) {
         this.fileReader(file).then(url => {
           const extension = file.name.split('.').pop();
 
           const { componentData } = this.props;
-          const tempData = tempDataBuilder[pluginType]?.({
+          const tempData = tempDataBuilder[type]?.({
             url,
             file,
             type: extension,
           });
           onLocalLoad?.(tempData);
-          const handleFileUpload = uploadFunctionGetter[pluginType](this.props);
+          const handleFileUpload = uploadFunctionGetter[type](this.props);
           if (handleFileUpload) {
             const {
               helpers: { onMediaUploadStart, onMediaUploadEnd },
             } = this.props;
-            const uploadBIData = onMediaUploadStart(pluginType, file.size, file.type);
+            const uploadBIData = onMediaUploadStart(type, file.size, file.type);
             const fileType = getGalleryFileType(file.type);
             handleFileUpload(file, ({ data, error }) => {
               onMediaUploadEnd(uploadBIData, error);
@@ -214,7 +190,7 @@ const createBaseMediaPlugin = ({
               undefined,
               { msg: 'Missing upload function' },
               onUploadFinished,
-              pluginType
+              type
             );
           }
         });
@@ -222,16 +198,7 @@ const createBaseMediaPlugin = ({
     };
 
     render() {
-      return isPluginViewer ? (
-        <MediaPlugin
-          Component={PluginComponent}
-          {...this.props}
-          handleUploadStart={this.uploadFile}
-          handleUploadFinished={this.handleUploadFinished}
-          isOverlayLoader={isOverlayLoader}
-          pluginType={pluginType}
-        />
-      ) : (
+      return (
         <PluginComponent
           {...this.props}
           handleUploadStart={this.uploadFile}
@@ -242,4 +209,4 @@ const createBaseMediaPlugin = ({
   };
 };
 
-export default createBaseMediaPlugin;
+export { createMediaUploadWrapper, createBaseMediaPlugin };

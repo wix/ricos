@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import MediaURLInputModal from './mediaURLInputModal';
 import { mediaTypes } from '../types';
-import { createBaseMediaPlugin } from 'wix-rich-content-plugin-commons';
+import { createMediaUploadWrapper } from 'wix-rich-content-plugin-commons';
 import { VIDEO_TYPE } from 'wix-rich-content-common';
 
 const VideoModal = props => {
@@ -12,11 +12,7 @@ const VideoModal = props => {
   } = props;
   const Comp = mediaTypes.includes(type)
     ? MediaURLInputModal
-    : createBaseMediaPlugin({
-        PluginComponent: VideoSelectionInputModal,
-        pluginType: VIDEO_TYPE,
-        isPluginViewer: false,
-      });
+    : createMediaUploadWrapper(VideoSelectionInputModal);
   return <Comp {...props} />;
 };
 
