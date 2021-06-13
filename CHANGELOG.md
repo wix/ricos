@@ -34,6 +34,8 @@
 - `editor`
   - [#2593](https://github.com/wix/ricos/pull/2593) fix cut behavior
   - [#2603](https://github.com/wix/ricos/pull/2603) fix insertDecoration (link) from Editor Commands
+- `link`
+  - [#2586](https://github.com/wix/ricos/pull/2586) support anchor from outer editor into collapsible list
 - `button`
   - [#2609](https://github.com/wix/ricos/pull/2609) Default Colors were always shown on settings panel configurations
 
