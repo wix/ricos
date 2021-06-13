@@ -3,8 +3,8 @@
 import { toDraft, fromDraft } from '..';
 import { compare } from '../../../comparision/compare';
 import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
-import buggy1 from '../../../../../../../e2e/tests/fixtures/buggy/atomicWithNoEntityRanges.json';
-import buggy2 from '../../../../../../../e2e/tests/fixtures/buggy/buggy.json';
+import buggy from '../../../../../../../e2e/tests/fixtures/buggy/atomicWithNoEntityRanges.json';
+import polyfills from '../../../../../../../e2e/tests/fixtures/polyfills.json';
 import { getTextNodes } from './getTextNodes';
 import complexRicosFixture from '../../../../statics/json/migratedFixtures/migration-content.json';
 import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
@@ -14,7 +14,7 @@ import { IMAGE_TYPE } from '../../../consts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
-  const fixtures = { buggy1, buggy2 };
+  const fixtures = { buggy, polyfills };
   Object.entries(fixtures).forEach(([name, content]) =>
     it(`should migrate ${name} fixture`, () => {
       const _backToDraft = toDraft(fromDraft(content));
