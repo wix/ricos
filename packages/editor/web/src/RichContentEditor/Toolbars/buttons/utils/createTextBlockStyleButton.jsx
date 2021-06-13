@@ -103,13 +103,14 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textBlockStyleButton_${textForHooks}`;
+      const onClick = e => this.setBlockStyle(e, textForHooks);
       return (
         <TextButton
           icon={Icon}
           theme={theme}
           isMobile={isMobile}
           isActive={this.blockTypeIsActive}
-          onClick={event => this.setBlockStyle(event, textForHooks)}
+          onClick={onClick}
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}
