@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FileInput } from 'wix-rich-content-ui-components';
 import { ToolbarButton, Dropdown } from 'wix-rich-content-editor-common';
-import { Version } from 'wix-rich-content-common';
 import BUTTONS from './buttons/keys';
 
 class BaseToolbarButton extends React.Component {
@@ -85,7 +84,6 @@ class BaseToolbarButton extends React.Component {
     } = this.props;
 
     helpers?.onToolbarButtonClick?.({
-      version: Version.currentVersion,
       buttonName: keyName,
       pluginId: pluginType,
     });

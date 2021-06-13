@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RichUtils } from 'wix-rich-content-editor-common';
-import { Version } from 'wix-rich-content-common';
 import TextButton from '../TextButton';
 
 export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
@@ -83,7 +82,6 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
         const isAddEvent = blockType !== 'unstyled';
         helpers?.onToolbarButtonClick?.({
           buttonName: textForHooks,
-          version: Version.currentVersion,
           value: String(isAddEvent),
           pluginId: isAddEvent ? blockType : this.selectionBlockType,
         });

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RichUtils } from 'wix-rich-content-editor-common';
-import { Version } from 'wix-rich-content-common';
 import TextButton from '../TextButton';
 
 export default ({ style, Icon, tooltipTextKey }) =>
@@ -41,7 +40,6 @@ export default ({ style, Icon, tooltipTextKey }) =>
       const onClick = e => {
         helpers?.onToolbarButtonClick?.({
           buttonName: textForHooks,
-          version: Version.currentVersion,
           value: String(!this.isActive()),
         });
         this.toggleStyle(e);

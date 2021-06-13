@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextButton from '../TextButton';
-import { mergeStyles, Version } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outsider';
 
@@ -63,9 +63,15 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
     showOptions = () => this.setState({ isOpen: true });
 
     renderOptions = () => {
-      const { getEditorState, setEditorState } = this.props;
+      const { getEditorState, setEditorState, t, helpers } = this.props;
       const { selected } = this.state;
       const onClick = value => {
+        const tooltipText = t(tooltipTextKey);
+        const textForHooks = tooltipText.replace(/\s+/, '');
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+          value,
+        });
         onChange(getEditorState, setEditorState, value);
         this.setState({ selected: activeItem({ value }), isOpen: false });
       };
@@ -101,7 +107,6 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       const onClick = () => {
         helpers?.onToolbarButtonClick?.({
           buttonName: textForHooks,
-          version: Version.currentVersion,
         });
         this.showOptions();
       };

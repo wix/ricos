@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
-import { Version } from 'wix-rich-content-common';
 
 export default ({ alignment, Icon, tooltipTextKey }) =>
   class BlockAlignmentButton extends Component {
@@ -30,7 +29,6 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
         return;
       }
       helpers?.onToolbarButtonClick?.({
-        version: Version.currentVersion,
         buttonName: 'Alignment',
         pluginId: pluginType,
         value: `${alignment}`,

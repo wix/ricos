@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { setTextAlignment } from 'wix-rich-content-editor-common';
-import { Version } from 'wix-rich-content-common';
 import TextButton from '../TextButton';
 
 export default ({ alignment, Icon, tooltipTextKey }) =>
@@ -24,7 +23,6 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       const { onClick, helpers, getEditorState, setEditorState } = this.props;
       helpers?.onToolbarButtonClick?.({
         buttonName: 'Alignment',
-        version: Version.currentVersion,
         value: alignment,
       });
       if (onClick) {
