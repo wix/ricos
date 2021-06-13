@@ -45,7 +45,9 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
 
     let decorations: Decoration[] = [];
 
-    const keysDecorations = keys.map(key => getEntity(key, entityMap)).filter(x => x);
+    const keysDecorations = keys
+      .map(key => getEntity(key, entityMap))
+      .filter(x => x) as Decoration[];
     const stylesDecorations = mergeColorDecorations(styles.map(style => getDecoration(style)));
     decorations = [...decorations, ...keysDecorations, ...stylesDecorations];
 
