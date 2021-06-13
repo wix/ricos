@@ -61,6 +61,7 @@ export default class LineSpacingButton extends Component {
     setEditorState(newEditorState);
     helpers?.onToolbarButtonClick?.({
       buttonName: this.dataHookName,
+      pluginId: LINE_SPACING_TYPE,
       value: spacing?.['line-height'],
     });
     this.currentEditorState = newEditorState;
