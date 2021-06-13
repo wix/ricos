@@ -4,5 +4,8 @@
   "[json]": {
     "editor.formatOnSave": false
   },
-  "eslint.workingDirectories": ["**/src/**"]
+  "eslint.workingDirectories": [
+    "**/src/**"
+  ],
+  "god.tsconfig": "./tsconfig.json"
 }

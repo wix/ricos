@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SettingsMobileHeader } from 'wix-rich-content-plugin-commons';
+import { SettingsMobileHeader } from 'wix-rich-content-ui-components';
 
 const ImageSettingsMobileHeader = ({
   theme,

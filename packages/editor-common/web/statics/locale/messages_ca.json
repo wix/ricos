@@ -466,6 +466,7 @@
   "HeadingThreeButton_label": "Encapçalament 3",
   "CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Disseny",
   "ButtonPlugin_Navbar_Update_button": "Desa",
+  "LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
   "LinkPanelContainer_RemoveButton": "Elimina l'enllaç",
   "ButtonModal_Link_Input_Placeholder": "Introdueix un URL",
   "LinkPanelContainer_CancelButton": "Cancel·la",
