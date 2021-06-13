@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/input-with-label.scss';
-import generalStyles from '../../statics/styles/general.scss';
+import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 
 class InputWithLabel extends Component {
   constructor(props) {

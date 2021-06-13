@@ -5,7 +5,7 @@ import { RadioGroup } from 'wix-rich-content-editor-common';
 import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/radio-group-horizontal.scss';
-import generalStyles from '../../statics/styles/general.scss';
+import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 
 class RadioGroupHorizontal extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../../statics/styles/general.scss';
+import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 
 class FileInput extends Component {
   constructor(props) {
