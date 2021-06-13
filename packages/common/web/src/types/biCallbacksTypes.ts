@@ -71,7 +71,7 @@ export interface onToolbarButtonClickArgs extends biCallbackParams {
   category?: string;
   /** Plugin's Type (e.g. values of `LINK_TYPE`, `HASHTAG_TYPE`...) */
   pluginId?: string;
-  /** Draft: `blockKey` of plugin. Prose: not yet decided */
+  /** Schema: Node's key. Draft: `blockKey` of plugin. Prose: attr's key */
   pluginUniqueId?: string;
   /** Additional specification of plugin */
   pluginDetails?: string;
