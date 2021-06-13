@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
-import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
+import generalStyles from '../../statics/styles/general.scss';
 import { InfoIcon } from 'wix-rich-content-ui-components';
 
 export default class Checkbox extends React.Component {
