@@ -5,7 +5,7 @@ import InfoIcon from './InfoIcon';
 import { mergeStyles } from 'wix-rich-content-common';
 import Slider from './Slider';
 import styles from '../../statics/styles/slider-with-input.scss';
-import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
+import infoIconStyles from '../../statics/styles/info-icon.scss';
 
 class SliderWithInput extends Component {
   styles = mergeStyles({ styles, theme: this.props.theme });
@@ -54,7 +54,7 @@ class SliderWithInput extends Component {
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
       <div>
-        <div className={generalStyles.infoContainer}>
+        <div className={infoIconStyles.infoContainer}>
           {label ? (
             <span id={`${this.id}_lbl`} className={this.styles.sliderWithInput_label}>
               {label}

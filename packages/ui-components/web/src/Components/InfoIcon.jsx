@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import generalStyles from '../../statics/styles/general.scss';
+import generalStyles from '../../statics/styles/info-icon.scss';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import Icon from '../Icons/InfoIcon';
 

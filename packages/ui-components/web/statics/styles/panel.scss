@@ -1,0 +1,13 @@
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
+.panelContainer {
+  @extend .fontElementMap;
+  position: absolute;
+  display: flex;
+  padding: 12px 24px;
+  background: white;
+  color: $secondary-text-color;
+  border: 1px solid #ddd;
+  border-radius: $toolbarBorderRadius;
+  box-shadow: rgb(220, 220, 220) 1px 1px 3px 1px;
+}
