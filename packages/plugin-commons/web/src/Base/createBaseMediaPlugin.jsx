@@ -6,7 +6,6 @@ import {
   GALLERY_FILE_TYPES,
 } from '../Utils/mediaPluginsDataBuilders';
 import PropTypes from 'prop-types';
-import { MediaItemErrorMsg, Loader } from 'wix-rich-content-ui-components';
 import {
   GALLERY_TYPE,
   alignmentClassName,
