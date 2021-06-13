@@ -13,7 +13,7 @@ import {
   textWrapClassName,
 } from 'wix-rich-content-common';
 
-const createMediaUploadWrapper = PluginComponent => {
+const createMediaUploadWrapper = (PluginComponent, WrappedComponent) => {
   return class MediaUploadWrapper extends PureComponent {
     static propTypes = {
       componentData: PropTypes.object.isRequired,
@@ -23,15 +23,15 @@ const createMediaUploadWrapper = PluginComponent => {
     };
 
     static alignmentClassName = (...args) =>
-      PluginComponent.alignmentClassName?.(...args) || alignmentClassName(...args);
+      WrappedComponent?.alignmentClassName?.(args) || alignmentClassName(args);
 
     static sizeClassName = (...args) =>
-      PluginComponent.sizeClassName?.(...args) || sizeClassName(...args);
+      WrappedComponent?.sizeClassName?.(args) || sizeClassName(args);
 
     static textWrapClassName = (...args) =>
-      PluginComponent.textWrapClassName?.(...args) || textWrapClassName(...args);
+      WrappedComponent?.textWrapClassName?.(args) || textWrapClassName(args);
 
-    static customClassName = (...args) => PluginComponent.customClassName?.(...args);
+    static customClassName = (...args) => WrappedComponent?.customClassName?.(args);
 
     fileReader = file => {
       return new Promise(resolve => {
@@ -199,7 +199,8 @@ const createBaseMediaPlugin = PluginComponent => {
         const { isLoading, tempData } = this.state;
         return <PluginComponent {...this.props} isLoading={isLoading} tempData={tempData} />;
       }
-    }
+    },
+    PluginComponent
   );
 };
 
