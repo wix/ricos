@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { LoaderIcon } from 'wix-rich-content-plugin-commons';
 import {
   UrlInputModal,
   FOOTER_BUTTON_ALIGNMENT,
   MODAL_CONTROLS_POSITION,
-  LoaderIcon,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-ui-components';
 import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';

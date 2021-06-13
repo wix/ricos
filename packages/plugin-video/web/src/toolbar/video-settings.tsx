@@ -3,11 +3,11 @@ import { VideoSettingsProps } from '../types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import Styles from '../../statics/styles/video-settings.scss';
-import { SettingsMobileHeader } from 'wix-rich-content-plugin-commons';
 import {
   LabeledToggle,
   SettingsSection,
   SettingsPanelFooter,
+  SettingsMobileHeader,
 } from 'wix-rich-content-ui-components';
 
 const VideoSettings: React.FC<VideoSettingsProps> = ({

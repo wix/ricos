@@ -7,4 +7,5 @@ export const EXPERIMENTS = [
   { name: 'spoilerInSettings', scope: 'ricos' },
   { name: 'removeUsmFromImageUrls', scope: 'ricos' },
   { name: 'newFormattingToolbar', scope: 'ricos' },
+  { name: 'tiptapEditor', scope: 'ricos' },
 ];
