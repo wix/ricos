@@ -25,6 +25,7 @@ export default ({ Icon, tooltipTextKey, name }) =>
       }
       helpers?.onToolbarButtonClick?.({
         buttonName: name,
+        type: 'PLUGIN',
         pluginId: pluginType,
       });
       onClick && onClick();

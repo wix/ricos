@@ -84,6 +84,7 @@ class BaseToolbarButton extends React.Component {
     } = this.props;
 
     helpers?.onToolbarButtonClick?.({
+      type: 'PLUGIN',
       buttonName: keyName,
       pluginId: pluginType,
     });
@@ -254,11 +255,25 @@ class BaseToolbarButton extends React.Component {
       t,
       tabIndex,
       tooltipTextKey,
+      helpers,
+      pluginType,
       ...props
     } = this.props;
 
     const tooltipText = t(tooltipTextKey);
-    const decoratedOnChange = value => onChange(value, componentData, pubsub.store);
+    const textForHooks = tooltipText.replace(/\s+/, '');
+    const onToolbarButtonClick = value =>
+      helpers?.onToolbarButtonClick?.({
+        type: 'PLUGIN',
+        buttonName: textForHooks,
+        pluginId: pluginType,
+        value,
+      });
+    const decoratedOnChange = value => {
+      // Gallery -> value.label,  Divider -> value.value
+      onToolbarButtonClick(value?.label || value?.value);
+      return onChange(value, componentData, pubsub.store);
+    };
     const decoratedGetValue = () => getValue(pubsub.store, t);
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -270,6 +285,7 @@ class BaseToolbarButton extends React.Component {
           dataHook={this.getDataHook()}
           onChange={decoratedOnChange}
           getValue={decoratedGetValue}
+          onClick={onToolbarButtonClick}
           theme={theme}
           {...props}
         />

@@ -30,6 +30,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       }
       helpers?.onToolbarButtonClick?.({
         buttonName: 'Alignment',
+        type: 'PLUGIN',
         pluginId: pluginType,
         value: `${alignment}`,
       });

@@ -81,6 +81,7 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
         const blockType = this.activeBlockType;
         const isAddEvent = blockType !== 'unstyled';
         helpers?.onToolbarButtonClick?.({
+          type: 'FORMATTING',
           buttonName: textForHooks,
           value: String(isAddEvent),
           pluginId: isAddEvent ? blockType : this.selectionBlockType,

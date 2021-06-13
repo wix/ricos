@@ -63,8 +63,8 @@ export interface onToolbarButtonClickArgs extends biCallbackParams {
   buttonName: string;
   /** Toolbar / Sidebar/ else */
   origin?: string;
-  /** toolbar type (PluginsToolbar / FormattingToolbar) */
-  type?: 'FormattingToolbar' | 'PluginsToolbar' | string;
+  /** toolbar type (`FORMATTING`, `PLUGIN`, ...) */
+  type?: ToolbarType;
   /** The new value that was changed (center, right...) */
   value?: string;
   /** Category of change (alignment / size / settings...) */

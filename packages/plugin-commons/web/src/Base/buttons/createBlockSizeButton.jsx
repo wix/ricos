@@ -29,6 +29,7 @@ export default ({ size, Icon, tooltipTextKey }) =>
       }
       helpers?.onToolbarButtonClick?.({
         buttonName: 'Size',
+        type: 'PLUGIN',
         pluginId: pluginType,
         value: `${size}`,
       });

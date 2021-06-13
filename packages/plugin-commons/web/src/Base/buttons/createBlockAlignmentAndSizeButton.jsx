@@ -30,6 +30,7 @@ export default ({ alignment, size, Icon, tooltipTextKey }) =>
       }
       helpers?.onToolbarButtonClick?.({
         buttonName: 'AlignmentAndSize',
+        type: 'PLUGIN',
         pluginId: pluginType,
         value: `${alignment}|${size}`,
       });

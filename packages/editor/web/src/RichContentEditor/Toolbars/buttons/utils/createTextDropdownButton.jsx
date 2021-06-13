@@ -69,6 +69,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         const tooltipText = t(tooltipTextKey);
         const textForHooks = tooltipText.replace(/\s+/, '');
         helpers?.onToolbarButtonClick?.({
+          type: 'FORMATTING',
           buttonName: textForHooks,
           value,
         });
@@ -106,6 +107,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       const dataHookText = `textDropDownButton_${textForHooks}`;
       const onClick = () => {
         helpers?.onToolbarButtonClick?.({
+          type: 'FORMATTING',
           buttonName: textForHooks,
         });
         this.showOptions();
