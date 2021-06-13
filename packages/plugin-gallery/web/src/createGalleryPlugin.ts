@@ -1,9 +1,5 @@
 import createToolbar from './toolbar/createToolbar';
-import {
-  createBasePlugin,
-  createMediaUploadWrapper,
-  createBaseMediaPlugin,
-} from 'wix-rich-content-plugin-commons';
+import { createBasePlugin, createBaseMediaPlugin } from 'wix-rich-content-plugin-commons';
 import { Component, DEFAULTS } from './gallery-component';
 import { GALLERY_TYPE, GalleryPluginEditorConfig } from './types';
 import { CreatePluginFunction } from 'wix-rich-content-common';
@@ -49,9 +45,8 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
           disableExpand: settings.disableExpand,
         }
       : pluginData;
-  const component = createMediaUploadWrapper(createBaseMediaPlugin(Component));
   return createBasePlugin({
-    component,
+    component: createBaseMediaPlugin(Component),
     settings,
     theme,
     t,

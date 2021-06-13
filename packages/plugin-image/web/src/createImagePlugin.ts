@@ -3,7 +3,6 @@ import {
   createBasePlugin,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
-  createMediaUploadWrapper,
   createBaseMediaPlugin,
 } from 'wix-rich-content-plugin-commons';
 import { Component, DEFAULTS } from './image-component';
@@ -36,9 +35,8 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     experiments,
     ...rest
   } = config;
-  const component = createMediaUploadWrapper(createBaseMediaPlugin(Component));
   return createBasePlugin({
-    component,
+    component: createBaseMediaPlugin(Component),
     type: IMAGE_TYPE,
     legacyType: IMAGE_TYPE_LEGACY,
     pluginDecorationProps: (props, componentData) => {
