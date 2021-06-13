@@ -23,15 +23,15 @@ const createMediaUploadWrapper = PluginComponent => {
     };
 
     static alignmentClassName = (...args) =>
-      PluginComponent.alignmentClassName?.(args) || alignmentClassName(args);
+      PluginComponent.alignmentClassName?.(...args) || alignmentClassName(...args);
 
     static sizeClassName = (...args) =>
-      PluginComponent.sizeClassName?.(args) || sizeClassName(args);
+      PluginComponent.sizeClassName?.(...args) || sizeClassName(...args);
 
     static textWrapClassName = (...args) =>
-      PluginComponent.textWrapClassName?.(args) || textWrapClassName(args);
+      PluginComponent.textWrapClassName?.(...args) || textWrapClassName(...args);
 
-    static customClassName = (...args) => PluginComponent.customClassName?.(args);
+    static customClassName = (...args) => PluginComponent.customClassName?.(...args);
 
     fileReader = file => {
       return new Promise(resolve => {
@@ -54,13 +54,10 @@ const createMediaUploadWrapper = PluginComponent => {
       const { type } = this.props;
       if (file) {
         this.fileReader(file).then(url => {
-          const extension = file.name.split('.').pop();
-
           const { componentData } = this.props;
           const tempData = tempDataBuilder[type]?.({
             url,
             file,
-            type: extension,
           });
           onLocalLoad?.(tempData);
           const handleFileUpload = uploadFunctionGetter[type](this.props);

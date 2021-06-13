@@ -107,8 +107,9 @@ export const tempDataBuilder = {
   [VIDEO_TYPE]: ({ url }) => {
     return { src: url, tempData: true };
   },
-  [FILE_UPLOAD_TYPE]: ({ file, type }) => {
+  [FILE_UPLOAD_TYPE]: ({ file }) => {
     const { name, size } = file;
+    const type = name.split('.').pop();
     return { name, size, type, tempData: true };
   },
 };
