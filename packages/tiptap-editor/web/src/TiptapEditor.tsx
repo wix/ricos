@@ -24,7 +24,7 @@ import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
 
-import { draftToProseMirror, proseMirrorToDraft } from 'ricos-content/libs/converters';
+import { draftToTiptap, tiptapToDraft } from 'ricos-content/libs/converters';
 import { createDivider } from './extensions/extension-divider';
 
 const starterKitExtensions = [
@@ -65,7 +65,7 @@ type TipTapEditorProps = {
 const TipTapEditor = ({ editorProps, onUpdate }) => {
   // draft to Prose
 
-  const content = draftToProseMirror(editorProps.initialState);
+  const content = draftToTiptap(editorProps.initialState);
   const editor = useEditor({
     content,
     extensions: [...starterKitExtensions],
@@ -83,7 +83,7 @@ const TipTapEditor = ({ editorProps, onUpdate }) => {
           return node;
         }
       });
-      const convertedContent = proseMirrorToDraft(newContent2 as JSONContent);
+      const convertedContent = tiptapToDraft(newContent2 as JSONContent);
       onUpdate && onUpdate(convertedContent);
     },
   });
