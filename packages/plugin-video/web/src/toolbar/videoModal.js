@@ -4,7 +4,6 @@ import VideoSelectionInputModal from './videoSelectionInputModal';
 import MediaURLInputModal from './mediaURLInputModal';
 import { mediaTypes } from '../types';
 import { createMediaUploadWrapper } from 'wix-rich-content-plugin-commons';
-import { VIDEO_TYPE } from 'wix-rich-content-common';
 
 const VideoModal = props => {
   const {
