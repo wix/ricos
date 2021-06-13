@@ -18,7 +18,6 @@
   </summary>
 
 ### :house: Internal
-add
 - `editor-common`
   - [#2614](https://github.com/wix-incubator/rich-content/pull/2614) moved RadioGroup component into ui-components folder
 - `plugin-commons`
