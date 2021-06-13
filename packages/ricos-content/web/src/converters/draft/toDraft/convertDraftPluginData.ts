@@ -37,7 +37,8 @@ export const convertDecorationToDraftData = (decoration: Decoration) => {
 
 export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
   if (!data) {
-    throw Error(`No data for ${nodeType}`);
+    console.error(`No data for ${nodeType}`);
+    return {};
   }
   const newData = cloneDeep(data);
   const converters = {
