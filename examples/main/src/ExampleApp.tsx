@@ -135,6 +135,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       externalToolbarToShow,
       shouldNativeUpload,
       shouldUseNewContent,
+      externalPopups,
     } = this.state;
     this.editorSettings = [
       {
@@ -167,7 +168,11 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       {
         name: 'Static Toolbar',
         active: staticToolbar,
-        action: () => this.setState(state => ({ staticToolbar: !state.staticToolbar })),
+        action: () =>
+          this.setState(state => ({
+            staticToolbar: !state.staticToolbar,
+            editorResetKey: state.editorResetKey + 1,
+          })),
       },
       {
         name: 'External Toolbar',
@@ -175,6 +180,15 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
         action: selectedExternalToolbar =>
           this.setState({ externalToolbarToShow: selectedExternalToolbar }),
         items: [ToolbarType.FORMATTING, ToolbarType.INSERT_PLUGIN],
+      },
+      {
+        name: 'External Link Popups',
+        active: externalPopups,
+        action: () =>
+          this.setState(state => ({
+            externalPopups: !state.externalPopups,
+            editorResetKey: state.editorResetKey + 1,
+          })),
       },
       {
         name: 'Locale',
@@ -265,6 +279,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
     };
     this.setState({ experiments });
     set('experiments', experiments);
+    window.location.reload();
   };
 
   renderEditor = () => {
@@ -277,6 +292,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
       shouldNativeUpload,
       experiments,
       styleElement,
+      externalPopups,
     } = this.state;
 
     return (
@@ -297,6 +313,7 @@ class ExampleApp extends PureComponent<ExampleAppProps, ExampleAppState> {
                 isMobile={editorIsMobile || isMobile}
                 shouldNativeUpload={shouldNativeUpload}
                 staticToolbar={staticToolbar}
+                externalPopups={externalPopups}
                 externalToolbarToShow={externalToolbarToShow}
                 locale={locale}
                 scrollingElementFn={this.editorScrollingElementFn}

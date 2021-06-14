@@ -1,5 +1,6 @@
 import { ToolbarType } from './toolbarEnums';
 import { OnPluginAction } from './pluginsBiCallbacksTypes';
+import { getContentSummary } from '../Utils/contentAnalytics';
 interface biCallbackParams {
   version?: string;
 }
@@ -21,7 +22,7 @@ export type PluginAddParams =
     }
   | {
       // Poll
-      type: 'text in a list' | 'text & main image' | 'images in a grid';
+      type: 'list' | 'grid';
     };
 
 type EntryType = ToolbarType;
@@ -41,9 +42,22 @@ export interface onPluginDeleteArgs extends biCallbackParams {
 
 export interface onViewerLoadedArgs extends biCallbackParams {
   isPreview: boolean;
-  pluginsCount: boolean;
+  pluginsCount: ReturnType<typeof getContentSummary>['pluginsCount'];
   version: string;
 }
+
+export interface onPluginModalOpenedArgs extends biCallbackParams {
+  pluginId: string;
+  pluginDetails: unknown;
+  entryPoint: ToolbarType;
+  entryType: EntryType;
+}
+
+export interface onMenuLoadArgs extends biCallbackParams {
+  menu: EntryType;
+}
+
+export interface onContentEditedArgs extends biCallbackParams {}
 
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
@@ -70,6 +84,7 @@ export interface BICallbacks {
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
   onViewerLoaded?(params: onViewerLoadedArgs): void;
   onOpenEditorSuccess?(version: string): void;
+  onContentEdited?(params: onContentEditedArgs): void;
   onPluginChange?(
     pluginId: string,
     changeObject: { from: string; to: string },
@@ -92,6 +107,8 @@ export interface BICallbacks {
     errorType: string | undefined,
     version: string
   ): void;
+  onPluginModalOpened?(params: onPluginModalOpenedArgs): void;
+  onMenuLoad?(params: onMenuLoadArgs): void;
   onPluginAction?: OnPluginAction;
 }
 

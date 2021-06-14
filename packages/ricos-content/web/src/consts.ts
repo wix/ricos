@@ -52,7 +52,7 @@ export const INDENT_TYPE = 'wix-rich-content-plugin-indent';
 export const LINE_SPACING_TYPE = 'line-spacing';
 export const HEADINGS_DROPDOWN_TYPE = 'wix-rich-content-plugin-headings';
 export const SPOILER_TYPE = 'wix-rich-content-plugin-spoiler';
-export const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
+export const COLLAPSIBLE_LIST_TYPE = 'wix-rich-content-plugin-collapsible-list';
 export const EXTERNAL_LINK_TYPE = 'wix-draft-plugin-external-link';
 export const LINK_TYPE = 'LINK';
 export const CUSTOM_LINK_TYPE = 'ricos-plugin-custom-link';
@@ -78,7 +78,7 @@ export const VIDEO_EMBED_TYPE = 'VIDEO_EMBED_TYPE';
 export const OEMBED_TYPE = 'OEMBED';
 
 // ricos plugin types
-export const RICOS_ACCORDION_TYPE = 'ricos-accordion';
+export const RICOS_COLLAPSIBLE_LIST_TYPE = 'ricos-collapsible-list';
 export const RICOS_ACTION_BUTTON_TYPE = 'ricos-action-button';
 export const RICOS_CODE_BLOCK_TYPE = 'ricos-code-block';
 export const RICOS_DIVIDER_TYPE = 'ricos-divider';

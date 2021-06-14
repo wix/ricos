@@ -25,3 +25,15 @@ export const DEFAULTS = Object.freeze({
     textWrap: NO_WRAP,
   },
 });
+
+export const newDefaults = {
+  type: LINE_SINGLE,
+  width: 'LARGE',
+  alignment: 'LEFT',
+  containerData: {
+    alignment: 'CENTER',
+    width: {
+      type: 'CONTENT',
+    },
+  },
+};

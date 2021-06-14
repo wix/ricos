@@ -10,6 +10,7 @@ import {
 } from '.';
 import { BoundingRect } from 'react-measure';
 import { ContentBlock, SelectionState, EditorState } from 'draft-js';
+export { Link_Rel } from 'ricos-schema';
 
 export { Pubsub, Store } from '../Utils/simplePubsub';
 
@@ -65,7 +66,7 @@ export type TextDirection = 'rtl' | 'ltr';
 
 export type TextAlignment = 'left' | 'center' | 'right' | 'justify';
 
-export type InlineStyle = 'bold' | 'underline' | 'italic';
+export type InlineStyle = 'bold' | 'underline' | 'italic' | 'spoiler';
 
 export type onAtomicBlockFocus = (params: {
   blockKey?: string;

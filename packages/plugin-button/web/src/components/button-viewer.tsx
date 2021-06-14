@@ -1,12 +1,20 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { FC, useCallback, useMemo } from 'react';
-import { mergeStyles, Helpers, RichContentTheme } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  Helpers,
+  RichContentTheme,
+  AnchorTarget,
+  getRelValue,
+  getTargetValue,
+} from 'wix-rich-content-common';
 import Styles from '../../statics/styles/default-styles.scss';
 import { ACTION_BUTTON_TYPE, LINK_BUTTON_TYPE } from '../types';
 import { merge } from 'lodash';
 
 interface Props {
   style: Record<string, unknown>;
+  anchorTarget: AnchorTarget;
   onClick?: React.DOMAttributes<HTMLAnchorElement>['onClick'] &
     React.DOMAttributes<HTMLDivElement>['onClick'];
   helpers: Helpers;
@@ -19,11 +27,12 @@ interface Props {
 
 const ButtonViewer: FC<Props> = ({
   style,
+  anchorTarget,
   onClick,
   theme,
   helpers,
   url,
-  target,
+  target = anchorTarget,
   rel,
   buttonText,
 }) => {
@@ -41,7 +50,7 @@ const ButtonViewer: FC<Props> = ({
   const Component = isActionButton ? 'div' : 'a';
   const props = merge(
     { className: styles.button_container, style },
-    isActionButton && { href: url, target, rel }
+    !isActionButton && { href: url, target: getTargetValue(target), rel: getRelValue(rel) }
   );
   return (
     <Component {...props} data-hook="buttonViewer" onClick={onClickHandler}>

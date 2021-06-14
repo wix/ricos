@@ -31,7 +31,7 @@ Hashtag.propTypes = {
   decoratedText: PropTypes.string,
   createHref: PropTypes.func,
   onClick: PropTypes.func,
-  target: PropTypes.oneOf(['_self', '_blank']),
+  target: PropTypes.oneOf(['_top', '_blank']),
   theme: PropTypes.object,
 };
 

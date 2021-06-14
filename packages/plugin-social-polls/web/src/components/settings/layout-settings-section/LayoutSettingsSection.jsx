@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { SelectionList, LabeledToggle, LTRIcon, RTLIcon } from 'wix-rich-content-plugin-commons';
+import { LTRIcon, RTLIcon } from 'wix-rich-content-plugin-commons';
+import { SelectionList, LabeledToggle } from 'wix-rich-content-ui-components';
 import { Separator, InfoIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 

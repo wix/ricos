@@ -5,7 +5,7 @@ import {
   RawDraftEntity,
   RawDraftContentState,
 } from '@wix/draft-js';
-import { ACCORDION_TYPE, TABLE_TYPE, SOUND_CLOUD_TYPE, VIDEO_TYPE } from 'ricos-content';
+import { COLLAPSIBLE_LIST_TYPE, TABLE_TYPE, SOUND_CLOUD_TYPE, VIDEO_TYPE } from 'ricos-content';
 import { version } from '../package.json';
 
 const addVersion = (obj, version) => {
@@ -25,7 +25,7 @@ const fixBlockDataImmutableJS = contentState => {
   return contentState;
 };
 
-const isAccordion = entity => entity.type === ACCORDION_TYPE;
+const isCollapsibleList = entity => entity.type === COLLAPSIBLE_LIST_TYPE;
 const isTable = entity => entity.type === TABLE_TYPE;
 const isOldSoundCloud = entity => entity.type === SOUND_CLOUD_TYPE;
 
@@ -82,7 +82,7 @@ const entityFixersToRaw = [
     },
   },
   {
-    predicate: isAccordion,
+    predicate: isCollapsibleList,
     entityFixer: (entity: RawDraftEntity) => {
       const { pairs } = entity.data;
       entity.data.pairs = pairs.map((pair: Pair) => {
@@ -126,7 +126,7 @@ const convertTableConfigToRaw = config => {
 
 const entityFixersFromRaw = [
   {
-    predicate: isAccordion,
+    predicate: isCollapsibleList,
     entityFixer: (entity: RawDraftEntity) => {
       const { pairs } = entity.data;
       entity.data.pairs = pairs.map((pair: RawPair) => {

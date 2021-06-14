@@ -11,8 +11,6 @@ import {
   TextButtonMapper,
   GetEditorState,
   SetEditorState,
-  AnchorTarget,
-  RelValue,
   ThemeGeneratorFunction,
   RichContentTheme,
   ThemeData,
@@ -66,7 +64,7 @@ import {
   VIDEO_TYPE_LEGACY,
   RICOS_POLL_TYPE,
   POLL_TYPE,
-  ACCORDION_TYPE,
+  COLLAPSIBLE_LIST_TYPE,
   TABLE_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
   RICOS_LINK_TYPE,
@@ -192,7 +190,7 @@ export type PluginType =
   | typeof VIDEO_TYPE
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE
-  | typeof ACCORDION_TYPE
+  | typeof COLLAPSIBLE_LIST_TYPE
   | typeof TABLE_TYPE
   | typeof UNSUPPORTED_BLOCKS_TYPE;
 
@@ -326,8 +324,11 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
 }
 
 export interface LinkPanelSettings {
-  blankTargetToggleVisibilityFn?: (anchorTarget?: AnchorTarget) => boolean;
-  nofollowRelToggleVisibilityFn?: (relValue?: RelValue) => boolean;
+  blankTargetToggleVisibilityFn?: () => boolean;
+  nofollowRelToggleVisibilityFn?: () => boolean;
+  showNewTabCheckbox?: boolean;
+  showNoFollowCheckbox?: boolean;
+  showSponsoredCheckbox?: boolean;
   placeholder?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dropDown?: any;

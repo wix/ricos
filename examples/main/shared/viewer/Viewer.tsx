@@ -7,8 +7,8 @@ import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selec
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { RicosViewer } from 'ricos-viewer';
 
-const anchorTarget = '_top';
-const relValue = 'noreferrer';
+const anchorTarget = '_blank';
+const rel = { nofollow: true };
 
 interface ExampleViewerProps {
   initialState?: DraftContent;
@@ -59,7 +59,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
             content={initialState}
             plugins={Plugins.viewerPlugins}
             locale={locale}
-            linkSettings={{ relValue, anchorTarget }}
+            linkSettings={{ rel, anchorTarget }}
             isMobile={isMobile}
             cssOverride={theme}
             mediaSettings={{ pauseMedia: disabled }}

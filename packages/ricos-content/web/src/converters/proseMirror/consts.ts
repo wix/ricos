@@ -8,7 +8,7 @@ export const NODE_TYPES = [
   Node_Type.ORDERED_LIST,
   Node_Type.LIST_ITEM,
   Node_Type.BLOCKQUOTE,
-  Node_Type.CODEBLOCK,
+  Node_Type.CODE_BLOCK,
   Node_Type.VIDEO,
   Node_Type.DIVIDER,
   Node_Type.FILE,
@@ -20,7 +20,7 @@ export const NODE_TYPES = [
   Node_Type.MAP,
   Node_Type.POLL,
   Node_Type.BUTTON,
-  Node_Type.ACCORDION,
+  Node_Type.COLLAPSIBLE_LIST,
   Node_Type.TABLE,
   Node_Type.OEMBED,
 ];

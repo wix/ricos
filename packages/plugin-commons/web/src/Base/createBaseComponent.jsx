@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { merge, compact, debounce } from 'lodash';
 import classNames from 'classnames';
+import '../styles.scss';
 import {
   alignmentClassName,
   sizeClassName,
@@ -63,6 +64,7 @@ const createBaseComponent = ({
       super(props);
       this.state = { componentState: {}, ...this.stateFromProps(props) };
       this.styles = { ...styles, ...rtlIgnoredStyles };
+
       this.containerRef = React.createRef();
     }
 
