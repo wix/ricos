@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import { normalizeUrl, isValidUrl } from 'wix-rich-content-common';
+import { normalizeUrl } from 'wix-rich-content-common';
 import { getAbsoluteUrl } from './baseUrlConverter';
 
 /**

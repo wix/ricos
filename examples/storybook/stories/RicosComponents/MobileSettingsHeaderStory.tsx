@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SettingsMobileHeader } from 'wix-rich-content-plugin-commons';
+import { SettingsMobileHeader } from 'wix-rich-content-ui-components';
 import { Button } from 'wix-style-react';
 
 import { Section, Page } from '../Components/StoryParts';
