@@ -9,9 +9,7 @@ const VideoModal = props => {
   const {
     componentData: { type },
   } = props;
-  const Comp = mediaTypes.includes(type)
-    ? MediaURLInputModal
-    : createMediaUploadWrapper(VideoSelectionInputModal);
+  const Comp = mediaTypes.includes(type) ? MediaURLInputModal : VideoSelectionInputModal;
   return <Comp {...props} />;
 };
 

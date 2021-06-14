@@ -6,6 +6,7 @@ import { mergeStyles, isValidExactUrl } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 import ReactPlayer from 'react-player';
 import { VIDEO_TYPE } from '../types';
+import { handleUploadStart, handleUploadFinished } from 'wix-rich-content-plugin-commons';
 
 export default class VideoSelectionInputModal extends Component {
   constructor(props) {
@@ -83,8 +84,8 @@ export default class VideoSelectionInputModal extends Component {
     };
   };
 
-  addVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
-    this.props.handleUploadFinished(data, error, ({ data, error }) =>
+  addVideoComponent = ({ data, error }, isCustomVideo = false) => {
+    handleUploadFinished(this.props, this.getComponentData, data, error, ({ data, error }) =>
       this.onConfirm({ ...data, error, isCustomVideo })
     );
   };
@@ -101,9 +102,16 @@ export default class VideoSelectionInputModal extends Component {
     this.onConfirm({ ...this.props.componentData, src, isCustomVideo: true, tempData });
   };
 
+  getComponentData = () => this.props.componentData;
+
   handleNativeFileUpload = () => {
-    const { componentData, handleUploadStart } = this.props;
-    handleUploadStart(this.inputFile.files[0], this.onLocalLoad, this.getOnUploadFinished(true));
+    handleUploadStart(
+      this.props,
+      this.getComponentData,
+      this.inputFile.files[0],
+      this.onLocalLoad,
+      this.getOnUploadFinished(true)
+    );
     this.closeModal();
   };
 
@@ -126,7 +134,7 @@ export default class VideoSelectionInputModal extends Component {
       handleClick = evt => {
         evt.preventDefault();
         return handleFileSelection(({ data, error }) => {
-          this.addVideoComponent({ data, error }, componentData, true);
+          this.addVideoComponent({ data, error }, true);
           this.closeModal();
         });
       };
@@ -234,6 +242,4 @@ VideoSelectionInputModal.propTypes = {
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
   blockKey: PropTypes.string,
-  handleUploadStart: PropTypes.func.isRequired,
-  handleUploadFinished: PropTypes.func.isRequired,
 };
