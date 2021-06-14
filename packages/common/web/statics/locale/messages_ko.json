@@ -466,6 +466,7 @@
 	"HeadingThreeButton_label": "제목 3",
 	"CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "디자인",
 	"ButtonPlugin_Navbar_Update_button": "저장",
+	"LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
 	"LinkPanelContainer_RemoveButton": "링크 제거 >>",
 	"ButtonModal_Link_Input_Placeholder": "URL을 입력하세요.",
 	"LinkPanelContainer_CancelButton": "닫기",

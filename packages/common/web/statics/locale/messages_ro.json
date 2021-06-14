@@ -466,6 +466,7 @@
 	"HeadingThreeButton_label": "Titlul 3",
 	"CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Design",
 	"ButtonPlugin_Navbar_Update_button": "Salvează",
+	"LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
 	"LinkPanelContainer_RemoveButton": "Elimină linkul",
 	"ButtonModal_Link_Input_Placeholder": "Introdu o adresă URL",
 	"LinkPanelContainer_CancelButton": "Anulează",

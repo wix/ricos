@@ -466,6 +466,7 @@
 	"HeadingThreeButton_label": "Rubrik 3",
 	"CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Design",
 	"ButtonPlugin_Navbar_Update_button": "Spara",
+	"LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
 	"LinkPanelContainer_RemoveButton": "Ta bort länk",
 	"ButtonModal_Link_Input_Placeholder": "Ange en URL",
 	"LinkPanelContainer_CancelButton": "Avbryt",
