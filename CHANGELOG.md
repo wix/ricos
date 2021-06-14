@@ -18,6 +18,8 @@
   </summary>
 
 ### :house: Internal
+- `editor-common`
+  - [#2617](https://github.com/wix-incubator/rich-content/pull/2617) moved textSearchInput component into ui-components folder
 - `plugin-commons`
   - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved SettingsMobileHeader/UrlInputModal components into ui-components folder
 - `tiptap-editor`
