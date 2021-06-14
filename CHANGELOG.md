@@ -19,8 +19,7 @@
 
 ### :house: Internal
 - `editor-common`
-  - [#2614](https://github.com/wix-incubator/rich-content/pull/2614) moved RadioGroup component into ui-components folder
-  - [#2614](https://github.com/wix-incubator/rich-content/pull/2614) moved InfoIcon components into ui-components folder
+  - [#2618](https://github.com/wix-incubator/rich-content/pull/2618) moved RadioGroup/InfoIcon/Checkbox components into ui-components folder
 - `plugin-commons`
   - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved SettingsMobileHeader/UrlInputModal components into ui-components folder
 - `tiptap-editor`
