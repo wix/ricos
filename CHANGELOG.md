@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :house: Internal
+- `editor-common`
+  - [#2620](https://github.com/wix-incubator/rich-content/pull/2620) moved Dropdown/ToolbarButton/InlineToolbarButton components into ui-components folder
 
 </details>
 <hr/>
