@@ -6,6 +6,7 @@ export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
 export * from './Icons';
 
 // Components
+export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Button } from './Components/Button';
 export { default as FileInput } from './Components/FileInput';
 export { default as Image } from './Components/Image';

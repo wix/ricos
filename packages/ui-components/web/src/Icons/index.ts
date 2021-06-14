@@ -1,5 +1,8 @@
 // @create-index
 
+export { default as InfoIcon } from './InfoIcon';
+
+// plugin-commons
 // export { default as AlignCenterIcon } from './AlignCenterIcon';
 // export { default as BackArrowIcon } from './BackArrowIcon';
 // export { default as HeightIcon } from './HeightIcon';
