@@ -23,3 +23,4 @@ export { default as CloseIcon } from './CloseIcon';
 // export { default as LoaderIcon } from './LoaderIcon';
 // export { default as HashtagIcon } from './HashtagIcon';
 export { default as MoreIcon } from './MoreIcon';
+export { default as CheckIcon } from './CheckIcon';
