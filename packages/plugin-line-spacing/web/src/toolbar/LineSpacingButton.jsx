@@ -4,12 +4,11 @@ import { pick } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
 import {
   getAnchorBlockData,
-  InlineToolbarButton,
   mergeBlockData,
   EditorState,
   ClickOutside,
 } from 'wix-rich-content-editor-common';
-
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import LineSpacingIcon from '../icons/LineSpacingIcon';
 import Modal from 'react-modal';
 import Panel from './LineSpacingPanel';

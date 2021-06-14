@@ -5,7 +5,6 @@ export { default as AlignJustifyIcon } from './AlignJustifyIcon';
 export { default as AlignLeftIcon } from './AlignLeftIcon';
 export { default as AlignRightIcon } from './AlignRightIcon';
 export { default as CheckIcon } from './CheckIcon';
-export { default as DropdownArrowIcon } from './DropdownArrowIcon';
 export { default as ErrorIcon } from './ErrorIcon';
 export { default as LinkIcon } from './LinkIcon';
 export { default as ImageIcon } from './AnchorsThumbnails/ImageIcon';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outsider';
 
-import InlineToolbarButton from '../src/Components/InlineToolbarButton';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 
 class FormattingDropdownButton extends Component {
   static propTypes = {
