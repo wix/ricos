@@ -13,7 +13,7 @@ import {
 } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE, pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { createEmojiPlugin, EMOJI_TYPE, pluginEmoji } from 'wix-rich-content-plugin-emoji';
-import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'wix-rich-content-plugin-image';
+import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'wix-rich-content-plugin-image/editor';
 import {
   createUndoRedoPlugin,
   pluginUndoRedo,

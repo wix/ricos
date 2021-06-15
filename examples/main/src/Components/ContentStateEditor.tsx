@@ -20,7 +20,7 @@ import pollsSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-pol
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import { IMAGE_TYPE } from 'wix-rich-content-plugin-image';
+import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/editor';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';

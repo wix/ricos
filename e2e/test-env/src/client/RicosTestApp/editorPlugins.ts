@@ -14,7 +14,7 @@ import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list'
 import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
-import { pluginImage } from 'wix-rich-content-plugin-image';
+import { pluginImage } from 'wix-rich-content-plugin-image/editor';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
 import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginLink } from 'wix-rich-content-plugin-link';

@@ -26,7 +26,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build:rollup": "rollup --environment MODULE_NAME:plugin-image -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment LOADABLE_COMPONENT,MODULE_NAME:plugin-image -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
@@ -41,6 +41,9 @@
     "wix-rich-content-editor-common": "8.44.2",
     "wix-rich-content-plugin-commons": "8.44.2",
     "wix-rich-content-ui-components": "8.44.2"
+  },
+  "peerDependencies": {
+    "@loadable/component": "^5.14.1"
   },
   "unpkg": true,
   "publishConfig": {

@@ -9,7 +9,10 @@ import {
   LINK_PREVIEW_TYPE,
   pluginLinkPreview,
 } from 'wix-rich-content-plugin-link-preview/viewer';
-import { imageTypeMapper, pluginImage } from 'wix-rich-content-plugin-image/viewer';
+import {
+  imageTypeMapper,
+  pluginImage,
+} from 'wix-rich-content-plugin-image/dist/loadable/es/viewer.js';
 import { tableTypeMapper, pluginTable } from 'wix-rich-content-plugin-table/viewer';
 
 import {

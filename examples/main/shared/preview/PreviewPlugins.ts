@@ -8,7 +8,7 @@ import {
   LINK_PREVIEW_TYPE,
   linkPreviewTypeMapper,
 } from 'wix-rich-content-plugin-link-preview/viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/loadable/es/viewer.js';
 import {
   galleryTypeMapper,
   GALLERY_TYPE,
