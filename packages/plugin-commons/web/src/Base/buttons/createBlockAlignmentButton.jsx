@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { ToolbarButton } from 'wix-rich-content-editor-common';
+import { ToolbarButton } from 'wix-rich-content-ui-components';
 
 export default ({ alignment, Icon, tooltipTextKey }) =>
   class BlockAlignmentButton extends Component {

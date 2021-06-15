@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ToolbarButton } from 'wix-rich-content-editor-common';
+import { ToolbarButton } from 'wix-rich-content-ui-components';
 
 export default ({ Icon, tooltipTextKey }) =>
   class BlockButton extends Component {
