@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RichUtils } from 'wix-rich-content-editor-common';
 import TextButton from '../TextButton';
+import { withToolbarBI } from 'wix-rich-content-common';
 
-export default ({ style, Icon, tooltipTextKey }) =>
+export default ({ style, Icon, tooltipTextKey }) => {
+  const checkIsActive = editorState => editorState?.getCurrentInlineStyle().has(style);
   class TextInlineStyleButton extends Component {
     static propTypes = {
       getEditorState: PropTypes.func.isRequired,
@@ -13,46 +15,30 @@ export default ({ style, Icon, tooltipTextKey }) =>
       isMobile: PropTypes.bool,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      onClick: PropTypes.func,
     };
 
     toggleStyle = event => {
-      const { getEditorState, setEditorState } = this.props;
+      const { getEditorState, setEditorState, onClick } = this.props;
       event.preventDefault();
+      onClick?.();
       setEditorState(RichUtils.toggleInlineStyle(getEditorState(), style));
     };
 
-    isActive = () => {
-      const { getEditorState } = this.props;
-      if (getEditorState) {
-        return getEditorState()
-          .getCurrentInlineStyle()
-          .has(style);
-      } else {
-        return false;
-      }
-    };
-
     render() {
-      const { theme, helpers, isMobile, t, tabIndex } = this.props;
+      const { theme, isMobile, t, tabIndex, getEditorState } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textInlineStyleButton_${textForHooks}`;
-      const onClick = e => {
-        helpers?.onToolbarButtonClick?.({
-          type: 'FORMATTING',
-          buttonName: textForHooks,
-          value: String(!this.isActive()),
-        });
-        this.toggleStyle(e);
-      };
+      const isActive = () => checkIsActive(getEditorState());
 
       return (
         <TextButton
           icon={Icon}
           theme={theme}
           isMobile={isMobile}
-          isActive={this.isActive}
-          onClick={onClick}
+          isActive={isActive}
+          onClick={this.toggleStyle}
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}
@@ -60,4 +46,11 @@ export default ({ style, Icon, tooltipTextKey }) =>
         />
       );
     }
-  };
+  }
+
+  return withToolbarBI(({ t, getEditorState }) => ({
+    type: 'FORMATTING',
+    buttonName: t(tooltipTextKey).replace(/\s+/, ''),
+    value: String(!checkIsActive(getEditorState?.())),
+  }))(TextInlineStyleButton);
+};
