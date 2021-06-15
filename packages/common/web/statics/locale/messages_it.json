@@ -466,6 +466,7 @@
 	"HeadingThreeButton_label": "Titolo 3",
 	"CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Design",
 	"ButtonPlugin_Navbar_Update_button": "Save",
+	"LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
 	"LinkPanelContainer_RemoveButton": "Rimuovi Link",
 	"ButtonModal_Link_Input_Placeholder": "Inserisci un URL",
 	"LinkPanelContainer_CancelButton": "No, annulla",
