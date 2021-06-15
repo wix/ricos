@@ -72,7 +72,6 @@ const TipTapEditor: FunctionComponent<TipTapEditorProps> = ({ editorProps, onUpd
     injectCSS: true,
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();
-      console.log({ newContent });
       const convertedContent = tiptapToDraft(newContent as JSONContent);
       onUpdate?.({ content: convertedContent });
     },
