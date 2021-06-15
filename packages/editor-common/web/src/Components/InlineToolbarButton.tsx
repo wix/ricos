@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ToolbarButton from './ToolbarButton';
 import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
-import { Helpers, mergeStyles, withToolbarBI } from 'wix-rich-content-common';
+import { Helpers, mergeStyles } from 'wix-rich-content-common';
 
 type InlineToolbarButtonProps = {
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -72,6 +72,16 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
 
   preventDefault = event => event.preventDefault();
 
+  onClick: InlineToolbarButtonProps['onClick'] = e => {
+    const { onClick, helpers, pluginType, dataHook, isActive, children } = this.props;
+    helpers?.onToolbarButtonClick?.({
+      buttonName: dataHook || '',
+      pluginId: pluginType,
+      value: children ? undefined : String(!isActive),
+    });
+    onClick?.(e);
+  };
+
   render() {
     const {
       isActive,
@@ -83,7 +93,6 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
       disabled,
       buttonContent,
       showArrowIcon,
-      onClick,
     } = this.props;
     const { styles } = this;
     const arrowIcon = (
@@ -120,7 +129,7 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
           aria-label={tooltipText}
           aria-pressed={isActive}
           data-hook={dataHook}
-          onClick={onClick}
+          onClick={this.onClick}
           className={styles.button}
           ref={forwardRef}
           onMouseDown={this.preventDefault}
@@ -142,12 +151,6 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
   }
 }
 
-const InlineToolbarButtonWithBI = withToolbarBI(({ pluginType, dataHook, isActive, children }) => ({
-  buttonName: dataHook || '',
-  pluginId: pluginType,
-  value: children ? undefined : String(!isActive),
-}))(InlineToolbarButton);
-
 export default React.forwardRef<InlineToolbarButton, InlineToolbarButtonProps>((props, ref) => (
-  <InlineToolbarButtonWithBI forwardRef={ref} {...props} />
+  <InlineToolbarButton forwardRef={ref} {...props} />
 ));

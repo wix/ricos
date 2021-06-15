@@ -1,4 +1,3 @@
-import { withToolbarBI } from 'wix-rich-content-common/src/Utils/biUtils';
 export * from './types';
 
 // Components
@@ -38,7 +37,6 @@ export { GlobalContext } from './Utils/contexts';
 
 export { isHexColor } from './Utils/colorUtils';
 export { isRtl, getLangDir } from './Utils/rtlUtils';
-export { withToolbarBI } from './Utils/biUtils';
 
 export { simplePubsub, Pubsub, Store } from './Utils/simplePubsub';
 export { generateKey } from './Utils/generateKey';
