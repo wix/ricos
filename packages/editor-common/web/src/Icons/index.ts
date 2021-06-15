@@ -24,4 +24,3 @@ export { default as H4Icon } from './AnchorsThumbnails/H4Icon';
 export { default as H5Icon } from './AnchorsThumbnails/H5Icon';
 export { default as H6Icon } from './AnchorsThumbnails/H6Icon';
 export { default as SearchIcon } from './SearchIcon';
-export { default as ClearIcon } from './ClearIcon';

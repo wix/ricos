@@ -17,7 +17,6 @@ export { default as RadioGroup } from './Components/RadioGroup';
 export { default as Separator } from './Components/Separator';
 export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
-export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';

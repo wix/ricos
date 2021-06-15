@@ -25,5 +25,6 @@ export { Tab, Tabs } from './Components/Tabs';
 // export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
+export { default as TextSearchInput } from './Components/TextSearchInput';
 
 // export { getSelectionStyles } from './Utils/inlineStyleUtils';
