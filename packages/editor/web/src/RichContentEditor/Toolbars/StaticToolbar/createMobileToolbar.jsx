@@ -11,7 +11,7 @@ const createMobileToolbar = ({
   buttons,
   textPluginButtons,
   pluginButtons,
-  helpers,
+  helpers: _helpers,
   pubsub,
   getEditorState,
   setEditorState,
@@ -29,6 +29,7 @@ const createMobileToolbar = ({
   addPluginMenuConfig,
 }) => {
   const mobileTheme = getMobileTheme(theme);
+  const helpers = withToolbarType(_helpers, ToolbarType.MOBILE);
   return createStaticToolbar({
     helpers,
     t,
@@ -120,7 +121,7 @@ const getMobileButtons = ({
     t,
     uiSettings,
     config,
-    helpers: withToolbarType(helpers, ToolbarType.MOBILE),
+    helpers,
     setEditorState,
     getEditorState,
     pubsub,
