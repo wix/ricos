@@ -1,4 +1,3 @@
-import { withToolbarType } from './utils';
 import {
   getToolbarTheme,
   TOOLBARS,
@@ -6,6 +5,7 @@ import {
   mergeToolbarSettings,
   isiOS,
 } from 'wix-rich-content-editor-common';
+import { withToolbarType } from './utils';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { mobileTextButtonList, desktopTextButtonList, pluginButtonNames } from './buttons';
 import { reducePluginTextButtons } from './buttons/utils';

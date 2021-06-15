@@ -1,5 +1,7 @@
-import { Helpers, ToolbarType } from 'wix-rich-content-common';
+import { Helpers, ToolbarType, onToolbarButtonClickArgs } from 'wix-rich-content-common';
+
 export const withToolbarType = (helpers: Helpers, type: ToolbarType) => ({
   ...helpers,
-  onToolbarButtonClick: args => helpers?.onToolbarButtonClick?.({ ...args, type }),
+  onToolbarButtonClick: (args: onToolbarButtonClickArgs) =>
+    helpers?.onToolbarButtonClick?.({ ...args, type }),
 });
