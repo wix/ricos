@@ -25,4 +25,3 @@ export { default as CloseIcon } from './CloseIcon';
 export { default as MoreIcon } from './MoreIcon';
 export { default as ClearIcon } from './ClearIcon';
 export { default as SearchIcon } from './SearchIcon';
-export { default as DropdownArrowIcon } from './DropdownArrowIcon';

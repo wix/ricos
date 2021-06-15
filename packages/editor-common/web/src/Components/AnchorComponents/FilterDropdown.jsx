@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/anchor-panel.scss';
-import { Dropdown } from 'wix-rich-content-ui-components';
+import Dropdown from '../Dropdown';
 import { ANCHORABLE_BLOCKS } from './consts';
 import FilterDropdownElement from './FilterDropdownElement';
 
