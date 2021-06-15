@@ -1,5 +1,6 @@
 import createInlineToolbar from './createInlineToolbar';
 import { getTextButtonsFromList } from '../buttons/utils';
+import { ToolbarType } from 'wix-rich-content-common';
 
 export default data => {
   const {
@@ -40,7 +41,11 @@ export default data => {
     pubsub,
     theme,
     isMobile,
-    helpers,
+    helpers: {
+      ...helpers,
+      onToolbarButtonClick: args =>
+        helpers?.onToolbarButtonClick?.({ ...args, type: ToolbarType.FORMATTING }),
+    },
     anchorTarget,
     relValue,
     t,

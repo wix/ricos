@@ -60,7 +60,6 @@ export default class LineSpacingButton extends Component {
     const newEditorState = mergeBlockData(this.oldEditorState, { dynamicStyles });
     setEditorState(newEditorState);
     helpers?.onToolbarButtonClick?.({
-      type: 'FORMATTING',
       buttonName: this.dataHookName,
       pluginId: LINE_SPACING_TYPE,
       value: spacing?.['line-height'],

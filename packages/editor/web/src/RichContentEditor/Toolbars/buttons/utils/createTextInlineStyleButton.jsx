@@ -39,7 +39,6 @@ export default ({ style, Icon, tooltipTextKey }) =>
       const dataHookText = `textInlineStyleButton_${textForHooks}`;
       const onClick = e => {
         helpers?.onToolbarButtonClick?.({
-          type: 'FORMATTING',
           buttonName: textForHooks,
           value: String(!this.isActive()),
         });

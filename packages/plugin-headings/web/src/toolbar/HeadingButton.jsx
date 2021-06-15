@@ -59,7 +59,6 @@ export default class HeadingButton extends Component {
     const isAddEvent = !hasBlockType(type, editorState);
     const newEditorState = RichUtils.toggleBlockType(editorState, type);
     helpers?.onToolbarButtonClick?.({
-      type: 'FORMATTING',
       pluginId: HEADINGS_DROPDOWN_TYPE,
       buttonName: this.dataHookText,
       value: type,

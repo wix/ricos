@@ -22,7 +22,6 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
     handleClick = () => {
       const { onClick, helpers, getEditorState, setEditorState } = this.props;
       helpers?.onToolbarButtonClick?.({
-        type: 'FORMATTING',
         buttonName: 'Alignment',
         value: alignment,
       });
