@@ -61,29 +61,3 @@
   fill: $settings-action-color-fallback;
   @include svg-fill;
 }
-
-.inlineToolbarButton_menuButton {
-  width: max-content !important;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  font-family: $ricos-font-family;
-  font-weight: 500;
-  margin: 0 0 0 5px !important;
-}
-
-.inlineToolbarDropdownButton_arrowIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 8px;
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-.inlineToolbarDropdownButton_arrowIcon_isOpen {
-  @extend .inlineToolbarDropdownButton_arrowIcon;
-  transform: rotate(180deg);
-}
