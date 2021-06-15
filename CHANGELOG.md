@@ -16,15 +16,15 @@
     Click to see more.
   </summary>
 
-
+### :house: Internal
+- `editor-common`
+  - [#2622](https://github.com/wix-incubator/rich-content/pull/2622) moved textSearchInput/Separator components into ui-components folder
 
 </details>
 <hr/>
 
 ## 8.44.2 (Jun 14, 2021)
 ### :house: Internal
-- `editor-common`
-  - [#2617](https://github.com/wix-incubator/rich-content/pull/2617) moved textSearchInput/Separator components into ui-components folder
 - `plugin-commons`
   - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved SettingsMobileHeader/UrlInputModal components into ui-components folder
 - `tiptap-editor`
