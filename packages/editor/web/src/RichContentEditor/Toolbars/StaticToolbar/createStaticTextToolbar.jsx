@@ -6,6 +6,7 @@ import { getStaticTextToolbarId } from '../toolbar-id';
 import toolbarStyles from '../../../../statics/styles/text-static-toolbar.scss';
 import separatorStyles from '../../../../statics/styles/text-static-toolbar-separator.scss';
 import { ToolbarType } from 'wix-rich-content-common';
+import { withToolbarType } from '../utils';
 
 const getStaticTextTheme = theme => {
   const {
@@ -107,11 +108,7 @@ export default ({
     pubsub,
     theme: staticTextTheme,
     isMobile,
-    helpers: {
-      ...helpers,
-      onToolbarButtonClick: args =>
-        helpers?.onToolbarButtonClick?.({ ...args, type: ToolbarType.STATIC }),
-    },
+    helpers: withToolbarType(helpers, ToolbarType.STATIC),
     linkModal: true,
     anchorTarget,
     relValue,

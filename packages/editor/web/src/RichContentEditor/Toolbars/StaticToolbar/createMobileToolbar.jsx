@@ -1,10 +1,11 @@
 import classNames from 'classnames';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, ToolbarType } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
 import { getTextButtonsFromList } from '../buttons/utils';
 import toolbarStyles from '../../../../statics/styles/mobile-toolbar.scss';
 import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss';
 import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator.scss';
+import { withToolbarType } from '../utils';
 
 const createMobileToolbar = ({
   buttons,
@@ -119,7 +120,7 @@ const getMobileButtons = ({
     t,
     uiSettings,
     config,
-    helpers,
+    helpers: withToolbarType(helpers, ToolbarType.MOBILE),
     setEditorState,
     getEditorState,
     pubsub,
