@@ -466,6 +466,7 @@
 	"HeadingThreeButton_label": "Koptekst 3",
 	"CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Ontwerp",
 	"ButtonPlugin_Navbar_Update_button": "Opslaan",
+	"LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
 	"LinkPanelContainer_RemoveButton": "Koppeling verwijderen",
 	"ButtonModal_Link_Input_Placeholder": "Voeg een URL toe",
 	"LinkPanelContainer_CancelButton": "Annuleren",
