@@ -6,20 +6,27 @@ import "wix/rich_content/v1/common.proto";
 import "google/protobuf/wrappers.proto";
 
 message OembedData {
+    message EmbedData {
+        google.protobuf.StringValue type = 1;
+        google.protobuf.Int32Value width = 2; 
+        google.protobuf.Int32Value height = 3; 
+        google.protobuf.StringValue title = 4; 
+        google.protobuf.StringValue url = 5;
+        google.protobuf.StringValue html = 6;
+        google.protobuf.StringValue author_name = 7; 
+        google.protobuf.StringValue author_url = 8; 
+        google.protobuf.StringValue provider_name = 9; 
+        google.protobuf.StringValue provider_url = 10; 
+        google.protobuf.StringValue thumbnail_url = 11; 
+        google.protobuf.StringValue thumbnail_width = 12; 
+        google.protobuf.StringValue thumbnail_height = 13; 
+        google.protobuf.StringValue video_url = 14; 
+        google.protobuf.StringValue version = 15; 
+    }
     PluginContainerData container_data = 1;
-    google.protobuf.StringValue type = 2;
+    EmbedData embed_data = 2;
     google.protobuf.StringValue src = 3; 
-    google.protobuf.Int32Value width = 4; 
-    google.protobuf.Int32Value height = 5; 
-    google.protobuf.StringValue title = 6; 
-    google.protobuf.StringValue url = 7;
-    google.protobuf.StringValue html = 8;
-    google.protobuf.StringValue author_name = 9; 
-    google.protobuf.StringValue author_url = 10; 
-    google.protobuf.StringValue provider_name = 11; 
-    google.protobuf.StringValue provider_url = 12; 
-    google.protobuf.StringValue thumbnail_url = 13; 
-    google.protobuf.StringValue thumbnail_width = 14; 
-    google.protobuf.StringValue thumbnail_height = 15; 
+
+
 }
 

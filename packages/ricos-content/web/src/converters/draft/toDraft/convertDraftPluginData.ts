@@ -94,7 +94,7 @@ const convertContainerData = (
   );
   if (nodeType === Node_Type.IMAGE && width?.custom) {
     data.config.size = 'inline';
-  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+  } else if (nodeType === Node_Type.MAP && width?.custom) {
     data.config.size = 'content';
   }
   delete data.containerData;
@@ -152,33 +152,45 @@ const convertPollData = data => {
 };
 
 const convertOEmbedData = data => {
-  switch (data.type) {
+  switch (data.embedData.type) {
     case 'video': {
+      const {
+        thumbnailUrl,
+        providerName,
+        thumbnailHeight,
+        thumbnailWidth,
+        authorName,
+        providerUrl,
+        authorUrl,
+        videoUrl,
+      } = data.embedData;
       data.metadata = {
-        thumbnail_url: data.thumbnailUrl,
-        width: data.width,
-        height: data.height,
-        provider_name: data.providerName,
-        thumbnail_height: data.thumbnailHeight,
-        thumbnail_width: data.thumbnailWidth,
-        type: data.type,
-        title: data.title,
+        ...data.embedData,
+        thumbnail_url: thumbnailUrl,
+        provider_name: providerName,
+        thumbnail_height: thumbnailHeight,
+        thumbnail_width: thumbnailWidth,
+        author_name: authorName,
+        provider_url: providerUrl,
+        author_url: authorUrl,
+        video_url: videoUrl,
       };
-      delete data.thumbnailUrl;
-      delete data.thumbnailWidth;
-      delete data.thumbnailHeight;
-      delete data.width;
-      delete data.height;
-      delete data.providerName;
-      delete data.type;
-      delete data.title;
-      delete data.html;
+      delete data.embedData;
       break;
     }
     case 'rich': {
-      const link = { url: data.src, target: '_blank' };
-      data.config = { ...(data?.config || {}), link };
-      delete data.type;
+      data.config = {
+        ...(data?.config || {}),
+        alignment: 'center',
+        size: 'content',
+        link: { url: data.src, target: '_blank', rel: 'noopener' },
+      };
+      const { html, thumbnailUrl, title, description } = data.embedData;
+      data.html = html;
+      thumbnailUrl && (data.thumbnail_url = thumbnailUrl);
+      title && (data.title = title);
+      description && (data.description = description);
+      delete data.embedData;
       delete data.src;
       break;
     }
@@ -202,15 +214,13 @@ const convertOEmbedData = data => {
 const convertVerticalEmbedData = data => {
   data.selectedProduct = {
     id: data.src,
-    name: data.title,
-    imageSrc: data.thumbnailUrl,
-    html: data.html,
+    name: data.embedData.title,
+    imageSrc: data.embedData.thumbnailUrl,
+    html: data.embedData.html,
   };
+  data.type = data.embedData.type;
   delete data.src;
-  delete data.title;
-  delete data.thumbnailUrl;
-  delete data.html;
-  delete data.providerName;
+  delete data.embedData;
 };
 
 const convertLinkPreviewData = data => {

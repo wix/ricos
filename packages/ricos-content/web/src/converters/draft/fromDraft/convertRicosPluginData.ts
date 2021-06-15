@@ -95,31 +95,18 @@ const convertVideoData = (data: {
   };
 };
 
-const convertVideoEmbed = (data: {
-  src?: string | VideoComponentData;
-  metadata?;
-  video;
-  thumbnailUrl;
-  videoUrl;
-  providerName;
-  type;
-  title;
-  html;
-  thumbnailHeight;
-  thumbnailWidth;
-  height;
-  width;
-}) => {
-  data.width = data.metadata?.width;
-  data.height = data.metadata?.height;
-  data.thumbnailUrl = data.metadata?.thumbnail_url;
-  data.thumbnailWidth = data.metadata?.thumbnail_width;
-  data.thumbnailHeight = data.metadata?.thumbnail_height;
-  data.title = data.metadata?.title;
-  data.html = data.metadata?.html;
-  data.type = data.metadata?.type;
-  data.providerName = data.metadata?.provider_name;
-  data.videoUrl = data.metadata?.video_url;
+const convertVideoEmbed = (data: { src?: string | VideoComponentData; metadata?; embedData }) => {
+  data.embedData = {
+    ...data.metadata,
+    thumbnailUrl: data.metadata?.thumbnail_url,
+    thumbnailWidth: data.metadata?.thumbnail_width,
+    thumbnailHeight: data.metadata?.thumbnail_height,
+    providerName: data.metadata?.provider_name,
+    videoUrl: data.metadata?.video_url,
+    authorName: data.metadata?.author_name,
+    providerUrl: data.metadata?.provider_url,
+    authorUrl: data.metadata?.author_url,
+  };
 };
 
 const convertDividerData = (data: {
@@ -162,20 +149,15 @@ const convertPollData = (data: { layout; design }) => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toUpperCase());
 };
 
-const convertVerticalEmbedData = (data: {
-  type;
-  selectedProduct;
-  thumbnailUrl;
-  title;
-  src;
-  providerName;
-  html;
-}) => {
-  data.thumbnailUrl = data.selectedProduct.imageSrc;
-  data.title = data.selectedProduct.name;
+const convertVerticalEmbedData = (data: { type; selectedProduct; src; embedData }) => {
   data.src = data.selectedProduct.id;
-  data.providerName = 'wix';
-  data.html = data.selectedProduct.html;
+  data.embedData = {
+    thumbnailUrl: data.selectedProduct.imageSrc,
+    title: data.selectedProduct.name,
+    providerName: 'wix',
+    html: data.selectedProduct.html,
+    type: data.type,
+  };
 };
 
 const convertLinkPreviewData = (data: {
@@ -189,11 +171,24 @@ const convertLinkPreviewData = (data: {
   data.config?.link && (data.link = convertLink(data.config.link));
 };
 
-const convertSocialEmbed = (data: { type; thumbnailUrl; thumbnail_url; src; config }) => {
-  data.type = 'rich';
+const convertSocialEmbed = (data: {
+  html;
+  description;
+  title;
+  thumbnail_url;
+  src;
+  config;
+  embedData;
+}) => {
   const url = data.config?.link?.url;
   url && (data.src = url);
-  data.thumbnailUrl = data.thumbnail_url;
+  data.embedData = {
+    type: 'rich',
+    thumbnailUrl: data.thumbnail_url,
+    title: data.title,
+    description: data.description,
+    html: data.html,
+  };
 };
 
 const convertMention = (data: {

@@ -33,7 +33,8 @@ const getNodeEntityData = (node: Node) => {
       booking: VERTICAL_EMBED_TYPE,
       event: VERTICAL_EMBED_TYPE,
     };
-    draftPluginType = node.oembedData?.type && embedTypesMapper[node.oembedData.type];
+    const embedType = node.oembedData?.embedData?.type;
+    draftPluginType = embedType && embedTypesMapper[embedType];
   }
   const data = convertNodeToDraftData(node);
   if (data === undefined) {

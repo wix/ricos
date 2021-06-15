@@ -93,15 +93,14 @@ export const parseMap = ({ mapData }: Node): string => {
 };
 
 export const parseEmbed = ({ oembedData }: Node, delimiter: string): string => {
-  const { html, title, type, src } = oembedData || {};
-  if (type === 'video') {
-    return src || '';
-  } else if (html) {
-    const href = html
+  if (oembedData?.embedData?.type === 'video') {
+    return oembedData.src || '';
+  } else if (oembedData?.embedData?.html) {
+    const href = oembedData.embedData.html
       ?.replace(/.*href="/g, '')
       .replace(/.*=http/g, 'http')
       .replace(/" .*/g, '');
-    return [title, href].filter(Boolean).join(delimiter);
+    return [oembedData?.embedData?.title || '', href].filter(Boolean).join(delimiter);
   }
   return '';
 };
