@@ -16,6 +16,7 @@ const presetEnvCommonJS = [
 const commonPresets = ['@babel/preset-react'];
 
 const commonPlugins = [
+  '@loadable/babel-plugin',
   ['@babel/plugin-proposal-class-properties', { loose: true }],
   '@babel/plugin-transform-runtime',
   '@babel/plugin-syntax-dynamic-import',
@@ -32,6 +33,10 @@ if (process.env.NODE_ENV !== 'development') {
     },
   ]);
 }
+
+// if (process.env.LOADABLE_COMPONENT) {
+//   commonPlugins.push(['@loadable/babel-plugin']);
+// }
 
 const testPlugins = [
   '@babel/plugin-transform-modules-commonjs',

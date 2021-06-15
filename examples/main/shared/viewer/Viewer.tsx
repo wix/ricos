@@ -4,7 +4,7 @@ import { DraftContent, SEOSettings, AvailableExperiments } from 'wix-rich-conten
 import * as Plugins from './ViewerPlugins';
 import theme from '../theme/theme'; // must import after custom styles
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/loadable';
 import { RicosViewer } from 'ricos-viewer';
 
 const anchorTarget = '_blank';

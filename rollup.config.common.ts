@@ -103,7 +103,19 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
   return entries.filter(x => x);
 };
 
-const output: OutputOptions[] = process.env.DYNAMIC_IMPORT
+const output: OutputOptions[] = process.env.LOADABLE_COMPONENT
+  ? [
+      {
+        dir: 'dist/loadable/es',
+        format: 'es',
+        chunkFileNames: '[name].js',
+      },
+      {
+        dir: 'dist/loadable/cjs',
+        format: 'cjs',
+      },
+    ]
+  : process.env.DYNAMIC_IMPORT
   ? [
       {
         dir: 'dist/es',

@@ -16,7 +16,7 @@ import {
   galleryTypeMapper,
   pluginGallery,
   GALLERY_TYPE,
-} from 'wix-rich-content-plugin-gallery/viewer';
+} from 'wix-rich-content-plugin-gallery/dist/loadable/es/viewer.js';
 import { mapTypeMapper, pluginMap } from 'wix-rich-content-plugin-map/viewer';
 import { giphyTypeMapper, pluginGiphy, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
 import {

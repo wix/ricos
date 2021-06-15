@@ -19,7 +19,11 @@ import {
   pluginUndoRedo,
   UNDO_REDO_TYPE,
 } from 'wix-rich-content-plugin-undo-redo';
-import { createGalleryPlugin, GALLERY_TYPE, pluginGallery } from 'wix-rich-content-plugin-gallery';
+import {
+  createGalleryPlugin,
+  GALLERY_TYPE,
+  pluginGallery,
+} from 'wix-rich-content-plugin-gallery/editor';
 import {
   createVideoPlugin,
   pluginVideo,

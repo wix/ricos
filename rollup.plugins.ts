@@ -20,6 +20,7 @@ import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 import { writeFileSync } from 'fs';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -79,6 +80,7 @@ const babel = (): Plugin => {
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**'],
+    extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
     babelHelpers: 'runtime',
   });
 };
@@ -181,10 +183,10 @@ let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
   resolve(),
+  typescript(),
   babel(),
   commonjsPlugin(),
   json(),
-  typescript(),
 ];
 
 if (!IS_DEV_ENV) {

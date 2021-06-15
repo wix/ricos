@@ -10,7 +10,7 @@ import { createHashtagPlugin, HASHTAG_TYPE } from 'wix-rich-content-plugin-hasht
 import { createEmojiPlugin, EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
 import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
-import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/editor';
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';

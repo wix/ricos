@@ -5,7 +5,7 @@ import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
+import { pluginGallery } from 'wix-rich-content-plugin-gallery/editor';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';

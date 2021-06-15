@@ -3,7 +3,7 @@ import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-edit
 import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
 import theme from '../theme/theme'; // must import after custom styles
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/editor';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import {

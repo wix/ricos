@@ -9,7 +9,10 @@ import {
   linkPreviewTypeMapper,
 } from 'wix-rich-content-plugin-link-preview/viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
-import { galleryTypeMapper, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/viewer';
+import {
+  galleryTypeMapper,
+  GALLERY_TYPE,
+} from 'wix-rich-content-plugin-gallery/dist/loadable/es/viewer.js';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
 import { buttonTypeMapper } from 'wix-rich-content-plugin-button/viewer';
@@ -122,8 +125,7 @@ export const config = {
     resolveFileUrl: () =>
       new Promise(resolve =>
         setTimeout(
-          () =>
-            resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
+          () => resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
           1000
         )
       ),
