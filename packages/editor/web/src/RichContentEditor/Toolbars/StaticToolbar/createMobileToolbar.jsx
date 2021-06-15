@@ -1,17 +1,16 @@
 import classNames from 'classnames';
-import { mergeStyles, ToolbarType } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import createStaticToolbar from './createStaticToolbar';
 import { getTextButtonsFromList } from '../buttons/utils';
 import toolbarStyles from '../../../../statics/styles/mobile-toolbar.scss';
 import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss';
 import separatorStyles from '../../../../statics/styles/mobile-toolbar-separator.scss';
-import { withToolbarType } from '../utils';
 
 const createMobileToolbar = ({
   buttons,
   textPluginButtons,
   pluginButtons,
-  helpers: _helpers,
+  helpers,
   pubsub,
   getEditorState,
   setEditorState,
@@ -29,7 +28,6 @@ const createMobileToolbar = ({
   addPluginMenuConfig,
 }) => {
   const mobileTheme = getMobileTheme(theme);
-  const helpers = withToolbarType(_helpers, ToolbarType.MOBILE);
   return createStaticToolbar({
     helpers,
     t,
