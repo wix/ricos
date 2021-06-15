@@ -7,8 +7,6 @@ export { default as Checkbox } from './Components/Checkbox';
 export { default as ClickOutside } from './Components/ClickOutside/ClickOutside';
 export { default as useClickOutside } from './Components/ClickOutside/useClickOutside';
 
-export { default as Dropdown } from './Components/Dropdown';
-
 export { default as FocusManager } from './Components/FocusManager';
 export { default as LinkPanelWrapper } from './Components/LinkComponents/LinkPanelWrapper';
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
