@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import Toolbar from './components/Toolbar';
 import { JSONContent } from '@tiptap/core';
 import { useEditor, EditorContent } from '@tiptap/react';
@@ -24,8 +24,9 @@ import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
 
-import { draftToTiptap, tiptapToDraft } from 'ricos-content/libs/converters';
+import { draftToTiptap, fromTiptap, tiptapToDraft, toDraft } from 'ricos-content/libs/converters';
 import { createDivider } from './extensions/extension-divider';
+import { DraftContent } from 'ricos-content';
 
 const starterKitExtensions = [
   Blockquote,
@@ -58,33 +59,22 @@ const starterKitExtensions = [
 ];
 
 type TipTapEditorProps = {
-  onUpdate: ({ content }) => void;
-  plugins: Record<string, unknown>[];
-  editorProps: unknown & Record<string, unknown>[];
+  onUpdate?: ({ content }: { content: DraftContent }) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  editorProps: Record<string, any>;
 };
-const TipTapEditor = ({ editorProps, onUpdate }) => {
-  // draft to Prose
-
-  const content = draftToTiptap(editorProps.initialState);
+const TipTapEditor: FunctionComponent<TipTapEditorProps> = ({ editorProps, onUpdate }) => {
+  const { initialState } = editorProps;
+  const content = initialState && draftToTiptap(initialState);
   const editor = useEditor({
     content,
     extensions: [...starterKitExtensions],
     injectCSS: true,
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();
-      // this is a workaround because some paragraph doesn't have content property (empty)
-      const newContent2 = newContent.content.map(node => {
-        if (node.type === 'paragraph') {
-          return {
-            content: [],
-            ...node,
-          };
-        } else {
-          return node;
-        }
-      });
-      const convertedContent = tiptapToDraft(newContent2 as JSONContent);
-      onUpdate && onUpdate(convertedContent);
+      console.log({ newContent });
+      const convertedContent = tiptapToDraft(newContent as JSONContent);
+      onUpdate?.({ content: convertedContent });
     },
   });
 

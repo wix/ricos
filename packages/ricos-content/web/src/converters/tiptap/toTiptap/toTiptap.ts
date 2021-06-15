@@ -1,4 +1,11 @@
-import { DATA_FIELDS_MAP, isDataFieldName, isRichContent, isDecoration, isNode } from '../utils';
+import {
+  DATA_FIELDS_MAP,
+  isDataFieldName,
+  isRichContent,
+  isDecoration,
+  isNode,
+  isTextNode,
+} from '../utils';
 import { transform, isObject, pickBy, identity } from 'lodash';
 import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
@@ -65,7 +72,7 @@ const convertValue = value => {
     newValue = addDocType(newValue);
     newValue = moveMetadata(newValue);
   }
-  if (newValue?.textData) {
+  if (isTextNode(newValue)) {
     newValue = flattenTextData(newValue);
   }
   if (isNode(newValue)) {

@@ -9,7 +9,7 @@ import toConstantCase from 'to-constant-case';
 
 const TYPES = [...NODE_TYPES, ...DECORATION_TYPES];
 
-const isTextNode = (object): boolean =>
+export const isTextNode = (object): boolean =>
   object?.type?.toUpperCase() === Node_Type.TEXT && ('text' in object || 'textData' in object);
 
 const isParagraphNode = (object): boolean => object?.type?.toUpperCase() === Node_Type.PARAGRAPH;

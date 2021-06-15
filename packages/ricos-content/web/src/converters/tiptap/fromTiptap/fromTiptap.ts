@@ -3,7 +3,7 @@ import { RichContent, Node } from 'ricos-schema';
 import { JSONContent } from '@tiptap/core';
 import { initializeMetadata } from '../../nodeUtils';
 import { genKey } from '../../generateRandomKey';
-import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent } from '../utils';
+import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent, isTextNode } from '../utils';
 import toConstantCase from 'to-constant-case';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,8 +22,6 @@ const FIELDS_MAP = {
 };
 
 const typeToConstantCase = object => ({ ...object, type: toConstantCase(object.type) });
-
-const isTextNode = value => value?.type === 'text' && 'marks' in value;
 
 const removeKeyFromData = value => {
   const { key: _, ...newValue } = value;
