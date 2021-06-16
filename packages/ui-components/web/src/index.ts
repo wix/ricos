@@ -25,5 +25,6 @@ export { Tab, Tabs } from './Components/Tabs';
 export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 export { default as Dropdown } from './Components/Dropdown';
+export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 
 // export { getSelectionStyles } from './Utils/inlineStyleUtils';
