@@ -148,7 +148,7 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.Blockquote]: 'paragraphData',
 };
 
-// Node_Type.IMAGE: imageData
+// IMAGE_TYPE: imageData
 const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = Object.fromEntries(
   Object.entries(TO_RICOS_NODE_TYPE).map(([key, value]) => [
     key,
