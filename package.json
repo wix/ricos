@@ -65,6 +65,11 @@
     "toPlainText": "cd scripts && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} toPlainText",
     "link": "lerna link"
   },
+  "ultra": {
+    "concurrent": [
+      "lint"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "node scripts/preCommit"

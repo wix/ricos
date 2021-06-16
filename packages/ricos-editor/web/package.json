@@ -49,6 +49,7 @@
     "ricos-schema": "8.44.2",
     "wix-rich-content-common": "8.44.2",
     "wix-rich-content-editor": "8.44.2",
+    "wix-tiptap-editor": "8.44.2",
     "wix-rich-content-editor-common": "8.44.2"
   },
   "jest": {

@@ -40,6 +40,8 @@ interface State {
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor!: RichContentEditor;
 
+  useTiptap = false;
+
   dataInstance: EditorDataInstance;
 
   isBusy = false;
@@ -57,6 +59,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       remountKey: false,
       initialContentChanged: true,
     };
+    this.useTiptap = !!props._rcProps?.experiments?.tiptapEditor?.enabled;
   }
 
   static defaultProps = { locale: 'en' };
@@ -64,8 +67,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   updateLocale = async () => {
     const { children, _rcProps } = this.props;
     const locale = children?.props.locale || this.props.locale;
-    const isTiptapEditor = _rcProps?.experiments?.tiptapEditor?.enabled;
-    if (isTiptapEditor) {
+    // TODO: handle locale for tiptap
+    if (this.useTiptap) {
       return false;
     }
 
@@ -82,6 +85,20 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       this.props._rcProps?.helpers?.onOpenEditorSuccess;
     onOpenEditorSuccess?.(Version.currentVersion);
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+  }
+
+  loadEditor() {
+    if (this.useTiptap) {
+      const tiptapEditorModule = await import(
+        /* webpackChunkName: wix-tiptap-editor */
+        'wix-tiptap-editor'
+      );
+      const { initTiptapEditor } = tiptapEditorModule;
+      this.Editor = initTiptapEditor(content, onUpdate);
+      this.forceUpdate();
+    } else {
+      // load RCE
+    }
   }
 
   componentWillUnmount() {
@@ -198,7 +215,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getEditorCommands = () => this.editor.getEditorCommands();
 
-  render() {
+  renderDraftEditor() {
     const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
     const { StaticToolbar, localeData, remountKey, editorState } = this.state;
 
@@ -242,6 +259,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       </Fragment>
     );
   }
+
+  render() {}
 }
 
 export default forwardRef<RicosEditor, RicosEditorProps>((props, ref) => (
