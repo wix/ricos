@@ -18,7 +18,7 @@
 
 ### :house: Internal
 - `ricos-content`
-- [#2610](https://github.com/wix/ricos/pull/2610) tiptap converters fixed
+  - [#2610](https://github.com/wix/ricos/pull/2610) tiptap converters fixed
 
 </details>
 <hr/>
