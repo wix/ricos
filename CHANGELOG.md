@@ -20,6 +20,8 @@
 
 - `editor-common`
   - [#2618](https://github.com/wix-incubator/rich-content/pull/2618) moved RadioGroup/InfoIcon/Checkbox components into ui-components folder
+- `ricos-content`
+  - [#2610](https://github.com/wix/ricos/pull/2610) tiptap converters fixed
 
 </details>
 <hr/>
