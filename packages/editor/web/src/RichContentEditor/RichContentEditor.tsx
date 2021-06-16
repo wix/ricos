@@ -83,6 +83,7 @@ import InnerModal from './InnerModal';
 import { onCut, onCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
+import { TiptapEditor } from 'wix-tiptap-editor';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -206,7 +207,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   editorWrapper!: Element;
 
-  TiptapEditor: React.FC<{ editorProps; onUpdate }> | null;
+  TiptapEditor: typeof TiptapEditor | null;
 
   lastFocusedAtomicPlugin?: ContentBlock;
 
@@ -982,7 +983,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   renderTiptapEditor = () => {
     if (this.TiptapEditor) {
       const TiptapEditor = this.TiptapEditor;
-      return <TiptapEditor onUpdate={() => null} editorProps={this.props} />;
+      return (
+        <TiptapEditor
+          onUpdate={({ content }) => {
+            const editorState = EditorState.createWithContent(convertFromRaw(content));
+            this.props.onChange?.(editorState);
+          }}
+          editorProps={this.props}
+        />
+      );
     } else {
       return null;
     }

@@ -1,3 +1,4 @@
 import React from 'react';
 
-export const EditorPropsContext = React.createContext(null);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const EditorPropsContext = React.createContext<Record<string, any> | null>(null);
