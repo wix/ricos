@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/extract.cjs.js",
+    "module": "../../dist/lib/extract.js",
+    "types": "../../dist/lib/extract.d.ts"
+}
