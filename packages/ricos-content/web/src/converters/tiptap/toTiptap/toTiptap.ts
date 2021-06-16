@@ -1,14 +1,21 @@
-import { DATA_FIELDS_MAP, isDataFieldName, isRichContent } from './../utils';
+import {
+  DATA_FIELDS_MAP,
+  isDataFieldName,
+  isRichContent,
+  isDecoration,
+  isNode,
+  isTextNode,
+} from '../utils';
 import { transform, isObject, pickBy, identity } from 'lodash';
 import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap/core';
-import { isDecoration, isNode } from '../utils';
+import toCamelCase from 'to-camel-case';
 
 declare const a: RichContent;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const toProseMirror = <T extends RichContent | Node | Record<string, any>>(
+export const toTiptap = <T extends RichContent | Node | Record<string, any>>(
   richContent: T
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): T extends RichContent | Node ? JSONContent : Record<string, any> => {
@@ -35,7 +42,10 @@ const FIELDS_MAP = {
 const fieldMapper = (fieldName: string | number | symbol, value) =>
   isDataFieldName(fieldName, value) ? 'attrs' : FIELDS_MAP[fieldName] || fieldName;
 
-const typeToLower = (object: Node | Decoration) => ({ ...object, type: object.type.toLowerCase() });
+const typeToCamelCase = (object: Node | Decoration) => ({
+  ...object,
+  type: toCamelCase(object.type),
+});
 
 const addDocType = (content: RichContent) => ({ type: 'doc', ...content });
 
@@ -62,14 +72,14 @@ const convertValue = value => {
     newValue = addDocType(newValue);
     newValue = moveMetadata(newValue);
   }
-  if (newValue?.textData) {
+  if (isTextNode(newValue)) {
     newValue = flattenTextData(newValue);
   }
   if (isNode(newValue)) {
     newValue = moveToData(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
-    newValue = typeToLower(newValue);
+    newValue = typeToCamelCase(newValue);
   }
   return newValue;
 };
