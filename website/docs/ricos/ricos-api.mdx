@@ -68,13 +68,16 @@ Will render in mobile optimized mode
 
 ### `linkSettings`
 
-```jsx
+*** `relValue` is Deprecated ***, please use `rel` instead.
 
+
+```jsx
 CustomAnchorScroll: (event: Event, anchor: string) => void;
 
 linkSettings?: {
   anchorTarget?: string;
   relValue?: string;
+  rel?: { nofollow?: boolean; sponsored?: boolean; ugc?: boolean; };
   customAnchorScroll?: CustomAnchorScroll;
 }
 ```
@@ -83,6 +86,26 @@ Defines the behavior of links.
 anchorTarget - as defined in [HTMLAnchorElement.target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target)
 relValue - as defined in [HTMLAnchorElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/rel)
 customAnchorScroll - enables overriding the default anchor scroll behaviour
+
+Examples:
+
+1. Links created by the User:
+
+```jsx
+linkSettings: {
+  anchorTarget: '_blank',
+  rel: { nofollow: false, sponsored: false, ugc: false },
+}
+```
+
+2. Links created by UoU:
+
+```jsx
+linkSettings: {
+  anchorTarget: '_blank',
+  rel: { nofollow: true, sponsored: false, ugc: true },
+}
+```
 
 ### `locale`
 
@@ -194,27 +217,77 @@ Similar to [content](#content) prop; allows content to be injected to mounted Ri
 
 ```jsx
 linkPanelSettings?: {
-  blankTargetToggleVisibilityFn?: (anchorTarget: string) => boolean;
-  nofollowRelToggleVisibilityFn?: (relValue: string) => boolean;
-  placeholder?: string;}
+  showNewTabCheckbox?: boolean;
+  showNoFollowCheckbox?: boolean;
+  showSponsoredCheckbox?: boolean;
+  placeholder?: string;
+  externalPopups?: boolean;
+}
 ```
 
 Settings for the link panel component.
 
-#### `blankTargetToggleVisibilityFn`
+#### `showNewTabCheckbox`
 
 Determines the 'Open link in a new tab' link panel checkbox visiblity.
-By default, its predicate is `anchorTarget !== '_blank'`
+By default, it's visible.
+
+#### `showNoFollowCheckbox`
+
+Determines the 'Add a nofollow tag' link panel checkbox visiblity.
+By default, it's visible.
+
+#### `showSponsoredCheckbox`
+
+Determines the 'Mark as a sponsored link' link panel checkbox visiblity.
+By default, it's hidden.
+
+#### `blankTargetToggleVisibilityFn`
+
+*** Deprecated ***, please use `showNewTabCheckbox` instead.
+
+Determines the 'Open link in a new tab' link panel checkbox visiblity.
+By default, it's visible.
 
 #### `nofollowRelToggleVisibilityFn`
 
+*** Deprecated ***, please use `showNoFollowCheckbox` instead.
+
 Determines the 'Add a nofollow tag' link panel checkbox visiblity.
-By default, its predicate is `relValue !== 'nofollow'`
+By default, it's visible.
 
 #### `placeholder`
 
 Determines the placeholder to use for the link panel.
 By default, its value is `"Enter a URL here"` translated by localization
+
+#### `externalPopups`
+
+Determines the position of the link modal.
+Passing *true* places the link modal on the topmost layer.
+By default, this value is false.
+
+Examples:
+
+1. Links created by the User:
+
+```jsx
+linkPanelSettings: {
+  showNewTabCheckbox: true;
+  showNoFollowCheckbox: true;
+  showSponsoredCheckbox: true;
+}
+```
+
+2. Links created by UoU:
+
+```jsx
+linkPanelSettings: {
+  showNewTabCheckbox: false;
+  showNoFollowCheckbox: false;
+  showSponsoredCheckbox: false;
+}
+```
 
 ### `maxTextLength`
 

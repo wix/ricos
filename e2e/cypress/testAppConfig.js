@@ -86,7 +86,7 @@ export const plugins = {
   all: 'all',
   giphy: 'giphy',
   emoji: 'emoji',
-  accordion: 'accordion',
+  collapsibleList: 'collapsibleList',
   table: 'table',
   video: 'video',
 };

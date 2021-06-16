@@ -7,7 +7,7 @@ import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji/viewer';
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/viewer';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list/viewer';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy/viewer';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/viewer';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/viewer';
@@ -62,7 +62,7 @@ const plugins = [
   pluginTextColor(),
   pluginTextHighlight(),
   pluginLinkPreview(),
-  pluginAccordion(),
+  pluginCollapsibleList(),
   pluginVerticalEmbed(),
 ];
 

@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/linkConverters.cjs.js",
+    "module": "../../dist/lib/linkConverters.js",
+    "types": "../../dist/lib/linkConverters.d.ts"
+}

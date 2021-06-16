@@ -151,7 +151,10 @@ const postcss = (shouldExtract: boolean): Plugin => {
 
 const replace = (): Plugin => {
   return replacePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production'),
+    preventAssignment: true,
+    values: {
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    },
   });
 };
 

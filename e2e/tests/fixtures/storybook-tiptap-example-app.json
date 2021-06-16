@@ -1,0 +1,217 @@
+{
+  "blocks": [
+    {
+      "key": "81ob3",
+      "text": "this is a demo of divider",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "20px"
+        }
+      }
+    },
+    {
+      "key": "br5mm",
+      "text": "1.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "20px"
+        }
+      }
+    },
+    {
+      "key": "9lm9l",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "20px"
+        }
+      }
+    },
+    {
+      "key": "9fo54",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "4s504",
+      "text": "2.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7eatl",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "89arc",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "d84m3",
+      "text": "3.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "advj0",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "3vs9",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "cs9js",
+      "text": "4.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "cjh52",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "1acp",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "1kce7",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "small",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        },
+        "type": "double"
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "medium",
+          "alignment": "right",
+          "textWrap": "nowrap"
+        },
+        "type": "dotted"
+      }
+    },
+    "3": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "size": "medium",
+          "alignment": "left",
+          "textWrap": "nowrap"
+        },
+        "type": "dashed"
+      }
+    }
+  },
+  "VERSION": "8.41.0"
+}

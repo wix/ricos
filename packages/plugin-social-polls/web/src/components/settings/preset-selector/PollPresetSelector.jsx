@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { merge } from 'lodash';
 
-import { SelectionList } from 'wix-rich-content-plugin-commons';
+import { SelectionList } from 'wix-rich-content-ui-components';
 import { Separator } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 

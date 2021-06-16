@@ -37,7 +37,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
         case Node_Type.BLOCKQUOTE:
           parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.key });
           break;
-        case Node_Type.CODEBLOCK:
+        case Node_Type.CODE_BLOCK:
           parseTextNodes(node, { type: BlockType.CodeBlock, key: node.key });
           break;
         case Node_Type.HEADING:

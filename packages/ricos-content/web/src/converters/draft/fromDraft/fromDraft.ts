@@ -72,10 +72,10 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
 
   const parseCodeBlock = (block: RicosContentBlock): Node => ({
     key: block.key,
-    type: Node_Type.CODEBLOCK,
+    type: Node_Type.CODE_BLOCK,
     nodes: getTextNodes(block, entityMap),
     style: getNodeStyle(block.data),
-    codeData: {
+    codeBlockData: {
       textStyle: getTextStyle(block.data),
     },
   });
@@ -161,7 +161,6 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
         key: genKey(),
         type: FROM_DRAFT_LIST_TYPE[listType],
         nodes: listNodes,
-        style: getNodeStyle(blocks[searchIndex].data),
       },
       nextIndex: searchIndex,
     };
