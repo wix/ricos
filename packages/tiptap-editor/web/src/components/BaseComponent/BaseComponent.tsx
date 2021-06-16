@@ -9,7 +9,7 @@ import {
 } from './styles';
 import generalStyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import generalRTLIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
-import { proseMirrorNodeDataToDraft, toProseMirror } from 'ricos-content/libs/converters';
+import { tiptapNodeDataToDraft, toTiptap } from 'ricos-content/libs/converters';
 
 const stylesWithRTL = { ...generalStyles, ...generalRTLIgnoredStyles };
 const EditorContextConsumer = ({ children }) => {
@@ -35,7 +35,7 @@ const BaseExtensionComponentHOC = Component => {
     return (
       <EditorContextConsumer>
         {context => {
-          const componentData = proseMirrorNodeDataToDraft(
+          const componentData = tiptapNodeDataToDraft(
             props.node.type.name.toUpperCase(),
             props.node.attrs
           );
@@ -46,7 +46,7 @@ const BaseExtensionComponentHOC = Component => {
           const { theme } = context;
 
           const componentStyles = getComponentStyles({
-            componentData: toProseMirror(componentData),
+            componentData: toTiptap(componentData),
             theme,
             isFocused: isSelected || selected,
           });
