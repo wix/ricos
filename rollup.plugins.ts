@@ -188,7 +188,7 @@ let _plugins: Plugin[] = [
 ];
 
 if (!IS_DEV_ENV) {
-  _plugins = [..._plugins, replace(), uglify()];
+  _plugins = [..._plugins, replace()];
 }
 
 if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
