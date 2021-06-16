@@ -1,4 +1,5 @@
 import { Command, Node, mergeAttributes } from '@tiptap/core';
+import { ParagraphData } from 'ricos-schema';
 
 export interface ParagraphOptions {
   HTMLAttributes: Record<string, unknown>;
@@ -25,6 +26,11 @@ export const Paragraph = Node.create<ParagraphOptions>({
   group: 'block',
 
   content: 'inline*',
+
+  addAttributes() {
+    const attrs: ParagraphData & { key: string } = { key: '', ...ParagraphData.fromJSON({}) };
+    return attrs;
+  },
 
   parseHTML() {
     return [{ tag: 'div' }];
