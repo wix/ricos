@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `fullscreen`
+  - [#2625](https://github.com/wix/ricos/pull/2625) images with download enabled can be downloaded from fullscreen
+
 ### :house: Internal
 - `ricos-content`
   - [#2610](https://github.com/wix/ricos/pull/2610) tiptap converters fixed
