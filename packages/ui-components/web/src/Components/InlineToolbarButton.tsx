@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { Component, ReactElement, ReactNode, Ref, FC } from 'react';
 import classNames from 'classnames';
-import ToolbarButton from './ToolbarButton';
+import { ToolbarButton } from 'wix-rich-content-editor-common';
 import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
 import { mergeStyles } from 'wix-rich-content-common';

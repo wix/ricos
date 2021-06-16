@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
-import styles from 'wix-rich-content-editor-common/dist/statics/styles/inline-toolbar-button.scss';
+import styles from '../../../../statics/styles/inline-toolbar-button.scss';
 
 export default class TextButton extends Component {
   constructor(props) {
