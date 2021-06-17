@@ -80,6 +80,9 @@ export {
   selectAllContent,
   setSelectionToBlock,
   hasBlockType,
+  getColor,
+  setTextColor,
+  setHighlightColor,
 } from './Utils/draftUtils';
 export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';

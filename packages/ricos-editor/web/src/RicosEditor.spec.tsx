@@ -18,6 +18,10 @@ import {
   RICOS_HASHTAG_TYPE,
   RICOS_SPOILER_TYPE,
   RICOS_MENTION_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
 } from 'wix-rich-content-common';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
@@ -32,6 +36,9 @@ import { pluginImage, IMAGE_TYPE } from '../../../plugin-image/web/src';
 import { pluginLink, LINK_TYPE } from '../../../plugin-link/web/src';
 import { pluginMentions, MENTION_TYPE } from '../../../plugin-mentions/web/src';
 import { pluginSpoiler, SPOILER_TYPE } from '../../../plugin-spoiler/web/src';
+import { pluginTextColor, pluginTextHighlight } from '../../../plugin-text-color/web/src';
+import { colorScheme } from '../../../../examples/main/src/text-color-style-fn';
+
 import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 import {
   content,
@@ -58,6 +65,8 @@ const expectedPluginsList = [
   HASHTAG_TYPE,
   MENTION_TYPE,
   SPOILER_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
 ];
 
 const expectedPluginsListRicosSchema = [
@@ -73,10 +82,32 @@ const expectedPluginsListRicosSchema = [
   RICOS_HASHTAG_TYPE,
   RICOS_MENTION_TYPE,
   RICOS_SPOILER_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
 ];
+
+jest.mock('react-modal', () => {
+  const TestReactModal = class MockReactModal extends React.Component {
+    static setAppElement() {
+      // in our application we use #setAppElement for accessibility
+      // if you use this or any other functions you'll have to mock them
+    }
+
+    render() {
+      return <div />;
+    }
+  };
+  return TestReactModal;
+});
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
+
+const configs = {
+  textColor: {
+    colorScheme,
+  },
+};
 
 const plugins = [
   pluginDivider(),
@@ -91,6 +122,8 @@ const plugins = [
   pluginHashtag(),
   pluginMentions(),
   pluginSpoiler(),
+  pluginTextColor(configs.textColor),
+  pluginTextHighlight(configs.textColor),
 ];
 
 const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
@@ -185,7 +218,11 @@ const insertDecorationTest = (settings: Settings) => ([
     isMention(type) && ricosEditor.getEditorCommands().triggerDecoration(type);
     ricosEditor.getEditorCommands().insertDecoration(type, data1, settings);
     setSelection(ricosEditor, blockKey, selection2);
-    expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData1);
+    if (type === RICOS_TEXT_COLOR_TYPE || type === RICOS_TEXT_HIGHLIGHT_TYPE) {
+      expect(ricosEditor.getEditorCommands().getColor(type)).toEqual(expectedData1);
+    } else {
+      expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData1);
+    }
   });
 
 const setDecorationTest = (settings: Settings) => ([
@@ -200,7 +237,11 @@ const setDecorationTest = (settings: Settings) => ([
     setSelection(ricosEditor, blockKey, selection1);
     ricosEditor.getEditorCommands().insertDecoration(type, data2, settings);
     setSelection(ricosEditor, blockKey, selection2);
-    expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData2);
+    if (type === RICOS_TEXT_COLOR_TYPE || type === RICOS_TEXT_HIGHLIGHT_TYPE) {
+      expect(ricosEditor.getEditorCommands().getColor(type)).toEqual(expectedData2);
+    } else {
+      expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData2);
+    }
   });
 
 const deleteDecorationTest = (settings: Settings) => ([

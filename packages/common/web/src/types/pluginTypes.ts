@@ -69,6 +69,8 @@ import {
   UNSUPPORTED_BLOCKS_TYPE,
   RICOS_LINK_TYPE,
   RICOS_MENTION_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
 } from 'ricos-content';
 import {
   DividerData,
@@ -83,6 +85,7 @@ import {
   MentionData as MentionPluginData,
   Node_Type,
   Decoration_Type,
+  ColorData,
 } from 'ricos-schema';
 export { Node_Type, Decoration_Type, LinkData };
 
@@ -139,6 +142,8 @@ export interface PluginsDataMap {
 export interface DecorationsDataMap {
   [RICOS_LINK_TYPE]?: LinkData;
   [RICOS_MENTION_TYPE]?: MentionData;
+  [RICOS_TEXT_COLOR_TYPE]?: { color?: ColorData['foreground'] };
+  [RICOS_TEXT_HIGHLIGHT_TYPE]?: { color?: ColorData['background'] };
 }
 
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';

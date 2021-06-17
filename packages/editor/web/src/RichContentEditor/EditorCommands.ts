@@ -1,5 +1,8 @@
 import {
   EditorState,
+  getColor,
+  setTextColor,
+  setHighlightColor,
   SelectionState,
   RichUtils,
   setTextAlignment,
@@ -97,6 +100,8 @@ import {
   UNSUPPORTED_BLOCKS_TYPE,
 } from 'wix-rich-content-common';
 
+type ColorType = typeof RICOS_TEXT_COLOR_TYPE | typeof RICOS_TEXT_HIGHLIGHT_TYPE;
+
 type PluginsList = string[];
 
 type TextBlockType =
@@ -137,6 +142,8 @@ const TO_DRAFT_PLUGIN_TYPE_MAP = {
   [RICOS_POLL_TYPE]: POLL_TYPE,
   [RICOS_LINK_TYPE]: LINK_TYPE,
   [RICOS_MENTION_TYPE]: MENTION_TYPE,
+  [RICOS_TEXT_HIGHLIGHT_TYPE]: TEXT_HIGHLIGHT_TYPE,
+  [RICOS_TEXT_COLOR_TYPE]: TEXT_COLOR_TYPE,
   [DIVIDER_TYPE]: DIVIDER_TYPE,
   [FILE_UPLOAD_TYPE]: FILE_UPLOAD_TYPE,
   [GALLERY_TYPE]: GALLERY_TYPE,
@@ -145,6 +152,8 @@ const TO_DRAFT_PLUGIN_TYPE_MAP = {
   [IMAGE_TYPE]: IMAGE_TYPE,
   [VIDEO_TYPE]: VIDEO_TYPE,
   [POLL_TYPE]: POLL_TYPE,
+  [TEXT_HIGHLIGHT_TYPE]: TEXT_HIGHLIGHT_TYPE,
+  [TEXT_COLOR_TYPE]: TEXT_COLOR_TYPE,
 };
 
 const TO_RICOS_PLUGIN_TYPE_MAP = {
@@ -189,10 +198,14 @@ const triggerDecorationsMap = {
 const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
   [RICOS_MENTION_TYPE]: insertMention,
+  [RICOS_TEXT_COLOR_TYPE]: setTextColor,
+  [RICOS_TEXT_HIGHLIGHT_TYPE]: setHighlightColor,
 };
 
 const deleteDecorationsMapFuncs = {
   [RICOS_LINK_TYPE]: removeLinksInSelection,
+  [RICOS_TEXT_COLOR_TYPE]: setTextColor,
+  [RICOS_TEXT_HIGHLIGHT_TYPE]: setHighlightColor,
 };
 
 export const createEditorCommands = (
@@ -222,6 +235,7 @@ export const createEditorCommands = (
       return { getIsCollapsed: isCollapsed, getIsFocused: getHasFocus };
     },
     getAnchorableBlocks: () => getAnchorableBlocks(getEditorState()),
+    getColor: (colorType: ColorType) => getColor(getEditorState(), colorType),
     getTextAlignment: () => getTextAlignment(getEditorState()),
     hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
     isBlockTypeSelected: (type: TextBlockType) => getBlockType(getEditorState()) === type,
@@ -294,13 +308,13 @@ export const createEditorCommands = (
     ) => {
       const draftType = TO_DRAFT_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
-      const pluginData = createPluginData(data, settings?.isRicosSchema);
+      const pluginData = createPluginData ? createPluginData(data, settings?.isRicosSchema) : data;
       const newEditorState = insertDecorationsMap[type]?.(getEditorState(), pluginData);
       if (newEditorState) {
         setEditorState(newEditorState);
       }
     },
-    triggerDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_LINK_TYPE>>(
+    triggerDecoration: <K extends keyof Pick<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
       type: K
     ) => {
       const newEditorState = triggerDecorationsMap[type]?.(getEditorState());

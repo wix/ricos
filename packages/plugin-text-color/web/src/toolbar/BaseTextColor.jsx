@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, isSSR } from 'wix-rich-content-common';
 import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
 import { ClickOutside, InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
 import TextColorPanel from './TextColorPanel';
@@ -21,7 +21,7 @@ export default class BaseTextColor extends Component {
   }
 
   static getModalParent() {
-    return document.querySelector('.DraftEditor-root').parentNode;
+    return !isSSR ? document.querySelector('.DraftEditor-root').parentNode : undefined;
   }
 
   openPanel = () => {
