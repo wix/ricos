@@ -5,6 +5,7 @@ import {
   mergeToolbarSettings,
   isiOS,
 } from 'wix-rich-content-editor-common';
+import { withToolbarType } from './utils';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { mobileTextButtonList, desktopTextButtonList, pluginButtonNames } from './buttons';
 import { reducePluginTextButtons } from './buttons/utils';
@@ -44,7 +45,7 @@ const createEditorToolbars = ({
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
-  const { isMobile, theme = {} } = context;
+  const { isMobile, theme = {}, helpers } = context;
 
   const textButtons: TextButtons = {
     mobile: mobileTextButtonList,
@@ -105,6 +106,7 @@ const createEditorToolbars = ({
       }) => {
         toolbars[name] = getInstance?.({
           ...context,
+          helpers: withToolbarType(helpers, name),
           displayOptions: get(getDisplayOptions?.(), deviceName, {
             displayMode: DISPLAY_MODE.NORMAL,
           }),

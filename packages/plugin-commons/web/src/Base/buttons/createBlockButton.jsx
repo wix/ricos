@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
 
-export default ({ Icon, tooltipTextKey }) =>
+export default ({ Icon, tooltipTextKey, name }) =>
   class BlockButton extends Component {
     static propTypes = {
       onClick: PropTypes.func,
@@ -12,15 +12,22 @@ export default ({ Icon, tooltipTextKey }) =>
       isMobile: PropTypes.bool,
       tooltipText: PropTypes.string,
       t: PropTypes.func,
+      helpers: PropTypes.object,
       tabIndex: PropTypes.number,
+      pluginType: PropTypes.string,
     };
 
     handleClick = event => {
       event.preventDefault();
-      const { onClick, disabled } = this.props;
+      const { onClick, disabled, helpers, pluginType } = this.props;
       if (disabled) {
         return;
       }
+      helpers?.onToolbarButtonClick?.({
+        buttonName: name,
+        type: 'PLUGIN',
+        pluginId: pluginType,
+      });
       onClick && onClick();
     };
 
