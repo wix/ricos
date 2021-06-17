@@ -4,11 +4,13 @@ import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
 import { undo, pluginsUndo } from 'wix-rich-content-editor-common';
 import { InlineToolbarButton } from 'wix-rich-content-ui-components';
+import { UNDO_REDO_TYPE } from './types';
 
 const UndoButton = props => {
   const {
     isMobile,
     theme = {},
+    helpers,
     children,
     className,
     config,
@@ -35,11 +37,13 @@ const UndoButton = props => {
         disabled={disabled}
         onClick={onClick}
         isActive={false}
+        helpers={helpers}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('UndoButton_Tooltip')}
         dataHook={'undoButton'}
         tabIndex={tabIndex}
+        pluginType={UNDO_REDO_TYPE}
         icon={icon}
       >
         {children}
@@ -61,6 +65,7 @@ const UndoButton = props => {
 UndoButton.propTypes = {
   children: PropTypes.node,
   theme: PropTypes.any,
+  helpers: PropTypes.object,
   setEditorState: PropTypes.func,
   isMobile: PropTypes.bool,
   className: PropTypes.string,

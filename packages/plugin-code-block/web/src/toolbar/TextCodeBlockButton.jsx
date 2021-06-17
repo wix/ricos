@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InlineToolbarButton } from 'wix-rich-content-ui-components';
+import { hasBlockType } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from '../types';
-import { hasBlockType, toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
+import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import CodeBlockIcon from '../icons/CodeBlockIcon';
 
 export default class TextCodeBlockButton extends Component {
@@ -11,20 +12,36 @@ export default class TextCodeBlockButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, t, tabIndex, setEditorState, getEditorState, config } = this.props;
+    const {
+      theme,
+      helpers,
+      isMobile,
+      t,
+      tabIndex,
+      setEditorState,
+      getEditorState,
+      config,
+    } = this.props;
     const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon || CodeBlockIcon;
+    const onClick = () => {
+      const editorState = getEditorState();
+      const isAddEvent = !hasBlockType(CODE_BLOCK_TYPE, editorState);
+      isAddEvent && helpers?.onPluginAdd?.(CODE_BLOCK_TYPE, 'FormattingToolbar');
+      setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
+      isAddEvent && helpers?.onPluginAddSuccess?.(CODE_BLOCK_TYPE, 'FormattingToolbar');
+    };
     return (
       <InlineToolbarButton
-        onClick={() =>
-          setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, getEditorState()))
-        }
+        onClick={onClick}
         isActive={this.isActive}
+        helpers={helpers}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('TextCodeBlockButton_Tooltip')}
         dataHook={'TextCodeBlockButton'}
         tabIndex={tabIndex}
         icon={icon}
+        pluginType={CODE_BLOCK_TYPE}
       />
     );
   }

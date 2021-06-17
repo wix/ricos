@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import SpoilerButtonIcon from '../../Icons/SpoilerButtonIcon';
+import { SPOILER_TYPE } from 'wix-rich-content-common';
 
 class BlockSpoilerButton extends Component {
   handleClick = event => {
@@ -25,17 +26,19 @@ class BlockSpoilerButton extends Component {
   }
 
   render() {
-    const { theme, isMobile, tabIndex, tooltipText } = this.props;
+    const { theme, helpers, isMobile, tabIndex, tooltipText } = this.props;
     return (
       <InlineToolbarButton
         onClick={this.handleClick}
         isActive={this.isActive}
+        helpers={helpers}
         dataHook={'spoilerButton'}
         theme={theme}
         isMobile={isMobile}
         tooltipText={tooltipText}
         tabIndex={tabIndex}
         icon={SpoilerButtonIcon}
+        pluginType={SPOILER_TYPE}
       />
     );
   }
@@ -44,6 +47,7 @@ class BlockSpoilerButton extends Component {
 BlockSpoilerButton.propTypes = {
   pubsub: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  helpers: PropTypes.object,
   isMobile: PropTypes.bool,
   tabIndex: PropTypes.number,
   tooltipText: PropTypes.string,
