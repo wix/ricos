@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/modify.cjs.js",
+    "module": "../../dist/lib/modify.js",
+    "types": "../../dist/lib/modify.d.ts"
+}
