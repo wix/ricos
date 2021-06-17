@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InlineToolbarButton, hasBlockType } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
+import { hasBlockType } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import CodeBlockIcon from '../icons/CodeBlockIcon';

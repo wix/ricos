@@ -27,3 +27,4 @@ export { default as CloseIcon } from './CloseIcon';
 // export { default as HashtagIcon } from './HashtagIcon';
 export { default as MoreIcon } from './MoreIcon';
 export { default as CheckIcon } from './CheckIcon';
+export { default as DropdownArrowIcon } from './DropdownArrowIcon';

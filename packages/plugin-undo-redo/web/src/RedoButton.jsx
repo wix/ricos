@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import redoIcon from './icons/RedoIcon';
-import { InlineToolbarButton, redo } from 'wix-rich-content-editor-common';
+import { redo } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import { UNDO_REDO_TYPE } from './types';
 
 const RedoButton = props => {

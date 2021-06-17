@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import {
   getAnchorBlockData,
-  InlineToolbarButton,
   mergeBlockData,
   EditorState,
   ClickOutside,

@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { HEADINGS_DROPDOWN_TYPE, mergeStyles } from 'wix-rich-content-common';
 import { HEADING_TYPE_TO_ELEMENT } from '../constants';
-import {
-  ClickOutside,
-  InlineToolbarButton,
-  EditorState,
-  RichUtils,
-  hasBlockType,
-} from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
+import { ClickOutside, EditorState, RichUtils, hasBlockType } from 'wix-rich-content-editor-common';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
 import classNames from 'classnames';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { removeLinksInSelection, InlineToolbarButton } from 'wix-rich-content-editor-common';
+import { removeLinksInSelection } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import RemoveLinkIcon from '../icons/RemoveLinkIcon';
 import { LINK_TYPE } from '../types';
 

@@ -5,7 +5,8 @@ import Modal from 'react-modal';
 
 import { mergeStyles } from 'wix-rich-content-common';
 import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
-import { ClickOutside, InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import { ClickOutside, EditorState } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import TextColorPanel from './TextColorPanel';
 import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InlineToolbarButton from '../InlineToolbarButton';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import { LinkIcon } from '../../Icons';
 
 const LinkButton = ({ icon, ...otherProps }) => (

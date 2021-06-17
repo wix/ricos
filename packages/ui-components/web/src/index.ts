@@ -27,5 +27,6 @@ export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 export { default as RadioGroup } from './Components/RadioGroup';
+export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 
 // export { getSelectionStyles } from './Utils/inlineStyleUtils';
