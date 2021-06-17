@@ -7,7 +7,7 @@ import LinkPanelWrapper from './LinkPanelWrapper';
 import AnchorPanel from '../AnchorComponents/AnchorPanel';
 import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
-import RadioGroup from '../RadioGroup';
+import { RadioGroup } from 'wix-rich-content-ui-components';
 import styles from '../../../statics/styles/multi-select-link-panel.scss';
 import LinkActionsButtons from './LinkActionsButtons';
 import { LinkIcon } from '../../Icons';

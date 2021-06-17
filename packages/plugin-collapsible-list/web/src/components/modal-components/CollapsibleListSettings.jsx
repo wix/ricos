@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Separator, InfoIcon } from 'wix-rich-content-editor-common';
-import { RadioGroupVertical, SelectionList, LabeledToggle } from 'wix-rich-content-ui-components';
+import { Separator } from 'wix-rich-content-editor-common';
+import {
+  RadioGroupVertical,
+  SelectionList,
+  LabeledToggle,
+  InfoIcon,
+} from 'wix-rich-content-ui-components';
 import { LTRIcon, RTLIcon } from 'wix-rich-content-plugin-commons';
 import { directions, EXPANDED, COLLAPSED, FIRST_EXPANDED } from '../../defaults';
 import styles from '../../../statics/styles/collapsible-list-settings.scss';
