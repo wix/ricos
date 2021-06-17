@@ -5,7 +5,7 @@ import { writeFileSync } from 'fs';
 import { fromDraft } from '../packages/ricos-content/web/src/converters/draft';
 import { toPlainText } from '../packages/ricos-content/web/src/converters/plainText';
 import { toHtml } from '../packages/ricos-content/web/src/converters/html';
-import { toProseMirror } from '../packages/ricos-content/web/src/converters/proseMirror';
+import { toTiptap } from '../packages/ricos-content/web/src/converters/tiptap';
 import migrationContent from '../e2e/tests/fixtures/migration-content.json';
 import { RichContent } from 'ricos-schema';
 
@@ -20,15 +20,15 @@ const PLAIN_TEXT_BASELINE = getAbsPath(
 const HTML_BASELINE = getAbsPath(
   '../packages/ricos-content/web/src/converters/html/toHtml/__tests__/complexContentHtml.html'
 );
-const PROSE_MIRROR_BASELINE = getAbsPath(
-  '../packages/ricos-content/web/src/converters/proseMirror/toProseMirror/__tests__/migrationContentProse.json'
+const TIPTAP_BASELINE = getAbsPath(
+  '../packages/ricos-content/web/src/converters/tiptap/toTiptap/__tests__/migrationContentTiptap.json'
 );
 
 enum Target {
   RICOS = 'ricos',
   TEXT = 'text',
   HTML = 'html',
-  PROSE_MIRROR = 'prose',
+  TIPTAP = 'tiptap',
 }
 
 const convertToRichContent = async () => {
@@ -55,11 +55,11 @@ const convertToPlainText = async () => {
   console.log('Saved plain text baseline 📃\n');
 };
 
-const convertToProseMirror = async () => {
-  console.log('Converting to ' + chalk.green('prose mirror') + '...');
-  const proseMirror = toProseMirror(richContent);
-  writeFileSync(PROSE_MIRROR_BASELINE, JSON.stringify(proseMirror, null, 2));
-  console.log('Saved prose mirror baseline 🦉\n');
+const convertToTiptap = async () => {
+  console.log('Converting to ' + chalk.green('tiptap') + '...');
+  const tiptap = toTiptap(richContent);
+  writeFileSync(TIPTAP_BASELINE, JSON.stringify(tiptap, null, 2));
+  console.log('Saved tiptap baseline ⚪️\n');
 };
 
 const target = process.argv[2]?.toLowerCase();
@@ -73,8 +73,8 @@ switch (target) {
   case Target.HTML:
     conversions.push(convertToHtml());
     break;
-  case Target.PROSE_MIRROR:
-    conversions.push(convertToProseMirror());
+  case Target.TIPTAP:
+    conversions.push(convertToTiptap());
     break;
   case Target.TEXT:
     conversions.push(convertToPlainText());
@@ -83,7 +83,7 @@ switch (target) {
     conversions.push(
       convertToRichContent(),
       convertToHtml(),
-      convertToProseMirror(),
+      convertToTiptap(),
       convertToPlainText()
     );
     break;

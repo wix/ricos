@@ -93,6 +93,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       onOpenEditorSuccess: async version => console.log('onOpenEditorSuccess', version),
       onContentEdited: async params => console.log('onContentEdited', params),
+      onToolbarButtonClick: async params => console.log('onToolbarButtonClick', params),
       onPluginModalOpened: async params => console.log('onPluginModalOpened', params),
       onMenuLoad: async params => console.log('onMenuLoad', params),
       //
