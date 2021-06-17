@@ -12,7 +12,6 @@ export { default as LinkPanelWrapper } from './Components/LinkComponents/LinkPan
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
 export { default as LinkModal } from './Components/LinkComponents/LinkModal';
 export { default as Separator } from './Components/Separator';
-export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals

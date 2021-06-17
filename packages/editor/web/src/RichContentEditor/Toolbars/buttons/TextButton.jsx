@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { ToolbarButton } from 'wix-rich-content-editor-common';
+import { ToolbarButton } from 'wix-rich-content-ui-components';
 import styles from '../../../../statics/styles/inline-toolbar-button.scss';
 
 export default class TextButton extends Component {
