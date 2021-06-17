@@ -89,7 +89,6 @@ export {
   FORMATTING_BUTTONS,
   INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
-  KEYS_CHARCODE,
 } from './consts';
 
 import './draftTypes';
