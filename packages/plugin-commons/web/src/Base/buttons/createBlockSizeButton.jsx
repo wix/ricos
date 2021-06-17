@@ -15,16 +15,25 @@ export default ({ size, Icon, tooltipTextKey }) =>
       tooltipText: PropTypes.string,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      helpers: PropTypes.object,
+      pluginType: PropTypes.string,
     };
 
     isActive = () => this.props.size === size;
 
     handleClick = event => {
       event.preventDefault();
-      if (this.props.disabled) {
+      const { disabled, setLayoutProps, helpers, pluginType } = this.props;
+      if (disabled) {
         return;
       }
-      this.props.setLayoutProps({ size });
+      helpers?.onToolbarButtonClick?.({
+        buttonName: 'Size',
+        type: 'PLUGIN',
+        pluginId: pluginType,
+        value: `${size}`,
+      });
+      setLayoutProps({ size });
     };
 
     preventBubblingUp = event => {
