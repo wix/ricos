@@ -23,6 +23,8 @@
 ## 8.44.3 (Jun 17, 2021)
 
 ### :house: Internal
+- `editor-common`
+  - [#2622](https://github.com/wix-incubator/rich-content/pull/2622) moved textSearchInput/Separator components into ui-components folder
 
 - `editor-common`
   - [#2618](https://github.com/wix-incubator/rich-content/pull/2618) moved RadioGroup/InfoIcon/Checkbox components into ui-components folder

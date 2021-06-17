@@ -24,10 +24,11 @@ export { default as TextInput } from './Components/TextInput';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
+export { default as TextSearchInput } from './Components/TextSearchInput';
+export { default as Separator } from './Components/Separator';
+export { default as Dropdown } from './Components/Dropdown';
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 export { default as ToolbarButton } from './Components/ToolbarButton';
-
-// export { getSelectionStyles } from './Utils/inlineStyleUtils';

@@ -3,8 +3,7 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { ToolbarButton, FileInput } from 'wix-rich-content-ui-components';
-import { Dropdown } from 'wix-rich-content-editor-common';
+import { ToolbarButton, FileInput, Dropdown } from 'wix-rich-content-ui-components';
 import BUTTONS from './buttons/keys';
 
 class BaseToolbarButton extends React.Component {

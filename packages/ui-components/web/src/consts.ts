@@ -45,5 +45,3 @@ export const KEYS_CHARCODE = {
   ESCAPE: 27,
   SPACE: 32,
 };
-
-// export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
