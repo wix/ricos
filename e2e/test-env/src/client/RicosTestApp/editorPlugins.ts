@@ -5,7 +5,7 @@ import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery/editor';
+import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
@@ -14,7 +14,7 @@ import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list'
 import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
-import { pluginImage } from 'wix-rich-content-plugin-image/editor';
+import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
 import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginLink } from 'wix-rich-content-plugin-link';
