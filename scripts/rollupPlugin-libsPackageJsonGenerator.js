@@ -1,18 +1,12 @@
 function writePackageJson(packagePath, filePath) {
   const fs = require('fs');
   fs.mkdirSync(packagePath, { recursive: true });
-  const isLoadable = packagePath === 'loadable';
-  const isEditor = packagePath === 'editor';
-  let newPath;
-  if (isLoadable || isEditor) {
-    newPath = isLoadable ? '../dist/loadable/es/viewer' : '../dist/loadable/es/index';
-  }
   fs.writeFile(
     packagePath + '/package.json',
     `{
-    "main": "${newPath ? newPath : filePath + '.cjs'}.js",
-    "module": "${newPath || filePath}.js",
-    "types": "${isLoadable ? '../dist/src/viewer' : filePath}.d.ts"
+    "main": "${filePath}.cjs.js",
+    "module": "${filePath}.js",
+    "types": "${filePath}.d.ts"
 }`,
     err => {
       if (err) {
@@ -44,8 +38,6 @@ export default function createLibsPackageJsons() {
       }
       if (fs.existsSync('src/viewer.ts')) {
         writePackageJson('viewer', '../dist/module.viewer');
-        writePackageJson('loadable', '../dist/loadable/es/viewer');
-        writePackageJson('editor', '../dist/loadable/es/viewer');
       }
     },
   };
