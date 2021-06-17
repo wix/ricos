@@ -9,6 +9,7 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
       getEditorState: PropTypes.func.isRequired,
       setEditorState: PropTypes.func.isRequired,
       theme: PropTypes.object.isRequired,
+      helpers: PropTypes.object,
       isVisible: PropTypes.bool,
       isMobile: PropTypes.bool,
       t: PropTypes.func,
@@ -72,13 +73,21 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
       return nextBlockTypeIndex > -1 ? nextBlockTypeIndex : undefined;
     };
 
-    setBlockStyle = event => {
+    setBlockStyle = (event, textForHooks) => {
       event.preventDefault();
-      const { getEditorState, setEditorState } = this.props;
+      const { getEditorState, setEditorState, helpers } = this.props;
       const blockTypeIndex = this.nextBlockTypeIndex();
       this.setState({ blockTypeIndex }, () => {
         const blockType = this.activeBlockType;
+        const isAddEvent = blockType !== 'unstyled';
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+          value: String(isAddEvent),
+          pluginId: isAddEvent ? blockType : this.selectionBlockType,
+        });
+        isAddEvent && helpers?.onPluginAdd?.(blockType, 'FormattingToolbar');
         setEditorState(RichUtils.toggleBlockType(getEditorState(), blockType));
+        isAddEvent && helpers?.onPluginAddSuccess?.(blockType, 'FormattingToolbar');
       });
     };
 
@@ -93,14 +102,14 @@ export default ({ blockTypes, Icons, InactiveIcon = null, tooltipTextKey }) =>
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textBlockStyleButton_${textForHooks}`;
-
+      const onClick = e => this.setBlockStyle(e, textForHooks);
       return (
         <TextButton
           icon={Icon}
           theme={theme}
           isMobile={isMobile}
           isActive={this.blockTypeIsActive}
-          onClick={this.setBlockStyle}
+          onClick={onClick}
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}

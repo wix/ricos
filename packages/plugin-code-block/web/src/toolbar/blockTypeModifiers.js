@@ -7,17 +7,9 @@ import {
   BlockMapBuilder,
   SelectionState,
   createSelection,
+  hasBlockType,
 } from 'wix-rich-content-editor-common';
 import { List } from 'immutable';
-
-export const hasBlockType = (blockType, editorState) => {
-  const currentBlockType = editorState
-    .getCurrentContent()
-    .getBlockForKey(editorState.getSelection().getStartKey())
-    .getType();
-
-  return blockType === currentBlockType;
-};
 
 export const toggleBlockType = (blockType, editorState) =>
   RichUtils.toggleBlockType(editorState, blockType);
