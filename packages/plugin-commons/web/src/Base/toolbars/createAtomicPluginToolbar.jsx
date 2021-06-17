@@ -215,16 +215,19 @@ export default function createAtomicPluginToolbar({
         isMobile,
         t,
         pubsub,
+        helpers,
+        keyName: button.keyName,
       };
 
+      const editorState = getEditorState();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
         settings: button.settings,
+        pluginType,
         ...commonButtonProps,
       };
-      const editorState = getEditorState();
-      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const baseLinkProps = {
         onOverrideContent: this.onOverrideContent,
         helpers,

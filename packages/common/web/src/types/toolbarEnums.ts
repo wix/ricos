@@ -44,7 +44,7 @@ export enum ToolbarType {
   SIDE = 'SIDE',
   MOBILE = 'MOBILE',
   FOOTER = 'FOOTER',
-  STATIC = 'TEXT',
+  STATIC = 'STATIC',
   INLINE = 'INLINE',
   PLUGIN = 'PLUGIN',
   FORMATTING = 'FORMATTING',

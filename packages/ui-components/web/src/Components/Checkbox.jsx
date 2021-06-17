@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import { CheckIcon } from '../Icons';
 import styles from '../../statics/styles/checkbox.scss';
-import generalStyles from '../../statics/styles/general.scss';
 import InfoIcon from './InfoIcon';
 
 export default class Checkbox extends React.Component {
@@ -27,7 +26,6 @@ export default class Checkbox extends React.Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.generalStyles = mergeStyles({ styles: generalStyles, theme: props.theme });
     this.state = { focused: false };
     this.id = `chk_${Math.floor(Math.random() * 9999)}`;
   }
@@ -41,7 +39,7 @@ export default class Checkbox extends React.Component {
   }
 
   render() {
-    const { styles, generalStyles } = this;
+    const { styles } = this;
     const { onChange, label, checked, dataHook, tooltipTextKey, t, isMobile } = this.props;
     const isChecked = checked ? { defaultChecked: 'checked' } : {};
     const a11yProps = {
@@ -55,7 +53,7 @@ export default class Checkbox extends React.Component {
         htmlFor={this.id}
         className={classnames(styles.checkbox_wrapper, {
           [styles.checkbox]: true,
-          [generalStyles.focused]: this.state.focused,
+          [styles.focused]: this.state.focused,
         })}
       >
         <div className={styles.checkbox_inputLabel}>

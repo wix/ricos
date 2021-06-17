@@ -239,7 +239,6 @@ class EditorWrapper extends React.Component<Props> {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
         _rcProps={rcProps}
-
       >
         <RichContentEditor
           onFocus={onFocus}

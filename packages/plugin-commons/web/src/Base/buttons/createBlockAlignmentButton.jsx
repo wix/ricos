@@ -16,16 +16,25 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       tabIndex: PropTypes.number,
       icon: PropTypes.func,
       keyName: PropTypes.string.isRequired,
+      helpers: PropTypes.object,
+      pluginType: PropTypes.string,
     };
 
     isActive = () => this.props.alignment === alignment;
 
     handleClick = event => {
       event.preventDefault();
-      if (this.props.disabled) {
+      const { disabled, setLayoutProps, helpers, pluginType } = this.props;
+      if (disabled) {
         return;
       }
-      this.props.setLayoutProps({ alignment });
+      helpers?.onToolbarButtonClick?.({
+        buttonName: 'Alignment',
+        type: 'PLUGIN',
+        pluginId: pluginType,
+        value: `${alignment}`,
+      });
+      setLayoutProps({ alignment });
     };
 
     preventBubblingUp = event => {

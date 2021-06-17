@@ -19,6 +19,6 @@
     "allowJs": true
   },
   "files": ["external-types.d.ts"],
-  "include": ["packages/**/*.ts","packages/**/*.tsx", "packages/**/*.json", "*.ts"],
+"include": ["packages", "packages/**/*.json", "*.ts"],
   "exclude": ["**/node_modules/*", "**/dist/*"]
 }

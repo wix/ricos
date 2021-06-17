@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { InlineToolbarButton, indentSelectedBlocks } from 'wix-rich-content-editor-common';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
+import { INDENT_TYPE } from '../types';
 
 function indentButton(props) {
   const {
     theme,
+    helpers,
     isMobile,
     t,
     tabIndex,
@@ -26,12 +28,14 @@ function indentButton(props) {
           setEditorState(newState);
         }
       }}
+      helpers={helpers}
       theme={theme}
       isMobile={isMobile}
       tooltipText={t(tooltipKey)}
       dataHook={dataHook}
       tabIndex={tabIndex}
       icon={icon}
+      pluginType={INDENT_TYPE}
     />
   );
 }

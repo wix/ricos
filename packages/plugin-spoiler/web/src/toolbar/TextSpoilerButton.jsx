@@ -34,11 +34,12 @@ export default class TextSpoilerButton extends PureComponent {
   };
 
   render() {
-    const { theme, isMobile, tabIndex, t } = this.props;
+    const { theme, helpers, isMobile, tabIndex, t } = this.props;
     const { isActive } = this.state;
     return (
       <InlineToolbarButton
         onClick={this.handleClick}
+        helpers={helpers}
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('Spoiler_Insert_Tooltip')}
@@ -46,6 +47,7 @@ export default class TextSpoilerButton extends PureComponent {
         tabIndex={tabIndex}
         icon={SpoilerButtonIcon}
         isActive={isActive}
+        pluginType={SPOILER_TYPE}
       />
     );
   }
@@ -55,6 +57,7 @@ TextSpoilerButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object,
+  helpers: PropTypes.object,
   isMobile: PropTypes.bool,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
