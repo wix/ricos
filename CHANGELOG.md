@@ -24,10 +24,8 @@
 
 ### :house: Internal
 - `editor-common`
-  - [#2622](https://github.com/wix-incubator/rich-content/pull/2622) moved textSearchInput/Separator components into ui-components folder
-
-- `editor-common`
-  - [#2618](https://github.com/wix-incubator/rich-content/pull/2618) moved RadioGroup/InfoIcon/Checkbox components into ui-components folder
+  - [#2622](https://github.com/wix-incubator/rich-content/pull/2622) moved textSearchInput/Separator/Dropdown components into ui-components folder
+  - [#2619](https://github.com/wix-incubator/rich-content/pull/2619) moved RadioGroup/InfoIcon/Checkbox components into ui-components folder
 - `ricos-content`
   - [#2610](https://github.com/wix/ricos/pull/2610) tiptap converters fixed
   - [#2628](https://github.com/wix/ricos/pull/2628) `extract` & `modify` API exposed via libs folder
