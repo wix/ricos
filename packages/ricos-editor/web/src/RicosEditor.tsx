@@ -76,11 +76,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
-    const { children } = this.props;
+    const { children, isMobile } = this.props;
+    const { StaticToolbar } = this.state;
     const onOpenEditorSuccess =
       children?.props.helpers?.onOpenEditorSuccess ||
       this.props._rcProps?.helpers?.onOpenEditorSuccess;
-    onOpenEditorSuccess?.(Version.currentVersion);
+    onOpenEditorSuccess?.(
+      Version.currentVersion,
+      StaticToolbar ? (isMobile ? ToolbarType.MOBILE : ToolbarType.STATIC) : ToolbarType.INLINE
+    );
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
