@@ -1,5 +1,8 @@
 // @create-index
 
+export { default as InfoIcon } from './InfoIcon';
+
+// plugin-commons
 // export { default as AlignCenterIcon } from './AlignCenterIcon';
 // export { default as BackArrowIcon } from './BackArrowIcon';
 // export { default as HeightIcon } from './HeightIcon';
@@ -23,3 +26,7 @@ export { default as CloseIcon } from './CloseIcon';
 // export { default as LoaderIcon } from './LoaderIcon';
 // export { default as HashtagIcon } from './HashtagIcon';
 export { default as MoreIcon } from './MoreIcon';
+export { default as ClearIcon } from './ClearIcon';
+export { default as SearchIcon } from './SearchIcon';
+export { default as DropdownArrowIcon } from './DropdownArrowIcon';
+export { default as CheckIcon } from './CheckIcon';
