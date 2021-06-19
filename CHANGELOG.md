@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :house: Internal
+- `ricos-viewer`
+  - [#2634](https://github.com/wix-incubator/rich-content/pull/2634) `onViewerLoaded` contains url field
 
 </details>
 <hr/>
