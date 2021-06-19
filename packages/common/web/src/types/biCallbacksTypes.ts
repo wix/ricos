@@ -44,6 +44,7 @@ export interface onViewerLoadedArgs extends biCallbackParams {
   isPreview: boolean;
   pluginsCount: ReturnType<typeof getContentSummary>['pluginsCount'];
   version: string;
+  postURL: string;
 }
 
 export interface onPluginModalOpenedArgs extends biCallbackParams {

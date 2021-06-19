@@ -49,6 +49,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
       isPreview: !!isPreview?.(),
       version: Version.currentVersion,
       pluginsCount,
+      postUrl: document.URL,
     });
   }
 
