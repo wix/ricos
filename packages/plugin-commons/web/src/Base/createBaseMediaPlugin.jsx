@@ -99,16 +99,20 @@ const createBaseMediaPlugin = PluginComponent => {
       type: PropTypes.string,
     };
 
-    static alignmentClassName = (...args) =>
-      PluginComponent.alignmentClassName?.(...args) || alignmentClassName(...args);
+    static alignmentClassName = (...args) => {
+      const alignment = PluginComponent.alignmentClassName?.(...args);
+      return typeof alignment === 'string' ? alignment : alignmentClassName(...args);
+    };
 
-    static sizeClassName = (...args) =>
-      PluginComponent.sizeClassName?.(...args) || sizeClassName(...args);
+    static sizeClassName = (...args) => {
+      const size = PluginComponent.sizeClassName?.(...args);
+      return typeof size === 'string' ? size : sizeClassName(...args);
+    };
 
-    static textWrapClassName = (...args) =>
-      PluginComponent.textWrapClassName?.(...args) || textWrapClassName(...args);
-
-    static customClassName = (...args) => PluginComponent.customClassName?.(...args);
+    static textWrapClassName = (...args) => {
+      const textWrap = PluginComponent.textWrapClassName?.(...args);
+      return typeof textWrap === 'string' ? textWrap : textWrapClassName(...args);
+    };
 
     constructor(props) {
       super(props);
