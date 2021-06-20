@@ -5,6 +5,7 @@ import {
   localeStrategy,
   getBiCallback as getCallback,
 } from 'ricos-common';
+import { DraftContent } from 'ricos-content';
 import { RichContentEditor, RichContentEditorProps } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
@@ -24,6 +25,8 @@ import {
   EditorEvents,
 } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
 import { ToolbarType, Version } from 'wix-rich-content-common';
+import { emptyDraftContent, getEditorContentSummary } from 'wix-rich-content-editor-common';
+import { TiptapAPI } from 'wix-tiptap-editor';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -38,7 +41,7 @@ interface State {
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
-  editor!: RichContentEditor;
+  editor!: RichContentEditor | TiptapAPI;
 
   useTiptap = false;
 
@@ -67,18 +70,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   updateLocale = async () => {
     const { children, _rcProps } = this.props;
     const locale = children?.props.locale || this.props.locale;
-    // TODO: handle locale for tiptap
-    if (this.useTiptap) {
-      return false;
-    }
-
     await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
       this.setState({ localeData, remountKey: !this.state.remountKey })
     );
   };
 
   componentDidMount() {
-    this.updateLocale();
+    this.updateLocale().then(localeData => this.loadEditor(localeData));
     const { children } = this.props;
     const onOpenEditorSuccess =
       children?.props.helpers?.onOpenEditorSuccess ||
@@ -87,27 +85,55 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
-  loadEditor() {
+  async loadEditor(localeData) {
     if (this.useTiptap) {
+      console.log('tiptap in use'); // eslint-disable-line no-console
       const tiptapEditorModule = await import(
         /* webpackChunkName: wix-tiptap-editor */
         'wix-tiptap-editor'
       );
       const { initTiptapEditor } = tiptapEditorModule;
-      this.Editor = initTiptapEditor(content, onUpdate);
+      const { content, injectedContent, _rcProps } = this.props;
+      this.editor = initTiptapEditor({
+        initialContent: content ?? injectedContent ?? emptyDraftContent,
+        onUpdate: this.onUpdate,
+        _rcProps,
+      });
+      console.log(this.editor); // eslint-disable-line no-console
       this.forceUpdate();
     } else {
       // load RCE
+      console.log('RCE in use'); // eslint-disable-line no-console
     }
   }
+
+  onUpdate = ({ content }: { content: DraftContent }) => {
+    const editorState = EditorState.createWithContent(convertFromRaw(content));
+    this.onChange()(editorState);
+  };
 
   componentWillUnmount() {
     this.props.editorEvents?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
+  // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
+  sendPublishBi = async (postId?: string) => {
+    if (!this.props._rcProps?.helpers?.onPublish) {
+      return;
+    }
+    const { pluginsCount, pluginsDetails } =
+      getEditorContentSummary(this.dataInstance.getEditorState()) || {};
+    this.props._rcProps?.helpers?.onPublish(
+      postId,
+      pluginsCount,
+      pluginsDetails,
+      Version.currentVersion
+    );
+  };
+
   onPublish = async () => {
     // TODO: remove this param after getContent(postId) is deprecated
-    await this.editor.publish((undefined as unknown) as string);
+    await this.sendPublishBi((undefined as unknown) as string);
     console.debug('editor publish callback'); // eslint-disable-line
     return {
       type: 'EDITOR_PUBLISH',
@@ -176,7 +202,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
       console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
-      await this.editor.publish(postId); //async
+      await this.sendPublishBi(postId); //async
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
@@ -193,7 +219,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     const res = await getContentStatePromise();
     if (publishId) {
       console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
-      await this.editor.publish(publishId);
+      await this.sendPublishBi(publishId);
     }
     return res;
   };
@@ -260,7 +286,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     );
   }
 
-  render() {}
+  renderTiptapEditor() {
+    if (!this.editor) return null;
+    const { Editor } = this.editor as TiptapAPI;
+    return <Editor />;
+  }
+
+  render() {
+    return this.useTiptap ? this.renderTiptapEditor() : this.renderDraftEditor();
+  }
 }
 
 export default forwardRef<RicosEditor, RicosEditorProps>((props, ref) => (
