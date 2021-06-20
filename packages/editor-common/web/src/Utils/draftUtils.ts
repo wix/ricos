@@ -12,7 +12,6 @@ import {
   EntityInstance,
 } from '@wix/draft-js';
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
-import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
 
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
@@ -25,8 +24,6 @@ import {
   RelValue,
   getTargetValue,
   SPOILER_TYPE,
-  RICOS_TEXT_COLOR_TYPE,
-  RICOS_TEXT_HIGHLIGHT_TYPE,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
 import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics';
@@ -41,8 +38,6 @@ type LinkData = LinkDataUrl & { anchor?: string };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomLinkData = any;
-
-type ColorType = typeof RICOS_TEXT_COLOR_TYPE | typeof RICOS_TEXT_HIGHLIGHT_TYPE;
 
 const isEditorState = value => value?.getCurrentContent && value;
 export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
@@ -311,72 +306,6 @@ export const getTextAlignment = (
   } = contentBlock.toJS();
   return textAlignment || defaultAlignment;
 };
-
-const normalizeStyle = (style: string) => {
-  try {
-    return JSON.parse(style);
-  } catch (e) {
-    return { FG: style };
-  }
-};
-
-const getColorByType = (style: string, type: string) => {
-  const parsed = normalizeStyle(style);
-  return parsed[type] || '';
-};
-
-const textForegroundPredicate = (style: string) => getColorByType(style, 'FG');
-
-const textBackgroundPredicate = (style: string) => getColorByType(style, 'BG');
-
-const getCurrentColors = (editorState: EditorState, colorType: ColorType) => {
-  const isTextColor = colorType === 'ricos-text-color';
-  const styleSelectionPredicate = isTextColor ? textForegroundPredicate : textBackgroundPredicate;
-  const currentColors = getSelectionStyles(styleSelectionPredicate, editorState);
-  return currentColors;
-};
-
-export const getColor = (editorState: EditorState, colorType: ColorType) => {
-  const currentColors = getCurrentColors(editorState, colorType);
-  const parsed = normalizeStyle(currentColors[0]);
-  return Object.values(parsed)[0];
-};
-
-const removeCurrentColors = (
-  editorState: EditorState,
-  data: { colorType: ColorType; color?: string }
-) => {
-  const selection = editorState.getSelection();
-  const currentColors = getCurrentColors(editorState, data.colorType);
-  return currentColors.reduce((nextEditorState, prevColor) => {
-    const contentState = nextEditorState.getCurrentContent();
-    const nextContentState = Modifier.removeInlineStyle(contentState, selection, prevColor);
-    return EditorState.push(nextEditorState, nextContentState, 'change-inline-style');
-  }, editorState);
-};
-
-export const setColor = (
-  editorState: EditorState,
-  data: { colorType: ColorType; color?: string }
-) => {
-  const selection = editorState.getSelection();
-  const isTextColor = data.colorType === 'ricos-text-color';
-  const newEditorState = removeCurrentColors(editorState, data);
-  let contentState = newEditorState.getCurrentContent();
-  if (data?.color) {
-    const inlineStyle = isTextColor
-      ? JSON.stringify({ FG: data?.color })
-      : JSON.stringify({ BG: data?.color });
-    contentState = Modifier.applyInlineStyle(contentState, selection, inlineStyle);
-  }
-  return EditorState.push(newEditorState, contentState, 'change-inline-style');
-};
-
-export const setTextColor = (editorState: EditorState, data?: { color?: string }) =>
-  setColor(editorState, { colorType: 'ricos-text-color', color: data?.color });
-
-export const setHighlightColor = (editorState: EditorState, data?: { color?: string }) =>
-  setColor(editorState, { colorType: 'ricos-text-highlight', color: data?.color });
 
 export const setTextAlignment = (editorState: EditorState, textAlignment: string) => {
   return mergeBlockData(editorState, { textAlignment });

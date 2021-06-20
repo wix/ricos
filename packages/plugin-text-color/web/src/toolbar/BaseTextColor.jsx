@@ -4,8 +4,12 @@ import classNames from 'classnames';
 import Modal from 'react-modal';
 
 import { mergeStyles, isSSR } from 'wix-rich-content-common';
-import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
-import { ClickOutside, InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import {
+  ClickOutside,
+  InlineToolbarButton,
+  EditorState,
+  getSelectionStyles,
+} from 'wix-rich-content-editor-common';
 import TextColorPanel from './TextColorPanel';
 import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';
