@@ -69,6 +69,8 @@ import {
   UNSUPPORTED_BLOCKS_TYPE,
   RICOS_LINK_TYPE,
   RICOS_MENTION_TYPE,
+  RICOS_INDENT_TYPE,
+  RICOS_LINE_SPACING_TYPE,
 } from 'ricos-content';
 import {
   DividerData,
@@ -139,6 +141,8 @@ export interface PluginsDataMap {
 export interface DecorationsDataMap {
   [RICOS_LINK_TYPE]?: LinkData;
   [RICOS_MENTION_TYPE]?: MentionData;
+  [RICOS_INDENT_TYPE]?: number;
+  [RICOS_LINE_SPACING_TYPE]?: any;
 }
 
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';

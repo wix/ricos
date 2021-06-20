@@ -1,3 +1,4 @@
+import { pick } from 'lodash';
 import {
   EditorState,
   SelectionState,
@@ -20,6 +21,9 @@ import {
   removeLinksInSelection,
   triggerMention,
   insertMention,
+  indentSelectedBlocks,
+  mergeBlockData,
+  getAnchorBlockData,
   getAnchorableBlocks,
 } from 'wix-rich-content-editor-common';
 import {
@@ -55,6 +59,8 @@ import {
   UNSTYLED,
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
+  RICOS_INDENT_TYPE,
+  RICOS_LINE_SPACING_TYPE,
 } from 'wix-rich-content-common';
 
 type TextBlockType =
@@ -98,6 +104,8 @@ const PLUGIN_TYPE_MAP = {
   [IMAGE_TYPE]: IMAGE_TYPE,
   [VIDEO_TYPE]: VIDEO_TYPE,
   [POLL_TYPE]: POLL_TYPE,
+  [RICOS_INDENT_TYPE]: RICOS_INDENT_TYPE,
+  [RICOS_LINE_SPACING_TYPE]: RICOS_LINE_SPACING_TYPE,
 };
 
 const triggerDecorationsMap = {
@@ -107,11 +115,20 @@ const triggerDecorationsMap = {
 const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
   [RICOS_MENTION_TYPE]: insertMention,
+  [RICOS_INDENT_TYPE]: indentSelectedBlocks,
+  [RICOS_LINE_SPACING_TYPE]: mergeBlockData,
 };
 
 const deleteDecorationsMapFuncs = {
   [RICOS_LINK_TYPE]: removeLinksInSelection,
 };
+
+const lineHeight = 'line-height';
+const spaceBefore = 'padding-top';
+const spaceAfter = 'padding-bottom';
+
+let savedEditorState;
+let savedSelectionState;
 
 export const createEditorCommands = (
   createPluginsDataMap,
@@ -130,6 +147,28 @@ export const createEditorCommands = (
       )
     );
 
+  const getBlockSpacing = () => {
+    const { dynamicStyles = {} } = getAnchorBlockData(getEditorState());
+    return pick(dynamicStyles, [lineHeight, spaceBefore, spaceAfter]);
+  };
+
+  const saveEditorState = () => {
+    savedEditorState = getEditorState();
+  };
+
+  const saveSelectionState = () => {
+    savedSelectionState = getEditorState().getSelection();
+  };
+
+  const loadEditorState = () => {
+    const selection = savedEditorState.getSelection();
+    setEditorState(EditorState.forceSelection(savedEditorState, selection));
+  };
+
+  const loadSelectionState = () => {
+    setEditorState(EditorState.forceSelection(getEditorState(), savedSelectionState));
+  };
+
   const editorState = {
     // TODO: check if needed, plus type error using SelectionState, not sure why
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -143,6 +182,11 @@ export const createEditorCommands = (
     hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
     getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
     getSelectedData: () => getEntityData(getEditorState()) || {},
+    getBlockSpacing,
+    saveEditorState,
+    loadEditorState,
+    saveSelectionState,
+    loadSelectionState,
   };
 
   const textFormattingCommands = {
@@ -200,13 +244,13 @@ export const createEditorCommands = (
     ) => {
       const draftType = PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
-      const pluginData = createPluginData(data, settings?.isRicosSchema);
+      const pluginData = createPluginData ? createPluginData(data, settings?.isRicosSchema) : data;
       const newEditorState = insertDecorationsMap[type]?.(getEditorState(), pluginData);
       if (newEditorState) {
         setEditorState(newEditorState);
       }
     },
-    triggerDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_LINK_TYPE>>(
+    triggerDecoration: <K extends keyof Pick<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
       type: K
     ) => {
       const newEditorState = triggerDecorationsMap[type]?.(getEditorState());
@@ -214,7 +258,7 @@ export const createEditorCommands = (
         setEditorState(newEditorState);
       }
     },
-    deleteDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
+    deleteDecoration: <K extends keyof Pick<DecorationsDataMap, typeof RICOS_LINK_TYPE>>(
       type: K
     ) => {
       const newEditorState = deleteDecorationsMapFuncs[type]?.(getEditorState());
