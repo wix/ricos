@@ -17,6 +17,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       isMobile: PropTypes.bool,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      helpers: PropTypes.object,
     };
 
     constructor(props) {
@@ -62,9 +63,15 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
     showOptions = () => this.setState({ isOpen: true });
 
     renderOptions = () => {
-      const { getEditorState, setEditorState } = this.props;
+      const { getEditorState, setEditorState, t, helpers } = this.props;
       const { selected } = this.state;
       const onClick = value => {
+        const tooltipText = t(tooltipTextKey);
+        const textForHooks = tooltipText.replace(/\s+/, '');
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+          value,
+        });
         onChange(getEditorState, setEditorState, value);
         this.setState({ selected: activeItem({ value }), isOpen: false });
       };
@@ -93,10 +100,16 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         selected: { Icon },
         isOpen,
       } = this.state;
-      const { isMobile, tabIndex, t } = this.props;
+      const { isMobile, tabIndex, t, helpers } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textDropDownButton_${textForHooks}`;
+      const onClick = () => {
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+        });
+        this.showOptions();
+      };
 
       return (
         <div className={this.styles.inlineToolbarDropdown_wrapper}>
@@ -105,7 +118,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
             theme={this.theme}
             isMobile={isMobile}
             dataHook={dataHookText}
-            onClick={this.showOptions}
+            onClick={onClick}
             tabIndex={tabIndex}
             tooltipText={tooltipText}
             tooltipOffset={{ y: -10 }}

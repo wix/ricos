@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ToolbarButton from './ToolbarButton';
 import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
-import { mergeStyles } from 'wix-rich-content-common';
+import { Helpers, mergeStyles } from 'wix-rich-content-common';
 
 type InlineToolbarButtonProps = {
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -20,6 +20,8 @@ type InlineToolbarButtonProps = {
   disabled?: boolean;
   buttonContent?: string;
   showArrowIcon?: boolean;
+  helpers?: Helpers;
+  pluginType?: string;
 };
 
 class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
@@ -70,6 +72,16 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
 
   preventDefault = event => event.preventDefault();
 
+  onClick: InlineToolbarButtonProps['onClick'] = e => {
+    const { onClick, helpers, pluginType, dataHook, isActive, children } = this.props;
+    helpers?.onToolbarButtonClick?.({
+      buttonName: dataHook || '',
+      pluginId: pluginType,
+      value: children ? undefined : String(!isActive),
+    });
+    onClick?.(e);
+  };
+
   render() {
     const {
       isActive,
@@ -81,7 +93,6 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
       disabled,
       buttonContent,
       showArrowIcon,
-      onClick,
     } = this.props;
     const { styles } = this;
     const arrowIcon = (
@@ -118,7 +129,7 @@ class InlineToolbarButton extends Component<InlineToolbarButtonProps> {
           aria-label={tooltipText}
           aria-pressed={isActive}
           data-hook={dataHook}
-          onClick={onClick}
+          onClick={this.onClick}
           className={styles.button}
           ref={forwardRef}
           onMouseDown={this.preventDefault}
