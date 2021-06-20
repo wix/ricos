@@ -16,12 +16,16 @@
     Click to see more.
   </summary>
 
-### :house: Internal
-- `ricos-viewer`
-  - [#2634](https://github.com/wix-incubator/rich-content/pull/2634) `onViewerLoaded` contains url field
 
 </details>
 <hr/>
+
+## 8.44.5 (Jun 20, 2021)
+### :house: Internal
+- `ricos-viewer`
+  - [#2634](https://github.com/wix-incubator/rich-content/pull/2634) `onViewerLoaded` contains `url` field
+- `ricos-editor`
+  - [#2632](https://github.com/wix-incubator/rich-content/pull/2632) `onOpenEditorSuccess` contains `toolbarType` field
 
 ## 8.44.4 (Jun 18, 2021)
 ### :bug: Bug Fix

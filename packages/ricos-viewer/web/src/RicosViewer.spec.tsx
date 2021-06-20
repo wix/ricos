@@ -83,7 +83,6 @@ describe('RicosViewer', () => {
     );
   });
   it('should trigger onViewerLoaded upon mount', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let args = {};
     const onViewerLoadedMock: BICallbacks['onViewerLoaded'] = params => (args = params);
     const fn = jest.fn(onViewerLoadedMock);
