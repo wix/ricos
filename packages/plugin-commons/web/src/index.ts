@@ -27,3 +27,5 @@ export { default as baseToolbarButton } from './Base/baseToolbarButton';
 
 // Components
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
+
+export { getSelectionStyles } from 'wix-rich-content-editor-common';
