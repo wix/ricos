@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
-import { mergeStyles, isSSR } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import {
   ClickOutside,
   InlineToolbarButton,
@@ -25,7 +25,7 @@ export default class BaseTextColor extends Component {
   }
 
   static getModalParent() {
-    return !isSSR ? document.querySelector('.DraftEditor-root').parentNode : undefined;
+    return document?.querySelector('.DraftEditor-root')?.parentNode;
   }
 
   openPanel = () => {
