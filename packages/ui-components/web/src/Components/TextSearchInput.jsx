@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SearchIcon, ClearIcon } from '../Icons';
 import styles from '../../statics/styles/text-search-input.scss';
 import { KEYS_CHARCODE } from '../consts';
+
 export default class TextSearchInput extends Component {
   componentDidMount() {
     this.input.focus();

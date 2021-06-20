@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import cls from 'classnames';
 import ReactModal from 'react-modal';
 
-import { Tabs, Tab, SettingsPanelFooter } from 'wix-rich-content-ui-components';
-import { FocusManager, Separator } from 'wix-rich-content-editor-common';
+import { Tabs, Tab, SettingsPanelFooter, Separator } from 'wix-rich-content-ui-components';
+import { FocusManager } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { PollContextProvider } from '../poll-context';

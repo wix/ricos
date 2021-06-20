@@ -4,7 +4,7 @@ import { DECORATION_MODE } from '../consts';
 import { getLangDir, ModalDecorations, Helpers, generateKey } from 'wix-rich-content-common';
 
 const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
-  if (!wrapping) {
+  if (wrapping.length === 0) {
     return <ModalElement {...modalProps} />;
   } else {
     const Wrapper = wrapping.shift();
@@ -49,16 +49,16 @@ class RichContentModal extends Component<Props> {
   };
 
   render() {
-    const { modalElement, modalDecorations, locale, ...modalProps } = this.props;
+    const { modalElement, modalDecorations = [], locale, ...modalProps } = this.props;
     const ModalElement = modalElement;
     const prepended = modalDecorations
-      ?.filter(({ decorationMode }) => decorationMode === DECORATION_MODE.PREPEND)
+      .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.PREPEND)
       .map(({ decorator }) => decorator);
     const wrapping = modalDecorations
-      ?.filter(({ decorationMode }) => decorationMode === DECORATION_MODE.WRAP)
+      .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.WRAP)
       .map(({ decorator }) => decorator);
     const appended = modalDecorations
-      ?.filter(({ decorationMode }) => decorationMode === DECORATION_MODE.APPEND)
+      .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.APPEND)
       .map(({ decorator }) => decorator);
 
     return (

@@ -466,6 +466,7 @@
 	"HeadingThreeButton_label": "Заголовок 3",
 	"CollapsibleList_CollapsibleListSettings_Tab_Design_TabName": "Дизайн",
 	"ButtonPlugin_Navbar_Update_button": "Зберегти",
+	"LinkPanel_Sponsored_Checkbox_Tooltip": "Let search engines know this link represents a paid ad, sponsorship, or paid agreement.",
 	"LinkPanelContainer_RemoveButton": "Вилучити посилання",
 	"ButtonModal_Link_Input_Placeholder": "Уведіть вебадресу",
 	"LinkPanelContainer_CancelButton": "Не скасовувати",
