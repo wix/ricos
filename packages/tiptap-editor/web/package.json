@@ -58,6 +58,7 @@
     "@tiptap/extension-underline": "^2.0.0-beta.13",
     "@tiptap/react": "2.0.0-beta.41",
     "@tiptap/starter-kit": "2.0.0-beta.51",
+    "fp-ts": "^2.10.5",
     "ricos-content": "8.44.2",
     "ricos-schema": "8.44.2",
     "wix-rich-content-plugin-divider": "8.44.2"
