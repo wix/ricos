@@ -2,22 +2,15 @@
 export * from './Icons';
 
 // Components
-export { default as InfoIcon } from './Components/InfoIcon';
-export { default as Checkbox } from './Components/Checkbox';
 export { default as ClickOutside } from './Components/ClickOutside/ClickOutside';
 export { default as useClickOutside } from './Components/ClickOutside/useClickOutside';
-
-export { default as Dropdown } from './Components/Dropdown';
 
 export { default as FocusManager } from './Components/FocusManager';
 export { default as LinkPanelWrapper } from './Components/LinkComponents/LinkPanelWrapper';
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
 export { default as LinkModal } from './Components/LinkComponents/LinkModal';
-export { default as RadioGroup } from './Components/RadioGroup';
-export { default as Separator } from './Components/Separator';
 export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
-export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -82,6 +75,7 @@ export {
   isCursorAtFirstLine,
   selectAllContent,
   setSelectionToBlock,
+  hasBlockType,
 } from './Utils/draftUtils';
 export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';

@@ -275,6 +275,7 @@ const gallery = {
       },
     ],
     styles: {
+      allowContextMenu: true,
       allowDownload: false,
       allowHover: true,
       allowSocial: false,
@@ -323,6 +324,7 @@ const gallery = {
       },
     ],
     styles: {
+      allowContextMenu: true,
       allowDownload: false,
       allowHover: true,
       allowSocial: false,

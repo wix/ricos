@@ -476,6 +476,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onPluginAction,
         onPluginChange: (pluginId: string, changeObj) =>
           helpers.onPluginChange?.(pluginId, changeObj, Version.currentVersion),
+        onToolbarButtonClick: args =>
+          helpers.onToolbarButtonClick?.({ ...args, version: Version.currentVersion }),
       },
       config,
       isMobile,
