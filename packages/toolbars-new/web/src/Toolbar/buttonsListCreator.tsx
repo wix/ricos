@@ -38,9 +38,8 @@ import {
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
 // import LinkPanelContainer from '../modals/link/LinkComponents/LinkPanelContainer';
-import { RicosEditorType } from 'ricos-editor';
 
-type editorCommands = ReturnType<RicosEditorType['getEditorCommands']>;
+type editorCommands = any;
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',

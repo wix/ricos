@@ -12,7 +12,6 @@ import ToolbarButton from './ToolbarButton';
 import ContextMenu from './ButtonComponents/ContextMenu';
 import { createButtonsList } from './buttonsListCreator';
 import { RichContentTheme, TranslationFunction, DesktopTextButtons } from 'wix-rich-content-common';
-import { RicosEditorType } from 'ricos-editor';
 
 type formattingToolbarButtonsKeysType =
   | DesktopTextButtons
@@ -29,7 +28,7 @@ interface ToolbarProps {
   buttons: unknown[];
   vertical?: boolean;
   formattingToolbarButtonsKeys?: formattingToolbarButtonsKeysType;
-  editorCommands: ReturnType<RicosEditorType['getEditorCommands']>;
+  editorCommands: any;
   plugins?: string[];
   setKeepOpen?: (boolean) => void;
   afterClick?: () => void;
