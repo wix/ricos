@@ -73,6 +73,7 @@ import {
   PluginEventParams,
   OnPluginAction,
   IMAGE_TYPE,
+  EditorCommands,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -225,7 +226,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   innerRCECustomStyleFn;
 
-  EditorCommands!: ReturnType<typeof createEditorCommands>;
+  EditorCommands!: EditorCommands;
 
   getSelectedText!: (editorState: EditorState) => string;
 

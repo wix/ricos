@@ -26,12 +26,9 @@ import {
   getAnchorableBlocks,
 } from 'wix-rich-content-editor-common';
 import {
-  PluginsDataMap,
-  DecorationsDataMap,
+  EditorCommands,
   GetEditorState,
   SetEditorState,
-  TextAlignment,
-  InlineStyle,
   COLLAPSIBLE_LIST_TYPE,
   ACTION_BUTTON_TYPE,
   LINK_BUTTON_TYPE,
@@ -92,44 +89,8 @@ import {
   RICOS_LINK_TYPE,
   RICOS_MENTION_TYPE,
   RICOS_CODE_BLOCK_TYPE,
-  HEADER_BLOCK,
-  BLOCKQUOTE,
-  UNSTYLED,
-  NUMBERED_LIST_TYPE,
-  BULLET_LIST_TYPE,
   UNSUPPORTED_BLOCKS_TYPE,
 } from 'wix-rich-content-common';
-
-type ColorType = typeof RICOS_TEXT_COLOR_TYPE | typeof RICOS_TEXT_HIGHLIGHT_TYPE;
-
-type PluginsList = string[];
-
-type TextBlockType =
-  | typeof UNSTYLED
-  | typeof NUMBERED_LIST_TYPE
-  | typeof BULLET_LIST_TYPE
-  | typeof CODE_BLOCK_TYPE
-  | typeof BLOCKQUOTE
-  | typeof HEADER_BLOCK.ONE
-  | typeof HEADER_BLOCK.TWO
-  | typeof HEADER_BLOCK.THREE
-  | typeof HEADER_BLOCK.FOUR
-  | typeof HEADER_BLOCK.FIVE
-  | typeof HEADER_BLOCK.SIX;
-
-type Selection = {
-  getIsFocused?: () => boolean;
-  getIsCollapsed?: () => boolean;
-};
-
-type draftSelection = {
-  anchorKey?: string;
-  anchorOffset?: number;
-  focusKey?: string;
-  focusOffset?: number;
-  isBackward?: boolean;
-  hasFocus?: boolean;
-};
 
 const TO_DRAFT_PLUGIN_TYPE_MAP = {
   [RICOS_DIVIDER_TYPE]: DIVIDER_TYPE,
@@ -213,12 +174,12 @@ export const createEditorCommands = (
   plugins,
   getEditorState: GetEditorState,
   setEditorState: SetEditorState
-) => {
-  const setBlockType = (type: TextBlockType) => {
+): EditorCommands => {
+  const setBlockType: EditorCommands['setBlockType'] = type => {
     setEditorState(RichUtils.toggleBlockType(getEditorState(), type));
   };
 
-  const _setSelection = (blockKey: string, selection: draftSelection): void =>
+  const _setSelection: EditorCommands['_setSelection'] = (blockKey, selection) =>
     setEditorState(
       EditorState.forceSelection(
         getEditorState(),
@@ -226,52 +187,71 @@ export const createEditorCommands = (
       )
     );
 
-  const normalizePluginsList = (pluginsList: PluginsList) =>
-    pluginsList.filter(pluginName => pluginName && !PluginsToExclude.includes[pluginName]);
-
-  const editorState = {
-    getSelection: (): Selection => {
+  const editorState: {
+    getSelection: EditorCommands['getSelection'];
+    getAnchorableBlocks: EditorCommands['getAnchorableBlocks'];
+    getColor: EditorCommands['getColor'];
+    getTextAlignment: EditorCommands['getTextAlignment'];
+    hasInlineStyle: EditorCommands['hasInlineStyle'];
+    isBlockTypeSelected: EditorCommands['isBlockTypeSelected'];
+    isUndoStackEmpty: EditorCommands['isUndoStackEmpty'];
+    isRedoStackEmpty: EditorCommands['isRedoStackEmpty'];
+    hasLinkInSelection: EditorCommands['hasLinkInSelection'];
+    getLinkDataInSelection: EditorCommands['getLinkDataInSelection'];
+    getSelectedData: EditorCommands['getSelectedData'];
+    getPluginsList: EditorCommands['getPluginsList'];
+  } = {
+    getSelection: () => {
       const { isCollapsed, getHasFocus } = getEditorState().getSelection();
       return { getIsCollapsed: isCollapsed, getIsFocused: getHasFocus };
     },
     getAnchorableBlocks: () => getAnchorableBlocks(getEditorState()),
-    getColor: (colorType: ColorType) => getColor(getEditorState(), colorType),
+    getColor: colorType => getColor(getEditorState(), colorType),
     getTextAlignment: () => getTextAlignment(getEditorState()),
-    hasInlineStyle: (style: InlineStyle) => hasInlineStyle(style, getEditorState()),
-    isBlockTypeSelected: (type: TextBlockType) => getBlockType(getEditorState()) === type,
+    hasInlineStyle: style => hasInlineStyle(style, getEditorState()),
+    isBlockTypeSelected: type => getBlockType(getEditorState()) === type,
     isUndoStackEmpty: () => getEditorState().getUndoStack().size === 0,
     isRedoStackEmpty: () => getEditorState().getRedoStack().size === 0,
     hasLinkInSelection: () => hasLinksInSelection(getEditorState()),
     getLinkDataInSelection: () => getLinkDataInSelection(getEditorState()),
     getSelectedData: () => getEntityData(getEditorState()) || {},
-    getPluginsList: (settings?: { isRicosSchema?: boolean }): PluginsList => {
+    getPluginsList: settings => {
       const { isRicosSchema } = settings || {};
       const pluginsList = plugins?.map(plugin =>
         isRicosSchema ? TO_RICOS_PLUGIN_TYPE_MAP[plugin.blockType] : plugin.blockType
       );
-      return normalizePluginsList(pluginsList);
+      return pluginsList.filter(
+        (pluginName: string) => pluginName && !PluginsToExclude.includes[pluginName]
+      );
     },
   };
 
-  const textFormattingCommands = {
-    undo: (): void => setEditorState(undo(getEditorState())),
-    redo: (): void => setEditorState(redo(getEditorState())),
-    toggleInlineStyle: (inlineStyle: InlineStyle): void =>
+  const textFormattingCommands: {
+    undo: EditorCommands['undo'];
+    redo: EditorCommands['redo'];
+    toggleInlineStyle: EditorCommands['toggleInlineStyle'];
+    setBlockType: EditorCommands['setBlockType'];
+    setTextAlignment: EditorCommands['setTextAlignment'];
+    _setSelection: EditorCommands['_setSelection'];
+  } = {
+    undo: () => setEditorState(undo(getEditorState())),
+    redo: () => setEditorState(redo(getEditorState())),
+    toggleInlineStyle: inlineStyle =>
       setEditorState(
         RichUtils.toggleInlineStyle(getEditorState(), getDraftInlineStyle(inlineStyle))
       ),
     setBlockType,
-    setTextAlignment: (textAlignment: TextAlignment): void =>
+    setTextAlignment: textAlignment =>
       setEditorState(setTextAlignment(getEditorState(), textAlignment)),
     _setSelection,
   };
 
-  const pluginsCommands = {
-    insertBlock: <K extends keyof PluginsDataMap>(
-      type: K,
-      data?: PluginsDataMap[K],
-      settings?: { isRicosSchema?: boolean }
-    ): string => {
+  const pluginsCommands: {
+    insertBlock: EditorCommands['insertBlock'];
+    setBlock: EditorCommands['setBlock'];
+    deleteBlock: EditorCommands['deleteBlock'];
+  } = {
+    insertBlock: (type, data, settings) => {
       const draftType = TO_DRAFT_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       const pluginData = createPluginData(data, settings?.isRicosSchema);
@@ -283,12 +263,7 @@ export const createEditorCommands = (
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
       return newBlock.getKey();
     },
-    setBlock: <K extends keyof PluginsDataMap>(
-      blockKey: string,
-      type: K,
-      data?: PluginsDataMap[K],
-      settings?: { isRicosSchema?: boolean }
-    ) => {
+    setBlock: (blockKey, type, data, settings) => {
       const draftType = TO_DRAFT_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       const pluginData = createPluginData(data, settings?.isRicosSchema);
@@ -300,12 +275,12 @@ export const createEditorCommands = (
     deleteBlock: (blockKey: string) => setEditorState(deleteBlock(getEditorState(), blockKey)),
   };
 
-  const decorationsCommands = {
-    insertDecoration: <K extends keyof DecorationsDataMap>(
-      type: K,
-      data?: DecorationsDataMap[K],
-      settings?: { isRicosSchema?: boolean }
-    ) => {
+  const decorationsCommands: {
+    insertDecoration: EditorCommands['insertDecoration'];
+    triggerDecoration: EditorCommands['triggerDecoration'];
+    deleteDecoration: EditorCommands['deleteDecoration'];
+  } = {
+    insertDecoration: (type, data, settings) => {
       const draftType = TO_DRAFT_PLUGIN_TYPE_MAP[type];
       const { [draftType]: createPluginData } = createPluginsDataMap;
       const pluginData = createPluginData ? createPluginData(data, settings?.isRicosSchema) : data;
@@ -314,17 +289,13 @@ export const createEditorCommands = (
         setEditorState(newEditorState);
       }
     },
-    triggerDecoration: <K extends keyof Pick<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
-      type: K
-    ) => {
+    triggerDecoration: type => {
       const newEditorState = triggerDecorationsMap[type]?.(getEditorState());
       if (newEditorState) {
         setEditorState(newEditorState);
       }
     },
-    deleteDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
-      type: K
-    ) => {
+    deleteDecoration: type => {
       const newEditorState = deleteDecorationsMapFuncs[type]?.(getEditorState());
       if (newEditorState) {
         setEditorState(newEditorState);

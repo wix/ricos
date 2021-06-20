@@ -163,8 +163,7 @@ type Settings = { isRicosSchema?: boolean };
 const isMention = type => type === RICOS_MENTION_TYPE;
 
 const setSelection = (ricosEditor, blockKey, selection) =>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (ricosEditor.getEditorCommands() as any)._setSelection(blockKey, selection);
+  ricosEditor.getEditorCommands()._setSelection(blockKey, selection);
 
 const toggleInlineStyleTest = result => inlineStyle =>
   it(`should ${result ? '' : 'not '}have ${inlineStyle} inline style`, () => {
