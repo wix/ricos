@@ -22,7 +22,6 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
   createCalcContentDiff,
-  getEditorContentSummary,
   getBlockType,
   COMMANDS,
   MODIFIERS,
@@ -236,15 +235,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     },
     normalize: {},
     plugins: [],
-  };
-
-  static publish = async (
-    postId: number,
-    editorState: EditorState,
-    callBack: (...args) => boolean = () => true
-  ) => {
-    const postSummary = getEditorContentSummary(editorState || {});
-    callBack({ postId, ...postSummary });
   };
 
   static getDerivedStateFromError(error: string) {
@@ -856,15 +846,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     context: this.contextualData,
     pubsub: this.commonPubsub,
   });
-
-  // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
-  publish = async (postId?: string) => {
-    if (!this.props.helpers?.onPublish) {
-      return;
-    }
-    const { pluginsCount, pluginsDetails } = getEditorContentSummary(this.state.editorState) || {};
-    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
-  };
 
   setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
 
