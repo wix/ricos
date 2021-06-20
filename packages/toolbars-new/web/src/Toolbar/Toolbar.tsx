@@ -28,7 +28,7 @@ interface ToolbarProps {
   buttons: unknown[];
   vertical?: boolean;
   formattingToolbarButtonsKeys?: formattingToolbarButtonsKeysType;
-  editorCommands: any;
+  editorCommands: any; //TODO: editorCommands type
   plugins?: string[];
   setKeepOpen?: (boolean) => void;
   afterClick?: () => void;
@@ -175,14 +175,16 @@ class Toolbar extends Component<ToolbarProps> {
   };
 
   renderNestedMenu = buttonProps => {
-    const { isMobile, tabIndex, t, theme } = this.props;
+    const { isMobile, tabIndex, t, theme, editorCommands } = this.props;
     const dropDownProps = {
       tabIndex,
       isMobile,
       t,
       ...buttonProps,
     };
-    return <NestedMenu dropDownProps={dropDownProps} theme={theme} />;
+    return (
+      <NestedMenu dropDownProps={dropDownProps} theme={theme} editorCommands={editorCommands} />
+    );
   };
 
   renderContextMenu = buttonProps => {

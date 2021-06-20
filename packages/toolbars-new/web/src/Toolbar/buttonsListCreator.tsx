@@ -39,7 +39,7 @@ import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
 // import LinkPanelContainer from '../modals/link/LinkComponents/LinkPanelContainer';
 
-type editorCommands = any;
+type editorCommands = any; //TODO: editorCommands type
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',
