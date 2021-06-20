@@ -100,6 +100,7 @@ describe('RicosViewer', () => {
         'wix-draft-plugin-gallery': 1,
         'wix-draft-plugin-giphy': 1,
       },
+      url: 'http://localhost/',
       version,
     });
   });
