@@ -73,7 +73,7 @@ class ImageComponent extends React.Component {
           setFocusToBlock={blockProps.setFocusToBlock}
           setComponentUrl={setComponentUrl}
         />
-        {!error && isLoading && <Loader type={'medium'} />}
+        {(isLoading || componentData.loading) && <Loader type={'medium'} />}
         {error && <MediaItemErrorMsg error={error} t={t} />}
       </>
     );
