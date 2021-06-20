@@ -1,0 +1,5 @@
+{
+    "main": "../dist/loadable/es/viewer-loadable.js",
+    "module": "../dist/loadable/es/viewer-loadable.js",
+    "types": "../dist/src/viewer.d.ts"
+}
