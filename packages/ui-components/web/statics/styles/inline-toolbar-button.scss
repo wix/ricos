@@ -41,6 +41,9 @@
     cursor: default;
     opacity: 0.4;
   }
+  @include phone {
+    padding: 5px 0;
+  }
 }
 
 .inlineToolbarButton_icon {
