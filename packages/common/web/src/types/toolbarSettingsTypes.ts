@@ -39,14 +39,15 @@ export interface ToolbarSettingsFunctions {
   onClick?: () => void;
 }
 
+export type TextGroupButtons = {
+  name: string;
+  buttons: string[];
+};
+
+export type DesktopTextButtons = (string | TextGroupButtons)[];
+
 export type TextButtons = {
-  desktop: (
-    | string
-    | {
-        name: string;
-        buttons: string[];
-      }
-  )[];
+  desktop: DesktopTextButtons;
   mobile: string[];
 };
 

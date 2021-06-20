@@ -59,8 +59,8 @@ import {
   UNSTYLED,
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
-  INDENT_TYPE,
-  LINE_SPACING_TYPE,
+  RICOS_INDENT_TYPE,
+  RICOS_LINE_SPACING_TYPE,
 } from 'wix-rich-content-common';
 
 type TextBlockType =
@@ -104,6 +104,8 @@ const PLUGIN_TYPE_MAP = {
   [IMAGE_TYPE]: IMAGE_TYPE,
   [VIDEO_TYPE]: VIDEO_TYPE,
   [POLL_TYPE]: POLL_TYPE,
+  [RICOS_INDENT_TYPE]: RICOS_INDENT_TYPE,
+  [RICOS_LINE_SPACING_TYPE]: RICOS_LINE_SPACING_TYPE,
 };
 
 const triggerDecorationsMap = {
@@ -113,8 +115,8 @@ const triggerDecorationsMap = {
 const insertDecorationsMap = {
   [RICOS_LINK_TYPE]: insertLinkAtCurrentSelection,
   [RICOS_MENTION_TYPE]: insertMention,
-  [INDENT_TYPE]: indentSelectedBlocks,
-  [LINE_SPACING_TYPE]: mergeBlockData,
+  [RICOS_INDENT_TYPE]: indentSelectedBlocks,
+  [RICOS_LINE_SPACING_TYPE]: mergeBlockData,
 };
 
 const deleteDecorationsMapFuncs = {
@@ -248,7 +250,7 @@ export const createEditorCommands = (
         setEditorState(newEditorState);
       }
     },
-    triggerDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_LINK_TYPE>>(
+    triggerDecoration: <K extends keyof Pick<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
       type: K
     ) => {
       const newEditorState = triggerDecorationsMap[type]?.(getEditorState());
@@ -256,7 +258,7 @@ export const createEditorCommands = (
         setEditorState(newEditorState);
       }
     },
-    deleteDecoration: <K extends keyof Omit<DecorationsDataMap, typeof RICOS_MENTION_TYPE>>(
+    deleteDecoration: <K extends keyof Pick<DecorationsDataMap, typeof RICOS_LINK_TYPE>>(
       type: K
     ) => {
       const newEditorState = deleteDecorationsMapFuncs[type]?.(getEditorState());

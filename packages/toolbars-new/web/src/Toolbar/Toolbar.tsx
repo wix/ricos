@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './Toolbar.scss';
 import { TOOLBAR_BUTTON_TYPES } from './consts';
@@ -11,7 +11,35 @@ import NestedMenu from './ButtonComponents/NestedMenu';
 import ToolbarButton from './ToolbarButton';
 import ContextMenu from './ButtonComponents/ContextMenu';
 import { createButtonsList } from './buttonsListCreator';
-class Toolbar extends Component {
+import { RichContentTheme, TranslationFunction, DesktopTextButtons } from 'wix-rich-content-common';
+import { RicosEditorType } from 'ricos-editor';
+
+type formattingToolbarButtonsKeysType =
+  | DesktopTextButtons
+  | {
+      ios?: string[] | undefined;
+      android?: string[] | undefined;
+    }
+  | undefined;
+
+interface ToolbarProps {
+  isMobile?: boolean;
+  tabIndex?: number;
+  t: TranslationFunction;
+  buttons: unknown[];
+  vertical?: boolean;
+  formattingToolbarButtonsKeys?: formattingToolbarButtonsKeysType;
+  editorCommands: ReturnType<RicosEditorType['getEditorCommands']>;
+  plugins?: string[];
+  setKeepOpen?: (boolean) => void;
+  afterClick?: () => void;
+  nestedMenu?: boolean;
+  theme?: RichContentTheme;
+}
+
+class Toolbar extends Component<ToolbarProps> {
+  theme: RichContentTheme;
+
   constructor(props) {
     super(props);
     const buttonTheme = props.theme?.buttonStyles || {};
@@ -45,11 +73,11 @@ class Toolbar extends Component {
 
   renderSeparator = () => <div className={styles.separator} />;
 
-  handleDropDownClick = onClick => () => {
-    if (this.buttonRef) {
-      onClick(this.buttonRef);
-    }
-  };
+  // handleDropDownClick = onClick => () => {
+  //   if (this.buttonRef) {
+  //     onClick(this.buttonRef);
+  //   }
+  // };
 
   renderDropDown = buttonProps => {
     const { isMobile, tabIndex, setKeepOpen } = this.props;
@@ -63,15 +91,15 @@ class Toolbar extends Component {
     return <DropdownButton {...dropDownProps} />;
   };
 
-  renderButtonGroup = ({ buttonList, ...rest }) => {
-    const { isMobile, tabIndex } = this.props;
+  renderButtonGroup = ({ buttonList, tooltip, ...rest }) => {
+    const { theme, isMobile, tabIndex } = this.props;
     const dropDownProps = {
       tabIndex,
       isMobile,
-      theme: this.theme,
+      tooltip,
       ...rest,
     };
-    return <GroupButton buttons={Object.values(buttonList)} {...dropDownProps} />;
+    return <GroupButton buttons={Object.values(buttonList)} theme={theme} {...dropDownProps} />;
   };
 
   renderColorPicker = buttonProps => {
@@ -123,15 +151,15 @@ class Toolbar extends Component {
   };
 
   renderModal = buttonProps => {
-    const { isMobile, tabIndex, t, setKeepOpen } = this.props;
+    const { theme, isMobile, tabIndex, t, setKeepOpen } = this.props;
     const dropDownProps = {
       tabIndex,
       isMobile,
-      theme: this.theme,
       ...buttonProps,
     };
     return (
       <ModalButton
+        theme={theme}
         modal={buttonProps.modal}
         onSelect={buttonProps.onSelect}
         onSave={buttonProps.onSave}
@@ -148,15 +176,14 @@ class Toolbar extends Component {
   };
 
   renderNestedMenu = buttonProps => {
-    const { isMobile, tabIndex, t } = this.props;
+    const { isMobile, tabIndex, t, theme } = this.props;
     const dropDownProps = {
       tabIndex,
       isMobile,
       t,
-      theme: this.theme,
       ...buttonProps,
     };
-    return <NestedMenu dropDownProps={dropDownProps} />;
+    return <NestedMenu dropDownProps={dropDownProps} theme={theme} />;
   };
 
   renderContextMenu = buttonProps => {
@@ -186,7 +213,7 @@ class Toolbar extends Component {
   };
 
   separateByGaps = buttons => {
-    const separatedButtons = [[]];
+    const separatedButtons: any = [[]];
     buttons.forEach(button => {
       if (button.type !== TOOLBAR_BUTTON_TYPES.GAP) {
         separatedButtons[separatedButtons.length - 1].push(button);
@@ -237,20 +264,5 @@ class Toolbar extends Component {
     });
   }
 }
-
-Toolbar.propTypes = {
-  theme: PropTypes.object,
-  isMobile: PropTypes.bool,
-  t: PropTypes.func,
-  tabIndex: PropTypes.number,
-  buttons: PropTypes.array,
-  nestedMenu: PropTypes.bool,
-  vertical: PropTypes.bool,
-  afterClick: PropTypes.func,
-  setKeepOpen: PropTypes.func,
-  editorCommands: PropTypes.object,
-  formattingToolbarButtonsKeys: PropTypes.array,
-  plugins: PropTypes.array,
-};
 
 export default Toolbar;

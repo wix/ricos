@@ -1,13 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent, ReactElement } from 'react';
 import styles from './ToolbarContainer.scss';
 import { getVisibleSelectionRect, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { debounce } from 'lodash';
 
 const TOOLBAR_OFFSET = 5;
 
-class FloatingToolbarContainer extends PureComponent {
+interface ToolbarContainerProps {
+  children: ReactElement;
+  isMobile?: boolean;
+  showFormattingToolbar: boolean;
+  removeToolbarFocus: () => void;
+}
+
+interface State {
+  toolbarPosition: Record<string, any> | undefined;
+  isVisible: boolean;
+  keepOpen?: boolean;
+}
+
+class FloatingToolbarContainer extends PureComponent<ToolbarContainerProps, State> {
+  toolbarContainerRef?: React.RefObject<any>;
+
   constructor(props) {
     super(props);
     this.toolbarContainerRef = React.createRef();
@@ -32,7 +47,7 @@ class FloatingToolbarContainer extends PureComponent {
   };
 
   getRelativePosition() {
-    if (!this.toolbarContainerRef.current) {
+    if (!this.toolbarContainerRef?.current) {
       return { top: 0, left: 0 };
     }
     const relativeParent = this.getRelativeParent(this.toolbarContainerRef.current.parentElement);
@@ -81,7 +96,7 @@ class FloatingToolbarContainer extends PureComponent {
     if (
       !reactModalElement &&
       !pluginMenuElement &&
-      (`${top}px` !== toolbarPosition.top || `${left}px` !== toolbarPosition.left) &&
+      (`${top}px` !== toolbarPosition?.top || `${left}px` !== toolbarPosition?.left) &&
       !keepOpen &&
       !toolbarOnFocus
     ) {
@@ -124,18 +139,10 @@ class FloatingToolbarContainer extends PureComponent {
         data-id="floating-toolbar"
         onKeyDown={this.onKeyDown}
       >
-        {React.cloneElement(children, { setKeepOpen: this.setKeepOpen })}
+        {React.cloneElement(React.Children.only(children), { setKeepOpen: this.setKeepOpen })}
       </div>
     );
   }
 }
-
-FloatingToolbarContainer.propTypes = {
-  children: PropTypes.any,
-  isMobile: PropTypes.bool,
-  showFormattingToolbar: PropTypes.bool,
-  // isInnerRCE: PropTypes.bool,
-  removeToolbarFocus: PropTypes.func,
-};
 
 export default FloatingToolbarContainer;

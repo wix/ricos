@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable fp/no-loops */
-import React from 'react';
+import React, { FC } from 'react';
 import {
   CODE_BLOCK_TYPE,
   BLOCKQUOTE,
   NUMBERED_LIST_TYPE,
   BULLET_LIST_TYPE,
-  INDENT_TYPE,
-  LINE_SPACING_TYPE,
+  RICOS_INDENT_TYPE,
+  RICOS_LINE_SPACING_TYPE,
+  InlineStyle,
+  DecorationsDataMap,
+  TextAlignment,
 } from 'wix-rich-content-common';
 import {
   BoldIcon,
@@ -34,6 +38,9 @@ import {
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
 // import LinkPanelContainer from '../modals/link/LinkComponents/LinkPanelContainer';
+import { RicosEditorType } from 'ricos-editor';
+
+type editorCommands = ReturnType<RicosEditorType['getEditorCommands']>;
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',
@@ -45,7 +52,27 @@ export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   unstyled: 'P',
 });
 
-const buttonsFullData = {
+type buttonsFullDataType = {
+  type: string;
+  plugin?: string;
+  icon?: any;
+  dataHook?: string;
+  tooltip?: string;
+  label?: string;
+  arrow?: boolean;
+  action?: string;
+  modal?: (() => JSX.Element) | FC<any>;
+  onSave?: string;
+  saveState?: boolean;
+  onCancel?: string;
+  onChange?: string;
+  saveSelection?: boolean;
+  unstyled?: { icon: any; action: string };
+  'header-two'?: { icon: any; action: string };
+  'header-three'?: { icon: any; action: string };
+};
+
+const buttonsFullData: Record<string, buttonsFullDataType> = {
   HEADINGS: {
     plugin: 'wix-rich-content-plugin-headings',
     icon: () => null,
@@ -53,7 +80,6 @@ const buttonsFullData = {
     tooltip: 'Text style',
     label: 'HEADINGS',
     arrow: true,
-    action: 'HEADINGS',
     type: 'modal',
     modal: props => <HeadingsDropDownPanel {...props} translateHeading={translateHeading} />,
     onSave: 'HEADINGS',
@@ -65,21 +91,18 @@ const buttonsFullData = {
     icon: BoldIcon,
     dataHook: 'textInlineStyleButton_BOLD',
     tooltip: 'Bold',
-    action: 'Bold',
     type: 'button',
   },
   Italic: {
     icon: ItalicIcon,
     dataHook: 'textInlineStyleButton_ITALIC',
     tooltip: 'Italic',
-    action: 'Italic',
     type: 'button',
   },
   Underline: {
     icon: UnderlineIcon,
     dataHook: 'textInlineStyleButton_UNDERLINE',
     tooltip: 'Underline',
-    action: 'Underline',
     type: 'button',
   },
   TEXT_COLOR: {
@@ -119,7 +142,6 @@ const buttonsFullData = {
     icon: BlockQuoteIcon,
     dataHook: 'textBlockStyleButton_Quote',
     tooltip: 'Quote',
-    action: BLOCKQUOTE,
     type: 'button',
   },
   Alignment: {
@@ -131,42 +153,36 @@ const buttonsFullData = {
     icon: AlignTextCenterIcon,
     dataHook: 'textAlignmentButton_center',
     tooltip: 'Align center',
-    action: 'center',
     type: 'button',
   },
   AlignLeft: {
     icon: AlignLeftIcon,
     dataHook: 'textAlignmentButton_left',
     tooltip: 'Align left',
-    action: 'left',
     type: 'button',
   },
   AlignRight: {
     icon: AlignRightIcon,
     dataHook: 'textAlignmentButton_right',
     tooltip: 'Align right',
-    action: 'right',
     type: 'button',
   },
   Justify: {
     icon: AlignJustifyIcon,
     dataHook: 'textAlignmentButton_justify',
     tooltip: 'Justify',
-    action: 'justify',
     type: 'button',
   },
   OrderedList: {
     icon: OrderedListIcon,
     dataHook: 'textBlockStyleButton_NumberedList',
     tooltip: 'Numbered list',
-    action: NUMBERED_LIST_TYPE,
     type: 'button',
   },
   UnorderedList: {
     icon: UnorderedListIcon,
     dataHook: 'textBlockStyleButton_BulletedList',
     tooltip: 'Bulleted list',
-    action: BULLET_LIST_TYPE,
     type: 'button',
   },
   DECREASE_INDENT: {
@@ -174,7 +190,6 @@ const buttonsFullData = {
     icon: decreaseIndentPluginIcon,
     dataHook: 'DECREASE_INDENT',
     tooltip: 'Decrease indent',
-    action: INDENT_TYPE,
     type: 'button',
   },
   INCREASE_INDENT: {
@@ -182,7 +197,6 @@ const buttonsFullData = {
     icon: increaseIndentPluginIcon,
     dataHook: 'INCREASE_INDENT',
     tooltip: 'Increase indent',
-    action: INDENT_TYPE,
     type: 'button',
   },
   SPOILER: {
@@ -190,7 +204,6 @@ const buttonsFullData = {
     icon: SpoilerButtonIcon,
     dataHook: 'spoilerButton',
     tooltip: 'Spoiler',
-    action: 'spoiler',
     type: 'button',
   },
   LINE_SPACING: {
@@ -198,7 +211,6 @@ const buttonsFullData = {
     icon: LineSpacingIcon,
     dataHook: 'LINE_SPACING',
     tooltip: 'Line spacing',
-    action: LINE_SPACING_TYPE,
     type: 'modal',
     modal: props => <Panel {...props} />,
     onSave: 'LINE_SPACING',
@@ -222,21 +234,47 @@ const buttonsFullData = {
     icon: CodeBlockIcon,
     dataHook: 'CODE_BLOCK',
     tooltip: 'Code snippet',
-    action: CODE_BLOCK_TYPE,
     type: 'button',
   },
 };
 
-const inlineStyleButtons = ['Bold', 'Italic', 'Underline', 'SPOILER'];
+const inlineStyleButtons: Record<string, InlineStyle> = {
+  Bold: 'bold',
+  Italic: 'italic',
+  Underline: 'underline',
+  SPOILER: 'spoiler',
+};
 
-const textBlockButtons = ['CODE_BLOCK', 'Blockquote', 'OrderedList', 'UnorderedList', 'HEADINGS'];
+const textBlockButtons: Record<string, string> = {
+  CODE_BLOCK: CODE_BLOCK_TYPE,
+  Blockquote: BLOCKQUOTE,
+  OrderedList: NUMBERED_LIST_TYPE,
+  UnorderedList: BULLET_LIST_TYPE,
+  HEADINGS: 'HEADINGS',
+};
 
-const decorationButtons = ['DECREASE_INDENT', 'INCREASE_INDENT', 'LINE_SPACING'];
+const decorationButtons: Record<string, keyof DecorationsDataMap> = {
+  DECREASE_INDENT: RICOS_INDENT_TYPE,
+  INCREASE_INDENT: RICOS_INDENT_TYPE,
+  LINE_SPACING: RICOS_LINE_SPACING_TYPE,
+};
 
-export const createButtonsList = (formattingButtonsKeys, editorCommands, t, plugins) => {
+const setTextAlignment: Record<string, TextAlignment> = {
+  AlignCenter: 'center',
+  AlignLeft: 'left',
+  AlignRight: 'right',
+  Justify: 'justify',
+};
+
+export const createButtonsList = (
+  formattingButtonsKeys,
+  editorCommands: editorCommands,
+  t,
+  plugins
+) => {
   const buttonsList = [];
   formattingButtonsKeys.forEach((buttonKey, index) => {
-    handleButtonName(buttonsList, buttonKey, index, editorCommands);
+    handleButtonName(buttonsList, buttonKey, index);
     handleButtonType(buttonsList, index);
     handleButtonIcon(buttonsList, index);
     handleButtonDataHook(buttonsList, index);
@@ -269,7 +307,7 @@ const filterButtonsByPlugins = (buttonsList, plugins) => {
   });
 };
 
-const handleButtonOnChange = (buttonsList, index, editorCommands) => {
+const handleButtonOnChange = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onChange) {
     const buttonName = buttonsList[index].name;
     if (buttonName === 'LINE_SPACING') {
@@ -280,7 +318,7 @@ const handleButtonOnChange = (buttonsList, index, editorCommands) => {
   }
 };
 
-const handleButtonOnCancel = (buttonsList, index, editorCommands) => {
+const handleButtonOnCancel = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onCancel) {
     const buttonName = buttonsList[index].name;
     if (buttonName === 'LINE_SPACING') {
@@ -289,7 +327,7 @@ const handleButtonOnCancel = (buttonsList, index, editorCommands) => {
   }
 };
 
-const handleButtonSaveState = (buttonsList, index, editorCommands) => {
+const handleButtonSaveState = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].saveState) {
     buttonsList[index].saveState = () => {
       editorCommands.saveSelectionState();
@@ -298,7 +336,7 @@ const handleButtonSaveState = (buttonsList, index, editorCommands) => {
   }
 };
 
-const handleButtonSaveSelection = (buttonsList, index, editorCommands) => {
+const handleButtonSaveSelection = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].saveSelection) {
     buttonsList[index].saveSelection = () => {
       editorCommands.saveSelectionState();
@@ -306,7 +344,7 @@ const handleButtonSaveSelection = (buttonsList, index, editorCommands) => {
   }
 };
 
-const handleTitleButton = (buttonsList, index, editorCommands) => {
+const handleTitleButton = (buttonsList, index, editorCommands: editorCommands) => {
   const currentHeading = getCurrentHeading(editorCommands);
   let headingKey;
   switch (currentHeading) {
@@ -326,12 +364,12 @@ const handleTitleButton = (buttonsList, index, editorCommands) => {
   buttonsList[index].isActive = () => headingKey === 'header-three' || headingKey === 'header-two';
 };
 
-const handleButtonOnSave = (buttonsList, index, editorCommands) => {
+const handleButtonOnSave = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onSave) {
     const buttonName = buttonsList[index].name;
-    if (textBlockButtons.includes(buttonName)) {
+    if (Object.keys(textBlockButtons).includes(buttonName)) {
       buttonsList[index].onSave = type => editorCommands.setBlockType(type);
-    } else if (decorationButtons.includes(buttonName)) {
+    } else if (Object.keys(decorationButtons).includes(buttonName)) {
       buttonsList[index].onSave = type => {
         if (buttonName === 'LINE_SPACING') {
           if (type) {
@@ -346,19 +384,18 @@ const handleButtonOnSave = (buttonsList, index, editorCommands) => {
   }
 };
 
-const handleButtonModal = (buttonsList, index, editorCommands) => {
+const handleButtonModal = (buttonsList, index, editorCommands: editorCommands) => {
   const buttonName = buttonsList[index].name;
   if (buttonsFullData[buttonName].modal) {
     buttonsList[index].modal = buttonsFullData[buttonName].modal;
-    if (buttonsFullData[buttonName].action === 'HEADINGS') {
+    if (buttonName === 'HEADINGS') {
       const Modal = buttonsFullData[buttonName].modal;
-      buttonsList[index].modal = props => (
-        <Modal {...props} heading={getCurrentHeading(editorCommands)} />
-      );
+      buttonsList[index].modal = props =>
+        Modal && <Modal {...props} heading={getCurrentHeading(editorCommands)} />;
     } else if (buttonName === 'LINE_SPACING') {
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
-      buttonsList[index].modal = props => <Modal {...props} spacing={spacing} />;
+      buttonsList[index].modal = props => Modal && <Modal {...props} spacing={spacing} />;
     }
   }
 };
@@ -367,36 +404,35 @@ const handleButtonIsDisabled = (buttonsList, index) => {
   buttonsList[index].isDisabled = () => false;
 };
 
-const handleButtonIsActive = (buttonsList, index, editorCommands) => {
+const handleButtonIsActive = (buttonsList, index, editorCommands: editorCommands) => {
   const buttonName = buttonsList[index].name;
-  if (inlineStyleButtons.includes(buttonName)) {
+  if (Object.keys(inlineStyleButtons).includes(buttonName)) {
     buttonsList[index].isActive = () =>
-      editorCommands.hasInlineStyle(buttonsFullData[buttonName].action);
-  } else if (textBlockButtons.includes(buttonName)) {
+      editorCommands.hasInlineStyle(inlineStyleButtons[buttonName]);
+  } else if (Object.keys(textBlockButtons).includes(buttonName)) {
     buttonsList[index].isActive = () =>
-      editorCommands.isBlockTypeSelected(buttonsFullData[buttonName].action);
+      editorCommands.isBlockTypeSelected(textBlockButtons[buttonName]);
   } else {
     buttonsList[index].isActive = () => false;
   }
 };
 
-const handleButtonOnClick = (buttonsList, index, editorCommands) => {
+const handleButtonOnClick = (buttonsList, index, editorCommands: editorCommands) => {
   const buttonName = buttonsList[index].name;
-  if (inlineStyleButtons.includes(buttonName)) {
+  if (Object.keys(inlineStyleButtons).includes(buttonName)) {
     buttonsList[index].onClick = () =>
-      editorCommands.toggleInlineStyle(buttonsFullData[buttonName].action);
-  } else if (textBlockButtons.includes(buttonName)) {
-    buttonsList[index].onClick = () =>
-      editorCommands.setBlockType(buttonsFullData[buttonName].action);
-  } else if (decorationButtons.includes(buttonName)) {
+      editorCommands.toggleInlineStyle(inlineStyleButtons[buttonName]);
+  } else if (Object.keys(textBlockButtons).includes(buttonName)) {
+    buttonsList[index].onClick = () => editorCommands.setBlockType(textBlockButtons[buttonName]);
+  } else if (Object.keys(decorationButtons).includes(buttonName)) {
     if (buttonName === 'DECREASE_INDENT') {
       buttonsList[index].onClick = () =>
-        editorCommands.insertDecoration(buttonsFullData[buttonName].action, -1);
+        editorCommands.insertDecoration(decorationButtons[buttonName], -1);
     } else if (buttonName === 'INCREASE_INDENT') {
       buttonsList[index].onClick = () =>
-        editorCommands.insertDecoration(buttonsFullData[buttonName].action, 1);
+        editorCommands.insertDecoration(decorationButtons[buttonName], 1);
     }
-  } else if (buttonsFullData[buttonName].action === 'LINK') {
+  } else if (buttonName === 'LINK') {
     buttonsList[index].onClick = () => {
       // eslint-disable-next-line no-console
       console.log('hasLinkInSelection = ', editorCommands.hasLinkInSelection());
@@ -416,10 +452,11 @@ const handleButtonArrow = (buttonsList, index) => {
   }
 };
 
-const handleButtonLabel = (buttonsList, index, editorCommands, t) => {
-  if (buttonsFullData[buttonsList[index].name].label) {
-    buttonsList[index].getLabel = () => buttonsFullData[buttonsList[index].name].label;
-    if (buttonsFullData[buttonsList[index].name].action === 'HEADINGS') {
+const handleButtonLabel = (buttonsList, index, editorCommands: editorCommands, t) => {
+  const buttonName = buttonsList[index].name;
+  if (buttonsFullData[buttonName].label) {
+    buttonsList[index].getLabel = () => buttonsFullData[buttonName].label;
+    if (buttonName === 'HEADINGS') {
       buttonsList[index].getLabel = () => translateHeading(getCurrentHeading(editorCommands), t);
     }
   }
@@ -460,7 +497,7 @@ const handleButtonName = (buttonsList, buttonKey, index) => {
   }
 };
 
-const handleGroupButtons = (buttonsList, buttonKey, index, editorCommands) => {
+const handleGroupButtons = (buttonsList, buttonKey, index, editorCommands: editorCommands) => {
   if (buttonKey.buttons) {
     buttonsList[index].buttonList = {};
     buttonKey.buttons.forEach(innerButtonKey => {
@@ -470,7 +507,12 @@ const handleGroupButtons = (buttonsList, buttonKey, index, editorCommands) => {
   }
 };
 
-const addGroupButtonsData = (buttonsList, index, innerButtonKey, editorCommands) => {
+const addGroupButtonsData = (
+  buttonsList,
+  index,
+  innerButtonKey,
+  editorCommands: editorCommands
+) => {
   const currentInnerButton = buttonsList[index].buttonList[innerButtonKey];
   if (buttonsFullData[innerButtonKey].type) {
     currentInnerButton.type = buttonsFullData[innerButtonKey].type;
@@ -484,8 +526,9 @@ const addGroupButtonsData = (buttonsList, index, innerButtonKey, editorCommands)
   if (buttonsFullData[innerButtonKey].tooltip) {
     currentInnerButton.tooltip = buttonsFullData[innerButtonKey].tooltip;
   }
+  //TODO: check type of button (Alignment)
   currentInnerButton.onClick = () =>
-    editorCommands.setTextAlignment(buttonsFullData[innerButtonKey].action);
+    editorCommands.setTextAlignment(setTextAlignment[innerButtonKey]);
   currentInnerButton.isActive = () =>
     editorCommands.getTextAlignment() === buttonsFullData[innerButtonKey].action;
   currentInnerButton.isDisabled = () => false;
@@ -500,7 +543,7 @@ const addGroupButtonsData = (buttonsList, index, innerButtonKey, editorCommands)
 //   return { url, anchor, targetBlank, nofollow, ariaProps };
 // };
 
-const getCurrentHeading = editorCommands => {
+const getCurrentHeading = (editorCommands: editorCommands) => {
   let currentHeading = 'P';
   Object.keys(HEADING_TYPE_TO_ELEMENT).forEach(headingType => {
     if (editorCommands.isBlockTypeSelected(headingType)) {
@@ -516,7 +559,7 @@ const translateHeading = (option = 'P', t) => {
     : t('FormattingToolbar_TextStyle_Heading', { number: option.slice(-1) });
 };
 
-const updateSpacing = (type, editorCommands, buttonName) => {
+const updateSpacing = (type, editorCommands: editorCommands, buttonName) => {
   const dynamicStyles = type;
-  editorCommands.insertDecoration(buttonsFullData[buttonName].action, { dynamicStyles });
+  editorCommands.insertDecoration(decorationButtons[buttonName], { dynamicStyles });
 };

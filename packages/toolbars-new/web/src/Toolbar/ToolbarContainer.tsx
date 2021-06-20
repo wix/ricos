@@ -1,9 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactElement } from 'react';
 import styles from './ToolbarContainer.scss';
 
-class ToolbarContainer extends Component {
+interface ToolbarContainerProps {
+  toolbarPosition: Record<string, any>;
+  children: ReactElement;
+}
+
+interface State {
+  toolbarPosition: Record<string, any> | undefined;
+}
+
+class ToolbarContainer extends Component<ToolbarContainerProps, State> {
+  toolbarContainerRef?: HTMLDivElement | null;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +35,7 @@ class ToolbarContainer extends Component {
 
   setToolbarContainerRef = ref => (this.toolbarContainerRef = ref);
 
-  focus = () => this.toolbarContainerRef.focus();
+  focus = () => this.toolbarContainerRef?.focus();
 
   getToolbarPosition = () => {
     const { toolbarPosition } = this.props;
@@ -64,10 +75,5 @@ class ToolbarContainer extends Component {
     );
   }
 }
-
-ToolbarContainer.propTypes = {
-  toolbarPosition: PropTypes.object,
-  children: PropTypes.any,
-};
 
 export default ToolbarContainer;

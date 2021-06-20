@@ -1,14 +1,44 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ClickOutside from 'react-click-outsider';
 import styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton';
 import { ColorPicker } from 'wix-rich-content-plugin-commons';
+import { RichContentTheme, TranslationFunction } from 'wix-rich-content-common';
 
-class ColorPickerButton extends Component {
+type dropDownPropsType = {
+  tooltip: string;
+  isActive: () => boolean;
+  getIcon: () => any;
+};
+
+interface ColorPickerButtonProps {
+  theme?: RichContentTheme;
+  t: TranslationFunction;
+  dropDownProps: dropDownPropsType;
+  isMobile?: boolean;
+  getCurrentColor: () => string;
+  onColorAdded: (string) => void;
+  onChange: (string) => void;
+  settings: any;
+  defaultPalette: string[];
+  getUserColors: () => string[];
+  onResetColor: () => void;
+  nestedMenu?: boolean;
+  afterClick?: () => void;
+  getDefaultColors: () => string;
+}
+
+interface State {
+  isModalOpen: boolean;
+  currentColor: string;
+  userColors: string[];
+}
+
+class ColorPickerButton extends Component<ColorPickerButtonProps, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,8 +94,8 @@ class ColorPickerButton extends Component {
       return this.props.defaultPalette;
     }
     return Object.values(colorScheme)
-      .sort((entry1, entry2) => (entry1.index > entry2.index ? 1 : -1))
-      .map(entry => entry.color);
+      .sort((entry1: any, entry2: any) => (entry1.index > entry2.index ? 1 : -1))
+      .map((entry: any) => entry.color);
   };
 
   render() {
@@ -129,22 +159,5 @@ class ColorPickerButton extends Component {
     );
   }
 }
-
-ColorPickerButton.propTypes = {
-  getCurrentColor: PropTypes.string,
-  onColorAdded: PropTypes.func,
-  onChange: PropTypes.func,
-  settings: PropTypes.object,
-  t: PropTypes.func,
-  isMobile: PropTypes.bool,
-  defaultPalette: PropTypes.array,
-  getUserColors: PropTypes.func,
-  getDefaultColors: PropTypes.func,
-  dropDownProps: PropTypes.Object,
-  theme: PropTypes.object,
-  onResetColor: PropTypes.func,
-  nestedMenu: PropTypes.bool,
-  afterClick: PropTypes.func,
-};
 
 export default ColorPickerButton;

@@ -1,36 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
 import { isElementOutOfWindow } from 'wix-rich-content-editor-common';
+import { RichContentTheme } from 'wix-rich-content-common';
 
-class ContextMenu extends PureComponent {
-  static propTypes = {
-    isMobile: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    buttonList: PropTypes.array,
-    activeItem: PropTypes.func,
-    tooltip: PropTypes.string,
-    dataHook: PropTypes.string,
-    getButtonStyles: PropTypes.func,
-    disableState: PropTypes.bool,
-    isActive: PropTypes.func,
-    isDisabled: PropTypes.func,
-    getIcon: PropTypes.func,
-    theme: PropTypes.object,
-  };
+interface ContextMenuProps {
+  isMobile: boolean;
+  tabIndex?: number;
+  tooltip: string;
+  dataHook: string;
+  isActive: () => boolean;
+  isDisabled: () => boolean;
+  getIcon: () => any;
+  theme: RichContentTheme;
+  buttonList: any[];
+}
+
+interface State {
+  isOpen: boolean;
+  position: { right: number } | { left: number } | null;
+}
+
+class ContextMenu extends PureComponent<ContextMenuProps, State> {
+  modalRef?: HTMLDivElement | null;
 
   static defaultProps = {
     isActive: () => false,
     isDisabled: () => false,
-    getButtonStyles: () => ({}),
   };
 
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
+      position: null,
     };
   }
 
@@ -102,14 +107,13 @@ class ContextMenu extends PureComponent {
   };
 
   render() {
-    const { tooltip, dataHook, getButtonStyles, isMobile, getIcon, tabIndex, theme } = this.props;
+    const { tooltip, dataHook, isMobile, getIcon, tabIndex, theme } = this.props;
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
           <ToolbarButton
             isActive={false}
             onClick={this.toggleOptions}
-            getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}
             isMobile={isMobile}

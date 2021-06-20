@@ -245,11 +245,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       const formattingToolbarSetting = getToolbarSettings({ textButtons }).find(
         toolbar => toolbar?.name === 'INLINE'
       );
-      const allFormattingToolbarButtons = formattingToolbarSetting?.getButtons?.();
+      const allFormattingToolbarButtons = formattingToolbarSetting?.getButtons?.() as TextButtons;
       const formattingToolbarButtons = isMobile
         ? allFormattingToolbarButtons?.mobile
         : allFormattingToolbarButtons?.desktop;
-      const plugins = this.getPluginsKey();
+      const plugins: string[] = this.getPluginsKey();
       const ToolbarToRender = (
         <Toolbar
           theme={theme}

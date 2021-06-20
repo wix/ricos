@@ -1,26 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outsider';
-import ToolbarButton from '../ToolbarButton.jsx';
+import ToolbarButton, { ToolbarButtonType } from '../ToolbarButton';
+import { RichContentTheme } from 'wix-rich-content-common';
 
-class DropdownButton extends Component {
-  static propTypes = {
-    isMobile: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    getLabel: PropTypes.func,
-    getIcon: PropTypes.func,
-    onClick: PropTypes.func,
-    tooltip: PropTypes.string,
-    dataHook: PropTypes.string,
-    isActive: PropTypes.func,
-    isDisabled: PropTypes.func,
-    arrow: PropTypes.bool,
-    onClose: PropTypes.func,
-    theme: PropTypes.object,
-    getButtonStyles: PropTypes.func,
-    disabled: PropTypes.bool,
-    setKeepOpen: PropTypes.func,
-  };
+interface DropdownButtonProps {
+  isMobile: boolean;
+  tabIndex?: number;
+  buttons: unknown[];
+  tooltip: string;
+  dataHook: string;
+  isActive: () => boolean;
+  isDisabled: () => boolean;
+  theme: RichContentTheme;
+  getLabel?: () => string;
+  getIcon: () => any;
+  onClick: (any) => void;
+  arrow?: boolean;
+  onClose: () => void;
+  setKeepOpen?: (boolean) => void;
+}
+
+class DropdownButton extends Component<DropdownButtonProps> {
+  isDropDownOpen: boolean;
+
+  buttonRef?: ToolbarButtonType | null;
 
   constructor(props) {
     super(props);
@@ -53,13 +57,11 @@ class DropdownButton extends Component {
       isActive,
       arrow = false,
       onClose = () => {},
-      getButtonStyles,
-      disabled,
       isDisabled,
       theme,
       getLabel,
     } = this.props;
-    const disabledState = isDisabled() || disabled;
+    const disabledState = isDisabled();
     const buttonProps = arrow && getLabel ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
       <div>
@@ -68,7 +70,6 @@ class DropdownButton extends Component {
             isActive={isActive()}
             onClick={this.handleDropDownClick(onClick)}
             showArrowIcon={arrow}
-            getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}
             tabIndex={tabIndex}

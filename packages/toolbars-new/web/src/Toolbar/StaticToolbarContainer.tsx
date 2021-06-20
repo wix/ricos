@@ -1,10 +1,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import styles from './ToolbarContainer.scss';
 
-class StaticToolbarContainer extends Component {
+interface StaticToolbarContainerProps {
+  children: ReactElement;
+}
+
+class StaticToolbarContainer extends Component<StaticToolbarContainerProps> {
+  toolbarContainerRef?: HTMLDivElement | null;
+
   setToolbarContainerRef = ref => (this.toolbarContainerRef = ref);
 
   render() {
@@ -20,9 +25,5 @@ class StaticToolbarContainer extends Component {
     );
   }
 }
-
-StaticToolbarContainer.propTypes = {
-  children: PropTypes.any,
-};
 
 export default StaticToolbarContainer;

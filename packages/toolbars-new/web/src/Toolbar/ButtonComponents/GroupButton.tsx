@@ -1,29 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
+import { RichContentTheme } from 'wix-rich-content-common';
 
-class GroupButton extends PureComponent {
-  static propTypes = {
-    isMobile: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    buttons: PropTypes.array,
-    activeItem: PropTypes.func,
-    tooltip: PropTypes.string,
-    dataHook: PropTypes.string,
-    getButtonStyles: PropTypes.func,
-    disableState: PropTypes.bool,
-    isActive: PropTypes.func,
-    isDisabled: PropTypes.func,
-    theme: PropTypes.object,
-  };
+interface GroupButtonProps {
+  isMobile?: boolean;
+  tabIndex?: number;
+  buttons: any;
+  tooltip: string;
+  dataHook?: string;
+  isActive: () => boolean;
+  isDisabled: () => boolean;
+  theme?: RichContentTheme;
+}
 
+interface State {
+  isOpen: boolean;
+  Icon: any;
+  isDisabled: () => boolean;
+}
+
+class GroupButton extends PureComponent<GroupButtonProps, State> {
   static defaultProps = {
     isActive: () => false,
     isDisabled: () => false,
-    getButtonStyles: () => ({}),
   };
 
   constructor(props) {
@@ -65,7 +68,7 @@ class GroupButton extends PureComponent {
 
     return (
       <div className={classNames(Styles.modal, Styles.groupButtonModal)}>
-        {buttons.map((props, i) => {
+        {buttons.map((props: any, i: number) => {
           const buttonProps = {
             ...this.props,
             shouldRefreshTooltips: () => this.state.isOpen,
@@ -92,18 +95,9 @@ class GroupButton extends PureComponent {
   };
 
   render() {
-    const {
-      tooltip,
-      dataHook,
-      getButtonStyles,
-      disableState,
-      isActive,
-      isMobile,
-      tabIndex,
-      theme,
-    } = this.props;
+    const { tooltip, dataHook, isActive, isMobile, tabIndex, theme } = this.props;
     const { Icon, isDisabled, isOpen } = this.state;
-    const disabled = disableState || isDisabled();
+    const disabled = isDisabled();
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
@@ -111,7 +105,6 @@ class GroupButton extends PureComponent {
             isActive={isOpen || isActive()}
             onClick={this.toggleOptions}
             showArrowIcon
-            getButtonStyles={getButtonStyles}
             tooltipText={tooltip}
             dataHook={dataHook}
             tabIndex={tabIndex}
