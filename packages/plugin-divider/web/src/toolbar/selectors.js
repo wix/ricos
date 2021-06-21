@@ -1,10 +1,5 @@
-import {
-  SizeLargeIcon,
-  SizeMediumIcon,
-  SizeSmallIcon,
-  AlignCenterIcon,
-} from 'wix-rich-content-plugin-commons';
-
+import { SizeLargeIcon, SizeMediumIcon, SizeSmallIcon } from 'wix-rich-content-plugin-commons';
+import { AlignCenterIcon } from 'wix-rich-content-ui-components';
 import { AlignLeftIcon, AlignRightIcon } from 'wix-rich-content-editor-common';
 
 import {

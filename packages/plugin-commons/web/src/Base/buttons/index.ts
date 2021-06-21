@@ -16,11 +16,10 @@ import {
   SizeSmallRightIcon,
   SizeBestFitIcon,
   SizeFullWidthIcon,
-  AlignCenterIcon,
   WidthIcon,
-  HeightIcon,
   TrashIcon,
 } from '../../Icons';
+import { HeightIcon, AlignCenterIcon } from 'wix-rich-content-ui-components';
 import { AlignLeftIcon, AlignTextCenterIcon, AlignRightIcon } from 'wix-rich-content-editor-common';
 
 export { BUTTONS };

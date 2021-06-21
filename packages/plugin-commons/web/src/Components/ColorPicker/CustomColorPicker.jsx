@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import Styles from '../../../statics/styles/custom-color-picker.scss';
-import { HashtagIcon } from '../../Icons';
+import { HashtagIcon } from 'wix-rich-content-ui-components';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
 import classNames from 'classnames';
 
