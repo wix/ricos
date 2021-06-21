@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :nail_care: Polish
+- `toolbars-new`
+  - [#2635](https://github.com/wix-incubator/rich-content/pull/2635) improved line-spacing dropdown and custom-spacing modal styles
 
 </details>
 <hr/>
