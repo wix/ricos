@@ -152,8 +152,7 @@ export const getParagraphNode = (node: Node) => {
   if (node.nodes[0].type === Node_Type.PARAGRAPH) {
     return node.nodes[0];
   } else {
-    console.log(`ERROR! Expected a paragraph node but found ${node.nodes[0].type}`);
-    process.exit(1);
+    throw Error(`Expected a paragraph node but found ${node.nodes[0].type}`);
   }
 };
 

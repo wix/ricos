@@ -63,8 +63,7 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
       const type = Object.keys(styleObj)[0];
       const value = Object.values<string>(styleObj)[0];
       if (type !== 'FG' && type !== 'BG') {
-        console.log(`ERROR! Unknown decoration type "${type}"!`);
-        process.exit(1);
+        throw Error(`Unknown decoration type "${type}"!`);
       }
       decoration = {
         type: Decoration_Type.COLOR,
@@ -72,8 +71,7 @@ export const getTextNodes = (block: RicosContentBlock, entityMap: RicosEntityMap
       };
     } catch {
       if (!isDecorationType(style)) {
-        console.log(`ERROR! Unknown decoration type "${style}"!`);
-        process.exit(1);
+        throw Error(`Unknown decoration type "${style}"!`);
       }
       decoration = {
         type: TO_RICOS_DECORATION_TYPE[style],
