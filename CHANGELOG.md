@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `editor`
+  - [#2580](https://github.com/wix-incubator/rich-content/pull/2580) Editor Commands improvements
 
 </details>
 <hr/>

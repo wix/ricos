@@ -105,7 +105,7 @@ export interface EditorCommands {
     anchorableBlocks: any[];
     pluginsIncluded: string[];
   };
-  getColor: (colorType: ColorType) => unknown;
+  getColor: (colorType: ColorType) => string | undefined;
   getTextAlignment: () => TextAlignment;
   hasInlineStyle: (style: InlineStyle) => boolean;
   isBlockTypeSelected: (type: TextBlockType) => boolean;

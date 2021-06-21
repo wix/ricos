@@ -12,7 +12,7 @@ const normalizeStyle = (style: string) => {
   }
 };
 
-const getColorByType = (style: string, type: string) => {
+const getColorByType = (style: string, type: string): string => {
   const parsed = normalizeStyle(style);
   return parsed[type] || '';
 };
@@ -31,7 +31,7 @@ const getCurrentColors = (editorState: EditorState, colorType: ColorType) => {
 export const getColor = (editorState: EditorState, colorType: ColorType) => {
   const currentColors = getCurrentColors(editorState, colorType);
   const parsed = normalizeStyle(currentColors[0]);
-  return Object.values(parsed)[0];
+  return Object.values<string | undefined>(parsed)[0];
 };
 
 const removeCurrentColors = (
