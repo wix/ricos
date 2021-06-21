@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { InlineToolbarButton } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-ui-components';
 import SpoilerButtonIcon from '../../Icons/SpoilerButtonIcon';
 import { SPOILER_TYPE } from 'wix-rich-content-common';
 

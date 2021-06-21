@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { getBlockEntityType } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -12,7 +12,7 @@ import {
   deleteButton,
   BlockSpoilerButton,
 } from '../buttons';
-import { Separator, Panel } from 'wix-rich-content-ui-components';
+import { Separator, Panel, KEYS_CHARCODE } from 'wix-rich-content-ui-components';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
 import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';

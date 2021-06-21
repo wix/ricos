@@ -4,11 +4,8 @@ import classNames from 'classnames';
 import Measure from 'react-measure';
 import ClickOutside from 'react-click-outsider';
 import { debounce } from 'lodash';
-import {
-  DISPLAY_MODE,
-  getVisibleSelectionRect,
-  KEYS_CHARCODE,
-} from 'wix-rich-content-editor-common';
+import { DISPLAY_MODE, getVisibleSelectionRect } from 'wix-rich-content-editor-common';
+import { KEYS_CHARCODE } from 'wix-rich-content-ui-components';
 import stylesRtlIgnore from '../../../../statics/styles/inline-toolbar.rtlignore.scss';
 import styles from '../../../../statics/styles/inline-toolbar.scss';
 import { getLangDir } from 'wix-rich-content-common';

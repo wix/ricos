@@ -1,4 +1,4 @@
-export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION } from './consts';
+export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION, KEYS_CHARCODE } from './consts';
 
 export { default as UrlInputModal } from './Modals/UrlInputModal';
 export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
@@ -30,5 +30,5 @@ export { default as Dropdown } from './Components/Dropdown';
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 export { default as RadioGroup } from './Components/RadioGroup';
-
-// export { getSelectionStyles } from './Utils/inlineStyleUtils';
+export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
+export { default as ToolbarButton } from './Components/ToolbarButton';

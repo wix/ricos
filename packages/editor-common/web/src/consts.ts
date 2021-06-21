@@ -45,12 +45,6 @@ export {
   DecorationMode as DECORATION_MODE,
 } from 'wix-rich-content-common';
 
-export const KEYS_CHARCODE = {
-  ENTER: 13,
-  ESCAPE: 27,
-  SPACE: 32,
-};
-
 const ALIGN_LEFT = 'AlignLeft';
 const ALIGN_RIGHT = 'AlignRight';
 const ALIGN_CENTER = 'AlignCenter';

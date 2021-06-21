@@ -1,0 +1,92 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+
+.inlineToolbarButton_wrapper {
+  display: flex;
+  padding: 10px 0;
+  margin-right: 10px;
+  width: max-content;
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    & > button {
+      background-color: rgba($fallbackColorTuple, 0.06);
+      @include phone {
+        background-color: transparent;
+      }
+    }
+    // .inlineToolbarButton_icon,
+    // .inlineToolbarButton_icon svg,
+    // .inlineToolbarDropdownButton_icon svg {
+    //   @include fillWithSettingsActionColor();
+    // }
+  }
+  &.inlineToolbarButton_active button {
+    background-color: rgba($settings-action-color-fallback-tuple, 0.1);
+  }
+}
+
+.inlineToolbarButton {
+  background: transparent;
+  color: $toolbar-font-color;
+  padding: 5px;
+  border: 0 none;
+  line-height: normal;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+    opacity: 0.4;
+  }
+  @include phone {
+    padding: 5px 0;
+  }
+}
+
+.inlineToolbarButton_icon {
+  width: $icon-width;
+  height: $icon-width;
+  vertical-align: middle;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include svg-fill;
+}
+
+.inlineToolbarButton_active {
+  color: $settings-action-color-fallback;
+  fill: $settings-action-color-fallback;
+  @include svg-fill;
+}
+
+.inlineToolbarButton_menuButton {
+  width: max-content !important;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-family: $ricos-font-family;
+  font-weight: 500;
+  margin: 0 0 0 5px !important;
+}
+
+.inlineToolbarDropdownButton_arrowIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.inlineToolbarDropdownButton_arrowIcon_isOpen {
+  @extend .inlineToolbarDropdownButton_arrowIcon;
+  transform: rotate(180deg);
+}
