@@ -37,7 +37,7 @@ import {
 } from '../icons';
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
-// import LinkPanelContainer from '../modals/link/LinkComponents/LinkPanelContainer';
+// import LinkModal from '../modals/link/LinkComponents/LinkModal';
 
 type editorCommands = any; //TODO: editorCommands type
 
