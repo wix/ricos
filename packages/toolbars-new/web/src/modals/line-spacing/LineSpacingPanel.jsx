@@ -4,6 +4,8 @@ import styles from './styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 
+const Separator = () => <div className={styles.lineSpacing_separator} />;
+
 const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }) => {
   const lineHeightElement = (height, isSelected, onClick) => (
     <button
@@ -21,6 +23,7 @@ const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }
       {lineHeights.map(height =>
         lineHeightElement(height, parseFloat(selectedHeight) === height, onSave)
       )}
+      <Separator />
       <button onClick={showCustomPanel}>{t('LineSpacing_customSpacing')}</button>
     </div>
   );
@@ -81,8 +84,6 @@ const LabeledInput = ({
     </label>
   );
 };
-
-const Separator = () => <div className={styles.lineSpacing_separator} />;
 
 const CustomPanel = ({ spacing, onChange, onSave, onCancel, styles, t }) => {
   return (
