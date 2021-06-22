@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { getAnchorableBlocks } from '../AnchorComponents/anchorUtils';
 import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 import BasicLinkPanel from './BasicLinkPanel';
 import MultiSelectLinkPanel from './MultiSelectLinkPanel';
@@ -24,9 +23,7 @@ class LinkModal extends PureComponent {
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
       hideUrlInput;
-    this.anchorableBlocksData = !this.renderBasicLinkPanel
-      ? anchorableBlocksData || getAnchorableBlocks(editorState)
-      : undefined;
+    this.anchorableBlocksData = !this.renderBasicLinkPanel ? anchorableBlocksData : undefined;
     this.state = {
       linkPanelValues: {
         url,

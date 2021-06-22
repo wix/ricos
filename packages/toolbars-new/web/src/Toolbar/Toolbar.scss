@@ -52,6 +52,9 @@
         &.withoutTop {
             top: 0;
         }
+        &.linkPanelPadding {
+            padding: 0 19px;
+        }
         &.withoutPadding {
             padding: unset;
         }

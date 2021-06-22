@@ -51,7 +51,7 @@ class BasicLinkPanel extends PureComponent {
       //   role="form"
       //   {...ariaProps}
       // >
-      <>
+      <div className={linkPanelContainerClassName} data-hook="linkPanelContainer">
         {isMobile && this.renderMobileTitle()}
         <div className={styles.linkPanel_content}>
           <LinkPanelWrapper
@@ -65,7 +65,7 @@ class BasicLinkPanel extends PureComponent {
           <div className={styles.linkPanel_actionsDivider} role="separator" />
         </div>
         <LinkActionsButtons basicLinkPanel {...buttonsProps} />
-      </>
+      </div>
       // </FocusManager>
     );
   }

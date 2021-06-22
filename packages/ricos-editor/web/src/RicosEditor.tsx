@@ -251,6 +251,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         ? allFormattingToolbarButtons?.mobile
         : allFormattingToolbarButtons?.desktop;
       const plugins: string[] = this.getPluginsKey();
+      const linkPanelData = {
+        linkTypes: this.props.plugins?.find(plugin => plugin.type === 'LINK')?.config.linkTypes,
+        uiSettings: { linkPanel: this.props.linkPanelSettings },
+        anchorTarget: this.props.linkSettings?.anchorTarget,
+        isMobile,
+      };
       const ToolbarToRender = (
         <Toolbar
           theme={theme}
@@ -260,6 +266,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           editorCommands={editorCommands}
           formattingToolbarButtonsKeys={formattingToolbarButtons}
           plugins={plugins}
+          linkPanelData={linkPanelData}
         />
       );
       const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;

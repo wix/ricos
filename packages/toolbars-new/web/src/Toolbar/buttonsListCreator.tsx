@@ -8,6 +8,7 @@ import {
   BULLET_LIST_TYPE,
   RICOS_INDENT_TYPE,
   RICOS_LINE_SPACING_TYPE,
+  RICOS_LINK_TYPE,
   InlineStyle,
   DecorationsDataMap,
   TextAlignment,
@@ -37,7 +38,7 @@ import {
 } from '../icons';
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
-// import LinkModal from '../modals/link/LinkComponents/LinkModal';
+import LinkModal from '../modals/link/LinkComponents/LinkModal';
 
 type editorCommands = any; //TODO: editorCommands type
 
@@ -65,7 +66,10 @@ type buttonsFullDataType = {
   saveState?: boolean;
   onCancel?: string;
   onChange?: string;
+  onDone?: string;
+  onDelete?: string;
   saveSelection?: boolean;
+  loadSelection?: boolean;
   unstyled?: { icon: any; action: string };
   'header-two'?: { icon: any; action: string };
   'header-three'?: { icon: any; action: string };
@@ -224,9 +228,13 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
     icon: LinkIcon,
     dataHook: 'LINK',
     tooltip: 'Link',
-    action: 'LINK',
-    type: 'button',
-    // modal: props => <LinkPanelContainer {...props} />,
+    type: 'modal',
+    modal: props => <LinkModal {...props} />,
+    onDone: 'LINK',
+    onDelete: 'LINK',
+    onCancel: 'LINK',
+    saveSelection: true,
+    loadSelection: true,
   },
   CODE_BLOCK: {
     plugin: 'code-block',
@@ -256,6 +264,7 @@ const decorationButtons: Record<string, keyof DecorationsDataMap> = {
   DECREASE_INDENT: RICOS_INDENT_TYPE,
   INCREASE_INDENT: RICOS_INDENT_TYPE,
   LINE_SPACING: RICOS_LINE_SPACING_TYPE,
+  LINK: RICOS_LINK_TYPE,
 };
 
 const setTextAlignment: Record<string, TextAlignment> = {
@@ -269,7 +278,8 @@ export const createButtonsList = (
   formattingButtonsKeys,
   editorCommands: editorCommands,
   t,
-  plugins
+  plugins,
+  linkPanelData
 ) => {
   const buttonsList = [];
   formattingButtonsKeys.forEach((buttonKey, index) => {
@@ -283,14 +293,17 @@ export const createButtonsList = (
     handleButtonOnClick(buttonsList, index, editorCommands);
     handleButtonIsActive(buttonsList, index, editorCommands);
     handleButtonIsDisabled(buttonsList, index);
-    handleButtonModal(buttonsList, index, editorCommands);
+    handleButtonModal(buttonsList, index, editorCommands, linkPanelData, t);
     handleButtonOnSave(buttonsList, index, editorCommands);
     handleButtonOnCancel(buttonsList, index, editorCommands);
     handleButtonOnChange(buttonsList, index, editorCommands);
+    handleButtonOnDone(buttonsList, index, editorCommands);
+    handleButtonOnDelete(buttonsList, index, editorCommands);
     handleGroupButtons(buttonsList, buttonKey, index, editorCommands);
     buttonKey === 'Title' && handleTitleButton(buttonsList, index, editorCommands);
     handleButtonSaveState(buttonsList, index, editorCommands);
     handleButtonSaveSelection(buttonsList, index, editorCommands);
+    handleButtonLoadSelection(buttonsList, index, editorCommands);
   });
   const filteredButtonsList = filterButtonsByPlugins(buttonsList, plugins);
   return filteredButtonsList;
@@ -304,6 +317,30 @@ const filterButtonsByPlugins = (buttonsList, plugins) => {
       return true;
     }
   });
+};
+
+const handleButtonOnDelete = (buttonsList, index, editorCommands: editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].onDelete) {
+    const buttonName = buttonsList[index].name;
+    if (buttonName === 'LINK') {
+      buttonsList[index].onDelete = () => {
+        editorCommands.deleteDecoration(decorationButtons[buttonName]);
+        setTimeout(() => editorCommands.loadSelectionState());
+      };
+    }
+  }
+};
+
+const handleButtonOnDone = (buttonsList, index, editorCommands: editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].onDone) {
+    const buttonName = buttonsList[index].name;
+    if (buttonName === 'LINK') {
+      buttonsList[index].onDone = data => {
+        editorCommands.insertDecoration(decorationButtons[buttonName], data);
+        setTimeout(() => editorCommands.loadSelectionState());
+      };
+    }
+  }
 };
 
 const handleButtonOnChange = (buttonsList, index, editorCommands: editorCommands) => {
@@ -322,6 +359,8 @@ const handleButtonOnCancel = (buttonsList, index, editorCommands: editorCommands
     const buttonName = buttonsList[index].name;
     if (buttonName === 'LINE_SPACING') {
       buttonsList[index].onCancel = () => editorCommands.loadEditorState();
+    } else if (buttonName === 'LINK') {
+      buttonsList[index].onCancel = () => editorCommands.loadSelectionState();
     }
   }
 };
@@ -331,6 +370,14 @@ const handleButtonSaveState = (buttonsList, index, editorCommands: editorCommand
     buttonsList[index].saveState = () => {
       editorCommands.saveSelectionState();
       editorCommands.saveEditorState();
+    };
+  }
+};
+
+const handleButtonLoadSelection = (buttonsList, index, editorCommands: editorCommands) => {
+  if (buttonsFullData[buttonsList[index].name].loadSelection) {
+    buttonsList[index].loadSelection = () => {
+      setTimeout(() => editorCommands.loadSelectionState());
     };
   }
 };
@@ -383,7 +430,13 @@ const handleButtonOnSave = (buttonsList, index, editorCommands: editorCommands) 
   }
 };
 
-const handleButtonModal = (buttonsList, index, editorCommands: editorCommands) => {
+const handleButtonModal = (
+  buttonsList,
+  index,
+  editorCommands: editorCommands,
+  linkPanelData,
+  t
+) => {
   const buttonName = buttonsList[index].name;
   if (buttonsFullData[buttonName].modal) {
     buttonsList[index].modal = buttonsFullData[buttonName].modal;
@@ -395,6 +448,20 @@ const handleButtonModal = (buttonsList, index, editorCommands: editorCommands) =
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
       buttonsList[index].modal = props => Modal && <Modal {...props} spacing={spacing} />;
+    } else if (buttonName === 'LINK') {
+      const Modal = buttonsFullData[buttonName].modal;
+      const linkData = editorCommands.getLinkDataInSelection();
+      const anchorableBlocks = editorCommands.getAnchorableBlocks();
+      buttonsList[index].modal = props =>
+        Modal && (
+          <Modal
+            {...props}
+            {...linkPanelData}
+            {...linkData}
+            t={t}
+            anchorableBlocksData={anchorableBlocks}
+          />
+        );
     }
   }
 };
@@ -411,6 +478,8 @@ const handleButtonIsActive = (buttonsList, index, editorCommands: editorCommands
   } else if (Object.keys(textBlockButtons).includes(buttonName)) {
     buttonsList[index].isActive = () =>
       editorCommands.isBlockTypeSelected(textBlockButtons[buttonName]);
+  } else if (buttonName === 'LINK') {
+    buttonsList[index].isActive = () => editorCommands.hasLinkInSelection();
   } else {
     buttonsList[index].isActive = () => false;
   }

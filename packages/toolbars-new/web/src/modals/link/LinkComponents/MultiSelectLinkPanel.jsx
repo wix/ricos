@@ -145,7 +145,7 @@ class MultiSelectLinkPanel extends PureComponent {
       //   role="form"
       //   {...ariaProps}
       // >
-      <>
+      <div className={containerClassName} data-hook="linkPanelContainer">
         {!isMobile ? this.renderDesktopHeader() : this.renderMobileHeader()}
 
         <div className={contentClassName}>
@@ -179,7 +179,7 @@ class MultiSelectLinkPanel extends PureComponent {
         </div>
 
         {!isMobile && this.renderDesktopLinkActionsButtons()}
-      </>
+      </div>
       //</FocusManager>
     );
   }

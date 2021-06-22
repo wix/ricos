@@ -22,6 +22,8 @@ type dropDownPropsType = {
   saveSelection?: () => void;
   onCancel?: () => void;
   onChange?: (any) => void;
+  onDelete?: () => void;
+  loadSelection?: () => void;
 };
 
 interface ModalButtonProps {
@@ -30,7 +32,8 @@ interface ModalButtonProps {
   t: TranslationFunction;
   modal: (() => JSX.Element) | FC<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
   onSelect: (string) => void;
-  onSave: (any) => void;
+  onSave?: (any) => void;
+  onDone?: (any) => void;
   dropDownProps: dropDownPropsType;
 }
 
@@ -58,7 +61,11 @@ class ModalButton extends Component<ModalButtonProps, State> {
       saveState?.();
       setKeepOpen?.(true);
     } else {
+      const {
+        dropDownProps: { loadSelection },
+      } = this.props;
       setKeepOpen?.(false);
+      loadSelection?.();
     }
   };
 
@@ -71,7 +78,20 @@ class ModalButton extends Component<ModalButtonProps, State> {
   };
 
   onSave = (...args: [any]) => {
-    this.props.onSave(...args);
+    this.props.onSave?.(...args);
+    this.closeModal();
+  };
+
+  onDone = (...args: [any]) => {
+    this.props.onDone?.(...args);
+    this.closeModal();
+  };
+
+  onDelete = () => {
+    const {
+      dropDownProps: { onDelete },
+    } = this.props;
+    onDelete?.();
     this.closeModal();
   };
 
@@ -123,7 +143,7 @@ class ModalButton extends Component<ModalButtonProps, State> {
           />
           {isModalOpen && (
             <div
-              data-id="table-formatting-toolbar-modal"
+              data-id="toolbar-modal-button"
               className={classNames(styles.modal, styles.withoutPadding)}
               onMouseDown={event => event.preventDefault()}
             >
@@ -136,6 +156,9 @@ class ModalButton extends Component<ModalButtonProps, State> {
                 isMobile,
                 onCancel: this.onCancel,
                 onChange: this.onChange,
+                onDone: this.onDone,
+                isActive: isActive(),
+                onDelete: this.onDelete,
               })}
             </div>
           )}

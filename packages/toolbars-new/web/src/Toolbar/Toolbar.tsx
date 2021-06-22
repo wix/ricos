@@ -34,6 +34,21 @@ interface ToolbarProps {
   afterClick?: () => void;
   nestedMenu?: boolean;
   theme?: RichContentTheme;
+  linkPanelData?: {
+    linkTypes?: any;
+    anchorTarget?: string;
+    rel?: { nofollow?: boolean };
+    uiSettings?: {
+      linkPanel?: {
+        dropDown?: any;
+        externalPopups?: boolean;
+        showNewTabCheckbox?: boolean;
+        showNoFollowCheckbox?: boolean;
+        showSponsoredCheckbox?: boolean;
+      };
+    };
+    isMobile?: boolean;
+  };
 }
 
 class Toolbar extends Component<ToolbarProps> {
@@ -162,6 +177,7 @@ class Toolbar extends Component<ToolbarProps> {
         modal={buttonProps.modal}
         onSelect={buttonProps.onSelect}
         onSave={buttonProps.onSave}
+        onDone={buttonProps.onDone}
         dropDownProps={dropDownProps}
         t={t}
         setKeepOpen={setKeepOpen}
@@ -243,8 +259,15 @@ class Toolbar extends Component<ToolbarProps> {
       editorCommands,
       t,
       plugins,
+      linkPanelData,
     } = this.props;
-    const blabla = createButtonsList(formattingToolbarButtonsKeys, editorCommands, t, plugins);
+    const blabla = createButtonsList(
+      formattingToolbarButtonsKeys,
+      editorCommands,
+      t,
+      plugins,
+      linkPanelData
+    );
     // console.log({ buttons });
     // console.log({ blabla });
     this.cleanUnwantedSeparators(blabla);
