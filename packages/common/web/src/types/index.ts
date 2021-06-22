@@ -14,4 +14,3 @@ export * from './biCallbacksTypes';
 export * from './toolbarEnums';
 export * from './toolbarSettingsTypes';
 export * from './pluginsBiCallbacksTypes';
-export * from './editorCommandsType';

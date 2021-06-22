@@ -73,7 +73,6 @@ import {
   PluginEventParams,
   OnPluginAction,
   IMAGE_TYPE,
-  EditorCommands,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -164,6 +163,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   maxTextLength?: number;
   experiments?: AvailableExperiments;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
+  // setActiveEditor?(ref: RichContentEditor): void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -226,7 +226,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   innerRCECustomStyleFn;
 
-  EditorCommands!: EditorCommands;
+  EditorCommands!: ReturnType<typeof createEditorCommands>;
 
   getSelectedText!: (editorState: EditorState) => string;
 
@@ -262,7 +262,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
-      toolbarsToIgnore: [],
+      toolbarsToIgnore: experiments?.newFormattingToolbar?.enabled ? ['InlineTextToolbar'] : [],
       readOnly: false,
       context: { experiments, isMobile, t },
       undoRedoStackChanged: false,
@@ -535,7 +535,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const { createPluginsDataMap = {} } = this.props;
     this.EditorCommands = createEditorCommands(
       createPluginsDataMap,
-      this.plugins,
       this.getEditorState,
       this.updateEditorState
     );
@@ -680,6 +679,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const formattingToolbar = document.querySelectorAll(
       `[data-hook=inlineToolbar]`
     )[0] as HTMLElement;
+    const newFormattingToolbar = document.querySelectorAll(`[data-id="toolbar"]`)[0] as HTMLElement;
     if (pluginToolbar && pluginToolbar.dataset.hook !== 'linkPluginToolbar') {
       const editorState = this.getEditorState();
       const focusedAtomicPluginKey = editorState.getSelection().getFocusKey();
@@ -687,7 +687,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         .getCurrentContent()
         .getBlockForKey(focusedAtomicPluginKey);
     }
-    const toolbar = pluginToolbar || formattingToolbar;
+    const toolbar = pluginToolbar || formattingToolbar || newFormattingToolbar;
     if (toolbar) {
       const buttonToFocus = toolbar.querySelectorAll('Button')[0] as HTMLElement;
       buttonToFocus.focus();
@@ -880,6 +880,17 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pubsub: this.commonPubsub,
   });
 
+  getT = () => {
+    const { t } = this.props;
+    return t;
+  };
+
+  getPlugins = () => {
+    return this.plugins;
+  };
+
+  getEditorCommands = () => this.EditorCommands;
+
   // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
   publish = async (postId?: string) => {
     if (!this.props.helpers?.onPublish) {
@@ -898,7 +909,19 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const mode = shouldEnable ? 'render' : 'edit';
     this.editor?.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
-    const toolbarsToIgnore: ToolbarsToIgnore = shouldEnable ? ['SideToolbar'] : [];
+    const { toolbarsToIgnore: currentToolbarsToIgnore } = this.state;
+    const toolbarsToIgnore: ToolbarsToIgnore = currentToolbarsToIgnore;
+    if (shouldEnable) {
+      const index = toolbarsToIgnore.indexOf('SideToolbar');
+      if (index === -1) {
+        toolbarsToIgnore.push('SideToolbar');
+      }
+    } else {
+      const index = toolbarsToIgnore.indexOf('SideToolbar');
+      if (index !== -1) {
+        toolbarsToIgnore.splice(index, 1);
+      }
+    }
     this.setState({ toolbarsToIgnore });
   };
 
@@ -1107,6 +1130,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         direction={direction}
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
+        // setActiveEditor={this.props.setActiveEditor}
         toolbarsToIgnore={toolbarsToIgnore}
         handleUndoCommand={this.handleUndoCommand}
         handleRedoCommand={this.handleRedoCommand}
@@ -1167,6 +1191,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
         this.setInPluginEditingMode(false);
         this.props.setEditorToolbars?.(this);
+        // this.props.setActiveEditor?.(this);
       }
     }
   };

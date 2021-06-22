@@ -77,7 +77,6 @@ export {
   setSelectionToBlock,
   hasBlockType,
 } from './Utils/draftUtils';
-export { getColor, setTextColor, setHighlightColor } from './Utils/colorUtils';
 export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
@@ -149,5 +148,3 @@ export const emptyDraftContent = {
     },
   ],
 };
-
-export { getSelectionStyles } from './Utils/inlineStyleUtils';

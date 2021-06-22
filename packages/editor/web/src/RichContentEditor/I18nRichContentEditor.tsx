@@ -8,6 +8,8 @@ const WrappedEditor = withI18n<RichContentEditor, Partial<RichContentEditorProps
   englishResources
 );
 
+type excludeFromEditorCommandsAPI = '_getSelection';
+
 export default class I18nRichContentEditor extends Component<Partial<RichContentEditorProps>> {
   editor!: RichContentEditor;
 
@@ -19,11 +21,18 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
 
+  getT = () => this.editor.getT();
+
+  getPlugins = () => this.editor.getPlugins();
+
+  removeToolbarFocus = () => this.editor.removeToolbarFocus();
+
   focus = () => this.editor.focus();
 
   blur = () => this.editor.blur();
 
-  getEditorCommands = () => this.editor.EditorCommands;
+  getEditorCommands = (): Omit<RichContentEditor['EditorCommands'], excludeFromEditorCommandsAPI> =>
+    this.editor.EditorCommands;
 
   // TODO: remove postId param once the getContent(postId) API is completely deprecated
   publish = (postId?: string) => this.editor.publish(postId); //async
