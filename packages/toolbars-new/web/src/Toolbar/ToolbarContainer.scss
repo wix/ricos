@@ -12,5 +12,13 @@
     &.staticContainer {
         position: static;
         width: fit-content;
+
+        &.staticContainerMobile {
+            width: 100%;
+            overflow: scroll;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
     }
 }

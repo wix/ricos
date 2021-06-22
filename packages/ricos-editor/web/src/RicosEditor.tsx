@@ -18,7 +18,7 @@ import {
   convertFromRaw,
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { isEqual } from 'lodash';
+import { isEqual, get } from 'lodash';
 import {
   EditorEventsContext,
   EditorEvents,
@@ -29,7 +29,7 @@ import {
   Toolbar,
   StaticToolbarContainer,
 } from 'wix-rich-content-toolbars-new';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { TOOLBARS, isiOS } from 'wix-rich-content-editor-common';
 import { mobileTextButtonList, desktopTextButtonList } from './';
 
 // eslint-disable-next-line
@@ -248,9 +248,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         toolbar => toolbar?.name === 'INLINE'
       );
       const allFormattingToolbarButtons = formattingToolbarSetting?.getButtons?.() as TextButtons;
-      const formattingToolbarButtons = isMobile
-        ? allFormattingToolbarButtons?.mobile
-        : allFormattingToolbarButtons?.desktop;
+      const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
+      const formattingToolbarButtons = get(allFormattingToolbarButtons, deviceName, []);
       const plugins: string[] = this.getPluginsKey();
       const linkPanelData = {
         linkTypes: this.props.plugins?.find(plugin => plugin.type === 'LINK')?.config.linkTypes,
@@ -271,10 +270,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           helpers={helpers}
         />
       );
-      const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
+      // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
+      const textToolbarType = StaticToolbar ? 'static' : null;
       return textToolbarType === 'static' ? (
         <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
-          <StaticToolbarContainer>{ToolbarToRender}</StaticToolbarContainer>
+          <StaticToolbarContainer isMobile={isMobile}>{ToolbarToRender}</StaticToolbarContainer>
         </div>
       ) : (
         <div style={{ flex: 'none' }} dir={getLangDir(locale)}>

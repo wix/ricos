@@ -76,6 +76,24 @@ type buttonsFullDataType = {
 };
 
 const buttonsFullData: Record<string, buttonsFullDataType> = {
+  AddPlugin: {
+    icon: BoldIcon,
+    dataHook: 'textInlineStyleButton_AddPlugin',
+    tooltip: 'AddPlugin',
+    type: 'button',
+  },
+  UNDO: {
+    icon: BoldIcon,
+    dataHook: 'textInlineStyleButton_UNDO',
+    tooltip: 'UNDO',
+    type: 'button',
+  },
+  REDO: {
+    icon: BoldIcon,
+    dataHook: 'textInlineStyleButton_REDO',
+    tooltip: 'REDO',
+    type: 'button',
+  },
   HEADINGS: {
     plugin: 'wix-rich-content-plugin-headings',
     icon: () => null,
