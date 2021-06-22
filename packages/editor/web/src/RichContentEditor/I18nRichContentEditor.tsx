@@ -8,8 +8,6 @@ const WrappedEditor = withI18n<RichContentEditor, Partial<RichContentEditorProps
   englishResources
 );
 
-type excludeFromEditorCommandsAPI = '_getSelection';
-
 export default class I18nRichContentEditor extends Component<Partial<RichContentEditorProps>> {
   editor!: RichContentEditor;
 
@@ -25,8 +23,7 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   blur = () => this.editor.blur();
 
-  getEditorCommands = (): Omit<RichContentEditor['EditorCommands'], excludeFromEditorCommandsAPI> =>
-    this.editor.EditorCommands;
+  getEditorCommands = () => this.editor.EditorCommands;
 
   render() {
     return <WrappedEditor {...this.props} ref={this.setEditorRef} />;

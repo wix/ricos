@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
+import styles from '../../statics/styles/panel.scss';
 
 export default class Panel extends Component {
   constructor(props) {

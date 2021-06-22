@@ -72,6 +72,7 @@ import {
   PluginEventParams,
   OnPluginAction,
   IMAGE_TYPE,
+  EditorCommands,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -221,7 +222,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   innerRCECustomStyleFn;
 
-  EditorCommands!: ReturnType<typeof createEditorCommands>;
+  EditorCommands!: EditorCommands;
 
   getSelectedText!: (editorState: EditorState) => string;
 
@@ -447,6 +448,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onPluginAction,
         onPluginChange: (pluginId: string, changeObj) =>
           helpers.onPluginChange?.(pluginId, changeObj, Version.currentVersion),
+        onToolbarButtonClick: args =>
+          helpers.onToolbarButtonClick?.({ ...args, version: Version.currentVersion }),
       },
       config,
       isMobile,
@@ -503,6 +506,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const { createPluginsDataMap = {} } = this.props;
     this.EditorCommands = createEditorCommands(
       createPluginsDataMap,
+      this.plugins,
       this.getEditorState,
       this.updateEditorState
     );

@@ -44,6 +44,7 @@ export interface onViewerLoadedArgs extends biCallbackParams {
   isPreview: boolean;
   pluginsCount: ReturnType<typeof getContentSummary>['pluginsCount'];
   version: string;
+  url: string;
 }
 
 export interface onPluginModalOpenedArgs extends biCallbackParams {
@@ -58,6 +59,24 @@ export interface onMenuLoadArgs extends biCallbackParams {
 }
 
 export interface onContentEditedArgs extends biCallbackParams {}
+export interface onToolbarButtonClickArgs extends biCallbackParams {
+  /** The name of the button the user clicked on (`Bold`, `Italic`, `SpoilerButton`, ...) */
+  buttonName: string;
+  /** Toolbar / Sidebar/ else */
+  origin?: string;
+  /** toolbar type (`FORMATTING`, `PLUGIN`, ...) */
+  type?: ToolbarType;
+  /** The new value that was changed (center, right...) */
+  value?: string;
+  /** Category of change (alignment / size / settings...) */
+  category?: string;
+  /** Plugin's Type (e.g. values of `LINK_TYPE`, `HASHTAG_TYPE`...) */
+  pluginId?: string;
+  /** Schema: Node's key. Draft: `blockKey` of plugin. Prose: attr's key */
+  pluginUniqueId?: string;
+  /** Additional specification of plugin */
+  pluginDetails?: string;
+}
 
 export interface BICallbacks {
   onPluginAdd?(pluginId: string, entryPoint: string, version: string): void;
@@ -83,8 +102,10 @@ export interface BICallbacks {
   ): void;
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
   onViewerLoaded?(params: onViewerLoadedArgs): void;
-  onOpenEditorSuccess?(version: string): void;
+  onOpenEditorSuccess?(version: string, toolbarType: ToolbarType): void;
   onContentEdited?(params: onContentEditedArgs): void;
+  /** evid: 3 - 'changePlugin' */
+  onToolbarButtonClick?(params: onToolbarButtonClickArgs): void;
   onPluginChange?(
     pluginId: string,
     changeObject: { from: string; to: string },
