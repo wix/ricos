@@ -194,7 +194,7 @@ const setPluginTest = (settings: Settings) => ([
     data1 = settings?.isRicosSchema ? data1 : convertNodeDataToDraft(nodeType, data1);
     data2 = settings?.isRicosSchema ? data2 : convertNodeDataToDraft(nodeType, data2);
     const blockKey = ricosEditor.getEditorCommands().insertBlock(type, data1, settings);
-    ricosEditor.getEditorCommands().setBlock(blockKey, type, data2, settings);
+    ricosEditor.getEditorCommands().setBlock(blockKey as string, type, data2, settings);
     expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData2);
   });
 
@@ -203,7 +203,7 @@ const deletePluginTest = (settings: Settings) => ([pluginName, { type, nodeType,
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     data1 = settings?.isRicosSchema ? data1 : convertNodeDataToDraft(nodeType, data1);
     const blockKey = ricosEditor.getEditorCommands().insertBlock(type, data1, settings);
-    ricosEditor.getEditorCommands().deleteBlock(blockKey);
+    ricosEditor.getEditorCommands().deleteBlock(blockKey as string);
     expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual({});
   });
 
