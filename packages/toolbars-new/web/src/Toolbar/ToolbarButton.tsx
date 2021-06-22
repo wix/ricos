@@ -1,8 +1,8 @@
-import React, { Component, ReactElement, ReactNode, Ref, FC } from 'react';
+import React, { Component, ReactElement, ReactNode, Ref, FC, version } from 'react';
 import classNames from 'classnames';
 import DropdownArrowIcon from '../icons/DropdownArrowIcon';
 import Styles from './ToolbarButton.scss';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, Helpers, Version } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 type ToolbarButtonProps = {
@@ -22,6 +22,7 @@ type ToolbarButtonProps = {
   asGroupButton?: boolean;
   asContextButton?: boolean;
   disabledStyle?: boolean;
+  helpers?: Helpers;
 };
 
 class ToolbarButton extends Component<ToolbarButtonProps> {
@@ -71,6 +72,12 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
 
   preventDefault = event => event.preventDefault();
 
+  onClick = (...args: [any]) => {
+    const { helpers } = this.props;
+    helpers?.onToolbarButtonClick?.({ buttonName: 'aaa', version: Version.currentVersion });
+    this.props.onClick?.(...args);
+  };
+
   render() {
     const {
       isActive,
@@ -82,7 +89,6 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
       disabled,
       buttonContent,
       showArrowIcon,
-      onClick,
       asGroupButton,
       asContextButton,
       disabledStyle,
@@ -122,7 +128,7 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
             aria-label={tooltipText}
             aria-pressed={isActive}
             data-hook={dataHook}
-            onClick={onClick}
+            onClick={this.onClick}
             className={classNames(styles.button, {
               [Styles.renderAsContextButton]: asContextButton,
               [Styles.disabled]: disabledStyle,

@@ -231,6 +231,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         theme,
         locale,
         toolbarSettings: { getToolbarSettings = () => [] } = {},
+        _rcProps: { helpers } = {},
       } = this.props;
       const buttonsAsArray = Object.values(buttons);
       const editorCommands = activeEditor.getEditorCommands();
@@ -267,6 +268,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           formattingToolbarButtonsKeys={formattingToolbarButtons}
           plugins={plugins}
           linkPanelData={linkPanelData}
+          helpers={helpers}
         />
       );
       const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;

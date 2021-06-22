@@ -11,7 +11,12 @@ import NestedMenu from './ButtonComponents/NestedMenu';
 import ToolbarButton from './ToolbarButton';
 import ContextMenu from './ButtonComponents/ContextMenu';
 import { createButtonsList } from './buttonsListCreator';
-import { RichContentTheme, TranslationFunction, DesktopTextButtons } from 'wix-rich-content-common';
+import {
+  RichContentTheme,
+  TranslationFunction,
+  DesktopTextButtons,
+  Helpers,
+} from 'wix-rich-content-common';
 
 type formattingToolbarButtonsKeysType =
   | DesktopTextButtons
@@ -49,6 +54,7 @@ interface ToolbarProps {
     };
     isMobile?: boolean;
   };
+  helpers?: Helpers;
 }
 
 class Toolbar extends Component<ToolbarProps> {
@@ -81,6 +87,7 @@ class Toolbar extends Component<ToolbarProps> {
         tooltipText={tooltip}
         icon={getIcon()}
         disabled={isDisabled()}
+        helpers={this.props.helpers}
       />
     );
   };
