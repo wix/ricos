@@ -34,10 +34,6 @@ if (process.env.NODE_ENV !== 'development') {
   ]);
 }
 
-// if (process.env.LOADABLE_COMPONENT) {
-//   commonPlugins.push(['@loadable/babel-plugin']);
-// }
-
 const testPlugins = [
   '@babel/plugin-transform-modules-commonjs',
   '@babel/plugin-syntax-dynamic-import',

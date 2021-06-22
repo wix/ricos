@@ -9,17 +9,14 @@ import {
   LINK_PREVIEW_TYPE,
   pluginLinkPreview,
 } from 'wix-rich-content-plugin-link-preview/viewer';
-import {
-  imageTypeMapper,
-  pluginImage,
-} from 'wix-rich-content-plugin-image/dist/loadable/es/viewer.js';
+import { imageTypeMapper, pluginImage } from 'wix-rich-content-plugin-image/loadable/viewer';
 import { tableTypeMapper, pluginTable } from 'wix-rich-content-plugin-table/viewer';
 
 import {
   galleryTypeMapper,
   pluginGallery,
   GALLERY_TYPE,
-} from 'wix-rich-content-plugin-gallery/dist/loadable/es/viewer.js';
+} from 'wix-rich-content-plugin-gallery/loadable/viewer';
 import { mapTypeMapper, pluginMap } from 'wix-rich-content-plugin-map/viewer';
 import { giphyTypeMapper, pluginGiphy, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
 import {

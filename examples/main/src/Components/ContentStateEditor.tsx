@@ -20,7 +20,7 @@ import pollsSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-pol
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/editor';
+import { IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
@@ -28,7 +28,7 @@ import { MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { HTML_TYPE } from 'wix-rich-content-plugin-html';
 import { LINK_TYPE } from 'wix-rich-content-plugin-link';
 import { MENTION_TYPE } from 'wix-rich-content-plugin-mentions';
-import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/editor';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';

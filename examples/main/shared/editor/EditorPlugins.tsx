@@ -13,17 +13,13 @@ import {
 } from 'wix-rich-content-plugin-line-spacing';
 import { createHashtagPlugin, HASHTAG_TYPE, pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { createEmojiPlugin, EMOJI_TYPE, pluginEmoji } from 'wix-rich-content-plugin-emoji';
-import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'wix-rich-content-plugin-image/editor';
+import { createImagePlugin, IMAGE_TYPE, pluginImage } from 'wix-rich-content-plugin-image';
 import {
   createUndoRedoPlugin,
   pluginUndoRedo,
   UNDO_REDO_TYPE,
 } from 'wix-rich-content-plugin-undo-redo';
-import {
-  createGalleryPlugin,
-  GALLERY_TYPE,
-  pluginGallery,
-} from 'wix-rich-content-plugin-gallery/editor';
+import { createGalleryPlugin, GALLERY_TYPE, pluginGallery } from 'wix-rich-content-plugin-gallery';
 import {
   createVideoPlugin,
   pluginVideo,

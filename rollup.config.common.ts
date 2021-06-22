@@ -72,6 +72,23 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     });
   }
 
+  const viewerLoadableOutput: OutputOptions[] = [
+    {
+      dir: 'dist/loadable/viewer',
+      format: 'es',
+      chunkFileNames: '[name].js',
+    },
+  ];
+
+  const viewerLoadablePath = 'src/viewer-loadable.ts';
+  if (existsSync(`./${viewerLoadablePath}`)) {
+    viewerEntry.push({
+      input: viewerLoadablePath,
+      output: viewerLoadableOutput,
+      ...commonOptions,
+    });
+  }
+
   let entries;
   if (process.env.MODULE_ANALYZE_EDITOR) {
     entries = [editorEntry, ...libEntries];
@@ -103,19 +120,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
   return entries.filter(x => x);
 };
 
-const output: OutputOptions[] = process.env.LOADABLE_COMPONENT
-  ? [
-      {
-        dir: 'dist/loadable/es',
-        format: 'es',
-        chunkFileNames: '[name].js',
-      },
-      {
-        dir: 'dist/loadable/cjs',
-        format: 'cjs',
-      },
-    ]
-  : process.env.DYNAMIC_IMPORT
+const output: OutputOptions[] = process.env.DYNAMIC_IMPORT
   ? [
       {
         dir: 'dist/es',

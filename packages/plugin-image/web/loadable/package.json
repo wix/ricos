@@ -1,5 +1,0 @@
-{
-    "main": "../dist/loadable/es/viewer.js",
-    "module": "../dist/loadable/es/viewer.js",
-    "types": "../dist/src/viewer.d.ts"
-}

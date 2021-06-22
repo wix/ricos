@@ -8,11 +8,8 @@ import {
   LINK_PREVIEW_TYPE,
   linkPreviewTypeMapper,
 } from 'wix-rich-content-plugin-link-preview/viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/loadable/es/viewer.js';
-import {
-  galleryTypeMapper,
-  GALLERY_TYPE,
-} from 'wix-rich-content-plugin-gallery/dist/loadable/es/viewer.js';
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/loadable/viewer';
+import { galleryTypeMapper, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/loadable/viewer';
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/viewer';
 import { giphyTypeMapper, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy/viewer';
 import { buttonTypeMapper } from 'wix-rich-content-plugin-button/viewer';
