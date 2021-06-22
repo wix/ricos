@@ -1,20 +1,17 @@
 import React, { FC } from 'react';
-import { curry } from 'lodash/fp';
-import { pipe } from 'fp-ts/lib/function';
+import { compose, curry } from 'lodash/fp';
 import { EditorPropsContext } from './context';
 import Toolbar from './components/Toolbar';
-import { JSONContent, Command } from '@tiptap/core';
+import { JSONContent } from '@tiptap/core';
 import { Editor, EditorContent } from '@tiptap/react';
 import { draftToTiptap, tiptapToDraft } from 'ricos-content/libs/converters';
 import { createDivider } from './extensions/extension-divider';
 import { tiptapExtensions } from './tiptap-extensions';
 import { DraftContent } from 'ricos-content';
-import { RicosEditorProps } from 'ricos-common';
 
 type TiptapConfig = {
   onUpdate?: ({ content }: { content: DraftContent }) => void;
   initialContent: DraftContent;
-  _rcProps: RicosEditorProps['_rcProps']; // eslint-disable-line
 };
 
 export type TiptapAPI = {
@@ -22,7 +19,7 @@ export type TiptapAPI = {
   blur: () => void;
   focus: () => void;
   // eslint-disable-next-line
-  getEditorCommands: () => Record<string, any>; // EditorCommands;
+  getEditorCommands: () => Editor['commands']; // EditorCommands;
   getToolbars: () => Record<string, FC>;
   // eslint-disable-next-line
   getToolbarProps: () => Record<string, any>; // to be deprecated
@@ -43,24 +40,22 @@ const getEditorInstance = curry(
     })
 );
 
-const toTiptapAPI = curry(
-  (props, editor: Editor): TiptapAPI => ({
-    Editor: () => (
-      <EditorPropsContext.Provider value={props}>
-        <EditorContent editor={editor} />
-      </EditorPropsContext.Provider>
-    ),
-    blur: () => editor.commands.blur(),
-    focus: () => editor.commands.focus(true),
-    getEditorCommands: () => ({}),
-    getToolbars: () => ({
-      MobileToolbar: () => <Toolbar editor={editor} />,
-      TextToolbar: () => <Toolbar editor={editor} />,
-    }),
-    getToolbarProps: () => ({}),
-    destroy: editor.destroy,
-  })
-);
+const toTiptapAPI = (editor: Editor): TiptapAPI => ({
+  Editor: props => (
+    <EditorPropsContext.Provider value={props}>
+      <EditorContent editor={editor} />
+    </EditorPropsContext.Provider>
+  ),
+  blur: () => editor.commands.blur(),
+  focus: () => editor.commands.focus(true),
+  getEditorCommands: () => editor.commands,
+  getToolbars: () => ({
+    MobileToolbar: () => <Toolbar editor={editor} />,
+    TextToolbar: () => <Toolbar editor={editor} />,
+  }),
+  getToolbarProps: () => ({}),
+  destroy: editor.destroy.bind(editor),
+});
 
-export const initTiptapEditor = ({ initialContent, onUpdate, _rcProps }: TiptapConfig): TiptapAPI =>
-  pipe(initialContent, draftToTiptap, getEditorInstance(onUpdate), toTiptapAPI(_rcProps));
+export const initTiptapEditor = ({ initialContent, onUpdate }: TiptapConfig): TiptapAPI =>
+  compose(toTiptapAPI, getEditorInstance(onUpdate), draftToTiptap)(initialContent);

@@ -76,7 +76,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   componentDidMount() {
-    this.updateLocale().then(localeData => this.loadEditor(localeData));
+    this.updateLocale();
+    this.loadEditor();
     const { children } = this.props;
     const onOpenEditorSuccess =
       children?.props.helpers?.onOpenEditorSuccess ||
@@ -85,25 +86,20 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
   }
 
-  async loadEditor(localeData) {
+  loadEditor() {
     if (this.useTiptap) {
-      console.log('tiptap in use'); // eslint-disable-line no-console
-      const tiptapEditorModule = await import(
+      import(
         /* webpackChunkName: wix-tiptap-editor */
         'wix-tiptap-editor'
-      );
-      const { initTiptapEditor } = tiptapEditorModule;
-      const { content, injectedContent, _rcProps } = this.props;
-      this.editor = initTiptapEditor({
-        initialContent: content ?? injectedContent ?? emptyDraftContent,
-        onUpdate: this.onUpdate,
-        _rcProps,
+      ).then(tiptapEditorModule => {
+        const { initTiptapEditor } = tiptapEditorModule;
+        const { content, injectedContent } = this.props;
+        this.editor = initTiptapEditor({
+          initialContent: content ?? injectedContent ?? emptyDraftContent,
+          onUpdate: this.onUpdate,
+        });
+        this.forceUpdate();
       });
-      console.log(this.editor); // eslint-disable-line no-console
-      this.forceUpdate();
-    } else {
-      // load RCE
-      console.log('RCE in use'); // eslint-disable-line no-console
     }
   }
 
@@ -114,26 +110,25 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentWillUnmount() {
     this.props.editorEvents?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    if (this.useTiptap && this.editor) {
+      (this.editor as TiptapAPI).destroy();
+    }
   }
 
   // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
   sendPublishBi = async (postId?: string) => {
-    if (!this.props._rcProps?.helpers?.onPublish) {
+    const onPublish = this.props._rcProps?.helpers?.onPublish;
+    if (!onPublish) {
       return;
     }
-    const { pluginsCount, pluginsDetails } =
-      getEditorContentSummary(this.dataInstance.getEditorState()) || {};
-    this.props._rcProps?.helpers?.onPublish(
-      postId,
-      pluginsCount,
-      pluginsDetails,
-      Version.currentVersion
-    );
+    const editorState = this.dataInstance.getEditorState();
+    const { pluginsCount, pluginsDetails } = getEditorContentSummary(editorState) || {};
+    onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
   onPublish = async () => {
     // TODO: remove this param after getContent(postId) is deprecated
-    await this.sendPublishBi((undefined as unknown) as string);
+    this.sendPublishBi((undefined as unknown) as string);
     console.debug('editor publish callback'); // eslint-disable-line
     return {
       type: 'EDITOR_PUBLISH',
@@ -202,7 +197,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
       console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
-      await this.sendPublishBi(postId); //async
+      this.sendPublishBi(postId); //async
     }
     return getContentState({ shouldRemoveErrorBlocks });
   };
@@ -219,7 +214,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     const res = await getContentStatePromise();
     if (publishId) {
       console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
-      await this.sendPublishBi(publishId);
+      this.sendPublishBi(publishId);
     }
     return res;
   };
@@ -241,55 +236,80 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getEditorCommands = () => this.editor.getEditorCommands();
 
-  renderDraftEditor() {
-    const { children, toolbarSettings, draftEditorSettings = {}, content, ...props } = this.props;
-    const { StaticToolbar, localeData, remountKey, editorState } = this.state;
+  renderToolbarPortal(Toolbar) {
+    return (
+      <StaticToolbarPortal
+        StaticToolbar={Toolbar}
+        textToolbarContainer={this.props.toolbarSettings?.textToolbarContainer}
+      />
+    );
+  }
 
-    const contentProp = editorState
-      ? { editorState: { editorState }, content: {} }
-      : { editorState: {}, content: { content } };
-
+  renderRicosEngine(child, childProps) {
+    const { toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
+    const contentProp = this.getContentProp();
+    return (
+      <RicosEngine
+        RicosModal={RicosModal}
+        isViewer={false}
+        key={'editor'}
+        toolbarSettings={toolbarSettings}
+        {...contentProp.content}
+        {...props}
+      >
+        {React.cloneElement(child, {
+          editorKey: 'editor',
+          setEditorToolbars: this.setStaticToolbar,
+          ...childProps,
+          ...contentProp.editorState,
+          ...supportedDraftEditorSettings,
+          ...this.state.localeData,
+        })}
+      </RicosEngine>
+    );
+  }
 
+  renderDraftEditor() {
+    const { StaticToolbar, remountKey } = this.state;
     const child =
-      children && shouldRenderChild('RichContentEditor', children) ? (
-        children
+      this.props.children && shouldRenderChild('RichContentEditor', this.props.children) ? (
+        this.props.children
       ) : (
         <RichContentEditor />
       );
-
     return (
       <Fragment key={`${remountKey}`}>
-        <StaticToolbarPortal
-          StaticToolbar={StaticToolbar}
-          textToolbarContainer={toolbarSettings?.textToolbarContainer}
-        />
-        <RicosEngine
-          RicosModal={RicosModal}
-          isViewer={false}
-          key={'editor'}
-          toolbarSettings={toolbarSettings}
-          {...contentProp.content}
-          {...props}
-        >
-          {React.cloneElement(child, {
-            onChange: this.onChange(child.props.onChange),
-            ref: this.setEditorRef,
-            editorKey: 'editor',
-            setEditorToolbars: this.setStaticToolbar,
-            ...contentProp.editorState,
-            ...supportedDraftEditorSettings,
-            ...localeData,
-          })}
-        </RicosEngine>
+        {this.renderToolbarPortal(StaticToolbar)}
+        {this.renderRicosEngine(child, {
+          onChange: this.onChange(child.props.onChange),
+          ref: this.setEditorRef,
+        })}
       </Fragment>
     );
   }
 
   renderTiptapEditor() {
-    if (!this.editor) return null;
-    const { Editor } = this.editor as TiptapAPI;
-    return <Editor />;
+    if (!this.editor) {
+      return null;
+    }
+    const { Editor: TiptapEditor, getToolbars } = this.editor as TiptapAPI;
+    const Toolbar = getToolbars().TextToolbar;
+    const child = <TiptapEditor />;
+    return (
+      <Fragment>
+        {this.renderToolbarPortal(Toolbar)}
+        {this.renderRicosEngine(child, {})}
+      </Fragment>
+    );
+  }
+
+  getContentProp() {
+    const { editorState } = this.state;
+    const { content } = this.props;
+    return editorState
+      ? { editorState: { editorState }, content: {} }
+      : { editorState: {}, content: { content } };
   }
 
   render() {
