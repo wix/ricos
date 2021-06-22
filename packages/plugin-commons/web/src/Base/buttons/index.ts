@@ -149,6 +149,7 @@ export const sizeFullWidthButton = icon =>
 
 export const deleteButton = icon =>
   createBlockButton({
+    name: 'Delete',
     Icon: icon || TrashIcon,
     tooltipTextKey: 'DeleteButton_Tooltip',
   });

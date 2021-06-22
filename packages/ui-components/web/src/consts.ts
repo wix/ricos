@@ -35,9 +35,15 @@ export const FOOTER_BUTTON_ALIGNMENT = Object.freeze({
   END: 'end',
 });
 
-// export const MODAL_CONTROLS_POSITION = Object.freeze({
-//   TOP: 'top',
-//   BOTTOM: 'bottom',
-// });
+export const MODAL_CONTROLS_POSITION = Object.freeze({
+  TOP: 'top',
+  BOTTOM: 'bottom',
+});
+
+export const KEYS_CHARCODE = {
+  ENTER: 13,
+  ESCAPE: 27,
+  SPACE: 32,
+};
 
 // export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';

@@ -64,6 +64,7 @@ const createBaseComponent = ({
       super(props);
       this.state = { componentState: {}, ...this.stateFromProps(props) };
       this.styles = { ...styles, ...rtlIgnoredStyles };
+
       this.containerRef = React.createRef();
     }
 

@@ -2,7 +2,7 @@
   "Poll_Viewer_ShowAllOptions_CTA": "Lihat Semua Opsi",
   "Spoiler_Reveal_Tooltip": "Klik untuk mengungkap",
   "Viewer_Toolbar_Twitter_Tooltip": "Twitkan ini",
-  "CollapsibleListPlugin_CollapseButton_AriaLabel": "Butir diciutkan",
+  "CollapsibleListPlugin_CollapseButton_AriaLabel": "Item ditutup",
   "Spoiler_Reveal_Video_CTA": "Singkap Video",
   "Poll_Viewer_ShowAllResults_CTA": "Lihat Semua Hasil",
   "Spoiler_Reveal_Image_Placeholder": "Gambar ini berisi bocoran",
@@ -24,7 +24,7 @@
   "Poll_Viewer_Toast_Error_Connection": "Tidak ada internet. Periksa sambungan Anda.",
   "Poll_Viewer_Visibility_Owner_Footer": "Hanya Anda yang bisa melihat hasilnya.",
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} orang memberikan suara untuk jawaban ini",
-  "CollapsibleListPlugin_ExpandButton_AriaLabel": "Butir dibentangkan",
+  "CollapsibleListPlugin_ExpandButton_AriaLabel": "Item dibentangkan",
   "Spoiler_Reveal_Video_Placeholder": "Video ini berisi bocoran",
   "Preview_SeeFullPost_Label": "Lihat pos lengkap",
   "UploadFile_Viewer_Download": "Unduh {{fileType}}"

@@ -4,13 +4,8 @@ export {
   PLUGIN_DECORATIONS,
   HEADER_TYPE_MAP,
   DEFAULT_HEADERS_DROPDOWN_OPTIONS,
-  FOOTER_BUTTON_ALIGNMENT,
-  MODAL_CONTROLS_POSITION,
   UNSUPPORTED_BLOCKS_TYPE,
 } from './consts';
-
-export { default as UrlInputModal } from './Modals/UrlInputModal';
-export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
 
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
@@ -33,4 +28,4 @@ export { default as baseToolbarButton } from './Base/baseToolbarButton';
 // Components
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 
-export { getSelectionStyles } from './Utils/inlineStyleUtils';
+export { getSelectionStyles } from 'wix-rich-content-editor-common';
