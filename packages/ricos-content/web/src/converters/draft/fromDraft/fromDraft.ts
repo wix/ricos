@@ -20,7 +20,10 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     if (block) {
       switch (block.type) {
         case BlockType.Atomic:
-          nodes.push(parseAtomicBlock(block));
+          const atomicBlock = parseAtomicBlock(block);
+          if (atomicBlock) {
+            nodes.push(atomicBlock);
+          }
           parseBlocks(index + 1);
           break;
         case BlockType.Blockquote:
@@ -56,12 +59,20 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     }
   };
 
-  const parseAtomicBlock = (block: RicosContentBlock): Node => ({
-    key: block.key,
-    nodes: [],
-    style: getNodeStyle(block.data),
-    ...getEntity(block.entityRanges[0].key, entityMap),
-  });
+  const parseAtomicBlock = ({ key, data, entityRanges }: RicosContentBlock): Node | null => {
+    if (entityRanges && entityRanges.length) {
+      const entity = getEntity(entityRanges[0].key, entityMap);
+      if (entity) {
+        return {
+          key,
+          nodes: [],
+          style: getNodeStyle(data),
+          ...entity,
+        };
+      }
+    }
+    return null;
+  };
 
   const parseQuoteBlock = (block: RicosContentBlock): Node => ({
     key: block.key,
