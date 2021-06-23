@@ -24,6 +24,8 @@
   - [#2580](https://github.com/wix-incubator/rich-content/pull/2580) Editor Commands improvements
 - `link`
   - [#2637](https://github.com/wix-incubator/rich-content/pull/2637) Sponsored tooltip in link panel
+- `collapsible-list`
+  - [#2639](https://github.com/wix-incubator/rich-content/pull/2639) Collapsible's default direction is based on locale (ltr/rtl)
 
 </details>
 <hr/>
