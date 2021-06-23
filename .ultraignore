@@ -1,1 +1,2 @@
-packages/common/web/statics/locale/*.json
+# Generated Merged Translations
+packages/common/web/statics/locale
