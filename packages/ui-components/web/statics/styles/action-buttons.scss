@@ -12,15 +12,9 @@
 .action_buttons_button {
   border: 1px solid $settings-action-color-fallback;
   outline: none;
-  background: transparent;
-  cursor: pointer;
   width: calc(50% - 6px);
   max-width: 132px;
   padding: 0;
-  color: $settings-action-color-fallback;
-  &:hover {
-    background: #fff;
-  }
   &.mobile {
     font-size: 16px;
     color: $fallbackColor;
@@ -32,9 +26,6 @@
 .action_buttons_button_save {
   background-color: $settings-action-color-fallback;
   color: $primary-text-color-light;
-  & :hover {
-    background-color: rgba($settings-action-color-fallback, 0.7);
-  }
   .mobile & {
     background-color: transparent;
     color: $settings-action-color-fallback;

@@ -4,8 +4,9 @@ import Button from './Button';
 import { RichContentTheme } from 'wix-rich-content-common';
 import styles from '../../statics/styles/action-buttons.scss';
 
+type sizeType = 'xs' | 'sm' | 'md' | 'lg';
 export interface ActionButtonsProps {
-  size: string;
+  size: sizeType;
   onCancel: () => void;
   onSave: () => void;
   cancelText: string;
@@ -17,7 +18,7 @@ export interface ActionButtonsProps {
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({
-  size,
+  size = 'sm',
   onCancel,
   onSave,
   cancelText,
@@ -51,6 +52,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       )}
       dataHook={saveBtnDataHook}
       onClick={onSave}
+      type={'primary'}
     >
       {saveText}
     </Button>
