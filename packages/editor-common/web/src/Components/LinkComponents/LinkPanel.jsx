@@ -167,6 +167,9 @@ class LinkPanel extends Component {
               checked={sponsored}
               dataHook="linkPanelSponsoredCheckbox"
               onChange={this.handleSponsoredChange}
+              tooltipTextKey={'LinkPanel_Sponsored_Checkbox_Tooltip'}
+              t={t}
+              isMobile={isMobile}
             />
           )}
         </div>
