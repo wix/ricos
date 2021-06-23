@@ -12982,6 +12982,15 @@ wix-rich-content-plugin-sound-cloud@8.43.1:
     wix-rich-content-editor-common "8.43.1"
     wix-rich-content-plugin-commons "8.43.1"
 
+wix-rich-content-plugin-spoiler@8.43.1:
+  version "8.43.1"
+  resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-spoiler/-/wix-rich-content-plugin-spoiler-8.43.1.tgz#551b3c958fde267fa9e5970bbfc51da44fd9a4b0"
+  integrity sha512-57ZQbz6i6xWJ6exdrmmoBgheIBPyoQx/Ru4H5YsRIMSvavaJva7H17YgU/P2shETR6EELeY3bXenOrP4U90Rnw==
+  dependencies:
+    wix-rich-content-common "8.43.1"
+    wix-rich-content-editor-common "8.43.1"
+    wix-rich-content-plugin-commons "8.43.1"
+
 wix-rich-content-plugin-table@8.43.1:
   version "8.43.1"
   resolved "https://registry.yarnpkg.com/wix-rich-content-plugin-table/-/wix-rich-content-plugin-table-8.43.1.tgz#b2f21fa302907cec4881199e303fc1fbe1ec0e76"
