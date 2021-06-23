@@ -2,7 +2,7 @@ import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
-import { ActionButtons } from 'wix-rich-content-ui-components';
+import { ActionButtons, BUTTON_SIZE } from 'wix-rich-content-ui-components';
 import classNames from 'classnames';
 
 const CustomColorPicker = lazy(() => import('./CustomColorPicker'));
@@ -38,7 +38,7 @@ class CustomColorPickerDialog extends Component {
     return (
       <div className={styles.colorPickerDialog_buttons_wrapper}>
         <ActionButtons
-          size="xs"
+          size={BUTTON_SIZE.tiny}
           isMobile={isMobile}
           onCancel={this.onCancel}
           onSave={this.onUpdate}

@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import Button from './Button';
 import { RichContentTheme } from 'wix-rich-content-common';
 import styles from '../../statics/styles/action-buttons.scss';
+import { BUTTON_SIZE } from '../consts';
 
-type sizeType = 'xs' | 'sm' | 'md' | 'lg';
-
+type Keys = keyof typeof BUTTON_SIZE;
 export interface ActionButtonsProps {
-  size?: sizeType;
+  size?: typeof BUTTON_SIZE[Keys];
   onCancel: () => void;
   onSave: () => void;
   cancelText: string;
@@ -19,7 +19,7 @@ export interface ActionButtonsProps {
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({
-  size = 'sm',
+  size = BUTTON_SIZE.small,
   onCancel,
   onSave,
   cancelText,

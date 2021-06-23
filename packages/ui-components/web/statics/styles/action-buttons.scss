@@ -32,30 +32,26 @@
   }
 }
 
-.sm_font_size {
+.small_font_size {
   font-size: 16px;
 }
 
-.xs {
-  line-height: 32px;
+.tiny {
   height: 32px;
   font-size: 14px;
 }
 
-.sm {
-  @extend.sm_font_size;
-  line-height: 36px;
+.small {
+  @extend.small_font_size;
   height: 36px;
 }
 
-.md {
-  @extend.sm_font_size;
-  line-height: 40px;
+.medium {
+  @extend.small_font_size;
   height: 40px;
 }
 
-.lg {
-  @extend.sm_font_size;
-  line-height: 48px;
+.large {
+  @extend.small_font_size;
   height: 48px;
 }

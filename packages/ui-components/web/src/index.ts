@@ -1,4 +1,4 @@
-export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION } from './consts';
+export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION, BUTTON_SIZE } from './consts';
 
 export { default as UrlInputModal } from './Modals/UrlInputModal';
 export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';

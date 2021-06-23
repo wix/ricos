@@ -46,4 +46,11 @@ export const KEYS_CHARCODE = {
   SPACE: 32,
 };
 
+export const BUTTON_SIZE = {
+  tiny: 'tiny',
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+};
+
 // export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';

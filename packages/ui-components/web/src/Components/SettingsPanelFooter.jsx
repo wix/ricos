@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ActionButtons from './ActionButtons';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-panel-footer.scss';
-import { FOOTER_BUTTON_ALIGNMENT } from '../consts';
+import { FOOTER_BUTTON_ALIGNMENT, BUTTON_SIZE } from '../consts';
 
 class SettingsPanelFooter extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class SettingsPanelFooter extends Component {
       >
         <div className={this.styles.settingsPanel_footer_buttons_wrapper}>
           <ActionButtons
-            size="sm"
+            size={BUTTON_SIZE.small}
             theme={theme}
             isMobile={false}
             onCancel={cancel}
