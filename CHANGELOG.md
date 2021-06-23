@@ -24,6 +24,8 @@
   - [#2580](https://github.com/wix-incubator/rich-content/pull/2580) Editor Commands improvements
 - `link`
   - [#2637](https://github.com/wix-incubator/rich-content/pull/2637) Sponsored tooltip in link panel
+- `ui-components`
+  - [#2641](https://github.com/wix-incubator/rich-content/pull/2641) moved ActionButtons into ui-components and some code refactor
 
 </details>
 <hr/>
