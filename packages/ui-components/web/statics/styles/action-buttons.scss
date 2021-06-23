@@ -6,9 +6,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0;
-  &.mobile {
-    margin: 5px auto;
-  }
+  width: 100%;
 }
 
 .action_buttons_button {
@@ -17,9 +15,18 @@
   background: transparent;
   cursor: pointer;
   width: calc(50% - 6px);
+  max-width: 132px;
   padding: 0;
   color: $settings-action-color-fallback;
-  margin: 0 6px;
+  &:hover {
+    background: #fff;
+  }
+  &.mobile {
+    font-size: 16px;
+    color: $fallbackColor;
+    background: transparent;
+    border: none;
+  }
 }
 
 .action_buttons_button_save {
@@ -34,16 +41,30 @@
   }
 }
 
+.sm_font_size {
+  font-size: 16px;
+}
+
 .xs {
-  max-width: 132px;
   line-height: 32px;
   height: 32px;
   font-size: 14px;
-  .mobile {
-    font-size: 16px;
-    width: 50px;
-    color: $fallbackColor;
-    background: transparent;
-    border: none;
-  }
+}
+
+.sm {
+  @extend.sm_font_size;
+  line-height: 36px;
+  height: 36px;
+}
+
+.md {
+  @extend.sm_font_size;
+  line-height: 40px;
+  height: 40px;
+}
+
+.lg {
+  @extend.sm_font_size;
+  line-height: 48px;
+  height: 48px;
 }

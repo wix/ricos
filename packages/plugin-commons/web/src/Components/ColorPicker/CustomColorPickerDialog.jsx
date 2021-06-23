@@ -36,15 +36,17 @@ class CustomColorPickerDialog extends Component {
   renderActionButtons = () => {
     const { t, isMobile } = this.props;
     return (
-      <ActionButtons
-        size={'xs'}
-        isMobile={isMobile}
-        onCancel={this.onCancel}
-        onUpdate={this.onUpdate}
-        cancelBtnText={t('ColorPickerButtonLabel_Cancel')}
-        saveBtnText={t('ColorPickerButtonLabel_Update')}
-        dataHook={'colorPickerUpdateButton'}
-      />
+      <div className={styles.colorPickerDialog_buttons_wrapper}>
+        <ActionButtons
+          size={'xs'}
+          isMobile={isMobile}
+          onCancel={this.onCancel}
+          onSave={this.onUpdate}
+          cancelText={t('ColorPickerButtonLabel_Cancel')}
+          saveText={t('ColorPickerButtonLabel_Update')}
+          saveBtnDataHook={'colorPickerUpdateButton'}
+        />
+      </div>
     );
   };
 

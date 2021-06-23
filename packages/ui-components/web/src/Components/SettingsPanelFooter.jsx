@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Button from './Button';
+import ActionButtons from './ActionButtons';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-panel-footer.scss';
 import { FOOTER_BUTTON_ALIGNMENT } from '../consts';
@@ -42,33 +42,19 @@ class SettingsPanelFooter extends Component {
           }
         )}
       >
-        <Button
-          theme={theme}
-          ariaProps={{ 'aria-label': cancelText }}
-          dataHook="settingPanelFooterCancel"
-          onClick={() => cancel()}
-          className={classNames(
-            this.styles.settingsPanel_cancel,
-            isModal && this.styles.modal,
-            endAlignment && this.styles.flexEndModalButtons
-          )}
-          type={'secondary'}
-        >
-          {cancelText}
-        </Button>
-        <Button
-          ariaProps={({ 'aria-label': saveText }, !selected && { disabled: 'disabled' })}
-          theme={theme}
-          className={classNames(
-            this.styles.settingsPanel_save,
-            isModal && this.styles.modal,
-            endAlignment && this.styles.flexEndModalButtons
-          )}
-          dataHook="settingPanelFooterDone"
-          onClick={() => save()}
-        >
-          {saveText}
-        </Button>
+        <div className={this.styles.settingsPanel_footer_buttons_wrapper}>
+          <ActionButtons
+            size="sm"
+            theme={theme}
+            isMobile={false}
+            onCancel={cancel}
+            onSave={save}
+            cancelText={cancelText}
+            saveText={saveText}
+            saveBtnDataHook={'settingPanelFooterDone'}
+            cancelBtnDataHook={'settingPanelFooterCancel'}
+          />
+        </div>
       </div>
     );
   }
