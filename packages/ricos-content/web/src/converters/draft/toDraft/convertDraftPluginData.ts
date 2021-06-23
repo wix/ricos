@@ -26,7 +26,10 @@ export const convertNodeToDraftData = (node: Node) => {
   const { type } = node;
   const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
   const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
-  return convertNodeDataToDraft(type, node[dataFieldName]);
+  if (!dataFieldName) {
+    console.error(`No data field name | Plugin Name: ${draftPluginType}`);
+  }
+  return convertNodeDataToDraft(type, node[dataFieldName] || {});
 };
 
 export const convertDecorationToDraftData = (decoration: Decoration) => {
@@ -36,6 +39,10 @@ export const convertDecorationToDraftData = (decoration: Decoration) => {
 };
 
 export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
+  if (!data) {
+    console.error(`No data for ${nodeType}`);
+    return {};
+  }
   const newData = cloneDeep(data);
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,

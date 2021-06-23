@@ -19,6 +19,14 @@
 ### :bug: Bug Fix
 - `fullscreen`
   - [#2625](https://github.com/wix/ricos/pull/2625) images with download enabled can be downloaded from fullscreen
+### :house: Internal
+- `ricos-editor`
+  - [#2641](https://github.com/wix/ricos/pull/2641) RicosEditor uses TiptapAPI based on experiment
+### :nail_care: Polish
+- `editor`
+  - [#2580](https://github.com/wix-incubator/rich-content/pull/2580) Editor Commands improvements
+- `link`
+  - [#2637](https://github.com/wix-incubator/rich-content/pull/2637) Sponsored tooltip in link panel
 
 </details>
 <hr/>

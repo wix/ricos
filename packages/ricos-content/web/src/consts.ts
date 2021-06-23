@@ -78,6 +78,7 @@ export const RICOS_COLLAPSIBLE_LIST_TYPE = 'ricos-collapsible-list';
 export const RICOS_ACTION_BUTTON_TYPE = 'ricos-action-button';
 export const RICOS_CODE_BLOCK_TYPE = 'ricos-code-block';
 export const RICOS_DIVIDER_TYPE = 'ricos-divider';
+export const RICOS_EMOJI_TYPE = 'ricos-emoji';
 export const RICOS_FILE_TYPE = 'ricos-file';
 export const RICOS_GALLERY_TYPE = 'ricos-gallery';
 export const RICOS_GIPHY_TYPE = 'ricos-giphy';
