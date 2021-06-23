@@ -34,7 +34,7 @@ class CustomColorPickerDialog extends Component {
   }
 
   renderActionButtons = () => {
-    const { t, isMobile } = this.props;
+    const { t, isMobile, theme } = this.props;
     return (
       <div className={styles.colorPickerDialog_buttons_wrapper}>
         <ActionButtons
@@ -42,6 +42,7 @@ class CustomColorPickerDialog extends Component {
           isMobile={isMobile}
           onCancel={this.onCancel}
           onSave={this.onUpdate}
+          theme={theme}
           cancelText={t('ColorPickerButtonLabel_Cancel')}
           saveText={t('ColorPickerButtonLabel_Update')}
           saveBtnDataHook={'colorPickerUpdateButton'}
