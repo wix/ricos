@@ -5,8 +5,9 @@ import { RichContentTheme } from 'wix-rich-content-common';
 import styles from '../../statics/styles/action-buttons.scss';
 
 type sizeType = 'xs' | 'sm' | 'md' | 'lg';
+
 export interface ActionButtonsProps {
-  size: sizeType;
+  size?: sizeType;
   onCancel: () => void;
   onSave: () => void;
   cancelText: string;

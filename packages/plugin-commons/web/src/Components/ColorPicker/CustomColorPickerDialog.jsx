@@ -38,7 +38,7 @@ class CustomColorPickerDialog extends Component {
     return (
       <div className={styles.colorPickerDialog_buttons_wrapper}>
         <ActionButtons
-          size={'xs'}
+          size="xs"
           isMobile={isMobile}
           onCancel={this.onCancel}
           onSave={this.onUpdate}
