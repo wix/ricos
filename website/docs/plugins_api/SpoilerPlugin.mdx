@@ -1,0 +1,115 @@
+---
+id: SpoilerPlugin
+title: Spoiler Plugin
+sidebar_label: Spoiler Plugin
+---
+
+import { pluginSpoiler, SpoilerEditorWrapper } from 'wix-rich-content-plugin-spoiler';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
+import { pluginGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
+import { pluginImage, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
+import 'wix-rich-content-plugin-image/dist/styles.min.css';
+import { pluginVideo, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Spoilers plugin allows the user to hide some content (text, image, gallery, video ) on the page.
+Spoiler for plugins done through plugin settings modal, and for text through text formatting toolbar.
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add content and spoiler it!')}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginSpoiler({
+        SpoilerEditorWrapper,
+        supportedPlugins: [IMAGE_TYPE, GALLERY_TYPE, VIDEO_TYPE],
+      }),
+      pluginImage(),
+      pluginGallery(),
+      pluginVideo(),
+    ]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginSpoiler, SpoilerEditorWrapper } from 'wix-rich-content-plugin-spoiler';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
+<RicosEditor plugins={[pluginSpoiler({SpoilerEditorWrapper, supportedPlugins: [IMAGE_TYPE, GALLERY_TYPE, VIDEO_TYPE]})]} />;
+/* For support inline spoiler (for text), you should add spoiler button to text formatting toolbar by add it to getToolbarSettings config.
+For more information click [here](https://ricos.js.org/docs/rce_api/ToolbarCustomization/#gettoolbarsettings-api) */
+getToolbarSettings: ({ textButtons }) => [{
+  getButtons: () => {
+      desktop: [FORMATTING_BUTTONS.SPOILER],
+  }
+}]
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import {
+  spoilerInlineStyleMapper,
+  initSpoilersContentState,
+  SpoilerViewerWrapper,
+  SPOILER_TYPE,
+  pluginSpoiler,
+} from 'wix-rich-content-plugin-spoiler/viewer';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
+<RicosViewer
+  plugins={[pluginSpoiler({initSpoilersContentState, SpoilerViewerWrapper})]}
+  inlineStyleMappers={spoilerInlineStyleMapper(config, initialState)}
+/>;
+/* For support inline spoiler styles (for text), you should add spoilerInlineStyleMapper to inlineStyleMapper
+For more information click [here](https://ricos.js.org/docs/plugins_api/PluginCustomization/#text-color-inline-style-mapper)
+```
+
+## Spoiler Editor Config API
+
+### `supportedPlugins`
+
+controls on which plugins spoiler can be done. If not given - spoiler can be don on all supported plugins
+
+```jsx
+{
+  supportedPlugins: [IMAGE_TYPE, GALLERY_TYPE, VIDEO_TYPE],
+}
+```
+
+### `SpoilerEditorWrapper`
+
+Wrapper component which enables to override the default spoiler component that wrapping the plugins
+
+```jsx
+{
+  SpoilerEditorWrapper: config => WrappedComponent => <YourSpoilerWrapper><WrappedComponent/></YourSpoilerWrapper>,
+}
+```
+
+## Spoiler Viewer Config API
+
+### `initSpoilersContentState`
+
+Function that gets contentState and returns a new contentState with block after modify manipulation on spoiler block style
+
+```jsx
+{
+  initSpoilersContentState: contentState  => ({...contentState, blocks: modifiedBlocks}),
+}
+```
+
+### `SpoilerViewerWrapper`
+
+Wrapper component which enables to override the default spoiler component that wrapping the plugins
+
+```jsx
+{
+  SpoilerViewerWrapper:  <YourSpoilerWrapper>{children}</YourSpoilerWrapper>,
+}
+```
