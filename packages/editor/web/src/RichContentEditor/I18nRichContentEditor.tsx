@@ -25,9 +25,6 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   getEditorCommands = () => this.editor.EditorCommands;
 
-  // TODO: remove postId param once the getContent(postId) API is completely deprecated
-  publish = (postId?: string) => this.editor.publish(postId); //async
-
   render() {
     return <WrappedEditor {...this.props} ref={this.setEditorRef} />;
   }
