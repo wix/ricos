@@ -163,6 +163,11 @@ const replace = (): Plugin => {
 const uglify = (): Plugin => {
   return terser({
     mangle: false,
+    output: {
+      comments: (node, comment) => {
+        return /@preserve|@license|@cc_on|.*webpackChunkName:.*/i.test(comment.value);
+      },
+    },
   });
 };
 

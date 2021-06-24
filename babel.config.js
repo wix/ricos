@@ -35,6 +35,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const testPlugins = [
+  '@loadable/babel-plugin',
   '@babel/plugin-transform-modules-commonjs',
   '@babel/plugin-syntax-dynamic-import',
   'dynamic-import-node',

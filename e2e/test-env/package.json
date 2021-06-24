@@ -22,6 +22,8 @@
     "ricos-viewer": "8.44.3",
     "serialize-javascript": "^5.0.0",
     "ts-loader": "^8.0.4",
+    "@loadable/component": "^5.14.1",
+    "@loadable/server": "^5.14.1",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-server-middleware": "^0.6.0",
     "webpack-node-externals": "^1.7.2",
