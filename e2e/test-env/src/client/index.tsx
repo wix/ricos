@@ -8,6 +8,7 @@ import PreviewTestApp from './PreviewTestApp';
 
 import './app.css';
 import { TestAppConfig } from '../../../../examples/main/src/types';
+import { loadableReady } from '@loadable/component';
 
 const compMap = {
   rce: TestApp,
@@ -23,10 +24,12 @@ const props = {
   testAppConfig: window.testAppConfig,
 };
 
-hydrate(
-  <RichContentApp app={compMap[window.compId]} mode={'test'} {...props} />,
-  document.getElementById('root')
-);
+loadableReady(() => {
+  hydrate(
+    <RichContentApp app={compMap[window.compId]} mode={'test'} {...props} />,
+    document.getElementById('root')
+  );
+});
 
 declare global {
   interface Window {
