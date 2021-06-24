@@ -3,16 +3,21 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .action_buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
+  &.tiny {
+    gap: 12px;
+  }
+  &.small {
+    gap: 24px;
+  }
 }
 
 .action_buttons_button {
   border: 1px solid $settings-action-color-fallback;
   outline: none;
-  width: calc(50% - 6px);
+  // width: calc(50% - 6px);
   max-width: 132px;
   padding: 0;
   &.mobile {
@@ -20,6 +25,12 @@
     color: $fallbackColor;
     background: transparent;
     border: none;
+    &:nth-child(1) {
+      justify-self: left;
+    }
+    &:nth-child(2) {
+      justify-self: right;
+    }
   }
 }
 

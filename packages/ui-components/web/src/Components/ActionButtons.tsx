@@ -29,7 +29,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   cancelBtnDataHook,
   theme,
 }) => (
-  <div className={classNames(styles.action_buttons, { [styles.mobile]: isMobile })}>
+  <div className={classNames(styles.action_buttons, styles[size], { [styles.mobile]: isMobile })}>
     <Button
       theme={theme}
       ariaProps={{ 'aria-label': cancelText }}
