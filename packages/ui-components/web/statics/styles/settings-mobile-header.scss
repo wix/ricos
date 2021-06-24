@@ -10,7 +10,7 @@
     z-index: 5;
     &:not(.media) {
       position: fixed;
-      display: block;
+      display: flex;
       padding: 0 9px;
       background: $settings-action-color-fallback;
     }
@@ -39,8 +39,10 @@
     border-bottom: 1px solid #ededed;
     display: flex;
     justify-content: space-between;
-    padding: 0 5px;
+    padding: 0 17px;
     background: $background-color;
+    height: 70px;
+    align-items: center;
     .button {
       padding: 14px 12px 15px 18px;
       font-size: 16px;

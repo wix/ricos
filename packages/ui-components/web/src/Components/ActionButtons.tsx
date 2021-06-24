@@ -5,9 +5,9 @@ import { RichContentTheme } from 'wix-rich-content-common';
 import styles from '../../statics/styles/action-buttons.scss';
 import { BUTTON_SIZE } from '../consts';
 
-type Keys = keyof typeof BUTTON_SIZE;
+type ButtonSizeKeys = keyof typeof BUTTON_SIZE;
 export interface ActionButtonsProps {
-  size?: typeof BUTTON_SIZE[Keys];
+  size?: typeof BUTTON_SIZE[ButtonSizeKeys];
   onCancel: () => void;
   onSave: () => void;
   cancelText: string;
@@ -15,6 +15,7 @@ export interface ActionButtonsProps {
   isMobile?: boolean;
   saveBtnDataHook?: string;
   cancelBtnDataHook?: string;
+  selected?: boolean;
   theme?: RichContentTheme;
 }
 
@@ -24,10 +25,11 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   onSave,
   cancelText,
   saveText,
-  isMobile,
+  isMobile = false,
   saveBtnDataHook,
   cancelBtnDataHook,
   theme,
+  selected,
 }) => (
   <div className={classNames(styles.action_buttons, styles[size], { [styles.mobile]: isMobile })}>
     <Button
@@ -43,13 +45,14 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       {cancelText}
     </Button>
     <Button
-      ariaProps={{ 'aria-label': saveText }}
+      ariaProps={{ 'aria-label': saveText } && !selected && { disabled: 'disabled' }}
       theme={theme}
       className={classNames(
         styles.action_buttons_button,
         styles[size],
         styles.action_buttons_button_save,
-        { [styles.mobile]: isMobile }
+        { [styles.mobile]: isMobile },
+        { [styles.disabled]: !selected }
       )}
       dataHook={saveBtnDataHook}
       onClick={onSave}

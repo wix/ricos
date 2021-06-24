@@ -46,11 +46,11 @@ class SettingsPanelFooter extends Component {
           <ActionButtons
             size={BUTTON_SIZE.small}
             theme={theme}
-            isMobile={false}
             onCancel={cancel}
             onSave={save}
             cancelText={cancelText}
             saveText={saveText}
+            selected={selected}
             saveBtnDataHook={'settingPanelFooterDone'}
             cancelBtnDataHook={'settingPanelFooterCancel'}
           />

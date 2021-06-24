@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { SelectionList } from 'wix-rich-content-ui-components';
+import { SelectionList, ActionButtons, BUTTON_SIZE } from '../';
 import { MoreIcon } from '../Icons';
 import styles from '../../statics/styles/settings-mobile-header.scss';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -28,16 +28,18 @@ const SettingsMobileHeader = ({
           [styles.media]: isMediaSettingsModal,
         })}
       >
-        <button
-          data-hook={dataHookPrefix + 'Cancel'}
-          role="menuitem"
-          aria-label={cancelLabel}
-          onClick={() => cancel()}
-          className={classNames(_styles.button, _styles.cancel)}
-        >
-          {cancelLabel}
-        </button>
-        {otherTab ? (
+        <ActionButtons
+          size={BUTTON_SIZE.small}
+          theme={theme}
+          isMobile
+          onCancel={cancel}
+          onSave={save}
+          cancelText={cancelLabel}
+          saveText={saveLabel}
+          saveBtnDataHook={dataHookPrefix + 'Done'}
+          cancelBtnDataHook={dataHookPrefix + 'Cancel'}
+        />
+        {otherTab && (
           <button
             role="menuitem"
             aria-label="More"
@@ -47,6 +49,26 @@ const SettingsMobileHeader = ({
           >
             <MoreIcon />
           </button>
+        )}
+        {/* <button
+          data-hook={dataHookPrefix + 'Cancel'}
+          role="menuitem"
+          aria-label={cancelLabel}
+          onClick={() => cancel()}
+          className={classNames(_styles.button, _styles.cancel)}
+        >
+          {cancelLabel}
+        </button>
+        {otherTab  &&(
+          <button
+            role="menuitem"
+            aria-label="More"
+            data-hook={dataHookPrefix + 'More'}
+            onClick={() => toggleMenu(!menuVisible)}
+            className={classNames(_styles.button, _styles.menuIcon)}
+          >
+            <MoreIcon />
+          </button>}
         ) : null}
         <button
           data-hook={dataHookPrefix + 'Done'}
@@ -56,7 +78,7 @@ const SettingsMobileHeader = ({
           className={classNames(_styles.button, _styles.done)}
         >
           {saveLabel}
-        </button>
+        </button> */}
       </div>
       {menuVisible && (
         <div className={_styles.menu}>
