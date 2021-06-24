@@ -62,8 +62,8 @@ type TextBlockType =
   | typeof HEADER_BLOCK.SIX;
 
 type Selection = {
-  getIsFocused?: () => boolean;
-  getIsCollapsed?: () => boolean;
+  getIsFocused?: boolean;
+  getIsCollapsed?: boolean;
 };
 
 type draftSelection = {

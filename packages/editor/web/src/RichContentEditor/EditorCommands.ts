@@ -244,8 +244,8 @@ export const createEditorCommands = (
     loadSelectionState: EditorCommands['loadSelectionState'];
   } = {
     getSelection: () => {
-      const { isCollapsed, getHasFocus } = getEditorState().getSelection();
-      return { getIsCollapsed: isCollapsed, getIsFocused: getHasFocus };
+      const selection = getEditorState().getSelection();
+      return { getIsCollapsed: selection.isCollapsed(), getIsFocused: selection.getHasFocus() };
     },
     getAnchorableBlocks: () => getAnchorableBlocks(getEditorState()),
     getColor: colorType => getColor(getEditorState(), colorType),

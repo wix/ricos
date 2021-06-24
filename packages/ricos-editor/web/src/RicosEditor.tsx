@@ -24,7 +24,13 @@ import {
   EditorEventsContext,
   EditorEvents,
 } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
-import { ToolbarType, Version, getLangDir, TextButtons } from 'wix-rich-content-common';
+import {
+  ToolbarType,
+  Version,
+  getLangDir,
+  TextButtons,
+  EditorCommands,
+} from 'wix-rich-content-common';
 import {
   FloatingToolbarContainer,
   Toolbar,
@@ -279,10 +285,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         _rcProps: { helpers } = {},
       } = this.props;
       const buttonsAsArray = Object.values(buttons);
-      const editorCommands = activeEditor.getEditorCommands();
+      const editorCommands: EditorCommands = activeEditor.getEditorCommands();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const selection = (editorCommands as any)._getSelection();
-      const showFormattingToolbar = !selection.isCollapsed() && selection.getHasFocus();
+      const selection = editorCommands.getSelection();
+      const showFormattingToolbar = !selection.getIsCollapsed && selection.getIsFocused;
       const t = activeEditor.getT();
       const removeToolbarFocus = () => activeEditor.removeToolbarFocus();
       const textButtons: TextButtons = {
@@ -325,7 +331,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
           <FloatingToolbarContainer
             isMobile={isMobile}
-            showFormattingToolbar={showFormattingToolbar}
+            showFormattingToolbar={showFormattingToolbar || false}
             removeToolbarFocus={removeToolbarFocus}
           >
             {ToolbarToRender}
