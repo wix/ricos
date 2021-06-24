@@ -34,6 +34,7 @@ module.exports = {
           'plugins_api/TablePlugin',
           'plugins_api/CollapsibleListPlugin',
           'plugins_api/HeadingsPlugin',
+          'plugins_api/SpoilerPlugin',
         ],
       },
       {
