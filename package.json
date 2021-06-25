@@ -57,8 +57,8 @@
     "e2e:app:run": "cd e2e/test-env && npm start",
     "e2e:app:dev": "cd e2e/test-env && npm run dev",
     "e2e:app:wait": "wait-on http://localhost:3002/ --timeout 220000 --interval 2000",
-    "test": "lerna run --stream test",
-    "lint": "lerna run --stream lint",
+    "test": "ultra -r test",
+    "lint": "ultra -r lint",
     "build:test": "npm run build && npm run build --prefix e2e/test-env",
     "generatePlugin": "node scripts/generatePlugin",
     "migrateFixtures": "cd scripts && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} migrateSchema",
@@ -67,7 +67,8 @@
   },
   "ultra": {
     "concurrent": [
-      "lint"
+      "lint",
+      "test"
     ]
   },
   "husky": {
