@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { compose, curry } from 'lodash/fp';
+import { pipe } from 'fp-ts/lib/function';
 import { EditorPropsContext } from './context';
 import Toolbar from './components/Toolbar';
 import { JSONContent } from '@tiptap/core';
@@ -26,19 +26,17 @@ export type TiptapAPI = {
   destroy: Editor['destroy'];
 };
 
-const getEditorInstance = curry(
-  (onUpdate, content: JSONContent) =>
-    new Editor({
-      content,
-      extensions: [...tiptapExtensions, createDivider()],
-      injectCSS: true,
-      onUpdate: ({ editor }) => {
-        const newContent = editor.getJSON();
-        const convertedContent = tiptapToDraft(newContent as JSONContent);
-        onUpdate?.({ content: convertedContent });
-      },
-    })
-);
+const getEditorInstance = onUpdate => (content: JSONContent) =>
+  new Editor({
+    content,
+    extensions: [...tiptapExtensions, createDivider()],
+    injectCSS: true,
+    onUpdate: ({ editor }) => {
+      const newContent = editor.getJSON();
+      const convertedContent = tiptapToDraft(newContent as JSONContent);
+      onUpdate?.({ content: convertedContent });
+    },
+  });
 
 const toTiptapAPI = (editor: Editor): TiptapAPI => ({
   Editor: props => (
@@ -58,4 +56,4 @@ const toTiptapAPI = (editor: Editor): TiptapAPI => ({
 });
 
 export const initTiptapEditor = ({ initialContent, onUpdate }: TiptapConfig): TiptapAPI =>
-  compose(toTiptapAPI, getEditorInstance(onUpdate), draftToTiptap)(initialContent);
+  pipe(initialContent, draftToTiptap, getEditorInstance(onUpdate), toTiptapAPI);
