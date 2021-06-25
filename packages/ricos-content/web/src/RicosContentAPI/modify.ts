@@ -1,6 +1,5 @@
 import * as T from 'fp-ts/lib/Tree';
 import { pipe } from 'fp-ts/lib/function';
-import { curry } from 'lodash/fp';
 import { compact, isArray } from 'lodash';
 import { Prism, fromTraversable, Traversal } from 'monocle-ts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
@@ -16,11 +15,12 @@ const unfoldTree = (nodes: Node | Node[]) => {
 };
 
 const toArray = item => (isArray(item) ? item : [item]);
-const modifyByKey = curry(
-  (keysToSet: string[], setter: (node: Node) => Node | Node[], node: Node) =>
-    keysToSet.includes(node.key) ? setter(node) : node
-);
-const mergeWith = curry((prefix: Node[], suffix: Node[]) => [...prefix, ...suffix]);
+
+const modifyByKey = (keysToSet: string[], setter: (node: Node) => Node | Node[]) => (node: Node) =>
+  keysToSet.includes(node.key) ? setter(node) : node;
+
+const mergeWith = (prefix: Node[]) => (suffix: Node[]) => [...prefix, ...suffix];
+
 const foldTree = (tree: T.Tree<Node>, setter: (node: Node) => Node | Node[], keysToSet: string[]) =>
   T.fold<Node, Node>((root, forest) => ({
     ...root,
