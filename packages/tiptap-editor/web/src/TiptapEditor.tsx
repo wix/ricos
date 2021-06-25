@@ -19,7 +19,7 @@ export type TiptapAPI = {
   blur: () => void;
   focus: () => void;
   // eslint-disable-next-line
-  getEditorCommands: () => Editor['commands']; // EditorCommands;
+  getEditorCommands: () => Editor['commands'];
   getToolbars: () => Record<string, FC>;
   // eslint-disable-next-line
   getToolbarProps: () => Record<string, any>; // to be deprecated
