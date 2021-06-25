@@ -54,8 +54,7 @@
     "wix-rich-content-common": "8.44.5",
     "wix-rich-content-editor-common": "8.44.5",
     "wix-rich-content-plugin-commons": "8.44.5",
-    "wix-rich-content-ui-components": "8.44.5",
-    "wix-tiptap-editor": "8.44.5"
+    "wix-rich-content-ui-components": "8.44.5"
   },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
