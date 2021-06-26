@@ -36,6 +36,7 @@ jobs:
           path: |
             node_modules
             */*/node_modules
+            */*/dist
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: Install Protoc
