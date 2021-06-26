@@ -24,7 +24,7 @@
     "reinstall": "yarn clean && npx midgard-yarn install",
     "rebuild": "npm run reinstall && npm run build",
     "postinstall": "touch .env",
-    "build": "ultra --filter 'packages/*' -r build",
+    "build": "ultra --filter 'packages/*' -r rebuild",
     "build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' build:dev",
     "build:core": "npm run build:dev -- --scope 'ricos-content' && npm run build:dev -- --scope 'wix-rich-content-@(common|editor|viewer)'",
     "prewatch": "lerna run build --scope wix-rich-content-*common* && lerna run build --scope wix-rich-content-editor && lerna run build --scope ricos-common",
