@@ -3,3 +3,5 @@
 **/yarn-error.log
 **/dist
 **/node_modules
+**/src/genetated
+**ricos-content/web/scripts
