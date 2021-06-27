@@ -42,7 +42,12 @@ class SettingsPanelFooter extends Component {
           }
         )}
       >
-        <div className={this.styles.settingsPanel_footer_buttons_wrapper}>
+        <div
+          className={classNames(
+            this.styles.settingsPanel_footer_buttons_wrapper,
+            isModal && this.styles.modal
+          )}
+        >
           <ActionButtons
             size={BUTTON_SIZE.small}
             theme={theme}

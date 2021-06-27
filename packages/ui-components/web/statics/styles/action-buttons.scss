@@ -6,6 +6,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
+  // justify-items: center;
   &.tiny {
     gap: 12px;
   }
@@ -17,7 +18,7 @@
 .action_buttons_button {
   border: 1px solid $settings-action-color-fallback;
   outline: none;
-  // width: calc(50% - 6px);
+  width: 100%;
   max-width: 132px;
   padding: 0;
   &.mobile {

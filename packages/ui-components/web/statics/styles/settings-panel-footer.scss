@@ -9,13 +9,12 @@
   padding: 24px 24px;
   border-top: solid 1px #ededed;
   width: 100%;
-  // max-width: 419px;
+  max-width: 420px;
   height: 88px;
   box-sizing: border-box;
   background: #fff;
   font-size: 14px;
   &.modal {
-    // justify-content: center;
     border-top: none;
     height: max-content;
     padding: 0;
@@ -39,4 +38,7 @@
 
 .settingsPanel_footer_buttons_wrapper {
   width: 288px;
+  &.modal {
+    margin: 0 auto;
+  }
 }
