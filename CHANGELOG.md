@@ -19,6 +19,8 @@
 ### :house: Internal
 - `ricos-editor`
   - [#2641](https://github.com/wix/ricos/pull/2641) RicosEditor uses TiptapAPI based on experiment
+- `ricos-content`
+  - [#2645](https://github.com/wix/ricos/pull/2645) lodash/fp replaced with fp-ts
 ### :nail_care: Polish
 - `editor`
   - [#2580](https://github.com/wix-incubator/rich-content/pull/2580) Editor Commands improvements
