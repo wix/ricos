@@ -18,8 +18,7 @@
   "scripts": {
     "start": "npm run storybook",
     "precommit": "lint-staged",
-    "pretest": "yoshi build",
-    "test": "echo 'There are no tests configured for this project!' && exit 0",
+    "test": "echo 'There are no tests configured for this project!'",
     "release": "yoshi release",
     "storybook": "start-storybook -p 6006",
     "clean": "rm -rf dist storybook-static",
