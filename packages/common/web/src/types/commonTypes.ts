@@ -85,6 +85,7 @@ interface CommonContextType {
   theme: RichContentTheme;
   t: TranslationFunction;
   locale: string;
+  localeContent?: string;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
   customAnchorScroll?: CustomAnchorScroll;
