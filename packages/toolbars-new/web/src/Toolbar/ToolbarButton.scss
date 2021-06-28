@@ -8,6 +8,13 @@
     height: 34px;
   }
 
+  &.toolbarButton_wrapper_mobile {
+    &:hover {
+      button {
+        background-color: unset;
+      }
+    }
+  }
   &:hover {
     button {
       background-color: rgba($fallbackColorTuple, 0.06);

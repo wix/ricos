@@ -16,13 +16,15 @@
   padding: 0 19px;
 }
 .multiSelectLinkPanel_container_mobile {
+  position:fixed;
+  background-color: white;
+  margin-top: 0;
   font-family: $ricos-font-family;
   color: black;
   font-size: 14px;
   font-weight: 300;
   font-stretch: normal;
   font-style: normal;
-  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;

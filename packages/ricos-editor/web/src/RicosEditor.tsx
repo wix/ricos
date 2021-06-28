@@ -308,6 +308,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         anchorTarget: this.props.linkSettings?.anchorTarget,
         isMobile,
       };
+      const baseStyles = { flex: 'none' };
+      const baseMobileStyles = { ...baseStyles, position: 'sticky', top: 0, zIndex: 9 };
       const ToolbarToRender = (
         <Toolbar
           theme={theme}
@@ -324,11 +326,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
       const textToolbarType = StaticToolbar ? 'static' : null;
       return textToolbarType === 'static' ? (
-        <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
+        <div style={isMobile ? baseMobileStyles : baseStyles} dir={getLangDir(locale)}>
           <StaticToolbarContainer isMobile={isMobile}>{ToolbarToRender}</StaticToolbarContainer>
         </div>
       ) : (
-        <div style={{ flex: 'none' }} dir={getLangDir(locale)}>
+        <div style={baseStyles} dir={getLangDir(locale)}>
           <FloatingToolbarContainer
             isMobile={isMobile}
             showFormattingToolbar={showFormattingToolbar || false}

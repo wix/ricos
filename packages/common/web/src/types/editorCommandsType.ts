@@ -94,7 +94,7 @@ interface PluginsDataMap {
   [IMAGE_TYPE]?: any;
 }
 
-interface DecorationsDataMap {
+export interface DecorationsDataMap {
   [RICOS_LINK_TYPE]?: LinkData;
   [RICOS_MENTION_TYPE]?: MentionData;
   [RICOS_TEXT_COLOR_TYPE]?: { color?: ColorData['foreground'] };

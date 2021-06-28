@@ -40,7 +40,8 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
         // buttonStyles.pluginToolbarButton
       ),
       buttonWrapper: classNames(
-        styles.toolbarButton_wrapper
+        styles.toolbarButton_wrapper,
+        props.isMobile && styles.toolbarButton_wrapper_mobile
         // buttonStyles.inlineToolbarButton_wrapper,
         // buttonStyles.pluginToolbarButton_wrapper
       ),

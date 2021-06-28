@@ -496,6 +496,9 @@ const handleButtonIsActive = (buttonsList, index, editorCommands: editorCommands
   } else if (Object.keys(textBlockButtons).includes(buttonName)) {
     buttonsList[index].isActive = () =>
       editorCommands.isBlockTypeSelected(textBlockButtons[buttonName]);
+  } else if (Object.keys(setTextAlignment).includes(buttonName)) {
+    buttonsList[index].isActive = () =>
+      editorCommands.getTextAlignment() === setTextAlignment[buttonName];
   } else if (buttonName === 'LINK') {
     buttonsList[index].isActive = () => editorCommands.hasLinkInSelection();
   } else {
@@ -510,6 +513,9 @@ const handleButtonOnClick = (buttonsList, index, editorCommands: editorCommands)
       editorCommands.toggleInlineStyle(inlineStyleButtons[buttonName]);
   } else if (Object.keys(textBlockButtons).includes(buttonName)) {
     buttonsList[index].onClick = () => editorCommands.setBlockType(textBlockButtons[buttonName]);
+  } else if (Object.keys(setTextAlignment).includes(buttonName)) {
+    buttonsList[index].onClick = () =>
+      editorCommands.setTextAlignment(setTextAlignment[buttonName]);
   } else if (Object.keys(decorationButtons).includes(buttonName)) {
     if (buttonName === 'DECREASE_INDENT') {
       buttonsList[index].onClick = () =>
