@@ -18,6 +18,11 @@
     border-top: none;
     height: max-content;
     padding: 0;
+    justify-content: center;
+    max-width: 100%;
+    &.flexEndModalButtons {
+      justify-content: flex-end;
+    }
     @include phone {
       display: grid;
       grid-template-areas: 'save' 'cancel';
@@ -38,7 +43,4 @@
 
 .settingsPanel_footer_buttons_wrapper {
   width: 288px;
-  &.modal {
-    margin: 0 auto;
-  }
 }
