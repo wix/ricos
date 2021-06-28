@@ -41,7 +41,9 @@ interface State {
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
-  editor!: RichContentEditor | TiptapAPI;
+  editor!: RichContentEditor;
+
+  tiptapApi!: TiptapAPI;
 
   useTiptap = false;
 
@@ -95,7 +97,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       ).then(tiptapEditorModule => {
         const { initTiptapEditor } = tiptapEditorModule;
         const { content, injectedContent } = this.props;
-        this.editor = initTiptapEditor({
+        this.tiptapApi = initTiptapEditor({
           initialContent: content ?? injectedContent ?? emptyDraftContent,
           onUpdate: this.onUpdate,
         });
@@ -111,8 +113,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentWillUnmount() {
     this.props.editorEvents?.unsubscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
-    if (this.useTiptap && this.editor) {
-      (this.editor as TiptapAPI).destroy();
+    if (this.useTiptap && this.tiptapApi) {
+      this.tiptapApi.destroy();
     }
   }
 
@@ -186,9 +188,9 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
 
-  focus = () => this.editor.focus();
+  focus = () => (this.useTiptap ? this.tiptapApi.focus() : this.editor.focus());
 
-  blur = () => this.editor.blur();
+  blur = () => (this.useTiptap ? this.tiptapApi.blur() : this.editor.blur());
 
   getToolbars = () => this.editor.getToolbars();
 
@@ -235,7 +237,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.setStaticToolbar(ref);
   };
 
-  getEditorCommands = () => this.editor.getEditorCommands();
+  getEditorCommands = () =>
+    this.useTiptap ? this.tiptapApi.getEditorCommands() : this.editor.getEditorCommands();
 
   renderToolbarPortal(Toolbar) {
     return (
@@ -247,7 +250,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   renderRicosEngine(child, childProps) {
-    const { toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
+    const { toolbarSettings, draftEditorSettings = {}, localeContent, ...props } = this.props;
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
     const contentProp = this.getContentProp();
     return (
@@ -266,6 +269,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           ...contentProp.editorState,
           ...supportedDraftEditorSettings,
           ...this.state.localeData,
+          localeContent,
         })}
       </RicosEngine>
     );
@@ -291,10 +295,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   renderTiptapEditor() {
-    if (!this.editor) {
+    if (!this.tiptapApi) {
       return null;
     }
-    const { Editor: TiptapEditor, getToolbars } = this.editor as TiptapAPI;
+    const { Editor: TiptapEditor, getToolbars } = this.tiptapApi;
     const Toolbar = getToolbars().TextToolbar;
     const child = <TiptapEditor />;
     return (
