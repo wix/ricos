@@ -16,15 +16,15 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor-common`
+  - [#2650](https://github.com/wix/ricos/pull/2650) moved  FocusManager/FocusTrapReact/RichContentModal into ui-components folder
 
 </details>
 <hr/>
 
 ## 8.44.6  (Jun 28, 2021)
-### :house: Internal
-- `ricos-editor`
-  - [#2641](https://github.com/wix/ricos/pull/2641) RicosEditor uses TiptapAPI based on experiment
-- `ricos-content`
+c
   - [#2645](https://github.com/wix/ricos/pull/2645) lodash/fp replaced with fp-ts
 ### :nail_care: Polish
 - `editor`

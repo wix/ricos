@@ -51,10 +51,10 @@
     "forked-draft-js-focus-plugin": "^3.0.1",
     "react-click-outsider": "1.1.1",
     "react-measure": "~2.3.0",
+    "wix-rich-content-ui-components": "8.44.6",
     "wix-rich-content-common": "8.44.6",
     "wix-rich-content-editor-common": "8.44.6",
     "wix-rich-content-plugin-commons": "8.44.6",
-    "wix-rich-content-ui-components": "8.44.6",
     "wix-tiptap-editor": "8.44.6"
   },
   "peerDependencies": {

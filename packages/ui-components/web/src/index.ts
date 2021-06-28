@@ -1,7 +1,9 @@
-export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION } from './consts';
+export { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION, DECORATION_MODE } from './consts';
 
+// Modals
 export { default as UrlInputModal } from './Modals/UrlInputModal';
 export { default as SettingsMobileHeader } from './Modals/SettingsMobileHeader';
+export { default as RichContentModal } from './Modals/RichContentModal';
 
 export * from './Icons';
 
@@ -30,5 +32,5 @@ export { default as Dropdown } from './Components/Dropdown';
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 export { default as RadioGroup } from './Components/RadioGroup';
-
+export { default as FocusManager } from './Components/FocusManager';
 // export { getSelectionStyles } from './Utils/inlineStyleUtils';
