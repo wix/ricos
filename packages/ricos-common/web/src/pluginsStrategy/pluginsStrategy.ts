@@ -2,8 +2,8 @@ import { ComponentType } from 'react';
 import { merge, pick } from 'lodash'; // TODO: get rid of buggy merge
 import { fold, struct } from 'fp-ts/lib/Monoid';
 import { last } from 'fp-ts/lib/Semigroup';
-import * as A from 'fp-ts/lib/Array';
-import * as R from 'fp-ts/lib/Record';
+import { getMonoid as arrayMonoid, map } from 'fp-ts/lib/Array';
+import { getMonoid as recordMonoid } from 'fp-ts/lib/Record';
 import { pipe } from 'fp-ts/lib/function';
 import {
   AvailableExperiments,
@@ -21,16 +21,16 @@ import { RicosCssOverride, RichContentProps } from '../types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type InlineStyleMapper = () => InlineStyleMapping;
 
-const recordMergeM = <T>() => R.getMonoid<string, T>(last<T>());
+const recordMergeM = <T>() => recordMonoid<string, T>(last<T>());
 const rcvPropM = struct<RCVPluginProps>({
   config: recordMergeM<any>(),
-  decorators: A.getMonoid<any>(),
-  typeMappers: A.getMonoid<PluginTypeMapper>(),
-  inlineStyleMappers: A.getMonoid<InlineStyleMapper>(),
+  decorators: arrayMonoid<any>(),
+  typeMappers: arrayMonoid<PluginTypeMapper>(),
+  inlineStyleMappers: arrayMonoid<InlineStyleMapper>(),
 });
 const rcePropM = struct<RCEPluginProps>({
   config: recordMergeM<any>(),
-  plugins: A.getMonoid<CreatePluginFunction>(),
+  plugins: arrayMonoid<CreatePluginFunction>(),
   ModalsMap: recordMergeM<ComponentType>(),
   createPluginsDataMap: recordMergeM<any>(),
 });
@@ -90,13 +90,13 @@ export default function pluginsStrategy({
   return isViewer
     ? pipe(
         plugins as ViewerPlugin[],
-        A.map(toRCVPluginProps(cssOverride, content)),
+        map(toRCVPluginProps(cssOverride, content)),
         fold(rcvPropM),
         mergeWithChildProps(extractChildRCVPluginProps(childProps, content), themeData)
       )
     : pipe(
         plugins as EditorPlugin[],
-        A.map(toRCEPluginProps),
+        map(toRCEPluginProps),
         fold(rcePropM),
         mergeWithChildProps(extractChildRCEPluginProps(childProps), themeData)
       );
