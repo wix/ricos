@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { SettingsPanelFooter, Tabs, Tab } from 'wix-rich-content-ui-components';
+import { SettingsPanelFooter, Tabs, Tab, BUTTON_SIZE } from 'wix-rich-content-ui-components';
 import { KEYS_CHARCODE, FocusManager } from 'wix-rich-content-editor-common';
 import {
   mergeStyles,
@@ -283,6 +283,7 @@ export default class ButtonInputModal extends Component {
               cancelLabel={cancelLabel}
               theme={styles}
               t={t}
+              buttonSize={BUTTON_SIZE.medium}
             />
           </div>
         )}

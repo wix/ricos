@@ -24,6 +24,7 @@ class SettingsPanelFooter extends Component {
       t,
       layoutOptions = {},
       selected,
+      buttonSize = BUTTON_SIZE.small,
     } = this.props;
     const { isModal, buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER } = layoutOptions;
     const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
@@ -49,7 +50,7 @@ class SettingsPanelFooter extends Component {
           )}
         >
           <ActionButtons
-            size={BUTTON_SIZE.small}
+            size={buttonSize}
             theme={theme}
             onCancel={cancel}
             onSave={save}
@@ -78,6 +79,7 @@ SettingsPanelFooter.propTypes = {
   flexEndModalButtons: PropTypes.bool,
   layoutOptions: PropTypes.object,
   selected: PropTypes.bool,
+  buttonSize: PropTypes.string,
 };
 
 export default SettingsPanelFooter;
