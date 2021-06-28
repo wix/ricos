@@ -163,7 +163,6 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             injectedContent={injectedContent}
             linkSettings={{ anchorTarget, rel }}
             locale={locale}
-            localeContent={'he'}
             cssOverride={theme}
             toolbarSettings={{
               useStaticTextToolbar: useStaticTextToolbar,
