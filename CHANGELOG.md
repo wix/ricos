@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.44.6  (Jun 28, 2021)
 ### :house: Internal
 - `ricos-editor`
   - [#2641](https://github.com/wix/ricos/pull/2641) RicosEditor uses TiptapAPI based on experiment
@@ -28,9 +33,6 @@
   - [#2637](https://github.com/wix-incubator/rich-content/pull/2637) Sponsored tooltip in link panel
 - `ui-components`
   - [#2641](https://github.com/wix-incubator/rich-content/pull/2641) moved ActionButtons into ui-components and some code refactor
-
-</details>
-<hr/>
 
 ## 8.44.5 (Jun 20, 2021)
 ### :house: Internal
