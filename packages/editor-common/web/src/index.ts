@@ -2,22 +2,15 @@
 export * from './Icons';
 
 // Components
-export { default as InfoIcon } from './Components/InfoIcon';
-export { default as Checkbox } from './Components/Checkbox';
 export { default as ClickOutside } from './Components/ClickOutside/ClickOutside';
 export { default as useClickOutside } from './Components/ClickOutside/useClickOutside';
 
-export { default as Dropdown } from './Components/Dropdown';
-
 export { default as FocusManager } from './Components/FocusManager';
-export { default as LinkPanel } from './Components/LinkComponents/LinkPanel';
+export { default as LinkPanelWrapper } from './Components/LinkComponents/LinkPanelWrapper';
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
-export { default as LinkPanelContainer } from './Components/LinkComponents/LinkPanelContainer';
-export { default as RadioGroup } from './Components/RadioGroup';
-export { default as Separator } from './Components/Separator';
+export { default as LinkModal } from './Components/LinkComponents/LinkModal';
 export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
-export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -28,6 +21,7 @@ export { default as decorateComponentWithProps } from './Utils/decorateComponent
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 export { undo, redo, pluginsUndo } from './Utils/handleUndoRedoCommands';
+export { getAnchorableBlocks } from './Components/AnchorComponents/anchorUtils';
 
 export {
   updateLinkAtCurrentSelection,
@@ -60,10 +54,11 @@ export {
   getBlockEntityType,
   getFocusedBlockKey,
   createCalcContentDiff,
-  getPostContentSummary,
+  getEditorContentSummary,
   createSelection,
   getBlockType,
   hasInlineStyle,
+  getDraftInlineStyle,
   indentSelectedBlocks,
   isTypeText,
   setForceSelection,
@@ -76,13 +71,14 @@ export {
   getSelectionRange,
   isInSelectionRange,
   cloneDeepWithoutEditorState,
-  getEntities,
   isCursorAtStartOfContent,
   isCursorAtFirstLine,
   selectAllContent,
   isAtomicBlockInSelection,
   setSelectionToBlock,
+  hasBlockType,
 } from './Utils/draftUtils';
+export { getColor, setTextColor, setHighlightColor } from './Utils/colorUtils';
 export { triggerMention, insertMention } from './Utils/mentionUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
@@ -139,3 +135,20 @@ import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
 
 export { isElementOutOfWindow } from './Utils/overflowUtils';
+
+export const emptyDraftContent = {
+  entityMap: {},
+  blocks: [
+    {
+      text: '',
+      key: 'foo',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+};
+
+export { getSelectionStyles } from './Utils/inlineStyleUtils';

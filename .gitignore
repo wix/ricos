@@ -12,6 +12,7 @@ maven
 stats.html
 .env
 applitools.private.config.js
+tsconfig.tsbuildinfo
 
 #Webstorm
 **/.idea/*
@@ -45,3 +46,7 @@ applitools.config.js
 !intro.json
 !migration-content.json
 **/reverseMigratedFixtures
+
+# Generated Merged Translations
+packages/common/web/statics/locale
+.ultraignore

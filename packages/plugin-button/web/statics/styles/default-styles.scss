@@ -11,8 +11,9 @@
   border-style: none;
   border-width: 0px;
   text-decoration: none;
-  color: white;
   background-color: $action-color;
+  border-color: $action-color;
+  color: var(--ricos-background-color, white);
 }
 
 .button_text {

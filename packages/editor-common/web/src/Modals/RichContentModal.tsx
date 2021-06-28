@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ComponentType } from 'react';
+import React, { Component, ComponentType } from 'react';
 import FocusManager from '../Components/FocusManager';
 import { DECORATION_MODE } from '../consts';
-import { getLangDir, ModalDecorations } from 'wix-rich-content-common';
+import { getLangDir, ModalDecorations, Helpers, generateKey } from 'wix-rich-content-common';
 
 const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
   if (wrapping.length === 0) {
@@ -22,38 +22,57 @@ interface Props {
   locale?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
+  helpers?: Helpers;
+  pluginId?: string;
 }
 
-const RichContentModal: FunctionComponent<Props> = ({
-  modalElement,
-  modalDecorations = [],
-  locale,
-  ...modalProps
-}) => {
-  const ModalElement = modalElement;
-  const prepended = modalDecorations
-    .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.PREPEND)
-    .map(({ decorator }) => decorator);
-  const wrapping = modalDecorations
-    .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.WRAP)
-    .map(({ decorator }) => decorator);
-  const appended = modalDecorations
-    .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.APPEND)
-    .map(({ decorator }) => decorator);
+class RichContentModal extends Component<Props> {
+  settingSessionId?: string;
 
-  return (
-    <FocusManager dir={getLangDir(locale)}>
-      {prepended.length > 0 &&
-        prepended.map((Prepended, index) => (
+  componentDidMount() {
+    this.settingSessionId = generateKey();
+    this.triggerBi('settingsModalOpenedForPlugin');
+  }
+
+  componentWillUnmount() {
+    this.triggerBi('settingsModalClosedForPlugin');
+  }
+
+  triggerBi = action => {
+    const { triggerSettingsBi, helpers, pluginId = '' } = this.props;
+    if (triggerSettingsBi) {
+      helpers?.onPluginAction?.(action, {
+        plugin_id: pluginId,
+        settingSessionId: this.settingSessionId,
+      });
+    }
+  };
+
+  render() {
+    const { modalElement, modalDecorations = [], locale, ...modalProps } = this.props;
+    const ModalElement = modalElement;
+    const prepended = modalDecorations
+      .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.PREPEND)
+      .map(({ decorator }) => decorator);
+    const wrapping = modalDecorations
+      .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.WRAP)
+      .map(({ decorator }) => decorator);
+    const appended = modalDecorations
+      .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.APPEND)
+      .map(({ decorator }) => decorator);
+
+    return (
+      <FocusManager dir={getLangDir(locale)}>
+        {prepended?.map((Prepended, index) => (
           <Prepended key={`prepended_decorator_${index}`} {...modalProps} />
         ))}
-      {renderWrappedModalElement(wrapping, ModalElement, modalProps)}
-      {appended.length > 0 &&
-        appended.map((Appended, index) => (
+        {renderWrappedModalElement(wrapping, ModalElement, modalProps)}
+        {appended?.map((Appended, index) => (
           <Appended key={`appended_decorator_${index}`} {...modalProps} />
         ))}
-    </FocusManager>
-  );
-};
+      </FocusManager>
+    );
+  }
+}
 
 export default RichContentModal;

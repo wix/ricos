@@ -12,7 +12,7 @@ import {
   SETTINGS_PANEL,
   TOOLBARS,
   COLOR_PICKER,
-  ACCORDION_SETTINGS,
+  COLLAPSIBLE_LIST_SETTINGS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
@@ -105,8 +105,8 @@ Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, ...config) =>
   run('ricos', fixtureName, merge(...config))
 );
 
-Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
-  cy.request(getUrl(compName, fixtureName))
+Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName, config) => {
+  cy.request(getUrl(compName, fixtureName, config))
     .its('body')
     .then(html => {
       // remove the application code bundle
@@ -180,12 +180,12 @@ Cypress.Commands.add('getEditor', () => {
   cy.get(RicosDriver.editor.contentEditable);
 });
 
-Cypress.Commands.add('getAccordion', () => {
-  cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
+Cypress.Commands.add('getCollapsibleList', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.COLLAPSIBLE_LIST);
 });
 
-Cypress.Commands.add('focusAccordion', idx => {
-  cy.getAccordion()
+Cypress.Commands.add('focusCollapsibleList', idx => {
+  cy.getCollapsibleList()
     .get(RicosDriver.editor.contentEditable)
     .eq(idx)
     .focus();
@@ -542,8 +542,8 @@ Cypress.Commands.add('redo', () => {
   cy.wait(100);
 });
 
-Cypress.Commands.add('addAccordionPair', () => {
-  cy.get(`[data-hook*=${ACCORDION_SETTINGS.NEW_PAIR}]`).click({ force: true });
+Cypress.Commands.add('addCollapsibleListPair', () => {
+  cy.get(`[data-hook*=${COLLAPSIBLE_LIST_SETTINGS.NEW_PAIR}]`).click({ force: true });
 });
 
 Cypress.Commands.add('openVideoUploadModal', () => {
@@ -673,11 +673,11 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
     .wait(200);
 });
 
-Cypress.Commands.add('insertAccordion', () => {
+Cypress.Commands.add('insertCollapsibleList', () => {
   cy.getEditor()
     .first()
     .focus()
-    .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
+    .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'CollapsibleList_InsertButton'}]`)
     .click({ force: true });
 });
 

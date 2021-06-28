@@ -12,11 +12,12 @@ package wix.rich_content.v1;
 
 import "wix/api/validations.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 import "wix/rich_content/v1/decoration_anchor.proto";
 import "wix/rich_content/v1/decoration_color.proto";
 import "wix/rich_content/v1/decoration_link.proto";
 import "wix/rich_content/v1/decoration_mention.proto";
-import "wix/rich_content/v1/node_code.proto";
+import "wix/rich_content/v1/node_code_block.proto";
 import "wix/rich_content/v1/node_heading.proto";
 import "wix/rich_content/v1/node_paragraph.proto";
 import "wix/rich_content/v1/plugin_button.proto";
@@ -46,7 +47,7 @@ message Node {
         ORDERED_LIST = 4;
         LIST_ITEM = 5;
         BLOCKQUOTE = 6;
-        CODEBLOCK = 7;
+        CODE_BLOCK = 7;
         VIDEO = 8;
         DIVIDER = 9;
         FILE = 10;
@@ -59,31 +60,38 @@ message Node {
         POLL = 17;
         VERTICAL_EMBED = 18;
         BUTTON = 19;
-        ACCORDION = 20;
+        COLLAPSIBLE_LIST = 20;
         TABLE = 21;
     }
 
     Type type = 1; // Node type
     string key = 2; // Node unique indentifier
     repeated Node nodes = 3; // List of child nodes
+    NodeStyle style = 4;
     oneof data {
-        ButtonData button_data = 4;
-        CodeData code_data = 5;
-        DividerData divider_data = 6;
-        FileData file_data = 7;
-        GalleryData gallery_data = 8;
-        GiphyData giphy_data = 9;
-        HeadingData heading_data = 10;
-        HTMLData html_data = 11;
-        ImageData image_data = 12;
-        LinkPreviewData link_preview_data = 13;
-        MapData map_data = 14;
-        ParagraphData paragraph_data = 15;
-        PollData poll_data = 16;
-        TextData text_data = 17;
-        VerticalEmbedData vertical_embed_data = 18;
-        VideoData video_data = 19;
+        ButtonData button_data = 5;
+        CodeBlockData code_block_data = 6;
+        DividerData divider_data = 7;
+        FileData file_data = 8;
+        GalleryData gallery_data = 9;
+        GiphyData giphy_data = 10;
+        HeadingData heading_data = 11;
+        HTMLData html_data = 12;
+        ImageData image_data = 13;
+        LinkPreviewData link_preview_data = 14;
+        MapData map_data = 15;
+        ParagraphData paragraph_data = 16;
+        PollData poll_data = 17;
+        TextData text_data = 18;
+        VerticalEmbedData vertical_embed_data = 19;
+        VideoData video_data = 20;
     }
+}
+
+message NodeStyle {
+    google.protobuf.StringValue padding_top = 1;
+    google.protobuf.StringValue padding_bottom = 2;
+    google.protobuf.StringValue background_color = 3;
 }
 
 message TextData {

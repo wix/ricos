@@ -84,7 +84,7 @@ describe('Paste text tests', () => {
     expect(pastedRaw).toEqual(textWithLineSpacingWordExpectedRaw);
   });
 
-  it('should convert raw content of accordion (from EditorState JSON object to rawData) correctly', () => {
+  it('should convert raw content of collapsible list (from EditorState JSON object to rawData) correctly', () => {
     expect(convertParsedEditorStateObjectToRawData(rawContent)).toEqual(expectedRawContent);
   });
 

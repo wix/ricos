@@ -9,8 +9,9 @@ import {
   AnchorTarget,
   RelValue,
   UISettings,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
-import { ImagePluginEditorConfig } from '../types';
+import { ImagePluginEditorConfig, IMAGE_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
@@ -19,6 +20,7 @@ const createInlineButtons: CreateInlineButtons = ({
   uiSettings,
   isMobile,
   settings = {},
+  experiments = {},
 }: {
   t: TranslationFunction;
   settings: ImagePluginEditorConfig;
@@ -26,6 +28,7 @@ const createInlineButtons: CreateInlineButtons = ({
   anchorTarget: AnchorTarget;
   relValue: RelValue;
   uiSettings: UISettings;
+  experiments: AvailableExperiments;
 }) => {
   const icons = get(settings, 'toolbar.icons', {});
   const modalStyles = getModalStyles({ isMobile });
@@ -48,16 +51,17 @@ const createInlineButtons: CreateInlineButtons = ({
       disabled: isEmpty(componentData.src) || !!componentData.error,
     }),
   };
-
-  const spoilerButton = settings.spoiler
-    ? [
-        {
-          keyName: 'spoiler',
-          type: BUTTONS.SPOILER,
-          mobile: true,
-        },
-      ]
-    : [];
+  const { spoilerInInlineToolbar } = experiments;
+  const spoilerButton =
+    settings.spoiler && spoilerInInlineToolbar?.enabled
+      ? [
+          {
+            keyName: 'spoiler',
+            type: BUTTONS.SPOILER,
+            mobile: true,
+          },
+        ]
+      : [];
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -82,6 +86,8 @@ const createInlineButtons: CreateInlineButtons = ({
       mobile: true,
       tooltipTextKey: 'SettingsButton_Tooltip',
       uiSettings,
+      triggerSettingsBi: true,
+      pluginId: IMAGE_TYPE,
     },
     { keyName: 'link', type: BUTTONS.LINK, mobile: true },
     {

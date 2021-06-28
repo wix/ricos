@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { ColorPicker, SelectionList, SliderWithInput } from 'wix-rich-content-plugin-commons';
-import { Separator } from 'wix-rich-content-editor-common';
+import { ColorPicker } from 'wix-rich-content-plugin-commons';
+import { SliderWithInput, Separator, SelectionList } from 'wix-rich-content-ui-components';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { ColorIcon, ImageIcon, GradientIcon } from '../../../assets/icons';
@@ -138,7 +138,7 @@ export class DesignSettingsSection extends Component {
           max={20}
           label={t('Poll_PollSettings_Tab_Design_Section_CornerRadius_Poll')}
           onChange={this.handlePollBorderRadiusChange}
-          value={parseInt(design.poll?.borderRadius)}
+          defaultValue={parseInt(design.poll?.borderRadius)}
           theme={this.props.theme}
         />
         <SliderWithInput
@@ -146,7 +146,7 @@ export class DesignSettingsSection extends Component {
           max={10}
           label={t('Poll_PollSettings_Tab_Design_Section_CornerRadius_Answers')}
           onChange={this.handleOptionBorderRadiusChange}
-          value={parseInt(design.option?.borderRadius)}
+          defaultValue={parseInt(design.option?.borderRadius)}
           theme={this.props.theme}
         />
       </section>

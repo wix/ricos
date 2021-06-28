@@ -5,7 +5,7 @@ import { BlockType, FROM_DRAFT_LIST_TYPE, HeaderLevel } from '../consts';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { genKey } from '../../generateRandomKey';
 import { getTextNodes } from './getTextNodes';
-import { getEntity, getTextStyle } from './getRicosEntityData';
+import { getEntity, getNodeStyle, getTextStyle } from './getRicosEntityData';
 import { createParagraphNode, initializeMetadata } from '../../nodeUtils';
 
 export const ensureRicosContent = (content: RichContent | DraftContent): RichContent =>
@@ -20,7 +20,10 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     if (block) {
       switch (block.type) {
         case BlockType.Atomic:
-          nodes.push(parseAtomicBlock(block));
+          const atomicBlock = parseAtomicBlock(block);
+          if (atomicBlock) {
+            nodes.push(atomicBlock);
+          }
           parseBlocks(index + 1);
           break;
         case BlockType.Blockquote:
@@ -56,25 +59,34 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     }
   };
 
-  const parseAtomicBlock = (block: RicosContentBlock): Node => {
-    return {
-      key: block.key,
-      nodes: [],
-      ...getEntity(block.entityRanges[0].key, entityMap),
-    };
+  const parseAtomicBlock = ({ key, data, entityRanges }: RicosContentBlock): Node | null => {
+    if (entityRanges && entityRanges.length) {
+      const entity = getEntity(entityRanges[0].key, entityMap);
+      if (entity) {
+        return {
+          key,
+          nodes: [],
+          style: getNodeStyle(data),
+          ...entity,
+        };
+      }
+    }
+    return null;
   };
 
   const parseQuoteBlock = (block: RicosContentBlock): Node => ({
     key: block.key,
     type: Node_Type.BLOCKQUOTE,
     nodes: [parseTextBlock(block)],
+    style: getNodeStyle(block.data),
   });
 
   const parseCodeBlock = (block: RicosContentBlock): Node => ({
     key: block.key,
-    type: Node_Type.CODEBLOCK,
+    type: Node_Type.CODE_BLOCK,
     nodes: getTextNodes(block, entityMap),
-    codeData: {
+    style: getNodeStyle(block.data),
+    codeBlockData: {
       textStyle: getTextStyle(block.data),
     },
   });
@@ -95,11 +107,16 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
         textStyle: getTextStyle(block.data),
       },
       nodes: getTextNodes(block, entityMap),
+      style: getNodeStyle(block.data),
     };
   };
 
   const parseTextBlock = (block: RicosContentBlock): Node => {
-    const paragraphNode: Node = createParagraphNode([], { textStyle: getTextStyle(block.data) });
+    const paragraphNode: Node = createParagraphNode(
+      [],
+      { textStyle: getTextStyle(block.data) },
+      getNodeStyle(block.data)
+    );
 
     switch (block.type) {
       case BlockType.Unstyled:
@@ -150,7 +167,6 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
       }
       nextBlock = blocks[searchIndex];
     }
-
     return {
       node: {
         key: genKey(),

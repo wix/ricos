@@ -3,7 +3,7 @@ import {
   DraftContent,
   RicosContentBlock,
   GALLERY_TYPE,
-  ACCORDION_TYPE,
+  COLLAPSIBLE_LIST_TYPE,
   TABLE_TYPE,
 } from 'wix-rich-content-common';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
@@ -22,7 +22,7 @@ const complexPluginHandlers = {
     newData.items = items;
     return newData;
   },
-  [ACCORDION_TYPE]: (_, newData) => {
+  [COLLAPSIBLE_LIST_TYPE]: (_, newData) => {
     newData.pairs.forEach(pair => {
       pair.title = errorBlocksRemover(pair.title);
       pair.content = errorBlocksRemover(pair.content);

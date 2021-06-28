@@ -1,5 +1,5 @@
 import React, { Component, RefObject } from 'react';
-import { FileInput } from 'wix-rich-content-plugin-commons';
+import { FileInput } from 'wix-rich-content-ui-components';
 import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import FormattingGroupButton from 'wix-rich-content-editor-common/libs/FormattingGroupButton';
 import FormattingDropdownButton from 'wix-rich-content-editor-common/libs/FormattingDropdownButton';
@@ -116,7 +116,7 @@ class ExternalToolbar extends Component<{
   };
 
   render() {
-    const { buttons } = this.props;
+    const { buttons = {} } = this.props;
     return (
       <div className={styles.toolbar}>
         {Object.values(buttons).map((buttonProps: any, i) => {

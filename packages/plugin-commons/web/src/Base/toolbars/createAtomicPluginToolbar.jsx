@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { Separator, getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -12,7 +12,7 @@ import {
   deleteButton,
   BlockSpoilerButton,
 } from '../buttons';
-import Panel from '../../Components/Panel';
+import { Separator, Panel } from 'wix-rich-content-ui-components';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
 import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';
@@ -22,7 +22,6 @@ export default function createAtomicPluginToolbar({
   buttons,
   theme,
   pubsub,
-  commonPubsub,
   helpers,
   settings,
   isMobile,
@@ -74,7 +73,6 @@ export default function createAtomicPluginToolbar({
 
     componentDidMount() {
       pubsub.subscribe('focusedBlock', this.onVisibilityChanged);
-      commonPubsub.subscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.subscribe('componentState', this.onComponentStateChanged);
       pubsub.subscribe('componentData', this.onComponentDataChanged);
       this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
@@ -217,16 +215,19 @@ export default function createAtomicPluginToolbar({
         isMobile,
         t,
         pubsub,
+        helpers,
+        keyName: button.keyName,
       };
 
+      const editorState = getEditorState();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
         settings: button.settings,
+        pluginType,
         ...commonButtonProps,
       };
-      const editorState = getEditorState();
-      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const baseLinkProps = {
         onOverrideContent: this.onOverrideContent,
         helpers,
@@ -295,19 +296,18 @@ export default function createAtomicPluginToolbar({
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
         case BUTTONS.VIDEO_SETTINGS: {
-          const isCustomVideo = !!this.state.componentData.isCustomVideo;
           const videoSettingsProps = {
             ...defaultButtonProps,
             type: BUTTONS.EXTERNAL_MODAL,
           };
-          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
+          return <Button {...videoSettingsProps} />;
         }
         case BUTTONS.LINK_PREVIEW: {
           return (
             !this.state.componentData.html && (
               <BlockLinkButton
                 {...baseLinkProps}
-                unchangedUrl
+                hideUrlInput
                 tooltipText={t('LinkPreview_Settings_Tooltip')}
                 icons={button.icons}
               />

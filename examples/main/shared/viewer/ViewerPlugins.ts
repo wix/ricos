@@ -60,7 +60,10 @@ import {
   SPOILER_TYPE,
   pluginSpoiler,
 } from 'wix-rich-content-plugin-spoiler/viewer';
-import { accordionTypeMapper, pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+import {
+  collapsibleListTypeMapper,
+  pluginCollapsibleList,
+} from 'wix-rich-content-plugin-collapsible-list/viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -91,7 +94,7 @@ import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
 import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 
 import { RichContentViewerProps } from 'wix-rich-content-viewer';
@@ -130,7 +133,7 @@ export const typeMappers: PluginTypeMapper[] = [
   giphyTypeMapper,
   pollTypeMapper,
   verticalEmbedTypeMapper,
-  accordionTypeMapper,
+  collapsibleListTypeMapper,
 ];
 
 export const uiSettings: UISettings = {
@@ -171,8 +174,7 @@ const config: RichContentViewerProps['config'] = {
     resolveFileUrl: () =>
       new Promise(resolve =>
         setTimeout(
-          () =>
-            resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
+          () => resolve('https://www.w3.org/wai/er/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
           1000
         )
       ),
@@ -213,7 +215,7 @@ export const viewerPlugins: ViewerPlugin[] = [
   pluginGiphy(config[GIPHY_TYPE]),
   pluginPoll(config[POLL_TYPE]),
   pluginVerticalEmbed(),
-  pluginAccordion(),
+  pluginCollapsibleList(),
   pluginHashtag(config[HASHTAG_TYPE]),
   pluginHeadersMarkdown(),
   pluginCodeBlock(),

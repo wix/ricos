@@ -8,17 +8,23 @@ import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
-import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
-import { VideoPluginEditorConfig } from '../types';
+import {
+  CreateInlineButtons,
+  TranslationFunction,
+  AvailableExperiments,
+} from 'wix-rich-content-common';
+import { VideoPluginEditorConfig, VIDEO_TYPE } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
+  experiments = {},
 }: {
   t: TranslationFunction;
   settings: VideoPluginEditorConfig;
   isMobile: boolean;
+  experiments: AvailableExperiments;
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
@@ -29,12 +35,33 @@ const createInlineButtons: CreateInlineButtons = ({
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
 
-  const spoilerButton = settings.spoiler
+  const { spoilerInInlineToolbar } = experiments;
+  const spoilerButton =
+    settings.spoiler && spoilerInInlineToolbar?.enabled
+      ? [
+          {
+            keyName: 'spoiler',
+            type: BUTTONS.SPOILER,
+            mobile: true,
+          },
+        ]
+      : [];
+  const settingsButton = !spoilerInInlineToolbar?.enabled
     ? [
         {
-          keyName: 'spoiler',
-          type: BUTTONS.SPOILER,
+          keyName: 'settings',
+          type: BUTTONS.VIDEO_SETTINGS,
+          icon: PluginSettingsIcon,
+          modalName: Modals.VIDEO_SETTINGS,
+          modalStyles: getModalStyles({
+            isMobile,
+          }),
+          t,
           mobile: true,
+          tooltipTextKey: 'SettingsButton_Tooltip',
+          settings,
+          triggerSettingsBi: true,
+          pluginId: VIDEO_TYPE,
         },
       ]
     : [];
@@ -64,19 +91,7 @@ const createInlineButtons: CreateInlineButtons = ({
       tooltipTextKey: 'ReplaceVideoButton_Tooltip',
       t,
     },
-    {
-      keyName: 'settings',
-      type: BUTTONS.VIDEO_SETTINGS,
-      icon: PluginSettingsIcon,
-      modalName: Modals.VIDEO_SETTINGS,
-      modalStyles: getModalStyles({
-        isMobile,
-      }),
-      t,
-      mobile: true,
-      tooltipTextKey: 'SettingsButton_Tooltip',
-      settings,
-    },
+    ...settingsButton,
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
 };

@@ -1,6 +1,4 @@
-@import '~wix-rich-content-common/dist/statics/styles/consts';
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
-@import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 //*** GENERIC ***//
@@ -10,15 +8,6 @@
 
 // *:focus,
 .focused {
-}
-
-.visuallyHidden {
-  width: 0.1px;
-  height: 0.1px;
-  overflow: hidden;
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
 }
 
 //*** BLOCK ***//
@@ -73,19 +62,6 @@
   max-width: 100%;
 }
 
-//*** PANEL ***//
-.panelContainer {
-  @extend .fontElementMap;
-  position: absolute;
-  display: flex;
-  padding: 12px 24px;
-  background: white;
-  color: $secondary-text-color;
-  border: 1px solid #ddd;
-  border-radius: $toolbarBorderRadius;
-  box-shadow: rgb(220, 220, 220) 1px 1px 3px 1px;
-}
-
 :global {
   .ReactModal__Body--open {
     overflow-y: hidden;
@@ -112,20 +88,6 @@ button {
 
 .anchor {
   display: block;
-}
-
-.infoIcon {
-  vertical-align: text-bottom;
-  padding-top: 2px;
-  height: 17px;
-  &:hover {
-    color: $settings-action-color;
-  }
-}
-
-.infoContainer {
-  cursor: pointer;
-  display: flex;
 }
 
 .horizontalScrollbarWrapper {

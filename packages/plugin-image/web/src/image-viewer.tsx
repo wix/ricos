@@ -15,6 +15,7 @@ import {
   Helpers,
   RichContentTheme,
   SEOSettings,
+  CustomAnchorScroll,
 } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
@@ -55,6 +56,7 @@ interface ImageViewerProps {
   setComponentUrl: (highres?: string) => unknown;
   seoMode: SEOSettings;
   blockKey: string;
+  customAnchorScroll?: CustomAnchorScroll;
 }
 
 interface ImageSrc {
@@ -138,6 +140,8 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       return null;
     }
 
+    const removeUsm = this.context.experiments?.removeUsmFromImageUrls?.enabled;
+
     const imageUrl: ImageSrc = {
       preload: '',
       highres: '',
@@ -175,6 +179,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       } = this.props;
       const usePredefinedWidth = (alignment === 'left' || alignment === 'right') && !width;
       imageSrcOpts = {
+        removeUsm,
         imageType: 'quailtyPreload',
         ...(usePredefinedWidth && { requiredWidth: 300 }),
       };
@@ -190,6 +195,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     }
 
     imageUrl.highres = getImageSrc(src, helpers?.getImageUrl, {
+      removeUsm,
       requiredWidth,
       requiredHeight,
       requiredQuality: 90,
@@ -302,16 +308,18 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
 
   renderCaption(caption) {
     const { onCaptionChange, setFocusToBlock, setInPluginEditingMode } = this.props;
+    const { imageCaption, link } = this.styles;
+    const classes = classNames(imageCaption, this.hasLink() && link);
     return onCaptionChange ? (
       <InPluginInput
         setInPluginEditingMode={setInPluginEditingMode}
-        className={this.styles.imageCaption}
+        className={classes}
         value={caption}
         onChange={onCaptionChange}
         setFocusToBlock={setFocusToBlock}
       />
     ) : (
-      <span dir="auto" className={this.styles.imageCaption}>
+      <span dir="auto" className={classes}>
         {caption}
       </span>
     );
@@ -348,16 +356,21 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     this.hasExpand() && onExpand?.(this.props.blockKey);
   };
 
-  scrollToAnchor = () => {
+  scrollToAnchor = e => {
     const {
       componentData: {
         config: { link: { anchor } = {} },
       },
+      customAnchorScroll,
     } = this.props;
-    const anchorString = `viewer-${anchor}`;
-    const element = document.getElementById(anchorString);
-    addAnchorTagToUrl(anchorString);
-    anchorScroll(element);
+    if (customAnchorScroll) {
+      customAnchorScroll(e, anchor as string);
+    } else {
+      const anchorString = `viewer-${anchor}`;
+      const element = document.getElementById(anchorString);
+      addAnchorTagToUrl(anchorString);
+      anchorScroll(element);
+    }
   };
 
   hasLink = () => this.props.componentData?.config?.link?.url;
@@ -377,7 +390,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     } else if (this.hasAnchor()) {
       e.preventDefault();
       e.stopPropagation(); // fix problem with wix platform, where it wouldn't scroll and sometimes jump to different page
-      this.scrollToAnchor();
+      this.scrollToAnchor(e);
     } else {
       this.handleExpand(e);
     }

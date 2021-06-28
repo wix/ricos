@@ -1,21 +1,44 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 import React from 'react';
+import { version } from '../package.json';
 import { RicosEditorType as RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RICOS_MENTION_TYPE } from 'wix-rich-content-common';
+import {
+  BICallbacks,
+  RICOS_DIVIDER_TYPE,
+  RICOS_GIPHY_TYPE,
+  RICOS_HTML_TYPE,
+  RICOS_GALLERY_TYPE,
+  RICOS_POLL_TYPE,
+  RICOS_VIDEO_TYPE,
+  RICOS_FILE_TYPE,
+  RICOS_IMAGE_TYPE,
+  RICOS_LINK_TYPE,
+  RICOS_HASHTAG_TYPE,
+  RICOS_SPOILER_TYPE,
+  RICOS_MENTION_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+} from 'wix-rich-content-common';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
-import { pluginDivider } from '../../../plugin-divider/web/src';
-import { pluginGiphy } from '../../../plugin-giphy/web/src';
-import { pluginHtml } from '../../../plugin-html/web/src';
-import { pluginGallery } from '../../../plugin-gallery/web/src';
-import { pluginPoll } from '../../../plugin-social-polls/web/src';
-import { pluginVideo } from '../../../plugin-video/web/src';
-import { pluginFileUpload } from '../../../plugin-file-upload/web/src';
-import { pluginImage } from '../../../plugin-image/web/src';
-import { pluginLink } from '../../../plugin-link/web/src';
-import { pluginMentions } from '../../../plugin-mentions/web/src';
+import { pluginDivider, DIVIDER_TYPE } from '../../../plugin-divider/web/src';
+import { pluginGiphy, GIPHY_TYPE } from '../../../plugin-giphy/web/src';
+import { pluginHtml, HTML_TYPE } from '../../../plugin-html/web/src';
+import { pluginGallery, GALLERY_TYPE } from '../../../plugin-gallery/web/src';
+import { pluginPoll, POLL_TYPE } from '../../../plugin-social-polls/web/src';
+import { pluginVideo, VIDEO_TYPE } from '../../../plugin-video/web/src';
+import { pluginFileUpload, FILE_UPLOAD_TYPE } from '../../../plugin-file-upload/web/src';
+import { pluginImage, IMAGE_TYPE } from '../../../plugin-image/web/src';
+import { pluginLink, LINK_TYPE } from '../../../plugin-link/web/src';
+import { pluginMentions, MENTION_TYPE } from '../../../plugin-mentions/web/src';
+import { pluginSpoiler, SPOILER_TYPE } from '../../../plugin-spoiler/web/src';
+import { pluginTextColor, pluginTextHighlight } from '../../../plugin-text-color/web/src';
+import { colorScheme } from '../../../../examples/main/src/text-color-style-fn';
+
 import { convertNodeDataToDraft } from 'ricos-content/libs/toDraftData';
 import {
   content,
@@ -29,8 +52,62 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
 
+const expectedPluginsList = [
+  DIVIDER_TYPE,
+  GIPHY_TYPE,
+  HTML_TYPE,
+  GALLERY_TYPE,
+  POLL_TYPE,
+  VIDEO_TYPE,
+  FILE_UPLOAD_TYPE,
+  IMAGE_TYPE,
+  LINK_TYPE,
+  HASHTAG_TYPE,
+  MENTION_TYPE,
+  SPOILER_TYPE,
+  TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT_TYPE,
+];
+
+const expectedPluginsListRicosSchema = [
+  RICOS_DIVIDER_TYPE,
+  RICOS_GIPHY_TYPE,
+  RICOS_HTML_TYPE,
+  RICOS_GALLERY_TYPE,
+  RICOS_POLL_TYPE,
+  RICOS_VIDEO_TYPE,
+  RICOS_FILE_TYPE,
+  RICOS_IMAGE_TYPE,
+  RICOS_LINK_TYPE,
+  RICOS_HASHTAG_TYPE,
+  RICOS_MENTION_TYPE,
+  RICOS_SPOILER_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
+];
+
+jest.mock('react-modal', () => {
+  const TestReactModal = class MockReactModal extends React.Component {
+    static setAppElement() {
+      // in our application we use #setAppElement for accessibility
+      // if you use this or any other functions you'll have to mock them
+    }
+
+    render() {
+      return <div />;
+    }
+  };
+  return TestReactModal;
+});
+
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
+
+const configs = {
+  textColor: {
+    colorScheme,
+  },
+};
 
 const plugins = [
   pluginDivider(),
@@ -44,6 +121,9 @@ const plugins = [
   pluginLink(),
   pluginHashtag(),
   pluginMentions(),
+  pluginSpoiler(),
+  pluginTextColor(configs.textColor),
+  pluginTextHighlight(configs.textColor),
 ];
 
 const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
@@ -82,10 +162,13 @@ type Settings = { isRicosSchema?: boolean };
 
 const isMention = type => type === RICOS_MENTION_TYPE;
 
+const setSelection = (ricosEditor, blockKey, selection) =>
+  ricosEditor.getEditorCommands()._setSelection(blockKey, selection);
+
 const toggleInlineStyleTest = result => inlineStyle =>
   it(`should ${result ? '' : 'not '}have ${inlineStyle} inline style`, () => {
-    const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+    const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
+    setSelection(ricosEditor, blockKey, selection);
     ricosEditor.getEditorCommands().toggleInlineStyle(inlineStyle);
     !result && ricosEditor.getEditorCommands().toggleInlineStyle(inlineStyle);
     expect(ricosEditor.getEditorCommands().hasInlineStyle(inlineStyle)).toEqual(result);
@@ -111,7 +194,7 @@ const setPluginTest = (settings: Settings) => ([
     data1 = settings?.isRicosSchema ? data1 : convertNodeDataToDraft(nodeType, data1);
     data2 = settings?.isRicosSchema ? data2 : convertNodeDataToDraft(nodeType, data2);
     const blockKey = ricosEditor.getEditorCommands().insertBlock(type, data1, settings);
-    ricosEditor.getEditorCommands().setBlock(blockKey, type, data2, settings);
+    ricosEditor.getEditorCommands().setBlock(blockKey as string, type, data2, settings);
     expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData2);
   });
 
@@ -120,7 +203,7 @@ const deletePluginTest = (settings: Settings) => ([pluginName, { type, nodeType,
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
     data1 = settings?.isRicosSchema ? data1 : convertNodeDataToDraft(nodeType, data1);
     const blockKey = ricosEditor.getEditorCommands().insertBlock(type, data1, settings);
-    ricosEditor.getEditorCommands().deleteBlock(blockKey);
+    ricosEditor.getEditorCommands().deleteBlock(blockKey as string);
     expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual({});
   });
 
@@ -130,11 +213,15 @@ const insertDecorationTest = (settings: Settings) => ([
 ]) =>
   it(`should insert ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection1);
+    setSelection(ricosEditor, blockKey, selection1);
     isMention(type) && ricosEditor.getEditorCommands().triggerDecoration(type);
     ricosEditor.getEditorCommands().insertDecoration(type, data1, settings);
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection2);
-    expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData1);
+    setSelection(ricosEditor, blockKey, selection2);
+    if (type === RICOS_TEXT_COLOR_TYPE || type === RICOS_TEXT_HIGHLIGHT_TYPE) {
+      expect(ricosEditor.getEditorCommands().getColor(type)).toEqual(expectedData1);
+    } else {
+      expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData1);
+    }
   });
 
 const setDecorationTest = (settings: Settings) => ([
@@ -144,12 +231,16 @@ const setDecorationTest = (settings: Settings) => ([
   !isMention(type) &&
   it(`should set ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection1);
+    setSelection(ricosEditor, blockKey, selection1);
     ricosEditor.getEditorCommands().insertDecoration(type, data1, settings);
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection1);
+    setSelection(ricosEditor, blockKey, selection1);
     ricosEditor.getEditorCommands().insertDecoration(type, data2, settings);
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection2);
-    expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData2);
+    setSelection(ricosEditor, blockKey, selection2);
+    if (type === RICOS_TEXT_COLOR_TYPE || type === RICOS_TEXT_HIGHLIGHT_TYPE) {
+      expect(ricosEditor.getEditorCommands().getColor(type)).toEqual(expectedData2);
+    } else {
+      expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual(expectedData2);
+    }
   });
 
 const deleteDecorationTest = (settings: Settings) => ([
@@ -159,9 +250,9 @@ const deleteDecorationTest = (settings: Settings) => ([
   !isMention(type) &&
   it(`should remove ${pluginName}`, () => {
     const ricosEditor = getRicosEditorInstance({ plugins, content }) as RicosEditor;
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection1);
+    setSelection(ricosEditor, blockKey, selection1);
     ricosEditor.getEditorCommands().insertDecoration(type, data1, settings);
-    ricosEditor.getEditorCommands().setSelection(blockKey, selection2);
+    setSelection(ricosEditor, blockKey, selection2);
     ricosEditor.getEditorCommands().deleteDecoration(type);
     expect(ricosEditor.getEditorCommands().getSelectedData()).toEqual({});
   });
@@ -275,6 +366,14 @@ describe('RicosEditor', () => {
     expect(rceProps.spellCheck).toEqual(true);
     expect(rceProps).not.toHaveProperty('notADraftSetting');
   });
+  it('should trigger onOpenEditorSuccess upon mount', () => {
+    let reportedVersion = '';
+    const onOpenEditorSuccessMock: BICallbacks['onOpenEditorSuccess'] = v => (reportedVersion = v);
+    const fn = jest.fn(onOpenEditorSuccessMock);
+    getRicosEditor({ _rcProps: { helpers: { onOpenEditorSuccess: fn } } });
+    expect(fn).toBeCalledTimes(1);
+    expect(reportedVersion).toEqual(version);
+  });
   describe('Modal API', () => {
     it('should pass openModal & closeModal to helpers', () => {
       const modalSettings = { openModal: () => 'open', closeModal: () => 'close' };
@@ -331,24 +430,39 @@ describe('RicosEditor', () => {
       });
       it('should undo stack be not empty', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+        setSelection(ricosEditor, blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('bold');
         expect(ricosEditor.getEditorCommands().isUndoStackEmpty()).toBeFalsy();
       });
       it('should redo stack be not empty', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+        setSelection(ricosEditor, blockKey, selection);
         ricosEditor.getEditorCommands().toggleInlineStyle('bold');
         ricosEditor.getEditorCommands().undo();
         expect(ricosEditor.getEditorCommands().isRedoStackEmpty()).toBeFalsy();
       });
       it('should change block to numbered list', async () => {
         const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
-        ricosEditor.getEditorCommands().setSelection(blockKey, selection);
+        setSelection(ricosEditor, blockKey, selection);
         ricosEditor.getEditorCommands().setBlockType('ordered-list-item');
         expect(
           ricosEditor.getEditorCommands().isBlockTypeSelected('ordered-list-item')
         ).toBeTruthy();
+      });
+      it('should get empty plugins list', async () => {
+        const ricosEditor = getRicosEditorInstance({ content }) as RicosEditor;
+        const pluginsList = ricosEditor.getEditorCommands().getPluginsList();
+        expect(pluginsList).toEqual([]);
+      });
+      it('should get plugins list', async () => {
+        const ricosEditor = getRicosEditorInstance({ content, plugins }) as RicosEditor;
+        const pluginsList = ricosEditor.getEditorCommands().getPluginsList();
+        expect(pluginsList).toEqual(expectedPluginsList);
+      });
+      it('should get plugins list (Ricos Schema)', async () => {
+        const ricosEditor = getRicosEditorInstance({ content, plugins }) as RicosEditor;
+        const pluginsList = ricosEditor.getEditorCommands().getPluginsList({ isRicosSchema: true });
+        expect(pluginsList).toEqual(expectedPluginsListRicosSchema);
       });
     });
     describe('Editor Decorations API (Ricos Schema)', () => {

@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
-import { Separator, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { Separator } from 'wix-rich-content-ui-components';
 import { BUTTONS } from '../buttons';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
@@ -65,6 +66,7 @@ export default function createInlinePluginToolbar({
     isToolbarOnFocus = () => this.ref?.contains(document.activeElement);
 
     cursorIsOnInlinePlugin = debounce(() => {
+      this.hideToolbar();
       const toolbarOnFocus = this.isToolbarOnFocus();
       const { boundingRect, type } = commonPubsub.get('cursorOnInlinePlugin') || {};
       if (toolbarOnFocus) {
@@ -73,8 +75,6 @@ export default function createInlinePluginToolbar({
       if (boundingRect && name.toUpperCase() === type) {
         this.pluginBoundingRect = boundingRect;
         this.showToolbar();
-      } else {
-        this.hideToolbar();
       }
     }, 40);
 

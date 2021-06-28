@@ -1,6 +1,6 @@
 {
   "name": "ricos-content",
-  "version": "8.33.1",
+  "version": "8.44.6",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -33,12 +33,15 @@
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
-    "test:watchAll": "jest --verbose --watchAll"
+    "test:watchAll": "jest --verbose --watchAll",
+    "updateBaselines": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} ../../../scripts/updateBaselines"
   },
   "dependencies": {
+    "fp-ts": "^2.10.5",
+    "monocle-ts": "^2.3.9",
     "omit-deep": "0.3.0",
     "parse5": "^6.0.0",
-    "ricos-schema": "8.33.1",
+    "ricos-schema": "8.44.6",
     "to-camel-case": "1.0.0",
     "to-constant-case": "1.0.0",
     "to-slug-case": "1.0.0",

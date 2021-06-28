@@ -21,7 +21,7 @@ ensureDraftContent: (content: RichContent | DraftContent) => DraftContent;
 import { fromDraft, toDraft } from 'ricos-content/libs/migrateSchema';
 import { RichContent } from 'ricos-schema';
 import { RicosEditor, DraftContent } from 'ricos-editor';
-import ricosContent from './ricosCotnent.json';
+import ricosContent from './ricosContent.json';
 
 const draftContent: DraftContent = toDraft(ricosContent);
 
@@ -135,4 +135,47 @@ import ricosContent from './ricosCotnent.json';
 const html: string = toHtml(ricosContent);
 
 document.body.innerHTML = html;
+```
+
+## Tiptap
+
+The following functions allow converting rich content to and from Tiptap.
+
+### HTML to rich content
+
+```tsx
+fromTiptap: (content: ProseContent) => RichContent;
+fromTiptap: (node: ProseContent) => Node; // Convert a single node
+fromTiptap: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
+```
+
+#### Example
+
+```tsx
+import { fromTiptap } from 'ricos-content/libs/converters';
+import { RichContent } from 'ricos-schema';
+import { RicosEditor, DraftContent } from 'ricos-editor';
+import proseContent from './proseContent.json';
+
+const content: RichContent = fromTiptap(proseContent);
+const draftContent: DraftContent = toDraft(content);
+
+<RicosEditor content={draftContent} />;
+```
+
+### Rich content to plain text
+
+```tsx
+toTiptap: (content: RichContent) => ProseContent;
+toTiptap: (node: Node) => ProseContent; // Convert a single node
+toTiptap: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
+```
+
+#### Example
+
+```tsx
+import { toTiptap } from 'ricos-content/libs/converters';
+import ricosContent from './ricosCotnent.json';
+
+const content: ProseContent = toTiptap(ricosContent);
 ```

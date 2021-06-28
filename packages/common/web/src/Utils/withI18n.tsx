@@ -1,5 +1,5 @@
 import React, { PureComponent, Ref, ComponentType } from 'react';
-import { I18nextProvider, translate } from 'react-i18next';
+import { I18nextProvider, translate, Trans } from 'react-i18next';
 import i18n from './i18n';
 import createHocName from './createHocName';
 import { LocaleResource } from '../types';
@@ -86,3 +86,5 @@ export default <T, P>(
 
   return React.forwardRef<T, P>((props, ref) => <I18nWrapper {...props} forwardedRef={ref} />);
 };
+
+export { translate, Trans };

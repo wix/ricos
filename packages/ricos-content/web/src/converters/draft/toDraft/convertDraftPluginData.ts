@@ -3,9 +3,7 @@ import {
   Node,
   Node_Type,
   Decoration_Type,
-  PluginContainerData_Width_Type,
   Link,
-  Link_Target,
   ImageData,
   Decoration,
   PluginContainerData,
@@ -28,7 +26,10 @@ export const convertNodeToDraftData = (node: Node) => {
   const { type } = node;
   const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
   const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
-  return convertNodeDataToDraft(type, node[dataFieldName]);
+  if (!dataFieldName) {
+    console.error(`No data field name | Plugin Name: ${draftPluginType}`);
+  }
+  return convertNodeDataToDraft(type, node[dataFieldName] || {});
 };
 
 export const convertDecorationToDraftData = (decoration: Decoration) => {
@@ -38,6 +39,10 @@ export const convertDecorationToDraftData = (decoration: Decoration) => {
 };
 
 export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
+  if (!data) {
+    console.error(`No data for ${nodeType}`);
+    return {};
+  }
   const newData = cloneDeep(data);
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,
@@ -49,15 +54,16 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
+    [Node_Type.MAP]: convertMapData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
-    convertContainerData(newData);
+    convertContainerData(newData, nodeType);
   }
   if (nodeType in converters) {
     const convert = converters[nodeType];
     convert(newData);
   }
-  return JSON.parse(JSON.stringify(newData));
+  return JSON.parse(JSON.stringify(newData)); // remove undefined values
 };
 
 export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
@@ -73,19 +79,17 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
   return data;
 };
 
-const convertContainerData = (data: { containerData?: PluginContainerData; config }) => {
-  const { width, alignment, spoiler, customHeight } = data.containerData || {};
+const convertContainerData = (
+  data: { containerData?: PluginContainerData; config },
+  nodeType: string
+) => {
+  const { width, alignment, spoiler, height } = data.containerData || {};
   data.config = Object.assign(
     {},
     data.config,
-    width?.type && {
-      size:
-        width.type === PluginContainerData_Width_Type.CUSTOM
-          ? 'inline'
-          : constantToKebabCase(width.type),
-    },
-    width?.customWidth && { width: width.customWidth },
-    customHeight && { height: customHeight },
+    width?.size && { size: constantToKebabCase(width.size) },
+    width?.custom && { width: parseInt(width.custom) },
+    height?.custom && { height: parseInt(height.custom) },
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
@@ -95,6 +99,11 @@ const convertContainerData = (data: { containerData?: PluginContainerData; confi
       },
     }
   );
+  if (nodeType === Node_Type.IMAGE && width?.custom) {
+    data.config.size = 'inline';
+  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+    data.config.size = 'content';
+  }
   delete data.containerData;
 };
 
@@ -187,11 +196,11 @@ const convertFileData = (data: FileData & FileComponentData) => {
 const convertButtonData = (data: Partial<ButtonData> & { button }) => {
   const { link, text, styles } = data;
   const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles || {};
-  const { url, rel, target } = link || {};
+  const convertedLink = link ? convertLink(link) : {};
   data.button = {
     settings: {
       buttonText: text,
-      ...(url ? { url, rel: !!rel?.nofollow, target: target === Link_Target.BLANK } : {}),
+      ...convertedLink,
     },
     design: {
       borderRadius,
@@ -214,6 +223,38 @@ const convertHTMLData = data => {
   data.src = html || url;
   delete data[srcType];
   config.size && delete data.config.size;
+};
+
+const convertMapData = data => {
+  const {
+    draggable,
+    marker,
+    streetViewControl,
+    zoomControl,
+    locationName,
+    viewModeControl,
+    initialZoom,
+    mapType,
+  } = data.mapSettings;
+  data.mapSettings.isDraggingAllowed = draggable;
+  data.mapSettings.isMarkerShown = marker;
+  data.mapSettings.isStreetViewControlShown = streetViewControl;
+  data.mapSettings.isZoomControlShown = zoomControl;
+  data.mapSettings.locationDisplayName = locationName;
+  data.mapSettings.zoom = initialZoom;
+  data.mapSettings.mode = mapType;
+  delete data.mapSettings.draggable;
+  delete data.mapSettings.marker;
+  delete data.mapSettings.streetViewControl;
+  delete data.mapSettings.zoomControl;
+  delete data.mapSettings.locationName;
+  delete data.mapSettings.initialZoom;
+  delete data.mapSettings.mapType;
+
+  if (viewModeControl) {
+    data.mapSettings.isViewControlShown = viewModeControl;
+    delete data.mapSettings.viewModeControl;
+  }
 };
 
 const convertLink = ({
