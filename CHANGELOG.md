@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2625](https://github.com/wix/ricos/pull/2625) images with download enabled can be downloaded from fullscreen
+
 </details>
 <hr/>
 

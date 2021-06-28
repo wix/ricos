@@ -17,6 +17,7 @@ function imageEntityToGallery(data, index) {
     },
     itemId: src.id || url + index,
     url,
+    disableDownload: data.disableDownload,
   };
 }
 
@@ -116,7 +117,11 @@ function convertEntityToGalleryItems(entity, index) {
         ? [imageEntityToGallery(entity.data, index)]
         : [];
     case galleryType: {
-      return entity.data?.disableExpand ? [] : entity.data.items;
+      return entity.data?.disableExpand
+        ? []
+        : entity.data.items.map(item => {
+            return { ...item, disableDownload: entity.data.disableDownload };
+          });
     }
     case tableType: {
       return getTableImages(entity, index);
