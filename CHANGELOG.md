@@ -616,7 +616,7 @@
 - `gallery`
   - [#2290](https://github.com/wix/ricos/pull/2290) gallery doesnt require data to handle error, supported file types checked locally
 - `fullscreen`
-  - [#2273](https://github.com/wix-incubator/rich-content/pull/2273) fix dimension issues
+  - [#2273](https://github.com/wix/ricos/pull/2273) fix dimension issues
 
 ## 8.27.1 (Mar 10, 2021)
 ### :rocket: New Feature
