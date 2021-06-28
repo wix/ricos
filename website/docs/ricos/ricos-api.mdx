@@ -113,7 +113,17 @@ linkSettings: {
 locale?: string
 ```
 
-Any two letter string represing a [supported](https://github.com/wix/ricos/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction.
+Any two letter string represing a [supported](https://github.com/wix/ricos/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction of modals and settings.
+
+### `localeContent`
+
+```jsx
+localeContent?: string
+```
+
+Any two letter string represing a [supported](https://github.com/wix/ricos/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction of content.
+If not given, `locale` props will be use.
+
 
 ### `mediaSettings`
 
