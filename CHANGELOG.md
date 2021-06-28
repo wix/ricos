@@ -17,6 +17,15 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2625](https://github.com/wix/ricos/pull/2625) images with download enabled can be downloaded from fullscreen
+- `file-upload`
+  - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) show loader when content has `tempData`
+- `link`
+  - [#2214](https://github.com/wix-incubator/rich-content/pull/2214) disable link button when atomic block is selected
+
 </details>
 <hr/>
 
