@@ -19,6 +19,9 @@
 ### :nail_care
 - `gallery/image`
  - [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2652](https://github.com/wix-incubator/rich-content/pull/2652) scroll to plugins on creation
 
 </details>
 <hr/>

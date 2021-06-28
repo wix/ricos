@@ -827,6 +827,7 @@
         "config": {
           "alignment": "center",
           "size": "content",
+          "disableExpand": false,
           "link": {
             "url": "www.image-link.com",
             "target": "_blank",
@@ -967,7 +968,8 @@
           "alignment": "center",
           "size": "content",
           "layout": "small",
-          "spacing": 0
+          "spacing": 0,
+          "disableExpand": false
         }
       }
     },
@@ -1275,7 +1277,8 @@
         "config": {
           "alignment": "right",
           "size": "inline",
-          "width": 300
+          "width": 300,
+          "disableExpand": false
         },
         "src": {
           "id": "91ff5a615e0235157dc1a7e5f66607bf",
