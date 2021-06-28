@@ -137,6 +137,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   customAnchorScroll?: CustomAnchorScroll;
   style?: CSSProperties;
   locale: string;
+  localeContent?: string;
   shouldRenderOptimizedImages?: boolean;
   onChange?(editorState: EditorState): void;
   onAtomicBlockFocus?: onAtomicBlockFocus;
@@ -374,6 +375,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       theme,
       t,
       locale,
+      localeContent,
       anchorTarget,
       relValue,
       customAnchorScroll,
@@ -394,6 +396,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       theme: theme || {},
       t,
       locale,
+      localeContent,
       anchorTarget,
       relValue,
       customAnchorScroll,
