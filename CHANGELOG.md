@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :nail_care
+- `gallery/image`
+ - [#2649](https://github.com/wix/ricos/pull/2649) remove useless config
 
 </details>
 <hr/>
