@@ -29,7 +29,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   saveBtnDataHook,
   cancelBtnDataHook,
   theme,
-  selected,
+  selected = true,
 }) => (
   <div className={classNames(styles.action_buttons, styles[size], { [styles.mobile]: isMobile })}>
     <Button
