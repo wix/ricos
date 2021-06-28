@@ -17,6 +17,13 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `file-upload`
+  - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) show loader when content has `tempData`
+- `link`
+  - [#2214](https://github.com/wix-incubator/rich-content/pull/2214) disable link button when atomic block is selected
+
 </details>
 <hr/>
 
