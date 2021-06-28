@@ -1,21 +1,19 @@
-import {
-  identity,
-  merge,
-  curry,
-  compose,
-  map,
-  findIndex,
-  has,
-  isNumber,
-  isString,
-  isArray,
-} from 'lodash/fp';
+import { has, isNumber, isString, isArray } from 'lodash';
+import { flow } from 'fp-ts/lib/function';
+import * as A from 'fp-ts/lib/Array';
+import * as O from 'fp-ts/lib/Option';
 import { ParagraphData, RichContent, TextData, Node } from 'ricos-schema';
 import { task, either, firstResolved } from '../fp-utils';
-import { PartialDeep, ListItemData } from '../types';
+import { ListItemData } from '../types';
 
 // predicates
-const isIndexFound = either(index => index !== -1);
+const isIndexFound = either(i => i !== -1);
+
+const findIndex = predicate =>
+  flow(
+    A.findIndex(predicate),
+    O.getOrElse(() => -1)
+  );
 
 const isIndexInRange = either(
   ({ content, index }: { content: RichContent; index?: number }) =>
@@ -29,20 +27,14 @@ const appendNode = (node: Node, content: RichContent) =>
     nodes: [...content.nodes, node],
   });
 
-const insertNode = curry((content: RichContent, node: Node, index: number) =>
+const insertNode = (content: RichContent, node: Node) => (index: number) =>
   isIndexInRange({ content, index }).map(() => ({
     ...content,
     nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index)],
-  }))
-);
-
-const replaceNode = curry((content: RichContent, node: Node, index: number) => ({
-  ...content,
-  nodes: [...content.nodes.slice(0, index), node, ...content.nodes.slice(index + 1)],
-}));
+  }));
 
 const insertNodeByKey = (content: RichContent, node: Node, nodeKey: string, isAfter?: boolean) =>
-  isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes))
+  isIndexFound(findIndex(({ key }) => key === nodeKey)(content.nodes))
     .map((index: number) => (isAfter ? index + 1 : index))
     .chain(insertNode(content, node));
 
@@ -65,98 +57,33 @@ export function addNode({
   content: RichContent;
 }): RichContent {
   return firstResolved([
-    insertNode(content, node, <number>index),
+    insertNode(content, node)(<number>index),
     insertNodeByKey(content, node, <string>before),
     insertNodeByKey(content, node, <string>after, true),
     appendNode(node, content),
   ]);
 }
 
-export function setNode({
-  node,
-  key: nodeKey,
-  content,
-}: {
-  node: Node;
-  key: string;
-  content: RichContent;
-}): RichContent {
-  return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes)).fork(
-    () => content,
-    replaceNode(content, { ...node, key: nodeKey })
-  );
-}
-
-export function toggleNodeType({
-  node: sourceNode,
-  key: nodeKey,
-  canToggle = () => false,
-  convert,
-  content,
-}: {
-  node: PartialDeep<Node>;
-  key: string;
-  canToggle: ({
-    sourceNode,
-    targetNode,
-  }: {
-    sourceNode: PartialDeep<Node>;
-    targetNode: Node;
-  }) => boolean;
-  convert: ({
-    sourceNode,
-    targetNode,
-  }: {
-    sourceNode: PartialDeep<Node>;
-    targetNode: Node;
-  }) => PartialDeep<Node>;
-  content: RichContent;
-}): RichContent {
-  const isToggleable = either(canToggle);
-  return isIndexFound(findIndex(({ key }) => key === nodeKey, content.nodes))
-    .chain((index: number) => isToggleable({ targetNode: content.nodes[index], sourceNode }))
-    .map(({ targetNode, sourceNode }) => convert({ targetNode, sourceNode }))
-    .map((node: Node) => setNode({ node: { ...node, key: nodeKey }, key: nodeKey, content }))
-    .fork(() => content, identity);
-}
-
-export function updateNode({
-  node: mergedNode,
-  key: nodeKey,
-  content,
-}: {
-  node: PartialDeep<Node>;
-  key: string;
-  content: RichContent;
-}): RichContent {
-  return isIndexFound(
-    findIndex(({ key, type }) => key === nodeKey && type === mergedNode.type, content.nodes)
-  )
-    .map((index: number) => merge(content.nodes[index], mergedNode))
-    .map((node: Node) => setNode({ node: { ...node, key: nodeKey }, key: nodeKey, content }))
-    .fork(() => content, identity);
-}
-
-const isTextData = text => has('text', text) && has('decorations', text);
+const isTextData = text => has(text, 'text') && has(text, 'decorations');
 
 const toArray = t => [t];
 
 const toTextData = text => ({ text, decorations: [] });
 
-const toListItemData = curry((data: ParagraphData, text: TextData[]) => ({ data, text }));
+const toListItemData = (data: ParagraphData) => (text: TextData[]) => ({ data, text });
 
 export function toListDataArray(
   items: string | TextData | ListItemData | (string | TextData | ListItemData)[],
   data: ParagraphData
 ): ListItemData[] {
   return firstResolved([
-    either(isString, items).map(compose(toArray, toListItemData(data), toArray, toTextData)),
-    either(isTextData, items).map(compose(toArray, toListItemData(data), toArray)),
-    either(isArray, items).map(
-      map(item =>
+    either(isString)(items).map(flow(toTextData, toArray, toListItemData(data), toArray)),
+    either(isTextData)(items).map(flow(toArray, toListItemData(data), toArray)),
+    either(isArray)(items).map(
+      A.map(item =>
         firstResolved([
-          either(isString, item).map(compose(toListItemData(data), toArray, toTextData)),
-          either(isTextData, item).map(compose(toListItemData(data), toArray)),
+          either(isString)(item).map(flow(toTextData, toArray, toListItemData(data))),
+          either(isTextData)(item).map(flow(toArray, toListItemData(data))),
           task.of(item),
         ])
       )
@@ -166,9 +93,9 @@ export function toListDataArray(
 }
 export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
   return firstResolved([
-    either(isString, text).map(compose(toArray, toTextData)),
-    either(isTextData, text).map(toArray),
-    either(isArray, text).map(map(t => (isString(t) ? toTextData(t) : t))),
+    either(isString)(text).map(flow(toTextData, toArray)),
+    either(isTextData)(text).map(toArray),
+    either(isArray)(text).map(A.map(t => (isString(t) ? toTextData(t) : t))),
     task.of([]),
   ]);
 }
