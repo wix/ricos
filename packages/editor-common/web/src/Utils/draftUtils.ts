@@ -819,6 +819,15 @@ export function isCursorAtStartOfContent(editorState: EditorState) {
   return isStartOfLine && isCursorAtFirstLine(editorState);
 }
 
+export const hasBlockType = (blockType: string, editorState: EditorState) => {
+  const currentBlockType = editorState
+    .getCurrentContent()
+    .getBlockForKey(editorState.getSelection().getStartKey())
+    .getType();
+
+  return blockType === currentBlockType;
+};
+
 export function selectAllContent(editorState, forceSelection) {
   const currentContent = editorState.getCurrentContent();
   const selection = editorState.getSelection().merge({

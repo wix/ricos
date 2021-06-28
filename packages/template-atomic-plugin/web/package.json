@@ -1,6 +1,5 @@
 {
   "name": "wix-rich-content-plugin-yourDpluginDname",
-  "private": true,
   "version": "yourPluginVersion",
   "author": {
     "name": "pluginAuthorName",

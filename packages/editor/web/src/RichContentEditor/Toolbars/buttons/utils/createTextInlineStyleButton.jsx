@@ -9,6 +9,7 @@ export default ({ style, Icon, tooltipTextKey }) =>
       getEditorState: PropTypes.func.isRequired,
       setEditorState: PropTypes.func.isRequired,
       theme: PropTypes.object.isRequired,
+      helpers: PropTypes.object,
       isMobile: PropTypes.bool,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
@@ -32,10 +33,17 @@ export default ({ style, Icon, tooltipTextKey }) =>
     };
 
     render() {
-      const { theme, isMobile, t, tabIndex } = this.props;
+      const { theme, helpers, isMobile, t, tabIndex } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textInlineStyleButton_${textForHooks}`;
+      const onClick = e => {
+        helpers?.onToolbarButtonClick?.({
+          buttonName: textForHooks,
+          value: String(!this.isActive()),
+        });
+        this.toggleStyle(e);
+      };
 
       return (
         <TextButton
@@ -43,7 +51,7 @@ export default ({ style, Icon, tooltipTextKey }) =>
           theme={theme}
           isMobile={isMobile}
           isActive={this.isActive}
-          onClick={this.toggleStyle}
+          onClick={onClick}
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}

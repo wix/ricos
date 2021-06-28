@@ -166,7 +166,6 @@ export const setupContentBuilder = (
     { name: 'Paragraph', type: Node_Type.PARAGRAPH, dataT: {} as ParagraphData },
     { name: 'Heading', type: Node_Type.HEADING, dataT: {} as HeadingData },
     { name: 'Code', type: Node_Type.CODE_BLOCK, dataT: {} as CodeBlockData },
-    { name: 'Blockquote', type: Node_Type.BLOCKQUOTE, dataT: {} as never },
   ].forEach(({ name, type, dataT }) => {
     builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
       data,
@@ -207,19 +206,36 @@ export const setupContentBuilder = (
   );
 
   [
-    { name: 'Image', type: Node_Type.IMAGE, dataT: {} as ImageData },
     { name: 'Divider', type: Node_Type.DIVIDER, dataT: {} as DividerData },
-    { name: 'LinkPreview', type: Node_Type.LINK_PREVIEW, dataT: {} as LinkPreviewData },
-    { name: 'Poll', type: Node_Type.POLL, dataT: {} as PollData },
     { name: 'File', type: Node_Type.FILE, dataT: {} as FileData },
     { name: 'Gallery', type: Node_Type.GALLERY, dataT: {} as GalleryData },
-    { name: 'Map', type: Node_Type.MAP, dataT: {} as MapData },
-    { name: 'Video', type: Node_Type.VIDEO, dataT: {} as VideoData },
-    { name: 'Button', type: Node_Type.BUTTON, dataT: {} as ButtonData },
-    { name: 'Giphy', type: Node_Type.GIPHY, dataT: {} as GiphyData },
     { name: 'Html', type: Node_Type.HTML, dataT: {} as HTMLData },
+    { name: 'Image', type: Node_Type.IMAGE, dataT: {} as ImageData },
+    { name: 'Video', type: Node_Type.VIDEO, dataT: {} as VideoData },
   ].forEach(({ name, type, dataT }) => {
     builderApis[`add${name}`] = RicosContentBuilder.prototype[`add${name}`] = function({
+      data,
+      index,
+      before,
+      after,
+      content,
+    }: AddMethodParams<typeof dataT>): RichContent {
+      return addNode({
+        type,
+        data,
+        content,
+        index,
+        before,
+        after,
+      });
+    };
+  });
+
+  [
+    { name: 'addActionButton', type: Node_Type.BUTTON, dataT: {} as ButtonData },
+    { name: 'addLinkButton', type: Node_Type.BUTTON, dataT: {} as ButtonData },
+  ].forEach(({ name, type, dataT }) => {
+    builderApis[name] = RicosContentBuilder.prototype[name] = function({
       data,
       index,
       before,

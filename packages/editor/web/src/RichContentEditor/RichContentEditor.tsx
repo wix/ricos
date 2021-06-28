@@ -22,7 +22,6 @@ import {
   getBlockInfo,
   getFocusedBlockKey,
   createCalcContentDiff,
-  getEditorContentSummary,
   getBlockType,
   COMMANDS,
   MODIFIERS,
@@ -73,6 +72,7 @@ import {
   PluginEventParams,
   OnPluginAction,
   IMAGE_TYPE,
+  EditorCommands,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -83,7 +83,6 @@ import InnerModal from './InnerModal';
 import { onCut, onCopy } from './utils/onCutAndCopy';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
-import { TiptapEditor } from 'wix-tiptap-editor';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -207,8 +206,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   editorWrapper!: Element;
 
-  TiptapEditor: typeof TiptapEditor | null;
-
   lastFocusedAtomicPlugin?: ContentBlock;
 
   updateBounds!: (editorBounds?: BoundingRect) => void;
@@ -225,7 +222,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   innerRCECustomStyleFn;
 
-  EditorCommands!: ReturnType<typeof createEditorCommands>;
+  EditorCommands!: EditorCommands;
 
   getSelectedText!: (editorState: EditorState) => string;
 
@@ -239,15 +236,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     },
     normalize: {},
     plugins: [],
-  };
-
-  static publish = async (
-    postId: number,
-    editorState: EditorState,
-    callBack: (...args) => boolean = () => true
-  ) => {
-    const postSummary = getEditorContentSummary(editorState || {});
-    callBack({ postId, ...postSummary });
   };
 
   static getDerivedStateFromError(error: string) {
@@ -267,7 +255,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       undoRedoStackChanged: false,
     };
     this.refId = Math.floor(Math.random() * 9999);
-    this.TiptapEditor = null;
     this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
       this.state.editorState,
@@ -295,26 +282,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.handleBlockFocus(this.state.editorState);
   }
 
-  tiptapInterval;
-
   componentDidMount() {
     preventWixFocusRingAccessibility(this.editorWrapper);
     this.reportDebuggingInfo();
     this.preloadLibs();
     document?.addEventListener('beforeinput', this.preventDefaultKeyCommands);
     this.commonPubsub.set('undoExperiment', this.getUndoExperiment);
-
-    if (this.props.experiments?.tiptapEditor?.enabled) {
-      this.tiptapInterval = setTimeout(async () => {
-        const tiptapEditorModule = await import(
-          /* webpackChunkName: wix-tiptap-editor */
-          'wix-tiptap-editor'
-        );
-        const { TiptapEditor } = tiptapEditorModule;
-        this.TiptapEditor = TiptapEditor;
-        this.forceUpdate();
-      }, 1000);
-    }
   }
 
   componentWillMount() {
@@ -324,7 +297,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.tiptapInterval);
     this.updateBounds = () => '';
     document?.removeEventListener('beforeinput', this.preventDefaultKeyCommands);
   }
@@ -476,6 +448,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onPluginAction,
         onPluginChange: (pluginId: string, changeObj) =>
           helpers.onPluginChange?.(pluginId, changeObj, Version.currentVersion),
+        onToolbarButtonClick: args =>
+          helpers.onToolbarButtonClick?.({ ...args, version: Version.currentVersion }),
       },
       config,
       isMobile,
@@ -532,6 +506,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const { createPluginsDataMap = {} } = this.props;
     this.EditorCommands = createEditorCommands(
       createPluginsDataMap,
+      this.plugins,
       this.getEditorState,
       this.updateEditorState
     );
@@ -876,15 +851,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pubsub: this.commonPubsub,
   });
 
-  // TODO: remove deprecated postId once getContent(postId) is removed (9.0.0)
-  publish = async (postId?: string) => {
-    if (!this.props.helpers?.onPublish) {
-      return;
-    }
-    const { pluginsCount, pluginsDetails } = getEditorContentSummary(this.state.editorState) || {};
-    this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
-  };
-
   setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
 
   inPluginEditingMode = false;
@@ -978,23 +944,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
 
     return handled || 'not-handled';
-  };
-
-  renderTiptapEditor = () => {
-    if (this.TiptapEditor) {
-      const TiptapEditor = this.TiptapEditor;
-      return (
-        <TiptapEditor
-          onUpdate={({ content }) => {
-            const editorState = EditorState.createWithContent(convertFromRaw(content));
-            this.props.onChange?.(editorState);
-          }}
-          editorProps={this.props}
-        />
-      );
-    } else {
-      return null;
-    }
   };
 
   renderEditor = () => {
@@ -1210,7 +1159,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...themeDesktopStyle,
       });
 
-      const isTiptapEditor = this.props.experiments?.tiptapEditor?.enabled;
       return (
         <GlobalContext.Provider value={this.state.context}>
           <Measure bounds onResize={this.onResize}>
@@ -1233,12 +1181,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 >
                   {this.renderAccessibilityListener()}
 
-                  {isTiptapEditor && this.renderTiptapEditor()}
-                  {isTiptapEditor && (
-                    <div style={{ position: 'absolute', zIndex: -1 }}> {this.renderEditor()}</div>
-                  )}
-
-                  {!isTiptapEditor && this.renderEditor()}
+                  {this.renderEditor()}
                   {showToolbars && this.renderToolbars()}
                   {this.renderInlineModals()}
                   {this.renderErrorToast()}

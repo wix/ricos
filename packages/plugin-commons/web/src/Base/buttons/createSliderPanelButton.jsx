@@ -13,6 +13,8 @@ export default ({ Icon, tooltipTextKey, getValue, onChange }) =>
       inputMax: PropTypes.number,
       mapStoreDataToPanelProps: PropTypes.func,
       getEditorBounds: PropTypes.func,
+      helpers: PropTypes.object,
+      pluginType: PropTypes.string,
     };
 
     render() {
