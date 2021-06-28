@@ -3,15 +3,13 @@
 </div>
 <h2>A React-based, supercharged rich content editor with an extensible plugin system</h2>
 
-
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) 
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 <div align="center">
   <img src="ricos.gif"/>
 </div>
 
 <br />
-
 
 Try out our [demo](https://wix-rich-content.herokuapp.com/). You can see the full documentation here: [https://wix.github.io/ricos/](https://wix.github.io/ricos/)
 
@@ -43,6 +41,7 @@ Adding videos and dividers:
 ```jsx
 import { RicosEditor } from 'ricos-editor';
 import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
@@ -53,7 +52,7 @@ import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 <RicosEditor placeholder={'Type here!'} plugins={[pluginDivider(), pluginVideo()]} />;
 ```
 
-There you go! A rich content editor with plugins. 
+There you go! A rich content editor with plugins.
 
 [See full documentation](https://wix.github.io/ricos/)
 
@@ -63,7 +62,7 @@ Compiled package also contains a CommonJS bundle, which you can consume if you a
 
 ## Using with [Yoshi](https://github.com/wix/yoshi)
 
-To use editor with Yoshi, follow the same bootstrapping process, but make sure to include the package `.css` files from the `.global.scss` file.  For example, create a file named `rich-content.global.scss` with the following content (make sure to import styles from any plugins you are using as well):
+To use editor with Yoshi, follow the same bootstrapping process, but make sure to include the package `.css` files from the `.global.scss` file. For example, create a file named `rich-content.global.scss` with the following content (make sure to import styles from any plugins you are using as well):
 
 ```scss
 @import '~wix-rich-content-editor-common/dist/styles.min.css';
@@ -72,11 +71,12 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 
 > This workaround is required because Yoshi re-compiles CSS files and applies css-modules again.
 
-
 ## Development
 
 ### Prerequisites
+
 - `protoc` - install [protoc](http://google.github.io/proto-lens/installing-protoc.html) on your local machine
+
 ### Run Locally
 
 1. `yarn` - installs all dependencies and links any cross-dependencies.
@@ -86,6 +86,7 @@ To use editor with Yoshi, follow the same bootstrapping process, but make sure t
 #### Examples
 
 See [rich-content-editor-example](./examples/main) to see how to consume the Component as:
+
 - [editor](./examples/main/shared/editor/Editor.jsx)
 - [viewer](./examples/main/shared/viewer/Viewer.jsx)
 

@@ -1,4 +1,4 @@
-import { curry, identity, compose } from 'lodash/fp';
+import { identity, flow } from 'fp-ts/lib/function';
 
 // TODO: improve types
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -20,7 +20,7 @@ type TaskMonad = ((f: Fork) => Task) & { of: (data: unknown) => Task };
 export const task: TaskMonad = fork => ({
   fork,
   map(f) {
-    return task((rej, res) => this.fork(rej, compose(res, f)));
+    return task((rej, res) => this.fork(rej, flow(f, res)));
   },
   chain(t) {
     return task((rej, res) => this.fork(rej, x => t(x).fork(rej, res)));
@@ -34,6 +34,5 @@ export const firstResolved = (tasks: Task[], i = 0) =>
   tasks[i].fork(() => firstResolved(tasks, i + 1), identity);
 
 // if/else implemented with task
-export const either = curry((predicate: (data: unknown) => boolean, data) =>
-  task((rej, res) => (predicate(data) ? res(data) : rej(data)))
-);
+export const either = (predicate: (data: unknown) => boolean) => data =>
+  task((rej, res) => (predicate(data) ? res(data) : rej(data)));

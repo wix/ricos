@@ -44,6 +44,7 @@ export interface onViewerLoadedArgs extends biCallbackParams {
   isPreview: boolean;
   pluginsCount: ReturnType<typeof getContentSummary>['pluginsCount'];
   version: string;
+  url: string;
 }
 
 export interface onPluginModalOpenedArgs extends biCallbackParams {
@@ -101,7 +102,7 @@ export interface BICallbacks {
   ): void;
   onViewerAction?(pluginId: string, actionName: ActionName, value: string): void;
   onViewerLoaded?(params: onViewerLoadedArgs): void;
-  onOpenEditorSuccess?(version: string): void;
+  onOpenEditorSuccess?(version: string, toolbarType: ToolbarType): void;
   onContentEdited?(params: onContentEditedArgs): void;
   /** evid: 3 - 'changePlugin' */
   onToolbarButtonClick?(params: onToolbarButtonClickArgs): void;

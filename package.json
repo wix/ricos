@@ -65,6 +65,11 @@
     "toPlainText": "cd scripts && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} toPlainText",
     "link": "lerna link"
   },
+  "ultra": {
+    "concurrent": [
+      "lint"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "node scripts/preCommit"
@@ -93,7 +98,6 @@
     "@rollup/plugin-json": "^4.0.0",
     "@svgr/rollup": "^5.4.0",
     "@testing-library/react": "^9.4.0",
-    "@tiptap/core": "2.0.0-beta.54",
     "@types/classnames": "^2.2.10",
     "@types/draft-js": "^0.11.2",
     "@types/enzyme": "^3.10.5",
