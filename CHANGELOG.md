@@ -16,12 +16,14 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `plugin-commons`
-  - [#2652](https://github.com/wix-incubator/rich-content/pull/2652) scroll to plugins on creation
 
 </details>
 <hr/>
+
+## 8.44.7  (Jun 28, 2021)
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2652](https://github.com/wix-incubator/rich-content/pull/2652) scroll to plugins on creation
 
 ## 8.44.6  (Jun 28, 2021)
 ### :house: Internal
