@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2652](https://github.com/wix-incubator/rich-content/pull/2652) scroll to plugins on creation
 
 </details>
 <hr/>
