@@ -93,6 +93,7 @@
   "Poll_FormatToolbar_Layout_Tooltip": "Modifier la mise en page du sondage",
   "LinkPanel_Anchor_Title": "Ancre",
   "LinkTo_Edit_Tooltip": "Modifier le lien",
+  "TextLinkButton_DisableButtonForPlugins_Tooltip": "Inline links can not be applied to plugins",
   "CollapsibleList_InsertButton": "Liste déroulante",
   "Embed_Vertical_Stores_Search_Placeholder": "Rechercher un article",
   "EmbedURL_Social_Facebook_Placeholder": "Coller l'URL d'un post public",
