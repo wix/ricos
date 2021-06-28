@@ -250,10 +250,9 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   renderRicosEngine(child, childProps) {
-    const { toolbarSettings, draftEditorSettings = {}, children, ...props } = this.props;
+    const { toolbarSettings, draftEditorSettings = {}, localeContent, ...props } = this.props;
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
     const contentProp = this.getContentProp();
-    const localeContent = children?.props.localeContent || this.props.localeContent;
     return (
       <RicosEngine
         RicosModal={RicosModal}
