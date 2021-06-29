@@ -38,3 +38,26 @@
     background-color: rgba(0, 0, 0, 0.4);
   }
 }
+
+.small_btn_font_size {
+  font-size: 16px;
+}
+
+.tiny {
+  height: 32px;
+}
+
+.small {
+  @extend.small_btn_font_size;
+  height: 36px;
+}
+
+.medium {
+  @extend.small_btn_font_size;
+  height: 40px;
+}
+
+.large {
+  @extend.small_btn_font_size;
+  height: 48px;
+}
