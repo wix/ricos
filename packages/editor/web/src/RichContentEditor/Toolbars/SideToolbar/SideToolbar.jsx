@@ -81,6 +81,7 @@ export default class SideToolbar extends PureComponent {
     setTimeout(() => {
       if (displayOptions.displayMode === DISPLAY_MODE.NORMAL) {
         const node = document.querySelectorAll(`[data-offset-key="${offsetKey}"]`)[0];
+        const fontSize = window.getComputedStyle(node, null).getPropertyValue('font-size');
         if (node) {
           const top = node.getBoundingClientRect().top;
           const parentTop = node.offsetParent.getBoundingClientRect().top;
@@ -90,6 +91,7 @@ export default class SideToolbar extends PureComponent {
               ...(isMobile ? { right: offset.x } : { left: offset.x, right: offset.x }),
               transform: `scale(${isMobile ? 0.76 : 1})`, //mobile plus is smaller
               transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
+              fontSize,
             },
           });
         }
