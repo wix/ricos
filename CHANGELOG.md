@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.45.2 (Jun 29, 2021)
+
 ### :nail_care: Polish
 
 - `collapsible-list`
@@ -28,9 +33,6 @@
 
 - `editor-common`
   - [#2650](https://github.com/wix/ricos/pull/2650) moved FocusManager/FocusTrapReact/RichContentModal into ui-components folder
-
-</details>
-<hr/>
 
 ## 8.45.1 (Jun 29, 2021)
 
