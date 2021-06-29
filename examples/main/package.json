@@ -65,7 +65,7 @@
     "test": "echo 'There are no tests configured for this project!' && exit 0",
     "build:dev": "webpack --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js",
-    "analyze": "npm run build --progress --env.analyzeBundle"
+    "analyze": "npm run build -- --progress --env.analyzeBundle"
   },
   "devDependencies": {
     "babel-plugin-preval": "^3.0.1",
