@@ -17,11 +17,15 @@
     Click to see more.
   </summary>
 
+### :nail_care: Polish
+- `collapsible-list`
+  - [#2639](https://github.com/wix-incubator/rich-content/pull/2639) Collapsible's default direction is based on locale (ltr/rtl)
+
 ### :house: Internal
 
 - `editor-common`
   - [#2650](https://github.com/wix/ricos/pull/2650) moved FocusManager/FocusTrapReact/RichContentModal into ui-components folder
-  
+
 </details>
 <hr/>
 
