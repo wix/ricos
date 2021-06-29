@@ -6,7 +6,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
-  gap: 12px;
+  // justify-items: center;
+  &.tiny {
+    gap: 12px;
+  }
+  &.small {
+    gap: 24px;
+  }
 }
 
 .action_buttons_button {
@@ -36,4 +42,28 @@
     background-color: transparent;
     color: $settings-action-color-fallback;
   }
+}
+
+.small_font_size {
+  font-size: 16px;
+}
+
+.tiny {
+  height: 32px;
+  font-size: 14px;
+}
+
+.small {
+  @extend.small_font_size;
+  height: 36px;
+}
+
+.medium {
+  @extend.small_font_size;
+  height: 40px;
+}
+
+.large {
+  @extend.small_font_size;
+  height: 48px;
 }
