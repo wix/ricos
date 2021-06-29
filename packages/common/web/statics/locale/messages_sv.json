@@ -93,6 +93,7 @@
 	"Poll_FormatToolbar_Layout_Tooltip": "Ändra enkätens layout",
 	"LinkPanel_Anchor_Title": "Fästpunkt",
 	"LinkTo_Edit_Tooltip": "Redigera länk",
+	"TextLinkButton_DisableButtonForPlugins_Tooltip": "Inline links can not be applied to plugins",
 	"CollapsibleList_InsertButton": "Hopfällbar lista",
 	"Embed_Vertical_Stores_Search_Placeholder": "Sök efter en produkt",
 	"EmbedURL_Social_Facebook_Placeholder": "Klistra in URL till ett specifikt inlägg",

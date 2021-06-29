@@ -296,11 +296,12 @@ export default function createAtomicPluginToolbar({
             <BlockSpoilerButton {...commonButtonProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
         case BUTTONS.VIDEO_SETTINGS: {
+          const isCustomVideo = !!this.state.componentData.isCustomVideo;
           const videoSettingsProps = {
             ...defaultButtonProps,
             type: BUTTONS.EXTERNAL_MODAL,
           };
-          return <Button {...videoSettingsProps} />;
+          return isCustomVideo ? <Button {...videoSettingsProps} /> : null;
         }
         case BUTTONS.LINK_PREVIEW: {
           return (
