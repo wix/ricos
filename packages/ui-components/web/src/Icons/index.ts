@@ -1,12 +1,11 @@
 // @create-index
 
-// import { HashtagIcon } from 'wix-rich-content-ui-components';
-// plugin-commons
 export { default as DropdownArrowIcon } from './DropdownArrowIcon';
 export { default as InfoIcon } from './InfoIcon';
 export { default as AddColorIcon } from './AddColorIcon';
 export { default as AlignCenterIcon } from './AlignCenterIcon';
 export { default as HeightIcon } from './HeightIcon';
+export { default as ErrorIcon } from './ErrorIcon';
 // export { default as PluginSettingsIcon } from './PluginSettingsIcon';
 // export { default as SizeBestFitIcon } from './SizeBestFitIcon';
 // export { default as SizeFullWidthIcon } from './SizeFullWidthIcon';
