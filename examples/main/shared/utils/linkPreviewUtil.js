@@ -27,6 +27,15 @@ const mockLinkPreviewResults = [
     provider_url: 'www.mockUrl.com',
   },
   {
+    title: 'Link Preview without image',
+    description: 'A mock description',
+    provider_url: 'www.mockUrl.com',
+  },
+  {
+    title: 'Link Preview with title only',
+    provider_url: 'www.mockUrl.com',
+  },
+  {
     title: 'Free Website Builder | Create a Free Website | Wix.com',
     description:
       '	Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!', //eslint-disable-line

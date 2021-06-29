@@ -404,6 +404,11 @@
   border: solid 1px #ededed;
   border-radius: unset;
   box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.05);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color:#fff;
 }
 
 .lineSpacingModal {

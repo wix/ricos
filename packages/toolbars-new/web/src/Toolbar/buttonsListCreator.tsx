@@ -76,6 +76,24 @@ type buttonsFullDataType = {
 };
 
 const buttonsFullData: Record<string, buttonsFullDataType> = {
+  AddPlugin: {
+    icon: BoldIcon,
+    dataHook: 'textInlineStyleButton_AddPlugin',
+    tooltip: 'AddPlugin',
+    type: 'button',
+  },
+  UNDO: {
+    icon: BoldIcon,
+    dataHook: 'textInlineStyleButton_UNDO',
+    tooltip: 'UNDO',
+    type: 'button',
+  },
+  REDO: {
+    icon: BoldIcon,
+    dataHook: 'textInlineStyleButton_REDO',
+    tooltip: 'REDO',
+    type: 'button',
+  },
   HEADINGS: {
     plugin: 'wix-rich-content-plugin-headings',
     icon: () => null,
@@ -478,6 +496,9 @@ const handleButtonIsActive = (buttonsList, index, editorCommands: editorCommands
   } else if (Object.keys(textBlockButtons).includes(buttonName)) {
     buttonsList[index].isActive = () =>
       editorCommands.isBlockTypeSelected(textBlockButtons[buttonName]);
+  } else if (Object.keys(setTextAlignment).includes(buttonName)) {
+    buttonsList[index].isActive = () =>
+      editorCommands.getTextAlignment() === setTextAlignment[buttonName];
   } else if (buttonName === 'LINK') {
     buttonsList[index].isActive = () => editorCommands.hasLinkInSelection();
   } else {
@@ -492,6 +513,9 @@ const handleButtonOnClick = (buttonsList, index, editorCommands: editorCommands)
       editorCommands.toggleInlineStyle(inlineStyleButtons[buttonName]);
   } else if (Object.keys(textBlockButtons).includes(buttonName)) {
     buttonsList[index].onClick = () => editorCommands.setBlockType(textBlockButtons[buttonName]);
+  } else if (Object.keys(setTextAlignment).includes(buttonName)) {
+    buttonsList[index].onClick = () =>
+      editorCommands.setTextAlignment(setTextAlignment[buttonName]);
   } else if (Object.keys(decorationButtons).includes(buttonName)) {
     if (buttonName === 'DECREASE_INDENT') {
       buttonsList[index].onClick = () =>

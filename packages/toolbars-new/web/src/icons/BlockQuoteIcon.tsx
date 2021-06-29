@@ -2,24 +2,16 @@
 import React from 'react';
 
 const BlockQuoteIcon = props => (
-  <svg
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={19}
-    height={19}
-    viewBox="0 0 19 19"
-    {...props}
-  >
-    <defs>
-      <path
-        id="block-quote-icon-path"
-        d="M11.2 4h4.6c.11 0 .2.09.2.2v4.533c0 .852-.095 1.655-.284 2.408a6.033 6.033 0 0 1-.875 1.983 4.501 4.501 0 0 1-1.488 1.364c-.598.341-1.32.512-2.165.512v-2.132c.495 0 .904-.12 1.224-.362.321-.242.584-.562.788-.96.204-.397.343-.845.416-1.343.073-.497.109-.83.109-1.314H11.2a.2.2 0 0 1-.2-.2V4.2c0-.11.09-.2.2-.2zm-8 0h4.6c.11 0 .2.09.2.2v4.533c0 .852-.095 1.655-.284 2.408a6.033 6.033 0 0 1-.875 1.983 4.501 4.501 0 0 1-1.488 1.364c-.598.341-1.32.512-2.165.512v-2.132c.495 0 .904-.12 1.224-.362.321-.242.584-.562.788-.96.204-.397.343-.845.416-1.343.073-.497.109-.83.109-1.314H3.2a.2.2 0 0 1-.2-.2V4.2c0-.11.09-.2.2-.2z"
-      />
-    </defs>
-    <g fillRule="evenodd">
-      <mask id="block-quote-icon-mask">
-        <use xlinkHref="#block-quote-icon-path" />
-      </mask>
-      <use fillRule="nonzero" xlinkHref="#block-quote-icon-path" />
+  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" {...props}>
+    <g fill="none" fillRule="evenodd">
+      <g fill="currentColor">
+        <g>
+          <path
+            d="M9 5v5.5C9 12.981 6.981 15 4.5 15H4v-1h.5C6.43 14 8 12.43 8 10.5V10H4V5h5zm7 0v5.5c0 2.481-2.019 4.5-4.5 4.5H11v-1h.5c1.93 0 3.5-1.57 3.5-3.5V10h-4V5h5z"
+            transform="translate(-312.000000, -77.000000) translate(312.000000, 77.000000)"
+          />
+        </g>
+      </g>
     </g>
   </svg>
 );

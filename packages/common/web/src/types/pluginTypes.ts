@@ -119,32 +119,6 @@ export interface CreatePluginsDataMap {
   [MENTION_TYPE]?: CreatePluginData<MentionData>;
 }
 
-export interface PluginsDataMap {
-  [RICOS_DIVIDER_TYPE]?: DividerData;
-  [DIVIDER_TYPE]?: any;
-  [RICOS_GIPHY_TYPE]?: GiphyData;
-  [GIPHY_TYPE]?: any;
-  [RICOS_HTML_TYPE]?: HTMLData;
-  [HTML_TYPE]?: any;
-  [RICOS_GALLERY_TYPE]?: GalleryData;
-  [GALLERY_TYPE]?: any;
-  [RICOS_POLL_TYPE]?: PollData;
-  [POLL_TYPE]?: any;
-  [RICOS_VIDEO_TYPE]?: VideoData;
-  [VIDEO_TYPE]?: any;
-  [RICOS_FILE_TYPE]?: FileData;
-  [FILE_UPLOAD_TYPE]?: any;
-  [RICOS_IMAGE_TYPE]?: ImageData;
-  [IMAGE_TYPE]?: any;
-}
-
-export interface DecorationsDataMap {
-  [RICOS_LINK_TYPE]?: LinkData;
-  [RICOS_MENTION_TYPE]?: MentionData;
-  [RICOS_INDENT_TYPE]?: number;
-  [RICOS_LINE_SPACING_TYPE]?: any;
-}
-
 import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
 export type PluginMapping = Partial<{

@@ -5,6 +5,7 @@ import styles from './ToolbarContainer.scss';
 
 interface StaticToolbarContainerProps {
   children: ReactElement;
+  isMobile?: boolean;
 }
 
 class StaticToolbarContainer extends Component<StaticToolbarContainerProps> {
@@ -13,12 +14,16 @@ class StaticToolbarContainer extends Component<StaticToolbarContainerProps> {
   setToolbarContainerRef = ref => (this.toolbarContainerRef = ref);
 
   render() {
-    const { children } = this.props;
+    const { children, isMobile } = this.props;
     return (
       <div
         tabIndex={0}
         ref={this.setToolbarContainerRef}
-        className={classNames(styles.container, styles.staticContainer)}
+        className={classNames(
+          styles.container,
+          styles.staticContainer,
+          isMobile && styles.staticContainerMobile
+        )}
       >
         {children}
       </div>
