@@ -18,8 +18,11 @@
   </summary>
 
 ### :nail_care: Polish
+
 - `collapsible-list`
   - [#2639](https://github.com/wix-incubator/rich-content/pull/2639) Collapsible's default direction is based on locale (ltr/rtl)
+- `editor`
+  - [#2655](https://github.com/wix/ricos/pull/2655) Plus Icon (add plugin) position fixed based on focused block's size
 
 ### :house: Internal
 
