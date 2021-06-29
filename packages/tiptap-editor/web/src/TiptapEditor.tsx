@@ -5,7 +5,6 @@ import Toolbar from './components/Toolbar';
 import { JSONContent } from '@tiptap/core';
 import { Editor, EditorContent } from '@tiptap/react';
 import { draftToTiptap, tiptapToDraft } from 'ricos-content/libs/converters';
-import { createDivider } from './extensions/extension-divider';
 import { tiptapExtensions } from './tiptap-extensions';
 import { DraftContent } from 'ricos-content';
 
@@ -29,7 +28,7 @@ export type TiptapAPI = {
 const getEditorInstance = onUpdate => (content: JSONContent) =>
   new Editor({
     content,
-    extensions: [...tiptapExtensions, createDivider()],
+    extensions: tiptapExtensions,
     injectCSS: true,
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();

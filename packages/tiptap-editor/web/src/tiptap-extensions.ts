@@ -17,10 +17,11 @@ import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
 import Link from '@tiptap/extension-link';
+import { createDivider } from './extensions/extension-divider';
 import { LinkData, HeadingData } from 'ricos-schema';
-import { NodeConfig } from '@tiptap/react';
+import { MarkConfig, NodeConfig } from '@tiptap/react';
 
-const extendedAttrs = (attrs): Partial<NodeConfig> => ({
+const extendedAttrs = (attrs): Partial<NodeConfig & MarkConfig> => ({
   addAttributes() {
     return {
       ...this.parent?.(),
@@ -45,11 +46,8 @@ export const tiptapExtensions = [
   OrderedList.extend(withKey),
   Paragraph.extend(withKey),
   Text,
-  Link.extend({
-    addAttributes() {
-      return LinkData.fromJSON({});
-    },
-  }),
+  Link.extend(extendedAttrs(LinkData.fromJSON({}))),
+  createDivider().extend(withKey),
   // Dropcursor,
   // Gapcursor,
 ];
