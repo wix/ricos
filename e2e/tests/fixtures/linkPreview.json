@@ -137,12 +137,12 @@
       "inlineStyleRanges": [
         {
           "offset": 0,
-          "length": 110,
+          "length": 109,
           "style": "{\"FG\":\"#24292e\"}"
         },
         {
           "offset": 0,
-          "length": 110,
+          "length": 109,
           "style": "{\"BG\":\"#ffffff\"}"
         }
       ],
@@ -280,7 +280,7 @@
       "data": {}
     },
     {
-      "key": "78kj0",
+      "key": "2am9a",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -295,7 +295,16 @@
       "data": {}
     },
     {
-      "key": "4bh4v",
+      "key": "cjj3l",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "79dbr",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -305,6 +314,45 @@
           "offset": 0,
           "length": 1,
           "key": 5
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "3fos5",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "78kj0",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 6
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "4bh4v",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 7
         }
       ],
       "data": {}
@@ -334,7 +382,7 @@
         {
           "offset": 0,
           "length": 7,
-          "key": 6
+          "key": 8
         }
       ],
       "data": {}
@@ -409,6 +457,39 @@
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
+          "alignment": "center",
+          "size": "content",
+          "link": {
+            "target": "_blank",
+            "rel": "nofollow",
+            "url": "wix.com"
+          }
+        },
+        "title": "Link Preview without image",
+        "description": "A mock description"
+      }
+    },
+    "5": {
+      "type": "wix-draft-plugin-link-preview",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "link": {
+            "target": "_blank",
+            "rel": "nofollow",
+            "url": "wix.com"
+          }
+        },
+        "title": "Link Preview with title only"
+      }
+    },
+    "6": {
+      "type": "wix-draft-plugin-link-preview",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
           "size": "content",
           "alignment": "center",
           "link": {
@@ -423,7 +504,7 @@
         "provider_url": "https://www.instagram.com"
       }
     },
-    "5": {
+    "7": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
@@ -441,7 +522,7 @@
         "provider_url": "https://twitter.com"
       }
     },
-    "6": {
+    "8": {
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
@@ -451,5 +532,5 @@
       }
     }
   },
-  "VERSION": "7.1.5"
+  "VERSION": "8.44.5"
 }
