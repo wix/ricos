@@ -36,7 +36,11 @@ class CustomColorPickerDialog extends Component {
   renderActionButtons = () => {
     const { t, isMobile, theme } = this.props;
     return (
-      <div className={styles.colorPickerDialog_buttons_wrapper}>
+      <div
+        className={classNames(styles.colorPickerDialog_buttons_wrapper, {
+          [styles.mobile]: isMobile,
+        })}
+      >
         <ActionButtons
           size={BUTTON_SIZE.tiny}
           isMobile={isMobile}

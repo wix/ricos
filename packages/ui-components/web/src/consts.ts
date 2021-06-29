@@ -53,4 +53,11 @@ export const BUTTON_SIZE = {
   large: 'large',
 };
 
+export {
+  // ModifierKey as MODIFIERS,
+  // ToolbarType as TOOLBARS,
+  // DisplayMode as DISPLAY_MODE,
+  DecorationMode as DECORATION_MODE,
+} from 'wix-rich-content-common';
+
 // export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
