@@ -2,12 +2,16 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import SettingsMobileHeader from './SettingsMobileHeader';
 import { CloseIcon } from '../Icons';
 import TextInput from '../Components/TextInput';
 import SettingsPanelFooter from '../Components/SettingsPanelFooter';
-import { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION, BUTTON_SIZE } from '../consts';
+import {
+  FOOTER_BUTTON_ALIGNMENT,
+  MODAL_CONTROLS_POSITION,
+  BUTTON_SIZE,
+  KEYS_CHARCODE,
+} from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
 
 export default class UrlInputModal extends Component {
