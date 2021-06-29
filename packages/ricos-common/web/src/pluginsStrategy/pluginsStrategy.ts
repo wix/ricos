@@ -1,10 +1,10 @@
 import { ComponentType } from 'react';
 import { merge, pick } from 'lodash'; // TODO: get rid of buggy merge
-import { fold, struct } from 'fp-ts/lib/Monoid';
-import { last } from 'fp-ts/lib/Semigroup';
-import { getMonoid as arrayMonoid, map } from 'fp-ts/lib/Array';
-import { getMonoid as recordMonoid } from 'fp-ts/lib/Record';
-import { pipe } from 'fp-ts/lib/function';
+import { fold, struct } from 'fp-ts/Monoid';
+import { last } from 'fp-ts/Semigroup';
+import { getMonoid as arrayMonoid, map } from 'fp-ts/Array';
+import { getMonoid as recordMonoid } from 'fp-ts/Record';
+import { pipe } from 'fp-ts/function';
 import {
   AvailableExperiments,
   CreatePluginFunction,
