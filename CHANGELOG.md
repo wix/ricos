@@ -18,8 +18,18 @@
   </summary>
 
 ### :house: Internal
+
 - `editor-common`
   - [#2650](https://github.com/wix/ricos/pull/2650) moved FocusManager/FocusTrapReact/RichContentModal into ui-components folder
+  
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2625](https://github.com/wix/ricos/pull/2625) images with download enabled can be downloaded from fullscreen
+- `file-upload`
+  - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) show loader when content has `tempData`
+- `link`
+  - [#2214](https://github.com/wix-incubator/rich-content/pull/2214) disable link button when atomic block is selected
 
 </details>
 <hr/>
