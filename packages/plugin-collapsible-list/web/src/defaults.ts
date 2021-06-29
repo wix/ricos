@@ -14,6 +14,7 @@ export const FIRST_EXPANDED = 'first_expanded';
 export const DEFAULTS = Object.freeze({
   config: {
     expandState: FIRST_EXPANDED,
+    direction: directions.LTR,
     expandOnlyOne: false,
   },
   pairs: [

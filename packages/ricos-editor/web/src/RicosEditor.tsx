@@ -250,7 +250,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   renderRicosEngine(child, childProps) {
-    const { toolbarSettings, draftEditorSettings = {}, localeContent, ...props } = this.props;
+    const { toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
     const contentProp = this.getContentProp();
     return (
@@ -269,7 +269,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           ...contentProp.editorState,
           ...supportedDraftEditorSettings,
           ...this.state.localeData,
-          localeContent,
         })}
       </RicosEngine>
     );

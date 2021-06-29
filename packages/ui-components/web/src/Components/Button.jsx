@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { BUTTON_SIZE } from '..';
 import styles from '../../statics/styles/button.scss';
 
 class Button extends Component {
@@ -14,7 +13,6 @@ class Button extends Component {
     children: PropTypes.node,
     dataHook: PropTypes.string,
     ariaProps: PropTypes.object,
-    size: PropTypes.string,
   };
 
   static defaultProps = {
@@ -27,22 +25,14 @@ class Button extends Component {
   }
 
   render() {
-    const {
-      onClick,
-      className,
-      type,
-      children,
-      dataHook,
-      ariaProps,
-      size = BUTTON_SIZE.small,
-    } = this.props;
+    const { onClick, className, type, children, dataHook, ariaProps } = this.props;
     return (
       <button
         {...ariaProps}
         data-hook={dataHook}
         onClick={onClick}
         tabIndex="0"
-        className={classNames(this.styles[`button_${type}`], this.styles[size], className)}
+        className={classNames(this.styles[`button_${type}`], className)}
       >
         {children}
       </button>

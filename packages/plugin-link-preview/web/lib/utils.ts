@@ -47,7 +47,6 @@ const addLinkPreview = async (
       description,
       html,
     };
-    isValidImgSrc(thumbnail_url) && (data.thumbnail_url = thumbnail_url);
     const { newEditorState } = createBlock(withoutLinkBlock, data, LINK_PREVIEW_TYPE);
     setEditorState(newEditorState);
   }
@@ -66,8 +65,12 @@ const isValidImgSrc = (url: string) => {
   });
 };
 
-const shouldAddLinkPreview = (title: string, thumbnail_url: string, enableLinkPreview: boolean) =>
-  enableLinkPreview && title;
+const shouldAddLinkPreview = (title: string, thumbnail_url: string, enableLinkPreview: boolean) => {
+  if (enableLinkPreview && title && thumbnail_url) {
+    return isValidImgSrc(thumbnail_url);
+  }
+  return false;
+};
 
 const shouldAddEmbed = (html, enableEmbed: boolean, url: string) => {
   if (Array.isArray(enableEmbed)) {

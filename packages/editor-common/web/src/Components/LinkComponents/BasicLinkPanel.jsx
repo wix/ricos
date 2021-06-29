@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import LinkPanelWrapper from './LinkPanelWrapper';
-import { FocusManager } from 'wix-rich-content-ui-components';
+import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/link-panel.scss';
 import LinkActionsButtons from './LinkActionsButtons';

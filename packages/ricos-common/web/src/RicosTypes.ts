@@ -32,7 +32,6 @@ export interface RicosProps {
   isMobile?: boolean;
   linkSettings?: LinkSettings;
   locale?: string;
-  localeContent?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;

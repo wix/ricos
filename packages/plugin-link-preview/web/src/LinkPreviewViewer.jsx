@@ -95,18 +95,16 @@ class LinkPreviewViewer extends Component {
           data-hook="linkPreviewViewer"
           onClick={this.onLinkPreviewClick}
         >
-          {thumbnailUrl && (
-            <div
-              style={{
-                width: isMobile ? '110px' : imageHeight,
-                height: imageHeight,
-                backgroundImage: `url(${thumbnailUrl})`,
-              }}
-              className={linkPreviewImage}
-              alt={title}
-              ref={ref => (this.image = ref)}
-            />
-          )}
+          <div
+            style={{
+              width: isMobile ? '110px' : imageHeight,
+              height: imageHeight,
+              backgroundImage: `url(${thumbnailUrl})`,
+            }}
+            className={linkPreviewImage}
+            alt={title}
+            ref={ref => (this.image = ref)}
+          />
           <section className={linkPreviewInfo}>
             <div className={linkPreviewUrl}>{this.getUrlForDisplay(getHost(url) || url)}</div>
             <figcaption className={linkPreviewTitle}>{title}</figcaption>

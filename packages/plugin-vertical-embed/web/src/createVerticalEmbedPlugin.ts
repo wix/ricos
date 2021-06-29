@@ -6,16 +6,7 @@ import { CreatePluginFunction } from 'wix-rich-content-common';
 
 const createVerticalEmbedPlugin: CreatePluginFunction<VerticalEmbedPluginEditorConfig> = config => {
   const type = VERTICAL_EMBED_TYPE;
-  const {
-    helpers,
-    theme,
-    t,
-    [type]: settings = {},
-    isMobile,
-    locale,
-    localeContent,
-    ...rest
-  } = config;
+  const { helpers, theme, t, [type]: settings = {}, isMobile, locale, ...rest } = config;
 
   return createBasePlugin({
     component: VerticalEmbedComponent,
@@ -27,13 +18,13 @@ const createVerticalEmbedPlugin: CreatePluginFunction<VerticalEmbedPluginEditorC
       helpers,
       t,
       isMobile,
-      locale: localeContent || locale,
+      locale,
     }),
     helpers,
     t,
     defaultPluginData: {},
     isMobile,
-    locale: localeContent || locale,
+    locale,
     ...rest,
   });
 };

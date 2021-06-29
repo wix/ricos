@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
+import { FocusManager } from 'wix-rich-content-editor-common';
 import {
   Tabs,
   Tab,
   LabeledToggle,
   SettingsSection,
   SettingsPanelFooter,
-  FocusManager,
 } from 'wix-rich-content-ui-components';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
