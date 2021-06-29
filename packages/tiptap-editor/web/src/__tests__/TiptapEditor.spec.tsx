@@ -4,6 +4,7 @@ import { initTiptapEditor } from '../TiptapEditor';
 import { Editor, JSONContent } from '@tiptap/react';
 import supportedPluginsContent from './supportedPluginsContent.json';
 import { tiptapToDraft } from 'ricos-content/lib/converters';
+import { compare } from 'ricos-content/lib/comparision';
 
 let editor: Editor | null = null;
 
@@ -24,6 +25,6 @@ describe('tiptap editor', () => {
     render(<TiptapEditor />);
     const newContent = editor?.getJSON();
     const draftContent = tiptapToDraft(newContent as JSONContent);
-    expect(draftContent).toEqual(supportedPluginsContent);
+    expect(compare(draftContent, supportedPluginsContent)).toEqual({});
   });
 });
