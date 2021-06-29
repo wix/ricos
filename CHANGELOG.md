@@ -24,6 +24,20 @@
 </details>
 <hr/>
 
+## 8.45.2 (Jun 29, 2021)
+
+### :nail_care: Polish
+
+- `collapsible-list`
+  - [#2639](https://github.com/wix-incubator/rich-content/pull/2639) Collapsible's default direction is based on locale (ltr/rtl)
+- `editor`
+  - [#2655](https://github.com/wix/ricos/pull/2655) Plus Icon (add plugin) position fixed based on focused block's size
+
+### :house: Internal
+
+- `editor-common`
+  - [#2650](https://github.com/wix/ricos/pull/2650) moved FocusManager/FocusTrapReact/RichContentModal into ui-components folder
+
 ## 8.45.1 (Jun 29, 2021)
 
 ### :bug: Bug Fix
