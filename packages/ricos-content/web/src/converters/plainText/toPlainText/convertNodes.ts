@@ -93,16 +93,13 @@ export const parseMap = ({ mapData }: Node): string => {
 };
 
 export const parseEmbed = ({ oembedData }: Node, delimiter: string): string => {
-  if (oembedData?.embedData?.type === 'video') {
-    return oembedData.src || '';
-  } else if (oembedData?.embedData?.html) {
-    const href = oembedData.embedData.html
+  const href =
+    oembedData?.src ||
+    oembedData?.embedData?.html
       ?.replace(/.*href="/g, '')
       .replace(/.*=http/g, 'http')
       .replace(/" .*/g, '');
-    return [oembedData?.embedData?.title || '', href].filter(Boolean).join(delimiter);
-  }
-  return '';
+  return href ? [oembedData?.embedData?.title || '', href].filter(Boolean).join(delimiter) : '';
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {

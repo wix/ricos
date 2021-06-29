@@ -4,6 +4,7 @@ export const PLAIN_TEXT = `Lorem ipsum dolor sit amet 😎, consectetur adipisci
 Dad holding his baby
 https://static.wixstatic.com/media/8bb438_67a68c0652d740bab508f68662acc882.jpg/v1/fill/w_3192,h_2124,al_c,q_90/8bb438_67a68c0652d740bab508f68662acc882.jpg
 
+iJustine | Create a Website with Wix Artificial Design Intelligence
 https://www.youtube.com/watch?v=CoJ23XNHgG0
 
 https://video.wixstatic.com/video/d3dd72_9397c7bfa03f4fa8920b16bdd667f73b/1080p/mp4/file.mp4
@@ -12,9 +13,7 @@ https://video.wixstatic.com/video/d3dd72_9397c7bfa03f4fa8920b16bdd667f73b/1080p/
 
 
 
-https://twitter.com/CNN/status/1244886173409034240?ref_src=twsrc%5Etfw">March 31, 2020</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js
-
+https://twitter.com/CNN/status/1244886173409034240
 
 
 
@@ -31,7 +30,7 @@ Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel
 
 
 flowers
-https://sapirs0.wixsite.com/mysite/product-page/flowers
+265beaf5-3008-c5c2-fa5e-1447e0bebf71
 
 www.wix.com
 
