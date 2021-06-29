@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.45.1 (Jun 29, 2021)
+
 ### :bug: Bug Fix
 
 - `fullscreen`
@@ -25,9 +30,6 @@
   - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) show loader when content has `tempData`
 - `link`
   - [#2214](https://github.com/wix-incubator/rich-content/pull/2214) disable link button when atomic block is selected
-
-</details>
-<hr/>
 
 ## 8.45.0 (Jun 28, 2021)
 
