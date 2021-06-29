@@ -16,27 +16,40 @@ import BulletList from '@tiptap/extension-bullet-list';
 import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
+import Link from '@tiptap/extension-link';
+import { LinkData, HeadingData } from 'ricos-schema';
+import { NodeConfig } from '@tiptap/react';
+
+const extendedAttrs = (attrs): Partial<NodeConfig> => ({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      ...attrs,
+    };
+  },
+});
+
+const withKey = extendedAttrs({ key: '' });
 
 export const tiptapExtensions = [
-  Blockquote,
+  Blockquote.extend(withKey),
   Bold,
   Underline,
-  BulletList,
-  CodeBlock,
-  Document.extend({
-    addAttributes() {
-      return {
-        metadata: {},
-      };
-    },
-  }),
-  Heading,
+  BulletList.extend(withKey),
+  CodeBlock.extend(withKey),
+  Document.extend(extendedAttrs({ metadata: {} })),
+  Heading.extend(withKey).extend(extendedAttrs(HeadingData.fromJSON({}))),
   History,
   Italic,
-  ListItem,
-  OrderedList,
-  Paragraph,
+  ListItem.extend(withKey),
+  OrderedList.extend(withKey),
+  Paragraph.extend(withKey),
   Text,
+  Link.extend({
+    addAttributes() {
+      return LinkData.fromJSON({});
+    },
+  }),
   // Dropcursor,
   // Gapcursor,
 ];
