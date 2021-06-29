@@ -20,6 +20,11 @@
 ### :house: Internal
 - `ui-components`
   - [#2636](https://github.com/wix/ricos/pull/2636) moved editicon/hashtagicon/heighticon/addcoloricon/aligncentericon/erroricon into ui-components folder
+  
+</details>
+<hr/>
+
+## 8.45.2 (Jun 29, 2021)
 
 ### :nail_care: Polish
 
@@ -32,9 +37,6 @@
 
 - `editor-common`
   - [#2650](https://github.com/wix/ricos/pull/2650) moved FocusManager/FocusTrapReact/RichContentModal into ui-components folder
-
-</details>
-<hr/>
 
 ## 8.45.1 (Jun 29, 2021)
 
