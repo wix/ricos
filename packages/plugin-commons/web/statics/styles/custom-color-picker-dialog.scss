@@ -22,6 +22,9 @@
 .colorPickerDialog_buttons_wrapper {
   margin: 0 12px;
   &.mobile {
-    margin: 5px auto;
+    margin: 5px 6px;
+    button{
+      width:50px
+    }
   }
 }

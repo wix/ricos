@@ -20,7 +20,7 @@ export default class GiphyApiInputModal extends Component {
   triggerBi = debounce(() => {
     const { helpers, toolbarName } = this.props;
     helpers.onPluginAction('searchInsideThePlugin', {
-      searchTerm: this.state.value,
+      searchTerm: this.state.searchTag,
       plugin_id: GIPHY_TYPE,
       entry_point: toolbarName,
     });
