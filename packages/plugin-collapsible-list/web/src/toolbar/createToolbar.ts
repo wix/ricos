@@ -7,18 +7,16 @@ const createToolbar: CreatePluginToolbar = ({
   t,
   isMobile,
   settings,
-  locale,
 }: {
   t: TranslationFunction;
   settings: CollapsibleListPluginEditorConfig;
   isMobile: boolean;
-  locale: string;
 }) => {
   return {
     InlineButtons: createInlineButtons({
       t,
     }),
-    InsertButtons: createInsertButtons({ t, settings, isMobile, locale }),
+    InsertButtons: createInsertButtons({ t, settings, isMobile }),
     name: COLLAPSIBLE_LIST_TYPE,
   };
 };

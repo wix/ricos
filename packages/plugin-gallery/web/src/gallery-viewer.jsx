@@ -229,9 +229,16 @@ class GalleryViewer extends React.Component {
     );
   };
 
+  handleContextMenu = e => {
+    const {
+      componentData: { disableDownload = false },
+    } = this.props;
+    return disableDownload && e.preventDefault();
+  };
+
   getStyleParams = () => {
     const {
-      componentData: { styles: styleParams, disableDownload },
+      componentData: { styles: styleParams },
       isMobile,
     } = this.props;
     if (isMobile && isHorizontalLayout(styleParams)) {
@@ -241,15 +248,7 @@ class GalleryViewer extends React.Component {
         styleParams.thumbnailSize = 90;
       }
     }
-    styleParams.allowContextMenu = !disableDownload;
     return styleParams;
-  };
-
-  handleContextMenu = e => {
-    const {
-      componentData: { disableDownload = false },
-    } = this.props;
-    return disableDownload && e.preventDefault();
   };
 
   render() {
@@ -257,6 +256,7 @@ class GalleryViewer extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { scrollingElement, ...gallerySettings } = settings;
     const { size } = this.state;
+
     const items = this.getItems();
     const styleParams = this.getStyleParams();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;

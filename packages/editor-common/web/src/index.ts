@@ -5,6 +5,7 @@ export * from './Icons';
 export { default as ClickOutside } from './Components/ClickOutside/ClickOutside';
 export { default as useClickOutside } from './Components/ClickOutside/useClickOutside';
 
+export { default as FocusManager } from './Components/FocusManager';
 export { default as LinkPanelWrapper } from './Components/LinkComponents/LinkPanelWrapper';
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
 export { default as LinkModal } from './Components/LinkComponents/LinkModal';
@@ -13,6 +14,7 @@ export { default as InlineToolbarButton } from './Components/InlineToolbarButton
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
+export { default as RichContentModal } from './Modals/RichContentModal';
 
 //Utils
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
@@ -72,7 +74,6 @@ export {
   isCursorAtStartOfContent,
   isCursorAtFirstLine,
   selectAllContent,
-  isAtomicBlockInSelection,
   setSelectionToBlock,
   hasBlockType,
 } from './Utils/draftUtils';
@@ -86,6 +87,7 @@ export {
   MODIFIERS,
   TOOLBARS,
   DISPLAY_MODE,
+  DECORATION_MODE,
   CHARACTERS,
   FORMATTING_BUTTONS,
   INSERT_PLUGIN_BUTTONS,
