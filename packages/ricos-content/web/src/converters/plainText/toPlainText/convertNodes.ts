@@ -93,12 +93,15 @@ export const parseMap = ({ mapData }: Node): string => {
 };
 
 export const parseEmbed = ({ oembedData }: Node, delimiter: string): string => {
-  const href =
-    oembedData?.src ||
-    oembedData?.embedData?.html
-      ?.replace(/.*href="/g, '')
-      .replace(/.*=http/g, 'http')
-      .replace(/" .*/g, '');
+  const isVerticalEmbed = ['product', 'event', 'booking'].includes(
+    oembedData?.embedData?.type || ''
+  );
+  const href = isVerticalEmbed
+    ? oembedData?.embedData?.html
+        ?.replace(/.*href="/g, '')
+        .replace(/.*=http/g, 'http')
+        .replace(/" .*/g, '')
+    : oembedData?.src;
   return href ? [oembedData?.embedData?.title || '', href].filter(Boolean).join(delimiter) : '';
 };
 
