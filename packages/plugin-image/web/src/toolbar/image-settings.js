@@ -76,7 +76,7 @@ class ImageSettings extends Component {
     );
   };
 
-  toggleData = [
+  baseToggleData = [
     {
       toggleKey: 'isExpandEnabled',
       labelKey: 'ImagePlugin_Settings_ImageOpensInExpandMode_Label',
@@ -89,22 +89,28 @@ class ImageSettings extends Component {
       dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip'),
     },
-    {
-      type: DIVIDER,
-    },
-    {
-      toggleKey: 'isSpoilerEnabled',
-      labelKey: 'ImageSettings_Spoiler_Toggle',
-      dataHook: 'imageSpoilerToggle',
-      tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
-      onToggle: value => {
-        this.props.pubsub.update('componentData', {
-          ...this.props.componentData,
-          ...this.getSpoilerConfig(value),
-        });
-      },
-    },
   ];
+
+  toggleData = this.props.shouldShowSpoiler
+    ? [
+        ...this.baseToggleData,
+        {
+          type: DIVIDER,
+        },
+        {
+          toggleKey: 'isSpoilerEnabled',
+          labelKey: 'ImageSettings_Spoiler_Toggle',
+          dataHook: 'imageSpoilerToggle',
+          tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
+          onToggle: value => {
+            this.props.pubsub.update('componentData', {
+              ...this.props.componentData,
+              ...this.getSpoilerConfig(value),
+            });
+          },
+        },
+      ]
+    : this.baseToggleData;
 
   componentDidMount() {
     this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
@@ -273,6 +279,7 @@ ImageSettings.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
+  shouldShowSpoiler: PropTypes.bool,
 };
 
 export default ImageSettings;

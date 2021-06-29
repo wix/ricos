@@ -88,6 +88,7 @@ const createInlineButtons: CreateInlineButtons = ({
       uiSettings,
       triggerSettingsBi: true,
       pluginId: IMAGE_TYPE,
+      shouldShowSpoiler: settings.spoiler,
     },
     { keyName: 'link', type: BUTTONS.LINK, mobile: true },
     {
