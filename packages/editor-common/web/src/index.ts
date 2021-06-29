@@ -74,6 +74,7 @@ export {
   isCursorAtStartOfContent,
   isCursorAtFirstLine,
   selectAllContent,
+  isAtomicBlockInSelection,
   setSelectionToBlock,
   hasBlockType,
 } from './Utils/draftUtils';
