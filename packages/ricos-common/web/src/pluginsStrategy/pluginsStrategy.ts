@@ -2,8 +2,8 @@ import { ComponentType } from 'react';
 import { merge, pick } from 'lodash'; // TODO: get rid of buggy merge
 import { fold, struct } from 'fp-ts/Monoid';
 import { last } from 'fp-ts/Semigroup';
-import { getMonoid as arrayMonoid, map } from 'fp-ts/Array';
-import { getMonoid as recordMonoid } from 'fp-ts/Record';
+import * as A from 'fp-ts/Array';
+import * as R from 'fp-ts/Record';
 import { pipe } from 'fp-ts/function';
 import {
   AvailableExperiments,
@@ -21,16 +21,16 @@ import { RicosCssOverride, RichContentProps } from '../types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type InlineStyleMapper = () => InlineStyleMapping;
 
-const recordMergeM = <T>() => recordMonoid<string, T>(last<T>());
+const recordMergeM = <T>() => R.getMonoid<string, T>(last<T>());
 const rcvPropM = struct<RCVPluginProps>({
   config: recordMergeM<any>(),
-  decorators: arrayMonoid<any>(),
-  typeMappers: arrayMonoid<PluginTypeMapper>(),
-  inlineStyleMappers: arrayMonoid<InlineStyleMapper>(),
+  decorators: A.getMonoid<any>(),
+  typeMappers: A.getMonoid<PluginTypeMapper>(),
+  inlineStyleMappers: A.getMonoid<InlineStyleMapper>(),
 });
 const rcePropM = struct<RCEPluginProps>({
   config: recordMergeM<any>(),
-  plugins: arrayMonoid<CreatePluginFunction>(),
+  plugins: A.getMonoid<CreatePluginFunction>(),
   ModalsMap: recordMergeM<ComponentType>(),
   createPluginsDataMap: recordMergeM<any>(),
 });
@@ -64,7 +64,9 @@ const toRCVPluginProps = (cssOverride: RicosCssOverride, content?: DraftContent)
   typeMappers: plugin.typeMapper ? [plugin.typeMapper] : [],
   decorators: plugin.decorator ? [plugin.decorator(cssOverride, plugin.config)] : [],
   inlineStyleMappers:
-    plugin.inlineStyleMapper && content ? [plugin.inlineStyleMapper(plugin.config, content)] : [],
+    plugin.inlineStyleMapper && content
+      ? [plugin.inlineStyleMapper({ [plugin.type]: plugin.config }, content)]
+      : [],
 });
 
 const mergeWithChildProps = (childPluginProps, themeData) => pluginProps =>
@@ -90,13 +92,13 @@ export default function pluginsStrategy({
   return isViewer
     ? pipe(
         plugins as ViewerPlugin[],
-        map(toRCVPluginProps(cssOverride, content)),
+        A.map(toRCVPluginProps(cssOverride, content)),
         fold(rcvPropM),
         mergeWithChildProps(extractChildRCVPluginProps(childProps, content), themeData)
       )
     : pipe(
         plugins as EditorPlugin[],
-        map(toRCEPluginProps),
+        A.map(toRCEPluginProps),
         fold(rcePropM),
         mergeWithChildProps(extractChildRCEPluginProps(childProps), themeData)
       );

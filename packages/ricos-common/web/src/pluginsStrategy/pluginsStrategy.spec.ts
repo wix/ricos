@@ -3,7 +3,15 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginImage as pluginImageV } from 'wix-rich-content-plugin-image/viewer';
 import { pluginGallery as pluginGalleryV } from 'wix-rich-content-plugin-gallery/viewer';
-import { IMAGE_TYPE, GALLERY_TYPE, FILE_UPLOAD_TYPE, VIDEO_TYPE } from 'wix-rich-content-common';
+import { pluginTextColor } from 'wix-rich-content-plugin-text-color/viewer';
+import content from '../tests/expectedContentState3.json';
+import {
+  IMAGE_TYPE,
+  GALLERY_TYPE,
+  FILE_UPLOAD_TYPE,
+  VIDEO_TYPE,
+  TEXT_COLOR_TYPE,
+} from 'wix-rich-content-common';
 import pluginsStrategy from './pluginsStrategy';
 import { RCEPluginProps, RCVPluginProps } from './pluginTypes';
 import * as utils from '../themeStrategy/themeUtils';
@@ -17,6 +25,7 @@ describe('PluginsStrategy', () => {
     }),
     pluginGallery(),
   ];
+  const viewerPlugins = [pluginImageV(), pluginGalleryV(), pluginTextColor()];
 
   const editorChildProps = {
     config: {
@@ -31,7 +40,6 @@ describe('PluginsStrategy', () => {
     config: { PREVIEW: {} },
   };
 
-  const viewerPlugins = [pluginImageV(), pluginGalleryV()];
   const driver = {
     runStrategy: (isViewer: boolean) =>
       pluginsStrategy({
@@ -40,6 +48,7 @@ describe('PluginsStrategy', () => {
         plugins: isViewer ? viewerPlugins : editorPlugins,
         childProps: isViewer ? viewerChildProps : editorChildProps,
         cssOverride: { modalTheme: { content: {} } },
+        content,
       }),
   };
 
@@ -55,9 +64,11 @@ describe('PluginsStrategy', () => {
     expect(Object.keys(result.config)).toStrictEqual([
       IMAGE_TYPE,
       GALLERY_TYPE,
+      TEXT_COLOR_TYPE,
       'PREVIEW',
       'themeData',
     ]);
     expect(result.typeMappers.length).toEqual(2);
+    expect(result.inlineStyleMappers.length).toEqual(1);
   });
 });
