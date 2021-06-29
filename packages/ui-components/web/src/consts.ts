@@ -40,4 +40,17 @@ export const MODAL_CONTROLS_POSITION = Object.freeze({
   BOTTOM: 'bottom',
 });
 
+export const KEYS_CHARCODE = {
+  ENTER: 13,
+  ESCAPE: 27,
+  SPACE: 32,
+};
+
+export {
+  // ModifierKey as MODIFIERS,
+  // ToolbarType as TOOLBARS,
+  // DisplayMode as DISPLAY_MODE,
+  DecorationMode as DECORATION_MODE,
+} from 'wix-rich-content-common';
+
 // export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';

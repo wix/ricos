@@ -3,8 +3,8 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FileInput } from 'wix-rich-content-ui-components';
-import { ToolbarButton, Dropdown } from 'wix-rich-content-editor-common';
+import { FileInput, Dropdown } from 'wix-rich-content-ui-components';
+import { ToolbarButton } from 'wix-rich-content-editor-common';
 import BUTTONS from './buttons/keys';
 
 class BaseToolbarButton extends React.Component {
@@ -72,6 +72,7 @@ class BaseToolbarButton extends React.Component {
       anchorTarget,
       relValue,
       componentState,
+      pluginType,
       keyName,
       pubsub,
       onClick,
@@ -81,6 +82,12 @@ class BaseToolbarButton extends React.Component {
       modalStylesFn,
       ...otherProps
     } = this.props;
+
+    helpers?.onToolbarButtonClick?.({
+      type: 'PLUGIN',
+      buttonName: keyName,
+      pluginId: pluginType,
+    });
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
       const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
@@ -248,11 +255,25 @@ class BaseToolbarButton extends React.Component {
       t,
       tabIndex,
       tooltipTextKey,
+      helpers,
+      pluginType,
       ...props
     } = this.props;
 
     const tooltipText = t(tooltipTextKey);
-    const decoratedOnChange = value => onChange(value, componentData, pubsub.store);
+    const textForHooks = tooltipText.replace(/\s+/, '');
+    const onToolbarButtonClick = value =>
+      helpers?.onToolbarButtonClick?.({
+        type: 'PLUGIN',
+        buttonName: textForHooks,
+        pluginId: pluginType,
+        value,
+      });
+    const decoratedOnChange = value => {
+      // Gallery -> value.label,  Divider -> value.value
+      onToolbarButtonClick(value?.label || value?.value);
+      return onChange(value, componentData, pubsub.store);
+    };
     const decoratedGetValue = () => getValue(pubsub.store, t);
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -264,6 +285,7 @@ class BaseToolbarButton extends React.Component {
           dataHook={this.getDataHook()}
           onChange={decoratedOnChange}
           getValue={decoratedGetValue}
+          onClick={onToolbarButtonClick}
           theme={theme}
           {...props}
         />
@@ -334,6 +356,7 @@ BaseToolbarButton.propTypes = {
   hideInlinePanel: PropTypes.func.isRequired,
   uiSettings: PropTypes.object,
   settings: PropTypes.object,
+  pluginType: PropTypes.string,
 };
 
 BaseToolbarButton.defaultProps = {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { mergeStyles } from 'wix-rich-content-common';
-import { TextSearchInput } from 'wix-rich-content-editor-common';
+import { TextSearchInput } from 'wix-rich-content-ui-components';
 import styles from '../../statics/styles/giphy-api-input-modal.scss';
 import GiphySelector from './giphySelector';
 import { CloseIcon } from '../icons';
@@ -20,7 +20,7 @@ export default class GiphyApiInputModal extends Component {
   triggerBi = debounce(() => {
     const { helpers, toolbarName } = this.props;
     helpers.onPluginAction('searchInsideThePlugin', {
-      searchTerm: this.state.value,
+      searchTerm: this.state.searchTag,
       plugin_id: GIPHY_TYPE,
       entry_point: toolbarName,
     });

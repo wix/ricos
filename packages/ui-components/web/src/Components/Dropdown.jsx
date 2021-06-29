@@ -32,6 +32,7 @@ class Dropdown extends Component {
     controlClassName: PropTypes.string,
     menuClassName: PropTypes.string,
     tabIndex: PropTypes.number,
+    onClick: PropTypes.func,
   };
 
   constructor(props) {
@@ -92,6 +93,8 @@ class Dropdown extends Component {
         isOpen: !this.state.isOpen,
       });
     }
+
+    this.props.onClick?.();
   };
 
   setValue(value, label, component) {

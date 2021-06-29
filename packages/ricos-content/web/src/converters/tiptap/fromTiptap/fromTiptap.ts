@@ -3,10 +3,11 @@ import { RichContent, Node } from 'ricos-schema';
 import { JSONContent } from '@tiptap/core';
 import { initializeMetadata } from '../../nodeUtils';
 import { genKey } from '../../generateRandomKey';
-import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent } from '../utils';
+import { DATA_FIELDS_MAP, isDecoration, isNode, isProseContent, isTextNode } from '../utils';
+import toConstantCase from 'to-constant-case';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fromProseMirror = <T extends JSONContent | Record<string, any>>(
+export const fromTiptap = <T extends JSONContent | Record<string, any>>(
   proseContent: T
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): T extends JSONContent ? RichContent | Node : Record<string, any> => {
@@ -20,9 +21,7 @@ const FIELDS_MAP = {
   marks: 'decorations',
 };
 
-const typeToUpper = object => ({ ...object, type: object.type.toUpperCase() });
-
-const isTextNode = value => value?.type === 'text' && 'marks' in value;
+const typeToConstantCase = object => ({ ...object, type: toConstantCase(object.type) });
 
 const removeKeyFromData = value => {
   const { key: _, ...newValue } = value;
@@ -67,7 +66,7 @@ const convertValue = value => {
     newValue = movefromAttrs(newValue);
   }
   if (isNode(newValue) || isDecoration(newValue)) {
-    newValue = typeToUpper(newValue);
+    newValue = typeToConstantCase(newValue);
     newValue = convertDataField(newValue);
   }
   return newValue;

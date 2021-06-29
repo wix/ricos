@@ -18,14 +18,96 @@
   </summary>
 
 ### :house: Internal
+
+- `editor-common`
+  - [#2650](https://github.com/wix/ricos/pull/2650) moved FocusManager/FocusTrapReact/RichContentModal into ui-components folder
+  
+</details>
+<hr/>
+
+## 8.45.1 (Jun 29, 2021)
+
+### :bug: Bug Fix
+
+- `fullscreen`
+  - [#2625](https://github.com/wix/ricos/pull/2625) images with download enabled can be downloaded from fullscreen
+- `file-upload`
+  - [#2479](https://github.com/wix-incubator/rich-content/pull/2479) show loader when content has `tempData`
+- `link`
+  - [#2214](https://github.com/wix-incubator/rich-content/pull/2214) disable link button when atomic block is selected
+
+## 8.45.0 (Jun 28, 2021)
+
+### :bug: Bug Fix
+
+- `link-preview`
+  - [#2651](https://github.com/wix-incubator/rich-content/pull/2651) support link preview without image
+
+### :rocket: New Feature
+
+- `locale content`
+  - [#2648](https://github.com/wix/ricos/pull/2648) add locale content to ricos-editor api
+
+## 8.44.7 (Jun 28, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2652](https://github.com/wix-incubator/rich-content/pull/2652) scroll to plugins on creation
+
+## 8.44.6 (Jun 28, 2021)
+
+### :house: Internal
+
+- `ricos-editor`
+  - [#2641](https://github.com/wix/ricos/pull/2641) RicosEditor uses TiptapAPI based on experiment
+- `ricos-content`
+  - [#2645](https://github.com/wix/ricos/pull/2645) lodash/fp replaced with fp-ts
+
+### :nail_care: Polish
+
+- `editor`
+  - [#2580](https://github.com/wix-incubator/rich-content/pull/2580) Editor Commands improvements
+- `link`
+  - [#2637](https://github.com/wix-incubator/rich-content/pull/2637) Sponsored tooltip in link panel
+
+## 8.44.5 (Jun 20, 2021)
+
+### :house: Internal
+
+- `ricos-viewer`
+  - [#2634](https://github.com/wix-incubator/rich-content/pull/2634) `onViewerLoaded` contains `url` field
+- `ricos-editor`
+  - [#2632](https://github.com/wix-incubator/rich-content/pull/2632) `onOpenEditorSuccess` contains `toolbarType` field
+
+## 8.44.4 (Jun 18, 2021)
+
+### :bug: Bug Fix
+
+- `editor-common`
+  - [#2629](https://github.com/wix-incubator/rich-content/pull/2629) render wrapper modal (fix's polls insert modal)
+
+## 8.44.3 (Jun 17, 2021)
+
+### :house: Internal
+
+- `editor-common`
+  - [#2622](https://github.com/wix-incubator/rich-content/pull/2622) moved textSearchInput/Separator/Dropdown components into ui-components folder
+  - [#2619](https://github.com/wix-incubator/rich-content/pull/2619) moved RadioGroup/InfoIcon/Checkbox components into ui-components folder
+- `ricos-content`
+  - [#2610](https://github.com/wix/ricos/pull/2610) tiptap converters fixed
+  - [#2628](https://github.com/wix/ricos/pull/2628) `extract` & `modify` API exposed via libs folder
+- `editor`
+  - [#2585](https://github.com/wix/ricos/pull/2585) `onToolbarButtonClick` callback hook
+
+## 8.44.2 (Jun 14, 2021)
+
+### :house: Internal
+
 - `plugin-commons`
   - [#2608](https://github.com/wix-incubator/rich-content/pull/2608) moved SettingsMobileHeader/UrlInputModal components into ui-components folder
 - `tiptap-editor`
   - [#2546](https://github.com/wix-incubator/rich-content/pull/2546) package added
-  
-
-</details>
-<hr/>
 
 ## 8.44.1 (Jun 9, 2021)
 

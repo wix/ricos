@@ -21,9 +21,8 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
   }
   const dataFieldName = TO_RICOS_DATA_FIELD[blockType];
   if (dataFieldName === undefined) {
-    // eslint-disable-next-line no-console
-    console.error(`ERROR! Unknown entity type "${type}"!`);
-    process.exit(1);
+    console.error(`Unknown entity type "${type}"!`);
+    return null;
   }
 
   return {

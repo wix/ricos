@@ -1,0 +1,15 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.infoIcon {
+  vertical-align: text-bottom;
+  padding-top: 2px;
+  height: 17px;
+  &:hover {
+    color: $settings-action-color-fallback;
+  }
+}
+
+.infoContainer {
+  cursor: pointer;
+  display: flex;
+}

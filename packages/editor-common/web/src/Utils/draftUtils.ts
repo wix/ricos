@@ -485,6 +485,10 @@ export const getSelectedBlocks = (editorState: EditorState) => {
   return blocks.slice(firstIndex, lastIndex + 1);
 };
 
+export const isAtomicBlockInSelection = (editorState: EditorState) => {
+  return getSelectedBlocks(editorState).some(block => block.getType() === 'atomic');
+};
+
 export const getSelectionRange = (editorState: EditorState, block: ContentBlock) => {
   const selection = getSelection(editorState);
   const blockKey = block.getKey();
@@ -818,6 +822,15 @@ export function isCursorAtStartOfContent(editorState: EditorState) {
   const isStartOfLine = editorState.getSelection().getFocusOffset() === 0;
   return isStartOfLine && isCursorAtFirstLine(editorState);
 }
+
+export const hasBlockType = (blockType: string, editorState: EditorState) => {
+  const currentBlockType = editorState
+    .getCurrentContent()
+    .getBlockForKey(editorState.getSelection().getStartKey())
+    .getType();
+
+  return blockType === currentBlockType;
+};
 
 export function selectAllContent(editorState, forceSelection) {
   const currentContent = editorState.getCurrentContent();
