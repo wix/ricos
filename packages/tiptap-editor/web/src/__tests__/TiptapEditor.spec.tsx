@@ -8,7 +8,7 @@ import { tiptapToDraft } from 'ricos-content/lib/converters';
 let editor: Editor | null = null;
 
 jest.mock('@tiptap/react', () => {
-  const { Editor, ...tiptapReact } = jest.requireActual<any>('@tiptap/react');
+  const { Editor, ...tiptapReact } = jest.requireActual('@tiptap/react');
   return {
     ...tiptapReact,
     Editor(options) {
