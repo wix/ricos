@@ -277,7 +277,7 @@ class Toolbar extends Component<ToolbarProps> {
     );
     // console.log({ buttons });
     // console.log({ blabla });
-    this.cleanUnwantedSeparators(blabla);
+    blabla.length > 0 && this.cleanUnwantedSeparators(blabla);
     const buttonsSeparatedByGaps = this.separateByGaps(blabla);
     return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
       return (
