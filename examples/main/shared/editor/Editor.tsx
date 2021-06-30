@@ -22,7 +22,7 @@ import { TestAppConfig } from '../../src/types';
 //   Toolbar,
 //   StaticToolbarContainer,
 // } from 'wix-rich-content-toolbars-new';
-import 'wix-rich-content-toolbars-new/dist/styles.min.css';
+// import 'wix-rich-content-toolbars-new/dist/styles.min.css';
 import { RicosEditor, RicosEditorProps, RicosEditorType } from 'ricos-editor';
 
 const anchorTarget = '_blank';

@@ -249,6 +249,7 @@
   "ButtonPlugin_Navbar_Update_button": "Save",
   "TextAlignmentButton_Tooltip": "Alignment",
   "TextLinkButton_Tooltip": "Link",
+  "TextLinkButton_DisableButtonForPlugins_Tooltip": "Inline links can not be applied to plugins",
   "FormattingToolbar_TextStyle_Heading": "Heading {{number}}",
   "FormattingToolbar_TextStyle_Paragraph": "Paragraph",
   "BoldButton_Tooltip": "Bold",

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ComponentType } from 'react';
 
-import { EditorModals, RichContentModal } from 'wix-rich-content-editor-common';
+import { EditorModals } from 'wix-rich-content-editor-common';
+import { RichContentModal } from 'wix-rich-content-ui-components';
 import MobileAddPluginModal from './Toolbars/SideToolbar/AddPluginMenu';
 import BlockLinkModal from './Toolbars/BlockLinkModal';
 import TextLinkModal from './Toolbars/TextLinkModal';
