@@ -272,13 +272,17 @@ Cypress.Commands.add('moveCursorToEnd', () => {
   cy.focusEditor().type('{selectall}{downarrow}');
 });
 
-Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
+Cypress.Commands.add('getInlineButton', (buttonSelector, selection) => {
   if (selection) {
     cy.setEditorSelection(selection[0], selection[1]);
   }
   cy.get(
     `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
-  ).click({ force: true });
+  );
+});
+
+Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
+  cy.getInlineButton(buttonSelector, selection).click({ force: true });
 });
 
 Cypress.Commands.add('openCustomColorModal', () => {
