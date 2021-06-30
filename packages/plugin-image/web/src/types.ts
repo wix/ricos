@@ -13,7 +13,6 @@ export type ImageEditorWixSettings = {
 export interface ImageConfig {
   size?: string;
   alignment?: string;
-  disableExpand?: boolean;
   showTitle?: boolean;
   showDescription?: boolean;
   link?: {
@@ -43,8 +42,8 @@ export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig
 }
 
 type ImageSrc = Record<string, unknown>;
-export interface ImagePluginViewerConfig extends ViewerPluginConfig {
+export interface ImagePluginViewerConfig extends ViewerPluginConfig, ImageConfig {
   onExpand?: (blockkey: string) => unknown;
-  disableExpand: boolean;
+  disableExpand?: boolean;
   imageProps?: ((src: ImageSrc) => HTMLImageElement) | HTMLImageElement;
 }

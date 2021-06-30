@@ -89,8 +89,7 @@
                             "alignment": "center",
                             "size": "content",
                             "showTitle": true,
-                            "showDescription": true,
-                            "disableExpand": false
+                            "showDescription": true
                           },
                           "src": {
                             "id": "bbafa01c54087e7003f10c2c2a06a524",
@@ -202,8 +201,7 @@
                             "alignment": "center",
                             "size": "content",
                             "showTitle": true,
-                            "showDescription": true,
-                            "disableExpand": false
+                            "showDescription": true
                           },
                           "src": {
                             "id": "ab64fd1362015d405181f8b82d14e029",
@@ -315,8 +313,7 @@
                             "alignment": "center",
                             "size": "content",
                             "showTitle": true,
-                            "showDescription": true,
-                            "disableExpand": false
+                            "showDescription": true
                           },
                           "src": {
                             "id": "5e106a5d4a0b7709f8938194d4778ff4",
@@ -428,8 +425,7 @@
                             "alignment": "center",
                             "size": "content",
                             "showTitle": true,
-                            "showDescription": true,
-                            "disableExpand": false
+                            "showDescription": true
                           },
                           "src": {
                             "id": "ae91d01147f241ed8e9b1b7425c11380",

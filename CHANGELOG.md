@@ -21,6 +21,10 @@
 - `ui-components`
   - [#2643](https://github.com/wix-incubator/rich-content/pull/2643) moved ActionButtons into ui-components and some code refactor
 
+### :nail_care
+- `gallery/image`
+  - [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
+ 
 </details>
 <hr/>
 

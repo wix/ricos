@@ -241,7 +241,6 @@ const gallery = {
   expectedData1: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       layout: 'small',
       size: 'content',
       spacing: 0,
@@ -308,7 +307,6 @@ const gallery = {
   expectedData2: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       layout: 'small',
       size: 'content',
       spacing: 0,
@@ -456,7 +454,6 @@ const image = {
   expectedData1: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       showDescription: true,
       showTitle: true,
       size: 'content',
@@ -471,7 +468,6 @@ const image = {
   expectedData2: {
     config: {
       alignment: 'left',
-      disableExpand: false,
       showDescription: true,
       showTitle: true,
       size: 'content',
