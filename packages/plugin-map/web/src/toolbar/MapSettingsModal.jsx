@@ -9,8 +9,9 @@ import {
   SettingsSection,
   TextInput,
   SettingsPanelFooter,
+  SearchIcon,
 } from 'wix-rich-content-ui-components';
-import { SearchIcon } from '../icons/SearchIcon';
+
 import { Scrollbars } from 'react-custom-scrollbars';
 import classNames from 'classnames';
 

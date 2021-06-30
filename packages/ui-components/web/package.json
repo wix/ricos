@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "focus-trap": "6.4.0",
-    "wix-rich-content-common": "8.46.0",
-    "wix-rich-content-editor-common": "8.46.0"
+    "wix-rich-content-common": "8.46.0"
   },
   "unpkg": true,
   "publishConfig": {
