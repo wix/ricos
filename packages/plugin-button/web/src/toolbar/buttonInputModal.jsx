@@ -289,7 +289,7 @@ export default class ButtonInputModal extends Component {
               cancelLabel={cancelLabel}
               theme={styles}
               t={t}
-              buttonSize={BUTTON_SIZE.medium}
+              buttonSize={BUTTON_SIZE.small}
             />
           </div>
         )}
