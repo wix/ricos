@@ -36,6 +36,7 @@ import {
   Toolbar,
   StaticToolbarContainer,
 } from 'wix-rich-content-toolbars-new';
+import 'wix-rich-content-toolbars-new/dist/styles.min.css';
 import {
   emptyDraftContent,
   getEditorContentSummary,
