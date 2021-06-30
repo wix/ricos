@@ -72,6 +72,12 @@ MediaUploadError?: {
 }
 ```
 
+### `privacy`
+
+Access control of the uploaded file: either 'public' or 'private'.
+Whatever value you set here, will be stored in the data of an uploaded file.
+This parameter is sent into `resolveFileUrl`, and you can use it when you customize your own resolver.
+
 ### `modify accepted file types`
 
 ```jsx
