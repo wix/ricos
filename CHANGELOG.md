@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `ui-components`
+  - [#2643](https://github.com/wix-incubator/rich-content/pull/2643) moved ActionButtons into ui-components and some code refactor
+
 </details>
 <hr/>
 
@@ -86,8 +90,6 @@
   - [#2580](https://github.com/wix-incubator/rich-content/pull/2580) Editor Commands improvements
 - `link`
   - [#2637](https://github.com/wix-incubator/rich-content/pull/2637) Sponsored tooltip in link panel
-- `ui-components`
-  - [#2641](https://github.com/wix-incubator/rich-content/pull/2641) moved ActionButtons into ui-components and some code refactor
 
 ## 8.44.5 (Jun 20, 2021)
 
