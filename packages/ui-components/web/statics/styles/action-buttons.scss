@@ -16,7 +16,6 @@
   max-width: 132px;
   padding: 0;
   &.mobile {
-    font-size: 16px;
     color: $fallbackColor;
     background: transparent;
     border: none;
@@ -29,11 +28,8 @@
   }
 }
 
-.action_buttons_button_save {
-  background-color: $settings-action-color-fallback;
-  color: $primary-text-color-light;
+.action_buttons_button_primary {
   .mobile & {
-    background-color: transparent;
     color: $settings-action-color-fallback;
   }
 }

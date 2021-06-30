@@ -51,7 +51,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       theme={theme}
       className={classNames(
         styles.action_buttons_button,
-        styles.action_buttons_button_save,
+        styles.action_buttons_button_primary,
         { [styles.mobile]: isMobile },
         { [styles.disabled]: !selected }
       )}
