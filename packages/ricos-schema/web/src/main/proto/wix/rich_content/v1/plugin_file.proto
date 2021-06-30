@@ -6,10 +6,11 @@ import "wix/rich_content/v1/common.proto";
 import "google/protobuf/wrappers.proto";
 
 message FileData {
-enum Privacy {
-        PUBLIC = 0;
-        PRIVATE = 1;
-    }
+  enum Privacy {
+    UNSET = 0;
+    PUBLIC = 1;
+    PRIVATE = 2;
+  }
   PluginContainerData container_data = 1;
   FileSource src = 2;
   google.protobuf.StringValue name = 3;
