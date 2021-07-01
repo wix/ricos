@@ -1,3 +1,4 @@
+import { MediaPrivacy } from '../../../';
 /* eslint-disable fp/no-delete */
 import { has, cloneDeep } from 'lodash';
 import {
@@ -168,6 +169,7 @@ const convertMention = (data: {
 const convertFileData = (data: FileComponentData & { src }) => {
   const src: FileSource = { url: data.url, custom: data.id };
   data.src = src;
+  data.privacy = (data.privacy?.toUpperCase() || 'UNSET') as MediaPrivacy;
 };
 
 const convertButtonData = (
