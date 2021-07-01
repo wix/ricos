@@ -192,7 +192,7 @@ const convertFileData = (data: Omit<FileData, 'privacy'> & FileComponentData) =>
   const { url, custom } = data.src || {};
   data.url = url;
   data.id = custom;
-  if (!privacy || (privacy as FileData_Privacy) === 'UNSET') {
+  if (!privacy || (privacy as string) === FileData_Privacy.UNSET) {
     data.privacy = undefined;
   } else {
     data.privacy = privacy.toLowerCase() as MediaPrivacy;
