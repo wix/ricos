@@ -35,14 +35,14 @@ export class RicosEngine extends Component<EngineProps> {
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
-      _rcProps,
+      experiments,
     } = this.props;
 
     const { theme, html, themeData } = themeStrategy({
       plugins,
       cssOverride,
       ricosTheme,
-      experiments: _rcProps?.experiments,
+      experiments,
     });
     const htmls: ReactElement[] = [];
     if (html) {
@@ -58,7 +58,7 @@ export class RicosEngine extends Component<EngineProps> {
         childProps: children.props,
         cssOverride: theme,
         content,
-        experiments: _rcProps?.experiments,
+        experiments,
       })
     );
 
@@ -68,7 +68,6 @@ export class RicosEngine extends Component<EngineProps> {
       onPreviewExpand,
       previewConfig: preview,
       content,
-      experiments: _rcProps?.experiments,
     });
 
     return {
@@ -97,6 +96,7 @@ export class RicosEngine extends Component<EngineProps> {
       maxTextLength,
       textAlignment,
       onAtomicBlockFocus,
+      experiments,
     } = this.props;
 
     const { strategyProps, previewContent, htmls } = this.runStrategies();
@@ -175,6 +175,7 @@ export class RicosEngine extends Component<EngineProps> {
       customAnchorScroll,
       textAlignment,
       onAtomicBlockFocus,
+      experiments,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
