@@ -229,31 +229,6 @@ class EditorWrapper extends React.Component<Props> {
     
     return (
       <>
-        <div>
-          yaron
-           <button onClick={() => {
-            const commands = this.editor.getEditorCommands();
-            commands.toggleInlineStyle('bold');
-           }}>
-            bold
-           </button>
-          <button onClick={() => {
-            const commands = this.editor.getEditorCommands();
-            commands.insertBlock('ricos-divider', 
-              
-               {
-                "type": "single",
-                "config": {
-                  "size": "large",
-                  "alignment": "center",
-                  "textWrap": "nowrap"
-                }
-              }
-            )
-          }}>
-           insert divider
-          </button>
-        </div>
       <RicosEditor
         ref={ref => (this.editor = ref)}
         plugins={this.editorPlugins}
