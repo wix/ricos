@@ -67,5 +67,13 @@
             width: 100%;
             min-width: unset;
         }
+        &.colorPickerMobile {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            top: auto;
+            width: 100%;
+        }
     }
 }

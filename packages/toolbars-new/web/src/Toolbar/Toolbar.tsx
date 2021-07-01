@@ -54,6 +54,7 @@ interface ToolbarProps {
     };
     isMobile?: boolean;
   };
+  colorPickerData?: any;
   helpers?: Helpers;
 }
 
@@ -124,7 +125,7 @@ class Toolbar extends Component<ToolbarProps> {
   };
 
   renderColorPicker = buttonProps => {
-    const { t, isMobile, afterClick, nestedMenu } = this.props;
+    const { t, isMobile, afterClick, nestedMenu, setKeepOpen } = this.props;
     const {
       getCurrentColor,
       onColorAdded,
@@ -152,6 +153,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={rest}
         theme={this.theme}
         onResetColor={onResetColor}
+        setKeepOpen={setKeepOpen}
       />
     );
   };
@@ -267,13 +269,15 @@ class Toolbar extends Component<ToolbarProps> {
       t,
       plugins,
       linkPanelData,
+      colorPickerData,
     } = this.props;
     const blabla = createButtonsList(
       formattingToolbarButtonsKeys,
       editorCommands,
       t,
       plugins,
-      linkPanelData
+      linkPanelData,
+      colorPickerData
     );
     // console.log({ buttons });
     // console.log({ blabla });
