@@ -106,6 +106,7 @@ const createInlineButtons: CreateInlineButtons = ({
       accept: settings.accept,
       triggerSettingsBi: true,
       pluginId: GALLERY_TYPE,
+      shouldShowSpoiler: settings.spoiler,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

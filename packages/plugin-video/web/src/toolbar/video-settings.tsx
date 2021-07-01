@@ -74,7 +74,9 @@ const VideoSettings: React.FC<VideoSettingsProps> = ({
     onToggle: () => setIsDownloadEnabled(!isDownloadEnabled),
   };
 
-  const toggleData = isCustomVideo ? [downloadToggle, spoilerToggle] : [spoilerToggle];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const toggleData: Record<string, any>[] = isCustomVideo ? [downloadToggle] : [];
+  settings.spoiler && toggleData.push(spoilerToggle);
 
   return (
     <div

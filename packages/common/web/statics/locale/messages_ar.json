@@ -93,6 +93,7 @@
 	"Poll_FormatToolbar_Layout_Tooltip": "غيّر تخطيط الاستقصاء",
 	"LinkPanel_Anchor_Title": "وحدة التثبيت",
 	"LinkTo_Edit_Tooltip": "تعديل رابط",
+	"TextLinkButton_DisableButtonForPlugins_Tooltip": "Inline links can not be applied to plugins",
 	"CollapsibleList_InsertButton": "قائمة قابلة للطي",
 	"Embed_Vertical_Stores_Search_Placeholder": "بحث عن منتج",
 	"EmbedURL_Social_Facebook_Placeholder": "لصق رابط URL لمنشور عام",

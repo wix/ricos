@@ -7193,12 +7193,10 @@ exports[`plugins > collapsible list > should insert image in collapsible list #0
                   "data": {
                     "config": {
                       "alignment": "center",
-                      "disableExpand": false,
                       "showDescription": true,
                       "showTitle": true,
                       "size": "content"
                     },
-                    "disableExpand": false,
                     "src": {
                       "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
                       "height": 1000,

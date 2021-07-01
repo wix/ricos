@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FocusManager } from 'wix-rich-content-editor-common';
 import {
   Tabs,
   Tab,
   LabeledToggle,
   SettingsSection,
   SettingsPanelFooter,
+  FocusManager,
 } from 'wix-rich-content-ui-components';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
@@ -308,7 +308,7 @@ export class GallerySettingsModal extends Component {
       />
     );
 
-  toggleData = [
+  baseToggleData = [
     {
       toggleKey: 'isExpandEnabled',
       labelKey: 'GalleryPlugin_Settings_ImagesOpenInExpandMode_Label',
@@ -321,22 +321,28 @@ export class GallerySettingsModal extends Component {
       dataHook: 'imageDownloadToggle',
       tooltipText: this.props.t('GalleryPlugin_Settings_ImagesCanBeDownloaded_Tooltip'),
     },
-    {
-      type: DIVIDER,
-    },
-    {
-      toggleKey: 'isSpoilerEnabled',
-      labelKey: 'GallerySettings_Spoiler_Toggle',
-      dataHook: 'gallerySpoilerToggle',
-      tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
-      onToggle: value => {
-        this.props.pubsub.update('componentData', {
-          ...this.componentData,
-          ...this.getSpoilerConfig(value),
-        });
-      },
-    },
   ];
+
+  toggleData = this.props.shouldShowSpoiler
+    ? [
+        ...this.baseToggleData,
+        {
+          type: DIVIDER,
+        },
+        {
+          toggleKey: 'isSpoilerEnabled',
+          labelKey: 'GallerySettings_Spoiler_Toggle',
+          dataHook: 'gallerySpoilerToggle',
+          tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
+          onToggle: value => {
+            this.props.pubsub.update('componentData', {
+              ...this.componentData,
+              ...this.getSpoilerConfig(value),
+            });
+          },
+        },
+      ]
+    : this.baseToggleData;
 
   render() {
     const styles = this.styles;
@@ -397,6 +403,7 @@ GallerySettingsModal.propTypes = {
   uiSettings: PropTypes.object,
   languageDir: PropTypes.string,
   accept: PropTypes.string,
+  shouldShowSpoiler: PropTypes.bool,
 };
 
 export default GallerySettingsModal;
