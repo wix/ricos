@@ -3077,7 +3077,6 @@ exports[`plugins > table > should test the first and last block logic #0`] =
                         "data": {
                           "config": {
                             "alignment": "center",
-                            "disableExpand": false,
                             "showDescription": true,
                             "showTitle": true,
                             "size": "content"
@@ -3190,7 +3189,6 @@ exports[`plugins > table > should test the first and last block logic #0`] =
                         "data": {
                           "config": {
                             "alignment": "center",
-                            "disableExpand": false,
                             "showDescription": true,
                             "showTitle": true,
                             "size": "content"
@@ -3303,7 +3301,6 @@ exports[`plugins > table > should test the first and last block logic #0`] =
                         "data": {
                           "config": {
                             "alignment": "center",
-                            "disableExpand": false,
                             "showDescription": true,
                             "showTitle": true,
                             "size": "content"
@@ -3416,7 +3413,6 @@ exports[`plugins > table > should test the first and last block logic #0`] =
                         "data": {
                           "config": {
                             "alignment": "center",
-                            "disableExpand": false,
                             "showDescription": true,
                             "showTitle": true,
                             "size": "content"

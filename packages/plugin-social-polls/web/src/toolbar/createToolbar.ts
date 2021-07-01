@@ -1,10 +1,10 @@
 import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { DECORATION_MODE } from 'wix-rich-content-ui-components';
 import {
   BUTTON_TYPES,
   TOOLBARS,
   INSERT_PLUGIN_BUTTONS,
   getModalStyles,
-  DECORATION_MODE,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
 } from 'wix-rich-content-editor-common';

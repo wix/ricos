@@ -42,7 +42,6 @@ export {
   ModifierKey as MODIFIERS,
   ToolbarType as TOOLBARS,
   DisplayMode as DISPLAY_MODE,
-  DecorationMode as DECORATION_MODE,
 } from 'wix-rich-content-common';
 
 export const KEYS_CHARCODE = {
