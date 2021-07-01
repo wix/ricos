@@ -4,6 +4,7 @@ import { NodeViewWrapper } from '@tiptap/react';
 import {
   getAlignmentClassName,
   getFocusClassName,
+  getPluginContainerClassName,
   getSizeClassName,
   getTextWrapClassName,
 } from './styles';
@@ -17,7 +18,7 @@ const EditorContextConsumer = ({ children }) => {
   return children(editorContext);
 };
 
-const getComponentStyles = ({ componentData, theme, isFocused }) => {
+const getComponentStyles = ({ componentData, theme, isFocused, isMobile }) => {
   const alignment = componentData?.config?.alignment;
   const size = componentData?.config?.size;
   const textWrap = componentData?.config?.textWrap;
@@ -27,7 +28,33 @@ const getComponentStyles = ({ componentData, theme, isFocused }) => {
     sizeClassName: getSizeClassName(stylesWithRTL, size, theme),
     focusClassName: getFocusClassName(stylesWithRTL, theme, isFocused),
     textWrapClassName: getTextWrapClassName(stylesWithRTL, theme, textWrap),
+    pluginContainerClassName: getPluginContainerClassName(stylesWithRTL, theme, isMobile),
   };
+};
+
+const useIsSelected = (editor, getPos) => {
+  const [isSelected, setSelected] = useState(false);
+
+  useEffect(() => {
+    const onSelectionUpdate = ({ editor }) => {
+      const position = getPos();
+      if (
+        position >= editor.state.selection.$from.pos &&
+        position <= editor.state.selection.$to.pos
+      ) {
+        setSelected(true);
+      } else {
+        setSelected(false);
+      }
+    };
+    editor.on('selectionUpdate', onSelectionUpdate);
+
+    return () => {
+      editor.off('selectionUpdate', onSelectionUpdate);
+    };
+  }, []);
+
+  return isSelected;
 };
 
 const BaseExtensionComponentHOC = Component => {
@@ -39,36 +66,30 @@ const BaseExtensionComponentHOC = Component => {
             props.node.type.name.toUpperCase(),
             props.node.attrs
           );
-
-          const [isSelected, setSelected] = useState(false);
           const { editor, getPos } = props;
           const selected = props.selected;
-          const { theme } = context;
+          const { theme, isMobile } = context;
+          const isSelected = useIsSelected(editor, getPos);
 
           const componentStyles = getComponentStyles({
             componentData: toTiptap(componentData),
             theme,
             isFocused: isSelected || selected,
-          });
-
-          useEffect(() => {
-            editor.on('selectionUpdate', ({ editor }) => {
-              const position = getPos();
-              if (
-                position >= editor.state.selection.$from.pos &&
-                position <= editor.state.selection.$to.pos
-              ) {
-                setSelected(true);
-              } else {
-                setSelected(false);
-              }
-            });
+            isMobile,
           });
 
           return (
             <NodeViewWrapper as="div">
               <div data-drag-handle className={Object.values(componentStyles).join(' ')}>
-                <Component {...props} context={context} componentData={componentData} />
+                <Component
+                  {...props}
+                  context={{
+                    context,
+                    t: key => `Translation is not supported: ${key}`,
+                  }}
+                  componentData={componentData}
+                  updateAttributes={props.updateAttributes}
+                />
               </div>
             </NodeViewWrapper>
           );
