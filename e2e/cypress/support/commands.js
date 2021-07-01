@@ -17,7 +17,7 @@ import {
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
-import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
+const ONCHANGE_DEBOUNCE_TIME = 200;
 import { merge } from 'lodash';
 
 // Viewport size commands
