@@ -51,7 +51,7 @@ const toTiptapAPI = (editor: Editor): TiptapAPI => ({
         editorCommand[styleName]().run();
       },
       insertBlock: (pluginType, data) => {
-        if (pluginType === RICOS_DIVIDER_TYPE) {
+        if (pluginType === RICOS_DIVIDER_TYPE || pluginType === DIVIDER_TYPE) {
           const attrs = draftBlockDataToTiptap(DIVIDER_TYPE, data);
           editor.commands.insertContent({
             type: TO_RICOS_NODE_TYPE[DIVIDER_TYPE].toLowerCase(),
