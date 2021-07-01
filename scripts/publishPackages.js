@@ -23,13 +23,13 @@ function publish(pkg) {
   const publishCmd = publishCommand(pkg, tag);
   console.log(chalk.magenta(`Running: "${publishCmd}" for ${name}@${version}`));
   execSync(publishCmd, { stdio: 'inherit' });
+  const addTiptapTag = addTiptapTagCmd(pkg);
+  execSync(addTiptapTag, { stdio: 'inherit' });
+  console.log(chalk.magenta(`adding: adding tiptap tag to latest: "${addTiptapTag}"`));
   if (pkgUtils.isLatest(tag)) {
     const addTagCmd = addNextTagCmd(pkg);
-    const addTiptapTag = addTiptapTagCmd(pkg);
     console.log(chalk.magenta(`adding: adding next tag to latest: "${addTagCmd}"`));
-    console.log(chalk.magenta(`adding: adding tiptap tag to latest: "${addTiptapTag}"`));
     execSync(addTagCmd, { stdio: 'inherit' });
-    execSync(addTiptapTag, { stdio: 'inherit' });
   }
   return true;
 }
