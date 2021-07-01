@@ -165,7 +165,7 @@ const uglify = (): Plugin => {
     mangle: false,
     output: {
       comments: (node, comment) => {
-        return /@preserve|@license|@cc_on|.*webpackChunkName:.*/i.test(comment.value);
+        return /@preserve|@license|@cc_on|webpackChunkName/i.test(comment.value);
       },
     },
   });
