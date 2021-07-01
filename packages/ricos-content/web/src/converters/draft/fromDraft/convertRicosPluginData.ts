@@ -47,6 +47,9 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     [MAP_TYPE]: convertMapData,
   };
   if (newData.config && blockType !== DIVIDER_TYPE) {
+    if (blockType === IMAGE_TYPE) {
+      // console.log('newData', newData);
+    }
     convertContainerData(newData);
   }
   if (blockType in converters) {
@@ -120,15 +123,13 @@ const convertImageData = (data: {
   metadata?: { alt?: string; caption?: string };
   image;
   link;
-  disableExpand;
   altText;
   caption;
 }) => {
   const { file_name, width, height } = data.src || {};
-  const { link, anchor, disableExpand } = data.config || {};
+  const { link, anchor } = data.config || {};
   data.image = { src: { custom: file_name }, width, height };
   data.link = (link || anchor) && convertLink({ ...link, anchor });
-  data.disableExpand = disableExpand;
   data.altText = data.metadata?.alt;
   data.caption = data.metadata?.caption;
 };

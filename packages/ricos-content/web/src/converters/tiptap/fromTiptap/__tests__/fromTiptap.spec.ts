@@ -35,6 +35,7 @@ describe('convert from Tiptap', () => {
       const imageData = tiptapNodeDataToDraft(Node_Type.IMAGE, imageNode.attrs as JSONContent);
       expect(
         compare(imageData, getImageBlockData(draftMigrationContent), {
+          verbose: true,
           ignoredKeys: ['key', 'src'],
         })
       ).toEqual({});
