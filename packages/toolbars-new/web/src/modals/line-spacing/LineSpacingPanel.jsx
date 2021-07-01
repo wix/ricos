@@ -30,31 +30,36 @@ const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }
 };
 
 const MobilePanel = ({ selectedHeight, styles, t, onChange, onSave, onCancel }) => {
-  const lineHeightElement = (height, isSelected, onClick) => (
-    <button
-      className={isSelected ? styles.lineSpacingMobilePanel_selectedLineHeight : ''}
-      key={height}
-      onClick={() => onClick(`${height}`)}
-    >
-      {height}
-    </button>
+  const lineHeightElement = (height, isSelected, onClick, showSeparator) => (
+    <div>
+      <button
+        className={isSelected ? styles.lineSpacingMobilePanel_selectedLineHeight : ''}
+        key={height}
+        onClick={() => onClick(`${height}`)}
+      >
+        {height}
+      </button>
+      {showSeparator && <Separator />}
+    </div>
   );
 
   const lineHeights = [1, 1.5, 2, 2.5, 3];
   return (
     <div className={styles.lineSpacingMobilePanel}>
-      <div>{t('LineSpacing_lineSpacing')}</div>
+      <div className={styles.lineSpacingMobilePanel_header}>{t('LineSpacing_lineSpacing')}</div>
+      <Separator />
       <div className={styles.lineSpacingMobilePanel_heights}>
-        {lineHeights.map(height => {
+        {lineHeights.map((height, i) => {
           const selected = parseFloat(selectedHeight) === height;
-          return lineHeightElement(height, selected, onChange);
+          const showSeparator = i !== lineHeights.length - 1;
+          return lineHeightElement(height, selected, onChange, showSeparator);
         })}
       </div>
-      <Separator />
-      <div className={styles.lineSpacingMobilePanel_buttons}>
+      {/* <Separator /> */}
+      {/* <div className={styles.lineSpacingMobilePanel_buttons}>
         <button onClick={onCancel}>{t('LineSpacing_cancel')}</button>
         <button onClick={() => onSave()}>{t('LineSpacing_save')}</button>
-      </div>
+      </div> */}
     </div>
   );
 };
