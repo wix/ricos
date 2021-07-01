@@ -9,9 +9,6 @@ const publishCommand = (pkg, tag) =>
 const addNextTagCmd = pkg =>
   `npm dist-tag --registry=${pkg.registry} add ${pkg.name}@${pkg.version} ${pkgUtils.NEXT_TAG}`;
 
-const addTiptapTagCmd = pkg =>
-  `npm dist-tag --registry=${pkg.registry} add ${pkg.name}@${pkg.version} tiptap`;
-
 function shouldPublishPackage(pkg) {
   const remoteVersionsList = pkgUtils.getPublishedVersions(pkg);
   return !remoteVersionsList.includes(pkg.version);
@@ -23,9 +20,6 @@ function publish(pkg) {
   const publishCmd = publishCommand(pkg, tag);
   console.log(chalk.magenta(`Running: "${publishCmd}" for ${name}@${version}`));
   execSync(publishCmd, { stdio: 'inherit' });
-  const addTiptapTag = addTiptapTagCmd(pkg);
-  execSync(addTiptapTag, { stdio: 'inherit' });
-  console.log(chalk.magenta(`adding: adding tiptap tag to latest: "${addTiptapTag}"`));
   if (pkgUtils.isLatest(tag)) {
     const addTagCmd = addNextTagCmd(pkg);
     console.log(chalk.magenta(`adding: adding next tag to latest: "${addTagCmd}"`));
