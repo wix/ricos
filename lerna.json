@@ -4,8 +4,7 @@
     "version": {
       "allowBranch": [
         "master",
-        "release*",
-        "loadableComponent"
+        "release*"
       ],
       "message": "[*] chore(release): %s"
     }
