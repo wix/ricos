@@ -1,7 +1,4 @@
-import { AvailableExperiments } from 'wix-rich-content-common';
-
-//eslint-disable-next-line
-export default async function localeStrategy(locale = 'en', experiments?: AvailableExperiments) {
+export default async function localeStrategy(locale = 'en') {
   if (locale === 'en') {
     return { locale };
   }

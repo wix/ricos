@@ -10,7 +10,7 @@ import { isDefined } from 'ts-is-present';
 
 export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyResult {
   const { buildCssVars } = utils;
-  const { ricosTheme = {}, plugins = [], cssOverride = {} /*, experiments*/ } = args;
+  const { ricosTheme = {}, plugins = [], cssOverride = {} } = args;
   const { parentClass = '', palette, paletteConfig, typography, customStyles } = ricosTheme;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
 
