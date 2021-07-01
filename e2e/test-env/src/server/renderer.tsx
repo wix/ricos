@@ -66,7 +66,6 @@ export default function renderer() {
       loadableScriptTags: scriptTags,
       loadableLinkTags: linkTags,
       loadableStyleTags: styleTags,
-      dana: 'danaaaaaa',
     });
   };
 }
