@@ -5,8 +5,13 @@ import exampleAppContent from '../../../../e2e/tests/fixtures/storybook-tiptap-e
 
 export default () => {
     const editorProps = {
-        experiments: { tiptapEditor: { value: 'true', enabled: true, namespace: 'ricos' } },
+        experiments: {
+            tiptapEditor: {
+              enabled: true
+            }
     };
+
+        }
     return (
         <Page title="Example App">
             <ExampleApplication initialState={exampleAppContent} editorProps={editorProps} />
