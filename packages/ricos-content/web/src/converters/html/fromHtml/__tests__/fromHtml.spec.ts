@@ -1,4 +1,5 @@
 import { fromHtml } from '../fromHtml';
+import { preprocess } from '../ck-editor/preprocess';
 import { toDraft } from '../../../draft';
 
 import richTextContent from './richTextContent.json';
@@ -20,8 +21,8 @@ describe('convert from html', () => {
   });
 
   it('should convert FAQ content', () => {
-    const content = toDraft(fromHtml(getHTML('FAQContent')));
-    console.log('HTML', content);
+    const content = preprocess(getHTML('FAQContent'));
+    // console.log('HTML', content); // eslint-disable-line
     expect(true).toBe(true);
   });
 });
