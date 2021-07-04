@@ -12,9 +12,13 @@ import {
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
 
-export const createNode = (type: Node_Type, nodes: Node[] = [], style?: NodeStyle): Node => ({
+export const createNode = (
+  type: Node_Type,
+  nodes: Node[] = [],
+  { style, key }: { style?: NodeStyle; key?: string } = {}
+): Node => ({
   type,
-  key: genKey(),
+  key: key ?? genKey(),
   nodes,
   style,
 });
@@ -24,7 +28,7 @@ export const createParagraphNode = (
   data?: ParagraphData,
   style?: NodeStyle
 ): Node => ({
-  ...createNode(Node_Type.PARAGRAPH, nodes, style),
+  ...createNode(Node_Type.PARAGRAPH, nodes, { style }),
   paragraphData: {
     textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
     ...data,
@@ -32,7 +36,7 @@ export const createParagraphNode = (
 });
 
 export const createTextNode = (text: string, decorations: Decoration[] = []): Node => ({
-  ...createNode(Node_Type.TEXT),
+  ...createNode(Node_Type.TEXT, []),
   textData: {
     text,
     decorations,

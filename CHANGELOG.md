@@ -17,13 +17,22 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.46.5 (July 4, 2021)
+
+### :house: Internal
+
+- `tiptap-editor`
+  - [#2673](https://github.com/wix/ricos/pull/2673) convert tiptap to ES5
+
+## 8.46.4 (July 4, 2021)
+
 ### :house: Internal
 
 - `plugin-commons`
   - [#2581](https://github.com/wix/ricos/pull/2581) unify media upload functionality and extract from plugins
-
-</details>
-<hr/>
 
 ## 8.46.3 (July 3, 2021)
 
