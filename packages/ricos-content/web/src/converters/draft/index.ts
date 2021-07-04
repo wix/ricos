@@ -8,3 +8,5 @@ export {
   convertDecorationDataToDraft,
   convertDecorationToDraftData,
 } from './toDraft/convertDraftPluginData';
+
+export { TO_RICOS_NODE_TYPE } from './consts';
