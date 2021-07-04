@@ -107,5 +107,5 @@ export const parseLinkPreview = ({ linkPreviewData }: Node): string => {
 };
 
 export const parseEmbed = ({ embedData }: Node, delimiter?: string): string => {
-  return [embedData?.oembed?.title || '', embedData?.src].filter(Boolean).join(delimiter);
+  return [embedData?.oembed?.title, embedData?.src].filter(Boolean).join(delimiter);
 };
