@@ -9,6 +9,7 @@ import {
   parseTextNodes,
   parseVerticalEmbed,
   parseVideo,
+  parseEmbed,
 } from './convertNodes';
 
 interface PlainTextOptions {
@@ -62,6 +63,9 @@ export const toPlainText = async (
           break;
         case Node_Type.LINK_PREVIEW:
           plainText += parseLinkPreview(node);
+          break;
+        case Node_Type.EMBED:
+          plainText += parseEmbed(node);
           break;
         default:
       }
