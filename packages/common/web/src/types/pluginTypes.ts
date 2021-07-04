@@ -84,6 +84,7 @@ import {
   Node_Type,
   Decoration_Type,
 } from 'ricos-schema';
+import { NodeConfig } from '@tiptap/core';
 export { Node_Type, Decoration_Type, LinkData };
 
 export type CreatePluginData<PluginData> = (
@@ -226,7 +227,14 @@ export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<s
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
   createPluginData?: CreatePluginData<PluginConfig>;
+  tiptapExtension?: (componentDataDefaults) => createTiptapExtension;
 }
+
+export type createTiptapExtension = (obj: {
+  mergeAttributes;
+  ReactNodeViewRenderer;
+  BaseExtensionComponentHOC;
+}) => NodeConfig;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasePluginConfig {

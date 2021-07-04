@@ -33,6 +33,7 @@ const rcePropM = struct<RCEPluginProps>({
   plugins: A.getMonoid<CreatePluginFunction>(),
   ModalsMap: recordMergeM<ComponentType>(),
   createPluginsDataMap: recordMergeM<any>(),
+  tiptapExtensions: A.getMonoid<EditorPlugin['tiptapExtension']>(),
 });
 
 const extractChildRCVPluginProps = (
@@ -55,6 +56,7 @@ const toRCEPluginProps = (plugin: EditorPlugin): RCEPluginProps => ({
   plugins: plugin.createPlugin ? [plugin.createPlugin] : [],
   ModalsMap: plugin.ModalsMap ?? {},
   createPluginsDataMap: { [plugin.type]: plugin.createPluginData },
+  tiptapExtensions: plugin.tiptapExtension ? [plugin.tiptapExtension] : [],
 });
 
 const toRCVPluginProps = (cssOverride: RicosCssOverride, content?: DraftContent) => (

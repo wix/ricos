@@ -16,6 +16,7 @@ export interface RCEPluginProps {
   plugins: CreatePluginFunction[];
   ModalsMap: ModalsMap;
   createPluginsDataMap: CreatePluginsDataMap;
+  tiptapExtensions: EditorPlugin['tiptapExtension'][];
 }
 
 export interface RCVPluginProps {
