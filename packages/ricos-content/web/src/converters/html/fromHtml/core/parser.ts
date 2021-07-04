@@ -13,15 +13,14 @@ import {
   initializeMetadata,
 } from '../../../nodeUtils';
 
-const parseHtmlElement = (
-  element: Element | TextNode,
-  decorations: Decoration[] = []
-): Node | Node[] => {
+type DecorationMap = Record<Decoration_Type, Decoration>;
+
+const htmlToNodes = (decorations: Decoration[] = []) => (element: Element | TextNode): Node[] => {
   // TextNode
   if ('value' in element) {
     return element.value === '\n'
       ? []
-      : createTextNode(element.value, reduceDecorations(decorations));
+      : [createTextNode(element.value, reduceDecorations(decorations))];
   }
   // ElementNode
   switch (element.nodeName) {
@@ -34,19 +33,21 @@ const parseHtmlElement = (
     case 'ul':
     case 'ol':
     case 'li':
-      return createNode(TAG_TO_NODE_TYPE[element.nodeName], traverse(element, decorations));
+      return [createNode(TAG_TO_NODE_TYPE[element.nodeName], traverse(element, decorations))];
     case 'h1':
     case 'h2':
     case 'h3':
     case 'h4':
     case 'h5':
     case 'h6':
-      return createHeadingNode(traverse(element, decorations), {
-        level: parseInt(element.nodeName.substring(1), 10),
-      });
+      return [
+        createHeadingNode(traverse(element, decorations), {
+          level: parseInt(element.nodeName.substring(1), 10),
+        }),
+      ];
     case 'p':
     default:
-      return createParagraphNode(traverse(element, decorations));
+      return [createParagraphNode(traverse(element, decorations))];
   }
 };
 
@@ -69,8 +70,8 @@ const addDecoration = (
   data: Omit<Decoration, 'type'> = {}
 ) => {
   const decoration = createDecoration(type, data);
-  const innerElement = getChildNodes(element)[0];
-  return parseHtmlElement(innerElement, [...decorations, decoration]);
+  const innerElement = pipe(element, getChildNodes, filterComments)[0] as TextNode | Element;
+  return htmlToNodes([...decorations, decoration])(innerElement);
 };
 
 const createLinkData = (element: Element) => {
@@ -78,18 +79,12 @@ const createLinkData = (element: Element) => {
   return url ? { linkData: { url } } : {};
 };
 
-const toRichContentNodes = (decorations: Decoration[]) => (elements: (TextNode | Element)[]) =>
-  elements.flatMap(el => parseHtmlElement(el, decorations));
-
-const traverse = (element: Element | DocumentFragment, decorations: Decoration[] = []): Node[] =>
-  pipe(element, getChildNodes, filterComments, toRichContentNodes(decorations));
+const toRichContentNodes = (decorations: Decoration[]) => A.chain(htmlToNodes(decorations));
 
 const getChildNodes = (element: Element | DocumentFragment): (TextNode | Element)[] =>
   isLeaf(element) ? [] : (element.childNodes as (Element | TextNode)[]);
 
 const filterComments = A.filter(not(isComment));
-
-type DecorationMap = Record<Decoration_Type, Decoration>;
 
 const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
   const reducedDecorationsMap: DecorationMap = decorations.reduce(
@@ -106,6 +101,9 @@ const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
   const reducedDecorations = Object.values(reducedDecorationsMap);
   return reducedDecorations;
 };
+
+const traverse = (element: Element | DocumentFragment, decorations: Decoration[] = []): Node[] =>
+  pipe(element, getChildNodes, filterComments, toRichContentNodes(decorations));
 
 const toRichContent = (nodes: Node[]): RichContent => ({ nodes, metadata: initializeMetadata() });
 
