@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, debounce } from 'lodash';
 import { mergeStyles, validate } from 'wix-rich-content-common';
-import { LoaderIcon, getIcon, DownloadIcon, ReadyIcon, errorIcon } from './icons';
+import { LoaderIcon, getIcon, DownloadIcon, ErrorIcon, ReadyIcon } from './icons';
 // eslint-disable-next-line max-len
 import pluginFileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
@@ -103,7 +103,7 @@ class FileUploadViewer extends PureComponent {
       return (
         <div className={isMobile ? this.styles.mobile_status_icon : this.styles.file_upload_state}>
           {error ? (
-            <errorIcon />
+            <ErrorIcon />
           ) : showLoader ? (
             <LoaderIcon className={this.styles.file_loader_icon} />
           ) : showReadyIcon ? (
