@@ -206,7 +206,6 @@ describe('migrate from draft', () => {
     };
 
     const nodeData = convertBlockDataToRicos(IMAGE_TYPE, blockData);
-    // console.log('nodeData', nodeData);
 
     expect(nodeData).toEqual(expectedNodeData);
   });
