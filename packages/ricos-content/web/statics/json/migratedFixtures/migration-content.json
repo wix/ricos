@@ -430,6 +430,7 @@
             "custom": "video/d3dd72_9397c7bfa03f4fa8920b16bdd667f73b/1080p/mp4/file.mp4"
           }
         },
+        "disableDownload": false,
         "thumbnail": {
           "src": {
             "custom": "media/d3dd72_9397c7bfa03f4fa8920b16bdd667f73bf000.jpg"
@@ -493,6 +494,7 @@
             "selected": false
           }
         ],
+        "disableExpand": false,
         "styles": {
           "galleryLayout": 2,
           "gallerySizeType": "px",

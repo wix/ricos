@@ -894,6 +894,7 @@
             "height": 1080
           }
         },
+        "disableDownload": false,
         "isCustomVideo": true,
         "tempData": false
       }
@@ -963,6 +964,7 @@
           "videoPlay": "onClick",
           "numberOfImagesPerRow": 3
         },
+        "disableExpand": false,
         "config": {
           "alignment": "center",
           "size": "content",
