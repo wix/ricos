@@ -7,7 +7,6 @@ import Document from '@tiptap/extension-document';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import History from '@tiptap/extension-history';
-import Bold from '@tiptap/extension-bold';
 import Italic from '@tiptap/extension-italic';
 import CodeBlock from '@tiptap/extension-code-block';
 import Heading from '@tiptap/extension-heading';
@@ -19,7 +18,6 @@ import Paragraph from './extensions/extension-paragraph';
 
 export const tiptapExtensions = [
   Blockquote,
-  Bold,
   Underline,
   BulletList,
   CodeBlock,
