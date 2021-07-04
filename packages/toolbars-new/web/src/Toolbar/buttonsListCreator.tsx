@@ -378,8 +378,7 @@ const handleButtonColorPicker = (
       colorPickerData[buttonName]?.getDefaultColors?.() ||
       Object.freeze(['#ff0000', '#ffffff', '#303030', '#3a54b4', '#bfad80', '#dddddd']);
     buttonsList[index].onResetColor = () => {
-      //TODO: editorCommands function to remove the style from the contentState
-      editorCommands.insertDecoration(colorTypes[buttonName], { color: '#0000ff' });
+      editorCommands.insertDecoration(colorTypes[buttonName]);
     };
     buttonsList[index].colorPickerHeaderKey = buttonsFullData[buttonName].colorPickerHeaderKey;
   }
