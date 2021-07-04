@@ -13,16 +13,6 @@ const initConfig = {
   transformation: defaultTransformation,
 };
 
-/*
-  isViewer,
-  isPreviewExpanded,
-  onPreviewExpand,
-  previewConfig,
-  content,
-  experiments,
-
- * */
-
 const previewConfig = createPreview(initConfig) as PreviewConfig;
 describe('Preview Strategy', () => {
   describe('Required Props', () => {

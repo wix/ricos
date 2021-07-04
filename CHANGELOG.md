@@ -17,8 +17,20 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `plugin-commons`
+  - [#2581](https://github.com/wix/ricos/pull/2581) unify media upload functionality and extract from plugins
+
 </details>
 <hr/>
+
+## 8.46.3 (July 3, 2021)
+
+### :nail_care
+
+- `gallery/image`
+- [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
 
 ## 8.46.0 (Jun 29, 2021)
 
