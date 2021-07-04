@@ -4,7 +4,7 @@ import ClickOutside from 'react-click-outsider';
 import styles from '../Toolbar.scss';
 import Toolbar from '../Toolbar';
 import ToolbarButton from '../ToolbarButton';
-import { RichContentTheme, TranslationFunction } from 'wix-rich-content-common';
+import { RichContentTheme, TranslationFunction, Helpers } from 'wix-rich-content-common';
 
 type dropDownPropsType = {
   t: TranslationFunction;
@@ -14,12 +14,14 @@ type dropDownPropsType = {
   isActive: () => boolean;
   getIcon: () => any;
   buttonList: any[];
+  plugin?: string;
 };
 
 interface NestedMenuProps {
   editorCommands: any; //TODO: editorCommands type
   theme?: RichContentTheme;
   dropDownProps: dropDownPropsType;
+  helpers?: Helpers;
 }
 
 interface State {
@@ -48,12 +50,13 @@ class NestedMenu extends Component<NestedMenuProps, State> {
 
   render() {
     const { dropDownProps, theme, editorCommands } = this.props;
-    const { tooltip, dataHook, getIcon, isMobile, t, buttonList, isActive } = dropDownProps;
+    const { tooltip, dataHook, getIcon, isMobile, t, buttonList, isActive, plugin } = dropDownProps;
     const { isModalOpen } = this.state;
     return (
       <ClickOutside onClickOutside={this.closeModal}>
         <div className={styles.buttonWrapper}>
           <ToolbarButton
+            helpers={this.props.helpers}
             isActive={isActive()}
             onClick={this.toggleModal}
             tooltipText={tooltip}
@@ -62,6 +65,7 @@ class NestedMenu extends Component<NestedMenuProps, State> {
             icon={getIcon()}
             theme={theme}
             showArrowIcon
+            plugin={plugin}
           />
           {isModalOpen && (
             <div className={styles.modal}>

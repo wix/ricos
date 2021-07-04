@@ -1,4 +1,4 @@
-import React, { Component, ReactElement, ReactNode, Ref, FC, version } from 'react';
+import React, { Component, ReactElement, ReactNode, Ref, FC } from 'react';
 import classNames from 'classnames';
 import DropdownArrowIcon from '../icons/DropdownArrowIcon';
 import Styles from './ToolbarButton.scss';
@@ -23,6 +23,7 @@ type ToolbarButtonProps = {
   asContextButton?: boolean;
   disabledStyle?: boolean;
   helpers?: Helpers;
+  plugin?: string;
 };
 
 class ToolbarButton extends Component<ToolbarButtonProps> {
@@ -74,8 +75,14 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
   preventDefault = event => event.preventDefault();
 
   onClick = (...args: [any]) => {
-    const { helpers } = this.props;
-    helpers?.onToolbarButtonClick?.({ buttonName: 'aaa', version: Version.currentVersion });
+    const { helpers, isActive, dataHook, plugin } = this.props;
+    const buttonName = dataHook?.split('_').pop();
+    helpers?.onToolbarButtonClick?.({
+      buttonName: buttonName || '',
+      pluginId: plugin || undefined,
+      value: `${!isActive}`,
+      version: Version.currentVersion,
+    });
     this.props.onClick?.(...args);
   };
 

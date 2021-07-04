@@ -77,7 +77,7 @@ class Toolbar extends Component<ToolbarProps> {
   };
 
   renderButton = buttonProps => {
-    const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
+    const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip, plugin } = buttonProps;
     return (
       <ToolbarButton
         onClick={onClick}
@@ -89,6 +89,7 @@ class Toolbar extends Component<ToolbarProps> {
         icon={getIcon()}
         disabled={isDisabled()}
         helpers={this.props.helpers}
+        plugin={plugin}
       />
     );
   };
@@ -110,7 +111,7 @@ class Toolbar extends Component<ToolbarProps> {
       setKeepOpen,
       ...buttonProps,
     };
-    return <DropdownButton {...dropDownProps} />;
+    return <DropdownButton {...dropDownProps} helpers={this.props.helpers} />;
   };
 
   renderButtonGroup = ({ buttonList, tooltip, ...rest }) => {
@@ -121,7 +122,14 @@ class Toolbar extends Component<ToolbarProps> {
       tooltip,
       ...rest,
     };
-    return <GroupButton buttons={Object.values(buttonList)} theme={theme} {...dropDownProps} />;
+    return (
+      <GroupButton
+        buttons={Object.values(buttonList)}
+        theme={theme}
+        {...dropDownProps}
+        helpers={this.props.helpers}
+      />
+    );
   };
 
   renderColorPicker = buttonProps => {
@@ -154,6 +162,7 @@ class Toolbar extends Component<ToolbarProps> {
         theme={this.theme}
         onResetColor={onResetColor}
         setKeepOpen={setKeepOpen}
+        helpers={this.props.helpers}
       />
     );
   };
@@ -169,6 +178,7 @@ class Toolbar extends Component<ToolbarProps> {
         buttonContent={text}
         tooltipText={tooltip}
         disabled={isDisabled?.()}
+        helpers={this.props.helpers}
       />
     );
   };
@@ -190,6 +200,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={dropDownProps}
         t={t}
         setKeepOpen={setKeepOpen}
+        helpers={this.props.helpers}
       />
     );
   };
@@ -208,7 +219,12 @@ class Toolbar extends Component<ToolbarProps> {
       ...buttonProps,
     };
     return (
-      <NestedMenu dropDownProps={dropDownProps} theme={theme} editorCommands={editorCommands} />
+      <NestedMenu
+        dropDownProps={dropDownProps}
+        theme={theme}
+        editorCommands={editorCommands}
+        helpers={this.props.helpers}
+      />
     );
   };
 
@@ -221,7 +237,7 @@ class Toolbar extends Component<ToolbarProps> {
       theme: this.theme,
       ...buttonProps,
     };
-    return <ContextMenu {...dropDownProps} />;
+    return <ContextMenu {...dropDownProps} helpers={this.props.helpers} />;
   };
 
   buttonMap = {

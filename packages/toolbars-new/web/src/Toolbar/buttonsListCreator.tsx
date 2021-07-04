@@ -133,7 +133,7 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   TEXT_COLOR: {
     plugin: 'wix-rich-content-text-color',
     icon: TextColorIcon,
-    dataHook: 'wix-rich-content-text-color-button',
+    dataHook: 'TextColorButton',
     tooltip: 'Text color',
     action: 'TEXT_COLOR',
     type: 'color-picker',
@@ -144,7 +144,7 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   TEXT_HIGHLIGHT: {
     plugin: 'wix-rich-content-text-highlight',
     icon: TextHighlightIcon,
-    dataHook: 'wix-rich-content-text-highlight-button',
+    dataHook: 'TextHighlightButton',
     tooltip: 'Highlight color',
     action: 'TEXT_HIGHLIGHT',
     type: 'color-picker',
@@ -219,28 +219,28 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   DECREASE_INDENT: {
     plugin: 'wix-rich-content-plugin-indent',
     icon: decreaseIndentPluginIcon,
-    dataHook: 'DECREASE_INDENT',
+    dataHook: 'decreaseIndentButton',
     tooltip: 'Decrease indent',
     type: 'button',
   },
   INCREASE_INDENT: {
     plugin: 'wix-rich-content-plugin-indent',
     icon: increaseIndentPluginIcon,
-    dataHook: 'INCREASE_INDENT',
+    dataHook: 'increaseIndentButton',
     tooltip: 'Increase indent',
     type: 'button',
   },
   SPOILER: {
     plugin: 'wix-rich-content-plugin-spoiler',
     icon: SpoilerButtonIcon,
-    dataHook: 'spoilerButton',
+    dataHook: 'textSpoilerButton',
     tooltip: 'Spoiler',
     type: 'button',
   },
   LINE_SPACING: {
     plugin: 'line-spacing',
     icon: LineSpacingIcon,
-    dataHook: 'LINE_SPACING',
+    dataHook: 'LineSpacingButton',
     tooltip: 'Line spacing',
     type: 'modal',
     modal: props => <Panel {...props} />,
@@ -254,7 +254,7 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   LINK: {
     plugin: 'LINK',
     icon: LinkIcon,
-    dataHook: 'LINK',
+    dataHook: 'LinkButton',
     tooltip: 'Link',
     type: 'modal',
     modal: props => <LinkModal {...props} />,
@@ -267,7 +267,7 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   CODE_BLOCK: {
     plugin: 'code-block',
     icon: CodeBlockIcon,
-    dataHook: 'CODE_BLOCK',
+    dataHook: 'TextCodeBlockButton',
     tooltip: 'Code snippet',
     type: 'button',
   },
@@ -339,9 +339,16 @@ export const createButtonsList = (
     handleButtonSaveSelection(buttonsList, index, editorCommands);
     handleButtonLoadSelection(buttonsList, index, editorCommands);
     handleButtonColorPicker(buttonsList, index, editorCommands, colorPickerData);
+    handleButtonPlugin(buttonsList, index);
   });
   const filteredButtonsList = filterButtonsByPlugins(buttonsList, plugins);
   return filteredButtonsList;
+};
+
+const handleButtonPlugin = (buttonsList, index) => {
+  if (buttonsFullData[buttonsList[index].name].plugin) {
+    buttonsList[index].plugin = buttonsFullData[buttonsList[index].name].plugin;
+  }
 };
 
 const handleButtonColorPicker = (
