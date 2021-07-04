@@ -4,7 +4,8 @@
     "version": {
       "allowBranch": [
         "master",
-        "release*"
+        "release*",
+        "tiptap-image"
       ],
       "message": "[*] chore(release): %s"
     }
@@ -14,5 +15,5 @@
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "8.46.0"
+  "version": "8.46.3"
 }
