@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import ClickOutside from 'react-click-outsider';
 import ToolbarButton, { ToolbarButtonType } from '../ToolbarButton';
-import { RichContentTheme, Helpers } from 'wix-rich-content-common';
+import { RichContentTheme, onToolbarButtonClickArgs } from 'wix-rich-content-common';
 
 interface DropdownButtonProps {
-  helpers?: Helpers;
+  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
   isMobile: boolean;
   tabIndex?: number;
   buttons: unknown[];
@@ -78,7 +78,7 @@ class DropdownButton extends Component<DropdownButtonProps> {
             disabled={disabledState}
             ref={ref => (this.buttonRef = ref)}
             theme={theme}
-            helpers={this.props.helpers}
+            onToolbarButtonClick={this.props.onToolbarButtonClick}
             {...buttonProps}
           />
         </ClickOutside>

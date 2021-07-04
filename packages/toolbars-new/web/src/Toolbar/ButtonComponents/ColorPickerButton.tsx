@@ -7,7 +7,11 @@ import ClickOutside from 'react-click-outsider';
 import styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton';
 import { ColorPicker } from 'wix-rich-content-plugin-commons';
-import { RichContentTheme, TranslationFunction, Helpers } from 'wix-rich-content-common';
+import {
+  RichContentTheme,
+  TranslationFunction,
+  onToolbarButtonClickArgs,
+} from 'wix-rich-content-common';
 
 type dropDownPropsType = {
   tooltip: string;
@@ -19,7 +23,7 @@ type dropDownPropsType = {
 };
 
 interface ColorPickerButtonProps {
-  helpers?: Helpers;
+  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
   theme?: RichContentTheme;
   t: TranslationFunction;
   dropDownProps: dropDownPropsType;
@@ -144,7 +148,7 @@ class ColorPickerButton extends Component<ColorPickerButtonProps, State> {
           isMobile={isMobile}
           icon={getIcon()}
           theme={theme}
-          helpers={this.props.helpers}
+          onToolbarButtonClick={this.props.onToolbarButtonClick}
         />
         {isModalOpen && (
           <div

@@ -885,7 +885,7 @@ const config: RichContentEditorProps['config'] = {
         desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
         mobile: {
           ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
-          android: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+          android: [],
         },
       }),
     },
