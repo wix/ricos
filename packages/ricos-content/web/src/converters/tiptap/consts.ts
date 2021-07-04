@@ -23,6 +23,7 @@ export const NODE_TYPES = [
   Node_Type.BUTTON,
   Node_Type.COLLAPSIBLE_LIST,
   Node_Type.TABLE,
+  Node_Type.EMBED,
 ];
 
 export const NODE_MAP = Object.fromEntries(NODE_TYPES.map(v => [v, v]));
