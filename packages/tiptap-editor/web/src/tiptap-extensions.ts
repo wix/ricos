@@ -15,26 +15,41 @@ import BulletList from '@tiptap/extension-bullet-list';
 import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
+import Link from '@tiptap/extension-link';
+import { createDivider } from './extensions/extension-divider';
+import { createImage } from './extensions/extension-image';
+import { createBold } from './extensions/extension-bold';
+import { LinkData, HeadingData } from 'ricos-schema';
+import { MarkConfig, NodeConfig } from '@tiptap/react';
+
+const extendedAttrs = (attrs): Partial<NodeConfig & MarkConfig> => ({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      ...attrs,
+    };
+  },
+});
+
+const withKey = extendedAttrs({ key: '' });
 
 export const tiptapExtensions = [
-  Blockquote,
+  Blockquote.extend(withKey),
   Underline,
-  BulletList,
-  CodeBlock,
-  Document.extend({
-    addAttributes() {
-      return {
-        metadata: {},
-      };
-    },
-  }),
-  Heading,
+  BulletList.extend(withKey),
+  CodeBlock.extend(withKey),
+  Document.extend(extendedAttrs({ metadata: {} })),
+  Heading.extend(withKey).extend(extendedAttrs(HeadingData.fromJSON({}))),
   History,
   Italic,
-  ListItem,
-  OrderedList,
-  Paragraph,
+  ListItem.extend(withKey),
+  OrderedList.extend(withKey),
+  Paragraph.extend(withKey),
   Text,
+  Link.extend(extendedAttrs(LinkData.fromJSON({}))),
+  createDivider().extend(withKey),
+  createBold(),
+  createImage().extend(withKey),
   // Dropcursor,
   // Gapcursor,
 ];
