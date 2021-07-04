@@ -89,7 +89,7 @@ const createBaseComponent = ({
           // Required in order to wait for images to load their source
           setTimeout(() => this.scrollIntoViewIfNeeded(blockKey, threshold + 1), 100);
         } else if (focusedBlock === blockKey && !this.isInViewport(boundingRect)) {
-          this.containerRef.current.scrollIntoView();
+          setTimeout(() => this.containerRef.current.scrollIntoView(), 100);
         }
       }
     };

@@ -68,7 +68,7 @@ class FileUploadViewer extends PureComponent {
   };
 
   renderContainerWithoutLink = () => {
-    const { componentData, tempDataPlaceHolder } = this.props;
+    const { tempDataPlaceHolder, componentData } = this.props;
     const { name, type } = tempDataPlaceHolder ? tempDataPlaceHolder : componentData;
     return (
       <div

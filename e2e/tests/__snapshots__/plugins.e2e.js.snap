@@ -410,6 +410,7 @@ exports[`plugins > full screen > gallery full screen > expand gallery image on f
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -569,6 +570,7 @@ exports[`plugins > gallery > render gallery plugin #0`] =
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -711,6 +713,7 @@ exports[`plugins > gallery > organize media > allow to manipulate the media item
         },
         "items": [],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -853,6 +856,7 @@ exports[`plugins > gallery > media settings > allow to update media content #0`]
         },
         "items": [],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -2644,6 +2648,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -5477,6 +5482,7 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowHover": true,
           "arrowsSize": 23,
           "cubeType": "fill",
@@ -7187,12 +7193,10 @@ exports[`plugins > collapsible list > should insert image in collapsible list #0
                   "data": {
                     "config": {
                       "alignment": "center",
-                      "disableExpand": false,
                       "showDescription": true,
                       "showTitle": true,
                       "size": "content"
                     },
-                    "disableExpand": false,
                     "src": {
                       "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
                       "height": 1000,

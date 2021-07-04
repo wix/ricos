@@ -20,7 +20,7 @@ const fileReader = file => {
 };
 
 const handleUploadFinished = (
-  props,
+  type,
   getComponentData,
   data,
   error,
@@ -28,10 +28,6 @@ const handleUploadFinished = (
   itemIndex,
   fileType
 ) => {
-  const { commonPubsub, type } = props;
-  if (error) {
-    commonPubsub.set('onMediaUploadError', error);
-  }
   return onUploadFinished({
     data: data && dataBuilder[type]?.({ data, error }, getComponentData(), fileType, itemIndex),
     error,
@@ -48,41 +44,31 @@ const handleUploadStart = (
 ) => {
   if (file) {
     fileReader(file).then(url => {
-      const { type } = props;
+      const { type, commonPubsub } = props;
       const tempData = tempDataBuilder[type]?.({
         url,
         file,
       });
       onLocalLoad?.(tempData);
       const handleFileUpload = uploadFunctionGetter[type](props);
-      if (handleFileUpload) {
-        const {
-          helpers: { onMediaUploadStart, onMediaUploadEnd },
-        } = props;
-        const uploadBIData = onMediaUploadStart(type, file.size, file.type);
-        const fileType = getGalleryFileType(file.type);
-        handleFileUpload(file, ({ data, error }) => {
-          onMediaUploadEnd(uploadBIData, error);
-          handleUploadFinished(
-            props,
-            getComponentData,
-            data,
-            error,
-            onUploadFinished,
-            itemPos,
-            fileType
-          );
-        });
-      } else {
+      const {
+        helpers: { onMediaUploadStart, onMediaUploadEnd },
+      } = props;
+      const uploadBIData = onMediaUploadStart(type, file.size, file.type);
+      const fileType = getGalleryFileType(file.type);
+      handleFileUpload(file, ({ data, error }) => {
+        onMediaUploadEnd(uploadBIData, error);
+        error && commonPubsub.set('onMediaUploadError', error);
         handleUploadFinished(
-          props,
+          type,
           getComponentData,
-          undefined,
-          { msg: 'Missing upload function' },
+          data,
+          error,
           onUploadFinished,
-          type
+          itemPos,
+          fileType
         );
-      }
+      });
     });
   }
 };
@@ -191,10 +177,11 @@ const createBaseMediaPlugin = PluginComponent => {
     };
 
     handleFilesAdded = ({ data, error }) => {
+      const { type } = this.props;
       if (data instanceof Array) {
         data.forEach((item, index) => {
           handleUploadFinished(
-            this.props,
+            type,
             this.getComponentData,
             item,
             (error instanceof Array && error[index]) || error,
@@ -202,7 +189,7 @@ const createBaseMediaPlugin = PluginComponent => {
           );
         });
       } else {
-        handleUploadFinished(this.props, this.getComponentData, data, error, this.onUploadFinished);
+        handleUploadFinished(type, this.getComponentData, data, error, this.onUploadFinished);
       }
     };
 

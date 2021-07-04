@@ -435,8 +435,10 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
-    const { metadata = {} } = componentData;
-
+    let { metadata } = componentData;
+    if (!metadata) {
+      metadata = {};
+    }
     const itemClassName = classNames(this.styles.imageWrapper, className, {
       [this.styles.pointer]: this.hasExpand() as boolean,
     });

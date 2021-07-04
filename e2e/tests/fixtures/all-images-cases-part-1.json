@@ -1585,8 +1585,7 @@
           "alignment": "center",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1605,8 +1604,7 @@
           "alignment": "left",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1625,8 +1623,7 @@
           "alignment": "right",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1645,8 +1642,7 @@
           "alignment": "center",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1665,8 +1661,7 @@
           "alignment": "left",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1685,8 +1680,7 @@
           "alignment": "right",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1705,8 +1699,7 @@
           "alignment": "center",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1725,8 +1718,7 @@
           "alignment": "left",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1745,8 +1737,7 @@
           "alignment": "right",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1765,8 +1756,7 @@
           "alignment": "center",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1785,8 +1775,7 @@
           "alignment": "left",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1805,8 +1794,7 @@
           "alignment": "right",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1825,8 +1813,7 @@
           "alignment": "center",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1845,8 +1832,7 @@
           "alignment": "left",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1865,8 +1851,7 @@
           "alignment": "right",
           "size": "original",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1885,8 +1870,7 @@
           "alignment": "center",
           "size": "small",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1905,8 +1889,7 @@
           "alignment": "left",
           "size": "small",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -1925,8 +1908,7 @@
           "alignment": "right",
           "size": "small",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",

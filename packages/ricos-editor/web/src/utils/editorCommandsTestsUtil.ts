@@ -241,7 +241,6 @@ const gallery = {
   expectedData1: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       layout: 'small',
       size: 'content',
       spacing: 0,
@@ -276,6 +275,7 @@ const gallery = {
       },
     ],
     styles: {
+      allowContextMenu: true,
       allowDownload: false,
       allowHover: true,
       allowSocial: false,
@@ -307,7 +307,6 @@ const gallery = {
   expectedData2: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       layout: 'small',
       size: 'content',
       spacing: 0,
@@ -324,6 +323,7 @@ const gallery = {
       },
     ],
     styles: {
+      allowContextMenu: true,
       allowDownload: false,
       allowHover: true,
       allowSocial: false,
@@ -454,7 +454,6 @@ const image = {
   expectedData1: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       showDescription: true,
       showTitle: true,
       size: 'content',
@@ -469,7 +468,6 @@ const image = {
   expectedData2: {
     config: {
       alignment: 'left',
-      disableExpand: false,
       showDescription: true,
       showTitle: true,
       size: 'content',

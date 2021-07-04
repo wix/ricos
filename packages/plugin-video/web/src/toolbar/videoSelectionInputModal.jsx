@@ -85,7 +85,7 @@ export default class VideoSelectionInputModal extends Component {
   };
 
   addVideoComponent = ({ data, error }, isCustomVideo = false) => {
-    handleUploadFinished(this.props, this.getComponentData, data, error, ({ data, error }) =>
+    handleUploadFinished(VIDEO_TYPE, this.getComponentData, data, error, ({ data, error }) =>
       this.onConfirm({ ...data, error, isCustomVideo })
     );
   };
