@@ -72,6 +72,7 @@ export const TABLE_TYPE = 'wix-rich-content-plugin-table';
 export const ANCHOR_TYPE = 'ANCHOR';
 export const PREVIEW = 'PREVIEW';
 export const UNSUPPORTED_BLOCKS_TYPE = 'unsupported-blocks';
+export const EMBED_TYPE = 'EMBED';
 
 // ricos plugin types
 export const RICOS_COLLAPSIBLE_LIST_TYPE = 'ricos-collapsible-list';
