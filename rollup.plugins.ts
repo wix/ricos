@@ -78,7 +78,7 @@ const copyAfterBundleWritten = (): Plugin => {
 const babel = (): Plugin => {
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
-    include: ['src/**', 'lib/**'],
+    include: ['src/**', 'lib/**', 'node_modules/@tiptap'],
     babelHelpers: 'runtime',
   });
 };
@@ -104,6 +104,7 @@ const typescript = (): Plugin => {
         'statics/**/*.scss',
         'package.json',
         'lib',
+        'node_modules/@tiptap',
       ].map(path => absPath(path)),
       exclude: ['node_modules', '**/*.spec.*'].map(path => absPath(path)),
     },
