@@ -12,6 +12,9 @@ import {
   InlineStyle,
   DecorationsDataMap,
   TextAlignment,
+  ColorType,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
 } from 'wix-rich-content-common';
 import {
   BoldIcon,
@@ -70,6 +73,7 @@ type buttonsFullDataType = {
   onDelete?: string;
   saveSelection?: boolean;
   loadSelection?: boolean;
+  colorPickerHeaderKey?: string;
   unstyled?: { icon: any; action: string };
   'header-two'?: { icon: any; action: string };
   'header-three'?: { icon: any; action: string };
@@ -129,18 +133,24 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   TEXT_COLOR: {
     plugin: 'wix-rich-content-text-color',
     icon: TextColorIcon,
-    dataHook: 'wix-rich-content-text-color-button',
+    dataHook: 'TextColorButton',
     tooltip: 'Text color',
     action: 'TEXT_COLOR',
-    type: 'DROPDOWN',
+    type: 'color-picker',
+    saveSelection: true,
+    loadSelection: true,
+    colorPickerHeaderKey: 'Color_Picker_TextColorButton_Header',
   },
   TEXT_HIGHLIGHT: {
     plugin: 'wix-rich-content-text-highlight',
     icon: TextHighlightIcon,
-    dataHook: 'wix-rich-content-text-highlight-button',
+    dataHook: 'TextHighlightButton',
     tooltip: 'Highlight color',
     action: 'TEXT_HIGHLIGHT',
-    type: 'DROPDOWN',
+    type: 'color-picker',
+    saveSelection: true,
+    loadSelection: true,
+    colorPickerHeaderKey: 'Color_Picker_TextHighlightButton_Header',
   },
   Title: {
     unstyled: {
@@ -209,28 +219,28 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   DECREASE_INDENT: {
     plugin: 'wix-rich-content-plugin-indent',
     icon: decreaseIndentPluginIcon,
-    dataHook: 'DECREASE_INDENT',
+    dataHook: 'decreaseIndentButton',
     tooltip: 'Decrease indent',
     type: 'button',
   },
   INCREASE_INDENT: {
     plugin: 'wix-rich-content-plugin-indent',
     icon: increaseIndentPluginIcon,
-    dataHook: 'INCREASE_INDENT',
+    dataHook: 'increaseIndentButton',
     tooltip: 'Increase indent',
     type: 'button',
   },
   SPOILER: {
     plugin: 'wix-rich-content-plugin-spoiler',
     icon: SpoilerButtonIcon,
-    dataHook: 'spoilerButton',
+    dataHook: 'textSpoilerButton',
     tooltip: 'Spoiler',
     type: 'button',
   },
   LINE_SPACING: {
     plugin: 'line-spacing',
     icon: LineSpacingIcon,
-    dataHook: 'LINE_SPACING',
+    dataHook: 'LineSpacingButton',
     tooltip: 'Line spacing',
     type: 'modal',
     modal: props => <Panel {...props} />,
@@ -244,7 +254,7 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   LINK: {
     plugin: 'LINK',
     icon: LinkIcon,
-    dataHook: 'LINK',
+    dataHook: 'LinkButton',
     tooltip: 'Link',
     type: 'modal',
     modal: props => <LinkModal {...props} />,
@@ -257,7 +267,7 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   CODE_BLOCK: {
     plugin: 'code-block',
     icon: CodeBlockIcon,
-    dataHook: 'CODE_BLOCK',
+    dataHook: 'TextCodeBlockButton',
     tooltip: 'Code snippet',
     type: 'button',
   },
@@ -292,12 +302,18 @@ const setTextAlignment: Record<string, TextAlignment> = {
   Justify: 'justify',
 };
 
+const colorTypes: Record<string, ColorType> = {
+  TEXT_COLOR: RICOS_TEXT_COLOR_TYPE,
+  TEXT_HIGHLIGHT: RICOS_TEXT_HIGHLIGHT_TYPE,
+};
+
 export const createButtonsList = (
   formattingButtonsKeys,
   editorCommands: editorCommands,
   t,
   plugins,
-  linkPanelData
+  linkPanelData,
+  colorPickerData
 ) => {
   const buttonsList = [];
   formattingButtonsKeys.forEach((buttonKey, index) => {
@@ -322,9 +338,51 @@ export const createButtonsList = (
     handleButtonSaveState(buttonsList, index, editorCommands);
     handleButtonSaveSelection(buttonsList, index, editorCommands);
     handleButtonLoadSelection(buttonsList, index, editorCommands);
+    handleButtonColorPicker(buttonsList, index, editorCommands, colorPickerData);
+    handleButtonPlugin(buttonsList, index);
   });
   const filteredButtonsList = filterButtonsByPlugins(buttonsList, plugins);
   return filteredButtonsList;
+};
+
+const handleButtonPlugin = (buttonsList, index) => {
+  if (buttonsFullData[buttonsList[index].name].plugin) {
+    buttonsList[index].plugin = buttonsFullData[buttonsList[index].name].plugin;
+  }
+};
+
+const handleButtonColorPicker = (
+  buttonsList,
+  index,
+  editorCommands: editorCommands,
+  colorPickerData
+) => {
+  if (buttonsFullData[buttonsList[index].name].type === 'color-picker') {
+    const buttonName = buttonsList[index].name;
+    buttonsList[index].getCurrentColor = () => editorCommands.getColor(colorTypes[buttonName]);
+    buttonsList[index].onColorAdded = color => colorPickerData[buttonName]?.onColorAdded?.(color);
+    buttonsList[index].onChange = color => {
+      editorCommands.insertDecoration(colorTypes[buttonName], { color });
+    };
+    buttonsList[index].settings = colorPickerData[buttonName] || {};
+    buttonsList[index].defaultPalette = Object.freeze([
+      '#ff0000',
+      '#ffffff',
+      '#303030',
+      '#3a54b4',
+      '#bfad80',
+      '#dddddd',
+    ]);
+    buttonsList[index].getUserColors = () => colorPickerData[buttonName]?.getUserColors?.();
+    buttonsList[index].getDefaultColors = () =>
+      colorPickerData[buttonName]?.getDefaultColors?.() ||
+      Object.freeze(['#ff0000', '#ffffff', '#303030', '#3a54b4', '#bfad80', '#dddddd']);
+    buttonsList[index].onResetColor = () => {
+      //TODO: editorCommands function to remove the style from the contentState
+      editorCommands.insertDecoration(colorTypes[buttonName], { color: '#0000ff' });
+    };
+    buttonsList[index].colorPickerHeaderKey = buttonsFullData[buttonName].colorPickerHeaderKey;
+  }
 };
 
 const filterButtonsByPlugins = (buttonsList, plugins) => {
@@ -501,6 +559,9 @@ const handleButtonIsActive = (buttonsList, index, editorCommands: editorCommands
       editorCommands.getTextAlignment() === setTextAlignment[buttonName];
   } else if (buttonName === 'LINK') {
     buttonsList[index].isActive = () => editorCommands.hasLinkInSelection();
+  } else if (Object.keys(colorTypes).includes(buttonName)) {
+    buttonsList[index].isActive = () =>
+      editorCommands.getColor(colorTypes[buttonName]) !== undefined;
   } else {
     buttonsList[index].isActive = () => false;
   }

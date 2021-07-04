@@ -303,6 +303,14 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
       const formattingToolbarButtons = get(allFormattingToolbarButtons, deviceName, []);
       const plugins: string[] = this.getPluginsKey();
+      const colorPickerData = {
+        TEXT_COLOR: this.props.plugins?.find(
+          plugin => plugin.type === 'wix-rich-content-text-color'
+        )?.config,
+        TEXT_HIGHLIGHT: this.props.plugins?.find(
+          plugin => plugin.type === 'wix-rich-content-text-highlight'
+        )?.config,
+      };
       const linkPanelData = {
         linkTypes: this.props.plugins?.find(plugin => plugin.type === 'LINK')?.config.linkTypes,
         uiSettings: { linkPanel: this.props.linkPanelSettings },
@@ -321,6 +329,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           formattingToolbarButtonsKeys={formattingToolbarButtons}
           plugins={plugins}
           linkPanelData={linkPanelData}
+          colorPickerData={colorPickerData}
           helpers={helpers}
         />
       );

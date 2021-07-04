@@ -7,15 +7,19 @@ import ClickOutside from 'react-click-outsider';
 import styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton';
 import { ColorPicker } from 'wix-rich-content-plugin-commons';
-import { RichContentTheme, TranslationFunction } from 'wix-rich-content-common';
+import { RichContentTheme, TranslationFunction, Helpers } from 'wix-rich-content-common';
 
 type dropDownPropsType = {
   tooltip: string;
   isActive: () => boolean;
   getIcon: () => any;
+  loadSelection?: () => void;
+  saveSelection?: () => void;
+  colorPickerHeaderKey: string;
 };
 
 interface ColorPickerButtonProps {
+  helpers?: Helpers;
   theme?: RichContentTheme;
   t: TranslationFunction;
   dropDownProps: dropDownPropsType;
@@ -30,6 +34,7 @@ interface ColorPickerButtonProps {
   nestedMenu?: boolean;
   afterClick?: () => void;
   getDefaultColors: () => string;
+  setKeepOpen?: (boolean) => void;
 }
 
 interface State {
@@ -43,25 +48,48 @@ class ColorPickerButton extends Component<ColorPickerButtonProps, State> {
     super(props);
     this.state = {
       isModalOpen: false,
-      currentColor: props.getCurrentColor(),
+      currentColor: props.getCurrentColor() || 'unset',
       userColors: props?.getUserColors?.() || [],
     };
   }
 
   componentWillReceiveProps = nextProps => {
     const currentColor = this.state.currentColor;
-    const nextCurrentColor = nextProps.getCurrentColor();
+    const nextCurrentColor = nextProps.getCurrentColor() || 'unset';
     if (nextCurrentColor !== currentColor) {
       this.setState({ currentColor: nextCurrentColor });
     }
   };
 
   toggleModal = () => {
-    this.setState({ isModalOpen: !this.state.isModalOpen });
+    const { isModalOpen } = this.state;
+    const {
+      dropDownProps: { saveSelection },
+      setKeepOpen,
+    } = this.props;
+    this.setState({ isModalOpen: !isModalOpen });
+    if (!isModalOpen) {
+      saveSelection?.();
+      setKeepOpen?.(true);
+    } else {
+      const {
+        dropDownProps: { loadSelection },
+      } = this.props;
+      setKeepOpen?.(false);
+      loadSelection?.();
+    }
   };
 
   closeModal = () => {
-    this.setState({ isModalOpen: false });
+    if (this.state.isModalOpen) {
+      const {
+        setKeepOpen,
+        dropDownProps: { loadSelection },
+      } = this.props;
+      this.setState({ isModalOpen: false });
+      setKeepOpen?.(false);
+      loadSelection?.();
+    }
   };
 
   onColorAdded = color => {
@@ -100,7 +128,7 @@ class ColorPickerButton extends Component<ColorPickerButtonProps, State> {
 
   render() {
     const { settings, t, isMobile, dropDownProps, theme, nestedMenu } = this.props;
-    const { isActive, getIcon, tooltip } = dropDownProps;
+    const { isActive, getIcon, tooltip, colorPickerHeaderKey } = dropDownProps;
     const { currentColor, userColors } = this.state;
     const { isModalOpen } = this.state;
     const { colorScheme } = settings;
@@ -116,10 +144,15 @@ class ColorPickerButton extends Component<ColorPickerButtonProps, State> {
           isMobile={isMobile}
           icon={getIcon()}
           theme={theme}
+          helpers={this.props.helpers}
         />
         {isModalOpen && (
           <div
-            className={classNames(styles.modal, nestedMenu && styles.withoutTop)}
+            className={classNames(
+              styles.modal,
+              nestedMenu && styles.withoutTop,
+              isMobile && styles.colorPickerMobile
+            )}
             data-id={'color-picker-modal'}
           >
             <ColorPicker
@@ -140,17 +173,32 @@ class ColorPickerButton extends Component<ColorPickerButtonProps, State> {
                 renderResetColorButton,
                 mergedStyles,
               }) => (
-                <div className={mergedStyles.colorPicker_palette}>
-                  <div className={mergedStyles.colorPicker_buttons_container}>
-                    {renderPalette()}
-                    {renderUserColors()}
+                <>
+                  {isMobile && (
+                    <>
+                      <div className={mergedStyles.colorPicker_header}>
+                        {t(colorPickerHeaderKey)}
+                      </div>
+                      <div className={mergedStyles.colorPicker_separator} />
+                    </>
+                  )}
+                  <div className={mergedStyles.colorPicker_palette}>
+                    <div className={mergedStyles.colorPicker_buttons_container}>
+                      {renderPalette()}
+                      {renderUserColors()}
+                      {isMobile && renderAddColorButton()}
+                    </div>
+                    {!isMobile && (
+                      <>
+                        <hr className={mergedStyles.colorPicker_separator} />
+                        <div className={mergedStyles.colorPicker_bottom_container}>
+                          {renderResetColorButton()}
+                          {renderAddColorButton()}
+                        </div>
+                      </>
+                    )}
                   </div>
-                  <hr className={mergedStyles.colorPicker_separator} />
-                  <div className={mergedStyles.colorPicker_bottom_container}>
-                    {renderResetColorButton()}
-                    {renderAddColorButton()}
-                  </div>
-                </div>
+                </>
               )}
             </ColorPicker>
           </div>
