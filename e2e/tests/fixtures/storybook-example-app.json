@@ -417,7 +417,6 @@
           "size": "small",
           "alignment": "right",
           "showTitle": true,
-          "disableExpand": false,
           "showDescription": true,
           "link": {
             "url": "www.wix.com",
@@ -527,8 +526,7 @@
           "size": "small",
           "layout": "small",
           "spacing": 0,
-          "alignment": "left",
-          "disableExpand": false
+          "alignment": "left"
         },
         "styles": {
           "oneRow": false,

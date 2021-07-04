@@ -531,7 +531,6 @@ exports[`insert plugins tests > side toolbar > should insert image #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -647,7 +646,6 @@ exports[`insert plugins tests > side toolbar > should upload native image #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -1199,7 +1197,6 @@ exports[`insert plugins tests > footer toolbar > should insert image #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -1315,7 +1312,6 @@ exports[`insert plugins tests > footer toolbar > should upload native image #0`]
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -1376,7 +1372,6 @@ exports[`insert plugins tests > side toolbar > should insert gallery #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0
@@ -1488,7 +1483,6 @@ exports[`insert plugins tests > side toolbar > should upload native gallery #0`]
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0
@@ -1572,7 +1566,6 @@ exports[`insert plugins tests > footer toolbar > should insert gallery #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0
@@ -1684,7 +1677,6 @@ exports[`insert plugins tests > footer toolbar > should upload native gallery #0
       "data": {
         "config": {
           "alignment": "center",
-          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0

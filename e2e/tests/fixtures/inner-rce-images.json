@@ -157,7 +157,6 @@
                             "size": "inline",
                             "showTitle": true,
                             "showDescription": true,
-                            "disableExpand": false,
                             "width": 156
                           },
                           "src": {
@@ -263,7 +262,6 @@
                       "size": "inline",
                       "showTitle": true,
                       "showDescription": true,
-                      "disableExpand": false,
                       "width": 301
                     },
                     "src": {

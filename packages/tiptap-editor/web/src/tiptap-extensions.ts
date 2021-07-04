@@ -7,7 +7,6 @@ import Document from '@tiptap/extension-document';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import History from '@tiptap/extension-history';
-import Bold from '@tiptap/extension-bold';
 import Italic from '@tiptap/extension-italic';
 import CodeBlock from '@tiptap/extension-code-block';
 import Heading from '@tiptap/extension-heading';
@@ -18,6 +17,8 @@ import ListItem from '@tiptap/extension-list-item';
 import Paragraph from './extensions/extension-paragraph';
 import Link from '@tiptap/extension-link';
 import { createDivider } from './extensions/extension-divider';
+import { createImage } from './extensions/extension-image';
+import { createBold } from './extensions/extension-bold';
 import { LinkData, HeadingData } from 'ricos-schema';
 import { MarkConfig, NodeConfig } from '@tiptap/react';
 
@@ -34,7 +35,6 @@ const withKey = extendedAttrs({ key: '' });
 
 export const tiptapExtensions = [
   Blockquote.extend(withKey),
-  Bold,
   Underline,
   BulletList.extend(withKey),
   CodeBlock.extend(withKey),
@@ -48,6 +48,8 @@ export const tiptapExtensions = [
   Text,
   Link.extend(extendedAttrs(LinkData.fromJSON({}))),
   createDivider().extend(withKey),
+  createBold(),
+  createImage().extend(withKey),
   // Dropcursor,
   // Gapcursor,
 ];

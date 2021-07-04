@@ -2517,7 +2517,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand image on f
                         "data": {
                           "config": {
                             "alignment": "center",
-                            "disableExpand": false,
                             "showDescription": true,
                             "showTitle": true,
                             "size": "inline",
@@ -2615,7 +2614,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand image on f
                         "data": {
                           "config": {
                             "alignment": "center",
-                            "disableExpand": false,
                             "showDescription": true,
                             "showTitle": true,
                             "size": "inline",
@@ -2698,7 +2696,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand image on f
                   "data": {
                     "config": {
                       "alignment": "center",
-                      "disableExpand": false,
                       "showDescription": true,
                       "showTitle": true,
                       "size": "inline",
@@ -2902,7 +2899,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
                         "data": {
                           "config": {
                             "alignment": "center",
-                            "disableExpand": false,
                             "showDescription": true,
                             "showTitle": true,
                             "size": "inline",
@@ -2985,7 +2981,6 @@ exports[`plugins > full screen > innerRCE images full screen > expand inner-rce 
                   "data": {
                     "config": {
                       "alignment": "center",
-                      "disableExpand": false,
                       "showDescription": true,
                       "showTitle": true,
                       "size": "inline",

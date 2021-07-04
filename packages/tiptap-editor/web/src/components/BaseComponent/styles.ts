@@ -32,3 +32,10 @@ export const getTextWrapClassName = (styles, theme, textWrap) => {
   const key = `textWrap${upperFirst(camelCase(textWrap))}`;
   return classNames(styles[key], theme[key]);
 };
+
+export const getPluginContainerClassName = (styles, theme, isMobile) => {
+  return classNames(styles.pluginContainer, theme.pluginContainer, theme.pluginContainerWrapper, {
+    [styles.pluginContainerMobile]: isMobile,
+    [theme.pluginContainerMobile]: isMobile,
+  });
+};

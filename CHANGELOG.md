@@ -20,6 +20,20 @@
 </details>
 <hr/>
 
+## 8.46.3 (July 3, 2021)
+
+### :nail_care
+
+- `gallery/image`
+- [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
+
+## 8.46.0 (Jun 29, 2021)
+
+### :bug: Bug Fix
+
+- `spoiler`
+  - [#2657](https://github.com/wix-incubator/rich-content/pull/2657) remove spoiler toggle from media settings modal
+
 ## 8.45.2 (Jun 29, 2021)
 
 ### :nail_care: Polish
