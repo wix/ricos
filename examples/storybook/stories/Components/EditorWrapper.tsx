@@ -199,6 +199,7 @@ interface Props {
   onFocus?: RichContentEditorProps['onFocus'];
   theme?: RicosTheme;
   rcProps?: Record<string, any>;
+  experiments?: Record<string, any>;
 }
 
 class EditorWrapper extends React.Component<Props> {
@@ -225,8 +226,10 @@ class EditorWrapper extends React.Component<Props> {
       onBlur,
       onFocus,
       rcProps = {},
+      experiments,
     } = this.props;
 
+    console.log({ rcProps });
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
@@ -238,6 +241,8 @@ class EditorWrapper extends React.Component<Props> {
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
+        //@ts-ignore
+        experiments={experiments}
         _rcProps={rcProps}
       >
         <RichContentEditor
