@@ -43,9 +43,6 @@
     "wix-rich-content-plugin-commons": "8.46.4",
     "wix-rich-content-ui-components": "8.46.4"
   },
-  "peerDependencies": {
-    "@loadable/component": "^5.14.1"
-  },
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
