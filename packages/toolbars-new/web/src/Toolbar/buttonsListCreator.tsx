@@ -15,6 +15,7 @@ import {
   ColorType,
   RICOS_TEXT_COLOR_TYPE,
   RICOS_TEXT_HIGHLIGHT_TYPE,
+  EditorCommands,
 } from 'wix-rich-content-common';
 import {
   BoldIcon,
@@ -43,7 +44,7 @@ import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
 
-type editorCommands = any; //TODO: editorCommands type
+type editorCommands = EditorCommands;
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',
@@ -399,7 +400,7 @@ const handleButtonOnDelete = (buttonsList, index, editorCommands: editorCommands
     const buttonName = buttonsList[index].name;
     if (buttonName === 'LINK') {
       buttonsList[index].onDelete = () => {
-        editorCommands.deleteDecoration(decorationButtons[buttonName]);
+        editorCommands.deleteDecoration(decorationButtons[buttonName] as typeof RICOS_LINK_TYPE);
         setTimeout(() => editorCommands.loadSelectionState());
       };
     }

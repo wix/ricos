@@ -18,6 +18,7 @@ import {
   Helpers,
   ToolbarType,
   Version,
+  EditorCommands,
 } from 'wix-rich-content-common';
 
 type formattingToolbarButtonsKeysType =
@@ -35,7 +36,7 @@ interface ToolbarProps {
   buttons: unknown[];
   vertical?: boolean;
   formattingToolbarButtonsKeys?: formattingToolbarButtonsKeysType;
-  editorCommands: any; //TODO: editorCommands type
+  editorCommands: EditorCommands;
   plugins?: string[];
   setKeepOpen?: (boolean) => void;
   afterClick?: () => void;

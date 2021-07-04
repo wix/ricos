@@ -8,6 +8,7 @@ import {
   RichContentTheme,
   TranslationFunction,
   onToolbarButtonClickArgs,
+  EditorCommands,
 } from 'wix-rich-content-common';
 
 type dropDownPropsType = {
@@ -22,7 +23,7 @@ type dropDownPropsType = {
 };
 
 interface NestedMenuProps {
-  editorCommands: any; //TODO: editorCommands type
+  editorCommands: EditorCommands;
   theme?: RichContentTheme;
   dropDownProps: dropDownPropsType;
   onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
