@@ -50,7 +50,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
     [Node_Type.POLL]: convertPollData,
-    [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
+    [Node_Type.OEMBED]: convertOEmbedData,
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
@@ -101,25 +101,18 @@ const convertContainerData = (
   );
   if (nodeType === Node_Type.IMAGE && width?.custom) {
     data.config.size = 'inline';
-  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+  } else if (nodeType === Node_Type.MAP && width?.custom) {
     data.config.size = 'content';
   }
   delete data.containerData;
 };
 
 const convertVideoData = (data: VideoData & { src; metadata }) => {
-  const videoSrc = data.video?.src;
-  if (videoSrc?.url) {
-    data.src = videoSrc.url;
-    const { src, width, height } = data.thumbnail || {};
-    data.metadata = { thumbnail_url: src?.url, width, height };
-  } else if (videoSrc?.custom) {
-    const { src, width, height } = data.thumbnail || {};
-    data.src = {
-      pathname: videoSrc.custom,
-      thumbnail: { pathname: src?.custom, width, height },
-    };
-  }
+  const { src, width, height } = data.thumbnail || {};
+  data.src = {
+    pathname: data.video?.src?.custom,
+    thumbnail: { pathname: src?.custom, width, height },
+  };
   delete data.video;
   delete data.thumbnail;
 };
@@ -165,8 +158,76 @@ const convertPollData = data => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toLowerCase());
 };
 
+const convertOEmbedData = data => {
+  switch (data.embedData.type) {
+    case 'video': {
+      const {
+        thumbnailUrl,
+        providerName,
+        thumbnailHeight,
+        thumbnailWidth,
+        authorName,
+        providerUrl,
+        authorUrl,
+        videoUrl,
+      } = data.embedData;
+      data.metadata = {
+        ...data.embedData,
+        thumbnail_url: thumbnailUrl,
+        provider_name: providerName,
+        thumbnail_height: thumbnailHeight,
+        thumbnail_width: thumbnailWidth,
+        author_name: authorName,
+        provider_url: providerUrl,
+        author_url: authorUrl,
+        video_url: videoUrl,
+      };
+      delete data.embedData;
+      break;
+    }
+    case 'rich': {
+      data.config = {
+        ...(data?.config || {}),
+        alignment: 'center',
+        size: 'content',
+        link: { url: data.src, target: '_blank', rel: 'noopener' },
+      };
+      const { html, thumbnailUrl, title, description } = data.embedData;
+      data.html = html;
+      thumbnailUrl && (data.thumbnail_url = thumbnailUrl);
+      title && (data.title = title);
+      description && (data.description = description);
+      delete data.embedData;
+      delete data.src;
+      break;
+    }
+    case 'product': {
+      convertVerticalEmbedData(data);
+      break;
+    }
+    case 'event': {
+      convertVerticalEmbedData(data);
+      break;
+    }
+    case 'booking': {
+      convertVerticalEmbedData(data);
+      break;
+    }
+    default:
+      break;
+  }
+};
+
 const convertVerticalEmbedData = data => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.selectedProduct = {
+    id: data.src,
+    name: data.embedData.title,
+    imageSrc: data.embedData.thumbnailUrl,
+    html: data.embedData.html,
+  };
+  data.type = data.embedData.type;
+  delete data.src;
+  delete data.embedData;
 };
 
 const convertLinkPreviewData = data => {

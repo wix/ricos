@@ -19,10 +19,10 @@ export const NODE_TYPES = [
   Node_Type.LINK_PREVIEW,
   Node_Type.MAP,
   Node_Type.POLL,
-  Node_Type.VERTICAL_EMBED,
   Node_Type.BUTTON,
   Node_Type.COLLAPSIBLE_LIST,
   Node_Type.TABLE,
+  Node_Type.OEMBED,
 ];
 
 export const NODE_MAP = Object.fromEntries(NODE_TYPES.map(v => [v, v]));

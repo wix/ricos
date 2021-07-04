@@ -94,6 +94,27 @@
           "key": "eisf3",
           "nodes": [],
           "textData": {
+            "text": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+            "decorations": []
+          }
+        }
+      ],
+      "paragraphData": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "PARAGRAPH",
+      "key": "docd3",
+      "nodes": [
+        {
+          "type": "TEXT",
+          "key": "eisf3",
+          "nodes": [],
+          "textData": {
             "text": "https://www.youtube.com/watch?v=CoJ23XNHgG0",
             "decorations": []
           }
