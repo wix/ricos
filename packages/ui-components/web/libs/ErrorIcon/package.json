@@ -1,5 +1,0 @@
-{
-    "main": "../../dist/lib/ErrorIcon.cjs.js",
-    "module": "../../dist/lib/ErrorIcon.js",
-    "types": "../../dist/lib/ErrorIcon.d.ts"
-}

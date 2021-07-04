@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, debounce } from 'lodash';
 import { mergeStyles, validate } from 'wix-rich-content-common';
-import ErrorIcon from 'wix-rich-content-ui-components/lib/ErrorIcon';
-import { LoaderIcon, getIcon, DownloadIcon, ReadyIcon } from './icons';
+import { LoaderIcon, getIcon, DownloadIcon, ReadyIcon, ErrorIcon } from './icons';
 // eslint-disable-next-line max-len
 import pluginFileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
