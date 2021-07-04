@@ -29,7 +29,7 @@ export type Rules = {
 };
 
 export interface Context {
-  node: Node;
+  nodes: Node[];
   style: NodeStyle;
   textData: TextData[];
 }

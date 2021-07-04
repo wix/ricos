@@ -1,16 +1,12 @@
-import { ChildNode } from 'parse5';
-import { Rule, Context, Rules } from './models';
-import { createParagraphNode } from '../../../nodeUtils';
+import { Context, Rules } from './models';
 
 const emptyContext: Context = {
-  node: createParagraphNode(),
+  nodes: [],
   style: {},
   textData: [],
 };
 
 const emptyRule = (_, context: Context) => context;
-
-const textToParagraph = (childNode: ChildNode, context) => {};
 
 export const rules: Rules = {
   '#text': emptyRule,

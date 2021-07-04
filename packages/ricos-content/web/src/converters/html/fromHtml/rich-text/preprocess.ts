@@ -1,6 +1,6 @@
 import { flow } from 'fp-ts/function';
 
-const replace = (replaced: RegEx | string, by: string) => (str: string): string =>
+const replace = (replaced: RegExp | string, by: string) => (str: string): string =>
   str.replace(replaced, by);
 
 export const preprocess = flow(
