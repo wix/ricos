@@ -13,6 +13,7 @@ import {
   VERTICAL_EMBED_TYPE,
   VIDEO_TYPE,
   MAP_TYPE,
+  EMBED_TYPE,
 } from '../../../consts';
 import {
   PluginContainerData_Spoiler,
@@ -30,7 +31,7 @@ import {
   VideoComponentData,
 } from '../../../types';
 
-export const convertBlockDataToRicos = (blockType: string, data) => {
+export const convertBlockDataToRicos = (type: string, data) => {
   const newData = cloneDeep(data);
   const converters = {
     [VIDEO_TYPE]: convertVideoData,
@@ -45,7 +46,12 @@ export const convertBlockDataToRicos = (blockType: string, data) => {
     [ACTION_BUTTON_TYPE]: convertButtonData,
     [HTML_TYPE]: convertHTMLData,
     [MAP_TYPE]: convertMapData,
+    [EMBED_TYPE]: convertEmbed,
   };
+  let blockType = type;
+  if (type === LINK_PREVIEW_TYPE && data.html) {
+    blockType = EMBED_TYPE;
+  }
   if (newData.config && blockType !== DIVIDER_TYPE) {
     convertContainerData(newData);
   }
@@ -243,6 +249,26 @@ const convertLink = ({
     url,
     rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
     target: target?.toUpperCase().substring(1) as Link_Target,
+  };
+};
+
+const convertEmbed = (data: {
+  html;
+  description?;
+  title?;
+  thumbnail_url?;
+  src;
+  config;
+  oembed;
+}) => {
+  const url = data.config?.link?.url;
+  url && (data.src = url);
+  data.oembed = {
+    type: 'rich',
+    thumbnailUrl: data.thumbnail_url,
+    title: data.title,
+    description: data.description,
+    html: data.html,
   };
 };
 
