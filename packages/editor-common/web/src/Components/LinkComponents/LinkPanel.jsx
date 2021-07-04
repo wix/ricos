@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
-import { Checkbox, ErrorIcon } from 'wix-rich-content-ui-components';
+import { Checkbox } from 'wix-rich-content-ui-components';
+import ErrorIcon from 'wix-rich-content-ui-components/lib/ErrorIcon';
 import styles from '../../../statics/styles/link-panel.scss';
 import { LinkPanelDropdown } from './LinkPanelDropdown';
 

@@ -866,8 +866,7 @@
           "alignment": "center",
           "size": "fullWidth",
           "layout": "small",
-          "spacing": 0,
-          "disableExpand": false
+          "spacing": 0
         }
       }
     },

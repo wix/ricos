@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ErrorIcon } from '../Icons';
+import ErrorIcon from '../../lib/ErrorIcon';
 import styles from '../../statics/styles/media-item-error-msg.scss';
 import classnames from 'classnames';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';

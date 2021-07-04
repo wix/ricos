@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
-import { ErrorIcon, SearchIcon } from '../Icons';
+import ErrorIcon from '../../lib/ErrorIcon';
+import { SearchIcon } from '../Icons';
 
 import textInputStyles from '../../statics/styles/text-input.scss';
 import { omit } from 'lodash';
