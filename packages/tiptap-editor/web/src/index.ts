@@ -1,2 +1,3 @@
-export { initTiptapEditor, TiptapAPI } from './TiptapEditor';
+export { initTiptapEditor } from './TiptapEditor';
+export { TiptapAPI } from './types';
 export { createNodeExtension } from './extension';

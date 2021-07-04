@@ -12,6 +12,7 @@ import {
   onAtomicBlockFocus,
   CustomAnchorScroll,
   Link_Rel,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -38,6 +39,7 @@ export interface RicosProps {
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
   onAtomicBlockFocus?: onAtomicBlockFocus;
+  experiments?: AvailableExperiments;
   /* Changes to this interface should also be reflected in the API docs */
 }
 

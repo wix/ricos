@@ -1,8 +1,10 @@
 /** Based on https://gist.github.com/Yimiprod/7ee176597fef230d1451 */
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any, fp/no-delete */
 
+import { RawDraftEntityRange } from '@wix/draft-js';
 import { transform, isEqualWith, isEqual, isObject, omit, pick, cloneDeep } from 'lodash';
 import omitDeep from 'omit-deep';
+import { DraftContent } from '..';
 
 const IGNORED_KEYS = [
   'updatedTimestamp',
@@ -57,7 +59,11 @@ export function compare(object, base, options: { verbose?: boolean; ignoredKeys?
   return changes(objectWithoutIgnored, basetWithoutIgnored);
 }
 
-const comparator = (left, right, key) => {
+const comparator = (
+  left: Record<string, any> | undefined, // defined for type safety, could have any value
+  right: Record<string, any> | undefined,
+  key: string
+) => {
   if (left?.enableVoteRole !== undefined || right?.enableVoteRole !== undefined) {
     return isEqual(omit(left, IGNORED_POLL_CONFIG_KEYS), omit(right, IGNORED_POLL_CONFIG_KEYS));
   }
@@ -76,16 +82,18 @@ const comparator = (left, right, key) => {
   return undefined;
 };
 
-const removeEmoji = object => {
+const removeEmoji = (object: DraftContent) => {
   const emojiEntityKeys: number[] = [];
   Object.entries<any>(object.entityMap).forEach(
     ([key, value]) => value.type === 'EMOJI_TYPE' && emojiEntityKeys.push(parseInt(key, 10))
   );
-  object.entityMap = Object.entries<any>(object.entityMap).filter(
-    ([, value]) => value.type !== 'EMOJI_TYPE'
+  object.entityMap = Object.fromEntries(
+    Object.entries(object.entityMap).filter(([, value]) => value.type !== 'EMOJI_TYPE')
   );
   object.blocks = object.blocks.map(block => ({
     ...block,
-    entityRanges: block.entityRanges.filter(range => !emojiEntityKeys.includes(range.key)),
+    entityRanges: block.entityRanges.filter(
+      (range: RawDraftEntityRange) => !emojiEntityKeys.includes(range.key)
+    ),
   }));
 };

@@ -15,9 +15,6 @@ const ImagePluginStory = () => {
     ['specs.ricos.useSrcSet']: 'true',
   });
   console.log({ experiments });
-  const _rcProps = {
-    experiments,
-  };
 
   return (
     <Page title="Image Plugin With Thumbnail experiment">
@@ -34,7 +31,7 @@ const ImagePluginStory = () => {
           key={viewerKey}
           content={imageContentState}
           plugins={[pluginImage()]}
-          {...(experimentEnabled && { _rcProps })}
+          {...(experimentEnabled && { experiments })}
         />
       </div>
     </Page>
