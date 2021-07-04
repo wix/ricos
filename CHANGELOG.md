@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `plugin-commons`
+  - [#2581](https://github.com/wix/ricos/pull/2581) unify media upload functionality and extract from plugins
+
 </details>
 <hr/>
 
