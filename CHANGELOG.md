@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `schema`
+  - [#2669](https://github.com/wix-incubator/rich-content/pull/2669) fix new schema to support media plugins content ('disableExpand','disableDownload')
+
 </details>
 <hr/>
 
