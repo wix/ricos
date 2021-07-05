@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `editor-common`
+  - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
+
 </details>
 <hr/>
 
