@@ -24,10 +24,11 @@ export const desktopTextButtonList = [
   FORMATTING_BUTTONS.CODE_BLOCK,
   FORMATTING_BUTTONS.SPOILER,
   '|',
-  {
-    name: 'Alignment',
-    buttons: [ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT, ALIGN_JUSTIFY],
-  },
+  // {
+  //   name: 'Alignment',
+  //   buttons: [ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT, ALIGN_JUSTIFY],
+  // },
+  FORMATTING_BUTTONS.ALIGNMENT,
   '|',
   FORMATTING_BUTTONS.ORDERED_LIST,
   FORMATTING_BUTTONS.UNORDERED_LIST,

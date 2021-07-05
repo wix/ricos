@@ -179,32 +179,39 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
   Alignment: {
     dataHook: 'Alignment',
     tooltip: 'Alignment',
-    type: 'GROUP',
+    type: 'modal',
+    modal: props => <div {...props}>alignment modal</div>,
+    onSave: 'Alignment',
   },
-  AlignCenter: {
-    icon: AlignTextCenterIcon,
-    dataHook: 'textAlignmentButton_center',
-    tooltip: 'Align center',
-    type: 'button',
-  },
-  AlignLeft: {
-    icon: AlignLeftIcon,
-    dataHook: 'textAlignmentButton_left',
-    tooltip: 'Align left',
-    type: 'button',
-  },
-  AlignRight: {
-    icon: AlignRightIcon,
-    dataHook: 'textAlignmentButton_right',
-    tooltip: 'Align right',
-    type: 'button',
-  },
-  Justify: {
-    icon: AlignJustifyIcon,
-    dataHook: 'textAlignmentButton_justify',
-    tooltip: 'Justify',
-    type: 'button',
-  },
+  // Alignment: {
+  //   dataHook: 'Alignment',
+  //   tooltip: 'Alignment',
+  //   type: 'GROUP',
+  // },
+  // AlignCenter: {
+  //   icon: AlignTextCenterIcon,
+  //   dataHook: 'textAlignmentButton_center',
+  //   tooltip: 'Align center',
+  //   type: 'button',
+  // },
+  // AlignLeft: {
+  //   icon: AlignLeftIcon,
+  //   dataHook: 'textAlignmentButton_left',
+  //   tooltip: 'Align left',
+  //   type: 'button',
+  // },
+  // AlignRight: {
+  //   icon: AlignRightIcon,
+  //   dataHook: 'textAlignmentButton_right',
+  //   tooltip: 'Align right',
+  //   type: 'button',
+  // },
+  // Justify: {
+  //   icon: AlignJustifyIcon,
+  //   dataHook: 'textAlignmentButton_justify',
+  //   tooltip: 'Justify',
+  //   type: 'button',
+  // },
   OrderedList: {
     icon: OrderedListIcon,
     dataHook: 'textBlockStyleButton_NumberedList',
@@ -320,7 +327,7 @@ export const createButtonsList = (
   formattingButtonsKeys.forEach((buttonKey, index) => {
     handleButtonName(buttonsList, buttonKey, index);
     handleButtonType(buttonsList, index);
-    handleButtonIcon(buttonsList, index);
+    handleButtonIcon(buttonsList, index, editorCommands);
     handleButtonDataHook(buttonsList, index);
     handleButtonTooltip(buttonsList, index);
     handleButtonLabel(buttonsList, index, editorCommands, t);
@@ -334,7 +341,7 @@ export const createButtonsList = (
     handleButtonOnChange(buttonsList, index, editorCommands);
     handleButtonOnDone(buttonsList, index, editorCommands);
     handleButtonOnDelete(buttonsList, index, editorCommands);
-    handleGroupButtons(buttonsList, buttonKey, index, editorCommands);
+    // handleGroupButtons(buttonsList, buttonKey, index, editorCommands);
     buttonKey === 'Title' && handleTitleButton(buttonsList, index, editorCommands);
     handleButtonSaveState(buttonsList, index, editorCommands);
     handleButtonSaveSelection(buttonsList, index, editorCommands);
@@ -491,6 +498,8 @@ const handleButtonOnSave = (buttonsList, index, editorCommands: editorCommands) 
     const buttonName = buttonsList[index].name;
     if (Object.keys(textBlockButtons).includes(buttonName)) {
       buttonsList[index].onSave = type => editorCommands.setBlockType(type);
+    } else if (Object.keys(setTextAlignment).includes(buttonName)) {
+      buttonsList[index].onSave = type => editorCommands.setTextAlignment(type);
     } else if (Object.keys(decorationButtons).includes(buttonName)) {
       buttonsList[index].onSave = type => {
         if (buttonName === 'LINE_SPACING') {
@@ -520,6 +529,10 @@ const handleButtonModal = (
       const Modal = buttonsFullData[buttonName].modal;
       buttonsList[index].modal = props =>
         Modal && <Modal {...props} heading={getCurrentHeading(editorCommands)} />;
+    } else if (buttonName === 'Alignment') {
+      const Modal = buttonsFullData[buttonName].modal;
+      const alignment = editorCommands.getTextAlignment();
+      buttonsList[index].modal = props => Modal && <Modal {...props} alignment={alignment} />;
     } else if (buttonName === 'LINE_SPACING') {
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
@@ -627,10 +640,33 @@ const handleButtonDataHook = (buttonsList, index) => {
   }
 };
 
-const handleButtonIcon = (buttonsList, index) => {
-  if (buttonsFullData[buttonsList[index].name].icon) {
+const handleButtonIcon = (buttonsList, index, editorCommands: editorCommands) => {
+  const buttonName = buttonsList[index].name;
+  if (buttonsFullData[buttonName].icon) {
     buttonsList[index].getIcon = () => buttonsFullData[buttonsList[index].name].icon;
+  } else if (buttonName === 'Alignment') {
+    buttonsList[index].getIcon = () => handleAlignmentIcon(editorCommands);
   }
+};
+
+const handleAlignmentIcon = editorCommands => {
+  const currentAlignment = editorCommands.getTextAlignment();
+  let alignmentIcon;
+  switch (currentAlignment) {
+    case setTextAlignment.AlignCenter:
+      alignmentIcon = AlignTextCenterIcon;
+      break;
+    case setTextAlignment.AlignRight:
+      alignmentIcon = AlignRightIcon;
+      break;
+    case setTextAlignment.Justify:
+      alignmentIcon = AlignJustifyIcon;
+      break;
+    default:
+      alignmentIcon = AlignLeftIcon;
+      break;
+  }
+  return alignmentIcon;
 };
 
 const handleButtonType = (buttonsList, index) => {
@@ -642,58 +678,49 @@ const handleButtonType = (buttonsList, index) => {
 const handleButtonName = (buttonsList, buttonKey, index) => {
   if (buttonKey === '|') {
     buttonsList[index] = { name: 'Separator' };
-  } else if (typeof buttonKey !== 'string') {
-    //grouped buttons
-    buttonsList[index] = { name: buttonKey.name };
+    // } else if (typeof buttonKey !== 'string') {
+    //   //grouped buttons
+    //   buttonsList[index] = { name: buttonKey.name };
   } else {
     buttonsList[index] = { name: buttonKey };
   }
 };
 
-const handleGroupButtons = (buttonsList, buttonKey, index, editorCommands: editorCommands) => {
-  if (buttonKey.buttons) {
-    buttonsList[index].buttonList = {};
-    buttonKey.buttons.forEach(innerButtonKey => {
-      buttonsList[index].buttonList[innerButtonKey] = { name: innerButtonKey };
-      addGroupButtonsData(buttonsList, index, innerButtonKey, editorCommands);
-    });
-  }
-};
+// const handleGroupButtons = (buttonsList, buttonKey, index, editorCommands: editorCommands) => {
+//   if (buttonKey.buttons) {
+//     buttonsList[index].buttonList = {};
+//     buttonKey.buttons.forEach(innerButtonKey => {
+//       buttonsList[index].buttonList[innerButtonKey] = { name: innerButtonKey };
+//       addGroupButtonsData(buttonsList, index, innerButtonKey, editorCommands);
+//     });
+//   }
+// };
 
-const addGroupButtonsData = (
-  buttonsList,
-  index,
-  innerButtonKey,
-  editorCommands: editorCommands
-) => {
-  const currentInnerButton = buttonsList[index].buttonList[innerButtonKey];
-  if (buttonsFullData[innerButtonKey].type) {
-    currentInnerButton.type = buttonsFullData[innerButtonKey].type;
-  }
-  if (buttonsFullData[innerButtonKey].icon) {
-    currentInnerButton.getIcon = () => buttonsFullData[innerButtonKey].icon;
-  }
-  if (buttonsFullData[innerButtonKey].dataHook) {
-    currentInnerButton.dataHook = buttonsFullData[innerButtonKey].dataHook;
-  }
-  if (buttonsFullData[innerButtonKey].tooltip) {
-    currentInnerButton.tooltip = buttonsFullData[innerButtonKey].tooltip;
-  }
-  //TODO: check type of button (Alignment)
-  currentInnerButton.onClick = () =>
-    editorCommands.setTextAlignment(setTextAlignment[innerButtonKey]);
-  currentInnerButton.isActive = () =>
-    editorCommands.getTextAlignment() === buttonsFullData[innerButtonKey].action;
-  currentInnerButton.isDisabled = () => false;
-};
-
-// const getLinkData = editorCommands => {
-//   const linkData = editorCommands.getLinkDataInSelection();
-//   const { url, anchor, target, rel } = linkData || {};
-//   const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
-//   const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
-//   const ariaProps = { 'aria-labelledby': 'mob_link_modal_hdr' };
-//   return { url, anchor, targetBlank, nofollow, ariaProps };
+// const addGroupButtonsData = (
+//   buttonsList,
+//   index,
+//   innerButtonKey,
+//   editorCommands: editorCommands
+// ) => {
+//   const currentInnerButton = buttonsList[index].buttonList[innerButtonKey];
+//   if (buttonsFullData[innerButtonKey].type) {
+//     currentInnerButton.type = buttonsFullData[innerButtonKey].type;
+//   }
+//   if (buttonsFullData[innerButtonKey].icon) {
+//     currentInnerButton.getIcon = () => buttonsFullData[innerButtonKey].icon;
+//   }
+//   if (buttonsFullData[innerButtonKey].dataHook) {
+//     currentInnerButton.dataHook = buttonsFullData[innerButtonKey].dataHook;
+//   }
+//   if (buttonsFullData[innerButtonKey].tooltip) {
+//     currentInnerButton.tooltip = buttonsFullData[innerButtonKey].tooltip;
+//   }
+//   //TODO: check type of button (Alignment)
+//   currentInnerButton.onClick = () =>
+//     editorCommands.setTextAlignment(setTextAlignment[innerButtonKey]);
+//   currentInnerButton.isActive = () =>
+//     editorCommands.getTextAlignment() === buttonsFullData[innerButtonKey].action;
+//   currentInnerButton.isDisabled = () => false;
 // };
 
 const getCurrentHeading = (editorCommands: editorCommands) => {
