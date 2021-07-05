@@ -20,6 +20,7 @@ const CustomStylesCreator: FunctionComponent<Props> = ({ stylesArray, setStyles 
     <div className={styles.panel}>
       {stylesArray.map((item, idx) => (
         <ListItem
+          key={idx}
           item={item}
           updateStyle={newItem => setStyles(replace(stylesArray, item, newItem))}
           close={() => setStyles(stylesArray.filter((_, index) => index !== idx))}

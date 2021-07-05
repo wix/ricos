@@ -18,6 +18,7 @@
   "scripts": {
     "start": "npm run storybook",
     "precommit": "lint-staged",
+    "lint": "eslint '{src,stories}/**/*.{js,jsx,ts,tsx,d.ts}'",
     "pretest": "yoshi build",
     "test": "echo 'There are no tests configured for this project!' && exit 0",
     "release": "yoshi release",
@@ -99,11 +100,5 @@
         }
       ]
     ]
-  },
-  "eslintConfig": {
-    "extends": "yoshi",
-    "rules": {
-      "import/no-unresolved": "off"
-    }
   }
 }

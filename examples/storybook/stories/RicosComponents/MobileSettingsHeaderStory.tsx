@@ -11,7 +11,9 @@ export default () => {
     <Page title="Mobile Setting Header">
       <Section>
         <div className={styles.container} dir="ltr">
-          <div>import {'{ SettingsMobileHeader }'} from 'wix-rich-content-plugin-commons';</div>
+          <div>
+            import {'{ SettingsMobileHeader }'} from &apos;wix-rich-content-plugin-commons&apos;;
+          </div>
           <Button onClick={() => setMoreTab(!withMoreTab)}>
             {withMoreTab ? 'Without' : 'With'} More Tab
           </Button>
@@ -20,6 +22,7 @@ export default () => {
               cancelLabel="Cancel"
               saveLabel="Save"
               otherTab={withMoreTab && 'One more tab'}
+              // eslint-disable-next-line no-console
               switchTab={() => console.log('tab switched')}
             />
           </div>
