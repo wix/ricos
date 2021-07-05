@@ -64,15 +64,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       remountKey: false,
       initialContentChanged: true,
     };
-    this.useTiptap = !!props._rcProps?.experiments?.tiptapEditor?.enabled;
+    this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
   }
 
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { children, _rcProps } = this.props;
+    const { children } = this.props;
     const locale = children?.props.locale || this.props.locale;
-    await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
+    await localeStrategy(locale).then(localeData =>
       this.setState({ localeData, remountKey: !this.state.remountKey })
     );
   };

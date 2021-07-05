@@ -64,7 +64,7 @@ export default class Viewer extends PureComponent<ExampleViewerProps, ExampleVie
             cssOverride={theme}
             mediaSettings={{ pauseMedia: disabled }}
             seoSettings={seoMode}
-            _rcProps={{ experiments }}
+            experiments={experiments}
           >
             <RichContentViewer helpers={helpers} />
           </RicosViewer>
