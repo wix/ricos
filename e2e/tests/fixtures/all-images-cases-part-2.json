@@ -562,8 +562,7 @@
           "alignment": "center",
           "size": "content",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -582,8 +581,7 @@
           "alignment": "left",
           "size": "content",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -602,8 +600,7 @@
           "alignment": "right",
           "size": "content",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -622,8 +619,7 @@
           "alignment": "center",
           "size": "fullWidth",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -642,8 +638,7 @@
           "alignment": "left",
           "size": "fullWidth",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",
@@ -662,8 +657,7 @@
           "alignment": "right",
           "size": "fullWidth",
           "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
+          "showDescription": true
         },
         "src": {
           "id": "1ea8c429c3fbbc7b507b45b756c8499f",

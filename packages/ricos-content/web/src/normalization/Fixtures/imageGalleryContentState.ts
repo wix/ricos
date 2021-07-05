@@ -68,7 +68,6 @@ export default {
           size: 'content',
           showTitle: true,
           showDescription: true,
-          disableExpand: false,
         },
         src: {
           id: '8a719c372d21ebb4b9d2a8373734bf52',
@@ -88,7 +87,6 @@ export default {
           size: 'content',
           layout: 'small',
           spacing: 0,
-          disableExpand: false,
         },
         items: [
           {

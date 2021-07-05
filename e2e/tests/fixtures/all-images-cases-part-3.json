@@ -917,7 +917,6 @@
             "size": "inline",
             "showTitle": true,
             "showDescription": true,
-            "disableExpand": false,
             "width": 50
           },
           "src": {
@@ -937,8 +936,7 @@
             "alignment": "left",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 50
           },
           "src": {
@@ -958,8 +956,7 @@
             "alignment": "right",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 50
           },
           "src": {
@@ -979,8 +976,7 @@
             "alignment": "center",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 170
           },
           "src": {
@@ -1000,8 +996,7 @@
             "alignment": "left",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,            
             "width": 170
           },
           "src": {
@@ -1021,8 +1016,7 @@
             "alignment": "right",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 170
           },
           "src": {
@@ -1042,8 +1036,7 @@
             "alignment": "center",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 350
           },
           "src": {
@@ -1063,8 +1056,7 @@
             "alignment": "left",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,          
             "width": 350
           },
           "src": {
@@ -1084,8 +1076,7 @@
             "alignment": "right",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,          
             "width": 350
           },
           "src": {
@@ -1105,8 +1096,7 @@
             "alignment": "center",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 450
           },
           "src": {
@@ -1126,8 +1116,7 @@
             "alignment": "left",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 450
           },
           "src": {
@@ -1147,8 +1136,7 @@
             "alignment": "right",
             "size": "inline",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false,
+            "showDescription": true,           
             "width": 450
           },
           "src": {

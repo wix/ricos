@@ -92,8 +92,7 @@
             "alignment": "center",
             "size": "content",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false
+            "showDescription": true
           },
           "src": {
             "id": "75318326db54174bea73594c3c25873a",
