@@ -16,6 +16,9 @@ import {
   TranslationFunction,
   DesktopTextButtons,
   Helpers,
+  ToolbarType,
+  Version,
+  EditorCommands,
 } from 'wix-rich-content-common';
 
 type formattingToolbarButtonsKeysType =
@@ -33,7 +36,7 @@ interface ToolbarProps {
   buttons: unknown[];
   vertical?: boolean;
   formattingToolbarButtonsKeys?: formattingToolbarButtonsKeysType;
-  editorCommands: any; //TODO: editorCommands type
+  editorCommands: EditorCommands;
   plugins?: string[];
   setKeepOpen?: (boolean) => void;
   afterClick?: () => void;
@@ -56,6 +59,7 @@ interface ToolbarProps {
   };
   colorPickerData?: any;
   helpers?: Helpers;
+  toolbarType?: ToolbarType;
 }
 
 class Toolbar extends Component<ToolbarProps> {
@@ -76,6 +80,17 @@ class Toolbar extends Component<ToolbarProps> {
     event.preventDefault();
   };
 
+  onToolbarButtonClick = ({ buttonName, plugin, isActive }) => {
+    const { helpers, toolbarType } = this.props;
+    helpers?.onToolbarButtonClick?.({
+      buttonName: buttonName || '',
+      pluginId: plugin || undefined,
+      type: toolbarType,
+      value: `${!isActive}`,
+      version: Version.currentVersion,
+    });
+  };
+
   renderButton = buttonProps => {
     const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip, plugin } = buttonProps;
     return (
@@ -88,7 +103,7 @@ class Toolbar extends Component<ToolbarProps> {
         tooltipText={tooltip}
         icon={getIcon()}
         disabled={isDisabled()}
-        helpers={this.props.helpers}
+        onToolbarButtonClick={this.onToolbarButtonClick}
         plugin={plugin}
       />
     );
@@ -111,7 +126,7 @@ class Toolbar extends Component<ToolbarProps> {
       setKeepOpen,
       ...buttonProps,
     };
-    return <DropdownButton {...dropDownProps} helpers={this.props.helpers} />;
+    return <DropdownButton {...dropDownProps} onToolbarButtonClick={this.onToolbarButtonClick} />;
   };
 
   renderButtonGroup = ({ buttonList, tooltip, ...rest }) => {
@@ -127,7 +142,7 @@ class Toolbar extends Component<ToolbarProps> {
         buttons={Object.values(buttonList)}
         theme={theme}
         {...dropDownProps}
-        helpers={this.props.helpers}
+        onToolbarButtonClick={this.onToolbarButtonClick}
       />
     );
   };
@@ -162,7 +177,7 @@ class Toolbar extends Component<ToolbarProps> {
         theme={this.theme}
         onResetColor={onResetColor}
         setKeepOpen={setKeepOpen}
-        helpers={this.props.helpers}
+        onToolbarButtonClick={this.onToolbarButtonClick}
       />
     );
   };
@@ -178,7 +193,7 @@ class Toolbar extends Component<ToolbarProps> {
         buttonContent={text}
         tooltipText={tooltip}
         disabled={isDisabled?.()}
-        helpers={this.props.helpers}
+        onToolbarButtonClick={this.onToolbarButtonClick}
       />
     );
   };
@@ -200,7 +215,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={dropDownProps}
         t={t}
         setKeepOpen={setKeepOpen}
-        helpers={this.props.helpers}
+        onToolbarButtonClick={this.onToolbarButtonClick}
       />
     );
   };
@@ -223,7 +238,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={dropDownProps}
         theme={theme}
         editorCommands={editorCommands}
-        helpers={this.props.helpers}
+        onToolbarButtonClick={this.onToolbarButtonClick}
       />
     );
   };
@@ -237,7 +252,7 @@ class Toolbar extends Component<ToolbarProps> {
       theme: this.theme,
       ...buttonProps,
     };
-    return <ContextMenu {...dropDownProps} helpers={this.props.helpers} />;
+    return <ContextMenu {...dropDownProps} onToolbarButtonClick={this.onToolbarButtonClick} />;
   };
 
   buttonMap = {

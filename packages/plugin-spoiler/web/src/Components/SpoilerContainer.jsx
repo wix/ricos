@@ -68,7 +68,6 @@ class SpoilerContainer extends React.Component {
       [styles.revealSpoilerBtnMobile]: isMobile,
       [styles.onHoverBtn]: !disabledRevealBtn,
     });
-
     return (
       <div className={containerClassName} style={{ width: '100%' }}>
         <SpoilerContainerIcon

@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
-import { RichContentTheme, Helpers } from 'wix-rich-content-common';
+import { RichContentTheme, onToolbarButtonClickArgs } from 'wix-rich-content-common';
 
 interface GroupButtonProps {
-  helpers?: Helpers;
+  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
   isMobile?: boolean;
   tabIndex?: number;
   buttons: any;
@@ -89,7 +89,7 @@ class GroupButton extends PureComponent<GroupButtonProps, State> {
               icon={buttonProps.getIcon()}
               disabled={buttonProps.isDisabled()}
               asGroupButton
-              helpers={this.props.helpers}
+              onToolbarButtonClick={this.props.onToolbarButtonClick}
               plugin={plugin}
             />
           );
@@ -116,7 +116,7 @@ class GroupButton extends PureComponent<GroupButtonProps, State> {
             disabled={disabled}
             icon={Icon}
             theme={theme}
-            helpers={this.props.helpers}
+            onToolbarButtonClick={this.props.onToolbarButtonClick}
             plugin={plugin}
           />
           {isOpen && this.renderOptions()}

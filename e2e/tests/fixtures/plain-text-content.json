@@ -702,7 +702,6 @@
             "size": "small",
             "showTitle": true,
             "showDescription": true,
-            "disableExpand": false,
             "link": {
               "url": "www.image-link.com",
               "target": "_blank",
@@ -918,8 +917,7 @@
             "alignment": "right",
             "size": "small",
             "showTitle": true,
-            "showDescription": true,
-            "disableExpand": false
+            "showDescription": true
           },
           "src": {
             "id": "91ff5a615e0235157dc1a7e5f66607bf",

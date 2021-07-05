@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Component, ReactElement, ReactNode, Ref, FC } from 'react';
 import classNames from 'classnames';
 import DropdownArrowIcon from '../icons/DropdownArrowIcon';
 import Styles from './ToolbarButton.scss';
-import { mergeStyles, Helpers, Version } from 'wix-rich-content-common';
+import { mergeStyles, onToolbarButtonClickArgs } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 type ToolbarButtonProps = {
@@ -22,7 +23,7 @@ type ToolbarButtonProps = {
   asGroupButton?: boolean;
   asContextButton?: boolean;
   disabledStyle?: boolean;
-  helpers?: Helpers;
+  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
   plugin?: string;
 };
 
@@ -75,13 +76,12 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
   preventDefault = event => event.preventDefault();
 
   onClick = (...args: [any]) => {
-    const { helpers, isActive, dataHook, plugin } = this.props;
+    const { onToolbarButtonClick, isActive, dataHook, plugin } = this.props;
     const buttonName = dataHook?.split('_').pop();
-    helpers?.onToolbarButtonClick?.({
+    onToolbarButtonClick?.({
       buttonName: buttonName || '',
       pluginId: plugin || undefined,
       value: `${!isActive}`,
-      version: Version.currentVersion,
     });
     this.props.onClick?.(...args);
   };

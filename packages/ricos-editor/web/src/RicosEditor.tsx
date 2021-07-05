@@ -84,15 +84,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       initialContentChanged: true,
       activeEditor: null,
     };
-    this.useTiptap = !!props._rcProps?.experiments?.tiptapEditor?.enabled;
+    this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
   }
 
   static defaultProps = { locale: 'en' };
 
   updateLocale = async () => {
-    const { children, _rcProps } = this.props;
+    const { children } = this.props;
     const locale = children?.props.locale || this.props.locale;
-    await localeStrategy(locale, _rcProps?.experiments).then(localeData =>
+    await localeStrategy(locale).then(localeData =>
       this.setState({ localeData, remountKey: !this.state.remountKey })
     );
   };
@@ -296,12 +296,25 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         mobile: mobileTextButtonList,
         desktop: desktopTextButtonList,
       };
+      let toolbarType;
+      if (isMobile) {
+        toolbarType = 'MOBILE';
+      } else if (StaticToolbar) {
+        toolbarType = 'STATIC';
+      } else {
+        toolbarType = 'INLINE';
+      }
       const formattingToolbarSetting = getToolbarSettings({ textButtons }).find(
-        toolbar => toolbar?.name === 'INLINE'
+        toolbar => toolbar?.name === toolbarType
       );
-      const allFormattingToolbarButtons = formattingToolbarSetting?.getButtons?.() as TextButtons;
-      const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
-      const formattingToolbarButtons = get(allFormattingToolbarButtons, deviceName, []);
+      let formattingToolbarButtons;
+      if (formattingToolbarSetting?.getButtons) {
+        const allFormattingToolbarButtons = formattingToolbarSetting?.getButtons?.() as TextButtons;
+        const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
+        formattingToolbarButtons = get(allFormattingToolbarButtons, deviceName, []);
+      } else {
+        formattingToolbarButtons = isMobile ? textButtons.mobile : textButtons.desktop;
+      }
       const plugins: string[] = this.getPluginsKey();
       const colorPickerData = {
         TEXT_COLOR: this.props.plugins?.find(
@@ -331,6 +344,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           linkPanelData={linkPanelData}
           colorPickerData={colorPickerData}
           helpers={helpers}
+          toolbarType={toolbarType}
         />
       );
       // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
@@ -398,7 +412,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         <RichContentEditor />
       );
 
-    const newFormattingToolbar = this.props._rcProps?.experiments?.newFormattingToolbar?.enabled;
+    const newFormattingToolbar = this.props.experiments?.newFormattingToolbar?.enabled;
 
     return (
       <Fragment key={`${remountKey}`}>

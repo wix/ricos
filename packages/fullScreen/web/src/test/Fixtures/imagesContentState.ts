@@ -196,7 +196,6 @@ export default {
                             size: 'inline',
                             showTitle: true,
                             showDescription: true,
-                            disableExpand: false,
                             width: 184,
                           },
                           src: {
@@ -230,7 +229,6 @@ export default {
           size: 'content',
           layout: 'small',
           spacing: 0,
-          disableExpand: false,
         },
         items: [
           {
@@ -302,7 +300,6 @@ export default {
           size: 'inline',
           showTitle: true,
           showDescription: true,
-          disableExpand: false,
           width: 380,
         },
         src: {
@@ -386,7 +383,6 @@ export default {
                       size: 'inline',
                       showTitle: true,
                       showDescription: true,
-                      disableExpand: false,
                       width: 295,
                     },
                     src: {
@@ -463,7 +459,6 @@ export default {
                       size: 'inline',
                       showTitle: true,
                       showDescription: true,
-                      disableExpand: false,
                       width: 320,
                     },
                     src: {
