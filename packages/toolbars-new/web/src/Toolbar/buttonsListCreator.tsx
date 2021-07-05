@@ -42,6 +42,7 @@ import {
 } from '../icons';
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
+import NewPanel from '../modals/modal-panels/NewPanel';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
 
 type editorCommands = EditorCommands;
@@ -180,7 +181,7 @@ const buttonsFullData: Record<string, buttonsFullDataType> = {
     dataHook: 'Alignment',
     tooltip: 'Alignment',
     type: 'modal',
-    modal: props => <div {...props}>alignment modal</div>,
+    modal: props => <NewPanel {...props} />,
     onSave: 'Alignment',
   },
   // Alignment: {
@@ -304,9 +305,9 @@ const decorationButtons: Record<string, keyof DecorationsDataMap> = {
 };
 
 const setTextAlignment: Record<string, TextAlignment> = {
-  AlignCenter: 'center',
   AlignLeft: 'left',
   AlignRight: 'right',
+  AlignCenter: 'center',
   Justify: 'justify',
 };
 
@@ -532,11 +533,27 @@ const handleButtonModal = (
     } else if (buttonName === 'Alignment') {
       const Modal = buttonsFullData[buttonName].modal;
       const alignment = editorCommands.getTextAlignment();
-      buttonsList[index].modal = props => Modal && <Modal {...props} alignment={alignment} />;
+      buttonsList[index].modal = props =>
+        Modal && (
+          <Modal
+            {...props}
+            initialSelect={alignment}
+            options={Object.values(setTextAlignment)}
+            panelHeader={t('Alignment')}
+          />
+        );
     } else if (buttonName === 'LINE_SPACING') {
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
-      buttonsList[index].modal = props => Modal && <Modal {...props} spacing={spacing} />;
+      buttonsList[index].modal = props =>
+        Modal && (
+          <Modal
+            {...props}
+            initialSelect={spacing}
+            options={[1, 1.5, 2, 2.5, 3]}
+            panelHeader={t('LineSpacing_lineSpacing')}
+          />
+        );
     } else if (buttonName === 'LINK') {
       const Modal = buttonsFullData[buttonName].modal;
       const linkData = editorCommands.getLinkDataInSelection();
