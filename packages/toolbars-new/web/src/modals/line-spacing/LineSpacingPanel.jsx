@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
+import NewMobilePanel from '../modal-panels/MobilePanel';
 
 const Separator = () => <div className={styles.lineSpacing_separator} />;
 
@@ -29,40 +30,40 @@ const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }
   );
 };
 
-const MobilePanel = ({ selectedHeight, styles, t, onChange, onSave, onCancel }) => {
-  const lineHeightElement = (height, isSelected, onClick, showSeparator) => (
-    <div>
-      <button
-        className={isSelected ? styles.lineSpacingMobilePanel_selectedLineHeight : ''}
-        key={height}
-        onClick={() => onClick(`${height}`)}
-      >
-        {height}
-      </button>
-      {showSeparator && <Separator />}
-    </div>
-  );
+// const MobilePanel = ({ selectedHeight, styles, t, onChange, onSave, onCancel }) => {
+//   const lineHeightElement = (height, isSelected, onClick, showSeparator) => (
+//     <div>
+//       <button
+//         className={isSelected ? styles.lineSpacingMobilePanel_selectedLineHeight : ''}
+//         key={height}
+//         onClick={() => onClick(`${height}`)}
+//       >
+//         {height}
+//       </button>
+//       {showSeparator && <Separator />}
+//     </div>
+//   );
 
-  const lineHeights = [1, 1.5, 2, 2.5, 3];
-  return (
-    <div className={styles.lineSpacingMobilePanel}>
-      <div className={styles.lineSpacingMobilePanel_header}>{t('LineSpacing_lineSpacing')}</div>
-      <Separator />
-      <div className={styles.lineSpacingMobilePanel_heights}>
-        {lineHeights.map((height, i) => {
-          const selected = parseFloat(selectedHeight) === height;
-          const showSeparator = i !== lineHeights.length - 1;
-          return lineHeightElement(height, selected, onChange, showSeparator);
-        })}
-      </div>
-      {/* <Separator /> */}
-      {/* <div className={styles.lineSpacingMobilePanel_buttons}>
-        <button onClick={onCancel}>{t('LineSpacing_cancel')}</button>
-        <button onClick={() => onSave()}>{t('LineSpacing_save')}</button>
-      </div> */}
-    </div>
-  );
-};
+//   const lineHeights = [1, 1.5, 2, 2.5, 3];
+//   return (
+//     <div className={styles.lineSpacingMobilePanel}>
+//       <div className={styles.lineSpacingMobilePanel_header}>{t('LineSpacing_lineSpacing')}</div>
+//       <Separator />
+//       <div className={styles.lineSpacingMobilePanel_heights}>
+//         {lineHeights.map((height, i) => {
+//           const selected = parseFloat(selectedHeight) === height;
+//           const showSeparator = i !== lineHeights.length - 1;
+//           return lineHeightElement(height, selected, onChange, showSeparator);
+//         })}
+//       </div>
+//       {/* <Separator /> */}
+//       {/* <div className={styles.lineSpacingMobilePanel_buttons}>
+//         <button onClick={onCancel}>{t('LineSpacing_cancel')}</button>
+//         <button onClick={() => onSave()}>{t('LineSpacing_save')}</button>
+//       </div> */}
+//     </div>
+//   );
+// };
 
 const LabeledInput = ({
   label,
@@ -163,14 +164,17 @@ export default class Panel extends Component {
     const { styles, showCustomPanel, onChange, onSave } = this;
     const selectedHeight = spacing['line-height'];
     const onSaveLineHeight = height => onSave({ 'line-height': height });
-    const onChangeLineHeight = height => onChange({ 'line-height': height });
+    const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
+    const options = [1, 1.5, 2, 2.5, 3];
+    const panelHeader = t('LineSpacing_lineSpacing');
 
     const panel = isMobile ? (
-      <MobilePanel
+      <NewMobilePanel
         {...{
-          styles,
-          selectedHeight,
-          t,
+          // styles,
+          // selectedHeight,
+          panelHeader,
+          options,
           onChange: onChangeLineHeight,
           onSave,
           onCancel,
@@ -245,11 +249,11 @@ LineHeightsPanel.propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-MobilePanel.propTypes = {
-  onCancel: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
-  selectedHeight: PropTypes.string.isRequired,
-  styles: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired,
-};
+// MobilePanel.propTypes = {
+//   onCancel: PropTypes.func.isRequired,
+//   onChange: PropTypes.func.isRequired,
+//   onSave: PropTypes.func.isRequired,
+//   selectedHeight: PropTypes.string.isRequired,
+//   styles: PropTypes.object.isRequired,
+//   t: PropTypes.func.isRequired,
+// };
