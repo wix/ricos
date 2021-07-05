@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import DefaultColorPicker from './DefaultColorPicker';
-import AddColorIcon from '../../Icons/AddColorIcon';
+import { AddColorIcon } from 'wix-rich-content-ui-components';
 import styles from '../../../statics/styles/color-picker.scss';
 
 class ColorPicker extends PureComponent {

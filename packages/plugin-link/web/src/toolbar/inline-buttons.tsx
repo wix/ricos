@@ -1,5 +1,6 @@
 import React from 'react';
-import { BUTTONS, EditIcon } from 'wix-rich-content-plugin-commons';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { EditIcon } from 'wix-rich-content-ui-components';
 import {
   updateLinkAtCurrentSelection,
   getEntityData,

@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `ui-components`
+  - [#2636](https://github.com/wix/ricos/pull/2636) moved editicon/hashtagicon/heighticon/addcoloricon/aligncentericon/erroricon into ui-components folder
+  
 </details>
 <hr/>
 

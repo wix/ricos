@@ -4,7 +4,7 @@ import {
   SizeSmallCenterIcon,
   SizeSmallRightIcon,
 } from 'wix-rich-content-plugin-commons';
-import { EditIcon } from '../icons';
+import { EditIcon } from 'wix-rich-content-ui-components';
 import {
   MAX_ALIGNMENT_WIDTH,
   MIN_WIDTH,

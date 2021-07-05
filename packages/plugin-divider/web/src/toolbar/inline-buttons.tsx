@@ -1,4 +1,5 @@
-import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-plugin-commons';
+import { BUTTONS, SizeLargeIcon } from 'wix-rich-content-plugin-commons';
+import { AlignCenterIcon } from 'wix-rich-content-ui-components';
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
