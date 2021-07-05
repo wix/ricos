@@ -1,28 +1,26 @@
 import { pipe, flow } from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
-import { merge } from 'lodash';
-import { Element, TextNode, DocumentFragment } from 'parse5';
-import { toAst, isLeaf, not, isComment } from './ast-utils';
+import { Element, DocumentFragment } from 'parse5';
+import { toAst, isLeaf, not, isText, isComment } from './ast-utils';
 import { RichContent, Node, Decoration, Decoration_Type, Node_Type } from 'ricos-schema';
+import { ContentNode, Rule } from './models';
 import {
   createDecoration,
   createHeadingNode,
   createNode,
   createParagraphNode,
   createTextNode,
+  createLinkData,
   initializeMetadata,
+  reduceDecorations,
 } from '../../../nodeUtils';
 
-type DecorationMap = Record<Decoration_Type, Decoration>;
-
-const htmlToNodes = (decorations: Decoration[] = []) => (element: Element | TextNode): Node[] => {
-  // TextNode
-  if ('value' in element) {
+const htmlToNodes = (decorations: Decoration[] = []) => (element: ContentNode): Node[] => {
+  if (isText(element)) {
     return element.value === '\n'
       ? []
       : [createTextNode(element.value, reduceDecorations(decorations))];
   }
-  // ElementNode
   switch (element.nodeName) {
     case 'strong':
     case 'em':
@@ -46,8 +44,9 @@ const htmlToNodes = (decorations: Decoration[] = []) => (element: Element | Text
         }),
       ];
     case 'p':
-    default:
       return [createParagraphNode(traverse(element, decorations))];
+    default:
+      return [];
   }
 };
 
@@ -70,41 +69,19 @@ const addDecoration = (
   data: Omit<Decoration, 'type'> = {}
 ) => {
   const decoration = createDecoration(type, data);
-  const innerElement = pipe(element, getChildNodes, filterComments)[0] as TextNode | Element;
+  const innerElement = pipe(element, getChildNodes, filterComments)[0] as ContentNode;
   return htmlToNodes([...decorations, decoration])(innerElement);
 };
 
-const createLinkData = (element: Element) => {
-  const url = element.attrs.find(attr => attr.name === 'href')?.value;
-  return url ? { linkData: { url } } : {};
-};
-
-const toRichContentNodes = (decorations: Decoration[]) => A.chain(htmlToNodes(decorations));
-
-const getChildNodes = (element: Element | DocumentFragment): (TextNode | Element)[] =>
-  isLeaf(element) ? [] : (element.childNodes as (Element | TextNode)[]);
+const getChildNodes = (element: Element | DocumentFragment): ContentNode[] =>
+  isLeaf(element) ? [] : (element.childNodes as ContentNode[]);
 
 const filterComments = A.filter(not(isComment));
 
-const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
-  const reducedDecorationsMap: DecorationMap = decorations.reduce(
-    (decorationMap, { type, ...data }) => {
-      const currentDecoration: Decoration = decorationMap[type] || { type };
-      const nextDecoration: Decoration = { type, ...data };
-      return {
-        ...decorationMap,
-        [type]: merge(currentDecoration, nextDecoration),
-      };
-    },
-    {} as DecorationMap
-  );
-  const reducedDecorations = Object.values(reducedDecorationsMap);
-  return reducedDecorations;
-};
-
 const traverse = (element: Element | DocumentFragment, decorations: Decoration[] = []): Node[] =>
-  pipe(element, getChildNodes, filterComments, toRichContentNodes(decorations));
+  pipe(element, getChildNodes, filterComments, A.chain(htmlToNodes(decorations)));
 
 const toRichContent = (nodes: Node[]): RichContent => ({ nodes, metadata: initializeMetadata() });
 
-export const parse = flow(toAst, traverse, toRichContent, RichContent.fromJSON);
+export const parse = (rules: Rule[], html: string) =>
+  pipe(html, toAst, traverse, toRichContent, RichContent.fromJSON);

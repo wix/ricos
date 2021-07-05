@@ -1,35 +1,9 @@
-import { Node, TextData, NodeStyle, RichContent } from 'ricos-schema';
-import { ChildNode } from 'parse5';
+import { Node, TextData, NodeStyle, Decoration, RichContent } from 'ricos-schema';
+import { TextNode, Element } from 'parse5';
 
-export interface Parser {
-  preprocess: (html: string) => string;
-  parse: (html: string, rules: Rule[]) => RichContent;
-  postprocess: (content: RichContent) => RichContent;
-}
+export type ContentNode = Element | TextNode;
 
-export type Rule = (node: ChildNode, context: Context) => Context;
-
-export type Rules = {
-  '#text': Rule;
-  p: Rule;
-  strong: Rule;
-  em: Rule;
-  u: Rule;
-  a: Rule;
-  ul: Rule;
-  ol: Rule;
-  li: Rule;
-  h1: Rule;
-  h2: Rule;
-  h3: Rule;
-  h4: Rule;
-  h5: Rule;
-  h6: Rule;
-  img: Rule;
+export type Rule = {
+  _if: (contentNode: ContentNode) => boolean;
+  _then: (context, decorations: Decoration[], contentNode: ContentNode) => Node[];
 };
-
-export interface Context {
-  nodes: Node[];
-  style: NodeStyle;
-  textData: TextData[];
-}

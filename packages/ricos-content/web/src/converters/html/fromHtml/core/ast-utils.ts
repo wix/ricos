@@ -12,12 +12,17 @@ export const isLeaf = (node: Node): boolean =>
 
 export const not = <T>(predicate: (data: T) => boolean) => (data: T) => !predicate(data);
 
+export const log = <T>(tag: string) => (data: T) => {
+  console.log(tag, data); // eslint-disable-line no-console
+  return data;
+};
+
 export const hasDescendant = (predicate: (child: Node) => boolean) => (node: Node): boolean =>
   predicate(node) ||
   (!isLeaf(node) &&
     pipe((node as Element).childNodes, A.map(hasDescendant(predicate)), concatAll(MonoidAny)));
 
-const last = arr => (arr.length > 0 ? arr[arr.length - 1] : null);
+export const last = arr => (arr.length > 0 ? arr[arr.length - 1] : null);
 
 export const partitionBy = <T>(
   isSeparator: (node: T) => boolean,

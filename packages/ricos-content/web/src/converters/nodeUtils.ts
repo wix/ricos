@@ -1,3 +1,5 @@
+import { merge } from 'lodash';
+import { Element } from 'parse5';
 import {
   TextStyle_TextAlignment,
   Node_Type,
@@ -47,6 +49,11 @@ export const createHeadingNode = (nodes: Node[] = [], data: HeadingData): Node =
   },
 });
 
+export const createLinkData = (element: Element) => {
+  const url = element.attrs.find(attr => attr.name === 'href')?.value;
+  return url ? { linkData: { url } } : {};
+};
+
 export const createDecoration = (
   type: Decoration_Type,
   data: Omit<Decoration, 'type'> = {}
@@ -57,3 +64,21 @@ export const initializeMetadata = (version?: number): Metadata => ({
   createdTimestamp: new Date(),
   updatedTimestamp: new Date(),
 });
+
+type DecorationMap = Record<Decoration_Type, Decoration>;
+
+export const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
+  const reducedDecorationsMap: DecorationMap = decorations.reduce(
+    (decorationMap, { type, ...data }) => {
+      const currentDecoration: Decoration = decorationMap[type] || { type };
+      const nextDecoration: Decoration = { type, ...data };
+      return {
+        ...decorationMap,
+        [type]: merge(currentDecoration, nextDecoration),
+      };
+    },
+    {} as DecorationMap
+  );
+  const reducedDecorations = Object.values(reducedDecorationsMap);
+  return reducedDecorations;
+};
