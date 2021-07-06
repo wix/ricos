@@ -10,11 +10,13 @@ const modalStyleDefaults = {
 };
 
 const mergeModalStyles = (modalStyles, theme) => {
+  // Render modal below top toolbar of BM sites
+  const headerHeight = document.querySelector('[data-hook="header"]')?.clientHeight || 0;
   return {
     content: Object.assign(
       {},
       (modalStyles || modalStyleDefaults).content,
-      { zIndex: 20001 },
+      { zIndex: 20001, paddingTop: headerHeight },
       theme?.modalTheme?.content || {}
     ),
     overlay: Object.assign(
