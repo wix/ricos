@@ -17,6 +17,23 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `editor-common`
+  - [#2685](https://github.com/wix-incubator/rich-content/pull/2685) color utils for editor commands
+
+### :nail_care
+
+- `table`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+- `collapsible-list`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+
+### :house: Internal
+
+- `editor-common`
+  - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
+
 </details>
 <hr/>
 
@@ -39,7 +56,7 @@
 ### :nail_care
 
 - `gallery/image`
-- [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
+  - [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
 
 ## 8.46.0 (Jun 29, 2021)
 

@@ -1,8 +1,9 @@
 export function newKey(length: number) {
-  var result = [];
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
+  const result = [];
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  // eslint-disable-next-line fp/no-loops
+  for (let i = 0; i < length; i++) {
     result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
   }
   return result.join('');
