@@ -3,7 +3,7 @@ import React, { Component, ReactElement, ReactNode, Ref, FC } from 'react';
 import classNames from 'classnames';
 import DropdownArrowIcon from '../icons/DropdownArrowIcon';
 import Styles from './ToolbarButton.scss';
-import { mergeStyles, onToolbarButtonClickArgs } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 type ToolbarButtonProps = {
@@ -23,8 +23,7 @@ type ToolbarButtonProps = {
   asGroupButton?: boolean;
   asContextButton?: boolean;
   disabledStyle?: boolean;
-  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
-  plugin?: string;
+  onToolbarButtonClick?: () => void;
 };
 
 class ToolbarButton extends Component<ToolbarButtonProps> {
@@ -76,13 +75,8 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
   preventDefault = event => event.preventDefault();
 
   onClick = (...args: [any]) => {
-    const { onToolbarButtonClick, isActive, dataHook, plugin } = this.props;
-    const buttonName = dataHook?.split('_').pop();
-    onToolbarButtonClick?.({
-      buttonName: buttonName || '',
-      pluginId: plugin || undefined,
-      value: `${!isActive}`,
-    });
+    const { onToolbarButtonClick } = this.props;
+    onToolbarButtonClick?.();
     this.props.onClick?.(...args);
   };
 

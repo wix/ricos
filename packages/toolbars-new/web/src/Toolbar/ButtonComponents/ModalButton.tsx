@@ -5,11 +5,7 @@ import classNames from 'classnames';
 import ClickOutside from 'react-click-outsider';
 import styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton';
-import {
-  RichContentTheme,
-  TranslationFunction,
-  onToolbarButtonClickArgs,
-} from 'wix-rich-content-common';
+import { RichContentTheme, TranslationFunction } from 'wix-rich-content-common';
 
 type dropDownPropsType = {
   isMobile?: boolean;
@@ -28,11 +24,10 @@ type dropDownPropsType = {
   onChange?: (any) => void;
   onDelete?: () => void;
   loadSelection?: () => void;
-  plugin?: string;
 };
 
 interface ModalButtonProps {
-  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
+  onToolbarButtonClick?: () => void;
   theme?: RichContentTheme;
   setKeepOpen?: (boolean) => void;
   t: TranslationFunction;
@@ -128,7 +123,6 @@ class ModalButton extends Component<ModalButtonProps, State> {
       isMobile,
       arrow = false,
       getLabel,
-      plugin,
     } = dropDownProps;
     const { isModalOpen } = this.state;
     const buttonProps = arrow && getLabel ? { buttonContent: getLabel() } : { icon: getIcon() };
@@ -147,7 +141,6 @@ class ModalButton extends Component<ModalButtonProps, State> {
             disabled={isDisabled()}
             icon={getIcon()}
             theme={theme}
-            plugin={plugin}
             {...buttonProps}
           />
           {isModalOpen && (

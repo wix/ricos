@@ -4,10 +4,9 @@ import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
 import { isElementOutOfWindow } from 'wix-rich-content-editor-common';
-import { RichContentTheme, onToolbarButtonClickArgs } from 'wix-rich-content-common';
+import { RichContentTheme } from 'wix-rich-content-common';
 
 interface ContextMenuProps {
-  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
   isMobile: boolean;
   tabIndex?: number;
   tooltip: string;
@@ -17,7 +16,6 @@ interface ContextMenuProps {
   getIcon: () => any;
   theme: RichContentTheme;
   buttonList: any[];
-  plugin?: string;
 }
 
 interface State {
@@ -62,7 +60,7 @@ class ContextMenu extends PureComponent<ContextMenuProps, State> {
   };
 
   renderOptions = () => {
-    const { buttonList, theme, plugin } = this.props;
+    const { buttonList, theme } = this.props;
     const { isOpen, position } = this.state;
     const display = isOpen ? { display: 'block' } : { display: 'none' };
 
@@ -98,7 +96,6 @@ class ContextMenu extends PureComponent<ContextMenuProps, State> {
                 disabledStyle={buttonProps.isDisabled()}
                 tooltipText={buttonProps.tooltip}
                 asContextButton
-                plugin={plugin}
               />
             );
           } else {
@@ -115,7 +112,6 @@ class ContextMenu extends PureComponent<ContextMenuProps, State> {
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
           <ToolbarButton
-            onToolbarButtonClick={this.props.onToolbarButtonClick}
             isActive={false}
             onClick={this.toggleOptions}
             tooltipText={tooltip}
