@@ -15,7 +15,6 @@ import {
   createHeadingNode,
   createNode,
   createLinkData,
-  reduceDecorations,
 } from '../../../nodeUtils';
 
 const toName = (node: ContentNode) => node.nodeName;
@@ -27,55 +26,53 @@ const hasTag = (tag: string) => flow(toName, equals(S.Eq)(tag));
 const oneOf = (tags: string[]) => (node: ContentNode) =>
   pipe(tags, A.map(equals(S.Eq)(node.nodeName)), concatAll(MonoidAny));
 
-export const textToText: Rule = {
-  _if: isText,
-  _then: (context, decorations, node: TextNode) => [
-    createTextNode(node.value, reduceDecorations(decorations)),
-  ],
-};
+export const textToText: Rule = [
+  isText,
+  context => (node: TextNode) => [createTextNode(node.value, context.decorations)],
+];
 
-export const pToParagraph: Rule = {
-  _if: hasTag('p'),
-  _then: (context, decorations, node) => [createParagraphNode(context.traverse(node, decorations))],
-};
+export const pToParagraph: Rule = [
+  hasTag('p'),
+  context => (node: Element) => [createParagraphNode(context.visit(node))],
+];
 
-export const hToHeading: Rule = {
-  _if: flow(toName, /h[1-6]/.test),
-  _then: (context, decorations, node) => [
-    createHeadingNode(context.traverse(node, decorations), {
+export const hToHeading: Rule = [
+  flow(toName, /h[1-6]/.test.bind(/h[1-6]/)),
+  context => (node: Element) => [
+    createHeadingNode(context.visit(node), {
       level: Number(node.nodeName.replace('h', '')),
     }),
   ],
-};
+];
 
-export const aToLink: Rule = {
-  _if: hasTag('a'),
-  _then: (context, decorations, node: Element) =>
-    context.addDecoration(node, decorations, Decoration_Type.LINK, createLinkData(node)),
-};
+export const aToLink: Rule = [
+  hasTag('a'),
+  context => (node: Element) =>
+    context.addDecoration(Decoration_Type.LINK, createLinkData(node), node),
+];
 
-export const lToList: Rule = {
-  _if: oneOf(['ul', 'ol', 'li']),
-  _then: (context, decorations, node) => [
+export const lToList: Rule = [
+  oneOf(['ul', 'ol', 'li']),
+  context => (node: Element) => [
     createNode(
       {
         ul: Node_Type.BULLET_LIST,
         ol: Node_Type.ORDERED_LIST,
         li: Node_Type.LIST_ITEM,
       }[node.nodeName],
-      context.traverse(node, decorations)
+      context.visit(node)
     ),
   ],
-};
+];
 
-export const strongEmUToDecoration: Rule = {
-  _if: oneOf(['strong', 'em', 'u']),
-  _then: (context, decorations, node) =>
+export const strongEmUToDecoration: Rule = [
+  oneOf(['strong', 'em', 'u']),
+  context => (node: Element) =>
     context.addDecoration(
-      node,
-      decorations,
       { strong: Decoration_Type.BOLD, em: Decoration_Type.ITALIC, u: Decoration_Type.UNDERLINE }[
         node.nodeName
-      ]
+      ],
+      {},
+      node
     ),
-};
+];
