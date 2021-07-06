@@ -17,6 +17,13 @@
     Click to see more.
   </summary>
 
+### :nail_care
+
+- `table`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+- `collapsible-list`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+
 ### :house: Internal
 
 - `editor-common`
@@ -44,7 +51,7 @@
 ### :nail_care
 
 - `gallery/image`
-- [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
+  - [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
 
 ## 8.46.0 (Jun 29, 2021)
 
