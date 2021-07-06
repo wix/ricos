@@ -23,12 +23,12 @@ const MobilePanel = ({
     <div>
       <button
         className={isSelected ? styles.mobilePanel_selectedLineHeight : ''}
-        key={option.commandKey}
-        onClick={() => onClick(option.commandKey)}
+        key={option[Object.keys(option)[0]]}
+        onClick={() => onClick(option[Object.keys(option)[0]])}
       >
         <div className={styles.alignment_mobile_contentWrapper}>
           {option.icon && <div>{option.icon}</div>}
-          <div>{option.text}</div>
+          <div>{Object.keys(option)[0]}</div>
         </div>
       </button>
       {showSeparator && <Separator />}
@@ -42,7 +42,7 @@ const MobilePanel = ({
       <Separator />
       <div className={styles.mobilePanel_heights}>
         {options.map((option, i) => {
-          const isSelected = selected === option.commandKey;
+          const isSelected = selected === option[Object.keys(option)[0]];
           const showSeparator = i !== options.length - 1;
           return lineHeightElement(option, isSelected, showSeparator);
         })}
