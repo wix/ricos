@@ -20,6 +20,7 @@ type dropDownPropsType = {
   loadSelection?: () => void;
   saveSelection?: () => void;
   colorPickerHeaderKey: string;
+  withColoredIcon?: boolean;
 };
 
 interface ColorPickerButtonProps {
@@ -132,21 +133,36 @@ class ColorPickerButton extends Component<ColorPickerButtonProps, State> {
 
   render() {
     const { settings, t, isMobile, dropDownProps, theme, nestedMenu } = this.props;
-    const { isActive, getIcon, tooltip, colorPickerHeaderKey } = dropDownProps;
+    const { isActive, getIcon, tooltip, colorPickerHeaderKey, withColoredIcon } = dropDownProps;
     const { currentColor, userColors } = this.state;
     const { isModalOpen } = this.state;
     const { colorScheme } = settings;
     const palette = this.extractPalette(colorScheme);
     const paletteColors = isMobile ? palette.slice(0, 5) : palette.slice(0, 6);
+    let icon;
+    if (withColoredIcon) {
+      const Icon = getIcon();
+      let coloredIcon;
+      if (currentColor[0] === '#' || currentColor === 'unset') {
+        coloredIcon = <Icon style={{ color: currentColor }} />;
+      } else {
+        const color = colorScheme[currentColor].color;
+        coloredIcon = <Icon style={{ color }} />;
+      }
+      icon = coloredIcon;
+    } else {
+      const Icon = getIcon();
+      icon = <Icon />;
+    }
     return (
       <ClickOutside onClickOutside={this.closeModal}>
         <ToolbarButton
           {...dropDownProps}
-          isActive={isActive()}
+          isActive={withColoredIcon ? false : isActive()}
           onClick={this.toggleModal}
           tooltipText={tooltip}
           isMobile={isMobile}
-          icon={getIcon()}
+          icon={() => icon}
           theme={theme}
           onToolbarButtonClick={this.props.onToolbarButtonClick}
         />

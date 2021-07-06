@@ -90,6 +90,7 @@ const handleButtonColorPicker = (
       editorCommands.insertDecoration(colorTypes[buttonName]);
     };
     buttonsList[index].colorPickerHeaderKey = buttonsFullData[buttonName].colorPickerHeaderKey;
+    buttonsList[index].withColoredIcon = true;
   }
 };
 
