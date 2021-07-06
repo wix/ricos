@@ -54,9 +54,13 @@ export default () => {
       <Page title="Ricos Modal API: ariaHiddenId attribute">
         <div style={{ background: 'red', zIndex: 2, position: 'absolute', width: '100%' }}>
           Some annoying div that demonstrate the usage of
-          <a target="_blank" href="https://wix.github.io/ricos/docs/ricos/ricos-api#modalsettings">
+          <a
+            target="_blank"
+            href="https://wix.github.io/ricos/docs/ricos/ricos-api#modalsettings"
+            rel="noreferrer"
+          >
             {' '}
-            modalSettings' container
+            modalSettings&apos; container
           </a>
         </div>
         <div style={{ zIndex: 1, position: 'absolute' }}>
