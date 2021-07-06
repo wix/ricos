@@ -133,7 +133,7 @@ const CustomPanel = ({ spacing, onChange, onSave, onCancel, styles, t }) => {
 export default class NewPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: props.initialSelect };
+    this.state = { selected: props.currentSelect };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
@@ -148,23 +148,25 @@ export default class NewPanel extends Component {
     }
   };
 
-  onChange = spacing => {
-    const merged = { ...this.state.spacing, ...spacing };
-    this.setState({ spacing: merged });
-    this.props.onChange(merged);
+  onChange = selected => {
+    const merged = { ...this.state.selected, ...selected };
+    this.setState({ selected: merged });
+    this.props.onChange(selected);
   };
 
-  onSave = spacing => {
-    this.props.onSave({ ...this.state.spacing, ...spacing });
+  onSave = selected => {
+    this.props.onSave({ ...this.state.selected, ...selected });
   };
 
   render() {
-    const { onCancel, t, isMobile, options, panelHeader } = this.props;
+    const { onCancel, t, isMobile, options, panelHeader, currentSelect } = this.props;
     const { isCustomPanel, selected } = this.state;
     const { styles, showCustomPanel, onChange, onSave } = this;
     // const selectedHeight = spacing['line-height'];//!TODO selected row
     const onSaveLineHeight = height => onSave({ 'line-height': height });
-    const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
+    // const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
+    // console.log('props ', this.props);
+    // const onChangeLineHeight = selected => onChange({ currentSelect: `${selected}` });
     // const options = [1, 1.5, 2, 2.5, 3];
     // const panelHeader = t('LineSpacing_lineSpacing');
 
@@ -173,9 +175,10 @@ export default class NewPanel extends Component {
         {...{
           // styles,
           // selectedHeight,
+          currentSelect,
           panelHeader,
           options,
-          onChange: onChangeLineHeight,
+          onChange: this.props.onChange,
           onSave,
           onCancel,
         }}
@@ -215,14 +218,14 @@ NewPanel.propTypes = {
   onCustomPanel: PropTypes.func,
   onSave: PropTypes.func,
   showCustomPanel: PropTypes.func,
-  initialSelect: PropTypes.string,
+  currentSelect: PropTypes.string,
   options: PropTypes.array,
   panelHeader: PropTypes.string,
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-NewPanel.defaultProps = { spacing: {} };
+// NewPanel.defaultProps = { spacing: {} };
 
 CustomPanel.propTypes = {
   isMobile: PropTypes.bool,

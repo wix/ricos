@@ -246,3 +246,22 @@
     }
   }
 }
+
+//Alignment
+.alignment_mobile_contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  svg {
+    height: 20px;
+  }
+
+  :nth-child(1) {
+    max-width: 20px;
+  }
+
+  * {
+    display: flex;
+    align-items: center;
+  }
+}

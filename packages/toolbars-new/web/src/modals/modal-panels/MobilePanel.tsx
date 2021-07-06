@@ -3,23 +3,17 @@ import styles from './styles.scss';
 
 const Separator = () => <div className={styles.separator} />;
 
-// const options = ['left', 'center', 'right'];
-
-// const selected = () => console.log('On Select');
-// const onSave = () => console.log('On Save');
-// const onChange = () => console.log('On Change');
-// const onCancel = () => console.log('On Change');
-
 const MobilePanel = ({
   // selectedHeight,
   // styles,
+  currentSelect,
   panelHeader,
   onChange,
   options,
-  onSave,
-  onCancel,
+  // onSave,
+  // onCancel,
 }) => {
-  const [selected, setSelected] = useState<null | number | string>(null);
+  const [selected, setSelected] = useState<number | string>(currentSelect);
   const onClick = selected => {
     setSelected(selected);
     onChange(selected);
@@ -29,10 +23,13 @@ const MobilePanel = ({
     <div>
       <button
         className={isSelected ? styles.mobilePanel_selectedLineHeight : ''}
-        key={option}
-        onClick={() => onClick(option)}
+        key={option[Object.keys(option)[0]]}
+        onClick={() => onClick(option[Object.keys(option)[0]])}
       >
-        {option}
+        <div className={styles.alignment_mobile_contentWrapper}>
+          {option.icon && <div>{option.icon}</div>}
+          <div>{Object.keys(option)[0]}</div>
+        </div>
       </button>
       {showSeparator && <Separator />}
     </div>
@@ -45,7 +42,7 @@ const MobilePanel = ({
       <Separator />
       <div className={styles.mobilePanel_heights}>
         {options.map((option, i) => {
-          const isSelected = selected === option;
+          const isSelected = selected === option[Object.keys(option)[0]];
           const showSeparator = i !== options.length - 1;
           return lineHeightElement(option, isSelected, showSeparator);
         })}
@@ -53,30 +50,5 @@ const MobilePanel = ({
     </div>
   );
 };
-
-// function MobilePanel({ onCancel, t, options, isMobile = true }) {
-//   //   const { onCancel, t, isMobile } = this.props;
-//   //   const { isCustomPanel, spacing } = this.state;
-//   //   const { styles, showCustomPanel, onChange, onSave } = this;
-//   //   const selected =  alignement['line-height'];
-//   const selected = () => console.log('On Select');
-//   const onSave = () => console.log('On Save');
-//   const onChange = () => console.log('On Change');
-//   //   const onSaveLineHeight = height => onSave({ 'line-height': height });
-//   //   const onChangeLineHeight = height => onChange({ 'line-height': height });
-//   return (
-//     <MobilePanel
-//       {...{
-//         styles,
-//         selected,
-//         t,
-//         onChange,
-//         onSave,
-//         options,
-//         onCancel,
-//       }}
-//     />
-//   );
-// }
 
 export default MobilePanel;
