@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { Dropdown, Input } from 'wix-style-react';
 import { truncateContent } from 'ricos-content/libs/truncateContent';

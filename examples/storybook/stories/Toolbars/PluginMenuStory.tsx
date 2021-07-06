@@ -7,6 +7,7 @@ import { DraftContent, ToolbarSettings } from 'ricos-editor';
 
 export default (isMobile = false) => {
   class PluginMenuStory extends Component<
+    // eslint-disable-next-line @typescript-eslint/ban-types
     {},
     {
       editorKey: number;

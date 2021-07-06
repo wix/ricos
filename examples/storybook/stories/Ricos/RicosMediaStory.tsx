@@ -47,6 +47,7 @@ export default () => {
           <ActionButton
             text={'Publish'}
             tooltipText={isButtonDisabled && 'Uploading files'}
+            // eslint-disable-next-line no-alert
             onClick={() => alert('Published')}
             isDisabled={isButtonDisabled}
           />

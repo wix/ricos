@@ -1,6 +1,6 @@
 {
   "name": "wix-tiptap-editor",
-  "version": "8.46.3",
+  "version": "8.46.5",
   "author": {
     "name": "Bashar Qaddumi",
     "email": "bqaddumi@asaltech.com"
@@ -32,7 +32,8 @@
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
+    "test": "jest --verbose"
   },
   "dependencies": {
     "@tiptap/core": "2.0.0-beta.54",
@@ -50,6 +51,7 @@
     "@tiptap/extension-history": "2.0.0-beta.12",
     "@tiptap/extension-horizontal-rule": "2.0.0-beta.16",
     "@tiptap/extension-italic": "2.0.0-beta.13",
+    "@tiptap/extension-link": "2.0.0-beta.18",
     "@tiptap/extension-list-item": "2.0.0-beta.13",
     "@tiptap/extension-ordered-list": "2.0.0-beta.13",
     "@tiptap/extension-paragraph": "^2.0.0-beta.14",
@@ -58,9 +60,28 @@
     "@tiptap/extension-underline": "^2.0.0-beta.13",
     "@tiptap/react": "2.0.0-beta.41",
     "@tiptap/starter-kit": "2.0.0-beta.51",
-    "ricos-content": "8.46.3",
-    "ricos-schema": "8.46.3",
-    "wix-rich-content-plugin-divider": "8.46.3"
+    "ricos-content": "8.46.5",
+    "ricos-schema": "8.46.5",
+    "wix-rich-content-plugin-divider": "8.46.5"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "unpkg": true,
   "publishConfig": {
