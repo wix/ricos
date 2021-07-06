@@ -20,6 +20,7 @@ import {
   VIDEO_TYPE_LEGACY,
   TABLE_TYPE,
   ANCHOR_TYPE,
+  EMBED_TYPE,
 } from '../../consts';
 import { Decoration_Type, Node_Type } from 'ricos-schema';
 
@@ -74,6 +75,7 @@ export const TO_RICOS_NODE_TYPE = {
   [VIDEO_TYPE_LEGACY]: Node_Type.VIDEO,
   [POLL_TYPE]: Node_Type.POLL,
   [TABLE_TYPE]: Node_Type.TABLE,
+  [EMBED_TYPE]: Node_Type.EMBED,
 };
 
 const DUPLICATE_KEYS = [IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
@@ -132,6 +134,7 @@ export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
   [Node_Type.HEADING]: 'headingData',
   [Node_Type.CODE_BLOCK]: 'codeBlockData',
   [Node_Type.BLOCKQUOTE]: 'paragraphData',
+  [Node_Type.EMBED]: 'embedData',
 } as const;
 
 export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {

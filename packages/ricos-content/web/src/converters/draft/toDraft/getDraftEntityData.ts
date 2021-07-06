@@ -6,7 +6,13 @@ import {
   FROM_RICOS_ENTITY_TYPE,
   TO_RICOS_DECORATION_TYPE,
 } from '../consts';
-import { ACTION_BUTTON_TYPE, LINK_BUTTON_TYPE, RicosEntity, RicosEntityMap } from '../../..';
+import {
+  ACTION_BUTTON_TYPE,
+  LINK_BUTTON_TYPE,
+  LINK_PREVIEW_TYPE,
+  RicosEntity,
+  RicosEntityMap,
+} from '../../..';
 import { DraftTypedDecoration } from './decorationParsers';
 import { convertDecorationToDraftData, convertNodeToDraftData } from './convertDraftPluginData';
 
@@ -16,6 +22,8 @@ const getNodeEntityData = (node: Node) => {
   if (type === Node_Type.BUTTON) {
     draftPluginType =
       node.buttonData?.type === ButtonData_Type.ACTION ? ACTION_BUTTON_TYPE : LINK_BUTTON_TYPE;
+  } else if (type === Node_Type.EMBED) {
+    draftPluginType = LINK_PREVIEW_TYPE;
   }
   const data = convertNodeToDraftData(node);
   if (data === undefined) {

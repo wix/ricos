@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package wix.rich_content.v1;
+
+import "wix/rich_content/v1/common.proto";
+import "google/protobuf/wrappers.proto";
+
+message EmbedData {
+    PluginContainerData container_data = 1;
+    Oembed oembed = 2;
+    google.protobuf.StringValue src = 3; 
+}

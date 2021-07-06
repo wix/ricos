@@ -198,7 +198,9 @@ interface Props {
   onBlur?: RichContentEditorProps['onBlur'];
   onFocus?: RichContentEditorProps['onFocus'];
   theme?: RicosTheme;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rcProps?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   experiments?: Record<string, any>;
 }
 
@@ -207,6 +209,7 @@ class EditorWrapper extends React.Component<Props> {
     isMobile: mobileDetect.mobile() !== null,
     toolbarSettings: { getToolbarSettings },
   };
+
   editor: RicosEditorType;
 
   getToolbarProps = type => this.editor.getToolbarProps(type);
@@ -229,7 +232,6 @@ class EditorWrapper extends React.Component<Props> {
       experiments,
     } = this.props;
 
-    console.log({ rcProps });
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
@@ -241,7 +243,6 @@ class EditorWrapper extends React.Component<Props> {
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
-        //@ts-ignore
         experiments={experiments}
         _rcProps={rcProps}
       >

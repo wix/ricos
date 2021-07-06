@@ -45,6 +45,7 @@ const ImagePluginStory = () => {
       <Section title="handleFileUpload Error (with UI)">
         <div>With Error Message:</div>
         <SyntaxHighlighter
+          // eslint-disable-next-line max-len
           code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: ${mockErrorMsg} } });`}
         />
         <RichContentEditorBox>
