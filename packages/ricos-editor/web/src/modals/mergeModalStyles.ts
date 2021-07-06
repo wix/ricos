@@ -11,7 +11,9 @@ const modalStyleDefaults = {
 
 const mergeModalStyles = (modalStyles, theme) => {
   // Render modal below top toolbar of BM sites
-  const headerHeight = document.querySelector('[data-hook="header"]')?.clientHeight;
+  const headerHeight = document
+    .querySelector('[data-hook=bsm-main-container]')
+    ?.querySelector('[data-hook=header]')?.clientHeight;
   return {
     content: Object.assign(
       {},
