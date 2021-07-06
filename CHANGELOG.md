@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `editor-common`
+  - [#2685](https://github.com/wix-incubator/rich-content/pull/2685) color utils for editor commands
+
 ### :nail_care
 
 - `table`
