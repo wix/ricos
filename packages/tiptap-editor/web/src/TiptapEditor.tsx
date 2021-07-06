@@ -2,7 +2,7 @@ import React from 'react';
 import { EditorPropsContext } from './context';
 import Toolbar from './components/Toolbar';
 import { JSONContent } from '@tiptap/core';
-import { Editor, EditorContent } from '@tiptap/react';
+import * as ttReact from '@tiptap/react';
 import {
   draftToTiptap,
   tiptapToDraft,
@@ -17,7 +17,10 @@ import { capitalize } from 'lodash';
 import { TiptapAPI, TiptapConfig } from './types';
 import { RICOS_DIVIDER_TYPE, DIVIDER_TYPE } from 'wix-rich-content-common';
 
-const getEditorCreator = ({ onUpdate }) => (content: JSONContent) => {
+const { Editor, EditorContent } = ttReact;
+
+const getEditorCreator = ({ onUpdate, tiptapExtensions: exts }) => (content: JSONContent) => {
+  // const extensions = exts.map(ext => ext()(ttReact));
   return new Editor({
     content,
     extensions: [...tiptapExtensions, createDivider(), createImage(), createBold()],
@@ -32,7 +35,7 @@ const getEditorCreator = ({ onUpdate }) => (content: JSONContent) => {
 
 // missing forceUpdate
 //github.com/ueberdosis/tiptap/blob/main/packages/react/src/useEditor.ts#L20
-const toTiptapAPI = (editor: Editor): TiptapAPI => ({
+const toTiptapAPI = (editor: ttReact.Editor): TiptapAPI => ({
   Editor: props => (
     <EditorPropsContext.Provider value={props}>
       <div dir="">
@@ -73,9 +76,13 @@ const toTiptapAPI = (editor: Editor): TiptapAPI => ({
   destroy: editor.destroy.bind(editor),
 });
 
-export const initTiptapEditor = ({ initialContent, onUpdate }: TiptapConfig): TiptapAPI => {
+export const initTiptapEditor = ({
+  initialContent,
+  onUpdate,
+  tiptapExtensions,
+}: TiptapConfig): TiptapAPI => {
   const tiptapData = draftToTiptap(initialContent);
-  const editorCreator = getEditorCreator({ onUpdate });
+  const editorCreator = getEditorCreator({ onUpdate, tiptapExtensions });
   const editor = editorCreator(tiptapData);
 
   return toTiptapAPI(editor);

@@ -1,8 +1,18 @@
-export const createNodeExtension = (name, Component, componentDataDefaults) => ({
-  mergeAttributes,
-  ReactNodeViewRenderer,
-  BaseExtensionComponentHOC,
-}) => ({
+import { NodeConfig } from '@tiptap/core';
+import { CreateTiptapExtension } from 'wix-rich-content-common';
+
+type CreateNodeExtension = (
+  name: string,
+  Component: React.ComponentType,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  componentDataDefaults: Record<string, any>
+) => CreateTiptapExtension<NodeConfig>;
+
+export const createNodeExtension: CreateNodeExtension = (
+  name,
+  Component,
+  componentDataDefaults
+) => ({ mergeAttributes, ReactNodeViewRenderer, BaseExtensionComponentHOC }) => ({
   name,
 
   group: 'block',

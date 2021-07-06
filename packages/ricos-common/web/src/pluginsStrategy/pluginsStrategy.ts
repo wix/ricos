@@ -21,6 +21,9 @@ import { RicosCssOverride, RichContentProps } from '../types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type InlineStyleMapper = () => InlineStyleMapping;
 
+type TiptapPluginProps = Pick<RCEPluginProps, 'tiptapExtensions'>;
+type DraftPluginProps = Omit<RCEPluginProps, 'tiptapExtensions'>;
+
 const recordMergeM = <T>() => R.getMonoid<string, T>(last<T>());
 const rcvPropM = struct<RCVPluginProps>({
   config: recordMergeM<any>(),
@@ -29,11 +32,11 @@ const rcvPropM = struct<RCVPluginProps>({
   inlineStyleMappers: A.getMonoid<InlineStyleMapper>(),
 });
 const rcePropM = struct<RCEPluginProps>({
+  tiptapExtensions: A.getMonoid<EditorPlugin['tiptapExtension']>(),
   config: recordMergeM<any>(),
   plugins: A.getMonoid<CreatePluginFunction>(),
   ModalsMap: recordMergeM<ComponentType>(),
   createPluginsDataMap: recordMergeM<any>(),
-  tiptapExtensions: A.getMonoid<EditorPlugin['tiptapExtension']>(),
 });
 
 const extractChildRCVPluginProps = (
@@ -46,17 +49,23 @@ const extractChildRCVPluginProps = (
   inlineStyleMappers: content ? inlineStyleMappers.map(mapper => mapper(config, content)) : [],
 });
 
-const extractChildRCEPluginProps = (childProps: any): RCEPluginProps => ({
+const extractChildRCEPluginProps = (
+  isTiptap: boolean,
+  childProps: any
+): TiptapPluginProps | DraftPluginProps => ({
   ...rcePropM.empty,
-  ...pick(childProps, ['config', 'ModalsMap', 'plugins', 'createPluginsDataMap']),
+  ...pick(
+    childProps,
+    isTiptap ? ['tiptapExtensions'] : ['config', 'ModalsMap', 'plugins', 'createPluginsDataMap']
+  ),
 });
 
 const toRCEPluginProps = (plugin: EditorPlugin): RCEPluginProps => ({
+  tiptapExtensions: plugin.tiptapExtension ? [plugin.tiptapExtension] : [],
   config: { [plugin.type]: plugin.config },
   plugins: plugin.createPlugin ? [plugin.createPlugin] : [],
   ModalsMap: plugin.ModalsMap ?? {},
   createPluginsDataMap: { [plugin.type]: plugin.createPluginData },
-  tiptapExtensions: plugin.tiptapExtension ? [plugin.tiptapExtension] : [],
 });
 
 const toRCVPluginProps = (cssOverride: RicosCssOverride, content?: DraftContent) => (
@@ -91,6 +100,7 @@ export default function pluginsStrategy({
   content?: DraftContent;
   experiments?: AvailableExperiments;
 }): RCEPluginProps | RCVPluginProps {
+  const isTiptap = !!experiments?.tiptapEditor?.enabled;
   return isViewer
     ? pipe(
         plugins as ViewerPlugin[],
@@ -102,6 +112,6 @@ export default function pluginsStrategy({
         plugins as EditorPlugin[],
         A.map(toRCEPluginProps),
         fold(rcePropM),
-        mergeWithChildProps(extractChildRCEPluginProps(childProps), themeData)
+        mergeWithChildProps(extractChildRCEPluginProps(isTiptap, childProps), themeData)
       );
 }
