@@ -14,7 +14,7 @@
             }
           ],
           "attrs": {
-            "key": "cgol3"
+            "key": "2ub9o"
           }
         },
         {
@@ -23,7 +23,7 @@
           "text": " 😎, ",
           "marks": [],
           "attrs": {
-            "key": "7splo"
+            "key": "1phkp"
           }
         },
         {
@@ -36,7 +36,7 @@
             }
           ],
           "attrs": {
-            "key": "afh2q"
+            "key": "cfmp7"
           }
         },
         {
@@ -45,7 +45,7 @@
           "text": " elit. Quisque quis ex ",
           "marks": [],
           "attrs": {
-            "key": "c2npg"
+            "key": "8o1vc"
           }
         },
         {
@@ -58,7 +58,7 @@
             }
           ],
           "attrs": {
-            "key": "7lt80"
+            "key": "92vkh"
           }
         },
         {
@@ -67,7 +67,7 @@
           "text": ", facilisis lectus id, sodales ipsum. In ",
           "marks": [],
           "attrs": {
-            "key": "dtieq"
+            "key": "fbt81"
           }
         },
         {
@@ -80,7 +80,7 @@
             }
           ],
           "attrs": {
-            "key": "3eh9b"
+            "key": "5v708"
           }
         },
         {
@@ -96,7 +96,7 @@
             }
           ],
           "attrs": {
-            "key": "4ct5t"
+            "key": "fpgj4"
           }
         },
         {
@@ -109,7 +109,7 @@
             }
           ],
           "attrs": {
-            "key": "1eoku"
+            "key": "ee1h"
           }
         },
         {
@@ -118,7 +118,7 @@
           "text": " ac elementum. Ut ",
           "marks": [],
           "attrs": {
-            "key": "a08kn"
+            "key": "dt0gs"
           }
         },
         {
@@ -129,9 +129,15 @@
             {
               "type": "link",
               "attrs": {
-                "url": "www.google.com",
-                "rel": "noopener",
-                "target": "_blank"
+                "link": {
+                  "url": "www.google.com",
+                  "target": "BLANK",
+                  "rel": {
+                    "nofollow": true,
+                    "sponsored": true,
+                    "ugc": true
+                  }
+                }
               }
             },
             {
@@ -139,7 +145,7 @@
             }
           ],
           "attrs": {
-            "key": "2cgm5"
+            "key": "ddnk0"
           }
         },
         {
@@ -148,7 +154,7 @@
           "text": " iaculis ex. ",
           "marks": [],
           "attrs": {
-            "key": "andfs"
+            "key": "9vje"
           }
         },
         {
@@ -161,7 +167,7 @@
             }
           ],
           "attrs": {
-            "key": "91ogg"
+            "key": "bdeho"
           }
         },
         {
@@ -170,7 +176,7 @@
           "text": " dolor sit ",
           "marks": [],
           "attrs": {
-            "key": "1vfsa"
+            "key": "et95m"
           }
         },
         {
@@ -187,7 +193,7 @@
             }
           ],
           "attrs": {
-            "key": "86uge"
+            "key": "cpqh3"
           }
         },
         {
@@ -196,7 +202,7 @@
           "text": ", consectetur adipiscing elit. In hac ",
           "marks": [],
           "attrs": {
-            "key": "356l7"
+            "key": "dq4ep"
           }
         },
         {
@@ -212,7 +218,7 @@
             }
           ],
           "attrs": {
-            "key": "5m2nl"
+            "key": "3ce6i"
           }
         },
         {
@@ -229,7 +235,7 @@
             }
           ],
           "attrs": {
-            "key": "7q644"
+            "key": "4tbuj"
           }
         },
         {
@@ -245,7 +251,7 @@
             }
           ],
           "attrs": {
-            "key": "4scfe"
+            "key": "eq16t"
           }
         },
         {
@@ -254,7 +260,7 @@
           "text": ". Aenean placerat, quam eget vestibulum ",
           "marks": [],
           "attrs": {
-            "key": "8ug1v"
+            "key": "e9e7a"
           }
         },
         {
@@ -265,9 +271,10 @@
             {
               "type": "link",
               "attrs": {
-                "url": "www.link.com",
-                "rel": "noopener",
-                "target": "_blank"
+                "link": {
+                  "url": "www.link.com",
+                  "target": "BLANK"
+                }
               }
             },
             {
@@ -275,7 +282,7 @@
             }
           ],
           "attrs": {
-            "key": "c5cnq"
+            "key": "fq7lb"
           }
         },
         {
@@ -284,7 +291,7 @@
           "text": ", nisl ligula vulputate ",
           "marks": [],
           "attrs": {
-            "key": "7tdim"
+            "key": "de7cn"
           }
         },
         {
@@ -303,7 +310,7 @@
             }
           ],
           "attrs": {
-            "key": "qpmp"
+            "key": "a2js9"
           }
         },
         {
@@ -312,7 +319,7 @@
           "text": ", id lacinia odio magna eu arcu.",
           "marks": [],
           "attrs": {
-            "key": "1pao8"
+            "key": "5fk2c"
           }
         }
       ],
@@ -708,7 +715,7 @@
           "text": "songs = pd.read_csv(SONGS_FILE)",
           "marks": [],
           "attrs": {
-            "key": "11f6e"
+            "key": "24ltb"
           }
         }
       ],
@@ -1007,7 +1014,7 @@
               "text": "Nunc eros ante , porttitor ",
               "marks": [],
               "attrs": {
-                "key": "7qc3n"
+                "key": "everh"
               }
             },
             {
@@ -1020,7 +1027,7 @@
                 }
               ],
               "attrs": {
-                "key": "296hd"
+                "key": "878fn"
               }
             },
             {
@@ -1029,7 +1036,7 @@
               "text": " tempor nec, sagittis non mi. Nulla non ",
               "marks": [],
               "attrs": {
-                "key": "bq635"
+                "key": "3v076"
               }
             },
             {
@@ -1042,7 +1049,7 @@
                 }
               ],
               "attrs": {
-                "key": "79l5"
+                "key": "97sd2"
               }
             },
             {
@@ -1051,7 +1058,7 @@
               "text": " ",
               "marks": [],
               "attrs": {
-                "key": "371ih"
+                "key": "ak3d4"
               }
             },
             {
@@ -1067,7 +1074,7 @@
                 }
               ],
               "attrs": {
-                "key": "fges5"
+                "key": "4vekk"
               }
             },
             {
@@ -1076,7 +1083,7 @@
               "text": ", semper convallis sapien.",
               "marks": [],
               "attrs": {
-                "key": "fhp5s"
+                "key": "fjep2"
               }
             }
           ],
@@ -1085,7 +1092,7 @@
               "textAlignment": "AUTO"
             },
             "indentation": 0,
-            "key": "9iojv"
+            "key": "e8jke"
           }
         }
       ],
@@ -1108,7 +1115,7 @@
                   "text": "In imperdiet eros elementum nulla fringilla sollicitudin.",
                   "marks": [],
                   "attrs": {
-                    "key": "4qbos"
+                    "key": "7e3r"
                   }
                 }
               ],
@@ -1117,7 +1124,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "acnr3"
+                "key": "1p1mt"
               }
             },
             {
@@ -1135,7 +1142,7 @@
                           "text": "Proin dictum aliquam sapien at pretium.",
                           "marks": [],
                           "attrs": {
-                            "key": "1hqqm"
+                            "key": "bro2u"
                           }
                         }
                       ],
@@ -1144,7 +1151,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "2o8lf"
+                        "key": "99br1"
                       }
                     },
                     {
@@ -1162,7 +1169,7 @@
                                   "text": "Quisque pulvinar ac erat vitae imperdiet.",
                                   "marks": [],
                                   "attrs": {
-                                    "key": "48ts0"
+                                    "key": "4b45o"
                                   }
                                 }
                               ],
@@ -1171,7 +1178,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "6otnu"
+                                "key": "fbokl"
                               }
                             },
                             {
@@ -1189,7 +1196,7 @@
                                           "text": "Phasellus ultricies urna ut ultrices imperdiet.",
                                           "marks": [],
                                           "attrs": {
-                                            "key": "3gc1j"
+                                            "key": "bc3ff"
                                           }
                                         }
                                       ],
@@ -1198,7 +1205,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "85uf5"
+                                        "key": "6p1b9"
                                       }
                                     },
                                     {
@@ -1216,7 +1223,7 @@
                                                   "text": "Nulla non varius ipsum, sit amet consectetur quam.",
                                                   "marks": [],
                                                   "attrs": {
-                                                    "key": "eb28f"
+                                                    "key": "f55a6"
                                                   }
                                                 }
                                               ],
@@ -1225,7 +1232,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "6bp8q"
+                                                "key": "864r"
                                               }
                                             }
                                           ],
@@ -1245,7 +1252,7 @@
                                                   "text": "Nunc scelerisque fringilla aliquet.",
                                                   "marks": [],
                                                   "attrs": {
-                                                    "key": "2c8st"
+                                                    "key": "9f2vp"
                                                   }
                                                 }
                                               ],
@@ -1254,7 +1261,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "1n84b"
+                                                "key": "dkei4"
                                               }
                                             }
                                           ],
@@ -1264,7 +1271,7 @@
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "n8cg"
+                                        "key": "9kvev"
                                       }
                                     }
                                   ],
@@ -1274,7 +1281,7 @@
                                 }
                               ],
                               "attrs": {
-                                "key": "9b46e"
+                                "key": "a7f9j"
                               }
                             }
                           ],
@@ -1284,7 +1291,7 @@
                         }
                       ],
                       "attrs": {
-                        "key": "4ccbk"
+                        "key": "2j8qr"
                       }
                     }
                   ],
@@ -1294,7 +1301,7 @@
                 }
               ],
               "attrs": {
-                "key": "bnle0"
+                "key": "1h07c"
               }
             }
           ],
@@ -1314,7 +1321,7 @@
                   "text": "Praesent purus nibh, sodales",
                   "marks": [],
                   "attrs": {
-                    "key": "4f49b"
+                    "key": "3a9ct"
                   }
                 }
               ],
@@ -1323,7 +1330,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "8amh"
+                "key": "flh0r"
               }
             },
             {
@@ -1341,7 +1348,7 @@
                           "text": "non efficitur a",
                           "marks": [],
                           "attrs": {
-                            "key": "b9i44"
+                            "key": "dckms"
                           }
                         }
                       ],
@@ -1350,7 +1357,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "b6hvj"
+                        "key": "c38cc"
                       }
                     }
                   ],
@@ -1360,7 +1367,7 @@
                 }
               ],
               "attrs": {
-                "key": "1vc88"
+                "key": "9aufv"
               }
             }
           ],
@@ -1380,7 +1387,7 @@
                   "text": "consequat ac ante.",
                   "marks": [],
                   "attrs": {
-                    "key": "cj9f6"
+                    "key": "cer1k"
                   }
                 }
               ],
@@ -1389,7 +1396,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "f6110"
+                "key": "4qt0i"
               }
             }
           ],
@@ -1399,7 +1406,7 @@
         }
       ],
       "attrs": {
-        "key": "14ku0"
+        "key": "5nk67"
       }
     },
     {
@@ -1428,7 +1435,7 @@
                   "text": "Aenean sed posuere odio.",
                   "marks": [],
                   "attrs": {
-                    "key": "bjda1"
+                    "key": "42gf3"
                   }
                 }
               ],
@@ -1437,7 +1444,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "77ao2"
+                "key": "ajfq3"
               }
             },
             {
@@ -1455,7 +1462,7 @@
                           "text": "Pellentesque imperdiet maximus turpis nec faucibus.",
                           "marks": [],
                           "attrs": {
-                            "key": "bevjt"
+                            "key": "a0ljb"
                           }
                         }
                       ],
@@ -1464,7 +1471,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "bo8r2"
+                        "key": "7g493"
                       }
                     },
                     {
@@ -1482,7 +1489,7 @@
                                   "text": "Nulla at tempus lectus,",
                                   "marks": [],
                                   "attrs": {
-                                    "key": "dv8rt"
+                                    "key": "df87o"
                                   }
                                 }
                               ],
@@ -1491,7 +1498,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "aca8f"
+                                "key": "1scff"
                               }
                             },
                             {
@@ -1509,7 +1516,7 @@
                                           "text": "non tempor tortor.",
                                           "marks": [],
                                           "attrs": {
-                                            "key": "dk9q6"
+                                            "key": "3qs6s"
                                           }
                                         }
                                       ],
@@ -1518,7 +1525,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "3md5u"
+                                        "key": "bab5c"
                                       }
                                     },
                                     {
@@ -1536,7 +1543,7 @@
                                                   "text": "Vivamus mauris",
                                                   "marks": [],
                                                   "attrs": {
-                                                    "key": "36abu"
+                                                    "key": "61nkt"
                                                   }
                                                 }
                                               ],
@@ -1545,7 +1552,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "8eupm"
+                                                "key": "dkhkg"
                                               }
                                             }
                                           ],
@@ -1565,7 +1572,7 @@
                                                   "text": "diam",
                                                   "marks": [],
                                                   "attrs": {
-                                                    "key": "3k1a3"
+                                                    "key": "akkm2"
                                                   }
                                                 }
                                               ],
@@ -1574,7 +1581,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "chuje"
+                                                "key": "dfkrq"
                                               }
                                             }
                                           ],
@@ -1584,7 +1591,7 @@
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "eqirc"
+                                        "key": "2ga88"
                                       }
                                     }
                                   ],
@@ -1594,7 +1601,7 @@
                                 }
                               ],
                               "attrs": {
-                                "key": "3drnn"
+                                "key": "62bhj"
                               }
                             }
                           ],
@@ -1604,7 +1611,7 @@
                         }
                       ],
                       "attrs": {
-                        "key": "31drb"
+                        "key": "2ioqi"
                       }
                     }
                   ],
@@ -1614,7 +1621,7 @@
                 }
               ],
               "attrs": {
-                "key": "9kpuh"
+                "key": "i1kg"
               }
             }
           ],
@@ -1634,7 +1641,7 @@
                   "text": "Auctor in sollicitudin eget, suscipit sed nulla.",
                   "marks": [],
                   "attrs": {
-                    "key": "9smj3"
+                    "key": "6ukk4"
                   }
                 }
               ],
@@ -1643,7 +1650,7 @@
                   "textAlignment": "RIGHT"
                 },
                 "indentation": 0,
-                "key": "879te"
+                "key": "1fk4"
               }
             }
           ],
@@ -1663,7 +1670,7 @@
                   "text": "Aenean sapien lectus, interdum ultrices enim a, sodales ultrices mi. Quisque ut mi metus.",
                   "marks": [],
                   "attrs": {
-                    "key": "99cs5"
+                    "key": "jq3r"
                   }
                 }
               ],
@@ -1672,7 +1679,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "d2s7v"
+                "key": "ddf7t"
               }
             }
           ],
@@ -1682,7 +1689,7 @@
         }
       ],
       "attrs": {
-        "key": "708og"
+        "key": "ee76s"
       }
     },
     {
@@ -1705,7 +1712,7 @@
           "text": "Donec sit amet sapien quis velit ultrices sollicitudin id facilisis ligula.",
           "marks": [],
           "attrs": {
-            "key": "cfs9v"
+            "key": "6i03g"
           }
         }
       ],
@@ -1745,7 +1752,7 @@
           "text": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac 👨‍👩‍👦‍👦 habitasse platea dictumst. In hac habitasse platea dictumst. Cras porta dolor lorem, ac luctus justo pretium quis. Vestibulum et lacinia tortor, in viverra ipsum.",
           "marks": [],
           "attrs": {
-            "key": "ecsq2"
+            "key": "9ibmd"
           }
         }
       ],
@@ -1803,7 +1810,7 @@
           "text": "לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, ושבעגט ליבם סולגק.",
           "marks": [],
           "attrs": {
-            "key": "1pamh"
+            "key": "42skn"
           }
         }
       ],
@@ -1824,7 +1831,7 @@
           "text": "בראיט ולחת צורק מונחף, בגורמי מגמש.\n",
           "marks": [],
           "attrs": {
-            "key": "51iii"
+            "key": "bauqg"
           }
         }
       ],
@@ -1851,8 +1858,8 @@
   "attrs": {
     "metadata": {
       "version": 1,
-      "createdTimestamp": "2021-07-04T08:05:34.705Z",
-      "updatedTimestamp": "2021-07-04T08:05:34.705Z"
+      "createdTimestamp": "2021-07-06T08:26:35.305Z",
+      "updatedTimestamp": "2021-07-06T08:26:35.305Z"
     }
   }
 }

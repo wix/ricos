@@ -14,6 +14,7 @@ import {
   VIDEO_TYPE,
   MAP_TYPE,
   EMBED_TYPE,
+  LINK_TYPE,
 } from '../../../consts';
 import {
   PluginContainerData_Spoiler,
@@ -21,7 +22,6 @@ import {
   PluginContainerData_Width_Type,
   ButtonData_Type,
   Link,
-  Link_Target,
 } from 'ricos-schema';
 import { TO_RICOS_DATA } from './consts';
 import {
@@ -30,6 +30,7 @@ import {
   ImageComponentData,
   VideoComponentData,
 } from '../../../types';
+import { createLink } from '../../nodeUtils';
 
 export const convertBlockDataToRicos = (type: string, data) => {
   const newData = cloneDeep(data);
@@ -41,12 +42,13 @@ export const convertBlockDataToRicos = (type: string, data) => {
     [POLL_TYPE]: convertPollData,
     [VERTICAL_EMBED_TYPE]: convertVerticalEmbedData,
     [LINK_PREVIEW_TYPE]: convertLinkPreviewData,
-    [MENTION_TYPE]: convertMention,
+    [MENTION_TYPE]: convertMentionData,
     [LINK_BUTTON_TYPE]: convertButtonData,
     [ACTION_BUTTON_TYPE]: convertButtonData,
     [HTML_TYPE]: convertHTMLData,
     [MAP_TYPE]: convertMapData,
-    [EMBED_TYPE]: convertEmbed,
+    [EMBED_TYPE]: convertEmbedData,
+    [LINK_TYPE]: convertLinkData,
   };
   let blockType = type;
   if (type === LINK_PREVIEW_TYPE && data.html) {
@@ -133,7 +135,7 @@ const convertImageData = (data: {
   const { file_name, width, height } = data.src || {};
   const { link, anchor, disableExpand } = data.config || {};
   data.image = { src: { custom: file_name }, width, height };
-  data.link = (link || anchor) && convertLink({ ...link, anchor });
+  data.link = (link || anchor) && createLink({ ...link, anchor });
   data.disableExpand = disableExpand;
   data.altText = data.metadata?.alt;
   data.caption = data.metadata?.caption;
@@ -158,10 +160,10 @@ const convertLinkPreviewData = (data: {
   link;
 }) => {
   has(data, 'thumbnail_url') && (data.thumbnailUrl = data.thumbnail_url);
-  data.config?.link && (data.link = convertLink(data.config?.link));
+  data.config?.link && (data.link = createLink(data.config?.link));
 };
 
-const convertMention = (data: {
+const convertMentionData = (data: {
   mention?: { name?: string; slug?: string };
   name?: string;
   slug?: string;
@@ -193,7 +195,7 @@ const convertButtonData = (
   data.type = blockType === ACTION_BUTTON_TYPE ? ButtonData_Type.ACTION : ButtonData_Type.LINK;
   data.text = buttonText;
   if (url) {
-    data.link = convertLink({
+    data.link = createLink({
       url,
       rel,
       target,
@@ -230,31 +232,7 @@ const convertMapData = data => {
   }
 };
 
-const convertLink = ({
-  url,
-  rel,
-  target,
-  anchor,
-}: {
-  url?: string;
-  rel?: string;
-  target?: string;
-  anchor?: string;
-}): Link => {
-  const relValues =
-    rel
-      ?.split(' ')
-      .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
-      .map(key => [key, true]) || [];
-  return {
-    anchor,
-    url,
-    rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
-    target: target?.toUpperCase().substring(1) as Link_Target,
-  };
-};
-
-const convertEmbed = (data: {
+const convertEmbedData = (data: {
   html;
   description?;
   title?;
@@ -272,6 +250,10 @@ const convertEmbed = (data: {
     description: data.description,
     html: data.html,
   };
+};
+
+const convertLinkData = (data: { url: string; target?: string; rel?: string } & { link: Link }) => {
+  data.link = createLink(data);
 };
 
 const kebabToConstantCase = (str: string) => str.toUpperCase().replace('-', '_');

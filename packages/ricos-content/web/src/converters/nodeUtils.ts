@@ -9,6 +9,8 @@ import {
   Decoration_Type,
   HeadingData,
   LATEST_VERSION,
+  Link,
+  Link_Target,
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
 
@@ -61,3 +63,30 @@ export const initializeMetadata = (version?: number): Metadata => ({
   createdTimestamp: new Date(),
   updatedTimestamp: new Date(),
 });
+
+export const createLink = ({
+  url,
+  rel,
+  target,
+  anchor,
+}: {
+  url?: string;
+  rel?: string;
+  target?: string;
+  anchor?: string;
+}): Link => {
+  const relValues =
+    rel
+      ?.split(' ')
+      .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
+      .map(key => [key, true]) || [];
+  return {
+    anchor,
+    url,
+    rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
+    target: target?.toUpperCase().substring(1) as Link_Target,
+  };
+};
+
+export const createLinkDecoration = (data: { url?: string; rel?: string; target?: string }) =>
+  createDecoration(Decoration_Type.LINK, { linkData: { link: createLink(data) } });
