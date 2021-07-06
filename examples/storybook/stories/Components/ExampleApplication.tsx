@@ -11,7 +11,8 @@ const ExampleApplication: FunctionComponent<{
   initialState?: DraftContent;
   theme?: RicosTheme;
   display?: 'Editor' | 'Viewer' | 'Both';
-  editorProps?: Record<string, any>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  editorProps?: Record<string, any>;
 }> = ({ initialState, theme, display = 'Both', editorProps = {} }) => {
   const [content, setContent] = useState(initialState);
   const showEditor = useMemo(() => display === 'Both' || display === 'Editor', [display]);
@@ -26,7 +27,6 @@ const ExampleApplication: FunctionComponent<{
             theme={{ ...theme, parentClass: styles['rce-wrapper'] }}
             onChange={setContent}
             {...editorProps}
-
           />
         </RichContentEditorBox>
       )}

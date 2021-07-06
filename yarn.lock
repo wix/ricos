@@ -26088,9 +26088,9 @@ ts-poet@^4.5.0:
     lodash "^4.17.15"
     prettier "^2.0.2"
 
-ts-proto-descriptors@^1.2.0:
+ts-proto-descriptors@1.2.1, ts-proto-descriptors@^1.2.0:
   version "1.2.1"
-  resolved "https://registry.npmjs.org/ts-proto-descriptors/-/ts-proto-descriptors-1.2.1.tgz#3ff4e2bfcabaf1a59e8faff6f0518cd5d25fa16e"
+  resolved "https://registry.yarnpkg.com/ts-proto-descriptors/-/ts-proto-descriptors-1.2.1.tgz#3ff4e2bfcabaf1a59e8faff6f0518cd5d25fa16e"
   integrity sha512-iSHiQAaovi9sBwjiSCca/E089uv0IMt9Cfe0wV5AJwZppGa47yfih97Q+1006bdSLWkxf5Pk3VDQnt1yRTMV8w==
   dependencies:
     long "^4.0.0"

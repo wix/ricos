@@ -29,7 +29,7 @@ export const getMediaUploadErrorFunctions = () => {
     }, 2000);
   };
 
-  const handleVideoUpload = (file, updateEntity, removeEntity) => {
+  const handleVideoUpload = (file, updateEntity, _removeEntity) => {
     const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
     const testVideo = testWixVideos[mockVideoIndex];
     const videoToUpload = getVideoToUpload(testVideo.url, testVideo.metadata.posters[0].url);

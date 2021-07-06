@@ -284,6 +284,23 @@ export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePlugi
   unsupportedBlocks: createUnsupportedBlocksPlugin,
 };
 
+const innerRCEPlugins = [
+  createTextColorPlugin,
+  createTextHighlightPlugin,
+  createIndentPlugin,
+  createLineSpacingPlugin,
+  createLinkPlugin,
+  createImagePlugin,
+  createVideoPlugin,
+  createGiphyPlugin,
+  createEmojiPlugin,
+  createFileUploadPlugin,
+  createDividerPlugin,
+  createCodeBlockPlugin,
+  createUnsupportedBlocksPlugin,
+  createSpoilerPlugin,
+];
+
 const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
 let userButtonTextColors = [...buttonDefaultPalette];
 let userButtonBackgroundColors = [...buttonDefaultPalette];
@@ -497,32 +514,9 @@ const config: RichContentEditorProps['config'] = {
     //   },
     // },
     // },
-    innerRCEPlugins: [
-      createTextColorPlugin,
-      createLineSpacingPlugin,
-      createDividerPlugin,
-      createEmojiPlugin,
-      createMapPlugin,
-      createUnsupportedBlocksPlugin,
-    ],
   },
   [TABLE_TYPE]: {
-    innerRCEPlugins: [
-      createTextColorPlugin,
-      createTextHighlightPlugin,
-      createIndentPlugin,
-      createLineSpacingPlugin,
-      createLinkPlugin,
-      createImagePlugin,
-      createVideoPlugin,
-      createGiphyPlugin,
-      createEmojiPlugin,
-      createFileUploadPlugin,
-      createDividerPlugin,
-      createCodeBlockPlugin,
-      createUnsupportedBlocksPlugin,
-      createSpoilerPlugin,
-    ],
+    innerRCEPlugins,
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -578,21 +572,7 @@ const config: RichContentEditorProps['config'] = {
       ),
   },
   [COLLAPSIBLE_LIST_TYPE]: {
-    innerRCEPlugins: [
-      createTextColorPlugin,
-      createTextHighlightPlugin,
-      createIndentPlugin,
-      createLineSpacingPlugin,
-      createLinkPlugin,
-      createCodeBlockPlugin,
-      createImagePlugin,
-      createVideoPlugin,
-      createDividerPlugin,
-      createGiphyPlugin,
-      createFileUploadPlugin,
-      createEmojiPlugin,
-      createUnsupportedBlocksPlugin,
-    ],
+    innerRCEPlugins,
   },
   [HEADINGS_DROPDOWN_TYPE]: {
     // customHeadings: ['H2', 'H3'],
