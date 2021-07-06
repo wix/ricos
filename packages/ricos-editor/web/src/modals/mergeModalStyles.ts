@@ -16,7 +16,7 @@ const mergeModalStyles = (modalStyles, theme) => {
     content: Object.assign(
       {},
       (modalStyles || modalStyleDefaults).content,
-      { zIndex: 20001, ...({ paddingTop: headerHeight } || {}) },
+      { zIndex: 20001, ...((headerHeight && { paddingTop: headerHeight }) || {}) },
       theme?.modalTheme?.content || {}
     ),
     overlay: Object.assign(
