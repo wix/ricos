@@ -22,7 +22,7 @@
 - `editor-common`
   - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
 - `image`
-  - []() Merge `useQualityPreload` Experiment
+  - [#2681](https://github.com/wix/ricos/pull/2681) Merge `useQualityPreload` Experiment
 
 </details>
 <hr/>
