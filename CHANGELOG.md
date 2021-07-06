@@ -18,7 +18,8 @@
   </summary>
 
 ### :bug: Bug Fix
-
+- `plugin-commons`
+  - [#2686](https://github.com/wix-incubator/rich-content/pull/2686) revert upload functionality isolation (regression from 8.46.4)
 - `editor-common`
   - [#2685](https://github.com/wix-incubator/rich-content/pull/2685) color utils for editor commands
 
