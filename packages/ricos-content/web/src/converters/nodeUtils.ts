@@ -38,7 +38,7 @@ export const createParagraphNode = (
 });
 
 export const createTextNode = (text: string, decorations: Decoration[] = []): Node => ({
-  ...createNode(Node_Type.TEXT, []),
+  ...createNode(Node_Type.TEXT, [], { key: '' }),
   textData: {
     text,
     decorations,

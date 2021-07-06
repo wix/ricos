@@ -6,7 +6,7 @@ import {
   isNode,
   isTextNode,
 } from '../utils';
-import { transform, isObject, pickBy, identity } from 'lodash';
+import { transform, isObject, pickBy } from 'lodash';
 import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap/core';
@@ -62,7 +62,7 @@ const flattenTextData = (node: Node) => {
 const moveToData = (node: Node) => {
   const { style, key, ...rest } = node;
   const dataFieldName = DATA_FIELDS_MAP[node.type];
-  const dataField = { ...node[dataFieldName], ...pickBy({ style, key }, identity) };
+  const dataField = { ...node[dataFieldName], ...pickBy({ style, key }, x => x !== undefined) };
   return { ...rest, [dataFieldName]: dataField };
 };
 
