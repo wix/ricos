@@ -7,6 +7,7 @@ import VideoCamera from 'wix-ui-icons-common/VideoCamera';
 import styles from './InitialIntentToolbar.scss';
 
 class InitialIntentToolbar extends Component<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   buttons?: any;
   onClick: MouseEventHandler;
 }> {

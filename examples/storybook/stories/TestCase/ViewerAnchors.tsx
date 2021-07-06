@@ -14,6 +14,7 @@ class ViewerAnchors extends React.Component {
     try {
       const newEl = document.createElement('p');
       const text = adFnc ? adFnc(el) : 'My Ad!';
+      // eslint-disable-next-line max-len
       newEl.innerHTML = `<div style="background: cyan; width: 50%; margin: 0 auto; padding: 20px; text-align: center;"}>${text}</div>`;
       el.parentNode.replaceChild(newEl, el);
     } catch (e) {

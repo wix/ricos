@@ -12,7 +12,9 @@ const plugins = [pluginImage(), pluginGallery()];
 export default () => {
   const editorEl = useRef(null);
   const modalSettings = {
+    // eslint-disable-next-line no-console
     onModalOpen: () => console.log('modal opened'),
+    // eslint-disable-next-line no-console
     onModalClose: () => console.log('modal closed'),
   };
   const isMobile = mobileDetect.mobile() !== null;

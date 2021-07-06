@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { RicosEditor } from 'ricos-editor';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -53,7 +52,7 @@ const plugins = [
 
 export default () => {
   const toolbarSettings = {
-    getToolbarSettings: ({ pluginButtons, textButtons }) => {
+    getToolbarSettings: ({ pluginButtons }) => {
       return [
         {
           name: TOOLBARS.FOOTER,
