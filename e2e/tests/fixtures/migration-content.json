@@ -826,7 +826,6 @@
         "config": {
           "alignment": "center",
           "size": "content",
-          "disableExpand": false,
           "link": {
             "url": "www.image-link.com",
             "target": "_blank",
@@ -894,6 +893,7 @@
             "height": 1080
           }
         },
+        "disableDownload": false,
         "isCustomVideo": true,
         "tempData": false
       }
@@ -963,12 +963,12 @@
           "videoPlay": "onClick",
           "numberOfImagesPerRow": 3
         },
+        "disableExpand": false,
         "config": {
           "alignment": "center",
           "size": "content",
           "layout": "small",
-          "spacing": 0,
-          "disableExpand": false
+          "spacing": 0
         }
       }
     },
@@ -1276,8 +1276,7 @@
         "config": {
           "alignment": "right",
           "size": "inline",
-          "width": 300,
-          "disableExpand": false
+          "width": 300
         },
         "src": {
           "id": "91ff5a615e0235157dc1a7e5f66607bf",
