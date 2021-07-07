@@ -17,13 +17,25 @@
     Click to see more.
   </summary>
 
-### :house: Internal
 
-- `editor-common`
-  - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
 
 </details>
 <hr/>
+
+## 8.46.6 (July 6, 2021)
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2686](https://github.com/wix-incubator/rich-content/pull/2686) revert upload functionality isolation (regression from 8.46.4)
+- `editor-common`
+  - [#2685](https://github.com/wix-incubator/rich-content/pull/2685) color utils for editor commands
+### :nail_care
+- `table`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+- `collapsible-list`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+### :house: Internal
+- `editor-common`
+  - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
 
 ## 8.46.5 (July 4, 2021)
 
@@ -44,7 +56,7 @@
 ### :nail_care
 
 - `gallery/image`
-- [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
+  - [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
 
 ## 8.46.0 (Jun 29, 2021)
 
