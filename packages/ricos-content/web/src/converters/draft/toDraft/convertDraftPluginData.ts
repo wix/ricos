@@ -12,7 +12,7 @@ import {
   MentionData,
   FileData,
   ButtonData,
-  FileData_Privacy,
+  FileSource_Privacy,
 } from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
@@ -189,11 +189,10 @@ const convertMention = (data: Partial<MentionData> & { mention }) => {
 };
 
 const convertFileData = (data: Omit<FileData, 'privacy'> & FileComponentData) => {
-  const { privacy } = data;
-  const { url, custom } = data.src || {};
+  const { url, id, custom, privacy } = data.src || {};
   data.url = url;
-  data.id = custom;
-  if (!privacy || (privacy as string) === FileData_Privacy.UNSET) {
+  data.id = id || custom;
+  if (!privacy || (privacy as string) === FileSource_Privacy.UNSET) {
     data.privacy = undefined;
   } else {
     data.privacy = privacy.toLowerCase() as MediaPrivacy;
