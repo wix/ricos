@@ -20,6 +20,8 @@
 ### :bug: Bug Fix
 - `schema`
   - [#2669](https://github.com/wix-incubator/rich-content/pull/2669) fix new schema to support media plugins content ('disableExpand','disableDownload')
+- `image-plugin`
+  - [#2693](https://github.com/wix-incubator/rich-content/pull/2693) fix image data after settings cancel
 
 - `ricos-editor`
   - [#2684](https://github.com/wix-incubator/rich-content/pull/2684) BM's top toolbar overrides Ricos Modal
