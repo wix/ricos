@@ -248,12 +248,7 @@ const handleButtonModal = (
       const spacing = editorCommands.getBlockSpacing();
       buttonsList[index].modal = props =>
         Modal && (
-          <Modal
-            {...props}
-            currentSelect={spacing}
-            // options={[{ 1: 1 }, , 2, 2.5, 3]}
-            panelHeader={t('LineSpacing_lineSpacing')}
-          />
+          <Modal {...props} currentSelect={spacing} panelHeader={t('LineSpacing_lineSpacing')} />
         );
     } else if (buttonName === 'LINK') {
       const Modal = buttonsFullData[buttonName].modal;
