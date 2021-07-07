@@ -38,7 +38,7 @@ export const addLinksToText = (text: string, linkDecorations: RangedDecoration[]
         insertInText(
           newText,
           link.end + newText.length - text.length + 1,
-          `(${link.linkData?.url})`
+          `(${link.linkData?.link?.url})`
         ),
       text
     );

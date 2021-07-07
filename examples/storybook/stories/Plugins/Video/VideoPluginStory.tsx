@@ -48,6 +48,7 @@ const VideoPluginStory = () => (
       <Section title="onFilesChange Error (with UI)">
         <div>With Error Message:</div>
         <SyntaxHighlighter
+          // eslint-disable-next-line max-len
           code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}
         />
         <RichContentEditorBox>

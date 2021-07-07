@@ -791,7 +791,7 @@
       "data": {
         "url": "www.google.com",
         "target": "_blank",
-        "rel": "noopener"
+        "rel": "nofollow sponsored ugc"
       }
     },
     "2": {
@@ -809,8 +809,7 @@
       "mutability": "MUTABLE",
       "data": {
         "url": "www.link.com",
-        "target": "_blank",
-        "rel": "noopener"
+        "target": "_blank"
       }
     },
     "4": {

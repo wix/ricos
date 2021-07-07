@@ -76,20 +76,24 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
     draftContent.entityMap = { ...draftContent.entityMap, ...entityMap };
   };
 
-  const parseListNode = (node: Node) => {
+  const parseListNode = (node: Node, indentation = 0) => {
     node.nodes.forEach(listItem => {
       const [paragraph, childNode] = listItem.nodes;
       parseTextNodes(paragraph, {
         type: TO_DRAFT_LIST_TYPE[node.type],
         key: listItem.key,
+        indentation,
       });
       if (childNode) {
-        parseListNode(childNode);
+        parseListNode(childNode, indentation + 1);
       }
     });
   };
 
-  const parseTextNodes = (node: Node, { type, key }: { type: DraftBlockType; key: string }) => {
+  const parseTextNodes = (
+    node: Node,
+    { type, key, indentation }: { type: DraftBlockType; key: string; indentation?: number }
+  ) => {
     const { text, decorationMap } = mergeTextNodes(node.nodes);
     const { inlineStyleDecorations, entityDecorations } = parseDecorations(decorationMap, text);
     const inlineStyleRanges = parseInlineStyleDecorations(inlineStyleDecorations);
@@ -103,7 +107,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
       key,
       type,
       text,
-      depth,
+      depth: indentation || depth,
       inlineStyleRanges,
       entityRanges,
       data,

@@ -131,9 +131,15 @@
               {
                 "type": "LINK",
                 "linkData": {
-                  "url": "www.google.com",
-                  "rel": "noopener",
-                  "target": "_blank"
+                  "link": {
+                    "url": "www.google.com",
+                    "target": "BLANK",
+                    "rel": {
+                      "nofollow": true,
+                      "sponsored": true,
+                      "ugc": true
+                    }
+                  }
                 }
               },
               {
@@ -267,9 +273,10 @@
               {
                 "type": "LINK",
                 "linkData": {
-                  "url": "www.link.com",
-                  "rel": "noopener",
-                  "target": "_blank"
+                  "link": {
+                    "url": "www.link.com",
+                    "target": "BLANK"
+                  }
                 }
               },
               {
