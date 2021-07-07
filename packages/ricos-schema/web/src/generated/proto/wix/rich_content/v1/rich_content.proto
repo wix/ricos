@@ -37,6 +37,7 @@ import "wix/rich_content/v1/plugin_map.proto";
 import "wix/rich_content/v1/plugin_poll.proto";
 import "wix/rich_content/v1/plugin_vertical_embed.proto";
 import "wix/rich_content/v1/plugin_video.proto";
+import "wix/rich_content/v1/plugin_embed.proto";
 
 message RichContent {
     repeated Node nodes = 1; // List of nodes
@@ -67,6 +68,7 @@ message Node {
         BUTTON = 19;
         COLLAPSIBLE_LIST = 20;
         TABLE = 21;
+        EMBED = 22;
     }
 
     Type type = 1; // Node type
@@ -90,6 +92,7 @@ message Node {
         TextData text_data = 18;
         VerticalEmbedData vertical_embed_data = 19;
         VideoData video_data = 20;
+        EmbedData embed_data = 21;
     }
 }
 

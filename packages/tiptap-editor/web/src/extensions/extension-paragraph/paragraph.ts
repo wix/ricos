@@ -28,7 +28,7 @@ export const Paragraph = Node.create<ParagraphOptions>({
   content: 'inline*',
 
   addAttributes() {
-    const attrs: ParagraphData & { key: string } = { key: '', ...ParagraphData.fromJSON({}) };
+    const attrs: ParagraphData = ParagraphData.fromJSON({});
     return attrs;
   },
 

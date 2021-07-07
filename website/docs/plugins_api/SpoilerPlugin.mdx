@@ -19,6 +19,11 @@ import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditor
 Spoilers plugin allows the user to hide some content (text, image, gallery, video ) on the page.
 Spoiler for plugins done through plugin settings modal, and for text through text formatting toolbar.
 
+For consume Spoiler you need to:
+
+1. `spoiler plugins` - add spoiler plugin to plugins array (described below).
+2. `spoiler text` - add spoiler button to text formatting toolbar by add it to getToolbarSettings config. For more information click [here](https://ricos.js.org/docs/rce_api/ToolbarCustomization/#gettoolbarsettings-api) or look at the example below.
+
 <div className="card">
   <RicosEditorWithMobile
     content={createContent('Add content and spoiler it!')}

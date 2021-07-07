@@ -16,7 +16,9 @@ const plugins = [pluginImage(), pluginGallery(), pluginPoll()];
 
 const RicosPublishStory: FunctionComponent<EditorEventsProps> = ({ editorEvents }) => {
   const modalSettings = {
+    // eslint-disable-next-line no-console
     onModalOpen: () => console.log('modal opened'),
+    // eslint-disable-next-line no-console
     onModalClose: () => console.log('modal closed'),
   };
   const isMobile = mobileDetect.mobile() !== null;
@@ -43,6 +45,7 @@ const RicosPublishStory: FunctionComponent<EditorEventsProps> = ({ editorEvents 
             modalSettings={modalSettings}
             _rcProps={{
               helpers: {
+                // eslint-disable-next-line no-console
                 onPublish: async (...args) => console.log('biOnPublish', args),
               },
             }}

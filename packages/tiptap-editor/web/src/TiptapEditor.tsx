@@ -9,9 +9,6 @@ import {
   draftBlockDataToTiptap,
   TO_RICOS_NODE_TYPE,
 } from 'ricos-content/libs/converters';
-import { createDivider } from './extensions/extension-divider';
-import { createImage } from './extensions/extension-image';
-import { createBold } from './extensions/extension-bold';
 import { tiptapExtensions } from './tiptap-extensions';
 import { capitalize } from 'lodash';
 import { TiptapAPI, TiptapConfig } from './types';
@@ -20,7 +17,7 @@ import { RICOS_DIVIDER_TYPE, DIVIDER_TYPE } from 'wix-rich-content-common';
 const getEditorCreator = ({ onUpdate }) => (content: JSONContent) => {
   return new Editor({
     content,
-    extensions: [...tiptapExtensions, createDivider(), createImage(), createBold()],
+    extensions: tiptapExtensions,
     injectCSS: true,
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();

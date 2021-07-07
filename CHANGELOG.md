@@ -17,15 +17,46 @@
     Click to see more.
   </summary>
 
+
+
 </details>
 <hr/>
+
+## 8.46.6 (July 6, 2021)
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#2686](https://github.com/wix-incubator/rich-content/pull/2686) revert upload functionality isolation (regression from 8.46.4)
+- `editor-common`
+  - [#2685](https://github.com/wix-incubator/rich-content/pull/2685) color utils for editor commands
+### :nail_care
+- `table`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+- `collapsible-list`
+  - [#2682](https://github.com/wix/ricos/pull/2682) add localeContent support
+### :house: Internal
+- `editor-common`
+  - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
+
+## 8.46.5 (July 4, 2021)
+
+### :house: Internal
+
+- `tiptap-editor`
+  - [#2673](https://github.com/wix/ricos/pull/2673) convert tiptap to ES5
+
+## 8.46.4 (July 4, 2021)
+
+### :house: Internal
+
+- `plugin-commons`
+  - [#2581](https://github.com/wix/ricos/pull/2581) unify media upload functionality and extract from plugins
 
 ## 8.46.3 (July 3, 2021)
 
 ### :nail_care
 
 - `gallery/image`
-- [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
+  - [#2649](https://github.com/wix/ricos/pull/2649) remove unused config
 
 ## 8.46.0 (Jun 29, 2021)
 

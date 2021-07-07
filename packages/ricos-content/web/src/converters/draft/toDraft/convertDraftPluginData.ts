@@ -56,6 +56,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
     [Node_Type.MAP]: convertMapData,
+    [Node_Type.EMBED]: convertEmbedData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
     convertContainerData(newData, nodeType);
@@ -102,7 +103,7 @@ const convertContainerData = (
   );
   if (nodeType === Node_Type.IMAGE && width?.custom) {
     data.config.size = 'inline';
-  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+  } else if (nodeType === Node_Type.MAP && width?.custom) {
     data.config.size = 'content';
   }
   delete data.containerData;
@@ -262,6 +263,22 @@ const convertMapData = data => {
     data.mapSettings.isViewControlShown = viewModeControl;
     delete data.mapSettings.viewModeControl;
   }
+};
+
+const convertEmbedData = data => {
+  data.config = {
+    ...(data?.config || {}),
+    alignment: 'center',
+    size: 'content',
+    link: { url: data.src, target: '_blank', rel: 'noopener' },
+  };
+  const { html, thumbnailUrl, title, description } = data.oembed;
+  data.html = html;
+  thumbnailUrl && (data.thumbnail_url = thumbnailUrl);
+  title && (data.title = title);
+  description && (data.description = description);
+  delete data.oembed;
+  delete data.src;
 };
 
 const convertLink = ({
