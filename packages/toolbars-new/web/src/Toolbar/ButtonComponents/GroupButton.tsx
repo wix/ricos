@@ -4,10 +4,9 @@ import classNames from 'classnames';
 import ClickOutside from 'react-click-outsider';
 import Styles from '../Toolbar.scss';
 import ToolbarButton from '../ToolbarButton.jsx';
-import { RichContentTheme, onToolbarButtonClickArgs } from 'wix-rich-content-common';
+import { RichContentTheme } from 'wix-rich-content-common';
 
 interface GroupButtonProps {
-  onToolbarButtonClick?: (args: onToolbarButtonClickArgs) => void;
   isMobile?: boolean;
   tabIndex?: number;
   buttons: any;
@@ -16,7 +15,6 @@ interface GroupButtonProps {
   isActive: () => boolean;
   isDisabled: () => boolean;
   theme?: RichContentTheme;
-  plugin?: string;
 }
 
 interface State {
@@ -66,7 +64,7 @@ class GroupButton extends PureComponent<GroupButtonProps, State> {
   };
 
   renderOptions = () => {
-    const { buttons, theme, plugin } = this.props;
+    const { buttons, theme } = this.props;
 
     return (
       <div className={classNames(Styles.modal, Styles.groupButtonModal)}>
@@ -89,8 +87,6 @@ class GroupButton extends PureComponent<GroupButtonProps, State> {
               icon={buttonProps.getIcon()}
               disabled={buttonProps.isDisabled()}
               asGroupButton
-              onToolbarButtonClick={this.props.onToolbarButtonClick}
-              plugin={plugin}
             />
           );
         })}
@@ -99,7 +95,7 @@ class GroupButton extends PureComponent<GroupButtonProps, State> {
   };
 
   render() {
-    const { tooltip, dataHook, isActive, isMobile, tabIndex, theme, plugin } = this.props;
+    const { tooltip, dataHook, isActive, isMobile, tabIndex, theme } = this.props;
     const { Icon, isDisabled, isOpen } = this.state;
     const disabled = isDisabled();
     return (
@@ -116,8 +112,6 @@ class GroupButton extends PureComponent<GroupButtonProps, State> {
             disabled={disabled}
             icon={Icon}
             theme={theme}
-            onToolbarButtonClick={this.props.onToolbarButtonClick}
-            plugin={plugin}
           />
           {isOpen && this.renderOptions()}
         </div>

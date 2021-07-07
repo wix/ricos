@@ -49,16 +49,9 @@ export const createButtonsList = (
     handleButtonSaveSelection(buttonsList, index, editorCommands);
     handleButtonLoadSelection(buttonsList, index, editorCommands);
     handleButtonColorPicker(buttonsList, index, editorCommands, colorPickerData);
-    handleButtonPlugin(buttonsList, index);
   });
   const filteredButtonsList = filterButtonsByPlugins(buttonsList, plugins);
   return filteredButtonsList;
-};
-
-const handleButtonPlugin = (buttonsList, index) => {
-  if (buttonsFullData[buttonsList[index].name].plugin) {
-    buttonsList[index].plugin = buttonsFullData[buttonsList[index].name].plugin;
-  }
 };
 
 const handleButtonColorPicker = (
