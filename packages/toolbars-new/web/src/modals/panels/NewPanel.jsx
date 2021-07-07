@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
-import NewMobilePanel from '../panels/MobilePanel';
+import NewMobilePanel from './MobilePanel';
 
 const Separator = () => <div className={styles.lineSpacing_separator} />;
 
@@ -130,10 +130,10 @@ const CustomPanel = ({ spacing, onChange, onSave, onCancel, styles, t }) => {
   );
 };
 
-export default class Panel extends Component {
+export default class NewPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { spacing: props.currentSelect };
+    this.state = { selected: props.currentSelect };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
@@ -148,25 +148,27 @@ export default class Panel extends Component {
     }
   };
 
-  onChange = spacing => {
-    const merged = { ...this.state.spacing, ...spacing };
-    this.setState({ spacing: merged });
-    this.props.onChange(merged);
+  onChange = selected => {
+    const merged = { ...this.state.selected, ...selected };
+    this.setState({ selected: merged });
+    this.props.onChange(selected);
   };
 
-  onSave = spacing => {
-    this.props.onSave({ ...this.state.spacing, ...spacing });
+  onSave = selected => {
+    this.props.onSave({ ...this.state.selected, ...selected });
   };
 
   render() {
-    const { onCancel, t, isMobile, currentSelect } = this.props;
-    const { isCustomPanel, spacing } = this.state;
+    const { onCancel, t, isMobile, options, panelHeader, currentSelect } = this.props;
+    const { isCustomPanel, selected } = this.state;
     const { styles, showCustomPanel, onChange, onSave } = this;
-    const selectedHeight = spacing['line-height'];
+    // const selectedHeight = spacing['line-height'];//!TODO selected row
     const onSaveLineHeight = height => onSave({ 'line-height': height });
-    const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
-    const options = [{ 1: 1 }, { 1.5: 1.5 }, { 2: 2 }, { 2.5: 2.5 }, { 3: 3 }];
-    const panelHeader = t('LineSpacing_lineSpacing');
+    // const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
+    // console.log('props ', this.props);
+    // const onChangeLineHeight = selected => onChange({ currentSelect: `${selected}` });
+    // const options = [1, 1.5, 2, 2.5, 3];
+    // const panelHeader = t('LineSpacing_lineSpacing');
 
     const panel = isMobile ? (
       <NewMobilePanel
@@ -176,16 +178,22 @@ export default class Panel extends Component {
           currentSelect,
           panelHeader,
           options,
-          onChange: onChangeLineHeight,
+          onChange: this.props.onChange,
           onSave,
           onCancel,
         }}
       />
     ) : isCustomPanel ? (
-      <CustomPanel {...{ spacing, onChange, onSave, onCancel, styles, t, isMobile }} />
+      <CustomPanel {...{ selected, onChange, onSave, onCancel, styles, t, isMobile }} />
     ) : (
       <LineHeightsPanel
-        {...{ styles, selectedHeight, showCustomPanel, t, onSave: onSaveLineHeight }}
+        {...{
+          styles,
+          //  selectedHeight,
+          showCustomPanel,
+          t,
+          onSave: onSaveLineHeight,
+        }}
       />
     );
 
@@ -203,23 +211,21 @@ export default class Panel extends Component {
   }
 }
 
-Panel.propTypes = {
+NewPanel.propTypes = {
   isMobile: PropTypes.bool,
   onCancel: PropTypes.func,
   onChange: PropTypes.func,
   onCustomPanel: PropTypes.func,
   onSave: PropTypes.func,
   showCustomPanel: PropTypes.func,
-  currentSelect: PropTypes.shape({
-    'line-height': PropTypes.string,
-    'padding-top': PropTypes.string,
-    'padding-bottom': PropTypes.string,
-  }),
+  currentSelect: PropTypes.string,
+  options: PropTypes.array,
+  panelHeader: PropTypes.string,
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-Panel.defaultProps = { spacing: {} };
+// NewPanel.defaultProps = { spacing: {} };
 
 CustomPanel.propTypes = {
   isMobile: PropTypes.bool,

@@ -227,11 +227,34 @@ const handleButtonModal = (
     } else if (buttonName === 'Alignment') {
       const Modal = buttonsFullData[buttonName].modal;
       const alignment = editorCommands.getTextAlignment();
-      buttonsList[index].modal = props => Modal && <Modal {...props} alignment={alignment} />;
+      const alignmentsWithIcons = [
+        { 'Align left': 'left', icon: <AlignLeftIcon /> },
+        { 'Align center': 'center', icon: <AlignTextCenterIcon /> },
+        { 'Align right': 'right', icon: <AlignRightIcon /> },
+        { Justify: 'justify', icon: <AlignJustifyIcon /> },
+      ];
+      buttonsList[index].modal = props =>
+        Modal && (
+          <Modal
+            {...props}
+            currentSelect={alignment}
+            options={alignmentsWithIcons}
+            panelHeader={t('Alignment')}
+            onChange={a => editorCommands.setTextAlignment(a)}
+          />
+        );
     } else if (buttonName === 'LINE_SPACING') {
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
-      buttonsList[index].modal = props => Modal && <Modal {...props} spacing={spacing} />;
+      buttonsList[index].modal = props =>
+        Modal && (
+          <Modal
+            {...props}
+            currentSelect={spacing}
+            // options={[{ 1: 1 }, , 2, 2.5, 3]}
+            panelHeader={t('LineSpacing_lineSpacing')}
+          />
+        );
     } else if (buttonName === 'LINK') {
       const Modal = buttonsFullData[buttonName].modal;
       const linkData = editorCommands.getLinkDataInSelection();

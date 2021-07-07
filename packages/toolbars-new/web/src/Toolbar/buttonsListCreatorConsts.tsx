@@ -38,6 +38,7 @@ import {
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
 import Panel from '../modals/line-spacing/LineSpacingPanel';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
+import NewPanel from '../modals/panels/NewPanel';
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',
@@ -173,7 +174,7 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     dataHook: 'Alignment',
     tooltip: 'Alignment',
     type: 'modal',
-    modal: props => <div {...props}>alignment modal</div>,
+    modal: props => <NewPanel {...props} />,
     onSave: 'Alignment',
   },
   // Alignment: {

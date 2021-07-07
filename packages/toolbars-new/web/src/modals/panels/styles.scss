@@ -35,22 +35,22 @@
 }
 
 .lineHeightsPanel_selectedLineHeight,
-.lineSpacingMobilePanel_selectedLineHeight {
+.mobilePanel_selectedLineHeight {
   color: $settings-action-color-fallback;
 }
 
-.lineSpacingMobilePanel_AlignContent {
+.mobilePanel_AlignContent {
   padding-left: 20px;
 }
 
-.lineSpacingMobilePanel {
+.mobilePanel {
   display: flex;
   flex-direction: column;
   font-size: 16px;
   //align-items: flex-start;
   // padding: 16px 18px;
-  .lineSpacingMobilePanel_header {
-    @extend .lineSpacingMobilePanel_AlignContent;
+  .mobilePanel_header {
+    @extend .mobilePanel_AlignContent;
     padding-top: 15px;
     padding-bottom: 15px;
   }
@@ -66,7 +66,7 @@
   }
 }
 
-.lineSpacingMobilePanel_heights {
+.mobilePanel_heights {
   display: flex;
   flex-direction: column;
   * {
@@ -81,23 +81,23 @@
     }
 
     button {
-      @extend .lineSpacingMobilePanel_AlignContent;
+      @extend .mobilePanel_AlignContent;
     }
   }
 }
 
-// .lineSpacingMobilePanel_buttons {
-//   display: flex;
-//   justify-content: space-between;
+.mobilePanel_buttons {
+  display: flex;
+  justify-content: space-between;
 
-//   * {
-//     padding: 0;
-//   }
+  * {
+    padding: 0;
+  }
 
-//   :nth-child(2) {
-//     color: $settings-action-color-fallback;
-//   }
-// }
+  :nth-child(2) {
+    color: $settings-action-color-fallback;
+  }
+}
 
 .customSpacingPanel {
   display: flex;
@@ -154,17 +154,6 @@
   }
 }
 
-.lineSpacing_separator {
-  height: 1px;
-  background-color: rgba(51, 51, 51, 0.2);
-  width: calc(100% - 24px);
-  margin: 0 auto;
-
-  @include phone {
-    width: 100%;
-  }
-}
-
 .customSpacingPanel_buttons {
   height: 34px;
   display: flex;
@@ -206,7 +195,7 @@
   background-color: #fff;
 }
 
-.lineSpacingModal {
+.modal {
   position: fixed;
   right: initial;
   bottom: initial;
@@ -214,12 +203,23 @@
   background: #fff;
 }
 
-.lineSpacingModal_mobile {
+.modal_mobile {
   border-radius: unset;
   box-shadow: unset;
 }
 
-.lineSpacingModalOverlay {
+.separator {
+  height: 1px;
+  background-color: rgba(51, 51, 51, 0.2);
+  width: calc(100% - 24px);
+  margin: 0 auto;
+
+  @include phone {
+    width: 100%;
+  }
+}
+
+.modalOverlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -228,7 +228,7 @@
   background-color: transparent;
   z-index: 40;
 }
-.lineSpacingModalOverlay_mobile {
+.modalOverlay_mobile {
   //background-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -244,5 +244,24 @@
     & button {
       background-color: transparent;
     }
+  }
+}
+
+//Alignment
+.alignment_mobile_contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  svg {
+    height: 20px;
+  }
+
+  :nth-child(1) {
+    max-width: 20px;
+  }
+
+  * {
+    display: flex;
+    align-items: center;
   }
 }
