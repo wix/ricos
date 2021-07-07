@@ -159,13 +159,13 @@ export default class Panel extends Component {
   };
 
   render() {
-    const { onCancel, t, isMobile, currentSelect } = this.props;
+    const { onCancel, t, isMobile, currentSelect, options } = this.props;
     const { isCustomPanel, spacing } = this.state;
     const { styles, showCustomPanel, onChange, onSave } = this;
     const selectedHeight = spacing['line-height'];
     const onSaveLineHeight = height => onSave({ 'line-height': height });
     const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
-    const options = [{ 1: 1 }, { 1.5: 1.5 }, { 2: 2 }, { 2.5: 2.5 }, { 3: 3 }];
+    // const options = [{ 1: 1 }, { 1.5: 1.5 }, { 2: 2 }, { 2.5: 2.5 }, { 3: 3 }];
     const panelHeader = t('LineSpacing_lineSpacing');
 
     const panel = isMobile ? (
@@ -210,6 +210,7 @@ Panel.propTypes = {
   onCustomPanel: PropTypes.func,
   onSave: PropTypes.func,
   showCustomPanel: PropTypes.func,
+  options: PropTypes.Array,
   currentSelect: PropTypes.shape({
     'line-height': PropTypes.string,
     'padding-top': PropTypes.string,
