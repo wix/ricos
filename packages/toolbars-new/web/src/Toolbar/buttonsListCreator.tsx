@@ -237,10 +237,10 @@ const handleButtonModal = (
       const alignment = editorCommands.getTextAlignment();
 
       const alignmentsWithIcons = [
-        { text: 'Align left', commandKey: 'left', icon: <AlignLeftIcon /> },
-        { text: 'Align center', commandKey: 'center', icon: <AlignTextCenterIcon /> },
-        { text: 'Align right', commandKey: 'right', icon: <AlignRightIcon /> },
-        { text: 'Justify', commandKey: 'justify', icon: <AlignJustifyIcon /> },
+        { 'Align left': 'left', icon: <AlignLeftIcon /> },
+        { 'Align center': 'center', icon: <AlignTextCenterIcon /> },
+        { 'Align right': 'right', icon: <AlignRightIcon /> },
+        { Justify: 'justify', icon: <AlignJustifyIcon /> },
       ];
       buttonsList[index].modal = props =>
         Modal && (
@@ -255,19 +255,12 @@ const handleButtonModal = (
     } else if (buttonName === 'LINE_SPACING') {
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
-      const options = [
-        { text: '1', commandKey: '1' },
-        { text: '1.5', commandKey: '1.5' },
-        { text: '2', commandKey: '2' },
-        { text: '2.5', commandKey: '2.5' },
-        { text: '3', commandKey: '3' },
-      ];
       buttonsList[index].modal = props =>
         Modal && (
           <Modal
             {...props}
-            currentSelect={spacing['line-height']}
-            options={options}
+            currentSelect={spacing}
+            // options={[{ 1: 1 }, , 2, 2.5, 3]}
             panelHeader={t('LineSpacing_lineSpacing')}
           />
         );
