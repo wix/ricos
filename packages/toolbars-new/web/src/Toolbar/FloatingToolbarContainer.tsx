@@ -62,9 +62,13 @@ class FloatingToolbarContainer extends PureComponent<ToolbarContainerProps, Stat
 
     let top;
     if (!this.props.isMobile) {
-      top = selectionRect.top - toolbarParentRect.top - toolbarHeight - TOOLBAR_OFFSET;
+      top =
+        Math.round(selectionRect.top) -
+        Math.round(toolbarParentRect.top) -
+        Math.round(toolbarHeight) -
+        TOOLBAR_OFFSET;
     } else {
-      top = selectionRect.bottom - toolbarParentRect.top + TOOLBAR_OFFSET;
+      top = Math.round(selectionRect.bottom) - Math.round(toolbarParentRect.top) + TOOLBAR_OFFSET;
     }
 
     let left =
@@ -93,12 +97,16 @@ class FloatingToolbarContainer extends PureComponent<ToolbarContainerProps, Stat
     const reactModalElement = document.querySelector('[data-id="rich-content-editor-modal"]');
     const pluginMenuElement = document.querySelector('[data-hook="addPluginMenu"]');
     const toolbarOnFocus = this.isToolbarOnFocus();
+    const positionTopGap = parseFloat(toolbarPosition?.top) - top;
+
     if (
       !reactModalElement &&
       !pluginMenuElement &&
       (`${top}px` !== toolbarPosition?.top || `${left}px` !== toolbarPosition?.left) &&
       !keepOpen &&
-      !toolbarOnFocus
+      !toolbarOnFocus &&
+      positionTopGap !== 1 &&
+      positionTopGap !== -1
     ) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ toolbarPosition: { top: `${top}px`, left: `${left}px` } });

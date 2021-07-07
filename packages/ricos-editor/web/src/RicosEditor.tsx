@@ -344,7 +344,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           linkPanelData={linkPanelData}
           colorPickerData={colorPickerData}
           helpers={helpers}
-          toolbarType={toolbarType}
+          toolbarType={ToolbarType.FORMATTING}
         />
       );
       // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;

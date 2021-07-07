@@ -80,19 +80,18 @@ class Toolbar extends Component<ToolbarProps> {
     event.preventDefault();
   };
 
-  onToolbarButtonClick = ({ buttonName, plugin, isActive }) => {
+  onToolbarButtonClick = (name, isActive = undefined) => {
     const { helpers, toolbarType } = this.props;
     helpers?.onToolbarButtonClick?.({
-      buttonName: buttonName || '',
-      pluginId: plugin || undefined,
+      buttonName: name,
       type: toolbarType,
-      value: `${!isActive}`,
+      value: isActive !== undefined ? `${!isActive}` : undefined,
       version: Version.currentVersion,
     });
   };
 
   renderButton = buttonProps => {
-    const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip, plugin } = buttonProps;
+    const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip, name } = buttonProps;
     return (
       <ToolbarButton
         onClick={onClick}
@@ -103,8 +102,7 @@ class Toolbar extends Component<ToolbarProps> {
         tooltipText={tooltip}
         icon={getIcon()}
         disabled={isDisabled()}
-        onToolbarButtonClick={this.onToolbarButtonClick}
-        plugin={plugin}
+        onToolbarButtonClick={() => this.onToolbarButtonClick(name, isActive())}
       />
     );
   };
@@ -126,7 +124,7 @@ class Toolbar extends Component<ToolbarProps> {
       setKeepOpen,
       ...buttonProps,
     };
-    return <DropdownButton {...dropDownProps} onToolbarButtonClick={this.onToolbarButtonClick} />;
+    return <DropdownButton {...dropDownProps} />;
   };
 
   renderButtonGroup = ({ buttonList, tooltip, ...rest }) => {
@@ -137,14 +135,7 @@ class Toolbar extends Component<ToolbarProps> {
       tooltip,
       ...rest,
     };
-    return (
-      <GroupButton
-        buttons={Object.values(buttonList)}
-        theme={theme}
-        {...dropDownProps}
-        onToolbarButtonClick={this.onToolbarButtonClick}
-      />
-    );
+    return <GroupButton buttons={Object.values(buttonList)} theme={theme} {...dropDownProps} />;
   };
 
   renderColorPicker = buttonProps => {
@@ -177,7 +168,7 @@ class Toolbar extends Component<ToolbarProps> {
         theme={this.theme}
         onResetColor={onResetColor}
         setKeepOpen={setKeepOpen}
-        onToolbarButtonClick={this.onToolbarButtonClick}
+        onToolbarButtonClick={() => this.onToolbarButtonClick(buttonProps.name)}
       />
     );
   };
@@ -193,7 +184,6 @@ class Toolbar extends Component<ToolbarProps> {
         buttonContent={text}
         tooltipText={tooltip}
         disabled={isDisabled?.()}
-        onToolbarButtonClick={this.onToolbarButtonClick}
       />
     );
   };
@@ -215,7 +205,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={dropDownProps}
         t={t}
         setKeepOpen={setKeepOpen}
-        onToolbarButtonClick={this.onToolbarButtonClick}
+        onToolbarButtonClick={() => this.onToolbarButtonClick(buttonProps.name)}
       />
     );
   };
@@ -234,12 +224,7 @@ class Toolbar extends Component<ToolbarProps> {
       ...buttonProps,
     };
     return (
-      <NestedMenu
-        dropDownProps={dropDownProps}
-        theme={theme}
-        editorCommands={editorCommands}
-        onToolbarButtonClick={this.onToolbarButtonClick}
-      />
+      <NestedMenu dropDownProps={dropDownProps} theme={theme} editorCommands={editorCommands} />
     );
   };
 
@@ -252,7 +237,7 @@ class Toolbar extends Component<ToolbarProps> {
       theme: this.theme,
       ...buttonProps,
     };
-    return <ContextMenu {...dropDownProps} onToolbarButtonClick={this.onToolbarButtonClick} />;
+    return <ContextMenu {...dropDownProps} />;
   };
 
   buttonMap = {

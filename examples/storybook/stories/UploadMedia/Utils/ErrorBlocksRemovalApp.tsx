@@ -8,6 +8,7 @@ import { getMediaUploadErrorFunctions } from './upload-functions';
 import { DraftContent, RicosEditorType } from 'ricos-editor';
 
 export default class ErrorBlocksRemovalApp extends Component<
+  // eslint-disable-next-line @typescript-eslint/ban-types
   {},
   { isEditing: boolean; content: DraftContent }
 > {

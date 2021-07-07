@@ -17,6 +17,7 @@ export interface AbstractPanelProps<T> {
   title?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Plugins = [string, FC<any>, FC<EditPanelProps<any>>?][];
 
 export interface CommonBuilderFields {
