@@ -148,13 +148,12 @@ const convertDividerData = (
 };
 
 const convertImageData = (data: ImageData & { src; config; metadata }) => {
-  const { link, config, disableExpand, image, altText, caption } = data;
+  const { link, config, image, altText, caption } = data;
   const { src, width, height } = image || {};
   data.src = { id: src?.custom, file_name: src?.custom, width, height };
   const links = link?.anchor ? { anchor: link?.anchor } : { link: link && parseLink(link) };
-  data.config = { ...(config || {}), ...links, disableExpand };
+  data.config = { ...(config || {}), ...links };
   data.metadata = (altText || caption) && { caption, alt: altText };
-  delete data.disableExpand;
   delete data.image;
   delete data.link;
   delete data.caption;
