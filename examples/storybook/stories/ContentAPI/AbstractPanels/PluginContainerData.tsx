@@ -10,7 +10,7 @@ export const emptyPluginContainerData: PluginContainerData = {
 
 export const PNLContainerData: FC<AbstractPanelProps<PluginContainerData>> = ({ obj, setter }) => {
   const set = createAbstractPanelSetter(obj, setter);
-  const { alignment, customHeight, spoiler: { buttonText, description } = {}, width } = obj;
+  const { alignment, height, spoiler: { buttonText, description } = {} } = obj;
   return (
     <Layout>
       <Cell>
@@ -26,8 +26,8 @@ export const PNLContainerData: FC<AbstractPanelProps<PluginContainerData>> = ({ 
         <InputWithLabel
           label="customHeight"
           type="number"
-          value={customHeight}
-          onChange={e => set({ customHeight: e.currentTarget.valueAsNumber })}
+          value={height.custom}
+          onChange={e => set({ height: { custom: e.currentTarget.valueAsNumber.toString() } })}
         />
         <p className={t.h2}>src:</p>
         <Layout>

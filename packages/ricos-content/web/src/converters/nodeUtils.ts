@@ -25,17 +25,27 @@ import {
   VideoData,
   LATEST_VERSION,
   LinkData,
+  Link,
+  Link_Target,
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
 
 export const createNode = <TData>(
   type: Node_Type,
-  nodes: Node[] = [],
-  data: TData,
-  style?: NodeStyle
+  {
+    nodes,
+    data,
+    style,
+    key,
+  }: {
+    nodes: Node[];
+    data: TData;
+    style?: NodeStyle;
+    key?: string;
+  }
 ): Node => ({
   type,
-  key: genKey(),
+  key: key ?? genKey(),
   nodes,
   ...dataByNodeType(type, data),
   style,
@@ -65,23 +75,25 @@ export const createParagraphNode = (
   data?: ParagraphData,
   style?: NodeStyle
 ): Node =>
-  createNode(
-    Node_Type.PARAGRAPH,
+  createNode(Node_Type.PARAGRAPH, {
     nodes,
-    {
+    data: {
       textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
       ...data,
     },
-    style
-  );
+    style,
+  });
 
 export const createTextNode = (text: string, decorations: Decoration[] = []): Node =>
-  createNode(Node_Type.TEXT, [], { text, decorations });
+  createNode(Node_Type.TEXT, { nodes: [], data: { text, decorations } });
 
 export const createHeadingNode = (nodes: Node[] = [], data: HeadingData): Node =>
-  createNode(Node_Type.HEADING, nodes, {
-    textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
-    ...data,
+  createNode(Node_Type.HEADING, {
+    nodes,
+    data: {
+      textStyle: { textAlignment: TextStyle_TextAlignment.AUTO },
+      ...data,
+    },
   });
 
 export const createLinkData = (element: Element): LinkData => {
@@ -117,3 +129,30 @@ export const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
   const reducedDecorations = Object.values(reducedDecorationsMap);
   return reducedDecorations;
 };
+
+export const createLink = ({
+  url,
+  rel,
+  target,
+  anchor,
+}: {
+  url?: string;
+  rel?: string;
+  target?: string;
+  anchor?: string;
+}): Link => {
+  const relValues =
+    rel
+      ?.split(' ')
+      .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
+      .map(key => [key, true]) || [];
+  return {
+    anchor,
+    url,
+    rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
+    target: target?.toUpperCase().substring(1) as Link_Target,
+  };
+};
+
+export const createLinkDecoration = (data: { url?: string; rel?: string; target?: string }) =>
+  createDecoration(Decoration_Type.LINK, { linkData: { link: createLink(data) } });

@@ -22,8 +22,8 @@ const ErrorToastStory = () => {
         would also appear on the block.
       </p>
       <p>
-        On Ricos Viewer (click "View"), blocks with errors will be filtered out. This is done by
-        calling the getContent method of Ricos Editor which returns the cleaned content.
+        On Ricos Viewer (click &quot;View&quot;), blocks with errors will be filtered out. This is
+        done by calling the getContent method of Ricos Editor which returns the cleaned content.
       </p>
 
       <ErrorBlocksRemovalApp />

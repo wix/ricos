@@ -25,6 +25,7 @@ import { FooterToolbarConfig } from '../../../main/src/types';
 
 export default () => {
   class ShortcutMenuStory extends Component<
+    // eslint-disable-next-line @typescript-eslint/ban-types
     {},
     {
       editorKey: number;

@@ -12,6 +12,7 @@ import {
   MentionData,
   FileData,
   ButtonData,
+  LinkData,
 } from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
@@ -55,6 +56,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
     [Node_Type.MAP]: convertMapData,
+    [Node_Type.EMBED]: convertEmbedData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
     convertContainerData(newData, nodeType);
@@ -68,7 +70,8 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
 
 export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
   const converters = {
-    [Decoration_Type.MENTION]: convertMention,
+    [Decoration_Type.MENTION]: convertMentionData,
+    [Decoration_Type.LINK]: convertLinkData,
   };
   if (decorationType in converters) {
     const convert = converters[decorationType];
@@ -101,7 +104,7 @@ const convertContainerData = (
   );
   if (nodeType === Node_Type.IMAGE && width?.custom) {
     data.config.size = 'inline';
-  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+  } else if (nodeType === Node_Type.MAP && width?.custom) {
     data.config.size = 'content';
   }
   delete data.containerData;
@@ -147,7 +150,7 @@ const convertImageData = (data: ImageData & { src; config; metadata }) => {
   const { link, config, disableExpand, image, altText, caption } = data;
   const { src, width, height } = image || {};
   data.src = { id: src?.custom, file_name: src?.custom, width, height };
-  const links = link?.anchor ? { anchor: link?.anchor } : { link: link && convertLink(link) };
+  const links = link?.anchor ? { anchor: link?.anchor } : { link: link && parseLink(link) };
   data.config = { ...(config || {}), ...links, disableExpand };
   data.metadata = (altText || caption) && { caption, alt: altText };
   delete data.disableExpand;
@@ -175,12 +178,12 @@ const convertLinkPreviewData = data => {
     delete data.thumbnailUrl;
   }
   if (has(data, 'link')) {
-    data.config.link = convertLink(data.link);
+    data.config.link = parseLink(data.link);
     delete data.link;
   }
 };
 
-const convertMention = (data: Partial<MentionData> & { mention }) => {
+const convertMentionData = (data: Partial<MentionData> & { mention }) => {
   data.mention = { slug: data.slug, name: data.name };
   delete data.name;
   delete data.slug;
@@ -196,7 +199,7 @@ const convertFileData = (data: FileData & FileComponentData) => {
 const convertButtonData = (data: Partial<ButtonData> & { button }) => {
   const { link, text, styles } = data;
   const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles || {};
-  const convertedLink = link ? convertLink(link) : {};
+  const convertedLink = link ? parseLink(link) : {};
   data.button = {
     settings: {
       buttonText: text,
@@ -257,7 +260,33 @@ const convertMapData = data => {
   }
 };
 
-const convertLink = ({
+const convertEmbedData = data => {
+  data.config = {
+    ...(data?.config || {}),
+    alignment: 'center',
+    size: 'content',
+    link: { url: data.src, target: '_blank', rel: 'noopener' },
+  };
+  const { html, thumbnailUrl, title, description } = data.oembed;
+  data.html = html;
+  thumbnailUrl && (data.thumbnail_url = thumbnailUrl);
+  title && (data.title = title);
+  description && (data.description = description);
+  delete data.oembed;
+  delete data.src;
+};
+
+const convertLinkData = (data: LinkData & { url?: string; target?: string; rel?: string }) => {
+  if (data.link) {
+    const { url, target, rel } = parseLink(data.link);
+    data.url = url;
+    if (target) data.target = target;
+    if (rel) data.rel = rel;
+    delete data.link;
+  }
+};
+
+const parseLink = ({
   url,
   rel,
   target,

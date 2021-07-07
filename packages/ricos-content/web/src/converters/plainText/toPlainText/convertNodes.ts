@@ -38,7 +38,7 @@ export const addLinksToText = (text: string, linkDecorations: RangedDecoration[]
         insertInText(
           newText,
           link.end + newText.length - text.length + 1,
-          `(${link.linkData?.url})`
+          `(${link.linkData?.link?.url})`
         ),
       text
     );
@@ -104,4 +104,8 @@ export const parseVerticalEmbed = ({ verticalEmbedData }: Node, delimiter: strin
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {
   const { url } = linkPreviewData?.link || {};
   return url || '';
+};
+
+export const parseEmbed = ({ embedData }: Node, delimiter?: string): string => {
+  return [embedData?.oembed?.title, embedData?.src].filter(Boolean).join(delimiter);
 };

@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react';
 import styles from './ContentBuilder.scss';
 import { ComposerSidebar, ComposerSidebarItem } from 'wix-style-react';
+import { Plugins } from './types';
 
 interface SidebarProps {
-  plugins: [string, FC<any>][];
+  plugins: Plugins;
   setPanel: (id: number) => void;
 }
 

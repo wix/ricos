@@ -1,24 +1,37 @@
 /* eslint-disable no-console */
 import path from 'path';
 import chalk from 'chalk';
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
 import { fromDraft } from '../packages/ricos-content/web/src/converters/draft';
-import { toPlainText } from '../packages/ricos-content/web/src/converters/plainText';
-import { toHtml } from '../packages/ricos-content/web/src/converters/html';
+import { fromPlainText, toPlainText } from '../packages/ricos-content/web/src/converters/plainText';
+import { fromHtml, toHtml } from '../packages/ricos-content/web/src/converters/html';
 import { toTiptap } from '../packages/ricos-content/web/src/converters/tiptap';
 import migrationContent from '../e2e/tests/fixtures/migration-content.json';
 import { RichContent } from 'ricos-schema';
 
 const getAbsPath = (relPath: string) => path.resolve(__dirname, relPath);
 
+const HTML_CONTENT = readFileSync(
+  getAbsPath(
+    '../packages/ricos-content/web/src/converters/html/fromHtml/__tests__/richTextHtml.html'
+  ),
+  'utf8'
+);
+
 const RICH_CONTENT_BASELINE = getAbsPath(
   '../packages/ricos-content/web/statics/json/migratedFixtures/migration-content.json'
 );
-const PLAIN_TEXT_BASELINE = getAbsPath(
+const TO_PLAIN_TEXT_BASELINE = getAbsPath(
   '../packages/ricos-content/web/src/converters/plainText/toPlainText/complexPlainText.ts'
 );
-const HTML_BASELINE = getAbsPath(
+const FROM_PLAIN_TEXT_BASELINE = getAbsPath(
+  '../packages/ricos-content/web/src/converters/plainText/fromPlainText/plainTextContent.json'
+);
+const TO_HTML_BASELINE = getAbsPath(
   '../packages/ricos-content/web/src/converters/html/toHtml/__tests__/complexContentHtml.html'
+);
+const FROM_HTML_BASELINE = getAbsPath(
+  '../packages/ricos-content/web/src/converters/html/fromHtml/__tests__/richTextContent.json'
 );
 const TIPTAP_BASELINE = getAbsPath(
   '../packages/ricos-content/web/src/converters/tiptap/toTiptap/__tests__/migrationContentTiptap.json'
@@ -38,21 +51,44 @@ const convertToRichContent = async () => {
   console.log('Saved rich content baseline 💰\n');
 };
 
-const convertToHtml = async () => {
-  console.log('Converting to ' + chalk.green('HTML') + '...');
-  const html = toHtml(richContent);
-  writeFileSync(HTML_BASELINE, html);
+const convertHtml = async () => {
+  console.log('Converting to/from ' + chalk.green('HTML') + '...');
+  convertToHtml();
+  convertFromHtml();
   console.log('Saved HTML baseline 🌎\n');
+};
+
+const convertToHtml = () => {
+  const html = toHtml(richContent);
+  writeFileSync(TO_HTML_BASELINE, html);
+};
+
+const convertFromHtml = () => {
+  const content = fromHtml(HTML_CONTENT);
+  const contentJSON = RichContent.toJSON(content);
+  writeFileSync(FROM_HTML_BASELINE, JSON.stringify(contentJSON, null, 2));
+};
+
+const convertPlainText = async () => {
+  console.log('Converting to/from ' + chalk.green('plain text') + '...');
+  await convertToPlainText();
+  convertFromPlainText();
+  console.log('Saved to/from plain text baselines 📃\n');
 };
 
 const convertToPlainText = async () => {
   const plainTextBaseline = (text: string) =>
     '/* eslint-disable max-len */\nexport const PLAIN_TEXT = `' + text + '`;\n';
 
-  console.log('Converting to ' + chalk.green('plain text') + '...');
   const plainText = await toPlainText(richContent);
-  writeFileSync(PLAIN_TEXT_BASELINE, plainTextBaseline(plainText));
-  console.log('Saved plain text baseline 📃\n');
+  writeFileSync(TO_PLAIN_TEXT_BASELINE, plainTextBaseline(plainText));
+};
+
+const convertFromPlainText = () => {
+  const { PLAIN_TEXT } = require(TO_PLAIN_TEXT_BASELINE);
+  const content = fromPlainText(PLAIN_TEXT);
+  const contentJSON = RichContent.toJSON(content);
+  writeFileSync(FROM_PLAIN_TEXT_BASELINE, JSON.stringify(contentJSON, null, 2));
 };
 
 const convertToTiptap = async () => {
@@ -71,21 +107,16 @@ switch (target) {
     conversions.push(convertToRichContent());
     break;
   case Target.HTML:
-    conversions.push(convertToHtml());
+    conversions.push(convertHtml());
     break;
   case Target.TIPTAP:
     conversions.push(convertToTiptap());
     break;
   case Target.TEXT:
-    conversions.push(convertToPlainText());
+    conversions.push(convertPlainText());
     break;
   case undefined:
-    conversions.push(
-      convertToRichContent(),
-      convertToHtml(),
-      convertToTiptap(),
-      convertToPlainText()
-    );
+    conversions.push(convertToRichContent(), convertHtml(), convertToTiptap(), convertPlainText());
     break;
   default:
     console.error(chalk.red(`Target "${target}" should be one of ${Object.values(Target)}`));

@@ -1,35 +1,23 @@
-import React, { FC } from 'react';
-import { pipe } from 'fp-ts/lib/function';
+import React from 'react';
 import { EditorPropsContext } from './context';
 import Toolbar from './components/Toolbar';
 import { JSONContent } from '@tiptap/core';
 import { Editor, EditorContent } from '@tiptap/react';
-import { draftToTiptap, tiptapToDraft } from 'ricos-content/libs/converters';
-import { createDivider } from './extensions/extension-divider';
+import {
+  draftToTiptap,
+  tiptapToDraft,
+  draftBlockDataToTiptap,
+  TO_RICOS_NODE_TYPE,
+} from 'ricos-content/libs/converters';
 import { tiptapExtensions } from './tiptap-extensions';
-import { DraftContent } from 'ricos-content';
+import { capitalize } from 'lodash';
+import { TiptapAPI, TiptapConfig } from './types';
+import { RICOS_DIVIDER_TYPE, DIVIDER_TYPE } from 'wix-rich-content-common';
 
-type TiptapConfig = {
-  onUpdate?: ({ content }: { content: DraftContent }) => void;
-  initialContent: DraftContent;
-};
-
-export type TiptapAPI = {
-  Editor: FC;
-  blur: () => void;
-  focus: () => void;
-  // eslint-disable-next-line
-  getEditorCommands: () => Editor['commands']; // EditorCommands;
-  getToolbars: () => Record<string, FC>;
-  // eslint-disable-next-line
-  getToolbarProps: () => Record<string, any>; // to be deprecated
-  destroy: Editor['destroy'];
-};
-
-const getEditorInstance = onUpdate => (content: JSONContent) =>
-  new Editor({
+const getEditorCreator = ({ onUpdate }) => (content: JSONContent) => {
+  return new Editor({
     content,
-    extensions: [...tiptapExtensions, createDivider()],
+    extensions: tiptapExtensions,
     injectCSS: true,
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();
@@ -37,16 +25,43 @@ const getEditorInstance = onUpdate => (content: JSONContent) =>
       onUpdate?.({ content: convertedContent });
     },
   });
+};
 
+// missing forceUpdate
+//github.com/ueberdosis/tiptap/blob/main/packages/react/src/useEditor.ts#L20
 const toTiptapAPI = (editor: Editor): TiptapAPI => ({
   Editor: props => (
     <EditorPropsContext.Provider value={props}>
-      <EditorContent editor={editor} />
+      <div dir="">
+        <EditorContent editor={editor} />
+      </div>
     </EditorPropsContext.Provider>
   ),
   blur: () => editor.commands.blur(),
   focus: () => editor.commands.focus(true),
-  getEditorCommands: () => editor.commands,
+  getEditorCommands: () => {
+    return {
+      ...editor.commands,
+      toggleInlineStyle: inlineStyle => {
+        const editorCommand = editor.chain().focus();
+        const styleName = `toggle${capitalize(inlineStyle)}`;
+        editorCommand[styleName]().run();
+      },
+      insertBlock: (pluginType, data) => {
+        if (pluginType === RICOS_DIVIDER_TYPE || pluginType === DIVIDER_TYPE) {
+          const attrs = draftBlockDataToTiptap(DIVIDER_TYPE, data);
+          editor.commands.insertContent({
+            type: TO_RICOS_NODE_TYPE[DIVIDER_TYPE].toLowerCase(),
+            attrs,
+            content: [],
+          });
+        }
+      },
+      // setBlock: (blockKey, pluginType, data) => {
+      //   editor.commands.updateAttributes('heading', { level: 1 })
+      // },
+    };
+  },
   getToolbars: () => ({
     MobileToolbar: () => <Toolbar editor={editor} />,
     TextToolbar: () => <Toolbar editor={editor} />,
@@ -55,5 +70,10 @@ const toTiptapAPI = (editor: Editor): TiptapAPI => ({
   destroy: editor.destroy.bind(editor),
 });
 
-export const initTiptapEditor = ({ initialContent, onUpdate }: TiptapConfig): TiptapAPI =>
-  pipe(initialContent, draftToTiptap, getEditorInstance(onUpdate), toTiptapAPI);
+export const initTiptapEditor = ({ initialContent, onUpdate }: TiptapConfig): TiptapAPI => {
+  const tiptapData = draftToTiptap(initialContent);
+  const editorCreator = getEditorCreator({ onUpdate });
+  const editor = editorCreator(tiptapData);
+
+  return toTiptapAPI(editor);
+};

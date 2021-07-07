@@ -45,6 +45,7 @@ export default () => {
   const addFunc: AddMethod = useMemo(
     () => (element, args) => {
       const currentContent = fromDraft(content);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newContent = app[element]({ ...(args as any), content: currentContent });
       const contentAsDraft = toDraft(newContent);
       setContent(contentAsDraft);
@@ -52,6 +53,7 @@ export default () => {
     [content]
   );
   const createPanels = useMemo(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     () => (props: EditPanelProps<any>) =>
       plugins.map(([, , Component]) => Component && <Component {...props} />),
     [content]

@@ -60,8 +60,10 @@ export const lToList: Rule = [
         ol: Node_Type.ORDERED_LIST,
         li: Node_Type.LIST_ITEM,
       }[node.nodeName],
-      context.visit(node),
-      {}
+      {
+        nodes: context.visit(node),
+        data: {},
+      }
     ),
   ],
 ];
@@ -87,13 +89,13 @@ const toImageData = (decorations: Decoration[], node: Element): ImageData => {
     altText: attrs.alt,
     link: decorations
       .filter(({ type }) => type === Decoration_Type.LINK)
-      .map(({ linkData }) => linkData.link)[0],
+      .map(({ linkData }) => linkData?.link)[0],
   };
 };
 
 export const imgToImage: Rule = [
   hasTag('img'),
   context => (node: Element) => [
-    createNode(Node_Type.IMAGE, [], toImageData(context.decorations, node)),
+    createNode(Node_Type.IMAGE, { nodes: [], data: toImageData(context.decorations, node) }),
   ],
 ];
