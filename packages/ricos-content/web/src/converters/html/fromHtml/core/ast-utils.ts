@@ -1,8 +1,8 @@
-import { pipe } from 'fp-ts/function';
+import { pipe, flow } from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
 import { MonoidAny } from 'fp-ts/boolean';
 import { concatAll } from 'fp-ts/Monoid';
-import { parseFragment, Node, Element, TextNode, CommentNode } from 'parse5';
+import { parseFragment, Node, Element, TextNode, CommentNode, Attribute } from 'parse5';
 
 export const isText = (node: Node): node is TextNode => node.nodeName === '#text';
 export const isComment = (node: Node): node is CommentNode => node.nodeName === '#comment';
@@ -44,5 +44,16 @@ export const partitionBy = <T>(
     }
     return partitions;
   }, []);
+
+const toAttrs = (node: Element) => node.attrs;
+
+type AttrRecord = Record<Attribute['name'], Attribute['value']>;
+
+const toRecord = A.reduce({} as AttrRecord, (rec, { name, value }) => ({
+  ...rec,
+  [name]: value,
+}));
+
+export const getAttributes = flow(toAttrs, toRecord);
 
 export const toAst = (html: string) => parseFragment(html);

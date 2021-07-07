@@ -6,8 +6,8 @@ import { MonoidAny } from 'fp-ts/boolean';
 import { concatAll } from 'fp-ts/Monoid';
 
 import { TextNode, Element } from 'parse5';
-import { Node_Type, Decoration_Type } from 'ricos-schema';
-import { isText } from './ast-utils';
+import { Node_Type, Decoration_Type, ImageData, Decoration } from 'ricos-schema';
+import { getAttributes, isText } from './ast-utils';
 import { Rule, ContentNode } from './models';
 import {
   createTextNode,
@@ -60,7 +60,8 @@ export const lToList: Rule = [
         ol: Node_Type.ORDERED_LIST,
         li: Node_Type.LIST_ITEM,
       }[node.nodeName],
-      context.visit(node)
+      context.visit(node),
+      {}
     ),
   ],
 ];
@@ -75,4 +76,24 @@ export const strongEmUToDecoration: Rule = [
       {},
       node
     ),
+];
+
+const toImageData = (decorations: Decoration[], node: Element): ImageData => {
+  const attrs = getAttributes(node);
+  return {
+    image: {
+      src: { url: attrs.href },
+    },
+    altText: attrs.alt,
+    link: decorations
+      .filter(({ type }) => type === Decoration_Type.LINK)
+      .map(({ linkData }) => linkData.link)[0],
+  };
+};
+
+export const imgToImage: Rule = [
+  hasTag('img'),
+  context => (node: Element) => [
+    createNode(Node_Type.IMAGE, [], toImageData(context.decorations, node)),
+  ],
 ];

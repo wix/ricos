@@ -28,17 +28,15 @@ const addDecoration = (rules: Rule[], decorations: Decoration[]) => (
   element: Element
 ) => {
   const decoration = createDecoration(type, data);
-  const innerElement = pipe(element, getChildNodes, filterComments)[0] as ContentNode;
+  const innerElement = getChildNodes(element)[0] as ContentNode;
   return htmlToNodes(rules, [...decorations, decoration])(innerElement);
 };
 
 const getChildNodes = (element: Element | DocumentFragment): ContentNode[] =>
   isLeaf(element) ? [] : (element.childNodes as ContentNode[]);
 
-const filterComments = A.filter(not(isComment));
-
 const visit = (rules: Rule[], decorations: Decoration[]) => (element: Element | DocumentFragment) =>
-  pipe(element, getChildNodes, filterComments, A.chain(htmlToNodes(rules, decorations)));
+  pipe(element, getChildNodes, A.chain(htmlToNodes(rules, decorations)));
 
 const traverse = (rules: Rule[]) => visit(rules, []);
 
