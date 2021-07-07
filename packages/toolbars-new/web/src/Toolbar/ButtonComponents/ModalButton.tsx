@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component, FC } from 'react';
@@ -126,6 +127,15 @@ class ModalButton extends Component<ModalButtonProps, State> {
     } = dropDownProps;
     const { isModalOpen } = this.state;
     const buttonProps = arrow && getLabel ? { buttonContent: getLabel() } : { icon: getIcon() };
+    const mobileStyles = {
+      position: 'fixed',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      width: '100%',
+      background: 'transparent',
+    } as React.CSSProperties;
     return (
       <ClickOutside onClickOutside={this.closeModal}>
         <div className={styles.buttonWrapper}>
@@ -148,6 +158,8 @@ class ModalButton extends Component<ModalButtonProps, State> {
               data-id="toolbar-modal-button"
               className={classNames(styles.modal, styles.withoutPadding)}
               onMouseDown={event => event.preventDefault()}
+              style={isMobile ? mobileStyles : {}}
+              onClick={isMobile ? this.closeModal : undefined}
             >
               {modal({
                 closeCustomModal: this.closeModal,
