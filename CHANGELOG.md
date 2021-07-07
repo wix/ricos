@@ -17,6 +17,23 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `ricos-editor`
+  - [#2684](https://github.com/wix-incubator/rich-content/pull/2684) BM's top toolbar overrides Ricos Modal
+
+</details>
+<hr/>
+
+## 8.46.6 (July 6, 2021)
+
+### :bug: Bug Fix
+
+- `plugin-commons`
+  - [#2686](https://github.com/wix-incubator/rich-content/pull/2686) revert upload functionality isolation (regression from 8.46.4)
+- `editor-common`
+  - [#2685](https://github.com/wix-incubator/rich-content/pull/2685) color utils for editor commands
+
 ### :nail_care
 
 - `table`
@@ -28,9 +45,6 @@
 
 - `editor-common`
   - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
-
-</details>
-<hr/>
 
 ## 8.46.5 (July 4, 2021)
 
