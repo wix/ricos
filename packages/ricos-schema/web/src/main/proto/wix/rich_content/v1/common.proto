@@ -39,6 +39,12 @@ message Link {
     google.protobuf.StringValue custom_data = 5; // Serialized object, used for custom/external link panel
 }
 
+enum Alignment {
+    CENTER = 0;
+    LEFT = 1;
+    RIGHT = 2;
+}
+
 message PluginContainerData {
     message Spoiler {
         google.protobuf.StringValue description = 1;
@@ -58,11 +64,6 @@ message PluginContainerData {
     }
     message Height {
         google.protobuf.StringValue custom = 1;
-    }
-    enum Alignment {
-        CENTER = 0;
-        LEFT = 1;
-        RIGHT = 2;
     }
 
     Width width = 1;
