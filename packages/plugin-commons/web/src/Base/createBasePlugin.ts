@@ -252,7 +252,6 @@ const createBasePlugin = (
       noPointerEventsOnFocus,
       withHorizontalScroll,
       disableKeyboardEvents,
-      type: config.type,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =
