@@ -22,6 +22,7 @@ import {
   ButtonData_Type,
   Link,
   Link_Target,
+  FileSource_Privacy,
 } from 'ricos-schema';
 import { TO_RICOS_DATA } from './consts';
 import {
@@ -172,7 +173,9 @@ const convertMention = (data: {
 };
 
 const convertFileData = (data: FileComponentData & { src }) => {
-  const src: FileSource = { url: data.url, custom: data.id };
+  const privacy = (data.privacy?.toUpperCase() as FileSource_Privacy) || FileSource_Privacy.UNSET;
+  const { url, id } = data;
+  const src: FileSource = { url, id, privacy };
   data.src = src;
 };
 

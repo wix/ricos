@@ -12,6 +12,7 @@ import {
   MentionData,
   FileData,
   ButtonData,
+  FileSource_Privacy,
 } from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
@@ -20,7 +21,7 @@ import {
   FROM_RICOS_ENTITY_TYPE,
   TO_RICOS_DATA_FIELD,
 } from '../consts';
-import { ComponentData, FileComponentData } from '../../../types';
+import { ComponentData, FileComponentData, MediaPrivacy } from '../../../types';
 
 export const convertNodeToDraftData = (node: Node) => {
   const { type } = node;
@@ -187,10 +188,15 @@ const convertMention = (data: Partial<MentionData> & { mention }) => {
   delete data.slug;
 };
 
-const convertFileData = (data: FileData & FileComponentData) => {
-  const { url, custom } = data.src || {};
+const convertFileData = (data: Omit<FileData, 'privacy'> & FileComponentData) => {
+  const { url, id, custom, privacy } = data.src || {};
   data.url = url;
-  data.id = custom;
+  data.id = id || custom;
+  if (!privacy || (privacy as string) === FileSource_Privacy.UNSET) {
+    data.privacy = undefined;
+  } else {
+    data.privacy = privacy.toLowerCase() as MediaPrivacy;
+  }
   delete data.src;
 };
 
