@@ -31,7 +31,10 @@ const MobilePanel = ({ selectedHeight, styles, t, onChange, onSave, onCancel }) 
     <button
       className={isSelected ? styles.lineSpacingMobilePanel_selectedLineHeight : ''}
       key={height}
-      onClick={() => onClick(`${height}`)}
+      onClick={e => {
+        e.stopPropagation();
+        onClick(`${height}`);
+      }}
     >
       {height}
     </button>

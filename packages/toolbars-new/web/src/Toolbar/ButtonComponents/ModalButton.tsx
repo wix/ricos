@@ -81,7 +81,10 @@ class ModalButton extends Component<ModalButtonProps, State> {
 
   onSave = (...args: [any]) => {
     this.props.onSave?.(...args);
-    this.closeModal();
+    const {
+      dropDownProps: { isMobile },
+    } = this.props;
+    !isMobile && this.closeModal();
   };
 
   onDone = (...args: [any]) => {

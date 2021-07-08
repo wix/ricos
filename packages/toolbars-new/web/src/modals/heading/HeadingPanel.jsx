@@ -16,7 +16,10 @@ const headingElement = (heading, isSelected, onClick, t, translateHeading) => {
         styles.headingElement,
         isSelected ? styles.headingsPanel_selectedHeading : ''
       )}
-      onClick={() => onClick(type, heading)}
+      onClick={e => {
+        e.stopPropagation();
+        onClick(type, heading);
+      }}
     >
       {content}
     </button>
@@ -52,6 +55,14 @@ export default class HeadingsDropDownPanel extends Component {
     super(props);
     this.state = { heading: props.heading };
     this.styles = mergeStyles({ styles, theme: props.theme });
+  }
+
+  componentDidUpdate() {
+    const { heading } = this.state;
+    if (heading !== this.props.heading) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ heading: this.props.heading });
+    }
   }
 
   static contextType = GlobalContext;
