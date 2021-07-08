@@ -80,10 +80,10 @@ const divider = {
   type: RICOS_DIVIDER_TYPE,
   nodeType: Node_Type.DIVIDER,
   data1: DividerData.fromJSON({
-    type: DividerData_LineStyle.DOUBLE,
+    lineStyle: DividerData_LineStyle.DOUBLE,
   }),
   data2: DividerData.fromJSON({
-    type: DividerData_LineStyle.DASHED,
+    lineStyle: DividerData_LineStyle.DASHED,
   }),
   expectedData1: {
     type: 'double',
