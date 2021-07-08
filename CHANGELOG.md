@@ -29,6 +29,11 @@
 - `ricos-editor`
   - [#2684](https://github.com/wix-incubator/rich-content/pull/2684) BM's top toolbar overrides Ricos Modal
 
+### :house: Internal
+
+- `*`
+  - [#2697](https://github.com/wix/ricos/pull/2697) console.error when viewer/editor have error
+  
 </details>
 <hr/>
 
