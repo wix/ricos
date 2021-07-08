@@ -28,7 +28,7 @@ type dropDownPropsType = {
 };
 
 interface ModalButtonProps {
-  onToolbarButtonClick?: () => void;
+  onToolbarButtonClick?: any;
   theme?: RichContentTheme;
   setKeepOpen?: (boolean) => void;
   t: TranslationFunction;
@@ -173,6 +173,7 @@ class ModalButton extends Component<ModalButtonProps, State> {
                 onDone: this.onDone,
                 isActive: isActive(),
                 onDelete: this.onDelete,
+                onToolbarButtonClick: this.props.onToolbarButtonClick,
               })}
             </div>
           )}

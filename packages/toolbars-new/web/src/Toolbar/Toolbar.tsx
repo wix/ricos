@@ -80,12 +80,12 @@ class Toolbar extends Component<ToolbarProps> {
     event.preventDefault();
   };
 
-  onToolbarButtonClick = (name, isActive = undefined) => {
+  onToolbarButtonClick = (name, value = undefined) => {
     const { helpers, toolbarType } = this.props;
     helpers?.onToolbarButtonClick?.({
       buttonName: name,
       type: toolbarType,
-      value: isActive !== undefined ? `${!isActive}` : undefined,
+      value: value === undefined ? undefined : typeof value === 'boolean' ? `${!value}` : value,
       version: Version.currentVersion,
     });
   };
@@ -205,7 +205,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={dropDownProps}
         t={t}
         setKeepOpen={setKeepOpen}
-        onToolbarButtonClick={() => this.onToolbarButtonClick(buttonProps.name)}
+        onToolbarButtonClick={value => this.onToolbarButtonClick(buttonProps.name, value)}
       />
     );
   };

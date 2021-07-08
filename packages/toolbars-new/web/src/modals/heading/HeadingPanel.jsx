@@ -57,6 +57,7 @@ export default class HeadingsDropDownPanel extends Component {
   static contextType = GlobalContext;
 
   onSaveHeading = (type, headingName) => {
+    this.props?.onToolbarButtonClick?.(type);
     return this.props.onSave(type, headingName);
   };
 
@@ -109,6 +110,7 @@ HeadingsDropDownPanel.propTypes = {
   customHeadingsOptions: PropTypes.array,
   t: PropTypes.func,
   translateHeading: PropTypes.func,
+  onToolbarButtonClick: PropTypes.func,
 };
 
 HeadingsDropDownPanel.defaultProps = { heading: 'P' };
