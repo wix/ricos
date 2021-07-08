@@ -56,7 +56,6 @@ interface ImageViewerProps {
   setComponentUrl: (highres?: string) => unknown;
   seoMode: SEOSettings;
   blockKey: string;
-  isLoading: boolean;
   customAnchorScroll?: CustomAnchorScroll;
 }
 
@@ -199,7 +198,7 @@ class ImageViewer extends React.Component<ImageViewerProps, ImageViewerState> {
       imageType: 'highRes',
     });
 
-    if (this.state.ssrDone && !imageUrl.preload && !this.props.isLoading) {
+    if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
     }
 
