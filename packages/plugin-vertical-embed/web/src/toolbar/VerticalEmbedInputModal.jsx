@@ -6,10 +6,11 @@ import {
   FOOTER_BUTTON_ALIGNMENT,
   MODAL_CONTROLS_POSITION,
 } from 'wix-rich-content-ui-components';
-import { contentTypeMap } from '../constants';
+import { contentTypeMap, verticalEmbedProviders } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
 import generalStyles from '../../statics/styles/general.scss';
+import { convertDuration } from '../utils';
 
 const LOADING = 'LOADING';
 const NO_ITEMS = 'NO_ITEMS';
@@ -71,6 +72,23 @@ export default class VerticalEmbedInputModal extends Component {
     }
   };
 
+  getItems = () => {
+    const {
+      componentData: { type },
+      t,
+    } = this.props;
+    const { products } = this.state;
+    let getDescriptionFunc;
+    if (type === verticalEmbedProviders.booking) {
+      getDescriptionFunc = product => convertDuration(product.description, t);
+    } else if (type === verticalEmbedProviders.event) {
+      getDescriptionFunc = product => `${product.scheduling} | ${product.location}`;
+    }
+    return getDescriptionFunc
+      ? products.map(product => ({ ...product, description: getDescriptionFunc(product) }))
+      : products;
+  };
+
   render() {
     const { products, inputString, selectedProduct, status } = this.state;
     const {
@@ -122,7 +140,7 @@ export default class VerticalEmbedInputModal extends Component {
             <ItemsList
               isMobile={isMobile}
               selectedItem={selectedProduct}
-              products={products}
+              products={this.getItems()}
               onClick={this.onItemClick}
               contentType={contentType}
               t={t}

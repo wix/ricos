@@ -45,7 +45,6 @@ class ItemsList extends PureComponent {
                 key={index}
                 onClick={onClick}
                 selected={selectedItem?.id === item.id}
-                contentType={contentType}
                 t={t}
               />
             ))

@@ -27,7 +27,7 @@ const getBookingData = (data, t) => {
   return { pageUrl, imageSrc, content };
 };
 const getEventData = (data, t) => {
-  const { name, imageSrc, scheduling, location, pageUrl } = data;
+  const { name, imageSrc, scheduling, pageUrl, location } = data;
   const content = {
     title: name,
     info: { leftSubtitle: scheduling, rightSubtitle: location },
