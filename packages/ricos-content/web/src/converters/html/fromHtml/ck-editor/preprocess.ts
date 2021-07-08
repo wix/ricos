@@ -1,6 +1,7 @@
 import { flow } from 'fp-ts/function';
 import { ChildNode, DocumentFragment, Element, Node, serialize } from 'parse5';
-import { toAst, isText, isLeaf, hasDescendant, partitionBy, not } from '../core/ast-utils';
+import { toAst, isText, isLeaf, hasDescendant, appendChild, partitionBy } from '../core/ast-utils';
+import { not } from '../../../../fp-utils';
 
 const addParagraph = (parentNode: Element) => (): ChildNode => ({
   nodeName: 'p',
@@ -10,8 +11,6 @@ const addParagraph = (parentNode: Element) => (): ChildNode => ({
   attrs: parentNode.attrs,
   namespaceURI: parentNode.namespaceURI,
 });
-
-const addToParagraph = (paragraph: Element, node: ChildNode) => paragraph.childNodes.push(node);
 
 // TODO: purify
 const visit = (visitor: (node: ChildNode) => ChildNode) => (node: Node): Node => {
@@ -39,7 +38,7 @@ const blockWrapParagraphToDiv = (node: Element): ChildNode => {
       hasDescendant(isBlock),
       isParagraph,
       addParagraph(node),
-      addToParagraph
+      appendChild
     )(node.childNodes);
   }
   return node;

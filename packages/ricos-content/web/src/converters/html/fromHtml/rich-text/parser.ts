@@ -19,5 +19,5 @@ const noEmptyLineText: Rule = [
 
 export default flow(
   preprocess,
-  parse([noEmptyLineText, pToParagraph, lToList, hToHeading, strongEmUToDecoration, aToLink])
+  parse([noEmptyLineText, pToParagraph, lToList, hToHeading, aToLink, strongEmUToDecoration])
 );

@@ -1,2 +1,2 @@
-export { fromHtml } from './fromHtml/fromHtml';
+export { default as fromRichTextHtml } from './fromHtml/rich-text/parser';
 export { toHtml } from './toHtml/toHtml';

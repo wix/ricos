@@ -1,25 +1,29 @@
 import { flow, pipe } from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
 import * as S from 'fp-ts/string';
-import { Eq } from 'fp-ts/Eq';
 import { MonoidAny } from 'fp-ts/boolean';
 import { concatAll } from 'fp-ts/Monoid';
 
 import { TextNode, Element } from 'parse5';
-import { Node_Type, Decoration_Type, ImageData, Decoration } from 'ricos-schema';
+import {
+  Node_Type,
+  Decoration_Type,
+  ImageData,
+  Link_Target,
+  LinkData,
+  Decoration,
+} from 'ricos-schema';
 import { getAttributes, isText } from './ast-utils';
+import { replace, equals, toUpperCase } from '../../../../fp-utils';
 import { Rule, ContentNode } from './models';
 import {
   createTextNode,
   createParagraphNode,
   createHeadingNode,
   createNode,
-  createLinkData,
 } from '../../../nodeUtils';
 
 const toName = (node: ContentNode) => node.nodeName;
-
-const equals = <T>(E: Eq<T>) => (lhs: T) => (rhs: T) => E.equals(lhs, rhs);
 
 const hasTag = (tag: string) => flow(toName, equals(S.Eq)(tag));
 
@@ -45,10 +49,26 @@ export const hToHeading: Rule = [
   ],
 ];
 
+const toLinkTarget = (target = 'SELF') => pipe(target, toUpperCase, replace('_', ''));
+
+export const createLinkData = (element: Element): LinkData => {
+  const attrs = getAttributes(element);
+  const url = attrs.href;
+  return url
+    ? {
+        link: {
+          url: attrs.href,
+          target: (toLinkTarget(attrs.target) as unknown) as Link_Target,
+          anchor: undefined,
+        },
+      }
+    : ({} as LinkData);
+};
+
 export const aToLink: Rule = [
   hasTag('a'),
   context => (node: Element) =>
-    context.addDecoration(Decoration_Type.LINK, createLinkData(node), node),
+    context.addDecoration(Decoration_Type.LINK, { linkData: createLinkData(node) }, node),
 ];
 
 export const lToList: Rule = [

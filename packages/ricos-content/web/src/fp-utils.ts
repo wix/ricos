@@ -1,6 +1,7 @@
-import { identity, flow } from 'fp-ts/lib/function';
+import { identity, flow } from 'fp-ts/function';
+import { Eq } from 'fp-ts/Eq';
 
-// TODO: improve types
+// TODO: replace this monad with fp-ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 type Fun = (data?: unknown) => any;
@@ -36,3 +37,17 @@ export const firstResolved = (tasks: Task[], i = 0) =>
 // if/else implemented with task
 export const either = (predicate: (data: unknown) => boolean) => data =>
   task((rej, res) => (predicate(data) ? res(data) : rej(data)));
+
+export const replace = (replaced: RegExp | string, by: string) => (str: string): string =>
+  str.replace(replaced, by);
+
+export const equals = <T>(E: Eq<T>) => (lhs: T) => (rhs: T) => E.equals(lhs, rhs);
+
+export const toUpperCase = (str: string) => str.toUpperCase();
+
+export const not = <T>(predicate: (data: T) => boolean) => (data: T) => !predicate(data);
+
+export const log = <T>(tag: string) => (data: T) => {
+  console.log(tag, data); // eslint-disable-line no-console
+  return data;
+};

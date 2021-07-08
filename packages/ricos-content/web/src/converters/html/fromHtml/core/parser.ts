@@ -2,7 +2,7 @@ import { flow, pipe } from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
 
 import { Element, DocumentFragment } from 'parse5';
-import { toAst, isLeaf, not, isComment } from './ast-utils';
+import { toAst, isLeaf } from './ast-utils';
 import { RichContent, Node, Decoration, Decoration_Type } from 'ricos-schema';
 import { ContentNode, Context, Rule } from './models';
 import { initializeMetadata, createDecoration, reduceDecorations } from '../../../nodeUtils';
@@ -29,7 +29,7 @@ const addDecoration = (rules: Rule[], decorations: Decoration[]) => (
 ) => {
   const decoration = createDecoration(type, data);
   const innerElement = getChildNodes(element)[0] as ContentNode;
-  return htmlToNodes(rules, [...decorations, decoration])(innerElement);
+  return htmlToNodes(rules, [decoration, ...decorations])(innerElement);
 };
 
 const getChildNodes = (element: Element | DocumentFragment): ContentNode[] =>

@@ -1,5 +1,4 @@
 import { merge } from 'lodash';
-import { Element } from 'parse5';
 import {
   TextStyle_TextAlignment,
   Node_Type,
@@ -95,11 +94,6 @@ export const createHeadingNode = (nodes: Node[] = [], data: HeadingData): Node =
       ...data,
     },
   });
-
-export const createLinkData = (element: Element): LinkData => {
-  const url = element.attrs.find(attr => attr.name === 'href')?.value;
-  return url ? { linkData: { url } } : {};
-};
 
 export const createDecoration = (
   type: Decoration_Type,
