@@ -22,7 +22,7 @@ const getBookingData = (data, t) => {
   const content = {
     title: name,
     info: { leftSubtitle: description && convertDuration(description, t) },
-    buttonText: t('bookButtonText'),
+    buttonText: t('Embed_Vertical_Bookings_Button'),
   };
   return { pageUrl, imageSrc, content };
 };
@@ -31,7 +31,7 @@ const getEventData = (data, t) => {
   const content = {
     title: name,
     info: { leftSubtitle: scheduling, rightSubtitle: location },
-    buttonText: t('registerButtonText'),
+    buttonText: t('Embed_Vertical_Events_Button'),
   };
   return { pageUrl, imageSrc, content };
 };
@@ -39,7 +39,7 @@ const getProductData = (data, t) => {
   const { name, imageSrc, pageUrl } = data;
   const content = {
     title: name,
-    buttonText: t('buyButtonText'),
+    buttonText: t('Embed_Vertical_Products_Button'),
   };
   return { pageUrl, imageSrc, content };
 };
