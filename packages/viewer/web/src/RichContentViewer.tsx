@@ -196,6 +196,10 @@ class RichContentViewer extends Component<
     return { error };
   }
 
+  componentDidCatch(error, errorInfo) {
+    console.error({ error, errorInfo });
+  }
+
   componentDidMount() {
     this.reportDebuggingInfo();
   }
