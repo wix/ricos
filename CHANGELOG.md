@@ -27,7 +27,7 @@
 ### :house: Internal
 
 - `*`
-  - [#2697](https://github.com/wix/ricos/pull/2697) emmit error when viewer/editor have error in render
+  - [#2697](https://github.com/wix/ricos/pull/2697) console.error when viewer/editor have error
   
 </details>
 <hr/>
