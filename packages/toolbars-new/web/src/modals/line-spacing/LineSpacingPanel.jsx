@@ -43,6 +43,19 @@ const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }
 //       {showSeparator && <Separator />}
 //     </div>
 //   );
+// const MobilePanel = ({ selectedHeight, styles, t, onChange, onSave, onCancel }) => {
+//   const lineHeightElement = (height, isSelected, onClick) => (
+//     <button
+//       className={isSelected ? styles.lineSpacingMobilePanel_selectedLineHeight : ''}
+//       key={height}
+//       onClick={e => {
+//         e.stopPropagation();
+//         onClick(`${height}`);
+//       }}
+//     >
+//       {height}
+//     </button>
+//   );
 
 //   const lineHeights = [1, 1.5, 2, 2.5, 3];
 //   return (
@@ -151,11 +164,14 @@ export default class Panel extends Component {
   onChange = spacing => {
     const merged = { ...this.state.spacing, ...spacing };
     this.setState({ spacing: merged });
+    this.props?.onToolbarButtonClick?.(merged['line-height']);
     this.props.onChange(merged);
   };
 
   onSave = spacing => {
-    this.props.onSave({ ...this.state.spacing, ...spacing });
+    const merged = { ...this.state.spacing, ...spacing };
+    this.props?.onToolbarButtonClick?.(merged['line-height']);
+    this.props.onSave(merged);
   };
 
   render() {
@@ -218,6 +234,7 @@ Panel.propTypes = {
   }),
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
+  onToolbarButtonClick: PropTypes.func,
 };
 
 Panel.defaultProps = { spacing: {} };

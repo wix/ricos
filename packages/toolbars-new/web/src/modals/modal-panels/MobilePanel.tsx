@@ -21,7 +21,10 @@ const MobilePanel = ({
       <button
         className={isSelected ? styles.mobilePanel_selectedLineHeight : ''}
         key={option.commandKey}
-        onClick={() => onClick(option.commandKey)}
+        onClick={e => {
+          e.stopPropagation();
+          onClick(option.commandKey);
+        }}
       >
         <div className={styles.alignment_mobile_contentWrapper}>
           {option.icon && <div>{option.icon}</div>}

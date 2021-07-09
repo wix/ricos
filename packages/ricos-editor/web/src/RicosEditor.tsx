@@ -37,12 +37,7 @@ import {
   StaticToolbarContainer,
 } from 'wix-rich-content-toolbars-new';
 import 'wix-rich-content-toolbars-new/dist/styles.min.css';
-import {
-  emptyDraftContent,
-  getEditorContentSummary,
-  TOOLBARS,
-  isiOS,
-} from 'wix-rich-content-editor-common';
+import { emptyDraftContent, getEditorContentSummary, isiOS } from 'wix-rich-content-editor-common';
 import { mobileTextButtonList, desktopTextButtonList } from './';
 import { TiptapAPI } from 'wix-tiptap-editor';
 
@@ -276,7 +271,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   renderTextFormattingToolbar() {
     const { activeEditor } = this.state;
     if (activeEditor) {
-      const { buttons } = activeEditor.getToolbarProps(TOOLBARS.FORMATTING);
       const { StaticToolbar } = this.state;
       const {
         isMobile,
@@ -285,9 +279,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         toolbarSettings: { getToolbarSettings = () => [] } = {},
         _rcProps: { helpers } = {},
       } = this.props;
-      const buttonsAsArray = Object.values(buttons);
       const editorCommands: EditorCommands = activeEditor.getEditorCommands();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const selection = editorCommands.getSelection();
       const showFormattingToolbar = !selection.getIsCollapsed && selection.getIsFocused;
       const t = activeEditor.getT();
@@ -337,9 +329,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           theme={theme}
           isMobile={isMobile}
           t={t}
-          buttons={buttonsAsArray}
           editorCommands={editorCommands}
-          formattingToolbarButtonsKeys={formattingToolbarButtons}
+          buttons={formattingToolbarButtons}
           plugins={plugins}
           linkPanelData={linkPanelData}
           colorPickerData={colorPickerData}

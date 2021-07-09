@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { PureComponent, ReactElement } from 'react';
 import styles from './ToolbarContainer.scss';
-import { getVisibleSelectionRect, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { /*getVisibleSelectionRect,*/ KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { debounce } from 'lodash';
 
 const TOOLBAR_OFFSET = 5;
@@ -54,7 +54,14 @@ class FloatingToolbarContainer extends PureComponent<ToolbarContainerProps, Stat
     const halfToolbarWidth = this.toolbarContainerRef.current.clientWidth / 2;
     const toolbarHeight = this.toolbarContainerRef.current.clientHeight;
     const toolbarParentRect = (relativeParent || document.body).getBoundingClientRect();
-    const selectionRect = getVisibleSelectionRect(window);
+    // const selectionRect = getVisibleSelectionRect(window);
+    let selectionRect;
+    try {
+      selectionRect = window
+        ?.getSelection?.()
+        ?.getRangeAt?.(0)
+        ?.getBoundingClientRect?.();
+    } catch (error) {}
 
     if (!selectionRect) {
       return { top: 0, left: 0 };

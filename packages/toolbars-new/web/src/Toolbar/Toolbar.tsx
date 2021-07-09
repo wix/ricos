@@ -33,9 +33,8 @@ interface ToolbarProps {
   isMobile?: boolean;
   tabIndex?: number;
   t: TranslationFunction;
-  buttons: unknown[];
   vertical?: boolean;
-  formattingToolbarButtonsKeys?: formattingToolbarButtonsKeysType;
+  buttons?: formattingToolbarButtonsKeysType;
   editorCommands: EditorCommands;
   plugins?: string[];
   setKeepOpen?: (boolean) => void;
@@ -80,12 +79,12 @@ class Toolbar extends Component<ToolbarProps> {
     event.preventDefault();
   };
 
-  onToolbarButtonClick = (name, isActive = undefined) => {
+  onToolbarButtonClick = (name, value = undefined) => {
     const { helpers, toolbarType } = this.props;
     helpers?.onToolbarButtonClick?.({
       buttonName: name,
       type: toolbarType,
-      value: isActive !== undefined ? `${!isActive}` : undefined,
+      value: value === undefined ? undefined : typeof value === 'boolean' ? `${!value}` : value,
       version: Version.currentVersion,
     });
   };
@@ -205,7 +204,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={dropDownProps}
         t={t}
         setKeepOpen={setKeepOpen}
-        onToolbarButtonClick={() => this.onToolbarButtonClick(buttonProps.name)}
+        onToolbarButtonClick={value => this.onToolbarButtonClick(buttonProps.name, value)}
       />
     );
   };
@@ -280,25 +279,22 @@ class Toolbar extends Component<ToolbarProps> {
     const {
       buttons,
       vertical,
-      formattingToolbarButtonsKeys,
       editorCommands,
       t,
       plugins,
       linkPanelData,
       colorPickerData,
     } = this.props;
-    const blabla = createButtonsList(
-      formattingToolbarButtonsKeys,
+    const updatedButtons = createButtonsList(
+      buttons,
       editorCommands,
       t,
       plugins,
       linkPanelData,
       colorPickerData
     );
-    // console.log({ buttons });
-    // console.log({ blabla });
-    blabla.length > 0 && this.cleanUnwantedSeparators(blabla);
-    const buttonsSeparatedByGaps = this.separateByGaps(blabla);
+    updatedButtons.length > 0 && this.cleanUnwantedSeparators(updatedButtons);
+    const buttonsSeparatedByGaps = this.separateByGaps(updatedButtons);
     return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
       return (
         <div
