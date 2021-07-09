@@ -245,7 +245,7 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     dataHook: 'LineSpacingButton',
     tooltip: 'Line spacing',
     type: 'modal',
-    modal: props => <Panel {...props} />,
+    modal: props => <NewPanel {...props} />,
     onSave: 'LINE_SPACING',
     arrow: true,
     saveState: true,

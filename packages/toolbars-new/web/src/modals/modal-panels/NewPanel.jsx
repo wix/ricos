@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
@@ -5,27 +6,42 @@ import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import NewMobilePanel from './MobilePanel';
 
-const Separator = () => <div className={styles.lineSpacing_separator} />;
+const Separator = () => <div className={styles.separator} />;
 
-const LineHeightsPanel = ({ selectedHeight, onSave, showCustomPanel, styles, t }) => {
-  const lineHeightElement = (height, isSelected, onClick) => (
+const LineHeightsPanel = ({
+  currentSelect,
+  options,
+  onClick,
+  showCustomPanel,
+  styles,
+  panelHeader,
+  hasCustomPanel,
+}) => {
+  const lineHeightElement = (option, isSelected, onClick) => (
     <button
       className={isSelected ? styles.lineHeightsPanel_selectedLineHeight : ''}
-      key={height}
-      onClick={() => onClick(`${height}`)}
+      key={option.commandKey}
+      onClick={() => onClick(option.commandKey)}
     >
-      {height}
+      {option.icon ? option.icon : option.text}
     </button>
   );
 
-  const lineHeights = [1, 1.5, 2, 2.5, 3];
   return (
     <div className={styles.lineHeightsPanel}>
-      {lineHeights.map(height =>
-        lineHeightElement(height, parseFloat(selectedHeight) === height, onSave)
+      {options.map(option =>
+        lineHeightElement(
+          option,
+          (currentSelect['line-height'] ?? currentSelect) === option.commandKey,
+          onClick
+        )
       )}
-      <Separator />
-      <button onClick={showCustomPanel}>{t('LineSpacing_customSpacing')}</button>
+      {hasCustomPanel && (
+        <>
+          <Separator />
+          <button onClick={showCustomPanel}>{panelHeader}</button>
+        </>
+      )}
     </div>
   );
 };
@@ -84,14 +100,16 @@ const LabeledInput = ({
         min={min}
         max={max}
         value={value}
-        onChange={e => onChange({ [name]: Number(e.target.value) + unit })}
+        onChange={e => {
+          onChange({ [name]: Number(e.target.value) + unit });
+        }}
         onMouseDown={event => event.stopPropagation()}
       />
     </label>
   );
 };
 
-const CustomPanel = ({ spacing, onChange, onSave, onCancel, styles, t }) => {
+const CustomPanel = ({ selected, onChange, onSave, onCancel, styles, t }) => {
   return (
     <div className={styles.customSpacingPanel}>
       <LabeledInput
@@ -99,7 +117,7 @@ const CustomPanel = ({ spacing, onChange, onSave, onCancel, styles, t }) => {
         name="line-height"
         defaultValue={1.5}
         onChange={onChange}
-        spacing={spacing}
+        spacing={selected}
         min={1}
         max={100}
       />
@@ -109,7 +127,7 @@ const CustomPanel = ({ spacing, onChange, onSave, onCancel, styles, t }) => {
         name="padding-top"
         unit="px"
         onChange={onChange}
-        spacing={spacing}
+        spacing={selected}
         min={0}
         max={250}
       />
@@ -118,7 +136,7 @@ const CustomPanel = ({ spacing, onChange, onSave, onCancel, styles, t }) => {
         name="padding-bottom"
         unit="px"
         onChange={onChange}
-        spacing={spacing}
+        spacing={selected}
         min={0}
         max={250}
       />
@@ -148,27 +166,38 @@ export default class NewPanel extends Component {
     }
   };
 
-  onChange = selected => {
-    const merged = { ...this.state.selected, ...selected };
+  onChange = spacing => {
+    const merged = { ...this.state.selected, ...spacing };
     this.setState({ selected: merged });
-    this.props.onChange(selected);
+    this.props.onChange(merged);
   };
 
-  onSave = selected => {
-    this.props.onSave({ ...this.state.selected, ...selected });
+  onSave = spacing => {
+    this.props.onSave({ ...this.state.selected, ...spacing });
   };
 
   render() {
-    const { onCancel, t, isMobile, options, panelHeader, currentSelect } = this.props;
+    const {
+      onCancel,
+      t,
+      isMobile,
+      options,
+      panelHeader,
+      currentSelect,
+      // onChange,
+      // onSave,
+      hasCustomPanel,
+    } = this.props;
     const { isCustomPanel, selected } = this.state;
-    const { styles, showCustomPanel, onChange, onSave } = this;
+    const { styles, showCustomPanel } = this;
     // const selectedHeight = spacing['line-height'];//!TODO selected row
     const onSaveLineHeight = height => onSave({ 'line-height': height });
-    // const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
+    const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
     // console.log('props ', this.props);
     // const onChangeLineHeight = selected => onChange({ currentSelect: `${selected}` });
     // const options = [1, 1.5, 2, 2.5, 3];
-    // const panelHeader = t('LineSpacing_lineSpacing');
+    const onChange = hasCustomPanel ? this.onChange : this.props.onChange;
+    const onSave = hasCustomPanel ? this.onSave : this.props.onSave;
 
     const panel = isMobile ? (
       <NewMobilePanel
@@ -178,21 +207,33 @@ export default class NewPanel extends Component {
           currentSelect,
           panelHeader,
           options,
-          onChange: this.props.onChange,
+          onChange: hasCustomPanel ? onChangeLineHeight : onChange,
           onSave,
           onCancel,
         }}
       />
     ) : isCustomPanel ? (
-      <CustomPanel {...{ selected, onChange, onSave, onCancel, styles, t, isMobile }} />
+      <CustomPanel
+        {...{
+          selected,
+          onChange,
+          onSave,
+          onCancel,
+          styles,
+          t,
+          isMobile,
+        }}
+      />
     ) : (
       <LineHeightsPanel
         {...{
-          styles,
-          //  selectedHeight,
+          currentSelect,
+          options,
           showCustomPanel,
-          t,
-          onSave: onSaveLineHeight,
+          panelHeader,
+          onClick: hasCustomPanel ? onSaveLineHeight : onChange,
+          styles,
+          hasCustomPanel,
         }}
       />
     );
@@ -250,6 +291,9 @@ LabeledInput.propTypes = {
 
 LineHeightsPanel.propTypes = {
   onSave: PropTypes.func,
+  currentSelect: PropTypes.string,
+  panelHeader: PropTypes.string,
+  options: PropTypes.Array,
   selectedHeight: PropTypes.any,
   showCustomPanel: PropTypes.func,
   styles: PropTypes.object,

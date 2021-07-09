@@ -258,6 +258,7 @@ const handleButtonModal = (
         Modal && (
           <Modal
             {...props}
+            hasCustomPanel
             currentSelect={spacing}
             options={options}
             panelHeader={t('LineSpacing_lineSpacing')}
