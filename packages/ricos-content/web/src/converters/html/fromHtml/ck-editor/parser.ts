@@ -2,7 +2,7 @@ import { identity, flow } from 'fp-ts/function';
 import * as E from 'fp-ts/Either';
 
 import { VideoData, Node_Type } from 'ricos-schema';
-import { Element } from 'parse5';
+import { TextNode, Element } from 'parse5';
 import { createNode } from '../../../nodeUtils';
 import { hasTag, getAttributes } from '../core/ast-utils';
 import { preprocess } from './preprocess';
@@ -57,10 +57,15 @@ const iframeToVideo: Rule = [
 
 const traverseDiv: Rule = [hasTag('div'), identityRule[1]];
 
+const noEmptyLineText: Rule = [
+  node => textToText[0](node) && (node as TextNode).value !== '\n',
+  textToText[1],
+];
+
 export default flow(
   preprocess,
   parse([
-    textToText,
+    noEmptyLineText,
     pToParagraph,
     lToList,
     hToHeading,

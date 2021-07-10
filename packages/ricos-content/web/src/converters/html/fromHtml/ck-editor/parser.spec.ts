@@ -4,10 +4,10 @@ import { Node_Type } from 'ricos-schema';
 import { extract } from '../../../../RicosContentAPI/extract';
 import parse from './parser';
 
-const getHtml = () => readFileSync(`${__dirname}/../__tests__/FAQContent.html`, 'utf8');
+const getHtml = filename => readFileSync(`${__dirname}/../__tests__/${filename}.html`, 'utf8');
 
 describe('CKEditor parser', () => {
-  const content = parse(getHtml());
+  const content = parse(getHtml('FAQContent'));
   it('iframe => video with youtube url', async () => {
     const videos = extract(content.nodes)
       .filter(({ type }) => type === Node_Type.VIDEO)
@@ -31,7 +31,10 @@ describe('CKEditor parser', () => {
   });
 
   it('should output valid content for toDraft', () => {
-    const draft = toDraft(content);
+    const content = getHtml('faq-no-nested-content');
+    const rich = parse(content);
+    console.log(JSON.stringify(rich, null, 2)); // eslint-disable-line no-console
+    const draft = toDraft(rich);
     console.log(draft); // eslint-disable-line no-console
     expect(draft.blocks.length).toEqual(1);
     expect(Object.keys(draft.entityMap).length).toEqual(1);
