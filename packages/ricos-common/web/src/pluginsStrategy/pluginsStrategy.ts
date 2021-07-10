@@ -21,9 +21,6 @@ import { RicosCssOverride, RichContentProps } from '../types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type InlineStyleMapper = () => InlineStyleMapping;
 
-type TiptapPluginProps = Pick<RCEPluginProps, 'tiptapExtensions'>;
-type DraftPluginProps = Omit<RCEPluginProps, 'tiptapExtensions'>;
-
 const recordMergeM = <T>() => R.getMonoid<string, T>(last<T>());
 const rcvPropM = struct<RCVPluginProps>({
   config: recordMergeM<any>(),
@@ -32,7 +29,6 @@ const rcvPropM = struct<RCVPluginProps>({
   inlineStyleMappers: A.getMonoid<InlineStyleMapper>(),
 });
 const rcePropM = struct<RCEPluginProps>({
-  tiptapExtensions: A.getMonoid<EditorPlugin['tiptapExtension']>(),
   config: recordMergeM<any>(),
   plugins: A.getMonoid<CreatePluginFunction>(),
   ModalsMap: recordMergeM<ComponentType>(),
@@ -49,19 +45,12 @@ const extractChildRCVPluginProps = (
   inlineStyleMappers: content ? inlineStyleMappers.map(mapper => mapper(config, content)) : [],
 });
 
-const extractChildRCEPluginProps = (
-  isTiptap: boolean,
-  childProps: any
-): TiptapPluginProps | DraftPluginProps => ({
+const extractChildRCEPluginProps = (childProps: any): RCEPluginProps => ({
   ...rcePropM.empty,
-  ...pick(
-    childProps,
-    isTiptap ? ['tiptapExtensions'] : ['config', 'ModalsMap', 'plugins', 'createPluginsDataMap']
-  ),
+  ...pick(childProps, ['config', 'ModalsMap', 'plugins', 'createPluginsDataMap']),
 });
 
 const toRCEPluginProps = (plugin: EditorPlugin): RCEPluginProps => ({
-  tiptapExtensions: plugin.tiptapExtension ? [plugin.tiptapExtension] : [],
   config: { [plugin.type]: plugin.config },
   plugins: plugin.createPlugin ? [plugin.createPlugin] : [],
   ModalsMap: plugin.ModalsMap ?? {},
@@ -100,7 +89,6 @@ export default function pluginsStrategy({
   content?: DraftContent;
   experiments?: AvailableExperiments;
 }): RCEPluginProps | RCVPluginProps {
-  const isTiptap = !!experiments?.tiptapEditor?.enabled;
   return isViewer
     ? pipe(
         plugins as ViewerPlugin[],
@@ -112,6 +100,6 @@ export default function pluginsStrategy({
         plugins as EditorPlugin[],
         A.map(toRCEPluginProps),
         fold(rcePropM),
-        mergeWithChildProps(extractChildRCEPluginProps(isTiptap, childProps), themeData)
+        mergeWithChildProps(extractChildRCEPluginProps(childProps), themeData)
       );
 }
