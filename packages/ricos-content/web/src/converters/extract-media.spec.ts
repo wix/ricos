@@ -84,7 +84,6 @@ const draftContentWithImages = {
           size: 'content',
           showTitle: true,
           showDescription: true,
-          disableExpand: false,
         },
         metadata: {
           caption: 'wedding',
@@ -108,7 +107,6 @@ const draftContentWithImages = {
           size: 'content',
           layout: 'small',
           spacing: 0,
-          disableExpand: false,
         },
         items: [
           {
