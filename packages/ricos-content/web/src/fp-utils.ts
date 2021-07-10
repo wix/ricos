@@ -56,7 +56,7 @@ export const not = <T>(predicate: (data: T) => boolean) => (data: T) => !predica
 
 export const toUpperCase = (str: string) => str.toUpperCase();
 
-export const log = <T>(tag: string) => (data: T) => {
-  console.log(tag, data); // eslint-disable-line no-console
+export const log = <T>(tag: string, processor: (data: T) => string | T = identity) => (data: T) => {
+  console.log(tag, processor(data)); // eslint-disable-line no-console
   return data;
 };

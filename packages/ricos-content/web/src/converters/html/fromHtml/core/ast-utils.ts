@@ -28,8 +28,8 @@ export const isLeaf = (node: Node): boolean =>
   isText(node) || isComment(node) || (node as Element).childNodes.length === 0;
 
 export const hasDescendant = (predicate: (child: Node) => boolean) => (node: Node): boolean =>
-  !isLeaf(node) &&
-  (pipe((node as Element).childNodes, A.map(predicate), concatAll(MonoidAny)) ||
+  predicate(node) ||
+  (!isLeaf(node) &&
     pipe((node as Element).childNodes, A.map(hasDescendant(predicate)), concatAll(MonoidAny)));
 
 export const last = arr => (arr.length > 0 ? arr[arr.length - 1] : null);
@@ -88,6 +88,9 @@ export const toDocumentFragment = (nodes: ChildNode[]): DocumentFragment => {
 export const toName = (node: ContentNode) => node.nodeName;
 
 export const hasTag = (tag: string) => flow(toName, equals(S.Eq)(tag));
+
+export const hasChild = (predicate: (node: ContentNode) => boolean) =>
+  flow(getChildNodes, A.map(predicate), concatAll(MonoidAny));
 
 export const oneOf = (tags: string[]) => (node: ContentNode) =>
   pipe(tags, A.map(equals(S.Eq)(node.nodeName)), concatAll(MonoidAny));

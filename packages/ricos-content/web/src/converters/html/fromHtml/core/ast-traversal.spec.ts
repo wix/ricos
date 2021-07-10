@@ -8,6 +8,6 @@ describe('AST traversal', () => {
     const expected = toAst('<p>text</p><ol><li><p>item</p></li></ol>');
     const rule: AstRule = [() => true, identity];
     const actual = traverse(rule)(expected);
-    expect(serialize(toDocumentFragment(actual))).toEqual(serialize(expected));
+    expect(serialize(actual)).toEqual(serialize(expected));
   });
 });

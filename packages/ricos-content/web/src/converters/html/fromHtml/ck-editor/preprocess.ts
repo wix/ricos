@@ -1,9 +1,24 @@
 import { flow } from 'fp-ts/function';
-import { ChildNode, DocumentFragment, Element, Node, serialize } from 'parse5';
-import { toAst, isText, isLeaf, hasDescendant, appendChild, partitionBy } from '../core/ast-utils';
-import { not } from '../../../../fp-utils';
+import { MonoidAll, MonoidAny } from 'fp-ts/boolean';
 
-const addParagraph = (parentNode: Element) => (): ChildNode => ({
+import { Element, serialize } from 'parse5';
+import { ContentNode } from '../core/models';
+import {
+  isText,
+  isLeaf,
+  hasDescendant,
+  appendChild,
+  partitionBy,
+  hasTag,
+  oneOf,
+  AstRule,
+  toAst,
+  hasChild,
+} from '../core/ast-utils';
+import traverse from '../core/ast-traversal';
+import { concatApply, not } from '../../../../fp-utils';
+
+const addParagraph = (parentNode: Element) => (): ContentNode => ({
   nodeName: 'p',
   tagName: 'p',
   childNodes: [],
@@ -12,56 +27,56 @@ const addParagraph = (parentNode: Element) => (): ChildNode => ({
   namespaceURI: parentNode.namespaceURI,
 });
 
-// TODO: purify
-const visit = (visitor: (node: ChildNode) => ChildNode) => (node: Node): Node => {
-  if (isLeaf(node)) {
-    return node;
-  }
-  const element = node as Element;
-  element.childNodes = element.childNodes.map(visitor);
-  element.childNodes.map(visit(visitor));
-  return node;
-};
-
-const isBlock = (node: ChildNode): boolean => ['img', 'iframe', 'ol', 'ul'].includes(node.nodeName);
-
-const isParagraph = (node: ChildNode): boolean => node.nodeName === 'p';
-
-const isListItem = (node: ChildNode): boolean => ['ol', 'ul', 'li'].includes(node.nodeName);
-
-// TODO: purify
-const blockWrapParagraphToDiv = (node: Element): ChildNode => {
-  if (isParagraph(node) && hasDescendant(isBlock)(node)) {
-    node.nodeName = 'div';
-    node.tagName = 'div';
-    node.childNodes = partitionBy<ChildNode>(
-      hasDescendant(isBlock),
-      isParagraph,
+const containerPToDiv: AstRule = [
+  concatApply(MonoidAll)([hasTag('p'), hasDescendant(oneOf(['img', 'iframe', 'ol', 'ul']))]),
+  (node: Element) => ({
+    ...node,
+    tagName: 'div',
+    nodeName: 'div',
+    childNodes: partitionBy<ContentNode>(
+      hasDescendant(oneOf(['img', 'iframe', 'ol', 'ul'])),
+      hasTag('p'),
       addParagraph(node),
       appendChild
-    )(node.childNodes);
-  }
-  return node;
-};
+    )(node.childNodes),
+  }),
+];
 
-const leafParagraphToDiv = (node: Element): ChildNode =>
-  isParagraph(node) && isLeaf(node) ? { ...node, nodeName: 'div', tagName: 'div' } : node;
+const leafParagraphToDiv: AstRule = [
+  concatApply(MonoidAll)([isLeaf, hasTag('p')]),
+  (node: Element) => ({
+    ...node,
+    tagName: 'div',
+    nodeName: 'div',
+  }),
+];
 
-// TODO: purify
-const cleanListPadding = (node: Element): ChildNode => {
-  if (isListItem(node)) {
-    node.childNodes = node.childNodes.filter(not(isText));
-  }
-  return node;
-};
+const cleanListPadding: AstRule = [
+  oneOf(['ol', 'ul']),
+  (node: Element) => ({
+    ...node,
+    childNodes: (node.childNodes as Element[]).filter(not(isText)),
+  }),
+];
 
-const traverse = (visitor: (node: ChildNode) => ChildNode) => (root: DocumentFragment): Node =>
-  visit(visitor)(root);
+const wrapTextUnderLi: AstRule = [
+  concatApply(MonoidAll)([hasTag('li'), hasChild(isText)]),
+  (node: Element) => ({
+    ...node,
+    childNodes: partitionBy<ContentNode>(
+      concatApply(MonoidAny)([hasTag('p'), hasDescendant(oneOf(['img', 'iframe', 'ol', 'ul']))]),
+      hasTag('p'),
+      addParagraph(node),
+      appendChild
+    )(node.childNodes),
+  }),
+];
 
 export const preprocess = flow(
   toAst,
-  traverse(cleanListPadding),
   traverse(leafParagraphToDiv),
-  traverse(blockWrapParagraphToDiv),
+  traverse(cleanListPadding),
+  traverse(containerPToDiv),
+  traverse(wrapTextUnderLi),
   serialize
 );

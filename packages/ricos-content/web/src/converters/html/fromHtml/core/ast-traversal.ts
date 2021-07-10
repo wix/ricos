@@ -1,8 +1,8 @@
-import { pipe } from 'fp-ts/function';
+import { flow, pipe } from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
 
 import { DocumentFragment } from 'parse5';
-import { getChildNodes, AstRule } from './ast-utils';
+import { getChildNodes, AstRule, toDocumentFragment } from './ast-utils';
 import { ContentNode } from './models';
 import { log } from '../../../../fp-utils';
 
@@ -18,4 +18,4 @@ const appyRule = (rule: AstRule) => (node: ContentNode): ContentNode => {
 const visit = (rule: AstRule) => (element: ContentNode | DocumentFragment) =>
   pipe(element, getChildNodes, A.map(appyRule(rule)));
 
-export default (rule: AstRule) => visit(rule);
+export default (rule: AstRule) => flow(visit(rule), toDocumentFragment);

@@ -19,6 +19,8 @@ import {
   createNode,
 } from '../../../nodeUtils';
 
+export const identityRule: Rule = [() => true, ({ visit }) => (node: Element) => visit(node)];
+
 export const textToText: Rule = [
   isText,
   context => (node: TextNode) => [createTextNode(node.value, context.decorations)],
@@ -93,7 +95,7 @@ const toImageData = (decorations: Decoration[], node: Element): ImageData => {
   const attrs = getAttributes(node);
   return {
     image: {
-      src: { url: attrs.href },
+      src: { url: attrs.src },
     },
     altText: attrs.alt,
     link: decorations
