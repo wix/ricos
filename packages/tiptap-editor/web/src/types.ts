@@ -21,7 +21,10 @@ export interface PluginProps {
 export type TiptapConfig = {
   onUpdate?: ({ content }: { content: DraftContent }) => void;
   initialContent: DraftContent;
-  ricosExtensions: () => CreateTiptapExtension<NodeConfig | MarkConfig | ExtensionConfig>;
+  ricosExtensions: (
+    | (() => CreateTiptapExtension<NodeConfig | MarkConfig | ExtensionConfig>)
+    | undefined
+  )[];
 };
 
 export type TiptapAPI = {

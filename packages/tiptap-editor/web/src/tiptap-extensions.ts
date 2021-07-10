@@ -19,7 +19,7 @@ import Link from '@tiptap/extension-link';
 import { createImage } from './extensions/extension-image';
 import { createBold } from './extensions/extension-bold';
 import { LinkData, HeadingData } from 'ricos-schema';
-import { MarkConfig, NodeConfig, ExtensionConfig } from '@tiptap/react';
+import { MarkConfig, NodeConfig, ExtensionConfig, Node } from '@tiptap/react';
 import * as TTR from '@tiptap/react';
 import { BaseExtensionComponentHOC } from './components/BaseComponent';
 import { CreateTiptapExtension } from 'wix-rich-content-common';
@@ -60,7 +60,8 @@ type Creator = CreateTiptapExtension<NodeConfig | MarkConfig | ExtensionConfig>;
 export const createExtensions = (ricosExtensions: ((() => Creator) | undefined)[]) => {
   const creatorCoreUtils = { ...TTR, BaseExtensionComponentHOC };
   const extensions = ricosExtensions
-    .map(ext => ext?.()(creatorCoreUtils).extend(withKey))
-    .filter(ext => !!ext);
+    .map(ext => ext?.()(creatorCoreUtils))
+    .filter(ext => !!ext)
+    .map(ext => Node.create(ext as NodeConfig).extend(withKey));
   return [...tiptapExtensions, ...extensions];
 };
