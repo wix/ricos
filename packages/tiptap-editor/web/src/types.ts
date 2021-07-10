@@ -1,8 +1,9 @@
+import { ExtensionConfig } from '@tiptap/core';
+import { CreateTiptapExtension } from 'wix-rich-content-common';
 import { Node as ProseMirrorNode } from 'prosemirror-model';
 import { DraftContent } from 'ricos-content';
-import { RCEPluginProps } from 'ricos-common';
 import { FC } from 'react';
-import { Editor } from '@tiptap/react';
+import { Editor, NodeConfig, MarkConfig } from '@tiptap/react';
 
 export interface PluginProps {
   context: {
@@ -20,7 +21,7 @@ export interface PluginProps {
 export type TiptapConfig = {
   onUpdate?: ({ content }: { content: DraftContent }) => void;
   initialContent: DraftContent;
-  tiptapExtensions: RCEPluginProps['tiptapExtensions'];
+  ricosExtensions: () => CreateTiptapExtension<NodeConfig | MarkConfig | ExtensionConfig>;
 };
 
 export type TiptapAPI = {

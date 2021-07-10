@@ -2,25 +2,22 @@ import React from 'react';
 import { EditorPropsContext } from './context';
 import Toolbar from './components/Toolbar';
 import { JSONContent } from '@tiptap/core';
-import * as ttReact from '@tiptap/react';
+import { Editor, EditorContent } from '@tiptap/react';
 import {
   draftToTiptap,
   tiptapToDraft,
   draftBlockDataToTiptap,
   TO_RICOS_NODE_TYPE,
 } from 'ricos-content/libs/converters';
-import { tiptapExtensions } from './tiptap-extensions';
+import { createExtensions } from './tiptap-extensions';
 import { capitalize } from 'lodash';
 import { TiptapAPI, TiptapConfig } from './types';
 import { RICOS_DIVIDER_TYPE, DIVIDER_TYPE } from 'wix-rich-content-common';
 
-const { Editor, EditorContent } = ttReact;
-
-const getEditorCreator = ({ onUpdate, tiptapExtensions: exts }) => (content: JSONContent) => {
-  // const extensions = exts.map(ext => ext()(ttReact));
+const getEditorCreator = ({ onUpdate, ricosExtensions }) => (content: JSONContent) => {
   return new Editor({
     content,
-    extensions: tiptapExtensions,
+    extensions: createExtensions(ricosExtensions),
     injectCSS: true,
     onUpdate: ({ editor }) => {
       const newContent = editor.getJSON();
@@ -32,7 +29,7 @@ const getEditorCreator = ({ onUpdate, tiptapExtensions: exts }) => (content: JSO
 
 // missing forceUpdate
 //github.com/ueberdosis/tiptap/blob/main/packages/react/src/useEditor.ts#L20
-const toTiptapAPI = (editor: ttReact.Editor): TiptapAPI => ({
+const toTiptapAPI = (editor: Editor): TiptapAPI => ({
   Editor: props => (
     <EditorPropsContext.Provider value={props}>
       <div dir="">
@@ -76,10 +73,10 @@ const toTiptapAPI = (editor: ttReact.Editor): TiptapAPI => ({
 export const initTiptapEditor = ({
   initialContent,
   onUpdate,
-  tiptapExtensions,
+  ricosExtensions,
 }: TiptapConfig): TiptapAPI => {
   const tiptapData = draftToTiptap(initialContent);
-  const editorCreator = getEditorCreator({ onUpdate, tiptapExtensions });
+  const editorCreator = getEditorCreator({ onUpdate, ricosExtensions });
   const editor = editorCreator(tiptapData);
 
   return toTiptapAPI(editor);
