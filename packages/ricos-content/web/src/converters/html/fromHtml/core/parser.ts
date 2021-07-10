@@ -2,7 +2,7 @@ import { flow, pipe } from 'fp-ts/function';
 import * as A from 'fp-ts/Array';
 
 import { Element, DocumentFragment } from 'parse5';
-import { toAst, isLeaf } from './ast-utils';
+import { toAst, getChildNodes } from './ast-utils';
 import { RichContent, Node, Decoration, Decoration_Type } from 'ricos-schema';
 import { ContentNode, Context, Rule } from './models';
 import { initializeMetadata, createDecoration, reduceDecorations } from '../../../nodeUtils';
@@ -31,9 +31,6 @@ const addDecoration = (rules: Rule[], decorations: Decoration[]) => (
   const innerElement = getChildNodes(element)[0] as ContentNode;
   return htmlToNodes(rules, [decoration, ...decorations])(innerElement);
 };
-
-const getChildNodes = (element: Element | DocumentFragment): ContentNode[] =>
-  isLeaf(element) ? [] : (element.childNodes as ContentNode[]);
 
 const visit = (rules: Rule[], decorations: Decoration[]) => (element: Element | DocumentFragment) =>
   pipe(element, getChildNodes, A.chain(htmlToNodes(rules, decorations)));

@@ -1,8 +1,4 @@
 import { flow, pipe } from 'fp-ts/function';
-import * as A from 'fp-ts/Array';
-import * as S from 'fp-ts/string';
-import { MonoidAny } from 'fp-ts/boolean';
-import { concatAll } from 'fp-ts/Monoid';
 
 import { TextNode, Element } from 'parse5';
 import {
@@ -13,22 +9,15 @@ import {
   LinkData,
   Decoration,
 } from 'ricos-schema';
-import { getAttributes, isText } from './ast-utils';
-import { replace, equals, toUpperCase } from '../../../../fp-utils';
-import { Rule, ContentNode } from './models';
+import { getAttributes, isText, toName, hasTag, oneOf } from './ast-utils';
+import { replace, toUpperCase } from '../../../../fp-utils';
+import { Rule } from './models';
 import {
   createTextNode,
   createParagraphNode,
   createHeadingNode,
   createNode,
 } from '../../../nodeUtils';
-
-const toName = (node: ContentNode) => node.nodeName;
-
-const hasTag = (tag: string) => flow(toName, equals(S.Eq)(tag));
-
-const oneOf = (tags: string[]) => (node: ContentNode) =>
-  pipe(tags, A.map(equals(S.Eq)(node.nodeName)), concatAll(MonoidAny));
 
 export const textToText: Rule = [
   isText,

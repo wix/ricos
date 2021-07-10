@@ -1,5 +1,7 @@
-import { identity, flow } from 'fp-ts/function';
+import { identity, flow, pipe } from 'fp-ts/function';
 import { Eq } from 'fp-ts/Eq';
+import { concatAll, Monoid } from 'fp-ts/Monoid';
+import * as A from 'fp-ts/Array';
 
 // TODO: replace this monad with fp-ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -43,9 +45,16 @@ export const replace = (replaced: RegExp | string, by: string) => (str: string):
 
 export const equals = <T>(E: Eq<T>) => (lhs: T) => (rhs: T) => E.equals(lhs, rhs);
 
-export const toUpperCase = (str: string) => str.toUpperCase();
+export const concatApply = <T, D>(m: Monoid<T>) => (fns: ((data: D) => T)[]) => (data: D) =>
+  pipe(
+    fns,
+    A.map(fn => fn(data)),
+    concatAll(m)
+  );
 
 export const not = <T>(predicate: (data: T) => boolean) => (data: T) => !predicate(data);
+
+export const toUpperCase = (str: string) => str.toUpperCase();
 
 export const log = <T>(tag: string) => (data: T) => {
   console.log(tag, data); // eslint-disable-line no-console

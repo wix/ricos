@@ -1,7 +1,7 @@
 import { Node, TextData, NodeStyle, Decoration, Decoration_Type, RichContent } from 'ricos-schema';
-import { TextNode, Element } from 'parse5';
+import { TextNode, Element, CommentNode } from 'parse5';
 
-export type ContentNode = Element | TextNode;
+export type ContentNode = Element | TextNode | CommentNode;
 
 export type Context = {
   readonly decorations: Decoration[];
