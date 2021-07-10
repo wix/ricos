@@ -54,8 +54,8 @@ describe('migrate to draft', () => {
     config: {
       alignment: 'center',
       size: 'content',
-      disableExpand: false,
     },
+    disableExpand: false,
     src: {
       id: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
       file_name: '8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg',
