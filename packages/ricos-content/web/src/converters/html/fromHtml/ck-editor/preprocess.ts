@@ -8,13 +8,13 @@ import {
   isLeaf,
   hasDescendant,
   appendChild,
-  partitionBy,
   hasTag,
   oneOf,
   AstRule,
   toAst,
   hasChild,
 } from '../core/ast-utils';
+import { partitionBy } from '../../../nodeUtils';
 import traverse from '../core/ast-traversal';
 import { concatApply, not } from '../../../../fp-utils';
 
