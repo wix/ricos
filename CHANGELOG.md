@@ -18,22 +18,23 @@
   </summary>
 
 ### :bug: Bug Fix
+
 - `schema`
   - [#2669](https://github.com/wix-incubator/rich-content/pull/2669) fix new schema to support media plugins content ('disableExpand','disableDownload')
 - `image-plugin`
   - [#2694](https://github.com/wix-incubator/rich-content/pull/2694) fix image data after settings cancel
-- `editor-common`
-  - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
-- `image`
-  - [#2681](https://github.com/wix/ricos/pull/2681) Merge `useQualityPreload` Experiment
 - `ricos-editor`
   - [#2684](https://github.com/wix-incubator/rich-content/pull/2684) BM's top toolbar overrides Ricos Modal
 
 ### :house: Internal
 
+- `editor-common`
+  - [#2663](https://github.com/wix/ricos/pull/2663) moved SearchIcon/ErrorIcon into ui-components folder
+- `image`
+  - [#2681](https://github.com/wix/ricos/pull/2681) Merge `useQualityPreload` Experiment
 - `*`
   - [#2697](https://github.com/wix/ricos/pull/2697) console.error when viewer/editor have error
-  
+
 </details>
 <hr/>
 
