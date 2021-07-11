@@ -130,10 +130,12 @@ const convertVideoData = (data: VideoData & { src; metadata }) => {
 const convertDividerData = (
   data: Partial<DividerData> & {
     type;
+    lineStyle?: string;
     config?: ComponentData['config'];
   }
 ) => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.type = data.lineStyle?.toLowerCase();
+  delete data.lineStyle;
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
     data.config.size = data.width?.toLowerCase();

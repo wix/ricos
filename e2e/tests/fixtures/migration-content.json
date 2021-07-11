@@ -1353,7 +1353,10 @@
         "config": {
           "alignment": "right",
           "size": "inline",
-          "width": 300
+          "width": 300,
+          "spoiler": {
+            "enabled": true
+          }
         },
         "src": {
           "id": "91ff5a615e0235157dc1a7e5f66607bf",
@@ -1361,7 +1364,9 @@
           "file_name": "8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg",
           "width": 1920,
           "height": 1280
-        }
+        },
+        "disableDownload": false,
+        "disableExpand": false
       }
     }
   },
