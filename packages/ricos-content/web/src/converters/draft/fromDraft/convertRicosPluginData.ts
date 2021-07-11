@@ -147,8 +147,34 @@ const convertPollData = (data: { layout; design }) => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toUpperCase());
 };
 
-const convertAppEmbedData = (data: { type?: string }) => {
-  has(data, 'type') && (data.type = data.type?.toUpperCase());
+const convertAppEmbedData = (data: {
+  type: string;
+  selectedProduct: Record<string, string>;
+  metadata: Record<string, unknown>;
+}) => {
+  const {
+    id,
+    name,
+    imageSrc,
+    description,
+    pageUrl,
+    scheduling,
+    location,
+    html,
+    durations,
+  } = data.selectedProduct;
+  const metadata: Record<string, unknown> = { id, name, imageSrc };
+  pageUrl
+    ? (metadata.pageUrl = pageUrl)
+    : html && (metadata.pageUrl = html.match(/href="[^"]*/g)?.[0]?.slice(6));
+  if (data.type === 'booking') {
+    metadata.durations = durations || description;
+  } else if (data.type === 'event') {
+    metadata.location = location || (description && description.match(/[^|]*$/)?.[0]);
+    metadata.scheduling = scheduling || (description && description.match(/[^|]+/)?.[0]);
+  }
+  data.type = data.type?.toUpperCase();
+  data.metadata = metadata;
 };
 
 const convertLinkPreviewData = (data: {

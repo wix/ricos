@@ -93,12 +93,8 @@ export const parseMap = ({ mapData }: Node): string => {
 };
 
 export const parseAppEmbed = ({ appEmbedData }: Node, delimiter: string): string => {
-  const { html, name } = appEmbedData?.selectedProduct || {};
-  const href = html
-    ?.replace(/.*href="/g, '')
-    .replace(/.*=http/g, 'http')
-    .replace(/" .*/g, '');
-  return [name, href].filter(Boolean).join(delimiter);
+  const { pageUrl, name } = appEmbedData?.metadata || {};
+  return [name, pageUrl].filter(Boolean).join(delimiter);
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {

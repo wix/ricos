@@ -11,19 +11,22 @@ package wix.rich_content.v1;
 import "google/protobuf/wrappers.proto";
 
 message AppEmbedData {
-    message SelectedProduct {
+    message Metadata {
         google.protobuf.StringValue id = 1;
         google.protobuf.StringValue name = 2;
         google.protobuf.StringValue imageSrc = 3;
-        google.protobuf.StringValue html = 4;
+        google.protobuf.StringValue durations = 4;
+        google.protobuf.StringValue page_url = 5;
+        google.protobuf.StringValue scheduling = 6;
+        google.protobuf.StringValue location = 7;
     }
 
     enum AppType {
         PRODUCT = 0;
         EVENT = 1;
-        STORE = 2;
+        BOOKING = 2;
     }
     
     AppType type = 1;
-    SelectedProduct selectedProduct = 2;
+    Metadata metadata = 2;
 }

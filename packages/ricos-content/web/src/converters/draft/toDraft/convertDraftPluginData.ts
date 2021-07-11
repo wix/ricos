@@ -169,6 +169,18 @@ const convertPollData = data => {
 
 const convertAppEmbedData = data => {
   has(data, 'type') && (data.type = data.type.toLowerCase());
+  const { id, name, imageSrc, durations, pageUrl, scheduling, location } = data.metadata;
+  const selectedProduct: Record<string, unknown> = {
+    id,
+    name,
+    imageSrc,
+    scheduling,
+    location,
+    pageUrl,
+    durations,
+  };
+  data.selectedProduct = selectedProduct;
+  delete data.metadata;
 };
 
 const convertLinkPreviewData = data => {

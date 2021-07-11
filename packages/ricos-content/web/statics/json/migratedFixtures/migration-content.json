@@ -845,17 +845,70 @@
       "nodes": [],
       "appEmbedData": {
         "type": "PRODUCT",
-        "selectedProduct": {
+        "metadata": {
           "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
           "name": "flowers",
           "imageSrc": "https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg",
-          "html": "<a class=\"vertical-embed-link\" href=\"https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers\" target=\"_blank\"><div class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">flowers</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Comprar ahora</div></div></div></div></a>"
+          "pageUrl": "https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers"
         }
       }
     },
     {
       "type": "PARAGRAPH",
       "key": "akn59",
+      "nodes": [],
+      "paragraphData": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "APP_EMBED",
+      "key": "c1q2f",
+      "nodes": [],
+      "appEmbedData": {
+        "type": "EVENT",
+        "metadata": {
+          "id": "65129504-3bfc-44c8-90cc-f9eedfea9321",
+          "name": "2-week course of intensive physical research, with a sense of plenty of time for process and discovery. Rooted in Ohad N",
+          "imageSrc": "https://static.wixstatic.com/media/2571849c6b0749a4bbd008a06fd65762.jpg",
+          "pageUrl": "https://www.wix.app/events/54e7b326-49ec-434f-a7cc-c2ad1eaec049/65129504-3bfc-44c8-90cc-f9eedfea9321/details?d=https://sapirs0.wixsite.com/mysite/event-details/2-week-course-of-intensive-physical-research-with-a-sense-of-plenty-of-time-for-process-and-discovery-rooted-in-ohad-n",
+          "scheduling": "13 de octubre de 2020 19:00–27 de octubre de 2020 23:00 ",
+          "location": " Suzanna Baby Shop"
+        }
+      }
+    },
+    {
+      "type": "PARAGRAPH",
+      "key": "264en",
+      "nodes": [],
+      "paragraphData": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0
+      }
+    },
+    {
+      "type": "APP_EMBED",
+      "key": "cnbji",
+      "nodes": [],
+      "appEmbedData": {
+        "type": "BOOKING",
+        "metadata": {
+          "id": "03ef6546-985d-4739-951e-ca897375b967",
+          "name": "CUPCAKE MASTER",
+          "imageSrc": "https://static.wixstatic.com/media/78ccafc88f7fce3e55bd7a33f166704b.jpg",
+          "durations": "1h 30min",
+          "pageUrl": "https://www.wix.app/bookings/54e7b326-49ec-434f-a7cc-c2ad1eaec049/service/03ef6546-985d-4739-951e-ca897375b967/details?d=https://sapirs0.wixsite.com/mysite/bookings-checkout/cupcake-master"
+        }
+      }
+    },
+    {
+      "type": "PARAGRAPH",
+      "key": "8uk1q",
       "nodes": [],
       "paragraphData": {
         "textStyle": {
@@ -1007,7 +1060,7 @@
       "nodes": [
         {
           "type": "PARAGRAPH",
-          "key": "5i2gm",
+          "key": "9p7nf",
           "nodes": [
             {
               "type": "TEXT",
@@ -1099,7 +1152,7 @@
     },
     {
       "type": "ORDERED_LIST",
-      "key": "8hb2p",
+      "key": "dtg8p",
       "nodes": [
         {
           "type": "LIST_ITEM",
@@ -1107,7 +1160,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "b4h9b",
+              "key": "cpqci",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1128,7 +1181,7 @@
             },
             {
               "type": "ORDERED_LIST",
-              "key": "2m4si",
+              "key": "aon0m",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1136,7 +1189,7 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "ctcl",
+                      "key": "86otj",
                       "nodes": [
                         {
                           "type": "TEXT",
@@ -1157,7 +1210,7 @@
                     },
                     {
                       "type": "ORDERED_LIST",
-                      "key": "11oca",
+                      "key": "4v1q7",
                       "nodes": [
                         {
                           "type": "LIST_ITEM",
@@ -1165,7 +1218,7 @@
                           "nodes": [
                             {
                               "type": "PARAGRAPH",
-                              "key": "8qa3c",
+                              "key": "37lkc",
                               "nodes": [
                                 {
                                   "type": "TEXT",
@@ -1186,7 +1239,7 @@
                             },
                             {
                               "type": "ORDERED_LIST",
-                              "key": "5tfkg",
+                              "key": "92pv4",
                               "nodes": [
                                 {
                                   "type": "LIST_ITEM",
@@ -1194,7 +1247,7 @@
                                   "nodes": [
                                     {
                                       "type": "PARAGRAPH",
-                                      "key": "195td",
+                                      "key": "9cimo",
                                       "nodes": [
                                         {
                                           "type": "TEXT",
@@ -1215,7 +1268,7 @@
                                     },
                                     {
                                       "type": "ORDERED_LIST",
-                                      "key": "2n2nv",
+                                      "key": "5v4oj",
                                       "nodes": [
                                         {
                                           "type": "LIST_ITEM",
@@ -1223,7 +1276,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "d0dm4",
+                                              "key": "3lovv",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1250,7 +1303,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "6egvp",
+                                              "key": "fimm2",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1293,7 +1346,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "9k75r",
+              "key": "4sv37",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1314,7 +1367,7 @@
             },
             {
               "type": "BULLET_LIST",
-              "key": "4vtbb",
+              "key": "3423r",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1322,7 +1375,7 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "43l9t",
+                      "key": "b9hhu",
                       "nodes": [
                         {
                           "type": "TEXT",
@@ -1353,7 +1406,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "4rjuq",
+              "key": "758lt",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1389,7 +1442,7 @@
     },
     {
       "type": "BULLET_LIST",
-      "key": "7oied",
+      "key": "a5upj",
       "nodes": [
         {
           "type": "LIST_ITEM",
@@ -1397,7 +1450,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "2jo1q",
+              "key": "7cn51",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1418,7 +1471,7 @@
             },
             {
               "type": "BULLET_LIST",
-              "key": "8tnbv",
+              "key": "1s82p",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1426,7 +1479,7 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "ahqos",
+                      "key": "cafdv",
                       "nodes": [
                         {
                           "type": "TEXT",
@@ -1447,7 +1500,7 @@
                     },
                     {
                       "type": "BULLET_LIST",
-                      "key": "798dm",
+                      "key": "fhtli",
                       "nodes": [
                         {
                           "type": "LIST_ITEM",
@@ -1455,7 +1508,7 @@
                           "nodes": [
                             {
                               "type": "PARAGRAPH",
-                              "key": "7o37b",
+                              "key": "1vjlf",
                               "nodes": [
                                 {
                                   "type": "TEXT",
@@ -1476,7 +1529,7 @@
                             },
                             {
                               "type": "BULLET_LIST",
-                              "key": "27sjq",
+                              "key": "6t1dr",
                               "nodes": [
                                 {
                                   "type": "LIST_ITEM",
@@ -1484,7 +1537,7 @@
                                   "nodes": [
                                     {
                                       "type": "PARAGRAPH",
-                                      "key": "ai9k4",
+                                      "key": "eogqk",
                                       "nodes": [
                                         {
                                           "type": "TEXT",
@@ -1505,7 +1558,7 @@
                                     },
                                     {
                                       "type": "BULLET_LIST",
-                                      "key": "62c4d",
+                                      "key": "96mj3",
                                       "nodes": [
                                         {
                                           "type": "LIST_ITEM",
@@ -1513,7 +1566,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "ci6je",
+                                              "key": "4kjmr",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1540,7 +1593,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "112eu",
+                                              "key": "4n9rl",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1583,7 +1636,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "2i10j",
+              "key": "6jl81",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1610,7 +1663,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "dflvu",
+              "key": "52hlq",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1797,7 +1850,7 @@
   ],
   "metadata": {
     "version": 1,
-    "createdTimestamp": "2021-07-08T15:31:34.758Z",
-    "updatedTimestamp": "2021-07-08T15:31:34.758Z"
+    "createdTimestamp": "2021-07-11T12:18:30.652Z",
+    "updatedTimestamp": "2021-07-11T12:18:30.652Z"
   }
 }
