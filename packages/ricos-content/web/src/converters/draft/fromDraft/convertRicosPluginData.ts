@@ -87,13 +87,15 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
 
 const convertVideoData = (data: {
   src?: string | VideoComponentData;
-  metadata?: { thumbnail_url?: string; width?: number; height?: number };
+  metadata?: { thumbnail_url?: string; width?: number; height?: number; title?: string };
   video;
   thumbnail;
+  title?;
 }) => {
   if (typeof data.src === 'string') {
     data.video = { src: { url: data.src } };
-    const { thumbnail_url, width, height } = data.metadata || {};
+    const { thumbnail_url, width, height, title } = data.metadata || {};
+    title && (data.title = title);
     data.thumbnail = {
       src: { url: thumbnail_url },
       width,
