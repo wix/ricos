@@ -10,7 +10,7 @@ import {
   LINK_PREVIEW_TYPE,
   MENTION_TYPE,
   POLL_TYPE,
-  VERTICAL_EMBED_TYPE,
+  APP_EMBED_TYPE,
   VIDEO_TYPE,
   MAP_TYPE,
   EMBED_TYPE,
@@ -40,7 +40,7 @@ export const convertBlockDataToRicos = (type: string, data) => {
     [FILE_UPLOAD_TYPE]: convertFileData,
     [IMAGE_TYPE]: convertImageData,
     [POLL_TYPE]: convertPollData,
-    [VERTICAL_EMBED_TYPE]: convertVerticalEmbedData,
+    [APP_EMBED_TYPE]: convertAppEmbedData,
     [LINK_PREVIEW_TYPE]: convertLinkPreviewData,
     [MENTION_TYPE]: convertMentionData,
     [LINK_BUTTON_TYPE]: convertButtonData,
@@ -147,7 +147,7 @@ const convertPollData = (data: { layout; design }) => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toUpperCase());
 };
 
-const convertVerticalEmbedData = (data: { type?: string }) => {
+const convertAppEmbedData = (data: { type?: string }) => {
   has(data, 'type') && (data.type = data.type?.toUpperCase());
 };
 

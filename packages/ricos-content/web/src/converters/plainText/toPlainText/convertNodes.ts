@@ -92,8 +92,8 @@ export const parseMap = ({ mapData }: Node): string => {
   return address || '';
 };
 
-export const parseVerticalEmbed = ({ verticalEmbedData }: Node, delimiter: string): string => {
-  const { html, name } = verticalEmbedData?.selectedProduct || {};
+export const parseAppEmbed = ({ appEmbedData }: Node, delimiter: string): string => {
+  const { html, name } = appEmbedData?.selectedProduct || {};
   const href = html
     ?.replace(/.*href="/g, '')
     .replace(/.*=http/g, 'http')

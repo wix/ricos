@@ -51,7 +51,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
     [Node_Type.POLL]: convertPollData,
-    [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
+    [Node_Type.APP_EMBED]: convertAppEmbedData,
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
@@ -167,7 +167,7 @@ const convertPollData = data => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toLowerCase());
 };
 
-const convertVerticalEmbedData = data => {
+const convertAppEmbedData = data => {
   has(data, 'type') && (data.type = data.type.toLowerCase());
 };
 

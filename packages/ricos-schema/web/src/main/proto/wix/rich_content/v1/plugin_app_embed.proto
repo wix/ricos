@@ -4,7 +4,7 @@ package wix.rich_content.v1;
 
 import "google/protobuf/wrappers.proto";
 
-message VerticalEmbedData {
+message AppEmbedData {
     message SelectedProduct {
         google.protobuf.StringValue id = 1;
         google.protobuf.StringValue name = 2;
@@ -12,14 +12,12 @@ message VerticalEmbedData {
         google.protobuf.StringValue html = 4;
     }
 
-    enum VerticalType {
+    enum AppType {
         PRODUCT = 0;
         EVENT = 1;
         STORE = 2;
     }
     
-    VerticalType type = 1;
+    AppType type = 1;
     SelectedProduct selectedProduct = 2;
 }
-
-message VerticalEmbedConfig {}
