@@ -112,11 +112,12 @@ const convertVideoData = (data: {
 const convertDividerData = (data: {
   type?: string;
   config?: ComponentData['config'];
+  lineStyle?: string;
   width;
   alignment;
   containerData;
 }) => {
-  has(data, 'type') && (data.type = data.type?.toUpperCase());
+  has(data, 'type') && (data.lineStyle = data.type?.toUpperCase());
   has(data, 'config.size') && (data.width = data.config?.size?.toUpperCase());
   has(data, 'config.alignment') && (data.alignment = data.config?.alignment?.toUpperCase());
   data.containerData = { width: { size: PluginContainerData_Width_Type.CONTENT } };
