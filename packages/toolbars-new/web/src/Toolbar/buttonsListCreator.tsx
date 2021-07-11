@@ -14,6 +14,7 @@ import {
   colorTypes,
   translateHeading,
 } from './buttonsListCreatorConsts';
+import { HEADER_TYPE_MAP } from 'wix-rich-content-plugin-commons';
 
 type editorCommands = EditorCommands;
 
@@ -222,9 +223,30 @@ const handleButtonModal = (
   if (buttonsFullData[buttonName].modal) {
     buttonsList[index].modal = buttonsFullData[buttonName].modal;
     if (buttonName === 'HEADINGS') {
+      const headings = ['P', 'H2', 'H3', 'H4', 'H5', 'H6'];
       const Modal = buttonsFullData[buttonName].modal;
+      const translateHeading = (option = '', t) => {
+        return option.length === 1
+          ? t('FormattingToolbar_TextStyle_Paragraph')
+          : t('FormattingToolbar_TextStyle_Heading', { number: option.slice(-1) });
+      };
       buttonsList[index].modal = props =>
-        Modal && <Modal {...props} heading={getCurrentHeading(editorCommands)} />;
+        Modal && (
+          <Modal
+            {...props}
+            currentSelect={getCurrentHeading(editorCommands)}
+            options={[
+              {
+                text: translateHeading(headings[0], props.t),
+                commandKey: (HEADER_TYPE_MAP[headings[0]], headings[0]),
+              },
+              {
+                text: translateHeading(headings[1], props.t),
+                commandKey: (HEADER_TYPE_MAP[headings[1]], headings[1]),
+              },
+            ]}
+          />
+        );
     } else if (buttonName === 'Alignment') {
       const Modal = buttonsFullData[buttonName].modal;
       const alignment = editorCommands.getTextAlignment();

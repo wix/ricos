@@ -36,7 +36,7 @@ import {
   CodeBlockIcon,
 } from '../icons';
 import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
-import Panel from '../modals/line-spacing/LineSpacingPanel';
+// import Panel from '../modals/line-spacing/LineSpacingPanel';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
 import NewPanel from '../modals/modal-panels/NewPanel';
 
@@ -101,7 +101,7 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     label: 'HEADINGS',
     arrow: true,
     type: 'modal',
-    modal: props => <HeadingsDropDownPanel {...props} translateHeading={translateHeading} />,
+    modal: props => <NewPanel {...props} translateHeading={translateHeading} />,
     onSave: 'HEADINGS',
   },
   Separator: {
