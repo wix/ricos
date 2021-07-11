@@ -5,7 +5,15 @@ import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
 const createCollapsibleListPlugin: CreatePluginFunction<CollapsibleListPluginEditorConfig> = config => {
-  const { locale, helpers, t, [COLLAPSIBLE_LIST_TYPE]: settings = {}, isMobile, ...rest } = config;
+  const {
+    localeContent,
+    locale,
+    helpers,
+    t,
+    [COLLAPSIBLE_LIST_TYPE]: settings = {},
+    isMobile,
+    ...rest
+  } = config;
 
   return createBasePlugin({
     component: Component,
@@ -15,7 +23,7 @@ const createCollapsibleListPlugin: CreatePluginFunction<CollapsibleListPluginEdi
       t,
       settings,
       isMobile,
-      locale,
+      locale: localeContent || locale,
     }),
     helpers,
     settings,
@@ -24,7 +32,7 @@ const createCollapsibleListPlugin: CreatePluginFunction<CollapsibleListPluginEdi
     defaultPluginData: DEFAULTS,
     noPluginBorder: true,
     noPointerEventsOnFocus: true,
-    locale,
+    locale: localeContent || locale,
     ...rest,
   });
 };

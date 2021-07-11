@@ -11,9 +11,10 @@ const ImagePluginStory = () => {
   const [viewerKey, setViewerKey] = useState(1);
 
   const experiments = parseExperiments({
-    ['specs.ricos.useQualityPreload']: 'true',
-    ['specs.ricos.useSrcSet']: 'true',
+    'specs.ricos.useQualityPreload': 'true',
+    'specs.ricos.useSrcSet': 'true',
   });
+  // eslint-disable-next-line no-console
   console.log({ experiments });
 
   return (

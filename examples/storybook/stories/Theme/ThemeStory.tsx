@@ -24,12 +24,10 @@ const ThemeSelector = () => {
         } else if (event.key === 'ArrowRight') {
           fontPage < FONTS.length - 1 && setFontPage(fontPage + 1);
         }
-      } else {
-        if (event.key === 'ArrowLeft') {
-          palettePage > 0 && setPalettePage(palettePage - 1);
-        } else if (event.key === 'ArrowRight') {
-          palettePage < palettes.length - 1 && setPalettePage(palettePage + 1);
-        }
+      } else if (event.key === 'ArrowLeft') {
+        palettePage > 0 && setPalettePage(palettePage - 1);
+      } else if (event.key === 'ArrowRight') {
+        palettePage < palettes.length - 1 && setPalettePage(palettePage + 1);
       }
     };
   }, [fontPage, palettePage]);
@@ -37,7 +35,8 @@ const ThemeSelector = () => {
   const palette = ricosPalettes[palettePage];
   const values = Object.values(palette);
 
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore: https://github.com/wix-private/wix-design-systems/pull/7554
   const PaletteElement = () => <Palette fill={values} />;
 
   return (
