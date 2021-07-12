@@ -27720,6 +27720,18 @@ wix-rich-content-plugin-divider@8.46.6:
     wix-rich-content-editor-common "8.46.6"
     wix-rich-content-plugin-commons "8.46.6"
 
+wix-rich-content-plugin-image@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-image/-/wix-rich-content-plugin-image-8.46.6.tgz#33a0290b9e27933a1f7b2985409d315913aa1eea"
+  integrity sha512-XkwNftwoOAdtL3z9izuomRaMYs42XCLCizuieFPgJxGFcQAlIboPX3mFdw9SbutG3oZ0oSSpj1JOnfyko9PxtQ==
+  dependencies:
+    image-client-api "1.2218.0"
+    ricos-content "8.46.6"
+    wix-rich-content-common "8.46.6"
+    wix-rich-content-editor-common "8.46.6"
+    wix-rich-content-plugin-commons "8.46.6"
+    wix-rich-content-ui-components "8.46.6"
+
 wix-rich-content-ui-components@8.46.6:
   version "8.46.6"
   resolved "https://registry.npmjs.org/wix-rich-content-ui-components/-/wix-rich-content-ui-components-8.46.6.tgz#5e97ae1a96c33673ad6afe3442e7b503a43b7881"
