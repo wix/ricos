@@ -38,6 +38,7 @@ interface State {
   remountKey: boolean;
   editorState?: EditorState;
   initialContentChanged: boolean;
+  error?: string;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -55,6 +56,14 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   currentEditorRef!: ElementType;
 
+  static getDerivedStateFromError(error: string) {
+    return { error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error({ error, errorInfo });
+  }
+
   constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange, props.content);
@@ -67,7 +76,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
   }
 
-  static defaultProps = { locale: 'en' };
+  static defaultProps = {
+    onError: err => {
+      throw err;
+    },
+    locale: 'en',
+  };
 
   updateLocale = async () => {
     const { children } = this.props;
@@ -318,7 +332,17 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   render() {
-    return this.useTiptap ? this.renderTiptapEditor() : this.renderDraftEditor();
+    try {
+      if (this.state.error) {
+        this.props.onError?.(this.state.error);
+        return null;
+      }
+
+      return this.useTiptap ? this.renderTiptapEditor() : this.renderDraftEditor();
+    } catch (e) {
+      this.props.onError?.(e);
+      return null;
+    }
   }
 }
 
