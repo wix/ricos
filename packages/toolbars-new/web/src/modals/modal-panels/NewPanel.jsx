@@ -19,17 +19,17 @@ const LineHeightsPanel = ({
   hasCustomPanel,
 }) => {
   const hasIcons = !!options[0].icon;
-  const lineHeightElement = (option, isSelected, onClick) => (
-    <button
-      className={isSelected ? styles.lineHeightsPanel_selectedLineHeight : ''}
-      key={option.commandKey}
-      onClick={() => {
-        onClick(option.commandKey);
-      }}
-    >
-      {hasIcons ? option.icon : option.text}
-    </button>
-  );
+  const lineHeightElement = (option, isSelected, onClick) => {
+    return (
+      <button
+        className={isSelected ? styles.lineHeightsPanel_selectedLineHeight : ''}
+        key={option.commandKey}
+        onClick={() => onClick(option.commandKey)}
+      >
+        {hasIcons ? option.icon : option.text}
+      </button>
+    );
+  };
 
   return (
     <div
@@ -54,108 +54,6 @@ const LineHeightsPanel = ({
   );
 };
 
-// const MobilePanel = ({ selectedHeight, styles, t, onChange, onSave, onCancel }) => {
-//   const lineHeightElement = (height, isSelected, onClick, showSeparator) => (
-//     <div>
-//       <button
-//         className={isSelected ? styles.lineSpacingMobilePanel_selectedLineHeight : ''}
-//         key={height}
-//         onClick={() => onClick(`${height}`)}
-//       >
-//         {height}
-//       </button>
-//       {showSeparator && <Separator />}
-//     </div>
-//   );
-
-//   const lineHeights = [1, 1.5, 2, 2.5, 3];
-//   return (
-//     <div className={styles.lineSpacingMobilePanel}>
-//       <div className={styles.lineSpacingMobilePanel_header}>{t('LineSpacing_lineSpacing')}</div>
-//       <Separator />
-//       <div className={styles.lineSpacingMobilePanel_heights}>
-//         {lineHeights.map((height, i) => {
-//           const selected = parseFloat(selectedHeight) === height;
-//           const showSeparator = i !== lineHeights.length - 1;
-//           return lineHeightElement(height, selected, onChange, showSeparator);
-//         })}
-//       </div>
-//       {/* <Separator /> */}
-//       {/* <div className={styles.lineSpacingMobilePanel_buttons}>
-//         <button onClick={onCancel}>{t('LineSpacing_cancel')}</button>
-//         <button onClick={() => onSave()}>{t('LineSpacing_save')}</button>
-//       </div> */}
-//     </div>
-//   );
-// };
-
-// const LabeledInput = ({
-//   label,
-//   name,
-//   unit = '',
-//   defaultValue = 0,
-//   spacing,
-//   onChange,
-//   min,
-//   max,
-// }) => {
-//   const value = spacing[name] === undefined ? defaultValue : parseFloat(spacing[name]);
-//   return (
-//     <label className={styles.customSpacingPanel_labeledInput}>
-//       <span>{label}</span>
-//       <input
-//         type="number"
-//         min={min}
-//         max={max}
-//         value={value}
-//         onChange={e => {
-//           onChange({ [name]: Number(e.target.value) + unit });
-//         }}
-//         onMouseDown={event => event.stopPropagation()}
-//       />
-//     </label>
-//   );
-// };
-
-// const CustomPanel = ({ selected, onChange, onSave, onCancel, styles, t }) => {
-//   return (
-//     <div className={styles.customSpacingPanel}>
-//       <LabeledInput
-//         label={t('LineSpacing_lineSpacing')}
-//         name="line-height"
-//         defaultValue={1.5}
-//         onChange={onChange}
-//         spacing={selected}
-//         min={1}
-//         max={100}
-//       />
-//       <Separator />
-//       <LabeledInput
-//         label={t('LineSpacing_beforeParagraph')}
-//         name="padding-top"
-//         unit="px"
-//         onChange={onChange}
-//         spacing={selected}
-//         min={0}
-//         max={250}
-//       />
-//       <LabeledInput
-//         label={t('LineSpacing_afterParagraph')}
-//         name="padding-bottom"
-//         unit="px"
-//         onChange={onChange}
-//         spacing={selected}
-//         min={0}
-//         max={250}
-//       />
-//       <div className={styles.customSpacingPanel_buttons}>
-//         <button onClick={onCancel}>{t('LineSpacing_cancel')}</button>
-//         <button onClick={() => onSave()}>{t('LineSpacing_save')}</button>
-//       </div>
-//     </div>
-//   );
-// };
-
 export default class NewPanel extends Component {
   constructor(props) {
     super(props);
@@ -174,14 +72,19 @@ export default class NewPanel extends Component {
     }
   };
 
-  onChange = spacing => {
+  onCustomPanelChange = spacing => {
     const merged = { ...this.state.selected, ...spacing };
     this.setState({ selected: merged });
     this.props.onChange(merged);
   };
 
-  onSave = spacing => {
+  onCustomPanelSave = spacing => {
     this.props.onSave({ ...this.state.selected, ...spacing });
+  };
+
+  onSaveHeading = (type, headingName) => {
+    this.props?.onToolbarButtonClick?.(type);
+    return this.props.onSave(type);
   };
 
   render() {
@@ -195,15 +98,27 @@ export default class NewPanel extends Component {
       // onChange,
       // onSave,
       hasCustomPanel,
+      modalType,
     } = this.props;
     const { isCustomPanel, selected } = this.state;
-    const { styles, showCustomPanel, onChange, onSave } = this;
-    // const selectedHeight = spacing['line-height'];//!TODO selected row
-    const onSaveLineHeight = height => onSave({ 'line-height': height });
-    const onChangeLineHeight = height => onChange({ 'line-height': `${height}` });
-    // console.log('props ', this.props);
-    // const onChangeLineHeight = selected => onChange({ currentSelect: `${selected}` });
-    // const options = [1, 1.5, 2, 2.5, 3];
+    const { styles, showCustomPanel, onCustomPanelChange, onCustomPanelSave, onSaveHeading } = this;
+    const onSaveLineHeight = height => onCustomPanelSave({ 'line-height': height });
+    const onChangeLineHeight = height => onCustomPanelChange({ 'line-height': `${height}` });
+    const isHeadingsModal = modalType === 'HEADINGS';
+    const onLineClick = hasCustomPanel
+      ? onChangeLineHeight
+      : isHeadingsModal
+      ? onSaveHeading
+      : this.props.onChange;
+
+    const defaultHeadings = () => {
+      const { experiments } = this.context;
+      const defaults = [...options];
+      if (experiments?.useHeadingOne?.enabled) {
+        defaults.splice(1, 0, this.props.headingOne);
+      }
+      return defaults;
+    };
 
     const panel = isMobile ? (
       <NewMobilePanel
@@ -212,8 +127,8 @@ export default class NewPanel extends Component {
           // selectedHeight,
           currentSelect,
           panelHeader,
-          options,
-          onChange: hasCustomPanel ? onChangeLineHeight : this.props.onChange,
+          options: isHeadingsModal ? defaultHeadings() : options,
+          onChange: onLineClick,
           onSave: hasCustomPanel ? onSaveLineHeight : this.props.onSave,
           onCancel,
         }}
@@ -222,8 +137,8 @@ export default class NewPanel extends Component {
       <CustomPanel
         {...{
           spacing: selected,
-          onChange,
-          onSave,
+          onChange: onCustomPanelChange,
+          onSave: onCustomPanelSave,
           onCancel,
           styles,
           t,
@@ -234,10 +149,10 @@ export default class NewPanel extends Component {
       <LineHeightsPanel
         {...{
           currentSelect,
-          options,
+          options: isHeadingsModal ? defaultHeadings() : options,
           showCustomPanel,
           panelHeader,
-          onClick: hasCustomPanel ? onSaveLineHeight : this.props.onChange,
+          onClick: onLineClick,
           styles,
           hasCustomPanel,
         }}

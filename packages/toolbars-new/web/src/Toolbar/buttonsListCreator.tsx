@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable fp/no-loops */
 import React from 'react';
-import { RICOS_LINK_TYPE, EditorCommands } from 'wix-rich-content-common';
+import { RICOS_LINK_TYPE, EditorCommands, GlobalContext } from 'wix-rich-content-common';
 import { AlignTextCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon } from '../icons';
 import {
   HEADING_TYPE_TO_ELEMENT,
@@ -224,27 +224,24 @@ const handleButtonModal = (
     buttonsList[index].modal = buttonsFullData[buttonName].modal;
     if (buttonName === 'HEADINGS') {
       const headings = ['P', 'H2', 'H3', 'H4', 'H5', 'H6'];
+      const options = headings.map(heading => ({
+        text: translateHeading(heading, t),
+        commandKey: HEADER_TYPE_MAP[heading],
+      }));
       const Modal = buttonsFullData[buttonName].modal;
-      const translateHeading = (option = '', t) => {
-        return option.length === 1
-          ? t('FormattingToolbar_TextStyle_Paragraph')
-          : t('FormattingToolbar_TextStyle_Heading', { number: option.slice(-1) });
-      };
+      const currentHeading = HEADER_TYPE_MAP[getCurrentHeading(editorCommands)];
       buttonsList[index].modal = props =>
         Modal && (
           <Modal
             {...props}
-            currentSelect={getCurrentHeading(editorCommands)}
-            options={[
-              {
-                text: translateHeading(headings[0], props.t),
-                commandKey: (HEADER_TYPE_MAP[headings[0]], headings[0]),
-              },
-              {
-                text: translateHeading(headings[1], props.t),
-                commandKey: (HEADER_TYPE_MAP[headings[1]], headings[1]),
-              },
-            ]}
+            currentSelect={currentHeading}
+            panelHeader={t('HEADINGS')}
+            options={options}
+            modalType={buttonName}
+            headingOne={{
+              text: translateHeading('H1', t),
+              commandKey: HEADER_TYPE_MAP.H1,
+            }}
           />
         );
     } else if (buttonName === 'Alignment') {
