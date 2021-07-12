@@ -59,13 +59,41 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     }
   };
 
+  type TableCell = {
+    key: string;
+    style: Record<string, string>;
+    border: Record<string, string>;
+    content: DraftContent;
+  };
+
+  const parseTableCell = ({ key, style, border, content }): Node => ({
+    key,
+    type: Node_Type.TABLE_CELL,
+    tableCellData: { style, border },
+    nodes: fromDraft(content).nodes,
+  });
+
+  const parseTableRow = (key: string, row: Record<string, Record<string, TableCell>>): Node => ({
+    key,
+    type: Node_Type.TABLE_ROW,
+    nodes: Object.entries(row.columns).map(([, cell]) => parseTableCell(cell)),
+  });
+
+  const parseTable = (rows: Record<string, Record<string, Record<string, TableCell>>>): Node[] =>
+    Object.entries(rows).map(([i, row]) => parseTableRow(i, row));
+
   const parseAtomicBlock = ({ key, data, entityRanges }: RicosContentBlock): Node | null => {
     if (entityRanges && entityRanges.length) {
       const entity = getEntity(entityRanges[0].key, entityMap);
       if (entity) {
+        const nodes =
+          entity.type === Node_Type.TABLE
+            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              parseTable((entity as any).tableData.rows)
+            : [];
         return {
           key,
-          nodes: [],
+          nodes,
           style: getNodeStyle(data),
           ...entity,
         };

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package wix.rich_content.v1;
+
+import "wix/rich_content/v1/common.proto";
+import "google/protobuf/wrappers.proto";
+
+message TableData {
+  PluginContainerData container_data = 1;
+  repeated int32 colsWidth = 2;
+  repeated int32 rowsHeight = 3;
+  repeated int32 colsMinWidth = 4;
+}
+
