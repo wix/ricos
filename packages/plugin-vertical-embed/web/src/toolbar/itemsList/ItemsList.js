@@ -12,7 +12,7 @@ class ItemsList extends PureComponent {
   }
 
   static propTypes = {
-    products: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
     onClick: PropTypes.func.isRequired,
     selectedItem: PropTypes.object,
     contentType: PropTypes.string.isRequired,
@@ -21,7 +21,7 @@ class ItemsList extends PureComponent {
   };
 
   render() {
-    const { products, onClick, selectedItem, contentType, t, isMobile } = this.props;
+    const { items, onClick, selectedItem, contentType, t, isMobile } = this.props;
     const emptyState = (
       <div className={generalStyles.emptyState}>
         <div className={generalStyles.title}>
@@ -37,8 +37,8 @@ class ItemsList extends PureComponent {
         className={cx(styles.container, { [styles.mobile]: isMobile })}
         data-hook="verticalsItemsList"
       >
-        {products.length > 0
-          ? products.map((item, index) => (
+        {items.length > 0
+          ? items.map((item, index) => (
               // eslint-disable-next-line react/jsx-indent
               <Item
                 item={item}

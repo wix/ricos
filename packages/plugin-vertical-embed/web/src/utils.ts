@@ -18,10 +18,10 @@ export const convertDuration = (durationInMinutes, t) => {
 };
 
 const getBookingData = (data, t) => {
-  const { name, imageSrc, pageUrl, description } = data;
+  const { name, imageSrc, pageUrl, durations } = data;
   const content = {
     title: name,
-    info: { leftSubtitle: description && convertDuration(description, t) },
+    info: { leftSubtitle: durations && convertDuration(durations, t) },
     buttonText: t('Embed_Vertical_Bookings_Button'),
   };
   return { pageUrl, imageSrc, content };

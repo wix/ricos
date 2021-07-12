@@ -80,7 +80,7 @@ export default class VerticalEmbedInputModal extends Component {
     const { products } = this.state;
     let getDescriptionFunc;
     if (type === verticalEmbedProviders.booking) {
-      getDescriptionFunc = product => convertDuration(product.description, t);
+      getDescriptionFunc = product => convertDuration(product.durations, t);
     } else if (type === verticalEmbedProviders.event) {
       getDescriptionFunc = product => `${product.scheduling} | ${product.location}`;
     }
@@ -90,7 +90,7 @@ export default class VerticalEmbedInputModal extends Component {
   };
 
   render() {
-    const { products, inputString, selectedProduct, status } = this.state;
+    const { inputString, selectedProduct, status } = this.state;
     const {
       t,
       componentData: { type },
@@ -140,7 +140,7 @@ export default class VerticalEmbedInputModal extends Component {
             <ItemsList
               isMobile={isMobile}
               selectedItem={selectedProduct}
-              products={this.getItems()}
+              items={this.getItems()}
               onClick={this.onItemClick}
               contentType={contentType}
               t={t}
