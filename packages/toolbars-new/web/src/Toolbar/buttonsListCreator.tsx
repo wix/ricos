@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable fp/no-loops */
 import React from 'react';
-import { RICOS_LINK_TYPE, EditorCommands, GlobalContext } from 'wix-rich-content-common';
+import { RICOS_LINK_TYPE, EditorCommands } from 'wix-rich-content-common';
 import { AlignTextCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon } from '../icons';
 import {
   HEADING_TYPE_TO_ELEMENT,
@@ -223,66 +223,20 @@ const handleButtonModal = (
   if (buttonsFullData[buttonName].modal) {
     buttonsList[index].modal = buttonsFullData[buttonName].modal;
     if (buttonName === 'HEADINGS') {
-      const headings = ['P', 'H2', 'H3', 'H4', 'H5', 'H6'];
-      const options = headings.map(heading => ({
-        text: translateHeading(heading, t),
-        commandKey: HEADER_TYPE_MAP[heading],
-      }));
       const Modal = buttonsFullData[buttonName].modal;
       const currentHeading = HEADER_TYPE_MAP[getCurrentHeading(editorCommands)];
       buttonsList[index].modal = props =>
-        Modal && (
-          <Modal
-            {...props}
-            currentSelect={currentHeading}
-            panelHeader={t('HEADINGS')}
-            options={options}
-            modalType={buttonName}
-            headingOne={{
-              text: translateHeading('H1', t),
-              commandKey: HEADER_TYPE_MAP.H1,
-            }}
-          />
-        );
+        Modal && <Modal {...props} currentSelect={currentHeading} />;
     } else if (buttonName === 'Alignment') {
-      const Modal = buttonsFullData[buttonName].modal;
       const alignment = editorCommands.getTextAlignment();
-
-      const alignmentsWithIcons = [
-        { text: 'Align left', commandKey: 'left', icon: <AlignLeftIcon /> },
-        { text: 'Align center', commandKey: 'center', icon: <AlignTextCenterIcon /> },
-        { text: 'Align right', commandKey: 'right', icon: <AlignRightIcon /> },
-        { text: 'Justify', commandKey: 'justify', icon: <AlignJustifyIcon /> },
-      ];
+      const onChange = alignment => editorCommands.setTextAlignment(alignment);
+      const Modal = buttonsFullData[buttonName].modal;
       buttonsList[index].modal = props =>
-        Modal && (
-          <Modal
-            {...props}
-            currentSelect={alignment}
-            options={alignmentsWithIcons}
-            panelHeader={t('Alignment')}
-            onChange={a => editorCommands.setTextAlignment(a)}
-          />
-        );
+        Modal && <Modal {...props} currentSelect={alignment} onChange={onChange} />;
     } else if (buttonName === 'LINE_SPACING') {
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
-      const options = [
-        { text: '1', commandKey: '1' },
-        { text: '2', commandKey: '2' },
-        { text: '2.5', commandKey: '2.5' },
-        { text: '3', commandKey: '3' },
-      ];
-      buttonsList[index].modal = props =>
-        Modal && (
-          <Modal
-            {...props}
-            hasCustomPanel
-            currentSelect={spacing}
-            options={options}
-            panelHeader={t('LineSpacing_lineSpacing')}
-          />
-        );
+      buttonsList[index].modal = props => Modal && <Modal {...props} currentSelect={spacing} />;
     } else if (buttonName === 'LINK') {
       const Modal = buttonsFullData[buttonName].modal;
       const linkData = editorCommands.getLinkDataInSelection();

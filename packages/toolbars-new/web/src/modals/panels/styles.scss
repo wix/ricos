@@ -1,7 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 
-.lineHeightsPanel {
+.desktopPanel {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,12 +20,23 @@
     &:hover {
       color: $settings-action-color-fallback;
       cursor: pointer;
+      background-color: rgba($fallbackColorTuple, 0.05);
     }
 
     &:active {
       background-color: rgba($action-color-fallback-tuple, 0.1);
     }
-
+  }
+}
+.desktopPanel_withIcons {
+  width: 46px;
+  * {
+    text-align: center;
+    padding: 0;
+  }
+}
+.desktopPanel_withCustomPanel {
+  * {
     &:last-of-type {
       text-align: center;
       padding: 0;
@@ -33,18 +44,8 @@
     }
   }
 }
-.lineHeightsPanel_withIcons {
-  width: 46px;
-  *{
-    text-align: center;
-    padding: 0;
-    &:hover {
-      background-color: rgba($fallbackColorTuple, 0.05);
-    }
-  }
-}
 
-.lineHeightsPanel_selectedLineHeight,
+.desktopPanel_selectedLine,
 .mobilePanel_selectedLineHeight {
   color: $settings-action-color-fallback;
 }
@@ -187,7 +188,7 @@
   }
 }
 
-.lineSpacingContainer {
+.panel_Container {
   border: solid 1px #ededed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
   svg {
@@ -196,7 +197,7 @@
   }
 }
 
-.lineSpacingContainer_mobile {
+.mobile_Container {
   border: solid 1px #ededed;
   border-radius: unset;
   box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.1), 0 4px 8px 0 rgba(0, 0, 0, 0.1);

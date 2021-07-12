@@ -3,16 +3,7 @@ import styles from './styles.scss';
 
 const Separator = () => <div className={styles.separator} />;
 
-const MobilePanel = ({
-  // selectedHeight,
-  // styles,
-  currentSelect,
-  panelHeader,
-  onChange,
-  options,
-  // onSave,
-  // onCancel,
-}) => {
+const MobilePanel = ({ currentSelect, panelHeader, onChange, options, hasIcons }) => {
   const lineHeightElement = (option, isSelected, showSeparator) => {
     return (
       <div>
@@ -26,10 +17,10 @@ const MobilePanel = ({
         >
           <div
             className={
-              option.icon ? styles.alignment_mobile_contentWrapper : styles.mobile_contentWrapper
+              hasIcons ? styles.alignment_mobile_contentWrapper : styles.mobile_contentWrapper
             }
           >
-            {option.icon && <div>{option.icon}</div>}
+            {hasIcons && <div>{option.icon}</div>}
             <div>{option.text}</div>
           </div>
         </button>

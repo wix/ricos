@@ -4,55 +4,56 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
-import NewMobilePanel from './MobilePanel';
+import MobilePanel from './MobilePanel';
+import DesktopPanel from './DesktopPanel';
 import CustomPanel from '../line-spacing/CustomPanel';
 
-const Separator = () => <div className={styles.separator} />;
+// const Separator = () => <div className={styles.separator} />;
 
-const LineHeightsPanel = ({
-  currentSelect,
-  options,
-  onClick,
-  showCustomPanel,
-  styles,
-  panelHeader,
-  hasCustomPanel,
-}) => {
-  const hasIcons = !!options[0].icon;
-  const lineHeightElement = (option, isSelected, onClick) => {
-    return (
-      <button
-        className={isSelected ? styles.lineHeightsPanel_selectedLineHeight : ''}
-        key={option.commandKey}
-        onClick={() => onClick(option.commandKey)}
-      >
-        {hasIcons ? option.icon : option.text}
-      </button>
-    );
-  };
+// const DesktopPanel = ({
+//   currentSelect,
+//   options,
+//   onClick,
+//   showCustomPanel,
+//   styles,
+//   panelHeader,
+//   hasCustomPanel,
+// }) => {
+//   const hasIcons = !!options[0].icon;
+//   const lineHeightElement = (option, isSelected, onClick) => {
+//     return (
+//       <button
+//         className={isSelected ? styles.lineHeightsPanel_selectedLineHeight : ''}
+//         key={option.commandKey}
+//         onClick={() => onClick(option.commandKey)}
+//       >
+//         {hasIcons ? option.icon : option.text}
+//       </button>
+//     );
+//   };
 
-  return (
-    <div
-      className={classNames(styles.lineHeightsPanel, {
-        [styles.lineHeightsPanel_withIcons]: hasIcons,
-      })}
-    >
-      {options.map(option =>
-        lineHeightElement(
-          option,
-          (currentSelect['line-height'] ?? currentSelect) === option.commandKey,
-          onClick
-        )
-      )}
-      {hasCustomPanel && (
-        <>
-          <Separator />
-          <button onClick={showCustomPanel}>{panelHeader}</button>
-        </>
-      )}
-    </div>
-  );
-};
+//   return (
+//     <div
+//       className={classNames(styles.lineHeightsPanel, {
+//         [styles.lineHeightsPanel_withIcons]: hasIcons,
+//       })}
+//     >
+//       {options.map(option =>
+//         lineHeightElement(
+//           option,
+//           (currentSelect['line-height'] ?? currentSelect) === option.commandKey,
+//           onClick
+//         )
+//       )}
+//       {hasCustomPanel && (
+//         <>
+//           <Separator />
+//           <button onClick={showCustomPanel}>{panelHeader}</button>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
 
 export default class NewPanel extends Component {
   constructor(props) {
@@ -74,15 +75,18 @@ export default class NewPanel extends Component {
 
   onCustomPanelChange = spacing => {
     const merged = { ...this.state.selected, ...spacing };
+    this.props?.onToolbarButtonClick?.(merged['line-height']);
     this.setState({ selected: merged });
     this.props.onChange(merged);
   };
 
   onCustomPanelSave = spacing => {
+    const merged = { ...this.state.selected, ...spacing };
+    this.props?.onToolbarButtonClick?.(merged['line-height']);
     this.props.onSave({ ...this.state.selected, ...spacing });
   };
 
-  onSaveHeading = (type, headingName) => {
+  onSaveHeading = type => {
     this.props?.onToolbarButtonClick?.(type);
     return this.props.onSave(type);
   };
@@ -121,7 +125,7 @@ export default class NewPanel extends Component {
     };
 
     const panel = isMobile ? (
-      <NewMobilePanel
+      <MobilePanel
         {...{
           // styles,
           // selectedHeight,
@@ -146,7 +150,7 @@ export default class NewPanel extends Component {
         }}
       />
     ) : (
-      <LineHeightsPanel
+      <DesktopPanel
         {...{
           currentSelect,
           options: isHeadingsModal ? defaultHeadings() : options,
@@ -210,16 +214,16 @@ CustomPanel.propTypes = {
 //   unit: PropTypes.string,
 // };
 
-LineHeightsPanel.propTypes = {
-  onSave: PropTypes.func,
-  currentSelect: PropTypes.string,
-  panelHeader: PropTypes.string,
-  options: PropTypes.Array,
-  selectedHeight: PropTypes.any,
-  showCustomPanel: PropTypes.func,
-  styles: PropTypes.object,
-  t: PropTypes.func.isRequired,
-};
+// LineHeightsPanel.propTypes = {
+//   onSave: PropTypes.func,
+//   currentSelect: PropTypes.string,
+//   panelHeader: PropTypes.string,
+//   options: PropTypes.Array,
+//   selectedHeight: PropTypes.any,
+//   showCustomPanel: PropTypes.func,
+//   styles: PropTypes.object,
+//   t: PropTypes.func.isRequired,
+// };
 
 // MobilePanel.propTypes = {
 //   onCancel: PropTypes.func.isRequired,

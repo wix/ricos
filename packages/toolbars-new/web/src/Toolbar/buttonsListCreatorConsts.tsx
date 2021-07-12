@@ -35,10 +35,10 @@ import {
   LineSpacingIcon,
   CodeBlockIcon,
 } from '../icons';
-import HeadingsDropDownPanel from '../modals/heading/HeadingPanel';
-// import Panel from '../modals/line-spacing/LineSpacingPanel';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
-import NewPanel from '../modals/modal-panels/NewPanel';
+import AlignmentPanel from '../modals/alignment/AlignmentPanel';
+import HeadingsPanel from '../modals/heading/HeadingsPanel';
+import LineSpacingPanel from '../modals/line-spacing/LineSpacingPanel';
 
 export const HEADING_TYPE_TO_ELEMENT = Object.freeze({
   'header-one': 'H1',
@@ -101,7 +101,7 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     label: 'HEADINGS',
     arrow: true,
     type: 'modal',
-    modal: props => <NewPanel {...props} translateHeading={translateHeading} />,
+    modal: props => <HeadingsPanel {...props} translateHeading={translateHeading} />,
     onSave: 'HEADINGS',
   },
   Separator: {
@@ -174,7 +174,7 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     dataHook: 'Alignment',
     tooltip: 'Alignment',
     type: 'modal',
-    modal: props => <NewPanel {...props} />,
+    modal: props => <AlignmentPanel {...props} />,
     onSave: 'Alignment',
   },
   // Alignment: {
@@ -245,7 +245,7 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     dataHook: 'LineSpacingButton',
     tooltip: 'Line spacing',
     type: 'modal',
-    modal: props => <NewPanel {...props} />,
+    modal: props => <LineSpacingPanel {...props} />,
     onSave: 'LINE_SPACING',
     arrow: true,
     saveState: true,
