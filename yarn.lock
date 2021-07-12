@@ -4345,7 +4345,7 @@
     "@testing-library/dom" "^6.15.0"
     "@types/testing-library__react" "^9.1.2"
 
-"@tiptap-es5/core@2.0.0-beta.54", "@tiptap-es5/core@^2.0.0-beta.95":
+"@tiptap-es5/core@^2.0.0-beta.54":
   version "2.0.0-beta.95"
   resolved "https://registry.npmjs.org/@tiptap-es5/core/-/core-2.0.0-beta.95.tgz#3128029be71976e6b016bd40de21162c7bad6738"
   integrity sha512-AbuTPtQkrSTl9vsy1Vk4M6zo2051S5hV/4fu63mZrxYW0PUuXsXjTevwlvA9l4zaEXZJtlje1uhPsaOd5hwetA==
@@ -4367,14 +4367,14 @@
     prosemirror-transform "^1.3.2"
     prosemirror-view "^1.18.8"
 
-"@tiptap-es5/extension-blockquote@2.0.0-beta.13", "@tiptap-es5/extension-blockquote@^2.0.0-beta.23":
+"@tiptap-es5/extension-blockquote@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-blockquote/-/extension-blockquote-2.0.0-beta.23.tgz#d1f7e734cfdbad40ab6e5aa24a0a2aea41d8ee2b"
   integrity sha512-vye0TxuMz3tjL5WvzQNB7pOFN4kNK1kPlat9eq3gaSmr46bkZBhasZ5mkVxGhFuJ7YlzCmAhD7mqI4kivVaN0A==
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
-"@tiptap-es5/extension-bold@2.0.0-beta.13", "@tiptap-es5/extension-bold@^2.0.0-beta.23":
+"@tiptap-es5/extension-bold@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-bold/-/extension-bold-2.0.0-beta.23.tgz#8d677bb0c1e8cee6e7198dfc107cfadd86bfd375"
   integrity sha512-QS6vbdWm3vgQsEtnyDWrIuaZuHi+MD3Vnjex7kTgzCse70ZZS4OaSNijkhIloMJg9rMh6FZgvRSpFHMO1rpndQ==
@@ -4388,31 +4388,31 @@
     prosemirror-view "^1.18.8"
     tippy.js "^6.3.1"
 
-"@tiptap-es5/extension-bullet-list@2.0.0-beta.13", "@tiptap-es5/extension-bullet-list@^2.0.0-beta.23":
+"@tiptap-es5/extension-bullet-list@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-bullet-list/-/extension-bullet-list-2.0.0-beta.23.tgz#0a4c3dcb3d47986cd9b96cf0b562872956235b59"
   integrity sha512-Ohfmtn+Zdzzpvf0RKQDVMg2EppcxIy03UIcbrXRyMoO6pep1POt2VvVoxtvBkfnDMBLLTnH8RvcCSxr35GQDNA==
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
-"@tiptap-es5/extension-code-block@2.0.0-beta.15", "@tiptap-es5/extension-code-block@^2.0.0-beta.25":
+"@tiptap-es5/extension-code-block@^2.0.0-beta.15":
   version "2.0.0-beta.25"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-code-block/-/extension-code-block-2.0.0-beta.25.tgz#870bbc5e1d54722a418718e0af1c5609ed7bef78"
   integrity sha512-fs2o/8Umr/emPsltrjZ3SwwXWsgNb3pM8R5Z1bvFalL2wojWlUCsYjhOwJA6JhAIqz3MZtohiTa28emDio5cVw==
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
-"@tiptap-es5/extension-code@2.0.0-beta.13", "@tiptap-es5/extension-code@^2.0.0-beta.23":
+"@tiptap-es5/extension-code@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-code/-/extension-code-2.0.0-beta.23.tgz#d30b05fcc6d7782b94de9f4f6780a61069ba024f"
   integrity sha512-VmKSAW3Qbl3o7ttp/+mlac9K8I2VXdhnLLhbx0Wx3SM0vIF2X7HUKJbVtv7eWGf7t2VjfKDe4/vhmWXedugNxQ==
 
-"@tiptap-es5/extension-document@2.0.0-beta.12", "@tiptap-es5/extension-document@^2.0.0-beta.21":
+"@tiptap-es5/extension-document@^2.0.0-beta.12":
   version "2.0.0-beta.21"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-document/-/extension-document-2.0.0-beta.21.tgz#1b2fe1ecbe5433aec2f6cd03cd4fd723391c6910"
   integrity sha512-OETatI6HfrQ2fWnhgmuAHUuHYmR4vxstEYcqfh7YrjCVleiXytxe7Fm+uve76M5a12yKQjqW8wn+YfUpGryg0Q==
 
-"@tiptap-es5/extension-dropcursor@2.0.0-beta.13", "@tiptap-es5/extension-dropcursor@^2.0.0-beta.26":
+"@tiptap-es5/extension-dropcursor@^2.0.0-beta.13":
   version "2.0.0-beta.26"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-dropcursor/-/extension-dropcursor-2.0.0-beta.26.tgz#13d67fefc63dfe05309deae7c027beb2af87c7d3"
   integrity sha512-XfiYPrEwDd//xCfrEfanj5kYfIAaChpHv+ZJKwrw88oiLqgsaJEM4Tusy7+4/8QHWEugbJ5kePXRWfkPDqC/1A==
@@ -4429,7 +4429,7 @@
     prosemirror-view "^1.18.8"
     tippy.js "^6.3.1"
 
-"@tiptap-es5/extension-gapcursor@2.0.0-beta.17", "@tiptap-es5/extension-gapcursor@^2.0.0-beta.27":
+"@tiptap-es5/extension-gapcursor@^2.0.0-beta.17":
   version "2.0.0-beta.27"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-gapcursor/-/extension-gapcursor-2.0.0-beta.27.tgz#809cd987b1a6e96dc7986b62deb570c223391f20"
   integrity sha512-qHoMSeDhcJNyNEpYhNUivQzBAmXCctj2slgxls7bi7vb9WU8GhFTjuy5QctN6PnVffYC3C788yPXj0NteFJWZA==
@@ -4437,12 +4437,12 @@
     "@types/prosemirror-gapcursor" "^1.0.4"
     prosemirror-gapcursor "^1.1.5"
 
-"@tiptap-es5/extension-hard-break@2.0.0-beta.13", "@tiptap-es5/extension-hard-break@^2.0.0-beta.23":
+"@tiptap-es5/extension-hard-break@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-hard-break/-/extension-hard-break-2.0.0-beta.23.tgz#b337c8cbbf52b7300fb86c9e9a2479c849a14e76"
   integrity sha512-FFxzIuHfyN48xOwK6GDPkncaiWOIQmcK51rq6447XCE6+F5KpOAS1SR62BnkK/rCiKgGhnqDY1PeDPTMODzmKw==
 
-"@tiptap-es5/extension-heading@2.0.0-beta.13", "@tiptap-es5/extension-heading@^2.0.0-beta.23":
+"@tiptap-es5/extension-heading@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-heading/-/extension-heading-2.0.0-beta.23.tgz#1a2cce286cedc5712131f3ee1ee348df536ee98e"
   integrity sha512-UAOmmAZPBWPS6EtRutVnSIJv4RDT0woNZlAh0UtX2L8IUiX8J5aYWdotAQnbBonvpMgWVPsmHRqxpL5rei+S0A==
@@ -4454,7 +4454,7 @@
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-highlight/-/extension-highlight-2.0.0-beta.23.tgz#8d22136c23068aebf4f947c5577bb5ae8b7d30b1"
   integrity sha512-DPPo4+GApgV41OVxAcdxC/up5dOt7IlPZg9H/sBh6j2qqLWSrH4ioGoBh2yEf4Ef9/ZC7+6tngpBke5Mv5lt1Q==
 
-"@tiptap-es5/extension-history@2.0.0-beta.12", "@tiptap-es5/extension-history@^2.0.0-beta.23":
+"@tiptap-es5/extension-history@^2.0.0-beta.12":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-history/-/extension-history-2.0.0-beta.23.tgz#9d82b25bec46f36f50a905c02494d143a300e03e"
   integrity sha512-8BYJxjD66WZAX65pm21h1ER/j9LVsmw3ly1utkvETNYW07yTxx87j4xGygsbZREHnhhMnTEChyd2MXmNNCH3WA==
@@ -4462,48 +4462,48 @@
     "@types/prosemirror-history" "^1.0.3"
     prosemirror-history "^1.1.3"
 
-"@tiptap-es5/extension-horizontal-rule@2.0.0-beta.16", "@tiptap-es5/extension-horizontal-rule@^2.0.0-beta.26":
+"@tiptap-es5/extension-horizontal-rule@^2.0.0-beta.16":
   version "2.0.0-beta.26"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-horizontal-rule/-/extension-horizontal-rule-2.0.0-beta.26.tgz#8a1abf9cbdbbca524ce58455deb2b4af5bae30fc"
   integrity sha512-sC1pQTaKK0NiYrN1YA0rBAUM9u8DKA0t3Dw7GeFqwvJnDPiuZbZnKUjg/GqzuCNSBHG6opQ8TJzH5Q/4Nmx4oQ==
   dependencies:
     prosemirror-state "^1.3.4"
 
-"@tiptap-es5/extension-italic@2.0.0-beta.13", "@tiptap-es5/extension-italic@^2.0.0-beta.23":
+"@tiptap-es5/extension-italic@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-italic/-/extension-italic-2.0.0-beta.23.tgz#3ad18b95822ad6549e30e82f47b41e8b8177db37"
   integrity sha512-W1+lEymJA0vFrzycA+cjRPvovV88EO+tDlsHsl33iRkHa1HpiVoIfoJ2RneX5J88CB7ZonYZ1lnIz3kF5q56FQ==
 
-"@tiptap-es5/extension-link@2.0.0-beta.18":
+"@tiptap-es5/extension-link@^2.0.0-beta.18":
   version "2.0.0-beta.27"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-link/-/extension-link-2.0.0-beta.27.tgz#b704a8849ef632feb5b58408f137aefc7807c80e"
   integrity sha512-s6QJzM1ceDUJFfkjH5J3dugflLXXDRQb+KQvv+K73u6mbvsKNBbUfvRM1Ks+g/um5FQF9EvmoSFm/M3U4FGZ5w==
   dependencies:
     prosemirror-state "^1.3.4"
 
-"@tiptap-es5/extension-list-item@2.0.0-beta.13", "@tiptap-es5/extension-list-item@^2.0.0-beta.22":
+"@tiptap-es5/extension-list-item@^2.0.0-beta.13":
   version "2.0.0-beta.22"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-list-item/-/extension-list-item-2.0.0-beta.22.tgz#0ad08cebaf0ae10470621d37b002da304a8618e6"
   integrity sha512-lsu7LGqpt22/lcJOYAErwni64SnrIlgm+8bTTzOENwSsG11VaTeWbt8ixCL47z2buyp3VEN+YRZc/MURXP+Dfg==
 
-"@tiptap-es5/extension-ordered-list@2.0.0-beta.13", "@tiptap-es5/extension-ordered-list@^2.0.0-beta.23":
+"@tiptap-es5/extension-ordered-list@^2.0.0-beta.13":
   version "2.0.0-beta.23"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-ordered-list/-/extension-ordered-list-2.0.0-beta.23.tgz#6ea3ad47a4eb42624fff6c3dad54da2e4408a490"
   integrity sha512-F0qm5T9FyhcBJm5VMrLjTn+n2zkSPAxxn/iGOLBBAJY9baGBlPwzfcf84zXERaJ3nrNkyHxp8zr6oBsgeexW7A==
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
-"@tiptap-es5/extension-paragraph@^2.0.0-beta.14", "@tiptap-es5/extension-paragraph@^2.0.0-beta.24":
+"@tiptap-es5/extension-paragraph@^2.0.0-beta.14":
   version "2.0.0-beta.24"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-paragraph/-/extension-paragraph-2.0.0-beta.24.tgz#3358c43da60164c51f5c392301fb5caf842a7ca3"
   integrity sha512-kXTW5YwdEiW2oFvRmvgoIykL0pUDJ85QdFsseKZlB2mmtDyr94NLjisrrGnei169L8T6CTbjEELTJww7eS+o8Q==
 
-"@tiptap-es5/extension-strike@2.0.0-beta.14", "@tiptap-es5/extension-strike@^2.0.0-beta.25":
+"@tiptap-es5/extension-strike@^2.0.0-beta.14":
   version "2.0.0-beta.25"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-strike/-/extension-strike-2.0.0-beta.25.tgz#d3019406d374ac15ef7d0d9b974f52285467020f"
   integrity sha512-lHSDHR4DyQfo/IkW4W/89NS2ovn27sxWxR5xG4Mx2nWcyOeroUP1Udfxuny1YUvCvQaCChj55c/ZuhZGo2X0eQ==
 
-"@tiptap-es5/extension-text@2.0.0-beta.12", "@tiptap-es5/extension-text@^2.0.0-beta.21":
+"@tiptap-es5/extension-text@^2.0.0-beta.12":
   version "2.0.0-beta.21"
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-text/-/extension-text-2.0.0-beta.21.tgz#b43227cf6ab34cfd1be18b63db7d85375a8ad261"
   integrity sha512-wu3bCGjebMxuJn34pQkHTpQmK2retIScpEkOp4xgCr0ili1l+cuPM/OcaM3bCo5IAa87YcTMmbcizgXS0HjYWQ==
@@ -4513,7 +4513,7 @@
   resolved "https://registry.npmjs.org/@tiptap-es5/extension-underline/-/extension-underline-2.0.0-beta.24.tgz#07134598749600f5a4ccbe913548d0599bc2ddb8"
   integrity sha512-NFFpKz122N6YTQiVo8htldNODtVhARim2Flkog5HyiiWWliU0zAKC1nB0yeppPGjd3Iu7rbFHZ+kdY7sg+7XwQ==
 
-"@tiptap-es5/react@2.0.0-beta.41":
+"@tiptap-es5/react@^2.0.0-beta.41":
   version "2.0.0-beta.61"
   resolved "https://registry.npmjs.org/@tiptap-es5/react/-/react-2.0.0-beta.61.tgz#e9959d153ad6e5a1c3004069db5c0654e38be936"
   integrity sha512-PA1qNzp30gd+Rmcue6EqGZNCwK6X/+luEjDz8/ZxV9vqMJKesydok0jKkqa3NRqlhHpljDRIXIGfsTzfWvW8vg==
@@ -4521,31 +4521,6 @@
     "@tiptap-es5/extension-bubble-menu" "^2.0.0-beta.33"
     "@tiptap-es5/extension-floating-menu" "^2.0.0-beta.27"
     prosemirror-view "^1.18.8"
-
-"@tiptap-es5/starter-kit@2.0.0-beta.51":
-  version "2.0.0-beta.91"
-  resolved "https://registry.npmjs.org/@tiptap-es5/starter-kit/-/starter-kit-2.0.0-beta.91.tgz#36ead6b81dc4075e6b6bcc2cd7bf6d412a45cb74"
-  integrity sha512-ILnixcb6xuKULSEVfiC6YqCFctncqP9QnP8pbef2+2Gv+LksJGmiY5Ya9Rg1r3eenqWVvC2PCxLujRouUyHjvg==
-  dependencies:
-    "@tiptap-es5/core" "^2.0.0-beta.95"
-    "@tiptap-es5/extension-blockquote" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-bold" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-bullet-list" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-code" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-code-block" "^2.0.0-beta.25"
-    "@tiptap-es5/extension-document" "^2.0.0-beta.21"
-    "@tiptap-es5/extension-dropcursor" "^2.0.0-beta.26"
-    "@tiptap-es5/extension-gapcursor" "^2.0.0-beta.27"
-    "@tiptap-es5/extension-hard-break" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-heading" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-history" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-horizontal-rule" "^2.0.0-beta.26"
-    "@tiptap-es5/extension-italic" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-list-item" "^2.0.0-beta.22"
-    "@tiptap-es5/extension-ordered-list" "^2.0.0-beta.23"
-    "@tiptap-es5/extension-paragraph" "^2.0.0-beta.24"
-    "@tiptap-es5/extension-strike" "^2.0.0-beta.25"
-    "@tiptap-es5/extension-text" "^2.0.0-beta.21"
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -23333,6 +23308,27 @@ rgba-regex@^1.0.0:
   resolved "https://registry.npmjs.org/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
+ricos-content@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/ricos-content/-/ricos-content-8.46.6.tgz#407e2757c42a58a66cfdf3c03325c73f7c380a03"
+  integrity sha512-9x0RzhHrqLhXkh/5an9KZha/U/zbtPrCdGaS32NnUaGqVs1RXoTR5CzYFOjOFqZY9ggjF8OIcd+nL8iHhj9+Bw==
+  dependencies:
+    fp-ts "^2.10.5"
+    monocle-ts "^2.3.9"
+    omit-deep "0.3.0"
+    parse5 "^6.0.0"
+    ricos-schema "8.46.6"
+    to-camel-case "1.0.0"
+    to-constant-case "1.0.0"
+    to-slug-case "1.0.0"
+    to-snake-case "1.0.0"
+    utility-types "^3.10.0"
+
+ricos-schema@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/ricos-schema/-/ricos-schema-8.46.6.tgz#5e520bc286f50545300b7b9c8196732ae11a68a0"
+  integrity sha512-mqszhS4ifPoa7wE8w46uIOpZ3btNX9ygyayWOdXzbEFD8hUDuuuANmj5kkCSyeNHQzQFB16barBFA2dCLZupqA==
+
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@^2.7.1:
   version "2.7.1"
   resolved "https://registry.npmjs.org/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
@@ -27678,6 +27674,59 @@ wix-redraft@^1.1.2:
   integrity sha512-T0LhyOL+MVs0FWYxS6kza9hNnW8ZPZh0ca+Z7LV/Y/HZ7Iomed1nR58hhyKA2pmE0M30YPLc0bAuoWplj1rkyQ==
   dependencies:
     punycode "^1.4.1"
+
+wix-rich-content-common@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/wix-rich-content-common/-/wix-rich-content-common-8.46.6.tgz#172ead3adff91c4587464d12edc14549e13c0992"
+  integrity sha512-3Z7FUgqHg2j1IL8qyJA4OHGX0CeIcVO70A6x7s0J2Dw+hRxLinLm7aI/xiGMX58ophRolZ1vdoLfCmABQOgOqA==
+  dependencies:
+    i18next "~10.6.0"
+    jsonschema "~1.2.4"
+    linkify-it "^2.1.0"
+    react-i18next "^7.0.0"
+    react-intersection-observer "~8.24.1"
+    react-portal-tooltip "^2.4.7"
+    ricos-content "8.46.6"
+
+wix-rich-content-editor-common@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/wix-rich-content-editor-common/-/wix-rich-content-editor-common-8.46.6.tgz#4d5f71e0e277858faf74860cd10544185c41e8a5"
+  integrity sha512-wAiBvB3d1qB/xf8B9CpE42q/BvlTtS24DuXrPr94ZPlXHj/uIUotayQ2/6ICXIX4SqEkDSrcthOOcvMM/eSVng==
+  dependencies:
+    "@wix/draft-js" "0.0.11"
+    downshift "3.2.12"
+    react-window "~1.5.0"
+    wix-rich-content-common "8.46.6"
+    wix-rich-content-ui-components "8.46.6"
+
+wix-rich-content-plugin-commons@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-commons/-/wix-rich-content-plugin-commons-8.46.6.tgz#92107a13ff59ae03cf3fbda89cbb1ad60eef337c"
+  integrity sha512-Tus0oj+jkXdrlFhN7di7c4eY8KU9Bb2VeWgNWGPBTBzZcJUb+QyvJaJtv5lj1OVav1NBMAA2iEA3pVmFSyIX8Q==
+  dependencies:
+    react-colorful "^4.4.3"
+    react-measure "~2.3.0"
+    wix-rich-content-common "8.46.6"
+    wix-rich-content-editor-common "8.46.6"
+    wix-rich-content-ui-components "8.46.6"
+
+wix-rich-content-plugin-divider@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-divider/-/wix-rich-content-plugin-divider-8.46.6.tgz#f29fef4b8ebc38698a9c72fe42bdb4aa546f14b0"
+  integrity sha512-Oq+cm5NCMsL66qatBIMHO43ZGmopAcGloVnoSNFoyCp0LlCSNZu7D0zM5Z+njY+/wmJkzBjnWqnBP39KOoUF9w==
+  dependencies:
+    ricos-content "8.46.6"
+    wix-rich-content-common "8.46.6"
+    wix-rich-content-editor-common "8.46.6"
+    wix-rich-content-plugin-commons "8.46.6"
+
+wix-rich-content-ui-components@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/wix-rich-content-ui-components/-/wix-rich-content-ui-components-8.46.6.tgz#5e97ae1a96c33673ad6afe3442e7b503a43b7881"
+  integrity sha512-+vJg4yZ7IjsugjZXMjHlYDYIi3Nmb7XOOrQrEiYKVcrG98Bd7qxmDLof7nzog7X1suMtQrWMHNpSoGdf/lxgpA==
+  dependencies:
+    focus-trap "6.4.0"
+    wix-rich-content-common "8.46.6"
 
 wix-statics-parent@*:
   version "1.0.1134"
