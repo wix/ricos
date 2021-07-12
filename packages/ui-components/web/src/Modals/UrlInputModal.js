@@ -6,12 +6,7 @@ import SettingsMobileHeader from './SettingsMobileHeader';
 import { CloseIcon } from '../Icons';
 import TextInput from '../Components/TextInput';
 import SettingsPanelFooter from '../Components/SettingsPanelFooter';
-import {
-  FOOTER_BUTTON_ALIGNMENT,
-  MODAL_CONTROLS_POSITION,
-  BUTTON_SIZE,
-  KEYS_CHARCODE,
-} from '../consts';
+import { FOOTER_BUTTON_ALIGNMENT, MODAL_CONTROLS_POSITION, KEYS_CHARCODE } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
 
 export default class UrlInputModal extends Component {
@@ -71,6 +66,7 @@ export default class UrlInputModal extends Component {
       controlsPosition = MODAL_CONTROLS_POSITION.BOTTOM,
       selected = true,
       textInput = true,
+      buttonSize,
     } = this.props;
     const topControls = controlsPosition === MODAL_CONTROLS_POSITION.TOP;
     const { styles, classes } = this;
@@ -128,7 +124,7 @@ export default class UrlInputModal extends Component {
             layoutOptions={{ isModal: true, buttonAlignment }}
             t={t}
             selected={selected}
-            buttonSize={BUTTON_SIZE.medium}
+            buttonSize={buttonSize}
           />
         )}
       </div>
