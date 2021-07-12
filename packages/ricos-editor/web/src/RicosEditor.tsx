@@ -1,3 +1,4 @@
+import codegen from 'codegen.macro';
 import React, { Component, Fragment, ElementType, FunctionComponent, forwardRef } from 'react';
 import {
   RicosEngine,
@@ -40,6 +41,9 @@ interface State {
   initialContentChanged: boolean;
 }
 
+const loadTiptap = () =>
+  codegen`module.exports = process.env.TIPTAP ? "import( /* webpackChunkName: wix-tiptap-editor */ 'wix-tiptap-editor');" : "Promise.resolve({initTiptapEditor: (config) => ({})})"`; // eslint-disable-line
+
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor!: RichContentEditor;
 
@@ -64,7 +68,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       remountKey: false,
       initialContentChanged: true,
     };
-    this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
+    if (process.env.TIPTAP) {
+      this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
+    } else {
+      this.useTiptap = false;
+    }
   }
 
   static defaultProps = { locale: 'en' };
@@ -79,7 +87,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   componentDidMount() {
     this.updateLocale();
-    this.loadEditor();
+    codegen`module.exports = process.env.TIPTAP ? 'this.loadEditor();`;
     const { isMobile, toolbarSettings } = this.props;
     const { useStaticTextToolbar } = toolbarSettings || {};
     this.getBiCallback('onOpenEditorSuccess')?.(
@@ -91,10 +99,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   loadEditor() {
     if (this.useTiptap) {
-      import(
-        /* webpackChunkName: wix-tiptap-editor */
-        'wix-tiptap-editor'
-      ).then(tiptapEditorModule => {
+      loadTiptap().then(tiptapEditorModule => {
         const { initTiptapEditor } = tiptapEditorModule;
         const { content, injectedContent } = this.props;
         this.tiptapApi = initTiptapEditor({

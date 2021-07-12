@@ -28,6 +28,7 @@
     "prebuild": "npm run clean",
     "build:rollup": "rollup --environment MODULE_NAME:plugin-social-polls -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
+    "build:tiptap": "npm run build",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "postbuild": "node ../../../scripts/esCheck.js",

@@ -28,7 +28,8 @@
     "generate": "ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} src/generateSchema.ts",
     "buildESM": "tsc",
     "buildCJS": "tsc --module commonjs --outDir dist/cjs",
-    "build": "yarn generate && yarn buildESM && yarn buildCJS"
+    "build": "yarn generate && yarn buildESM && yarn buildCJS",
+    "build:tiptap": "npm run build"
   },
   "unpkg": true,
   "publishConfig": {

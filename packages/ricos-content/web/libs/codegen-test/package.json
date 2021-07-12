@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/codegen-test.cjs.js",
+    "module": "../../dist/lib/codegen-test.js",
+    "types": "../../dist/lib/codegen-test.d.ts"
+}

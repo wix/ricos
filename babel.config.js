@@ -21,6 +21,7 @@ const commonPlugins = [
   '@babel/plugin-syntax-dynamic-import',
   '@babel/plugin-proposal-optional-chaining',
   ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: true }],
+  'macros',
 ];
 
 if (process.env.NODE_ENV !== 'development') {

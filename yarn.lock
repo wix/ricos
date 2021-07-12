@@ -6810,6 +6810,15 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
+babel-plugin-codegen@^4.1.0:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-codegen/-/babel-plugin-codegen-4.1.4.tgz#e00ff59aef90dbfd41f2dec74138c46416f524d2"
+  integrity sha512-WWqjrCgi/+bOA9Vnx0k6tbuyDVzJaMFcBlzBpw02r9yrW8W4qWu+ObZE8lbM1g57IX+tHHS4WbO0zW40sDLGPA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    babel-plugin-macros "^3.0.1"
+    require-from-string "^2.0.2"
+
 babel-plugin-dynamic-import-node@^2.2.0, babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.3.tgz#84fda19c976ec5c6defef57f9427b3def66e17a3"
@@ -6888,6 +6897,15 @@ babel-plugin-macros@^2.0.0, babel-plugin-macros@^2.2.2, babel-plugin-macros@^2.7
     "@babel/runtime" "^7.7.2"
     cosmiconfig "^6.0.0"
     resolve "^1.12.0"
+
+babel-plugin-macros@^3.0.1, babel-plugin-macros@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-3.1.0.tgz#9ef6dc74deb934b4db344dc973ee851d148c50c1"
+  integrity sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    cosmiconfig "^7.0.0"
+    resolve "^1.19.0"
 
 babel-plugin-minify-builtins@^0.5.0:
   version "0.5.0"
@@ -8694,6 +8712,13 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
+
+codegen.macro@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/codegen.macro/-/codegen.macro-4.1.0.tgz#8d822e8f8294692d32ecb29f04240f1e6cd36018"
+  integrity sha512-T0A8vdX9SkhT00cd7nWQwlg8CT2qQwp1o2+ZD7Wqx38ABK0kJvhk/IJTjNgnE1W35dE98+OzLr1zluVREz5bPg==
+  dependencies:
+    babel-plugin-codegen "^4.1.0"
 
 codem-isoboxer@0.3.6:
   version "0.3.6"
