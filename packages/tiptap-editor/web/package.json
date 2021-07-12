@@ -62,8 +62,10 @@
     "ricos-content": "8.46.6",
     "ricos-schema": "8.46.6",
     "wix-rich-content-plugin-divider": "8.46.6",
-    "wix-rich-content-plugin-image": "8.46.6"
-
+    "wix-rich-content-plugin-image": "8.46.6",
+    "wix-rich-content-plugin-spoiler": "8.46.6",
+    "wix-rich-content-common": "8.46.6",
+    "wix-rich-content-editor-common": "8.46.6"
   },
   "jest": {
     "globals": {

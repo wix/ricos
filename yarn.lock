@@ -27732,6 +27732,15 @@ wix-rich-content-plugin-image@8.46.6:
     wix-rich-content-plugin-commons "8.46.6"
     wix-rich-content-ui-components "8.46.6"
 
+wix-rich-content-plugin-spoiler@8.46.6:
+  version "8.46.6"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-spoiler/-/wix-rich-content-plugin-spoiler-8.46.6.tgz#0938522ddcd399343157728fee89a8c7a1f3fbad"
+  integrity sha512-J0/Dwa5mmGdDxLVMzVrAALcCXNqZAnUhoi12VV4e4jf9EMzGrbUhJ4dkS0LtBkQDUk1VnoL++ojlITbp0bqmUA==
+  dependencies:
+    wix-rich-content-common "8.46.6"
+    wix-rich-content-editor-common "8.46.6"
+    wix-rich-content-plugin-commons "8.46.6"
+
 wix-rich-content-ui-components@8.46.6:
   version "8.46.6"
   resolved "https://registry.npmjs.org/wix-rich-content-ui-components/-/wix-rich-content-ui-components-8.46.6.tgz#5e97ae1a96c33673ad6afe3442e7b503a43b7881"
