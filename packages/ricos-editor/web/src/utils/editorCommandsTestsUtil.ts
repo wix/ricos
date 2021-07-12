@@ -10,10 +10,12 @@ import {
   RICOS_IMAGE_TYPE,
   RICOS_LINK_TYPE,
   RICOS_MENTION_TYPE,
+  RICOS_TEXT_COLOR_TYPE,
+  RICOS_TEXT_HIGHLIGHT_TYPE,
 } from 'ricos-content';
 import {
   DividerData,
-  DividerData_Type,
+  DividerData_LineStyle,
   GiphyData,
   HTMLData,
   GalleryData,
@@ -23,7 +25,6 @@ import {
   ImageData,
   LinkData,
   Node_Type,
-  Decoration_Type,
   MentionData,
   PluginContainerData_Width_Type,
   PluginContainerData_Alignment,
@@ -79,10 +80,10 @@ const divider = {
   type: RICOS_DIVIDER_TYPE,
   nodeType: Node_Type.DIVIDER,
   data1: DividerData.fromJSON({
-    type: DividerData_Type.DOUBLE,
+    lineStyle: DividerData_LineStyle.DOUBLE,
   }),
   data2: DividerData.fromJSON({
-    type: DividerData_Type.DASHED,
+    lineStyle: DividerData_LineStyle.DASHED,
   }),
   expectedData1: {
     type: 'double',
@@ -240,7 +241,6 @@ const gallery = {
   expectedData1: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       layout: 'small',
       size: 'content',
       spacing: 0,
@@ -275,6 +275,7 @@ const gallery = {
       },
     ],
     styles: {
+      allowContextMenu: true,
       allowDownload: false,
       allowHover: true,
       allowSocial: false,
@@ -306,7 +307,6 @@ const gallery = {
   expectedData2: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       layout: 'small',
       size: 'content',
       spacing: 0,
@@ -323,6 +323,7 @@ const gallery = {
       },
     ],
     styles: {
+      allowContextMenu: true,
       allowDownload: false,
       allowHover: true,
       allowSocial: false,
@@ -453,7 +454,6 @@ const image = {
   expectedData1: {
     config: {
       alignment: 'center',
-      disableExpand: false,
       showDescription: true,
       showTitle: true,
       size: 'content',
@@ -468,7 +468,6 @@ const image = {
   expectedData2: {
     config: {
       alignment: 'left',
-      disableExpand: false,
       showDescription: true,
       showTitle: true,
       size: 'content',
@@ -484,26 +483,28 @@ const image = {
 
 const link = {
   type: RICOS_LINK_TYPE,
-  decorationType: Decoration_Type.LINK,
-  data1: LinkData.fromJSON({ url: 'www.wix.com' }),
+  data1: LinkData.fromJSON({
+    link: {
+      url: 'www.wix.com',
+      rel: { nofollow: true },
+      target: 'SELF',
+    },
+  }),
   selection1: selection,
-  data2: LinkData.fromJSON({ url: 'www.sport5.co.il', rel: 'nofollow' }),
+  data2: LinkData.fromJSON({
+    link: {
+      url: 'www.sport5.co.il',
+      rel: { sponsored: true },
+      target: 'SELF',
+    },
+  }),
   selection2: selectionCollapsed,
-  expectedData1: {
-    url: 'www.wix.com',
-    rel: 'noopener',
-    target: '_self',
-  },
-  expectedData2: {
-    url: 'www.sport5.co.il',
-    rel: 'nofollow',
-    target: '_self',
-  },
+  expectedData1: { url: 'www.wix.com', rel: 'nofollow', target: '_self' },
+  expectedData2: { url: 'www.sport5.co.il', rel: 'sponsored', target: '_self' },
 };
 
 const mention = {
   type: RICOS_MENTION_TYPE,
-  decorationType: Decoration_Type.MENTION,
   data1: { mention: MentionData.fromJSON({ name: 'aviv', slug: 'blabla' }), trigger: '@' },
   selection1: endOfSelection,
   data2: {
@@ -525,6 +526,26 @@ const mention = {
   },
 };
 
+const textColor = {
+  type: RICOS_TEXT_COLOR_TYPE,
+  data1: { color: 'color4' },
+  selection1: selection,
+  data2: { color: 'color2' },
+  selection2: selectionCollapsed,
+  expectedData1: 'color4',
+  expectedData2: 'color2',
+};
+
+const highlightColor = {
+  type: RICOS_TEXT_HIGHLIGHT_TYPE,
+  data1: { color: 'color3' },
+  selection1: selection,
+  data2: { color: 'color1' },
+  selection2: selectionCollapsed,
+  expectedData1: 'color3',
+  expectedData2: 'color1',
+};
+
 export const inlineStylesTestConfig = ['bold', 'italic', 'underline', 'spoiler'];
 
 export const pluginsTestConfig = {
@@ -538,4 +559,4 @@ export const pluginsTestConfig = {
   image,
 };
 
-export const decorationsTestConfig = { link, mention };
+export const decorationsTestConfig = { link, mention, textColor, highlightColor };

@@ -791,7 +791,7 @@
       "data": {
         "url": "www.google.com",
         "target": "_blank",
-        "rel": "noopener"
+        "rel": "nofollow sponsored ugc"
       }
     },
     "2": {
@@ -809,8 +809,7 @@
       "mutability": "MUTABLE",
       "data": {
         "url": "www.link.com",
-        "target": "_blank",
-        "rel": "noopener"
+        "target": "_blank"
       }
     },
     "4": {
@@ -827,7 +826,6 @@
         "config": {
           "alignment": "center",
           "size": "content",
-          "disableExpand": false,
           "link": {
             "url": "www.image-link.com",
             "target": "_blank",
@@ -895,6 +893,7 @@
             "height": 1080
           }
         },
+        "disableDownload": false,
         "isCustomVideo": true,
         "tempData": false
       }
@@ -964,12 +963,12 @@
           "videoPlay": "onClick",
           "numberOfImagesPerRow": 3
         },
+        "disableExpand": false,
         "config": {
           "alignment": "center",
           "size": "content",
           "layout": "small",
-          "spacing": 0,
-          "disableExpand": false
+          "spacing": 0
         }
       }
     },
@@ -1015,8 +1014,8 @@
           "settings": {
             "buttonText": "Link Button",
             "url": "www.wix.com",
-            "rel": false,
-            "target": true
+            "rel": "nofollow",
+            "target": "_blank"
           },
           "design": {
             "activeButton": 4,
@@ -1277,8 +1276,10 @@
         "config": {
           "alignment": "right",
           "size": "inline",
-          "disableExpand": false,
-          "width": 300
+          "width": 300,
+          "spoiler": {
+            "enabled": true
+          }
         },
         "src": {
           "id": "91ff5a615e0235157dc1a7e5f66607bf",
@@ -1286,9 +1287,11 @@
           "file_name": "8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg",
           "width": 1920,
           "height": 1280
-        }
+        },
+        "disableDownload": false,
+        "disableExpand": false
       }
     }
   },
-  "VERSION": "8.29.12"
+  "VERSION": "8.46.6"
 }

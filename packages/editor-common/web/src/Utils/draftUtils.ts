@@ -1,4 +1,4 @@
-import { convertToRaw } from '..';
+import { DraftContent } from 'ricos-content';
 import {
   EditorState,
   Modifier,
@@ -16,12 +16,13 @@ import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import {
-  RelValue,
   AnchorTarget,
   LINK_TYPE,
   CUSTOM_LINK_TYPE,
   TextAlignment,
   InlineStyle,
+  RelValue,
+  getTargetValue,
   SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import { Optional } from 'utility-types';
@@ -29,10 +30,8 @@ import { getContentSummary } from 'wix-rich-content-common/libs/contentAnalytics
 
 type LinkDataUrl = {
   url: string;
-  targetBlank?: boolean;
-  nofollow?: boolean;
-  anchorTarget?: string;
-  relValue?: string;
+  target?: string;
+  rel?: string;
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
@@ -77,15 +76,13 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
+  { url, target, rel }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
   const linkEntityData = createLinkEntityData({
     url,
-    targetBlank,
-    nofollow,
-    anchorTarget,
-    relValue,
+    target,
+    rel,
   });
 
   return insertLink(editorState, selection, linkEntityData);
@@ -143,27 +140,30 @@ export const insertLinkAtCurrentSelection = (
 ) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
-  if (selection.isCollapsed()) {
-    const { url } = entityData;
-    const urlToInsertWhenCollapsed = text ? text : url;
-    const contentState = Modifier.insertText(
-      editorState.getCurrentContent(),
-      selection,
-      urlToInsertWhenCollapsed
-    );
-    selection = selection.merge({
-      focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
-    }) as SelectionState;
-    newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
-  }
-  const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+  let editorStateWithLink, editorStateSelection;
   const linkEntityData = createLinkEntityData(entityData);
-  const editorStateWithLink = isExistsLink
-    ? updateLink(newEditorState, selection, linkEntityData)
-    : insertLink(newEditorState, selection, linkEntityData);
-  const editorStateSelection = isExistsLink
-    ? selection.merge({ anchorOffset: selection.getFocusOffset() })
-    : editorStateWithLink.getCurrentContent().getSelectionAfter();
+  const isExistsLink = isSelectionBelongsToExistingLink(newEditorState, selection);
+
+  if (isExistsLink) {
+    editorStateWithLink = updateLink(newEditorState, selection, linkEntityData);
+    editorStateSelection = selection.merge({ anchorOffset: selection.getFocusOffset() });
+  } else {
+    if (selection.isCollapsed()) {
+      const { url } = entityData;
+      const urlToInsertWhenCollapsed = text ? text : url;
+      const contentState = Modifier.insertText(
+        editorState.getCurrentContent(),
+        selection,
+        urlToInsertWhenCollapsed
+      );
+      selection = selection.merge({
+        focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
+      }) as SelectionState;
+      newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
+    }
+    editorStateWithLink = insertLink(newEditorState, selection, linkEntityData);
+    editorStateSelection = editorStateWithLink.getCurrentContent().getSelectionAfter();
+  }
   return EditorState.forceSelection(editorStateWithLink, editorStateSelection as SelectionState);
 };
 
@@ -235,17 +235,8 @@ function insertLink(
   );
 }
 
-export function createLinkEntityData({
-  url,
-  anchor,
-  targetBlank,
-  nofollow,
-  anchorTarget,
-  relValue,
-}: LinkData) {
+export function createLinkEntityData({ url, anchor, target, rel }: LinkData) {
   if (url) {
-    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
     return {
       url,
       target,
@@ -494,6 +485,10 @@ export const getSelectedBlocks = (editorState: EditorState) => {
   return blocks.slice(firstIndex, lastIndex + 1);
 };
 
+export const isAtomicBlockInSelection = (editorState: EditorState) => {
+  return getSelectedBlocks(editorState).some(block => block.getType() === 'atomic');
+};
+
 export const getSelectionRange = (editorState: EditorState, block: ContentBlock) => {
   const selection = getSelection(editorState);
   const blockKey = block.getKey();
@@ -586,9 +581,8 @@ function getSelection(editorState: EditorState) {
   return selection;
 }
 
-export function getEditorContentSummary(editorState: EditorState) {
-  if (Object.entries(editorState).length === 0) return;
-  return getContentSummary(convertToRaw(editorState.getCurrentContent()));
+export function getEditorContentSummary(contentState: DraftContent) {
+  return getContentSummary(contentState);
 }
 
 const countByTypeField = obj => countBy(obj, x => x.type);
@@ -688,8 +682,8 @@ export function fixPastedLinks(
     if (url) {
       content.replaceEntityData(entityKey, {
         url,
-        target: anchorTarget || '_self',
-        rel: relValue || 'noopener noreferrer',
+        target: getTargetValue(anchorTarget),
+        rel: relValue,
       });
     }
   });
@@ -827,6 +821,15 @@ export function isCursorAtStartOfContent(editorState: EditorState) {
   const isStartOfLine = editorState.getSelection().getFocusOffset() === 0;
   return isStartOfLine && isCursorAtFirstLine(editorState);
 }
+
+export const hasBlockType = (blockType: string, editorState: EditorState) => {
+  const currentBlockType = editorState
+    .getCurrentContent()
+    .getBlockForKey(editorState.getSelection().getStartKey())
+    .getType();
+
+  return blockType === currentBlockType;
+};
 
 export function selectAllContent(editorState, forceSelection) {
   const currentContent = editorState.getCurrentContent();

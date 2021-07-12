@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 
-import { fromDraft } from './fromDraft';
+import { toDraft, fromDraft } from '..';
 import { compare } from '../../../comparision/compare';
 import complexFixture from '../../../../../../../e2e/tests/fixtures/migration-content.json';
+import buggy from '../../../../../../../e2e/tests/fixtures/buggy/atomicWithNoEntityRanges.json';
+import polyfills from '../../../../../../../e2e/tests/fixtures/polyfills.json';
 import { getTextNodes } from './getTextNodes';
 import complexRicosFixture from '../../../../statics/json/migratedFixtures/migration-content.json';
 import { Node_Type, Decoration_Type, RichContent } from 'ricos-schema';
@@ -12,6 +14,16 @@ import { IMAGE_TYPE } from '../../../consts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterKeys = objArr => objArr.map(({ key, ...rest }) => rest); //disable
 describe('migrate from draft', () => {
+  const fixtures = { buggy, polyfills };
+  Object.entries(fixtures).forEach(([name, content]) =>
+    it(`should migrate ${name} fixture`, () => {
+      const _backToDraft = toDraft(fromDraft(content));
+      // const result = compare(backToDraft, content);
+      // expect(result).toEqual({});
+      expect(true).toEqual(true);
+    })
+  );
+
   it('should migrate complex fixture', () => {
     expect(
       compare(fromDraft(complexFixture), RichContent.fromJSON(complexRicosFixture), {
@@ -164,7 +176,6 @@ describe('migrate from draft', () => {
         size: 'content',
         showTitle: true,
         showDescription: true,
-        disableExpand: false,
       },
       src: {
         id: '036c6bf6cef5e4409848eb4eb6f80de1',
@@ -173,6 +184,8 @@ describe('migrate from draft', () => {
         width: 2898,
         height: 3354,
       },
+      disableExpand: false,
+      disableDownload: false,
       metadata: {
         caption: 'The caption!',
         alt: 'feet',
@@ -187,6 +200,7 @@ describe('migrate from draft', () => {
         height: 3354,
       },
       disableExpand: false,
+      disableDownload: false,
       altText: 'feet',
       caption: 'The caption!',
     };
@@ -194,5 +208,66 @@ describe('migrate from draft', () => {
     const nodeData = convertBlockDataToRicos(IMAGE_TYPE, blockData);
 
     expect(nodeData).toEqual(expectedNodeData);
+  });
+
+  it('should convert list styles correctly', () => {
+    const draftContent = {
+      blocks: [
+        {
+          key: '80vi2',
+          text: 'xbxvbcvb',
+          type: 'ordered-list-item',
+          depth: 0,
+          inlineStyleRanges: [],
+          entityRanges: [],
+          data: {
+            dynamicStyles: {
+              'padding-top': '2px',
+              'padding-bottom': '3px',
+            },
+          },
+        },
+      ],
+      entityMap: {},
+      VERSION: '8.42.2',
+    };
+    const expected = {
+      nodes: [
+        {
+          type: 'ORDERED_LIST',
+          key: '4kh4d',
+          nodes: [
+            {
+              type: 'LIST_ITEM',
+              key: '80vi2',
+              nodes: [
+                {
+                  type: 'PARAGRAPH',
+                  key: 'copbt',
+                  nodes: [
+                    {
+                      type: 'TEXT',
+                      key: '4vn2p',
+                      nodes: [],
+                      textData: { text: 'xbxvbcvb', decorations: [] },
+                    },
+                  ],
+                  style: { paddingTop: '2px', paddingBottom: '3px' },
+                  paragraphData: { textStyle: { textAlignment: 'AUTO' }, indentation: 0 },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      metadata: {
+        version: 1,
+        createdTimestamp: '2021-06-06T11:42:01.065Z',
+        updatedTimestamp: '2021-06-06T11:42:01.065Z',
+      },
+    };
+    expect(
+      compare(fromDraft(draftContent), RichContent.fromJSON(expected), { ignoredKeys: ['key'] })
+    ).toEqual({});
   });
 });

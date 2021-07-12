@@ -5,8 +5,9 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
-import { DEFAULTS, isHorizontalLayout, sampleItems, GALLERY_LAYOUTS } from './defaults';
+import { DEFAULTS, isHorizontalLayout, sampleItems } from './defaults';
 import { resizeMediaUrl } from '../lib/resize-media-url';
+import { GALLERY_LAYOUTS } from '../lib/layout-data-provider';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
@@ -228,16 +229,9 @@ class GalleryViewer extends React.Component {
     );
   };
 
-  handleContextMenu = e => {
-    const {
-      componentData: { disableDownload = false },
-    } = this.props;
-    return disableDownload && e.preventDefault();
-  };
-
   getStyleParams = () => {
     const {
-      componentData: { styles: styleParams },
+      componentData: { styles: styleParams, disableDownload },
       isMobile,
     } = this.props;
     if (isMobile && isHorizontalLayout(styleParams)) {
@@ -247,7 +241,15 @@ class GalleryViewer extends React.Component {
         styleParams.thumbnailSize = 90;
       }
     }
+    styleParams.allowContextMenu = !disableDownload;
     return styleParams;
+  };
+
+  handleContextMenu = e => {
+    const {
+      componentData: { disableDownload = false },
+    } = this.props;
+    return disableDownload && e.preventDefault();
   };
 
   render() {
@@ -255,7 +257,6 @@ class GalleryViewer extends React.Component {
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { scrollingElement, ...gallerySettings } = settings;
     const { size } = this.state;
-
     const items = this.getItems();
     const styleParams = this.getStyleParams();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;

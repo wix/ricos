@@ -4,8 +4,8 @@ import {
   getModalStyles,
   EditorState,
   isAtomicBlockFocused,
+  getSelectionStyles,
 } from 'wix-rich-content-editor-common';
-import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
 import TextColorPanel, { getInlineColorState } from './TextColorPanel';
 import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
 import {

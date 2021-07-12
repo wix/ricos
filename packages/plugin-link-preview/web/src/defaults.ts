@@ -4,7 +4,7 @@ export const DEFAULTS = {
     size: 'content',
     link: {
       target: '_blank',
-      rel: 'noopener',
+      rel: '',
     },
   },
 };

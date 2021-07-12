@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FocusManager } from 'wix-rich-content-editor-common';
-import { LabeledToggle } from 'wix-rich-content-ui-components';
-import { SettingsPanelFooter, SettingsSection, Tabs, Tab } from 'wix-rich-content-plugin-commons';
+import {
+  Tabs,
+  Tab,
+  LabeledToggle,
+  SettingsSection,
+  SettingsPanelFooter,
+  FocusManager,
+} from 'wix-rich-content-ui-components';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import LayoutControlsSection from './layout-controls-section';
 import { SortableComponent } from './gallery-controls/gallery-items-sortable';
-import layoutData from '../../lib/layout-data-provider';
+import { layoutData } from '../../lib/layout-data-provider';
 import GallerySettingsMobileHeader from './gallery-controls/gallery-settings-mobile-header';
-
+const DIVIDER = 'divider';
 class ManageMediaSection extends Component {
   applyItems = items => {
     const { data, store } = this.props;
@@ -150,12 +155,17 @@ export class GallerySettingsModal extends Component {
   constructor(props) {
     super(props);
     const {
-      componentData: { disableExpand, disableDownload },
+      componentData: {
+        disableExpand,
+        disableDownload,
+        config: { spoiler = {} },
+      },
     } = this.props;
     this.state = {
       activeTab: this.props.activeTab,
       isExpandEnabled: !disableExpand,
       isDownloadEnabled: !disableDownload,
+      isSpoilerEnabled: spoiler.enabled,
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.switchTab = this.switchTab.bind(this);
@@ -212,6 +222,7 @@ export class GallerySettingsModal extends Component {
     const componentData = pubsub.get('componentData');
     const newComponentData = {
       ...componentData,
+      ...this.getSpoilerConfig(this.state.isSpoilerEnabled),
       disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,
     };
@@ -219,11 +230,17 @@ export class GallerySettingsModal extends Component {
     helpers.closeModal();
   };
 
-  toggleState = key => () => {
-    this.setState(prevState => ({
-      [key]: !prevState[key],
-    }));
+  toggleState = (key, onToggle) => () => {
+    const value = !this.state[key];
+    this.setState({ [key]: value }, onToggle?.(value));
   };
+
+  getSpoilerConfig = enabled => ({
+    config: {
+      ...this.componentData.config,
+      spoiler: { enabled },
+    },
+  });
 
   tabsList = () => ({
     mangeMedia: (
@@ -276,23 +293,27 @@ export class GallerySettingsModal extends Component {
       ? [this.tabsList().mangeMedia, this.tabsList().settings]
       : [this.tabsList().mangeMedia, this.tabsList().advancedSettings, this.tabsList().settings];
 
-  renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook }) => (
-    <LabeledToggle
-      key={toggleKey}
-      theme={this.props.theme}
-      checked={this.state[toggleKey]}
-      label={this.props.t(labelKey)}
-      dataHook={dataHook}
-      onChange={this.toggleState(toggleKey)}
-      tooltipText={tooltipText}
-    />
-  );
+  renderToggle = ({ toggleKey, labelKey, tooltipText, dataHook, onToggle, type }) =>
+    type === DIVIDER ? (
+      <div className={this.styles.divider} />
+    ) : (
+      <LabeledToggle
+        key={toggleKey}
+        theme={this.props.theme}
+        checked={this.state[toggleKey]}
+        label={this.props.t(labelKey)}
+        dataHook={dataHook}
+        onChange={this.toggleState(toggleKey, onToggle)}
+        tooltipText={tooltipText}
+      />
+    );
 
-  toggleData = [
+  baseToggleData = [
     {
       toggleKey: 'isExpandEnabled',
       labelKey: 'GalleryPlugin_Settings_ImagesOpenInExpandMode_Label',
       dataHook: 'galleryExpandToggle',
+      tooltipText: this.props.t('GallerySettings_Expand_Mode_Toggle'),
     },
     {
       toggleKey: 'isDownloadEnabled',
@@ -302,10 +323,32 @@ export class GallerySettingsModal extends Component {
     },
   ];
 
+  toggleData = this.props.shouldShowSpoiler
+    ? [
+        ...this.baseToggleData,
+        {
+          type: DIVIDER,
+        },
+        {
+          toggleKey: 'isSpoilerEnabled',
+          labelKey: 'GallerySettings_Spoiler_Toggle',
+          dataHook: 'gallerySpoilerToggle',
+          tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
+          onToggle: value => {
+            this.props.pubsub.update('componentData', {
+              ...this.componentData,
+              ...this.getSpoilerConfig(value),
+            });
+          },
+        },
+      ]
+    : this.baseToggleData;
+
   render() {
     const styles = this.styles;
-    const { t, isMobile, languageDir } = this.props;
+    const { t, isMobile, languageDir, pubsub } = this.props;
     const { activeTab } = this.state;
+    this.componentData = pubsub.get('componentData');
 
     return (
       <div data-hook="settings" dir={languageDir}>
@@ -360,6 +403,7 @@ GallerySettingsModal.propTypes = {
   uiSettings: PropTypes.object,
   languageDir: PropTypes.string,
   accept: PropTypes.string,
+  shouldShowSpoiler: PropTypes.bool,
 };
 
 export default GallerySettingsModal;

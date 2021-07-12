@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import { Separator, getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { getBlockEntityType, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import {
   BUTTONS,
@@ -12,7 +12,7 @@ import {
   deleteButton,
   BlockSpoilerButton,
 } from '../buttons';
-import Panel from '../../Components/Panel';
+import { Separator, Panel } from 'wix-rich-content-ui-components';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
 import { isSSR, TABLE_TYPE } from 'wix-rich-content-common';
@@ -215,16 +215,19 @@ export default function createAtomicPluginToolbar({
         isMobile,
         t,
         pubsub,
+        helpers,
+        keyName: button.keyName,
       };
 
+      const editorState = getEditorState();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
         settings: button.settings,
+        pluginType,
         ...commonButtonProps,
       };
-      const editorState = getEditorState();
-      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const baseLinkProps = {
         onOverrideContent: this.onOverrideContent,
         helpers,
@@ -305,7 +308,7 @@ export default function createAtomicPluginToolbar({
             !this.state.componentData.html && (
               <BlockLinkButton
                 {...baseLinkProps}
-                unchangedUrl
+                hideUrlInput
                 tooltipText={t('LinkPreview_Settings_Tooltip')}
                 icons={button.icons}
               />

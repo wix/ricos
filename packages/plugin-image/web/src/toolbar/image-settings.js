@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, getImageSrc } from 'wix-rich-content-common';
-import { LabeledToggle } from 'wix-rich-content-ui-components';
 import {
-  Image,
-  InputWithLabel,
   SettingsPanelFooter,
   SettingsSection,
+  LabeledToggle,
+  InputWithLabel,
+  Image,
   Loader,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-ui-components';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
+import { DIVIDER } from '../consts';
 
 class ImageSettings extends Component {
   constructor(props) {
@@ -31,9 +32,17 @@ class ImageSettings extends Component {
 
   propsToState(props) {
     const { componentData } = props;
-    const { src, metadata, error, disableExpand, disableDownload } = componentData;
+    const {
+      src,
+      metadata,
+      error,
+      disableExpand,
+      disableDownload,
+      config: { spoiler = {} },
+    } = componentData;
     const isExpandEnabled = !disableExpand;
     const isDownloadEnabled = !disableDownload;
+    const isSpoilerEnabled = spoiler.enabled;
 
     return {
       src,
@@ -41,23 +50,25 @@ class ImageSettings extends Component {
       error,
       isExpandEnabled,
       isDownloadEnabled,
+      isSpoilerEnabled,
     };
   }
 
-  toggleState = key => () => {
-    this.setState(prevState => ({
-      [key]: !prevState[key],
-    }));
+  toggleState = (key, onToggle) => () => {
+    const value = !this.state[key];
+    this.setState({ [key]: value }, onToggle?.(value));
   };
 
-  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText }) => {
-    return (
+  renderToggle = ({ toggleKey, labelKey, dataHook, tooltipText, onToggle, type }) => {
+    return type === DIVIDER ? (
+      <div className={this.styles.divider} />
+    ) : (
       <div key={toggleKey} className={this.styles.imageSettings_toggleContainer}>
         <LabeledToggle
           theme={this.props.theme}
           checked={this.state[toggleKey]}
           label={this.props.t(labelKey)}
-          onChange={this.toggleState(toggleKey)}
+          onChange={this.toggleState(toggleKey, onToggle)}
           dataHook={dataHook}
           tooltipText={tooltipText}
         />
@@ -65,11 +76,12 @@ class ImageSettings extends Component {
     );
   };
 
-  toggleData = [
+  baseToggleData = [
     {
       toggleKey: 'isExpandEnabled',
       labelKey: 'ImagePlugin_Settings_ImageOpensInExpandMode_Label',
       dataHook: 'imageExpandToggle',
+      tooltipText: this.props.t('ImageSettings_Expand_Mode_Toggle'),
     },
     {
       toggleKey: 'isDownloadEnabled',
@@ -78,6 +90,27 @@ class ImageSettings extends Component {
       tooltipText: this.props.t('ImagePlugin_Settings_ImageCanBeDownloaded_Tooltip'),
     },
   ];
+
+  toggleData = this.props.shouldShowSpoiler
+    ? [
+        ...this.baseToggleData,
+        {
+          type: DIVIDER,
+        },
+        {
+          toggleKey: 'isSpoilerEnabled',
+          labelKey: 'ImageSettings_Spoiler_Toggle',
+          dataHook: 'imageSpoilerToggle',
+          tooltipText: this.props.t('Spoiler_Toggle_Tooltip'),
+          onToggle: value => {
+            this.props.pubsub.update('componentData', {
+              ...this.props.componentData,
+              ...this.getSpoilerConfig(value),
+            });
+          },
+        },
+      ]
+    : this.baseToggleData;
 
   componentDidMount() {
     this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
@@ -95,7 +128,13 @@ class ImageSettings extends Component {
   revertComponentData() {
     const { componentData, helpers, pubsub } = this.props;
     if (this.initialState) {
-      const initialComponentData = { ...componentData, ...this.initialState };
+      const { isExpandEnabled, isDownloadEnabled, ...rest } = this.initialState;
+      const initialComponentData = {
+        ...componentData,
+        ...rest,
+        disableExpand: !isExpandEnabled,
+        disableDownload: !isDownloadEnabled,
+      };
       pubsub.update('componentData', initialComponentData);
       this.setState({ ...this.initialState });
     }
@@ -110,6 +149,7 @@ class ImageSettings extends Component {
     const { helpers, componentData, pubsub } = this.props;
     const newComponentData = {
       ...componentData,
+      ...this.getSpoilerConfig(this.state.isSpoilerEnabled),
       disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,
     };
@@ -120,6 +160,13 @@ class ImageSettings extends Component {
 
     helpers.closeModal();
   };
+
+  getSpoilerConfig = enabled => ({
+    config: {
+      ...this.props.componentData.config,
+      spoiler: { enabled },
+    },
+  });
 
   setBlockLink = item => this.props.pubsub.setBlockData({ key: 'componentLink', item });
 
@@ -238,6 +285,7 @@ ImageSettings.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
+  shouldShowSpoiler: PropTypes.bool,
 };
 
 export default ImageSettings;

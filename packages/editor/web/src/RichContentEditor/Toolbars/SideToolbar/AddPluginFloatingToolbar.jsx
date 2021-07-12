@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { FocusManager } from 'wix-rich-content-ui-components';
 import {
-  FocusManager,
   EditorModals,
   getModalStyles,
   TOOLBARS,

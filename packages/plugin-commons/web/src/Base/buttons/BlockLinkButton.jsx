@@ -30,7 +30,7 @@ class BlockLinkButton extends Component {
       relValue,
       t,
       uiSettings,
-      unchangedUrl,
+      hideUrlInput,
       innerModal,
       toolbarOffsetTop,
       toolbarOffsetLeft,
@@ -41,7 +41,7 @@ class BlockLinkButton extends Component {
       !linkTypes ||
       isEmpty(linkTypes) ||
       !Object.values(linkTypes).find(addon => !!addon) ||
-      unchangedUrl;
+      hideUrlInput;
     const { externalPopups = false } = uiSettings.linkPanel;
     const customStyles =
       !isMobile && !OriginalLinkPanel
@@ -72,7 +72,7 @@ class BlockLinkButton extends Component {
       relValue,
       modalName: EditorModals.BLOCK_LINK_MODAL,
       uiSettings,
-      unchangedUrl,
+      hideUrlInput,
       linkTypes,
       editorState,
       triggerBi: this.triggerBi,
@@ -105,15 +105,17 @@ class BlockLinkButton extends Component {
   };
 
   render() {
-    const { theme, isMobile, tabIndex, icons, tooltipText } = this.props;
+    const { theme, isMobile, tabIndex, icons, tooltipText, helpers, pluginType } = this.props;
     return (
       <LinkButton
         onClick={this.showLinkPanel}
+        helpers={helpers}
         isActive={this.isActive}
         theme={theme}
         isMobile={isMobile}
         tooltipText={tooltipText}
         tabIndex={tabIndex}
+        pluginType={pluginType}
         icon={icons}
       />
     );
@@ -133,7 +135,7 @@ BlockLinkButton.propTypes = {
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
   icons: PropTypes.object,
-  unchangedUrl: PropTypes.bool,
+  hideUrlInput: PropTypes.bool,
   tooltipText: PropTypes.string,
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,

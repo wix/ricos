@@ -12,7 +12,7 @@ import {
   SETTINGS_PANEL,
   TOOLBARS,
   COLOR_PICKER,
-  ACCORDION_SETTINGS,
+  COLLAPSIBLE_LIST_SETTINGS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
@@ -180,12 +180,12 @@ Cypress.Commands.add('getEditor', () => {
   cy.get(RicosDriver.editor.contentEditable);
 });
 
-Cypress.Commands.add('getAccordion', () => {
-  cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
+Cypress.Commands.add('getCollapsibleList', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.COLLAPSIBLE_LIST);
 });
 
-Cypress.Commands.add('focusAccordion', idx => {
-  cy.getAccordion()
+Cypress.Commands.add('focusCollapsibleList', idx => {
+  cy.getCollapsibleList()
     .get(RicosDriver.editor.contentEditable)
     .eq(idx)
     .focus();
@@ -272,13 +272,17 @@ Cypress.Commands.add('moveCursorToEnd', () => {
   cy.focusEditor().type('{selectall}{downarrow}');
 });
 
-Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
+Cypress.Commands.add('getInlineButton', (buttonSelector, selection) => {
   if (selection) {
     cy.setEditorSelection(selection[0], selection[1]);
   }
   cy.get(
     `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
-  ).click({ force: true });
+  );
+});
+
+Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
+  cy.getInlineButton(buttonSelector, selection).click({ force: true });
 });
 
 Cypress.Commands.add('openCustomColorModal', () => {
@@ -538,8 +542,8 @@ Cypress.Commands.add('redo', () => {
   cy.wait(100);
 });
 
-Cypress.Commands.add('addAccordionPair', () => {
-  cy.get(`[data-hook*=${ACCORDION_SETTINGS.NEW_PAIR}]`).click({ force: true });
+Cypress.Commands.add('addCollapsibleListPair', () => {
+  cy.get(`[data-hook*=${COLLAPSIBLE_LIST_SETTINGS.NEW_PAIR}]`).click({ force: true });
 });
 
 Cypress.Commands.add('openVideoUploadModal', () => {
@@ -669,11 +673,11 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
     .wait(200);
 });
 
-Cypress.Commands.add('insertAccordion', () => {
+Cypress.Commands.add('insertCollapsibleList', () => {
   cy.getEditor()
     .first()
     .focus()
-    .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
+    .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'CollapsibleList_InsertButton'}]`)
     .click({ force: true });
 });
 

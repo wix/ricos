@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import LinkPanel from './LinkPanel';
-import FocusManager from '../FocusManager';
+import LinkPanelWrapper from './LinkPanelWrapper';
+import { FocusManager } from 'wix-rich-content-ui-components';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/link-panel.scss';
 import LinkActionsButtons from './LinkActionsButtons';
@@ -32,14 +32,14 @@ class BasicLinkPanel extends PureComponent {
     const { styles } = this;
     const {
       ariaProps,
-      showTargetBlankCheckbox,
-      showRelValueCheckbox,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+      showSponsoredCheckbox,
       sharedPanelsProps,
       buttonsProps,
       linkPanelValues,
       onChangeLinkPanel,
       isMobile,
-      linkPanelWithTitle,
     } = this.props;
     const linkPanelContainerClassName = classNames(styles.linkPanel_container, {
       [styles.linkPanel_container_isMobile]: isMobile,
@@ -51,13 +51,14 @@ class BasicLinkPanel extends PureComponent {
         role="form"
         {...ariaProps}
       >
-        {isMobile && linkPanelWithTitle && this.renderMobileTitle()}
+        {isMobile && this.renderMobileTitle()}
         <div className={styles.linkPanel_content}>
-          <LinkPanel
+          <LinkPanelWrapper
             linkValues={linkPanelValues}
-            onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
-            showTargetBlankCheckbox={showTargetBlankCheckbox}
-            showRelValueCheckbox={showRelValueCheckbox}
+            onChange={onChangeLinkPanel}
+            showNewTabCheckbox={showNewTabCheckbox}
+            showNoFollowCheckbox={showNoFollowCheckbox}
+            showSponsoredCheckbox={showSponsoredCheckbox}
             {...sharedPanelsProps}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator" />
@@ -72,15 +73,15 @@ BasicLinkPanel.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
-  showTargetBlankCheckbox: PropTypes.bool,
-  showRelValueCheckbox: PropTypes.bool,
+  showNewTabCheckbox: PropTypes.bool,
+  showNoFollowCheckbox: PropTypes.bool,
+  showSponsoredCheckbox: PropTypes.bool,
   sharedPanelsProps: PropTypes.object,
   buttonsProps: PropTypes.object,
   changeRadioGroup: PropTypes.func,
   linkPanelValues: PropTypes.object,
   onChangeLinkPanel: PropTypes.func,
   isMobile: PropTypes.bool,
-  linkPanelWithTitle: PropTypes.bool,
 };
 
 export default BasicLinkPanel;

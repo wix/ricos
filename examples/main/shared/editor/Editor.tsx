@@ -18,7 +18,7 @@ import { TestAppConfig } from '../../src/types';
 import { RicosEditor, RicosEditorProps, RicosEditorType } from 'ricos-editor';
 
 const anchorTarget = '_blank';
-const relValue = 'noopener';
+const rel = { nofollow: true };
 const STATIC_TOOLBAR = 'static';
 
 interface ExampleEditorProps {
@@ -36,6 +36,7 @@ interface ExampleEditorProps {
   injectedContent?: DraftContent;
   onRicosEditorChange?: RicosEditorProps['onChange'];
   experiments?: AvailableExperiments;
+  externalPopups: boolean;
 }
 
 export default class Editor extends PureComponent<ExampleEditorProps> {
@@ -90,7 +91,9 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
         console.log('biPluginChange', plugin_id, changeObj, version),
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
-      onOpenEditorSuccess: async version => console.log('onOpenEditorSuccess', version),
+      onOpenEditorSuccess: async (...args) => console.log('onOpenEditorSuccess', ...args),
+      onContentEdited: async params => console.log('onContentEdited', params),
+      onToolbarButtonClick: async params => console.log('onToolbarButtonClick', params),
       onPluginModalOpened: async params => console.log('onPluginModalOpened', params),
       onMenuLoad: async params => console.log('onMenuLoad', params),
       //
@@ -143,6 +146,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
       injectedContent,
       onRicosEditorChange,
       experiments,
+      externalPopups,
     } = this.props;
     const textToolbarType: TextToolbarType = staticToolbar && !isMobile ? STATIC_TOOLBAR : null;
     const useStaticTextToolbar = textToolbarType === STATIC_TOOLBAR;
@@ -157,7 +161,7 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             onChange={onRicosEditorChange}
             content={contentState}
             injectedContent={injectedContent}
-            linkSettings={{ anchorTarget, relValue }}
+            linkSettings={{ anchorTarget, rel }}
             locale={locale}
             cssOverride={theme}
             toolbarSettings={{
@@ -168,7 +172,8 @@ export default class Editor extends PureComponent<ExampleEditorProps> {
             isMobile={isMobile}
             placeholder={'Add some text!'}
             plugins={this.ricosPlugins}
-            _rcProps={{ experiments }}
+            linkPanelSettings={{ ...Plugins.uiSettings.linkPanel, externalPopups }}
+            experiments={experiments}
           >
             <RichContentEditor helpers={this.helpers} />
           </RicosEditor>

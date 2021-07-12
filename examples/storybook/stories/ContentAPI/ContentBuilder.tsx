@@ -17,7 +17,7 @@ import {
   Code,
 } from './PluginPanels';
 import { Sidebar } from './Sidebar';
-import { AddFunctor, EditPanelProps, Plugins } from './types';
+import { AddMethod, EditPanelProps, Plugins } from './types';
 import { newKey } from './blockKeyGenerator';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import theme from '../../../main/shared/theme/theme';
@@ -27,24 +27,25 @@ import * as Icons from 'wix-ui-icons-common';
 const app = setupContentBuilder(() => newKey(5));
 
 const plugins: Plugins = [
-  ['Paragraph', Icons.SentenceCase, Paragraph],
-  ['Heading', Icons.Rename, Heading],
-  ['Code', Icons.Code, Code],
-  ['Image', Icons.Image, Image],
-  ['Video', Icons.VideoCamera, Video],
-  ['File', Icons.Attachment, File],
-  ['Divider', Icons.Divider, Divider],
   ['Button', Icons.SquareRatio, Button],
+  ['Code', Icons.Code, Code],
+  ['Divider', Icons.Divider, Divider],
+  ['File', Icons.Attachment, File],
   ['Gallery', Icons.LayoutGallery, Gallery],
+  ['Heading', Icons.Rename, Heading],
   ['Html', Icons.Code, Html],
+  ['Image', Icons.Image, Image],
+  ['Paragraph', Icons.SentenceCase, Paragraph],
+  ['Video', Icons.VideoCamera, Video],
 ];
 
 export default () => {
   const [content, setContent] = useState(emptyState);
   const [selectedPanel, setSelectedPanel] = useState(0);
-  const addFunc: AddFunctor = useMemo(
+  const addFunc: AddMethod = useMemo(
     () => (element, args) => {
       const currentContent = fromDraft(content);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newContent = app[element]({ ...(args as any), content: currentContent });
       const contentAsDraft = toDraft(newContent);
       setContent(contentAsDraft);
@@ -52,6 +53,7 @@ export default () => {
     [content]
   );
   const createPanels = useMemo(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     () => (props: EditPanelProps<any>) =>
       plugins.map(([, , Component]) => Component && <Component {...props} />),
     [content]

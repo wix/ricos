@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
-import { TextSearchInput } from 'wix-rich-content-editor-common';
+import { TextSearchInput } from 'wix-rich-content-ui-components';
 import PluginMenuPluginsSection from './PluginMenuPluginsSection';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';

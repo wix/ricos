@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
-import Checkbox from '../Checkbox';
-import { ErrorIcon } from '../../Icons';
+import { Checkbox, ErrorIcon } from 'wix-rich-content-ui-components';
 import styles from '../../../statics/styles/link-panel.scss';
 import { LinkPanelDropdown } from './LinkPanelDropdown';
 
@@ -12,9 +11,9 @@ class LinkPanel extends Component {
   state = { showValidation: false };
 
   static defaultProps = {
-    targetBlank: true,
-    showTargetBlankCheckbox: true,
-    showRelValueCheckbox: true,
+    showNewTabCheckbox: true,
+    showNoFollowCheckbox: true,
+    showSponsoredCheckbox: false,
     isMobile: false,
   };
 
@@ -44,9 +43,11 @@ class LinkPanel extends Component {
     this.onChange({ nofollow: event.target.checked });
   };
 
-  onChange = changes => {
-    this.props.onChange({ ...this.props.linkValues, ...changes });
+  handleSponsoredChange = event => {
+    this.onChange({ sponsored: event.target.checked });
   };
+
+  onChange = changes => this.props.onChange(changes);
 
   handleKeyDown = e => {
     const { onEnter, onEscape } = this.props;
@@ -112,19 +113,20 @@ class LinkPanel extends Component {
     const {
       theme,
       ariaProps,
-      showTargetBlankCheckbox,
-      showRelValueCheckbox,
+      showNewTabCheckbox,
+      showNoFollowCheckbox,
+      showSponsoredCheckbox,
       t,
       linkValues,
-      unchangedUrl,
+      hideUrlInput,
       isMobile,
     } = this.props;
 
-    const { targetBlank, nofollow } = linkValues;
+    const { targetBlank = true, nofollow, sponsored } = linkValues;
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
-        {!unchangedUrl && (
+        {!hideUrlInput && (
           /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
           <div className={styles.linkPanel_Input} onKeyDown={this.handleKeyDown}>
             {this.getInput()}
@@ -136,7 +138,7 @@ class LinkPanel extends Component {
           </div>
         )}
         <div className={styles.checkboxesContainer}>
-          {showTargetBlankCheckbox && (
+          {showNewTabCheckbox && (
             <Checkbox
               label={t('LinkPanel_Target_Checkbox')}
               theme={theme}
@@ -145,7 +147,7 @@ class LinkPanel extends Component {
               onChange={this.handleTargetChange}
             />
           )}
-          {showRelValueCheckbox && (
+          {showNoFollowCheckbox && (
             <Checkbox
               label={t('LinkPanel_Nofollow_Checkbox')}
               theme={theme}
@@ -153,6 +155,18 @@ class LinkPanel extends Component {
               dataHook="linkPanelRelCheckbox"
               onChange={this.handleNofollowChange}
               tooltipTextKey={'LinkPanel_Nofollow_Checkbox_Tooltip'}
+              t={t}
+              isMobile={isMobile}
+            />
+          )}
+          {showSponsoredCheckbox && (
+            <Checkbox
+              label={t('LinkPanel_Sponsored_Checkbox')}
+              theme={theme}
+              checked={sponsored}
+              dataHook="linkPanelSponsoredCheckbox"
+              onChange={this.handleSponsoredChange}
+              tooltipTextKey={'LinkPanel_Sponsored_Checkbox_Tooltip'}
               t={t}
               isMobile={isMobile}
             />
@@ -172,15 +186,18 @@ LinkPanel.propTypes = {
     isValid: PropTypes.bool,
     targetBlank: PropTypes.bool,
     nofollow: PropTypes.bool,
+    sponsored: PropTypes.bool,
   }).isRequired,
   ariaProps: PropTypes.object,
-  showTargetBlankCheckbox: PropTypes.bool,
-  showRelValueCheckbox: PropTypes.bool,
+  showNewTabCheckbox: PropTypes.bool,
+  showNoFollowCheckbox: PropTypes.bool,
+  showSponsoredCheckbox: PropTypes.bool,
   dropDown: PropTypes.object,
   onEnter: PropTypes.func,
   onEscape: PropTypes.func,
   placeholder: PropTypes.string,
-  unchangedUrl: PropTypes.bool,
+  hideUrlInput: PropTypes.bool,
   isMobile: PropTypes.bool,
+  anchorTarget: PropTypes.string,
 };
 export default LinkPanel;

@@ -4,7 +4,6 @@ import {
   Node_Type,
   Decoration_Type,
   Link,
-  Link_Target,
   ImageData,
   Decoration,
   PluginContainerData,
@@ -13,6 +12,7 @@ import {
   MentionData,
   FileData,
   ButtonData,
+  LinkData,
 } from 'ricos-schema';
 import { cloneDeep, has } from 'lodash';
 import {
@@ -27,7 +27,10 @@ export const convertNodeToDraftData = (node: Node) => {
   const { type } = node;
   const draftPluginType = FROM_RICOS_ENTITY_TYPE[type];
   const dataFieldName = TO_RICOS_DATA_FIELD[draftPluginType];
-  return convertNodeDataToDraft(type, node[dataFieldName]);
+  if (!dataFieldName) {
+    console.error(`No data field name | Plugin Name: ${draftPluginType}`);
+  }
+  return convertNodeDataToDraft(type, node[dataFieldName] || {});
 };
 
 export const convertDecorationToDraftData = (decoration: Decoration) => {
@@ -37,6 +40,10 @@ export const convertDecorationToDraftData = (decoration: Decoration) => {
 };
 
 export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
+  if (!data) {
+    console.error(`No data for ${nodeType}`);
+    return {};
+  }
   const newData = cloneDeep(data);
   const converters = {
     [Node_Type.VIDEO]: convertVideoData,
@@ -49,6 +56,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
     [Node_Type.MAP]: convertMapData,
+    [Node_Type.EMBED]: convertEmbedData,
   };
   if (newData.containerData && nodeType !== Node_Type.DIVIDER) {
     convertContainerData(newData, nodeType);
@@ -62,7 +70,8 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
 
 export const convertDecorationDataToDraft = (decorationType: Decoration_Type, data) => {
   const converters = {
-    [Decoration_Type.MENTION]: convertMention,
+    [Decoration_Type.MENTION]: convertMentionData,
+    [Decoration_Type.LINK]: convertLinkData,
   };
   if (decorationType in converters) {
     const convert = converters[decorationType];
@@ -95,18 +104,18 @@ const convertContainerData = (
   );
   if (nodeType === Node_Type.IMAGE && width?.custom) {
     data.config.size = 'inline';
-  } else if ((nodeType === Node_Type.MAP || nodeType === Node_Type.LINK_PREVIEW) && width?.custom) {
+  } else if (nodeType === Node_Type.MAP && width?.custom) {
     data.config.size = 'content';
   }
   delete data.containerData;
 };
 
-const convertVideoData = (data: VideoData & { src; metadata }) => {
+const convertVideoData = (data: VideoData & { src; metadata; title? }) => {
   const videoSrc = data.video?.src;
   if (videoSrc?.url) {
     data.src = videoSrc.url;
     const { src, width, height } = data.thumbnail || {};
-    data.metadata = { thumbnail_url: src?.url, width, height };
+    data.metadata = { thumbnail_url: src?.url, width, height, title: data.title };
   } else if (videoSrc?.custom) {
     const { src, width, height } = data.thumbnail || {};
     data.src = {
@@ -115,16 +124,19 @@ const convertVideoData = (data: VideoData & { src; metadata }) => {
     };
   }
   delete data.video;
+  delete data.title;
   delete data.thumbnail;
 };
 
 const convertDividerData = (
   data: Partial<DividerData> & {
     type;
+    lineStyle?: string;
     config?: ComponentData['config'];
   }
 ) => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.type = data.lineStyle?.toLowerCase();
+  delete data.lineStyle;
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
     data.config.size = data.width?.toLowerCase();
@@ -138,13 +150,12 @@ const convertDividerData = (
 };
 
 const convertImageData = (data: ImageData & { src; config; metadata }) => {
-  const { link, config, disableExpand, image, altText, caption } = data;
+  const { link, config, image, altText, caption } = data;
   const { src, width, height } = image || {};
   data.src = { id: src?.custom, file_name: src?.custom, width, height };
-  const links = link?.anchor ? { anchor: link?.anchor } : { link: link && convertLink(link) };
-  data.config = { ...(config || {}), ...links, disableExpand };
+  const links = link?.anchor ? { anchor: link?.anchor } : { link: link && parseLink(link) };
+  data.config = { ...(config || {}), ...links };
   data.metadata = (altText || caption) && { caption, alt: altText };
-  delete data.disableExpand;
   delete data.image;
   delete data.link;
   delete data.caption;
@@ -169,12 +180,12 @@ const convertLinkPreviewData = data => {
     delete data.thumbnailUrl;
   }
   if (has(data, 'link')) {
-    data.config.link = convertLink(data.link);
+    data.config.link = parseLink(data.link);
     delete data.link;
   }
 };
 
-const convertMention = (data: Partial<MentionData> & { mention }) => {
+const convertMentionData = (data: Partial<MentionData> & { mention }) => {
   data.mention = { slug: data.slug, name: data.name };
   delete data.name;
   delete data.slug;
@@ -190,11 +201,11 @@ const convertFileData = (data: FileData & FileComponentData) => {
 const convertButtonData = (data: Partial<ButtonData> & { button }) => {
   const { link, text, styles } = data;
   const { borderRadius, borderWidth, backgroundColor, textColor, borderColor } = styles || {};
-  const { url, rel, target } = link || {};
+  const convertedLink = link ? parseLink(link) : {};
   data.button = {
     settings: {
       buttonText: text,
-      ...(url ? { url, rel: !!rel?.nofollow, target: target === Link_Target.BLANK } : {}),
+      ...convertedLink,
     },
     design: {
       borderRadius,
@@ -251,7 +262,33 @@ const convertMapData = data => {
   }
 };
 
-const convertLink = ({
+const convertEmbedData = data => {
+  data.config = {
+    ...(data?.config || {}),
+    alignment: 'center',
+    size: 'content',
+    link: { url: data.src, target: '_blank', rel: 'noopener' },
+  };
+  const { html, thumbnailUrl, title, description } = data.oembed;
+  data.html = html;
+  thumbnailUrl && (data.thumbnail_url = thumbnailUrl);
+  title && (data.title = title);
+  description && (data.description = description);
+  delete data.oembed;
+  delete data.src;
+};
+
+const convertLinkData = (data: LinkData & { url?: string; target?: string; rel?: string }) => {
+  if (data.link) {
+    const { url, target, rel } = parseLink(data.link);
+    data.url = url;
+    if (target) data.target = target;
+    if (rel) data.rel = rel;
+    delete data.link;
+  }
+};
+
+const parseLink = ({
   url,
   rel,
   target,

@@ -1,0 +1,67 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.checkbox_input {
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+}
+
+.checkbox {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 12px;
+}
+.checkbox_wrapper {
+  display: flex;
+}
+.checkbox_inputLabel:hover .checkbox_icon_unchecked {
+  background-color: rgba($settings-action-color-fallback-tuple, 0.2);
+}
+.checkbox_icon {
+  width: 16px;
+  height: 16px;
+  padding: 3px 2px;
+  border-radius: 3px;
+  background-color: #fff;
+  border: solid 1px $settings-action-color-fallback;
+  display: inline-block;
+  vertical-align: text-bottom;
+  color: #fff;
+  box-sizing: border-box;
+
+  &:hover {
+    color: rgba($settings-action-color-fallback-tuple, 0.1);
+  }
+
+  .checkbox_input:focus + & {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color; // for WebKit
+  }
+}
+
+.checkbox_infoIcon {
+  vertical-align: text-bottom;
+  height: 19px;
+  padding-top: 2px;
+  &:hover {
+    color: $settings-action-color-fallback;
+  }
+}
+
+.checkbox_icon_checked {
+  background-color: $settings-action-color-fallback;
+}
+
+.checkbox_check {
+  width: 10px;
+  height: 8px;
+  display: block;
+}
+
+.checkbox_label {
+  margin-left: 12px;
+}
+
+// *:focus,
+.focused {
+}

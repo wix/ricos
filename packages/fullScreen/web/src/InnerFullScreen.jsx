@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
-import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
+import {
+  layoutData,
+  GALLERY_LAYOUTS,
+} from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -15,6 +18,7 @@ export default class InnerFullscreen extends Component {
     this.state = { isInFullscreen: false };
     this.getItems();
     this.containerRef = React.createRef();
+    this.currentIdx = props.index;
   }
 
   static defaultProps = {
@@ -179,12 +183,13 @@ export default class InnerFullscreen extends Component {
     return { width, height };
   };
 
+  handleContextMenu = e => this.items[this.currentIdx].disableDownload && e.preventDefault();
+
   render() {
-    const { backgroundColor, topMargin, isMobile, index } = this.props;
+    const { backgroundColor, topMargin, isMobile } = this.props;
     const { isInFullscreen, size } = this.state;
     const isHorizontalView = size?.width > size?.height;
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams(isHorizontalView);
-
     return (
       <div
         style={{ background: backgroundColor, ...topMargin }}
@@ -192,19 +197,21 @@ export default class InnerFullscreen extends Component {
         data-hook={'fullscreen-root'}
         className={isInFullscreen || isMobile ? styles.fullscreen_mode : styles.expand_mode}
         ref={this.containerRef}
+        onContextMenu={this.handleContextMenu}
+        role="none"
       >
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
         {size && (
           <ProGallery
             items={this.items}
-            currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
+            currentIdx={this.currentIdx}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={fullscreenResizeMediaUrl}
             container={size}
-            styles={{
-              ...layouts[5],
-              galleryLayout: 5,
+            options={{
+              ...layoutData[GALLERY_LAYOUTS.SLIDESHOW],
+              galleryLayout: GALLERY_LAYOUTS.SLIDESHOW,
               cubeType: 'fit',
               scrollSnap: true,
               videoPlay: 'auto',
@@ -215,6 +222,7 @@ export default class InnerFullscreen extends Component {
               showArrows: !isMobile,
               arrowsPosition,
               slideshowInfoSize,
+              allowContextMenu: true,
             }}
             customSlideshowInfoRenderer={this.infoElement}
             customNavArrowsRenderer={this.customArrowRenderer}

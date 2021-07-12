@@ -137,27 +137,27 @@ const html: string = toHtml(ricosContent);
 document.body.innerHTML = html;
 ```
 
-## ProseMirror
+## Tiptap
 
-The following functions allow converting rich content to and from ProseMirror.
+The following functions allow converting rich content to and from Tiptap.
 
 ### HTML to rich content
 
 ```tsx
-fromProseMirror: (content: ProseContent) => RichContent;
-fromProseMirror: (node: ProseContent) => Node; // Convert a single node
-fromProseMirror: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
+fromTiptap: (content: ProseContent) => RichContent;
+fromTiptap: (node: ProseContent) => Node; // Convert a single node
+fromTiptap: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
 ```
 
 #### Example
 
 ```tsx
-import { fromProseMirror } from 'ricos-content/libs/converters';
+import { fromTiptap } from 'ricos-content/libs/converters';
 import { RichContent } from 'ricos-schema';
 import { RicosEditor, DraftContent } from 'ricos-editor';
 import proseContent from './proseContent.json';
 
-const content: RichContent = fromProseMirror(proseContent);
+const content: RichContent = fromTiptap(proseContent);
 const draftContent: DraftContent = toDraft(content);
 
 <RicosEditor content={draftContent} />;
@@ -166,16 +166,16 @@ const draftContent: DraftContent = toDraft(content);
 ### Rich content to plain text
 
 ```tsx
-toProseMirror: (content: RichContent) => ProseContent;
-toProseMirror: (node: Node) => ProseContent; // Convert a single node
-toProseMirror: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
+toTiptap: (content: RichContent) => ProseContent;
+toTiptap: (node: Node) => ProseContent; // Convert a single node
+toTiptap: (data: Record<string, any>) => Record<string, any>; // Convert a node's data
 ```
 
 #### Example
 
 ```tsx
-import { toProseMirror } from 'ricos-content/libs/converters';
+import { toTiptap } from 'ricos-content/libs/converters';
 import ricosContent from './ricosCotnent.json';
 
-const content: ProseContent = toProseMirror(ricosContent);
+const content: ProseContent = toTiptap(ricosContent);
 ```

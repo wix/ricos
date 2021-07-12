@@ -1,5 +1,5 @@
 import React, { Component, MouseEventHandler } from 'react';
-import { FileInput } from 'wix-rich-content-plugin-commons';
+import { FileInput } from 'wix-rich-content-ui-components';
 import { BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-editor-common';
 import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
@@ -7,6 +7,7 @@ import VideoCamera from 'wix-ui-icons-common/VideoCamera';
 import styles from './InitialIntentToolbar.scss';
 
 class InitialIntentToolbar extends Component<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   buttons?: any;
   onClick: MouseEventHandler;
 }> {

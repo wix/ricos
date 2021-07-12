@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { ReactElement } from 'react';
+import React, { ReactElement, Suspense } from 'react';
 import { getTooltipStyles } from './tooltipStyles';
-import ToolTip from 'react-portal-tooltip';
 import { GlobalContext } from '../src/Utils/contexts';
 
 declare global {
@@ -19,6 +18,8 @@ interface Props {
   followMouse?: boolean;
   hideArrow?: boolean;
 }
+
+const ToolTipComponent = React.lazy(() => import('react-portal-tooltip'));
 
 class Tooltip extends React.Component<Props> {
   static defaultProps = {
@@ -113,16 +114,18 @@ class Tooltip extends React.Component<Props> {
       <>
         {React.cloneElement(React.Children.only(children), elementProps)}
         {tooltipVisible ? (
-          <ToolTip
-            active={tooltipVisible}
-            parent={'[data-tooltipid=true]'}
-            position={place}
-            arrow={!hideArrow ? 'center' : null}
-            style={style}
-            tooltipTimeout={10}
-          >
-            {content}
-          </ToolTip>
+          <Suspense fallback={<div />}>
+            <ToolTipComponent
+              active={tooltipVisible}
+              parent={'[data-tooltipid=true]'}
+              position={place}
+              arrow={!hideArrow ? 'center' : null}
+              style={style}
+              tooltipTimeout={10}
+            >
+              {content}
+            </ToolTipComponent>
+          </Suspense>
         ) : null}
       </>
     );

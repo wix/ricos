@@ -9,6 +9,7 @@ import {
   parseTextNodes,
   parseVerticalEmbed,
   parseVideo,
+  parseEmbed,
 } from './convertNodes';
 
 interface PlainTextOptions {
@@ -33,7 +34,7 @@ export const toPlainText = async (
         plainText += delimiter;
       }
       switch (node.type) {
-        case Node_Type.CODEBLOCK:
+        case Node_Type.CODE_BLOCK:
         case Node_Type.PARAGRAPH:
         case Node_Type.HEADING:
           plainText += parseTextNodes(node);
@@ -49,7 +50,7 @@ export const toPlainText = async (
           plainText += await parseImage(node, delimiter, urlShortener);
           break;
         case Node_Type.VIDEO:
-          plainText += await parseVideo(node, getVideoUrl);
+          plainText += await parseVideo(node, delimiter, getVideoUrl);
           break;
         case Node_Type.GIPHY:
           plainText += parseGiphy(node);
@@ -62,6 +63,9 @@ export const toPlainText = async (
           break;
         case Node_Type.LINK_PREVIEW:
           plainText += parseLinkPreview(node);
+          break;
+        case Node_Type.EMBED:
+          plainText += parseEmbed(node);
           break;
         default:
       }

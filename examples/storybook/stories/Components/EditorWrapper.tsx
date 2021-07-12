@@ -18,7 +18,7 @@ import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list';
 import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
@@ -91,7 +91,7 @@ const plugins = [
   pluginDivider(),
   pluginHeadings(),
   pluginSpoiler(),
-  pluginAccordion({
+  pluginCollapsibleList({
     innerRCEPlugins: [
       pluginTextColor().createPlugin,
       pluginTextHighlight().createPlugin,
@@ -164,7 +164,7 @@ const pluginsMap = {
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
   spoiler: pluginSpoiler(),
-  accordion: pluginAccordion(),
+  collapsibleList: pluginCollapsibleList(),
   table: pluginTable(),
   highlight: pluginTextHighlight(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
@@ -198,6 +198,10 @@ interface Props {
   onBlur?: RichContentEditorProps['onBlur'];
   onFocus?: RichContentEditorProps['onFocus'];
   theme?: RicosTheme;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rcProps?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  experiments?: Record<string, any>;
 }
 
 class EditorWrapper extends React.Component<Props> {
@@ -205,6 +209,7 @@ class EditorWrapper extends React.Component<Props> {
     isMobile: mobileDetect.mobile() !== null,
     toolbarSettings: { getToolbarSettings },
   };
+
   editor: RicosEditorType;
 
   getToolbarProps = type => this.editor.getToolbarProps(type);
@@ -223,6 +228,8 @@ class EditorWrapper extends React.Component<Props> {
       toolbarSettings,
       onBlur,
       onFocus,
+      rcProps = {},
+      experiments,
     } = this.props;
 
     return (
@@ -236,6 +243,8 @@ class EditorWrapper extends React.Component<Props> {
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
+        experiments={experiments}
+        _rcProps={rcProps}
       >
         <RichContentEditor
           onFocus={onFocus}

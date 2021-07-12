@@ -57,15 +57,15 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should undo and redo accordion plugin customizations', function() {
+    it('should undo and redo collapsible list plugin customizations', function() {
       cy.loadRicosEditorAndViewer('empty', {
         ...useExperiments({ UseUndoForPlugins: { enabled: true } }),
         ...usePlugins(plugins.all),
       });
-      cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ACCORDION, { force: true });
-      cy.focusAccordion(0).type('Yes ');
-      cy.addAccordionPair();
-      cy.focusAccordion(1).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.COLLAPSIBLE_LIST, { force: true });
+      cy.focusCollapsibleList(0).type('Yes ');
+      cy.addCollapsibleListPair();
+      cy.focusCollapsibleList(1).insertPluginFromSideToolbar('ImagePlugin_InsertButton');
       cy.wait(1000);
       cy.undo();
       cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`).should('not.exist');
@@ -81,9 +81,9 @@ describe('plugins', () => {
       cy.undo();
       cy.get('.public-DraftStyleDefault-block > span').should('not.have.text', 'Yes');
       cy.undo();
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('not.exist');
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.COLLAPSIBLE_LIST}]:first`).should('not.exist');
       cy.redo();
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.ACCORDION}]:first`).should('exist');
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.COLLAPSIBLE_LIST}]:first`).should('exist');
       cy.redo();
       cy.get('.public-DraftStyleDefault-block > span').should('have.text', 'Y');
       cy.redo();

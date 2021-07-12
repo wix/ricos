@@ -11,13 +11,11 @@ const ImagePluginStory = () => {
   const [viewerKey, setViewerKey] = useState(1);
 
   const experiments = parseExperiments({
-    ['specs.ricos.useQualityPreload']: 'true',
-    ['specs.ricos.useSrcSet']: 'true',
+    'specs.ricos.useQualityPreload': 'true',
+    'specs.ricos.useSrcSet': 'true',
   });
+  // eslint-disable-next-line no-console
   console.log({ experiments });
-  const _rcProps = {
-    experiments,
-  };
 
   return (
     <Page title="Image Plugin With Thumbnail experiment">
@@ -34,7 +32,7 @@ const ImagePluginStory = () => {
           key={viewerKey}
           content={imageContentState}
           plugins={[pluginImage()]}
-          {...(experimentEnabled && { _rcProps })}
+          {...(experimentEnabled && { experiments })}
         />
       </div>
     </Page>

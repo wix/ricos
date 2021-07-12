@@ -16,10 +16,11 @@ import {
   ACTION_BUTTON_TYPE,
   IMAGE_TYPE_LEGACY,
   SPOILER_TYPE,
-  ACCORDION_TYPE,
+  COLLAPSIBLE_LIST_TYPE,
   VIDEO_TYPE_LEGACY,
   TABLE_TYPE,
   ANCHOR_TYPE,
+  EMBED_TYPE,
 } from '../../consts';
 import { Decoration_Type, Node_Type } from 'ricos-schema';
 
@@ -66,7 +67,7 @@ export const TO_RICOS_NODE_TYPE = {
   [HTML_TYPE]: Node_Type.HTML,
   [IMAGE_TYPE]: Node_Type.IMAGE,
   [IMAGE_TYPE_LEGACY]: Node_Type.IMAGE,
-  [ACCORDION_TYPE]: Node_Type.ACCORDION,
+  [COLLAPSIBLE_LIST_TYPE]: Node_Type.COLLAPSIBLE_LIST,
   [LINK_PREVIEW_TYPE]: Node_Type.LINK_PREVIEW,
   [MAP_TYPE]: Node_Type.MAP,
   [VERTICAL_EMBED_TYPE]: Node_Type.VERTICAL_EMBED,
@@ -74,6 +75,7 @@ export const TO_RICOS_NODE_TYPE = {
   [VIDEO_TYPE_LEGACY]: Node_Type.VIDEO,
   [POLL_TYPE]: Node_Type.POLL,
   [TABLE_TYPE]: Node_Type.TABLE,
+  [EMBED_TYPE]: Node_Type.EMBED,
 };
 
 const DUPLICATE_KEYS = [IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
@@ -120,7 +122,7 @@ export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
   [Node_Type.GIPHY]: 'giphyData',
   [Node_Type.HTML]: 'htmlData',
   [Node_Type.IMAGE]: 'imageData',
-  [Node_Type.ACCORDION]: 'accordionData',
+  [Node_Type.COLLAPSIBLE_LIST]: 'collapsibleListData',
   [Node_Type.LINK_PREVIEW]: 'linkPreviewData',
   [Node_Type.MAP]: 'mapData',
   [Node_Type.VERTICAL_EMBED]: 'verticalEmbedData',
@@ -130,8 +132,9 @@ export const RICOS_NODE_TYPE_TO_DATA_FIELD = {
   [Node_Type.PARAGRAPH]: 'paragraphData',
   [Node_Type.LIST_ITEM]: 'paragraphData',
   [Node_Type.HEADING]: 'headingData',
-  [Node_Type.CODEBLOCK]: 'codeData',
+  [Node_Type.CODE_BLOCK]: 'codeBlockData',
   [Node_Type.BLOCKQUOTE]: 'paragraphData',
+  [Node_Type.EMBED]: 'embedData',
 } as const;
 
 export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
@@ -144,11 +147,11 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
   [BlockType.HeaderFour]: 'headingData',
   [BlockType.HeaderFive]: 'headingData',
   [BlockType.HeaderSix]: 'headingData',
-  [BlockType.CodeBlock]: 'codeData',
+  [BlockType.CodeBlock]: 'codeBlockData',
   [BlockType.Blockquote]: 'paragraphData',
 };
 
-// Node_Type.IMAGE: imageData
+// IMAGE_TYPE: imageData
 const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = Object.fromEntries(
   Object.entries(TO_RICOS_NODE_TYPE).map(([key, value]) => [
     key,

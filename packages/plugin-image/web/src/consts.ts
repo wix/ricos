@@ -4,9 +4,9 @@ export const DEFAULTS = Object.freeze({
     size: 'content',
     showTitle: true,
     showDescription: true,
-    disableExpand: false,
   },
 });
 
 export const SMALL_SIZE_WIDTH = 350;
 export const SEO_IMAGE_WIDTH = 1000;
+export const DIVIDER = 'divider';

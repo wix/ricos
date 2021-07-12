@@ -12,7 +12,7 @@ maven
 stats.html
 .env
 applitools.private.config.js
-
+tsconfig.tsbuildinfo
 
 #Webstorm
 **/.idea/*
@@ -49,3 +49,4 @@ applitools.config.js
 
 # Generated Merged Translations
 packages/common/web/statics/locale
+.ultraignore

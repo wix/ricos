@@ -11,6 +11,8 @@ import {
   ViewerPlugin,
   onAtomicBlockFocus,
   CustomAnchorScroll,
+  Link_Rel,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -31,11 +33,13 @@ export interface RicosProps {
   isMobile?: boolean;
   linkSettings?: LinkSettings;
   locale?: string;
+  localeContent?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
   onAtomicBlockFocus?: onAtomicBlockFocus;
+  experiments?: AvailableExperiments;
   /* Changes to this interface should also be reflected in the API docs */
 }
 
@@ -126,6 +130,7 @@ export interface MediaSettings {
 export interface LinkSettings {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
+  rel?: Link_Rel;
   customAnchorScroll?: CustomAnchorScroll;
 }
 

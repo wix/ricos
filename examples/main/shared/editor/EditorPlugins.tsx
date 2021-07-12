@@ -94,10 +94,10 @@ import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin, pluginIndent, INDENT_TYPE } from 'wix-rich-content-plugin-indent';
 import { createTablePlugin, pluginTable, TABLE_TYPE } from 'wix-rich-content-plugin-table';
 import {
-  createAccordionPlugin,
-  ACCORDION_TYPE,
-  pluginAccordion,
-} from 'wix-rich-content-plugin-accordion';
+  createCollapsibleListPlugin,
+  COLLAPSIBLE_LIST_TYPE,
+  pluginCollapsibleList,
+} from 'wix-rich-content-plugin-collapsible-list';
 import {
   createUnsupportedBlocksPlugin,
   pluginUnsupportedBlocks,
@@ -130,7 +130,7 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
-import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
 import 'wix-rich-content-plugin-unsupported-blocks/dist/styles.min.css';
 
 import {
@@ -188,7 +188,7 @@ export const ricosEditorPlugins: Record<string, EditorPluginCreator<unknown>> = 
   [INDENT_TYPE]: pluginIndent,
   [ACTION_BUTTON_TYPE]: pluginActionButton,
   [POLL_TYPE]: pluginPoll,
-  [ACCORDION_TYPE]: pluginAccordion,
+  [COLLAPSIBLE_LIST_TYPE]: pluginCollapsibleList,
   [TABLE_TYPE]: pluginTable,
 };
 
@@ -242,7 +242,7 @@ export const editorPlugins: CreatePluginFunction[] = [
   createIndentPlugin,
   createActionButtonPlugin,
   createPollPlugin,
-  createAccordionPlugin,
+  createCollapsibleListPlugin,
   createTablePlugin,
   ...editorPluginsPartialPreset,
 ];
@@ -274,7 +274,7 @@ export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePlugi
   undoRedo: createUndoRedoPlugin,
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
-  accordion: createAccordionPlugin,
+  collapsibleList: createCollapsibleListPlugin,
   table: createTablePlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
@@ -283,6 +283,23 @@ export const editorPluginsMap: Record<string, CreatePluginFunction | CreatePlugi
   all: editorPlugins,
   unsupportedBlocks: createUnsupportedBlocksPlugin,
 };
+
+const innerRCEPlugins = [
+  createTextColorPlugin,
+  createTextHighlightPlugin,
+  createIndentPlugin,
+  createLineSpacingPlugin,
+  createLinkPlugin,
+  createImagePlugin,
+  createVideoPlugin,
+  createGiphyPlugin,
+  createEmojiPlugin,
+  createFileUploadPlugin,
+  createDividerPlugin,
+  createCodeBlockPlugin,
+  createUnsupportedBlocksPlugin,
+  createSpoilerPlugin,
+];
 
 const buttonDefaultPalette = ['#FEFDFD', '#D5D4D4', '#ABCAFF', '#81B0FF', '#0261FF', '#0141AA'];
 let userButtonTextColors = [...buttonDefaultPalette];
@@ -352,9 +369,12 @@ let userColors = [];
 
 export const uiSettings: UISettings = {
   linkPanel: {
-    externalPopups: true,
-    blankTargetToggleVisibilityFn: () => true,
-    nofollowRelToggleVisibilityFn: () => true,
+    externalPopups: false,
+    // blankTargetToggleVisibilityFn: () => true, // deprecated
+    // nofollowRelToggleVisibilityFn: () => true, // deprecated
+    showNewTabCheckbox: true,
+    showNoFollowCheckbox: true,
+    showSponsoredCheckbox: true,
     dropDown: getLinkPanelDropDownConfig(),
     //placeholder: "Enter a URL here",
   },
@@ -494,32 +514,9 @@ const config: RichContentEditorProps['config'] = {
     //   },
     // },
     // },
-    innerRCEPlugins: [
-      createTextColorPlugin,
-      createLineSpacingPlugin,
-      createDividerPlugin,
-      createEmojiPlugin,
-      createMapPlugin,
-      createUnsupportedBlocksPlugin,
-    ],
   },
   [TABLE_TYPE]: {
-    innerRCEPlugins: [
-      createTextColorPlugin,
-      createTextHighlightPlugin,
-      createIndentPlugin,
-      createLineSpacingPlugin,
-      createLinkPlugin,
-      createImagePlugin,
-      createVideoPlugin,
-      createGiphyPlugin,
-      createEmojiPlugin,
-      createFileUploadPlugin,
-      createDividerPlugin,
-      createCodeBlockPlugin,
-      createUnsupportedBlocksPlugin,
-      createSpoilerPlugin,
-    ],
+    innerRCEPlugins,
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -574,22 +571,8 @@ const config: RichContentEditorProps['config'] = {
         )
       ),
   },
-  [ACCORDION_TYPE]: {
-    innerRCEPlugins: [
-      createTextColorPlugin,
-      createTextHighlightPlugin,
-      createIndentPlugin,
-      createLineSpacingPlugin,
-      createLinkPlugin,
-      createCodeBlockPlugin,
-      createImagePlugin,
-      createVideoPlugin,
-      createDividerPlugin,
-      createGiphyPlugin,
-      createFileUploadPlugin,
-      createEmojiPlugin,
-      createUnsupportedBlocksPlugin,
-    ],
+  [COLLAPSIBLE_LIST_TYPE]: {
+    innerRCEPlugins,
   },
   [HEADINGS_DROPDOWN_TYPE]: {
     // customHeadings: ['H2', 'H3'],

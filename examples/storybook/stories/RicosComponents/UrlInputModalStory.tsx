@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UrlInputModal, MODAL_CONTROLS_POSITION } from 'wix-rich-content-plugin-commons';
+import { UrlInputModal, MODAL_CONTROLS_POSITION } from 'wix-rich-content-ui-components';
 import { Section, Page } from '../Components/StoryParts';
 import styles from './TextInputStory.scss';
 import { Dropdown } from 'wix-style-react';
@@ -13,7 +13,9 @@ const UrlInputModalWrapper = ({ children, ...props }) => {
   const [input, setInput] = useState('');
   return (
     <UrlInputModal
+      // eslint-disable-next-line no-console
       save={() => console.log('Save!')}
+      // eslint-disable-next-line no-console
       cancel={() => console.log('Cancel!')}
       placeholder={placeholder}
       t={x => trans[x] || x}
@@ -32,11 +34,11 @@ const UrlInputModalDesktop = () => {
     <Page title="URL Input Modal">
       <Section>
         <div className={styles.container} dir="ltr">
-          <div>import {'{ UrlInputModal }'} from 'wix-rich-content-plugin-commons';</div>
+          <div>import {'{ UrlInputModal }'} from &apos;wix-rich-content-plugin-commons&apos;;</div>
           <div className={styles.section}>
             <div style={{ border: '1px dashed pink', position: 'relative' }}>
               <UrlInputModalWrapper title={'Default URL input modal'}>
-                <div>I'm the inner content, you can place here whatever you like</div>
+                <div>I&apos;m the inner content, you can place here whatever you like</div>
               </UrlInputModalWrapper>
             </div>
           </div>
@@ -68,7 +70,7 @@ const UrlInputModalMobile = () => {
         t={x => trans[x] || x}
       >
         <div>
-          <div>I'm the inner content - select an options to change controlsPosition</div>
+          <div>I&apos;m the inner content - select an options to change controlsPosition</div>
           <div>{controlsPosValue}</div>
           <Dropdown
             initialSelectedId={initialId}

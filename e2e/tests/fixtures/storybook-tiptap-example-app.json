@@ -1,0 +1,106 @@
+{
+  "blocks": [
+    {
+      "key": "81ob3",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "dynamicStyles": {
+          "line-height": "20px"
+        }
+      }
+    },
+    {
+      "key": "1uttj",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "7n447",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "6hrme",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 1
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "8p260",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-divider",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "type": "single",
+        "config": {
+          "size": "large",
+          "alignment": "center",
+          "textWrap": "nowrap"
+        }
+      }
+    },
+    "1": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "showTitle": true,
+          "showDescription": true,
+          "disableExpand": false,
+          "spoiler": {
+            "enabled": false,
+            "description": "ffd"
+          }
+        },
+        "disableExpand": false,
+        "src": {
+          "id": "0db65a80624a2e0b8c71e553b6f4b3f6",
+          "original_file_name": "8bb438_f4f7fa31c5364557af0da7c4fd543cc9.jpg",
+          "file_name": "8bb438_f4f7fa31c5364557af0da7c4fd543cc9.jpg",
+          "width": 5600,
+          "height": 3737
+        },
+        "disableDownload": false
+      }
+    }
+  },
+  "VERSION": "8.45.2"
+}

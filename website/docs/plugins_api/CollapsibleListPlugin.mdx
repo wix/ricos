@@ -1,0 +1,58 @@
+---
+id: CollapsibleListPlugin
+title: Collapsible List Plugin
+sidebar_label: CollapsibleList Plugin
+---
+
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+CollapsibleList plugin allows the user to add super cool collpasible list!
+
+<div className="card collapsibleListPlugin">
+  <RicosEditorWithMobile
+    content={createContent('Add a collapsible list!')}
+    placeholder={'Type here!'}
+    plugins={[pluginCollapsibleList()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
+<RicosEditor plugins={[pluginCollapsibleList()]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginCollapsibleList } from 'wix-rich-content-plugin-collapsible-list/dist/module.viewer';
+import 'wix-rich-content-plugin-collapsible-list/dist/styles.min.css';
+<RicosViewer plugins={[pluginCollapsibleList()]} />;
+```
+
+### Currently supported plugins
+
+For now, these are the plugins that are supported in the collapsible list and can be added when editing a cell:
+
+1. Text color
+2. Text highlight
+3. Indent
+4. Line spacing
+5. Link
+6. Image
+7. Video
+8. Gif
+9. Emoji
+10. File upload
+11. Divider
+12. Code block
+13. Unsupported blocks
+14. Spoiler

@@ -116,7 +116,8 @@ exports[`plugins > image > render image toolbar and settings #0`] =
           },
           "showDescription": true,
           "showTitle": true,
-          "size": "fullWidth"
+          "size": "fullWidth",
+          "spoiler": {}
         },
         "metadata": {
           "caption": ""
@@ -409,6 +410,7 @@ exports[`plugins > full screen > gallery full screen > expand gallery image on f
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -568,6 +570,7 @@ exports[`plugins > gallery > render gallery plugin #0`] =
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -710,6 +713,7 @@ exports[`plugins > gallery > organize media > allow to manipulate the media item
         },
         "items": [],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -852,6 +856,7 @@ exports[`plugins > gallery > media settings > allow to update media content #0`]
         },
         "items": [],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -2643,6 +2648,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowDownload": false,
           "allowHover": true,
           "allowSocial": false,
@@ -3765,7 +3771,7 @@ exports[`plugins > convert link to preview > should embed link that supports emb
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -4468,7 +4474,7 @@ exports[`plugins > convert link to preview > with default config > should create
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.wix.com"
           },
@@ -4527,7 +4533,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -4889,7 +4895,7 @@ exports[`plugins > social embed > render twitter upload modals #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -4947,7 +4953,7 @@ exports[`plugins > social embed > render instagram upload modals #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
+            "rel": "",
             "target": "_blank",
             "url": "www.mockUrl.com"
           },
@@ -5198,6 +5204,7 @@ exports[`plugins > spoiler > check text spoilers in editor and reveal it in view
   "entityMap": {
     "0": {
       "data": {
+        "rel": "",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -5326,6 +5333,8 @@ exports[`plugins > spoiler > check spoilers on an image in editor and reveal it 
             "enabled": true
           }
         },
+        "disableDownload": false,
+        "disableExpand": false,
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
           "height": 3354,
@@ -5452,6 +5461,8 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
             "enabled": true
           }
         },
+        "disableDownload": false,
+        "disableExpand": false,
         "items": [
           {
             "itemId": "65a6266ba23a8a55da3f469157f15237",
@@ -5471,29 +5482,14 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
           }
         ],
         "styles": {
+          "allowContextMenu": true,
           "allowHover": true,
-          "cropOnlyFill": false,
-          "cubeImages": true,
-          "cubeRatio": 1,
+          "arrowsSize": 23,
           "cubeType": "fill",
-          "enableScroll": false,
           "floatingImages": 0,
           "galleryLayout": 9,
-          "galleryMargin": 0,
-          "galleryThumbnailsAlignment": "none",
-          "galleryType": "Strips",
-          "groupSize": 1,
-          "groupTypes": "1",
-          "hasThumbnails": false,
-          "imageMargin": 0,
-          "isColumns": false,
-          "isGrid": false,
-          "isSlider": false,
-          "isSlideshow": false,
-          "isVertical": false,
-          "oneRow": true,
           "showArrows": true,
-          "smartCrop": false
+          "slideshowInfoSize": 0
         }
       },
       "mutability": "IMMUTABLE",
@@ -6173,7 +6169,7 @@ exports[`plugins > html > render html plugin with url #0`] =
   }
 };
 
-exports[`plugins > accordion > should change accordion settings #0`] =
+exports[`plugins > collapsible list > should change collapsible list settings #0`] =
 {
   "blocks": [
     {
@@ -6655,12 +6651,12 @@ exports[`plugins > accordion > should change accordion settings #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should focus & type #0`] =
+exports[`plugins > collapsible list > should focus & type #0`] =
 {
   "blocks": [
     {
@@ -6771,12 +6767,12 @@ exports[`plugins > accordion > should focus & type #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should collapse first pair #0`] =
+exports[`plugins > collapsible list > should collapse first pair #0`] =
 {
   "blocks": [
     {
@@ -6887,12 +6883,12 @@ exports[`plugins > accordion > should collapse first pair #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should have only one expanded pair #0`] =
+exports[`plugins > collapsible list > should have only one expanded pair #0`] =
 {
   "blocks": [
     {
@@ -7003,12 +6999,12 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
 
-exports[`plugins > accordion > should delete second pair #0`] =
+exports[`plugins > collapsible list > should delete second pair #0`] =
 {
   "blocks": [
     {
@@ -7088,7 +7084,7 @@ exports[`plugins > accordion > should delete second pair #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };
@@ -7109,7 +7105,7 @@ exports[`plugins > Headers markdown > Should render header-two #0`] =
   "entityMap": {}
 };
 
-exports[`plugins > accordion > should insert image in accordion #0`] =
+exports[`plugins > collapsible list > should insert image in collapsible list #0`] =
 {
   "blocks": [
     {
@@ -7164,7 +7160,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": 0,
-                  "text": "Image in accordion",
+                  "text": "Image in collapsible list",
                   "type": "unstyled"
                 },
                 {
@@ -7197,12 +7193,10 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                   "data": {
                     "config": {
                       "alignment": "center",
-                      "disableExpand": false,
                       "showDescription": true,
                       "showTitle": true,
                       "size": "content"
                     },
-                    "disableExpand": false,
                     "src": {
                       "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
                       "height": 1000,
@@ -7266,7 +7260,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
         ]
       },
       "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
+      "type": "wix-rich-content-plugin-collapsible-list"
     }
   }
 };

@@ -196,7 +196,6 @@ export default {
                             size: 'inline',
                             showTitle: true,
                             showDescription: true,
-                            disableExpand: false,
                             width: 184,
                           },
                           src: {
@@ -230,7 +229,6 @@ export default {
           size: 'content',
           layout: 'small',
           spacing: 0,
-          disableExpand: false,
         },
         items: [
           {
@@ -302,7 +300,6 @@ export default {
           size: 'inline',
           showTitle: true,
           showDescription: true,
-          disableExpand: false,
           width: 380,
         },
         src: {
@@ -315,7 +312,7 @@ export default {
       },
     },
     '3': {
-      type: 'wix-rich-content-plugin-accordion',
+      type: 'wix-rich-content-plugin-collapsible-list',
       mutability: 'IMMUTABLE',
       data: {
         config: {
@@ -386,7 +383,6 @@ export default {
                       size: 'inline',
                       showTitle: true,
                       showDescription: true,
-                      disableExpand: false,
                       width: 295,
                     },
                     src: {
@@ -463,7 +459,6 @@ export default {
                       size: 'inline',
                       showTitle: true,
                       showDescription: true,
-                      disableExpand: false,
                       width: 320,
                     },
                     src: {

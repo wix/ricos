@@ -30,8 +30,10 @@ const mappings = {
   }: {
     disableState?: boolean;
     isDisabled?: () => boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }) => <FormattingDropdownButton {...rest} isDisabled={() => disableState || isDisabled()} />,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [BUTTON_TYPES.GROUP]: ({ buttonList, ...rest }: { buttonList?: any[]; [key: string]: any }) => {
     return (
       <FormattingGroupButton
@@ -70,6 +72,7 @@ const ExternalFormattingButton: FunctionComponent<{
   if (Button) {
     return <Button {...buttonProps} />;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Icon: any = arrow || !getIcon ? () => <span>{name}</span> : getIcon();
 
   const disabled = disableState || isDisabled();
@@ -86,6 +89,7 @@ const ExternalFormattingButton: FunctionComponent<{
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ExternalFormattingToolbar: FunctionComponent<{ toolbarProps?: any; disabled?: boolean }> = ({
   toolbarProps,
   disabled,

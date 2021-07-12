@@ -2,12 +2,13 @@ import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
-import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
+import { getGalleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
 import {
   CreateInlineButtons,
   TranslationFunction,
   AnchorTarget,
   RelValue,
+  AvailableExperiments,
 } from 'wix-rich-content-common';
 import { GalleryPluginEditorConfig, GALLERY_TYPE } from '../types';
 
@@ -16,25 +17,29 @@ const createInlineButtons: CreateInlineButtons = ({
   anchorTarget,
   relValue,
   settings,
+  experiments = {},
   isMobile,
 }: {
   t: TranslationFunction;
   settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
+  experiments: AvailableExperiments;
   isMobile: boolean;
 }) => {
   const modalStyles = getModalStyles({ isMobile });
   const icons = settings?.toolbar?.icons || {};
-  const spoilerButton = settings.spoiler
-    ? [
-        {
-          keyName: 'spoiler',
-          type: BUTTONS.SPOILER,
-          mobile: true,
-        },
-      ]
-    : [];
+  const { spoilerInInlineToolbar } = experiments;
+  const spoilerButton =
+    settings.spoiler && spoilerInInlineToolbar?.enabled
+      ? [
+          {
+            keyName: 'spoiler',
+            type: BUTTONS.SPOILER,
+            mobile: true,
+          },
+        ]
+      : [];
 
   return [
     {
@@ -55,7 +60,7 @@ const createInlineButtons: CreateInlineButtons = ({
     {
       keyName: 'layout',
       type: BUTTONS.DROPDOWN,
-      options: galleryLayoutsDropdown(t),
+      options: getGalleryLayoutsDropdown(t),
       onChange: switchLayout,
       getValue: getCurrentLayout,
       mobile: true,
@@ -101,6 +106,7 @@ const createInlineButtons: CreateInlineButtons = ({
       accept: settings.accept,
       triggerSettingsBi: true,
       pluginId: GALLERY_TYPE,
+      shouldShowSpoiler: settings.spoiler,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

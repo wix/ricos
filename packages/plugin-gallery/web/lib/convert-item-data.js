@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { normalizeUrl } from 'wix-rich-content-common';
 import { getAbsoluteUrl } from './baseUrlConverter';
 
@@ -41,10 +42,20 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
         };
         const {
           pathname,
-          thumbnail: { pathname: thumbPathname } = {},
+          thumbnail: { pathname: thumbPathname, width, height } = {},
         } = convertedData.metaData.poster;
         if (pathname && thumbPathname) {
-          convertedData.metaData.poster = getAbsoluteUrl(thumbPathname, 'image');
+          convertedData.metaData.poster = {
+            url: getAbsoluteUrl(thumbPathname, 'image'),
+            width,
+            height,
+          };
+        } else if (typeof convertedData.metaData.poster === 'string') {
+          convertedData.metaData.poster = {
+            url: convertedData.metaData.poster,
+            width: convertedData.metaData.width,
+            height: convertedData.metaData.height,
+          };
         }
       }
 

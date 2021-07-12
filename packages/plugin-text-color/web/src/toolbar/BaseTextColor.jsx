@@ -4,8 +4,12 @@ import classNames from 'classnames';
 import Modal from 'react-modal';
 
 import { mergeStyles } from 'wix-rich-content-common';
-import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
-import { ClickOutside, InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import {
+  ClickOutside,
+  InlineToolbarButton,
+  EditorState,
+  getSelectionStyles,
+} from 'wix-rich-content-editor-common';
 import TextColorPanel from './TextColorPanel';
 import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';
@@ -21,7 +25,7 @@ export default class BaseTextColor extends Component {
   }
 
   static getModalParent() {
-    return document.querySelector('.DraftEditor-root').parentNode;
+    return document?.querySelector('.DraftEditor-root')?.parentNode;
   }
 
   openPanel = () => {
@@ -66,6 +70,7 @@ export default class BaseTextColor extends Component {
   render() {
     const {
       theme,
+      helpers,
       isMobile,
       t,
       tabIndex,
@@ -108,6 +113,7 @@ export default class BaseTextColor extends Component {
         <InlineToolbarButton
           onClick={this.openPanel}
           isActive={this.isActive}
+          helpers={helpers}
           theme={{ ...theme, ...buttonStyles }}
           isMobile={isMobile}
           tooltipText={tooltip}
@@ -115,6 +121,7 @@ export default class BaseTextColor extends Component {
           tabIndex={tabIndex}
           icon={pluginParams.icon}
           forwardRef={this.buttonRef}
+          pluginType={pluginParams.type}
         >
           <Modal
             onRequestClose={() => this.closePanel()}
@@ -155,6 +162,7 @@ export default class BaseTextColor extends Component {
           <InlineToolbarButton
             onClick={this.openPanel}
             isActive={this.isActive}
+            helpers={helpers}
             theme={{ ...theme, ...buttonStyles }}
             isMobile={isMobile}
             tooltipText={tooltip}
@@ -162,6 +170,7 @@ export default class BaseTextColor extends Component {
             tabIndex={tabIndex}
             icon={pluginParams.icon}
             forwardRef={this.buttonRef}
+            pluginType={pluginParams.type}
           >
             {isPanelOpen && (
               <div className={styles.textColorPopup}>
