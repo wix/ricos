@@ -70,11 +70,12 @@ export const convertBlockDataToRicos = (type: string, data) => {
 
 const convertContainerData = (data: { config?: ComponentData['config']; containerData }) => {
   const { size, alignment, width, spoiler, height } = data.config || {};
-  let newSpoiler: PluginContainerData_Spoiler | undefined;
-  if (spoiler?.enabled) {
-    const { description, buttonContent } = spoiler;
-    newSpoiler = { description, buttonText: buttonContent };
-  }
+  const { enabled, description, buttonContent } = spoiler || {};
+  const newSpoiler: PluginContainerData_Spoiler | undefined = spoiler && {
+    isEnabled: enabled || false,
+    description,
+    buttonText: buttonContent,
+  };
   data.containerData = {
     alignment: alignment && kebabToConstantCase(alignment),
     spoiler: newSpoiler,

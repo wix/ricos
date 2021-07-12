@@ -87,6 +87,7 @@ const convertContainerData = (
   nodeType: string
 ) => {
   const { width, alignment, spoiler, height } = data.containerData || {};
+  const { isEnabled = false, description, buttonText } = spoiler || {};
   data.config = Object.assign(
     {},
     data.config,
@@ -96,9 +97,9 @@ const convertContainerData = (
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
-        enabled: true,
-        description: spoiler.description,
-        buttonContent: spoiler.buttonText,
+        enabled: isEnabled,
+        description,
+        buttonContent: buttonText,
       },
     }
   );

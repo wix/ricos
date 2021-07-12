@@ -41,8 +41,9 @@ message Link {
 
 message PluginContainerData {
     message Spoiler {
-        google.protobuf.StringValue description = 1;
-        google.protobuf.StringValue button_text = 2;
+        google.protobuf.BoolValue is_enabled = 1;
+        google.protobuf.StringValue description = 2;
+        google.protobuf.StringValue button_text = 3;
     }
     message Width {
         enum Type {
