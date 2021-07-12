@@ -45,8 +45,8 @@
   }
 }
 
-.desktopPanel_selectedLine,
-.mobilePanel_selectedLineHeight {
+.desktopPanel_selectedRow,
+.mobilePanel_selectedRow {
   color: $settings-action-color-fallback;
 }
 
@@ -77,7 +77,7 @@
   }
 }
 
-.mobilePanel_heights {
+.mobilePanel_rows {
   display: flex;
   flex-direction: column;
   * {
@@ -241,24 +241,24 @@
   background-color: transparent;
   z-index: 40;
 }
-.modalOverlay_mobile {
-  //background-color: rgba(0, 0, 0, 0.2);
-}
+// .modalOverlay_mobile {
+//   //background-color: rgba(0, 0, 0, 0.2);
+// }
 
-.lineSpacingPopup_button {
-  position: relative;
-  margin-right: 10px;
-  .lineSpacingPopup {
-    position: absolute;
-    top: 50px;
-    left: -146px;
-    background: #fff;
+// .lineSpacingPopup_button {
+//   position: relative;
+//   margin-right: 10px;
+//   .lineSpacingPopup {
+//     position: absolute;
+//     top: 50px;
+//     left: -146px;
+//     background: #fff;
 
-    & button {
-      background-color: transparent;
-    }
-  }
-}
+//     & button {
+//       background-color: transparent;
+//     }
+//   }
+// }
 
 //Alignment
 .alignment_mobile_contentWrapper {

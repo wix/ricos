@@ -8,7 +8,7 @@ const MobilePanel = ({ currentSelect, panelHeader, onChange, options, hasIcons }
     return (
       <div>
         <button
-          className={isSelected ? styles.mobilePanel_selectedLineHeight : ''}
+          className={isSelected ? styles.mobilePanel_selectedRow : ''}
           key={option.commandKey}
           onClick={e => {
             e.stopPropagation();
@@ -33,7 +33,7 @@ const MobilePanel = ({ currentSelect, panelHeader, onChange, options, hasIcons }
     <div className={styles.mobilePanel}>
       <div className={styles.mobilePanel_header}>{panelHeader}</div>
       <Separator />
-      <div className={styles.mobilePanel_heights}>
+      <div className={styles.mobilePanel_rows}>
         {options.map((option, i) => {
           const isSelected = (currentSelect['line-height'] ?? currentSelect) === option.commandKey;
           const showSeparator = i !== options.length - 1;
