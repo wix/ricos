@@ -2,7 +2,7 @@ import { verticalEmbedProviders } from './constants';
 
 export const convertDuration = (durationInMinutes, t) => {
   if (durationInMinutes < 60) {
-    return t('Embed_Vertical_Units_Minute', { minutes: durationInMinutes });
+    return t('VerticalEmbed_Units_Minute', { minutes: durationInMinutes });
   }
   const hours = durationInMinutes / 60;
   const rhours = Math.floor(hours);
@@ -10,10 +10,10 @@ export const convertDuration = (durationInMinutes, t) => {
   const rminutes = Math.round(minutes);
   const durationInHours =
     rminutes === 0
-      ? t('Embed_Vertical_Units_Hour', { hours: rhours })
-      : t('Embed_Vertical_Units_Hour', { hours: rhours }) +
+      ? t('VerticalEmbed_Units_Hour', { hours: rhours })
+      : t('VerticalEmbed_Units_Hour', { hours: rhours }) +
         ' ' +
-        t('Embed_Vertical_Units_Minute', { minutes: rminutes });
+        t('VerticalEmbed_Units_Minute', { minutes: rminutes });
   return durationInHours;
 };
 
@@ -22,7 +22,7 @@ const getBookingData = (data, t) => {
   const content = {
     title: name,
     info: { leftSubtitle: durations && convertDuration(durations, t) },
-    buttonText: t('Embed_Vertical_Bookings_Button'),
+    buttonText: t('VerticalEmbed_Bookings_Button'),
   };
   return { pageUrl, imageSrc, content };
 };
@@ -31,7 +31,7 @@ const getEventData = (data, t) => {
   const content = {
     title: name,
     info: { leftSubtitle: scheduling, rightSubtitle: location },
-    buttonText: t('Embed_Vertical_Events_Button'),
+    buttonText: t('VerticalEmbed_Events_Button'),
   };
   return { pageUrl, imageSrc, content };
 };
@@ -39,7 +39,7 @@ const getProductData = (data, t) => {
   const { name, imageSrc, pageUrl } = data;
   const content = {
     title: name,
-    buttonText: t('Embed_Vertical_Products_Button'),
+    buttonText: t('VerticalEmbed_Products_Button'),
   };
   return { pageUrl, imageSrc, content };
 };
