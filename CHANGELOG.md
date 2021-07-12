@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.46.7 (July 12, 2021)
 ### :bug: Bug Fix
 - `schema`
   - [#2669](https://github.com/wix-incubator/rich-content/pull/2669) fix new schema to support media plugins content ('disableExpand','disableDownload')
@@ -30,9 +35,6 @@
 
 - `*`
   - [#2697](https://github.com/wix/ricos/pull/2697) console.error when viewer/editor have error
-  
-</details>
-<hr/>
 
 ## 8.46.6 (July 6, 2021)
 
