@@ -17,7 +17,10 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `common`
+  - [#2703](https://github.com/wix/ricos/pull/2703) tooltip: wrapped with Suspense
+  
 </details>
 <hr/>
 
