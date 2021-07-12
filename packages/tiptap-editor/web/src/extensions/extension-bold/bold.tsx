@@ -1,4 +1,4 @@
-import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/core';
+import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap-es5/core';
 
 export interface BoldOptions {
   HTMLAttributes: Record<string, unknown>;
