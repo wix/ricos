@@ -244,6 +244,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return { error };
   }
 
+  componentDidCatch(error, errorInfo) {
+    console.error({ error, errorInfo });
+  }
+
   constructor(props: RichContentEditorProps) {
     super(props);
     const initialEditorState = this.getInitialEditorState();

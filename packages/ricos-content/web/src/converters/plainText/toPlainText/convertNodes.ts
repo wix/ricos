@@ -38,7 +38,7 @@ export const addLinksToText = (text: string, linkDecorations: RangedDecoration[]
         insertInText(
           newText,
           link.end + newText.length - text.length + 1,
-          `(${link.linkData?.url})`
+          `(${link.linkData?.link?.url})`
         ),
       text
     );
@@ -75,11 +75,13 @@ const getDefaultVideoUrl = async (fileId: string) => `https://video.wixstatic.co
 
 export const parseVideo = async (
   { videoData }: Node,
+  delimiter: string,
   getVideoUrl: (fileId: string) => Promise<string> = getDefaultVideoUrl
 ): Promise<string> => {
-  const { custom, url } = videoData?.video?.src || {};
-  const text = custom ? getVideoUrl(custom) : url;
-  return text || '';
+  const { video, title } = videoData || {};
+  const { custom, url } = video?.src || {};
+  const videoUrl = (custom ? getVideoUrl(custom) : url) || '';
+  return title ? title + delimiter + videoUrl : videoUrl;
 };
 
 export const parseGiphy = ({ giphyData }: Node): string => {
