@@ -1,6 +1,6 @@
 {
   "name": "wix-tiptap-editor",
-  "version": "8.46.7",
+  "version": "8.46.8",
   "author": {
     "name": "Bashar Qaddumi",
     "email": "bqaddumi@asaltech.com"
@@ -61,11 +61,11 @@
     "@tiptap-es5/react": "^2.0.0-beta.41",
     "ricos-content": "8.46.6",
     "ricos-schema": "8.46.6",
+    "wix-rich-content-common": "8.46.6",
+    "wix-rich-content-editor-common": "8.46.6",
     "wix-rich-content-plugin-divider": "8.46.6",
     "wix-rich-content-plugin-image": "8.46.6",
-    "wix-rich-content-plugin-spoiler": "8.46.6",
-    "wix-rich-content-common": "8.46.6",
-    "wix-rich-content-editor-common": "8.46.6"
+    "wix-rich-content-plugin-spoiler": "8.46.6"
   },
   "jest": {
     "globals": {
