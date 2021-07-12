@@ -4,6 +4,7 @@ export const PLAIN_TEXT = `Lorem ipsum dolor sit amet 😎, consectetur adipisci
 Dad holding his baby
 https://static.wixstatic.com/media/8bb438_67a68c0652d740bab508f68662acc882.jpg/v1/fill/w_3192,h_2124,al_c,q_90/8bb438_67a68c0652d740bab508f68662acc882.jpg
 
+iJustine | Create a Website with Wix Artificial Design Intelligence
 https://www.youtube.com/watch?v=CoJ23XNHgG0
 
 https://video.wixstatic.com/video/d3dd72_9397c7bfa03f4fa8920b16bdd667f73b/1080p/mp4/file.mp4
