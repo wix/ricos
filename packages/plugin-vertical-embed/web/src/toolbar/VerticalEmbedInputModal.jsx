@@ -20,7 +20,7 @@ const NOT_FOUND = 'NOT_FOUND';
 export default class VerticalEmbedInputModal extends Component {
   state = {
     errorMsg: '',
-    products: [],
+    items: [],
     selectedProduct: this.props.componentData?.selectedProduct || null,
     status: LOADING,
   };
@@ -33,18 +33,18 @@ export default class VerticalEmbedInputModal extends Component {
     } = this.props;
     this.verticalApi = verticalsApi(type, locale);
     try {
-      this.verticalApi.search('').then(products => {
-        this.setState({ products, status: products.length === 0 ? NO_ITEMS : READY });
+      this.verticalApi.search('').then(items => {
+        this.setState({ items, status: items.length === 0 ? NO_ITEMS : READY });
       });
     } catch (e) {
       console.error('failed to load products ', e);
-      this.setState({ products: [], status: NO_ITEMS });
+      this.setState({ items: [], status: NO_ITEMS });
     }
   }
 
   onInputChange = (inputString = '') => {
-    this.verticalApi.search(inputString).then(products => {
-      this.setState({ products, status: products.length === 0 ? NOT_FOUND : READY });
+    this.verticalApi.search(inputString).then(items => {
+      this.setState({ items, status: items.length === 0 ? NOT_FOUND : READY });
     });
     this.setState({ inputString });
   };
@@ -77,7 +77,7 @@ export default class VerticalEmbedInputModal extends Component {
       componentData: { type },
       t,
     } = this.props;
-    const { products } = this.state;
+    const { items } = this.state;
     let getDescriptionFunc;
     if (type === verticalEmbedProviders.booking) {
       getDescriptionFunc = product => convertDuration(product.durations, t);
@@ -85,8 +85,8 @@ export default class VerticalEmbedInputModal extends Component {
       getDescriptionFunc = product => `${product.scheduling} | ${product.location}`;
     }
     return getDescriptionFunc
-      ? products.map(product => ({ ...product, description: getDescriptionFunc(product) }))
-      : products;
+      ? items.map(product => ({ ...product, description: getDescriptionFunc(product) }))
+      : items;
   };
 
   render() {

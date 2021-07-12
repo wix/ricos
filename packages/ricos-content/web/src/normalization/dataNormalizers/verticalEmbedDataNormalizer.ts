@@ -1,6 +1,6 @@
 const verticalEmbedDataNormalizer = componentData => {
   const { selectedProduct, type } = componentData;
-  const { html, description, ...rest } = selectedProduct;
+  const { html, description } = selectedProduct;
   if (html) {
     const pageUrl = selectedProduct.html.match(/href="[^"]*/g)?.[0]?.slice(6);
     let additionalData = {};
@@ -13,7 +13,7 @@ const verticalEmbedDataNormalizer = componentData => {
     }
     return {
       ...componentData,
-      selectedProduct: { ...additionalData, pageUrl, ...rest },
+      selectedProduct: { ...selectedProduct, ...additionalData, pageUrl },
     };
   } else {
     return componentData;

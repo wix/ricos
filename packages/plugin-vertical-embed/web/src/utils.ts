@@ -24,8 +24,9 @@ const getBookingData = (data, t) => {
     info: { leftSubtitle: durations && convertDuration(durations, t) },
     buttonText: t('VerticalEmbed_Bookings_Button'),
   };
-  return { pageUrl, imageSrc, content };
+  return { url: pageUrl, imageSrc, content };
 };
+
 const getEventData = (data, t) => {
   const { name, imageSrc, scheduling, pageUrl, location } = data;
   const content = {
@@ -33,15 +34,16 @@ const getEventData = (data, t) => {
     info: { leftSubtitle: scheduling, rightSubtitle: location },
     buttonText: t('VerticalEmbed_Events_Button'),
   };
-  return { pageUrl, imageSrc, content };
+  return { url: pageUrl, imageSrc, content };
 };
+
 const getProductData = (data, t) => {
   const { name, imageSrc, pageUrl } = data;
   const content = {
     title: name,
     buttonText: t('VerticalEmbed_Products_Button'),
   };
-  return { pageUrl, imageSrc, content };
+  return { url: pageUrl, imageSrc, content };
 };
 
 export const dataTypeMapper = {
