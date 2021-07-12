@@ -846,12 +846,10 @@
       "content": [],
       "attrs": {
         "type": "PRODUCT",
-        "metadata": {
-          "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
-          "name": "flowers",
-          "imageSrc": "https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg",
-          "pageUrl": "https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers"
-        },
+        "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
+        "name": "flowers",
+        "imageSrc": "https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg",
+        "url": "https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers",
         "key": "dm5qe"
       }
     },
@@ -871,11 +869,11 @@
       "content": [],
       "attrs": {
         "type": "EVENT",
-        "metadata": {
-          "id": "65129504-3bfc-44c8-90cc-f9eedfea9321",
-          "name": "2-week course of intensive physical research, with a sense of plenty of time for process and discovery. Rooted in Ohad N",
-          "imageSrc": "https://static.wixstatic.com/media/2571849c6b0749a4bbd008a06fd65762.jpg",
-          "pageUrl": "https://www.wix.app/events/54e7b326-49ec-434f-a7cc-c2ad1eaec049/65129504-3bfc-44c8-90cc-f9eedfea9321/details?d=https://sapirs0.wixsite.com/mysite/event-details/2-week-course-of-intensive-physical-research-with-a-sense-of-plenty-of-time-for-process-and-discovery-rooted-in-ohad-n",
+        "id": "65129504-3bfc-44c8-90cc-f9eedfea9321",
+        "name": "2-week course of intensive physical research, with a sense of plenty of time for process and discovery. Rooted in Ohad N",
+        "imageSrc": "https://static.wixstatic.com/media/2571849c6b0749a4bbd008a06fd65762.jpg",
+        "url": "https://www.wix.app/events/54e7b326-49ec-434f-a7cc-c2ad1eaec049/65129504-3bfc-44c8-90cc-f9eedfea9321/details?d=https://sapirs0.wixsite.com/mysite/event-details/2-week-course-of-intensive-physical-research-with-a-sense-of-plenty-of-time-for-process-and-discovery-rooted-in-ohad-n",
+        "eventData": {
           "scheduling": "13 de octubre de 2020 19:00–27 de octubre de 2020 23:00 ",
           "location": " Suzanna Baby Shop"
         },
@@ -898,12 +896,12 @@
       "content": [],
       "attrs": {
         "type": "BOOKING",
-        "metadata": {
-          "id": "03ef6546-985d-4739-951e-ca897375b967",
-          "name": "CUPCAKE MASTER",
-          "imageSrc": "https://static.wixstatic.com/media/78ccafc88f7fce3e55bd7a33f166704b.jpg",
-          "durations": "1h 30min",
-          "pageUrl": "https://www.wix.app/bookings/54e7b326-49ec-434f-a7cc-c2ad1eaec049/service/03ef6546-985d-4739-951e-ca897375b967/details?d=https://sapirs0.wixsite.com/mysite/bookings-checkout/cupcake-master"
+        "id": "03ef6546-985d-4739-951e-ca897375b967",
+        "name": "CUPCAKE MASTER",
+        "imageSrc": "https://static.wixstatic.com/media/78ccafc88f7fce3e55bd7a33f166704b.jpg",
+        "url": "https://www.wix.app/bookings/54e7b326-49ec-434f-a7cc-c2ad1eaec049/service/03ef6546-985d-4739-951e-ca897375b967/details?d=https://sapirs0.wixsite.com/mysite/bookings-checkout/cupcake-master",
+        "bookingData": {
+          "durations": "90"
         },
         "key": "cnbji"
       }
@@ -1146,7 +1144,7 @@
               "textAlignment": "AUTO"
             },
             "indentation": 0,
-            "key": "8bs97"
+            "key": "bfggn"
           }
         }
       ],
@@ -1178,7 +1176,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "aboqb"
+                "key": "drqie"
               }
             },
             {
@@ -1205,7 +1203,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "ecmr3"
+                        "key": "au63b"
                       }
                     },
                     {
@@ -1232,7 +1230,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "849en"
+                                "key": "a5m19"
                               }
                             },
                             {
@@ -1259,7 +1257,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "f8blp"
+                                        "key": "cenmb"
                                       }
                                     },
                                     {
@@ -1286,7 +1284,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "83as5"
+                                                "key": "4mte2"
                                               }
                                             }
                                           ],
@@ -1315,7 +1313,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "3tb2i"
+                                                "key": "4phkp"
                                               }
                                             }
                                           ],
@@ -1325,7 +1323,7 @@
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "29g5r"
+                                        "key": "2lnoa"
                                       }
                                     }
                                   ],
@@ -1335,7 +1333,7 @@
                                 }
                               ],
                               "attrs": {
-                                "key": "8imnj"
+                                "key": "14ti"
                               }
                             }
                           ],
@@ -1345,7 +1343,7 @@
                         }
                       ],
                       "attrs": {
-                        "key": "lk0r"
+                        "key": "cf41n"
                       }
                     }
                   ],
@@ -1355,7 +1353,7 @@
                 }
               ],
               "attrs": {
-                "key": "f7sj"
+                "key": "75o1"
               }
             }
           ],
@@ -1384,7 +1382,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "dbkdr"
+                "key": "6qkgt"
               }
             },
             {
@@ -1411,7 +1409,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "2vo2j"
+                        "key": "39v7e"
                       }
                     }
                   ],
@@ -1421,7 +1419,7 @@
                 }
               ],
               "attrs": {
-                "key": "c7bfe"
+                "key": "bee41"
               }
             }
           ],
@@ -1450,7 +1448,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "b8ffo"
+                "key": "ecloc"
               }
             }
           ],
@@ -1460,7 +1458,7 @@
         }
       ],
       "attrs": {
-        "key": "bb88j"
+        "key": "1shqu"
       }
     },
     {
@@ -1498,7 +1496,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "fdv8v"
+                "key": "agi74"
               }
             },
             {
@@ -1525,7 +1523,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "5l664"
+                        "key": "154fm"
                       }
                     },
                     {
@@ -1552,7 +1550,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "dsst"
+                                "key": "f9qou"
                               }
                             },
                             {
@@ -1579,7 +1577,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "b2uib"
+                                        "key": "4kguv"
                                       }
                                     },
                                     {
@@ -1606,7 +1604,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "l9jh"
+                                                "key": "ak3kg"
                                               }
                                             }
                                           ],
@@ -1635,7 +1633,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "8s3tq"
+                                                "key": "a4i5o"
                                               }
                                             }
                                           ],
@@ -1645,7 +1643,7 @@
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "dnqq6"
+                                        "key": "a4n6r"
                                       }
                                     }
                                   ],
@@ -1655,7 +1653,7 @@
                                 }
                               ],
                               "attrs": {
-                                "key": "7u5t8"
+                                "key": "1lsbk"
                               }
                             }
                           ],
@@ -1665,7 +1663,7 @@
                         }
                       ],
                       "attrs": {
-                        "key": "fbs6q"
+                        "key": "4tflh"
                       }
                     }
                   ],
@@ -1675,7 +1673,7 @@
                 }
               ],
               "attrs": {
-                "key": "eiasq"
+                "key": "8fbkn"
               }
             }
           ],
@@ -1704,7 +1702,7 @@
                   "textAlignment": "RIGHT"
                 },
                 "indentation": 0,
-                "key": "4uadq"
+                "key": "comii"
               }
             }
           ],
@@ -1733,7 +1731,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "12ks1"
+                "key": "8sb8r"
               }
             }
           ],
@@ -1743,7 +1741,7 @@
         }
       ],
       "attrs": {
-        "key": "7en2u"
+        "key": "1dho6"
       }
     },
     {
@@ -1914,8 +1912,8 @@
   "attrs": {
     "metadata": {
       "version": 1,
-      "createdTimestamp": "2021-07-11T12:33:20.130Z",
-      "updatedTimestamp": "2021-07-11T12:33:20.130Z"
+      "createdTimestamp": "2021-07-12T13:20:47.341Z",
+      "updatedTimestamp": "2021-07-12T13:20:47.341Z"
     }
   }
 }

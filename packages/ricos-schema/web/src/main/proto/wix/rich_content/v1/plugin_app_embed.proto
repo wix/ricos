@@ -5,16 +5,15 @@ package wix.rich_content.v1;
 import "google/protobuf/wrappers.proto";
 
 message AppEmbedData {
-    message Metadata {
-        google.protobuf.StringValue id = 1;
-        google.protobuf.StringValue name = 2;
-        google.protobuf.StringValue imageSrc = 3;
-        google.protobuf.StringValue durations = 4;
-        google.protobuf.StringValue page_url = 5;
-        google.protobuf.StringValue scheduling = 6;
-        google.protobuf.StringValue location = 7;
+    message BookingData {
+        google.protobuf.StringValue durations = 1;
     }
 
+    message EventData {
+        google.protobuf.StringValue scheduling = 1;
+        google.protobuf.StringValue location = 2;
+    }
+    
     enum AppType {
         PRODUCT = 0;
         EVENT = 1;
@@ -22,5 +21,13 @@ message AppEmbedData {
     }
     
     AppType type = 1;
-    Metadata metadata = 2;
+    google.protobuf.StringValue id = 2;
+    google.protobuf.StringValue name = 3;
+    google.protobuf.StringValue image_src = 4;
+    google.protobuf.StringValue url = 5;
+
+    oneof appData {
+        BookingData booking_data = 6;
+        EventData event_data = 7;
+    } 
 }

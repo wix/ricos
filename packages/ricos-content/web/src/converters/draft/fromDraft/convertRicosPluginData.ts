@@ -153,7 +153,12 @@ const convertPollData = (data: { layout; design }) => {
 const convertAppEmbedData = (data: {
   type: string;
   selectedProduct: Record<string, string>;
-  metadata: Record<string, unknown>;
+  url;
+  imageSrc;
+  id;
+  name;
+  bookingData;
+  eventData;
 }) => {
   const {
     id,
@@ -166,18 +171,19 @@ const convertAppEmbedData = (data: {
     html,
     durations,
   } = data.selectedProduct;
-  const metadata: Record<string, unknown> = { id, name, imageSrc };
-  pageUrl
-    ? (metadata.pageUrl = pageUrl)
-    : html && (metadata.pageUrl = html.match(/href="[^"]*/g)?.[0]?.slice(6));
+  data.url = pageUrl || (html && (data.url = html.match(/href="[^"]*/g)?.[0]?.slice(6)));
+  data.id = id;
+  data.name = name;
+  data.imageSrc = imageSrc;
   if (data.type === 'booking') {
-    metadata.durations = durations || description;
+    data.bookingData = { durations: durations || description };
   } else if (data.type === 'event') {
-    metadata.location = location || (description && description.match(/[^|]*$/)?.[0]);
-    metadata.scheduling = scheduling || (description && description.match(/[^|]+/)?.[0]);
+    data.eventData = {
+      location: location || (description && description.match(/[^|]*$/)?.[0]),
+      scheduling: scheduling || (description && description.match(/[^|]+/)?.[0]),
+    };
   }
   data.type = data.type?.toUpperCase();
-  data.metadata = metadata;
 };
 
 const convertLinkPreviewData = (data: {

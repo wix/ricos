@@ -171,19 +171,23 @@ const convertPollData = data => {
 };
 
 const convertAppEmbedData = data => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
-  const { id, name, imageSrc, durations, pageUrl, scheduling, location } = data.metadata;
+  const { type, id, name, imageSrc, url, bookingData, eventData } = data;
+  data.type = type.toLowerCase();
   const selectedProduct: Record<string, unknown> = {
     id,
     name,
     imageSrc,
-    scheduling,
-    location,
-    pageUrl,
-    durations,
+    pageUrl: url,
+    ...(bookingData || {}),
+    ...(eventData || {}),
   };
   data.selectedProduct = selectedProduct;
-  delete data.metadata;
+  delete data.id;
+  delete data.name;
+  delete data.imageSrc;
+  delete data.url;
+  bookingData && delete data.bookingData;
+  eventData && delete data.eventData;
 };
 
 const convertLinkPreviewData = data => {

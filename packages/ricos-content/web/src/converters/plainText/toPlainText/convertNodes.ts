@@ -95,8 +95,8 @@ export const parseMap = ({ mapData }: Node): string => {
 };
 
 export const parseAppEmbed = ({ appEmbedData }: Node, delimiter: string): string => {
-  const { pageUrl, name } = appEmbedData?.metadata || {};
-  return [name, pageUrl].filter(Boolean).join(delimiter);
+  const { url, name } = appEmbedData || {};
+  return [name, url].filter(Boolean).join(delimiter);
 };
 
 export const parseLinkPreview = ({ linkPreviewData }: Node): string => {
