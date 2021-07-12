@@ -24,7 +24,7 @@ export const layoutData = {
   },
   [GALLERY_LAYOUTS.MASONRY]: {
     numberOfImagesPerRow: 0,
-    isVertical: true,
+    isVertical: false,
     gallerySizePx: '300',
   },
   [GALLERY_LAYOUTS.GRID]: {
