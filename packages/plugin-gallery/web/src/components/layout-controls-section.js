@@ -15,7 +15,7 @@ import ImageRatioSelector from './gallery-controls/image-ratio-selector';
 import ThumbnailPlacementSelector from './gallery-controls/thumbnail-placement-selector';
 
 const scrollDirectionOptions = {
-  horizontal: { oneRow: true, showArrows: true, isVertical: false },
+  horizontal: { oneRow: true, showArrows: true },
   vertical: { oneRow: false, showArrows: false },
 };
 

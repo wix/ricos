@@ -5,6 +5,7 @@ import { MediaUploadErrorKey } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS, GALLERY_ITEMS_TYPES, createImageItem, createVideoItem } from './defaults';
+import { GALLERY_LAYOUTS } from '../lib/layout-data-provider';
 import { GALLERY_TYPE } from './types';
 import styles from '../statics/styles/gallery-component.scss';
 
