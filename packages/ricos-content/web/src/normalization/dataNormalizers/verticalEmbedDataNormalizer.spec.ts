@@ -60,12 +60,12 @@ describe('Test vertical embed normalizer', () => {
       id: '03ef6546-985d-4739-951e-ca897375b967',
       name: 'CUPCAKE MASTER',
       imageSrc: 'https://static.wixstatic.com/media/78ccafc88f7fce3e55bd7a33f166704b.jpg',
-      description: 90,
     };
     const oldComponentData = {
       type: 'booking',
       selectedProduct: {
         ...baseData,
+        description: 90,
         html:
           '<a class="vertical-embed-link" href="https://www.wix.app/bookings/54e7b326-49ec-434f-a7cc-c2ad1eaec049/service/03ef6546-985d-4739-951e-ca897375b967/details?d=https://sapirs0.wixsite.com/mysite/bookings-checkout/cupcake-master" target="_blank"><div class="vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout"><div style="background-image:url(https://static.wixstatic.com/media/78ccafc88f7fce3e55bd7a33f166704b.jpg)" class="vertical-embed-imageLayout vertical-embed-image"></div><div class="vertical-embed-content"><div><div class="vertical-embed-title">CUPCAKE MASTER</div><div class="vertical-embed-subtitle">1h 30min</div></div><div class="vertical-embed-button"><div class="vertical-embed-buttonText">Reservar ahora</div></div></div></div></a>',
       },
@@ -74,6 +74,7 @@ describe('Test vertical embed normalizer', () => {
       type: 'booking',
       selectedProduct: {
         ...baseData,
+        durations: 90,
         pageUrl:
           'https://www.wix.app/bookings/54e7b326-49ec-434f-a7cc-c2ad1eaec049/service/03ef6546-985d-4739-951e-ca897375b967/details?d=https://sapirs0.wixsite.com/mysite/bookings-checkout/cupcake-master',
       },
