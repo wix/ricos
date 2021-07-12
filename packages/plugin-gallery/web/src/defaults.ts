@@ -50,9 +50,11 @@ export const LAYOUT_FIXED_STYLES = {
   },
   [GALLERY_LAYOUTS.MASONRY]: {
     imageMargin: 5,
+    gridStyle: 0,
   },
   [GALLERY_LAYOUTS.GRID]: {
     imageResize: false,
+    gridStyle: 1,
     galleryImageRatio: 2,
     imageMargin: 5,
   },
@@ -93,7 +95,6 @@ export const FIXED_STYLES = {
   allowHover: true,
   itemClick: 'link',
   fullscreen: false,
-  gridStyle: 1,
   loveButton: false,
   allowSocial: false,
   allowDownload: false,
