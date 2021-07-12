@@ -1,22 +1,15 @@
-import { flow, pipe } from 'fp-ts/function';
+import { flow } from 'fp-ts/function';
 
 import { TextNode, Element } from 'parse5';
-import {
-  Node_Type,
-  Decoration_Type,
-  ImageData,
-  Link_Target,
-  LinkData,
-  Decoration,
-} from 'ricos-schema';
+import { Node_Type, Decoration_Type, ImageData, Decoration } from 'ricos-schema';
 import { getAttributes, isText, toName, hasTag, oneOf } from './ast-utils';
-import { replace, toUpperCase } from '../../../../fp-utils';
 import { Rule } from './models';
 import {
   createTextNode,
   createParagraphNode,
   createHeadingNode,
   createNode,
+  createLink,
 } from '../../../nodeUtils';
 
 export const identityRule: Rule = [() => true, ({ visit }) => (node: Element) => visit(node)];
@@ -40,26 +33,16 @@ export const hToHeading: Rule = [
   ],
 ];
 
-const toLinkTarget = (target = 'SELF') => pipe(target, toUpperCase, replace('_', ''));
-
-export const createLinkData = (element: Element): LinkData => {
-  const attrs = getAttributes(element);
-  const url = attrs.href;
-  return url
-    ? {
-        link: {
-          url: attrs.href,
-          target: (toLinkTarget(attrs.target) as unknown) as Link_Target,
-          anchor: undefined,
-        },
-      }
-    : ({} as LinkData);
-};
-
 export const aToLink: Rule = [
   hasTag('a'),
-  context => (node: Element) =>
-    context.addDecoration(Decoration_Type.LINK, { linkData: createLinkData(node) }, node),
+  context => (node: Element) => {
+    const attrs = getAttributes(node);
+    return context.addDecoration(
+      Decoration_Type.LINK,
+      { linkData: { link: createLink({ ...attrs, url: attrs.href }) } },
+      node
+    );
+  },
 ];
 
 export const lToList: Rule = [

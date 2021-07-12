@@ -1,9 +1,9 @@
-import { identity, flow } from 'fp-ts/function';
+import { identity, pipe, flow } from 'fp-ts/function';
 import * as E from 'fp-ts/Either';
 
-import { VideoData, Node_Type } from 'ricos-schema';
+import { Link, Decoration_Type, VideoData, Node_Type } from 'ricos-schema';
 import { TextNode, Element } from 'parse5';
-import { createNode } from '../../../nodeUtils';
+import { createNode, createLink } from '../../../nodeUtils';
 import { hasTag, getAttributes } from '../core/ast-utils';
 import { preprocess } from './preprocess';
 import parse from '../core/parser';
@@ -18,7 +18,7 @@ import {
   identityRule,
 } from '../core/rules';
 import { Rule } from '../core/models';
-import { log } from '../../../../fp-utils';
+// import { log } from '../../../../fp-utils';
 
 const toURL = (str: string) =>
   E.tryCatch(
@@ -62,6 +62,33 @@ const noEmptyLineText: Rule = [
   textToText[1],
 ];
 
+const toCustomData = (onclick: string) => {};
+
+const getSrc = (onclick: string, url: string): Record<string, string> =>
+  url.startsWith('javascript:') && onclick.startsWith('Wix.')
+    ? { customData: toCustomData(onclick) }
+    : {};
+
+const mergeSrc = (onclick: string, url: string) => (link: Link): Link => ({
+  ...link,
+  ...getSrc(onclick, url),
+});
+
+const createCustomLink = ({ url, onclick, ...rest }: Record<string, string>): Link =>
+  pipe({ url, ...rest }, createLink, mergeSrc(onclick, url));
+
+const aToCustomLink: Rule = [
+  aToLink[0],
+  context => (node: Element) => {
+    const attrs = getAttributes(node);
+    return context.addDecoration(
+      Decoration_Type.LINK,
+      { linkData: { link: createCustomLink({ ...attrs, url: attrs.href }) } },
+      node
+    );
+  },
+];
+
 export default flow(
   preprocess,
   parse([
@@ -69,7 +96,7 @@ export default flow(
     pToParagraph,
     lToList,
     hToHeading,
-    aToLink,
+    aToCustomLink,
     strongEmUToDecoration,
     iframeToVideo,
     imgToImage,

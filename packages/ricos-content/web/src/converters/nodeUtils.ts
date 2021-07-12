@@ -1,3 +1,4 @@
+import { pipe } from 'fp-ts/function';
 import { merge } from 'lodash';
 import {
   TextStyle_TextAlignment,
@@ -28,6 +29,7 @@ import {
   Link_Target,
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
+import { toUpperCase, replace } from '../fp-utils';
 
 export const createNode = <TData>(
   type: Node_Type,
@@ -124,6 +126,8 @@ export const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
   return reducedDecorations;
 };
 
+export const toLinkTarget = (target = 'SELF') => pipe(target, toUpperCase, replace('_', ''));
+
 export const createLink = ({
   url,
   rel,
@@ -144,7 +148,7 @@ export const createLink = ({
     anchor,
     url,
     rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
-    target: target?.toUpperCase().substring(1) as Link_Target,
+    target: toLinkTarget(target) as Link_Target,
   };
 };
 

@@ -1,5 +1,6 @@
 import { identity, flow, pipe } from 'fp-ts/function';
 import { Eq } from 'fp-ts/Eq';
+import * as O from 'fp-ts/Option';
 import { concatAll, Monoid } from 'fp-ts/Monoid';
 import * as A from 'fp-ts/Array';
 
@@ -60,3 +61,6 @@ export const log = <T>(tag: string, processor: (data: T) => string | T = identit
   console.log(tag, processor(data)); // eslint-disable-line no-console
   return data;
 };
+
+export const getMatches = (regex: RegExp) => (str: string) => (): O.Option<RegExpExecArray> =>
+  pipe(regex.exec(str), O.fromNullable);
