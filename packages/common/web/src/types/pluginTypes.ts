@@ -161,7 +161,6 @@ export type PluginType =
   | typeof TEXT_COLOR_TYPE
   | typeof TEXT_HIGHLIGHT_TYPE
   | typeof UNDO_REDO_TYPE
-  | typeof VERTICAL_EMBED_TYPE
   | typeof VIDEO_TYPE
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE
