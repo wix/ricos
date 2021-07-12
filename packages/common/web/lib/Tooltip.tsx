@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { ReactElement } from 'react';
+import React, { ReactElement, Suspense } from 'react';
 import { getTooltipStyles } from './tooltipStyles';
 import { GlobalContext } from '../src/Utils/contexts';
 
@@ -114,16 +114,18 @@ class Tooltip extends React.Component<Props> {
       <>
         {React.cloneElement(React.Children.only(children), elementProps)}
         {tooltipVisible ? (
-          <ToolTipComponent
-            active={tooltipVisible}
-            parent={'[data-tooltipid=true]'}
-            position={place}
-            arrow={!hideArrow ? 'center' : null}
-            style={style}
-            tooltipTimeout={10}
-          >
-            {content}
-          </ToolTipComponent>
+          <Suspense fallback={<div />}>
+            <ToolTipComponent
+              active={tooltipVisible}
+              parent={'[data-tooltipid=true]'}
+              position={place}
+              arrow={!hideArrow ? 'center' : null}
+              style={style}
+              tooltipTimeout={10}
+            >
+              {content}
+            </ToolTipComponent>
+          </Suspense>
         ) : null}
       </>
     );
