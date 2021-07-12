@@ -110,12 +110,12 @@ const convertContainerData = (
   delete data.containerData;
 };
 
-const convertVideoData = (data: VideoData & { src; metadata }) => {
+const convertVideoData = (data: VideoData & { src; metadata; title? }) => {
   const videoSrc = data.video?.src;
   if (videoSrc?.url) {
     data.src = videoSrc.url;
     const { src, width, height } = data.thumbnail || {};
-    data.metadata = { thumbnail_url: src?.url, width, height };
+    data.metadata = { thumbnail_url: src?.url, width, height, title: data.title };
   } else if (videoSrc?.custom) {
     const { src, width, height } = data.thumbnail || {};
     data.src = {
@@ -124,16 +124,19 @@ const convertVideoData = (data: VideoData & { src; metadata }) => {
     };
   }
   delete data.video;
+  delete data.title;
   delete data.thumbnail;
 };
 
 const convertDividerData = (
   data: Partial<DividerData> & {
     type;
+    lineStyle?: string;
     config?: ComponentData['config'];
   }
 ) => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.type = data.lineStyle?.toLowerCase();
+  delete data.lineStyle;
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
     data.config.size = data.width?.toLowerCase();

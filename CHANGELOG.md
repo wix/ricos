@@ -18,14 +18,26 @@
   </summary>
 
 ### :bug: Bug Fix
+- `common`
+  - [#2703](https://github.com/wix/ricos/pull/2703) tooltip: wrapped with Suspense
+  
+</details>
+<hr/>
+
+## 8.46.7 (July 12, 2021)
+### :bug: Bug Fix
 - `schema`
   - [#2669](https://github.com/wix-incubator/rich-content/pull/2669) fix new schema to support media plugins content ('disableExpand','disableDownload')
+- `image-plugin`
+  - [#2694](https://github.com/wix-incubator/rich-content/pull/2694) fix image data after settings cancel
 
 - `ricos-editor`
   - [#2684](https://github.com/wix-incubator/rich-content/pull/2684) BM's top toolbar overrides Ricos Modal
 
-</details>
-<hr/>
+### :house: Internal
+
+- `*`
+  - [#2697](https://github.com/wix/ricos/pull/2697) console.error when viewer/editor have error
 
 ## 8.46.6 (July 6, 2021)
 

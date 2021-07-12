@@ -87,13 +87,15 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
 
 const convertVideoData = (data: {
   src?: string | VideoComponentData;
-  metadata?: { thumbnail_url?: string; width?: number; height?: number };
+  metadata?: { thumbnail_url?: string; width?: number; height?: number; title?: string };
   video;
   thumbnail;
+  title?;
 }) => {
   if (typeof data.src === 'string') {
     data.video = { src: { url: data.src } };
-    const { thumbnail_url, width, height } = data.metadata || {};
+    const { thumbnail_url, width, height, title } = data.metadata || {};
+    title && (data.title = title);
     data.thumbnail = {
       src: { url: thumbnail_url },
       width,
@@ -112,11 +114,12 @@ const convertVideoData = (data: {
 const convertDividerData = (data: {
   type?: string;
   config?: ComponentData['config'];
+  lineStyle?: string;
   width;
   alignment;
   containerData;
 }) => {
-  has(data, 'type') && (data.type = data.type?.toUpperCase());
+  has(data, 'type') && (data.lineStyle = data.type?.toUpperCase());
   has(data, 'config.size') && (data.width = data.config?.size?.toUpperCase());
   has(data, 'config.alignment') && (data.alignment = data.config?.alignment?.toUpperCase());
   data.containerData = { width: { size: PluginContainerData_Width_Type.CONTENT } };
