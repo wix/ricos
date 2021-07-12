@@ -21,16 +21,26 @@ message GalleryData {
 }
 
 message GalleryStyles {
-  google.protobuf.Int32Value gallery_layout = 1;
-  google.protobuf.Int32Value gallery_size_px = 2;
-  google.protobuf.BoolValue one_row = 3;
-  google.protobuf.DoubleValue cube_ratio = 4;
-  google.protobuf.StringValue gallery_thumbnails_alignment = 5;
-  google.protobuf.BoolValue is_vertical = 6;
-  google.protobuf.Int32Value number_of_images_per_row = 7;
-  google.protobuf.Int32Value image_margin = 8;
-  google.protobuf.Int32Value thumbnail_spacings = 9;
-  google.protobuf.StringValue cube_type = 10;
+  // galleryLayout
+  google.protobuf.Int32Value layout = 1;
+  // gallerySizePx
+  google.protobuf.Int32Value item_target_size = 2;
+  // oneRow
+  google.protobuf.BoolValue horizontal_scroll = 3;
+  // cubeRatio
+  google.protobuf.DoubleValue item_ratio = 4;
+  // isVertical - bool
+  google.protobuf.StringValue layout_orientation = 5;
+  // numberOfImagesPerRow
+  google.protobuf.Int32Value images_per_row = 6;
+  google.protobuf.Int32Value image_margin = 7;
+  // cubeType
+  google.protobuf.StringValue item_crop = 8;
+  // related to thumbnails layout only
+  // galleryThumbnailsAlignment
+  google.protobuf.StringValue thumbnails_alignment = 9;
+  // thumbnailSpacings
+  google.protobuf.Int32Value thumbnail_spacings = 10;
 }
 
 message GalleryConfig {
