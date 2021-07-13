@@ -66,7 +66,7 @@ class NestedMenu extends Component<NestedMenuProps, State> {
           {isModalOpen && (
             <div className={styles.modal}>
               <Toolbar
-                editorCommands={editorCommands}
+                // editorCommands={editorCommands}
                 theme={theme}
                 isMobile={isMobile}
                 t={t}

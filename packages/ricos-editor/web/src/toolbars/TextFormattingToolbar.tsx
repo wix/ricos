@@ -15,7 +15,7 @@ import { LinkSettings } from 'ricos-common';
 import { isiOS } from 'wix-rich-content-editor-common';
 import {
   FloatingToolbarContainer,
-  Toolbar,
+  RicosToolbar,
   StaticToolbarContainer,
 } from 'wix-rich-content-toolbars-new';
 import { get } from 'lodash';
@@ -105,7 +105,7 @@ class TextFormattingToolbar extends Component<TextFormattingToolbarProps, State>
     const baseStyles = { flex: 'none' };
     const baseMobileStyles = { ...baseStyles, position: 'sticky', top: 0, zIndex: 9 };
     const ToolbarToRender = (
-      <Toolbar
+      <RicosToolbar
         theme={theme}
         isMobile={isMobile}
         t={t}

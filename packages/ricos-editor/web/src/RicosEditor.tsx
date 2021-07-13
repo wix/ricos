@@ -96,18 +96,18 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   loadEditor() {
     if (this.useTiptap) {
-      import(
-        /* webpackChunkName: wix-tiptap-editor */
-        'wix-tiptap-editor'
-      ).then(tiptapEditorModule => {
-        const { initTiptapEditor } = tiptapEditorModule;
-        const { content, injectedContent } = this.props;
-        this.tiptapApi = initTiptapEditor({
-          initialContent: content ?? injectedContent ?? emptyDraftContent,
-          onUpdate: this.onUpdate,
-        });
-        this.forceUpdate();
-      });
+      // import(
+      //   /* webpackChunkName: wix-tiptap-editor */
+      //   'wix-tiptap-editor'
+      // ).then(tiptapEditorModule => {
+      //   const { initTiptapEditor } = tiptapEditorModule;
+      //   const { content, injectedContent } = this.props;
+      //   this.tiptapApi = initTiptapEditor({
+      //     initialContent: content ?? injectedContent ?? emptyDraftContent,
+      //     onUpdate: this.onUpdate,
+      //   });
+      //   this.forceUpdate();
+      // });
     }
   }
 
@@ -305,7 +305,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     const newFormattingToolbar = this.props.experiments?.newFormattingToolbar?.enabled;
 
-    const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
+    const textToolbarType = StaticToolbar ? 'static' : null;
+    // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
 
     // let showFormattingToolbar;
     // if (newFormattingToolbar && textToolbarType !== 'static' && !isMobile && activeEditor) {
