@@ -193,9 +193,10 @@ const handleTitleButton = (buttonsList, index, editorCommands: editorCommands) =
 const handleButtonOnSave = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onSave) {
     const buttonName = buttonsList[index].name;
+
     if (Object.keys(textBlockButtons).includes(buttonName)) {
       buttonsList[index].onSave = type => editorCommands.setBlockType(type);
-    } else if (Object.keys(setTextAlignment).includes(buttonName)) {
+    } else if (buttonName === 'Alignment') {
       buttonsList[index].onSave = type => editorCommands.setTextAlignment(type);
     } else if (Object.keys(decorationButtons).includes(buttonName)) {
       buttonsList[index].onSave = type => {
@@ -229,10 +230,8 @@ const handleButtonModal = (
         Modal && <Modal {...props} currentSelect={currentHeading} />;
     } else if (buttonName === 'Alignment') {
       const alignment = editorCommands.getTextAlignment();
-      const onChange = alignment => editorCommands.setTextAlignment(alignment);
       const Modal = buttonsFullData[buttonName].modal;
-      buttonsList[index].modal = props =>
-        Modal && <Modal {...props} currentSelect={alignment} onChange={onChange} />;
+      buttonsList[index].modal = props => Modal && <Modal {...props} currentSelect={alignment} />;
     } else if (buttonName === 'LINE_SPACING') {
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();

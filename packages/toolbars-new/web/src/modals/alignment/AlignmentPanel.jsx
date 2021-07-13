@@ -13,16 +13,19 @@ const alignments = [
   { text: 'Justify', commandKey: 'justify', icon: <AlignJustifyIcon /> },
 ];
 
-const AlignmentPanel = ({ isMobile, t, editorCommands, theme, currentSelect, onChange }) => {
+const AlignmentPanel = ({ isMobile, t, theme, currentSelect, onSave, ...props }) => {
   const panelHeader = t('Alignment');
-
+  const hasIcons = true;
+  const onChange = alignment => {
+    props?.onToolbarButtonClick?.(alignment);
+    onSave(alignment);
+  };
   const onBlur = e => {
     const { target, relatedTarget, currentTarget } = e;
     if (!currentTarget.contains(relatedTarget)) {
       setTimeout(() => target.focus());
     }
   };
-  const hasIcons = true;
 
   const panel = isMobile ? (
     <MobilePanel
