@@ -152,18 +152,15 @@ const convertDividerData = (
 };
 
 const convertGalleryStyles = styles => {
-  if (styles) {
-    has(styles, 'layout') && (styles.galleryLayout = styles.layout);
-    has(styles, 'itemTargetSize') && (styles.gallerySizePx = styles.itemTargetSize);
-    has(styles, 'horizontalScroll') && (styles.oneRow = styles.horizontalScroll);
-    has(styles, 'itemRatio') && (styles.cubeRatio = styles.itemRatio);
-    has(styles, 'layoutOrientation') &&
-      (styles.isVertical = styles.layoutOrientation === 'vertical');
-    has(styles, 'imagesPerRow') && (styles.numberOfImagesPerRow = styles.imagesPerRow);
-    has(styles, 'itemCrop') && (styles.cubeType = styles.itemCrop);
-    has(styles, 'thumbnailsAlignment') &&
-      (styles.galleryThumbnailsAlignment = styles.thumbnailsAlignment);
-  }
+  has(styles, 'layout') && (styles.galleryLayout = styles.layout);
+  has(styles, 'itemTargetSize') && (styles.gallerySizePx = styles.itemTargetSize);
+  has(styles, 'horizontalScroll') && (styles.oneRow = styles.horizontalScroll);
+  has(styles, 'itemRatio') && (styles.cubeRatio = styles.itemRatio);
+  has(styles, 'layoutOrientation') && (styles.isVertical = styles.layoutOrientation === 'vertical');
+  has(styles, 'imagesPerRow') && (styles.numberOfImagesPerRow = styles.imagesPerRow);
+  has(styles, 'itemCrop') && (styles.cubeType = styles.itemCrop);
+  has(styles, 'thumbnailsAlignment') &&
+    (styles.galleryThumbnailsAlignment = styles.thumbnailsAlignment);
   delete styles.layout;
   delete styles.itemTargetSize;
   delete styles.itemRatio;
