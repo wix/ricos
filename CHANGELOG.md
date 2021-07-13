@@ -20,7 +20,7 @@
 ### :house: Internal
 
 - `plugin-commons`
-  - [#2581](https://github.com/wix/ricos/pull/2581) upload functionality isolated from plugins (revert 8.46.6)
+  - [#2712](https://github.com/wix/ricos/pull/2712) upload functionality isolated from plugins (revert 8.46.6)
 
 </details>
 <hr/>
