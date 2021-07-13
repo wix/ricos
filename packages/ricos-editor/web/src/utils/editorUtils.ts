@@ -128,7 +128,7 @@ export function createDataConverter(
       if (!isSSR()) {
         isUpdated = false;
         currEditorState = editorState;
-        debounceUpdate().catch(err => onError(err));
+        debounceUpdate().catch(err => onError?.(err));
       }
     },
   };

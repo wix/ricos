@@ -337,13 +337,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   render() {
     try {
       if (this.state.error) {
-        this.props.onError(this.state.error);
+        this.props.onError?.(this.state.error);
         return null;
       }
 
       return this.useTiptap ? this.renderTiptapEditor() : this.renderDraftEditor();
     } catch (e) {
-      this.props.onError(e);
+      this.props.onError?.(e);
       return null;
     }
   }
