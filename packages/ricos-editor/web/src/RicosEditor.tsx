@@ -86,9 +86,9 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   updateLocale = async () => {
     const { children } = this.props;
     const locale = children?.props.locale || this.props.locale;
-    await localeStrategy(locale).then(localeData =>
-      this.setState({ localeData, remountKey: !this.state.remountKey })
-    );
+    await localeStrategy(locale)
+      .then(localeData => this.setState({ localeData, remountKey: !this.state.remountKey }))
+      .catch(error => this.setState({ error }));
   };
 
   componentDidMount() {
