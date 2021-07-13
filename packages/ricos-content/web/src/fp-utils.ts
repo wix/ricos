@@ -47,11 +47,7 @@ export const replace = (replaced: RegExp | string, by: string) => (str: string):
 export const equals = <T>(E: Eq<T>) => (lhs: T) => (rhs: T) => E.equals(lhs, rhs);
 
 export const concatApply = <T, D>(m: Monoid<T>) => (fns: ((data: D) => T)[]) => (data: D) =>
-  pipe(
-    fns,
-    A.map(fn => fn(data)),
-    concatAll(m)
-  );
+  pipe(fns, A.ap(A.of(data)), concatAll(m));
 
 export const not = <T>(predicate: (data: T) => boolean) => (data: T) => !predicate(data);
 

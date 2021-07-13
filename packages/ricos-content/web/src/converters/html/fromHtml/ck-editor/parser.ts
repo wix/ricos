@@ -3,7 +3,7 @@ import * as E from 'fp-ts/Either';
 
 import { Link, Decoration_Type, VideoData, Node_Type } from 'ricos-schema';
 import { TextNode, Element } from 'parse5';
-import { getMatches, replace, log } from '../../../../fp-utils';
+import { getMatches, replace } from '../../../../fp-utils';
 import { createNode, createLink } from '../../../nodeUtils';
 import { hasTag, getAttributes } from '../core/ast-utils';
 import { preprocess } from './preprocess';
