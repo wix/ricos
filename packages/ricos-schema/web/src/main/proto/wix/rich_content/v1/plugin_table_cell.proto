@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package wix.rich_content.v1;
+
+import "wix/rich_content/v1/common.proto";
+import "google/protobuf/wrappers.proto";
+
+message TableCellData {
+  message Style {
+    google.protobuf.StringValue vertical_align = 1;
+    google.protobuf.StringValue background_color = 2;
+  }
+  message Border {
+    google.protobuf.StringValue left = 1;
+    google.protobuf.StringValue right = 2;
+    google.protobuf.StringValue top = 3;
+    google.protobuf.StringValue bottom = 4;
+  }
+  Style style = 1;
+  Border border = 2;
+}
+

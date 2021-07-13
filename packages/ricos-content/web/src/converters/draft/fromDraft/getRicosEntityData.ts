@@ -1,7 +1,13 @@
 import { pickBy, identity } from 'lodash';
 /* eslint-disable fp/no-delete */
 import { TextStyle, NodeStyle } from 'ricos-schema';
-import { RicosEntityMap, RicosContentBlock, LINK_PREVIEW_TYPE, EMBED_TYPE } from '../../..';
+import {
+  RicosEntityMap,
+  RicosContentBlock,
+  LINK_PREVIEW_TYPE,
+  EMBED_TYPE,
+  TABLE_TYPE,
+} from '../../..';
 import { TO_RICOS_DATA_FIELD, TO_RICOS_PLUGIN_TYPE } from '../consts';
 import { convertBlockDataToRicos } from './convertRicosPluginData';
 
@@ -13,11 +19,16 @@ export const getEntity = (key: string | number, entityMap: RicosEntityMap) => {
     console.error(`Unknown entity type "${blockType}"!`);
     return null;
   }
-
-  return {
+  const entity = {
     type: TO_RICOS_PLUGIN_TYPE[blockType],
     [dataFieldName]: convertBlockDataToRicos(blockType, data),
   };
+  return blockType === TABLE_TYPE
+    ? {
+        ...entity,
+        rows: data.config.rows,
+      }
+    : entity;
 };
 
 export const getTextStyle = (blockData?: RicosContentBlock['data']): TextStyle => {

@@ -775,6 +775,30 @@
       "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {}
+    },
+    {
+      "key": "285l3",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 22
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "avgsl",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
     }
   ],
   "entityMap": {
@@ -961,7 +985,8 @@
           "gotStyleParams": true,
           "showVideoPlayButton": true,
           "videoPlay": "onClick",
-          "numberOfImagesPerRow": 3
+          "numberOfImagesPerRow": 3,
+          "allowContextMenu": true
         },
         "disableExpand": false,
         "config": {
@@ -1291,7 +1316,132 @@
         "disableDownload": false,
         "disableExpand": false
       }
+    },
+    "22": {
+      "type": "wix-rich-content-plugin-table",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "kawvqt96c",
+                        "text": "cell 1",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  },
+                  "style": {
+                    "backgroundColor": "#ff0000"
+                  },
+                  "border": {
+                    "left": "#3a54b4",
+                    "right": "#3a54b4",
+                    "top": "#3a54b4",
+                    "bottom": "#3a54b4"
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "go6lqq3ej",
+                        "text": "cell 2",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "xsiruatan",
+                        "text": "cell 3",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "key": "adz40fqw0",
+                        "text": "cell 4",
+                        "type": "unstyled",
+                        "depth": 0,
+                        "inlineStyleRanges": [
+                          {
+                            "offset": 0,
+                            "length": 6,
+                            "style": "BOLD"
+                          },
+                          {
+                            "offset": 0,
+                            "length": 6,
+                            "style": "{\"FG\":\"color1\"}"
+                          }
+                        ],
+                        "entityRanges": [],
+                        "data": {}
+                      }
+                    ],
+                    "entityMap": {}
+                  },
+                  "style": {
+                    "backgroundColor": "#3a54b4",
+                    "verticalAlign": "middle"
+                  },
+                  "border": {
+                    "left": "#bfad80",
+                    "right": "#bfad80",
+                    "top": "#bfad80",
+                    "bottom": "#bfad80"
+                  }
+                }
+              }
+            }
+          },
+          "colsWidth": [
+            10,
+            10
+          ],
+          "rowsHeight": [
+            47,
+            47
+          ],
+          "colsMinWidth": [
+            120,
+            120
+          ]
+        },
+        "type": "wix-rich-content-plugin-table"
+      }
     }
   },
-  "VERSION": "8.46.6"
+  "VERSION": "8.46.9"
 }

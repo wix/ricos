@@ -33,6 +33,8 @@ import "wix/rich_content/v1/plugin_poll.proto";
 import "wix/rich_content/v1/plugin_vertical_embed.proto";
 import "wix/rich_content/v1/plugin_video.proto";
 import "wix/rich_content/v1/plugin_embed.proto";
+import "wix/rich_content/v1/plugin_table.proto";
+import "wix/rich_content/v1/plugin_table_cell.proto";
 
 message RichContent {
     repeated Node nodes = 1; // List of nodes
@@ -64,6 +66,8 @@ message Node {
         COLLAPSIBLE_LIST = 20;
         TABLE = 21;
         EMBED = 22;
+        TABLE_CELL = 23;
+        TABLE_ROW = 24;
     }
 
     Type type = 1; // Node type
@@ -88,6 +92,8 @@ message Node {
         VerticalEmbedData vertical_embed_data = 19;
         VideoData video_data = 20;
         EmbedData embed_data = 21;
+        TableData table_data = 22;
+        TableCellData table_cell_data = 23;
     }
 }
 
