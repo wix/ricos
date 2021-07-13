@@ -66,7 +66,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
     content: DraftContent;
   };
 
-  const parseTableCell = ({ key, style, border, content }): Node => ({
+  const parseTableCell = (key, { style, border, content }): Node => ({
     key,
     type: Node_Type.TABLE_CELL,
     tableCellData: { style, border },
@@ -76,7 +76,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
   const parseTableRow = (key: string, row: Record<string, Record<string, TableCell>>): Node => ({
     key,
     type: Node_Type.TABLE_ROW,
-    nodes: Object.entries(row.columns).map(([, cell]) => parseTableCell(cell)),
+    nodes: Object.entries(row.columns).map(([i, cell]) => parseTableCell(i, cell)),
   });
 
   const parseTable = (rows: Record<string, Record<string, Record<string, TableCell>>>): Node[] =>
