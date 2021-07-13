@@ -50,6 +50,7 @@ export const LAYOUT_FIXED_STYLES = {
   },
   [GALLERY_LAYOUTS.MASONRY]: {
     imageMargin: 5,
+    isVertical: false,
     gridStyle: 0,
   },
   [GALLERY_LAYOUTS.GRID]: {
