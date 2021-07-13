@@ -1,8 +1,8 @@
 import React from 'react';
 import { EditorPropsContext } from './context';
 import Toolbar from './components/Toolbar';
-import { JSONContent } from '@tiptap/core';
-import { Editor, EditorContent } from '@tiptap/react';
+import { JSONContent } from '@tiptap-es5/core';
+import { Editor, EditorContent } from '@tiptap-es5/react';
 import {
   draftToTiptap,
   tiptapToDraft,
