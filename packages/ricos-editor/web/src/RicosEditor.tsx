@@ -178,7 +178,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       const editorState = createWithContent(convertFromRaw(newProps.injectedContent));
       this.setState({ editorState }, () => {
         this.dataInstance = createDataConverter(this.props.onChange, this.props.injectedContent);
-        this.dataInstance.refresh(editorState);
+        this.dataInstance.refresh(editorState, this.props.onError);
       });
     }
   }
@@ -192,12 +192,16 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   onChange = (childOnChange?: RichContentEditorProps['onChange']) => (editorState: EditorState) => {
-    this.dataInstance.refresh(editorState);
-    if (this.getContentTraits().isContentChanged) {
-      this.onInitialContentChanged();
+    try {
+      this.dataInstance.refresh(editorState, this.props.onError);
+      if (this.getContentTraits().isContentChanged) {
+        this.onInitialContentChanged();
+      }
+      childOnChange?.(editorState);
+      this.onBusyChange(editorState.getCurrentContent());
+    } catch (err) {
+      this.setState({ error: err });
     }
-    childOnChange?.(editorState);
-    this.onBusyChange(editorState.getCurrentContent());
   };
 
   getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
@@ -211,12 +215,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   getContentTraits = () => this.dataInstance.getContentTraits();
 
   getContent = async (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
-    const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
       console.warn(PUBLISH_DEPRECATION_WARNING_v9); // eslint-disable-line
       this.sendPublishBi(postId); //async
     }
-    return getContentState({ shouldRemoveErrorBlocks });
+    return this.dataInstance.getContentState({ shouldRemoveErrorBlocks });
   };
 
   getContentPromise = async ({
@@ -334,13 +337,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   render() {
     try {
       if (this.state.error) {
-        this.props.onError?.(this.state.error);
+        this.props.onError(this.state.error);
         return null;
       }
 
       return this.useTiptap ? this.renderTiptapEditor() : this.renderDraftEditor();
     } catch (e) {
-      this.props.onError?.(e);
+      this.props.onError(e);
       return null;
     }
   }

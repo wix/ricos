@@ -35,7 +35,7 @@ export interface RicosProps {
   locale?: string;
   localeContent?: string;
   mediaSettings?: MediaSettings;
-  onError?: OnErrorFunction;
+  onError: OnErrorFunction;
   theme?: RicosTheme;
   textAlignment?: TextAlignment;
   onAtomicBlockFocus?: onAtomicBlockFocus;
@@ -91,7 +91,7 @@ export interface EditorDataInstance {
     isLastChangeEdit: boolean;
   };
   getEditorState: () => EditorState;
-  refresh: (editorState: EditorState) => void;
+  refresh: (editorState: EditorState, onError: OnErrorFunction) => void;
   waitForUpdate: () => void;
   getContentStatePromise: () => Promise<DraftContent>;
 }
