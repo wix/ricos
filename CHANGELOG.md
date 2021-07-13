@@ -17,13 +17,14 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.46.11 (July 14, 2021)
 ### :bug: Bug Fix
 
 - `ricos-content`
   - [#2715](https://github.com/wix/ricos/pull/2715) replace Object.fromEntries for backwards compatibility
-
-</details>
-<hr/>
 
 ## 8.46.9 (July 13, 2021)
 
