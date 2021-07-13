@@ -47,7 +47,7 @@ message Link {
 
 message PluginContainerData {
     message Spoiler {
-        google.protobuf.BoolValue is_enabled = 1;
+        google.protobuf.BoolValue enabled = 1;
         google.protobuf.StringValue description = 2;
         google.protobuf.StringValue button_text = 3;
     }

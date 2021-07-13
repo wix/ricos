@@ -72,7 +72,7 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
   const { size, alignment, width, spoiler, height } = data.config || {};
   const { enabled, description, buttonContent } = spoiler || {};
   const newSpoiler: PluginContainerData_Spoiler | undefined = spoiler && {
-    isEnabled: enabled || false,
+    enabled: enabled || false,
     description,
     buttonText: buttonContent,
   };
