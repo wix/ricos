@@ -1,8 +1,10 @@
 import { identity, pipe, flow } from 'fp-ts/function';
 import * as E from 'fp-ts/Either';
+import * as O from 'fp-ts/Option';
 
 import { Link, Decoration_Type, VideoData, Node_Type } from 'ricos-schema';
 import { TextNode, Element } from 'parse5';
+import { getMatches, replace } from '../../../../fp-utils';
 import { createNode, createLink } from '../../../nodeUtils';
 import { hasTag, getAttributes } from '../core/ast-utils';
 import { preprocess } from './preprocess';
@@ -62,7 +64,13 @@ const noEmptyLineText: Rule = [
   textToText[1],
 ];
 
-const toCustomData = (onclick: string) => {};
+const toCustomData = flow(
+  getMatches(/Wix\.(.+)\('(.+)'\)/),
+  O.map(([, method, data]: string[]) => ({ method, data })),
+  O.map(({ method, data }) => ({ method, data: pipe(data, replace(/~#~/g, '"'), JSON.parse) })),
+  O.map(JSON.stringify),
+  O.fold(() => 'failed to parse custom data', identity)
+);
 
 const getSrc = (onclick: string, url: string): Record<string, string> =>
   url.startsWith('javascript:') && onclick.startsWith('Wix.')

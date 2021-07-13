@@ -62,5 +62,5 @@ export const log = <T>(tag: string, processor: (data: T) => string | T = identit
   return data;
 };
 
-export const getMatches = (regex: RegExp) => (str: string) => (): O.Option<RegExpExecArray> =>
+export const getMatches = (regex: RegExp) => (str: string): O.Option<RegExpExecArray> =>
   pipe(regex.exec(str), O.fromNullable);
