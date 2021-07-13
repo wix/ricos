@@ -12,13 +12,13 @@ export const DEFAULT_HEADERS_DROPDOWN_OPTIONS = Object.freeze(['P', 'H2', 'H3', 
 class HeadingsPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { heading: props.heading };
+    this.state = { heading: props.currentSelect };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
   componentDidUpdate() {
     const { heading } = this.state;
-    if (heading !== this.props.heading) {
+    if (heading !== this.props.currentSelect) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ heading: this.props.currentSelect });
     }

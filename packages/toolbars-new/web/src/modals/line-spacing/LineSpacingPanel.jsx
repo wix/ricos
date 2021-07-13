@@ -68,7 +68,7 @@ class LineSpacingPanel extends Component {
         {...{
           currentSelect,
           options: lineHeights,
-          onChange: onChangeLineHeight,
+          onChange: onSaveLineHeight,
           panelHeader,
           showCustomPanel,
         }}
