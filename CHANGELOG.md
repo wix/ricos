@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+
+- `spoiler`
+  - [#2704](https://github.com/wix/ricos/pull/2704) spoiler schema
+
 </details>
 <hr/>
 

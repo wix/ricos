@@ -356,6 +356,7 @@
           },
           "alignment": "CENTER",
           "spoiler": {
+            "enabled": true,
             "description": "SPOILER ALERT!!!",
             "buttonText": "What's behind door number 1?"
           }
@@ -1008,7 +1009,7 @@
       "nodes": [
         {
           "type": "PARAGRAPH",
-          "key": "45v9j",
+          "key": "cj084",
           "nodes": [
             {
               "type": "TEXT",
@@ -1100,7 +1101,7 @@
     },
     {
       "type": "ORDERED_LIST",
-      "key": "lslb",
+      "key": "4d6u5",
       "nodes": [
         {
           "type": "LIST_ITEM",
@@ -1108,7 +1109,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "d9nkc",
+              "key": "9va36",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1129,7 +1130,7 @@
             },
             {
               "type": "ORDERED_LIST",
-              "key": "fq0eg",
+              "key": "doj60",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1137,7 +1138,7 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "cm5is",
+                      "key": "6c1b0",
                       "nodes": [
                         {
                           "type": "TEXT",
@@ -1158,7 +1159,7 @@
                     },
                     {
                       "type": "ORDERED_LIST",
-                      "key": "af9n3",
+                      "key": "ct9gs",
                       "nodes": [
                         {
                           "type": "LIST_ITEM",
@@ -1166,7 +1167,7 @@
                           "nodes": [
                             {
                               "type": "PARAGRAPH",
-                              "key": "1mcp0",
+                              "key": "5ui5b",
                               "nodes": [
                                 {
                                   "type": "TEXT",
@@ -1187,7 +1188,7 @@
                             },
                             {
                               "type": "ORDERED_LIST",
-                              "key": "5rum7",
+                              "key": "6hak",
                               "nodes": [
                                 {
                                   "type": "LIST_ITEM",
@@ -1195,7 +1196,7 @@
                                   "nodes": [
                                     {
                                       "type": "PARAGRAPH",
-                                      "key": "dv7qe",
+                                      "key": "eje0t",
                                       "nodes": [
                                         {
                                           "type": "TEXT",
@@ -1216,7 +1217,7 @@
                                     },
                                     {
                                       "type": "ORDERED_LIST",
-                                      "key": "6263v",
+                                      "key": "coea7",
                                       "nodes": [
                                         {
                                           "type": "LIST_ITEM",
@@ -1224,7 +1225,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "3p7ut",
+                                              "key": "b1asu",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1251,7 +1252,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "9misa",
+                                              "key": "ecr97",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1294,7 +1295,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "9tjtt",
+              "key": "cdv8j",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1315,7 +1316,7 @@
             },
             {
               "type": "BULLET_LIST",
-              "key": "5v8tt",
+              "key": "c7uqe",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1323,7 +1324,7 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "113qg",
+                      "key": "2g2nc",
                       "nodes": [
                         {
                           "type": "TEXT",
@@ -1354,7 +1355,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "cl20n",
+              "key": "2knbn",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1390,7 +1391,7 @@
     },
     {
       "type": "BULLET_LIST",
-      "key": "709u",
+      "key": "ficao",
       "nodes": [
         {
           "type": "LIST_ITEM",
@@ -1398,7 +1399,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "8llmf",
+              "key": "80fbm",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1419,7 +1420,7 @@
             },
             {
               "type": "BULLET_LIST",
-              "key": "a5fji",
+              "key": "apeuh",
               "nodes": [
                 {
                   "type": "LIST_ITEM",
@@ -1427,7 +1428,7 @@
                   "nodes": [
                     {
                       "type": "PARAGRAPH",
-                      "key": "3ve0r",
+                      "key": "1oc20",
                       "nodes": [
                         {
                           "type": "TEXT",
@@ -1448,7 +1449,7 @@
                     },
                     {
                       "type": "BULLET_LIST",
-                      "key": "726i",
+                      "key": "4p6k8",
                       "nodes": [
                         {
                           "type": "LIST_ITEM",
@@ -1456,7 +1457,7 @@
                           "nodes": [
                             {
                               "type": "PARAGRAPH",
-                              "key": "76ug9",
+                              "key": "41h5r",
                               "nodes": [
                                 {
                                   "type": "TEXT",
@@ -1477,7 +1478,7 @@
                             },
                             {
                               "type": "BULLET_LIST",
-                              "key": "9khk9",
+                              "key": "u2to",
                               "nodes": [
                                 {
                                   "type": "LIST_ITEM",
@@ -1485,7 +1486,7 @@
                                   "nodes": [
                                     {
                                       "type": "PARAGRAPH",
-                                      "key": "2iso",
+                                      "key": "4ejvi",
                                       "nodes": [
                                         {
                                           "type": "TEXT",
@@ -1506,7 +1507,7 @@
                                     },
                                     {
                                       "type": "BULLET_LIST",
-                                      "key": "bal6r",
+                                      "key": "65k22",
                                       "nodes": [
                                         {
                                           "type": "LIST_ITEM",
@@ -1514,7 +1515,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "cg0fj",
+                                              "key": "30tm6",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1541,7 +1542,7 @@
                                           "nodes": [
                                             {
                                               "type": "PARAGRAPH",
-                                              "key": "9r7mo",
+                                              "key": "10oe",
                                               "nodes": [
                                                 {
                                                   "type": "TEXT",
@@ -1584,7 +1585,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "3f2fb",
+              "key": "e879u",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1611,7 +1612,7 @@
           "nodes": [
             {
               "type": "PARAGRAPH",
-              "key": "7rah3",
+              "key": "6d3uk",
               "nodes": [
                 {
                   "type": "TEXT",
@@ -1732,7 +1733,9 @@
             "custom": "300"
           },
           "alignment": "RIGHT",
-          "spoiler": {}
+          "spoiler": {
+            "enabled": true
+          }
         },
         "image": {
           "src": {
@@ -1801,7 +1804,7 @@
   ],
   "metadata": {
     "version": 1,
-    "createdTimestamp": "2021-07-11T10:01:19.262Z",
-    "updatedTimestamp": "2021-07-11T10:01:19.262Z"
+    "createdTimestamp": "2021-07-13T13:13:09.871Z",
+    "updatedTimestamp": "2021-07-13T13:13:09.871Z"
   }
 }
