@@ -150,4 +150,5 @@ UrlInputModal.propTypes = {
   controlsPosition: PropTypes.string,
   selected: PropTypes.bool,
   textInput: PropTypes.object || PropTypes.bool,
+  buttonSize: PropTypes.string,
 };
