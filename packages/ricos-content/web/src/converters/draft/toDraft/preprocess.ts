@@ -1,10 +1,7 @@
-import { flow, identity } from 'fp-ts/function';
-
-import { RichContent, Node_Type, Node } from 'ricos-schema';
+import { Node_Type, Node } from 'ricos-schema';
 import { modify } from '../../../RicosContentAPI/modify';
 import { extract } from '../../../RicosContentAPI/extract';
 import { partitionBy } from '../../nodeUtils';
-import { log } from '../../../fp-utils';
 
 const newLine: Node = {
   type: Node_Type.TEXT,

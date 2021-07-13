@@ -26,8 +26,10 @@ describe('CKEditor parser', () => {
     expect(images[0].imageData?.image?.src?.url).toEqual(
       'https://static.wixstatic.com/media/23a20f14fc6d489d91b14aaa3033cd30.jpg'
     );
-    // TODO: external link support
-    expect(images[0].imageData?.link?.url).toEqual('javascript:void(0)');
+    expect(images[0].imageData?.link?.url).toEqual('javascript:void(0)'); // eslint-disable-line no-script-url
+    expect(images[0].imageData?.link?.customData).toEqual(
+      JSON.stringify({ method: 'navigateToPage', data: 'eihsd' })
+    );
   });
 
   it('should output valid content for toDraft', () => {
@@ -36,7 +38,7 @@ describe('CKEditor parser', () => {
     console.log(JSON.stringify(rich, null, 2)); // eslint-disable-line no-console
     const draft = toDraft(rich);
     console.log(draft); // eslint-disable-line no-console
-    expect(draft.blocks.length).toEqual(1);
-    expect(Object.keys(draft.entityMap).length).toEqual(1);
+    expect(draft.blocks.length).toEqual(9);
+    expect(Object.keys(draft.entityMap).length).toEqual(3);
   });
 });

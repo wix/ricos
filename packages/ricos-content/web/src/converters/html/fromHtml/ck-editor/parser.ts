@@ -1,10 +1,9 @@
 import { identity, pipe, flow } from 'fp-ts/function';
 import * as E from 'fp-ts/Either';
-import * as O from 'fp-ts/Option';
 
 import { Link, Decoration_Type, VideoData, Node_Type } from 'ricos-schema';
 import { TextNode, Element } from 'parse5';
-import { getMatches, replace } from '../../../../fp-utils';
+import { getMatches, replace, log } from '../../../../fp-utils';
 import { createNode, createLink } from '../../../nodeUtils';
 import { hasTag, getAttributes } from '../core/ast-utils';
 import { preprocess } from './preprocess';
@@ -20,7 +19,6 @@ import {
   identityRule,
 } from '../core/rules';
 import { Rule } from '../core/models';
-// import { log } from '../../../../fp-utils';
 
 const toURL = (str: string) =>
   E.tryCatch(
@@ -41,20 +39,12 @@ const toYoutubeWatchUrl = flow(
 
 const toVideoData = flow(
   getAttributes,
-  ({ src }) =>
-    ({
-      video: { src: { url: toYoutubeWatchUrl(src) } },
-    } as VideoData)
+  ({ src }) => ({ video: { src: { url: toYoutubeWatchUrl(src) } } } as VideoData)
 );
 
 const iframeToVideo: Rule = [
   hasTag('iframe'),
-  () => (node: Element) => [
-    createNode(Node_Type.VIDEO, {
-      nodes: [],
-      data: toVideoData(node),
-    }),
-  ],
+  () => (node: Element) => [createNode(Node_Type.VIDEO, { nodes: [], data: toVideoData(node) })],
 ];
 
 const traverseDiv: Rule = [hasTag('div'), identityRule[1]];
@@ -64,26 +54,31 @@ const noEmptyLineText: Rule = [
   textToText[1],
 ];
 
-const toCustomData = flow(
-  getMatches(/Wix\.(.+)\('(.+)'\)/),
-  O.map(([, method, data]: string[]) => ({ method, data })),
-  O.map(({ method, data }) => ({ method, data: pipe(data, replace(/~#~/g, '"'), JSON.parse) })),
-  O.map(JSON.stringify),
-  O.fold(() => 'failed to parse custom data', identity)
+const parseNavigationData = flow(
+  replace(/~#~/g, '"'),
+  d =>
+    E.tryCatch(
+      () => JSON.parse(d),
+      () => d
+    ),
+  E.fold(identity, identity)
 );
 
-const getSrc = (onclick: string, url: string): Record<string, string> =>
-  url.startsWith('javascript:') && onclick.startsWith('Wix.')
-    ? { customData: toCustomData(onclick) }
-    : {};
+const toCustomData = flow(
+  getMatches(/Wix\.(.+)\('(.+)'\)/),
+  E.fromOption(() => 'failed to parse custom link onclick'),
+  E.map(([, method, data]: string[]) => ({ method, data: parseNavigationData(data) })),
+  E.map(JSON.stringify),
+  E.fold(identity, identity)
+);
 
-const mergeSrc = (onclick: string, url: string) => (link: Link): Link => ({
-  ...link,
-  ...getSrc(onclick, url),
-});
+const getData = (onclick?: string): Record<string, string> =>
+  onclick?.startsWith('Wix.') ? { customData: toCustomData(onclick) } : {};
+
+const mergeData = (onclick?: string) => (link: Link): Link => ({ ...link, ...getData(onclick) });
 
 const createCustomLink = ({ url, onclick, ...rest }: Record<string, string>): Link =>
-  pipe({ url, ...rest }, createLink, mergeSrc(onclick, url));
+  pipe({ url, ...rest }, createLink, mergeData(onclick));
 
 const aToCustomLink: Rule = [
   aToLink[0],
