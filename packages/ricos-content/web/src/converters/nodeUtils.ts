@@ -76,7 +76,7 @@ export const createLink = ({
   target?: string;
   anchor?: string;
 }): Link => {
-  const relValues =
+  const relValues: [string, boolean][] =
     rel
       ?.split(' ')
       .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
