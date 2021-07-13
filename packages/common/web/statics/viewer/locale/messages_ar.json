@@ -26,7 +26,7 @@
   "Spoiler_Reveal_Video_Placeholder": "يحتوي هذا الفيديو على سبويلر",
   "Preview_SeeFullPost_Label": "عرض المنشور كاملاً",
   "UploadFile_Viewer_Download": "تنزيل {{fileType}}",
-  "$schema":   "VerticalEmbed_Bookings_Button": "حجز الآن",
+  "VerticalEmbed_Bookings_Button": "حجز الآن",
   "VerticalEmbed_Units_Minute": "{{minutes}} د",
   "VerticalEmbed_Products_Button": "شراء الآن",
   "VerticalEmbed_Units_Hour": "{{hours}} س",
