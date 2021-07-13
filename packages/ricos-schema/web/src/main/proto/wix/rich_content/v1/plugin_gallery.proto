@@ -44,20 +44,14 @@ message GalleryConfig {
   google.protobuf.BoolValue disableExpand = 5;
 }
 
-message GalleryVideo {
-  Media video = 1;
-  Media thumbnail = 2;
-}
-
 message GalleyItemMetadata {
-  oneof data {
-    Media image = 1;
-    GalleryVideo video = 2;
-  }
+  google.protobuf.Int32Value width = 1;
+  google.protobuf.Int32Value height = 2;
   google.protobuf.StringValue title = 3;
   google.protobuf.StringValue altText = 4;
   Link link = 5;
   google.protobuf.StringValue type = 6;
+  Media thumbnail = 7;
 }
 
 message GalleryItem {
