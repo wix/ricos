@@ -118,20 +118,18 @@ class TextFormattingToolbar extends Component<TextFormattingToolbarProps, State>
         toolbarType={ToolbarType.FORMATTING}
       />
     );
+    const ToolbarContainer =
+      textToolbarType === 'static' ? StaticToolbarContainer : FloatingToolbarContainer;
 
-    return textToolbarType === 'static' ? (
+    return (
       <div style={isMobile ? baseMobileStyles : baseStyles} dir={getLangDir(locale)}>
-        <StaticToolbarContainer isMobile={isMobile}>{ToolbarToRender}</StaticToolbarContainer>
-      </div>
-    ) : (
-      <div style={baseStyles} dir={getLangDir(locale)}>
-        <FloatingToolbarContainer
+        <ToolbarContainer
           isMobile={isMobile}
           showFormattingToolbar={showFormattingToolbar || false}
           removeToolbarFocus={removeToolbarFocus}
         >
           {ToolbarToRender}
-        </FloatingToolbarContainer>
+        </ToolbarContainer>
       </div>
     );
   }
