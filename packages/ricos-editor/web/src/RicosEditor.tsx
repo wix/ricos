@@ -305,7 +305,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     const newFormattingToolbar = this.props.experiments?.newFormattingToolbar?.enabled;
 
-    const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
+    const textToolbarType = StaticToolbar ? 'static' : null;
+    // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
 
     // let showFormattingToolbar;
     // if (newFormattingToolbar && textToolbarType !== 'static' && !isMobile && activeEditor) {

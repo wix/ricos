@@ -7,58 +7,28 @@ import GroupButton from './ButtonComponents/GroupButton';
 import DropdownButton from './ButtonComponents/DropdownButton';
 import ModalButton from './ButtonComponents/ModalButton';
 import ColorPickerButton from './ButtonComponents/ColorPickerButton';
-import NestedMenu from './ButtonComponents/NestedMenu';
 import ToolbarButton from './ToolbarButton';
 import ContextMenu from './ButtonComponents/ContextMenu';
-import { createButtonsList } from './buttonsListCreator';
-import {
-  RichContentTheme,
-  TranslationFunction,
-  DesktopTextButtons,
-  Helpers,
-  ToolbarType,
-  Version,
-  EditorCommands,
-} from 'wix-rich-content-common';
+import { RichContentTheme, TranslationFunction, DesktopTextButtons } from 'wix-rich-content-common';
 
 type formattingToolbarButtonsKeysType =
   | DesktopTextButtons
   | {
-      ios?: string[] | undefined;
-      android?: string[] | undefined;
-    }
-  | undefined;
+      ios: string[];
+      android: string[];
+    };
 
 interface ToolbarProps {
   isMobile?: boolean;
   tabIndex?: number;
   t: TranslationFunction;
   vertical?: boolean;
-  buttons?: formattingToolbarButtonsKeysType;
-  editorCommands: EditorCommands;
-  plugins?: string[];
+  buttons: any;
   setKeepOpen?: (boolean) => void;
   afterClick?: () => void;
   nestedMenu?: boolean;
   theme?: RichContentTheme;
-  linkPanelData?: {
-    linkTypes?: any;
-    anchorTarget?: string;
-    rel?: { nofollow?: boolean };
-    uiSettings?: {
-      linkPanel?: {
-        dropDown?: any;
-        externalPopups?: boolean;
-        showNewTabCheckbox?: boolean;
-        showNoFollowCheckbox?: boolean;
-        showSponsoredCheckbox?: boolean;
-      };
-    };
-    isMobile?: boolean;
-  };
-  colorPickerData?: any;
-  helpers?: Helpers;
-  toolbarType?: ToolbarType;
+  onToolbarButtonClick?: any;
 }
 
 class Toolbar extends Component<ToolbarProps> {
@@ -79,16 +49,6 @@ class Toolbar extends Component<ToolbarProps> {
     event.preventDefault();
   };
 
-  onToolbarButtonClick = (name, value = undefined) => {
-    const { helpers, toolbarType } = this.props;
-    helpers?.onToolbarButtonClick?.({
-      buttonName: name,
-      type: toolbarType,
-      value: value === undefined ? undefined : typeof value === 'boolean' ? `${!value}` : value,
-      version: Version.currentVersion,
-    });
-  };
-
   renderButton = buttonProps => {
     const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip, name } = buttonProps;
     return (
@@ -101,7 +61,7 @@ class Toolbar extends Component<ToolbarProps> {
         tooltipText={tooltip}
         icon={getIcon()}
         disabled={isDisabled()}
-        onToolbarButtonClick={() => this.onToolbarButtonClick(name, isActive())}
+        onToolbarButtonClick={() => this.props.onToolbarButtonClick(name, isActive())}
       />
     );
   };
@@ -167,7 +127,7 @@ class Toolbar extends Component<ToolbarProps> {
         theme={this.theme}
         onResetColor={onResetColor}
         setKeepOpen={setKeepOpen}
-        onToolbarButtonClick={() => this.onToolbarButtonClick(buttonProps.name)}
+        onToolbarButtonClick={() => this.props.onToolbarButtonClick(buttonProps.name)}
       />
     );
   };
@@ -204,7 +164,7 @@ class Toolbar extends Component<ToolbarProps> {
         dropDownProps={dropDownProps}
         t={t}
         setKeepOpen={setKeepOpen}
-        onToolbarButtonClick={value => this.onToolbarButtonClick(buttonProps.name, value)}
+        onToolbarButtonClick={value => this.props.onToolbarButtonClick(buttonProps.name, value)}
       />
     );
   };
@@ -214,18 +174,18 @@ class Toolbar extends Component<ToolbarProps> {
     return <Component />;
   };
 
-  renderNestedMenu = buttonProps => {
-    const { isMobile, tabIndex, t, theme, editorCommands } = this.props;
-    const dropDownProps = {
-      tabIndex,
-      isMobile,
-      t,
-      ...buttonProps,
-    };
-    return (
-      <NestedMenu dropDownProps={dropDownProps} theme={theme} editorCommands={editorCommands} />
-    );
-  };
+  // renderNestedMenu = buttonProps => {
+  //   const { isMobile, tabIndex, t, theme, editorCommands } = this.props;
+  //   const dropDownProps = {
+  //     tabIndex,
+  //     isMobile,
+  //     t,
+  //     ...buttonProps,
+  //   };
+  //   return (
+  //     <NestedMenu dropDownProps={dropDownProps} theme={theme} editorCommands={editorCommands} />
+  //   );
+  // };
 
   renderContextMenu = buttonProps => {
     const { isMobile, tabIndex, t } = this.props;
@@ -250,7 +210,6 @@ class Toolbar extends Component<ToolbarProps> {
     [TOOLBAR_BUTTON_TYPES.MODAL]: this.renderModal,
     [TOOLBAR_BUTTON_TYPES.COMPONENT]: this.renderComponent,
     [TOOLBAR_BUTTON_TYPES.CONTEXT_MENU]: this.renderContextMenu,
-    [TOOLBAR_BUTTON_TYPES.NESTED_MENU]: this.renderNestedMenu,
   };
 
   separateByGaps = buttons => {
@@ -276,26 +235,8 @@ class Toolbar extends Component<ToolbarProps> {
   };
 
   render() {
-    const {
-      buttons,
-      vertical,
-      editorCommands,
-      t,
-      plugins,
-      linkPanelData,
-      colorPickerData,
-    } = this.props;
-    const updatedButtons = createButtonsList(
-      buttons,
-      editorCommands,
-      t,
-      plugins,
-      linkPanelData,
-      colorPickerData
-    );
-    updatedButtons.length > 0 && this.cleanUnwantedSeparators(updatedButtons);
-    const buttonsSeparatedByGaps = this.separateByGaps(updatedButtons);
-    return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
+    const { buttons, vertical } = this.props;
+    return buttons.map((buttonsWithoutGaps, index) => {
       return (
         <div
           data-id="toolbar"
