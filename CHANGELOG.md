@@ -17,13 +17,17 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.46.9 (July 13, 2021)
+
 ### :house: Internal
 
 - `spoiler`
   - [#2704](https://github.com/wix/ricos/pull/2704) spoiler schema
-
-</details>
-<hr/>
+- `vertical-embed`
+  - [#2687](https://github.com/wix/ricos/pull/2687) move ui component creation from serverless to client side
 
 ## 8.46.8 (July 13, 2021)
 
