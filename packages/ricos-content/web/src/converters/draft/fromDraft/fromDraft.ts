@@ -89,7 +89,7 @@ export const fromDraft = (draftJSON: DraftContent): RichContent => {
         const nodes =
           entity.type === Node_Type.TABLE
             ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              parseTable((entity as any).tableData.rows)
+              parseTable((entity as any).rows)
             : [];
         return {
           key,

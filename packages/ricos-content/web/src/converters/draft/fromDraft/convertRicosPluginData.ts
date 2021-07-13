@@ -15,6 +15,7 @@ import {
   MAP_TYPE,
   EMBED_TYPE,
   LINK_TYPE,
+  TABLE_TYPE,
 } from '../../../consts';
 import {
   PluginContainerData_Spoiler,
@@ -49,6 +50,7 @@ export const convertBlockDataToRicos = (type: string, data) => {
     [MAP_TYPE]: convertMapData,
     [EMBED_TYPE]: convertEmbedData,
     [LINK_TYPE]: convertLinkData,
+    [TABLE_TYPE]: convertTableType,
   };
   let blockType = type;
   if (type === LINK_PREVIEW_TYPE && data.html) {
@@ -255,6 +257,15 @@ const convertEmbedData = (data: {
 
 const convertLinkData = (data: { url: string; target?: string; rel?: string } & { link: Link }) => {
   data.link = createLink(data);
+};
+
+const convertTableType = data => {
+  const {
+    config: { colsWidth, rowsHeight, colsMinWidth },
+  } = data;
+  data.colsWidth = colsWidth;
+  data.rowsHeight = rowsHeight;
+  data.colsMinWidth = colsMinWidth;
 };
 
 const kebabToConstantCase = (str: string) => str.toUpperCase().replace('-', '_');
