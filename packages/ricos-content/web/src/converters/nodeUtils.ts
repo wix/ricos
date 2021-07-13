@@ -13,6 +13,7 @@ import {
   Link_Target,
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
+import fromEntries from 'fromentries';
 
 export const createNode = (
   type: Node_Type,
@@ -75,7 +76,7 @@ export const createLink = ({
   target?: string;
   anchor?: string;
 }): Link => {
-  const relValues =
+  const relValues: [string, boolean][] =
     rel
       ?.split(' ')
       .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
@@ -83,7 +84,7 @@ export const createLink = ({
   return {
     anchor,
     url,
-    rel: relValues.length > 0 ? Object.fromEntries(relValues) : undefined,
+    rel: relValues.length > 0 ? fromEntries(relValues) : undefined,
     target: target?.toUpperCase().substring(1) as Link_Target,
   };
 };

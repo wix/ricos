@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+
+- `ricos-content`
+  - [#2715](https://github.com/wix/ricos/pull/2715) replace Object.fromEntries for backwards compatibility
+
 </details>
 <hr/>
 
