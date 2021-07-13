@@ -40,6 +40,15 @@ interface State {
   initialContentChanged: boolean;
 }
 
+let loadTiptap = () => Promise.resolve({ initTiptapEditor: _config => ({} as TiptapAPI) });
+if (process.env.TIPTAP) {
+  loadTiptap = () =>
+    import(
+      /* webpackChunkName: wix-tiptap-editor */
+      'wix-tiptap-editor'
+    );
+}
+
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor!: RichContentEditor;
 
@@ -64,7 +73,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       remountKey: false,
       initialContentChanged: true,
     };
-    this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
+    if (process.env.TIPTAP) {
+      this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
+    } else {
+      this.useTiptap = false;
+    }
   }
 
   static defaultProps = { locale: 'en' };
@@ -91,18 +104,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   loadEditor() {
     if (this.useTiptap) {
-      // import(
-      //   /* webpackChunkName: wix-tiptap-editor */
-      //   'wix-tiptap-editor'
-      // ).then(tiptapEditorModule => {
-      //   const { initTiptapEditor } = tiptapEditorModule;
-      //   const { content, injectedContent } = this.props;
-      //   this.tiptapApi = initTiptapEditor({
-      //     initialContent: content ?? injectedContent ?? emptyDraftContent,
-      //     onUpdate: this.onUpdate,
-      //   });
-      //   this.forceUpdate();
-      // });
+      loadTiptap().then(tiptapEditorModule => {
+        const { initTiptapEditor } = tiptapEditorModule;
+        const { content, injectedContent } = this.props;
+        this.tiptapApi = initTiptapEditor({
+          initialContent: content ?? injectedContent ?? emptyDraftContent,
+          onUpdate: this.onUpdate,
+        });
+        this.forceUpdate();
+      });
     }
   }
 
