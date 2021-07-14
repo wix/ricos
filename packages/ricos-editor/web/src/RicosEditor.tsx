@@ -91,18 +91,18 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   loadEditor() {
     if (this.useTiptap) {
-      // import(
-      //   /* webpackChunkName: wix-tiptap-editor */
-      //   'wix-tiptap-editor'
-      // ).then(tiptapEditorModule => {
-      //   const { initTiptapEditor } = tiptapEditorModule;
-      //   const { content, injectedContent } = this.props;
-      //   this.tiptapApi = initTiptapEditor({
-      //     initialContent: content ?? injectedContent ?? emptyDraftContent,
-      //     onUpdate: this.onUpdate,
-      //   });
-      //   this.forceUpdate();
-      // });
+      import(
+        /* webpackChunkName: wix-tiptap-editor */
+        'wix-tiptap-editor'
+      ).then(tiptapEditorModule => {
+        const { initTiptapEditor } = tiptapEditorModule;
+        const { content, injectedContent } = this.props;
+        this.tiptapApi = initTiptapEditor({
+          initialContent: content ?? injectedContent ?? emptyDraftContent,
+          onUpdate: this.onUpdate,
+        });
+        this.forceUpdate();
+      });
     }
   }
 
