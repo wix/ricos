@@ -24,6 +24,12 @@
 </details>
 <hr/>
 
+## 8.46.12 (July 14, 2021)
+### :house: Internal
+
+- `plugin-commons`
+  - [#2712](https://github.com/wix/ricos/pull/2712) upload functionality isolated from plugins (revert 8.46.6)
+
 ## 8.46.11 (July 14, 2021)
 ### :bug: Bug Fix
 
@@ -43,6 +49,7 @@
 
 ### :bug: Bug Fix
 
+<<<<<<< HEAD
 - `common`
   - [#2703](https://github.com/wix/ricos/pull/2703) tooltip: wrapped with Suspense
 
@@ -69,6 +76,8 @@
 
 - `plugin-commons`
   - [#2686](https://github.com/wix-incubator/rich-content/pull/2686) revert upload functionality isolation (regression from 8.46.4)
+=======
+>>>>>>> master
 - `editor-common`
   - [#2685](https://github.com/wix-incubator/rich-content/pull/2685) color utils for editor commands
 
