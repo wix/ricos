@@ -87,6 +87,7 @@ const convertContainerData = (
   nodeType: string
 ) => {
   const { width, alignment, spoiler, height } = data.containerData || {};
+  const { enabled = false, description, buttonText } = spoiler || {};
   data.config = Object.assign(
     {},
     data.config,
@@ -96,9 +97,9 @@ const convertContainerData = (
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
-        enabled: true,
-        description: spoiler.description,
-        buttonContent: spoiler.buttonText,
+        enabled,
+        description,
+        buttonContent: buttonText,
       },
     }
   );
@@ -110,12 +111,12 @@ const convertContainerData = (
   delete data.containerData;
 };
 
-const convertVideoData = (data: VideoData & { src; metadata }) => {
+const convertVideoData = (data: VideoData & { src; metadata; title? }) => {
   const videoSrc = data.video?.src;
   if (videoSrc?.url) {
     data.src = videoSrc.url;
     const { src, width, height } = data.thumbnail || {};
-    data.metadata = { thumbnail_url: src?.url, width, height };
+    data.metadata = { thumbnail_url: src?.url, width, height, title: data.title };
   } else if (videoSrc?.custom) {
     const { src, width, height } = data.thumbnail || {};
     data.src = {
@@ -124,16 +125,19 @@ const convertVideoData = (data: VideoData & { src; metadata }) => {
     };
   }
   delete data.video;
+  delete data.title;
   delete data.thumbnail;
 };
 
 const convertDividerData = (
   data: Partial<DividerData> & {
     type;
+    lineStyle?: string;
     config?: ComponentData['config'];
   }
 ) => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.type = data.lineStyle?.toLowerCase();
+  delete data.lineStyle;
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
     data.config.size = data.width?.toLowerCase();
@@ -147,13 +151,12 @@ const convertDividerData = (
 };
 
 const convertImageData = (data: ImageData & { src; config; metadata }) => {
-  const { link, config, disableExpand, image, altText, caption } = data;
+  const { link, config, image, altText, caption } = data;
   const { src, width, height } = image || {};
   data.src = { id: src?.custom, file_name: src?.custom, width, height };
   const links = link?.anchor ? { anchor: link?.anchor } : { link: link && parseLink(link) };
-  data.config = { ...(config || {}), ...links, disableExpand };
+  data.config = { ...(config || {}), ...links };
   data.metadata = (altText || caption) && { caption, alt: altText };
-  delete data.disableExpand;
   delete data.image;
   delete data.link;
   delete data.caption;

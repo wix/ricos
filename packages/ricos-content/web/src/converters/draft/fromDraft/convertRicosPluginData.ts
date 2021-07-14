@@ -70,11 +70,12 @@ export const convertBlockDataToRicos = (type: string, data) => {
 
 const convertContainerData = (data: { config?: ComponentData['config']; containerData }) => {
   const { size, alignment, width, spoiler, height } = data.config || {};
-  let newSpoiler: PluginContainerData_Spoiler | undefined;
-  if (spoiler?.enabled) {
-    const { description, buttonContent } = spoiler;
-    newSpoiler = { description, buttonText: buttonContent };
-  }
+  const { enabled, description, buttonContent } = spoiler || {};
+  const newSpoiler: PluginContainerData_Spoiler | undefined = spoiler && {
+    enabled: enabled || false,
+    description,
+    buttonText: buttonContent,
+  };
   data.containerData = {
     alignment: alignment && kebabToConstantCase(alignment),
     spoiler: newSpoiler,
@@ -87,13 +88,15 @@ const convertContainerData = (data: { config?: ComponentData['config']; containe
 
 const convertVideoData = (data: {
   src?: string | VideoComponentData;
-  metadata?: { thumbnail_url?: string; width?: number; height?: number };
+  metadata?: { thumbnail_url?: string; width?: number; height?: number; title?: string };
   video;
   thumbnail;
+  title?;
 }) => {
   if (typeof data.src === 'string') {
     data.video = { src: { url: data.src } };
-    const { thumbnail_url, width, height } = data.metadata || {};
+    const { thumbnail_url, width, height, title } = data.metadata || {};
+    title && (data.title = title);
     data.thumbnail = {
       src: { url: thumbnail_url },
       width,
@@ -112,11 +115,12 @@ const convertVideoData = (data: {
 const convertDividerData = (data: {
   type?: string;
   config?: ComponentData['config'];
+  lineStyle?: string;
   width;
   alignment;
   containerData;
 }) => {
-  has(data, 'type') && (data.type = data.type?.toUpperCase());
+  has(data, 'type') && (data.lineStyle = data.type?.toUpperCase());
   has(data, 'config.size') && (data.width = data.config?.size?.toUpperCase());
   has(data, 'config.alignment') && (data.alignment = data.config?.alignment?.toUpperCase());
   data.containerData = { width: { size: PluginContainerData_Width_Type.CONTENT } };
@@ -128,15 +132,13 @@ const convertImageData = (data: {
   metadata?: { alt?: string; caption?: string };
   image;
   link;
-  disableExpand;
   altText;
   caption;
 }) => {
   const { file_name, width, height } = data.src || {};
-  const { link, anchor, disableExpand } = data.config || {};
+  const { link, anchor } = data.config || {};
   data.image = { src: { custom: file_name }, width, height };
   data.link = (link || anchor) && createLink({ ...link, anchor });
-  data.disableExpand = disableExpand;
   data.altText = data.metadata?.alt;
   data.caption = data.metadata?.caption;
 };

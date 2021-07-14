@@ -50,7 +50,7 @@ export const toPlainText = async (
           plainText += await parseImage(node, delimiter, urlShortener);
           break;
         case Node_Type.VIDEO:
-          plainText += await parseVideo(node, getVideoUrl);
+          plainText += await parseVideo(node, delimiter, getVideoUrl);
           break;
         case Node_Type.GIPHY:
           plainText += parseGiphy(node);
