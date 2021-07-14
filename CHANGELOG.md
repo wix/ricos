@@ -17,13 +17,15 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.46.12 (July 14, 2021)
 ### :house: Internal
 
 - `plugin-commons`
   - [#2712](https://github.com/wix/ricos/pull/2712) upload functionality isolated from plugins (revert 8.46.6)
-
-</details>
-<hr/>
 
 ## 8.46.11 (July 14, 2021)
 ### :bug: Bug Fix
