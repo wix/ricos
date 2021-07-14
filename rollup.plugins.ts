@@ -27,6 +27,7 @@ const resolve = (): Plugin => {
   return resolvePlugin({
     preferBuiltins: true,
     extensions: ['.js', '.jsx', '.json'],
+    rootDir: pathResolve(__dirname),
   });
 };
 
@@ -78,8 +79,18 @@ const copyAfterBundleWritten = (): Plugin => {
 const babel = (): Plugin => {
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
-    include: ['src/**', 'lib/**', 'node_modules/@tiptap'],
+    // include: ['**/packages/src/**', 'lib/**', '**/@tiptap/**'],
     babelHelpers: 'runtime',
+
+    babelrc: false,
+    filter: file => {
+      const src = /.*\/packages\/.*\/src\/.*/;
+      const lib = /.*\/packages\/.*\/lib\/.*/;
+      const tiptap = /.*tiptap.*/;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore-next-line
+      return src.test(file.toString()) || lib.test(file.toString()) || tiptap.test(file.toString());
+    },
   });
 };
 
@@ -105,6 +116,8 @@ const typescript = (): Plugin => {
         'package.json',
         'lib',
         'node_modules/@tiptap',
+        'node_modules/@tiptap/**/*',
+        '**/@tiptap/**/*',
       ].map(path => absPath(path)),
       exclude: ['node_modules', '**/*.spec.*'].map(path => absPath(path)),
     },
