@@ -163,6 +163,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   maxTextLength?: number;
   experiments?: AvailableExperiments;
   disableKeyboardEvents?: (shouldEnable: boolean) => void;
+  setEditorCommands?: (editorCommands: EditorCommands) => void;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -510,13 +511,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 
   initEditorCommands = () => {
-    const { createPluginsDataMap = {} } = this.props;
+    const { createPluginsDataMap = {}, setEditorCommands } = this.props;
     this.EditorCommands = createEditorCommands(
       createPluginsDataMap,
       this.plugins,
       this.getEditorState,
       this.updateEditorState
     );
+    setEditorCommands && setEditorCommands(this.EditorCommands);
   };
 
   initEditorToolbars(
@@ -1198,6 +1200,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                     innerModal={innerModal}
                     closeInnerModal={this.closeInnerModal}
                     editorWrapper={this.editorWrapper}
+                    EditorCommands={this.EditorCommands}
                   />
                 </div>
               </div>
