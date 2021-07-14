@@ -15,6 +15,7 @@ class Button extends Component {
     dataHook: PropTypes.string,
     ariaProps: PropTypes.object,
     size: PropTypes.string,
+    text: PropTypes.string,
   };
 
   static defaultProps = {
@@ -31,10 +32,10 @@ class Button extends Component {
       onClick,
       className,
       type,
-      children,
       dataHook,
       ariaProps,
       size = BUTTON_SIZE.small,
+      text,
     } = this.props;
     return (
       <button
@@ -44,7 +45,7 @@ class Button extends Component {
         tabIndex="0"
         className={classNames(this.styles[`button_${type}`], this.styles[size], className)}
       >
-        {children}
+        {text}
       </button>
     );
   }

@@ -42,9 +42,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         [styles.mobile]: isMobile,
       })}
       type={'secondary'}
-    >
-      {cancelText}
-    </Button>
+      text={cancelText}
+    />
     <Button
       size={size}
       ariaProps={{ 'aria-label': saveText } && !selected && { disabled: 'disabled' }}
@@ -58,9 +57,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       dataHook={saveBtnDataHook}
       onClick={onSave}
       type={'primary'}
-    >
-      {saveText}
-    </Button>
+      text={saveText}
+    />
   </div>
 );
 

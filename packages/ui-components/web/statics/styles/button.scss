@@ -1,7 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 %button {
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -39,25 +39,19 @@
   }
 }
 
-.small_btn_font_size {
-  font-size: 16px;
-}
-
 .tiny {
+  font-size: 14px;
   height: 32px;
 }
 
 .small {
-  @extend.small_btn_font_size;
   height: 36px;
 }
 
 .medium {
-  @extend.small_btn_font_size;
   height: 40px;
 }
 
 .large {
-  @extend.small_btn_font_size;
   height: 48px;
 }
