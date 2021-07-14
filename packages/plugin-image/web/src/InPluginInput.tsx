@@ -50,6 +50,7 @@ class InPluginInput extends Component<Props> {
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
         dir="auto"
+        rows={1}
       />
     );
   }
