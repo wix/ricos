@@ -18,6 +18,11 @@
   </summary>
 
 
+### :bug: Bug Fix
+- `common`
+  - [#2715](https://github.com/wix/ricos/pull/2715) fix tooltip doesn't hide + preload tooltip
+
+
 </details>
 <hr/>
 
