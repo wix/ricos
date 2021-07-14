@@ -57,8 +57,6 @@ class SettingsPanelFooter extends Component {
             cancelText={cancelText}
             saveText={saveText}
             disableSave={!selected}
-            saveBtnDataHook={'settingPanelFooterDone'}
-            cancelBtnDataHook={'settingPanelFooterCancel'}
           />
         </div>
       </div>

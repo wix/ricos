@@ -140,7 +140,7 @@ export const GALLERY_IMAGE_SETTINGS = {
   LINK: 'linkPanelInput',
   LINK_TARGET: 'linkPanelBlankCheckbox',
   LINK_NOFOLLOW: 'linkPanelRelCheckbox',
-  DONE: 'settingPanelFooterDone',
+  DONE: ACTION_BUTTONS.SAVE,
 };
 
 export const VIDEO_PLUGIN = {
@@ -182,7 +182,7 @@ export const TABLE_PLUGIN = {
 
 export const SOUND_CLOUD = {
   INPUT: 'soundCloudUploadModalInput',
-  ADD: 'settingPanelFooterDone',
+  ADD: ACTION_BUTTONS.SAVE,
 };
 
 export const HTML_PLUGIN = {
@@ -230,7 +230,7 @@ export const BUTTON_PLUGIN_MODAL = {
 
 export const SOCIAL_EMBED = {
   INPUT: 'socialEmbedUploadModalInput',
-  ADD: 'settingPanelFooterDone',
+  ADD: ACTION_BUTTONS.SAVE,
 };
 
 export const COLLAPSIBLE_LIST_SETTINGS = {

@@ -444,7 +444,7 @@ describe('plugins', () => {
           cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
           cy.get(`[data-hook=verticalsImage]`).eq(3);
           cy.eyesCheckWindow(this.test.title);
-          cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
+          cy.get(`[data-hook*=${ACTION_BUTTONS.CANCEL}][tabindex!=-1]`).click();
         });
       });
     });
@@ -461,7 +461,7 @@ describe('plugins', () => {
           .children()
           .first()
           .click();
-        cy.get(`[data-hook=settingPanelFooterDone]`).click();
+        cy.get(`[data-hook=${ACTION_BUTTONS.SAVE}]`).click();
       });
     });
   });
