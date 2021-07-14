@@ -20,6 +20,7 @@ import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 import { writeFileSync } from 'fs';
+import { createFilter } from '@rollup/pluginutils';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -77,20 +78,17 @@ const copyAfterBundleWritten = (): Plugin => {
 };
 
 const babel = (): Plugin => {
+  const include = ['packages/**/src/**', 'packages/**/lib/**', '**/@tiptap/**'];
+  const options = {
+    resolve: pathResolve(__dirname),
+  };
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
     // include: ['**/packages/src/**', 'lib/**', '**/@tiptap/**'],
     babelHelpers: 'runtime',
 
     babelrc: false,
-    filter: file => {
-      const src = /.*\/packages\/.*\/src\/.*/;
-      const lib = /.*\/packages\/.*\/lib\/.*/;
-      const tiptap = /.*tiptap.*/;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore-next-line
-      return src.test(file.toString()) || lib.test(file.toString()) || tiptap.test(file.toString());
-    },
+    filter: createFilter(include, undefined, options),
   });
 };
 
