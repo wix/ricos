@@ -160,12 +160,13 @@ export const last = arr => (arr.length > 0 ? arr[arr.length - 1] : null);
 export const partitionBy = <T>(
   isSeparator: (node: T) => boolean,
   isPartition: (node: T) => boolean,
+  Separator: (node: T) => T,
   Partition: (node: T) => T,
   addToPartition: (partition: T, node: T) => void
 ) => (nodes: T[]): T[] =>
   nodes.reduce((partitions: T[], node: T) => {
     if (isSeparator(node)) {
-      partitions.push(node);
+      partitions.push(Separator(node));
     } else {
       let lastPartition = last(partitions);
       if (!lastPartition || !isPartition(lastPartition)) {

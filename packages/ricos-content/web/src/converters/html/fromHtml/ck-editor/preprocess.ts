@@ -1,4 +1,4 @@
-import { flow } from 'fp-ts/function';
+import { flow, identity } from 'fp-ts/function';
 import { MonoidAll, MonoidAny } from 'fp-ts/boolean';
 
 import { Element, serialize } from 'parse5';
@@ -36,6 +36,7 @@ const containerPToDiv: AstRule = [
     childNodes: partitionBy<ContentNode>(
       hasDescendant(oneOf(['img', 'iframe', 'ol', 'ul'])),
       hasTag('p'),
+      identity,
       addParagraph(node),
       appendChild
     )(node.childNodes),
@@ -66,6 +67,7 @@ const wrapTextUnderLi: AstRule = [
     childNodes: partitionBy<ContentNode>(
       concatApply(MonoidAny)([hasTag('p'), hasDescendant(oneOf(['img', 'iframe', 'ol', 'ul']))]),
       hasTag('p'),
+      identity,
       addParagraph(node),
       appendChild
     )(node.childNodes),
