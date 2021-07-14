@@ -3683,3 +3683,4 @@ fix bad release in 7.10.1
 
 - `gallery`
   - [#775](https://github.com/wix/ricos/pull/775) adding videos to gallery
+  
