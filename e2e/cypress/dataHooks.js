@@ -20,10 +20,15 @@ export const INLINE_TOOLBAR_BUTTONS = {
   CODE_BLOCK: 'TextCodeBlockButton',
 };
 
+export const ACTION_BUTTONS = {
+  SAVE: 'actionButtonSave',
+  CANCEL: 'actionButtonCancel',
+};
+
 export const COLOR_PICKER = {
   ADD_COLOR: 'addColor',
   COLOR_INPUT: 'colorInput',
-  UPDATE_BUTTON: 'colorPickerUpdateButton',
+  UPDATE_BUTTON: ACTION_BUTTONS.SAVE,
   RESET_COLOR: 'resetColor',
 };
 
@@ -79,10 +84,6 @@ export const STATIC_TOOLBAR_BUTTONS = {
   ...STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   ...STATIC_TOOLBAR_BUTTONS_EMBED,
   ...STATIC_TOOLBAR_BUTTONS_EXPENDED,
-};
-
-export const SETTINGS_PANEL = {
-  DONE: 'settingPanelFooterDone',
 };
 
 export const PLUGIN_TOOLBAR_BUTTONS = {
@@ -224,7 +225,7 @@ export const DIVIDER_DROPDOWN_OPTIONS = {
 export const BUTTON_PLUGIN_MODAL = {
   DESIGN_TAB: 'design_Tab',
   BUTTON_SAMPLE: 'buttonSample_3',
-  DONE: SETTINGS_PANEL.DONE,
+  DONE: ACTION_BUTTONS.SAVE,
 };
 
 export const SOCIAL_EMBED = {

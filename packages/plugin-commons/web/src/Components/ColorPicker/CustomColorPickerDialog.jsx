@@ -49,7 +49,6 @@ class CustomColorPickerDialog extends Component {
           theme={theme}
           cancelText={t('ColorPickerButtonLabel_Cancel')}
           saveText={t('ColorPickerButtonLabel_Update')}
-          saveBtnDataHook={'colorPickerUpdateButton'}
         />
       </div>
     );

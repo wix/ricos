@@ -3,10 +3,13 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .action_buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  // grid-template-columns: repeat(2, 1fr);
   width: 100%;
   gap: 12px;
+  &.mobile {
+    justify-content: space-between;
+  }
 }
 
 .action_buttons_button {

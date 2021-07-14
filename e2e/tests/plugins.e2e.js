@@ -8,7 +8,7 @@ import {
   BUTTON_PLUGIN_MODAL,
   INLINE_TOOLBAR_BUTTONS,
   COLLAPSIBLE_LIST_SETTINGS,
-  SETTINGS_PANEL,
+  ACTION_BUTTONS,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
@@ -116,7 +116,7 @@ describe('plugins', () => {
       //check spoiler from settings modal
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
       cy.get(`[data-hook=imageSpoilerToggle]`).click();
-      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.get(`[data-hook=${ACTION_BUTTONS.SAVE}]`).click();
 
       cy.wait(50); //wait for setRef to get width and adjust correct blur
       cy.eyesCheckWindow('adding spoiler on an image');
@@ -140,7 +140,7 @@ describe('plugins', () => {
       //check spoiler from settings modal
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS);
       cy.get(`[data-hook=gallerySpoilerToggle]`).click();
-      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.get(`[data-hook=${ACTION_BUTTONS.SAVE}]`).click();
       cy.eyesCheckWindow('adding spoiler on a gallery');
       editText('spoilerTextArea', 'change the description');
       editText('revealSpoilerContent', 'change the reveal button content');
@@ -731,7 +731,7 @@ describe('plugins', () => {
     const setCollapsibleListSetting = setting => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
       cy.get(`[data-hook=${setting}]`).click();
-      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.get(`[data-hook=${ACTION_BUTTONS.SAVE}]`).click();
     };
 
     it('should change collapsible list settings', function() {

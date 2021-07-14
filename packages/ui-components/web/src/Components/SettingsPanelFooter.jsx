@@ -23,7 +23,7 @@ class SettingsPanelFooter extends Component {
       className,
       t,
       layoutOptions = {},
-      selected,
+      selected = true,
       buttonSize = BUTTON_SIZE.small,
     } = this.props;
     const { isModal, buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER } = layoutOptions;
@@ -56,7 +56,7 @@ class SettingsPanelFooter extends Component {
             onSave={save}
             cancelText={cancelText}
             saveText={saveText}
-            selected={selected}
+            disableSave={!selected}
             saveBtnDataHook={'settingPanelFooterDone'}
             cancelBtnDataHook={'settingPanelFooterCancel'}
           />
