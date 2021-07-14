@@ -356,6 +356,7 @@
           },
           "alignment": "CENTER",
           "spoiler": {
+            "enabled": true,
             "description": "SPOILER ALERT!!!",
             "buttonText": "What's behind door number 1?"
           }
@@ -1093,7 +1094,7 @@
               "textAlignment": "AUTO"
             },
             "indentation": 0,
-            "key": "45v9j"
+            "key": "cj084"
           }
         }
       ],
@@ -1125,7 +1126,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "d9nkc"
+                "key": "9va36"
               }
             },
             {
@@ -1152,7 +1153,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "cm5is"
+                        "key": "6c1b0"
                       }
                     },
                     {
@@ -1179,7 +1180,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "1mcp0"
+                                "key": "5ui5b"
                               }
                             },
                             {
@@ -1206,7 +1207,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "dv7qe"
+                                        "key": "eje0t"
                                       }
                                     },
                                     {
@@ -1233,7 +1234,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "3p7ut"
+                                                "key": "b1asu"
                                               }
                                             }
                                           ],
@@ -1262,7 +1263,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "9misa"
+                                                "key": "ecr97"
                                               }
                                             }
                                           ],
@@ -1272,7 +1273,7 @@
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "6263v"
+                                        "key": "coea7"
                                       }
                                     }
                                   ],
@@ -1282,7 +1283,7 @@
                                 }
                               ],
                               "attrs": {
-                                "key": "5rum7"
+                                "key": "6hak"
                               }
                             }
                           ],
@@ -1292,7 +1293,7 @@
                         }
                       ],
                       "attrs": {
-                        "key": "af9n3"
+                        "key": "ct9gs"
                       }
                     }
                   ],
@@ -1302,7 +1303,7 @@
                 }
               ],
               "attrs": {
-                "key": "fq0eg"
+                "key": "doj60"
               }
             }
           ],
@@ -1331,7 +1332,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "9tjtt"
+                "key": "cdv8j"
               }
             },
             {
@@ -1358,7 +1359,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "113qg"
+                        "key": "2g2nc"
                       }
                     }
                   ],
@@ -1368,7 +1369,7 @@
                 }
               ],
               "attrs": {
-                "key": "5v8tt"
+                "key": "c7uqe"
               }
             }
           ],
@@ -1397,7 +1398,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "cl20n"
+                "key": "2knbn"
               }
             }
           ],
@@ -1407,7 +1408,7 @@
         }
       ],
       "attrs": {
-        "key": "lslb"
+        "key": "4d6u5"
       }
     },
     {
@@ -1445,7 +1446,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "8llmf"
+                "key": "80fbm"
               }
             },
             {
@@ -1472,7 +1473,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "3ve0r"
+                        "key": "1oc20"
                       }
                     },
                     {
@@ -1499,7 +1500,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "76ug9"
+                                "key": "41h5r"
                               }
                             },
                             {
@@ -1526,7 +1527,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "2iso"
+                                        "key": "4ejvi"
                                       }
                                     },
                                     {
@@ -1553,7 +1554,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "cg0fj"
+                                                "key": "30tm6"
                                               }
                                             }
                                           ],
@@ -1582,7 +1583,7 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "9r7mo"
+                                                "key": "10oe"
                                               }
                                             }
                                           ],
@@ -1592,7 +1593,7 @@
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "bal6r"
+                                        "key": "65k22"
                                       }
                                     }
                                   ],
@@ -1602,7 +1603,7 @@
                                 }
                               ],
                               "attrs": {
-                                "key": "9khk9"
+                                "key": "u2to"
                               }
                             }
                           ],
@@ -1612,7 +1613,7 @@
                         }
                       ],
                       "attrs": {
-                        "key": "726i"
+                        "key": "4p6k8"
                       }
                     }
                   ],
@@ -1622,7 +1623,7 @@
                 }
               ],
               "attrs": {
-                "key": "a5fji"
+                "key": "apeuh"
               }
             }
           ],
@@ -1651,7 +1652,7 @@
                   "textAlignment": "RIGHT"
                 },
                 "indentation": 0,
-                "key": "3f2fb"
+                "key": "e879u"
               }
             }
           ],
@@ -1680,7 +1681,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "7rah3"
+                "key": "6d3uk"
               }
             }
           ],
@@ -1690,7 +1691,7 @@
         }
       ],
       "attrs": {
-        "key": "709u"
+        "key": "ficao"
       }
     },
     {
@@ -1790,7 +1791,9 @@
             "custom": "300"
           },
           "alignment": "RIGHT",
-          "spoiler": {}
+          "spoiler": {
+            "enabled": true
+          }
         },
         "image": {
           "src": {
@@ -1861,8 +1864,8 @@
   "attrs": {
     "metadata": {
       "version": 1,
-      "createdTimestamp": "2021-07-11T10:01:19.262Z",
-      "updatedTimestamp": "2021-07-11T10:01:19.262Z"
+      "createdTimestamp": "2021-07-13T13:13:09.871Z",
+      "updatedTimestamp": "2021-07-13T13:13:09.871Z"
     }
   }
 }

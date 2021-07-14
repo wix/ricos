@@ -23,6 +23,7 @@ import {
   EMBED_TYPE,
 } from '../../consts';
 import { Decoration_Type, Node_Type } from 'ricos-schema';
+import fromEntries from 'fromentries';
 
 export enum BlockType {
   Unstyled = 'unstyled',
@@ -53,7 +54,7 @@ export const FROM_DRAFT_LIST_TYPE = {
   [BlockType.OrderedListItem]: Node_Type.ORDERED_LIST,
 };
 
-export const TO_DRAFT_LIST_TYPE = Object.fromEntries(
+export const TO_DRAFT_LIST_TYPE = fromEntries(
   Object.entries(FROM_DRAFT_LIST_TYPE).map(([key, value]) => [value, key])
 );
 
@@ -81,7 +82,7 @@ export const TO_RICOS_NODE_TYPE = {
 const DUPLICATE_KEYS = [IMAGE_TYPE_LEGACY, VIDEO_TYPE_LEGACY];
 
 // Node_Type.IMAGE: IMAGE_TYPE
-export const FROM_RICOS_ENTITY_TYPE = Object.fromEntries(
+export const FROM_RICOS_ENTITY_TYPE = fromEntries(
   Object.entries(TO_RICOS_NODE_TYPE)
     .filter(([key]) => !DUPLICATE_KEYS.includes(key))
     .map(([key, value]) => [value, key])
@@ -103,7 +104,7 @@ export const TO_RICOS_PLUGIN_TYPE = {
 };
 
 // Decoration_Type.BOLD: BOLD
-export const FROM_RICOS_DECORATION_TYPE = Object.fromEntries(
+export const FROM_RICOS_DECORATION_TYPE = fromEntries(
   Object.entries(TO_RICOS_DECORATION_TYPE).map(([key, value]) => [value, key])
 );
 
@@ -152,7 +153,7 @@ export const DRAFT_BLOCK_TYPE_TO_DATA_FIELD = {
 };
 
 // IMAGE_TYPE: imageData
-const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = Object.fromEntries(
+const DRAFT_PLUGIN_TYPE_TO_DATA_FIELD = fromEntries(
   Object.entries(TO_RICOS_NODE_TYPE).map(([key, value]) => [
     key,
     RICOS_NODE_TYPE_TO_DATA_FIELD[value],
