@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `ricos-content`
+  - [#2717](https://github.com/wix-incubator/rich-content/pull/2717) getImgSrc removed from converters
 
 </details>
 <hr/>
@@ -24,7 +26,7 @@
 ## 8.46.13 (July 14, 2021)
 ### :bug: Bug Fix
 - `common`
-  - [#2715](https://github.com/wix/ricos/pull/2715) fix tooltip doesn't hide + preload tooltip
+  - [#2721](https://github.com/wix/ricos/pull/2721) fix tooltip doesn't hide + preload tooltip
 
 
 ## 8.46.12 (July 14, 2021)
