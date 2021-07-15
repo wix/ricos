@@ -5970,6 +5970,11 @@ ansi-to-html@^0.6.11:
   dependencies:
     entities "^2.0.0"
 
+ansi@^0.3.0, ansi@~0.3.1:
+  version "0.3.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/ansi/-/ansi-0.3.1.tgz#0c42d4fb17160d5a9af1e484bace1c66922c1b21"
+  integrity sha1-DELU+xcWDVqa8eSEus4cZpIsGyE=
+
 any-base@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/any-base/-/any-base-1.1.0.tgz#ae101a62bc08a597b4c9ab5b7089d456630549fe"
@@ -6363,6 +6368,11 @@ async@^3.1.0, async@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/async/-/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
   integrity sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==
+
+async@~1.0.0:
+  version "1.0.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/async/-/async-1.0.0.tgz#f8fc04ca3a13784ade9e1641af98578cfbd647a9"
+  integrity sha1-+PwEyjoTeErenhZBr5hXjPvWR6k=
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -7491,7 +7501,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@3.7.2, bluebird@^3.0.5, bluebird@^3.3.5, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.2:
+bluebird@3.7.2, bluebird@^3.0.5, bluebird@^3.3.5, bluebird@^3.4.7, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.npmjs.org/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -8129,6 +8139,21 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000929, caniuse-lite@^1.0.30000989, can
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001243.tgz#d9250155c91e872186671c523f3ae50cfc94a3aa"
   integrity sha512-vNxw9mkTBtkmLFnJRv/2rhs1yufpDfCkBZexG3Y0xdOH2Z/eE/85E4Dl5j1YUN34nZVsSp6vVRFQRrez9wJMRA==
 
+caporal@1.4.0:
+  version "1.4.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/caporal/-/caporal-1.4.0.tgz#d6087b815e3df97c3a0f55dbb82850fae29ed585"
+  integrity sha1-1gh7gV49+Xw6D1XbuChQ+uKe1YU=
+  dependencies:
+    bluebird "^3.4.7"
+    cli-table3 "^0.5.0"
+    colorette "^1.0.1"
+    fast-levenshtein "^2.0.6"
+    lodash "^4.17.14"
+    micromist "1.1.0"
+    prettyjson "^1.2.1"
+    tabtab "^2.2.2"
+    winston "^2.3.1"
+
 capture-exit@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/capture-exit/-/capture-exit-2.0.0.tgz#fb953bfaebeb781f62898239dabb426d08a509a4"
@@ -8412,7 +8437,7 @@ cli-cursor@^3.1.0:
   dependencies:
     restore-cursor "^3.1.0"
 
-cli-table3@0.5.1:
+cli-table3@0.5.1, cli-table3@^0.5.0:
   version "0.5.1"
   resolved "https://registry.npmjs.org/cli-table3/-/cli-table3-0.5.1.tgz#0252372d94dfc40dbd8df06005f48f31f656f202"
   integrity sha512-7Qg2Jrep1S/+Q3EceiZtQcDPWxhAvBw+ERf1162v4sikJrvojMHFqXt8QIVha8UlH9rgU0BeWPytZ9/TzYqlUw==
@@ -8643,10 +8668,15 @@ color@^3.0.0:
     color-convert "^1.9.1"
     color-string "^1.5.4"
 
-colorette@^1.1.0, colorette@^1.2.1, colorette@^1.2.2:
+colorette@^1.0.1, colorette@^1.1.0, colorette@^1.2.1, colorette@^1.2.2:
   version "1.2.2"
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
   integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
+
+colors@1.0.x:
+  version "1.0.3"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
+  integrity sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=
 
 colors@^1.1.2, colors@^1.2.1:
   version "1.4.0"
@@ -9701,6 +9731,11 @@ cuss@^1.15.0:
   version "1.21.0"
   resolved "https://registry.npmjs.org/cuss/-/cuss-1.21.0.tgz#1aba3bb911fadda8566855ed036295af8116be40"
   integrity sha512-X3VvImImJ5q6w0wOgJtxAX+RC06d26egp/A/vdSxqOrsRtAA9biXAkc4PZGj/3gx0+z+gDFri6BpcpwuG1/UEw==
+
+cycle@1.0.x:
+  version "1.0.3"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/cycle/-/cycle-1.0.3.tgz#21e80b2be8580f98b468f379430662b046c34ad2"
+  integrity sha1-IegLK+hYD5i0aPN5QwZisEbDStI=
 
 cyclist@^1.0.1:
   version "1.0.1"
@@ -11194,6 +11229,15 @@ es-array-method-boxes-properly@^1.0.0:
   resolved "https://registry.npmjs.org/es-array-method-boxes-properly/-/es-array-method-boxes-properly-1.0.0.tgz#873f3e84418de4ee19c5be752990b2e44718d09e"
   integrity sha512-wd6JXUmyHmt8T5a2xreUwKcGPq6f1f+WwIJkijUqiGcJz1qqnZgP6XIK+QyIWU5lT7imeNxUll48bziG+TSYcA==
 
+es-check@5.2.4:
+  version "5.2.4"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/es-check/-/es-check-5.2.4.tgz#76fe2d96ad238bd8ec1d9c3b3d0e98ddbcc723e7"
+  integrity sha1-dv4tlq0ji9jsHZw7PQ6Y3bzHI+c=
+  dependencies:
+    acorn "^6.4.1"
+    caporal "1.4.0"
+    glob "^7.1.2"
+
 es-get-iterator@^1.0.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/es-get-iterator/-/es-get-iterator-1.1.2.tgz#9234c54aba713486d7ebde0220864af5e2b283f7"
@@ -12228,6 +12272,11 @@ extsprintf@^1.2.0:
   resolved "https://registry.npmjs.org/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
+eyes@0.1.x:
+  version "0.1.8"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/eyes/-/eyes-0.1.8.tgz#62cf120234c683785d902348a800ef3e0cc20bc0"
+  integrity sha1-Ys8SAjTGg3hdkCNIqADvPgzCC8A=
+
 fast-deep-equal@2.0.1, fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
@@ -13053,6 +13102,17 @@ fuse.js@^6.4.5:
   version "6.4.6"
   resolved "https://registry.npmjs.org/fuse.js/-/fuse.js-6.4.6.tgz#62f216c110e5aa22486aff20be7896d19a059b79"
   integrity sha512-/gYxR/0VpXmWSfZOIPS3rWwU8SHgsRTwWuXhyb2O6s7aRuVtHtxCkR33bNYu3wyLyNx/Wpv0vU7FZy8Vj53VNw==
+
+gauge@~1.2.5:
+  version "1.2.7"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/gauge/-/gauge-1.2.7.tgz#e9cec5483d3d4ee0ef44b60a7d99e4935e136d93"
+  integrity sha1-6c7FSD09TuDvRLYKfZnkk14TbZM=
+  dependencies:
+    ansi "^0.3.0"
+    has-unicode "^2.0.0"
+    lodash.pad "^4.1.0"
+    lodash.padend "^4.1.0"
+    lodash.padstart "^4.1.0"
 
 gauge@~2.7.3:
   version "2.7.4"
@@ -14798,7 +14858,7 @@ inquirer@6.5.0:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-inquirer@^1.0.0:
+inquirer@^1.0.0, inquirer@^1.0.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/inquirer/-/inquirer-1.2.3.tgz#4dec6f32f37ef7bb0b2ed3f1d1a5c3f545074918"
   integrity sha1-TexvMvN+97sLLtPx0aXD9UUHSRg=
@@ -15601,7 +15661,7 @@ isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
     node-fetch "^1.0.1"
     whatwg-fetch ">=0.10.0"
 
-isstream@~0.1.2:
+isstream@0.1.x, isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.npmjs.org/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
@@ -17681,6 +17741,21 @@ lodash.once@^4.1.1:
   resolved "https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
 
+lodash.pad@^4.1.0:
+  version "4.5.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash.pad/-/lodash.pad-4.5.1.tgz#4330949a833a7c8da22cc20f6a26c4d59debba70"
+  integrity sha1-QzCUmoM6fI2iLMIPaibE1Z3runA=
+
+lodash.padend@^4.1.0:
+  version "4.6.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash.padend/-/lodash.padend-4.6.1.tgz#53ccba047d06e158d311f45da625f4e49e6f166e"
+  integrity sha1-U8y6BH0G4VjTEfRdpiX05J5vFm4=
+
+lodash.padstart@^4.1.0:
+  version "4.6.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash.padstart/-/lodash.padstart-4.6.1.tgz#d2e3eebff0d9d39ad50f5cbd1b52a7bce6bb611b"
+  integrity sha1-0uPuv/DZ05rVD1y9G1KnvOa7YRs=
+
 lodash.set@^4.3.2:
   version "4.3.2"
   resolved "https://registry.npmjs.org/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
@@ -18367,6 +18442,13 @@ micromatch@^4.0.0, micromatch@^4.0.2, micromatch@^4.0.4:
   dependencies:
     braces "^3.0.1"
     picomatch "^2.2.3"
+
+micromist@1.1.0:
+  version "1.1.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/micromist/-/micromist-1.1.0.tgz#a490bcf9a4b918ad9eed8e52d0ec98b9c3b2d3c8"
+  integrity sha1-pJC8+aS5GK2e7Y5S0OyYucOy08g=
+  dependencies:
+    lodash.camelcase "^4.3.0"
 
 miller-rabin@^4.0.0:
   version "4.0.1"
@@ -19297,6 +19379,15 @@ npm-which@^3.0.1:
     console-control-strings "~1.1.0"
     gauge "~2.7.3"
     set-blocking "~2.0.0"
+
+npmlog@^2.0.3:
+  version "2.0.4"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/npmlog/-/npmlog-2.0.4.tgz#98b52530f2514ca90d09ec5b22c8846722375692"
+  integrity sha1-mLUlMPJRTKkNCexbIsiEZyI3VpI=
+  dependencies:
+    ansi "~0.3.1"
+    are-we-there-yet "~1.1.2"
+    gauge "~1.2.5"
 
 nth-check@^1.0.2:
   version "1.0.2"
@@ -21128,6 +21219,14 @@ pretty-time@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/pretty-time/-/pretty-time-1.1.0.tgz#ffb7429afabb8535c346a34e41873adf3d74dd0e"
   integrity sha512-28iF6xPQrP8Oa6uxE6a1biz+lWeTOAPKggvjB8HAs6nVMKZwf5bG++632Dx614hIWgUPkgivRfG+a8uAXGTIbA==
+
+prettyjson@^1.2.1:
+  version "1.2.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/prettyjson/-/prettyjson-1.2.1.tgz#fcffab41d19cab4dfae5e575e64246619b12d289"
+  integrity sha1-/P+rQdGcq0365eV15kJGYZsS0ok=
+  dependencies:
+    colors "^1.1.2"
+    minimist "^1.2.0"
 
 prismjs@^1.8.4:
   version "1.24.1"
@@ -25192,6 +25291,20 @@ table@^6.0.9:
     string-width "^4.2.0"
     strip-ansi "^6.0.0"
 
+tabtab@^2.2.2:
+  version "2.2.2"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/tabtab/-/tabtab-2.2.2.tgz#7a047f143b010b4cbd31f857e82961512cbf4e14"
+  integrity sha1-egR/FDsBC0y9MfhX6ClhUSy/ThQ=
+  dependencies:
+    debug "^2.2.0"
+    inquirer "^1.0.2"
+    lodash.difference "^4.5.0"
+    lodash.uniq "^4.5.0"
+    minimist "^1.2.0"
+    mkdirp "^0.5.1"
+    npmlog "^2.0.3"
+    object-assign "^4.1.0"
+
 tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
   resolved "https://registry.npmjs.org/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
@@ -27617,6 +27730,18 @@ winston-transport@^4.4.0:
   dependencies:
     readable-stream "^2.3.7"
     triple-beam "^1.2.0"
+
+winston@^2.3.1:
+  version "2.4.5"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/winston/-/winston-2.4.5.tgz#f2e431d56154c4ea765545fc1003bd340c95b59a"
+  integrity sha1-8uQx1WFUxOp2VUX8EAO9NAyVtZo=
+  dependencies:
+    async "~1.0.0"
+    colors "1.0.x"
+    cycle "1.0.x"
+    eyes "0.1.x"
+    isstream "0.1.x"
+    stack-trace "0.0.x"
 
 winston@^3.3.3:
   version "3.3.3"

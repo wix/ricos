@@ -6,6 +6,7 @@
     "examples/storybook",
     "packages/!(template-*)/web",
     "bundle-analyzer",
+    "bundle-es5-checker",
     "!website"
   ],
   "resolutions": {
