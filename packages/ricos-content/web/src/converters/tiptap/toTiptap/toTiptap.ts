@@ -11,7 +11,7 @@ import { Node, Decoration, RichContent } from 'ricos-schema';
 import { TO_RICOS_DATA_FIELD } from '../../draft/consts';
 import { JSONContent } from '@tiptap-es5/core';
 import toCamelCase from 'to-camel-case';
-import fromEntries from 'fromentries';
+import { fromEntries } from '../../../utils';
 
 declare const a: RichContent;
 
@@ -23,8 +23,8 @@ export const toTiptap = <T extends RichContent | Node | Record<string, any>>(
   const jsonContent = isRichContent(richContent)
     ? RichContent.toJSON(richContent)
     : isNode(richContent)
-    ? Node.toJSON(richContent)
-    : JSON.parse(JSON.stringify(richContent)); // remove undefined values
+      ? Node.toJSON(richContent)
+      : JSON.parse(JSON.stringify(richContent)); // remove undefined values
   const { proseContent } = convertToProse({ proseContent: jsonContent });
   return proseContent;
 };
