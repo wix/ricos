@@ -11,7 +11,17 @@ import { RichContent } from 'ricos-schema';
 
 const stringifyBaseLine = obj => {
   let i = 0;
-  const normalizeKeys = (key, val) => (key === 'key' ? `${i++}` : val);
+  const normalizeKeys = (key, val) => {
+    switch (key) {
+      case 'key':
+        return `${i++}`;
+      case 'createdTimestamp':
+      case 'updatedTimestamp':
+        return '2021-07-15T07:42:30.023Z';
+      default:
+        return val;
+    }
+  };
   return JSON.stringify(obj, normalizeKeys, 2);
 };
 
