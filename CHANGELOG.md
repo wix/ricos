@@ -18,7 +18,9 @@
   </summary>
 
 
-
+### :bug: Bug Fix
+- `image`
+  - [#2716](https://github.com/wix/ricos/pull/2716) fix image caption clipping in editor
 
 </details>
 <hr/>
@@ -30,8 +32,6 @@
   - [#2729](https://github.com/wix-incubator/rich-content/pull/2729) fix tooltip in ssr - regression from 8.46.13
 - `html`
   - [#2728](https://github.com/wix-incubator/rich-content/pull/2728) allow popups from embed
-- `image`
-  - [#2716](https://github.com/wix/ricos/pull/2716) fix image caption clipping in editor
 
 ## 8.46.15 (July 15, 2021)
 
