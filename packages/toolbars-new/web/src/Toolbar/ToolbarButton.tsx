@@ -37,7 +37,8 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
 
     this.styles = {
       button: classNames(
-        styles.toolbarButton
+        styles.toolbarButton,
+        props.isMobile && styles.toolbarButton_mobile
         // buttonStyles.inlineToolbarButton,
         // buttonStyles.pluginToolbarButton
       ),

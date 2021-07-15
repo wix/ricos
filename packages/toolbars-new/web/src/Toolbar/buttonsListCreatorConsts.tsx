@@ -38,6 +38,7 @@ import {
   TrashIcon,
   UndoIcon,
   RedoIcon,
+  PlusIcon,
 } from '../icons';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
 import AlignmentPanel from '../modals/alignment/AlignmentPanel';
@@ -80,7 +81,7 @@ type buttonsFullDataType = {
 
 export const buttonsFullData: Record<string, buttonsFullDataType> = {
   AddPlugin: {
-    icon: BoldIcon,
+    icon: PlusIcon,
     dataHook: 'textInlineStyleButton_AddPlugin',
     tooltip: 'AddPlugin',
     type: 'button',
