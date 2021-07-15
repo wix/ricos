@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+ - `ui-components`
+  - [#2643](https://github.com/wix-incubator/rich-content/pull/2643) moved ActionButtons into ui-components and some code refactor
 
 ### :bug: Bug Fix
 - `image`
