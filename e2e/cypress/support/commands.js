@@ -9,7 +9,7 @@ import {
   HTML_PLUGIN,
   PLUGIN_COMPONENT,
   STATIC_TOOLBAR_BUTTONS,
-  SETTINGS_PANEL,
+  ACTION_BUTTONS,
   TOOLBARS,
   COLOR_PICKER,
   COLLAPSIBLE_LIST_SETTINGS,
@@ -436,13 +436,13 @@ Cypress.Commands.add('addImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
     .type('Title')
-    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .get(`[data-hook=${ACTION_BUTTONS.SAVE}]`)
     .click();
 });
 
 Cypress.Commands.add('editImageTitle', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:first`)
-    .find('input')
+    .find('textarea')
     .click()
     .type(' - In Plugin Editing')
     .blur();
@@ -452,14 +452,14 @@ Cypress.Commands.add('deleteImageTitle', () => {
   cy.get(`[data-hook=${IMAGE_SETTINGS.CAPTION}]`)
     .click()
     .clear()
-    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+    .get(`[data-hook=${ACTION_BUTTONS.SAVE}]`)
     .click();
 });
 
 Cypress.Commands.add('addGalleryImageTitle', (pluginToClick = null) => {
   cy.get(`[data-hook=${GALLERY_SETTINGS.TITLE}]`).type('Title');
-  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]:first`).click({ multiple: true });
-  cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook=${ACTION_BUTTONS.SAVE}]:first`).click({ multiple: true });
+  cy.get(`[data-hook=${ACTION_BUTTONS.SAVE}]`).click();
   pluginToClick &&
     cy
       .get(`[data-hook=${pluginToClick}]:first`)
@@ -565,7 +565,7 @@ Cypress.Commands.add('addSoundCloud', () => {
   cy.get(`[data-hook*=${'soundCloudUploadModalInput'}]`).type(
     'https://soundcloud.com/nlechoppa/camelot'
   );
-  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click({ force: true });
+  cy.get(`[data-hook*=${ACTION_BUTTONS.SAVE}]`).click({ force: true });
   cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
     .parent()
     .click({ force: true });
@@ -573,7 +573,7 @@ Cypress.Commands.add('addSoundCloud', () => {
 
 Cypress.Commands.add('addSocialEmbed', url => {
   cy.get(`[data-hook*=${'socialEmbedUploadModalInput'}]`).type(url);
-  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook*=${ACTION_BUTTONS.SAVE}]`).click();
 });
 
 Cypress.Commands.add('addVideoFromURL', () => {
