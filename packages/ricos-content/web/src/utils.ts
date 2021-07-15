@@ -1,6 +1,6 @@
 export function fromEntries(iterable) {
-    return [...iterable].reduce((obj, [key, val]) => {
-        obj[key] = val
-        return obj
-    }, {})
+  return [...iterable].reduce((obj, [key, val]) => {
+    obj[key] = val;
+    return obj;
+  }, {});
 }

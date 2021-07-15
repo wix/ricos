@@ -23,8 +23,8 @@ export const toTiptap = <T extends RichContent | Node | Record<string, any>>(
   const jsonContent = isRichContent(richContent)
     ? RichContent.toJSON(richContent)
     : isNode(richContent)
-      ? Node.toJSON(richContent)
-      : JSON.parse(JSON.stringify(richContent)); // remove undefined values
+    ? Node.toJSON(richContent)
+    : JSON.parse(JSON.stringify(richContent)); // remove undefined values
   const { proseContent } = convertToProse({ proseContent: jsonContent });
   return proseContent;
 };
