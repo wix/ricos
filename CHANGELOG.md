@@ -18,20 +18,44 @@
   </summary>
 
 ### :bug: Bug Fix
-
 - `image`
   - [#2716](https://github.com/wix/ricos/pull/2716) fix image caption clipping in editor
 
 </details>
 <hr/>
 
+## 8.46.15 (July 15, 2021)
+
+### :house: Internal
+
+- `ricos-schema`
+  - [#2701](https://github.com/wix/ricos/pull/2701) add new vertical embed schema
+
+## 8.46.14 (July 15, 2021)
+
+### :bug: Bug Fix
+
+- `ricos-content`
+  - [#2717](https://github.com/wix-incubator/rich-content/pull/2717) getImgSrc removed from converters
+- `common`
+  - [#2726](https://github.com/wix-incubator/rich-content/pull/2726) fix tooltip in ssr - regression from 8.46.13
+
+## 8.46.13 (July 14, 2021)
+
+### :bug: Bug Fix
+
+- `common`
+  - [#2721](https://github.com/wix/ricos/pull/2721) fix tooltip doesn't hide + preload tooltip
+
 ## 8.46.12 (July 14, 2021)
+
 ### :house: Internal
 
 - `plugin-commons`
   - [#2712](https://github.com/wix/ricos/pull/2712) upload functionality isolated from plugins (revert 8.46.6)
 
 ## 8.46.11 (July 14, 2021)
+
 ### :bug: Bug Fix
 
 - `ricos-content`
