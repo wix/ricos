@@ -152,24 +152,41 @@ const convertDividerData = (
   delete data.containerData;
 };
 
+enum GalleryLayout {
+  COLLAGE = 0,
+  MASONRY,
+  GRID,
+  THUMBNAIL,
+  SLIDER,
+  SLIDESHOW,
+  PANORAMA,
+  COLUMN,
+  MAGIC,
+  FULLSIZE,
+  BRICKS,
+  MIX,
+  ALTERNATE,
+}
+
 const convertGalleryStyles = styles => {
-  has(styles, 'layout') && (styles.galleryLayout = styles.layout);
-  has(styles, 'itemTargetSize') && (styles.gallerySizePx = styles.itemTargetSize);
-  has(styles, 'horizontalScroll') && (styles.oneRow = styles.horizontalScroll);
-  has(styles, 'itemRatio') && (styles.cubeRatio = styles.itemRatio);
-  has(styles, 'layoutOrientation') && (styles.isVertical = styles.layoutOrientation === 'vertical');
-  has(styles, 'imagesPerRow') && (styles.numberOfImagesPerRow = styles.imagesPerRow);
-  has(styles, 'itemCrop') && (styles.cubeType = styles.itemCrop);
-  has(styles, 'thumbnailsAlignment') &&
-    (styles.galleryThumbnailsAlignment = styles.thumbnailsAlignment);
-  delete styles.layout;
-  delete styles.itemTargetSize;
-  delete styles.itemRatio;
-  delete styles.layoutOrientation;
-  delete styles.imagesPerRow;
-  delete styles.itemCrop;
-  delete styles.thumbnailsAlignment;
-  delete styles.horizontalScroll;
+  has(styles, 'layouting.layout') &&
+    (styles.galleryLayout = GalleryLayout[styles.layouting.layout]);
+  has(styles, 'layouting.horizontalScroll') && (styles.oneRow = styles.layouting.horizontalScroll);
+  has(styles, 'layouting.orientation') &&
+    (styles.isVertical = styles.layouting.orientation === 'VERTICAL');
+  has(styles, 'layouting.itemsPerRow') &&
+    (styles.numberOfImagesPerRow = styles.layouting.itemsPerRow);
+  has(styles, 'itemStyling.targetSize') && (styles.gallerySizePx = styles.itemStyling.targetSize);
+  has(styles, 'itemStyling.ratio') && (styles.cubeRatio = styles.itemStyling.ratio);
+  has(styles, 'itemStyling.crop') && (styles.cubeType = styles.itemStyling.crop.toLowerCase());
+  has(styles, 'itemStyling.margin') && (styles.imageMargin = styles.itemStyling.margin);
+  has(styles, 'thumbnailsLayout.alignment') &&
+    (styles.galleryThumbnailsAlignment = styles.thumbnailsLayout.alignment.toLowerCase());
+  has(styles, 'thumbnailsLayout.spacings') &&
+    (styles.thumbnailSpacings = styles.thumbnailsLayout.spacings);
+  delete styles.layouting;
+  delete styles.itemStyling;
+  delete styles.thumbnailsLayout;
   return styles;
 };
 

@@ -7,44 +7,77 @@ import "google/protobuf/wrappers.proto";
 
 message GalleryData {
   PluginContainerData container_data = 1;
-  repeated GalleryItem items = 2;
-  GalleryStyles styles = 3;
-  GalleryConfig config = 4;
+  repeated Item items = 2;
+  Styles styles = 3;
+  Config config = 4;
   google.protobuf.BoolValue disable_expand = 5;
   google.protobuf.BoolValue disable_download = 6;
 }
 
-message GalleryStyles {
-  // galleryLayout
-  google.protobuf.Int32Value layout = 1;
-  // gallerySizePx
-  google.protobuf.Int32Value item_target_size = 2;
-  // oneRow
-  google.protobuf.BoolValue horizontal_scroll = 3;
-  // cubeRatio
-  google.protobuf.DoubleValue item_ratio = 4;
-  // isVertical - bool
-  google.protobuf.StringValue layout_orientation = 5;
-  // numberOfImagesPerRow
-  google.protobuf.Int32Value images_per_row = 6;
-  google.protobuf.Int32Value image_margin = 7;
-  // cubeType
-  google.protobuf.StringValue item_crop = 8;
-  // related to thumbnails layout only
-  // galleryThumbnailsAlignment
-  google.protobuf.StringValue thumbnails_alignment = 9;
-  // thumbnailSpacings
-  google.protobuf.Int32Value thumbnail_spacings = 10;
+message Layouting {
+  enum Layout {
+    COLLAGE = 0;
+    MASONRY = 1;
+    GRID = 2;
+    THUMBNAIL = 3;
+    SLIDER = 4;
+    SLIDESHOW = 5;
+    PANORAMA = 6;
+    COLUMN = 7;
+    MAGIC = 8;
+    FULLSIZE = 9;
+    BRICKS = 10;
+    MIX = 11;
+    ALTERNATE = 12;
+  }
+
+  enum Orientation {
+    HORIZONTAL = 0;
+    VERTICAL = 1;
+  }
+
+  Layout layout = 1;
+  google.protobuf.BoolValue horizontal_scroll = 2;
+  Orientation orientation = 3;
+  google.protobuf.Int32Value items_per_row = 4;
 }
 
-message GalleryConfig {
+message ItemStyling {
+  enum Crop {
+    FILL = 0;
+    FIT = 1;
+  }
+  google.protobuf.Int32Value target_size = 1;
+  google.protobuf.DoubleValue ratio = 2;
+  google.protobuf.StringValue crop = 3;
+  google.protobuf.Int32Value margin = 4;
+}
+
+message ThumbnailsLayout {
+  enum Alignment {
+    TOP = 0;
+    RIGHT = 1;
+    BOTTOM = 2;
+    LEFT = 3;
+  }
+  Alignment alignment = 1;
+  google.protobuf.Int32Value spacings = 2;
+}
+
+message Styles {
+  Layouting layouting = 1;
+  ItemStyling itemStyling = 2;
+  ThumbnailsLayout thumbnailsLayout = 3;
+}
+
+message Config {
   google.protobuf.StringValue layout = 2;
   google.protobuf.Int32Value spacing = 3;
   google.protobuf.StringValue key = 4;
   google.protobuf.BoolValue disableExpand = 5;
 }
 
-message GalleyItemMetadata {
+message ItemMetadata {
   google.protobuf.Int32Value height = 1;
   google.protobuf.Int32Value width = 2;
   google.protobuf.StringValue title = 3;
@@ -54,8 +87,8 @@ message GalleyItemMetadata {
   Media poster = 7;
 }
 
-message GalleryItem {
-  GalleyItemMetadata metadata = 1;
+message Item {
+  ItemMetadata metadata = 1;
   google.protobuf.StringValue item_id = 2;
   google.protobuf.StringValue url = 3;
   google.protobuf.BoolValue selected = 4;

@@ -115,23 +115,29 @@ const convertVideoData = (data: {
 };
 
 const convertGalleryStyles = styles => {
-  has(styles, 'galleryLayout') && (styles.layout = styles.galleryLayout);
-  has(styles, 'gallerySizePx') && (styles.itemTargetSize = styles.gallerySizePx);
-  has(styles, 'oneRow') && (styles.horizontalScroll = styles.oneRow);
-  has(styles, 'cubeRatio') && (styles.itemRatio = styles.cubeRatio);
+  styles.layouting = {};
+  styles.itemStyling = {};
+  styles.thumbnailsLayout = {};
+  has(styles, 'galleryLayout') && (styles.layouting.layout = styles.galleryLayout);
+  has(styles, 'oneRow') && (styles.layouting.horizontalScroll = styles.oneRow);
   has(styles, 'isVertical') &&
-    (styles.layoutOrientation = styles.isVertical ? 'vertical' : 'horizontal');
-  has(styles, 'numberOfImagesPerRow') && (styles.imagesPerRow = styles.numberOfImagesPerRow);
-  has(styles, 'cubeType') && (styles.itemCrop = styles.cubeType);
+    (styles.layouting.orientation = styles.isVertical ? 'VERTICAL' : 'HORIZONTAL');
+  has(styles, 'numberOfImagesPerRow') &&
+    (styles.layouting.itemsPerRow = styles.numberOfImagesPerRow);
+  has(styles, 'gallerySizePx') && (styles.itemStyling.targetSize = styles.gallerySizePx);
+  has(styles, 'cubeRatio') && (styles.itemStyling.ratio = styles.cubeRatio);
+  has(styles, 'cubeType') && (styles.itemStyling.crop = styles.cubeType.toUpperCase());
+  has(styles, 'imageMargin') && (styles.itemStyling.margin = styles.imageMargin);
   has(styles, 'galleryThumbnailsAlignment') &&
-    (styles.thumbnailsAlignment = styles.galleryThumbnailsAlignment);
+    (styles.thumbnailsLayout.alignment = styles.galleryThumbnailsAlignment.toUpperCase());
+  has(styles, 'thumbnailSpacings') && (styles.thumbnailsLayout.spacings = styles.thumbnailSpacings);
   return styles;
 };
 
 const convertGalleryItem = (item: { metadata; type }) => {
-  if (item.metadata.type === 'video' && typeof item.metadata.thumbnail === 'string') {
-    item.metadata.thumbnail = {
-      url: item.metadata.thumbnail,
+  if (item.metadata.type === 'video' && typeof item.metadata.poster === 'string') {
+    item.metadata.poster = {
+      url: item.metadata.poster,
       height: item.metadata.height,
       width: item.metadata.width,
     };

@@ -504,16 +504,22 @@
           }
         ],
         "styles": {
-          "layout": 2,
-          "itemTargetSize": 300,
-          "horizontalScroll": false,
-          "itemRatio": 1,
-          "thumbnailsAlignment": "bottom",
-          "layoutOrientation": "horizontal",
-          "imagesPerRow": 3,
-          "imageMargin": 20,
-          "thumbnailSpacings": 0,
-          "itemCrop": "fill"
+          "layouting": {
+            "layout": "GRID",
+            "horizontalScroll": false,
+            "orientation": "HORIZONTAL",
+            "itemsPerRow": 3
+          },
+          "itemStyling": {
+            "targetSize": 300,
+            "ratio": 1,
+            "crop": "FILL",
+            "margin": 20
+          },
+          "thumbnailsLayout": {
+            "alignment": "BOTTOM",
+            "spacings": 0
+          }
         },
         "config": {
           "layout": "small",
