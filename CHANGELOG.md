@@ -17,15 +17,17 @@
   </summary>
 
 
+
+
+</details>
+<hr/>
+
+## 8.46.14 (July 15, 2021)
 ### :bug: Bug Fix
 - `ricos-content`
   - [#2717](https://github.com/wix-incubator/rich-content/pull/2717) getImgSrc removed from converters
 - `common`
   - [#2726](https://github.com/wix-incubator/rich-content/pull/2726) fix tooltip in ssr - regression from 8.46.13
-
-
-</details>
-<hr/>
 
 ## 8.46.13 (July 14, 2021)
 ### :bug: Bug Fix
