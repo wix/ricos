@@ -4,7 +4,6 @@
 
 .action_buttons {
   display: flex;
-  // grid-template-columns: repeat(2, 1fr);
   width: 100%;
   gap: 12px;
   &.mobile {
@@ -23,12 +22,6 @@
     color: $fallbackColor;
     background: transparent;
     border: none;
-    &:nth-child(1) {
-      justify-self: left;
-    }
-    &:nth-child(2) {
-      justify-self: right;
-    }
   }
 }
 
