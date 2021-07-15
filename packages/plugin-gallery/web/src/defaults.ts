@@ -41,7 +41,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const LAYOUT_FIXED_STYLES = {
+const LAYOUT_FIXED_STYLES = {
   [GALLERY_LAYOUTS.COLLAGE]: {
     galleryType: 'Columns',
     imageMargin: 5,
@@ -87,10 +87,12 @@ export const LAYOUT_FIXED_STYLES = {
   },
 };
 
-export const FIXED_STYLES = {
+const FIXED_STYLES = {
   gallerySizeType: 'px',
   enableInfiniteScroll: true,
   titlePlacement: 'SHOW_ON_HOVER',
+  hoveringBehaviour: 'NO_CHANGE',
+  alwaysShowHover: true,
   allowHover: true,
   itemClick: 'link',
   fullscreen: false,
@@ -98,10 +100,13 @@ export const FIXED_STYLES = {
   allowSocial: false,
   allowDownload: false,
   mobileSwipeAnimation: 'NO_EFFECT',
-  thumbnailSize: 120,
   gotStyleParams: true,
   showVideoPlayButton: true,
   videoPlay: 'onClick',
+};
+
+export const getFixedStyles = (layout: GALLERY_LAYOUTS) => {
+  return { ...FIXED_STYLES, ...LAYOUT_FIXED_STYLES[layout] };
 };
 
 export const isHorizontalLayout = ({ galleryLayout, oneRow }) =>
