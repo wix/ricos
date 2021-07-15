@@ -81,7 +81,7 @@ class ImageSettings extends Component {
       linkPanel || {};
     const { metadata = {} } = image || {};
 
-    const altText = typeof metadata.altText === 'string' ? metadata.altText : metadata.title;
+    const altText = typeof metadata.altText === 'string' ? metadata.altText : '';
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */
     return (
       <FocusManager className={styles.galleryImageSettings}>
