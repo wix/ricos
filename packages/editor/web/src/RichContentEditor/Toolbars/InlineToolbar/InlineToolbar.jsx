@@ -80,7 +80,7 @@ export default class InlineToolbar extends Component {
         if (!triggered && isVisible) {
           triggered = true;
           this.props.helpers?.onInlineToolbarOpen?.({
-            toolbarType: 'INLINE',
+            toolbarType: 'FORMATTING',
           });
         } else if (!isVisible) {
           triggered = false;

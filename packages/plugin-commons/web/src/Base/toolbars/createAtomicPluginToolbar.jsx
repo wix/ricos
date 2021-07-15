@@ -428,7 +428,7 @@ export default function createAtomicPluginToolbar({
       const { hide } = this.props;
       const triggerOnLoadBi = () => {
         helpers?.onInlineToolbarOpen?.({
-          toolbarType: 'INLINE',
+          toolbarType: 'PLUGIN',
           pluginId: this.getPluginType(),
         });
       };
