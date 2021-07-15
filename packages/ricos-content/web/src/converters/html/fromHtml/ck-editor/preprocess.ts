@@ -1,7 +1,7 @@
 import { flow, identity } from 'fp-ts/function';
 import { MonoidAll, MonoidAny } from 'fp-ts/boolean';
 
-import { Element, serialize } from 'parse5';
+import { Element, TextNode, serialize } from 'parse5';
 import { ContentNode } from '../core/models';
 import {
   isText,
@@ -52,6 +52,16 @@ const leafParagraphToDiv: AstRule = [
   }),
 ];
 
+const cleanListItemPadding: AstRule = [
+  hasTag('p'),
+  (node: Element) => ({
+    ...node,
+    childNodes: (node.childNodes as Element[]).filter(
+      n => !isText(n) || (<TextNode>n).value.trim() !== ''
+    ),
+  }),
+];
+
 const cleanListPadding: AstRule = [
   oneOf(['ol', 'ul']),
   (node: Element) => ({
@@ -77,6 +87,7 @@ const wrapTextUnderLi: AstRule = [
 export const preprocess = flow(
   toAst,
   traverse(leafParagraphToDiv),
+  traverse(cleanListItemPadding),
   traverse(cleanListPadding),
   traverse(containerPToDiv),
   traverse(wrapTextUnderLi),

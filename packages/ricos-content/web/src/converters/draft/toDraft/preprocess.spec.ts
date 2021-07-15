@@ -1,4 +1,5 @@
 import { RichContent } from 'ricos-schema';
+import { compare } from '../../../comparision/compare';
 import preprocess from './preprocess';
 
 describe('toDraft preprocess', () => {
@@ -110,7 +111,7 @@ describe('toDraft preprocess', () => {
     expect(RichContent.fromJSON(actual)).toStrictEqual(expected);
   });
 
-  it('<ol><li><p></li><li><img></li><li><p></li></ol> => <ul><li><p></li></ul><img><ul><li><p></li></ul>', () => {
+  it('<ol><li><p></li><li><p><img><p></li><li><p></li></ol> => <ul><li><p></li></ul><ul><li><p></li></ul><img><ul><li><p></li></ul><ul><li><p></li></ul>', () => {
     const content = RichContent.fromJSON({
       nodes: [
         {
@@ -148,12 +149,52 @@ describe('toDraft preprocess', () => {
               key: 'c4gcn',
               nodes: [
                 {
+                  type: 'PARAGRAPH',
+                  key: '3um32',
+                  nodes: [
+                    {
+                      type: 'TEXT',
+                      key: '',
+                      nodes: [],
+                      textData: {
+                        text: 'para2',
+                        decorations: [],
+                      },
+                    },
+                  ],
+                  paragraphData: {
+                    textStyle: {
+                      textAlignment: 'AUTO',
+                    },
+                  },
+                },
+                {
                   type: 'IMAGE',
                   key: '5u2v2',
                   nodes: [],
                   imageData: {
                     image: {
                       src: { url: 'https://host.com/image.png' },
+                    },
+                  },
+                },
+                {
+                  type: 'PARAGRAPH',
+                  key: '3um32',
+                  nodes: [
+                    {
+                      type: 'TEXT',
+                      key: '',
+                      nodes: [],
+                      textData: {
+                        text: 'para3',
+                        decorations: [],
+                      },
+                    },
+                  ],
+                  paragraphData: {
+                    textStyle: {
+                      textAlignment: 'AUTO',
                     },
                   },
                 },
@@ -172,7 +213,7 @@ describe('toDraft preprocess', () => {
                       key: '',
                       nodes: [],
                       textData: {
-                        text: 'para2',
+                        text: 'para4',
                         decorations: [],
                       },
                     },
@@ -224,26 +265,16 @@ describe('toDraft preprocess', () => {
           ],
         },
         {
-          type: 'IMAGE',
-          key: '5u2v2',
-          nodes: [],
-          imageData: {
-            image: {
-              src: { url: 'https://host.com/image.png' },
-            },
-          },
-        },
-        {
           type: 'BULLET_LIST',
           key: 'cjdfa',
           nodes: [
             {
               type: 'LIST_ITEM',
-              key: 'f62ja',
+              key: '6s1ga',
               nodes: [
                 {
                   type: 'PARAGRAPH',
-                  key: '2u96f',
+                  key: '3um32',
                   nodes: [
                     {
                       type: 'TEXT',
@@ -265,9 +296,83 @@ describe('toDraft preprocess', () => {
             },
           ],
         },
+        {
+          type: 'IMAGE',
+          key: '5u2v2',
+          nodes: [],
+          imageData: {
+            image: {
+              src: { url: 'https://host.com/image.png' },
+            },
+          },
+        },
+        {
+          type: 'BULLET_LIST',
+          key: 'cjdfa',
+          nodes: [
+            {
+              type: 'LIST_ITEM',
+              key: '6s1ga',
+              nodes: [
+                {
+                  type: 'PARAGRAPH',
+                  key: '3um32',
+                  nodes: [
+                    {
+                      type: 'TEXT',
+                      key: '',
+                      nodes: [],
+                      textData: {
+                        text: 'para3',
+                        decorations: [],
+                      },
+                    },
+                  ],
+                  paragraphData: {
+                    textStyle: {
+                      textAlignment: 'AUTO',
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'BULLET_LIST',
+          key: 'cjdfa',
+          nodes: [
+            {
+              type: 'LIST_ITEM',
+              key: 'f62ja',
+              nodes: [
+                {
+                  type: 'PARAGRAPH',
+                  key: '2u96f',
+                  nodes: [
+                    {
+                      type: 'TEXT',
+                      key: '',
+                      nodes: [],
+                      textData: {
+                        text: 'para4',
+                        decorations: [],
+                      },
+                    },
+                  ],
+                  paragraphData: {
+                    textStyle: {
+                      textAlignment: 'AUTO',
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
       ],
     });
     const actual = preprocess(content);
-    expect(actual).toStrictEqual(expected);
+    expect(compare(RichContent.fromJSON(actual), expected, { ignoredKeys: ['key'] })).toEqual({});
   });
 });

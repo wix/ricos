@@ -1,51 +1,85 @@
 import { identity, flow } from 'fp-ts/function';
+import * as E from 'fp-ts/Either';
+
 import { RichContent, Node_Type, Node } from 'ricos-schema';
 import { modify } from '../../../RicosContentAPI/modify';
 import { extract } from '../../../RicosContentAPI/extract';
 import { createNode, partitionBy } from '../../nodeUtils';
+import { log } from '../../../fp-utils';
 
-// scape goats
-const decomposeListItems = (node: Node): Node[] =>
+// scapegoat
+const decomposeListItem = (node: Node): Node[] =>
   partitionBy<Node>(
-    ({ type }) => type !== Node_Type.PARAGRAPH,
-    ({ type }) => type === Node_Type.BULLET_LIST,
-    identity,
-    () => createNode(Node_Type.BULLET_LIST, { nodes: [], data: {} }),
-    (list, paragraph) =>
-      list.nodes.push(createNode(Node_Type.LIST_ITEM, { nodes: [paragraph], data: {} }))
+    ({ type }) =>
+      ![Node_Type.PARAGRAPH, Node_Type.ORDERED_LIST, Node_Type.BULLET_LIST].includes(type), // anything but paragraph or list is a separator
+    ({ type }) => type === Node_Type.BULLET_LIST, // partition is a bullet list
+    identity, // separator added as is
+    () =>
+      createNode(Node_Type.BULLET_LIST, {
+        nodes: [createNode(Node_Type.LIST_ITEM, { nodes: [], data: {} })],
+        data: {},
+      }), // partition initialization
+    (list, paragraphOrList) =>
+      list.nodes[0].nodes.push(
+        createNode(Node_Type.LIST_ITEM, { nodes: [paragraphOrList], data: {} }) // append child to list item
+      )
   )(node.nodes[0]?.nodes || []);
 
-const getDecomposedListItems = (content: RichContent) =>
+// decompose list items resulted by splitUnsupportedLists
+const decomposeUnsupportedListItems = (content: RichContent) =>
   modify(content)
     .filter(({ type }) => type === Node_Type.ORDERED_LIST)
-    .set(decomposeListItems);
+    .filter(
+      ({ nodes }) =>
+        nodes.length === 1 &&
+        nodes[0].nodes.filter(
+          ({ type }) =>
+            ![Node_Type.PARAGRAPH, Node_Type.ORDERED_LIST, Node_Type.BULLET_LIST].includes(type)
+        ).length > 0
+    )
+    .set(decomposeListItem);
 
-// ab haedis scindere oves
-const splitLists = (node: Node): Node[] =>
+// segregat oves ab haedis
+const splitList = (list: Node): Node[] =>
   partitionBy<Node>(
-    n => n.nodes.filter(({ type }) => type !== Node_Type.PARAGRAPH).length > 0,
-    n => n.type === Node_Type.BULLET_LIST,
-    n => createNode(Node_Type.ORDERED_LIST, { nodes: [n], data: {} }),
-    () => createNode(Node_Type.BULLET_LIST, { nodes: [], data: {} }),
-    (list, item) => list.nodes.push(item)
-  )(node.nodes);
+    li =>
+      li.nodes.filter(
+        ({ type }) =>
+          ![Node_Type.PARAGRAPH, Node_Type.ORDERED_LIST, Node_Type.BULLET_LIST].includes(type)
+      ).length > 0, // separator is a list item with unsupported nodes
+    n => n.type === Node_Type.BULLET_LIST, // partition is an empty bullet list
+    n => createNode(Node_Type.ORDERED_LIST, { nodes: [n], data: {} }), // separator list item wrapped with ordered list
+    () => createNode(Node_Type.BULLET_LIST, { nodes: [], data: {} }), // new partition
+    (list, item) => list.nodes.push(item) // add valid list item to partition
+  )(list.nodes);
 
+// find lists whose list items contain anything but paragraph or list
 const getListToSplitKeys = content =>
   extract(content.nodes)
     .filter(({ type }) => type === Node_Type.BULLET_LIST || type === Node_Type.ORDERED_LIST)
     .map(({ key, nodes }) => ({ key, nodes: nodes.flatMap(n => n.nodes) }))
     .filter(
       ({ nodes }) =>
-        nodes.filter(({ type }) => ![Node_Type.PARAGRAPH, Node_Type.TEXT].includes(type)).length > 0
+        nodes.filter(
+          ({ type }) =>
+            ![Node_Type.PARAGRAPH, Node_Type.ORDERED_LIST, Node_Type.BULLET_LIST].includes(type)
+        ).length > 0
     )
     .map(({ key }) => key)
     .get();
 
-const getSplitLists = (content: RichContent) => {
+// separate legit draft list items from unsupported ones (containing anything except paragraphs and nested lists)
+const splitUnsupportedLists = (content: RichContent): E.Either<RichContent, RichContent> => {
   const listToSplitKeys = getListToSplitKeys(content);
-  return modify(content)
-    .filter(({ key }) => listToSplitKeys.includes(key))
-    .set(splitLists);
+
+  // Either used for short-circuiting of decomposeUnsupportedListItems, if nothing was splitted
+  return listToSplitKeys.length > 0
+    ? E.right(
+        modify(content)
+          .filter(({ key }) => listToSplitKeys.includes(key))
+          .set(splitList)
+      )
+    : E.left(content);
 };
 
 const newLine: Node = {
@@ -55,22 +89,33 @@ const newLine: Node = {
   textData: { text: '\n', decorations: [] },
 };
 
-const mergeAdjasentParagraphs = (node: Node): Node => ({
-  ...node,
-  nodes: partitionBy<Node>(
-    ({ type }) => type !== Node_Type.PARAGRAPH,
-    ({ type }) => type === Node_Type.PARAGRAPH,
-    identity,
-    node => ({ ...node, nodes: [] }),
-    (pred, curr) =>
-      (pred.nodes = pred.nodes.concat(pred.nodes.length > 0 ? [newLine] : []).concat(curr.nodes))
-  )(node.nodes),
-});
+const mergeAdjasentParagraphs = (node: Node): Node => {
+  console.log('merge applied on', node); // eslint-disable-line no-console
+  return {
+    ...node,
+    nodes: partitionBy<Node>(
+      ({ type }) => type !== Node_Type.PARAGRAPH, // any non-paragraph is separator
+      ({ type }) => type === Node_Type.PARAGRAPH, // paragraph is partition
+      identity, // seprator added as is to result partition array
+      node => ({ ...node, nodes: [] }), // empty paragraph is a new partition
+      // paragraph nodes appended to partition nodes, separated by \n
+      (pred, curr) =>
+        (pred.nodes = pred.nodes.concat(pred.nodes.length > 0 ? [newLine] : []).concat(curr.nodes))
+    )(node.nodes),
+  };
+};
 
+// merge any adjasent paragraphs into a single paragraph
 const mergeListParagraphNodes = (content: RichContent) =>
   modify(content)
     .filter(({ type }) => type === Node_Type.LIST_ITEM)
-    .filter(({ nodes }) => nodes.length > 1)
+    .filter(({ nodes }) => nodes.filter(({ type }) => type === Node_Type.PARAGRAPH).length > 1)
     .set(mergeAdjasentParagraphs);
 
-export default flow(mergeListParagraphNodes, getSplitLists, getDecomposedListItems);
+export default flow(
+  mergeListParagraphNodes,
+  // log('merged paragraphs', d => JSON.stringify(d, null, 2)),
+  splitUnsupportedLists,
+  E.map(decomposeUnsupportedListItems),
+  E.fold(identity, identity)
+);
