@@ -73,6 +73,20 @@ export default class InlineToolbar extends Component {
     if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
       position = { '--offset-top': `${offset.y}px`, '--offset-left': `${offset.x}px` };
     }
+    this.checkShouldTriggerBI = (() => {
+      let triggered = false;
+      return () => {
+        const { isVisible } = this.state;
+        if (!triggered && isVisible) {
+          triggered = true;
+          this.props.helpers?.onInlineToolbarOpen?.({
+            toolbarType: 'INLINE',
+          });
+        } else if (!isVisible) {
+          triggered = false;
+        }
+      };
+    })();
     this.state = {
       position,
       overrideContent: undefined,
@@ -349,6 +363,7 @@ export default class InlineToolbar extends Component {
   onClick = e => e.preventDefault();
 
   render() {
+    this.checkShouldTriggerBI();
     //checking false since undefined is not good
     if (this.isVisible() === false) {
       return null;
