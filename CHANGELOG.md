@@ -19,6 +19,8 @@
 
 
 ### :bug: Bug Fix
+- `common`
+  - [#2729](https://github.com/wix-incubator/rich-content/pull/2729) fix tooltip in ssr - regression from 8.46.13
 - `html`
   - [#2728](https://github.com/wix-incubator/rich-content/pull/2728) allow popups from embed
 
