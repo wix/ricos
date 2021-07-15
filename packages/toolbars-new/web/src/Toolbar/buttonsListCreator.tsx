@@ -37,7 +37,7 @@ export const createButtonsList = (
     handleButtonArrow(buttonsList, index);
     handleButtonOnClick(buttonsList, index, editorCommands);
     handleButtonIsActive(buttonsList, index, editorCommands);
-    handleButtonIsDisabled(buttonsList, index);
+    handleButtonIsDisabled(buttonsList, index, editorCommands);
     handleButtonModal(buttonsList, index, editorCommands, linkPanelData, t);
     handleButtonOnSave(buttonsList, index, editorCommands);
     handleButtonOnCancel(buttonsList, index, editorCommands);
@@ -263,8 +263,15 @@ const handleButtonModal = (
   }
 };
 
-const handleButtonIsDisabled = (buttonsList, index) => {
-  buttonsList[index].isDisabled = () => false;
+const handleButtonIsDisabled = (buttonsList, index, editorCommands: editorCommands) => {
+  const buttonName = buttonsList[index].name;
+  if (buttonName === 'UNDO') {
+    buttonsList[index].isDisabled = () => editorCommands.isUndoStackEmpty();
+  } else if (buttonName === 'REDO') {
+    buttonsList[index].isDisabled = () => editorCommands.isRedoStackEmpty();
+  } else {
+    buttonsList[index].isDisabled = () => false;
+  }
 };
 
 const handleButtonIsActive = (buttonsList, index, editorCommands: editorCommands) => {
@@ -309,6 +316,10 @@ const handleButtonOnClick = (buttonsList, index, editorCommands: editorCommands)
       buttonsList[index].onClick = () =>
         editorCommands.deleteDecoration(decorationButtons[buttonName] as typeof RICOS_LINK_TYPE);
     }
+  } else if (buttonName === 'UNDO') {
+    buttonsList[index].onClick = () => editorCommands.undo();
+  } else if (buttonName === 'REDO') {
+    buttonsList[index].onClick = () => editorCommands.redo();
   } else if (buttonName === 'goToLink') {
     buttonsList[index].onClick = () => {
       // eslint-disable-next-line no-console

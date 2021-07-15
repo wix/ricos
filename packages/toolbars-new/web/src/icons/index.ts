@@ -22,3 +22,5 @@ export { default as LineSpacingIcon } from './LineSpacingIcon';
 export { default as CodeBlockIcon } from './CodeBlockIcon';
 export { default as EditIcon } from './EditIcon';
 export { default as TrashIcon } from './TrashIcon';
+export { default as RedoIcon } from './RedoIcon';
+export { default as UndoIcon } from './UndoIcon';

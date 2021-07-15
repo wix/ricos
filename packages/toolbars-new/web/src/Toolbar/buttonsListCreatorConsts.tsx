@@ -36,6 +36,8 @@ import {
   CodeBlockIcon,
   EditIcon,
   TrashIcon,
+  UndoIcon,
+  RedoIcon,
 } from '../icons';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
 import AlignmentPanel from '../modals/alignment/AlignmentPanel';
@@ -84,13 +86,13 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     type: 'button',
   },
   UNDO: {
-    icon: BoldIcon,
+    icon: UndoIcon,
     dataHook: 'textInlineStyleButton_UNDO',
     tooltip: 'UNDO',
     type: 'button',
   },
   REDO: {
-    icon: BoldIcon,
+    icon: RedoIcon,
     dataHook: 'textInlineStyleButton_REDO',
     tooltip: 'REDO',
     type: 'button',
