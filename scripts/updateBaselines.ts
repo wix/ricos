@@ -14,7 +14,7 @@ const stringifyBaseLine = obj => {
   const normalizeKeys = (key, val) => {
     switch (key) {
       case 'key':
-        return `${i++}`;
+        return val === '' ? '' : `${i++}`;
       case 'createdTimestamp':
       case 'updatedTimestamp':
         return '2021-07-15T07:42:30.023Z';
