@@ -17,6 +17,12 @@
     Click to see more.
   </summary>
 
+
+### :bug: Bug Fix
+- `common`
+  - [#2729](https://github.com/wix-incubator/rich-content/pull/2729) fix tooltip in ssr - regression from 8.46.13
+
+
 </details>
 <hr/>
 
