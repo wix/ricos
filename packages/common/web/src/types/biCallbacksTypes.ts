@@ -56,6 +56,7 @@ export interface onPluginModalOpenedArgs extends biCallbackParams {
 
 export interface OnInlineToolbarOpen extends biCallbackParams {
   toolbarType: ToolbarType;
+  pluginId?: string;
 }
 
 export interface onMenuLoadArgs extends biCallbackParams {
