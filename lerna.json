@@ -5,8 +5,7 @@
       "allowBranch": [
         "master",
         "release*",
-        "tiptap-image",
-        "lodableExternal"
+        "tiptap-image"
       ],
       "message": "[*] chore(release): %s"
     }
@@ -16,5 +15,5 @@
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "8.46.6-loadable"
+  "version": "8.46.6"
 }
