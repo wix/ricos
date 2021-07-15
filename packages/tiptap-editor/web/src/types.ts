@@ -1,7 +1,7 @@
 import { Node as ProseMirrorNode } from 'prosemirror-model';
 import { DraftContent } from 'ricos-content';
 import { FC } from 'react';
-import { Editor } from '@tiptap/react';
+import { Editor } from '@tiptap-es5/react';
 
 export interface PluginProps {
   context: {

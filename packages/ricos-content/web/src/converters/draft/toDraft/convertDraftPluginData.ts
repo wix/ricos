@@ -51,7 +51,7 @@ export const convertNodeDataToDraft = (nodeType: Node_Type, data) => {
     [Node_Type.FILE]: convertFileData,
     [Node_Type.IMAGE]: convertImageData,
     [Node_Type.POLL]: convertPollData,
-    [Node_Type.VERTICAL_EMBED]: convertVerticalEmbedData,
+    [Node_Type.APP_EMBED]: convertAppEmbedData,
     [Node_Type.LINK_PREVIEW]: convertLinkPreviewData,
     [Node_Type.BUTTON]: convertButtonData,
     [Node_Type.HTML]: convertHTMLData,
@@ -87,6 +87,7 @@ const convertContainerData = (
   nodeType: string
 ) => {
   const { width, alignment, spoiler, height } = data.containerData || {};
+  const { enabled = false, description, buttonText } = spoiler || {};
   data.config = Object.assign(
     {},
     data.config,
@@ -96,9 +97,9 @@ const convertContainerData = (
     alignment && { alignment: constantToKebabCase(alignment) },
     spoiler && {
       spoiler: {
-        enabled: true,
-        description: spoiler.description,
-        buttonContent: spoiler.buttonText,
+        enabled,
+        description,
+        buttonContent: buttonText,
       },
     }
   );
@@ -110,12 +111,12 @@ const convertContainerData = (
   delete data.containerData;
 };
 
-const convertVideoData = (data: VideoData & { src; metadata }) => {
+const convertVideoData = (data: VideoData & { src; metadata; title? }) => {
   const videoSrc = data.video?.src;
   if (videoSrc?.url) {
     data.src = videoSrc.url;
     const { src, width, height } = data.thumbnail || {};
-    data.metadata = { thumbnail_url: src?.url, width, height };
+    data.metadata = { thumbnail_url: src?.url, width, height, title: data.title };
   } else if (videoSrc?.custom) {
     const { src, width, height } = data.thumbnail || {};
     data.src = {
@@ -124,16 +125,19 @@ const convertVideoData = (data: VideoData & { src; metadata }) => {
     };
   }
   delete data.video;
+  delete data.title;
   delete data.thumbnail;
 };
 
 const convertDividerData = (
   data: Partial<DividerData> & {
     type;
+    lineStyle?: string;
     config?: ComponentData['config'];
   }
 ) => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+  data.type = data.lineStyle?.toLowerCase();
+  delete data.lineStyle;
   data.config = { textWrap: 'nowrap' };
   if (has(data, 'width')) {
     data.config.size = data.width?.toLowerCase();
@@ -167,8 +171,24 @@ const convertPollData = data => {
     (data.design.poll.backgroundType = data.design.poll.backgroundType.toLowerCase());
 };
 
-const convertVerticalEmbedData = data => {
-  has(data, 'type') && (data.type = data.type.toLowerCase());
+const convertAppEmbedData = data => {
+  const { type, id, name, imageSrc, url, bookingData, eventData } = data;
+  data.type = type.toLowerCase();
+  const selectedProduct: Record<string, unknown> = {
+    id,
+    name,
+    imageSrc,
+    pageUrl: url,
+    ...(bookingData || {}),
+    ...(eventData || {}),
+  };
+  data.selectedProduct = selectedProduct;
+  delete data.id;
+  delete data.name;
+  delete data.imageSrc;
+  delete data.url;
+  bookingData && delete data.bookingData;
+  eventData && delete data.eventData;
 };
 
 const convertLinkPreviewData = data => {
