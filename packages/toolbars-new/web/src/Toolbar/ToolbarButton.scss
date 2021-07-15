@@ -15,6 +15,24 @@
       }
     }
   }
+  &.toolbarButton_wrapper_asLink {
+    button {
+      display: inline-block;
+      color: $settings-action-color-fallback;
+      max-width: 270px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+    }
+    
+    &:hover {
+      button {
+        background-color: unset;
+        text-decoration: underline;
+      }
+    }
+  }
   &:hover {
     button {
       background-color: rgba($fallbackColorTuple, 0.06);

@@ -117,6 +117,7 @@ type ToolbarsToIgnore = (
   | 'MobileToolbar'
   | 'StaticTextToolbar'
   | 'StaticToolbar'
+  | 'InlinePluginToolbar'
 )[];
 
 export interface RichContentEditorProps extends PartialDraftEditorProps {
@@ -255,7 +256,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
-      toolbarsToIgnore: experiments?.newFormattingToolbar?.enabled ? ['InlineTextToolbar'] : [],
+      toolbarsToIgnore: experiments?.newFormattingToolbar?.enabled
+        ? ['InlineTextToolbar', 'InlinePluginToolbar']
+        : [],
       readOnly: false,
       context: { experiments, isMobile, t },
       undoRedoStackChanged: false,
@@ -922,6 +925,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
       if (Toolbar) {
         if (includes(toolbarsToIgnore, plugin.name)) {
+          return null;
+        }
+        if (plugin.InlinePluginToolbar && includes(toolbarsToIgnore, 'InlinePluginToolbar')) {
           return null;
         }
         return (

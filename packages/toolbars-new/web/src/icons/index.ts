@@ -20,3 +20,5 @@ export { default as decreaseIndentPluginIcon } from './decreaseIndentPluginIcon'
 export { default as SpoilerButtonIcon } from './SpoilerButtonIcon';
 export { default as LineSpacingIcon } from './LineSpacingIcon';
 export { default as CodeBlockIcon } from './CodeBlockIcon';
+export { default as EditIcon } from './EditIcon';
+export { default as TrashIcon } from './TrashIcon';

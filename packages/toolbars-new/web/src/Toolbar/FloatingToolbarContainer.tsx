@@ -10,7 +10,7 @@ const TOOLBAR_OFFSET = 5;
 interface ToolbarContainerProps {
   children: ReactElement;
   isMobile?: boolean;
-  showFormattingToolbar: boolean;
+  showToolbar: boolean;
   removeToolbarFocus: () => void;
 }
 
@@ -118,11 +118,11 @@ class FloatingToolbarContainer extends PureComponent<ToolbarContainerProps, Stat
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ toolbarPosition: { top: `${top}px`, left: `${left}px` } });
     }
-    const { showFormattingToolbar } = this.props;
+    const { showToolbar } = this.props;
     const { isVisible } = this.state;
-    if (isVisible !== (showFormattingToolbar || this.state.keepOpen || toolbarOnFocus)) {
+    if (isVisible !== (showToolbar || this.state.keepOpen || toolbarOnFocus)) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ isVisible: showFormattingToolbar });
+      this.setState({ isVisible: showToolbar });
     }
   }, 40);
 

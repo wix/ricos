@@ -24,6 +24,7 @@ type ToolbarButtonProps = {
   asContextButton?: boolean;
   disabledStyle?: boolean;
   onToolbarButtonClick?: () => void;
+  asLink?: boolean;
 };
 
 class ToolbarButton extends Component<ToolbarButtonProps> {
@@ -42,7 +43,8 @@ class ToolbarButton extends Component<ToolbarButtonProps> {
       ),
       buttonWrapper: classNames(
         styles.toolbarButton_wrapper,
-        props.isMobile && styles.toolbarButton_wrapper_mobile
+        props.isMobile && styles.toolbarButton_wrapper_mobile,
+        props.asLink && styles.toolbarButton_wrapper_asLink
         // buttonStyles.inlineToolbarButton_wrapper,
         // buttonStyles.pluginToolbarButton_wrapper
       ),

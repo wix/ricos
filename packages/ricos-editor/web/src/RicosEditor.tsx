@@ -29,6 +29,7 @@ import 'wix-rich-content-toolbars-new/dist/styles.min.css';
 import { emptyDraftContent, getEditorContentSummary } from 'wix-rich-content-editor-common';
 import { TiptapAPI } from 'wix-tiptap-editor';
 import TextFormattingToolbar from './toolbars/TextFormattingToolbar';
+import LinkToolbar from './toolbars/LinkToolbar';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -322,18 +323,32 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         {!newFormattingToolbar && this.renderToolbarPortal(StaticToolbar)}
         {/* {newFormattingToolbar && activeEditor && showFormattingToolbar && ( */}
         {newFormattingToolbar && activeEditor && (
-          <TextFormattingToolbar
-            activeEditor={activeEditor}
-            textToolbarType={textToolbarType}
-            isMobile={isMobile}
-            theme={theme}
-            locale={locale}
-            getToolbarSettings={getToolbarSettings}
-            helpers={helpers}
-            plugins={plugins}
-            linkPanelSettings={linkPanelSettings}
-            linkSettings={linkSettings}
-          />
+          <>
+            <TextFormattingToolbar
+              activeEditor={activeEditor}
+              textToolbarType={textToolbarType}
+              isMobile={isMobile}
+              theme={theme}
+              locale={locale}
+              getToolbarSettings={getToolbarSettings}
+              helpers={helpers}
+              plugins={plugins}
+              linkPanelSettings={linkPanelSettings}
+              linkSettings={linkSettings}
+            />
+            <LinkToolbar
+              activeEditor={activeEditor}
+              textToolbarType={textToolbarType}
+              isMobile={isMobile}
+              theme={theme}
+              locale={locale}
+              getToolbarSettings={getToolbarSettings}
+              helpers={helpers}
+              plugins={plugins}
+              linkPanelSettings={linkPanelSettings}
+              linkSettings={linkSettings}
+            />
+          </>
         )}
         {this.renderRicosEngine(child, {
           onChange: this.onChange(child.props.onChange),

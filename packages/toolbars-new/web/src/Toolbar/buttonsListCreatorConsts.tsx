@@ -34,6 +34,8 @@ import {
   SpoilerButtonIcon,
   LineSpacingIcon,
   CodeBlockIcon,
+  EditIcon,
+  TrashIcon,
 } from '../icons';
 import LinkModal from '../modals/link/LinkComponents/LinkModal';
 import AlignmentPanel from '../modals/alignment/AlignmentPanel';
@@ -266,6 +268,30 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
     saveSelection: true,
     loadSelection: true,
   },
+  goToLink: {
+    plugin: 'LINK',
+    dataHook: 'GoToLinkButton',
+    type: 'text',
+  },
+  editLink: {
+    plugin: 'LINK',
+    icon: EditIcon,
+    dataHook: 'LinkButton',
+    tooltip: 'Link',
+    type: 'modal',
+    modal: props => <LinkModal {...props} isActive />,
+    onDone: 'LINK',
+    onDelete: 'LINK',
+    onCancel: 'LINK',
+    saveSelection: true,
+    loadSelection: true,
+  },
+  removeLink: {
+    icon: TrashIcon,
+    plugin: 'LINK',
+    dataHook: 'RemoveLinkButton',
+    type: 'button',
+  },
   CODE_BLOCK: {
     plugin: 'code-block',
     icon: CodeBlockIcon,
@@ -295,6 +321,8 @@ export const decorationButtons: Record<string, keyof DecorationsDataMap> = {
   INCREASE_INDENT: RICOS_INDENT_TYPE,
   LINE_SPACING: RICOS_LINE_SPACING_TYPE,
   LINK: RICOS_LINK_TYPE,
+  removeLink: RICOS_LINK_TYPE,
+  editLink: RICOS_LINK_TYPE,
 };
 
 export const setTextAlignment: Record<string, TextAlignment> = {

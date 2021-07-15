@@ -133,7 +133,7 @@ class Toolbar extends Component<ToolbarProps> {
   };
 
   renderTextButton = buttonProps => {
-    const { onClick, dataHook, text, tooltip, isDisabled } = buttonProps;
+    const { onClick, dataHook, text, tooltip, isDisabled, asLink } = buttonProps;
     return (
       <ToolbarButton
         onClick={onClick}
@@ -143,6 +143,7 @@ class Toolbar extends Component<ToolbarProps> {
         buttonContent={text}
         tooltipText={tooltip}
         disabled={isDisabled?.()}
+        asLink={asLink}
       />
     );
   };

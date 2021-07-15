@@ -125,7 +125,7 @@ class TextFormattingToolbar extends Component<TextFormattingToolbarProps, State>
       <div style={isMobile ? baseMobileStyles : baseStyles} dir={getLangDir(locale)}>
         <ToolbarContainer
           isMobile={isMobile}
-          showFormattingToolbar={showFormattingToolbar || false}
+          showToolbar={showFormattingToolbar || false}
           removeToolbarFocus={removeToolbarFocus}
         >
           {ToolbarToRender}

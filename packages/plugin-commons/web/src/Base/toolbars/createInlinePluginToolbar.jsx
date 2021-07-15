@@ -66,12 +66,12 @@ export default function createInlinePluginToolbar({
     isToolbarOnFocus = () => this.ref?.contains(document.activeElement);
 
     cursorIsOnInlinePlugin = debounce(() => {
-      this.hideToolbar();
       const toolbarOnFocus = this.isToolbarOnFocus();
       const { boundingRect, type } = commonPubsub.get('cursorOnInlinePlugin') || {};
       if (toolbarOnFocus) {
         return;
       }
+      this.hideToolbar();
       if (boundingRect && name.toUpperCase() === type) {
         this.pluginBoundingRect = boundingRect;
         this.showToolbar();

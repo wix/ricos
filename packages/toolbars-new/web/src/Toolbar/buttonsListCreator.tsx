@@ -50,9 +50,18 @@ export const createButtonsList = (
     handleButtonSaveSelection(buttonsList, index, editorCommands);
     handleButtonLoadSelection(buttonsList, index, editorCommands);
     handleButtonColorPicker(buttonsList, index, editorCommands, colorPickerData);
+    handleButtonText(buttonsList, index, editorCommands, t);
   });
   const filteredButtonsList = filterButtonsByPlugins(buttonsList, plugins);
   return filteredButtonsList;
+};
+
+const handleButtonText = (buttonsList, index, editorCommands: editorCommands, t) => {
+  if (buttonsList[index].name === 'goToLink') {
+    const linkData = editorCommands.getLinkDataInSelection();
+    buttonsList[index].text = linkData.url || t('LinkTo_Toolbar_GoTo');
+    buttonsList[index].asLink = true;
+  }
 };
 
 const handleButtonColorPicker = (
@@ -102,7 +111,7 @@ const filterButtonsByPlugins = (buttonsList, plugins) => {
 const handleButtonOnDelete = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onDelete) {
     const buttonName = buttonsList[index].name;
-    if (buttonName === 'LINK') {
+    if (buttonName === 'LINK' || buttonName === 'editLink') {
       buttonsList[index].onDelete = () => {
         editorCommands.deleteDecoration(decorationButtons[buttonName] as typeof RICOS_LINK_TYPE);
         setTimeout(() => editorCommands.loadSelectionState());
@@ -114,7 +123,7 @@ const handleButtonOnDelete = (buttonsList, index, editorCommands: editorCommands
 const handleButtonOnDone = (buttonsList, index, editorCommands: editorCommands) => {
   if (buttonsFullData[buttonsList[index].name].onDone) {
     const buttonName = buttonsList[index].name;
-    if (buttonName === 'LINK') {
+    if (buttonName === 'LINK' || buttonName === 'editLink') {
       buttonsList[index].onDone = data => {
         editorCommands.insertDecoration(decorationButtons[buttonName], data);
         setTimeout(() => editorCommands.loadSelectionState());
@@ -139,7 +148,7 @@ const handleButtonOnCancel = (buttonsList, index, editorCommands: editorCommands
     const buttonName = buttonsList[index].name;
     if (buttonName === 'LINE_SPACING') {
       buttonsList[index].onCancel = () => editorCommands.loadEditorState();
-    } else if (buttonName === 'LINK') {
+    } else if (buttonName === 'LINK' || buttonName === 'editLink') {
       buttonsList[index].onCancel = () => editorCommands.loadSelectionState();
     }
   }
@@ -236,7 +245,7 @@ const handleButtonModal = (
       const Modal = buttonsFullData[buttonName].modal;
       const spacing = editorCommands.getBlockSpacing();
       buttonsList[index].modal = props => Modal && <Modal {...props} currentSelect={spacing} />;
-    } else if (buttonName === 'LINK') {
+    } else if (buttonName === 'LINK' || buttonName === 'editLink') {
       const Modal = buttonsFullData[buttonName].modal;
       const linkData = editorCommands.getLinkDataInSelection();
       const anchorableBlocks = editorCommands.getAnchorableBlocks();
@@ -296,8 +305,11 @@ const handleButtonOnClick = (buttonsList, index, editorCommands: editorCommands)
     } else if (buttonName === 'INCREASE_INDENT') {
       buttonsList[index].onClick = () =>
         editorCommands.insertDecoration(decorationButtons[buttonName], 1);
+    } else if (buttonName === 'removeLink') {
+      buttonsList[index].onClick = () =>
+        editorCommands.deleteDecoration(decorationButtons[buttonName] as typeof RICOS_LINK_TYPE);
     }
-  } else if (buttonName === 'LINK') {
+  } else if (buttonName === 'goToLink') {
     buttonsList[index].onClick = () => {
       // eslint-disable-next-line no-console
       console.log('hasLinkInSelection = ', editorCommands.hasLinkInSelection());
