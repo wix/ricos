@@ -51,7 +51,7 @@ message GalleyItemMetadata {
   google.protobuf.StringValue altText = 4;
   Link link = 5;
   google.protobuf.StringValue type = 6;
-  Media thumbnail = 7;
+  Media poster = 7;
 }
 
 message GalleryItem {
