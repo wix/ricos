@@ -9,8 +9,11 @@ import {
   Decoration_Type,
   HeadingData,
   LATEST_VERSION,
+  Link,
+  Link_Target,
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
+import fromEntries from 'fromentries';
 
 export const createNode = (
   type: Node_Type,
@@ -36,7 +39,7 @@ export const createParagraphNode = (
 });
 
 export const createTextNode = (text: string, decorations: Decoration[] = []): Node => ({
-  ...createNode(Node_Type.TEXT, []),
+  ...createNode(Node_Type.TEXT, [], { key: '' }),
   textData: {
     text,
     decorations,
@@ -61,3 +64,30 @@ export const initializeMetadata = (version?: number): Metadata => ({
   createdTimestamp: new Date(),
   updatedTimestamp: new Date(),
 });
+
+export const createLink = ({
+  url,
+  rel,
+  target,
+  anchor,
+}: {
+  url?: string;
+  rel?: string;
+  target?: string;
+  anchor?: string;
+}): Link => {
+  const relValues: [string, boolean][] =
+    rel
+      ?.split(' ')
+      .filter(key => ['nofollow', 'sponsored', 'ugc'].includes(key))
+      .map(key => [key, true]) || [];
+  return {
+    anchor,
+    url,
+    rel: relValues.length > 0 ? fromEntries(relValues) : undefined,
+    target: target?.toUpperCase().substring(1) as Link_Target,
+  };
+};
+
+export const createLinkDecoration = (data: { url?: string; rel?: string; target?: string }) =>
+  createDecoration(Decoration_Type.LINK, { linkData: { link: createLink(data) } });

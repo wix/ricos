@@ -1,9 +1,10 @@
 import { merge } from 'lodash';
 import { parseFragment, ChildNode, Element, TextNode, DocumentFragment } from 'parse5';
-import { RichContent, Node, Decoration, Decoration_Type, Node_Type } from 'ricos-schema';
+import { RichContent, Node, Decoration, Decoration_Type, Node_Type, LinkData } from 'ricos-schema';
 import {
   createDecoration,
   createHeadingNode,
+  createLink,
   createNode,
   createParagraphNode,
   createTextNode,
@@ -90,7 +91,9 @@ const addDecoration = (
 
 const createLinkData = (element: Element) => {
   const url = element.attrs.find(attr => attr.name === 'href')?.value;
-  return url ? { linkData: { url } } : {};
+  const rel = element.attrs.find(attr => attr.name === 'rel')?.value;
+  const target = element.attrs.find(attr => attr.name === 'target')?.value;
+  return url ? { linkData: { link: createLink({ url, rel, target }) } } : {};
 };
 
 const getChildNodes = (
@@ -113,8 +116,8 @@ const reduceDecorations = (decorations: Decoration[]): Decoration[] => {
       const currentDecoration: Decoration = decorationMap[type] || { type };
       const nextDecoration: Decoration = { type, ...data };
       return {
-        ...decorationMap,
         [type]: merge(currentDecoration, nextDecoration),
+        ...decorationMap,
       };
     },
     {} as DecorationMap

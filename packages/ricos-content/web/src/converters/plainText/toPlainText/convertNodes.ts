@@ -1,5 +1,4 @@
 import { Node, Node_Type } from 'ricos-schema';
-import { getImageSrc } from '../../../imageUtils';
 import { LINK_TYPE } from '../../../consts';
 import { mergeTextNodes, RangedDecoration } from '../../draft/toDraft/decorationParsers';
 
@@ -38,7 +37,7 @@ export const addLinksToText = (text: string, linkDecorations: RangedDecoration[]
         insertInText(
           newText,
           link.end + newText.length - text.length + 1,
-          `(${link.linkData?.url})`
+          `(${link.linkData?.link?.url})`
         ),
       text
     );
@@ -56,15 +55,7 @@ export const parseImage = async (
 ): Promise<string> => {
   const { caption } = imageData || {};
   const { src, width, height } = imageData?.image || {};
-  const imageUrlOptions = Object.assign(
-    {
-      imageType: 'highRes',
-      requiredQuality: 90,
-    },
-    width && { requiredWidth: width },
-    height && { requiredHeight: height }
-  );
-  let url: string = getImageSrc({ file_name: src?.custom }, undefined, imageUrlOptions);
+  let url = `https://static.wixstatic.com/media/${src?.custom?.replace('media/', '')}`;
   if (urlShortener) {
     url = await urlShortener(url);
   }
@@ -75,11 +66,13 @@ const getDefaultVideoUrl = async (fileId: string) => `https://video.wixstatic.co
 
 export const parseVideo = async (
   { videoData }: Node,
+  delimiter: string,
   getVideoUrl: (fileId: string) => Promise<string> = getDefaultVideoUrl
 ): Promise<string> => {
-  const { custom, url } = videoData?.video?.src || {};
-  const text = custom ? getVideoUrl(custom) : url;
-  return text || '';
+  const { video, title } = videoData || {};
+  const { custom, url } = video?.src || {};
+  const videoUrl = (custom ? getVideoUrl(custom) : url) || '';
+  return title ? title + delimiter + videoUrl : videoUrl;
 };
 
 export const parseGiphy = ({ giphyData }: Node): string => {

@@ -124,8 +124,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if (!onPublish) {
       return;
     }
-    const editorState = this.dataInstance.getEditorState();
-    const { pluginsCount, pluginsDetails } = getEditorContentSummary(editorState) || {};
+    const contentState = this.dataInstance.getContentState();
+    const { pluginsCount, pluginsDetails } = getEditorContentSummary(contentState) || {};
     onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 

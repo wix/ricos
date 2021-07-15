@@ -1,4 +1,4 @@
-import { ReactNodeViewRenderer, Node, mergeAttributes } from '@tiptap/react';
+import { ReactNodeViewRenderer, Node, mergeAttributes } from '@tiptap-es5/react';
 import { BaseExtensionComponentHOC } from './components/BaseComponent';
 
 export const createNodeExtension = (name, Component, componentDataDefaults) => {

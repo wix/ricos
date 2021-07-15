@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { ReactElement } from 'react';
+import React, { ReactElement, Suspense } from 'react';
 import { getTooltipStyles } from './tooltipStyles';
 import { GlobalContext } from '../src/Utils/contexts';
 
@@ -19,7 +19,15 @@ interface Props {
   hideArrow?: boolean;
 }
 
-const ToolTipComponent = React.lazy(() => import('react-portal-tooltip'));
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const lazyWithPreload = (factory: () => Promise<any>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Component: any = React.lazy(factory);
+  Component.preload = factory;
+  return Component;
+};
+
+const ToolTipComponent = lazyWithPreload(() => import('react-portal-tooltip'));
 
 class Tooltip extends React.Component<Props> {
   static defaultProps = {
@@ -40,6 +48,8 @@ class Tooltip extends React.Component<Props> {
 
   static contextType = GlobalContext;
 
+  private firstShow = false;
+
   componentDidUpdate() {
     this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
   }
@@ -49,6 +59,8 @@ class Tooltip extends React.Component<Props> {
   }
 
   showTooltip = (e: MouseEvent) => {
+    this.firstShow = true;
+    ToolTipComponent.preload();
     if (!(e.target as HTMLButtonElement).disabled) {
       this.mousePosition = { x: e.clientX, y: e.clientY };
 
@@ -108,23 +120,27 @@ class Tooltip extends React.Component<Props> {
     const elementProps = tooltipVisible
       ? { ...this.wrapperProps, 'data-tooltipid': true }
       : this.wrapperProps;
+
+    const tooltipArrow = hideArrow ? null : 'center';
     return isMobile || this.disabled || !content ? (
       children
     ) : (
       <>
         {React.cloneElement(React.Children.only(children), elementProps)}
-        {tooltipVisible ? (
-          <ToolTipComponent
-            active={tooltipVisible}
-            parent={'[data-tooltipid=true]'}
-            position={place}
-            arrow={!hideArrow ? 'center' : null}
-            style={style}
-            tooltipTimeout={10}
-          >
-            {content}
-          </ToolTipComponent>
-        ) : null}
+        {this.firstShow && ( //can't render Suspense in SSR
+          <Suspense fallback={null}>
+            <ToolTipComponent
+              active={tooltipVisible}
+              parent={'[data-tooltipid=true]'}
+              position={place}
+              arrow={tooltipArrow}
+              style={style}
+              tooltipTimeout={10}
+            >
+              {content}
+            </ToolTipComponent>
+          </Suspense>
+        )}
       </>
     );
   }

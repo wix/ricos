@@ -1,4 +1,5 @@
 import { Decoration_Type, Node_Type } from 'ricos-schema';
+import fromEntries from 'fromentries';
 
 export const NODE_TYPES = [
   Node_Type.PARAGRAPH,
@@ -26,7 +27,7 @@ export const NODE_TYPES = [
   Node_Type.EMBED,
 ];
 
-export const NODE_MAP = Object.fromEntries(NODE_TYPES.map(v => [v, v]));
+export const NODE_MAP = fromEntries(NODE_TYPES.map(v => [v, v]));
 
 export const DECORATION_TYPES = [
   Decoration_Type.BOLD,
