@@ -843,16 +843,14 @@
       }
     },
     {
-      "type": "verticalEmbed",
+      "type": "appEmbed",
       "content": [],
       "attrs": {
         "type": "PRODUCT",
-        "selectedProduct": {
-          "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
-          "name": "flowers",
-          "imageSrc": "https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg",
-          "html": "<a class=\"vertical-embed-link\" href=\"https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers\" target=\"_blank\"><div class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">flowers</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Comprar ahora</div></div></div></div></a>"
-        },
+        "id": "265beaf5-3008-c5c2-fa5e-1447e0bebf71",
+        "name": "flowers",
+        "imageSrc": "https://static.wixstatic.com/media/11062b_3a93dbce5ab64e7c90d9b2a83a598893~mv2.jpg/v1/fit/w_6720,h_4480,q_90/file.jpg",
+        "url": "https://www.wix.app/stores/54e7b326-49ec-434f-a7cc-c2ad1eaec049/catalog/265beaf5-3008-c5c2-fa5e-1447e0bebf71?d=https://sapirs0.wixsite.com/mysite/product-page/flowers",
         "key": "28"
       }
     },
@@ -865,6 +863,59 @@
         },
         "indentation": 0,
         "key": "29"
+      }
+    },
+    {
+      "type": "appEmbed",
+      "content": [],
+      "attrs": {
+        "type": "EVENT",
+        "id": "65129504-3bfc-44c8-90cc-f9eedfea9321",
+        "name": "2-week course of intensive physical research, with a sense of plenty of time for process and discovery. Rooted in Ohad N",
+        "imageSrc": "https://static.wixstatic.com/media/2571849c6b0749a4bbd008a06fd65762.jpg",
+        "url": "https://www.wix.app/events/54e7b326-49ec-434f-a7cc-c2ad1eaec049/65129504-3bfc-44c8-90cc-f9eedfea9321/details?d=https://sapirs0.wixsite.com/mysite/event-details/2-week-course-of-intensive-physical-research-with-a-sense-of-plenty-of-time-for-process-and-discovery-rooted-in-ohad-n",
+        "eventData": {
+          "scheduling": "13 de octubre de 2020 19:00–27 de octubre de 2020 23:00 ",
+          "location": " Suzanna Baby Shop"
+        },
+        "key": "30"
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0,
+        "key": "31"
+      }
+    },
+    {
+      "type": "appEmbed",
+      "content": [],
+      "attrs": {
+        "type": "BOOKING",
+        "id": "03ef6546-985d-4739-951e-ca897375b967",
+        "name": "CUPCAKE MASTER",
+        "imageSrc": "https://static.wixstatic.com/media/78ccafc88f7fce3e55bd7a33f166704b.jpg",
+        "url": "https://www.wix.app/bookings/54e7b326-49ec-434f-a7cc-c2ad1eaec049/service/03ef6546-985d-4739-951e-ca897375b967/details?d=https://sapirs0.wixsite.com/mysite/bookings-checkout/cupcake-master",
+        "bookingData": {
+          "durations": "90"
+        },
+        "key": "32"
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [],
+      "attrs": {
+        "textStyle": {
+          "textAlignment": "AUTO"
+        },
+        "indentation": 0,
+        "key": "33"
       }
     },
     {
@@ -884,7 +935,7 @@
         "title": "A mock title",
         "thumbnailUrl": "https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp",
         "description": "A mock description",
-        "key": "30"
+        "key": "34"
       }
     },
     {
@@ -895,7 +946,7 @@
           "textAlignment": "AUTO"
         },
         "indentation": 0,
-        "key": "31"
+        "key": "35"
       }
     },
     {
@@ -1001,7 +1052,7 @@
           }
         },
         "siteToken": "VBLuQllkHnrmBH_7O0-Xmzek4kW6U1qHy5-p36Rfkys.eyJpbnN0YW5jZUlkIjoiYTE2NDRiZmUtNzFmOC00MDFiLWI3YWEtNTgwYzkxMDBmMDk3IiwiYXBwRGVmSWQiOiIxNDhjMjI4Ny1jNjY5LWQ4NDktZDE1My00NjNjNzQ4NmE2OTQiLCJtZXRhU2l0ZUlkIjoiMzlkNjk1MTYtYWYwNC00ZTQ1LWE2NjAtMzQwNjIwZWQ0NGNkIiwic2lnbkRhdGUiOiIyMDIwLTA3LTMwVDA4OjQyOjQ2LjQ2MVoiLCJ1aWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJhaWQiOiIzYTk1MzMzMS1hZGU4LTQzMDMtOWM5NC04NmIzNmU0ZDAzMzIiLCJiaVRva2VuIjoiOThiMmRlZTgtZGVmYy0wZTVlLTExY2EtNmMwYWIxZWRiNDVhIiwic2l0ZU93bmVySWQiOiIzZWZhN2U4Ni1mYzI1LTRlZjEtYTAwMi0xOTc2OWI4NDIwMmYiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjAtMDctMzBUMTI6NDI6NDYuNDYxWiIsImhhc1VzZXJSb2xlIjp0cnVlfQ",
-        "key": "32"
+        "key": "36"
       }
     },
     {
@@ -1094,12 +1145,12 @@
               "textAlignment": "AUTO"
             },
             "indentation": 0,
-            "key": "33"
+            "key": "37"
           }
         }
       ],
       "attrs": {
-        "key": "34"
+        "key": "38"
       }
     },
     {
@@ -1126,7 +1177,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "35"
+                "key": "39"
               }
             },
             {
@@ -1153,7 +1204,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "36"
+                        "key": "40"
                       }
                     },
                     {
@@ -1180,7 +1231,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "37"
+                                "key": "41"
                               }
                             },
                             {
@@ -1207,7 +1258,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "38"
+                                        "key": "42"
                                       }
                                     },
                                     {
@@ -1234,12 +1285,12 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "39"
+                                                "key": "43"
                                               }
                                             }
                                           ],
                                           "attrs": {
-                                            "key": "40"
+                                            "key": "44"
                                           }
                                         },
                                         {
@@ -1263,52 +1314,52 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "41"
+                                                "key": "45"
                                               }
                                             }
                                           ],
                                           "attrs": {
-                                            "key": "42"
+                                            "key": "46"
                                           }
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "43"
+                                        "key": "47"
                                       }
                                     }
                                   ],
                                   "attrs": {
-                                    "key": "44"
+                                    "key": "48"
                                   }
                                 }
                               ],
                               "attrs": {
-                                "key": "45"
+                                "key": "49"
                               }
                             }
                           ],
                           "attrs": {
-                            "key": "46"
+                            "key": "50"
                           }
                         }
                       ],
                       "attrs": {
-                        "key": "47"
+                        "key": "51"
                       }
                     }
                   ],
                   "attrs": {
-                    "key": "48"
+                    "key": "52"
                   }
                 }
               ],
               "attrs": {
-                "key": "49"
+                "key": "53"
               }
             }
           ],
           "attrs": {
-            "key": "50"
+            "key": "54"
           }
         },
         {
@@ -1332,7 +1383,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "51"
+                "key": "55"
               }
             },
             {
@@ -1359,22 +1410,22 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "52"
+                        "key": "56"
                       }
                     }
                   ],
                   "attrs": {
-                    "key": "53"
+                    "key": "57"
                   }
                 }
               ],
               "attrs": {
-                "key": "54"
+                "key": "58"
               }
             }
           ],
           "attrs": {
-            "key": "55"
+            "key": "59"
           }
         },
         {
@@ -1398,17 +1449,17 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "56"
+                "key": "60"
               }
             }
           ],
           "attrs": {
-            "key": "57"
+            "key": "61"
           }
         }
       ],
       "attrs": {
-        "key": "58"
+        "key": "62"
       }
     },
     {
@@ -1419,7 +1470,7 @@
           "textAlignment": "AUTO"
         },
         "indentation": 0,
-        "key": "59"
+        "key": "63"
       }
     },
     {
@@ -1446,7 +1497,7 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "60"
+                "key": "64"
               }
             },
             {
@@ -1473,7 +1524,7 @@
                           "textAlignment": "AUTO"
                         },
                         "indentation": 1,
-                        "key": "61"
+                        "key": "65"
                       }
                     },
                     {
@@ -1500,7 +1551,7 @@
                                   "textAlignment": "AUTO"
                                 },
                                 "indentation": 2,
-                                "key": "62"
+                                "key": "66"
                               }
                             },
                             {
@@ -1527,7 +1578,7 @@
                                           "textAlignment": "AUTO"
                                         },
                                         "indentation": 3,
-                                        "key": "63"
+                                        "key": "67"
                                       }
                                     },
                                     {
@@ -1554,12 +1605,12 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "64"
+                                                "key": "68"
                                               }
                                             }
                                           ],
                                           "attrs": {
-                                            "key": "65"
+                                            "key": "69"
                                           }
                                         },
                                         {
@@ -1583,52 +1634,52 @@
                                                   "textAlignment": "AUTO"
                                                 },
                                                 "indentation": 4,
-                                                "key": "66"
+                                                "key": "70"
                                               }
                                             }
                                           ],
                                           "attrs": {
-                                            "key": "67"
+                                            "key": "71"
                                           }
                                         }
                                       ],
                                       "attrs": {
-                                        "key": "68"
+                                        "key": "72"
                                       }
                                     }
                                   ],
                                   "attrs": {
-                                    "key": "69"
+                                    "key": "73"
                                   }
                                 }
                               ],
                               "attrs": {
-                                "key": "70"
+                                "key": "74"
                               }
                             }
                           ],
                           "attrs": {
-                            "key": "71"
+                            "key": "75"
                           }
                         }
                       ],
                       "attrs": {
-                        "key": "72"
+                        "key": "76"
                       }
                     }
                   ],
                   "attrs": {
-                    "key": "73"
+                    "key": "77"
                   }
                 }
               ],
               "attrs": {
-                "key": "74"
+                "key": "78"
               }
             }
           ],
           "attrs": {
-            "key": "75"
+            "key": "79"
           }
         },
         {
@@ -1652,12 +1703,12 @@
                   "textAlignment": "RIGHT"
                 },
                 "indentation": 0,
-                "key": "76"
+                "key": "80"
               }
             }
           ],
           "attrs": {
-            "key": "77"
+            "key": "81"
           }
         },
         {
@@ -1681,17 +1732,17 @@
                   "textAlignment": "AUTO"
                 },
                 "indentation": 0,
-                "key": "78"
+                "key": "82"
               }
             }
           ],
           "attrs": {
-            "key": "79"
+            "key": "83"
           }
         }
       ],
       "attrs": {
-        "key": "80"
+        "key": "84"
       }
     },
     {
@@ -1702,7 +1753,7 @@
           "textAlignment": "AUTO"
         },
         "indentation": 0,
-        "key": "81"
+        "key": "85"
       }
     },
     {
@@ -1727,7 +1778,7 @@
           "paddingTop": "0px",
           "paddingBottom": "0px"
         },
-        "key": "82"
+        "key": "86"
       }
     },
     {
@@ -1742,7 +1793,7 @@
           "paddingTop": "0px",
           "paddingBottom": "0px"
         },
-        "key": "83"
+        "key": "87"
       }
     },
     {
@@ -1768,7 +1819,7 @@
           "paddingTop": "0px",
           "paddingBottom": "0px"
         },
-        "key": "84"
+        "key": "88"
       }
     },
     {
@@ -1779,7 +1830,7 @@
           "textAlignment": "AUTO"
         },
         "indentation": 1,
-        "key": "85"
+        "key": "89"
       }
     },
     {
@@ -1804,7 +1855,7 @@
         },
         "disableExpand": false,
         "disableDownload": false,
-        "key": "86"
+        "key": "90"
       }
     },
     {
@@ -1825,7 +1876,7 @@
           "textAlignment": "AUTO"
         },
         "indentation": 0,
-        "key": "87"
+        "key": "91"
       }
     },
     {
@@ -1846,7 +1897,7 @@
           "textAlignment": "AUTO"
         },
         "indentation": 0,
-        "key": "88"
+        "key": "92"
       }
     },
     {
@@ -1857,7 +1908,7 @@
           "textAlignment": "AUTO"
         },
         "indentation": 0,
-        "key": "89"
+        "key": "93"
       }
     }
   ],
