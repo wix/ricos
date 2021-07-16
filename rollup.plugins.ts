@@ -161,14 +161,16 @@ const replace = (): Plugin => {
   });
 };
 
-const uglify = (): Plugin => {
+const uglify = (loadable: boolean): Plugin => {
   return terser({
     mangle: false,
-    output: {
-      comments: (node, comment) => {
-        return /@preserve|@license|@cc_on|webpackChunkName/i.test(comment.value);
+    ...(loadable && {
+      output: {
+        comments: (node, comment) => {
+          return /@preserve|@license|@cc_on|webpackChunkName/i.test(comment.value);
+        },
       },
-    },
+    }),
   });
 };
 
@@ -198,7 +200,7 @@ const getPlugins = (loadable: boolean) => {
   ].filter(x => x);
 
   if (!IS_DEV_ENV) {
-    plugins = [...plugins, replace(), uglify()];
+    plugins = [...plugins, replace(), uglify(loadable)];
   }
 
   if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
