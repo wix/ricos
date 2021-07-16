@@ -53,7 +53,7 @@ const leafParagraphToDiv: AstRule = [
 ];
 
 const cleanListItemPadding: AstRule = [
-  hasTag('p'),
+  hasTag('li'),
   (node: Element) => ({
     ...node,
     childNodes: (node.childNodes as Element[]).filter(

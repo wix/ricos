@@ -5,7 +5,6 @@ import { RichContent, Node_Type, Node } from 'ricos-schema';
 import { modify } from '../../../RicosContentAPI/modify';
 import { extract } from '../../../RicosContentAPI/extract';
 import { createNode, partitionBy } from '../../nodeUtils';
-import { log } from '../../../fp-utils';
 
 // scapegoat
 const decomposeListItem = (node: Node): Node[] =>
@@ -19,10 +18,7 @@ const decomposeListItem = (node: Node): Node[] =>
         nodes: [createNode(Node_Type.LIST_ITEM, { nodes: [], data: {} })],
         data: {},
       }), // partition initialization
-    (list, paragraphOrList) =>
-      list.nodes[0].nodes.push(
-        createNode(Node_Type.LIST_ITEM, { nodes: [paragraphOrList], data: {} }) // append child to list item
-      )
+    (list, paragraphOrList) => list.nodes[0].nodes.push(paragraphOrList)
   )(node.nodes[0]?.nodes || []);
 
 // decompose list items resulted by splitUnsupportedLists
@@ -90,7 +86,6 @@ const newLine: Node = {
 };
 
 const mergeAdjasentParagraphs = (node: Node): Node => {
-  console.log('merge applied on', node); // eslint-disable-line no-console
   return {
     ...node,
     nodes: partitionBy<Node>(
@@ -114,7 +109,6 @@ const mergeListParagraphNodes = (content: RichContent) =>
 
 export default flow(
   mergeListParagraphNodes,
-  // log('merged paragraphs', d => JSON.stringify(d, null, 2)),
   splitUnsupportedLists,
   E.map(decomposeUnsupportedListItems),
   E.fold(identity, identity)

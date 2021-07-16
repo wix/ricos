@@ -35,10 +35,10 @@ describe('CKEditor parser', () => {
   it('should output valid content for toDraft', () => {
     const content = getHtml('faq-no-nested-content');
     const rich = parse(content);
-    console.log(JSON.stringify(rich, null, 2)); // eslint-disable-line no-console
+    // console.log(JSON.stringify(rich, null, 2)); // eslint-disable-line no-console
     const draft = toDraft(rich);
-    console.log(draft); // eslint-disable-line no-console
-    expect(draft.blocks.length).toEqual(9);
-    expect(Object.keys(draft.entityMap).length).toEqual(3);
+    // console.log(draft); // eslint-disable-line no-console
+    expect(draft.blocks.length).toEqual(16);
+    expect(Object.keys(draft.entityMap).length).toEqual(4);
   });
 });

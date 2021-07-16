@@ -111,7 +111,7 @@ describe('toDraft preprocess', () => {
     expect(RichContent.fromJSON(actual)).toStrictEqual(expected);
   });
 
-  it('<ol><li><p></li><li><p><img><p></li><li><p></li></ol> => <ul><li><p></li></ul><ul><li><p></li></ul><img><ul><li><p></li></ul><ul><li><p></li></ul>', () => {
+  it('should split lists and list items containing list-unsupported nodes in draft', () => {
     const content = RichContent.fromJSON({
       nodes: [
         {
