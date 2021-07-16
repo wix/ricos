@@ -190,11 +190,12 @@ const getPlugins = (loadable: boolean) => {
     svgr(),
     resolveAlias(),
     resolve(),
-    typescript(),
+    loadable && typescript(),
     babel(loadable),
     commonjsPlugin(),
     json(),
-  ];
+    !loadable && typescript(),
+  ].filter(x => x);
 
   if (!IS_DEV_ENV) {
     plugins = [...plugins, replace(), uglify()];
