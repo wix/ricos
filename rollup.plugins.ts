@@ -76,11 +76,11 @@ const copyAfterBundleWritten = (): Plugin => {
   });
 };
 
-const babel = (): Plugin => {
+const babel = (loadable: boolean): Plugin => {
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**', 'node_modules/@tiptap'],
-    extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
+    ...(loadable && { extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'] }),
     babelHelpers: 'runtime',
   });
 };
@@ -185,31 +185,35 @@ const createFakeStylesFile = (): Plugin => ({
   },
 });
 
-let _plugins: Plugin[] = [
-  svgr(),
-  resolveAlias(),
-  resolve(),
-  typescript(),
-  babel(),
-  commonjsPlugin(),
-  json(),
-];
+const getPlugins = (loadable: boolean) => {
+  let plugins: Plugin[] = [
+    svgr(),
+    resolveAlias(),
+    resolve(),
+    typescript(),
+    babel(loadable),
+    commonjsPlugin(),
+    json(),
+  ];
 
-if (!IS_DEV_ENV) {
-  _plugins = [..._plugins, replace(), uglify()];
-}
+  if (!IS_DEV_ENV) {
+    plugins = [...plugins, replace(), uglify()];
+  }
 
-if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
-  _plugins = [..._plugins, visualizer()];
-}
+  if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
+    plugins = [...plugins, visualizer()];
+  }
 
-if (process.env.EXTRACT_CSS === 'false') {
-  _plugins = [..._plugins, createFakeStylesFile()];
-}
+  if (process.env.EXTRACT_CSS === 'false') {
+    plugins = [...plugins, createFakeStylesFile()];
+  }
+  return plugins;
+};
 
-const plugins = (shouldExtractCss: boolean) => {
-  _plugins.push(postcss(shouldExtractCss));
-  return _plugins;
+const plugins = (shouldExtractCss: boolean, loadable: boolean) => {
+  const plugins = getPlugins(loadable);
+  plugins.push(postcss(shouldExtractCss));
+  return plugins;
 };
 const lastEntryPlugins = [libsPackageJsonGeneratorPlugin(), copy(), copyAfterBundleWritten()];
 export { plugins, lastEntryPlugins };

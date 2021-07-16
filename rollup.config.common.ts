@@ -12,7 +12,7 @@ if (!process.env.MODULE_NAME) {
 }
 
 const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): RollupOptions[] => {
-  const plugins = createPlugins(shouldExtractCss);
+  const plugins = createPlugins(shouldExtractCss, false);
   const watch: WatcherOptions = {
     exclude: ['node_modules/**'],
     clearScreen: false,
@@ -88,9 +88,10 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
   const viewerLoadablePath = 'src/viewer-loadable.ts';
   if (existsSync(`./${viewerLoadablePath}`)) {
     viewerEntry.push({
+      ...commonOptions,
       input: viewerLoadablePath,
       output: viewerLoadableOutput,
-      ...commonOptions,
+      plugins: createPlugins(shouldExtractCss, true),
     });
   }
 
