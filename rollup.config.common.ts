@@ -78,6 +78,11 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
       format: 'es',
       chunkFileNames: '[name].js',
     },
+    {
+      dir: 'dist/loadable/viewer',
+      format: 'cjs',
+      chunkFileNames: '[name].cjs.js',
+    },
   ];
 
   const viewerLoadablePath = 'src/viewer-loadable.ts';
