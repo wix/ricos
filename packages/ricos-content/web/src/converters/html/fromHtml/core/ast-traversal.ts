@@ -4,7 +4,6 @@ import * as A from 'fp-ts/Array';
 import { DocumentFragment } from 'parse5';
 import { getChildNodes, AstRule, toDocumentFragment } from './ast-utils';
 import { ContentNode } from './models';
-import { log } from '../../../../fp-utils';
 
 const appyRule = (rule: AstRule) => (node: ContentNode): ContentNode => {
   const [_if, then] = rule;

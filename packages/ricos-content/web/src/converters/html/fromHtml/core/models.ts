@@ -1,4 +1,4 @@
-import { Node, TextData, NodeStyle, Decoration, Decoration_Type, RichContent } from 'ricos-schema';
+import { Node, Decoration, Decoration_Type } from 'ricos-schema';
 import { TextNode, Element, CommentNode } from 'parse5';
 
 export type ContentNode = Element | TextNode | CommentNode;
