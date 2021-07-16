@@ -16,6 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
+
+## 8.46.17 (July 16, 2021)
 
 ### :rocket: New Feature
 
@@ -33,8 +37,6 @@
   - [#2716](https://github.com/wix/ricos/pull/2716) fix image caption clipping in editor
 - `ricos-content`
   - [#2731](https://github.com/wix/ricos/pull/2731) ES5 compatible fix
-    </details>
-    <hr/>
 
 ## 8.46.16 (July 15, 2021)
 
