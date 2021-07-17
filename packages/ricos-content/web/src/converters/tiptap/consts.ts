@@ -1,5 +1,5 @@
 import { Decoration_Type, Node_Type } from 'ricos-schema';
-import fromEntries from 'fromentries';
+import { fromEntries } from '../../utils';
 
 export const NODE_TYPES = [
   Node_Type.PARAGRAPH,
@@ -20,7 +20,7 @@ export const NODE_TYPES = [
   Node_Type.LINK_PREVIEW,
   Node_Type.MAP,
   Node_Type.POLL,
-  Node_Type.VERTICAL_EMBED,
+  Node_Type.APP_EMBED,
   Node_Type.BUTTON,
   Node_Type.COLLAPSIBLE_LIST,
   Node_Type.TABLE,

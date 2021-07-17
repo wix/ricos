@@ -29,7 +29,7 @@ import {
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
 import { toUpperCase, replace } from '../fp-utils';
-import fromEntries from 'fromentries';
+import { fromEntries } from '../utils';
 
 export const createNode = <TData>(
   type: Node_Type,
