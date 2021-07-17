@@ -19,6 +19,13 @@
 </details>
 <hr/>
 
+## 8.46.18 (July 17, 2021)
+
+### :nail_care: Polish
+
+- `loadable`
+  - [#2736](https://github.com/wix/ricos/pull/2736) Loadable CJS & bundle improvments
+
 ## 8.46.17 (July 16, 2021)
 
 ### :rocket: New Feature
