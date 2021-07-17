@@ -41,7 +41,7 @@ const testRegex = (regex: RegExp, source: string) =>
   typeof regex === 'string' ? regex === source : regex.test(source);
 
 export const isExternal = (isLoadable = false) => source => {
-  const _externals = isLoadable ? [/@babel\/runtime/, ...externals] : externals;
+  const _externals = isLoadable ? externals : [/@babel\/runtime/, ...externals];
   return (
     !localPrefixes.some(prefix => source.startsWith(prefix)) &&
     !excludedExternalsRegexArr.some(regex => testRegex(regex, source)) &&
