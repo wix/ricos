@@ -1,6 +1,5 @@
 import { identity, flow } from 'fp-ts/function';
 import * as E from 'fp-ts/Either';
-
 import { RichContent, Node_Type, Node } from 'ricos-schema';
 import { modify } from '../../../RicosContentAPI/modify';
 import { extract } from '../../../RicosContentAPI/extract';
@@ -49,7 +48,7 @@ const splitList = (list: Node): Node[] =>
     (list, item) => list.nodes.push(item) // add valid list item to partition
   )(list.nodes);
 
-// find lists whose list items contain anything but paragraph or list
+// find lists whose items contain some non-paragraphs or non-lists
 const getListToSplitKeys = content =>
   extract(content.nodes)
     .filter(({ type }) => type === Node_Type.BULLET_LIST || type === Node_Type.ORDERED_LIST)
@@ -67,7 +66,6 @@ const getListToSplitKeys = content =>
 // separate legit draft list items from unsupported ones (containing anything except paragraphs and nested lists)
 const splitUnsupportedLists = (content: RichContent): E.Either<RichContent, RichContent> => {
   const listToSplitKeys = getListToSplitKeys(content);
-
   // Either used for short-circuiting of decomposeUnsupportedListItems, if nothing was splitted
   return listToSplitKeys.length > 0
     ? E.right(
