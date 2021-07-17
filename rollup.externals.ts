@@ -28,7 +28,6 @@ const externals = [
   /^ricos-content\/libs\/toDraftData$/,
   /^react-player$/,
   /^@loadable\/component$/,
-  /@babel\/runtime/,
 ];
 
 const excludedExternalsRegexArr = [
@@ -41,10 +40,11 @@ const localPrefixes = ['\0', '.', '/'];
 const testRegex = (regex: RegExp, source: string) =>
   typeof regex === 'string' ? regex === source : regex.test(source);
 
-export const isExternal: IsExternal = source => {
+export const isExternal = (isLoadable = false) => source => {
+  const _externals = isLoadable ? [/@babel\/runtime/, ...externals] : externals;
   return (
     !localPrefixes.some(prefix => source.startsWith(prefix)) &&
     !excludedExternalsRegexArr.some(regex => testRegex(regex, source)) &&
-    externals.some(externalName => new RegExp(externalName).test(source))
+    _externals.some(externalName => new RegExp(externalName).test(source))
   );
 };
