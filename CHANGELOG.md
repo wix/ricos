@@ -16,6 +16,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+
+### :house: Internal
+- `scripts`
+  - [#2750](https://github.com/wix/ricos/pull/2750) updateBaselines - normalize keys in baselines 
+
+
 </details>
 <hr/>
 
