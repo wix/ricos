@@ -1,4 +1,5 @@
 /* eslint-disable fp/no-delete */
+// TODO: purify this module
 import {
   Node,
   Node_Type,
@@ -153,7 +154,9 @@ const convertDividerData = (
 const convertImageData = (data: ImageData & { src; config; metadata }) => {
   const { link, config, image, altText, caption } = data;
   const { src, width, height } = image || {};
-  data.src = { id: src?.custom, file_name: src?.custom, width, height };
+  data.src = src?.custom
+    ? { id: src?.custom, file_name: src?.custom, width, height }
+    : { url: src?.url, source: 'static' };
   const links = link?.anchor ? { anchor: link?.anchor } : { link: link && parseLink(link) };
   data.config = { ...(config || {}), ...links };
   data.metadata = (altText || caption) && { caption, alt: altText };
@@ -295,12 +298,25 @@ const convertEmbedData = data => {
   delete data.src;
 };
 
-const convertLinkData = (data: LinkData & { url?: string; target?: string; rel?: string }) => {
+const convertLinkData = (
+  data: LinkData & { url?: string; target?: string; rel?: string; customData?: string }
+) => {
   if (data.link) {
-    const { url, target, rel } = parseLink(data.link);
+    const { url, target, rel, customData } = parseLink(data.link);
     data.url = url;
-    if (target) data.target = target;
-    if (rel) data.rel = rel;
+    if (target) {
+      data.target = target;
+    }
+    if (rel) {
+      data.rel = rel;
+    }
+    if (customData) {
+      try {
+        data = { ...data, ...JSON.parse(customData) }; // eslint-disable-line no-param-reassign
+      } catch (e) {
+        data.customData = customData;
+      }
+    }
     delete data.link;
   }
 };
@@ -310,11 +326,13 @@ const parseLink = ({
   rel,
   target,
   anchor,
+  customData,
 }: Link): {
   url?: string;
   rel?: string;
   target?: string;
   anchor?: string;
+  customData?: string;
 } => ({
   anchor,
   url,
@@ -324,6 +342,7 @@ const parseLink = ({
       .flatMap(([key, value]) => (value ? key : []))
       .join(' '),
   target: target && '_' + target.toLowerCase(),
+  customData,
 });
 
 const constantToKebabCase = (str: string) => str.toLowerCase().replace('_', '-');
