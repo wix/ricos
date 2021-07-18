@@ -195,11 +195,6 @@ export default function createAtomicPluginToolbar({
       }
     };
 
-    getPluginType = () => {
-      const editorState = getEditorState();
-      return this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
-    };
-
     /*eslint-disable complexity*/
     PluginToolbarButton = ({
       button,
@@ -225,7 +220,7 @@ export default function createAtomicPluginToolbar({
       };
 
       const editorState = getEditorState();
-      const pluginType = this.getPluginType();
+      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
@@ -429,7 +424,7 @@ export default function createAtomicPluginToolbar({
       const triggerOnLoadBi = () => {
         helpers?.onInlineToolbarOpen?.({
           toolbarType: 'PLUGIN',
-          pluginId: this.getPluginType(),
+          pluginId: this.focusedBlock && getBlockEntityType(getEditorState(), this.focusedBlock),
         });
       };
       const toolbarContentProps = {

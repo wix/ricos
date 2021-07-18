@@ -73,14 +73,14 @@ export default class InlineToolbar extends Component {
     if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
       position = { '--offset-top': `${offset.y}px`, '--offset-left': `${offset.x}px` };
     }
+    const isVisible = () => this.state.isVisible;
     this.checkShouldTriggerBI = (() => {
       let triggered = false;
       return () => {
-        const { isVisible } = this.state;
-        if (!triggered && isVisible) {
+        if (!triggered && isVisible()) {
           triggered = true;
           helpers?.onInlineToolbarOpen?.({ toolbarType: 'FORMATTING' });
-        } else if (!isVisible) {
+        } else if (!isVisible()) {
           triggered = false;
         }
       };
