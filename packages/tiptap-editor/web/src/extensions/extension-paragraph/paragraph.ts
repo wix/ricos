@@ -1,4 +1,4 @@
-import { Command, Node, mergeAttributes } from '@tiptap/core';
+import { Command, Node, mergeAttributes } from '@tiptap-es5/core';
 import { ParagraphData } from 'ricos-schema';
 
 export interface ParagraphOptions {
@@ -39,7 +39,8 @@ export const Paragraph = Node.create<ParagraphOptions>({
   renderHTML({ HTMLAttributes }) {
     return ['div', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
-
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore-next-line
   addCommands() {
     return {
       setParagraph: () => ({ commands }) => {
@@ -50,6 +51,8 @@ export const Paragraph = Node.create<ParagraphOptions>({
 
   addKeyboardShortcuts() {
     return {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore-next-line
       'Mod-Alt-0': () => this.editor.commands.setParagraph(),
     };
   },
