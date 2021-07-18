@@ -1,14 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import { EditorPropsContext, RicosTiptapContext } from './context';
 import Toolbar from './components/Toolbar';
-import { JSONContent } from '@tiptap/core';
-import { Editor, EditorContent, useEditor } from '@tiptap/react';
-import {
-  draftToTiptap,
-  tiptapToDraft,
-  draftBlockDataToTiptap,
-  TO_RICOS_NODE_TYPE,
-} from 'ricos-content/libs/converters';
+import { JSONContent } from '@tiptap-es5/core';
+import { Editor, EditorContent } from '@tiptap-es5/react';
+import { draftToTiptap, tiptapToDraft, draftBlockDataToTiptap } from 'ricos-content/libs/tiptap';
 import { tiptapExtensions } from './tiptap-extensions';
 import { capitalize } from 'lodash';
 import { TiptapAPI, TiptapConfig } from './types';
@@ -52,7 +47,7 @@ const toTiptapAPI = (editor: Editor): TiptapAPI => ({
         if (pluginType === RICOS_DIVIDER_TYPE || pluginType === DIVIDER_TYPE) {
           const attrs = draftBlockDataToTiptap(DIVIDER_TYPE, data);
           editor.commands.insertContent({
-            type: TO_RICOS_NODE_TYPE[DIVIDER_TYPE].toLowerCase(),
+            type: DIVIDER_TYPE.toLowerCase(),
             attrs,
             content: [],
           });
