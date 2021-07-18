@@ -17,6 +17,24 @@
     Click to see more.
   </summary>
 
+
+### :house: Internal
+- `scripts`
+  - [#2750](https://github.com/wix/ricos/pull/2750) updateBaselines - normalize keys in baselines 
+
+
+</details>
+<hr/>
+
+## 8.46.18 (July 17, 2021)
+
+### :nail_care: Polish
+
+- `loadable`
+  - [#2736](https://github.com/wix/ricos/pull/2736) Loadable CJS & bundle improvments
+
+## 8.46.17 (July 16, 2021)
+
 ### :rocket: New Feature
 
 - `image gallery video`
@@ -33,8 +51,6 @@
   - [#2716](https://github.com/wix/ricos/pull/2716) fix image caption clipping in editor
 - `ricos-content`
   - [#2731](https://github.com/wix/ricos/pull/2731) ES5 compatible fix
-    </details>
-    <hr/>
 
 ## 8.46.16 (July 15, 2021)
 
