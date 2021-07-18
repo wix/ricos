@@ -352,7 +352,7 @@
     },
     "1": {
       "type": "wix-draft-plugin-gallery",
-    "mutability": "IMMUTABLE",
+      "mutability": "IMMUTABLE",
       "data": {
         "items": [
           {
