@@ -21,11 +21,7 @@ class ManageMediaSection extends Component {
     const { data, store } = this.props;
     const componentData = {
       ...data,
-      items: items.map(item => {
-        // eslint-disable-next-line fp/no-delete
-        delete item.selected;
-        return item;
-      }),
+      items,
     };
     store.set('componentData', componentData);
   };

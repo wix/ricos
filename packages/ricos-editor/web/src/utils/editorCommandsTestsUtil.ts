@@ -198,7 +198,7 @@ const gallery = {
     items: [
       {
         metadata: {
-          type: 'image',
+          type: 'IMAGE',
           height: 3497,
           width: 5000,
         },
@@ -207,7 +207,7 @@ const gallery = {
       },
       {
         metadata: {
-          type: 'image',
+          type: 'IMAGE',
           height: 3733,
           width: 5600,
         },
@@ -216,7 +216,7 @@ const gallery = {
       },
       {
         metadata: {
-          type: 'image',
+          type: 'IMAGE',
           height: 3727,
           width: 5600,
         },
@@ -247,7 +247,7 @@ const gallery = {
     items: [
       {
         metadata: {
-          type: 'image',
+          type: 'IMAGE',
           height: 3727,
           width: 5600,
         },
