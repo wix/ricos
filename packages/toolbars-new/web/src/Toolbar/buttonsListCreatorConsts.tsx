@@ -177,6 +177,7 @@ export const buttonsFullData: Record<string, buttonsFullDataType> = {
   },
   Alignment: {
     dataHook: 'Alignment',
+    arrow: true,
     tooltip: 'Alignment',
     type: 'modal',
     modal: props => <AlignmentPanel {...props} />,
