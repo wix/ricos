@@ -10,7 +10,6 @@ describe('CKEditor preprocess', () => {
       '<p>text</p><p><a><img></a></p>' +
         '<ol><li><p>item</p></li><li><p><img>This should be <strong>wrapped</strong> with P!</p></li></ol>'
     );
-    console.log(actual); // eslint-disable-line no-console
     expect(actual).toEqual(expected);
   });
 
@@ -20,7 +19,6 @@ describe('CKEditor preprocess', () => {
     const actual = preprocess(
       '<ol><li>item</li><li><p><img>This should be <strong>wrapped</strong> with P!</p></li></ol>'
     );
-    console.log(actual); // eslint-disable-line no-console
     expect(actual).toEqual(expected);
   });
 
@@ -30,22 +28,12 @@ describe('CKEditor preprocess', () => {
     const actual = preprocess(
       '<p>text</p><div></div><div></div><ol><li><p>item</p></li><li><p/></li></ol>'
     );
-    console.log(actual); // eslint-disable-line no-console
     expect(actual).toEqual(expected);
   });
 
   it('<ul>text<li>...</li></ul> => <ul><li>...</li></ul>', async () => {
     const expected = '<p>text</p><ol><li><p>assa</p><p>item inside</p></li></ol>';
     const actual = preprocess('<p>text</p><ol>remove me!<li>assa<p>item</p> inside</li></ol>');
-    console.log(actual); // eslint-disable-line no-console
     expect(actual).toEqual(expected);
-  });
-
-  const getHtml = () => readFileSync(`${__dirname}/../__tests__/FAQContent.html`, 'utf8');
-
-  it('should process html', () => {
-    const actual = preprocess(getHtml());
-    // console.log(actual); // eslint-disable-line no-console
-    expect(true).toEqual(true);
   });
 });
