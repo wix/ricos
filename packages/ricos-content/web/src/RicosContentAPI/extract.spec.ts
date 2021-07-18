@@ -45,7 +45,7 @@ describe('Content extract API', () => {
       .map(
         items =>
           items.filter(
-            ({ metadata }) => (!!metadata && metadata?.type === 'image') || !metadata?.type
+            ({ metadata }) => (!!metadata && metadata?.type === 'IMAGE') || !metadata?.type
           ).length
       )
       .get()

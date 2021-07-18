@@ -19,7 +19,14 @@ const DIVIDER = 'divider';
 class ManageMediaSection extends Component {
   applyItems = items => {
     const { data, store } = this.props;
-    const componentData = { ...data, items };
+    const componentData = {
+      ...data,
+      items: items.map(item => {
+        // eslint-disable-next-line fp/no-delete
+        delete item.selected;
+        return item;
+      }),
+    };
     store.set('componentData', componentData);
   };
 
@@ -173,8 +180,9 @@ export class GallerySettingsModal extends Component {
 
   componentDidMount() {
     this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
+    const componentData = this.props.pubsub.get('componentData');
     this.setState({
-      initComponentData: this.props.pubsub.get('componentData'),
+      initComponentData: { ...componentData, items: this.getItems(componentData.items) },
     });
   }
 
@@ -187,7 +195,10 @@ export class GallerySettingsModal extends Component {
   revertComponentData = () => {
     const { pubsub, helpers } = this.props;
     if (this.state.initComponentData) {
-      pubsub.set('componentData', this.state.initComponentData);
+      pubsub.set('componentData', {
+        ...this.state.initComponentData,
+        items: this.getItems(this.state.initComponentData.items),
+      });
     }
 
     helpers.closeModal();
@@ -217,11 +228,20 @@ export class GallerySettingsModal extends Component {
     }[tab];
   }
 
+  getItems = items => {
+    return items.map(item => {
+      // eslint-disable-next-line fp/no-delete
+      delete item.selected;
+      return item;
+    });
+  };
+
   onDoneClick = () => {
     const { helpers, pubsub } = this.props;
     const componentData = pubsub.get('componentData');
     const newComponentData = {
       ...componentData,
+      items: this.getItems(componentData.items),
       ...this.getSpoilerConfig(this.state.isSpoilerEnabled),
       disableDownload: !this.state.isDownloadEnabled,
       disableExpand: !this.state.isExpandEnabled,

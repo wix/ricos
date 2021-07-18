@@ -190,6 +190,13 @@ const convertGalleryStyles = styles => {
   return styles;
 };
 
+const convertGalleryItem = item => {
+  item.metadata.type = item.metadata.type.toLowerCase();
+  has(item, 'metadata.thumbnail') && (item.metadata.poster = item.metadata.thumbnail);
+  delete item.metadata.thumbnail;
+  return item;
+};
+
 const convertGalleryData = (
   data: GalleryData & {
     styles: {
@@ -204,6 +211,7 @@ const convertGalleryData = (
     };
   }
 ) => {
+  has(data, 'items') && (data.items = data.items.map(item => convertGalleryItem(item)));
   has(data, 'styles') && (data.styles = convertGalleryStyles(data.styles));
 };
 
