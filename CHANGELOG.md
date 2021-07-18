@@ -20,6 +20,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#2708](https://github.com/wix/ricos/pull/2708) error boundary lifted from RCE to Ricos
+- `loadable`
+  - [#2745](https://github.com/wix/ricos/pull/2745) CJS bundle fix
 
 </details>
 <hr/>
