@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, truncateSync } from 'fs';
 import { toDraft } from '../../../draft/toDraft/toDraft';
 import { Node_Type } from 'ricos-schema';
 import { extract } from '../../../../RicosContentAPI/extract';
@@ -33,11 +33,10 @@ describe('CKEditor parser', () => {
   });
 
   it('should output valid content for toDraft', () => {
-    // const content = getHtml('faq-no-nested-content');
-    // const rich = parse(content);
-    // console.log(JSON.stringify(rich, null, 2)); // eslint-disable-line no-console
     const draft = toDraft(content);
-    // writeFileSync('faq-rich.json', JSON.stringify(content), 'utf8');
+    // truncateSync('faq-draft.json', 0);
+    // writeFileSync('faq-draft.json', JSON.stringify(draft), 'utf8');
+    // console.log('draft written'); // eslint-disable-line no-console
     expect(draft.blocks.length).toEqual(32);
     expect(Object.keys(draft.entityMap).length).toEqual(9);
   });

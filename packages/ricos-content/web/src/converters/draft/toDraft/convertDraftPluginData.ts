@@ -15,7 +15,7 @@ import {
   ButtonData,
   LinkData,
 } from 'ricos-schema';
-import { cloneDeep, has } from 'lodash';
+import { cloneDeep, has, merge } from 'lodash';
 import {
   ENTITY_DECORATION_TO_DATA_FIELD,
   FROM_RICOS_DECORATION_TYPE,
@@ -78,6 +78,7 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
     const convert = converters[decorationType];
     const newData = cloneDeep(data);
     convert(newData);
+    console.log({ newData }); // eslint-disable-line no-console
     return newData;
   }
   return data;
@@ -312,7 +313,7 @@ const convertLinkData = (
     }
     if (customData) {
       try {
-        data = { ...data, ...JSON.parse(customData) }; // eslint-disable-line no-param-reassign
+        data = merge(data, JSON.parse(customData));
       } catch (e) {
         data.customData = customData;
       }

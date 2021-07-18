@@ -1,11 +1,24 @@
 import { identity, pipe, flow } from 'fp-ts/function';
+import * as A from 'fp-ts/Array';
+import * as S from 'fp-ts/string';
 import * as E from 'fp-ts/Either';
+import * as R from 'fp-ts/Record';
+import * as O from 'fp-ts/Option';
 
-import { Link, Decoration_Type, VideoData, Node_Type } from 'ricos-schema';
+import {
+  Link,
+  Decoration_Type,
+  VideoData,
+  Node_Type,
+  TextStyle_TextAlignment,
+  TextStyle,
+  PluginContainerData,
+  PluginContainerData_Alignment,
+} from 'ricos-schema';
 import { TextNode, Element } from 'parse5';
-import { getMatches, replace } from '../../../../fp-utils';
-import { createNode, createLink } from '../../../nodeUtils';
-import { hasTag, getAttributes } from '../core/ast-utils';
+import { getMatches, toUpperCase, replace, split } from '../../../../fp-utils';
+import { createNode, createLink, createHeadingNode, createParagraphNode } from '../../../nodeUtils';
+import { hasTag, getAttributes, toName } from '../core/ast-utils';
 import { preprocess } from './preprocess';
 import parse from '../core/parser';
 import {
@@ -18,7 +31,7 @@ import {
   imgToImage,
   identityRule,
 } from '../core/rules';
-import { Rule } from '../core/models';
+import { Rule, ContainerStyle } from '../core/models';
 
 const toURL = (str: string) =>
   E.tryCatch(
@@ -44,10 +57,12 @@ const toVideoData = flow(
 
 const iframeToVideo: Rule = [
   hasTag('iframe'),
-  () => (node: Element) => [createNode(Node_Type.VIDEO, { nodes: [], data: toVideoData(node) })],
+  () => (node: Element) => [
+    createNode(Node_Type.VIDEO, { nodes: [], data: { ...toVideoData(node) } }), // TODO: add PluginContainerData
+  ],
 ];
 
-const traverseDiv: Rule = [hasTag('div'), identityRule[1]];
+const traverseDiv: Rule = [hasTag('div'), identityRule[1]]; // TODO: add PluginContainerData or style
 
 const noEmptyLineText: Rule = [
   node => textToText[0](node) && (node as TextNode).value !== '\n',
@@ -92,17 +107,73 @@ const aToCustomLink: Rule = [
   },
 ];
 
+type Alignment = 'LEFT' | 'RIGHT' | 'CENTER' | '';
+
+const toContainerStyle = (alignment: Alignment): ContainerStyle => ({ alignment });
+
+const toTextStyle = (alignment: Alignment): TextStyle => ({
+  textAlignment: alignment as TextStyle_TextAlignment,
+});
+
+const toPluginContainerData = (align: Alignment) => ({
+  alignment: align as PluginContainerData_Alignment,
+});
+
+const getAlignment = flow(
+  R.lookup('class'),
+  O.map(split(' ')),
+  O.map(A.filter(c => ['align-left', 'align-right', 'align-center'].includes(c))),
+  O.chain(A.head),
+  O.map(replace('align-', '')),
+  O.map(toUpperCase),
+  O.fold(
+    () => <Alignment>'',
+    a => <Alignment>a
+  )
+);
+
+const alignClassToStyle: Rule = [
+  flow(getAttributes, getAlignment, Boolean),
+  context => (node: Element) =>
+    pipe(node, getAttributes, getAlignment, toContainerStyle, context.setStyle(node)),
+];
+
+const pToAlignedParagraph: Rule = [
+  pToParagraph[0],
+  context => (node: Element) =>
+    alignClassToStyle[0](node)
+      ? [
+          createParagraphNode(context.visit(node), {
+            textStyle: pipe(node, getAttributes, getAlignment, toTextStyle),
+          }),
+        ]
+      : pToParagraph[1](context)(node),
+];
+
+const hToAlignedHeading: Rule = [
+  hToHeading[0],
+  context => (node: Element) =>
+    alignClassToStyle[0](node)
+      ? [
+          createHeadingNode(context.visit(node), {
+            level: pipe(node, toName, replace('h', ''), Number),
+            textStyle: pipe(node, getAttributes, getAlignment, toTextStyle),
+          }),
+        ]
+      : hToHeading[1](context)(node),
+];
+
 export default flow(
   preprocess,
   parse([
     noEmptyLineText,
-    pToParagraph,
+    pToAlignedParagraph,
     lToList,
-    hToHeading,
+    hToAlignedHeading,
     aToCustomLink,
     strongEmUToDecoration,
     iframeToVideo,
-    imgToImage,
+    imgToImage, // TODO: add PluginContainerData
     traverseDiv,
   ])
 );

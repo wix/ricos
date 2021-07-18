@@ -41,6 +41,8 @@ export const firstResolved = (tasks: Task[], i = 0) =>
 export const either = (predicate: (data: unknown) => boolean) => data =>
   task((rej, res) => (predicate(data) ? res(data) : rej(data)));
 
+export const split = (splitter: string) => (str: string) => str.split(splitter);
+
 export const replace = (replaced: RegExp | string, by: string) => (str: string): string =>
   str.replace(replaced, by);
 
