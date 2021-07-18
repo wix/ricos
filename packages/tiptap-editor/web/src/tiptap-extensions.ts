@@ -8,7 +8,7 @@ import Underline from '@tiptap-es5/extension-underline';
 import Text from '@tiptap-es5/extension-text';
 import History from '@tiptap-es5/extension-history';
 import Italic from '@tiptap-es5/extension-italic';
-import CodeBlock from '@tiptap-es5/extension-code-block';
+// import CodeBlock from '@tiptap-es5/extension-code-block';
 import Heading from '@tiptap-es5/extension-heading';
 import Blockquote from '@tiptap-es5/extension-blockquote';
 import BulletList from '@tiptap-es5/extension-bullet-list';
@@ -37,7 +37,7 @@ export const tiptapExtensions = [
   Blockquote.extend(withKey),
   Underline,
   BulletList.extend(withKey),
-  CodeBlock.extend(withKey),
+  // CodeBlock.extend(withKey),
   Document.extend(extendedAttrs({ metadata: {} })),
   Heading.extend(withKey).extend(extendedAttrs(HeadingData.fromJSON({}))),
   History,
