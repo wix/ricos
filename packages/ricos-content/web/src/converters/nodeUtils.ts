@@ -13,7 +13,7 @@ import {
   Link_Target,
 } from 'ricos-schema';
 import { genKey } from './generateRandomKey';
-import fromEntries from 'fromentries';
+import { fromEntries } from '../utils';
 
 export const createNode = (
   type: Node_Type,
