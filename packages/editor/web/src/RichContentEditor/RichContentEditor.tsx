@@ -49,6 +49,7 @@ import {
   TranslationFunction,
   CreatePluginFunction,
   onAtomicBlockFocus,
+  OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
   LegacyEditorPluginConfig,
@@ -142,6 +143,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   onAtomicBlockFocus?: onAtomicBlockFocus;
   siteDomain?: string;
   iframeSandboxDomain?: string;
+  onError: OnErrorFunction;
   toolbarsToIgnore?: ToolbarsToIgnore;
   showToolbars?: boolean;
   normalize: NormalizeConfig;
@@ -171,6 +173,7 @@ interface State {
   toolbarsToIgnore: ToolbarsToIgnore;
   theme?: RichContentTheme;
   textToolbarType?: TextToolbarType;
+  error?: string;
   readOnly: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   context: {
@@ -229,9 +232,20 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     spellCheck: true,
     customStyleFn: () => ({}),
     locale: 'en',
+    onError: err => {
+      throw err;
+    },
     normalize: {},
     plugins: [],
   };
+
+  static getDerivedStateFromError(error: string) {
+    return { error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error({ error, errorInfo });
+  }
 
   constructor(props: RichContentEditorProps) {
     super(props);
@@ -1133,58 +1147,68 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   setEditorWrapper = ref => ref && (this.editorWrapper = ref);
 
   render() {
-    const { locale, direction, showToolbars = true, isInnerRCE } = this.props;
+    const { onError, locale, direction, showToolbars = true, isInnerRCE } = this.props;
     const { innerModal } = this.state;
     const editorStyle = isInnerRCE ? { backgroundColor: 'transparent' } : {};
-    const { isMobile = false } = this.props;
-    const { theme } = this.contextualData;
-    const themeDesktopStyle = theme.desktop
-      ? { [theme.desktop]: !isMobile && theme && theme.desktop }
-      : {};
-    const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
-      [styles.desktop]: !isMobile,
-      ...themeDesktopStyle,
-    });
 
-    return (
-      <GlobalContext.Provider value={this.state.context}>
-        <Measure bounds onResize={this.onResize}>
-          {({ measureRef }) => (
-            <div
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={direction || getLangDir(this.props.locale)}
-              data-id={'rce'}
-              data-hook={!isInnerRCE ? 'root-editor' : 'inner-editor'}
-            >
-              {this.renderStyleTag()}
+    try {
+      if (this.state.error) {
+        onError(this.state.error);
+        return null;
+      }
+      const { isMobile = false } = this.props;
+      const { theme } = this.contextualData;
+      const themeDesktopStyle = theme.desktop
+        ? { [theme.desktop]: !isMobile && theme && theme.desktop }
+        : {};
+      const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
+        [styles.desktop]: !isMobile,
+        ...themeDesktopStyle,
+      });
+
+      return (
+        <GlobalContext.Provider value={this.state.context}>
+          <Measure bounds onResize={this.onResize}>
+            {({ measureRef }) => (
               <div
-                ref={this.setEditorWrapper}
-                className={classNames(styles.editor, theme.editor)}
-                style={editorStyle}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                style={this.props.style}
+                ref={measureRef}
+                className={wrapperClassName}
+                dir={direction || getLangDir(this.props.locale)}
+                data-id={'rce'}
+                data-hook={!isInnerRCE ? 'root-editor' : 'inner-editor'}
               >
-                {this.renderAccessibilityListener()}
+                {this.renderStyleTag()}
+                <div
+                  ref={this.setEditorWrapper}
+                  className={classNames(styles.editor, theme.editor)}
+                  style={editorStyle}
+                >
+                  {this.renderAccessibilityListener()}
 
-                {this.renderEditor()}
-                {showToolbars && this.renderToolbars()}
-                {this.renderInlineModals()}
-                {this.renderErrorToast()}
-                <InnerModal
-                  theme={theme}
-                  locale={locale}
-                  innerModal={innerModal}
-                  closeInnerModal={this.closeInnerModal}
-                  editorWrapper={this.editorWrapper}
-                />
+                  {this.renderEditor()}
+                  {showToolbars && this.renderToolbars()}
+                  {this.renderInlineModals()}
+                  {this.renderErrorToast()}
+                  <InnerModal
+                    theme={theme}
+                    locale={locale}
+                    innerModal={innerModal}
+                    closeInnerModal={this.closeInnerModal}
+                    editorWrapper={this.editorWrapper}
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </Measure>
-      </GlobalContext.Provider>
-    );
+            )}
+          </Measure>
+        </GlobalContext.Provider>
+      );
+    } catch (err) {
+      onError(err);
+      return null;
+    }
   }
 }
 

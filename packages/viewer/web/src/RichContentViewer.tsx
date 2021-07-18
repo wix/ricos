@@ -22,6 +22,7 @@ import {
   RelValue,
   CustomAnchorScroll,
   LegacyViewerPluginConfig,
+  OnErrorFunction,
   NormalizeConfig,
   PluginMapping,
   TextDirection,
@@ -64,6 +65,7 @@ export interface RichContentViewerProps {
   disabled?: boolean;
   seoMode?: SEOSettings;
   iframeSandboxDomain?: string;
+  onError: OnErrorFunction;
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
   localeResource?: Record<string, string>;
@@ -81,6 +83,7 @@ class RichContentViewer extends Component<
   RichContentViewerProps,
   {
     raw?: DraftContent;
+    error?: string;
     context: {
       experiments?: AvailableExperiments;
       isMobile: boolean;
@@ -98,6 +101,9 @@ class RichContentViewer extends Component<
     typeMappers: [],
     inlineStyleMappers: [],
     locale: 'en',
+    onError: err => {
+      throw err;
+    },
     normalize: {},
     config: {},
   };
@@ -186,6 +192,14 @@ class RichContentViewer extends Component<
     };
   }
 
+  static getDerivedStateFromError(error: string) {
+    return { error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error({ error, errorInfo });
+  }
+
   componentDidMount() {
     this.reportDebuggingInfo();
   }
@@ -212,6 +226,7 @@ class RichContentViewer extends Component<
 
   render() {
     const {
+      onError,
       config = {},
       onHover,
       isMobile,
@@ -229,62 +244,71 @@ class RichContentViewer extends Component<
       onMouseOver = () => {},
     } = this.props;
     const decorators = [...this.props.decorators, createJustificationFixDecorator()];
-    const { styles } = this;
-    const wrapperClassName = classNames(styles.wrapper, {
-      [styles.desktop]: !platform || platform === 'desktop',
-    });
-    const tableClassNames = classNames(
-      styles.renderedInTable,
-      viewerStyles.renderedInTable,
-      draftDefaultStyles.renderedInTable
-    );
-    const editorClassName = classNames(styles.editor, renderedInTable && tableClassNames, {
-      [styles.rtl]: textDirection === 'rtl',
-    });
+    try {
+      if (this.state.error) {
+        onError(this.state.error);
+        return null;
+      }
+      const { styles } = this;
+      const wrapperClassName = classNames(styles.wrapper, {
+        [styles.desktop]: !platform || platform === 'desktop',
+      });
+      const tableClassNames = classNames(
+        styles.renderedInTable,
+        viewerStyles.renderedInTable,
+        draftDefaultStyles.renderedInTable
+      );
+      const editorClassName = classNames(styles.editor, renderedInTable && tableClassNames, {
+        [styles.rtl]: textDirection === 'rtl',
+      });
 
-    const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
-    const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
-    const contextualData = this.getContextualData(this.props, this.state.raw);
-    const innerRCEViewerProps = {
-      typeMappers,
-      inlineStyleMappers,
-      decorators,
-      config,
-      t,
-      renderedInTable,
-      isMobile,
-    };
+      const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
+      const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
+      const contextualData = this.getContextualData(this.props, this.state.raw);
+      const innerRCEViewerProps = {
+        typeMappers,
+        inlineStyleMappers,
+        decorators,
+        config,
+        t,
+        renderedInTable,
+        isMobile,
+      };
 
-    const output = convertToReact(
-      styles,
-      textDirection,
-      this.typeMappers,
-      contextualData,
-      decorators,
-      inlineStyleMappers,
-      initSpoilers,
-      SpoilerViewerWrapper,
-      { addAnchors },
-      innerRCEViewerProps
-    );
+      const output = convertToReact(
+        styles,
+        textDirection,
+        this.typeMappers,
+        contextualData,
+        decorators,
+        inlineStyleMappers,
+        initSpoilers,
+        SpoilerViewerWrapper,
+        { addAnchors },
+        innerRCEViewerProps
+      );
 
-    const dataId = isInnerRcv ? {} : { 'data-id': 'rich-content-viewer' };
-    return (
-      <GlobalContext.Provider value={this.state.context}>
-        {/* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events*/}
-        <div
-          className={wrapperClassName}
-          dir={direction || getLangDir(locale)}
-          onMouseEnter={e => onHover && onHover(e)}
-          ref={setRef}
-          onMouseOver={onMouseOver}
-          {...dataId}
-        >
-          <div className={editorClassName}>{output}</div>
-          <AccessibilityListener isMobile={isMobile} />
-        </div>
-      </GlobalContext.Provider>
-    );
+      const dataId = isInnerRcv ? {} : { 'data-id': 'rich-content-viewer' };
+      return (
+        <GlobalContext.Provider value={this.state.context}>
+          {/* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events*/}
+          <div
+            className={wrapperClassName}
+            dir={direction || getLangDir(locale)}
+            onMouseEnter={e => onHover && onHover(e)}
+            ref={setRef}
+            onMouseOver={onMouseOver}
+            {...dataId}
+          >
+            <div className={editorClassName}>{output}</div>
+            <AccessibilityListener isMobile={isMobile} />
+          </div>
+        </GlobalContext.Provider>
+      );
+    } catch (err) {
+      onError(err);
+      return null;
+    }
   }
 }
 
