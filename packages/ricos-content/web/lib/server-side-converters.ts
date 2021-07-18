@@ -1,1 +1,1 @@
-export { fromRichTextHtml as fromHtml, toHtml } from '../src/converters/html';
+export { fromCKEditorHtml, fromRichTextHtml as fromHtml, toHtml } from '../src/converters/html';
