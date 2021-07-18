@@ -16,6 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `editor`
+  - [#2708](https://github.com/wix/ricos/pull/2708) error boundary lifted from RCE to Ricos
 
 </details>
 <hr/>
