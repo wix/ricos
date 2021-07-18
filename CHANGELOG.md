@@ -21,6 +21,11 @@
 - `editor`
   - [#2708](https://github.com/wix/ricos/pull/2708) error boundary lifted from RCE to Ricos
 
+### :nail_care: Polish
+
+- `ricos-schema`
+  - [#2744](https://github.com/wix/ricos/pull/2744) rename unique node identifier from `key` to `id`
+
 </details>
 <hr/>
 

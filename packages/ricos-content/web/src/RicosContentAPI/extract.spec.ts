@@ -57,7 +57,7 @@ describe('Content extract API', () => {
     const richContent = fromDraft(contentWithImages);
     const actual = extract(richContent.nodes)
       .filter(({ imageData }) => !!imageData && !imageData.altText)
-      .map(({ key }) => key)
+      .map(({ id }) => id)
       .get();
     const expected = ['4n607', '213ea'];
     expect(actual).toEqual(expected);

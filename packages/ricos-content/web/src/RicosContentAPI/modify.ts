@@ -10,14 +10,14 @@ export interface Modifier {
 }
 
 const unfoldTree = (nodes: Node | Node[]) => {
-  const root = isArray(nodes) ? { key: 'root', type: Node_Type.UNRECOGNIZED, nodes } : nodes;
+  const root = isArray(nodes) ? { id: 'root', type: Node_Type.UNRECOGNIZED, nodes } : nodes;
   return T.unfoldTree<Node, Node>(root, n => [n, n.nodes]);
 };
 
 const toArray = item => (isArray(item) ? item : [item]);
 
 const modifyByKey = (keysToSet: string[], setter: (node: Node) => Node | Node[]) => (node: Node) =>
-  keysToSet.includes(node.key) ? setter(node) : node;
+  keysToSet.includes(node.id) ? setter(node) : node;
 
 const mergeWith = (prefix: Node[]) => (suffix: Node[]) => [...prefix, ...suffix];
 
@@ -53,7 +53,7 @@ class TraversalModifier implements Modifier {
   }
 
   set(setter: (node: Node) => Node | Node[]) {
-    const keysToSet = compact(this.traversal.asFold().getAll(this.tree)).map(({ key }) => key);
+    const keysToSet = compact(this.traversal.asFold().getAll(this.tree)).map(({ id }) => id);
     const root = foldTree(this.tree, setter, keysToSet);
     return { ...this.content, nodes: root.nodes };
   }

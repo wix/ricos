@@ -67,7 +67,7 @@ message Node {
     }
 
     Type type = 1; // Node type
-    string key = 2; // Node unique indentifier
+    string id = 2; // Node unique indentifier
     repeated Node nodes = 3; // List of child nodes
     NodeStyle style = 4;
     oneof data {
