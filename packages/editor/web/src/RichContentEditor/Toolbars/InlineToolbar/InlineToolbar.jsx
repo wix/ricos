@@ -67,7 +67,7 @@ export default class InlineToolbar extends Component {
 
   constructor(props) {
     super(props);
-    const { offset, displayOptions } = props;
+    const { offset, displayOptions, helpers } = props;
     let position;
 
     if (displayOptions.displayMode === DISPLAY_MODE.FLOATING) {
@@ -79,9 +79,7 @@ export default class InlineToolbar extends Component {
         const { isVisible } = this.state;
         if (!triggered && isVisible) {
           triggered = true;
-          this.props.helpers?.onInlineToolbarOpen?.({
-            toolbarType: 'FORMATTING',
-          });
+          helpers?.onInlineToolbarOpen?.({ toolbarType: 'FORMATTING' });
         } else if (!isVisible) {
           triggered = false;
         }
