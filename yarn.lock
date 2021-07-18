@@ -1596,10 +1596,10 @@
   resolved "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@eslint/eslintrc@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-0.4.2.tgz#f63d0ef06f5c0c57d76c4ab5f63d3835c51b0179"
-  integrity sha512-8nmGq/4ycLpIwzvhI4tNDmQztZ8sp+hI7cyG8i1nQDhkAbRzHpXPidRAHlNvCZQpJTKw5ItIpMw9RSToGF00mg==
+"@eslint/eslintrc@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"
+  integrity sha512-J6KFFz5QCYUJq3pf0mjEcCJVERbzv71PUIDczuh9JkwGEzced6CO5ADLHB1rbf/+oPBtoPfMYNOpGDzCANlbXw==
   dependencies:
     ajv "^6.12.4"
     debug "^4.1.1"
@@ -3202,7 +3202,7 @@
 
 "@loadable/babel-plugin@^5.13.2":
   version "5.13.2"
-  resolved "https://registry.yarnpkg.com/@loadable/babel-plugin/-/babel-plugin-5.13.2.tgz#373cddc64ee5437814f7dca1c1b6a7b2c1665a9f"
+  resolved "https://registry.npmjs.org/@loadable/babel-plugin/-/babel-plugin-5.13.2.tgz#373cddc64ee5437814f7dca1c1b6a7b2c1665a9f"
   integrity sha512-vSZUVeTH1S1sDbk8Tzft0plZSkN7W4zmVR5w/Bmy4UmvBiu9lin7ztrDpoUTUzxpoups+OJbTc/OosvN0aMXWg==
   dependencies:
     "@babel/plugin-syntax-dynamic-import" "^7.7.4"
@@ -3465,9 +3465,9 @@
     react-lifecycles-compat "^3.0.4"
 
 "@rollup/plugin-alias@^3.0.1":
-  version "3.1.3"
-  resolved "https://registry.npmjs.org/@rollup/plugin-alias/-/plugin-alias-3.1.3.tgz#86787ab317cdc31e205c2ae380f66673054988bc"
-  integrity sha512-Z0rIFDnNQTVd9pveh+Jnfy3odYRu/UXY4yA9TN8+jHUqpMHEKSwhtTbG439obYOd6YkMnD6EjdW7dW3pe97JeQ==
+  version "3.1.4"
+  resolved "https://registry.npmjs.org/@rollup/plugin-alias/-/plugin-alias-3.1.4.tgz#47774f4ff0eab5937f7acb392cf2b89921f03b7d"
+  integrity sha512-9YN5h0bWlYFV0zpXwwAWGPUWh/A+kkoCqwrMb43LnuGfhnQqOjsGR+5uh4LGpAZbBBj8qR1Hno6CZadZs7hyCQ==
   dependencies:
     slash "^3.0.0"
 
@@ -3500,9 +3500,9 @@
     "@rollup/pluginutils" "^3.0.8"
 
 "@rollup/plugin-node-resolve@^13.0.0":
-  version "13.0.1"
-  resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-13.0.1.tgz#cd41b1e6ea2b7d6477f28478d863070187978a1b"
-  integrity sha512-GLkrYXzHzLZu174IZSTUMRRPc/vwcw3pQ7HTScWCJDAznz4APU6medHrm5iAzgupf/WwDkSHxMqwrUNCEptF+w==
+  version "13.0.2"
+  resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-13.0.2.tgz#bfe58e9bfc7284ee0fabc6da7fabcb268f04e0a4"
+  integrity sha512-hv+eAMcA2hQ7qvPVcXbtIyc0dtue4jMyA2sCW4IMkrmh+SeDDEHg1MXTv65VPpKdtjvWzN3+4mHAEl4rT+zgzQ==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     "@types/resolve" "1.17.1"
@@ -3529,9 +3529,9 @@
     picomatch "^2.2.2"
 
 "@rollup/pluginutils@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.npmjs.org/@rollup/pluginutils/-/pluginutils-4.1.0.tgz#0dcc61c780e39257554feb7f77207dceca13c838"
-  integrity sha512-TrBhfJkFxA+ER+ew2U2/fHbebhLT/l/2pRk0hfj9KusXUuRXd2v0R58AfaZK9VXDQ4TogOSEmICVrQAA3zFnHQ==
+  version "4.1.1"
+  resolved "https://registry.npmjs.org/@rollup/pluginutils/-/pluginutils-4.1.1.tgz#1d4da86dd4eded15656a57d933fda2b9a08d47ec"
+  integrity sha512-clDjivHqWGXi7u+0d2r2sBi4Ie6VLEAzWMIkvJLnDmxoOhBYOTfzGbOQBA32THHm11/LiJbd01tJUpJsbshSWQ==
   dependencies:
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
@@ -4822,9 +4822,9 @@
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
 "@types/node@*", "@types/node@>= 8", "@types/node@>=13.7.0":
-  version "16.3.2"
-  resolved "https://registry.npmjs.org/@types/node/-/node-16.3.2.tgz#655432817f83b51ac869c2d51dd8305fb8342e16"
-  integrity sha512-jJs9ErFLP403I+hMLGnqDRWT0RYKSvArxuBVh2veudHV7ifEC1WAmjJADacZ7mRbA2nWgHtn8xyECMAot0SkAw==
+  version "16.3.3"
+  resolved "https://registry.npmjs.org/@types/node/-/node-16.3.3.tgz#0c30adff37bbbc7a50eb9b58fae2a504d0d88038"
+  integrity sha512-8h7k1YgQKxKXWckzFCMfsIwn0Y61UK6tlD6y2lOb3hTOIMlK3t9/QwHOhc81TwU+RMf0As5fj7NPjroERCnejQ==
 
 "@types/node@^14.14.31":
   version "14.17.5"
@@ -5837,9 +5837,9 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5, ajv
     uri-js "^4.2.2"
 
 ajv@^8.0.1:
-  version "8.6.1"
-  resolved "https://registry.npmjs.org/ajv/-/ajv-8.6.1.tgz#ae65764bf1edde8cd861281cda5057852364a295"
-  integrity sha512-42VLtQUOLefAvKFAQIxIZDaThq6om/PrfP0CYk3/vn+y4BMNkKnbli8ON2QCiHov4KkzOSJ/xSoBJdayiiYvVQ==
+  version "8.6.2"
+  resolved "https://registry.npmjs.org/ajv/-/ajv-8.6.2.tgz#2fb45e0e5fcbc0813326c1c3da535d1881bb0571"
+  integrity sha512-9807RlWAgT564wT+DjeyU5OFMPjmzxVobvDFmNAhY+5zD6A2ly3jDp6sgnfyDtlIQ+7H97oc/DGCzzfu9rjw9w==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -5979,7 +5979,7 @@ ansi-to-html@^0.6.11:
 
 ansi@^0.3.0, ansi@~0.3.1:
   version "0.3.1"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/ansi/-/ansi-0.3.1.tgz#0c42d4fb17160d5a9af1e484bace1c66922c1b21"
+  resolved "https://registry.npmjs.org/ansi/-/ansi-0.3.1.tgz#0c42d4fb17160d5a9af1e484bace1c66922c1b21"
   integrity sha1-DELU+xcWDVqa8eSEus4cZpIsGyE=
 
 any-base@^1.1.0:
@@ -6378,7 +6378,7 @@ async@^3.1.0, async@^3.2.0:
 
 async@~1.0.0:
   version "1.0.0"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/async/-/async-1.0.0.tgz#f8fc04ca3a13784ade9e1641af98578cfbd647a9"
+  resolved "https://registry.npmjs.org/async/-/async-1.0.0.tgz#f8fc04ca3a13784ade9e1641af98578cfbd647a9"
   integrity sha1-+PwEyjoTeErenhZBr5hXjPvWR6k=
 
 asynckit@^0.4.0:
@@ -8148,8 +8148,8 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000929, caniuse-lite@^1.0.30000989, can
 
 caporal@1.4.0:
   version "1.4.0"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/caporal/-/caporal-1.4.0.tgz#d6087b815e3df97c3a0f55dbb82850fae29ed585"
-  integrity sha1-1gh7gV49+Xw6D1XbuChQ+uKe1YU=
+  resolved "https://registry.npmjs.org/caporal/-/caporal-1.4.0.tgz#d6087b815e3df97c3a0f55dbb82850fae29ed585"
+  integrity sha512-3pWfIwKVdIbB/gWmpLloO6iGAXTRi9mcTinPOwvHfzH3BYjOhLgq2XRG3hKtp+F6vBcBXxMgCobUzBAx1d8T4A==
   dependencies:
     bluebird "^3.4.7"
     cli-table3 "^0.5.0"
@@ -8643,10 +8643,10 @@ color-name@^1.0.0, color-name@~1.1.4:
   resolved "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-color-string@^1.5.2, color-string@^1.5.4:
-  version "1.5.5"
-  resolved "https://registry.npmjs.org/color-string/-/color-string-1.5.5.tgz#65474a8f0e7439625f3d27a6a19d89fc45223014"
-  integrity sha512-jgIoum0OfQfq9Whcfc2z/VhCNcmQjWbey6qBX0vqt7YICflUmBCh9E9CiQD5GSJ+Uehixm3NUwHVhqUAWRivZg==
+color-string@^1.5.2, color-string@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.npmjs.org/color-string/-/color-string-1.6.0.tgz#c3915f61fe267672cb7e1e064c9d692219f6c312"
+  integrity sha512-c/hGS+kRWJutUBEngKKmk4iH3sD59MBkoxVapS/0wgpCz2u7XsNloxknyvBhzwEs1IbV36D9PwqLPJ2DTu3vMA==
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
@@ -8668,12 +8668,12 @@ color@^2.0.1:
     color-string "^1.5.2"
 
 color@^3.0.0:
-  version "3.1.3"
-  resolved "https://registry.npmjs.org/color/-/color-3.1.3.tgz#ca67fb4e7b97d611dcde39eceed422067d91596e"
-  integrity sha512-xgXAcTHa2HeFCGLE9Xs/R82hujGtu9Jd9x4NW3T34+OMs7VoPsjwzRczKHvTAHeJwWFwX5j15+MgAppE8ztObQ==
+  version "3.2.1"
+  resolved "https://registry.npmjs.org/color/-/color-3.2.1.tgz#3544dc198caf4490c3ecc9a790b54fe9ff45e164"
+  integrity sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==
   dependencies:
-    color-convert "^1.9.1"
-    color-string "^1.5.4"
+    color-convert "^1.9.3"
+    color-string "^1.6.0"
 
 colorette@^1.0.1, colorette@^1.1.0, colorette@^1.2.1, colorette@^1.2.2:
   version "1.2.2"
@@ -8682,7 +8682,7 @@ colorette@^1.0.1, colorette@^1.1.0, colorette@^1.2.1, colorette@^1.2.2:
 
 colors@1.0.x:
   version "1.0.3"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
+  resolved "https://registry.npmjs.org/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
   integrity sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=
 
 colors@^1.1.2, colors@^1.2.1:
@@ -9741,7 +9741,7 @@ cuss@^1.15.0:
 
 cycle@1.0.x:
   version "1.0.3"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/cycle/-/cycle-1.0.3.tgz#21e80b2be8580f98b468f379430662b046c34ad2"
+  resolved "https://registry.npmjs.org/cycle/-/cycle-1.0.3.tgz#21e80b2be8580f98b468f379430662b046c34ad2"
   integrity sha1-IegLK+hYD5i0aPN5QwZisEbDStI=
 
 cyclist@^1.0.1:
@@ -10943,9 +10943,9 @@ ejs@^2.6.1, ejs@^2.7.4:
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
 electron-to-chromium@^1.3.103, electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.723:
-  version "1.3.776"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.776.tgz#33f6e2423b61f1bdaa8d2a103aae78a09764a75f"
-  integrity sha512-V0w7eFSBoFPpdw4xexjVPZ770UDZIevSwkkj4W97XbE3IsCsTRFpa7/yXGZ88EOQAUEA09JMMsWK0xsw0kRAYw==
+  version "1.3.779"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.779.tgz#de55492a756deec63424f89fbe62aec9776f0e6d"
+  integrity sha512-nreave0y/1Qhmo8XtO6C/LpawNyC6U26+q7d814/e+tIqUK073pM+4xW7WUXyqCRa5K4wdxHmNMBAi8ap9nEew==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -11238,8 +11238,8 @@ es-array-method-boxes-properly@^1.0.0:
 
 es-check@5.2.4:
   version "5.2.4"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/es-check/-/es-check-5.2.4.tgz#76fe2d96ad238bd8ec1d9c3b3d0e98ddbcc723e7"
-  integrity sha1-dv4tlq0ji9jsHZw7PQ6Y3bzHI+c=
+  resolved "https://registry.npmjs.org/es-check/-/es-check-5.2.4.tgz#76fe2d96ad238bd8ec1d9c3b3d0e98ddbcc723e7"
+  integrity sha512-FZ3qAJ9hwguqPvGGagaKAVDnusSkezeHbiKNM5rOepOjloeVuX2e6meMxQ+mKcnWbAFucCG7fszNrzUT8bvHcQ==
   dependencies:
     acorn "^6.4.1"
     caporal "1.4.0"
@@ -11744,12 +11744,12 @@ eslint@5.16.0:
     text-table "^0.2.0"
 
 eslint@^7.2.0:
-  version "7.30.0"
-  resolved "https://registry.npmjs.org/eslint/-/eslint-7.30.0.tgz#6d34ab51aaa56112fd97166226c9a97f505474f8"
-  integrity sha512-VLqz80i3as3NdloY44BQSJpFw534L9Oh+6zJOUaViV4JPd+DaHwutqP7tcpkW3YiXbK6s05RZl7yl7cQn+lijg==
+  version "7.31.0"
+  resolved "https://registry.npmjs.org/eslint/-/eslint-7.31.0.tgz#f972b539424bf2604907a970860732c5d99d3aca"
+  integrity sha512-vafgJpSh2ia8tnTkNUkwxGmnumgckLh5aAbLa1xRmIn9+owi8qBNGKL+B881kNKNTy7FFqTEkpNkUvmw0n6PkA==
   dependencies:
     "@babel/code-frame" "7.12.11"
-    "@eslint/eslintrc" "^0.4.2"
+    "@eslint/eslintrc" "^0.4.3"
     "@humanwhocodes/config-array" "^0.5.0"
     ajv "^6.10.0"
     chalk "^4.0.0"
@@ -12281,7 +12281,7 @@ extsprintf@^1.2.0:
 
 eyes@0.1.x:
   version "0.1.8"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/eyes/-/eyes-0.1.8.tgz#62cf120234c683785d902348a800ef3e0cc20bc0"
+  resolved "https://registry.npmjs.org/eyes/-/eyes-0.1.8.tgz#62cf120234c683785d902348a800ef3e0cc20bc0"
   integrity sha1-Ys8SAjTGg3hdkCNIqADvPgzCC8A=
 
 fast-deep-equal@2.0.1, fast-deep-equal@^2.0.1:
@@ -12948,6 +12948,11 @@ from@~0:
   resolved "https://registry.npmjs.org/from/-/from-0.1.7.tgz#83c60afc58b9c56997007ed1a768b3ab303a44fe"
   integrity sha1-g8YK/Fi5xWmXAH7Rp2izqzA6RP4=
 
+fromentries@1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/fromentries/-/fromentries-1.3.2.tgz#e4bca6808816bf8f93b52750f1127f5a6fd86e3a"
+  integrity sha512-cHEpEQHUg0f8XdtZCc2ZAhrHzKzT0MrFUTcvx+hfxYu7rGMDc5SKoXFh+n4YigxsHXRzc6OrCshdR1bWH6HHyg==
+
 front-matter@^3.0.1:
   version "3.2.1"
   resolved "https://registry.npmjs.org/front-matter/-/front-matter-3.2.1.tgz#88be839638f397bbbcb0d61ac03bd08abb4f0a40"
@@ -13107,7 +13112,7 @@ fuse.js@^6.4.5:
 
 gauge@~1.2.5:
   version "1.2.7"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/gauge/-/gauge-1.2.7.tgz#e9cec5483d3d4ee0ef44b60a7d99e4935e136d93"
+  resolved "https://registry.npmjs.org/gauge/-/gauge-1.2.7.tgz#e9cec5483d3d4ee0ef44b60a7d99e4935e136d93"
   integrity sha1-6c7FSD09TuDvRLYKfZnkk14TbZM=
   dependencies:
     ansi "^0.3.0"
@@ -17745,17 +17750,17 @@ lodash.once@^4.1.1:
 
 lodash.pad@^4.1.0:
   version "4.5.1"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash.pad/-/lodash.pad-4.5.1.tgz#4330949a833a7c8da22cc20f6a26c4d59debba70"
+  resolved "https://registry.npmjs.org/lodash.pad/-/lodash.pad-4.5.1.tgz#4330949a833a7c8da22cc20f6a26c4d59debba70"
   integrity sha1-QzCUmoM6fI2iLMIPaibE1Z3runA=
 
 lodash.padend@^4.1.0:
   version "4.6.1"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash.padend/-/lodash.padend-4.6.1.tgz#53ccba047d06e158d311f45da625f4e49e6f166e"
+  resolved "https://registry.npmjs.org/lodash.padend/-/lodash.padend-4.6.1.tgz#53ccba047d06e158d311f45da625f4e49e6f166e"
   integrity sha1-U8y6BH0G4VjTEfRdpiX05J5vFm4=
 
 lodash.padstart@^4.1.0:
   version "4.6.1"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash.padstart/-/lodash.padstart-4.6.1.tgz#d2e3eebff0d9d39ad50f5cbd1b52a7bce6bb611b"
+  resolved "https://registry.npmjs.org/lodash.padstart/-/lodash.padstart-4.6.1.tgz#d2e3eebff0d9d39ad50f5cbd1b52a7bce6bb611b"
   integrity sha1-0uPuv/DZ05rVD1y9G1KnvOa7YRs=
 
 lodash.set@^4.3.2:
@@ -18447,8 +18452,8 @@ micromatch@^4.0.0, micromatch@^4.0.2, micromatch@^4.0.4:
 
 micromist@1.1.0:
   version "1.1.0"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/micromist/-/micromist-1.1.0.tgz#a490bcf9a4b918ad9eed8e52d0ec98b9c3b2d3c8"
-  integrity sha1-pJC8+aS5GK2e7Y5S0OyYucOy08g=
+  resolved "https://registry.npmjs.org/micromist/-/micromist-1.1.0.tgz#a490bcf9a4b918ad9eed8e52d0ec98b9c3b2d3c8"
+  integrity sha512-+CQ76pabE9egniSEdmDuH+j2cYyIBKP97kujG8ZLZyLCRq5ExwtIy4DPHPFrq4jVbhMRBnyjuH50KU9Ohs8QCg==
   dependencies:
     lodash.camelcase "^4.3.0"
 
@@ -19384,7 +19389,7 @@ npm-which@^3.0.1:
 
 npmlog@^2.0.3:
   version "2.0.4"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/npmlog/-/npmlog-2.0.4.tgz#98b52530f2514ca90d09ec5b22c8846722375692"
+  resolved "https://registry.npmjs.org/npmlog/-/npmlog-2.0.4.tgz#98b52530f2514ca90d09ec5b22c8846722375692"
   integrity sha1-mLUlMPJRTKkNCexbIsiEZyI3VpI=
   dependencies:
     ansi "~0.3.1"
@@ -21224,7 +21229,7 @@ pretty-time@^1.1.0:
 
 prettyjson@^1.2.1:
   version "1.2.1"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/prettyjson/-/prettyjson-1.2.1.tgz#fcffab41d19cab4dfae5e575e64246619b12d289"
+  resolved "https://registry.npmjs.org/prettyjson/-/prettyjson-1.2.1.tgz#fcffab41d19cab4dfae5e575e64246619b12d289"
   integrity sha1-/P+rQdGcq0365eV15kJGYZsS0ok=
   dependencies:
     colors "^1.1.2"
@@ -21474,9 +21479,9 @@ prosemirror-transform@^1.0.0, prosemirror-transform@^1.1.0, prosemirror-transfor
     prosemirror-model "^1.0.0"
 
 prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.18.8:
-  version "1.18.9"
-  resolved "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.18.9.tgz#29bc11759438aecc5b7fadaa8520165c84c2144a"
-  integrity sha512-AkknqYyt7QBJIfA993O5NNOXLyQji5vr0SnOk/eig18dr7hbe1CK9FKd4Cnh9/f0JSHhZwadHlc3w+wZkIdmIQ==
+  version "1.18.10"
+  resolved "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.18.10.tgz#7ee25be72409f8de21ba2d08c640e4dd7a3ddef7"
+  integrity sha512-DR3lexbN3D36umBNo7DaYheEQB0MdC8Hk2Lhz2YXIC7nEPjC2VG03Zy/YcYusxTtAY08+YB6OKH3yDWJDRObtg==
   dependencies:
     prosemirror-model "^1.1.0"
     prosemirror-state "^1.0.0"
@@ -23414,6 +23419,52 @@ rgba-regex@^1.0.0:
   resolved "https://registry.npmjs.org/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
+ricos-common@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/ricos-common/-/ricos-common-8.46.16.tgz#c50144ee43d39101acac0dd85f10ce74ec8bab2c"
+  integrity sha512-cBcdjOhY251qqutkAmOxx3cFlbl+KNYPZPJRqHXVtLjVym5U8iywojvGCHXsXVhDNqC60kjSmpOSjIWRG5k2xQ==
+  dependencies:
+    ts-is-present "^1.1.1"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor "8.46.16"
+    wix-rich-content-preview "8.46.16"
+    wix-rich-content-viewer "8.46.16"
+
+ricos-content@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/ricos-content/-/ricos-content-8.46.16.tgz#3a487c11ad12bbac6b5a5c6420ccd840b4edbc3e"
+  integrity sha512-AWUT7pOBqXByNS5VEgmqzDP4hVmV1korOfrj3AkuXSgXLSb9mjkumSou3NbYxCDzgz3cDM6DKB/Z9N1bQlE/qw==
+  dependencies:
+    fp-ts "^2.10.5"
+    fromentries "1.3.2"
+    monocle-ts "^2.3.9"
+    omit-deep "0.3.0"
+    parse5 "^6.0.0"
+    ricos-schema "8.46.16"
+    to-camel-case "1.0.0"
+    to-constant-case "1.0.0"
+    to-slug-case "1.0.0"
+    to-snake-case "1.0.0"
+    utility-types "^3.10.0"
+
+ricos-editor@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/ricos-editor/-/ricos-editor-8.46.16.tgz#5e5f552ed1a0e028a7bcf9dec141d17598f47eee"
+  integrity sha512-uHCnWsA1gfLHbEXPRF3zlW2RS78VYZ6noQt1USUFYdfq5zgn1GZnjcPrM9fc1gtU7km0B0A4wo0xhj4T849sVw==
+  dependencies:
+    react-modal "~3.4.1"
+    ricos-common "8.46.16"
+    ricos-schema "8.46.16"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor "8.46.16"
+    wix-rich-content-editor-common "8.46.16"
+    wix-tiptap-editor "8.46.16"
+
+ricos-schema@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/ricos-schema/-/ricos-schema-8.46.16.tgz#b1d7991c0fa3527a91153383b507f00226b28ccf"
+  integrity sha512-V/G3GuPtTPvIrBjPDUD/wfCs02eYRze4PeohxxG1msNHMD61m/yz+MChl9gcr23R1T869fgNOzDcnxrbeMuOKA==
+
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@^2.7.1:
   version "2.7.1"
   resolved "https://registry.npmjs.org/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
@@ -25295,7 +25346,7 @@ table@^6.0.9:
 
 tabtab@^2.2.2:
   version "2.2.2"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/tabtab/-/tabtab-2.2.2.tgz#7a047f143b010b4cbd31f857e82961512cbf4e14"
+  resolved "https://registry.npmjs.org/tabtab/-/tabtab-2.2.2.tgz#7a047f143b010b4cbd31f857e82961512cbf4e14"
   integrity sha1-egR/FDsBC0y9MfhX6ClhUSy/ThQ=
   dependencies:
     debug "^2.2.0"
@@ -27735,8 +27786,8 @@ winston-transport@^4.4.0:
 
 winston@^2.3.1:
   version "2.4.5"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/winston/-/winston-2.4.5.tgz#f2e431d56154c4ea765545fc1003bd340c95b59a"
-  integrity sha1-8uQx1WFUxOp2VUX8EAO9NAyVtZo=
+  resolved "https://registry.npmjs.org/winston/-/winston-2.4.5.tgz#f2e431d56154c4ea765545fc1003bd340c95b59a"
+  integrity sha512-TWoamHt5yYvsMarGlGEQE59SbJHqGsZV8/lwC+iCcGeAe0vUaOh+Lv6SYM17ouzC/a/LB1/hz/7sxFBtlu1l4A==
   dependencies:
     async "~1.0.0"
     colors "1.0.x"
@@ -27785,6 +27836,115 @@ wix-redraft@^1.1.2:
   integrity sha512-T0LhyOL+MVs0FWYxS6kza9hNnW8ZPZh0ca+Z7LV/Y/HZ7Iomed1nR58hhyKA2pmE0M30YPLc0bAuoWplj1rkyQ==
   dependencies:
     punycode "^1.4.1"
+
+wix-rich-content-common@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-common/-/wix-rich-content-common-8.46.16.tgz#7f5f81c928312dfd064c259b29dd1f03d88fa02a"
+  integrity sha512-48bpKZzf6fp7MMnilKO/Ajz/fmNsL79DIZXDfMwna1iL22Qle1eC2ZufxjZmB34CrHdQvFEIi1t/HdBdcHRENw==
+  dependencies:
+    i18next "~10.6.0"
+    jsonschema "~1.2.4"
+    linkify-it "^2.1.0"
+    react-i18next "^7.0.0"
+    react-intersection-observer "~8.24.1"
+    react-portal-tooltip "^2.4.7"
+    ricos-content "8.46.16"
+
+wix-rich-content-editor-common@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-editor-common/-/wix-rich-content-editor-common-8.46.16.tgz#db03aca122417375b7c0fd60d76172ed91a2bf92"
+  integrity sha512-YCkUBT6zLjHVFa7WSZN/eBZmz6LATXL+lfyfE5mIpAVH7gmNW5R+56T9KM5eOV3fO6UlEQGbWw5mMCIkNcJUFA==
+  dependencies:
+    "@wix/draft-js" "0.0.11"
+    downshift "3.2.12"
+    react-window "~1.5.0"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-ui-components "8.46.16"
+
+wix-rich-content-editor@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-editor/-/wix-rich-content-editor-8.46.16.tgz#fc2c74de1239e66614453ac9a5e11771babb925a"
+  integrity sha512-BGP1jTrIiX5zA5ytxTinrigXi/8oLgIY2cu2abZLuioCCbD9rpratqR2KdaxEWfKlX9R+p0V73GZtxNHZGtIeA==
+  dependencies:
+    draft-js-drag-n-drop-plugin "~2.0.4"
+    draft-js-list-plugin "^1.0.2"
+    draft-js-plugins-editor "~3.0.0"
+    forked-draft-js-focus-plugin "^3.0.1"
+    react-click-outsider "1.1.1"
+    react-measure "~2.3.0"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor-common "8.46.16"
+    wix-rich-content-plugin-commons "8.46.16"
+    wix-rich-content-ui-components "8.46.16"
+    wix-tiptap-editor "8.46.16"
+
+wix-rich-content-plugin-commons@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-commons/-/wix-rich-content-plugin-commons-8.46.16.tgz#3d1aac669606092115598a98e57613c348a3740b"
+  integrity sha512-LKdy2+6NcHncRt2XsgF208M13XzlZQhmtngpQ5p5IHz9ab8T7k4CRMtNzplEDwVpUbSJGoBJyWKwHCfrCNlDYA==
+  dependencies:
+    react-colorful "^4.4.3"
+    react-measure "~2.3.0"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor-common "8.46.16"
+    wix-rich-content-ui-components "8.46.16"
+
+wix-rich-content-plugin-divider@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-divider/-/wix-rich-content-plugin-divider-8.46.16.tgz#cc67f686e255ea379ea2a1584c046aecc58b7dff"
+  integrity sha512-FyNnOySlUxoPGFUERG39AYq4AFXtbVhaQryyfm99a3YeHWbzqqWZnZm+LsqNPMrygMb7nwtrXT8wO22F4D/FfQ==
+  dependencies:
+    ricos-content "8.46.16"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor-common "8.46.16"
+    wix-rich-content-plugin-commons "8.46.16"
+
+wix-rich-content-plugin-image@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-image/-/wix-rich-content-plugin-image-8.46.16.tgz#897982688232f336c54dd565e80a349e957f7932"
+  integrity sha512-DmLN32zfAM6DtiZhfQh7ffLy+bVfZDH4H4WbprXyUXDkPClbSY8vbCcBqr3osf05ktMDW3e2B1EyVk8y//BbLA==
+  dependencies:
+    image-client-api "1.2218.0"
+    ricos-content "8.46.16"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor-common "8.46.16"
+    wix-rich-content-plugin-commons "8.46.16"
+    wix-rich-content-ui-components "8.46.16"
+
+wix-rich-content-plugin-spoiler@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-plugin-spoiler/-/wix-rich-content-plugin-spoiler-8.46.16.tgz#48451e125f378bc216f76e554adeea1caa8adc64"
+  integrity sha512-f9O/tlxNDcjDzuixp98obZ82BFTwBRIHtdnLTVnfRz38iilINL6x7jDpxAAj6ZLyu40vPBc+Anunn0rmh6zDIQ==
+  dependencies:
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor-common "8.46.16"
+    wix-rich-content-plugin-commons "8.46.16"
+
+wix-rich-content-preview@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-preview/-/wix-rich-content-preview-8.46.16.tgz#f114d04bbe4f606f80cdfbfe197ed6a03109ce34"
+  integrity sha512-ZP9cy6PXPQgN6zTrzjglKMgZcHjcAInVnXFh0GrAC3d60kcrBFo2MiLm4QceGPaZG1/P9SxK57WYf1FbpZNcfQ==
+  dependencies:
+    react-measure "~2.3.0"
+    ricos-content "8.46.16"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-viewer "8.46.16"
+
+wix-rich-content-ui-components@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-ui-components/-/wix-rich-content-ui-components-8.46.16.tgz#1fcb21bd81b2cb4bc272998052a113563a391c75"
+  integrity sha512-GJgtbgopucxedKbQqvwRaQDuDjbbhzoFPmA0xiL9+ZA+Nl0BYjr1qD/PzplfKdNoCKiM20FmOtrfCV7Urr4nUw==
+  dependencies:
+    focus-trap "6.4.0"
+    wix-rich-content-common "8.46.16"
+
+wix-rich-content-viewer@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-rich-content-viewer/-/wix-rich-content-viewer-8.46.16.tgz#bb2498371934facc459615002c2f5cb6b43a6cfa"
+  integrity sha512-HtvOZ1+sU2wqMIe/4eRwrAsdaYoyamQoxqgU31k5mYPQIsvIG79tkmaPH3PqU0H2C5OfJh2Bw0LDJW8BbrAIfA==
+  dependencies:
+    wix-redraft "^1.1.2"
+    wix-rich-content-common "8.46.16"
 
 wix-statics-parent@*:
   version "1.0.1134"
@@ -27840,6 +28000,42 @@ wix-style-react@^9.0.0:
     wix-ui-icons-common "^2.0.308"
     wix-ui-test-utils "^1.0.178"
     yoshi-stylable-dependencies "^4.86.0"
+
+wix-tiptap-editor@8.46.16:
+  version "8.46.16"
+  resolved "https://registry.npmjs.org/wix-tiptap-editor/-/wix-tiptap-editor-8.46.16.tgz#7dd494af52356b19902f0c2e1f14e3e98d85b16a"
+  integrity sha512-vNt3bxZsEGjFy7G8Y5KyiQqGdEyML0QH/9qWyNWfiWpEBSTr/jaDZMUgcW+AtDswSsGhpuCbqSVv3CqQmtd4Lg==
+  dependencies:
+    "@tiptap-es5/core" "^2.0.0-beta.54"
+    "@tiptap-es5/extension-blockquote" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-bold" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-bullet-list" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-code" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-code-block" "^2.0.0-beta.15"
+    "@tiptap-es5/extension-document" "^2.0.0-beta.12"
+    "@tiptap-es5/extension-dropcursor" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-gapcursor" "^2.0.0-beta.17"
+    "@tiptap-es5/extension-hard-break" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-heading" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-highlight" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-history" "^2.0.0-beta.12"
+    "@tiptap-es5/extension-horizontal-rule" "^2.0.0-beta.16"
+    "@tiptap-es5/extension-italic" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-link" "^2.0.0-beta.18"
+    "@tiptap-es5/extension-list-item" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-ordered-list" "^2.0.0-beta.13"
+    "@tiptap-es5/extension-paragraph" "^2.0.0-beta.14"
+    "@tiptap-es5/extension-strike" "^2.0.0-beta.14"
+    "@tiptap-es5/extension-text" "^2.0.0-beta.12"
+    "@tiptap-es5/extension-underline" "^2.0.0-beta.13"
+    "@tiptap-es5/react" "^2.0.0-beta.41"
+    ricos-content "8.46.16"
+    ricos-schema "8.46.16"
+    wix-rich-content-common "8.46.16"
+    wix-rich-content-editor-common "8.46.16"
+    wix-rich-content-plugin-divider "8.46.16"
+    wix-rich-content-plugin-image "8.46.16"
+    wix-rich-content-plugin-spoiler "8.46.16"
 
 wix-tpa-style-loader@1.0.13:
   version "1.0.13"
