@@ -17,14 +17,15 @@
     Click to see more.
   </summary>
 
-
-### :house: Internal
-- `scripts`
-  - [#2750](https://github.com/wix/ricos/pull/2750) updateBaselines - normalize keys in baselines 
-
-
 </details>
 <hr/>
+
+## 8.46.19 (July 18, 2021)
+
+### :house: Internal
+
+- `scripts`
+  - [#2750](https://github.com/wix/ricos/pull/2750) updateBaselines - normalize keys in baselines
 
 ## 8.46.18 (July 17, 2021)
 
