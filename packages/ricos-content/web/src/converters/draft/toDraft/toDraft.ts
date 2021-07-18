@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { flow } from 'fp-ts/function';
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { DraftContent, RicosContentBlock, Version } from '../../..';
 import { genKey } from '../../generateRandomKey';
@@ -18,11 +19,9 @@ import {
   parseInlineStyleDecorations,
   parseEntityDecorations,
 } from './decorationParsers';
+import preprocess from './preprocess';
 
-export const ensureDraftContent = (content: RichContent | DraftContent): DraftContent =>
-  'nodes' in content ? toDraft(content) : content;
-
-export const toDraft = (ricosContent: RichContent): DraftContent => {
+const convert = (ricosContent: RichContent): DraftContent => {
   const { nodes } = RichContent.toJSON(RichContent.fromJSON(ricosContent)) as RichContent; // using toJSON to remove undefined fields
   const draftContent: DraftContent = {
     blocks: [],
@@ -136,3 +135,8 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
   draftContent.VERSION = Version.currentVersion;
   return draftContent;
 };
+
+export const toDraft = flow(preprocess, convert);
+
+export const ensureDraftContent = (content: RichContent | DraftContent): DraftContent =>
+  'nodes' in content ? toDraft(content) : content;
