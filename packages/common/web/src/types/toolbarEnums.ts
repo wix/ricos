@@ -51,6 +51,7 @@ export enum ToolbarType {
   INSERT_PLUGIN = 'INSERT_PLUGIN',
   TEXT = 'ALL-TEXT-TOOLBARS',
   SHORTCUT = 'SHORTCUT',
+  LINK = 'LINK',
 }
 
 export enum DisplayMode {

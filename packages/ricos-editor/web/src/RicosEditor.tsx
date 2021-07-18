@@ -24,9 +24,12 @@ import {
   EditorEventsContext,
   EditorEvents,
 } from 'wix-rich-content-editor-common/libs/EditorEventsContext';
-import { ToolbarType, Version } from 'wix-rich-content-common';
+import { ToolbarType, Version, EditorCommands } from 'wix-rich-content-common';
+import 'wix-rich-content-toolbars-new/dist/styles.min.css';
 import { emptyDraftContent, getEditorContentSummary } from 'wix-rich-content-editor-common';
 import { TiptapAPI } from 'wix-tiptap-editor';
+import TextFormattingToolbar from './toolbars/TextFormattingToolbar';
+import LinkToolbar from './toolbars/LinkToolbar';
 
 // eslint-disable-next-line
 const PUBLISH_DEPRECATION_WARNING_v9 = `Please provide the postId via RicosEditor biSettings prop and use one of editorRef.publish() or editorEvents.publish() APIs for publishing.
@@ -38,6 +41,7 @@ interface State {
   remountKey: boolean;
   editorState?: EditorState;
   initialContentChanged: boolean;
+  activeEditor?: RichContentEditor | null;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -63,6 +67,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       localeData: { locale: props.locale },
       remountKey: false,
       initialContentChanged: true,
+      activeEditor: null,
     };
     this.useTiptap = !!props.experiments?.tiptapEditor?.enabled;
   }
@@ -87,6 +92,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       isMobile ? ToolbarType.MOBILE : useStaticTextToolbar ? ToolbarType.STATIC : ToolbarType.INLINE
     );
     this.props.editorEvents?.subscribe(EditorEvents.RICOS_PUBLISH, this.onPublish);
+    this.setState({ activeEditor: this.editor });
   }
 
   loadEditor() {
@@ -144,11 +150,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return publishResponse.data;
   };
 
-  setStaticToolbar = ref => {
+  setActiveEditor = ref => {
     if (ref && ref !== this.currentEditorRef) {
       this.currentEditorRef = ref;
       const { MobileToolbar, TextToolbar } = ref.getToolbars();
-      this.setState({ StaticToolbar: MobileToolbar || TextToolbar });
+      this.setState({ StaticToolbar: MobileToolbar || TextToolbar, activeEditor: ref });
     }
   };
 
@@ -234,11 +240,15 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   setEditorRef = (ref: RichContentEditor) => {
     this.editor = ref;
-    this.setStaticToolbar(ref);
+    this.setActiveEditor(ref);
   };
 
   getEditorCommands = () =>
     this.useTiptap ? this.tiptapApi.getEditorCommands() : this.editor.getEditorCommands();
+
+  getT = () => this.editor.getT();
+
+  removeToolbarFocus = () => this.editor.removeToolbarFocus();
 
   renderToolbarPortal(Toolbar) {
     return (
@@ -264,7 +274,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       >
         {React.cloneElement(child, {
           editorKey: 'editor',
-          setEditorToolbars: this.setStaticToolbar,
+          setEditorToolbars: this.setActiveEditor,
           ...childProps,
           ...contentProp.editorState,
           ...supportedDraftEditorSettings,
@@ -276,16 +286,74 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   renderDraftEditor() {
-    const { StaticToolbar, remountKey } = this.state;
+    const { StaticToolbar, remountKey, activeEditor } = this.state;
+    const {
+      isMobile,
+      theme,
+      locale,
+      toolbarSettings: { getToolbarSettings = () => [] } = {},
+      _rcProps: { helpers } = {},
+      plugins,
+      linkPanelSettings,
+      linkSettings,
+    } = this.props;
     const child =
       this.props.children && shouldRenderChild('RichContentEditor', this.props.children) ? (
         this.props.children
       ) : (
         <RichContentEditor />
       );
+
+    const newFormattingToolbar = this.props.experiments?.newFormattingToolbar?.enabled;
+
+    const textToolbarType = StaticToolbar ? 'static' : null;
+    // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
+
+    let hideFormattingToolbar; //when LinkToolbar is open in mobile
+    if (newFormattingToolbar && activeEditor && isMobile) {
+      const editorCommands: EditorCommands = activeEditor.getEditorCommands();
+      const selection = editorCommands.getSelection();
+      if (isMobile) {
+        hideFormattingToolbar = selection.getIsCollapsed && editorCommands.hasLinkInSelection();
+      } else {
+        hideFormattingToolbar = false;
+      }
+    }
+
     return (
       <Fragment key={`${remountKey}`}>
-        {this.renderToolbarPortal(StaticToolbar)}
+        {!newFormattingToolbar && this.renderToolbarPortal(StaticToolbar)}
+        {/* {newFormattingToolbar && activeEditor && showFormattingToolbar && ( */}
+        {newFormattingToolbar && activeEditor && (
+          <>
+            {!hideFormattingToolbar && (
+              <TextFormattingToolbar
+                activeEditor={activeEditor}
+                textToolbarType={textToolbarType}
+                isMobile={isMobile}
+                theme={theme}
+                locale={locale}
+                getToolbarSettings={getToolbarSettings}
+                helpers={helpers}
+                plugins={plugins}
+                linkPanelSettings={linkPanelSettings}
+                linkSettings={linkSettings}
+              />
+            )}
+            <LinkToolbar
+              activeEditor={activeEditor}
+              textToolbarType={textToolbarType}
+              isMobile={isMobile}
+              theme={theme}
+              locale={locale}
+              getToolbarSettings={getToolbarSettings}
+              helpers={helpers}
+              plugins={plugins}
+              linkPanelSettings={linkPanelSettings}
+              linkSettings={linkSettings}
+            />
+          </>
+        )}
         {this.renderRicosEngine(child, {
           onChange: this.onChange(child.props.onChange),
           ref: this.setEditorRef,
