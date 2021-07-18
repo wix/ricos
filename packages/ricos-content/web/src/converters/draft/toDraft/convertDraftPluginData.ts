@@ -78,7 +78,6 @@ export const convertDecorationDataToDraft = (decorationType: Decoration_Type, da
     const convert = converters[decorationType];
     const newData = cloneDeep(data);
     convert(newData);
-    console.log({ newData }); // eslint-disable-line no-console
     return newData;
   }
   return data;
@@ -159,6 +158,13 @@ const convertImageData = (data: ImageData & { src; config; metadata }) => {
     ? { id: src?.custom, file_name: src?.custom, width, height }
     : { url: src?.url, source: 'static' };
   const links = link?.anchor ? { anchor: link?.anchor } : { link: link && parseLink(link) };
+  if (links.link?.customData) {
+    const parsedCustomData = parseLinkCustomData(links.link?.customData);
+    merge(links.link, parsedCustomData);
+    if (!parsedCustomData.customData) {
+      delete links.link.customData;
+    }
+  }
   data.config = { ...(config || {}), ...links };
   data.metadata = (altText || caption) && { caption, alt: altText };
   delete data.image;
@@ -312,13 +318,19 @@ const convertLinkData = (
       data.rel = rel;
     }
     if (customData) {
-      try {
-        data = merge(data, JSON.parse(customData));
-      } catch (e) {
-        data.customData = customData;
-      }
+      const customDataObj = parseLinkCustomData(customData);
+      merge(data, customDataObj);
     }
     delete data.link;
+  }
+};
+
+const parseLinkCustomData = (customData: string) => {
+  try {
+    return JSON.parse(customData);
+  } catch (e) {
+    console.error('failed to parse customData', customData); // eslint-disable-line
+    return { customData };
   }
 };
 

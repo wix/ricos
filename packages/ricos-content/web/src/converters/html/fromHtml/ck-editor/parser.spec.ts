@@ -34,6 +34,8 @@ describe('CKEditor parser', () => {
 
   it('should output valid content for toDraft', () => {
     const draft = toDraft(content);
+    // truncateSync('faq-rich.json', 0);
+    // writeFileSync('faq-rich.json', JSON.stringify(content), 'utf8');
     // truncateSync('faq-draft.json', 0);
     // writeFileSync('faq-draft.json', JSON.stringify(draft), 'utf8');
     // console.log('draft written'); // eslint-disable-line no-console
