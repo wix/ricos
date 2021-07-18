@@ -421,10 +421,17 @@ export default function createAtomicPluginToolbar({
     render() {
       const { overrideContent, tabIndex, isVisible } = this.state;
       const { hide } = this.props;
+      const triggerOnLoadBi = () => {
+        helpers?.onInlineToolbarOpen?.({
+          toolbarType: 'PLUGIN',
+          pluginId: this.focusedBlock && getBlockEntityType(getEditorState(), this.focusedBlock),
+        });
+      };
       const toolbarContentProps = {
         overrideContent,
         tabIndex,
         theme,
+        triggerOnLoadBi,
         PluginToolbarButton: this.PluginToolbarButton,
         structure: this.structure,
         componentData: this.state.componentData.config || {},
