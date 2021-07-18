@@ -11,7 +11,7 @@ describe('convert from html', () => {
     const content = fromHtml(htmlContent);
     expect(
       compare(content, RichContent.fromJSON(richTextContent), {
-        ignoredKeys: ['key'],
+        ignoredKeys: ['id'],
       })
     ).toEqual({});
   });

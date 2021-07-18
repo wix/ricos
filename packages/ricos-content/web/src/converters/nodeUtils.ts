@@ -12,16 +12,16 @@ import {
   Link,
   Link_Target,
 } from 'ricos-schema';
-import { genKey } from './generateRandomKey';
+import { generateId } from './generateRandomId';
 import { fromEntries } from '../utils';
 
 export const createNode = (
   type: Node_Type,
   nodes: Node[] = [],
-  { style, key }: { style?: NodeStyle; key?: string } = {}
+  { style, id }: { style?: NodeStyle; id?: string } = {}
 ): Node => ({
   type,
-  key: key ?? genKey(),
+  id: id ?? generateId(),
   nodes,
   style,
 });
@@ -39,7 +39,7 @@ export const createParagraphNode = (
 });
 
 export const createTextNode = (text: string, decorations: Decoration[] = []): Node => ({
-  ...createNode(Node_Type.TEXT, [], { key: '' }),
+  ...createNode(Node_Type.TEXT, [], { id: '' }),
   textData: {
     text,
     decorations,

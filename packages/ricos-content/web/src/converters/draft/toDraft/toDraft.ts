@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { RichContent, Node, Node_Type } from 'ricos-schema';
 import { DraftContent, RicosContentBlock, Version } from '../../..';
-import { genKey } from '../../generateRandomKey';
+import { generateId } from '../../generateRandomId';
 import {
   BlockType,
   HeaderLevel,
@@ -35,23 +35,23 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
     if (node) {
       switch (node.type) {
         case Node_Type.BLOCKQUOTE:
-          parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.key });
+          parseTextNodes(getParagraphNode(node), { type: BlockType.Blockquote, key: node.id });
           break;
         case Node_Type.CODE_BLOCK:
-          parseTextNodes(node, { type: BlockType.CodeBlock, key: node.key });
+          parseTextNodes(node, { type: BlockType.CodeBlock, key: node.id });
           break;
         case Node_Type.HEADING:
           if (!node.headingData) {
             throw Error(`ERROR! Heading node with no data!`);
           }
-          parseTextNodes(node, { type: HeaderLevel[node.headingData.level], key: node.key });
+          parseTextNodes(node, { type: HeaderLevel[node.headingData.level], key: node.id });
           break;
         case Node_Type.ORDERED_LIST:
         case Node_Type.BULLET_LIST:
           parseListNode(node);
           break;
         case Node_Type.PARAGRAPH:
-          parseTextNodes(node, { type: BlockType.Unstyled, key: node.key });
+          parseTextNodes(node, { type: BlockType.Unstyled, key: node.id });
           break;
         default:
           if (RICOS_NODE_TYPE_TO_DATA_FIELD[node.type]) {
@@ -68,7 +68,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
     latestEntityKey += 1;
     const entityMap = createAtomicEntityData(node, latestEntityKey);
     addBlock({
-      key: node.key,
+      key: node.id,
       type: BlockType.Atomic,
       text: ' ',
       entityRanges: [{ offset: 0, length: 1, key: latestEntityKey }],
@@ -81,7 +81,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
       const [paragraph, childNode] = listItem.nodes;
       parseTextNodes(paragraph, {
         type: TO_DRAFT_LIST_TYPE[node.type],
-        key: listItem.key,
+        key: listItem.id,
         indentation,
       });
       if (childNode) {
@@ -118,7 +118,7 @@ export const toDraft = (ricosContent: RichContent): DraftContent => {
   const addBlock = (blockProps?: Partial<RicosContentBlock>) => {
     const newBlock: RicosContentBlock = merge(
       {
-        key: genKey(),
+        key: generateId(),
         type: BlockType.Unstyled,
         text: '',
         depth: 0,
