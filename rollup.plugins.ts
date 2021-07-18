@@ -21,6 +21,7 @@ import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 import { writeFileSync } from 'fs';
 import { createFilter } from '@rollup/pluginutils';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -84,6 +85,7 @@ const babel = (): Plugin => {
   return babelPlugin({
     configFile: pathResolve(__dirname, 'babel.config.js'),
     filter: createFilter(include, undefined, options),
+    extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
     babelHelpers: 'runtime',
   });
 };
@@ -167,6 +169,11 @@ const replace = (): Plugin => {
 const uglify = (): Plugin => {
   return terser({
     mangle: false,
+    output: {
+      comments: (node, comment) => {
+        return /@preserve|@license|@cc_on|webpackChunkName/i.test(comment.value);
+      },
+    },
   });
 };
 
@@ -187,10 +194,10 @@ let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
   resolve(),
+  typescript(),
   babel(),
   commonjsPlugin(),
   json(),
-  typescript(),
 ];
 
 if (!IS_DEV_ENV) {

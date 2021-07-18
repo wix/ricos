@@ -124,18 +124,21 @@ class Tooltip extends React.Component<Props> {
     ) : (
       <>
         {React.cloneElement(React.Children.only(children), elementProps)}
-        <Suspense fallback={null}>
-          <ToolTipComponent
-            active={tooltipVisible}
-            parent={'[data-tooltipid=true]'}
-            position={place}
-            arrow={tooltipArrow}
-            style={style}
-            tooltipTimeout={10}
-          >
-            {content}
-          </ToolTipComponent>
-        </Suspense>
+        {tooltipVisible ? (
+          <Suspense fallback={null}>
+            <ToolTipComponent
+              active={tooltipVisible}
+              parent={'[data-tooltipid=true]'}
+              position={place}
+              arrow={tooltipArrow}
+              style={style}
+              tooltipTimeout={10}
+              group={'ricos'}
+            >
+              {content}
+            </ToolTipComponent>
+          </Suspense>
+        ) : null}
       </>
     );
   }
